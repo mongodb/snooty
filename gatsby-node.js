@@ -96,20 +96,20 @@ const fetchChangelogData = async (runId, versions, s3Prefix) => {
       //pathUpdate takes the array of versions from the specific path passed in and takes each version and runs versionUpdate on it
       const pathUpdate = (path) => {
         const updatedPath = { ...path, versions: path.versions.map(versionUpdate) };
-        updatedPath.versions = updatedPath.versions.filter((version) => version?.changes?.length);
+        updatedPath.versions = updatedPath.versions.filter((version) => version.changes?.length);
         return updatedPath;
       };
 
       //dateUpdate takes the array of paths from the specific date section passed in and takes each path and runs pathUpdate on it
       const dateUpdate = (dateSection) => {
         const updatedDateSection = { ...dateSection, paths: dateSection.paths.map(pathUpdate) };
-        updatedDateSection.paths = updatedDateSection.paths.filter((path) => path?.versions?.length);
+        updatedDateSection.paths = updatedDateSection.paths.filter((path) => path.versions?.length);
         return updatedDateSection;
       };
 
       //changelog is the json file with everything in it. Map at this level takes each date section and runs dateUpdate on it
       const updatedChangelog = changelog.map(dateUpdate);
-      return updatedChangelog.filter((dateSection) => dateSection?.paths?.length);
+      return updatedChangelog.filter((dateSection) => dateSection.paths?.length);
     };
 
     const changelog = hideChanges(unfilteredChangelog);
@@ -138,7 +138,7 @@ const fetchChangelogData = async (runId, versions, s3Prefix) => {
       };
 
       const updatedDiffData = diffData.map(pathUpdate);
-      return updatedDiffData.filter((path) => path?.changes?.length);
+      return updatedDiffData.filter((path) => path.changes?.length);
     };
 
     const mostRecentDiffData = hideDiffChanges(mostRecentDiffDataUnfiltered);

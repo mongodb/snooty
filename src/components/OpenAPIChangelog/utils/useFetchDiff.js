@@ -14,7 +14,7 @@ const hideDiffChanges = (diffData) => {
   };
 
   const updatedDiffData = diffData.map(pathUpdate);
-  return updatedDiffData.filter((path) => path?.changes?.length);
+  return updatedDiffData.filter((path) => path.changes?.length);
 };
 
 export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen, snootyEnv) => {
