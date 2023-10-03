@@ -29,18 +29,27 @@ export const getLocalValue = (key) => {
 };
 
 export const setSessionValue = (key, value) => {
-  if (isValidStorage) {
-    const prevState = JSON.parse(window.sessionStorage.getItem('mongodb-docs'));
-    sessionStorage.setItem('mongodb-docs', JSON.stringify({ ...prevState, [key]: value }));
+  try {
+    if (isValidStorage) {
+      const prevState = JSON.parse(window.sessionStorage.getItem('mongodb-docs'));
+      sessionStorage.setItem('mongodb-docs', JSON.stringify({ ...prevState, [key]: value }));
+    }
+  } catch {
+    console.error('Error setting session value');
   }
 };
 
 export const getSessionValue = (key) => {
-  if (isValidStorage && JSON.parse(window.sessionStorage.getItem('mongodb-docs'))) {
-    const docsObj = JSON.parse(window.sessionStorage.getItem('mongodb-docs'));
-    if (docsObj) {
-      return docsObj[key];
+  try {
+    if (isValidStorage && JSON.parse(window.sessionStorage.getItem('mongodb-docs'))) {
+      const docsObj = JSON.parse(window.sessionStorage.getItem('mongodb-docs'));
+      if (docsObj) {
+        return docsObj[key];
+      }
     }
+    return undefined;
+  } catch {
+    console.error('Error getting session value');
+    return undefined;
   }
-  return undefined;
 };
