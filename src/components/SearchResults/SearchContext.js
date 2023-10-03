@@ -85,11 +85,11 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         navigate(`?${newSearch.toString()}`);
       };
 
+      const newFacet = { fullFacetId, key, id };
       if (checked) {
-        const newFacet = { fullFacetId, key, id };
         updateFacetSearchParams([newFacet], 'add');
       } else {
-        const facetsToRemove = [];
+        const facetsToRemove = [newFacet];
         // Remove facet from array, including any sub-facet with same relationship
         updateFacetSearchParams(facetsToRemove, 'remove');
       }
