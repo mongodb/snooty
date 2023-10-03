@@ -32,7 +32,7 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   const productList = manifestMetadata?.associated_products || [];
   await Promise.all(
     productList.map(async (product) => {
-      associatedReposInfo[product.name] = await db.realmInterface.fetchRepoBranches(product.name);
+      associatedReposInfo[product.name] = await db.realmInterface.fetchDocset({ project: product.name });
     })
   );
   // check if product is associated child product
@@ -179,7 +179,7 @@ exports.createPages = async ({ actions }) => {
 
   let repoBranches = null;
   try {
-    const repoInfo = await db.realmInterface.fetchRepoBranches();
+    const repoInfo = await db.realmInterface.fetchDocset();
     let errMsg;
 
     if (!repoInfo) {
