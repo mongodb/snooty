@@ -327,6 +327,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  padding-top: 21px;
 }
 
 .emotion-14 {
@@ -1184,7 +1185,7 @@ exports[`Search Results Page considers a given search filter query param and dis
       <h1
         class="emotion-4"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -1248,7 +1249,6 @@ exports[`Search Results Page considers a given search filter query param and dis
       </form>
       <div
         class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
       >
         <span
           class="sl-search-keyword"
@@ -1265,11 +1265,10 @@ exports[`Search Results Page considers a given search filter query param and dis
             Realm
             <svg
               aria-label="X Icon"
-              class=""
+              class="name styles map toString"
               fill="none"
               height="16"
               role="img"
-              style="margin-left: 8px; margin-right: -2px;"
               viewBox="0 0 16 16"
               width="16"
               xmlns="http://www.w3.org/2000/svg"
@@ -1941,6 +1940,7 @@ exports[`Search Results Page does not return results for a given search term wit
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  padding-top: 21px;
 }
 
 .emotion-14 {
@@ -2058,7 +2058,6 @@ exports[`Search Results Page does not return results for a given search term wit
 
 .emotion-20 {
   margin-bottom: calc(50vh - 28px - 40px - 166px / 2);
-  margin-top: calc(50vh - 28px - 40px - 166px / 2);
   grid-area: results;
   margin-top: 80px;
 }
@@ -2511,7 +2510,7 @@ exports[`Search Results Page does not return results for a given search term wit
       <h1
         class="emotion-4"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -2575,7 +2574,6 @@ exports[`Search Results Page does not return results for a given search term wit
       </form>
       <div
         class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
       >
         <span
           class="sl-search-keyword"
@@ -3296,6 +3294,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  padding-top: 21px;
 }
 
 .emotion-11 {
@@ -3420,7 +3419,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       <h1
         class="emotion-4"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -3457,7 +3456,6 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       </form>
       <div
         class="emotion-9 emotion-10"
-        style="padding-top: 10px;"
       >
         <span
           class="sl-search-keyword"
@@ -3832,6 +3830,7 @@ exports[`Search Results Page renders loading images before returning no results 
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  padding-top: 21px;
 }
 
 .emotion-14 {
@@ -3956,7 +3955,7 @@ exports[`Search Results Page renders loading images before returning no results 
       <h1
         class="emotion-4"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -4020,7 +4019,6 @@ exports[`Search Results Page renders loading images before returning no results 
       </form>
       <div
         class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
       >
         <span
           class="sl-search-keyword"
@@ -4397,6 +4395,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  padding-top: 21px;
 }
 
 .emotion-14 {
@@ -4521,7 +4520,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
       <h1
         class="emotion-4"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -4585,7 +4584,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
       </form>
       <div
         class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
       >
         <span
           class="sl-search-keyword"
@@ -4962,6 +4960,7 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  padding-top: 21px;
 }
 
 .emotion-14 {
@@ -5817,7 +5816,7 @@ exports[`Search Results Page renders results from a given search term query para
       <h1
         class="emotion-4"
       >
-         Search Results
+        Search Results
       </h1>
       <form
         class="emotion-5"
@@ -5881,7 +5880,6 @@ exports[`Search Results Page renders results from a given search term query para
       </form>
       <div
         class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
       >
         <span
           class="sl-search-keyword"

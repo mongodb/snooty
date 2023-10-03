@@ -2,6 +2,7 @@ import { navigate } from 'gatsby';
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css, Global } from '@emotion/react';
+import { cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -46,7 +47,8 @@ const EmptyResultsContainer = styled('div')`
   must account for any margins added from using the blank landing template,
   and half of the height of the empty state component */
   margin-bottom: ${CALC_MARGIN};
-  margin-top: ${CALC_MARGIN};
+  grid-area: results;
+  margin-top: 80px;
 `;
 
 const HeaderContainer = styled('div')`
@@ -222,6 +224,12 @@ const StyledTag = styled(Tag)`
 const ResultTag = styled('div')`
   display: flex;
   flex-direction: row;
+  padding-top: 21px;
+`;
+
+const styledIcon = css`
+  margin-left: 8px;
+  margin-right: -2px;
 `;
 
 const MobileSearchButtonWrapper = styled('div')`
@@ -382,7 +390,7 @@ const SearchResults = () => {
       <SearchResultsContainer>
         {/* new header for search bar */}
         <HeaderContainer>
-          <H3 as="h1"> Search Results</H3>
+          <H3 as="h1">Search Results</H3>
           <SearchInput
             ref={searchBoxRef}
             value={searchField}
@@ -392,13 +400,13 @@ const SearchResults = () => {
               setSearchField(e.target.value);
             }}
           />
-          <ResultTag style={{ paddingTop: '10px' }}>
+          <ResultTag>
             {/* Classname-attached searchTerm needed for Smartling localization */}
             <span style={{ display: 'none' }} className="sl-search-keyword">
               {searchTerm}
             </span>
             {Number.isInteger(searchCount) && (
-              <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
+              <Overline>
                 <>{searchCount} RESULTS</>
               </Overline>
             )}
@@ -407,7 +415,7 @@ const SearchResults = () => {
                 {selectedCategory && (
                   <StyledTag variant="green" onClick={resetFilters}>
                     {selectedCategory}
-                    <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
+                    <Icon className={cx(styledIcon)} glyph="X" />
                   </StyledTag>
                 )}
                 {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
@@ -440,12 +448,7 @@ const SearchResults = () => {
         {!isFirstLoad && searchFinished && !searchResults?.length && (
           <>
             <>
-              <EmptyResultsContainer
-                css={css`
-                  grid-area: results;
-                  margin-top: 80px;
-                `}
-              >
+              <EmptyResultsContainer>
                 <EmptyResults />
               </EmptyResultsContainer>
             </>
