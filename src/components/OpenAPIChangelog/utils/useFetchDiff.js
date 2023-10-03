@@ -5,20 +5,22 @@ import { getDiffRequestFormat } from './getDiffRequestFormat';
 
 //nested filtering of Diff changes with hideFromChangelog
 const hideDiffChanges = (diffData) => {
-  const pathUpdate = ({ ...path }) => {
-    if (path && path.changes) {
-      path.changes = path.changes.filter((change) => !change.hideFromChangelog);
+  const pathUpdate = (path) => {
+    const updatedPath = { ...path };
+    if (path?.changes) {
+      updatedPath.changes = path.changes.filter((change) => !change.hideFromChangelog);
     }
-    return path;
+    return updatedPath;
   };
 
-  diffData = diffData.map(pathUpdate);
-  return diffData.filter((path) => path && path.changes !== null && path.changes.length);
+  const updatedDiffData = diffData.map(pathUpdate);
+  return updatedDiffData.filter((path) => path?.changes?.length);
 };
 
 export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen, snootyEnv) => {
   const { index = {}, mostRecentDiff = {} } = useChangelogData();
   const [diff, setDiff] = useState([]);
+
   useEffect(() => {
     if (!resourceVersionOne || !resourceVersionTwo || !index.runId) return;
 
@@ -32,7 +34,8 @@ export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoadin
       setIsLoading(true);
       fetchOADiff(index.runId, fromAndToDiffLabel, snootyEnv)
         .then((response) => {
-          setDiff(hideDiffChanges(response));
+          const filteredDiff = hideDiffChanges(response);
+          setDiff(filteredDiff);
           setIsLoading(false);
         })
         .catch((err) => {
