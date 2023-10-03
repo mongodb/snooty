@@ -17,6 +17,31 @@ export const mockChangelog = [
                 change: 'resource version 2023-01-01 was removed, latest available resource version is 2023-02-01',
                 changeCode: 'resource-version-removed',
                 backwardCompatible: true,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    date: '2024-02-01',
+    paths: [
+      {
+        path: '/api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}',
+        httpMethod: 'PUT',
+        operationId: 'updateAlertConfiguration',
+        tag: 'Alert Configurations',
+        versions: [
+          {
+            version: '2023-01-01',
+            stabilityLevel: 'stable',
+            changeType: 'removed',
+            changes: [
+              {
+                change: 'resource version 2023-01-01 was removed, latest available resource version is 2023-02-01',
+                changeCode: 'resource-version-removed',
+                backwardCompatible: true,
                 hideFromChangelog: true,
               },
             ],
@@ -65,6 +90,11 @@ export const mockChangelog = [
                 changeCode: 'resource-version-added',
                 backwardCompatible: false,
                 hideFromChangelog: true,
+              },
+              {
+                change: 'resource version added.',
+                changeCode: 'resource-version-added',
+                backwardCompatible: false,
               },
               {
                 change:
@@ -164,6 +194,11 @@ export const mockDiff = [
         hideFromChangelog: true,
       },
       {
+        change: "removed the non-success response with the status '400'.",
+        changeCode: 'response-non-success-status-removed',
+        backwardCompatible: false,
+      },
+      {
         change: "added the new optional 'query' request parameter 'envelope'.",
         changeCode: 'new-optional-request-parameter',
         backwardCompatible: true,
@@ -193,6 +228,11 @@ export const mockDiff = [
         changeCode: 'response-required-property-removed',
         backwardCompatible: false,
         hideFromChangelog: true,
+      },
+      {
+        change: "removed the required property 'name' from the response with the '200' status.",
+        changeCode: 'response-required-property-removed',
+        backwardCompatible: false,
       },
     ],
   },
