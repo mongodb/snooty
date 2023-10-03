@@ -10,7 +10,13 @@ const TRUNCATE_OPTIONS = ['programming_language', 'sub_product'];
 const TRUNCATE_AMOUNT = 5;
 
 const optionStyle = (isNested) => css`
-  ${!isNested && 'margin-bottom: 36px;'}
+  ${isNested
+    ? `
+    margin-left: 22px;
+  `
+    : `
+    margin-bottom: 36px;
+  `}
 `;
 
 const optionNameStyle = css`
@@ -32,7 +38,8 @@ const showMoreGlyphStyle = css`
   color: ${palette.gray.dark2};
 `;
 
-const FacetOption = ({ className, facetOption: { name, id, options }, isNested = false }) => {
+// Representative of a "facet-option" from search server response
+const FacetGroup = ({ facetOption: { name, id, options }, isNested = false }) => {
   const [truncated, setTruncated] = useState(TRUNCATE_OPTIONS.includes(id));
   const displayedOptions = truncated ? options.slice(0, TRUNCATE_AMOUNT) : options;
 
@@ -41,7 +48,7 @@ const FacetOption = ({ className, facetOption: { name, id, options }, isNested =
   }, []);
 
   return (
-    <div className={cx(optionStyle(isNested), className)}>
+    <div className={cx(optionStyle(isNested))}>
       {!isNested && (
         <Body className={cx(optionNameStyle)} weight={'bold'}>
           {name}
@@ -60,4 +67,4 @@ const FacetOption = ({ className, facetOption: { name, id, options }, isNested =
   );
 };
 
-export default FacetOption;
+export default FacetGroup;

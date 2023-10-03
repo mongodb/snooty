@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { navigate } from 'gatsby';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
@@ -68,7 +68,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   // Facets are applied on toggle, in the format facet-option>facet-value
-  const [selectedFacets, setSelectedFacets] = useState(() => getSelectedFacetParams(searchParams));
+  const [selectedFacets, setSelectedFacets] = useState(getSelectedFacetParams(searchParams));
 
   // navigate changes and store state in URL
   const onSearchChange = ({ searchTerm, searchFilter, page }) => {
@@ -91,49 +91,64 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
     navigate(`?${newSearch.toString()}`);
   };
 
-  const handleFacetChange = useCallback(
-    ({ target, key, id }) => {
-      const { id: fullFacetId, checked } = target;
+  const handleFacetChange = (facets, checked) => {
+    const newSearch = new URLSearchParams(search);
+    if (checked) {
+      facets.forEach(({ key, id }) => {
+        console.log(`Adding ${id} to ${key}`);
+        newSearch.append(`${FACETS_KEY_PREFIX}${key}`, id);
+      });
+    } else {
+      facets.forEach(({ key, id }) => {
+        newSearch.delete(`${FACETS_KEY_PREFIX}${key}`, id);
+      });
+    }
+    setSelectedFacets(getSelectedFacetParams(newSearch));
+    // The navigation might cause a small visual delay when facets are being checked
+    navigate(`?${newSearch.toString()}`);
+  };
 
-      // Update query params based on whether a facet a is being added or removed
-      const updateFacetSearchParams = (facets, action) => {
-        const newSearch = new URLSearchParams(search);
+  // const handleFacetChange = useCallback(
+  //   (facets, checked) => {
+  //     // Update query params based on whether a facet is being added or removed
+  //     const updateFacetSearchParams = (facets, action) => {
+  //       const newSearch = new URLSearchParams(search);
 
-        if (action === 'add') {
-          facets.forEach(({ key, id }) => {
-            newSearch.append(`${FACETS_KEY_PREFIX}${key}`, id);
-          });
-        } else if (action === 'remove') {
-          facets.forEach(({ key, id }) => {
-            newSearch.delete(`${FACETS_KEY_PREFIX}${key}`, id);
-          });
-        }
+  //       if (action === 'add') {
+  //         facets.forEach(({ key, id }) => {
+  //           newSearch.append(`${FACETS_KEY_PREFIX}${key}`, id);
+  //         });
+  //       } else if (action === 'remove') {
+  //         facets.forEach(({ key, id }) => {
+  //           newSearch.delete(`${FACETS_KEY_PREFIX}${key}`, id);
+  //         });
+  //       }
 
-        // The navigation might cause a small visual delay when facets are being checked
-        navigate(`?${newSearch.toString()}`);
-      };
+  //       // The navigation might cause a small visual delay when facets are being checked
+  //       navigate(`?${newSearch.toString()}`);
+  //     };
 
-      if (checked) {
-        const newFacet = { fullFacetId, key, id };
-        setSelectedFacets((prev) => [...prev, newFacet]);
-        updateFacetSearchParams([newFacet], 'add');
-      } else {
-        const facetsToRemove = [];
-        // Remove facet from array, including any sub-facet with same relationship
-        setSelectedFacets((prev) =>
-          prev.filter((facet) => {
-            const shouldKeep = !facet.fullFacetId.includes(fullFacetId);
-            if (!shouldKeep) {
-              facetsToRemove.push(facet);
-            }
-            return shouldKeep;
-          })
-        );
-        updateFacetSearchParams(facetsToRemove, 'remove');
-      }
-    },
-    [search]
-  );
+  //     if (checked) {
+  //       const newFacet = { fullFacetId, key, id };
+  //       setSelectedFacets((prev) => [...prev, newFacet]);
+  //       updateFacetSearchParams([newFacet], 'add');
+  //     } else {
+  //       const facetsToRemove = [];
+  //       // Remove facet from array, including any sub-facet with same relationship
+  //       setSelectedFacets((prev) =>
+  //         prev.filter((facet) => {
+  //           const shouldKeep = !facet.fullFacetId.includes(fullFacetId);
+  //           if (!shouldKeep) {
+  //             facetsToRemove.push(facet);
+  //           }
+  //           return shouldKeep;
+  //         })
+  //       );
+  //       updateFacetSearchParams(facetsToRemove, 'remove');
+  //     }
+  //   },
+  //   [search]
+  // );
 
   return (
     <SearchContext.Provider
