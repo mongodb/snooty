@@ -40,11 +40,21 @@ const showMoreGlyphStyle = css`
 
 // Representative of a "facet-option" from search server response
 const FacetGroup = ({ facetOption: { name, id, options }, isNested = false }) => {
-  const [truncated, setTruncated] = useState(TRUNCATE_OPTIONS.includes(id));
+  const shouldTruncate = options.length >= TRUNCATE_AMOUNT && TRUNCATE_OPTIONS.includes(id);
+  const [truncated, setTruncated] = useState(shouldTruncate);
   const displayedOptions = truncated ? options.slice(0, TRUNCATE_AMOUNT) : options;
+  const truncatedState = truncated
+    ? {
+        glyph: 'ChevronDown',
+        text: 'Show more',
+      }
+    : {
+        glyph: 'ChevronUp',
+        text: 'Show less',
+      };
 
   const handleExpandResults = useCallback(() => {
-    setTruncated(false);
+    setTruncated((prev) => !prev);
   }, []);
 
   return (
@@ -57,10 +67,10 @@ const FacetGroup = ({ facetOption: { name, id, options }, isNested = false }) =>
       {displayedOptions.map((facet) => {
         return <FacetValue key={facet.id} facetValue={facet} />;
       })}
-      {truncated && (
+      {shouldTruncate && (
         <div className={cx(showMoreStyle)} onClick={handleExpandResults}>
-          <Icon className={cx(showMoreGlyphStyle)} glyph={'ChevronDown'} />
-          Show more
+          <Icon className={cx(showMoreGlyphStyle)} glyph={truncatedState.glyph} />
+          {truncatedState.text}
         </div>
       )}
     </div>

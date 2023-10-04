@@ -95,7 +95,6 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
     const newSearch = new URLSearchParams(search);
     if (checked) {
       facets.forEach(({ key, id }) => {
-        console.log(`Adding ${id} to ${key}`);
         newSearch.append(`${FACETS_KEY_PREFIX}${key}`, id);
       });
     } else {
