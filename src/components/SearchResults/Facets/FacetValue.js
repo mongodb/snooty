@@ -16,18 +16,31 @@ const checkboxStyle = css`
 `;
 
 const initChecked = (searchParams, key, id) => searchParams.getAll(`facets.${key}`).includes(id);
+
 /**
+ * Check if the key + value of a query param are actual subfacets.
+ * @param {Map<string, Set<string>>} nestedSubFacets
+ * @param {string} paramKey
+ * @param {string} paramVal
+ */
+const isParamValidSubFacet = (nestedSubFacets, paramKey, paramVal) => {
+  const originalKey = paramKey.split('facets.')[1];
+  const ids = nestedSubFacets.get(originalKey);
+  return ids.has(paramVal);
+};
+
+/**
+ * Finds the number of sub facets that are currently selected, based on the current
+ * query params.
  * @param {URLSearchParams} searchParams
- * @param {object[]} nestedSubFacets
+ * @param {Map<string, Set<string, string>>} nestedSubFacets
  * @param {string} fullFacetId
  */
 const findNumSelectedSubFacets = (searchParams, nestedSubFacets, fullFacetId) => {
   let count = 0;
-  for (const [paramKey, val] of searchParams.entries()) {
-    if (
-      paramKey.includes(fullFacetId) &&
-      !!nestedSubFacets.find(({ key, id }) => `facets.${key}` === paramKey && id === val)
-    ) {
+  for (const [paramKey, paramVal] of searchParams.entries()) {
+    // Ensure that invalid query params do not affect the UI
+    if (paramKey.includes(fullFacetId) && isParamValidSubFacet(nestedSubFacets, paramKey, paramVal)) {
       count++;
     }
   }
@@ -43,32 +56,51 @@ const FacetValue = ({ facetValue: { name, facets, key, id } }) => {
   const fullFacetId = `${key}>${id}`;
   // Decide on initial state based on selected facets deduced from query params
   const isChecked = initChecked(searchParams, key, id);
-  const nestedSubFacets = useMemo(() => {
+  // Mapping of nested facet options/groups with the ids for each underlying facet value
+  const [nestedSubFacets, totalSubFacets] = useMemo(() => {
+    // key: string; value: Set
+    const map = new Map();
+    let totalCount = 0;
     // Flatten the available facet values for an arbitrary amount of nested facet
-    // options (i.e. subfacets)
-    return facets.reduce((acc, facetOption) => {
-      acc.push(...facetOption.options);
-      return acc;
-    }, []);
+    // options (i.e. subfacets). This only flattens up to 1 layer of facet values
+    facets.forEach((facetGroup) => {
+      facetGroup.options.forEach(({ key, id }) => {
+        if (!map.has(key)) {
+          map.set(key, new Set());
+        }
+        const currentSet = map.get(key);
+        currentSet.add(id);
+        totalCount++;
+      });
+    });
+    return [map, totalCount];
   }, [facets]);
-  // const numSelectedSubProducts = selectedFacets.filter((selectedFacet) => {
-  //   return selectedFacet.key.includes(fullFacetId);
-  // }).length;
-  // const numSelectedSubProducts = searchParams.getAll
-  const numSelectedSubProducts = findNumSelectedSubFacets(searchParams, nestedSubFacets, fullFacetId);
-
-  const isIndeterminate = numSelectedSubProducts > 0 && numSelectedSubProducts !== nestedSubFacets.length;
+  // Only show an indeterminate state for Atlas products
+  const numSelectedSubProducts = isAtlasProduct
+    ? findNumSelectedSubFacets(searchParams, nestedSubFacets, fullFacetId)
+    : 0;
+  const isIndeterminate = numSelectedSubProducts > 0 && numSelectedSubProducts !== totalSubFacets;
 
   const onChangeHandler = useCallback(
     ({ target }) => {
       const { checked } = target;
       const facetsToUpdate = [];
+
+      const updateNestedFacets = () => {
+        nestedSubFacets.forEach((ids, key) => {
+          ids.forEach((id) => {
+            facetsToUpdate.push({ key, id });
+          });
+        });
+      };
+
       // If the Atlas product is selected/deselected, the action should apply to all
       // subfacets
       if (isAtlasProduct) {
-        nestedSubFacets.forEach(({ key, id }) => {
-          facetsToUpdate.push({ key, id });
-        });
+        updateNestedFacets();
+      } else if (!checked) {
+        // Perform updates for nested facets for non-Atlas products only for deselection
+        updateNestedFacets();
       }
       facetsToUpdate.push({ key, id });
       handleFacetChange(facetsToUpdate, checked);
