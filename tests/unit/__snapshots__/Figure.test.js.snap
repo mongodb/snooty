@@ -61,6 +61,7 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
   margin-top: 24px;
   margin-bottom: 24px;
   display: block;
+  max-height: 620px;
 }
 
 .emotion-2 {

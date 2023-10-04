@@ -27,6 +27,7 @@ const StyledModal = styled(Modal)`
 
   img {
     max-height: 620px;
+    width: 100%;
   }
 `;
 
