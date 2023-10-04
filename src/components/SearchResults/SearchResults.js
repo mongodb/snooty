@@ -26,7 +26,6 @@ import MobileFilters from './MobileFilters';
 import { Facets } from './Facets';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_COLUMN_WIDTH = '173px';
 const LANDING_MODULE_MARGIN = '28px';
 const LANDING_PAGE_MARGIN = '40px';
@@ -81,25 +80,30 @@ const FilterHeader = styled('h2')`
 `;
 
 const SearchResultsContainer = styled('div')`
-  column-gap: ${DESKTOP_COLUMN_GAP};
   display: grid;
   ${({ showFacets }) =>
     showFacets
       ? `
+    column-gap: 16px;
     grid-template-areas: 'header header' 'filters results';
-    grid-template-columns: ${FILTER_COLUMN_WIDTH} auto;
+    grid-template-columns: 188px auto;
+
+    @media ${theme.screenSize.upTo2XLarge} {
+      margin: ${theme.size.large} 71px ${theme.size.xlarge} 52px;
+    }
   `
       : `
+    column-gap: 46px;
     grid-template-areas: 'header .' 'results filters';
     grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
+
+    @media ${theme.screenSize.upTo2XLarge} {
+      margin: ${theme.size.large} 40px ${theme.size.xlarge} 40px;
+    }
   `}
   margin: ${theme.size.large} 108px ${theme.size.xlarge} ${theme.size.large};
   max-width: 1150px;
   row-gap: ${theme.size.small};
-
-  @media ${theme.screenSize.upTo2XLarge} {
-    margin: ${theme.size.large} 40px ${theme.size.xlarge} 40px;
-  }
 
   @media ${theme.screenSize.upToMedium} {
     column-gap: 0;

@@ -2,16 +2,14 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import Checkbox from '@leafygreen-ui/checkbox';
 import { css, cx } from '@leafygreen-ui/emotion';
 import SearchContext from '../SearchContext';
-import FacetOption from './FacetOption';
-
-const nestedFacetStyle = css`
-  margin-left: 22px;
-`;
+import FacetGroup from './FacetGroup';
 
 const checkboxStyle = css`
-  // Target the label
-  span {
+  // Target the label/text
+  label {
     font-size: 13px;
+    margin-bottom: 8px;
+  }
   }
 `;
 
@@ -120,7 +118,7 @@ const FacetValue = ({ facetValue: { name, facets, key, id } }) => {
       />
       {(isChecked || isAtlasProduct) &&
         facets.map((facet) => {
-          return <FacetOption key={facet.id} className={cx(nestedFacetStyle)} facetOption={facet} isNested={true} />;
+          return <FacetGroup key={facet.id} facetOption={facet} isNested={true} />;
         })}
     </>
   );
