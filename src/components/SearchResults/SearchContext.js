@@ -14,42 +14,15 @@ const SearchContext = createContext({
   searchTerm: '',
   selectedVersion: null,
   selectedCategory: null,
-  selectedFacets: [],
   setSearchFilter: null,
   setSelectedVersion: () => {},
   setSelectedCategory: () => {},
   setShowMobileFilters: () => {},
-  setSelectedFacets: () => {},
   handleFacetChange: () => {},
   shouldAutofocus: false,
   showFacets: false,
+  searchParams: {},
 });
-
-/**
- * Get facets from query params on initial load
- * @param {URLSearchParams} searchParams
- */
-const getSelectedFacetParams = (searchParams) => {
-  const selectedFacets = [];
-  // Use set to avoid duplicate keys for facet options
-  const keySet = new Set(searchParams.keys());
-
-  for (const key of keySet) {
-    if (!key.startsWith(FACETS_KEY_PREFIX)) {
-      continue;
-    }
-
-    // Reconstruct facet object
-    const strippedKey = key.split(FACETS_KEY_PREFIX)[1];
-    const facetIds = searchParams.getAll(key);
-    facetIds.forEach((id) => {
-      const fullFacetId = `${strippedKey}>${id}`;
-      selectedFacets.push({ fullFacetId, key: strippedKey, id });
-    });
-  }
-
-  return selectedFacets;
-};
 
 const SearchContextProvider = ({ children, showFacets = false }) => {
   const { search } = useLocation();
@@ -66,9 +39,6 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedVersion, setSelectedVersion] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-
-  // Facets are applied on toggle, in the format facet-option>facet-value
-  const [selectedFacets, setSelectedFacets] = useState(getSelectedFacetParams(searchParams));
 
   // navigate changes and store state in URL
   const onSearchChange = ({ searchTerm, searchFilter, page }) => {
@@ -107,7 +77,6 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
       });
     }
     newSearch.set('page', 1);
-    setSelectedFacets(getSelectedFacetParams(newSearch));
     // The navigation might cause a small visual delay when facets are being checked
     navigate(`?${newSearch.toString()}`);
   };
@@ -175,11 +144,11 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         setSelectedCategory,
         selectedVersion,
         setSelectedVersion,
-        selectedFacets,
         handleFacetChange,
         showMobileFilters,
         setShowMobileFilters,
         showFacets,
+        searchParams,
       }}
     >
       {children}
