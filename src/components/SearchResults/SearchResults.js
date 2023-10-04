@@ -231,6 +231,9 @@ const StyledTag = styled(Tag)`
 const ResultTag = styled('div')`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: ${theme.size.small};
 `;
 
 const MobileSearchButtonWrapper = styled('div')`
@@ -402,9 +405,9 @@ const SearchResults = () => {
               setSearchField(e.target.value);
             }}
           />
-          <ResultTag style={{ paddingTop: '10px' }}>
-            {Number.isInteger(searchCount) && (
-              <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
+          <ResultTag style={{ paddingTop: '16px' }}>
+            {!showFacets && Number.isInteger(searchCount) && (
+              <Overline style={{ paddingRight: '8px' }}>
                 <>{searchCount} RESULTS</>
               </Overline>
             )}

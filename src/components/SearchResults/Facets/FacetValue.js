@@ -22,7 +22,6 @@ const FacetValue = ({ facetValue: { name, facets, key, id } }) => {
   // Differentiate between facets with the same id found under different facet options
   const fullFacetId = `${key}>${id}`;
   // Decide on initial state based on selected facets deduced from query params
-  // const [isChecked, setIsChecked] = useState(() => initChecked(searchParams, key, id));
   const isChecked = useMemo(() => initChecked(searchParams, key, id), [id, key, searchParams]);
 
   const onChangeHandler = useCallback(

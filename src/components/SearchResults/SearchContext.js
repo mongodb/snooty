@@ -19,6 +19,7 @@ const SearchContext = createContext({
   setSelectedCategory: () => {},
   setShowMobileFilters: () => {},
   handleFacetChange: () => {},
+  clearFacets: () => {},
   shouldAutofocus: false,
   showFacets: false,
   searchParams: {},
@@ -97,6 +98,13 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
     [search]
   );
 
+  const clearFacets = useCallback(() => {
+    const newSearch = new URLSearchParams();
+    newSearch.set('q', searchTerm);
+    newSearch.set('page', 1);
+    navigate(`?${newSearch.toString()}`);
+  }, [searchTerm]);
+
   return (
     <SearchContext.Provider
       value={{
@@ -119,6 +127,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         selectedVersion,
         setSelectedVersion,
         handleFacetChange,
+        clearFacets,
         showMobileFilters,
         setShowMobileFilters,
         showFacets,
