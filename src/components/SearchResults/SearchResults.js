@@ -1,8 +1,7 @@
 import { navigate } from 'gatsby';
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { Global } from '@emotion/react';
-import { css, cx } from '@leafygreen-ui/emotion';
+import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -10,7 +9,7 @@ import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
 import { palette } from '@leafygreen-ui/palette';
-import { H3, H1, Overline } from '@leafygreen-ui/typography';
+import { H1, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -42,11 +41,6 @@ const commonTextStyling = css`
   margin: 0;
 `;
 
-const headerStyle = css`
-  color: ${palette.green.dark2};
-  padding-bottom: 24px;
-`;
-
 const EmptyResultsContainer = styled('div')`
   /* We want to place the empty state in the middle of the page. To do so, we
   must account for any margins added from using the blank landing template,
@@ -57,6 +51,12 @@ const EmptyResultsContainer = styled('div')`
 
 const HeaderContainer = styled('div')`
   grid-area: header;
+
+  > h1:first-of-type {
+    color: ${palette.green.dark2};
+    padding-bottom: 40px;
+    margin: unset;
+  }
 `;
 
 const FiltersContainer = styled('div')`
@@ -103,7 +103,7 @@ const SearchResultsContainer = styled('div')`
   `}
   margin: ${theme.size.large} 108px ${theme.size.xlarge} ${theme.size.large};
   max-width: 1150px;
-  row-gap: ${theme.size.small};
+  row-gap: ${theme.size.large};
 
   @media ${theme.screenSize.upToMedium} {
     column-gap: 0;
@@ -294,10 +294,12 @@ const SearchResults = () => {
     };
   }
 
-  //effect called to autofocus search box on page render
+  // effect called to autofocus search box on page render
   useEffect(() => {
     if (searchBoxRef.current) {
       searchBoxRef.current.focus();
+      // Add class for Smartling localization
+      searchBoxRef.current.classList.add('sl-search-input');
     }
   }, []);
 
@@ -394,9 +396,7 @@ const SearchResults = () => {
       <SearchResultsContainer showFacets={showFacets}>
         {/* new header for search bar */}
         <HeaderContainer>
-          <H3 as={H1} className={cx(headerStyle)}>
-            Search Results
-          </H3>
+          <H1>Search Results</H1>
           <SearchInput
             ref={searchBoxRef}
             value={searchField}
@@ -407,6 +407,10 @@ const SearchResults = () => {
             }}
           />
           <ResultTag style={{ paddingTop: '10px' }}>
+            {/* Classname-attached searchTerm needed for Smartling localization */}
+            <span style={{ display: 'none' }} className="sl-search-keyword">
+              {searchTerm}
+            </span>
             {Number.isInteger(searchCount) && (
               <Overline style={{ paddingTop: '11px', paddingRight: '8px' }}>
                 <>{searchCount} RESULTS</>

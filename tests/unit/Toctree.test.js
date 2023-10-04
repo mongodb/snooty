@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { mockLocation } from '../utils/mock-location';
 import Toctree from '../../src/components/Sidenav/Toctree';
 import { tick } from '../utils';
 import mockData from './data/Toctree.test.json';
@@ -18,6 +19,10 @@ import mockData from './data/Toctree.test.json';
 const mountToctree = (slug) => {
   return render(<Toctree slug={slug} toctree={mockData?.toctree} />);
 };
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 describe('Toctree', () => {
   jest.useFakeTimers();

@@ -1,7 +1,7 @@
-import { useSiteMetadata } from '../../../hooks/use-site-metadata';
+import useSnootyMetadata from '../../../utils/use-snooty-metadata';
 
 export default function useFeedbackData({ slug, title, url, publishedBranches }) {
-  const { project } = useSiteMetadata();
+  const { project } = useSnootyMetadata();
   const feedback_data = {
     slug,
     url,

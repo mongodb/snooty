@@ -72,7 +72,7 @@ const Wrapper = styled('main')`
 `;
 
 // The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
-const Landing = ({ children, pageContext, isSearch, useChatbot }) => {
+const Landing = ({ children, pageContext, useChatbot }) => {
   const { fontSize, screenSize, size } = useTheme();
   return (
     <>
@@ -125,13 +125,10 @@ const Landing = ({ children, pageContext, isSearch, useChatbot }) => {
               grid-column: 2 / -2;
             }
           }
-          ${!isSearch &&
-          `
           main h1:first-of-type {
             color: ${palette.white};
-            ${
-              SHOW_CHATBOT && useChatbot
-                ? `
+            ${SHOW_CHATBOT && useChatbot
+              ? `
               color: ${palette.black};
               grid-column: 2/-1;
               margin: ${size.large} 0;
@@ -143,14 +140,12 @@ const Landing = ({ children, pageContext, isSearch, useChatbot }) => {
                 line-height: 40px;
               }
             `
-                : `
+              : `
               @media ${screenSize.upToMedium} {
                 color: ${palette.green.dark2};
               }
-              `
-            }
+              `}
           }
-          `}
           .span-columns {
             grid-column: 3 / -3 !important;
             margin: ${size.xlarge} 0;
@@ -233,7 +228,6 @@ Landing.propTypes = {
     page: PropTypes.object.isRequired,
   }).isRequired,
   useChatbot: PropTypes.bool,
-  isSearch: PropTypes.bool,
 };
 
 export default Landing;

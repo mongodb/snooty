@@ -1,15 +1,16 @@
 const path = require('path');
-const { transformBreadcrumbs } = require('./src/utils/setup/transform-breadcrumbs.js');
-const { baseUrl } = require('./src/utils/base-url');
-const { saveAssetFiles, saveStaticFiles } = require('./src/utils/setup/save-asset-files');
-const { validateEnvVariables } = require('./src/utils/setup/validate-env-variables');
-const { getNestedValue } = require('./src/utils/get-nested-value');
-const { removeNestedValue } = require('./src/utils/remove-nested-value.js');
-const { getPageSlug } = require('./src/utils/get-page-slug');
-const { manifestMetadata, siteMetadata } = require('./src/utils/site-metadata');
-const { assertTrailingSlash } = require('./src/utils/assert-trailing-slash');
-const { constructPageIdPrefix } = require('./src/utils/setup/construct-page-id-prefix');
-const { manifestDocumentDatabase, realmDocumentDatabase } = require('./src/init/DocumentDatabase.js');
+const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
+const { saveAssetFiles, saveStaticFiles } = require('../../src/utils/setup/save-asset-files');
+const { validateEnvVariables } = require('../../src/utils/setup/validate-env-variables');
+const { getNestedValue } = require('../../src/utils/get-nested-value');
+const { removeNestedValue } = require('../../src/utils/remove-nested-value.js');
+const { getPageSlug } = require('../../src/utils/get-page-slug');
+const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadata');
+const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash');
+const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix');
+const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
+const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
+const { createProductNodes } = require('../utils/products.js');
 
 // different types of references
 const PAGES = [];
@@ -31,7 +32,7 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   const productList = manifestMetadata?.associated_products || [];
   await Promise.all(
     productList.map(async (product) => {
-      associatedReposInfo[product.name] = await db.realmInterface.fetchRepoBranches(product.name);
+      associatedReposInfo[product.name] = await db.realmInterface.fetchDocset({ project: product.name });
     })
   );
   // check if product is associated child product
@@ -75,116 +76,6 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   }
 };
 
-const atlasAdminProdChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
-const atlasAdminDevChangelogS3Prefix = 'https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog';
-
-const fetchChangelogData = async (runId, versions, s3Prefix) => {
-  try {
-    /* Using metadata runId, fetch OpenAPI Changelog full change list */
-    const changelogResp = await fetch(`${s3Prefix}/${runId}/changelog.json`);
-    const changelog = await changelogResp.json();
-
-    /* Aggregate all Resources in changelog for frontend filter */
-    const resourcesListSet = new Set();
-    changelog.forEach((release) =>
-      release.paths.forEach(({ httpMethod, path }) => resourcesListSet.add(`${httpMethod} ${path}`))
-    );
-    const changelogResourcesList = Array.from(resourcesListSet);
-
-    /* Fetch most recent Resource Versions' diff */
-    const mostRecentResourceVersions = versions.slice(-2);
-    const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
-    const mostRecentDiffResp = await fetch(`${s3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
-    const mostRecentDiffData = await mostRecentDiffResp.json();
-
-    return {
-      changelog,
-      changelogResourcesList,
-      mostRecentDiff: {
-        mostRecentDiffLabel,
-        mostRecentDiffData,
-      },
-    };
-  } catch (error) {
-    console.warn('Changelog error: Most recent runId not successful. Using last successful runId to build Changelog.');
-    throw error;
-  }
-};
-
-/* Creates node for ChangelogData, cuyrrently only used for OpenAPI Changelog in cloud-docs. */
-const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest, siteMetadata }) => {
-  try {
-    const { snootyEnv } = siteMetadata;
-    let atlasAdminChangelogS3Prefix;
-    let indexLocation;
-    switch (snootyEnv) {
-      case 'staging':
-      case 'development':
-        atlasAdminChangelogS3Prefix = atlasAdminDevChangelogS3Prefix;
-        indexLocation = 'dev.json';
-        break;
-      case 'production':
-      default:
-        atlasAdminChangelogS3Prefix = atlasAdminProdChangelogS3Prefix;
-        indexLocation = 'prod.json';
-    }
-    /* Fetch OpenAPI Changelog metadata */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/${indexLocation}`);
-    const index = await indexResp.json();
-
-    const { runId, versions } = index;
-
-    if (!runId || typeof runId !== 'string')
-      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.json!');
-
-    let changelogData = {
-      index,
-    };
-    try {
-      const receivedChangelogData = await fetchChangelogData(runId, versions, atlasAdminChangelogS3Prefix);
-      changelogData = { ...changelogData, ...receivedChangelogData };
-      if (snootyEnv === 'production') await db.realmInterface.updateOAChangelogMetadata(index);
-    } catch (error) {
-      /* If any error occurs, fetch last successful metadata and build changelog node */
-      const lastSuccessfulIndex = await db.realmInterface.fetchDocument(
-        'openapi_changelog',
-        'atlas_admin_metadata',
-        {}
-      );
-      const { runId: lastRunId, versions: lastVersions } = lastSuccessfulIndex;
-      const receivedChangelogData = fetchChangelogData(lastRunId, lastVersions, atlasAdminProdChangelogS3Prefix);
-      changelogData = { index: lastSuccessfulIndex, ...receivedChangelogData };
-    }
-
-    /* Create Node for useStaticQuery with all Changelog data */
-    createNode({
-      children: [],
-      id: createNodeId('changelogData'),
-      internal: {
-        contentDigest: createContentDigest(changelogData),
-        type: 'ChangelogData',
-      },
-      parent: null,
-      changelogData: changelogData,
-    });
-  } catch (e) {
-    console.error('Error while fetching OpenAPI Changelog data from S3');
-    console.error(e);
-
-    /* Create empty Node for useStaticQuery to ensure successful build */
-    createNode({
-      children: [],
-      id: createNodeId('changelogData'),
-      internal: {
-        contentDigest: createContentDigest({}),
-        type: 'ChangelogData',
-      },
-      parent: null,
-      changelogData: {},
-    });
-  }
-};
-
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
@@ -195,7 +86,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     throw Error(envResults.message);
   }
 
-  // wait to connect to stitch
+  // wait to connect to Realm
 
   if (siteMetadata.manifestPath) {
     console.log('Loading documents from manifest');
@@ -252,27 +143,11 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
-  // Get all MongoDB products for the sidenav
-  const products = await db.fetchAllProducts();
-  products.forEach((product) => {
-    const url = baseUrl(product.baseUrl + product.slug);
-
-    createNode({
-      children: [],
-      id: createNodeId(`Product-${product.title}`),
-      internal: {
-        contentDigest: createContentDigest(product),
-        type: 'Product',
-      },
-      parent: null,
-      title: product.title,
-      url,
-    });
-  });
+  await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
-    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata });
+    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
 
   await saveAssetFiles(assets, db);
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
@@ -304,7 +179,7 @@ exports.createPages = async ({ actions }) => {
 
   let repoBranches = null;
   try {
-    const repoInfo = await db.realmInterface.fetchRepoBranches();
+    const repoInfo = await db.realmInterface.fetchDocset();
     let errMsg;
 
     if (!repoInfo) {
@@ -351,9 +226,7 @@ exports.createPages = async ({ actions }) => {
       const slug = getPageSlug(page);
 
       // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
-      const isFullBuild =
-        siteMetadata.snootyEnv !== 'production' || process.env.PREVIEW_BUILD_ENABLED?.toUpperCase() !== 'TRUE';
-      const mainComponentRelativePath = `./src/components/DocumentBody${isFullBuild ? '' : 'Preview'}.js`;
+      const mainComponentRelativePath = `../../src/components/DocumentBody.js`;
 
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
@@ -376,10 +249,10 @@ exports.createPages = async ({ actions }) => {
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
-exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
+exports.onCreateWebpackConfig = ({ plugins, actions }) => {
   const providePlugins = {
     Buffer: ['buffer', 'Buffer'],
-    process: require.resolve('./stubs/process.js'),
+    process: require.resolve('../../stubs/process.js'),
   };
 
   const fallbacks = { stream: require.resolve('stream-browserify'), buffer: require.resolve('buffer/') };
@@ -399,12 +272,25 @@ exports.onCreateWebpackConfig = ({ stage, loaders, plugins, actions }) => {
 // https://www.gatsbyjs.com/docs/scaling-issues/#switch-off-type-inference-for-sitepagecontext
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
-    type SitePage implements Node @dontInfer {
-      path: String!
+    type Page implements Node @dontInfer {
+      page_id: String
+      branch: String
+      pagePath: String
+      ast: JSON!
+      metadata: SnootyMetadata @link
     }
 
     type SnootyMetadata implements Node @dontInfer {
-      metadata: JSON!
+      metadata: JSON
+      branch: String
+      project: String
+    }
+
+    type PagePath implements Node @dontInfer {
+      page_id: String!
+      branch: String!
+      project: String!
+      pageNodeId: String!
     }
 
     type RemoteMetadata implements Node @dontInfer {

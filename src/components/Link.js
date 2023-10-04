@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from '@gatsbyjs/reach-router';
 import { Link as GatsbyLink } from 'gatsby';
 import { css } from '@leafygreen-ui/emotion';
 import { Link as LGLink } from '@leafygreen-ui/typography';
@@ -7,6 +8,7 @@ import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
+import { isGatsbyPreview } from '../utils/is-gatsby-preview';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -67,6 +69,7 @@ const Link = ({
   hideExternalIcon: hideExternalIconProp,
   ...other
 }) => {
+  const location = useLocation();
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
@@ -86,6 +89,20 @@ const Link = ({
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
+
+    if (isGatsbyPreview()) {
+      // If we're in preview mode, we build the pages of each project and branch of the site within
+      // its own namespace so each author can preview their own pages e.g.
+      // /project1/branch1/doc-path
+      // /project2/branch2/doc-path
+      //
+      // So to navigate with the namespaced site, we add to each link the current project and branch
+      // the user is browsing in.
+      const projectAndBranchPrefix = `/` + location.pathname.split(`/`).slice(1, 3).join(`/`);
+      if (!to.startsWith(projectAndBranchPrefix)) {
+        to = projectAndBranchPrefix + to;
+      }
+    }
 
     return (
       <GatsbyLink
