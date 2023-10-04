@@ -14,42 +14,15 @@ const SearchContext = createContext({
   searchTerm: '',
   selectedVersion: null,
   selectedCategory: null,
-  selectedFacets: [],
   setSearchFilter: null,
   setSelectedVersion: () => {},
   setSelectedCategory: () => {},
   setShowMobileFilters: () => {},
-  setSelectedFacets: () => {},
   handleFacetChange: () => {},
   shouldAutofocus: false,
   showFacets: false,
+  searchParams: {},
 });
-
-/**
- * Get facets from query params on initial load
- * @param {URLSearchParams} searchParams
- */
-const getSelectedFacetParams = (searchParams) => {
-  const selectedFacets = [];
-  // Use set to avoid duplicate keys for facet options
-  const keySet = new Set(searchParams.keys());
-
-  for (const key of keySet) {
-    if (!key.startsWith(FACETS_KEY_PREFIX)) {
-      continue;
-    }
-
-    // Reconstruct facet object
-    const strippedKey = key.split(FACETS_KEY_PREFIX)[1];
-    const facetIds = searchParams.getAll(key);
-    facetIds.forEach((id) => {
-      const fullFacetId = `${strippedKey}>${id}`;
-      selectedFacets.push({ fullFacetId, key: strippedKey, id });
-    });
-  }
-
-  return selectedFacets;
-};
 
 const SearchContextProvider = ({ children, showFacets = false }) => {
   const { search } = useLocation();
@@ -68,7 +41,6 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   // Facets are applied on toggle, in the format facet-option>facet-value
-  const [selectedFacets, setSelectedFacets] = useState(() => getSelectedFacetParams(searchParams));
 
   // navigate changes and store state in URL
   const onSearchChange = ({ searchTerm, searchFilter, page }) => {
@@ -113,22 +85,12 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         navigate(`?${newSearch.toString()}`);
       };
 
+      const newFacet = { fullFacetId, key, id };
       if (checked) {
-        const newFacet = { fullFacetId, key, id };
-        setSelectedFacets((prev) => [...prev, newFacet]);
         updateFacetSearchParams([newFacet], 'add');
       } else {
-        const facetsToRemove = [];
+        const facetsToRemove = [newFacet];
         // Remove facet from array, including any sub-facet with same relationship
-        setSelectedFacets((prev) =>
-          prev.filter((facet) => {
-            const shouldKeep = !facet.fullFacetId.includes(fullFacetId);
-            if (!shouldKeep) {
-              facetsToRemove.push(facet);
-            }
-            return shouldKeep;
-          })
-        );
         updateFacetSearchParams(facetsToRemove, 'remove');
       }
     },
@@ -156,11 +118,11 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         setSelectedCategory,
         selectedVersion,
         setSelectedVersion,
-        selectedFacets,
         handleFacetChange,
         showMobileFilters,
         setShowMobileFilters,
         showFacets,
+        searchParams,
       }}
     >
       {children}
