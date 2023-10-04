@@ -61,21 +61,20 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
     navigate(`?${newSearch.toString()}`);
   };
 
-  const handleFacetChange = (facets, checked) => {
+  const handleFacetChange = (facets) => {
     const newSearch = new URLSearchParams(search);
-    if (checked) {
-      facets.forEach(({ key, id }) => {
-        const paramKey = FACETS_KEY_PREFIX + key;
+
+    facets.forEach(({ key, id, checked }) => {
+      const paramKey = FACETS_KEY_PREFIX + key;
+      if (checked) {
         // Avoid duplicate param keys with the same values
         if (!newSearch.getAll(paramKey).includes(id)) {
           newSearch.append(paramKey, id);
         }
-      });
-    } else {
-      facets.forEach(({ key, id }) => {
+      } else {
         newSearch.delete(FACETS_KEY_PREFIX + key, id);
-      });
-    }
+      }
+    });
     newSearch.set('page', 1);
     // The navigation might cause a small visual delay when facets are being checked
     navigate(`?${newSearch.toString()}`);

@@ -31,7 +31,7 @@ const showMoreStyle = css`
   font-size: 13px;
   line-height: 20px;
   color: ${palette.gray.dark4};
-  margin: 8px 0;
+  margin-bottom: 16px;
   cursor: pointer;
 `;
 
@@ -54,7 +54,7 @@ const FacetGroup = ({ facetOption: { name, id, options }, isNested = false }) =>
         text: 'Show less',
       };
 
-  const handleExpandResults = useCallback(() => {
+  const handleExpansionClick = useCallback(() => {
     setTruncated((prev) => !prev);
   }, []);
 
@@ -62,10 +62,10 @@ const FacetGroup = ({ facetOption: { name, id, options }, isNested = false }) =>
     <div className={cx(optionStyle(isNested))}>
       {!isNested && <Body className={cx(optionNameStyle)}>{name}</Body>}
       {displayedOptions.map((facet) => {
-        return <FacetValue key={facet.id} facetValue={facet} />;
+        return <FacetValue key={facet.id} facetValue={facet} isNested={isNested} />;
       })}
       {shouldTruncate && (
-        <div className={cx(showMoreStyle)} onClick={handleExpandResults}>
+        <div className={cx(showMoreStyle)} onClick={handleExpansionClick}>
           <Icon className={cx(showMoreGlyphStyle)} glyph={truncatedState.glyph} />
           {truncatedState.text}
         </div>

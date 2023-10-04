@@ -86,7 +86,7 @@ const SearchResultsContainer = styled('div')`
       ? `
     column-gap: 16px;
     grid-template-areas: 'header header' 'filters results';
-    grid-template-columns: 188px auto;
+    grid-template-columns: 148px auto;
 
     @media ${theme.screenSize.upTo2XLarge} {
       margin: ${theme.size.large} 71px ${theme.size.xlarge} 52px;

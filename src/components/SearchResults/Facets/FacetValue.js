@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import Checkbox from '@leafygreen-ui/checkbox';
 import { css, cx } from '@leafygreen-ui/emotion';
 import SearchContext from '../SearchContext';
@@ -47,20 +47,18 @@ const findNumSelectedSubFacets = (searchParams, nestedSubFacets, fullFacetId) =>
 
 // Representative of a "facet-option" from search server response. These are
 // facets that the user can select to filter search
-const FacetValue = ({ facetValue: { name, facets, key, id } }) => {
+const FacetValue = ({ facetValue: { name, facets, key, id }, isNested = false }) => {
   const { handleFacetChange, searchParams } = useContext(SearchContext);
   const isAtlasProduct = key === 'target_product' && id === 'atlas';
   // Differentiate between facets with the same id found under different facet options
   const fullFacetId = `${key}>${id}`;
-  // Decide on initial state based on selected facets deduced from query params
-  const isChecked = initChecked(searchParams, key, id);
   // Mapping of nested facet options/groups with the ids for each underlying facet value
   const [nestedSubFacets, totalSubFacets] = useMemo(() => {
     // key: string; value: Set
     const map = new Map();
     let totalCount = 0;
-    // Flatten the available facet values for an arbitrary amount of nested facet
-    // options (i.e. subfacets). This only flattens up to 1 layer of facet values
+    // Consolidate the available facet values for an arbitrary amount of nested facet
+    // options (i.e. subfacets). This only consolidates up to 1 layer of facet values
     facets.forEach((facetGroup) => {
       facetGroup.options.forEach(({ key, id }) => {
         if (!map.has(key)) {
@@ -73,38 +71,35 @@ const FacetValue = ({ facetValue: { name, facets, key, id } }) => {
     });
     return [map, totalCount];
   }, [facets]);
-  // Only show an indeterminate state for Atlas products
-  const numSelectedSubProducts = isAtlasProduct
-    ? findNumSelectedSubFacets(searchParams, nestedSubFacets, fullFacetId)
-    : 0;
+  const numSelectedSubProducts =
+    totalSubFacets > 0 ? findNumSelectedSubFacets(searchParams, nestedSubFacets, fullFacetId) : 0;
   const isIndeterminate = numSelectedSubProducts > 0 && numSelectedSubProducts !== totalSubFacets;
+  const isChecked = totalSubFacets > 0 ? numSelectedSubProducts === totalSubFacets : initChecked(searchParams, key, id);
 
   const onChangeHandler = useCallback(
     ({ target }) => {
       const { checked } = target;
       const facetsToUpdate = [];
 
-      const updateNestedFacets = () => {
-        nestedSubFacets.forEach((ids, key) => {
-          ids.forEach((id) => {
-            facetsToUpdate.push({ key, id });
-          });
+      // Update nested checkboxes when parent is changed
+      nestedSubFacets.forEach((ids, key) => {
+        ids.forEach((id) => {
+          facetsToUpdate.push({ key, id, checked });
         });
-      };
-
-      // If the Atlas product is selected/deselected, the action should apply to all
-      // subfacets
-      if (isAtlasProduct) {
-        updateNestedFacets();
-      } else if (!checked) {
-        // Perform updates for nested facets for non-Atlas products only for deselection
-        updateNestedFacets();
-      }
-      facetsToUpdate.push({ key, id });
+      });
+      facetsToUpdate.push({ key, id, checked });
       handleFacetChange(facetsToUpdate, checked);
     },
-    [handleFacetChange, key, id, isAtlasProduct, nestedSubFacets]
+    [handleFacetChange, key, id, nestedSubFacets]
   );
+
+  // Remove query param for parent facet to prevent propagating parent to
+  // server when indeterminate. Search server only wants child facets in this case
+  useEffect(() => {
+    if (totalSubFacets > 0 && isIndeterminate) {
+      handleFacetChange([{ key, id, checked: false }]);
+    }
+  }, [isIndeterminate, totalSubFacets, handleFacetChange, key, id]);
 
   return (
     <>
@@ -116,7 +111,7 @@ const FacetValue = ({ facetValue: { name, facets, key, id } }) => {
         id={fullFacetId}
         indeterminate={isIndeterminate}
       />
-      {(isChecked || isAtlasProduct) &&
+      {(isAtlasProduct || isChecked || isIndeterminate) &&
         facets.map((facet) => {
           return <FacetGroup key={facet.id} facetOption={facet} isNested={true} />;
         })}
