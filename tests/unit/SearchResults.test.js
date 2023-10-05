@@ -19,7 +19,11 @@ const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 // Mock LG Checkbox component to avoid potential React incompatibilities with testing:
 // "Error: Uncaught [TypeError: e.addEventListener is not a function]"
 jest.mock('@leafygreen-ui/checkbox', () => {
-  return ({ label, checked }) => <div data-checked={checked}>{label}</div>;
+  return ({ label, checked, indeterminate }) => (
+    <div data-checked={checked} data-indeterminate={indeterminate}>
+      {label}
+    </div>
+  );
 });
 
 // Check the search results include the property-filtered results
@@ -113,9 +117,9 @@ const clearAllFilters = async (wrapper, screenSize) => {
   tick();
 };
 
-function renderSearchResults({ showFacets }) {
+function renderSearchResults(props) {
   return render(
-    <SearchContextProvider showFacets={showFacets}>
+    <SearchContextProvider showFacets={props?.showFacets}>
       <SearchResults />
     </SearchContextProvider>
   );
@@ -306,7 +310,7 @@ describe('Search Results Page', () => {
   });
 
   // Note that snapshots might not be entirely accurate due to mocked LG component
-  describe.only('Facets component', () => {
+  describe('Facets component', () => {
     const facetsContainerId = 'facets-container';
 
     it('renders all facets', async () => {
@@ -317,18 +321,19 @@ describe('Search Results Page', () => {
       });
       expect(tree.getByTestId(facetsContainerId)).toMatchSnapshot();
     });
+
     it('renders facets with selected values', async () => {
       let tree;
-      mockLocation(
-        '?q=test&page=1&facets.genre=tutorial&facets.target_product=atlas&facets.target_product>atlas>sub_product=atlas-cli'
-      );
+      mockLocation('?q=test&page=1&facets.genre=tutorial&facets.target_product>atlas>sub_product=atlas-cli');
       await act(async () => {
         tree = renderSearchResults({ showFacets: true });
       });
       const facetsContainer = tree.getByTestId(facetsContainerId);
       // Check that the number of checked items match the number of facets in mocked location
-      const numFacetsSelected = 3;
+      const numFacetsSelected = 2;
+      const numFacetsIndeterminate = 1;
       expect(facetsContainer.querySelectorAll('[data-checked=true]')).toHaveLength(numFacetsSelected);
+      expect(facetsContainer.querySelectorAll('[data-indeterminate=true]')).toHaveLength(numFacetsIndeterminate);
       expect(tree.getByTestId(facetsContainerId)).toMatchSnapshot();
     });
   });
