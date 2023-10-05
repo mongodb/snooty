@@ -224,7 +224,8 @@ const StyledTag = styled(Tag)`
 const ResultTag = styled('div')`
   display: flex;
   flex-direction: row;
-  padding-top: 21px;
+  padding-top: ${theme.size.default};
+  align-items: center;
 `;
 
 const styledIcon = css`
