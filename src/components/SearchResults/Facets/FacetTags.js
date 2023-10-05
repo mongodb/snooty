@@ -2,6 +2,8 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
+import { Overline } from '@leafygreen-ui/typography';
 import { theme } from '../../../theme/docsTheme';
 import Tag, { searchTagStyle } from '../../Tag';
 import SearchContext from '../SearchContext';
@@ -60,12 +62,18 @@ const SelectionsFlexbox = styled('div')`
   display: flex;
   flex-wrap: wrap;
   row-gap: 8px;
-  max-height: ${(props) => (!props.expanded ? `${MAX_HEIGHT}px` : 'unset')}};
+  max-height: ${(props) => (!props.expanded ? `${MAX_HEIGHT}px` : 'unset')};
+  align-items: center;
 `;
 
 const ExpandFlexbox = styled('div')`
   display: flex;
   flex: 0 0 fit-content;
+`;
+
+const overlineStyling = css`
+  color: ${palette.gray.dark2};
+  margin-right: ${theme.size.small};
 `;
 
 const FacetTag = ({ facet: { name, key, id } }) => {
@@ -82,7 +90,7 @@ const FacetTag = ({ facet: { name, key, id } }) => {
   return <StyledTag onClick={onClick}>{name}</StyledTag>;
 };
 
-const FacetTags = () => {
+const FacetTags = ({ resultsCount }) => {
   const { searchParams, clearFacets } = useContext(SearchContext);
   const facets = useFacets();
   // don't have to use state since facet filters are
@@ -113,6 +121,11 @@ const FacetTags = () => {
   return (
     <TagsFlexbox>
       <SelectionsFlexbox ref={refContainer} expanded={expanded}>
+        {Number.isInteger(resultsCount) && (
+          <Overline className={cx(overlineStyling)}>
+            <>{resultsCount} RESULTS</>
+          </Overline>
+        )}
         {activeFacets.map((facet) => (
           <FacetTag facet={facet} key={facet.id}></FacetTag>
         ))}
@@ -122,7 +135,7 @@ const FacetTags = () => {
           </StyledTag>
         )}
         {expanded && activeFacets.length > 0 && (
-          <StyledTag className={cx(clearButtonStyling)} onClick={clearFacets}>
+          <StyledTag variant={'gray'} className={cx(clearButtonStyling)} onClick={clearFacets}>
             clear all filters <Icon glyph="X"> </Icon>
           </StyledTag>
         )}
@@ -135,7 +148,7 @@ const FacetTags = () => {
             </StyledTag>
           )}
           {activeFacets.length > 0 && (
-            <StyledTag className={cx(clearButtonStyling)} onClick={clearFacets}>
+            <StyledTag variant={'gray'} className={cx(clearButtonStyling)} onClick={clearFacets}>
               clear all filters <Icon glyph="X"> </Icon>
             </StyledTag>
           )}

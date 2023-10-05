@@ -422,7 +422,7 @@ const SearchResults = () => {
                 {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
               </FilterBadgesWrapper>
             )}
-            {showFacets && <FacetTags></FacetTags>}
+            {showFacets && searchFinished && <FacetTags resultsCount={searchCount}></FacetTags>}
           </ResultTag>
           <MobileSearchButtonWrapper>
             <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
