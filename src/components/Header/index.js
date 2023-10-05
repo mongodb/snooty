@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import { UnifiedNav } from '@mdb/consistent-nav';
 import { SidenavMobileMenuDropdown } from '../Sidenav';
 import SiteBanner from '../Banner/SiteBanner';
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
@@ -21,8 +20,7 @@ const StyledHeaderContainer = styled.header(
 );
 
 const Header = ({ sidenav, eol, template }) => {
-  const { project } = useSiteMetadata();
-  const { branch } = useSnootyMetadata();
+  const { project, branch } = useSnootyMetadata();
   const { searchPropertyMapping } = useMarianManifests();
 
   let searchProperty;

@@ -1,8 +1,7 @@
 import { navigate } from 'gatsby';
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { Global } from '@emotion/react';
-import { css, cx } from '@leafygreen-ui/emotion';
+import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -10,7 +9,7 @@ import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
 import { palette } from '@leafygreen-ui/palette';
-import { H3, H1, Overline } from '@leafygreen-ui/typography';
+import { H1, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -26,7 +25,6 @@ import MobileFilters from './MobileFilters';
 import { Facets, FacetTags } from './Facets';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-const DESKTOP_COLUMN_GAP = '46px';
 const FILTER_COLUMN_WIDTH = '173px';
 const LANDING_MODULE_MARGIN = '28px';
 const LANDING_PAGE_MARGIN = '40px';
@@ -43,11 +41,6 @@ const commonTextStyling = css`
   margin: 0;
 `;
 
-const headerStyle = css`
-  color: ${palette.green.dark2};
-  padding-bottom: 24px;
-`;
-
 const EmptyResultsContainer = styled('div')`
   /* We want to place the empty state in the middle of the page. To do so, we
   must account for any margins added from using the blank landing template,
@@ -58,6 +51,12 @@ const EmptyResultsContainer = styled('div')`
 
 const HeaderContainer = styled('div')`
   grid-area: header;
+
+  > h1:first-of-type {
+    color: ${palette.green.dark2};
+    padding-bottom: 40px;
+    margin: unset;
+  }
 `;
 
 const FiltersContainer = styled('div')`
@@ -81,25 +80,30 @@ const FilterHeader = styled('h2')`
 `;
 
 const SearchResultsContainer = styled('div')`
-  column-gap: ${DESKTOP_COLUMN_GAP};
   display: grid;
   ${({ showFacets }) =>
     showFacets
       ? `
+    column-gap: 16px;
     grid-template-areas: 'header header' 'filters results';
-    grid-template-columns: ${FILTER_COLUMN_WIDTH} auto;
+    grid-template-columns: 148px auto;
+
+    @media ${theme.screenSize.upTo2XLarge} {
+      margin: ${theme.size.large} 71px ${theme.size.xlarge} 52px;
+    }
   `
       : `
+    column-gap: 46px;
     grid-template-areas: 'header .' 'results filters';
     grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
+
+    @media ${theme.screenSize.upTo2XLarge} {
+      margin: ${theme.size.large} 40px ${theme.size.xlarge} 40px;
+    }
   `}
   margin: ${theme.size.large} 108px ${theme.size.xlarge} ${theme.size.large};
   max-width: 1150px;
-  row-gap: ${theme.size.small};
-
-  @media ${theme.screenSize.upTo2XLarge} {
-    margin: ${theme.size.large} 40px ${theme.size.xlarge} 40px;
-  }
+  row-gap: ${theme.size.large};
 
   @media ${theme.screenSize.upToMedium} {
     column-gap: 0;
@@ -293,10 +297,12 @@ const SearchResults = () => {
     };
   }
 
-  //effect called to autofocus search box on page render
+  // effect called to autofocus search box on page render
   useEffect(() => {
     if (searchBoxRef.current) {
       searchBoxRef.current.focus();
+      // Add class for Smartling localization
+      searchBoxRef.current.classList.add('sl-search-input');
     }
   }, []);
 
@@ -393,9 +399,7 @@ const SearchResults = () => {
       <SearchResultsContainer showFacets={showFacets}>
         {/* new header for search bar */}
         <HeaderContainer>
-          <H3 as={H1} className={cx(headerStyle)}>
-            Search Results
-          </H3>
+          <H1>Search Results</H1>
           <SearchInput
             ref={searchBoxRef}
             value={searchField}
@@ -406,6 +410,9 @@ const SearchResults = () => {
             }}
           />
           <ResultTag style={{ paddingTop: '16px' }}>
+            <span style={{ display: 'none' }} className="sl-search-keyword">
+              {searchTerm}
+            </span>
             {!showFacets && Number.isInteger(searchCount) && (
               <Overline style={{ paddingRight: '8px' }}>
                 <>{searchCount} RESULTS</>

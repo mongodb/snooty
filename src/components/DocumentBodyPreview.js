@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
-import useSnootyMetadata from '../utils/use-snooty-metadata';
+import Layout from '../layouts/preview-layout';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -62,8 +63,15 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
 const DocumentBody = (props) => {
   const {
     location,
-    pageContext: { page, slug, template },
+    pageContext: { slug },
+    data,
   } = props;
+  const page = data.page.ast;
+  const metadata = data.page.metadata.metadata;
+  const template = page?.options?.template;
+  // Adds page to pageContext to mimic current behavior of passing entire page AST down
+  // pageContext for templates
+  props.pageContext.page = page;
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
     const footnotes = getFootnotes(pageNodes);
@@ -73,15 +81,22 @@ const DocumentBody = (props) => {
 
   const [{ pageNodes, footnotes }] = useState(initialization);
 
-  const metadata = useSnootyMetadata();
-
   const lookup = slug === '/' ? 'index' : slug;
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
   const siteTitle = getNestedValue(['title'], metadata) || '';
   const { Template, useChatbot } = getTemplate(template);
 
   return (
-    <>
+    <Layout
+      pageContext={{
+        // Pass down data missing from the preview plugin, but are present in the
+        // prod plugin for consistency
+        template,
+        publishedBranches: getNestedValue(['publishedBranches'], metadata),
+        ...props.pageContext,
+      }}
+      metadata={metadata}
+    >
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
       <Widgets
         location={location}
@@ -99,7 +114,7 @@ const DocumentBody = (props) => {
         </FootnoteContext.Provider>
       </Widgets>
       <footer style={{ width: '100%', height: '568px', backgroundColor: '#061621' }}></footer>
-    </>
+    </Layout>
   );
 };
 
@@ -114,3 +129,14 @@ DocumentBody.propTypes = {
 };
 
 export default DocumentBody;
+
+export const query = graphql`
+  query ($id: String) {
+    page(id: { eq: $id }) {
+      ast
+      metadata {
+        metadata
+      }
+    }
+  }
+`;

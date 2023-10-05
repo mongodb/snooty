@@ -1,10 +1,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { mockLocation } from '../utils/mock-location';
 import Paragraph from '../../src/components/Paragraph';
 
 // data for this component
 import mockData from './data/Paragraph.test.json';
 import mockDataFormat from './data/Paragraph-Format.test.json';
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 describe('Paragraph unit tests', () => {
   it('renders correctly', () => {

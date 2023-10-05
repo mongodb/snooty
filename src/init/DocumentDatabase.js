@@ -1,13 +1,7 @@
 const AdmZip = require('adm-zip');
 const BSON = require('bson');
 const { initRealm } = require('../utils/setup/init-realm');
-const { constructReposFilter } = require('../utils/setup/construct-repos-filter');
-const {
-  DOCUMENTS_COLLECTION,
-  METADATA_COLLECTION,
-  ASSETS_COLLECTION,
-  BRANCHES_COLLECTION,
-} = require('../build-constants');
+const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } = require('../build-constants');
 const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
 const { constructBuildFilter } = require('../utils/setup/construct-build-filter');
 
@@ -27,15 +21,6 @@ class RealmInterface {
     return this.realmClient.callFunction('fetchAllProducts', siteMetadata.database);
   }
 
-  fetchRepoBranches(project = siteMetadata.project) {
-    return this.realmClient.callFunction(
-      'fetchDocument',
-      siteMetadata.reposDatabase,
-      BRANCHES_COLLECTION,
-      constructReposFilter(project, project === siteMetadata.project)
-    );
-  }
-
   async fetchDocuments(collection, buildFilter) {
     return this.realmClient.callFunction('fetchDocuments', DB, collection, buildFilter);
   }
@@ -46,6 +31,10 @@ class RealmInterface {
 
   async fetchDocument(database, collectionName, query) {
     return this.realmClient.callFunction('fetchDocument', database, collectionName, query);
+  }
+
+  async fetchDocset(matchConditions = { project: siteMetadata.project }) {
+    return this.realmClient.callFunction('fetchDocset', siteMetadata.reposDatabase, matchConditions);
   }
 
   async updateOAChangelogMetadata(metadata) {
@@ -126,6 +115,10 @@ class RealmDocumentDatabase {
 
   async fetchDocument(database, collectionName, query) {
     return this.realmInterface.fetchDocument(database, collectionName, query);
+  }
+
+  async fetchDocset(matchConditions) {
+    return this.realmInterface.fetchDocset(matchConditions);
   }
 
   async updateOAChangelogMetadata(metadata) {

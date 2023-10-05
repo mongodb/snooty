@@ -1,6 +1,6 @@
 import React from 'react';
 import useFacets from './useFacets';
-import FacetOption from './FacetOption';
+import FacetGroup from './FacetGroup';
 
 const Facets = () => {
   const facets = useFacets();
@@ -9,7 +9,7 @@ const Facets = () => {
     <div data-testid="facets-container">
       {facets?.length > 0 &&
         facets.map((facetOption) => {
-          return <FacetOption key={facetOption.id} facetOption={facetOption} />;
+          return <FacetGroup key={facetOption.id} facetOption={facetOption} />;
         })}
     </div>
   );

@@ -13,7 +13,6 @@ import {
 const getTemplate = (templateName) => {
   let template;
   let sidenav;
-  let isSearch = false;
   let useChatbot = false;
   switch (templateName) {
     case 'blank':
@@ -49,7 +48,6 @@ const getTemplate = (templateName) => {
     case 'search':
       template = Landing;
       sidenav = true;
-      isSearch = true;
       break;
     // Default template and guide template share very similar layouts
     default:
@@ -58,7 +56,7 @@ const getTemplate = (templateName) => {
       break;
   }
 
-  return { Template: template, sidenav, isSearch, useChatbot };
+  return { Template: template, sidenav, useChatbot };
 };
 
 export { getTemplate };

@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
+import { mockLocation } from '../utils/mock-location';
 import ProductsList from '../../src/components/Sidenav/ProductsList';
 import { tick } from '../utils';
 
@@ -21,6 +22,10 @@ jest.mock('../../src/hooks/useAllProducts', () => ({
 }));
 
 expect.extend(matchers);
+
+beforeAll(() => {
+  mockLocation(null, `/`);
+});
 
 describe('ProductsList', () => {
   jest.useFakeTimers();

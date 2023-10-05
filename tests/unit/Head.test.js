@@ -4,18 +4,21 @@ import { Head } from '../../src/components/DocumentBody';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import { useSiteMetadata } from '../../src/hooks/use-site-metadata';
 import { usePathPrefix } from '../../src/hooks/use-path-prefix';
+import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
 import mockCompleteEOLPageContext from './data/CompleteEOLPageContext.json';
 import mockEOLSnootyMetadata from './data/EOLSnootyMetadata.json';
 import mockHeadPageContext from './data/HeadPageContext.test.json';
 
+jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
+
 describe('Head', () => {
   describe("Canonical for completely EOL'd", () => {
     beforeEach(() => {
-      mockStaticQuery({}, mockEOLSnootyMetadata);
+      mockStaticQuery({});
+      useSnootyMetadata.mockImplementation(() => mockEOLSnootyMetadata);
     });
     it('renders the canonical tag from the snooty.toml', () => {
       render(<Head pageContext={mockCompleteEOLPageContext} />);
-
       const _canonical = mockEOLSnootyMetadata.canonical;
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
@@ -48,7 +51,7 @@ describe('Head', () => {
   describe("Canonical for non-EoL'd", () => {
     beforeEach(() => {
       const modMockEOLSnootyMetadataToBeNotEOL = { ...mockEOLSnootyMetadata, eol: false };
-      mockStaticQuery({}, modMockEOLSnootyMetadataToBeNotEOL);
+      useSnootyMetadata.mockImplementation(() => modMockEOLSnootyMetadataToBeNotEOL);
     });
 
     it('renders the canonical tag that points to itself', () => {
@@ -69,7 +72,7 @@ describe('Head', () => {
 
   describe('Canonical when pulled from directive', () => {
     beforeEach(() => {
-      mockStaticQuery({}, mockEOLSnootyMetadata);
+      useSnootyMetadata.mockImplementation(() => mockEOLSnootyMetadata);
     });
 
     const metaCanonical = {

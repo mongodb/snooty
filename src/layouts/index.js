@@ -80,13 +80,13 @@ const DefaultLayout = ({
   pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct },
 }) => {
   const { sidenav } = getTemplate(template);
-  const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = useSnootyMetadata();
+  const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol, project } = useSnootyMetadata();
   const remoteMetadata = useRemoteMetadata();
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
-  useDelightedSurvey(slug);
+  useDelightedSurvey(slug, project);
 
   return (
     <>
@@ -99,6 +99,7 @@ const DefaultLayout = ({
         selectors={page?.options?.selectors}
         isAssociatedProduct={isAssociatedProduct}
         remoteMetadata={remoteMetadata}
+        project={project}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} slug={slug} template={template} /> : <div />}

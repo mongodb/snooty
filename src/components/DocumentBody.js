@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
@@ -9,6 +9,7 @@ import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { isBrowser } from '../utils/is-browser';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -67,11 +68,37 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
+const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
+const AVAILABLE_LANGUAGES = ['English', '简体中文'];
+
 const DocumentBody = (props) => {
   const {
     location,
     pageContext: { page, slug, template },
   } = props;
+
+  useEffect(() => {
+    // A workaround to remove the other locale options.
+    if (!HIDE_UNIFIED_FOOTER_LOCALE) {
+      const footer = document.getElementById('footer-container');
+      const footerUlElement = footer?.querySelector('ul[role=listbox]');
+      if (footerUlElement) {
+        // For DOP-4060 we only want to support English and Simple Chinese (for now)
+        const availableOptions = Array.from(footerUlElement.childNodes).reduce((accumulator, child) => {
+          if (AVAILABLE_LANGUAGES.includes(child.textContent)) {
+            accumulator.push(child);
+          }
+          return accumulator;
+        }, []);
+
+        footerUlElement.innerHTML = null;
+        availableOptions.forEach((child) => {
+          footerUlElement.appendChild(child);
+        });
+      }
+    }
+  }, []);
+
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
     const footnotes = getFootnotes(pageNodes);
@@ -86,9 +113,20 @@ const DocumentBody = (props) => {
   const lookup = slug === '/' ? 'index' : slug;
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
 
-  const { Template, useChatbot, isSearch } = getTemplate(template);
+  const { Template, useChatbot } = getTemplate(template);
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
+
+  const onSelectLocale = (locale) => {
+    const localeHrefMap = {
+      'zh-cn': 'https://mongodbcom-cdn.website.staging.corp.mongodb.com/zh-cn/docs-qa/',
+      'en-us': 'https://mongodbcom-cdn.website.staging.corp.mongodb.com/docs-qa/',
+    };
+
+    if (isBrowser) {
+      window.location.href = localeHrefMap[locale];
+    }
+  };
 
   return (
     <>
@@ -101,7 +139,7 @@ const DocumentBody = (props) => {
         isInPresentationMode={isInPresentationMode}
       >
         <FootnoteContext.Provider value={{ footnotes }}>
-          <Template {...props} useChatbot={useChatbot} isSearch={isSearch}>
+          <Template {...props} useChatbot={useChatbot}>
             {pageNodes.map((child, index) => (
               <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
             ))}
@@ -109,8 +147,8 @@ const DocumentBody = (props) => {
         </FootnoteContext.Provider>
       </Widgets>
       {!isInPresentationMode && (
-        <div data-testid="consistent-footer">
-          <UnifiedFooter hideLocale={true} />
+        <div data-testid="consistent-footer" id="footer-container">
+          <UnifiedFooter hideLocale={HIDE_UNIFIED_FOOTER_LOCALE} onSelectLocale={onSelectLocale} />
         </div>
       )}
     </>
