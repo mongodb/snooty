@@ -213,10 +213,6 @@ const StyledSearchResults = styled('div')`
   }
 `;
 
-const FilterBadgesWrapper = styled('div')`
-  margin-top: ${theme.size.small};
-`;
-
 const StyledTag = styled(Tag)`
   ${searchTagStyle}
 `;
@@ -412,7 +408,7 @@ const SearchResults = () => {
               </Overline>
             )}
             {!!searchFilter && (
-              <FilterBadgesWrapper>
+              <div>
                 {selectedCategory && (
                   <StyledTag variant="green" onClick={resetFilters}>
                     {selectedCategory}
@@ -420,7 +416,7 @@ const SearchResults = () => {
                   </StyledTag>
                 )}
                 {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-              </FilterBadgesWrapper>
+              </div>
             )}
           </ResultTag>
           <MobileSearchButtonWrapper>
