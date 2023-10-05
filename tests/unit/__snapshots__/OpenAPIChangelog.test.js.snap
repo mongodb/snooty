@@ -1110,7 +1110,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             <li
               class="emotion-62 emotion-63"
             >
-              Resource version 2023-01-01 was removed, latest available resource version is 2023-02-01
+              This change is hidden
             </li>
           </ul>
         </div>
@@ -1237,7 +1237,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
                   />
                 </svg>
               </div>
-              Resource version added.
+              This change should be hidden
             </li>
             <li
               class="emotion-62 emotion-63"

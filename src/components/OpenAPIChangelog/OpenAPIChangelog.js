@@ -14,6 +14,7 @@ import ChangeList from './components/ChangeList';
 import { useFetchDiff } from './utils/useFetchDiff';
 import { ALL_VERSIONS, getDownloadChangelogUrl } from './utils/constants';
 import getDiffResourcesList from './utils/getDiffResourcesList';
+import { hideChanges } from './utils/filterHiddenChanges';
 
 const ChangelogPage = styled.div`
   width: 100%;
@@ -87,7 +88,8 @@ const OpenAPIChangelog = () => {
   const [diffResourcesList, setDiffResourcesList] = useState(getDiffResourcesList(diff));
 
   const [filteredDiff, setFilteredDiff] = useState(diff);
-  const [filteredChangelog, setFilteredChangelog] = useState(changelog);
+  const unfilteredChangelog = hideChanges(changelog);
+  const [filteredChangelog, setFilteredChangelog] = useState(unfilteredChangelog);
 
   /* Update diffResourcesList on diff change */
   useEffect(() => {

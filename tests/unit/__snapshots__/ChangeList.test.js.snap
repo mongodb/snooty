@@ -296,7 +296,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
           <li
             class="emotion-19 emotion-20"
           >
-            Resource version 2023-01-01 was removed, latest available resource version is 2023-02-01
+            This change is hidden
           </li>
         </ul>
       </div>
@@ -423,7 +423,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
                 />
               </svg>
             </div>
-            Resource version added.
+            This change should be hidden
           </li>
           <li
             class="emotion-19 emotion-20"
@@ -793,7 +793,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
               />
             </svg>
           </div>
-          Removed the non-success response with the status '400'.
+          A change
         </li>
         <li
           class="emotion-13 emotion-14"

@@ -64,7 +64,7 @@ describe('OpenAPIChangelog ChangeList', () => {
       return acc;
     }, []);
 
-    const { queryByText } = render(<ChangeList changes={mockDiff} versionMode={COMPARE_VERSIONS} />);
+    const { queryByText } = render(<ChangeList changes={mockChangelog} versionMode={ALL_VERSIONS} />);
 
     expect(hiddenChanges).toHaveLength(2);
 

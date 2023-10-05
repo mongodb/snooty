@@ -2,20 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchOADiff } from '../../../utils/realm';
 import useChangelogData from '../../../utils/use-changelog-data';
 import { getDiffRequestFormat } from './getDiffRequestFormat';
-
-//nested filtering of Diff changes with hideFromChangelog
-const hideDiffChanges = (diffData) => {
-  const pathUpdate = (path) => {
-    const updatedPath = { ...path };
-    if (path?.changes) {
-      updatedPath.changes = path.changes.filter((change) => !change.hideFromChangelog);
-    }
-    return updatedPath;
-  };
-
-  const updatedDiffData = diffData.map(pathUpdate);
-  return updatedDiffData.filter((path) => path.changes?.length);
-};
+import { hideDiffChanges } from './filterHiddenChanges';
 
 export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen, snootyEnv) => {
   const { index = {}, mostRecentDiff = {} } = useChangelogData();

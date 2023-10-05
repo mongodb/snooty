@@ -39,7 +39,7 @@ export const mockChangelog = [
             changeType: 'removed',
             changes: [
               {
-                change: 'resource version 2023-01-01 was removed, latest available resource version is 2023-02-01',
+                change: 'This change is hidden',
                 changeCode: 'resource-version-removed',
                 backwardCompatible: true,
                 hideFromChangelog: true,
@@ -86,7 +86,7 @@ export const mockChangelog = [
             changeType: 'release',
             changes: [
               {
-                change: 'resource version added.',
+                change: 'This change should be hidden',
                 changeCode: 'resource-version-added',
                 backwardCompatible: false,
                 hideFromChangelog: true,
@@ -188,7 +188,7 @@ export const mockDiff = [
     changeType: 'update',
     changes: [
       {
-        change: "removed the non-success response with the status '400'.",
+        change: "a change",
         changeCode: 'response-non-success-status-removed',
         backwardCompatible: false,
         hideFromChangelog: true,
