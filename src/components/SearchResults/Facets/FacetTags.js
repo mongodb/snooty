@@ -130,7 +130,7 @@ const FacetTags = ({ resultsCount }) => {
           <FacetTag facet={facet} key={facet.id}></FacetTag>
         ))}
         {needExpansion && expanded && (
-          <StyledTag variant={'purple'} onClick={() => clickHandle(false)}>
+          <StyledTag variant={'gray'} onClick={() => clickHandle(false)}>
             Show Less
           </StyledTag>
         )}
@@ -143,7 +143,7 @@ const FacetTags = ({ resultsCount }) => {
       {!expanded && (
         <ExpandFlexbox>
           {needExpansion && (
-            <StyledTag variant={'purple'} onClick={() => clickHandle(true)}>
+            <StyledTag variant={'gray'} onClick={() => clickHandle(true)}>
               Show More
             </StyledTag>
           )}
