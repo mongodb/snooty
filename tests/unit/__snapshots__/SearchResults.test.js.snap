@@ -12,8 +12,9 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
   font-size: 13px;
   line-height: 20px;
   color: #001E2B;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .emotion-1 strong,
@@ -21,7 +22,11 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
   font-weight: 700;
 }
 
-.emotion-6 {
+.emotion-4 {
+  margin-left: 22px;
+}
+
+.emotion-5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -34,11 +39,11 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
   font-size: 13px;
   line-height: 20px;
   color: #112733;
-  margin: 8px 0;
+  margin-bottom: 16px;
   cursor: pointer;
 }
 
-.emotion-7 {
+.emotion-6 {
   color: #3D4F58;
 }
 
@@ -55,11 +60,13 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
     </p>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Reference
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Tutorial
     </div>
@@ -74,96 +81,171 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
     </p>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Atlas
     </div>
     <div
+      class="emotion-4"
+    >
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        App Services
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Charts
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Atlas CLI
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Data API
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Data Federation
+      </div>
+      <div
+        class="emotion-5"
+      >
+        <svg
+          aria-label="Chevron Down Icon"
+          class="emotion-6"
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        Show more
+      </div>
+    </div>
+    <div
       data-checked="false"
+      data-indeterminate="false"
     >
       BI Connector
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Cloud Manager
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Cluster-to-Cluster Sync
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Community Kubernetes Operator
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Compass
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Database Tools
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Drivers
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Enterprise Kubernetes Operator
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Kafka Connector
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       MongoDB Analyzer
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       MongoDB CLI
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       MongoDB for VS Code
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       MongoDB Shell
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Ops Manager
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Realm
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Relational Migrator
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Server
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Spark Connector
     </div>
@@ -178,35 +260,40 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
     </p>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Objective C
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       C
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       C#
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       C++
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Dart
     </div>
     <div
-      class="emotion-6"
+      class="emotion-5"
     >
       <svg
         aria-label="Chevron Down Icon"
-        class="emotion-7"
+        class="emotion-6"
         fill="none"
         height="16"
         role="img"
@@ -239,8 +326,9 @@ exports[`Search Results Page Facets component renders facets with selected value
   font-size: 13px;
   line-height: 20px;
   color: #001E2B;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .emotion-1 strong,
@@ -265,7 +353,7 @@ exports[`Search Results Page Facets component renders facets with selected value
   font-size: 13px;
   line-height: 20px;
   color: #112733;
-  margin: 8px 0;
+  margin-bottom: 16px;
   cursor: pointer;
 }
 
@@ -286,11 +374,13 @@ exports[`Search Results Page Facets component renders facets with selected value
     </p>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Reference
     </div>
     <div
       data-checked="true"
+      data-indeterminate="false"
     >
       Tutorial
     </div>
@@ -304,7 +394,8 @@ exports[`Search Results Page Facets component renders facets with selected value
       Target Product
     </p>
     <div
-      data-checked="true"
+      data-checked="false"
+      data-indeterminate="true"
     >
       Atlas
     </div>
@@ -313,26 +404,31 @@ exports[`Search Results Page Facets component renders facets with selected value
     >
       <div
         data-checked="false"
+        data-indeterminate="false"
       >
         App Services
       </div>
       <div
         data-checked="false"
+        data-indeterminate="false"
       >
         Charts
       </div>
       <div
         data-checked="true"
+        data-indeterminate="false"
       >
         Atlas CLI
       </div>
       <div
         data-checked="false"
+        data-indeterminate="false"
       >
         Data API
       </div>
       <div
         data-checked="false"
+        data-indeterminate="false"
       >
         Data Federation
       </div>
@@ -361,91 +457,109 @@ exports[`Search Results Page Facets component renders facets with selected value
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       BI Connector
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Cloud Manager
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Cluster-to-Cluster Sync
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Community Kubernetes Operator
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Compass
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Database Tools
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Drivers
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Enterprise Kubernetes Operator
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Kafka Connector
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       MongoDB Analyzer
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       MongoDB CLI
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       MongoDB for VS Code
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       MongoDB Shell
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Ops Manager
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Realm
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Relational Migrator
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Server
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Spark Connector
     </div>
@@ -460,26 +574,31 @@ exports[`Search Results Page Facets component renders facets with selected value
     </p>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Objective C
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       C
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       C#
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       C++
     </div>
     <div
       data-checked="false"
+      data-indeterminate="false"
     >
       Dart
     </div>
@@ -512,9 +631,9 @@ exports[`Search Results Page Facets component renders facets with selected value
 exports[`Search Results Page considers a given search filter query param and displays category and version tags 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -2127,9 +2246,9 @@ exports[`Search Results Page considers a given search filter query param and dis
 exports[`Search Results Page does not return results for a given search term with an ill-formed searchProperty 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -3591,9 +3710,9 @@ exports[`Search Results Page does not return results for a given search term wit
 exports[`Search Results Page renders correctly without browser 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -4030,9 +4149,9 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 exports[`Search Results Page renders loading images before returning no results 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -4596,9 +4715,9 @@ exports[`Search Results Page renders loading images before returning no results 
 exports[`Search Results Page renders loading images before returning nonempty results 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -5162,9 +5281,9 @@ exports[`Search Results Page renders loading images before returning nonempty re
 exports[`Search Results Page renders results from a given search term query param and displays category and version tags 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
