@@ -1,3 +1,5 @@
+const { hideChanges, hideDiffChanges } = require('../../src/components/OpenAPIChangelog/utils/filterHiddenChanges');
+
 const atlasAdminProdChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
 const atlasAdminDevChangelogS3Prefix = 'https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog';
 
@@ -5,7 +7,8 @@ const fetchChangelogData = async (runId, versions, s3Prefix) => {
   try {
     /* Using metadata runId, fetch OpenAPI Changelog full change list */
     const changelogResp = await fetch(`${s3Prefix}/${runId}/changelog.json`);
-    const changelog = await changelogResp.json();
+    const unfilteredChangelog = await changelogResp.json();
+    const changelog = hideChanges(unfilteredChangelog);
 
     /* Aggregate all Resources in changelog for frontend filter */
     const resourcesListSet = new Set();
@@ -18,7 +21,8 @@ const fetchChangelogData = async (runId, versions, s3Prefix) => {
     const mostRecentResourceVersions = versions.slice(-2);
     const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
     const mostRecentDiffResp = await fetch(`${s3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
-    const mostRecentDiffData = await mostRecentDiffResp.json();
+    const mostRecentUnfilteredDiffData = await mostRecentDiffResp.json();
+    const mostRecentDiffData = hideDiffChanges(mostRecentUnfilteredDiffData);
 
     return {
       changelog,

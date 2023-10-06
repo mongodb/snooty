@@ -1,4 +1,4 @@
-export const hideChanges = (changelog) => {
+const hideChanges = (changelog) => {
   const versionUpdate = (version) => {
     const updatedVersion = { ...version };
     if (version?.changes) {
@@ -27,7 +27,7 @@ export const hideChanges = (changelog) => {
 };
 
 //nested filtering of Diff changes with hideFromChangeloge
-export const hideDiffChanges = (diffData) => {
+const hideDiffChanges = (diffData) => {
   const pathUpdate = (path) => {
     const updatedPath = { ...path };
     if (path?.changes) {
@@ -39,3 +39,5 @@ export const hideDiffChanges = (diffData) => {
   const updatedDiffData = diffData.map(pathUpdate);
   return updatedDiffData.filter((path) => path.changes?.length);
 };
+
+module.exports = { hideChanges, hideDiffChanges };
