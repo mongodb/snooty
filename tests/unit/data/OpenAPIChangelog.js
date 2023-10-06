@@ -39,7 +39,7 @@ export const mockChangelog = [
             changeType: 'removed',
             changes: [
               {
-                change: 'This change is hidden',
+                change: 'This change should really definitely be hidden',
                 changeCode: 'resource-version-removed',
                 backwardCompatible: true,
                 hideFromChangelog: true,

@@ -296,7 +296,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
           <li
             class="emotion-19 emotion-20"
           >
-            This change is hidden
+            This change should really definitely be hidden
           </li>
         </ul>
       </div>

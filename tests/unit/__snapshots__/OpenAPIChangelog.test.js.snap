@@ -1110,7 +1110,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             <li
               class="emotion-62 emotion-63"
             >
-              This change is hidden
+              This change should really definitely be hidden
             </li>
           </ul>
         </div>
