@@ -1,4 +1,3 @@
-import { withPrefix } from 'gatsby';
 import React from 'react';
 import { ThemeProvider } from '@emotion/react';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
@@ -13,7 +12,7 @@ export const wrapRootElement = ({ element }) => (
 );
 
 export const shouldUpdateScroll = ({ routerProps: { location }, _getSavedScrollPosition }) => {
-  if (location.pathname === withPrefix(`/search/`)) {
+  if (location?.state?.preserveScroll) {
     return false;
   }
   return true;

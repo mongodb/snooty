@@ -364,7 +364,7 @@ const SearchResults = () => {
     searchParams.set('q', newValue);
     searchParams.set('page', '1');
     const queryPath = '?' + searchParams.toString();
-    navigate(queryPath);
+    navigate(queryPath, { state: { preserveScroll: true } });
   };
 
   const onPageClick = useCallback(
@@ -377,7 +377,7 @@ const SearchResults = () => {
       }
       searchParams.set('page', newPage);
       const queryPath = '?' + searchParams.toString();
-      navigate(queryPath);
+      navigate(queryPath, { state: { preserveScroll: true } });
       setSearchFinished(false);
       const result = await fetch(searchParamsToURL(searchTerm, searchFilter, newPage));
       const resJson = await result.json();
