@@ -76,16 +76,22 @@ const overlineStyling = css`
   margin-right: ${theme.size.small};
 `;
 
-const FacetTag = ({ facet: { name, key, id } }) => {
+const FacetTag = ({ facet: { name, key, id, facets } }) => {
   const { handleFacetChange } = useContext(SearchContext);
-  const onClick = useCallback(
-    ({ target }) => {
-      // mimic checkbox event, manually set target checked to false
-      target.checked = false;
-      handleFacetChange([{ target, key, id }]);
-    },
-    [handleFacetChange, id, key]
-  );
+  const onClick = useCallback(() => {
+    // if the Facet has any sub facet options, include those in change
+    const facetsToDeselect = [{ key, id, checked: false }];
+    for (const subFacet of facets) {
+      for (const facetOption of subFacet?.facets) {
+        facetsToDeselect.push({
+          key: facetOption.key,
+          id: facetOption.id,
+          checked: false,
+        });
+      }
+    }
+    handleFacetChange(facetsToDeselect);
+  }, [facets, handleFacetChange, id, key]);
 
   return (
     <StyledTag onClick={onClick}>
