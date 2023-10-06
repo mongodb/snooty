@@ -1,3 +1,5 @@
+//nested filtering out all changes with hideFromChangelog
+//hides changes on all versions changelog
 const hideChanges = (changelog) => {
   const versionUpdate = (version) => {
     const updatedVersion = { ...version };
@@ -26,7 +28,8 @@ const hideChanges = (changelog) => {
   return updatedChangelog.filter((dateSection) => dateSection.paths?.length);
 };
 
-//nested filtering of Diff changes with hideFromChangeloge
+//nested filtering out all changes with hideFromChangelog
+//hides changes on diffs
 const hideDiffChanges = (diffData) => {
   const pathUpdate = (path) => {
     const updatedPath = { ...path };
