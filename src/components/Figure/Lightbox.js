@@ -16,18 +16,18 @@ const StyledModal = styled(Modal)`
     div[role='dialog'] {
       max-width: 80%;
     }
+    img {
+      max-height: 620px;
+    }
   }
 
   @media ${theme.screenSize.upToLarge} {
     div[role='dialog'] {
       max-width: 100%;
     }
-    max-height: 300px;
-  }
-
-  img {
-    max-height: 620px;
-    width: 100%;
+    img {
+      max-height: 300px;
+    }
   }
 `;
 
