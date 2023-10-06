@@ -11,7 +11,7 @@ export const wrapRootElement = ({ element }) => (
   </ThemeProvider>
 );
 
-export const shouldUpdateScroll = ({ routerProps: { location }, _getSavedScrollPosition }) => {
+export const shouldUpdateScroll = ({ routerProps: { location } }) => {
   if (location?.state?.preserveScroll) {
     return false;
   }
