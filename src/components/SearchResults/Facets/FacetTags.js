@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -106,13 +106,14 @@ const FacetTags = ({ resultsCount }) => {
   const facets = useFacets();
   // don't have to use state since facet filters are
   // derived from URL state (search params)
-  const activeFacets = getActiveFacets(facets, searchParams);
+  const activeFacets = useMemo(() => getActiveFacets(facets, searchParams), [facets, searchParams]);
 
   const [expanded, setExpanded] = useState(false);
 
   const [needExpansion, setNeedExpansion] = useState(false);
   const refContainer = useRef();
 
+  // resize affect. show/hide `Show More` button if there is no real estate
   useEffect(() => {
     if (!refContainer.current) {
       return;
