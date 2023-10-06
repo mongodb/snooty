@@ -409,7 +409,8 @@ const SearchResults = () => {
               setSearchField(e.target.value);
             }}
           />
-          <ResultTag style={{ paddingTop: '16px' }}>
+          <ResultTag style={{ paddingTop: '10px' }}>
+            {/* Classname-attached searchTerm needed for Smartling localization */}
             <span style={{ display: 'none' }} className="sl-search-keyword">
               {searchTerm}
             </span>

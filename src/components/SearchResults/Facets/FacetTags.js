@@ -40,13 +40,13 @@ const getActiveFacets = (facetOptions, searchParams) => {
 };
 
 const StyledTag = styled(Tag)`
+  column-gap: ${theme.size.small};
   ${searchTagStyle}
 `;
 
 const clearButtonStyling = css`
   text-transform: uppercase;
   font-weight: 500;
-  column-gap: ${theme.size.small};
 `;
 
 const MAX_HEIGHT = 30;
@@ -82,13 +82,24 @@ const FacetTag = ({ facet: { name, key, id } }) => {
     ({ target }) => {
       // mimic checkbox event, manually set target checked to false
       target.checked = false;
-      handleFacetChange({ target, key, id });
+      handleFacetChange([{ target, key, id }]);
     },
     [handleFacetChange, id, key]
   );
 
-  return <StyledTag onClick={onClick}>{name}</StyledTag>;
+  return (
+    <StyledTag onClick={onClick}>
+      {name}
+      <Icon glyph="X" />
+    </StyledTag>
+  );
 };
+
+const ClearFacetsTag = ({ onClick }) => (
+  <StyledTag variant={'gray'} className={cx(clearButtonStyling)} onClick={onClick}>
+    clear all filters <Icon glyph="X" />
+  </StyledTag>
+);
 
 const FacetTags = ({ resultsCount }) => {
   const { searchParams, clearFacets } = useContext(SearchContext);
@@ -107,7 +118,6 @@ const FacetTags = ({ resultsCount }) => {
       return;
     }
     const resizeObserver = new ResizeObserver((entries) => {
-      console.log('need expansion ', entries[0]?.target?.clientHeight);
       setNeedExpansion(entries[0]?.target?.clientHeight >= MAX_HEIGHT);
     });
     resizeObserver.observe(refContainer.current);
@@ -134,11 +144,7 @@ const FacetTags = ({ resultsCount }) => {
             Show Less
           </StyledTag>
         )}
-        {expanded && activeFacets.length > 0 && (
-          <StyledTag variant={'gray'} className={cx(clearButtonStyling)} onClick={clearFacets}>
-            clear all filters <Icon glyph="X"> </Icon>
-          </StyledTag>
-        )}
+        {expanded && activeFacets.length > 0 && <ClearFacetsTag onClick={clearFacets}></ClearFacetsTag>}
       </SelectionsFlexbox>
       {!expanded && (
         <ExpandFlexbox>
@@ -147,11 +153,7 @@ const FacetTags = ({ resultsCount }) => {
               Show More
             </StyledTag>
           )}
-          {activeFacets.length > 0 && (
-            <StyledTag variant={'gray'} className={cx(clearButtonStyling)} onClick={clearFacets}>
-              clear all filters <Icon glyph="X"> </Icon>
-            </StyledTag>
-          )}
+          {activeFacets.length > 0 && <ClearFacetsTag onClick={clearFacets}></ClearFacetsTag>}
         </ExpandFlexbox>
       )}
     </TagsFlexbox>
