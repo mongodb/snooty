@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import Checkbox from '@leafygreen-ui/checkbox';
 import { css, cx } from '@leafygreen-ui/emotion';
-import SearchContext from '../SearchContext';
+import SearchContext, { FACETS_KEY_PREFIX } from '../SearchContext';
 import FacetGroup from './FacetGroup';
 
 const checkboxStyle = css`
@@ -13,7 +13,7 @@ const checkboxStyle = css`
   }
 `;
 
-export const initChecked = (searchParams, key, id) => searchParams.getAll(`facets.${key}`).includes(id);
+export const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
 
 /**
  * Check if the key + value of a query param are actual subfacets.
@@ -22,9 +22,9 @@ export const initChecked = (searchParams, key, id) => searchParams.getAll(`facet
  * @param {string} paramVal
  */
 const isParamValidSubFacet = (nestedSubFacets, paramKey, paramVal) => {
-  const originalKey = paramKey.split('facets.')[1];
+  const originalKey = paramKey.split(FACETS_KEY_PREFIX)[1];
   const ids = nestedSubFacets.get(originalKey);
-  return ids.has(paramVal);
+  return ids?.has(paramVal);
 };
 
 /**
