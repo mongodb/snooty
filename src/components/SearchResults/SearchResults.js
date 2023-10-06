@@ -224,6 +224,10 @@ const ResultTag = styled('div')`
   align-items: center;
 `;
 
+const styledOverline = css`
+  padding-right: 8px;
+`;
+
 const styledIcon = css`
   margin-left: 8px;
   margin-right: -2px;
@@ -403,7 +407,7 @@ const SearchResults = () => {
               {searchTerm}
             </span>
             {Number.isInteger(searchCount) && (
-              <Overline>
+              <Overline className={cx(styledOverline)}>
                 <>{searchCount} RESULTS</>
               </Overline>
             )}
