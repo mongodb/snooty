@@ -955,6 +955,15 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
   padding-top: 16px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -2566,6 +2575,15 @@ exports[`Search Results Page does not return results for a given search term wit
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
   padding-top: 16px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -3924,6 +3942,15 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
   padding-top: 16px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -4464,6 +4491,15 @@ exports[`Search Results Page renders loading images before returning no results 
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
   padding-top: 16px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -4584,6 +4620,75 @@ exports[`Search Results Page renders loading images before returning no results 
   justify-self: right;
 }
 
+.emotion-20 {
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-auto-rows: calc(152px + 16px);
+  height: 100%;
+  width: 100%;
+}
+
+.emotion-20:hover>.e1yoi6mj5:hover {
+  opacity: 1;
+  box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
+}
+
+.emotion-20:not(:hover)>.e1yoi6mj5 {
+  opacity: 1;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-22 {
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 45px;
+  background-color: #fff;
+  height: 152px;
+  position: relative;
+  place-self: center;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  color: red;
+  box-sizing: border-box;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+.emotion-22>div {
+  padding: 20px;
+  padding-left: 30px;
+}
+
+.emotion-22:hover,
+.emotion-22:focus {
+  color: unset;
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+.emotion-22:hover>div,
+.emotion-22:focus>div {
+  background-color: unset!important;
+}
+
+.emotion-22:before {
+  content: '';
+  position: absolute;
+  top: calc(-16px / 2);
+  left: 0;
+  right: 0;
+  bottom: calc(-16px / 2);
+  background-color: transparent;
+}
+
+.emotion-22 * {
+  padding: 2px;
+  height: 15px!important;
+  margin-right: 10px!important;
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -4700,6 +4805,460 @@ exports[`Search Results Page renders loading images before returning no results 
             Refine your search
           </div>
         </button>
+      </div>
+    </div>
+    <div
+      class="emotion-20 emotion-21"
+    >
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
     </div>
   </div>
@@ -5033,6 +5592,15 @@ exports[`Search Results Page renders loading images before returning nonempty re
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
   padding-top: 16px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -5153,6 +5721,75 @@ exports[`Search Results Page renders loading images before returning nonempty re
   justify-self: right;
 }
 
+.emotion-20 {
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-auto-rows: calc(152px + 16px);
+  height: 100%;
+  width: 100%;
+}
+
+.emotion-20:hover>.e1yoi6mj5:hover {
+  opacity: 1;
+  box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
+}
+
+.emotion-20:not(:hover)>.e1yoi6mj5 {
+  opacity: 1;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-22 {
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 45px;
+  background-color: #fff;
+  height: 152px;
+  position: relative;
+  place-self: center;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  color: red;
+  box-sizing: border-box;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+.emotion-22>div {
+  padding: 20px;
+  padding-left: 30px;
+}
+
+.emotion-22:hover,
+.emotion-22:focus {
+  color: unset;
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+.emotion-22:hover>div,
+.emotion-22:focus>div {
+  background-color: unset!important;
+}
+
+.emotion-22:before {
+  content: '';
+  position: absolute;
+  top: calc(-16px / 2);
+  left: 0;
+  right: 0;
+  bottom: calc(-16px / 2);
+  background-color: transparent;
+}
+
+.emotion-22 * {
+  padding: 2px;
+  height: 15px!important;
+  margin-right: 10px!important;
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -5269,6 +5906,460 @@ exports[`Search Results Page renders loading images before returning nonempty re
             Refine your search
           </div>
         </button>
+      </div>
+    </div>
+    <div
+      class="emotion-20 emotion-21"
+    >
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
       </div>
     </div>
   </div>
@@ -5602,6 +6693,15 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
   padding-top: 16px;
   -webkit-align-items: center;
   -webkit-box-align: center;

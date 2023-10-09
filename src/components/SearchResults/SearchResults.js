@@ -23,7 +23,7 @@ import SearchFilters from './SearchFilters';
 import SearchResult from './SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import MobileFilters from './MobileFilters';
-import { Facets } from './Facets';
+import { Facets, FacetTags } from './Facets';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const FILTER_COLUMN_WIDTH = '173px';
@@ -233,6 +233,9 @@ const StyledTag = styled(Tag)`
 const ResultTag = styled('div')`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: ${theme.size.small};
   padding-top: ${theme.size.default};
   align-items: center;
 `;
@@ -275,7 +278,7 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchField, setSearchField] = useState(searchTerm || '');
 
-  const [searchFinished, setSearchFinished] = useState(true);
+  const [searchFinished, setSearchFinished] = useState(() => !searchTerm);
   const [searchCount, setSearchCount] = useState();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
 
@@ -370,7 +373,7 @@ const SearchResults = () => {
     searchParams.set('q', newValue);
     searchParams.set('page', '1');
     const queryPath = '?' + searchParams.toString();
-    navigate(queryPath);
+    navigate(queryPath, { state: { preserveScroll: true } });
   };
 
   const onPageClick = useCallback(
@@ -383,7 +386,7 @@ const SearchResults = () => {
       }
       searchParams.set('page', newPage);
       const queryPath = '?' + searchParams.toString();
-      navigate(queryPath);
+      navigate(queryPath, { state: { preserveScroll: true } });
       setSearchFinished(false);
       const result = await fetch(searchParamsToURL(searchTerm, searchFilter, newPage));
       const resJson = await result.json();
@@ -420,7 +423,7 @@ const SearchResults = () => {
             <span style={{ display: 'none' }} className="sl-search-keyword">
               {searchTerm}
             </span>
-            {Number.isInteger(searchCount) && (
+            {!showFacets && Number.isInteger(searchCount) && (
               <Overline className={cx(styledOverline)}>
                 <>{searchCount} RESULTS</>
               </Overline>
@@ -436,6 +439,7 @@ const SearchResults = () => {
                 {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
               </div>
             )}
+            {showFacets && searchFinished && <FacetTags resultsCount={searchCount}></FacetTags>}
           </ResultTag>
           <MobileSearchButtonWrapper>
             <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>

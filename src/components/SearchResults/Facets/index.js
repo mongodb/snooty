@@ -1,3 +1,4 @@
 import Facets from './Facets';
+import FacetTags from './FacetTags';
 
-export { Facets };
+export { Facets, FacetTags };
