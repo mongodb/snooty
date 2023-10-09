@@ -13,7 +13,7 @@ const checkboxStyle = css`
   }
 `;
 
-const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
+export const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
 
 /**
  * Check if the key + value of a query param are actual subfacets.
@@ -22,7 +22,7 @@ const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PR
  * @param {string} paramVal
  */
 const isParamValidSubFacet = (nestedSubFacets, paramKey, paramVal) => {
-  const originalKey = paramKey.split('facets.')[1];
+  const originalKey = paramKey.split(FACETS_KEY_PREFIX)[1];
   const ids = nestedSubFacets.get(originalKey);
   return ids?.has(paramVal);
 };

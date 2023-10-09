@@ -36,6 +36,11 @@ const VARIANTS = {
     border: 1px solid ${palette.purple.light2};
     color: ${palette.purple.dark2};
   `,
+  gray: css`
+    background-color: ${palette.gray.light3};
+    border: 1px solid ${palette.gray.light1};
+    color: ${palette.gray.dark2};
+  `,
 };
 
 const Tag = ({ children, variant, ...rest }) => {
