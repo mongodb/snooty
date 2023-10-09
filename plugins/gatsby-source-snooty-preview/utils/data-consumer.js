@@ -78,7 +78,7 @@ const handlePage = (
   const filename = getNestedValue(['filename'], page) || '';
   // There can be ASTs for included .rst files as well. We should skip these, in case
   // we encounter them
-  if (!filename.endsWith('.txt')) {
+  if (!filename || !filename.endsWith('.txt')) {
     console.warn(`Found an AST that is not for a page: ${filename}`);
     return;
   }
@@ -124,6 +124,13 @@ const handlePage = (
   onHandlePage(pageTemplate, page_id, pageNodeId);
 };
 
+/**
+ * Handles incoming data accordingly based on its data type. Notably, this handles
+ * converting build data from the Snooty Data API into nodes and assets that the
+ * Gatsby site will need to render pages.
+ * @param {*} entry - A single data entry obtained from the Snooty Data API
+ * @param {*} options - Gatsby functions and other utilities to be used by handlers
+ */
 const consumeData = async (
   entry,
   { actions, cache, createNodeId, createContentDigest, getNode, fileWritePromises, clientAccessToken, onHandlePage }

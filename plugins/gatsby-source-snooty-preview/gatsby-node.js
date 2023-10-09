@@ -116,7 +116,9 @@ exports.sourceNodes = async ({
       }
     };
 
-    // Handle data consumed by the Snooty Data API based on data type
+    // Since there's a lot of data incoming from the Snooty Data API, we stream
+    // the data in chunks and parse them as they come instead of fetching everything
+    // as a single JSON response
     const decode = parser();
     decode.on('data', async (_entry) => {
       // Un-nest data
