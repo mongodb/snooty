@@ -148,11 +148,11 @@ const consumeData = async (
   const shouldDeleteContentNode = data.deleted;
   const { createNode, deleteNode } = actions;
 
-  if (entry.type === 'timestamp') {
+  if (type === 'timestamp') {
     handleTimestamp(data, { cache, clientAccessToken });
-  } else if (entry.type === 'asset') {
+  } else if (type === 'asset') {
     handleAsset(data, { fileWritePromises });
-  } else if (entry.type === 'metadata') {
+  } else if (type === 'metadata') {
     await handleMetadata(data, {
       createContentDigest,
       createNode,
@@ -161,7 +161,7 @@ const consumeData = async (
       getNode,
       shouldDeleteContentNode,
     });
-  } else if (entry.type === 'page') {
+  } else if (type === 'page') {
     handlePage(data, {
       createContentDigest,
       createNode,
@@ -173,7 +173,7 @@ const consumeData = async (
     });
   } else {
     // Shouldn't affect current builds
-    console.warn(`Unexpected data type: ${entry.type}`);
+    console.warn(`Unexpected data type: ${type}`);
   }
 };
 
