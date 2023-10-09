@@ -253,16 +253,16 @@ const SearchResults = () => {
   const { search } = useLocation();
 
   const {
-    page,
     searchTerm,
     searchFilter,
     setSearchFilter,
     selectedCategory,
     selectedVersion,
-    searchPropertyMapping,
     showMobileFilters,
     setShowMobileFilters,
     showFacets,
+    searchParams,
+    setSearchTerm,
   } = useContext(SearchContext);
 
   const { isTabletOrMobile } = useScreenSize();
@@ -271,7 +271,6 @@ const SearchResults = () => {
 
   const [searchFinished, setSearchFinished] = useState(() => !searchTerm);
   const [searchCount, setSearchCount] = useState();
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
@@ -309,29 +308,16 @@ const SearchResults = () => {
   // async call to fetch search results
   // effect is called if searchTerm, searchPropertyMapping are defined
   useEffect(() => {
-    if (!searchPropertyMapping || !Object.keys(searchPropertyMapping).length) {
-      return;
-    }
-    if (!searchTerm) {
-      if (isFirstLoad) {
-        return;
-      }
+    if (!searchParams.get('q')) {
       setSearchResults([]);
       setSearchCount(0);
       return;
     }
-    setIsFirstLoad(false);
     setSearchFinished(false);
 
     const fetchSearchResults = async () => {
-      const res = await fetch(searchParamsToURL(searchTerm, searchFilter, page));
+      const res = await fetch(searchParamsToURL(searchParams));
       return (await res.json()).results;
-    };
-
-    const fetchSearchMeta = async () => {
-      // TODO: allow search facet selections
-      const res = await fetch(searchParamsToMetaURL(searchTerm, searchFilter));
-      return res.json();
     };
 
     fetchSearchResults()
@@ -344,7 +330,20 @@ const SearchResults = () => {
       .finally(() => {
         setSearchFinished(true);
       });
+  }, [searchParams]);
 
+  useEffect(() => {
+    if (!searchParams.get('q')) {
+      setSearchResults([]);
+      setSearchCount(0);
+      return;
+    }
+
+    const fetchSearchMeta = async () => {
+      // TODO: allow search facet selections
+      const res = await fetch(searchParamsToMetaURL(searchParams));
+      return res.json();
+    };
     // fetch search meta
     fetchSearchMeta()
       .then((res) => {
@@ -354,17 +353,14 @@ const SearchResults = () => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
         setSearchCount();
       });
-  }, [searchTerm, page, searchFilter, searchPropertyMapping, isFirstLoad]);
+  }, [searchParams]);
 
   const submitNewSearch = (event) => {
     const newValue = event.target[0]?.value;
     const { page } = queryString.parse(search);
     if (newValue === searchTerm && parseInt(page) === 1) return;
-    const searchParams = new URLSearchParams(search);
-    searchParams.set('q', newValue);
-    searchParams.set('page', '1');
-    const queryPath = '?' + searchParams.toString();
-    navigate(queryPath, { state: { preserveScroll: true } });
+
+    setSearchTerm(searchTerm);
   };
 
   const onPageClick = useCallback(
@@ -409,29 +405,31 @@ const SearchResults = () => {
               setSearchField(e.target.value);
             }}
           />
-          <ResultTag style={{ paddingTop: '10px' }}>
-            {/* Classname-attached searchTerm needed for Smartling localization */}
-            <span style={{ display: 'none' }} className="sl-search-keyword">
-              {searchTerm}
-            </span>
-            {!showFacets && Number.isInteger(searchCount) && (
-              <Overline style={{ paddingRight: '8px' }}>
-                <>{searchCount} RESULTS</>
-              </Overline>
-            )}
-            {!!searchFilter && (
-              <FilterBadgesWrapper>
-                {selectedCategory && (
-                  <StyledTag variant="green" onClick={resetFilters}>
-                    {selectedCategory}
-                    <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
-                  </StyledTag>
-                )}
-                {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-              </FilterBadgesWrapper>
-            )}
-            {showFacets && searchFinished && <FacetTags resultsCount={searchCount}></FacetTags>}
-          </ResultTag>
+          {searchTerm && (
+            <ResultTag style={{ paddingTop: '10px' }}>
+              {/* Classname-attached searchTerm needed for Smartling localization */}
+              <span style={{ display: 'none' }} className="sl-search-keyword">
+                {searchTerm}
+              </span>
+              {!showFacets && Number.isInteger(searchCount) && (
+                <Overline style={{ paddingRight: '8px' }}>
+                  <>{searchCount} RESULTS</>
+                </Overline>
+              )}
+              {!!searchFilter && (
+                <FilterBadgesWrapper>
+                  {selectedCategory && (
+                    <StyledTag variant="green" onClick={resetFilters}>
+                      {selectedCategory}
+                      <Icon style={{ marginLeft: '8px', marginRight: '-2px' }} glyph="X" />
+                    </StyledTag>
+                  )}
+                  {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                </FilterBadgesWrapper>
+              )}
+              {showFacets && searchFinished && <FacetTags resultsCount={searchCount}></FacetTags>}
+            </ResultTag>
+          )}
           <MobileSearchButtonWrapper>
             <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
               {mobileFilterButton.text}
@@ -455,7 +453,7 @@ const SearchResults = () => {
         )}
 
         {/* empty search results */}
-        {!isFirstLoad && searchFinished && !searchResults?.length && (
+        {searchTerm && searchFinished && !searchResults?.length && (
           <>
             <>
               <EmptyResultsContainer
@@ -504,7 +502,7 @@ const SearchResults = () => {
           </>
         )}
 
-        {!isFirstLoad && searchFinished && (
+        {searchParams.get('q') && searchFinished && (
           <FiltersContainer>
             {showFacets ? (
               <>

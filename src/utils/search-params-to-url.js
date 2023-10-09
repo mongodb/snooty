@@ -1,29 +1,48 @@
 import { MARIAN_URL } from '../constants';
-import { baseUrl } from './base-url';
+import { FACETS_KEY_PREFIX } from '../components/SearchResults/SearchContext';
 import { assertTrailingSlash } from './assert-trailing-slash';
 
+const TERM_PARAM = 'q';
+const PAGE_PARAM = 'p';
+const V1_SEARCH_FILTER_PARAM = 'searchProperty';
+const V2_SEARCH_FILTER_PREFIX = FACETS_KEY_PREFIX;
+
+const getFilterParams = (searchParams) => {
+  const res = [];
+  searchParams.forEach((value, key) => {
+    if (key.startsWith(V2_SEARCH_FILTER_PREFIX)) {
+      res.push(`${key}=${value}`);
+    }
+  });
+  return res.join('&');
+};
+
 // Search helper function to generate marian URL from params and filters
-export const searchParamsToURL = (searchQuery, searchFilters, pageNumber = 1, isMarian = true) => {
-  const queryParams = `?q=${searchQuery}&page=${pageNumber}${searchFilters ? `&searchProperty=${searchFilters}` : ''}`;
-  const url = isMarian ? MARIAN_URL : baseUrl();
-  return `${assertTrailingSlash(url)}search${queryParams}`;
+export const searchParamsToURL = (searchParams) => {
+  const searchTerm = searchParams.get(TERM_PARAM);
+  const page = searchParams.get(PAGE_PARAM) || 1;
+  const searchProperty = searchParams.get(V1_SEARCH_FILTER_PARAM);
+  const filters = getFilterParams(searchParams);
+
+  const queryParams = `?q=${searchTerm}&page=${page}${searchProperty ? `&searchProperty=${searchProperty}` : ''}${
+    filters.length ? `&${filters}` : ''
+  }`;
+  return `${assertTrailingSlash(MARIAN_URL)}search${queryParams}`;
 };
 /**
  *
  * @param {string} searchQuery
  * @param {string} searchFilters
- * @param {{key}[]} facetSelections
+ * @param {string[]} facetSelections
  */
-export const searchParamsToMetaURL = (searchQuery, searchFilters, facetSelections) => {
-  let queryParams = `?q=${searchQuery}${searchFilters ? `&searchProperty=${searchFilters}` : ''}`;
-  // TODO: DOP-3929
-  // use facet selections to expand facets, restrict count
-  //
-  // for (const facetSelection of facetSelections) {
-  //   for (const facetKey in facetSelection) {
-  //     queryParams += `&facets.${facetKey}=${facetSelection[facetKey]}`
-  //   }
-  // }
+export const searchParamsToMetaURL = (searchParams) => {
+  const searchTerm = searchParams.get(TERM_PARAM);
+  const searchProperty = searchParams.get(V1_SEARCH_FILTER_PARAM);
+  const filters = getFilterParams(searchParams);
+
+  const queryParams = `?q=${searchTerm}${searchProperty ? `&searchProperty=${searchProperty}` : ''}${
+    filters.length ? `&${filters}` : ''
+  }`;
   const META_PATH = `v2/search/meta`;
-  return assertTrailingSlash(MARIAN_URL) + META_PATH + queryParams;
+  return `${assertTrailingSlash(MARIAN_URL)}${META_PATH}${queryParams}`;
 };
