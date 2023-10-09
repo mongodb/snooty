@@ -4,6 +4,7 @@ import { navigate } from 'gatsby';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
 
 export const FACETS_KEY_PREFIX = 'facets.';
+export const FACETS_LEVEL_KEY = '>';
 
 // Simple context to pass search results, ref, and filters to children
 const SearchContext = createContext({
