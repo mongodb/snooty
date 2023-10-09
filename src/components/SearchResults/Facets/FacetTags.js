@@ -82,7 +82,7 @@ const FacetTag = ({ facet: { name, key, id, facets } }) => {
     // if the Facet has any sub facet options, include those in change
     const facetsToDeselect = [{ key, id, checked: false }];
     for (const subFacet of facets) {
-      for (const facetOption of subFacet?.facets) {
+      for (const facetOption of subFacet?.options) {
         facetsToDeselect.push({
           key: facetOption.key,
           id: facetOption.id,
