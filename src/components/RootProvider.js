@@ -9,6 +9,9 @@ import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
 import { SearchContextProvider } from './SearchResults/SearchContext';
 
+// Check for feature flag here to make it easier to pass down for testing purposes
+const SHOW_FACETS = process.env.GATSBY_FEATURE_FACETED_SEARCH === 'true';
+
 const RootProvider = ({
   children,
   headingNodes,
@@ -32,7 +35,7 @@ const RootProvider = ({
           >
             <TocContextProvider remoteMetadata={remoteMetadata}>
               <SidenavContextProvider>
-                <SearchContextProvider>{children}</SearchContextProvider>
+                <SearchContextProvider showFacets={SHOW_FACETS}>{children}</SearchContextProvider>
               </SidenavContextProvider>
             </TocContextProvider>
           </VersionContextProvider>

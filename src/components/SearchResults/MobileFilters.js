@@ -7,6 +7,7 @@ import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { theme } from '../../theme/docsTheme';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
+import { Facets } from './Facets';
 
 // Temporarily apply this css rule to prevent body scrolling only while
 // this component is mounted.
@@ -46,7 +47,7 @@ const Label = styled('div')`
 
 const MobileFilters = () => {
   const { topSmall } = useStickyTopValues();
-  const { setShowMobileFilters } = useContext(SearchContext);
+  const { setShowMobileFilters, showFacets } = useContext(SearchContext);
 
   const closeMobileFilters = useCallback(() => {
     setShowMobileFilters(false);
@@ -61,7 +62,7 @@ const MobileFilters = () => {
           Back to search results
         </BackButton>
         <Label>Refine your search</Label>
-        <SearchFilters manuallyApplyFilters={true} onApplyFilters={closeMobileFilters} />
+        {showFacets ? <Facets /> : <SearchFilters manuallyApplyFilters={true} onApplyFilters={closeMobileFilters} />}
       </Container>
     </>
   );

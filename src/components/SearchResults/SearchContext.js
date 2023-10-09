@@ -1,7 +1,9 @@
-import { createContext, useState } from 'react';
+import { createContext, useCallback, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { navigate } from 'gatsby';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
+
+export const FACETS_KEY_PREFIX = 'facets.';
 
 // Simple context to pass search results, ref, and filters to children
 const SearchContext = createContext({
@@ -16,10 +18,13 @@ const SearchContext = createContext({
   setSelectedVersion: () => {},
   setSelectedCategory: () => {},
   setShowMobileFilters: () => {},
+  handleFacetChange: () => {},
   shouldAutofocus: false,
+  showFacets: false,
+  searchParams: {},
 });
 
-const SearchContextProvider = ({ children }) => {
+const SearchContextProvider = ({ children, showFacets = false }) => {
   const { search } = useLocation();
   const { filters, searchPropertyMapping } = useMarianManifests();
   // get vars from URL
@@ -56,6 +61,28 @@ const SearchContextProvider = ({ children }) => {
     navigate(`?${newSearch.toString()}`);
   };
 
+  const handleFacetChange = useCallback(
+    (facets) => {
+      const newSearch = new URLSearchParams(search);
+
+      facets.forEach(({ key, id, checked }) => {
+        const paramKey = FACETS_KEY_PREFIX + key;
+        if (checked) {
+          // Avoid duplicate param keys with the same values
+          if (!newSearch.getAll(paramKey).includes(id)) {
+            newSearch.append(paramKey, id);
+          }
+        } else {
+          newSearch.delete(FACETS_KEY_PREFIX + key, id);
+        }
+      });
+      newSearch.set('page', 1);
+      // The navigation might cause a small visual delay when facets are being checked
+      navigate(`?${newSearch.toString()}`);
+    },
+    [search]
+  );
+
   return (
     <SearchContext.Provider
       value={{
@@ -77,8 +104,11 @@ const SearchContextProvider = ({ children }) => {
         setSelectedCategory,
         selectedVersion,
         setSelectedVersion,
+        handleFacetChange,
         showMobileFilters,
         setShowMobileFilters,
+        showFacets,
+        searchParams,
       }}
     >
       {children}
