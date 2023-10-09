@@ -339,6 +339,8 @@ const SearchResults = () => {
       return;
     }
 
+    setSearchCount();
+
     const fetchSearchMeta = async () => {
       // TODO: allow search facet selections
       const res = await fetch(searchParamsToMetaURL(searchParams));
@@ -360,7 +362,7 @@ const SearchResults = () => {
     const { page } = queryString.parse(search);
     if (newValue === searchTerm && parseInt(page) === 1) return;
 
-    setSearchTerm(searchTerm);
+    setSearchTerm(newValue);
   };
 
   const onPageClick = useCallback(
@@ -427,7 +429,7 @@ const SearchResults = () => {
                   {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
                 </FilterBadgesWrapper>
               )}
-              {showFacets && searchFinished && <FacetTags resultsCount={searchCount}></FacetTags>}
+              {showFacets && <FacetTags resultsCount={searchCount}></FacetTags>}
             </ResultTag>
           )}
           <MobileSearchButtonWrapper>
@@ -502,7 +504,7 @@ const SearchResults = () => {
           </>
         )}
 
-        {searchParams.get('q') && searchFinished && (
+        {searchParams.get('q') && (
           <FiltersContainer>
             {showFacets ? (
               <>
