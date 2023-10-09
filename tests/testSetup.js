@@ -6,6 +6,13 @@ global.navigator = {
   userAgent: 'node.js',
 };
 
+class MockResizeObserver {}
+['observe', 'unobserve', 'disconnect'].forEach((method) => {
+  MockResizeObserver.prototype[method] = jest.fn();
+});
+
+global.ResizeObserver = MockResizeObserver;
+
 jest.mock('@leafygreen-ui/lib', () => {
   const lib = jest.requireActual('@leafygreen-ui/lib');
   return {
