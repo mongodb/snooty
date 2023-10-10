@@ -1,4 +1,3 @@
-import { navigate } from 'gatsby';
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css, Global } from '@emotion/react';
@@ -376,22 +375,14 @@ const SearchResults = () => {
 
   const onPageClick = useCallback(
     async (isForward) => {
-      const searchParams = new URLSearchParams(search);
       const currentPage = parseInt(searchParams.get('page'));
       const newPage = isForward ? currentPage + 1 : currentPage - 1;
       if (newPage < 1) {
         return;
       }
-      searchParams.set('page', newPage);
-      const queryPath = '?' + searchParams.toString();
-      navigate(queryPath, { state: { preserveScroll: true } });
-      setSearchFinished(false);
-      const result = await fetch(searchParamsToURL(searchTerm, searchFilter, newPage));
-      const resJson = await result.json();
-      setSearchResults(resJson?.results || []);
-      setSearchFinished(true);
+      setSearchTerm(searchTerm, newPage);
     },
-    [search, searchFilter, searchTerm]
+    [searchParams, searchTerm, setSearchTerm]
   );
 
   return (
@@ -416,12 +407,12 @@ const SearchResults = () => {
               setSearchField(e.target.value);
             }}
           />
+          {/* Classname-attached searchTerm needed for Smartling localization */}
+          <span style={{ display: 'none' }} className="sl-search-keyword">
+            {searchTerm}
+          </span>
           {searchTerm && (
             <ResultTag>
-              {/* Classname-attached searchTerm needed for Smartling localization */}
-              <span style={{ display: 'none' }} className="sl-search-keyword">
-                {searchTerm}
-              </span>
               {!showFacets && Number.isInteger(searchCount) && (
                 <Overline className={cx(styledOverline)}>
                   <>{searchCount} RESULTS</>

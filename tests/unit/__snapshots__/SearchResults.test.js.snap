@@ -1884,15 +1884,15 @@ exports[`Search Results Page considers a given search filter query param and dis
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        stitch
+      </span>
       <div
         class="emotion-12 emotion-13"
       >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          stitch
-        </span>
         <div>
           <span
             class="emotion-14 emotion-15"
@@ -3220,16 +3220,15 @@ exports[`Search Results Page does not return results for a given search term wit
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        realm
+      </span>
       <div
         class="emotion-12 emotion-13"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          realm
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -4091,6 +4090,10 @@ exports[`Search Results Page renders correctly without browser 1`] = `
           />
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      />
       <div
         class="emotion-9 emotion-10"
       >
@@ -5142,16 +5145,15 @@ exports[`Search Results Page renders loading images before returning no results 
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        noresultsreturned
+      </span>
       <div
         class="emotion-12 emotion-13"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          noresultsreturned
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -6817,16 +6819,15 @@ exports[`Search Results Page renders loading images before returning nonempty re
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        stitch
+      </span>
       <div
         class="emotion-12 emotion-13"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          stitch
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -8740,16 +8741,15 @@ exports[`Search Results Page renders results from a given search term query para
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        stitch
+      </span>
       <div
         class="emotion-12 emotion-13"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          stitch
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
