@@ -794,7 +794,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   line-height: 28px;
 }
 
-.emotion-78 {
+.emotion-97 {
   font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -819,11 +819,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   color: #00684A;
 }
 
-.emotion-83 {
+.emotion-102 {
   position: relative;
 }
 
-.emotion-84 {
+.emotion-103 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -836,7 +836,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   margin-right: 5px;
 }
 
-.emotion-86 {
+.emotion-105 {
   color: #DB3030;
 }
 
@@ -1074,6 +1074,53 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         <h2
           class="emotion-47"
         >
+          01 February 2024 Release
+        </h2>
+        <div
+          class="emotion-48 emotion-49"
+          data-testid="resource-changes-block"
+        >
+          <div
+            class="emotion-50 emotion-51"
+          >
+            <a
+              class="lg-ui-0001 emotion-52"
+              href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
+              target="_self"
+            >
+              <span
+                class="emotion-53"
+              >
+                <h6
+                  class="emotion-54 emotion-55 emotion-56"
+                >
+                  PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
+                </h6>
+              </span>
+            </a>
+            <div
+              class="emotion-57 emotion-58 emotion-59"
+            >
+              Removed
+            </div>
+          </div>
+          <ul
+            class="emotion-60 emotion-61"
+          >
+            <li
+              class="emotion-62 emotion-63"
+            >
+              This change should really definitely be hidden
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="emotion-13 emotion-46"
+      >
+        <h2
+          class="emotion-47"
+        >
           01 February 2023 Release
         </h2>
         <div
@@ -1099,7 +1146,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               </span>
             </a>
             <div
-              class="emotion-57 emotion-58 emotion-78"
+              class="emotion-57 emotion-58 emotion-97"
             >
               Released
             </div>
@@ -1111,11 +1158,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               class="emotion-62 emotion-63"
             >
               <div
-                class="emotion-83 emotion-84 emotion-85"
+                class="emotion-102 emotion-103 emotion-104"
               >
                 <svg
                   aria-label="Important With Circle Icon"
-                  class="emotion-86"
+                  class="emotion-105"
                   fill="none"
                   height="16"
                   role="img"
@@ -1158,7 +1205,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               </span>
             </a>
             <div
-              class="emotion-57 emotion-58 emotion-78"
+              class="emotion-57 emotion-58 emotion-97"
             >
               Released
             </div>
@@ -1170,11 +1217,37 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               class="emotion-62 emotion-63"
             >
               <div
-                class="emotion-83 emotion-84 emotion-85"
+                class="emotion-102 emotion-103 emotion-104"
               >
                 <svg
                   aria-label="Important With Circle Icon"
-                  class="emotion-86"
+                  class="emotion-105"
+                  fill="none"
+                  height="16"
+                  role="img"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM7 4.5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4Zm2 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              This change should be hidden
+            </li>
+            <li
+              class="emotion-62 emotion-63"
+            >
+              <div
+                class="emotion-102 emotion-103 emotion-104"
+              >
+                <svg
+                  aria-label="Important With Circle Icon"
+                  class="emotion-105"
                   fill="none"
                   height="16"
                   role="img"
@@ -1196,11 +1269,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               class="emotion-62 emotion-63"
             >
               <div
-                class="emotion-83 emotion-84 emotion-85"
+                class="emotion-102 emotion-103 emotion-104"
               >
                 <svg
                   aria-label="Important With Circle Icon"
-                  class="emotion-86"
+                  class="emotion-105"
                   fill="none"
                   height="16"
                   role="img"
@@ -1227,11 +1300,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               class="emotion-62 emotion-63"
             >
               <div
-                class="emotion-83 emotion-84 emotion-85"
+                class="emotion-102 emotion-103 emotion-104"
               >
                 <svg
                   aria-label="Important With Circle Icon"
-                  class="emotion-86"
+                  class="emotion-105"
                   fill="none"
                   height="16"
                   role="img"
@@ -1274,7 +1347,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               </span>
             </a>
             <div
-              class="emotion-57 emotion-58 emotion-78"
+              class="emotion-57 emotion-58 emotion-97"
             >
               Updated
             </div>
@@ -1326,7 +1399,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               </span>
             </a>
             <div
-              class="emotion-57 emotion-58 emotion-78"
+              class="emotion-57 emotion-58 emotion-97"
             >
               Updated
             </div>
