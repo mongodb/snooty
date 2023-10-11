@@ -2,16 +2,13 @@ const { getDataStore } = require('gatsby/dist/datastore');
 const path = require('path');
 const stream = require('stream');
 const { promisify } = require('util');
-const fs = require('fs').promises;
-const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
 const pipeline = promisify(stream.pipeline);
 const got = require(`got`);
 const { parser } = require(`stream-json/jsonl/Parser`);
-const { saveStaticFiles } = require('../../src/utils/setup/save-asset-files');
-const { getNestedValue } = require('../../src/utils/get-nested-value');
 const { sourceNodes } = require(`./other-things-to-source`);
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
 const { callPostBuildWebhook } = require('./utils/post-build.js');
+const { consumeData, KEY_LAST_FETCHED, KEY_LAST_CLIENT_ACCESS_TOKEN } = require('./utils/data-consumer.js');
 
 // Global variable to allow webhookBody from sourceNodes step to be passed down
 // to other Gatsby build steps that might not pass webhookBody natively.
@@ -52,19 +49,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
   createTypes(typeDefs);
 };
 
-const saveFile = async (file, data) => {
-  await fs.mkdir(path.join('public', path.dirname(file)), {
-    recursive: true,
-  });
-  await fs.writeFile(path.join('public', file), data, 'binary');
-};
-
 const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
 const GATSBY_CLOUD_SITE_USER = process.env.GATSBY_CLOUD_SITE_USER;
-
-function createSnootyMetadataId({ branch, project, createNodeId }) {
-  return createNodeId(`metadata-${branch}-${project}`);
-}
 
 let isFirstRun = true;
 exports.sourceNodes = async ({
@@ -80,12 +66,11 @@ exports.sourceNodes = async ({
   console.log({ webhookBody });
   currentWebhookBody = webhookBody;
   let hasOpenAPIChangelog = false;
-  const { createNode, deleteNode, touchNode } = actions;
+  const { createNode, touchNode } = actions;
 
-  let pageCount = 0;
   const fileWritePromises = [];
-  const lastFetched = (await cache.get(`lastFetched`)) || 0;
-  const lastClientAccessToken = await cache.get('lastClientAccessToken');
+  const lastFetched = (await cache.get(KEY_LAST_FETCHED)) || 0;
+  const lastClientAccessToken = await cache.get(KEY_LAST_CLIENT_ACCESS_TOKEN);
   console.log({ lastFetched });
 
   if (isFirstRun && lastFetched) {
@@ -120,100 +105,34 @@ exports.sourceNodes = async ({
     }
     const httpStream = got.stream(url, { headers });
 
-    const decode = parser();
-    decode.on(`data`, async (_entry) => {
-      const entry = _entry.value;
-      const shouldDeleteContentNode = entry.data?.deleted;
-
-      if (entry.type === `timestamp`) {
-        cache.set(`lastFetched`, entry.data);
-        cache.set('lastClientAccessToken', clientAccessToken);
-      } else if (entry.type === `asset`) {
-        entry.data.filenames.forEach((filePath) => {
-          fileWritePromises.push(saveFile(filePath, Buffer.from(entry.data.assetData, `base64`)));
-        });
-      } else if (entry.type === `metadata`) {
-        // Create metadata node.
-        const { _id, build_id, created_at, static_files: staticFiles, ...metadataMinusStatic } = entry.data;
-        const { parentPaths, slugToTitle, branch, project } = metadataMinusStatic;
-        const nodeId = createSnootyMetadataId({ createNodeId, branch, project });
-
-        if (shouldDeleteContentNode) {
-          deleteNode(getNode(nodeId));
-        } else {
-          if (parentPaths) {
-            transformBreadcrumbs(parentPaths, slugToTitle);
-          }
-
-          // Save files in the static_files field of metadata document, including intersphinx inventories.
-          if (staticFiles) {
-            await saveStaticFiles(staticFiles);
-          }
-
-          createNode({
-            children: [],
-            id: nodeId,
-            internal: {
-              contentDigest: createContentDigest(metadataMinusStatic),
-              type: 'SnootyMetadata',
-            },
-            branch,
-            project,
-            parent: null,
-            metadata: metadataMinusStatic,
-          });
-        }
-      } else if (entry.type === `page`) {
-        if (entry.data?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
-        pageCount += 1;
-        const { source, ...page } = entry.data;
-
-        const filename = getNestedValue(['filename'], page) || '';
-        // The old gatsby sourceNodes has this code — I'm not sure it actually
-        // is a concern (I couldn't find any page documents that didn't end in .txt)
-        // but Chesterton's Fence and all.
-        if (filename.endsWith('.txt')) {
-          const branch = page.page_id.split(`/`)[2];
-          const raw_page_id = page.page_id.split(`/`).slice(3).join(`/`);
-          const page_id = raw_page_id === `index` ? `/` : `/${raw_page_id}`;
-          const project = page.page_id.split(`/`)[0];
-
-          const pageNodeId = createNodeId(page_id + project + branch);
-          const pagePathNodeId = pageNodeId + `/path`;
-
-          if (shouldDeleteContentNode) {
-            deleteNode(getNode(pageNodeId));
-            deleteNode(getNode(pagePathNodeId));
-          } else {
-            page.page_id = page_id;
-            page.metadata = createSnootyMetadataId({ createNodeId, branch, project });
-            page.id = pageNodeId;
-            page.internal = {
-              type: `Page`,
-              contentDigest: createContentDigest(page),
-            };
-
-            const pagePathNode = {
-              id: pagePathNodeId,
-              page_id,
-              branch,
-              project,
-              pageNodeId: page.id,
-              internal: {
-                type: `PagePath`,
-                contentDigest: page.internal.contentDigest,
-              },
-            };
-
-            createNode(page);
-            createNode(pagePathNode);
-
-            if (pageCount % 1000 === 0) {
-              console.log({ pageCount, page_id, id: page.id });
-            }
-          }
-        }
+    let pageCount = 0;
+    // Callback function to be ran after a valid page has been found and handled.
+    // Tracks and updates information that spans across several data entries
+    const onHandlePage = (pageTemplate, pageId, pageNodeId) => {
+      if (pageTemplate === 'changelog') hasOpenAPIChangelog = true;
+      pageCount += 1;
+      if (pageCount % 1000 === 0) {
+        console.log({ pageCount, page_id: pageId, id: pageNodeId });
       }
+    };
+
+    // Since there's a lot of data incoming from the Snooty Data API, we stream
+    // the data in chunks and parse them as they come instead of fetching everything
+    // as a single JSON response
+    const decode = parser();
+    decode.on('data', async (_entry) => {
+      // Un-nest data
+      const entry = _entry.value;
+      await consumeData(entry, {
+        actions,
+        cache,
+        clientAccessToken,
+        createContentDigest,
+        createNodeId,
+        fileWritePromises,
+        getNode,
+        onHandlePage,
+      });
     });
 
     console.time(`source updates`);
