@@ -1884,15 +1884,15 @@ exports[`Search Results Page considers a given search filter query param and dis
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        stitch
+      </span>
       <div
         class="emotion-12 emotion-13"
       >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          stitch
-        </span>
         <div>
           <span
             class="emotion-14 emotion-15"
@@ -2105,8 +2105,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-65"
             >
               <button
-                aria-controls="select-33-menu"
-                aria-describedby="select-33-description"
+                aria-controls="select-81-menu"
+                aria-describedby="select-81-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -2114,7 +2114,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 class="emotion-66"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-34"
+                id="select-82"
                 type="button"
                 value="Realm"
               >
@@ -2162,8 +2162,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-65"
             >
               <button
-                aria-controls="select-35-menu"
-                aria-describedby="select-35-description"
+                aria-controls="select-83-menu"
+                aria-describedby="select-83-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -2172,7 +2172,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-36"
+                id="select-84"
                 type="button"
                 value="Latest"
               >
@@ -3220,16 +3220,15 @@ exports[`Search Results Page does not return results for a given search term wit
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        realm
+      </span>
       <div
         class="emotion-12 emotion-13"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          realm
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -3570,8 +3569,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-40"
             >
               <button
-                aria-controls="select-53-menu"
-                aria-describedby="select-53-description"
+                aria-controls="select-109-menu"
+                aria-describedby="select-109-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -3579,7 +3578,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 class="emotion-41"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-54"
+                id="select-110"
                 type="button"
                 value=""
               >
@@ -3627,8 +3626,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-40"
             >
               <button
-                aria-controls="select-55-menu"
-                aria-describedby="select-55-description"
+                aria-controls="select-111-menu"
+                aria-describedby="select-111-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -3637,7 +3636,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-56"
+                id="select-112"
                 type="button"
                 value=""
               >
@@ -3935,41 +3934,17 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 }
 
 .emotion-9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  row-gap: 8px;
-  padding-top: 16px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.emotion-11 {
   display: none;
   margin-top: 16px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-11 {
+  .emotion-9 {
     display: block;
   }
 }
 
-.emotion-13 {
+.emotion-11 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -4004,35 +3979,35 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   height: 36px;
 }
 
-.emotion-13:focus,
-.emotion-13:focus-visible {
+.emotion-11:focus,
+.emotion-11:focus-visible {
   outline: none;
 }
 
-.emotion-13:active,
-.emotion-13:focus,
-.emotion-13:hover {
+.emotion-11:active,
+.emotion-11:focus,
+.emotion-11:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-13:focus {
+.emotion-11:focus {
   color: #001E2B;
 }
 
-.emotion-13:hover[aria-disabled='false'],
-.emotion-13:active {
+.emotion-11:hover[aria-disabled='false'],
+.emotion-11:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-13:focus-visible {
+.emotion-11:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-14 {
+.emotion-12 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -4042,7 +4017,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   border-radius: 5px;
 }
 
-.emotion-15 {
+.emotion-13 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -4064,7 +4039,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   gap: 6px;
 }
 
-.emotion-16 {
+.emotion-14 {
   color: #889397;
   height: 16px;
   width: 16px;
@@ -4115,32 +4090,28 @@ exports[`Search Results Page renders correctly without browser 1`] = `
           />
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      />
       <div
         class="emotion-9 emotion-10"
       >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        />
-      </div>
-      <div
-        class="emotion-11 emotion-12"
-      >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-13"
+          class="lg-ui-button-0000 emotion-11"
           type="button"
         >
           <div
-            class="emotion-14"
+            class="emotion-12"
           />
           <div
-            class="emotion-15"
+            class="emotion-13"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-16"
+              class="emotion-14"
               fill="none"
               height="16"
               role="presentation"
@@ -4689,6 +4660,420 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-right: 10px!important;
 }
 
+.emotion-42 {
+  grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-42 {
+    display: none;
+  }
+}
+
+.emotion-44 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #3D4F58;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: 'Euclid Circular A';
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.emotion-46 {
+  grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-46 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: none;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .emotion-46>div {
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-46 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .emotion-46>div {
+    width: 100%;
+  }
+
+  .emotion-46>div:first-of-type {
+    margin-bottom: 8px;
+    margin-right: 0;
+  }
+
+  .emotion-46>div>div {
+    width: 100%;
+  }
+}
+
+.emotion-48 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.emotion-50 {
+  width: 175px;
+}
+
+.emotion-52 {
+  position: relative;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-52 label,
+  .emotion-52 p,
+  .emotion-52 button,
+  .emotion-52 div,
+  .emotion-52 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-53 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-53>label+button,
+.emotion-53>p+button {
+  margin-top: 3px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-53 label,
+  .emotion-53 p,
+  .emotion-53 button,
+  .emotion-53 div,
+  .emotion-53 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-54 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-54:focus {
+  outline: none;
+}
+
+.emotion-54[disabled],
+.emotion-54:disabled {
+  pointer-events: none;
+}
+
+.emotion-54:active,
+.emotion-54:focus,
+.emotion-54:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-54:hover,
+.emotion-54:active {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-54:focus {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-54>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-54>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-54>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-54>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-54:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-54 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+.emotion-56 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-57 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.emotion-58 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.emotion-59 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  justify-self: left;
+}
+
+.emotion-66 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-66:focus {
+  outline: none;
+}
+
+.emotion-66[disabled],
+.emotion-66:disabled {
+  pointer-events: none;
+}
+
+.emotion-66:active,
+.emotion-66:focus,
+.emotion-66:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-66:hover,
+.emotion-66:active {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-66,
+.emotion-66:hover {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+  color: #889397;
+  cursor: not-allowed;
+}
+
+.emotion-66:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-66>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-66>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-66>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-66>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-66:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.emotion-66:disabled {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-66:disabled:active {
+  pointer-events: none;
+}
+
+.emotion-66:disabled {
+  background-color: #E8EDEB;
+  color: #889397;
+}
+
+.emotion-66:disabled>*:last-child>svg {
+  color: #889397;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-66 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -4760,16 +5145,15 @@ exports[`Search Results Page renders loading images before returning no results 
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        noresultsreturned
+      </span>
       <div
         class="emotion-12 emotion-13"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          noresultsreturned
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -5259,6 +5643,166 @@ exports[`Search Results Page renders loading images before returning no results 
             ‌
           </span>
         </span>
+      </div>
+    </div>
+    <div
+      class="emotion-42 emotion-43"
+    >
+      <h2
+        class="emotion-44 emotion-45"
+      >
+        Refine your search
+      </h2>
+      <div
+        class="emotion-46 emotion-47"
+      >
+        <div
+          class="emotion-48 emotion-49"
+        >
+          <div
+            class="emotion-50 emotion-51 emotion-52"
+          >
+            <div
+              class="emotion-53"
+            >
+              <button
+                aria-controls="select-17-menu"
+                aria-describedby="select-17-description"
+                aria-disabled="false"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-54"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                id="select-18"
+                type="button"
+                value=""
+              >
+                <div
+                  class="emotion-17"
+                />
+                <div
+                  class="emotion-56"
+                >
+                  <div
+                    class="emotion-57"
+                  >
+                    <div
+                      class="emotion-58"
+                    >
+                      Filter by Category
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-59"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="emotion-48 emotion-49"
+        >
+          <div
+            class="emotion-50 emotion-51 emotion-52"
+          >
+            <div
+              class="emotion-53"
+            >
+              <button
+                aria-controls="select-19-menu"
+                aria-describedby="select-19-description"
+                aria-disabled="true"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-66"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                disabled=""
+                id="select-20"
+                type="button"
+                value=""
+              >
+                <div
+                  class="emotion-17"
+                />
+                <div
+                  class="emotion-56"
+                >
+                  <div
+                    class="emotion-57"
+                  >
+                    <div
+                      class="emotion-58"
+                    >
+                      Filter by Version
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-59"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button
+          aria-disabled="false"
+          class="lg-ui-button-0000 emotion-16"
+          type="button"
+        >
+          <div
+            class="emotion-17"
+          />
+          <div
+            class="emotion-18"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="emotion-19"
+              fill="none"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Clear all filters
+          </div>
+        </button>
       </div>
     </div>
   </div>
@@ -5790,6 +6334,420 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin-right: 10px!important;
 }
 
+.emotion-42 {
+  grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-42 {
+    display: none;
+  }
+}
+
+.emotion-44 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #3D4F58;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: 'Euclid Circular A';
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.emotion-46 {
+  grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-46 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: none;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .emotion-46>div {
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-46 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .emotion-46>div {
+    width: 100%;
+  }
+
+  .emotion-46>div:first-of-type {
+    margin-bottom: 8px;
+    margin-right: 0;
+  }
+
+  .emotion-46>div>div {
+    width: 100%;
+  }
+}
+
+.emotion-48 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.emotion-50 {
+  width: 175px;
+}
+
+.emotion-52 {
+  position: relative;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-52 label,
+  .emotion-52 p,
+  .emotion-52 button,
+  .emotion-52 div,
+  .emotion-52 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-53 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-53>label+button,
+.emotion-53>p+button {
+  margin-top: 3px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-53 label,
+  .emotion-53 p,
+  .emotion-53 button,
+  .emotion-53 div,
+  .emotion-53 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-54 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-54:focus {
+  outline: none;
+}
+
+.emotion-54[disabled],
+.emotion-54:disabled {
+  pointer-events: none;
+}
+
+.emotion-54:active,
+.emotion-54:focus,
+.emotion-54:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-54:hover,
+.emotion-54:active {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-54:focus {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-54>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-54>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-54>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-54>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-54:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-54 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+.emotion-56 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-57 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.emotion-58 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.emotion-59 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  justify-self: left;
+}
+
+.emotion-66 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-66:focus {
+  outline: none;
+}
+
+.emotion-66[disabled],
+.emotion-66:disabled {
+  pointer-events: none;
+}
+
+.emotion-66:active,
+.emotion-66:focus,
+.emotion-66:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-66:hover,
+.emotion-66:active {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-66,
+.emotion-66:hover {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+  color: #889397;
+  cursor: not-allowed;
+}
+
+.emotion-66:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-66>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-66>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-66>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-66>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-66:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.emotion-66:disabled {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-66:disabled:active {
+  pointer-events: none;
+}
+
+.emotion-66:disabled {
+  background-color: #E8EDEB;
+  color: #889397;
+}
+
+.emotion-66:disabled>*:last-child>svg {
+  color: #889397;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-66 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -5861,16 +6819,15 @@ exports[`Search Results Page renders loading images before returning nonempty re
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        stitch
+      </span>
       <div
         class="emotion-12 emotion-13"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          stitch
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -6360,6 +7317,166 @@ exports[`Search Results Page renders loading images before returning nonempty re
             ‌
           </span>
         </span>
+      </div>
+    </div>
+    <div
+      class="emotion-42 emotion-43"
+    >
+      <h2
+        class="emotion-44 emotion-45"
+      >
+        Refine your search
+      </h2>
+      <div
+        class="emotion-46 emotion-47"
+      >
+        <div
+          class="emotion-48 emotion-49"
+        >
+          <div
+            class="emotion-50 emotion-51 emotion-52"
+          >
+            <div
+              class="emotion-53"
+            >
+              <button
+                aria-controls="select-1-menu"
+                aria-describedby="select-1-description"
+                aria-disabled="false"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-54"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                id="select-2"
+                type="button"
+                value=""
+              >
+                <div
+                  class="emotion-17"
+                />
+                <div
+                  class="emotion-56"
+                >
+                  <div
+                    class="emotion-57"
+                  >
+                    <div
+                      class="emotion-58"
+                    >
+                      Filter by Category
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-59"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="emotion-48 emotion-49"
+        >
+          <div
+            class="emotion-50 emotion-51 emotion-52"
+          >
+            <div
+              class="emotion-53"
+            >
+              <button
+                aria-controls="select-3-menu"
+                aria-describedby="select-3-description"
+                aria-disabled="true"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-66"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                disabled=""
+                id="select-4"
+                type="button"
+                value=""
+              >
+                <div
+                  class="emotion-17"
+                />
+                <div
+                  class="emotion-56"
+                >
+                  <div
+                    class="emotion-57"
+                  >
+                    <div
+                      class="emotion-58"
+                    >
+                      Filter by Version
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-59"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button
+          aria-disabled="false"
+          class="lg-ui-button-0000 emotion-16"
+          type="button"
+        >
+          <div
+            class="emotion-17"
+          />
+          <div
+            class="emotion-18"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="emotion-19"
+              fill="none"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Clear all filters
+          </div>
+        </button>
       </div>
     </div>
   </div>
@@ -7624,16 +8741,15 @@ exports[`Search Results Page renders results from a given search term query para
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        stitch
+      </span>
       <div
         class="emotion-12 emotion-13"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          stitch
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -7816,8 +8932,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-61"
             >
               <button
-                aria-controls="select-17-menu"
-                aria-describedby="select-17-description"
+                aria-controls="select-57-menu"
+                aria-describedby="select-57-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -7825,7 +8941,7 @@ exports[`Search Results Page renders results from a given search term query para
                 class="emotion-62"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-18"
+                id="select-58"
                 type="button"
                 value=""
               >
@@ -7873,8 +8989,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-61"
             >
               <button
-                aria-controls="select-19-menu"
-                aria-describedby="select-19-description"
+                aria-controls="select-59-menu"
+                aria-describedby="select-59-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -7883,7 +8999,7 @@ exports[`Search Results Page renders results from a given search term query para
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-20"
+                id="select-60"
                 type="button"
                 value=""
               >

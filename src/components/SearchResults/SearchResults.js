@@ -1,4 +1,3 @@
-import { navigate } from 'gatsby';
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css, Global } from '@emotion/react';
@@ -262,16 +261,16 @@ const SearchResults = () => {
   const { search } = useLocation();
 
   const {
-    page,
     searchTerm,
     searchFilter,
     setSearchFilter,
     selectedCategory,
     selectedVersion,
-    searchPropertyMapping,
     showMobileFilters,
     setShowMobileFilters,
     showFacets,
+    searchParams,
+    setSearchTerm,
   } = useContext(SearchContext);
 
   const { isTabletOrMobile } = useScreenSize();
@@ -280,7 +279,6 @@ const SearchResults = () => {
 
   const [searchFinished, setSearchFinished] = useState(() => !searchTerm);
   const [searchCount, setSearchCount] = useState();
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
@@ -318,28 +316,21 @@ const SearchResults = () => {
   // async call to fetch search results
   // effect is called if searchTerm, searchPropertyMapping are defined
   useEffect(() => {
-    if (!searchPropertyMapping || !Object.keys(searchPropertyMapping).length) {
-      return;
-    }
-    if (!searchTerm) {
-      if (isFirstLoad) {
-        return;
-      }
+    if (!searchParams.get('q')) {
       setSearchResults([]);
       setSearchCount(0);
       return;
     }
-    setIsFirstLoad(false);
     setSearchFinished(false);
+    setSearchCount();
 
     const fetchSearchResults = async () => {
-      const res = await fetch(searchParamsToURL(searchTerm, searchFilter, page));
+      const res = await fetch(searchParamsToURL(searchParams));
       return (await res.json()).results;
     };
 
     const fetchSearchMeta = async () => {
-      // TODO: allow search facet selections
-      const res = await fetch(searchParamsToMetaURL(searchTerm, searchFilter));
+      const res = await fetch(searchParamsToMetaURL(searchParams));
       return res.json();
     };
 
@@ -363,37 +354,26 @@ const SearchResults = () => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
         setSearchCount();
       });
-  }, [searchTerm, page, searchFilter, searchPropertyMapping, isFirstLoad]);
+  }, [searchParams]);
 
   const submitNewSearch = (event) => {
     const newValue = event.target[0]?.value;
     const { page } = queryString.parse(search);
     if (newValue === searchTerm && parseInt(page) === 1) return;
-    const searchParams = new URLSearchParams(search);
-    searchParams.set('q', newValue);
-    searchParams.set('page', '1');
-    const queryPath = '?' + searchParams.toString();
-    navigate(queryPath, { state: { preserveScroll: true } });
+
+    setSearchTerm(newValue);
   };
 
   const onPageClick = useCallback(
     async (isForward) => {
-      const searchParams = new URLSearchParams(search);
       const currentPage = parseInt(searchParams.get('page'));
       const newPage = isForward ? currentPage + 1 : currentPage - 1;
       if (newPage < 1) {
         return;
       }
-      searchParams.set('page', newPage);
-      const queryPath = '?' + searchParams.toString();
-      navigate(queryPath, { state: { preserveScroll: true } });
-      setSearchFinished(false);
-      const result = await fetch(searchParamsToURL(searchTerm, searchFilter, newPage));
-      const resJson = await result.json();
-      setSearchResults(resJson?.results || []);
-      setSearchFinished(true);
+      setSearchTerm(searchTerm, newPage);
     },
-    [search, searchFilter, searchTerm]
+    [searchParams, searchTerm, setSearchTerm]
   );
 
   return (
@@ -418,29 +398,31 @@ const SearchResults = () => {
               setSearchField(e.target.value);
             }}
           />
-          <ResultTag>
-            {/* Classname-attached searchTerm needed for Smartling localization */}
-            <span style={{ display: 'none' }} className="sl-search-keyword">
-              {searchTerm}
-            </span>
-            {!showFacets && Number.isInteger(searchCount) && (
-              <Overline className={cx(styledOverline)}>
-                <>{searchCount} RESULTS</>
-              </Overline>
-            )}
-            {!!searchFilter && (
-              <div>
-                {selectedCategory && (
-                  <StyledTag variant="green" onClick={resetFilters}>
-                    {selectedCategory}
-                    <Icon className={cx(styledIcon)} glyph="X" />
-                  </StyledTag>
-                )}
-                {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-              </div>
-            )}
-            {showFacets && searchFinished && <FacetTags resultsCount={searchCount}></FacetTags>}
-          </ResultTag>
+          {/* Classname-attached searchTerm needed for Smartling localization */}
+          <span style={{ display: 'none' }} className="sl-search-keyword">
+            {searchTerm}
+          </span>
+          {searchTerm && (
+            <ResultTag>
+              {!showFacets && Number.isInteger(searchCount) && (
+                <Overline className={cx(styledOverline)}>
+                  <>{searchCount} RESULTS</>
+                </Overline>
+              )}
+              {!!searchFilter && (
+                <div>
+                  {selectedCategory && (
+                    <StyledTag variant="green" onClick={resetFilters}>
+                      {selectedCategory}
+                      <Icon className={cx(styledIcon)} glyph="X" />
+                    </StyledTag>
+                  )}
+                  {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                </div>
+              )}
+              {showFacets && <FacetTags resultsCount={searchCount}></FacetTags>}
+            </ResultTag>
+          )}
           <MobileSearchButtonWrapper>
             <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
               {mobileFilterButton.text}
@@ -464,7 +446,7 @@ const SearchResults = () => {
         )}
 
         {/* empty search results */}
-        {!isFirstLoad && searchFinished && !searchResults?.length && (
+        {searchTerm && searchFinished && !searchResults?.length && (
           <>
             <>
               <EmptyResultsContainer>
@@ -508,7 +490,7 @@ const SearchResults = () => {
           </>
         )}
 
-        {!isFirstLoad && searchFinished && (
+        {searchParams.get('q') && (
           <FiltersContainer>
             {showFacets ? (
               <>

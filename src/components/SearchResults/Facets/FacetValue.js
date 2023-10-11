@@ -1,7 +1,7 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import Checkbox from '@leafygreen-ui/checkbox';
 import { css, cx } from '@leafygreen-ui/emotion';
-import SearchContext, { FACETS_KEY_PREFIX } from '../SearchContext';
+import SearchContext, { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY } from '../SearchContext';
 import FacetGroup from './FacetGroup';
 
 const checkboxStyle = css`
@@ -81,6 +81,16 @@ const FacetValue = ({ facetValue: { name, facets, key, id }, isNested = false })
       const { checked } = target;
       const facetsToUpdate = [];
 
+      // if unchecked, parent should be unchecked
+      if (!checked) {
+        const parentKey = {
+          key: key.split(FACETS_LEVEL_KEY).slice(0, -2).join(FACETS_LEVEL_KEY),
+          id: key.split(FACETS_LEVEL_KEY).slice(-2)[0],
+          checked: false,
+        };
+        facetsToUpdate.push(parentKey);
+      }
+
       // Update nested checkboxes when parent is changed
       nestedSubFacets.forEach((ids, key) => {
         ids.forEach((id) => {
@@ -92,14 +102,6 @@ const FacetValue = ({ facetValue: { name, facets, key, id }, isNested = false })
     },
     [handleFacetChange, key, id, nestedSubFacets]
   );
-
-  // Remove query param for parent facet to prevent propagating parent to
-  // server when indeterminate. Search server only wants child facets in this case
-  useEffect(() => {
-    if (totalSubFacets > 0 && isIndeterminate) {
-      handleFacetChange([{ key, id, checked: false }]);
-    }
-  }, [isIndeterminate, totalSubFacets, handleFacetChange, key, id]);
 
   return (
     <>

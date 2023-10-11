@@ -25,6 +25,32 @@ export const mockChangelog = [
     ],
   },
   {
+    date: '2024-02-01',
+    paths: [
+      {
+        path: '/api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}',
+        httpMethod: 'PUT',
+        operationId: 'updateAlertConfiguration',
+        tag: 'Alert Configurations',
+        versions: [
+          {
+            version: '2023-01-01',
+            stabilityLevel: 'stable',
+            changeType: 'removed',
+            changes: [
+              {
+                change: 'This change should really definitely be hidden',
+                changeCode: 'resource-version-removed',
+                backwardCompatible: true,
+                hideFromChangelog: true,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
     date: '2023-02-01',
     paths: [
       {
@@ -42,6 +68,7 @@ export const mockChangelog = [
                 change: 'resource version added.',
                 changeCode: 'resource-version-added',
                 backwardCompatible: false,
+                hideFromChangelog: false,
               },
             ],
           },
@@ -58,6 +85,12 @@ export const mockChangelog = [
             stabilityLevel: 'stable',
             changeType: 'release',
             changes: [
+              {
+                change: 'This change should be hidden',
+                changeCode: 'resource-version-added',
+                backwardCompatible: false,
+                hideFromChangelog: true,
+              },
               {
                 change: 'resource version added.',
                 changeCode: 'resource-version-added',
@@ -155,6 +188,12 @@ export const mockDiff = [
     changeType: 'update',
     changes: [
       {
+        change: "a change",
+        changeCode: 'response-non-success-status-removed',
+        backwardCompatible: false,
+        hideFromChangelog: true,
+      },
+      {
         change: "removed the non-success response with the status '400'.",
         changeCode: 'response-non-success-status-removed',
         backwardCompatible: false,
@@ -173,6 +212,7 @@ export const mockDiff = [
         change: 'this change should be hidden!',
         changeCode: 'operation-tag-changed',
         backwardCompatible: false,
+        hideFromChangelog: false,
       },
     ],
   },
@@ -183,6 +223,12 @@ export const mockDiff = [
     tag: 'Project IP Access List',
     changeType: 'removed',
     changes: [
+      {
+        change: "removed the required property 'name' from the response with the '200' status.",
+        changeCode: 'response-required-property-removed',
+        backwardCompatible: false,
+        hideFromChangelog: true,
+      },
       {
         change: "removed the required property 'name' from the response with the '200' status.",
         changeCode: 'response-required-property-removed',

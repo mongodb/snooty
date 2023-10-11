@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchOADiff } from '../../../utils/realm';
 import useChangelogData from '../../../utils/use-changelog-data';
 import { getDiffRequestFormat } from './getDiffRequestFormat';
+import { hideDiffChanges } from './filterHiddenChanges';
 
 export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen, snootyEnv) => {
   const { index = {}, mostRecentDiff = {} } = useChangelogData();
@@ -20,7 +21,8 @@ export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoadin
       setIsLoading(true);
       fetchOADiff(index.runId, fromAndToDiffLabel, snootyEnv)
         .then((response) => {
-          setDiff(response);
+          const filteredDiff = hideDiffChanges(response);
+          setDiff(filteredDiff);
           setIsLoading(false);
         })
         .catch((err) => {
