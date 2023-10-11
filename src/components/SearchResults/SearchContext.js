@@ -4,6 +4,7 @@ import { navigate } from 'gatsby';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
 
 export const FACETS_KEY_PREFIX = 'facets.';
+export const FACETS_LEVEL_KEY = '>';
 
 // Simple context to pass search results, ref, and filters to children
 const SearchContext = createContext({
@@ -30,7 +31,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   const { filters, searchPropertyMapping } = useMarianManifests();
   // get vars from URL
   // state management for Search is within URL.
-  const searchParams = new URLSearchParams(search);
+  const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
   const page = parseInt(searchParams.get('page') || 1);
   const searchTerm = searchParams.get('q');
   const searchFilter = searchParams.get('searchProperty');
@@ -59,6 +60,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
     if (page) {
       newSearch.set('page', page);
     }
+    setSearchParams(newSearch);
     navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
   };
 
@@ -78,6 +80,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         }
       });
       newSearch.set('page', 1);
+      setSearchParams(newSearch);
       // The navigation might cause a small visual delay when facets are being checked
       navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
     },
@@ -89,6 +92,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
     newSearch.set('q', searchTerm);
     newSearch.set('page', 1);
     navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
+    setSearchParams(newSearch);
   }, [searchTerm]);
 
   return (
@@ -100,8 +104,8 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
           onSearchChange({ page: p });
         },
         searchTerm,
-        setSearchTerm: (q) => {
-          onSearchChange({ searchTerm: q });
+        setSearchTerm: (q, p = 1) => {
+          onSearchChange({ searchTerm: q, page: p });
         },
         searchFilter,
         setSearchFilter: (searchProperty) => {
