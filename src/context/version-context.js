@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect, useState, useCallback, useRef, useMemo } from 'react';
-import { navigate } from '@gatsbyjs/reach-router';
+import { navigate } from 'gatsby';
 import { METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';
@@ -172,7 +172,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
   const [availableGroups, setAvailableGroups] = useState(
     getDefaultGroups(metadata.project, repoBranches, associatedReposInfo)
   );
-  const [showEol, setShowEol] = useState(repoBranches['branches']?.some((b) => !b.active) || false);
+  const [showEol, setShowEol] = useState(repoBranches?.branches?.some((b) => !b.active) || false);
 
   // on init, fetch versions from realm app services
   useEffect(() => {

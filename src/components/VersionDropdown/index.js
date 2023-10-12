@@ -140,6 +140,7 @@ const VersionDropdown = ({ eol }) => {
   // ungrouped branches are handled in a separate array.
   return (
     <StyledSelect
+      role="button"
       allowDeselect={false}
       className={cx(eol ? eolVersionFlipperStyle : '')}
       aria-labelledby="View a different version of documentation."
