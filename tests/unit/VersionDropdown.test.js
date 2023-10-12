@@ -1,5 +1,5 @@
 import { render, screen, act, within } from '@testing-library/react';
-import { navigate } from 'gatsby';
+import { navigate } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
 import * as realm from '../../src/utils/realm';
 import { generatePrefix } from '../../src/components/VersionDropdown/utils';
@@ -15,6 +15,10 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
 jest.mock('../../src/utils/use-snooty-metadata', () => {
   return () => ({ project: 'node' });
 });
+
+jest.mock('@gatsbyjs/reach-router', () => ({
+  navigate: jest.fn(),
+}));
 
 const fetchDocuments = () => {
   return jest.spyOn(realm, 'fetchDocuments').mockImplementation(async (dbName, collectionName, query) => {
