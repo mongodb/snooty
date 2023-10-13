@@ -232,7 +232,7 @@ describe('VersionDropdown', () => {
       expect(versionOptionsDropdown).not.toBeInTheDocument();
 
       await act(async () => {
-        await userEvent.click(versionDropdown);
+        userEvent.click(versionDropdown);
       });
       await tick();
 
