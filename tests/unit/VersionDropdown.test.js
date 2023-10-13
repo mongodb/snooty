@@ -209,13 +209,13 @@ describe('VersionDropdown', () => {
 
     it('renders correctly', async () => {
       let tree;
-      await act(() => {
+      await act(async () => {
         tree = mountConsumer();
       });
       expect(tree.asFragment()).toMatchSnapshot();
     });
     it('renders the dropdown with the correct version', async () => {
-      await act(() => {
+      await act(async () => {
         mountConsumer();
       });
       const versionDropdown = screen.queryByRole('button', { name: 'master' });
@@ -223,7 +223,7 @@ describe('VersionDropdown', () => {
     });
 
     it('show version options when user clicks button', async () => {
-      await act(() => {
+      await act(async () => {
         mountConsumer();
       });
 
@@ -241,7 +241,7 @@ describe('VersionDropdown', () => {
     });
 
     it('calls the navigate function when a user clicks on a version', async () => {
-      await act(() => {
+      await act(async () => {
         mountConsumer();
       });
 
