@@ -1,10 +1,37 @@
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useCallback, useMemo, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { navigate } from 'gatsby';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
+import useFacets from './Facets/useFacets';
 
 export const FACETS_KEY_PREFIX = 'facets.';
 export const FACETS_LEVEL_KEY = '>';
+
+const combineKeyAndId = (facet) => `${facet.key}${FACETS_LEVEL_KEY}${facet.id}`;
+
+const constructFacetNamesByKey = (facets) => {
+  const res = {};
+
+  function extractKeyIdName(facets) {
+    for (const facet of facets) {
+      res[combineKeyAndId(facet)] = facet.name;
+      if (facet?.facets?.length) {
+        traverseFacetGroup(facet.facets);
+      }
+    }
+  }
+
+  function traverseFacetGroup(facetGroup) {
+    for (const facet of facetGroup) {
+      res[combineKeyAndId(facet)] = facet.name;
+      extractKeyIdName(facet.options);
+    }
+  }
+
+  traverseFacetGroup(facets);
+
+  return res;
+};
 
 // Simple context to pass search results, ref, and filters to children
 const SearchContext = createContext({
@@ -24,11 +51,26 @@ const SearchContext = createContext({
   shouldAutofocus: false,
   showFacets: false,
   searchParams: {},
+  facets: [],
+  facetNamesByKeyId: {},
+  getFacetName: () => {},
 });
 
 const SearchContextProvider = ({ children, showFacets = false }) => {
   const { search } = useLocation();
   const { filters, searchPropertyMapping } = useMarianManifests();
+  const facets = useFacets();
+  const facetNamesByKeyId = constructFacetNamesByKey(facets);
+  useMemo(() => {
+    constructFacetNamesByKey(facets);
+  }, [facets]);
+
+  const getFacetName = useCallback(
+    (facet) => {
+      return facetNamesByKeyId?.[combineKeyAndId(facet)];
+    },
+    [facetNamesByKeyId]
+  );
   // get vars from URL
   // state management for Search is within URL.
   const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
@@ -122,6 +164,9 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         setShowMobileFilters,
         showFacets,
         searchParams,
+        facets,
+        facetNamesByKeyId,
+        getFacetName,
       }}
     >
       {children}

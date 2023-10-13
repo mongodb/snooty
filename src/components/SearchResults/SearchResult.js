@@ -132,9 +132,10 @@ const SearchResult = React.memo(
     title,
     searchProperty,
     url,
+    facets,
     ...props
   }) => {
-    const { searchPropertyMapping, searchTerm } = useContext(SearchContext);
+    const { searchPropertyMapping, searchTerm, getFacetName } = useContext(SearchContext);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
@@ -159,6 +160,9 @@ const SearchResult = React.memo(
             {!!category && <StyledTag variant="green">{category}</StyledTag>}
             {!!version && <StyledTag variant="blue">{version}</StyledTag>}
             {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
+            {facets.filter(getFacetName).map((facet) => (
+              <StyledTag variant="blue">{getFacetName(facet)}</StyledTag>
+            ))}
           </StylingTagContainer>
           {learnMoreLink && (
             <MobileFooterContainer>
