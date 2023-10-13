@@ -1,11 +1,639 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Search Results Page Facets component renders all facets 1`] = `
+.emotion-0 {
+  margin-bottom: 36px;
+}
+
+.emotion-1 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.emotion-1 strong,
+.emotion-1 b {
+  font-weight: 700;
+}
+
+.emotion-4 {
+  margin-left: 22px;
+}
+
+.emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0 8px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #112733;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.emotion-6 {
+  color: #3D4F58;
+}
+
+<div
+  data-testid="facets-container"
+>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Genre
+    </p>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Reference
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Tutorial
+    </div>
+  </div>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Target Product
+    </p>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Atlas
+    </div>
+    <div
+      class="emotion-4"
+    >
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        App Services
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Charts
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Atlas CLI
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Data API
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Data Federation
+      </div>
+      <div
+        class="emotion-5"
+      >
+        <svg
+          aria-label="Chevron Down Icon"
+          class="emotion-6"
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        Show more
+      </div>
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      BI Connector
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Cloud Manager
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Cluster-to-Cluster Sync
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Community Kubernetes Operator
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Compass
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Database Tools
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Drivers
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Enterprise Kubernetes Operator
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Kafka Connector
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      MongoDB Analyzer
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      MongoDB CLI
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      MongoDB for VS Code
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      MongoDB Shell
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Ops Manager
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Realm
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Relational Migrator
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Server
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Spark Connector
+    </div>
+  </div>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Programming Language
+    </p>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Objective C
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      C
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      C#
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      C++
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Dart
+    </div>
+    <div
+      class="emotion-5"
+    >
+      <svg
+        aria-label="Chevron Down Icon"
+        class="emotion-6"
+        fill="none"
+        height="16"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      Show more
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Search Results Page Facets component renders facets with selected values 1`] = `
+.emotion-0 {
+  margin-bottom: 36px;
+}
+
+.emotion-1 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.emotion-1 strong,
+.emotion-1 b {
+  font-weight: 700;
+}
+
+.emotion-4 {
+  margin-left: 22px;
+}
+
+.emotion-5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0 8px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #112733;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.emotion-6 {
+  color: #3D4F58;
+}
+
+<div
+  data-testid="facets-container"
+>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Genre
+    </p>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Reference
+    </div>
+    <div
+      data-checked="true"
+      data-indeterminate="false"
+    >
+      Tutorial
+    </div>
+  </div>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Target Product
+    </p>
+    <div
+      data-checked="false"
+      data-indeterminate="true"
+    >
+      Atlas
+    </div>
+    <div
+      class="emotion-4"
+    >
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        App Services
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Charts
+      </div>
+      <div
+        data-checked="true"
+        data-indeterminate="false"
+      >
+        Atlas CLI
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Data API
+      </div>
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Data Federation
+      </div>
+      <div
+        class="emotion-5"
+      >
+        <svg
+          aria-label="Chevron Down Icon"
+          class="emotion-6"
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        Show more
+      </div>
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      BI Connector
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Cloud Manager
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Cluster-to-Cluster Sync
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Community Kubernetes Operator
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Compass
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Database Tools
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Drivers
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Enterprise Kubernetes Operator
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Kafka Connector
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      MongoDB Analyzer
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      MongoDB CLI
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      MongoDB for VS Code
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      MongoDB Shell
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Ops Manager
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Realm
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Relational Migrator
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Server
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Spark Connector
+    </div>
+  </div>
+  <div
+    class="emotion-0"
+  >
+    <p
+      class="emotion-1"
+    >
+      Programming Language
+    </p>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Objective C
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      C
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      C#
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      C++
+    </div>
+    <div
+      data-checked="false"
+      data-indeterminate="false"
+    >
+      Dart
+    </div>
+    <div
+      class="emotion-5"
+    >
+      <svg
+        aria-label="Chevron Down Icon"
+        class="emotion-6"
+        fill="none"
+        height="16"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      Show more
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Search Results Page considers a given search filter query param and displays category and version tags 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -35,7 +663,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-2>h1:first-of-type {
   color: #00684A;
-  padding-bottom: 40px;
+  padding-bottom: 24px;
   margin: unset;
 }
 
@@ -43,11 +671,10 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -328,13 +955,23 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  padding-top: 16px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-.emotion-14 {
-  margin-top: 8px;
-}
-
-.emotion-17 {
+.emotion-15 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -356,7 +993,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-right: 8px;
 }
 
-.emotion-19 {
+.emotion-17 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -378,18 +1015,18 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-right: 8px;
 }
 
-.emotion-20 {
+.emotion-18 {
   display: none;
   margin-top: 16px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-20 {
+  .emotion-18 {
     display: block;
   }
 }
 
-.emotion-22 {
+.emotion-20 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -424,35 +1061,35 @@ exports[`Search Results Page considers a given search filter query param and dis
   height: 36px;
 }
 
-.emotion-22:focus,
-.emotion-22:focus-visible {
+.emotion-20:focus,
+.emotion-20:focus-visible {
   outline: none;
 }
 
-.emotion-22:active,
-.emotion-22:focus,
-.emotion-22:hover {
+.emotion-20:active,
+.emotion-20:focus,
+.emotion-20:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-22:focus {
+.emotion-20:focus {
   color: #001E2B;
 }
 
-.emotion-22:hover[aria-disabled='false'],
-.emotion-22:active {
+.emotion-20:hover[aria-disabled='false'],
+.emotion-20:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-22:focus-visible {
+.emotion-20:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-23 {
+.emotion-21 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -462,7 +1099,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   border-radius: 5px;
 }
 
-.emotion-24 {
+.emotion-22 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -484,14 +1121,14 @@ exports[`Search Results Page considers a given search filter query param and dis
   gap: 6px;
 }
 
-.emotion-25 {
+.emotion-23 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-26 {
+.emotion-24 {
   box-shadow: none;
   display: grid;
   grid-area: results;
@@ -500,18 +1137,18 @@ exports[`Search Results Page considers a given search filter query param and dis
   width: 100%;
 }
 
-.emotion-26:hover>.emotion-28:hover {
+.emotion-24:hover>.emotion-26:hover {
   opacity: 1;
   box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
 }
 
-.emotion-26:not(:hover)>.emotion-28 {
+.emotion-24:not(:hover)>.emotion-26 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-29 {
+.emotion-27 {
   color: #494747;
   height: 100%;
   -webkit-text-decoration: none;
@@ -526,38 +1163,38 @@ exports[`Search Results Page considers a given search filter query param and dis
   width: 100%;
 }
 
-.emotion-29:hover,
-.emotion-29:focus {
+.emotion-27:hover,
+.emotion-27:focus {
   color: #494747;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-29:hover .emotion-32,
-.emotion-29:focus .emotion-32 {
+.emotion-27:hover .emotion-30,
+.emotion-27:focus .emotion-30 {
   background-color: rgba(231, 238, 236, 0.4);
   -webkit-transition: background-color 150ms ease-in;
   transition: background-color 150ms ease-in;
 }
 
-.emotion-29>div {
+.emotion-27>div {
   padding: 20px;
   padding-left: 30px;
 }
 
-.emotion-29:hover,
-.emotion-29:focus {
+.emotion-27:hover,
+.emotion-27:focus {
   color: unset;
   -webkit-text-decoration: unset;
   text-decoration: unset;
 }
 
-.emotion-29:hover>div,
-.emotion-29:focus>div {
+.emotion-27:hover>div,
+.emotion-27:focus>div {
   background-color: unset!important;
 }
 
-.emotion-29:before {
+.emotion-27:before {
   content: '';
   position: absolute;
   top: calc(-16px / 2);
@@ -567,11 +1204,11 @@ exports[`Search Results Page considers a given search filter query param and dis
   background-color: transparent;
 }
 
-.emotion-31 {
+.emotion-29 {
   height: 100%;
 }
 
-.emotion-33 {
+.emotion-31 {
   font-family: 'Euclid Circular A';
   color: #016bf8;
   font-size: 13px;
@@ -591,14 +1228,14 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-33 {
+  .emotion-31 {
     font-size: 16px;
     line-height: 24px;
     font-weight: 600;
   }
 }
 
-.emotion-35 {
+.emotion-33 {
   font-size: 13px;
   line-height: 20px;
   margin-bottom: 16px;
@@ -609,7 +1246,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   min-height: 20px;
 }
 
-.emotion-37 {
+.emotion-35 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -619,17 +1256,17 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-weight: 400;
 }
 
-.emotion-37 strong,
-.emotion-37 b {
+.emotion-35 strong,
+.emotion-35 b {
   font-weight: 700;
 }
 
-.emotion-38 {
+.emotion-36 {
   bottom: 0;
   margin-bottom: 24px;
 }
 
-.emotion-44 {
+.emotion-42 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -640,21 +1277,21 @@ exports[`Search Results Page considers a given search filter query param and dis
   width: 100%;
 }
 
-.emotion-44>div:first-child {
+.emotion-42>div:first-child {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-44>div:last-child {
+.emotion-42>div:last-child {
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
-.emotion-45 {
+.emotion-43 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -673,7 +1310,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: center;
 }
 
-.emotion-50 {
+.emotion-48 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -696,7 +1333,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-50:before {
+.emotion-48:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -713,9 +1350,9 @@ exports[`Search Results Page considers a given search filter query param and dis
   transform: scale(0.8);
 }
 
-.emotion-50:active:before,
-.emotion-50:hover:before,
-.emotion-50:focus:before {
+.emotion-48:active:before,
+.emotion-48:hover:before,
+.emotion-48:focus:before {
   opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -723,58 +1360,58 @@ exports[`Search Results Page considers a given search filter query param and dis
   transform: scale(1);
 }
 
-.emotion-50:focus {
+.emotion-48:focus {
   outline: none;
 }
 
-.emotion-50:active,
-.emotion-50:hover {
+.emotion-48:active,
+.emotion-48:hover {
   color: #001E2B;
 }
 
-.emotion-50:active:before,
-.emotion-50:hover:before {
+.emotion-48:active:before,
+.emotion-48:hover:before {
   background-color: #E8EDEB;
 }
 
-.emotion-50:focus-visible {
+.emotion-48:focus-visible {
   color: #001E2B;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-50:focus-visible:before {
+.emotion-48:focus-visible:before {
   background-color: #E8EDEB;
 }
 
-.emotion-50:active,
-.emotion-50:hover {
+.emotion-48:active,
+.emotion-48:hover {
   color: #C1C7C6;
 }
 
-.emotion-50:active:before,
-.emotion-50:hover:before {
+.emotion-48:active:before,
+.emotion-48:hover:before {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-50:focus {
+.emotion-48:focus {
   color: #C1C7C6;
 }
 
-.emotion-50:focus:before {
+.emotion-48:focus:before {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-56 {
+.emotion-54 {
   grid-area: filters;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-56 {
+  .emotion-54 {
     display: none;
   }
 }
 
-.emotion-58 {
+.emotion-56 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -790,12 +1427,12 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-bottom: 16px;
 }
 
-.emotion-60 {
+.emotion-58 {
   grid-area: filters;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-60 {
+  .emotion-58 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -806,34 +1443,34 @@ exports[`Search Results Page considers a given search filter query param and dis
     flex-direction: row;
   }
 
-  .emotion-60>div {
+  .emotion-58>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-60 {
+  .emotion-58 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-60>div {
+  .emotion-58>div {
     width: 100%;
   }
 
-  .emotion-60>div:first-of-type {
+  .emotion-58>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 
-  .emotion-60>div>div {
+  .emotion-58>div>div {
     width: 100%;
   }
 }
 
-.emotion-62 {
+.emotion-60 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -848,25 +1485,25 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-bottom: 16px;
 }
 
-.emotion-64 {
+.emotion-62 {
   width: 175px;
 }
 
-.emotion-66 {
+.emotion-64 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-66 label,
-  .emotion-66 p,
-  .emotion-66 button,
-  .emotion-66 div,
-  .emotion-66 span {
+  .emotion-64 label,
+  .emotion-64 p,
+  .emotion-64 button,
+  .emotion-64 div,
+  .emotion-64 span {
     font-size: 13px;
   }
 }
 
-.emotion-67 {
+.emotion-65 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -876,22 +1513,22 @@ exports[`Search Results Page considers a given search filter query param and dis
   flex-direction: column;
 }
 
-.emotion-67>label+button,
-.emotion-67>p+button {
+.emotion-65>label+button,
+.emotion-65>p+button {
   margin-top: 3px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-67 label,
-  .emotion-67 p,
-  .emotion-67 button,
-  .emotion-67 div,
-  .emotion-67 span {
+  .emotion-65 label,
+  .emotion-65 p,
+  .emotion-65 button,
+  .emotion-65 div,
+  .emotion-65 span {
     font-size: 13px;
   }
 }
 
-.emotion-68 {
+.emotion-66 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -930,35 +1567,35 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-size: 13px;
 }
 
-.emotion-68:focus {
+.emotion-66:focus {
   outline: none;
 }
 
-.emotion-68[disabled],
-.emotion-68:disabled {
+.emotion-66[disabled],
+.emotion-66:disabled {
   pointer-events: none;
 }
 
-.emotion-68:active,
-.emotion-68:focus,
-.emotion-68:hover {
+.emotion-66:active,
+.emotion-66:focus,
+.emotion-66:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-68:hover,
-.emotion-68:active {
+.emotion-66:hover,
+.emotion-66:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-68:focus {
+.emotion-66:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-68>*:last-child {
+.emotion-66>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -966,33 +1603,33 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: flex-start;
 }
 
-.emotion-68>*:last-child>svg {
+.emotion-66>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-68>*:last-child>svg {
+.emotion-66>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-68>*:last-child {
+.emotion-66>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-68:focus {
+.emotion-66:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-68 {
+  .emotion-66 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-70 {
+.emotion-68 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -1012,7 +1649,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   gap: 6px;
 }
 
-.emotion-71 {
+.emotion-69 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1032,14 +1669,14 @@ exports[`Search Results Page considers a given search filter query param and dis
   overflow: hidden;
 }
 
-.emotion-72 {
+.emotion-70 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-73 {
+.emotion-71 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -1049,7 +1686,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-self: left;
 }
 
-.emotion-80 {
+.emotion-78 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -1088,42 +1725,42 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-size: 13px;
 }
 
-.emotion-80:focus {
+.emotion-78:focus {
   outline: none;
 }
 
-.emotion-80[disabled],
-.emotion-80:disabled {
+.emotion-78[disabled],
+.emotion-78:disabled {
   pointer-events: none;
 }
 
-.emotion-80:active,
-.emotion-80:focus,
-.emotion-80:hover {
+.emotion-78:active,
+.emotion-78:focus,
+.emotion-78:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-80:hover,
-.emotion-80:active {
+.emotion-78:hover,
+.emotion-78:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-80,
-.emotion-80:hover {
+.emotion-78,
+.emotion-78:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-80:focus {
+.emotion-78:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-80>*:last-child {
+.emotion-78>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -1131,46 +1768,46 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: flex-start;
 }
 
-.emotion-80>*:last-child>svg {
+.emotion-78>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-80>*:last-child>svg {
+.emotion-78>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-80>*:last-child {
+.emotion-78>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-80:focus {
+.emotion-78:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-80:disabled {
+.emotion-78:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-80:disabled:active {
+.emotion-78:disabled:active {
   pointer-events: none;
 }
 
-.emotion-80:disabled {
+.emotion-78:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-80:disabled>*:last-child>svg {
+.emotion-78:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-80 {
+  .emotion-78 {
     height: 36px;
     font-size: 16px;
   }
@@ -1247,30 +1884,26 @@ exports[`Search Results Page considers a given search filter query param and dis
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        stitch
+      </span>
       <div
         class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
       >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          stitch
-        </span>
-        <div
-          class="emotion-14 emotion-15"
-        >
+        <div>
           <span
-            class="emotion-16 emotion-17"
+            class="emotion-14 emotion-15"
           >
             Realm
             <svg
               aria-label="X Icon"
-              class=""
+              class="name styles map toString"
               fill="none"
               height="16"
               role="img"
-              style="margin-left: 8px; margin-right: -2px;"
               viewBox="0 0 16 16"
               width="16"
               xmlns="http://www.w3.org/2000/svg"
@@ -1284,30 +1917,30 @@ exports[`Search Results Page considers a given search filter query param and dis
             </svg>
           </span>
           <span
-            class="emotion-16 emotion-19"
+            class="emotion-14 emotion-17"
           >
             Latest
           </span>
         </div>
       </div>
       <div
-        class="emotion-20 emotion-21"
+        class="emotion-18 emotion-19"
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-22"
+          class="lg-ui-button-0000 emotion-20"
           type="button"
         >
           <div
-            class="emotion-23"
+            class="emotion-21"
           />
           <div
-            class="emotion-24"
+            class="emotion-22"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-25"
+              class="emotion-23"
               fill="none"
               height="16"
               role="presentation"
@@ -1328,22 +1961,22 @@ exports[`Search Results Page considers a given search filter query param and dis
       </div>
     </div>
     <div
-      class="emotion-26 emotion-27"
+      class="emotion-24 emotion-25"
     >
       <a
-        class="emotion-28 emotion-29 emotion-30"
+        class="emotion-26 emotion-27 emotion-28"
         href="stitch.withfilters"
       >
         <div
-          class="emotion-31 emotion-32"
+          class="emotion-29 emotion-30"
         >
           <p
-            class="emotion-33 emotion-34"
+            class="emotion-31 emotion-32"
           >
             stitch (realm filter)
           </p>
           <p
-            class="emotion-35 emotion-36 emotion-37"
+            class="emotion-33 emotion-34 emotion-35"
             maxlines="2"
           >
             <span
@@ -1354,15 +1987,15 @@ exports[`Search Results Page considers a given search filter query param and dis
              preview (with realm filter)
           </p>
           <div
-            class="emotion-38 emotion-39"
+            class="emotion-36 emotion-37"
           >
             <span
-              class="emotion-40 emotion-17"
+              class="emotion-38 emotion-15"
             >
               Realm
             </span>
             <span
-              class="emotion-40 emotion-19"
+              class="emotion-38 emotion-17"
             >
               Latest
             </span>
@@ -1370,26 +2003,26 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
       </a>
       <div
-        class="emotion-44"
+        class="emotion-42"
       >
         <div
-          class="emotion-45"
+          class="emotion-43"
         />
         <div
-          class="emotion-45"
+          class="emotion-43"
         >
           <p
-            class="emotion-37"
+            class="emotion-35"
             data-testid="lg-pagination-item-range"
           >
             1 - 10 of many
           </p>
         </div>
         <div
-          class="emotion-45"
+          class="emotion-43"
         >
           <p
-            class="emotion-37"
+            class="emotion-35"
             data-testid="lg-pagination-page-range"
           >
             1 of many
@@ -1397,7 +2030,7 @@ exports[`Search Results Page considers a given search filter query param and dis
           <button
             aria-disabled="true"
             aria-label="Previous page"
-            class="emotion-50"
+            class="emotion-48"
             data-testid="lg-pagination-back-button"
             tabindex="0"
           >
@@ -1424,7 +2057,7 @@ exports[`Search Results Page considers a given search filter query param and dis
           <button
             aria-disabled="true"
             aria-label="Next page"
-            class="emotion-50"
+            class="emotion-48"
             data-testid="lg-pagination-next-button"
             tabindex="0"
           >
@@ -1452,50 +2085,50 @@ exports[`Search Results Page considers a given search filter query param and dis
       </div>
     </div>
     <div
-      class="emotion-56 emotion-130"
+      class="emotion-54 emotion-55"
     >
       <h2
-        class="emotion-58 emotion-59"
+        class="emotion-56 emotion-57"
       >
         Refine your search
       </h2>
       <div
-        class="emotion-60 emotion-61"
+        class="emotion-58 emotion-59"
       >
         <div
-          class="emotion-62 emotion-63"
+          class="emotion-60 emotion-61"
         >
           <div
-            class="emotion-64 emotion-65 emotion-66"
+            class="emotion-62 emotion-63 emotion-64"
           >
             <div
-              class="emotion-67"
+              class="emotion-65"
             >
               <button
-                aria-controls="select-33-menu"
-                aria-describedby="select-33-description"
+                aria-controls="select-81-menu"
+                aria-describedby="select-81-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-68"
+                class="emotion-66"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-34"
+                id="select-82"
                 type="button"
                 value="Realm"
               >
                 <div
-                  class="emotion-23"
+                  class="emotion-21"
                 />
                 <div
-                  class="emotion-70"
+                  class="emotion-68"
                 >
                   <div
-                    class="emotion-71"
+                    class="emotion-69"
                   >
                     <div
-                      class="emotion-72"
+                      class="emotion-70"
                     >
                       Realm
                     </div>
@@ -1503,7 +2136,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-73"
+                    class="emotion-71"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -1520,40 +2153,40 @@ exports[`Search Results Page considers a given search filter query param and dis
           </div>
         </div>
         <div
-          class="emotion-62 emotion-63"
+          class="emotion-60 emotion-61"
         >
           <div
-            class="emotion-64 emotion-65 emotion-66"
+            class="emotion-62 emotion-63 emotion-64"
           >
             <div
-              class="emotion-67"
+              class="emotion-65"
             >
               <button
-                aria-controls="select-35-menu"
-                aria-describedby="select-35-description"
+                aria-controls="select-83-menu"
+                aria-describedby="select-83-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-80"
+                class="emotion-78"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-36"
+                id="select-84"
                 type="button"
                 value="Latest"
               >
                 <div
-                  class="emotion-23"
+                  class="emotion-21"
                 />
                 <div
-                  class="emotion-70"
+                  class="emotion-68"
                 >
                   <div
-                    class="emotion-71"
+                    class="emotion-69"
                   >
                     <div
-                      class="emotion-72"
+                      class="emotion-70"
                     >
                       Latest
                     </div>
@@ -1561,7 +2194,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-73"
+                    class="emotion-71"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -1579,19 +2212,19 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-22"
+          class="lg-ui-button-0000 emotion-20"
           type="button"
         >
           <div
-            class="emotion-23"
+            class="emotion-21"
           />
           <div
-            class="emotion-24"
+            class="emotion-22"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-25"
+              class="emotion-23"
               fill="none"
               height="16"
               role="presentation"
@@ -1618,9 +2251,9 @@ exports[`Search Results Page considers a given search filter query param and dis
 exports[`Search Results Page does not return results for a given search term with an ill-formed searchProperty 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -1650,7 +2283,7 @@ exports[`Search Results Page does not return results for a given search term wit
 
 .emotion-2>h1:first-of-type {
   color: #00684A;
-  padding-bottom: 40px;
+  padding-bottom: 24px;
   margin: unset;
 }
 
@@ -1658,11 +2291,10 @@ exports[`Search Results Page does not return results for a given search term wit
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -1943,6 +2575,20 @@ exports[`Search Results Page does not return results for a given search term wit
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  padding-top: 16px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-14 {
@@ -2060,7 +2706,6 @@ exports[`Search Results Page does not return results for a given search term wit
 
 .emotion-20 {
   margin-bottom: calc(50vh - 28px - 40px - 166px / 2);
-  margin-top: calc(50vh - 28px - 40px - 166px / 2);
   grid-area: results;
   margin-top: 80px;
 }
@@ -2079,16 +2724,6 @@ exports[`Search Results Page does not return results for a given search term wit
 .emotion-24 {
   padding-left: 56px;
   padding-top: 20px;
-}
-
-.emotion-26 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 500;
-  color: #001E2B;
 }
 
 .emotion-27 {
@@ -2585,17 +3220,15 @@ exports[`Search Results Page does not return results for a given search term wit
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        realm
+      </span>
       <div
         class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          realm
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -2634,7 +3267,7 @@ exports[`Search Results Page does not return results for a given search term wit
       </div>
     </div>
     <div
-      class="emotion-20 emotion-132"
+      class="emotion-20 emotion-131"
     >
       <div
         class="emotion-22 emotion-23"
@@ -2903,7 +3536,7 @@ exports[`Search Results Page does not return results for a given search term wit
           class="emotion-24 emotion-25"
         >
           <h3
-            class="emotion-26"
+            class="emotion-4"
           >
             No results found
           </h3>
@@ -2916,7 +3549,7 @@ exports[`Search Results Page does not return results for a given search term wit
       </div>
     </div>
     <div
-      class="emotion-29 emotion-130"
+      class="emotion-29 emotion-30"
     >
       <h2
         class="emotion-31 emotion-32"
@@ -2936,8 +3569,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-40"
             >
               <button
-                aria-controls="select-53-menu"
-                aria-describedby="select-53-description"
+                aria-controls="select-109-menu"
+                aria-describedby="select-109-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -2945,7 +3578,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 class="emotion-41"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-54"
+                id="select-110"
                 type="button"
                 value=""
               >
@@ -2993,8 +3626,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-40"
             >
               <button
-                aria-controls="select-55-menu"
-                aria-describedby="select-55-description"
+                aria-controls="select-111-menu"
+                aria-describedby="select-111-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -3003,7 +3636,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-56"
+                id="select-112"
                 type="button"
                 value=""
               >
@@ -3082,9 +3715,9 @@ exports[`Search Results Page does not return results for a given search term wit
 exports[`Search Results Page renders correctly without browser 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -3114,7 +3747,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 
 .emotion-2>h1:first-of-type {
   color: #00684A;
-  padding-bottom: 40px;
+  padding-bottom: 24px;
   margin: unset;
 }
 
@@ -3122,11 +3755,10 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -3302,27 +3934,17 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 }
 
 .emotion-9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
-
-.emotion-11 {
   display: none;
   margin-top: 16px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-11 {
+  .emotion-9 {
     display: block;
   }
 }
 
-.emotion-13 {
+.emotion-11 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -3357,35 +3979,35 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   height: 36px;
 }
 
-.emotion-13:focus,
-.emotion-13:focus-visible {
+.emotion-11:focus,
+.emotion-11:focus-visible {
   outline: none;
 }
 
-.emotion-13:active,
-.emotion-13:focus,
-.emotion-13:hover {
+.emotion-11:active,
+.emotion-11:focus,
+.emotion-11:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-13:focus {
+.emotion-11:focus {
   color: #001E2B;
 }
 
-.emotion-13:hover[aria-disabled='false'],
-.emotion-13:active {
+.emotion-11:hover[aria-disabled='false'],
+.emotion-11:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-13:focus-visible {
+.emotion-11:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-14 {
+.emotion-12 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -3395,7 +4017,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   border-radius: 5px;
 }
 
-.emotion-15 {
+.emotion-13 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -3417,7 +4039,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   gap: 6px;
 }
 
-.emotion-16 {
+.emotion-14 {
   color: #889397;
   height: 16px;
   width: 16px;
@@ -3468,33 +4090,28 @@ exports[`Search Results Page renders correctly without browser 1`] = `
           />
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      />
       <div
         class="emotion-9 emotion-10"
-        style="padding-top: 10px;"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        />
-      </div>
-      <div
-        class="emotion-11 emotion-12"
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-13"
+          class="lg-ui-button-0000 emotion-11"
           type="button"
         >
           <div
-            class="emotion-14"
+            class="emotion-12"
           />
           <div
-            class="emotion-15"
+            class="emotion-13"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-16"
+              class="emotion-14"
               fill="none"
               height="16"
               role="presentation"
@@ -3521,9 +4138,9 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 exports[`Search Results Page renders loading images before returning no results 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -3553,7 +4170,7 @@ exports[`Search Results Page renders loading images before returning no results 
 
 .emotion-2>h1:first-of-type {
   color: #00684A;
-  padding-bottom: 40px;
+  padding-bottom: 24px;
   margin: unset;
 }
 
@@ -3561,11 +4178,10 @@ exports[`Search Results Page renders loading images before returning no results 
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -3846,6 +4462,20 @@ exports[`Search Results Page renders loading images before returning no results 
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  padding-top: 16px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-14 {
@@ -3959,6 +4589,489 @@ exports[`Search Results Page renders loading images before returning no results 
   height: 16px;
   width: 16px;
   justify-self: right;
+}
+
+.emotion-20 {
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-auto-rows: calc(152px + 16px);
+  height: 100%;
+  width: 100%;
+}
+
+.emotion-20:hover>.e1yoi6mj5:hover {
+  opacity: 1;
+  box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
+}
+
+.emotion-20:not(:hover)>.e1yoi6mj5 {
+  opacity: 1;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-22 {
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 45px;
+  background-color: #fff;
+  height: 152px;
+  position: relative;
+  place-self: center;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  color: red;
+  box-sizing: border-box;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+.emotion-22>div {
+  padding: 20px;
+  padding-left: 30px;
+}
+
+.emotion-22:hover,
+.emotion-22:focus {
+  color: unset;
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+.emotion-22:hover>div,
+.emotion-22:focus>div {
+  background-color: unset!important;
+}
+
+.emotion-22:before {
+  content: '';
+  position: absolute;
+  top: calc(-16px / 2);
+  left: 0;
+  right: 0;
+  bottom: calc(-16px / 2);
+  background-color: transparent;
+}
+
+.emotion-22 * {
+  padding: 2px;
+  height: 15px!important;
+  margin-right: 10px!important;
+}
+
+.emotion-42 {
+  grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-42 {
+    display: none;
+  }
+}
+
+.emotion-44 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #3D4F58;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: 'Euclid Circular A';
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.emotion-46 {
+  grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-46 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: none;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .emotion-46>div {
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-46 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .emotion-46>div {
+    width: 100%;
+  }
+
+  .emotion-46>div:first-of-type {
+    margin-bottom: 8px;
+    margin-right: 0;
+  }
+
+  .emotion-46>div>div {
+    width: 100%;
+  }
+}
+
+.emotion-48 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.emotion-50 {
+  width: 175px;
+}
+
+.emotion-52 {
+  position: relative;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-52 label,
+  .emotion-52 p,
+  .emotion-52 button,
+  .emotion-52 div,
+  .emotion-52 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-53 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-53>label+button,
+.emotion-53>p+button {
+  margin-top: 3px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-53 label,
+  .emotion-53 p,
+  .emotion-53 button,
+  .emotion-53 div,
+  .emotion-53 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-54 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-54:focus {
+  outline: none;
+}
+
+.emotion-54[disabled],
+.emotion-54:disabled {
+  pointer-events: none;
+}
+
+.emotion-54:active,
+.emotion-54:focus,
+.emotion-54:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-54:hover,
+.emotion-54:active {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-54:focus {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-54>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-54>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-54>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-54>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-54:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-54 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+.emotion-56 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-57 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.emotion-58 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.emotion-59 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  justify-self: left;
+}
+
+.emotion-66 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-66:focus {
+  outline: none;
+}
+
+.emotion-66[disabled],
+.emotion-66:disabled {
+  pointer-events: none;
+}
+
+.emotion-66:active,
+.emotion-66:focus,
+.emotion-66:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-66:hover,
+.emotion-66:active {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-66,
+.emotion-66:hover {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+  color: #889397;
+  cursor: not-allowed;
+}
+
+.emotion-66:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-66>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-66>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-66>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-66>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-66:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.emotion-66:disabled {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-66:disabled:active {
+  pointer-events: none;
+}
+
+.emotion-66:disabled {
+  background-color: #E8EDEB;
+  color: #889397;
+}
+
+.emotion-66:disabled>*:last-child>svg {
+  color: #889397;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-66 {
+    height: 36px;
+    font-size: 16px;
+  }
 }
 
 <div
@@ -4032,17 +5145,15 @@ exports[`Search Results Page renders loading images before returning no results 
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        noresultsreturned
+      </span>
       <div
         class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          noresultsreturned
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -4080,6 +5191,620 @@ exports[`Search Results Page renders loading images before returning no results 
         </button>
       </div>
     </div>
+    <div
+      class="emotion-20 emotion-21"
+    >
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="emotion-42 emotion-43"
+    >
+      <h2
+        class="emotion-44 emotion-45"
+      >
+        Refine your search
+      </h2>
+      <div
+        class="emotion-46 emotion-47"
+      >
+        <div
+          class="emotion-48 emotion-49"
+        >
+          <div
+            class="emotion-50 emotion-51 emotion-52"
+          >
+            <div
+              class="emotion-53"
+            >
+              <button
+                aria-controls="select-17-menu"
+                aria-describedby="select-17-description"
+                aria-disabled="false"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-54"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                id="select-18"
+                type="button"
+                value=""
+              >
+                <div
+                  class="emotion-17"
+                />
+                <div
+                  class="emotion-56"
+                >
+                  <div
+                    class="emotion-57"
+                  >
+                    <div
+                      class="emotion-58"
+                    >
+                      Filter by Category
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-59"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="emotion-48 emotion-49"
+        >
+          <div
+            class="emotion-50 emotion-51 emotion-52"
+          >
+            <div
+              class="emotion-53"
+            >
+              <button
+                aria-controls="select-19-menu"
+                aria-describedby="select-19-description"
+                aria-disabled="true"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-66"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                disabled=""
+                id="select-20"
+                type="button"
+                value=""
+              >
+                <div
+                  class="emotion-17"
+                />
+                <div
+                  class="emotion-56"
+                >
+                  <div
+                    class="emotion-57"
+                  >
+                    <div
+                      class="emotion-58"
+                    >
+                      Filter by Version
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-59"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button
+          aria-disabled="false"
+          class="lg-ui-button-0000 emotion-16"
+          type="button"
+        >
+          <div
+            class="emotion-17"
+          />
+          <div
+            class="emotion-18"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="emotion-19"
+              fill="none"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Clear all filters
+          </div>
+        </button>
+      </div>
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -4087,9 +5812,9 @@ exports[`Search Results Page renders loading images before returning no results 
 exports[`Search Results Page renders loading images before returning nonempty results 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -4119,7 +5844,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
 
 .emotion-2>h1:first-of-type {
   color: #00684A;
-  padding-bottom: 40px;
+  padding-bottom: 24px;
   margin: unset;
 }
 
@@ -4127,11 +5852,10 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -4412,6 +6136,20 @@ exports[`Search Results Page renders loading images before returning nonempty re
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  padding-top: 16px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-14 {
@@ -4527,6 +6265,489 @@ exports[`Search Results Page renders loading images before returning nonempty re
   justify-self: right;
 }
 
+.emotion-20 {
+  box-shadow: none;
+  display: grid;
+  grid-area: results;
+  grid-auto-rows: calc(152px + 16px);
+  height: 100%;
+  width: 100%;
+}
+
+.emotion-20:hover>.e1yoi6mj5:hover {
+  opacity: 1;
+  box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
+}
+
+.emotion-20:not(:hover)>.e1yoi6mj5 {
+  opacity: 1;
+  -webkit-transition: opacity 150ms ease-in;
+  transition: opacity 150ms ease-in;
+}
+
+.emotion-22 {
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 45px;
+  background-color: #fff;
+  height: 152px;
+  position: relative;
+  place-self: center;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(231, 238, 236, 1)!important;
+  color: red;
+  box-sizing: border-box;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+.emotion-22>div {
+  padding: 20px;
+  padding-left: 30px;
+}
+
+.emotion-22:hover,
+.emotion-22:focus {
+  color: unset;
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+.emotion-22:hover>div,
+.emotion-22:focus>div {
+  background-color: unset!important;
+}
+
+.emotion-22:before {
+  content: '';
+  position: absolute;
+  top: calc(-16px / 2);
+  left: 0;
+  right: 0;
+  bottom: calc(-16px / 2);
+  background-color: transparent;
+}
+
+.emotion-22 * {
+  padding: 2px;
+  height: 15px!important;
+  margin-right: 10px!important;
+}
+
+.emotion-42 {
+  grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-42 {
+    display: none;
+  }
+}
+
+.emotion-44 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  color: #3D4F58;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: 'Euclid Circular A';
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.emotion-46 {
+  grid-area: filters;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-46 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: none;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .emotion-46>div {
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-46 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .emotion-46>div {
+    width: 100%;
+  }
+
+  .emotion-46>div:first-of-type {
+    margin-bottom: 8px;
+    margin-right: 0;
+  }
+
+  .emotion-46>div>div {
+    width: 100%;
+  }
+}
+
+.emotion-48 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.emotion-50 {
+  width: 175px;
+}
+
+.emotion-52 {
+  position: relative;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-52 label,
+  .emotion-52 p,
+  .emotion-52 button,
+  .emotion-52 div,
+  .emotion-52 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-53 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-53>label+button,
+.emotion-53>p+button {
+  margin-top: 3px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-53 label,
+  .emotion-53 p,
+  .emotion-53 button,
+  .emotion-53 div,
+  .emotion-53 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-54 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-54:focus {
+  outline: none;
+}
+
+.emotion-54[disabled],
+.emotion-54:disabled {
+  pointer-events: none;
+}
+
+.emotion-54:active,
+.emotion-54:focus,
+.emotion-54:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-54:hover,
+.emotion-54:active {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-54:focus {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-54>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-54>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-54>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-54>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-54:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-54 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+.emotion-56 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-57 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.emotion-58 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.emotion-59 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  height: 16px;
+  width: 16px;
+  justify-self: left;
+}
+
+.emotion-66 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  font-weight: 400;
+  background-color: #FFFFFF;
+  color: #5C6C75;
+  width: 100%;
+  font-size: 13px;
+}
+
+.emotion-66:focus {
+  outline: none;
+}
+
+.emotion-66[disabled],
+.emotion-66:disabled {
+  pointer-events: none;
+}
+
+.emotion-66:active,
+.emotion-66:focus,
+.emotion-66:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-66:hover,
+.emotion-66:active {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-66,
+.emotion-66:hover {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+  color: #889397;
+  cursor: not-allowed;
+}
+
+.emotion-66:focus {
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-66>*:last-child {
+  grid-template-columns: 1fr 16px;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.emotion-66>*:last-child>svg {
+  justify-self: right;
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-66>*:last-child>svg {
+  color: #3D4F58;
+}
+
+.emotion-66>*:last-child {
+  padding: 0 4px 0 12px;
+}
+
+.emotion-66:focus {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.emotion-66:disabled {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-66:disabled:active {
+  pointer-events: none;
+}
+
+.emotion-66:disabled {
+  background-color: #E8EDEB;
+  color: #889397;
+}
+
+.emotion-66:disabled>*:last-child>svg {
+  color: #889397;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-66 {
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -4598,17 +6819,15 @@ exports[`Search Results Page renders loading images before returning nonempty re
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        stitch
+      </span>
       <div
         class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          stitch
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -4646,6 +6865,620 @@ exports[`Search Results Page renders loading images before returning nonempty re
         </button>
       </div>
     </div>
+    <div
+      class="emotion-20 emotion-21"
+    >
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+      <div
+        class="emotion-22 emotion-23"
+      >
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 200px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <br />
+        </span>
+        <span
+          aria-busy="true"
+          aria-live="polite"
+        >
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+          <span
+            class="react-loading-skeleton"
+            style="width: 60px; border-radius: 12px;"
+          >
+            ‌
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="emotion-42 emotion-43"
+    >
+      <h2
+        class="emotion-44 emotion-45"
+      >
+        Refine your search
+      </h2>
+      <div
+        class="emotion-46 emotion-47"
+      >
+        <div
+          class="emotion-48 emotion-49"
+        >
+          <div
+            class="emotion-50 emotion-51 emotion-52"
+          >
+            <div
+              class="emotion-53"
+            >
+              <button
+                aria-controls="select-1-menu"
+                aria-describedby="select-1-description"
+                aria-disabled="false"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-54"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                id="select-2"
+                type="button"
+                value=""
+              >
+                <div
+                  class="emotion-17"
+                />
+                <div
+                  class="emotion-56"
+                >
+                  <div
+                    class="emotion-57"
+                  >
+                    <div
+                      class="emotion-58"
+                    >
+                      Filter by Category
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-59"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="emotion-48 emotion-49"
+        >
+          <div
+            class="emotion-50 emotion-51 emotion-52"
+          >
+            <div
+              class="emotion-53"
+            >
+              <button
+                aria-controls="select-3-menu"
+                aria-describedby="select-3-description"
+                aria-disabled="true"
+                aria-expanded="false"
+                aria-invalid="false"
+                aria-labelledby="select"
+                class="emotion-66"
+                data-leafygreen-ui="button"
+                data-testid="lg-select"
+                disabled=""
+                id="select-4"
+                type="button"
+                value=""
+              >
+                <div
+                  class="emotion-17"
+                />
+                <div
+                  class="emotion-56"
+                >
+                  <div
+                    class="emotion-57"
+                  >
+                    <div
+                      class="emotion-58"
+                    >
+                      Filter by Version
+                    </div>
+                  </div>
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-59"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button
+          aria-disabled="false"
+          class="lg-ui-button-0000 emotion-16"
+          type="button"
+        >
+          <div
+            class="emotion-17"
+          />
+          <div
+            class="emotion-18"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="emotion-19"
+              fill="none"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Clear all filters
+          </div>
+        </button>
+      </div>
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -4653,9 +7486,9 @@ exports[`Search Results Page renders loading images before returning nonempty re
 exports[`Search Results Page renders results from a given search term query param and displays category and version tags 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: grid;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  display: grid;
   grid-template-areas: 'header .' 'results filters';
   grid-template-columns: auto 173px;
   margin: 32px 108px 64px 32px;
@@ -4685,7 +7518,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-2>h1:first-of-type {
   color: #00684A;
-  padding-bottom: 40px;
+  padding-bottom: 24px;
   margin: unset;
 }
 
@@ -4693,11 +7526,10 @@ exports[`Search Results Page renders results from a given search term query para
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 62px;
-  font-family: 'MongoDB Value Serif','Times New Roman',serif;
-  color: #00684A;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: #001E2B;
 }
 
 .emotion-5 {
@@ -4978,6 +7810,20 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  padding-top: 16px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-14 {
@@ -5895,17 +8741,15 @@ exports[`Search Results Page renders results from a given search term query para
           </button>
         </div>
       </form>
+      <span
+        class="sl-search-keyword"
+        style="display: none;"
+      >
+        stitch
+      </span>
       <div
         class="emotion-12 emotion-13"
-        style="padding-top: 10px;"
-      >
-        <span
-          class="sl-search-keyword"
-          style="display: none;"
-        >
-          stitch
-        </span>
-      </div>
+      />
       <div
         class="emotion-14 emotion-15"
       >
@@ -6068,7 +8912,7 @@ exports[`Search Results Page renders results from a given search term query para
       </div>
     </div>
     <div
-      class="emotion-50 emotion-130"
+      class="emotion-50 emotion-51"
     >
       <h2
         class="emotion-52 emotion-53"
@@ -6088,8 +8932,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-61"
             >
               <button
-                aria-controls="select-17-menu"
-                aria-describedby="select-17-description"
+                aria-controls="select-57-menu"
+                aria-describedby="select-57-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -6097,7 +8941,7 @@ exports[`Search Results Page renders results from a given search term query para
                 class="emotion-62"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-18"
+                id="select-58"
                 type="button"
                 value=""
               >
@@ -6145,8 +8989,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-61"
             >
               <button
-                aria-controls="select-19-menu"
-                aria-describedby="select-19-description"
+                aria-controls="select-59-menu"
+                aria-describedby="select-59-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -6155,7 +8999,7 @@ exports[`Search Results Page renders results from a given search term query para
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-20"
+                id="select-60"
                 type="button"
                 value=""
               >

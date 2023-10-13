@@ -37,4 +37,4 @@ const saveStaticFiles = async (staticFiles) => {
   );
 };
 
-module.exports = { saveAssetFiles, saveStaticFiles };
+module.exports = { saveAssetFiles, saveStaticFiles, saveFile };

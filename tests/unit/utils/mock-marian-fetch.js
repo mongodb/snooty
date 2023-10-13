@@ -1,4 +1,5 @@
 import { MARIAN_URL } from '../../../src/constants';
+import { statusV2 } from '../data/SearchResults.test.json';
 
 const allowJsonPromise = (x) => ({ json: () => x });
 
@@ -43,7 +44,8 @@ export const mockMarianFetch = (url) => {
       return allowJsonPromise({
         results: [RESULT_ILL_FORMED_SEARCHPROPERTY],
       });
-
+    case 'v2/status':
+      return allowJsonPromise(statusV2);
     default:
       return allowJsonPromise(['atlas-master']);
   }

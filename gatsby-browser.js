@@ -10,3 +10,10 @@ export const wrapRootElement = ({ element }) => (
     <LeafyGreenProvider baseFontSize={16}>{element}</LeafyGreenProvider>
   </ThemeProvider>
 );
+
+export const shouldUpdateScroll = ({ routerProps: { location } }) => {
+  if (location?.state?.preserveScroll) {
+    return false;
+  }
+  return true;
+};

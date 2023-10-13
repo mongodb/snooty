@@ -10,21 +10,24 @@ const CAPTION_TEXT = 'click to enlarge';
 const StyledModal = styled(Modal)`
   // Set z-index to appear above side nav and top navbar
   z-index: 10;
+  margin-top: 64px;
 
   @media ${theme.screenSize.largeAndUp} {
     div[role='dialog'] {
-      width: 80%;
+      max-width: 80%;
+    }
+    img {
+      max-height: 620px;
     }
   }
 
   @media ${theme.screenSize.upToLarge} {
     div[role='dialog'] {
-      width: 100%;
+      max-width: 100%;
     }
-  }
-
-  img {
-    width: 100%;
+    img {
+      max-height: 300px;
+    }
   }
 `;
 
@@ -43,6 +46,7 @@ const LightboxWrapper = styled('div')`
   margin-top: ${theme.size.medium};
   margin-bottom: ${theme.size.medium};
   display: block;
+  max-height: 620px;
 `;
 
 const Lightbox = ({ nodeData, ...rest }) => {
@@ -57,7 +61,7 @@ const Lightbox = ({ nodeData, ...rest }) => {
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
       </LightboxWrapper>
-      <StyledModal size="large" open={open} setOpen={setOpen}>
+      <StyledModal size="medium" open={open} setOpen={setOpen}>
         <Image nodeData={nodeData} />
       </StyledModal>
     </React.Fragment>

@@ -1,7 +1,10 @@
-import { createContext, useState } from 'react';
+import { createContext, useCallback, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { navigate } from 'gatsby';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
+
+export const FACETS_KEY_PREFIX = 'facets.';
+export const FACETS_LEVEL_KEY = '>';
 
 // Simple context to pass search results, ref, and filters to children
 const SearchContext = createContext({
@@ -16,15 +19,19 @@ const SearchContext = createContext({
   setSelectedVersion: () => {},
   setSelectedCategory: () => {},
   setShowMobileFilters: () => {},
+  handleFacetChange: () => {},
+  clearFacets: () => {},
   shouldAutofocus: false,
+  showFacets: false,
+  searchParams: {},
 });
 
-const SearchContextProvider = ({ children }) => {
+const SearchContextProvider = ({ children, showFacets = false }) => {
   const { search } = useLocation();
   const { filters, searchPropertyMapping } = useMarianManifests();
   // get vars from URL
   // state management for Search is within URL.
-  const searchParams = new URLSearchParams(search);
+  const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
   const page = parseInt(searchParams.get('page') || 1);
   const searchTerm = searchParams.get('q');
   const searchFilter = searchParams.get('searchProperty');
@@ -53,8 +60,40 @@ const SearchContextProvider = ({ children }) => {
     if (page) {
       newSearch.set('page', page);
     }
-    navigate(`?${newSearch.toString()}`);
+    setSearchParams(newSearch);
+    navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
   };
+
+  const handleFacetChange = useCallback(
+    (facets) => {
+      const newSearch = new URLSearchParams(search);
+
+      facets.forEach(({ key, id, checked }) => {
+        const paramKey = FACETS_KEY_PREFIX + key;
+        if (checked) {
+          // Avoid duplicate param keys with the same values
+          if (!newSearch.getAll(paramKey).includes(id)) {
+            newSearch.append(paramKey, id);
+          }
+        } else {
+          newSearch.delete(FACETS_KEY_PREFIX + key, id);
+        }
+      });
+      newSearch.set('page', 1);
+      setSearchParams(newSearch);
+      // The navigation might cause a small visual delay when facets are being checked
+      navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
+    },
+    [search]
+  );
+
+  const clearFacets = useCallback(() => {
+    const newSearch = new URLSearchParams();
+    newSearch.set('q', searchTerm);
+    newSearch.set('page', 1);
+    navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
+    setSearchParams(newSearch);
+  }, [searchTerm]);
 
   return (
     <SearchContext.Provider
@@ -65,8 +104,8 @@ const SearchContextProvider = ({ children }) => {
           onSearchChange({ page: p });
         },
         searchTerm,
-        setSearchTerm: (q) => {
-          onSearchChange({ searchTerm: q });
+        setSearchTerm: (q, p = 1) => {
+          onSearchChange({ searchTerm: q, page: p });
         },
         searchFilter,
         setSearchFilter: (searchProperty) => {
@@ -77,8 +116,12 @@ const SearchContextProvider = ({ children }) => {
         setSelectedCategory,
         selectedVersion,
         setSelectedVersion,
+        handleFacetChange,
+        clearFacets,
         showMobileFilters,
         setShowMobileFilters,
+        showFacets,
+        searchParams,
       }}
     >
       {children}
