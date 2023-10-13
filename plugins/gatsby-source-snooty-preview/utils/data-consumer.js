@@ -98,12 +98,12 @@ const handlePage = (
   }
 
   const metadataNodeId = createSnootyMetadataId({ createNodeId, branch, project });
-  if (!getNode(metadataNodeId)) {
-    // Take into account the possibility of having new page data available in the API
-    // right before the query is made, but with no metadata yet
-    console.warn(`Skipping node creation for page "${page.page_id}". No metadata node "${metadataNodeId}" found.`);
-    return;
-  }
+  // if (!getNode(metadataNodeId)) {
+  //   // Take into account the possibility of having new page data available in the API
+  //   // right before the query is made, but with no metadata yet
+  //   console.warn(`Skipping node creation for page "${page.page_id}". No metadata node "${metadataNodeId}" found.`);
+  //   return;
+  // }
 
   page.page_id = page_id;
   page.metadata = metadataNodeId;
@@ -185,4 +185,4 @@ const consumeData = async (
   }
 };
 
-module.exports = { consumeData, KEY_LAST_FETCHED, KEY_LAST_CLIENT_ACCESS_TOKEN };
+module.exports = { consumeData, createSnootyMetadataId, KEY_LAST_FETCHED, KEY_LAST_CLIENT_ACCESS_TOKEN };

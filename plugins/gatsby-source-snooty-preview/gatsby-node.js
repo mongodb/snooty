@@ -8,7 +8,12 @@ const { parser } = require(`stream-json/jsonl/Parser`);
 const { sourceNodes } = require(`./other-things-to-source`);
 const { fetchClientAccessToken } = require('./utils/kanopy-auth.js');
 const { callPostBuildWebhook } = require('./utils/post-build.js');
-const { consumeData, KEY_LAST_FETCHED, KEY_LAST_CLIENT_ACCESS_TOKEN } = require('./utils/data-consumer.js');
+const {
+  consumeData,
+  createSnootyMetadataId,
+  KEY_LAST_FETCHED,
+  KEY_LAST_CLIENT_ACCESS_TOKEN,
+} = require('./utils/data-consumer.js');
 
 // Global variable to allow webhookBody from sourceNodes step to be passed down
 // to other Gatsby build steps that might not pass webhookBody natively.
@@ -181,7 +186,7 @@ exports.onCreateWebpackConfig = ({ plugins, actions }) => {
   });
 };
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
+exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter }) => {
   const { createPage } = actions;
   const templatePath = path.join(__dirname, `../../src/components/DocumentBodyPreview.js`);
   const result = await graphql(`
@@ -210,6 +215,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       let slug = node.page_id;
       // Slices off leading slash to ensure slug matches an entry within the toctreeOrder and renders InternalPageNav components
       if (slug !== '/' && slug[0] === '/') slug = slug.slice(1);
+
+      const metadataNodeId = createSnootyMetadataId({ createNodeId, branch: node.branch, project: node.project });
+      if (!getNode(metadataNodeId)) {
+        // Take into account the possibility of having new page data available in the API
+        // right before the query is made, but with no metadata yet
+        console.warn(`Skipping node creation for page "${node.page_id}". No metadata node "${metadataNodeId}" found.`);
+        return;
+      }
 
       createPage({
         path: pagePath,
