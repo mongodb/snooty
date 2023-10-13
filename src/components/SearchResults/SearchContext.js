@@ -60,10 +60,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   const { search } = useLocation();
   const { filters, searchPropertyMapping } = useMarianManifests();
   const facets = useFacets();
-  const facetNamesByKeyId = constructFacetNamesByKey(facets);
-  useMemo(() => {
-    constructFacetNamesByKey(facets);
-  }, [facets]);
+  const facetNamesByKeyId = useMemo(() => constructFacetNamesByKey(facets), [facets]);
 
   const getFacetName = useCallback(
     (facet) => {

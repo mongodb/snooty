@@ -11,9 +11,13 @@ const baseStyle = css`
   padding: ${theme.size.tiny} ${theme.size.small};
 `;
 
+export const tagHeightStyle = css`
+  height: 26px;
+`;
+
 export const searchTagStyle = css`
   cursor: pointer;
-  height: 26px;
+  ${tagHeightStyle};
   padding: 4px 11px 4px 11px;
   border-radius: 12px;
   font-size: ${theme.fontSize.tiny};

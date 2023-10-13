@@ -5,8 +5,9 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
-import Tag, { searchTagStyle } from '../Tag';
+import Tag, { searchTagStyle, tagHeightStyle } from '../Tag';
 import SearchContext from './SearchContext';
+import { getFacetTagVariant } from './Facets/utils';
 
 const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
@@ -95,6 +96,8 @@ const StyledTag = styled(Tag)`
 const StylingTagContainer = styled('div')`
   bottom: 0;
   margin-bottom: ${theme.size.medium};
+  overflow: hidden;
+  ${tagHeightStyle};
 `;
 
 const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -135,7 +138,7 @@ const SearchResult = React.memo(
     facets,
     ...props
   }) => {
-    const { searchPropertyMapping, searchTerm, getFacetName } = useContext(SearchContext);
+    const { searchPropertyMapping, searchTerm, getFacetName, showFacets } = useContext(SearchContext);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
@@ -156,14 +159,20 @@ const SearchResult = React.memo(
               __html: sanitizePreviewHtml(highlightedPreviewText),
             }}
           />
-          <StylingTagContainer>
-            {!!category && <StyledTag variant="green">{category}</StyledTag>}
-            {!!version && <StyledTag variant="blue">{version}</StyledTag>}
-            {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
-            {facets.filter(getFacetName).map((facet) => (
-              <StyledTag variant="blue">{getFacetName(facet)}</StyledTag>
-            ))}
-          </StylingTagContainer>
+          {!showFacets && (
+            <StylingTagContainer>
+              {!!category && <StyledTag variant="green">{category}</StyledTag>}
+              {!!version && <StyledTag variant="blue">{version}</StyledTag>}
+              {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
+            </StylingTagContainer>
+          )}
+          {showFacets && (
+            <StylingTagContainer>
+              {facets.filter(getFacetName).map((facet) => (
+                <StyledTag variant={getFacetTagVariant(facet)}>{getFacetName(facet)}</StyledTag>
+              ))}
+            </StylingTagContainer>
+          )}
           {learnMoreLink && (
             <MobileFooterContainer>
               <LearnMoreLink href={url}>
