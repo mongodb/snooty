@@ -17,6 +17,14 @@ export const onRenderBody = ({ setHeadComponents }) => {
     />,
     // Optimizely
     <script key="optimizely" src="https://cdn.optimizely.com/js/20988630008.js" />,
+    // Transperfect
+    <script
+      key="transperfect"
+      referrerpolicy="no-referrer-when-downgrade"
+      type="text/javascript"
+      src="https://www.onelink-edge.com/moxie.min.js"
+      data-oljs="P3FF1-D8F7-16C3-610C"
+    />,
     // Delighted
     <script
       key="delighted"
