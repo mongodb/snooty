@@ -218,8 +218,8 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
 
       const metadataNodeId = createSnootyMetadataId({ createNodeId, branch: node.branch, project: node.project });
       if (!getNode(metadataNodeId)) {
-        // Take into account the possibility of having new page data available in the API
-        // right before the query is made, but with no metadata yet
+        // Take into account the possibility of having new page data available through the API,
+        // but no metadata yet due to async uploads
         console.warn(
           `Skipping node creation for page "${node.page_id}", in project "${node.project}" on branch "${node.branch}. No metadata node "${metadataNodeId}" found.`
         );

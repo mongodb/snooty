@@ -97,16 +97,8 @@ const handlePage = (
     return;
   }
 
-  const metadataNodeId = createSnootyMetadataId({ createNodeId, branch, project });
-  // if (!getNode(metadataNodeId)) {
-  //   // Take into account the possibility of having new page data available in the API
-  //   // right before the query is made, but with no metadata yet
-  //   console.warn(`Skipping node creation for page "${page.page_id}". No metadata node "${metadataNodeId}" found.`);
-  //   return;
-  // }
-
   page.page_id = page_id;
-  page.metadata = metadataNodeId;
+  page.metadata = createSnootyMetadataId({ createNodeId, branch, project });
   page.id = pageNodeId;
   page.internal = {
     type: 'Page',
