@@ -40,10 +40,11 @@ const showMoreGlyphStyle = css`
 `;
 
 // Representative of a "facet-option" from search server response
-const FacetGroup = ({ facetOption: { name, id, options }, isNested = false }) => {
+const FacetGroup = ({ facetOption: { name, id, options }, isNested = false, numSelectedChildren }) => {
   const shouldTruncate = options.length >= TRUNCATE_AMOUNT && TRUNCATE_OPTIONS.includes(id);
   const [truncated, setTruncated] = useState(shouldTruncate);
   const displayedOptions = truncated ? options.slice(0, TRUNCATE_AMOUNT) : options;
+  const selfAndSiblings = isNested ? options : null;
   const truncatedState = truncated
     ? {
         glyph: 'ChevronDown',
@@ -53,7 +54,7 @@ const FacetGroup = ({ facetOption: { name, id, options }, isNested = false }) =>
         glyph: 'ChevronUp',
         text: 'Show less',
       };
-
+  const siblingsSelected = numSelectedChildren > 1 ? true : false;
   const handleExpansionClick = useCallback(() => {
     setTruncated((prev) => !prev);
   }, []);
@@ -62,7 +63,15 @@ const FacetGroup = ({ facetOption: { name, id, options }, isNested = false }) =>
     <div className={cx(optionStyle(isNested))}>
       {!isNested && <Body className={cx(optionNameStyle)}>{name}</Body>}
       {displayedOptions.map((facet) => {
-        return <FacetValue key={facet.id} facetValue={facet} isNested={isNested} />;
+        return (
+          <FacetValue
+            key={facet.id}
+            facetValue={facet}
+            isNested={isNested}
+            siblingsSelected={siblingsSelected}
+            selfAndSiblings={selfAndSiblings}
+          />
+        );
       })}
       {shouldTruncate && (
         <div className={cx(showMoreStyle)} onClick={handleExpansionClick}>
