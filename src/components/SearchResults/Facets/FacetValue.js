@@ -11,21 +11,34 @@ const checkboxStyle = css`
     font-size: 13px;
     margin-bottom: 8px;
   }
+  :hover + button {
+    opacity: 1;
   }
+  flex: 1;
 `;
 
 const onlyButtonStyle = css`
   opacity: 0;
+  flex: 1;
+  div {
+    padding: 0px;
+    border: none;
+  }
   :hover {
     opacity: 1;
+    border: none;
   }
+  :hover + div {
+    border: none;
+  }
+  border: none;
 `;
 
 const container = css`
   div:hover + button {
     opacity: 1;
   }
-  display: inline-block;
+  display: flex;
 `;
 
 export const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
