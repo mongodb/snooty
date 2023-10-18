@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 import Button from '@leafygreen-ui/button';
 import Checkbox from '@leafygreen-ui/checkbox';
+import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import SearchContext, { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY } from '../SearchContext';
 import FacetGroup from './FacetGroup';
@@ -20,18 +21,24 @@ const checkboxStyle = css`
 const onlyButtonStyle = css`
   opacity: 0;
   flex: 1;
+  background-color: inherit;
+  border: none;
+  height: 13px;
+  align-self: center;
   div {
-    padding: 0px;
-    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${palette.gray.base};
   }
   :hover {
     opacity: 1;
-    border: none;
+    border: 0px;
+    box-shadow: none;
   }
   :hover + div {
     border: none;
   }
-  border: none;
 `;
 
 const container = css`
