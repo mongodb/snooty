@@ -1,5 +1,4 @@
 import React, { useCallback, useContext, useMemo } from 'react';
-import Button from '@leafygreen-ui/button';
 import Checkbox from '@leafygreen-ui/checkbox';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -12,7 +11,7 @@ const checkboxStyle = css`
     font-size: 13px;
     margin-bottom: 8px;
   }
-  :hover + button {
+  :hover + span {
     opacity: 1;
   }
   flex: 1;
@@ -21,28 +20,17 @@ const checkboxStyle = css`
 const onlyButtonStyle = css`
   opacity: 0;
   flex: 1;
-  background-color: inherit;
-  border: none;
-  height: 13px;
-  align-self: center;
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: ${palette.gray.base};
-  }
+  color: ${palette.gray.base};
+  font-weight: 400;
   :hover {
     opacity: 1;
-    border: 0px;
-    box-shadow: none;
+    cursor: pointer;
   }
-  :hover + div {
-    border: none;
-  }
+  padding: 0px 8px;
 `;
 
 const container = css`
-  div:hover + button {
+  div:hover + span {
     opacity: 1;
   }
   display: flex;
@@ -116,7 +104,7 @@ const FacetValue = ({
     totalSubFacets > 0 ? findNumSelectedSubFacets(searchParams, nestedSubFacets, fullFacetId) : 0;
   const isIndeterminate = numSelectedSubProducts > 0 && numSelectedSubProducts !== totalSubFacets;
   const isChecked = totalSubFacets > 0 ? numSelectedSubProducts === totalSubFacets : initChecked(searchParams, key, id);
-  const onChangeHandler = useCallback(
+  const updateChildren = useCallback(
     ({ target }) => {
       const { checked } = target;
       const facetsToUpdate = [];
@@ -142,7 +130,7 @@ const FacetValue = ({
     [handleFacetChange, key, id, nestedSubFacets]
   );
 
-  const onClickHandler = () => {
+  const updateSiblings = () => {
     const facetsToUpdate = [];
     selfAndSiblings.forEach((facet) => {
       let checked = false;
@@ -163,15 +151,15 @@ const FacetValue = ({
         <Checkbox
           className={cx(checkboxStyle)}
           label={name}
-          onChange={onChangeHandler}
+          onChange={updateChildren}
           checked={isChecked}
           id={fullFacetId}
           indeterminate={isIndeterminate}
         />
         {isNested && isChecked && siblingsSelected && (
-          <Button onClick={onClickHandler} className={onlyButtonStyle}>
+          <span onClick={updateSiblings} className={onlyButtonStyle}>
             Only
-          </Button>
+          </span>
         )}
       </div>
       {(isAtlasProduct || isChecked || isIndeterminate) &&

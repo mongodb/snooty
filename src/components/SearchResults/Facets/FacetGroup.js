@@ -54,7 +54,7 @@ const FacetGroup = ({ facetOption: { name, id, options }, isNested = false, numS
         glyph: 'ChevronUp',
         text: 'Show less',
       };
-  const siblingsSelected = numSelectedChildren > 1 ? true : false;
+  const siblingsSelected = numSelectedChildren > 1;
   const handleExpansionClick = useCallback(() => {
     setTruncated((prev) => !prev);
   }, []);
