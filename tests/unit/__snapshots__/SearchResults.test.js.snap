@@ -1320,7 +1320,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -1331,13 +1331,9 @@ exports[`Search Results Page considers a given search filter query param and dis
   height: 36px;
 }
 
-.emotion-20:focus {
+.emotion-20:focus,
+.emotion-20:focus-visible {
   outline: none;
-}
-
-.emotion-20[disabled],
-.emotion-20:disabled {
-  pointer-events: none;
 }
 
 .emotion-20:active,
@@ -1347,14 +1343,18 @@ exports[`Search Results Page considers a given search filter query param and dis
   text-decoration: none;
 }
 
-.emotion-20:hover,
+.emotion-20:focus {
+  color: #001E2B;
+}
+
+.emotion-20:hover[aria-disabled='false'],
 .emotion-20:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-20:focus {
+.emotion-20:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -1385,6 +1385,8 @@ exports[`Search Results Page considers a given search filter query param and dis
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -1897,6 +1899,26 @@ exports[`Search Results Page considers a given search filter query param and dis
   }
 }
 
+.emotion-68 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
 .emotion-69 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2176,8 +2198,7 @@ exports[`Search Results Page considers a given search filter query param and dis
       >
         <button
           aria-disabled="false"
-          class="emotion-20"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-20"
           type="button"
         >
           <div
@@ -2371,7 +2392,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   class="emotion-21"
                 />
                 <div
-                  class="emotion-22"
+                  class="emotion-68"
                 >
                   <div
                     class="emotion-69"
@@ -2429,7 +2450,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   class="emotion-21"
                 />
                 <div
-                  class="emotion-22"
+                  class="emotion-68"
                 >
                   <div
                     class="emotion-69"
@@ -2461,8 +2482,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
         <button
           aria-disabled="false"
-          class="emotion-20"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-20"
           type="button"
         >
           <div
@@ -2876,7 +2896,7 @@ exports[`Search Results Page does not return results for a given search term wit
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -2887,13 +2907,9 @@ exports[`Search Results Page does not return results for a given search term wit
   height: 36px;
 }
 
-.emotion-16:focus {
+.emotion-16:focus,
+.emotion-16:focus-visible {
   outline: none;
-}
-
-.emotion-16[disabled],
-.emotion-16:disabled {
-  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -2903,14 +2919,18 @@ exports[`Search Results Page does not return results for a given search term wit
   text-decoration: none;
 }
 
-.emotion-16:hover,
+.emotion-16:focus {
+  color: #001E2B;
+}
+
+.emotion-16:hover[aria-disabled='false'],
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -2941,6 +2961,8 @@ exports[`Search Results Page does not return results for a given search term wit
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -3212,6 +3234,26 @@ exports[`Search Results Page does not return results for a given search term wit
   }
 }
 
+.emotion-43 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
 .emotion-44 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -3462,8 +3504,7 @@ exports[`Search Results Page does not return results for a given search term wit
       >
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -3815,7 +3856,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-43"
                 >
                   <div
                     class="emotion-44"
@@ -3873,7 +3914,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-43"
                 >
                   <div
                     class="emotion-44"
@@ -3905,8 +3946,7 @@ exports[`Search Results Page does not return results for a given search term wit
         </div>
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -4198,7 +4238,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -4209,13 +4249,9 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   height: 36px;
 }
 
-.emotion-11:focus {
+.emotion-11:focus,
+.emotion-11:focus-visible {
   outline: none;
-}
-
-.emotion-11[disabled],
-.emotion-11:disabled {
-  pointer-events: none;
 }
 
 .emotion-11:active,
@@ -4225,14 +4261,18 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   text-decoration: none;
 }
 
-.emotion-11:hover,
+.emotion-11:focus {
+  color: #001E2B;
+}
+
+.emotion-11:hover[aria-disabled='false'],
 .emotion-11:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-11:focus {
+.emotion-11:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -4263,6 +4303,8 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -4327,8 +4369,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         <button
           aria-disabled="false"
-          class="emotion-11"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-11"
           type="button"
         >
           <div
@@ -4742,7 +4783,7 @@ exports[`Search Results Page renders loading images before returning no results 
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -4753,13 +4794,9 @@ exports[`Search Results Page renders loading images before returning no results 
   height: 36px;
 }
 
-.emotion-16:focus {
+.emotion-16:focus,
+.emotion-16:focus-visible {
   outline: none;
-}
-
-.emotion-16[disabled],
-.emotion-16:disabled {
-  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -4769,14 +4806,18 @@ exports[`Search Results Page renders loading images before returning no results 
   text-decoration: none;
 }
 
-.emotion-16:hover,
+.emotion-16:focus {
+  color: #001E2B;
+}
+
+.emotion-16:hover[aria-disabled='false'],
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -4807,6 +4848,8 @@ exports[`Search Results Page renders loading images before returning no results 
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -5116,6 +5159,26 @@ exports[`Search Results Page renders loading images before returning no results 
   }
 }
 
+.emotion-56 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
 .emotion-57 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -5366,8 +5429,7 @@ exports[`Search Results Page renders loading images before returning no results 
       >
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -5891,7 +5953,7 @@ exports[`Search Results Page renders loading images before returning no results 
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-56"
                 >
                   <div
                     class="emotion-57"
@@ -5949,7 +6011,7 @@ exports[`Search Results Page renders loading images before returning no results 
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-56"
                 >
                   <div
                     class="emotion-57"
@@ -5981,8 +6043,7 @@ exports[`Search Results Page renders loading images before returning no results 
         </div>
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -6396,7 +6457,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -6407,13 +6468,9 @@ exports[`Search Results Page renders loading images before returning nonempty re
   height: 36px;
 }
 
-.emotion-16:focus {
+.emotion-16:focus,
+.emotion-16:focus-visible {
   outline: none;
-}
-
-.emotion-16[disabled],
-.emotion-16:disabled {
-  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -6423,14 +6480,18 @@ exports[`Search Results Page renders loading images before returning nonempty re
   text-decoration: none;
 }
 
-.emotion-16:hover,
+.emotion-16:focus {
+  color: #001E2B;
+}
+
+.emotion-16:hover[aria-disabled='false'],
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -6461,6 +6522,8 @@ exports[`Search Results Page renders loading images before returning nonempty re
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -6770,6 +6833,26 @@ exports[`Search Results Page renders loading images before returning nonempty re
   }
 }
 
+.emotion-56 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
 .emotion-57 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -7020,8 +7103,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
       >
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -7545,7 +7627,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-56"
                 >
                   <div
                     class="emotion-57"
@@ -7603,7 +7685,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-56"
                 >
                   <div
                     class="emotion-57"
@@ -7635,8 +7717,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
         </div>
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -8050,7 +8131,7 @@ exports[`Search Results Page renders results from a given search term query para
   text-decoration: none;
   cursor: pointer;
   z-index: 0;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
   background-color: #F9FBFA;
   border-color: #889397;
@@ -8061,13 +8142,9 @@ exports[`Search Results Page renders results from a given search term query para
   height: 36px;
 }
 
-.emotion-16:focus {
+.emotion-16:focus,
+.emotion-16:focus-visible {
   outline: none;
-}
-
-.emotion-16[disabled],
-.emotion-16:disabled {
-  pointer-events: none;
 }
 
 .emotion-16:active,
@@ -8077,14 +8154,18 @@ exports[`Search Results Page renders results from a given search term query para
   text-decoration: none;
 }
 
-.emotion-16:hover,
+.emotion-16:focus {
+  color: #001E2B;
+}
+
+.emotion-16:hover[aria-disabled='false'],
 .emotion-16:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -8115,6 +8196,8 @@ exports[`Search Results Page renders results from a given search term query para
   pointer-events: none;
   position: relative;
   z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
   padding: 0 11px;
   gap: 6px;
 }
@@ -8672,6 +8755,26 @@ exports[`Search Results Page renders results from a given search term query para
   }
 }
 
+.emotion-64 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+  padding: 0 11px;
+  gap: 6px;
+}
+
 .emotion-65 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -8922,8 +9025,7 @@ exports[`Search Results Page renders results from a given search term query para
       >
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
@@ -9117,7 +9219,7 @@ exports[`Search Results Page renders results from a given search term query para
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-64"
                 >
                   <div
                     class="emotion-65"
@@ -9175,7 +9277,7 @@ exports[`Search Results Page renders results from a given search term query para
                   class="emotion-17"
                 />
                 <div
-                  class="emotion-18"
+                  class="emotion-64"
                 >
                   <div
                     class="emotion-65"
@@ -9207,8 +9309,7 @@ exports[`Search Results Page renders results from a given search term query para
         </div>
         <button
           aria-disabled="false"
-          class="emotion-16"
-          data-leafygreen-ui="button"
+          class="lg-ui-button-0000 emotion-16"
           type="button"
         >
           <div
