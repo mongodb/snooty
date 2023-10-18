@@ -1,0 +1,163 @@
+{
+    "repoBranches": {
+        "branches": [
+            {
+                "gitBranchName": "master",
+                "active": true,
+                "urlAliases": [
+                    "upcoming"
+                ],
+                "publishOriginalBranchName": true,
+                "urlSlug": "upcoming",
+                "versionSelectorLabel": "upcoming",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.11",
+                "active": true,
+                "urlAliases": [
+                    "current"
+                ],
+                "publishOriginalBranchName": true,
+                "urlSlug": "current",
+                "versionSelectorLabel": "v4.11 (current)",
+                "isStableBranch": true,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.10",
+                "active": true,
+                "urlAliases": [],
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.10",
+                "versionSelectorLabel": "v4.10",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.9",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.9",
+                "versionSelectorLabel": "v4.9",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.8",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.8",
+                "versionSelectorLabel": "v4.8",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.7",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.7",
+                "versionSelectorLabel": "v4.7",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.6",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.6",
+                "versionSelectorLabel": "v4.6",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.5",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.5",
+                "versionSelectorLabel": "v4.5",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.4",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.4",
+                "versionSelectorLabel": "v4.4",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.3",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.3",
+                "versionSelectorLabel": "v4.3",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.2",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.2",
+                "versionSelectorLabel": "v4.2",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.1",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.1",
+                "versionSelectorLabel": "v4.1",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v4.0",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v4.0",
+                "versionSelectorLabel": "v4.0",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v3.7",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v3.7",
+                "versionSelectorLabel": "v3.7",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            },
+            {
+                "gitBranchName": "v3.6",
+                "active": true,
+                "urlAliases": null,
+                "publishOriginalBranchName": true,
+                "urlSlug": "v3.6",
+                "versionSelectorLabel": "v3.6",
+                "isStableBranch": false,
+                "buildsWithSnooty": true
+            }
+        ],
+        "siteBasePrefix": "docs-qa/drivers/node"
+    },
+    "slug": "/",
+    "eol": false
+}
