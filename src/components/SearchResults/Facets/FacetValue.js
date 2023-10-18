@@ -77,7 +77,6 @@ const findNumSelectedSubFacets = (searchParams, nestedSubFacets, fullFacetId) =>
       count++;
     }
   }
-  //console.log(count);
   return count;
 };
 
@@ -140,14 +139,14 @@ const FacetValue = ({
       facetsToUpdate.push({ key, id, checked });
       handleFacetChange(facetsToUpdate, checked);
     },
-    [handleFacetChange, key, id, nestedSubFacets, numSelectedSubProducts]
+    [handleFacetChange, key, id, nestedSubFacets]
   );
 
   const onClickHandler = () => {
     const facetsToUpdate = [];
     selfAndSiblings.forEach((facet) => {
       let checked = false;
-      if (key == facet.key && id == facet.id) checked = true;
+      if (key === facet.key && id === facet.id) checked = true;
       const updatedFacet = {
         key: facet.key,
         id: facet.id,
