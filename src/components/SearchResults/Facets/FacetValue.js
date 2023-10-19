@@ -21,7 +21,11 @@ const onlyButtonStyle = css`
   opacity: 0;
   flex: 1;
   color: ${palette.gray.base};
+  font-size: 13px;
   font-weight: 400;
+  margin-bottom: 7px;
+  vertical-align: top;
+  height: fit-content;
   :hover {
     opacity: 1;
     cursor: pointer;
