@@ -29,7 +29,7 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
   display: flex;
 }
 
-.emotion-2 div:hover+button {
+.emotion-2 div:hover+span {
   opacity: 1;
 }
 
@@ -478,7 +478,7 @@ exports[`Search Results Page Facets component renders facets with selected value
   display: flex;
 }
 
-.emotion-2 div:hover+button {
+.emotion-2 div:hover+span {
   opacity: 1;
 }
 
