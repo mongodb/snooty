@@ -6,11 +6,11 @@ on:
       tag:
         type: string
         required: true
-        description: 'The GitHub tag to use for Gatsby Cloud sites.'
+        description: 'The GitHub tag to use for Gatsby Cloud sites'
       branch:
         type: choice
         required: true
-        description: 'The target Gatsby Cloud environment to force push the tag to.'
+        description: 'The target Gatsby Cloud environment to force push the tag to'
         default: 'gatsby-cloud-rc'
         options:
           - 'gatsby-cloud-rc'
@@ -28,4 +28,4 @@ jobs:
         run: |
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git config user.name 'github-actions[bot]'
-          git push ${{ inputs.branch }}
+          git push origin HEAD:${{ inputs.branch }}
