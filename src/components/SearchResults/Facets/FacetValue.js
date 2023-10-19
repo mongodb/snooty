@@ -23,14 +23,14 @@ const onlyButtonStyle = css`
   color: ${palette.gray.base};
   font-size: 13px;
   font-weight: 400;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
   vertical-align: top;
   height: fit-content;
   :hover {
     opacity: 1;
     cursor: pointer;
   }
-  padding: 0px 8px;
+  padding-left: 8px;
 `;
 
 const container = css`
@@ -135,16 +135,14 @@ const FacetValue = ({
   );
 
   const updateSiblings = () => {
-    const facetsToUpdate = [];
-    selfAndSiblings.forEach((facet) => {
-      let checked = false;
-      if (key === facet.key && id === facet.id) checked = true;
+    const facetsToUpdate = selfAndSiblings.map((facet) => {
+      const checked = key === facet.key && id === facet.id; // self remains checked
       const updatedFacet = {
         key: facet.key,
         id: facet.id,
         checked: checked,
       };
-      facetsToUpdate.push(updatedFacet);
+      return updatedFacet;
     });
     handleFacetChange(facetsToUpdate);
   };
