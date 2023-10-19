@@ -1,3 +1,5 @@
+name: Sync Gatsby Cloud Branch
+
 on:
   workflow_dispatch:
     inputs:
