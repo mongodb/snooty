@@ -6,11 +6,11 @@ on:
       tag:
         type: string
         required: true
-        description: 'The GitHub tag to use for Gatsby Cloud sites'
+        description: 'GitHub tag'
       branch:
         type: choice
         required: true
-        description: 'The target Gatsby Cloud environment to force push the tag to'
+        description: 'Target Gatsby Cloud branch'
         default: 'gatsby-cloud-rc'
         options:
           - 'gatsby-cloud-rc'
@@ -24,6 +24,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Push tag to target branch
         # We force push to ensure that we can go between release tags without worrying about a clean history
         run: |
