@@ -122,7 +122,7 @@ const DocumentBody = (props) => {
   const onSelectLocale = (locale) => {
     const localeHrefMap = {
       'zh-cn': `https://mongodbcom-cdn.staging.corp.mongodb.com/zh-cn${slugForUrl}/`,
-      'en-us': `https://mongodbcom-cdn.website.staging.corp.mongodb.com${slugForUrl}/`,
+      'en-us': `https://mongodbcom-cdn.staging.corp.mongodb.com${slugForUrl}/`,
     };
 
     if (isBrowser) {
