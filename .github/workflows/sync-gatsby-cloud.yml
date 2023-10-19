@@ -25,7 +25,8 @@ jobs:
         with:
           ref: ${{ inputs.tag }}
       - name: Push tag to target branch
+        # We force push to ensure that we can go between release tags without worrying about a clean history
         run: |
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git config user.name 'github-actions[bot]'
-          git push origin HEAD:${{ inputs.branch }}
+          git push -f origin HEAD:${{ inputs.branch }}
