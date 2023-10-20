@@ -135,7 +135,7 @@ const FacetValue = ({
     [handleFacetChange, key, id, nestedSubFacets]
   );
 
-  const updateSiblings = () => {
+  const updateSiblings = useCallback(() => {
     const facetsToUpdate = selfAndSiblings.map((facet) => {
       const checked = key === facet.key && id === facet.id; // self remains checked
       const updatedFacet = {
@@ -146,7 +146,7 @@ const FacetValue = ({
       return updatedFacet;
     });
     handleFacetChange(facetsToUpdate);
-  };
+  }, [handleFacetChange, key, id, selfAndSiblings]);
 
   return (
     <>
