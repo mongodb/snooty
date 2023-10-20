@@ -27,7 +27,7 @@ jobs:
           # This token is used just in case there were workflow changes between tags.
           # Without this, the push may fail due to permission errors.
           # IMPORTANT: This token is a PAT, meaning it is tied to the user who created it.
-          # Please create a new PAT if needed:
+          # Please create a new PAT with the "workflows" permission, if needed/when it expires:
           # https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token
           token: ${{ secrets.WORKFLOW_TOKEN }}
       - name: Push tag to target branch
