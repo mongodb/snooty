@@ -117,7 +117,7 @@ const DocumentBody = (props) => {
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
-  const slugForUrl = slug === '/' ? '' : slug; // handle the index's path
+  const slugForUrl = slug === '/' ? '' : slug; // handle the `/` path
   const onSelectLocale = (locale) => {
     const localeHrefMap = {
       'zh-cn': `https://mongodbcom-cdn.staging.corp.mongodb.com/zh-cn/docs-qa/${slugForUrl}`,
