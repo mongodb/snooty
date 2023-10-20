@@ -27,6 +27,7 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  gap: 8px;
 }
 
 .emotion-2 div:hover+span {
@@ -476,6 +477,7 @@ exports[`Search Results Page Facets component renders facets with selected value
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  gap: 8px;
 }
 
 .emotion-2 div:hover+span {
