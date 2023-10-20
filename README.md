@@ -126,6 +126,17 @@ We have configured an automatic release process using [GitHub Actions](https://g
 
 :warning: This process cannot be completed if the releaser's `origin` points to a fork.
 
+### Gatsby Cloud
+
+Gatsby Cloud uses set GitHub branches to build sites. Right now, we have:
+
+1. `gatsby-cloud-latest` - Used by the Gatsby Cloud sites for the docs team. This branch should typically have the latest production release tag used by the Autobuilder.
+2. `gatsby-cloud-rc` - Used by Gatsby Cloud sites designated for pre-production. This branch should be used for testing release candidates end-to-end with the Autobuilder in preprd.
+
+When a new frontend release tag is made, use the GitHub Actions workflow [Sync Gatsby Cloud Branch](https://github.com/mongodb/snooty/actions/workflows/sync-gatsby-cloud.yml) on the `master` branch to update the contents of the selected Gatsby Cloud branch. Note that this will override any commit history present in the branch to make it easy to update and rollback as needed. Alternatively, the contents of any feature branch or tag can be pushed directly to the target Gatsby Cloud branch.
+
+Once the branch is updated with a given tag, all Gatsby Cloud sites using that branch will be rebuilt. 
+
 ## Testing
 
 Tests can be run using:
