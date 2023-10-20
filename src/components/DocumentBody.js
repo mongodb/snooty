@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { withPrefix } from 'gatsby';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
@@ -117,10 +118,11 @@ const DocumentBody = (props) => {
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
+  const slugForUrl = slug === '/' ? `${withPrefix('')}` : `${withPrefix(slug)}`; // handle the `/` path
   const onSelectLocale = (locale) => {
     const localeHrefMap = {
-      'zh-cn': 'https://mongodbcom-cdn.staging.corp.mongodb.com/zh-cn/docs-qa/',
-      'en-us': 'https://mongodbcom-cdn.website.staging.corp.mongodb.com/docs-qa/',
+      'zh-cn': `https://mongodbcom-cdn.staging.corp.mongodb.com/zh-cn${slugForUrl}/`,
+      'en-us': `https://mongodbcom-cdn.website.staging.corp.mongodb.com${slugForUrl}/`,
     };
 
     if (isBrowser) {
