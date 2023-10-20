@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 import Checkbox from '@leafygreen-ui/checkbox';
+import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import SearchContext, { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY } from '../SearchContext';
 import FacetGroup from './FacetGroup';
@@ -10,7 +11,34 @@ const checkboxStyle = css`
     font-size: 13px;
     margin-bottom: 8px;
   }
+  :hover + span {
+    opacity: 1;
   }
+  flex: 1;
+`;
+
+const onlyButtonStyle = css`
+  opacity: 0;
+  flex: 1;
+  color: ${palette.gray.base};
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  vertical-align: top;
+  height: fit-content;
+  :hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  line-height: 20px;
+`;
+
+const container = css`
+  div:hover + span {
+    opacity: 1;
+  }
+  display: flex;
+  gap: 8px;
 `;
 
 export const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
@@ -47,11 +75,17 @@ const findNumSelectedSubFacets = (searchParams, nestedSubFacets, fullFacetId) =>
 
 // Representative of a "facet-option" from search server response. These are
 // facets that the user can select to filter search
-const FacetValue = ({ facetValue: { name, facets, key, id }, isNested = false }) => {
+const FacetValue = ({
+  facetValue: { name, facets, key, id },
+  isNested = false,
+  siblingsSelected = false,
+  selfAndSiblings,
+}) => {
   const { handleFacetChange, searchParams } = useContext(SearchContext);
   const isAtlasProduct = key === 'target_product' && id === 'atlas';
   // Differentiate between facets with the same id found under different facet options
   const fullFacetId = `${key}>${id}`;
+
   // Mapping of nested facet options/groups with the ids for each underlying facet value
   const [nestedSubFacets, totalSubFacets] = useMemo(() => {
     // key: string; value: Set
@@ -75,8 +109,7 @@ const FacetValue = ({ facetValue: { name, facets, key, id }, isNested = false })
     totalSubFacets > 0 ? findNumSelectedSubFacets(searchParams, nestedSubFacets, fullFacetId) : 0;
   const isIndeterminate = numSelectedSubProducts > 0 && numSelectedSubProducts !== totalSubFacets;
   const isChecked = totalSubFacets > 0 ? numSelectedSubProducts === totalSubFacets : initChecked(searchParams, key, id);
-
-  const onChangeHandler = useCallback(
+  const updateChildren = useCallback(
     ({ target }) => {
       const { checked } = target;
       const facetsToUpdate = [];
@@ -90,7 +123,6 @@ const FacetValue = ({ facetValue: { name, facets, key, id }, isNested = false })
         };
         facetsToUpdate.push(parentKey);
       }
-
       // Update nested checkboxes when parent is changed
       nestedSubFacets.forEach((ids, key) => {
         ids.forEach((id) => {
@@ -103,19 +135,46 @@ const FacetValue = ({ facetValue: { name, facets, key, id }, isNested = false })
     [handleFacetChange, key, id, nestedSubFacets]
   );
 
+  const updateSiblings = useCallback(() => {
+    const facetsToUpdate = selfAndSiblings.map((facet) => {
+      const checked = key === facet.key && id === facet.id; // self remains checked
+      const updatedFacet = {
+        key: facet.key,
+        id: facet.id,
+        checked: checked,
+      };
+      return updatedFacet;
+    });
+    handleFacetChange(facetsToUpdate);
+  }, [handleFacetChange, key, id, selfAndSiblings]);
+
   return (
     <>
-      <Checkbox
-        className={cx(checkboxStyle)}
-        label={name}
-        onChange={onChangeHandler}
-        checked={isChecked}
-        id={fullFacetId}
-        indeterminate={isIndeterminate}
-      />
+      <div className={container}>
+        <Checkbox
+          className={cx(checkboxStyle)}
+          label={name}
+          onChange={updateChildren}
+          checked={isChecked}
+          id={fullFacetId}
+          indeterminate={isIndeterminate}
+        />
+        {isNested && isChecked && siblingsSelected && (
+          <span onClick={updateSiblings} className={onlyButtonStyle}>
+            Only
+          </span>
+        )}
+      </div>
       {(isAtlasProduct || isChecked || isIndeterminate) &&
         facets.map((facet) => {
-          return <FacetGroup key={facet.id} facetOption={facet} isNested={true} />;
+          return (
+            <FacetGroup
+              key={facet.id}
+              facetOption={facet}
+              isNested={true}
+              numSelectedChildren={numSelectedSubProducts}
+            />
+          );
         })}
     </>
   );
