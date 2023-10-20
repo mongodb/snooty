@@ -30,7 +30,7 @@ const onlyButtonStyle = css`
     opacity: 1;
     cursor: pointer;
   }
-  padding-left: 8px;
+  line-height: 20px;
 `;
 
 const container = css`
@@ -38,6 +38,7 @@ const container = css`
     opacity: 1;
   }
   display: flex;
+  gap: 8px;
 `;
 
 export const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
