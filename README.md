@@ -133,9 +133,17 @@ Gatsby Cloud uses set GitHub branches to build sites. Right now, we have:
 1. `gatsby-cloud-latest` - Used by the Gatsby Cloud sites for the docs team. This branch should typically have the latest production release tag used by the Autobuilder.
 2. `gatsby-cloud-rc` - Used by Gatsby Cloud sites designated for pre-production. This branch should be used for testing release candidates end-to-end with the Autobuilder in preprd.
 
-When a new frontend release tag is made, use the GitHub Actions workflow [Sync Gatsby Cloud Branch](https://github.com/mongodb/snooty/actions/workflows/sync-gatsby-cloud.yml) on the `master` branch to update the contents of the selected Gatsby Cloud branch. Note that this will override any commit history present in the branch to make it easy to update and rollback as needed. Alternatively, the contents of any feature branch or tag can be pushed directly to the target Gatsby Cloud branch.
+When a new frontend release tag is made, use the commands below to update the desired Gatsby Cloud branch.
 
-Once the branch is updated with a given tag, all Gatsby Cloud sites using that branch will be rebuilt. 
+:warning: Note that the following commands include a force push to make it easy to update and rollback the branch as needed.
+
+```sh
+git fetch origin --tags
+git checkout tags/<tag>
+git push -f origin HEAD:<gatsby-cloud-rc|gatsby-cloud-latest>
+```
+
+Once the branch is updated with a given tag, all Gatsby Cloud sites using that branch will be rebuilt. Ideally, `gatsby-cloud-latest` is only updated after the Autobuilder has completed its latest release, to ensure versions of the frontend and parser are compatible.
 
 ## Testing
 
