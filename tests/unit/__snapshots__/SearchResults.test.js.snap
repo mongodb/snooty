@@ -22,11 +22,23 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
   font-weight: 700;
 }
 
-.emotion-4 {
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+}
+
+.emotion-2 div:hover+span {
+  opacity: 1;
+}
+
+.emotion-7 {
   margin-left: 22px;
 }
 
-.emotion-5 {
+.emotion-13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -43,7 +55,7 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
   cursor: pointer;
 }
 
-.emotion-6 {
+.emotion-14 {
   color: #3D4F58;
 }
 
@@ -59,16 +71,24 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
       Genre
     </p>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Reference
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Reference
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Tutorial
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Tutorial
+      </div>
     </div>
   </div>
   <div
@@ -80,50 +100,74 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
       Target Product
     </p>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Atlas
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Atlas
+      </div>
     </div>
     <div
-      class="emotion-4"
+      class="emotion-7"
     >
       <div
-        data-checked="false"
-        data-indeterminate="false"
+        class="emotion-2"
       >
-        App Services
+        <div
+          data-checked="false"
+          data-indeterminate="false"
+        >
+          App Services
+        </div>
       </div>
       <div
-        data-checked="false"
-        data-indeterminate="false"
+        class="emotion-2"
       >
-        Charts
+        <div
+          data-checked="false"
+          data-indeterminate="false"
+        >
+          Charts
+        </div>
       </div>
       <div
-        data-checked="false"
-        data-indeterminate="false"
+        class="emotion-2"
       >
-        Atlas CLI
+        <div
+          data-checked="false"
+          data-indeterminate="false"
+        >
+          Atlas CLI
+        </div>
       </div>
       <div
-        data-checked="false"
-        data-indeterminate="false"
+        class="emotion-2"
       >
-        Data API
+        <div
+          data-checked="false"
+          data-indeterminate="false"
+        >
+          Data API
+        </div>
       </div>
       <div
-        data-checked="false"
-        data-indeterminate="false"
+        class="emotion-2"
       >
-        Data Federation
+        <div
+          data-checked="false"
+          data-indeterminate="false"
+        >
+          Data Federation
+        </div>
       </div>
       <div
-        class="emotion-5"
+        class="emotion-13"
       >
         <svg
           aria-label="Chevron Down Icon"
-          class="emotion-6"
+          class="emotion-14"
           fill="none"
           height="16"
           role="img"
@@ -142,112 +186,184 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
       </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      BI Connector
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        BI Connector
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Cloud Manager
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Cloud Manager
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Cluster-to-Cluster Sync
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Cluster-to-Cluster Sync
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Community Kubernetes Operator
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Community Kubernetes Operator
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Compass
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Compass
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Database Tools
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Database Tools
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Drivers
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Drivers
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Enterprise Kubernetes Operator
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Enterprise Kubernetes Operator
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Kafka Connector
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Kafka Connector
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      MongoDB Analyzer
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        MongoDB Analyzer
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      MongoDB CLI
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        MongoDB CLI
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      MongoDB for VS Code
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        MongoDB for VS Code
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      MongoDB Shell
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        MongoDB Shell
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Ops Manager
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Ops Manager
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Realm
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Realm
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Relational Migrator
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Relational Migrator
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Server
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Server
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Spark Connector
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Spark Connector
+      </div>
     </div>
   </div>
   <div
@@ -259,41 +375,61 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
       Programming Language
     </p>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Objective C
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Objective C
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      C
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        C
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      C#
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        C#
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      C++
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        C++
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Dart
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Dart
+      </div>
     </div>
     <div
-      class="emotion-5"
+      class="emotion-13"
     >
       <svg
         aria-label="Chevron Down Icon"
-        class="emotion-6"
+        class="emotion-14"
         fill="none"
         height="16"
         role="img"
@@ -336,11 +472,23 @@ exports[`Search Results Page Facets component renders facets with selected value
   font-weight: 700;
 }
 
-.emotion-4 {
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+}
+
+.emotion-2 div:hover+span {
+  opacity: 1;
+}
+
+.emotion-7 {
   margin-left: 22px;
 }
 
-.emotion-5 {
+.emotion-13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -357,7 +505,7 @@ exports[`Search Results Page Facets component renders facets with selected value
   cursor: pointer;
 }
 
-.emotion-6 {
+.emotion-14 {
   color: #3D4F58;
 }
 
@@ -373,16 +521,24 @@ exports[`Search Results Page Facets component renders facets with selected value
       Genre
     </p>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Reference
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Reference
+      </div>
     </div>
     <div
-      data-checked="true"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Tutorial
+      <div
+        data-checked="true"
+        data-indeterminate="false"
+      >
+        Tutorial
+      </div>
     </div>
   </div>
   <div
@@ -394,50 +550,74 @@ exports[`Search Results Page Facets component renders facets with selected value
       Target Product
     </p>
     <div
-      data-checked="false"
-      data-indeterminate="true"
+      class="emotion-2"
     >
-      Atlas
+      <div
+        data-checked="false"
+        data-indeterminate="true"
+      >
+        Atlas
+      </div>
     </div>
     <div
-      class="emotion-4"
+      class="emotion-7"
     >
       <div
-        data-checked="false"
-        data-indeterminate="false"
+        class="emotion-2"
       >
-        App Services
+        <div
+          data-checked="false"
+          data-indeterminate="false"
+        >
+          App Services
+        </div>
       </div>
       <div
-        data-checked="false"
-        data-indeterminate="false"
+        class="emotion-2"
       >
-        Charts
+        <div
+          data-checked="false"
+          data-indeterminate="false"
+        >
+          Charts
+        </div>
       </div>
       <div
-        data-checked="true"
-        data-indeterminate="false"
+        class="emotion-2"
       >
-        Atlas CLI
+        <div
+          data-checked="true"
+          data-indeterminate="false"
+        >
+          Atlas CLI
+        </div>
       </div>
       <div
-        data-checked="false"
-        data-indeterminate="false"
+        class="emotion-2"
       >
-        Data API
+        <div
+          data-checked="false"
+          data-indeterminate="false"
+        >
+          Data API
+        </div>
       </div>
       <div
-        data-checked="false"
-        data-indeterminate="false"
+        class="emotion-2"
       >
-        Data Federation
+        <div
+          data-checked="false"
+          data-indeterminate="false"
+        >
+          Data Federation
+        </div>
       </div>
       <div
-        class="emotion-5"
+        class="emotion-13"
       >
         <svg
           aria-label="Chevron Down Icon"
-          class="emotion-6"
+          class="emotion-14"
           fill="none"
           height="16"
           role="img"
@@ -456,112 +636,184 @@ exports[`Search Results Page Facets component renders facets with selected value
       </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      BI Connector
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        BI Connector
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Cloud Manager
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Cloud Manager
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Cluster-to-Cluster Sync
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Cluster-to-Cluster Sync
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Community Kubernetes Operator
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Community Kubernetes Operator
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Compass
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Compass
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Database Tools
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Database Tools
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Drivers
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Drivers
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Enterprise Kubernetes Operator
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Enterprise Kubernetes Operator
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Kafka Connector
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Kafka Connector
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      MongoDB Analyzer
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        MongoDB Analyzer
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      MongoDB CLI
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        MongoDB CLI
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      MongoDB for VS Code
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        MongoDB for VS Code
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      MongoDB Shell
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        MongoDB Shell
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Ops Manager
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Ops Manager
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Realm
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Realm
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Relational Migrator
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Relational Migrator
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Server
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Server
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Spark Connector
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Spark Connector
+      </div>
     </div>
   </div>
   <div
@@ -573,41 +825,61 @@ exports[`Search Results Page Facets component renders facets with selected value
       Programming Language
     </p>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Objective C
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Objective C
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      C
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        C
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      C#
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        C#
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      C++
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        C++
+      </div>
     </div>
     <div
-      data-checked="false"
-      data-indeterminate="false"
+      class="emotion-2"
     >
-      Dart
+      <div
+        data-checked="false"
+        data-indeterminate="false"
+      >
+        Dart
+      </div>
     </div>
     <div
-      class="emotion-5"
+      class="emotion-13"
     >
       <svg
         aria-label="Chevron Down Icon"
-        class="emotion-6"
+        class="emotion-14"
         fill="none"
         height="16"
         role="img"

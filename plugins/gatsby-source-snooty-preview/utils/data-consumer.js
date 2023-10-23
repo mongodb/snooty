@@ -177,4 +177,4 @@ const consumeData = async (
   }
 };
 
-module.exports = { consumeData, KEY_LAST_FETCHED, KEY_LAST_CLIENT_ACCESS_TOKEN };
+module.exports = { consumeData, createSnootyMetadataId, KEY_LAST_FETCHED, KEY_LAST_CLIENT_ACCESS_TOKEN };
