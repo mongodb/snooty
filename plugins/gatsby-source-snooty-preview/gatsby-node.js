@@ -1,4 +1,4 @@
-const { getDataStore } = require('gatsby/dist/datastore');
+const { getDataStore, getTypes } = require('gatsby/dist/datastore');
 const path = require('path');
 const stream = require('stream');
 const { promisify } = require('util');
@@ -240,6 +240,16 @@ exports.sourceNodes = async ({
   });
   console.timeEnd(`old source nodes`);
   isFirstRun = false;
+
+  try {
+    const nodeTypes = getTypes();
+    nodeTypes.forEach((nodeType) => {
+      const nodes = getNodesByType(nodeType);
+      console.log({ nodeType, count: nodes.length });
+    });
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // Prevent errors when running gatsby build caused by browser packages run in a node environment.
