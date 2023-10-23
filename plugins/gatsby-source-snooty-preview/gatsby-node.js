@@ -304,6 +304,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           isAssociatedProduct: false,
           project: node.project,
         },
+        defer: true,
       });
     });
   } catch (err) {

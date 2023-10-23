@@ -240,6 +240,8 @@ exports.createPages = async ({ actions }) => {
             template: pageNodes?.options?.template,
             page: pageNodes,
           },
+          // Use deferred static generation for non-prod builds
+          defer: !['dotcomprd', 'dotcomstg'].includes(siteMetadata.snootyEnv),
         });
       }
     });
