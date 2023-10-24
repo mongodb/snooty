@@ -166,7 +166,7 @@ const SearchResult = React.memo(
               {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
             </StylingTagContainer>
           )}
-          {showFacets && (
+          {showFacets && facets?.filter(getFacetName)?.length > 0 && (
             <StylingTagContainer>
               {facets.filter(getFacetName).map((facet) => (
                 <StyledTag variant={getFacetTagVariant(facet)}>{getFacetName(facet)}</StyledTag>

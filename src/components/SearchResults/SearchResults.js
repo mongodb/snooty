@@ -359,7 +359,7 @@ const SearchResults = () => {
   const submitNewSearch = (event) => {
     const newValue = event.target[0]?.value;
     const { page } = queryString.parse(search);
-    if (newValue === searchTerm && parseInt(page) === 1) return;
+    if (!newValue || (newValue === searchTerm && parseInt(page) === 1)) return;
 
     setSearchTerm(newValue);
   };
