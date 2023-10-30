@@ -8,11 +8,16 @@ import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
 
-const StyledHeaderContainer = styled.header(`
+const CHATBOT_ENABLED = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
+
+const StyledHeaderContainer = styled.header(
+  (props) => `
   grid-area: header;
   top: 0;
   z-index: 1000;
-  `);
+  ${props.template !== 'landing' || !CHATBOT_ENABLED ? 'position: sticky;' : ''}
+  `
+);
 
 const Header = ({ sidenav, eol, template }) => {
   const { project, branch } = useSnootyMetadata();

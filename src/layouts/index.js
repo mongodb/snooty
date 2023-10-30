@@ -73,6 +73,7 @@ const GlobalGrid = styled('div')`
     'sidenav contents';
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
+  overflow: clip;
 `;
 
 const DefaultLayout = ({
