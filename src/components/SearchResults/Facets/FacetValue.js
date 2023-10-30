@@ -15,9 +15,7 @@ const checkboxStyle = css`
     opacity: 1;
   }
   grid-area: facet;
-  div {
-    width: fit-content;
-  }
+  width: fit-content;
 `;
 
 const onlyButtonStyle = css`
@@ -43,6 +41,7 @@ const container = css`
   display: grid;
   grid-template-areas: 'facet button';
   gap: 8px;
+  width: fit-content;
 `;
 
 export const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
