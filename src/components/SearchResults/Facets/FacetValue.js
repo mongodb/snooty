@@ -14,12 +14,14 @@ const checkboxStyle = css`
   :hover + span {
     opacity: 1;
   }
-  flex: 1;
+  grid-area: facet;
+  div {
+    width: fit-content;
+  }
 `;
 
 const onlyButtonStyle = css`
   opacity: 0;
-  flex: 1;
   color: ${palette.gray.base};
   font-size: 13px;
   font-weight: 400;
@@ -31,14 +33,15 @@ const onlyButtonStyle = css`
     cursor: pointer;
   }
   line-height: 20px;
-  position: absolute;
+  grid-area: button;
 `;
 
 const container = css`
   div:hover + span {
     opacity: 1;
   }
-  display: flex;
+  display: grid;
+  grid-template-areas: 'facet button';
   gap: 8px;
 `;
 
