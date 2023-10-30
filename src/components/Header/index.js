@@ -15,7 +15,6 @@ const StyledHeaderContainer = styled.header(
   grid-area: header;
   top: 0;
   z-index: 1000;
-  ${props.template !== 'landing' || !CHATBOT_ENABLED ? 'position: sticky;' : ''}
   `
 );
 
