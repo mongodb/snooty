@@ -31,6 +31,7 @@ const onlyButtonStyle = css`
     cursor: pointer;
   }
   line-height: 20px;
+  position: absolute;
 `;
 
 const container = css`
