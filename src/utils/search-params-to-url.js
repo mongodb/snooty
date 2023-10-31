@@ -31,7 +31,7 @@ export const searchParamsToURL = (searchParams) => {
   const filters = getFilterParams(searchParams);
 
   const queryParams = `?q=${searchTerm}&page=${page}${searchProperty ? `&searchProperty=${searchProperty}` : ''}${
-    filters.length ? `&${filters}` : ''
+    filters.length ? `&${filters}&combineFilters=true` : ''
   }`;
   return `${assertTrailingSlash(MARIAN_URL)}search${queryParams}`;
 };
@@ -49,7 +49,7 @@ export const searchParamsToMetaURL = (searchParams) => {
   const filters = getFilterParams(searchParams);
 
   const queryParams = `?q=${searchTerm}${searchProperty ? `&searchProperty=${searchProperty}` : ''}${
-    filters.length ? `&${filters}` : ''
+    filters.length ? `&${filters}&combineFilters=true` : ''
   }`;
   const META_PATH = `v2/search/meta`;
   return `${assertTrailingSlash(MARIAN_URL)}${META_PATH}${queryParams}`;
