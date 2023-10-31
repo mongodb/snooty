@@ -143,6 +143,7 @@ const SearchResult = React.memo(
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
+    const validFacets = facets?.filter(getFacetName);
 
     return (
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
@@ -166,10 +167,12 @@ const SearchResult = React.memo(
               {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
             </StylingTagContainer>
           )}
-          {showFacets && facets?.filter(getFacetName)?.length > 0 && (
+          {showFacets && validFacets?.length > 0 && (
             <StylingTagContainer>
-              {facets.filter(getFacetName).map((facet) => (
-                <StyledTag variant={getFacetTagVariant(facet)}>{getFacetName(facet)}</StyledTag>
+              {validFacets.map((facet, idx) => (
+                <StyledTag variant={getFacetTagVariant(facet)} key={`${idx}-${facet.key}-${facet.id}`}>
+                  {getFacetName(facet)}
+                </StyledTag>
               ))}
             </StylingTagContainer>
           )}

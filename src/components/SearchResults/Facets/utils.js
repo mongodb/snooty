@@ -5,7 +5,7 @@
  *
  * @returns {str} blue | green
  */
-export const getFacetTagVariant = (facet, type = 'facet-option') => {
+export const getFacetTagVariant = (facet) => {
   if (facet.key === 'target_product') {
     return 'green';
   }
