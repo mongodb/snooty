@@ -279,6 +279,7 @@ const SearchResults = () => {
 
   const [searchFinished, setSearchFinished] = useState(() => !searchTerm);
   const [searchCount, setSearchCount] = useState();
+  const [searchResultFacets, setSearchResultFacets] = useState([]);
 
   const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
@@ -329,11 +330,6 @@ const SearchResults = () => {
       return (await res.json()).results;
     };
 
-    const fetchSearchMeta = async () => {
-      const res = await fetch(searchParamsToMetaURL(searchParams));
-      return res.json();
-    };
-
     fetchSearchResults()
       .then((searchRes) => {
         setSearchResults(searchRes || []);
@@ -344,15 +340,23 @@ const SearchResults = () => {
       .finally(() => {
         setSearchFinished(true);
       });
+  }, [searchParams]);
 
+  useEffect(() => {
+    const fetchSearchMeta = async () => {
+      const res = await fetch(searchParamsToMetaURL(searchParams));
+      return res.json();
+    };
     // fetch search meta
     fetchSearchMeta()
       .then((res) => {
         setSearchCount(res?.count);
+        setSearchResultFacets(res?.facets);
       })
       .catch((e) => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
         setSearchCount();
+        setSearchResultFacets([]);
       });
   }, [searchParams]);
 
@@ -495,7 +499,7 @@ const SearchResults = () => {
             {showFacets ? (
               <>
                 {/* Avoid showing Facets component to avoid clashing values with mobile filter */}
-                {!showMobileFilters && <Facets />}
+                {!showMobileFilters && <Facets facets={searchResultFacets} />}
               </>
             ) : (
               <>
@@ -505,7 +509,7 @@ const SearchResults = () => {
             )}
           </FiltersContainer>
         )}
-        {showMobileFilters && isTabletOrMobile && <MobileFilters />}
+        {showMobileFilters && isTabletOrMobile && <MobileFilters facets={searchResultFacets} />}
       </SearchResultsContainer>
     </>
   );

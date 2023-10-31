@@ -1,10 +1,7 @@
 import React from 'react';
-import useFacets from './useFacets';
 import FacetGroup from './FacetGroup';
 
-const Facets = () => {
-  const facets = useFacets();
-
+const Facets = ({ facets }) => {
   return (
     <div data-testid="facets-container">
       {facets?.length > 0 &&

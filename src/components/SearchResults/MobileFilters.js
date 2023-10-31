@@ -45,7 +45,7 @@ const Label = styled('div')`
   margin: ${theme.size.small} 0 ${theme.size.medium} 0;
 `;
 
-const MobileFilters = () => {
+const MobileFilters = ({ facets }) => {
   const { topSmall } = useStickyTopValues();
   const { setShowMobileFilters, showFacets } = useContext(SearchContext);
 
@@ -62,7 +62,11 @@ const MobileFilters = () => {
           Back to search results
         </BackButton>
         <Label>Refine your search</Label>
-        {showFacets ? <Facets /> : <SearchFilters manuallyApplyFilters={true} onApplyFilters={closeMobileFilters} />}
+        {showFacets ? (
+          <Facets facets={facets} />
+        ) : (
+          <SearchFilters manuallyApplyFilters={true} onApplyFilters={closeMobileFilters} />
+        )}
       </Container>
     </>
   );
