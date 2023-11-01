@@ -323,13 +323,18 @@ const SearchResults = () => {
       return;
     }
     setSearchFinished(false);
-    setSearchCount();
 
     const fetchSearchResults = async () => {
       const res = await fetch(searchParamsToURL(searchParams));
       return (await res.json()).results;
     };
 
+    const fetchSearchMeta = async () => {
+      const res = await fetch(searchParamsToMetaURL(searchParams));
+      return res.json();
+    };
+
+    // fetch search results
     fetchSearchResults()
       .then((searchRes) => {
         setSearchResults(searchRes || []);
@@ -340,14 +345,8 @@ const SearchResults = () => {
       .finally(() => {
         setSearchFinished(true);
       });
-  }, [searchParams]);
 
-  useEffect(() => {
-    const fetchSearchMeta = async () => {
-      const res = await fetch(searchParamsToMetaURL(searchParams));
-      return res.json();
-    };
-    // fetch search meta
+    // fetch search meta (count and filters)
     fetchSearchMeta()
       .then((res) => {
         setSearchCount(res?.count);
