@@ -5,17 +5,17 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import SearchContext, { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY } from '../SearchContext';
 import FacetGroup from './FacetGroup';
 
+/* If the checkbox title wraps, constrain span element width 
+  to be size of content */
 const checkboxStyle = css`
   // Target the label/text
   label {
     font-size: 13px;
     margin-bottom: 8px;
   }
-  :hover + span {
+  :hover .facetButton {
     opacity: 1;
   }
-  grid-area: facet;
-  width: fit-content;
 `;
 
 const onlyButtonStyle = css`
@@ -31,17 +31,7 @@ const onlyButtonStyle = css`
     cursor: pointer;
   }
   line-height: 20px;
-  grid-area: button;
-`;
-
-const container = css`
-  div:hover + span {
-    opacity: 1;
-  }
-  display: grid;
-  grid-template-areas: 'facet button';
-  gap: 8px;
-  width: fit-content;
+  margin-left: 8px;
 `;
 
 export const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
@@ -116,7 +106,6 @@ const FacetValue = ({
     ({ target }) => {
       const { checked } = target;
       const facetsToUpdate = [];
-
       // if unchecked, parent should be unchecked
       if (!checked) {
         const parentKey = {
@@ -138,36 +127,44 @@ const FacetValue = ({
     [handleFacetChange, key, id, nestedSubFacets]
   );
 
-  const updateSiblings = useCallback(() => {
-    const facetsToUpdate = selfAndSiblings.map((facet) => {
-      const checked = key === facet.key && id === facet.id; // self remains checked
-      const updatedFacet = {
-        key: facet.key,
-        id: facet.id,
-        checked: checked,
-      };
-      return updatedFacet;
-    });
-    handleFacetChange(facetsToUpdate);
-  }, [handleFacetChange, key, id, selfAndSiblings]);
+  const updateSiblings = useCallback(
+    (e) => {
+      const facetsToUpdate = selfAndSiblings.map((facet) => {
+        const checked = key === facet.key && id === facet.id; // self remains checked
+        const updatedFacet = {
+          key: facet.key,
+          id: facet.id,
+          checked: checked,
+        };
+        return updatedFacet;
+      });
+      handleFacetChange(facetsToUpdate);
+      e.preventDefault();
+    },
+    [handleFacetChange, key, id, selfAndSiblings]
+  );
+
+  const labelAndButton = (
+    <>
+      {name}
+      {isNested && isChecked && siblingsSelected && (
+        <span onClick={updateSiblings} className={`facetButton ${cx(onlyButtonStyle)}`}>
+          Only
+        </span>
+      )}
+    </>
+  );
 
   return (
     <>
-      <div className={container}>
-        <Checkbox
-          className={cx(checkboxStyle)}
-          label={name}
-          onChange={updateChildren}
-          checked={isChecked}
-          id={fullFacetId}
-          indeterminate={isIndeterminate}
-        />
-        {isNested && isChecked && siblingsSelected && (
-          <span onClick={updateSiblings} className={onlyButtonStyle}>
-            Only
-          </span>
-        )}
-      </div>
+      <Checkbox
+        className={cx(checkboxStyle)}
+        label={labelAndButton}
+        onChange={updateChildren}
+        checked={isChecked}
+        id={fullFacetId}
+        indeterminate={isIndeterminate}
+      />
       {(isAtlasProduct || isChecked || isIndeterminate) &&
         facets.map((facet) => {
           return (
