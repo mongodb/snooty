@@ -363,7 +363,7 @@ const SearchResults = () => {
   const submitNewSearch = (event) => {
     const newValue = event.target[0]?.value;
     const { page } = queryString.parse(search);
-    if (newValue === searchTerm && parseInt(page) === 1) return;
+    if (!newValue || (newValue === searchTerm && parseInt(page) === 1)) return;
 
     setSearchTerm(newValue);
   };
@@ -464,7 +464,7 @@ const SearchResults = () => {
         {!!searchTerm && !!searchFinished && !!searchResults.length && (
           <>
             <StyledSearchResults>
-              {searchResults.map(({ title, preview, url, searchProperty }, index) => (
+              {searchResults.map(({ title, preview, url, searchProperty, facets }, index) => (
                 <StyledSearchResult
                   key={`${url}${index}`}
                   onClick={() =>
@@ -475,6 +475,7 @@ const SearchResults = () => {
                   url={url}
                   useLargeTitle
                   searchProperty={searchProperty?.[0]}
+                  facets={facets}
                 />
               ))}
               {
