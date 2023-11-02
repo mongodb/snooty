@@ -21,6 +21,7 @@ const StyledHeaderContainer = styled.header(
 
 const Header = ({ sidenav, eol, template }) => {
   const { project, branch } = useSnootyMetadata();
+  const { searchPropertyMapping } = useMarianManifests();
 
   let searchProperty;
 
@@ -30,10 +31,6 @@ const Header = ({ sidenav, eol, template }) => {
   }
   const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
-
-  //The following code is commented out because it is currently unused while contextual search is "turned off" (is not passed into UnifiedNav)
-
-  const { searchPropertyMapping } = useMarianManifests();
 
   const searchParams = [];
 
