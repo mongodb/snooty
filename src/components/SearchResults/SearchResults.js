@@ -314,6 +314,11 @@ const SearchResults = () => {
     }
   }, []);
 
+  const fetchSearchMeta = useCallback(async () => {
+    const res = await fetch(searchParamsToMetaURL(searchParams));
+    return res.json();
+  }, [searchParams]);
+
   // async call to fetch search results
   // effect is called if searchTerm, searchPropertyMapping are defined
   useEffect(() => {
@@ -327,11 +332,6 @@ const SearchResults = () => {
     const fetchSearchResults = async () => {
       const res = await fetch(searchParamsToURL(searchParams));
       return (await res.json()).results;
-    };
-
-    const fetchSearchMeta = async () => {
-      const res = await fetch(searchParamsToMetaURL(searchParams));
-      return res.json();
     };
 
     // fetch search results
@@ -350,19 +350,21 @@ const SearchResults = () => {
     fetchSearchMeta()
       .then((res) => {
         setSearchCount(res?.count);
-        if (searchResultFacets && searchResultFacets.length) {
-          return;
-        }
-        setSearchResultFacets(res?.facets);
       })
       .catch((e) => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
         setSearchCount();
         setSearchResultFacets([]);
       });
-    // searchResultsFacets missing as dependency, but should not refresh the results or count
+  }, [fetchSearchMeta, searchParams]);
+
+  useEffect(() => {
+    fetchSearchMeta().then((res) => {
+      setSearchResultFacets(res?.facets);
+    });
+    // facet filters should only refresh on search term being updated
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [searchTerm]);
 
   const submitNewSearch = (event) => {
     const newValue = event.target[0]?.value;
