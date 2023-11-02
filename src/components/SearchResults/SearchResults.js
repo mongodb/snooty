@@ -350,6 +350,9 @@ const SearchResults = () => {
     fetchSearchMeta()
       .then((res) => {
         setSearchCount(res?.count);
+        if (searchResultFacets && searchResultFacets.length) {
+          return;
+        }
         setSearchResultFacets(res?.facets);
       })
       .catch((e) => {
@@ -357,6 +360,8 @@ const SearchResults = () => {
         setSearchCount();
         setSearchResultFacets([]);
       });
+    // searchResultsFacets missing as dependency, but should not refresh the results or count
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   const submitNewSearch = (event) => {
