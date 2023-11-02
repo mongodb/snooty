@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css, Global } from '@emotion/react';
-import { cx } from '@leafygreen-ui/emotion';
+import { cx, css as leafyCss } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -239,11 +239,11 @@ const ResultTag = styled('div')`
   align-items: center;
 `;
 
-const styledOverline = css`
+const overlineStyle = leafyCss`
   padding-right: 8px;
 `;
 
-const styledIcon = css`
+const iconStyle = leafyCss`
   margin-left: 8px;
   margin-right: -2px;
 `;
@@ -408,7 +408,7 @@ const SearchResults = () => {
           {searchTerm && (
             <ResultTag>
               {!showFacets && Number.isInteger(searchCount) && (
-                <Overline className={cx(styledOverline)}>
+                <Overline className={cx(overlineStyle)}>
                   <>{searchCount} RESULTS</>
                 </Overline>
               )}
@@ -417,7 +417,7 @@ const SearchResults = () => {
                   {selectedCategory && (
                     <StyledTag variant="green" onClick={resetFilters}>
                       {selectedCategory}
-                      <Icon className={cx(styledIcon)} glyph="X" />
+                      <Icon className={cx(iconStyle)} glyph="X" />
                     </StyledTag>
                   )}
                   {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
