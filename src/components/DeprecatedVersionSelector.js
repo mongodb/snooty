@@ -77,7 +77,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   const updateVersion = useCallback(({ value }) => setVersion(value), []);
   const buttonDisabled = !(product && version);
 
-  // Fetch repos_branches for `displayName` and url
+  // Fetch docsets for url and combine `displayName` from oldGenToReposMap method
   useEffect(() => {
     if (reposDatabase) {
       fetchDocsets(reposDatabase).then((resp) => {
