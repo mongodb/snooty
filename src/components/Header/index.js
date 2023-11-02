@@ -6,7 +6,7 @@ import { SidenavMobileMenuDropdown } from '../Sidenav';
 import SiteBanner from '../Banner/SiteBanner';
 import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { useMarianManifests } from '../../hooks/use-marian-manifests';
+//import { useMarianManifests } from '../../hooks/use-marian-manifests';
 
 const CHATBOT_ENABLED = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
 
@@ -20,8 +20,7 @@ const StyledHeaderContainer = styled.header(
 );
 
 const Header = ({ sidenav, eol, template }) => {
-  const { project, branch } = useSnootyMetadata();
-  const { searchPropertyMapping } = useMarianManifests();
+  const { project /*, branch*/ } = useSnootyMetadata();
 
   let searchProperty;
 
@@ -32,9 +31,13 @@ const Header = ({ sidenav, eol, template }) => {
   const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
   const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
 
-  const searchParams = [];
+  //The following code is commented out because it is currently unused while contextual search is "turned off" (is not passed into UnifiedNav)
 
-  let searchManifestName = project;
+  //const { searchPropertyMapping } = useMarianManifests();
+
+  // const searchParams = [];
+
+  // let searchManifestName = project;
 
   /**
    * The searchPropertyMapping object will contain a new property
@@ -42,21 +45,22 @@ const Header = ({ sidenav, eol, template }) => {
    * the project name to the true search manifest name in cases where the
    * project name is NOT the search manifest name.
    */
-  if (searchPropertyMapping.projectToSearchMap && project in searchPropertyMapping.projectToSearchMap) {
-    searchManifestName = searchPropertyMapping.projectToSearchMap[project];
-  }
 
-  const projectManifest = `${searchManifestName}-${branch}`;
+  // if (searchPropertyMapping.projectToSearchMap && project in searchPropertyMapping.projectToSearchMap) {
+  //   searchManifestName = searchPropertyMapping.projectToSearchMap[project];
+  // }
 
-  if (projectManifest in searchPropertyMapping) {
-    searchParams.push({ param: 'searchProperty', value: projectManifest });
-  }
+  // const projectManifest = `${searchManifestName}-${branch}`;
+
+  // if (projectManifest in searchPropertyMapping) {
+  //   searchParams.push({ param: 'searchProperty', value: projectManifest });
+  // }
 
   return (
     <StyledHeaderContainer template={template}>
       <SiteBanner />
       <>
-        {!eol && <UnifiedNav position="relative" property={{ name: unifiedNavProperty, searchParams }} />}
+        {!eol && <UnifiedNav position="relative" property={{ name: unifiedNavProperty }} />}
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>
