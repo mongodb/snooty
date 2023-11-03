@@ -5,8 +5,6 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import SearchContext, { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY } from '../SearchContext';
 import FacetGroup from './FacetGroup';
 
-/* If the checkbox title wraps, constrain span element width 
-  to be size of content */
 const checkboxStyle = css`
   // Target the label/text
   label {
@@ -148,7 +146,7 @@ const FacetValue = ({
     <>
       {name}
       {isNested && isChecked && siblingsSelected && (
-        <span onClick={updateSiblings} className={`facetButton ${cx(onlyButtonStyle)}`}>
+        <span onClick={updateSiblings} className={cx(onlyButtonStyle, 'facetButton')}>
           Only
         </span>
       )}
