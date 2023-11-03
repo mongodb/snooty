@@ -7,8 +7,8 @@ import { Overline } from '@leafygreen-ui/typography';
 import { theme } from '../../../theme/docsTheme';
 import Tag, { searchTagStyle } from '../../Tag';
 import SearchContext from '../SearchContext';
-import useFacets from './useFacets';
 import { initChecked } from './FacetValue';
+import { getFacetTagVariant } from './utils';
 
 // util to get all current facets, derived from search params
 const getActiveFacets = (facetOptions, searchParams) => {
@@ -97,7 +97,7 @@ const FacetTag = ({ facet: { name, key, id, facets } }) => {
   }, [facets, handleFacetChange, id, key]);
 
   return (
-    <StyledTag onClick={onClick}>
+    <StyledTag variant={getFacetTagVariant({ key, id })} onClick={onClick}>
       {name}
       <Icon glyph="X" />
     </StyledTag>
@@ -111,8 +111,7 @@ const ClearFacetsTag = ({ onClick }) => (
 );
 
 const FacetTags = ({ resultsCount }) => {
-  const { searchParams, clearFacets } = useContext(SearchContext);
-  const facets = useFacets();
+  const { searchParams, clearFacets, facets } = useContext(SearchContext);
   // don't have to use state since facet filters are
   // derived from URL state (search params)
   const activeFacets = useMemo(() => getActiveFacets(facets, searchParams), [facets, searchParams]);
