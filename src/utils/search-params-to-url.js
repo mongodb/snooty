@@ -31,7 +31,7 @@ export const searchParamsToURL = (searchParams) => {
   const filters = getFilterParams(searchParams);
 
   const queryParams = `?q=${searchTerm}&page=${page}${searchProperty ? `&searchProperty=${searchProperty}` : ''}${
-    filters.length ? `&${filters}&combineFilters=true` : ''
+    filters.length ? `&${filters}` : ''
   }`;
   return `${assertTrailingSlash(MARIAN_URL)}search${queryParams}`;
 };
@@ -41,16 +41,18 @@ export const searchParamsToURL = (searchParams) => {
  * Extracts query params from search params and appends to new request URL as string
  * Route is used to return meta data for search params
  *
- * @param {URLSearchParams} searchParams
+ * @param {URLSearchParams} [searchParams]
+ * @param {string} [searchTerm]
  */
-export const searchParamsToMetaURL = (searchParams) => {
-  const searchTerm = searchParams.get(TERM_PARAM);
-  const searchProperty = searchParams.get(V1_SEARCH_FILTER_PARAM);
-  const filters = getFilterParams(searchParams);
+export const searchParamsToMetaURL = (searchParams, searchTerm) => {
+  const queryString = searchTerm || searchParams.get(TERM_PARAM);
 
-  const queryParams = `?q=${searchTerm}${searchProperty ? `&searchProperty=${searchProperty}` : ''}${
-    filters.length ? `&${filters}&combineFilters=true` : ''
-  }`;
+  let queryParams = `?q=${queryString}`;
+  if (searchParams) {
+    const searchProperty = searchParams.get(V1_SEARCH_FILTER_PARAM);
+    const filters = getFilterParams(searchParams);
+    queryParams += `${searchProperty ? `&searchProperty=${searchProperty}` : ''}${filters.length ? `&${filters}` : ''}`;
+  }
   const META_PATH = `v2/search/meta`;
   return `${assertTrailingSlash(MARIAN_URL)}${META_PATH}${queryParams}`;
 };

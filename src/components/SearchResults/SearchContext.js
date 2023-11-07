@@ -83,7 +83,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
 
   // navigate changes and store state in URL
   const onSearchChange = ({ searchTerm, searchFilter, page }) => {
-    const newSearch = new URLSearchParams(search);
+    const newSearch = new URLSearchParams();
     if (searchTerm) {
       newSearch.set('q', searchTerm);
     }
