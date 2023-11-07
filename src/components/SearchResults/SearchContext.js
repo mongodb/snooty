@@ -83,7 +83,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
 
   // navigate changes and store state in URL
   const onSearchChange = ({ searchTerm, searchFilter, page }) => {
-    const newSearch = new URLSearchParams();
+    const newSearch = new URLSearchParams(search);
     if (searchTerm) {
       newSearch.set('q', searchTerm);
     }
@@ -140,7 +140,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         filters,
         page,
         setPage: (p) => {
-          onSearchChange({ page: p });
+          onSearchChange({ searchTerm: new URLSearchParams(search).get('q'), page: p });
         },
         searchTerm,
         setSearchTerm: (q, p = 1) => {
@@ -148,7 +148,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         },
         searchFilter,
         setSearchFilter: (searchProperty) => {
-          onSearchChange({ searchFilter: searchProperty });
+          onSearchChange({ searchTerm: new URLSearchParams(search).get('q'), searchFilter: searchProperty });
         },
         searchPropertyMapping,
         selectedCategory,
