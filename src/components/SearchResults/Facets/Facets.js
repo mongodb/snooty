@@ -1,10 +1,7 @@
-import React, { useContext } from 'react';
-import SearchContext from '../SearchContext';
+import React from 'react';
 import FacetGroup from './FacetGroup';
 
-const Facets = () => {
-  const { facets } = useContext(SearchContext);
-
+const Facets = ({ facets }) => {
   return (
     <div data-testid="facets-container">
       {facets?.length > 0 &&
