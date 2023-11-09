@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -51,11 +51,12 @@ const StyledChatBotUiContainer = styled.div`
   width: 100%;
   background: ${palette.white};
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  min-height: 96px;
+  align-items: center;
 
   > div {
     max-width: 862px;
     margin-left: -32px;
-
     p {
       color: ${palette.black};
     }
@@ -65,8 +66,33 @@ const StyledChatBotUiContainer = styled.div`
     }
   }
 
+  // Styling the chatbot's loading skeleton
+  > span {
+    display: flex;
+    height: 48px;
+    align-items: self-end;
+  }
+
   ${({ template }) => template === 'landing' && landingTemplateStyling};
 `;
+
+const skeletonStyle = css`
+  justify-self: center;
+`;
+
+const SuspenseTrigger = () => {
+  throw new Promise(() => {});
+};
+
+// const LazyChatbot = () => {
+//   const [ready, setReady] = useState(false);
+
+//   useEffect(() => {
+//     setTimeout(() => setReady(true), 1000);
+//   }, []);
+
+//   return ready ? <div>hello world!</div> : <SuspenseTrigger />;
+// };
 
 const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
 
@@ -78,10 +104,18 @@ const ChatbotUi = ({ template }) => {
       ? 'https://knowledge.mongodb.com/api/v1'
       : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      // Inspect styles or do whatever you need
+      console.log('Inspecting styles...');
+    }, 50000); // Adjust the timeout as needed
+
+    return () => clearTimeout(timeout);
+  }, []);
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
-      <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={82} />}>
+      <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
         <LazyChatbot
           serverBaseUrl={CHATBOT_SERVER_BASE_URL}
           suggestedPrompts={[
