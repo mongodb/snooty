@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
+import React, { Suspense, lazy } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -76,24 +76,6 @@ const StyledChatBotUiContainer = styled.div`
   ${({ template }) => template === 'landing' && landingTemplateStyling};
 `;
 
-const skeletonStyle = css`
-  justify-self: center;
-`;
-
-const SuspenseTrigger = () => {
-  throw new Promise(() => {});
-};
-
-// const LazyChatbot = () => {
-//   const [ready, setReady] = useState(false);
-
-//   useEffect(() => {
-//     setTimeout(() => setReady(true), 1000);
-//   }, []);
-
-//   return ready ? <div>hello world!</div> : <SuspenseTrigger />;
-// };
-
 const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
 
 const ChatbotUi = ({ template }) => {
@@ -104,14 +86,6 @@ const ChatbotUi = ({ template }) => {
       ? 'https://knowledge.mongodb.com/api/v1'
       : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      // Inspect styles or do whatever you need
-      console.log('Inspecting styles...');
-    }, 50000); // Adjust the timeout as needed
-
-    return () => clearTimeout(timeout);
-  }, []);
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
