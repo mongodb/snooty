@@ -51,11 +51,12 @@ const StyledChatBotUiContainer = styled.div`
   width: 100%;
   background: ${palette.white};
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  min-height: 96px;
+  align-items: center;
 
   > div {
     max-width: 862px;
     margin-left: -32px;
-
     p {
       color: ${palette.black};
     }
@@ -63,6 +64,13 @@ const StyledChatBotUiContainer = styled.div`
     @media ${theme.screenSize.upToLarge} {
       max-width: unset;
     }
+  }
+
+  // Styling the chatbot's loading skeleton
+  > span {
+    display: flex;
+    height: 48px;
+    align-items: self-end;
   }
 
   ${({ template }) => template === 'landing' && landingTemplateStyling};
@@ -81,7 +89,7 @@ const ChatbotUi = ({ template }) => {
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
-      <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={82} />}>
+      <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
         <LazyChatbot
           serverBaseUrl={CHATBOT_SERVER_BASE_URL}
           suggestedPrompts={[
