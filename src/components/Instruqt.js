@@ -51,7 +51,7 @@ const Instruqt = ({ nodeData: { argument }, nodeData }) => {
         src={`https://play.instruqt.com/embed${embedValue}`}
       />
       <div css={controlsStyle}>
-        <IconButton onClick={onFullScreen}>
+        <IconButton aria-label="Full Screen" onClick={onFullScreen}>
           <Icon glyph="FullScreenEnter" />
         </IconButton>
       </div>
