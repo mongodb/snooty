@@ -46,7 +46,7 @@ const Code = ({
   let customActionButtonList = [];
   if (sourceSpecified) {
     customActionButtonList = [
-      <IconButton href={source}>
+      <IconButton aria-label="Open new tab" href={source}>
         <Tooltip
           triggerEvent="hover"
           align="bottom"
