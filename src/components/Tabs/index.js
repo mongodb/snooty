@@ -29,7 +29,7 @@ const defaultTabsStyling = css`
     align-items: center;
   }
 
-  @media ${theme.screenSize.upToXLarge} {
+  @media ${theme.screenSize.upTo2XLarge} {
     ${TAB_BUTTON_SELECTOR} {
       overflow: initial;
       max-width: initial;
