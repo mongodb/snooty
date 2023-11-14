@@ -132,7 +132,42 @@
           "name": "Community Kubernetes Operator",
           "facets": []
         },
-        { "type": "facet-value", "id": "compass", "key": "target_product", "name": "Compass", "facets": [] },
+        { "type": "facet-value", "id": "compass", "key": "target_product", "name": "Compass", "facets": [ {
+          "type": "facet-option",
+          "id": "version",
+          "key": "target_product>compass>version",
+          "name": "Version",
+          "options": [
+            {
+              "type": "facet-value",
+              "id": "v7.0",
+              "key": "target_product>compass>sub_product",
+              "name": "v7.0 (current)",
+              "facets": []
+            },
+            {
+              "type": "facet-value",
+              "id": "v6.0",
+              "key": "target_product>compass>sub_product",
+              "name": "v6.0",
+              "facets": []
+            },
+            {
+              "type": "facet-value",
+              "id": "v5.0",
+              "key": "target_product>compass>sub_product",
+              "name": "v5.0",
+              "facets": []
+            },
+            {
+              "type": "facet-value",
+              "id": "v4.4",
+              "key": "target_product>compass>sub_product",
+              "name": "v4.4",
+              "facets": []
+            }
+          ]
+        }] },
         {
           "type": "facet-value",
           "id": "database-tools",

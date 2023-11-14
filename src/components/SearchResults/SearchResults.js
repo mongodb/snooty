@@ -16,6 +16,8 @@ import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToMetaURL, searchParamsToURL } from '../../utils/search-params-to-url';
+// TODO: remove after testing
+import { statusV2 } from '../../../tests/unit/data/SearchResults.test.json';
 import Tag, { searchTagStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
@@ -350,7 +352,9 @@ const SearchResults = () => {
     fetchSearchMeta()
       .then((res) => {
         setSearchCount(res?.count);
-        setSearchResultFacets(res?.facets);
+        // setSearchResultFacets(res?.facets);
+        // TODO: remove testing DOP-4081
+        setSearchResultFacets(statusV2);
       })
       .catch((e) => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);

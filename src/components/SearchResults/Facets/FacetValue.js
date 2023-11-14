@@ -129,7 +129,7 @@ const FacetValue = ({
         facetsToUpdate.push({
           key: preferredVersion.key,
           id: preferredVersion.id,
-          checked: true,
+          checked: checked,
         });
       }
       facetsToUpdate.push({ key, id, checked });

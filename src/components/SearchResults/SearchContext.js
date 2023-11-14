@@ -70,7 +70,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   );
   // get vars from URL
   // state management for Search is within URL.
-  const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
+  const [searchParams, setSearchParams] = useState(() => new URLSearchParams(search));
   const page = parseInt(searchParams.get('page') || 1);
   const searchTerm = searchParams.get('q');
   const searchFilter = searchParams.get('searchProperty');
