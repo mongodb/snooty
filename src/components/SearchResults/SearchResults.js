@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css, Global } from '@emotion/react';
-import { cx } from '@leafygreen-ui/emotion';
+import { cx, css as leafyCss } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -87,7 +87,7 @@ const SearchResultsContainer = styled('div')`
       ? `
     column-gap: 16px;
     grid-template-areas: 'header header' 'filters results';
-    grid-template-columns: 148px auto;
+    grid-template-columns: 188px auto;
 
     @media ${theme.screenSize.upTo2XLarge} {
       margin: ${theme.size.large} 71px ${theme.size.xlarge} 52px;
@@ -239,11 +239,11 @@ const ResultTag = styled('div')`
   align-items: center;
 `;
 
-const styledOverline = css`
+const overlineStyle = leafyCss`
   padding-right: 8px;
 `;
 
-const styledIcon = css`
+const iconStyle = leafyCss`
   margin-left: 8px;
   margin-right: -2px;
 `;
@@ -279,6 +279,7 @@ const SearchResults = () => {
 
   const [searchFinished, setSearchFinished] = useState(() => !searchTerm);
   const [searchCount, setSearchCount] = useState();
+  const [searchResultFacets, setSearchResultFacets] = useState([]);
 
   const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
@@ -322,7 +323,6 @@ const SearchResults = () => {
       return;
     }
     setSearchFinished(false);
-    setSearchCount();
 
     const fetchSearchResults = async () => {
       const res = await fetch(searchParamsToURL(searchParams));
@@ -334,6 +334,7 @@ const SearchResults = () => {
       return res.json();
     };
 
+    // fetch search results
     fetchSearchResults()
       .then((searchRes) => {
         setSearchResults(searchRes || []);
@@ -345,14 +346,16 @@ const SearchResults = () => {
         setSearchFinished(true);
       });
 
-    // fetch search meta
+    // fetch search meta (count and filters)
     fetchSearchMeta()
       .then((res) => {
         setSearchCount(res?.count);
+        setSearchResultFacets(res?.facets);
       })
       .catch((e) => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
         setSearchCount();
+        setSearchResultFacets([]);
       });
   }, [searchParams]);
 
@@ -405,7 +408,7 @@ const SearchResults = () => {
           {searchTerm && (
             <ResultTag>
               {!showFacets && Number.isInteger(searchCount) && (
-                <Overline className={cx(styledOverline)}>
+                <Overline className={cx(overlineStyle)}>
                   <>{searchCount} RESULTS</>
                 </Overline>
               )}
@@ -414,7 +417,7 @@ const SearchResults = () => {
                   {selectedCategory && (
                     <StyledTag variant="green" onClick={resetFilters}>
                       {selectedCategory}
-                      <Icon className={cx(styledIcon)} glyph="X" />
+                      <Icon className={cx(iconStyle)} glyph="X" />
                     </StyledTag>
                   )}
                   {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
@@ -496,7 +499,7 @@ const SearchResults = () => {
             {showFacets ? (
               <>
                 {/* Avoid showing Facets component to avoid clashing values with mobile filter */}
-                {!showMobileFilters && <Facets />}
+                {!showMobileFilters && <Facets facets={searchResultFacets} />}
               </>
             ) : (
               <>
@@ -506,7 +509,7 @@ const SearchResults = () => {
             )}
           </FiltersContainer>
         )}
-        {showMobileFilters && isTabletOrMobile && <MobileFilters />}
+        {showMobileFilters && isTabletOrMobile && <MobileFilters facets={searchResultFacets} />}
       </SearchResultsContainer>
     </>
   );
