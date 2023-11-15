@@ -319,7 +319,6 @@ const SearchResults = () => {
   useEffect(() => {
     if (!searchParams.get('q')) {
       setSearchResults([]);
-      setSearchCount(0);
       return;
     }
     setSearchFinished(false);
@@ -346,18 +345,33 @@ const SearchResults = () => {
         setSearchFinished(true);
       });
 
-    // fetch search meta (count and filters)
+    // fetch search meta (count)
     fetchSearchMeta()
       .then((res) => {
         setSearchCount(res?.count);
-        setSearchResultFacets(res?.facets);
       })
       .catch((e) => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
         setSearchCount();
-        setSearchResultFacets([]);
       });
   }, [searchParams]);
+
+  // update filters only on search term change
+  useEffect(() => {
+    const fetchSearchMeta = async () => {
+      const res = await fetch(searchParamsToMetaURL(null, searchTerm));
+      return res.json();
+    };
+
+    fetchSearchMeta()
+      .then((res) => {
+        setSearchResultFacets(res?.facets);
+      })
+      .catch((e) => {
+        console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
+        setSearchResultFacets([]);
+      });
+  }, [searchTerm]);
 
   const submitNewSearch = (event) => {
     const newValue = event.target[0]?.value;
