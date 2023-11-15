@@ -351,9 +351,6 @@ const SearchResults = () => {
     fetchSearchMeta()
       .then((res) => {
         setSearchCount(res?.count);
-        // setSearchResultFacets(res?.facets);
-        // TODO: remove testing DOP-4081
-        setSearchResultFacets(statusV2);
       })
       .catch((e) => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
@@ -370,7 +367,9 @@ const SearchResults = () => {
 
     fetchSearchMeta()
       .then((res) => {
-        setSearchResultFacets(res?.facets);
+        // setSearchResultFacets(res?.facets);
+        // TODO: remove testing DOP-4081
+        setSearchResultFacets(statusV2);
       })
       .catch((e) => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
