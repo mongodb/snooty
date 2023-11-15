@@ -140,7 +140,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         filters,
         page,
         setPage: (p) => {
-          onSearchChange({ searchTerm: new URLSearchParams(search).get('q'), page: p });
+          onSearchChange({ searchTerm: searchTerm, page: p });
         },
         searchTerm,
         setSearchTerm: (q, p = 1) => {
@@ -148,7 +148,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         },
         searchFilter,
         setSearchFilter: (searchProperty) => {
-          onSearchChange({ searchTerm: new URLSearchParams(search).get('q'), searchFilter: searchProperty });
+          onSearchChange({ searchTerm: searchTerm, searchFilter: searchProperty });
         },
         searchPropertyMapping,
         selectedCategory,
