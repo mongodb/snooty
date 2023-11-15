@@ -68,7 +68,8 @@ export const searchParamsToURL = (searchParams) => {
  * Extracts query params from search params and appends to new request URL as string
  * Route is used to return meta data for search params
  *
- * @param {URLSearchParams} searchParams
+ * @param {URLSearchParams} [searchParams]
+ * @param {string} [searchTerm]
  */
 export const searchParamsToMetaURL = (searchParams, searchTerm) => {
   const modifiedSearchParams = removeParentSelections(searchParams);
