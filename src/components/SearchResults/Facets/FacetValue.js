@@ -78,9 +78,11 @@ const FacetValue = ({
   const fullFacetId = `${key}>${id}`;
 
   // Mapping of nested facet options/groups with the ids for each underlying facet value
-  const [nestedSubFacets, preferredVersion, totalSubFacets] = useMemo(() => {
+  // nestedSubFacets do not include version subfacets, this is treated separately
+  const [nestedSubFacets, nestedVersions, preferredVersion, totalSubFacets] = useMemo(() => {
     // key: string; value: Set
     const map = new Map();
+    let nestedVersions = [];
     let totalCount = 0;
     let preferredVersion;
     // Consolidate the available facet values for an arbitrary amount of nested facet
@@ -89,6 +91,7 @@ const FacetValue = ({
       // if facetGroup is versions, get the first key
       if (facetGroup.id === VERSION_GROUP_ID) {
         preferredVersion = facetGroup.options?.[0];
+        nestedVersions = facetGroup.options;
         return;
       }
       facetGroup.options.forEach(({ key, id }) => {
@@ -100,7 +103,7 @@ const FacetValue = ({
         totalCount++;
       });
     });
-    return [map, preferredVersion, totalCount];
+    return [map, nestedVersions, preferredVersion, totalCount];
   }, [facets]);
   const numSelectedSubProducts =
     totalSubFacets > 0 ? findNumSelectedSubFacets(searchParams, nestedSubFacets, fullFacetId) : 0;
@@ -125,7 +128,12 @@ const FacetValue = ({
           facetsToUpdate.push({ key, id, checked });
         });
       });
-      if (preferredVersion) {
+      // uncheck all version options if option is
+      if (!checked) {
+        nestedVersions.forEach(({ key, id }) => {
+          facetsToUpdate.push({ key, id, checked });
+        });
+      } else if (preferredVersion) {
         facetsToUpdate.push({
           key: preferredVersion.key,
           id: preferredVersion.id,
@@ -135,7 +143,7 @@ const FacetValue = ({
       facetsToUpdate.push({ key, id, checked });
       handleFacetChange(facetsToUpdate, checked);
     },
-    [nestedSubFacets, preferredVersion, key, id, handleFacetChange]
+    [nestedSubFacets, preferredVersion, key, id, handleFacetChange, nestedVersions]
   );
 
   const updateSiblings = useCallback(
