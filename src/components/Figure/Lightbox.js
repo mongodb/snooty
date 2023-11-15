@@ -46,7 +46,6 @@ const LightboxWrapper = styled('div')`
   margin-top: ${theme.size.medium};
   margin-bottom: ${theme.size.medium};
   display: block;
-  max-height: 620px;
 `;
 
 const Lightbox = ({ nodeData, ...rest }) => {
