@@ -141,28 +141,28 @@
             {
               "type": "facet-value",
               "id": "v7.0",
-              "key": "target_product>compass>sub_product",
+              "key": "target_product>compass>version",
               "name": "v7.0 (current)",
               "facets": []
             },
             {
               "type": "facet-value",
               "id": "v6.0",
-              "key": "target_product>compass>sub_product",
+              "key": "target_product>compass>version",
               "name": "v6.0",
               "facets": []
             },
             {
               "type": "facet-value",
               "id": "v5.0",
-              "key": "target_product>compass>sub_product",
+              "key": "target_product>compass>version",
               "name": "v5.0",
               "facets": []
             },
             {
               "type": "facet-value",
               "id": "v4.4",
-              "key": "target_product>compass>sub_product",
+              "key": "target_product>compass>version",
               "name": "v4.4",
               "facets": []
             }
@@ -314,28 +314,28 @@
                 {
                   "type": "facet-value",
                   "id": "v7.0",
-                  "key": "target_product>docs>sub_product",
+                  "key": "target_product>docs>version",
                   "name": "v7.0 (current)",
                   "facets": []
                 },
                 {
                   "type": "facet-value",
                   "id": "v6.0",
-                  "key": "target_product>docs>sub_product",
+                  "key": "target_product>docs>version",
                   "name": "v6.0",
                   "facets": []
                 },
                 {
                   "type": "facet-value",
                   "id": "v5.0",
-                  "key": "target_product>docs>sub_product",
+                  "key": "target_product>docs>version",
                   "name": "v5.0",
                   "facets": []
                 },
                 {
                   "type": "facet-value",
                   "id": "v4.4",
-                  "key": "target_product>docs>sub_product",
+                  "key": "target_product>docs>version",
                   "name": "v4.4",
                   "facets": []
                 }

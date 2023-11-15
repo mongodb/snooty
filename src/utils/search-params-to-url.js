@@ -6,6 +6,7 @@ const TERM_PARAM = 'q';
 const PAGE_PARAM = 'page';
 const V1_SEARCH_FILTER_PARAM = 'searchProperty';
 const V2_SEARCH_FILTER_PREFIX = FACETS_KEY_PREFIX;
+const SINGLE_SELECT_FIELDS = ['version'];
 
 const getFilterParams = (searchParams) => {
   const res = [];
@@ -36,6 +37,12 @@ function removeParentSelections(searchParams) {
     if (parts.length <= 1) {
       continue;
     }
+
+    // if not within fields that you can only select one value
+    if (SINGLE_SELECT_FIELDS.indexOf(parts[parts.length - 1]) === -1) {
+      continue;
+    }
+
     const parentKey = parts.slice(0, parts.length - 2).join(FACETS_LEVEL_KEY);
     const parentValue = parts[parts.length - 2];
     newSearchParams.delete(parentKey, parentValue);
@@ -72,7 +79,7 @@ export const searchParamsToURL = (searchParams) => {
  * @param {string} [searchTerm]
  */
 export const searchParamsToMetaURL = (searchParams, searchTerm) => {
-  const modifiedSearchParams = removeParentSelections(searchParams);
+  const modifiedSearchParams = searchParams ? removeParentSelections(searchParams) : new URLSearchParams();
   const queryString = searchTerm || modifiedSearchParams.get(TERM_PARAM);
 
   let queryParams = `?q=${queryString}`;
