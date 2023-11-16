@@ -56,7 +56,9 @@ const Header = ({ sidenav, eol, template }) => {
     <StyledHeaderContainer template={template}>
       <SiteBanner />
       <>
-        {!eol && <UnifiedNav position="relative" property={{ name: unifiedNavProperty, searchParams }} />}
+        {!eol && (
+          <UnifiedNav fullWidth="true" position="relative" property={{ name: unifiedNavProperty, searchParams }} />
+        )}
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>
