@@ -3,4 +3,4 @@
  */
 const isGatsbyPreview = () => process.env.GATSBY_IS_PREVIEW === 'true';
 
-module.exports = { isGatsbyPreview };
+export default isGatsbyPreview;

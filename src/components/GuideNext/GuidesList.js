@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { getPlaintext } from '../../utils/get-plaintext';
+import getPlaintext from '../../utils/get-plaintext';
 import GuidesListItem from './GuidesListItem';
 
 const List = styled('ul')`

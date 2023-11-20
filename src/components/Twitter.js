@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { getPlaintext } from '../utils/get-plaintext';
+import getPlaintext from '../utils/get-plaintext';
 
 const isExternalUrl = /^http(s)?:\/\//;
 

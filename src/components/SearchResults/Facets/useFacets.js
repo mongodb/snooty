@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { assertTrailingSlash } from '../../../utils/assert-trailing-slash';
+import assertTrailingSlash from '../../../utils/assert-trailing-slash.mjs';
 import { MARIAN_URL } from '../../../constants';
 
 const useFacets = () => {

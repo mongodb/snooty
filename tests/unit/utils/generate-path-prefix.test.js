@@ -1,4 +1,4 @@
-import { generatePathPrefix } from '../../../src/utils/generate-path-prefix';
+import generatePathPrefix from '../../../src/utils/generate-path-prefix';
 
 describe('path prefix testing', () => {
   const commitHash = 'COMMIT_HASH';

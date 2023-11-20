@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getNestedValue } from '../utils/get-nested-value';
+import getNestedValue from '../utils/get-nested-value.mjs';
 import ComponentFactory from './ComponentFactory';
 
 // For now, explicitly define the arguments that should be accepted for Gatsby to build the node

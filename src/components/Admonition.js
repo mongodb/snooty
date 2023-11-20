@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Callout, { Variant } from '@leafygreen-ui/callout';
 import { cx, css } from '@leafygreen-ui/emotion';
-import { getPlaintext } from '../utils/get-plaintext';
+import getPlaintext from '../utils/get-plaintext';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 

@@ -8,7 +8,7 @@ import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
-import { isGatsbyPreview } from '../utils/is-gatsby-preview';
+import isGatsbyPreview from '../utils/is-gatsby-preview';
 
 /*
  * Note: This component is not suitable for internal page navigation:

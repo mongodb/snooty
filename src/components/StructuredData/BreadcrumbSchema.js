@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
+import assertTrailingSlash from '../../utils/assert-trailing-slash.mjs';
 import { baseUrl } from '../../utils/base-url';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 

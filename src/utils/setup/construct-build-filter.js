@@ -1,4 +1,4 @@
-const { constructPageIdPrefix } = require('./construct-page-id-prefix');
+import constructPageIdPrefix from './construct-page-id-prefix.mjs';
 
 // Returns the query to be used by our Stitch/Realm function to fetch a site's documents
 const constructBuildFilter = ({ commitHash, patchId, ...rest }) => {
@@ -10,4 +10,4 @@ const constructBuildFilter = ({ commitHash, patchId, ...rest }) => {
   };
 };
 
-module.exports = { constructBuildFilter };
+export default constructBuildFilter;

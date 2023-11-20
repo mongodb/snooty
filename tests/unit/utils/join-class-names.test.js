@@ -1,4 +1,4 @@
-const { joinClassNames } = require('../../../src/utils/join-class-names');
+import { joinClassNames } from '../../../src/utils/join-class-names.js';
 
 describe('joinClassNames', () => {
   it('returns a string of all class names joined together', () => {

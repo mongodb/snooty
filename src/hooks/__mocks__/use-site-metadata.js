@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   useSiteMetadata: jest.fn().mockReturnValue({
     branch: 'master',
     project: 'datalake',

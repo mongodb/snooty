@@ -1,5 +1,5 @@
-import { generatePathPrefix } from '../../../utils/generate-path-prefix';
-import { normalizePath } from '../../../utils/normalize-path';
+import generatePathPrefix from '../../../utils/generate-path-prefix';
+import normalizePath from '../../../utils/normalize-path';
 
 const getResourceLinkUrl = (metadata, project, tag, operationId, openapi_pages = {}) => {
   const pathPrefix = generatePathPrefix(metadata, project);

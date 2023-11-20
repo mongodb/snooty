@@ -1,4 +1,4 @@
-const { assertTrailingSlash } = require('./assert-trailing-slash');
+import assertTrailingSlash from './assert-trailing-slash.mjs';
 const DOTCOM_BASE_URL = 'https://www.mongodb.com';
 const DOTCOM_BASE_PREFIX = `docs`;
 
@@ -59,4 +59,4 @@ const baseUrl = (url = DOTCOM_BASE_URL, options = {}) => {
   return assertTrailingSlash(needsProtocol ? baseUrl.toString() : baseUrl.toString().split('//')[1]);
 };
 
-module.exports = { baseUrl, DOTCOM_BASE_PREFIX, DOTCOM_BASE_URL };
+export { baseUrl, DOTCOM_BASE_PREFIX, DOTCOM_BASE_URL };

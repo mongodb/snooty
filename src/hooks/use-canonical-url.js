@@ -1,4 +1,4 @@
-import { assertTrailingSlash } from '../utils/assert-trailing-slash';
+import assertTrailingSlash from '../utils/assert-trailing-slash.mjs';
 import { useSiteMetadata } from './use-site-metadata';
 import { usePathPrefix } from './use-path-prefix';
 

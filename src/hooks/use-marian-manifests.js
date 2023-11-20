@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { assertTrailingSlash } from '../utils/assert-trailing-slash';
+import assertTrailingSlash from '../utils/assert-trailing-slash.mjs';
 import { parseMarianManifests } from '../utils/parse-marian-manifests';
 import { MARIAN_URL } from '../constants';
 import { fetchSearchPropertyMapping } from '../utils/realm';

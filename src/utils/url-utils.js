@@ -1,7 +1,7 @@
 import { generatePrefix } from '../components/VersionDropdown/utils';
 import { baseUrl } from './base-url';
-import { assertTrailingSlash } from './assert-trailing-slash';
-import { normalizePath } from './normalize-path';
+import assertTrailingSlash from './assert-trailing-slash.mjs';
+import normalizePath from './normalize-path';
 
 export const getUrl = (branchUrlSlug, project, siteMetadata, siteBasePrefix, slug) => {
   if (branchUrlSlug === 'legacy') {

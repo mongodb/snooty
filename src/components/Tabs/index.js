@@ -6,7 +6,7 @@ import { CodeProvider } from '../Code/code-context';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
-import { getNestedValue } from '../../utils/get-nested-value';
+import getNestedValue from '../../utils/get-nested-value.mjs';
 import { isBrowser } from '../../utils/is-browser';
 import { TabContext } from './tab-context';
 

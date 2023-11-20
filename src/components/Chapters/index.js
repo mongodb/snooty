@@ -8,8 +8,8 @@ import ComponentFactory from '../ComponentFactory';
 import CardGroup from '../Card/CardGroup';
 import BookIcon from '../icons/Book';
 import { theme } from '../../theme/docsTheme';
-import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
-import { getPlaintext } from '../../utils/get-plaintext';
+import assertTrailingSlash from '../../utils/assert-trailing-slash.mjs';
+import getPlaintext from '../../utils/get-plaintext';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import RightColumn from './RightColumn';
 

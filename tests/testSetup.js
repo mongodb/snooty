@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import EventSource from 'eventsourcemock';
 import { preloadAll } from 'react-loadable';
+import crypto from 'crypto';
 
 global.navigator = {
   userAgent: 'node.js',
@@ -34,8 +35,6 @@ beforeAll(async () => {
 afterAll(() => {
   process.removeListener('unhandledRejection', rejectionHandler);
 });
-
-const crypto = require('crypto');
 
 Object.defineProperty(global.self, 'crypto', {
   value: {

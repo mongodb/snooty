@@ -8,7 +8,7 @@ import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
-import { getPlaintext } from '../../utils/get-plaintext';
+import getPlaintext from '../../utils/get-plaintext';
 import ChapterNumberLabel from './ChapterNumberLabel';
 
 // Height and width of image

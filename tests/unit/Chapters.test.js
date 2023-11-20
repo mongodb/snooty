@@ -8,7 +8,7 @@ import { tick } from '../utils';
 import { SidenavContext } from '../../src/components/Sidenav';
 import { theme } from '../../src/theme/docsTheme';
 import * as useActiveHeading from '../../src/hooks/useActiveHeading';
-import { getPlaintext } from '../../src/utils/get-plaintext';
+import getPlaintext from '../../src/utils/get-plaintext';
 import mockData from './data/Chapters.test.json';
 
 const mountChapters = () => {

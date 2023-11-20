@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { getNestedValue } from '../../utils/get-nested-value';
+import getNestedValue from '../../utils/get-nested-value.mjs';
 import FootnoteContext from './footnote-context';
 
 /**

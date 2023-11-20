@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getPlaintext } from '../utils/get-plaintext';
+import getPlaintext from '../utils/get-plaintext';
 
 const Time = ({ nodeData: { argument } }) => {
   const time = getPlaintext(argument);

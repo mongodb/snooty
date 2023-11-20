@@ -1,4 +1,4 @@
-const { getNestedValue } = require('./get-nested-value');
+import getNestedValue from './get-nested-value.mjs';
 
 // Grabs the metadata values in question and returns them as an array
 // for the Meta & TwitterMeta tags
@@ -33,4 +33,4 @@ const getMetaFromDirective = (type, nodes, target) => {
   return collectionOfMetadata;
 };
 
-module.exports.getMetaFromDirective = getMetaFromDirective;
+export default getMetaFromDirective;

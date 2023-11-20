@@ -5,7 +5,7 @@ import { SNOOTY_REALM_APP_ID } from '../../build-constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
-import { normalizePath } from '../../utils/normalize-path';
+import normalizePath from '../../utils/normalize-path';
 import { fetchBanner } from '../../utils/realm';
 
 const getBannerSource = (src) => {

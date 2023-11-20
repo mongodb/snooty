@@ -1,5 +1,5 @@
-const AdmZip = require('adm-zip');
-const BSON = require('bson');
+import AdmZip from 'adm-zip';
+import BSON from 'bson';
 
 // Returns the metadata from the manifest file if provided
 const fetchManifestMetadata = () => {
@@ -16,4 +16,4 @@ const fetchManifestMetadata = () => {
   return metadata;
 };
 
-module.exports = { fetchManifestMetadata };
+export default fetchManifestMetadata;

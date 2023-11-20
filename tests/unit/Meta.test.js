@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { getMetaFromDirective } from '../../src/utils/get-meta-from-directive';
+import getMetaFromDirective from '../../src/utils/get-meta-from-directive';
 import Meta from '../../src/components/Meta';
 
 // data for this component

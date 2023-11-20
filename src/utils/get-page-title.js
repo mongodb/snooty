@@ -1,5 +1,5 @@
 import { formatText } from './format-text';
-import { getNestedValue } from './get-nested-value';
+import getNestedValue from './get-nested-value.mjs';
 
 /*
  * Given slug and a property's slug-title mapping, look up the title for a given page.

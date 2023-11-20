@@ -15,4 +15,4 @@ const getPlaintext = (nodeArray) => {
   return nodeArray && nodeArray.length > 0 ? nodeArray.reduce(extractText, '') : '';
 };
 
-module.exports = { getPlaintext };
+export default getPlaintext;

@@ -1,8 +1,8 @@
-const React = require('react');
+import React from 'react';
 
 const gatsby = jest.requireActual('gatsby');
 
-module.exports = {
+export default {
   ...gatsby,
   graphql: jest.fn(),
   navigate: jest.fn(),

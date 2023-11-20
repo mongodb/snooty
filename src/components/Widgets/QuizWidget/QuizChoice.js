@@ -7,7 +7,7 @@ import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
-import { getPlaintext } from '../../../utils/get-plaintext';
+import getPlaintext from '../../../utils/get-plaintext';
 
 const Dot = styled('span')`
   height: 10px;

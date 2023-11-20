@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
-import { getNestedValue } from '../utils/get-nested-value';
-import { getPlaintext } from '../utils/get-plaintext';
+import findAllKeyValuePairs from '../utils/find-all-key-value-pairs';
+import getNestedValue from '../utils/get-nested-value.mjs';
+import getPlaintext from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import Layout from '../layouts/preview-layout';
 import Widgets from './Widgets';

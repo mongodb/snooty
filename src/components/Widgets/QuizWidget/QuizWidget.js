@@ -8,7 +8,7 @@ import Icon from '@leafygreen-ui/icon';
 import ComponentFactory from '../../ComponentFactory';
 import { theme } from '../../../theme/docsTheme';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
-import { getPlaintext } from '../../../utils/get-plaintext';
+import getPlaintext from '../../../utils/get-plaintext';
 import useSnootyMetadata from '../../../utils/use-snooty-metadata';
 import { useRealmFuncs } from './RealmFuncs';
 import { RealmAppProvider } from './RealmApp';

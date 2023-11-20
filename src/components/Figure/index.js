@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import Image from '../Image';
-import { getNestedValue } from '../../utils/get-nested-value';
+import getNestedValue from '../../utils/get-nested-value.mjs';
 import { theme } from '../../theme/docsTheme';
 import Lightbox from './Lightbox';
 import CaptionLegend from './CaptionLegend';

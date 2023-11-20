@@ -12,7 +12,7 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { isBrowser } from '../../utils/is-browser';
 import { theme } from '../../theme/docsTheme';
-import { getPlaintext } from '../../utils/get-plaintext';
+import getPlaintext from '../../utils/get-plaintext';
 import { fetchOASFile } from '../../utils/realm';
 import { isLinkInWhitelist, WhitelistErrorCallout } from './whitelist';
 import {

@@ -1,6 +1,6 @@
 import { MARIAN_URL } from '../constants';
 import { FACETS_KEY_PREFIX } from '../components/SearchResults/SearchContext';
-import { assertTrailingSlash } from './assert-trailing-slash';
+import assertTrailingSlash from './assert-trailing-slash.mjs';
 
 const TERM_PARAM = 'q';
 const PAGE_PARAM = 'page';

@@ -1,4 +1,4 @@
-import { assertTrailingSlash } from '../../../src/utils/assert-trailing-slash';
+import assertTrailingSlash from '../../../src/utils/assert-trailing-slash';
 
 it('should add trailing slashes to links if they are missing', () => {
   const linkWithoutSlash = 'foo.bar';

@@ -1,4 +1,4 @@
-import { generatePathPrefix } from '../../utils/generate-path-prefix';
+import generatePathPrefix from '../../utils/generate-path-prefix';
 
 /**
  * Generates the prefix to be used for a version's URL. The prefix will typically consist of the docs repo's
