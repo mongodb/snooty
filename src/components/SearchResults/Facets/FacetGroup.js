@@ -3,14 +3,13 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
+import { VERSION_GROUP_ID } from '../../../utils/search-facet-constants';
 import FacetVersionGroup from './FacetVersionGroup';
 import FacetValue from './FacetValue';
 
 // Facet options with the following ids will truncate the initial number of items shown
 const TRUNCATE_OPTIONS = ['programming_language', 'sub_product'];
 const TRUNCATE_AMOUNT = 5;
-
-export const VERSION_GROUP_ID = 'version';
 
 const optionStyle = (isNested) => css`
   ${isNested

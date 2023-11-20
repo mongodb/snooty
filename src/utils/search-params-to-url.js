@@ -1,17 +1,18 @@
 import { MARIAN_URL } from '../constants';
-import { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY } from '../components/SearchResults/SearchContext';
 import { assertTrailingSlash } from './assert-trailing-slash';
-
-const TERM_PARAM = 'q';
-const PAGE_PARAM = 'page';
-const V1_SEARCH_FILTER_PARAM = 'searchProperty';
-const V2_SEARCH_FILTER_PREFIX = FACETS_KEY_PREFIX;
-const SINGLE_SELECT_FIELDS = ['version'];
+import {
+  TERM_PARAM,
+  PAGE_PARAM,
+  V1_SEARCH_FILTER_PARAM,
+  FACETS_KEY_PREFIX,
+  FACETS_LEVEL_KEY,
+  SINGLE_SELECT_FIELDS,
+} from './search-facet-constants';
 
 const getFilterParams = (searchParams) => {
   const res = [];
   searchParams.forEach((value, key) => {
-    if (key.startsWith(V2_SEARCH_FILTER_PREFIX)) {
+    if (key.startsWith(FACETS_KEY_PREFIX)) {
       res.push(`${key}=${value}`);
     }
   });

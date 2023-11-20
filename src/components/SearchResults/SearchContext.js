@@ -2,10 +2,8 @@ import { createContext, useCallback, useMemo, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { navigate } from 'gatsby';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
+import { FACETS_LEVEL_KEY, FACETS_KEY_PREFIX } from '../../utils/search-facet-constants';
 import useFacets from './Facets/useFacets';
-
-export const FACETS_KEY_PREFIX = 'facets.';
-export const FACETS_LEVEL_KEY = '>';
 
 const combineKeyAndId = (facet) => `${facet.key}${FACETS_LEVEL_KEY}${facet.id}`;
 

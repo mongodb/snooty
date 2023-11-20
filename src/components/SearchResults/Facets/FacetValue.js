@@ -2,8 +2,9 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import Checkbox from '@leafygreen-ui/checkbox';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
-import SearchContext, { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY } from '../SearchContext';
-import FacetGroup, { VERSION_GROUP_ID } from './FacetGroup';
+import { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY, VERSION_GROUP_ID } from '../../../utils/search-facet-constants';
+import SearchContext from '../SearchContext';
+import FacetGroup from './FacetGroup';
 
 const checkboxStyle = css`
   // Target the label/text
@@ -32,7 +33,9 @@ const onlyButtonStyle = css`
   margin-left: 8px;
 `;
 
-export const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
+export const initChecked = (searchParams, key, id) => {
+  return searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
+};
 
 /**
  * Check if the key + value of a query param are actual subfacets.
