@@ -6,6 +6,11 @@ const TERM_PARAM = 'q';
 const PAGE_PARAM = 'page';
 const V1_SEARCH_FILTER_PARAM = 'searchProperty';
 const V2_SEARCH_FILTER_PREFIX = FACETS_KEY_PREFIX;
+export const requestHeaders = process.env['GATSBY_MARIAN_URL'].includes('staging')
+  ? {
+      credentials: 'include',
+    }
+  : {};
 
 const getFilterParams = (searchParams) => {
   const res = [];

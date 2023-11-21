@@ -15,7 +15,7 @@ import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
-import { searchParamsToMetaURL, searchParamsToURL } from '../../utils/search-params-to-url';
+import { searchParamsToMetaURL, searchParamsToURL, requestHeaders } from '../../utils/search-params-to-url';
 import Tag, { searchTagStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
@@ -324,12 +324,12 @@ const SearchResults = () => {
     setSearchFinished(false);
 
     const fetchSearchResults = async () => {
-      const res = await fetch(searchParamsToURL(searchParams));
+      const res = await fetch(searchParamsToURL(searchParams), requestHeaders);
       return (await res.json()).results;
     };
 
     const fetchSearchMeta = async () => {
-      const res = await fetch(searchParamsToMetaURL(searchParams));
+      const res = await fetch(searchParamsToMetaURL(searchParams), requestHeaders);
       return res.json();
     };
 
@@ -359,7 +359,7 @@ const SearchResults = () => {
   // update filters only on search term change
   useEffect(() => {
     const fetchSearchMeta = async () => {
-      const res = await fetch(searchParamsToMetaURL(null, searchTerm));
+      const res = await fetch(searchParamsToMetaURL(null, searchTerm), requestHeaders);
       return res.json();
     };
 
@@ -405,6 +405,7 @@ const SearchResults = () => {
       <SearchResultsContainer showFacets={showFacets}>
         {/* new header for search bar */}
         <HeaderContainer>
+          TEST DOP-3998
           <H3 as="h1">Search Results</H3>
           <SearchInput
             ref={searchBoxRef}
