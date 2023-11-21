@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { assertTrailingSlash } from '../../../utils/assert-trailing-slash';
+import { requestHeaders } from '../../../utils/search-facet-constants';
 import { MARIAN_URL } from '../../../constants';
 
 const useFacets = () => {
@@ -9,7 +10,7 @@ const useFacets = () => {
   useEffect(() => {
     const fetchFacets = async () => {
       try {
-        const result = await fetch(assertTrailingSlash(MARIAN_URL) + 'v2/status');
+        const result = await fetch(assertTrailingSlash(MARIAN_URL) + 'v2/status', requestHeaders);
         const jsonResult = await result.json();
         setFacets(jsonResult);
       } catch (err) {

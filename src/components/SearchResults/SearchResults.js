@@ -15,7 +15,8 @@ import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
-import { searchParamsToMetaURL, searchParamsToURL, requestHeaders } from '../../utils/search-params-to-url';
+import { searchParamsToMetaURL, searchParamsToURL } from '../../utils/search-params-to-url';
+import { requestHeaders } from '../../utils/search-facet-constants';
 import Tag, { searchTagStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
@@ -500,7 +501,6 @@ const SearchResults = () => {
                     onForwardArrowClick={onPageClick.bind(null, true)}
                     onBackArrowClick={onPageClick.bind(null, false)}
                     shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
-                    // TODO: should disable if at max count from meta query
                     shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
                   ></Pagination>
                 </>
