@@ -499,7 +499,6 @@ const SearchResults = () => {
                     onForwardArrowClick={onPageClick.bind(null, true)}
                     onBackArrowClick={onPageClick.bind(null, false)}
                     shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
-                    // TODO: should disable if at max count from meta query
                     shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
                   ></Pagination>
                 </>

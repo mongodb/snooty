@@ -2,10 +2,8 @@ import { createContext, useCallback, useMemo, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { navigate } from 'gatsby';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
+import { FACETS_LEVEL_KEY, FACETS_KEY_PREFIX } from '../../utils/search-facet-constants';
 import useFacets from './Facets/useFacets';
-
-export const FACETS_KEY_PREFIX = 'facets.';
-export const FACETS_LEVEL_KEY = '>';
 
 const combineKeyAndId = (facet) => `${facet.key}${FACETS_LEVEL_KEY}${facet.id}`;
 
@@ -70,7 +68,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   );
   // get vars from URL
   // state management for Search is within URL.
-  const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
+  const [searchParams, setSearchParams] = useState(() => new URLSearchParams(search));
   const page = parseInt(searchParams.get('page') || 1);
   const searchTerm = searchParams.get('q');
   const searchFilter = searchParams.get('searchProperty');
