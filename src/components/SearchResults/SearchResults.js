@@ -406,7 +406,7 @@ const SearchResults = () => {
       <SearchResultsContainer showFacets={showFacets}>
         {/* new header for search bar */}
         <HeaderContainer>
-          TEST DOP-3998
+          TEST DOP-3998 via autobuilder. check build logs
           <H3 as="h1">Search Results</H3>
           <SearchInput
             ref={searchBoxRef}
