@@ -19,3 +19,9 @@ export const VERSION_GROUP_ID = 'version';
 // single select fields will be dropdown in UI,
 // and remove its parent selection as child facet selection implies parent facet
 export const SINGLE_SELECT_FIELDS = [VERSION_GROUP_ID];
+
+export const requestHeaders = process.env['GATSBY_MARIAN_URL']?.includes('staging')
+  ? {
+      credentials: 'include',
+    }
+  : {};
