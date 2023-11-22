@@ -384,7 +384,7 @@ const SearchResults = () => {
 
   const onPageClick = useCallback(
     async (isForward) => {
-      const currentPage = parseInt(searchParams.get('page'));
+      const currentPage = parseInt(searchParams.get('page')) || 1;
       const newPage = isForward ? currentPage + 1 : currentPage - 1;
       if (newPage < 1) {
         return;
