@@ -484,7 +484,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://www.mongodb.com/careers"
               rel="noreferrer noopener"
               target="_self"
@@ -496,7 +496,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://investors.mongodb.com"
               rel="noreferrer noopener"
               target="_self"
@@ -508,7 +508,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://www.mongodb.com/legal/legal-notices"
               rel="noreferrer noopener"
               target="_self"
@@ -520,7 +520,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://www.mongodb.com/legal/privacy-policy"
               rel="noreferrer noopener"
               target="_self"
@@ -532,7 +532,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://www.mongodb.com/security"
               rel="noreferrer noopener"
               target="_self"
@@ -544,7 +544,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://www.mongodb.com/cloud/trust"
               rel="noreferrer noopener"
               target="_self"
@@ -569,7 +569,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://www.mongodb.com/contact"
               rel="noreferrer noopener"
               target="_self"
@@ -581,7 +581,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://support.mongodb.com/welcome"
               rel="noreferrer noopener"
               target="_self"
@@ -593,8 +593,8 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
-              href="https://status.cloud.mongodb.com/"
+              class=" emotion-23"
+              href="https://status.mongodb.com/"
               rel="noreferrer noopener"
               target="_self"
             >
@@ -605,12 +605,12 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
-              href="https://www.mongodb.com/products/enterprise-grade-support"
+              class=" emotion-23"
+              href="https://www.mongodb.com/support"
               rel="noreferrer noopener"
               target="_self"
             >
-              Paid Support
+              Customer Support
             </a>
           </li>
         </ul>
@@ -630,7 +630,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://github.com/mongodb"
               rel="noreferrer noopener"
               target="_self"
@@ -640,14 +640,14 @@ exports[`DocumentBody renders the necessary elements 1`] = `
                 class="emotion-50"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wrvghw9q75ytq1-github.svg?auto=format%252Ccompress"
               />
-              Github
+              GitHub
             </a>
           </li>
           <li
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://stackoverflow.com/tags/mongodb/info"
               rel="noreferrer noopener"
               target="_self"
@@ -664,7 +664,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://www.linkedin.com/company/mongodbinc/"
               rel="noreferrer noopener"
               target="_self"
@@ -681,7 +681,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://youtube.com/user/mongodb"
               rel="noreferrer noopener"
               target="_self"
@@ -691,14 +691,14 @@ exports[`DocumentBody renders the necessary elements 1`] = `
                 class="emotion-50"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wsxwxsvrivp4q4-youtube.svg?auto=format%252Ccompress"
               />
-              Youtube
+              YouTube
             </a>
           </li>
           <li
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://twitter.com/mongodb"
               rel="noreferrer noopener"
               target="_self"
@@ -715,7 +715,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://twitch.tv/mongodb/videos"
               rel="noreferrer noopener"
               target="_self"
@@ -732,7 +732,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-22"
           >
             <a
-              class="emotion-23"
+              class=" emotion-23"
               href="https://facebook.com/mongodb"
               rel="noreferrer noopener"
               target="_self"
