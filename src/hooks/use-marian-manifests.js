@@ -3,6 +3,7 @@ import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import { parseMarianManifests } from '../utils/parse-marian-manifests';
 import { MARIAN_URL } from '../constants';
 import { fetchSearchPropertyMapping } from '../utils/realm';
+import { requestHeaders } from '../utils/search-facet-constants';
 import { useSiteMetadata } from './use-site-metadata';
 
 // Fetches manifests for search results and the mapping between search properties and their category/version names.
@@ -14,7 +15,7 @@ export const useMarianManifests = () => {
   useEffect(() => {
     async function fetchManifests(propertyMapping) {
       try {
-        const result = await fetch(assertTrailingSlash(MARIAN_URL) + `status`);
+        const result = await fetch(assertTrailingSlash(MARIAN_URL) + `status`, requestHeaders);
         const jsonResult = await result.json();
         setFilters(parseMarianManifests(jsonResult.manifests, propertyMapping));
       } catch (err) {

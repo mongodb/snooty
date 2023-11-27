@@ -46,6 +46,16 @@ export const mockMarianFetch = (url) => {
       });
     case 'v2/status':
       return allowJsonPromise(statusV2);
+    case 'v2/search/meta?q=test&facets.genre=tutorial&facets.target_product>atlas>sub_product=atlas-cli':
+      return allowJsonPromise({
+        count: 99,
+        facets: statusV2,
+      });
+    case 'v2/search/meta?q=test':
+      return allowJsonPromise({
+        count: 10,
+        facets: statusV2,
+      });
     default:
       return allowJsonPromise(['atlas-master']);
   }

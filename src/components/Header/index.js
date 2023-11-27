@@ -42,6 +42,7 @@ const Header = ({ sidenav, eol, template }) => {
    * the project name to the true search manifest name in cases where the
    * project name is NOT the search manifest name.
    */
+
   if (searchPropertyMapping.projectToSearchMap && project in searchPropertyMapping.projectToSearchMap) {
     searchManifestName = searchPropertyMapping.projectToSearchMap[project];
   }
@@ -49,7 +50,7 @@ const Header = ({ sidenav, eol, template }) => {
   const projectManifest = `${searchManifestName}-${branch}`;
 
   if (projectManifest in searchPropertyMapping) {
-    searchParams.push({ param: 'searchProperty', value: projectManifest });
+    searchParams.push({ param: 'docsProperty', value: projectManifest });
   }
 
   return (

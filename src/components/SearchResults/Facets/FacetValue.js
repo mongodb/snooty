@@ -2,7 +2,8 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import Checkbox from '@leafygreen-ui/checkbox';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
-import SearchContext, { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY } from '../SearchContext';
+import { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY, VERSION_GROUP_ID } from '../../../utils/search-facet-constants';
+import SearchContext from '../SearchContext';
 import FacetGroup from './FacetGroup';
 
 const checkboxStyle = css`
@@ -11,15 +12,13 @@ const checkboxStyle = css`
     font-size: 13px;
     margin-bottom: 8px;
   }
-  :hover + span {
+  :hover .facetButton {
     opacity: 1;
   }
-  flex: 1;
 `;
 
 const onlyButtonStyle = css`
   opacity: 0;
-  flex: 1;
   color: ${palette.gray.base};
   font-size: 13px;
   font-weight: 400;
@@ -31,17 +30,12 @@ const onlyButtonStyle = css`
     cursor: pointer;
   }
   line-height: 20px;
+  margin-left: 8px;
 `;
 
-const container = css`
-  div:hover + span {
-    opacity: 1;
-  }
-  display: flex;
-  gap: 8px;
-`;
-
-export const initChecked = (searchParams, key, id) => searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
+export const initChecked = (searchParams, key, id) => {
+  return searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
+};
 
 /**
  * Check if the key + value of a query param are actual subfacets.
@@ -87,13 +81,22 @@ const FacetValue = ({
   const fullFacetId = `${key}>${id}`;
 
   // Mapping of nested facet options/groups with the ids for each underlying facet value
-  const [nestedSubFacets, totalSubFacets] = useMemo(() => {
+  // nestedSubFacets do not include version subfacets, this is treated separately
+  const [nestedSubFacets, nestedVersions, preferredVersion, totalSubFacets] = useMemo(() => {
     // key: string; value: Set
     const map = new Map();
+    let nestedVersions = [];
     let totalCount = 0;
+    let preferredVersion;
     // Consolidate the available facet values for an arbitrary amount of nested facet
     // options (i.e. subfacets). This only consolidates up to 1 layer of facet values
     facets.forEach((facetGroup) => {
+      // if facetGroup is versions, get the first key
+      if (facetGroup.id === VERSION_GROUP_ID) {
+        preferredVersion = facetGroup.options?.[0];
+        nestedVersions = facetGroup.options;
+        return;
+      }
       facetGroup.options.forEach(({ key, id }) => {
         if (!map.has(key)) {
           map.set(key, new Set());
@@ -103,17 +106,16 @@ const FacetValue = ({
         totalCount++;
       });
     });
-    return [map, totalCount];
+    return [map, nestedVersions, preferredVersion, totalCount];
   }, [facets]);
   const numSelectedSubProducts =
     totalSubFacets > 0 ? findNumSelectedSubFacets(searchParams, nestedSubFacets, fullFacetId) : 0;
   const isIndeterminate = numSelectedSubProducts > 0 && numSelectedSubProducts !== totalSubFacets;
   const isChecked = totalSubFacets > 0 ? numSelectedSubProducts === totalSubFacets : initChecked(searchParams, key, id);
-  const updateChildren = useCallback(
+  const onChange = useCallback(
     ({ target }) => {
       const { checked } = target;
       const facetsToUpdate = [];
-
       // if unchecked, parent should be unchecked
       if (!checked) {
         const parentKey = {
@@ -129,42 +131,62 @@ const FacetValue = ({
           facetsToUpdate.push({ key, id, checked });
         });
       });
+      // uncheck all version options if option is
+      if (!checked) {
+        nestedVersions.forEach(({ key, id }) => {
+          facetsToUpdate.push({ key, id, checked });
+        });
+      } else if (preferredVersion) {
+        facetsToUpdate.push({
+          key: preferredVersion.key,
+          id: preferredVersion.id,
+          checked: checked,
+        });
+      }
       facetsToUpdate.push({ key, id, checked });
       handleFacetChange(facetsToUpdate, checked);
     },
-    [handleFacetChange, key, id, nestedSubFacets]
+    [nestedSubFacets, preferredVersion, key, id, handleFacetChange, nestedVersions]
   );
 
-  const updateSiblings = useCallback(() => {
-    const facetsToUpdate = selfAndSiblings.map((facet) => {
-      const checked = key === facet.key && id === facet.id; // self remains checked
-      const updatedFacet = {
-        key: facet.key,
-        id: facet.id,
-        checked: checked,
-      };
-      return updatedFacet;
-    });
-    handleFacetChange(facetsToUpdate);
-  }, [handleFacetChange, key, id, selfAndSiblings]);
+  const updateSiblings = useCallback(
+    (e) => {
+      const facetsToUpdate = selfAndSiblings.map((facet) => {
+        const checked = key === facet.key && id === facet.id; // self remains checked
+        const updatedFacet = {
+          key: facet.key,
+          id: facet.id,
+          checked: checked,
+        };
+        return updatedFacet;
+      });
+      handleFacetChange(facetsToUpdate);
+      e.preventDefault();
+    },
+    [handleFacetChange, key, id, selfAndSiblings]
+  );
+
+  const labelAndButton = (
+    <>
+      {name}
+      {isNested && isChecked && siblingsSelected && (
+        <span onClick={updateSiblings} className={cx(onlyButtonStyle, 'facetButton')}>
+          Only
+        </span>
+      )}
+    </>
+  );
 
   return (
     <>
-      <div className={container}>
-        <Checkbox
-          className={cx(checkboxStyle)}
-          label={name}
-          onChange={updateChildren}
-          checked={isChecked}
-          id={fullFacetId}
-          indeterminate={isIndeterminate}
-        />
-        {isNested && isChecked && siblingsSelected && (
-          <span onClick={updateSiblings} className={onlyButtonStyle}>
-            Only
-          </span>
-        )}
-      </div>
+      <Checkbox
+        className={cx(checkboxStyle)}
+        label={labelAndButton}
+        onChange={onChange}
+        checked={isChecked}
+        id={fullFacetId}
+        indeterminate={isIndeterminate}
+      />
       {(isAtlasProduct || isChecked || isIndeterminate) &&
         facets.map((facet) => {
           return (

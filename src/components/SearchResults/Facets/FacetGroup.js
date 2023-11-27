@@ -1,8 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { Body } from '@leafygreen-ui/typography';
-import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
+import { palette } from '@leafygreen-ui/palette';
+import { Body } from '@leafygreen-ui/typography';
+import { VERSION_GROUP_ID } from '../../../utils/search-facet-constants';
+import FacetVersionGroup from './FacetVersionGroup';
 import FacetValue from './FacetValue';
 
 // Facet options with the following ids will truncate the initial number of items shown
@@ -58,6 +60,10 @@ const FacetGroup = ({ facetOption: { name, id, options }, isNested = false, numS
   const handleExpansionClick = useCallback(() => {
     setTruncated((prev) => !prev);
   }, []);
+
+  if (id === VERSION_GROUP_ID) {
+    return <FacetVersionGroup facetOption={{ name, id, options }} />;
+  }
 
   return (
     <div className={cx(optionStyle(isNested))}>
