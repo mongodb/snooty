@@ -1,4 +1,4 @@
-import { normalizePath } from './normalize-path.js';
+import { normalizePath } from './normalize-path.mjs';
 
 const generatePathPrefix = (
   { commitHash, parserBranch, patchId, pathPrefix, project: parserProject, snootyBranch, user },

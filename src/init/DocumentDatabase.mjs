@@ -1,9 +1,9 @@
 import AdmZip from 'adm-zip';
 import BSON from 'bson';
-import { initRealm } from '../utils/setup/init-realm.js';
-import { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } from '../build-constants.js';
-import { manifestMetadata, siteMetadata } from '../utils/site-metadata.js';
-import { constructBuildFilter } from '../utils/setup/construct-build-filter.js';
+import { initRealm } from '../utils/setup/init-realm.mjs';
+import { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } from '../build-constants.mjs';
+import { manifestMetadata, siteMetadata } from '../utils/site-metadata.mjs';
+import { constructBuildFilter } from '../utils/setup/construct-build-filter.mjs';
 
 const DB = siteMetadata.database;
 const buildFilter = constructBuildFilter(siteMetadata);

@@ -1,4 +1,4 @@
-import { getPlaintext } from '../get-plaintext.js';
+import { getPlaintext } from '../get-plaintext.mjs';
 
 const transformBreadcrumbs = (breadcrumbs, slugToTitle) => {
   Object.entries(breadcrumbs).forEach(([slug, breadcrumbList]) => {

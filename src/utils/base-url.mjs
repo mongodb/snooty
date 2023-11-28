@@ -1,4 +1,4 @@
-import { assertTrailingSlash } from './assert-trailing-slash.js';
+import { assertTrailingSlash } from './assert-trailing-slash.mjs';
 const DOTCOM_BASE_URL = 'https://www.mongodb.com';
 const DOTCOM_BASE_PREFIX = `docs`;
 

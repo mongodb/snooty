@@ -1,4 +1,4 @@
-import { baseUrl } from '../../src/utils/base-url.js';
+import { baseUrl } from '../../src/utils/base-url.mjs';
 
 const createProductNodes = async ({ db, createNode, createNodeId, createContentDigest }) => {
   // Get all MongoDB products for the sidenav

@@ -1,5 +1,5 @@
 import Realm from 'realm-web';
-import { SNOOTY_REALM_APP_ID } from '../../build-constants.js';
+import { SNOOTY_REALM_APP_ID } from '../../build-constants.mjs';
 
 const initRealm = async () => {
   // Returns an instance of an app.

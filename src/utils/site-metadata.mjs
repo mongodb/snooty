@@ -1,8 +1,8 @@
 import { execSync } from 'child_process';
 import { userInfo } from 'os';
 import dotenv from 'dotenv';
-import { fetchManifestMetadata } from '../utils/setup/fetch-manifest-metadata.js';
-import { DOTCOM_BASE_URL } from './base-url.js';
+import { fetchManifestMetadata } from './setup/fetch-manifest-metadata.mjs';
+import { DOTCOM_BASE_URL } from './base-url.mjs';
 
 // loads vars from the .env file into process.env object
 const runningEnv = process.env.NODE_ENV || 'production';

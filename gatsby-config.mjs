@@ -1,7 +1,7 @@
 import { createRequire } from 'module';
-import { generatePathPrefix } from './src/utils/generate-path-prefix.js';
-import { siteMetadata } from './src/utils/site-metadata.js';
-import { isGatsbyPreview } from './src/utils/is-gatsby-preview.js';
+import { generatePathPrefix } from './src/utils/generate-path-prefix.mjs';
+import { siteMetadata } from './src/utils/site-metadata.mjs';
+import { isGatsbyPreview } from './src/utils/is-gatsby-preview.mjs';
 
 const isPreview = isGatsbyPreview();
 const pathPrefix = !isPreview ? generatePathPrefix(siteMetadata) : undefined;

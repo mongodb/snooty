@@ -1,4 +1,4 @@
-import { hideChanges, hideDiffChanges } from '../../src/components/OpenAPIChangelog/utils/filterHiddenChanges.js';
+import { hideChanges, hideDiffChanges } from '../../src/components/OpenAPIChangelog/utils/filterHiddenChanges.mjs';
 
 const atlasAdminProdChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
 const atlasAdminDevChangelogS3Prefix = 'https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog';
