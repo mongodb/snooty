@@ -3,4 +3,4 @@ const getPageSlug = (page) => {
   return page === 'index' ? '/' : page;
 };
 
-module.exports.getPageSlug = getPageSlug;
+export { getPageSlug };

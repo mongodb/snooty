@@ -1,4 +1,4 @@
-const { normalizePath } = require('./normalize-path');
+import { normalizePath } from './normalize-path.js';
 
 const generatePathPrefix = (
   { commitHash, parserBranch, patchId, pathPrefix, project: parserProject, snootyBranch, user },
@@ -32,6 +32,4 @@ const generatePathPrefix = (
   return normalizePath(path);
 };
 
-// TODO: switch to ES6 export syntax if Gatsby implements support for ES6 module imports
-// https://github.com/gatsbyjs/gatsby/issues/7810
-module.exports.generatePathPrefix = generatePathPrefix;
+export { generatePathPrefix };

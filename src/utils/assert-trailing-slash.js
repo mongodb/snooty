@@ -5,4 +5,4 @@ const assertTrailingSlash = (url) => {
   return `${url}/`;
 };
 
-module.exports.assertTrailingSlash = assertTrailingSlash;
+export { assertTrailingSlash };

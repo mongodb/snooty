@@ -1,4 +1,4 @@
-const { hideChanges, hideDiffChanges } = require('../../src/components/OpenAPIChangelog/utils/filterHiddenChanges');
+import { hideChanges, hideDiffChanges } from '../../src/components/OpenAPIChangelog/utils/filterHiddenChanges.js';
 
 const atlasAdminProdChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
 const atlasAdminDevChangelogS3Prefix = 'https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog';
@@ -112,6 +112,4 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
   }
 };
 
-module.exports = {
-  createOpenAPIChangelogNode,
-};
+export { createOpenAPIChangelogNode };

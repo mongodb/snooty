@@ -22,4 +22,4 @@ const removeNestedValue = (target, traversalKey, arr) => {
   });
 };
 
-module.exports.removeNestedValue = removeNestedValue;
+export { removeNestedValue };

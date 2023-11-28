@@ -1,4 +1,4 @@
-const { getPlaintext } = require('../get-plaintext');
+import { getPlaintext } from '../get-plaintext.js';
 
 const transformBreadcrumbs = (breadcrumbs, slugToTitle) => {
   Object.entries(breadcrumbs).forEach(([slug, breadcrumbList]) => {
@@ -13,4 +13,4 @@ const transformBreadcrumbs = (breadcrumbs, slugToTitle) => {
   });
 };
 
-module.exports = { transformBreadcrumbs };
+export { transformBreadcrumbs };

@@ -43,4 +43,4 @@ const hideDiffChanges = (diffData) => {
   return updatedDiffData.filter((path) => path.changes?.length);
 };
 
-module.exports = { hideChanges, hideDiffChanges };
+export { hideChanges, hideDiffChanges };

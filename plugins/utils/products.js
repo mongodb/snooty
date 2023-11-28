@@ -1,4 +1,4 @@
-const { baseUrl } = require('../../src/utils/base-url');
+import { baseUrl } from '../../src/utils/base-url.js';
 
 const createProductNodes = async ({ db, createNode, createNodeId, createContentDigest }) => {
   // Get all MongoDB products for the sidenav
@@ -20,6 +20,4 @@ const createProductNodes = async ({ db, createNode, createNodeId, createContentD
   });
 };
 
-module.exports = {
-  createProductNodes,
-};
+export { createProductNodes };

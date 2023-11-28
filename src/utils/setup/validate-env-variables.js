@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 // env variables for building site along with use in front-end
 // https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
@@ -100,4 +100,4 @@ const replaceIncorrectEnvVars = (incorrectEnvVars, envVars) => {
   }
 };
 
-module.exports.validateEnvVariables = validateEnvVariables;
+export { validateEnvVariables };

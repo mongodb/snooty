@@ -1,9 +1,9 @@
-const AdmZip = require('adm-zip');
-const BSON = require('bson');
-const { initRealm } = require('../utils/setup/init-realm');
-const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } = require('../build-constants');
-const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
-const { constructBuildFilter } = require('../utils/setup/construct-build-filter');
+import AdmZip from 'adm-zip';
+import BSON from 'bson';
+import { initRealm } from '../utils/setup/init-realm.js';
+import { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } from '../build-constants.js';
+import { manifestMetadata, siteMetadata } from '../utils/site-metadata.js';
+import { constructBuildFilter } from '../utils/setup/construct-build-filter.js';
 
 const DB = siteMetadata.database;
 const buildFilter = constructBuildFilter(siteMetadata);
@@ -126,5 +126,7 @@ class RealmDocumentDatabase {
   }
 }
 
-exports.manifestDocumentDatabase = new ManifestDocumentDatabase(process.env.GATSBY_MANIFEST_PATH);
-exports.realmDocumentDatabase = new RealmDocumentDatabase();
+const manifestDocumentDatabase = new ManifestDocumentDatabase(process.env.GATSBY_MANIFEST_PATH);
+const realmDocumentDatabase = new RealmDocumentDatabase();
+
+export { manifestDocumentDatabase, realmDocumentDatabase };

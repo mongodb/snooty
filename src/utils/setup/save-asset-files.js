@@ -1,5 +1,5 @@
-const fs = require('fs').promises;
-const path = require('path');
+import fs from 'node:fs/promises';
+import path from 'path';
 
 const saveFile = async (file, data) => {
   await fs.mkdir(path.join('public', path.dirname(file)), {
@@ -37,4 +37,4 @@ const saveStaticFiles = async (staticFiles) => {
   );
 };
 
-module.exports = { saveAssetFiles, saveStaticFiles, saveFile };
+export { saveAssetFiles, saveStaticFiles, saveFile };

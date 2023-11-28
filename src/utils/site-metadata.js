@@ -1,12 +1,13 @@
-const { execSync } = require('child_process');
-const userInfo = require('os').userInfo;
-const { fetchManifestMetadata } = require('../utils/setup/fetch-manifest-metadata');
-const { DOTCOM_BASE_URL } = require('./base-url');
+import { execSync } from 'child_process';
+import { userInfo } from 'os';
+import dotenv from 'dotenv';
+import { fetchManifestMetadata } from '../utils/setup/fetch-manifest-metadata.js';
+import { DOTCOM_BASE_URL } from './base-url.js';
 
 // loads vars from the .env file into process.env object
 const runningEnv = process.env.NODE_ENV || 'production';
 
-require('dotenv').config({
+dotenv.config({
   path: `.env.${runningEnv}`,
 });
 
@@ -75,5 +76,4 @@ const siteMetadata = {
   manifestPath: process.env.GATSBY_MANIFEST_PATH,
 };
 
-module.exports.siteMetadata = siteMetadata;
-module.exports.manifestMetadata = manifestMetadata;
+export { siteMetadata, manifestMetadata };
