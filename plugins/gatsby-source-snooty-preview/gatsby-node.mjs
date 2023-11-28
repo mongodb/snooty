@@ -7,15 +7,15 @@ import { promisify } from 'util';
 import got from 'got';
 import { createRequire } from 'module';
 import { parser } from 'stream-json/jsonl/Parser';
-import { sourceNodes } from './other-things-to-source.js';
-import { fetchClientAccessToken } from './utils/kanopy-auth.js';
-import { callPostBuildWebhook } from './utils/post-build.js';
+import { sourceNodes } from './other-things-to-source.mjs';
+import { fetchClientAccessToken } from './utils/kanopy-auth.mjs';
+import { callPostBuildWebhook } from './utils/post-build.mjs';
 import {
   consumeData,
   createSnootyMetadataId,
   KEY_LAST_FETCHED,
   KEY_LAST_CLIENT_ACCESS_TOKEN,
-} from './utils/data-consumer.js';
+} from './utils/data-consumer.mjs';
 
 const pipeline = promisify(stream.pipeline);
 
