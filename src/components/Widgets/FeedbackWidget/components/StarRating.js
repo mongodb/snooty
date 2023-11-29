@@ -27,6 +27,14 @@ const StarContainer = styled.div`
   cursor: pointer;
 `;
 
+const StyledIcon = styled(Icon)`
+  ${({ isHighlighted }) => `
+    color: ${isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR};
+    stroke-width: ${isHighlighted ? 1 : 0.5}px;
+  `};
+  stroke: ${palette.gray.dark2};
+`;
+
 export const StarRatingLabel = styled.div`
   margin-top: 12px;
 `;
@@ -39,7 +47,7 @@ export const RATING_TOOLTIPS = {
   5: 'Very Good',
 };
 
-export const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMouseLeave }) => {
+export const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMouseLeave, starSize = 24 }) => {
   return (
     <div onClick={onClick} onMouseLeave={onMouseLeave}>
       <Tooltip
@@ -49,16 +57,12 @@ export const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMous
         usePortal={false}
         trigger={
           <StarContainer>
-            <Icon
+            <StyledIcon
               glyph="Favorite"
-              height={24}
-              width={24}
+              height={starSize}
+              width={starSize}
               onMouseEnter={onMouseEnter}
-              style={{
-                color: isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR,
-                stroke: palette.gray.dark2,
-                strokeWidth: isHighlighted ? '1px' : '0.5px',
-              }}
+              isHighlighted={isHighlighted}
             />
           </StarContainer>
         }
@@ -69,13 +73,13 @@ export const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMous
   );
 };
 
-const StarRating = ({ handleRatingSelection = () => {} }) => {
+const StarRating = ({ className, handleRatingSelection = () => {}, starSize = 24 }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
   const { selectedRating } = useFeedbackContext();
 
   return (
     isBrowser && (
-      <Layout>
+      <Layout className={className}>
         {[1, 2, 3, 4, 5].map((ratingValue) => {
           let isHighlighted = selectedRating ? selectedRating >= ratingValue : false;
           if (hoveredRating) {
@@ -90,6 +94,7 @@ const StarRating = ({ handleRatingSelection = () => {} }) => {
               onMouseEnter={() => setHoveredRating(ratingValue)}
               onMouseLeave={() => setHoveredRating(null)}
               onClick={() => handleRatingSelection(ratingValue)}
+              starSize={starSize}
             />
           );
         })}

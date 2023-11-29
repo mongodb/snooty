@@ -72,7 +72,9 @@ const exitButtonStyle = (position, top, left) => css`
 
 //styling for entire screenshot icon selector
 const ScreenshotSelect = styled(Button)`
+  display: block;
   height: 28px;
+  margin: 8px 0;
   z-index: 5;
   width: 158px !important;
 `;
@@ -325,6 +327,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         enabled={true}
         darkMode={false}
         trigger={
+          // <div css={screenshotButtonContainerStyle}>
           <ScreenshotSelect
             onClick={takeNewScreenshot}
             leftGlyph={<img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />}
@@ -332,6 +335,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
           >
             Take a screenshot
           </ScreenshotSelect>
+          // </div>
         }
         popoverZIndex={15}
       >

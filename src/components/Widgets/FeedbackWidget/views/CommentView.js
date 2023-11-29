@@ -6,17 +6,19 @@ import TextInput from '@leafygreen-ui/text-input';
 import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
 import Loadable from '@loadable/component';
-import { Layout, CommentHeader, Footer } from '../components/view-components';
+import { Layout, Footer } from '../components/view-components';
 import { useFeedbackContext } from '../context';
 import { retrieveDataUri } from '../handleScreenshot';
 import useViewport from '../../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../../hooks/use-site-metadata';
 import useScreenSize from '../../../../hooks/useScreenSize';
 import validateEmail from '../../../../utils/validate-email';
+import StarRating from '../components/StarRating';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
 const SubmitButton = styled(Button)`
-  margin-top: auto;
+  display: block;
+  margin-top: 24px;
   margin-left: auto;
   height: 28px !important;
   width: 55px;
@@ -27,13 +29,18 @@ const SubmitButton = styled(Button)`
 `;
 
 const StyledCommentInput = styled(TextArea)`
-  margin-top: -16px;
   height: 140px;
   z-index: 4;
+  font-size: 13px;
+
+  textarea {
+    height: 140px;
+  }
 
   textarea::placeholder {
-    font-size: 15px !important;
-    color: #b8c4c2;
+    // font-size: 13px !important;
+    color: ${palette.gray.dark1};
+    line-height: 20px;
     min-height: 200px !important;
     border-color: ${palette.gray.base} !important;
   }
@@ -41,7 +48,7 @@ const StyledCommentInput = styled(TextArea)`
 
 const StyledEmailInput = styled(TextInput)`
   margin: 8px 0;
-  height: 36px;
+  min-height: 36px;
   font-size: 13px;
   border-color: #89989b !important;
 
@@ -67,6 +74,10 @@ const StyledEmailInput = styled(TextInput)`
   }
 `;
 
+const StyledStarRating = styled(StarRating)`
+  margin: 30px 0 16px;
+`;
+
 // responsive width for mobile view
 const widthStyling = (isMobile, currWindowWidth) => LeafyCSS`
   width: ${isMobile ? Math.max(currWindowWidth - 32, 280) : '186'}px !important;
@@ -82,13 +93,8 @@ const useValidation = (inputValue, validator) => {
 };
 
 const CommentView = () => {
-  const { selectedSentiment, submitAllFeedback, screenshotTaken } = useFeedbackContext();
-  const placeholderText =
-    selectedSentiment === 'Positive'
-      ? 'How did this page help you?'
-      : selectedSentiment === 'Negative'
-      ? 'How could this page be more helpful?'
-      : 'What change would you like to see?';
+  const { submitAllFeedback, screenshotTaken, setSelectedRating } = useFeedbackContext();
+  const placeholderText = 'Tell us more about your experience';
 
   const [comment, setComment] = useState('');
   const [email, setEmail] = useState('');
@@ -114,7 +120,7 @@ const CommentView = () => {
 
   return (
     <Layout>
-      <CommentHeader />
+      <StyledStarRating handleRatingSelection={setSelectedRating} starSize={28} />
       <StyledCommentInput
         className={cx(widthStyling(isMobile, currWindowWidth))}
         type="text"
@@ -122,8 +128,8 @@ const CommentView = () => {
         aria-labelledby="Comment Text Box"
         placeholder={placeholderText}
         value={comment}
-        rows={5}
         onChange={(e) => setComment(e.target.value)}
+        baseFontSize={13}
       />
       <StyledEmailInput
         className={cx(widthStyling(isMobile, currWindowWidth))}

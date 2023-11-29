@@ -81,6 +81,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       // set the sentiment and feedback to null
       setFeedback(null);
       selectSentiment(null);
+      setSelectedRating(null);
     }
   };
 
