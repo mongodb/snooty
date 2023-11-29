@@ -7,6 +7,12 @@ import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
 
+const HEIGHTS = {
+  sentiment: 175,
+  comment: 404,
+  submitted: 427,
+};
+
 const FloatingContainer = styled.div`
   position: fixed;
   z-index: 14;
@@ -24,35 +30,34 @@ const FloatingContainer = styled.div`
 const Card = styled(LeafygreenCard)`
   /* Card Size */
   width: 234px;
-  height: 404px;
-  padding: 16px 16px 32px;
+  // height: ${({ view }) => HEIGHTS[view]}px;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const CardHeader = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  // display: grid;
+  // grid-template-columns: 1fr 2fr 1fr;
 `;
 
 const Content = styled.div`
-  margin: 0px 8px;
   display: flex;
   // Allow content to take up the remaining space of the card
   flex-grow: 1;
 `;
 
-const FeedbackCard = ({ isOpen, children }) => {
+const FeedbackCard = ({ isOpen, children, view }) => {
   const { abandon } = useFeedbackContext();
 
   return (
     isOpen && (
       <FloatingContainer id={feedbackId}>
-        <Card>
+        <Card view={view}>
+          <ProgressBar />
           <CardHeader>
             {/* Empty div to help align items better */}
             <div />
-            <ProgressBar />
             <CloseButton onClick={() => abandon()} />
           </CardHeader>
           <Content>{children}</Content>

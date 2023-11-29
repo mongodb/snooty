@@ -7,6 +7,7 @@ const FeedbackContext = createContext();
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [feedback, setFeedback] = useState((test.feedback !== {} && test.feedback) || null);
   const [selectedSentiment, selectSentiment] = useState(test.feedback?.sentiment || null);
+  const [selectedRating, setSelectedRating] = useState(null);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
@@ -19,6 +20,12 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setView(nextView);
     setProgress([true, false, false]);
     return { newFeedback };
+  };
+
+  const selectInitialRating = (ratingValue) => {
+    setSelectedRating(ratingValue);
+    setView('comment');
+    setProgress([false, true, false]);
   };
 
   // Once a user has selected the sentiment category, show them the comment/email input boxes.
@@ -91,6 +98,9 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     submitAllFeedback,
     abandon,
     hideHeader,
+    selectedRating,
+    setSelectedRating,
+    selectInitialRating,
   };
 
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;

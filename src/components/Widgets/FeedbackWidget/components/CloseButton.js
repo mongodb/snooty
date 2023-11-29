@@ -5,7 +5,11 @@ import IconButton from '@leafygreen-ui/icon-button';
 import { palette } from '@leafygreen-ui/palette';
 
 const buttonStyles = css`
-  justify-self: end;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  height: 16px;
+  width: 16px;
 `;
 
 const CloseButton = ({ onClick, size = 'default', ...props }) => {

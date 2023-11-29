@@ -6,8 +6,9 @@ import { sentimentChoices } from '../views/SentimentView';
 import Emoji from '../components/Emoji';
 
 export const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
 `;
 
 export const Heading = styled.h2`

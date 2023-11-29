@@ -1,20 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { theme } from '../../../../theme/docsTheme';
+import { Body } from '@leafygreen-ui/typography';
 
-const TextHeader = styled('h3')`
+const TextHeader = styled(Body)`
   font-weight: 600;
-  font-size: ${theme.fontSize.default};
   text-align: center;
-  margin-top: 24px;
-  margin-bottom: 32px;
-  display: flex;
-  align-items: flex-end;
+  margin: 20px 0 16px;
 `;
 
 // this should only render when in modal or mobile view
 const ViewHeader = () => {
-  return <TextHeader>Did this page help?</TextHeader>;
+  return <TextHeader>How would you rate this page?</TextHeader>;
 };
 
 export default ViewHeader;

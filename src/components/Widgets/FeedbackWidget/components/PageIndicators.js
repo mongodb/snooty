@@ -21,7 +21,7 @@ const StyledBar = styled('span')`
   text-align: center !important;
   justify-self: center;
   align-self: center;
-  margin-bottom: 5px;
+  margin: 0 auto;
 `;
 
 const ProgressBar = () => {

@@ -11,6 +11,7 @@ const CommentView = Loadable(() => import('../FeedbackWidget/views/CommentView')
 export const FeedbackContent = ({ view }) => {
   const View = {
     sentiment: SentimentView,
+    // rating: RatingView,
     comment: CommentView,
     submitted: SubmittedView,
   }[view];
@@ -33,7 +34,7 @@ const FeedbackForm = () => {
   return (
     isOpen && (
       <div className={fwFormId} hidden={!isOpen}>
-        <Container isOpen={isOpen}>
+        <Container isOpen={isOpen} view={view}>
           <FeedbackContent view={view} />
         </Container>
       </div>
