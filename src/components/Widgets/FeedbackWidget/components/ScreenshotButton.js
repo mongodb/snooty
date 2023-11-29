@@ -74,8 +74,7 @@ const exitButtonStyle = (position, top, left) => css`
 const ScreenshotSelect = styled(Button)`
   height: 28px;
   z-index: 5;
-  width: 38px !important;
-  align-text: center;
+  width: 158px !important;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
@@ -326,8 +325,12 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         enabled={true}
         darkMode={false}
         trigger={
-          <ScreenshotSelect onClick={takeNewScreenshot} {...props}>
-            <img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />
+          <ScreenshotSelect
+            onClick={takeNewScreenshot}
+            leftGlyph={<img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />}
+            {...props}
+          >
+            Take a screenshot
           </ScreenshotSelect>
         }
         popoverZIndex={15}

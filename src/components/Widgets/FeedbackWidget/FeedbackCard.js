@@ -24,20 +24,22 @@ const FloatingContainer = styled.div`
 const Card = styled(LeafygreenCard)`
   /* Card Size */
   width: 234px;
-  height: 340px;
-  align-items: center;
-  padding: 0;
+  height: 404px;
+  padding: 16px 16px 32px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CardHeader = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 5px;
-  margin-right: 10px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
 `;
 
 const Content = styled.div`
-  margin: 0px 24px;
+  margin: 0px 8px;
+  display: flex;
+  // Allow content to take up the remaining space of the card
+  flex-grow: 1;
 `;
 
 const FeedbackCard = ({ isOpen, children }) => {
@@ -48,6 +50,8 @@ const FeedbackCard = ({ isOpen, children }) => {
       <FloatingContainer id={feedbackId}>
         <Card>
           <CardHeader>
+            {/* Empty div to help align items better */}
+            <div />
             <ProgressBar />
             <CloseButton onClick={() => abandon()} />
           </CardHeader>

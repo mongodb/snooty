@@ -8,7 +8,6 @@ import Emoji from '../components/Emoji';
 export const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 export const Heading = styled.h2`
@@ -30,14 +29,14 @@ export const Subheading = styled.p`
 `;
 
 export const Footer = styled.div`
-  margin-top: 0;
-  margin-bottom: 10px;
-  width: 100%;
-  font-weight: normal;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
+  // margin-top: 0;
+  // margin-bottom: 10px;
+  // width: 100%;
+  // font-weight: normal;
+  // display: flex;
+  // flex-direction: row-reverse;
+  // justify-content: space-between;
+  // align-items: center;
 `;
 
 const ResponsiveEmoji = styled('div')`
