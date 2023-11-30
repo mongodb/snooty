@@ -3,9 +3,12 @@ import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { feedbackId } from '../FeedbackWidget/FeedbackForm';
 import { theme } from '../../../../src/theme/docsTheme';
+import useScreenSize from '../../../hooks/useScreenSize';
+import useStickyTopValues from '../../../hooks/useStickyTopValues';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
+import useNoScroll from './hooks/useNoScroll';
 
 const FloatingContainer = styled.div`
   position: fixed;
@@ -22,7 +25,7 @@ const FloatingContainer = styled.div`
 
   @media ${theme.screenSize.upToMedium} {
     right: 0;
-    top: 108px;
+    top: ${({ top }) => top};
   }
 `;
 
@@ -34,7 +37,7 @@ const Card = styled(LeafygreenCard)`
   position: relative;
 
   @media ${theme.screenSize.upToMedium} {
-    height: calc(100vh - 108px);
+    height: calc(100vh - ${({ top }) => top});
     width: 100vw;
     border-radius: 0;
   }
@@ -42,11 +45,15 @@ const Card = styled(LeafygreenCard)`
 
 const FeedbackCard = ({ isOpen, children }) => {
   const { abandon } = useFeedbackContext();
+  // Ensure FeedbackCard can be fullscreen size
+  const { isMobile } = useScreenSize();
+  const { topSmall } = useStickyTopValues();
+  useNoScroll(isMobile);
 
   return (
     isOpen && (
-      <FloatingContainer id={feedbackId}>
-        <Card>
+      <FloatingContainer top={topSmall} id={feedbackId}>
+        <Card top={topSmall}>
           <CloseButton onClick={() => abandon()} />
           <ProgressBar />
           <div>{children}</div>
