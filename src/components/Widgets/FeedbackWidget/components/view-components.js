@@ -7,14 +7,6 @@ export const Layout = styled.div`
   align-items: center;
 `;
 
-export const Heading = styled.h2`
-  margin-top: 5px;
-  margin-bottom: 16px;
-  width: 100%;
-  text-align: center;
-  font-size: ${theme.fontSize.default};
-`;
-
 export const Subheading = styled.p`
   margin-top: 0;
   margin-bottom: 16px;

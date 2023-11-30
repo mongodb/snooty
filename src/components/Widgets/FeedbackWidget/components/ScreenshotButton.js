@@ -327,7 +327,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         enabled={true}
         darkMode={false}
         trigger={
-          // <div css={screenshotButtonContainerStyle}>
           <ScreenshotSelect
             onClick={takeNewScreenshot}
             leftGlyph={<img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />}
@@ -335,7 +334,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
           >
             Take a screenshot
           </ScreenshotSelect>
-          // </div>
         }
         popoverZIndex={15}
       >
