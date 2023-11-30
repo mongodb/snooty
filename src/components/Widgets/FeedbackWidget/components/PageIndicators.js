@@ -7,7 +7,7 @@ import { useFeedbackContext } from '../context';
 const Dot = styled('span')`
   height: 4px;
   width: 4px;
-  background-color: ${(props) => (props.isActive ? `${palette.green.dark1}` : `${palette.gray.light2}`)};
+  background-color: ${(props) => (props.isActive ? `${palette.green.base}` : `${palette.gray.light2}`)};
   border-radius: 50%;
   display: inline-block;
 `;
