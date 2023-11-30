@@ -19,6 +19,11 @@ const FloatingContainer = styled.div`
   @media ${theme.screenSize.largeAndUp} {
     bottom: 40px;
   }
+
+  @media ${theme.screenSize.upToMedium} {
+    right: 0;
+    top: 108px;
+  }
 `;
 
 const Card = styled(LeafygreenCard)`
@@ -27,15 +32,21 @@ const Card = styled(LeafygreenCard)`
   display: flex;
   flex-direction: column;
   position: relative;
+
+  @media ${theme.screenSize.upToMedium} {
+    height: calc(100vh - 108px);
+    width: 100vw;
+    border-radius: 0;
+  }
 `;
 
-const FeedbackCard = ({ isOpen, children, view }) => {
+const FeedbackCard = ({ isOpen, children }) => {
   const { abandon } = useFeedbackContext();
 
   return (
     isOpen && (
       <FloatingContainer id={feedbackId}>
-        <Card view={view}>
+        <Card>
           <CloseButton onClick={() => abandon()} />
           <ProgressBar />
           <div>{children}</div>

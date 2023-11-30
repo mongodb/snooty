@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import TextArea from '@leafygreen-ui/text-area';
 import TextInput from '@leafygreen-ui/text-input';
 import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
 import Loadable from '@loadable/component';
-import { Layout, Footer } from '../components/view-components';
+import { Layout } from '../components/view-components';
 import { useFeedbackContext } from '../context';
 import { retrieveDataUri } from '../handleScreenshot';
 import useViewport from '../../../../hooks/useViewport';
@@ -29,16 +28,16 @@ const SubmitButton = styled(Button)`
 `;
 
 const StyledCommentInput = styled(TextArea)`
-  height: 140px;
-  z-index: 4;
   font-size: 13px;
+  height: 140px;
+  width: 100%;
+  z-index: 4;
 
   textarea {
     height: 140px;
   }
 
   textarea::placeholder {
-    // font-size: 13px !important;
     color: ${palette.gray.dark1};
     line-height: 20px;
     min-height: 200px !important;
@@ -51,6 +50,7 @@ const StyledEmailInput = styled(TextInput)`
   min-height: 36px;
   font-size: 13px;
   border-color: #89989b !important;
+  width: 100%;
 
   ::optional {
     font-size: 300px;
@@ -78,11 +78,6 @@ const StyledStarRating = styled(StarRating)`
   margin: 30px 0 16px;
 `;
 
-// responsive width for mobile view
-const widthStyling = (isMobile, currWindowWidth) => LeafyCSS`
-  width: ${isMobile ? Math.max(currWindowWidth - 32, 280) : '186'}px !important;
-`;
-
 const useValidation = (inputValue, validator) => {
   const [isValid, setIsValid] = useState(null);
   useEffect(() => {
@@ -103,7 +98,6 @@ const CommentView = () => {
   const { snootyEnv } = useSiteMetadata();
   const viewport = useViewport();
   const { isMobile } = useScreenSize();
-  const currWindowWidth = window.innerWidth;
 
   const handleSubmit = async () => {
     if (isValidEmail) {
@@ -122,7 +116,6 @@ const CommentView = () => {
     <Layout>
       <StyledStarRating handleRatingSelection={setSelectedRating} starSize={28} />
       <StyledCommentInput
-        className={cx(widthStyling(isMobile, currWindowWidth))}
         type="text"
         id="feedback-comment"
         aria-labelledby="Comment Text Box"
@@ -132,7 +125,6 @@ const CommentView = () => {
         baseFontSize={13}
       />
       <StyledEmailInput
-        className={cx(widthStyling(isMobile, currWindowWidth))}
         type="email"
         id="feedback-email"
         aria-labelledby="Email Text Box"
@@ -147,7 +139,6 @@ const CommentView = () => {
       <SubmitButton onClick={() => handleSubmit()} type="submit">
         {'Send'}
       </SubmitButton>
-      <Footer className={cx(widthStyling(isMobile, currWindowWidth))}></Footer>
     </Layout>
   );
 };

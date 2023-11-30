@@ -43,7 +43,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setProgress([false, false, true]);
     setView('submitted');
 
-    if (!selectedSentiment) return;
+    if (!selectedRating) return;
     // Submit the full feedback document
     const newFeedback = {
       page: {

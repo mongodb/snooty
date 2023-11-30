@@ -74,7 +74,7 @@ const exitButtonStyle = (position, top, left) => css`
 const ScreenshotSelect = styled(Button)`
   display: block;
   height: 28px;
-  margin: 8px 0;
+  margin: 8px auto 8px 0;
   z-index: 5;
   width: 158px !important;
 `;

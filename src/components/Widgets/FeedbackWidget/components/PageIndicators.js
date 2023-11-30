@@ -18,10 +18,7 @@ const DotSpan = styled('span')`
 `;
 
 const StyledBar = styled('span')`
-  text-align: center !important;
-  justify-self: center;
   align-self: center;
-  margin: 0 auto;
 `;
 
 const ProgressBar = () => {

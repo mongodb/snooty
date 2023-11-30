@@ -5,6 +5,7 @@ import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import { useFeedbackContext } from '../context';
 import { isBrowser } from '../../../../utils/is-browser';
+import useScreenSize from '../../../../hooks/useScreenSize';
 const Tooltip = loadable(() => import('./LeafygreenTooltip'));
 
 // Given a string, convert all regular space characters to non-breaking spaces
@@ -47,15 +48,10 @@ export const RATING_TOOLTIPS = {
   5: 'Very Good',
 };
 
-export const Star = ({
-  ratingValue,
-  isHighlighted,
-  onClick,
-  onMouseEnter,
-  onMouseLeave,
-  starSize = 24,
-  triggerEnabled,
-}) => {
+export const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMouseLeave, triggerEnabled }) => {
+  const { isTabletOrMobile } = useScreenSize();
+  const starSize = isTabletOrMobile ? 32 : 24;
+
   return (
     <div onClick={onClick} onMouseLeave={onMouseLeave}>
       <Tooltip
@@ -82,7 +78,7 @@ export const Star = ({
   );
 };
 
-const StarRating = ({ className, handleRatingSelection = () => {}, starSize = 24, editable = true }) => {
+const StarRating = ({ className, handleRatingSelection = () => {}, editable = true }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
   const { selectedRating } = useFeedbackContext();
 
@@ -104,7 +100,6 @@ const StarRating = ({ className, handleRatingSelection = () => {}, starSize = 24
               key={ratingValue}
               ratingValue={ratingValue}
               isHighlighted={isHighlighted}
-              starSize={starSize}
               triggerEnabled={editable}
               {...eventProps}
             />
