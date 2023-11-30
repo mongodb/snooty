@@ -47,13 +47,22 @@ export const RATING_TOOLTIPS = {
   5: 'Very Good',
 };
 
-export const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMouseLeave, starSize = 24 }) => {
+export const Star = ({
+  ratingValue,
+  isHighlighted,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  starSize = 24,
+  triggerEnabled,
+}) => {
   return (
     <div onClick={onClick} onMouseLeave={onMouseLeave}>
       <Tooltip
         key={`star-${ratingValue}`}
         justify="middle"
         triggerEvent="hover"
+        enabled={triggerEnabled}
         usePortal={false}
         trigger={
           <StarContainer>
@@ -73,7 +82,7 @@ export const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMous
   );
 };
 
-const StarRating = ({ className, handleRatingSelection = () => {}, starSize = 24 }) => {
+const StarRating = ({ className, handleRatingSelection = () => {}, starSize = 24, editable = true }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
   const { selectedRating } = useFeedbackContext();
 
@@ -81,20 +90,23 @@ const StarRating = ({ className, handleRatingSelection = () => {}, starSize = 24
     isBrowser && (
       <Layout className={className}>
         {[1, 2, 3, 4, 5].map((ratingValue) => {
-          let isHighlighted = selectedRating ? selectedRating >= ratingValue : false;
-          if (hoveredRating) {
-            isHighlighted = hoveredRating >= ratingValue;
-          }
+          const isHighlighted = hoveredRating ? hoveredRating >= ratingValue : selectedRating >= ratingValue;
+          const eventProps = editable
+            ? {
+                onMouseEnter: () => setHoveredRating(ratingValue),
+                onMouseLeave: () => setHoveredRating(null),
+                onClick: () => handleRatingSelection(ratingValue),
+              }
+            : {};
 
           return (
             <Star
               key={ratingValue}
               ratingValue={ratingValue}
               isHighlighted={isHighlighted}
-              onMouseEnter={() => setHoveredRating(ratingValue)}
-              onMouseLeave={() => setHoveredRating(null)}
-              onClick={() => handleRatingSelection(ratingValue)}
               starSize={starSize}
+              triggerEnabled={editable}
+              {...eventProps}
             />
           );
         })}

@@ -40,7 +40,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const submitAllFeedback = async ({ comment = '', email = '', snootyEnv, dataUri, viewport }) => {
     // Route the user to their "next steps"
 
-    setProgress([true, true, true]);
+    setProgress([false, false, true]);
     setView('submitted');
 
     if (!selectedSentiment) return;

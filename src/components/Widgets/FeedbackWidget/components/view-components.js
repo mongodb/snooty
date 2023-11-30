@@ -12,7 +12,6 @@ export const Heading = styled.h2`
   margin-bottom: 16px;
   width: 100%;
   text-align: center;
-  font-weight: regular;
   font-size: ${theme.fontSize.default};
 `;
 
