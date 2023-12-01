@@ -39,15 +39,16 @@ const SubmittedView = () => {
       <Subheading>Your input improves MongoDB's Documentation.</Subheading>
       <Subheading>
         <span>Looking for more resources? </span>
-        {RESOURCE_LINKS.map(({ text, href }) => (
-          <>
-            <a href={href}>{text}</a>
+        {RESOURCE_LINKS.map(({ text, href }, index) => (
+          <React.Fragment key={index}>
             <br />
-          </>
+            <a href={href}>{text}</a>
+            {/* <br /> */}
+          </React.Fragment>
         ))}
         {isSentimentNegative && (
           <SupportCase>
-            Have a support contact?
+            {'Have a support contact? '}
             <a href={SUPPORT_LINK}>Create a Support Case</a>
           </SupportCase>
         )}

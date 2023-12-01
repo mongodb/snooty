@@ -7,7 +7,7 @@ export const Layout = styled.div`
   align-items: center;
 `;
 
-export const Subheading = styled.p`
+export const Subheading = styled.div`
   margin-top: 0;
   margin-bottom: 16px;
   width: 100%;

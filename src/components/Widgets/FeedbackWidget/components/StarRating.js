@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import loadable from '@loadable/component';
 import { palette } from '@leafygreen-ui/palette';
+import { css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { useFeedbackContext } from '../context';
 import { isBrowser } from '../../../../utils/is-browser';
@@ -15,7 +16,13 @@ const convertSpacesToNbsp = (someString) => {
 };
 
 const FILLED_STAR_COLOR = palette.green.light1;
-const UNFILLED_STAR_COLOR = palette.white;
+export const UNFILLED_STAR_COLOR = palette.white;
+
+const starIconStyle = (isHighlighted) => css`
+  color: ${isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR};
+  stroke-width: ${isHighlighted ? 1 : 0.5}px;
+  stroke: ${palette.gray.dark2};
+`;
 
 const Layout = styled.div`
   display: flex;
@@ -26,14 +33,6 @@ const Layout = styled.div`
 
 const StarContainer = styled.div`
   cursor: pointer;
-`;
-
-const StyledIcon = styled(Icon)`
-  ${({ isHighlighted }) => `
-    color: ${isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR};
-    stroke-width: ${isHighlighted ? 1 : 0.5}px;
-  `};
-  stroke: ${palette.gray.dark2};
 `;
 
 export const StarRatingLabel = styled.div`
@@ -62,12 +61,12 @@ export const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMous
         usePortal={false}
         trigger={
           <StarContainer>
-            <StyledIcon
+            <Icon
+              data-testid={`rating-star${isHighlighted ? '-highlighted' : ''}`}
+              className={starIconStyle(isHighlighted)}
               glyph="Favorite"
-              height={starSize}
-              width={starSize}
+              size={starSize}
               onMouseEnter={onMouseEnter}
-              isHighlighted={isHighlighted}
             />
           </StarContainer>
         }

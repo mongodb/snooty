@@ -7,7 +7,7 @@ const FeedbackContext = createContext();
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [feedback, setFeedback] = useState((test.feedback !== {} && test.feedback) || null);
   const [selectedSentiment, selectSentiment] = useState(test.feedback?.sentiment || null);
-  const [selectedRating, setSelectedRating] = useState(null);
+  const [selectedRating, setSelectedRating] = useState(test.feedback?.rating || null);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
