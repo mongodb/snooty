@@ -5,7 +5,6 @@ import { withPrefix } from 'gatsby';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import Portal from '@leafygreen-ui/portal';
-import Tooltip from '@leafygreen-ui/tooltip';
 import { useFeedbackContext } from '../context';
 import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
@@ -81,7 +80,7 @@ const ScreenshotSelect = styled(Button)`
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
   const { setScreenshotTaken } = useFeedbackContext();
-  const label = 'Take a Screenshot';
+  const label = 'Take a screenshot';
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [currElemState, setCurrElemState] = useState(null);
 
@@ -320,25 +319,13 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         </Portal>
       )}
 
-      <Tooltip
-        align="bottom"
-        justify="middle"
-        triggerEvent="hover"
-        enabled={true}
-        darkMode={false}
-        trigger={
-          <ScreenshotSelect
-            onClick={takeNewScreenshot}
-            leftGlyph={<img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />}
-            {...props}
-          >
-            Take a screenshot
-          </ScreenshotSelect>
-        }
-        popoverZIndex={15}
+      <ScreenshotSelect
+        onClick={takeNewScreenshot}
+        leftGlyph={<img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />}
+        {...props}
       >
         {label}
-      </Tooltip>
+      </ScreenshotSelect>
     </>
   );
 };
