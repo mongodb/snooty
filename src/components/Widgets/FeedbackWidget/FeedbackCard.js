@@ -23,7 +23,7 @@ const FloatingContainer = styled.div`
     bottom: 40px;
   }
 
-  @media ${theme.screenSize.upToMedium} {
+  @media ${theme.screenSize.upToSmall} {
     right: 0;
     top: ${({ top }) => top};
   }
@@ -36,7 +36,7 @@ const Card = styled(LeafygreenCard)`
   flex-direction: column;
   position: relative;
 
-  @media ${theme.screenSize.upToMedium} {
+  @media ${theme.screenSize.upToSmall} {
     height: calc(100vh - ${({ top }) => top});
     width: 100vw;
     border-radius: 0;
