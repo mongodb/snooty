@@ -30,7 +30,7 @@ const SubmittedView = () => {
   const { abandon } = useFeedbackContext();
   const { isMobile } = useScreenSize();
   const { selectedRating } = useFeedbackContext();
-  const isSentimentNegative = selectedRating <= 3;
+  const shouldShowSupportLink = selectedRating <= 3;
 
   return (
     <Layout>
@@ -46,7 +46,7 @@ const SubmittedView = () => {
             {/* <br /> */}
           </React.Fragment>
         ))}
-        {isSentimentNegative && (
+        {shouldShowSupportLink && (
           <SupportCase>
             {'Have a support contact? '}
             <a href={SUPPORT_LINK}>Create a Support Case</a>
