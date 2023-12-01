@@ -15,7 +15,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const user = useRealmUser();
 
   // Create a new feedback document
-  const initializeFeedback = (nextView = 'sentiment') => {
+  const initializeFeedback = (nextView = 'rating') => {
     const newFeedback = {};
     setFeedback({ newFeedback });
     setView(nextView);

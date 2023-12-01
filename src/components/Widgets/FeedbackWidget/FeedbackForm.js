@@ -2,13 +2,13 @@ import React from 'react';
 import Loadable from '@loadable/component';
 import { useFeedbackContext } from './context';
 import FeedbackCard from './FeedbackCard';
-import SentimentView from './views/SentimentView';
+import RatingView from './views/RatingView';
 import SubmittedView from './views/SubmittedView';
 const CommentView = Loadable(() => import('../FeedbackWidget/views/CommentView'));
 
 export const FeedbackContent = ({ view }) => {
   const View = {
-    sentiment: SentimentView,
+    rating: RatingView,
     comment: CommentView,
     submitted: SubmittedView,
   }[view];

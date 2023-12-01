@@ -4,7 +4,7 @@ import { useFeedbackContext } from '../context';
 import ViewHeader from '../components/ViewHeader';
 import StarRating from '../components/StarRating';
 
-const SentimentView = () => {
+const RatingView = () => {
   const { selectInitialRating } = useFeedbackContext();
 
   return (
@@ -15,4 +15,4 @@ const SentimentView = () => {
   );
 };
 
-export default SentimentView;
+export default RatingView;

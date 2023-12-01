@@ -95,7 +95,7 @@ describe('FeedbackWidget', () => {
 
     it('is hidden outside of the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({
-        view: 'sentiment',
+        view: 'rating',
         comment: '',
       });
       expect(wrapper.queryAllByText('How would you rate this page?')).toHaveLength(1);
@@ -152,7 +152,7 @@ describe('FeedbackWidget', () => {
   describe('FeedbackForm', () => {
     it('waiting state when the form is closed', async () => {
       wrapper = await mountFormWithFeedbackState({
-        view: 'sentiment',
+        view: 'rating',
       });
       // Click the close button
       userEvent.click(wrapper.getByLabelText('Close Feedback Form'));
@@ -163,14 +163,14 @@ describe('FeedbackWidget', () => {
     describe('SentimentView', () => {
       it('Shows 5 stars for rating', async () => {
         wrapper = await mountFormWithFeedbackState({
-          view: 'sentiment',
+          view: 'rating',
         });
         expect(wrapper.getAllByTestId('rating-star')).toHaveLength(5);
       });
 
       it('transitions to the comment view when a rating is clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
-          view: 'sentiment',
+          view: 'rating',
         });
         const stars = wrapper.getAllByTestId('rating-star');
         const selectedRating = 5;
