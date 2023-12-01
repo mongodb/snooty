@@ -16,7 +16,7 @@ const convertSpacesToNbsp = (someString) => {
 };
 
 const FILLED_STAR_COLOR = palette.green.light1;
-export const UNFILLED_STAR_COLOR = palette.white;
+const UNFILLED_STAR_COLOR = palette.white;
 
 const starIconStyle = (isHighlighted) => css`
   color: ${isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR};
@@ -47,7 +47,7 @@ export const RATING_TOOLTIPS = {
   5: 'Very Good',
 };
 
-export const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMouseLeave, triggerEnabled }) => {
+const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMouseLeave, triggerEnabled }) => {
   const { isTabletOrMobile } = useScreenSize();
   const starSize = isTabletOrMobile ? 32 : 24;
 
