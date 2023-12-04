@@ -57,6 +57,7 @@ exports[`renders correctly 1`] = `
         class="emotion-4 emotion-5"
         id=""
       />
+      <div />
     </h1>
   </section>
 </DocumentFragment>

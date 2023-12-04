@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
+import { useLocation } from '@gatsbyjs/reach-router';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 import useScreenSize from '../hooks/useScreenSize';
+import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -42,6 +44,22 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors);
 
+  const { hash } = useLocation();
+  const headingRef = useRef();
+  const bannerOffset = parseInt(
+    theme.header.navbarScrollOffset.slice(0, theme.header.navbarScrollOffset.indexOf('px'))
+  );
+
+  useEffect(() => {
+    const hashId = hash?.slice(1);
+    if (!hash || id !== hashId) {
+      return;
+    }
+    setTimeout(() => {
+      window.scrollTo(0, headingRef.current.offsetTop - bannerOffset);
+    }, 40);
+  }, [bannerOffset, hash, id]);
+
   return (
     <>
       <ConditionalWrapper
@@ -62,6 +80,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
           <Permalink id={id} description="heading" />
+          <div ref={headingRef}></div>
         </HeadingTag>
       </ConditionalWrapper>
       {isPageTitle && <Contents />}

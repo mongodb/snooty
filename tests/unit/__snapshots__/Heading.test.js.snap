@@ -53,6 +53,7 @@ exports[`renders correctly 1`] = `
       class="emotion-4 emotion-5"
       id="create-an-administrative-username-and-password"
     />
+    <div />
   </h3>
 </DocumentFragment>
 `;

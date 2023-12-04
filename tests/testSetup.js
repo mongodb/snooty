@@ -1,6 +1,16 @@
 import '@testing-library/jest-dom';
 import EventSource from 'eventsourcemock';
 import { preloadAll } from 'react-loadable';
+import { useLocation } from '@gatsbyjs/reach-router';
+
+jest.mock('@gatsbyjs/reach-router', () => ({
+  useLocation: jest.fn().mockImplementation(() => ({
+    hash: '',
+  })),
+  navigate: jest.fn(),
+}));
+
+export const mockLocation = (search, pathname) => useLocation.mockImplementation(() => ({ search, pathname }));
 
 global.navigator = {
   userAgent: 'node.js',
