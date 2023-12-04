@@ -9,6 +9,7 @@ import { useFeedbackContext } from '../context';
 import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
+import { theme } from '../../../../theme/docsTheme';
 
 const HIGHLIGHT_BORDER_SIZE = 5;
 
@@ -73,7 +74,7 @@ const exitButtonStyle = (position, top, left) => css`
 const ScreenshotSelect = styled(Button)`
   display: block;
   height: 28px;
-  margin: 8px auto 8px 0;
+  margin: 0 auto ${theme.size.small} 0;
   z-index: 5;
   width: 158px !important;
 `;

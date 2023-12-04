@@ -2,11 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { useFeedbackContext } from '../context';
+import { theme } from '../../../../theme/docsTheme';
 
 //styling for individual dots in the progress bar
 const Dot = styled('span')`
-  height: 4px;
-  width: 4px;
+  height: ${theme.size.tiny};
+  width: ${theme.size.tiny};
   background-color: ${(props) => (props.isActive ? `${palette.green.base}` : `${palette.gray.light2}`)};
   border-radius: 50%;
   display: inline-block;
@@ -14,7 +15,7 @@ const Dot = styled('span')`
 
 const DotSpan = styled('span')`
   display: flex;
-  gap: 3px;
+  gap: ${theme.size.tiny};
 `;
 
 const StyledBar = styled('span')`

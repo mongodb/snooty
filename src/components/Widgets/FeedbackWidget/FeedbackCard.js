@@ -36,10 +36,15 @@ const Card = styled(LeafygreenCard)`
   flex-direction: column;
   position: relative;
 
+  @media ${theme.screenSize.upToLarge} {
+    width: 262px;
+  }
+
   @media ${theme.screenSize.upToSmall} {
     height: calc(100vh - ${({ top }) => top});
     width: 100vw;
     border-radius: 0;
+    padding-top: 40px;
   }
 `;
 

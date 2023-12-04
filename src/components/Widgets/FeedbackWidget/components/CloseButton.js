@@ -3,13 +3,19 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { palette } from '@leafygreen-ui/palette';
+import { theme } from '../../../../theme/docsTheme';
 
 const buttonStyles = css`
   position: absolute;
-  top: 16px;
-  right: 16px;
-  height: 16px;
-  width: 16px;
+  top: ${theme.size.default};
+  right: ${theme.size.default};
+  height: ${theme.size.default};
+  width: ${theme.size.default};
+
+  @media ${theme.screenSize.upToSmall} {
+    top: ${theme.size.large};
+    right: ${theme.size.medium};
+  }
 `;
 
 const CloseButton = ({ onClick, size = 'default', ...props }) => {

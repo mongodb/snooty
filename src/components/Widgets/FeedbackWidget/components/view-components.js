@@ -9,7 +9,7 @@ export const Layout = styled.div`
 
 export const Subheading = styled.div`
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: ${theme.size.default};
   width: 100%;
   text-align: center;
   font-weight: regular;

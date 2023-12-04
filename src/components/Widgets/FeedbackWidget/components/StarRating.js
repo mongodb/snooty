@@ -7,6 +7,7 @@ import Icon from '@leafygreen-ui/icon';
 import { useFeedbackContext } from '../context';
 import { isBrowser } from '../../../../utils/is-browser';
 import useScreenSize from '../../../../hooks/useScreenSize';
+import { theme } from '../../../../theme/docsTheme';
 const Tooltip = loadable(() => import('./LeafygreenTooltip'));
 
 // Given a string, convert all regular space characters to non-breaking spaces
@@ -26,9 +27,13 @@ const starIconStyle = (isHighlighted) => css`
 
 const Layout = styled.div`
   display: flex;
-  gap: 8px;
+  gap: ${theme.size.small};
   justify-content: center;
-  margin: 16px 0 8px;
+  margin: ${theme.size.default} 0 ${theme.size.small};
+
+  @media ${theme.screenSize.upToLarge} {
+    gap: 12px;
+  }
 `;
 
 const StarContainer = styled.div`
@@ -79,17 +84,33 @@ const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMouseLeave,
 
 const StarRating = ({ className, handleRatingSelection = () => {}, editable = true }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
+  const [lastHoveredRating, setLastHoveredRating] = useState(null);
   const { selectedRating } = useFeedbackContext();
+
+  const handleMouseEnterStar = (ratingValue) => {
+    setHoveredRating(ratingValue);
+    setLastHoveredRating(ratingValue);
+  };
+
+  const handleMouseLeaveStar = () => {
+    setHoveredRating(lastHoveredRating);
+  };
+
+  // Resets hover states
+  const handleMouseLeaveContainer = () => {
+    setHoveredRating(null);
+    setLastHoveredRating(null);
+  };
 
   return (
     isBrowser && (
-      <Layout className={className}>
+      <Layout className={className} onMouseLeave={handleMouseLeaveContainer}>
         {[1, 2, 3, 4, 5].map((ratingValue) => {
           const isHighlighted = hoveredRating ? hoveredRating >= ratingValue : selectedRating >= ratingValue;
           const eventProps = editable
             ? {
-                onMouseEnter: () => setHoveredRating(ratingValue),
-                onMouseLeave: () => setHoveredRating(null),
+                onMouseEnter: () => handleMouseEnterStar(ratingValue),
+                onMouseLeave: () => handleMouseLeaveStar(),
                 onClick: () => handleRatingSelection(ratingValue),
               }
             : {};

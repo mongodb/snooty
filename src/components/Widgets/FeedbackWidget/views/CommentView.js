@@ -13,6 +13,7 @@ import { useSiteMetadata } from '../../../../hooks/use-site-metadata';
 import useScreenSize from '../../../../hooks/useScreenSize';
 import validateEmail from '../../../../utils/validate-email';
 import StarRating from '../components/StarRating';
+import { theme } from '../../../../theme/docsTheme';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
 const SubmitButton = styled(Button)`
@@ -46,7 +47,7 @@ const StyledCommentInput = styled(TextArea)`
 `;
 
 const StyledEmailInput = styled(TextInput)`
-  margin: 8px 0;
+  margin: ${theme.size.small} 0;
   min-height: 36px;
   font-size: 13px;
   border-color: #89989b !important;
@@ -75,7 +76,7 @@ const StyledEmailInput = styled(TextInput)`
 `;
 
 const StyledStarRating = styled(StarRating)`
-  margin: 30px 0 16px;
+  margin: 30px 0 ${theme.size.default};
 `;
 
 const useValidation = (inputValue, validator) => {
