@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
@@ -8,6 +8,7 @@ import Tooltip from '@leafygreen-ui/tooltip';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import useCopyClipboard from '../hooks/useCopyClipboard';
+import useHashAnchor from '../hooks/use-hash-anchor';
 
 const tooltipStyle = LeafyCSS` 
   padding: 2px 8px;
@@ -50,6 +51,9 @@ const Permalink = ({ id, description, buffer }) => {
     setCopied(true);
   };
 
+  const linkRef = useRef();
+  useHashAnchor(id, linkRef);
+
   return (
     <>
       <a
@@ -72,7 +76,7 @@ const Permalink = ({ id, description, buffer }) => {
           {'copied'}
         </Tooltip>
       </a>
-      <HeaderBuffer id={id} bufferSpace={bufferSpace} />
+      <HeaderBuffer ref={linkRef} id={id} bufferSpace={bufferSpace} />
     </>
   );
 };

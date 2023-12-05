@@ -144,7 +144,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
       <CodeProvider>
         <LeafyTabs
-          className={'LEAFY-TABS-HERE ' + cx(getTabsStyling({ isHidden, isProductLanding }))}
+          className={cx(getTabsStyling({ isHidden, isProductLanding }))}
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
           setSelected={handleClick}
