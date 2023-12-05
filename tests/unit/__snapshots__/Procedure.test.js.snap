@@ -384,7 +384,6 @@ exports[`renders steps nested in include nodes 1`] = `
               class="emotion-13 emotion-14"
               id="step-1"
             />
-            <div />
           </h1>
           <p
             class="emotion-15"
@@ -429,7 +428,6 @@ exports[`renders steps nested in include nodes 1`] = `
               class="emotion-13 emotion-14"
               id="step-2"
             />
-            <div />
           </h1>
           <p
             class="emotion-15"
@@ -474,7 +472,6 @@ exports[`renders steps nested in include nodes 1`] = `
               class="emotion-13 emotion-14"
               id="step-3"
             />
-            <div />
           </h1>
           <p
             class="emotion-15"
@@ -519,7 +516,6 @@ exports[`renders steps nested in include nodes 1`] = `
               class="emotion-13 emotion-14"
               id="step-4"
             />
-            <div />
           </h1>
           <p
             class="emotion-15"
@@ -564,7 +560,6 @@ exports[`renders steps nested in include nodes 1`] = `
               class="emotion-13 emotion-14"
               id="step-5"
             />
-            <div />
           </h1>
           <p
             class="emotion-15"
@@ -609,7 +604,6 @@ exports[`renders steps nested in include nodes 1`] = `
               class="emotion-13 emotion-14"
               id="step-6"
             />
-            <div />
           </h1>
           <p
             class="emotion-15"
@@ -654,7 +648,6 @@ exports[`renders steps nested in include nodes 1`] = `
               class="emotion-13 emotion-14"
               id="step-7"
             />
-            <div />
           </h1>
           <p
             class="emotion-15"
