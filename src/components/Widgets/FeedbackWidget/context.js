@@ -5,15 +5,17 @@ import { createNewFeedback, useRealmUser } from './realm';
 const FeedbackContext = createContext();
 
 export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
-  const [feedback, setFeedback] = useState((test.feedback !== {} && test.feedback) || null);
-  const [selectedSentiment, selectSentiment] = useState(test.feedback?.sentiment || null);
+  const hasExistingFeedback =
+    !!test.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
+  const [feedback, setFeedback] = useState((hasExistingFeedback && test.feedback) || null);
+  const [selectedRating, setSelectedRating] = useState(test.feedback?.rating || null);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
   const user = useRealmUser();
 
   // Create a new feedback document
-  const initializeFeedback = (nextView = 'sentiment') => {
+  const initializeFeedback = (nextView = 'rating') => {
     const newFeedback = {};
     setFeedback({ newFeedback });
     setView(nextView);
@@ -21,22 +23,30 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     return { newFeedback };
   };
 
-  // Once a user has selected the sentiment category, show them the comment/email input boxes.
-  const setSentiment = (sentiment) => {
-    selectSentiment(sentiment);
-    if (view !== 'comment' && sentiment) {
-      setView('comment');
-      setProgress([true, true, false]);
+  const selectInitialRating = (ratingValue) => {
+    setSelectedRating(ratingValue);
+    setView('comment');
+    setProgress([false, true, false]);
+  };
+
+  // Create a placeholder sentiment based on the selected rating to avoid any breaking changes from external dependencies
+  const createSentiment = (selectedRating) => {
+    if (selectedRating < 3) {
+      return 'Negative';
+    } else if (selectedRating === 3) {
+      return 'Suggestion';
+    } else {
+      return 'Positive';
     }
   };
 
   const submitAllFeedback = async ({ comment = '', email = '', snootyEnv, dataUri, viewport }) => {
     // Route the user to their "next steps"
 
-    setProgress([true, true, true]);
+    setProgress([false, false, true]);
     setView('submitted');
 
-    if (!selectedSentiment) return;
+    if (!selectedRating) return;
     // Submit the full feedback document
     const newFeedback = {
       page: {
@@ -55,14 +65,18 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       },
       viewport: getViewport(),
       comment,
-      category: selectedSentiment,
+      category: createSentiment(selectedRating),
+      rating: selectedRating,
       snootyEnv,
       ...test.feedback,
     };
 
-    await createNewFeedback(newFeedback);
-
-    setFeedback(newFeedback);
+    try {
+      await createNewFeedback(newFeedback);
+      setFeedback(newFeedback);
+    } catch (err) {
+      console.error('There was an error submitting feedback', err);
+    }
   };
 
   // Stop giving feedback (if in progress) and reset the widget to the
@@ -71,9 +85,9 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     // Reset to the initial state
     setView('waiting');
     if (feedback) {
-      // set the sentiment and feedback to null
+      // set the rating and feedback to null
       setFeedback(null);
-      selectSentiment(null);
+      setSelectedRating(null);
     }
   };
 
@@ -83,14 +97,14 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     view,
     setScreenshotTaken,
     screenshotTaken,
-    selectedSentiment,
     initializeFeedback,
-    selectSentiment,
-    setSentiment,
     setProgress,
     submitAllFeedback,
     abandon,
     hideHeader,
+    selectedRating,
+    setSelectedRating,
+    selectInitialRating,
   };
 
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
