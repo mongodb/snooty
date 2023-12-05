@@ -1,60 +1,51 @@
 import React from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import LeafygreenCard from '@leafygreen-ui/card';
+import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../../../src/theme/docsTheme';
 import { useFeedbackContext } from './context';
 
 const containerStyle = css`
+  display: flex;
+  align-items: center;
+  gap: 4px;
   cursor: pointer;
-  padding: 12px;
+  padding: 12px ${theme.size.default};
+  background-color: ${palette.white};
+  border: 1px solid ${palette.blue.light1};
+  border-radius: 40px;
+  box-shadow: 0px 4px 10px -4px ${palette.gray.light2};
   position: fixed;
-  user-select: none;
   z-index: 9;
-  font-weight: 500;
-  color: ${palette.green.dark2};
+  bottom: ${theme.size.large};
+  right: ${theme.size.large};
+  color: ${palette.blue.dark1};
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
 
-  // tab fixed at bottom of docs page
+  :hover {
+    box-shadow: 0px 0px 0px 3px ${palette.blue.light2};
+  }
+
   @media ${theme.screenSize.upToSmall} {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    position: static !important;
-    width: fit-content !important;
-    margin-left: 20px;
-    margin-top: -20px;
-    margin-bottom: 20px;
-    transform: rotate(0deg) !important;
+    bottom: ${theme.size.medium};
+    right: ${theme.size.medium};
   }
+`;
 
-  @media ${theme.screenSize.smallAndUp} {
-    // tab positioned on side of page
-    @media ${theme.screenSize.upToLarge} {
-      transform: rotate(-90deg);
-      top: 50%;
-      right: -53px;
-    }
-
-    // tab positioned on bottom right of page
-    @media ${theme.screenSize.largeAndUp} {
-      bottom: -24px;
-      @media ${theme.screenSize.upTo2XLarge} {
-        right: 16px;
-      }
-      @media ${theme.screenSize['2XLargeAndUp']} {
-        right: 64px;
-      }
-    }
-  }
+const starIconStyle = css`
+  color: ${palette.blue.light1};
 `;
 
 const FeedbackTab = () => {
   const { feedback, initializeFeedback } = useFeedbackContext();
   return (
     !feedback && (
-      <LeafygreenCard className={cx(containerStyle)} onClick={() => initializeFeedback()}>
-        Share Feedback
-      </LeafygreenCard>
+      <div className={cx(containerStyle)} onClick={() => initializeFeedback()}>
+        <Icon className={starIconStyle} glyph="Favorite" />
+        Rate this page
+      </div>
     )
   );
 };
