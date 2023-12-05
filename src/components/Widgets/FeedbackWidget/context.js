@@ -71,9 +71,12 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       ...test.feedback,
     };
 
-    await createNewFeedback(newFeedback);
-
-    setFeedback(newFeedback);
+    try {
+      await createNewFeedback(newFeedback);
+      setFeedback(newFeedback);
+    } catch (err) {
+      console.error('There was an error submitting feedback', err);
+    }
   };
 
   // Stop giving feedback (if in progress) and reset the widget to the
