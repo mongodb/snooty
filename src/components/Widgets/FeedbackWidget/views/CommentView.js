@@ -14,7 +14,12 @@ import useScreenSize from '../../../../hooks/useScreenSize';
 import validateEmail from '../../../../utils/validate-email';
 import StarRating from '../components/StarRating';
 import { theme } from '../../../../theme/docsTheme';
-import { COMMENT_PLACEHOLDER_TEXT } from '../constants';
+import {
+  COMMENT_PLACEHOLDER_TEXT,
+  EMAIL_ERROR_TEXT,
+  EMAIL_PLACEHOLDER_TEXT,
+  FEEDBACK_SUBMIT_BUTTON_TEXT,
+} from '../constants';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
 const SubmitButton = styled(Button)`
@@ -129,16 +134,16 @@ const CommentView = () => {
         type="email"
         id="feedback-email"
         aria-labelledby="Email Text Box"
-        placeholder="Email Address"
+        placeholder={EMAIL_PLACEHOLDER_TEXT}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        errorMessage="Please enter a valid email."
+        errorMessage={EMAIL_ERROR_TEXT}
         state={hasEmailError ? 'error' : 'none'}
         optional={true}
       />
       {!isMobile && <ScreenshotButton />}
       <SubmitButton onClick={() => handleSubmit()} type="submit">
-        {'Send'}
+        {FEEDBACK_SUBMIT_BUTTON_TEXT}
       </SubmitButton>
     </Layout>
   );

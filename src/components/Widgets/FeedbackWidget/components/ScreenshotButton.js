@@ -10,6 +10,7 @@ import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
 import { theme } from '../../../../theme/docsTheme';
+import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_OVERLAY_ALT_TEXT } from '../constants';
 
 const HIGHLIGHT_BORDER_SIZE = 5;
 
@@ -81,7 +82,6 @@ const ScreenshotSelect = styled(Button)`
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
   const { setScreenshotTaken } = useFeedbackContext();
-  const label = 'Take a screenshot';
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [currElemState, setCurrElemState] = useState(null);
 
@@ -238,7 +238,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
             <img
               className={fwInstructionsId}
               src={withPrefix('assets/screenshotCTA.svg')}
-              alt="Screenshot"
+              alt={SCREENSHOT_OVERLAY_ALT_TEXT}
               css={instructionsPanelStyling}
               onClick={handleInstructionClick}
             />
@@ -325,7 +325,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         leftGlyph={<img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />}
         {...props}
       >
-        {label}
+        {SCREENSHOT_BUTTON_TEXT}
       </ScreenshotSelect>
     </>
   );

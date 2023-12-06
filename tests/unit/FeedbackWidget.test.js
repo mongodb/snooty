@@ -22,9 +22,18 @@ import {
   clearMockScreenshotFunctions,
 } from '../utils/data/feedbackWidgetScreenshotFunctions';
 import {
+  CLOSE_BUTTON_ALT_TEXT,
   COMMENT_PLACEHOLDER_TEXT,
+  EMAIL_ERROR_TEXT,
+  EMAIL_PLACEHOLDER_TEXT,
   FEEDBACK_BUTTON_TEXT,
+  FEEDBACK_SUBMIT_BUTTON_TEXT,
   RATING_QUESTION_TEXT,
+  SCREENSHOT_BUTTON_TEXT,
+  SCREENSHOT_OVERLAY_ALT_TEXT,
+  SUBMITTED_VIEW_RESOURCE_LINKS,
+  SUBMITTED_VIEW_SUPPORT_LINK,
+  SUBMITTED_VIEW_TEXT,
 } from '../../src/components/Widgets/FeedbackWidget/constants';
 import headingData from './data/Heading.test.json';
 
@@ -130,7 +139,7 @@ describe('FeedbackWidget', () => {
         view: 'rating',
       });
       // Click the close button
-      userEvent.click(wrapper.getByLabelText('Close Feedback Form'));
+      userEvent.click(wrapper.getByLabelText(CLOSE_BUTTON_ALT_TEXT));
       await tick();
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
     });
@@ -171,7 +180,7 @@ describe('FeedbackWidget', () => {
         expect(highlightedStars).toHaveLength(expectedRating);
         expect(unselectedStar).toHaveLength(5 - expectedRating);
 
-        expect(wrapper.getByPlaceholderText('Email Address')).toBeTruthy();
+        expect(wrapper.getByPlaceholderText(EMAIL_PLACEHOLDER_TEXT)).toBeTruthy();
         expect(wrapper.getByText('Send')).toBeTruthy();
       });
 
@@ -184,13 +193,15 @@ describe('FeedbackWidget', () => {
           });
 
           // click on screenshot button; use closest() because of LG implementation of `"pointer-events": "none"`
-          userEvent.click(wrapper.getByText('Take a screenshot').closest('button'));
+          userEvent.click(wrapper.getByText(SCREENSHOT_BUTTON_TEXT).closest('button'));
           await tick();
 
           expect(screenshotFunctionMocks['addEventListener']).toHaveBeenCalled();
 
           // shows overlays
-          expect(wrapper.getByAltText('Screenshot').getElementsByClassName('overlay-instructions')).toBeTruthy();
+          expect(
+            wrapper.getByAltText(SCREENSHOT_OVERLAY_ALT_TEXT).getElementsByClassName('overlay-instructions')
+          ).toBeTruthy();
         });
 
         it('adds the screenshot attachment on send', async () => {
@@ -202,7 +213,7 @@ describe('FeedbackWidget', () => {
             screenshotTaken: true,
           });
 
-          userEvent.click(wrapper.getByText('Send').closest('button'));
+          userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
 
           expect(screenshotFunctionMocks['retrieveDataUri']).toHaveBeenCalled();
@@ -219,7 +230,7 @@ describe('FeedbackWidget', () => {
             user: { email: 'test@example.com' },
           });
           // Click the submit button
-          userEvent.click(wrapper.getByText('Send').closest('button'));
+          userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
           expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
         });
@@ -231,25 +242,23 @@ describe('FeedbackWidget', () => {
             user: { email: 'test invalid email' },
           });
           // Type in an invalid email address
-          const emailInput = wrapper.getByPlaceholderText('Email Address');
+          const emailInput = wrapper.getByPlaceholderText(EMAIL_PLACEHOLDER_TEXT);
           userEvent.paste(emailInput, 'invalid email address');
           // Click the submit button
-          userEvent.click(wrapper.getByText('Send').closest('button'));
+          userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
-          expect(wrapper.getByText('Please enter a valid email.')).toBeTruthy();
+          expect(wrapper.getByText(EMAIL_ERROR_TEXT)).toBeTruthy();
         });
       });
     });
 
     describe('SubmittedView', () => {
       const standardViewCopy = [
-        'Thank you for your feedback!',
-        'Looking for more resources?',
-        'MongoDB Developer Community Forums',
-        'MongoDB Developer Center',
-        'MongoDB University',
+        SUBMITTED_VIEW_TEXT.HEADING,
+        SUBMITTED_VIEW_TEXT.SUB_HEADING,
+        ...SUBMITTED_VIEW_RESOURCE_LINKS.map(({ text }) => text),
       ];
-      const negativeViewCopy = ['Have a support contact?', 'Create a Support Case'];
+      const negativeViewCopy = [SUBMITTED_VIEW_TEXT.SUPPORT_CTA, SUBMITTED_VIEW_SUPPORT_LINK.text];
 
       it('shows self-serve support links for negative path', async () => {
         wrapper = await mountFormWithFeedbackState({
