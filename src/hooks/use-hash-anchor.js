@@ -10,7 +10,6 @@ const useHashAnchor = (id, ref) => {
       return;
     }
     setTimeout(() => {
-      console.log('scrolling');
       window.scrollTo(0, ref.current.offsetTop);
     }, 40);
   }, [hash, id, ref]);
