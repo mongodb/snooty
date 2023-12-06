@@ -4,7 +4,7 @@ import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../../../src/theme/docsTheme';
 import { useFeedbackContext } from './context';
-import { text } from './constants';
+import { FEEDBACK_BUTTON_TEXT } from './constants';
 
 const containerStyle = css`
   display: flex;
@@ -45,7 +45,7 @@ const FeedbackTab = () => {
     !feedback && (
       <div className={cx(containerStyle)} onClick={() => initializeFeedback()}>
         <Icon className={starIconStyle} glyph="Favorite" />
-        {text.feedbackButton}
+        {FEEDBACK_BUTTON_TEXT}
       </div>
     )
   );

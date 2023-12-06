@@ -7,7 +7,6 @@ import {
   FeedbackForm,
   FeedbackTab,
   FeedbackFooter,
-  constants,
 } from '../../src/components/Widgets/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
@@ -22,6 +21,11 @@ import {
   mockScreenshotFunctions,
   clearMockScreenshotFunctions,
 } from '../utils/data/feedbackWidgetScreenshotFunctions';
+import {
+  COMMENT_PLACEHOLDER_TEXT,
+  FEEDBACK_BUTTON_TEXT,
+  RATING_QUESTION_TEXT,
+} from '../../src/components/Widgets/FeedbackWidget/constants';
 import headingData from './data/Heading.test.json';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
@@ -78,18 +82,18 @@ describe('FeedbackWidget', () => {
     it('shows the sentiment category view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
       // Before the click, the form is hidden
-      expect(wrapper.queryAllByText(constants.text.ratingQuestion)).toHaveLength(0);
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
       // Click the tab
-      userEvent.click(wrapper.getByText(constants.text.feedbackButton));
+      userEvent.click(wrapper.getByText(FEEDBACK_BUTTON_TEXT));
 
       await tick();
       // After the click new feedback is initialized
-      expect(wrapper.queryAllByText(constants.text.ratingQuestion)).toHaveLength(1);
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
     });
 
     it('is visible in the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText(constants.text.feedbackButton)).toHaveLength(1);
+      expect(wrapper.queryAllByText(FEEDBACK_BUTTON_TEXT)).toHaveLength(1);
     });
 
     it('is hidden outside of the waiting view on large/desktop screens', async () => {
@@ -97,7 +101,7 @@ describe('FeedbackWidget', () => {
         view: 'rating',
         comment: '',
       });
-      expect(wrapper.queryAllByText(constants.text.ratingQuestion)).toHaveLength(1);
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
     });
   });
 
@@ -128,7 +132,7 @@ describe('FeedbackWidget', () => {
       // Click the close button
       userEvent.click(wrapper.getByLabelText('Close Feedback Form'));
       await tick();
-      expect(wrapper.queryAllByText(constants.text.ratingQuestion)).toHaveLength(0);
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
     });
 
     describe('SentimentView', () => {
@@ -148,7 +152,7 @@ describe('FeedbackWidget', () => {
         const selectedStar = stars[selectedRating - 1];
         userEvent.click(selectedStar);
         await tick();
-        expect(wrapper.getByPlaceholderText('Tell us more about your experience')).toBeTruthy();
+        expect(wrapper.getByPlaceholderText(COMMENT_PLACEHOLDER_TEXT)).toBeTruthy();
       });
     });
 

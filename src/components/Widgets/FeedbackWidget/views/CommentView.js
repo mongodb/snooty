@@ -14,6 +14,7 @@ import useScreenSize from '../../../../hooks/useScreenSize';
 import validateEmail from '../../../../utils/validate-email';
 import StarRating from '../components/StarRating';
 import { theme } from '../../../../theme/docsTheme';
+import { COMMENT_PLACEHOLDER_TEXT } from '../constants';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
 const SubmitButton = styled(Button)`
@@ -90,7 +91,6 @@ const useValidation = (inputValue, validator) => {
 
 const CommentView = () => {
   const { submitAllFeedback, screenshotTaken, setSelectedRating } = useFeedbackContext();
-  const placeholderText = 'Tell us more about your experience';
 
   const [comment, setComment] = useState('');
   const [email, setEmail] = useState('');
@@ -120,7 +120,7 @@ const CommentView = () => {
         type="text"
         id="feedback-comment"
         aria-labelledby="Comment Text Box"
-        placeholder={placeholderText}
+        placeholder={COMMENT_PLACEHOLDER_TEXT}
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         baseFontSize={13}
