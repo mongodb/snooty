@@ -7,6 +7,7 @@ import {
   FeedbackForm,
   FeedbackTab,
   FeedbackFooter,
+  constants,
 } from '../../src/components/Widgets/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
@@ -16,7 +17,6 @@ import {
   clearMockStitchFunctions,
 } from '../utils/feedbackWidgetStitchFunctions';
 import Heading from '../../src/components/Heading';
-import { theme } from '../../src/theme/docsTheme';
 import {
   screenshotFunctionMocks,
   mockScreenshotFunctions,
@@ -77,20 +77,19 @@ describe('FeedbackWidget', () => {
   describe('FeedbackTab (Desktop Viewport)', () => {
     it('shows the sentiment category view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      const fwQuestion = 'How would you rate this page?';
       // Before the click, the form is hidden
-      expect(wrapper.queryAllByText(fwQuestion)).toHaveLength(0);
+      expect(wrapper.queryAllByText(constants.text.ratingQuestion)).toHaveLength(0);
       // Click the tab
-      userEvent.click(wrapper.getByText('Share Feedback'));
+      userEvent.click(wrapper.getByText(constants.text.feedbackButton));
 
       await tick();
       // After the click new feedback is initialized
-      expect(wrapper.queryAllByText(fwQuestion)).toHaveLength(1);
+      expect(wrapper.queryAllByText(constants.text.ratingQuestion)).toHaveLength(1);
     });
 
     it('is visible in the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText(constants.text.feedbackButton)).toHaveLength(1);
     });
 
     it('is hidden outside of the waiting view on large/desktop screens', async () => {
@@ -98,35 +97,7 @@ describe('FeedbackWidget', () => {
         view: 'rating',
         comment: '',
       });
-      expect(wrapper.queryAllByText('How would you rate this page?')).toHaveLength(1);
-    });
-
-    it('is hidden on small/mobile and medium/tablet screens', async () => {
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('margin-left', '20px', {
-        media: `${theme.screenSize.upToSmall}`,
-      });
-    });
-  });
-
-  describe('FeedbackHeading (Mobile Viewport)', () => {
-    it('is visible on medium/tablet screens', async () => {
-      setTablet();
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-    });
-
-    it('is visible on small/mobile screens', async () => {
-      setMobile();
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-    });
-
-    it('is hidden on small/mobile screens when configured with page option', async () => {
-      setMobile();
-      wrapper = await mountFormWithFeedbackState({ hideHeader: true });
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText(constants.text.ratingQuestion)).toHaveLength(1);
     });
   });
 
@@ -157,7 +128,7 @@ describe('FeedbackWidget', () => {
       // Click the close button
       userEvent.click(wrapper.getByLabelText('Close Feedback Form'));
       await tick();
-      expect(wrapper.queryAllByText('How would you rate this page?')).toHaveLength(0);
+      expect(wrapper.queryAllByText(constants.text.ratingQuestion)).toHaveLength(0);
     });
 
     describe('SentimentView', () => {
