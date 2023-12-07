@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isBrowser } from '../../utils/is-browser';
-import { FeedbackProvider, FeedbackForm, FeedbackButton, useFeedbackData } from './FeedbackWidget';
+import { FeedbackProvider, FeedbackForm, FeedbackTab, useFeedbackData } from './FeedbackWidget';
 
 const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, isInPresentationMode }) => {
   const url = isBrowser ? window.location.href : null;
@@ -21,7 +21,7 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
       {children}
       {!isInPresentationMode && !hideFeedback && (
         <>
-          <FeedbackButton />
+          <FeedbackTab />
           <FeedbackForm />
         </>
       )}
