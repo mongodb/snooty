@@ -39,7 +39,7 @@ const starIconStyle = css`
   color: ${palette.blue.light1};
 `;
 
-const FeedbackTab = () => {
+const FeedbackButton = () => {
   const { feedback, initializeFeedback } = useFeedbackContext();
   return (
     !feedback && (
@@ -51,4 +51,4 @@ const FeedbackTab = () => {
   );
 };
 
-export default FeedbackTab;
+export default FeedbackButton;

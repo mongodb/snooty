@@ -5,7 +5,7 @@ import { matchers } from '@emotion/jest';
 import {
   FeedbackProvider,
   FeedbackForm,
-  FeedbackTab,
+  FeedbackButton,
   FeedbackFooter,
 } from '../../src/components/Widgets/FeedbackWidget';
 
@@ -58,7 +58,7 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
       >
         <FeedbackForm />
         <div>
-          <FeedbackTab />
+          <FeedbackButton />
           <Heading nodeData={headingData} sectionDepth={1} />
           <FeedbackFooter />
         </div>
@@ -87,7 +87,7 @@ describe('FeedbackWidget', () => {
   beforeEach(mockScreenshotFunctions);
   afterEach(clearMockScreenshotFunctions);
 
-  describe('FeedbackTab (Desktop Viewport)', () => {
+  describe('FeedbackButton (Desktop Viewport)', () => {
     it('shows the sentiment category view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
       // Before the click, the form is hidden
