@@ -866,7 +866,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
-  color: #889397;
+  color: #5C6C75;
   height: 28px;
   width: 28px;
 }
@@ -1071,7 +1071,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   outline: none;
 }
 
-.emotion-21:active,
+.emotion-21:active[aria-disabled='false'],
 .emotion-21:focus,
 .emotion-21:hover {
   -webkit-text-decoration: none;
@@ -1083,7 +1083,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-21:hover[aria-disabled='false'],
-.emotion-21:active {
+.emotion-21:active[aria-disabled='false'] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
@@ -1117,8 +1117,11 @@ exports[`Search Results Page considers a given search filter query param and dis
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -1334,7 +1337,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
-  color: #889397;
+  color: #5C6C75;
   cursor: not-allowed;
   color: #C1C7C6;
   background-color: rgba(255, 255, 255, 0);
@@ -2112,8 +2115,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-66"
             >
               <button
-                aria-controls="select-81-menu"
-                aria-describedby="select-81-description"
+                aria-controls="select-17-menu"
+                aria-describedby="select-17-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -2121,7 +2124,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 class="emotion-67"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-82"
+                id="select-18"
                 type="button"
                 value="Realm"
               >
@@ -2169,8 +2172,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-66"
             >
               <button
-                aria-controls="select-83-menu"
-                aria-describedby="select-83-description"
+                aria-controls="select-19-menu"
+                aria-describedby="select-19-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -2179,7 +2182,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-84"
+                id="select-20"
                 type="button"
                 value="Latest"
               >
@@ -2493,7 +2496,7 @@ exports[`Search Results Page does not return results for a given search term wit
   background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
-  color: #889397;
+  color: #5C6C75;
   height: 28px;
   width: 28px;
 }
@@ -2649,7 +2652,7 @@ exports[`Search Results Page does not return results for a given search term wit
   outline: none;
 }
 
-.emotion-16:active,
+.emotion-16:active[aria-disabled='false'],
 .emotion-16:focus,
 .emotion-16:hover {
   -webkit-text-decoration: none;
@@ -2661,7 +2664,7 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-16:hover[aria-disabled='false'],
-.emotion-16:active {
+.emotion-16:active[aria-disabled='false'] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
@@ -2695,8 +2698,11 @@ exports[`Search Results Page does not return results for a given search term wit
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -3576,8 +3582,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-40"
             >
               <button
-                aria-controls="select-109-menu"
-                aria-describedby="select-109-description"
+                aria-controls="select-21-menu"
+                aria-describedby="select-21-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -3585,7 +3591,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 class="emotion-41"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-110"
+                id="select-22"
                 type="button"
                 value=""
               >
@@ -3633,8 +3639,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-40"
             >
               <button
-                aria-controls="select-111-menu"
-                aria-describedby="select-111-description"
+                aria-controls="select-23-menu"
+                aria-describedby="select-23-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -3643,7 +3649,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-112"
+                id="select-24"
                 type="button"
                 value=""
               >
@@ -3991,7 +3997,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   outline: none;
 }
 
-.emotion-11:active,
+.emotion-11:active[aria-disabled='false'],
 .emotion-11:focus,
 .emotion-11:hover {
   -webkit-text-decoration: none;
@@ -4003,7 +4009,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 }
 
 .emotion-11:hover[aria-disabled='false'],
-.emotion-11:active {
+.emotion-11:active[aria-disabled='false'] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
@@ -4037,8 +4043,11 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -4380,7 +4389,7 @@ exports[`Search Results Page renders loading images before returning no results 
   background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
-  color: #889397;
+  color: #5C6C75;
   height: 28px;
   width: 28px;
 }
@@ -4536,7 +4545,7 @@ exports[`Search Results Page renders loading images before returning no results 
   outline: none;
 }
 
-.emotion-16:active,
+.emotion-16:active[aria-disabled='false'],
 .emotion-16:focus,
 .emotion-16:hover {
   -webkit-text-decoration: none;
@@ -4548,7 +4557,7 @@ exports[`Search Results Page renders loading images before returning no results 
 }
 
 .emotion-16:hover[aria-disabled='false'],
-.emotion-16:active {
+.emotion-16:active[aria-disabled='false'] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
@@ -4582,8 +4591,11 @@ exports[`Search Results Page renders loading images before returning no results 
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -5673,8 +5685,8 @@ exports[`Search Results Page renders loading images before returning no results 
               class="emotion-53"
             >
               <button
-                aria-controls="select-17-menu"
-                aria-describedby="select-17-description"
+                aria-controls="select-5-menu"
+                aria-describedby="select-5-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -5682,7 +5694,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 class="emotion-54"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-18"
+                id="select-6"
                 type="button"
                 value=""
               >
@@ -5730,8 +5742,8 @@ exports[`Search Results Page renders loading images before returning no results 
               class="emotion-53"
             >
               <button
-                aria-controls="select-19-menu"
-                aria-describedby="select-19-description"
+                aria-controls="select-7-menu"
+                aria-describedby="select-7-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -5740,7 +5752,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-20"
+                id="select-8"
                 type="button"
                 value=""
               >
@@ -6054,7 +6066,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
-  color: #889397;
+  color: #5C6C75;
   height: 28px;
   width: 28px;
 }
@@ -6210,7 +6222,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   outline: none;
 }
 
-.emotion-16:active,
+.emotion-16:active[aria-disabled='false'],
 .emotion-16:focus,
 .emotion-16:hover {
   -webkit-text-decoration: none;
@@ -6222,7 +6234,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
 }
 
 .emotion-16:hover[aria-disabled='false'],
-.emotion-16:active {
+.emotion-16:active[aria-disabled='false'] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
@@ -6256,8 +6268,11 @@ exports[`Search Results Page renders loading images before returning nonempty re
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -7728,7 +7743,7 @@ exports[`Search Results Page renders results from a given search term query para
   background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
-  color: #889397;
+  color: #5C6C75;
   height: 28px;
   width: 28px;
 }
@@ -7884,7 +7899,7 @@ exports[`Search Results Page renders results from a given search term query para
   outline: none;
 }
 
-.emotion-16:active,
+.emotion-16:active[aria-disabled='false'],
 .emotion-16:focus,
 .emotion-16:hover {
   -webkit-text-decoration: none;
@@ -7896,7 +7911,7 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-16:hover[aria-disabled='false'],
-.emotion-16:active {
+.emotion-16:active[aria-disabled='false'] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
@@ -7930,8 +7945,11 @@ exports[`Search Results Page renders results from a given search term query para
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -8191,7 +8209,7 @@ exports[`Search Results Page renders results from a given search term query para
   background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
-  color: #889397;
+  color: #5C6C75;
   cursor: not-allowed;
   color: #C1C7C6;
   background-color: rgba(255, 255, 255, 0);
@@ -8941,8 +8959,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-61"
             >
               <button
-                aria-controls="select-57-menu"
-                aria-describedby="select-57-description"
+                aria-controls="select-13-menu"
+                aria-describedby="select-13-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -8950,7 +8968,7 @@ exports[`Search Results Page renders results from a given search term query para
                 class="emotion-62"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-58"
+                id="select-14"
                 type="button"
                 value=""
               >
@@ -8998,8 +9016,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-61"
             >
               <button
-                aria-controls="select-59-menu"
-                aria-describedby="select-59-description"
+                aria-controls="select-15-menu"
+                aria-describedby="select-15-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -9008,7 +9026,7 @@ exports[`Search Results Page renders results from a given search term query para
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-60"
+                id="select-16"
                 type="button"
                 value=""
               >

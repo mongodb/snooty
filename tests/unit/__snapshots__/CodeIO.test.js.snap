@@ -307,7 +307,7 @@ exports[`CodeIO renders correctly 1`] = `
   outline: none;
 }
 
-.emotion-16:active,
+.emotion-16:active[aria-disabled='false'],
 .emotion-16:focus,
 .emotion-16:hover {
   -webkit-text-decoration: none;
@@ -319,7 +319,7 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 .emotion-16:hover[aria-disabled='false'],
-.emotion-16:active {
+.emotion-16:active[aria-disabled='false'] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
@@ -353,8 +353,11 @@ exports[`CodeIO renders correctly 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;

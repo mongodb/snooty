@@ -150,7 +150,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   outline: none;
 }
 
-.emotion-21:active,
+.emotion-21:active[aria-disabled='false'],
 .emotion-21:focus,
 .emotion-21:hover {
   -webkit-text-decoration: none;
@@ -162,7 +162,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
 }
 
 .emotion-21:hover[aria-disabled='false'],
-.emotion-21:active {
+.emotion-21:active[aria-disabled='false'] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
@@ -200,8 +200,11 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;

@@ -137,7 +137,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   outline: none;
 }
 
-.emotion-8:active,
+.emotion-8:active[aria-disabled='false'],
 .emotion-8:focus,
 .emotion-8:hover {
   -webkit-text-decoration: none;
@@ -149,7 +149,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 }
 
 .emotion-8:hover[aria-disabled='false'],
-.emotion-8:active {
+.emotion-8:active[aria-disabled='false'] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
@@ -187,8 +187,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -967,15 +970,15 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             <label
               class="emotion-37"
               for="combobox-input-1"
-              id="combobox-label-1"
+              id="combobox-label-2"
             >
               Select Resource
             </label>
           </div>
           <div
-            aria-controls="combobox-menu-1"
+            aria-controls="combobox-menu-3"
             aria-expanded="false"
-            aria-owns="combobox-menu-1"
+            aria-owns="combobox-menu-3"
             class="emotion-38"
             role="combobox"
             tabindex="-1"
@@ -985,9 +988,9 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             >
               <input
                 aria-autocomplete="list"
-                aria-controls="combobox-menu-1"
+                aria-controls="combobox-menu-3"
                 aria-label="Select Resource"
-                aria-labelledby="combobox-label-1"
+                aria-labelledby="combobox-label-2"
                 autocomplete="off"
                 class="emotion-40"
                 id="combobox-input-1"

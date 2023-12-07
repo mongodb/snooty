@@ -120,7 +120,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   outline: none;
 }
 
-.emotion-8:active,
+.emotion-8:active[aria-disabled='false'],
 .emotion-8:focus,
 .emotion-8:hover {
   -webkit-text-decoration: none;
@@ -132,7 +132,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-8:hover[aria-disabled='false'],
-.emotion-8:active {
+.emotion-8:active[aria-disabled='false'] {
   color: #FFFFFF;
   background-color: #00593f;
   border-color: #00593f;
@@ -190,8 +190,11 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -609,7 +612,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   outline: none;
 }
 
-.emotion-9:active,
+.emotion-9:active[aria-disabled='false'],
 .emotion-9:focus,
 .emotion-9:hover {
   -webkit-text-decoration: none;
@@ -621,7 +624,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-9:hover[aria-disabled='false'],
-.emotion-9:active {
+.emotion-9:active[aria-disabled='false'] {
   color: #FFFFFF;
   background-color: #00593f;
   border-color: #00593f;
@@ -657,8 +660,11 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -1024,7 +1030,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   outline: none;
 }
 
-.emotion-9:active,
+.emotion-9:active[aria-disabled='false'],
 .emotion-9:focus,
 .emotion-9:hover {
   -webkit-text-decoration: none;
@@ -1036,7 +1042,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-9:hover[aria-disabled='false'],
-.emotion-9:active {
+.emotion-9:active[aria-disabled='false'] {
   color: #FFFFFF;
   background-color: #00593f;
   border-color: #00593f;
@@ -1072,8 +1078,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
