@@ -1,55 +1,42 @@
 import React from 'react';
 import Button from '@leafygreen-ui/button';
 import styled from '@emotion/styled';
-import { Subtitle } from '@leafygreen-ui/typography';
 import { useFeedbackContext } from '../context';
 import useScreenSize from '../../../../hooks/useScreenSize';
-import { Layout, Subheading } from '../components/view-components';
-import StarRating from '../components/StarRating';
-import { theme } from '../../../../theme/docsTheme';
-
-const RESOURCE_LINKS = [
-  { text: 'MongoDB Developer Community Forums', href: 'https://www.mongodb.com/community/forums/' },
-  { text: 'MongoDB Developer Center', href: 'https://www.mongodb.com/developer/' },
-  { text: 'MongoDB University', href: 'https://learn.mongodb.com/' },
-];
-
-const SUPPORT_LINK =
-  'https://support.mongodb.com/?_ga=2.191926057.2087449804.1701109748-1659791399.1655906873&_gac=1.114903413.1698074435.CjwKCAjws9ipBhB1EiwAccEi1AOuCPf5YadKdTucTL0245YGXrgMbNUsNrZLHXWf-WX73dnW1DOzZBoCR-QQAvD_BwE';
+import { Layout, Heading, Subheading } from '../components/view-components';
 
 const SupportCase = styled.div`
-  margin-top: ${theme.size.default};
+  margin-top: 16px;
 `;
 
-const StyledHeading = styled(Subtitle)`
-  margin-top: 30px;
-  margin-bottom: ${theme.size.default};
-  text-align: center;
+const StyledHeading = styled.div`
+  margin-top: 8px !important;
+  margin-bottom: 16px !important;
 `;
 
 const SubmittedView = () => {
   const { abandon } = useFeedbackContext();
   const { isMobile } = useScreenSize();
-  const { selectedRating } = useFeedbackContext();
-  const shouldShowSupportLink = selectedRating <= 3;
+  const { selectedSentiment } = useFeedbackContext();
+  const isSentimentNegative = selectedSentiment === 'Negative';
+  const finalHeading = isSentimentNegative ? "We're sorry to hear that." : 'Thanks for your help!';
 
   return (
     <Layout>
-      <StyledHeading>Thank you for your feedback!</StyledHeading>
-      <StarRating editable={false} />
+      <StyledHeading>
+        <Heading>{finalHeading}</Heading>
+      </StyledHeading>
       <Subheading>Your input improves MongoDB's Documentation.</Subheading>
       <Subheading>
         <span>Looking for more resources? </span>
-        {RESOURCE_LINKS.map(({ text, href }, index) => (
-          <React.Fragment key={index}>
-            <br />
-            <a href={href}>{text}</a>
-          </React.Fragment>
-        ))}
-        {shouldShowSupportLink && (
-          <SupportCase>
-            {'Have a support contact? '}
-            <a href={SUPPORT_LINK}>Create a Support Case</a>
+        <br />
+        <a href="https://developer.mongodb.com/community/forums/">MongoDB Community </a>
+        <br />
+        <a href="https://www.mongodb.com/developer/">MongoDB Developer Center</a>
+        {isSentimentNegative && (
+          <SupportCase selectedSentiment={selectedSentiment}>
+            {'Have a support contract? '}
+            <a href="https://support.mongodb.com/">Create a Support Case</a>
           </SupportCase>
         )}
       </Subheading>
