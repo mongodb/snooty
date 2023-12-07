@@ -23,6 +23,14 @@ const starIconStyle = (isHighlighted) => css`
   color: ${isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR};
   stroke-width: ${isHighlighted ? 1 : 0.5}px;
   stroke: ${palette.gray.dark2};
+  // Ensures that containing divs do not overflow
+  display: block;
+
+  :focus {
+    outline-color: ${palette.blue.light1};
+    outline-offset: 1px;
+    border-radius: 6px;
+  }
 `;
 
 const Layout = styled.div`
@@ -52,7 +60,17 @@ export const RATING_TOOLTIPS = {
   5: 'Very Good',
 };
 
-const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMouseLeave, triggerEnabled }) => {
+const Star = ({
+  ratingValue,
+  isHighlighted,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  onFocus,
+  onKeyDown,
+  onBlur,
+  triggerEnabled,
+}) => {
   const { isTabletOrMobile } = useScreenSize();
   const starSize = isTabletOrMobile ? 32 : 24;
 
@@ -71,7 +89,13 @@ const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMouseLeave,
               className={starIconStyle(isHighlighted)}
               glyph="Favorite"
               size={starSize}
+              // Change default viewbox to allow focus outline to be more centered
+              viewBox="0 -0.5 16 16"
               onMouseEnter={onMouseEnter}
+              tabIndex={0}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              onKeyDown={onKeyDown}
             />
           </StarContainer>
         }
@@ -87,7 +111,7 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
   const [lastHoveredRating, setLastHoveredRating] = useState(null);
   const { selectedRating } = useFeedbackContext();
 
-  const handleMouseEnterStar = (ratingValue) => {
+  const hoverStar = (ratingValue) => {
     setHoveredRating(ratingValue);
     setLastHoveredRating(ratingValue);
   };
@@ -96,22 +120,32 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
     setHoveredRating(lastHoveredRating);
   };
 
-  // Resets hover states
-  const handleMouseLeaveContainer = () => {
+  const resetHoverStates = () => {
     setHoveredRating(null);
     setLastHoveredRating(null);
   };
 
+  const handleKeyDown = (e, ratingValue) => {
+    const validKeys = ['Enter', 'Space'];
+    if (validKeys.includes(e.code)) {
+      e.preventDefault();
+      handleRatingSelection(ratingValue);
+    }
+  };
+
   return (
     isBrowser && (
-      <Layout className={className} onMouseLeave={handleMouseLeaveContainer}>
+      <Layout className={className} onMouseLeave={resetHoverStates}>
         {[1, 2, 3, 4, 5].map((ratingValue) => {
           const isHighlighted = hoveredRating ? hoveredRating >= ratingValue : selectedRating >= ratingValue;
           const eventProps = editable
             ? {
-                onMouseEnter: () => handleMouseEnterStar(ratingValue),
+                onMouseEnter: () => hoverStar(ratingValue),
                 onMouseLeave: () => handleMouseLeaveStar(),
+                onFocus: () => hoverStar(ratingValue),
+                onBlur: () => resetHoverStates(),
                 onClick: () => handleRatingSelection(ratingValue),
+                onKeyDown: (e) => handleKeyDown(e, ratingValue),
               }
             : {};
 
