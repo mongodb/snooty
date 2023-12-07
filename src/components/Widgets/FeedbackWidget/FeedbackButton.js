@@ -2,7 +2,7 @@ import React from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
-import { theme } from '../../../../src/theme/docsTheme';
+import { theme } from '../../../theme/docsTheme';
 import { useFeedbackContext } from './context';
 import { FEEDBACK_BUTTON_TEXT } from './constants';
 
@@ -39,7 +39,7 @@ const starIconStyle = css`
   color: ${palette.blue.light1};
 `;
 
-const FeedbackTab = () => {
+const FeedbackButton = () => {
   const { feedback, initializeFeedback } = useFeedbackContext();
   return (
     !feedback && (
@@ -51,4 +51,4 @@ const FeedbackTab = () => {
   );
 };
 
-export default FeedbackTab;
+export default FeedbackButton;
