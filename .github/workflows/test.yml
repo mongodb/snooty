@@ -24,6 +24,8 @@ jobs:
         node-version: '18.15'
     - name: Install
       run: npm ci --legacy-peer-deps
+    - name: Dedupe
+      run: npm dedupe
     - name: Lint
       run: npm run lint && npm run format
     - name: Test
