@@ -37,7 +37,7 @@ import {
 } from '../../src/components/Widgets/FeedbackWidget/constants';
 import headingData from './data/Heading.test.json';
 
-async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
+async function mountFormWithFeedbackState(feedbackState = {}) {
   const { view, isSupportRequest, hideHeader, screenshotTaken, ...feedback } = feedbackState;
   const wrapper = render(
     <>
@@ -88,7 +88,7 @@ describe('FeedbackWidget', () => {
   afterEach(clearMockScreenshotFunctions);
 
   describe('FeedbackButton (Desktop Viewport)', () => {
-    it('shows the sentiment category view when clicked', async () => {
+    it('shows the rating view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
       // Before the click, the form is hidden
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);

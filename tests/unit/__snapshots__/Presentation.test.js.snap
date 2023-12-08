@@ -799,7 +799,7 @@ exports[`DocumentBody renders the necessary elements 2`] = `
   color: #0498EC;
 }
 
-<div
+<button
   class="emotion-0"
 >
   <svg
@@ -818,7 +818,7 @@ exports[`DocumentBody renders the necessary elements 2`] = `
     />
   </svg>
   Rate this page
-</div>
+</button>
 `;
 
 exports[`DocumentBody renders the necessary elements 3`] = `
