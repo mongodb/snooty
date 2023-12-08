@@ -50,7 +50,7 @@
     "prettier": "prettier '**/*.{js,jsx,json,md}'",
     "preversion": "npm run ensure-master && npm run format && npm run lint && npm run test",
     "serve": "gatsby serve --prefix-paths",
-    "test": "jest",
+    "test": "jest --ignore-projects tests-esm",
     "test:unit": "jest unit",
     "version": "auto-changelog -p --template keepachangelog && git add CHANGELOG.md"
   },

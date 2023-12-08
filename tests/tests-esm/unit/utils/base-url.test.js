@@ -1,4 +1,4 @@
-import { baseUrl } from '../../../src/utils/base-url';
+import { baseUrl } from '../../../../src/utils/base-url.mjs';
 
 describe('baseUrl', () => {
   it('by default returns the DOTCOM_BASE_URL with protocols and prefix, with a trailing slash', () => {

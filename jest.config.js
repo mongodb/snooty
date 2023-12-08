@@ -36,5 +36,9 @@ module.exports = {
         '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,
       },
     },
+    {
+      displayName: 'tests-esm',
+      testMatch: ['<rootDir>/tests/tests-esm/**/*.test.js'],
+    },
   ],
 };

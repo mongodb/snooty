@@ -1,4 +1,4 @@
-import { constructBuildFilter } from '../../../../src/utils/setup/construct-build-filter';
+import { constructBuildFilter } from '../../../../../src/utils/setup/construct-build-filter.mjs';
 
 // Mock page documents found in snooty_<db>.documents
 const mockPageDocs = [

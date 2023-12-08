@@ -1,4 +1,4 @@
-import { generatePathPrefix } from '../../../src/utils/generate-path-prefix';
+import { generatePathPrefix } from '../../../../src/utils/generate-path-prefix.mjs';
 
 describe('path prefix testing', () => {
   const commitHash = 'COMMIT_HASH';
