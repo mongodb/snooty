@@ -43,10 +43,10 @@ const FeedbackButton = () => {
   const { feedback, initializeFeedback } = useFeedbackContext();
   return (
     !feedback && (
-      <div className={cx(containerStyle)} onClick={() => initializeFeedback()}>
+      <button className={cx(containerStyle)} onClick={() => initializeFeedback()}>
         <Icon className={starIconStyle} glyph="Favorite" />
         {FEEDBACK_BUTTON_TEXT}
-      </div>
+      </button>
     )
   );
 };
