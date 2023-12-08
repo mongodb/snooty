@@ -13,17 +13,11 @@ import useNoScroll from './hooks/useNoScroll';
 const FloatingContainer = styled.div`
   position: fixed;
   z-index: 14;
-  right: 16px;
-
-  @media ${theme.screenSize.upToLarge} {
-    top: 40%;
-  }
-
-  @media ${theme.screenSize.largeAndUp} {
-    bottom: 40px;
-  }
+  bottom: ${theme.size.large};
+  right: ${theme.size.large};
 
   @media ${theme.screenSize.upToSmall} {
+    position: fixed;
     right: 0;
     top: ${({ top }) => top};
   }
@@ -44,6 +38,7 @@ const Card = styled(LeafygreenCard)`
     height: calc(100vh - ${({ top }) => top});
     width: 100vw;
     border-radius: 0;
+    border-width: 0px;
     padding-top: 40px;
   }
 `;

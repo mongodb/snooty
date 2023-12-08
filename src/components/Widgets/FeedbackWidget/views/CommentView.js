@@ -14,6 +14,12 @@ import useScreenSize from '../../../../hooks/useScreenSize';
 import validateEmail from '../../../../utils/validate-email';
 import StarRating from '../components/StarRating';
 import { theme } from '../../../../theme/docsTheme';
+import {
+  COMMENT_PLACEHOLDER_TEXT,
+  EMAIL_ERROR_TEXT,
+  EMAIL_PLACEHOLDER_TEXT,
+  FEEDBACK_SUBMIT_BUTTON_TEXT,
+} from '../constants';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
 const SubmitButton = styled(Button)`
@@ -90,7 +96,6 @@ const useValidation = (inputValue, validator) => {
 
 const CommentView = () => {
   const { submitAllFeedback, screenshotTaken, setSelectedRating } = useFeedbackContext();
-  const placeholderText = 'Tell us more about your experience';
 
   const [comment, setComment] = useState('');
   const [email, setEmail] = useState('');
@@ -120,7 +125,7 @@ const CommentView = () => {
         type="text"
         id="feedback-comment"
         aria-labelledby="Comment Text Box"
-        placeholder={placeholderText}
+        placeholder={COMMENT_PLACEHOLDER_TEXT}
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         baseFontSize={13}
@@ -129,16 +134,16 @@ const CommentView = () => {
         type="email"
         id="feedback-email"
         aria-labelledby="Email Text Box"
-        placeholder="Email Address"
+        placeholder={EMAIL_PLACEHOLDER_TEXT}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        errorMessage="Please enter a valid email."
+        errorMessage={EMAIL_ERROR_TEXT}
         state={hasEmailError ? 'error' : 'none'}
         optional={true}
       />
       {!isMobile && <ScreenshotButton />}
       <SubmitButton onClick={() => handleSubmit()} type="submit">
-        {'Send'}
+        {FEEDBACK_SUBMIT_BUTTON_TEXT}
       </SubmitButton>
     </Layout>
   );
