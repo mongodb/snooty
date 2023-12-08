@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Lightbox from '../../src/components/Figure/Lightbox';
+import Lightbox from '../../../src/components/Figure/Lightbox';
 // data for this component
-import mockData from './data/Figure.test.json';
+import mockData from '../../unit/data/Figure.test.json';
 
 describe('Lightbox', () => {
   it('renders correctly', () => {

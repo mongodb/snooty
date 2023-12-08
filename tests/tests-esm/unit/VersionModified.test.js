@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import VersionModified from '../../src/components/VersionModified';
+import VersionModified from '../../../src/components/VersionModified';
 
 // data for this component
-import { deprecated, versionadded, versionchanged } from './data/VersionModified.test.json';
+import { deprecated, versionadded, versionchanged } from '../../unit/data/VersionModified.test.json';
 
 const shallowRender = (data) => render(<VersionModified nodeData={data} />);
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { getMetaFromDirective } from '../../src/utils/get-meta-from-directive';
-import Meta from '../../src/components/Meta';
+import { getMetaFromDirective } from '../../../src/utils/get-meta-from-directive';
+import Meta from '../../../src/components/Meta';
 
 // data for this component
-import { testPageNodes } from './data/MetaData';
+import { testPageNodes } from '../../unit/data/MetaData';
 
 describe('Meta Tag', () => {
   it('does not renders a Meta correctly when the meta value is present', () => {

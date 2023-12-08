@@ -7,22 +7,22 @@ import {
   FeedbackForm,
   FeedbackTab,
   FeedbackFooter,
-} from '../../src/components/Widgets/FeedbackWidget';
+} from '../../../src/components/Widgets/FeedbackWidget';
 
-import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
+import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../../utils';
 import {
   stitchFunctionMocks,
   mockStitchFunctions,
   clearMockStitchFunctions,
-} from '../utils/feedbackWidgetStitchFunctions';
-import Heading from '../../src/components/Heading';
-import { theme } from '../../src/theme/docsTheme';
+} from '../../utils/feedbackWidgetStitchFunctions';
+import Heading from '../../../src/components/Heading';
+import { theme } from '../../../src/theme/docsTheme';
 import {
   screenshotFunctionMocks,
   mockScreenshotFunctions,
   clearMockScreenshotFunctions,
-} from '../utils/data/feedbackWidgetScreenshotFunctions';
-import headingData from './data/Heading.test.json';
+} from '../../utils/data/feedbackWidgetScreenshotFunctions';
+import headingData from '../../unit/data/Heading.test.json';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   const { view, isSupportRequest, hideHeader, screenshotTaken, ...feedback } = feedbackState;

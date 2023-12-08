@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import QuizWidget from '../../src/components/Widgets/QuizWidget/QuizWidget';
+import QuizWidget from '../../../src/components/Widgets/QuizWidget/QuizWidget';
 
 // data for this component
-import { completeQuiz, noQuestion } from './data/QuizWidget.test.json';
+import { completeQuiz, noQuestion } from '../../unit/data/QuizWidget.test.json';
 
 const siteUrl = 'https://docs.mongodb.com';
 const project = 'cloud-docs';

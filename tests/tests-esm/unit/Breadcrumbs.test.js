@@ -1,10 +1,10 @@
 import React from 'react';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
-import { mockLocation } from '../utils/mock-location';
-import Breadcrumbs from '../../src/components/Breadcrumbs/index';
+import { mockLocation } from '../../utils/mock-location';
+import Breadcrumbs from '../../../src/components/Breadcrumbs/index';
 
-import mockData from './data/Breadcrumbs.test.json';
+import mockData from '../../unit/data/Breadcrumbs.test.json';
 
 it('renders correctly with siteTitle', () => {
   const tree = render(<Breadcrumbs parentPaths={mockData} siteTitle="MongoDB Compass" slug="documents/view" />);

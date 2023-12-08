@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import RoleAbbr from '../../src/components/Roles/Abbr';
-import RoleGUILabel from '../../src/components/Roles/GUILabel';
-import RoleFile from '../../src/components/Roles/File';
+import RoleAbbr from '../../../src/components/Roles/Abbr';
+import RoleGUILabel from '../../../src/components/Roles/GUILabel';
+import RoleFile from '../../../src/components/Roles/File';
 
-import mockDataGUILabel from './data/Role-guilabel.test.json';
-import mockDataFile from './data/Role-file.test.json';
-import mockDataAbbr from './data/Role-abbr.test.json';
+import mockDataGUILabel from '../../unit/data/Role-guilabel.test.json';
+import mockDataFile from '../../unit/data/Role-file.test.json';
+import mockDataAbbr from '../../unit/data/Role-abbr.test.json';
 
 describe('GUI Label', () => {
   it('correctly renders a "guilabel" role', () => {

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { act } from 'react-dom/test-utils';
 import { render } from '@testing-library/react';
-import * as realm from '../../src/utils/realm';
-import * as siteMetadata from '../../src/hooks/use-site-metadata';
-import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
-import { VersionContext } from '../../src/context/version-context';
+import * as realm from '../../../src/utils/realm';
+import * as siteMetadata from '../../../src/hooks/use-site-metadata';
+import * as snootyMetadata from '../../../src/utils/use-snooty-metadata';
+import { VersionContext } from '../../../src/context/version-context';
 
-import { TocContext, TocContextProvider } from '../../src/context/toc-context';
+import { TocContext, TocContextProvider } from '../../../src/context/toc-context';
 
 // <------------------ START test data mocks ------------------>
 const siteMetadataMock = jest.spyOn(siteMetadata, 'useSiteMetadata');

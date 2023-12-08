@@ -1,9 +1,9 @@
 import React from 'react';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
-import ChangeList from '../../src/components/OpenAPIChangelog/components/ChangeList';
-import { ALL_VERSIONS, COMPARE_VERSIONS } from '../../src/components/OpenAPIChangelog/utils/constants';
-import { mockChangelog, mockDiff } from './data/OpenAPIChangelog';
+import ChangeList from '../../../src/components/OpenAPIChangelog/components/ChangeList';
+import { ALL_VERSIONS, COMPARE_VERSIONS } from '../../../src/components/OpenAPIChangelog/utils/constants';
+import { mockChangelog, mockDiff } from '../../unit/data/OpenAPIChangelog';
 
 jest.mock('../../src/utils/use-snooty-metadata', () => () => ({
   openapi_pages: ['reference/api-resources-spec/v2'],

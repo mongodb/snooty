@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import OpenAPI from '../../src/components/OpenAPI';
+import OpenAPI from '../../../src/components/OpenAPI';
 
 const mockSpecJson = {
   openapi: '3.0.0',

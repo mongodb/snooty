@@ -5,14 +5,14 @@ import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
-import { mockLocation } from '../utils/mock-location';
-import { tick, setMobile } from '../utils';
-import SearchResults from '../../src/components/SearchResults';
-import { SearchContextProvider } from '../../src/components/SearchResults/SearchContext';
-import mockStaticQuery from '../utils/mockStaticQuery';
-import * as RealmUtil from '../../src/utils/realm';
-import mockInputData from '../utils/data/marian-manifests.json';
-import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
+import { mockLocation } from '../../utils/mock-location';
+import { tick, setMobile } from '../../utils';
+import SearchResults from '../../../src/components/SearchResults';
+import { SearchContextProvider } from '../../../src/components/SearchResults/SearchContext';
+import mockStaticQuery from '../../utils/mockStaticQuery';
+import * as RealmUtil from '../../../src/utils/realm';
+import mockInputData from '../../utils/data/marian-manifests.json';
+import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from '../../unit/utils/mock-marian-fetch';
 
 const MOBILE_SEARCH_BACK_BUTTON_TEXT = 'Back to search results';
 

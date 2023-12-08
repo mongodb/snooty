@@ -1,11 +1,11 @@
 import React from 'react';
 // import { queryAllByRole } from '@testing-library/react';
 import { render } from '@testing-library/react';
-import { mockLocation } from '../utils/mock-location';
-import GuideNext from '../../src/components/GuideNext';
-import * as browserStorage from '../../src/utils/browser-storage';
-import mockChaptersData from './data/Chapters.test.json';
-import mockNodeData from './data/GuideNext.test.json';
+import { mockLocation } from '../../utils/mock-location';
+import GuideNext from '../../../src/components/GuideNext';
+import * as browserStorage from '../../../src/utils/browser-storage';
+import mockChaptersData from '../../unit/data/Chapters.test.json';
+import mockNodeData from '../../unit/data/GuideNext.test.json';
 
 const renderGuideNext = (slug, mockNodeData = {}) => {
   return render(<GuideNext nodeData={mockNodeData} metadata={mockChaptersData.metadata} slug={slug} />);

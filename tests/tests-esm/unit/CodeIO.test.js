@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import CodeIO from '../../src/components/Code/CodeIO';
+import CodeIO from '../../../src/components/Code/CodeIO';
 
 // data for this component
-import mockData from './data/CodeIO.test.json';
+import mockData from '../../unit/data/CodeIO.test.json';
 
 describe('CodeIO', () => {
   it('renders correctly', () => {

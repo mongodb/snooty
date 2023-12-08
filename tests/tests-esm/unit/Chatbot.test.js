@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
-import ComponentFactory from '../../src/components/ComponentFactory';
+import ComponentFactory from '../../../src/components/ComponentFactory';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),

@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Footnote from '../../src/components/Footnote';
-import FootnoteContext from '../../src/components/Footnote/footnote-context';
+import Footnote from '../../../src/components/Footnote';
+import FootnoteContext from '../../../src/components/Footnote/footnote-context';
 
 // data for this component
-import mockData from './data/Footnote.test.json';
+import mockData from '../../unit/data/Footnote.test.json';
 
 const mountFootnotes = (footnotes) =>
   render(

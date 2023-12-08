@@ -2,9 +2,9 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
-import { mockLocation } from '../utils/mock-location';
-import ProductsList from '../../src/components/Sidenav/ProductsList';
-import { tick } from '../utils';
+import { mockLocation } from '../../utils/mock-location';
+import ProductsList from '../../../src/components/Sidenav/ProductsList';
+import { tick } from '../../utils';
 
 const mockProducts = [
   {

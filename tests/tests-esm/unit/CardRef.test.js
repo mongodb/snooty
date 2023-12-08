@@ -1,12 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
-import { mockLocation } from '../utils/mock-location';
-import CardGroup from '../../src/components/Card/CardGroup';
-import { theme } from '../../src/theme/docsTheme';
+import { mockLocation } from '../../utils/mock-location';
+import CardGroup from '../../../src/components/Card/CardGroup';
+import { theme } from '../../../src/theme/docsTheme';
 
 // data for this component
-import mockData from './data/CardRef.test.json';
+import mockData from '../../unit/data/CardRef.test.json';
 
 beforeAll(() => {
   mockLocation(null, `/`);

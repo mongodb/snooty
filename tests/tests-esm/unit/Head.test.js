@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Head } from '../../src/components/DocumentBody';
-import mockStaticQuery from '../utils/mockStaticQuery';
-import { useSiteMetadata } from '../../src/hooks/use-site-metadata';
-import { usePathPrefix } from '../../src/hooks/use-path-prefix';
-import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
-import mockCompleteEOLPageContext from './data/CompleteEOLPageContext.json';
-import mockEOLSnootyMetadata from './data/EOLSnootyMetadata.json';
-import mockHeadPageContext from './data/HeadPageContext.test.json';
+import { Head } from '../../../src/components/DocumentBody';
+import mockStaticQuery from '../../utils/mockStaticQuery';
+import { useSiteMetadata } from '../../../src/hooks/use-site-metadata';
+import { usePathPrefix } from '../../../src/hooks/use-path-prefix';
+import useSnootyMetadata from '../../../src/utils/use-snooty-metadata';
+import mockCompleteEOLPageContext from '../../unit/data/CompleteEOLPageContext.json';
+import mockEOLSnootyMetadata from '../../unit/data/EOLSnootyMetadata.json';
+import mockHeadPageContext from '../../unit/data/HeadPageContext.test.json';
 
 jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { mockLocation } from '../utils/mock-location';
-import DocumentBody from '../../src/components/DocumentBody';
-import mockPageContext from './data/PageContext.test.json';
-import mockSnootyMetadata from './data/SnootyMetadata.json';
+import { mockLocation } from '../../utils/mock-location';
+import DocumentBody from '../../../src/components/DocumentBody';
+import mockPageContext from '../../unit/data/PageContext.test.json';
+import mockSnootyMetadata from '../../unit/data/SnootyMetadata.json';
 
 jest.mock(`../../src/utils/use-snooty-metadata`, () => {
   return () => mockSnootyMetadata;

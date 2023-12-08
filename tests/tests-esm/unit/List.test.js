@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import List from '../../src/components/List';
+import List from '../../../src/components/List';
 
 // data for this component
-import mockData from './data/List.test.json';
+import mockData from '../../unit/data/List.test.json';
 
 it('List renders correctly', () => {
   const tree = render(<List nodeData={mockData} />);

@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import DeprecatedVersionSelector from '../../src/components/DeprecatedVersionSelector';
-import * as realm from '../../src/utils/realm';
+import DeprecatedVersionSelector from '../../../src/components/DeprecatedVersionSelector';
+import * as realm from '../../../src/utils/realm';
 
 const deprecatedVersions = {
   docs: ['v2.2', 'v2.4', 'v2.6', 'v3.0', 'v3.2', 'v3.4'],

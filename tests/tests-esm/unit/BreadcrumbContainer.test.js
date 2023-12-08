@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { mockLocation } from '../utils/mock-location';
-import BreadcrumbContainer from '../../src/components/Breadcrumbs/BreadcrumbContainer';
-import { NavigationContext } from '../../src/context/navigation-context';
+import { mockLocation } from '../../utils/mock-location';
+import BreadcrumbContainer from '../../../src/components/Breadcrumbs/BreadcrumbContainer';
+import { NavigationContext } from '../../../src/context/navigation-context';
 
 const mountBreadcrumbContainer = (homeCrumb, lastCrumb, parents) => {
   return render(

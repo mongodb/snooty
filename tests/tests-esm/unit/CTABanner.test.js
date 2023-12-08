@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { mockLocation } from '../utils/mock-location';
-import CTABanner from '../../src/components/Banner/CTABanner';
+import { mockLocation } from '../../utils/mock-location';
+import CTABanner from '../../../src/components/Banner/CTABanner';
 
 // data for this component
-import mockData from './data/CTABanner.test.json';
+import mockData from '../../unit/data/CTABanner.test.json';
 
 beforeAll(() => {
   mockLocation(null, `/`);

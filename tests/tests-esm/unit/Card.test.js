@@ -2,12 +2,12 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { navigate } from 'gatsby';
-import { mockLocation } from '../utils/mock-location';
-import Card from '../../src/components/Card';
-import { theme } from '../../src/theme/docsTheme';
+import { mockLocation } from '../../utils/mock-location';
+import Card from '../../../src/components/Card';
+import { theme } from '../../../src/theme/docsTheme';
 
 // data for this component
-import mockData from './data/Card.test.json';
+import mockData from '../../unit/data/Card.test.json';
 
 it('renders correctly', () => {
   const tree = render(

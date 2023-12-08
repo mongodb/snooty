@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { mockLocation } from '../utils/mock-location';
-import InternalPageNav from '../../src/components/InternalPageNav';
-import slugTitleMapping from './data/ecosystem/slugTitleMapping.json';
+import { mockLocation } from '../../utils/mock-location';
+import InternalPageNav from '../../../src/components/InternalPageNav';
+import slugTitleMapping from '../../unit/data/ecosystem/slugTitleMapping.json';
 
 const data = ['drivers/csharp', 'drivers/go', 'drivers/java'];
 

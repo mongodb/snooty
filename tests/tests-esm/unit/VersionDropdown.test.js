@@ -1,12 +1,12 @@
 import { render, screen, act, within } from '@testing-library/react';
 import { navigate } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
-import * as realm from '../../src/utils/realm';
-import { generatePrefix } from '../../src/components/VersionDropdown/utils';
-import VersionDropdown from '../../src/components/VersionDropdown';
-import mockData from '../unit/data/VersionDropdown.test.json';
-import { VersionContextProvider } from '../../src/context/version-context';
-import { tick } from '../utils';
+import * as realm from '../../../src/utils/realm';
+import { generatePrefix } from '../../../src/components/VersionDropdown/utils';
+import VersionDropdown from '../../../src/components/VersionDropdown';
+import mockData from '../../unit/data/VersionDropdown.test.json';
+import { VersionContextProvider } from '../../../src/context/version-context';
+import { tick } from '../../utils';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ parserBranch: 'master', snootyEnv: 'development' }),

@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { matchers } from '@emotion/jest';
-import ListTable from '../../src/components/ListTable';
+import ListTable from '../../../src/components/ListTable';
 
-import mockData from './data/ListTable.test.json';
-import mockDataFixedWidths from './data/ListTableFixedWidths.test.json';
+import mockData from '../../unit/data/ListTable.test.json';
+import mockDataFixedWidths from '../../unit/data/ListTableFixedWidths.test.json';
 
 expect.extend(matchers);
 

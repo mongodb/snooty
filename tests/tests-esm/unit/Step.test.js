@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { mockLocation } from '../utils/mock-location';
-import Step from '../../src/components/Procedure/Step';
+import { mockLocation } from '../../utils/mock-location';
+import Step from '../../../src/components/Procedure/Step';
 
 // data for this component
-import mockData from './data/Step.test.json';
+import mockData from '../../unit/data/Step.test.json';
 
 beforeAll(() => {
   mockLocation(null, `/`);

@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { mockLocation } from '../utils/mock-location';
-import Chapter from '../../src/components/Chapters/Chapter';
-import mockData from './data/Chapters.test.json';
+import { mockLocation } from '../../utils/mock-location';
+import Chapter from '../../../src/components/Chapters/Chapter';
+import mockData from '../../unit/data/Chapters.test.json';
 
 beforeAll(() => {
   mockLocation(null, `/`);

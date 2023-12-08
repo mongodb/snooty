@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 // Keep mockLocation on top to ensure mock is applied
-import { mockLocation } from '../utils/mock-location';
-import IA from '../../src/components/Sidenav/IA';
-import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
-import sampleData from './data/IA.test.json';
+import { mockLocation } from '../../utils/mock-location';
+import IA from '../../../src/components/Sidenav/IA';
+import useSnootyMetadata from '../../../src/utils/use-snooty-metadata';
+import sampleData from '../../unit/data/IA.test.json';
 
 jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 

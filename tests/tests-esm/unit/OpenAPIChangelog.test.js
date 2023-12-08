@@ -2,9 +2,9 @@ import React from 'react';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as realm from '../../src/utils/realm';
-import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
-import { mockChangelog, mockDiff, mockIndex } from './data/OpenAPIChangelog';
+import * as realm from '../../../src/utils/realm';
+import OpenAPIChangelog from '../../../src/components/OpenAPIChangelog';
+import { mockChangelog, mockDiff, mockIndex } from '../../unit/data/OpenAPIChangelog';
 
 /**
  * Helper function to strip HTML from combobox list options

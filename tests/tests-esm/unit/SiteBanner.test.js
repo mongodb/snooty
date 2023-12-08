@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import * as Gatsby from 'gatsby';
-import * as RealmUtil from '../../src/utils/realm';
-import SiteBanner from '../../src/components/Banner/SiteBanner';
-import { HeaderContext } from '../../src/components/Header/header-context';
-import { tick } from '../utils';
+import * as RealmUtil from '../../../src/utils/realm';
+import SiteBanner from '../../../src/components/Banner/SiteBanner';
+import { HeaderContext } from '../../../src/components/Header/header-context';
+import { tick } from '../../utils';
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 const mockSnootyEnv = (snootyEnv) => {

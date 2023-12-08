@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Figure from '../../src/components/Figure';
+import Figure from '../../../src/components/Figure';
 
 // data for this component
-import mockData from './data/Figure.test.json';
-import borderData from './data/FigureBorder.test.json';
-import lightboxData from './data/FigureLightbox.test.json';
+import mockData from '../../unit/data/Figure.test.json';
+import borderData from '../../unit/data/FigureBorder.test.json';
+import lightboxData from '../../unit/data/FigureLightbox.test.json';
 
 it('renders correctly', () => {
   const tree = render(<Figure nodeData={mockData} />);

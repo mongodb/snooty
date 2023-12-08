@@ -2,10 +2,10 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
-import { mockLocation } from '../utils/mock-location';
-import { Sidenav, SidenavContextProvider, SidenavMobileMenuButton } from '../../src/components/Sidenav';
-import { theme } from '../../src/theme/docsTheme';
-import { tick, setMatchMedia, setMobile } from '../utils';
+import { mockLocation } from '../../utils/mock-location';
+import { Sidenav, SidenavContextProvider, SidenavMobileMenuButton } from '../../../src/components/Sidenav';
+import { theme } from '../../../src/theme/docsTheme';
+import { tick, setMatchMedia, setMobile } from '../../utils';
 
 jest.mock(`../../src/utils/use-snooty-metadata`, () => {
   return () => ({ project: 'test-project' });

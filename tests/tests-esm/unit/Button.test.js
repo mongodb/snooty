@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { mockLocation } from '../utils/mock-location';
-import Button from '../../src/components/Button';
+import { mockLocation } from '../../utils/mock-location';
+import Button from '../../../src/components/Button';
 
 // data for this component
-import Link from '../../src/components/Link';
-import mockData from './data/Button.test.json';
+import Link from '../../../src/components/Link';
+import mockData from '../../unit/data/Button.test.json';
 
 jest.mock('../../src/components/Link');
 
