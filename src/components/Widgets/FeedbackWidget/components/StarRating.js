@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 import loadable from '@loadable/component';
 import { palette } from '@leafygreen-ui/palette';
+import { css } from '@leafygreen-ui/emotion';
+import Icon from '@leafygreen-ui/icon';
 import { useFeedbackContext } from '../context';
 import { isBrowser } from '../../../../utils/is-browser';
-import { StarIcon } from '../icons';
+import useScreenSize from '../../../../hooks/useScreenSize';
+import { theme } from '../../../../theme/docsTheme';
 const Tooltip = loadable(() => import('./LeafygreenTooltip'));
 
 // Given a string, convert all regular space characters to non-breaking spaces
@@ -14,18 +16,25 @@ const convertSpacesToNbsp = (someString) => {
   return someString.replace(/\s/g, nbsp);
 };
 
-const FILLED_STAR_COLOR = palette.yellow.base;
-const UNFILLED_STAR_COLOR = palette.gray.light2;
+const FILLED_STAR_COLOR = palette.green.light1;
+const UNFILLED_STAR_COLOR = palette.white;
 
-const Layout = styled.div(
-  (props) => css`
-    display: flex;
-    flex-direction: row;
-    width: ${widthForSize(props.size)};
-    justify-content: space-between;
-    margin: ${marginForSize(props.size)};
-  `
-);
+const starIconStyle = (isHighlighted) => css`
+  color: ${isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR};
+  stroke-width: ${isHighlighted ? 1 : 0.5}px;
+  stroke: ${palette.gray.dark2};
+`;
+
+const Layout = styled.div`
+  display: flex;
+  gap: ${theme.size.small};
+  justify-content: center;
+  margin: ${theme.size.default} 0 ${theme.size.small};
+
+  @media ${theme.screenSize.upToLarge} {
+    gap: 12px;
+  }
+`;
 
 const StarContainer = styled.div`
   cursor: pointer;
@@ -36,84 +45,83 @@ export const StarRatingLabel = styled.div`
 `;
 
 export const RATING_TOOLTIPS = {
-  1: 'Not at all',
-  2: 'A little',
-  3: 'Somewhat',
-  4: 'Very',
-  5: 'Extremely',
+  1: 'Very Poor',
+  2: 'Poor',
+  3: 'Neutral',
+  4: 'Good',
+  5: 'Very Good',
 };
 
-const widthForSize = (size) => {
-  switch (size) {
-    case 'lg':
-      return '140px';
-    case '2x':
-      return '100%';
-    case '3x':
-      return '100%';
-    default:
-      return '100%';
-  }
-};
+const Star = ({ ratingValue, isHighlighted, onClick, onMouseEnter, onMouseLeave, triggerEnabled }) => {
+  const { isTabletOrMobile } = useScreenSize();
+  const starSize = isTabletOrMobile ? 32 : 24;
 
-const marginForSize = (size) => {
-  switch (size) {
-    case 'lg':
-      return '0';
-    case '2x':
-      return '16px 0 32px 0';
-    case '3x':
-      return '32px 0 20px 0';
-    default:
-      return '20px 0 20px 0';
-  }
-};
-
-export const Star = ({ ratingValue, isHighlighted, shouldShowTooltip, size, onClick, onMouseEnter, onMouseLeave }) => {
   return (
     <div onClick={onClick} onMouseLeave={onMouseLeave}>
       <Tooltip
-        key={`star-${size}-${ratingValue}`}
-        id={`star-${size}-${ratingValue}`}
+        key={`star-${ratingValue}`}
         justify="middle"
         triggerEvent="hover"
-        open={shouldShowTooltip}
+        enabled={triggerEnabled}
         usePortal={false}
         trigger={
           <StarContainer>
-            <StarIcon
-              size={size}
+            <Icon
+              data-testid={`rating-star${isHighlighted ? '-highlighted' : ''}`}
+              className={starIconStyle(isHighlighted)}
+              glyph="Favorite"
+              size={starSize}
               onMouseEnter={onMouseEnter}
-              style={{ color: isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR }}
             />
           </StarContainer>
         }
       >
-        {convertSpacesToNbsp(`${RATING_TOOLTIPS[ratingValue]} helpful`)}
+        {convertSpacesToNbsp(RATING_TOOLTIPS[ratingValue])}
       </Tooltip>
     </div>
   );
 };
 
-const StarRating = ({ size = '3x' }) => {
+const StarRating = ({ className, handleRatingSelection = () => {}, editable = true }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
-  const { feedback } = useFeedbackContext();
-  const selectedRating = feedback && feedback.rating;
+  const [lastHoveredRating, setLastHoveredRating] = useState(null);
+  const { selectedRating } = useFeedbackContext();
+
+  const handleMouseEnterStar = (ratingValue) => {
+    setHoveredRating(ratingValue);
+    setLastHoveredRating(ratingValue);
+  };
+
+  const handleMouseLeaveStar = () => {
+    setHoveredRating(lastHoveredRating);
+  };
+
+  // Resets hover states
+  const handleMouseLeaveContainer = () => {
+    setHoveredRating(null);
+    setLastHoveredRating(null);
+  };
+
   return (
     isBrowser && (
-      <Layout size={size}>
+      <Layout className={className} onMouseLeave={handleMouseLeaveContainer}>
         {[1, 2, 3, 4, 5].map((ratingValue) => {
-          const isHighlighted = selectedRating ? selectedRating >= ratingValue : hoveredRating >= ratingValue;
-          const isHovered = hoveredRating === ratingValue;
+          const isHighlighted = hoveredRating ? hoveredRating >= ratingValue : selectedRating >= ratingValue;
+          const eventProps = editable
+            ? {
+                onMouseEnter: () => handleMouseEnterStar(ratingValue),
+                onMouseLeave: () => handleMouseLeaveStar(),
+                onClick: () => handleRatingSelection(ratingValue),
+              }
+            : {};
+
           return (
             <Star
               key={ratingValue}
               ratingValue={ratingValue}
               isHighlighted={isHighlighted}
-              shouldShowTooltip={isHovered && !selectedRating}
-              onMouseEnter={() => setHoveredRating(ratingValue)}
-              onMouseLeave={() => setHoveredRating(null)}
-              size={size}
+              triggerEnabled={editable}
+              {...eventProps}
             />
           );
         })}
