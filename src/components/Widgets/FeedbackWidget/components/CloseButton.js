@@ -4,6 +4,7 @@ import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../../theme/docsTheme';
+import { CLOSE_BUTTON_ALT_TEXT } from '../constants';
 
 const buttonStyles = css`
   position: absolute;
@@ -21,7 +22,7 @@ const buttonStyles = css`
 const CloseButton = ({ onClick, size = 'default', ...props }) => {
   return (
     <IconButton
-      aria-label="Close Feedback Form"
+      aria-label={CLOSE_BUTTON_ALT_TEXT}
       className={cx(buttonStyles)}
       onClick={onClick}
       size={size}

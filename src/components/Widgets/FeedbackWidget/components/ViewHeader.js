@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../../../../theme/docsTheme';
+import { RATING_QUESTION_TEXT } from '../constants';
 
 const TextHeader = styled(Body)`
   font-weight: 600;
@@ -15,7 +16,7 @@ const TextHeader = styled(Body)`
 
 // this should only render when in modal or mobile view
 const ViewHeader = () => {
-  return <TextHeader>How would you rate this page?</TextHeader>;
+  return <TextHeader>{RATING_QUESTION_TEXT}</TextHeader>;
 };
 
 export default ViewHeader;

@@ -7,15 +7,7 @@ import useScreenSize from '../../../../hooks/useScreenSize';
 import { Layout, Subheading } from '../components/view-components';
 import StarRating from '../components/StarRating';
 import { theme } from '../../../../theme/docsTheme';
-
-const RESOURCE_LINKS = [
-  { text: 'MongoDB Developer Community Forums', href: 'https://www.mongodb.com/community/forums/' },
-  { text: 'MongoDB Developer Center', href: 'https://www.mongodb.com/developer/' },
-  { text: 'MongoDB University', href: 'https://learn.mongodb.com/' },
-];
-
-const SUPPORT_LINK =
-  'https://support.mongodb.com/?_ga=2.191926057.2087449804.1701109748-1659791399.1655906873&_gac=1.114903413.1698074435.CjwKCAjws9ipBhB1EiwAccEi1AOuCPf5YadKdTucTL0245YGXrgMbNUsNrZLHXWf-WX73dnW1DOzZBoCR-QQAvD_BwE';
+import { SUBMITTED_VIEW_RESOURCE_LINKS, SUBMITTED_VIEW_SUPPORT_LINK, SUBMITTED_VIEW_TEXT } from '../constants';
 
 const SupportCase = styled.div`
   margin-top: ${theme.size.default};
@@ -35,12 +27,12 @@ const SubmittedView = () => {
 
   return (
     <Layout>
-      <StyledHeading>Thank you for your feedback!</StyledHeading>
+      <StyledHeading>{SUBMITTED_VIEW_TEXT.HEADING}</StyledHeading>
       <StarRating editable={false} />
-      <Subheading>Your input improves MongoDB's Documentation.</Subheading>
+      <Subheading>{SUBMITTED_VIEW_TEXT.SUB_HEADING}</Subheading>
       <Subheading>
-        <span>Looking for more resources? </span>
-        {RESOURCE_LINKS.map(({ text, href }, index) => (
+        <span>{SUBMITTED_VIEW_TEXT.RESOURCES_CTA}</span>
+        {SUBMITTED_VIEW_RESOURCE_LINKS.map(({ text, href }, index) => (
           <React.Fragment key={index}>
             <br />
             <a href={href}>{text}</a>
@@ -48,8 +40,8 @@ const SubmittedView = () => {
         ))}
         {shouldShowSupportLink && (
           <SupportCase>
-            {'Have a support contact? '}
-            <a href={SUPPORT_LINK}>Create a Support Case</a>
+            {`${SUBMITTED_VIEW_TEXT.SUPPORT_CTA} `}
+            <a href={SUBMITTED_VIEW_SUPPORT_LINK.href}>{SUBMITTED_VIEW_SUPPORT_LINK.text}</a>
           </SupportCase>
         )}
       </Subheading>

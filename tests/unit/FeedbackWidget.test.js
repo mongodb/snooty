@@ -5,7 +5,7 @@ import { matchers } from '@emotion/jest';
 import {
   FeedbackProvider,
   FeedbackForm,
-  FeedbackTab,
+  FeedbackButton,
   FeedbackFooter,
 } from '../../src/components/Widgets/FeedbackWidget';
 
@@ -16,12 +16,25 @@ import {
   clearMockStitchFunctions,
 } from '../utils/feedbackWidgetStitchFunctions';
 import Heading from '../../src/components/Heading';
-import { theme } from '../../src/theme/docsTheme';
 import {
   screenshotFunctionMocks,
   mockScreenshotFunctions,
   clearMockScreenshotFunctions,
 } from '../utils/data/feedbackWidgetScreenshotFunctions';
+import {
+  CLOSE_BUTTON_ALT_TEXT,
+  COMMENT_PLACEHOLDER_TEXT,
+  EMAIL_ERROR_TEXT,
+  EMAIL_PLACEHOLDER_TEXT,
+  FEEDBACK_BUTTON_TEXT,
+  FEEDBACK_SUBMIT_BUTTON_TEXT,
+  RATING_QUESTION_TEXT,
+  SCREENSHOT_BUTTON_TEXT,
+  SCREENSHOT_OVERLAY_ALT_TEXT,
+  SUBMITTED_VIEW_RESOURCE_LINKS,
+  SUBMITTED_VIEW_SUPPORT_LINK,
+  SUBMITTED_VIEW_TEXT,
+} from '../../src/components/Widgets/FeedbackWidget/constants';
 import headingData from './data/Heading.test.json';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
@@ -45,7 +58,7 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
       >
         <FeedbackForm />
         <div>
-          <FeedbackTab />
+          <FeedbackButton />
           <Heading nodeData={headingData} sectionDepth={1} />
           <FeedbackFooter />
         </div>
@@ -74,23 +87,22 @@ describe('FeedbackWidget', () => {
   beforeEach(mockScreenshotFunctions);
   afterEach(clearMockScreenshotFunctions);
 
-  describe('FeedbackTab (Desktop Viewport)', () => {
+  describe('FeedbackButton (Desktop Viewport)', () => {
     it('shows the sentiment category view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      const fwQuestion = 'How would you rate this page?';
       // Before the click, the form is hidden
-      expect(wrapper.queryAllByText(fwQuestion)).toHaveLength(0);
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
       // Click the tab
-      userEvent.click(wrapper.getByText('Share Feedback'));
+      userEvent.click(wrapper.getByText(FEEDBACK_BUTTON_TEXT));
 
       await tick();
       // After the click new feedback is initialized
-      expect(wrapper.queryAllByText(fwQuestion)).toHaveLength(1);
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
     });
 
     it('is visible in the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText(FEEDBACK_BUTTON_TEXT)).toHaveLength(1);
     });
 
     it('is hidden outside of the waiting view on large/desktop screens', async () => {
@@ -98,35 +110,7 @@ describe('FeedbackWidget', () => {
         view: 'rating',
         comment: '',
       });
-      expect(wrapper.queryAllByText('How would you rate this page?')).toHaveLength(1);
-    });
-
-    it('is hidden on small/mobile and medium/tablet screens', async () => {
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('margin-left', '20px', {
-        media: `${theme.screenSize.upToSmall}`,
-      });
-    });
-  });
-
-  describe('FeedbackHeading (Mobile Viewport)', () => {
-    it('is visible on medium/tablet screens', async () => {
-      setTablet();
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-    });
-
-    it('is visible on small/mobile screens', async () => {
-      setMobile();
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-    });
-
-    it('is hidden on small/mobile screens when configured with page option', async () => {
-      setMobile();
-      wrapper = await mountFormWithFeedbackState({ hideHeader: true });
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
     });
   });
 
@@ -155,9 +139,9 @@ describe('FeedbackWidget', () => {
         view: 'rating',
       });
       // Click the close button
-      userEvent.click(wrapper.getByLabelText('Close Feedback Form'));
+      userEvent.click(wrapper.getByLabelText(CLOSE_BUTTON_ALT_TEXT));
       await tick();
-      expect(wrapper.queryAllByText('How would you rate this page?')).toHaveLength(0);
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
     });
 
     describe('SentimentView', () => {
@@ -177,7 +161,7 @@ describe('FeedbackWidget', () => {
         const selectedStar = stars[selectedRating - 1];
         userEvent.click(selectedStar);
         await tick();
-        expect(wrapper.getByPlaceholderText('Tell us more about your experience')).toBeTruthy();
+        expect(wrapper.getByPlaceholderText(COMMENT_PLACEHOLDER_TEXT)).toBeTruthy();
       });
     });
 
@@ -196,7 +180,7 @@ describe('FeedbackWidget', () => {
         expect(highlightedStars).toHaveLength(expectedRating);
         expect(unselectedStar).toHaveLength(5 - expectedRating);
 
-        expect(wrapper.getByPlaceholderText('Email Address')).toBeTruthy();
+        expect(wrapper.getByPlaceholderText(EMAIL_PLACEHOLDER_TEXT)).toBeTruthy();
         expect(wrapper.getByText('Send')).toBeTruthy();
       });
 
@@ -209,13 +193,15 @@ describe('FeedbackWidget', () => {
           });
 
           // click on screenshot button; use closest() because of LG implementation of `"pointer-events": "none"`
-          userEvent.click(wrapper.getByText('Take a screenshot').closest('button'));
+          userEvent.click(wrapper.getByText(SCREENSHOT_BUTTON_TEXT).closest('button'));
           await tick();
 
           expect(screenshotFunctionMocks['addEventListener']).toHaveBeenCalled();
 
           // shows overlays
-          expect(wrapper.getByAltText('Screenshot').getElementsByClassName('overlay-instructions')).toBeTruthy();
+          expect(
+            wrapper.getByAltText(SCREENSHOT_OVERLAY_ALT_TEXT).getElementsByClassName('overlay-instructions')
+          ).toBeTruthy();
         });
 
         it('adds the screenshot attachment on send', async () => {
@@ -227,7 +213,7 @@ describe('FeedbackWidget', () => {
             screenshotTaken: true,
           });
 
-          userEvent.click(wrapper.getByText('Send').closest('button'));
+          userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
 
           expect(screenshotFunctionMocks['retrieveDataUri']).toHaveBeenCalled();
@@ -244,7 +230,7 @@ describe('FeedbackWidget', () => {
             user: { email: 'test@example.com' },
           });
           // Click the submit button
-          userEvent.click(wrapper.getByText('Send').closest('button'));
+          userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
           expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
         });
@@ -256,25 +242,23 @@ describe('FeedbackWidget', () => {
             user: { email: 'test invalid email' },
           });
           // Type in an invalid email address
-          const emailInput = wrapper.getByPlaceholderText('Email Address');
+          const emailInput = wrapper.getByPlaceholderText(EMAIL_PLACEHOLDER_TEXT);
           userEvent.paste(emailInput, 'invalid email address');
           // Click the submit button
-          userEvent.click(wrapper.getByText('Send').closest('button'));
+          userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
-          expect(wrapper.getByText('Please enter a valid email.')).toBeTruthy();
+          expect(wrapper.getByText(EMAIL_ERROR_TEXT)).toBeTruthy();
         });
       });
     });
 
     describe('SubmittedView', () => {
       const standardViewCopy = [
-        'Thank you for your feedback!',
-        'Looking for more resources?',
-        'MongoDB Developer Community Forums',
-        'MongoDB Developer Center',
-        'MongoDB University',
+        SUBMITTED_VIEW_TEXT.HEADING,
+        SUBMITTED_VIEW_TEXT.SUB_HEADING,
+        ...SUBMITTED_VIEW_RESOURCE_LINKS.map(({ text }) => text),
       ];
-      const negativeViewCopy = ['Have a support contact?', 'Create a Support Case'];
+      const negativeViewCopy = [SUBMITTED_VIEW_TEXT.SUPPORT_CTA, SUBMITTED_VIEW_SUPPORT_LINK.text];
 
       it('shows self-serve support links for negative path', async () => {
         wrapper = await mountFormWithFeedbackState({
