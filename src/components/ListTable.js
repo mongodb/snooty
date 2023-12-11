@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
+import { Table, Row, Cell, TableHead, HeaderRow, TableBody, HeaderCell } from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
@@ -34,6 +34,48 @@ const unstyleThead = css`
     min-height: unset !important;
     padding: 0 !important;
   }
+`;
+
+const styleTableRow = ({ isStub }) => css`
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  padding: 10px ${theme.size.small};
+
+  /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
+  vertical-align: top;
+
+  > div {
+    max-height: unset;
+    min-height: unset;
+    line-height: 20px;
+  }
+
+  /* Apply grey background to stub <th> cells (PD-1216) */
+  ${isStub && `background-clip: padding-box; background-color: ${palette.gray.light3};`}
+
+  * {
+    font-size: ${theme.fontSize.small} !important;
+  }
+
+  & > div {
+    max-height: unset;
+    display: block;
+    align-items: start;
+  }
+`;
+
+const styleHeader = ({ widths, colIndex }) => css`
+  div {
+    font-size: ${theme.fontSize.small};
+    font-weight: 600;
+    height: unset;
+  }
+
+  line-height: ${theme.size.medium};
+  height: unset;
+  padding: 10px ${theme.size.small};
+
+  ${widths && `width: ${widths[colIndex]}%`}
 `;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
@@ -74,48 +116,21 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
       const contents = cell.children.map((child, i) => (
         <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
       ));
-      return (
-        <Cell
-          className={cx(css`
-            overflow-wrap: anywhere;
-            word-break: break-word;
-
-            /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
-            vertical-align: top;
-
-            /* Apply grey background to stub <th> cells (PD-1216) */
-            ${isStub && `background-clip: padding-box; background-color: ${palette.gray.light3};`}
-
-            * {
-              font-size: ${theme.fontSize.small} !important;
-            }
-
-            & > div {
-              align-items: start;
-            }
-
-            & > div > span {
-              display: block;
-              align-self: center;
-            }
-
-            & > div > span > *,
-            & > div > span p {
-              margin: 0 0 12px;
-              line-height: inherit;
-            }
-
-            /* Prevent extra margin below last element */
-            & > div > span > *:last-child {
-              margin-bottom: 0;
-            }
-          `)}
-          isHeader={isStub}
-          key={colIndex}
-        >
-          {contents}
-        </Cell>
-      );
+      if (isStub) {
+        console.log('STUB');
+        return (
+          <th>Hello</th>
+          // <HeaderCell className={cx(styleTableRow(isStub))} key={colIndex}>
+          //   <div>{contents}</div>
+          // </HeaderCell>
+        );
+      } else {
+        return (
+          <Cell className={cx(styleTableRow(isStub))} key={colIndex}>
+            <div>{contents}</div>
+          </Cell>
+        );
+      }
     })}
   </Row>
 );
@@ -128,8 +143,11 @@ ListTableRow.propTypes = {
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
+
   const bodyRows = children[0].children.slice(headerRowCount);
   const columnCount = bodyRows[0].children[0].children.length;
+
+  //TODO: generate unique component ID for table, row, column
 
   // If :header-rows: 0 is specified or :header-rows: is omitted, spoof empty <thead> content to avoid LeafyGreen component crashing
   const headerRows =
@@ -162,33 +180,33 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             customWidth: options?.width,
           })
         )}
-        columns={headerRows.map((row, rowIndex) => (
-          <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
-            {row.children.map((cell, colIndex) => {
-              const skipPTag = hasOneChild(cell.children);
-              return (
-                <TableHeader
-                  className={cx(css`
-                    * {
-                      font-size: ${theme.fontSize.small};
-                      font-weight: 600;
-                    }
-                    ${widths && `width: ${widths[colIndex]}%`}
-                  `)}
-                  key={`${rowIndex}-${colIndex}`}
-                  label={cell.children.map((child, i) => (
-                    <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-                  ))}
-                />
-              );
-            })}
-          </HeaderRow>
-        ))}
         data={bodyRows}
+        // Alternate row color if # of rows > 4
+        shouldAlternateRowColor={bodyRows.length > 4 ? true : false}
       >
-        {({ datum }) => (
-          <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />
-        )}
+        <TableHead>
+          {headerRows.map((row, rowIndex) => (
+            <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
+              {row.children.map((cell, colIndex) => {
+                const skipPTag = hasOneChild(cell.children);
+                return (
+                  <HeaderCell className={cx(styleHeader({ widths, colIndex }))} key={`${rowIndex}-${colIndex}`}>
+                    <div>
+                      {cell.children.map((child, i) => (
+                        <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
+                      ))}
+                    </div>
+                  </HeaderCell>
+                );
+              })}
+            </HeaderRow>
+          ))}
+        </TableHead>
+        <TableBody>
+          {bodyRows.map((row, i) => (
+            <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={row?.children?.[0]?.children} />
+          ))}
+        </TableBody>
       </Table>
     </>
   );
