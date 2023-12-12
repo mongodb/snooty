@@ -2,12 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
-import {
-  FeedbackProvider,
-  FeedbackForm,
-  FeedbackTab,
-  FeedbackFooter,
-} from '../../src/components/Widgets/FeedbackWidget';
+import { FeedbackProvider, FeedbackForm, FeedbackTab } from '../../src/components/Widgets/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
 import {
@@ -47,7 +42,6 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
         <div>
           <FeedbackTab />
           <Heading nodeData={headingData} sectionDepth={1} />
-          <FeedbackFooter />
         </div>
       </FeedbackProvider>
     </>
