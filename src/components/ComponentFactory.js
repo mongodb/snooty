@@ -1,55 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import { LAZY_COMPONENTS } from './ComponentFactoryLazy';
 import Admonition, { admonitionMap } from './Admonition';
 import Banner from './Banner/Banner';
 import BlockQuote from './BlockQuote';
 import Button from './Button';
-import Card from './Card';
-import CardGroup from './Card/CardGroup';
-import Chapter from './Chapters/Chapter';
-import Chapters from './Chapters';
-import Code from './Code/Code';
-import CodeIO from './Code/CodeIO';
-import Cond from './Cond';
 import Container from './Container';
 import CTA from './CTA';
 import CTABanner from './Banner/CTABanner';
-import DefinitionList from './DefinitionList';
-import DefinitionListItem from './DefinitionList/DefinitionListItem';
 import DeprecatedVersionSelector from './DeprecatedVersionSelector';
-import Describe from './Describe';
 import DriversIndexTiles from './DriversIndexTiles';
-import Emphasis from './Emphasis';
-import Extract from './Extract';
-import Field from './FieldList/Field';
-import FieldList from './FieldList';
-import Figure from './Figure';
-import Footnote from './Footnote';
-import FootnoteReference from './Footnote/FootnoteReference';
-import Glossary from './Glossary';
-import GuideNext from './GuideNext';
 import Heading from './Heading';
-import HorizontalList from './HorizontalList';
-import Image from './Image';
 import Include from './Include';
 import Introduction from './Introduction';
-import Kicker from './Kicker';
 import LandingIntro from './LandingIntro';
-import Line from './LineBlock/Line';
-import LineBlock from './LineBlock';
-import List from './List';
-import ListItem from './List/ListItem';
-import ListTable from './ListTable';
-import Literal from './Literal';
-import LiteralBlock from './LiteralBlock';
-import LiteralInclude from './LiteralInclude';
-import MongoWebShell from './MongoWebShell';
-import OpenAPI from './OpenAPI';
-import OpenAPIChangelog from './OpenAPIChangelog';
 import Paragraph from './Paragraph';
-import Procedure from './Procedure';
-import QuizChoice from './Widgets/QuizWidget/QuizChoice';
-import QuizWidget from './Widgets/QuizWidget/QuizWidget';
 import Reference from './Reference';
 import RefRole from './RefRole';
 import ReleaseSpecification from './ReleaseSpecification';
@@ -71,7 +37,6 @@ import Transition from './Transition';
 import ChatbotUi from './ChatbotUi';
 
 import VersionModified from './VersionModified';
-import Video from './Video';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -83,12 +48,8 @@ import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
-import Instruqt from './Instruqt';
-import Explore from './Landing/Explore';
-import { MoreWays } from './Landing/MoreWays';
 import Products from './Products';
 import ProductItem from './Products/ProductItem';
-import StandaloneHeader from './StandaloneHeader';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -137,61 +98,20 @@ const componentMap = {
   banner: Banner,
   blockquote: BlockQuote,
   button: Button,
-  card: Card,
-  'card-group': CardGroup,
-  chapter: Chapter,
-  chapters: Chapters,
   chatbot: ChatbotUi,
-  code: Code,
-  'io-code-block': CodeIO,
-  cond: Cond,
   container: Container,
   cta: CTA,
   'cta-banner': CTABanner,
-  definitionList: DefinitionList,
-  definitionListItem: DefinitionListItem,
   deprecated: VersionModified,
   'deprecated-version-selector': DeprecatedVersionSelector,
-  describe: Describe,
   'drivers-index-tiles': DriversIndexTiles, // deprecated.
-  emphasis: Emphasis,
-  extract: Extract,
-  field: Field,
-  field_list: FieldList,
-  figure: Figure,
-  footnote: Footnote,
-  footnote_reference: FootnoteReference,
-  glossary: Glossary,
-  'guide-next': GuideNext,
   heading: Heading,
-  hlist: HorizontalList,
-  image: Image,
   include: Include,
-  instruqt: Instruqt,
   introduction: Introduction,
-  kicker: Kicker,
-  'landing:explore': Explore,
-  'landing:more-ways': MoreWays,
-  'landing:client-libraries': StandaloneHeader,
   'landing:introduction': LandingIntro,
   'landing:product': ProductItem,
   'landing:products': Products,
-  line: Line,
-  line_block: LineBlock,
-  list: List,
-  listItem: ListItem,
-  'list-table': ListTable,
-  literal: Literal,
-  literal_block: LiteralBlock,
-  literalinclude: LiteralInclude,
-  'mongo-web-shell': MongoWebShell,
-  only: Cond,
-  openapi: OpenAPI,
-  'openapi-changelog': OpenAPIChangelog,
   paragraph: Paragraph,
-  procedure: Procedure,
-  quiz: QuizWidget,
-  quizchoice: QuizChoice,
   ref_role: RefRole,
   reference: Reference,
   release_specification: ReleaseSpecification,
@@ -212,8 +132,27 @@ const componentMap = {
 
   versionadded: VersionModified,
   versionchanged: VersionModified,
-  video: Video,
 };
+
+function getComponentType(type, name) {
+  const lookup = type === 'directive' ? name : type;
+  let ComponentType = componentMap[lookup];
+
+  if (type === 'role') {
+    ComponentType = roleMap[name];
+  }
+
+  // Various admonition types are all handled by the Admonition component
+  if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
+    ComponentType = componentMap.admonition;
+  }
+
+  if (LAZY_COMPONENTS[lookup]) {
+    return LAZY_COMPONENTS[lookup];
+  }
+
+  return ComponentType;
+}
 
 const ComponentFactory = (props) => {
   const { nodeData, slug } = props;
@@ -231,17 +170,7 @@ const ComponentFactory = (props) => {
       console.warn(`Domain '${domain}' not yet implemented ${name ? `for '${name}'` : ''}`);
     }
 
-    const lookup = type === 'directive' ? name : type;
-    let ComponentType = componentMap[lookup];
-
-    if (type === 'role') {
-      ComponentType = roleMap[name];
-    }
-
-    // Various admonition types are all handled by the Admonition component
-    if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
-      ComponentType = componentMap.admonition;
-    }
+    const ComponentType = getComponentType(type, name, props);
 
     if (!ComponentType) {
       console.warn(`${type} ${name ? `"${name}" ` : ''}not yet implemented${slug ? ` on page ${slug}` : ''}`);

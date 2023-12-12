@@ -37,7 +37,7 @@ const headerStyles = css`
   padding-bottom: 10px;
 `;
 
-export const MoreWays = ({ nodeData: { children, options, argument }, ...rest }) => {
+const MoreWays = ({ nodeData: { children, options, argument }, ...rest }) => {
   return (
     <StyledContainer>
       <VideoItem>
@@ -54,3 +54,5 @@ export const MoreWays = ({ nodeData: { children, options, argument }, ...rest })
     </StyledContainer>
   );
 };
+
+export default MoreWays;
