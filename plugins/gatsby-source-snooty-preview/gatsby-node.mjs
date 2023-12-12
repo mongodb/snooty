@@ -1,4 +1,4 @@
-import { getDataStore } from 'gatsby/dist/datastore';
+import { getDataStore } from 'gatsby/dist/datastore/index.js';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -6,8 +6,8 @@ import stream from 'stream';
 import { promisify } from 'util';
 import got from 'got';
 import { createRequire } from 'module';
-import { parser } from 'stream-json/jsonl/Parser';
-import { sourceNodes } from './other-things-to-source.mjs';
+import jsonlParser from 'stream-json/jsonl/Parser.js';
+import { sourceNodes as otherSourceNodes } from './other-things-to-source.mjs';
 import { fetchClientAccessToken } from './utils/kanopy-auth.mjs';
 import { callPostBuildWebhook } from './utils/post-build.mjs';
 import {
@@ -18,6 +18,7 @@ import {
 } from './utils/data-consumer.mjs';
 
 const pipeline = promisify(stream.pipeline);
+const { parser } = jsonlParser;
 
 // Global variable to allow webhookBody from sourceNodes step to be passed down
 // to other Gatsby build steps that might not pass webhookBody natively.
@@ -158,7 +159,7 @@ export const sourceNodes = async ({
 
   // Source old nodes.
   console.time(`old source nodes`);
-  await sourceNodes({
+  await otherSourceNodes({
     hasOpenAPIChangelog,
     github_username: GATSBY_CLOUD_SITE_USER,
     createNode,
