@@ -1,62 +1,60 @@
-import {
-  Blank,
-  Document,
-  DriversIndex,
-  Instruqt,
-  Landing,
-  OpenAPITemplate,
-  ProductLanding,
-  NotFound,
-  Changelog,
-} from '../templates';
+import { lazy, Suspense } from 'react';
 
 const getTemplate = (templateName) => {
-  let template;
+  let LazyTemplate;
   let sidenav;
   let useChatbot = false;
   switch (templateName) {
     case 'blank':
-      template = Blank;
+      LazyTemplate = lazy(() => import('../templates/blank'));
       break;
     case 'drivers-index':
-      template = DriversIndex;
+      LazyTemplate = lazy(() => import('../templates/drivers-index'));
       sidenav = true;
       break;
     case 'errorpage':
-      template = NotFound;
+      LazyTemplate = lazy(() => import('../templates/NotFound'));
       break;
     case 'instruqt':
-      template = Instruqt;
+      LazyTemplate = lazy(() => import('../templates/instruqt'));
       sidenav = true;
       break;
     case 'landing':
-      template = Landing;
+      LazyTemplate = lazy(() => import('../templates/landing'));
       sidenav = true;
       useChatbot = true;
       break;
     case 'openapi':
-      template = OpenAPITemplate;
+      LazyTemplate = lazy(() => import('../templates/openapi'));
       break;
     case 'changelog':
-      template = Changelog;
+      LazyTemplate = lazy(() => import('../templates/changelog'));
       sidenav = true;
       break;
     case 'product-landing':
-      template = ProductLanding;
+      LazyTemplate = lazy(() => import('../templates/product-landing'));
       sidenav = true;
       break;
     case 'search':
-      template = Landing;
+      LazyTemplate = lazy(() => import('../templates/landing'));
       sidenav = true;
       break;
     // Default template and guide template share very similar layouts
     default:
-      template = Document;
+      LazyTemplate = lazy(() => import('../templates/document'));
       sidenav = true;
       break;
   }
 
-  return { Template: template, sidenav, useChatbot };
+  return {
+    Template: (props) => (
+      <Suspense fallback="Loading...">
+        <LazyTemplate {...props}></LazyTemplate>
+      </Suspense>
+    ),
+    sidenav,
+    useChatbot,
+  };
 };
 
 export { getTemplate };

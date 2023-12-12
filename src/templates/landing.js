@@ -4,29 +4,30 @@ import { useTheme, Global, css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 import ChatbotUi from '../components/ChatbotUi';
+import { theme } from '../theme/docsTheme';
 
 const CONTENT_MAX_WIDTH = 1440;
 
 const SHOW_CHATBOT = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
 
-const newLandingCardStyling = () => css`
+const newLandingCardStyling = (theme) => css`
   &:not(.compact, .extra-compact, .drivers) {
     p {
       font-weight: 500;
 
       a {
-        margin-top: ${({ theme }) => theme.size.medium};
+        margin-top: ${theme.size.medium};
       }
     }
 
-    @media ${({ theme }) => theme.screenSize.upToMedium} {
+    @media ${theme.screenSize.upToMedium} {
       margin-left: 42px;
       margin-right: 42px;
     }
 
-    @media ${({ theme }) => theme.screenSize.upToSmall} {
-      margin-left: ${({ theme }) => theme.size.medium};
-      margin-right: ${({ theme }) => theme.size.medium};
+    @media ${theme.screenSize.upToSmall} {
+      margin-left: ${theme.size.medium};
+      margin-right: ${theme.size.medium};
     }
   }
 `;
@@ -66,7 +67,7 @@ const Wrapper = styled('main')`
         grid-column: 2 / -2 !important;
       }
 
-      ${({ newChatbotLanding }) => newChatbotLanding && newLandingCardStyling()}
+      ${({ newChatbotLanding }) => newChatbotLanding && newLandingCardStyling(theme)}
     }
   }
 `;
