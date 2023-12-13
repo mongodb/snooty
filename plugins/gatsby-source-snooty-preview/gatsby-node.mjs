@@ -1,13 +1,12 @@
-import { getDataStore } from 'gatsby/dist/datastore';
-import path from 'path';
-import { dirname } from 'path';
+import { getDataStore } from 'gatsby/dist/datastore/index.js';
+import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import stream from 'stream';
 import { promisify } from 'util';
 import got from 'got';
 import { createRequire } from 'module';
-import { parser } from 'stream-json/jsonl/Parser';
-import { sourceNodes } from './other-things-to-source.mjs';
+import parser from 'stream-json/jsonl/Parser.js';
+import { sourceNodes as sourceNodesLocal } from './other-things-to-source.mjs';
 import { fetchClientAccessToken } from './utils/kanopy-auth.mjs';
 import { callPostBuildWebhook } from './utils/post-build.mjs';
 import {
@@ -128,7 +127,7 @@ export const sourceNodes = async ({
     // Since there's a lot of data incoming from the Snooty Data API, we stream
     // the data in chunks and parse them as they come instead of fetching everything
     // as a single JSON response
-    const decode = parser();
+    const decode = new parser();
     decode.on('data', async (_entry) => {
       // Un-nest data
       const entry = _entry.value;
@@ -158,7 +157,7 @@ export const sourceNodes = async ({
 
   // Source old nodes.
   console.time(`old source nodes`);
-  await sourceNodes({
+  await sourceNodesLocal({
     hasOpenAPIChangelog,
     github_username: GATSBY_CLOUD_SITE_USER,
     createNode,

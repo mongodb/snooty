@@ -1,5 +1,4 @@
-import path from 'path';
-import { dirname } from 'path';
+import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 import { transformBreadcrumbs } from '../../src/utils/setup/transform-breadcrumbs.mjs';
