@@ -36,7 +36,6 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
           url: 'https://docs.mongodb.com/test',
           docs_property: 'test',
         }}
-        //hideHeader={hideHeader}
       >
         <FeedbackForm />
         <div>
