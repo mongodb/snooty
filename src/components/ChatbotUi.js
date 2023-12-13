@@ -95,9 +95,8 @@ const ChatbotUi = ({ template }) => {
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
       <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
-        <Chatbot>
+        <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
           <DocsChatbot
-            serverBaseUrl={CHATBOT_SERVER_BASE_URL}
             suggestedPrompts={[
               'How do you deploy a free cluster in Atlas?',
               'How do you import or migrate data into MongoDB Atlas?',
