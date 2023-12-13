@@ -2,12 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
-import {
-  FeedbackProvider,
-  FeedbackForm,
-  FeedbackTab,
-  FeedbackFooter,
-} from '../../src/components/Widgets/FeedbackWidget';
+import { FeedbackProvider, FeedbackForm, FeedbackTab } from '../../src/components/Widgets/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
 import {
@@ -25,7 +20,7 @@ import {
 import headingData from './data/Heading.test.json';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
-  const { view, isSupportRequest, hideHeader, screenshotTaken, ...feedback } = feedbackState;
+  const { view, isSupportRequest, screenshotTaken, ...feedback } = feedbackState;
   const wrapper = render(
     <>
       <FeedbackProvider
@@ -41,13 +36,11 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
           url: 'https://docs.mongodb.com/test',
           docs_property: 'test',
         }}
-        hideHeader={hideHeader}
       >
         <FeedbackForm />
         <div>
           <FeedbackTab />
           <Heading nodeData={headingData} sectionDepth={1} />
-          <FeedbackFooter />
         </div>
       </FeedbackProvider>
     </>
@@ -75,6 +68,14 @@ describe('FeedbackWidget', () => {
   afterEach(clearMockScreenshotFunctions);
 
   describe('FeedbackTab (Desktop Viewport)', () => {
+    it('is hidden outside of the waiting view on large/desktop screens', async () => {
+      wrapper = await mountFormWithFeedbackState({
+        view: 'sentiment',
+        comment: '',
+      });
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(0);
+    });
+
     it('shows the sentiment category view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
       // Before the click, the form is hidden
@@ -91,59 +92,47 @@ describe('FeedbackWidget', () => {
       wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
     });
+  });
 
-    it('is hidden outside of the waiting view on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState({
-        view: 'sentiment',
-        comment: '',
-      });
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
+  describe('FeedbackTab (Mobile/Tablet Viewport)', () => {
+    it('shows tab on medium/tablet screens', async () => {
+      setTablet();
+      wrapper = await mountFormWithFeedbackState({});
+      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
     });
 
-    it('is hidden on small/mobile and medium/tablet screens', async () => {
+    it('shows tab on small/mobile screens', async () => {
+      setMobile();
       wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
       expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('margin-left', '20px', {
         media: `${theme.screenSize.upToSmall}`,
       });
     });
-  });
 
-  describe('FeedbackHeading (Mobile Viewport)', () => {
-    it('is visible on medium/tablet screens', async () => {
-      setTablet();
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-    });
-
-    it('is visible on small/mobile screens', async () => {
+    it('shows the sentiment category view when clicked (mobile)', async () => {
       setMobile();
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-    });
-
-    it('is hidden on small/mobile screens when configured with page option', async () => {
-      setMobile();
-      wrapper = await mountFormWithFeedbackState({ hideHeader: true });
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-    });
-  });
-
-  describe('FeedbackFooter', () => {
-    it('is hidden on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState({});
+      // Before the click, the form is hidden
       expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
-    });
+      // Click the tab
+      userEvent.click(wrapper.getByText('Share Feedback'));
 
-    it('is visible on medium/tablet screens', async () => {
-      setTablet();
-      wrapper = await mountFormWithFeedbackState({});
+      await tick();
+      // After the click new feedback is initialized
       expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
 
-    it('is visible on small/mobile screens', async () => {
-      setMobile();
+    it('shows the sentiment category view when clicked (tablet)', async () => {
+      setTablet();
       wrapper = await mountFormWithFeedbackState({});
+      // Before the click, the form is hidden
+      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
+      // Click the tab
+      userEvent.click(wrapper.getByText('Share Feedback'));
+
+      await tick();
+      // After the click new feedback is initialized
       expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
   });
