@@ -42,7 +42,6 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
         <div>
           <FeedbackTab />
           <Heading nodeData={headingData} sectionDepth={1} />
-          {/* <FeedbackFooter /> */}
         </div>
       </FeedbackProvider>
     </>
@@ -70,7 +69,6 @@ describe('FeedbackWidget', () => {
   afterEach(clearMockScreenshotFunctions);
 
   describe('FeedbackTab (Desktop Viewport)', () => {
-    //fix this
     it('is hidden outside of the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({
         view: 'sentiment',
