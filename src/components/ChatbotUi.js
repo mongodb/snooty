@@ -56,7 +56,6 @@ const StyledChatBotUiContainer = styled.div`
 
   > div {
     max-width: 862px;
-    margin-left: -32px;
     p {
       color: ${palette.black};
     }
