@@ -112,6 +112,12 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     return `${hostName}/${versionName}`;
   };
 
+  //updated selection dropdown here
+  //  const prdChoices = deprecatedVersions ? Object.keys(deprecatedVersions).map((product) =>({
+  //     text: product.project,
+  //     value: product.display_name,
+  //  })).filter(({ text }) => !!text).sort():[];
+
   const productChoices = deprecatedVersions
     ? Object.keys(deprecatedVersions)
         .map((product) => ({
@@ -121,7 +127,6 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         // Ensure invalid entries do not break selector
         .filter(({ text }) => !!text)
     : [];
-
   const versionChoices = deprecatedVersions[product]
     ? deprecatedVersions[product].map((version) => ({
         text: prefixVersion(version),
