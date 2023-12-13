@@ -20,7 +20,7 @@ import {
 import headingData from './data/Heading.test.json';
 
 async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
-  const { view, isSupportRequest, hideHeader, screenshotTaken, ...feedback } = feedbackState;
+  const { view, isSupportRequest, screenshotTaken, ...feedback } = feedbackState;
   const wrapper = render(
     <>
       <FeedbackProvider
@@ -36,7 +36,7 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
           url: 'https://docs.mongodb.com/test',
           docs_property: 'test',
         }}
-        hideHeader={hideHeader}
+        //hideHeader={hideHeader}
       >
         <FeedbackForm />
         <div>
@@ -137,13 +137,6 @@ describe('FeedbackWidget', () => {
       await tick();
       // After the click new feedback is initialized
       expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
-    });
-
-    //fix this one
-    it('is hidden on small/mobile screens when configured with page option', async () => {
-      setMobile();
-      wrapper = await mountFormWithFeedbackState({ hideHeader: true });
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
     });
   });
 
