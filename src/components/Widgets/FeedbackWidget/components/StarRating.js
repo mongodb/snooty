@@ -74,8 +74,13 @@ const Star = ({
   const { isTabletOrMobile } = useScreenSize();
   const starSize = isTabletOrMobile ? 32 : 24;
 
+  // Prevents focus styling from appearing when trying to click
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <div onClick={onClick} onMouseLeave={onMouseLeave}>
+    <div onClick={onClick} onMouseDown={handleMouseDown} onMouseLeave={onMouseLeave}>
       <Tooltip
         key={`star-${ratingValue}`}
         justify="middle"
