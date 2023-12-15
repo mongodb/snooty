@@ -5,7 +5,7 @@ import { createProductNodes } from '../utils/products.mjs';
 
 // Sources nodes for the preview plugin that are not directly related to data
 // from the Snooty Data API
-export const sourceNodes = async ({ hasOpenAPIChangelog, createNode, createContentDigest, createNodeId }) => {
+export const sourceNodesLocal = async ({ hasOpenAPIChangelog, createNode, createContentDigest, createNodeId }) => {
   let db = realmDocumentDatabase;
   await db.connect();
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });

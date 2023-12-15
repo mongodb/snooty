@@ -6,7 +6,7 @@ import { promisify } from 'util';
 import got from 'got';
 import { createRequire } from 'module';
 import parser from 'stream-json/jsonl/Parser.js';
-import { sourceNodes as sourceNodesLocal } from './other-things-to-source.mjs';
+import { sourceNodesLocal } from './other-things-to-source.mjs';
 import { fetchClientAccessToken } from './utils/kanopy-auth.mjs';
 import { callPostBuildWebhook } from './utils/post-build.mjs';
 import {
