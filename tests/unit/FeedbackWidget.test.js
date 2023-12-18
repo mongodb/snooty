@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
 import {
@@ -37,7 +37,7 @@ import {
 } from '../../src/components/Widgets/FeedbackWidget/constants';
 import headingData from './data/Heading.test.json';
 
-async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
+async function mountFormWithFeedbackState(feedbackState = {}) {
   const { view, isSupportRequest, hideHeader, screenshotTaken, ...feedback } = feedbackState;
   const wrapper = render(
     <>
@@ -69,6 +69,18 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   await tick();
   return wrapper;
 }
+
+// Finds all of the stars in the rating view and ensures the correct number are shown
+const checkSelectedStars = (wrapper, selectedRating) => {
+  const maxStars = 5;
+  const highlightedStars = wrapper.queryAllByTestId('rating-star-highlighted');
+  const unselectedStars = wrapper.queryAllByTestId('rating-star');
+
+  expect(highlightedStars.length + unselectedStars.length).toEqual(maxStars);
+  expect(highlightedStars).toHaveLength(selectedRating);
+  expect(unselectedStars).toHaveLength(maxStars - selectedRating);
+};
+
 const snootyEnv = 'development';
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ snootyEnv }),
@@ -88,15 +100,29 @@ describe('FeedbackWidget', () => {
   afterEach(clearMockScreenshotFunctions);
 
   describe('FeedbackButton (Desktop Viewport)', () => {
-    it('shows the sentiment category view when clicked', async () => {
+    it('shows the rating view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
       // Before the click, the form is hidden
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
-      // Click the tab
+      // Click the button
       userEvent.click(wrapper.getByText(FEEDBACK_BUTTON_TEXT));
 
       await tick();
       // After the click new feedback is initialized
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
+    });
+
+    it('shows the rating view when using keyboard', async () => {
+      wrapper = await mountFormWithFeedbackState({});
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
+
+      // Focus and simulate keyboard interaction
+      const fwButon = wrapper.getByText(FEEDBACK_BUTTON_TEXT);
+      fwButon.focus();
+      userEvent.keyboard('{Enter}');
+      await tick();
+
+      // Ensure rating view appears
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
     });
 
@@ -144,7 +170,7 @@ describe('FeedbackWidget', () => {
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
     });
 
-    describe('SentimentView', () => {
+    describe('RatingView', () => {
       it('Shows 5 stars for rating', async () => {
         wrapper = await mountFormWithFeedbackState({
           view: 'rating',
@@ -161,6 +187,25 @@ describe('FeedbackWidget', () => {
         const selectedStar = stars[selectedRating - 1];
         userEvent.click(selectedStar);
         await tick();
+
+        checkSelectedStars(wrapper, selectedRating);
+        expect(wrapper.getByPlaceholderText(COMMENT_PLACEHOLDER_TEXT)).toBeTruthy();
+      });
+
+      it('transitions to the comment view when using keyboard to select a rating', async () => {
+        wrapper = await mountFormWithFeedbackState({
+          view: 'rating',
+        });
+        const stars = wrapper.getAllByTestId('rating-star');
+        const selectedRating = 4;
+        const selectedStar = stars[selectedRating - 1];
+        // Wrap in `act` due to multiple state changes
+        await act(async () => {
+          selectedStar.focus();
+          userEvent.keyboard('{Enter}');
+        });
+
+        checkSelectedStars(wrapper, selectedRating);
         expect(wrapper.getByPlaceholderText(COMMENT_PLACEHOLDER_TEXT)).toBeTruthy();
       });
     });
@@ -175,10 +220,7 @@ describe('FeedbackWidget', () => {
           comment: '',
         });
         // Check that present rating is shown
-        const highlightedStars = wrapper.getAllByTestId('rating-star-highlighted');
-        const unselectedStar = wrapper.getAllByTestId('rating-star');
-        expect(highlightedStars).toHaveLength(expectedRating);
-        expect(unselectedStar).toHaveLength(5 - expectedRating);
+        checkSelectedStars(wrapper, expectedRating);
 
         expect(wrapper.getByPlaceholderText(EMAIL_PLACEHOLDER_TEXT)).toBeTruthy();
         expect(wrapper.getByText('Send')).toBeTruthy();
