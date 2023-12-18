@@ -56,61 +56,6 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
 }
 
 .emotion-12 {
-  position: relative;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
-  border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  line-height: 20px;
-  padding: 24px;
-  min-height: 68px;
-  cursor: pointer;
-  box-shadow: none!important;
-  margin: auto auto 16px auto;
-  padding: 16px;
-  min-height: unset;
-  border-radius: 7px;
-}
-
-.emotion-12:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
-}
-
-.emotion-12:hover,
-.emotion-12:active {
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
-}
-
-.emotion-12:hover:focus,
-.emotion-12:active:focus {
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
-}
-
-.emotion-12:hover {
-  border-color: #001E2B!important;
-}
-
-.emotion-13 {
-  height: 10px;
-  width: 10px;
-  background-color: white;
-  border-color: black;
-  border-radius: 50%;
-  display: inline-block;
-  border-style: solid;
-  border-width: thin;
-  margin-right: 16px;
-}
-
-.emotion-21 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -145,39 +90,39 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   height: 36px;
 }
 
-.emotion-21:focus,
-.emotion-21:focus-visible {
+.emotion-12:focus,
+.emotion-12:focus-visible {
   outline: none;
 }
 
-.emotion-21:active,
-.emotion-21:focus,
-.emotion-21:hover {
+.emotion-12:active,
+.emotion-12:focus,
+.emotion-12:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-21:focus {
+.emotion-12:focus {
   color: #001E2B;
 }
 
-.emotion-21:hover[aria-disabled='false'],
-.emotion-21:active {
+.emotion-12:hover[aria-disabled='false'],
+.emotion-12:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-21:focus-visible {
+.emotion-12:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-22 {
+.emotion-13 {
   font-size: 16px;
 }
 
-.emotion-24 {
+.emotion-15 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -187,7 +132,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   border-radius: 5px;
 }
 
-.emotion-25 {
+.emotion-16 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -248,40 +193,16 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
     >
       With my MongoDB account, I can now access?
     </p>
-    <div
-      class="emotion-12"
-    >
-      <span
-        class="emotion-13 emotion-14"
-      />
-      MongoDB Atlas
-    </div>
-    <div
-      class="emotion-12"
-    >
-      <span
-        class="emotion-13 emotion-14"
-      />
-      MongoDB University
-    </div>
-    <div
-      class="emotion-12"
-    >
-      <span
-        class="emotion-13 emotion-14"
-      />
-      All of the Above
-    </div>
     <button
       aria-disabled="false"
-      class="lg-ui-button-0000 emotion-21 emotion-22 emotion-23"
+      class="lg-ui-button-0000 emotion-12 emotion-13 emotion-14"
       type="button"
     >
       <div
-        class="emotion-24"
+        class="emotion-15"
       />
       <div
-        class="emotion-25"
+        class="emotion-16"
       >
         Submit
       </div>
