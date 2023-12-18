@@ -26,7 +26,13 @@ const starIconStyle = (isHighlighted) => css`
   // Ensures that containing divs do not overflow
   display: block;
 
-  :focus {
+  // Prevents mousedown events from causing focus styling to appear
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  // Allows focus styling only on keyboard interaction
+  :focus-visible {
     outline-color: ${palette.blue.light1};
     outline-offset: 1px;
     border-radius: 6px;
@@ -74,13 +80,8 @@ const Star = ({
   const { isTabletOrMobile } = useScreenSize();
   const starSize = isTabletOrMobile ? 32 : 24;
 
-  // Prevents focus styling from appearing when trying to click
-  const handleMouseDown = (e) => {
-    e.preventDefault();
-  };
-
   return (
-    <div onClick={onClick} onMouseDown={handleMouseDown} onMouseLeave={onMouseLeave}>
+    <div onClick={onClick} onMouseLeave={onMouseLeave}>
       <Tooltip
         key={`star-${ratingValue}`}
         justify="middle"
