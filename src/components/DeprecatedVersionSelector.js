@@ -112,21 +112,35 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     return `${hostName}/${versionName}`;
   };
 
-  //updated selection dropdown here
-  //  const prdChoices = deprecatedVersions ? Object.keys(deprecatedVersions).map((product) =>({
-  //     text: product.project,
-  //     value: product.display_name,
-  //  })).filter(({ text }) => !!text).sort():[];
-
+  //legacy Docs product selection dropdown here
   const productChoices = deprecatedVersions
     ? Object.keys(deprecatedVersions)
-        .map((product) => ({
-          text: reposMap[product]?.displayName,
-          value: product,
+        .map((deprecated_version) => ({
+          text: deprecated_version.product_display_name,
+          value: deprecated_version.product,
         }))
-        // Ensure invalid entries do not break selector
         .filter(({ text }) => !!text)
+        .sort((a, b) => {
+          return a.text.localeCompare(b.text);
+        })
     : [];
+
+  // const productChoices = deprecatedVersions
+  //   ? Object.keys(deprecatedVersions)
+  //       .map((product) => ({
+  //         text: reposMap[product]?.displayName,
+  //         value: product,
+  //       }))
+  //       // Ensure invalid entries do not break selector
+  //       .filter(({ text }) => !!text)
+  //   : [];
+  console.log(productChoices);
+  console.log(
+    productChoices.sort((a, b) => {
+      return a.value.localeCompare(b.value);
+    })
+  );
+
   const versionChoices = deprecatedVersions[product]
     ? deprecatedVersions[product].map((version) => ({
         text: prefixVersion(version),
