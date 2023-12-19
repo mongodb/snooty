@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { act } from 'react-dom/test-utils';
 import { theme } from '../../src/theme/docsTheme';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { jest } from '@jest/globals';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import { mockLocation } from '../../utils/mock-location';

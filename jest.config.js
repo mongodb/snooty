@@ -39,6 +39,11 @@ module.exports = {
     {
       displayName: 'tests-esm',
       testMatch: ['<rootDir>/tests/tests-esm/**/*.test.js'],
+      testEnvironment: 'jest-environment-jsdom-sixteen',
+      transform: {},
+      testEnvironmentOptions: {
+        url: `http://localhost`,
+      },
     },
   ],
 };

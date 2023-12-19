@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import * as Realm from 'realm-web';
 import * as realm from '../../src/components/Widgets/FeedbackWidget/realm';
 

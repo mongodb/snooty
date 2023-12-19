@@ -1,4 +1,5 @@
 import React from 'react';
+import { jest } from '@jest/globals';
 import { act } from 'react-dom/test-utils';
 import { render } from '@testing-library/react';
 import useViewport, { getViewport } from '../../src/hooks/useViewport';

@@ -1,4 +1,5 @@
 import React from 'react';
+import { jest } from '@jest/globals';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import DeprecatedVersionSelector from '../../../src/components/DeprecatedVersionSelector';
@@ -48,7 +49,7 @@ const mockedReposBranches = [
   },
 ];
 
-jest.mock('../../src/hooks/use-site-metadata', () => ({
+jest.unstable_mockModule('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),
 }));
 

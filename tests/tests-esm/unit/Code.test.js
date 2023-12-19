@@ -1,4 +1,5 @@
 import React from 'react';
+import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
 import Code from '../../../src/components/Code/Code';
 import { CodeProvider } from '../../../src/components/Code/code-context';

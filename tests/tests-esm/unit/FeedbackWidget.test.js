@@ -1,4 +1,5 @@
 import React from 'react';
+import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
@@ -57,7 +58,7 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   return wrapper;
 }
 const snootyEnv = 'development';
-jest.mock('../../src/hooks/use-site-metadata', () => ({
+jest.unstable_mockModule('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ snootyEnv }),
 }));
 

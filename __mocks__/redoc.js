@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 // Mock redoc library by default to avoid nested import error in RedocStandalone component
 // import * as YAML from './dist/index.js'
 module.exports = {

@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import debounce from '../../src/utils/debounce';
 
 describe('debounce', () => {

@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import * as Gatsby from 'gatsby';
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');

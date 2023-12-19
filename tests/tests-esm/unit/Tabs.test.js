@@ -1,4 +1,5 @@
 import React from 'react';
+import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import Tabs from '../../../src/components/Tabs';
