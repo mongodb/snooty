@@ -100,6 +100,11 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   const documents = await db.getDocuments();
 
+  console.log('SITE METATDATA', siteMetadata);
+
+  const hello = await db.realmInterface.fetchDocsets();
+  console.log('HELLO', hello);
+
   if (documents.length === 0) {
     console.error(
       'Snooty could not find AST entries for the',
@@ -141,6 +146,19 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       PAGES.push(key);
     }
     if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
+  });
+
+  console.log('CREATING DROPDOWN NODES');
+  hello.forEach((docset) => {
+    createNode({
+      children: [],
+      id: createNodeId(`docsetInfo-${docset.displayName}`),
+      internal: {
+        contentDigest: createContentDigest(docset),
+        type: 'Docset',
+      },
+      displayName: `${docset.displayName}-uwu`,
+    });
   });
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
