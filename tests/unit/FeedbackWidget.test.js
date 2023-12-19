@@ -2,14 +2,9 @@ import React from 'react';
 import { act, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
-import {
-  FeedbackProvider,
-  FeedbackForm,
-  FeedbackButton,
-  FeedbackFooter,
-} from '../../src/components/Widgets/FeedbackWidget';
+import { FeedbackProvider, FeedbackForm, FeedbackButton } from '../../src/components/Widgets/FeedbackWidget';
 
-import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
+import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop } from '../utils';
 import {
   stitchFunctionMocks,
   mockStitchFunctions,
@@ -38,7 +33,7 @@ import {
 import headingData from './data/Heading.test.json';
 
 async function mountFormWithFeedbackState(feedbackState = {}) {
-  const { view, isSupportRequest, hideHeader, screenshotTaken, ...feedback } = feedbackState;
+  const { view, isSupportRequest, screenshotTaken, ...feedback } = feedbackState;
   const wrapper = render(
     <>
       <FeedbackProvider
@@ -54,13 +49,11 @@ async function mountFormWithFeedbackState(feedbackState = {}) {
           url: 'https://docs.mongodb.com/test',
           docs_property: 'test',
         }}
-        hideHeader={hideHeader}
       >
         <FeedbackForm />
         <div>
           <FeedbackButton />
           <Heading nodeData={headingData} sectionDepth={1} />
-          <FeedbackFooter />
         </div>
       </FeedbackProvider>
     </>
@@ -99,7 +92,7 @@ describe('FeedbackWidget', () => {
   beforeEach(mockScreenshotFunctions);
   afterEach(clearMockScreenshotFunctions);
 
-  describe('FeedbackButton (Desktop Viewport)', () => {
+  describe('FeedbackButton', () => {
     it('shows the rating view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
       // Before the click, the form is hidden
@@ -129,33 +122,6 @@ describe('FeedbackWidget', () => {
     it('is visible in the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
       expect(wrapper.queryAllByText(FEEDBACK_BUTTON_TEXT)).toHaveLength(1);
-    });
-
-    it('is hidden outside of the waiting view on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState({
-        view: 'rating',
-        comment: '',
-      });
-      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
-    });
-  });
-
-  describe('FeedbackFooter', () => {
-    it('is hidden on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
-    });
-
-    it('is visible on medium/tablet screens', async () => {
-      setTablet();
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
-    });
-
-    it('is visible on small/mobile screens', async () => {
-      setMobile();
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
     });
   });
 

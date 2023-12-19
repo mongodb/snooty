@@ -4,7 +4,6 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
-import Footer from '../components/Footer';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
 import Link from '../components/Link';
@@ -121,7 +120,6 @@ const NotFound = () => {
         <NotFoundImage />
         <ErrorBoxContainer />
       </div>
-      <Footer disableFeedback />
     </main>
   );
 };

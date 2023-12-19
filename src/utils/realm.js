@@ -13,6 +13,11 @@ const loginAnonymous = async () => {
     return loginDefer;
   }
 
+  // Avoid creating multiple users if one already exists
+  if (app.currentUser) {
+    return;
+  }
+
   loginDefer = new Promise(async (res, rej) => {
     try {
       const credentials = Realm.Credentials.anonymous();
