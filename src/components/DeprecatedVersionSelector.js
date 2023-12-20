@@ -70,8 +70,6 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   const [version, setVersion] = useState('');
   const [reposMap, setReposMap] = useState({});
 
-  console.log('dep', deprecatedVersions);
-
   const updateProduct = useCallback(({ value }) => {
     setProduct(value);
     setVersion('');
@@ -84,11 +82,6 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   // Fetch docsets for url and combine `displayName` from oldGenToReposMap method
   useEffect(() => {
     if (reposDatabase) {
-      // fetchDocsets(reposDatabase).then((resp) => {
-      //   const reposBranchesMap = keyBy(resp, 'project');
-      //   const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
-      //   setReposMap(reposBranchesMapWithOldGen);
-      // });
       const reposBranchesMap = keyBy(reposBranches, 'project');
       const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
       setReposMap(reposBranchesMapWithOldGen);
@@ -105,11 +98,6 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     }
   }, [deprecatedVersions]);
 
-  console.log('REPOS MAPPPP', reposMap);
-
-  // const alldocset = useAllDocsets();
-  // console.log('ALL DOCSET', alldocset);
-
   const generateUrl = () => {
     // Our current LG button version has a bug where a disabled button with an href allows the disabled
     // button to be clickable. This logic can be removed when LG button is version >= 12.0.4.
@@ -123,9 +111,6 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     const versionName = isVersioned(versionOptions) ? version : '';
     return `${hostName}/${versionName}`;
   };
-
-  // console.log('deprecatedversions', deprecatedVersions);
-  // console.log('PRODUCT', product);
 
   const productChoices = deprecatedVersions
     ? Object.keys(deprecatedVersions)
@@ -143,9 +128,6 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         value: version,
       }))
     : [];
-
-  // console.log('PRODUCT CHOICES', productChoices);
-  // console.log('VERSION CHOICES', versionChoices);
 
   return (
     <>

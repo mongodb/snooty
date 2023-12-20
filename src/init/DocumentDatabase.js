@@ -37,7 +37,7 @@ class RealmInterface {
     return this.realmClient.callFunction('fetchDocset', siteMetadata.reposDatabase, matchConditions);
   }
 
-  async fetchDocsets(matchConditions = {}) {
+  async fetchDocsets() {
     return this.realmClient.callFunction('fetchDocsets', siteMetadata.reposDatabase);
   }
 

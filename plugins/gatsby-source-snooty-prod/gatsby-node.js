@@ -11,6 +11,7 @@ const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-
 const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
+const { createDocsetNodes } = require('../utils/docsets.js');
 
 // different types of references
 const PAGES = [];
@@ -100,11 +101,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   const documents = await db.getDocuments();
 
-  console.log('SITE METATDATA', siteMetadata);
-
-  const hello = await db.realmInterface.fetchDocsets();
-  // console.log('HELLO', hello);
-
   if (documents.length === 0) {
     console.error(
       'Snooty could not find AST entries for the',
@@ -148,21 +144,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
-  console.log('CREATING DROPDOWN NODES');
-  hello.forEach((docset) => {
-    createNode({
-      children: [],
-      id: createNodeId(`docsetInfo-${docset.displayName}`),
-      internal: {
-        contentDigest: createContentDigest(docset),
-        type: 'Docset',
-      },
-      displayName: `${docset.displayName}-uwu`,
-      prefix: docset.prefix,
-      project: docset.project,
-      url: docset.url,
-    });
-  });
+  await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
