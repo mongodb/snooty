@@ -105,6 +105,7 @@
     "gatsby": "^5.0.0",
     "gatsby-plugin-emotion": "^8.0.0",
     "gatsby-plugin-google-tagmanager": "^5.0.0",
+    "gatsby-plugin-image": "^3.13.0",
     "gatsby-plugin-layout": "^4.7.0",
     "gatsby-plugin-sitemap": "^6.0.0",
     "hex-rgb": "^5.0.0",

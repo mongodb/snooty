@@ -1,41 +1,16 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
-import { css } from '@emotion/react';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { getNestedValue } from '../utils/get-nested-value';
+import { getGatsbyImage } from '../utils/get-gatsby-image';
 
-const Image = ({ nodeData, handleImageLoaded, className }) => {
-  const [height, setHeight] = useState(null);
-  const [width, setWidth] = useState(null);
-  const imgRef = useRef();
-
-  const handleLoad = useCallback(() => {
-    const img = imgRef.current;
-    handleImageLoaded(img);
-
-    const scale = getNestedValue(['options', 'scale'], nodeData);
-    if (scale) {
-      scaleSize(img.naturalWidth, img.naturalHeight, scale);
-    } else {
-      const height = getNestedValue(['options', 'height'], nodeData);
-      const width = getNestedValue(['options', 'width'], nodeData);
-      if (height) setHeight(height);
-      if (width) setWidth(height);
-    }
-  }, [handleImageLoaded, nodeData]);
-
-  useEffect(() => {
-    if (imgRef.current && imgRef.current.complete) {
-      handleLoad();
-    }
-  }, [handleLoad]);
-
-  const scaleSize = (width, height, scale) => {
-    const scaleValue = parseInt(scale, 10) / 100.0;
-    setHeight(height * scaleValue);
-    setWidth(width * scaleValue);
-  };
+const Image = ({ nodeData, handleImageLoaded, className, ...props }) => {
+  // const scale = getNestedValue(['options', 'scale'], nodeData);
+  // TODO: add scale to aspect ratio
+  const height = getNestedValue(['options', 'height'], nodeData);
+  const width = getNestedValue(['options', 'width'], nodeData);
 
   const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
@@ -49,27 +24,29 @@ const Image = ({ nodeData, handleImageLoaded, className }) => {
     border-radius: 4px;
   `;
 
-  const buildStyles = () => {
-    return {
-      ...(height && { height }),
-      ...(width && { width }),
-    };
-  };
-
   const { options: { class: directiveClass } = {} } = nodeData;
 
+  const imageOptions = {
+    imageUrl: imgSrc,
+  };
+  if (width) {
+    imageOptions['width'] = width;
+  }
+  if (height) {
+    imageOptions['height'] = height;
+  }
+  const imageData = getGatsbyImage(imageOptions);
+
   return (
-    <img
-      src={withPrefix(imgSrc)}
+    <GatsbyImage
+      image={imageData}
       alt={altText}
       className={[directiveClass, customAlign, className].join(' ')}
-      style={nodeData.options ? buildStyles() : {}}
-      onLoad={handleLoad}
-      ref={imgRef}
-      css={css`
+      imgClassName={cx(css`
         ${hasBorder ? borderStyling : ''}
         max-width: 100%;
-      `}
+      `)}
+      objectFit={'scale-down'}
     />
   );
 };
