@@ -52,6 +52,10 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),
 }));
 
+jest.mock('../../src/hooks/useAllDocsets', () => ({
+  useAllDocsets: () => mockedReposBranches,
+}));
+
 describe('DeprecatedVersionSelector when rendered', () => {
   let wrapper, mockFetchDocuments;
 
