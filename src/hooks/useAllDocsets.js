@@ -8,6 +8,21 @@ export const useAllDocsets = () => {
         allDocset {
           nodes {
             displayName
+            prefix {
+              dotcomprd
+              dotcomstg
+              prd
+              stg
+            }
+            project
+            url {
+              dev
+              dotcomprd
+              dotcomstg
+              prd
+              stg
+              regression
+            }
           }
         }
       }

@@ -6,8 +6,8 @@ import Button from '@leafygreen-ui/button';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
-import { fetchDocsets } from '../utils/realm';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { useAllDocsets } from '../hooks/useAllDocsets';
 import Select from './Select';
 
 const SELECT_WIDTH = '336px';
@@ -70,6 +70,8 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   const [version, setVersion] = useState('');
   const [reposMap, setReposMap] = useState({});
 
+  console.log('dep', deprecatedVersions);
+
   const updateProduct = useCallback(({ value }) => {
     setProduct(value);
     setVersion('');
@@ -77,16 +79,21 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   const updateVersion = useCallback(({ value }) => setVersion(value), []);
   const buttonDisabled = !(product && version);
 
+  const reposBranches = useAllDocsets();
+
   // Fetch docsets for url and combine `displayName` from oldGenToReposMap method
   useEffect(() => {
     if (reposDatabase) {
-      fetchDocsets(reposDatabase).then((resp) => {
-        const reposBranchesMap = keyBy(resp, 'project');
-        const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
-        setReposMap(reposBranchesMapWithOldGen);
-      });
+      // fetchDocsets(reposDatabase).then((resp) => {
+      //   const reposBranchesMap = keyBy(resp, 'project');
+      //   const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
+      //   setReposMap(reposBranchesMapWithOldGen);
+      // });
+      const reposBranchesMap = keyBy(reposBranches, 'project');
+      const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
+      setReposMap(reposBranchesMapWithOldGen);
     }
-  }, [reposDatabase]);
+  }, [reposDatabase, reposBranches]);
 
   useEffect(() => {
     if (isBrowser) {
@@ -97,6 +104,11 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
       }
     }
   }, [deprecatedVersions]);
+
+  console.log('REPOS MAPPPP', reposMap);
+
+  // const alldocset = useAllDocsets();
+  // console.log('ALL DOCSET', alldocset);
 
   const generateUrl = () => {
     // Our current LG button version has a bug where a disabled button with an href allows the disabled
@@ -111,6 +123,9 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     const versionName = isVersioned(versionOptions) ? version : '';
     return `${hostName}/${versionName}`;
   };
+
+  // console.log('deprecatedversions', deprecatedVersions);
+  // console.log('PRODUCT', product);
 
   const productChoices = deprecatedVersions
     ? Object.keys(deprecatedVersions)
@@ -128,6 +143,9 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         value: version,
       }))
     : [];
+
+  // console.log('PRODUCT CHOICES', productChoices);
+  // console.log('VERSION CHOICES', versionChoices);
 
   return (
     <>

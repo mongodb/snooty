@@ -103,7 +103,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   console.log('SITE METATDATA', siteMetadata);
 
   const hello = await db.realmInterface.fetchDocsets();
-  console.log('HELLO', hello);
+  // console.log('HELLO', hello);
 
   if (documents.length === 0) {
     console.error(
@@ -158,6 +158,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
         type: 'Docset',
       },
       displayName: `${docset.displayName}-uwu`,
+      prefix: docset.prefix,
+      project: docset.project,
+      url: docset.url,
     });
   });
 
