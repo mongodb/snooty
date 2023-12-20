@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import { getNestedValue } from '../utils/get-nested-value';
@@ -49,27 +50,38 @@ const Image = ({ nodeData, handleImageLoaded, className }) => {
     border-radius: 4px;
   `;
 
-  const buildStyles = () => {
-    return {
-      ...(height && { height }),
-      ...(width && { width }),
-    };
-  };
+  const buildStyles = useCallback(() => {
+    return css`
+      ${hasBorder ? borderStyling : ''}
+      max-width: 100%;
+      ${height && { height }}
+      ${width && { width }}
+    `;
+  }, [borderStyling, hasBorder, height, width]);
 
   const { options: { class: directiveClass } = {} } = nodeData;
 
+  const data = useStaticQuery(graphql`
+    query image {
+      file(relativePath: { eq: "hero.png" }) {
+        id
+        relativePath
+        childImageSharp {
+          gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+        }
+      }
+    }
+  `);
+
+  const image = getImage(data.file);
+
   return (
-    <img
-      src={withPrefix(imgSrc)}
+    <GatsbyImage
+      image={image}
       alt={altText}
       className={[directiveClass, customAlign, className].join(' ')}
-      style={nodeData.options ? buildStyles() : {}}
-      onLoad={handleLoad}
-      ref={imgRef}
-      css={css`
-        ${hasBorder ? borderStyling : ''}
-        max-width: 100%;
-      `}
+      imgStyle={buildStyles()}
+      loading="eager"
     />
   );
 };
