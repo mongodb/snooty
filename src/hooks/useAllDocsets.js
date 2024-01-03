@@ -7,6 +7,9 @@ export const useAllDocsets = () => {
       query AllDocsets {
         allDocset {
           nodes {
+            search {
+              categoryTitle
+            }
             displayName
             prefix {
               dotcomprd
