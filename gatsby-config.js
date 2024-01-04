@@ -1,8 +1,11 @@
 const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
 const { siteMetadata } = require('./src/utils/site-metadata');
 const { isGatsbyPreview } = require('./src/utils/is-gatsby-preview');
+const { enableZopfliCompressOutputVerbose } = require('./src/utils/enable-compression-output-verbose');
 
 const isPreview = isGatsbyPreview();
+const enableCompressionOutputVerbose = enableZopfliCompressOutputVerbose();
+console.log('enableCompressionOutputVerbose', enableCompressionOutputVerbose);
 const pathPrefix = !isPreview ? generatePathPrefix(siteMetadata) : undefined;
 
 console.log('PATH PREFIX', pathPrefix);
@@ -20,6 +23,24 @@ if (!isPreview) {
     resolve: 'gatsby-plugin-layout',
     options: {
       component: require.resolve(layoutComponentRelativePath),
+    },
+  });
+  plugins.push('gatsby-plugin-sharp');
+  plugins.push({
+    resolve: 'gatsby-transformer-sharp',
+    options: {
+      // The option defaults to true
+      checkSupportedExtensions: false,
+    },
+  });
+  plugins.push({
+    resolve: 'gatsby-plugin-zopfli',
+    options: {
+      extensions: ['css', 'html', 'js', 'svg', 'json'], // focuses on text-base files
+      verbose: enableCompressionOutputVerbose,
+      compression: {
+        numiterations: 20,
+      },
     },
   });
 } else {
