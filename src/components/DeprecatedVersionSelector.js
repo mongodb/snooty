@@ -112,15 +112,19 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     return `${hostName}/${versionName}`;
   };
 
+  const alphabetize = (product1, product2) => {
+    return product1.text.localeCompare(product2.text);
+  };
+
   const productChoices = deprecatedVersions
     ? Object.keys(deprecatedVersions)
-        .sort()
         .map((product) => ({
           text: reposMap[product]?.search?.categoryTitle || reposMap[product]?.displayName,
           value: product,
         }))
         // Ensure invalid entries do not break selector
         .filter(({ text }) => !!text)
+        .sort(alphabetize)
     : [];
 
   const versionChoices = deprecatedVersions[product]
