@@ -7,8 +7,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getGatsbyImage } from '../utils/get-gatsby-image';
 
 const Image = ({ nodeData, handleImageLoaded, className, ...props }) => {
-  // const scale = getNestedValue(['options', 'scale'], nodeData);
-  // TODO: add scale to aspect ratio
+  const scale = getNestedValue(['options', 'scale'], nodeData);
   const height = getNestedValue(['options', 'height'], nodeData);
   const width = getNestedValue(['options', 'width'], nodeData);
 
@@ -35,6 +34,9 @@ const Image = ({ nodeData, handleImageLoaded, className, ...props }) => {
   if (height) {
     imageOptions['height'] = height;
   }
+  if (scale) {
+    imageOptions['scale'] = parseInt(scale, 10) / 100;
+  }
   const imageData = getGatsbyImage(imageOptions);
 
   return (
@@ -46,7 +48,7 @@ const Image = ({ nodeData, handleImageLoaded, className, ...props }) => {
         ${hasBorder ? borderStyling : ''}
         max-width: 100%;
       `)}
-      objectFit={'scale-down'}
+      objectFit={'contain'}
     />
   );
 };
