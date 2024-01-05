@@ -5,11 +5,12 @@ import { withPrefix } from 'gatsby';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import Portal from '@leafygreen-ui/portal';
-import Tooltip from '@leafygreen-ui/tooltip';
 import { useFeedbackContext } from '../context';
 import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
+import { theme } from '../../../../theme/docsTheme';
+import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_OVERLAY_ALT_TEXT } from '../constants';
 
 const HIGHLIGHT_BORDER_SIZE = 5;
 
@@ -72,15 +73,15 @@ const exitButtonStyle = (position, top, left) => css`
 
 //styling for entire screenshot icon selector
 const ScreenshotSelect = styled(Button)`
+  display: block;
   height: 28px;
+  margin: 0 auto ${theme.size.small} 0;
   z-index: 5;
-  width: 38px !important;
-  align-text: center;
+  width: 158px !important;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
   const { setScreenshotTaken } = useFeedbackContext();
-  const label = 'Take a Screenshot';
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [currElemState, setCurrElemState] = useState(null);
 
@@ -237,7 +238,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
             <img
               className={fwInstructionsId}
               src={withPrefix('assets/screenshotCTA.svg')}
-              alt="Screenshot"
+              alt={SCREENSHOT_OVERLAY_ALT_TEXT}
               css={instructionsPanelStyling}
               onClick={handleInstructionClick}
             />
@@ -319,21 +320,13 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         </Portal>
       )}
 
-      <Tooltip
-        align="bottom"
-        justify="middle"
-        triggerEvent="hover"
-        enabled={true}
-        darkMode={false}
-        trigger={
-          <ScreenshotSelect onClick={takeNewScreenshot} {...props}>
-            <img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />
-          </ScreenshotSelect>
-        }
-        popoverZIndex={15}
+      <ScreenshotSelect
+        onClick={takeNewScreenshot}
+        leftGlyph={<img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />}
+        {...props}
       >
-        {label}
-      </Tooltip>
+        {SCREENSHOT_BUTTON_TEXT}
+      </ScreenshotSelect>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { FeedbackProvider, useFeedbackContext } from './context';
 import useFeedbackData from './useFeedbackData';
 import FeedbackForm from './FeedbackForm';
-import FeedbackTab from './FeedbackTab';
+import FeedbackButton from './FeedbackButton';
 
-export { FeedbackProvider, useFeedbackContext, useFeedbackData, FeedbackForm, FeedbackTab };
+export { FeedbackProvider, useFeedbackContext, useFeedbackData, FeedbackForm, FeedbackButton };

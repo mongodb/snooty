@@ -1,25 +1,38 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
-import { FeedbackProvider, FeedbackForm, FeedbackTab } from '../../src/components/Widgets/FeedbackWidget';
+import { FeedbackProvider, FeedbackForm, FeedbackButton } from '../../src/components/Widgets/FeedbackWidget';
 
-import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop, setMobile, setTablet } from '../utils';
+import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop } from '../utils';
 import {
   stitchFunctionMocks,
   mockStitchFunctions,
   clearMockStitchFunctions,
 } from '../utils/feedbackWidgetStitchFunctions';
 import Heading from '../../src/components/Heading';
-import { theme } from '../../src/theme/docsTheme';
 import {
   screenshotFunctionMocks,
   mockScreenshotFunctions,
   clearMockScreenshotFunctions,
 } from '../utils/data/feedbackWidgetScreenshotFunctions';
+import {
+  CLOSE_BUTTON_ALT_TEXT,
+  COMMENT_PLACEHOLDER_TEXT,
+  EMAIL_ERROR_TEXT,
+  EMAIL_PLACEHOLDER_TEXT,
+  FEEDBACK_BUTTON_TEXT,
+  FEEDBACK_SUBMIT_BUTTON_TEXT,
+  RATING_QUESTION_TEXT,
+  SCREENSHOT_BUTTON_TEXT,
+  SCREENSHOT_OVERLAY_ALT_TEXT,
+  SUBMITTED_VIEW_RESOURCE_LINKS,
+  SUBMITTED_VIEW_SUPPORT_LINK,
+  SUBMITTED_VIEW_TEXT,
+} from '../../src/components/Widgets/FeedbackWidget/constants';
 import headingData from './data/Heading.test.json';
 
-async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
+async function mountFormWithFeedbackState(feedbackState = {}) {
   const { view, isSupportRequest, screenshotTaken, ...feedback } = feedbackState;
   const wrapper = render(
     <>
@@ -39,7 +52,7 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
       >
         <FeedbackForm />
         <div>
-          <FeedbackTab />
+          <FeedbackButton />
           <Heading nodeData={headingData} sectionDepth={1} />
         </div>
       </FeedbackProvider>
@@ -49,6 +62,18 @@ async function mountFormWithFeedbackState(feedbackState = {}, options = {}) {
   await tick();
   return wrapper;
 }
+
+// Finds all of the stars in the rating view and ensures the correct number are shown
+const checkSelectedStars = (wrapper, selectedRating) => {
+  const maxStars = 5;
+  const highlightedStars = wrapper.queryAllByTestId('rating-star-highlighted');
+  const unselectedStars = wrapper.queryAllByTestId('rating-star');
+
+  expect(highlightedStars.length + unselectedStars.length).toEqual(maxStars);
+  expect(highlightedStars).toHaveLength(selectedRating);
+  expect(unselectedStars).toHaveLength(maxStars - selectedRating);
+};
+
 const snootyEnv = 'development';
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ snootyEnv }),
@@ -67,136 +92,103 @@ describe('FeedbackWidget', () => {
   beforeEach(mockScreenshotFunctions);
   afterEach(clearMockScreenshotFunctions);
 
-  describe('FeedbackTab (Desktop Viewport)', () => {
-    it('is hidden outside of the waiting view on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState({
-        view: 'sentiment',
-        comment: '',
-      });
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(0);
-    });
-
-    it('shows the sentiment category view when clicked', async () => {
+  describe('FeedbackButton', () => {
+    it('shows the rating view when clicked', async () => {
       wrapper = await mountFormWithFeedbackState({});
       // Before the click, the form is hidden
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
-      // Click the tab
-      userEvent.click(wrapper.getByText('Share Feedback'));
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
+      // Click the button
+      userEvent.click(wrapper.getByText(FEEDBACK_BUTTON_TEXT));
 
       await tick();
       // After the click new feedback is initialized
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
+    });
+
+    it('shows the rating view when using keyboard', async () => {
+      wrapper = await mountFormWithFeedbackState({});
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
+
+      // Focus and simulate keyboard interaction
+      const fwButon = wrapper.getByText(FEEDBACK_BUTTON_TEXT);
+      fwButon.focus();
+      userEvent.keyboard('{Enter}');
+      await tick();
+
+      // Ensure rating view appears
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
     });
 
     it('is visible in the waiting view on large/desktop screens', async () => {
       wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-    });
-  });
-
-  describe('FeedbackTab (Mobile/Tablet Viewport)', () => {
-    it('shows tab on medium/tablet screens', async () => {
-      setTablet();
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-    });
-
-    it('shows tab on small/mobile screens', async () => {
-      setMobile();
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText('Share Feedback')).toHaveLength(1);
-      expect(wrapper.queryAllByText('Share Feedback')[0]).toHaveStyleRule('margin-left', '20px', {
-        media: `${theme.screenSize.upToSmall}`,
-      });
-    });
-
-    it('shows the sentiment category view when clicked (mobile)', async () => {
-      setMobile();
-      wrapper = await mountFormWithFeedbackState({});
-      // Before the click, the form is hidden
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
-      // Click the tab
-      userEvent.click(wrapper.getByText('Share Feedback'));
-
-      await tick();
-      // After the click new feedback is initialized
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
-    });
-
-    it('shows the sentiment category view when clicked (tablet)', async () => {
-      setTablet();
-      wrapper = await mountFormWithFeedbackState({});
-      // Before the click, the form is hidden
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
-      // Click the tab
-      userEvent.click(wrapper.getByText('Share Feedback'));
-
-      await tick();
-      // After the click new feedback is initialized
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(1);
+      expect(wrapper.queryAllByText(FEEDBACK_BUTTON_TEXT)).toHaveLength(1);
     });
   });
 
   describe('FeedbackForm', () => {
     it('waiting state when the form is closed', async () => {
       wrapper = await mountFormWithFeedbackState({
-        view: 'sentiment',
+        view: 'rating',
       });
       // Click the close button
-      userEvent.click(wrapper.getByLabelText('Close Feedback Form'));
+      userEvent.click(wrapper.getByLabelText(CLOSE_BUTTON_ALT_TEXT));
       await tick();
-      expect(wrapper.queryAllByText('Did this page help?')).toHaveLength(0);
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
     });
 
-    describe('SentimentView', () => {
-      it('Shows 3 sentiment categories', async () => {
+    describe('RatingView', () => {
+      it('Shows 5 stars for rating', async () => {
         wrapper = await mountFormWithFeedbackState({
-          view: 'sentiment',
+          view: 'rating',
         });
-        expect(wrapper.queryAllByText('Yes, it did!')).toHaveLength(1);
-        expect(wrapper.queryAllByText('No, I have feedback.')).toHaveLength(1);
-        expect(wrapper.queryAllByText('I have a suggestion.')).toHaveLength(1);
+        expect(wrapper.getAllByTestId('rating-star')).toHaveLength(5);
       });
 
-      it('transitions to the negative path comment view when a negative category is clicked', async () => {
+      it('transitions to the comment view when a rating is clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
-          view: 'sentiment',
+          view: 'rating',
         });
-        userEvent.click(wrapper.queryByText('No, I have feedback.'));
+        const stars = wrapper.getAllByTestId('rating-star');
+        const selectedRating = 5;
+        const selectedStar = stars[selectedRating - 1];
+        userEvent.click(selectedStar);
         await tick();
-        expect(wrapper.getByText('Unhelpful')).toBeTruthy();
-        expect(wrapper.getByPlaceholderText('How could this page be more helpful?')).toBeTruthy();
+
+        checkSelectedStars(wrapper, selectedRating);
+        expect(wrapper.getByPlaceholderText(COMMENT_PLACEHOLDER_TEXT)).toBeTruthy();
       });
 
-      it('transitions to the positive path comment view when a positive category is clicked', async () => {
+      it('transitions to the comment view when using keyboard to select a rating', async () => {
         wrapper = await mountFormWithFeedbackState({
-          view: 'sentiment',
+          view: 'rating',
         });
-        userEvent.click(wrapper.queryByText('Yes, it did!'));
-        await tick();
-        expect(wrapper.getByText('Helpful')).toBeTruthy();
-        expect(wrapper.getByPlaceholderText('How did this page help you?')).toBeTruthy();
-      });
+        const stars = wrapper.getAllByTestId('rating-star');
+        const selectedRating = 4;
+        const selectedStar = stars[selectedRating - 1];
+        // Wrap in `act` due to multiple state changes
+        await act(async () => {
+          selectedStar.focus();
+          userEvent.keyboard('{Enter}');
+        });
 
-      it('transitions to the suggestion path comment view when a suggestion category is clicked', async () => {
-        wrapper = await mountFormWithFeedbackState({
-          view: 'sentiment',
-        });
-        userEvent.click(wrapper.queryByText('I have a suggestion.'));
-        await tick();
-        expect(wrapper.getByText('Idea')).toBeTruthy();
-        expect(wrapper.getByPlaceholderText('What change would you like to see?')).toBeTruthy();
+        checkSelectedStars(wrapper, selectedRating);
+        expect(wrapper.getByPlaceholderText(COMMENT_PLACEHOLDER_TEXT)).toBeTruthy();
       });
     });
 
     describe('CommentView', () => {
       it('shows correct comment view text', async () => {
+        const expectedRating = 4;
         wrapper = await mountFormWithFeedbackState({
           view: 'comment',
           sentiment: 'Positive',
+          rating: expectedRating,
           comment: '',
         });
-        expect(wrapper.getByPlaceholderText('Email Address')).toBeTruthy();
+        // Check that present rating is shown
+        checkSelectedStars(wrapper, expectedRating);
+
+        expect(wrapper.getByPlaceholderText(EMAIL_PLACEHOLDER_TEXT)).toBeTruthy();
         expect(wrapper.getByText('Send')).toBeTruthy();
       });
 
@@ -208,14 +200,16 @@ describe('FeedbackWidget', () => {
             user: { email: 'test@example.com' },
           });
 
-          // click on screenshot button
-          userEvent.click(wrapper.getAllByRole('button')[2]);
+          // click on screenshot button; use closest() because of LG implementation of `"pointer-events": "none"`
+          userEvent.click(wrapper.getByText(SCREENSHOT_BUTTON_TEXT).closest('button'));
           await tick();
 
           expect(screenshotFunctionMocks['addEventListener']).toHaveBeenCalled();
 
           // shows overlays
-          expect(wrapper.getByAltText('Screenshot').getElementsByClassName('overlay-instructions')).toBeTruthy();
+          expect(
+            wrapper.getByAltText(SCREENSHOT_OVERLAY_ALT_TEXT).getElementsByClassName('overlay-instructions')
+          ).toBeTruthy();
         });
 
         it('adds the screenshot attachment on send', async () => {
@@ -227,7 +221,7 @@ describe('FeedbackWidget', () => {
             screenshotTaken: true,
           });
 
-          userEvent.click(wrapper.getByText('Send').closest('button'));
+          userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
 
           expect(screenshotFunctionMocks['retrieveDataUri']).toHaveBeenCalled();
@@ -240,10 +234,11 @@ describe('FeedbackWidget', () => {
             view: 'comment',
             comment: 'This is a test comment.',
             sentiment: 'Positive',
+            rating: 5,
             user: { email: 'test@example.com' },
           });
           // Click the submit button
-          userEvent.click(wrapper.getByText('Send').closest('button'));
+          userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
           expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
         });
@@ -255,40 +250,48 @@ describe('FeedbackWidget', () => {
             user: { email: 'test invalid email' },
           });
           // Type in an invalid email address
-          const emailInput = wrapper.getByPlaceholderText('Email Address');
+          const emailInput = wrapper.getByPlaceholderText(EMAIL_PLACEHOLDER_TEXT);
           userEvent.paste(emailInput, 'invalid email address');
           // Click the submit button
-          userEvent.click(wrapper.getByText('Send').closest('button'));
+          userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
-          expect(wrapper.getByText('Please enter a valid email.')).toBeTruthy();
+          expect(wrapper.getByText(EMAIL_ERROR_TEXT)).toBeTruthy();
         });
       });
     });
 
     describe('SubmittedView', () => {
+      const standardViewCopy = [
+        SUBMITTED_VIEW_TEXT.HEADING,
+        SUBMITTED_VIEW_TEXT.SUB_HEADING,
+        ...SUBMITTED_VIEW_RESOURCE_LINKS.map(({ text }) => text),
+      ];
+      const negativeViewCopy = [SUBMITTED_VIEW_TEXT.SUPPORT_CTA, SUBMITTED_VIEW_SUPPORT_LINK.text];
+
       it('shows self-serve support links for negative path', async () => {
         wrapper = await mountFormWithFeedbackState({
           sentiment: 'Negative',
+          rating: 1,
           view: 'submitted',
         });
-        expect(wrapper.getByText("We're sorry to hear that.")).toBeTruthy();
-        expect(wrapper.getByText('Looking for more resources?')).toBeTruthy();
-        expect(wrapper.getByText('MongoDB Community')).toBeTruthy();
-        expect(wrapper.getByText('MongoDB Developer Center')).toBeTruthy();
-        expect(wrapper.getByText('Have a support contract?')).toBeTruthy();
-        expect(wrapper.getByText('Create a Support Case')).toBeTruthy();
+        const viewCopy = [...standardViewCopy, ...negativeViewCopy];
+        viewCopy.forEach((text) => {
+          expect(wrapper.getByText(text)).toBeTruthy();
+        });
       });
 
       it('shows summary information for positive path', async () => {
         wrapper = await mountFormWithFeedbackState({
           sentiment: 'Positive',
+          rating: 5,
           view: 'submitted',
         });
-        expect(wrapper.getByText('Thanks for your help!')).toBeTruthy();
-        expect(wrapper.getByText('MongoDB Community')).toBeTruthy();
-        expect(wrapper.getByText('MongoDB Developer Center')).toBeTruthy();
-        expect(wrapper.queryAllByText('Have a support contract?')).toHaveLength(0);
-        expect(wrapper.queryAllByText('Create a Support Case')).toHaveLength(0);
+        standardViewCopy.forEach((text) => {
+          expect(wrapper.getByText(text)).toBeTruthy();
+        });
+        negativeViewCopy.forEach((text) => {
+          expect(wrapper.queryAllByText(text)).toHaveLength(0);
+        });
       });
     });
   });
