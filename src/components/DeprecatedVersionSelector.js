@@ -8,6 +8,7 @@ import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useAllDocsets } from '../hooks/useAllDocsets';
+import { fetchDocsets } from '../utils/realm';
 import Select from './Select';
 
 const SELECT_WIDTH = '336px';
@@ -66,9 +67,12 @@ const addOldGenToReposMap = (reposMap) => {
 
 const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
   const { reposDatabase } = useSiteMetadata();
+  const reposBranchesBuildData = useAllDocsets();
+  const reposBranchesBuildDataMap = keyBy(reposBranchesBuildData, 'project');
+  const reposBranchesBuildDataMapWithOldGen = addOldGenToReposMap(reposBranchesBuildDataMap);
   const [product, setProduct] = useState('');
   const [version, setVersion] = useState('');
-  const [reposMap, setReposMap] = useState({});
+  const [reposMap, setReposMap] = useState(reposBranchesBuildDataMapWithOldGen);
 
   const updateProduct = useCallback(({ value }) => {
     setProduct(value);
@@ -77,16 +81,20 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   const updateVersion = useCallback(({ value }) => setVersion(value), []);
   const buttonDisabled = !(product && version);
 
-  const reposBranches = useAllDocsets();
-
   // Fetch docsets for url and combine `displayName` from oldGenToReposMap method
   useEffect(() => {
     if (reposDatabase) {
-      const reposBranchesMap = keyBy(reposBranches, 'project');
-      const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
-      setReposMap(reposBranchesMapWithOldGen);
+      fetchDocsets(reposDatabase)
+        .then((resp) => {
+          const reposBranchesMap = keyBy(resp, 'project');
+          const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
+          setReposMap(reposBranchesMapWithOldGen);
+        })
+        .catch((error) => {
+          setReposMap(reposBranchesBuildDataMapWithOldGen);
+        });
     }
-  }, [reposDatabase, reposBranches]);
+  }, [reposDatabase, reposBranchesBuildDataMapWithOldGen]);
 
   useEffect(() => {
     if (isBrowser) {
