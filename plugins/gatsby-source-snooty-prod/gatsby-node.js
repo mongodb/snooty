@@ -1,3 +1,4 @@
+const CompressionPlugin = require('compression-webpack-plugin');
 const path = require('path');
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
 const { saveAssetFiles, saveStaticFiles } = require('../../src/utils/setup/save-asset-files');
@@ -258,7 +259,13 @@ exports.onCreateWebpackConfig = ({ plugins, actions }) => {
   const fallbacks = { stream: require.resolve('stream-browserify'), buffer: require.resolve('buffer/') };
 
   actions.setWebpackConfig({
-    plugins: [plugins.provide(providePlugins)],
+    plugins: [
+      plugins.provide(providePlugins),
+      new CompressionPlugin({
+        filename: '[path][base].gz',
+        test: /\.(js|css|html|svg|json)$/,
+      }),
+    ],
     resolve: {
       fallback: fallbacks,
       alias: {
