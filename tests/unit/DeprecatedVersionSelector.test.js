@@ -166,7 +166,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
   describe('if fetching the dropdown data from atlas fails', () => {
     it('still populates the dropdown using build-time data', () => {
       mockFetchDocuments = jest.spyOn(realm, 'fetchDocsets').mockImplementation(async (dbName) => {
-        return {};
+        return Promise.reject();
       });
 
       wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);

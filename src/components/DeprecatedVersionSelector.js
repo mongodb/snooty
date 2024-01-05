@@ -88,7 +88,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         .then((resp) => {
           const reposBranchesMap = keyBy(resp, 'project');
           const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
-          setReposMap(reposBranchesMapWithOldGen);
+          if (reposBranchesMap.size > 0) setReposMap(reposBranchesMapWithOldGen);
         })
         .catch((error) => {
           setReposMap(reposBranchesBuildDataMapWithOldGen);
