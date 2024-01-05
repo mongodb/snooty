@@ -16,7 +16,7 @@ const landingTemplateStyling = css`
   position: sticky;
   top: 0px;
   display: grid;
-  padding: 0;
+  padding: 16px 0px 0px 0px;
   // Use landing template's grid layout to help with alignment
   @media ${theme.screenSize.mediumAndUp} {
     grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(12, minmax(0, ${CONTENT_MAX_WIDTH / 12}px)) minmax(
@@ -56,7 +56,6 @@ const StyledChatBotUiContainer = styled.div`
 
   > div {
     max-width: 862px;
-    margin-left: -32px;
     p {
       color: ${palette.black};
     }
@@ -76,7 +75,13 @@ const StyledChatBotUiContainer = styled.div`
   ${({ template }) => template === 'landing' && landingTemplateStyling};
 `;
 
-const LazyChatbot = lazy(() => import('mongodb-chatbot-ui'));
+const DocsChatbot = lazy(() =>
+  import('mongodb-chatbot-ui').then((module) => {
+    return { default: module.DocsChatbot };
+  })
+);
+
+const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 
 const ChatbotUi = ({ template }) => {
   const { snootyEnv } = useSiteMetadata();
@@ -90,15 +95,16 @@ const ChatbotUi = ({ template }) => {
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
       <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
-        <LazyChatbot
-          serverBaseUrl={CHATBOT_SERVER_BASE_URL}
-          suggestedPrompts={[
-            'How do you deploy a free cluster in Atlas?',
-            'How do you import or migrate data into MongoDB Atlas?',
-            'Get started with MongoDB',
-            'Why should I use Atlas Search?',
-          ]}
-        />
+        <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
+          <DocsChatbot
+            suggestedPrompts={[
+              'How do you deploy a free cluster in Atlas?',
+              'How do you import or migrate data into MongoDB Atlas?',
+              'Get started with MongoDB',
+              'Why should I use Atlas Search?',
+            ]}
+          />
+        </Chatbot>
       </Suspense>
     </StyledChatBotUiContainer>
   );
