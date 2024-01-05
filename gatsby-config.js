@@ -57,4 +57,9 @@ module.exports = {
   plugins,
   pathPrefix,
   siteMetadata,
+  flags: {
+    DEV_SSR: false,
+    PRESERVE_WEBPACK_CACHE: true,
+    FAST_REFRESH: true,
+  },
 };
