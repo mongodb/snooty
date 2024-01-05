@@ -25,14 +25,6 @@ if (!isPreview) {
       component: require.resolve(layoutComponentRelativePath),
     },
   });
-  plugins.push('gatsby-plugin-sharp');
-  plugins.push({
-    resolve: 'gatsby-transformer-sharp',
-    options: {
-      // The option defaults to true
-      checkSupportedExtensions: false,
-    },
-  });
   plugins.push({
     resolve: 'gatsby-plugin-zopfli',
     options: {
@@ -57,9 +49,4 @@ module.exports = {
   plugins,
   pathPrefix,
   siteMetadata,
-  flags: {
-    DEV_SSR: false,
-    PRESERVE_WEBPACK_CACHE: true,
-    FAST_REFRESH: true,
-  },
 };
