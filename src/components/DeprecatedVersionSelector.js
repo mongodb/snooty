@@ -91,7 +91,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
           if (reposBranchesMap.size > 0) setReposMap(reposBranchesMapWithOldGen);
         })
         .catch((error) => {
-          setReposMap(reposBranchesBuildDataMapWithOldGen);
+          console.error(`Error: could not access ${reposDatabase} for dropdown data.`);
         });
     }
   }, [reposDatabase, reposBranchesBuildDataMapWithOldGen]);
