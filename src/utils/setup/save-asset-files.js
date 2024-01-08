@@ -2,9 +2,6 @@ const fs = require('fs').promises;
 const path = require('path');
 
 const saveFile = async (file, data) => {
-  // TODO
-  // CHANGE TO src/images
-  // THEN UPDATE PLUGINS OPTIONS
   await fs.mkdir(path.join('src', 'images', path.dirname(file)), {
     recursive: true,
   });
@@ -19,7 +16,6 @@ const saveFile = async (file, data) => {
 // Write all assets to static directory
 const saveAssetFiles = async (assets, db) => {
   const imageWrites = [];
-  console.log('saveAssetFiles');
 
   for (const [id, filenames] of assets) {
     if (filenames) {
@@ -31,7 +27,6 @@ const saveAssetFiles = async (assets, db) => {
         process.exit(1);
       }
       filenames.forEach((filename) => {
-        console.log(filename);
         imageWrites.push(saveFile(filename, buffer));
       });
     }

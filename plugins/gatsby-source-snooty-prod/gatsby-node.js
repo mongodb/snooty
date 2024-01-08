@@ -140,6 +140,22 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       PAGES.push(key);
     }
+    const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
+    const slug = assertTrailingSlash(getPageSlug(key));
+    const gatsby_images = val.static_assets.filter((a) => GATSBY_IMAGE_EXTENSIONS.some((ext) => a.key.endsWith(ext)));
+    if (gatsby_images?.length) {
+      createNode({
+        children: [],
+        id: createNodeId(`page-images-${slug}`),
+        internal: {
+          type: 'PageImage',
+          contentDigest: createContentDigest(gatsby_images.map((a) => a.key)),
+        },
+        pageAssets: gatsby_images.map((a) => a.key.slice(1)),
+        parent: null,
+        slug: slug,
+      });
+    }
     if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
@@ -299,6 +315,11 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type ChangelogData implements Node @dontInfer {
       changelogData: JSON
+    }
+
+    type PageImage implements Node @dontInfer {
+      slug: String
+      images: [File] @link(by: "relativePath", from: "pageAssets")
     }
   `);
 };

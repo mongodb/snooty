@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
+import { withPrefix, graphql } from 'gatsby';
 import { UnifiedFooter } from '@mdb/consistent-nav';
+import { ImageContextProvider } from '../context/gatsby-image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
@@ -140,13 +141,15 @@ const DocumentBody = (props) => {
         slug={slug}
         isInPresentationMode={isInPresentationMode}
       >
-        <FootnoteContext.Provider value={{ footnotes }}>
-          <Template {...props} useChatbot={useChatbot}>
-            {pageNodes.map((child, index) => (
-              <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-            ))}
-          </Template>
-        </FootnoteContext.Provider>
+        <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
+          <FootnoteContext.Provider value={{ footnotes }}>
+            <Template {...props} useChatbot={useChatbot}>
+              {pageNodes.map((child, index) => (
+                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+              ))}
+            </Template>
+          </FootnoteContext.Provider>
+        </ImageContextProvider>
       </Widgets>
       {!isInPresentationMode && (
         <div data-testid="consistent-footer" id="footer-container">
@@ -168,6 +171,20 @@ DocumentBody.propTypes = {
 };
 
 export default DocumentBody;
+
+export const query = graphql`
+  query ($slug: String) {
+    pageImage(slug: { eq: $slug }) {
+      slug
+      images {
+        childImageSharp {
+          gatsbyImageData(formats: [AUTO, WEBP], placeholder: BLURRED)
+        }
+        relativePath
+      }
+    }
+  }
+`;
 
 export const Head = ({ pageContext }) => {
   const { slug, page, template, repoBranches } = pageContext;

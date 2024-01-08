@@ -1,42 +1,15 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { graphql, useStaticQuery } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { css } from '@emotion/react';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { getNestedValue } from '../utils/get-nested-value';
+import ImageContext from '../context/gatsby-image-context';
 
 const Image = ({ nodeData, handleImageLoaded, className }) => {
-  const [height, setHeight] = useState(null);
-  const [width, setWidth] = useState(null);
-  const imgRef = useRef();
-
-  const handleLoad = useCallback(() => {
-    const img = imgRef.current;
-    handleImageLoaded(img);
-
-    const scale = getNestedValue(['options', 'scale'], nodeData);
-    if (scale) {
-      scaleSize(img.naturalWidth, img.naturalHeight, scale);
-    } else {
-      const height = getNestedValue(['options', 'height'], nodeData);
-      const width = getNestedValue(['options', 'width'], nodeData);
-      if (height) setHeight(height);
-      if (width) setWidth(height);
-    }
-  }, [handleImageLoaded, nodeData]);
-
-  useEffect(() => {
-    if (imgRef.current && imgRef.current.complete) {
-      handleLoad();
-    }
-  }, [handleLoad]);
-
-  const scaleSize = (width, height, scale) => {
-    const scaleValue = parseInt(scale, 10) / 100.0;
-    setHeight(height * scaleValue);
-    setWidth(width * scaleValue);
-  };
+  const scale = (parseInt(getNestedValue(['options', 'scale'], nodeData), 10) || 100) / 100;
+  const height = getNestedValue(['options', 'height'], nodeData);
+  const width = getNestedValue(['options', 'width'], nodeData);
 
   const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
@@ -50,37 +23,37 @@ const Image = ({ nodeData, handleImageLoaded, className }) => {
     border-radius: 4px;
   `;
 
-  const buildStyles = useCallback(() => {
-    return css`
-      ${hasBorder ? borderStyling : ''}
-      max-width: 100%;
-      ${height && { height }}
-      ${width && { width }}
-    `;
-  }, [borderStyling, hasBorder, height, width]);
+  const directiveClass = getNestedValue(['options', 'directiveClass'], nodeData);
 
-  const { options: { class: directiveClass } = {} } = nodeData;
+  const { imageByPath } = useContext(ImageContext);
+  const image = imageByPath[imgSrc.slice(1)];
+  const defaultStyling = css`
+    max-width: 100%;
+  `;
 
-  const data = useStaticQuery(graphql`
-    query image {
-      file(relativePath: { eq: "hero.png" }) {
-        id
-        relativePath
-        childImageSharp {
-          gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
-        }
-      }
-    }
-  `);
-
-  const image = getImage(data.file);
+  if (!image) {
+    return (
+      <img
+        src={imgSrc}
+        alt={altText}
+        className={[cx(defaultStyling), directiveClass, customAlign, className, hasBorder ? borderStyling : ''].join(
+          ' '
+        )}
+      />
+    );
+  }
 
   return (
     <GatsbyImage
+      width={width * scale}
+      height={height * scale}
       image={image}
+      imgClassName={cx(css`
+        ${hasBorder ? borderStyling : ''}
+        max-width: 100%;
+      `)}
+      className={[cx(defaultStyling), directiveClass, customAlign, className].join(' ')}
       alt={altText}
-      className={[directiveClass, customAlign, className].join(' ')}
-      imgStyle={buildStyles()}
       loading="eager"
     />
   );
