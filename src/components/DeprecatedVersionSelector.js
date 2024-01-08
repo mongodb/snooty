@@ -81,8 +81,6 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   const updateVersion = useCallback(({ value }) => setVersion(value), []);
   const buttonDisabled = !(product && version);
 
-  const reposBranches = useAllDocsets();
-
   // Fetch docsets for url and combine `displayName` from oldGenToReposMap method
   useEffect(() => {
     if (reposDatabase) {
@@ -93,7 +91,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
           if (reposBranchesMap.size > 0) setReposMap(reposBranchesMapWithOldGen);
         })
         .catch((error) => {
-          setReposMap(reposBranchesBuildDataMapWithOldGen);
+          console.error(`Error: could not access ${reposDatabase} for dropdown data.`);
         });
     }
   }, [reposDatabase, reposBranchesBuildDataMapWithOldGen]);
