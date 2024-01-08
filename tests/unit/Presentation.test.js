@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { mockLocation } from '../utils/mock-location';
 import DocumentBody from '../../src/components/DocumentBody';
+import { FEEDBACK_BUTTON_TEXT } from '../../src/components/Widgets/FeedbackWidget/constants';
 import mockPageContext from './data/PageContext.test.json';
 import mockSnootyMetadata from './data/SnootyMetadata.json';
 
@@ -27,7 +28,7 @@ describe('DocumentBody', () => {
       expect(languageSelector.querySelectorAll('li')).toHaveLength(2);
     }
 
-    const feedbackWidget = screen.getByText('Share Feedback');
+    const feedbackWidget = screen.getByText(FEEDBACK_BUTTON_TEXT);
     expect(feedbackWidget).toBeVisible();
     expect(feedbackWidget).toMatchSnapshot();
 
@@ -43,7 +44,7 @@ describe('DocumentBody', () => {
     const footer = screen.queryByTestId('consistent-footer');
     expect(footer).not.toBeInTheDocument();
 
-    const feedbackWidget = screen.queryByTestId('Share Feedback');
+    const feedbackWidget = screen.queryByText(FEEDBACK_BUTTON_TEXT);
     expect(feedbackWidget).not.toBeInTheDocument();
 
     const mainNav = screen.queryByRole('img', { name: 'MongoDB logo' });

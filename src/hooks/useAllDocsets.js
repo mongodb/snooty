@@ -10,6 +10,7 @@ export const useAllDocsets = () => {
             search {
               categoryTitle
             }
+
             displayName
             prefix {
               dotcomprd

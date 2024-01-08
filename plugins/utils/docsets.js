@@ -4,7 +4,7 @@ const createDocsetNodes = async ({ db, createNode, createNodeId, createContentDi
   docsets.forEach((docset) => {
     createNode({
       children: [],
-      id: createNodeId(`docsetInfo-${docset.displayName}`),
+      id: createNodeId(`docsetInfo-${docset.repoName}`),
       internal: {
         contentDigest: createContentDigest(docset),
         type: 'Docset',

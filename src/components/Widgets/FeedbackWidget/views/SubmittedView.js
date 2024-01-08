@@ -1,42 +1,47 @@
 import React from 'react';
 import Button from '@leafygreen-ui/button';
 import styled from '@emotion/styled';
+import { Subtitle } from '@leafygreen-ui/typography';
 import { useFeedbackContext } from '../context';
 import useScreenSize from '../../../../hooks/useScreenSize';
-import { Layout, Heading, Subheading } from '../components/view-components';
+import { Layout, Subheading } from '../components/view-components';
+import StarRating from '../components/StarRating';
+import { theme } from '../../../../theme/docsTheme';
+import { SUBMITTED_VIEW_RESOURCE_LINKS, SUBMITTED_VIEW_SUPPORT_LINK, SUBMITTED_VIEW_TEXT } from '../constants';
 
 const SupportCase = styled.div`
-  margin-top: 16px;
+  margin-top: ${theme.size.default};
 `;
 
-const StyledHeading = styled.div`
-  margin-top: 8px !important;
-  margin-bottom: 16px !important;
+const StyledHeading = styled(Subtitle)`
+  margin-top: 30px;
+  margin-bottom: ${theme.size.default};
+  text-align: center;
 `;
 
 const SubmittedView = () => {
   const { abandon } = useFeedbackContext();
   const { isMobile } = useScreenSize();
-  const { selectedSentiment } = useFeedbackContext();
-  const isSentimentNegative = selectedSentiment === 'Negative';
-  const finalHeading = isSentimentNegative ? "We're sorry to hear that." : 'Thanks for your help!';
+  const { selectedRating } = useFeedbackContext();
+  const shouldShowSupportLink = selectedRating <= 3;
 
   return (
     <Layout>
-      <StyledHeading>
-        <Heading>{finalHeading}</Heading>
-      </StyledHeading>
-      <Subheading>Your input improves MongoDB's Documentation.</Subheading>
+      <StyledHeading>{SUBMITTED_VIEW_TEXT.HEADING}</StyledHeading>
+      <StarRating editable={false} />
+      <Subheading>{SUBMITTED_VIEW_TEXT.SUB_HEADING}</Subheading>
       <Subheading>
-        <span>Looking for more resources? </span>
-        <br />
-        <a href="https://developer.mongodb.com/community/forums/">MongoDB Community </a>
-        <br />
-        <a href="https://www.mongodb.com/developer/">MongoDB Developer Center</a>
-        {isSentimentNegative && (
-          <SupportCase selectedSentiment={selectedSentiment}>
-            {'Have a support contract? '}
-            <a href="https://support.mongodb.com/">Create a Support Case</a>
+        <span>{SUBMITTED_VIEW_TEXT.RESOURCES_CTA}</span>
+        {SUBMITTED_VIEW_RESOURCE_LINKS.map(({ text, href }, index) => (
+          <React.Fragment key={index}>
+            <br />
+            <a href={href}>{text}</a>
+          </React.Fragment>
+        ))}
+        {shouldShowSupportLink && (
+          <SupportCase>
+            {`${SUBMITTED_VIEW_TEXT.SUPPORT_CTA} `}
+            <a href={SUBMITTED_VIEW_SUPPORT_LINK.href}>{SUBMITTED_VIEW_SUPPORT_LINK.text}</a>
           </SupportCase>
         )}
       </Subheading>
