@@ -52,6 +52,10 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),
 }));
 
+jest.mock('../../src/hooks/useAllDocsets', () => ({
+  useAllDocsets: () => mockedReposBranches,
+}));
+
 describe('DeprecatedVersionSelector when rendered', () => {
   let wrapper, mockFetchDocuments;
 
@@ -156,6 +160,23 @@ describe('DeprecatedVersionSelector when rendered', () => {
       const button = await wrapper.findByTitle('View Documentation');
       expect(button).toHaveAttribute('aria-disabled', 'false');
       expect(button.href).toEqual(expectedUrl);
+    });
+  });
+
+  describe('if fetching the dropdown data from atlas fails', () => {
+    it('still populates the dropdown using build-time data', () => {
+      mockFetchDocuments = jest.spyOn(realm, 'fetchDocsets').mockImplementation(async (dbName) => {
+        return Promise.reject();
+      });
+
+      wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
+
+      const productDropdown = wrapper.container.querySelectorAll('button')[0];
+      userEvent.click(productDropdown);
+
+      expect(wrapper.findByText('MongoDB Manual')).toBeTruthy();
+      expect(wrapper.findByText('MongoDB Ops Manager')).toBeTruthy();
+      expect(wrapper.findByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
     });
   });
 });

@@ -11,6 +11,7 @@ const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-
 const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
+const { createDocsetNodes } = require('../utils/docsets.js');
 
 // different types of references
 const PAGES = [];
@@ -142,6 +143,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     }
     if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
+
+  await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
