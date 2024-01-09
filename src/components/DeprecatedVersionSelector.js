@@ -127,7 +127,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   const productChoices = deprecatedVersions
     ? Object.keys(deprecatedVersions)
         .map((product) => ({
-          text: reposMap[product]?.search?.categoryTitle || reposMap[product]?.displayName,
+          text: reposMap[product]?.displayName,
           value: product,
         }))
         // Ensure invalid entries do not break selector
