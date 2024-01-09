@@ -10,22 +10,12 @@ import CaptionLegend from './CaptionLegend';
 export default class Figure extends Component {
   constructor(props) {
     super(props);
+    const figWidth = parseInt(getNestedValue(['nodeData', 'options', 'figwidth'], props), 10);
+    const imgWidth = parseInt(getNestedValue(['nodeData', 'options', 'width'], props), 10);
     this.state = {
-      isLightboxSize: false,
+      isLightboxSize: !figWidth || figWidth / imgWidth < 0.9,
     };
   }
-
-  imgShouldHaveLightbox = (img) => {
-    const naturalArea = img.naturalWidth * img.naturalHeight;
-    const clientArea = img.clientWidth * img.clientHeight;
-    return clientArea < naturalArea * 0.9;
-  };
-
-  handleImageLoaded = (imgRef) => {
-    this.setState({
-      isLightboxSize: this.imgShouldHaveLightbox(imgRef),
-    });
-  };
 
   render() {
     const { nodeData, ...rest } = this.props;
@@ -44,7 +34,7 @@ export default class Figure extends Component {
         `}
         style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}
       >
-        <Image nodeData={nodeData} handleImageLoaded={this.handleImageLoaded} />
+        <Image nodeData={nodeData} />
         <CaptionLegend {...rest} nodeData={nodeData} />
       </div>
     );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '@leafygreen-ui/modal';
 import styled from '@emotion/styled';
@@ -51,10 +51,15 @@ const LightboxWrapper = styled('div')`
 const Lightbox = ({ nodeData, ...rest }) => {
   const [open, setOpen] = useState(false);
   const figureWidth = nodeData.options?.figwidth || 'auto';
+  const openModal = useCallback(() => {
+    setOpen(!open);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <React.Fragment>
       <LightboxWrapper figwidth={figureWidth}>
-        <div onClick={() => setOpen((curr) => !curr)} role="button" tabIndex="-1">
+        <div onClick={openModal} role="button" tabIndex="-1">
           <Image nodeData={nodeData} />
           <LightboxCaption>{CAPTION_TEXT}</LightboxCaption>
         </div>
