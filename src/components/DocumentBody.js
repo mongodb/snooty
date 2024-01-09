@@ -178,7 +178,7 @@ export const query = graphql`
       slug
       images {
         childImageSharp {
-          gatsbyImageData(formats: [AUTO, WEBP], placeholder: BLURRED)
+          gatsbyImageData(formats: [WEBP], placeholder: NONE)
         }
         relativePath
       }

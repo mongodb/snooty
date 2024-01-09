@@ -141,7 +141,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       PAGES.push(key);
     }
     const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
-    const slug = assertTrailingSlash(getPageSlug(key));
+    const slug = getPageSlug(key);
     const gatsby_images = val.static_assets.filter((a) => GATSBY_IMAGE_EXTENSIONS.some((ext) => a.key.endsWith(ext)));
     if (gatsby_images?.length) {
       createNode({
