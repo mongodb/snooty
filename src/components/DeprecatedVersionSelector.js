@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { keyBy, isEmpty } from 'lodash';
 import Button from '@leafygreen-ui/button';
+import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
@@ -29,8 +30,9 @@ const isPrimaryBranch = (version) => {
 const prefixVersion = (version) => {
   if (!version) return null;
   // Display as "Version X" on menu if numeric version and remove v from version name
+  //this is old code, might be unecessary with new format of version numbers
   const versionNumber = version.replace('v', '').split()[0];
-  // if branch is 'master' or 'main', show as latest
+  // if branch is 'master' or 'main', show as latest--> do we still want to do this? will this case ever happen? if so, should it still be lower case????
   if (isPrimaryBranch(versionNumber)) {
     return 'latest';
   }
@@ -39,8 +41,8 @@ const prefixVersion = (version) => {
 
 // An unversioned docs site defined as a product with a single
 // option of 'master' or 'main'
-const isVersioned = (versionOptions) => {
-  return !(versionOptions?.length === 1 && isPrimaryBranch(versionOptions[0].value.gitBranchName));
+const isVersioned = (versionChoices) => {
+  return !(versionChoices?.length === 1 && isPrimaryBranch(versionChoices[0].value.gitBranchName));
 };
 
 // Validation for necessary url fields to bypass errors
@@ -148,6 +150,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
           else return null;
         })
         .filter((versionChoice) => !!versionChoice)
+        .sort()
     : [];
 
   return (
@@ -169,8 +172,14 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         onChange={updateVersion}
         value={version}
       />
-      <Button variant="primary" title="View Documentation" href={generateUrl()} disabled={buttonDisabled}>
-        View Documentation
+      <Button
+        variant="primary"
+        title="View Documentation"
+        rightGlyph={version.active ? <Icon glyph="Download" /> : ''}
+        href={generateUrl()}
+        disabled={buttonDisabled}
+      >
+        {version.active ? 'Download Documentation' : 'View Documentation'}
       </Button>
     </>
   );
