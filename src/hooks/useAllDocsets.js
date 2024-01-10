@@ -15,6 +15,12 @@ export const useAllDocsets = () => {
               stg
             }
             project
+            branches {
+              active
+              versionSelectorLabel
+            }
+            hasEolVersions
+            internalOnly
             url {
               dev
               dotcomprd

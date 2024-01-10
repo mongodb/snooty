@@ -40,7 +40,7 @@ const prefixVersion = (version) => {
 // An unversioned docs site defined as a product with a single
 // option of 'master' or 'main'
 const isVersioned = (versionOptions) => {
-  return !(versionOptions.length === 1 && isPrimaryBranch(versionOptions[0]));
+  return !(versionOptions?.length === 1 && isPrimaryBranch(versionOptions[0]));
 };
 
 // Validation for necessary url fields to bypass errors
@@ -67,7 +67,7 @@ const addOldGenToReposMap = (reposMap) => {
 
 const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
   const { reposDatabase } = useSiteMetadata();
-  const reposBranchesBuildData = useAllDocsets();
+  const reposBranchesBuildData = useAllDocsets().filter((project) => !project.internalOnly);
   const reposBranchesBuildDataMap = keyBy(reposBranchesBuildData, 'project');
   const reposBranchesBuildDataMapWithOldGen = addOldGenToReposMap(reposBranchesBuildDataMap);
   const [product, setProduct] = useState('');
@@ -86,7 +86,10 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     if (reposDatabase) {
       fetchDocsets(reposDatabase)
         .then((resp) => {
-          const reposBranchesMap = keyBy(resp, 'project');
+          const reposBranchesMap = keyBy(
+            resp.filter((project) => !project.internalOnly),
+            'project'
+          );
           const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
           if (reposBranchesMap.size > 0) setReposMap(reposBranchesMapWithOldGen);
         })
@@ -120,21 +123,28 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     return `${hostName}/${versionName}`;
   };
 
-  const productChoices = deprecatedVersions
-    ? Object.keys(deprecatedVersions)
-        .map((product) => ({
-          text: reposMap[product]?.displayName,
-          value: product,
-        }))
+  const productChoices = reposMap
+    ? Object.keys(reposMap)
+        .map((product) => {
+          return {
+            text: reposMap[product]?.displayName,
+            value: product,
+          };
+        })
         // Ensure invalid entries do not break selector
-        .filter(({ text }) => !!text)
+        .filter((product) => !!product.text)
     : [];
 
-  const versionChoices = deprecatedVersions[product]
-    ? deprecatedVersions[product].map((version) => ({
-        text: prefixVersion(version),
-        value: version,
-      }))
+  const versionChoices = reposMap[product]?.branches
+    ? reposMap[product].branches
+        .map((version) => {
+          //change this to eol_type
+          return {
+            text: prefixVersion(version.versionSelectorLabel),
+            value: version,
+          };
+        })
+        .filter((versionChoice) => !!versionChoice)
     : [];
 
   return (
