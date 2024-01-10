@@ -17,7 +17,7 @@ export const useAllDocsets = () => {
             project
             branches {
               active
-              versionSelectorLabel
+              gitBranchName
             }
             internalOnly
             url {

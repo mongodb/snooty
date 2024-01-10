@@ -40,7 +40,7 @@ const prefixVersion = (version) => {
 // An unversioned docs site defined as a product with a single
 // option of 'master' or 'main'
 const isVersioned = (versionOptions) => {
-  return !(versionOptions?.length === 1 && isPrimaryBranch(versionOptions[0]));
+  return !(versionOptions?.length === 1 && isPrimaryBranch(versionOptions[0].value.gitBranchName));
 };
 
 // Validation for necessary url fields to bypass errors
@@ -99,6 +99,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     }
   }, [reposDatabase, reposBranchesBuildDataMapWithOldGen]);
 
+  //this can be removed? i dont think its used anywhere
   useEffect(() => {
     if (isBrowser) {
       // Extract the value of 'site' query string from the page url to pre-select product
@@ -118,8 +119,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
 
     // Utilizing hardcoded env because legacy sites are not available on dev/stage
     const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
-    const versionOptions = deprecatedVersions[product];
-    const versionName = isVersioned(versionOptions) ? version : '';
+    const versionName = isVersioned(versionChoices) ? version.gitBranchName : '';
     return `${hostName}/${versionName}`;
   };
 
@@ -136,13 +136,16 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     : [];
 
   const versionChoices = reposMap[product]?.branches
-    ? reposMap[product].branches
+    ? reposMap[product].branches[0]
         .map((version) => {
           //change this to eol_type
-          return {
-            text: prefixVersion(version.versionSelectorLabel),
-            value: version,
-          };
+          if (version.active)
+            return {
+              text: prefixVersion(version.gitBranchName),
+              value: version,
+            };
+          //have some additional check here, a conditional, in case for some reason has_eol is wrong
+          else return null;
         })
         .filter((versionChoice) => !!versionChoice)
     : [];
