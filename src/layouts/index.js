@@ -12,6 +12,7 @@ import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
+import ChatbotBubble from '../components/ChatbotBubble.tsx';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -124,6 +125,7 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
             <div />
           )}
           <ContentTransition slug={slug}>{children}</ContentTransition>
+          {template !== 'landing' && <ChatbotBubble />}
         </GlobalGrid>
       </RootProvider>
     </>
