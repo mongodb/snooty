@@ -13,7 +13,7 @@ export default class Figure extends Component {
     const figWidth = parseInt(getNestedValue(['nodeData', 'options', 'figwidth'], props), 10);
     const imgWidth = parseInt(getNestedValue(['nodeData', 'options', 'width'], props), 10);
     this.state = {
-      isLightboxSize: !figWidth || figWidth / imgWidth < 0.9,
+      isLightboxSize: figWidth && figWidth / imgWidth < 0.9,
     };
   }
 

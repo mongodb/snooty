@@ -3,6 +3,7 @@ public/
 .cache/
 .DS_Store
 static/*
+src/images/*
 # Don't ignore the assets or media directory
 !static/assets
 !static/media

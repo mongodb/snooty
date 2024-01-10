@@ -100,7 +100,8 @@ const Wrapper = styled('main')`
       `}
     }
 
-    > img {
+    > img,
+    > .gatsby-image-wrapper {
       display: block;
       grid-column: 2;
       margin-top: auto;

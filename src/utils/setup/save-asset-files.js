@@ -1,14 +1,18 @@
 const fs = require('fs').promises;
 const path = require('path');
 
+const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
+
 const saveFile = async (file, data) => {
-  await fs.mkdir(path.join('public', path.dirname(file)), {
+  const pathList = GATSBY_IMAGE_EXTENSIONS.some((ext) => file.endsWith(ext)) ? ['src', 'images'] : ['public'];
+  await fs.mkdir(path.join(...pathList, path.dirname(file)), {
     recursive: true,
   });
-  await fs.writeFile(path.join('public', file), data, 'binary');
+  await fs.writeFile(path.join(...pathList, file), data, 'binary');
 };
 
-// Write all assets to static directory
+// Write assets to static directory
+// Or /src directory if they are supported to be processed
 const saveAssetFiles = async (assets, db) => {
   const imageWrites = [];
 
@@ -37,4 +41,4 @@ const saveStaticFiles = async (staticFiles) => {
   );
 };
 
-module.exports = { saveAssetFiles, saveStaticFiles, saveFile };
+module.exports = { saveAssetFiles, saveStaticFiles, saveFile, GATSBY_IMAGE_EXTENSIONS };

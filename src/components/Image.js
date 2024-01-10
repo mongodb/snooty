@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
-import { css } from '@emotion/react';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
+import ImageContext from '../context/image-context';
 import { getNestedValue } from '../utils/get-nested-value';
 
 const Image = ({ nodeData, className }) => {
   const scale = (parseInt(getNestedValue(['options', 'scale'], nodeData), 10) || 100) / 100;
-  const height = getNestedValue(['options', 'height'], nodeData);
-  const width = getNestedValue(['options', 'width'], nodeData);
+  let height = getNestedValue(['options', 'height'], nodeData);
+  let width = getNestedValue(['options', 'width'], nodeData);
+  const loading = getNestedValue(['options', 'loading'], nodeData);
+  const directiveClass = getNestedValue(['options', 'directiveClass'], nodeData);
 
-  const imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
+  let imgSrc = withPrefix(getNestedValue(['argument', 0, 'value'], nodeData));
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
   const imgAlignment = getNestedValue(['options', 'align'], nodeData);
   const customAlign = imgAlignment ? `align-${imgAlignment}` : '';
 
+  const defaultStyling = css`
+    max-width: 100%;
+    height: auto;
+  `;
   const hasBorder = getNestedValue(['options', 'border'], nodeData);
   const borderStyling = css`
     border: 0.5px solid ${palette.gray.light1};
@@ -22,20 +30,43 @@ const Image = ({ nodeData, className }) => {
     border-radius: 4px;
   `;
 
-  const { options: { class: directiveClass } = {} } = nodeData;
+  const { imageByPath } = useContext(ImageContext);
+  const image = imageByPath[imgSrc.slice(1)];
+  // if there is a preprocessed image, use those new values for
+  // src, srcset, width, height
+  let srcSet;
+  if (image) {
+    width = image.width * scale;
+    height = image.height * scale;
+    imgSrc = image.images.fallback.src;
+    srcSet = image.images.fallback.srcSet;
+  } else {
+    width *= scale;
+    height *= scale;
+  }
+
+  if (loading === 'lazy') {
+    // loading option comes from parser. if image is to be lazy loaded, use gatsby image
+    return (
+      <GatsbyImage
+        width={width}
+        height={height}
+        image={image}
+        imgClassName={cx(defaultStyling, hasBorder ? borderStyling : '')}
+        className={[directiveClass, customAlign, className].join(' ')}
+        alt={altText}
+      />
+    );
+  }
 
   return (
     <img
-      src={withPrefix(imgSrc)}
+      src={imgSrc}
+      srcSet={srcSet}
       alt={altText}
-      height={String(height * scale)}
-      width={String(width * scale)}
-      className={[directiveClass, customAlign, className].join(' ')}
-      css={css`
-        ${hasBorder ? borderStyling : ''}
-        max-width: 100%;
-        height: auto;
-      `}
+      height={height}
+      width={width}
+      className={[cx(defaultStyling, hasBorder ? borderStyling : ''), directiveClass, customAlign, className].join(' ')}
     />
   );
 };
