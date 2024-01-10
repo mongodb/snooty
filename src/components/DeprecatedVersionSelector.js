@@ -145,6 +145,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
             return {
               text: prefixVersion(version.gitBranchName),
               value: version,
+              icon: <Icon glyph="Download" />,
             };
           //have some additional check here, a conditional, in case for some reason has_eol is wrong
           else return null;
@@ -171,11 +172,11 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         label="Select a Version"
         onChange={updateVersion}
         value={version}
-      />
+      ></Select>
       <Button
         variant="primary"
-        title="View Documentation"
-        rightGlyph={version.active ? <Icon glyph="Download" /> : ''}
+        title="Download or View Documentation"
+        rightGlyph={version?.active ? <Icon glyph="Download" /> : null}
         href={generateUrl()}
         disabled={buttonDisabled}
       >
