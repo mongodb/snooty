@@ -14,7 +14,7 @@ const Image = ({ nodeData, className }) => {
   const loading = getNestedValue(['options', 'loading'], nodeData);
   const directiveClass = getNestedValue(['options', 'directiveClass'], nodeData);
 
-  let imgSrc = withPrefix(getNestedValue(['argument', 0, 'value'], nodeData));
+  let imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
   const imgAlignment = getNestedValue(['options', 'align'], nodeData);
   const customAlign = imgAlignment ? `align-${imgAlignment}` : '';
@@ -43,6 +43,7 @@ const Image = ({ nodeData, className }) => {
   } else {
     width *= scale;
     height *= scale;
+    imgSrc = withPrefix(imgSrc);
   }
 
   if (loading === 'lazy') {
