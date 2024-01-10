@@ -9,8 +9,8 @@ import { getNestedValue } from '../utils/get-nested-value';
 
 const Image = ({ nodeData, className }) => {
   const scale = (parseInt(getNestedValue(['options', 'scale'], nodeData), 10) || 100) / 100;
+  const widthOption = getNestedValue(['options', 'width'], nodeData);
   let height = getNestedValue(['options', 'height'], nodeData);
-  let width = getNestedValue(['options', 'width'], nodeData);
   const loading = getNestedValue(['options', 'loading'], nodeData);
   const directiveClass = getNestedValue(['options', 'directiveClass'], nodeData);
 
@@ -26,7 +26,6 @@ const Image = ({ nodeData, className }) => {
   const hasBorder = getNestedValue(['options', 'border'], nodeData);
   const borderStyling = css`
     border: 0.5px solid ${palette.gray.light1};
-    width: 100%;
     border-radius: 4px;
   `;
 
@@ -34,7 +33,7 @@ const Image = ({ nodeData, className }) => {
   const image = imageByPath[imgSrc.slice(1)];
   // if there is a preprocessed image, use those new values for
   // src, srcset, width, height
-  let srcSet;
+  let srcSet, width;
   if (image) {
     width = image.width * scale;
     height = image.height * scale;
@@ -44,6 +43,11 @@ const Image = ({ nodeData, className }) => {
     width *= scale;
     height *= scale;
     imgSrc = withPrefix(imgSrc);
+  }
+
+  const userOptionStyle = {};
+  if (widthOption?.endsWith('px')) {
+    userOptionStyle['width'] = widthOption;
   }
 
   if (loading === 'lazy') {
@@ -56,6 +60,7 @@ const Image = ({ nodeData, className }) => {
         imgClassName={cx(defaultStyling, hasBorder ? borderStyling : '')}
         className={[directiveClass, customAlign, className].join(' ')}
         alt={altText}
+        style={userOptionStyle}
       />
     );
   }
@@ -67,6 +72,7 @@ const Image = ({ nodeData, className }) => {
       alt={altText}
       height={height}
       width={width}
+      style={userOptionStyle}
       className={[cx(defaultStyling, hasBorder ? borderStyling : ''), directiveClass, customAlign, className].join(' ')}
     />
   );
