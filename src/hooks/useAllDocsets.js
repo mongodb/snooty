@@ -19,7 +19,6 @@ export const useAllDocsets = () => {
               active
               versionSelectorLabel
             }
-            hasEolVersions
             internalOnly
             url {
               dev
