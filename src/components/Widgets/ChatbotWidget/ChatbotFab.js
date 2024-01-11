@@ -76,7 +76,8 @@ const ChatbotFab = () => {
   ];
   return (
     <StyledChatBotFabContainer
-    // style={{ display: 'none' }}
+    // Inline style to default hide Chatbot FAB, Optimizely to flip this on client-side
+    // style={{ display: 'none' }} // TODO: uncomment line below
     >
       <Suspense fallback={null}>
         <Chatbot className={fabChatbot}>
