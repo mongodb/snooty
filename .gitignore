@@ -11,6 +11,4 @@ coverage/
 .coverage
 .env.*
 .vscode/
-.npmrc
-.nvmrc
 .env
