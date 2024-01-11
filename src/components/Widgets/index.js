@@ -11,17 +11,10 @@ const WidgetsContainer = styled.div`
   flex-direction: column;
   justify-content: end;
   align-items: end;
-<<<<<<< HEAD
   gap: ${theme.size.small};
   position: fixed;
   right: ${theme.size.large};
   bottom: ${theme.size.large};
-=======
-  gap: 8px;
-  position: fixed;
-  right: 32px;
-  bottom: 32px;
->>>>>>> 2439c86 (layout of chatbot fab and feedback fab)
 
   @media ${theme.screenSize.upToSmall} {
     background-color: white;
@@ -33,10 +26,7 @@ const WidgetsContainer = styled.div`
     box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.25);
     right: 0;
     bottom: 0;
-<<<<<<< HEAD
     min-width: max-content;
-=======
->>>>>>> 2439c86 (layout of chatbot fab and feedback fab)
 
     > button {
       height: 44px;
@@ -62,7 +52,6 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
     <FeedbackProvider page={feedbackData} hideHeader={hideFeedbackHeader}>
       {children}
       {!isInPresentationMode && !hideFeedback && (
-<<<<<<< HEAD
         /* Suspense at this level ensures that widgets will appear simultaneously rather than one-by-one as loaded */
         <Suspense fallback={null}>
           <WidgetsContainer className={widgetsContainer}>
@@ -71,13 +60,6 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
             {template !== 'landing' && <ChatbotFab />}
           </WidgetsContainer>
         </Suspense>
-=======
-        <WidgetsContainer>
-          <FeedbackButton />
-          <FeedbackForm />
-          {template !== 'landing' && <ChatbotFab />}
-        </WidgetsContainer>
->>>>>>> 2439c86 (layout of chatbot fab and feedback fab)
       )}
     </FeedbackProvider>
   );
