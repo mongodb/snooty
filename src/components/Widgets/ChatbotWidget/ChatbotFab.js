@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react';
 import styled from '@emotion/styled';
-import { theme } from '../../../theme/docsTheme';
 
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 
@@ -21,10 +20,6 @@ const StyledChatBotFabContainer = styled.div`
     bottom: 32px;
     border-width: 1px;
     position: unset;
-
-    /* @media ${theme.screenSize.upToSmall} {
-      position: unset;
-    } */
   }
 `;
 
@@ -36,8 +31,10 @@ const ChatbotFab = () => {
   ];
   return (
     <StyledChatBotFabContainer
-    // Inline style to default hide Chatbot FAB, Optimizely to flip this on client-side
-    // style={{ display: 'none' }} // TODO: uncomment line below
+      // Inline style to default hide Chatbot FAB, Optimizely to flip this on client-side
+      // style={{ display: 'none' }} // TODO: uncomment line before merge
+      // Classname below for Optimizely A/B testing
+      className="chatbot-fab"
     >
       <Suspense fallback={null}>
         <Chatbot className={fabChatbot}>

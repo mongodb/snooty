@@ -51,7 +51,7 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
     <FeedbackProvider page={feedbackData} hideHeader={hideFeedbackHeader}>
       {children}
       {!isInPresentationMode && !hideFeedback && (
-        <WidgetsContainer>
+        <WidgetsContainer className={widgetsContainer}>
           <FeedbackButton />
           <FeedbackForm />
           {template !== 'landing' && <ChatbotFab />}
@@ -76,4 +76,5 @@ Widgets.defaultProps = {
   pageOptions: {},
 };
 
+export const widgetsContainer = 'widgets';
 export default Widgets;
