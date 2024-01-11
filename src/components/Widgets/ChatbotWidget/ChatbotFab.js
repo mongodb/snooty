@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import { lazy } from 'react';
 import styled from '@emotion/styled';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
+=======
+import { lazy, Suspense } from 'react';
+import styled from '@emotion/styled';
+import { theme } from '../../../theme/docsTheme';
+>>>>>>> 2439c86 (layout of chatbot fab and feedback fab)
 
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 
@@ -17,12 +23,24 @@ const StyledChatBotFabContainer = styled.div`
     display: none;
   }
   > button {
+<<<<<<< HEAD
     border-width: 1px;
     position: unset;
+=======
+    right: 32px;
+    bottom: 32px;
+    border-width: 1px;
+    position: unset;
+
+    /* @media ${theme.screenSize.upToSmall} {
+      position: unset;
+    } */
+>>>>>>> 2439c86 (layout of chatbot fab and feedback fab)
   }
 `;
 
 const ChatbotFab = () => {
+<<<<<<< HEAD
   const { snootyEnv } = useSiteMetadata();
 
   const suggestedPrompts = [
@@ -50,10 +68,34 @@ const ChatbotFab = () => {
           showDisclaimer
         />
       </Chatbot>
+=======
+  const suggestedPrompts = [
+    'How do I create a new MongoDB Atlas cluster?',
+    'Can MongoDB store lists of data?',
+    'How does vector search work?',
+  ];
+  return (
+    <StyledChatBotFabContainer
+    // style={{ display: 'none' }}
+    >
+      <Suspense fallback={null}>
+        <Chatbot className={fabChatbot}>
+          <InputBarTrigger suggestedPrompts={suggestedPrompts} />
+          <FloatingActionButtonTrigger text="Ask MongoDB AI" />
+          <ModalView
+            initialMessageText="Welcome to MongoDB AI Assistant. What can I help you with?"
+            initialMessageSuggestedPrompts={suggestedPrompts}
+          />
+        </Chatbot>
+      </Suspense>
+>>>>>>> 2439c86 (layout of chatbot fab and feedback fab)
     </StyledChatBotFabContainer>
   );
 };
 
 export const fabChatbot = 'fab-chatbot';
+<<<<<<< HEAD
 export const CHATBOT_WIDGET_TEXT = 'Ask MongoDB AI';
+=======
+>>>>>>> 2439c86 (layout of chatbot fab and feedback fab)
 export default ChatbotFab;
