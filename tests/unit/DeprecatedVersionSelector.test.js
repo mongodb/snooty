@@ -19,32 +19,47 @@ const mockedReposBranches = [
   {
     project: 'docs',
     displayName: 'MongoDB Manual',
+    hasEolVersions: true,
     url: {
       dotcomprd: 'https://mongodb.com/',
     },
     prefix: {
       dotcomprd: 'docs',
     },
+    branches: [
+      [
+        { active: true, gitBranchName: 'v2.2' },
+        { active: true, gitBranchName: 'v2.4' },
+        { active: true, gitBranchName: 'v2.6' },
+        { active: true, gitBranchName: 'v3.0' },
+        { active: true, gitBranchName: 'v3.2' },
+        { active: true, gitBranchName: 'v3.4' },
+      ],
+    ],
   },
   {
     project: 'mongocli',
     displayName: 'MongoDB Command Line Interface',
+    hasEolVersions: true,
     url: {
       dotcomprd: 'https://mongodb.com/',
     },
     prefix: {
       dotcomprd: 'docs/mongocli',
     },
+    branches: [[{ active: true, eol_type: 'download', gitBranchName: 'v0.5.0' }]],
   },
   {
     project: 'atlas-open-service-broker',
     displayName: 'MongoDB Atlas Open Service Broker on Kubernetes',
+    hasEolVersions: true,
     url: {
       dotcomprd: 'https://mongodb.com/',
     },
     prefix: {
       dotcomprd: 'docs/atlas-open-service-broker',
     },
+    branches: [[{ active: true, eol_type: 'download', gitBranchName: 'master' }]],
   },
 ];
 
@@ -82,7 +97,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
   it('shows a disabled submit button', async () => {
     wrapper = render(<DeprecatedVersionSelector metadata={metadata} />);
 
-    const button = await wrapper.findByTitle('View Documentation');
+    const button = await wrapper.findByTitle('View or Download Documentation');
     expect(button).toBeTruthy();
     expect(button).toHaveAttribute('aria-disabled', 'true');
   });
@@ -157,7 +172,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
       const versionOption = await wrapper.findByText(versionSelection);
       userEvent.click(versionOption);
 
-      const button = await wrapper.findByTitle('View Documentation');
+      const button = await wrapper.findByTitle('View or Download Documentation');
       expect(button).toHaveAttribute('aria-disabled', 'false');
       expect(button.href).toEqual(expectedUrl);
     });

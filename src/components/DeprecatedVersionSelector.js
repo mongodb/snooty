@@ -129,7 +129,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     return product1.text.localeCompare(product2.text);
   };
 
- const productChoices = reposMap
+  const productChoices = reposMap
     ? Object.keys(reposMap)
         .map((product) => {
           return {
@@ -142,8 +142,8 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         .sort(alphabetize)
     : [];
 
-  const versionChoices = reposMap[product]?.branches
-    ? reposMap[product].branches[0]
+  const versionChoices = reposMap[product]?.branches[0]
+    ? reposMap[product]?.branches[0]
         .map((version) => {
           //change this to eol_type
           if (version.active)
@@ -180,7 +180,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
       ></Select>
       <Button
         variant="primary"
-        title="Download or View Documentation"
+        title="View or Download Documentation"
         rightGlyph={version?.active ? <Icon glyph="Download" /> : null}
         href={generateUrl()}
         disabled={buttonDisabled}
