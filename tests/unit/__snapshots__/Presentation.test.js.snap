@@ -774,10 +774,7 @@ exports[`DocumentBody renders the necessary elements 2`] = `
   border: 1px solid #0498EC;
   border-radius: 40px;
   box-shadow: 0px 4px 10px -4px #E8EDEB;
-  position: fixed;
   z-index: 9;
-  bottom: 32px;
-  right: 32px;
   color: #1254B7;
   font-weight: 600;
   font-size: 13px;
