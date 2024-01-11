@@ -30,11 +30,10 @@ const isPrimaryBranch = (version) => {
 const prefixVersion = (version) => {
   if (!version) return null;
   // Display as "Version X" on menu if numeric version and remove v from version name
-  //this is old code, might be unecessary with new format of version numbers
   const versionNumber = version.replace('v', '').split()[0];
   // if branch is 'master' or 'main', show as latest--> do we still want to do this? will this case ever happen? if so, should it still be lower case????
   if (isPrimaryBranch(versionNumber)) {
-    return 'latest';
+    return 'Latest';
   }
   return `Version ${versionNumber}`;
 };
@@ -51,30 +50,13 @@ const hasValidHostName = (repoDocument) => {
   return true;
 };
 
-// Add mms-docs to reposMap. It does not have a document in repos_branches collection.
-// TODO: Remove when mms-docs is added to repos_branches
-const addOldGenToReposMap = (reposMap) => {
-  const oldGenRepos = {
-    mms: {
-      displayName: 'MongoDB Ops Manager',
-      url: { dotcomprd: 'http://mongodb.com/' },
-      prefix: { dotcomprd: 'docs/ops-manager' },
-    },
-  };
-  return {
-    ...oldGenRepos,
-    ...reposMap,
-  };
-};
-
 const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
   const { reposDatabase } = useSiteMetadata();
-  const reposBranchesBuildData = useAllDocsets().filter((project) => !project.internalOnly);
+  const reposBranchesBuildData = useAllDocsets().filter((project) => !!project.hasEolVersions);
   const reposBranchesBuildDataMap = keyBy(reposBranchesBuildData, 'project');
-  const reposBranchesBuildDataMapWithOldGen = addOldGenToReposMap(reposBranchesBuildDataMap);
   const [product, setProduct] = useState('');
   const [version, setVersion] = useState('');
-  const [reposMap, setReposMap] = useState(reposBranchesBuildDataMapWithOldGen);
+  const [reposMap, setReposMap] = useState(reposBranchesBuildDataMap);
 
   const updateProduct = useCallback(({ value }) => {
     setProduct(value);
@@ -83,23 +65,22 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   const updateVersion = useCallback(({ value }) => setVersion(value), []);
   const buttonDisabled = !(product && version);
 
-  // Fetch docsets for url and combine `displayName` from oldGenToReposMap method
+  // Fetch docsets for url
   useEffect(() => {
     if (reposDatabase) {
       fetchDocsets(reposDatabase)
         .then((resp) => {
           const reposBranchesMap = keyBy(
-            resp.filter((project) => !project.internalOnly),
+            resp.filter((project) => !!project.hasEolVersions),
             'project'
           );
-          const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
-          if (reposBranchesMap.size > 0) setReposMap(reposBranchesMapWithOldGen);
+          if (reposBranchesMap.size > 0) setReposMap(reposBranchesMap);
         })
         .catch((error) => {
           console.error(`ERROR: could not access ${reposDatabase} for dropdown data.`);
         });
     }
-  }, [reposDatabase, reposBranchesBuildDataMapWithOldGen]);
+  }, [reposDatabase]);
 
   //this can be removed? i dont think its used anywhere
   useEffect(() => {
@@ -142,17 +123,16 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         .sort(alphabetize)
     : [];
 
-  const versionChoices = reposMap[product]?.branches[0]
-    ? reposMap[product]?.branches[0]
+  const versionChoices = reposMap[product]?.branches
+    ? reposMap[product]?.branches
         .map((version) => {
           //change this to eol_type
-          if (version.active)
+          if (!!version.eol_type)
             return {
               text: prefixVersion(version.gitBranchName),
               value: version,
-              icon: <Icon glyph="Download" />,
+              icon: version.eol_type === 'download' ? <Icon glyph="Download" /> : '',
             };
-          //have some additional check here, a conditional, in case for some reason has_eol is wrong
           else return null;
         })
         .filter((versionChoice) => !!versionChoice)
@@ -181,11 +161,11 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
       <Button
         variant="primary"
         title="View or Download Documentation"
-        rightGlyph={version?.active ? <Icon glyph="Download" /> : null}
+        rightGlyph={version?.eol_type === 'download' ? <Icon glyph="Download" /> : ''}
         href={generateUrl()}
         disabled={buttonDisabled}
       >
-        {version.active ? 'Download Documentation' : 'View Documentation'}
+        {version?.eol_type === 'download' ? 'Download Documentation' : 'View Documentation'}
       </Button>
     </>
   );

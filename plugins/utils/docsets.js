@@ -13,7 +13,8 @@ const createDocsetNodes = async ({ db, createNode, createNodeId, createContentDi
       prefix: docset.prefix,
       project: docset.project,
       url: docset.url,
-      branches: [docset.branches],
+      branches: docset.branches,
+      hasEolVersions: docset.hasEolVersions,
       internalOnly: docset.internalOnly,
     });
   });

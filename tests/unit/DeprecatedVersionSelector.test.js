@@ -27,14 +27,12 @@ const mockedReposBranches = [
       dotcomprd: 'docs',
     },
     branches: [
-      [
-        { active: true, gitBranchName: 'v2.2' },
-        { active: true, gitBranchName: 'v2.4' },
-        { active: true, gitBranchName: 'v2.6' },
-        { active: true, gitBranchName: 'v3.0' },
-        { active: true, gitBranchName: 'v3.2' },
-        { active: true, gitBranchName: 'v3.4' },
-      ],
+      { eol_type: 'link', gitBranchName: 'v2.2' },
+      { eol_type: 'download', gitBranchName: 'v2.4' },
+      { eol_type: 'link', gitBranchName: 'v2.6' },
+      { eol_type: 'link', gitBranchName: 'v3.0' },
+      { eol_type: 'download', gitBranchName: 'v3.2' },
+      { eol_type: 'download', gitBranchName: 'v3.4' },
     ],
   },
   {
@@ -47,7 +45,7 @@ const mockedReposBranches = [
     prefix: {
       dotcomprd: 'docs/mongocli',
     },
-    branches: [[{ active: true, eol_type: 'download', gitBranchName: 'v0.5.0' }]],
+    branches: [{ eol_type: 'download', gitBranchName: 'v0.5.0' }],
   },
   {
     project: 'atlas-open-service-broker',
@@ -59,7 +57,7 @@ const mockedReposBranches = [
     prefix: {
       dotcomprd: 'docs/atlas-open-service-broker',
     },
-    branches: [[{ active: true, eol_type: 'download', gitBranchName: 'master' }]],
+    branches: [{ eol_type: 'download', gitBranchName: 'master' }],
   },
 ];
 
@@ -157,7 +155,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
       ['MongoDB Command Line Interface', 'Version 0.5.0', 'https://mongodb.com/docs/mongocli/v0.5.0'],
       [
         'MongoDB Atlas Open Service Broker on Kubernetes',
-        'latest',
+        'Latest',
         'https://mongodb.com/docs/atlas-open-service-broker/',
       ],
     ])('generates the correct docs URL', async (product, versionSelection, expectedUrl) => {
@@ -190,7 +188,6 @@ describe('DeprecatedVersionSelector when rendered', () => {
       userEvent.click(productDropdown);
 
       expect(wrapper.findByText('MongoDB Manual')).toBeTruthy();
-      expect(wrapper.findByText('MongoDB Ops Manager')).toBeTruthy();
       expect(wrapper.findByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
     });
   });

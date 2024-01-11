@@ -16,10 +16,11 @@ export const useAllDocsets = () => {
             }
             project
             branches {
-              active
               gitBranchName
+              eol_type
             }
             internalOnly
+            hasEolVersions
             url {
               dev
               dotcomprd
