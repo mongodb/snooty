@@ -1,9 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 import { isBrowser } from '../../utils/is-browser';
+import { theme } from '../../theme/docsTheme';
 import { FeedbackProvider, FeedbackForm, FeedbackButton, useFeedbackData } from './FeedbackWidget';
+import ChatbotFab from './ChatbotWidget/ChatbotFab';
 
-const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, isInPresentationMode }) => {
+const WidgetsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+  gap: 8px;
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+
+  @media ${theme.screenSize.upToSmall} {
+    background-color: white;
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.25);
+    right: 0;
+    bottom: 0;
+
+    > button {
+      height: 44px;
+      position: unset;
+    }
+  }
+`;
+
+const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, isInPresentationMode, template }) => {
   const url = isBrowser ? window.location.href : null;
   const hideFeedbackHeader = pageOptions.hidefeedback === 'header';
   const feedbackData = useFeedbackData({
@@ -20,10 +51,11 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
     <FeedbackProvider page={feedbackData} hideHeader={hideFeedbackHeader}>
       {children}
       {!isInPresentationMode && !hideFeedback && (
-        <>
+        <WidgetsContainer>
           <FeedbackButton />
           <FeedbackForm />
-        </>
+          {template !== 'landing' && <ChatbotFab />}
+        </WidgetsContainer>
       )}
     </FeedbackProvider>
   );

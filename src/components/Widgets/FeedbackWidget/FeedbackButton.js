@@ -16,10 +16,7 @@ const containerStyle = css`
   border: 1px solid ${palette.blue.light1};
   border-radius: 40px;
   box-shadow: 0px 4px 10px -4px ${palette.gray.light2};
-  position: fixed;
   z-index: 9;
-  bottom: ${theme.size.large};
-  right: ${theme.size.large};
   color: ${palette.blue.dark1};
   font-weight: 600;
   font-size: 13px;
