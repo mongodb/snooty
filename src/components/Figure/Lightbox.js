@@ -52,8 +52,7 @@ const Lightbox = ({ nodeData, ...rest }) => {
   const [open, setOpen] = useState(false);
   const figureWidth = nodeData.options?.figwidth || 'auto';
   const openModal = useCallback(() => {
-    setOpen(!open);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setOpen((prevOpen) => !prevOpen);
   }, []);
 
   return (
