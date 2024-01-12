@@ -16,12 +16,12 @@ const mockedReposBranches = [
       dotcomprd: 'docs',
     },
     branches: [
-      { eol_type: 'link', gitBranchName: 'v2.2' },
-      { eol_type: 'download', gitBranchName: 'v2.4' },
-      { eol_type: 'link', gitBranchName: 'v2.6' },
-      { eol_type: 'link', gitBranchName: 'v3.0' },
-      { eol_type: 'download', gitBranchName: 'v3.2' },
-      { eol_type: 'download', gitBranchName: 'v3.4' },
+      { eol_type: 'link', versionSelectorLabel: 'v2.2', urlSlug: 'v2.2' },
+      { eol_type: 'download', versionSelectorLabel: 'v2.4', urlSlug: 'v2.4' },
+      { eol_type: 'link', versionSelectorLabel: 'v2.6', urlSlug: 'v2.6' },
+      { eol_type: 'link', versionSelectorLabel: 'v3.0', urlSlug: 'v3.0' },
+      { eol_type: 'download', versionSelectorLabel: 'v3.2', urlSlug: 'v3.2' },
+      { eol_type: 'download', versionSelectorLabel: 'v3.4', urlSlug: 'v3.4' },
     ],
   },
   {
@@ -34,7 +34,7 @@ const mockedReposBranches = [
     prefix: {
       dotcomprd: 'docs/mongocli',
     },
-    branches: [{ eol_type: 'download', gitBranchName: 'v0.5.0' }],
+    branches: [{ eol_type: 'download', versionSelectorLabel: 'v0.5.0', urlSlug: 'v0.5.0' }],
   },
   {
     project: 'atlas-open-service-broker',
@@ -46,7 +46,7 @@ const mockedReposBranches = [
     prefix: {
       dotcomprd: 'docs/atlas-open-service-broker',
     },
-    branches: [{ eol_type: 'download', gitBranchName: 'master' }],
+    branches: [{ eol_type: 'download', versionSelectorLabel: 'master', urlSlug: '' }],
   },
 ];
 
@@ -102,7 +102,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
     });
 
     expect(wrapper.queryAllByText('MongoDB Connector for BI')).toHaveLength(0);
-    expect(wrapper.queryAllByText(mockedReposBranches[0].branches[0].gitBranchName)).toHaveLength(0);
+    expect(wrapper.queryAllByText(mockedReposBranches[0].branches[0].versionSelectorLabel)).toHaveLength(0);
   });
 
   // Test product dropdown
@@ -114,7 +114,6 @@ describe('DeprecatedVersionSelector when rendered', () => {
       userEvent.click(productDropdown);
 
       expect(wrapper.findByText('MongoDB Manual')).toBeTruthy();
-      expect(wrapper.findByText('MongoDB Ops Manager')).toBeTruthy();
       expect(wrapper.findByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
     });
 

@@ -30,17 +30,11 @@ const prefixVersion = (version) => {
   if (!version) return null;
   // Display as "Version X" on menu if numeric version and remove v from version name
   const versionNumber = version.replace('v', '').split()[0];
-  // if branch is 'master' or 'main', show as latest--> do we still want to do this? will this case ever happen? if so, should it still be lower case????
+  // if branch is 'master' or 'main', show as latest
   if (isPrimaryBranch(versionNumber)) {
     return 'Latest';
   }
   return `Version ${versionNumber}`;
-};
-
-// An unversioned docs site defined as a product with a single
-// option of 'master' or 'main'
-const isVersioned = (versionChoices) => {
-  return !(versionChoices?.length === 1 && isPrimaryBranch(versionChoices[0].value.gitBranchName));
 };
 
 // Validation for necessary url fields to bypass errors
@@ -79,7 +73,7 @@ const DeprecatedVersionSelector = () => {
           console.error(`ERROR: could not access ${reposDatabase} for dropdown data.`);
         });
     }
-  }, [reposDatabase]);
+  }, [reposDatabase, reposBranchesBuildDataMap]);
 
   useEffect(() => {
     if (isBrowser) {
@@ -100,8 +94,7 @@ const DeprecatedVersionSelector = () => {
 
     // Utilizing hardcoded env because legacy sites are not available on dev/stage
     const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
-    const versionName = isVersioned(versionChoices) ? version.gitBranchName : '';
-    return `${hostName}/${versionName}`;
+    return `${hostName}/${version.urlSlug}`;
   };
 
   const alphabetize = (product1, product2) => {
@@ -110,30 +103,31 @@ const DeprecatedVersionSelector = () => {
 
   const productChoices = reposMap
     ? Object.keys(reposMap)
-        .map((product) => {
-          return {
-            text: reposMap[product]?.displayName,
-            value: product,
-          };
-        })
+        .map((product) => ({
+          text: reposMap[product]?.displayName,
+          value: product,
+        }))
         // Ensure invalid entries do not break selector
         .filter(({ text }) => !!text)
+        //sort entries alphabetically by text
         .sort(alphabetize)
     : [];
 
   const versionChoices = reposMap[product]?.branches
     ? reposMap[product]?.branches
         .map((version) => {
-          //change this to eol_type
-          if (!!version.eol_type)
+          //only include versions with an eol_type field
+          if (!!version.eol_type) {
             return {
-              text: prefixVersion(version.gitBranchName),
+              text: prefixVersion(version.versionSelectorLabel),
               value: version,
-              icon: version.eol_type === 'download' ? <Icon glyph="Download" /> : '',
+              icon: version.eol_type === 'download' ? <Icon glyph="Download" /> : null,
             };
-          else return null;
+          } else return null;
         })
+        //Ensure versions set to null are not included and do not break selector
         .filter((versionChoice) => !!versionChoice)
+        //sort entries alphabetically by text
         .sort(alphabetize)
     : [];
 
@@ -159,7 +153,7 @@ const DeprecatedVersionSelector = () => {
       <Button
         variant="primary"
         title="View or Download Documentation"
-        rightGlyph={version?.eol_type === 'download' ? <Icon glyph="Download" /> : ''}
+        rightGlyph={version?.eol_type === 'download' ? <Icon glyph="Download" /> : null}
         href={generateUrl()}
         disabled={buttonDisabled}
       >
