@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { keyBy, isEmpty } from 'lodash';
 import Button from '@leafygreen-ui/button';
@@ -50,7 +49,7 @@ const hasValidHostName = (repoDocument) => {
   return true;
 };
 
-const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
+const DeprecatedVersionSelector = () => {
   const { reposDatabase } = useSiteMetadata();
   const reposBranchesBuildData = useAllDocsets().filter((project) => !!project.hasEolVersions);
   const reposBranchesBuildDataMap = keyBy(reposBranchesBuildData, 'project');
@@ -82,16 +81,15 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
     }
   }, [reposDatabase]);
 
-  //this can be removed? i dont think its used anywhere
   useEffect(() => {
     if (isBrowser) {
       // Extract the value of 'site' query string from the page url to pre-select product
       const { site } = queryString.parse(window.location.search);
-      if (site && Object.keys(deprecatedVersions).includes(site)) {
+      if (site && Object.keys(reposMap).includes(site)) {
         setProduct(site);
       }
     }
-  }, [deprecatedVersions]);
+  }, [reposMap]);
 
   const generateUrl = () => {
     // Our current LG button version has a bug where a disabled button with an href allows the disabled
@@ -136,7 +134,7 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
           else return null;
         })
         .filter((versionChoice) => !!versionChoice)
-        .sort()
+        .sort(alphabetize)
     : [];
 
   return (
@@ -171,8 +169,6 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
   );
 };
 
-DeprecatedVersionSelector.propTypes = {
-  metadata: PropTypes.object.isRequired,
-};
+DeprecatedVersionSelector.propTypes = {};
 
 export default DeprecatedVersionSelector;
