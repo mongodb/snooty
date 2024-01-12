@@ -11,10 +11,10 @@ const WidgetsContainer = styled.div`
   flex-direction: column;
   justify-content: end;
   align-items: end;
-  gap: 8px;
+  gap: ${theme.size.small};
   position: fixed;
-  right: 32px;
-  bottom: 32px;
+  right: ${theme.size.large};
+  bottom: ${theme.size.large};
 
   @media ${theme.screenSize.upToSmall} {
     background-color: white;
@@ -26,6 +26,7 @@ const WidgetsContainer = styled.div`
     box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.25);
     right: 0;
     bottom: 0;
+    min-width: max-content;
 
     > button {
       height: 44px;

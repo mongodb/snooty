@@ -34,15 +34,16 @@ const ChatbotFab = () => {
       // Inline style to default hide Chatbot FAB, Optimizely to flip this on client-side
       // style={{ display: 'none' }} // TODO: uncomment line before merge
       // Classname below for Optimizely A/B testing
-      className="chatbot-fab"
+      className={fabChatbot}
     >
       <Suspense fallback={null}>
-        <Chatbot className={fabChatbot}>
+        <Chatbot>
           <InputBarTrigger suggestedPrompts={suggestedPrompts} />
           <FloatingActionButtonTrigger text="Ask MongoDB AI" />
           <ModalView
             initialMessageText="Welcome to MongoDB AI Assistant. What can I help you with?"
             initialMessageSuggestedPrompts={suggestedPrompts}
+            showDisclaimer
           />
         </Chatbot>
       </Suspense>

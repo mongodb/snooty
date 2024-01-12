@@ -64,6 +64,11 @@ const globalCSS = css`
   }
 
   ${footerOverrides}
+
+  /* To ensure the Chatbot ModalView has precedence over the consistent-nav */
+  div[id^=modal-] {
+    z-index: 1000 !important;
+  }
 `;
 
 const GlobalGrid = styled('div')`
