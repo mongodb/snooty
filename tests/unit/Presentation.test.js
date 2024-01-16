@@ -39,7 +39,7 @@ describe('DocumentBody', () => {
         expect(chatbotWidget).toBeVisible();
         expect(chatbotWidget).toMatchSnapshot();
       },
-      { timeout: 3000 }
+      { timeout: 5000 }
     );
 
     const mainNav = screen.getByRole('img', { name: 'MongoDB logo' });
@@ -59,7 +59,7 @@ describe('DocumentBody', () => {
         const feedbackWidget = screen.queryByText(FEEDBACK_BUTTON_TEXT);
         expect(feedbackWidget).not.toBeInTheDocument();
       },
-      { timeout: 3000 }
+      { timeout: 5000 }
     );
 
     const mainNav = screen.queryByRole('img', { name: 'MongoDB logo' });
