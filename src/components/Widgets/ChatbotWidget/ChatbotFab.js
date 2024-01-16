@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy } from 'react';
 import styled from '@emotion/styled';
 
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
@@ -36,17 +36,15 @@ const ChatbotFab = () => {
       // Classname below for Optimizely A/B testing
       className={fabChatbot}
     >
-      <Suspense fallback={null}>
-        <Chatbot>
-          <InputBarTrigger suggestedPrompts={suggestedPrompts} />
-          <FloatingActionButtonTrigger text="Ask MongoDB AI" />
-          <ModalView
-            initialMessageText="Welcome to MongoDB AI Assistant. What can I help you with?"
-            initialMessageSuggestedPrompts={suggestedPrompts}
-            showDisclaimer
-          />
-        </Chatbot>
-      </Suspense>
+      <Chatbot>
+        <InputBarTrigger suggestedPrompts={suggestedPrompts} />
+        <FloatingActionButtonTrigger text="Ask MongoDB AI" />
+        <ModalView
+          initialMessageText="Welcome to MongoDB AI Assistant. What can I help you with?"
+          initialMessageSuggestedPrompts={suggestedPrompts}
+          showDisclaimer
+        />
+      </Chatbot>
     </StyledChatBotFabContainer>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { isBrowser } from '../../utils/is-browser';
@@ -52,11 +52,13 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
     <FeedbackProvider page={feedbackData} hideHeader={hideFeedbackHeader}>
       {children}
       {!isInPresentationMode && !hideFeedback && (
-        <WidgetsContainer className={widgetsContainer}>
-          <FeedbackButton />
-          <FeedbackForm />
-          {template !== 'landing' && <ChatbotFab />}
-        </WidgetsContainer>
+        <Suspense fallback={null}>
+          <WidgetsContainer className={widgetsContainer}>
+            <FeedbackButton />
+            <FeedbackForm />
+            {template !== 'landing' && <ChatbotFab />}
+          </WidgetsContainer>
+        </Suspense>
       )}
     </FeedbackProvider>
   );
