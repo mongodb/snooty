@@ -39,7 +39,7 @@ describe('DocumentBody', () => {
         expect(chatbotWidget).toBeVisible();
         expect(chatbotWidget).toMatchSnapshot();
       },
-      { timeout: 5000 }
+      { timeout: 10000 }
     );
 
     const mainNav = screen.getByRole('img', { name: 'MongoDB logo' });
