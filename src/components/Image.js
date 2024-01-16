@@ -60,7 +60,7 @@ const Image = ({ nodeData, className }) => {
         alt={altText}
         style={userOptionStyle}
         imgClassName={cx(defaultStyling, hasBorder ? borderStyling : '')}
-        className={[directiveClass, customAlign, className].join(' ')}
+        className={cx(directiveClass, customAlign, className)}
       />
     );
   }
