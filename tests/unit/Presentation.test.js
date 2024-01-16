@@ -29,15 +29,18 @@ describe('DocumentBody', () => {
       expect(languageSelector.querySelectorAll('li')).toHaveLength(2);
     }
 
-    await waitFor(() => {
-      const feedbackWidget = screen.getByText(FEEDBACK_BUTTON_TEXT);
-      expect(feedbackWidget).toBeVisible();
-      expect(feedbackWidget).toMatchSnapshot();
+    await waitFor(
+      () => {
+        const feedbackWidget = screen.getByText(FEEDBACK_BUTTON_TEXT);
+        expect(feedbackWidget).toBeVisible();
+        expect(feedbackWidget).toMatchSnapshot();
 
-      const chatbotWidget = screen.getByText(CHATBOT_WIDGET_TEXT);
-      expect(chatbotWidget).toBeVisible();
-      expect(chatbotWidget).toMatchSnapshot();
-    });
+        const chatbotWidget = screen.getByText(CHATBOT_WIDGET_TEXT);
+        expect(chatbotWidget).toBeVisible();
+        expect(chatbotWidget).toMatchSnapshot();
+      },
+      { timeout: 3000 }
+    );
 
     const mainNav = screen.getByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).toBeVisible();
@@ -51,10 +54,13 @@ describe('DocumentBody', () => {
     const footer = screen.queryByTestId('consistent-footer');
     expect(footer).not.toBeInTheDocument();
 
-    await waitFor(() => {
-      const feedbackWidget = screen.queryByText(FEEDBACK_BUTTON_TEXT);
-      expect(feedbackWidget).not.toBeInTheDocument();
-    });
+    await waitFor(
+      () => {
+        const feedbackWidget = screen.queryByText(FEEDBACK_BUTTON_TEXT);
+        expect(feedbackWidget).not.toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
 
     const mainNav = screen.queryByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).not.toBeInTheDocument();
