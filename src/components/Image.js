@@ -40,7 +40,7 @@ const Image = ({ nodeData, className }) => {
     imgSrc = image.images.fallback.src;
     srcSet = image.images.fallback.srcSet;
   } else {
-    width *= scale;
+    width = parseInt(widthOption, 10) * scale;
     height *= scale;
     imgSrc = withPrefix(imgSrc);
   }
@@ -50,17 +50,17 @@ const Image = ({ nodeData, className }) => {
     userOptionStyle['width'] = widthOption;
   }
 
-  if (loading === 'lazy') {
+  if (loading === 'lazy' && image) {
     // loading option comes from parser. if image is to be lazy loaded, use gatsby image
     return (
       <GatsbyImage
+        image={image}
         width={width}
         height={height}
-        image={image}
-        imgClassName={cx(defaultStyling, hasBorder ? borderStyling : '')}
-        className={[directiveClass, customAlign, className].join(' ')}
         alt={altText}
         style={userOptionStyle}
+        imgClassName={cx(defaultStyling, hasBorder ? borderStyling : '')}
+        className={[directiveClass, customAlign, className].join(' ')}
       />
     );
   }
@@ -69,11 +69,11 @@ const Image = ({ nodeData, className }) => {
     <img
       src={imgSrc}
       srcSet={srcSet}
-      alt={altText}
-      height={height}
       width={width}
+      height={height}
+      alt={altText}
       style={userOptionStyle}
-      className={[cx(defaultStyling, hasBorder ? borderStyling : ''), directiveClass, customAlign, className].join(' ')}
+      className={cx(defaultStyling, hasBorder ? borderStyling : '', directiveClass, customAlign, className)}
     />
   );
 };
