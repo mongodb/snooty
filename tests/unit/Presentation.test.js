@@ -39,13 +39,13 @@ describe('DocumentBody', () => {
         expect(chatbotWidget).toBeVisible();
         expect(chatbotWidget).toMatchSnapshot();
       },
-      { timeout: 10000 }
+      { timeout: 8000 }
     );
 
     const mainNav = screen.getByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).toBeVisible();
     expect(mainNav).toMatchSnapshot();
-  }, 11000);
+  });
 
   it('does not render the following elements, footer, feedback widget, navigation', async () => {
     mockLocation('?presentation=true');
