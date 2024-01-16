@@ -31,9 +31,6 @@ describe('DocumentBody', () => {
   beforeAll(() => {
     jest.spyOn(document, 'querySelector');
   });
-  beforeEach(() => {
-    browser.ignoresynchronization = true;
-  });
   it('renders the necessary elements', async () => {
     mockLocation(null);
     render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
