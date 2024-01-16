@@ -1,9 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-<<<<<<< HEAD
 import * as Gatsby from 'gatsby';
-=======
->>>>>>> cbfcc7e (alter and add test)
 import { mockLocation } from '../utils/mock-location';
 import DocumentBody from '../../src/components/DocumentBody';
 import { FEEDBACK_BUTTON_TEXT } from '../../src/components/Widgets/FeedbackWidget/constants';
@@ -75,7 +72,6 @@ describe('DocumentBody', () => {
     const footer = screen.queryByTestId('consistent-footer');
     expect(footer).not.toBeInTheDocument();
 
-<<<<<<< HEAD
     await waitFor(
       () => {
         const feedbackWidget = screen.queryByText(FEEDBACK_BUTTON_TEXT);
@@ -83,12 +79,6 @@ describe('DocumentBody', () => {
       },
       { timeout: 5000 }
     );
-=======
-    await waitFor(() => {
-      const feedbackWidget = screen.queryByText(FEEDBACK_BUTTON_TEXT);
-      expect(feedbackWidget).not.toBeInTheDocument();
-    });
->>>>>>> cbfcc7e (alter and add test)
 
     const mainNav = screen.queryByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).not.toBeInTheDocument();
