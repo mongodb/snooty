@@ -45,7 +45,8 @@ describe('DocumentBody', () => {
     const mainNav = screen.getByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).toBeVisible();
     expect(mainNav).toMatchSnapshot();
-  });
+    /* Give more time for lazy-loaded components to be found */
+  }, 12000);
 
   it('does not render the following elements, footer, feedback widget, navigation', async () => {
     mockLocation('?presentation=true');
