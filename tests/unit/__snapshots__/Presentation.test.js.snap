@@ -819,6 +819,12 @@ exports[`DocumentBody renders the necessary elements 2`] = `
 `;
 
 exports[`DocumentBody renders the necessary elements 3`] = `
+<b>
+  Ask MongoDB AI
+</b>
+`;
+
+exports[`DocumentBody renders the necessary elements 4`] = `
 .emotion-0 {
   width: 100%;
   min-width: 100px;

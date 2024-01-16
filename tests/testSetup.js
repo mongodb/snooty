@@ -51,9 +51,11 @@ Object.defineProperty(global.self, 'crypto', {
   value: {
     getRandomValues: (arr) => crypto.randomBytes(arr.length),
   },
+  randomUUID: crypto.randomUUID,
 });
 
 window.matchMedia = () => ({ addListener: () => {}, removeListener: () => {} });
 window.EventSource = () => ({ EventSource: EventSource });
 window.scrollTo = () => {};
 global.fetch = jest.fn();
+window.crypto.randomUUID = crypto.randomUUID;

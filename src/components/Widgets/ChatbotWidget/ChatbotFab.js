@@ -38,7 +38,7 @@ const ChatbotFab = () => {
     >
       <Chatbot>
         <InputBarTrigger suggestedPrompts={suggestedPrompts} />
-        <FloatingActionButtonTrigger text="Ask MongoDB AI" />
+        <FloatingActionButtonTrigger text={CHATBOT_WIDGET_TEXT} />
         <ModalView
           initialMessageText="Welcome to MongoDB AI Assistant. What can I help you with?"
           initialMessageSuggestedPrompts={suggestedPrompts}
@@ -50,4 +50,5 @@ const ChatbotFab = () => {
 };
 
 export const fabChatbot = 'fab-chatbot';
+export const CHATBOT_WIDGET_TEXT = 'Ask MongoDB AI';
 export default ChatbotFab;
