@@ -1,10 +1,15 @@
 const fs = require('fs').promises;
 const path = require('path');
+const { isGatsbyPreview } = require('../is-gatsby-preview');
 
 const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
+const isPreview = isGatsbyPreview();
 
 const saveFile = async (file, data) => {
-  const pathList = GATSBY_IMAGE_EXTENSIONS.some((ext) => file.endsWith(ext)) ? ['src', 'images'] : ['public'];
+  // if this is preview, always save to 'public'
+  // images saved in /src/images are transformed and processed by gatsby-source-filesystem and gatsby-transformer-sharp
+  const pathList =
+    !isPreview && GATSBY_IMAGE_EXTENSIONS.some((ext) => file.endsWith(ext)) ? ['src', 'images'] : ['public'];
   await fs.mkdir(path.join(...pathList, path.dirname(file)), {
     recursive: true,
   });
