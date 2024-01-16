@@ -52,6 +52,7 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
     <FeedbackProvider page={feedbackData} hideHeader={hideFeedbackHeader}>
       {children}
       {!isInPresentationMode && !hideFeedback && (
+        /* Suspense at this level ensures that widgets will appear simultaneously rather than one-by-one as loaded */
         <Suspense fallback={null}>
           <WidgetsContainer className={widgetsContainer}>
             <FeedbackButton />
