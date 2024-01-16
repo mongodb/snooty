@@ -25,9 +25,9 @@ const StyledChatBotFabContainer = styled.div`
 
 const ChatbotFab = () => {
   const suggestedPrompts = [
-    'How do I create a new MongoDB Atlas cluster?',
-    'Can MongoDB store lists of data?',
-    'How does vector search work?',
+    'How do you deploy a free cluster in Atlas?',
+    'How do you import or migrate data into MongoDB?',
+    'Get started with MongoDB',
   ];
   return (
     <StyledChatBotFabContainer
