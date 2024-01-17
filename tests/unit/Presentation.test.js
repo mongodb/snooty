@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import * as Gatsby from 'gatsby';
 import { mockLocation } from '../utils/mock-location';
 import DocumentBody from '../../src/components/DocumentBody';
 import { FEEDBACK_BUTTON_TEXT } from '../../src/components/Widgets/FeedbackWidget/constants';
@@ -10,6 +11,21 @@ import mockSnootyMetadata from './data/SnootyMetadata.json';
 jest.mock(`../../src/utils/use-snooty-metadata`, () => {
   return () => mockSnootyMetadata;
 });
+
+const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+useStaticQuery.mockImplementation(() => ({
+  site: {
+    siteMetadata: {
+      commitHash: '',
+      parserBranch: '',
+      patchId: '',
+      pathPrefix: '',
+      snootyBranch: '',
+      user: '',
+      snootyEnv: 'production',
+    },
+  },
+}));
 
 describe('DocumentBody', () => {
   beforeAll(() => {
