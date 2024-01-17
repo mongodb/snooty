@@ -11,6 +11,7 @@ export async function loginAnonymous() {
     const user = await app.logIn(Realm.Credentials.anonymous());
     return user;
   } else {
+    await app.currentUser.refreshCustomData();
     return app.currentUser;
   }
 }
