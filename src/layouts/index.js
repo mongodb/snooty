@@ -66,6 +66,8 @@ const globalCSS = css`
   ${footerOverrides}
 
   /* To ensure the Chatbot ModalView has precedence over the consistent-nav */
+  /* In next Chatbot release, a className can be specified as a prop giving us more granular specificity */
+  /* At that time, remove or improve the following lines */
   div[id^=modal-] {
     z-index: 1000 !important;
   }
