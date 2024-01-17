@@ -15,6 +15,7 @@ const loginAnonymous = async () => {
 
   // Avoid creating multiple users if one already exists
   if (app.currentUser) {
+    await app.currentUser.refreshCustomData();
     return;
   }
 
