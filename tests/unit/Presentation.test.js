@@ -52,7 +52,8 @@ describe('DocumentBody', () => {
         expect(feedbackWidget).toMatchSnapshot();
 
         const chatbotWidget = screen.getByText(CHATBOT_WIDGET_TEXT);
-        expect(chatbotWidget).toBeVisible();
+        /* NOT to be visible for now, with display:none */
+        expect(chatbotWidget).not.toBeVisible();
         expect(chatbotWidget).toMatchSnapshot();
       },
       { timeout: 8000 }
