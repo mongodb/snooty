@@ -34,9 +34,9 @@ exports[`Lightbox renders correctly 1`] = `
       <img
         alt="/images/firstcluster.png"
         class="emotion-2"
-        height="NaN"
+        height="300"
         src="/images/firstcluster.png"
-        width="NaN"
+        width="500"
       />
       <div
         class="emotion-3 emotion-4"
