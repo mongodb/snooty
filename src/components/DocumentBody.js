@@ -140,6 +140,7 @@ const DocumentBody = (props) => {
         publishedBranches={getNestedValue(['publishedBranches'], metadata)}
         slug={slug}
         isInPresentationMode={isInPresentationMode}
+        template={template}
       >
         <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
           <FootnoteContext.Provider value={{ footnotes }}>
