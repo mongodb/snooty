@@ -37,11 +37,22 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
     })
   );
   // check if product is associated child product
+  // get all associated products' repo branches if umbrella exists,
+  // except for the current project
   try {
     const umbrellaProduct = await db.realmInterface.getMetadata({
       'associated_products.name': siteMetadata.project,
     });
     isAssociatedProduct = !!umbrellaProduct;
+    if (umbrellaProduct?.associated_products?.length) {
+      await Promise.all(
+        umbrellaProduct.associated_products
+          .filter((product) => product.name !== manifestMetadata.project)
+          .map(async (product) => {
+            associatedReposInfo[product.name] = await db.realmInterface.fetchDocset({ project: product.name });
+          })
+      );
+    }
   } catch (e) {
     console.log('No umbrella product found. Not an associated product.');
     isAssociatedProduct = false;
@@ -59,7 +70,7 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
     const findOptions = {
       sort: { build_id: -1 },
     };
-    const remoteMetadata = await db.realmInterface.getMetadata(filter, findOptions);
+    const remoteMetadata = await db.realmInterface.getMetadata(filter, undefined, findOptions);
 
     createNode({
       children: [],
@@ -171,6 +182,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
 
   await saveAssetFiles(assets, db);
+  if (!siteMetadata.manifestPath) {
+    console.error('Getting metadata from realm without filters');
+  }
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
 
   const { parentPaths, slugToTitle } = metadataMinusStatic;

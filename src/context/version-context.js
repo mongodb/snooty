@@ -176,7 +176,12 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   // on init, fetch versions from realm app services
   useEffect(() => {
-    getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then(
+    const allAssociatedProducts = (associatedProducts || []).concat(
+      Object.keys(associatedReposInfo || {}).map((repo) => ({
+        name: repo,
+      }))
+    );
+    getBranches(metadata, repoBranches, associatedReposInfo, allAssociatedProducts).then(
       ({ versions, groups, hasEolBranches }) => {
         if (!mountRef.current) {
           return;
