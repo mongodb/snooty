@@ -4,6 +4,8 @@ import userEvent from '@testing-library/user-event';
 import * as realm from '../../src/utils/realm';
 import { generatePrefix } from '../../src/components/VersionDropdown/utils';
 import VersionDropdown from '../../src/components/VersionDropdown';
+import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
+import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import mockData from '../unit/data/VersionDropdown.test.json';
 import { VersionContextProvider } from '../../src/context/version-context';
 import { tick } from '../utils';
@@ -19,6 +21,20 @@ jest.mock('../../src/utils/use-snooty-metadata', () => {
 jest.mock('@gatsbyjs/reach-router', () => ({
   navigate: jest.fn(),
 }));
+
+const useAssociatedProductsMock = jest.spyOn(useAssociatedProducts, 'useAllAssociatedProducts');
+const useAllDocsetsMock = jest.spyOn(useAllDocsets, 'useAllDocsets');
+useAssociatedProductsMock.mockImplementation(() => ['atlas-cli']);
+useAllDocsetsMock.mockImplementation(() => [
+  {
+    project: 'cloud-docs',
+    branches: [],
+  },
+  {
+    project: 'atlas-cli',
+    branches: [],
+  },
+]);
 
 const fetchDocuments = () => {
   return jest.spyOn(realm, 'fetchDocuments').mockImplementation(async (dbName, collectionName, query) => {
@@ -121,7 +137,7 @@ const queryElementWithin = (versionDropdown, role) => within(versionDropdown).qu
 
 const mountConsumer = () => {
   return render(
-    <VersionContextProvider repoBranches={docsNodeRepoBranches} slug={'/'} isAssociatedProduct={true}>
+    <VersionContextProvider repoBranches={docsNodeRepoBranches} slug={'/'}>
       <VersionDropdown eol={mockData.eol} slug={mockData.slug} repoBranches={docsNodeRepoBranches} />
     </VersionContextProvider>
   );

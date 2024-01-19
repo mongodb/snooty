@@ -85,11 +85,7 @@ const mockedAssociatedRepoInfo = {
 
 const setProjectAndAssociatedProducts = () => {
   uesSiteMetadataMock.mockImplementation(() => ({
-    site: {
-      siteMetadata: {
-        parserBranch: 'master',
-      },
-    },
+    parserBranch: 'master',
   }));
   snootyMetadataMock.mockImplementation(() => ({
     project,
@@ -163,12 +159,8 @@ const mountConsumer = () => {
 const mountAtlasCliConsumer = (eol) => {
   const project = 'atlas-cli';
   uesSiteMetadataMock.mockImplementationOnce(() => ({
-    site: {
-      siteMetadata: {
-        project: project,
-        parserBranch: eol ? 'v1.0' : 'master',
-      },
-    },
+    project: project,
+    parserBranch: eol ? 'v1.0' : 'master',
   }));
 
   snootyMetadataMock.mockImplementationOnce(() => {
@@ -179,7 +171,7 @@ const mountAtlasCliConsumer = (eol) => {
   });
 
   return render(
-    <VersionContextProvider repoBranches={cloudDocsRepoBranches}>
+    <VersionContextProvider repoBranches={mockedAssociatedRepoInfo['atlas-cli']}>
       test consumer below
       <TestConsumer />
     </VersionContextProvider>
@@ -318,6 +310,7 @@ describe('Version Context', () => {
     await act(async () => {
       wrapper = mountAtlasCliConsumer(true);
     });
+    wrapper.debug();
     for (let branch of mockedAssociatedRepoInfo['atlas-cli'].branches) {
       expect(await wrapper.findByText(getKey(project, branch.gitBranchName))).toBeTruthy();
     }
