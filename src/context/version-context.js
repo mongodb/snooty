@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { navigate } from '@gatsbyjs/reach-router';
 import { METADATA_COLLECTION } from '../build-constants';
+import { useAllDocsets } from '../hooks/useAllDocsets';
 import { useAllAssociatedProducts } from '../hooks/useAssociatedProducts';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';
@@ -8,7 +9,6 @@ import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { fetchDocset, fetchDocuments } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { useAllDocsets } from '../hooks/useAllDocsets';
 
 // <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';

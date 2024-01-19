@@ -76,7 +76,9 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
   // initial effect is to fetch metadata
   // should only run once on init
   useEffect(() => {
+    console.log(79);
     if (!Object.keys(activeVersions).length || isLoaded) {
+      console.log('returning early');
       return;
     }
     getTocMetadata().then((tocTreeResponse) => {

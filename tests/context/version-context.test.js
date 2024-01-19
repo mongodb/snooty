@@ -1,71 +1,20 @@
 import React, { useContext } from 'react';
-import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import { VersionContextProvider, VersionContext, STORAGE_KEY } from '../../src/context/version-context';
+import * as siteMetadata from '../../src/hooks/use-site-metadata';
+import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
+import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
+import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import * as browserStorage from '../../src/utils/browser-storage';
 import * as realm from '../../src/utils/realm';
-import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
 
 const snootyMetadataMock = jest.spyOn(snootyMetadata, 'default');
-const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+const uesSiteMetadataMock = jest.spyOn(siteMetadata, 'useSiteMetadata');
+const useAssociatedProductsMock = jest.spyOn(useAssociatedProducts, 'useAllAssociatedProducts');
+const useAllDocsetsMock = jest.spyOn(useAllDocsets, 'useAllDocsets');
 const project = 'cloud-docs';
-const setProjectAndAssociatedProducts = () => {
-  useStaticQuery.mockImplementation(() => ({
-    site: {
-      siteMetadata: {
-        parserBranch: 'master',
-      },
-    },
-  }));
-  snootyMetadataMock.mockImplementation(() => ({
-    project,
-    associated_products: [
-      {
-        name: 'atlas-cli',
-        versions: ['v1.1', 'v1.2', 'master'],
-      },
-    ],
-  }));
-};
-
-const getKey = (project, branchName) => `${project}-${branchName}`;
-
-const TestConsumer = () => {
-  const { activeVersions, setActiveVersions, availableVersions } = useContext(VersionContext);
-
-  const handleClick = (project, version) => {
-    const value = {};
-    value[project] = version;
-    setActiveVersions(value);
-  };
-
-  const versionElms = [];
-  for (let project in availableVersions) {
-    for (let branch of availableVersions[project]) {
-      versionElms.push(
-        <div
-          onClick={() => {
-            handleClick(project, branch.gitBranchName);
-          }}
-          key={getKey(project, branch.gitBranchName)}
-          id={getKey(project, branch.gitBranchName)}
-        >
-          {getKey(project, branch.gitBranchName)}
-        </div>
-      );
-    }
-  }
-  return (
-    <>
-      <h1>active versions:</h1>
-      <div id="active-versions">{JSON.stringify(activeVersions)}</div>
-      <h1>availableVersions:</h1>
-      <div id="available-versions">{versionElms}</div>
-    </>
-  );
-};
 
 const cloudDocsRepoBranches = {
   branches: [
@@ -134,10 +83,77 @@ const mockedAssociatedRepoInfo = {
   },
 };
 
+const setProjectAndAssociatedProducts = () => {
+  uesSiteMetadataMock.mockImplementation(() => ({
+    site: {
+      siteMetadata: {
+        parserBranch: 'master',
+      },
+    },
+  }));
+  snootyMetadataMock.mockImplementation(() => ({
+    project,
+    associated_products: [
+      {
+        name: 'atlas-cli',
+        versions: ['v1.1', 'v1.2', 'master'],
+      },
+    ],
+  }));
+  useAssociatedProductsMock.mockImplementation(() => ['atlas-cli']);
+  useAllDocsetsMock.mockImplementation(() => [
+    {
+      project: 'cloud-docs',
+      branches: cloudDocsRepoBranches.branches,
+    },
+    {
+      project: 'atlas-cli',
+      branches: mockedAssociatedRepoInfo['atlas-cli']['branches'],
+    },
+  ]);
+};
+
+const getKey = (project, branchName) => `${project}-${branchName}`;
+
+const TestConsumer = () => {
+  const { activeVersions, setActiveVersions, availableVersions } = useContext(VersionContext);
+
+  const handleClick = (project, version) => {
+    const value = {};
+    value[project] = version;
+    setActiveVersions(value);
+  };
+
+  const versionElms = [];
+  for (let project in availableVersions) {
+    for (let branch of availableVersions[project]) {
+      versionElms.push(
+        <div
+          onClick={() => {
+            handleClick(project, branch.gitBranchName);
+          }}
+          key={getKey(project, branch.gitBranchName)}
+          id={getKey(project, branch.gitBranchName)}
+        >
+          {getKey(project, branch.gitBranchName)}
+        </div>
+      );
+    }
+  }
+  return (
+    <>
+      <h1>active versions:</h1>
+      <div id="active-versions">{JSON.stringify(activeVersions)}</div>
+      <h1>availableVersions:</h1>
+      <div id="available-versions">{versionElms}</div>
+    </>
+  );
+};
+
 const mountConsumer = () => {
   setProjectAndAssociatedProducts();
   return render(
-    <VersionContextProvider repoBranches={cloudDocsRepoBranches} associatedReposInfo={mockedAssociatedRepoInfo}>
+    <VersionContextProvider repoBranches={cloudDocsRepoBranches}>
       test consumer below
       <TestConsumer />
     </VersionContextProvider>
@@ -146,7 +162,7 @@ const mountConsumer = () => {
 
 const mountAtlasCliConsumer = (eol) => {
   const project = 'atlas-cli';
-  useStaticQuery.mockImplementationOnce(() => ({
+  uesSiteMetadataMock.mockImplementationOnce(() => ({
     site: {
       siteMetadata: {
         project: project,
@@ -163,7 +179,7 @@ const mountAtlasCliConsumer = (eol) => {
   });
 
   return render(
-    <VersionContextProvider repoBranches={cloudDocsRepoBranches} associatedReposInfo={mockedAssociatedRepoInfo}>
+    <VersionContextProvider repoBranches={cloudDocsRepoBranches}>
       test consumer below
       <TestConsumer />
     </VersionContextProvider>
