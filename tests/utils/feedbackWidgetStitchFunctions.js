@@ -16,7 +16,11 @@ export function mockStitchFunctions() {
 
   stitchFunctionMocks['useRealmUser'] = jest.spyOn(realm, 'useRealmUser').mockImplementation(() => {
     return {
-      id: 'test-user-id',
+      user: {
+        id: 'test-user-id',
+      },
+      // Most of this logic is dependent on Realm app working
+      reassignCurrentUser: () => ({ id: 'another-test-user-id' }),
     };
   });
 }

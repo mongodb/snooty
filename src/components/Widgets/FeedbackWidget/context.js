@@ -87,7 +87,9 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       setFeedback(newFeedback);
     } catch (err) {
       console.error('There was an error submitting feedback', err);
-      await retryFeedbackSubmission(newFeedback);
+      if (err.statusCode === 401) {
+        await retryFeedbackSubmission(newFeedback);
+      }
     }
   };
 

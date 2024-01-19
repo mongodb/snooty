@@ -33,34 +33,12 @@ async function deleteLocalStorageData() {
   });
 }
 
-/**
- * Makes a call to the Feedback Widget App Service to ensure the current user can succesfully
- * call out to the app. Otherwise, a new user is created in case credentials are completely invalid.
- * @returns A valid user
- */
-// async function validateCurrentUser() {
-//   try {
-//     // Ensure access token is always refreshed on initial login
-//     await app.currentUser.refreshAccessToken();
-//     // Ideally, this would only error in the event that current anonymous credentials are messed up beyond repair
-//     const success = await app.currentUser.callFunction('validateConnection');
-//     if (!success) {
-//       return reassignCurrentUser();
-//     }
-//     return app.currentUser;
-//   } catch (e) {
-//     console.error(e);
-//     return reassignCurrentUser();
-//   }
-// }
-
 // User Authentication & Management
 export async function loginAnonymous() {
   if (!app.currentUser) {
     const user = await app.logIn(Realm.Credentials.anonymous());
     return user;
   }
-  // return validateCurrentUser();
   return app.currentUser;
 }
 
@@ -81,9 +59,11 @@ export const useRealmUser = () => {
       await app.removeUser(oldUser);
     } catch (e) {
       console.error(e);
-      // Clean up invalid data from local storage to avoid bubbling up local storage sizes for unused users
-      await deleteLocalStorageData();
     }
+
+    // Clean up invalid data from local storage to avoid bubbling up local storage sizes for broken user credentials
+    // This should be safe since only old users' data would be deleted, and we make a new user right after
+    await deleteLocalStorageData();
 
     const newUser = await app.logIn(Realm.Credentials.anonymous());
     setUser(newUser);
