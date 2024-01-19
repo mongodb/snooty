@@ -34,43 +34,25 @@ async function deleteLocalStorageData() {
 }
 
 /**
- * Attempts to remove the current user in place of a new anonymous user
- * @returns A new anonymous user
- */
-async function reassignCurrentUser() {
-  const oldUser = app.currentUser;
-  try {
-    await app.removeUser(oldUser);
-  } catch (e) {
-    console.error(e);
-    // Clean up invalid data from local storage to avoid bubbling up local storage sizes for unused users
-    await deleteLocalStorageData();
-  }
-
-  const newUser = await app.logIn(Realm.Credentials.anonymous());
-  return newUser;
-}
-
-/**
  * Makes a call to the Feedback Widget App Service to ensure the current user can succesfully
  * call out to the app. Otherwise, a new user is created in case credentials are completely invalid.
  * @returns A valid user
  */
-async function validateCurrentUser() {
-  try {
-    // Ensure access token is always refreshed on initial login
-    await app.currentUser.refreshAccessToken();
-    // Ideally, this would only error in the event that current anonymous credentials are messed up beyond repair
-    const success = await app.currentUser.callFunction('validateConnection');
-    if (!success) {
-      return reassignCurrentUser();
-    }
-    return app.currentUser;
-  } catch (e) {
-    console.error(e);
-    return reassignCurrentUser();
-  }
-}
+// async function validateCurrentUser() {
+//   try {
+//     // Ensure access token is always refreshed on initial login
+//     await app.currentUser.refreshAccessToken();
+//     // Ideally, this would only error in the event that current anonymous credentials are messed up beyond repair
+//     const success = await app.currentUser.callFunction('validateConnection');
+//     if (!success) {
+//       return reassignCurrentUser();
+//     }
+//     return app.currentUser;
+//   } catch (e) {
+//     console.error(e);
+//     return reassignCurrentUser();
+//   }
+// }
 
 // User Authentication & Management
 export async function loginAnonymous() {
@@ -78,7 +60,8 @@ export async function loginAnonymous() {
     const user = await app.logIn(Realm.Credentials.anonymous());
     return user;
   }
-  return validateCurrentUser();
+  // return validateCurrentUser();
+  return app.currentUser;
 }
 
 export async function logout() {
@@ -91,6 +74,23 @@ export async function logout() {
 
 export const useRealmUser = () => {
   const [user, setUser] = React.useState(app.currentUser);
+
+  async function reassignCurrentUser() {
+    const oldUser = app.currentUser;
+    try {
+      await app.removeUser(oldUser);
+    } catch (e) {
+      console.error(e);
+      // Clean up invalid data from local storage to avoid bubbling up local storage sizes for unused users
+      await deleteLocalStorageData();
+    }
+
+    const newUser = await app.logIn(Realm.Credentials.anonymous());
+    setUser(newUser);
+    return newUser;
+  }
+
+  // Initial user login
   React.useEffect(() => {
     loginAnonymous()
       .then(setUser)
@@ -98,7 +98,8 @@ export const useRealmUser = () => {
         console.error(e);
       });
   }, []);
-  return user;
+
+  return { user, reassignCurrentUser };
 };
 
 // Feedback Widget Functions
