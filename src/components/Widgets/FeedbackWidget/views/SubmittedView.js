@@ -20,9 +20,8 @@ const StyledHeading = styled(Subtitle)`
 `;
 
 const SubmittedView = () => {
-  const { abandon } = useFeedbackContext();
+  const { abandon, selectedRating } = useFeedbackContext();
   const { isMobile } = useScreenSize();
-  const { selectedRating } = useFeedbackContext();
   const shouldShowSupportLink = selectedRating <= 3;
 
   return (

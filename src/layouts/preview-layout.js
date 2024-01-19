@@ -155,6 +155,7 @@ const DefaultLayout = ({
           headingNodes={page?.options?.headings}
           selectors={page?.options?.selectors}
           isAssociatedProduct={isAssociatedProduct}
+          pageTitle={pageTitle}
         >
           <GlobalGrid>
             <PreviewHeader sidenav={sidenav} />

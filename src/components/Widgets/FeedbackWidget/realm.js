@@ -58,6 +58,7 @@ async function reassignCurrentUser() {
  */
 async function validateCurrentUser() {
   try {
+    // Ensure access token is always refreshed on initial login
     await app.currentUser.refreshAccessToken();
     // Ideally, this would only error in the event that current anonymous credentials are messed up beyond repair
     const success = await app.currentUser.callFunction('validateConnection');
@@ -78,7 +79,6 @@ export async function loginAnonymous() {
     return user;
   }
   return validateCurrentUser();
-  // return app.currentUser;
 }
 
 export async function logout() {

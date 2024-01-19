@@ -98,14 +98,7 @@ const DocumentBody = (props) => {
       metadata={metadata}
     >
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
-      <Widgets
-        location={location}
-        pageOptions={page?.options}
-        pageTitle={pageTitle}
-        publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-        slug={slug}
-        template={template}
-      >
+      <Widgets location={location} pageOptions={page?.options} template={template}>
         <FootnoteContext.Provider value={{ footnotes }}>
           <Template {...props} useChatbot={useChatbot}>
             {pageNodes.map((child, index) => (
