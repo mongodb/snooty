@@ -1,8 +1,9 @@
 import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { isBrowser } from '../../utils/is-browser';
 import { theme } from '../../theme/docsTheme';
-import { FeedbackForm, FeedbackButton } from './FeedbackWidget';
+import { FeedbackProvider, FeedbackForm, FeedbackButton, useFeedbackData } from './FeedbackWidget';
 import ChatbotFab from './ChatbotWidget/ChatbotFab';
 
 const WidgetsContainer = styled.div`
@@ -34,12 +35,21 @@ const WidgetsContainer = styled.div`
   }
 `;
 
-const Widgets = ({ children, pageOptions, isInPresentationMode, template }) => {
+const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, isInPresentationMode, template }) => {
+  const url = isBrowser ? window.location.href : null;
+  const hideFeedbackHeader = pageOptions.hidefeedback === 'header';
+  const feedbackData = useFeedbackData({
+    slug,
+    url,
+    title: pageTitle || 'Home',
+    publishedBranches,
+  });
+
   // DOP-4025: hide feedback tab on homepage
   const hideFeedback = pageOptions.hidefeedback === 'page';
 
   return (
-    <>
+    <FeedbackProvider page={feedbackData} hideHeader={hideFeedbackHeader}>
       {children}
       {!isInPresentationMode && !hideFeedback && (
         /* Suspense at this level ensures that widgets will appear simultaneously rather than one-by-one as loaded */
@@ -51,7 +61,7 @@ const Widgets = ({ children, pageOptions, isInPresentationMode, template }) => {
           </WidgetsContainer>
         </Suspense>
       )}
-    </>
+    </FeedbackProvider>
   );
 };
 

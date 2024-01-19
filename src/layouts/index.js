@@ -108,7 +108,6 @@ const DefaultLayout = ({
         isAssociatedProduct={isAssociatedProduct}
         remoteMetadata={remoteMetadata}
         project={project}
-        pageTitle={pageTitle}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} slug={slug} template={template} /> : <div />}

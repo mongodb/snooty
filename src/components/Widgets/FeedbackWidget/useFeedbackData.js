@@ -7,6 +7,7 @@ export default function useFeedbackData({ slug, title, url, publishedBranches })
     url,
     title,
     docs_property: project,
+    docs_version: publishedBranches ? publishedBranches.version.published : null,
   };
   return feedback_data;
 }
