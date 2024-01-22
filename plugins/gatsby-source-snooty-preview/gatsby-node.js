@@ -50,6 +50,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type ChangelogData implements Node @dontInfer {
       changelogData: JSON
     }
+
+    type PageImage implements Node @dontInfer {
+      slug: String
+      images: [File] @link(by: "relativePath", from: "pageAssets")
+    }
   `;
   createTypes(typeDefs);
 };

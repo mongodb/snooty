@@ -57,3 +57,4 @@ window.matchMedia = () => ({ addListener: () => {}, removeListener: () => {} });
 window.EventSource = () => ({ EventSource: EventSource });
 window.scrollTo = () => {};
 global.fetch = jest.fn();
+window.crypto.randomUUID = crypto.randomUUID;
