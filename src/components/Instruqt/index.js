@@ -1,9 +1,9 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useContext } from 'react';
 import { css } from '@emotion/react';
 import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
-//import {InstruqtContext} from './instruqt-context';
+import { InstruqtContext } from './instruqt-context';
 
 const controlsStyle = css`
   width: 100%;
@@ -20,10 +20,12 @@ const controlsStyle = css`
 const Instruqt = ({ nodeData: { argument }, nodeData }) => {
   const embedValue = argument[0].value;
   const iframeRef = useRef(null);
+  const { setIsOpen } = useContext(InstruqtContext);
 
   const onFullScreen = useCallback(() => {
     if (iframeRef) {
       const element = iframeRef.current;
+      setIsOpen(true);
       if (element.requestFullscreen) {
         element.requestFullscreen();
       } else if (element.msRequestFullscreen) {
@@ -34,7 +36,7 @@ const Instruqt = ({ nodeData: { argument }, nodeData }) => {
         element.webkitRequestFullscreen();
       }
     }
-  }, [iframeRef]);
+  }, [iframeRef, setIsOpen]);
 
   if (!embedValue) {
     return null;
