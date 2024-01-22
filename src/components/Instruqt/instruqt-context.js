@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const defaultContextValue = {
+  hasLab: false,
   isOpen: false,
+  setIsOpen: () => {},
 };
 
 const InstruqtContext = React.createContext(defaultContextValue);
 
-//function here to determine if page's AST has a lab
-
-const InstruqtProvider = ({ children }) => {
-  //update with function passed to use state to tell if lab is open
+const InstruqtProvider = ({ children, hasInstruqtLab }) => {
+  const hasLab = hasInstruqtLab;
   const [isOpen, setIsOpen] = useState(false);
 
-  //check that useEffect is the right function for this
-  useEffect(() => {
-    setIsOpen(false);
-  }, [isOpen]);
+  return <InstruqtContext.Provider value={{ hasLab, isOpen, setIsOpen }}>{children}</InstruqtContext.Provider>;
+};
 
-  return <InstruqtContext.Provider value={{ isOpen, setIsOpen }}>{children}</InstruqtContext.Provider>;
+InstruqtProvider.defaultProps = {
+  hasInstruqtLab: false,
 };
 
 export { InstruqtContext, InstruqtProvider };
