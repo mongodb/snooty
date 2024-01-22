@@ -3,7 +3,7 @@ import React, { lazy } from 'react';
 const ComponentMap = {
   openapi: lazy(() => import('./OpenAPI')),
   video: lazy(() => import('./Video')),
-  instruqt: lazy(() => import('./Instruqt')),
+  instruqt: lazy(() => import('./Instruqt/index')),
   quiz: lazy(() => import('./Widgets/QuizWidget/QuizWidget')),
   quizchoice: lazy(() => import('./Widgets/QuizWidget/QuizChoice')),
 };

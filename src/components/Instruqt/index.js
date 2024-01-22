@@ -2,7 +2,8 @@ import React, { useCallback, useRef } from 'react';
 import { css } from '@emotion/react';
 import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
-import { theme } from '../theme/docsTheme';
+import { theme } from '../../theme/docsTheme';
+//import {InstruqtContext} from './instruqt-context';
 
 const controlsStyle = css`
   width: 100%;
