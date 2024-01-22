@@ -26,7 +26,7 @@ let db;
 
 // Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
 // or data are found, the node will be null
-const createdAssociatedProductNodes = async ({ createNode, createNodeId, createContentDigest }, umbrellaProduct) => {
+const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }, umbrellaProduct) => {
   // get remote metadata for updated ToC in Atlas
   try {
     const filter = {
@@ -60,9 +60,8 @@ const createdAssociatedProductNodes = async ({ createNode, createNodeId, createC
 
 /**
  * Creates graphql nodes on metadata for associated products
- * association can be an umbrella product, associated product (in snooty.toml),
+ * Association can be an umbrella product, associated product (in snooty.toml),
  * or sibling products
- * @param {*} param0
  */
 const createAssociatedProductNodes = async ({ createNode, createNodeId, createContentDigest }, umbrellaProduct) => {
   try {
@@ -71,7 +70,7 @@ const createAssociatedProductNodes = async ({ createNode, createNodeId, createCo
       associatedProducts.push(...(umbrellaProduct.associated_products || []));
     }
 
-    return Promise.all(
+    return await Promise.all(
       associatedProducts.map(async (product) =>
         createNode({
           children: [],
@@ -86,7 +85,7 @@ const createAssociatedProductNodes = async ({ createNode, createNodeId, createCo
       )
     );
   } catch (e) {
-    console.log(`Error while creating associated metadata nodes: ${JSON.stringify(e)}`);
+    console.error(`Error while creating associated metadata nodes: ${JSON.stringify(e)}`);
   }
 };
 
@@ -188,7 +187,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   await createAssociatedProductNodes({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
 
-  await createdAssociatedProductNodes({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+  await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
 
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
@@ -349,6 +348,10 @@ exports.createSchemaCustomization = ({ actions }) => {
     type PageImage implements Node @dontInfer {
       slug: String
       images: [File] @link(by: "relativePath", from: "pageAssets")
+    }
+
+    type AssociatedProduct implements Node @dontInfer {
+      productName: String
     }
   `);
 };
