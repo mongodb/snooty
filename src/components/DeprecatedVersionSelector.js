@@ -98,7 +98,7 @@ const DeprecatedVersionSelector = () => {
   };
 
   const alphabetize = (product1, product2) => {
-    return product1.text.localeCompare(product2.text);
+    return product1?.text?.localeCompare(product2?.text);
   };
 
   const productChoices = reposMap
