@@ -1,13 +1,13 @@
-import { replaceLeadingSlash } from '../../../src/utils/replace-leading-slash';
+import { removeLeadingSlash } from '../../../src/utils/remove-leading-slash';
 
-it('should replace leading slashes to file pathnames if found', () => {
+it('should remove leading slashes to file pathnames if found', () => {
   const pathNameWithSlash = '/path/to/image.png';
 
   const pathNameWithMultipleSlashes = '////path/to/image.png';
 
   const pathNameWithoutSlash = 'path/to/image.png';
 
-  expect(replaceLeadingSlash(pathNameWithSlash)).toBe(pathNameWithoutSlash);
-  expect(replaceLeadingSlash(pathNameWithMultipleSlashes)).toBe(pathNameWithoutSlash);
-  expect(replaceLeadingSlash(pathNameWithoutSlash)).toBe(pathNameWithoutSlash);
+  expect(removeLeadingSlash(pathNameWithSlash)).toBe(pathNameWithoutSlash);
+  expect(removeLeadingSlash(pathNameWithMultipleSlashes)).toBe(pathNameWithoutSlash);
+  expect(removeLeadingSlash(pathNameWithoutSlash)).toBe(pathNameWithoutSlash);
 });

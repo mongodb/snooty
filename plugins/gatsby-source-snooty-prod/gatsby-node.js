@@ -5,7 +5,7 @@ const { validateEnvVariables } = require('../../src/utils/setup/validate-env-var
 const { getNestedValue } = require('../../src/utils/get-nested-value');
 const { removeNestedValue } = require('../../src/utils/remove-nested-value.js');
 const { getPageSlug } = require('../../src/utils/get-page-slug');
-const { replaceLeadingSlash } = require('../../src/utils/replace-leading-slash.js');
+const { removeLeadingSlash } = require('../../src/utils/remove-leading-slash.js');
 const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadata');
 const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix');
@@ -155,7 +155,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
           type: 'PageImage',
           contentDigest: createContentDigest(gatsbyImages.map((asset) => asset.key)),
         },
-        pageAssets: gatsbyImages.map((asset) => replaceLeadingSlash(asset.key)),
+        pageAssets: gatsbyImages.map((asset) => removeLeadingSlash(asset.key)),
         parent: null,
         slug: slug,
       });
