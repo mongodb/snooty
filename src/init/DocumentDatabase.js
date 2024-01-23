@@ -1,5 +1,6 @@
 const AdmZip = require('adm-zip');
 const BSON = require('bson');
+const fs = require('fs');
 const { initRealm } = require('../utils/setup/init-realm');
 const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } = require('../build-constants');
 const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
@@ -56,6 +57,7 @@ class RealmInterface {
 class ManifestDocumentDatabase {
   constructor(path) {
     this.zip = new AdmZip(path);
+    this.path = path;
     this.realmInterface = new RealmInterface();
   }
 
@@ -65,11 +67,17 @@ class ManifestDocumentDatabase {
 
   async getDocuments() {
     const result = [];
-    const zipEntries = this.zip.getEntries();
-    for (const entry of zipEntries) {
-      if (entry.entryName.startsWith('documents/')) {
-        const doc = BSON.deserialize(entry.getData());
-        result.push(doc);
+    if (!this.path.includes('.zip')) {
+      const documents = fs.readFileSync('snooty-documents.js');
+      console.log('DOCUMENTS found in snooty-documents.js', documents.length);
+      return documents;
+    } else {
+      const zipEntries = this.zip.getEntries();
+      for (const entry of zipEntries) {
+        if (entry.entryName.startsWith('documents/')) {
+          const doc = BSON.deserialize(entry.getData());
+          result.push(doc);
+        }
       }
     }
     return result;
