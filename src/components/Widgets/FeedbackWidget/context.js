@@ -12,7 +12,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
-  const user = useRealmUser();
+  const { user, reassignCurrentUser } = useRealmUser();
 
   // Create a new feedback document
   const initializeFeedback = (nextView = 'rating') => {
@@ -37,6 +37,17 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       return 'Suggestion';
     } else {
       return 'Positive';
+    }
+  };
+
+  const retryFeedbackSubmission = async (newFeedback) => {
+    try {
+      const newUser = await reassignCurrentUser();
+      newFeedback.user.stitch_id = newUser.id;
+      await createNewFeedback(newFeedback);
+      setFeedback(newFeedback);
+    } catch (e) {
+      console.error('Error when retrying feedback submission', e);
     }
   };
 
@@ -75,7 +86,13 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       await createNewFeedback(newFeedback);
       setFeedback(newFeedback);
     } catch (err) {
+      // This catch block will most likely only be hit after Realm attempts internal retry logic
+      // after access token is refreshed
       console.error('There was an error submitting feedback', err);
+      if (err.statusCode === 401) {
+        // Explicitly retry 1 time to avoid any infinite loop
+        await retryFeedbackSubmission(newFeedback);
+      }
     }
   };
 
