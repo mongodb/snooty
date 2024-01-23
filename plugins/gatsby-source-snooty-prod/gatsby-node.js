@@ -5,6 +5,7 @@ const { validateEnvVariables } = require('../../src/utils/setup/validate-env-var
 const { getNestedValue } = require('../../src/utils/get-nested-value');
 const { removeNestedValue } = require('../../src/utils/remove-nested-value.js');
 const { getPageSlug } = require('../../src/utils/get-page-slug');
+const { removeLeadingSlash } = require('../../src/utils/remove-leading-slash.js');
 const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadata');
 const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix');
@@ -23,43 +24,23 @@ const assets = new Map();
 
 let db;
 
-let isAssociatedProduct = false;
-const associatedReposInfo = {};
-
 // Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
 // or data are found, the node will be null
-const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }) => {
-  // fetch associated child products
-  const productList = manifestMetadata?.associated_products || [];
-  await Promise.all(
-    productList.map(async (product) => {
-      associatedReposInfo[product.name] = await db.realmInterface.fetchDocset({ project: product.name });
-    })
-  );
-  // check if product is associated child product
-  try {
-    const umbrellaProduct = await db.realmInterface.getMetadata({
-      'associated_products.name': siteMetadata.project,
-    });
-    isAssociatedProduct = !!umbrellaProduct;
-  } catch (e) {
-    console.log('No umbrella product found. Not an associated product.');
-    isAssociatedProduct = false;
-  }
-
+const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }, umbrellaProduct) => {
   // get remote metadata for updated ToC in Atlas
   try {
     const filter = {
       project: manifestMetadata.project,
       branch: manifestMetadata.branch,
     };
+    const isAssociatedProduct = !!umbrellaProduct;
     if (isAssociatedProduct || manifestMetadata?.associated_products?.length) {
       filter['is_merged_toc'] = true;
     }
     const findOptions = {
       sort: { build_id: -1 },
     };
-    const remoteMetadata = await db.realmInterface.getMetadata(filter, findOptions);
+    const remoteMetadata = await db.realmInterface.getMetadata(filter, undefined, findOptions);
 
     createNode({
       children: [],
@@ -74,6 +55,37 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   } catch (e) {
     console.error('Error while fetching metadata from Atlas, falling back to manifest metadata');
     console.error(e);
+  }
+};
+
+/**
+ * Creates graphql nodes on metadata for associated products
+ * Association can be an umbrella product, associated product (in snooty.toml),
+ * or sibling products
+ */
+const createAssociatedProductNodes = async ({ createNode, createNodeId, createContentDigest }, umbrellaProduct) => {
+  try {
+    const associatedProducts = manifestMetadata?.associated_products || [];
+    if (umbrellaProduct) {
+      associatedProducts.push(...(umbrellaProduct.associated_products || []));
+    }
+
+    return await Promise.all(
+      associatedProducts.map(async (product) =>
+        createNode({
+          children: [],
+          id: createNodeId(`associated-metadata-${product.name}`),
+          internal: {
+            contentDigest: createContentDigest(product),
+            type: 'AssociatedProduct',
+          },
+          parent: null,
+          productName: product.name,
+        })
+      )
+    );
+  } catch (e) {
+    console.error(`Error while creating associated metadata nodes: ${JSON.stringify(e)}`);
   }
 };
 
@@ -154,7 +166,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
           type: 'PageImage',
           contentDigest: createContentDigest(gatsbyImages.map((asset) => asset.key)),
         },
-        pageAssets: gatsbyImages.map((asset) => asset.key.slice(1)),
+        pageAssets: gatsbyImages.map((asset) => removeLeadingSlash(asset.key)),
         parent: null,
         slug: slug,
       });
@@ -166,11 +178,24 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
-  await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
+  const umbrellaProduct = await db.realmInterface.getMetadata(
+    {
+      'associated_products.name': siteMetadata.project,
+    },
+    { associated_products: 1 }
+  );
+
+  await createAssociatedProductNodes({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+
+  await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
 
   await saveAssetFiles(assets, db);
+  if (!siteMetadata.manifestPath) {
+    console.error('Getting metadata from realm without filters');
+  }
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
 
   const { parentPaths, slugToTitle } = metadataMinusStatic;
@@ -256,8 +281,6 @@ exports.createPages = async ({ actions }) => {
           context: {
             slug,
             repoBranches,
-            associatedReposInfo,
-            isAssociatedProduct,
             template: pageNodes?.options?.template,
             page: pageNodes,
           },
@@ -325,6 +348,10 @@ exports.createSchemaCustomization = ({ actions }) => {
     type PageImage implements Node @dontInfer {
       slug: String
       images: [File] @link(by: "relativePath", from: "pageAssets")
+    }
+
+    type AssociatedProduct implements Node @dontInfer {
+      productName: String
     }
   `);
 };

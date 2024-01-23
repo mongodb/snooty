@@ -59,7 +59,7 @@ export const fetchOASFile = async (apiName, database) => {
 };
 
 export const fetchDocument = async (database, collectionName, query, projections) => {
-  return callAuthenticatedFunction('fetchDocument', database, collectionName, query, projections);
+  return callAuthenticatedFunction('fetchDocumentSorted', database, collectionName, query, projections);
 };
 
 export const fetchDocset = async (database, matchConditions) => {

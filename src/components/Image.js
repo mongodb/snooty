@@ -6,6 +6,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import ImageContext from '../context/image-context';
 import { getNestedValue } from '../utils/get-nested-value';
+import { removeLeadingSlash } from '../utils/remove-leading-slash';
 
 const Image = ({ nodeData, className }) => {
   const scale = (parseInt(getNestedValue(['options', 'scale'], nodeData), 10) || 100) / 100;
@@ -28,9 +29,12 @@ const Image = ({ nodeData, className }) => {
     border: 0.5px solid ${palette.gray.light1};
     border-radius: 4px;
   `;
+  const gatsbyContainerStyle = css`
+    height: max-content;
+  `;
 
   const { imageByPath } = useContext(ImageContext);
-  const image = imageByPath[imgSrc.slice(1)];
+  const image = imageByPath[removeLeadingSlash(imgSrc)];
   // if there is a preprocessed image, use those new values for
   // src, srcset, width, height
   let srcSet, width;
@@ -60,7 +64,7 @@ const Image = ({ nodeData, className }) => {
         alt={altText}
         style={userOptionStyle}
         imgClassName={cx(defaultStyling, hasBorder ? borderStyling : '')}
-        className={cx(directiveClass, customAlign, className)}
+        className={cx(gatsbyContainerStyle, directiveClass, customAlign, className)}
       />
     );
   }

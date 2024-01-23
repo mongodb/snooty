@@ -83,10 +83,7 @@ const GlobalGrid = styled('div')`
   overflow: clip;
 `;
 
-const DefaultLayout = ({
-  children,
-  pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct },
-}) => {
+const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol, project } = useSnootyMetadata();
   const remoteMetadata = useRemoteMetadata();
@@ -102,10 +99,8 @@ const DefaultLayout = ({
       <RootProvider
         slug={slug}
         repoBranches={repoBranches}
-        associatedReposInfo={associatedReposInfo}
         headingNodes={page?.options?.headings}
         selectors={page?.options?.selectors}
-        isAssociatedProduct={isAssociatedProduct}
         remoteMetadata={remoteMetadata}
         project={project}
       >

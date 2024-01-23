@@ -12,27 +12,12 @@ import { SearchContextProvider } from './SearchResults/SearchContext';
 // Check for feature flag here to make it easier to pass down for testing purposes
 const SHOW_FACETS = process.env.GATSBY_FEATURE_FACETED_SEARCH === 'true';
 
-const RootProvider = ({
-  children,
-  headingNodes,
-  selectors,
-  slug,
-  repoBranches,
-  associatedReposInfo,
-  isAssociatedProduct,
-  remoteMetadata,
-  project,
-}) => {
+const RootProvider = ({ children, headingNodes, selectors, slug, repoBranches, remoteMetadata, project }) => {
   let providers = (
     <TabProvider selectors={selectors}>
       <ContentsProvider headingNodes={headingNodes}>
         <HeaderContextProvider>
-          <VersionContextProvider
-            repoBranches={repoBranches}
-            slug={slug}
-            associatedReposInfo={associatedReposInfo}
-            isAssociatedProduct={isAssociatedProduct}
-          >
+          <VersionContextProvider repoBranches={repoBranches} slug={slug}>
             <TocContextProvider remoteMetadata={remoteMetadata}>
               <SidenavContextProvider>
                 <SearchContextProvider showFacets={SHOW_FACETS}>{children}</SearchContextProvider>

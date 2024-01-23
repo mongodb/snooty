@@ -25,12 +25,19 @@ class RealmInterface {
     return this.realmClient.callFunction('fetchDocuments', DB, collection, buildFilter);
   }
 
-  async getMetadata(buildFilter, findOptions) {
-    return this.realmClient.callFunction('fetchDocument', DB, METADATA_COLLECTION, buildFilter, undefined, findOptions);
+  async getMetadata(buildFilter, projectionOptions, findOptions) {
+    return this.realmClient.callFunction(
+      'fetchDocumentSorted',
+      DB,
+      METADATA_COLLECTION,
+      buildFilter,
+      projectionOptions,
+      findOptions
+    );
   }
 
   async fetchDocument(database, collectionName, query) {
-    return this.realmClient.callFunction('fetchDocument', database, collectionName, query);
+    return this.realmClient.callFunction('fetchDocumentSorted', database, collectionName, query);
   }
 
   async fetchDocset(matchConditions = { project: siteMetadata.project }) {
