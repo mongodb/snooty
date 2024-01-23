@@ -48,6 +48,10 @@ const Image = ({ nodeData, handleImageLoaded, className }) => {
     width: 100%;
     border-radius: 4px;
   `;
+  // const gatsbyContainerStyle = css`
+  //   height: max-content;
+  // `;
+  // UNUSED from merge conflict
 
   const buildStyles = () => {
     return {

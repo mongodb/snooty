@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import { METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { fetchDocuments } from '../utils/realm';
+import { fetchDocument } from '../utils/realm';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { isGatsbyPreview } from '../utils/is-gatsby-preview';
 import { VersionContext } from './version-context';
@@ -39,16 +39,15 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
       if (associatedProducts?.length || showVersionDropdown) {
         filter['is_merged_toc'] = true;
       }
-      const db = database;
-      const metadata = await fetchDocuments(db, METADATA_COLLECTION, filter, undefined, findOptions);
-      return metadata[0]?.toctree ?? toctree;
+      const metadata = await fetchDocument(database, METADATA_COLLECTION, filter, { toctree: 1 }, findOptions);
+      return metadata?.toctree ?? toctree;
     } catch (e) {
       // fallback to toctree from build time
       console.error(e);
       return remoteMetadata?.toctree || toctree;
     }
     // below dependents are server constants
-  }, [project, branch, associatedProducts, showVersionDropdown, database, toctree, remoteMetadata]);
+  }, [toctree, project, branch, associatedProducts?.length, showVersionDropdown, database, remoteMetadata?.toctree]);
 
   const setInitVersion = useCallback(
     (tocNode) => {
