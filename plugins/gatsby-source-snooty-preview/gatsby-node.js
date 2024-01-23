@@ -55,6 +55,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       slug: String
       images: [File] @link(by: "relativePath", from: "pageAssets")
     }
+
+    type AssociatedProduct implements Node @dontInfer {
+      productName: String
+    }
   `;
   createTypes(typeDefs);
 };

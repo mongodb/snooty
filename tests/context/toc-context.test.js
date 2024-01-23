@@ -11,7 +11,7 @@ import { TocContext, TocContextProvider } from '../../src/context/toc-context';
 // <------------------ START test data mocks ------------------>
 const siteMetadataMock = jest.spyOn(siteMetadata, 'useSiteMetadata');
 const snootyMetadataMock = jest.spyOn(snootyMetadata, 'default');
-const realmMock = jest.spyOn(realm, 'fetchDocuments');
+const realmMock = jest.spyOn(realm, 'fetchDocument');
 const project = 'cloud-docs';
 
 let sampleTocTree, responseTree, mockedResponse;
@@ -80,11 +80,9 @@ const setResponse = () => {
     },
   });
 
-  mockedResponse = [
-    {
-      toctree: responseTree,
-    },
-  ];
+  mockedResponse = {
+    toctree: responseTree,
+  };
 };
 
 const setMocks = () => {
