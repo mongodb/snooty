@@ -82,12 +82,19 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
       ...test.feedback,
     };
 
+    const maxRetries = 1;
+    let retries = 0;
+
     try {
       await createNewFeedback(newFeedback);
       setFeedback(newFeedback);
     } catch (err) {
+      // This catch block will most likely only be hit after Realm attempts internal retry logic
+      // after access token is refreshed
       console.error('There was an error submitting feedback', err);
-      if (err.statusCode === 401) {
+      // Safeguard with retry count in case Realm does something weird
+      if (err.statusCode === 401 && retries < maxRetries) {
+        retries++;
         await retryFeedbackSubmission(newFeedback);
       }
     }

@@ -20,7 +20,7 @@ function parseStorageKey(storage) {
 /**
  * Deletes localStorage data for all users
  */
-async function deleteLocalStorageData() {
+function deleteLocalStorageData() {
   const { allUsers } = app;
   // The accessToken and refreshToken are automatically removed if invalid, but not the following keys
   const keysToDelete = ['profile', 'providerType'];
@@ -63,7 +63,7 @@ export const useRealmUser = () => {
 
     // Clean up invalid data from local storage to avoid bubbling up local storage sizes for broken user credentials
     // This should be safe since only old users' data would be deleted, and we make a new user right after
-    await deleteLocalStorageData();
+    deleteLocalStorageData();
 
     const newUser = await app.logIn(Realm.Credentials.anonymous());
     setUser(newUser);
