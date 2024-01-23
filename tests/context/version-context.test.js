@@ -234,9 +234,9 @@ describe('Version Context', () => {
       };
     });
   });
-  mockFetchDocuments = jest.spyOn(realm, 'fetchDocuments').mockImplementation(async (dbName, collectionName, query) => {
+  mockFetchDocuments = jest.spyOn(realm, 'fetchDocument').mockImplementation(async (dbName, collectionName, query) => {
     if (query && query['associated_products'] === 'docs-atlas-cli') {
-      return [{}]; // spoofing data for "at least one parent association"
+      return {}; // spoofing data for "at least one parent association"
     }
     return [];
   });

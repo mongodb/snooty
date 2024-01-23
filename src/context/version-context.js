@@ -6,7 +6,7 @@ import { useAllAssociatedProducts } from '../hooks/useAssociatedProducts';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
-import { fetchDocset, fetchDocuments } from '../utils/realm';
+import { fetchDocset, fetchDocument } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 
@@ -124,8 +124,8 @@ const getUmbrellaProject = async (project, dbName) => {
     const query = {
       'associated_products.name': project,
     };
-    const umbrellaProjects = fetchDocuments(dbName, METADATA_COLLECTION, query);
-    return umbrellaProjects;
+    const umbrellaProject = await fetchDocument(dbName, METADATA_COLLECTION, query);
+    return umbrellaProject;
   } catch (e) {
     console.error(e);
   }
@@ -212,11 +212,11 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
 
   const [showVersionDropdown, setShowVersionDropdown] = useState(isAssociatedProduct);
   useEffect(() => {
-    getUmbrellaProject(metadata.project, metadata.database).then((metadataList) => {
+    getUmbrellaProject(metadata.project, metadata.database).then((umbrellaMetadata) => {
       if (!mountRef.current) {
         return;
       }
-      setShowVersionDropdown(metadataList.length > 0);
+      setShowVersionDropdown(!!umbrellaMetadata);
     });
   }, [metadata.project, metadata.database]);
 

@@ -45,6 +45,12 @@ const fetchDocuments = () => {
   });
 };
 
+const fetchDocument = () => {
+  return jest.spyOn(realm, 'fetchDocument').mockImplementation(async () => {
+    return {};
+  });
+};
+
 const fetchDocset = () => {
   return jest.spyOn(realm, 'fetchDocset').mockImplementation(async (database, matchConditions) => {
     switch (matchConditions.project) {
@@ -211,14 +217,16 @@ describe('VersionDropdown', () => {
 
   describe('Component', () => {
     jest.useFakeTimers();
-    let mockFetchDocuments, mockedFetchDocset;
+    let mockFetchDocuments, mockedFetchDocset, mockFetchDocument;
 
     beforeEach(async () => {
+      mockFetchDocument = fetchDocument();
       mockFetchDocuments = fetchDocuments();
       mockedFetchDocset = fetchDocset();
     });
 
     afterAll(async () => {
+      mockFetchDocument.mockClear();
       mockFetchDocuments.mockClear();
       mockedFetchDocset.mockClear();
     });
