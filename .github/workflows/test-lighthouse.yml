@@ -24,3 +24,9 @@ jobs:
         run: |
           npm ci --legacy-peer-deps
           npm run build
+      - name: Save Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-public
+          path: |
+            public

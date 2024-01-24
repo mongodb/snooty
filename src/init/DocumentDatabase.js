@@ -68,12 +68,9 @@ class ManifestDocumentDatabase {
   async getDocuments() {
     const result = [];
     if (!this.path.includes('.zip')) {
-      console.log('looking for documents from file');
       const documents = JSON.parse(fs.readFileSync('snooty-documents.json'));
-      console.log('DOCUMENTS found in snooty-documents.json', documents.length);
       return documents;
     } else {
-      console.log('sadly still using zip for documents');
       const zipEntries = this.zip.getEntries();
       for (const entry of zipEntries) {
         if (entry.entryName.startsWith('documents/')) {
@@ -92,14 +89,8 @@ class ManifestDocumentDatabase {
   async getAsset(checksum) {
     console.log('getting assets');
     if (!this.zip) {
-      console.log('looking for assets from file');
       const assets = JSON.parse(fs.readFileSync('snooty-assets.json'));
-      console.log('DOCUMENTS found in snooty-assets.json', Object.keys(assets));
-      console.log('checksum ', checksum);
-      // const assetData = assets.assetData;
-      // console.log('assetData info ', Object.keys(assetData));
       const asset = assets[checksum];
-      console.log('is this asset around? ', asset);
       return asset.assetData;
     }
     const result = this.zip.getEntry(`assets/${checksum}`);
