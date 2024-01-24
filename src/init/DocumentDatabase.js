@@ -94,7 +94,8 @@ class ManifestDocumentDatabase {
     if (!this.zip) {
       console.log('looking for assets from file');
       const assets = JSON.parse(fs.readFileSync('snooty-assets.json'));
-      console.log('DOCUMENTS found in snooty-assets.json', Object.keys(assets).length);
+      console.log('DOCUMENTS found in snooty-assets.json', Object.keys(assets));
+      console.log('checksum ', checksum);
       const asset = assets[checksum];
       console.log('is this asset around? ', asset);
       return asset;
