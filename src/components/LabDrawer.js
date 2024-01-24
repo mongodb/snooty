@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { Resizable } from 'react-resizable';
 import { palette } from '@leafygreen-ui/palette';
 import useViewport from '../hooks/useViewport';
+import { theme } from '../theme/docsTheme';
 
 const iframeStyle = css`
   border: none;
@@ -32,13 +33,22 @@ const handleStyle = css`
   background-color: ${palette.white};
   width: 50px;
   height: 4px;
+
+  @media ${theme.screenSize.upToMedium} {
+    display: none;
+  }
 `;
 
 const topContainerStyle = css`
   margin-bottom: 11px;
+  padding-left: 17px;
   height: 28px;
   display: flex;
   justify-content: center;
+
+  @media ${theme.screenSize.upToSmall} {
+    display: block;
+  }
 `;
 
 const titleStyle = css`
@@ -48,6 +58,10 @@ const titleStyle = css`
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+
+  @media ${theme.screenSize.upToSmall} {
+    text-align: left;
+  }
 `;
 
 const CustomResizeHandle = React.forwardRef((props, ref) => {
@@ -89,7 +103,7 @@ const LabDrawer = ({ title, embedValue }) => {
       {/* Need this div with style as a wrapper to help with resizing */}
       <div style={{ width: defaultWidth + 'px', height: height + 'px' }}>
         <div className={cx(topContainerStyle)}>
-          <span className={cx(titleStyle)}>{labTitle}</span>
+          <div className={cx(titleStyle)}>{labTitle}</div>
         </div>
         <iframe
           className={cx(iframeStyle)}
