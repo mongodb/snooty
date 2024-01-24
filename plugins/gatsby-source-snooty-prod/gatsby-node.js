@@ -13,6 +13,7 @@ const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/i
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
+const { constructPageDirectives } = require('../../src/utils/setup/construct-page-directives.js');
 
 // different types of references
 const PAGES = [];
@@ -148,6 +149,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
           assets.set(checksum, new Set([asset.key]));
         }
       });
+
+      const nodeType = 'PageDirective';
+
+      constructPageDirectives({ rootNodes: pageNode, key, nodeType, createNode, createNodeId, createContentDigest });
     }
 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
@@ -352,6 +357,11 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type AssociatedProduct implements Node @dontInfer {
       productName: String
+    }
+
+    type PageDirective implements Node @dontInfer {
+      directives: [String!]
+      slug: String!
     }
   `);
 };

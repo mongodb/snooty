@@ -59,6 +59,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type AssociatedProduct implements Node @dontInfer {
       productName: String
     }
+
+    type PageDirective implements Node @dontInfer {
+      directives: [String!]
+      slug: String!
+    }
   `;
   createTypes(typeDefs);
 };
