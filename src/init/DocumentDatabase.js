@@ -56,7 +56,7 @@ class RealmInterface {
 
 class ManifestDocumentDatabase {
   constructor(path) {
-    this.zip = new AdmZip(path);
+    this.zip = path.includes('.zip') ? new AdmZip(path) : null;
     this.path = path;
     this.realmInterface = new RealmInterface();
   }
@@ -91,6 +91,7 @@ class ManifestDocumentDatabase {
 
   async getAsset(checksum) {
     console.log('getting assets');
+    if (!this.zip) return null;
     const result = this.zip.getEntry(`assets/${checksum}`);
     if (result) {
       return result.getData();
