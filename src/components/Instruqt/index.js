@@ -18,7 +18,7 @@ const controlsStyle = css`
 `;
 
 const Instruqt = ({ nodeData: { argument }, nodeData }) => {
-  const embedValue = argument[0].value;
+  const embedValue = argument[0]?.value;
   const iframeRef = useRef(null);
 
   const onFullScreen = useCallback(() => {
