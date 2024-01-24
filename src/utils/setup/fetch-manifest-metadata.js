@@ -6,10 +6,13 @@ const fs = require('fs');
 const fetchManifestMetadata = () => {
   let metadata = {};
   if (!process.env.GATSBY_MANIFEST_PATH || !process.env.GATSBY_MANIFEST_PATH.includes('.zip')) {
+    console.log('trying to get metadata from file');
     metadata = fs.readFileSync('snooty-metadata.js');
+    console.log('got metadata from file ', metadata);
     return metadata;
   }
   if (process.env.GATSBY_MANIFEST_PATH) {
+    console.log('still getting metadata from zip');
     const zip = new AdmZip(process.env.GATSBY_MANIFEST_PATH);
     const zipEntries = zip.getEntries();
     for (const entry of zipEntries) {
