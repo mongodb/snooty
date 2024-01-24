@@ -69,8 +69,8 @@ class ManifestDocumentDatabase {
     const result = [];
     if (!this.path.includes('.zip')) {
       console.log('looking for documents from file');
-      const documents = fs.readFileSync('snooty-documents.js');
-      console.log('DOCUMENTS found in snooty-documents.js', documents.length);
+      const documents = JSON.parse(fs.readFileSync('snooty-documents.json'));
+      console.log('DOCUMENTS found in snooty-documents.json', documents.length);
       return documents;
     } else {
       console.log('sadly still using zip for documents');

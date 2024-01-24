@@ -20,6 +20,7 @@ jobs:
         env:
           NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
           NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
+          GATSBY_MANIFEST_PATH: snooty-metadata.json
         run: |
           npm ci --legacy-peer-deps
           npm run build

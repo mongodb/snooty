@@ -7,7 +7,7 @@ const fetchManifestMetadata = () => {
   let metadata = {};
   if (!process.env.GATSBY_MANIFEST_PATH || !process.env.GATSBY_MANIFEST_PATH.includes('.zip')) {
     console.log('trying to get metadata from file');
-    metadata = fs.readFileSync('snooty-metadata.js');
+    metadata = JSON.parse(fs.readFileSync('snooty-metadata.json'));
     console.log('got metadata from file ', metadata);
     return metadata;
   }
