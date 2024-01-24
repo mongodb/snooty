@@ -1,6 +1,4 @@
-// Generates graphql nodes that contains directives used
-// in a page, in order of occurrence.
-// Does not contain duplicates.
+const { getPageSlug } = require('../get-page-slug');
 
 const storeDirectiveNames = (node, directiveNameSet) => {
   if (node && node.type) {
@@ -12,6 +10,9 @@ const storeDirectiveNames = (node, directiveNameSet) => {
 };
 
 /**
+ * Generates graphql nodes that contains the unique directives
+ * used in a page, in order of first occurrence.
+ * Use a page query using slug to fetch unique directives
  *
  * @param {node[]}    rootNodes
  * @param {string}    key
@@ -37,7 +38,7 @@ const constructPageDirectives = ({ rootNodes, key, createNode, createNodeId, cre
       type: nodeType,
     },
     directives: nodeList,
-    slug: key,
+    slug: getPageSlug(key),
   });
 };
 

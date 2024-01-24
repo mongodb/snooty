@@ -79,6 +79,8 @@ const DocumentBody = (props) => {
     pageContext: { page, slug, template },
   } = props;
 
+  console.log(`Directives used on page "${slug}": ${props?.data?.pageDirective?.directives}`);
+
   useEffect(() => {
     // A workaround to remove the other locale options.
     if (!HIDE_UNIFIED_FOOTER_LOCALE) {
@@ -220,6 +222,9 @@ export const query = graphql`
         }
         relativePath
       }
+    }
+    pageDirective(slug: { eq: $slug }) {
+      directives
     }
   }
 `;
