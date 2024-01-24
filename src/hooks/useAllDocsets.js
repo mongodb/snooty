@@ -23,6 +23,12 @@ export const useAllDocsets = () => {
               stg
               regression
             }
+            branches {
+              gitBranchName
+              active
+              urlSlug
+              urlAliases
+            }
           }
         }
       }

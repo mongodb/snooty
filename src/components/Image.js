@@ -29,6 +29,9 @@ const Image = ({ nodeData, className }) => {
     border: 0.5px solid ${palette.gray.light1};
     border-radius: 4px;
   `;
+  const gatsbyContainerStyle = css`
+    height: max-content;
+  `;
 
   const { imageByPath } = useContext(ImageContext);
   const image = imageByPath[removeLeadingSlash(imgSrc)];
@@ -61,7 +64,7 @@ const Image = ({ nodeData, className }) => {
         alt={altText}
         style={userOptionStyle}
         imgClassName={cx(defaultStyling, hasBorder ? borderStyling : '')}
-        className={cx(directiveClass, customAlign, className)}
+        className={cx(gatsbyContainerStyle, directiveClass, customAlign, className)}
       />
     );
   }
