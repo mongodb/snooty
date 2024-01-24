@@ -79,7 +79,8 @@ const DocumentBody = (props) => {
     pageContext: { page, slug, template },
   } = props;
 
-  console.log(`Directives used on page "${slug}": ${props?.data?.pageDirective?.directives}`);
+  console.log(`Directives used on page "${slug}": ${props?.data?.pageDirective?.directiveTypes}`);
+  console.log(`Nodes used on page "${slug}": ${props?.data?.pageDirective?.nodeTypes}`);
 
   useEffect(() => {
     // A workaround to remove the other locale options.
