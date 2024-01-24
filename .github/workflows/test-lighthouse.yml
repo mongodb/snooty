@@ -2,7 +2,7 @@ on:
   push:
     branches:
     - DOP-4247-build-artifacts
-name: Initial Feature Branch Deploy
+name: Test Lighthouse Score
 jobs: 
   deploy:
     permissions: write-all
@@ -12,7 +12,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '18.x'
-      - name: Get Webhook URL 
+      - name: Build Artifact
         uses: mongodb/docs-worker-actions/build-artifact@DOP-4247-build-artifact
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Snooty
+        run: |
+          npm ci --legacy-peer-deps
+          npm run build
