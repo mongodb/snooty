@@ -3,8 +3,8 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { createPortal } from 'react-dom';
 import { Resizable } from 'react-resizable';
 import { palette } from '@leafygreen-ui/palette';
-import useViewport from '../hooks/useViewport';
-import { theme } from '../theme/docsTheme';
+import useViewport from '../../hooks/useViewport';
+import { theme } from '../../theme/docsTheme';
 
 const iframeStyle = css`
   border: none;
