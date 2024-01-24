@@ -96,11 +96,11 @@ class ManifestDocumentDatabase {
       const assets = JSON.parse(fs.readFileSync('snooty-assets.json'));
       console.log('DOCUMENTS found in snooty-assets.json', Object.keys(assets));
       console.log('checksum ', checksum);
-      const assetData = assets.assetData;
-      console.log('assetData info ', Object.keys(assetData));
-      const asset = assetData[checksum];
+      // const assetData = assets.assetData;
+      // console.log('assetData info ', Object.keys(assetData));
+      const asset = assets[checksum];
       console.log('is this asset around? ', asset);
-      return asset;
+      return asset.assetData;
     }
     const result = this.zip.getEntry(`assets/${checksum}`);
     if (result) {
