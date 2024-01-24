@@ -61,8 +61,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type PageDirective implements Node @dontInfer {
-      directives: [String!]
       slug: String!
+      directiveTypes: [String!]
+      nodeTypes: [String!]
     }
   `;
   createTypes(typeDefs);

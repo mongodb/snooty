@@ -224,7 +224,8 @@ export const query = graphql`
       }
     }
     pageDirective(slug: { eq: $slug }) {
-      directives
+      directiveTypes
+      nodeTypes
     }
   }
 `;

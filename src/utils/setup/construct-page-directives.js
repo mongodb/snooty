@@ -1,11 +1,12 @@
 const { getPageSlug } = require('../get-page-slug');
 
-const storeDirectiveNames = (node, directiveNameSet) => {
-  if (node && node.type) {
-    directiveNameSet.add(node.type);
+const storeDirectiveNames = (node, nodeTypeSet, directiveNameSet) => {
+  if (node?.type === 'directive') {
+    directiveNameSet.add(node.name);
   }
+  nodeTypeSet.add(node.type);
   node?.children?.forEach((childNode) => {
-    storeDirectiveNames(childNode, directiveNameSet);
+    storeDirectiveNames(childNode, nodeTypeSet, directiveNameSet);
   });
 };
 
@@ -23,13 +24,15 @@ const storeDirectiveNames = (node, directiveNameSet) => {
  */
 const constructPageDirectives = ({ rootNodes, key, createNode, createNodeId, createContentDigest, nodeType }) => {
   const directiveNameSet = new Set();
+  const nodeTypeSet = new Set();
 
   // there usually is only one root node, but safeguarding in case
   rootNodes.forEach((rootNode) => {
-    storeDirectiveNames(rootNode, directiveNameSet);
+    storeDirectiveNames(rootNode, nodeTypeSet, directiveNameSet);
   });
 
-  const nodeList = [...directiveNameSet];
+  const nodeList = [...nodeTypeSet];
+  const directiveList = [...directiveNameSet];
   createNode({
     children: [],
     id: createNodeId(`pageDirectives-${key}`),
@@ -37,7 +40,8 @@ const constructPageDirectives = ({ rootNodes, key, createNode, createNodeId, cre
       contentDigest: createContentDigest(nodeList),
       type: nodeType,
     },
-    directives: nodeList,
+    nodeTypes: nodeList,
+    directiveTypes: directiveList,
     slug: getPageSlug(key),
   });
 };
