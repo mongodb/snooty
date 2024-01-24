@@ -13,7 +13,16 @@ import { InstruqtProvider } from './Instruqt/instruqt-context';
 // Check for feature flag here to make it easier to pass down for testing purposes
 const SHOW_FACETS = process.env.GATSBY_FEATURE_FACETED_SEARCH === 'true';
 
-const RootProvider = ({ children, headingNodes, selectors, slug, repoBranches, hasInstruqtLab, remoteMetadata, project }) => {
+const RootProvider = ({
+  children,
+  headingNodes,
+  selectors,
+  slug,
+  repoBranches,
+  hasInstruqtLab,
+  remoteMetadata,
+  project,
+}) => {
   let providers = (
     <TabProvider selectors={selectors}>
       <ContentsProvider headingNodes={headingNodes}>
