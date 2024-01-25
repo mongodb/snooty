@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { cx, css } from '@leafygreen-ui/emotion';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Resizable } from 'react-resizable';
+import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import useViewport from '../../hooks/useViewport';
 import { theme } from '../../theme/docsTheme';
@@ -80,10 +80,17 @@ const LabDrawer = ({ title, embedValue }) => {
   const defaultMeasurement = 200;
   const defaultWidth = viewportSize.width ?? defaultMeasurement;
   const defaultHeight = (viewportSize.height * 2) / 3 ?? defaultMeasurement;
+
   const minHeight = 60;
   const maxHeight = viewportSize.height ?? defaultMeasurement;
-
   const [height, setHeight] = useState(defaultHeight);
+
+  // Shrink height of the drawer if new max height is less than the current height
+  useEffect(() => {
+    if (maxHeight < height) {
+      setHeight(maxHeight);
+    }
+  }, [height, maxHeight]);
 
   const handleResize = (_e, { size }) => {
     setHeight(size.height);
@@ -109,7 +116,7 @@ const LabDrawer = ({ title, embedValue }) => {
           className={cx(iframeStyle)}
           allowFullScreen
           sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
-          title={`Instruqt ${embedValue}`}
+          title={`Instruqt - ${labTitle}`}
           height={`${height - minHeight}px`}
           width="100%"
           src={`https://play.instruqt.com/embed${embedValue}`}
