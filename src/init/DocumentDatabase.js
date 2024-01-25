@@ -56,8 +56,7 @@ class RealmInterface {
 
 class ManifestDocumentDatabase {
   constructor(path) {
-    this.zip = path.includes('.zip') ? new AdmZip(path) : null;
-    this.path = path;
+    this.zip = path.match(/\.zip$/) ? new AdmZip(path) : null;
     this.realmInterface = new RealmInterface();
   }
 
@@ -67,7 +66,7 @@ class ManifestDocumentDatabase {
 
   async getDocuments() {
     const result = [];
-    if (!this.path.includes('.zip')) {
+    if (!this.zip) {
       const documents = JSON.parse(fs.readFileSync('snooty-documents.json'));
       return documents;
     } else {
@@ -87,7 +86,6 @@ class ManifestDocumentDatabase {
   }
 
   async getAsset(checksum) {
-    console.log('getting assets');
     if (!this.zip) {
       const assets = JSON.parse(fs.readFileSync('snooty-assets.json'));
       const asset = assets[checksum];

@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '18.x'
-      - name: Build Artifact
+      - name: Access Build Data
         uses: mongodb/docs-worker-actions/build-artifact@DOP-4247-build-artifact
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -24,7 +24,7 @@ jobs:
         run: |
           npm ci --legacy-peer-deps
           npm run build
-      - name: Save Artifacts
+      - name: Save Artifact
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-public

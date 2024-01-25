@@ -5,14 +5,11 @@ const fs = require('fs');
 // Returns the metadata from the manifest file if provided
 const fetchManifestMetadata = () => {
   let metadata = {};
-  if (!process.env.GATSBY_MANIFEST_PATH || !process.env.GATSBY_MANIFEST_PATH.includes('.zip')) {
-    console.log('trying to get metadata from file');
+  if (!process.env.GATSBY_MANIFEST_PATH || !process.env.GATSBY_MANIFEST_PATH.match(/\.zip$/)) {
     metadata = JSON.parse(fs.readFileSync('snooty-metadata.json'));
-    console.log('got metadata from file ');
     return metadata;
   }
   if (process.env.GATSBY_MANIFEST_PATH) {
-    console.log('still getting metadata from zip');
     const zip = new AdmZip(process.env.GATSBY_MANIFEST_PATH);
     const zipEntries = zip.getEntries();
     for (const entry of zipEntries) {
@@ -21,7 +18,6 @@ const fetchManifestMetadata = () => {
       }
     }
   }
-  console.log('keys ', Object.keys(metadata));
   return metadata;
 };
 
