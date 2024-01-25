@@ -257,6 +257,23 @@ describe('FeedbackWidget', () => {
           await tick();
           expect(wrapper.getByText(EMAIL_ERROR_TEXT)).toBeTruthy();
         });
+
+        it('attempts to resubmit on 401 error', async () => {
+          const customError = new Error('mock error message');
+          customError.statusCode = 401;
+          stitchFunctionMocks['createNewFeedback'].mockRejectedValueOnce(customError);
+
+          wrapper = await mountFormWithFeedbackState({
+            view: 'comment',
+            comment: 'This is a test comment.',
+            sentiment: 'Positive',
+            rating: 5,
+            user: { email: 'test@example.com' },
+          });
+          userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
+          await tick();
+          expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(2);
+        });
       });
     });
 

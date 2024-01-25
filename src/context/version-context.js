@@ -1,10 +1,12 @@
 import React, { createContext, useReducer, useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { navigate } from '@gatsbyjs/reach-router';
 import { METADATA_COLLECTION } from '../build-constants';
+import { useAllDocsets } from '../hooks/useAllDocsets';
+import { useAllAssociatedProducts } from '../hooks/useAssociatedProducts';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
-import { fetchDocset, fetchDocuments } from '../utils/realm';
+import { fetchDocset, fetchDocument } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 
@@ -60,7 +62,7 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
     for (let associatedProduct of associatedProducts) {
       promises.push(
         fetchDocset(metadata.reposDatabase, {
-          project: associatedProduct.name,
+          project: associatedProduct,
         })
       );
     }
@@ -122,8 +124,8 @@ const getUmbrellaProject = async (project, dbName) => {
     const query = {
       'associated_products.name': project,
     };
-    const umbrellaProjects = fetchDocuments(dbName, METADATA_COLLECTION, query);
-    return umbrellaProjects;
+    const umbrellaProject = await fetchDocument(dbName, METADATA_COLLECTION, query);
+    return umbrellaProject;
   } catch (e) {
     console.error(e);
   }
@@ -139,12 +141,28 @@ const VersionContext = createContext({
   setAvailableVersions: () => {},
   showVersionDropdown: false,
   showEol: false,
+  isAssociatedProduct: false,
   onVersionSelect: () => {},
 });
 
-const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociatedProduct, slug, children }) => {
+const VersionContextProvider = ({ repoBranches, slug, children }) => {
   const siteMetadata = useSiteMetadata();
-  const { associated_products: associatedProducts, project } = useSnootyMetadata();
+  const associatedProductNames = useAllAssociatedProducts();
+  const docsets = useAllDocsets();
+  const { project } = useSnootyMetadata();
+  const associatedReposInfo = useMemo(
+    () =>
+      associatedProductNames.reduce((res, productName) => {
+        res[productName] = docsets.find((docset) => docset.project === productName);
+        return res;
+      }, {}),
+    [associatedProductNames, docsets]
+  );
+
+  const isAssociatedProduct = useMemo(
+    () => associatedProductNames.includes(project),
+    [associatedProductNames, project]
+  );
   const metadata = useMemo(() => {
     return {
       ...siteMetadata,
@@ -176,7 +194,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   // on init, fetch versions from realm app services
   useEffect(() => {
-    getBranches(metadata, repoBranches, associatedReposInfo, associatedProducts || []).then(
+    getBranches(metadata, repoBranches, associatedReposInfo, associatedProductNames).then(
       ({ versions, groups, hasEolBranches }) => {
         if (!mountRef.current) {
           return;
@@ -194,11 +212,11 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
 
   const [showVersionDropdown, setShowVersionDropdown] = useState(isAssociatedProduct);
   useEffect(() => {
-    getUmbrellaProject(metadata.project, metadata.database).then((metadataList) => {
+    getUmbrellaProject(metadata.project, metadata.database).then((umbrellaMetadata) => {
       if (!mountRef.current) {
         return;
       }
-      setShowVersionDropdown(metadataList.length > 0);
+      setShowVersionDropdown(!!umbrellaMetadata);
     });
   }, [metadata.project, metadata.database]);
 
@@ -273,6 +291,7 @@ const VersionContextProvider = ({ repoBranches, associatedReposInfo, isAssociate
         availableGroups,
         showVersionDropdown,
         onVersionSelect,
+        isAssociatedProduct,
         showEol,
       }}
     >
