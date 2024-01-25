@@ -5,10 +5,7 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import useViewport from '../../hooks/useViewport';
 import { theme } from '../../theme/docsTheme';
-
-const iframeStyle = css`
-  border: none;
-`;
+import InstruqtFrame from './InstruqtFrame';
 
 const labContainerStyle = css`
   background-color: ${palette.gray.dark3};
@@ -85,6 +82,8 @@ const LabDrawer = ({ title, embedValue }) => {
   const maxHeight = viewportSize.height ?? defaultMeasurement;
   const [height, setHeight] = useState(defaultHeight);
 
+  const frameHeight = height - minHeight;
+
   // Shrink height of the drawer if new max height is less than the current height
   useEffect(() => {
     if (maxHeight < height) {
@@ -112,15 +111,7 @@ const LabDrawer = ({ title, embedValue }) => {
         <div className={cx(topContainerStyle)}>
           <div className={cx(titleStyle)}>{labTitle}</div>
         </div>
-        <iframe
-          className={cx(iframeStyle)}
-          allowFullScreen
-          sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
-          title={`Instruqt - ${labTitle}`}
-          height={`${height - minHeight}px`}
-          width="100%"
-          src={`https://play.instruqt.com/embed${embedValue}`}
-        />
+        <InstruqtFrame title={title} embedValue={embedValue} height={frameHeight} />
       </div>
     </Resizable>,
     document.body

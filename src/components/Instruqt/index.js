@@ -4,6 +4,7 @@ import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import LabDrawer from './LabDrawer';
+import InstruqtFrame from './InstruqtFrame';
 
 const controlsStyle = css`
   width: 100%;
@@ -17,8 +18,9 @@ const controlsStyle = css`
   margin-bottom: ${theme.size.default};
 `;
 
-const Instruqt = ({ nodeData: { argument }, nodeData }) => {
-  const embedValue = argument[0]?.value;
+const Instruqt = ({ nodeData }) => {
+  const embedValue = nodeData?.argument[0]?.value;
+  const title = nodeData?.options?.title;
   const iframeRef = useRef(null);
 
   const onFullScreen = useCallback(() => {
@@ -44,19 +46,11 @@ const Instruqt = ({ nodeData: { argument }, nodeData }) => {
     <>
       {process.env.GATSBY_FEATURE_LAB_DRAWER === 'true' ? (
         <>
-          <LabDrawer embedValue={embedValue} />
+          <LabDrawer embedValue={embedValue} title={title} />
         </>
       ) : (
         <>
-          <iframe
-            ref={iframeRef}
-            allowFullScreen
-            sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
-            title={`Instruqt ${embedValue}`}
-            height="640"
-            width="100%"
-            src={`https://play.instruqt.com/embed${embedValue}`}
-          />
+          <InstruqtFrame title={title} embedValue={embedValue} ref={iframeRef} />
           <div css={controlsStyle}>
             <IconButton aria-label="Full Screen" onClick={onFullScreen}>
               <Icon glyph="FullScreenEnter" />
