@@ -50,6 +50,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type ChangelogData implements Node @dontInfer {
       changelogData: JSON
     }
+<<<<<<< HEAD
 
     type PageImage implements Node @dontInfer {
       slug: String
@@ -59,6 +60,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type AssociatedProduct implements Node @dontInfer {
       productName: String
     }
+=======
+>>>>>>> parent of 60e49b50 (DOP-4207: use Gatsby Image to pre process images (#981))
   `;
   createTypes(typeDefs);
 };
