@@ -147,6 +147,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       const { nodeList, directiveList } = getPageDirectives(pageNode);
 
       createNode({
+        id: key,
         page_id: key,
         ast: doc.ast,
         internal: {
