@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
+import Button from '@leafygreen-ui/button';
+import Icon from '@leafygreen-ui/icon';
 import useScreenSize from '../hooks/useScreenSize';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
+import { InstruqtContext } from './Instruqt/instruqt-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
@@ -19,6 +22,16 @@ const h2Styling = css`
 const headingStyles = css`
   margin-top: 24px;
   margin-bottom: 8px;
+`;
+
+const labButtonStyling = css`
+  display: inline-flex;
+  height: 36px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: 18px;
 `;
 
 const determineHeading = (sectionDepth) => {
@@ -39,7 +52,9 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
   const { selectors } = useContext(TabContext);
+  const { hasLab, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
+  const shouldShowLabButton = isPageTitle && hasLab;
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors);
 
   return (
@@ -62,6 +77,17 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
           <Permalink id={id} description="heading" />
+          {shouldShowLabButton && (
+            <Button
+              role="button"
+              className={cx(labButtonStyling)}
+              disabled={isOpen}
+              onClick={() => setIsOpen(!isOpen)}
+              leftGlyph={<Icon glyph="Code" />}
+            >
+              {'Open Interactive Tutorial'}
+            </Button>
+          )}
         </HeadingTag>
       </ConditionalWrapper>
       {isPageTitle && <Contents />}
