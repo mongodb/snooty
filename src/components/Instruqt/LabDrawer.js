@@ -6,7 +6,7 @@ import { palette } from '@leafygreen-ui/palette';
 import useViewport from '../../hooks/useViewport';
 import { theme } from '../../theme/docsTheme';
 import InstruqtFrame from './InstruqtFrame';
-import LabButtons from './LabButtons';
+import DrawerButtons from './DrawerButtons';
 
 const labContainerStyle = css`
   background-color: ${palette.gray.dark3};
@@ -116,7 +116,7 @@ const LabDrawer = ({ title, embedValue }) => {
       <div style={{ width: defaultWidth + 'px', height: height + 'px' }}>
         <div className={cx(topContainerStyle)}>
           <div className={cx(titleStyle)}>{labTitle}</div>
-          <LabButtons
+          <DrawerButtons
             isMinHeight={isMinHeight}
             targetHeight={buttonTargetHeight}
             setHeight={setHeight}

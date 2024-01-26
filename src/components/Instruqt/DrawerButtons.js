@@ -24,11 +24,11 @@ const iconStyle = css`
   cursor: pointer;
 `;
 
-const LabButtons = ({ isMinHeight, targetHeight, setHeight, embedValue }) => {
+const DrawerButtons = ({ isMinHeight, targetHeight, setHeight, embedValue }) => {
   const { setIsOpen } = useContext(InstruqtContext);
   const drawerSizeGlyph = isMinHeight ? 'ArrowUp' : 'Minus';
 
-  const handleLabDrawerSize = () => {
+  const handleDrawerSize = () => {
     setHeight(targetHeight);
   };
 
@@ -39,17 +39,17 @@ const LabButtons = ({ isMinHeight, targetHeight, setHeight, embedValue }) => {
     }
   };
 
-  const handleLabClose = () => {
+  const handleDrawerClose = () => {
     setIsOpen(false);
   };
 
   return (
     <div className={cx(buttonContainerStyle)}>
-      <Icon className={cx(iconStyle)} width={16} height={16} onClick={handleLabDrawerSize} glyph={drawerSizeGlyph} />
+      <Icon className={cx(iconStyle)} width={16} height={16} onClick={handleDrawerSize} glyph={drawerSizeGlyph} />
       <Icon className={cx(iconStyle)} width={24} height={24} onClick={handleOpenLabInNewTab} glyph="OpenNewTab" />
-      <Icon className={cx(iconStyle)} width={24} height={24} onClick={handleLabClose} glyph="X" />
+      <Icon className={cx(iconStyle)} width={24} height={24} onClick={handleDrawerClose} glyph="X" />
     </div>
   );
 };
 
-export default LabButtons;
+export default DrawerButtons;
