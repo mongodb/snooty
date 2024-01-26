@@ -22,6 +22,7 @@ const saveAssetFiles = async (assets, db) => {
   const imageWrites = [];
 
   for (const [id, filenames] of assets) {
+    console.log(id, filenames);
     if (filenames) {
       const buffer = await db.getAsset(id);
       if (!buffer) {
