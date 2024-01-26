@@ -74,7 +74,6 @@ const Wrapper = styled('main')`
 // The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
 const Landing = ({ children, pageContext, useChatbot }) => {
   const { fontSize, screenSize, size } = useTheme();
-
   return (
     <>
       <div>
