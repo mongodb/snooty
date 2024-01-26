@@ -6,13 +6,13 @@ import { palette } from '@leafygreen-ui/palette';
 import useViewport from '../../hooks/useViewport';
 import { theme } from '../../theme/docsTheme';
 import InstruqtFrame from './InstruqtFrame';
+import LabButtons from './LabButtons';
 
 const labContainerStyle = css`
   background-color: ${palette.gray.dark3};
   z-index: 9999;
   position: fixed !important;
   bottom: 0;
-  padding-top: 21px;
   color: ${palette.white};
 `;
 
@@ -37,27 +37,31 @@ const handleStyle = css`
 `;
 
 const topContainerStyle = css`
-  margin-bottom: 11px;
-  padding-left: 17px;
-  height: 28px;
+  position: relative;
+  padding: 0 17px;
+  height: 60px;
   display: flex;
+  align-items: center;
   justify-content: center;
 
-  @media ${theme.screenSize.upToSmall} {
-    display: block;
+  @media ${theme.screenSize.upToMedium} {
+    justify-content: left;
   }
 `;
 
 const titleStyle = css`
+  font-size: 16px;
   line-height: 28px;
   width: 50vw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+  margin-top: 10px;
 
-  @media ${theme.screenSize.upToSmall} {
+  @media ${theme.screenSize.upToMedium} {
     text-align: left;
+    margin-top: 0;
   }
 `;
 
@@ -83,6 +87,8 @@ const LabDrawer = ({ title, embedValue }) => {
   const [height, setHeight] = useState(defaultHeight);
 
   const frameHeight = height - minHeight;
+  const isMinHeight = height === minHeight;
+  const buttonTargetHeight = isMinHeight ? defaultHeight : minHeight;
 
   // Shrink height of the drawer if new max height is less than the current height
   useEffect(() => {
@@ -110,6 +116,12 @@ const LabDrawer = ({ title, embedValue }) => {
       <div style={{ width: defaultWidth + 'px', height: height + 'px' }}>
         <div className={cx(topContainerStyle)}>
           <div className={cx(titleStyle)}>{labTitle}</div>
+          <LabButtons
+            isMinHeight={isMinHeight}
+            targetHeight={buttonTargetHeight}
+            setHeight={setHeight}
+            embedValue={embedValue}
+          />
         </div>
         <InstruqtFrame title={title} embedValue={embedValue} height={frameHeight} />
       </div>

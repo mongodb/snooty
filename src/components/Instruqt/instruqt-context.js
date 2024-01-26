@@ -10,7 +10,8 @@ const InstruqtContext = React.createContext(defaultContextValue);
 
 const InstruqtProvider = ({ children, hasInstruqtLab }) => {
   const hasLab = hasInstruqtLab;
-  const [isOpen, setIsOpen] = useState(false);
+  // Temporarily default state to true
+  const [isOpen, setIsOpen] = useState(true);
 
   return <InstruqtContext.Provider value={{ hasLab, isOpen, setIsOpen }}>{children}</InstruqtContext.Provider>;
 };
