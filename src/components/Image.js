@@ -6,7 +6,6 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import ImageContext from '../context/image-context';
 import { getNestedValue } from '../utils/get-nested-value';
-import { removeLeadingSlash } from '../utils/remove-leading-slash';
 
 const Image = ({ nodeData, className }) => {
   const scale = (parseInt(getNestedValue(['options', 'scale'], nodeData), 10) || 100) / 100;
@@ -34,7 +33,7 @@ const Image = ({ nodeData, className }) => {
   `;
 
   const { imageByPath } = useContext(ImageContext);
-  const image = imageByPath[removeLeadingSlash(imgSrc)];
+  const image = imageByPath[imgSrc.slice(1)];
   // if there is a preprocessed image, use those new values for
   // src, srcset, width, height
   let srcSet, width;
