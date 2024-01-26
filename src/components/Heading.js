@@ -54,7 +54,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const { selectors } = useContext(TabContext);
   const { hasLab, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
-  const shouldShowLabButton = isPageTitle && hasLab;
+  const shouldShowLabButton = isPageTitle && process.env.GATSBY_FEATURE_LAB_DRAWER === 'true' && hasLab;
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors);
 
   return (
