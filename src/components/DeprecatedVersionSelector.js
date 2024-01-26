@@ -85,7 +85,7 @@ const DeprecatedVersionSelector = () => {
     }
   }, [reposMap]);
 
-  const generateUrl = () => {
+  const generateUrl = (currentVersion) => {
     // Our current LG button version has a bug where a disabled button with an href allows the disabled
     // button to be clickable. This logic can be removed when LG button is version >= 12.0.4.
     if (buttonDisabled || isEmpty(reposMap) || !hasValidHostName(reposMap[product])) {
@@ -94,7 +94,7 @@ const DeprecatedVersionSelector = () => {
 
     // Utilizing hardcoded env because legacy sites are not available on dev/stage
     const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
-    return `${hostName}/${version.urlSlug}`;
+    return `${hostName}/${currentVersion?.urlSlug}`;
   };
 
   const alphabetize = (product1, product2) => {
@@ -104,7 +104,7 @@ const DeprecatedVersionSelector = () => {
   const productChoices = reposMap
     ? Object.keys(reposMap)
         .map((product) => ({
-          text: reposMap[product]?.displayName,
+          text: reposMap[product].displayName,
           value: product,
         }))
         // Ensure invalid entries do not break selector
@@ -117,10 +117,11 @@ const DeprecatedVersionSelector = () => {
     ? reposMap[product]?.branches
         .map((version) => {
           //only include versions with an eol_type field
-          if (!!version.eol_type) {
+          if (!!version.eol_type && !!version.versionSelectorLabel) {
             return {
               text: prefixVersion(version.versionSelectorLabel),
-              value: version,
+              value: version.versionSelectorLabel,
+              urlSlug: version.urlSlug,
               icon: version.eol_type === 'download' ? <Icon glyph="Download" /> : null,
             };
           } else return null;
@@ -130,6 +131,8 @@ const DeprecatedVersionSelector = () => {
         //sort entries alphabetically by text
         .sort(alphabetize)
     : [];
+
+  const versionChoicesMap = keyBy(versionChoices, 'value');
 
   return (
     <>
@@ -153,8 +156,8 @@ const DeprecatedVersionSelector = () => {
       <Button
         variant="primary"
         title="View or Download Documentation"
-        rightGlyph={version?.eol_type === 'download' ? <Icon glyph="Download" /> : null}
-        href={generateUrl()}
+        rightGlyph={versionChoicesMap[version]?.icon}
+        href={generateUrl(versionChoicesMap[version])}
         disabled={buttonDisabled}
       >
         {version?.eol_type === 'download' ? 'Download Documentation' : 'View Documentation'}
