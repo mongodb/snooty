@@ -15,9 +15,7 @@ export default ImageContext;
 const ImageContextProvider = ({ images, children }) => {
   const imageByPath = {};
   for (const image of images) {
-    if (image?.relativePath) {
-      imageByPath[image.relativePath] = getImage(image);
-    }
+    imageByPath[image.relativePath] = getImage(image);
   }
   return <ImageContext.Provider value={{ imageByPath }}>{children} </ImageContext.Provider>;
 };
