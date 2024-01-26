@@ -1,5 +1,6 @@
 const path = require('path');
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
+const { getPageComponents } = require('../../src/utils/setup/get-page-components.js');
 const { saveAssetFiles, saveStaticFiles, GATSBY_IMAGE_EXTENSIONS } = require('../../src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('../../src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('../../src/utils/get-nested-value');
@@ -13,7 +14,6 @@ const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/i
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
-const { getPageDirectives } = require('../../src/utils/setup/get-page-directives.js');
 
 const assets = new Map();
 
@@ -144,8 +144,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     }
 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
-      const { nodeList, directiveList } = getPageDirectives(pageNode);
-
       createNode({
         id: key,
         page_id: key,
@@ -154,8 +152,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
           type: 'Page',
           contentDigest: createContentDigest(doc),
         },
-        nodes: nodeList,
-        directives: directiveList,
+        componentNames: getPageComponents(pageNode),
       });
     }
 
@@ -279,8 +276,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         nodes {
           page_id
           ast
-          nodes
-          directives
+          componentNames
         }
       }
     }
@@ -344,8 +340,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       pagePath: String
       ast: JSON!
       metadata: SnootyMetadata @link
-      nodes: [String!]
-      directives: [String!]
+      componentNames: [String!]
     }
 
     type SnootyMetadata implements Node @dontInfer {

@@ -28,6 +28,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       pagePath: String
       ast: JSON!
       metadata: SnootyMetadata @link
+      componentNames: [String!]
     }
 
     type PagePath implements Node @dontInfer {
