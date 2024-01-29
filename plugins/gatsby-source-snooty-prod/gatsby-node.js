@@ -193,6 +193,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
 
   await saveAssetFiles(assets, db);
+  console.log('saved');
+  console.log(Date.now());
   if (!siteMetadata.manifestPath) {
     console.error('Getting metadata from realm without filters');
   }

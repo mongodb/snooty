@@ -13,7 +13,7 @@ const saveFile = async (file, data) => {
   await fs.mkdir(path.join(...pathList, path.dirname(file)), {
     recursive: true,
   });
-  await fs.writeFile(path.join(...pathList, file), data, 'binary');
+  return fs.writeFile(path.join(...pathList, file), data, 'binary');
 };
 
 // Write assets to static directory
@@ -33,7 +33,20 @@ const saveAssetFiles = async (assets, db) => {
       filenames.forEach((filename) => imageWrites.push(saveFile(filename, buffer)));
     }
   }
-  await Promise.all(imageWrites);
+  console.log('awaiting promise.all');
+  console.log(Date.now());
+  imageWrites.push(
+    new Promise((res, rej) => {
+      console.log(`setTimeout`);
+      console.log(Date.now());
+      setTimeout(() => {
+        console.log('resolving after timeout');
+        console.log(Date.now());
+        res();
+      }, 10000);
+    })
+  );
+  return Promise.all(imageWrites);
 };
 
 const saveStaticFiles = async (staticFiles) => {
