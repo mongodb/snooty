@@ -59,7 +59,7 @@ const saveStaticFiles = async (staticFiles) => {
         const toSave = data.buffer ? data.buffer : data;
         return saveFile(file, toSave);
       })
-      .push(
+      .concat([
         new Promise((res, rej) => {
           console.log(`setTimeout`);
           console.log(Date.now());
@@ -68,8 +68,8 @@ const saveStaticFiles = async (staticFiles) => {
             console.log(Date.now());
             res();
           }, 10000);
-        })
-      )
+        }),
+      ])
   );
 };
 
