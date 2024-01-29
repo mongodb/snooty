@@ -19,7 +19,7 @@ const RootProvider = ({
   selectors,
   slug,
   repoBranches,
-  hasInstruqtLab,
+  hasLabDrawer,
   remoteMetadata,
   project,
 }) => {
@@ -30,7 +30,7 @@ const RootProvider = ({
           <VersionContextProvider repoBranches={repoBranches} slug={slug}>
             <TocContextProvider remoteMetadata={remoteMetadata}>
               <SidenavContextProvider>
-                <InstruqtProvider hasInstruqtLab={hasInstruqtLab}>
+                <InstruqtProvider hasLabDrawer={hasLabDrawer}>
                   <SearchContextProvider showFacets={SHOW_FACETS}>{children}</SearchContextProvider>
                 </InstruqtProvider>
               </SidenavContextProvider>

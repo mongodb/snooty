@@ -52,9 +52,9 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
   const { selectors } = useContext(TabContext);
-  const { hasLab, isOpen, setIsOpen } = useContext(InstruqtContext);
+  const { hasDrawer, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
-  const shouldShowLabButton = isPageTitle && process.env.GATSBY_FEATURE_LAB_DRAWER === 'true' && hasLab;
+  const shouldShowLabButton = isPageTitle && process.env.GATSBY_FEATURE_LAB_DRAWER === 'true' && hasDrawer;
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors);
 
   return (
