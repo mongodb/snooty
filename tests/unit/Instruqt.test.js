@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Instruqt from '../../src/components/Instruqt';
-// data for this component
 import { InstruqtProvider } from '../../src/components/Instruqt/instruqt-context';
 import mockData from './data/Instruqt.test.json';
 
