@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Instruqt from '../../src/components/Instruqt';
 import { InstruqtProvider } from '../../src/components/Instruqt/instruqt-context';
 import mockData from './data/Instruqt.test.json';
@@ -28,13 +29,70 @@ describe('Instruqt', () => {
   });
 
   describe('lab drawer', () => {
+    const hasLabDrawer = true;
+    jest.useFakeTimers();
+    // Default width and height of Jest's virtual DOM/window
+    const defaultWidth = global.window.innerWidth;
+    const defaultHeight = global.window.innerHeight;
+    let windowOpenSpy;
+
+    beforeEach(() => {
+      process.env.GATSBY_FEATURE_LAB_DRAWER = 'true';
+      windowOpenSpy = jest.spyOn(global.window, 'open');
+      windowOpenSpy.mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      windowOpenSpy.mockRestore();
+    });
+
     it('renders in a drawer', () => {
-      // This may be removed as the feature work is complete
-      process.env.GATSBY_FEATURE_LAB_DRAWER = true;
-      const hasLabDrawer = true;
       const wrapper = renderComponent(mockData.example, hasLabDrawer);
+
+      // Ensure everything exists
+      const drawerContainer = wrapper.getByTestId('resizable-wrapper');
+      expect(drawerContainer).toBeTruthy();
+      expect(drawerContainer).toHaveStyle(`width: ${defaultWidth}px`);
+      expect(drawerContainer).toHaveStyle(`height: ${(defaultHeight * 2) / 3}px`);
       expect(wrapper.queryByTitle('Instruqt', { exact: false })).toBeTruthy();
       expect(wrapper.queryByText('MongoDB Interactive Lab')).toBeTruthy();
+    });
+
+    it('can be minimized and brought back to starting height', () => {
+      const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      const drawerContainer = wrapper.getByTestId('resizable-wrapper');
+      // Label text based on aria labels for LG Icons
+      const minimizeButton = wrapper.getByLabelText('Minus Icon');
+      const startingDrawerHeight = (defaultHeight * 2) / 3;
+      expect(drawerContainer).toHaveStyle(`height: ${startingDrawerHeight}px`);
+
+      // Ensure height goes down
+      userEvent.click(minimizeButton);
+      expect(drawerContainer).toHaveStyle(`width: ${defaultWidth}px`);
+      expect(drawerContainer).toHaveStyle(`height: 60px`);
+
+      // Ensure height goes back up to starting height
+      const arrowUpButton = wrapper.getByLabelText('Arrow Up Icon');
+      userEvent.click(arrowUpButton);
+      expect(drawerContainer).toHaveStyle(`width: ${defaultWidth}px`);
+      expect(drawerContainer).toHaveStyle(`height: ${startingDrawerHeight}px`);
+    });
+
+    it('can open lab in a new tab', () => {
+      const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      const newTabButton = wrapper.getByLabelText('Open New Tab Icon');
+
+      userEvent.click(newTabButton);
+      expect(windowOpenSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('can be closed', () => {
+      const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      const xButton = wrapper.getByLabelText('X Icon');
+      expect(wrapper.queryByTestId('resizable-wrapper')).toBeTruthy();
+
+      userEvent.click(xButton);
+      expect(wrapper.queryByTestId('resizable-wrapper')).toBeFalsy();
     });
   });
 });

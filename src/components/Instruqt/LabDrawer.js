@@ -113,7 +113,7 @@ const LabDrawer = ({ title, embedValue }) => {
       onResize={handleResize}
     >
       {/* Need this div with style as a wrapper to help with resizing */}
-      <div style={{ width: defaultWidth + 'px', height: height + 'px' }}>
+      <div style={{ width: defaultWidth + 'px', height: height + 'px' }} data-testid="resizable-wrapper">
         <div className={cx(topContainerStyle)}>
           <div className={cx(titleStyle)}>{labTitle}</div>
           <DrawerButtons
