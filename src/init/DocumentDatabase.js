@@ -87,9 +87,8 @@ class ManifestDocumentDatabase {
 
   async getAsset(checksum) {
     if (!this.zip) {
-      const assets = JSON.parse(fs.readFileSync('snooty-assets.json'));
-      const asset = assets[checksum];
-      return asset.assetData;
+      const asset = fs.readFileSync(`assets/${checksum}`);
+      return asset;
     }
     const result = this.zip.getEntry(`assets/${checksum}`);
     if (result) {
