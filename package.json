@@ -129,6 +129,7 @@
     "react-loadable": "^5.5.0",
     "react-loading-skeleton": "^3.1.0",
     "react-player": "^2.9.0",
+    "react-resizable": "^3.0.5",
     "react-transition-group": "^4.4.1",
     "readable-stream": "^4.3.0",
     "realm-web": "^2.0.0",
