@@ -158,6 +158,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     const gatsbyImages = val.static_assets.filter((asset) =>
       GATSBY_IMAGE_EXTENSIONS.some((ext) => asset.key.endsWith(ext))
     );
+    console.log('gatsbyImages ', gatsbyImages);
     if (gatsbyImages?.length) {
       createNode({
         children: [],
