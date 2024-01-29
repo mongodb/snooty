@@ -12,7 +12,6 @@ exports[`Lightbox renders correctly 1`] = `
 
 .emotion-2 {
   max-width: 100%;
-  height: auto;
 }
 
 .emotion-3 {
@@ -33,10 +32,8 @@ exports[`Lightbox renders correctly 1`] = `
     >
       <img
         alt="/images/firstcluster.png"
-        class="emotion-2"
-        height="300"
+        class="   emotion-2"
         src="/images/firstcluster.png"
-        width="500"
       />
       <div
         class="emotion-3 emotion-4"

@@ -23,7 +23,7 @@ const Instruqt = ({ nodeData }) => {
   const embedValue = nodeData?.argument[0]?.value;
   const title = nodeData?.options?.title;
   const iframeRef = useRef(null);
-  const { isOpen } = useContext(InstruqtContext);
+  const { isOpen, hasLab } = useContext(InstruqtContext);
 
   const onFullScreen = useCallback(() => {
     if (iframeRef) {
@@ -46,7 +46,7 @@ const Instruqt = ({ nodeData }) => {
 
   return (
     <>
-      {process.env.GATSBY_FEATURE_LAB_DRAWER === 'true' ? (
+      {process.env.GATSBY_FEATURE_LAB_DRAWER === 'true' && hasLab ? (
         <>{isOpen && <LabDrawer embedValue={embedValue} title={title} />}</>
       ) : (
         <>
