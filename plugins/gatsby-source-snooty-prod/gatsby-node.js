@@ -192,6 +192,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
 
+  console.log('assets! ', assets);
+  console.log('assets size ', assets.size);
   await saveAssetFiles(assets, db);
   if (!siteMetadata.manifestPath) {
     console.error('Getting metadata from realm without filters');
