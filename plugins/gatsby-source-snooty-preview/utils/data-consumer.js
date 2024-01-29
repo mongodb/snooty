@@ -52,6 +52,8 @@ const handleMetadata = async (
   // Save files in the static_files field of metadata document, including intersphinx inventories.
   if (staticFiles) {
     await saveStaticFiles(staticFiles);
+    console.log('finished saveStaticFiles');
+    console.log(Date.now());
   }
 
   createNode({

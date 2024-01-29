@@ -160,6 +160,8 @@ exports.sourceNodes = async ({
 
   // Wait for all assets to be written.
   await Promise.all(fileWritePromises);
+  console.log('finished filewritePromises');
+  console.log(Date.now());
 
   // Source old nodes.
   console.time(`old source nodes`);

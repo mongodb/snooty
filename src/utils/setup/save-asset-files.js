@@ -50,12 +50,26 @@ const saveAssetFiles = async (assets, db) => {
 };
 
 const saveStaticFiles = async (staticFiles) => {
+  console.log('awaiting promise.all');
+  console.log(Date.now());
   await Promise.all(
-    Object.entries(staticFiles).map(([file, data]) => {
-      // Certain files, like manpages, may not have buffers
-      const toSave = data.buffer ? data.buffer : data;
-      return saveFile(file, toSave);
-    })
+    Object.entries(staticFiles)
+      .map(([file, data]) => {
+        // Certain files, like manpages, may not have buffers
+        const toSave = data.buffer ? data.buffer : data;
+        return saveFile(file, toSave);
+      })
+      .push(
+        new Promise((res, rej) => {
+          console.log(`setTimeout`);
+          console.log(Date.now());
+          setTimeout(() => {
+            console.log('resolving after timeout');
+            console.log(Date.now());
+            res();
+          }, 10000);
+        })
+      )
   );
 };
 
