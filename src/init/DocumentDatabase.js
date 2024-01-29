@@ -93,7 +93,9 @@ class ManifestDocumentDatabase {
     }
     const result = this.zip.getEntry(`assets/${checksum}`);
     if (result) {
-      return result.getData();
+      const buffer = result.getData();
+      console.log('BUFF? ', buffer);
+      return buffer;
     }
     return null;
   }
