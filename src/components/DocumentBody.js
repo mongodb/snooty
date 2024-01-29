@@ -131,8 +131,6 @@ const DocumentBody = (props) => {
     }
   };
 
-  console.log('images ', props.data?.pageImage?.images ?? []);
-
   return (
     <>
       <Widgets

@@ -88,6 +88,7 @@ class ManifestDocumentDatabase {
   async getAsset(checksum) {
     if (!this.zip) {
       const asset = fs.readFileSync(`assets/${checksum}`);
+      console.log('ASSET? ', asset);
       return Buffer(JSON.parse(asset));
     }
     const result = this.zip.getEntry(`assets/${checksum}`);
