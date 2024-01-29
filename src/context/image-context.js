@@ -16,6 +16,7 @@ const ImageContextProvider = ({ images, children }) => {
   const imageByPath = {};
   for (const image of images) {
     if (image?.relativePath) {
+      console.log('image rel Path ', image.relativePath);
       imageByPath[image.relativePath] = getImage(image);
     }
   }
