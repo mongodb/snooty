@@ -14,6 +14,7 @@ export default ImageContext;
 
 const ImageContextProvider = ({ images, children }) => {
   const imageByPath = {};
+  console.log('IMAGES in Context ', images);
   for (const image of images) {
     if (image?.relativePath) {
       console.log('image rel Path ', image.relativePath);

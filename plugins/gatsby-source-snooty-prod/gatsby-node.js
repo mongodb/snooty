@@ -160,6 +160,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     );
 
     if (gatsbyImages?.length) {
+      console.log(
+        'KEYS ',
+        gatsbyImages.map((asset) => asset.key)
+      );
       createNode({
         children: [],
         id: createNodeId(`page-images-${slug}`),
