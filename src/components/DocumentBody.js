@@ -121,8 +121,8 @@ const DocumentBody = (props) => {
   const slugForUrl = slug === '/' ? `${withPrefix('')}` : `${withPrefix(slug)}`; // handle the `/` path
   const onSelectLocale = (locale) => {
     const localeHrefMap = {
-      'zh-cn': `https://mongodbcom-cdn.staging.corp.mongodb.com/zh-cn${slugForUrl}/`,
-      'en-us': `https://mongodbcom-cdn.website.staging.corp.mongodb.com${slugForUrl}/`,
+      'zh-cn': `${location.origin}/zh-cn${slugForUrl}`,
+      'en-us': `${location.origin}${slugForUrl}`,
     };
 
     if (isBrowser) {
