@@ -33,6 +33,7 @@
     "xmlhttprequest-ssl": ">=1.6.2"
   },
   "scripts": {
+    "info": "gatsby info --clipboard",
     "build": "gatsby build --prefix-paths",
     "build:clean": "npm run clean && npm run build",
     "build:clean:stage": "npm run build:clean && make stage",
