@@ -32,10 +32,11 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
           installer-parallel: true
-      - name: Clone
+      - name: Ssh
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.GITHUB_TOKEN }}
+      - name: Clone
         run: |
           git clone https://github.com/10gen/cloud-docs.git
       #----------------------------------------------
