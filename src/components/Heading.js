@@ -76,7 +76,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
               role="button"
               className={cx(labButtonStyling)}
               disabled={isOpen}
-              onClick={() => setIsOpen('True')}
+              onClick={() => setIsOpen(true)}
               leftGlyph={<Icon glyph="Code" />}
             >
               {'Open Interactive Tutorial'}
