@@ -9,10 +9,10 @@ exports[`renders border correctly when specified as an option 1`] = `
 }
 
 .emotion-1 {
-  max-width: 100%;
-  height: auto;
   border: 0.5px solid #C1C7C6;
+  width: 100%;
   border-radius: 4px;
+  max-width: 100%;
 }
 
 <div
@@ -21,10 +21,8 @@ exports[`renders border correctly when specified as an option 1`] = `
   >
     <img
       alt="/images/firstcluster.png"
-      class="emotion-1"
-      height="NaN"
+      class="   emotion-1"
       src="/images/firstcluster.png"
-      width="NaN"
     />
   </div>
 </DocumentFragment>
@@ -40,7 +38,6 @@ exports[`renders correctly 1`] = `
 
 .emotion-1 {
   max-width: 100%;
-  height: auto;
 }
 
 <div
@@ -49,10 +46,8 @@ exports[`renders correctly 1`] = `
   >
     <img
       alt="/images/firstcluster.png"
-      class="emotion-1"
-      height="300"
+      class="   emotion-1"
       src="/images/firstcluster.png"
-      width="500"
     />
   </div>
 </DocumentFragment>
@@ -70,7 +65,6 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
 
 .emotion-2 {
   max-width: 100%;
-  height: auto;
 }
 
 .emotion-3 {
@@ -91,10 +85,8 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
     >
       <img
         alt="/images/firstcluster.png"
-        class="emotion-2"
-        height="NaN"
+        class="   emotion-2"
         src="/images/firstcluster.png"
-        width="NaN"
       />
       <div
         class="emotion-3 emotion-4"

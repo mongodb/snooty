@@ -1,8 +1,11 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useContext } from 'react';
 import { css } from '@emotion/react';
 import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
-import { theme } from '../theme/docsTheme';
+import { theme } from '../../theme/docsTheme';
+import LabDrawer from './LabDrawer';
+import InstruqtFrame from './InstruqtFrame';
+import { InstruqtContext } from './instruqt-context';
 
 const controlsStyle = css`
   width: 100%;
@@ -16,13 +19,16 @@ const controlsStyle = css`
   margin-bottom: ${theme.size.default};
 `;
 
-const Instruqt = ({ nodeData: { argument }, nodeData }) => {
-  const embedValue = argument[0].value;
+const Instruqt = ({ nodeData }) => {
+  const embedValue = nodeData?.argument[0]?.value;
+  const title = nodeData?.options?.title;
   const iframeRef = useRef(null);
+  const { setIsOpen, hasLab } = useContext(InstruqtContext);
 
   const onFullScreen = useCallback(() => {
     if (iframeRef) {
       const element = iframeRef.current;
+      setIsOpen(true);
       if (element.requestFullscreen) {
         element.requestFullscreen();
       } else if (element.msRequestFullscreen) {
@@ -33,7 +39,7 @@ const Instruqt = ({ nodeData: { argument }, nodeData }) => {
         element.webkitRequestFullscreen();
       }
     }
-  }, [iframeRef]);
+  }, [iframeRef, setIsOpen]);
 
   if (!embedValue) {
     return null;
@@ -41,20 +47,20 @@ const Instruqt = ({ nodeData: { argument }, nodeData }) => {
 
   return (
     <>
-      <iframe
-        ref={iframeRef}
-        allowFullScreen
-        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
-        title={`Instruqt ${embedValue}`}
-        height="640"
-        width="100%"
-        src={`https://play.instruqt.com/embed${embedValue}`}
-      />
-      <div css={controlsStyle}>
-        <IconButton aria-label="Full Screen" onClick={onFullScreen}>
-          <Icon glyph="FullScreenEnter" />
-        </IconButton>
-      </div>
+      {process.env.GATSBY_FEATURE_LAB_DRAWER === 'true' && hasLab ? (
+        <>
+          <LabDrawer embedValue={embedValue} title={title} />
+        </>
+      ) : (
+        <>
+          <InstruqtFrame title={title} embedValue={embedValue} ref={iframeRef} />
+          <div css={controlsStyle}>
+            <IconButton aria-label="Full Screen" onClick={onFullScreen}>
+              <Icon glyph="FullScreenEnter" />
+            </IconButton>
+          </div>
+        </>
+      )}
     </>
   );
 };
