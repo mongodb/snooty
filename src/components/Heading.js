@@ -25,12 +25,6 @@ const headingStyles = css`
 `;
 
 const labButtonStyling = css`
-  display: inline-flex;
-  height: 36px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  flex-shrink: 0;
   margin-left: 18px;
 `;
 
