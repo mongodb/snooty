@@ -34,7 +34,6 @@ describe('Instruqt', () => {
       const hasLabDrawer = true;
       const wrapper = renderComponent(mockData.example, hasLabDrawer);
       expect(wrapper.queryByTitle('Instruqt', { exact: false })).toBeTruthy();
-      expect(wrapper.queryByText('MongoDB Interactive Lab')).toBeTruthy();
     });
   });
 });

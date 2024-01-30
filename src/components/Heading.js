@@ -48,7 +48,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
   const { selectors } = useContext(TabContext);
   const { hasDrawer, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
-  const shouldShowLabButton = isPageTitle && process.env.GATSBY_FEATURE_LAB_DRAWER === 'true' && hasDrawer;
+  const shouldShowLabButton = process.env.GATSBY_FEATURE_LAB_DRAWER === 'true' && isPageTitle && hasDrawer;
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors);
 
   return (
@@ -76,7 +76,7 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
               role="button"
               className={cx(labButtonStyling)}
               disabled={isOpen}
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsOpen('True')}
               leftGlyph={<Icon glyph="Code" />}
             >
               {'Open Interactive Tutorial'}
