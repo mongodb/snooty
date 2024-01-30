@@ -2,7 +2,7 @@ on:
   push:
     branches:
     - DOP-4247-build-artifacts
-name: Test Lighthouse Score
+name: Cloud-docs Lighthouse
 jobs: 
   deploy:
     permissions: write-all
@@ -32,17 +32,17 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
           installer-parallel: true
-      - name: Ssh
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.GITHUB_TOKEN }}
-      - name: Clone
-        run: |
-          git clone https://github.com/10gen/cloud-docs.git
-      #----------------------------------------------
-      #  -----  Run custom Github Action  -----
-      #----------------------------------------------
-      - name: Cloud Docs Build
-        uses: mongodb/docs-worker-actions/build-cloud-docs@DOP-4247-build-artifact
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Ssh
+      #   uses: webfactory/ssh-agent@v0.8.0
+      #   with:
+      #     ssh-private-key: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Clone
+      #   run: |
+      #     git clone https://github.com/10gen/cloud-docs.git
+      # #----------------------------------------------
+      # #  -----  Run custom Github Action  -----
+      # #----------------------------------------------
+      # - name: Cloud Docs Build
+      #   uses: mongodb/docs-worker-actions/build-cloud-docs@DOP-4247-build-artifact
+      #   env: 
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
