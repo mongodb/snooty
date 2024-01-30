@@ -110,7 +110,7 @@
     "gatsby-plugin-sharp": "^5.13.0",
     "gatsby-plugin-sitemap": "^6.0.0",
     "gatsby-source-filesystem": "^5.13.0",
-    "gatsby-transformer-sharp": "^5.13.0",
+    "gatsby-transformer-sharp": "github:seungpark/gatsby-transformer-sharp",
     "hex-rgb": "^5.0.0",
     "highlight.js": "~11.5.0",
     "html-screen-capture-js": "^1.0.50",
