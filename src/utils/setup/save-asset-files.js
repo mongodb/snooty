@@ -1,14 +1,23 @@
 const fs = require('fs').promises;
 const path = require('path');
+const { isGatsbyPreview } = require('../is-gatsby-preview');
+
+const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
+const isPreview = isGatsbyPreview();
 
 const saveFile = async (file, data) => {
-  await fs.mkdir(path.join('public', path.dirname(file)), {
+  // if this is preview, always save to 'public'
+  // images saved in /src/images are transformed and processed by gatsby-source-filesystem and gatsby-transformer-sharp
+  const pathList =
+    !isPreview && GATSBY_IMAGE_EXTENSIONS.some((ext) => file.endsWith(ext)) ? ['src', 'images'] : ['public'];
+  await fs.mkdir(path.join(...pathList, path.dirname(file)), {
     recursive: true,
   });
-  await fs.writeFile(path.join('public', file), data, 'binary');
+  await fs.writeFile(path.join(...pathList, file), data, 'binary');
 };
 
-// Write all assets to static directory
+// Write assets to static directory
+// Or /src directory if they are supported to be processed
 const saveAssetFiles = async (assets, db) => {
   const imageWrites = [];
 
@@ -37,4 +46,4 @@ const saveStaticFiles = async (staticFiles) => {
   );
 };
 
-module.exports = { saveAssetFiles, saveStaticFiles, saveFile };
+module.exports = { saveAssetFiles, saveStaticFiles, saveFile, GATSBY_IMAGE_EXTENSIONS };
