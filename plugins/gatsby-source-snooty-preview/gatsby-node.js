@@ -59,6 +59,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type AssociatedProduct implements Node @dontInfer {
       productName: String
     }
+
+    type File implements Node {
+      absolutePath: String
+    }
   `;
   createTypes(typeDefs);
 };

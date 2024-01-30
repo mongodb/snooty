@@ -314,6 +314,10 @@ exports.onCreateWebpackConfig = ({ plugins, actions }) => {
 
 // Remove type inference, as our schema is too ambiguous for this to be useful.
 // https://www.gatsbyjs.com/docs/scaling-issues/#switch-off-type-inference-for-sitepagecontext
+//
+// NOTE: File type is defined here to mitigate race conditions against plugins' createNode
+// async function does not await for node creation dispatch
+// https://github.com/gatsbyjs/gatsby/blob/gatsby-transformer-sharp%405.13.0/packages/gatsby-transformer-sharp/src/on-node-create.js#L26
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`
     type Page implements Node @dontInfer {
@@ -352,6 +356,10 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type AssociatedProduct implements Node @dontInfer {
       productName: String
+    }
+
+    type File implements Node {
+      absolutePath: String
     }
   `);
 };
