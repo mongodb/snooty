@@ -84,7 +84,7 @@ const DocumentBody = (props) => {
       const footer = document.getElementById('footer-container');
       const footerUlElement = footer?.querySelector('ul[role=listbox]');
       if (footerUlElement) {
-        // For DOP-4060 we only want to support English and Simple Chinese (for now)
+        // For DOP-4296 we only want to support English,Simple Chinese,Korean, and Portuguese.
         const availableOptions = Array.from(footerUlElement.childNodes).reduce((accumulator, child) => {
           if (AVAILABLE_LANGUAGES.includes(child.textContent)) {
             accumulator.push(child);
