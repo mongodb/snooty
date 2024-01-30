@@ -1,12 +1,13 @@
 const AdmZip = require('adm-zip');
 const BSON = require('bson');
 const fs = require('fs');
+const path = require('path');
 
 // Returns the metadata from the manifest file if provided
 const fetchManifestMetadata = () => {
   let metadata = {};
   if (!process.env.GATSBY_MANIFEST_PATH || !process.env.GATSBY_MANIFEST_PATH.match(/\.zip$/)) {
-    metadata = JSON.parse(fs.readFileSync('snooty-metadata.json'));
+    metadata = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../../snooty-metadata.js')));
     return metadata;
   }
   if (process.env.GATSBY_MANIFEST_PATH) {

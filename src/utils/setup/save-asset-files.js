@@ -14,6 +14,8 @@ const saveFile = async (file, data) => {
     recursive: true,
   });
   await fs.writeFile(path.join(...pathList, file), data, 'binary');
+  await fs.stat(path.join(...pathList, file));
+  console.log('file ', path.join(...pathList, file));
 };
 
 // Write assets to static directory
@@ -22,7 +24,6 @@ const saveAssetFiles = async (assets, db) => {
   const imageWrites = [];
 
   for (const [id, filenames] of assets) {
-    console.log(id, filenames);
     if (filenames) {
       const buffer = await db.getAsset(id);
       if (!buffer) {
@@ -31,7 +32,8 @@ const saveAssetFiles = async (assets, db) => {
         );
         process.exit(1);
       }
-      filenames.forEach((filename) => imageWrites.push(saveFile(filename, buffer)));
+      // filenames.forEach((filename) => imageWrites.push(saveFile(filename, buffer)));
+      filenames.forEach((filename) => imageWrites.push(saveFile(filename, Buffer.from(buffer, 'base64'))));
     }
   }
   await Promise.all(imageWrites);

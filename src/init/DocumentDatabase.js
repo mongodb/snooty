@@ -56,7 +56,9 @@ class RealmInterface {
 
 class ManifestDocumentDatabase {
   constructor(path) {
-    this.zip = path.match(/\.zip$/) ? new AdmZip(path) : null;
+    this.zip = null;
+    // this.zip = path.match(/\.zip$/) ? new AdmZip(path) : null;
+    this.zippy = path.match(/\.zip$/) ? new AdmZip(path) : null;
     this.realmInterface = new RealmInterface();
   }
 
@@ -67,7 +69,9 @@ class ManifestDocumentDatabase {
   async getDocuments() {
     const result = [];
     if (!this.zip) {
-      const documents = JSON.parse(fs.readFileSync('snooty-documents.json'));
+      const documents = JSON.parse(
+        fs.readFileSync('/Users/matt.meigs/Desktop/docs-platform/snooty/snooty-documents.js')
+      );
       return documents;
     } else {
       const zipEntries = this.zip.getEntries();
@@ -87,7 +91,8 @@ class ManifestDocumentDatabase {
 
   async getAsset(checksum) {
     if (!this.zip) {
-      const asset = fs.readFileSync(`assets/${checksum}`);
+      console.log(__dirname);
+      const asset = fs.readFileSync(`/Users/matt.meigs/Desktop/docs-platform/snooty/loaded-assets/${checksum}`);
       console.log('ASSET? ', asset);
       return asset;
     }
