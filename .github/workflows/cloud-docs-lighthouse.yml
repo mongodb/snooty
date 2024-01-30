@@ -35,6 +35,11 @@ jobs:
       #----------------------------------------------
       #  -----  Run custom Github Action  -----
       #----------------------------------------------
+      - name: Clone
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone https://docs-builder-bot:$GITHUB_TOKEN@github.com/10gen/cloud-docs.git
       - name: Cloud Docs Build
         uses: mongodb/docs-worker-actions/build-cloud-docs@DOP-4247-build-artifact
         env: 
