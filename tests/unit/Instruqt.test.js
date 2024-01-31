@@ -32,8 +32,8 @@ describe('Instruqt', () => {
     const hasLabDrawer = true;
     jest.useFakeTimers();
     // Default width and height of Jest's virtual DOM/window
-    const defaultWidth = global.window.innerWidth;
-    const defaultHeight = global.window.innerHeight;
+    const defaultWindowWidth = global.window.innerWidth;
+    const defaultWindowHeight = global.window.innerHeight;
     let windowOpenSpy;
 
     beforeEach(() => {
@@ -52,8 +52,8 @@ describe('Instruqt', () => {
       // Ensure everything exists
       const drawerContainer = wrapper.getByTestId('resizable-wrapper');
       expect(drawerContainer).toBeTruthy();
-      expect(drawerContainer).toHaveStyle(`width: ${defaultWidth}px`);
-      expect(drawerContainer).toHaveStyle(`height: ${(defaultHeight * 2) / 3}px`);
+      expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
+      expect(drawerContainer).toHaveStyle(`height: ${(defaultWindowHeight * 2) / 3}px`);
       expect(wrapper.queryByTitle('Instruqt', { exact: false })).toBeTruthy();
       expect(wrapper.queryByText('MongoDB Interactive Lab')).toBeTruthy();
     });
@@ -63,27 +63,32 @@ describe('Instruqt', () => {
       const drawerContainer = wrapper.getByTestId('resizable-wrapper');
       // Label text based on aria labels for LG Icons
       const minimizeButton = wrapper.getByLabelText('Minus Icon');
-      const startingDrawerHeight = (defaultHeight * 2) / 3;
+      const startingDrawerHeight = (defaultWindowHeight * 2) / 3;
       expect(drawerContainer).toHaveStyle(`height: ${startingDrawerHeight}px`);
 
       // Ensure height goes down
       userEvent.click(minimizeButton);
-      expect(drawerContainer).toHaveStyle(`width: ${defaultWidth}px`);
+      expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
       expect(drawerContainer).toHaveStyle(`height: 60px`);
 
       // Ensure height goes back up to starting height
       const arrowUpButton = wrapper.getByLabelText('Arrow Up Icon');
       userEvent.click(arrowUpButton);
-      expect(drawerContainer).toHaveStyle(`width: ${defaultWidth}px`);
+      expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
       expect(drawerContainer).toHaveStyle(`height: ${startingDrawerHeight}px`);
     });
 
-    it('can open lab in a new tab', () => {
+    it('can set height to maximum', () => {
       const wrapper = renderComponent(mockData.example, hasLabDrawer);
-      const newTabButton = wrapper.getByLabelText('Open New Tab Icon');
+      const drawerContainer = wrapper.getByTestId('resizable-wrapper');
+      const fullscreenButton = wrapper.getByLabelText('Full Screen Enter Icon');
+      const startingDrawerHeight = (defaultWindowHeight * 2) / 3;
+      expect(drawerContainer).toHaveStyle(`height: ${startingDrawerHeight}px`);
 
-      userEvent.click(newTabButton);
-      expect(windowOpenSpy).toHaveBeenCalledTimes(1);
+      // Ensure drawer height goes up to max height
+      userEvent.click(fullscreenButton);
+      expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
+      expect(drawerContainer).toHaveStyle(`height: ${defaultWindowHeight}px`);
     });
 
     it('can be closed', () => {

@@ -120,7 +120,7 @@ const LabDrawer = ({ title, embedValue }) => {
             isMinHeight={isMinHeight}
             targetHeight={buttonTargetHeight}
             setHeight={setHeight}
-            embedValue={embedValue}
+            maxHeight={maxHeight}
           />
         </div>
         <InstruqtFrame title={title} embedValue={embedValue} height={frameHeight} />

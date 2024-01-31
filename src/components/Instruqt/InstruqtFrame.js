@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { getLabURL } from './utils';
 
 const iframeStyle = css`
   border: none;
@@ -10,7 +9,7 @@ const InstruqtFrame = forwardRef(({ title, height, embedValue }, ref) => {
   const labTitle = title || 'MongoDB Interactive Lab';
   const frameTitle = `Instruqt - ${labTitle}`;
   const frameHeight = height || '640';
-  const frameSrc = getLabURL(embedValue);
+  const frameSrc = `https://play.instruqt.com/embed${embedValue}`;
 
   return (
     <iframe
