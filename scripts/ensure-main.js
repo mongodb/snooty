@@ -6,14 +6,14 @@ const getGitBranch = () => {
     .replace(/[\n\r\s]+$/, '');
 };
 
-const ensureMaster = () => ['main', 'master'].includes(getGitBranch());
+const ensureMain = () => getGitBranch() === 'main';
 
 const main = () => {
   let warned = false;
 
-  if (!ensureMaster()) {
+  if (!ensureMain()) {
     warned = true;
-    console.error('ERROR: Can only release on master');
+    console.error('ERROR: Can only release on main');
   }
 
   if (warned) {
