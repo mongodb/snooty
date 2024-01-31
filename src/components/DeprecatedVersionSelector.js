@@ -28,8 +28,8 @@ const isPrimaryBranch = (version) => {
 
 const prefixVersion = (version) => {
   if (!version) return null;
-  // Display as "Version X" on menu if numeric version and remove v from version name
-  const versionNumber = version.replace('v', '').split()[0];
+  // Display as "Version X" on menu if numeric version and remove "v" or "Version" from version name
+  const versionNumber = version.replace(/v|Version /g, '').split()[0];
   // if branch is 'master' or 'main', show as latest
   if (isPrimaryBranch(versionNumber)) {
     return 'Latest';
@@ -108,7 +108,7 @@ const DeprecatedVersionSelector = () => {
           value: product,
         }))
         // Ensure invalid entries do not break selector
-        .filter(({ text }) => !!text)
+        .filter(({ text }) => text)
         //sort entries alphabetically by text
         .sort(alphabetize)
     : [];
@@ -127,13 +127,13 @@ const DeprecatedVersionSelector = () => {
           } else return null;
         })
         //Ensure versions set to null are not included and do not break selector
-        .filter((versionChoice) => !!versionChoice)
+        .filter((versionChoice) => versionChoice)
         //sort versions newest(larger numbers) to oldest(smaller numbers). Assumes there are no more than three digits between/before/after each decimal place
         .sort((a, b) =>
-          a
+          a.text
             .toString()
             .replace(/\d+/g, (n) => +n + 1000)
-            .localeCompare(b.toString().replace(/\d+/g, (n) => +n - 1000))
+            .localeCompare(b.text.toString().replace(/\d+/g, (n) => +n + 1000))
         )
     : [];
 
