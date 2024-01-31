@@ -45,7 +45,7 @@ const hasValidHostName = (repoDocument) => {
 
 const DeprecatedVersionSelector = () => {
   const { reposDatabase } = useSiteMetadata();
-  const reposBranchesBuildData = useAllDocsets().filter((project) => !!project.hasEolVersions);
+  const reposBranchesBuildData = useAllDocsets().filter((project) => project.hasEolVersions);
   const reposBranchesBuildDataMap = keyBy(reposBranchesBuildData, 'project');
   const [product, setProduct] = useState('');
   const [version, setVersion] = useState('');
@@ -64,7 +64,7 @@ const DeprecatedVersionSelector = () => {
       fetchDocsets(reposDatabase)
         .then((resp) => {
           const reposBranchesMap = keyBy(
-            resp.filter((project) => !!project.hasEolVersions),
+            resp.filter((project) => project.hasEolVersions),
             'project'
           );
           if (reposBranchesMap.size > 0) setReposMap(reposBranchesMap);
@@ -117,7 +117,7 @@ const DeprecatedVersionSelector = () => {
     ? reposMap[product]?.branches
         .map((version) => {
           //only include versions with an eol_type field
-          if (!!version.eol_type && !!version.versionSelectorLabel) {
+          if (version.eol_type && version.versionSelectorLabel) {
             return {
               text: prefixVersion(version.versionSelectorLabel),
               value: version.versionSelectorLabel,
@@ -128,8 +128,13 @@ const DeprecatedVersionSelector = () => {
         })
         //Ensure versions set to null are not included and do not break selector
         .filter((versionChoice) => !!versionChoice)
-        //sort entries alphabetically by text
-        .sort(alphabetize)
+        //sort versions newest(larger numbers) to oldest(smaller numbers). Assumes there are no more than three digits between/before/after each decimal place
+        .sort((a, b) =>
+          a
+            .toString()
+            .replace(/\d+/g, (n) => +n + 1000)
+            .localeCompare(b.toString().replace(/\d+/g, (n) => +n - 1000))
+        )
     : [];
 
   const versionChoicesMap = keyBy(versionChoices, 'value');
