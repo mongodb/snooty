@@ -7,7 +7,6 @@ const saveFile = async (file, data) => {
   });
   await fs.writeFile(path.join('public', file), data, 'binary');
   await fs.stat(path.join('public', file));
-  console.log('file ', path.join('public', file));
   await fs.writeFile(path.join('public', file), data, 'binary');
 };
 

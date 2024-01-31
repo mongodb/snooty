@@ -152,7 +152,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       PAGES.push(key);
     }
-    if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
+    if (val?.ast?.options?.template === 'changelog') {
+      hasOpenAPIChangelog = true;
+    }
   });
 
   await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
@@ -170,11 +172,13 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
 
-  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
+  console.log('metadata ', siteMetadata);
+  console.log('has ', hasOpenAPIChangelog);
+  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog) {
+    console.log('create changelog node');
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
+  }
 
-  console.log('assets! ', assets);
-  console.log('assets size ', assets.size);
   await saveAssetFiles(assets, db);
   if (!siteMetadata.manifestPath) {
     console.error('Getting metadata from realm without filters');
