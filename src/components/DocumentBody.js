@@ -69,7 +69,9 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
+console.log("process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE']", process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE']);
 const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
+console.log('HIDE_UNIFIED_FOOTER_LOCALE', HIDE_UNIFIED_FOOTER_LOCALE);
 const AVAILABLE_LANGUAGES = ['English', '简体中文'];
 
 const DocumentBody = (props) => {
