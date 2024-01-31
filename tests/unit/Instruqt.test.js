@@ -34,16 +34,9 @@ describe('Instruqt', () => {
     // Default width and height of Jest's virtual DOM/window
     const defaultWindowWidth = global.window.innerWidth;
     const defaultWindowHeight = global.window.innerHeight;
-    let windowOpenSpy;
 
     beforeEach(() => {
       process.env.GATSBY_FEATURE_LAB_DRAWER = 'true';
-      windowOpenSpy = jest.spyOn(global.window, 'open');
-      windowOpenSpy.mockImplementation(() => {});
-    });
-
-    afterEach(() => {
-      windowOpenSpy.mockRestore();
     });
 
     it('renders in a drawer', () => {
