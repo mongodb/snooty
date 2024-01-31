@@ -4,7 +4,7 @@ Uses [Gatsby](https://www.gatsbyjs.org/) to build static site.
 
 ## Installation
 
-Snooty uses [artifactory](https://jfrog.com/artifactory/) that [will need authentication](https://github.com/mongodb/snooty/blob/master/.npmrc) to install some private npm packages. Update your local zsh variables in `$~/.zshrc` (in Windows `%USERPROFILE%/.zshrc`) to include the following
+Snooty uses [artifactory](https://jfrog.com/artifactory/) that [will need authentication](https://github.com/mongodb/snooty/blob/main/.npmrc) to install some private npm packages. Update your local zsh variables in `$~/.zshrc` (in Windows `%USERPROFILE%/.zshrc`) to include the following
 
 ```
 export NPM_BASE_64_AUTH=<BASE_64_API_KEY>
@@ -32,7 +32,7 @@ GATSBY_PARSER_BRANCH=<BRANCH>
 GATSBY_SNOOTY_DEV=true
 ```
 
-The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`. See pathing [here](https://github.com/mongodb/snooty/blob/master/src/utils/generate-path-prefix.js#L22)
+The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`. See pathing [here](https://github.com/mongodb/snooty/blob/main/src/utils/generate-path-prefix.js#L22)
 
 It should be set to `true` when working on snooty locally.
 
@@ -54,7 +54,7 @@ npm run develop
 ```
 
 To build and serve the site, run the following commands:
-The serve command generates the site at a [prefix](https://github.com/mongodb/snooty/blob/master/src/utils/generate-path-prefix.js) ie. `localhost:9000/<branch>/<docs-name>/<user>/<branch-name>/`
+The serve command generates the site at a [prefix](https://github.com/mongodb/snooty/blob/main/src/utils/generate-path-prefix.js) ie. `localhost:9000/<branch>/<docs-name>/<user>/<branch-name>/`
 
 ```shell
 $ npm run build
@@ -120,9 +120,9 @@ If your changes specifically affect Gatsby Cloud preview builds, set up and use 
 
 We have configured an automatic release process using [GitHub Actions](https://github.com/features/actions) that is triggered by [npm-version](https://docs.npmjs.com/cli/version). To release a version, you must have admin privileges in this repo. Then proceed as follows:
 
-1. On the `master` branch, run `git pull` followed by `npm ci`.
+1. On the `main` branch, run `git pull` followed by `npm ci`.
 2. Run `npm version [major | minor | patch]`, using [Semantic Versioning](https://semver.org) guidelines to correctly increment the version number. Keep the minor version consistent with [snooty-parser versioning](https://github.com/mongodb/snooty-parser/tags). GitHub Actions will create a new git tag and push it to GitHub.
-3. Update the release draft found [here](https://github.com/mongodb/snooty/releases) using the automatically generated [CHANGELOG.md](https://github.com/mongodb/snooty/blob/master/CHANGELOG.md) and publish the release. Keep "pre-release" checked until version 1.0.0.
+3. Update the release draft found [here](https://github.com/mongodb/snooty/releases) using the automatically generated [CHANGELOG.md](https://github.com/mongodb/snooty/blob/main/CHANGELOG.md) and publish the release. Keep "pre-release" checked until version 1.0.0.
 
 :warning: This process cannot be completed if the releaser's `origin` points to a fork.
 
