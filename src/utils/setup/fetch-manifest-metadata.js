@@ -6,8 +6,13 @@ const fs = require('fs');
 const fetchManifestMetadata = () => {
   let metadata = {};
   if (!process.env.GATSBY_MANIFEST_PATH || !process.env.GATSBY_MANIFEST_PATH.match(/\.zip$/)) {
-    metadata = JSON.parse(fs.readFileSync('snooty-metadata.json'));
-    return metadata;
+    try {
+      metadata = JSON.parse(fs.readFileSync('snooty-metadata.json'));
+      return metadata;
+    } catch (err) {
+      console.error('No Manifest Path was found.');
+      return metadata;
+    }
   }
   if (process.env.GATSBY_MANIFEST_PATH) {
     const zip = new AdmZip(process.env.GATSBY_MANIFEST_PATH);

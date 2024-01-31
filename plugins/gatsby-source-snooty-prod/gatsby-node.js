@@ -152,9 +152,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       PAGES.push(key);
     }
-    if (val?.ast?.options?.template === 'changelog') {
-      hasOpenAPIChangelog = true;
-    }
+    if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
   await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
@@ -172,12 +170,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
 
-  console.log('metadata ', siteMetadata);
-  console.log('has ', hasOpenAPIChangelog);
-  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog) {
-    console.log('create changelog node');
+  if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
-  }
 
   await saveAssetFiles(assets, db);
   if (!siteMetadata.manifestPath) {

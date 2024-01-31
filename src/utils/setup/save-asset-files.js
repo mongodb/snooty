@@ -6,8 +6,6 @@ const saveFile = async (file, data) => {
     recursive: true,
   });
   await fs.writeFile(path.join('public', file), data, 'binary');
-  await fs.stat(path.join('public', file));
-  await fs.writeFile(path.join('public', file), data, 'binary');
 };
 
 // Write all assets to static directory
@@ -23,8 +21,8 @@ const saveAssetFiles = async (assets, db) => {
         );
         process.exit(1);
       }
-      // filenames.forEach((filename) => imageWrites.push(saveFile(filename, buffer)));
-      filenames.forEach((filename) => imageWrites.push(saveFile(filename, Buffer.from(buffer, 'base64'))));
+      filenames.forEach((filename) => imageWrites.push(saveFile(filename, buffer)));
+      // filenames.forEach((filename) => imageWrites.push(saveFile(filename, Buffer.from(buffer, 'base64'))));
     }
   }
   await Promise.all(imageWrites);

@@ -67,8 +67,13 @@ class ManifestDocumentDatabase {
   async getDocuments() {
     const result = [];
     if (!this.zip) {
-      const documents = JSON.parse(fs.readFileSync('snooty-documents.json'));
-      return documents;
+      try {
+        const documents = JSON.parse(fs.readFileSync('snooty-documents.json'));
+        return documents;
+      } catch (err) {
+        console.error('No Manifest Path was found.');
+        return result;
+      }
     } else {
       const zipEntries = this.zip.getEntries();
       for (const entry of zipEntries) {
@@ -87,13 +92,17 @@ class ManifestDocumentDatabase {
 
   async getAsset(checksum) {
     if (!this.zip) {
-      const asset = fs.readFileSync(`assets/${checksum}`, { encoding: 'base64' });
-      return asset;
+      try {
+        const asset = fs.readFileSync(`assets/${checksum}`, { encoding: 'base64' });
+        return asset;
+      } catch (err) {
+        console.error('No Manifest Path was found.');
+        return null;
+      }
     }
     const result = this.zip.getEntry(`assets/${checksum}`);
     if (result) {
       const buffer = result.getData();
-      console.log('BUFF? ', buffer);
       return buffer;
     }
     return null;
