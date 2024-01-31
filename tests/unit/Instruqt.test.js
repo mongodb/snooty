@@ -3,11 +3,23 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Instruqt from '../../src/components/Instruqt';
 import { InstruqtProvider } from '../../src/components/Instruqt/instruqt-context';
+import Heading from '../../src/components/Heading';
 import mockData from './data/Instruqt.test.json';
+
+const mockTitleHeading = {
+  children: [
+    {
+      type: 'text',
+      value: 'Title Heading',
+    },
+  ],
+  id: 'title-heading',
+};
 
 const renderComponent = (nodeData, hasLabDrawer = false) => {
   return render(
-    <InstruqtProvider hasInstruqtLab={hasLabDrawer}>
+    <InstruqtProvider hasLabDrawer={hasLabDrawer}>
+      <Heading sectionDepth={1} nodeData={mockTitleHeading} />
       <Instruqt nodeData={nodeData} />
     </InstruqtProvider>
   );
@@ -39,8 +51,17 @@ describe('Instruqt', () => {
       process.env.GATSBY_FEATURE_LAB_DRAWER = 'true';
     });
 
+    const openLabDrawer = (wrapper) => {
+      const expectedButtonText = 'Open Interactive Tutorial';
+      const drawerButton = wrapper.getByText(expectedButtonText);
+      expect(drawerButton).toBeTruthy();
+      // LG buttons require us to check for closest button
+      userEvent.click(drawerButton.closest('button'));
+    };
+
     it('renders in a drawer', () => {
       const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      openLabDrawer(wrapper);
 
       // Ensure everything exists
       const drawerContainer = wrapper.getByTestId('resizable-wrapper');
@@ -52,6 +73,7 @@ describe('Instruqt', () => {
 
     it('can be minimized and brought back to starting height', () => {
       const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      openLabDrawer(wrapper);
       const drawerContainer = wrapper.getByTestId('resizable-wrapper');
       // Label text based on aria labels for LG Icons
       const minimizeButton = wrapper.getByLabelText('Minus Icon');
@@ -72,6 +94,7 @@ describe('Instruqt', () => {
 
     it('can set height to maximum', () => {
       const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      openLabDrawer(wrapper);
       const drawerContainer = wrapper.getByTestId('resizable-wrapper');
       const fullscreenButton = wrapper.getByLabelText('Full Screen Enter Icon');
       const startingDrawerHeight = (defaultWindowHeight * 2) / 3;
@@ -85,6 +108,7 @@ describe('Instruqt', () => {
 
     it('can be closed', () => {
       const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      openLabDrawer(wrapper);
       const xButton = wrapper.getByLabelText('X Icon');
       expect(wrapper.queryByTestId('resizable-wrapper')).toBeTruthy();
 

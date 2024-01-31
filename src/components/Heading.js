@@ -39,7 +39,7 @@ const determineHeading = (sectionDepth) => {
   return Body; // use weight=medium prop to style appropriately
 };
 
-const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
+const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = determineHeading(sectionDepth);
   const asHeading = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
@@ -115,7 +115,6 @@ Heading.propTypes = {
     ).isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
-  page: PropTypes.object,
   isProductLanding: PropTypes.bool,
 };
 
