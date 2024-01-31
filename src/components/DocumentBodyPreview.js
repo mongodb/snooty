@@ -10,6 +10,7 @@ import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
+import { InstruqtProvider } from './Instruqt/instruqt-context';
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
@@ -106,13 +107,15 @@ const DocumentBody = (props) => {
         slug={slug}
         template={template}
       >
-        <FootnoteContext.Provider value={{ footnotes }}>
-          <Template {...props} useChatbot={useChatbot}>
-            {pageNodes.map((child, index) => (
-              <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-            ))}
-          </Template>
-        </FootnoteContext.Provider>
+        <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
+          <FootnoteContext.Provider value={{ footnotes }}>
+            <Template {...props} useChatbot={useChatbot}>
+              {pageNodes.map((child, index) => (
+                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+              ))}
+            </Template>
+          </FootnoteContext.Provider>
+        </InstruqtProvider>
       </Widgets>
       <footer style={{ width: '100%', height: '568px', backgroundColor: '#061621' }}></footer>
     </Layout>
