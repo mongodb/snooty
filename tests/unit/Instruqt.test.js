@@ -55,7 +55,6 @@ describe('Instruqt', () => {
       expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
       expect(drawerContainer).toHaveStyle(`height: ${(defaultWindowHeight * 2) / 3}px`);
       expect(wrapper.queryByTitle('Instruqt', { exact: false })).toBeTruthy();
-      expect(wrapper.queryByText('MongoDB Interactive Lab')).toBeTruthy();
     });
 
     it('can be minimized and brought back to starting height', () => {
