@@ -94,7 +94,7 @@ class ManifestDocumentDatabase {
     if (!this.zip) {
       try {
         const asset = fs.readFileSync(`assets/${checksum}`, { encoding: 'base64' });
-        return asset;
+        return Buffer.from(asset, 'base64');
       } catch (err) {
         console.error('No Manifest Path was found.');
         return null;

@@ -21,8 +21,11 @@ const saveAssetFiles = async (assets, db) => {
         );
         process.exit(1);
       }
+      // if (!process.env.GATSBY_MANIFEST_PATH || !process.env.GATSBY_MANIFEST_PATH.match(/\.zip$/)) {
+      //   filenames.forEach((filename) => imageWrites.push(saveFile(filename, Buffer.from(buffer, 'base64'))));
+      // } else {
       filenames.forEach((filename) => imageWrites.push(saveFile(filename, buffer)));
-      // filenames.forEach((filename) => imageWrites.push(saveFile(filename, Buffer.from(buffer, 'base64'))));
+      // }
     }
   }
   await Promise.all(imageWrites);
