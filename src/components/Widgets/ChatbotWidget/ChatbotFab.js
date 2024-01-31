@@ -3,19 +3,12 @@ import styled from '@emotion/styled';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
-
-const InputBarTrigger = lazy(() =>
-  import('mongodb-chatbot-ui').then((module) => ({ default: module.InputBarTrigger }))
-);
 const FloatingActionButtonTrigger = lazy(() =>
   import('mongodb-chatbot-ui').then((module) => ({ default: module.FloatingActionButtonTrigger }))
 );
 const ModalView = lazy(() => import('mongodb-chatbot-ui').then((module) => ({ default: module.ModalView })));
 
 const StyledChatBotFabContainer = styled.div`
-  > div {
-    display: none;
-  }
   > button {
     border-width: 1px;
     position: unset;
@@ -42,7 +35,6 @@ const ChatbotFab = () => {
       className={fabChatbot}
     >
       <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
-        <InputBarTrigger suggestedPrompts={suggestedPrompts} />
         <FloatingActionButtonTrigger text={CHATBOT_WIDGET_TEXT} />
         <ModalView
           initialMessageText="Welcome to MongoDB AI Assistant. What can I help you with?"
