@@ -16,6 +16,7 @@ jobs:
         uses: mongodb/docs-worker-actions/build-artifact@DOP-4247-build-artifact
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROJECT_TO_BUILD: docs
       - name: Build Snooty
         env:
           NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
