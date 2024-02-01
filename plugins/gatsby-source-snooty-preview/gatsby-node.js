@@ -52,11 +52,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       changelogData: JSON
     }
 
-    type PageImage implements Node @dontInfer {
-      slug: String
-      images: [File] @link(by: "relativePath", from: "pageAssets")
-    }
-
     type AssociatedProduct implements Node @dontInfer {
       productName: String
     }

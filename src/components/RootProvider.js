@@ -8,11 +8,21 @@ import { SidenavContextProvider } from './Sidenav';
 import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
 import { SearchContextProvider } from './SearchResults/SearchContext';
+import { InstruqtProvider } from './Instruqt/instruqt-context';
 
 // Check for feature flag here to make it easier to pass down for testing purposes
 const SHOW_FACETS = process.env.GATSBY_FEATURE_FACETED_SEARCH === 'true';
 
-const RootProvider = ({ children, headingNodes, selectors, slug, repoBranches, remoteMetadata, project }) => {
+const RootProvider = ({
+  children,
+  headingNodes,
+  selectors,
+  slug,
+  repoBranches,
+  hasLabDrawer,
+  remoteMetadata,
+  project,
+}) => {
   let providers = (
     <TabProvider selectors={selectors}>
       <ContentsProvider headingNodes={headingNodes}>
@@ -20,7 +30,9 @@ const RootProvider = ({ children, headingNodes, selectors, slug, repoBranches, r
           <VersionContextProvider repoBranches={repoBranches} slug={slug}>
             <TocContextProvider remoteMetadata={remoteMetadata}>
               <SidenavContextProvider>
-                <SearchContextProvider showFacets={SHOW_FACETS}>{children}</SearchContextProvider>
+                <InstruqtProvider hasLabDrawer={hasLabDrawer}>
+                  <SearchContextProvider showFacets={SHOW_FACETS}>{children}</SearchContextProvider>
+                </InstruqtProvider>
               </SidenavContextProvider>
             </TocContextProvider>
           </VersionContextProvider>

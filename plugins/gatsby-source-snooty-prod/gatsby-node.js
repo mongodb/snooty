@@ -1,12 +1,11 @@
 const path = require('path');
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
 const { getPageComponents } = require('../../src/utils/setup/get-page-components.js');
-const { saveAssetFiles, saveStaticFiles, GATSBY_IMAGE_EXTENSIONS } = require('../../src/utils/setup/save-asset-files');
+const { saveAssetFiles, saveStaticFiles } = require('../../src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('../../src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('../../src/utils/get-nested-value');
 const { removeNestedValue } = require('../../src/utils/remove-nested-value.js');
 const { getPageSlug } = require('../../src/utils/get-page-slug');
-const { removeLeadingSlash } = require('../../src/utils/remove-leading-slash.js');
 const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadata');
 const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash');
 const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix');
@@ -156,24 +155,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
       });
     }
 
-    // Identify page documents and parse each document for images
-    const slug = getPageSlug(key);
-    const gatsbyImages = val.static_assets.filter((asset) =>
-      GATSBY_IMAGE_EXTENSIONS.some((ext) => asset.key.endsWith(ext))
-    );
-    if (gatsbyImages?.length) {
-      createNode({
-        children: [],
-        id: createNodeId(`page-images-${slug}`),
-        internal: {
-          type: 'PageImage',
-          contentDigest: createContentDigest(gatsbyImages.map((asset) => asset.key)),
-        },
-        pageAssets: gatsbyImages.map((asset) => removeLeadingSlash(asset.key)),
-        parent: null,
-        slug: slug,
-      });
-    }
     if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
@@ -362,11 +343,6 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type ChangelogData implements Node @dontInfer {
       changelogData: JSON
-    }
-
-    type PageImage implements Node @dontInfer {
-      slug: String
-      images: [File] @link(by: "relativePath", from: "pageAssets")
     }
 
     type AssociatedProduct implements Node @dontInfer {
