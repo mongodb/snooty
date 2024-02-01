@@ -14,8 +14,7 @@ const fetchManifestMetadata = () => {
       console.error('No Manifest Path was found.');
       return metadata;
     }
-  }
-  if (process.env.GATSBY_MANIFEST_PATH) {
+  } else if (process.env.GATSBY_MANIFEST_PATH) {
     const zip = new AdmZip(process.env.GATSBY_MANIFEST_PATH);
     const zipEntries = zip.getEntries();
     for (const entry of zipEntries) {
