@@ -133,16 +133,16 @@ const DocumentBody = (props) => {
 
   return (
     <>
-      <Widgets
-        location={location}
-        pageOptions={page?.options}
-        pageTitle={pageTitle}
-        publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-        slug={slug}
-        isInPresentationMode={isInPresentationMode}
-        template={template}
-      >
-        <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
+      <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
+        <Widgets
+          location={location}
+          pageOptions={page?.options}
+          pageTitle={pageTitle}
+          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+          slug={slug}
+          isInPresentationMode={isInPresentationMode}
+          template={template}
+        >
           <FootnoteContext.Provider value={{ footnotes }}>
             <Template {...props} useChatbot={useChatbot}>
               {pageNodes.map((child, index) => (
@@ -150,8 +150,8 @@ const DocumentBody = (props) => {
               ))}
             </Template>
           </FootnoteContext.Provider>
-        </InstruqtProvider>
-      </Widgets>
+        </Widgets>
+      </InstruqtProvider>
       {!isInPresentationMode && (
         <div data-testid="consistent-footer" id="footer-container">
           <UnifiedFooter hideLocale={HIDE_UNIFIED_FOOTER_LOCALE} onSelectLocale={onSelectLocale} />

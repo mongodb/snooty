@@ -5,15 +5,21 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import useViewport from '../../hooks/useViewport';
 import { theme } from '../../theme/docsTheme';
+import useScreenSize from '../../hooks/useScreenSize';
 import InstruqtFrame from './InstruqtFrame';
 import DrawerButtons from './DrawerButtons';
 
 const labContainerStyle = css`
   background-color: ${palette.gray.dark3};
-  z-index: 9999;
+  z-index: 2000;
   position: fixed !important;
   bottom: 0;
   color: ${palette.white};
+
+  @media ${theme.screenSize.upToSmall} {
+    // Accommodate widget buttons
+    bottom: 60px;
+  }
 `;
 
 const handleContainerStyle = css`
@@ -76,6 +82,7 @@ const CustomResizeHandle = React.forwardRef((props, ref) => {
 
 const LabDrawer = ({ title, embedValue }) => {
   const viewportSize = useViewport();
+  const { isMobile } = useScreenSize();
   const labTitle = title || 'MongoDB Interactive Lab';
 
   const defaultMeasurement = 200;
@@ -83,7 +90,9 @@ const LabDrawer = ({ title, embedValue }) => {
   const defaultHeight = (viewportSize.height * 2) / 3 ?? defaultMeasurement;
 
   const minHeight = 60;
-  const maxHeight = viewportSize.height ?? defaultMeasurement;
+  let maxHeight = viewportSize.height ?? defaultMeasurement;
+  // Subtract additional 60px to accommodate widget buttons
+  if (isMobile) maxHeight -= 60;
   const [height, setHeight] = useState(defaultHeight);
 
   const frameHeight = height - minHeight;

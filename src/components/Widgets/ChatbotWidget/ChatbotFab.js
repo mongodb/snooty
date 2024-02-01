@@ -30,7 +30,8 @@ const ChatbotFab = () => {
   return (
     <StyledChatBotFabContainer
       // Inline style to default hide Chatbot FAB, Optimizely to flip this on client-side
-      style={{ display: 'none' }}
+      // TODO-4284: Undo comment
+      // style={{ display: 'none' }}
       // Classname below for Optimizely A/B testing
       className={fabChatbot}
     >
