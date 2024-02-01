@@ -1,7 +1,6 @@
 on:
-  push:
-    branches:
-    - DOP-4247-build-artifacts
+  pull_request:
+    types: [opened, synchronize]
 name: Build cloud-docs artifact
 jobs: 
   deploy:
