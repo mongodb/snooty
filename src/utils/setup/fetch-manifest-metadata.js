@@ -5,7 +5,8 @@ const fs = require('fs');
 // Returns the metadata from the manifest file if provided
 const fetchManifestMetadata = () => {
   let metadata = {};
-  if (!process.env.GATSBY_MANIFEST_PATH || !process.env.GATSBY_MANIFEST_PATH.match(/\.zip$/)) {
+  if (process.env.GATSBY_MANIFEST_PATH && !process.env.GATSBY_MANIFEST_PATH.match(/\.zip$/)) {
+    // Read metadata from Gatsby Action download
     try {
       metadata = JSON.parse(fs.readFileSync('snooty-metadata.json'));
       return metadata;

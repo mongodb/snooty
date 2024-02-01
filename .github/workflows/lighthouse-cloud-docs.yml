@@ -28,6 +28,6 @@ jobs:
       - name: Save Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: lighthouse-build
+          name: lighthouse-cloud-docs
           path: |
             public
