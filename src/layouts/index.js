@@ -103,7 +103,7 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
         selectors={page?.options?.selectors}
         remoteMetadata={remoteMetadata}
         project={project}
-        hasInstruqtLab={page?.options?.instruqt}
+        hasLabDrawer={page?.options?.instruqt}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} slug={slug} template={template} /> : <div />}
