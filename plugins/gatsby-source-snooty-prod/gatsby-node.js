@@ -279,10 +279,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         path: assertTrailingSlash(slug),
         component: path.resolve(__dirname, mainComponentRelativePath),
         context: {
+          page_id: page.page_id,
           slug,
           repoBranches,
           template: pageNodes?.options?.template,
-          page: pageNodes,
         },
       });
     });

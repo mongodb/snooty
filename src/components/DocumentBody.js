@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
+import { withPrefix, graphql } from 'gatsby';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
@@ -73,10 +73,9 @@ const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCAL
 const AVAILABLE_LANGUAGES = ['English', '简体中文'];
 
 const DocumentBody = (props) => {
-  const {
-    location,
-    pageContext: { page, slug, template },
-  } = props;
+  const { location, data, pageContext } = props;
+  const page = data?.page?.ast;
+  const { slug, template } = pageContext;
 
   useEffect(() => {
     // A workaround to remove the other locale options.
@@ -206,3 +205,11 @@ export const Head = ({ pageContext }) => {
     </>
   );
 };
+
+export const query = graphql`
+  query ($page_id: String) {
+    page(id: { eq: $page_id }) {
+      ast
+    }
+  }
+`;
