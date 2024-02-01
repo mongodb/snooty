@@ -2,7 +2,7 @@ on:
   push:
     branches:
     - DOP-4247-build-artifacts
-name: Test Lighthouse Score
+name: Build cloud-docs artifact
 jobs: 
   deploy:
     permissions: write-all
@@ -16,7 +16,7 @@ jobs:
         uses: mongodb/docs-worker-actions/build-artifact@DOP-4247-build-artifact
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROJECT_TO_BUILD: docs
+          PROJECT_TO_BUILD: cloud-docs
       - name: Build Snooty
         env:
           NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
