@@ -1,5 +1,6 @@
 node_modules/
 public/
+plugins/gatsby-source-snooty-prod/pages/generated-pages
 .cache/
 .DS_Store
 static/*
