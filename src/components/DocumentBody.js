@@ -9,6 +9,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
+import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { isBrowser } from '../utils/is-browser';
 import Widgets from './Widgets';
@@ -128,7 +129,7 @@ const DocumentBody = (props) => {
     };
 
     if (isBrowser) {
-      window.location.href = localeHrefMap[locale];
+      window.location.href = assertTrailingSlash(localeHrefMap[locale]);
     }
   };
 
