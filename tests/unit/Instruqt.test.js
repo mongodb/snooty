@@ -96,14 +96,20 @@ describe('Instruqt', () => {
       const wrapper = renderComponent(mockData.example, hasLabDrawer);
       openLabDrawer(wrapper);
       const drawerContainer = wrapper.getByTestId('resizable-wrapper');
-      const fullscreenButton = wrapper.getByLabelText('Full Screen Enter Icon');
+      const fullscreenEnterButton = wrapper.getByLabelText('Full Screen Enter Icon');
       const startingDrawerHeight = (defaultWindowHeight * 2) / 3;
       expect(drawerContainer).toHaveStyle(`height: ${startingDrawerHeight}px`);
 
       // Ensure drawer height goes up to max height
-      userEvent.click(fullscreenButton);
+      userEvent.click(fullscreenEnterButton);
       expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
       expect(drawerContainer).toHaveStyle(`height: ${defaultWindowHeight}px`);
+
+      // Ensure drawer height goes back down to starting height
+      const fullscreenExitButton = wrapper.getByLabelText('Full Screen Exit Icon');
+      userEvent.click(fullscreenExitButton);
+      expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
+      expect(drawerContainer).toHaveStyle(`height: ${startingDrawerHeight}px`);
     });
 
     it('can be closed', () => {
