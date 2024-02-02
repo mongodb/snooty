@@ -9,6 +9,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
+import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { isBrowser } from '../utils/is-browser';
 import Widgets from './Widgets';
@@ -121,12 +122,12 @@ const DocumentBody = (props) => {
   const slugForUrl = slug === '/' ? `${withPrefix('')}` : `${withPrefix(slug)}`; // handle the `/` path
   const onSelectLocale = (locale) => {
     const localeHrefMap = {
-      'zh-cn': `https://mongodbcom-cdn.staging.corp.mongodb.com/zh-cn${slugForUrl}/`,
-      'en-us': `https://mongodbcom-cdn.website.staging.corp.mongodb.com${slugForUrl}/`,
+      'zh-cn': `${location.origin}/zh-cn${slugForUrl}`,
+      'en-us': `${location.origin}${slugForUrl}`,
     };
 
     if (isBrowser) {
-      window.location.href = localeHrefMap[locale];
+      window.location.href = assertTrailingSlash(localeHrefMap[locale]);
     }
   };
 
