@@ -8,6 +8,7 @@ const pathPrefix = !isPreview ? generatePathPrefix(siteMetadata) : undefined;
 console.log('PATH PREFIX', pathPrefix);
 
 // Specifies which plugins to use depending on build environment
+// Keep our main plugin at top to include file saving before image plugins
 const plugins = [
   isPreview ? 'gatsby-source-snooty-preview' : 'gatsby-source-snooty-prod',
   `gatsby-plugin-image`,
