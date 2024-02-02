@@ -9,6 +9,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
+import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { isBrowser } from '../utils/is-browser';
 import Widgets from './Widgets';
@@ -69,9 +70,7 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
-console.log("process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE']", process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE']);
 const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
-console.log('HIDE_UNIFIED_FOOTER_LOCALE', HIDE_UNIFIED_FOOTER_LOCALE);
 const AVAILABLE_LANGUAGES = ['English', '简体中文'];
 
 const DocumentBody = (props) => {
@@ -128,7 +127,7 @@ const DocumentBody = (props) => {
     };
 
     if (isBrowser) {
-      window.location.href = localeHrefMap[locale];
+      window.location.href = assertTrailingSlash(localeHrefMap[locale]);
     }
   };
 
