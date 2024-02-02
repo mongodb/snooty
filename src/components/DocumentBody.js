@@ -20,6 +20,7 @@ import Meta from './Meta';
 import Twitter from './Twitter';
 import DocsLandingSD from './StructuredData/DocsLandingSD';
 import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
+import { InstruqtProvider } from './Instruqt/instruqt-context';
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
@@ -142,13 +143,15 @@ const DocumentBody = (props) => {
         isInPresentationMode={isInPresentationMode}
         template={template}
       >
-        <FootnoteContext.Provider value={{ footnotes }}>
-          <Template {...props} useChatbot={useChatbot}>
-            {pageNodes.map((child, index) => (
-              <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-            ))}
-          </Template>
-        </FootnoteContext.Provider>
+        <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
+          <FootnoteContext.Provider value={{ footnotes }}>
+            <Template {...props} useChatbot={useChatbot}>
+              {pageNodes.map((child, index) => (
+                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+              ))}
+            </Template>
+          </FootnoteContext.Provider>
+        </InstruqtProvider>
       </Widgets>
       {!isInPresentationMode && (
         <div data-testid="consistent-footer" id="footer-container">
