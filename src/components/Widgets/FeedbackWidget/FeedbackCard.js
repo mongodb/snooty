@@ -15,7 +15,7 @@ const FloatingContainer = styled.div`
   position: fixed;
   z-index: 14;
   bottom: ${({ hasOpenLabDrawer }) => (hasOpenLabDrawer ? '70px' : theme.size.large)};
-  right: 40px;
+  right: ${theme.size.large};
 
   @media ${theme.screenSize.upToSmall} {
     position: fixed;
