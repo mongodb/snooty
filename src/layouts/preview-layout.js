@@ -154,7 +154,6 @@ const DefaultLayout = ({
           associatedReposInfo={associatedReposInfo}
           headingNodes={page?.options?.headings}
           selectors={page?.options?.selectors}
-          hasLabDrawer={page?.options?.instruqt}
           isAssociatedProduct={isAssociatedProduct}
         >
           <GlobalGrid>

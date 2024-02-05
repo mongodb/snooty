@@ -23,12 +23,11 @@ const Instruqt = ({ nodeData }) => {
   const embedValue = nodeData?.argument[0]?.value;
   const title = nodeData?.options?.title;
   const iframeRef = useRef(null);
-  const { setIsOpen, isOpen, hasDrawer } = useContext(InstruqtContext);
+  const { isOpen, hasDrawer } = useContext(InstruqtContext);
 
   const onFullScreen = useCallback(() => {
     if (iframeRef) {
       const element = iframeRef.current;
-      setIsOpen(true);
       if (element.requestFullscreen) {
         element.requestFullscreen();
       } else if (element.msRequestFullscreen) {
@@ -39,7 +38,7 @@ const Instruqt = ({ nodeData }) => {
         element.webkitRequestFullscreen();
       }
     }
-  }, [iframeRef, setIsOpen]);
+  }, [iframeRef]);
 
   if (!embedValue) {
     return null;
