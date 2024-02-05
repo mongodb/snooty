@@ -86,8 +86,10 @@ const LabDrawer = ({ title, embedValue }) => {
   const labTitle = title || 'MongoDB Interactive Lab';
 
   const defaultMeasurement = 200;
-  const defaultWidth = viewportSize.width ?? defaultMeasurement;
   const defaultHeight = (viewportSize.height * 2) / 3 ?? defaultMeasurement;
+  const defaultWidth = viewportSize.width ?? defaultMeasurement;
+  // Set this to 100% instead of a set px to avoid overlap with the browser's scrollbar
+  const wrapperWidth = '100%';
 
   const minHeight = 60;
   let maxHeight = viewportSize.height ?? defaultMeasurement;
@@ -122,7 +124,7 @@ const LabDrawer = ({ title, embedValue }) => {
       onResize={handleResize}
     >
       {/* Need this div with style as a wrapper to help with resizing */}
-      <div style={{ width: defaultWidth + 'px', height: height + 'px' }} data-testid="resizable-wrapper">
+      <div style={{ width: wrapperWidth, height: height + 'px' }} data-testid="resizable-wrapper">
         <div className={cx(topContainerStyle)}>
           <div className={cx(titleStyle)}>{labTitle}</div>
           <DrawerButtons
