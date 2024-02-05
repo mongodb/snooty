@@ -60,7 +60,7 @@ class RealmInterface {
 class ManifestDocumentDatabase {
   constructor(path) {
     // Allow no zip if building artifact through Github Action
-    this.zip = path?.match(/\.zip$/) ? new AdmZip(path) : null;
+    this.zip = process.env.GATSBY_BUILD_FROM_JSON !== 'true' ? new AdmZip(path) : null;
     this.realmInterface = new RealmInterface();
   }
 
@@ -70,7 +70,7 @@ class ManifestDocumentDatabase {
 
   async getDocuments() {
     const result = [];
-    if (!this.zip) {
+    if (!this.zip && process.env.GATSBY_BUILD_FROM_JSON === 'true') {
       // Read documents from Gatsby Action download
       try {
         const documents = JSON.parse(await readFileAsync('snooty-documents.json'));
@@ -96,7 +96,7 @@ class ManifestDocumentDatabase {
   }
 
   async getAsset(checksum) {
-    if (!this.zip) {
+    if (!this.zip && process.env.GATSBY_BUILD_FROM_JSON === 'true') {
       // Read assets from Gatsby Action download
       try {
         const asset = await readFileAsync(`assets/${checksum}`, { encoding: 'base64' });

@@ -5,13 +5,13 @@ const fs = require('fs');
 // Returns the metadata from the manifest file if provided
 const fetchManifestMetadata = () => {
   let metadata = {};
-  if (process.env.GATSBY_MANIFEST_PATH && !process.env.GATSBY_MANIFEST_PATH.match(/\.zip$/)) {
+  if (!process.env.GATSBY_MANIFEST_PATH && process.env.GATSBY_BUILD_FROM_JSON === 'true') {
     // Read metadata from Gatsby Action download
     try {
       metadata = JSON.parse(fs.readFileSync('snooty-metadata.json'));
       return metadata;
     } catch (err) {
-      console.error('No Manifest Path was found.');
+      console.error('No metadata was found.');
       return metadata;
     }
   } else if (process.env.GATSBY_MANIFEST_PATH) {

@@ -25,7 +25,7 @@ jobs:
         env:
           NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
           NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
-          GATSBY_MANIFEST_PATH: snooty-metadata.json
+          GATSBY_BUILD_FROM_JSON: true
           GATSBY_PARSER_USER: docsworker-xlarge
         run: |
           npm ci --legacy-peer-deps
