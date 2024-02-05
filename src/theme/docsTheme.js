@@ -77,6 +77,10 @@ const header = {
   navbarScrollOffset: '175px',
 };
 
+const widgets = {
+  buttonContainerMobileHeight: '60px',
+};
+
 const transitionSpeed = {
   iaExit: '100ms',
   iaEnter: '200ms',
@@ -87,6 +91,7 @@ export const theme = {
   breakpoints,
   fontSize,
   header,
+  widgets,
   screenSize,
   size,
   transitionSpeed,

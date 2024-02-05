@@ -20,7 +20,7 @@ const WidgetsContainer = styled.div`
   @media ${theme.screenSize.upToSmall} {
     background-color: white;
     width: 100%;
-    height: 60px;
+    height: ${theme.widgets.buttonContainerMobileHeight};
     flex-direction: row;
     justify-content: center;
     align-items: center;
