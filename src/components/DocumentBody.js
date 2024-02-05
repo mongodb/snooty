@@ -72,7 +72,7 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
 };
 
 const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
-const AVAILABLE_LANGUAGES = ['English', '简体中文'];
+const AVAILABLE_LANGUAGES = ['English', '简体中文', '한국어', 'Português'];
 
 const DocumentBody = (props) => {
   const {
@@ -86,7 +86,7 @@ const DocumentBody = (props) => {
       const footer = document.getElementById('footer-container');
       const footerUlElement = footer?.querySelector('ul[role=listbox]');
       if (footerUlElement) {
-        // For DOP-4060 we only want to support English and Simple Chinese (for now)
+        // For DOP-4296 we only want to support English,Simple Chinese,Korean, and Portuguese.
         const availableOptions = Array.from(footerUlElement.childNodes).reduce((accumulator, child) => {
           if (AVAILABLE_LANGUAGES.includes(child.textContent)) {
             accumulator.push(child);
@@ -125,6 +125,8 @@ const DocumentBody = (props) => {
     const localeHrefMap = {
       'zh-cn': `${location.origin}/zh-cn${slugForUrl}`,
       'en-us': `${location.origin}${slugForUrl}`,
+      'ko-kr': `${location.origin}/ko-kr${slugForUrl}`,
+      'pt-br': `${location.origin}/pt-br${slugForUrl}`,
     };
 
     if (isBrowser) {
