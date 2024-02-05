@@ -12,7 +12,7 @@ import DrawerButtons from './DrawerButtons';
 
 const labContainerStyle = css`
   background-color: ${palette.gray.dark3};
-  // Keeping z-index same as chatbot FAB
+  // Keeping z-index same as chatbot modal
   z-index: 2000;
   position: fixed !important;
   bottom: 0;
