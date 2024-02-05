@@ -1,6 +1,7 @@
 const AdmZip = require('adm-zip');
 const BSON = require('bson');
 const fs = require('fs');
+const { promisify } = require('util');
 const { initRealm } = require('../utils/setup/init-realm');
 const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } = require('../build-constants');
 const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
@@ -8,6 +9,8 @@ const { constructBuildFilter } = require('../utils/setup/construct-build-filter'
 
 const DB = siteMetadata.database;
 const buildFilter = constructBuildFilter(siteMetadata);
+
+const readFileAsync = promisify(fs.readFile);
 
 class RealmInterface {
   constructor() {
@@ -70,7 +73,7 @@ class ManifestDocumentDatabase {
     if (!this.zip) {
       // Read documents from Gatsby Action download
       try {
-        const documents = JSON.parse(fs.readFileSync('snooty-documents.json'));
+        const documents = JSON.parse(readFileAsync('snooty-documents.json'));
         return documents;
       } catch (err) {
         console.error('No Manifest Path was found.');
@@ -96,7 +99,7 @@ class ManifestDocumentDatabase {
     if (!this.zip) {
       // Read assets from Gatsby Action download
       try {
-        const asset = fs.readFileSync(`assets/${checksum}`, { encoding: 'base64' });
+        const asset = readFileAsync(`assets/${checksum}`, { encoding: 'base64' });
         return Buffer.from(asset, 'base64');
       } catch (err) {
         console.error('No Manifest Path was found.');
