@@ -73,7 +73,7 @@ class ManifestDocumentDatabase {
     if (!this.zip) {
       // Read documents from Gatsby Action download
       try {
-        const documents = JSON.parse(readFileAsync('snooty-documents.json'));
+        const documents = JSON.parse(await readFileAsync('snooty-documents.json'));
         return documents;
       } catch (err) {
         console.error('No Manifest Path was found.');
@@ -99,7 +99,7 @@ class ManifestDocumentDatabase {
     if (!this.zip) {
       // Read assets from Gatsby Action download
       try {
-        const asset = readFileAsync(`assets/${checksum}`, { encoding: 'base64' });
+        const asset = await readFileAsync(`assets/${checksum}`, { encoding: 'base64' });
         return Buffer.from(asset, 'base64');
       } catch (err) {
         console.error('No Manifest Path was found.');
