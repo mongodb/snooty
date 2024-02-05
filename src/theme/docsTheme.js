@@ -87,6 +87,11 @@ const transitionSpeed = {
   contentFade: '300ms',
 };
 
+// z-indexes for topmost major elements on the site. Subcomponents should have their own z-indexes set
+const zIndexes = {
+  widgets: 2000,
+};
+
 export const theme = {
   breakpoints,
   fontSize,
@@ -95,4 +100,5 @@ export const theme = {
   screenSize,
   size,
   transitionSpeed,
+  zIndexes,
 };
