@@ -99,15 +99,15 @@ const DocumentBody = (props) => {
       metadata={metadata}
     >
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
-      <Widgets
-        location={location}
-        pageOptions={page?.options}
-        pageTitle={pageTitle}
-        publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-        slug={slug}
-        template={template}
-      >
-        <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
+      <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
+        <Widgets
+          location={location}
+          pageOptions={page?.options}
+          pageTitle={pageTitle}
+          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+          slug={slug}
+          template={template}
+        >
           <FootnoteContext.Provider value={{ footnotes }}>
             <Template {...props} useChatbot={useChatbot}>
               {pageNodes.map((child, index) => (
@@ -115,8 +115,8 @@ const DocumentBody = (props) => {
               ))}
             </Template>
           </FootnoteContext.Provider>
-        </InstruqtProvider>
-      </Widgets>
+        </Widgets>
+      </InstruqtProvider>
       <footer style={{ width: '100%', height: '568px', backgroundColor: '#061621' }}></footer>
     </Layout>
   );
