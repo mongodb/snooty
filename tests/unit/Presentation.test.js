@@ -42,7 +42,7 @@ describe('DocumentBody', () => {
     if (!process.env.GATSBY_HIDE_UNIFIED_FOOTER_LOCALE) {
       const languageSelector = screen.getByTestId('options');
       expect(languageSelector).toBeInTheDocument();
-      expect(languageSelector.querySelectorAll('li')).toHaveLength(2);
+      expect(languageSelector.querySelectorAll('li')).toHaveLength(4);
     }
 
     await waitFor(

@@ -22,16 +22,21 @@ const iconStyle = css`
   cursor: pointer;
 `;
 
-const DrawerButtons = ({ isMinHeight, targetHeight, setHeight, maxHeight }) => {
+const DrawerButtons = ({ height, minHeight, maxHeight, defaultHeight, setHeight }) => {
   const { setIsOpen } = useContext(InstruqtContext);
-  const drawerSizeGlyph = isMinHeight ? 'ArrowUp' : 'Minus';
+  const isMinHeight = height === minHeight;
+  const isMaxHeight = height === maxHeight;
+  const minimizeGlyph = isMinHeight ? 'ArrowUp' : 'Minus';
+  const maximizeGlyph = isMaxHeight ? 'FullScreenExit' : 'FullScreenEnter';
 
-  const handleDrawerSize = () => {
-    setHeight(targetHeight);
+  const handleMinimizeDrawer = () => {
+    const minimizeTargetHeight = isMinHeight ? defaultHeight : minHeight;
+    setHeight(minimizeTargetHeight);
   };
 
   const handleMaximizeDrawer = () => {
-    setHeight(maxHeight);
+    const maximizeTargetHeight = isMaxHeight ? defaultHeight : maxHeight;
+    setHeight(maximizeTargetHeight);
   };
 
   const handleDrawerClose = () => {
@@ -40,8 +45,8 @@ const DrawerButtons = ({ isMinHeight, targetHeight, setHeight, maxHeight }) => {
 
   return (
     <div className={cx(buttonContainerStyle)}>
-      <Icon className={cx(iconStyle)} width={16} height={16} onClick={handleDrawerSize} glyph={drawerSizeGlyph} />
-      <Icon className={cx(iconStyle)} width={24} height={24} onClick={handleMaximizeDrawer} glyph="FullScreenEnter" />
+      <Icon className={cx(iconStyle)} width={16} height={16} onClick={handleMinimizeDrawer} glyph={minimizeGlyph} />
+      <Icon className={cx(iconStyle)} width={24} height={24} onClick={handleMaximizeDrawer} glyph={maximizeGlyph} />
       <Icon className={cx(iconStyle)} width={24} height={24} onClick={handleDrawerClose} glyph="X" />
     </div>
   );

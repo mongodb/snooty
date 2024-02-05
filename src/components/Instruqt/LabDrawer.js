@@ -113,8 +113,6 @@ const LabDrawer = ({ title, embedValue }) => {
   }
 
   const frameHeight = height - minHeight;
-  const isMinHeight = height === minHeight;
-  const buttonTargetHeight = isMinHeight ? defaultHeight : minHeight;
 
   // Shrink height of the drawer if new max height is less than the current height
   useEffect(() => {
@@ -143,10 +141,11 @@ const LabDrawer = ({ title, embedValue }) => {
         <div className={cx(topContainerStyle)}>
           <div className={cx(titleStyle)}>{labTitle}</div>
           <DrawerButtons
-            isMinHeight={isMinHeight}
-            targetHeight={buttonTargetHeight}
-            setHeight={setHeight}
+            height={height}
+            minHeight={minHeight}
             maxHeight={maxHeight}
+            defaultHeight={defaultHeight}
+            setHeight={setHeight}
           />
         </div>
         <InstruqtFrame title={title} embedValue={embedValue} height={frameHeight} />
