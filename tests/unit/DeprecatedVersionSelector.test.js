@@ -16,6 +16,10 @@ const mockedReposBranches = [
       dotcomprd: 'docs',
     },
     branches: [
+      { eol_type: 'link', versionSelectorLabel: 'v1.1', urlSlug: 'v1.1' },
+      { eol_type: 'link', versionSelectorLabel: 'v1.11', urlSlug: 'v1.11' },
+      { eol_type: 'link', versionSelectorLabel: 'v1.10', urlSlug: 'v1.10' },
+      { eol_type: 'link', versionSelectorLabel: 'v1.2', urlSlug: 'v1.2' },
       { eol_type: 'link', versionSelectorLabel: 'v2.2', urlSlug: 'v2.2' },
       { eol_type: 'download', versionSelectorLabel: 'v2.4', urlSlug: 'v2.4' },
       { eol_type: 'link', versionSelectorLabel: 'v2.6', urlSlug: 'v2.6' },
@@ -24,6 +28,7 @@ const mockedReposBranches = [
       { eol_type: 'download', versionSelectorLabel: 'v3.4', urlSlug: 'v3.4' },
     ],
   },
+
   {
     project: 'mongocli',
     displayName: 'MongoDB Command Line Interface',
@@ -162,6 +167,37 @@ describe('DeprecatedVersionSelector when rendered', () => {
       expect(button).toHaveAttribute('aria-disabled', 'false');
       expect(button.href).toEqual(expectedUrl);
     });
+  });
+
+  describe('when the selected product has multiple deprecated versions, versions are sorted correctly', () => {
+    const wrapper = render(<DeprecatedVersionSelector />);
+    const productDropdown = wrapper.container.querySelectorAll('button')[0];
+    userEvent.click(productDropdown);
+    const product = wrapper.queryByText('MongoDB Manual');
+    expect(product).toBeTruthy();
+    userEvent.click(product);
+    const versionDropdown = wrapper.container.querySelectorAll('button')[1];
+    userEvent.click(versionDropdown);
+    expect(versionDropdown).toHaveAttribute('aria-expanded', 'true');
+
+    const versionChoices = wrapper.queryAllByRole('option').slice(3);
+
+    const sortedManualChoices = [
+      'Version 1.1',
+      'Version 1.2',
+      'Version 1.10',
+      'Version 1.11',
+      'Version 2.2',
+      'Version 2.4',
+      'Version 2.6',
+      'Version 3.0',
+      'Version 3.2',
+      'Version 3.4',
+    ];
+
+    for (let version in versionChoices) {
+      expect(versionChoices[version].textContent).toEqual(sortedManualChoices[version]);
+    }
   });
 
   describe('if fetching the dropdown data from atlas fails', () => {

@@ -9,6 +9,7 @@ import { theme } from '../theme/docsTheme';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useAllDocsets } from '../hooks/useAllDocsets';
 import { fetchDocsets } from '../utils/realm';
+import { sortVersions } from '../utils/sort-versioned-branches';
 import Select from './Select';
 
 const SELECT_WIDTH = '336px';
@@ -96,15 +97,12 @@ const DeprecatedVersionSelector = () => {
             //Ensure versions set to null are not included and do not break selector
             .filter((versionChoice) => versionChoice)
             //sort versions newest(larger numbers) to oldest(smaller numbers). Assumes there are no more than three digits between/before/after each decimal place
-            .sort((a, b) =>
-              a.text
-                .toString()
-                .replace(/\d+/g, (n) => +n + 1000)
-                .localeCompare(b.text.toString().replace(/\d+/g, (n) => +n + 1000))
-            )
+            .sort(sortVersions)
         : [],
     [reposMap, product]
   );
+
+  console.log(versionChoices);
 
   const versionChoicesMap = useMemo(() => keyBy(versionChoices, 'value'), [versionChoices]);
 
