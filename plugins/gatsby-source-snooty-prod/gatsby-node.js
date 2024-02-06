@@ -101,7 +101,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   // wait to connect to Realm
 
-  if (siteMetadata.manifestPath) {
+  if (siteMetadata.manifestPath || process.env.GATSBY_BUILD_FROM_JSON === 'true') {
     console.log('Loading documents from manifest');
     db = manifestDocumentDatabase;
   } else {

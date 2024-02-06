@@ -1,5 +1,7 @@
 const AdmZip = require('adm-zip');
 const BSON = require('bson');
+const fs = require('fs');
+const { promisify } = require('util');
 const { initRealm } = require('../utils/setup/init-realm');
 const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } = require('../build-constants');
 const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
@@ -7,6 +9,8 @@ const { constructBuildFilter } = require('../utils/setup/construct-build-filter'
 
 const DB = siteMetadata.database;
 const buildFilter = constructBuildFilter(siteMetadata);
+
+const readFileAsync = promisify(fs.readFile);
 
 class RealmInterface {
   constructor() {
@@ -55,7 +59,8 @@ class RealmInterface {
 
 class ManifestDocumentDatabase {
   constructor(path) {
-    this.zip = new AdmZip(path);
+    // Allow no zip if building artifact through Github Action
+    this.zip = process.env.GATSBY_BUILD_FROM_JSON !== 'true' ? new AdmZip(path) : null;
     this.realmInterface = new RealmInterface();
   }
 
@@ -65,11 +70,22 @@ class ManifestDocumentDatabase {
 
   async getDocuments() {
     const result = [];
-    const zipEntries = this.zip.getEntries();
-    for (const entry of zipEntries) {
-      if (entry.entryName.startsWith('documents/')) {
-        const doc = BSON.deserialize(entry.getData());
-        result.push(doc);
+    if (!this.zip && process.env.GATSBY_BUILD_FROM_JSON === 'true') {
+      // Read documents from Gatsby Action download
+      try {
+        const documents = JSON.parse(await readFileAsync('snooty-documents.json'));
+        return documents;
+      } catch (err) {
+        console.error('No Manifest Path was found.');
+        return result;
+      }
+    } else {
+      const zipEntries = this.zip.getEntries();
+      for (const entry of zipEntries) {
+        if (entry.entryName.startsWith('documents/')) {
+          const doc = BSON.deserialize(entry.getData());
+          result.push(doc);
+        }
       }
     }
     return result;
@@ -80,9 +96,20 @@ class ManifestDocumentDatabase {
   }
 
   async getAsset(checksum) {
+    if (!this.zip && process.env.GATSBY_BUILD_FROM_JSON === 'true') {
+      // Read assets from Gatsby Action download
+      try {
+        const asset = await readFileAsync(`assets/${checksum}`, { encoding: 'base64' });
+        return Buffer.from(asset, 'base64');
+      } catch (err) {
+        console.error('No Manifest Path was found.');
+        return null;
+      }
+    }
     const result = this.zip.getEntry(`assets/${checksum}`);
     if (result) {
-      return result.getData();
+      const buffer = result.getData();
+      return buffer;
     }
     return null;
   }
