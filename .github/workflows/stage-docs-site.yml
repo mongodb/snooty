@@ -27,6 +27,8 @@ jobs:
           NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
           GATSBY_BUILD_FROM_JSON: true
           GATSBY_PARSER_USER: docsworker-xlarge
+          GATSBY_SITE: ${{ matrix.project }}
+          GATSBY_PARSER_BRANCH: main
         run: |
           npm ci --legacy-peer-deps
           npm run build
