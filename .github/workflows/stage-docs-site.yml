@@ -13,12 +13,12 @@ jobs:
       matrix: 
         project: ['cloud-docs', 'docs']
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
       - name: Access Build Data
-        uses: mongodb/docs-worker-actions/build-artifact@DOP-4247-build-artifact
+        uses: mongodb/docs-worker-actions/build-artifact@main
         env: 
           PROJECT_TO_BUILD: ${{ matrix.project }}
       - name: Build Snooty
