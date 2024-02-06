@@ -6,7 +6,8 @@ import { InstruqtContext } from './instruqt-context';
 const Instruqt = ({ nodeData }) => {
   const embedValue = nodeData?.argument[0]?.value;
   const title = nodeData?.options?.title;
-  const { isOpen, hasDrawer } = useContext(InstruqtContext);
+  const isDrawer = nodeData?.options?.drawer;
+  const { isOpen } = useContext(InstruqtContext);
 
   if (!embedValue) {
     return null;
@@ -14,7 +15,7 @@ const Instruqt = ({ nodeData }) => {
 
   return (
     <>
-      {hasDrawer ? (
+      {isDrawer ? (
         isOpen && (
           <>
             <LabDrawer embedValue={embedValue} title={title} />
