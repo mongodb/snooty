@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import queryString from 'query-string';
 import { keyBy, isEmpty } from 'lodash';
 import Button from '@leafygreen-ui/button';
@@ -51,11 +51,63 @@ const DeprecatedVersionSelector = () => {
   const [version, setVersion] = useState('');
   const [reposMap, setReposMap] = useState(reposBranchesBuildDataMap);
 
+  const alphabetize = (product1, product2) => {
+    return product1?.text?.localeCompare(product2?.text);
+  };
+
+  const productChoices = useMemo(
+    () =>
+      reposMap
+        ? Object.keys(reposMap)
+            .map((product) => ({
+              text: reposMap[product].displayName,
+              value: product,
+            }))
+            // Ensure invalid entries do not break selector
+            .filter(({ text }) => text)
+            //sort entries alphabetically by text
+            .sort(alphabetize)
+        : [],
+    [reposMap]
+  );
+
   const updateProduct = useCallback(({ value }) => {
     setProduct(value);
     setVersion('');
   }, []);
+
   const updateVersion = useCallback(({ value }) => setVersion(value), []);
+
+  const versionChoices = useMemo(
+    () =>
+      reposMap[product]?.branches
+        ? reposMap[product]?.branches
+            .map((version) => {
+              //only include versions with an eol_type field
+              if (version.eol_type && version.versionSelectorLabel) {
+                return {
+                  text: prefixVersion(version.versionSelectorLabel),
+                  value: version.versionSelectorLabel,
+                  urlSlug: version.urlSlug,
+                  icon: version.eol_type === 'download' ? <Icon glyph="Download" /> : null,
+                };
+              } else return null;
+            })
+            //Ensure versions set to null are not included and do not break selector
+            .filter((versionChoice) => versionChoice)
+            //sort versions newest(larger numbers) to oldest(smaller numbers). Assumes there are no more than three digits between/before/after each decimal place
+            .sort((a, b) =>
+              a.text
+                .toString()
+                .replace(/\d+/g, (n) => +n + 1000)
+                .localeCompare(b.text.toString().replace(/\d+/g, (n) => +n + 1000))
+            )
+        : [],
+    [reposMap, product]
+  );
+
+  const versionChoicesMap = useMemo(() => keyBy(versionChoices, 'value'), [versionChoices]);
+
   const buttonDisabled = !(product && version);
 
   // Fetch docsets for url
@@ -73,13 +125,13 @@ const DeprecatedVersionSelector = () => {
           console.error(`ERROR: could not access ${reposDatabase} for dropdown data.`);
         });
     }
-  }, [reposDatabase, reposBranchesBuildDataMap]);
+  }, [reposDatabase]);
 
   useEffect(() => {
     if (isBrowser) {
       // Extract the value of 'site' query string from the page url to pre-select product
       const { site } = queryString.parse(window.location.search);
-      if (site && Object.keys(reposMap).includes(site)) {
+      if (site && reposMap[site]) {
         setProduct(site);
       }
     }
@@ -88,56 +140,14 @@ const DeprecatedVersionSelector = () => {
   const generateUrl = (currentVersion) => {
     // Our current LG button version has a bug where a disabled button with an href allows the disabled
     // button to be clickable. This logic can be removed when LG button is version >= 12.0.4.
-    if (buttonDisabled || isEmpty(reposMap) || !hasValidHostName(reposMap[product])) {
+    if (buttonDisabled || !currentVersion || isEmpty(reposMap) || !hasValidHostName(reposMap[product])) {
       return null;
     }
 
     // Utilizing hardcoded env because legacy sites are not available on dev/stage
     const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
-    return `${hostName}/${currentVersion?.urlSlug}`;
+    return `${hostName}/${currentVersion.urlSlug}`;
   };
-
-  const alphabetize = (product1, product2) => {
-    return product1?.text?.localeCompare(product2?.text);
-  };
-
-  const productChoices = reposMap
-    ? Object.keys(reposMap)
-        .map((product) => ({
-          text: reposMap[product].displayName,
-          value: product,
-        }))
-        // Ensure invalid entries do not break selector
-        .filter(({ text }) => text)
-        //sort entries alphabetically by text
-        .sort(alphabetize)
-    : [];
-
-  const versionChoices = reposMap[product]?.branches
-    ? reposMap[product]?.branches
-        .map((version) => {
-          //only include versions with an eol_type field
-          if (version.eol_type && version.versionSelectorLabel) {
-            return {
-              text: prefixVersion(version.versionSelectorLabel),
-              value: version.versionSelectorLabel,
-              urlSlug: version.urlSlug,
-              icon: version.eol_type === 'download' ? <Icon glyph="Download" /> : null,
-            };
-          } else return null;
-        })
-        //Ensure versions set to null are not included and do not break selector
-        .filter((versionChoice) => versionChoice)
-        //sort versions newest(larger numbers) to oldest(smaller numbers). Assumes there are no more than three digits between/before/after each decimal place
-        .sort((a, b) =>
-          a.text
-            .toString()
-            .replace(/\d+/g, (n) => +n + 1000)
-            .localeCompare(b.text.toString().replace(/\d+/g, (n) => +n + 1000))
-        )
-    : [];
-
-  const versionChoicesMap = keyBy(versionChoices, 'value');
 
   return (
     <>
@@ -165,7 +175,7 @@ const DeprecatedVersionSelector = () => {
         href={generateUrl(versionChoicesMap[version])}
         disabled={buttonDisabled}
       >
-        {version?.eol_type === 'download' ? 'Download Documentation' : 'View Documentation'}
+        {versionChoicesMap[version]?.icon ? 'Download Documentation' : 'View Documentation'}
       </Button>
     </>
   );
