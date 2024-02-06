@@ -10,6 +10,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
+import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { isBrowser } from '../utils/is-browser';
 import Widgets from './Widgets';
@@ -20,6 +21,7 @@ import Meta from './Meta';
 import Twitter from './Twitter';
 import DocsLandingSD from './StructuredData/DocsLandingSD';
 import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
+import { InstruqtProvider } from './Instruqt/instruqt-context';
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
@@ -71,7 +73,7 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
 };
 
 const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
-const AVAILABLE_LANGUAGES = ['English', '简体中文'];
+const AVAILABLE_LANGUAGES = ['English', '简体中文', '한국어', 'Português'];
 
 const DocumentBody = (props) => {
   const {
@@ -85,7 +87,7 @@ const DocumentBody = (props) => {
       const footer = document.getElementById('footer-container');
       const footerUlElement = footer?.querySelector('ul[role=listbox]');
       if (footerUlElement) {
-        // For DOP-4060 we only want to support English and Simple Chinese (for now)
+        // For DOP-4296 we only want to support English,Simple Chinese,Korean, and Portuguese.
         const availableOptions = Array.from(footerUlElement.childNodes).reduce((accumulator, child) => {
           if (AVAILABLE_LANGUAGES.includes(child.textContent)) {
             accumulator.push(child);
@@ -122,12 +124,14 @@ const DocumentBody = (props) => {
   const slugForUrl = slug === '/' ? `${withPrefix('')}` : `${withPrefix(slug)}`; // handle the `/` path
   const onSelectLocale = (locale) => {
     const localeHrefMap = {
-      'zh-cn': `https://mongodbcom-cdn.staging.corp.mongodb.com/zh-cn${slugForUrl}/`,
-      'en-us': `https://mongodbcom-cdn.website.staging.corp.mongodb.com${slugForUrl}/`,
+      'zh-cn': `${location.origin}/zh-cn${slugForUrl}`,
+      'en-us': `${location.origin}${slugForUrl}`,
+      'ko-kr': `${location.origin}/ko-kr${slugForUrl}`,
+      'pt-br': `${location.origin}/pt-br${slugForUrl}`,
     };
 
     if (isBrowser) {
-      window.location.href = localeHrefMap[locale];
+      window.location.href = assertTrailingSlash(localeHrefMap[locale]);
     }
   };
 
@@ -143,13 +147,15 @@ const DocumentBody = (props) => {
         template={template}
       >
         <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
-          <FootnoteContext.Provider value={{ footnotes }}>
-            <Template {...props} useChatbot={useChatbot}>
-              {pageNodes.map((child, index) => (
-                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-              ))}
-            </Template>
-          </FootnoteContext.Provider>
+          <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
+            <FootnoteContext.Provider value={{ footnotes }}>
+              <Template {...props} useChatbot={useChatbot}>
+                {pageNodes.map((child, index) => (
+                  <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                ))}
+              </Template>
+            </FootnoteContext.Provider>
+          </InstruqtProvider>
         </ImageContextProvider>
       </Widgets>
       {!isInPresentationMode && (
