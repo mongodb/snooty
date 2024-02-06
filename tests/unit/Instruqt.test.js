@@ -26,10 +26,6 @@ const renderComponent = (nodeData, hasLabDrawer = false) => {
 };
 
 describe('Instruqt', () => {
-  beforeEach(() => {
-    process.env.GATSBY_FEATURE_LAB_DRAWER = false;
-  });
-
   it('renders null when directive argument does not exist', () => {
     const wrapper = renderComponent(mockData.noArgument);
     expect(wrapper.queryByTitle('Instruqt', { exact: false })).toBeFalsy();
@@ -44,10 +40,6 @@ describe('Instruqt', () => {
     const hasLabDrawer = true;
     jest.useFakeTimers();
     const defaultWindowHeight = global.window.innerHeight;
-
-    beforeEach(() => {
-      process.env.GATSBY_FEATURE_LAB_DRAWER = 'true';
-    });
 
     const openLabDrawer = (wrapper) => {
       const expectedButtonText = 'Open Interactive Tutorial';
