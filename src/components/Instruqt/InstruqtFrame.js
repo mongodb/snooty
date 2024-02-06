@@ -8,7 +8,8 @@ const iframeStyle = css`
 const InstruqtFrame = forwardRef(({ title, height, embedValue }, ref) => {
   const labTitle = title || 'MongoDB Interactive Lab';
   const frameTitle = `Instruqt - ${labTitle}`;
-  const frameHeight = height || '640';
+  // Allow frameHeight to be 0 when drawer is closed to avoid iframe overflowing
+  const frameHeight = height ?? '640';
   const frameSrc = `https://play.instruqt.com/embed${embedValue}`;
 
   return (

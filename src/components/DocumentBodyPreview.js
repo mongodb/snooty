@@ -6,10 +6,12 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import Layout from '../layouts/preview-layout';
+import { usePresentationMode } from '../hooks/use-presentation-mode';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
+import { InstruqtProvider } from './Instruqt/instruqt-context';
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
@@ -86,6 +88,8 @@ const DocumentBody = (props) => {
   const siteTitle = getNestedValue(['title'], metadata) || '';
   const { Template, useChatbot } = getTemplate(template);
 
+  const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
+
   return (
     <Layout
       pageContext={{
@@ -98,22 +102,25 @@ const DocumentBody = (props) => {
       metadata={metadata}
     >
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
-      <Widgets
-        location={location}
-        pageOptions={page?.options}
-        pageTitle={pageTitle}
-        publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-        slug={slug}
-        template={template}
-      >
-        <FootnoteContext.Provider value={{ footnotes }}>
-          <Template {...props} useChatbot={useChatbot}>
-            {pageNodes.map((child, index) => (
-              <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-            ))}
-          </Template>
-        </FootnoteContext.Provider>
-      </Widgets>
+      <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
+        <Widgets
+          location={location}
+          pageOptions={page?.options}
+          pageTitle={pageTitle}
+          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+          slug={slug}
+          template={template}
+          isInPresentationMode={isInPresentationMode}
+        >
+          <FootnoteContext.Provider value={{ footnotes }}>
+            <Template {...props} useChatbot={useChatbot}>
+              {pageNodes.map((child, index) => (
+                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+              ))}
+            </Template>
+          </FootnoteContext.Provider>
+        </Widgets>
+      </InstruqtProvider>
       <footer style={{ width: '100%', height: '568px', backgroundColor: '#061621' }}></footer>
     </Layout>
   );

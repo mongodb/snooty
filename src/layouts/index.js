@@ -69,7 +69,7 @@ const globalCSS = css`
   /* In next Chatbot release, a className can be specified as a prop giving us more granular specificity */
   /* At that time, remove or improve the following lines */
   div[id^=modal-] {
-    z-index: 1000 !important;
+    z-index: ${theme.zIndexes.widgets} !important;
   }
 `;
 
@@ -103,7 +103,6 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
         selectors={page?.options?.selectors}
         remoteMetadata={remoteMetadata}
         project={project}
-        hasLabDrawer={page?.options?.instruqt}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} slug={slug} template={template} /> : <div />}
