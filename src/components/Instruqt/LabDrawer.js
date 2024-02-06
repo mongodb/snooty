@@ -5,15 +5,25 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import useViewport from '../../hooks/useViewport';
 import { theme } from '../../theme/docsTheme';
+import useScreenSize from '../../hooks/useScreenSize';
+import useStickyTopValues from '../../hooks/useStickyTopValues';
 import InstruqtFrame from './InstruqtFrame';
 import DrawerButtons from './DrawerButtons';
 
 const labContainerStyle = css`
   background-color: ${palette.gray.dark3};
-  z-index: 9999;
+  // Keeping z-index same as chatbot modal
+  z-index: ${theme.zIndexes.widgets};
   position: fixed !important;
   bottom: 0;
   color: ${palette.white};
+
+  @media ${theme.screenSize.upToSmall} {
+    // Accommodate widget buttons
+    bottom: 60px;
+    // We need to lower z-index to avoid floating lab when top nav menus are open/active
+    z-index: 0;
+  }
 `;
 
 const handleContainerStyle = css`
@@ -76,15 +86,32 @@ const CustomResizeHandle = React.forwardRef((props, ref) => {
 
 const LabDrawer = ({ title, embedValue }) => {
   const viewportSize = useViewport();
+  const { isMobile } = useScreenSize();
   const labTitle = title || 'MongoDB Interactive Lab';
 
   const defaultMeasurement = 200;
-  const defaultWidth = viewportSize.width ?? defaultMeasurement;
   const defaultHeight = (viewportSize.height * 2) / 3 ?? defaultMeasurement;
+  const defaultWidth = viewportSize.width ?? defaultMeasurement;
+  // Set this to 100% instead of a set px to avoid overlap with the browser's scrollbar
+  const wrapperWidth = '100%';
 
-  const minHeight = 60;
-  const maxHeight = viewportSize.height ?? defaultMeasurement;
   const [height, setHeight] = useState(defaultHeight);
+  const minHeight = 60;
+  let maxHeight = viewportSize.height ?? defaultMeasurement;
+  const { topSmall } = useStickyTopValues();
+
+  if (isMobile) {
+    // Avoids max height of drawer from being skewed by widgets
+    const widgetsContainerHeight = theme.size.stripUnit(theme.widgets.buttonContainerMobileHeight);
+    // Prevents the drawer from overlapping with the top nav, which helps avoid awkward z-indexes when
+    // UnifiedNav's menu is open. We can consider removing this if either the UnifiedNav provides
+    // some sort of way to allow the frontend to know if its menu is open, or if the lab drawer no longer
+    // rests on top of the widgets container
+    const topNavHeight = theme.size.stripUnit(topSmall);
+    const offset = topNavHeight + widgetsContainerHeight;
+    maxHeight -= offset;
+  }
+
   const frameHeight = height - minHeight;
 
   // Shrink height of the drawer if new max height is less than the current height
@@ -110,7 +137,7 @@ const LabDrawer = ({ title, embedValue }) => {
       onResize={handleResize}
     >
       {/* Need this div with style as a wrapper to help with resizing */}
-      <div style={{ width: defaultWidth + 'px', height: height + 'px' }} data-testid="resizable-wrapper">
+      <div style={{ width: wrapperWidth, height: height + 'px' }} data-testid="resizable-wrapper">
         <div className={cx(topContainerStyle)}>
           <div className={cx(titleStyle)}>{labTitle}</div>
           <DrawerButtons

@@ -7,6 +7,7 @@ import SiteBanner from '../Banner/SiteBanner';
 import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
+import { theme } from '../../theme/docsTheme';
 
 const CHATBOT_ENABLED = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
 
@@ -14,7 +15,7 @@ const StyledHeaderContainer = styled.header(
   (props) => `
   grid-area: header;
   top: 0;
-  z-index: 1000;
+  z-index: ${theme.zIndexes.header};
   ${props.template !== 'landing' || !CHATBOT_ENABLED ? 'position: sticky;' : ''}
   `
 );

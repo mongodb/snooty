@@ -43,8 +43,6 @@ describe('Instruqt', () => {
   describe('lab drawer', () => {
     const hasLabDrawer = true;
     jest.useFakeTimers();
-    // Default width and height of Jest's virtual DOM/window
-    const defaultWindowWidth = global.window.innerWidth;
     const defaultWindowHeight = global.window.innerHeight;
 
     beforeEach(() => {
@@ -66,7 +64,6 @@ describe('Instruqt', () => {
       // Ensure everything exists
       const drawerContainer = wrapper.getByTestId('resizable-wrapper');
       expect(drawerContainer).toBeTruthy();
-      expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
       expect(drawerContainer).toHaveStyle(`height: ${(defaultWindowHeight * 2) / 3}px`);
       expect(wrapper.queryByTitle('Instruqt', { exact: false })).toBeTruthy();
     });
@@ -82,13 +79,11 @@ describe('Instruqt', () => {
 
       // Ensure height goes down
       userEvent.click(minimizeButton);
-      expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
       expect(drawerContainer).toHaveStyle(`height: 60px`);
 
       // Ensure height goes back up to starting height
       const arrowUpButton = wrapper.getByLabelText('Arrow Up Icon');
       userEvent.click(arrowUpButton);
-      expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
       expect(drawerContainer).toHaveStyle(`height: ${startingDrawerHeight}px`);
     });
 
@@ -102,13 +97,11 @@ describe('Instruqt', () => {
 
       // Ensure drawer height goes up to max height
       userEvent.click(fullscreenEnterButton);
-      expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
       expect(drawerContainer).toHaveStyle(`height: ${defaultWindowHeight}px`);
 
       // Ensure drawer height goes back down to starting height
       const fullscreenExitButton = wrapper.getByLabelText('Full Screen Exit Icon');
       userEvent.click(fullscreenExitButton);
-      expect(drawerContainer).toHaveStyle(`width: ${defaultWindowWidth}px`);
       expect(drawerContainer).toHaveStyle(`height: ${startingDrawerHeight}px`);
     });
 
