@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
+import { withPrefix, graphql } from 'gatsby';
 import { UnifiedFooter } from '@mdb/consistent-nav';
+import { ImageContextProvider } from '../context/image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
@@ -146,13 +147,15 @@ const DocumentBody = (props) => {
           isInPresentationMode={isInPresentationMode}
           template={template}
         >
-          <FootnoteContext.Provider value={{ footnotes }}>
-            <Template {...props} useChatbot={useChatbot}>
-              {pageNodes.map((child, index) => (
-                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-              ))}
-            </Template>
-          </FootnoteContext.Provider>
+          <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
+            <FootnoteContext.Provider value={{ footnotes }}>
+              <Template {...props} useChatbot={useChatbot}>
+                {pageNodes.map((child, index) => (
+                  <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                ))}
+              </Template>
+            </FootnoteContext.Provider>
+          </ImageContextProvider>
         </Widgets>
       </InstruqtProvider>
       {!isInPresentationMode && (
@@ -212,3 +215,17 @@ export const Head = ({ pageContext }) => {
     </>
   );
 };
+
+export const query = graphql`
+  query ($slug: String) {
+    pageImage(slug: { eq: $slug }) {
+      slug
+      images {
+        childImageSharp {
+          gatsbyImageData(layout: CONSTRAINED, formats: [WEBP], placeholder: NONE)
+        }
+        relativePath
+      }
+    }
+  }
+`;

@@ -1,0 +1,40 @@
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    types: [opened, synchronize]
+name: Build docs site artifact
+jobs: 
+  staging:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        project: ['cloud-docs', 'docs']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+      - name: Access Build Data
+        uses: mongodb/docs-worker-actions/build-artifact@main
+        env: 
+          PROJECT_TO_BUILD: ${{ matrix.project }}
+      - name: Build Snooty
+        env:
+          NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
+          NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
+          GATSBY_BUILD_FROM_JSON: true
+          GATSBY_PARSER_USER: docsworker-xlarge
+          GATSBY_SITE: ${{ matrix.project }}
+          GATSBY_PARSER_BRANCH: main
+        run: |
+          npm ci --legacy-peer-deps
+          npm run build
+      - name: Save Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact-${{ matrix.project }}
+          path: |
+            public
