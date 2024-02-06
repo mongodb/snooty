@@ -102,8 +102,6 @@ const DeprecatedVersionSelector = () => {
     [reposMap, product]
   );
 
-  console.log(versionChoices);
-
   const versionChoicesMap = useMemo(() => keyBy(versionChoices, 'value'), [versionChoices]);
 
   const buttonDisabled = !(product && version);
