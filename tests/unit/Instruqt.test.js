@@ -26,10 +26,6 @@ const renderComponent = (nodeData, hasLabDrawer = false) => {
 };
 
 describe('Instruqt', () => {
-  beforeEach(() => {
-    process.env.GATSBY_FEATURE_LAB_DRAWER = false;
-  });
-
   it('renders null when directive argument does not exist', () => {
     const wrapper = renderComponent(mockData.noArgument);
     expect(wrapper.queryByTitle('Instruqt', { exact: false })).toBeFalsy();
@@ -45,10 +41,6 @@ describe('Instruqt', () => {
     jest.useFakeTimers();
     const defaultWindowHeight = global.window.innerHeight;
 
-    beforeEach(() => {
-      process.env.GATSBY_FEATURE_LAB_DRAWER = 'true';
-    });
-
     const openLabDrawer = (wrapper) => {
       const expectedButtonText = 'Open Interactive Tutorial';
       const drawerButton = wrapper.getByText(expectedButtonText);
@@ -58,7 +50,7 @@ describe('Instruqt', () => {
     };
 
     it('renders in a drawer', () => {
-      const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      const wrapper = renderComponent(mockData.exampleDrawer, hasLabDrawer);
       openLabDrawer(wrapper);
 
       // Ensure everything exists
@@ -69,7 +61,7 @@ describe('Instruqt', () => {
     });
 
     it('can be minimized and brought back to starting height', () => {
-      const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      const wrapper = renderComponent(mockData.exampleDrawer, hasLabDrawer);
       openLabDrawer(wrapper);
       const drawerContainer = wrapper.getByTestId('resizable-wrapper');
       // Label text based on aria labels for LG Icons
@@ -88,7 +80,7 @@ describe('Instruqt', () => {
     });
 
     it('can set height to maximum', () => {
-      const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      const wrapper = renderComponent(mockData.exampleDrawer, hasLabDrawer);
       openLabDrawer(wrapper);
       const drawerContainer = wrapper.getByTestId('resizable-wrapper');
       const fullscreenEnterButton = wrapper.getByLabelText('Full Screen Enter Icon');
@@ -106,13 +98,29 @@ describe('Instruqt', () => {
     });
 
     it('can be closed', () => {
-      const wrapper = renderComponent(mockData.example, hasLabDrawer);
+      const wrapper = renderComponent(mockData.exampleDrawer, hasLabDrawer);
       openLabDrawer(wrapper);
       const xButton = wrapper.getByLabelText('X Icon');
       expect(wrapper.queryByTestId('resizable-wrapper')).toBeTruthy();
 
       userEvent.click(xButton);
       expect(wrapper.queryByTestId('resizable-wrapper')).toBeFalsy();
+    });
+
+    // This would most likely be a content edge case, but testing here to ensure graceful handling
+    it('renders both a drawer and embedded content', () => {
+      const wrapper = render(
+        <InstruqtProvider hasLabDrawer={hasLabDrawer}>
+          <Heading sectionDepth={1} nodeData={mockTitleHeading} />
+          <Instruqt nodeData={mockData.exampleDrawer} />
+          <Instruqt nodeData={mockData.example} />
+        </InstruqtProvider>
+      );
+      openLabDrawer(wrapper);
+      const drawerContainers = wrapper.queryAllByTestId('resizable-wrapper');
+      // Ensure there's only 1 drawer, but 2 Instruqt frames
+      expect(drawerContainers).toHaveLength(1);
+      expect(wrapper.queryAllByTitle('Instruqt', { exact: false })).toHaveLength(2);
     });
   });
 });

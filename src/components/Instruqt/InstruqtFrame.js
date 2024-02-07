@@ -1,11 +1,11 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 
 const iframeStyle = css`
   border: none;
 `;
 
-const InstruqtFrame = forwardRef(({ title, height, embedValue }, ref) => {
+const InstruqtFrame = ({ title, height, embedValue }) => {
   const labTitle = title || 'MongoDB Interactive Lab';
   const frameTitle = `Instruqt - ${labTitle}`;
   // Allow frameHeight to be 0 when drawer is closed to avoid iframe overflowing
@@ -14,7 +14,6 @@ const InstruqtFrame = forwardRef(({ title, height, embedValue }, ref) => {
 
   return (
     <iframe
-      ref={ref}
       className={cx(iframeStyle)}
       allowFullScreen
       sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
@@ -24,6 +23,6 @@ const InstruqtFrame = forwardRef(({ title, height, embedValue }, ref) => {
       src={frameSrc}
     />
   );
-});
+};
 
 export default InstruqtFrame;
