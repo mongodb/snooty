@@ -45,25 +45,19 @@ describe('DocumentBody', () => {
       expect(languageSelector.querySelectorAll('li')).toHaveLength(4);
     }
 
-    await waitFor(
-      () => {
-        const feedbackWidget = screen.getByText(FEEDBACK_BUTTON_TEXT);
-        expect(feedbackWidget).toBeVisible();
-        expect(feedbackWidget).toMatchSnapshot();
+    const feedbackWidget = await screen.getByText(FEEDBACK_BUTTON_TEXT);
+    expect(feedbackWidget).toBeVisible();
+    expect(feedbackWidget).toMatchSnapshot();
 
-        const chatbotWidget = screen.getByText(CHATBOT_WIDGET_TEXT);
-        /* NOT to be visible for now, with display:none */
-        expect(chatbotWidget).not.toBeVisible();
-        expect(chatbotWidget).toMatchSnapshot();
-      },
-      { timeout: 8000 }
-    );
+    const chatbotWidget = screen.getByText(CHATBOT_WIDGET_TEXT);
+    /* NOT to be visible for now, with display:none */
+    expect(chatbotWidget).not.toBeVisible();
+    expect(chatbotWidget).toMatchSnapshot();
 
     const mainNav = screen.getByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).toBeVisible();
     expect(mainNav).toMatchSnapshot();
-    /* Give more time for lazy-loaded components to be found */
-  }, 12000);
+  });
 
   it('does not render the following elements, footer, feedback widget, navigation', async () => {
     mockLocation('?presentation=true');
