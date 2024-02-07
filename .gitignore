@@ -10,5 +10,6 @@ docs-tools/
 coverage/
 .coverage
 .env.*
+.lighthouseci/*
 .vscode/
 .env
