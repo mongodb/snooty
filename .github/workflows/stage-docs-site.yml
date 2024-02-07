@@ -30,6 +30,7 @@ jobs:
           GATSBY_PARSER_USER: docsworker-xlarge
           GATSBY_SITE: ${{ matrix.project }}
           GATSBY_PARSER_BRANCH: main
+          PATH_PREFIX: /gh-actions/${{ matrix.project }}/${{ github.sha }}
         run: |
           npm ci --legacy-peer-deps
           npm run build
