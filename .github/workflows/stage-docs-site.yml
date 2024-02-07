@@ -43,6 +43,7 @@ jobs:
           DESTINATION_DIR: gh-actions
           COMMIT_HASH: ${{ github.sha }}
           PROJECT: ${{ matrix.project }}
+          GH_WORKSPACE: ${{ github.workspace }}
       - name: Save Artifact
         uses: actions/upload-artifact@v4
         with:
