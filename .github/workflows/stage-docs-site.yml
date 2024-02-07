@@ -31,7 +31,7 @@ jobs:
           GATSBY_PARSER_USER: docsworker-xlarge
           GATSBY_SITE: ${{ matrix.project }}
           GATSBY_PARSER_BRANCH: main
-          PATH_PREFIX: /${{ gh-actions }}/${{ matrix.project }}/${{ github.sha }}
+          PATH_PREFIX: /${{ s3_root_dir }}/${{ matrix.project }}/${{ github.sha }}
         run: |
           npm ci --legacy-peer-deps
           npm run build
@@ -42,7 +42,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           AWS_BUCKET: docs-mongodb-org-dotcomstg
           SOURCE_DIR: public
-          DESTINATION_DIR: ${{ gh-actions }}
+          DESTINATION_DIR: ${{ s3_root_dir }}
           COMMIT_HASH: ${{ github.sha }}
           PROJECT: ${{ matrix.project }}
           GH_WORKSPACE: ${{ github.workspace }}
