@@ -773,6 +773,21 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 
 exports[`DocumentBody renders the necessary elements 2`] = `
 .emotion-0 {
+  width: 100%;
+  min-width: 100px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+<img
+  alt="MongoDB logo"
+  class="emotion-0"
+  src="https://webimages.mongodb.com/_com_assets/cms/kuyj3d95v5vbmm2f4-horizontal_white.svg?auto=format%252Ccompress"
+/>
+`;
+
+exports[`DocumentBody renders the necessary elements 3`] = `
+.emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -832,23 +847,8 @@ exports[`DocumentBody renders the necessary elements 2`] = `
 </button>
 `;
 
-exports[`DocumentBody renders the necessary elements 3`] = `
+exports[`DocumentBody renders the necessary elements 4`] = `
 <b>
   Ask MongoDB AI
 </b>
-`;
-
-exports[`DocumentBody renders the necessary elements 4`] = `
-.emotion-0 {
-  width: 100%;
-  min-width: 100px;
-  font-size: 14px;
-  line-height: 18px;
-}
-
-<img
-  alt="MongoDB logo"
-  class="emotion-0"
-  src="https://webimages.mongodb.com/_com_assets/cms/kuyj3d95v5vbmm2f4-horizontal_white.svg?auto=format%252Ccompress"
-/>
 `;
