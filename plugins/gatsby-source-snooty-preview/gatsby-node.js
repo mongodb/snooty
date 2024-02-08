@@ -235,11 +235,13 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
         );
         return;
       }
+      console.log(`createPage with id ${node.pageNodeId}`);
 
       createPage({
         path: pagePath,
         component: templatePath,
         context: {
+          page_id: node.pageNodeId,
           id: node.pageNodeId,
           slug,
           // Hardcode static/safe values to prevent incremental builds from rebuilding versioned preview pages
