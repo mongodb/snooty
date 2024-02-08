@@ -19,9 +19,7 @@ import Meta from '../../../../src/components/Meta';
 import Twitter from '../../../../src/components/Twitter';
 import DocsLandingSD from '../../../../src/components/StructuredData/DocsLandingSD';
 import BreadcrumbSchema from '../../../../src/components/StructuredData/BreadcrumbSchema';
-
-// TARGET FOR DYNAMIC IMPORTS //
-import ComponentFactory from '../../../../src/components/ComponentFactory';
+import ComponentFactory from '../ComponentFactory';
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:

@@ -18,8 +18,6 @@ import Superscript from '../../../../src/components/Superscript';
 import { LAZY_COMPONENTS } from './lazy-imports';
 import { componentMap as filterComponents } from './imports';
 
-const componentMap = filterComponents();
-
 export const roleMap = {
   abbr: RoleAbbr,
   class: RoleClass,
@@ -73,28 +71,32 @@ const IGNORED_NAMES = new Set([
 const IGNORED_TYPES = new Set(['comment', 'inline_target', 'named_reference', 'substitution_definition']);
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'topic', 'caution', 'danger']);
 
-function getComponentType(type, name) {
-  const lookup = type === 'directive' ? name : type;
-  let ComponentType = componentMap[lookup];
-
-  if (type === 'role') {
-    ComponentType = roleMap[name];
-  }
-
-  // Various admonition types are all handled by the Admonition component
-  if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
-    ComponentType = componentMap.admonition;
-  }
-
-  if (LAZY_COMPONENTS[lookup]) {
-    return LAZY_COMPONENTS[lookup];
-  }
-
-  return ComponentType;
-}
-
 const ComponentFactory = (props) => {
   const { nodeData, slug } = props;
+
+  // TODO: Pass list of directives to filter components once available.
+  // Potentially passable via props arg.
+  const componentMap = filterComponents();
+
+  function getComponentType(type, name) {
+    const lookup = type === 'directive' ? name : type;
+    let ComponentType = componentMap[lookup];
+
+    if (type === 'role') {
+      ComponentType = roleMap[name];
+    }
+
+    // Various admonition types are all handled by the Admonition component
+    if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
+      ComponentType = componentMap.admonition;
+    }
+
+    if (LAZY_COMPONENTS[lookup]) {
+      return LAZY_COMPONENTS[lookup];
+    }
+
+    return ComponentType;
+  }
 
   const selectComponent = () => {
     const { domain, name, type } = nodeData;

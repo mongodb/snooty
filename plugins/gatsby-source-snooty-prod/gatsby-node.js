@@ -13,6 +13,7 @@ const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/i
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
+const { DocumentBodyFactory } = require('./pages/DocumentBodyFactory');
 
 // different types of references
 const PAGES = [];
@@ -246,9 +247,10 @@ exports.createPages = async ({ actions }) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
       const slug = getPageSlug(page);
-
-      // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
-      const mainComponentRelativePath = `../../src/components/DocumentBody.js`;
+      console.log(process.env.npm_config_dynamicimports);
+      const mainComponentRelativePath = process.env.npm_config_dynamicimports
+        ? DocumentBodyFactory(slug)
+        : `../../src/components/DocumentBody.js`;
 
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
         createPage({
