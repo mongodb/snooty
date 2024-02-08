@@ -52,14 +52,13 @@ exports.createSchemaCustomization = async ({ actions }) => {
       changelogData: JSON
     }
 
-    type AssociatedProduct implements Node @dontInfer {
-      productName: String
+    type PageImage implements Node @dontInfer {
+      slug: String
+      images: [File] @link(by: "relativePath", from: "pageAssets")
     }
 
-    type PageDirective implements Node @dontInfer {
-      slug: String!
-      directiveTypes: [String!]
-      nodeTypes: [String!]
+    type AssociatedProduct implements Node @dontInfer {
+      productName: String
     }
   `;
   createTypes(typeDefs);

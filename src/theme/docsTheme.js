@@ -77,17 +77,29 @@ const header = {
   navbarScrollOffset: '175px',
 };
 
+const widgets = {
+  buttonContainerMobileHeight: '60px',
+};
+
 const transitionSpeed = {
   iaExit: '100ms',
   iaEnter: '200ms',
   contentFade: '300ms',
 };
 
+// z-indexes for topmost major elements on the site. Subcomponents should have their own z-indexes set
+const zIndexes = {
+  header: 1000,
+  widgets: 2000,
+};
+
 export const theme = {
   breakpoints,
   fontSize,
   header,
+  widgets,
   screenSize,
   size,
   transitionSpeed,
+  zIndexes,
 };

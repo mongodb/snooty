@@ -33,6 +33,7 @@
     "xmlhttprequest-ssl": ">=1.6.2"
   },
   "scripts": {
+    "info": "gatsby info --clipboard",
     "build": "gatsby build --prefix-paths",
     "build:clean": "npm run clean && npm run build",
     "build:clean:stage": "npm run build:clean && make stage",
@@ -105,8 +106,12 @@
     "gatsby": "^5.0.0",
     "gatsby-plugin-emotion": "^8.0.0",
     "gatsby-plugin-google-tagmanager": "^5.0.0",
+    "gatsby-plugin-image": "^3.13.0",
     "gatsby-plugin-layout": "^4.7.0",
+    "gatsby-plugin-sharp": "^5.13.0",
     "gatsby-plugin-sitemap": "^6.0.0",
+    "gatsby-source-filesystem": "^5.13.0",
+    "gatsby-transformer-sharp": "^5.13.0",
     "hex-rgb": "^5.0.0",
     "highlight.js": "~11.5.0",
     "html-screen-capture-js": "^1.0.50",

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix, graphql } from 'gatsby';
 import { UnifiedFooter } from '@mdb/consistent-nav';
+import { ImageContextProvider } from '../context/image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
@@ -135,25 +136,27 @@ const DocumentBody = (props) => {
 
   return (
     <>
-      <Widgets
-        location={location}
-        pageOptions={page?.options}
-        pageTitle={pageTitle}
-        publishedBranches={getNestedValue(['publishedBranches'], metadata)}
-        slug={slug}
-        isInPresentationMode={isInPresentationMode}
-        template={template}
-      >
-        <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
-          <FootnoteContext.Provider value={{ footnotes }}>
-            <Template {...props} useChatbot={useChatbot}>
-              {pageNodes.map((child, index) => (
-                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-              ))}
-            </Template>
-          </FootnoteContext.Provider>
-        </InstruqtProvider>
-      </Widgets>
+      <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
+        <Widgets
+          location={location}
+          pageOptions={page?.options}
+          pageTitle={pageTitle}
+          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
+          slug={slug}
+          isInPresentationMode={isInPresentationMode}
+          template={template}
+        >
+          <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
+            <FootnoteContext.Provider value={{ footnotes }}>
+              <Template {...props} useChatbot={useChatbot}>
+                {pageNodes.map((child, index) => (
+                  <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                ))}
+              </Template>
+            </FootnoteContext.Provider>
+          </ImageContextProvider>
+        </Widgets>
+      </InstruqtProvider>
       {!isInPresentationMode && (
         <div data-testid="consistent-footer" id="footer-container">
           <UnifiedFooter hideLocale={HIDE_UNIFIED_FOOTER_LOCALE} onSelectLocale={onSelectLocale} />
@@ -213,9 +216,18 @@ export const Head = ({ pageContext }) => {
 };
 
 export const query = graphql`
-  query ($page_id: String) {
+  query ($page_id: String, $slug: String) {
     page(id: { eq: $page_id }) {
       ast
+    }
+    pageImage(slug: { eq: $slug }) {
+      slug
+      images {
+        childImageSharp {
+          gatsbyImageData(layout: CONSTRAINED, formats: [WEBP], placeholder: NONE)
+        }
+        relativePath
+      }
     }
   }
 `;
