@@ -1,5 +1,4 @@
 import React from 'react';
-import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -149,11 +148,3 @@ DefaultLayout.propTypes = {
 };
 
 export default DefaultLayout;
-
-export const query = graphql`
-  query ($page_id: String) {
-    page(id: { eq: $page_id }) {
-      ast
-    }
-  }
-`;

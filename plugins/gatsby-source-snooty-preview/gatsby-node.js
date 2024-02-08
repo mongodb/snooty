@@ -235,7 +235,6 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
         );
         return;
       }
-      console.log(`createPage with id ${node.pageNodeId}`);
 
       createPage({
         path: pagePath,
