@@ -76,10 +76,9 @@ const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCAL
 const AVAILABLE_LANGUAGES = ['English', '简体中文', '한국어', 'Português'];
 
 const DocumentBody = (props) => {
-  const {
-    location,
-    pageContext: { page, slug, template },
-  } = props;
+  const { location, data, pageContext } = props;
+  const page = data?.page?.ast;
+  const { slug, template } = pageContext;
 
   useEffect(() => {
     // A workaround to remove the other locale options.
@@ -217,7 +216,10 @@ export const Head = ({ pageContext }) => {
 };
 
 export const query = graphql`
-  query ($slug: String) {
+  query ($page_id: String, $slug: String) {
+    page(id: { eq: $page_id }) {
+      ast
+    }
     pageImage(slug: { eq: $slug }) {
       slug
       images {
