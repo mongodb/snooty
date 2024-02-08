@@ -3,12 +3,12 @@ module.exports = {
     collect: {
       staticDistDir: './public',
       startServerCommand: 'npm run serve',
-      url: ['http://localhost:9001'],
+      url: ['http://localhost:8080'],
     },
     upload: {
       target: 'lhci',
-      serverBaseUrl: 'http://localhost:3000',
-      token: '6a951bec-1f0a-4845-870e-78050e29e3e0', // could also use LHCI_TOKEN variable instead
+      serverBaseUrl: 'http://localhost:9001',
+      token: '3695a47b-03b2-4bd0-9d9b-53039f3f9d51', // could also use LHCI_TOKEN variable instead
     },
   },
 };
