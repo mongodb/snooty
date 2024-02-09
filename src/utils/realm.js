@@ -1,5 +1,6 @@
 import * as Realm from 'realm-web';
 import { SNOOTY_REALM_APP_ID } from '../build-constants';
+import { ensureCurrentUserSingleton, currentUsersCleanup } from './realm-user-management';
 
 const app = new Realm.App({ id: SNOOTY_REALM_APP_ID });
 
@@ -13,10 +14,12 @@ const loginAnonymous = async () => {
     return loginDefer;
   }
 
+  // Only clears local store if there are more than or equal to
+  // 10 users in storage.
+  currentUsersCleanup(app);
+
   // Avoid creating multiple users if one already exists
-  if (app.currentUser) {
-    return;
-  }
+  ensureCurrentUserSingleton(app);
 
   loginDefer = new Promise(async (res, rej) => {
     try {
