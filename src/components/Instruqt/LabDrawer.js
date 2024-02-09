@@ -82,7 +82,7 @@ const titleStyle = css`
   }
 `;
 
-const iframeOverlayStyle = (frameHeight, isResizing) => css`
+const iframeOverlayStyle = (frameHeight) => css`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -90,8 +90,6 @@ const iframeOverlayStyle = (frameHeight, isResizing) => css`
   opacity: 0;
   height: ${frameHeight}px;
   width: 100%;
-  // Hide the div to allow iframe interaction
-  ${!isResizing && 'display: none;'}
 `;
 
 const CustomResizeHandle = React.forwardRef((props, ref) => {
@@ -176,7 +174,7 @@ const LabDrawer = ({ title, embedValue }) => {
           />
         </div>
         {/* Having an overlaying div allows dragging to not bug out when mouse crosses over into the iframe */}
-        <div className={cx(iframeOverlayStyle(frameHeight, isResizing))} />
+        {isResizing && <div className={cx(iframeOverlayStyle(frameHeight))} />}
         <InstruqtFrame title={title} embedValue={embedValue} height={frameHeight} />
       </div>
     </Resizable>,
