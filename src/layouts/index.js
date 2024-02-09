@@ -83,14 +83,17 @@ const GlobalGrid = styled('div')`
   overflow: clip;
 `;
 
-const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, template } }) => {
+const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol, project } = useSnootyMetadata();
   const remoteMetadata = useRemoteMetadata();
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
-  const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
+  const pageTitle = React.useMemo(
+    () => page?.ast?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug],
+    [slug] // eslint-disable-line react-hooks/exhaustive-deps
+  );
   useDelightedSurvey(slug, project);
 
   return (
@@ -99,8 +102,8 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
       <RootProvider
         slug={slug}
         repoBranches={repoBranches}
-        headingNodes={page?.options?.headings}
-        selectors={page?.options?.selectors}
+        headingNodes={page?.ast?.options?.headings}
+        selectors={page?.ast?.options?.selectors}
         remoteMetadata={remoteMetadata}
         project={project}
       >
@@ -110,7 +113,7 @@ const DefaultLayout = ({ children, pageContext: { page, slug, repoBranches, temp
             <Sidenav
               chapters={chapters}
               guides={guides}
-              page={page}
+              page={page.ast}
               pageTitle={pageTitle}
               publishedBranches={publishedBranches}
               repoBranches={repoBranches}

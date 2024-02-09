@@ -1,3 +1,3 @@
-import SearchResults from './SearchResults';
+import SearchWrapper from './SearchWrapper';
 
-export default SearchResults;
+export default SearchWrapper;
