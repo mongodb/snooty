@@ -82,13 +82,12 @@ const titleStyle = css`
   }
 `;
 
-const iframeOverlayStyle = (frameHeight) => css`
+const iframeOverlayStyle = css`
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: 1;
   opacity: 0;
-  height: ${frameHeight}px;
   width: 100%;
 `;
 
@@ -174,7 +173,8 @@ const LabDrawer = ({ title, embedValue }) => {
           />
         </div>
         {/* Having an overlaying div allows dragging to not bug out when mouse crosses over into the iframe */}
-        {isResizing && <div className={cx(iframeOverlayStyle(frameHeight))} />}
+        {/* Keep height separate from css style to avoid constant css updates */}
+        {isResizing && <div className={cx(iframeOverlayStyle)} style={{ height: `${frameHeight}px` }} />}
         <InstruqtFrame title={title} embedValue={embedValue} height={frameHeight} />
       </div>
     </Resizable>,
