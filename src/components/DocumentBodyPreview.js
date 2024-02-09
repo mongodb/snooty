@@ -96,6 +96,7 @@ const DocumentBody = (props) => {
         // Pass down data missing from the preview plugin, but are present in the
         // prod plugin for consistency
         template,
+        page: data?.page?.ast,
         publishedBranches: getNestedValue(['publishedBranches'], metadata),
         ...props.pageContext,
       }}
