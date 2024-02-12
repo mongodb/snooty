@@ -141,7 +141,6 @@ const DocumentBody = (props) => {
           location={location}
           pageOptions={page?.options}
           pageTitle={pageTitle}
-          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
           slug={slug}
           isInPresentationMode={isInPresentationMode}
           template={template}
