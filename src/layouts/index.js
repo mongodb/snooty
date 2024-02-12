@@ -85,7 +85,7 @@ const GlobalGrid = styled('div')`
 
 const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
-  const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol, project } = useSnootyMetadata();
+  const { chapters, guides, slugToTitle, title, toctree, eol, project } = useSnootyMetadata();
   const remoteMetadata = useRemoteMetadata();
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
@@ -115,7 +115,6 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
               guides={guides}
               page={page.ast}
               pageTitle={pageTitle}
-              publishedBranches={publishedBranches}
               repoBranches={repoBranches}
               siteTitle={title}
               slug={slug}
@@ -141,7 +140,6 @@ DefaultLayout.propTypes = {
     page: PropTypes.shape({
       options: PropTypes.object,
     }).isRequired,
-    publishedBranches: PropTypes.object,
     slug: PropTypes.string,
     template: PropTypes.string,
   }).isRequired,
