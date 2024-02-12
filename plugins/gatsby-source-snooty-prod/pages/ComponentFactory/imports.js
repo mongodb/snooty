@@ -32,6 +32,7 @@ import Image from '../../../../src/components/Image';
 import Include from '../../../../src/components/Include';
 import Introduction from '../../../../src/components/Introduction';
 import Kicker from '../../../../src/components/Kicker';
+import LandingIntro from '../../../../src/components/LandingIntro';
 import Line from '../../../../src/components/LineBlock/Line';
 import LineBlock from '../../../../src/components/LineBlock';
 import List from '../../../../src/components/List';
@@ -61,6 +62,12 @@ import TitleReference from '../../../../src/components/TitleReference';
 import Topic from '../../../../src/components/Topic';
 import Transition from '../../../../src/components/Transition';
 import ChatbotUi from '../../../../src/components/ChatbotUi';
+
+import Explore from '../../../../src/components/Landing/Explore';
+import { MoreWays } from '../../../../src/components/Landing/MoreWays';
+import Products from '../../../../src/components/Products';
+import ProductItem from '../../../../src/components/Products/ProductItem';
+import StandaloneHeader from '../../../../src/components/StandaloneHeader';
 
 import VersionModified from '../../../../src/components/VersionModified';
 
@@ -102,6 +109,12 @@ export const componentMap = async (directives = []) => {
     include: Include,
     introduction: Introduction,
     kicker: Kicker,
+    'landing:explore': Explore,
+    'landing:more-ways': MoreWays,
+    'landing:client-libraries': StandaloneHeader,
+    'landing:introduction': LandingIntro,
+    'landing:product': ProductItem,
+    'landing:products': Products,
     line: Line,
     line_block: LineBlock,
     list: List,

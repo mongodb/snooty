@@ -95,10 +95,6 @@ const ComponentFactory = (props) => {
       return LAZY_COMPONENTS[lookup];
     }
 
-    if (!ComponentType) {
-      console.warn();
-    }
-
     return ComponentType;
   }
 
@@ -119,7 +115,6 @@ const ComponentFactory = (props) => {
 
     if (!ComponentType) {
       console.warn(`${type} ${name ? `"${name}" ` : ''}not yet implemented${slug ? ` on page ${slug}` : ''}`);
-      console.warn(`Found ${componentMap} instead`);
       return null;
     }
 
