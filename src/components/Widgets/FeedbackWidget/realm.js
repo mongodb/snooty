@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Realm from 'realm-web';
 import { isBrowser } from '../../../utils/is-browser';
-import { removeAllUsersFromLocalStorage } from '../../../utils/realm-user-management';
+import { removeAllRealmUsersFromLocalStorage } from '../../../utils/realm-user-management';
 
 const APP_ID = 'feedbackwidgetv3-dgcsv';
 export const app = isBrowser ? Realm.App.getApp(APP_ID) : { auth: {} };
@@ -11,7 +11,7 @@ export const app = isBrowser ? Realm.App.getApp(APP_ID) : { auth: {} };
  */
 function deleteLocalStorageData() {
   const { allUsers } = app;
-  removeAllUsersFromLocalStorage(allUsers);
+  removeAllRealmUsersFromLocalStorage(allUsers);
 }
 
 // User Authentication & Management

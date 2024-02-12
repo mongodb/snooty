@@ -1,3 +1,4 @@
+import { isBrowser } from './is-browser';
 /**
  * @param {object} storage
  * @returns The prefix for the storage key used by Realm for localStorage access
@@ -10,7 +11,7 @@ const parseStorageKey = (storage) => {
   return prefix + storage.keyPart + ':';
 };
 
-export const removeAllUsersFromLocalStorage = (allUsers) => {
+export const removeAllRealmUsersFromLocalStorage = (allUsers) => {
   // The accessToken and refreshToken are automatically removed if invalid, but not the following keys
   const keysToDelete = ['profile', 'providerType'];
 
@@ -22,22 +23,15 @@ export const removeAllUsersFromLocalStorage = (allUsers) => {
   });
 };
 
-export const ensureCurrentUserSingleton = (app) => {
-  if (app.currentUser) {
-    return;
-  }
-};
-
-export const currentUsersCleanup = (app, maxUsersAllowed = 10) => {
+export const currentUsersCleanup = (app, maxUsersAllowed = 1) => {
   const { allUsers } = app;
 
   const allUsersSize = Object.keys(allUsers).length;
-
-  if (allUsersSize >= maxUsersAllowed) {
+  if (allUsersSize > maxUsersAllowed) {
     // Delete local storage for the app, removing all logged in users creds
     // local store will restore new values on page navigation or refresh
-    if (typeof window !== 'undefined') {
-      removeAllUsersFromLocalStorage(allUsers);
+    if (isBrowser) {
+      removeAllRealmUsersFromLocalStorage(allUsers);
     }
   }
 };
