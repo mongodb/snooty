@@ -23,7 +23,7 @@ export const removeAllRealmUsersFromLocalStorage = (allUsers) => {
   });
 };
 
-export const currentUsersCleanup = (app, maxUsersAllowed = 1) => {
+export const currentRealmUsersCleanup = (app, maxUsersAllowed = 1) => {
   const { allUsers } = app;
 
   const allUsersSize = Object.keys(allUsers).length;
