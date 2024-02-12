@@ -3,6 +3,7 @@ const path = require('node:path');
 
 const templateRelativePath = `./DocumentBodyTemplate.js`;
 
+// Creates a new document body per page, utilizing the body template.
 const DocumentBodyFactory = (slug) => {
   const generationDirectory = path.resolve(__dirname, `../generated-pages`);
   try {

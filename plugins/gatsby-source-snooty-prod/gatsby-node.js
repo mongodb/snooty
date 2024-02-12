@@ -247,12 +247,12 @@ exports.createPages = async ({ actions }) => {
     PAGES.forEach((page) => {
       const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
       const slug = getPageSlug(page);
-      console.log(process.env.npm_config_dynamicimports);
-      const mainComponentRelativePath = process.env.npm_config_dynamicimports
-        ? DocumentBodyFactory(slug)
-        : `../../src/components/DocumentBody.js`;
 
       if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
+        const mainComponentRelativePath = process.env.npm_config_dynamicimports
+          ? DocumentBodyFactory(slug)
+          : `../../src/components/DocumentBody.js`;
+
         createPage({
           path: assertTrailingSlash(slug),
           component: path.resolve(__dirname, mainComponentRelativePath),

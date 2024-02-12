@@ -1,77 +1,140 @@
+import Admonition from '../../../../src/components/Admonition';
+import Banner from '../../../../src/components/Banner/Banner';
+import BlockQuote from '../../../../src/components/BlockQuote';
+import Button from '../../../../src/components/Button';
+import Card from '../../../../src/components/Card';
+import CardGroup from '../../../../src/components/Card/CardGroup';
+import Chapter from '../../../../src/components/Chapters/Chapter';
+import Chapters from '../../../../src/components/Chapters';
+import Code from '../../../../src/components/Code/Code';
+import CodeIO from '../../../../src/components/Code/CodeIO';
+import Cond from '../../../../src/components/Cond';
+import Container from '../../../../src/components/Container';
+import CTA from '../../../../src/components/CTA';
+import CTABanner from '../../../../src/components/Banner/CTABanner';
+import DefinitionList from '../../../../src/components/DefinitionList';
+import DefinitionListItem from '../../../../src/components/DefinitionList/DefinitionListItem';
+import DeprecatedVersionSelector from '../../../../src/components/DeprecatedVersionSelector';
+import Describe from '../../../../src/components/Describe';
+import DriversIndexTiles from '../../../../src/components/DriversIndexTiles';
+import Emphasis from '../../../../src/components/Emphasis';
+import Extract from '../../../../src/components/Extract';
+import Field from '../../../../src/components/FieldList/Field';
+import FieldList from '../../../../src/components/FieldList';
+import Figure from '../../../../src/components/Figure';
+import Footnote from '../../../../src/components/Footnote';
+import FootnoteReference from '../../../../src/components/Footnote/FootnoteReference';
+import Glossary from '../../../../src/components/Glossary';
+import GuideNext from '../../../../src/components/GuideNext';
+import Heading from '../../../../src/components/Heading';
+import HorizontalList from '../../../../src/components/HorizontalList';
+import Image from '../../../../src/components/Image';
+import Include from '../../../../src/components/Include';
+import Introduction from '../../../../src/components/Introduction';
+import Kicker from '../../../../src/components/Kicker';
+import Line from '../../../../src/components/LineBlock/Line';
+import LineBlock from '../../../../src/components/LineBlock';
+import List from '../../../../src/components/List';
+import ListItem from '../../../../src/components/List/ListItem';
+import ListTable from '../../../../src/components/ListTable';
+import Literal from '../../../../src/components/Literal';
+import LiteralBlock from '../../../../src/components/LiteralBlock';
+import LiteralInclude from '../../../../src/components/LiteralInclude';
+import MongoWebShell from '../../../../src/components/MongoWebShell';
+import OpenAPIChangelog from '../../../../src/components/OpenAPIChangelog';
+import Paragraph from '../../../../src/components/Paragraph';
+import Procedure from '../../../../src/components/Procedure';
+import Reference from '../../../../src/components/Reference';
+import RefRole from '../../../../src/components/RefRole';
+import ReleaseSpecification from '../../../../src/components/ReleaseSpecification';
+import Root from '../../../../src/components/Root';
+import Rubric from '../../../../src/components/Rubric';
+import SearchResults from '../../../../src/components/SearchResults';
+import Section from '../../../../src/components/Section';
+import Strong from '../../../../src/components/Strong';
+import SubstitutionReference from '../../../../src/components/SubstitutionReference';
+import Tabs from '../../../../src/components/Tabs';
+import Target from '../../../../src/components/Target';
+import Text from '../../../../src/components/Text';
+import Time from '../../../../src/components/Time';
+import TitleReference from '../../../../src/components/TitleReference';
+import Topic from '../../../../src/components/Topic';
+import Transition from '../../../../src/components/Transition';
+import ChatbotUi from '../../../../src/components/ChatbotUi';
+
+import VersionModified from '../../../../src/components/VersionModified';
+
 export const componentMap = async (directives = []) => {
   const imports = {
-    admonition: await import('../../../../src/components/Admonition'),
-    banner: await import('../../../../src/components/Banner/Banner'),
-    blockquote: await import('../../../../src/components/BlockQuote'),
-    button: await import('../../../../src/components/Button'),
-    card: await import('../../../../src/components/Card'),
-    'card-group': await import('../../../../src/components/Card/CardGroup'),
-    chapter: await import('../../../../src/components/Chapters/Chapter'),
-    chapters: await import('../../../../src/components/Chapters'),
-    chatbot: await import('../../../../src/components/ChatbotUi'),
-    code: await import('../../../../src/components/Code/Code'),
-    'io-code-block': await import('../../../../src/components/Code/CodeIO'),
-    cond: await import('../../../../src/components/Cond'),
-    container: await import('../../../../src/components/Container'),
-    cta: await import('../../../../src/components/CTA'),
-    'cta-banner': await import('../../../../src/components/Banner/CTABanner'),
-    definitionList: await import('../../../../src/components/DefinitionList'),
-    definitionListItem: await import('../../../../src/components/DefinitionList/DefinitionListItem'),
-    deprecated: await import('../../../../src/components/VersionModified'),
-    'deprecated-version-selector': await import('../../../../src/components/DeprecatedVersionSelector'),
-    describe: await import('../../../../src/components/Describe'),
-    emphasis: await import('../../../../src/components/Emphasis'),
-    extract: await import('../../../../src/components/Extract'),
-    field: await import('../../../../src/components/FieldList/Field'),
-    field_list: await import('../../../../src/components/FieldList'),
-    figure: await import('../../../../src/components/Figure'),
-    footnote: await import('../../../../src/components/Footnote'),
-    footnote_reference: await import('../../../../src/components/Footnote/FootnoteReference'),
-    glossary: await import('../../../../src/components/Glossary'),
-    'guide-next': await import('../../../../src/components/GuideNext'),
-    heading: await import('../../../../src/components/Heading'),
-    hlist: await import('../../../../src/components/HorizontalList'),
-    image: await import('../../../../src/components/Image'),
-    include: await import('../../../../src/components/Include'),
-    introduction: await import('../../../../src/components/Introduction'),
-    kicker: await import('../../../../src/components/Kicker'),
-    'landing:explore': await import('../../../../src/components/Landing/Explore'),
-    'landing:more-ways': await import('../../../../src/components/Landing/MoreWays'),
-    'landing:client-libraries': await import('../../../../src/components/StandaloneHeader'),
-    'landing:introduction': await import('../../../../src/components/LandingIntro'),
-    'landing:product': await import('../../../../src/components/Products/ProductItem'),
-    'landing:products': await import('../../../../src/components/Products'),
-    line: await import('../../../../src/components/LineBlock/Line'),
-    line_block: await import('../../../../src/components/LineBlock'),
-    list: await import('../../../../src/components/List'),
-    listItem: await import('../../../../src/components/List/ListItem'),
-    'list-table': await import('../../../../src/components/ListTable'),
-    literal: await import('../../../../src/components/Literal'),
-    literal_block: await import('../../../../src/components/LiteralBlock'),
-    literalinclude: await import('../../../../src/components/LiteralInclude'),
-    only: await import('../../../../src/components/Cond'),
-    'openapi-changelog': await import('../../../../src/components/OpenAPIChangelog'),
-    paragraph: await import('../../../../src/components/Paragraph'),
-    procedure: await import('../../../../src/components/Procedure'),
-    ref_role: await import('../../../../src/components/RefRole'),
-    reference: await import('../../../../src/components/Reference'),
-    release_specification: await import('../../../../src/components/ReleaseSpecification'),
-    root: await import('../../../../src/components/Root'),
-    rubric: await import('../../../../src/components/Rubric'),
-    'search-results': await import('../../../../src/components/SearchResults'),
-    section: await import('../../../../src/components/Section'),
-    sharedinclude: await import('../../../../src/components/Include'),
-    strong: await import('../../../../src/components/Strong'),
-    substitution_reference: await import('../../../../src/components/SubstitutionReference'),
-    tabs: await import('../../../../src/components/Tabs'),
-    target: await import('../../../../src/components/Target'),
-    text: await import('../../../../src/components/Text'),
-    time: await import('../../../../src/components/Time'),
-    title_reference: await import('../../../../src/components/TitleReference'),
-    topic: await import('../../../../src/components/Topic'),
-    transition: await import('../../../../src/components/Transition'),
-    versionadded: await import('../../../../src/components/VersionModified'),
-    versionchanged: await import('../../../../src/components/VersionModified'),
+    admonition: Admonition,
+    banner: Banner,
+    blockquote: BlockQuote,
+    button: Button,
+    card: Card,
+    'card-group': CardGroup,
+    chapter: Chapter,
+    chapters: Chapters,
+    chatbot: ChatbotUi,
+    code: Code,
+    'io-code-block': CodeIO,
+    cond: Cond,
+    container: Container,
+    cta: CTA,
+    'cta-banner': CTABanner,
+    definitionList: DefinitionList,
+    definitionListItem: DefinitionListItem,
+    deprecated: VersionModified,
+    'deprecated-version-selector': DeprecatedVersionSelector,
+    describe: Describe,
+    'drivers-index-tiles': DriversIndexTiles, // deprecated.
+    emphasis: Emphasis,
+    extract: Extract,
+    field: Field,
+    field_list: FieldList,
+    figure: Figure,
+    footnote: Footnote,
+    footnote_reference: FootnoteReference,
+    glossary: Glossary,
+    'guide-next': GuideNext,
+    heading: Heading,
+    hlist: HorizontalList,
+    image: Image,
+    include: Include,
+    introduction: Introduction,
+    kicker: Kicker,
+    line: Line,
+    line_block: LineBlock,
+    list: List,
+    listItem: ListItem,
+    'list-table': ListTable,
+    literal: Literal,
+    literal_block: LiteralBlock,
+    literalinclude: LiteralInclude,
+    'mongo-web-shell': MongoWebShell,
+    only: Cond,
+    'openapi-changelog': OpenAPIChangelog,
+    paragraph: Paragraph,
+    procedure: Procedure,
+    ref_role: RefRole,
+    reference: Reference,
+    release_specification: ReleaseSpecification,
+    root: Root,
+    rubric: Rubric,
+    'search-results': SearchResults,
+    section: Section,
+    sharedinclude: Include,
+    strong: Strong,
+    substitution_reference: SubstitutionReference,
+    tabs: Tabs,
+    target: Target,
+    text: Text,
+    time: Time,
+    title_reference: TitleReference,
+    topic: Topic,
+    transition: Transition,
+
+    versionadded: VersionModified,
+    versionchanged: VersionModified,
   };
 
   const filteredComponents = directives
