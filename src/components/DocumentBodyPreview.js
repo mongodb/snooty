@@ -97,7 +97,6 @@ const DocumentBody = (props) => {
         // prod plugin for consistency
         template,
         page: data?.page?.ast,
-        publishedBranches: getNestedValue(['publishedBranches'], metadata),
         ...props.pageContext,
       }}
       metadata={metadata}
@@ -108,7 +107,6 @@ const DocumentBody = (props) => {
           location={location}
           pageOptions={page?.options}
           pageTitle={pageTitle}
-          publishedBranches={getNestedValue(['publishedBranches'], metadata)}
           slug={slug}
           template={template}
           isInPresentationMode={isInPresentationMode}

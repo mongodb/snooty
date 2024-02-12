@@ -139,7 +139,7 @@ const DefaultLayout = ({
   metadata,
 }) => {
   const { sidenav } = getTemplate(template);
-  const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol } = metadata;
+  const { chapters, guides, slugToTitle, title, toctree, eol } = metadata;
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
   useDelightedSurvey(slug, metadata.project);
@@ -164,7 +164,6 @@ const DefaultLayout = ({
                 guides={guides}
                 page={page}
                 pageTitle={pageTitle}
-                publishedBranches={publishedBranches}
                 repoBranches={repoBranches}
                 siteTitle={title}
                 slug={slug}
@@ -188,7 +187,6 @@ DefaultLayout.propTypes = {
     page: PropTypes.shape({
       options: PropTypes.object,
     }).isRequired,
-    publishedBranches: PropTypes.object,
     slug: PropTypes.string,
     template: PropTypes.string,
   }).isRequired,

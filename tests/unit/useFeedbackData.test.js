@@ -49,24 +49,5 @@ describe('useFeedbackData', () => {
     expect(wrapper.getByText('https://docs.mongodb.com/test')).toBeTruthy();
     expect(wrapper.getByText('Test Page Please Ignore')).toBeTruthy();
     expect(wrapper.getByText('testproject')).toBeTruthy();
-    expect(wrapper.queryByText('4.2')).toEqual(null);
-  });
-
-  it('returns the current docs version, if applicable', () => {
-    const wrapper = render(
-      <Test
-        data={{
-          slug: '/test',
-          title: 'Test Page Please Ignore',
-          url: 'https://docs.mongodb.com/test',
-          publishedBranches: {
-            version: {
-              published: '4.2',
-            },
-          },
-        }}
-      />
-    );
-    expect(wrapper.getByText('4.2')).toBeTruthy();
   });
 });
