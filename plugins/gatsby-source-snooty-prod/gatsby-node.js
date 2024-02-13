@@ -291,23 +291,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       const pageNodes = page.ast;
       const slug = getPageSlug(page.page_id);
 
-        const mainComponentRelativePath = process.env.npm_config_dynamicimports
-          ? DocumentBodyFactory(slug)
-          : `../../src/components/DocumentBody.js`;
+      const mainComponentRelativePath = process.env.npm_config_dynamicimports
+        ? DocumentBodyFactory(slug)
+        : `../../src/components/DocumentBody.js`;
 
-        createPage({
-          path: assertTrailingSlash(slug),
-          component: path.resolve(__dirname, mainComponentRelativePath),
-          context: {
-            slug,
-            repoBranches,
-            associatedReposInfo,
-            isAssociatedProduct,
-            template: pageNodes?.options?.template,
-            page: pageNodes,
-          },
-        });
-      }
+      createPage({
+        path: assertTrailingSlash(slug),
+        component: path.resolve(__dirname, mainComponentRelativePath),
+        context: {
+          slug,
+          repoBranches,
+          template: pageNodes?.options?.template,
+          page: pageNodes,
+        },
+      });
     });
 
     resolve();
