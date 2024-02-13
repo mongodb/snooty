@@ -7,7 +7,7 @@ import { act } from 'react-dom/test-utils';
 // Importing all specifically to use jest spyOn, mockImplementation for mocking
 import { mockLocation } from '../utils/mock-location';
 import { tick, setMobile } from '../utils';
-import SearchResults from '../../src/components/SearchResults';
+import SearchResults from '../../src/components/SearchResults/SearchResults';
 import { SearchContextProvider } from '../../src/components/SearchResults/SearchContext';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import * as RealmUtil from '../../src/utils/realm';
