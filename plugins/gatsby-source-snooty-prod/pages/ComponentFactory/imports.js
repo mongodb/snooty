@@ -44,14 +44,12 @@ import LiteralInclude from '../../../../src/components/LiteralInclude';
 import MongoWebShell from '../../../../src/components/MongoWebShell';
 import OpenAPIChangelog from '../../../../src/components/OpenAPIChangelog';
 import Paragraph from '../../../../src/components/Paragraph';
-import Procedure from '../../../../src/components/Procedure';
 import Reference from '../../../../src/components/Reference';
 import RefRole from '../../../../src/components/RefRole';
 import ReleaseSpecification from '../../../../src/components/ReleaseSpecification';
 import Root from '../../../../src/components/Root';
 import Rubric from '../../../../src/components/Rubric';
 import SearchResults from '../../../../src/components/SearchResults';
-import Section from '../../../../src/components/Section';
 import Strong from '../../../../src/components/Strong';
 import SubstitutionReference from '../../../../src/components/SubstitutionReference';
 import Tabs from '../../../../src/components/Tabs';
@@ -127,14 +125,12 @@ export const componentMap = async (directives = []) => {
     only: Cond,
     'openapi-changelog': OpenAPIChangelog,
     paragraph: Paragraph,
-    procedure: Procedure,
     ref_role: RefRole,
     reference: Reference,
     release_specification: ReleaseSpecification,
     root: Root,
     rubric: Rubric,
     'search-results': SearchResults,
-    section: Section,
     sharedinclude: Include,
     strong: Strong,
     substitution_reference: SubstitutionReference,

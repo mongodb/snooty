@@ -15,6 +15,8 @@ import RoleRequired from '../../../../src/components/Roles/Required';
 import Subscript from '../../../../src/components/Subscript';
 import Superscript from '../../../../src/components/Superscript';
 
+import Procedure from '../../../../src/components/Procedure';
+import Section from '../../../../src/components/Section';
 import { LAZY_COMPONENTS } from './lazy-imports';
 import { componentMap as filterComponents } from './imports';
 
@@ -54,6 +56,11 @@ const admonitionMap = {
   warning: Variant.Warning,
 };
 
+const staticComponentsMap = {
+  procedure: Procedure,
+  section: Section,
+};
+
 const IGNORED_NAMES = new Set([
   'contents',
   'default-domain',
@@ -76,7 +83,7 @@ const ComponentFactory = (props) => {
 
   // TODO: Pass list of directives to filter components once available.
   // Potentially passable via props arg.
-  const componentMap = filterComponents();
+  const componentMap = { ...filterComponents(), ...staticComponentsMap };
 
   function getComponentType(type, name) {
     const lookup = type === 'directive' ? name : type;
@@ -117,6 +124,7 @@ const ComponentFactory = (props) => {
       console.warn(`${type} ${name ? `"${name}" ` : ''}not yet implemented${slug ? ` on page ${slug}` : ''}`);
       return null;
     }
+    if (process.env.npm_config_dynamicimports) console.warn(`Found ${componentMap} instead`);
 
     return <ComponentType {...props} />;
   };
