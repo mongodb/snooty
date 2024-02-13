@@ -1,5 +1,6 @@
 const path = require('path');
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
+const { getPageComponents } = require('../../src/utils/setup/get-page-components.js');
 const { saveAssetFiles, saveStaticFiles, GATSBY_IMAGE_EXTENSIONS } = require('../../src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('../../src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('../../src/utils/get-nested-value');
@@ -15,53 +16,27 @@ const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { DocumentBodyFactory } = require('./pages/DocumentBodyFactory');
 
-// different types of references
-const PAGES = [];
-
-// in-memory object with key/value = filename/document
-let RESOLVED_REF_DOC_MAPPING = {};
-
 const assets = new Map();
 
 let db;
 
-let isAssociatedProduct = false;
-const associatedReposInfo = {};
-
 // Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
 // or data are found, the node will be null
-const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }) => {
-  // fetch associated child products
-  const productList = manifestMetadata?.associated_products || [];
-  await Promise.all(
-    productList.map(async (product) => {
-      associatedReposInfo[product.name] = await db.realmInterface.fetchDocset({ project: product.name });
-    })
-  );
-  // check if product is associated child product
-  try {
-    const umbrellaProduct = await db.realmInterface.getMetadata({
-      'associated_products.name': siteMetadata.project,
-    });
-    isAssociatedProduct = !!umbrellaProduct;
-  } catch (e) {
-    console.log('No umbrella product found. Not an associated product.');
-    isAssociatedProduct = false;
-  }
-
+const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }, umbrellaProduct) => {
   // get remote metadata for updated ToC in Atlas
   try {
     const filter = {
       project: manifestMetadata.project,
       branch: manifestMetadata.branch,
     };
+    const isAssociatedProduct = !!umbrellaProduct;
     if (isAssociatedProduct || manifestMetadata?.associated_products?.length) {
       filter['is_merged_toc'] = true;
     }
     const findOptions = {
       sort: { build_id: -1 },
     };
-    const remoteMetadata = await db.realmInterface.getMetadata(filter, findOptions);
+    const remoteMetadata = await db.realmInterface.getMetadata(filter, undefined, findOptions);
 
     createNode({
       children: [],
@@ -79,6 +54,37 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
   }
 };
 
+/**
+ * Creates graphql nodes on metadata for associated products
+ * Association can be an umbrella product, associated product (in snooty.toml),
+ * or sibling products
+ */
+const createAssociatedProductNodes = async ({ createNode, createNodeId, createContentDigest }, umbrellaProduct) => {
+  try {
+    const associatedProducts = manifestMetadata?.associated_products || [];
+    if (umbrellaProduct) {
+      associatedProducts.push(...(umbrellaProduct.associated_products || []));
+    }
+
+    return await Promise.all(
+      associatedProducts.map(async (product) =>
+        createNode({
+          children: [],
+          id: createNodeId(`associated-metadata-${product.name}`),
+          internal: {
+            contentDigest: createContentDigest(product),
+            type: 'AssociatedProduct',
+          },
+          parent: null,
+          productName: product.name,
+        })
+      )
+    );
+  } catch (e) {
+    console.error(`Error while creating associated metadata nodes: ${JSON.stringify(e)}`);
+  }
+};
+
 exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
@@ -91,7 +97,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   // wait to connect to Realm
 
-  if (siteMetadata.manifestPath) {
+  if (siteMetadata.manifestPath || process.env.GATSBY_BUILD_FROM_JSON === 'true') {
     console.log('Loading documents from manifest');
     db = manifestDocumentDatabase;
   } else {
@@ -117,11 +123,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   const pageIdPrefix = constructPageIdPrefix(siteMetadata);
   documents.forEach((doc) => {
     const { page_id, ...rest } = doc;
-    RESOLVED_REF_DOC_MAPPING[page_id.replace(`${pageIdPrefix}/`, '')] = rest;
-  });
+    const key = page_id.replace(`${pageIdPrefix}/`, '');
+    const val = rest;
 
-  // Identify page documents and parse each document for images
-  Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
     const pageNode = getNestedValue(['ast', 'children'], val);
     const filename = getNestedValue(['filename'], val) || '';
 
@@ -141,7 +145,16 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     }
 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
-      PAGES.push(key);
+      createNode({
+        id: key,
+        page_id: key,
+        ast: doc.ast,
+        internal: {
+          type: 'Page',
+          contentDigest: createContentDigest(doc),
+        },
+        componentNames: getPageComponents(pageNode),
+      });
     }
 
     const slug = getPageSlug(key);
@@ -168,11 +181,24 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
-  await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest });
+  const umbrellaProduct = await db.realmInterface.getMetadata(
+    {
+      'associated_products.name': siteMetadata.project,
+    },
+    { associated_products: 1 }
+  );
+
+  await createAssociatedProductNodes({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+
+  await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
 
   await saveAssetFiles(assets, db);
+  if (!siteMetadata.manifestPath) {
+    console.error('Getting metadata from realm without filters');
+  }
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
 
   const { parentPaths, slugToTitle } = metadataMinusStatic;
@@ -197,7 +223,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 };
 
-exports.createPages = async ({ actions }) => {
+exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
 
   let repoBranches = null;
@@ -243,12 +269,28 @@ exports.createPages = async ({ actions }) => {
     throw err;
   }
 
-  return new Promise((resolve, reject) => {
-    PAGES.forEach((page) => {
-      const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
-      const slug = getPageSlug(page);
+  // DOP-4214: for each page, query the directive/node types
+  const pageList = await graphql(`
+    {
+      allPage {
+        nodes {
+          page_id
+          ast
+          componentNames
+        }
+      }
+    }
+  `);
 
-      if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
+  if (pageList.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+  }
+
+  return new Promise((resolve, reject) => {
+    pageList?.data?.allPage?.nodes?.forEach((page) => {
+      const pageNodes = page.ast;
+      const slug = getPageSlug(page.page_id);
+
         const mainComponentRelativePath = process.env.npm_config_dynamicimports
           ? DocumentBodyFactory(slug)
           : `../../src/components/DocumentBody.js`;
@@ -302,6 +344,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       pagePath: String
       ast: JSON!
       metadata: SnootyMetadata @link
+      componentNames: [String!]
     }
 
     type SnootyMetadata implements Node @dontInfer {
@@ -328,6 +371,10 @@ exports.createSchemaCustomization = ({ actions }) => {
     type PageImage implements Node @dontInfer {
       slug: String
       images: [File] @link(by: "relativePath", from: "pageAssets")
+    }
+
+    type AssociatedProduct implements Node @dontInfer {
+      productName: String
     }
   `);
 };

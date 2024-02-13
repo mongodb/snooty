@@ -15,6 +15,12 @@ export const useAllDocsets = () => {
               stg
             }
             project
+            branches {
+              versionSelectorLabel
+              eol_type
+              urlSlug
+            }
+            hasEolVersions
             url {
               dev
               dotcomprd
@@ -22,6 +28,12 @@ export const useAllDocsets = () => {
               prd
               stg
               regression
+            }
+            branches {
+              gitBranchName
+              active
+              urlSlug
+              urlAliases
             }
           }
         }

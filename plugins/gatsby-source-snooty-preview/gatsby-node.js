@@ -28,6 +28,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       pagePath: String
       ast: JSON!
       metadata: SnootyMetadata @link
+      componentNames: [String!]
     }
 
     type PagePath implements Node @dontInfer {
@@ -54,6 +55,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type PageImage implements Node @dontInfer {
       slug: String
       images: [File] @link(by: "relativePath", from: "pageAssets")
+    }
+
+    type AssociatedProduct implements Node @dontInfer {
+      productName: String
     }
   `;
   createTypes(typeDefs);
@@ -235,6 +240,7 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
         path: pagePath,
         component: templatePath,
         context: {
+          page_id: node.pageNodeId,
           id: node.pageNodeId,
           slug,
           // Hardcode static/safe values to prevent incremental builds from rebuilding versioned preview pages

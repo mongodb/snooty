@@ -17,6 +17,8 @@ const ImageContextProvider = ({ images, children }) => {
   for (const image of images) {
     if (image?.relativePath) {
       imageByPath[image.relativePath] = getImage(image);
+    } else {
+      console.warn(`Image does not have relativePath: ${image}`);
     }
   }
   return <ImageContext.Provider value={{ imageByPath }}>{children} </ImageContext.Provider>;

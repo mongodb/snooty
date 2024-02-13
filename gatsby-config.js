@@ -8,9 +8,12 @@ const pathPrefix = !isPreview ? generatePathPrefix(siteMetadata) : undefined;
 console.log('PATH PREFIX', pathPrefix);
 
 // Specifies which plugins to use depending on build environment
+// Keep our main plugin at top to include file saving before image plugins
 const plugins = [
+  isPreview ? 'gatsby-source-snooty-preview' : 'gatsby-source-snooty-prod',
   `gatsby-plugin-image`,
   `gatsby-plugin-sharp`,
+  `gatsby-transformer-sharp`, // Needed for dynamic images
   {
     resolve: 'gatsby-source-filesystem',
     options: {
@@ -18,9 +21,7 @@ const plugins = [
       path: `${__dirname}/src/images`, // cannot use public as plugins initialize before gatsby-node module
     },
   },
-  `gatsby-transformer-sharp`, // Needed for dynamic images
   'gatsby-plugin-emotion',
-  isPreview ? 'gatsby-source-snooty-preview' : 'gatsby-source-snooty-prod',
 ];
 // PRODUCTION DEPLOYMENTS --
 // If not a preview build, use the layout that includes the

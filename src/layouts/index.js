@@ -69,7 +69,7 @@ const globalCSS = css`
   /* In next Chatbot release, a className can be specified as a prop giving us more granular specificity */
   /* At that time, remove or improve the following lines */
   div[id^=modal-] {
-    z-index: 1000 !important;
+    z-index: ${theme.zIndexes.widgets} !important;
   }
 `;
 
@@ -83,17 +83,17 @@ const GlobalGrid = styled('div')`
   overflow: clip;
 `;
 
-const DefaultLayout = ({
-  children,
-  pageContext: { page, slug, repoBranches, template, associatedReposInfo, isAssociatedProduct },
-}) => {
+const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
-  const { chapters, guides, publishedBranches, slugToTitle, title, toctree, eol, project } = useSnootyMetadata();
+  const { chapters, guides, slugToTitle, title, toctree, eol, project } = useSnootyMetadata();
   const remoteMetadata = useRemoteMetadata();
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
-  const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
+  const pageTitle = React.useMemo(
+    () => page?.ast?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug],
+    [slug] // eslint-disable-line react-hooks/exhaustive-deps
+  );
   useDelightedSurvey(slug, project);
 
   return (
@@ -102,10 +102,8 @@ const DefaultLayout = ({
       <RootProvider
         slug={slug}
         repoBranches={repoBranches}
-        associatedReposInfo={associatedReposInfo}
-        headingNodes={page?.options?.headings}
-        selectors={page?.options?.selectors}
-        isAssociatedProduct={isAssociatedProduct}
+        headingNodes={page?.ast?.options?.headings}
+        selectors={page?.ast?.options?.selectors}
         remoteMetadata={remoteMetadata}
         project={project}
       >
@@ -115,9 +113,8 @@ const DefaultLayout = ({
             <Sidenav
               chapters={chapters}
               guides={guides}
-              page={page}
+              page={page.ast}
               pageTitle={pageTitle}
-              publishedBranches={publishedBranches}
               repoBranches={repoBranches}
               siteTitle={title}
               slug={slug}
@@ -143,7 +140,6 @@ DefaultLayout.propTypes = {
     page: PropTypes.shape({
       options: PropTypes.object,
     }).isRequired,
-    publishedBranches: PropTypes.object,
     slug: PropTypes.string,
     template: PropTypes.string,
   }).isRequired,

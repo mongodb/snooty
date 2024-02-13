@@ -39,13 +39,6 @@ const optionStyling = css`
   }
 `;
 
-const iconStyling = css`
-  display: inline-block;
-  margin-right: ${theme.size.small};
-  max-height: 20px;
-  width: 30px;
-`;
-
 const PortalContainer = forwardRef(({ ...props }, ref) => (
   <div className={cx(portalStyle, props.className)} ref={ref}>
     {props.children}
@@ -87,8 +80,13 @@ const Select = ({
         {...props}
       >
         {choices.map((choice) => (
-          <Option className={cx(optionStyling)} key={choice.value} value={choice.value} role="option">
-            {choice.icon && <choice.icon className={cx(iconStyling)} />}
+          <Option
+            className={cx(optionStyling)}
+            key={choice.value}
+            glyph={choice.icon}
+            value={choice.value}
+            role="option"
+          >
             {choice.text}
           </Option>
         ))}

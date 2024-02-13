@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
+import Button from '@leafygreen-ui/button';
+import Icon from '@leafygreen-ui/icon';
 import useScreenSize from '../hooks/useScreenSize';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
+import { InstruqtContext } from './Instruqt/instruqt-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
@@ -21,6 +24,10 @@ const headingStyles = css`
   margin-bottom: 8px;
 `;
 
+const labButtonStyling = css`
+  margin-left: 18px;
+`;
+
 const determineHeading = (sectionDepth) => {
   if (sectionDepth === 1) {
     return H2;
@@ -32,14 +39,16 @@ const determineHeading = (sectionDepth) => {
   return Body; // use weight=medium prop to style appropriately
 };
 
-const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
+const Heading = ({ sectionDepth, nodeData, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = determineHeading(sectionDepth);
   const asHeading = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
   const { selectors } = useContext(TabContext);
+  const { hasDrawer, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
+  const shouldShowLabButton = isPageTitle && hasDrawer;
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors);
 
   return (
@@ -62,6 +71,17 @@ const Heading = ({ sectionDepth, nodeData, page, ...rest }) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
           <Permalink id={id} description="heading" />
+          {shouldShowLabButton && (
+            <Button
+              role="button"
+              className={cx(labButtonStyling)}
+              disabled={isOpen}
+              onClick={() => setIsOpen(true)}
+              leftGlyph={<Icon glyph="Code" />}
+            >
+              {'Open Interactive Tutorial'}
+            </Button>
+          )}
         </HeadingTag>
       </ConditionalWrapper>
       {isPageTitle && <Contents />}
@@ -95,7 +115,6 @@ Heading.propTypes = {
     ).isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
-  page: PropTypes.object,
   isProductLanding: PropTypes.bool,
 };
 
