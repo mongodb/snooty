@@ -20,6 +20,9 @@ const Image = ({ nodeData, className }) => {
   const imgAlignment = getNestedValue(['options', 'align'], nodeData);
   const customAlign = imgAlignment ? `align-${imgAlignment}` : '';
 
+  // added to get hero image class back post-DOP-4321
+  const classOption = getNestedValue(['options', 'class'], nodeData);
+
   const defaultStyling = css`
     max-width: 100%;
     height: auto;
@@ -64,7 +67,7 @@ const Image = ({ nodeData, className }) => {
         alt={altText}
         style={userOptionStyle}
         imgClassName={cx(defaultStyling, hasBorder ? borderStyling : '')}
-        className={cx(gatsbyContainerStyle, directiveClass, customAlign, className)}
+        className={cx(gatsbyContainerStyle, directiveClass, customAlign, className, classOption)}
       />
     );
   }
@@ -77,7 +80,14 @@ const Image = ({ nodeData, className }) => {
       height={height}
       alt={altText}
       style={userOptionStyle}
-      className={cx(defaultStyling, hasBorder ? borderStyling : '', directiveClass, customAlign, className)}
+      className={cx(
+        defaultStyling,
+        hasBorder ? borderStyling : '',
+        directiveClass,
+        customAlign,
+        className,
+        classOption
+      )}
     />
   );
 };
