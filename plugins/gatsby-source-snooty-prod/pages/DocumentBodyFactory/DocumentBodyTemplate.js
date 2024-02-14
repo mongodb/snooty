@@ -76,9 +76,8 @@ const AVAILABLE_LANGUAGES = ['English', '简体中文'];
 const DocumentBody = (props) => {
   const {
     location,
-    pageContext: { page, slug, template },
+    pageContext: { page, slug, template, components },
   } = props;
-
   useEffect(() => {
     // A workaround to remove the other locale options.
     if (!HIDE_UNIFIED_FOOTER_LOCALE) {
@@ -146,7 +145,14 @@ const DocumentBody = (props) => {
           <FootnoteContext.Provider value={{ footnotes }}>
             <Template {...props} useChatbot={useChatbot}>
               {pageNodes.map((child, index) => (
-                <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                <ComponentFactory
+                  key={index}
+                  metadata={metadata}
+                  nodeData={child}
+                  page={page}
+                  slug={slug}
+                  components={components}
+                />
               ))}
             </Template>
           </FootnoteContext.Provider>

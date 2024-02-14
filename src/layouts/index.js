@@ -113,7 +113,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
             <Sidenav
               chapters={chapters}
               guides={guides}
-              page={page.ast}
+              page={page?.ast}
               pageTitle={pageTitle}
               repoBranches={repoBranches}
               siteTitle={title}

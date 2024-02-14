@@ -79,11 +79,11 @@ const IGNORED_TYPES = new Set(['comment', 'inline_target', 'named_reference', 's
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'topic', 'caution', 'danger']);
 
 const ComponentFactory = (props) => {
-  const { nodeData, slug } = props;
+  const { nodeData, slug, components = [] } = props;
 
   // TODO: Pass list of directives to filter components once available.
   // Potentially passable via props arg.
-  const componentMap = { ...filterComponents(), ...staticComponentsMap };
+  const componentMap = { ...filterComponents(components), ...staticComponentsMap };
 
   function getComponentType(type, name) {
     const lookup = type === 'directive' ? name : type;

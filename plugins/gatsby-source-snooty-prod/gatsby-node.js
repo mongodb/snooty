@@ -290,7 +290,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     pageList?.data?.allPage?.nodes?.forEach((page) => {
       const pageNodes = page.ast;
       const slug = getPageSlug(page.page_id);
-
+      const components = page.componentNames;
       const mainComponentRelativePath = process.env.npm_config_dynamicimports
         ? DocumentBodyFactory(slug)
         : `../../src/components/DocumentBody.js`;
@@ -300,6 +300,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         component: path.resolve(__dirname, mainComponentRelativePath),
         context: {
           slug,
+          components,
           repoBranches,
           template: pageNodes?.options?.template,
           page: pageNodes,
