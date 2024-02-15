@@ -140,10 +140,10 @@ const DeprecatedVersionSelector = () => {
       return null;
     }
 
-    // Utilizing hardcoded env because legacy sites are not available on dev/stage
+    // Utilizing hardcoded env or aws bucket path because legacy sites are not available on dev/stage
     if (currentVersion.icon) {
-      const bucket = `https://docs-mongodb-org-dotcomprd.s3.us-east-2.amazonaws.com/docs/offline`;
-      return `${bucket}/${product}-${currentVersion.value}.tar.gz`;
+      const bucketPath = `https://docs-mongodb-org-dotcomprd.s3.us-east-2.amazonaws.com/docs/offline`;
+      return `${bucketPath}/${product}-${currentVersion.value}.tar.gz`;
     }
 
     const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
