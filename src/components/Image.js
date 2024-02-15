@@ -13,15 +13,13 @@ const Image = ({ nodeData, className }) => {
   const widthOption = getNestedValue(['options', 'width'], nodeData);
   let height = getNestedValue(['options', 'height'], nodeData);
   const loading = getNestedValue(['options', 'loading'], nodeData);
-  const directiveClass = getNestedValue(['options', 'directiveClass'], nodeData);
+
+  const { options: { class: directiveClass } = {} } = nodeData;
 
   let imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
   const imgAlignment = getNestedValue(['options', 'align'], nodeData);
   const customAlign = imgAlignment ? `align-${imgAlignment}` : '';
-
-  // added to get hero image class back post-DOP-4321
-  const classOption = getNestedValue(['options', 'class'], nodeData);
 
   const defaultStyling = css`
     max-width: 100%;
@@ -67,7 +65,7 @@ const Image = ({ nodeData, className }) => {
         alt={altText}
         style={userOptionStyle}
         imgClassName={cx(defaultStyling, hasBorder ? borderStyling : '')}
-        className={cx(gatsbyContainerStyle, directiveClass, customAlign, className, classOption)}
+        className={cx(gatsbyContainerStyle, directiveClass, customAlign, className)}
       />
     );
   }
@@ -80,14 +78,7 @@ const Image = ({ nodeData, className }) => {
       height={height}
       alt={altText}
       style={userOptionStyle}
-      className={cx(
-        defaultStyling,
-        hasBorder ? borderStyling : '',
-        directiveClass,
-        customAlign,
-        className,
-        classOption
-      )}
+      className={cx(defaultStyling, hasBorder ? borderStyling : '', directiveClass, customAlign, className)}
     />
   );
 };
