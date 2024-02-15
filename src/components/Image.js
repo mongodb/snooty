@@ -13,8 +13,7 @@ const Image = ({ nodeData, className }) => {
   const widthOption = getNestedValue(['options', 'width'], nodeData);
   let height = getNestedValue(['options', 'height'], nodeData);
   const loading = getNestedValue(['options', 'loading'], nodeData);
-
-  const { options: { class: directiveClass } = {} } = nodeData;
+  const directiveClass = getNestedValue(['options', 'class'], nodeData);
 
   let imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
