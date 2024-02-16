@@ -80,7 +80,7 @@ exports.sourceNodes = async ({
   cache,
   webhookBody,
 }) => {
-  currentWebhookBody = INCOMING_HOOK_BODY || webhookBody;
+  currentWebhookBody = JSON.parse(INCOMING_HOOK_BODY) || webhookBody;
   console.log({ webhookBody, INCOMING_HOOK_BODY, currentWebhookBody });
   let hasOpenAPIChangelog = false;
   const { createNode, touchNode } = actions;
