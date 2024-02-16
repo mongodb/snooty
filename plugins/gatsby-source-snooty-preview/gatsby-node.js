@@ -18,8 +18,6 @@ const {
 // Global variable to allow webhookBody from sourceNodes step to be passed down
 // to other Gatsby build steps that might not pass webhookBody natively.
 let currentWebhookBody = {};
-// Netlify add webhook body payloads to env
-const { INCOMING_HOOK_BODY } = process.env;
 
 exports.createSchemaCustomization = async ({ actions }) => {
   const { createTypes } = actions;
@@ -69,6 +67,25 @@ exports.createSchemaCustomization = async ({ actions }) => {
 const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
 const GATSBY_CLOUD_SITE_USER = process.env.GATSBY_CLOUD_SITE_USER;
 
+/**
+ * Attempts to parse Netlify's build webhook payload.
+ * @returns `undefined` or a parsed webhook body payload
+ */
+const getNetlifyHookBody = () => {
+  // Netlify add webhook body payloads to env
+  const incomingHookBody = process.env.INCOMING_HOOK_BODY;
+  if (incomingHookBody) {
+    try {
+      const parsedPayload = JSON.parse(incomingHookBody);
+      return parsedPayload;
+    } catch (e) {
+      console.error(`Error parsing INCOMING_HOOK_BODY: ${incomingHookBody}. ${e}`);
+      return undefined;
+    }
+  }
+  return undefined;
+};
+
 let isFirstRun = true;
 exports.sourceNodes = async ({
   actions,
@@ -80,8 +97,9 @@ exports.sourceNodes = async ({
   cache,
   webhookBody,
 }) => {
-  currentWebhookBody = JSON.parse(INCOMING_HOOK_BODY) || webhookBody;
-  console.log({ webhookBody, INCOMING_HOOK_BODY, currentWebhookBody });
+  // Netlify and Gatsby Cloud have different ways of sending webhooks, with Gatsby's having a default value of {}.
+  currentWebhookBody = getNetlifyHookBody() || webhookBody;
+  console.log({ currentWebhookBody });
   let hasOpenAPIChangelog = false;
   const { createNode, touchNode } = actions;
 
