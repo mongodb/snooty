@@ -18,6 +18,8 @@ const {
 // Global variable to allow webhookBody from sourceNodes step to be passed down
 // to other Gatsby build steps that might not pass webhookBody natively.
 let currentWebhookBody = {};
+// Netlify add webhook body payloads to env
+const { INCOMING_HOOK_BODY } = process.env;
 
 exports.createSchemaCustomization = async ({ actions }) => {
   const { createTypes } = actions;
@@ -78,8 +80,8 @@ exports.sourceNodes = async ({
   cache,
   webhookBody,
 }) => {
-  console.log({ webhookBody });
-  currentWebhookBody = webhookBody;
+  currentWebhookBody = INCOMING_HOOK_BODY || webhookBody;
+  console.log({ webhookBody, INCOMING_HOOK_BODY, currentWebhookBody });
   let hasOpenAPIChangelog = false;
   const { createNode, touchNode } = actions;
 
@@ -155,7 +157,7 @@ exports.sourceNodes = async ({
     await pipeline(httpStream, decode);
     console.timeEnd(`source updates`);
   } catch (error) {
-    callPostBuildWebhook(webhookBody, 'failed');
+    callPostBuildWebhook(currentWebhookBody, 'failed');
     reporter.panic('There was an issue sourcing nodes', error);
   }
 
