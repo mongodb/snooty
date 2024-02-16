@@ -148,7 +148,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
       [
         'MongoDB Command Line Interface',
         'Version 0.5.0',
-        'https://docs-mongodb-org-dotcomprd.s3.us-east-2.amazonaws.com/docs/offline/mongocli-v0.5.0.tar.gz',
+        'https://www.mongodb.com/docs/offline/mongocli-v0.5.0.tar.gz',
       ],
       [
         'MongoDB Atlas Open Service Broker on Kubernetes',
