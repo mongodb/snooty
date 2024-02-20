@@ -130,9 +130,11 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             ${SHOW_CHATBOT && useChatbot
               ? `
               grid-column: 2/-1;
-              margin: ${size.large} 0;
+              margin-top: ${size.large};
               font-size: 48px;
               line-height: 62px;
+              margin-bottom: 10px;
+
 
               @media ${screenSize.upToSmall} {
                 font-size: 32px;
@@ -167,18 +169,21 @@ const Landing = ({ children, pageContext, useChatbot }) => {
 
             @media ${screenSize.upToMedium} {
               // grid-row: unset;
-              object-position: 100%;
+              // object-position: 100%;
+              height: 317px;
+            }
+            @media ${screenSize.upToXSmall} {
+              //grid-row: unset;
+              height: 382px;
+              grid-column: 1 / -1;
+              object-position: 50%;
             }
 
             @media ${screenSize.upToSmall} {
               //grid-row: unset;
-              height: 200px;
+              height: 382px;
               grid-column: 1 / -1;
-              // object-position: 85%;
-            }
-
-            @media only screen and (max-width: 320px) {
-              object-position: 100%;
+              object-position: 50%;
             }
           }
           .introduction {
@@ -191,10 +196,6 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             @media ${screenSize.upToMedium} {
               grid-column: 2 / -2;
             }
-
-            // @media ${screenSize.mediumAndUp} {
-
-            // }
           }
           @media ${screenSize.upToLarge} {
             .footer {
