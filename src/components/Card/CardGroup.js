@@ -89,14 +89,14 @@ const CardGroup = ({
     children,
     options: { columns, layout, style, type },
   },
-  page,
+  // page,
   ...rest
 }) => {
   const isCompact = style === 'compact';
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = layout === 'carousel';
   const isForDrivers = type === 'drivers';
-  const isLanding = page?.options?.template === 'landing';
+  const isLanding = true; // page?.options?.template === 'landing';
 
   console.log('TEMPLATE LANDING CARD GROUP', isLanding);
 
@@ -123,7 +123,7 @@ const CardGroup = ({
           isCompact={isCompact}
           isExtraCompact={isExtraCompact}
           isForDrivers={isForDrivers}
-          page={page}
+          // page={page}
         />
       ))}
     </StyledGrid>
@@ -138,7 +138,7 @@ CardGroup.propTypes = {
       columns: PropTypes.number,
     }),
   }).isRequired,
-  page: PropTypes.object,
+  // page: PropTypes.object,
 };
 
 export default CardGroup;
