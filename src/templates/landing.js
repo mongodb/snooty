@@ -166,14 +166,15 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             z-index: -1;
 
             @media ${screenSize.upToMedium} {
-              grid-row: unset;
+              // grid-row: unset;
               object-position: 100%;
             }
 
             @media ${screenSize.upToSmall} {
-              grid-row: unset;
+              //grid-row: unset;
               height: 200px;
-              object-position: 85%;
+              grid-column: 1 / -1;
+              // object-position: 85%;
             }
 
             @media only screen and (max-width: 320px) {
@@ -181,22 +182,19 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             }
           }
           .introduction {
-            grid-column: 2 / 8;
+            grid-column: 2 / 12;
             grid-row: 2 / 3;
+            p {
+              color: ${palette.white};
+            }
 
             @media ${screenSize.upToMedium} {
               grid-column: 2 / -2;
-
-              p {
-                color: ${palette.black};
-              }
             }
 
-            @media ${screenSize.mediumAndUp} {
-              p {
-                color: ${palette.white};
-              }
-            }
+            // @media ${screenSize.mediumAndUp} {
+
+            // }
           }
           @media ${screenSize.upToLarge} {
             .footer {
