@@ -129,7 +129,6 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             color: ${palette.white};
             ${SHOW_CHATBOT && useChatbot
               ? `
-              color: ${palette.black};
               grid-column: 2/-1;
               margin: ${size.large} 0;
               font-size: 48px;
