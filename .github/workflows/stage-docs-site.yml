@@ -42,7 +42,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
       - name: Publish build
-        uses: mongodb/docs-worker-actions/publish-build@DOP-4248
+        uses: mongodb/docs-worker-actions/publish-build@main
         env:
           AWS_BUCKET: docs-mongodb-org-dotcomstg
           SOURCE_DIR: public
