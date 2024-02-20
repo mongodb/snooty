@@ -96,7 +96,7 @@ const CardGroup = ({
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = layout === 'carousel';
   const isForDrivers = type === 'drivers';
-  const isLanding = false; // page?.options?.template === 'landing';
+  const isLanding = page?.options?.template === 'landing';
 
   console.log('TEMPLATE LANDING CARD GROUP', isLanding);
 
