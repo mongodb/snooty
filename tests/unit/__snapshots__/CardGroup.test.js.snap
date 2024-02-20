@@ -12,6 +12,7 @@ exports[`renders correctly 1`] = `
   grid-column-gap: 24px;
   grid-row-gap: 24px;
   grid-template-columns: repeat(3, 1fr);
+  max-width: 1110px;
   margin: 32px 0;
 }
 
