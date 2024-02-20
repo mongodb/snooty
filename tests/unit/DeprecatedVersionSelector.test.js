@@ -51,7 +51,7 @@ const mockedReposBranches = [
     prefix: {
       dotcomprd: 'docs/atlas-open-service-broker',
     },
-    branches: [{ eol_type: 'download', versionSelectorLabel: 'master', urlSlug: '' }],
+    branches: [{ eol_type: 'link', versionSelectorLabel: 'master', urlSlug: '' }],
   },
 ];
 
@@ -145,13 +145,17 @@ describe('DeprecatedVersionSelector when rendered', () => {
 
   describe('when the selected product has a single deprecated version', () => {
     test.each([
-      ['MongoDB Command Line Interface', 'Version 0.5.0', 'https://mongodb.com/docs/mongocli/v0.5.0'],
+      [
+        'MongoDB Command Line Interface',
+        'Version 0.5.0',
+        'https://www.mongodb.com/docs/offline/mongocli-v0.5.0.tar.gz',
+      ],
       [
         'MongoDB Atlas Open Service Broker on Kubernetes',
         'Latest',
         'https://mongodb.com/docs/atlas-open-service-broker/',
       ],
-    ])('generates the correct docs URL', async (product, versionSelection, expectedUrl) => {
+    ])('generates the correct docs URL or download link', async (product, versionSelection, expectedUrl) => {
       const wrapper = render(<DeprecatedVersionSelector />);
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
