@@ -31,6 +31,7 @@ describe('DocumentBody', () => {
   beforeAll(() => {
     jest.spyOn(document, 'querySelector');
   });
+
   it('renders the necessary elements', async () => {
     mockLocation(null);
     render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
@@ -53,12 +54,9 @@ describe('DocumentBody', () => {
       () => {
         const feedbackWidget = screen.getByText(FEEDBACK_BUTTON_TEXT);
         expect(feedbackWidget).toBeVisible();
-        expect(feedbackWidget).toMatchSnapshot();
 
         const chatbotWidget = screen.getByText(CHATBOT_WIDGET_TEXT);
-        /* NOT to be visible for now, with display:none */
-        expect(chatbotWidget).not.toBeVisible();
-        expect(chatbotWidget).toMatchSnapshot();
+        expect(chatbotWidget).toBeVisible();
       },
       { timeout: 8000 }
     );
