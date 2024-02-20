@@ -29,9 +29,7 @@ const ChatbotFab = () => {
       : 'https://knowledge.staging.corp.mongodb.com/api/v1';
   return (
     <StyledChatBotFabContainer
-      // Inline style to default hide Chatbot FAB, Optimizely to flip this on client-side
-      style={{ display: 'none' }}
-      // Classname below for Optimizely A/B testing
+      // Classname below to help ignore element for screenshots
       className={fabChatbot}
     >
       <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL}>

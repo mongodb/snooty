@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: ['react-app', 'plugin:import/errors'],
   ignorePatterns: ['node_modules/', 'public/'],
-  plugins: ['jest', '@emotion', 'import'],
+  plugins: ['jest', '@emotion', 'import', 'testing-library'],
   rules: {
     '@emotion/pkg-renaming': 'error',
     'no-return-await': 1,
@@ -15,6 +15,7 @@ module.exports = {
         groups: ['external', 'builtin', 'internal', 'parent', 'sibling', 'index'],
       },
     ],
+    'testing-library/no-wait-for-snapshot': 'error',
   },
   settings: {
     'import/resolver': {
