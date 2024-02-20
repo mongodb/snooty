@@ -50,6 +50,12 @@ const StyledGrid = styled('div')`
   grid-column-gap: ${theme.size.medium};
   grid-row-gap: ${theme.size.medium};
   grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
+
+  max-width: ${(isLanding) => {
+    if (isLanding) return '1110px';
+    else return '';
+  }};
+
   margin: ${({ isForDrivers, isLanding }) => getMarginStyles(isForDrivers, isLanding, 0)};
 
   @media ${theme.screenSize.upToMedium} {
@@ -64,7 +70,6 @@ const StyledGrid = styled('div')`
     grid-template-columns: repeat(2, 1fr);
   }
 
-  // TODO: Landing page vertical styling
   @media ${theme.screenSize.upToMedium} {
     ${({ isCarousel, ...props }) =>
       isCarousel
@@ -93,6 +98,8 @@ const CardGroup = ({
   const isForDrivers = type === 'drivers';
   const isLanding = page?.options?.template === 'landing';
 
+  console.log('TEMPLATE LANDING CARD GROUP', isLanding);
+
   return (
     <StyledGrid
       className={[
@@ -116,6 +123,7 @@ const CardGroup = ({
           isCompact={isCompact}
           isExtraCompact={isExtraCompact}
           isForDrivers={isForDrivers}
+          page={page}
         />
       ))}
     </StyledGrid>

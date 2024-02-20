@@ -17,6 +17,11 @@ const cardBaseStyles = css`
   height: 100%;
 `;
 
+// new->old homepage redesign
+const landingStyles = css`
+  max-width: 1110px;
+`;
+
 const cardStyling = css`
   flex-direction: column;
   padding: ${theme.size.large};
@@ -36,10 +41,12 @@ const cardDriverStyle = css`
   }
 `;
 
+// TODO: MAKE THIS LARGER IF
 const CardIcon = styled('img')`
   width: ${theme.size.large};
 `;
 
+// TODO: MAKE THIS NOT GET SO SMALL IF THE PAGE IS LANDING CUZ I THINK ITS UGLY
 const CompactIcon = styled('img')`
   width: ${theme.size.medium};
   @media ${theme.screenSize.upToSmall} {
@@ -97,13 +104,20 @@ const Card = ({
     options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
   },
 }) => {
+  const template = page?.options?.template;
+
+  console.log('PAGE', page);
+  const isLanding = template === 'landing';
+  const Icon = ['landing', 'product-landing'].includes(template) ? CardIcon : CompactIcon;
+
+  console.log('TEMPLAETE', template, isLanding);
+
   const styling = [
     cardBaseStyles,
+    isLanding ? landingStyles : '',
     isForDrivers ? cardDriverStyle : cardStyling,
     isCompact || isExtraCompact ? compactCardStyling : '',
   ];
-  const template = page?.options?.template;
-  const Icon = ['landing', 'product-landing'].includes(template) ? CardIcon : CompactIcon;
 
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
