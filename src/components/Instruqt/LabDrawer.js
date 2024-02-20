@@ -32,18 +32,25 @@ const handleContainerStyle = css`
   justify-content: center;
 `;
 
-const handleStyle = css`
+const handleGrabArea = css`
   position: absolute;
-  border-radius: 4px;
   cursor: ns-resize;
   top: 10px;
-  background-color: ${palette.white};
-  width: 50px;
-  height: 4px;
+
+  // Allows element to be bigger in size while maintaining visual size
+  padding: 10px 20px 20px 20px;
+  margin: -10px -20px -20px -20px;
 
   @media ${theme.screenSize.upToMedium} {
     display: none;
   }
+`;
+
+const handleStyle = css`
+  border-radius: 4px;
+  background-color: ${palette.white};
+  width: 50px;
+  height: 4px;
 `;
 
 const topContainerStyle = css`
@@ -75,11 +82,25 @@ const titleStyle = css`
   }
 `;
 
+const iframeOverlayStyle = css`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+  width: 100%;
+`;
+
 const CustomResizeHandle = React.forwardRef((props, ref) => {
+  // handleAxis is being filtered out to avoid prop warning for div
+  // restProps along with ref are what actually allows react-resizable to treat this as a handle
   const { handleAxis, ...restProps } = props;
   return (
     <div className={cx(handleContainerStyle)}>
-      <div className={cx(handleStyle)} ref={ref} {...restProps} />
+      {/* Allow grab area to be bigger than the actual shape of the handle */}
+      <div className={cx(handleGrabArea)} ref={ref} {...restProps}>
+        <div className={cx(handleStyle)} />
+      </div>
     </div>
   );
 });
@@ -88,6 +109,7 @@ const LabDrawer = ({ title, embedValue }) => {
   const viewportSize = useViewport();
   const { isMobile } = useScreenSize();
   const labTitle = title || 'MongoDB Interactive Lab';
+  const [isResizing, setIsResizing] = useState(false);
 
   const defaultMeasurement = 200;
   const defaultHeight = (viewportSize.height * 2) / 3 ?? defaultMeasurement;
@@ -135,6 +157,8 @@ const LabDrawer = ({ title, embedValue }) => {
       resizeHandles={['n']}
       handle={<CustomResizeHandle />}
       onResize={handleResize}
+      onResizeStart={() => setIsResizing(true)}
+      onResizeStop={() => setIsResizing(false)}
     >
       {/* Need this div with style as a wrapper to help with resizing */}
       <div style={{ width: wrapperWidth, height: height + 'px' }} data-testid="resizable-wrapper">
@@ -148,6 +172,9 @@ const LabDrawer = ({ title, embedValue }) => {
             setHeight={setHeight}
           />
         </div>
+        {/* Having an overlaying div allows dragging to not bug out when mouse crosses over into the iframe */}
+        {/* Keep height separate from css style to avoid constant css updates */}
+        {isResizing && <div className={cx(iframeOverlayStyle)} style={{ height: `${frameHeight}px` }} />}
         <InstruqtFrame title={title} embedValue={embedValue} height={frameHeight} />
       </div>
     </Resizable>,

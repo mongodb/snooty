@@ -36,7 +36,7 @@ const WidgetsContainer = styled.div`
   }
 `;
 
-const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, isInPresentationMode, template }) => {
+const Widgets = ({ children, pageOptions, pageTitle, slug, isInPresentationMode, template }) => {
   const { isOpen } = useContext(InstruqtContext);
   const url = isBrowser ? window.location.href : null;
   const hideFeedbackHeader = pageOptions.hidefeedback === 'header';
@@ -44,7 +44,6 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
     slug,
     url,
     title: pageTitle || 'Home',
-    publishedBranches,
   });
 
   // DOP-4025: hide feedback tab on homepage
@@ -73,7 +72,6 @@ Widgets.propTypes = {
     hideFeedback: PropTypes.string,
   }),
   pageTitle: PropTypes.string.isRequired,
-  publishedBranches: PropTypes.object,
   slug: PropTypes.string.isRequired,
   isInPresentationMode: PropTypes.bool,
 };

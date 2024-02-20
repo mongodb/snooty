@@ -14,6 +14,7 @@ const createDocsetNodes = async ({ db, createNode, createNodeId, createContentDi
       project: docset.project,
       url: docset.url,
       branches: docset.branches,
+      hasEolVersions: docset.hasEolVersions,
     });
   });
 };
