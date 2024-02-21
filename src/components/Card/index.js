@@ -28,10 +28,11 @@ const landingStyles = css`
   div {
     display: flex;
     flex-direction: column;
-    p {
-      font-size: ${theme.fontSize.h3};
-      font-weight: bold;
+    p:first-child {
+      font-size: ${theme.fontSize.h2};
+      font-weight: 500;
     }
+    margin-left: ${theme.size.large};
   }
 `;
 
