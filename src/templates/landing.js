@@ -203,7 +203,7 @@ const Landing = ({ children, pageContext, useChatbot }) => {
 Landing.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   pageContext: PropTypes.shape({
-    page: PropTypes.object.isRequired,
+    template: PropTypes.string,
   }).isRequired,
   useChatbot: PropTypes.bool,
 };
