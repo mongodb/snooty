@@ -1,19 +1,27 @@
 import React from 'react';
+import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import { mockLocation } from '../utils/mock-location';
 import BreadcrumbContainer from '../../src/components/Breadcrumbs/BreadcrumbContainer';
-import { NavigationContext } from '../../src/context/navigation-context';
 
-const mountBreadcrumbContainer = (homeCrumb, lastCrumb, parents) => {
-  return render(
-    <NavigationContext.Provider value={{ parents }}>
-      <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
-    </NavigationContext.Provider>
-  );
+const mountBreadcrumbContainer = (homeCrumb, lastCrumb) => {
+  return render(<BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />);
 };
 
-beforeAll(() => {
+const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+
+beforeEach(() => {
   mockLocation(null, `/`);
+  useStaticQuery.mockImplementation(() => ({
+    site: {
+      siteMetadata: {
+        project: '',
+      },
+    },
+    allProjectParent: {
+      nodes: [],
+    },
+  }));
 });
 
 describe('BreadcrumbContainer', () => {
@@ -35,7 +43,18 @@ describe('BreadcrumbContainer', () => {
       },
     ];
 
-    const tree = mountBreadcrumbContainer(mockHomeCrumb, mockLastCrumb, mockParents);
+    useStaticQuery.mockImplementation(() => ({
+      site: {
+        siteMetadata: {
+          project: '',
+        },
+      },
+      allProjectParent: {
+        nodes: mockParents,
+      },
+    }));
+
+    const tree = mountBreadcrumbContainer(mockHomeCrumb, mockLastCrumb);
     expect(tree.asFragment()).toMatchSnapshot();
   });
 

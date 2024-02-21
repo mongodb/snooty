@@ -14,6 +14,7 @@ const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/i
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
+const { createProjectParentNodes } = require('../utils/project-parents.js');
 
 const assets = new Map();
 
@@ -179,6 +180,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
+
+  await createProjectParentNodes({ db, createNode, createNodeId, createContentDigest });
 
   const umbrellaProduct = await db.realmInterface.getMetadata(
     {
@@ -370,6 +373,11 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type AssociatedProduct implements Node @dontInfer {
       productName: String
+    }
+
+    type ProjectParent implements Node @dontInfer {
+      title: JSON!
+      url: String!
     }
   `);
 };

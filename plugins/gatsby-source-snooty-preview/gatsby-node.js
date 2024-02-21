@@ -60,6 +60,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type AssociatedProduct implements Node @dontInfer {
       productName: String
     }
+
+    type ProjectParent implements Node @dontInfer {
+      title: JSON!
+      url: String!
+    }
   `;
   createTypes(typeDefs);
 };

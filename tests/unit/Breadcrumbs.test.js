@@ -18,6 +18,9 @@ useStaticQuery.mockImplementation(() => ({
       project: '',
     },
   },
+  allProjectParent: {
+    nodes: [],
+  },
 }));
 
 beforeAll(() => {
