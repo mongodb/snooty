@@ -67,6 +67,25 @@ exports.createSchemaCustomization = async ({ actions }) => {
 const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
 const GATSBY_CLOUD_SITE_USER = process.env.GATSBY_CLOUD_SITE_USER;
 
+/**
+ * Attempts to parse Netlify's build webhook payload.
+ * @returns {object | undefined} The parsed payload, if valid, or `undefined` otherwise
+ */
+const getNetlifyHookBody = () => {
+  // Netlify adds webhook body payloads to env
+  const incomingHookBody = process.env.INCOMING_HOOK_BODY;
+  if (!incomingHookBody) {
+    return;
+  }
+
+  try {
+    const parsedPayload = JSON.parse(incomingHookBody);
+    return parsedPayload;
+  } catch (e) {
+    console.error(`Error parsing INCOMING_HOOK_BODY: ${incomingHookBody}. ${e}`);
+  }
+};
+
 let isFirstRun = true;
 exports.sourceNodes = async ({
   actions,
@@ -78,8 +97,9 @@ exports.sourceNodes = async ({
   cache,
   webhookBody,
 }) => {
-  console.log({ webhookBody });
-  currentWebhookBody = webhookBody;
+  // Netlify and Gatsby Cloud have different ways of sending webhooks, with Gatsby's having a default value of {}.
+  currentWebhookBody = getNetlifyHookBody() || webhookBody;
+  console.log({ currentWebhookBody });
   let hasOpenAPIChangelog = false;
   const { createNode, touchNode } = actions;
 
@@ -155,7 +175,7 @@ exports.sourceNodes = async ({
     await pipeline(httpStream, decode);
     console.timeEnd(`source updates`);
   } catch (error) {
-    callPostBuildWebhook(webhookBody, 'failed');
+    callPostBuildWebhook(currentWebhookBody, 'failed');
     reporter.panic('There was an issue sourcing nodes', error);
   }
 

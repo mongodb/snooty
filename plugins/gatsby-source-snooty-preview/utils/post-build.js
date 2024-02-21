@@ -24,6 +24,14 @@ const callPostBuildWebhook = async (webhookBody, status) => {
     return;
   }
 
+  // Avoids completely throwing an error if a build is triggered with a custom payload outside the automated build process
+  if (!webhookBody.jobId) {
+    console.log(
+      'No Autobuilder job ID included in the webhook payload. This build will not call the post-build webhook.'
+    );
+    return;
+  }
+
   const supportedStatuses = ['completed', 'failed'];
   if (!supportedStatuses.includes(status)) {
     console.log(`Post-build webhook call does not support status "${status}".`);
