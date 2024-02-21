@@ -32,22 +32,22 @@ exports[`renders correctly 1`] = `
   .emotion-0 {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-@media only screen and (max-width: 767px) {
-  .emotion-0 {
-    grid-gap: calc(24px * 0.75);
-    grid-template-columns: calc(24px / 2) repeat(3, calc(75% - calc(2 * 24px))) calc(24px / 2);
-    grid-template-rows: minmax(150px, 1fr);
-    margin: 24px 0;
-    overflow-x: scroll;
-    padding-bottom: calc(24px / 2);
-    scroll-snap-type: x proximity;
-  }
+  @media only screen and (max-width: 767px) {
+    .emotion-0 {
+      grid-gap: calc(24px * 0.75);
+      grid-template-columns: calc(24px / 2) repeat(3, calc(75% - calc(2 * 24px))) calc(24px / 2);
+      grid-template-rows: minmax(150px, 1fr);
+      margin: 24px 0;
+      overflow-x: scroll;
+      padding-bottom: calc(24px / 2);
+      scroll-snap-type: x proximity;
+    }
 
-  .emotion-0:before,
-  .emotion-0:after {
-    content: '';
+    .emotion-0:before,
+    .emotion-0:after {
+      content: '';
+    }
   }
 }
 
@@ -242,26 +242,28 @@ exports[`renders correctly 1`] = `
       <div
         class="emotion-5 emotion-6"
       >
-        <p
-          class="emotion-7"
-        >
-          Use Compass to connect to your Atlas cluster
-        </p>
-        <p
-          class="emotion-8"
-        >
-          <a
-            class="lg-ui-0001 emotion-9"
-            href="https://www.mongodb.com/docs/atlas/getting-started/"
-            target="_self"
+        <div>
+          <p
+            class="emotion-7"
           >
-            <span
-              class="emotion-10"
+            Use Compass to connect to your Atlas cluster
+          </p>
+          <p
+            class="emotion-8"
+          >
+            <a
+              class="lg-ui-0001 emotion-9"
+              href="https://www.mongodb.com/docs/atlas/getting-started/"
+              target="_self"
             >
-              Read Atlas docs
-            </span>
-          </a>
-        </p>
+              <span
+                class="emotion-10"
+              >
+                Read Atlas docs
+              </span>
+            </a>
+          </p>
+        </div>
       </div>
     </div>
     <div
@@ -275,26 +277,28 @@ exports[`renders correctly 1`] = `
       <div
         class="emotion-5 emotion-6"
       >
-        <p
-          class="emotion-7"
-        >
-          Learn MongoDB Basics with MongoDB University
-        </p>
-        <p
-          class="emotion-8"
-        >
-          <a
-            class="lg-ui-0001 emotion-9"
-            href="https://university.mongodb.com/courses/M001/about"
-            target="_self"
+        <div>
+          <p
+            class="emotion-7"
           >
-            <span
-              class="emotion-10"
+            Learn MongoDB Basics with MongoDB University
+          </p>
+          <p
+            class="emotion-8"
+          >
+            <a
+              class="lg-ui-0001 emotion-9"
+              href="https://university.mongodb.com/courses/M001/about"
+              target="_self"
             >
-              Learn MongoDB Basics
-            </span>
-          </a>
-        </p>
+              <span
+                class="emotion-10"
+              >
+                Learn MongoDB Basics
+              </span>
+            </a>
+          </p>
+        </div>
       </div>
     </div>
     <div
@@ -308,26 +312,28 @@ exports[`renders correctly 1`] = `
       <div
         class="emotion-5 emotion-6"
       >
-        <p
-          class="emotion-7"
-        >
-          Access more in-depth examples of querying data
-        </p>
-        <p
-          class="emotion-8"
-        >
-          <a
-            class="lg-ui-0001 emotion-9"
-            href="https://www.mongodb.com/docs/manual/tutorial/getting-started/"
-            target="_self"
+        <div>
+          <p
+            class="emotion-7"
           >
-            <span
-              class="emotion-10"
+            Access more in-depth examples of querying data
+          </p>
+          <p
+            class="emotion-8"
+          >
+            <a
+              class="lg-ui-0001 emotion-9"
+              href="https://www.mongodb.com/docs/manual/tutorial/getting-started/"
+              target="_self"
             >
-              Read Server docs
-            </span>
-          </a>
-        </p>
+              <span
+                class="emotion-10"
+              >
+                Read Server docs
+              </span>
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   </div>
