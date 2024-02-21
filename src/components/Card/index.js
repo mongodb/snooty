@@ -24,15 +24,18 @@ const landingStyles = css`
   img {
     width: ${theme.size.xlarge};
     vertical-align: baseline;
+    height: fit-content;
   }
   div {
     display: flex;
     flex-direction: column;
+    margin-left: ${theme.size.large};
+    //min-width: 164px;
     p:first-child {
       font-size: ${theme.fontSize.h2};
       font-weight: 500;
+      margin: 0px 0px ${theme.size.default} 0px;
     }
-    margin-left: ${theme.size.large};
   }
 `;
 
@@ -55,12 +58,16 @@ const cardDriverStyle = css`
   }
 `;
 
-// TODO: MAKE THIS LARGER IF
+const landingBottomStyling = css`
+  p {
+    font-weight: 500;
+  }
+`;
+
 const CardIcon = styled('img')`
   width: ${theme.size.large};
 `;
 
-// TODO: MAKE THIS NOT GET SO SMALL IF THE PAGE IS LANDING CUZ I THINK ITS UGLY
 const CompactIcon = styled('img')`
   width: ${theme.size.medium};
   @media ${theme.screenSize.upToSmall} {
@@ -120,52 +127,21 @@ const Card = ({
 }) => {
   const template = page?.options?.template;
 
-  console.log('PAGE', page);
   const isLanding = template === 'landing';
   const Icon = ['landing', 'product-landing'].includes(template) ? CardIcon : CompactIcon;
 
-  console.log('TEMPLAETE', template, isLanding);
-
-  // if tag == 'landing-bottom', this is 2nd group of cards on landing page which
-  // we want to keep exempt from landing styles
+  /* If tag == 'landing-bottom', this is 2nd group of cards on 
+  landing page which we want to keep exempt from landing styles */
   const isLandingBottom = tag === 'landing-bottom';
-  if (isLandingBottom) console.log('LANDING BOTTOM', headline);
 
   const styling = [
     cardBaseStyles,
     isForDrivers ? cardDriverStyle : cardStyling,
     isLanding && !isLandingBottom ? landingStyles : '', // must come after other styles to override
+    isLandingBottom ? landingBottomStyling : '',
     isCompact || isExtraCompact ? compactCardStyling : '',
   ];
 
-  // removing ConditionalWrapper for landing because we need to group things together for style purposes
-  // if (isLanding)
-  //   return (
-  //     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
-  //       <div>
-  //         {icon && <Icon src={withPrefix(icon)} alt={iconAlt} />}
-  //         {headline && (
-  //           <Body
-  //             className={cx(headingStyling({ isCompact, isExtraCompact }))}
-  //             compact={isCompact || isExtraCompact}
-  //             weight="medium"
-  //           >
-  //             {headline}
-  //           </Body>
-  //         )}
-  //       </div>
-  //       {children.map((child, i) => (
-  //         // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)
-  //         <ComponentFactory nodeData={child} key={i} cardRef={true} />
-  //       ))}
-  //       {cta && (
-  //         <Body className={cx(bodyStyling)}>
-  //           <Link to={url}>{cta}</Link>
-  //         </Body>
-  //       )}
-  //     </LeafyGreenCard>
-  //   );
-  // else
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
       {icon && <Icon src={withPrefix(icon)} alt={iconAlt} />}

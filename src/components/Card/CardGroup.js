@@ -66,9 +66,15 @@ const StyledGrid = styled('div')`
     margin: ${({ isForDrivers, isLanding }) => getMarginStyles(isForDrivers, isLanding, 24)};
   }
 
-  @media ${theme.screenSize.upToXLarge} {
-    grid-template-columns: repeat(2, 1fr);
+  ${
+    '' /*want first 4 cards on landing page to stay as one column, and not affect group of 3 cards (so hacky i'm sorry) */
   }
+  @media ${theme.screenSize.upToXLarge} {
+    ${({ isLanding, columns }) => {
+      if (!isLanding) return `grid-template-columns: repeat(2, 1fr);`;
+      else if (isLanding && columns !== 3) return `grid-template-columns: repeat(1, 1fr);`;
+      else return '';
+    }}
 
   @media ${theme.screenSize.upToMedium} {
     ${({ isCarousel, ...props }) =>
@@ -97,8 +103,6 @@ const CardGroup = ({
   const isCarousel = layout === 'carousel';
   const isForDrivers = type === 'drivers';
   const isLanding = page?.options?.template === 'landing';
-
-  console.log('TEMPLATE LANDING CARD GROUP', isLanding);
 
   return (
     <StyledGrid
