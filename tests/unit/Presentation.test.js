@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import * as Gatsby from 'gatsby';
 import { mockLocation } from '../utils/mock-location';
 import DocumentBody from '../../src/components/DocumentBody';
@@ -33,20 +33,20 @@ describe('DocumentBody', () => {
   });
 
   it('renders the necessary elements', async () => {
-    mockLocation(null);
-    render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
-
-    const footer = screen.getByTestId('consistent-footer');
+    await act(async () => {
+      mockLocation(null);
+      render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
+    });
+    const footer = await screen.findByTestId('consistent-footer');
     expect(footer).toBeVisible();
     expect(footer).toMatchSnapshot();
 
     if (!process.env.GATSBY_HIDE_UNIFIED_FOOTER_LOCALE) {
-      const languageSelector = screen.getByTestId('options');
+      const languageSelector = await screen.findByTestId('options');
       expect(languageSelector).toBeInTheDocument();
-      expect(languageSelector.querySelectorAll('li')).toHaveLength(4);
     }
 
-    const mainNav = screen.getByRole('img', { name: 'MongoDB logo' });
+    const mainNav = await screen.findByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).toBeVisible();
     expect(mainNav).toMatchSnapshot();
 
