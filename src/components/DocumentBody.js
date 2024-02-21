@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix, graphql } from 'gatsby';
-import { UnifiedFooter } from '@mdb/consistent-nav';
 import { ImageContextProvider } from '../context/image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
@@ -22,6 +21,13 @@ import Twitter from './Twitter';
 import DocsLandingSD from './StructuredData/DocsLandingSD';
 import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 import { InstruqtProvider } from './Instruqt/instruqt-context';
+
+// lazy load the unified footer to improve page load speed
+const LazyFooter = lazy(() =>
+  import('@mdb/consistent-nav').then((module) => ({
+    default: module.UnifiedFooter,
+  }))
+);
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
@@ -158,7 +164,9 @@ const DocumentBody = (props) => {
       </InstruqtProvider>
       {!isInPresentationMode && (
         <div data-testid="consistent-footer" id="footer-container">
-          <UnifiedFooter hideLocale={HIDE_UNIFIED_FOOTER_LOCALE} onSelectLocale={onSelectLocale} />
+          <Suspense>
+            <LazyFooter hideLocale={HIDE_UNIFIED_FOOTER_LOCALE} onSelectLocale={onSelectLocale} />
+          </Suspense>
         </div>
       )}
     </>
@@ -168,9 +176,6 @@ const DocumentBody = (props) => {
 DocumentBody.propTypes = {
   location: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
-    page: PropTypes.shape({
-      children: PropTypes.array,
-    }).isRequired,
     slug: PropTypes.string.isRequired,
   }),
 };
