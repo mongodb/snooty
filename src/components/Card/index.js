@@ -20,6 +20,19 @@ const cardBaseStyles = css`
 // new->old homepage redesign
 const landingStyles = css`
   max-width: 1110px;
+  flex-direction: row;
+  img {
+    width: ${theme.size.xlarge};
+    vertical-align: baseline;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    p {
+      font-size: ${theme.fontSize.h3};
+      font-weight: bold;
+    }
+  }
 `;
 
 const cardStyling = css`
@@ -112,13 +125,46 @@ const Card = ({
 
   console.log('TEMPLAETE', template, isLanding);
 
+  // if tag == 'landing-bottom', this is 2nd group of cards on landing page which
+  // we want to keep exempt from landing styles
+  const isLandingBottom = tag === 'landing-bottom';
+  if (isLandingBottom) console.log('LANDING BOTTOM', headline);
+
   const styling = [
     cardBaseStyles,
-    isLanding ? landingStyles : '',
     isForDrivers ? cardDriverStyle : cardStyling,
+    isLanding && !isLandingBottom ? landingStyles : '', // must come after other styles to override
     isCompact || isExtraCompact ? compactCardStyling : '',
   ];
 
+  // removing ConditionalWrapper for landing because we need to group things together for style purposes
+  // if (isLanding)
+  //   return (
+  //     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
+  //       <div>
+  //         {icon && <Icon src={withPrefix(icon)} alt={iconAlt} />}
+  //         {headline && (
+  //           <Body
+  //             className={cx(headingStyling({ isCompact, isExtraCompact }))}
+  //             compact={isCompact || isExtraCompact}
+  //             weight="medium"
+  //           >
+  //             {headline}
+  //           </Body>
+  //         )}
+  //       </div>
+  //       {children.map((child, i) => (
+  //         // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)
+  //         <ComponentFactory nodeData={child} key={i} cardRef={true} />
+  //       ))}
+  //       {cta && (
+  //         <Body className={cx(bodyStyling)}>
+  //           <Link to={url}>{cta}</Link>
+  //         </Body>
+  //       )}
+  //     </LeafyGreenCard>
+  //   );
+  // else
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
       {icon && <Icon src={withPrefix(icon)} alt={iconAlt} />}
@@ -126,25 +172,28 @@ const Card = ({
         condition={isCompact || isExtraCompact}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
       >
-        {tag && <FlexTag>{tag}</FlexTag>}
-        {headline && (
-          <Body
-            className={cx(headingStyling({ isCompact, isExtraCompact }))}
-            compact={isCompact || isExtraCompact}
-            weight="medium"
-          >
-            {headline}
-          </Body>
-        )}
-        {children.map((child, i) => (
-          // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)
-          <ComponentFactory nodeData={child} key={i} cardRef={true} />
-        ))}
-        {cta && (
-          <Body className={cx(bodyStyling)}>
-            <Link to={url}>{cta}</Link>
-          </Body>
-        )}
+        {tag && !isLandingBottom && <FlexTag>{tag}</FlexTag>}
+        <div>
+          {headline && (
+            <Body
+              className={cx(headingStyling({ isCompact, isExtraCompact }))}
+              compact={isCompact || isExtraCompact}
+              weight="medium"
+            >
+              {headline}
+            </Body>
+          )}
+          {children.map((child, i) => (
+            // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)
+            <ComponentFactory nodeData={child} key={i} cardRef={true} />
+          ))}
+
+          {cta && (
+            <Body className={cx(bodyStyling)}>
+              <Link to={url}>{cta}</Link>
+            </Body>
+          )}
+        </div>
       </ConditionalWrapper>
     </LeafyGreenCard>
   );
