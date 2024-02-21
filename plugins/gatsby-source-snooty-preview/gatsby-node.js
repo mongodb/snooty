@@ -69,21 +69,21 @@ const GATSBY_CLOUD_SITE_USER = process.env.GATSBY_CLOUD_SITE_USER;
 
 /**
  * Attempts to parse Netlify's build webhook payload.
- * @returns `undefined` or a parsed webhook body payload
+ * @returns {object | undefined} The parsed payload, if valid, or `undefined` otherwise
  */
 const getNetlifyHookBody = () => {
-  // Netlify add webhook body payloads to env
+  // Netlify adds webhook body payloads to env
   const incomingHookBody = process.env.INCOMING_HOOK_BODY;
-  if (incomingHookBody) {
-    try {
-      const parsedPayload = JSON.parse(incomingHookBody);
-      return parsedPayload;
-    } catch (e) {
-      console.error(`Error parsing INCOMING_HOOK_BODY: ${incomingHookBody}. ${e}`);
-      return undefined;
-    }
+  if (!incomingHookBody) {
+    return;
   }
-  return undefined;
+
+  try {
+    const parsedPayload = JSON.parse(incomingHookBody);
+    return parsedPayload;
+  } catch (e) {
+    console.error(`Error parsing INCOMING_HOOK_BODY: ${incomingHookBody}. ${e}`);
+  }
 };
 
 let isFirstRun = true;
