@@ -3,5 +3,5 @@ import { constructResPayload } from './utils';
 
 export async function handler(event, _context) {
   const resPayload = constructResPayload(event);
-  await callPostBuildWebhook(resPayload, 'completed');
+  await callPostBuildWebhook(resPayload, 'failed');
 }
