@@ -8,9 +8,10 @@ export async function handler(event, _context) {
   // is not automatically passed along, so we use a txt file to save it
   const buildHookDataString = fs.readFileSync(path.resolve(__dirname, '../../build-hook.txt'), 'utf-8');
   const buildHookData = JSON.parse(buildHookDataString);
-  const { payload } = event;
-  console.log({ event, buildHookData, payload });
+  const { body } = event;
+  console.log({ event, buildHookData, body });
   console.log(Object.keys(event));
+  console.log({ preview: process.env.GATSBY_IS_PREVIEW });
 
   // callPostBuildWebhook(parsedTestData);
 }
