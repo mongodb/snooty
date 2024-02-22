@@ -23,5 +23,5 @@ export async function handler(event, _context) {
     ...buildHookData,
   };
 
-  await callPostBuildWebhook(resPayload, 'success');
+  await callPostBuildWebhook(resPayload, 'completed');
 }
