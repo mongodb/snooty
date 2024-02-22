@@ -178,7 +178,7 @@ const Landing = ({ children, pageContext, useChatbot }) => {
               }
     
             @media ${screenSize.xLargeAndUp} {
-                 height: 240px;
+                 height: 250px;
                 }
           }
           
