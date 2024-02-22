@@ -36,7 +36,7 @@ const SidenavBackButton = ({
   eol,
   ...props
 }) => {
-  const parents = useNavigationParents();
+  const parents = useNavigationParents(project);
   const glyph = enableGlyph ? <Icon glyph="ArrowLeft" size="small" /> : null;
   let title = titleOverride;
   let url = target;

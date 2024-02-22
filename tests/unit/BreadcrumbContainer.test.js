@@ -3,14 +3,19 @@ import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import { mockLocation } from '../utils/mock-location';
 import BreadcrumbContainer from '../../src/components/Breadcrumbs/BreadcrumbContainer';
+import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
 
 const mountBreadcrumbContainer = (homeCrumb, lastCrumb) => {
   return render(<BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />);
 };
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 
 beforeEach(() => {
+  useSnootyMetadata.mockImplementation(() => ({
+    project: 'test-project',
+  }));
   mockLocation(null, `/`);
   useStaticQuery.mockImplementation(() => ({
     site: {
@@ -46,11 +51,16 @@ describe('BreadcrumbContainer', () => {
     useStaticQuery.mockImplementation(() => ({
       site: {
         siteMetadata: {
-          project: '',
+          project: 'test-project',
         },
       },
       allProjectParent: {
-        nodes: mockParents,
+        nodes: [
+          {
+            project: 'test-project',
+            parents: mockParents,
+          },
+        ],
       },
     }));
 

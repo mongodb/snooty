@@ -9,6 +9,7 @@ import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { useNavigationParents } from '../../hooks/use-navigation-parents';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
 const activeColor = css`
   color: ${palette.gray.dark3};
@@ -39,7 +40,8 @@ const linkStyling = LeafyCss`
 `;
 
 const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
-  const parents = useNavigationParents();
+  const { project } = useSnootyMetadata();
+  const parents = useNavigationParents(project);
   const breadcrumbs = React.useMemo(() => [homeCrumb, ...parents, lastCrumb], [homeCrumb, parents, lastCrumb]);
 
   return (

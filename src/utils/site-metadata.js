@@ -23,7 +23,7 @@ const getDatabase = (env) => {
     case 'dotcomprd':
       return 'snooty_dotcomprd';
     default:
-      return 'snooty_dev';
+      return 'snooty_dotcomprd';
   }
 };
 
