@@ -128,10 +128,11 @@ const Landing = ({ children, pageContext, useChatbot }) => {
           main h1:first-of-type {
             color: ${palette.white};
             grid-column: 2/-1;
-            margin-top: ${size.large};
+            margin-top: ${size.medium};
             font-size: 48px;
             line-height: 62px;
             margin-bottom: 10px;
+            align-self: end;            
             @media ${screenSize.upToMedium} {
               font-size: 32px;
               line-height: 40px;
@@ -157,30 +158,32 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             width: 100%;
             object-fit: cover;
             z-index: -1;
+            object-position: 50%;
 
-            @media ${screenSize.upToLarge} {
+
+            @media ${screenSize.upToXSmall} {
+              height: 555px;
+            }
+
+            @media ${screenSize.xSmallAndUp} {
+              height: 430px;
+            }
+
+            @media ${screenSize.smallAndUp} {
               height: 317px;
             }
 
             @media ${screenSize.largeAndUp} {
-                height: 254px;
+                height: 280px;
               }
     
             @media ${screenSize.xLargeAndUp} {
-                 height: 220px;
+                 height: 240px;
                 }
-
-            @media ${screenSize.upToXSmall} {
-              height: 382px;
-              object-position: 50%;
-            }
-
-            @media ${screenSize.upToMedium} {
-              height: 317;
-            }
           }
+          
           .introduction {
-            grid-column: 2 / -5;
+            grid-column: 2 / -4;
             grid-row: 2 / 3;
             p {
               color: ${palette.white};
@@ -189,11 +192,15 @@ const Landing = ({ children, pageContext, useChatbot }) => {
 
           @media ${screenSize.upToMedium} {
             grid-column: 2 / -2;
-
-            .footer {
-              padding: ${size.medium};
-            }
           }
+
+
+          @media ${screenSize.xLargeAndUp}  {
+            grid-column: 2 / -5;
+          }
+
+
+
         `}
       />
     </>
