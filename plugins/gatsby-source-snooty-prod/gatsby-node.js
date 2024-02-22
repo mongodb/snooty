@@ -85,7 +85,7 @@ const createAssociatedProductNodes = async ({ createNode, createNodeId, createCo
   }
 };
 
-exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
+exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNodesByType }) => {
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
 
@@ -181,7 +181,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
-  await createProjectParentNodes({ db, createNode, createNodeId, createContentDigest });
+  await createProjectParentNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
 
   const umbrellaProduct = await db.realmInterface.getMetadata(
     {

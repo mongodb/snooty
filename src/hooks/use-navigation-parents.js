@@ -14,9 +14,6 @@ export const useNavigationParents = (project) => {
       }
     `
   );
-  console.log('check static query res');
-  console.log(`project ${project}`);
-  console.log(allProjectParent);
   const res = (allProjectParent?.nodes || []).filter((re) => re.project === project)[0];
 
   return res?.parents || [];
