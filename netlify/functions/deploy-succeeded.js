@@ -4,11 +4,13 @@ import path from 'path';
 
 export async function handler(event, _context) {
   console.log('This is the Netlify deploy-succeeded trigger function');
+  console.log({ preview: process.env.GATSBY_IS_PREVIEW });
 
   // This file does not currently exist, but should be created on Netlify builds. The INCOMING_HOOK_BODY env var
   // is not automatically passed along, so we use a txt file to save it
   const buildHookDataString = fs.readFileSync(path.resolve(__dirname, '../../build-hook.txt'), 'utf-8');
   if (!buildHookDataString) {
+    console.log('No build hook data found.');
     return;
   }
 
@@ -16,7 +18,6 @@ export async function handler(event, _context) {
   const { body } = event;
   console.log({ event, buildHookData, body });
   console.log(Object.keys(event));
-  console.log({ preview: process.env.GATSBY_IS_PREVIEW });
 
   // callPostBuildWebhook(parsedTestData);
 }
