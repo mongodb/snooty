@@ -17,20 +17,18 @@ const cardBaseStyles = css`
   height: 100%;
 `;
 
-// new->old homepage redesign
 const landingStyles = css`
-  max-width: 1110px;
+  max-width: 1200px;
   flex-direction: row;
+  padding-left: ${theme.size.medium};
   img {
     width: ${theme.size.xlarge};
-    vertical-align: baseline;
     height: fit-content;
   }
   div {
     display: flex;
     flex-direction: column;
     margin-left: ${theme.size.large};
-    //min-width: 164px;
     p:first-child {
       font-size: ${theme.fontSize.h2};
       font-weight: 500;
@@ -61,6 +59,7 @@ const cardDriverStyle = css`
 const landingBottomStyling = css`
   p {
     font-weight: 500;
+    line-height: 24px;
   }
 `;
 
