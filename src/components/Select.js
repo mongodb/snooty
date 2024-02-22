@@ -83,9 +83,9 @@ const Select = ({
           <Option
             className={cx(optionStyling)}
             key={choice.value}
-            glyph={choice.icon}
             value={choice.value}
             role="option"
+            glyph={choice.glyph ? choice.glyph : null}
           >
             {choice.text}
           </Option>
