@@ -85,7 +85,7 @@ const Select = ({
             key={choice.value}
             value={choice.value}
             role="option"
-            glyph={choice.glyph ? choice.glyph : null}
+            // glyph ={choice.icon ? : choice.icon : null}
           >
             {choice.text}
           </Option>
