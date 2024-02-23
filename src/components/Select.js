@@ -18,6 +18,13 @@ const portalStyle = css`
   position: relative;
 `;
 
+const iconStyling = css`
+  display: inline-block;
+  margin-right: ${theme.size.small};
+  max-height: 20px;
+  width: 30px;
+`;
+
 /* Override LG mobile style of enlarged mobile font */
 const selectStyle = css`
   @media ${theme.screenSize.upToLarge} {
@@ -80,7 +87,14 @@ const Select = ({
         {...props}
       >
         {choices.map((choice) => (
-          <Option className={cx(optionStyling)} key={choice.value} value={choice.value} role="option">
+          <Option
+            className={cx(optionStyling)}
+            key={choice.value}
+            value={choice.value}
+            glyph={choice.icon}
+            role="option"
+          >
+            {choice.tabSelectorIcon && <choice.tabSelectorIcon className={cx(iconStyling)} />}
             {choice.text}
           </Option>
         ))}
