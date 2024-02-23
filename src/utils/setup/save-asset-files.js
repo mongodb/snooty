@@ -6,8 +6,13 @@ const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
 const isPreview = isGatsbyPreview();
 
 const saveFile = async (file, data) => {
-  // if this is preview, always save to 'public'
-  // images saved in /src/images are transformed and processed by gatsby-source-filesystem and gatsby-transformer-sharp
+  // save files both to "public" and "src/images" directories
+  // the first is for public access, and the second is for image processing
+  await fs.mkdir(path.join('public', path.dirname(file)), {
+    recursive: true,
+  });
+  await fs.writeFile(path.join('public', file), data, 'binary');
+
   const pathList =
     !isPreview && GATSBY_IMAGE_EXTENSIONS.some((ext) => file.endsWith(ext)) ? ['src', 'images'] : ['public'];
   await fs.mkdir(path.join(...pathList, path.dirname(file)), {
