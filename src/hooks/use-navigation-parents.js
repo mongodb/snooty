@@ -14,7 +14,7 @@ export const useNavigationParents = (project) => {
       }
     `
   );
-  const res = (allProjectParent?.nodes || []).filter((re) => re.project === project)[0];
+  const res = (allProjectParent?.nodes || []).find((re) => re.project === project);
 
   return res?.parents || [];
 };
