@@ -35,6 +35,17 @@ const landingStyles = css`
       margin: 0px 0px ${theme.size.default} 0px;
     }
   }
+
+  ${'' /* Mobile view */}
+  @media ${theme.screenSize.upToSmall} {
+    flex-direction: column;
+    img {
+      margin-bottom: ${theme.size.medium};
+    }
+    div {
+      margin-left: 0px;
+    }
+  }
 `;
 
 const cardStyling = css`
