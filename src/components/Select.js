@@ -80,13 +80,7 @@ const Select = ({
         {...props}
       >
         {choices.map((choice) => (
-          <Option
-            className={cx(optionStyling)}
-            key={choice.value}
-            value={choice.value}
-            role="option"
-            // glyph ={choice.icon ? : choice.icon : null}
-          >
+          <Option className={cx(optionStyling)} key={choice.value} value={choice.value} role="option">
             {choice.text}
           </Option>
         ))}
