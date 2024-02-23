@@ -114,7 +114,18 @@ const Landing = ({ children, pageContext, useChatbot }) => {
               line-height: 40px;
               margin-top: ${size.medium};
             }
-
+          }
+          ${
+            '' /* :first-of-type selector used for precedence
+            above LeafyGreen class selector */
+          }
+          main>section>section:first-of-type h2 {
+            color: ${palette.gray.dark4};
+            font-size: 32px;
+            font-family: 'MongoDB Value Serif';
+            font-weight: 400;
+            margin-top: ${size.medium};
+            margin-bottom: 0px;
           }
           .span-columns {
             grid-column: 3 / -3 !important;

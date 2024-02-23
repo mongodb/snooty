@@ -5,12 +5,13 @@ import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
 
-const getMarginStyles = (isForDriver, isLanding, sideMarginValue) => {
+const getMarginStyles = (isForDriver, isLanding, columns, sideMarginValue) => {
   if (typeof sideMarginValue !== 'number') {
     console.warn('sideMarginValue only accepts a number');
   }
   if (isForDriver) return `0 ${sideMarginValue}px ${theme.size.xlarge}`;
-  else if (isLanding) return `${theme.size.large} ${sideMarginValue}px`;
+  else if (isLanding && columns !== 3) return `${theme.size.large} ${sideMarginValue}px`;
+  else if (isLanding && columns === 3) return `${theme.size.medium} ${sideMarginValue}px ${theme.size.large}`;
   else return `${theme.size.large} 0`;
 };
 
@@ -56,14 +57,14 @@ const StyledGrid = styled('div')`
     else return '';
   }};
 
-  margin: ${({ isForDrivers, isLanding }) => getMarginStyles(isForDrivers, isLanding, 0)};
+  margin: ${({ isForDrivers, isLanding, columns }) => getMarginStyles(isForDrivers, isLanding, columns, 0)};
 
   @media ${theme.screenSize.upToMedium} {
-    margin: ${({ isForDrivers, isLanding }) => getMarginStyles(isForDrivers, isLanding, 42)};
+    margin: ${({ isForDrivers, isLanding, columns }) => getMarginStyles(isForDrivers, isLanding, columns, 42)};
   }
 
   @media ${theme.screenSize.upToSmall} {
-    margin: ${({ isForDrivers, isLanding }) => getMarginStyles(isForDrivers, isLanding, 24)};
+    margin: ${({ isForDrivers, isLanding, columns }) => getMarginStyles(isForDrivers, isLanding, columns, 24)};
   }
 
   ${
