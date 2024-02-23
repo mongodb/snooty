@@ -11,7 +11,7 @@ const getMarginStyles = (isForDriver, isLanding, columns, sideMarginValue) => {
   }
   if (isForDriver) return `0 ${sideMarginValue}px ${theme.size.xlarge}`;
   else if (isLanding && columns !== 3) return `${theme.size.large} ${sideMarginValue}px`;
-  else if (isLanding && columns === 3) return `${theme.size.medium} ${sideMarginValue}px ${theme.size.large}`;
+  else if (isLanding && columns === 3) return `${theme.size.medium} ${sideMarginValue}px ${theme.size.xlarge}`;
   else return `${theme.size.large} 0`;
 };
 
