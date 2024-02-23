@@ -18,6 +18,8 @@ const {
 // Global variable to allow webhookBody from sourceNodes step to be passed down
 // to other Gatsby build steps that might not pass webhookBody natively.
 let currentWebhookBody = {};
+// Flag if the build is parsing data from Netlify or Gatsby Cloud, as there may be a difference
+let isNetlifyBuild = false;
 
 exports.createSchemaCustomization = async ({ actions }) => {
   const { createTypes } = actions;
@@ -78,6 +80,7 @@ const getNetlifyHookBody = () => {
     return;
   }
 
+  isNetlifyBuild = true;
   try {
     const parsedPayload = JSON.parse(incomingHookBody);
     return parsedPayload;
@@ -175,7 +178,9 @@ exports.sourceNodes = async ({
     await pipeline(httpStream, decode);
     console.timeEnd(`source updates`);
   } catch (error) {
-    callPostBuildWebhook(currentWebhookBody, 'failed');
+    if (!isNetlifyBuild) {
+      await callPostBuildWebhook(currentWebhookBody, 'failed');
+    }
     reporter.panic('There was an issue sourcing nodes', error);
   }
 
@@ -235,7 +240,9 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
   `);
 
   if (result.errors) {
-    await callPostBuildWebhook(currentWebhookBody, 'failed');
+    if (!isNetlifyBuild) {
+      await callPostBuildWebhook(currentWebhookBody, 'failed');
+    }
     reporter.panic('There was an error in the graphql query', result.errors);
   }
 
@@ -272,7 +279,9 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
       });
     });
   } catch (err) {
-    await callPostBuildWebhook(currentWebhookBody, 'failed');
+    if (!isNetlifyBuild) {
+      await callPostBuildWebhook(currentWebhookBody, 'failed');
+    }
     reporter.panic('Could not build pages off of graphl query', err);
   }
 };
@@ -284,5 +293,7 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
 // support passing through custom data from the preview webhook's body (to include the
 // Autobuilder job ID associated with the GC build).
 exports.onPostBuild = async () => {
-  await callPostBuildWebhook(currentWebhookBody, 'completed');
+  if (!isNetlifyBuild) {
+    await callPostBuildWebhook(currentWebhookBody, 'completed');
+  }
 };
