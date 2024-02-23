@@ -103,24 +103,18 @@ const Landing = ({ children, pageContext, useChatbot }) => {
           }
           main h1:first-of-type {
             color: ${palette.white};
-            ${SHOW_CHATBOT && useChatbot
-              ? `
-              color: ${palette.black};
-              grid-column: 2/-1;
-              margin: ${size.large} 0;
-              font-size: 48px;
-              line-height: 62px;
+            grid-column: 2/-1;
+            margin-top: ${size.medium};
+            font-size: 48px;
+            line-height: 62px;
+            margin-bottom: 10px;
+            align-self: end;            
+            @media ${screenSize.upToMedium} {
+              font-size: 32px;
+              line-height: 40px;
+              margin-top: ${size.medium};
+            }
 
-              @media ${screenSize.upToSmall} {
-                font-size: 32px;
-                line-height: 40px;
-              }
-            `
-              : `
-              @media ${screenSize.upToMedium} {
-                color: ${palette.green.dark2};
-              }
-              `}
           }
           .span-columns {
             grid-column: 3 / -3 !important;
@@ -137,61 +131,52 @@ const Landing = ({ children, pageContext, useChatbot }) => {
           .hero-img {
             grid-column: 1 / -1;
             grid-row: 1 / 3;
-            height: 310px;
             width: 100%;
             object-fit: cover;
             z-index: -1;
+            object-position: 50%;
 
-            @media ${screenSize.upToMedium} {
-              grid-row: unset;
-              object-position: 100%;
+
+            @media ${screenSize.upToXSmall} {
+              height: 555px;
             }
 
-            @media ${screenSize.upToSmall} {
-              grid-row: unset;
-              height: 200px;
-              object-position: 85%;
+            @media ${screenSize.xSmallAndUp} {
+              height: 430px;
             }
 
-            @media only screen and (max-width: 320px) {
-              object-position: 100%;
+            @media ${screenSize.smallAndUp} {
+              height: 317px;
             }
+
+            @media ${screenSize.largeAndUp} {
+                height: 280px;
+              }
+    
+            @media ${screenSize.xLargeAndUp} {
+                 height: 250px;
+                }
           }
+          
           .introduction {
-            grid-column: 2 / 8;
+            grid-column: 2 / -4;
             grid-row: 2 / 3;
+            p {
+              color: ${palette.white};
+            }
+            
 
-            @media ${screenSize.upToMedium} {
-              grid-column: 2 / -2;
+          @media ${screenSize.upToMedium} {
+            grid-column: 2 / -2;
+          }
 
-              p {
-                color: ${palette.black};
-              }
-            }
 
-            @media ${screenSize.mediumAndUp} {
-              p {
-                color: ${palette.white};
-              }
-            }
+          @media ${screenSize.xLargeAndUp}  {
+            grid-column: 2 / -5;
           }
-          @media ${screenSize.upToLarge} {
-            .footer {
-              padding: ${size.medium};
-            }
-          }
-          @media ${screenSize.mediumAndUp} {
-            .right-column {
-              grid-column: 7 / -1 !important;
-              grid-row-start: 1 !important;
-              grid-row-end: 3 !important;
-            }
-          }
-          @media ${screenSize.largeAndUp} {
-            .right-column {
-              grid-column: 9 / -1 !important;
-            }
-          }
+
+
+
         `}
       />
     </>
