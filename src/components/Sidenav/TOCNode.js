@@ -7,7 +7,6 @@ import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
-import { NavigationContext } from '../../context/navigation-context';
 import { VersionContext } from '../../context/version-context';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
@@ -53,15 +52,14 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
   const tocNodeRef = useRef(null);
 
   // effect of scrolling toc node into view on load
-  const { completedFetch } = useContext(NavigationContext);
   const isScrolled = useRef(false);
   useEffect(() => {
     if (isScrolled.current) return;
-    if (completedFetch && tocNodeRef.current && isSelected) {
+    if (tocNodeRef.current && isSelected) {
       tocNodeRef.current.scrollIntoView(scrollBehavior);
       isScrolled.current = true;
     }
-  }, [tocNodeRef, completedFetch, isSelected]);
+  }, [tocNodeRef, isSelected]);
 
   // If the active state of this node changes, change the open state to reflect it
   // Disable linter to handle conditional dependency that allows drawers to close when a new page is loaded

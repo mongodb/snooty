@@ -56,6 +56,7 @@ describe('Toctree', () => {
   });
 
   it('correct item set as active based off current page', () => {
+    window.HTMLElement.prototype.scrollIntoView = function () {};
     const wrapper = render(<Toctree slug={'/'} toctree={mockData?.toctree} />);
     const testActivePage = (testPage, testText) => {
       wrapper.rerender(<Toctree slug={testPage} toctree={mockData?.toctree} />);
