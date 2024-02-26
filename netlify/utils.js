@@ -17,22 +17,12 @@ const parseBuildHookData = () => {
   return JSON.parse(buildHookDataString);
 };
 
-/**
- * Returns the URL to the Netlify log for the build
- * @param {*} event
- * @returns {string}
- */
-const getNetlifyBuildLog = (event) => {
-  console.log(event.body);
-  const { id: buildId, name: netlifySiteName } = JSON.parse(event.body.payload);
-  const logSiteBaseUrl = 'https://app.netlify.com/sites';
-  return `${logSiteBaseUrl}/${netlifySiteName}/deploys/${buildId}`;
-};
-
 export const constructResPayload = (event) => {
   const buildHookData = parseBuildHookData();
+  const parsedEventBody = JSON.parse(event.body);
+  const netlifyPayload = parsedEventBody.payload;
   return {
-    netlifyBuildLog: getNetlifyBuildLog(event),
+    netlifyPayload,
     ...buildHookData,
   };
 };
