@@ -45,7 +45,6 @@ import ListTable from './ListTable';
 import Literal from './Literal';
 import LiteralBlock from './LiteralBlock';
 import LiteralInclude from './LiteralInclude';
-import MongoWebShell from './MongoWebShell';
 import OpenAPIChangelog from './OpenAPIChangelog';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
@@ -180,7 +179,6 @@ const componentMap = {
   literal: Literal,
   literal_block: LiteralBlock,
   literalinclude: LiteralInclude,
-  'mongo-web-shell': MongoWebShell,
   only: Cond,
   'openapi-changelog': OpenAPIChangelog,
   paragraph: Paragraph,

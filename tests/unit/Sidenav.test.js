@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
@@ -10,6 +11,18 @@ import { tick, setMatchMedia, setMobile } from '../utils';
 jest.mock(`../../src/utils/use-snooty-metadata`, () => {
   return () => ({ project: 'test-project' });
 });
+
+const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+useStaticQuery.mockImplementation(() => ({
+  site: {
+    siteMetadata: {
+      project: '',
+    },
+  },
+  allProjectParent: {
+    nodes: [],
+  },
+}));
 
 const mountSidenav = async () => {
   const wrapper = render(

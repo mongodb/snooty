@@ -1,27 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Link from '../Link';
-import { NavigationContext } from '../../context/navigation-context';
+import { useNavigationParents } from '../../hooks/use-navigation-parents';
 import { baseUrl } from '../../utils/base-url';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
-
-// Empty SideNavItem used as a placeholder while parent category page is fetched.
-// Look into implementing a loading skeleton for this when time permits
-const placeholderStyling = css`
-  s
-  cursor: unset;
-  height: 37px;
-  :hover {
-    background-color: unset;
-  }
-  margin-bottom: 16px;
-`;
 
 const backButtonStyling = css`
   font-size: ${theme.fontSize.small};
@@ -48,7 +36,7 @@ const SidenavBackButton = ({
   eol,
   ...props
 }) => {
-  const { completedFetch, parents } = useContext(NavigationContext);
+  const parents = useNavigationParents(project);
   const glyph = enableGlyph ? <Icon glyph="ArrowLeft" size="small" /> : null;
   let title = titleOverride;
   let url = target;
@@ -67,17 +55,9 @@ const SidenavBackButton = ({
       url = '/';
     } else if (parents.length) {
       [{ title, url }] = parents.slice(-1);
-    } else if (completedFetch) {
+    } else {
       title = 'docs home';
       url = baseUrl();
-    } else {
-      // Show placeholder since the data is likely being fetched
-      return (
-        <>
-          <SideNavItem className={cx(placeholderStyling)} />
-          {border}
-        </>
-      );
     }
   }
 

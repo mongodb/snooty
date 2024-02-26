@@ -137,9 +137,6 @@ DefaultLayout.propTypes = {
   pageContext: PropTypes.shape({
     chapters: PropTypes.object,
     guides: PropTypes.object,
-    page: PropTypes.shape({
-      options: PropTypes.object,
-    }).isRequired,
     slug: PropTypes.string,
     template: PropTypes.string,
   }).isRequired,

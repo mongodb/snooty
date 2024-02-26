@@ -24,7 +24,7 @@ const makeChoices = ({ name, iconMapping, options }) =>
   Object.entries(options).map(([tabId, title]) => ({
     text: getPlaintext(title),
     value: tabId,
-    ...(name === 'drivers' && { icon: iconMapping[tabId] }),
+    ...(name === 'drivers' && { tabSelectorIcon: iconMapping[tabId] }),
   }));
 
 const TabSelector = ({ activeTab, handleClick, iconMapping, name, options }) => {
