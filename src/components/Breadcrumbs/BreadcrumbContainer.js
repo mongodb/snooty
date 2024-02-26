@@ -1,14 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
-import { NavigationContext } from '../../context/navigation-context';
 import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { useNavigationParents } from '../../hooks/use-navigation-parents';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
 const activeColor = css`
   color: ${palette.gray.dark3};
@@ -39,7 +40,8 @@ const linkStyling = LeafyCss`
 `;
 
 const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
-  const { parents } = useContext(NavigationContext);
+  const { project } = useSnootyMetadata();
+  const parents = useNavigationParents(project);
   const breadcrumbs = React.useMemo(() => [homeCrumb, ...parents, lastCrumb], [homeCrumb, parents, lastCrumb]);
 
   return (

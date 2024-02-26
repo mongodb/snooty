@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavigationProvider } from '../context/navigation-context';
 import { VersionContextProvider } from '../context/version-context';
 import { TocContextProvider } from '../context/toc-context';
 import { HeaderContextProvider } from './Header/header-context';
@@ -9,7 +8,7 @@ import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
 
 const RootProvider = ({ children, headingNodes, selectors, slug, repoBranches, remoteMetadata, project }) => {
-  let providers = (
+  return (
     <TabProvider selectors={selectors}>
       <ContentsProvider headingNodes={headingNodes}>
         <HeaderContextProvider>
@@ -22,12 +21,6 @@ const RootProvider = ({ children, headingNodes, selectors, slug, repoBranches, r
       </ContentsProvider>
     </TabProvider>
   );
-
-  if (project) {
-    providers = <NavigationProvider project={project}>{providers}</NavigationProvider>;
-  }
-
-  return providers;
 };
 
 RootProvider.propTypes = {
