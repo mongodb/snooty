@@ -107,7 +107,7 @@ exports.sourceNodes = async ({
 }) => {
   // Netlify and Gatsby Cloud have different ways of sending webhooks, with Gatsby's having a default value of {}.
   currentWebhookBody = getNetlifyHookBody() || webhookBody;
-  console.log({ currentWebhookBody });
+  console.log({ currentWebhookBody, webhookBody });
   let hasOpenAPIChangelog = false;
   const { createNode, touchNode } = actions;
 
