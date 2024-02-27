@@ -1,8 +1,8 @@
 import { lazy } from 'react';
 import styled from '@emotion/styled';
-import { MongoDbLegalDisclosure, mongoDbVerifyInformationMessage } from 'mongodb-chatbot-ui';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { DEFAULT_MAX_INPUT } from '../../ChatbotUi';
+import MongoDbLegalDisclosure from './MongoDBLegal';
 
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const FloatingActionButtonTrigger = lazy(() =>
@@ -40,7 +40,7 @@ const ChatbotFab = () => {
           disclaimer={<MongoDbLegalDisclosure />}
           initialMessageText="Welcome to MongoDB AI Assistant. What can I help you with?"
           initialMessageSuggestedPrompts={suggestedPrompts}
-          inputBottomText={mongoDbVerifyInformationMessage}
+          inputBottomText={BOTTOM_TEXT}
         />
       </Chatbot>
     </StyledChatBotFabContainer>
@@ -49,4 +49,6 @@ const ChatbotFab = () => {
 
 export const fabChatbot = 'fab-chatbot';
 export const CHATBOT_WIDGET_TEXT = 'Ask MongoDB AI';
+export const BOTTOM_TEXT =
+  'This is an experimental generative AI chatbot. All information should be verified prior to use.';
 export default ChatbotFab;
