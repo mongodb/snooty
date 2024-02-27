@@ -1,6 +1,8 @@
 import { lazy } from 'react';
 import styled from '@emotion/styled';
+import { MongoDbLegalDisclosure, mongoDbVerifyInformationMessage } from 'mongodb-chatbot-ui';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
+import { DEFAULT_MAX_INPUT } from '../../ChatbotUi';
 
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const FloatingActionButtonTrigger = lazy(() =>
@@ -32,12 +34,13 @@ const ChatbotFab = () => {
       // Classname below to help ignore element for screenshots
       className={fabChatbot}
     >
-      <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
+      <Chatbot name="MongoDB AI" maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
         <FloatingActionButtonTrigger text={CHATBOT_WIDGET_TEXT} />
         <ModalView
+          disclaimer={<MongoDbLegalDisclosure />}
           initialMessageText="Welcome to MongoDB AI Assistant. What can I help you with?"
           initialMessageSuggestedPrompts={suggestedPrompts}
-          showDisclaimer
+          inputBottomText={mongoDbVerifyInformationMessage}
         />
       </Chatbot>
     </StyledChatBotFabContainer>
