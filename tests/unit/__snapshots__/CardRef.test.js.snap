@@ -31,20 +31,20 @@ exports[`card correctly with and without url 1`] = `
   .emotion-0 {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-@media only screen and (max-width: 767px) {
-  .emotion-0 {
-    grid-template-columns: repeat(1, 1fr);
-    grid-column-gap: 16px;
+  @media only screen and (max-width: 767px) {
+    .emotion-0 {
+      grid-template-columns: repeat(1, 1fr);
+      grid-column-gap: 16px;
+    }
   }
-}
 
-@media only screen and (max-width: 480px) {
-  .emotion-0 {
-    grid-column-gap: 16px;
-    grid-template-columns: 'auto';
-    grid-row-gap: '16px';
+  @media only screen and (max-width: 480px) {
+    .emotion-0 {
+      grid-column-gap: 16px;
+      grid-template-columns: 'auto';
+      grid-row-gap: '16px';
+    }
   }
 }
 
@@ -351,66 +351,68 @@ exports[`card correctly with and without url 1`] = `
       <div
         class="emotion-5 emotion-6"
       >
-        <p
-          class="emotion-7"
-        >
-          Realm SDKs
-        </p>
-        <p
-          class="emotion-8"
-        >
-          Use platform-specific libraries to include and work with the Realm database in your application.
-        </p>
-        <p
-          class="emotion-8"
-        >
-          <a
-            class="emotion-10 emotion-11"
-            href="/sdk/android/#std-label-android-intro"
+        <div>
+          <p
+            class="emotion-7"
           >
-            Android
-          </a>
-          
+            Realm SDKs
+          </p>
+          <p
+            class="emotion-8"
+          >
+            Use platform-specific libraries to include and work with the Realm database in your application.
+          </p>
+          <p
+            class="emotion-8"
+          >
+            <a
+              class="emotion-10 emotion-11"
+              href="/sdk/android/#std-label-android-intro"
+            >
+              Android
+            </a>
+            
 
-          <a
-            class="emotion-10 emotion-11"
-            href="/sdk/ios/#std-label-ios-intro"
-          >
-            iOS
-          </a>
-          
+            <a
+              class="emotion-10 emotion-11"
+              href="/sdk/ios/#std-label-ios-intro"
+            >
+              iOS
+            </a>
+            
 
-          <a
-            class="emotion-10 emotion-11"
-            href="/sdk/dotnet/#std-label-dotnet-intro"
-          >
-            .Net
-          </a>
-          
+            <a
+              class="emotion-10 emotion-11"
+              href="/sdk/dotnet/#std-label-dotnet-intro"
+            >
+              .Net
+            </a>
+            
 
-          <a
-            class="emotion-10 emotion-11"
-            href="/web/#std-label-web-intro"
-          >
-            Web
-          </a>
-          
+            <a
+              class="emotion-10 emotion-11"
+              href="/web/#std-label-web-intro"
+            >
+              Web
+            </a>
+            
 
-          <a
-            class="emotion-10 emotion-11"
-            href="/sdk/react-native/#std-label-react-native-intro"
-          >
-            React Native
-          </a>
-          
+            <a
+              class="emotion-10 emotion-11"
+              href="/sdk/react-native/#std-label-react-native-intro"
+            >
+              React Native
+            </a>
+            
 
-          <a
-            class="emotion-10 emotion-11"
-            href="/sdk/node/#std-label-node-intro"
-          >
-            Node.js
-          </a>
-        </p>
+            <a
+              class="emotion-10 emotion-11"
+              href="/sdk/node/#std-label-node-intro"
+            >
+              Node.js
+            </a>
+          </p>
+        </div>
       </div>
     </div>
     <div
@@ -423,31 +425,33 @@ exports[`card correctly with and without url 1`] = `
       <div
         class="emotion-5 emotion-6"
       >
-        <p
-          class="emotion-7"
-        >
-          MongoDB Realm
-        </p>
-        <p
-          class="emotion-8"
-        >
-          Discover how to sync data, define permissions, and connect to other services, including MongoDB Atlas.
-        </p>
-        <p
-          class="emotion-29"
-        >
-          <a
-            class="lg-ui-0001 emotion-30"
-            href="https://docs.mongodb.com/realm/services/"
-            target="_self"
+        <div>
+          <p
+            class="emotion-7"
           >
-            <span
-              class="emotion-31"
+            MongoDB Realm
+          </p>
+          <p
+            class="emotion-8"
+          >
+            Discover how to sync data, define permissions, and connect to other services, including MongoDB Atlas.
+          </p>
+          <p
+            class="emotion-29"
+          >
+            <a
+              class="lg-ui-0001 emotion-30"
+              href="https://docs.mongodb.com/realm/services/"
+              target="_self"
             >
-              Learn more about MongoDB Realm Application Services
-            </span>
-          </a>
-        </p>
+              <span
+                class="emotion-31"
+              >
+                Learn more about MongoDB Realm Application Services
+              </span>
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   </div>
