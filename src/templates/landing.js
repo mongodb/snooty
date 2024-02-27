@@ -183,7 +183,15 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             }
 
             @media ${screenSize.xLargeAndUp} {
-              grid-column: 2 / -4;
+              grid-column: 2 / -5;
+            }
+
+            @media ${screenSize['2XLargeAndUp']} {
+              grid-column: 2 / -3;
+            }
+
+            @media ${screenSize['3XLargeAndUp']} {
+              grid-column: 2 / -2;
             }
           }
         `}
