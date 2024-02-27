@@ -21,7 +21,8 @@
     "figwidth": "700px",
     "checksum": "968654cd30e0b15d8b835ff39a066d3e4555aeef2bc77707908d6f990a643706",
     "width": "500",
-    "height": "300"
+    "height": "300",
+    "class": "hero-img"
   },
   "children": []
 }
