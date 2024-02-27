@@ -53,7 +53,7 @@ const StyledGrid = styled('div')`
   grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
 
   max-width: ${(isLanding) => {
-    if (isLanding) return '1110px';
+    if (isLanding) return `${theme.breakpoints.xLarge}px`;
     else return '';
   }};
 

@@ -43,6 +43,9 @@ const Wrapper = styled('main')`
       @media ${({ theme }) => theme.screenSize.mediumAndUp} {
         grid-column: 2 / -2 !important;
       }
+      @media ${({ theme }) => theme.screenSize['3XLargeAndUp']} {
+        grid-column: 2 / -4 !important;
+      }
     }
   }
 `;
@@ -108,7 +111,7 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             font-size: 48px;
             line-height: 62px;
             margin-bottom: 10px;
-            align-self: end;            
+            align-self: end;
             @media ${screenSize.upToMedium} {
               font-size: 32px;
               line-height: 40px;
@@ -147,7 +150,6 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             z-index: -1;
             object-position: 50%;
 
-
             @media ${screenSize.upToXSmall} {
               height: 555px;
             }
@@ -161,33 +163,33 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             }
 
             @media ${screenSize.largeAndUp} {
-                height: 280px;
-              }
-    
+              height: 280px;
+            }
+
             @media ${screenSize.xLargeAndUp} {
-                 height: 250px;
-                }
+              height: 250px;
+            }
           }
-          
+
           .introduction {
             grid-column: 2 / -4;
             grid-row: 2 / 3;
             p {
               color: ${palette.white};
             }
-            
 
-          @media ${screenSize.upToMedium} {
-            grid-column: 2 / -2;
+            @media ${screenSize.upToMedium} {
+              grid-column: 2 / -2;
+            }
+
+            @media ${screenSize.xLargeAndUp} {
+              grid-column: 2 / -5;
+            }
+
+            @media ${screenSize['3XLargeAndUp']} {
+              grid-column: 2 / -4;
+            }
           }
-
-
-          @media ${screenSize.xLargeAndUp}  {
-            grid-column: 2 / -5;
-          }
-
-
-
         `}
       />
     </>
