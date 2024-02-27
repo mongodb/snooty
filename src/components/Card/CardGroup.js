@@ -67,9 +67,8 @@ const StyledGrid = styled('div')`
   }
   @media ${theme.screenSize.upToXLarge} {
     ${({ isLanding, columns }) => {
-      if (!isLanding) return `grid-template-columns: repeat(2, 1fr);`;
-      else if (isLanding && columns !== 3) return `grid-template-columns: repeat(1, 1fr);`;
-      else return '';
+      if (isLanding) return `grid-template-columns: repeat(${columns}, 1fr);`;
+      else return `grid-template-columns: repeat(2, 1fr);`;
     }}
 
   @media ${theme.screenSize.upToMedium} {

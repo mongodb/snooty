@@ -68,9 +68,12 @@ const cardDriverStyle = css`
 `;
 
 const landingBottomStyling = css`
+  img {
+    width: 50px;
+  }
   p {
     font-weight: 500;
-    line-height: 24px;
+    line-height: ${theme.size.medium};
   }
 `;
 
