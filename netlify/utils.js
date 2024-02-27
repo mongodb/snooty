@@ -20,6 +20,8 @@ const parseBuildHookData = () => {
 export const constructResPayload = (event) => {
   const buildHookData = parseBuildHookData();
   const parsedEventBody = JSON.parse(event.body);
+  // This is Netlify's default post-deployment payload. We include it with our custom data in case
+  // we want to process any information
   const netlifyPayload = parsedEventBody.payload;
   return {
     netlifyPayload,
