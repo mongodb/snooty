@@ -43,9 +43,6 @@ const Wrapper = styled('main')`
       @media ${({ theme }) => theme.screenSize.mediumAndUp} {
         grid-column: 2 / -2 !important;
       }
-      @media ${({ theme }) => theme.screenSize['3XLargeAndUp']} {
-        grid-column: 2 / -4 !important;
-      }
     }
   }
 `;
@@ -187,7 +184,7 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             }
 
             @media ${screenSize['3XLargeAndUp']} {
-              grid-column: 2 / -4;
+              grid-column: 2 / -2;
             }
           }
         `}
