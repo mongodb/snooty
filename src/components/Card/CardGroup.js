@@ -52,11 +52,6 @@ const StyledGrid = styled('div')`
   grid-row-gap: ${theme.size.medium};
   grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
 
-  max-width: ${(isLanding) => {
-    if (isLanding) return '1110px';
-    else return '';
-  }};
-
   margin: ${({ isForDrivers, isLanding, columns }) => getMarginStyles(isForDrivers, isLanding, columns, 0)};
 
   @media ${theme.screenSize.upToMedium} {

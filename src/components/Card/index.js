@@ -18,7 +18,7 @@ const cardBaseStyles = css`
 `;
 
 const landingStyles = css`
-  max-width: 1200px;
+  //max-width: 1200px;
   flex-direction: row;
   padding-left: ${theme.size.medium};
   img {
