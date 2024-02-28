@@ -197,31 +197,33 @@ exports[`renders correctly 1`] = `
     >
       Test card tag
     </span>
-    <p
-      class="emotion-5"
-    >
-      Test card headline
-    </p>
-    <p
-      class="emotion-6"
-    >
-      Test card paragraph
-    </p>
-    <p
-      class="emotion-7"
-    >
-      <a
-        class="lg-ui-0001 emotion-8"
-        href="https://university.mongodb.com/courses/M001/about"
-        target="_self"
+    <div>
+      <p
+        class="emotion-5"
       >
-        <span
-          class="emotion-9"
+        Test card headline
+      </p>
+      <p
+        class="emotion-6"
+      >
+        Test card paragraph
+      </p>
+      <p
+        class="emotion-7"
+      >
+        <a
+          class="lg-ui-0001 emotion-8"
+          href="https://university.mongodb.com/courses/M001/about"
+          target="_self"
         >
-          Test card CTA
-        </span>
-      </a>
-    </p>
+          <span
+            class="emotion-9"
+          >
+            Test card CTA
+          </span>
+        </a>
+      </p>
+    </div>
   </div>
 </DocumentFragment>
 `;
