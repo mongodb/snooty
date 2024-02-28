@@ -32,11 +32,11 @@ exports[`Lightbox renders correctly 1`] = `
       tabindex="-1"
     >
       <img
-        alt="/images/firstcluster.png"
-        class="emotion-2 hero-img"
-        height="300"
+        alt="test-alt"
+        class="emotion-2 hero-img align-test-align"
+        height="3000"
         src="/images/firstcluster.png"
-        width="500"
+        width="5000"
       />
       <div
         class="emotion-3 emotion-4"
