@@ -49,7 +49,7 @@ exports[`renders correctly 1`] = `
   >
     <img
       alt="/images/firstcluster.png"
-      class="emotion-1"
+      class="emotion-1 hero-img"
       height="300"
       src="/images/firstcluster.png"
       width="500"
