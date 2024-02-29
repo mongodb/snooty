@@ -189,6 +189,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const ia = page?.options?.ia;
 
   const template = page?.options?.template;
+  const isLanding = template === 'landing';
   const isGuidesLanding = project === 'guides' && template === 'product-landing';
   const isGuidesTemplate = template === 'guide';
 
@@ -264,7 +265,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 />
                 {ia && (
                   <IA
-                    header={<span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
+                    header={!isLanding && <span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
                     handleClick={() => {
                       setBack(false);
                       hideMobileSidenav();
