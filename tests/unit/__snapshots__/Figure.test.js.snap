@@ -46,11 +46,11 @@ exports[`renders correctly 1`] = `
     style="width: 700px;"
   >
     <img
-      alt="/images/firstcluster.png"
-      class="emotion-1"
-      height="300"
+      alt="test-alt"
+      class="emotion-1 hero-img align-test-align"
+      height="3000"
       src="/images/firstcluster.png"
-      width="500"
+      width="5000"
     />
   </div>
 </DocumentFragment>

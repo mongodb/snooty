@@ -14,7 +14,7 @@ describe('Lightbox', () => {
   it('displays lightbox image and prompt', () => {
     const wrapper = render(<Lightbox nodeData={mockData} />);
     expect(wrapper.getByText('click to enlarge')).toBeTruthy();
-    expect(wrapper.getByAltText('/images/firstcluster.png')).toBeTruthy();
+    expect(wrapper.getByAltText('test-alt')).toBeTruthy();
   });
 
   it('does not display the modal', () => {
