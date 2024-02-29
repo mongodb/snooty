@@ -1,7 +1,6 @@
 import React from 'react';
 
 const IconTypescript = ({ ...styles }) => (
-  // <svg viewBox="0 0 64 64" version="1.1" {...styles}>
   <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" {...styles}>
     <g clip-path="url(#clip0_2131_12795)">
       <path
