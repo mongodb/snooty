@@ -15,26 +15,37 @@ import IconScala from '../icons/Scala';
 import IconShell from '../icons/Shell';
 import IconSwift from '../icons/Swift';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
+import IconObjectiveC from '../icons/ObjectiveC';
+import IconJavascript from '../icons/Javascript';
+import IconTypescript from '../icons/Typescript';
+import IconDart from '../icons/Dart';
 
 const DRIVER_ICON_MAP = {
   c: IconC,
   compass: IconCompass,
   cpp: IconCpp,
   csharp: IconCsharp,
+  dart: IconDart,
   go: IconGo,
+  java: IconJava,
   'java-sync': IconJava,
   'java-async': IconJava,
+  javascript: IconJavascript,
+  kotlin: IconKotlin,
   'kotlin-coroutine': IconKotlin,
   'kotlin-sync': IconKotlin,
   nodejs: IconNode,
+  objectivec: IconObjectiveC,
   php: IconPHP,
   python: IconPython,
   ruby: IconRuby,
   rust: IconRust,
   scala: IconScala,
   shell: IconShell,
+  swift: IconSwift,
   'swift-async': IconSwift,
   'swift-sync': IconSwift,
+  typescript: IconTypescript,
 };
 
 const defaultContextValue = {
