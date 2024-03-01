@@ -13,7 +13,7 @@ const constructSnootyHeader = (payloadString) =>
  * build is finished.
  * @param {object} webhookBody - The webhook body passed to the source plugin to
  * initiate the preview build.
- * @param {string} status - The status of the build, typically "completed" or "failed".
+ * @param {'completed' | 'failed'} status - The status of the build, typically "completed" or "failed".
  * This value should coincide with the Autobuilder's job statuses.
  */
 const callPostBuildWebhook = async (webhookBody, status) => {
