@@ -1,19 +1,14 @@
 {
-  "name": "snooty-component-factory",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsx ./src/index.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@swc/cli": "^0.3.10",
-    "@swc/core": "^1.4.2",
-    "tsx": "^4.7.1",
-    "typescript": "^5.3.3"
-  }
+    "name": "my-first-plugin",
+    "version": "0.1.0",
+    "description": "",
+    "author": "",
+    "license": "ISC",
+    "keywords": ["swc-plugin"],
+    "main": "target/wasm32-wasi/release/my_first_plugin.wasm",
+    "scripts": {
+        "prepublishOnly": "cargo build-wasi --release"
+    },
+    "files": [],
+    "preferUnplugged": true
 }
