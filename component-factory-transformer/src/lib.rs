@@ -79,7 +79,7 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
         .expect("Failed to retrieve plugin config for remove-unused-directives");
 
     let config: Config = serde_json::from_str::<Option<Config>>(&config_str)
-        .expect("")
+        .expect("Config could not be deserialized")
         .unwrap_or_else(|| Config { exclude: vec![] });
 
     let exclude_set = HashSet::from_iter(config.exclude.iter().cloned());
