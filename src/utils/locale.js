@@ -1,0 +1,28 @@
+import { withPrefix } from 'gatsby';
+import { assertTrailingSlash } from './assert-trailing-slash';
+
+// Update this as more languages are introduced
+export const AVAILABLE_LANGUAGES = [
+  { language: 'English', code: 'en-us' },
+  { language: '简体中文', code: 'zh-cn' },
+  { language: '한국어', code: 'ko-kr' },
+  { language: 'Português', code: 'pt-br' },
+];
+
+/**
+ * Returns a mapping of a page's URL and its equivalent URLs in different languages.
+ * @param {string} slug
+ */
+export const getLocaleMapping = (location, slug) => {
+  // handle the `/` path
+  const slugForUrl = slug === '/' ? `${withPrefix('')}` : `${withPrefix(slug)}`;
+  const localeHrefMap = {};
+
+  AVAILABLE_LANGUAGES.forEach(({ code }) => {
+    const langPrefix = code === 'en-us' ? '' : `/${code}`;
+    const targetUrl = `${location.origin}${langPrefix}${slugForUrl}`;
+    localeHrefMap[code] = assertTrailingSlash(targetUrl);
+  });
+
+  return localeHrefMap;
+};

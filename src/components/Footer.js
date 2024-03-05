@@ -1,28 +1,19 @@
 import React, { useEffect } from 'react';
-import { withPrefix } from 'gatsby';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { isBrowser } from '../utils/is-browser';
-import { assertTrailingSlash } from '../utils/assert-trailing-slash';
+import { AVAILABLE_LANGUAGES, getLocaleMapping } from '../utils/locale';
 
 const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
-const AVAILABLE_LANGUAGES = ['English', '简体中文', '한국어', 'Português'];
 
 const Footer = ({ slug }) => {
   const location = useLocation();
-  // handle the `/` path
-  const slugForUrl = slug === '/' ? `${withPrefix('')}` : `${withPrefix(slug)}`;
 
   const onSelectLocale = (locale) => {
-    const localeHrefMap = {
-      'zh-cn': `${location.origin}/zh-cn${slugForUrl}`,
-      'en-us': `${location.origin}${slugForUrl}`,
-      'ko-kr': `${location.origin}/ko-kr${slugForUrl}`,
-      'pt-br': `${location.origin}/pt-br${slugForUrl}`,
-    };
+    const localeHrefMap = getLocaleMapping(location, slug);
 
     if (isBrowser) {
-      window.location.href = assertTrailingSlash(localeHrefMap[locale]);
+      window.location.href = localeHrefMap[locale];
     }
   };
 
@@ -34,7 +25,7 @@ const Footer = ({ slug }) => {
       if (footerUlElement) {
         // We only want to support English, Simple Chinese, Korean, and Portuguese for now.
         const availableOptions = Array.from(footerUlElement.childNodes).reduce((accumulator, child) => {
-          if (AVAILABLE_LANGUAGES.includes(child.textContent)) {
+          if (AVAILABLE_LANGUAGES.find(({ language }) => child.textContent === language)) {
             accumulator.push(child);
           }
           return accumulator;
