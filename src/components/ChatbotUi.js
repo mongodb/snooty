@@ -97,16 +97,14 @@ const ChatbotUi = ({ template }) => {
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
       <SuspenseHelper fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
         <Chatbot maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
-          <SuspenseHelper fallback={'Chatbot...'}>
-            <DocsChatbot
-              suggestedPrompts={[
-                'How do you deploy a free cluster in Atlas?',
-                'How do you import or migrate data into MongoDB Atlas?',
-                'Get started with MongoDB',
-                'Why should I use Atlas Search?',
-              ]}
-            />
-          </SuspenseHelper>
+          <DocsChatbot
+            suggestedPrompts={[
+              'How do you deploy a free cluster in Atlas?',
+              'How do you import or migrate data into MongoDB Atlas?',
+              'Get started with MongoDB',
+              'Why should I use Atlas Search?',
+            ]}
+          />
         </Chatbot>
       </SuspenseHelper>
     </StyledChatBotUiContainer>
