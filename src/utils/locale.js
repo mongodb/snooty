@@ -10,7 +10,7 @@ export const AVAILABLE_LANGUAGES = [
 ];
 
 /**
- * Returns a mapping of a page's URL and its equivalent URLs in different languages.
+ * Returns a mapping of a page's URL and its equivalent URLs for different languages.
  * @param {string} slug
  */
 export const getLocaleMapping = (location, slug) => {

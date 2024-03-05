@@ -1,21 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from '@gatsbyjs/reach-router';
+import { getLocaleMapping } from '../utils/locale';
 
 const DEFAULT_TWITTER_SITE = '@mongodb';
 const metaUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
 
-const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical }) => (
-  <>
-    <title>{showDocsLandingTitle ? 'MongoDB Documentation' : `${pageTitle} — ${siteTitle}`}</title>
-    {/* Twitter Tags - default values, may be overwritten by Twitter component */}
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content={DEFAULT_TWITTER_SITE} />
-    <meta property="twitter:title" content={pageTitle} />
-    <meta name="twitter:image" content={metaUrl} />
-    <meta name="twitter:image:alt" content="MongoDB logo featuring a green leaf on a dark green background." />
-    {canonical && <link data-testid="canonical" id="canonical" rel="canonical" key={canonical} href={canonical} />}
-  </>
-);
+const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug }) => {
+  const location = useLocation();
+  const localeHrefMap = getLocaleMapping(location, slug);
+
+  const hrefLangLinks = Object.entries(localeHrefMap).map(([langCode, href]) => {
+    const hrefLang = langCode === 'en-us' ? 'x-default' : langCode;
+    return <link rel="alternate" hrefLang={hrefLang} href={href} />;
+  });
+
+  return (
+    <>
+      <title>{showDocsLandingTitle ? 'MongoDB Documentation' : `${pageTitle} — ${siteTitle}`}</title>
+      {hrefLangLinks}
+      {/* Twitter Tags - default values, may be overwritten by Twitter component */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content={DEFAULT_TWITTER_SITE} />
+      <meta property="twitter:title" content={pageTitle} />
+      <meta name="twitter:image" content={metaUrl} />
+      <meta name="twitter:image:alt" content="MongoDB logo featuring a green leaf on a dark green background." />
+      {canonical && <link data-testid="canonical" id="canonical" rel="canonical" key={canonical} href={canonical} />}
+    </>
+  );
+};
 
 SEO.propTypes = {
   pageTitle: PropTypes.string.isRequired,

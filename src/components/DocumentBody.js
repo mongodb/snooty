@@ -166,6 +166,7 @@ export const Head = ({ pageContext }) => {
         pageTitle={pageTitle}
         siteTitle={siteTitle}
         showDocsLandingTitle={isDocsLandingHomepage}
+        slug={slug}
       />
       {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
