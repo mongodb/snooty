@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix, graphql } from 'gatsby';
 import { ImageContextProvider } from '../context/image-context';
@@ -21,6 +21,7 @@ import Twitter from './Twitter';
 import DocsLandingSD from './StructuredData/DocsLandingSD';
 import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 import { InstruqtProvider } from './Instruqt/instruqt-context';
+import { SuspenseHelper } from './SuspenseHelper';
 
 // lazy load the unified footer to improve page load speed
 const LazyFooter = lazy(() =>
@@ -164,9 +165,9 @@ const DocumentBody = (props) => {
       </InstruqtProvider>
       {!isInPresentationMode && (
         <div data-testid="consistent-footer" id="footer-container">
-          <Suspense>
+          <SuspenseHelper fallback={null}>
             <LazyFooter hideLocale={HIDE_UNIFIED_FOOTER_LOCALE} onSelectLocale={onSelectLocale} />
-          </Suspense>
+          </SuspenseHelper>
         </div>
       )}
     </>

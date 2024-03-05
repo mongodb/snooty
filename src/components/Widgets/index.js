@@ -1,9 +1,10 @@
-import React, { Suspense, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { isBrowser } from '../../utils/is-browser';
 import { theme } from '../../theme/docsTheme';
 import { InstruqtContext } from '../Instruqt/instruqt-context';
+import { SuspenseHelper } from '../SuspenseHelper';
 import { FeedbackProvider, FeedbackForm, FeedbackButton, useFeedbackData } from './FeedbackWidget';
 import ChatbotFab from './ChatbotWidget/ChatbotFab';
 
@@ -54,13 +55,13 @@ const Widgets = ({ children, pageOptions, pageTitle, slug, isInPresentationMode,
       {children}
       {!isInPresentationMode && !hideFeedback && (
         /* Suspense at this level ensures that widgets will appear simultaneously rather than one-by-one as loaded */
-        <Suspense fallback={null}>
+        <SuspenseHelper fallback={null}>
           <WidgetsContainer className={widgetsContainer} hasOpenLabDrawer={isOpen}>
             <FeedbackButton />
             <FeedbackForm />
             {template !== 'landing' && <ChatbotFab />}
           </WidgetsContainer>
-        </Suspense>
+        </SuspenseHelper>
       )}
     </FeedbackProvider>
   );

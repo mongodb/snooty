@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { lazy } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -6,6 +6,7 @@ import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { SuspenseHelper } from './SuspenseHelper';
 
 const SKELETON_BORDER_RADIUS = '12px';
 
@@ -94,18 +95,20 @@ const ChatbotUi = ({ template }) => {
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
-      <Suspense fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
+      <SuspenseHelper fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
         <Chatbot maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
-          <DocsChatbot
-            suggestedPrompts={[
-              'How do you deploy a free cluster in Atlas?',
-              'How do you import or migrate data into MongoDB Atlas?',
-              'Get started with MongoDB',
-              'Why should I use Atlas Search?',
-            ]}
-          />
+          <SuspenseHelper fallback={'Chatbot...'}>
+            <DocsChatbot
+              suggestedPrompts={[
+                'How do you deploy a free cluster in Atlas?',
+                'How do you import or migrate data into MongoDB Atlas?',
+                'Get started with MongoDB',
+                'Why should I use Atlas Search?',
+              ]}
+            />
+          </SuspenseHelper>
         </Chatbot>
-      </Suspense>
+      </SuspenseHelper>
     </StyledChatBotUiContainer>
   );
 };
