@@ -13,7 +13,7 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug }) =>
 
   const hrefLangLinks = Object.entries(localeHrefMap).map(([langCode, href]) => {
     const hrefLang = langCode === 'en-us' ? 'x-default' : langCode;
-    // Do not remove class. This is used to prevent Smartling's CDN from potentially overwriting these links
+    // Do not remove class. This is used to prevent Smartling from potentially overwriting these links
     const smartlingNoRewriteClass = 'sl_norewrite';
     return <link key={hrefLang} className={smartlingNoRewriteClass} rel="alternate" hrefLang={hrefLang} href={href} />;
   });
