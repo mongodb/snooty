@@ -10,7 +10,7 @@ const Footer = ({ slug }) => {
   const location = useLocation();
 
   const onSelectLocale = (locale) => {
-    const localeHrefMap = getLocaleMapping(location, slug);
+    const localeHrefMap = getLocaleMapping(location.origin, slug);
 
     if (isBrowser) {
       window.location.href = localeHrefMap[locale];

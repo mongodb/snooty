@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from '@gatsbyjs/reach-router';
 import { getLocaleMapping } from '../utils/locale';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const DEFAULT_TWITTER_SITE = '@mongodb';
 const metaUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
 
 const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug }) => {
-  const location = useLocation();
-  const localeHrefMap = getLocaleMapping(location, slug);
+  // Using static siteUrl instead of location.origin due to origin being undefined at build time
+  const { siteUrl } = useSiteMetadata();
+  const localeHrefMap = getLocaleMapping(siteUrl, slug);
 
   const hrefLangLinks = Object.entries(localeHrefMap).map(([langCode, href]) => {
     const hrefLang = langCode === 'en-us' ? 'x-default' : langCode;

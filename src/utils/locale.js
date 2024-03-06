@@ -13,14 +13,14 @@ export const AVAILABLE_LANGUAGES = [
  * Returns a mapping of a page's URL and its equivalent URLs for different languages.
  * @param {string} slug
  */
-export const getLocaleMapping = (location, slug) => {
+export const getLocaleMapping = (siteUrl, slug) => {
   // handle the `/` path
   const slugForUrl = slug === '/' ? `${withPrefix('')}` : `${withPrefix(slug)}`;
   const localeHrefMap = {};
 
   AVAILABLE_LANGUAGES.forEach(({ code }) => {
     const langPrefix = code === 'en-us' ? '' : `/${code}`;
-    const targetUrl = `${location.origin}${langPrefix}${slugForUrl}`;
+    const targetUrl = `${siteUrl}${langPrefix}${slugForUrl}`;
     localeHrefMap[code] = assertTrailingSlash(targetUrl);
   });
 
