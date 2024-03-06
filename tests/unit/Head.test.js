@@ -14,9 +14,14 @@ import mockHeadPageContext from './data/HeadPageContext.test.json';
 jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 
 describe('Head', () => {
+  beforeEach(() => {
+    mockStaticQuery({
+      siteUrl: DOTCOM_BASE_URL,
+    });
+  });
+
   describe("Canonical for completely EOL'd", () => {
     beforeEach(() => {
-      mockStaticQuery({});
       useSnootyMetadata.mockImplementation(() => mockEOLSnootyMetadata);
     });
     it('renders the canonical tag from the snooty.toml', () => {
@@ -32,7 +37,7 @@ describe('Head', () => {
 
   describe("Canonical for EOL'd version", () => {
     beforeEach(() => {
-      mockStaticQuery({}, mockEOLSnootyMetadata);
+      useSnootyMetadata.mockImplementation(() => mockEOLSnootyMetadata);
     });
     it('renders the canonical tag structured from the Head component with trailing slash', () => {
       render(<Head pageContext={mockHeadPageContext} />);
@@ -116,7 +121,7 @@ describe('Head', () => {
     it('renders the canonical tag from directive rather than pulling from default logic', () => {
       //need to override what happens in the beforeEach of this describe
       const modMockEOLSnootyMetadataToBeNotEOL = { ...mockEOLSnootyMetadata, eol: false };
-      mockStaticQuery({}, modMockEOLSnootyMetadataToBeNotEOL);
+      useSnootyMetadata.mockImplementation(() => modMockEOLSnootyMetadataToBeNotEOL);
 
       mockPageContext.page.children.push(metaCanonical);
       render(<Head pageContext={mockPageContext} />);
@@ -128,9 +133,6 @@ describe('Head', () => {
 
   describe('hreflang links', () => {
     beforeEach(() => {
-      mockStaticQuery({
-        siteUrl: DOTCOM_BASE_URL,
-      });
       useSnootyMetadata.mockImplementation(() => ({ ...mockEOLSnootyMetadata, eol: false }));
     });
 

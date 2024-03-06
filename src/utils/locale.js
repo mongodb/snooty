@@ -18,7 +18,7 @@ export const AVAILABLE_LANGUAGES = [
 export const getLocaleMapping = (siteUrl, slug) => {
   // handle the `/` path
   const slugForUrl = slug === '/' ? withPrefix('') : withPrefix(slug);
-  const normalizedSiteUrl = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
+  const normalizedSiteUrl = siteUrl?.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
   const localeHrefMap = {};
 
   AVAILABLE_LANGUAGES.forEach(({ code }) => {
