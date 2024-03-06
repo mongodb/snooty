@@ -5,6 +5,8 @@ import mockStaticQuery from '../utils/mockStaticQuery';
 import { useSiteMetadata } from '../../src/hooks/use-site-metadata';
 import { usePathPrefix } from '../../src/hooks/use-path-prefix';
 import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
+import { AVAILABLE_LANGUAGES } from '../../src/utils/locale';
+import { DOTCOM_BASE_URL } from '../../src/utils/base-url';
 import mockCompleteEOLPageContext from './data/CompleteEOLPageContext.json';
 import mockEOLSnootyMetadata from './data/EOLSnootyMetadata.json';
 import mockHeadPageContext from './data/HeadPageContext.test.json';
@@ -12,9 +14,14 @@ import mockHeadPageContext from './data/HeadPageContext.test.json';
 jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 
 describe('Head', () => {
+  beforeEach(() => {
+    mockStaticQuery({
+      siteUrl: DOTCOM_BASE_URL,
+    });
+  });
+
   describe("Canonical for completely EOL'd", () => {
     beforeEach(() => {
-      mockStaticQuery({});
       useSnootyMetadata.mockImplementation(() => mockEOLSnootyMetadata);
     });
     it('renders the canonical tag from the snooty.toml', () => {
@@ -30,7 +37,7 @@ describe('Head', () => {
 
   describe("Canonical for EOL'd version", () => {
     beforeEach(() => {
-      mockStaticQuery({}, mockEOLSnootyMetadata);
+      useSnootyMetadata.mockImplementation(() => mockEOLSnootyMetadata);
     });
     it('renders the canonical tag structured from the Head component with trailing slash', () => {
       render(<Head pageContext={mockHeadPageContext} />);
@@ -114,13 +121,27 @@ describe('Head', () => {
     it('renders the canonical tag from directive rather than pulling from default logic', () => {
       //need to override what happens in the beforeEach of this describe
       const modMockEOLSnootyMetadataToBeNotEOL = { ...mockEOLSnootyMetadata, eol: false };
-      mockStaticQuery({}, modMockEOLSnootyMetadataToBeNotEOL);
+      useSnootyMetadata.mockImplementation(() => modMockEOLSnootyMetadataToBeNotEOL);
 
       mockPageContext.page.children.push(metaCanonical);
       render(<Head pageContext={mockPageContext} />);
 
       const canonicalTag = screen.getByTestId('canonical');
       expectCanonicalTagToBeCorrect(canonicalTag);
+    });
+  });
+
+  describe('hreflang links', () => {
+    beforeEach(() => {
+      useSnootyMetadata.mockImplementation(() => ({ ...mockEOLSnootyMetadata, eol: false }));
+    });
+
+    it.each([['/'], ['foo']])('renders based on slug', (slug) => {
+      const mockPageContext = { ...mockHeadPageContext, slug };
+      const { container } = render(<Head pageContext={mockPageContext} />);
+      const hrefLangLinks = container.querySelectorAll('link.sl_norewrite');
+      expect(hrefLangLinks).toHaveLength(AVAILABLE_LANGUAGES.length);
+      expect(hrefLangLinks).toMatchSnapshot();
     });
   });
 });

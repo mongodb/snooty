@@ -1,6 +1,6 @@
-import React, { useState, useEffect, lazy } from 'react';
+import React, { useState, lazy } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import { ImageContextProvider } from '../context/image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
@@ -9,9 +9,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
-import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { isBrowser } from '../utils/is-browser';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -24,11 +22,7 @@ import { InstruqtProvider } from './Instruqt/instruqt-context';
 import { SuspenseHelper } from './SuspenseHelper';
 
 // lazy load the unified footer to improve page load speed
-const LazyFooter = lazy(() =>
-  import('@mdb/consistent-nav').then((module) => ({
-    default: module.UnifiedFooter,
-  }))
-);
+const LazyFooter = lazy(() => import('./Footer'));
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
@@ -79,35 +73,10 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
-const HIDE_UNIFIED_FOOTER_LOCALE = process.env['GATSBY_HIDE_UNIFIED_FOOTER_LOCALE'] === 'true';
-const AVAILABLE_LANGUAGES = ['English', '简体中文', '한국어', 'Português'];
-
 const DocumentBody = (props) => {
   const { location, data, pageContext } = props;
   const page = data?.page?.ast;
   const { slug, template } = pageContext;
-
-  useEffect(() => {
-    // A workaround to remove the other locale options.
-    if (!HIDE_UNIFIED_FOOTER_LOCALE) {
-      const footer = document.getElementById('footer-container');
-      const footerUlElement = footer?.querySelector('ul[role=listbox]');
-      if (footerUlElement) {
-        // For DOP-4296 we only want to support English,Simple Chinese,Korean, and Portuguese.
-        const availableOptions = Array.from(footerUlElement.childNodes).reduce((accumulator, child) => {
-          if (AVAILABLE_LANGUAGES.includes(child.textContent)) {
-            accumulator.push(child);
-          }
-          return accumulator;
-        }, []);
-
-        footerUlElement.innerHTML = null;
-        availableOptions.forEach((child) => {
-          footerUlElement.appendChild(child);
-        });
-      }
-    }
-  }, []);
 
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
@@ -126,20 +95,6 @@ const DocumentBody = (props) => {
   const { Template, useChatbot } = getTemplate(template);
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
-
-  const slugForUrl = slug === '/' ? `${withPrefix('')}` : `${withPrefix(slug)}`; // handle the `/` path
-  const onSelectLocale = (locale) => {
-    const localeHrefMap = {
-      'zh-cn': `${location.origin}/zh-cn${slugForUrl}`,
-      'en-us': `${location.origin}${slugForUrl}`,
-      'ko-kr': `${location.origin}/ko-kr${slugForUrl}`,
-      'pt-br': `${location.origin}/pt-br${slugForUrl}`,
-    };
-
-    if (isBrowser) {
-      window.location.href = assertTrailingSlash(localeHrefMap[locale]);
-    }
-  };
 
   return (
     <>
@@ -166,7 +121,7 @@ const DocumentBody = (props) => {
       {!isInPresentationMode && (
         <div data-testid="consistent-footer" id="footer-container">
           <SuspenseHelper fallback={null}>
-            <LazyFooter hideLocale={HIDE_UNIFIED_FOOTER_LOCALE} onSelectLocale={onSelectLocale} />
+            <LazyFooter slug={slug} />
           </SuspenseHelper>
         </div>
       )}
@@ -211,6 +166,7 @@ export const Head = ({ pageContext }) => {
         pageTitle={pageTitle}
         siteTitle={siteTitle}
         showDocsLandingTitle={isDocsLandingHomepage}
+        slug={slug}
       />
       {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
