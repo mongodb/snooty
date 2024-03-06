@@ -11,16 +11,19 @@ export const AVAILABLE_LANGUAGES = [
 
 /**
  * Returns a mapping of a page's URL and its equivalent URLs for different languages.
+ * @param {string} siteUrl
  * @param {string} slug
+ * @returns {object}
  */
 export const getLocaleMapping = (siteUrl, slug) => {
   // handle the `/` path
-  const slugForUrl = slug === '/' ? `${withPrefix('')}` : `${withPrefix(slug)}`;
+  const slugForUrl = slug === '/' ? withPrefix('') : withPrefix(slug);
+  const normalizedSiteUrl = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
   const localeHrefMap = {};
 
   AVAILABLE_LANGUAGES.forEach(({ code }) => {
     const langPrefix = code === 'en-us' ? '' : `/${code}`;
-    const targetUrl = `${siteUrl}${langPrefix}${slugForUrl}`;
+    const targetUrl = `${normalizedSiteUrl}${langPrefix}${slugForUrl}`;
     localeHrefMap[code] = assertTrailingSlash(targetUrl);
   });
 
