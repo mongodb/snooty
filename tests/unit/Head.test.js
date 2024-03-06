@@ -5,6 +5,8 @@ import mockStaticQuery from '../utils/mockStaticQuery';
 import { useSiteMetadata } from '../../src/hooks/use-site-metadata';
 import { usePathPrefix } from '../../src/hooks/use-path-prefix';
 import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
+import { AVAILABLE_LANGUAGES } from '../../src/utils/locale';
+import { DOTCOM_BASE_URL } from '../../src/utils/base-url';
 import mockCompleteEOLPageContext from './data/CompleteEOLPageContext.json';
 import mockEOLSnootyMetadata from './data/EOLSnootyMetadata.json';
 import mockHeadPageContext from './data/HeadPageContext.test.json';
@@ -121,6 +123,23 @@ describe('Head', () => {
 
       const canonicalTag = screen.getByTestId('canonical');
       expectCanonicalTagToBeCorrect(canonicalTag);
+    });
+  });
+
+  describe('hreflang links', () => {
+    beforeEach(() => {
+      mockStaticQuery({
+        siteUrl: DOTCOM_BASE_URL,
+      });
+      useSnootyMetadata.mockImplementation(() => ({ ...mockEOLSnootyMetadata, eol: false }));
+    });
+
+    it.each([['/'], ['foo']])('renders based on slug', (slug) => {
+      const mockPageContext = { ...mockHeadPageContext, slug };
+      const { container } = render(<Head pageContext={mockPageContext} />);
+      const hrefLangLinks = container.querySelectorAll('link.sl_norewrite');
+      expect(hrefLangLinks).toHaveLength(AVAILABLE_LANGUAGES.length);
+      expect(hrefLangLinks).toMatchSnapshot();
     });
   });
 });
