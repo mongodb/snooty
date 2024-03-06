@@ -32,6 +32,7 @@ function getImageProps({
   directiveClass,
   imgSrc,
   srcSet,
+  loading,
 }) {
   const imageProps = {
     alt: altText ?? '',
@@ -44,7 +45,7 @@ function getImageProps({
     imageProps['height'] = height;
   }
 
-  if (gatsbyImage) {
+  if (gatsbyImage && loading === 'lazy') {
     imageProps['image'] = gatsbyImage;
     imageProps['imgClassName'] = cx(defaultStyling, hasBorder ? borderStyling : '');
     imageProps['className'] = cx(gatsbyContainerStyle, directiveClass, customAlign, className);
@@ -110,6 +111,7 @@ const Image = ({ nodeData, className }) => {
     directiveClass,
     imgSrc,
     srcSet,
+    loading,
   });
 
   if (loading === 'lazy' && gatsbyImage) {
