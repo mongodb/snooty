@@ -41,10 +41,8 @@ describe('DocumentBody', () => {
     expect(footer).toBeVisible();
     expect(footer).toMatchSnapshot();
 
-    if (!process.env.GATSBY_HIDE_UNIFIED_FOOTER_LOCALE) {
-      const languageSelector = await screen.findByTestId('options');
-      expect(languageSelector).toBeInTheDocument();
-    }
+    const languageSelector = await screen.findByTestId('options');
+    expect(languageSelector).toBeInTheDocument();
 
     const mainNav = await screen.findByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).toBeVisible();
