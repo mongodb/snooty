@@ -1,3 +1,5 @@
+console.log('env ', process.env.LHCI_BUILD_TOKEN);
+
 module.exports = {
   ci: {
     collect: {
