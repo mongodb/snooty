@@ -3,7 +3,7 @@ module.exports = {
     collect: {
       staticDistDir: './public',
       startServerCommand: 'npm run serve',
-      url: ['http://localhost:8080'],
+      url: ['http://localhost:8080', 'http://mongodb.com/docs'],
     },
     upload: {
       target: 'lhci',
