@@ -7,8 +7,6 @@ import ChatbotUi from '../components/ChatbotUi';
 
 const CONTENT_MAX_WIDTH = 1440;
 
-const SHOW_CHATBOT = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
-
 const Wrapper = styled('main')`
   margin: 0 auto;
   width: 100%;
@@ -54,8 +52,8 @@ const Landing = ({ children, pageContext, useChatbot }) => {
   return (
     <>
       <div>
-        <Wrapper newChatbotLanding={SHOW_CHATBOT && useChatbot}>
-          {SHOW_CHATBOT && useChatbot && <ChatbotUi template={pageContext?.template} />}
+        <Wrapper newChatbotLanding={useChatbot}>
+          {useChatbot && <ChatbotUi template={pageContext?.template} />}
           {children}
         </Wrapper>
       </div>
