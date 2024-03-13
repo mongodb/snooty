@@ -12,3 +12,5 @@ coverage/
 .env.*
 .vscode/
 .env
+src/components/FilteredComponentFactory.js
+.swc/

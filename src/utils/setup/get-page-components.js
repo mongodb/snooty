@@ -28,7 +28,6 @@ const getPageComponents = (rootNodes) => {
   rootNodes.forEach((rootNode) => {
     storeComponentNames(rootNode, componentNameSet);
   });
-
   return [...componentNameSet];
 };
 
