@@ -293,5 +293,40 @@ describe('VersionDropdown', () => {
       expect(navigate).toBeCalled();
       expect(navigate).toBeCalledWith('/docs-test/drivers/node/v.411/');
     });
+
+    it('calls the navigate function for translated pages', async () => {
+      // Pretend page exists on Korean-translated site
+      global.window = Object.create(window);
+      Object.defineProperty(window, 'location', {
+        value: {
+          pathname: '/ko-kr/docs-test/drivers/node/current',
+        },
+      });
+
+      await act(async () => {
+        mountConsumer();
+      });
+
+      const versionDropdown = screen.queryByRole('button', { name: 'master' });
+      expect(versionDropdown).toBeInTheDocument();
+
+      await act(async () => {
+        userEvent.click(versionDropdown);
+      });
+      await tick();
+
+      const versionOptionsDropdown = queryElementWithin(versionDropdown, 'listbox');
+      const versionOptions = within(versionOptionsDropdown).queryAllByRole('option');
+      expect(versionOptions.length).toBe(3);
+
+      await act(async () => {
+        userEvent.click(versionOptions[1], undefined, {
+          skipPointerEventsCheck: true,
+        });
+      });
+
+      await tick();
+      expect(navigate).toBeCalledWith('/ko-kr/docs-test/drivers/node/v.411/');
+    });
   });
 });
