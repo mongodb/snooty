@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`returns a valid mapping of URLs 1`] = `
+exports[`getLocaleMapping returns a valid mapping of URLs 1`] = `
 {
   "en-us": "https://www.mongodb.com/docs/",
   "ko-kr": "https://www.mongodb.com/docs/ko-kr/",
@@ -9,7 +9,7 @@ exports[`returns a valid mapping of URLs 1`] = `
 }
 `;
 
-exports[`returns a valid mapping of URLs 2`] = `
+exports[`getLocaleMapping returns a valid mapping of URLs 2`] = `
 {
   "en-us": "https://www.mongodb.com/docs/about/page/",
   "ko-kr": "https://www.mongodb.com/docs/ko-kr/about/page/",
@@ -18,7 +18,7 @@ exports[`returns a valid mapping of URLs 2`] = `
 }
 `;
 
-exports[`returns a valid mapping of URLs 3`] = `
+exports[`getLocaleMapping returns a valid mapping of URLs 3`] = `
 {
   "en-us": "https://www.mongodb.com/introduction/",
   "ko-kr": "https://www.mongodb.com/ko-kr/introduction/",
