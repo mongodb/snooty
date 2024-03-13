@@ -26,6 +26,8 @@ const getCurrLocale = () => {
 
   // This currently needs to be client-side because the source page doesn't know about locale at
   // build time. Smartling's GDN handles localization
+  // Example on https://www.mongodb.com/zh-cn/docs/manual/introduction:
+  // expected pathname - /zh-cn/docs/manual/introduction; expected locale - "zh-cn"
   const pathname = window.location.pathname;
   const expectedDocsPrefixes = ['docs', 'docs-qa'];
   const firstPathSlug = pathname.split('/', 2)[1];

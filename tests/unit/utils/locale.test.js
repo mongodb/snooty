@@ -51,7 +51,7 @@ describe('localizePath', () => {
     ['/', '/'],
     ['/page/slug', '/page/slug/'],
     ['page/slug', 'page/slug/'],
-  ])('returns the same page slug when English is found', (slug, expectedRes) => {
+  ])('returns the same page slug when English is found by default', (slug, expectedRes) => {
     const res = localizePath(slug);
     expect(res).toEqual(expectedRes);
   });

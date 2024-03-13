@@ -75,7 +75,7 @@ const fetchDocset = () => {
               aliases: null,
               gitBranchName: 'v4.11',
               urlSlug: null,
-              urlAliases: ['v.411'],
+              urlAliases: ['v4.11'],
               isStableBranch: true,
             },
             {
@@ -291,7 +291,7 @@ describe('VersionDropdown', () => {
       await tick();
 
       expect(navigate).toBeCalled();
-      expect(navigate).toBeCalledWith('/docs-test/drivers/node/v.411/');
+      expect(navigate).toBeCalledWith('/docs-test/drivers/node/v4.11/');
     });
 
     it('calls the navigate function for translated pages', async () => {
@@ -326,7 +326,7 @@ describe('VersionDropdown', () => {
       });
 
       await tick();
-      expect(navigate).toBeCalledWith('/ko-kr/docs-test/drivers/node/v.411/');
+      expect(navigate).toBeCalledWith('/ko-kr/docs-test/drivers/node/v4.11/');
     });
   });
 });
