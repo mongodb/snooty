@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, Fragment } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
@@ -40,7 +40,7 @@ const ChatbotFab = () => {
         <FloatingActionButtonTrigger text={CHATBOT_WIDGET_TEXT} />
         <ModalView
           disclaimer={
-            <>
+            <Fragment>
               <MongoDbLegalDisclosure />
               <PoweredByAtlasVectorSearch
                 linkStyle="text"
@@ -48,7 +48,7 @@ const ChatbotFab = () => {
                   margin-top: 8px;
                 `}
               />
-            </>
+            </Fragment>
           }
           initialMessageText="Welcome to the MongoDB AI Assistant. What can I help you with?"
           initialMessageSuggestedPrompts={suggestedPrompts}
