@@ -8,14 +8,12 @@ import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { theme } from '../../theme/docsTheme';
 
-const CHATBOT_ENABLED = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
-
 const StyledHeaderContainer = styled.header(
   (props) => `
   grid-area: header;
   top: 0;
   z-index: ${theme.zIndexes.header};
-  ${props.template !== 'landing' || !CHATBOT_ENABLED ? 'position: sticky;' : ''}
+  ${props.template === 'landing' ? '' : 'position: sticky;'}
   `
 );
 
