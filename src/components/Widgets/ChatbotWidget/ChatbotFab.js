@@ -2,7 +2,7 @@ import { lazy, Fragment } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
-import { DEFAULT_MAX_INPUT } from '../../ChatbotUi';
+import { DEFAULT_MAX_INPUT, defaultSuggestedPrompts } from '../../ChatbotUi';
 import { MongoDbLegalDisclosure } from './MongoDBLegal';
 import { PoweredByAtlasVectorSearch } from './PoweredByAtlasSearch';
 
@@ -21,12 +21,6 @@ const StyledChatBotFabContainer = styled.div`
 
 const ChatbotFab = () => {
   const { snootyEnv } = useSiteMetadata();
-
-  const suggestedPrompts = [
-    'How do you deploy a free cluster in Atlas?',
-    'How do you import or migrate data into MongoDB?',
-    'Get started with MongoDB',
-  ];
   const CHATBOT_SERVER_BASE_URL =
     snootyEnv === 'dotcomprd'
       ? 'https://knowledge.mongodb.com/api/v1'
@@ -51,7 +45,7 @@ const ChatbotFab = () => {
             </Fragment>
           }
           initialMessageText="Welcome to the MongoDB AI Assistant. What can I help you with?"
-          initialMessageSuggestedPrompts={suggestedPrompts}
+          initialMessageSuggestedPrompts={defaultSuggestedPrompts}
           inputBottomText={BOTTOM_TEXT}
         />
       </Chatbot>
