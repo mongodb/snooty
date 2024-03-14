@@ -139,7 +139,7 @@ describe('Head', () => {
     it.each([['/'], ['foo']])('renders based on slug', (slug) => {
       const mockPageContext = { ...mockHeadPageContext, slug };
       const { container } = render(<Head pageContext={mockPageContext} />);
-      const hrefLangLinks = container.querySelectorAll('link.sl_norewrite');
+      const hrefLangLinks = container.querySelectorAll('link.sl_opaque');
       expect(hrefLangLinks).toHaveLength(AVAILABLE_LANGUAGES.length);
       expect(hrefLangLinks).toMatchSnapshot();
     });
