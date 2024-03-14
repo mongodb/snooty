@@ -108,7 +108,7 @@ const getTopAndHeight = (topValue, template) => css`
   `}
 `;
 
-// Keep the side nav container sticky to allow LG's side nav to push content seemlessly
+// Keep the side nav container sticky to allow LG's side nav to push content seamlessly
 const SidenavContainer = styled.div(
   ({ topLarge, topMedium, topSmall, template }) => css`
     grid-area: sidenav;
