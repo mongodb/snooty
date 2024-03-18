@@ -11,6 +11,7 @@
  */
 
 import { Body, Link } from '@leafygreen-ui/typography';
+import { cx } from '@leafygreen-ui/emotion';
 
 const url = 'https://www.mongodb.com/products/platform/atlas-vector-search?tck=mongodb_ai_chatbot';
 const VectorSearchLink = ({ children }) => (
@@ -22,14 +23,14 @@ const VectorSearchLink = ({ children }) => (
 export function PoweredByAtlasVectorSearch({ className, linkStyle = 'learnMore' }) {
   if (linkStyle === 'learnMore') {
     return (
-      <Body className={className}>
+      <Body className={cx(className)}>
         Powered by Atlas Vector Search. <VectorSearchLink>Learn More.</VectorSearchLink>
       </Body>
     );
   }
   if (linkStyle === 'text') {
     return (
-      <Body className={className}>
+      <Body className={cx(className)}>
         Powered by <VectorSearchLink>Atlas Vector Search</VectorSearchLink>
       </Body>
     );

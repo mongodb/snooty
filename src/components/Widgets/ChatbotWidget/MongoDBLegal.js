@@ -27,7 +27,7 @@ export function MongoDbLegalDisclosure() {
   );
 
   return (
-    <Body>
+    <Body baseFontSize={13}>
       This is a generative AI chatbot. By interacting with it, you agree to MongoDB's <TermsOfUse /> and{' '}
       <AcceptableUsePolicy />.
     </Body>
