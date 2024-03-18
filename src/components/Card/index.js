@@ -141,6 +141,11 @@ const Card = ({
 
   const isLanding = template === 'landing';
   const Icon = ['landing', 'product-landing'].includes(template) ? CardIcon : CompactIcon;
+  const width = ['landing', 'product-landing'].includes(template) ? theme.size.large : theme.size.medium;
+  const height = ['landing', 'product-landing'].includes(template) ? theme.size.large : theme.size.medium;
+  // TODO
+  // need to determine the width/height based on card icon compact icon
+  // then pass that into icon ??? IDKKKK
 
   /* If tag == 'landing-bottom', this is 2nd group of cards on 
   landing page which we want to keep exempt from landing styles */
@@ -156,7 +161,7 @@ const Card = ({
 
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
-      {icon && <Icon src={withPrefix(icon)} alt={iconAlt} />}
+      {icon && <Icon src={withPrefix(icon)} alt={iconAlt} width={width} height={height} />}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
