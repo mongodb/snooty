@@ -281,34 +281,33 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     console.error(err);
     throw err;
   }
-  console.log(
-    `${process.cwd()}/component-factory-transformer/target/wasm32-wasi/release/component_factory_filter.wasm`
-  );
 
-  const { code } = await swc.transformFile(`${process.cwd()}/src/components/ComponentFactory.js`, {
-    filename: 'FilteredComponentFactory.js',
-    outputPath: `${process.cwd()}/src/components/`,
+  if (process.env.USE_FILTER_BRANCH) {
+    const { code } = await swc.transformFile(`${process.cwd()}/src/components/ComponentFactory.js`, {
+      filename: 'FilteredComponentFactory.js',
+      outputPath: `${process.cwd()}/src/components/`,
 
-    jsc: {
-      transform: {
-        react: {
-          runtime: 'classic',
+      jsc: {
+        transform: {
+          react: {
+            runtime: 'classic',
+          },
+        },
+        target: 'esnext',
+        parser: { jsx: true, syntax: 'ecmascript' },
+        experimental: {
+          plugins: [
+            [
+              `${process.cwd()}/component-factory-transformer/target/wasm32-wasi/release/component_factory_filter.wasm`,
+              { includes: [...Array.from(pageComponents), 'admonition'] },
+            ],
+          ],
         },
       },
-      target: 'esnext',
-      parser: { jsx: true, syntax: 'ecmascript' },
-      experimental: {
-        plugins: [
-          [
-            `${process.cwd()}/component-factory-transformer/target/wasm32-wasi/release/component_factory_filter.wasm`,
-            { includes: [...Array.from(pageComponents), 'admonition'] },
-          ],
-        ],
-      },
-    },
-  });
-  console.log(code);
-  await fs.writeFile(`${process.cwd()}/src/components/ComponentFactory.js`, code);
+    });
+    console.log(code);
+    await fs.writeFile(`${process.cwd()}/src/components/ComponentFactory.js`, code);
+  }
 
   // DOP-4214: for each page, query the directive/node types
   const pageList = await graphql(`
