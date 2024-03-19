@@ -60,6 +60,11 @@ const cardDriverStyle = css`
   padding: ${theme.size.default} ${theme.size.medium};
   align-items: center;
 
+  // override "height" HTML attribute
+  img {
+    height: 100%;
+  }
+
   p {
     margin: 0 0 0 18px;
     font-weight: 400;
