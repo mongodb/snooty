@@ -127,7 +127,11 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
     let includes_set: HashSet<String> = HashSet::from_iter(config.includes.iter().cloned());
     let mut get_components_transform = GetComponentNamesTransform {
         includes: includes_set.clone(),
-        component_names: HashSet::from_iter(vec!["LAZY_COMPONENTS".to_string()].iter().cloned()),
+        component_names: HashSet::from_iter(
+            vec!["LAZY_COMPONENTS".to_string(), "Admonition".to_string()]
+                .iter()
+                .cloned(),
+        ),
     };
 
     program
@@ -151,8 +155,8 @@ test_inline!(
     |_| as_folder(RemoveDirectivesTransform {
         includes: HashSet::from_iter(
             vec![
+                "Admonition".to_string(),
                 "Banner".to_string(),
-                "BlockQuote".to_string(),
                 "LAZY_COMPONENTS".to_string()
             ]
             .iter()
@@ -180,12 +184,12 @@ test_inline!(
     import React from 'react';
     import { LAZY_COMPONENTS } from './ComponentFactoryLazy';
 
+    import Admonition, { admonitionMap } from './Admonition';
     import Banner from './Banner/Banner';
-    import BlockQuote from './BlockQuote';
 
     export const componentMap = {
+        admonition: Admonition,
         banner: Banner,
-        blockquote: BlockQuote,
     };
     "#
 );

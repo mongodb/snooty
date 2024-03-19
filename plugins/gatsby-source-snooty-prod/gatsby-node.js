@@ -299,7 +299,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           plugins: [
             [
               `${process.cwd()}/component-factory-transformer/target/wasm32-wasi/release/component_factory_filter.wasm`,
-              { includes: [...Array.from(pageComponents), 'admonition'] },
+              { includes: [...Array.from(pageComponents)] },
             ],
           ],
         },
