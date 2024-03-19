@@ -11,6 +11,7 @@ import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
 import { theme } from '../../../../theme/docsTheme';
 import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_OVERLAY_ALT_TEXT } from '../constants';
+import { elementZIndex } from '../../../../utils/dynamically-set-z-index';
 
 const HIGHLIGHT_BORDER_SIZE = 5;
 
@@ -181,6 +182,8 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   const takeNewScreenshot = useCallback(() => {
     setIsScreenshotButtonClicked(true);
     domElementClickedRef.current = 'dashed';
+    //conditionally set the z-index on the widget card when the screenshot is clicked
+    elementZIndex.setZIndex('.widgets', 14);
     setSelectedElementBorderStyle('dashed');
   }, []);
 

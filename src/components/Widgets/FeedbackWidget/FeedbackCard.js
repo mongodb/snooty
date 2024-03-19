@@ -6,6 +6,7 @@ import { theme } from '../../../../src/theme/docsTheme';
 import useScreenSize from '../../../hooks/useScreenSize';
 import useStickyTopValues from '../../../hooks/useStickyTopValues';
 import { InstruqtContext } from '../../Instruqt/instruqt-context';
+import { elementZIndex } from '../../../utils/dynamically-set-z-index';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
@@ -52,11 +53,18 @@ const FeedbackCard = ({ isOpen, children }) => {
   const { topSmall } = useStickyTopValues();
   useNoScroll(isMobile);
 
+  const onClose = () => {
+    abandon();
+    // reset the z-index set by the screenshot button on line
+    // 185 in ScreenshotButton.js
+    elementZIndex.resetZIndex('.widgets');
+  };
+
   return (
     isOpen && (
       <FloatingContainer top={topSmall} id={feedbackId} hasOpenLabDrawer={isLabOpen}>
         <Card top={topSmall}>
-          <CloseButton onClick={() => abandon()} />
+          <CloseButton onClick={onClose} />
           <ProgressBar />
           <div>{children}</div>
         </Card>
