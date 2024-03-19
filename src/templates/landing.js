@@ -7,8 +7,6 @@ import ChatbotUi from '../components/ChatbotUi';
 
 const CONTENT_MAX_WIDTH = 1440;
 
-const SHOW_CHATBOT = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
-
 const Wrapper = styled('main')`
   margin: 0 auto;
   width: 100%;
@@ -43,6 +41,7 @@ const Wrapper = styled('main')`
       @media ${({ theme }) => theme.screenSize.mediumAndUp} {
         grid-column: 2 / -2 !important;
       }
+      max-width: 1200px;
     }
   }
 `;
@@ -53,8 +52,8 @@ const Landing = ({ children, pageContext, useChatbot }) => {
   return (
     <>
       <div>
-        <Wrapper newChatbotLanding={SHOW_CHATBOT && useChatbot}>
-          {SHOW_CHATBOT && useChatbot && <ChatbotUi template={pageContext?.template} />}
+        <Wrapper newChatbotLanding={useChatbot}>
+          {useChatbot && <ChatbotUi template={pageContext?.template} />}
           {children}
         </Wrapper>
       </div>
@@ -183,12 +182,8 @@ const Landing = ({ children, pageContext, useChatbot }) => {
               grid-column: 2 / -5;
             }
 
-            @media ${screenSize['2XLargeAndUp']} {
-              grid-column: 2 / -3;
-            }
-
             @media ${screenSize['3XLargeAndUp']} {
-              grid-column: 2 / -2;
+              grid-column: 2 / -4;
             }
           }
         `}

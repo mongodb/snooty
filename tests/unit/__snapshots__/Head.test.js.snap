@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Head hreflang links renders based on slug 1`] = `
+NodeList [
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/"
+    hreflang="x-default"
+    rel="alternate"
+  />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/zh-cn/"
+    hreflang="zh-cn"
+    rel="alternate"
+  />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/ko-kr/"
+    hreflang="ko-kr"
+    rel="alternate"
+  />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/pt-br/"
+    hreflang="pt-br"
+    rel="alternate"
+  />,
+]
+`;
+
+exports[`Head hreflang links renders based on slug 2`] = `
+NodeList [
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/foo/"
+    hreflang="x-default"
+    rel="alternate"
+  />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/zh-cn/foo/"
+    hreflang="zh-cn"
+    rel="alternate"
+  />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/ko-kr/foo/"
+    hreflang="ko-kr"
+    rel="alternate"
+  />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/pt-br/foo/"
+    hreflang="pt-br"
+    rel="alternate"
+  />,
+]
+`;
