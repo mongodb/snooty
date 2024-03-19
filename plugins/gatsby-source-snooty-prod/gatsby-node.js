@@ -284,9 +284,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   if (process.env.USE_FILTER_BRANCH) {
     const { code } = await swc.transformFile(`${process.cwd()}/src/components/ComponentFactory.js`, {
-      filename: 'FilteredComponentFactory.js',
-      outputPath: `${process.cwd()}/src/components/`,
-
       jsc: {
         transform: {
           react: {

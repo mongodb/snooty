@@ -17,10 +17,17 @@ pub struct RemoveDirectivesTransform {
 }
 
 impl VisitMut for RemoveDirectivesTransform {
-    // TODO: Add relative import check
     // Implement necessary visit_mut_* methods for actual custom transform.
     // A comprehensive list of possible visitor methods can be found here:
     // https://rustdoc.swc.rs/swc_ecma_visit/trait.VisitMut.html
+
+    /**
+     * This method visits module imports and exports.
+     * We specifically want to check default and named imports to see if the components that
+     * they have are in the list of directives we want to keep. We specifically look at the name of the components
+     * e.g. `import Card from './Card;` will check and see if the `Card` variable is a directive that the project
+     * uses.
+     */
     fn visit_mut_module_items(&mut self, n: &mut std::vec::Vec<ModuleItem>) {
         n.visit_mut_children_with(self);
 
@@ -34,14 +41,15 @@ impl VisitMut for RemoveDirectivesTransform {
 
                     let first_char = import_src.chars().nth(0).unwrap_or_default();
 
+                    // we don't want to remove non-relative imports
                     if first_char != '.' {
                         return true;
                     }
 
                     for spec in import.specifiers.iter() {
                         match spec {
-                            ImportSpecifier::Default(default) => {
-                                let component_name = default.local.sym.as_str();
+                            ImportSpecifier::Default(default_import) => {
+                                let component_name = default_import.local.sym.as_str();
 
                                 if self.includes.contains(component_name) {
                                     return true;
@@ -57,14 +65,17 @@ impl VisitMut for RemoveDirectivesTransform {
                             _ => {}
                         }
                     }
-                    false
+                    return false;
                 }
-                _ => true,
+                _ => return true,
             },
-            _ => true,
+            _ => return true,
         });
     }
 
+    /**
+     * This method traverses variable declarations. We want to check the `componentMap` and `roleMap` variables.
+     */
     fn visit_mut_var_declarator(&mut self, n: &mut VarDeclarator) {
         match n.name {
             Pat::Ident(ref mut name) => {
@@ -86,6 +97,9 @@ impl VisitMut for RemoveDirectivesTransform {
     }
 }
 
+/**
+ * This function removes unused directives from the `componentMap` and `roleMap` objects.
+ */
 fn remove_unused_obj_directives(includes: &HashSet<String>, n: &mut ObjectLit) {
     n.props.retain(|prop| match prop {
         PropOrSpread::Prop(p) => {
@@ -98,13 +112,13 @@ fn remove_unused_obj_directives(includes: &HashSet<String>, n: &mut ObjectLit) {
                             let component_name = value_ident.sym.as_str();
                             includes.contains(component_name)
                         }
-                        _ => true,
+                        _ => return true,
                     }
                 }
-                _ => true,
+                _ => return true,
             }
         }
-        _ => true,
+        _ => return true,
     })
 }
 
