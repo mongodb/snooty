@@ -214,6 +214,8 @@ Once Rust is installed, you'll need to build the plugin. Change directory to `co
 
 The `USE_FILTER_BRANCH` environment variable needs to be added in the `.env.production` file and set to `true` for this to work.
 
+NOTE: This will modify the `ComponentFactory.js` file directly. To undo this, you can run `git restore src/components/ComponentFactory.js` to get the file back to its original state.
+
 ### Useful Resources
 
 [React](https://reactjs.org/docs/getting-started.html)
