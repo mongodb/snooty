@@ -138,17 +138,20 @@ const Card = ({
   const template = page?.options?.template;
 
   const isLanding = template === 'landing';
-  const styles = ['landing', 'product-landing'].includes(template)
-    ? { dim: theme.size.large, style: '' }
-    : { dim: theme.size.medium, style: compactIconStyle }; // used for both width/height
-
-  // TODO
-  // need to determine the width/height based on card icon compact icon
-  // then pass that into icon ??? IDKKKK
 
   /* If tag == 'landing-bottom', this is 2nd group of cards on 
   landing page which we want to keep exempt from landing styles */
   const isLandingBottom = tag === 'landing-bottom';
+
+  let dim;
+  if (isLanding && isLandingBottom) dim = '50px';
+  else if (isLanding) dim = theme.size.xlarge;
+  else if (template === 'product-landing') dim = theme.size.large;
+  else dim = theme.size.medium;
+
+  const styles = ['landing', 'product-landing'].includes(template)
+    ? { dim: dim, style: '' }
+    : { dim: dim, style: compactIconStyle }; // used for both width/height
 
   const styling = [
     cardBaseStyles,
