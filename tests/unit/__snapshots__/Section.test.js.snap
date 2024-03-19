@@ -50,7 +50,9 @@ exports[`renders correctly 1`] = `
       >
         <img
           class="emotion-2 emotion-3"
+          height="10px"
           src="/assets/link.svg"
+          width="10px"
         />
       </a>
       <div

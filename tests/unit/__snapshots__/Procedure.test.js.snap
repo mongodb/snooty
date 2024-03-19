@@ -377,7 +377,9 @@ exports[`renders steps nested in include nodes 1`] = `
             >
               <img
                 class="emotion-11 emotion-12"
+                height="10px"
                 src="/assets/link.svg"
+                width="10px"
               />
             </a>
             <div
@@ -421,7 +423,9 @@ exports[`renders steps nested in include nodes 1`] = `
             >
               <img
                 class="emotion-11 emotion-12"
+                height="10px"
                 src="/assets/link.svg"
+                width="10px"
               />
             </a>
             <div
@@ -465,7 +469,9 @@ exports[`renders steps nested in include nodes 1`] = `
             >
               <img
                 class="emotion-11 emotion-12"
+                height="10px"
                 src="/assets/link.svg"
+                width="10px"
               />
             </a>
             <div
@@ -509,7 +515,9 @@ exports[`renders steps nested in include nodes 1`] = `
             >
               <img
                 class="emotion-11 emotion-12"
+                height="10px"
                 src="/assets/link.svg"
+                width="10px"
               />
             </a>
             <div
@@ -553,7 +561,9 @@ exports[`renders steps nested in include nodes 1`] = `
             >
               <img
                 class="emotion-11 emotion-12"
+                height="10px"
                 src="/assets/link.svg"
+                width="10px"
               />
             </a>
             <div
@@ -597,7 +607,9 @@ exports[`renders steps nested in include nodes 1`] = `
             >
               <img
                 class="emotion-11 emotion-12"
+                height="10px"
                 src="/assets/link.svg"
+                width="10px"
               />
             </a>
             <div
@@ -641,7 +653,9 @@ exports[`renders steps nested in include nodes 1`] = `
             >
               <img
                 class="emotion-11 emotion-12"
+                height="10px"
                 src="/assets/link.svg"
+                width="10px"
               />
             </a>
             <div

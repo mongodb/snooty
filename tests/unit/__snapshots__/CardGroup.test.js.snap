@@ -105,17 +105,13 @@ exports[`renders correctly 1`] = `
   margin-bottom: 0;
 }
 
-.emotion-3 {
-  width: 24px;
-}
-
 @media only screen and (max-width: 480px) {
-  .emotion-3 {
+  .emotion-2 {
     width: 20px;
   }
 }
 
-.emotion-5 {
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -128,16 +124,16 @@ exports[`renders correctly 1`] = `
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-5 {
+  .emotion-3 {
     margin-left: 16px;
   }
 }
 
-.emotion-5 p {
+.emotion-3 p {
   line-height: 24px;
 }
 
-.emotion-7 {
+.emotion-5 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -148,12 +144,12 @@ exports[`renders correctly 1`] = `
   margin-bottom: 16px;
 }
 
-.emotion-7 strong,
-.emotion-7 b {
+.emotion-5 strong,
+.emotion-5 b {
   font-weight: 700;
 }
 
-.emotion-8 {
+.emotion-6 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -163,16 +159,16 @@ exports[`renders correctly 1`] = `
   font-weight: 400;
 }
 
-.emotion-8 strong,
-.emotion-8 b {
+.emotion-6 strong,
+.emotion-6 b {
   font-weight: 700;
 }
 
-.emotion-8 a {
+.emotion-6 a {
   line-height: unset;
 }
 
-.emotion-9 {
+.emotion-7 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -194,22 +190,22 @@ exports[`renders correctly 1`] = `
   text-decoration: none!important;
 }
 
-.emotion-9:hover,
-.emotion-9:focus,
-.emotion-9:visited {
+.emotion-7:hover,
+.emotion-7:focus,
+.emotion-7:visited {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-9:focus {
+.emotion-7:focus {
   outline: none;
 }
 
-.emotion-10 {
+.emotion-8 {
   position: relative;
 }
 
-.emotion-10::after {
+.emotion-8::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -219,11 +215,11 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-0001:focus .emotion-10::after {
+.lg-ui-0001:focus .emotion-8::after {
   background-color: #0498EC;
 }
 
-.lg-ui-0001:hover .emotion-10::after {
+.lg-ui-0001:hover .emotion-8::after {
   background-color: #E8EDEB;
 }
 
@@ -235,28 +231,34 @@ exports[`renders correctly 1`] = `
     >
       <img
         alt="MongoDB Atlas icon"
-        class="emotion-3 emotion-4"
+        class="
+  @media only screen and (max-width: 480px) {
+    width: 20px;
+  }
+"
+        height="24px"
         src="/images/icons/atlas.svg"
+        width="24px"
       />
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3 emotion-4"
       >
         <div>
           <p
-            class="emotion-7"
+            class="emotion-5"
           >
             Use Compass to connect to your Atlas cluster
           </p>
           <p
-            class="emotion-8"
+            class="emotion-6"
           >
             <a
-              class="lg-ui-0001 emotion-9"
+              class="lg-ui-0001 emotion-7"
               href="https://www.mongodb.com/docs/atlas/getting-started/"
               target="_self"
             >
               <span
-                class="emotion-10"
+                class="emotion-8"
               >
                 Read Atlas docs
               </span>
@@ -270,28 +272,34 @@ exports[`renders correctly 1`] = `
     >
       <img
         alt="MongoDB University icon"
-        class="emotion-3 emotion-4"
+        class="
+  @media only screen and (max-width: 480px) {
+    width: 20px;
+  }
+"
+        height="24px"
         src="/images/icons/university.svg"
+        width="24px"
       />
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3 emotion-4"
       >
         <div>
           <p
-            class="emotion-7"
+            class="emotion-5"
           >
             Learn MongoDB Basics with MongoDB University
           </p>
           <p
-            class="emotion-8"
+            class="emotion-6"
           >
             <a
-              class="lg-ui-0001 emotion-9"
+              class="lg-ui-0001 emotion-7"
               href="https://university.mongodb.com/courses/M001/about"
               target="_self"
             >
               <span
-                class="emotion-10"
+                class="emotion-8"
               >
                 Learn MongoDB Basics
               </span>
@@ -305,28 +313,34 @@ exports[`renders correctly 1`] = `
     >
       <img
         alt="MongoDB Server icon"
-        class="emotion-3 emotion-4"
+        class="
+  @media only screen and (max-width: 480px) {
+    width: 20px;
+  }
+"
+        height="24px"
         src="/images/icons/server.svg"
+        width="24px"
       />
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3 emotion-4"
       >
         <div>
           <p
-            class="emotion-7"
+            class="emotion-5"
           >
             Access more in-depth examples of querying data
           </p>
           <p
-            class="emotion-8"
+            class="emotion-6"
           >
             <a
-              class="lg-ui-0001 emotion-9"
+              class="lg-ui-0001 emotion-7"
               href="https://www.mongodb.com/docs/manual/tutorial/getting-started/"
               target="_self"
             >
               <span
-                class="emotion-10"
+                class="emotion-8"
               >
                 Read Server docs
               </span>
