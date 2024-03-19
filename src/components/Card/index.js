@@ -76,12 +76,7 @@ const landingBottomStyling = css`
   }
 `;
 
-const CardIcon = styled('img')`
-  width: ${theme.size.large};
-`;
-
-const CompactIcon = styled('img')`
-  width: ${theme.size.medium};
+const compactIconStyle = `
   @media ${theme.screenSize.upToSmall} {
     width: 20px;
   }
@@ -101,6 +96,9 @@ const compactCardStyling = css`
   align-items: flex-start;
   flex-direction: row;
   padding: ${theme.size.large} ${theme.size.medium};
+  @media ${theme.screenSize.upToSmall} {
+    width: 20px;
+  }
 `;
 
 const CompactTextWrapper = styled('div')`
@@ -140,9 +138,10 @@ const Card = ({
   const template = page?.options?.template;
 
   const isLanding = template === 'landing';
-  const Icon = ['landing', 'product-landing'].includes(template) ? CardIcon : CompactIcon;
-  const width = ['landing', 'product-landing'].includes(template) ? theme.size.large : theme.size.medium;
-  const height = ['landing', 'product-landing'].includes(template) ? theme.size.large : theme.size.medium;
+  const styles = ['landing', 'product-landing'].includes(template)
+    ? { dim: theme.size.large, style: '' }
+    : { dim: theme.size.medium, style: compactIconStyle }; // used for both width/height
+
   // TODO
   // need to determine the width/height based on card icon compact icon
   // then pass that into icon ??? IDKKKK
@@ -161,7 +160,9 @@ const Card = ({
 
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
-      {icon && <Icon src={withPrefix(icon)} alt={iconAlt} width={width} height={height} />}
+      {icon && (
+        <img src={withPrefix(icon)} alt={iconAlt} width={styles.dim} height={styles.dim} className={cx(styles.style)} />
+      )}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
