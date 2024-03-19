@@ -13,6 +13,13 @@ pub struct GetComponentNamesTransform {
     pub component_names: HashSet<String>,
 }
 
+/**
+ * This transformer retrieves the imported component name to determine which imports to remove.
+ * This is needed to be done because the name of the imports don't match with the name of the directive itself.
+ * For example, the `blockquote` directive does not match exactly the name of the default import for it, or for the
+ * file that is being imported (`import BlockQuote from './BlockQuote';`). Because of this, we need to get the correct
+ * imported component name, and then use that in the root transformer to perform the filtering process.
+ */
 impl VisitMut for GetComponentNamesTransform {
     fn visit_mut_object_lit(&mut self, n: &mut ObjectLit) {
         for prop in n.props.iter() {
