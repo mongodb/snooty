@@ -22,6 +22,6 @@ export const elementZIndex = {
       return;
     }
 
-    ele.style.zIndex = 1;
+    ele.style.zIndex = 0;
   },
 };
