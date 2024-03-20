@@ -86,12 +86,6 @@ exports[`card correctly with and without url 1`] = `
   margin-bottom: 0;
 }
 
-@media only screen and (max-width: 480px) {
-  .emotion-2 {
-    width: 20px;
-  }
-}
-
 .emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -258,12 +252,6 @@ exports[`card correctly with and without url 1`] = `
 
 .emotion-20 p:last-of-type {
   margin-bottom: 0;
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-20 {
-    width: 20px;
-  }
 }
 
 .emotion-25 {
