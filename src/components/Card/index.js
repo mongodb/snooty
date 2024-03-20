@@ -101,9 +101,6 @@ const compactCardStyling = css`
   align-items: flex-start;
   flex-direction: row;
   padding: ${theme.size.large} ${theme.size.medium};
-  @media ${theme.screenSize.upToSmall} {
-    width: 20px;
-  }
 `;
 
 const CompactTextWrapper = styled('div')`
