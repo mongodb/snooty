@@ -156,7 +156,7 @@ const Card = ({
 
   const styles = ['landing', 'product-landing'].includes(template)
     ? { dim: dim, style: '' }
-    : { dim: dim, style: compactIconStyle }; // used for both width/height
+    : { dim: dim, style: compactIconStyle };
 
   const styling = [
     cardBaseStyles,
