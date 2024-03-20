@@ -3,7 +3,9 @@ import { useSiteMetadata } from './use-site-metadata';
 import { usePathPrefix } from './use-path-prefix';
 
 export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
+  console.log('respobranches', repoBranches);
   const { siteUrl } = useSiteMetadata();
+  console.log('siteURL', siteUrl);
   const pathPrefix = usePathPrefix();
 
   // Use default logic assuming there is no canonical provided from the meta directive
