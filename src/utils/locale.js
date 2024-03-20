@@ -47,7 +47,7 @@ const stripLocale = (slug) => {
  * Returns the locale code based on the current location pathname of the page.
  * @returns {string}
  */
-const getCurrLocale = () => {
+export const getCurrLocale = () => {
   const defaultLang = 'en-us';
 
   if (!isBrowser) {
