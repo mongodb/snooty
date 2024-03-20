@@ -183,6 +183,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setIsScreenshotButtonClicked(true);
     domElementClickedRef.current = 'dashed';
     setSelectedElementBorderStyle('dashed');
+    elementZIndex.resetZIndex('.widgets');
   }, []);
 
   // close out the instructions panel
