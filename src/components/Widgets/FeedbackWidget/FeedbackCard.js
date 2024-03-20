@@ -55,8 +55,7 @@ const FeedbackCard = ({ isOpen, children }) => {
 
   const onClose = () => {
     abandon();
-    // reset the z-index set by the screenshot button on line
-    // 185 in ScreenshotButton.js
+    // reset the z-index set by the screenshot button in ScreenshotButton.js
     elementZIndex.resetZIndex('.widgets');
   };
 

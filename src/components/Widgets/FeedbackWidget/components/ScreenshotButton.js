@@ -182,8 +182,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   const takeNewScreenshot = useCallback(() => {
     setIsScreenshotButtonClicked(true);
     domElementClickedRef.current = 'dashed';
-    //conditionally set the z-index on the widget card when the screenshot is clicked
-    elementZIndex.setZIndex('.widgets', 14);
     setSelectedElementBorderStyle('dashed');
   }, []);
 
@@ -200,10 +198,14 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setIsScreenshotButtonClicked(false);
     setCurrElemState(null);
     setScreenshotTaken(false);
+    elementZIndex.resetZIndex('.widgets');
   };
 
   const handleDOMElementClick = (e) => {
     e.preventDefault();
+
+    //conditionally set the z-index on the widget card when the screenshot is clicked
+    elementZIndex.setZIndex('.widgets', 14);
 
     domElementClickedRef.current = 'solid';
     setSelectedElementBorderStyle(domElementClickedRef.current);
