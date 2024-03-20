@@ -7,8 +7,7 @@ use serde::Deserialize;
 use std::collections::HashSet;
 use swc_core::ecma::{
     ast::*,
-    transforms::testing::test_inline,
-    visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
+    visit::{as_folder, FoldWith},
 };
 use swc_ecma_parser::{EsConfig, Syntax};
 

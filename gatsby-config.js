@@ -14,7 +14,7 @@ const plugins = [
   `gatsby-plugin-image`,
   `gatsby-plugin-sharp`,
   `gatsby-transformer-sharp`, // Needed for dynamic images
-  { resolve: 'gatsby-plugin-webpack-bundle-analyser-v2', analyzerMode: 'static' },
+  { resolve: 'gatsby-plugin-webpack-bundle-analyser-v2', options: { analyzerMode: 'static' } },
   {
     resolve: 'gatsby-source-filesystem',
     options: {

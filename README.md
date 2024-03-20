@@ -216,6 +216,8 @@ The `USE_FILTER_BRANCH` environment variable needs to be added in the `.env.prod
 
 NOTE: This will modify the `ComponentFactory.js` file directly. To undo this, you can run `git restore src/components/ComponentFactory.js` to get the file back to its original state.
 
+To perform a dry run i.e. the `ComponentFactory.js` file does not get updated, the `FILTER_DRY_RUN` property can be provided and set to false. This will log the resulting code that would have been written to the file only.
+
 ### Useful Resources
 
 [React](https://reactjs.org/docs/getting-started.html)

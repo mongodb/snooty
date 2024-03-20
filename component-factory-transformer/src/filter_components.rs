@@ -1,13 +1,10 @@
-use serde::Deserialize;
 use std::collections::HashSet;
 use swc_core::ecma::{
     ast::*,
     transforms::testing::test_inline,
-    visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
+    visit::{as_folder, VisitMut, VisitMutWith},
 };
 use swc_ecma_parser::{EsConfig, Syntax};
-
-use swc_core::plugin::{plugin_transform, proxies::TransformPluginProgramMetadata};
 
 pub struct RemoveDirectivesTransform {
     pub includes: HashSet<String>,
@@ -132,6 +129,7 @@ test_inline!(
             vec![
                 "Admonition".to_string(),
                 "Banner".to_string(),
+                "RoleHighlight".to_string(),
                 "LAZY_COMPONENTS".to_string()
             ]
             .iter()
@@ -147,6 +145,21 @@ test_inline!(
   import Admonition, { admonitionMap } from './Admonition';
   import Banner from './Banner/Banner';
   import BlockQuote from './BlockQuote';
+  import RoleHighlight from './Roles/Highlight';
+  import RoleIcon from './Roles/Icon';
+
+  const roleMap = {
+    'highlight-blue': RoleHighlight,
+    'highlight-green': RoleHighlight,
+    'highlight-red': RoleHighlight,
+    'highlight-yellow': RoleHighlight,
+    'icon-fa5': RoleIcon,
+    'icon-fa5-brands': RoleIcon,
+    'icon-fa4': RoleIcon,
+    'icon-mms': RoleIcon,
+    'icon-charts': RoleIcon,
+    'icon-lg': RoleIcon,
+};
 
   export const componentMap = {
       admonition: Admonition,
@@ -161,6 +174,14 @@ test_inline!(
 
   import Admonition, { admonitionMap } from './Admonition';
   import Banner from './Banner/Banner';
+  import RoleHighlight from './Roles/Highlight';
+
+  const roleMap = {
+    'highlight-blue': RoleHighlight,
+    'highlight-green': RoleHighlight,
+    'highlight-red': RoleHighlight,
+    'highlight-yellow': RoleHighlight,
+};
 
   export const componentMap = {
       admonition: Admonition,
