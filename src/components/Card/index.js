@@ -148,15 +148,13 @@ const Card = ({
   landing page which we want to keep exempt from landing styles */
   const isLandingBottom = tag === 'landing-bottom';
 
-  let dim;
-  if (isLanding && isLandingBottom) dim = '50px';
-  else if (isLanding) dim = theme.size.xlarge;
-  else if (template === 'product-landing') dim = theme.size.large;
-  else dim = theme.size.medium;
+  let imgSize;
+  if (isLanding && isLandingBottom) imgSize = '50px';
+  else if (isLanding) imgSize = theme.size.xlarge;
+  else if (template === 'product-landing') imgSize = theme.size.large;
+  else imgSize = theme.size.medium;
 
-  const styles = ['landing', 'product-landing'].includes(template)
-    ? { dim: dim, style: '' }
-    : { dim: dim, style: compactIconStyle };
+  const useCompactIcon = !['landing', 'product-landing'].includes(template);
 
   const styling = [
     cardBaseStyles,
@@ -169,7 +167,13 @@ const Card = ({
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
       {icon && (
-        <img src={withPrefix(icon)} alt={iconAlt} width={styles.dim} height={styles.dim} className={cx(styles.style)} />
+        <img
+          src={withPrefix(icon)}
+          alt={iconAlt}
+          width={imgSize}
+          height={imgSize}
+          className={useCompactIcon ? cx(compactIconStyle) : ''}
+        />
       )}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
