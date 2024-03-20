@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { isBrowser } from '../utils/is-browser';
-import { AVAILABLE_LANGUAGES, getLocaleMapping } from '../utils/locale';
+import { AVAILABLE_LANGUAGES, getCurrLocale, getLocaleMapping } from '../utils/locale';
 
 const Footer = ({ slug }) => {
   const location = useLocation();
@@ -35,7 +35,7 @@ const Footer = ({ slug }) => {
     }
   }, []);
 
-  return <UnifiedFooter onSelectLocale={onSelectLocale} />;
+  return <UnifiedFooter onSelectLocale={onSelectLocale} locale={getCurrLocale()} />;
 };
 
 export default Footer;
