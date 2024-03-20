@@ -3,7 +3,6 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import Loadable from '@loadable/component';
 import { createPortal } from 'react-dom';
 import useScreenSize from '../../../hooks/useScreenSize';
-import { theme } from '../../../theme/docsTheme';
 import { useFeedbackContext } from './context';
 import FeedbackCard from './FeedbackCard';
 import RatingView from './views/RatingView';
@@ -21,7 +20,6 @@ export const FeedbackContent = ({ view }) => {
 
 const formStyle = css`
   position: relative;
-  z-index: ${theme.zIndexes.widgets};
 `;
 
 const FeedbackForm = () => {
