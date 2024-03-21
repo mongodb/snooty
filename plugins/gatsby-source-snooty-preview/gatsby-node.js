@@ -18,6 +18,8 @@ const {
 // Global variable to allow webhookBody from sourceNodes step to be passed down
 // to other Gatsby build steps that might not pass webhookBody natively.
 let currentWebhookBody = {};
+// Flag if the build is parsing data from Netlify or Gatsby Cloud, as there may be a difference
+let isNetlifyBuild = false;
 
 exports.createSchemaCustomization = async ({ actions }) => {
   const { createTypes } = actions;
@@ -28,6 +30,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       pagePath: String
       ast: JSON!
       metadata: SnootyMetadata @link
+      componentNames: [String!]
     }
 
     type PagePath implements Node @dontInfer {
@@ -59,12 +62,37 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type AssociatedProduct implements Node @dontInfer {
       productName: String
     }
+
+    type ProjectParent implements Node @dontInfer {
+      parents: JSON
+      project: String!
+    }
   `;
   createTypes(typeDefs);
 };
 
 const APIBase = process.env.API_BASE || `https://snooty-data-api.mongodb.com`;
 const GATSBY_CLOUD_SITE_USER = process.env.GATSBY_CLOUD_SITE_USER;
+
+/**
+ * Attempts to parse Netlify's build webhook payload.
+ * @returns {object | undefined} The parsed payload, if valid, or `undefined` otherwise
+ */
+const getNetlifyHookBody = () => {
+  // Netlify adds webhook body payloads to env
+  const incomingHookBody = process.env.INCOMING_HOOK_BODY;
+  if (!incomingHookBody) {
+    return;
+  }
+
+  isNetlifyBuild = true;
+  try {
+    const parsedPayload = JSON.parse(incomingHookBody);
+    return parsedPayload;
+  } catch (e) {
+    console.error(`Error parsing INCOMING_HOOK_BODY: ${incomingHookBody}. ${e}`);
+  }
+};
 
 let isFirstRun = true;
 exports.sourceNodes = async ({
@@ -77,8 +105,9 @@ exports.sourceNodes = async ({
   cache,
   webhookBody,
 }) => {
-  console.log({ webhookBody });
-  currentWebhookBody = webhookBody;
+  // Netlify and Gatsby Cloud have different ways of sending webhooks, with Gatsby's having a default value of {}.
+  currentWebhookBody = getNetlifyHookBody() || webhookBody;
+  console.log({ currentWebhookBody });
   let hasOpenAPIChangelog = false;
   const { createNode, touchNode } = actions;
 
@@ -154,7 +183,9 @@ exports.sourceNodes = async ({
     await pipeline(httpStream, decode);
     console.timeEnd(`source updates`);
   } catch (error) {
-    callPostBuildWebhook(webhookBody, 'failed');
+    if (!isNetlifyBuild) {
+      await callPostBuildWebhook(currentWebhookBody, 'failed');
+    }
     reporter.panic('There was an issue sourcing nodes', error);
   }
 
@@ -214,7 +245,9 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
   `);
 
   if (result.errors) {
-    await callPostBuildWebhook(currentWebhookBody, 'failed');
+    if (!isNetlifyBuild) {
+      await callPostBuildWebhook(currentWebhookBody, 'failed');
+    }
     reporter.panic('There was an error in the graphql query', result.errors);
   }
 
@@ -239,6 +272,7 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
         path: pagePath,
         component: templatePath,
         context: {
+          page_id: node.pageNodeId,
           id: node.pageNodeId,
           slug,
           // Hardcode static/safe values to prevent incremental builds from rebuilding versioned preview pages
@@ -250,7 +284,9 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
       });
     });
   } catch (err) {
-    await callPostBuildWebhook(currentWebhookBody, 'failed');
+    if (!isNetlifyBuild) {
+      await callPostBuildWebhook(currentWebhookBody, 'failed');
+    }
     reporter.panic('Could not build pages off of graphl query', err);
   }
 };
@@ -262,5 +298,7 @@ exports.createPages = async ({ actions, createNodeId, getNode, graphql, reporter
 // support passing through custom data from the preview webhook's body (to include the
 // Autobuilder job ID associated with the GC build).
 exports.onPostBuild = async () => {
-  await callPostBuildWebhook(currentWebhookBody, 'completed');
+  if (!isNetlifyBuild) {
+    await callPostBuildWebhook(currentWebhookBody, 'completed');
+  }
 };

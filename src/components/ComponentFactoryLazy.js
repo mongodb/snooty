@@ -1,4 +1,5 @@
 import React, { lazy } from 'react';
+import { SuspenseHelper } from './SuspenseHelper';
 
 const ComponentMap = {
   openapi: lazy(() => import('./OpenAPI')),
@@ -11,9 +12,9 @@ const ComponentMap = {
 export const LAZY_COMPONENTS = Object.keys(ComponentMap).reduce((res, key) => {
   const LazyComponent = ComponentMap[key];
   res[key] = (props) => (
-    <React.Suspense>
+    <SuspenseHelper fallback={null}>
       <LazyComponent {...props} />
-    </React.Suspense>
+    </SuspenseHelper>
   );
   return res;
 }, {});

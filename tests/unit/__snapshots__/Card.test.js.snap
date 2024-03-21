@@ -49,17 +49,7 @@ exports[`renders correctly 1`] = `
   margin-bottom: 0;
 }
 
-.emotion-1 {
-  width: 24px;
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-1 {
-    width: 20px;
-  }
-}
-
-.emotion-4 {
+.emotion-2 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -76,7 +66,7 @@ exports[`renders correctly 1`] = `
   margin-right: auto;
 }
 
-.emotion-5 {
+.emotion-3 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -89,12 +79,12 @@ exports[`renders correctly 1`] = `
   margin: 16px 0 8px 0;
 }
 
-.emotion-5 strong,
-.emotion-5 b {
+.emotion-3 strong,
+.emotion-3 b {
   font-weight: 700;
 }
 
-.emotion-6 {
+.emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -105,12 +95,12 @@ exports[`renders correctly 1`] = `
   margin-bottom: 16px;
 }
 
-.emotion-6 strong,
-.emotion-6 b {
+.emotion-4 strong,
+.emotion-4 b {
   font-weight: 700;
 }
 
-.emotion-7 {
+.emotion-5 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -120,16 +110,16 @@ exports[`renders correctly 1`] = `
   font-weight: 400;
 }
 
-.emotion-7 strong,
-.emotion-7 b {
+.emotion-5 strong,
+.emotion-5 b {
   font-weight: 700;
 }
 
-.emotion-7 a {
+.emotion-5 a {
   line-height: unset;
 }
 
-.emotion-8 {
+.emotion-6 {
   font-size: 13px;
   line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -151,22 +141,22 @@ exports[`renders correctly 1`] = `
   text-decoration: none!important;
 }
 
-.emotion-8:hover,
-.emotion-8:focus,
-.emotion-8:visited {
+.emotion-6:hover,
+.emotion-6:focus,
+.emotion-6:visited {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-8:focus {
+.emotion-6:focus {
   outline: none;
 }
 
-.emotion-9 {
+.emotion-7 {
   position: relative;
 }
 
-.emotion-9::after {
+.emotion-7::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -176,11 +166,11 @@ exports[`renders correctly 1`] = `
   border-radius: 2px;
 }
 
-.lg-ui-0001:focus .emotion-9::after {
+.lg-ui-0001:focus .emotion-7::after {
   background-color: #0498EC;
 }
 
-.lg-ui-0001:hover .emotion-9::after {
+.lg-ui-0001:hover .emotion-7::after {
   background-color: #E8EDEB;
 }
 
@@ -189,39 +179,47 @@ exports[`renders correctly 1`] = `
   >
     <img
       alt="MongoDB University icon"
-      class="emotion-1 emotion-2"
+      class="
+  @media only screen and (max-width: 480px) {
+    width: 20px;
+  }
+"
+      height="24px"
       src="/images/icons/university.svg"
+      width="24px"
     />
     <span
-      class="emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       Test card tag
     </span>
-    <p
-      class="emotion-5"
-    >
-      Test card headline
-    </p>
-    <p
-      class="emotion-6"
-    >
-      Test card paragraph
-    </p>
-    <p
-      class="emotion-7"
-    >
-      <a
-        class="lg-ui-0001 emotion-8"
-        href="https://university.mongodb.com/courses/M001/about"
-        target="_self"
+    <div>
+      <p
+        class="emotion-3"
       >
-        <span
-          class="emotion-9"
+        Test card headline
+      </p>
+      <p
+        class="emotion-4"
+      >
+        Test card paragraph
+      </p>
+      <p
+        class="emotion-5"
+      >
+        <a
+          class="lg-ui-0001 emotion-6"
+          href="https://university.mongodb.com/courses/M001/about"
+          target="_self"
         >
-          Test card CTA
-        </span>
-      </a>
-    </p>
+          <span
+            class="emotion-7"
+          >
+            Test card CTA
+          </span>
+        </a>
+      </p>
+    </div>
   </div>
 </DocumentFragment>
 `;

@@ -7,30 +7,6 @@ import ChatbotUi from '../components/ChatbotUi';
 
 const CONTENT_MAX_WIDTH = 1440;
 
-const SHOW_CHATBOT = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
-
-const newLandingCardStyling = () => css`
-  &:not(.compact, .extra-compact, .drivers) {
-    p {
-      font-weight: 500;
-
-      a {
-        margin-top: ${({ theme }) => theme.size.medium};
-      }
-    }
-
-    @media ${({ theme }) => theme.screenSize.upToMedium} {
-      margin-left: 42px;
-      margin-right: 42px;
-    }
-
-    @media ${({ theme }) => theme.screenSize.upToSmall} {
-      margin-left: ${({ theme }) => theme.size.medium};
-      margin-right: ${({ theme }) => theme.size.medium};
-    }
-  }
-`;
-
 const Wrapper = styled('main')`
   margin: 0 auto;
   width: 100%;
@@ -65,8 +41,7 @@ const Wrapper = styled('main')`
       @media ${({ theme }) => theme.screenSize.mediumAndUp} {
         grid-column: 2 / -2 !important;
       }
-
-      ${({ newChatbotLanding }) => newChatbotLanding && newLandingCardStyling()}
+      max-width: 1200px;
     }
   }
 `;
@@ -77,8 +52,8 @@ const Landing = ({ children, pageContext, useChatbot }) => {
   return (
     <>
       <div>
-        <Wrapper newChatbotLanding={SHOW_CHATBOT && useChatbot}>
-          {SHOW_CHATBOT && useChatbot && <ChatbotUi template={pageContext?.template} />}
+        <Wrapper newChatbotLanding={useChatbot}>
+          {useChatbot && <ChatbotUi template={pageContext?.template} />}
           {children}
         </Wrapper>
       </div>
@@ -127,24 +102,29 @@ const Landing = ({ children, pageContext, useChatbot }) => {
           }
           main h1:first-of-type {
             color: ${palette.white};
-            ${SHOW_CHATBOT && useChatbot
-              ? `
-              color: ${palette.black};
-              grid-column: 2/-1;
-              margin: ${size.large} 0;
-              font-size: 48px;
-              line-height: 62px;
-
-              @media ${screenSize.upToSmall} {
-                font-size: 32px;
-                line-height: 40px;
-              }
-            `
-              : `
-              @media ${screenSize.upToMedium} {
-                color: ${palette.green.dark2};
-              }
-              `}
+            grid-column: 2/-1;
+            margin-top: ${size.medium};
+            font-size: 48px;
+            line-height: 62px;
+            margin-bottom: 10px;
+            align-self: end;
+            @media ${screenSize.upToMedium} {
+              font-size: 32px;
+              line-height: 40px;
+              margin-top: ${size.medium};
+            }
+          }
+          ${
+            '' /* :first-of-type selector used for precedence
+            above LeafyGreen class selector */
+          }
+          main>section>section:first-of-type h2 {
+            color: ${palette.gray.dark4};
+            font-size: 32px;
+            font-family: 'MongoDB Value Serif';
+            font-weight: 400;
+            margin-top: ${size.medium};
+            margin-bottom: 0px;
           }
           .span-columns {
             grid-column: 3 / -3 !important;
@@ -161,59 +141,49 @@ const Landing = ({ children, pageContext, useChatbot }) => {
           .hero-img {
             grid-column: 1 / -1;
             grid-row: 1 / 3;
-            height: 310px;
             width: 100%;
             object-fit: cover;
             z-index: -1;
+            object-position: 50%;
 
-            @media ${screenSize.upToMedium} {
-              grid-row: unset;
-              object-position: 100%;
+            @media ${screenSize.upToXSmall} {
+              height: 555px;
             }
 
-            @media ${screenSize.upToSmall} {
-              grid-row: unset;
-              height: 200px;
-              object-position: 85%;
+            @media ${screenSize.xSmallAndUp} {
+              height: 430px;
             }
 
-            @media only screen and (max-width: 320px) {
-              object-position: 100%;
+            @media ${screenSize.smallAndUp} {
+              height: 317px;
+            }
+
+            @media ${screenSize.largeAndUp} {
+              height: 280px;
+            }
+
+            @media ${screenSize.xLargeAndUp} {
+              height: 250px;
             }
           }
+
           .introduction {
-            grid-column: 2 / 8;
+            grid-column: 2 / -4;
             grid-row: 2 / 3;
+            p {
+              color: ${palette.white};
+            }
 
             @media ${screenSize.upToMedium} {
               grid-column: 2 / -2;
-
-              p {
-                color: ${palette.black};
-              }
             }
 
-            @media ${screenSize.mediumAndUp} {
-              p {
-                color: ${palette.white};
-              }
+            @media ${screenSize.xLargeAndUp} {
+              grid-column: 2 / -5;
             }
-          }
-          @media ${screenSize.upToLarge} {
-            .footer {
-              padding: ${size.medium};
-            }
-          }
-          @media ${screenSize.mediumAndUp} {
-            .right-column {
-              grid-column: 7 / -1 !important;
-              grid-row-start: 1 !important;
-              grid-row-end: 3 !important;
-            }
-          }
-          @media ${screenSize.largeAndUp} {
-            .right-column {
-              grid-column: 9 / -1 !important;
+
+            @media ${screenSize['3XLargeAndUp']} {
+              grid-column: 2 / -4;
             }
           }
         `}
@@ -225,7 +195,7 @@ const Landing = ({ children, pageContext, useChatbot }) => {
 Landing.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   pageContext: PropTypes.shape({
-    page: PropTypes.object.isRequired,
+    template: PropTypes.string,
   }).isRequired,
   useChatbot: PropTypes.bool,
 };

@@ -1,0 +1,3 @@
+[functions."deploy-*"]
+  # build-hook.txt is a temporary file created at build time for Netlify builds
+  included_files = ['build-hook.txt', 'plugins/gatsby-source-snooty-preview/utils/post-build.js', 'netlify/utils.js']

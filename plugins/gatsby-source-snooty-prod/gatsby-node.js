@@ -1,5 +1,6 @@
 const path = require('path');
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
+const { getPageComponents } = require('../../src/utils/setup/get-page-components.js');
 const { saveAssetFiles, saveStaticFiles, GATSBY_IMAGE_EXTENSIONS } = require('../../src/utils/setup/save-asset-files');
 const { validateEnvVariables } = require('../../src/utils/setup/validate-env-variables');
 const { getNestedValue } = require('../../src/utils/get-nested-value');
@@ -13,12 +14,7 @@ const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/i
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
-
-// different types of references
-const PAGES = [];
-
-// in-memory object with key/value = filename/document
-let RESOLVED_REF_DOC_MAPPING = {};
+const { createProjectParentNodes } = require('../utils/project-parents.js');
 
 const assets = new Map();
 
@@ -89,7 +85,7 @@ const createAssociatedProductNodes = async ({ createNode, createNodeId, createCo
   }
 };
 
-exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => {
+exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNodesByType }) => {
   let hasOpenAPIChangelog = false;
   const { createNode } = actions;
 
@@ -127,11 +123,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   const pageIdPrefix = constructPageIdPrefix(siteMetadata);
   documents.forEach((doc) => {
     const { page_id, ...rest } = doc;
-    RESOLVED_REF_DOC_MAPPING[page_id.replace(`${pageIdPrefix}/`, '')] = rest;
-  });
+    const key = page_id.replace(`${pageIdPrefix}/`, '');
+    const val = rest;
 
-  // Identify page documents and parse each document for images
-  Object.entries(RESOLVED_REF_DOC_MAPPING).forEach(([key, val]) => {
     const pageNode = getNestedValue(['ast', 'children'], val);
     const filename = getNestedValue(['filename'], val) || '';
 
@@ -151,7 +145,16 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
     }
 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
-      PAGES.push(key);
+      createNode({
+        id: key,
+        page_id: key,
+        ast: doc.ast,
+        internal: {
+          type: 'Page',
+          contentDigest: createContentDigest(doc),
+        },
+        componentNames: getPageComponents(pageNode),
+      });
     }
 
     const slug = getPageSlug(key);
@@ -177,6 +180,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
+
+  await createProjectParentNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
 
   const umbrellaProduct = await db.realmInterface.getMetadata(
     {
@@ -220,7 +225,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   });
 };
 
-exports.createPages = async ({ actions }) => {
+exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
 
   let repoBranches = null;
@@ -266,26 +271,41 @@ exports.createPages = async ({ actions }) => {
     throw err;
   }
 
+  // DOP-4214: for each page, query the directive/node types
+  const pageList = await graphql(`
+    {
+      allPage {
+        nodes {
+          page_id
+          ast
+          componentNames
+        }
+      }
+    }
+  `);
+
+  if (pageList.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+  }
+
   return new Promise((resolve, reject) => {
-    PAGES.forEach((page) => {
-      const pageNodes = RESOLVED_REF_DOC_MAPPING[page]?.ast;
-      const slug = getPageSlug(page);
+    pageList?.data?.allPage?.nodes?.forEach((page) => {
+      const pageNodes = page.ast;
+      const slug = getPageSlug(page.page_id);
 
       // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
       const mainComponentRelativePath = `../../src/components/DocumentBody.js`;
 
-      if (RESOLVED_REF_DOC_MAPPING[page] && Object.keys(RESOLVED_REF_DOC_MAPPING[page]).length > 0) {
-        createPage({
-          path: assertTrailingSlash(slug),
-          component: path.resolve(__dirname, mainComponentRelativePath),
-          context: {
-            slug,
-            repoBranches,
-            template: pageNodes?.options?.template,
-            page: pageNodes,
-          },
-        });
-      }
+      createPage({
+        path: assertTrailingSlash(slug),
+        component: path.resolve(__dirname, mainComponentRelativePath),
+        context: {
+          page_id: page.page_id,
+          slug,
+          repoBranches,
+          template: pageNodes?.options?.template,
+        },
+      });
     });
 
     resolve();
@@ -322,6 +342,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       pagePath: String
       ast: JSON!
       metadata: SnootyMetadata @link
+      componentNames: [String!]
     }
 
     type SnootyMetadata implements Node @dontInfer {
@@ -352,6 +373,11 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type AssociatedProduct implements Node @dontInfer {
       productName: String
+    }
+
+    type ProjectParent implements Node @dontInfer {
+      parents: JSON
+      project: String!
     }
   `);
 };

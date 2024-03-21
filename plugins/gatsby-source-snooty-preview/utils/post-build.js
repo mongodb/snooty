@@ -13,7 +13,7 @@ const constructSnootyHeader = (payloadString) =>
  * build is finished.
  * @param {object} webhookBody - The webhook body passed to the source plugin to
  * initiate the preview build.
- * @param {string} status - The status of the build, typically "completed" or "failed".
+ * @param {'completed' | 'failed'} status - The status of the build, typically "completed" or "failed".
  * This value should coincide with the Autobuilder's job statuses.
  */
 const callPostBuildWebhook = async (webhookBody, status) => {
@@ -21,6 +21,14 @@ const callPostBuildWebhook = async (webhookBody, status) => {
   // that was not called by the preview webhook
   if (!webhookBody || !Object.keys(webhookBody).length) {
     console.log('No webhookBody found. This build will not call the post-build webhook.');
+    return;
+  }
+
+  // Avoids completely throwing an error if a build is triggered with a custom payload outside the automated build process
+  if (!webhookBody.jobId) {
+    console.log(
+      'No Autobuilder job ID included in the webhook payload. This build will not call the post-build webhook.'
+    );
     return;
   }
 

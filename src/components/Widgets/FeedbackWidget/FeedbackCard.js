@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { feedbackId } from '../FeedbackWidget/FeedbackForm';
 import { theme } from '../../../../src/theme/docsTheme';
 import useScreenSize from '../../../hooks/useScreenSize';
 import useStickyTopValues from '../../../hooks/useStickyTopValues';
+import { InstruqtContext } from '../../Instruqt/instruqt-context';
+import { elementZIndex } from '../../../utils/dynamically-set-z-index';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
@@ -13,7 +15,7 @@ import useNoScroll from './hooks/useNoScroll';
 const FloatingContainer = styled.div`
   position: fixed;
   z-index: 14;
-  bottom: ${theme.size.large};
+  bottom: ${({ hasOpenLabDrawer }) => (hasOpenLabDrawer ? '70px' : theme.size.large)};
   right: ${theme.size.large};
 
   @media ${theme.screenSize.upToSmall} {
@@ -45,16 +47,23 @@ const Card = styled(LeafygreenCard)`
 
 const FeedbackCard = ({ isOpen, children }) => {
   const { abandon } = useFeedbackContext();
+  const { isOpen: isLabOpen } = useContext(InstruqtContext);
   // Ensure FeedbackCard can be fullscreen size
   const { isMobile } = useScreenSize();
   const { topSmall } = useStickyTopValues();
   useNoScroll(isMobile);
 
+  const onClose = () => {
+    abandon();
+    // reset the z-index set by the screenshot button in ScreenshotButton.js
+    elementZIndex.resetZIndex('.widgets');
+  };
+
   return (
     isOpen && (
-      <FloatingContainer top={topSmall} id={feedbackId}>
+      <FloatingContainer top={topSmall} id={feedbackId} hasOpenLabDrawer={isLabOpen}>
         <Card top={topSmall}>
-          <CloseButton onClick={() => abandon()} />
+          <CloseButton onClick={onClose} />
           <ProgressBar />
           <div>{children}</div>
         </Card>

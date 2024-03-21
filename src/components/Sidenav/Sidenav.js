@@ -29,7 +29,6 @@ import Toctree from './Toctree';
 import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 
 const SIDENAV_WIDTH = 268;
-const CHATBOT_ENABLED = process.env['GATSBY_SHOW_CHATBOT'] === 'true';
 
 // Use LG's css here to style the component without passing props
 const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
@@ -99,7 +98,7 @@ const disableScroll = (shouldDisableScroll) => css`
 
 // use eol status to determine side nav styling
 const getTopAndHeight = (topValue, template) => css`
-  ${template === 'landing' && CHATBOT_ENABLED
+  ${template === 'landing'
     ? `
     top: 0px;
     height: calc(100vh);`
@@ -109,7 +108,7 @@ const getTopAndHeight = (topValue, template) => css`
   `}
 `;
 
-// Keep the side nav container sticky to allow LG's side nav to push content seemlessly
+// Keep the side nav container sticky to allow LG's side nav to push content seamlessly
 const SidenavContainer = styled.div(
   ({ topLarge, topMedium, topSmall, template }) => css`
     grid-area: sidenav;
@@ -189,6 +188,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const ia = page?.options?.ia;
 
   const template = page?.options?.template;
+  const isLanding = template === 'landing';
   const isGuidesLanding = project === 'guides' && template === 'product-landing';
   const isGuidesTemplate = template === 'guide';
 
@@ -264,7 +264,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 />
                 {ia && (
                   <IA
-                    header={<span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
+                    header={!isLanding && <span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
                     handleClick={() => {
                       setBack(false);
                       hideMobileSidenav();

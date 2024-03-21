@@ -1,8 +1,10 @@
-import React, { Suspense } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { isBrowser } from '../../utils/is-browser';
 import { theme } from '../../theme/docsTheme';
+import { InstruqtContext } from '../Instruqt/instruqt-context';
+import { SuspenseHelper } from '../SuspenseHelper';
 import { FeedbackProvider, FeedbackForm, FeedbackButton, useFeedbackData } from './FeedbackWidget';
 import ChatbotFab from './ChatbotWidget/ChatbotFab';
 
@@ -14,12 +16,12 @@ const WidgetsContainer = styled.div`
   gap: ${theme.size.small};
   position: fixed;
   right: ${theme.size.large};
-  bottom: ${theme.size.large};
+  bottom: ${({ hasOpenLabDrawer }) => (hasOpenLabDrawer ? '70px' : theme.size.large)};
 
   @media ${theme.screenSize.upToSmall} {
     background-color: white;
     width: 100%;
-    height: 60px;
+    height: ${theme.widgets.buttonContainerMobileHeight};
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -35,14 +37,14 @@ const WidgetsContainer = styled.div`
   }
 `;
 
-const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, isInPresentationMode, template }) => {
+const Widgets = ({ children, pageOptions, pageTitle, slug, isInPresentationMode, template }) => {
+  const { isOpen } = useContext(InstruqtContext);
   const url = isBrowser ? window.location.href : null;
   const hideFeedbackHeader = pageOptions.hidefeedback === 'header';
   const feedbackData = useFeedbackData({
     slug,
     url,
     title: pageTitle || 'Home',
-    publishedBranches,
   });
 
   // DOP-4025: hide feedback tab on homepage
@@ -53,13 +55,13 @@ const Widgets = ({ children, pageOptions, pageTitle, publishedBranches, slug, is
       {children}
       {!isInPresentationMode && !hideFeedback && (
         /* Suspense at this level ensures that widgets will appear simultaneously rather than one-by-one as loaded */
-        <Suspense fallback={null}>
-          <WidgetsContainer className={widgetsContainer}>
+        <SuspenseHelper fallback={null}>
+          <WidgetsContainer className={widgetsContainer} hasOpenLabDrawer={isOpen}>
             <FeedbackButton />
             <FeedbackForm />
             {template !== 'landing' && <ChatbotFab />}
           </WidgetsContainer>
-        </Suspense>
+        </SuspenseHelper>
       )}
     </FeedbackProvider>
   );
@@ -71,7 +73,6 @@ Widgets.propTypes = {
     hideFeedback: PropTypes.string,
   }),
   pageTitle: PropTypes.string.isRequired,
-  publishedBranches: PropTypes.object,
   slug: PropTypes.string.isRequired,
   isInPresentationMode: PropTypes.bool,
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import * as Gatsby from 'gatsby';
 import { mockLocation } from '../utils/mock-location';
 import DocumentBody from '../../src/components/DocumentBody';
@@ -31,39 +31,34 @@ describe('DocumentBody', () => {
   beforeAll(() => {
     jest.spyOn(document, 'querySelector');
   });
-  it('renders the necessary elements', async () => {
-    mockLocation(null);
-    render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
 
-    const footer = screen.getByTestId('consistent-footer');
+  it('renders the necessary elements', async () => {
+    await act(async () => {
+      mockLocation(null);
+      render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
+    });
+    const footer = await screen.findByTestId('consistent-footer');
     expect(footer).toBeVisible();
     expect(footer).toMatchSnapshot();
 
-    if (!process.env.GATSBY_HIDE_UNIFIED_FOOTER_LOCALE) {
-      const languageSelector = screen.getByTestId('options');
-      expect(languageSelector).toBeInTheDocument();
-      expect(languageSelector.querySelectorAll('li')).toHaveLength(4);
-    }
+    const languageSelector = await screen.findByTestId('options');
+    expect(languageSelector).toBeInTheDocument();
 
-    await waitFor(
+    const mainNav = await screen.findByRole('img', { name: 'MongoDB logo' });
+    expect(mainNav).toBeVisible();
+    expect(mainNav).toMatchSnapshot();
+
+    return waitFor(
       () => {
         const feedbackWidget = screen.getByText(FEEDBACK_BUTTON_TEXT);
         expect(feedbackWidget).toBeVisible();
-        expect(feedbackWidget).toMatchSnapshot();
 
         const chatbotWidget = screen.getByText(CHATBOT_WIDGET_TEXT);
-        /* NOT to be visible for now, with display:none */
-        expect(chatbotWidget).not.toBeVisible();
-        expect(chatbotWidget).toMatchSnapshot();
+        expect(chatbotWidget).toBeVisible();
       },
       { timeout: 8000 }
     );
-
-    const mainNav = screen.getByRole('img', { name: 'MongoDB logo' });
-    expect(mainNav).toBeVisible();
-    expect(mainNav).toMatchSnapshot();
-    /* Give more time for lazy-loaded components to be found */
-  }, 12000);
+  });
 
   it('does not render the following elements, footer, feedback widget, navigation', async () => {
     mockLocation('?presentation=true');

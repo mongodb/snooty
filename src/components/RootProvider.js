@@ -1,39 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavigationProvider } from '../context/navigation-context';
 import { VersionContextProvider } from '../context/version-context';
 import { TocContextProvider } from '../context/toc-context';
 import { HeaderContextProvider } from './Header/header-context';
 import { SidenavContextProvider } from './Sidenav';
 import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
-import { SearchContextProvider } from './SearchResults/SearchContext';
-
-// Check for feature flag here to make it easier to pass down for testing purposes
-const SHOW_FACETS = process.env.GATSBY_FEATURE_FACETED_SEARCH === 'true';
 
 const RootProvider = ({ children, headingNodes, selectors, slug, repoBranches, remoteMetadata, project }) => {
-  let providers = (
+  return (
     <TabProvider selectors={selectors}>
       <ContentsProvider headingNodes={headingNodes}>
         <HeaderContextProvider>
           <VersionContextProvider repoBranches={repoBranches} slug={slug}>
             <TocContextProvider remoteMetadata={remoteMetadata}>
-              <SidenavContextProvider>
-                <SearchContextProvider showFacets={SHOW_FACETS}>{children}</SearchContextProvider>
-              </SidenavContextProvider>
+              <SidenavContextProvider>{children}</SidenavContextProvider>
             </TocContextProvider>
           </VersionContextProvider>
         </HeaderContextProvider>
       </ContentsProvider>
     </TabProvider>
   );
-
-  if (project) {
-    providers = <NavigationProvider project={project}>{providers}</NavigationProvider>;
-  }
-
-  return providers;
 };
 
 RootProvider.propTypes = {

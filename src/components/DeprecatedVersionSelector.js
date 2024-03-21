@@ -1,14 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import queryString from 'query-string';
 import { keyBy, isEmpty } from 'lodash';
 import Button from '@leafygreen-ui/button';
+import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useAllDocsets } from '../hooks/useAllDocsets';
 import { fetchDocsets } from '../utils/realm';
+import { sortVersions } from '../utils/sort-versioned-branches';
 import Select from './Select';
 
 const SELECT_WIDTH = '336px';
@@ -28,19 +29,13 @@ const isPrimaryBranch = (version) => {
 
 const prefixVersion = (version) => {
   if (!version) return null;
-  // Display as "Version X" on menu if numeric version and remove v from version name
-  const versionNumber = version.replace('v', '').split()[0];
+  // Display as "Version X" on menu if numeric version and remove "v" or "Version" from version name
+  const versionNumber = version.replace(/v|Version /g, '').split()[0];
   // if branch is 'master' or 'main', show as latest
   if (isPrimaryBranch(versionNumber)) {
-    return 'latest';
+    return 'Latest';
   }
   return `Version ${versionNumber}`;
-};
-
-// An unversioned docs site defined as a product with a single
-// option of 'master' or 'main'
-const isVersioned = (versionOptions) => {
-  return !(versionOptions.length === 1 && isPrimaryBranch(versionOptions[0]));
 };
 
 // Validation for necessary url fields to bypass errors
@@ -49,98 +44,111 @@ const hasValidHostName = (repoDocument) => {
   return true;
 };
 
-// Add mms-docs to reposMap. It does not have a document in repos_branches collection.
-// TODO: Remove when mms-docs is added to repos_branches
-const addOldGenToReposMap = (reposMap) => {
-  const oldGenRepos = {
-    mms: {
-      displayName: 'MongoDB Ops Manager',
-      url: { dotcomprd: 'http://mongodb.com/' },
-      prefix: { dotcomprd: 'docs/ops-manager' },
-    },
-  };
-  return {
-    ...oldGenRepos,
-    ...reposMap,
-  };
-};
-
-const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecatedVersions } }) => {
+const DeprecatedVersionSelector = () => {
   const { reposDatabase } = useSiteMetadata();
-  const reposBranchesBuildData = useAllDocsets();
+  const reposBranchesBuildData = useAllDocsets().filter((project) => project.hasEolVersions);
   const reposBranchesBuildDataMap = keyBy(reposBranchesBuildData, 'project');
-  const reposBranchesBuildDataMapWithOldGen = addOldGenToReposMap(reposBranchesBuildDataMap);
   const [product, setProduct] = useState('');
   const [version, setVersion] = useState('');
-  const [reposMap, setReposMap] = useState(reposBranchesBuildDataMapWithOldGen);
+  const [reposMap, setReposMap] = useState(reposBranchesBuildDataMap);
+
+  const alphabetize = (product1, product2) => {
+    return product1?.text?.localeCompare(product2?.text);
+  };
+
+  const productChoices = useMemo(
+    () =>
+      reposMap
+        ? Object.keys(reposMap)
+            .map((product) => ({
+              text: reposMap[product].displayName,
+              value: product,
+            }))
+            // Ensure invalid entries do not break selector
+            .filter(({ text }) => text)
+            //sort entries alphabetically by text
+            .sort(alphabetize)
+        : [],
+    [reposMap]
+  );
 
   const updateProduct = useCallback(({ value }) => {
     setProduct(value);
     setVersion('');
   }, []);
+
   const updateVersion = useCallback(({ value }) => setVersion(value), []);
+
+  const versionChoices = useMemo(
+    () =>
+      reposMap[product]?.branches
+        ? reposMap[product]?.branches
+            .map((version) => {
+              //only include versions with an eol_type field
+              if (version.eol_type && version.versionSelectorLabel) {
+                return {
+                  text: prefixVersion(version.versionSelectorLabel),
+                  value: version.versionSelectorLabel,
+                  urlSlug: version.urlSlug,
+                  icon: version.eol_type === 'download' ? <Icon glyph="Download" /> : null,
+                };
+              } else return null;
+            })
+            //Ensure versions set to null are not included and do not break selector
+            .filter((versionChoice) => versionChoice)
+            //sort versions newest(larger numbers) to oldest(smaller numbers). Assumes there are no more than three digits between/before/after each decimal place
+            .sort(sortVersions)
+        : [],
+    [reposMap, product]
+  );
+
+  const versionChoicesMap = useMemo(() => keyBy(versionChoices, 'value'), [versionChoices]);
+
   const buttonDisabled = !(product && version);
 
-  // Fetch docsets for url and combine `displayName` from oldGenToReposMap method
+  // Fetch docsets for url
   useEffect(() => {
     if (reposDatabase) {
       fetchDocsets(reposDatabase)
         .then((resp) => {
-          const reposBranchesMap = keyBy(resp, 'project');
-          const reposBranchesMapWithOldGen = addOldGenToReposMap(reposBranchesMap);
-          if (reposBranchesMap.size > 0) setReposMap(reposBranchesMapWithOldGen);
+          const reposBranchesMap = keyBy(
+            resp.filter((project) => project.hasEolVersions),
+            'project'
+          );
+          if (reposBranchesMap.size > 0) setReposMap(reposBranchesMap);
         })
         .catch((error) => {
           console.error(`ERROR: could not access ${reposDatabase} for dropdown data.`);
         });
     }
-  }, [reposDatabase, reposBranchesBuildDataMapWithOldGen]);
+  }, [reposDatabase]);
 
   useEffect(() => {
     if (isBrowser) {
       // Extract the value of 'site' query string from the page url to pre-select product
       const { site } = queryString.parse(window.location.search);
-      if (site && Object.keys(deprecatedVersions).includes(site)) {
+      if (site && reposMap[site]) {
         setProduct(site);
       }
     }
-  }, [deprecatedVersions]);
+  }, [reposMap]);
 
-  const generateUrl = () => {
+  const generateUrl = (currentVersion) => {
     // Our current LG button version has a bug where a disabled button with an href allows the disabled
     // button to be clickable. This logic can be removed when LG button is version >= 12.0.4.
-    if (buttonDisabled || isEmpty(reposMap) || !hasValidHostName(reposMap[product])) {
+    if (buttonDisabled || !currentVersion || isEmpty(reposMap) || !hasValidHostName(reposMap[product])) {
       return null;
     }
 
-    // Utilizing hardcoded env because legacy sites are not available on dev/stage
+    // Utilizing hardcoded env or aws bucket path because legacy sites are not available on dev/stage
+    if (currentVersion.icon) {
+      const bucket = 'https://www.mongodb.com/docs/offline';
+      return `${bucket}/${product}-${currentVersion.urlSlug}.tar.gz`;
+    }
+
     const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
-    const versionOptions = deprecatedVersions[product];
-    const versionName = isVersioned(versionOptions) ? version : '';
-    return `${hostName}/${versionName}`;
+    return `${hostName}/${currentVersion.urlSlug}`;
   };
-
-  const alphabetize = (product1, product2) => {
-    return product1.text.localeCompare(product2.text);
-  };
-
-  const productChoices = deprecatedVersions
-    ? Object.keys(deprecatedVersions)
-        .map((product) => ({
-          text: reposMap[product]?.displayName,
-          value: product,
-        }))
-        // Ensure invalid entries do not break selector
-        .filter(({ text }) => !!text)
-        .sort(alphabetize)
-    : [];
-
-  const versionChoices = deprecatedVersions[product]
-    ? deprecatedVersions[product].map((version) => ({
-        text: prefixVersion(version),
-        value: version,
-      }))
-    : [];
 
   return (
     <>
@@ -160,16 +168,20 @@ const DeprecatedVersionSelector = ({ metadata: { deprecated_versions: deprecated
         label="Select a Version"
         onChange={updateVersion}
         value={version}
-      />
-      <Button variant="primary" title="View Documentation" href={generateUrl()} disabled={buttonDisabled}>
-        View Documentation
+      ></Select>
+      <Button
+        variant="primary"
+        title="View or Download Documentation"
+        rightGlyph={versionChoicesMap[version]?.icon}
+        href={generateUrl(versionChoicesMap[version])}
+        disabled={buttonDisabled}
+      >
+        {versionChoicesMap[version]?.icon ? 'Download Documentation' : 'View Documentation'}
       </Button>
     </>
   );
 };
 
-DeprecatedVersionSelector.propTypes = {
-  metadata: PropTypes.object.isRequired,
-};
+DeprecatedVersionSelector.propTypes = {};
 
 export default DeprecatedVersionSelector;
