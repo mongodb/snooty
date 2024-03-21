@@ -35,7 +35,7 @@ jobs:
           npm run build
       - name: Install Lighthouse
         env: 
-          GATSBY_SITE: ${{ matrix.project }}
+          PROJECT: ${{ matrix.project }}
           LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
           LIGHTHOUSE_BUILD_TOKEN: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
         run: |
