@@ -3,7 +3,7 @@ on:
     branches:
       - "main"
       - "DOP-4165-lhci"
-name: Build docs site artifact
+name: Run and Upload Lighthouse Report
 jobs: 
   staging:
     permissions: write-all
@@ -16,10 +16,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
-      - name: Access Build Data
-        uses: mongodb/docs-worker-actions/build-artifact@main
-        env: 
-          PROJECT_TO_BUILD: ${{ matrix.project }}
       - name: Build Snooty
         env:
           NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
@@ -33,18 +29,15 @@ jobs:
         run: |
           npm ci --legacy-peer-deps
           npm run build
+          ls public
+      - name: Install Lighthouse
+        env: 
+          LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
+          LIGHTHOUSE_BUILD_TOKEN: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
+        run: |
           npm install -g @lhci/cli
-          npm run serve &
           lhci autorun
-      # - name: Install Lighthouse
-      #   run: |
-      #     npm install -g @lhci/cli
-      #     lhci autorun
       # - name: Run Lighthouse
-      #   env: 
-      #     LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
-      #     LIGHTHOUSE_BUILD_TOKEN: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
-      #     BRANCH: ${{ github.head_ref || github.ref_name }}
       #   run: |
       #     lhci autorun
       # - uses: actions/checkout@v4
