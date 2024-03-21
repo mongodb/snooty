@@ -9,12 +9,12 @@ module.exports = {
     collect: {
       staticDistDir: './public',
       startServerCommand: 'npm run serve',
-      url: ['http://localhost:8080'],
+      url: ['http://localhost:9000/master/docs/docs-builder-bot/DOP-4165-lhci'], // change to main before merge
     },
     upload: {
       target: 'lhci',
-      serverBaseUrl: 'http://localhost:9001',
-      token: process.env.LHCI_BUILD_TOKEN,
+      serverBaseUrl: 'https://docs-lighthouse-server.docs.prod.corp.mongodb.com/',
+      token: process.env.LIGHTHOUSE_BUILD_TOKEN,
     },
   },
 };
