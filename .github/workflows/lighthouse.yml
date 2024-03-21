@@ -36,6 +36,7 @@ jobs:
       - name: Install Lighthouse
         env: 
           PROJECT: ${{ matrix.project }}
+          GATSBY_SITE: ${{ matrix.project }}
           LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
           LIGHTHOUSE_BUILD_TOKEN: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
         run: |
