@@ -287,7 +287,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       jsc: {
         transform: {
           react: {
-            runtime: 'classic',
+            runtime: 'automatic',
           },
         },
         target: 'esnext',
