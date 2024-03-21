@@ -35,6 +35,7 @@ jobs:
           npm ci --legacy-peer-deps
           npm run build
           npm install -g @lhci/cli
+          npm run serve &
           lhci autorun
       # - name: Install Lighthouse
       #   run: |
