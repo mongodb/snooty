@@ -1,16 +1,8 @@
-const runningEnv = process.env.NODE_ENV || 'production';
-
-require('dotenv').config({
-  path: `.env.${runningEnv}`,
-});
-
 module.exports = {
   ci: {
     collect: {
-      // staticDistDir: './public',
       startServerCommand: 'npm run serve',
-      url: [`http://localhost:9000/${process.env.PROJECT}/runner/master`], // change to main before merge?
-      // url: ['http://localhost:9000/master/cloud-docs/matt.meigs/DOP-4165-lhci'],
+      url: [`http://localhost:9000/${process.env.GATSBY_SITE}/runner/master`],
       numberOfRuns: 3,
     },
     upload: {
