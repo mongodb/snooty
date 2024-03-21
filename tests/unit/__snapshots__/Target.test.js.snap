@@ -130,7 +130,9 @@ a .emotion-0 {
       >
         <img
           class="emotion-2 emotion-3"
+          height="10"
           src="/assets/link.svg"
+          width="10"
         />
       </a>
       <div
