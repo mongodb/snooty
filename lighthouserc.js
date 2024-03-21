@@ -9,7 +9,7 @@ module.exports = {
     collect: {
       staticDistDir: './public',
       startServerCommand: 'npm run serve',
-      url: [`http://localhost:9000/${process.env.GATSBY_SITE}/runner/${process.env.BRANCH}`], // change to main before merge?
+      url: [`http://localhost:9000/${process.env.GATSBY_SITE}/runner/master`], // change to main before merge?
       numberOfRuns: 3,
     },
     upload: {
