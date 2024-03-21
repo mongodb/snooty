@@ -29,7 +29,6 @@ jobs:
         run: |
           npm ci --legacy-peer-deps
           npm run build
-          ls public
       - name: Install Lighthouse
         env: 
           LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
