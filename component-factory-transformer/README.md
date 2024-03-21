@@ -1,6 +1,6 @@
 # Component Factory Transformer
 
-This directory contains the custom SWC plugin that performs the component factory filtering process. This plugin uses a list of directive values to determine which components keep within the `src/components/ComponentFactory.js` file.
+This directory contains the custom SWC plugin that performs the component factory filtering process. This plugin uses a list of directive values to determine which components to keep within the `src/components/ComponentFactory.js` file.
 
 ## Structure
 
