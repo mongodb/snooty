@@ -31,13 +31,15 @@ jobs:
         run: |
           npm ci --legacy-peer-deps
           npm run build
+      - name: Install Lighthouse
+        run: |
+          npm install -g @lhci/cli
       - name: Run Lighthouse
         env: 
           LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
           LIGHTHOUSE_BUILD_TOKEN: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
           BRANCH: ${{ github.head_ref || github.ref_name }}
         run:
-          npm install -g @lhci/cli
           lhci autorun
       # - uses: actions/checkout@v4
       # - name: Run Lighthouse on urls and upload data to private lhci server
