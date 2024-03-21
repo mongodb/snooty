@@ -16,6 +16,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
+      - name: Access Build Data
+        uses: mongodb/docs-worker-actions/build-artifact@main
+        env: 
+          PROJECT_TO_BUILD: ${{ matrix.project }}
       - name: Build Snooty
         env:
           NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
