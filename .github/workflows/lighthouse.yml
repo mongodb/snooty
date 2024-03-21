@@ -2,15 +2,40 @@ on:
   push:
     branches:
       - "main"
-name: Run Lighthouse Report
+      - "DOP-4165-lhci"
+name: Build docs site artifact
 jobs: 
-  lighthouse:
+  staging:
+    permissions: write-all
     runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        project: ['cloud-docs', 'docs']
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+      - name: Access Build Data
+        uses: mongodb/docs-worker-actions/build-artifact@main
+        env: 
+          PROJECT_TO_BUILD: ${{ matrix.project }}
+      - name: Build Snooty
+        env:
+          NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
+          NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
+          GATSBY_BUILD_FROM_JSON: true
+          GATSBY_PARSER_USER: docsworker-xlarge
+          GATSBY_SITE: ${{ matrix.project }}
+          GATSBY_PARSER_BRANCH: main
+        run: |
+          npm ci --legacy-peer-deps
+          npm run build
+          npm run serve
       - uses: actions/checkout@v4
       - name: Run Lighthouse on urls and upload data to private lhci server
         uses: treosh/lighthouse-ci-action@v11
         with:
-          urls: 'https://example.com/'
+          urls: 'https://localhost:9000/master/${{ matrix.project }}/docs-builder-bot/${{ github.head_ref || github.ref_name }}'
           serverBaseUrl: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
           serverToken: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
