@@ -28,14 +28,17 @@ jobs:
           GATSBY_PARSER_USER: docsworker-xlarge
           GATSBY_SITE: ${{ matrix.project }}
           GATSBY_PARSER_BRANCH: main
+          LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
+          LIGHTHOUSE_BUILD_TOKEN: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
+          BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
           npm ci --legacy-peer-deps
           npm run build
-          npm run serve
-      - uses: actions/checkout@v4
-      - name: Run Lighthouse on urls and upload data to private lhci server
-        uses: treosh/lighthouse-ci-action@v11
-        with:
-          urls: 'https://localhost:9000/master/${{ matrix.project }}/docs-builder-bot/${{ github.head_ref || github.ref_name }}'
-          serverBaseUrl: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
-          serverToken: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
+          lhci autorun
+      # - uses: actions/checkout@v4
+      # - name: Run Lighthouse on urls and upload data to private lhci server
+      #   uses: treosh/lighthouse-ci-action@v11
+      #   with:
+      #     urls: 'https://localhost:9000/master/${{ matrix.project }}/docs-builder-bot/${{ github.head_ref || github.ref_name }}'
+      #     serverBaseUrl: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
+      #     serverToken: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}

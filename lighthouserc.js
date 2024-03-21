@@ -1,19 +1,20 @@
-const runningEnv = process.env.NODE_ENV || 'production';
+// const runningEnv = process.env.NODE_ENV || 'production';
 
-require('dotenv').config({
-  path: `.env.${runningEnv}`,
-});
+// require('dotenv').config({
+//   path: `.env.${runningEnv}`,
+// });
 
 module.exports = {
   ci: {
     collect: {
       staticDistDir: './public',
       startServerCommand: 'npm run serve',
-      url: ['http://localhost:9000/master/docs/docs-builder-bot/DOP-4165-lhci'], // change to main before merge
+      url: [`http://localhost:9000/master/docs/runner/${process.env.BRANCH}`], // change to main before merge?
+      numberOfRuns: 3,
     },
     upload: {
       target: 'lhci',
-      serverBaseUrl: 'https://docs-lighthouse-server.docs.prod.corp.mongodb.com/',
+      serverBaseUrl: process.env.LIGHTHOUSE_SERVER_URL,
       token: process.env.LIGHTHOUSE_BUILD_TOKEN,
     },
   },
