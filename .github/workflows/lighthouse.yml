@@ -30,7 +30,7 @@ jobs:
           GATSBY_PARSER_BRANCH: main
           LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
           LIGHTHOUSE_BUILD_TOKEN: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
-          BRANCH: ${{ github.head_ref || github.ref_name }}
+          BRANCH: ${{ github.ref_name }}
         run: |
           npm ci --legacy-peer-deps
           npm run build
