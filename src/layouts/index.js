@@ -12,6 +12,9 @@ import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
+import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
+
+const fontFamily = getCurrentLocaleFontFamilyValue();
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -28,6 +31,7 @@ const globalCSS = css`
   body {
     font-size: 16px;
     line-height: 24px;
+    font-family: ${fontFamily};
   }
 
   .hidden {

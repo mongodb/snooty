@@ -44,6 +44,21 @@ const stripLocale = (slug) => {
 };
 
 /**
+ * Returns the font-family name or inherit as a value based on the locale code
+ * returned from getCurrentLocale.
+ */
+export const getCurrentLocaleFontFamilyValue = () => {
+  if (!isBrowser) return;
+
+  const fontFamilyMap = {
+    'zh-cn': 'Noto Sans SC',
+    'ko-kr': 'Noto Sans Korean',
+  };
+  const locale = getCurrLocale();
+  return fontFamilyMap[locale] ?? 'inherit';
+};
+
+/**
  * Returns the locale code based on the current location pathname of the page.
  * @returns {string}
  */
