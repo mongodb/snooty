@@ -29,11 +29,11 @@ const plugins = [
       web: [
         {
           name: 'Noto Sans SC',
-          file: 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700;900&display=swap',
+          file: 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap',
         },
         {
           name: 'Noto Sans KR',
-          file: 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap',
+          file: 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap',
         },
       ],
     },

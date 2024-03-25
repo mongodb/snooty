@@ -28,15 +28,9 @@ const footerOverrides = css`
 `;
 
 const globalCSS = css`
-  body,
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: ${fontFamily} !important;
+  #side-nav-1 *,
+  #template-container * {
+    font-family: ${fontFamily};
   }
 
   body {

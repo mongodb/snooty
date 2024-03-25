@@ -46,14 +46,15 @@ const stripLocale = (slug) => {
 /**
  * Returns the font-family name or inherit as a value based on the locale code
  * returned from getCurrentLocale.
+ * Used currently for overriding font-family from LG.
  */
 export const getCurrentLocaleFontFamilyValue = () => {
   const fontFamilyMap = {
     'zh-cn': 'Noto Sans SC',
-    'ko-kr': 'Noto Sans Korean',
+    'ko-kr': 'Noto Sans KR',
   };
   const locale = getCurrLocale();
-  return fontFamilyMap[locale] ?? 'inherit';
+  return fontFamilyMap[locale] ? `${fontFamilyMap[locale]}` : undefined;
 };
 
 /**
