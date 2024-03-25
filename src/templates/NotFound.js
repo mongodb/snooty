@@ -37,15 +37,7 @@ const NotFoundImage = () => {
   const altText = 'Page not found';
   const imgPath = 'assets/404.png';
 
-  return (
-    <img
-      src={withPrefix(imgPath)}
-      alt={altText}
-      css={css`
-        width: 444px;
-      `}
-    />
-  );
+  return <img src={withPrefix(imgPath)} alt={altText} height={444} width={444} />;
 };
 
 const ErrorBoxContainer = () => {
