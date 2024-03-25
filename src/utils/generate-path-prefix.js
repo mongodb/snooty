@@ -19,9 +19,7 @@ const generatePathPrefix = (
 
   // if urlSlug is present we're generating a canonical link
   // and want to replace the parser branch alias with the url slug
-  console.log('url slug', urlSlug);
   const branch = urlSlug ?? parserBranch;
-  console.log('branhc', branch);
 
   // Uses the passed in project value if siteMetadata's project is undefined.
   // This is to maintain usability for both local/prod builds (uses siteMetadata) and Gatsby Cloud builds
