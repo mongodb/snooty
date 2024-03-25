@@ -1,19 +1,47 @@
 import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import { useSiteMetadata } from './use-site-metadata';
+//import { siteMetadata } from ''
+import { generatePathPrefix } from '../utils/generate-path-prefix';
 import { usePathPrefix } from './use-path-prefix';
 
 export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
-  const { siteUrl } = useSiteMetadata();
-  const pathPrefix = usePathPrefix();
+  const siteMetadata = useSiteMetadata();
+  // IDK WHAT TO DO
+  const { siteUrl, parserBranch, project } = siteMetadata;
+  // find urlslug
+  //console.log(repoBranches);
+  const urlSlugBranch = repoBranches.branches.find((branch) => branch.gitBranchName === parserBranch);
+  console.log('BRANCH', urlSlugBranch);
+  const urlSlug = urlSlugBranch.urlSlug;
+  console.log('URL SLUG', urlSlug);
+  //console.log(urlSlug);
+  // TODO: What to put as default for project?
+  const pathPrefix = generatePathPrefix(siteMetadata, project, urlSlug);
+  //const generatePathPrefixe = generatePathPrefix(siteMetadata);
+  //console.log('GENERATED PATH PREFIX', generatePathPrefixe);
+  //const pathPrefix = usePathPrefix();
 
-  console.log('repobranches', repoBranches);
+  // loop through repoBranches and find urlSlug for the current branch
 
-  console.log('SITE URL', siteUrl);
-  console.log('PATH FPREFIXXX', pathPrefix);
-  console.log('SLUG', slug);
+  // console.log('SITE URL', siteUrl);
+  // console.log('PATH FPREFIXXX', pathPrefix);
+  // console.log('SLUG', slug);
+
+  // repoBranches.branches.map((branch) => {
+  //   if (branch.urlAliases && branch.urlAliases.length != 0) {
+  //     console.log('BRANCH', branch);
+  //     branch.urlAliases.map((alias) => {
+  //       console.log('ALIAS', alias);
+  //     });
+  //   }
+  // });
   // Use default logic assuming there is no canonical provided from the meta directive
+
+  // AND THEN LOOP THROUGH REPOSBRANCHES TO FIND WHICH BRANCH WE"re ON< USE URLSLUG FOR THAT BRANCHHHH
+
+  // RECONSTRUCT PATH PREFIX
+
   let canonical = `${siteUrl}${pathPrefix}/${slug === '/' ? '' : slug}`;
-  console.log('cCANNONOICAL', canonical);
 
   // checks to see if the canonical is provided from the
   // meta directive and grab the index
