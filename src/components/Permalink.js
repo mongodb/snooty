@@ -64,7 +64,7 @@ const Permalink = ({ id, description, buffer }) => {
         title={'Permalink to this ' + description}
         onClick={handleClick}
       >
-        <LinkIcon src={withPrefix('assets/link.svg')} />
+        <LinkIcon src={withPrefix('assets/link.svg')} width={10} height={10} />
         <Tooltip
           className={cx(tooltipStyle)}
           triggerEvent="click"
