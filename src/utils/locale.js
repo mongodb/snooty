@@ -44,9 +44,11 @@ const stripLocale = (slug) => {
 };
 
 /**
- * Returns the font-family name or inherit as a value based on the locale code
- * returned from getCurrentLocale.
- * Used currently for overriding font-family from LG.
+ * Returns the font-family name or undefined as a value based on the locale code
+ * returned from getCurrentLocale, undefined to tell CSS to ignore this and work as
+ * normal and use LG's styles.
+ *
+ * This is currently for overriding font-family from LG.
  */
 export const getCurrentLocaleFontFamilyValue = () => {
   const fontFamilyMap = {
