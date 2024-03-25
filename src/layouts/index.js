@@ -28,10 +28,20 @@ const footerOverrides = css`
 `;
 
 const globalCSS = css`
+  body,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: ${fontFamily} !important;
+  }
+
   body {
     font-size: 16px;
     line-height: 24px;
-    font-family: ${fontFamily};
   }
 
   .hidden {

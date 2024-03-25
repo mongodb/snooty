@@ -48,8 +48,6 @@ const stripLocale = (slug) => {
  * returned from getCurrentLocale.
  */
 export const getCurrentLocaleFontFamilyValue = () => {
-  if (!isBrowser) return;
-
   const fontFamilyMap = {
     'zh-cn': 'Noto Sans SC',
     'ko-kr': 'Noto Sans Korean',
