@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { Head } from '../../src/components/DocumentBody';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import { useSiteMetadata } from '../../src/hooks/use-site-metadata';
-import { usePathPrefix } from '../../src/hooks/use-path-prefix';
+import { generatePathPrefix } from '../../src/utils/generate-path-prefix';
 import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
 import { AVAILABLE_LANGUAGES } from '../../src/utils/locale';
 import { DOTCOM_BASE_URL } from '../../src/utils/base-url';
@@ -63,8 +63,12 @@ describe('Head', () => {
 
     it('renders the canonical tag that points to itself', () => {
       render(<Head pageContext={mockHeadPageContext} />);
-      const { siteUrl } = useSiteMetadata();
-      const pathPrefix = usePathPrefix();
+      const siteMetadata = useSiteMetadata();
+      const { siteUrl, parserBranch, project } = siteMetadata;
+      const urlSlug = mockHeadPageContext.repoBranches.branches.find(
+        (branch) => branch.gitBranchName === parserBranch
+      )?.urlSlug;
+      const pathPrefix = generatePathPrefix(siteMetadata, project, urlSlug);
       const slug = mockHeadPageContext.slug;
 
       const canonical = `${siteUrl}${pathPrefix}/${slug === '/' ? '' : slug}`;
