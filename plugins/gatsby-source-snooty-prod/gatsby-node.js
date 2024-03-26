@@ -23,7 +23,7 @@ const { createDocsetNodes } = require('../utils/docsets.js');
 const { createProjectParentNodes } = require('../utils/project-parents.js');
 
 const assets = new Map();
-const pageComponents = new Set();
+const projectComponents = new Set();
 
 let db;
 
@@ -153,7 +153,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
     const currentPageComponents = getPageComponents(pageNode);
 
-    currentPageComponents.forEach((componentName) => pageComponents.add(componentName));
+    currentPageComponents.forEach((componentName) => projectComponents.add(componentName));
 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       createNode({
@@ -296,7 +296,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           plugins: [
             [
               `${process.cwd()}/component-factory-transformer/target/wasm32-wasi/release/component_factory_filter.wasm`,
-              { includes: [...Array.from(pageComponents)] },
+              { includes: [...Array.from(projectComponents)] },
             ],
           ],
         },
