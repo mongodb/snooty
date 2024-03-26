@@ -60,6 +60,11 @@ const cardDriverStyle = css`
   padding: ${theme.size.default} ${theme.size.medium};
   align-items: center;
 
+  // override "height" HTML attribute
+  img {
+    height: 100%;
+  }
+
   p {
     margin: 0 0 0 18px;
     font-weight: 400;
@@ -76,12 +81,7 @@ const landingBottomStyling = css`
   }
 `;
 
-const CardIcon = styled('img')`
-  width: ${theme.size.large};
-`;
-
-const CompactIcon = styled('img')`
-  width: ${theme.size.medium};
+const compactIconStyle = `
   @media ${theme.screenSize.upToSmall} {
     width: 20px;
   }
@@ -140,11 +140,18 @@ const Card = ({
   const template = page?.options?.template;
 
   const isLanding = template === 'landing';
-  const Icon = ['landing', 'product-landing'].includes(template) ? CardIcon : CompactIcon;
 
   /* If tag == 'landing-bottom', this is 2nd group of cards on 
   landing page which we want to keep exempt from landing styles */
   const isLandingBottom = tag === 'landing-bottom';
+
+  let imgSize;
+  if (isLanding && isLandingBottom) imgSize = '50px';
+  else if (isLanding) imgSize = theme.size.xlarge;
+  else if (template === 'product-landing') imgSize = theme.size.large;
+  else imgSize = theme.size.medium;
+
+  const useCompactIcon = !['landing', 'product-landing'].includes(template);
 
   const styling = [
     cardBaseStyles,
@@ -156,7 +163,15 @@ const Card = ({
 
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
-      {icon && <Icon src={withPrefix(icon)} alt={iconAlt} />}
+      {icon && (
+        <img
+          src={withPrefix(icon)}
+          alt={iconAlt}
+          width={imgSize}
+          height={imgSize}
+          className={useCompactIcon ? cx(compactIconStyle) : ''}
+        />
+      )}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
