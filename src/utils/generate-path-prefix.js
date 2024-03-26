@@ -2,8 +2,7 @@ const { normalizePath } = require('./normalize-path');
 
 const generatePathPrefix = (
   { commitHash, parserBranch, patchId, pathPrefix, project: parserProject, snootyBranch, user },
-  project,
-  urlSlug
+  project
 ) => {
   // If user specified a PATH_PREFIX environment variable, ensure it begins with a prefix and use
   if (pathPrefix) {
@@ -17,10 +16,6 @@ const generatePathPrefix = (
   if (commitHash) prefix += `${commitHash}`;
   if (patchId) prefix += `/${patchId}`;
 
-  // if urlSlug is present we're generating a canonical link
-  // and want to replace the parser branch alias with the url slug
-  const branch = urlSlug ?? parserBranch;
-
   // Uses the passed in project value if siteMetadata's project is undefined.
   // This is to maintain usability for both local/prod builds (uses siteMetadata) and Gatsby Cloud builds
   // (uses Snooty metadata for individual project + branch combination).
@@ -32,8 +27,8 @@ const generatePathPrefix = (
   // TODO: Simplify this logic when Snooty development is staged in integration environment
   const base = `${projectSlug}/${user}`;
   const path = process.env.GATSBY_SNOOTY_DEV
-    ? `/${prefix}/${branch}/${base}/${snootyBranch}`
-    : `/${prefix}/${base}/${branch}`;
+    ? `/${prefix}/${parserBranch}/${base}/${snootyBranch}`
+    : `/${prefix}/${base}/${parserBranch}`;
   return normalizePath(path);
 };
 
