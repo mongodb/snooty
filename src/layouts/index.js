@@ -29,7 +29,7 @@ const footerOverrides = css`
 
 const globalCSS = css`
   #side-nav-1 *,
-  #template-container * {
+  #template-container *:not(:is(code, code *)) {
     font-family: ${fontFamily};
   }
 
