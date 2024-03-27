@@ -12,3 +12,4 @@ coverage/
 .env.*
 .vscode/
 .env
+.swc/
