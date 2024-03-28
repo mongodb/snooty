@@ -44,6 +44,22 @@ const stripLocale = (slug) => {
 };
 
 /**
+ * Returns the font-family name or undefined as a value based on the locale code
+ * returned from getCurrentLocale, undefined to tell CSS to ignore this and work as
+ * normal and use LG's styles.
+ *
+ * This is currently for overriding font-family from LG.
+ */
+export const getCurrentLocaleFontFamilyValue = () => {
+  const fontFamilyMap = {
+    'zh-cn': 'Noto Sans SC',
+    'ko-kr': 'Noto Sans KR',
+  };
+  const locale = getCurrLocale();
+  return fontFamilyMap[locale] ? `${fontFamilyMap[locale]}` : undefined;
+};
+
+/**
  * Returns the locale code based on the current location pathname of the page.
  * @returns {string}
  */

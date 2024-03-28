@@ -109,11 +109,13 @@ const DocumentBody = (props) => {
         >
           <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
             <FootnoteContext.Provider value={{ footnotes }}>
-              <Template {...props} useChatbot={useChatbot}>
-                {pageNodes.map((child, index) => (
-                  <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-                ))}
-              </Template>
+              <div id="template-container">
+                <Template {...props} useChatbot={useChatbot}>
+                  {pageNodes.map((child, index) => (
+                    <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                  ))}
+                </Template>
+              </div>
             </FootnoteContext.Provider>
           </ImageContextProvider>
         </Widgets>
