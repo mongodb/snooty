@@ -1,15 +1,21 @@
+const swc = require('@swc/core');
 const path = require('path');
+const fs = require('fs/promises');
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
 const { getPageComponents } = require('../../src/utils/setup/get-page-components.js');
-const { saveAssetFiles, saveStaticFiles, GATSBY_IMAGE_EXTENSIONS } = require('../../src/utils/setup/save-asset-files');
-const { validateEnvVariables } = require('../../src/utils/setup/validate-env-variables');
-const { getNestedValue } = require('../../src/utils/get-nested-value');
+const {
+  saveAssetFiles,
+  saveStaticFiles,
+  GATSBY_IMAGE_EXTENSIONS,
+} = require('../../src/utils/setup/save-asset-files.js');
+const { validateEnvVariables } = require('../../src/utils/setup/validate-env-variables.js');
+const { getNestedValue } = require('../../src/utils/get-nested-value.js');
 const { removeNestedValue } = require('../../src/utils/remove-nested-value.js');
-const { getPageSlug } = require('../../src/utils/get-page-slug');
+const { getPageSlug } = require('../../src/utils/get-page-slug.js');
 const { removeLeadingSlash } = require('../../src/utils/remove-leading-slash.js');
-const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadata');
-const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash');
-const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix');
+const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadata.js');
+const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash.js');
+const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix.js');
 const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
@@ -17,6 +23,7 @@ const { createDocsetNodes } = require('../utils/docsets.js');
 const { createProjectParentNodes } = require('../utils/project-parents.js');
 
 const assets = new Map();
+const projectComponents = new Set();
 
 let db;
 
@@ -144,6 +151,10 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
       });
     }
 
+    const currentPageComponents = getPageComponents(pageNode);
+
+    currentPageComponents.forEach((componentName) => projectComponents.add(componentName));
+
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       createNode({
         id: key,
@@ -153,7 +164,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
           type: 'Page',
           contentDigest: createContentDigest(doc),
         },
-        componentNames: getPageComponents(pageNode),
+        componentNames: currentPageComponents,
       });
     }
 
@@ -269,6 +280,33 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   } catch (err) {
     console.error(err);
     throw err;
+  }
+
+  if (process.env.USE_FILTER_BRANCH === 'true') {
+    const { code } = await swc.transformFile(`${process.cwd()}/src/components/ComponentFactory.js`, {
+      jsc: {
+        transform: {
+          react: {
+            runtime: 'automatic',
+          },
+        },
+        target: 'esnext',
+        parser: { jsx: true, syntax: 'ecmascript' },
+        experimental: {
+          plugins: [
+            [
+              `${process.cwd()}/component-factory-transformer/target/wasm32-wasi/release/component_factory_filter.wasm`,
+              { includes: [...Array.from(projectComponents)] },
+            ],
+          ],
+        },
+      },
+    });
+
+    console.log(code);
+
+    if (process.env.FILTER_DRY_RUN !== 'true')
+      await fs.writeFile(`${process.cwd()}/src/components/ComponentFactory.js`, code);
   }
 
   // DOP-4214: for each page, query the directive/node types

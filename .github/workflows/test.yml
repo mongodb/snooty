@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-    - main
+      - main
   pull_request:
     branches:
-    - main
+      - main
 
 jobs:
   test:
@@ -18,15 +18,15 @@ jobs:
       NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
       NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '18.15'
-    - name: Install
-      run: npm ci --legacy-peer-deps
-    - name: Lint
-      run: npm run lint && npm run format
-    - name: Test
-      run: npm test
-      env:
-        CI: true
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '18.15'
+      - name: Install
+        run: npm ci --legacy-peer-deps
+      - name: Lint
+        run: npm run lint && npm run format
+      - name: Test
+        run: npm test
+        env:
+          CI: true
