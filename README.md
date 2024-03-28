@@ -215,6 +215,20 @@ npm run format:fix
 
 We have set up a precommit hook that will format staged files. Prettier also offers a variety of editor integrations to automatically format your code.
 
+### Component Factory Filter
+
+The component factory filter process uses [SWC](https://swc.rs/) to remove unused components from the `ComponentFactory.js` file. A custom plugin is used to perform this transformation, and it lives in the `component-factory-transformer` directory. This plugin is run when the `npm run build` command is executed.
+
+To use the custom plugin, you'll first need to install [Rust](https://www.rust-lang.org/tools/install).
+
+Once Rust is installed, you'll need to build the plugin. Change directory to `component-factory-transformer`, run `cargo build && rustup target add wasm32-wasi` if you haven't, and then run `npm run prepublishOnly`.
+
+The `USE_FILTER_BRANCH` environment variable needs to be added in the `.env.production` file and set to `true` for this to work.
+
+NOTE: This will modify the `ComponentFactory.js` file directly. To undo this, you can run `git restore src/components/ComponentFactory.js` to get the file back to its original state.
+
+To perform a dry run i.e. the `ComponentFactory.js` file does not get updated, the `FILTER_DRY_RUN` property can be provided and set to `true`. This will log the resulting code that would have been written to the file only.
+
 ### Useful Resources
 
 [React](https://reactjs.org/docs/getting-started.html)

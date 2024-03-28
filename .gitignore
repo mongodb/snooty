@@ -16,3 +16,4 @@ coverage/
 .lighthouseci/links.json
 .vscode/
 .env
+.swc/
