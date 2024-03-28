@@ -12,7 +12,6 @@ export const defaultSuggestedPrompts = [
   'Get started with MongoDB',
   'How do I register for Atlas?',
   'How do you deploy a free cluster in Atlas?',
-  'How do you import or migrate data into MongoDB Atlas?',
   'Why should I use Atlas Search?',
 ];
 
