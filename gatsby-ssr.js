@@ -23,6 +23,22 @@ export const onRenderBody = ({ setHeadComponents }) => {
         __html: `!function(e,t,r,n){if(!e[n]){for(var a=e[n]=[],i=["survey","reset","config","init","set","get","event","identify","track","page","screen","group","alias"],s=0;s<i.length;s++){var c=i[s];a[c]=a[c]||function(e){return function(){var t=Array.prototype.slice.call(arguments);a.push([e,t])}}(c)}a.SNIPPET_VERSION="1.0.1";var o=t.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/"+r+"/"+n+".js";var l=t.getElementsByTagName("script")[0];l.parentNode.insertBefore(o,l)}}(window,document,"Dk30CC86ba0nATlK","delighted");`,
       }}
     />,
+    <link
+      rel="preload"
+      href="./fonts/NotoSansKR-VariableFont_wght.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+      key="notoSansKR"
+    />,
+    <link
+      rel="preload"
+      href="./fonts/NotoSansSC-VariableFont_wght.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+      key="notoSansSC"
+    />,
   ]);
 };
 

@@ -17,6 +17,7 @@ import { baseUrl } from '../../utils/base-url';
 import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { getCurrentLocaleFontFamilyValue } from '../../utils/locale';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -29,6 +30,8 @@ import Toctree from './Toctree';
 import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 
 const SIDENAV_WIDTH = 268;
+
+const fontFamily = getCurrentLocaleFontFamilyValue();
 
 // Use LG's css here to style the component without passing props
 const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
@@ -91,6 +94,10 @@ const titleStyle = LeafyCSS`
 
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
 const disableScroll = (shouldDisableScroll) => css`
+  #side-nav-1 * {
+    font-family: ${fontFamily};
+  }
+
   body {
     ${shouldDisableScroll && 'overflow: hidden;'}
   }

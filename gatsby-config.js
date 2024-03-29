@@ -21,23 +21,6 @@ const plugins = [
       path: `${__dirname}/src/images`, // cannot use public as plugins initialize before gatsby-node module
     },
   },
-  {
-    resolve: 'gatsby-omni-font-loader',
-    options: {
-      enableListener: true,
-      preconnect: [`https://fonts.googleapis.com`, `https://fonts.gstatic.com`],
-      web: [
-        {
-          name: 'Noto Sans SC',
-          file: 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap',
-        },
-        {
-          name: 'Noto Sans KR',
-          file: 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap',
-        },
-      ],
-    },
-  },
   'gatsby-plugin-emotion',
 ];
 // PRODUCTION DEPLOYMENTS --
