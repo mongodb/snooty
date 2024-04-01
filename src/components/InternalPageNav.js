@@ -1,37 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { css } from '@emotion/react';
+import { palette } from '@leafygreen-ui/palette';
+import { theme } from '../theme/docsTheme';
 import { getPageTitle } from '../utils/get-page-title';
 import Link from './Link';
 
-const tableContainerStyling = css`
+const StyledContainer = styled.div`
   padding-top: 2em;
   padding-bottom: 2.5em;
-  display: table;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  column-gap: ${theme.size.default};
 
   @media print {
     display: none;
   }
 `;
 
-const tableCellStyling = css`
-  display: table-cell;
-  vertical-align: middle;
+const arrowStyling = css`
   line-height: 28px;
-`;
-
-const textAlignLeft = css`
-  text-align: left;
-`;
-
-const textAlignRight = css`
-  text-align: right;
+  align-content: center;
+  color: ${palette.black};
 `;
 
 const titleSpanStyling = css`
   display: inline-block;
-  width: 270px;
+  line-height: 28px;
+`;
+
+const LinkContentContainer = styled.div`
+  display: flex;
 `;
 
 const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
@@ -39,24 +40,28 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
   const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
   const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
   return (
-    <div css={tableContainerStyling}>
+    <StyledContainer>
       {prevSlug && (
         <React.Fragment>
-          <span css={[tableCellStyling, textAlignRight]}>← &nbsp;</span>
-          <Link css={[tableCellStyling, textAlignLeft]} to={prevSlug} title="Previous Section">
-            <span css={titleSpanStyling}>{getPageTitle(prevSlug, slugTitleMapping)}</span>
+          <Link css={[]} to={prevSlug} title="Previous Section">
+            <LinkContentContainer>
+              <span css={[arrowStyling]}>←&nbsp;</span>
+              <span css={titleSpanStyling}>{getPageTitle(prevSlug, slugTitleMapping)}</span>
+            </LinkContentContainer>
           </Link>
         </React.Fragment>
       )}
       {nextSlug && (
         <React.Fragment>
-          <Link css={[tableCellStyling, textAlignRight]} to={nextSlug} title="Next Section">
-            <span css={titleSpanStyling}>{getPageTitle(nextSlug, slugTitleMapping)}</span>
+          <Link css={[]} to={nextSlug} title="Next Section">
+            <LinkContentContainer>
+              <span css={titleSpanStyling}>{getPageTitle(nextSlug, slugTitleMapping)}</span>
+              <span css={[arrowStyling]}>&nbsp;→</span>
+            </LinkContentContainer>
           </Link>
-          <span css={[tableCellStyling, textAlignLeft]}>&nbsp;→</span>
         </React.Fragment>
       )}
-    </div>
+    </StyledContainer>
   );
 };
 
