@@ -24,5 +24,6 @@ export const baseBannerStyle = css`
   p,
   a {
     font-size: ${theme.fontSize.small};
+    line-height: ${theme.fontSize.small};
   }
 `;

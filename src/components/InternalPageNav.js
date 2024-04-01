@@ -33,6 +33,7 @@ const titleSpanStyling = css`
 
 const LinkContentContainer = styled.div`
   display: flex;
+  column-gap: ${theme.size.tiny};
 `;
 
 const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
