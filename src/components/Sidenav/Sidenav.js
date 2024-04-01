@@ -94,12 +94,14 @@ const titleStyle = LeafyCSS`
 
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
 const disableScroll = (shouldDisableScroll) => css`
-  #side-nav-1 * {
-    font-family: ${fontFamily};
-  }
-
   body {
     ${shouldDisableScroll && 'overflow: hidden;'}
+  }
+`;
+
+const translatedFontFamilyStyles = css`
+  #side-nav-1 * {
+    font-family: ${fontFamily};
   }
 `;
 
@@ -241,7 +243,11 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
 
   return (
     <>
-      <Global styles={disableScroll(!hideMobile)} />
+      <Global
+        styles={css`
+          ${disableScroll(!hideMobile)} ${translatedFontFamilyStyles}
+        `}
+      />
       <SidenavContainer {...topValues} template={template}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
