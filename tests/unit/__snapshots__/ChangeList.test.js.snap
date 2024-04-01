@@ -52,8 +52,6 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
 }
 
 .emotion-9 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -65,51 +63,44 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
 }
 
 .emotion-9:hover,
-.emotion-9:focus,
-.emotion-9:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-9:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-9:focus {
   outline: none;
 }
 
+.emotion-9:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-9:focus {
+  text-decoration-color: #016BF8;
+}
+
 .emotion-10 {
-  position: relative;
-}
-
-.emotion-10::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-10::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-10::after {
-  background-color: #E8EDEB;
-}
-
-.emotion-11 {
   color: #016BF8;
   word-break: break-all;
 }
 
-.emotion-13 {
+.emotion-12 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -119,11 +110,11 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
   color: #001E2B;
 }
 
-.emotion-14 {
+.emotion-13 {
   margin-top: 2px;
 }
 
-.emotion-16 {
+.emotion-15 {
   font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -148,17 +139,17 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
   color: #970606;
 }
 
-.emotion-17 {
+.emotion-16 {
   margin: 0;
   list-style-position: start;
 }
 
-.emotion-19 {
+.emotion-18 {
   margin-top: 12px;
   line-height: 28px;
 }
 
-.emotion-54 {
+.emotion-51 {
   font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -183,11 +174,11 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
   color: #00684A;
 }
 
-.emotion-59 {
+.emotion-56 {
   position: relative;
 }
 
-.emotion-60 {
+.emotion-57 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -200,7 +191,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
   margin-right: 5px;
 }
 
-.emotion-62 {
+.emotion-59 {
   color: #DB3030;
 }
 
@@ -227,27 +218,25 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
             target="_self"
           >
-            <span
-              class="emotion-10"
-            >
+            <span>
               <h6
-                class="emotion-11 emotion-12 emotion-13"
+                class="emotion-10 emotion-11 emotion-12"
               >
                 PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
               </h6>
             </span>
           </a>
           <div
-            class="emotion-14 emotion-15 emotion-16"
+            class="emotion-13 emotion-14 emotion-15"
           >
             Removed
           </div>
         </div>
         <ul
-          class="emotion-17 emotion-18"
+          class="emotion-16 emotion-17"
         >
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             Resource version 2023-01-01 was removed, latest available resource version is 2023-02-01
           </li>
@@ -274,27 +263,25 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
             target="_self"
           >
-            <span
-              class="emotion-10"
-            >
+            <span>
               <h6
-                class="emotion-11 emotion-12 emotion-13"
+                class="emotion-10 emotion-11 emotion-12"
               >
                 PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
               </h6>
             </span>
           </a>
           <div
-            class="emotion-14 emotion-15 emotion-16"
+            class="emotion-13 emotion-14 emotion-15"
           >
             Removed
           </div>
         </div>
         <ul
-          class="emotion-17 emotion-18"
+          class="emotion-16 emotion-17"
         >
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             This change should really definitely be hidden
           </li>
@@ -321,34 +308,32 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             href="//0/#tag/Projects/operation/getProjectByName"
             target="_self"
           >
-            <span
-              class="emotion-10"
-            >
+            <span>
               <h6
-                class="emotion-11 emotion-12 emotion-13"
+                class="emotion-10 emotion-11 emotion-12"
               >
                 GET /api/atlas/v2/groups/byName/{groupName}
               </h6>
             </span>
           </a>
           <div
-            class="emotion-14 emotion-15 emotion-54"
+            class="emotion-13 emotion-14 emotion-51"
           >
             Released
           </div>
         </div>
         <ul
-          class="emotion-17 emotion-18"
+          class="emotion-16 emotion-17"
         >
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             <div
-              class="emotion-59 emotion-60 emotion-61"
+              class="emotion-56 emotion-57 emotion-58"
             >
               <svg
                 aria-label="Important With Circle Icon"
-                class="emotion-62"
+                class="emotion-59"
                 fill="none"
                 height="16"
                 role="img"
@@ -380,34 +365,32 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
             target="_self"
           >
-            <span
-              class="emotion-10"
-            >
+            <span>
               <h6
-                class="emotion-11 emotion-12 emotion-13"
+                class="emotion-10 emotion-11 emotion-12"
               >
                 PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
               </h6>
             </span>
           </a>
           <div
-            class="emotion-14 emotion-15 emotion-54"
+            class="emotion-13 emotion-14 emotion-51"
           >
             Released
           </div>
         </div>
         <ul
-          class="emotion-17 emotion-18"
+          class="emotion-16 emotion-17"
         >
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             <div
-              class="emotion-59 emotion-60 emotion-61"
+              class="emotion-56 emotion-57 emotion-58"
             >
               <svg
                 aria-label="Important With Circle Icon"
-                class="emotion-62"
+                class="emotion-59"
                 fill="none"
                 height="16"
                 role="img"
@@ -426,14 +409,14 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             This change should be hidden
           </li>
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             <div
-              class="emotion-59 emotion-60 emotion-61"
+              class="emotion-56 emotion-57 emotion-58"
             >
               <svg
                 aria-label="Important With Circle Icon"
-                class="emotion-62"
+                class="emotion-59"
                 fill="none"
                 height="16"
                 role="img"
@@ -452,14 +435,14 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             Resource version added.
           </li>
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             <div
-              class="emotion-59 emotion-60 emotion-61"
+              class="emotion-56 emotion-57 emotion-58"
             >
               <svg
                 aria-label="Important With Circle Icon"
-                class="emotion-62"
+                class="emotion-59"
                 fill="none"
                 height="16"
                 role="img"
@@ -478,19 +461,19 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             For the 'query' request parameter 'clusterName', default value was changed from 'default' to 'cluster0'
           </li>
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             Added the optional property 'links' in the response with the '200' status.
           </li>
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             <div
-              class="emotion-59 emotion-60 emotion-61"
+              class="emotion-56 emotion-57 emotion-58"
             >
               <svg
                 aria-label="Important With Circle Icon"
-                class="emotion-62"
+                class="emotion-59"
                 fill="none"
                 height="16"
                 role="img"
@@ -522,32 +505,30 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             href="//0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
             target="_self"
           >
-            <span
-              class="emotion-10"
-            >
+            <span>
               <h6
-                class="emotion-11 emotion-12 emotion-13"
+                class="emotion-10 emotion-11 emotion-12"
               >
                 POST /api/atlas/v2/groups/{groupId}/accessList
               </h6>
             </span>
           </a>
           <div
-            class="emotion-14 emotion-15 emotion-54"
+            class="emotion-13 emotion-14 emotion-51"
           >
             Updated
           </div>
         </div>
         <ul
-          class="emotion-17 emotion-18"
+          class="emotion-16 emotion-17"
         >
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             Added the optional property 'name' in the response with the '200' status.
           </li>
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             Added the optional property 'comment' in the response with the '200' status.
           </li>
@@ -574,27 +555,25 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             href="//0/#tag/Projects/operation/getProjectByName"
             target="_self"
           >
-            <span
-              class="emotion-10"
-            >
+            <span>
               <h6
-                class="emotion-11 emotion-12 emotion-13"
+                class="emotion-10 emotion-11 emotion-12"
               >
                 GET /api/atlas/v2/groups/byName/{groupName}
               </h6>
             </span>
           </a>
           <div
-            class="emotion-14 emotion-15 emotion-54"
+            class="emotion-13 emotion-14 emotion-51"
           >
             Updated
           </div>
         </div>
         <ul
-          class="emotion-17 emotion-18"
+          class="emotion-16 emotion-17"
         >
           <li
-            class="emotion-19 emotion-20"
+            class="emotion-18 emotion-19"
           >
             Added the optional property 'withDefaultAlertsSettings' in the response with the '200' status.
           </li>
@@ -642,8 +621,6 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
 }
 
 .emotion-6 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -655,51 +632,44 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
 }
 
 .emotion-6:hover,
-.emotion-6:focus,
-.emotion-6:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-6:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-6:focus {
   outline: none;
 }
 
+.emotion-6:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-6:focus {
+  text-decoration-color: #016BF8;
+}
+
 .emotion-7 {
-  position: relative;
-}
-
-.emotion-7::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-7::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-7::after {
-  background-color: #E8EDEB;
-}
-
-.emotion-8 {
   color: #016BF8;
   word-break: break-all;
 }
 
-.emotion-10 {
+.emotion-9 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -709,21 +679,21 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
   color: #001E2B;
 }
 
-.emotion-11 {
+.emotion-10 {
   margin: 0;
   list-style-position: start;
 }
 
-.emotion-13 {
+.emotion-12 {
   margin-top: 12px;
   line-height: 28px;
 }
 
-.emotion-15 {
+.emotion-14 {
   position: relative;
 }
 
-.emotion-16 {
+.emotion-15 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -736,7 +706,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
   margin-right: 5px;
 }
 
-.emotion-18 {
+.emotion-17 {
   color: #DB3030;
 }
 
@@ -755,11 +725,9 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
           href="//0/#tag/Federated-Authentication/operation/listConnectedOrgConfigs"
           target="_self"
         >
-          <span
-            class="emotion-7"
-          >
+          <span>
             <h6
-              class="emotion-8 emotion-9 emotion-10"
+              class="emotion-7 emotion-8 emotion-9"
             >
               GET /api/atlas/v2/federationSettings/{federationSettingsId}/connectedOrgConfigs
             </h6>
@@ -767,17 +735,17 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
         </a>
       </div>
       <ul
-        class="emotion-11 emotion-12"
+        class="emotion-10 emotion-11"
       >
         <li
-          class="emotion-13 emotion-14"
+          class="emotion-12 emotion-13"
         >
           <div
-            class="emotion-15 emotion-16 emotion-17"
+            class="emotion-14 emotion-15 emotion-16"
           >
             <svg
               aria-label="Important With Circle Icon"
-              class="emotion-18"
+              class="emotion-17"
               fill="none"
               height="16"
               role="img"
@@ -796,14 +764,14 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
           A change
         </li>
         <li
-          class="emotion-13 emotion-14"
+          class="emotion-12 emotion-13"
         >
           <div
-            class="emotion-15 emotion-16 emotion-17"
+            class="emotion-14 emotion-15 emotion-16"
           >
             <svg
               aria-label="Important With Circle Icon"
-              class="emotion-18"
+              class="emotion-17"
               fill="none"
               height="16"
               role="img"
@@ -822,24 +790,24 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
           Removed the non-success response with the status '400'.
         </li>
         <li
-          class="emotion-13 emotion-14"
+          class="emotion-12 emotion-13"
         >
           Added the new optional 'query' request parameter 'envelope'.
         </li>
         <li
-          class="emotion-13 emotion-14"
+          class="emotion-12 emotion-13"
         >
           This change should be hidden!
         </li>
         <li
-          class="emotion-13 emotion-14"
+          class="emotion-12 emotion-13"
         >
           <div
-            class="emotion-15 emotion-16 emotion-17"
+            class="emotion-14 emotion-15 emotion-16"
           >
             <svg
               aria-label="Important With Circle Icon"
-              class="emotion-18"
+              class="emotion-17"
               fill="none"
               height="16"
               role="img"
@@ -871,11 +839,9 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
           href="//0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
           target="_self"
         >
-          <span
-            class="emotion-7"
-          >
+          <span>
             <h6
-              class="emotion-8 emotion-9 emotion-10"
+              class="emotion-7 emotion-8 emotion-9"
             >
               POST /api/atlas/v2/groups/{groupId}/accessList
             </h6>
@@ -883,17 +849,17 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
         </a>
       </div>
       <ul
-        class="emotion-11 emotion-12"
+        class="emotion-10 emotion-11"
       >
         <li
-          class="emotion-13 emotion-14"
+          class="emotion-12 emotion-13"
         >
           <div
-            class="emotion-15 emotion-16 emotion-17"
+            class="emotion-14 emotion-15 emotion-16"
           >
             <svg
               aria-label="Important With Circle Icon"
-              class="emotion-18"
+              class="emotion-17"
               fill="none"
               height="16"
               role="img"
@@ -912,14 +878,14 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
           Removed the required property 'name' from the response with the '200' status.
         </li>
         <li
-          class="emotion-13 emotion-14"
+          class="emotion-12 emotion-13"
         >
           <div
-            class="emotion-15 emotion-16 emotion-17"
+            class="emotion-14 emotion-15 emotion-16"
           >
             <svg
               aria-label="Important With Circle Icon"
-              class="emotion-18"
+              class="emotion-17"
               fill="none"
               height="16"
               role="img"

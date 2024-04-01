@@ -3,26 +3,6 @@
 exports[`renders a page with next and previous links correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  padding-top: 2em;
-  padding-bottom: 2.5em;
-  display: table;
-  width: 100%;
-}
-
-@media print {
-  .emotion-0 {
-    display: none;
-  }
-}
-
-.emotion-1 {
-  display: table-cell;
-  vertical-align: middle;
-  line-height: 28px;
-  text-align: right;
-}
-
-.emotion-2 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -36,15 +16,15 @@ exports[`renders a page with next and previous links correctly 1`] = `
   color: #016BF8;
 }
 
-.emotion-2:focus {
+.emotion-0:focus {
   outline: none;
 }
 
-.emotion-2>code {
+.emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-2::after {
+.emotion-0::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -54,61 +34,70 @@ exports[`renders a page with next and previous links correctly 1`] = `
   border-radius: 2px;
 }
 
-.emotion-2:focus .emotion-2::after {
+.emotion-0:focus .emotion-0::after {
   background-color: #0498EC;
 }
 
-.emotion-2:hover::after {
+.emotion-0:hover::after {
   background-color: #E8EDEB;
 }
 
-.emotion-3 {
-  display: table-cell;
-  vertical-align: middle;
+.emotion-1 {
   line-height: 28px;
-  text-align: left;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  color: #001E2B;
 }
 
-.emotion-4 {
+.emotion-2 {
   display: inline-block;
-  width: 270px;
+  line-height: 28px;
 }
 
 <div
-    class="emotion-0"
+    class="sc-bcXHqe eFamjP"
   >
-    <span
-      class="emotion-1"
-    >
-      ←  
-    </span>
     <a
-      class="emotion-2 emotion-3"
+      class="emotion-0"
       href="/drivers/csharp/"
       title="Previous Section"
     >
-      <span
-        class="emotion-4"
+      <div
+        class="sc-gswNZR gVBGiX"
       >
-        MongoDB C#/.NET Driver
-      </span>
+        <span
+          class="emotion-1"
+        >
+          ← 
+        </span>
+        <span
+          class="emotion-2"
+        >
+          MongoDB C#/.NET Driver
+        </span>
+      </div>
     </a>
     <a
-      class="emotion-2 emotion-1"
+      class="emotion-0"
       href="/drivers/java/"
       title="Next Section"
     >
-      <span
-        class="emotion-4"
+      <div
+        class="sc-gswNZR gVBGiX"
       >
-        Java MongoDB Driver
-      </span>
+        <span
+          class="emotion-2"
+        >
+          Java MongoDB Driver
+        </span>
+        <span
+          class="emotion-1"
+        >
+           →
+        </span>
+      </div>
     </a>
-    <span
-      class="emotion-3"
-    >
-       →
-    </span>
   </div>
 </DocumentFragment>
 `;
@@ -116,26 +105,6 @@ exports[`renders a page with next and previous links correctly 1`] = `
 exports[`renders a page with no next link correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  padding-top: 2em;
-  padding-bottom: 2.5em;
-  display: table;
-  width: 100%;
-}
-
-@media print {
-  .emotion-0 {
-    display: none;
-  }
-}
-
-.emotion-1 {
-  display: table-cell;
-  vertical-align: middle;
-  line-height: 28px;
-  text-align: right;
-}
-
-.emotion-2 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -149,15 +118,15 @@ exports[`renders a page with no next link correctly 1`] = `
   color: #016BF8;
 }
 
-.emotion-2:focus {
+.emotion-0:focus {
   outline: none;
 }
 
-.emotion-2>code {
+.emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-2::after {
+.emotion-0::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -167,44 +136,49 @@ exports[`renders a page with no next link correctly 1`] = `
   border-radius: 2px;
 }
 
-.emotion-2:focus .emotion-2::after {
+.emotion-0:focus .emotion-0::after {
   background-color: #0498EC;
 }
 
-.emotion-2:hover::after {
+.emotion-0:hover::after {
   background-color: #E8EDEB;
 }
 
-.emotion-3 {
-  display: table-cell;
-  vertical-align: middle;
+.emotion-1 {
   line-height: 28px;
-  text-align: left;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  color: #001E2B;
 }
 
-.emotion-4 {
+.emotion-2 {
   display: inline-block;
-  width: 270px;
+  line-height: 28px;
 }
 
 <div
-    class="emotion-0"
+    class="sc-bcXHqe eFamjP"
   >
-    <span
-      class="emotion-1"
-    >
-      ←  
-    </span>
     <a
-      class="emotion-2 emotion-3"
+      class="emotion-0"
       href="/drivers/go/"
       title="Previous Section"
     >
-      <span
-        class="emotion-4"
+      <div
+        class="sc-gswNZR gVBGiX"
       >
-        MongoDB Go Driver
-      </span>
+        <span
+          class="emotion-1"
+        >
+          ← 
+        </span>
+        <span
+          class="emotion-2"
+        >
+          MongoDB Go Driver
+        </span>
+      </div>
     </a>
   </div>
 </DocumentFragment>
@@ -213,19 +187,6 @@ exports[`renders a page with no next link correctly 1`] = `
 exports[`renders a page with no previous link correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  padding-top: 2em;
-  padding-bottom: 2.5em;
-  display: table;
-  width: 100%;
-}
-
-@media print {
-  .emotion-0 {
-    display: none;
-  }
-}
-
-.emotion-1 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -239,15 +200,15 @@ exports[`renders a page with no previous link correctly 1`] = `
   color: #016BF8;
 }
 
-.emotion-1:focus {
+.emotion-0:focus {
   outline: none;
 }
 
-.emotion-1>code {
+.emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-1::after {
+.emotion-0::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -257,52 +218,50 @@ exports[`renders a page with no previous link correctly 1`] = `
   border-radius: 2px;
 }
 
-.emotion-1:focus .emotion-1::after {
+.emotion-0:focus .emotion-0::after {
   background-color: #0498EC;
 }
 
-.emotion-1:hover::after {
+.emotion-0:hover::after {
   background-color: #E8EDEB;
 }
 
-.emotion-2 {
-  display: table-cell;
-  vertical-align: middle;
-  line-height: 28px;
-  text-align: right;
-}
-
-.emotion-3 {
+.emotion-1 {
   display: inline-block;
-  width: 270px;
+  line-height: 28px;
 }
 
-.emotion-4 {
-  display: table-cell;
-  vertical-align: middle;
+.emotion-2 {
   line-height: 28px;
-  text-align: left;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  color: #001E2B;
 }
 
 <div
-    class="emotion-0"
+    class="sc-bcXHqe eFamjP"
   >
     <a
-      class="emotion-1 emotion-2"
+      class="emotion-0"
       href="/drivers/go/"
       title="Next Section"
     >
-      <span
-        class="emotion-3"
+      <div
+        class="sc-gswNZR gVBGiX"
       >
-        MongoDB Go Driver
-      </span>
+        <span
+          class="emotion-1"
+        >
+          MongoDB Go Driver
+        </span>
+        <span
+          class="emotion-2"
+        >
+           →
+        </span>
+      </div>
     </a>
-    <span
-      class="emotion-4"
-    >
-       →
-    </span>
   </div>
 </DocumentFragment>
 `;

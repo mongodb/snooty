@@ -3,8 +3,6 @@
 exports[`Link component renders a variety of strings correctly empty string 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -16,8 +14,12 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -25,45 +27,32 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
 }
 
 .emotion-0:hover,
-.emotion-0:focus,
-.emotion-0:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-0:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-0:focus {
   outline: none;
 }
 
-.emotion-1 {
-  position: relative;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-1::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-1::after {
-  background-color: #E8EDEB;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
 }
 
 <a
     class="lg-ui-0001 emotion-0"
     href=""
   >
-    <span
-      class="emotion-1"
-    >
+    <span>
       Empty string
     </span>
   </a>
@@ -73,8 +62,6 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
 exports[`Link component renders a variety of strings correctly external MDB docs URL 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -86,8 +73,12 @@ exports[`Link component renders a variety of strings correctly external MDB docs
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -95,36 +86,25 @@ exports[`Link component renders a variety of strings correctly external MDB docs
 }
 
 .emotion-0:hover,
-.emotion-0:focus,
-.emotion-0:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-0:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-0:focus {
   outline: none;
 }
 
-.emotion-1 {
-  position: relative;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-1::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-1::after {
-  background-color: #E8EDEB;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
 }
 
 <a
@@ -132,9 +112,7 @@ exports[`Link component renders a variety of strings correctly external MDB docs
     href="https://www.mongodb.com/docs/atlas/"
     target="_self"
   >
-    <span
-      class="emotion-1"
-    >
+    <span>
       MongoDB Atlas Docs
     </span>
   </a>
@@ -144,8 +122,6 @@ exports[`Link component renders a variety of strings correctly external MDB docs
 exports[`Link component renders a variety of strings correctly external MDB non-docs URL 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -157,8 +133,12 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -166,36 +146,25 @@ exports[`Link component renders a variety of strings correctly external MDB non-
 }
 
 .emotion-0:hover,
-.emotion-0:focus,
-.emotion-0:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-0:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-0:focus {
   outline: none;
 }
 
-.emotion-1 {
-  position: relative;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-1::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-1::after {
-  background-color: #E8EDEB;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
 }
 
 <a
@@ -203,9 +172,7 @@ exports[`Link component renders a variety of strings correctly external MDB non-
     href="https://account.mongodb.com/account/"
     target="_self"
   >
-    <span
-      class="emotion-1"
-    >
+    <span>
       MongoDB Atlas Registration Page
     </span>
   </a>
@@ -215,8 +182,6 @@ exports[`Link component renders a variety of strings correctly external MDB non-
 exports[`Link component renders a variety of strings correctly external URL 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -228,8 +193,12 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -237,36 +206,25 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 }
 
 .emotion-0:hover,
-.emotion-0:focus,
-.emotion-0:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-0:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-0:focus {
   outline: none;
 }
 
-.emotion-1 {
-  position: relative;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-1::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-1::after {
-  background-color: #E8EDEB;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
 }
 
 <a
@@ -274,9 +232,7 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
     href="http://mongodb.com"
     target="_self"
   >
-    <span
-      class="emotion-1"
-    >
+    <span>
       MongoDB Company
     </span>
   </a>
@@ -286,8 +242,6 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 exports[`Link component renders a variety of strings correctly external URL with hidden external icon 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -299,8 +253,12 @@ exports[`Link component renders a variety of strings correctly external URL with
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -308,36 +266,25 @@ exports[`Link component renders a variety of strings correctly external URL with
 }
 
 .emotion-0:hover,
-.emotion-0:focus,
-.emotion-0:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-0:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-0:focus {
   outline: none;
 }
 
-.emotion-1 {
-  position: relative;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-1::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-1::after {
-  background-color: #E8EDEB;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
 }
 
 <a
@@ -345,9 +292,7 @@ exports[`Link component renders a variety of strings correctly external URL with
     href="http://mongodb.com"
     target="_self"
   >
-    <span
-      class="emotion-1"
-    >
+    <span>
       MongoDB Company
     </span>
   </a>
@@ -357,8 +302,6 @@ exports[`Link component renders a variety of strings correctly external URL with
 exports[`Link component renders a variety of strings correctly external non-MDB docs URL 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -370,8 +313,12 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -379,39 +326,28 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
 }
 
 .emotion-0:hover,
-.emotion-0:focus,
-.emotion-0:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-0:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-0:focus {
   outline: none;
 }
 
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
+}
+
 .emotion-1 {
-  position: relative;
-}
-
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-1::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-1::after {
-  background-color: #E8EDEB;
-}
-
-.emotion-2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -426,15 +362,13 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
     href="https://safety.google/authentication/"
     rel="noopener noreferrer"
   >
-    <span
-      class="emotion-1"
-    >
+    <span>
       Google 2-Step Verification
     </span>
     <svg
       alt=""
       aria-hidden="true"
-      class="emotion-2"
+      class="emotion-1"
       height="16"
       role="presentation"
       viewBox="0 0 16 16"
@@ -456,8 +390,6 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
 exports[`Link component renders a variety of strings correctly identfies mailto links as external urls 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -469,8 +401,12 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -478,36 +414,25 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
 }
 
 .emotion-0:hover,
-.emotion-0:focus,
-.emotion-0:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-0:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-0:focus {
   outline: none;
 }
 
-.emotion-1 {
-  position: relative;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-1::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-1::after {
-  background-color: #E8EDEB;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
 }
 
 <a
@@ -515,9 +440,7 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
     href="mailto:docs@mongodb.com"
     target="_self"
   >
-    <span
-      class="emotion-1"
-    >
+    <span>
       docs@mongodb.com
     </span>
   </a>

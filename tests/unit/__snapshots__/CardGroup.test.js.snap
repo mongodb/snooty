@@ -163,8 +163,6 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-7 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -176,8 +174,12 @@ exports[`renders correctly 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -185,36 +187,25 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-7:hover,
-.emotion-7:focus,
-.emotion-7:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-7:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-7:focus {
   outline: none;
 }
 
-.emotion-8 {
-  position: relative;
+.emotion-7:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-8::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-8::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-8::after {
-  background-color: #E8EDEB;
+.emotion-7:focus {
+  text-decoration-color: #016BF8;
 }
 
 <div
@@ -251,9 +242,7 @@ exports[`renders correctly 1`] = `
               href="https://www.mongodb.com/docs/atlas/getting-started/"
               target="_self"
             >
-              <span
-                class="emotion-8"
-              >
+              <span>
                 Read Atlas docs
               </span>
             </a>
@@ -292,9 +281,7 @@ exports[`renders correctly 1`] = `
               href="https://university.mongodb.com/courses/M001/about"
               target="_self"
             >
-              <span
-                class="emotion-8"
-              >
+              <span>
                 Learn MongoDB Basics
               </span>
             </a>
@@ -333,9 +320,7 @@ exports[`renders correctly 1`] = `
               href="https://www.mongodb.com/docs/manual/tutorial/getting-started/"
               target="_self"
             >
-              <span
-                class="emotion-8"
-              >
+              <span>
                 Read Server docs
               </span>
             </a>

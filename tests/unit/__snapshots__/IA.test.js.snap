@@ -81,8 +81,6 @@ exports[`renders a page IA with IA linked data 1`] = `
 }
 
 .emotion-6 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -94,8 +92,12 @@ exports[`renders a page IA with IA linked data 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -143,14 +145,25 @@ exports[`renders a page IA with IA linked data 1`] = `
 }
 
 .emotion-6:hover,
-.emotion-6:focus,
-.emotion-6:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-6:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-6:focus {
   outline: none;
+}
+
+.emotion-6:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-6:focus {
+  text-decoration-color: #016BF8;
 }
 
 .emotion-6:hover {
@@ -201,29 +214,7 @@ exports[`renders a page IA with IA linked data 1`] = `
   background-color: #0498EC;
 }
 
-.emotion-7 {
-  position: relative;
-}
-
-.emotion-7::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-7::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-7::after {
-  background-color: #E8EDEB;
-}
-
-.emotion-12 {
+.emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -237,15 +228,15 @@ exports[`renders a page IA with IA linked data 1`] = `
   color: #016BF8;
 }
 
-.emotion-12:focus {
+.emotion-10:focus {
   outline: none;
 }
 
-.emotion-12>code {
+.emotion-10>code {
   color: #016BF8;
 }
 
-.emotion-12::after {
+.emotion-10::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -255,15 +246,15 @@ exports[`renders a page IA with IA linked data 1`] = `
   border-radius: 2px;
 }
 
-.emotion-12:focus .emotion-12::after {
+.emotion-10:focus .emotion-10::after {
   background-color: #0498EC;
 }
 
-.emotion-12:hover::after {
+.emotion-10:hover::after {
   background-color: #E8EDEB;
 }
 
-.emotion-13 {
+.emotion-11 {
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -306,23 +297,23 @@ exports[`renders a page IA with IA linked data 1`] = `
   line-height: 20px;
 }
 
-.emotion-13:hover {
+.emotion-11:hover {
   background-color: #E8EDEB;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-13:focus {
+.emotion-11:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   outline: none;
 }
 
-.emotion-13::-moz-focus-inner {
+.emotion-11::-moz-focus-inner {
   border: 0;
 }
 
-.emotion-13:before {
+.emotion-11:before {
   content: '';
   position: absolute;
   background-color: transparent;
@@ -339,14 +330,14 @@ exports[`renders a page IA with IA linked data 1`] = `
   transform: scaleY(0.3);
 }
 
-.emotion-13:focus {
+.emotion-11:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   color: #0C2657;
   background-color: #C3E7FE;
 }
 
-.emotion-13:focus:before {
+.emotion-11:focus:before {
   -webkit-transform: scaleY(1);
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
@@ -354,7 +345,7 @@ exports[`renders a page IA with IA linked data 1`] = `
   background-color: #0498EC;
 }
 
-.emotion-17 {
+.emotion-14 {
   display: grid;
   -webkit-column-gap: 8px;
   column-gap: 8px;
@@ -366,9 +357,7 @@ exports[`renders a page IA with IA linked data 1`] = `
   padding: 8px;
 }
 
-.emotion-19 {
-  font-size: 13px;
-  line-height: 20px;
+.emotion-16 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -380,8 +369,12 @@ exports[`renders a page IA with IA linked data 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -426,34 +419,45 @@ exports[`renders a page IA with IA linked data 1`] = `
   height: 32px;
 }
 
-.emotion-19:hover,
-.emotion-19:focus,
-.emotion-19:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-16:hover,
+.emotion-16:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-19:focus {
+.emotion-16:focus {
   outline: none;
 }
 
-.emotion-19:hover {
+.emotion-16:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-16:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-16:hover {
   background-color: #E8EDEB;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-19:focus {
+.emotion-16:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   outline: none;
 }
 
-.emotion-19::-moz-focus-inner {
+.emotion-16::-moz-focus-inner {
   border: 0;
 }
 
-.emotion-19:before {
+.emotion-16:before {
   content: '';
   position: absolute;
   background-color: transparent;
@@ -470,14 +474,14 @@ exports[`renders a page IA with IA linked data 1`] = `
   transform: scaleY(0.3);
 }
 
-.emotion-19:focus {
+.emotion-16:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   color: #0C2657;
   background-color: #C3E7FE;
 }
 
-.emotion-19:focus:before {
+.emotion-16:focus:before {
   -webkit-transform: scaleY(1);
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
@@ -485,19 +489,19 @@ exports[`renders a page IA with IA linked data 1`] = `
   background-color: #0498EC;
 }
 
-.emotion-19:focus {
+.emotion-16:focus {
   border: 1px solid #0498EC;
 }
 
-.emotion-19:focus:focus:before {
+.emotion-16:focus:focus:before {
   display: none;
 }
 
-.emotion-19:focus>span>span {
+.emotion-16:focus>span>span {
   position: relative;
 }
 
-.emotion-19:focus>span>span::after {
+.emotion-16:focus>span>span::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -508,7 +512,7 @@ exports[`renders a page IA with IA linked data 1`] = `
   background-color: #0498EC;
 }
 
-.emotion-19>span {
+.emotion-16>span {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -520,7 +524,7 @@ exports[`renders a page IA with IA linked data 1`] = `
   gap: 8px;
 }
 
-.emotion-19>span:after {
+.emotion-16>span:after {
   display: none;
 }
 
@@ -554,9 +558,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           href="https://www.mongodb.com/docs/atlas/getting-started/"
           target="_self"
         >
-          <span
-            class="emotion-7"
-          >
+          <span>
             Atlas
           </span>
         </a>
@@ -571,9 +573,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           href="https://www.mongodb.com/docs/manual/"
           target="_self"
         >
-          <span
-            class="emotion-7"
-          >
+          <span>
             MongoDB Database Manual
           </span>
         </a>
@@ -584,7 +584,7 @@ exports[`renders a page IA with IA linked data 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="emotion-12 constant-classname emotion-13"
+          class="emotion-10 constant-classname emotion-11"
           href="/tools-and-connectors/"
         >
           Tools and Connectors
@@ -600,15 +600,13 @@ exports[`renders a page IA with IA linked data 1`] = `
           href="https://www.mongodb.com/docs/drivers/"
           target="_self"
         >
-          <span
-            class="emotion-7"
-          >
+          <span>
             Client Libraries
           </span>
         </a>
       </li>
       <ul
-        class="emotion-17"
+        class="emotion-14"
       >
         <li
           class="emotion-5"
@@ -616,13 +614,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/c/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="C Driver icon"
                 height="16"
@@ -641,13 +637,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/cxx/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="C plus plus Driver icon"
                 height="16"
@@ -666,13 +660,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/csharp/current/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="C sharp Driver icon"
                 height="16"
@@ -691,13 +683,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/go/current/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="Go Driver icon"
                 height="16"
@@ -716,13 +706,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/java-drivers/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="Java Driver icon"
                 height="16"
@@ -741,13 +729,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/kotlin-drivers/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="Kotlin Driver icon"
                 height="16"
@@ -766,13 +752,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/node/current/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="Node Driver icon"
                 height="16"
@@ -791,13 +775,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/php/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="PHP Driver icon"
                 height="16"
@@ -816,13 +798,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/python/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="Python Driver icon"
                 height="16"
@@ -841,13 +821,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/ruby/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="Ruby Driver icon"
                 height="16"
@@ -866,13 +844,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/rust/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="Rust Driver icon"
                 height="16"
@@ -891,13 +867,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/scala/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="Scala Driver icon"
                 height="16"
@@ -916,13 +890,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/swift/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="Swift Driver icon"
                 height="16"
@@ -941,13 +913,11 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-19"
+            class="lg-ui-0001 constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/typescript/"
             target="_self"
           >
-            <span
-              class="emotion-7"
-            >
+            <span>
               <img
                 alt="TypeScript Driver icon"
                 height="16"
@@ -1047,8 +1017,6 @@ exports[`renders a simple page IA correctly 1`] = `
 }
 
 .emotion-6 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -1060,8 +1028,12 @@ exports[`renders a simple page IA correctly 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
   -webkit-text-decoration: none!important;
@@ -1109,14 +1081,25 @@ exports[`renders a simple page IA correctly 1`] = `
 }
 
 .emotion-6:hover,
-.emotion-6:focus,
-.emotion-6:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-6:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-6:focus {
   outline: none;
+}
+
+.emotion-6:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-6:focus {
+  text-decoration-color: #016BF8;
 }
 
 .emotion-6:hover {
@@ -1167,29 +1150,7 @@ exports[`renders a simple page IA correctly 1`] = `
   background-color: #0498EC;
 }
 
-.emotion-7 {
-  position: relative;
-}
-
-.emotion-7::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-7::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-7::after {
-  background-color: #E8EDEB;
-}
-
-.emotion-12 {
+.emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1203,15 +1164,15 @@ exports[`renders a simple page IA correctly 1`] = `
   color: #016BF8;
 }
 
-.emotion-12:focus {
+.emotion-10:focus {
   outline: none;
 }
 
-.emotion-12>code {
+.emotion-10>code {
   color: #016BF8;
 }
 
-.emotion-12::after {
+.emotion-10::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -1221,15 +1182,15 @@ exports[`renders a simple page IA correctly 1`] = `
   border-radius: 2px;
 }
 
-.emotion-12:focus .emotion-12::after {
+.emotion-10:focus .emotion-10::after {
   background-color: #0498EC;
 }
 
-.emotion-12:hover::after {
+.emotion-10:hover::after {
   background-color: #E8EDEB;
 }
 
-.emotion-13 {
+.emotion-11 {
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1272,23 +1233,23 @@ exports[`renders a simple page IA correctly 1`] = `
   line-height: 20px;
 }
 
-.emotion-13:hover {
+.emotion-11:hover {
   background-color: #E8EDEB;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-13:focus {
+.emotion-11:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   outline: none;
 }
 
-.emotion-13::-moz-focus-inner {
+.emotion-11::-moz-focus-inner {
   border: 0;
 }
 
-.emotion-13:before {
+.emotion-11:before {
   content: '';
   position: absolute;
   background-color: transparent;
@@ -1305,14 +1266,14 @@ exports[`renders a simple page IA correctly 1`] = `
   transform: scaleY(0.3);
 }
 
-.emotion-13:focus {
+.emotion-11:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
   color: #0C2657;
   background-color: #C3E7FE;
 }
 
-.emotion-13:focus:before {
+.emotion-11:focus:before {
   -webkit-transform: scaleY(1);
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
@@ -1350,9 +1311,7 @@ exports[`renders a simple page IA correctly 1`] = `
           href="https://www.mongodb.com/docs/atlas/getting-started/"
           target="_self"
         >
-          <span
-            class="emotion-7"
-          >
+          <span>
             Atlas
           </span>
         </a>
@@ -1367,9 +1326,7 @@ exports[`renders a simple page IA correctly 1`] = `
           href="https://www.mongodb.com/docs/manual/"
           target="_self"
         >
-          <span
-            class="emotion-7"
-          >
+          <span>
             MongoDB Database Manual
           </span>
         </a>
@@ -1380,7 +1337,7 @@ exports[`renders a simple page IA correctly 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="emotion-12 constant-classname emotion-13"
+          class="emotion-10 constant-classname emotion-11"
           href="/tools-and-connectors/"
         >
           Tools and Connectors
@@ -1396,9 +1353,7 @@ exports[`renders a simple page IA correctly 1`] = `
           href="https://www.mongodb.com/docs/drivers/"
           target="_self"
         >
-          <span
-            class="emotion-7"
-          >
+          <span>
             Client Libraries
           </span>
         </a>
