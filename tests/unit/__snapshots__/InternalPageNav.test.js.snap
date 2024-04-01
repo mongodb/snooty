@@ -64,7 +64,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
       title="Previous Section"
     >
       <div
-        class="sc-gswNZR gVBGiX"
+        class="sc-gswNZR UJFxm"
       >
         <span
           class="emotion-1"
@@ -84,7 +84,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
       title="Next Section"
     >
       <div
-        class="sc-gswNZR gVBGiX"
+        class="sc-gswNZR UJFxm"
       >
         <span
           class="emotion-2"
@@ -166,7 +166,7 @@ exports[`renders a page with no next link correctly 1`] = `
       title="Previous Section"
     >
       <div
-        class="sc-gswNZR gVBGiX"
+        class="sc-gswNZR UJFxm"
       >
         <span
           class="emotion-1"
@@ -248,7 +248,7 @@ exports[`renders a page with no previous link correctly 1`] = `
       title="Next Section"
     >
       <div
-        class="sc-gswNZR gVBGiX"
+        class="sc-gswNZR UJFxm"
       >
         <span
           class="emotion-1"
