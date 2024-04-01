@@ -43,7 +43,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
     <StyledContainer>
       {prevSlug && (
         <React.Fragment>
-          <Link css={[]} to={prevSlug} title="Previous Section">
+          <Link to={prevSlug} title="Previous Section">
             <LinkContentContainer>
               <span css={[arrowStyling]}>←&nbsp;</span>
               <span css={titleSpanStyling}>{getPageTitle(prevSlug, slugTitleMapping)}</span>
@@ -53,7 +53,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
       )}
       {nextSlug && (
         <React.Fragment>
-          <Link css={[]} to={nextSlug} title="Next Section">
+          <Link to={nextSlug} title="Next Section">
             <LinkContentContainer>
               <span css={titleSpanStyling}>{getPageTitle(nextSlug, slugTitleMapping)}</span>
               <span css={[arrowStyling]}>&nbsp;→</span>
