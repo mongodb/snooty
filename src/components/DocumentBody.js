@@ -1,7 +1,6 @@
 import React, { useState, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-import { Global, css } from '@emotion/react';
 import { ImageContextProvider } from '../context/image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
@@ -11,7 +10,7 @@ import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
+import { getCurrLocale } from '../utils/locale';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -75,8 +74,6 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
-const fontFamily = getCurrentLocaleFontFamilyValue();
-
 const DocumentBody = (props) => {
   const { location, data, pageContext } = props;
   const page = data?.page?.ast;
@@ -113,13 +110,11 @@ const DocumentBody = (props) => {
         >
           <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
             <FootnoteContext.Provider value={{ footnotes }}>
-              <div id="template-container">
-                <Template {...props} useChatbot={useChatbot}>
-                  {pageNodes.map((child, index) => (
-                    <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-                  ))}
-                </Template>
-              </div>
+              <Template {...props} useChatbot={useChatbot}>
+                {pageNodes.map((child, index) => (
+                  <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                ))}
+              </Template>
             </FootnoteContext.Provider>
           </ImageContextProvider>
         </Widgets>
@@ -131,13 +126,6 @@ const DocumentBody = (props) => {
           </SuspenseHelper>
         </div>
       )}
-      <Global
-        styles={css`
-          #template-container *:not(:is(code, code *)) {
-            font-family: ${fontFamily};
-          }
-        `}
-      />
     </>
   );
 };
@@ -185,6 +173,7 @@ export const Head = ({ pageContext }) => {
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
+      <body className={getCurrLocale()} />
     </>
   );
 };
