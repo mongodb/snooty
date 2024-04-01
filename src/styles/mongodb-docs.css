@@ -973,7 +973,7 @@ div td pre {
   font-style: normal;
   font-display: swap;
   font-weight: 100 900;
-  src: url(../../static/fonts/NotoSansSC-VariableFont_wght.woff2) format('woff2');
+  src: url(fonts/NotoSansSC-VariableFont_wght.woff2) format('woff2');
 }
 
 @font-face {
@@ -981,7 +981,7 @@ div td pre {
   font-style: normal;
   font-display: swap;
   font-weight: 100 900;
-  src: url(../../static/fonts/NotoSansKR-VariableFont_wght.woff2) format('woff2');
+  src: url(fonts/NotoSansKR-VariableFont_wght.woff2) format('woff2');
 }
 
 div.document {
