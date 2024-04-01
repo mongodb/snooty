@@ -5,6 +5,8 @@ import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
+import NotoSansKR from './src/styles/fonts/NotoSansKR-VariableFont_wght.woff2';
+import NotoSansSC from './src/styles/fonts/NotoSansSC-VariableFont_wght.woff2';
 
 export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
@@ -32,6 +34,8 @@ export const onRenderBody = ({ setHeadComponents }) => {
       crossOrigin="anonymous"
       key="notoSansKR"
     />,
+    <link rel="preload" href={NotoSansKR} as="font" type="font/woff2" crossOrigin="anonymous" key="notoSansKR" />,
+    <link rel="preload" href={NotoSansSC} as="font" type="font/woff2" crossOrigin="anonymous" key="notoSansSC" />,
   ]);
 };
 
