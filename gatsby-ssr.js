@@ -30,12 +30,20 @@ export const onRenderBody = ({ setHeadComponents }) => {
       as="font"
       type="font/woff"
       crossOrigin="anonymous"
-      key="notoSansKR"
+      key="euclidCircularSemiBold"
     />,
-    <link rel="preconnect" href="https://fonts.googleapis.com" />,
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />,
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap" rel="stylesheet" />,
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />,
+    <link key="preconnectGoogleAPIS" rel="preconnect" href="https://fonts.googleapis.com" />,
+    <link key="preconnectGStatic" rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />,
+    <link
+      key="notoSansCS"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap"
+      rel="stylesheet"
+    />,
+    <link
+      key="notoSansKR"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />,
   ]);
 };
 
