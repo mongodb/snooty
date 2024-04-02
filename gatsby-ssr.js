@@ -30,7 +30,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
       rel="preload"
       href={EuclidCircularASemiBold}
       as="font"
-      type="font/woff2"
+      type="font/woff"
       crossOrigin="anonymous"
       key="notoSansKR"
     />,
