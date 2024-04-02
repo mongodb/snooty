@@ -33,7 +33,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
       key="notoSansKR"
     />,
     <link rel="preconnect" href="https://fonts.googleapis.com" />,
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />,
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />,
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap" rel="stylesheet" />,
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />,
   ]);
