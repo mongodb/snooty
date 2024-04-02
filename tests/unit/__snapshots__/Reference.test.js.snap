@@ -22,8 +22,6 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-0:hover,
@@ -59,7 +57,7 @@ exports[`renders correctly 1`] = `
 }
 
 <a
-    class="lg-ui-0001 emotion-0"
+    class="lg-ui-0001 lg-link emotion-0"
     href="https://docs.mlab.com/subscriptions/#change-plans-using-rnr"
     rel="noopener noreferrer"
   >

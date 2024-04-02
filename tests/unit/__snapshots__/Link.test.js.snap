@@ -22,8 +22,6 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-0:hover,
@@ -49,7 +47,7 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
 }
 
 <a
-    class="lg-ui-0001 emotion-0"
+    class="lg-ui-0001 lg-link emotion-0"
     href=""
   >
     <span>
@@ -81,8 +79,6 @@ exports[`Link component renders a variety of strings correctly external MDB docs
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-0:hover,
@@ -108,7 +104,7 @@ exports[`Link component renders a variety of strings correctly external MDB docs
 }
 
 <a
-    class="lg-ui-0001 emotion-0"
+    class="lg-ui-0001 lg-link emotion-0"
     href="https://www.mongodb.com/docs/atlas/"
     target="_self"
   >
@@ -141,8 +137,6 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-0:hover,
@@ -168,7 +162,7 @@ exports[`Link component renders a variety of strings correctly external MDB non-
 }
 
 <a
-    class="lg-ui-0001 emotion-0"
+    class="lg-ui-0001 lg-link emotion-0"
     href="https://account.mongodb.com/account/"
     target="_self"
   >
@@ -201,8 +195,6 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-0:hover,
@@ -228,7 +220,7 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 }
 
 <a
-    class="lg-ui-0001 emotion-0"
+    class="lg-ui-0001 lg-link emotion-0"
     href="http://mongodb.com"
     target="_self"
   >
@@ -261,8 +253,6 @@ exports[`Link component renders a variety of strings correctly external URL with
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-0:hover,
@@ -288,7 +278,7 @@ exports[`Link component renders a variety of strings correctly external URL with
 }
 
 <a
-    class="lg-ui-0001 emotion-0"
+    class="lg-ui-0001 lg-link emotion-0"
     href="http://mongodb.com"
     target="_self"
   >
@@ -321,8 +311,6 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-0:hover,
@@ -358,7 +346,7 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
 }
 
 <a
-    class="lg-ui-0001 emotion-0"
+    class="lg-ui-0001 lg-link emotion-0"
     href="https://safety.google/authentication/"
     rel="noopener noreferrer"
   >
@@ -409,8 +397,6 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-0:hover,
@@ -436,7 +422,7 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
 }
 
 <a
-    class="lg-ui-0001 emotion-0"
+    class="lg-ui-0001 lg-link emotion-0"
     href="mailto:docs@mongodb.com"
     target="_self"
   >
@@ -456,41 +442,37 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-0:focus {
-  outline: none;
 }
 
 .emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-0::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-0:focus,
+.emotion-0:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus .emotion-0::after {
-  background-color: #0498EC;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-0:hover::after {
-  background-color: #E8EDEB;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 <a
-    class="emotion-0 test-class"
+    class="gatsby-link emotion-0 test-class"
     href="/drivers/c/"
   >
     C Driver
@@ -507,41 +489,37 @@ exports[`Link component renders a variety of strings correctly internal link que
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-0:focus {
-  outline: none;
 }
 
 .emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-0::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-0:focus,
+.emotion-0:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus .emotion-0::after {
-  background-color: #0498EC;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-0:hover::after {
-  background-color: #E8EDEB;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 <a
-    class="emotion-0 test-class"
+    class="gatsby-link emotion-0 test-class"
     href="/drivers/ruby/?site=drivers"
   >
     C Driver
@@ -558,41 +536,37 @@ exports[`Link component renders a variety of strings correctly internal link tha
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-0:focus {
-  outline: none;
 }
 
 .emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-0::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-0:focus,
+.emotion-0:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus .emotion-0::after {
-  background-color: #0498EC;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-0:hover::after {
-  background-color: #E8EDEB;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 <a
-    class="emotion-0 test-class"
+    class="gatsby-link emotion-0 test-class"
     href="/drivers/nodejs/#installation"
   >
     C Driver
@@ -609,41 +583,37 @@ exports[`Link component renders a variety of strings correctly internal link wit
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-0:focus {
-  outline: none;
 }
 
 .emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-0::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-0:focus,
+.emotion-0:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus .emotion-0::after {
-  background-color: #0498EC;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-0:hover::after {
-  background-color: #E8EDEB;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 <a
-    class="emotion-0 test-class"
+    class="gatsby-link emotion-0 test-class"
     href="/drivers/pymongo/#installation"
   >
     C Driver

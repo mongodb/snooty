@@ -117,8 +117,6 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-6:hover,
@@ -180,7 +178,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="lg-ui-0001 emotion-6"
+        class="lg-ui-0001 lg-link emotion-6"
         href="https://university.mongodb.com/"
         target="_self"
       >
@@ -310,8 +308,6 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-6:hover,
@@ -375,7 +371,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="lg-ui-0001 emotion-6"
+        class="lg-ui-0001 lg-link emotion-6"
         href="https://university.mongodb.com/"
         target="_self"
       >
@@ -505,8 +501,6 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-6:hover,
@@ -568,7 +562,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="lg-ui-0001 emotion-6"
+        class="lg-ui-0001 lg-link emotion-6"
         href="https://university.mongodb.com/"
         target="_self"
       >
@@ -698,8 +692,6 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-6:hover,
@@ -761,7 +753,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
         If you prefer learning through videos, try this lesson on 
       </a>
       <a
-        class="lg-ui-0001 emotion-6"
+        class="lg-ui-0001 lg-link emotion-6"
         href="https://university.mongodb.com/"
         target="_self"
       >

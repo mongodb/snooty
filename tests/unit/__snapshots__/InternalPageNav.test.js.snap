@@ -9,37 +9,33 @@ exports[`renders a page with next and previous links correctly 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-0:focus {
-  outline: none;
 }
 
 .emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-0::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-0:focus,
+.emotion-0:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus .emotion-0::after {
-  background-color: #0498EC;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-0:hover::after {
-  background-color: #E8EDEB;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-1 {
@@ -59,7 +55,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
     class="sc-bcXHqe eFamjP"
   >
     <a
-      class="emotion-0"
+      class="gatsby-link emotion-0"
       href="/drivers/csharp/"
       title="Previous Section"
     >
@@ -79,7 +75,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
       </div>
     </a>
     <a
-      class="emotion-0"
+      class="gatsby-link emotion-0"
       href="/drivers/java/"
       title="Next Section"
     >
@@ -111,37 +107,33 @@ exports[`renders a page with no next link correctly 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-0:focus {
-  outline: none;
 }
 
 .emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-0::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-0:focus,
+.emotion-0:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus .emotion-0::after {
-  background-color: #0498EC;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-0:hover::after {
-  background-color: #E8EDEB;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-1 {
@@ -161,7 +153,7 @@ exports[`renders a page with no next link correctly 1`] = `
     class="sc-bcXHqe eFamjP"
   >
     <a
-      class="emotion-0"
+      class="gatsby-link emotion-0"
       href="/drivers/go/"
       title="Previous Section"
     >
@@ -193,37 +185,33 @@ exports[`renders a page with no previous link correctly 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-0:focus {
-  outline: none;
 }
 
 .emotion-0>code {
   color: #016BF8;
 }
 
-.emotion-0::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-0:focus,
+.emotion-0:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus .emotion-0::after {
-  background-color: #0498EC;
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-0:hover::after {
-  background-color: #E8EDEB;
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-1 {
@@ -243,7 +231,7 @@ exports[`renders a page with no previous link correctly 1`] = `
     class="sc-bcXHqe eFamjP"
   >
     <a
-      class="emotion-0"
+      class="gatsby-link emotion-0"
       href="/drivers/go/"
       title="Next Section"
     >

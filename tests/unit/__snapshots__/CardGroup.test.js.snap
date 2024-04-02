@@ -182,8 +182,6 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-7:hover,
@@ -238,7 +236,7 @@ exports[`renders correctly 1`] = `
             class="emotion-6"
           >
             <a
-              class="lg-ui-0001 emotion-7"
+              class="lg-ui-0001 lg-link emotion-7"
               href="https://www.mongodb.com/docs/atlas/getting-started/"
               target="_self"
             >
@@ -277,7 +275,7 @@ exports[`renders correctly 1`] = `
             class="emotion-6"
           >
             <a
-              class="lg-ui-0001 emotion-7"
+              class="lg-ui-0001 lg-link emotion-7"
               href="https://university.mongodb.com/courses/M001/about"
               target="_self"
             >
@@ -316,7 +314,7 @@ exports[`renders correctly 1`] = `
             class="emotion-6"
           >
             <a
-              class="lg-ui-0001 emotion-7"
+              class="lg-ui-0001 lg-link emotion-7"
               href="https://www.mongodb.com/docs/manual/tutorial/getting-started/"
               target="_self"
             >

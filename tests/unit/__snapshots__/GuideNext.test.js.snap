@@ -69,8 +69,6 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -326,37 +324,33 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-26:focus {
-  outline: none;
 }
 
 .emotion-26>code {
   color: #016BF8;
 }
 
-.emotion-26::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-26:focus,
+.emotion-26:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-26:focus .emotion-26::after {
-  background-color: #0498EC;
+.emotion-26:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-26:hover::after {
-  background-color: #E8EDEB;
+.emotion-26:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-27 {
@@ -393,7 +387,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
       </p>
       <span
         aria-disabled="false"
-        class="lg-ui-0001 lg-ui-button-0000 emotion-8"
+        class="lg-ui-0001 lg-link lg-ui-button-0000 emotion-8"
         target="_self"
         type="button"
       >
@@ -456,7 +450,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-26 emotion-27 emotion-28"
+            class="gatsby-link emotion-26 emotion-27 emotion-28"
             href="/server/read/"
           >
             Read Data in MongoDB
@@ -524,37 +518,33 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-8:focus {
-  outline: none;
 }
 
 .emotion-8>code {
   color: #016BF8;
 }
 
-.emotion-8::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-8:focus,
+.emotion-8:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-8:focus .emotion-8::after {
-  background-color: #0498EC;
+.emotion-8:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-8:hover::after {
-  background-color: #E8EDEB;
+.emotion-8:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-9 {
@@ -815,7 +805,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
       </div>
       <a
         aria-disabled="false"
-        class="emotion-8 lg-ui-button-0000 emotion-9"
+        class="gatsby-link emotion-8 lg-ui-button-0000 emotion-9"
         href="/server/read/"
         type="button"
       >
@@ -871,7 +861,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-8 emotion-28 emotion-29"
+            class="gatsby-link emotion-8 emotion-28 emotion-29"
             href="/server/read/"
           >
             Read Data in MongoDB
@@ -939,37 +929,33 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-8:focus {
-  outline: none;
 }
 
 .emotion-8>code {
   color: #016BF8;
 }
 
-.emotion-8::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-8:focus,
+.emotion-8:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-8:focus .emotion-8::after {
-  background-color: #0498EC;
+.emotion-8:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-8:hover::after {
-  background-color: #E8EDEB;
+.emotion-8:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-9 {
@@ -1285,7 +1271,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
       </div>
       <a
         aria-disabled="false"
-        class="emotion-8 lg-ui-button-0000 emotion-9"
+        class="gatsby-link emotion-8 lg-ui-button-0000 emotion-9"
         href="/cloud/connectionstring/"
         type="button"
       >
@@ -1346,7 +1332,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-8 emotion-28 emotion-29"
+            class="gatsby-link emotion-8 emotion-28 emotion-29"
             href="/cloud/account/"
           >
             Create and Manage a MongoDB Account
@@ -1374,7 +1360,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-8 emotion-28 emotion-29"
+            class="gatsby-link emotion-8 emotion-28 emotion-29"
             href="/cloud/connectionstring/"
           >
             Set Up Atlas Connectivity
@@ -1402,7 +1388,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             </svg>
           </div>
           <a
-            class="emotion-8 emotion-28 emotion-29"
+            class="gatsby-link emotion-8 emotion-28 emotion-29"
             href="/cloud/migrate-from-aws-to-atlas/"
           >
             Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas

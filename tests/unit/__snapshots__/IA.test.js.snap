@@ -100,8 +100,6 @@ exports[`renders a page IA with IA linked data 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -221,37 +219,33 @@ exports[`renders a page IA with IA linked data 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-10:focus {
-  outline: none;
 }
 
 .emotion-10>code {
   color: #016BF8;
 }
 
-.emotion-10::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-10:focus,
+.emotion-10:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-10:focus .emotion-10::after {
-  background-color: #0498EC;
+.emotion-10:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-10:hover::after {
-  background-color: #E8EDEB;
+.emotion-10:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-11 {
@@ -377,8 +371,6 @@ exports[`renders a page IA with IA linked data 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -554,7 +546,7 @@ exports[`renders a page IA with IA linked data 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-link constant-classname emotion-6"
           href="https://www.mongodb.com/docs/atlas/getting-started/"
           target="_self"
         >
@@ -569,7 +561,7 @@ exports[`renders a page IA with IA linked data 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-link constant-classname emotion-6"
           href="https://www.mongodb.com/docs/manual/"
           target="_self"
         >
@@ -584,7 +576,7 @@ exports[`renders a page IA with IA linked data 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="emotion-10 constant-classname emotion-11"
+          class="gatsby-link emotion-10 constant-classname emotion-11"
           href="/tools-and-connectors/"
         >
           Tools and Connectors
@@ -596,7 +588,7 @@ exports[`renders a page IA with IA linked data 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-link constant-classname emotion-6"
           href="https://www.mongodb.com/docs/drivers/"
           target="_self"
         >
@@ -614,7 +606,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/c/"
             target="_self"
           >
@@ -637,7 +629,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/cxx/"
             target="_self"
           >
@@ -660,7 +652,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/csharp/current/"
             target="_self"
           >
@@ -683,7 +675,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/go/current/"
             target="_self"
           >
@@ -706,7 +698,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/java-drivers/"
             target="_self"
           >
@@ -729,7 +721,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/kotlin-drivers/"
             target="_self"
           >
@@ -752,7 +744,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/node/current/"
             target="_self"
           >
@@ -775,7 +767,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/php/"
             target="_self"
           >
@@ -798,7 +790,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/python/"
             target="_self"
           >
@@ -821,7 +813,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/ruby/"
             target="_self"
           >
@@ -844,7 +836,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/rust/"
             target="_self"
           >
@@ -867,7 +859,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/scala/"
             target="_self"
           >
@@ -890,7 +882,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/swift/"
             target="_self"
           >
@@ -913,7 +905,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-link constant-classname emotion-16"
             href="https://www.mongodb.com/docs/drivers/typescript/"
             target="_self"
           >
@@ -1036,8 +1028,6 @@ exports[`renders a simple page IA correctly 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1157,37 +1147,33 @@ exports[`renders a simple page IA correctly 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-10:focus {
-  outline: none;
 }
 
 .emotion-10>code {
   color: #016BF8;
 }
 
-.emotion-10::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-10:focus,
+.emotion-10:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-10:focus .emotion-10::after {
-  background-color: #0498EC;
+.emotion-10:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-10:hover::after {
-  background-color: #E8EDEB;
+.emotion-10:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-11 {
@@ -1307,7 +1293,7 @@ exports[`renders a simple page IA correctly 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-link constant-classname emotion-6"
           href="https://www.mongodb.com/docs/atlas/getting-started/"
           target="_self"
         >
@@ -1322,7 +1308,7 @@ exports[`renders a simple page IA correctly 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-link constant-classname emotion-6"
           href="https://www.mongodb.com/docs/manual/"
           target="_self"
         >
@@ -1337,7 +1323,7 @@ exports[`renders a simple page IA correctly 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="emotion-10 constant-classname emotion-11"
+          class="gatsby-link emotion-10 constant-classname emotion-11"
           href="/tools-and-connectors/"
         >
           Tools and Connectors
@@ -1349,7 +1335,7 @@ exports[`renders a simple page IA correctly 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-link constant-classname emotion-6"
           href="https://www.mongodb.com/docs/drivers/"
           target="_self"
         >

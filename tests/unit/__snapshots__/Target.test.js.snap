@@ -81,37 +81,33 @@ a .emotion-0 {
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-7:focus {
-  outline: none;
 }
 
 .emotion-7>code {
   color: #016BF8;
 }
 
-.emotion-7::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-7:focus,
+.emotion-7:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-7:focus .emotion-7::after {
-  background-color: #0498EC;
+.emotion-7:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-7:hover::after {
-  background-color: #E8EDEB;
+.emotion-7:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 <dl
@@ -148,7 +144,7 @@ a .emotion-0 {
 configuration file is the preferred method for runtime configuration of
 
         <a
-          class="emotion-7"
+          class="gatsby-link emotion-7"
           href="/reference/program/mongos/#std-program-mongos"
         >
           <code
@@ -160,7 +156,7 @@ configuration file is the preferred method for runtime configuration of
         . The options are equivalent to the command-line
 configuration options. See 
         <a
-          class="emotion-7"
+          class="gatsby-link emotion-7"
           href="/reference/configuration-options/"
         >
           Configuration File Options
@@ -173,7 +169,7 @@ more information.
       >
         Ensure the configuration file uses ASCII encoding. The 
         <a
-          class="emotion-7"
+          class="gatsby-link emotion-7"
           href="/reference/program/mongos/#std-program-mongos"
         >
           <code

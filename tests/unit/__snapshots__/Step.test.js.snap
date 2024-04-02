@@ -91,37 +91,33 @@ exports[`renders with "connected" styling 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-9:focus {
-  outline: none;
 }
 
 .emotion-9>code {
   color: #016BF8;
 }
 
-.emotion-9::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-9:focus,
+.emotion-9:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-9:focus .emotion-9::after {
-  background-color: #0498EC;
+.emotion-9:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-9:hover::after {
-  background-color: #E8EDEB;
+.emotion-9:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 <div
@@ -148,7 +144,7 @@ exports[`renders with "connected" styling 1`] = `
         class="emotion-7"
       >
         <a
-          class="emotion-9"
+          class="gatsby-link emotion-9"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
@@ -250,37 +246,33 @@ exports[`renders with "connected" styling by default 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-9:focus {
-  outline: none;
 }
 
 .emotion-9>code {
   color: #016BF8;
 }
 
-.emotion-9::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-9:focus,
+.emotion-9:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-9:focus .emotion-9::after {
-  background-color: #0498EC;
+.emotion-9:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-9:hover::after {
-  background-color: #E8EDEB;
+.emotion-9:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 <div
@@ -307,7 +299,7 @@ exports[`renders with "connected" styling by default 1`] = `
         class="emotion-7"
       >
         <a
-          class="emotion-9"
+          class="gatsby-link emotion-9"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
@@ -382,37 +374,33 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-9:focus {
-  outline: none;
 }
 
 .emotion-9>code {
   color: #016BF8;
 }
 
-.emotion-9::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-9:focus,
+.emotion-9:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-9:focus .emotion-9::after {
-  background-color: #0498EC;
+.emotion-9:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-9:hover::after {
-  background-color: #E8EDEB;
+.emotion-9:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 <div
@@ -439,7 +427,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
         class="emotion-7"
       >
         <a
-          class="emotion-9"
+          class="gatsby-link emotion-9"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data

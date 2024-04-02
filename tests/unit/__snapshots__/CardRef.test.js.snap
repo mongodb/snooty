@@ -149,37 +149,33 @@ exports[`card correctly with and without url 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-8:focus {
-  outline: none;
 }
 
 .emotion-8>code {
   color: #016BF8;
 }
 
-.emotion-8::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-8:focus,
+.emotion-8:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-8:focus .emotion-8::after {
-  background-color: #0498EC;
+.emotion-8:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-8:hover::after {
-  background-color: #E8EDEB;
+.emotion-8:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-9 {
@@ -293,8 +289,6 @@ exports[`card correctly with and without url 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
 }
 
 .emotion-26:hover,
@@ -353,7 +347,7 @@ exports[`card correctly with and without url 1`] = `
             class="emotion-6"
           >
             <a
-              class="emotion-8 emotion-9"
+              class="gatsby-link emotion-8 emotion-9"
               href="/sdk/android/#std-label-android-intro"
             >
               Android
@@ -361,7 +355,7 @@ exports[`card correctly with and without url 1`] = `
             
 
             <a
-              class="emotion-8 emotion-9"
+              class="gatsby-link emotion-8 emotion-9"
               href="/sdk/ios/#std-label-ios-intro"
             >
               iOS
@@ -369,7 +363,7 @@ exports[`card correctly with and without url 1`] = `
             
 
             <a
-              class="emotion-8 emotion-9"
+              class="gatsby-link emotion-8 emotion-9"
               href="/sdk/dotnet/#std-label-dotnet-intro"
             >
               .Net
@@ -377,7 +371,7 @@ exports[`card correctly with and without url 1`] = `
             
 
             <a
-              class="emotion-8 emotion-9"
+              class="gatsby-link emotion-8 emotion-9"
               href="/web/#std-label-web-intro"
             >
               Web
@@ -385,7 +379,7 @@ exports[`card correctly with and without url 1`] = `
             
 
             <a
-              class="emotion-8 emotion-9"
+              class="gatsby-link emotion-8 emotion-9"
               href="/sdk/react-native/#std-label-react-native-intro"
             >
               React Native
@@ -393,7 +387,7 @@ exports[`card correctly with and without url 1`] = `
             
 
             <a
-              class="emotion-8 emotion-9"
+              class="gatsby-link emotion-8 emotion-9"
               href="/sdk/node/#std-label-node-intro"
             >
               Node.js
@@ -433,7 +427,7 @@ exports[`card correctly with and without url 1`] = `
             class="emotion-25"
           >
             <a
-              class="lg-ui-0001 emotion-26"
+              class="lg-ui-0001 lg-link emotion-26"
               href="https://docs.mongodb.com/realm/services/"
               target="_self"
             >

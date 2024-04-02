@@ -13,37 +13,33 @@ exports[`renders correctly 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-1:focus {
-  outline: none;
 }
 
 .emotion-1>code {
   color: #016BF8;
 }
 
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-1:focus,
+.emotion-1:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-1:focus .emotion-1::after {
-  background-color: #0498EC;
+.emotion-1:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-1:hover::after {
-  background-color: #E8EDEB;
+.emotion-1:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-2 {
@@ -161,7 +157,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="page"
       aria-disabled="false"
-      class="emotion-1 constant-classname emotion-2"
+      class="gatsby-link emotion-1 constant-classname emotion-2"
       href="/"
     >
       Overview
@@ -178,37 +174,33 @@ exports[`renders correctly 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-1:focus {
-  outline: none;
 }
 
 .emotion-1>code {
   color: #016BF8;
 }
 
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-1:focus,
+.emotion-1:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-1:focus .emotion-1::after {
-  background-color: #0498EC;
+.emotion-1:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-1:hover::after {
-  background-color: #E8EDEB;
+.emotion-1:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-2 {
@@ -308,7 +300,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="false"
       aria-disabled="false"
-      class="emotion-1 constant-classname emotion-2"
+      class="gatsby-link emotion-1 constant-classname emotion-2"
       href="/cloud/account/"
     >
       Atlas
@@ -325,37 +317,33 @@ exports[`renders correctly 1`] = `
   align-items: center;
   cursor: pointer;
   position: relative;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: #016BF8;
-}
-
-.emotion-1:focus {
-  outline: none;
 }
 
 .emotion-1>code {
   color: #016BF8;
 }
 
-.emotion-1::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
+.emotion-1:focus,
+.emotion-1:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
-.emotion-1:focus .emotion-1::after {
-  background-color: #0498EC;
+.emotion-1:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
 }
 
-.emotion-1:hover::after {
-  background-color: #E8EDEB;
+.emotion-1:hover {
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-2 {
@@ -455,7 +443,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="false"
       aria-disabled="false"
-      class="emotion-1 constant-classname emotion-2"
+      class="gatsby-link emotion-1 constant-classname emotion-2"
       href="/server/read/"
     >
       CRUD
