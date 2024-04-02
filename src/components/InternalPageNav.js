@@ -27,7 +27,6 @@ const arrowStyling = css`
 `;
 
 const titleSpanStyling = css`
-  // display: inline-block;
   line-height: 28px;
 `;
 
