@@ -42,6 +42,7 @@ exports[`renders correctly with pageTitle 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
   font-size: 13px;
 }
 
@@ -149,7 +150,7 @@ exports[`renders correctly with pageTitle 1`] = `
     class="emotion-0"
   >
     <a
-      class="lg-ui-0001 lg-link emotion-1"
+      class="lg-ui-0001 emotion-1"
       href="https://www.mongodb.com/docs/"
       target="_self"
     >
@@ -163,7 +164,7 @@ exports[`renders correctly with pageTitle 1`] = `
        → 
     </span>
     <a
-      class="gatsby-link emotion-4 emotion-5"
+      class="emotion-4 emotion-5"
       href="/view-analyze/"
     >
       View & Analyze Data
@@ -214,6 +215,7 @@ exports[`renders correctly with siteTitle 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
   font-size: 13px;
 }
 
@@ -321,7 +323,7 @@ exports[`renders correctly with siteTitle 1`] = `
     class="emotion-0"
   >
     <a
-      class="lg-ui-0001 lg-link emotion-1"
+      class="lg-ui-0001 emotion-1"
       href="https://www.mongodb.com/docs/"
       target="_self"
     >
@@ -335,7 +337,7 @@ exports[`renders correctly with siteTitle 1`] = `
        → 
     </span>
     <a
-      class="gatsby-link emotion-4 emotion-5"
+      class="emotion-4 emotion-5"
       href="/"
     >
       MongoDB Compass

@@ -46,6 +46,7 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-8:hover,
@@ -104,7 +105,7 @@ exports[`renders correctly 1`] = `
           class="emotion-0"
         >
           <a
-            class="lg-ui-0001 lg-link emotion-8"
+            class="lg-ui-0001 emotion-8"
             href=""
           >
             <span>

@@ -244,7 +244,7 @@ exports[`renders correctly 1`] = `
     >
       <li>
         <a
-          class="gatsby-link emotion-12 emotion-13 emotion-14"
+          class="emotion-12 emotion-13 emotion-14"
           href="/cloud/account/"
         >
           <span>
@@ -257,7 +257,7 @@ exports[`renders correctly 1`] = `
       </li>
       <li>
         <a
-          class="gatsby-link emotion-12 emotion-13 emotion-14"
+          class="emotion-12 emotion-13 emotion-14"
           href="/cloud/connectionstring/"
         >
           <span>
@@ -268,7 +268,7 @@ exports[`renders correctly 1`] = `
       </li>
       <li>
         <a
-          class="gatsby-link emotion-12 emotion-13 emotion-14"
+          class="emotion-12 emotion-13 emotion-14"
           href="/cloud/migrate-from-aws-to-atlas/"
         >
           <span>

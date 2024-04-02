@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { css } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import { getPageTitle } from '../utils/get-page-title';
@@ -27,7 +27,7 @@ const arrowStyling = css`
 `;
 
 const titleSpanStyling = css`
-  display: inline-block;
+  // display: inline-block;
   line-height: 28px;
 `;
 
@@ -44,22 +44,22 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
     <StyledContainer>
       {prevSlug && (
         <React.Fragment>
-          <Link to={prevSlug} title="Previous Section">
-            <LinkContentContainer>
-              <span css={[arrowStyling]}>←&nbsp;</span>
-              <span css={titleSpanStyling}>{getPageTitle(prevSlug, slugTitleMapping)}</span>
-            </LinkContentContainer>
-          </Link>
+          <LinkContentContainer>
+            <span className={cx([arrowStyling])}>←&nbsp;</span>
+            <Link className={cx(titleSpanStyling)} to={prevSlug} title="Previous Section">
+              {getPageTitle(prevSlug, slugTitleMapping)}
+            </Link>
+          </LinkContentContainer>
         </React.Fragment>
       )}
       {nextSlug && (
         <React.Fragment>
-          <Link to={nextSlug} title="Next Section">
-            <LinkContentContainer>
-              <span css={titleSpanStyling}>{getPageTitle(nextSlug, slugTitleMapping)}</span>
-              <span css={[arrowStyling]}>&nbsp;→</span>
-            </LinkContentContainer>
-          </Link>
+          <LinkContentContainer>
+            <Link className={cx(titleSpanStyling)} to={prevSlug} title="Next Section">
+              {getPageTitle(nextSlug, slugTitleMapping)}
+            </Link>
+            <span className={cx([arrowStyling])}>&nbsp;→</span>
+          </LinkContentContainer>
         </React.Fragment>
       )}
     </StyledContainer>

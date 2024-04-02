@@ -139,6 +139,7 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-6:hover,
@@ -197,7 +198,7 @@ exports[`renders correctly 1`] = `
         class="emotion-5"
       >
         <a
-          class="lg-ui-0001 lg-link emotion-6"
+          class="lg-ui-0001 emotion-6"
           href="https://university.mongodb.com/courses/M001/about"
           target="_self"
         >

@@ -157,7 +157,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="page"
       aria-disabled="false"
-      class="gatsby-link emotion-1 constant-classname emotion-2"
+      class="emotion-1 constant-classname emotion-2"
       href="/"
     >
       Overview
@@ -300,7 +300,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="false"
       aria-disabled="false"
-      class="gatsby-link emotion-1 constant-classname emotion-2"
+      class="emotion-1 constant-classname emotion-2"
       href="/cloud/account/"
     >
       Atlas
@@ -443,7 +443,7 @@ exports[`renders correctly 1`] = `
     <a
       aria-current="false"
       aria-disabled="false"
-      class="gatsby-link emotion-1 constant-classname emotion-2"
+      class="emotion-1 constant-classname emotion-2"
       href="/server/read/"
     >
       CRUD

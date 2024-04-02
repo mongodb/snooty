@@ -22,6 +22,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
   font-size: 13px;
 }
 
@@ -63,7 +64,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 }
 
 <a
-    class="lg-ui-0001 lg-link emotion-0"
+    class="lg-ui-0001 emotion-0"
     href="https://www.mongodb.com/docs/"
     target="_self"
   >
@@ -104,6 +105,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
   font-size: 13px;
 }
 
@@ -145,7 +147,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 }
 
 <a
-    class="lg-ui-0001 lg-link emotion-0"
+    class="lg-ui-0001 emotion-0"
     href="https://www.mongodb.com/docs/view-analyze"
     target="_self"
   >
@@ -222,7 +224,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 }
 
 <a
-    class="gatsby-link emotion-0 emotion-1"
+    class="emotion-0 emotion-1"
     href="/documents/view/"
   >
     MongoDB Compass
@@ -252,6 +254,7 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
   font-size: 13px;
 }
 
@@ -293,7 +296,7 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 }
 
 <a
-    class="lg-ui-0001 lg-link emotion-0"
+    class="lg-ui-0001 emotion-0"
     href="https://www.mongodb.com/docs/"
     target="_self"
   >
@@ -370,7 +373,7 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 }
 
 <a
-    class="gatsby-link emotion-0 emotion-1"
+    class="emotion-0 emotion-1"
     href="/view-analyze/"
   >
     View & Analyze Data

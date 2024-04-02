@@ -289,6 +289,7 @@ exports[`card correctly with and without url 1`] = `
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-26:hover,
@@ -347,7 +348,7 @@ exports[`card correctly with and without url 1`] = `
             class="emotion-6"
           >
             <a
-              class="gatsby-link emotion-8 emotion-9"
+              class="emotion-8 emotion-9"
               href="/sdk/android/#std-label-android-intro"
             >
               Android
@@ -355,7 +356,7 @@ exports[`card correctly with and without url 1`] = `
             
 
             <a
-              class="gatsby-link emotion-8 emotion-9"
+              class="emotion-8 emotion-9"
               href="/sdk/ios/#std-label-ios-intro"
             >
               iOS
@@ -363,7 +364,7 @@ exports[`card correctly with and without url 1`] = `
             
 
             <a
-              class="gatsby-link emotion-8 emotion-9"
+              class="emotion-8 emotion-9"
               href="/sdk/dotnet/#std-label-dotnet-intro"
             >
               .Net
@@ -371,7 +372,7 @@ exports[`card correctly with and without url 1`] = `
             
 
             <a
-              class="gatsby-link emotion-8 emotion-9"
+              class="emotion-8 emotion-9"
               href="/web/#std-label-web-intro"
             >
               Web
@@ -379,7 +380,7 @@ exports[`card correctly with and without url 1`] = `
             
 
             <a
-              class="gatsby-link emotion-8 emotion-9"
+              class="emotion-8 emotion-9"
               href="/sdk/react-native/#std-label-react-native-intro"
             >
               React Native
@@ -387,7 +388,7 @@ exports[`card correctly with and without url 1`] = `
             
 
             <a
-              class="gatsby-link emotion-8 emotion-9"
+              class="emotion-8 emotion-9"
               href="/sdk/node/#std-label-node-intro"
             >
               Node.js
@@ -427,7 +428,7 @@ exports[`card correctly with and without url 1`] = `
             class="emotion-25"
           >
             <a
-              class="lg-ui-0001 lg-link emotion-26"
+              class="lg-ui-0001 emotion-26"
               href="https://docs.mongodb.com/realm/services/"
               target="_self"
             >

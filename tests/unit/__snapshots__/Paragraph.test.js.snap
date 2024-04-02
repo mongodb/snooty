@@ -38,6 +38,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-1:hover,
@@ -66,7 +67,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
     class="emotion-0"
   >
     <a
-      class="lg-ui-0001 lg-link emotion-1"
+      class="lg-ui-0001 emotion-1"
       href="https://cloud.mongodb.com?tck=docs_realm"
       target="_self"
     >
@@ -116,6 +117,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-1:hover,
@@ -144,7 +146,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
     class="emotion-0"
   >
     <a
-      class="lg-ui-0001 lg-link emotion-1"
+      class="lg-ui-0001 emotion-1"
       href="https://cloud.mongodb.com?tck=docs_realm"
       target="_self"
     >

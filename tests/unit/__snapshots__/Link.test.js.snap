@@ -22,6 +22,7 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-0:hover,
@@ -47,7 +48,7 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
 }
 
 <a
-    class="lg-ui-0001 lg-link emotion-0"
+    class="lg-ui-0001 emotion-0"
     href=""
   >
     <span>
@@ -79,6 +80,7 @@ exports[`Link component renders a variety of strings correctly external MDB docs
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-0:hover,
@@ -104,7 +106,7 @@ exports[`Link component renders a variety of strings correctly external MDB docs
 }
 
 <a
-    class="lg-ui-0001 lg-link emotion-0"
+    class="lg-ui-0001 emotion-0"
     href="https://www.mongodb.com/docs/atlas/"
     target="_self"
   >
@@ -137,6 +139,7 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-0:hover,
@@ -162,7 +165,7 @@ exports[`Link component renders a variety of strings correctly external MDB non-
 }
 
 <a
-    class="lg-ui-0001 lg-link emotion-0"
+    class="lg-ui-0001 emotion-0"
     href="https://account.mongodb.com/account/"
     target="_self"
   >
@@ -195,6 +198,7 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-0:hover,
@@ -220,7 +224,7 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 }
 
 <a
-    class="lg-ui-0001 lg-link emotion-0"
+    class="lg-ui-0001 emotion-0"
     href="http://mongodb.com"
     target="_self"
   >
@@ -253,6 +257,7 @@ exports[`Link component renders a variety of strings correctly external URL with
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-0:hover,
@@ -278,7 +283,7 @@ exports[`Link component renders a variety of strings correctly external URL with
 }
 
 <a
-    class="lg-ui-0001 lg-link emotion-0"
+    class="lg-ui-0001 emotion-0"
     href="http://mongodb.com"
     target="_self"
   >
@@ -311,6 +316,7 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-0:hover,
@@ -346,7 +352,7 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
 }
 
 <a
-    class="lg-ui-0001 lg-link emotion-0"
+    class="lg-ui-0001 emotion-0"
     href="https://safety.google/authentication/"
     rel="noopener noreferrer"
   >
@@ -397,6 +403,7 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
   line-height: 20px;
   color: #016BF8;
   font-weight: 400;
+  display: inline;
 }
 
 .emotion-0:hover,
@@ -422,7 +429,7 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
 }
 
 <a
-    class="lg-ui-0001 lg-link emotion-0"
+    class="lg-ui-0001 emotion-0"
     href="mailto:docs@mongodb.com"
     target="_self"
   >
@@ -472,7 +479,7 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
 }
 
 <a
-    class="gatsby-link emotion-0 test-class"
+    class="emotion-0 test-class"
     href="/drivers/c/"
   >
     C Driver
@@ -519,7 +526,7 @@ exports[`Link component renders a variety of strings correctly internal link que
 }
 
 <a
-    class="gatsby-link emotion-0 test-class"
+    class="emotion-0 test-class"
     href="/drivers/ruby/?site=drivers"
   >
     C Driver
@@ -566,7 +573,7 @@ exports[`Link component renders a variety of strings correctly internal link tha
 }
 
 <a
-    class="gatsby-link emotion-0 test-class"
+    class="emotion-0 test-class"
     href="/drivers/nodejs/#installation"
   >
     C Driver
@@ -613,7 +620,7 @@ exports[`Link component renders a variety of strings correctly internal link wit
 }
 
 <a
-    class="gatsby-link emotion-0 test-class"
+    class="emotion-0 test-class"
     href="/drivers/pymongo/#installation"
   >
     C Driver
