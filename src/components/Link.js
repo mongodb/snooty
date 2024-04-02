@@ -45,6 +45,11 @@ const gatsbyLinkStyling = css`
   }
 `;
 
+// DOP-3091: LG anchors are not inline by default
+const lgLinkStyling = css`
+  display: inline;
+`;
+
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
 // destructure the prop here and pass it only to GatsbyLink.
 const Link = ({
@@ -112,7 +117,13 @@ const Link = ({
   const target = !showExtIcon ? '_self' : undefined;
 
   return (
-    <LGLink className={joinClassNames(className)} href={to} hideExternalIcon={!showExtIcon} target={target} {...other}>
+    <LGLink
+      className={joinClassNames(lgLinkStyling, className)}
+      href={to}
+      hideExternalIcon={!showExtIcon}
+      target={target}
+      {...other}
+    >
       {children}
       {decoration}
     </LGLink>
