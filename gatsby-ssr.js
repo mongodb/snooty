@@ -4,6 +4,7 @@ import { renderStylesToString } from '@leafygreen-ui/emotion';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
+import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
 import NotoSansKR from './src/styles/fonts/NotoSansKR-VariableFont_wght.woff2';
 import NotoSansSC from './src/styles/fonts/NotoSansSC-VariableFont_wght.woff2';
 
@@ -24,6 +25,14 @@ export const onRenderBody = ({ setHeadComponents }) => {
       dangerouslySetInnerHTML={{
         __html: `!function(e,t,r,n){if(!e[n]){for(var a=e[n]=[],i=["survey","reset","config","init","set","get","event","identify","track","page","screen","group","alias"],s=0;s<i.length;s++){var c=i[s];a[c]=a[c]||function(e){return function(){var t=Array.prototype.slice.call(arguments);a.push([e,t])}}(c)}a.SNIPPET_VERSION="1.0.1";var o=t.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/"+r+"/"+n+".js";var l=t.getElementsByTagName("script")[0];l.parentNode.insertBefore(o,l)}}(window,document,"Dk30CC86ba0nATlK","delighted");`,
       }}
+    />,
+    <link
+      rel="preload"
+      href={EuclidCircularASemiBold}
+      as="font"
+      type="font/woff"
+      crossOrigin="anonymous"
+      key="notoSansKR"
     />,
     <link rel="preload" href={NotoSansKR} as="font" type="font/woff2" crossOrigin="anonymous" key="notoSansKR" />,
     <link rel="preload" href={NotoSansSC} as="font" type="font/woff2" crossOrigin="anonymous" key="notoSansSC" />,
