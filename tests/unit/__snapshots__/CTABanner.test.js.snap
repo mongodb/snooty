@@ -43,6 +43,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 .emotion-0 p,
 .emotion-0 a {
   font-size: 13px;
+  line-height: 13px;
 }
 
 .emotion-0>p {
@@ -97,8 +98,6 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 }
 
 .emotion-6 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -110,45 +109,37 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  display: inline;
 }
 
 .emotion-6:hover,
-.emotion-6:focus,
-.emotion-6:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-6:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-6:focus {
   outline: none;
 }
 
-.emotion-7 {
-  position: relative;
+.emotion-6:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-7::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-7::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-7::after {
-  background-color: #E8EDEB;
+.emotion-6:focus {
+  text-decoration-color: #016BF8;
 }
 
 <div
@@ -192,9 +183,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
         href="https://university.mongodb.com/"
         target="_self"
       >
-        <span
-          class="emotion-7"
-        >
+        <span>
           MongoDB University
         </span>
       </a>
@@ -246,6 +235,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 .emotion-0 p,
 .emotion-0 a {
   font-size: 13px;
+  line-height: 13px;
 }
 
 .emotion-0>p {
@@ -300,8 +290,6 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 }
 
 .emotion-6 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -313,45 +301,37 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  display: inline;
 }
 
 .emotion-6:hover,
-.emotion-6:focus,
-.emotion-6:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-6:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-6:focus {
   outline: none;
 }
 
-.emotion-7 {
-  position: relative;
+.emotion-6:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-7::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-7::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-7::after {
-  background-color: #E8EDEB;
+.emotion-6:focus {
+  text-decoration-color: #016BF8;
 }
 
 <div
@@ -397,9 +377,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
         href="https://university.mongodb.com/"
         target="_self"
       >
-        <span
-          class="emotion-7"
-        >
+        <span>
           MongoDB University
         </span>
       </a>
@@ -451,6 +429,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 .emotion-0 p,
 .emotion-0 a {
   font-size: 13px;
+  line-height: 13px;
 }
 
 .emotion-0>p {
@@ -505,8 +484,6 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 }
 
 .emotion-6 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -518,45 +495,37 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  display: inline;
 }
 
 .emotion-6:hover,
-.emotion-6:focus,
-.emotion-6:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-6:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-6:focus {
   outline: none;
 }
 
-.emotion-7 {
-  position: relative;
+.emotion-6:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-7::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-7::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-7::after {
-  background-color: #E8EDEB;
+.emotion-6:focus {
+  text-decoration-color: #016BF8;
 }
 
 <div
@@ -600,9 +569,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
         href="https://university.mongodb.com/"
         target="_self"
       >
-        <span
-          class="emotion-7"
-        >
+        <span>
           MongoDB University
         </span>
       </a>
@@ -654,6 +621,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 .emotion-0 p,
 .emotion-0 a {
   font-size: 13px;
+  line-height: 13px;
 }
 
 .emotion-0>p {
@@ -708,8 +676,6 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 }
 
 .emotion-6 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -721,45 +687,37 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  display: inline;
 }
 
 .emotion-6:hover,
-.emotion-6:focus,
-.emotion-6:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-6:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-6:focus {
   outline: none;
 }
 
-.emotion-7 {
-  position: relative;
+.emotion-6:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-7::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-7::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-7::after {
-  background-color: #E8EDEB;
+.emotion-6:focus {
+  text-decoration-color: #016BF8;
 }
 
 <div
@@ -803,9 +761,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
         href="https://university.mongodb.com/"
         target="_self"
       >
-        <span
-          class="emotion-7"
-        >
+        <span>
           MongoDB University
         </span>
       </a>
