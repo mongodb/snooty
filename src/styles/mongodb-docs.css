@@ -975,23 +975,6 @@ div td pre {
   src: url(fonts/EuclidCircularA-Semibold-WebXL.woff) format('woff');
 }
 
-/* used for translation pages */
-@font-face {
-  font-family: 'Noto Sans SC';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url(fonts/NotoSansSC-VariableFont_wght.woff2) format('woff2');
-}
-
-@font-face {
-  font-family: 'Noto Sans KR';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url(fonts/NotoSansKR-VariableFont_wght.woff2) format('woff2');
-}
-
 div.document {
   margin-left: 25px;
 }

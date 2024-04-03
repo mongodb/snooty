@@ -5,8 +5,6 @@ import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
-import NotoSansKR from './src/styles/fonts/NotoSansKR-VariableFont_wght.woff2';
-import NotoSansSC from './src/styles/fonts/NotoSansSC-VariableFont_wght.woff2';
 
 export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
@@ -32,10 +30,20 @@ export const onRenderBody = ({ setHeadComponents }) => {
       as="font"
       type="font/woff"
       crossOrigin="anonymous"
-      key="notoSansKR"
+      key="euclidCircularSemiBold"
     />,
-    <link rel="preload" href={NotoSansKR} as="font" type="font/woff2" crossOrigin="anonymous" key="notoSansKR" />,
-    <link rel="preload" href={NotoSansSC} as="font" type="font/woff2" crossOrigin="anonymous" key="notoSansSC" />,
+    <link key="preconnectGoogleAPIS" rel="preconnect" href="https://fonts.googleapis.com" />,
+    <link key="preconnectGStatic" rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />,
+    <link
+      key="notoSansCS"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap"
+      rel="stylesheet"
+    />,
+    <link
+      key="notoSansKR"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />,
   ]);
 };
 
