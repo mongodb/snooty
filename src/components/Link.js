@@ -15,46 +15,39 @@ import { isGatsbyPreview } from '../utils/is-gatsby-preview';
  * https://www.gatsbyjs.org/docs/gatsby-link/#recommendations-for-programmatic-in-app-navigation
  */
 
-const LGlinkStyling = css`
-  text-decoration: none !important;
-`;
-
 // CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
 const gatsbyLinkStyling = css`
   align-items: center;
   cursor: pointer;
-  &:focus {
-    outline: none;
-  }
   position: relative;
-  text-decoration: none !important;
+  text-decoration: none;
+  text-decoration-color: transparent;
   line-height: 13px;
-  outline: none;
   color: ${palette.blue.base};
 
   > code {
     color: ${palette.blue.base};
   }
 
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    border-radius: 2px;
+  &:focus,
+  &:hover {
+    text-decoration-line: underline;
+    transition: text-decoration 150ms ease-in-out;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
   }
-  &:focus & {
-    &::after {
-      background-color: ${palette.blue.light1};
-    }
+  &:focus {
+    text-decoration-color: ${palette.blue.base};
+    outline: none;
   }
   &:hover {
-    &::after {
-      background-color: ${palette.gray.light2};
-    }
+    text-decoration-color: ${palette.gray.light2};
   }
+`;
+
+// DOP-3091: LG anchors are not inline by default
+const lgLinkStyling = css`
+  display: inline;
 `;
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
@@ -125,7 +118,7 @@ const Link = ({
 
   return (
     <LGLink
-      className={joinClassNames(LGlinkStyling, className)}
+      className={joinClassNames(lgLinkStyling, className)}
       href={to}
       hideExternalIcon={!showExtIcon}
       target={target}

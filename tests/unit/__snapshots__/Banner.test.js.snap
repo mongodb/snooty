@@ -22,6 +22,7 @@ exports[`renders a Banner correctly 1`] = `
 .emotion-0 p,
 .emotion-0 a {
   font-size: 13px;
+  line-height: 13px;
 }
 
 .emotion-2 {

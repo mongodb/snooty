@@ -19,8 +19,6 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 }
 
 .emotion-1 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -32,45 +30,37 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  display: inline;
 }
 
 .emotion-1:hover,
-.emotion-1:focus,
-.emotion-1:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-1:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-1:focus {
   outline: none;
 }
 
-.emotion-2 {
-  position: relative;
+.emotion-1:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-2::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-2::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-2::after {
-  background-color: #E8EDEB;
+.emotion-1:focus {
+  text-decoration-color: #016BF8;
 }
 
 <p
@@ -81,9 +71,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
       href="https://cloud.mongodb.com?tck=docs_realm"
       target="_self"
     >
-      <span
-        class="emotion-2"
-      >
+      <span>
         Deploy a Free Tier Cluster.
       </span>
     </a>
@@ -110,8 +98,6 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 }
 
 .emotion-1 {
-  font-size: 13px;
-  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -123,45 +109,37 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
+  text-decoration-color: transparent;
   cursor: pointer;
-  line-height: 13px;
+  font-size: inherit;
+  line-height: inherit;
+  font-size: 13px;
+  line-height: 20px;
   color: #016BF8;
   font-weight: 400;
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
+  display: inline;
 }
 
 .emotion-1:hover,
-.emotion-1:focus,
-.emotion-1:visited {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-1:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .emotion-1:focus {
   outline: none;
 }
 
-.emotion-2 {
-  position: relative;
+.emotion-1:hover {
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-2::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  border-radius: 2px;
-}
-
-.lg-ui-0001:focus .emotion-2::after {
-  background-color: #0498EC;
-}
-
-.lg-ui-0001:hover .emotion-2::after {
-  background-color: #E8EDEB;
+.emotion-1:focus {
+  text-decoration-color: #016BF8;
 }
 
 <p
@@ -172,9 +150,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
       href="https://cloud.mongodb.com?tck=docs_realm"
       target="_self"
     >
-      <span
-        class="emotion-2"
-      >
+      <span>
         Deploy a Free Tier Cluster.
       </span>
     </a>
