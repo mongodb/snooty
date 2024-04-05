@@ -23,6 +23,8 @@ exports[`renders correctly with pageTitle 1`] = `
 }
 
 .emotion-1 {
+  font-size: 13px;
+  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -34,12 +36,8 @@ exports[`renders correctly with pageTitle 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  text-decoration-color: transparent;
   cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  font-size: 13px;
-  line-height: 20px;
+  line-height: 13px;
   color: #016BF8;
   font-weight: 400;
   display: inline;
@@ -47,25 +45,14 @@ exports[`renders correctly with pageTitle 1`] = `
 }
 
 .emotion-1:hover,
-.emotion-1:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
+.emotion-1:focus,
+.emotion-1:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-1:focus {
   outline: none;
-}
-
-.emotion-1:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-1:focus {
-  text-decoration-color: #016BF8;
 }
 
 .emotion-1:last-of-type {
@@ -84,14 +71,36 @@ exports[`renders correctly with pageTitle 1`] = `
 }
 
 .emotion-2 {
+  position: relative;
+}
+
+.emotion-2::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.lg-ui-0001:focus .emotion-2::after {
+  background-color: #0498EC;
+}
+
+.lg-ui-0001:hover .emotion-2::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-3 {
   cursor: default;
 }
 
-.emotion-2:last-of-type {
+.emotion-3:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-4 {
+.emotion-5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -105,12 +114,12 @@ exports[`renders correctly with pageTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-4>code {
+.emotion-5>code {
   color: #016BF8;
 }
 
-.emotion-4:focus,
-.emotion-4:hover {
+.emotion-5:focus,
+.emotion-5:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -118,31 +127,31 @@ exports[`renders correctly with pageTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-4:focus {
+.emotion-5:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-4:hover {
+.emotion-5:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-5 {
+.emotion-6 {
   font-size: 13px;
 }
 
-.emotion-5:last-of-type {
+.emotion-6:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-5:hover,
-.emotion-5:focus {
+.emotion-6:hover,
+.emotion-6:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-5:hover:not(:last-of-type),
-.emotion-5:focus:not(:last-of-type) {
+.emotion-6:hover:not(:last-of-type),
+.emotion-6:focus:not(:last-of-type) {
   color: #1C2D38;
 }
 
@@ -154,17 +163,19 @@ exports[`renders correctly with pageTitle 1`] = `
       href="https://www.mongodb.com/docs/"
       target="_self"
     >
-      <span>
+      <span
+        class="emotion-2"
+      >
         Docs Home
       </span>
     </a>
     <span
-      class="emotion-2 emotion-3"
+      class="emotion-3 emotion-4"
     >
        → 
     </span>
     <a
-      class="emotion-4 emotion-5"
+      class="emotion-5 emotion-6"
       href="/view-analyze/"
     >
       View & Analyze Data
@@ -196,6 +207,8 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-1 {
+  font-size: 13px;
+  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -207,12 +220,8 @@ exports[`renders correctly with siteTitle 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  text-decoration-color: transparent;
   cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  font-size: 13px;
-  line-height: 20px;
+  line-height: 13px;
   color: #016BF8;
   font-weight: 400;
   display: inline;
@@ -220,25 +229,14 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-1:hover,
-.emotion-1:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
+.emotion-1:focus,
+.emotion-1:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-1:focus {
   outline: none;
-}
-
-.emotion-1:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-1:focus {
-  text-decoration-color: #016BF8;
 }
 
 .emotion-1:last-of-type {
@@ -257,14 +255,36 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-2 {
+  position: relative;
+}
+
+.emotion-2::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.lg-ui-0001:focus .emotion-2::after {
+  background-color: #0498EC;
+}
+
+.lg-ui-0001:hover .emotion-2::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-3 {
   cursor: default;
 }
 
-.emotion-2:last-of-type {
+.emotion-3:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-4 {
+.emotion-5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -278,12 +298,12 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-4>code {
+.emotion-5>code {
   color: #016BF8;
 }
 
-.emotion-4:focus,
-.emotion-4:hover {
+.emotion-5:focus,
+.emotion-5:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -291,31 +311,31 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-4:focus {
+.emotion-5:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-4:hover {
+.emotion-5:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-5 {
+.emotion-6 {
   font-size: 13px;
 }
 
-.emotion-5:last-of-type {
+.emotion-6:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-5:hover,
-.emotion-5:focus {
+.emotion-6:hover,
+.emotion-6:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-5:hover:not(:last-of-type),
-.emotion-5:focus:not(:last-of-type) {
+.emotion-6:hover:not(:last-of-type),
+.emotion-6:focus:not(:last-of-type) {
   color: #1C2D38;
 }
 
@@ -327,17 +347,19 @@ exports[`renders correctly with siteTitle 1`] = `
       href="https://www.mongodb.com/docs/"
       target="_self"
     >
-      <span>
+      <span
+        class="emotion-2"
+      >
         Docs Home
       </span>
     </a>
     <span
-      class="emotion-2 emotion-3"
+      class="emotion-3 emotion-4"
     >
        → 
     </span>
     <a
-      class="emotion-4 emotion-5"
+      class="emotion-5 emotion-6"
       href="/"
     >
       MongoDB Compass

@@ -270,6 +270,8 @@ exports[`card correctly with and without url 1`] = `
 }
 
 .emotion-26 {
+  font-size: 13px;
+  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -281,37 +283,44 @@ exports[`card correctly with and without url 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  text-decoration-color: transparent;
   cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  font-size: 13px;
-  line-height: 20px;
+  line-height: 13px;
   color: #016BF8;
   font-weight: 400;
   display: inline;
 }
 
 .emotion-26:hover,
-.emotion-26:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
+.emotion-26:focus,
+.emotion-26:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-26:focus {
   outline: none;
 }
 
-.emotion-26:hover {
-  text-decoration-color: #E8EDEB;
+.emotion-27 {
+  position: relative;
 }
 
-.emotion-26:focus {
-  text-decoration-color: #016BF8;
+.emotion-27::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.lg-ui-0001:focus .emotion-27::after {
+  background-color: #0498EC;
+}
+
+.lg-ui-0001:hover .emotion-27::after {
+  background-color: #E8EDEB;
 }
 
 <div
@@ -432,7 +441,9 @@ exports[`card correctly with and without url 1`] = `
               href="https://docs.mongodb.com/realm/services/"
               target="_self"
             >
-              <span>
+              <span
+                class="emotion-27"
+              >
                 Learn more about MongoDB Realm Application Services
               </span>
             </a>

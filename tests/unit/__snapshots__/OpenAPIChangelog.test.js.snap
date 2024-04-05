@@ -688,6 +688,8 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 }
 
 .emotion-52 {
+  font-size: 13px;
+  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -699,44 +701,51 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  text-decoration-color: transparent;
   cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  font-size: 13px;
-  line-height: 20px;
+  line-height: 13px;
   color: #016BF8;
   font-weight: 400;
 }
 
 .emotion-52:hover,
-.emotion-52:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
+.emotion-52:focus,
+.emotion-52:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-52:focus {
   outline: none;
 }
 
-.emotion-52:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-52:focus {
-  text-decoration-color: #016BF8;
-}
-
 .emotion-53 {
+  position: relative;
+}
+
+.emotion-53::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.lg-ui-0001:focus .emotion-53::after {
+  background-color: #0498EC;
+}
+
+.lg-ui-0001:hover .emotion-53::after {
+  background-color: #E8EDEB;
+}
+
+.emotion-54 {
   color: #016BF8;
   word-break: break-all;
 }
 
-.emotion-55 {
+.emotion-56 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -746,11 +755,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   color: #001E2B;
 }
 
-.emotion-56 {
+.emotion-57 {
   margin-top: 2px;
 }
 
-.emotion-58 {
+.emotion-59 {
   font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -775,17 +784,17 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   color: #970606;
 }
 
-.emotion-59 {
+.emotion-60 {
   margin: 0;
   list-style-position: start;
 }
 
-.emotion-61 {
+.emotion-62 {
   margin-top: 12px;
   line-height: 28px;
 }
 
-.emotion-94 {
+.emotion-97 {
   font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -810,11 +819,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   color: #00684A;
 }
 
-.emotion-99 {
+.emotion-102 {
   position: relative;
 }
 
-.emotion-100 {
+.emotion-103 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -827,7 +836,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   margin-right: 5px;
 }
 
-.emotion-102 {
+.emotion-105 {
   color: #DB3030;
 }
 
@@ -1032,25 +1041,27 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
               target="_self"
             >
-              <span>
+              <span
+                class="emotion-53"
+              >
                 <h6
-                  class="emotion-53 emotion-54 emotion-55"
+                  class="emotion-54 emotion-55 emotion-56"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-56 emotion-57 emotion-58"
+              class="emotion-57 emotion-58 emotion-59"
             >
               Removed
             </div>
           </div>
           <ul
-            class="emotion-59 emotion-60"
+            class="emotion-60 emotion-61"
           >
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               Resource version 2023-01-01 was removed, latest available resource version is 2023-02-01
             </li>
@@ -1077,25 +1088,27 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
               target="_self"
             >
-              <span>
+              <span
+                class="emotion-53"
+              >
                 <h6
-                  class="emotion-53 emotion-54 emotion-55"
+                  class="emotion-54 emotion-55 emotion-56"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-56 emotion-57 emotion-58"
+              class="emotion-57 emotion-58 emotion-59"
             >
               Removed
             </div>
           </div>
           <ul
-            class="emotion-59 emotion-60"
+            class="emotion-60 emotion-61"
           >
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               This change should really definitely be hidden
             </li>
@@ -1122,32 +1135,34 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               href="//0/#tag/Projects/operation/getProjectByName"
               target="_self"
             >
-              <span>
+              <span
+                class="emotion-53"
+              >
                 <h6
-                  class="emotion-53 emotion-54 emotion-55"
+                  class="emotion-54 emotion-55 emotion-56"
                 >
                   GET /api/atlas/v2/groups/byName/{groupName}
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-56 emotion-57 emotion-94"
+              class="emotion-57 emotion-58 emotion-97"
             >
               Released
             </div>
           </div>
           <ul
-            class="emotion-59 emotion-60"
+            class="emotion-60 emotion-61"
           >
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               <div
-                class="emotion-99 emotion-100 emotion-101"
+                class="emotion-102 emotion-103 emotion-104"
               >
                 <svg
                   aria-label="Important With Circle Icon"
-                  class="emotion-102"
+                  class="emotion-105"
                   fill="none"
                   height="16"
                   role="img"
@@ -1179,32 +1194,34 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               href="//0/#tag/Alert-Configurations/operation/updateAlertConfiguration"
               target="_self"
             >
-              <span>
+              <span
+                class="emotion-53"
+              >
                 <h6
-                  class="emotion-53 emotion-54 emotion-55"
+                  class="emotion-54 emotion-55 emotion-56"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-56 emotion-57 emotion-94"
+              class="emotion-57 emotion-58 emotion-97"
             >
               Released
             </div>
           </div>
           <ul
-            class="emotion-59 emotion-60"
+            class="emotion-60 emotion-61"
           >
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               <div
-                class="emotion-99 emotion-100 emotion-101"
+                class="emotion-102 emotion-103 emotion-104"
               >
                 <svg
                   aria-label="Important With Circle Icon"
-                  class="emotion-102"
+                  class="emotion-105"
                   fill="none"
                   height="16"
                   role="img"
@@ -1223,14 +1240,14 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               This change should be hidden
             </li>
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               <div
-                class="emotion-99 emotion-100 emotion-101"
+                class="emotion-102 emotion-103 emotion-104"
               >
                 <svg
                   aria-label="Important With Circle Icon"
-                  class="emotion-102"
+                  class="emotion-105"
                   fill="none"
                   height="16"
                   role="img"
@@ -1249,14 +1266,14 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               Resource version added.
             </li>
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               <div
-                class="emotion-99 emotion-100 emotion-101"
+                class="emotion-102 emotion-103 emotion-104"
               >
                 <svg
                   aria-label="Important With Circle Icon"
-                  class="emotion-102"
+                  class="emotion-105"
                   fill="none"
                   height="16"
                   role="img"
@@ -1275,19 +1292,19 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               For the 'query' request parameter 'clusterName', default value was changed from 'default' to 'cluster0'
             </li>
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               Added the optional property 'links' in the response with the '200' status.
             </li>
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               <div
-                class="emotion-99 emotion-100 emotion-101"
+                class="emotion-102 emotion-103 emotion-104"
               >
                 <svg
                   aria-label="Important With Circle Icon"
-                  class="emotion-102"
+                  class="emotion-105"
                   fill="none"
                   height="16"
                   role="img"
@@ -1319,30 +1336,32 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               href="//0/#tag/Project-IP-Access-List/operation/createProjectIpAccessList"
               target="_self"
             >
-              <span>
+              <span
+                class="emotion-53"
+              >
                 <h6
-                  class="emotion-53 emotion-54 emotion-55"
+                  class="emotion-54 emotion-55 emotion-56"
                 >
                   POST /api/atlas/v2/groups/{groupId}/accessList
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-56 emotion-57 emotion-94"
+              class="emotion-57 emotion-58 emotion-97"
             >
               Updated
             </div>
           </div>
           <ul
-            class="emotion-59 emotion-60"
+            class="emotion-60 emotion-61"
           >
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               Added the optional property 'name' in the response with the '200' status.
             </li>
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               Added the optional property 'comment' in the response with the '200' status.
             </li>
@@ -1369,25 +1388,27 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               href="//0/#tag/Projects/operation/getProjectByName"
               target="_self"
             >
-              <span>
+              <span
+                class="emotion-53"
+              >
                 <h6
-                  class="emotion-53 emotion-54 emotion-55"
+                  class="emotion-54 emotion-55 emotion-56"
                 >
                   GET /api/atlas/v2/groups/byName/{groupName}
                 </h6>
               </span>
             </a>
             <div
-              class="emotion-56 emotion-57 emotion-94"
+              class="emotion-57 emotion-58 emotion-97"
             >
               Updated
             </div>
           </div>
           <ul
-            class="emotion-59 emotion-60"
+            class="emotion-60 emotion-61"
           >
             <li
-              class="emotion-61 emotion-62"
+              class="emotion-62 emotion-63"
             >
               Added the optional property 'withDefaultAlertsSettings' in the response with the '200' status.
             </li>

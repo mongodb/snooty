@@ -27,6 +27,8 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-8 {
+  font-size: 13px;
+  line-height: 20px;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -38,37 +40,44 @@ exports[`renders correctly 1`] = `
   align-items: center;
   -webkit-text-decoration: none;
   text-decoration: none;
-  text-decoration-color: transparent;
   cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  font-size: 13px;
-  line-height: 20px;
+  line-height: 13px;
   color: #016BF8;
   font-weight: 400;
   display: inline;
 }
 
 .emotion-8:hover,
-.emotion-8:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
+.emotion-8:focus,
+.emotion-8:visited {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-8:focus {
   outline: none;
 }
 
-.emotion-8:hover {
-  text-decoration-color: #E8EDEB;
+.emotion-9 {
+  position: relative;
 }
 
-.emotion-8:focus {
-  text-decoration-color: #016BF8;
+.emotion-9::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.lg-ui-0001:focus .emotion-9::after {
+  background-color: #0498EC;
+}
+
+.lg-ui-0001:hover .emotion-9::after {
+  background-color: #E8EDEB;
 }
 
 <blockquote>
@@ -108,7 +117,9 @@ exports[`renders correctly 1`] = `
             class="lg-ui-0001 emotion-8"
             href=""
           >
-            <span>
+            <span
+              class="emotion-9"
+            >
               programmatic access
             </span>
           </a>
