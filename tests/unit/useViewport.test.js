@@ -52,26 +52,26 @@ describe('useViewport()', () => {
     window.removeEventListener = removeEventListener;
   });
 
-  async function resize(width = global.window.innerWidth, height = global.window.innerHeight) {
+  function resize(width = global.window.innerWidth, height = global.window.innerHeight) {
     const resizeEvent = document.createEvent('Event');
     resizeEvent.initEvent('resize', true, true);
 
     global.window.innerWidth = width || global.window.innerWidth;
     global.window.innerHeight = height || global.window.innerHeight;
     global.window.dispatchEvent(resizeEvent);
-    await act(async () => {
+    act(() => {
       listeners.resize();
     });
   }
 
-  async function scroll(vertical = 0, horizontal = 0) {
+  function scroll(vertical = 0, horizontal = 0) {
     const scrollEvent = document.createEvent('Event');
     scrollEvent.initEvent('scroll', true, true);
 
     global.window.pageYOffset = global.window.pageYOffset + vertical;
     global.window.pageXOffset = global.window.pageXOffset + horizontal;
     global.window.dispatchEvent(scrollEvent);
-    await act(async () => {
+    act(() => {
       listeners.scroll();
     });
   }
