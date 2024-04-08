@@ -15,6 +15,7 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
   const { user, reassignCurrentUser } = useRealmUser();
 
   // Create a new feedback document
+  // Maybe use transitions?
   const initializeFeedback = (nextView = 'rating') => {
     const newFeedback = {};
     setFeedback({ newFeedback });
