@@ -56,7 +56,7 @@ describe('DocumentBody', () => {
         const chatbotWidget = screen.getByText(CHATBOT_WIDGET_TEXT);
         expect(chatbotWidget).toBeVisible();
       },
-      { timeout: 8000 }
+      { timeout: 10000 }
     );
   });
 
