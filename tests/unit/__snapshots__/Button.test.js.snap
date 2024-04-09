@@ -109,31 +109,36 @@ exports[`button component renders correctly 1`] = `
   height: 36px;
 }
 
-.emotion-1:focus,
-.emotion-1:focus-visible {
+.emotion-1:focus-visible,
+.emotion-1[data-focus="true"] {
   outline: none;
 }
 
 .emotion-1:active,
+.emotion-1[data-active="true"],
 .emotion-1:focus,
 .emotion-1:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-1:focus {
+.emotion-1:focus-visible,
+.emotion-1[data-focus="true"] {
   color: #FFFFFF;
 }
 
-.emotion-1:hover[aria-disabled='false'],
-.emotion-1:active {
+.emotion-1:hover,
+.emotion-1[data-hover="true"],
+.emotion-1:active,
+.emotion-1[data-active="true"] {
   color: #FFFFFF;
   background-color: #00593f;
   border-color: #00593f;
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-1:focus-visible {
+.emotion-1:focus-visible,
+.emotion-1[data-focus="true"] {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
@@ -166,8 +171,11 @@ exports[`button component renders correctly 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
