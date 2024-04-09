@@ -167,8 +167,6 @@ describe('Head', () => {
       const { container } = render(<Head pageContext={pageContext} />);
       const title = container.querySelector('title');
       expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title} ${metadata.branch}`);
-      console.log('check title');
-      console.log(title);
     });
 
     it('defaults to project name and version if no page title', function () {
