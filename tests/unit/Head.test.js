@@ -183,7 +183,6 @@ describe('Head', () => {
       const { container } = render(<Head pageContext={pageContext} />);
       const title = container.querySelector('title');
       expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title}`);
-      // metadata.version = 'master'
     });
 
     // highly not likely to be missing project, title, and version

@@ -2,7 +2,7 @@ import { getNestedValue } from './get-nested-value';
 
 /**
  * Given property metadata,
- * return the page title as a string
+ * return the site title as a string
  *
  * @param {object} metadata
  */
