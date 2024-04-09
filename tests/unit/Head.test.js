@@ -10,6 +10,7 @@ import { DOTCOM_BASE_URL } from '../../src/utils/base-url';
 import mockCompleteEOLPageContext from './data/CompleteEOLPageContext.json';
 import mockEOLSnootyMetadata from './data/EOLSnootyMetadata.json';
 import mockHeadPageContext from './data/HeadPageContext.test.json';
+import metadataWithoutToc from './data/MetadataWithoutToc.json';
 
 jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 
@@ -146,6 +147,56 @@ describe('Head', () => {
       const hrefLangLinks = container.querySelectorAll('link.sl_opaque');
       expect(hrefLangLinks).toHaveLength(AVAILABLE_LANGUAGES.length);
       expect(hrefLangLinks).toMatchSnapshot();
+    });
+  });
+
+  describe('page title', function () {
+    let metadata;
+    const mockPageId = Object.keys(metadataWithoutToc['slugToTitle'])[0];
+    const pageContext = {
+      page_id: mockPageId,
+      slug: mockPageId,
+      repoBranches: { branches: [] },
+    };
+    beforeEach(function () {
+      metadata = { ...metadataWithoutToc };
+      useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
+    });
+
+    it('correctly applies title, project name, and version', function () {
+      const { container } = render(<Head pageContext={pageContext} />);
+      const title = container.querySelector('title');
+      expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title} ${metadata.branch}`);
+      console.log('check title');
+      console.log(title);
+    });
+
+    it('defaults to project name and version if no page title', function () {
+      metadata.slugToTitle = {};
+      useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
+      const { container } = render(<Head pageContext={pageContext} />);
+      const title = container.querySelector('title');
+      expect(title.innerHTML).toBe(`${metadata.title} ${metadata.branch}`);
+    });
+
+    it('only applies branch versions starting with a version number (v)', function () {
+      metadata.branch = 'master';
+      useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
+      const { container } = render(<Head pageContext={pageContext} />);
+      const title = container.querySelector('title');
+      expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title}`);
+      // metadata.version = 'master'
+    });
+
+    // highly not likely to be missing project, title, and version
+    it('has a fallback if all properties are missing', function () {
+      delete metadata.branch;
+      delete metadata.title;
+      metadata.slugToTitle = {};
+      useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
+      const { container } = render(<Head pageContext={pageContext} />);
+      const title = container.querySelector('title');
+      expect(title.innerHTML).toBe(`MongoDB Documentation`);
     });
   });
 });
