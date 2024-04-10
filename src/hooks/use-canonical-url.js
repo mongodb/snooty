@@ -11,7 +11,7 @@ export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
   const pathPrefix = generatePrefix(urlSlug, siteMetadata, siteBasePrefix);
 
   // Use default logic assuming there is no canonical provided from the meta directive
-  let canonical = `${siteUrl}/${normalizePath(`${pathPrefix}/${slug === '/' ? '' : slug}`)}`;
+  let canonical = `${siteUrl}${normalizePath(`${pathPrefix}/${slug === '/' ? '' : slug}`)}`;
 
   // checks to see if the canonical is provided from the
   // meta directive and grab the index
