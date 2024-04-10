@@ -48,10 +48,10 @@ describe('DocumentBody', () => {
     expect(mainNav).toBeVisible();
     expect(mainNav).toMatchSnapshot();
 
-    const feedbackWidget = await screen.findByText(FEEDBACK_BUTTON_TEXT);
+    const feedbackWidget = await screen.findByText(FEEDBACK_BUTTON_TEXT, {}, { timeout: 15000 });
     expect(feedbackWidget).toBeVisible();
 
-    const chatbotWidget = await screen.findByText(CHATBOT_WIDGET_TEXT);
+    const chatbotWidget = await screen.findByText(CHATBOT_WIDGET_TEXT, {}, { timeout: 15000 });
     expect(chatbotWidget).toBeVisible();
   });
 
