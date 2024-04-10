@@ -1,5 +1,6 @@
 import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import { generatePrefix } from '../components/VersionDropdown/utils';
+import { normalizePath } from '../utils/normalize-path';
 import { useSiteMetadata } from './use-site-metadata';
 
 export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
@@ -10,7 +11,7 @@ export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
   const pathPrefix = generatePrefix(urlSlug, siteMetadata, siteBasePrefix);
 
   // Use default logic assuming there is no canonical provided from the meta directive
-  let canonical = `${siteUrl}${pathPrefix}/${slug === '/' ? '' : slug}`;
+  let canonical = `${siteUrl}${normalizePath(`${pathPrefix}/${slug === '/' ? '' : slug}`)}`;
 
   // checks to see if the canonical is provided from the
   // meta directive and grab the index
@@ -40,7 +41,7 @@ export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
     if (stableBranch) {
       // if a stable branch is found, use the following canonical tag
       // which points to the most current version
-      canonical = `${siteUrl}/${siteBasePrefix}/${stableBranch.urlSlug}`;
+      canonical = `${siteUrl}${normalizePath(`${siteBasePrefix}/${stableBranch.urlSlug}`)}`;
     } else {
       // this means the entire page is EoL'd and a writer should provide the canonical tag
       let _canonical = `${siteUrl}`;
