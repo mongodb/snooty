@@ -54,7 +54,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
       {nextSlug && (
         <React.Fragment>
           <LinkContentContainer>
-            <Link className={cx(titleSpanStyling)} to={prevSlug} title="Next Section">
+            <Link className={cx(titleSpanStyling)} to={nextSlug} title="Next Section">
               {getPageTitle(nextSlug, slugTitleMapping)}
             </Link>
             <span className={cx([arrowStyling])}>&nbsp;→</span>
