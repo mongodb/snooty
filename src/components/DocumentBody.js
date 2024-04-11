@@ -12,6 +12,7 @@ import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
+import { getSiteTitle } from '../utils/get-site-title';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -162,8 +163,8 @@ export const Head = ({ pageContext }) => {
   const metadata = useSnootyMetadata();
 
   const lookup = slug === '/' ? 'index' : slug;
-  const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
-  const siteTitle = getNestedValue(['title'], metadata) || '';
+  const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
+  const siteTitle = getSiteTitle(metadata);
 
   const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing';
   const needsBreadcrumbs = template === 'document' || template === undefined;
@@ -178,7 +179,7 @@ export const Head = ({ pageContext }) => {
         canonical={canonical}
         pageTitle={pageTitle}
         siteTitle={siteTitle}
-        showDocsLandingTitle={isDocsLandingHomepage}
+        showDocsLandingTitle={isDocsLandingHomepage && slug === '/'}
         slug={slug}
       />
       {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}

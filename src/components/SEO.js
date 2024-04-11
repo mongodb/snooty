@@ -20,7 +20,11 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug }) =>
 
   return (
     <>
-      <title>{showDocsLandingTitle ? 'MongoDB Documentation' : `${pageTitle} — ${siteTitle}`}</title>
+      <title>
+        {showDocsLandingTitle || (!siteTitle && !pageTitle)
+          ? 'MongoDB Documentation'
+          : `${pageTitle ? `${pageTitle} - ` : ''}${siteTitle}`}
+      </title>
       {hrefLangLinks}
       {/* Twitter Tags - default values, may be overwritten by Twitter component */}
       <meta name="twitter:card" content="summary_large_image" />
