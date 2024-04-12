@@ -98,6 +98,7 @@ const CardGroup = ({
   const isCarousel = layout === 'carousel';
   // Keep "type" for backwards compatibility, but it might be good to generalize to "style"
   const isCenterContentStyle = type === 'drivers' || style === 'center-content';
+  const isLargeIconStyle = style === 'large-icon';
   const isDriversTemplate = page?.options?.template === 'drivers-index';
   const isLanding = page?.options?.template === 'landing';
 
@@ -124,6 +125,7 @@ const CardGroup = ({
           isCompact={isCompact}
           isExtraCompact={isExtraCompact}
           isCenterContentStyle={isCenterContentStyle}
+          isLargeIconStyle={isLargeIconStyle}
           page={page}
         />
       ))}

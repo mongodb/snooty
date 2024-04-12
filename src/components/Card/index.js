@@ -71,26 +71,17 @@ const centerContentStyling = css`
   }
 `;
 
-const landingBottomStyling = css`
-  img {
-    width: 50px;
-  }
-  p {
-    font-weight: 500;
-    line-height: ${theme.size.medium};
-  }
-`;
-
 const compactIconStyle = `
   @media ${theme.screenSize.upToSmall} {
     width: 20px;
   }
 `;
 
-const headingStyling = ({ isCompact, isExtraCompact }) => css`
-  font-weight: 600;
+const headingStyling = ({ isCompact, isExtraCompact, isLargeIconStyle }) => css`
+  font-weight: 500;
   letter-spacing: 0.5px;
   margin: ${isCompact || isExtraCompact ? `0 0 ${theme.size.small}` : `${theme.size.default} 0 ${theme.size.small} 0`};
+  ${isLargeIconStyle && 'margin-bottom: 36px;'}
 `;
 
 const FlexTag = styled(Tag)`
@@ -131,6 +122,7 @@ const Card = ({
   isCompact,
   isExtraCompact,
   isCenterContentStyle,
+  isLargeIconStyle,
   page,
   nodeData: {
     children,
@@ -141,12 +133,8 @@ const Card = ({
 
   const isLanding = template === 'landing';
 
-  /* If tag == 'landing-bottom', this is 2nd group of cards on 
-  landing page which we want to keep exempt from landing styles */
-  const isLandingBottom = tag === 'landing-bottom';
-
   let imgSize;
-  if (isLanding && isLandingBottom) imgSize = '50px';
+  if (isLargeIconStyle) imgSize = '50px';
   else if (isLanding) imgSize = theme.size.xlarge;
   else if (template === 'product-landing') imgSize = theme.size.large;
   else imgSize = theme.size.medium;
@@ -155,10 +143,9 @@ const Card = ({
 
   const styling = [
     cardBaseStyles,
-    isLanding && !isLandingBottom ? landingStyles : '', // must come after other styles to override
-    isLandingBottom ? landingBottomStyling : '',
     isCenterContentStyle ? centerContentStyling : cardStyling,
     isCompact || isExtraCompact ? compactCardStyling : '',
+    isLanding && !isLargeIconStyle ? landingStyles : '', // must come after other styles to override
   ];
 
   return (
@@ -176,10 +163,10 @@ const Card = ({
         condition={isCompact || isExtraCompact}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
       >
-        {tag && !isLandingBottom && <FlexTag>{tag}</FlexTag>}
+        {tag && <FlexTag>{tag}</FlexTag>}
         <div>
           {headline && (
-            <Body className={cx(headingStyling({ isCompact, isExtraCompact }))} weight="medium">
+            <Body className={cx(headingStyling({ isCompact, isExtraCompact, isLargeIconStyle }))} weight="medium">
               {headline}
             </Body>
           )}
@@ -200,7 +187,10 @@ const Card = ({
 };
 
 Card.propTypes = {
+  isCompact: PropTypes.bool,
+  isExtraCompact: PropTypes.bool,
   isCenterContentStyle: PropTypes.bool,
+  isLargeIconStyle: PropTypes.bool,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object),
     options: PropTypes.shape({
