@@ -179,11 +179,7 @@ const Card = ({
         {tag && !isLandingBottom && <FlexTag>{tag}</FlexTag>}
         <div>
           {headline && (
-            <Body
-              className={cx(headingStyling({ isCompact, isExtraCompact }))}
-              compact={isCompact || isExtraCompact}
-              weight="medium"
-            >
+            <Body className={cx(headingStyling({ isCompact, isExtraCompact }))} weight="medium">
               {headline}
             </Body>
           )}
