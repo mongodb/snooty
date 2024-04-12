@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import Link from '../Link';
 import { formatText } from '../../utils/format-text';
-import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { useNavigationParents } from '../../hooks/use-navigation-parents';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import Breadcrumb from './breadcrumb';
 
 const activeColor = css`
   color: ${palette.gray.dark3};
@@ -20,22 +18,6 @@ const StyledArrow = styled('span')`
 
   :last-of-type {
     ${activeColor}
-  }
-`;
-
-const linkStyling = LeafyCss`
-  font-size: ${theme.fontSize.small};
-  :last-of-type {
-    ${activeColor}
-  }
-
-  :hover,
-  :focus {
-    text-decoration: none;
-
-    :not(:last-of-type) {
-      ${activeColor}
-    }
   }
 `;
 
@@ -52,18 +34,16 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
         return (
           <React.Fragment key={`${renderKey}-${index}`}>
             {!isFirst && <StyledArrow> &#8594; </StyledArrow>}
-            <Link
-              className={cx(linkStyling)}
-              to={url}
+            <Breadcrumb
+              url={url}
+              title={formatText(title)}
               onClick={() => {
                 reportAnalytics('BreadcrumbClick', {
                   parentPaths: breadcrumbs,
                   breadcrumbClicked: url,
                 });
               }}
-            >
-              {formatText(title)}
-            </Link>
+            />
           </React.Fragment>
         );
       })}
