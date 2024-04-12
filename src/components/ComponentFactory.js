@@ -73,6 +73,7 @@ import VersionModified from './VersionModified';
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
 import RoleCommand from './Roles/Command';
+import RoleCommunityPillLink from './Roles/CommunityPillLink';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 import RoleHighlight from './Roles/Highlight';
@@ -106,6 +107,7 @@ const roleMap = {
   abbr: RoleAbbr,
   class: RoleClass,
   command: RoleCommand,
+  'community-pill-link': RoleCommunityPillLink,
   file: RoleFile,
   guilabel: RoleGUILabel,
   icon: RoleIcon,
