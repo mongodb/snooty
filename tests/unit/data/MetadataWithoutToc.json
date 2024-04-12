@@ -1,0 +1,21 @@
+{
+  "project": "atlas-cli",
+  "branch": "v1.18",
+  "title": "Atlas CLI",
+  "eol": false,
+  "canonical": null,
+  "parentPaths": {},
+  "slugToTitle": {
+    "atlas-cli-getting-started": [
+      {
+        "type": "text",
+        "position": {
+          "start": {
+            "line": 4
+          }
+        },
+        "value": "Get Started with "
+      }
+    ]
+  }
+}
