@@ -56,7 +56,7 @@ const cardStyling = css`
   }
 `;
 
-const cardDriverStyle = css`
+const centerContentStyling = css`
   padding: ${theme.size.default} ${theme.size.medium};
   align-items: center;
 
@@ -130,7 +130,7 @@ const onCardClick = (url) => {
 const Card = ({
   isCompact,
   isExtraCompact,
-  isForDrivers,
+  isCenterContentStyle,
   page,
   nodeData: {
     children,
@@ -155,9 +155,9 @@ const Card = ({
 
   const styling = [
     cardBaseStyles,
-    isForDrivers ? cardDriverStyle : cardStyling,
     isLanding && !isLandingBottom ? landingStyles : '', // must come after other styles to override
     isLandingBottom ? landingBottomStyling : '',
+    isCenterContentStyle ? centerContentStyling : cardStyling,
     isCompact || isExtraCompact ? compactCardStyling : '',
   ];
 
@@ -204,7 +204,7 @@ const Card = ({
 };
 
 Card.propTypes = {
-  isForDrivers: PropTypes.bool,
+  isCenterContentStyle: PropTypes.bool,
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object),
     options: PropTypes.shape({

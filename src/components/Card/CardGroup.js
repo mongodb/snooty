@@ -96,7 +96,9 @@ const CardGroup = ({
   const isCompact = style === 'compact';
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = layout === 'carousel';
-  const isForDrivers = type === 'drivers';
+  // Keep "type" for backwards compatibility, but it might be good to generalize to "style"
+  const isCenterContentStyle = type === 'drivers' || style === 'center-content';
+  const isDriversTemplate = page?.options?.template === 'drivers-index';
   const isLanding = page?.options?.template === 'landing';
 
   return (
@@ -105,13 +107,13 @@ const CardGroup = ({
         'card-group',
         isCompact ? 'compact' : '',
         isExtraCompact ? 'extra-compact' : '',
-        isForDrivers ? 'drivers' : '',
+        isDriversTemplate ? 'drivers' : '',
         className,
       ].join(' ')}
       columns={columns}
       noMargin={true}
       isCarousel={isCarousel}
-      isForDrivers={isForDrivers}
+      isForDrivers={isDriversTemplate}
       isLanding={isLanding}
     >
       {children.map((child, i) => (
@@ -121,7 +123,7 @@ const CardGroup = ({
           nodeData={child}
           isCompact={isCompact}
           isExtraCompact={isExtraCompact}
-          isForDrivers={isForDrivers}
+          isCenterContentStyle={isCenterContentStyle}
           page={page}
         />
       ))}
