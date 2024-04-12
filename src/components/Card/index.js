@@ -71,6 +71,12 @@ const centerContentStyling = css`
   }
 `;
 
+const largeIconStyling = css`
+  p {
+    line-height: ${theme.size.medium};
+  }
+`;
+
 const compactIconStyle = `
   @media ${theme.screenSize.upToSmall} {
     width: 20px;
@@ -145,6 +151,7 @@ const Card = ({
     cardBaseStyles,
     isCenterContentStyle ? centerContentStyling : cardStyling,
     isCompact || isExtraCompact ? compactCardStyling : '',
+    isLargeIconStyle ? largeIconStyling : '',
     isLanding && !isLargeIconStyle ? landingStyles : '', // must come after other styles to override
   ];
 
