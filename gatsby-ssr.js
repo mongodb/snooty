@@ -1,7 +1,9 @@
 import React from 'react';
+import { Script } from 'gatsby';
 import { ThemeProvider } from '@emotion/react';
 import { renderStylesToString } from '@leafygreen-ui/emotion';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
+
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
@@ -9,7 +11,7 @@ import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold
 export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     // GTM Pathway
-    <script
+    <Script
       key="pathway"
       type="text/javascript"
       dangerouslySetInnerHTML={{
@@ -17,7 +19,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
       }}
     />,
     // Delighted
-    <script
+    <Script
       key="delighted"
       type="text/javascript"
       dangerouslySetInnerHTML={{
