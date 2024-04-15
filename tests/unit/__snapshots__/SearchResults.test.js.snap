@@ -1066,30 +1066,35 @@ exports[`Search Results Page considers a given search filter query param and dis
   height: 36px;
 }
 
-.emotion-21:focus,
-.emotion-21:focus-visible {
+.emotion-21:focus-visible,
+.emotion-21[data-focus="true"] {
   outline: none;
 }
 
 .emotion-21:active,
+.emotion-21[data-active="true"],
 .emotion-21:focus,
 .emotion-21:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-21:focus {
+.emotion-21:focus-visible,
+.emotion-21[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-21:hover[aria-disabled='false'],
-.emotion-21:active {
+.emotion-21:hover,
+.emotion-21[data-hover="true"],
+.emotion-21:active,
+.emotion-21[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-21:focus-visible {
+.emotion-21:focus-visible,
+.emotion-21[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -1117,8 +1122,11 @@ exports[`Search Results Page considers a given search filter query param and dis
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -2644,30 +2652,35 @@ exports[`Search Results Page does not return results for a given search term wit
   height: 36px;
 }
 
-.emotion-16:focus,
-.emotion-16:focus-visible {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   outline: none;
 }
 
 .emotion-16:active,
+.emotion-16[data-active="true"],
 .emotion-16:focus,
 .emotion-16:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-16:hover[aria-disabled='false'],
-.emotion-16:active {
+.emotion-16:hover,
+.emotion-16[data-hover="true"],
+.emotion-16:active,
+.emotion-16[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus-visible {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -2695,8 +2708,11 @@ exports[`Search Results Page does not return results for a given search term wit
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -3986,30 +4002,35 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   height: 36px;
 }
 
-.emotion-11:focus,
-.emotion-11:focus-visible {
+.emotion-11:focus-visible,
+.emotion-11[data-focus="true"] {
   outline: none;
 }
 
 .emotion-11:active,
+.emotion-11[data-active="true"],
 .emotion-11:focus,
 .emotion-11:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-11:focus {
+.emotion-11:focus-visible,
+.emotion-11[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-11:hover[aria-disabled='false'],
-.emotion-11:active {
+.emotion-11:hover,
+.emotion-11[data-hover="true"],
+.emotion-11:active,
+.emotion-11[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-11:focus-visible {
+.emotion-11:focus-visible,
+.emotion-11[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -4037,8 +4058,11 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -4531,30 +4555,35 @@ exports[`Search Results Page renders loading images before returning no results 
   height: 36px;
 }
 
-.emotion-16:focus,
-.emotion-16:focus-visible {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   outline: none;
 }
 
 .emotion-16:active,
+.emotion-16[data-active="true"],
 .emotion-16:focus,
 .emotion-16:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-16:hover[aria-disabled='false'],
-.emotion-16:active {
+.emotion-16:hover,
+.emotion-16[data-hover="true"],
+.emotion-16:active,
+.emotion-16[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus-visible {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -4582,8 +4611,11 @@ exports[`Search Results Page renders loading images before returning no results 
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -6205,30 +6237,35 @@ exports[`Search Results Page renders loading images before returning nonempty re
   height: 36px;
 }
 
-.emotion-16:focus,
-.emotion-16:focus-visible {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   outline: none;
 }
 
 .emotion-16:active,
+.emotion-16[data-active="true"],
 .emotion-16:focus,
 .emotion-16:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-16:hover[aria-disabled='false'],
-.emotion-16:active {
+.emotion-16:hover,
+.emotion-16[data-hover="true"],
+.emotion-16:active,
+.emotion-16[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus-visible {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -6256,8 +6293,11 @@ exports[`Search Results Page renders loading images before returning nonempty re
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -7879,30 +7919,35 @@ exports[`Search Results Page renders results from a given search term query para
   height: 36px;
 }
 
-.emotion-16:focus,
-.emotion-16:focus-visible {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   outline: none;
 }
 
 .emotion-16:active,
+.emotion-16[data-active="true"],
 .emotion-16:focus,
 .emotion-16:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-16:focus {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-16:hover[aria-disabled='false'],
-.emotion-16:active {
+.emotion-16:hover,
+.emotion-16[data-hover="true"],
+.emotion-16:active,
+.emotion-16[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:focus-visible {
+.emotion-16:focus-visible,
+.emotion-16[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -7930,8 +7975,11 @@ exports[`Search Results Page renders results from a given search term query para
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;

@@ -65,6 +65,13 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   cursor: pointer;
   font-size: inherit;
   line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
   font-size: 13px;
   line-height: 20px;
   color: #016BF8;
@@ -127,31 +134,36 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-decoration-color: #016BF8;
 }
 
-.emotion-8:focus,
-.emotion-8:focus-visible {
+.emotion-8:focus-visible,
+.emotion-8[data-focus="true"] {
   outline: none;
 }
 
 .emotion-8:active,
+.emotion-8[data-active="true"],
 .emotion-8:focus,
 .emotion-8:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-8:focus {
+.emotion-8:focus-visible,
+.emotion-8[data-focus="true"] {
   color: #FFFFFF;
 }
 
-.emotion-8:hover[aria-disabled='false'],
-.emotion-8:active {
+.emotion-8:hover,
+.emotion-8[data-hover="true"],
+.emotion-8:active,
+.emotion-8[data-active="true"] {
   color: #FFFFFF;
   background-color: #00593f;
   border-color: #00593f;
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-8:focus-visible {
+.emotion-8:focus-visible,
+.emotion-8[data-focus="true"] {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
@@ -180,8 +192,11 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -584,31 +599,36 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   color: #ffffff!important;
 }
 
-.emotion-9:focus,
-.emotion-9:focus-visible {
+.emotion-9:focus-visible,
+.emotion-9[data-focus="true"] {
   outline: none;
 }
 
 .emotion-9:active,
+.emotion-9[data-active="true"],
 .emotion-9:focus,
 .emotion-9:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-9:focus {
+.emotion-9:focus-visible,
+.emotion-9[data-focus="true"] {
   color: #FFFFFF;
 }
 
-.emotion-9:hover[aria-disabled='false'],
-.emotion-9:active {
+.emotion-9:hover,
+.emotion-9[data-hover="true"],
+.emotion-9:active,
+.emotion-9[data-active="true"] {
   color: #FFFFFF;
   background-color: #00593f;
   border-color: #00593f;
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-9:focus-visible {
+.emotion-9:focus-visible,
+.emotion-9[data-focus="true"] {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
@@ -637,8 +657,11 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -995,31 +1018,36 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   color: #ffffff!important;
 }
 
-.emotion-9:focus,
-.emotion-9:focus-visible {
+.emotion-9:focus-visible,
+.emotion-9[data-focus="true"] {
   outline: none;
 }
 
 .emotion-9:active,
+.emotion-9[data-active="true"],
 .emotion-9:focus,
 .emotion-9:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-9:focus {
+.emotion-9:focus-visible,
+.emotion-9[data-focus="true"] {
   color: #FFFFFF;
 }
 
-.emotion-9:hover[aria-disabled='false'],
-.emotion-9:active {
+.emotion-9:hover,
+.emotion-9[data-hover="true"],
+.emotion-9:active,
+.emotion-9[data-active="true"] {
   color: #FFFFFF;
   background-color: #00593f;
   border-color: #00593f;
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-9:focus-visible {
+.emotion-9:focus-visible,
+.emotion-9[data-focus="true"] {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
@@ -1048,8 +1076,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
-  pointer-events: none;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;

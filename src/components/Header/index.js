@@ -4,8 +4,6 @@ import styled from '@emotion/styled';
 import { UnifiedNav } from '@mdb/consistent-nav';
 import { SidenavMobileMenuDropdown } from '../Sidenav';
 import SiteBanner from '../Banner/SiteBanner';
-import { isBrowser } from '../../utils/is-browser';
-import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { theme } from '../../theme/docsTheme';
 
 const StyledHeaderContainer = styled.header(
@@ -18,16 +16,7 @@ const StyledHeaderContainer = styled.header(
 );
 
 const Header = ({ sidenav, eol, template }) => {
-  const { project } = useSnootyMetadata();
-
-  let searchProperty;
-
-  if (isBrowser) {
-    const { searchParams } = new URL(window.location);
-    searchProperty = searchParams.get('searchProperty');
-  }
-  const shouldSearchRealm = project === 'realm' || searchProperty === 'realm-master';
-  const unifiedNavProperty = shouldSearchRealm ? 'REALM' : 'DOCS';
+  const unifiedNavProperty = 'DOCS';
 
   return (
     <StyledHeaderContainer template={template}>

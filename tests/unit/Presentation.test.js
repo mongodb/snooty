@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor, act } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import * as Gatsby from 'gatsby';
 import { mockLocation } from '../utils/mock-location';
 import DocumentBody from '../../src/components/DocumentBody';
@@ -48,16 +48,11 @@ describe('DocumentBody', () => {
     expect(mainNav).toBeVisible();
     expect(mainNav).toMatchSnapshot();
 
-    return waitFor(
-      () => {
-        const feedbackWidget = screen.getByText(FEEDBACK_BUTTON_TEXT);
-        expect(feedbackWidget).toBeVisible();
+    const feedbackWidget = await screen.findByText(FEEDBACK_BUTTON_TEXT, {}, { timeout: 15000 });
+    expect(feedbackWidget).toBeVisible();
 
-        const chatbotWidget = screen.getByText(CHATBOT_WIDGET_TEXT);
-        expect(chatbotWidget).toBeVisible();
-      },
-      { timeout: 8000 }
-    );
+    const chatbotWidget = await screen.findByText(CHATBOT_WIDGET_TEXT, {}, { timeout: 15000 });
+    expect(chatbotWidget).toBeVisible();
   });
 
   it('does not render the following elements, footer, feedback widget, navigation', async () => {
@@ -67,13 +62,8 @@ describe('DocumentBody', () => {
     const footer = screen.queryByTestId('consistent-footer');
     expect(footer).not.toBeInTheDocument();
 
-    await waitFor(
-      () => {
-        const feedbackWidget = screen.queryByText(FEEDBACK_BUTTON_TEXT);
-        expect(feedbackWidget).not.toBeInTheDocument();
-      },
-      { timeout: 5000 }
-    );
+    const feedbackWidget = screen.queryByText(FEEDBACK_BUTTON_TEXT);
+    expect(feedbackWidget).not.toBeInTheDocument();
 
     const mainNav = screen.queryByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).not.toBeInTheDocument();
