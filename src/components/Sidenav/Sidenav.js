@@ -23,7 +23,6 @@ import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
 import IATransition from './IATransition';
 import ProductsList from './ProductsList';
-import SidenavBackButton from './SidenavBackButton';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
@@ -264,17 +263,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                   MongoDB Documentation
                 </SideNavItem>
                 <Border />
-                <SidenavBackButton
-                  handleClick={() => {
-                    setBack(true);
-                    hideMobileSidenav();
-                  }}
-                  project={project}
-                  currentSlug={slug}
-                  target={isGuidesTemplate ? '/' : ''}
-                  titleOverride={isGuidesTemplate ? siteTitle : ''}
-                  eol={eol}
-                />
                 {ia && (
                   <IA
                     header={!isLanding && <span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
