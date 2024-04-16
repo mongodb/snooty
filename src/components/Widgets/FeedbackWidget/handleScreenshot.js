@@ -11,6 +11,13 @@ import { fwFormId } from './FeedbackForm';
 async function takeScreenshot(subject, config = {}) {
   // Convert the page into a "clean" html document that inlines all styles, images, etc.
   const htmlDocument = capture(OutputType.OBJECT, subject, config);
+
+  // Remove srcset from Gatsby images - it messes with the drawn image of the html
+  const imgs = htmlDocument.querySelectorAll('img[srcset]');
+  imgs.forEach((img) => {
+    img.removeAttribute('srcset');
+  });
+
   // Convert the "clean" document into a rasterized <img />. It has the same dimensions as the user's window.
   const { image } = await rasterizeHTML.drawHTML(htmlDocument.innerHTML);
   // Create a <canvas /> and draw the image on it. Set the canvas dimensions to match the image.
