@@ -96,22 +96,19 @@ const CardGroup = ({
   const isCompact = style === 'compact';
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = layout === 'carousel';
-  const isForDrivers = type === 'drivers';
+  // Keep "type" for backwards compatibility, but it might be good to generalize to "style"
+  const isCenterContentStyle = type === 'drivers' || style === 'center-content';
+  const isLargeIconStyle = style === 'large-icon';
+  const isDriversTemplate = page?.options?.template === 'drivers-index';
   const isLanding = page?.options?.template === 'landing';
 
   return (
     <StyledGrid
-      className={[
-        'card-group',
-        isCompact ? 'compact' : '',
-        isExtraCompact ? 'extra-compact' : '',
-        isForDrivers ? 'drivers' : '',
-        className,
-      ].join(' ')}
+      className={['card-group', className].join(' ')}
       columns={columns}
       noMargin={true}
       isCarousel={isCarousel}
-      isForDrivers={isForDrivers}
+      isForDrivers={isDriversTemplate}
       isLanding={isLanding}
     >
       {children.map((child, i) => (
@@ -121,7 +118,8 @@ const CardGroup = ({
           nodeData={child}
           isCompact={isCompact}
           isExtraCompact={isExtraCompact}
-          isForDrivers={isForDrivers}
+          isCenterContentStyle={isCenterContentStyle}
+          isLargeIconStyle={isLargeIconStyle}
           page={page}
         />
       ))}
