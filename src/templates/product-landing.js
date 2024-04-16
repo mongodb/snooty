@@ -34,7 +34,7 @@ const Wrapper = styled('main')`
 
   section p {
     grid-column: 2;
-    max-width: 500px;
+    ${({ hasMaxWidthParagraphs }) => !hasMaxWidthParagraphs && 'max-width: 500px;'}
   }
 
   // realm PLP has full width p
@@ -165,11 +165,13 @@ const Wrapper = styled('main')`
   }
 `;
 
-const ProductLanding = ({ children }) => {
+const ProductLanding = ({ children, data: { page } }) => {
   const { project } = useSnootyMetadata();
   const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
   const isRealm = project === 'realm';
+  const pageOptions = page?.ast?.options;
+  const hasMaxWidthParagraphs = ['', 'true'].includes(pageOptions?.['pl-max-width-paragraphs']);
 
   // shallow copy children, and search for existence of banner
   const shallowChildren = children.reduce((res, child) => {
@@ -189,7 +191,13 @@ const ProductLanding = ({ children }) => {
   const bannerNode = findKeyValuePair([{ children: shallowChildren }], 'name', 'banner');
 
   return (
-    <Wrapper isGuides={isGuides} isRealm={isRealm} useHero={useHero} hasBanner={!!bannerNode}>
+    <Wrapper
+      isGuides={isGuides}
+      isRealm={isRealm}
+      useHero={useHero}
+      hasBanner={!!bannerNode}
+      hasMaxWidthParagraphs={hasMaxWidthParagraphs}
+    >
       {children}
     </Wrapper>
   );
