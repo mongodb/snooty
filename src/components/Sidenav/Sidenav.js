@@ -260,7 +260,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
               <NavTopContainer>
                 <ArtificialPadding />
                 <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={baseUrl()}>
-                  MongoDB Documentation
+                  <Icon glyph="Home"></Icon>
+                  Docs Home
                 </SideNavItem>
                 <Border />
                 {ia && (
