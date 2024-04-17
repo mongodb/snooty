@@ -91,6 +91,19 @@ const titleStyle = LeafyCSS`
   }
 `;
 
+const homeLinkStyle = LeafyCSS`
+  span {
+    color: ${palette.gray.dark1};
+    font-weight: 400;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    svg {
+      color: ${palette.gray.dark2}
+    }
+  }
+`;
+
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
 const disableScroll = (shouldDisableScroll) => css`
   body {
@@ -259,7 +272,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={baseUrl()}>
+                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding, homeLinkStyle)} as={Link} to={baseUrl()}>
                   <Icon glyph="Home"></Icon>
                   Docs Home
                 </SideNavItem>
