@@ -8,8 +8,8 @@ import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
-import { useNavigationParents } from '../../hooks/use-navigation-parents';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { baseUrl } from '../../utils/base-url';
 
 const activeColor = css`
   color: ${palette.gray.dark3};
@@ -39,10 +39,25 @@ const linkStyling = LeafyCss`
   }
 `;
 
-const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
-  const { project } = useSnootyMetadata();
-  const parents = useNavigationParents(project);
-  const breadcrumbs = React.useMemo(() => [homeCrumb, ...parents, lastCrumb], [homeCrumb, parents, lastCrumb]);
+const BreadcrumbContainer = ({ homeCrumb, lastCrumb, slug }) => {
+  const { parentPaths } = useSnootyMetadata();
+
+  console.log('slug ' + slug);
+
+  //get base URL to reconstruct url of all the breadcrumbs
+  const urlBase = baseUrl();
+  console.log(urlBase);
+
+  //get parents from pathparents here instead
+  //add respective url to each breadcrumb
+  const parents = parentPaths[slug].map((crumb) => {
+    return { ...crumb, url: urlBase + crumb.path };
+  });
+  console.log('parents' + JSON.stringify(parents));
+
+  // const parents = useNavigationParents(project);
+  const breadcrumbs = React.useMemo(() => [homeCrumb, lastCrumb, ...parents], [homeCrumb, lastCrumb, parents]);
+  console.log('breadcrumbs' + JSON.stringify(breadcrumbs));
 
   return (
     <>

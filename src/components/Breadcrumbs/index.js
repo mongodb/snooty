@@ -27,7 +27,7 @@ const Breadcrumbs = ({ homeUrl = null, pageTitle = null, siteTitle, slug }) => {
 
   return (
     <Body className={cx(breadcrumbBodyStyle)}>
-      <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />
+      <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} slug={slug} />
     </Body>
   );
 };
