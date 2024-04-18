@@ -13,7 +13,6 @@ import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
-import { baseUrl } from '../../utils/base-url';
 import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
@@ -26,7 +25,8 @@ import ProductsList from './ProductsList';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
-import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
+import { sideNavItemBasePadding, sideNavItemFontSize, titleStyle } from './styles/sideNavItem';
+import DocsHomeButton from './DocsHomeButton';
 
 const SIDENAV_WIDTH = 268;
 
@@ -74,34 +74,6 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
     background-color: unset;
   }
 
-`;
-
-const titleStyle = LeafyCSS`
-  color: ${palette.gray.dark3};
-  font-size: ${theme.fontSize.small};
-  font-weight: bold;
-  line-height: 20px;
-  text-transform: none;
-  :hover {
-    background-color: inherit;
-
-    &:after, span:after {
-      display: none;
-    }
-  }
-`;
-
-const homeLinkStyle = LeafyCSS`
-  span {
-    color: ${palette.gray.dark1};
-    font-weight: 400;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    svg {
-      color: ${palette.gray.dark2}
-    }
-  }
 `;
 
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
@@ -272,10 +244,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding, homeLinkStyle)} as={Link} to={baseUrl()}>
-                  <Icon glyph="Home"></Icon>
-                  Docs Home
-                </SideNavItem>
+                <DocsHomeButton />
                 <Border />
                 {ia && (
                   <IA
