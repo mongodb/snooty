@@ -21,7 +21,7 @@ const videoBannerStyling = css`
   min-height: 44px;
 
   > p {
-    margin-left: 35px;
+    margin-left: 10px;
   }
 `;
 
@@ -29,7 +29,6 @@ const lgIconStyling = css`
   width: 26px;
   height: 26px;
   background-color: ${palette.blue.light2};
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
