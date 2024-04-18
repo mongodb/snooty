@@ -16,7 +16,8 @@ const CommunityPillLink = ({
 
   return (
     <span>
-      <Link to={link}>{label}</Link> <Badge variant="lightgray">{'community built'}</Badge>
+      <Link to={link}>{label}</Link>
+      <Badge variant="lightgray">{'community built'}</Badge>
     </span>
   );
 };
