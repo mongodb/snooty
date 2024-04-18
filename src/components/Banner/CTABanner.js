@@ -12,11 +12,13 @@ const videoBannerStyling = css`
   border: 1px solid ${palette.blue.light2};
   border-radius: 6px;
   display: flex;
+  align-items: center;
   position: relative;
   font-size: 14px;
   padding: 9px 12px 9px 20px;
   color: ${palette.blue.dark2};
   margin: 24px 0px;
+  min-height: 44px;
 
   > p {
     margin-left: 35px;
