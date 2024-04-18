@@ -12,6 +12,7 @@ import Chapter from './Chapters/Chapter';
 import Chapters from './Chapters';
 import Code from './Code/Code';
 import CodeIO from './Code/CodeIO';
+import CommunityPillLink from './CommunityPillLink';
 import Cond from './Cond';
 import Container from './Container';
 import CTA from './CTA';
@@ -73,7 +74,6 @@ import VersionModified from './VersionModified';
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
 import RoleCommand from './Roles/Command';
-import RoleCommunityPillLink from './Roles/CommunityPillLink';
 import RoleFile from './Roles/File';
 import RoleGUILabel from './Roles/GUILabel';
 import RoleHighlight from './Roles/Highlight';
@@ -107,7 +107,6 @@ const roleMap = {
   abbr: RoleAbbr,
   class: RoleClass,
   command: RoleCommand,
-  'community-pill-link': RoleCommunityPillLink,
   file: RoleFile,
   guilabel: RoleGUILabel,
   icon: RoleIcon,
@@ -141,6 +140,7 @@ const componentMap = {
   chapters: Chapters,
   chatbot: ChatbotUi,
   code: Code,
+  'community-driver': CommunityPillLink,
   'io-code-block': CodeIO,
   cond: Cond,
   container: Container,

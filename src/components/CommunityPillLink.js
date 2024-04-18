@@ -1,34 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Badge from '@leafygreen-ui/badge';
-import Link from '../Link';
+import { getPlaintext } from '../utils/get-plaintext';
+import Link from './Link';
 
 const CommunityPillLink = ({
   nodeData: {
-    children: [{ value }],
+    argument,
+    options: { url },
   },
 }) => {
-  let [label, link] = value.split('<');
-  if (link) {
-    link = link.split('>')[0];
-    label = label.trim();
-  }
-
   return (
-    <span>
-      <Link to={link}>{label}</Link>
+    <div>
+      <Link to={url}>{getPlaintext(argument)}</Link>
       <Badge variant="lightgray">{'community built'}</Badge>
-    </span>
+    </div>
   );
 };
 
 CommunityPillLink.propTypes = {
   nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string.isRequired,
-      })
-    ).isRequired,
+    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
+    options: PropTypes.shape({ url: PropTypes.string.isRequired }),
   }).isRequired,
 };
 
