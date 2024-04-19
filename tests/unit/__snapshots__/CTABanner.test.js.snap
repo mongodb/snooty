@@ -52,7 +52,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 }
 
 .emotion-0>p {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .emotion-1 {
@@ -256,7 +256,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 }
 
 .emotion-0>p {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .emotion-1 {
@@ -462,7 +462,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 }
 
 .emotion-0>p {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .emotion-1 {
@@ -666,7 +666,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 }
 
 .emotion-0>p {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .emotion-1 {

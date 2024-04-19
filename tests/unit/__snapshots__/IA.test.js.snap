@@ -13,7 +13,7 @@ exports[`renders a page IA with IA linked data 1`] = `
   position: relative;
 }
 
-.emotion-0~.emotion-0>.constant-classname {
+.emotion-0~.emotion-0>.lg-ui-side-nav-group-button-0000 {
   padding: 16px 16px 8px 16px;
 }
 
@@ -52,11 +52,12 @@ exports[`renders a page IA with IA linked data 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 8px;
 }
 
 .emotion-3 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 12px;
   font-weight: 700;
@@ -78,6 +79,7 @@ exports[`renders a page IA with IA linked data 1`] = `
 
 .emotion-5 {
   width: 100%;
+  list-style: none;
 }
 
 .emotion-6 {
@@ -129,15 +131,15 @@ exports[`renders a page IA with IA linked data 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-weight: normal;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: 400;
   text-align: left;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-transform: capitalize;
-  color: #001E2B;
   -webkit-transition: background-color 100ms ease-in-out;
   transition: background-color 100ms ease-in-out;
+  color: #001E2B;
   background-color: rgba(249,251,250,0);
   font-size: 13px;
   line-height: 20px;
@@ -205,11 +207,13 @@ exports[`renders a page IA with IA linked data 1`] = `
   transform: scaleY(0.3);
 }
 
+.emotion-6:hover {
+  background-color: #E8EDEB;
+}
+
 .emotion-6:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #0C2657;
-  background-color: #C3E7FE;
 }
 
 .emotion-6:focus:before {
@@ -217,7 +221,15 @@ exports[`renders a page IA with IA linked data 1`] = `
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
-  background-color: #0498EC;
+}
+
+.emotion-6:focus {
+  color: #083C90;
+  background-color: #E1F7FF;
+}
+
+.emotion-6:focus:before {
+  background-color: #016BF8;
 }
 
 .emotion-10 {
@@ -278,15 +290,15 @@ exports[`renders a page IA with IA linked data 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-weight: normal;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: 400;
   text-align: left;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-transform: capitalize;
-  color: #001E2B;
   -webkit-transition: background-color 100ms ease-in-out;
   transition: background-color 100ms ease-in-out;
+  color: #001E2B;
   background-color: rgba(249,251,250,0);
   font-size: 13px;
   line-height: 20px;
@@ -332,11 +344,13 @@ exports[`renders a page IA with IA linked data 1`] = `
   transform: scaleY(0.3);
 }
 
+.emotion-11:hover {
+  background-color: #E8EDEB;
+}
+
 .emotion-11:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #0C2657;
-  background-color: #C3E7FE;
 }
 
 .emotion-11:focus:before {
@@ -344,7 +358,15 @@ exports[`renders a page IA with IA linked data 1`] = `
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
-  background-color: #0498EC;
+}
+
+.emotion-11:focus {
+  color: #083C90;
+  background-color: #E1F7FF;
+}
+
+.emotion-11:focus:before {
+  background-color: #016BF8;
 }
 
 .emotion-14 {
@@ -408,15 +430,15 @@ exports[`renders a page IA with IA linked data 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-weight: normal;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: 400;
   text-align: left;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-transform: capitalize;
-  color: #001E2B;
   -webkit-transition: background-color 100ms ease-in-out;
   transition: background-color 100ms ease-in-out;
+  color: #001E2B;
   background-color: rgba(249,251,250,0);
   font-size: 13px;
   line-height: 20px;
@@ -482,11 +504,13 @@ exports[`renders a page IA with IA linked data 1`] = `
   transform: scaleY(0.3);
 }
 
+.emotion-16:hover {
+  background-color: #E8EDEB;
+}
+
 .emotion-16:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #0C2657;
-  background-color: #C3E7FE;
 }
 
 .emotion-16:focus:before {
@@ -494,7 +518,15 @@ exports[`renders a page IA with IA linked data 1`] = `
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
-  background-color: #0498EC;
+}
+
+.emotion-16:focus {
+  color: #083C90;
+  background-color: #E1F7FF;
+}
+
+.emotion-16:focus:before {
+  background-color: #016BF8;
 }
 
 .emotion-16:focus {
@@ -542,7 +574,7 @@ exports[`renders a page IA with IA linked data 1`] = `
     <div
       class="emotion-1"
       data-testid="side-nav-group-header-label"
-      id="menu-group-label-id-3"
+      id="menu-group-label-id-2"
     >
       <div
         class="emotion-2"
@@ -553,7 +585,7 @@ exports[`renders a page IA with IA linked data 1`] = `
       </div>
     </div>
     <ul
-      aria-labelledby="menu-group-label-id-3"
+      aria-labelledby="menu-group-label-id-2"
       class="emotion-4"
     >
       <li
@@ -562,7 +594,7 @@ exports[`renders a page IA with IA linked data 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
           href="https://www.mongodb.com/docs/atlas/getting-started/"
           target="_self"
         >
@@ -577,7 +609,7 @@ exports[`renders a page IA with IA linked data 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
           href="https://www.mongodb.com/docs/manual/"
           target="_self"
         >
@@ -592,7 +624,7 @@ exports[`renders a page IA with IA linked data 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="emotion-10 constant-classname emotion-11"
+          class="emotion-10 lg-ui-side-nav-item-0000 emotion-11"
           href="/tools-and-connectors/"
         >
           Tools and Connectors
@@ -604,7 +636,7 @@ exports[`renders a page IA with IA linked data 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
           href="https://www.mongodb.com/docs/drivers/"
           target="_self"
         >
@@ -622,7 +654,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/c/"
             target="_self"
           >
@@ -645,7 +677,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/cxx/"
             target="_self"
           >
@@ -668,7 +700,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/csharp/current/"
             target="_self"
           >
@@ -691,7 +723,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/go/current/"
             target="_self"
           >
@@ -714,7 +746,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/java-drivers/"
             target="_self"
           >
@@ -737,7 +769,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/kotlin-drivers/"
             target="_self"
           >
@@ -760,7 +792,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/node/current/"
             target="_self"
           >
@@ -783,7 +815,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/php/"
             target="_self"
           >
@@ -806,7 +838,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/python/"
             target="_self"
           >
@@ -829,7 +861,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/ruby/"
             target="_self"
           >
@@ -852,7 +884,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/rust/"
             target="_self"
           >
@@ -875,7 +907,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/scala/"
             target="_self"
           >
@@ -898,7 +930,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/swift/"
             target="_self"
           >
@@ -921,7 +953,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           <a
             aria-current="false"
             aria-disabled="false"
-            class="lg-ui-0001 constant-classname emotion-16"
+            class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-16"
             href="https://www.mongodb.com/docs/drivers/typescript/"
             target="_self"
           >
@@ -957,7 +989,7 @@ exports[`renders a simple page IA correctly 1`] = `
   position: relative;
 }
 
-.emotion-0~.emotion-0>.constant-classname {
+.emotion-0~.emotion-0>.lg-ui-side-nav-group-button-0000 {
   padding: 16px 16px 8px 16px;
 }
 
@@ -996,11 +1028,12 @@ exports[`renders a simple page IA correctly 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 8px;
 }
 
 .emotion-3 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 12px;
   font-weight: 700;
@@ -1022,6 +1055,7 @@ exports[`renders a simple page IA correctly 1`] = `
 
 .emotion-5 {
   width: 100%;
+  list-style: none;
 }
 
 .emotion-6 {
@@ -1073,15 +1107,15 @@ exports[`renders a simple page IA correctly 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-weight: normal;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: 400;
   text-align: left;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-transform: capitalize;
-  color: #001E2B;
   -webkit-transition: background-color 100ms ease-in-out;
   transition: background-color 100ms ease-in-out;
+  color: #001E2B;
   background-color: rgba(249,251,250,0);
   font-size: 13px;
   line-height: 20px;
@@ -1149,11 +1183,13 @@ exports[`renders a simple page IA correctly 1`] = `
   transform: scaleY(0.3);
 }
 
+.emotion-6:hover {
+  background-color: #E8EDEB;
+}
+
 .emotion-6:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #0C2657;
-  background-color: #C3E7FE;
 }
 
 .emotion-6:focus:before {
@@ -1161,7 +1197,15 @@ exports[`renders a simple page IA correctly 1`] = `
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
-  background-color: #0498EC;
+}
+
+.emotion-6:focus {
+  color: #083C90;
+  background-color: #E1F7FF;
+}
+
+.emotion-6:focus:before {
+  background-color: #016BF8;
 }
 
 .emotion-10 {
@@ -1222,15 +1266,15 @@ exports[`renders a simple page IA correctly 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-weight: normal;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: 400;
   text-align: left;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-transform: capitalize;
-  color: #001E2B;
   -webkit-transition: background-color 100ms ease-in-out;
   transition: background-color 100ms ease-in-out;
+  color: #001E2B;
   background-color: rgba(249,251,250,0);
   font-size: 13px;
   line-height: 20px;
@@ -1276,11 +1320,13 @@ exports[`renders a simple page IA correctly 1`] = `
   transform: scaleY(0.3);
 }
 
+.emotion-11:hover {
+  background-color: #E8EDEB;
+}
+
 .emotion-11:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: #0C2657;
-  background-color: #C3E7FE;
 }
 
 .emotion-11:focus:before {
@@ -1288,7 +1334,15 @@ exports[`renders a simple page IA correctly 1`] = `
   -moz-transform: scaleY(1);
   -ms-transform: scaleY(1);
   transform: scaleY(1);
-  background-color: #0498EC;
+}
+
+.emotion-11:focus {
+  color: #083C90;
+  background-color: #E1F7FF;
+}
+
+.emotion-11:focus:before {
+  background-color: #016BF8;
 }
 
 <li
@@ -1317,7 +1371,7 @@ exports[`renders a simple page IA correctly 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
           href="https://www.mongodb.com/docs/atlas/getting-started/"
           target="_self"
         >
@@ -1332,7 +1386,7 @@ exports[`renders a simple page IA correctly 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
           href="https://www.mongodb.com/docs/manual/"
           target="_self"
         >
@@ -1347,7 +1401,7 @@ exports[`renders a simple page IA correctly 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="emotion-10 constant-classname emotion-11"
+          class="emotion-10 lg-ui-side-nav-item-0000 emotion-11"
           href="/tools-and-connectors/"
         >
           Tools and Connectors
@@ -1359,7 +1413,7 @@ exports[`renders a simple page IA correctly 1`] = `
         <a
           aria-current="false"
           aria-disabled="false"
-          class="lg-ui-0001 constant-classname emotion-6"
+          class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
           href="https://www.mongodb.com/docs/drivers/"
           target="_self"
         >
