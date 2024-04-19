@@ -21,7 +21,7 @@ const videoBannerStyling = css`
   min-height: 44px;
 
   > p {
-    margin-left: 10px;
+    margin-left: 15px;
   }
 `;
 
