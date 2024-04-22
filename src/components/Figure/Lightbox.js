@@ -7,18 +7,30 @@ import { theme } from '../../theme/docsTheme.js';
 import CaptionLegend from './CaptionLegend';
 
 const CAPTION_TEXT = 'click to enlarge';
+
+const MODAL_PADDING = '64px';
+const MODAL_DIALOG_PADDING = '40px';
+
 const StyledModal = styled(Modal)`
   // Set z-index to appear above side nav and top navbar
   z-index: 10;
-  margin-top: 64px;
+  margin-top: ${theme.header.navbarHeight};
+
+  div[role='dialog'] {
+    max-width: 80%;
+    max-height: calc(100vh - ${theme.header.navbarHeight} - ${MODAL_DIALOG_PADDING});
+    transition: none;
+  }
+
+  img {
+    max-height: calc(
+      100vh - ${theme.header.navbarHeight} - ${MODAL_DIALOG_PADDING} - ${MODAL_PADDING} - ${MODAL_PADDING} -
+        ${MODAL_DIALOG_PADDING}
+    );
+    width: auto;
+  }
 
   @media ${theme.screenSize.largeAndUp} {
-    div[role='dialog'] {
-      max-width: 80%;
-    }
-    img {
-      max-height: 620px;
-    }
   }
 
   @media ${theme.screenSize.upToLarge} {
