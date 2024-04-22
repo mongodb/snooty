@@ -14,10 +14,9 @@ const homeLinkStyle = LeafyCSS`
     font-weight: 400;
     display: flex;
     gap: 6px;
-    align-items: text-bottom;
     svg {
       height: 17px;
-      color: ${palette.gray.dark2}
+      color: ${palette.gray.dark2};
     }
   }
 `;
