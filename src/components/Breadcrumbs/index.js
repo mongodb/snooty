@@ -15,19 +15,20 @@ const breadcrumbBodyStyle = css`
 `;
 
 const Breadcrumbs = ({ homeUrl = null, pageTitle = null, siteTitle, slug }) => {
+  console.log(homeUrl);
   const homeCrumb = {
     title: 'Docs Home',
     url: homeUrl || baseUrl(),
   };
   // If a pageTitle prop is passed, use that as the last breadcrumb instead
-  const lastCrumb = {
+  const propertyCrumb = {
     title: pageTitle || siteTitle,
     url: pageTitle ? slug : '/',
   };
 
   return (
     <Body className={cx(breadcrumbBodyStyle)}>
-      <BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} slug={slug} />
+      <BreadcrumbContainer homeCrumb={homeCrumb} propertyCrumb={propertyCrumb} slug={slug} />
     </Body>
   );
 };

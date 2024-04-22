@@ -9,7 +9,7 @@ import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { baseUrl } from '../../utils/base-url';
+import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 
 const activeColor = css`
   color: ${palette.gray.dark3};
@@ -39,24 +39,35 @@ const linkStyling = LeafyCss`
   }
 `;
 
-const BreadcrumbContainer = ({ homeCrumb, lastCrumb, slug }) => {
+const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
   const { parentPaths } = useSnootyMetadata();
-
-  console.log('slug ' + slug);
-
   //get base URL to reconstruct url of all the breadcrumbs
-  const urlBase = baseUrl();
-  console.log(urlBase);
+
+  const queriedCrumbs = useBreadcrumbs()[0];
+  const propertyUrl = queriedCrumbs.propertyUrl;
+  const intermediateCrumbs = queriedCrumbs.breadcrumbs;
+  console.log('intermediateCrumbs ' + JSON.stringify(intermediateCrumbs));
+  console.log(queriedCrumbs.project);
 
   //get parents from pathparents here instead
   //add respective url to each breadcrumb
-  const parents = parentPaths[slug].map((crumb) => {
-    return { ...crumb, url: urlBase + crumb.path };
-  });
+  // console.log("parentPaths" + JSON.stringify(parentPaths));
+  const parents = React.useMemo(
+    () =>
+      parentPaths[slug]
+        ? parentPaths[slug].map((crumb) => {
+            return { ...crumb, url: propertyUrl + crumb.path };
+          })
+        : [],
+    [parentPaths, slug, propertyUrl]
+  );
   console.log('parents' + JSON.stringify(parents));
 
   // const parents = useNavigationParents(project);
-  const breadcrumbs = React.useMemo(() => [homeCrumb, lastCrumb, ...parents], [homeCrumb, lastCrumb, parents]);
+  const breadcrumbs = React.useMemo(
+    () => [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents],
+    [homeCrumb, propertyCrumb, intermediateCrumbs, parents]
+  );
   console.log('breadcrumbs' + JSON.stringify(breadcrumbs));
 
   return (
@@ -93,7 +104,7 @@ const crumbObjectShape = {
 
 BreadcrumbContainer.propTypes = {
   homeCrumb: PropTypes.shape(crumbObjectShape).isRequired,
-  lastCrumb: PropTypes.shape(crumbObjectShape).isRequired,
+  propertyCrumb: PropTypes.shape(crumbObjectShape).isRequired,
 };
 
 export default BreadcrumbContainer;

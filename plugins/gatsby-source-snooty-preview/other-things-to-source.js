@@ -3,6 +3,7 @@ const { realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
 const { createOpenAPIChangelogNode } = require('../utils/openapi');
 const { createProductNodes } = require('../utils/products');
 const { createDocsetNodes } = require('../utils/docsets');
+const { createBreadcrumbNodes } = require('../utils/breadcrumbs');
 const { createProjectParentNodes } = require('../utils/project-parents');
 
 // Sources nodes for the preview plugin that are not directly related to data
@@ -18,6 +19,7 @@ exports.sourceNodes = async ({
   await db.connect();
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
   await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
+  await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
   await createProjectParentNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
   if (hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });

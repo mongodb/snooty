@@ -21,6 +21,7 @@ const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { createProjectParentNodes } = require('../utils/project-parents.js');
+const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
 
 const assets = new Map();
 const projectComponents = new Set();
@@ -191,6 +192,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
+
+  await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
 
   await createProjectParentNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
 
@@ -411,6 +414,12 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type AssociatedProduct implements Node @dontInfer {
       productName: String
+    }
+
+    type Breadcrumb implements Node @dontInfer {
+      breadcrumbs: JSON
+      propertyUrl: String
+      project: String!
     }
 
     type ProjectParent implements Node @dontInfer {

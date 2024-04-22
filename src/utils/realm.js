@@ -52,6 +52,10 @@ export const fetchBanner = async (snootyEnv) => {
   return callAuthenticatedFunction('getBanner', snootyEnv === 'development');
 };
 
+export const fetchBreadcrumbs = async (database, project) => {
+  return callAuthenticatedFunction('fetchBreadcrumbs', database, project);
+};
+
 export const fetchProjectParents = async (database, project) => {
   return callAuthenticatedFunction('fetchProjectParents', database, project);
 };
