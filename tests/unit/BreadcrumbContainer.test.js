@@ -43,7 +43,23 @@ describe('BreadcrumbContainer', () => {
 
     const mockParents = [
       {
-        title: 'View & Analyze',
+        title: 'Crumb 1',
+        url: 'https://www.mongodb.com/docs/',
+      },
+      {
+        title: 'Crumb 2',
+        url: 'https://www.mongodb.com/docs/',
+      },
+      {
+        title: 'Crumb 3',
+        url: 'https://www.mongodb.com/docs/',
+      },
+      {
+        title: 'Crumb 4',
+        url: 'https://www.mongodb.com/docs/',
+      },
+      {
+        title: 'View & Analyze: An Outrageously Long Title',
         url: 'https://www.mongodb.com/docs/view-analyze',
       },
     ];

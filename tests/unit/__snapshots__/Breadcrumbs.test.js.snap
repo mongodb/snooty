@@ -75,27 +75,16 @@ exports[`renders correctly with pageTitle 1`] = `
   text-decoration-color: #016BF8;
 }
 
-.emotion-1:last-of-type {
-  color: #1C2D38;
-}
-
 .emotion-1:hover,
 .emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-1:hover:not(:last-of-type),
-.emotion-1:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
 .emotion-2 {
   cursor: default;
-}
-
-.emotion-2:last-of-type {
-  color: #1C2D38;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .emotion-4 {
@@ -138,19 +127,10 @@ exports[`renders correctly with pageTitle 1`] = `
   font-size: 13px;
 }
 
-.emotion-5:last-of-type {
-  color: #1C2D38;
-}
-
 .emotion-5:hover,
 .emotion-5:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
-}
-
-.emotion-5:hover:not(:last-of-type),
-.emotion-5:focus:not(:last-of-type) {
-  color: #1C2D38;
 }
 
 <p
@@ -168,7 +148,7 @@ exports[`renders correctly with pageTitle 1`] = `
     <span
       class="emotion-2 emotion-3"
     >
-       → 
+       / 
     </span>
     <a
       class="emotion-4 emotion-5"
@@ -255,27 +235,16 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-color: #016BF8;
 }
 
-.emotion-1:last-of-type {
-  color: #1C2D38;
-}
-
 .emotion-1:hover,
 .emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-1:hover:not(:last-of-type),
-.emotion-1:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
 .emotion-2 {
   cursor: default;
-}
-
-.emotion-2:last-of-type {
-  color: #1C2D38;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .emotion-4 {
@@ -318,19 +287,10 @@ exports[`renders correctly with siteTitle 1`] = `
   font-size: 13px;
 }
 
-.emotion-5:last-of-type {
-  color: #1C2D38;
-}
-
 .emotion-5:hover,
 .emotion-5:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
-}
-
-.emotion-5:hover:not(:last-of-type),
-.emotion-5:focus:not(:last-of-type) {
-  color: #1C2D38;
 }
 
 <p
@@ -348,7 +308,7 @@ exports[`renders correctly with siteTitle 1`] = `
     <span
       class="emotion-2 emotion-3"
     >
-       → 
+       / 
     </span>
     <a
       class="emotion-4 emotion-5"
