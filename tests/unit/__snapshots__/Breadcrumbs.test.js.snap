@@ -91,7 +91,7 @@ exports[`renders correctly with pageTitle 1`] = `
   color: #1C2D38;
 }
 
-.emotion-7 {
+.emotion-4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -105,12 +105,12 @@ exports[`renders correctly with pageTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-7>code {
+.emotion-4>code {
   color: #016BF8;
 }
 
-.emotion-7:focus,
-.emotion-7:hover {
+.emotion-4:focus,
+.emotion-4:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -118,31 +118,31 @@ exports[`renders correctly with pageTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-7:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-7:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-8 {
+.emotion-5 {
   font-size: 13px;
 }
 
-.emotion-8:last-of-type {
+.emotion-5:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-8:hover,
-.emotion-8:focus {
+.emotion-5:hover,
+.emotion-5:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-8:hover:not(:last-of-type),
-.emotion-8:focus:not(:last-of-type) {
+.emotion-5:hover:not(:last-of-type),
+.emotion-5:focus:not(:last-of-type) {
   color: #1C2D38;
 }
 
@@ -164,13 +164,10 @@ exports[`renders correctly with pageTitle 1`] = `
        → 
     </span>
     <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/"
-      target="_self"
+      class="emotion-4 emotion-5"
+      href="/www.mongodb.comhttps://www.mongodb.com/docs/atlas/"
     >
-      <span>
-        MongoDB Atlas
-      </span>
+      MongoDB Atlas
     </a>
     <span
       class="emotion-2 emotion-3"
@@ -178,10 +175,13 @@ exports[`renders correctly with pageTitle 1`] = `
        → 
     </span>
     <a
-      class="emotion-7 emotion-8"
-      href="/sdk/cpp/app-services/call-a-function/"
+      class="lg-ui-0001 emotion-1"
+      href="https://www.mongodb.com/docs/atlas/device-sdks/"
+      target="_self"
     >
-      Call a Function - C++ SDK
+      <span>
+        Call a Function - C++ SDK
+      </span>
     </a>
     <span
       class="emotion-2 emotion-3"
@@ -306,7 +306,7 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #1C2D38;
 }
 
-.emotion-7 {
+.emotion-4 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -320,12 +320,12 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-7>code {
+.emotion-4>code {
   color: #016BF8;
 }
 
-.emotion-7:focus,
-.emotion-7:hover {
+.emotion-4:focus,
+.emotion-4:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -333,31 +333,31 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-7:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-7:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-8 {
+.emotion-5 {
   font-size: 13px;
 }
 
-.emotion-8:last-of-type {
+.emotion-5:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-8:hover,
-.emotion-8:focus {
+.emotion-5:hover,
+.emotion-5:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-8:hover:not(:last-of-type),
-.emotion-8:focus:not(:last-of-type) {
+.emotion-5:hover:not(:last-of-type),
+.emotion-5:focus:not(:last-of-type) {
   color: #1C2D38;
 }
 
@@ -379,13 +379,10 @@ exports[`renders correctly with siteTitle 1`] = `
        → 
     </span>
     <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/"
-      target="_self"
+      class="emotion-4 emotion-5"
+      href="/www.mongodb.comhttps://www.mongodb.com/docs/atlas/"
     >
-      <span>
-        MongoDB Atlas
-      </span>
+      MongoDB Atlas
     </a>
     <span
       class="emotion-2 emotion-3"
@@ -393,10 +390,13 @@ exports[`renders correctly with siteTitle 1`] = `
        → 
     </span>
     <a
-      class="emotion-7 emotion-8"
-      href="/"
+      class="lg-ui-0001 emotion-1"
+      href="https://www.mongodb.com/docs/atlas/device-sdks/"
+      target="_self"
     >
-      Call a Function - C++ SDK
+      <span>
+        Call a Function - C++ SDK
+      </span>
     </a>
     <span
       class="emotion-2 emotion-3"

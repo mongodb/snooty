@@ -15,7 +15,6 @@ const breadcrumbBodyStyle = css`
 `;
 
 const Breadcrumbs = ({ homeUrl = null, pageTitle = null, siteTitle, slug }) => {
-  console.log(slug);
   const homeCrumb = {
     title: 'Docs Home',
     url: homeUrl || baseUrl(),
