@@ -1,6 +1,8 @@
 import { lazy, Fragment } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@leafygreen-ui/emotion';
+import { SuspenseHelper } from '../../SuspenseHelper';
+
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { DEFAULT_MAX_INPUT, defaultSuggestedPrompts } from '../../ChatbotUi';
 import { MongoDbLegalDisclosure } from './MongoDBLegal';
@@ -30,25 +32,27 @@ const ChatbotFab = () => {
       // Classname below to help ignore element for screenshots
       className={fabChatbot}
     >
-      <Chatbot name="MongoDB AI" maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
-        <FloatingActionButtonTrigger text={CHATBOT_WIDGET_TEXT} />
-        <ModalView
-          disclaimer={
-            <Fragment>
-              <MongoDbLegalDisclosure />
-              <PoweredByAtlasVectorSearch
-                linkStyle="text"
-                className={css`
-                  margin-top: 8px;
-                `}
-              />
-            </Fragment>
-          }
-          initialMessageText="Welcome to the MongoDB AI Assistant. What can I help you with?"
-          initialMessageSuggestedPrompts={defaultSuggestedPrompts}
-          inputBottomText={BOTTOM_TEXT}
-        />
-      </Chatbot>
+      <SuspenseHelper fallback={null}>
+        <Chatbot name="MongoDB AI" maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
+          <FloatingActionButtonTrigger text={CHATBOT_WIDGET_TEXT} />
+          <ModalView
+            disclaimer={
+              <Fragment>
+                <MongoDbLegalDisclosure />
+                <PoweredByAtlasVectorSearch
+                  linkStyle="text"
+                  className={css`
+                    margin-top: 8px;
+                  `}
+                />
+              </Fragment>
+            }
+            initialMessageText="Welcome to the MongoDB AI Assistant. What can I help you with?"
+            initialMessageSuggestedPrompts={defaultSuggestedPrompts}
+            inputBottomText={BOTTOM_TEXT}
+          />
+        </Chatbot>
+      </SuspenseHelper>
     </StyledChatBotFabContainer>
   );
 };
