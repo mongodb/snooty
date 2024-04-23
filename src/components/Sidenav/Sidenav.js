@@ -13,7 +13,6 @@ import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
-import { baseUrl } from '../../utils/base-url';
 import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
@@ -23,11 +22,11 @@ import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
 import IATransition from './IATransition';
 import ProductsList from './ProductsList';
-import SidenavBackButton from './SidenavBackButton';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
-import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
+import { sideNavItemBasePadding, sideNavItemFontSize, titleStyle } from './styles/sideNavItem';
+import DocsHomeButton from './DocsHomeButton';
 
 const SIDENAV_WIDTH = 268;
 
@@ -75,21 +74,6 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
     background-color: unset;
   }
 
-`;
-
-const titleStyle = LeafyCSS`
-  color: ${palette.gray.dark3};
-  font-size: ${theme.fontSize.small};
-  font-weight: bold;
-  line-height: 20px;
-  text-transform: none;
-  :hover {
-    background-color: inherit;
-
-    &:after, span:after {
-      display: none;
-    }
-  }
 `;
 
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
@@ -260,21 +244,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={baseUrl()}>
-                  MongoDB Documentation
-                </SideNavItem>
+                <DocsHomeButton />
                 <Border />
-                <SidenavBackButton
-                  handleClick={() => {
-                    setBack(true);
-                    hideMobileSidenav();
-                  }}
-                  project={project}
-                  currentSlug={slug}
-                  target={isGuidesTemplate ? '/' : ''}
-                  titleOverride={isGuidesTemplate ? siteTitle : ''}
-                  eol={eol}
-                />
                 {ia && (
                   <IA
                     header={!isLanding && <span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
