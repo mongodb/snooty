@@ -14,11 +14,10 @@ const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createConte
     children: [],
     id: createNodeId(`Breadcrumbs-${project}`),
     internal: {
-      contentDigest: createContentDigest(result),
+      contentDigest: createContentDigest(result.breadcrumbs),
       type: breadcrumbType,
     },
     breadcrumbs: result.breadcrumbs,
-    project: project,
     propertyUrl: result.propertyUrl,
   });
 };

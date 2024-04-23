@@ -66,7 +66,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type Breadcrumb implements Node @dontInfer {
       breadcrumbs: JSON
       propertyUrl: String
-      project: String!
     }
 
     type ProjectParent implements Node @dontInfer {

@@ -34,13 +34,6 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   cursor: pointer;
   font-size: inherit;
   line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
   font-size: 13px;
   line-height: 20px;
   color: #016BF8;
@@ -120,13 +113,6 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   cursor: pointer;
   font-size: inherit;
   line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
   font-size: 13px;
   line-height: 20px;
   color: #016BF8;

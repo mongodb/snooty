@@ -77,35 +77,30 @@ exports[`Wistia video renders correctly 1`] = `
   height: 36px;
 }
 
-.emotion-4:focus-visible,
-.emotion-4[data-focus="true"] {
+.emotion-4:focus,
+.emotion-4:focus-visible {
   outline: none;
 }
 
 .emotion-4:active,
-.emotion-4[data-active="true"],
 .emotion-4:focus,
 .emotion-4:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-4:focus-visible,
-.emotion-4[data-focus="true"] {
+.emotion-4:focus {
   color: #001E2B;
 }
 
-.emotion-4:hover,
-.emotion-4[data-hover="true"],
-.emotion-4:active,
-.emotion-4[data-active="true"] {
+.emotion-4:hover[aria-disabled='false'],
+.emotion-4:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-4:focus-visible,
-.emotion-4[data-focus="true"] {
+.emotion-4:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -149,11 +144,8 @@ exports[`Wistia video renders correctly 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
+  pointer-events: none;
   position: relative;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;

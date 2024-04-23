@@ -44,14 +44,16 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
   //get base URL to reconstruct url of all the breadcrumbs
 
   const queriedCrumbs = useBreadcrumbs()[0];
+  console.log('hello');
+  console.log(queriedCrumbs);
   const propertyUrl = queriedCrumbs.propertyUrl;
+  console.log(propertyUrl);
   const intermediateCrumbs = queriedCrumbs.breadcrumbs;
-  console.log('intermediateCrumbs ' + JSON.stringify(intermediateCrumbs));
-  console.log(queriedCrumbs.project);
+  // console.log('intermediateCrumbs ' + JSON.stringify(intermediateCrumbs));
 
   //get parents from pathparents here instead
   //add respective url to each breadcrumb
-  // console.log("parentPaths" + JSON.stringify(parentPaths));
+  // console.log(parentPaths);
   const parents = React.useMemo(
     () =>
       parentPaths[slug]
@@ -61,9 +63,14 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
         : [],
     [parentPaths, slug, propertyUrl]
   );
-  console.log('parents' + JSON.stringify(parents));
+  // console.log('parents' + JSON.stringify(parents));
 
   // const parents = useNavigationParents(project);
+  console.log('homeCrumb:' + homeCrumb);
+  console.log('propertyCrumb:' + JSON.stringify(propertyCrumb));
+  console.log('intermediateCrumbs:' + intermediateCrumbs);
+  console.log('parents:' + parents);
+
   const breadcrumbs = React.useMemo(
     () => [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents],
     [homeCrumb, propertyCrumb, intermediateCrumbs, parents]

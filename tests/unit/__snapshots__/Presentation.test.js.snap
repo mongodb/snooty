@@ -123,7 +123,6 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 .emotion-5 {
   font-size: 14px;
   line-height: 18px;
-  height: auto;
 }
 
 .emotion-6 {
@@ -131,7 +130,6 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   min-width: 100px;
   font-size: 14px;
   line-height: 18px;
-  height: auto;
 }
 
 .emotion-7 {
@@ -346,7 +344,6 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 
 .emotion-52 {
   margin-right: 16px;
-  max-width: 16px;
 }
 
 .emotion-71 {
@@ -401,10 +398,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-7"
           >
             <img
-              height="48"
               src="https://webimages.mongodb.com/_com_assets/cms/kr6zmbrgbwlke2l97-atlas-global-deployments.svg?auto=format%252Ccompress"
-              style="height: auto;"
-              width="18"
             />
             <div
               class="emotion-8"
@@ -486,7 +480,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         <div
           class="emotion-20"
         >
-          © 2024 MongoDB, Inc.
+          © 2023 MongoDB, Inc.
         </div>
       </div>
       <div
@@ -656,11 +650,9 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
-                alt="GitHub"
+                alt=""
                 class="emotion-52"
-                height="16"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wrvghw9q75ytq1-github.svg?auto=format%252Ccompress"
-                width="16"
               />
               GitHub
             </a>
@@ -675,11 +667,9 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
-                alt="Stack Overflow"
+                alt=""
                 class="emotion-52"
-                height="22"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wsfh9d9z2m4jvx-stackoverflow.svg?auto=format%252Ccompress"
-                width="16"
               />
               Stack Overflow
             </a>
@@ -694,11 +684,9 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
-                alt="LinkedIn"
+                alt=""
                 class="emotion-52"
-                height="16"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wsmr3g1ckzd0hs-linkedin.svg?auto=format%252Ccompress"
-                width="16"
               />
               LinkedIn
             </a>
@@ -713,11 +701,9 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
-                alt="YouTube"
+                alt=""
                 class="emotion-52"
-                height="12"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wsxwxsvrivp4q4-youtube.svg?auto=format%252Ccompress"
-                width="16"
               />
               YouTube
             </a>
@@ -732,13 +718,11 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
-                alt="X"
+                alt=""
                 class="emotion-52"
-                height="16"
-                src="https://webimages.mongodb.com/_com_assets/cms/lrym6kl0k3hc1rjgc-x_light.svg?auto=format%252Ccompress"
-                width="16"
+                src="https://webimages.mongodb.com/_com_assets/cms/kr6wt4s3sy4hlc22k-twitter.svg?auto=format%252Ccompress"
               />
-              X
+              Twitter
             </a>
           </li>
           <li
@@ -751,11 +735,9 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
-                alt="Twitch"
+                alt=""
                 class="emotion-52"
-                height="18"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wtbzfgc05d27pb-twitch.svg?auto=format%252Ccompress"
-                width="16"
               />
               Twitch
             </a>
@@ -770,11 +752,9 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               <img
-                alt="Facebook"
+                alt=""
                 class="emotion-52"
-                height="16"
                 src="https://webimages.mongodb.com/_com_assets/cms/kr6wtks9piclp67yr-facebook.svg?auto=format%252Ccompress"
-                width="9"
               />
               Facebook
             </a>
@@ -784,7 +764,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
       <div
         class="emotion-71"
       >
-        © 2024 MongoDB, Inc.
+        © 2023 MongoDB, Inc.
       </div>
     </div>
   </footer>
@@ -797,7 +777,6 @@ exports[`DocumentBody renders the necessary elements 2`] = `
   min-width: 100px;
   font-size: 14px;
   line-height: 18px;
-  height: auto;
 }
 
 <img

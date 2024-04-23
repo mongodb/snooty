@@ -7,7 +7,6 @@ export const useBreadcrumbs = () => {
       query AllBreadcrumbs {
         allBreadcrumb {
           nodes {
-            project
             breadcrumbs
             propertyUrl
           }
@@ -16,6 +15,5 @@ export const useBreadcrumbs = () => {
     `
   );
 
-  // const res = (allBreadcrumb?.nodes || []).find((re) => re.project === project);
   return allBreadcrumb?.nodes || [];
 };

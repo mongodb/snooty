@@ -132,35 +132,30 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   height: 36px;
 }
 
-.emotion-8:focus-visible,
-.emotion-8[data-focus="true"] {
+.emotion-8:focus,
+.emotion-8:focus-visible {
   outline: none;
 }
 
 .emotion-8:active,
-.emotion-8[data-active="true"],
 .emotion-8:focus,
 .emotion-8:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-8:focus-visible,
-.emotion-8[data-focus="true"] {
+.emotion-8:focus {
   color: #001E2B;
 }
 
-.emotion-8:hover,
-.emotion-8[data-hover="true"],
-.emotion-8:active,
-.emotion-8[data-active="true"] {
+.emotion-8:hover[aria-disabled='false'],
+.emotion-8:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-8:focus-visible,
-.emotion-8[data-focus="true"] {
+.emotion-8:focus-visible {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
@@ -192,11 +187,8 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   align-items: center;
   height: 100%;
   width: 100%;
+  pointer-events: none;
   position: relative;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
@@ -711,13 +703,6 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   cursor: pointer;
   font-size: inherit;
   line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
   font-size: 13px;
   line-height: 20px;
   color: #016BF8;
