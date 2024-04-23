@@ -4,11 +4,8 @@ const breadcrumbType = `Breadcrumb`;
 
 const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createContentDigest, getNodesByType }) => {
   const { database, project } = siteMetadata;
-  //   const metadataNodes = getNodesByType('SnootyMetadata');
-  //   console.log(JSON.stringify(metadataNodes));
 
   const result = await db.fetchBreadcrumbs(database, project);
-  console.log(result.propertyUrl);
 
   return createNode({
     children: [],

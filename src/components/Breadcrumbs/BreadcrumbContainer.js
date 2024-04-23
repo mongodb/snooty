@@ -51,8 +51,8 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
 
   propertyCrumb.url = propertyUrl;
 
-  //get parents from pathparents here instead
-  //add respective url to each breadcrumb
+  //get direct parents of the current page from parentPaths
+  //add respective url to each direct parent crumb
   const parents = React.useMemo(
     () =>
       parentPaths[slug]
