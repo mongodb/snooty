@@ -12,6 +12,7 @@ import Chapter from './Chapters/Chapter';
 import Chapters from './Chapters';
 import Code from './Code/Code';
 import CodeIO from './Code/CodeIO';
+import CommunityPillLink from './CommunityPillLink';
 import Cond from './Cond';
 import Container from './Container';
 import CTA from './CTA';
@@ -139,6 +140,7 @@ const componentMap = {
   chapters: Chapters,
   chatbot: ChatbotUi,
   code: Code,
+  'community-driver': CommunityPillLink,
   'io-code-block': CodeIO,
   cond: Cond,
   container: Container,
