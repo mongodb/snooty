@@ -1,6 +1,6 @@
 import { useStaticQuery, graphql } from 'gatsby';
 
-// Return an array of MongoDB products
+// Return an array containing the project property's Url and any intermediate breadcrumbs
 export const useBreadcrumbs = () => {
   const { allBreadcrumb } = useStaticQuery(
     graphql`
@@ -15,5 +15,5 @@ export const useBreadcrumbs = () => {
     `
   );
 
-  return allBreadcrumb?.nodes || [];
+  return allBreadcrumb?.nodes[0] || [];
 };

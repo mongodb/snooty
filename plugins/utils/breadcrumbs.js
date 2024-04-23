@@ -5,17 +5,17 @@ const breadcrumbType = `Breadcrumb`;
 const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createContentDigest, getNodesByType }) => {
   const { database, project } = siteMetadata;
 
-  const result = await db.fetchBreadcrumbs(database, project);
+  const breadcrumbData = await db.fetchBreadcrumbs(database, project);
 
   return createNode({
     children: [],
     id: createNodeId(`Breadcrumbs-${project}`),
     internal: {
-      contentDigest: createContentDigest(result.breadcrumbs),
+      contentDigest: createContentDigest(breadcrumbData?.breadcrumbs),
       type: breadcrumbType,
     },
-    breadcrumbs: result.breadcrumbs,
-    propertyUrl: result.propertyUrl,
+    breadcrumbs: breadcrumbData.breadcrumbs,
+    propertyUrl: breadcrumbData.propertyUrl,
   });
 };
 

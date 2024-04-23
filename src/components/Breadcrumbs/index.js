@@ -19,7 +19,7 @@ const Breadcrumbs = ({ homeUrl = null, pageTitle = null, siteTitle, slug }) => {
     title: 'Docs Home',
     url: homeUrl || baseUrl(),
   };
-  // If a pageTitle prop is passed, use that as the last breadcrumb instead
+  // If a pageTitle prop is passed, use that as the property breadcrumb instead
   const propertyCrumb = {
     title: pageTitle || siteTitle,
     url: pageTitle ? slug : '/',

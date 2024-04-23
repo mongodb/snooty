@@ -20,7 +20,7 @@ beforeAll(() => {
 const mockIntermediateCrumbs = [
   {
     title: 'MongoDB Atlas',
-    url: 'https://www.mongodb.com/docs/atlas/',
+    url: '/docs/atlas',
   },
 ];
 

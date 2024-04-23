@@ -98,61 +98,6 @@ exports[`renders correctly with pageTitle 1`] = `
   color: #1C2D38;
 }
 
-.emotion-4 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  line-height: 13px;
-  color: #016BF8;
-}
-
-.emotion-4>code {
-  color: #016BF8;
-}
-
-.emotion-4:focus,
-.emotion-4:hover {
-  text-decoration-line: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-4:focus {
-  text-decoration-color: #016BF8;
-  outline: none;
-}
-
-.emotion-4:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-5 {
-  font-size: 13px;
-}
-
-.emotion-5:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-5:hover,
-.emotion-5:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-5:hover:not(:last-of-type),
-.emotion-5:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
 <p
     class="emotion-0"
   >
@@ -171,10 +116,13 @@ exports[`renders correctly with pageTitle 1`] = `
        → 
     </span>
     <a
-      class="emotion-4 emotion-5"
-      href="/www.mongodb.comhttps://www.mongodb.com/docs/atlas/"
+      class="lg-ui-0001 emotion-1"
+      href="http://www.mongodb.com/docs/atlas"
+      target="_self"
     >
-      MongoDB Atlas
+      <span>
+        MongoDB Atlas
+      </span>
     </a>
     <span
       class="emotion-2 emotion-3"
@@ -320,61 +268,6 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #1C2D38;
 }
 
-.emotion-4 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  line-height: 13px;
-  color: #016BF8;
-}
-
-.emotion-4>code {
-  color: #016BF8;
-}
-
-.emotion-4:focus,
-.emotion-4:hover {
-  text-decoration-line: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-4:focus {
-  text-decoration-color: #016BF8;
-  outline: none;
-}
-
-.emotion-4:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-5 {
-  font-size: 13px;
-}
-
-.emotion-5:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-5:hover,
-.emotion-5:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-5:hover:not(:last-of-type),
-.emotion-5:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
 <p
     class="emotion-0"
   >
@@ -393,10 +286,13 @@ exports[`renders correctly with siteTitle 1`] = `
        → 
     </span>
     <a
-      class="emotion-4 emotion-5"
-      href="/www.mongodb.comhttps://www.mongodb.com/docs/atlas/"
+      class="lg-ui-0001 emotion-1"
+      href="http://www.mongodb.com/docs/atlas"
+      target="_self"
     >
-      MongoDB Atlas
+      <span>
+        MongoDB Atlas
+      </span>
     </a>
     <span
       class="emotion-2 emotion-3"

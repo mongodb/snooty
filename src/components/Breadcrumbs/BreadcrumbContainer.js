@@ -43,10 +43,10 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
   const { parentPaths } = useSnootyMetadata();
 
   //get intermediate breadcrumbs and property Url
-  const queriedCrumbs = useBreadcrumbs()[0];
+  const queriedCrumbs = useBreadcrumbs();
   const propertyUrl = queriedCrumbs.propertyUrl;
   const intermediateCrumbs = queriedCrumbs.breadcrumbs.map((crumb) => {
-    return { ...crumb, url: `www.mongodb.com${crumb.url}` };
+    return { ...crumb, url: `http://www.mongodb.com${crumb.url}` };
   });
 
   propertyCrumb.url = propertyUrl;

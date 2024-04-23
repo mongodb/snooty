@@ -14,15 +14,10 @@ const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 
 jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 
-// 1. mock for when there are parents, when there aren't
-// 2. mock for when there are intermediate crumbs, when there aren't
-// 3. mock for when there are intermediate and parent crumbs
-//
-
 const mockIntermediateCrumbs = [
   {
     title: 'MongoDB Atlas',
-    url: 'https://www.mongodb.com/docs/atlas/',
+    url: '/docs/atlas/',
   },
 ];
 
@@ -50,7 +45,7 @@ describe('BreadcrumbContainer', () => {
   //home breadcrumb
   const mockHomeCrumb = {
     title: 'Docs Home',
-    url: 'www.mongodb.com/docs',
+    url: 'https://www.mongodb.com/docs',
   };
 
   //property breadcrumb
