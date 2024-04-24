@@ -193,7 +193,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
-  await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
+  await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createProjectParentNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
 

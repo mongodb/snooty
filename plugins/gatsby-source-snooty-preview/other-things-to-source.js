@@ -19,7 +19,7 @@ exports.sourceNodes = async ({
   await db.connect();
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
   await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
-  await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
+  await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
   await createProjectParentNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
   if (hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
