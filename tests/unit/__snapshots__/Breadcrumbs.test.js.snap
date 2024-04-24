@@ -163,7 +163,7 @@ exports[`renders correctly with pageTitle 1`] = `
       target="_self"
     >
       <span>
-        Application Services - C++ SDK
+        Application Services - - C++ SDK
       </span>
     </a>
   </p>
@@ -333,7 +333,7 @@ exports[`renders correctly with siteTitle 1`] = `
       target="_self"
     >
       <span>
-        Application Services - C++ SDK
+        Application Services - - C++ SDK
       </span>
     </a>
   </p>

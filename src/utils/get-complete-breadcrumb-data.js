@@ -11,7 +11,6 @@ export const getCompleteBreadcrumbData = ({
   queriedCrumbs,
   parentPaths,
 }) => {
-  console.log(slug);
   const homeCrumb = {
     title: 'Docs Home',
     url: homeUrl || baseUrl(),
@@ -21,8 +20,6 @@ export const getCompleteBreadcrumbData = ({
     title: pageTitle || siteTitle,
     url: pageTitle ? slug : '/',
   };
-
-  console.log(homeUrl, pageTitle, siteTitle);
 
   //get intermediate breadcrumbs and property Url
 

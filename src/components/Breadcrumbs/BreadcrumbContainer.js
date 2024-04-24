@@ -38,39 +38,6 @@ const linkStyling = LeafyCss`
 `;
 
 const BreadcrumbContainer = ({ breadcrumbs }) => {
-  // const { parentPaths } = useSnootyMetadata();
-
-  // //get intermediate breadcrumbs and property Url
-  // const queriedCrumbs = useBreadcrumbs();
-  // const propertyUrl = assertTrailingSlash(queriedCrumbs?.propertyUrl);
-  // const intermediateCrumbs = React.useMemo(
-  //   () =>
-  //     queriedCrumbs?.breadcrumbs
-  //       ? queriedCrumbs.breadcrumbs.map((crumb) => {
-  //           return { ...crumb, url: `http://www.mongodb.com${assertLeadingSlash(crumb.url)}` };
-  //         })
-  //       : [],
-  //   [queriedCrumbs]
-  // );
-
-  // propertyCrumb.url = propertyUrl;
-
-  // //get direct parents of the current page from parentPaths
-  // //add respective url to each direct parent crumb
-  // const parents = React.useMemo(
-  //   () =>
-  //     parentPaths[slug]
-  //       ? parentPaths[slug].map((crumb) => {
-  //           return { ...crumb, url: propertyUrl + removeLeadingSlash(crumb.path) };
-  //         })
-  //       : [],
-  //   [parentPaths, slug, propertyUrl]
-  // );
-  // const breadcrumbs = React.useMemo(
-  //   () => [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents],
-  //   [homeCrumb, intermediateCrumbs, propertyCrumb, parents]
-  // );
-
   return (
     <>
       {breadcrumbs.map(({ title, url }, index) => {
