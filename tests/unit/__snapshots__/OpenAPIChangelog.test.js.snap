@@ -869,6 +869,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       <a
         aria-disabled="false"
         class="lg-ui-button-0000 emotion-8 emotion-9 emotion-10"
+        data-lgid="lg-button"
         href="https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog/20230403105948111/changelog.json"
       >
         <div

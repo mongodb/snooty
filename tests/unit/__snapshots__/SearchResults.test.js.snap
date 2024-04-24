@@ -1944,6 +1944,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-21"
+          data-lgid="lg-button"
           type="button"
         >
           <div
@@ -2228,6 +2229,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-21"
+          data-lgid="lg-button"
           type="button"
         >
           <div
@@ -3258,6 +3260,7 @@ exports[`Search Results Page does not return results for a given search term wit
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-16"
+          data-lgid="lg-button"
           type="button"
         >
           <div
@@ -3700,6 +3703,7 @@ exports[`Search Results Page does not return results for a given search term wit
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-16"
+          data-lgid="lg-button"
           type="button"
         >
           <div
@@ -4131,6 +4135,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-11"
+          data-lgid="lg-button"
           type="button"
         >
           <div
@@ -5199,6 +5204,7 @@ exports[`Search Results Page renders loading images before returning no results 
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-16"
+          data-lgid="lg-button"
           type="button"
         >
           <div
@@ -5813,6 +5819,7 @@ exports[`Search Results Page renders loading images before returning no results 
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-16"
+          data-lgid="lg-button"
           type="button"
         >
           <div
@@ -6881,6 +6888,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-16"
+          data-lgid="lg-button"
           type="button"
         >
           <div
@@ -7495,6 +7503,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-16"
+          data-lgid="lg-button"
           type="button"
         >
           <div
@@ -8813,6 +8822,7 @@ exports[`Search Results Page renders results from a given search term query para
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-16"
+          data-lgid="lg-button"
           type="button"
         >
           <div
@@ -9097,6 +9107,7 @@ exports[`Search Results Page renders results from a given search term query para
         <button
           aria-disabled="false"
           class="lg-ui-button-0000 emotion-16"
+          data-lgid="lg-button"
           type="button"
         >
           <div
