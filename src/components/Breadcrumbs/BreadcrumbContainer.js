@@ -52,7 +52,7 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
     () =>
       queriedCrumbs?.breadcrumbs
         ? queriedCrumbs.breadcrumbs.map((crumb) => {
-            return { ...crumb, url: `http://www.mongodb.com${assertLeadingSlash(crumb.url)}` };
+            return { ...crumb, url: assertTrailingSlash(`http://www.mongodb.com${assertLeadingSlash(crumb.url)}`) };
           })
         : [],
     [queriedCrumbs]
@@ -66,7 +66,7 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
     () =>
       parentPaths[slug]
         ? parentPaths[slug].map((crumb) => {
-            return { ...crumb, url: propertyUrl + removeLeadingSlash(crumb.path) };
+            return { ...crumb, url: assertTrailingSlash(propertyUrl + removeLeadingSlash(crumb.path)) };
           })
         : [],
     [parentPaths, slug, propertyUrl]

@@ -81,6 +81,3 @@ describe('BreadcrumbContainer', () => {
     expect(tree.asFragment()).toMatchSnapshot();
   });
 });
-
-//can do 2 more tests here for something without intermediate breadcrumbs
-//test it with parents, and without
