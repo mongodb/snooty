@@ -36,14 +36,14 @@ const TestComponent = ({ mockBannerContent, HelperComponent }) => {
 describe('useStickyTopValues()', () => {
   it('provides the correct top values without any banner content and eol false', () => {
     const wrapper = render(<TestComponent mockBannerContent={null} HelperComponent={HelperComponent} />);
-    expect(wrapper.queryByText('88px')).toBeTruthy();
+    expect(wrapper.queryByText('95px')).toBeTruthy();
     expect(wrapper.queryByText('56px')).toBeTruthy();
     expect(wrapper.queryByText('108px')).toBeTruthy();
   });
 
   it('provides the correct top values with banner content and eol false', () => {
     const wrapper = render(<TestComponent mockBannerContent={{ isEnabled: true }} HelperComponent={HelperComponent} />);
-    expect(wrapper.queryByText('128px')).toBeTruthy();
+    expect(wrapper.queryByText('135px')).toBeTruthy();
     expect(wrapper.queryByText('96px')).toBeTruthy();
     expect(wrapper.queryByText('148px')).toBeTruthy();
   });
