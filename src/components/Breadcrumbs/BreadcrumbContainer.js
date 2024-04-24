@@ -8,11 +8,6 @@ import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
-import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { assertLeadingSlash } from '../../utils/assert-leading-slash';
-import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
-import { removeLeadingSlash } from '../../utils/remove-leading-slash';
-import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 
 const activeColor = css`
   color: ${palette.gray.dark3};
@@ -42,41 +37,39 @@ const linkStyling = LeafyCss`
   }
 `;
 
-const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
-  const { parentPaths } = useSnootyMetadata();
+const BreadcrumbContainer = ({ breadcrumbs }) => {
+  // const { parentPaths } = useSnootyMetadata();
 
-  //get intermediate breadcrumbs and property Url
-  const queriedCrumbs = useBreadcrumbs();
-  const propertyUrl = assertTrailingSlash(queriedCrumbs?.propertyUrl);
-  const intermediateCrumbs = React.useMemo(
-    () =>
-      queriedCrumbs?.breadcrumbs
-        ? queriedCrumbs.breadcrumbs.map((crumb) => {
-            return { ...crumb, url: `http://www.mongodb.com${assertLeadingSlash(crumb.url)}` };
-          })
-        : [],
-    [queriedCrumbs]
-  );
+  // //get intermediate breadcrumbs and property Url
+  // const queriedCrumbs = useBreadcrumbs();
+  // const propertyUrl = assertTrailingSlash(queriedCrumbs?.propertyUrl);
+  // const intermediateCrumbs = React.useMemo(
+  //   () =>
+  //     queriedCrumbs?.breadcrumbs
+  //       ? queriedCrumbs.breadcrumbs.map((crumb) => {
+  //           return { ...crumb, url: `http://www.mongodb.com${assertLeadingSlash(crumb.url)}` };
+  //         })
+  //       : [],
+  //   [queriedCrumbs]
+  // );
 
-  propertyCrumb.url = propertyUrl;
+  // propertyCrumb.url = propertyUrl;
 
-  //get direct parents of the current page from parentPaths
-  //add respective url to each direct parent crumb
-  const parents = React.useMemo(
-    () =>
-      parentPaths[slug]
-        ? parentPaths[slug].map((crumb) => {
-            return { ...crumb, url: propertyUrl + removeLeadingSlash(crumb.path) };
-          })
-        : [],
-    [parentPaths, slug, propertyUrl]
-  );
-  const breadcrumbs = React.useMemo(
-    () => [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents],
-    [homeCrumb, intermediateCrumbs, propertyCrumb, parents]
-  );
-
-  console.log(breadcrumbs);
+  // //get direct parents of the current page from parentPaths
+  // //add respective url to each direct parent crumb
+  // const parents = React.useMemo(
+  //   () =>
+  //     parentPaths[slug]
+  //       ? parentPaths[slug].map((crumb) => {
+  //           return { ...crumb, url: propertyUrl + removeLeadingSlash(crumb.path) };
+  //         })
+  //       : [],
+  //   [parentPaths, slug, propertyUrl]
+  // );
+  // const breadcrumbs = React.useMemo(
+  //   () => [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents],
+  //   [homeCrumb, intermediateCrumbs, propertyCrumb, parents]
+  // );
 
   return (
     <>
@@ -111,8 +104,7 @@ const crumbObjectShape = {
 };
 
 BreadcrumbContainer.propTypes = {
-  homeCrumb: PropTypes.shape(crumbObjectShape).isRequired,
-  propertyCrumb: PropTypes.shape(crumbObjectShape).isRequired,
+  breadcrumbs: PropTypes.shape(crumbObjectShape).isRequired,
 };
 
 export default BreadcrumbContainer;
