@@ -8,7 +8,7 @@ import useSnootyMetadata from '../../utils/use-snooty-metadata';
 const getBreadcrumbList = (breadcrumbs, siteUrl) =>
   breadcrumbs.map(({ url, title }, index) => ({
     '@type': 'ListItem',
-    position: index + 2,
+    position: index + 1,
     name: title,
     item: assertTrailingSlash(url),
   }));
@@ -17,14 +17,13 @@ const BreadcrumbSchema = ({ slug }) => {
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
 
   const queriedCrumbs = useBreadcrumbs();
-  const breadcrumbs = getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths });
-
-  console.log(breadcrumbs);
+  const breadcrumbs = React.useMemo(
+    () => getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths }),
+    [siteTitle, slug, queriedCrumbs, parentPaths]
+  );
 
   const breadcrumbList = [...getBreadcrumbList([...breadcrumbs])];
 
-  console.log(siteTitle);
-  console.log(breadcrumbList);
   return (
     <>
       {Array.isArray(breadcrumbs) && (
