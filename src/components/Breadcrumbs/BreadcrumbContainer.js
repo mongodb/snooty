@@ -10,6 +10,8 @@ import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
+import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
+import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 
 const activeColor = css`
@@ -45,7 +47,7 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
 
   //get intermediate breadcrumbs and property Url
   const queriedCrumbs = useBreadcrumbs();
-  const propertyUrl = queriedCrumbs?.propertyUrl;
+  const propertyUrl = assertTrailingSlash(queriedCrumbs?.propertyUrl);
   const intermediateCrumbs = React.useMemo(
     () =>
       queriedCrumbs?.breadcrumbs
@@ -64,11 +66,12 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
     () =>
       parentPaths[slug]
         ? parentPaths[slug].map((crumb) => {
-            return { ...crumb, url: propertyUrl + crumb.path };
+            return { ...crumb, url: propertyUrl + removeLeadingSlash(crumb.path) };
           })
         : [],
     [parentPaths, slug, propertyUrl]
   );
+  console.log(parents);
 
   const breadcrumbs = React.useMemo(
     () => [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents],
