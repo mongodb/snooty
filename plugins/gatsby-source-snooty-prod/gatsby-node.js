@@ -20,7 +20,6 @@ const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/i
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
-const { createProjectParentNodes } = require('../utils/project-parents.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
 
 const assets = new Map();
@@ -194,8 +193,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
-
-  await createProjectParentNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
 
   const umbrellaProduct = await db.realmInterface.getMetadata(
     {
@@ -421,9 +418,5 @@ exports.createSchemaCustomization = ({ actions }) => {
       propertyUrl: String
     }
 
-    type ProjectParent implements Node @dontInfer {
-      parents: JSON
-      project: String!
-    }
   `);
 };

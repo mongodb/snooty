@@ -56,10 +56,6 @@ export const fetchBreadcrumbs = async (database, project) => {
   return callAuthenticatedFunction('fetchBreadcrumbs', database, project);
 };
 
-export const fetchProjectParents = async (database, project) => {
-  return callAuthenticatedFunction('fetchProjectParents', database, project);
-};
-
 export const fetchSearchPropertyMapping = async (snootyEnv) => {
   return callAuthenticatedFunction('fetchSearchPropertyMapping', snootyEnv);
 };

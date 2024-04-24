@@ -59,10 +59,6 @@ class RealmInterface {
   async fetchBreadcrumbs(database, project) {
     return this.realmClient.callFunction('fetchBreadcrumbs', database, project);
   }
-
-  async fetchProjectParents(database, project) {
-    return this.realmClient.callFunction('fetchProjectParents', database, project);
-  }
 }
 
 class ManifestDocumentDatabase {
@@ -129,10 +125,6 @@ class ManifestDocumentDatabase {
   async fetchBreadcrumbs(database, project) {
     return this.realmInterface.fetchBreadcrumbs(database, project);
   }
-
-  async fetchProjectParents(database, project) {
-    return this.realmInterface.fetchProjectParents(database, project);
-  }
 }
 
 class RealmDocumentDatabase {
@@ -181,10 +173,6 @@ class RealmDocumentDatabase {
 
   async fetchBreadcrumbs(database, project) {
     return this.realmInterface.fetchBreadcrumbs(database, project);
-  }
-
-  async fetchProjectParents(database, project) {
-    return this.realmInterface.fetchProjectParents(database, project);
   }
 }
 
