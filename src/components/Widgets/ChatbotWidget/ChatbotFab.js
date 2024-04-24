@@ -1,7 +1,6 @@
 import { lazy, Fragment } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@leafygreen-ui/emotion';
-import { SuspenseHelper } from '../../SuspenseHelper';
 
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { DEFAULT_MAX_INPUT, defaultSuggestedPrompts } from '../../ChatbotUi';
