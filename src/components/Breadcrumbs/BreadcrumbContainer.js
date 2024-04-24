@@ -44,10 +44,16 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
 
   //get intermediate breadcrumbs and property Url
   const queriedCrumbs = useBreadcrumbs();
-  const propertyUrl = queriedCrumbs.propertyUrl;
-  const intermediateCrumbs = queriedCrumbs.breadcrumbs.map((crumb) => {
-    return { ...crumb, url: `http://www.mongodb.com${crumb.url}` };
-  });
+  const propertyUrl = queriedCrumbs?.propertyUrl;
+  const intermediateCrumbs = React.useMemo(
+    () =>
+      queriedCrumbs?.breadcrumbs
+        ? queriedCrumbs.breadcrumbs.map((crumb) => {
+            return { ...crumb, url: `http://www.mongodb.com${crumb.url}` };
+          })
+        : [],
+    [queriedCrumbs]
+  );
 
   propertyCrumb.url = propertyUrl;
 
