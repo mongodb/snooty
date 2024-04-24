@@ -19,6 +19,7 @@ const BreadcrumbSchema = ({ slug }) => {
   const { siteUrl } = useSiteMetadata();
   const { project, parentPaths, title: siteTitle } = useSnootyMetadata();
   const breadcrumbs = parentPaths[slug] ?? [];
+  console.log(breadcrumbs);
   const breadcrumbList = [
     {
       '@type': 'ListItem',
@@ -31,6 +32,7 @@ const BreadcrumbSchema = ({ slug }) => {
       siteUrl
     ),
   ];
+
   return (
     <>
       {Array.isArray(breadcrumbs) && (

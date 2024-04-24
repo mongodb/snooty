@@ -71,12 +71,12 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
         : [],
     [parentPaths, slug, propertyUrl]
   );
-  console.log(parents);
-
   const breadcrumbs = React.useMemo(
     () => [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents],
     [homeCrumb, intermediateCrumbs, propertyCrumb, parents]
   );
+
+  console.log(breadcrumbs);
 
   return (
     <>
