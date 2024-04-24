@@ -252,7 +252,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb and 
 
 <a
     class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs/atlas/device-sdks"
+    href="https://www.mongodb.com/docs/atlas/device-sdks/"
     target="_self"
   >
     <span>
@@ -342,7 +342,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb and 
 
 <a
     class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs/atlas/device-sdkssdk/cpp"
+    href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp"
     target="_self"
   >
     <span>
@@ -432,7 +432,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb and 
 
 <a
     class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs/atlas/device-sdkssdk/cpp/application-services"
+    href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/application-services"
     target="_self"
   >
     <span>
