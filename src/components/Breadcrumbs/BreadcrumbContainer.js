@@ -9,6 +9,7 @@ import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 
 const activeColor = css`
@@ -49,7 +50,7 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
     () =>
       queriedCrumbs?.breadcrumbs
         ? queriedCrumbs.breadcrumbs.map((crumb) => {
-            return { ...crumb, url: `http://www.mongodb.com${crumb.url}` };
+            return { ...crumb, url: `http://www.mongodb.com${assertLeadingSlash(crumb.url)}` };
           })
         : [],
     [queriedCrumbs]
