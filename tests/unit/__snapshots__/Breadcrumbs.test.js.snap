@@ -117,7 +117,7 @@ exports[`renders correctly with pageTitle 1`] = `
     </span>
     <a
       class="lg-ui-0001 emotion-1"
-      href="http://www.mongodb.com/docs/atlas"
+      href="http://www.mongodb.com/docs/atlas/"
       target="_self"
     >
       <span>
@@ -145,7 +145,7 @@ exports[`renders correctly with pageTitle 1`] = `
     </span>
     <a
       class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp"
+      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/"
       target="_self"
     >
       <span>
@@ -159,7 +159,7 @@ exports[`renders correctly with pageTitle 1`] = `
     </span>
     <a
       class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/application-services"
+      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/application-services/"
       target="_self"
     >
       <span>
@@ -287,7 +287,7 @@ exports[`renders correctly with siteTitle 1`] = `
     </span>
     <a
       class="lg-ui-0001 emotion-1"
-      href="http://www.mongodb.com/docs/atlas"
+      href="http://www.mongodb.com/docs/atlas/"
       target="_self"
     >
       <span>
@@ -315,7 +315,7 @@ exports[`renders correctly with siteTitle 1`] = `
     </span>
     <a
       class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp"
+      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/"
       target="_self"
     >
       <span>
@@ -329,7 +329,7 @@ exports[`renders correctly with siteTitle 1`] = `
     </span>
     <a
       class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/application-services"
+      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/application-services/"
       target="_self"
     >
       <span>
