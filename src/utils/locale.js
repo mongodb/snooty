@@ -6,10 +6,10 @@ import { removeLeadingSlash } from './remove-leading-slash';
 
 // Update this as more languages are introduced
 export const AVAILABLE_LANGUAGES = [
-  { language: 'English', code: 'en-us' },
-  { language: '简体中文', code: 'zh-cn' },
-  { language: '한국어', code: 'ko-kr' },
-  { language: 'Português', code: 'pt-br' },
+  { language: 'English', code: 'en-us', langCode: 'en' },
+  { language: '简体中文', code: 'zh-cn', langCode: 'zh' },
+  { language: '한국어', code: 'ko-kr', langCode: 'ko' },
+  { language: 'Português', code: 'pt-br', langCode: 'pt' },
 ];
 
 const validateCode = (potentialCode) => !!AVAILABLE_LANGUAGES.find(({ code }) => potentialCode === code);

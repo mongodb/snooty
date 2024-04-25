@@ -23,6 +23,7 @@ import DocsLandingSD from './StructuredData/DocsLandingSD';
 import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 import { InstruqtProvider } from './Instruqt/instruqt-context';
 import { SuspenseHelper } from './SuspenseHelper';
+import { useLocaleRedirect } from '../hooks/use-locale-redirect';
 
 // lazy load the unified footer to improve page load speed
 const LazyFooter = lazy(() => import('./Footer'));
@@ -172,6 +173,8 @@ export const Head = ({ pageContext }) => {
   // Retrieves the canonical URL based on certain situations
   // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
   const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
+
+  useLocaleRedirect(slug);
 
   return (
     <>

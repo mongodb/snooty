@@ -3,14 +3,19 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { isBrowser } from '../utils/is-browser';
 import { AVAILABLE_LANGUAGES, getCurrLocale, getLocaleMapping } from '../utils/locale';
+import { useCookies } from 'react-cookie';
+
+const COOKIE_LOCALE_KEY = 'avoid_en_redirect';
 
 const Footer = ({ slug }) => {
   const location = useLocation();
+  const [_cookies, setCookie] = useCookies([COOKIE_LOCALE_KEY]);
 
   const onSelectLocale = (locale) => {
     const localeHrefMap = getLocaleMapping(location.origin, slug);
 
     if (isBrowser) {
+      setCookie(COOKIE_LOCALE_KEY, 'true')
       window.location.href = localeHrefMap[locale];
     }
   };
