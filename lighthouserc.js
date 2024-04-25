@@ -1,4 +1,4 @@
-const urlsToRunPerProject = {
+export const urlsToRunPerProject = {
   docs: [
     `http://localhost:9000/docs/runner/master/`,
     `http://localhost:9000/docs/runner/master/changeStreams/`,

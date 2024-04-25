@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - "main"
+      - "DOP-4505-lh-desktop-mobile"
 name: Run and Upload Lighthouse Report
 jobs: 
   staging:
@@ -38,4 +39,7 @@ jobs:
           LHCI_BUILD_CONTEXT__CURRENT_BRANCH: ${{ matrix.project }}
         run: |
           npm install -g @lhci/cli
-          lhci autorun
+          lhci collect --additive --config=.mobile-lighthouserc.js
+          lhci collect --additive --config=.desktop-lighthouserc.js
+          lhci assert
+          lhci upload
