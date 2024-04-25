@@ -3,7 +3,6 @@ const { siteMetadata } = require('../../src/utils/site-metadata');
 const breadcrumbType = `Breadcrumb`;
 
 const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createContentDigest }) => {
-  console.log('HELLOOOO');
   const { database, project } = siteMetadata;
   let breadcrumbData;
   try {
