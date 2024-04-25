@@ -98,6 +98,61 @@ exports[`renders correctly with pageTitle 1`] = `
   color: #1C2D38;
 }
 
+.emotion-7 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: #016BF8;
+}
+
+.emotion-7>code {
+  color: #016BF8;
+}
+
+.emotion-7:focus,
+.emotion-7:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-7:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-7:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-8 {
+  font-size: 13px;
+}
+
+.emotion-8:last-of-type {
+  color: #1C2D38;
+}
+
+.emotion-8:hover,
+.emotion-8:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-8:hover:not(:last-of-type),
+.emotion-8:focus:not(:last-of-type) {
+  color: #1C2D38;
+}
+
 <p
     class="emotion-0"
   >
@@ -130,13 +185,10 @@ exports[`renders correctly with pageTitle 1`] = `
        → 
     </span>
     <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/"
-      target="_self"
+      class="emotion-7 emotion-8"
+      href="/sdk/cpp/app-services/call-a-function/"
     >
-      <span>
-        Call a Function - C++ SDK
-      </span>
+      Call a Function - C++ SDK
     </a>
     <span
       class="emotion-2 emotion-3"
@@ -268,6 +320,61 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #1C2D38;
 }
 
+.emotion-7 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: #016BF8;
+}
+
+.emotion-7>code {
+  color: #016BF8;
+}
+
+.emotion-7:focus,
+.emotion-7:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-7:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-7:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-8 {
+  font-size: 13px;
+}
+
+.emotion-8:last-of-type {
+  color: #1C2D38;
+}
+
+.emotion-8:hover,
+.emotion-8:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-8:hover:not(:last-of-type),
+.emotion-8:focus:not(:last-of-type) {
+  color: #1C2D38;
+}
+
 <p
     class="emotion-0"
   >
@@ -300,13 +407,10 @@ exports[`renders correctly with siteTitle 1`] = `
        → 
     </span>
     <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/"
-      target="_self"
+      class="emotion-7 emotion-8"
+      href="/"
     >
-      <span>
-        Call a Function - C++ SDK
-      </span>
+      Call a Function - C++ SDK
     </a>
     <span
       class="emotion-2 emotion-3"

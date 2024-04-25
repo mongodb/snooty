@@ -58,7 +58,10 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
     [queriedCrumbs]
   );
 
-  propertyCrumb.url = propertyUrl;
+  console.log(propertyCrumb);
+  if (propertyCrumb) {
+    propertyCrumb.url = propertyUrl;
+  }
 
   //get direct parents of the current page from parentPaths
   //add respective url to each direct parent crumb
@@ -73,7 +76,7 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
   );
 
   const breadcrumbs = React.useMemo(
-    () => [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents],
+    () => [homeCrumb, ...intermediateCrumbs, ...propertyCrumb, ...parents],
     [homeCrumb, intermediateCrumbs, propertyCrumb, parents]
   );
 

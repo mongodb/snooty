@@ -1,5 +1,177 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`BreadcrumbContainer renders correctly as a docs property homepage 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  font-size: 13px;
+}
+
+.emotion-0:hover,
+.emotion-0:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-0:last-of-type {
+  color: #1C2D38;
+}
+
+.emotion-0:hover,
+.emotion-0:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-0:hover:not(:last-of-type),
+.emotion-0:focus:not(:last-of-type) {
+  color: #1C2D38;
+}
+
+<a
+    class="lg-ui-0001 emotion-0"
+    href="https://www.mongodb.com/docs"
+    target="_self"
+  >
+    <span>
+      Docs Home
+    </span>
+  </a>
+  .emotion-0 {
+  cursor: default;
+}
+
+.emotion-0:last-of-type {
+  color: #1C2D38;
+}
+
+<span
+    class="emotion-0 emotion-1"
+  >
+     → 
+  </span>
+  .emotion-0 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  font-size: 13px;
+}
+
+.emotion-0:hover,
+.emotion-0:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-0:focus {
+  outline: none;
+}
+
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-0:last-of-type {
+  color: #1C2D38;
+}
+
+.emotion-0:hover,
+.emotion-0:focus {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-0:hover:not(:last-of-type),
+.emotion-0:focus:not(:last-of-type) {
+  color: #1C2D38;
+}
+
+<a
+    class="lg-ui-0001 emotion-0"
+    href="http://www.mongodb.com/docs/atlas/"
+    target="_self"
+  >
+    <span>
+      MongoDB Atlas
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
 exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb and with project parents 1`] = `
 <DocumentFragment>
   .emotion-0 {
@@ -183,40 +355,26 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb and 
      → 
   </span>
   .emotion-0 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  cursor: pointer;
+  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
+  line-height: 13px;
   color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0:focus,
+.emotion-0:hover {
+  text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
   text-underline-offset: 4px;
@@ -224,6 +382,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb and 
 }
 
 .emotion-0:focus {
+  text-decoration-color: #016BF8;
   outline: none;
 }
 
@@ -231,33 +390,30 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb and 
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-0:focus {
-  text-decoration-color: #016BF8;
+.emotion-1 {
+  font-size: 13px;
 }
 
-.emotion-0:last-of-type {
+.emotion-1:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
+.emotion-1:hover,
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
+.emotion-1:hover:not(:last-of-type),
+.emotion-1:focus:not(:last-of-type) {
   color: #1C2D38;
 }
 
 <a
-    class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs/atlas/device-sdks/"
-    target="_self"
+    class="emotion-0 emotion-1"
+    href="/"
   >
-    <span>
-      MongoDB Atlas Device SDKs
-    </span>
+    MongoDB Atlas Device SDKs
   </a>
   .emotion-0 {
   cursor: default;
@@ -625,40 +781,26 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, has
      → 
   </span>
   .emotion-0 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  cursor: pointer;
+  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
+  line-height: 13px;
   color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0:focus,
+.emotion-0:hover {
+  text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
   text-underline-offset: 4px;
@@ -666,6 +808,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, has
 }
 
 .emotion-0:focus {
+  text-decoration-color: #016BF8;
   outline: none;
 }
 
@@ -673,295 +816,30 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, has
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-0:focus {
-  text-decoration-color: #016BF8;
+.emotion-1 {
+  font-size: 13px;
 }
 
-.emotion-0:last-of-type {
+.emotion-1:last-of-type {
   color: #1C2D38;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
+.emotion-1:hover,
+.emotion-1:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
+.emotion-1:hover:not(:last-of-type),
+.emotion-1:focus:not(:last-of-type) {
   color: #1C2D38;
 }
 
 <a
-    class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs/atlas/device-sdks/"
-    target="_self"
-  >
-    <span>
-      MongoDB Atlas Device SDKs
-    </span>
-  </a>
-</DocumentFragment>
-`;
-
-exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb. No slug or project parents 1`] = `
-<DocumentFragment>
-  .emotion-0 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
-  color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-0:focus {
-  outline: none;
-}
-
-.emotion-0:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-0:focus {
-  text-decoration-color: #016BF8;
-}
-
-.emotion-0:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-<a
-    class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs"
-    target="_self"
-  >
-    <span>
-      Docs Home
-    </span>
-  </a>
-  .emotion-0 {
-  cursor: default;
-}
-
-.emotion-0:last-of-type {
-  color: #1C2D38;
-}
-
-<span
     class="emotion-0 emotion-1"
+    href="/"
   >
-     → 
-  </span>
-  .emotion-0 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
-  color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-0:focus {
-  outline: none;
-}
-
-.emotion-0:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-0:focus {
-  text-decoration-color: #016BF8;
-}
-
-.emotion-0:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-<a
-    class="lg-ui-0001 emotion-0"
-    href="http://www.mongodb.com/docs/atlas/"
-    target="_self"
-  >
-    <span>
-      MongoDB Atlas
-    </span>
-  </a>
-  .emotion-0 {
-  cursor: default;
-}
-
-.emotion-0:last-of-type {
-  color: #1C2D38;
-}
-
-<span
-    class="emotion-0 emotion-1"
-  >
-     → 
-  </span>
-  .emotion-0 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
-  color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-0:focus {
-  outline: none;
-}
-
-.emotion-0:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-0:focus {
-  text-decoration-color: #016BF8;
-}
-
-.emotion-0:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-0:hover:not(:last-of-type),
-.emotion-0:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-<a
-    class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs/atlas/device-sdks/"
-    target="_self"
-  >
-    <span>
-      MongoDB Atlas Device SDKs
-    </span>
+    MongoDB Atlas Device SDKs
   </a>
 </DocumentFragment>
 `;

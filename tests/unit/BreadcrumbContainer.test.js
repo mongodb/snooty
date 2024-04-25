@@ -49,10 +49,12 @@ describe('BreadcrumbContainer', () => {
   };
 
   //property breadcrumb
-  const mockPropertyCrumb = {
-    title: 'MongoDB Atlas Device SDKs',
-    url: '/',
-  };
+  const mockPropertyCrumb = [
+    {
+      title: 'MongoDB Atlas Device SDKs',
+      url: '/',
+    },
+  ];
 
   it('renders correctly with intermediate breadcrumb and with project parents', () => {
     useStaticQuery.mockImplementation(() => ({
@@ -76,8 +78,8 @@ describe('BreadcrumbContainer', () => {
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
-  it('renders correctly with intermediate breadcrumb. No slug or project parents', () => {
-    const tree = mountBreadcrumbContainer(mockHomeCrumb, mockPropertyCrumb, '');
+  it('renders correctly as a docs property homepage', () => {
+    const tree = mountBreadcrumbContainer(mockHomeCrumb, [], '');
     expect(tree.asFragment()).toMatchSnapshot();
   });
 });
