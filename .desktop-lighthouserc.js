@@ -20,7 +20,7 @@ module.exports = {
       // "staticDistDir": "./public",
       url: [
         // "http://localhost/company/about/index.html?desktop",
-        `${urlsToRunPerProject[process.env.GATSBY_SITE]}?desktop`,
+        `${urlsToRunPerProject[process.env.GATSBY_SITE]}`,
       ],
     },
   },

@@ -19,7 +19,7 @@ module.exports = {
       // "staticDistDir": "./public",
       url: [
         // "http://localhost/company/about/index.html?mobile",
-        `${urlsToRunPerProject[process.env.GATSBY_SITE]}?mobile`,
+        `${urlsToRunPerProject[process.env.GATSBY_SITE]}`,
       ],
     },
   },
