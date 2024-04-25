@@ -39,7 +39,5 @@ jobs:
           LHCI_BUILD_CONTEXT__CURRENT_BRANCH: ${{ matrix.project }}
         run: |
           npm install -g @lhci/cli
-          lhci collect --additive --config=.mobile-lighthouserc.js
-          lhci collect --additive --config=.desktop-lighthouserc.js
-          lhci assert
-          lhci upload
+          lhci autorun --additive --config=.mobile-lighthouserc.js
+          lhci autorun --additive --config=.desktop-lighthouserc.js
