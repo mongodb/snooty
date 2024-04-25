@@ -39,19 +39,6 @@ useStaticQuery.mockImplementation(() => ({
 }));
 
 it('renders correctly with siteTitle', () => {
-  const tree = render(
-    <Breadcrumbs siteTitle="Call a Function - C++ SDK" slug="sdk/cpp/app-services/call-a-function" />
-  );
-  expect(tree.asFragment()).toMatchSnapshot();
-});
-
-it('renders correctly with pageTitle', () => {
-  const tree = render(
-    <Breadcrumbs
-      pageTitle={'Call a Function - C++ SDK'}
-      siteTitle={'MongoDB Documentation'}
-      slug={'sdk/cpp/app-services/call-a-function'}
-    />
-  );
+  const tree = render(<Breadcrumbs siteTitle={'Atlas Device SDKs'} slug={'sdk/cpp/app-services/call-a-function'} />);
   expect(tree.asFragment()).toMatchSnapshot();
 });

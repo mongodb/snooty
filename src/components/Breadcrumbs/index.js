@@ -14,20 +14,18 @@ const breadcrumbBodyStyle = css`
   }
 `;
 
-const Breadcrumbs = ({ homeUrl = null, pageTitle = null, siteTitle, slug }) => {
+const Breadcrumbs = ({ siteTitle, slug }) => {
   const homeCrumb = {
     title: 'Docs Home',
-    url: homeUrl || baseUrl(),
+    url: baseUrl(),
   };
 
-  console.log(slug);
-  // If a pageTitle prop is passed, use that as the property breadcrumb
   const propertyCrumb =
     slug !== '/'
       ? [
           {
-            title: pageTitle || siteTitle,
-            url: pageTitle ? slug : '/',
+            title: siteTitle,
+            url: '/',
           },
         ]
       : [];

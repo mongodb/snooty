@@ -58,7 +58,6 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
     [queriedCrumbs]
   );
 
-  console.log(propertyCrumb);
   if (propertyCrumb) {
     propertyCrumb.url = propertyUrl;
   }
