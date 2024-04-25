@@ -8,8 +8,7 @@ const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createConte
   try {
     breadcrumbData = await db.fetchBreadcrumbs(database, project);
   } catch (e) {
-    console.error('Error while fetching breadcrumb data from Atlas');
-    console.error(e);
+    console.error(`Error while fetching breadcrumb data from Atlas: ${e}`);
   }
   const [breadcrumbs, propertyUrl] = breadcrumbData
     ? [breadcrumbData.breadcrumbs, breadcrumbData.propertyUrl]
