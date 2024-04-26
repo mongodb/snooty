@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { useNavigationParents } from '../../hooks/use-navigation-parents';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import useScreenSize from '../../hooks/useScreenSize';
 import IndividualBreadcrumb from './IndividualBreadcrumb';
 import CollapsedBreadcrumbs from './CollapsedBreadcrumbs';
 
@@ -13,24 +14,33 @@ const StyledSlash = styled('span')`
   padding-right: 4px;
 `;
 
+const Flexbox = styled('span')`
+  display: flex;
+`;
+
 const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
   const { project } = useSnootyMetadata();
   const parents = useNavigationParents(project);
+
+  // On mobile, we collapse all of the breadcrumbs between the first and the last
+  const { isMobile } = useScreenSize();
+  const maxCrumbs = isMobile ? 3 : 5;
 
   // Our breadcrumbs representation is an array of crumbObjectShape || (array of crumbObjectShape)
   // The latter indicates a collapsed series of breadcrumbs.
   const breadcrumbs = React.useMemo(() => {
     const crumbs = [homeCrumb, ...parents, lastCrumb];
-    if (crumbs.length > 5) {
-      // A maximum of 5 breadcrumbs may be shown, so we collapse crumbs 1..N-4 into a single "…" crumb
-      const collapsedCrumbs = crumbs.splice(1, crumbs.length - 4, []);
+    if (crumbs.length > maxCrumbs) {
+      // A maximum of maxCrumbs breadcrumbs may be shown, so we collapse the first run of internal
+      // crumbs into a single "…" crumb
+      const collapsedCrumbs = crumbs.splice(1, crumbs.length - maxCrumbs + 1, []);
       crumbs[1] = collapsedCrumbs;
     }
     return crumbs;
-  }, [homeCrumb, parents, lastCrumb]);
+  }, [maxCrumbs, homeCrumb, parents, lastCrumb]);
 
   return (
-    <>
+    <Flexbox>
       {breadcrumbs.map((crumb, index) => {
         const isFirst = index === 0;
         return (
@@ -51,7 +61,7 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
           </React.Fragment>
         );
       })}
-    </>
+    </Flexbox>
   );
 };
 

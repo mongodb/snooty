@@ -23,6 +23,26 @@ exports[`renders correctly with pageTitle 1`] = `
 }
 
 .emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-3 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+}
+
+.emotion-3:first-child,
+.emotion-3:last-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+.emotion-4 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -53,8 +73,8 @@ exports[`renders correctly with pageTitle 1`] = `
   font-size: 13px;
 }
 
-.emotion-1:hover,
-.emotion-1:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -63,31 +83,31 @@ exports[`renders correctly with pageTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-1:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-1:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-1:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
 }
 
-.emotion-1:hover,
-.emotion-1:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-2 {
+.emotion-5 {
   cursor: default;
   padding-left: 4px;
   padding-right: 4px;
 }
 
-.emotion-4 {
+.emotion-8 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -101,12 +121,12 @@ exports[`renders correctly with pageTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-4>code {
+.emotion-8>code {
   color: #016BF8;
 }
 
-.emotion-4:focus,
-.emotion-4:hover {
+.emotion-8:focus,
+.emotion-8:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -114,21 +134,21 @@ exports[`renders correctly with pageTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-4:focus {
+.emotion-8:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-4:hover {
+.emotion-8:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-5 {
+.emotion-9 {
   font-size: 13px;
 }
 
-.emotion-5:hover,
-.emotion-5:focus {
+.emotion-9:hover,
+.emotion-9:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
@@ -136,26 +156,38 @@ exports[`renders correctly with pageTitle 1`] = `
 <p
     class="emotion-0"
   >
-    <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/"
-      target="_self"
-    >
-      <span>
-        Docs Home
-      </span>
-    </a>
     <span
-      class="emotion-2 emotion-3"
+      class="emotion-1 emotion-2"
     >
-       / 
+      <span
+        class="emotion-3"
+      >
+        <a
+          class="lg-ui-0001 emotion-4"
+          href="https://www.mongodb.com/docs/"
+          target="_self"
+        >
+          <span>
+            Docs Home
+          </span>
+        </a>
+      </span>
+      <span
+        class="emotion-5 emotion-6"
+      >
+         / 
+      </span>
+      <span
+        class="emotion-3"
+      >
+        <a
+          class="emotion-8 emotion-9"
+          href="/view-analyze/"
+        >
+          View & Analyze Data
+        </a>
+      </span>
     </span>
-    <a
-      class="emotion-4 emotion-5"
-      href="/view-analyze/"
-    >
-      View & Analyze Data
-    </a>
   </p>
 </DocumentFragment>
 `;
@@ -183,6 +215,26 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-3 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+}
+
+.emotion-3:first-child,
+.emotion-3:last-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+.emotion-4 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -213,8 +265,8 @@ exports[`renders correctly with siteTitle 1`] = `
   font-size: 13px;
 }
 
-.emotion-1:hover,
-.emotion-1:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -223,31 +275,31 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-1:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-1:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-1:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
 }
 
-.emotion-1:hover,
-.emotion-1:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-2 {
+.emotion-5 {
   cursor: default;
   padding-left: 4px;
   padding-right: 4px;
 }
 
-.emotion-4 {
+.emotion-8 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -261,12 +313,12 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-4>code {
+.emotion-8>code {
   color: #016BF8;
 }
 
-.emotion-4:focus,
-.emotion-4:hover {
+.emotion-8:focus,
+.emotion-8:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -274,21 +326,21 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-4:focus {
+.emotion-8:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-4:hover {
+.emotion-8:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-5 {
+.emotion-9 {
   font-size: 13px;
 }
 
-.emotion-5:hover,
-.emotion-5:focus {
+.emotion-9:hover,
+.emotion-9:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
@@ -296,26 +348,38 @@ exports[`renders correctly with siteTitle 1`] = `
 <p
     class="emotion-0"
   >
-    <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/"
-      target="_self"
-    >
-      <span>
-        Docs Home
-      </span>
-    </a>
     <span
-      class="emotion-2 emotion-3"
+      class="emotion-1 emotion-2"
     >
-       / 
+      <span
+        class="emotion-3"
+      >
+        <a
+          class="lg-ui-0001 emotion-4"
+          href="https://www.mongodb.com/docs/"
+          target="_self"
+        >
+          <span>
+            Docs Home
+          </span>
+        </a>
+      </span>
+      <span
+        class="emotion-5 emotion-6"
+      >
+         / 
+      </span>
+      <span
+        class="emotion-3"
+      >
+        <a
+          class="emotion-8 emotion-9"
+          href="/"
+        >
+          MongoDB Compass
+        </a>
+      </span>
     </span>
-    <a
-      class="emotion-4 emotion-5"
-      href="/"
-    >
-      MongoDB Compass
-    </a>
   </p>
 </DocumentFragment>
 `;

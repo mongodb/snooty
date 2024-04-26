@@ -3,6 +3,26 @@
 exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-2 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+}
+
+.emotion-2:first-child,
+.emotion-2:last-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+.emotion-3 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -33,8 +53,8 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   font-size: 13px;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
+.emotion-3:hover,
+.emotion-3:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -43,45 +63,31 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus {
+.emotion-3:focus {
   outline: none;
 }
 
-.emotion-0:hover {
+.emotion-3:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-0:focus {
+.emotion-3:focus {
   text-decoration-color: #016BF8;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
+.emotion-3:hover,
+.emotion-3:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-<a
-    class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs/"
-    target="_self"
-  >
-    <span>
-      Docs Home
-    </span>
-  </a>
-  .emotion-0 {
+.emotion-4 {
   cursor: default;
   padding-left: 4px;
   padding-right: 4px;
 }
 
-<span
-    class="emotion-0 emotion-1"
-  >
-     / 
-  </span>
-  .emotion-0 {
+.emotion-6 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -100,7 +106,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   width: 28px;
 }
 
-.emotion-0:before {
+.emotion-6:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -117,9 +123,9 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   transform: scale(0.8);
 }
 
-.emotion-0:active:before,
-.emotion-0:hover:before,
-.emotion-0:focus:before {
+.emotion-6:active:before,
+.emotion-6:hover:before,
+.emotion-6:focus:before {
   opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -127,29 +133,29 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   transform: scale(1);
 }
 
-.emotion-0:focus {
+.emotion-6:focus {
   outline: none;
 }
 
-.emotion-0:active,
-.emotion-0:hover {
+.emotion-6:active,
+.emotion-6:hover {
   color: #3D4F58;
 }
 
-.emotion-0:active:before,
-.emotion-0:hover:before {
+.emotion-6:active:before,
+.emotion-6:hover:before {
   background-color: #E7EEEC;
 }
 
-.emotion-0:focus {
+.emotion-6:focus {
   color: #1A567E;
 }
 
-.emotion-0:focus:before {
+.emotion-6:focus:before {
   background-color: #C5E4F2;
 }
 
-.emotion-1 {
+.emotion-7 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -169,215 +175,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   justify-content: center;
 }
 
-<button
-    aria-disabled="false"
-    aria-expanded="false"
-    aria-haspopup="true"
-    aria-label="Show all breadcrumbs"
-    class="emotion-0"
-    tabindex="0"
-  >
-    <div
-      class="emotion-1"
-    >
-      <svg
-        aria-label="Ellipsis Icon"
-        class=""
-        fill="none"
-        height="16"
-        role="img"
-        viewBox="0 0 16 16"
-        width="16"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          clip-rule="evenodd"
-          d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
-          fill="currentColor"
-          fill-rule="evenodd"
-        />
-      </svg>
-    </div>
-  </button>
-  .emotion-0 {
-  cursor: default;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-<span
-    class="emotion-0 emotion-1"
-  >
-     / 
-  </span>
-  .emotion-0 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
-  color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-0:focus {
-  outline: none;
-}
-
-.emotion-0:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-0:focus {
-  text-decoration-color: #016BF8;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-<a
-    class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs/"
-    target="_self"
-  >
-    <span>
-      Crumb 4
-    </span>
-  </a>
-  .emotion-0 {
-  cursor: default;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-<span
-    class="emotion-0 emotion-1"
-  >
-     / 
-  </span>
-  .emotion-0 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
-  color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  position: relative;
-  font-size: 13px;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-0:focus {
-  outline: none;
-}
-
-.emotion-0:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-0:focus {
-  text-decoration-color: #016BF8;
-}
-
-.emotion-0:hover,
-.emotion-0:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-1 {
-  display: none;
-}
-
-<a
-    aria-describedby="tooltip-undefined"
-    class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs/view-analyze"
-    target="_self"
-  >
-    <span>
-      View & Analyze: An O…
-      <span
-        class="emotion-1"
-      />
-    </span>
-  </a>
-  .emotion-0 {
-  cursor: default;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-<span
-    class="emotion-0 emotion-1"
-  >
-     / 
-  </span>
-  .emotion-0 {
+.emotion-19 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -391,12 +189,12 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   color: #016BF8;
 }
 
-.emotion-0>code {
+.emotion-19>code {
   color: #016BF8;
 }
 
-.emotion-0:focus,
-.emotion-0:hover {
+.emotion-19:focus,
+.emotion-19:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -404,37 +202,154 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus {
+.emotion-19:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-0:hover {
+.emotion-19:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-1 {
+.emotion-20 {
   font-size: 13px;
 }
 
-.emotion-1:hover,
-.emotion-1:focus {
+.emotion-20:hover,
+.emotion-20:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-<a
+<span
     class="emotion-0 emotion-1"
-    href="/documents/view/"
   >
-    MongoDB Compass
-  </a>
+    <span
+      class="emotion-2"
+    >
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://www.mongodb.com/docs/"
+        target="_self"
+      >
+        <span>
+          Docs Home
+        </span>
+      </a>
+    </span>
+    <span
+      class="emotion-4 emotion-5"
+    >
+       / 
+    </span>
+    <button
+      aria-disabled="false"
+      aria-expanded="false"
+      aria-haspopup="true"
+      aria-label="Show all breadcrumbs"
+      class="emotion-6"
+      tabindex="0"
+    >
+      <div
+        class="emotion-7"
+      >
+        <svg
+          aria-label="Ellipsis Icon"
+          class=""
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </div>
+    </button>
+    <span
+      class="emotion-4 emotion-5"
+    >
+       / 
+    </span>
+    <span
+      class="emotion-2"
+    >
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://www.mongodb.com/docs/"
+        target="_self"
+      >
+        <span>
+          Crumb 4
+        </span>
+      </a>
+    </span>
+    <span
+      class="emotion-4 emotion-5"
+    >
+       / 
+    </span>
+    <span
+      class="emotion-2"
+    >
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://www.mongodb.com/docs/view-analyze"
+        target="_self"
+      >
+        <span>
+          View & Analyze: An Outrageously Long Title
+        </span>
+      </a>
+    </span>
+    <span
+      class="emotion-4 emotion-5"
+    >
+       / 
+    </span>
+    <span
+      class="emotion-2"
+    >
+      <a
+        class="emotion-19 emotion-20"
+        href="/documents/view/"
+      >
+        MongoDB Compass
+      </a>
+    </span>
+  </span>
 </DocumentFragment>
 `;
 
 exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-2 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+}
+
+.emotion-2:first-child,
+.emotion-2:last-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+.emotion-3 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -465,8 +380,8 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   font-size: 13px;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
+.emotion-3:hover,
+.emotion-3:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -475,45 +390,31 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus {
+.emotion-3:focus {
   outline: none;
 }
 
-.emotion-0:hover {
+.emotion-3:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-0:focus {
+.emotion-3:focus {
   text-decoration-color: #016BF8;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
+.emotion-3:hover,
+.emotion-3:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-<a
-    class="lg-ui-0001 emotion-0"
-    href="https://www.mongodb.com/docs/"
-    target="_self"
-  >
-    <span>
-      Docs Home
-    </span>
-  </a>
-  .emotion-0 {
+.emotion-4 {
   cursor: default;
   padding-left: 4px;
   padding-right: 4px;
 }
 
-<span
-    class="emotion-0 emotion-1"
-  >
-     / 
-  </span>
-  .emotion-0 {
+.emotion-7 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -527,12 +428,12 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   color: #016BF8;
 }
 
-.emotion-0>code {
+.emotion-7>code {
   color: #016BF8;
 }
 
-.emotion-0:focus,
-.emotion-0:hover {
+.emotion-7:focus,
+.emotion-7:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -540,30 +441,56 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus {
+.emotion-7:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-0:hover {
+.emotion-7:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-1 {
+.emotion-8 {
   font-size: 13px;
 }
 
-.emotion-1:hover,
-.emotion-1:focus {
+.emotion-8:hover,
+.emotion-8:focus {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-<a
+<span
     class="emotion-0 emotion-1"
-    href="/view-analyze/"
   >
-    View & Analyze Data
-  </a>
+    <span
+      class="emotion-2"
+    >
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://www.mongodb.com/docs/"
+        target="_self"
+      >
+        <span>
+          Docs Home
+        </span>
+      </a>
+    </span>
+    <span
+      class="emotion-4 emotion-5"
+    >
+       / 
+    </span>
+    <span
+      class="emotion-2"
+    >
+      <a
+        class="emotion-7 emotion-8"
+        href="/view-analyze/"
+      >
+        View & Analyze Data
+      </a>
+    </span>
+  </span>
 </DocumentFragment>
 `;

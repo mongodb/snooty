@@ -6,22 +6,6 @@ import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
 
-function nodesToString(titleNodes) {
-  if (typeof titleNodes === 'string') {
-    return titleNodes;
-  }
-
-  return titleNodes
-    .map((node) => {
-      if (node.type === 'text') {
-        return node.value;
-      }
-
-      return nodesToString(node.children);
-    })
-    .join('');
-}
-
 const linkStyling = LeafyCss`
   font-size: ${theme.fontSize.small};
 
@@ -31,35 +15,58 @@ const linkStyling = LeafyCss`
   }
 `;
 
-// This should be graphemes using the Intl.Segmenter API, but browser support is too new
-// at time of writing. For now, this is in code points. Which is wrong. But fast and easy.
-const MAX_CRUMB_LENGTH = 21;
+const linkWrapperLayoutStyling = LeafyCss`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
 
-const IndividualBreadcrumb = ({ crumb, onClick }) => {
-  let titleString = React.useMemo(() => nodesToString(crumb.title), [crumb]);
-
-  let maybeTruncatedTitle = titleString;
-  let truncated = false;
-
-  if (maybeTruncatedTitle.length > MAX_CRUMB_LENGTH) {
-    maybeTruncatedTitle = maybeTruncatedTitle.substr(0, MAX_CRUMB_LENGTH - 1) + '…';
-    truncated = true;
+  :first-child, :last-child {
+    min-width: max-content;
   }
+`;
 
-  let result = (
-    <Link className={cx(linkStyling)} to={crumb.url} onClick={onClick}>
-      {formatText(maybeTruncatedTitle)}
-    </Link>
+// On resize events, recheck if our truncation status
+function subscribeToResizeEvents(callback) {
+  window.addEventListener('resize', callback);
+  return () => {
+    window.removeEventListener('resize', callback);
+  };
+}
+
+// For server-side generation, assume no truncation
+function getServerSnapshot() {
+  return false;
+}
+
+const useIsTruncated = (ref) => {
+  const isTruncated = React.useSyncExternalStore(
+    subscribeToResizeEvents,
+    () => (ref.current?.scrollWidth ?? 0) > (ref.current?.clientWidth ?? 0),
+    getServerSnapshot
   );
 
-  if (truncated) {
+  return isTruncated;
+};
+
+const IndividualBreadcrumb = ({ crumb, onClick }) => {
+  const linkRef = React.useRef();
+  const isTruncated = useIsTruncated(linkRef);
+
+  let result = (
+    <span className={cx(linkWrapperLayoutStyling)} ref={linkRef}>
+      <Link className={cx(linkStyling)} to={crumb.url} onClick={onClick}>
+        {formatText(crumb.title)}
+      </Link>
+    </span>
+  );
+
+  if (isTruncated) {
     result = (
       <Tooltip
         // To get the tooltip above the topnav we have to pop up the z-index
         popoverZIndex={9001}
         baseFontSize={13}
         triggerEvent="hover"
-        open={true}
         align="top"
         justify="middle"
         trigger={result}
@@ -73,7 +80,7 @@ const IndividualBreadcrumb = ({ crumb, onClick }) => {
 };
 
 const crumbObjectShape = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.arrayOf(PropTypes.object)]),
   url: PropTypes.string.isRequired,
 };
 
