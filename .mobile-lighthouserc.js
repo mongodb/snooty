@@ -1,13 +1,13 @@
 const urlsToRunPerProject = {
   docs: [
-    `http://localhost:9000/docs/runner/master/`,
-    `http://localhost:9000/docs/runner/master/changeStreams/`,
-    `http://localhost:9000/docs/runner/master/replication/`,
+    `http://localhost:9000/docs/runner/master/?mobile`,
+    `http://localhost:9000/docs/runner/master/changeStreams/?mobile`,
+    `http://localhost:9000/docs/runner/master/replication/?mobile`,
   ],
   'cloud-docs': [
-    `http://localhost:9000/cloud-docs/runner/master/`,
-    `http://localhost:9000/cloud-docs/runner/master/atlas-search/atlas-search-overview/`,
-    `http://localhost:9000/cloud-docs/runner/master/manage-clusters/`,
+    `http://localhost:9000/cloud-docs/runner/master/?mobile`,
+    `http://localhost:9000/cloud-docs/runner/master/atlas-search/atlas-search-overview/?mobile`,
+    `http://localhost:9000/cloud-docs/runner/master/manage-clusters/?mobile`,
   ],
 };
 module.exports = {
@@ -17,10 +17,7 @@ module.exports = {
         additive: 'true',
       },
       // "staticDistDir": "./public",
-      url: [
-        // "http://localhost/company/about/index.html?mobile",
-        `${urlsToRunPerProject[process.env.GATSBY_SITE]}`,
-      ],
+      url: urlsToRunPerProject[process.env.GATSBY_SITE],
     },
   },
 };
