@@ -186,6 +186,7 @@ describe('VersionDropdown', () => {
       expect(versionOptionsDropdown).not.toBeInTheDocument();
 
       userEvent.click(versionDropdown);
+      // For some reason, this click needs to wait
       await tick();
 
       versionOptionsDropdown = queryElementWithin(versionDropdown, 'listbox');
@@ -199,17 +200,14 @@ describe('VersionDropdown', () => {
       expect(versionDropdown).toBeInTheDocument();
 
       userEvent.click(versionDropdown);
-      await tick();
 
       const versionOptionsDropdown = queryElementWithin(versionDropdown, 'listbox');
-
       const versionOptions = within(versionOptionsDropdown).queryAllByRole('option');
       expect(versionOptions.length).toBe(3);
 
       userEvent.click(versionOptions[1], undefined, {
         skipPointerEventsCheck: true,
       });
-      await tick();
 
       expect(navigate).toBeCalled();
       expect(navigate).toBeCalledWith('/docs-test/drivers/node/v4.11/');
@@ -230,7 +228,6 @@ describe('VersionDropdown', () => {
       expect(versionDropdown).toBeInTheDocument();
 
       userEvent.click(versionDropdown);
-      await tick();
 
       const versionOptionsDropdown = queryElementWithin(versionDropdown, 'listbox');
       const versionOptions = within(versionOptionsDropdown).queryAllByRole('option');
@@ -239,7 +236,6 @@ describe('VersionDropdown', () => {
       userEvent.click(versionOptions[1], undefined, {
         skipPointerEventsCheck: true,
       });
-      await tick();
 
       expect(navigate).toBeCalledWith('/ko-kr/docs-test/drivers/node/v4.11/');
     });
