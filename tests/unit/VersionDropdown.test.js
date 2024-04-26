@@ -1,4 +1,4 @@
-import { render, screen, act, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { navigate } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
 import * as realm from '../../src/utils/realm';
@@ -140,12 +140,15 @@ const docsNodeRepoBranches = {
 
 const queryElementWithin = (versionDropdown, role) => within(versionDropdown).queryByRole(role);
 
-const mountConsumer = () => {
-  return render(
+const mountConsumer = async () => {
+  const res = render(
     <VersionContextProvider repoBranches={docsNodeRepoBranches} slug={'/'}>
       <VersionDropdown eol={mockData.eol} slug={mockData.slug} repoBranches={docsNodeRepoBranches} />
     </VersionContextProvider>
   );
+  // Wait for any on-mount updates to occur. Prevents warnings about needing to wrap updates in act()
+  await tick();
+  return res;
 };
 
 describe('VersionDropdown', () => {
@@ -153,45 +156,36 @@ describe('VersionDropdown', () => {
     jest.useFakeTimers();
     let mockFetchDocuments, mockedFetchDocset, mockFetchDocument;
 
-    beforeEach(async () => {
+    beforeEach(() => {
       mockFetchDocument = fetchDocument();
       mockFetchDocuments = fetchDocuments();
       mockedFetchDocset = fetchDocset();
     });
 
-    afterAll(async () => {
+    afterAll(() => {
       mockFetchDocument.mockClear();
       mockFetchDocuments.mockClear();
       mockedFetchDocset.mockClear();
     });
 
     it('renders correctly', async () => {
-      let tree;
-      await act(async () => {
-        tree = mountConsumer();
-      });
+      const tree = await mountConsumer();
       expect(tree.asFragment()).toMatchSnapshot();
     });
+
     it('renders the dropdown with the correct version', async () => {
-      await act(async () => {
-        mountConsumer();
-      });
+      await mountConsumer();
       const versionDropdown = screen.queryByRole('button', { name: 'master' });
       expect(versionDropdown).toBeInTheDocument();
     });
 
     it('show version options when user clicks button', async () => {
-      await act(async () => {
-        mountConsumer();
-      });
-
+      await mountConsumer();
       const versionDropdown = screen.queryByRole('button', { name: 'master' });
       let versionOptionsDropdown = queryElementWithin(versionDropdown, 'listbox');
       expect(versionOptionsDropdown).not.toBeInTheDocument();
 
-      await act(async () => {
-        userEvent.click(versionDropdown);
-      });
+      userEvent.click(versionDropdown);
       await tick();
 
       versionOptionsDropdown = queryElementWithin(versionDropdown, 'listbox');
@@ -199,16 +193,12 @@ describe('VersionDropdown', () => {
     });
 
     it('calls the navigate function when a user clicks on a version', async () => {
-      await act(async () => {
-        mountConsumer();
-      });
+      await mountConsumer();
 
-      let versionDropdown = screen.queryByRole('button', { name: 'master' });
+      const versionDropdown = screen.queryByRole('button', { name: 'master' });
       expect(versionDropdown).toBeInTheDocument();
 
-      await act(async () => {
-        await userEvent.click(versionDropdown);
-      });
+      userEvent.click(versionDropdown);
       await tick();
 
       const versionOptionsDropdown = queryElementWithin(versionDropdown, 'listbox');
@@ -216,12 +206,9 @@ describe('VersionDropdown', () => {
       const versionOptions = within(versionOptionsDropdown).queryAllByRole('option');
       expect(versionOptions.length).toBe(3);
 
-      await act(async () => {
-        await userEvent.click(versionOptions[1], undefined, {
-          skipPointerEventsCheck: true,
-        });
+      userEvent.click(versionOptions[1], undefined, {
+        skipPointerEventsCheck: true,
       });
-
       await tick();
 
       expect(navigate).toBeCalled();
@@ -237,29 +224,23 @@ describe('VersionDropdown', () => {
         },
       });
 
-      await act(async () => {
-        mountConsumer();
-      });
+      await mountConsumer();
 
       const versionDropdown = screen.queryByRole('button', { name: 'master' });
       expect(versionDropdown).toBeInTheDocument();
 
-      await act(async () => {
-        userEvent.click(versionDropdown);
-      });
+      userEvent.click(versionDropdown);
       await tick();
 
       const versionOptionsDropdown = queryElementWithin(versionDropdown, 'listbox');
       const versionOptions = within(versionOptionsDropdown).queryAllByRole('option');
       expect(versionOptions.length).toBe(3);
 
-      await act(async () => {
-        userEvent.click(versionOptions[1], undefined, {
-          skipPointerEventsCheck: true,
-        });
+      userEvent.click(versionOptions[1], undefined, {
+        skipPointerEventsCheck: true,
       });
-
       await tick();
+
       expect(navigate).toBeCalledWith('/ko-kr/docs-test/drivers/node/v4.11/');
     });
   });
