@@ -13,12 +13,14 @@ const urlsToRunPerProject = {
 module.exports = {
   ci: {
     collect: {
+      startServerCommand: 'npm run serve',
       settings: {
         additive: 'true',
         preset: 'desktop',
       },
       // "staticDistDir": "./public",
       url: urlsToRunPerProject[process.env.GATSBY_SITE],
+      numberOfRuns: 3,
     },
   },
 };
