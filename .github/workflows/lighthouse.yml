@@ -41,3 +41,5 @@ jobs:
           npm install -g @lhci/cli
           lhci collect --additive --config=.mobile-lighthouserc.js
           lhci collect --additive --config=.desktop-lighthouserc.js
+          lhci assert
+          lhci upload
