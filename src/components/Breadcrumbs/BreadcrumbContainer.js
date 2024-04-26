@@ -9,10 +9,10 @@ import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
+import { baseUrl } from '../../utils/base-url';
 
 const activeColor = css`
   color: ${palette.gray.dark3};
@@ -51,7 +51,7 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
   const intermediateCrumbs = React.useMemo(
     () =>
       (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
-        return { ...crumb, url: assertTrailingSlash(`http://www.mongodb.com${assertLeadingSlash(crumb.url)}`) };
+        return { ...crumb, url: assertTrailingSlash(baseUrl() + removeLeadingSlash(crumb.url)) };
       }),
     [queriedCrumbs]
   );

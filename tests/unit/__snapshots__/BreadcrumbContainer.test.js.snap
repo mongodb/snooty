@@ -162,7 +162,7 @@ exports[`BreadcrumbContainer renders correctly as a docs property homepage 1`] =
 
 <a
     class="lg-ui-0001 emotion-0"
-    href="http://www.mongodb.com/docs/atlas/"
+    href="https://www.mongodb.com/docs/atlas/"
     target="_self"
   >
     <span>
@@ -334,7 +334,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb and 
 
 <a
     class="lg-ui-0001 emotion-0"
-    href="http://www.mongodb.com/docs/atlas/"
+    href="https://www.mongodb.com/docs/atlas/"
     target="_self"
   >
     <span>
@@ -776,7 +776,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, has
 
 <a
     class="lg-ui-0001 emotion-0"
-    href="http://www.mongodb.com/docs/atlas/"
+    href="https://www.mongodb.com/docs/atlas/"
     target="_self"
   >
     <span>

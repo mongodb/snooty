@@ -17,7 +17,7 @@ jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 const mockIntermediateCrumbs = [
   {
     title: 'MongoDB Atlas',
-    url: '/docs/atlas/',
+    url: '/atlas/',
   },
 ];
 

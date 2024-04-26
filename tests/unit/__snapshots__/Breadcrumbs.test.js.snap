@@ -117,7 +117,7 @@ exports[`renders correctly with siteTitle 1`] = `
     </span>
     <a
       class="lg-ui-0001 emotion-1"
-      href="http://www.mongodb.com/docs/atlas/"
+      href="https://www.mongodb.com/docs/atlas/"
       target="_self"
     >
       <span>
