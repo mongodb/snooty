@@ -1,175 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly with pageTitle 1`] = `
-<DocumentFragment>
-  .emotion-0 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  font-size: 13px;
-}
-
-.emotion-0 strong,
-.emotion-0 b {
-  font-weight: 700;
-}
-
-.emotion-0 a {
-  color: #5C6C75;
-}
-
-.emotion-1 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
-  color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
-}
-
-.emotion-1:hover,
-.emotion-1:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-1:focus {
-  outline: none;
-}
-
-.emotion-1:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-1:focus {
-  text-decoration-color: #016BF8;
-}
-
-.emotion-1:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-1:hover,
-.emotion-1:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-1:hover:not(:last-of-type),
-.emotion-1:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-.emotion-2 {
-  cursor: default;
-}
-
-.emotion-2:last-of-type {
-  color: #1C2D38;
-}
-
-<p
-    class="emotion-0"
-  >
-    <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/"
-      target="_self"
-    >
-      <span>
-        Docs Home
-      </span>
-    </a>
-    <span
-      class="emotion-2 emotion-3"
-    >
-       → 
-    </span>
-    <a
-      class="lg-ui-0001 emotion-1"
-      href="http://www.mongodb.com/docs/atlas"
-      target="_self"
-    >
-      <span>
-        MongoDB Atlas
-      </span>
-    </a>
-    <span
-      class="emotion-2 emotion-3"
-    >
-       → 
-    </span>
-    <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/"
-      target="_self"
-    >
-      <span>
-        Call a Function - C++ SDK
-      </span>
-    </a>
-    <span
-      class="emotion-2 emotion-3"
-    >
-       → 
-    </span>
-    <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp"
-      target="_self"
-    >
-      <span>
-        Atlas Device SDK for C++
-      </span>
-    </a>
-    <span
-      class="emotion-2 emotion-3"
-    >
-       → 
-    </span>
-    <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/application-services"
-      target="_self"
-    >
-      <span>
-        Application Services - - C++ SDK
-      </span>
-    </a>
-  </p>
-</DocumentFragment>
-`;
-
 exports[`renders correctly with siteTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
@@ -287,7 +117,7 @@ exports[`renders correctly with siteTitle 1`] = `
     </span>
     <a
       class="lg-ui-0001 emotion-1"
-      href="http://www.mongodb.com/docs/atlas"
+      href="https://www.mongodb.com/docs/atlas/"
       target="_self"
     >
       <span>
@@ -305,7 +135,7 @@ exports[`renders correctly with siteTitle 1`] = `
       target="_self"
     >
       <span>
-        Call a Function - C++ SDK
+        Atlas Device SDKs
       </span>
     </a>
     <span
@@ -315,7 +145,7 @@ exports[`renders correctly with siteTitle 1`] = `
     </span>
     <a
       class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp"
+      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/"
       target="_self"
     >
       <span>
@@ -329,11 +159,11 @@ exports[`renders correctly with siteTitle 1`] = `
     </span>
     <a
       class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/application-services"
+      href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/application-services/"
       target="_self"
     >
       <span>
-        Application Services - - C++ SDK
+        Application Services - C++ SDK
       </span>
     </a>
   </p>

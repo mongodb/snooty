@@ -162,7 +162,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb and 
 
 <a
     class="lg-ui-0001 emotion-0"
-    href="http://www.mongodb.com/docs/languages"
+    href="https://www.mongodb.com/docs/languages"
     target="_self"
   >
     <span>
@@ -252,7 +252,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb and 
 
 <a
     class="lg-ui-0001 emotion-0"
-    href="http://www.mongodb.com/docs/languages/csharp"
+    href="https://www.mongodb.com/docs/languages/csharp"
     target="_self"
   >
     <span>
@@ -591,7 +591,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
 
 <a
     class="emotion-0 emotion-1"
-    href="/docs/atlas/"
+    href="/atlas/"
   >
     MongoDB Atlas
   </a>
