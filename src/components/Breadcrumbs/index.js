@@ -16,13 +16,13 @@ const breadcrumbBodyStyle = css`
   }
 `;
 
-const Breadcrumbs = ({ homeUrl = null, pageTitle = null, siteTitle, slug }) => {
+const Breadcrumbs = ({ siteTitle, slug }) => {
   const queriedCrumbs = useBreadcrumbs();
 
   const { parentPaths } = useSnootyMetadata();
   const breadcrumbs = React.useMemo(
-    () => getCompleteBreadcrumbData({ homeUrl, pageTitle, siteTitle, slug, queriedCrumbs, parentPaths }),
-    [homeUrl, pageTitle, parentPaths, queriedCrumbs, siteTitle, slug]
+    () => getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths }),
+    [parentPaths, queriedCrumbs, siteTitle, slug]
   );
 
   return (

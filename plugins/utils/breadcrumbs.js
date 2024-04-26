@@ -8,33 +8,22 @@ const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createConte
   try {
     breadcrumbData = await db.fetchBreadcrumbs(database, project);
   } catch (e) {
-    console.error('Error while fetching breadcrumb data from Atlas');
-    console.error(e);
+    console.error(`Error while fetching breadcrumb data from Atlas: ${e}`);
   }
-  if (breadcrumbData)
-    return createNode({
-      children: [],
-      id: createNodeId(`Breadcrumbs-${project}`),
-      internal: {
-        contentDigest: createContentDigest(breadcrumbData.breadcrumbs),
-        type: breadcrumbType,
-      },
-      breadcrumbs: breadcrumbData.breadcrumbs,
-      propertyUrl: breadcrumbData.propertyUrl,
-    });
-  else {
-    //return empty node
-    return createNode({
-      children: [],
-      id: createNodeId(`Breadcrumbs-${project}`),
-      internal: {
-        contentDigest: createContentDigest({}),
-        type: breadcrumbType,
-      },
-      breadcrumbs: null,
-      propertyUrl: '',
-    });
-  }
+  const [breadcrumbs, propertyUrl] = breadcrumbData
+    ? [breadcrumbData.breadcrumbs, breadcrumbData.propertyUrl]
+    : [null, ''];
+
+  return createNode({
+    children: [],
+    id: createNodeId(`Breadcrumbs-${project}`),
+    internal: {
+      contentDigest: createContentDigest(breadcrumbs),
+      type: breadcrumbType,
+    },
+    breadcrumbs: breadcrumbs,
+    propertyUrl: propertyUrl,
+  });
 };
 
 module.exports = {
