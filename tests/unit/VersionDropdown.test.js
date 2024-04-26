@@ -2,13 +2,13 @@ import { render, screen, act, within } from '@testing-library/react';
 import { navigate } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
 import * as realm from '../../src/utils/realm';
-import { generatePrefix } from '../../src/components/VersionDropdown/utils';
 import VersionDropdown from '../../src/components/VersionDropdown';
 import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import mockData from '../unit/data/VersionDropdown.test.json';
 import { VersionContextProvider } from '../../src/context/version-context';
 import { tick } from '../utils';
+import { generateVersionedPrefix } from '../../src/utils/generate-versioned-prefix';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ parserBranch: 'master', snootyEnv: 'development' }),
@@ -151,14 +151,14 @@ const mountConsumer = () => {
 
 describe('VersionDropdown', () => {
   describe('utils', () => {
-    describe('generatePrefix', () => {
+    describe('generateVersionedPrefix', () => {
       it('returns a prefix when a simple pathPrefix exists', () => {
         const mockSiteMetadata = {
           pathPrefix: '/docs/bi-connector/v2.14',
         };
         const mockSiteBasePrefix = 'docs/bi-connector';
 
-        expect(generatePrefix('v2.15', mockSiteMetadata, mockSiteBasePrefix)).toBe('/docs/bi-connector/v2.15');
+        expect(generateVersionedPrefix('v2.15', mockSiteMetadata, mockSiteBasePrefix)).toBe('/docs/bi-connector/v2.15');
       });
 
       it('returns a prefix when a pathPrefix exists for the server docs', () => {
@@ -167,7 +167,7 @@ describe('VersionDropdown', () => {
         };
         const mockSiteBasePrefix = 'docs';
 
-        expect(generatePrefix('v100', mockSiteMetadata, mockSiteBasePrefix)).toBe('/docs/v100');
+        expect(generateVersionedPrefix('v100', mockSiteMetadata, mockSiteBasePrefix)).toBe('/docs/v100');
       });
 
       it("returns a prefix when the site's base prefix has more than 1 forward slash", () => {
@@ -176,7 +176,9 @@ describe('VersionDropdown', () => {
         };
         const mockSiteBasePrefix = 'docs/atlas/cli';
 
-        expect(generatePrefix('upcoming', mockSiteMetadata, mockSiteBasePrefix)).toBe('/docs/atlas/cli/upcoming');
+        expect(generateVersionedPrefix('upcoming', mockSiteMetadata, mockSiteBasePrefix)).toBe(
+          '/docs/atlas/cli/upcoming'
+        );
       });
 
       it('returns a prefix when a urlSlug/version with multiple forward slashes exists', () => {
@@ -185,7 +187,7 @@ describe('VersionDropdown', () => {
         };
         const mockSiteBasePrefix = 'docs/realm';
 
-        expect(generatePrefix('sdk/android/v10.2', mockSiteMetadata, mockSiteBasePrefix)).toBe(
+        expect(generateVersionedPrefix('sdk/android/v10.2', mockSiteMetadata, mockSiteBasePrefix)).toBe(
           '/docs/realm/sdk/android/v10.2'
         );
       });
@@ -198,7 +200,7 @@ describe('VersionDropdown', () => {
         };
         const mockSiteBasePrefix = 'docs/bi-connector';
 
-        expect(generatePrefix('v2.15', mockSiteMetadata, mockSiteBasePrefix)).toBe(
+        expect(generateVersionedPrefix('v2.15', mockSiteMetadata, mockSiteBasePrefix)).toBe(
           '/bi-connector/docsworker-xlarge/v2.15'
         );
       });
@@ -210,7 +212,7 @@ describe('VersionDropdown', () => {
         };
         const mockSiteBasePrefix = 'docs/bi-connector';
 
-        expect(generatePrefix('v2.15', mockSiteMetadata, mockSiteBasePrefix)).toBe('/docs/bi-connector/v2.15');
+        expect(generateVersionedPrefix('v2.15', mockSiteMetadata, mockSiteBasePrefix)).toBe('/docs/bi-connector/v2.15');
       });
     });
   });

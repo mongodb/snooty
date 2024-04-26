@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react';
 import { Head } from '../../src/components/DocumentBody';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import { useSiteMetadata } from '../../src/hooks/use-site-metadata';
-import { generatePrefix } from '../../src/components/VersionDropdown/utils';
 import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
 import { AVAILABLE_LANGUAGES } from '../../src/utils/locale';
 import { DOTCOM_BASE_URL } from '../../src/utils/base-url';
+import { generateVersionedPrefix } from '../../src/utils/generate-versioned-prefix';
 import mockCompleteEOLPageContext from './data/CompleteEOLPageContext.json';
 import mockEOLSnootyMetadata from './data/EOLSnootyMetadata.json';
 import mockHeadPageContext from './data/HeadPageContext.test.json';
@@ -69,7 +69,7 @@ describe('Head', () => {
       const urlSlug = mockHeadPageContext.repoBranches.branches.find(
         (branch) => branch.gitBranchName === parserBranch
       )?.urlSlug;
-      const pathPrefix = generatePrefix(urlSlug, siteMetadata);
+      const pathPrefix = generateVersionedPrefix(urlSlug, siteMetadata);
       const slug = mockHeadPageContext.slug;
 
       const canonical = `${siteUrl}${pathPrefix}/${slug === '/' ? '' : slug}`;
