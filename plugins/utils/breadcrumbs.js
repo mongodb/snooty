@@ -18,7 +18,7 @@ const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createConte
     children: [],
     id: createNodeId(`Breadcrumbs-${project}`),
     internal: {
-      contentDigest: createContentDigest(breadcrumbData.breadcrumbs),
+      contentDigest: createContentDigest(breadcrumbs),
       type: breadcrumbType,
     },
     breadcrumbs: breadcrumbs,

@@ -50,27 +50,24 @@ const BreadcrumbContainer = ({ homeCrumb, propertyCrumb, slug }) => {
   const propertyUrl = assertTrailingSlash(queriedCrumbs?.propertyUrl);
   const intermediateCrumbs = React.useMemo(
     () =>
-      queriedCrumbs?.breadcrumbs
-        ? queriedCrumbs.breadcrumbs.map((crumb) => {
-            return { ...crumb, url: assertTrailingSlash(`http://www.mongodb.com${assertLeadingSlash(crumb.url)}`) };
-          })
-        : [],
+      (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
+        return { ...crumb, url: assertTrailingSlash(`http://www.mongodb.com${assertLeadingSlash(crumb.url)}`) };
+      }),
     [queriedCrumbs]
   );
 
-  if (propertyCrumb) {
-    propertyCrumb.url = propertyUrl;
+  //if the current page is a property homepage, leave the propertyCrumb as an empty array
+  if (propertyCrumb.length) {
+    propertyCrumb[0].url = propertyUrl;
   }
 
   //get direct parents of the current page from parentPaths
   //add respective url to each direct parent crumb
   const parents = React.useMemo(
     () =>
-      parentPaths[slug]
-        ? parentPaths[slug].map((crumb) => {
-            return { ...crumb, url: assertTrailingSlash(propertyUrl + removeLeadingSlash(crumb.path)) };
-          })
-        : [],
+      (parentPaths[slug] ?? []).map((crumb) => {
+        return { ...crumb, url: assertTrailingSlash(propertyUrl + removeLeadingSlash(crumb.path)) };
+      }),
     [parentPaths, slug, propertyUrl]
   );
 
