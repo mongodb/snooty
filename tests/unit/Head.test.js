@@ -2,15 +2,16 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Head } from '../../src/components/DocumentBody';
 import mockStaticQuery from '../utils/mockStaticQuery';
-import { useSiteMetadata } from '../../src/hooks/use-site-metadata';
+import * as siteMetadata from '../../src/hooks/use-site-metadata';
 import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
 import { AVAILABLE_LANGUAGES } from '../../src/utils/locale';
 import { DOTCOM_BASE_URL } from '../../src/utils/base-url';
-import { generateVersionedPrefix } from '../../src/utils/generate-versioned-prefix';
 import mockCompleteEOLPageContext from './data/CompleteEOLPageContext.json';
 import mockEOLSnootyMetadata from './data/EOLSnootyMetadata.json';
 import mockHeadPageContext from './data/HeadPageContext.test.json';
 import metadataWithoutToc from './data/MetadataWithoutToc.json';
+
+const siteMetadataMock = jest.spyOn(siteMetadata, 'useSiteMetadata');
 
 jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 
@@ -41,12 +42,15 @@ describe('Head', () => {
       useSnootyMetadata.mockImplementation(() => mockEOLSnootyMetadata);
     });
     it('renders the canonical tag structured from the Head component with trailing slash', () => {
+      const mockSiteUrl = 'https://www.mongodb.com';
+      siteMetadataMock.mockImplementation(() => ({
+        siteUrl: mockSiteUrl,
+      }));
       render(<Head pageContext={mockHeadPageContext} />);
-      const { siteUrl } = useSiteMetadata();
       const urlSlug = 'stable';
       const siteBasePrefix = mockHeadPageContext.repoBranches.siteBasePrefix;
 
-      const currentVersion = `${siteUrl}/${siteBasePrefix}/${urlSlug}/`;
+      const currentVersion = `${mockSiteUrl}/${siteBasePrefix}/${urlSlug}/`;
 
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
@@ -62,23 +66,54 @@ describe('Head', () => {
       useSnootyMetadata.mockImplementation(() => modMockEOLSnootyMetadataToBeNotEOL);
     });
 
-    it('renders the canonical tag that points to itself', () => {
+    it("uses the branch's url slug as the canonical", () => {
+      siteMetadataMock.mockImplementation(() => ({
+        siteUrl: 'https://www.mongodb.com',
+        parserBranch: 'master',
+      }));
       render(<Head pageContext={mockHeadPageContext} />);
-      const siteMetadata = useSiteMetadata();
-      const { siteUrl, parserBranch } = siteMetadata;
-      const urlSlug = mockHeadPageContext.repoBranches.branches.find(
-        (branch) => branch.gitBranchName === parserBranch
-      )?.urlSlug;
-      const pathPrefix = generateVersionedPrefix(urlSlug, siteMetadata);
-      const slug = mockHeadPageContext.slug;
 
-      const canonical = `${siteUrl}${pathPrefix}/${slug === '/' ? '' : slug}`;
+      const expectedCanonical = 'https://www.mongodb.com/docs/mongocli/upcoming/';
 
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', canonical);
+      expect(canonicalTag).toHaveAttribute('href', expectedCanonical);
+    });
+
+    it('includes the correct page slug', () => {
+      siteMetadataMock.mockImplementation(() => ({
+        siteUrl: 'https://www.mongodb.com',
+        parserBranch: 'v1.26',
+      }));
+
+      const pageContext = { ...mockHeadPageContext, slug: '/introduction' };
+      render(<Head pageContext={pageContext} />);
+
+      const expectedCanonical = 'https://www.mongodb.com/docs/mongocli/stable/introduction/';
+
+      const canonicalTag = screen.getByTestId('canonical');
+      expect(canonicalTag).toBeInTheDocument();
+      expect(canonicalTag).toHaveAttribute('id', 'canonical');
+      expect(canonicalTag).toHaveAttribute('rel', 'canonical');
+      expect(canonicalTag).toHaveAttribute('href', expectedCanonical);
+    });
+
+    it('gracefully uses undefined for missing branches', () => {
+      siteMetadataMock.mockImplementation(() => ({
+        siteUrl: 'https://www.mongodb.com',
+        parserBranch: 'DOP-staging-branch',
+      }));
+      render(<Head pageContext={mockHeadPageContext} />);
+
+      const expectedCanonical = 'https://www.mongodb.com/docs/mongocli/undefined/';
+
+      const canonicalTag = screen.getByTestId('canonical');
+      expect(canonicalTag).toBeInTheDocument();
+      expect(canonicalTag).toHaveAttribute('id', 'canonical');
+      expect(canonicalTag).toHaveAttribute('rel', 'canonical');
+      expect(canonicalTag).toHaveAttribute('href', expectedCanonical);
     });
   });
 
