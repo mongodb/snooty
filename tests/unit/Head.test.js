@@ -66,7 +66,7 @@ describe('Head', () => {
       useSnootyMetadata.mockImplementation(() => modMockEOLSnootyMetadataToBeNotEOL);
     });
 
-    it("uses the branch's url slug as the canonical", () => {
+    it("uses the branch's url slug as the canonical for versioned docs", () => {
       siteMetadataMock.mockImplementation(() => ({
         siteUrl: 'https://www.mongodb.com',
         parserBranch: 'master',
@@ -108,6 +108,43 @@ describe('Head', () => {
       render(<Head pageContext={mockHeadPageContext} />);
 
       const expectedCanonical = 'https://www.mongodb.com/docs/mongocli/undefined/';
+
+      const canonicalTag = screen.getByTestId('canonical');
+      expect(canonicalTag).toBeInTheDocument();
+      expect(canonicalTag).toHaveAttribute('id', 'canonical');
+      expect(canonicalTag).toHaveAttribute('rel', 'canonical');
+      expect(canonicalTag).toHaveAttribute('href', expectedCanonical);
+    });
+
+    it("uses the branch's url slug as the canonical for non-versioned docs", () => {
+      siteMetadataMock.mockImplementation(() => ({
+        siteUrl: 'https://www.mongodb.com',
+        parserBranch: 'master',
+      }));
+
+      const nonVersionedBranchArr = [
+        {
+          gitBranchName: 'master',
+          active: true,
+          urlAliases: null,
+          publishOriginalBranchName: false,
+          urlSlug: '',
+          versionSelectorLabel: 'master',
+          isStableBranch: true,
+          buildsWithSnooty: true,
+        },
+      ];
+      const mockNonVersionedContext = {
+        ...mockHeadPageContext,
+        slug: '/atlas-search/introduction',
+        repoBranches: {
+          branches: nonVersionedBranchArr,
+          siteBasePrefix: 'docs/atlas',
+        },
+      };
+      render(<Head pageContext={mockNonVersionedContext} />);
+
+      const expectedCanonical = 'https://www.mongodb.com/docs/atlas/atlas-search/introduction/';
 
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
