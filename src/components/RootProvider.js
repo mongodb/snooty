@@ -7,7 +7,8 @@ import { SidenavContextProvider } from './Sidenav';
 import { TabProvider } from './Tabs/tab-context';
 import { ContentsProvider } from './Contents/contents-context';
 
-const RootProvider = ({ children, headingNodes, selectors, slug, repoBranches, remoteMetadata, project }) => {
+const RootProvider = ({ children, headingNodes, selectors, slug, repoBranches, remoteMetadata }) => {
+  console.log('check slug', slug);
   return (
     <TabProvider selectors={selectors}>
       <ContentsProvider headingNodes={headingNodes}>

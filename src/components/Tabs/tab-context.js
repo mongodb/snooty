@@ -1,3 +1,10 @@
+/**
+ * Context that contains language selector tab data
+ * Stores which tab is currently active by reading local storage
+ * or by setting default values, and allows
+ * child components to read and update
+ */
+
 import React, { useEffect, useReducer } from 'react';
 import IconC from '../icons/C';
 import IconCompass from '../icons/Compass';
@@ -19,6 +26,7 @@ import IconObjectiveC from '../icons/ObjectiveC';
 import IconJavascript from '../icons/Javascript';
 import IconTypescript from '../icons/Typescript';
 import IconDart from '../icons/Dart';
+import { makeChoices } from './TabSelectors';
 
 const DRIVER_ICON_MAP = {
   c: IconC,
@@ -64,8 +72,54 @@ const reducer = (prevState, { name, value }) => {
   };
 };
 
+const createInitialTabs = (choicesPerSelector, localActiveTabs) => {
+  // get default tabs based on availability
+  const defaultRes = Object.keys(choicesPerSelector || {}).reduce((res, selectorKey) => {
+    const nodeOptionIdx = choicesPerSelector[selectorKey].findIndex((tab) => tab.value === 'nodejs');
+    // TODO: find default choicesPerSelector for other tab types
+    if (selectorKey === 'drivers' && nodeOptionIdx > -1) {
+      res[selectorKey] = 'nodejs';
+    } else {
+      res[selectorKey] = choicesPerSelector[selectorKey][0].value;
+    }
+    return res;
+  }, {});
+
+  // get local active tabs
+  const activeTabsRes = Object.keys(localActiveTabs || {}).reduce((res, activeTabKey) => {
+    if (typeof localActiveTabs[activeTabKey] === 'string') {
+      res[activeTabKey] = localActiveTabs[activeTabKey];
+    }
+    return res;
+  }, {});
+
+  // tabs initialize with default tabs overwritten by local storage tabs
+  const initialTabs = { ...defaultRes, ...activeTabsRes };
+  setLocalValue('activeTabs', initialTabs);
+  return initialTabs;
+};
+
 const TabProvider = ({ children, selectors = {} }) => {
-  const [activeTabs, setActiveTab] = useReducer(reducer, getLocalValue('activeTabs') || defaultContextValue.activeTabs);
+  // convert selectors to tab options first here, then set init values
+  // selectors are determined at build time
+
+  const choicesPerSelector = Object.keys(selectors).reduce((res, selector) => {
+    res[selector] = makeChoices({
+      name: selector,
+      options: selectors[selector],
+      ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
+    });
+    return res;
+  }, {});
+
+  const [activeTabs, setActiveTab] = useReducer(
+    reducer,
+    getLocalValue('activeTabs'),
+    createInitialTabs.bind(null, choicesPerSelector)
+  );
+
+  console.log('check activeTab during build time');
+  console.log(activeTabs);
 
   useEffect(() => {
     setLocalValue('activeTabs', activeTabs);
