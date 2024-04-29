@@ -28,7 +28,7 @@ describe('BreadcrumbContainer', () => {
     url: 'https://www.mongodb.com/docs',
   };
 
-  const mockParents = mockData['sdk/cpp/app-services/call-a-function'];
+  const mockParents = mockData;
 
   it('renders correctly with intermediate breadcrumb and with project parents', () => {
     const breadcrumbs = [
@@ -45,19 +45,24 @@ describe('BreadcrumbContainer', () => {
 
   it('renders correctly with intermediate breadcrumb, no project parents', () => {
     const breadcrumbs = [mockHomeCrumb, mockIntermediateCrumbs, mockPropertyCrumb];
-    console.log('HELLO', breadcrumbs);
+    const tree = mountBreadcrumbContainer(breadcrumbs);
+    expect(tree.asFragment()).toMatchSnapshot();
+  });
+
+  it('renders correctly with intermediate breadcrumb, empty project parents array', () => {
+    const breadcrumbs = [mockHomeCrumb, mockPropertyCrumb, ...mockParents['example-projects']];
     const tree = mountBreadcrumbContainer(breadcrumbs);
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
   it('renders correctly with no intermediate breadcrumb, has project parents', () => {
-    const breadcrumbs = [mockHomeCrumb, mockPropertyCrumb, ...mockParents];
+    const breadcrumbs = [mockHomeCrumb, mockPropertyCrumb, ...mockParents['sdk/cpp/app-services/call-a-function']];
     const tree = mountBreadcrumbContainer(breadcrumbs);
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
   it('renders correctly as a docs homepage', () => {
-    const breadcrumbs = [mockHomeCrumb, mockPropertyCrumb, ...mockParents];
+    const breadcrumbs = [mockHomeCrumb, mockPropertyCrumb, ...mockParents['sdk/cpp/app-services/call-a-function']];
     const tree = mountBreadcrumbContainer(breadcrumbs);
     expect(tree.asFragment()).toMatchSnapshot();
   });
