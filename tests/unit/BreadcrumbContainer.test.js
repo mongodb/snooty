@@ -55,4 +55,10 @@ describe('BreadcrumbContainer', () => {
     const tree = mountBreadcrumbContainer(breadcrumbs);
     expect(tree.asFragment()).toMatchSnapshot();
   });
+
+  it('renders correctly as a docs homepage', () => {
+    const breadcrumbs = [mockHomeCrumb, mockPropertyCrumb, ...mockParents];
+    const tree = mountBreadcrumbContainer(breadcrumbs);
+    expect(tree.asFragment()).toMatchSnapshot();
+  });
 });

@@ -5,7 +5,7 @@ import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
-const getBreadcrumbList = (breadcrumbs, siteUrl) =>
+const getBreadcrumbList = (breadcrumbs) =>
   breadcrumbs.map(({ url, title }, index) => ({
     '@type': 'ListItem',
     position: index + 1,
@@ -17,16 +17,14 @@ const BreadcrumbSchema = ({ slug }) => {
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
 
   const queriedCrumbs = useBreadcrumbs();
-  const breadcrumbs = React.useMemo(
-    () => getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths }),
+  const breadcrumbList = React.useMemo(
+    () => [...getBreadcrumbList([...getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths })])],
     [siteTitle, slug, queriedCrumbs, parentPaths]
   );
 
-  const breadcrumbList = [...getBreadcrumbList([...breadcrumbs])];
-
   return (
     <>
-      {Array.isArray(breadcrumbs) && (
+      {Array.isArray(queriedCrumbs.breadcrumbs) && (
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://schema.org',

@@ -4,7 +4,7 @@ import { removeLeadingSlash } from './remove-leading-slash';
 
 export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, parentPaths }) => {
   //get intermediate breadcrumbs and property Url
-  const propertyUrl = assertTrailingSlash(queriedCrumbs?.propertyUrl);
+  const propertyUrl = assertTrailingSlash(queriedCrumbs?.propertyUrl ?? baseUrl());
   const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
     return { ...crumb, url: assertTrailingSlash(baseUrl() + removeLeadingSlash(crumb.url)) };
   });
