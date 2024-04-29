@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - "main"
-      - "DOP-4505-lh-desktop-mobile"
 name: Run and Upload Lighthouse Report
 jobs: 
   staging:
