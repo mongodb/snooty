@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { Body } from '@leafygreen-ui/typography';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import { baseUrl } from '../../utils/base-url';
 import { theme } from '../../theme/docsTheme';
+import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-data.js';
+import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import BreadcrumbContainer from './BreadcrumbContainer';
 
 const breadcrumbBodyStyle = css`
@@ -15,24 +17,17 @@ const breadcrumbBodyStyle = css`
 `;
 
 const Breadcrumbs = ({ siteTitle, slug }) => {
-  const homeCrumb = {
-    title: 'Docs Home',
-    url: baseUrl(),
-  };
+  const queriedCrumbs = useBreadcrumbs();
 
-  const propertyCrumb =
-    slug !== '/'
-      ? [
-          {
-            title: siteTitle,
-            url: '/',
-          },
-        ]
-      : [];
+  const { parentPaths } = useSnootyMetadata();
+  const breadcrumbs = React.useMemo(
+    () => getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths }),
+    [parentPaths, queriedCrumbs, siteTitle, slug]
+  );
 
   return (
     <Body className={cx(breadcrumbBodyStyle)}>
-      <BreadcrumbContainer homeCrumb={homeCrumb} propertyCrumb={propertyCrumb} slug={slug} />
+      <BreadcrumbContainer breadcrumbs={breadcrumbs} />
     </Body>
   );
 };

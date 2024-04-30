@@ -1,39 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
-
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-data.js';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
-import { baseUrl } from '../../utils/base-url';
+import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
-const getBreadcrumbList = (breadcrumbs, siteUrl) =>
-  breadcrumbs.map(({ path, plaintext }, index) => ({
+const getBreadcrumbList = (breadcrumbs) =>
+  breadcrumbs.map(({ url, title }, index) => ({
     '@type': 'ListItem',
-    position: index + 2,
-    name: plaintext,
-    item: assertTrailingSlash(`${siteUrl}${withPrefix(path)}`),
+    position: index + 1,
+    name: title,
+    item: assertTrailingSlash(url),
   }));
 
 const BreadcrumbSchema = ({ slug }) => {
-  const { siteUrl } = useSiteMetadata();
-  const { project, parentPaths, title: siteTitle } = useSnootyMetadata();
-  const breadcrumbs = parentPaths[slug] ?? [];
-  const breadcrumbList = [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'MongoDB Documentation',
-      item: baseUrl(),
-    },
-    ...getBreadcrumbList(
-      [...(slug !== '/' && project !== 'landing' ? [{ path: '/', plaintext: siteTitle }] : []), ...breadcrumbs],
-      siteUrl
-    ),
-  ];
+  const { parentPaths, title: siteTitle } = useSnootyMetadata();
+
+  const queriedCrumbs = useBreadcrumbs();
+  const breadcrumbList = React.useMemo(
+    () => [...getBreadcrumbList([...getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths })])],
+    [siteTitle, slug, queriedCrumbs, parentPaths]
+  );
+
   return (
     <>
-      {Array.isArray(breadcrumbs) && (
+      {Array.isArray(queriedCrumbs.breadcrumbs) && (
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://schema.org',
