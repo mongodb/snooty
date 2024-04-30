@@ -15,11 +15,18 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   text-wrap: nowrap;
 }
 
-.emotion-2:first-child,
-.emotion-2:last-child {
+.emotion-2:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-2:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
 }
 
 .emotion-3 {
@@ -51,6 +58,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   font-weight: 400;
   display: inline;
   font-size: 13px;
+  vertical-align: middle;
 }
 
 .emotion-3:hover,
@@ -77,14 +85,14 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
 
 .emotion-3:hover,
 .emotion-3:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .emotion-4 {
   cursor: default;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .emotion-6 {
@@ -175,7 +183,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   justify-content: center;
 }
 
-.emotion-19 {
+.emotion-27 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -189,12 +197,12 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   color: #016BF8;
 }
 
-.emotion-19>code {
+.emotion-27>code {
   color: #016BF8;
 }
 
-.emotion-19:focus,
-.emotion-19:hover {
+.emotion-27:focus,
+.emotion-27:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -202,29 +210,30 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-19:focus {
+.emotion-27:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-19:hover {
+.emotion-27:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-20 {
+.emotion-28 {
   font-size: 13px;
+  vertical-align: middle;
 }
 
-.emotion-20:hover,
-.emotion-20:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-28:hover,
+.emotion-28:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 <span
     class="emotion-0 emotion-1"
   >
-    <span
+    <div
       class="emotion-2"
     >
       <a
@@ -236,7 +245,7 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
           Docs Home
         </span>
       </a>
-    </span>
+    </div>
     <span
       class="emotion-4 emotion-5"
     >
@@ -277,7 +286,43 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
     >
        / 
     </span>
+    <div
+      class="emotion-2"
+    >
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://www.mongodb.com/docs/"
+        target="_self"
+      >
+        <span>
+          Crumb 2
+        </span>
+      </a>
+    </div>
     <span
+      class="emotion-4 emotion-5"
+    >
+       / 
+    </span>
+    <div
+      class="emotion-2"
+    >
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://www.mongodb.com/docs/"
+        target="_self"
+      >
+        <span>
+          Crumb 3
+        </span>
+      </a>
+    </div>
+    <span
+      class="emotion-4 emotion-5"
+    >
+       / 
+    </span>
+    <div
       class="emotion-2"
     >
       <a
@@ -289,13 +334,13 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
           Crumb 4
         </span>
       </a>
-    </span>
+    </div>
     <span
       class="emotion-4 emotion-5"
     >
        / 
     </span>
-    <span
+    <div
       class="emotion-2"
     >
       <a
@@ -307,22 +352,22 @@ exports[`BreadcrumbContainer renders correctly with project parent 1`] = `
           View & Analyze: An Outrageously Long Title
         </span>
       </a>
-    </span>
+    </div>
     <span
       class="emotion-4 emotion-5"
     >
        / 
     </span>
-    <span
+    <div
       class="emotion-2"
     >
       <a
-        class="emotion-19 emotion-20"
+        class="emotion-27 emotion-28"
         href="/documents/view/"
       >
         MongoDB Compass
       </a>
-    </span>
+    </div>
   </span>
 </DocumentFragment>
 `;
@@ -342,11 +387,18 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   text-wrap: nowrap;
 }
 
-.emotion-2:first-child,
-.emotion-2:last-child {
+.emotion-2:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-2:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
 }
 
 .emotion-3 {
@@ -378,6 +430,7 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
   font-weight: 400;
   display: inline;
   font-size: 13px;
+  vertical-align: middle;
 }
 
 .emotion-3:hover,
@@ -404,14 +457,14 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 
 .emotion-3:hover,
 .emotion-3:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .emotion-4 {
   cursor: default;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .emotion-7 {
@@ -452,18 +505,19 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
 
 .emotion-8 {
   font-size: 13px;
+  vertical-align: middle;
 }
 
 .emotion-8:hover,
 .emotion-8:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 <span
     class="emotion-0 emotion-1"
   >
-    <span
+    <div
       class="emotion-2"
     >
       <a
@@ -475,13 +529,13 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
           Docs Home
         </span>
       </a>
-    </span>
+    </div>
     <span
       class="emotion-4 emotion-5"
     >
        / 
     </span>
-    <span
+    <div
       class="emotion-2"
     >
       <a
@@ -490,7 +544,7 @@ exports[`BreadcrumbContainer renders correctly without project parent 1`] = `
       >
         View & Analyze Data
       </a>
-    </span>
+    </div>
   </span>
 </DocumentFragment>
 `;

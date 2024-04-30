@@ -3,19 +3,7 @@
 exports[`renders correctly with pageTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
   font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  font-size: 13px;
-}
-
-.emotion-0 strong,
-.emotion-0 b {
-  font-weight: 700;
 }
 
 .emotion-0 a {
@@ -35,11 +23,18 @@ exports[`renders correctly with pageTitle 1`] = `
   text-wrap: nowrap;
 }
 
-.emotion-3:first-child,
-.emotion-3:last-child {
+.emotion-3:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-3:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
 }
 
 .emotion-4 {
@@ -71,6 +66,7 @@ exports[`renders correctly with pageTitle 1`] = `
   font-weight: 400;
   display: inline;
   font-size: 13px;
+  vertical-align: middle;
 }
 
 .emotion-4:hover,
@@ -97,14 +93,14 @@ exports[`renders correctly with pageTitle 1`] = `
 
 .emotion-4:hover,
 .emotion-4:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .emotion-5 {
   cursor: default;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .emotion-8 {
@@ -145,21 +141,22 @@ exports[`renders correctly with pageTitle 1`] = `
 
 .emotion-9 {
   font-size: 13px;
+  vertical-align: middle;
 }
 
 .emotion-9:hover,
 .emotion-9:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
-<p
+<div
     class="emotion-0"
   >
     <span
       class="emotion-1 emotion-2"
     >
-      <span
+      <div
         class="emotion-3"
       >
         <a
@@ -171,13 +168,13 @@ exports[`renders correctly with pageTitle 1`] = `
             Docs Home
           </span>
         </a>
-      </span>
+      </div>
       <span
         class="emotion-5 emotion-6"
       >
          / 
       </span>
-      <span
+      <div
         class="emotion-3"
       >
         <a
@@ -186,28 +183,16 @@ exports[`renders correctly with pageTitle 1`] = `
         >
           View & Analyze Data
         </a>
-      </span>
+      </div>
     </span>
-  </p>
+  </div>
 </DocumentFragment>
 `;
 
 exports[`renders correctly with siteTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
   font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  font-size: 13px;
-}
-
-.emotion-0 strong,
-.emotion-0 b {
-  font-weight: 700;
 }
 
 .emotion-0 a {
@@ -227,11 +212,18 @@ exports[`renders correctly with siteTitle 1`] = `
   text-wrap: nowrap;
 }
 
-.emotion-3:first-child,
-.emotion-3:last-child {
+.emotion-3:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-3:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
 }
 
 .emotion-4 {
@@ -263,6 +255,7 @@ exports[`renders correctly with siteTitle 1`] = `
   font-weight: 400;
   display: inline;
   font-size: 13px;
+  vertical-align: middle;
 }
 
 .emotion-4:hover,
@@ -289,14 +282,14 @@ exports[`renders correctly with siteTitle 1`] = `
 
 .emotion-4:hover,
 .emotion-4:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .emotion-5 {
   cursor: default;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .emotion-8 {
@@ -337,21 +330,22 @@ exports[`renders correctly with siteTitle 1`] = `
 
 .emotion-9 {
   font-size: 13px;
+  vertical-align: middle;
 }
 
 .emotion-9:hover,
 .emotion-9:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
-<p
+<div
     class="emotion-0"
   >
     <span
       class="emotion-1 emotion-2"
     >
-      <span
+      <div
         class="emotion-3"
       >
         <a
@@ -363,13 +357,13 @@ exports[`renders correctly with siteTitle 1`] = `
             Docs Home
           </span>
         </a>
-      </span>
+      </div>
       <span
         class="emotion-5 emotion-6"
       >
          / 
       </span>
-      <span
+      <div
         class="emotion-3"
       >
         <a
@@ -378,8 +372,8 @@ exports[`renders correctly with siteTitle 1`] = `
         >
           MongoDB Compass
         </a>
-      </span>
+      </div>
     </span>
-  </p>
+  </div>
 </DocumentFragment>
 `;

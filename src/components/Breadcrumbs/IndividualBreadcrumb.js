@@ -8,10 +8,11 @@ import { theme } from '../../theme/docsTheme';
 
 const linkStyling = LeafyCss`
   font-size: ${theme.fontSize.small};
+  vertical-align: middle;
 
   :hover,
   :focus {
-    text-decoration: none;
+    text-decoration: underline;
   }
 `;
 
@@ -20,8 +21,14 @@ const linkWrapperLayoutStyling = LeafyCss`
   overflow: hidden;
   text-wrap: nowrap;
 
-  :first-child, :last-child {
+  :first-child {
     min-width: max-content;
+  }
+
+  @media ${theme.screenSize.smallAndUp} {
+    :last-child {
+      min-width: max-content;
+    }
   }
 `;
 
@@ -38,26 +45,39 @@ function getServerSnapshot() {
   return false;
 }
 
+const TRUNCATION_THRESHOLD = 125; // px
+
 const useIsTruncated = (ref) => {
   const isTruncated = React.useSyncExternalStore(
     subscribeToResizeEvents,
-    () => (ref.current?.scrollWidth ?? 0) > (ref.current?.clientWidth ?? 0),
+    () => {
+      const isTruncated = (ref.current?.scrollWidth ?? 0) > (ref.current?.clientWidth ?? 0);
+      const isExcessivelyTruncated = isTruncated && ref.current?.clientWidth <= TRUNCATION_THRESHOLD;
+
+      // useSyncExternalStore requires types with value comparison semantics
+      return JSON.stringify({ isTruncated, isExcessivelyTruncated });
+    },
     getServerSnapshot
   );
 
-  return isTruncated;
+  return JSON.parse(isTruncated);
 };
 
-const IndividualBreadcrumb = ({ crumb, onClick }) => {
+const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => {
   const linkRef = React.useRef();
-  const isTruncated = useIsTruncated(linkRef);
+
+  const { isTruncated, isExcessivelyTruncated } = useIsTruncated(linkRef);
+
+  if (isExcessivelyTruncated) {
+    setIsExcessivelyTruncated();
+  }
 
   let result = (
-    <span className={cx(linkWrapperLayoutStyling)} ref={linkRef}>
+    <div className={cx(linkWrapperLayoutStyling)} ref={linkRef}>
       <Link className={cx(linkStyling)} to={crumb.url} onClick={onClick}>
         {formatText(crumb.title)}
       </Link>
-    </span>
+    </div>
   );
 
   if (isTruncated) {
@@ -65,7 +85,7 @@ const IndividualBreadcrumb = ({ crumb, onClick }) => {
       <Tooltip
         // To get the tooltip above the topnav we have to pop up the z-index
         popoverZIndex={9001}
-        baseFontSize={13}
+        baseFontSize={theme.fontSize.small}
         triggerEvent="hover"
         align="top"
         justify="middle"
@@ -86,6 +106,7 @@ const crumbObjectShape = {
 
 IndividualBreadcrumb.propTypes = {
   crumb: PropTypes.shape(crumbObjectShape).isRequired,
+  setIsExcessivelyTruncated: PropTypes.func.isRequired,
   onClick: PropTypes.func,
 };
 
