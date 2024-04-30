@@ -141,23 +141,22 @@ export const validateHTMAttributes = (elementType, props) => {
   const ele = elements[elementType];
 
   if (ele) {
-    return (
-      props &&
-      Object.keys(props).reduce((attributes, propKey) => {
-        // propKey values should be lowercase to account for
-        // React's HTML attributes in camelCase
-        if (ele.includes(propKey.toLocaleLowerCase())) {
-          attributes[propKey] = props[propKey];
-        } else {
-          const isDataOrAriaAttribute = dataAndRoleBasedAttributes.some((pattern) => pattern.test(propKey));
-          if (isDataOrAriaAttribute) {
+    return props
+      ? Object.keys(props).reduce((attributes, propKey) => {
+          // propKey values should be lowercase to account for
+          // React's HTML attributes in camelCase
+          if (ele.includes(propKey.toLocaleLowerCase())) {
             attributes[propKey] = props[propKey];
+          } else {
+            const isDataOrAriaAttribute = dataAndRoleBasedAttributes.some((pattern) => pattern.test(propKey));
+            if (isDataOrAriaAttribute) {
+              attributes[propKey] = props[propKey];
+            }
           }
-        }
 
-        return attributes;
-      }, {})
-    );
+          return attributes;
+        }, {})
+      : {};
   }
 
   // Provide hint to user on available element and return the props in it's origin form

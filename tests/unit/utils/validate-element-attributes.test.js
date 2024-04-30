@@ -47,4 +47,11 @@ describe('Validate Props', () => {
       `Please check that you are using the correct elementType, available types are ${Object.keys(elements)}`
     );
   });
+
+  it('Should return an empty Object when null is passed as a prop', () => {
+    const props = null;
+
+    const validateAnchorProps = validateHTMAttributes('anchor', props);
+    expect(validateAnchorProps).toMatchObject({});
+  });
 });
