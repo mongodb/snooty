@@ -26,6 +26,7 @@ import IconObjectiveC from '../icons/ObjectiveC';
 import IconJavascript from '../icons/Javascript';
 import IconTypescript from '../icons/Typescript';
 import IconDart from '../icons/Dart';
+import { isBrowser } from '../../utils/is-browser';
 import { makeChoices } from './TabSelectors';
 
 const DRIVER_ICON_MAP = {
@@ -72,7 +73,13 @@ const reducer = (prevState, { name, value }) => {
   };
 };
 
-const createInitialTabs = (choicesPerSelector, localActiveTabs) => {
+const initActiveTabs = (choicesPerSelector, localActiveTabs) => {
+  // all tabbed content is read from browser local storage
+  // if there is no browser, wait for client side local storage
+  // hidden content should be handled from tab components
+  if (!isBrowser) {
+    return {};
+  }
   // get default tabs based on availability
   const defaultRes = Object.keys(choicesPerSelector || {}).reduce((res, selectorKey) => {
     const nodeOptionIdx = choicesPerSelector[selectorKey].findIndex((tab) => tab.value === 'nodejs');
@@ -115,7 +122,7 @@ const TabProvider = ({ children, selectors = {} }) => {
   const [activeTabs, setActiveTab] = useReducer(
     reducer,
     getLocalValue('activeTabs'),
-    createInitialTabs.bind(null, choicesPerSelector)
+    initActiveTabs.bind(null, choicesPerSelector)
   );
 
   console.log('check activeTab during build time');

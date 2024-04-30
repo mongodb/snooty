@@ -1,7 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import { useTheme, css } from '@emotion/react';
 import Select from '../Select';
-import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { TabContext } from './tab-context';
@@ -56,7 +55,7 @@ const TabSelector = ({ activeTab, handleClick, iconMapping, name, options }) => 
           languageSelected: value,
         });
       }}
-      value={isBrowser && activeTab}
+      value={activeTab}
     />
   );
 };
