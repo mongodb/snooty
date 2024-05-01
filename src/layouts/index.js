@@ -103,7 +103,6 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
         slug={slug}
         repoBranches={repoBranches}
         headingNodes={page?.ast?.options?.headings}
-        selectors={page?.ast?.options?.selectors}
         remoteMetadata={remoteMetadata}
         project={project}
       >
@@ -139,6 +138,12 @@ DefaultLayout.propTypes = {
     guides: PropTypes.object,
     slug: PropTypes.string,
     template: PropTypes.string,
+  }).isRequired,
+  data: PropTypes.shape({
+    page: PropTypes.shape({
+      children: PropTypes.array,
+      options: PropTypes.object,
+    }).isRequired,
   }).isRequired,
 };
 

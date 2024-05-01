@@ -89,26 +89,17 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map((child) => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
-  const [activeTab, setActiveTabIndex] = useState(0);
+  const [activeTab, setActiveTabIndex] = useState(() => {
+    // activeTabIdx at build time should be -1 if tabsetName !== drivers
+    // since no local storage to read, and no default tabs
+    const activeTabIdx = tabIds.indexOf(activeTabs?.[tabsetName]);
+    return activeTabIdx > -1 ? activeTabIdx : 0;
+  });
 
   const scrollAnchorRef = useRef();
-  const previousTabsetChoice = activeTabs[tabsetName];
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
   const isHidden = options.hidden || Object.keys(selectors).includes(tabsetName);
   const isProductLanding = page?.options?.template === 'product-landing';
-
-  useEffect(() => {
-    if (!previousTabsetChoice || !tabIds.includes(previousTabsetChoice)) {
-      const index = children.findIndex((item) => item.options.tabid === 'nodejs');
-      if (index > -1) {
-        // Set first tab to nodejs if no tab was previously selected
-        setActiveTab({ name: tabsetName, value: getTabId(children[index]) });
-      } else {
-        // Set first tab as active if no tab was previously selected and cant find nodejs
-        setActiveTab({ name: tabsetName, value: getTabId(children[0]) });
-      }
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const index = tabIds.indexOf(activeTabs[tabsetName]);
