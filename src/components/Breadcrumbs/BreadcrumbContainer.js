@@ -18,19 +18,20 @@ const Flexbox = styled('div')`
 `;
 
 const MIN_BREADCRUMBS = 3;
+const initialMaxCrumbs = (breadcrumbs) => breadcrumbs.length + 1;
 
 const BreadcrumbContainer = ({ breadcrumbs }) => {
-  const [maxCrumbs, setMaxCrumbs] = React.useState(breadcrumbs.length);
+  const [maxCrumbs, setMaxCrumbs] = React.useState(initialMaxCrumbs(breadcrumbs));
 
   React.useEffect(() => {
     const handleResize = () => {
-      setMaxCrumbs(breadcrumbs.length + 1);
+      setMaxCrumbs(initialMaxCrumbs(breadcrumbs));
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [breadcrumbs.length]);
+  }, [breadcrumbs]);
 
   // Our breadcrumbs representation is an array of crumbObjectShape || (array of crumbObjectShape)
   // The latter indicates a collapsed series of breadcrumbs.

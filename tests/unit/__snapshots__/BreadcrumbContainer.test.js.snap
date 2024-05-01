@@ -98,94 +98,6 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   padding-right: 8px;
 }
 
-.emotion-6 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  color: #89979B;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: color 150ms ease-in-out;
-  transition: color 150ms ease-in-out;
-  background-color: rgba(255, 255, 255, 0);
-  height: 28px;
-  width: 28px;
-}
-
-.emotion-6:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  opacity: 0;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
-}
-
-.emotion-6:active:before,
-.emotion-6:hover:before,
-.emotion-6:focus:before {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.emotion-6:focus {
-  outline: none;
-}
-
-.emotion-6:active,
-.emotion-6:hover {
-  color: #3D4F58;
-}
-
-.emotion-6:active:before,
-.emotion-6:hover:before {
-  background-color: #E7EEEC;
-}
-
-.emotion-6:focus {
-  color: #1A567E;
-}
-
-.emotion-6:focus:before {
-  background-color: #C5E4F2;
-}
-
-.emotion-7 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
 <div
     class="emotion-0 emotion-1"
   >
@@ -207,36 +119,19 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
        / 
     </span>
-    <button
-      aria-disabled="false"
-      aria-expanded="false"
-      aria-haspopup="true"
-      aria-label="Show all breadcrumbs"
-      class="emotion-6"
-      tabindex="0"
+    <div
+      class="emotion-2"
     >
-      <div
-        class="emotion-7"
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://www.mongodb.com/docs/languages"
+        target="_self"
       >
-        <svg
-          aria-label="Ellipsis Icon"
-          class=""
-          fill="none"
-          height="16"
-          role="img"
-          viewBox="0 0 16 16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            clip-rule="evenodd"
-            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
-            fill="currentColor"
-            fill-rule="evenodd"
-          />
-        </svg>
-      </div>
-    </button>
+        <span>
+          Languages
+        </span>
+      </a>
+    </div>
     <span
       class="emotion-4 emotion-5"
     >
@@ -394,91 +289,23 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
 }
 
 .emotion-6 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  color: #89979B;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: color 150ms ease-in-out;
-  transition: color 150ms ease-in-out;
-  background-color: rgba(255, 255, 255, 0);
-  height: 28px;
-  width: 28px;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
 }
 
-.emotion-6:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  opacity: 0;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
+.emotion-6:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
 }
 
-.emotion-6:active:before,
-.emotion-6:hover:before,
-.emotion-6:focus:before {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.emotion-6:focus {
-  outline: none;
-}
-
-.emotion-6:active,
-.emotion-6:hover {
-  color: #3D4F58;
-}
-
-.emotion-6:active:before,
-.emotion-6:hover:before {
-  background-color: #E7EEEC;
-}
-
-.emotion-6:focus {
-  color: #1A567E;
-}
-
-.emotion-6:focus:before {
-  background-color: #C5E4F2;
-}
-
-.emotion-7 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
+@media not all and (max-width: 480px) {
+  .emotion-6:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
 }
 
 <div
@@ -502,36 +329,19 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
     >
        / 
     </span>
-    <button
-      aria-disabled="false"
-      aria-expanded="false"
-      aria-haspopup="true"
-      aria-label="Show all breadcrumbs"
+    <div
       class="emotion-6"
-      tabindex="0"
     >
-      <div
-        class="emotion-7"
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://www.mongodb.com/docs/atlas/device-sdks/"
+        target="_self"
       >
-        <svg
-          aria-label="Ellipsis Icon"
-          class=""
-          fill="none"
-          height="16"
-          role="img"
-          viewBox="0 0 16 16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            clip-rule="evenodd"
-            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
-            fill="currentColor"
-            fill-rule="evenodd"
-          />
-        </svg>
-      </div>
-    </button>
+        <span>
+          MongoDB Atlas Device SDKs
+        </span>
+      </a>
+    </div>
     <span
       class="emotion-4 emotion-5"
     >
@@ -668,94 +478,6 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
   padding-right: 8px;
 }
 
-.emotion-6 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  color: #89979B;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: color 150ms ease-in-out;
-  transition: color 150ms ease-in-out;
-  background-color: rgba(255, 255, 255, 0);
-  height: 28px;
-  width: 28px;
-}
-
-.emotion-6:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  opacity: 0;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
-}
-
-.emotion-6:active:before,
-.emotion-6:hover:before,
-.emotion-6:focus:before {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.emotion-6:focus {
-  outline: none;
-}
-
-.emotion-6:active,
-.emotion-6:hover {
-  color: #3D4F58;
-}
-
-.emotion-6:active:before,
-.emotion-6:hover:before {
-  background-color: #E7EEEC;
-}
-
-.emotion-6:focus {
-  color: #1A567E;
-}
-
-.emotion-6:focus:before {
-  background-color: #C5E4F2;
-}
-
-.emotion-7 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
 .emotion-10 {
   overflow: hidden;
   text-wrap: nowrap;
@@ -797,36 +519,19 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
     >
        / 
     </span>
-    <button
-      aria-disabled="false"
-      aria-expanded="false"
-      aria-haspopup="true"
-      aria-label="Show all breadcrumbs"
-      class="emotion-6"
-      tabindex="0"
+    <div
+      class="emotion-2"
     >
-      <div
-        class="emotion-7"
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://www.mongodb.com/docs/atlas/"
+        target="_self"
       >
-        <svg
-          aria-label="Ellipsis Icon"
-          class=""
-          fill="none"
-          height="16"
-          role="img"
-          viewBox="0 0 16 16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            clip-rule="evenodd"
-            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
-            fill="currentColor"
-            fill-rule="evenodd"
-          />
-        </svg>
-      </div>
-    </button>
+        <span>
+          MongoDB Atlas
+        </span>
+      </a>
+    </div>
     <span
       class="emotion-4 emotion-5"
     >
@@ -948,91 +653,23 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
 }
 
 .emotion-6 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  color: #89979B;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: color 150ms ease-in-out;
-  transition: color 150ms ease-in-out;
-  background-color: rgba(255, 255, 255, 0);
-  height: 28px;
-  width: 28px;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
 }
 
-.emotion-6:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  opacity: 0;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
+.emotion-6:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
 }
 
-.emotion-6:active:before,
-.emotion-6:hover:before,
-.emotion-6:focus:before {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.emotion-6:focus {
-  outline: none;
-}
-
-.emotion-6:active,
-.emotion-6:hover {
-  color: #3D4F58;
-}
-
-.emotion-6:active:before,
-.emotion-6:hover:before {
-  background-color: #E7EEEC;
-}
-
-.emotion-6:focus {
-  color: #1A567E;
-}
-
-.emotion-6:focus:before {
-  background-color: #C5E4F2;
-}
-
-.emotion-7 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
+@media not all and (max-width: 480px) {
+  .emotion-6:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
 }
 
 <div
@@ -1056,36 +693,19 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
     >
        / 
     </span>
-    <button
-      aria-disabled="false"
-      aria-expanded="false"
-      aria-haspopup="true"
-      aria-label="Show all breadcrumbs"
+    <div
       class="emotion-6"
-      tabindex="0"
     >
-      <div
-        class="emotion-7"
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://www.mongodb.com/docs/atlas/device-sdks/"
+        target="_self"
       >
-        <svg
-          aria-label="Ellipsis Icon"
-          class=""
-          fill="none"
-          height="16"
-          role="img"
-          viewBox="0 0 16 16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            clip-rule="evenodd"
-            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
-            fill="currentColor"
-            fill-rule="evenodd"
-          />
-        </svg>
-      </div>
-    </button>
+        <span>
+          MongoDB Atlas Device SDKs
+        </span>
+      </a>
+    </div>
     <span
       class="emotion-4 emotion-5"
     >
