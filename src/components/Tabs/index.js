@@ -90,22 +90,38 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const tabIds = children.map((child) => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
   const [activeTab, setActiveTabIndex] = useState(() => {
+    // activeTabIdx at build time should be -1 if tabsetName !== drivers
+    // since no local storage to read, and no default tabs
     const activeTabIdx = tabIds.indexOf(activeTabs?.[tabsetName]);
     console.log(
-      `check active tab idx at build time for tabsetname ${tabsetName}: ${activeTabIdx} (should be -1 if tabsetName is not drivers, since no local storage to read, anod no default values)`
+      `check active tab idx at build time for tabsetname ${tabsetName}: ${activeTabIdx} (should be -1 if tabsetName is not drivers, since no local storage to read, and no default values)`
     );
-    if (activeTabIdx === -1) {
-      setActiveTab({ name: tabsetName, value: children[0] });
-      return 0;
-    }
 
-    return activeTabIdx;
+    return activeTabIdx > -1 ? activeTabIdx : 0;
   });
 
   const scrollAnchorRef = useRef();
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
   const isHidden = options.hidden || Object.keys(selectors).includes(tabsetName);
   const isProductLanding = page?.options?.template === 'product-landing';
+
+  useEffect(() => {
+    // correct tab choice on init
+    // done in an effect (vs state init), as we need to update TabContext
+    const savedTab = activeTabs[tabsetName];
+    if (savedTab && tabIds.includes(savedTab)) {
+      return;
+    }
+
+    let defaultTabIdx = activeTab;
+    if (tabsetName === 'drivers') {
+      const nodeOptionIdx = children.findIndex((item) => item.options.tabid === 'nodejs');
+      defaultTabIdx = nodeOptionIdx > -1 ? nodeOptionIdx : defaultTabIdx;
+    }
+
+    console.log('updating active tab in context and in local storage on load');
+    setActiveTab({ name: tabsetName, value: getTabId(children[defaultTabIdx]) });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const index = tabIds.indexOf(activeTabs[tabsetName]);
