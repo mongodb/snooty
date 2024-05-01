@@ -15,7 +15,7 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
 
 .emotion-2 {
   overflow: hidden;
-  text-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .emotion-2:first-child {
@@ -205,7 +205,7 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
 
 .emotion-2 {
   overflow: hidden;
-  text-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .emotion-2:first-child {
@@ -290,7 +290,7 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
 
 .emotion-6 {
   overflow: hidden;
-  text-wrap: nowrap;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
@@ -395,7 +395,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
 
 .emotion-2 {
   overflow: hidden;
-  text-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .emotion-2:first-child {
@@ -480,7 +480,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
 
 .emotion-10 {
   overflow: hidden;
-  text-wrap: nowrap;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
@@ -569,7 +569,7 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
 
 .emotion-2 {
   overflow: hidden;
-  text-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .emotion-2:first-child {
@@ -654,7 +654,7 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
 
 .emotion-6 {
   overflow: hidden;
-  text-wrap: nowrap;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 

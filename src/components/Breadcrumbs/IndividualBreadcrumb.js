@@ -22,7 +22,7 @@ const ellipsisStyling = LeafyCss`
 
 const linkWrapperLayoutStyling = LeafyCss`
   overflow: hidden;
-  text-wrap: nowrap;
+  white-space: nowrap;
 
   :first-child {
     min-width: max-content;
