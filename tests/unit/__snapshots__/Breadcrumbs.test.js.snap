@@ -23,7 +23,6 @@ exports[`renders correctly as a homepage 1`] = `
 
 .emotion-3 {
   overflow: hidden;
-  text-wrap: nowrap;
   white-space: nowrap;
 }
 
@@ -172,7 +171,6 @@ exports[`renders correctly with siteTitle 1`] = `
 
 .emotion-3 {
   overflow: hidden;
-  text-wrap: nowrap;
   white-space: nowrap;
 }
 
@@ -258,7 +256,6 @@ exports[`renders correctly with siteTitle 1`] = `
 
 .emotion-15 {
   overflow: hidden;
-  text-wrap: nowrap;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
