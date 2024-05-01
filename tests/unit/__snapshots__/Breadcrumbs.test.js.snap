@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly with pageTitle 1`] = `
+exports[`renders correctly as a homepage 1`] = `
 <DocumentFragment>
   .emotion-0 {
   font-size: 13px;
@@ -15,10 +15,13 @@ exports[`renders correctly with pageTitle 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-3 {
-  text-overflow: ellipsis;
   overflow: hidden;
   text-wrap: nowrap;
 }
@@ -103,57 +106,10 @@ exports[`renders correctly with pageTitle 1`] = `
   padding-right: 8px;
 }
 
-.emotion-8 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  line-height: 13px;
-  color: #016BF8;
-}
-
-.emotion-8>code {
-  color: #016BF8;
-}
-
-.emotion-8:focus,
-.emotion-8:hover {
-  text-decoration-line: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-8:focus {
-  text-decoration-color: #016BF8;
-  outline: none;
-}
-
-.emotion-8:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-9 {
-  font-size: 13px;
-  vertical-align: middle;
-}
-
-.emotion-9:hover,
-.emotion-9:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
 <div
     class="emotion-0"
   >
-    <span
+    <div
       class="emotion-1 emotion-2"
     >
       <div
@@ -178,13 +134,16 @@ exports[`renders correctly with pageTitle 1`] = `
         class="emotion-3"
       >
         <a
-          class="emotion-8 emotion-9"
-          href="/view-analyze/"
+          class="lg-ui-0001 emotion-4"
+          href="https://www.mongodb.com/docs/atlas/"
+          target="_self"
         >
-          View & Analyze Data
+          <span>
+            MongoDB Atlas
+          </span>
         </a>
       </div>
-    </span>
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -204,10 +163,13 @@ exports[`renders correctly with siteTitle 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .emotion-3 {
-  text-overflow: ellipsis;
   overflow: hidden;
   text-wrap: nowrap;
 }
@@ -292,57 +254,98 @@ exports[`renders correctly with siteTitle 1`] = `
   padding-right: 8px;
 }
 
+.emotion-7 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  color: #89979B;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
+  background-color: rgba(255, 255, 255, 0);
+  height: 28px;
+  width: 28px;
+}
+
+.emotion-7:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  opacity: 0;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-7:active:before,
+.emotion-7:hover:before,
+.emotion-7:focus:before {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-7:focus {
+  outline: none;
+}
+
+.emotion-7:active,
+.emotion-7:hover {
+  color: #3D4F58;
+}
+
+.emotion-7:active:before,
+.emotion-7:hover:before {
+  background-color: #E7EEEC;
+}
+
+.emotion-7:focus {
+  color: #1A567E;
+}
+
+.emotion-7:focus:before {
+  background-color: #C5E4F2;
+}
+
 .emotion-8 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  line-height: 13px;
-  color: #016BF8;
-}
-
-.emotion-8>code {
-  color: #016BF8;
-}
-
-.emotion-8:focus,
-.emotion-8:hover {
-  text-decoration-line: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-8:focus {
-  text-decoration-color: #016BF8;
-  outline: none;
-}
-
-.emotion-8:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-9 {
-  font-size: 13px;
-  vertical-align: middle;
-}
-
-.emotion-9:hover,
-.emotion-9:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 <div
     class="emotion-0"
   >
-    <span
+    <div
       class="emotion-1 emotion-2"
     >
       <div
@@ -363,17 +366,91 @@ exports[`renders correctly with siteTitle 1`] = `
       >
          / 
       </span>
+      <button
+        aria-disabled="false"
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="Show all breadcrumbs"
+        class="emotion-7"
+        tabindex="0"
+      >
+        <div
+          class="emotion-8"
+        >
+          <svg
+            aria-label="Ellipsis Icon"
+            class=""
+            fill="none"
+            height="16"
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </button>
+      <span
+        class="emotion-5 emotion-6"
+      >
+         / 
+      </span>
       <div
         class="emotion-3"
       >
         <a
-          class="emotion-8 emotion-9"
-          href="/"
+          class="lg-ui-0001 emotion-4"
+          href="https://www.mongodb.com/docs/atlas/device-sdks/"
+          target="_self"
         >
-          MongoDB Compass
+          <span>
+            Atlas Device SDKs
+          </span>
         </a>
       </div>
-    </span>
+      <span
+        class="emotion-5 emotion-6"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-3"
+      >
+        <a
+          class="lg-ui-0001 emotion-4"
+          href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/"
+          target="_self"
+        >
+          <span>
+            Atlas Device SDK for C++
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-5 emotion-6"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-3"
+      >
+        <a
+          class="lg-ui-0001 emotion-4"
+          href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/application-services/"
+          target="_self"
+        >
+          <span>
+            Application Services - C++ SDK
+          </span>
+        </a>
+      </div>
+    </div>
   </div>
 </DocumentFragment>
 `;

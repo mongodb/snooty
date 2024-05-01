@@ -19,9 +19,6 @@ useStaticQuery.mockImplementation(() => ({
       project: '',
     },
   },
-  allProjectParent: {
-    nodes: [],
-  },
 }));
 
 const mountSidenav = async () => {

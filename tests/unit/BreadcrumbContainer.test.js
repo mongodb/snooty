@@ -1,96 +1,63 @@
 import React from 'react';
-import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
-import { mockLocation } from '../utils/mock-location';
 import BreadcrumbContainer from '../../src/components/Breadcrumbs/BreadcrumbContainer';
-import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
+import mockData from './data/Breadcrumbs.test.json';
 
-const mountBreadcrumbContainer = (homeCrumb, lastCrumb) => {
-  return render(<BreadcrumbContainer homeCrumb={homeCrumb} lastCrumb={lastCrumb} />);
-};
-
-const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 
-beforeEach(() => {
-  useSnootyMetadata.mockImplementation(() => ({
-    project: 'test-project',
-  }));
-  mockLocation(null, `/`);
-  useStaticQuery.mockImplementation(() => ({
-    site: {
-      siteMetadata: {
-        project: '',
-      },
-    },
-    allProjectParent: {
-      nodes: [],
-    },
-  }));
-});
+const mountBreadcrumbContainer = (breadcrumbs) => {
+  return render(<BreadcrumbContainer breadcrumbs={breadcrumbs} />);
+};
+
+jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
+
+const mockIntermediateCrumbs = {
+  title: 'MongoDB Atlas',
+  url: 'https://www.mongodb.com/docs/atlas/',
+};
+
+const mockPropertyCrumb = {
+  title: 'MongoDB Atlas Device SDKs',
+  url: 'https://www.mongodb.com/docs/atlas/device-sdks/',
+};
 
 describe('BreadcrumbContainer', () => {
+  //home breadcrumb
   const mockHomeCrumb = {
     title: 'Docs Home',
     url: 'https://www.mongodb.com/docs/',
   };
 
-  it('renders correctly with project parent', () => {
-    const mockLastCrumb = {
-      title: 'MongoDB Compass',
-      url: 'documents/view',
-    };
+  const mockParents = mockData;
 
-    const mockParents = [
-      {
-        title: 'Crumb 1',
-        url: 'https://www.mongodb.com/docs/',
-      },
-      {
-        title: 'Crumb 2',
-        url: 'https://www.mongodb.com/docs/',
-      },
-      {
-        title: 'Crumb 3',
-        url: 'https://www.mongodb.com/docs/',
-      },
-      {
-        title: 'Crumb 4',
-        url: 'https://www.mongodb.com/docs/',
-      },
-      {
-        title: 'View & Analyze: An Outrageously Long Title',
-        url: 'https://www.mongodb.com/docs/view-analyze',
-      },
+  it('renders a driver site correctly with intermediate breadcrumb and with project parents', () => {
+    const breadcrumbs = [
+      { title: 'Docs Home', url: 'https://www.mongodb.com/docs/' },
+      { title: 'Languages', url: 'https://www.mongodb.com/docs/languages' },
+      { title: 'C#/.NET', url: 'https://www.mongodb.com/docs/languages/csharp/' },
+      { title: 'C#/.NET Driver', url: 'https://www.mongodb.com/docs/languages/csharp/csharp-driver/' },
+      { title: 'Usage Examples', url: 'https://www.mongodb.com/docs/languages/csharp/csharp-driver/usage-examples/' },
     ];
 
-    useStaticQuery.mockImplementation(() => ({
-      site: {
-        siteMetadata: {
-          project: 'test-project',
-        },
-      },
-      allProjectParent: {
-        nodes: [
-          {
-            project: 'test-project',
-            parents: mockParents,
-          },
-        ],
-      },
-    }));
-
-    const tree = mountBreadcrumbContainer(mockHomeCrumb, mockLastCrumb);
+    const tree = mountBreadcrumbContainer(breadcrumbs);
     expect(tree.asFragment()).toMatchSnapshot();
   });
 
-  it('renders correctly without project parent', () => {
-    const mockLastCrumb = {
-      title: 'View & Analyze Data',
-      url: 'view-analyze',
-    };
+  it('renders correctly with intermediate breadcrumb, no project parents', () => {
+    const breadcrumbs = [mockHomeCrumb, mockIntermediateCrumbs, mockPropertyCrumb, ...mockParents['example-projects']];
+    const tree = mountBreadcrumbContainer(breadcrumbs);
+    expect(tree.asFragment()).toMatchSnapshot();
+  });
 
-    const tree = mountBreadcrumbContainer(mockHomeCrumb, mockLastCrumb, []);
+  it('renders correctly with no intermediate breadcrumbs, has project parents', () => {
+    const breadcrumbs = [mockHomeCrumb, mockPropertyCrumb, ...mockParents['sdk/cpp/app-services/call-a-function']];
+    const tree = mountBreadcrumbContainer(breadcrumbs);
+    expect(tree.asFragment()).toMatchSnapshot();
+  });
+
+  it('renders correctly as a docs homepage', () => {
+    const breadcrumbs = [mockHomeCrumb, mockPropertyCrumb, ...mockParents['sdk/cpp/app-services/call-a-function']];
+    const tree = mountBreadcrumbContainer(breadcrumbs);
     expect(tree.asFragment()).toMatchSnapshot();
   });
 });

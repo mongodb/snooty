@@ -6,7 +6,6 @@ import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
-import { SidenavBackButton } from '../Sidenav';
 import Spinner from '../Spinner';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -91,13 +90,6 @@ const getGlobalCss = ({ topLarge, topMedium }) => css`
   }
 `;
 
-const Border = styled('hr')`
-  border: unset;
-  border-bottom: 1px solid ${palette.gray.light2};
-  margin: ${theme.size.default} 0;
-  width: 100%;
-`;
-
 const LoadingContainer = styled('div')`
   align-items: center;
   display: flex;
@@ -132,12 +124,9 @@ const LoadingWidget = ({ className }) => (
 );
 
 const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
-  const docsTitle = siteTitle ? `${siteTitle} Docs` : 'Docs';
   return (
     <>
-      {/* Disable LG left arrow glyph due to bug where additional copies of the LG icon would be rendered 
-          at the bottom of the page. */}
-      <SidenavBackButton border={<Border />} enableGlyph={false} target="/" titleOverride={docsTitle} />
+      {/* TODO: Add DocsHomeButton here - see comment below */}
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
   );
@@ -213,6 +202,8 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
                 sidebarEl.insertBefore(menuTitleContainerEl, searchEl);
                 const pageTitle = page?.options?.title || '';
                 const siteTitle = metadata?.title;
+                /* TODO: The below function is deprecated with React 18, need to replace it (potentially with 
+                  createRoot() and .render() (see React documentation) */
                 render(<MenuTitleContainer siteTitle={siteTitle} pageTitle={pageTitle} />, menuTitleContainerEl);
               }
             }

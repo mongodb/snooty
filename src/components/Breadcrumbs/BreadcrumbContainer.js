@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { reportAnalytics } from '../../utils/report-analytics';
-import { useNavigationParents } from '../../hooks/use-navigation-parents';
-import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { theme } from '../../theme/docsTheme';
 import IndividualBreadcrumb from './IndividualBreadcrumb';
 import CollapsedBreadcrumbs from './CollapsedBreadcrumbs';
@@ -21,39 +19,31 @@ const Flexbox = styled('div')`
 
 const MIN_BREADCRUMBS = 3;
 
-const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
-  const { project } = useSnootyMetadata();
-  const parents = useNavigationParents(project);
-
-  // On mobile, we collapse all of the breadcrumbs between the first and the last
-  const crumbs = React.useMemo(() => {
-    return [homeCrumb, ...parents, lastCrumb];
-  }, [homeCrumb, parents, lastCrumb]);
-
-  const [maxCrumbs, setMaxCrumbs] = React.useState(crumbs.length);
+const BreadcrumbContainer = ({ breadcrumbs }) => {
+  const [maxCrumbs, setMaxCrumbs] = React.useState(breadcrumbs.length);
 
   React.useEffect(() => {
     const handleResize = () => {
-      setMaxCrumbs(crumbs.length + 1);
+      setMaxCrumbs(breadcrumbs.length + 1);
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [crumbs.length]);
+  }, [breadcrumbs.length]);
 
   // Our breadcrumbs representation is an array of crumbObjectShape || (array of crumbObjectShape)
   // The latter indicates a collapsed series of breadcrumbs.
-  const breadcrumbs = React.useMemo(() => {
-    const crumbsCopy = Array.from(crumbs);
+  const processedBreadcrumbs = React.useMemo(() => {
+    const crumbsCopy = Array.from(breadcrumbs);
     if (crumbsCopy.length >= maxCrumbs && crumbsCopy.length > 2) {
       // A maximum of maxCrumbs breadcrumbs may be shown, so we collapse the first run of internal
       // crumbs into a single "…" crumb
-      const collapsedCrumbs = crumbsCopy.splice(1, crumbs.length - maxCrumbs + 1, []);
+      const collapsedCrumbs = crumbsCopy.splice(1, breadcrumbs.length - maxCrumbs + 1, []);
       crumbsCopy[1] = collapsedCrumbs;
     }
     return crumbsCopy;
-  }, [maxCrumbs, crumbs]);
+  }, [maxCrumbs, breadcrumbs]);
 
   const collapseBreadcrumbs = () => {
     const newMaxCrumbs = Math.max(maxCrumbs - 1, MIN_BREADCRUMBS);
@@ -62,7 +52,7 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
 
   return (
     <Flexbox>
-      {breadcrumbs.map((crumb, index) => {
+      {processedBreadcrumbs.map((crumb, index) => {
         const isFirst = index === 0;
         return (
           <React.Fragment key={index}>
@@ -94,8 +84,7 @@ const crumbObjectShape = {
 };
 
 BreadcrumbContainer.propTypes = {
-  homeCrumb: PropTypes.shape(crumbObjectShape).isRequired,
-  lastCrumb: PropTypes.shape(crumbObjectShape).isRequired,
+  breadcrumbs: PropTypes.shape(crumbObjectShape).isRequired,
 };
 
 export default BreadcrumbContainer;

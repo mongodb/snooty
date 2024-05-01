@@ -70,7 +70,7 @@ const screenSize = {
 
 const header = {
   bannerHeight: '40px',
-  navbarHeight: '88px',
+  navbarHeight: '95px',
   navbarMobileHeight: '56px',
   docsMobileMenuHeight: '52px',
   // used for scrolling elements into place, considering sticky header
