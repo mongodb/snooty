@@ -254,6 +254,26 @@ exports[`renders correctly with siteTitle 1`] = `
   padding-right: 8px;
 }
 
+.emotion-15 {
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+
+.emotion-15:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-15:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
 <div
     class="emotion-0"
   >
@@ -315,7 +335,7 @@ exports[`renders correctly with siteTitle 1`] = `
          / 
       </span>
       <div
-        class="emotion-3"
+        class="emotion-15"
       >
         <a
           class="lg-ui-0001 emotion-4"
@@ -333,7 +353,7 @@ exports[`renders correctly with siteTitle 1`] = `
          / 
       </span>
       <div
-        class="emotion-3"
+        class="emotion-15"
       >
         <a
           class="lg-ui-0001 emotion-4"

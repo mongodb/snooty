@@ -93,7 +93,7 @@ const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => 
       <Tooltip
         // To get the tooltip above the topnav we have to pop up the z-index
         popoverZIndex={9001}
-        baseFontSize={theme.fontSize.small}
+        baseFontSize={13}
         triggerEvent="hover"
         align="top"
         justify="middle"
