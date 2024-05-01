@@ -106,24 +106,6 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const isProductLanding = page?.options?.template === 'product-landing';
 
   useEffect(() => {
-    // correct tab choice on init
-    // done in an effect (vs state init), as we need to update TabContext
-    const savedTab = activeTabs[tabsetName];
-    if (savedTab && tabIds.includes(savedTab)) {
-      return;
-    }
-
-    let defaultTabIdx = activeTab;
-    if (tabsetName === 'drivers') {
-      const nodeOptionIdx = children.findIndex((item) => item.options.tabid === 'nodejs');
-      defaultTabIdx = nodeOptionIdx > -1 ? nodeOptionIdx : defaultTabIdx;
-    }
-
-    console.log('updating active tab in context and in local storage on load');
-    setActiveTab({ name: tabsetName, value: getTabId(children[defaultTabIdx]) });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
     const index = tabIds.indexOf(activeTabs[tabsetName]);
     if (index !== -1) {
       setActiveTabIndex(index);

@@ -140,6 +140,12 @@ DefaultLayout.propTypes = {
     slug: PropTypes.string,
     template: PropTypes.string,
   }).isRequired,
+  data: PropTypes.shape({
+    page: PropTypes.shape({
+      children: PropTypes.array,
+      options: PropTypes.object,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default DefaultLayout;
