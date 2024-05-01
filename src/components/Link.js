@@ -9,6 +9,7 @@ import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { isGatsbyPreview } from '../utils/is-gatsby-preview';
+import { validateHTMAttributes } from '../utils/validate-element-attributes';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -66,6 +67,8 @@ const Link = ({
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
+  const anchorProps = validateHTMAttributes('anchor', other);
+
   //used instead of LG showLinkArrow prop for consistency between LGLinks and GatsbyLinks(GatsbyLinks don't have that prop)
   const decoration = showLinkArrow ? (
     <span>
@@ -103,7 +106,7 @@ const Link = ({
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}
-        {...other}
+        {...anchorProps}
       >
         {children}
         {decoration}
@@ -122,7 +125,7 @@ const Link = ({
       href={to}
       hideExternalIcon={!showExtIcon}
       target={target}
-      {...other}
+      {...anchorProps}
     >
       {children}
       {decoration}

@@ -1,4 +1,5 @@
 import { css } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 
 export const sideNavItemBasePadding = css`
@@ -30,4 +31,20 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
 
 export const sideNavItemFontSize = css`
   font-size: ${theme.fontSize.small};
+`;
+
+export const titleStyle = css`
+  color: ${palette.gray.dark3};
+  font-size: ${theme.fontSize.small};
+  font-weight: bold;
+  line-height: 20px;
+  text-transform: none;
+  :hover {
+    background-color: inherit;
+
+    &:after,
+    span:after {
+      display: none;
+    }
+  }
 `;
