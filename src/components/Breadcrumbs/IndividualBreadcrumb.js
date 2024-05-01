@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import Tooltip from '@leafygreen-ui/tooltip';
@@ -16,8 +16,11 @@ const linkStyling = LeafyCss`
   }
 `;
 
-const linkWrapperLayoutStyling = LeafyCss`
+const ellipsisStyling = LeafyCss`
   text-overflow: ellipsis;
+`;
+
+const linkWrapperLayoutStyling = LeafyCss`
   overflow: hidden;
   text-wrap: nowrap;
 
@@ -47,12 +50,12 @@ function getServerSnapshot() {
 
 const TRUNCATION_THRESHOLD = 125; // px
 
-const useIsTruncated = (ref) => {
+const useIsTruncated = (node) => {
   const isTruncated = React.useSyncExternalStore(
     subscribeToResizeEvents,
     () => {
-      const isTruncated = (ref.current?.scrollWidth ?? 0) > (ref.current?.clientWidth ?? 0);
-      const isExcessivelyTruncated = isTruncated && ref.current?.clientWidth <= TRUNCATION_THRESHOLD;
+      const isTruncated = (node?.scrollWidth ?? 0) > (node?.clientWidth ?? 0);
+      const isExcessivelyTruncated = isTruncated && node?.clientWidth <= TRUNCATION_THRESHOLD;
 
       // useSyncExternalStore requires types with value comparison semantics
       return JSON.stringify({ isTruncated, isExcessivelyTruncated });
@@ -64,16 +67,21 @@ const useIsTruncated = (ref) => {
 };
 
 const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => {
-  const linkRef = React.useRef();
+  const [node, setNode] = useState(null);
+  const measuredRef = useCallback((node) => {
+    if (node !== null) {
+      setNode(node);
+    }
+  }, []);
 
-  const { isTruncated, isExcessivelyTruncated } = useIsTruncated(linkRef);
+  const { isTruncated, isExcessivelyTruncated } = useIsTruncated(node);
 
   if (isExcessivelyTruncated) {
     setIsExcessivelyTruncated();
   }
 
   let result = (
-    <div className={cx(linkWrapperLayoutStyling)} ref={linkRef}>
+    <div className={cx(linkWrapperLayoutStyling, crumb.title.length > 21 ? ellipsisStyling : '')} ref={measuredRef}>
       <Link className={cx(linkStyling)} to={crumb.url} onClick={onClick}>
         {formatText(crumb.title)}
       </Link>

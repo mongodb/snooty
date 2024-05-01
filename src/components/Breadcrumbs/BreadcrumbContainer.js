@@ -14,8 +14,9 @@ const StyledSlash = styled('span')`
   padding-right: ${theme.size.small};
 `;
 
-const Flexbox = styled('span')`
+const Flexbox = styled('div')`
   display: flex;
+  align-items: center;
 `;
 
 const MIN_BREADCRUMBS = 3;
@@ -70,6 +71,7 @@ const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
               <CollapsedBreadcrumbs crumbs={crumb}></CollapsedBreadcrumbs>
             ) : (
               <IndividualBreadcrumb
+                key={crumb.title}
                 crumb={crumb}
                 setIsExcessivelyTruncated={collapseBreadcrumbs}
                 onClick={() =>
