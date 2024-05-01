@@ -153,7 +153,6 @@ const DefaultLayout = ({
           repoBranches={repoBranches}
           associatedReposInfo={associatedReposInfo}
           headingNodes={page?.options?.headings}
-          selectors={page?.options?.selectors}
           isAssociatedProduct={isAssociatedProduct}
         >
           <GlobalGrid>

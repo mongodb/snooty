@@ -93,10 +93,6 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
     // activeTabIdx at build time should be -1 if tabsetName !== drivers
     // since no local storage to read, and no default tabs
     const activeTabIdx = tabIds.indexOf(activeTabs?.[tabsetName]);
-    console.log(
-      `check active tab idx at build time for tabsetname ${tabsetName}: ${activeTabIdx} (should be -1 if tabsetName is not drivers, since no local storage to read, and no default values)`
-    );
-
     return activeTabIdx > -1 ? activeTabIdx : 0;
   });
 

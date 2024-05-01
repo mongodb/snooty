@@ -125,9 +125,6 @@ const TabProvider = ({ children, selectors = {} }) => {
     initActiveTabs.bind(null, choicesPerSelector)
   );
 
-  console.log('check activeTab during build time');
-  console.log(activeTabs);
-
   useEffect(() => {
     setLocalValue('activeTabs', activeTabs);
   }, [activeTabs]);

@@ -7,7 +7,6 @@ import { SidenavContextProvider } from './Sidenav';
 import { ContentsProvider } from './Contents/contents-context';
 
 const RootProvider = ({ children, headingNodes, slug, repoBranches, remoteMetadata }) => {
-  console.log('check slug', slug);
   return (
     <ContentsProvider headingNodes={headingNodes}>
       <HeaderContextProvider>
