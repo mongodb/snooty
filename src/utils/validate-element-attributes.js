@@ -135,7 +135,7 @@ export const elements = {
 /**
  * Filter props based on validAttributes and regexPatterns
  * @param {string} elementType
- * @param {any} props // potential suitor for HTML attributes
+ * @param {object} props // potential suitor for HTML attributes
  */
 export const validateHTMAttributes = (elementType, props) => {
   const ele = elements[elementType];
