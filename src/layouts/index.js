@@ -103,7 +103,6 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
         slug={slug}
         repoBranches={repoBranches}
         headingNodes={page?.ast?.options?.headings}
-        selectors={page?.ast?.options?.selectors}
         remoteMetadata={remoteMetadata}
         project={project}
       >

@@ -83,7 +83,7 @@ const initActiveTabs = (choicesPerSelector, localActiveTabs) => {
   // get default tabs based on availability
   const defaultRes = Object.keys(choicesPerSelector || {}).reduce((res, selectorKey) => {
     const nodeOptionIdx = choicesPerSelector[selectorKey].findIndex((tab) => tab.value === 'nodejs');
-    // TODO: find default choicesPerSelector for other tab types
+    // NOTE: default tabs should be specified here
     if (selectorKey === 'drivers' && nodeOptionIdx > -1) {
       res[selectorKey] = 'nodejs';
     } else {
