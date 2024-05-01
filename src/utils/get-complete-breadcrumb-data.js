@@ -2,6 +2,26 @@ import { baseUrl } from './base-url';
 import { assertTrailingSlash } from './assert-trailing-slash';
 import { removeLeadingSlash } from './remove-leading-slash';
 
+const nodesToString = (titleNodes) => {
+  if (typeof titleNodes === 'string') {
+    return titleNodes;
+  }
+
+  if (!titleNodes) {
+    return titleNodes;
+  }
+
+  return titleNodes
+    .map((node) => {
+      if (node.type === 'text') {
+        return node.value;
+      }
+
+      return nodesToString(node.children);
+    })
+    .join('');
+};
+
 export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, parentPaths }) => {
   //get intermediate breadcrumbs and property Url
   const propertyUrl = assertTrailingSlash(queriedCrumbs?.propertyUrl ?? baseUrl());
@@ -18,7 +38,7 @@ export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, pare
   let propertyCrumb;
   if (slug !== '/') {
     propertyCrumb = {
-      title: siteTitle,
+      title: nodesToString(siteTitle),
       url: propertyUrl,
     };
   }
@@ -26,7 +46,11 @@ export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, pare
   //get direct parents of the current page from parentPaths
   //add respective url to each direct parent crumb
   const parents = (parentPaths[slug] ?? []).map((crumb) => {
-    return { ...crumb, url: assertTrailingSlash(propertyUrl + removeLeadingSlash(crumb.path)) };
+    return {
+      ...crumb,
+      title: nodesToString(crumb.title),
+      url: assertTrailingSlash(propertyUrl + removeLeadingSlash(crumb.path)),
+    };
   });
 
   return propertyCrumb
