@@ -1,73 +1,81 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
-import { palette } from '@leafygreen-ui/palette';
-import Link from '../Link';
-import { formatText } from '../../utils/format-text';
-import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
-import { useNavigationParents } from '../../hooks/use-navigation-parents';
-import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { theme } from '../../theme/docsTheme';
+import IndividualBreadcrumb from './IndividualBreadcrumb';
+import CollapsedBreadcrumbs from './CollapsedBreadcrumbs';
 
-const activeColor = css`
-  color: ${palette.gray.dark3};
-`;
-
-const StyledArrow = styled('span')`
+const StyledSlash = styled('span')`
   cursor: default;
-
-  :last-of-type {
-    ${activeColor}
-  }
+  padding-left: ${theme.size.small};
+  padding-right: ${theme.size.small};
 `;
 
-const linkStyling = LeafyCss`
-  font-size: ${theme.fontSize.small};
-  :last-of-type {
-    ${activeColor}
-  }
+const Flexbox = styled('div')`
+  display: flex;
+  align-items: center;
+`;
 
-  :hover,
-  :focus {
-    text-decoration: none;
+const MIN_BREADCRUMBS = 3;
+const initialMaxCrumbs = (breadcrumbs) => breadcrumbs.length + 1;
 
-    :not(:last-of-type) {
-      ${activeColor}
+const BreadcrumbContainer = ({ breadcrumbs }) => {
+  const [maxCrumbs, setMaxCrumbs] = React.useState(initialMaxCrumbs(breadcrumbs));
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setMaxCrumbs(initialMaxCrumbs(breadcrumbs));
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [breadcrumbs]);
+
+  // Our breadcrumbs representation is an array of crumbObjectShape || (array of crumbObjectShape)
+  // The latter indicates a collapsed series of breadcrumbs.
+  const processedBreadcrumbs = React.useMemo(() => {
+    const crumbsCopy = Array.from(breadcrumbs);
+    if (crumbsCopy.length >= maxCrumbs && crumbsCopy.length > 2) {
+      // A maximum of maxCrumbs breadcrumbs may be shown, so we collapse the first run of internal
+      // crumbs into a single "…" crumb
+      const collapsedCrumbs = crumbsCopy.splice(1, breadcrumbs.length - maxCrumbs + 1, []);
+      crumbsCopy[1] = collapsedCrumbs;
     }
-  }
-`;
+    return crumbsCopy;
+  }, [maxCrumbs, breadcrumbs]);
 
-const BreadcrumbContainer = ({ homeCrumb, lastCrumb }) => {
-  const { project } = useSnootyMetadata();
-  const parents = useNavigationParents(project);
-  const breadcrumbs = React.useMemo(() => [homeCrumb, ...parents, lastCrumb], [homeCrumb, parents, lastCrumb]);
+  const collapseBreadcrumbs = () => {
+    const newMaxCrumbs = Math.max(maxCrumbs - 1, MIN_BREADCRUMBS);
+    setMaxCrumbs(newMaxCrumbs);
+  };
 
   return (
-    <>
-      {breadcrumbs.map(({ title, url }, index) => {
+    <Flexbox>
+      {processedBreadcrumbs.map((crumb, index) => {
         const isFirst = index === 0;
-        const renderKey = typeof title === 'string' ? title : title[0]?.value; // could return undefined which is fine, we would still get a unique key
         return (
-          <React.Fragment key={`${renderKey}-${index}`}>
-            {!isFirst && <StyledArrow> &#8594; </StyledArrow>}
-            <Link
-              className={cx(linkStyling)}
-              to={url}
-              onClick={() => {
-                reportAnalytics('BreadcrumbClick', {
-                  parentPaths: breadcrumbs,
-                  breadcrumbClicked: url,
-                });
-              }}
-            >
-              {formatText(title)}
-            </Link>
+          <React.Fragment key={index}>
+            {!isFirst && <StyledSlash> / </StyledSlash>}
+            {Array.isArray(crumb) ? (
+              <CollapsedBreadcrumbs crumbs={crumb}></CollapsedBreadcrumbs>
+            ) : (
+              <IndividualBreadcrumb
+                key={crumb.title}
+                crumb={crumb}
+                setIsExcessivelyTruncated={collapseBreadcrumbs}
+                onClick={() =>
+                  reportAnalytics('BreadcrumbClick', {
+                    breadcrumbClicked: crumb.url,
+                  })
+                }
+              ></IndividualBreadcrumb>
+            )}
           </React.Fragment>
         );
       })}
-    </>
+    </Flexbox>
   );
 };
 
@@ -77,8 +85,7 @@ const crumbObjectShape = {
 };
 
 BreadcrumbContainer.propTypes = {
-  homeCrumb: PropTypes.shape(crumbObjectShape).isRequired,
-  lastCrumb: PropTypes.shape(crumbObjectShape).isRequired,
+  breadcrumbs: PropTypes.shape(crumbObjectShape).isRequired,
 };
 
 export default BreadcrumbContainer;
