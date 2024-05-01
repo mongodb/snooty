@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Body } from '@leafygreen-ui/typography';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
@@ -26,9 +25,9 @@ const Breadcrumbs = ({ siteTitle, slug }) => {
   );
 
   return (
-    <Body className={cx(breadcrumbBodyStyle)}>
+    <div className={cx(breadcrumbBodyStyle)}>
       <BreadcrumbContainer breadcrumbs={breadcrumbs} />
-    </Body>
+    </div>
   );
 };
 
