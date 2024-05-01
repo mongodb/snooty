@@ -204,6 +204,7 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
     <button
       aria-disabled="false"
       class="lg-ui-button-0000 emotion-12 emotion-13 emotion-14"
+      data-lgid="lg-button"
       type="button"
     >
       <div
