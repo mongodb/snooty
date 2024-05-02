@@ -1,4 +1,6 @@
 import { baseUrl } from './base-url';
+import { assertTrailingSlash } from './assert-trailing-slash';
+import { removeLeadingSlash } from './remove-leading-slash';
 import { assertLeadingSlash } from './assert-leading-slash';
 
 const nodesToString = (titleNodes) => {
@@ -23,7 +25,9 @@ const nodesToString = (titleNodes) => {
 
 export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, parentPaths }) => {
   //get intermediate breadcrumbs
-  const intermediateCrumbs = queriedCrumbs?.breadcrumbs ?? [];
+  const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
+    return { ...crumb, url: assertTrailingSlash(baseUrl() + removeLeadingSlash(crumb.url)) };
+  });
 
   const homeCrumb = {
     title: 'Docs Home',
