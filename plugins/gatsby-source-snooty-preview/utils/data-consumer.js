@@ -37,7 +37,8 @@ const handleMetadata = async (
   { createContentDigest, createNode, createNodeId, deleteNode, getNode, shouldDeleteContentNode }
 ) => {
   const { _id, build_id, created_at, static_files: staticFiles, ...metadataMinusStatic } = data;
-  const { parentPaths, slugToTitle, branch, project } = metadataMinusStatic;
+  const { parentPaths, slugToBreadcrumbLabel, branch, project } = metadataMinusStatic;
+
   const nodeId = createSnootyMetadataId({ createNodeId, branch, project });
 
   if (shouldDeleteContentNode) {
@@ -46,7 +47,7 @@ const handleMetadata = async (
   }
 
   if (parentPaths) {
-    transformBreadcrumbs(parentPaths, slugToTitle);
+    transformBreadcrumbs(parentPaths, slugToBreadcrumbLabel);
   }
 
   // Save files in the static_files field of metadata document, including intersphinx inventories.
