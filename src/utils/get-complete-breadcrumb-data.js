@@ -1,6 +1,7 @@
 import { baseUrl } from './base-url';
 import { assertTrailingSlash } from './assert-trailing-slash';
 import { removeLeadingSlash } from './remove-leading-slash';
+import { assertLeadingSlash } from './assert-leading-slash';
 
 const nodesToString = (titleNodes) => {
   if (typeof titleNodes === 'string') {
@@ -23,8 +24,7 @@ const nodesToString = (titleNodes) => {
 };
 
 export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, parentPaths }) => {
-  //get intermediate breadcrumbs and property Url
-  const propertyUrl = assertTrailingSlash(queriedCrumbs?.propertyUrl ?? baseUrl());
+  //get intermediate breadcrumbs
   const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
     return { ...crumb, url: assertTrailingSlash(baseUrl() + removeLeadingSlash(crumb.url)) };
   });
@@ -39,7 +39,7 @@ export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, pare
   if (slug !== '/') {
     propertyCrumb = {
       title: nodesToString(siteTitle),
-      url: propertyUrl,
+      url: '/',
     };
   }
 
@@ -49,7 +49,7 @@ export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, pare
     return {
       ...crumb,
       title: nodesToString(crumb.title),
-      url: assertTrailingSlash(propertyUrl + removeLeadingSlash(crumb.path)),
+      url: assertLeadingSlash(crumb.path),
     };
   });
 
