@@ -80,9 +80,11 @@ const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => 
     setIsExcessivelyTruncated();
   }
 
+  console.log('in Breadcrumb: ', crumb.url);
+
   let result = (
     <div className={cx(linkWrapperLayoutStyling, crumb.title.length > 21 ? ellipsisStyling : '')} ref={measuredRef}>
-      <Link className={cx(linkStyling)} to={crumb.url} onClick={onClick}>
+      <Link className={cx(linkStyling)} to={crumb.url} onClick={onClick} isBreadcrumb>
         {formatText(crumb.title)}
       </Link>
     </div>

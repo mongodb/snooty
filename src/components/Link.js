@@ -61,6 +61,7 @@ const Link = ({
   partiallyActive,
   showLinkArrow,
   hideExternalIcon: hideExternalIconProp,
+  isBreadcrumb,
   ...other
 }) => {
   const location = useLocation();
@@ -78,6 +79,8 @@ const Link = ({
   ) : (
     ''
   );
+
+  if (isBreadcrumb) console.log('isBreadcrumb and to, isRelative, and anchor ', to, isRelativeUrl(to), anchor);
 
   // Use Gatsby Link for internal links, and <a> for others
   if (to && isRelativeUrl(to) && !anchor) {
