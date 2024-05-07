@@ -404,7 +404,6 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
       <span
         aria-disabled="false"
         class="lg-ui-0001 lg-ui-button-0000 emotion-8"
-        data-lgid="lg-button"
         target="_self"
         type="button"
       >
@@ -831,7 +830,6 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
       <a
         aria-disabled="false"
         class="emotion-8 lg-ui-button-0000 emotion-9"
-        data-lgid="lg-button"
         href="/server/read/"
         type="button"
       >
@@ -1306,7 +1304,6 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
       <a
         aria-disabled="false"
         class="emotion-8 lg-ui-button-0000 emotion-9"
-        data-lgid="lg-button"
         href="/cloud/connectionstring/"
         type="button"
       >
