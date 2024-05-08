@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { startTransition, useCallback, useContext } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
@@ -31,7 +31,9 @@ const SidenavMobileMenuDropdown = () => {
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
 
   const clickDropdown = useCallback(() => {
-    setHideMobile((state) => !state);
+    startTransition(() => {
+      setHideMobile((state) => !state);
+    });
   }, [setHideMobile]);
 
   return (

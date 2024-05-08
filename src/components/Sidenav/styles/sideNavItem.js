@@ -9,9 +9,8 @@ export const sideNavItemBasePadding = css`
   padding-bottom: ${theme.size.small};
 `;
 
-export const sideNavItemTOCStyling = ({ level = 1 }) => css`
+export const sideNavItemTOCStyling = () => css`
   padding-bottom: ${theme.size.small};
-  padding-left: calc(${theme.size.tiny} + (${level} * ${theme.size.default}));
   padding-right: ${theme.size.medium};
   padding-top: ${theme.size.small};
   align-items: flex-start !important;

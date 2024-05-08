@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { startTransition, useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
@@ -23,6 +23,10 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
   margin-right: 5px;
   min-width: 16px;
+`;
+
+const navItemContainerStyle = LeafyCSS`
+  display: flex;
 `;
 
 const overwriteLinkStyle = LeafyCSS`
@@ -64,7 +68,9 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
   // If the active state of this node changes, change the open state to reflect it
   // Disable linter to handle conditional dependency that allows drawers to close when a new page is loaded
   useEffect(() => {
-    setIsOpen(isActive);
+    startTransition(() => {
+      setIsOpen(isActive);
+    });
   }, [isActive, isDrawer || hasChildren ? activeSection : null]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // project prop is passed down from parent ToC node
@@ -74,8 +80,9 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
   }
 
   const onCaretClick = (event) => {
-    event.preventDefault();
-    setIsOpen(!isOpen);
+    startTransition(() => {
+      setIsOpen(!isOpen);
+    });
   };
 
   const NodeLink = () => {
@@ -100,12 +107,18 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     const iconType = isOpen ? 'CaretDown' : 'CaretRight';
 
     if (isDrawer && hasChildren) {
+      console.log('IS DRAWER AND HAS CHILDREN');
       return (
         <SideNavItem
-          className={cx(sideNavItemTOCStyling({ level }))}
+          className={cx(sideNavItemTOCStyling())}
+          style={{
+            paddingLeft: `calc(${theme.size.tiny} + (${level} * ${theme.size.default}))`,
+          }}
           as="a"
           onClick={() => {
-            setIsOpen(!isOpen);
+            startTransition(() => {
+              setIsOpen(!isOpen);
+            });
           }}
         >
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
@@ -119,25 +132,34 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     }
 
     return (
-      <SideNavItem
-        as={Link}
-        to={target}
-        active={isSelected}
-        className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
-        onClick={(e) => {
-          setIsOpen(!isOpen);
-        }}
-        hideExternalIcon={true}
-      >
+      <div className={cx(navItemContainerStyle)}>
         {hasChildren && (
-          <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
+          <div>
+            <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
+          </div>
         )}
-        {isTocIcon && <SyncCloud />}
-        {formattedTitle}
-        {hasVersions && activeVersions[options.project] && (
-          <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
-        )}
-      </SideNavItem>
+        <SideNavItem
+          as={Link}
+          to={target}
+          active={isSelected}
+          className={cx(sideNavItemTOCStyling(), overwriteLinkStyle)}
+          style={{
+            paddingLeft: `calc(${theme.size.tiny} + (${level} * ${theme.size.default}))`,
+          }}
+          onClick={(e) => {
+            startTransition(() => {
+              setIsOpen(!isOpen);
+            });
+          }}
+          hideExternalIcon={true}
+        >
+          {isTocIcon && <SyncCloud />}
+          {formattedTitle}
+          {hasVersions && activeVersions[options.project] && (
+            <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
+          )}
+        </SideNavItem>
+      </div>
     );
   };
 
@@ -181,4 +203,4 @@ TOCNode.defaultProps = {
   level: BASE_NODE_LEVEL,
 };
 
-export default TOCNode;
+export default React.memo(TOCNode);

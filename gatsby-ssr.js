@@ -36,12 +36,12 @@ export const onRenderBody = ({ setHeadComponents }) => {
     <link key="preconnectGStatic" rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />,
     <link
       key="notoSansCS"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900"
       rel="stylesheet"
     />,
     <link
       key="notoSansKR"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900"
       rel="stylesheet"
     />,
   ]);

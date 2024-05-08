@@ -71,12 +71,8 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
     [onVersionSelect, versionedProject]
   );
 
-  const onClick = useCallback((e) => {
-    e.stopPropagation();
-  }, []);
-
   return (
-    <div onClick={onClick} className={cx(wrapperStyle)}>
+    <div className={cx(wrapperStyle)}>
       <Select
         value={activeVersions[versionedProject]}
         className={cx(selectStyle)}

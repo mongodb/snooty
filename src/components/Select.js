@@ -47,7 +47,14 @@ const optionStyling = css`
 `;
 
 const PortalContainer = forwardRef(({ ...props }, ref) => (
-  <div className={cx(portalStyle, props.className)} ref={ref}>
+  <div
+    className={cx(portalStyle, props.className)}
+    ref={ref}
+    onClick={(e) => {
+      console.log('PortalContainer');
+      e.stopPropagation();
+    }}
+  >
     {props.children}
   </div>
 ));
@@ -71,6 +78,10 @@ const Select = ({
         data-testid="lg-select"
         value={value || ''}
         label={label}
+        onClick={(e) => {
+          console.log('LGSelect propagation');
+          e.stopPropagation();
+        }}
         aria-labelledby={(!label && 'select') || null}
         size="default"
         allowDeselect={false}
@@ -81,6 +92,7 @@ const Select = ({
         placeholder={defaultText}
         defaultValue={value ? String(value) : ''}
         onChange={(value) => {
+          console.log('LGSelect on change');
           onChange({ value });
         }}
         className={cx(selectStyle)}

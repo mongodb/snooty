@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo, startTransition } from 'react';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -238,7 +238,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             aria-label="Side navigation"
             className={cx(sideNavStyling({ hideMobile, isCollapsed }))}
             collapsed={isCollapsed}
-            setCollapsed={setCollapsed}
+            setCollapsed={(collapsed) => startTransition(setCollapsed(collapsed))}
             widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
           >
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
