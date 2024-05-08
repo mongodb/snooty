@@ -3,7 +3,7 @@ import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Icon from '@leafygreen-ui/icon';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import Link from '../Link';
+import { Link } from '@leafygreen-ui/typography';
 import { baseUrl } from '../../utils/base-url';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import { titleStyle } from './styles/sideNavItem';
@@ -23,7 +23,12 @@ const homeLinkStyle = LeafyCSS`
 
 const DocsHomeButton = () => {
   return (
-    <SideNavItem className={cx(titleStyle, sideNavItemBasePadding, homeLinkStyle)} as={Link} to={baseUrl()}>
+    <SideNavItem
+      className={cx(titleStyle, sideNavItemBasePadding, homeLinkStyle)}
+      as={Link}
+      href={baseUrl()}
+      hideExternalIcon={true}
+    >
       <Icon glyph="Home"></Icon>
       Docs Home
     </SideNavItem>
