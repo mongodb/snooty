@@ -9,7 +9,7 @@ export const sideNavItemBasePadding = css`
   padding-bottom: ${theme.size.small};
 `;
 
-export const sideNavItemTOCStyling = () => css`
+export const sideNavItemTOCStyling = css`
   padding-bottom: ${theme.size.small};
   padding-right: ${theme.size.medium};
   padding-top: ${theme.size.small};

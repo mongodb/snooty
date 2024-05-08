@@ -110,7 +110,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
       console.log('IS DRAWER AND HAS CHILDREN');
       return (
         <SideNavItem
-          className={cx(sideNavItemTOCStyling())}
+          className={cx(sideNavItemTOCStyling)}
           style={{
             paddingLeft: `calc(${theme.size.tiny} + (${level} * ${theme.size.default}))`,
           }}
@@ -142,7 +142,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
           as={Link}
           to={target}
           active={isSelected}
-          className={cx(sideNavItemTOCStyling(), overwriteLinkStyle)}
+          className={cx(sideNavItemTOCStyling, overwriteLinkStyle)}
           style={{
             paddingLeft: `calc(${theme.size.tiny} + (${level} * ${theme.size.default}))`,
           }}
