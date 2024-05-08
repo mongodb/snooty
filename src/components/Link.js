@@ -90,6 +90,7 @@ const Link = ({
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
     if (isGatsbyPreview()) {
+      console.log('in gatsby preview');
       // If we're in preview mode, we build the pages of each project and branch of the site within
       // its own namespace so each author can preview their own pages e.g.
       // /project1/branch1/doc-path

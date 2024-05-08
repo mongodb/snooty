@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Menu, MenuItem } from '@leafygreen-ui/menu';
 import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
+import { withPrefix } from 'gatsby';
 import { formatText } from '../../utils/format-text';
 
 const CollapsedBreadcrumbs = ({ crumbs }) => {
@@ -18,7 +19,7 @@ const CollapsedBreadcrumbs = ({ crumbs }) => {
         }
       >
         {crumbs.map((crumb, index) => (
-          <MenuItem key={index} href={crumb.url}>
+          <MenuItem key={index} href={withPrefix(crumb.url)}>
             {formatText(crumb.title)}
           </MenuItem>
         ))}
