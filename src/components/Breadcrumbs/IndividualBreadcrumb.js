@@ -9,6 +9,7 @@ import { theme } from '../../theme/docsTheme';
 const linkStyling = LeafyCss`
   font-size: ${theme.fontSize.small};
   vertical-align: middle;
+  line-height: unset;
 
   :hover,
   :focus {
