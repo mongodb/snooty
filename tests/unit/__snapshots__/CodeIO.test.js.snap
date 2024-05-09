@@ -556,7 +556,6 @@ exports[`CodeIO renders correctly 1`] = `
       <button
         aria-disabled="false"
         class="lg-ui-button-0000 emotion-16"
-        data-lgid="lg-button"
         role="button"
         type="button"
       >

@@ -62,6 +62,7 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   display: inline;
   font-size: 13px;
   vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-3:hover,
@@ -252,6 +253,7 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   display: inline;
   font-size: 13px;
   vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-3:hover,
@@ -442,6 +444,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
   display: inline;
   font-size: 13px;
   vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-3:hover,
@@ -616,6 +619,7 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   display: inline;
   font-size: 13px;
   vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-3:hover,
