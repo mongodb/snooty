@@ -61,7 +61,6 @@ const Link = ({
   partiallyActive,
   showLinkArrow,
   hideExternalIcon: hideExternalIconProp,
-  isBreadcrumb,
   ...other
 }) => {
   const location = useLocation();
