@@ -42,6 +42,7 @@ const DRIVER_ICON_MAP = {
   'java-async': IconJava,
   javascript: IconJavascript,
   kotlin: IconKotlin,
+  'java-kotlin': IconKotlin,
   'kotlin-coroutine': IconKotlin,
   'kotlin-sync': IconKotlin,
   nodejs: IconNode,
