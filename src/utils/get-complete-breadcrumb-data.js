@@ -26,12 +26,12 @@ const nodesToString = (titleNodes) => {
 export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, parentPaths }) => {
   //get intermediate breadcrumbs
   const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
-    return { ...crumb, url: assertTrailingSlash(baseUrl() + removeLeadingSlash(crumb.url)) };
+    return { ...crumb, path: assertTrailingSlash(baseUrl() + removeLeadingSlash(crumb.path)) };
   });
 
   const homeCrumb = {
     title: 'Docs Home',
-    url: baseUrl(),
+    path: baseUrl(),
   };
 
   // If site is the property homepage, leave the propertyCrumb blank
@@ -39,7 +39,7 @@ export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, pare
   if (slug !== '/') {
     propertyCrumb = {
       title: nodesToString(siteTitle),
-      url: '/',
+      path: '/',
     };
   }
 
@@ -49,7 +49,7 @@ export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, pare
     return {
       ...crumb,
       title: nodesToString(crumb.title),
-      url: assertLeadingSlash(crumb.path),
+      path: assertLeadingSlash(crumb.path),
     };
   });
 

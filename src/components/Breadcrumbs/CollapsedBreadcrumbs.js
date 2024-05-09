@@ -12,7 +12,7 @@ const CollapsedBreadcrumbs = ({ crumbs }) => {
   const location = useLocation();
 
   const menuItems = crumbs.map((crumb, index) => {
-    let to = withPrefix(crumb.url);
+    let to = withPrefix(crumb.path);
     if (isGatsbyPreview()) {
       // If we're in preview mode, we build the pages of each project and branch of the site within
       // its own namespace so each author can preview their own pages e.g.
@@ -53,7 +53,7 @@ const CollapsedBreadcrumbs = ({ crumbs }) => {
 
 const crumbObjectShape = {
   title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 CollapsedBreadcrumbs.propTypes = {

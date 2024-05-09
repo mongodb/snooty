@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withPrefix } from 'gatsby';
 import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-data.js';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
 const getBreadcrumbList = (breadcrumbs) =>
-  breadcrumbs.map(({ url, title }, index) => ({
+  breadcrumbs.map(({ path, title }, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: title,
-    item: assertTrailingSlash(url),
+    item: assertTrailingSlash(withPrefix(path)),
   }));
 
 const BreadcrumbSchema = ({ slug }) => {

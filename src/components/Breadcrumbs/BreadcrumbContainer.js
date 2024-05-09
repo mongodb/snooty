@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { withPrefix } from 'gatsby';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { theme } from '../../theme/docsTheme';
 import IndividualBreadcrumb from './IndividualBreadcrumb';
@@ -67,7 +68,7 @@ const BreadcrumbContainer = ({ breadcrumbs }) => {
                 setIsExcessivelyTruncated={collapseBreadcrumbs}
                 onClick={() =>
                   reportAnalytics('BreadcrumbClick', {
-                    breadcrumbClicked: crumb.url,
+                    breadcrumbClicked: withPrefix(crumb.path),
                   })
                 }
               ></IndividualBreadcrumb>
@@ -81,7 +82,7 @@ const BreadcrumbContainer = ({ breadcrumbs }) => {
 
 const crumbObjectShape = {
   title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 BreadcrumbContainer.propTypes = {
