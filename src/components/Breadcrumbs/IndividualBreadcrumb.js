@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import Tooltip from '@leafygreen-ui/tooltip';
-import { withPrefix } from 'gatsby';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
@@ -83,7 +82,7 @@ const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => 
 
   let result = (
     <div className={cx(linkWrapperLayoutStyling, crumb.title.length > 21 ? ellipsisStyling : '')} ref={measuredRef}>
-      <Link className={cx(linkStyling)} to={withPrefix(crumb.url)} onClick={onClick}>
+      <Link className={cx(linkStyling)} to={crumb.url} onClick={onClick}>
         {formatText(crumb.title)}
       </Link>
     </div>
