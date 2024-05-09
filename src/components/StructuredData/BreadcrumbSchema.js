@@ -1,25 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
-import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-data.js';
-import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
+import { getCompleteBreadcrumbData, getFullBreadcrumbPath } from '../../utils/get-complete-breadcrumb-data.js';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { isRelativeUrl } from '../../utils/is-relative-url.js';
-import { baseUrl } from '../../utils/base-url.js';
-import { removeLeadingSlash } from '../../utils/remove-leading-slash.js';
 
 const getBreadcrumbList = (breadcrumbs) =>
   breadcrumbs.map(({ path, title }, index) => {
-    if (isRelativeUrl(path)) {
-      path = baseUrl() + removeLeadingSlash(withPrefix(path));
-    }
+    path = getFullBreadcrumbPath(path, true);
 
     return {
       '@type': 'ListItem',
       position: index + 1,
       name: title,
-      item: assertTrailingSlash(path),
+      item: path,
     };
   });
 
