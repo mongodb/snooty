@@ -5,14 +5,23 @@ import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-d
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { isRelativeUrl } from '../../utils/is-relative-url.js';
+import { baseUrl } from '../../utils/base-url.js';
+import { removeLeadingSlash } from '../../utils/remove-leading-slash.js';
 
 const getBreadcrumbList = (breadcrumbs) =>
-  breadcrumbs.map(({ path, title }, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: title,
-    item: assertTrailingSlash(withPrefix(path)),
-  }));
+  breadcrumbs.map(({ path, title }, index) => {
+    if (isRelativeUrl(path)) {
+      path = baseUrl() + removeLeadingSlash(withPrefix(path));
+    }
+
+    return {
+      '@type': 'ListItem',
+      position: index + 1,
+      name: title,
+      item: assertTrailingSlash(path),
+    };
+  });
 
 const BreadcrumbSchema = ({ slug }) => {
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
