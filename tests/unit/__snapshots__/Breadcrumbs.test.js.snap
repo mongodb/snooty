@@ -41,41 +41,26 @@ exports[`renders correctly as a homepage 1`] = `
 }
 
 .emotion-4 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  cursor: pointer;
+  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
+  line-height: 13px;
   color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
-  vertical-align: middle;
 }
 
-.emotion-4:hover,
-.emotion-4:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
+.emotion-4>code {
+  color: #016BF8;
+}
+
+.emotion-4:focus,
+.emotion-4:hover {
+  text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
   text-underline-offset: 4px;
@@ -83,6 +68,7 @@ exports[`renders correctly as a homepage 1`] = `
 }
 
 .emotion-4:focus {
+  text-decoration-color: #016BF8;
   outline: none;
 }
 
@@ -90,17 +76,18 @@ exports[`renders correctly as a homepage 1`] = `
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-4:focus {
-  text-decoration-color: #016BF8;
+.emotion-5 {
+  font-size: 13px;
+  vertical-align: middle;
 }
 
-.emotion-4:hover,
-.emotion-4:focus {
+.emotion-5:hover,
+.emotion-5:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.emotion-5 {
+.emotion-6 {
   cursor: default;
   padding-left: 8px;
   padding-right: 8px;
@@ -116,17 +103,14 @@ exports[`renders correctly as a homepage 1`] = `
         class="emotion-3"
       >
         <a
-          class="lg-ui-0001 emotion-4"
-          href="https://www.mongodb.com/docs/"
-          target="_self"
+          class="emotion-4 emotion-5"
+          href="/https://www.mongodb.com/docs/"
         >
-          <span>
-            Docs Home
-          </span>
+          Docs Home
         </a>
       </div>
       <span
-        class="emotion-5 emotion-6"
+        class="emotion-6 emotion-7"
       >
          / 
       </span>
@@ -134,13 +118,10 @@ exports[`renders correctly as a homepage 1`] = `
         class="emotion-3"
       >
         <a
-          class="lg-ui-0001 emotion-4"
-          href="https://www.mongodb.com/docs/atlas/"
-          target="_self"
+          class="emotion-4 emotion-5"
+          href="/https://www.mongodb.com/docs/atlas/"
         >
-          <span>
-            MongoDB Atlas
-          </span>
+          MongoDB Atlas
         </a>
       </div>
     </div>
@@ -189,72 +170,6 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-4 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
-  color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
-  vertical-align: middle;
-}
-
-.emotion-4:hover,
-.emotion-4:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-4:focus {
-  outline: none;
-}
-
-.emotion-4:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-4:focus {
-  text-decoration-color: #016BF8;
-}
-
-.emotion-4:hover,
-.emotion-4:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
-.emotion-5 {
-  cursor: default;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.emotion-12 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -268,12 +183,12 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-12>code {
+.emotion-4>code {
   color: #016BF8;
 }
 
-.emotion-12:focus,
-.emotion-12:hover {
+.emotion-4:focus,
+.emotion-4:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -281,40 +196,46 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-12:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-12:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-13 {
+.emotion-5 {
   font-size: 13px;
   vertical-align: middle;
 }
 
-.emotion-13:hover,
-.emotion-13:focus {
+.emotion-5:hover,
+.emotion-5:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.emotion-16 {
+.emotion-6 {
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.emotion-18 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.emotion-16:first-child {
+.emotion-18:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
 }
 
 @media not all and (max-width: 480px) {
-  .emotion-16:last-child {
+  .emotion-18:last-child {
     min-width: -webkit-max-content;
     min-width: -moz-max-content;
     min-width: max-content;
@@ -331,17 +252,14 @@ exports[`renders correctly with siteTitle 1`] = `
         class="emotion-3"
       >
         <a
-          class="lg-ui-0001 emotion-4"
-          href="https://www.mongodb.com/docs/"
-          target="_self"
+          class="emotion-4 emotion-5"
+          href="/https://www.mongodb.com/docs/"
         >
-          <span>
-            Docs Home
-          </span>
+          Docs Home
         </a>
       </div>
       <span
-        class="emotion-5 emotion-6"
+        class="emotion-6 emotion-7"
       >
          / 
       </span>
@@ -349,17 +267,14 @@ exports[`renders correctly with siteTitle 1`] = `
         class="emotion-3"
       >
         <a
-          class="lg-ui-0001 emotion-4"
-          href="https://www.mongodb.com/docs/atlas/"
-          target="_self"
+          class="emotion-4 emotion-5"
+          href="/https://www.mongodb.com/docs/atlas/"
         >
-          <span>
-            MongoDB Atlas
-          </span>
+          MongoDB Atlas
         </a>
       </div>
       <span
-        class="emotion-5 emotion-6"
+        class="emotion-6 emotion-7"
       >
          / 
       </span>
@@ -367,37 +282,37 @@ exports[`renders correctly with siteTitle 1`] = `
         class="emotion-3"
       >
         <a
-          class="emotion-12 emotion-13"
+          class="emotion-4 emotion-5"
           href="/"
         >
           Atlas Device SDKs
         </a>
       </div>
       <span
-        class="emotion-5 emotion-6"
+        class="emotion-6 emotion-7"
       >
          / 
       </span>
       <div
-        class="emotion-16"
+        class="emotion-18"
       >
         <a
-          class="emotion-12 emotion-13"
+          class="emotion-4 emotion-5"
           href="/sdk/cpp/"
         >
           Atlas Device SDK for C++
         </a>
       </div>
       <span
-        class="emotion-5 emotion-6"
+        class="emotion-6 emotion-7"
       >
          / 
       </span>
       <div
-        class="emotion-16"
+        class="emotion-18"
       >
         <a
-          class="emotion-12 emotion-13"
+          class="emotion-4 emotion-5"
           href="/sdk/cpp/application-services/"
         >
           Application Services - C++ SDK

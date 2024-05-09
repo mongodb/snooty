@@ -33,41 +33,26 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
 }
 
 .emotion-3 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  cursor: pointer;
+  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
+  line-height: 13px;
   color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
-  vertical-align: middle;
 }
 
-.emotion-3:hover,
-.emotion-3:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
+.emotion-3>code {
+  color: #016BF8;
+}
+
+.emotion-3:focus,
+.emotion-3:hover {
+  text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
   text-underline-offset: 4px;
@@ -75,6 +60,7 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
 }
 
 .emotion-3:focus {
+  text-decoration-color: #016BF8;
   outline: none;
 }
 
@@ -82,17 +68,18 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-3:focus {
-  text-decoration-color: #016BF8;
+.emotion-4 {
+  font-size: 13px;
+  vertical-align: middle;
 }
 
-.emotion-3:hover,
-.emotion-3:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.emotion-4 {
+.emotion-5 {
   cursor: default;
   padding-left: 8px;
   padding-right: 8px;
@@ -105,17 +92,14 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/"
-        target="_self"
+        class="emotion-3 emotion-4"
+        href="/https://www.mongodb.com/docs/"
       >
-        <span>
-          Docs Home
-        </span>
+        Docs Home
       </a>
     </div>
     <span
-      class="emotion-4 emotion-5"
+      class="emotion-5 emotion-6"
     >
        / 
     </span>
@@ -123,17 +107,14 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/languages"
-        target="_self"
+        class="emotion-3 emotion-4"
+        href="/https://www.mongodb.com/docs/languages/"
       >
-        <span>
-          Languages
-        </span>
+        Languages
       </a>
     </div>
     <span
-      class="emotion-4 emotion-5"
+      class="emotion-5 emotion-6"
     >
        / 
     </span>
@@ -141,17 +122,14 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/languages/csharp/"
-        target="_self"
+        class="emotion-3 emotion-4"
+        href="/https://www.mongodb.com/docs/languages/csharp/"
       >
-        <span>
-          C#/.NET
-        </span>
+        C#/.NET
       </a>
     </div>
     <span
-      class="emotion-4 emotion-5"
+      class="emotion-5 emotion-6"
     >
        / 
     </span>
@@ -159,17 +137,14 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/languages/csharp/csharp-driver/"
-        target="_self"
+        class="emotion-3 emotion-4"
+        href="/https://www.mongodb.com/docs/languages/csharp/csharp-driver/"
       >
-        <span>
-          C#/.NET Driver
-        </span>
+        C#/.NET Driver
       </a>
     </div>
     <span
-      class="emotion-4 emotion-5"
+      class="emotion-5 emotion-6"
     >
        / 
     </span>
@@ -177,13 +152,10 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/languages/csharp/csharp-driver/usage-examples/"
-        target="_self"
+        class="emotion-3 emotion-4"
+        href="/https://www.mongodb.com/docs/languages/csharp/csharp-driver/usage-examples/"
       >
-        <span>
-          Usage Examples
-        </span>
+        Usage Examples
       </a>
     </div>
   </div>
@@ -413,41 +385,26 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
 }
 
 .emotion-3 {
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  cursor: pointer;
+  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
-  cursor: pointer;
-  font-size: inherit;
-  line-height: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 13px;
-  line-height: 20px;
+  line-height: 13px;
   color: #016BF8;
-  font-weight: 400;
-  display: inline;
-  font-size: 13px;
-  vertical-align: middle;
 }
 
-.emotion-3:hover,
-.emotion-3:focus {
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
+.emotion-3>code {
+  color: #016BF8;
+}
+
+.emotion-3:focus,
+.emotion-3:hover {
+  text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
   text-underline-offset: 4px;
@@ -455,6 +412,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
 }
 
 .emotion-3:focus {
+  text-decoration-color: #016BF8;
   outline: none;
 }
 
@@ -462,36 +420,37 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-3:focus {
-  text-decoration-color: #016BF8;
+.emotion-4 {
+  font-size: 13px;
+  vertical-align: middle;
 }
 
-.emotion-3:hover,
-.emotion-3:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.emotion-4 {
+.emotion-5 {
   cursor: default;
   padding-left: 8px;
   padding-right: 8px;
 }
 
-.emotion-10 {
+.emotion-12 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.emotion-10:first-child {
+.emotion-12:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
 }
 
 @media not all and (max-width: 480px) {
-  .emotion-10:last-child {
+  .emotion-12:last-child {
     min-width: -webkit-max-content;
     min-width: -moz-max-content;
     min-width: max-content;
@@ -505,17 +464,14 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/"
-        target="_self"
+        class="emotion-3 emotion-4"
+        href="/https://www.mongodb.com/docs/"
       >
-        <span>
-          Docs Home
-        </span>
+        Docs Home
       </a>
     </div>
     <span
-      class="emotion-4 emotion-5"
+      class="emotion-5 emotion-6"
     >
        / 
     </span>
@@ -523,31 +479,25 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/atlas/"
-        target="_self"
+        class="emotion-3 emotion-4"
+        href="/https://www.mongodb.com/docs/atlas/"
       >
-        <span>
-          MongoDB Atlas
-        </span>
+        MongoDB Atlas
       </a>
     </div>
     <span
-      class="emotion-4 emotion-5"
+      class="emotion-5 emotion-6"
     >
        / 
     </span>
     <div
-      class="emotion-10"
+      class="emotion-12"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/atlas/device-sdks/"
-        target="_self"
+        class="emotion-3 emotion-4"
+        href="/https://www.mongodb.com/docs/atlas/device-sdks/"
       >
-        <span>
-          MongoDB Atlas Device SDKs
-        </span>
+        MongoDB Atlas Device SDKs
       </a>
     </div>
   </div>

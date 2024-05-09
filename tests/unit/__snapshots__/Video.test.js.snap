@@ -185,6 +185,7 @@ exports[`Wistia video renders correctly 1`] = `
           <button
             aria-disabled="false"
             class="lg-ui-button-0000 emotion-4 emotion-5 emotion-6"
+            data-lgid="lg-button"
             type="button"
           >
             <div
