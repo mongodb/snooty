@@ -33,6 +33,7 @@ const DRIVER_ICON_MAP = {
   c: IconC,
   compass: IconCompass,
   cpp: IconCpp,
+  'cpp-sdk': IconCpp,
   csharp: IconCsharp,
   dart: IconDart,
   go: IconGo,
