@@ -7,12 +7,11 @@ import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { isRelativeUrl } from '../../utils/is-relative-url.js';
 import { baseUrl } from '../../utils/base-url.js';
-import { removeLeadingSlash } from '../../utils/remove-leading-slash.js';
 
 const getBreadcrumbList = (breadcrumbs) =>
   breadcrumbs.map(({ path, title }, index) => {
     if (isRelativeUrl(path)) {
-      path = baseUrl() + removeLeadingSlash(withPrefix(path));
+      path = baseUrl(withPrefix(path), { needsProtocol: true, needsPrefix: true });
     }
 
     return {
