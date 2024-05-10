@@ -107,7 +107,8 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <span>
           Docs Home
@@ -124,7 +125,8 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/languages"
+        target="_self"
       >
         <span>
           Languages
@@ -141,7 +143,8 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/languages/csharp/"
+        target="_self"
       >
         <span>
           C#/.NET
@@ -158,7 +161,8 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/languages/csharp/csharp-driver/"
+        target="_self"
       >
         <span>
           C#/.NET Driver
@@ -175,7 +179,8 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/languages/csharp/csharp-driver/usage-examples/"
+        target="_self"
       >
         <span>
           Usage Examples
@@ -361,7 +366,8 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <span>
           Docs Home
@@ -378,7 +384,8 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/atlas/device-sdks/"
+        target="_self"
       >
         <span>
           MongoDB Atlas Device SDKs
@@ -546,7 +553,8 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <span>
           Docs Home
@@ -563,7 +571,8 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/atlas/"
+        target="_self"
       >
         <span>
           MongoDB Atlas
@@ -580,7 +589,8 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/atlas/device-sdks/"
+        target="_self"
       >
         <span>
           MongoDB Atlas Device SDKs
@@ -766,7 +776,8 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <span>
           Docs Home
@@ -783,7 +794,8 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href=""
+        href="https://www.mongodb.com/docs/atlas/device-sdks/"
+        target="_self"
       >
         <span>
           MongoDB Atlas Device SDKs
