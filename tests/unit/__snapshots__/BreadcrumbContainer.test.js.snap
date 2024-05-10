@@ -107,8 +107,7 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/"
-        target="_self"
+        href=""
       >
         <span>
           Docs Home
@@ -125,8 +124,7 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/languages"
-        target="_self"
+        href=""
       >
         <span>
           Languages
@@ -143,8 +141,7 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/languages/csharp/"
-        target="_self"
+        href=""
       >
         <span>
           C#/.NET
@@ -161,8 +158,7 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/languages/csharp/csharp-driver/"
-        target="_self"
+        href=""
       >
         <span>
           C#/.NET Driver
@@ -179,8 +175,7 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/languages/csharp/csharp-driver/usage-examples/"
-        target="_self"
+        href=""
       >
         <span>
           Usage Examples
@@ -310,6 +305,54 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   }
 }
 
+.emotion-11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: #016BF8;
+}
+
+.emotion-11>code {
+  color: #016BF8;
+}
+
+.emotion-11:focus,
+.emotion-11:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-11:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-11:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-12 {
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+}
+
+.emotion-12:hover,
+.emotion-12:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -318,8 +361,7 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/"
-        target="_self"
+        href=""
       >
         <span>
           Docs Home
@@ -336,8 +378,7 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/atlas/device-sdks/"
-        target="_self"
+        href=""
       >
         <span>
           MongoDB Atlas Device SDKs
@@ -353,12 +394,10 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href=""
+        class="emotion-11 emotion-12"
+        href="/sdk/cpp/"
       >
-        <span>
-          Atlas Device SDK for C++
-        </span>
+        Atlas Device SDK for C++
       </a>
     </div>
     <span
@@ -370,12 +409,10 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href=""
+        class="emotion-11 emotion-12"
+        href="/sdk/cpp/application-services/"
       >
-        <span>
-          Application Services - C++ SDK
-        </span>
+        Application Services - C++ SDK
       </a>
     </div>
   </div>
@@ -509,8 +546,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/"
-        target="_self"
+        href=""
       >
         <span>
           Docs Home
@@ -527,8 +563,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/atlas/"
-        target="_self"
+        href=""
       >
         <span>
           MongoDB Atlas
@@ -545,8 +580,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/atlas/device-sdks/"
-        target="_self"
+        href=""
       >
         <span>
           MongoDB Atlas Device SDKs
@@ -676,6 +710,54 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   }
 }
 
+.emotion-11 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: #016BF8;
+}
+
+.emotion-11>code {
+  color: #016BF8;
+}
+
+.emotion-11:focus,
+.emotion-11:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-11:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-11:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-12 {
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+}
+
+.emotion-12:hover,
+.emotion-12:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -684,8 +766,7 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/"
-        target="_self"
+        href=""
       >
         <span>
           Docs Home
@@ -702,8 +783,7 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
     >
       <a
         class="lg-ui-0001 emotion-3"
-        href="https://www.mongodb.com/docs/atlas/device-sdks/"
-        target="_self"
+        href=""
       >
         <span>
           MongoDB Atlas Device SDKs
@@ -719,12 +799,10 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href=""
+        class="emotion-11 emotion-12"
+        href="/sdk/cpp/"
       >
-        <span>
-          Atlas Device SDK for C++
-        </span>
+        Atlas Device SDK for C++
       </a>
     </div>
     <span
@@ -736,12 +814,10 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
       class="emotion-2"
     >
       <a
-        class="lg-ui-0001 emotion-3"
-        href=""
+        class="emotion-11 emotion-12"
+        href="/sdk/cpp/application-services/"
       >
-        <span>
-          Application Services - C++ SDK
-        </span>
+        Application Services - C++ SDK
       </a>
     </div>
   </div>
