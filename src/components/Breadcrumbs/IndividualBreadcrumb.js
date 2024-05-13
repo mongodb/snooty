@@ -9,6 +9,7 @@ import { theme } from '../../theme/docsTheme';
 const linkStyling = LeafyCss`
   font-size: ${theme.fontSize.small};
   vertical-align: middle;
+  line-height: unset;
 
   :hover,
   :focus {
@@ -82,7 +83,7 @@ const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => 
 
   let result = (
     <div className={cx(linkWrapperLayoutStyling, crumb.title.length > 21 ? ellipsisStyling : '')} ref={measuredRef}>
-      <Link className={cx(linkStyling)} to={crumb.url} onClick={onClick}>
+      <Link className={cx(linkStyling)} to={crumb.path} onClick={onClick}>
         {formatText(crumb.title)}
       </Link>
     </div>
@@ -109,7 +110,7 @@ const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => 
 
 const crumbObjectShape = {
   title: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.arrayOf(PropTypes.object)]),
-  url: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 IndividualBreadcrumb.propTypes = {
