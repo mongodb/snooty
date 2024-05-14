@@ -2,21 +2,17 @@ import React, { useEffect } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { isBrowser } from '../utils/is-browser';
-import { AVAILABLE_LANGUAGES, getCurrLocale, getLocaleMapping } from '../utils/locale';
-import { useCookies } from 'react-cookie';
+import { AVAILABLE_LANGUAGES, getCurrLocale, localizePath } from '../utils/locale';
+import { STORAGE_KEY_PREF_LOCALE, setLocalValue } from '../utils/browser-storage';
 
-const COOKIE_LOCALE_KEY = 'avoid_en_redirect';
-
-const Footer = ({ slug }) => {
+const Footer = () => {
   const location = useLocation();
-  const [_cookies, setCookie] = useCookies([COOKIE_LOCALE_KEY]);
 
   const onSelectLocale = (locale) => {
-    const localeHrefMap = getLocaleMapping(location.origin, slug);
-
     if (isBrowser) {
-      setCookie(COOKIE_LOCALE_KEY, 'true')
-      window.location.href = localeHrefMap[locale];
+      setLocalValue(STORAGE_KEY_PREF_LOCALE, locale);
+      const localizedPath = localizePath(location.pathname, locale);
+      window.location.href = localizedPath;
     }
   };
 

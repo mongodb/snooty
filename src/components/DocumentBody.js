@@ -13,6 +13,7 @@ import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
 import { getSiteTitle } from '../utils/get-site-title';
+import { useLocaleRedirect } from '../hooks/use-locale-redirect';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -23,7 +24,6 @@ import DocsLandingSD from './StructuredData/DocsLandingSD';
 import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 import { InstruqtProvider } from './Instruqt/instruqt-context';
 import { SuspenseHelper } from './SuspenseHelper';
-import { useLocaleRedirect } from '../hooks/use-locale-redirect';
 
 // lazy load the unified footer to improve page load speed
 const LazyFooter = lazy(() => import('./Footer'));
@@ -129,7 +129,7 @@ const DocumentBody = (props) => {
       {!isInPresentationMode && (
         <div data-testid="consistent-footer" id="footer-container">
           <SuspenseHelper fallback={null}>
-            <LazyFooter slug={slug} />
+            <LazyFooter />
           </SuspenseHelper>
         </div>
       )}
@@ -156,6 +156,8 @@ export default DocumentBody;
 export const Head = ({ pageContext }) => {
   const { slug, page, template, repoBranches } = pageContext;
 
+  useLocaleRedirect(slug);
+
   const pageNodes = getNestedValue(['children'], page) || [];
 
   const meta = getMetaFromDirective('section', pageNodes, 'meta');
@@ -173,8 +175,6 @@ export const Head = ({ pageContext }) => {
   // Retrieves the canonical URL based on certain situations
   // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
   const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
-
-  useLocaleRedirect(slug);
 
   return (
     <>
