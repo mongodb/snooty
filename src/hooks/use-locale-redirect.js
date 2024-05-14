@@ -2,15 +2,12 @@ import { useEffect } from 'react';
 import { withPrefix } from 'gatsby';
 import { AVAILABLE_LANGUAGES, getCurrLocale, localizePath } from '../utils/locale';
 import { STORAGE_KEY_PREF_LOCALE, getLocalValue } from '../utils/browser-storage';
-import { useSiteMetadata } from './use-site-metadata';
 
 /**
  * Attempts to perform a redirect based on the browser's locale
  * @param {string} slug The raw slug of the site page. Does not include the site's path prefix
  */
 export const useLocaleRedirect = (slug) => {
-  const { siteUrl } = useSiteMetadata();
-
   // Determine if a redirect is needed based on browser language
   useEffect(() => {
     if (typeof navigator === undefined) {
@@ -45,5 +42,5 @@ export const useLocaleRedirect = (slug) => {
         break;
       }
     }
-  }, [siteUrl, slug]);
+  }, [slug]);
 };
