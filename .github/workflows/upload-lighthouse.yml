@@ -1,0 +1,34 @@
+on:
+  push:
+    branches:
+      - "skunk-upload-lighthouse"
+name: Run and Upload Lighthouse Report to Atlas
+jobs: 
+  staging:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        project: ['cloud-docs', 'docs']
+        url: ['http://localhost:9000/docs/runner/master/', 'http://localhost:9000/cloud-docs/runner/master/']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+      - name: Build Snooty
+        env:
+          NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
+          NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
+          GATSBY_BUILD_FROM_JSON: true
+          GATSBY_PARSER_USER: docsworker-xlarge
+          GATSBY_SITE: ${{ matrix.project }}
+          GATSBY_PARSER_BRANCH: main
+        run: |
+          npm ci --legacy-peer-deps
+          npm run build
+      - name: Run and Upload Lighthouse action
+        uses: mongodb/docs-worker-actions/upload-lighthouse@skunk-upload-lighthouse
+        env: 
+          PROJECT_TO_BUILD: ${{ matrix.project }}
+          STAGING_URL: ${{ matrix.url }}
