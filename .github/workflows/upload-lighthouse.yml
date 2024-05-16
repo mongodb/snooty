@@ -10,12 +10,15 @@ jobs:
     strategy:
       matrix: 
         project: ['cloud-docs', 'docs']
-        url: ['http://localhost:9000/docs/runner/master/', 'http://localhost:9000/cloud-docs/runner/master/']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
+      - name: Access Build Data
+        uses: mongodb/docs-worker-actions/build-artifact@main
+        env: 
+          PROJECT_TO_BUILD: ${{ matrix.project }}
       - name: Build Snooty
         env:
           NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
@@ -31,4 +34,4 @@ jobs:
         uses: mongodb/docs-worker-actions/upload-lighthouse@skunk-upload-lighthouse
         env: 
           PROJECT_TO_BUILD: ${{ matrix.project }}
-          STAGING_URL: ${{ matrix.url }}
+          STAGING_URL: http://localhost:9000/${{ matrix.project }}/runner/master/
