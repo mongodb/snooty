@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - "main"
+      - "skunk-upload-lighthouse"
 name: Run and Upload Lighthouse Report
 jobs: 
   staging:
@@ -40,4 +41,14 @@ jobs:
           npm install -g @lhci/cli
           lhci collect --additive --config=.mobile-lighthouserc.js
           lhci collect --additive --config=.desktop-lighthouserc.js
-          lhci upload
+          lhci upload --target=filesystem --outputDir=./lhci
+      - name: Upload Lighthouse to MongoDB
+        uses: mongodb/docs-worker-actions/upload-lighthouse@skunk-upload-lighthouse
+        env:
+          COMMIT_AUTHOR: ${{ github.event.head_commit?.author }}
+          COMMIT_HASH_AFTER: ${{ github.event.after }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit?.message }}
+          COMMIT_TIMESTAMP: ${{ github.event.head_commit?.timestamp }}
+          COMMIT_HASH_BASE_REF: ${{ github.event.base_ref }}
+          PROJECT_TO_BUILD: ${{ matrix.project }}
+          
