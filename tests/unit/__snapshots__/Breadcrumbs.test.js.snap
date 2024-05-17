@@ -70,6 +70,7 @@ exports[`renders correctly as a homepage 1`] = `
   display: inline;
   font-size: 13px;
   vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-4:hover,
@@ -218,6 +219,7 @@ exports[`renders correctly with siteTitle 1`] = `
   display: inline;
   font-size: 13px;
   vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-4:hover,
@@ -254,20 +256,68 @@ exports[`renders correctly with siteTitle 1`] = `
   padding-right: 8px;
 }
 
-.emotion-15 {
+.emotion-12 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: #016BF8;
+}
+
+.emotion-12>code {
+  color: #016BF8;
+}
+
+.emotion-12:focus,
+.emotion-12:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-12:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-12:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-13 {
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+}
+
+.emotion-13:hover,
+.emotion-13:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-16 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.emotion-15:first-child {
+.emotion-16:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
 }
 
 @media not all and (max-width: 480px) {
-  .emotion-15:last-child {
+  .emotion-16:last-child {
     min-width: -webkit-max-content;
     min-width: -moz-max-content;
     min-width: max-content;
@@ -320,13 +370,10 @@ exports[`renders correctly with siteTitle 1`] = `
         class="emotion-3"
       >
         <a
-          class="lg-ui-0001 emotion-4"
-          href="https://www.mongodb.com/docs/atlas/device-sdks/"
-          target="_self"
+          class="emotion-12 emotion-13"
+          href="/"
         >
-          <span>
-            Atlas Device SDKs
-          </span>
+          Atlas Device SDKs
         </a>
       </div>
       <span
@@ -335,16 +382,13 @@ exports[`renders correctly with siteTitle 1`] = `
          / 
       </span>
       <div
-        class="emotion-15"
+        class="emotion-16"
       >
         <a
-          class="lg-ui-0001 emotion-4"
-          href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/"
-          target="_self"
+          class="emotion-12 emotion-13"
+          href="/sdk/cpp/"
         >
-          <span>
-            Atlas Device SDK for C++
-          </span>
+          Atlas Device SDK for C++
         </a>
       </div>
       <span
@@ -353,16 +397,13 @@ exports[`renders correctly with siteTitle 1`] = `
          / 
       </span>
       <div
-        class="emotion-15"
+        class="emotion-16"
       >
         <a
-          class="lg-ui-0001 emotion-4"
-          href="https://www.mongodb.com/docs/atlas/device-sdks/sdk/cpp/application-services/"
-          target="_self"
+          class="emotion-12 emotion-13"
+          href="/sdk/cpp/application-services/"
         >
-          <span>
-            Application Services - C++ SDK
-          </span>
+          Application Services - C++ SDK
         </a>
       </div>
     </div>

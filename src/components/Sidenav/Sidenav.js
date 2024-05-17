@@ -125,7 +125,7 @@ const Spaceholder = styled('div')`
   min-height: ${theme.size.medium};
 `;
 
-const Border = styled('hr')`
+export const Border = styled('hr')`
   border: unset;
   border-bottom: 1px solid ${palette.gray.light2};
   margin: ${theme.size.small} 0;

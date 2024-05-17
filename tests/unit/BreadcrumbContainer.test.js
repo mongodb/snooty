@@ -13,30 +13,30 @@ jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 
 const mockIntermediateCrumbs = {
   title: 'MongoDB Atlas',
-  url: 'https://www.mongodb.com/docs/atlas/',
+  path: 'https://www.mongodb.com/docs/atlas/',
 };
 
 const mockPropertyCrumb = {
   title: 'MongoDB Atlas Device SDKs',
-  url: 'https://www.mongodb.com/docs/atlas/device-sdks/',
+  path: 'https://www.mongodb.com/docs/atlas/device-sdks/',
 };
 
 describe('BreadcrumbContainer', () => {
   //home breadcrumb
   const mockHomeCrumb = {
     title: 'Docs Home',
-    url: 'https://www.mongodb.com/docs/',
+    path: 'https://www.mongodb.com/docs/',
   };
 
   const mockParents = mockData;
 
   it('renders a driver site correctly with intermediate breadcrumb and with project parents', () => {
     const breadcrumbs = [
-      { title: 'Docs Home', url: 'https://www.mongodb.com/docs/' },
-      { title: 'Languages', url: 'https://www.mongodb.com/docs/languages' },
-      { title: 'C#/.NET', url: 'https://www.mongodb.com/docs/languages/csharp/' },
-      { title: 'C#/.NET Driver', url: 'https://www.mongodb.com/docs/languages/csharp/csharp-driver/' },
-      { title: 'Usage Examples', url: 'https://www.mongodb.com/docs/languages/csharp/csharp-driver/usage-examples/' },
+      { title: 'Docs Home', path: 'https://www.mongodb.com/docs/' },
+      { title: 'Languages', path: 'https://www.mongodb.com/docs/languages' },
+      { title: 'C#/.NET', path: 'https://www.mongodb.com/docs/languages/csharp/' },
+      { title: 'C#/.NET Driver', path: 'https://www.mongodb.com/docs/languages/csharp/csharp-driver/' },
+      { title: 'Usage Examples', path: 'https://www.mongodb.com/docs/languages/csharp/csharp-driver/usage-examples/' },
     ];
 
     const tree = mountBreadcrumbContainer(breadcrumbs);

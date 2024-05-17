@@ -1,10 +1,10 @@
 {
   "name": "snooty",
-  "version": "0.16.11",
+  "version": "0.16.14",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
-    "npm": "8.*"
+    "npm": "9.*"
   },
   "overrides": {
     "@mdx-js/react": "^2.2.1"

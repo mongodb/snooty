@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { theme } from '../../theme/docsTheme';
+import { getFullBreadcrumbPath } from '../../utils/get-complete-breadcrumb-data';
 import IndividualBreadcrumb from './IndividualBreadcrumb';
 import CollapsedBreadcrumbs from './CollapsedBreadcrumbs';
 
@@ -67,7 +68,7 @@ const BreadcrumbContainer = ({ breadcrumbs }) => {
                 setIsExcessivelyTruncated={collapseBreadcrumbs}
                 onClick={() =>
                   reportAnalytics('BreadcrumbClick', {
-                    breadcrumbClicked: crumb.url,
+                    breadcrumbClicked: getFullBreadcrumbPath(crumb.path, true),
                   })
                 }
               ></IndividualBreadcrumb>
@@ -81,7 +82,7 @@ const BreadcrumbContainer = ({ breadcrumbs }) => {
 
 const crumbObjectShape = {
   title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 BreadcrumbContainer.propTypes = {

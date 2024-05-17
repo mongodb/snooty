@@ -55,6 +55,7 @@ export const getCurrentLocaleFontFamilyValue = () => {
   const fontFamilyMap = {
     'zh-cn': 'Noto Sans SC',
     'ko-kr': 'Noto Sans KR',
+    'ja-jp': 'Noto Sans JP',
   };
   const locale = getCurrLocale();
   return fontFamilyMap[locale] ? `${fontFamilyMap[locale]}` : undefined;

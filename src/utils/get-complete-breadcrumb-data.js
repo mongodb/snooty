@@ -1,6 +1,9 @@
+import { withPrefix } from 'gatsby';
 import { baseUrl } from './base-url';
 import { assertTrailingSlash } from './assert-trailing-slash';
 import { removeLeadingSlash } from './remove-leading-slash';
+import { assertLeadingSlash } from './assert-leading-slash';
+import { isRelativeUrl } from './is-relative-url';
 
 const nodesToString = (titleNodes) => {
   if (typeof titleNodes === 'string') {
@@ -22,16 +25,25 @@ const nodesToString = (titleNodes) => {
     .join('');
 };
 
+export const getFullBreadcrumbPath = (path, needsPrefix) => {
+  if (needsPrefix) {
+    path = withPrefix(path);
+  }
+  if (isRelativeUrl(path)) {
+    path = baseUrl() + removeLeadingSlash(path);
+  }
+  return assertTrailingSlash(path);
+};
+
 export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, parentPaths }) => {
-  //get intermediate breadcrumbs and property Url
-  const propertyUrl = assertTrailingSlash(queriedCrumbs?.propertyUrl ?? baseUrl());
+  //get intermediate breadcrumbs
   const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
-    return { ...crumb, url: assertTrailingSlash(baseUrl() + removeLeadingSlash(crumb.url)) };
+    return { ...crumb, path: getFullBreadcrumbPath(crumb.path, false) };
   });
 
   const homeCrumb = {
     title: 'Docs Home',
-    url: baseUrl(),
+    path: baseUrl(),
   };
 
   // If site is the property homepage, leave the propertyCrumb blank
@@ -39,7 +51,7 @@ export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, pare
   if (slug !== '/') {
     propertyCrumb = {
       title: nodesToString(siteTitle),
-      url: propertyUrl,
+      path: '/',
     };
   }
 
@@ -49,7 +61,7 @@ export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, pare
     return {
       ...crumb,
       title: nodesToString(crumb.title),
-      url: assertTrailingSlash(propertyUrl + removeLeadingSlash(crumb.path)),
+      path: assertLeadingSlash(crumb.path),
     };
   });
 
