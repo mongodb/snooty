@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-data.js';
-import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
+import { getCompleteBreadcrumbData, getFullBreadcrumbPath } from '../../utils/get-complete-breadcrumb-data.js';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
 const getBreadcrumbList = (breadcrumbs) =>
-  breadcrumbs.map(({ url, title }, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: title,
-    item: assertTrailingSlash(url),
-  }));
+  breadcrumbs.map(({ path, title }, index) => {
+    path = getFullBreadcrumbPath(path, true);
+
+    return {
+      '@type': 'ListItem',
+      position: index + 1,
+      name: title,
+      item: path,
+    };
+  });
 
 const BreadcrumbSchema = ({ slug }) => {
   const { parentPaths, title: siteTitle } = useSnootyMetadata();

@@ -52,6 +52,11 @@ exports[`renders correctly as a homepage 1`] = `
   text-decoration-color: transparent;
   line-height: 13px;
   color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-4>code {
@@ -170,6 +175,73 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-4 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+}
+
+.emotion-4:hover,
+.emotion-4:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-4:focus {
+  outline: none;
+}
+
+.emotion-4:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-4:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-4:hover,
+.emotion-4:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-5 {
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.emotion-12 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -208,6 +280,7 @@ exports[`renders correctly with siteTitle 1`] = `
 .emotion-5 {
   font-size: 13px;
   vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-5:hover,

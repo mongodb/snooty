@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import PropTypes from 'prop-types';
 import { RedocStandalone } from 'redoc';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
+import DocsHomeButton from '../Sidenav/DocsHomeButton';
+import { Border } from '../Sidenav/Sidenav';
 import Spinner from '../Spinner';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -123,10 +125,11 @@ const LoadingWidget = ({ className }) => (
   </LoadingContainer>
 );
 
-const MenuTitleContainer = ({ siteTitle, pageTitle }) => {
+const MenuTitleContainer = ({ pageTitle }) => {
   return (
     <>
-      {/* TODO: Add DocsHomeButton here - see comment below */}
+      <DocsHomeButton />
+      <Border />
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
   );
@@ -201,10 +204,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
                 menuTitleContainerEl.className = menuTitleContainerClass;
                 sidebarEl.insertBefore(menuTitleContainerEl, searchEl);
                 const pageTitle = page?.options?.title || '';
-                const siteTitle = metadata?.title;
-                /* TODO: The below function is deprecated with React 18, need to replace it (potentially with 
-                  createRoot() and .render() (see React documentation) */
-                render(<MenuTitleContainer siteTitle={siteTitle} pageTitle={pageTitle} />, menuTitleContainerEl);
+                createRoot(menuTitleContainerEl).render(<MenuTitleContainer pageTitle={pageTitle} />);
               }
             }
           }}
