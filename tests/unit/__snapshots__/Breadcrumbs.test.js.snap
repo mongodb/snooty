@@ -70,6 +70,7 @@ exports[`renders correctly as a homepage 1`] = `
   display: inline;
   font-size: 13px;
   vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-4:hover,
@@ -218,6 +219,7 @@ exports[`renders correctly with siteTitle 1`] = `
   display: inline;
   font-size: 13px;
   vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-4:hover,
@@ -293,6 +295,7 @@ exports[`renders correctly with siteTitle 1`] = `
 .emotion-13 {
   font-size: 13px;
   vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-13:hover,

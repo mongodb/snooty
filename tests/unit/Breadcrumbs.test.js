@@ -18,7 +18,7 @@ beforeAll(() => {
 const mockIntermediateCrumbs = [
   {
     title: 'MongoDB Atlas',
-    url: '/atlas',
+    path: '/atlas',
   },
 ];
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
