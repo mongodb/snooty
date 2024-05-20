@@ -3,7 +3,10 @@ on:
     branches:
       - "main"
       - "skunk-upload-lighthouse"
-name: Run and Upload Lighthouse Report
+  pull_request:
+    types: ["opened", "synchronize"]
+
+name: Run and Upload Lighthouse Reports to MongoDB
 jobs: 
   staging:
     permissions: write-all
@@ -45,11 +48,9 @@ jobs:
       - name: Upload Lighthouse to MongoDB
         uses: mongodb/docs-worker-actions/upload-lighthouse@skunk-upload-lighthouse
         env:
-          COMMIT_AUTHOR: $GITHUB_ACTOR
-          COMMIT_HASH_AFTER: $GITHUB_SHA
+          PROJECT_TO_BUILD: ${{ matrix.project }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           COMMIT_TIMESTAMP: ${{ github.event.head_commit.timestamp }}
-          PROJECT_TO_BUILD: ${{ matrix.project }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
           
