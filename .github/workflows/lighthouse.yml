@@ -47,8 +47,8 @@ jobs:
         env:
           COMMIT_AUTHOR: $GITHUB_ACTOR
           COMMIT_HASH_AFTER: $GITHUB_SHA
-          COMMIT_MESSAGE: ${{ github.head_commit.message }}
-          COMMIT_TIMESTAMP: ${{ github.head_commit.timestamp }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          COMMIT_TIMESTAMP: ${{ github.event.head_commit.timestamp }}
           PROJECT_TO_BUILD: ${{ matrix.project }}
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
