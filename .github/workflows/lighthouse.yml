@@ -51,4 +51,5 @@ jobs:
           COMMIT_TIMESTAMP: ${{ github.head_commit.timestamp }}
           PROJECT_TO_BUILD: ${{ matrix.project }}
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
           
