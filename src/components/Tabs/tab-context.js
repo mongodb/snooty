@@ -49,6 +49,8 @@ const DRIVER_ICON_MAP = {
   python: IconPython,
   ruby: IconRuby,
   rust: IconRust,
+  'rust-sync': IconRust,
+  'rust-async': IconRust,
   scala: IconScala,
   shell: IconShell,
   swift: IconSwift,
