@@ -47,14 +47,15 @@ const DarkModeContextProvider = ({ children }) => {
   return (
     <DarkModeContex.Provider value={{ darkMode, setDarkMode }}>
       <LeafyGreenProvider baseFontSize={16} darkMode={darkMode}>
-        {/* TODO: remove button for testing */}
-        <Button
-          onClick={() => {
-            setDarkMode(!darkMode);
-          }}
-        >
-          Click to toggle Dark Mode
-        </Button>
+        {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && (
+          <Button
+            onClick={() => {
+              setDarkMode(!darkMode);
+            }}
+          >
+            Click to toggle Dark Mode
+          </Button>
+        )}
         {children}
       </LeafyGreenProvider>
     </DarkModeContex.Provider>

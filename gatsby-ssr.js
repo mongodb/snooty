@@ -6,7 +6,7 @@ import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
 
 export const onRenderBody = ({ setHeadComponents }) => {
-  setHeadComponents([
+  const headComponents = [
     // GTM Pathway
     <script
       key="pathway"
@@ -21,28 +21,6 @@ export const onRenderBody = ({ setHeadComponents }) => {
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `!function(e,t,r,n){if(!e[n]){for(var a=e[n]=[],i=["survey","reset","config","init","set","get","event","identify","track","page","screen","group","alias"],s=0;s<i.length;s++){var c=i[s];a[c]=a[c]||function(e){return function(){var t=Array.prototype.slice.call(arguments);a.push([e,t])}}(c)}a.SNIPPET_VERSION="1.0.1";var o=t.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/"+r+"/"+n+".js";var l=t.getElementsByTagName("script")[0];l.parentNode.insertBefore(o,l)}}(window,document,"Dk30CC86ba0nATlK","delighted");`,
-      }}
-    />,
-    // Detect dark mode
-    <script
-      dangerouslySetInnerHTML={{
-        // __html: `alert('this is an alert test')()`
-        __html: `!function(){  try {
-          debugger;
-          var d = document.documentElement.classList;
-          d.remove("light-theme", "dark-theme");
-          var e = JSON.parse(localStorage.getItem("mongodb-docs"))?.['theme'];
-          if ("system" === e || (!e && true)) {
-            var t = "(prefers-color-scheme: dark)",
-              m = window.matchMedia(t);
-            m.media !== t || m.matches ? d.add("dark-theme") : d.add("light-theme");
-          } else if (e) {
-            var x = { "light-theme": "light-theme", "dark-theme": "dark-theme" };
-            d.add(x[e]);
-          }
-        } catch (e) {
-         console.error(e)
-        }}()`,
       }}
     />,
     <link
@@ -70,7 +48,34 @@ export const onRenderBody = ({ setHeadComponents }) => {
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
       rel="stylesheet"
     ></link>,
-  ]);
+  ];
+  if (process.env['GATSBY_ENABLE_DARK_MODE'] === 'true') {
+    headComponents.push(
+      // Detect dark mode
+      <script
+        key="dark-mode"
+        dangerouslySetInnerHTML={{
+          // __html: `alert('this is an alert test')()`
+          __html: `!function(){  try {
+          var d = document.documentElement.classList;
+          d.remove("light-theme", "dark-theme");
+          var e = JSON.parse(localStorage.getItem("mongodb-docs"))?.['theme'];
+          if ("system" === e || (!e && true)) {
+            var t = "(prefers-color-scheme: dark)",
+              m = window.matchMedia(t);
+            m.media !== t || m.matches ? d.add("dark-theme") : d.add("light-theme");
+          } else if (e) {
+            var x = { "light-theme": "light-theme", "dark-theme": "dark-theme" };
+            d.add(x[e]);
+          }
+        } catch (e) {
+         console.error(e)
+        }}()`,
+        }}
+      />
+    );
+  }
+  setHeadComponents(headComponents);
 };
 
 // Support SSR for LeafyGreen components
