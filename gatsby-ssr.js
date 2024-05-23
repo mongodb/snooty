@@ -1,7 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from '@emotion/react';
 import { renderStylesToString } from '@leafygreen-ui/emotion';
-import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
@@ -57,8 +56,4 @@ export const onRenderBody = ({ setHeadComponents }) => {
 export const replaceRenderer = ({ replaceBodyHTMLString, bodyComponent }) =>
   replaceBodyHTMLString(renderStylesToString(renderToString(bodyComponent)));
 
-export const wrapRootElement = ({ element }) => (
-  <ThemeProvider theme={theme}>
-    <LeafyGreenProvider baseFontSize={16}>{element}</LeafyGreenProvider>
-  </ThemeProvider>
-);
+export const wrapRootElement = ({ element }) => <ThemeProvider theme={theme}>{element}</ThemeProvider>;

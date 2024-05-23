@@ -1,5 +1,12 @@
-import React, { createContext, useEffect, useRef } from 'react';
-import LeafyGreenProvider, { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+/**
+ * Context to dictate dark mode UI for rest of page
+ * Should be on top level, and dictates LG Provider Context
+ * which in turn controls all UI elements within the page
+ * https://github.com/mongodb/leafygreen-ui/blob/main/STYLEGUIDE.md#consuming-darkmode-from-leafygreenprovider
+ */
+
+import React, { createContext, useEffect, useRef, useState } from 'react';
+import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import Button from '@leafygreen-ui/button';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 
@@ -8,8 +15,8 @@ const DarkModeContex = createContext({
   setDarkMode: () => {},
 });
 
-const DarkModeContexProvider = ({ children }) => {
-  const { setDarkMode, darkMode } = useDarkMode();
+const DarkModeContextProvider = ({ children }) => {
+  const [darkMode, setDarkMode] = useState();
   const loaded = useRef();
 
   // save to local value when darkmode changes, besides initial load
@@ -22,16 +29,15 @@ const DarkModeContexProvider = ({ children }) => {
     }
   }, [darkMode]);
 
-  // TODO: investigate why this is not upading dark mode
-  // seems to set dark mode to local value, but no change
+  // NOTE: client side read of darkmode from local storage
+  // occurs after component mounts, not during build time
+  // TODO: DOP-4671 - set based on system setting as well as previous selection
   useEffect(() => {
-    console.log('on init local value for darkmode is ', getLocalValue('darkMode'));
     setDarkMode(getLocalValue('darkMode'));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <DarkModeContex.Provider value={{ darkMode: darkMode, setDarkMode }}>
+    <DarkModeContex.Provider value={{ darkMode, setDarkMode }}>
       <LeafyGreenProvider baseFontSize={16} darkMode={darkMode}>
         {/* TODO: remove button for testing */}
         <Button
@@ -41,11 +47,10 @@ const DarkModeContexProvider = ({ children }) => {
         >
           Click to toggle Dark Mode
         </Button>
-        {/* {renderReady && children} */}
         {children}
       </LeafyGreenProvider>
     </DarkModeContex.Provider>
   );
 };
 
-export { DarkModeContex, DarkModeContexProvider };
+export { DarkModeContex, DarkModeContextProvider };
