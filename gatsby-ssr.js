@@ -57,7 +57,6 @@ export const onRenderBody = ({ setHeadComponents }) => {
       <script
         key="dark-mode"
         dangerouslySetInnerHTML={{
-          // __html: `alert('this is an alert test')()`
           __html: `
             function () {
               try {
