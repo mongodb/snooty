@@ -140,10 +140,6 @@ const DocumentBody = (props) => {
           #template-container *:not(:is(code, code *)) {
             font-family: ${fontFamily};
           }
-          // TESTING initial load background
-          // html.dark-theme body {
-          //   background: black
-          // }
         `}
       />
     </>
