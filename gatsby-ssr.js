@@ -50,27 +50,33 @@ export const onRenderBody = ({ setHeadComponents }) => {
     ></link>,
   ];
   if (process.env['GATSBY_ENABLE_DARK_MODE'] === 'true') {
+    // Detect dark mode
+    // before document body
+    // to prevent flash of incorrect theme
     headComponents.push(
-      // Detect dark mode
       <script
         key="dark-mode"
         dangerouslySetInnerHTML={{
           // __html: `alert('this is an alert test')()`
-          __html: `!function(){  try {
-          var d = document.documentElement.classList;
-          d.remove("light-theme", "dark-theme");
-          var e = JSON.parse(localStorage.getItem("mongodb-docs"))?.['theme'];
-          if ("system" === e || (!e && true)) {
-            var t = "(prefers-color-scheme: dark)",
-              m = window.matchMedia(t);
-            m.media !== t || m.matches ? d.add("dark-theme") : d.add("light-theme");
-          } else if (e) {
-            var x = { "light-theme": "light-theme", "dark-theme": "dark-theme" };
-            d.add(x[e]);
-          }
-        } catch (e) {
-         console.error(e)
-        }}()`,
+          __html: `
+            function () {
+              try {
+                var d = document.documentElement.classList;
+                d.remove("light-theme", "dark-theme");
+                var e = JSON.parse(localStorage.getItem("mongodb-docs"))?.["theme"];
+                if ("system" === e || (!e)) {
+                  var t = "(prefers-color-scheme: dark)",
+                    m = window.matchMedia(t);
+                  m.media !== t || m.matches ? d.add("dark-theme") : d.add("light-theme");
+                } else if (e) {
+                  var x = { "light-theme": "light-theme", "dark-theme": "dark-theme" };
+                  x[e] && d.add(x[e]);
+                }
+              } catch (e) {
+                console.error(e);
+              }
+            }();
+          `,
         }}
       />
     );
