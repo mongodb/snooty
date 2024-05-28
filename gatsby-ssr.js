@@ -58,7 +58,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
         key="dark-mode"
         dangerouslySetInnerHTML={{
           __html: `
-            function () {
+            !function () {
               try {
                 var d = document.documentElement.classList;
                 d.remove("light-theme", "dark-theme");
