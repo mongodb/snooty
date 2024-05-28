@@ -14,7 +14,6 @@ const DocumentContainer = styled('div')`
 
 const StyledMainColumn = styled(MainColumn)`
   grid-area: main;
-  padding-top: 40px;
 `;
 
 const DriversIndex = ({ children, pageContext: { slug } }) => {
