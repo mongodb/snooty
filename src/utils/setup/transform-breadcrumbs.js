@@ -5,7 +5,6 @@ const transformBreadcrumbs = (breadcrumbs, slugToBreadcrumbLabel) => {
       return {
         path,
         title,
-        plaintext: title,
       };
     });
   });
