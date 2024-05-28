@@ -1,0 +1,9 @@
+.dark-theme body {
+     background-color: var(--lg-bg-dark-mode);
+     color: var(--lg-color-dark-mode);
+}
+
+.light-theme body {
+    background-color: initial;
+    color: initial;
+}
