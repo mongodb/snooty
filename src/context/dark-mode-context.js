@@ -8,45 +8,54 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import Button from '@leafygreen-ui/button';
-import { getLocalValue, setLocalValue } from '../utils/browser-storage';
+import { setLocalValue } from '../utils/browser-storage';
+import { isBrowser } from '../utils/is-browser';
 
 const DarkModeContex = createContext({
   darkMode: false,
   setDarkMode: () => {},
 });
 
+const DARK_THEME_CLASSNAME = 'dark-theme';
+const LIGHT_THEME_CLASSNAME = 'light-theme';
+
 const DarkModeContextProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState();
+  const [darkMode, setDarkMode] = useState(false);
   const loaded = useRef();
 
   // save to local value when darkmode changes, besides initial load
   useEffect(() => {
-    if (loaded.current) {
-      console.log('setting local value for darkMode ', darkMode);
-      setLocalValue('darkMode', darkMode);
-    } else {
+    if (!loaded.current) {
       loaded.current = true;
+      return;
+    }
+    setLocalValue('theme', darkMode ? DARK_THEME_CLASSNAME : LIGHT_THEME_CLASSNAME);
+    if (isBrowser) {
+      const documentClasses = window.document.documentElement.classList;
+      documentClasses.remove(LIGHT_THEME_CLASSNAME, DARK_THEME_CLASSNAME);
+      documentClasses.add(darkMode ? DARK_THEME_CLASSNAME : LIGHT_THEME_CLASSNAME);
     }
   }, [darkMode]);
 
-  // NOTE: client side read of darkmode from local storage
-  // occurs after component mounts, not during build time
-  // TODO: DOP-4671 - set based on system setting as well as previous selection
+  // NOTE: client side read of darkmode from document classnames
+  // which is derived from local storage (see gatsby-ssr script).
+  // This occurs after component mounts, not during build time
   useEffect(() => {
-    setDarkMode(getLocalValue('darkMode'));
+    setDarkMode(isBrowser ? window?.document?.documentElement?.classList?.contains(DARK_THEME_CLASSNAME) : false);
   }, []);
 
   return (
     <DarkModeContex.Provider value={{ darkMode, setDarkMode }}>
       <LeafyGreenProvider baseFontSize={16} darkMode={darkMode}>
-        {/* TODO: remove button for testing */}
-        <Button
-          onClick={() => {
-            setDarkMode(!darkMode);
-          }}
-        >
-          Click to toggle Dark Mode
-        </Button>
+        {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && (
+          <Button
+            onClick={() => {
+              setDarkMode(!darkMode);
+            }}
+          >
+            Click to toggle Dark Mode
+          </Button>
+        )}
         {children}
       </LeafyGreenProvider>
     </DarkModeContex.Provider>

@@ -6,7 +6,7 @@ import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
 
 export const onRenderBody = ({ setHeadComponents }) => {
-  setHeadComponents([
+  const headComponents = [
     // GTM Pathway
     <script
       key="pathway"
@@ -48,7 +48,39 @@ export const onRenderBody = ({ setHeadComponents }) => {
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
       rel="stylesheet"
     ></link>,
-  ]);
+  ];
+  if (process.env['GATSBY_ENABLE_DARK_MODE'] === 'true') {
+    // Detect dark mode
+    // before document body
+    // to prevent flash of incorrect theme
+    headComponents.push(
+      <script
+        key="dark-mode"
+        dangerouslySetInnerHTML={{
+          __html: `
+            !function () {
+              try {
+                var d = document.documentElement.classList;
+                d.remove("light-theme", "dark-theme");
+                var e = JSON.parse(localStorage.getItem("mongodb-docs"))?.["theme"];
+                if ("system" === e || (!e)) {
+                  var t = "(prefers-color-scheme: dark)",
+                    m = window.matchMedia(t);
+                  m.media !== t || m.matches ? d.add("dark-theme") : d.add("light-theme");
+                } else if (e) {
+                  var x = { "light-theme": "light-theme", "dark-theme": "dark-theme" };
+                  x[e] && d.add(x[e]);
+                }
+              } catch (e) {
+                console.error(e);
+              }
+            }();
+          `,
+        }}
+      />
+    );
+  }
+  setHeadComponents(headComponents);
 };
 
 // Support SSR for LeafyGreen components
