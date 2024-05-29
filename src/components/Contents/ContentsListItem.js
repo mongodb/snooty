@@ -19,18 +19,22 @@ const listItemStyling = ({ isActive, darkMode }) => css`
   @media ${theme.screenSize.largeAndUp} {
     border-left-style: solid;
     border-left-width: ${isActive ? '2px' : '1px'};
-    ${isActive & 'padding-left: 0;'}
-    /* Border color, left to right:            active & dark,       active & light,           inactive & dark,    inactive & light */
     border-left-color: ${isActive
       ? darkMode
-        ? palette.gray.light1
-        : palette.black
+        ? // active & dark
+          palette.gray.light1
+        : // active & light
+          palette.black
       : darkMode
-      ? palette.gray.dark2
-      : palette.gray.light2};
+      ? // inactive & dark
+        palette.gray.dark2
+      : // inactive & light
+        palette.gray.light2};
+    ${isActive && 'padding-left: 0;'}
 
     &:hover,
     &:active {
+      border-left-width: 2px;
       border-left-color: ${darkMode ? palette.gray.light1 : palette.black};
     }
   }
