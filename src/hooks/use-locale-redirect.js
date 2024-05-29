@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { withPrefix } from 'gatsby';
-import { AVAILABLE_LANGUAGES, getCurrLocale, localizePath } from '../utils/locale';
-import { STORAGE_KEY_PREF_LOCALE, getLocalValue } from '../utils/browser-storage';
+import { AVAILABLE_LANGUAGES, STORAGE_KEY_PREF_LOCALE, getCurrLocale, localizePath } from '../utils/locale';
+import { getLocalValue } from '../utils/browser-storage';
 
 /**
  * Attempts to perform a redirect based on the browser's locale

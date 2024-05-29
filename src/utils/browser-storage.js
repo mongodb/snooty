@@ -2,8 +2,6 @@ import { isBrowser } from './is-browser';
 
 const isValidStorage = isBrowser;
 
-export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
-
 export const setLocalValue = (key, value) => {
   try {
     if (isValidStorage) {

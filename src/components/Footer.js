@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { isBrowser } from '../utils/is-browser';
-import { AVAILABLE_LANGUAGES, getCurrLocale, localizePath } from '../utils/locale';
-import { STORAGE_KEY_PREF_LOCALE, setLocalValue } from '../utils/browser-storage';
+import { AVAILABLE_LANGUAGES, STORAGE_KEY_PREF_LOCALE, getCurrLocale, localizePath } from '../utils/locale';
+import { setLocalValue } from '../utils/browser-storage';
 
 const Footer = () => {
   const location = useLocation();

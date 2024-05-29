@@ -4,6 +4,11 @@ import { isBrowser } from './is-browser';
 import { normalizePath } from './normalize-path';
 import { removeLeadingSlash } from './remove-leading-slash';
 
+/**
+ * Key used to access browser storage for user's preferred locale
+ */
+export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
+
 // Update this as more languages are introduced
 export const AVAILABLE_LANGUAGES = [
   { language: 'English', localeCode: 'en-us', langCode: 'en' },
