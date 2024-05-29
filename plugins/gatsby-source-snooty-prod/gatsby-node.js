@@ -214,9 +214,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   }
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
 
-  const { parentPaths, slugToTitle } = metadataMinusStatic;
+  const { parentPaths, slugToBreadcrumbLabel } = metadataMinusStatic;
   if (parentPaths) {
-    transformBreadcrumbs(parentPaths, slugToTitle);
+    transformBreadcrumbs(parentPaths, slugToBreadcrumbLabel);
   }
 
   //Save files in the static_files field of metadata document, including intersphinx inventories
