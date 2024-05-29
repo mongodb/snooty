@@ -1,7 +1,8 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { withPrefix } from 'gatsby';
 import { AVAILABLE_LANGUAGES, STORAGE_KEY_PREF_LOCALE, getCurrLocale, localizePath } from '../utils/locale';
 import { getLocalValue } from '../utils/browser-storage';
+import { isBrowser } from '../utils/is-browser';
 
 /**
  * Attempts to perform a redirect based on the browser's locale
@@ -11,6 +12,13 @@ export const useLocaleRedirect = (slug) => {
   // Memoize a user's preferred supported non-English language to avoid the need to check it across multiple pages
   const preferredLang = useMemo(() => {
     if (typeof navigator === 'undefined') {
+      return undefined;
+    }
+
+    // No need to check for preferred lang if local storage saves user's lang preference
+    // to English from interaction with the locale selector
+    const storedPrefLocale = getLocalValue(STORAGE_KEY_PREF_LOCALE);
+    if (storedPrefLocale === 'en-us') {
       return undefined;
     }
 
@@ -38,21 +46,13 @@ export const useLocaleRedirect = (slug) => {
     }
   }, []);
 
-  // Determine if a redirect is needed based on browser language
-  useEffect(() => {
-    const currLocale = getCurrLocale();
-    const storedPrefLocale = getLocalValue(STORAGE_KEY_PREF_LOCALE);
-    // Only redirect based on language if site is in English
-    if (currLocale !== 'en-us' || storedPrefLocale === 'en-us') {
-      return;
-    }
-
-    // preferredLang should be a non-English language
-    if (preferredLang) {
-      // Redirect user to expected page
-      const fullPageSlug = withPrefix(slug);
-      const targetRedirect = localizePath(fullPageSlug, preferredLang.localeCode);
-      window.location.href = targetRedirect;
-    }
-  }, [slug, preferredLang]);
+  // Only redirect based on language if site is in English
+  const isEnglishSite = isBrowser && getCurrLocale() === 'en-us';
+  // preferredLang should be a non-English language
+  if (isEnglishSite && preferredLang) {
+    // Redirect user to expected page
+    const fullPageSlug = withPrefix(slug);
+    const targetRedirect = localizePath(fullPageSlug, preferredLang.localeCode);
+    window.location.href = targetRedirect;
+  }
 };
