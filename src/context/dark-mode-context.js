@@ -11,7 +11,7 @@ import Button from '@leafygreen-ui/button';
 import { setLocalValue } from '../utils/browser-storage';
 import { isBrowser } from '../utils/is-browser';
 
-const DarkModeContex = createContext({
+const DarkModeContext = createContext({
   darkMode: false,
   setDarkMode: () => {},
 });
@@ -45,7 +45,7 @@ const DarkModeContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <DarkModeContex.Provider value={{ darkMode, setDarkMode }}>
+    <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
       <LeafyGreenProvider baseFontSize={16} darkMode={darkMode}>
         {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && (
           <Button
@@ -58,8 +58,8 @@ const DarkModeContextProvider = ({ children }) => {
         )}
         {children}
       </LeafyGreenProvider>
-    </DarkModeContex.Provider>
+    </DarkModeContext.Provider>
   );
 };
 
-export { DarkModeContex, DarkModeContextProvider };
+export { DarkModeContext, DarkModeContextProvider };

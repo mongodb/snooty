@@ -10,6 +10,7 @@ import Card from './Card';
 import CardGroup from './Card/CardGroup';
 import Chapter from './Chapters/Chapter';
 import Chapters from './Chapters';
+import ChatbotUi from './ChatbotUi';
 import Code from './Code/Code';
 import CodeIO from './Code/CodeIO';
 import CommunityPillLink from './CommunityPillLink';
@@ -67,7 +68,6 @@ import Time from './Time';
 import TitleReference from './TitleReference';
 import Topic from './Topic';
 import Transition from './Transition';
-import ChatbotUi from './ChatbotUi';
 
 import VersionModified from './VersionModified';
 
@@ -257,6 +257,10 @@ const ComponentFactory = (props) => {
   return selectComponent();
 };
 
+ComponentFactory.defaultProps = {
+  darkMode: false,
+};
+
 ComponentFactory.propTypes = {
   nodeData: PropTypes.shape({
     domain: PropTypes.string,
@@ -264,6 +268,7 @@ ComponentFactory.propTypes = {
     type: PropTypes.string.isRequired,
   }).isRequired,
   slug: PropTypes.string,
+  darkMode: PropTypes.bool,
 };
 
 export default ComponentFactory;

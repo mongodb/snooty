@@ -1,11 +1,22 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import Step from './Step';
 
 const StyledProcedure = styled('div')`
   margin-top: ${theme.size.default};
+  ${({ darkMode }) =>
+    darkMode
+      ? `
+        background-color: ${palette.black};
+        color: ${palette.gray.light2};
+  `
+      : `
+        background-color: initial;
+        color: initial;
+      `}
 
   ${({ procedureStyle }) =>
     procedureStyle === 'connected' &&
@@ -42,16 +53,16 @@ const getSteps = (children) => {
   return steps;
 };
 
-const Procedure = ({ nodeData: { children, options }, ...rest }) => {
+const Procedure = ({ nodeData: { children, options }, darkMode, ...rest }) => {
   // Make the style 'connected' by default for now to give time for PLPs that use this directive to
   // add the "style" option
   const style = options?.style || 'connected';
   const steps = useMemo(() => getSteps(children), [children]);
 
   return (
-    <StyledProcedure procedureStyle={style}>
+    <StyledProcedure procedureStyle={style} darkMode={darkMode}>
       {steps.map((child, i) => (
-        <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} />
+        <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} darkMode={darkMode} />
       ))}
     </StyledProcedure>
   );
