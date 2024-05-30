@@ -13,7 +13,6 @@ import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
 import { getSiteTitle } from '../utils/get-site-title';
-import { useLocaleRedirect } from '../hooks/use-locale-redirect';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -164,8 +163,6 @@ export default DocumentBody;
 
 export const Head = ({ pageContext }) => {
   const { slug, page, template, repoBranches } = pageContext;
-
-  useLocaleRedirect(slug);
 
   const pageNodes = getNestedValue(['children'], page) || [];
 

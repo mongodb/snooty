@@ -11,10 +11,10 @@ export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
 
 // Update this as more languages are introduced
 export const AVAILABLE_LANGUAGES = [
-  { language: 'English', localeCode: 'en-us', langCode: 'en' },
-  { language: '简体中文', localeCode: 'zh-cn', langCode: 'zh' },
-  { language: '한국어', localeCode: 'ko-kr', langCode: 'ko' },
-  { language: 'Português', localeCode: 'pt-br', langCode: 'pt' },
+  { language: 'English', localeCode: 'en-us' },
+  { language: '简体中文', localeCode: 'zh-cn' },
+  { language: '한국어', localeCode: 'ko-kr' },
+  { language: 'Português', localeCode: 'pt-br' },
 ];
 
 const validateLocaleCode = (potentialCode) =>
