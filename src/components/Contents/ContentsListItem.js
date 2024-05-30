@@ -36,6 +36,7 @@ const listItemStyling = ({ isActive, darkMode }) => css`
     &:active {
       border-left-width: 2px;
       border-left-color: ${darkMode ? palette.gray.light1 : palette.black};
+      padding-left: 0;
     }
   }
 `;
