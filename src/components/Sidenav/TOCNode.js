@@ -39,6 +39,7 @@ const scrollBehavior = { block: 'nearest', behavior: 'smooth' };
  */
 const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, parentProj = '' }) => {
   const { title, slug, url, children, options = {} } = node;
+  console.log('tocnode ', node);
   const { activeVersions } = useContext(VersionContext);
   const target = options.urls?.[activeVersions[options.project]] || slug || url;
   const hasChildren = !!children?.length;

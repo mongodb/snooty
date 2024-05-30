@@ -53,8 +53,10 @@ const IA = ({ handleClick, header, ia }) => {
   const { iatree } = useSnootyMetadata();
   const linkedDataMapping = findIALinkedData(iatree);
 
+  console.log('headerrrr ', header);
+
   return (
-    <SideNavGroup className={cx(headerPadding)} header={header}>
+    <SideNavGroup className={header ? cx(headerPadding) : ''} header={header}>
       {ia.map(({ title, slug, url, id }, index) => {
         const target = slug || url;
         // We use the linked data from the mapping since the linked data and the

@@ -182,6 +182,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
 
   const template = page?.options?.template;
   const hideIaHeader = template === 'landing' || template === 'search';
+  console.log('hide ia header ', hideIaHeader);
   const isGuidesLanding = project === 'guides' && template === 'product-landing';
   const isGuidesTemplate = template === 'guide';
 
@@ -208,6 +209,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
       );
     }
 
+    console.log('in navcontent ');
+
     if (!Object.keys(activeToc).length) {
       return null;
     }
@@ -224,6 +227,9 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
     const chapterName = guides?.[slug]?.['chapter_name'];
     return chapters[chapterName]?.['chapter_number'];
   }, [chapters, guides, isGuidesTemplate, slug]);
+
+  console.log('ia ', ia);
+  console.log('navTitle ', navTitle);
 
   return (
     <>
@@ -248,7 +254,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 <Border />
                 {ia && (
                   <IA
-                    header={!hideIaHeader && <span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
+                    header={!hideIaHeader ? <span className={cx([titleStyle])}>{formatText(pageTitle)}</span> : null}
                     handleClick={() => {
                       setBack(false);
                       hideMobileSidenav();
