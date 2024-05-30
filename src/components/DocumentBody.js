@@ -1,9 +1,8 @@
-import React, { useState, lazy, useContext } from 'react';
+import React, { useState, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import { Global, css } from '@emotion/react';
 import { ImageContextProvider } from '../context/image-context';
-import { DarkModeContext } from '../context/dark-mode-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
@@ -103,8 +102,6 @@ const DocumentBody = (props) => {
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
-  const { darkMode } = useContext(DarkModeContext);
-
   return (
     <>
       <TabProvider selectors={page?.options?.selectors}>
@@ -122,14 +119,7 @@ const DocumentBody = (props) => {
                 <div id="template-container">
                   <Template {...props} useChatbot={useChatbot}>
                     {pageNodes.map((child, index) => (
-                      <ComponentFactory
-                        key={index}
-                        metadata={metadata}
-                        nodeData={child}
-                        page={page}
-                        slug={slug}
-                        darkMode={darkMode}
-                      />
+                      <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
                     ))}
                   </Template>
                 </div>

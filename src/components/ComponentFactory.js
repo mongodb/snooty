@@ -257,10 +257,6 @@ const ComponentFactory = (props) => {
   return selectComponent();
 };
 
-ComponentFactory.defaultProps = {
-  darkMode: false,
-};
-
 ComponentFactory.propTypes = {
   nodeData: PropTypes.shape({
     domain: PropTypes.string,
@@ -268,7 +264,6 @@ ComponentFactory.propTypes = {
     type: PropTypes.string.isRequired,
   }).isRequired,
   slug: PropTypes.string,
-  darkMode: PropTypes.bool,
 };
 
 export default ComponentFactory;
