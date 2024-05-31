@@ -127,3 +127,29 @@ export const getLocaleMapping = (siteUrl, slug) => {
 
   return localeHrefMap;
 };
+
+/**
+ * Returns a node for the Language Selector that contains only
+ * available languages.
+ * @param {object} ulElement
+ * @returns {object}
+ */
+export const getLanguageSelectorOptions = (ulElement) => {
+  console.log('UL ELEMENT FROM THE thing', ulElement);
+  const availableOptions = Array.from(ulElement.childNodes).reduce((accumulator, child) => {
+    if (AVAILABLE_LANGUAGES.find(({ language }) => child.textContent === language)) {
+      accumulator.push(child);
+    }
+    return accumulator;
+  }, []);
+
+  console.log('AVAILABLE OPTIONS', availableOptions);
+
+  return availableOptions;
+
+  // ulElement.innerHTML = null;
+  // availableOptions.forEach((child) => {
+  //   ulElement.appendChild(child);
+  // });
+  // return ulElement;
+};
