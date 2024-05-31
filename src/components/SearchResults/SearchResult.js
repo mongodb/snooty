@@ -46,7 +46,7 @@ const SearchResultContainer = styled('div')`
 
 const StyledResultTitle = styled('p')`
   font-family: 'Euclid Circular A';
-  color: #016bf8;
+  color: ${({ darkMode }) => (darkMode ? palette.blue.light1 : palette.blue.base)};
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
@@ -136,6 +136,7 @@ const SearchResult = React.memo(
     searchProperty,
     url,
     facets,
+    darkMode,
     ...props
   }) => {
     const { searchPropertyMapping, searchTerm, getFacetName, showFacets } = useContext(SearchContext);
@@ -149,6 +150,7 @@ const SearchResult = React.memo(
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
         <SearchResultContainer>
           <StyledResultTitle
+            darkMode={darkMode}
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(title),
             }}

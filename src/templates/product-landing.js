@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme.js';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
@@ -13,7 +14,7 @@ const Wrapper = styled('main')`
   width: 100%;
 
   h1 {
-    color: black;
+    color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.black)};
   }
 
   h2 {
@@ -189,6 +190,7 @@ const ProductLanding = ({ children, data: { page } }) => {
   }, []);
 
   const bannerNode = findKeyValuePair([{ children: shallowChildren }], 'name', 'banner');
+  const { darkMode } = useDarkMode();
 
   return (
     <Wrapper
@@ -197,6 +199,7 @@ const ProductLanding = ({ children, data: { page } }) => {
       useHero={useHero}
       hasBanner={!!bannerNode}
       hasMaxWidthParagraphs={hasMaxWidthParagraphs}
+      darkMode={darkMode}
     >
       {children}
     </Wrapper>

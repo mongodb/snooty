@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useTheme, Global, css } from '@emotion/react';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 import ChatbotUi from '../components/ChatbotUi';
@@ -49,6 +50,7 @@ const Wrapper = styled('main')`
 // The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
 const Landing = ({ children, pageContext, useChatbot }) => {
   const { fontSize, screenSize, size } = useTheme();
+  const { darkMode } = useDarkMode();
   return (
     <>
       <div>
@@ -63,8 +65,9 @@ const Landing = ({ children, pageContext, useChatbot }) => {
           h2,
           h3,
           h4 {
-            color: ${palette.black};
+            color: ${darkMode ? palette.gray.light2 : palette.black};
           }
+
           h1,
           h2 {
             font-size: 32px;

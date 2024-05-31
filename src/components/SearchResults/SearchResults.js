@@ -8,6 +8,7 @@ import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { H3, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
@@ -55,7 +56,7 @@ const HeaderContainer = styled('div')`
   grid-area: header;
 
   > h1:first-of-type {
-    color: ${palette.green.dark2};
+    color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.green.dark2)};
     padding-bottom: 24px;
     margin: unset;
   }
@@ -70,7 +71,7 @@ const FiltersContainer = styled('div')`
 
 const FilterHeader = styled('h2')`
   align-self: center;
-  color: ${palette.gray.dark2};
+  color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.gray.dark2)};
   font-size: ${theme.fontSize.tiny};
   line-height: 15px;
   text-transform: uppercase;
@@ -285,6 +286,8 @@ const SearchResults = () => {
   const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
 
+  const { darkMode } = useDarkMode();
+
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
   }, [setSearchFilter]);
@@ -405,7 +408,7 @@ const SearchResults = () => {
       />
       <SearchResultsContainer showFacets={showFacets}>
         {/* new header for search bar */}
-        <HeaderContainer>
+        <HeaderContainer darkMode={darkMode}>
           <H3 as="h1">Search Results</H3>
           <SearchInput
             ref={searchBoxRef}
@@ -490,6 +493,7 @@ const SearchResults = () => {
                   useLargeTitle
                   searchProperty={searchProperty?.[0]}
                   facets={facets}
+                  darkMode={darkMode}
                 />
               ))}
               {
@@ -517,7 +521,7 @@ const SearchResults = () => {
               </>
             ) : (
               <>
-                <FilterHeader>{specifySearchText}</FilterHeader>
+                <FilterHeader darkMode={darkMode}>{specifySearchText}</FilterHeader>
                 <StyledSearchFilters />
               </>
             )}

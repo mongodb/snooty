@@ -4,6 +4,7 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { Link as GatsbyLink } from 'gatsby';
 import { css } from '@leafygreen-ui/emotion';
 import { Link as LGLink } from '@leafygreen-ui/typography';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
@@ -18,17 +19,17 @@ import { getGatsbyPreviewLink } from '../utils/get-gatsby-preview-link';
  */
 
 // CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
-const gatsbyLinkStyling = css`
+const gatsbyLinkStyling = (darkMode) => css`
   align-items: center;
   cursor: pointer;
   position: relative;
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: ${palette.blue.base};
+  color: ${darkMode ? palette.blue.light1 : palette.blue.base};
 
   > code {
-    color: ${palette.blue.base};
+    color: ${darkMode ? palette.blue.light1 : palette.blue.base};
   }
 
   &:focus,
@@ -39,7 +40,7 @@ const gatsbyLinkStyling = css`
     text-decoration-thickness: 2px;
   }
   &:focus {
-    text-decoration-color: ${palette.blue.base};
+    text-decoration-color: ${darkMode ? palette.blue.light1 : palette.blue.base};
     outline: none;
   }
   &:hover {
@@ -69,6 +70,7 @@ const Link = ({
   const anchor = to.startsWith('#');
 
   const anchorProps = validateHTMAttributes('anchor', other);
+  const { darkMode } = useDarkMode();
 
   //used instead of LG showLinkArrow prop for consistency between LGLinks and GatsbyLinks(GatsbyLinks don't have that prop)
   const decoration = showLinkArrow ? (
@@ -91,7 +93,7 @@ const Link = ({
 
     return (
       <GatsbyLink
-        className={joinClassNames(gatsbyLinkStyling, className)}
+        className={joinClassNames(gatsbyLinkStyling(darkMode), className)}
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}

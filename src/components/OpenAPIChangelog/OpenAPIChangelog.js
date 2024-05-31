@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { Body, H2 } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
@@ -44,7 +45,7 @@ const Title = styled.div`
   gap: 10px;
 
   p {
-    color: ${palette.gray.dark1};
+    color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.gray.dark1)};
   }
 
   @media ${theme.screenSize.upToMedium} {
@@ -71,6 +72,7 @@ const StyledLoadingSkeleton = styled.div`
 
 const OpenAPIChangelog = () => {
   const { snootyEnv } = useSiteMetadata();
+  const { darkMode } = useDarkMode();
   const { index = {}, changelog = [], changelogResourcesList = [] } = useChangelogData();
 
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
@@ -134,7 +136,7 @@ const OpenAPIChangelog = () => {
   return (
     <ChangelogPage>
       <ChangelogHeader>
-        <Title>
+        <Title darkMode={darkMode}>
           <H2 as="h1">API Changelog</H2>
           <Body>(2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})</Body>
         </Title>
