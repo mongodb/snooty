@@ -131,7 +131,7 @@ const DocumentBody = (props) => {
       {!isInPresentationMode && (
         <div data-testid="consistent-footer" id="footer-container">
           <SuspenseHelper fallback={null}>
-            <LazyFooter slug={slug} />
+            <LazyFooter />
           </SuspenseHelper>
         </div>
       )}

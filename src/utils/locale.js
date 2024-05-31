@@ -4,19 +4,27 @@ import { isBrowser } from './is-browser';
 import { normalizePath } from './normalize-path';
 import { removeLeadingSlash } from './remove-leading-slash';
 
+/**
+ * Key used to access browser storage for user's preferred locale
+ */
+export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
+
 // Update this as more languages are introduced
+// Because the client-side redirect script cannot use an import, PLEASE remember to update the list of supported languages
+// in redirect-based-on-lang.js
 export const AVAILABLE_LANGUAGES = [
-  { language: 'English', code: 'en-us' },
-  { language: '简体中文', code: 'zh-cn' },
-  { language: '한국어', code: 'ko-kr' },
-  { language: 'Português', code: 'pt-br' },
+  { language: 'English', localeCode: 'en-us' },
+  { language: '简体中文', localeCode: 'zh-cn' },
+  { language: '한국어', localeCode: 'ko-kr' },
+  { language: 'Português', localeCode: 'pt-br' },
 ];
 
 if (process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
-  AVAILABLE_LANGUAGES.push({ language: '日本語', code: 'ja-jp' });
+  AVAILABLE_LANGUAGES.push({ language: '日本語', localeCode: 'ja-jp' });
 }
 
-const validateCode = (potentialCode) => !!AVAILABLE_LANGUAGES.find(({ code }) => potentialCode === code);
+const validateLocaleCode = (potentialCode) =>
+  !!AVAILABLE_LANGUAGES.find(({ localeCode }) => potentialCode === localeCode);
 
 /**
  * Strips the first locale code found in the slug. This function should be used to determine the original un-localized path of a page.
@@ -37,7 +45,7 @@ const stripLocale = (slug) => {
   const firstPathSlug = normalizedSlug.split('/', 2)[1];
 
   // Replace from the original slug to maintain original form
-  const res = validateCode(firstPathSlug) ? normalizePath(slug.replace(firstPathSlug, '')) : slug;
+  const res = validateLocaleCode(firstPathSlug) ? normalizePath(slug.replace(firstPathSlug, '')) : slug;
   if (res.startsWith('/') && !slug.startsWith('/')) {
     return removeLeadingSlash(res);
   } else if (!res.startsWith('/') && slug.startsWith('/')) {
@@ -86,7 +94,7 @@ export const getCurrLocale = () => {
     return defaultLang;
   }
 
-  const slugMatchesCode = validateCode(firstPathSlug);
+  const slugMatchesCode = validateLocaleCode(firstPathSlug);
   return slugMatchesCode ? firstPathSlug : defaultLang;
 };
 
@@ -102,7 +110,7 @@ export const localizePath = (pathname, localeCode) => {
   }
 
   const unlocalizedPath = stripLocale(pathname);
-  const code = localeCode && validateCode(localeCode) ? localeCode : getCurrLocale();
+  const code = localeCode && validateLocaleCode(localeCode) ? localeCode : getCurrLocale();
   const languagePrefix = code === 'en-us' ? '' : `${code}/`;
   let newPath = languagePrefix + unlocalizedPath;
   if (pathname.startsWith('/')) {
@@ -123,10 +131,10 @@ export const getLocaleMapping = (siteUrl, slug) => {
   const normalizedSiteUrl = siteUrl?.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
   const localeHrefMap = {};
 
-  AVAILABLE_LANGUAGES.forEach(({ code }) => {
-    const localizedPath = localizePath(slugForUrl, code);
+  AVAILABLE_LANGUAGES.forEach(({ localeCode }) => {
+    const localizedPath = localizePath(slugForUrl, localeCode);
     const targetUrl = normalizedSiteUrl + localizedPath;
-    localeHrefMap[code] = assertTrailingSlash(targetUrl);
+    localeHrefMap[localeCode] = assertTrailingSlash(targetUrl);
   });
 
   return localeHrefMap;

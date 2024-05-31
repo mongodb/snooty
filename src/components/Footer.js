@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { UnifiedFooter } from '@mdb/consistent-nav';
 import { isBrowser } from '../utils/is-browser';
-import { AVAILABLE_LANGUAGES, getCurrLocale, getLocaleMapping } from '../utils/locale';
+import { AVAILABLE_LANGUAGES, STORAGE_KEY_PREF_LOCALE, getCurrLocale, localizePath } from '../utils/locale';
+import { setLocalValue } from '../utils/browser-storage';
 
-const Footer = ({ slug }) => {
+const Footer = () => {
   const location = useLocation();
 
   const onSelectLocale = (locale) => {
-    const localeHrefMap = getLocaleMapping(location.origin, slug);
-
     if (isBrowser) {
-      window.location.href = localeHrefMap[locale];
+      setLocalValue(STORAGE_KEY_PREF_LOCALE, locale);
+      const localizedPath = localizePath(location.pathname, locale);
+      window.location.href = localizedPath;
     }
   };
 
