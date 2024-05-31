@@ -25,33 +25,35 @@ const StepBlock = styled('div')`
 const Content = 'div';
 
 const circleStyles = {
-  connected: css`
-    background-color: ${palette.green.light3};
-    color: ${palette.green.dark2};
+  connected: (darkMode) => css`
+    position: relative;
+    background-color: ${darkMode ? palette.green.dark2 : palette.green.light3};
+    color: ${darkMode ? palette.gray.light2 : palette.green.dark2};
     height: 34px;
     width: 34px;
+    z-index: ${darkMode ? '1' : '0'};
   `,
-  normal: css`
-    background-color: #333;
-    color: ${palette.white};
+  normal: (darkMode) => css`
+    background-color: ${darkMode ? palette.gray.dark2 : palette.black};
+    color: ${darkMode ? palette.gray.light2 : palette.white};
     height: ${theme.size.medium};
     width: ${theme.size.medium};
   `,
 };
 
 const landingStepStyles = {
-  connected: css`
+  connected: (darkMode) => css`
     position: relative;
     gap: 33px;
 
     :not(:last-child):after {
       content: '';
-      border-left: 2px dashed ${palette.gray.light2};
+      border-left: 2px dashed ${darkMode ? palette.gray.dark1 : palette.gray.light2};
       bottom: 0;
       left: 16px;
       position: absolute;
       top: 0;
-      z-index: -1;
+      z-index: ${darkMode ? '0' : ' -1'};
     }
 
     h2,
@@ -60,7 +62,7 @@ const landingStepStyles = {
       margin-top: ${theme.size.tiny};
     }
   `,
-  normal: css`
+  normal: () => css`
     gap: ${theme.size.default};
 
     h2,
@@ -83,11 +85,11 @@ const contentStyles = {
   `,
 };
 
-const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', ...rest }) => {
+const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', darkMode, ...rest }) => {
   return (
-    <StyledStep css={landingStepStyles[stepStyle]}>
+    <StyledStep css={landingStepStyles[stepStyle](darkMode)}>
       <StepBlock>
-        <Circle css={circleStyles[stepStyle]}>{stepNumber}</Circle>
+        <Circle css={circleStyles[stepStyle](darkMode)}>{stepNumber}</Circle>
       </StepBlock>
       <Content css={contentStyles[stepStyle]}>
         {children.map((child, i) => (
