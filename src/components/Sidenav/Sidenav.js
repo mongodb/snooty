@@ -91,7 +91,7 @@ const translatedFontFamilyStyles = css`
 
 // use eol status to determine side nav styling
 const getTopAndHeight = (topValue, template) => css`
-  ${template === 'landing'
+  ${template === 'landing' || process.env['GATSBY_ENABLE_DARK_MODE'] === 'true'
     ? `
     top: 0px;
     height: calc(100vh);`
