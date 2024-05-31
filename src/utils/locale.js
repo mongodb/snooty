@@ -12,6 +12,10 @@ export const AVAILABLE_LANGUAGES = [
   { language: 'Português', code: 'pt-br' },
 ];
 
+if (process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
+  AVAILABLE_LANGUAGES.push({ language: '日本語', code: 'ja-jp' });
+}
+
 const validateCode = (potentialCode) => !!AVAILABLE_LANGUAGES.find(({ code }) => potentialCode === code);
 
 /**
