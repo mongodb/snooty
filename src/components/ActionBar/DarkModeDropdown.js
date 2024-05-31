@@ -17,10 +17,9 @@ const MenuStyling = css`
 
 const DarkModeDropdown = ({ ...props }) => {
   // not using dark mode from LG/provider here to account for case of 'system' dark theme
-  const { setDarkMode, darkMode } = useContext(DarkModeContext);
+  const { setDarkModePref, darkModePref } = useContext(DarkModeContext);
 
   return (
-    // <PortalContainer ref={portalRef}>
     <Menu
       className={cx(MenuStyling)}
       usePortal={false}
@@ -28,25 +27,29 @@ const DarkModeDropdown = ({ ...props }) => {
       align={'bottom'}
       trigger={
         <IconButton className={cx(IconStyling)} aria-label="Dark Mode Menu" aria-labelledby="Dark Mode Menu">
-          <Icon glyph={darkMode === 'system' ? 'Laptop' : darkMode === 'dark-theme' ? 'Moon' : 'Sun'} />
+          <Icon glyph={darkModePref === 'system' ? 'Laptop' : darkModePref === 'dark-theme' ? 'Moon' : 'Sun'} />
         </IconButton>
       }
     >
       <MenuItem
-        active={darkMode === 'light-theme'}
-        onClick={() => setDarkMode('light-theme')}
+        active={darkModePref === 'light-theme'}
+        onClick={() => setDarkModePref('light-theme')}
         glyph={<Icon glyph={'Sun'} />}
       >
         Light
       </MenuItem>
       <MenuItem
-        active={darkMode === 'dark-theme'}
-        onClick={() => setDarkMode('dark-theme')}
+        active={darkModePref === 'dark-theme'}
+        onClick={() => setDarkModePref('dark-theme')}
         glyph={<Icon glyph={'Moon'} />}
       >
         Dark
       </MenuItem>
-      <MenuItem active={darkMode === 'system'} onClick={() => setDarkMode('system')} glyph={<Icon glyph={'Laptop'} />}>
+      <MenuItem
+        active={darkModePref === 'system'}
+        onClick={() => setDarkModePref('system')}
+        glyph={<Icon glyph={'Laptop'} />}
+      >
         System
       </MenuItem>
     </Menu>

@@ -13,8 +13,8 @@ import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 
 const DarkModeContext = createContext({
-  setDarkMode: () => {},
-  darkMode: 'light-theme',
+  setDarkModePref: () => {},
+  darkModePref: 'light-theme',
 });
 
 export const DARK_THEME_CLASSNAME = 'dark-theme';
@@ -24,8 +24,8 @@ export const SYSTEM_THEME_CLASSNAME = 'system';
 const DarkModeContextProvider = ({ children }) => {
   const docClassList = useMemo(() => isBrowser && window?.document?.documentElement?.classList, []);
 
-  // darkMode   {str}   'light-theme' || 'dark-theme' || 'system';
-  const [darkMode, setDarkMode] = useState(() => {
+  // darkModePref   {str}   'light-theme' || 'dark-theme' || 'system';
+  const [darkModePref, setDarkModePref] = useState(() => {
     if (!isBrowser) return LIGHT_THEME_CLASSNAME;
 
     return docClassList.contains(SYSTEM_THEME_CLASSNAME)
@@ -37,39 +37,39 @@ const DarkModeContextProvider = ({ children }) => {
   const loaded = useRef();
 
   // update document class list to apply dark-theme/light-theme to whole document
-  const updateDocumentClasslist = useCallback((darkMode, darkPref) => {
+  const updateDocumentClasslist = useCallback((darkModePref, darkPref) => {
     if (!isBrowser) return;
-    docClassList.add(darkMode);
+    docClassList.add(darkModePref);
     const removeClassnames = new Set([LIGHT_THEME_CLASSNAME, DARK_THEME_CLASSNAME, SYSTEM_THEME_CLASSNAME]);
-    removeClassnames.delete(darkMode);
-    if (darkMode === 'system') {
+    removeClassnames.delete(darkModePref);
+    if (darkModePref === 'system') {
       const themeClass = darkPref ? DARK_THEME_CLASSNAME : LIGHT_THEME_CLASSNAME;
       docClassList.add(themeClass);
       removeClassnames.delete(themeClass);
     }
     for (const className of removeClassnames) {
-      if (className !== darkMode) docClassList.remove(className);
+      if (className !== darkModePref) docClassList.remove(className);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const darkPref = useMedia(theme.colorPreference.dark);
   // save to local value when darkmode changes, besides initial load
-  // also updates document classlist if darkMode or darkPref changes
+  // also updates document classlist if darkModePref or darkPref changes
   useEffect(() => {
     if (!loaded.current) {
       loaded.current = true;
       return;
     }
-    setLocalValue('theme', darkMode);
-    updateDocumentClasslist(darkMode, darkPref);
-  }, [darkMode, updateDocumentClasslist, darkPref]);
+    setLocalValue('theme', darkModePref);
+    updateDocumentClasslist(darkModePref, darkPref);
+  }, [darkModePref, updateDocumentClasslist, darkPref]);
 
   return (
-    <DarkModeContext.Provider value={{ setDarkMode, darkMode }}>
+    <DarkModeContext.Provider value={{ setDarkModePref, darkModePref }}>
       <LeafyGreenProvider
         baseFontSize={16}
-        darkMode={darkMode === 'dark-theme' || (darkMode === 'system' && darkPref) ? true : false}
+        darkModePref={darkModePref === 'dark-theme' || (darkModePref === 'system' && darkPref) ? true : false}
       >
         {children}
       </LeafyGreenProvider>
