@@ -36,14 +36,16 @@ const DarkModeContextProvider = ({ children }) => {
   });
   const loaded = useRef();
 
-  // update document class list to
+  // update document class list to apply dark-theme/light-theme to whole document
   const updateDocumentClasslist = useCallback((darkMode, darkPref) => {
     if (!isBrowser) return;
     docClassList.add(darkMode);
     const removeClassnames = new Set([LIGHT_THEME_CLASSNAME, DARK_THEME_CLASSNAME, SYSTEM_THEME_CLASSNAME]);
-    if (darkMode === 'system' && darkPref) {
-      docClassList.add(DARK_THEME_CLASSNAME);
-      removeClassnames.delete(DARK_THEME_CLASSNAME);
+    removeClassnames.delete(darkMode);
+    if (darkMode === 'system') {
+      const themeClass = darkPref ? DARK_THEME_CLASSNAME : LIGHT_THEME_CLASSNAME;
+      docClassList.add(themeClass);
+      removeClassnames.delete(themeClass);
     }
     for (const className of removeClassnames) {
       if (className !== darkMode) docClassList.remove(className);
