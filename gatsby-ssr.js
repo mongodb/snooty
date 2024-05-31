@@ -66,7 +66,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
                 if ("system" === e || (!e)) {
                   var t = "(prefers-color-scheme: dark)",
                     m = window.matchMedia(t);
-                  m.media !== t || m.matches ? d.add("dark-theme") : d.add("light-theme");
+                  m.media !== t || m.matches ? d.add("dark-theme", "system") : d.add("light-theme", "system");
                 } else if (e) {
                   var x = { "light-theme": "light-theme", "dark-theme": "dark-theme" };
                   x[e] && d.add(x[e]);

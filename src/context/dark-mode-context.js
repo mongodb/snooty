@@ -5,57 +5,70 @@
  * https://github.com/mongodb/leafygreen-ui/blob/main/STYLEGUIDE.md#consuming-darkmode-from-leafygreenprovider
  */
 
-import React, { createContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useMemo, useEffect, useRef, useState, useCallback } from 'react';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
-import Button from '@leafygreen-ui/button';
 import { setLocalValue } from '../utils/browser-storage';
+import useMedia from '../hooks/use-media';
 import { isBrowser } from '../utils/is-browser';
+import { theme } from '../theme/docsTheme';
 
 const DarkModeContext = createContext({
-  darkMode: false,
   setDarkMode: () => {},
+  darkMode: 'light-theme',
 });
 
-const DARK_THEME_CLASSNAME = 'dark-theme';
-const LIGHT_THEME_CLASSNAME = 'light-theme';
+export const DARK_THEME_CLASSNAME = 'dark-theme';
+export const LIGHT_THEME_CLASSNAME = 'light-theme';
+export const SYSTEM_THEME_CLASSNAME = 'system';
 
 const DarkModeContextProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const docClassList = useMemo(() => isBrowser && window?.document?.documentElement?.classList, []);
+
+  // darkMode   {str}   'light-theme' || 'dark-theme' || 'system';
+  const [darkMode, setDarkMode] = useState(() => {
+    if (!isBrowser) return LIGHT_THEME_CLASSNAME;
+
+    return docClassList.contains(SYSTEM_THEME_CLASSNAME)
+      ? SYSTEM_THEME_CLASSNAME
+      : docClassList.contains(DARK_THEME_CLASSNAME)
+      ? DARK_THEME_CLASSNAME
+      : LIGHT_THEME_CLASSNAME;
+  });
   const loaded = useRef();
 
+  // update document class list to
+  const updateDocumentClasslist = useCallback((darkMode, darkPref) => {
+    if (!isBrowser) return;
+    docClassList.add(darkMode);
+    const removeClassnames = new Set([LIGHT_THEME_CLASSNAME, DARK_THEME_CLASSNAME, SYSTEM_THEME_CLASSNAME]);
+    if (darkMode === 'system' && darkPref) {
+      docClassList.add(DARK_THEME_CLASSNAME);
+      removeClassnames.delete(DARK_THEME_CLASSNAME);
+    }
+    for (const className of removeClassnames) {
+      if (className !== darkMode) docClassList.remove(className);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const darkPref = useMedia(theme.colorPreference.dark);
   // save to local value when darkmode changes, besides initial load
+  // also updates document classlist if darkMode or darkPref changes
   useEffect(() => {
     if (!loaded.current) {
       loaded.current = true;
       return;
     }
-    setLocalValue('theme', darkMode ? DARK_THEME_CLASSNAME : LIGHT_THEME_CLASSNAME);
-    if (isBrowser) {
-      const documentClasses = window.document.documentElement.classList;
-      documentClasses.remove(LIGHT_THEME_CLASSNAME, DARK_THEME_CLASSNAME);
-      documentClasses.add(darkMode ? DARK_THEME_CLASSNAME : LIGHT_THEME_CLASSNAME);
-    }
-  }, [darkMode]);
-
-  // NOTE: client side read of darkmode from document classnames
-  // which is derived from local storage (see gatsby-ssr script).
-  // This occurs after component mounts, not during build time
-  useEffect(() => {
-    setDarkMode(isBrowser ? window?.document?.documentElement?.classList?.contains(DARK_THEME_CLASSNAME) : false);
-  }, []);
+    setLocalValue('theme', darkMode);
+    updateDocumentClasslist(darkMode, darkPref);
+  }, [darkMode, updateDocumentClasslist, darkPref]);
 
   return (
-    <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
-      <LeafyGreenProvider baseFontSize={16} darkMode={darkMode}>
-        {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && (
-          <Button
-            onClick={() => {
-              setDarkMode(!darkMode);
-            }}
-          >
-            Click to toggle Dark Mode
-          </Button>
-        )}
+    <DarkModeContext.Provider value={{ setDarkMode, darkMode }}>
+      <LeafyGreenProvider
+        baseFontSize={16}
+        darkMode={darkMode === 'dark-theme' || (darkMode === 'system' && darkPref) ? true : false}
+      >
         {children}
       </LeafyGreenProvider>
     </DarkModeContext.Provider>
