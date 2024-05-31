@@ -69,7 +69,7 @@ const DarkModeContextProvider = ({ children }) => {
     <DarkModeContext.Provider value={{ setDarkModePref, darkModePref }}>
       <LeafyGreenProvider
         baseFontSize={16}
-        darkModePref={darkModePref === 'dark-theme' || (darkModePref === 'system' && darkPref) ? true : false}
+        darkMode={darkModePref === 'dark-theme' || (darkModePref === 'system' && darkPref) ? true : false}
       >
         {children}
       </LeafyGreenProvider>
