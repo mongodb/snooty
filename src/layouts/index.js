@@ -131,7 +131,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
             <div />
           )}
           <StyledContentContainer>
-            <ActionBar />
+            {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && <ActionBar />}
             <ContentTransition slug={slug}>{children}</ContentTransition>
           </StyledContentContainer>
         </GlobalGrid>
