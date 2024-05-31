@@ -4,19 +4,28 @@ import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { Menu, MenuItem } from '@leafygreen-ui/menu';
 import { DarkModeContext } from '../../context/dark-mode-context';
+import { theme } from '../../theme/docsTheme';
 
 const IconStyling = css`
   cursor: pointer;
 `;
 
-const DarkModeDropdown = () => {
+const MenuStyling = css`
+  width: fit-content;
+  margin-top: ${theme.size.small};
+`;
+
+const DarkModeDropdown = ({ ...props }) => {
   // not using dark mode from LG/provider here to account for case of 'system' dark theme
   const { setDarkMode, darkMode } = useContext(DarkModeContext);
 
   return (
+    // <PortalContainer ref={portalRef}>
     <Menu
-      align="bottom"
-      justify="start"
+      className={cx(MenuStyling)}
+      usePortal={false}
+      justify={'start'}
+      align={'bottom'}
       trigger={
         <IconButton className={cx(IconStyling)} aria-label="Dark Mode Menu" aria-labelledby="Dark Mode Menu">
           <Icon glyph={darkMode === 'system' ? 'Laptop' : darkMode === 'dark-theme' ? 'Moon' : 'Sun'} />
@@ -41,6 +50,7 @@ const DarkModeDropdown = () => {
         System
       </MenuItem>
     </Menu>
+    // </PortalContainer>
   );
 };
 
