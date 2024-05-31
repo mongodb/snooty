@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
-import { DarkModeContext } from '../../context/dark-mode-context';
 
 const LINK_DEPTH_PADDING = 16;
 
@@ -65,7 +65,7 @@ const linkStyling = ({ depth, isActive, darkMode }) => css`
 `;
 
 const ContentsListItem = ({ children, depth = 0, id, isActive = false }) => {
-  const { darkMode } = useContext(DarkModeContext);
+  const { darkMode } = useDarkMode();
 
   return (
     <li className={listItemStyling({ isActive, darkMode })}>

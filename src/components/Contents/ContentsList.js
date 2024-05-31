@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { Label } from '../Select';
-import { DarkModeContext } from '../../context/dark-mode-context';
 
 const List = styled('ul')`
   list-style-type: none;
@@ -16,7 +16,7 @@ const StyledLabel = styled(Label)`
 `;
 
 const ContentsList = ({ children, label }) => {
-  const { darkMode } = useContext(DarkModeContext);
+  const { darkMode } = useDarkMode();
 
   return (
     <>
