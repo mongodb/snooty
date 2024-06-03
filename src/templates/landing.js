@@ -122,7 +122,7 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             above LeafyGreen class selector */
           }
           main>section>section:first-of-type h2 {
-            color: ${palette.gray.dark4};
+            color: ${darkMode ? palette.gray.light2 : palette.gray.dark4};
             font-size: 32px;
             font-family: 'MongoDB Value Serif';
             font-weight: 400;
