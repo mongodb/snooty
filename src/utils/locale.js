@@ -143,9 +143,7 @@ export const getLocaleMapping = (siteUrl, slug) => {
 
 export const onSelectLocale = (locale) => {
   const location = window.location;
-  if (isBrowser) {
-    setLocalValue(STORAGE_KEY_PREF_LOCALE, locale);
-    const localizedPath = localizePath(location.pathname, locale);
-    window.location.href = localizedPath;
-  }
+  setLocalValue(STORAGE_KEY_PREF_LOCALE, locale);
+  const localizedPath = localizePath(location.pathname, locale);
+  window.location.href = localizedPath;
 };
