@@ -9,11 +9,11 @@ import { DarkModeContext } from '../../context/dark-mode-context';
 import { theme } from '../../theme/docsTheme';
 import IconComputer from '../icons/Computer';
 
-const IconStyling = css`
+const iconStyling = css`
   cursor: pointer;
 `;
 
-const MenuStyling = css`
+const menuStyling = css`
   width: fit-content;
   margin-top: ${theme.size.small};
 `;
@@ -35,7 +35,7 @@ const DarkModeDropdown = ({ ...props }) => {
 
   return (
     <Menu
-      className={cx(MenuStyling)}
+      className={cx(menuStyling)}
       usePortal={false}
       justify={'start'}
       align={'bottom'}
@@ -44,7 +44,7 @@ const DarkModeDropdown = ({ ...props }) => {
       trigger={
         // using Box here to prevent warning of Button within Button
         // since we are using usePortal=false to mitigate sticky header
-        <IconButton as={Box} className={cx(IconStyling)} aria-label="Dark Mode Menu" aria-labelledby="Dark Mode Menu">
+        <IconButton as={Box} className={cx(iconStyling)} aria-label="Dark Mode Menu" aria-labelledby="Dark Mode Menu">
           {darkModePref === 'system' ? (
             <IconComputer darkMode={darkMode} />
           ) : (

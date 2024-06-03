@@ -30,7 +30,7 @@ const DarkModeContextProvider = ({ children }) => {
 
   // update document class list to apply dark-theme/light-theme to whole document
   const updateDocumentClasslist = useCallback((darkModePref, darkPref) => {
-    if (!isBrowser) return;
+    if (!isBrowser || !docClassList) return;
     docClassList.add(darkModePref);
     const removeClassnames = new Set([LIGHT_THEME_CLASSNAME, DARK_THEME_CLASSNAME, SYSTEM_THEME_CLASSNAME]);
     removeClassnames.delete(darkModePref);
@@ -58,7 +58,7 @@ const DarkModeContextProvider = ({ children }) => {
   }, [darkModePref, updateDocumentClasslist, darkPref]);
 
   useEffect(() => {
-    if (!isBrowser) return;
+    if (!isBrowser || !docClassList) return;
 
     // NOTE: client side read of darkmode from document classnames
     // which is derived from local storage (see gatsby-ssr script).
