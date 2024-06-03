@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { cx, css } from '@leafygreen-ui/emotion';
@@ -11,6 +11,12 @@ import IALinkedData from './IALinkedData';
 const headerPadding = css`
   > div {
     ${sideNavItemBasePadding}
+  }
+`;
+
+const collapseHeaderPadding = css`
+  > div {
+    padding: 0 !important;
   }
 `;
 
@@ -52,11 +58,10 @@ const findIALinkedData = (iaTree) => {
 const IA = ({ handleClick, header, ia }) => {
   const { iatree } = useSnootyMetadata();
   const linkedDataMapping = findIALinkedData(iatree);
-
-  console.log('headerrrr ', header);
+  const sideNavGroupClassname = useMemo(() => (header ? cx(headerPadding) : cx(collapseHeaderPadding)), [header]);
 
   return (
-    <SideNavGroup className={header ? cx(headerPadding) : ''} header={header}>
+    <SideNavGroup className={sideNavGroupClassname} header={header}>
       {ia.map(({ title, slug, url, id }, index) => {
         const target = slug || url;
         // We use the linked data from the mapping since the linked data and the
