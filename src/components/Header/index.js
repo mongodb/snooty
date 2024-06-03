@@ -5,6 +5,7 @@ import { UnifiedNav } from '@mdb/consistent-nav';
 import { SidenavMobileMenuDropdown } from '../Sidenav';
 import SiteBanner from '../Banner/SiteBanner';
 import { theme } from '../../theme/docsTheme';
+import { getCurrLocale, onSelectLocale } from '../../utils/locale';
 
 const StyledHeaderContainer = styled.header(
   (props) => `
@@ -22,7 +23,17 @@ const Header = ({ sidenav, eol, template }) => {
     <StyledHeaderContainer template={template}>
       <SiteBanner />
       <>
-        {!eol && <UnifiedNav fullWidth="true" position="relative" property={{ name: unifiedNavProperty }} />}
+        {!eol && (
+          <UnifiedNav
+            fullWidth="true"
+            position="relative"
+            property={{ name: unifiedNavProperty }}
+            showLanguageSelector={true}
+            onSelectLocale={onSelectLocale}
+            locale={getCurrLocale()}
+            enabledLocales={['en-us', 'pt-br', 'ko-kr', 'zh-cn']}
+          />
+        )}
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
     </StyledHeaderContainer>
