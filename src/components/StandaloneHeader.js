@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { css } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 import SectionHeader from './SectionHeader';
@@ -18,14 +20,15 @@ const StyledStandaloneContainer = styled.div`
   }
 `;
 
-const customStyleHeader = css`
-  color: #061621;
+const customStyleHeader = (darkMode) => css`
+  color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.black)};
 `;
 
 const StandaloneHeader = ({ nodeData: { argument, options } }) => {
+  const { darkMode } = useDarkMode();
   return (
     <StyledStandaloneContainer>
-      <SectionHeader customStyles={customStyleHeader}>
+      <SectionHeader customStyles={customStyleHeader(darkMode)}>
         {argument.map((child, i) => (
           <ComponentFactory nodeData={child} key={i} />
         ))}

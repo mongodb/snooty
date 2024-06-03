@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
@@ -21,7 +22,7 @@ const Container = styled('div')`
 `;
 
 const Heading = styled('div')`
-  color: ${palette.gray.dark1};
+  color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.gray.dark1)};
   font-size: ${theme.fontSize.default};
   margin-bottom: ${theme.size.default};
 `;
@@ -48,6 +49,7 @@ const defaultTarget = [
 const Content = ({ argument, children, guideData }) => {
   const hasCustomContent = argument?.length > 0 || children?.length > 0;
   const hasNextGuide = !!guideData[0] && !!guideData[1];
+  const { darkMode } = useDarkMode();
 
   let [buttonUrl, content] = hasNextGuide ? guideData : defaultTarget;
   if (hasCustomContent) {
@@ -60,7 +62,7 @@ const Content = ({ argument, children, guideData }) => {
 
   return (
     <Container>
-      <Heading>What's Next</Heading>
+      <Heading darkMode={darkMode}>What's Next</Heading>
       <Title>
         {formatText(content.title)}
         {!!content.completion_time && <Time>{content.completion_time} mins</Time>}
