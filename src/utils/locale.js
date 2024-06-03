@@ -20,6 +20,10 @@ export const AVAILABLE_LANGUAGES = [
   { language: 'Português', localeCode: 'pt-br' },
 ];
 
+if (process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
+  AVAILABLE_LANGUAGES.push({ language: '日本語', localeCode: 'ja-jp' });
+}
+
 const validateLocaleCode = (potentialCode) =>
   !!AVAILABLE_LANGUAGES.find(({ localeCode }) => potentialCode === localeCode);
 
