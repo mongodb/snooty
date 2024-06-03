@@ -1223,7 +1223,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-32 {
   font-family: 'Euclid Circular A';
-  color: #016bf8;
+  color: #016BF8;
   font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
@@ -8085,7 +8085,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-27 {
   font-family: 'Euclid Circular A';
-  color: #016bf8;
+  color: #016BF8;
   font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;

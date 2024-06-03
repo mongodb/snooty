@@ -38,42 +38,6 @@ exports[`button component renders correctly 1`] = `
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-0 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  line-height: 13px;
-  color: #016BF8;
-}
-
-.emotion-0>code {
-  color: #016BF8;
-}
-
-.emotion-0:focus,
-.emotion-0:hover {
-  text-decoration-line: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-0:focus {
-  text-decoration-color: #016BF8;
-  outline: none;
-}
-
-.emotion-0:hover {
-  text-decoration-color: #E8EDEB;
-}
-
 .emotion-1 {
   -webkit-appearance: none;
   -moz-appearance: none;
