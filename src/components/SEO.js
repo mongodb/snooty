@@ -11,8 +11,8 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug }) =>
   const { siteUrl } = useSiteMetadata();
   const localeHrefMap = getLocaleMapping(siteUrl, slug);
 
-  const hrefLangLinks = Object.entries(localeHrefMap).map(([langCode, href]) => {
-    const hrefLang = langCode === 'en-us' ? 'x-default' : langCode;
+  const hrefLangLinks = Object.entries(localeHrefMap).map(([localeCode, href]) => {
+    const hrefLang = localeCode === 'en-us' ? 'x-default' : localeCode;
     // Do not remove class. This is used to prevent Smartling from potentially overwriting these links
     const smartlingNoRewriteClass = 'sl_opaque';
     return <link key={hrefLang} className={smartlingNoRewriteClass} rel="alternate" hrefLang={hrefLang} href={href} />;
