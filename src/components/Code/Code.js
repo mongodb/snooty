@@ -7,6 +7,7 @@ import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import Tooltip from '@leafygreen-ui/tooltip';
 import { palette } from '@leafygreen-ui/palette';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
@@ -29,10 +30,11 @@ const sourceCodeStyle = css`
 
 const Code = ({
   nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
-  darkMode,
+  darkMode: localDarkMode,
 }) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
+  const { darkMode } = useDarkMode();
   const code = value;
   let language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
   // none should take precedence over language switcher
@@ -46,7 +48,7 @@ const Code = ({
   let customActionButtonList = [];
   if (sourceSpecified) {
     customActionButtonList = [
-      <IconButton aria-label="View full source in new tab" href={source}>
+      <IconButton aria-label="View full source in new tab" href={source} darkMode={darkMode}>
         <Tooltip
           triggerEvent="hover"
           align="bottom"
@@ -101,7 +103,7 @@ const Code = ({
         highlightLines={emphasizeLines}
         language={language}
         languageOptions={languageOptions}
-        darkMode={darkMode}
+        darkMode={localDarkMode ?? darkMode}
         onChange={(selectedOption) => {
           const tabsetName = 'drivers';
           setActiveTab({ name: tabsetName, value: selectedOption.id });
