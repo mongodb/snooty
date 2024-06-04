@@ -23,6 +23,7 @@ const Output = ({ nodeData: { children }, ...rest }) => {
           border-bottom-left-radius: 12px;
         }
 
+        /* Ensures no double border */
         ${darkMode &&
         `
           > div {
