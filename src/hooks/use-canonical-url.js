@@ -6,7 +6,9 @@ import { useSiteMetadata } from './use-site-metadata';
 export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
   const siteMetadata = useSiteMetadata();
   const { siteUrl, parserBranch } = siteMetadata;
-  const urlSlug = repoBranches.branches.find((branch) => branch.gitBranchName === parserBranch)?.urlSlug;
+  // Use parserBranch by default to avoid undefined slugs when testing
+  const urlSlug =
+    repoBranches.branches.find((branch) => branch.gitBranchName === parserBranch)?.urlSlug ?? parserBranch;
   const siteBasePrefix = repoBranches.siteBasePrefix;
   const pathPrefix = generateVersionedPrefix(urlSlug, siteBasePrefix);
 

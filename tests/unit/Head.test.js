@@ -100,14 +100,15 @@ describe('Head', () => {
       expect(canonicalTag).toHaveAttribute('href', expectedCanonical);
     });
 
-    it('gracefully uses undefined for missing branches', () => {
+    it('gracefully uses parserBranch for missing branches', () => {
+      const mockedParserBranch = 'DOP-staging-branch';
       siteMetadataMock.mockImplementation(() => ({
         siteUrl: 'https://www.mongodb.com',
-        parserBranch: 'DOP-staging-branch',
+        parserBranch: mockedParserBranch,
       }));
       render(<Head pageContext={mockHeadPageContext} />);
 
-      const expectedCanonical = 'https://www.mongodb.com/docs/mongocli/undefined/';
+      const expectedCanonical = `https://www.mongodb.com/docs/mongocli/${mockedParserBranch}/`;
 
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
