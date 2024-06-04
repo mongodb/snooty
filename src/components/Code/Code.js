@@ -14,18 +14,21 @@ import { getLanguage } from '../../utils/get-language';
 import { CodeContext } from './code-context';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
-const captionStyle = css`
-  padding: 10px;
-  color: ${palette.gray.dark1};
-  font-size: 14px;
-  margin-left: 5px;
-  border-bottom: none;
-`;
-
 const sourceCodeStyle = css`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const darkModeCodeBorder = css`
+  > div > div > pre,
+  > div > div > div:not(.code-caption) {
+    border: 1px solid ${palette.gray.dark2};
+  }
+
+  > div > div > pre {
+    border-right: none;
+  }
 `;
 
 const Code = ({
@@ -89,12 +92,16 @@ const Code = ({
           border-top-right-radius: ${captionBorderRadius};
           display: grid;
         }
+
+        ${darkMode && darkModeCodeBorder}
       `}
     >
       {captionSpecified && (
         <div>
-          <CaptionContainer>
-            <div css={captionStyle}>{caption}</div>
+          <CaptionContainer style={{ borderColor: darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
+            <Caption className="code-caption" style={{ color: darkMode ? palette.gray.light2 : palette.gray.dark1 }}>
+              {caption}
+            </Caption>
           </CaptionContainer>
         </div>
       )}
@@ -122,9 +129,18 @@ const Code = ({
 
 const CaptionContainer = styled.div`
   ${borderCodeStyle}
+  border-color: ${({ borderColor }) => borderColor};
   border-bottom: none;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
+`;
+
+const Caption = styled.div`
+  padding: 10px;
+  color: ${({ textColor }) => textColor};
+  font-size: 14px;
+  margin-left: 5px;
+  border-bottom: none;
 `;
 
 Code.propTypes = {

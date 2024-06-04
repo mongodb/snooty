@@ -2,9 +2,12 @@ import React from 'react';
 import { css } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { default as CodeBlock } from '@leafygreen-ui/code';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { palette } from '@leafygreen-ui/palette';
 import { getLanguage } from '../../utils/get-language';
 
 const Output = ({ nodeData: { children }, ...rest }) => {
+  const { darkMode } = useDarkMode();
   const { emphasize_lines, value, linenos, lang, lineno_start } = children[0];
   const language = getLanguage(lang);
 
@@ -20,6 +23,12 @@ const Output = ({ nodeData: { children }, ...rest }) => {
           border-bottom-right-radius: 12px;
           border-bottom-left-radius: 12px;
         }
+
+        ${darkMode &&
+        `
+          border: 1px solid ${palette.gray.dark2};
+          border-top: none;
+        `}
       `}
     >
       <CodeBlock

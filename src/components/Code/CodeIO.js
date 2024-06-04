@@ -5,6 +5,8 @@ import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { palette } from '@leafygreen-ui/palette';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import Input from '../Code/Input';
 import Output from '../Code/Output';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
@@ -16,6 +18,7 @@ const outputButtonStyling = LeafyCss`
 `;
 
 const CodeIO = ({ nodeData: { children }, ...rest }) => {
+  const { darkMode } = useDarkMode();
   const needsIOToggle = children.length === 2;
   const onlyInputSpecified = children.length === 1;
 
@@ -63,11 +66,10 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
       {needsIOToggle && (
         <>
           <Input nodeData={children[0]} />
-          <IOToggle>
+          <IOToggle borderColor={darkMode ? palette.gray.dark2 : palette.gray.light2}>
             <Button
               role="button"
               className={cx(outputButtonStyling)}
-              darkMode={false}
               disabled={false}
               onClick={handleClick}
               leftGlyph={<Icon glyph={arrow} fill="#FF0000" />}
@@ -85,6 +87,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
 
 const IOToggle = styled.div`
   ${borderCodeStyle}
+  border-color: ${({ borderColor }) => borderColor};
   border-top: none;
 `;
 
