@@ -17,7 +17,6 @@ jest.spyOn(MediaHooks, 'default').mockImplementation(() => ({}));
 const storage = {};
 jest.spyOn(window.localStorage.__proto__, 'setItem').mockImplementation((key, value) => {
   storage[key] = value;
-  return storage;
 });
 
 const DARK_MODE_PREFERENCE_VARNAME = 'darkModePref';
@@ -73,7 +72,7 @@ describe('Dark Mode Context', () => {
   it('updates local value and document class list when darkPref changes', async () => {
     // setDarkPref and watch for local value
     document.documentElement.classList.add(SYSTEM_THEME_CLASSNAME, LIGHT_THEME_CLASSNAME);
-    let elm = renderContext();
+    const elm = renderContext();
     expect(elm.findByText(`${DARK_MODE_PREFERENCE_VARNAME}: ${SYSTEM_THEME_CLASSNAME}`)).toBeTruthy();
     expect(JSON.parse(storage['mongodb-docs'])['theme']).toBe(SYSTEM_THEME_CLASSNAME);
     const button = await elm.findByRole('button');
