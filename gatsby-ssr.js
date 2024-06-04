@@ -4,6 +4,7 @@ import { renderStylesToString } from '@leafygreen-ui/emotion';
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
+import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang';
 
 export const onRenderBody = ({ setHeadComponents }) => {
   const headComponents = [
@@ -21,6 +22,14 @@ export const onRenderBody = ({ setHeadComponents }) => {
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `!function(e,t,r,n){if(!e[n]){for(var a=e[n]=[],i=["survey","reset","config","init","set","get","event","identify","track","page","screen","group","alias"],s=0;s<i.length;s++){var c=i[s];a[c]=a[c]||function(e){return function(){var t=Array.prototype.slice.call(arguments);a.push([e,t])}}(c)}a.SNIPPET_VERSION="1.0.1";var o=t.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/"+r+"/"+n+".js";var l=t.getElementsByTagName("script")[0];l.parentNode.insertBefore(o,l)}}(window,document,"Dk30CC86ba0nATlK","delighted");`,
+      }}
+    />,
+    <script
+      key="browser-lang-redirect"
+      type="text/javascript"
+      dangerouslySetInnerHTML={{
+        // Call function immediately on load
+        __html: `!${redirectBasedOnLang}()`,
       }}
     />,
     <link
@@ -66,7 +75,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
                 if ("system" === e || (!e)) {
                   var t = "(prefers-color-scheme: dark)",
                     m = window.matchMedia(t);
-                  m.media !== t || m.matches ? d.add("dark-theme") : d.add("light-theme");
+                  m.media !== t || m.matches ? d.add("dark-theme", "system") : d.add("light-theme", "system");
                 } else if (e) {
                   var x = { "light-theme": "light-theme", "dark-theme": "dark-theme" };
                   x[e] && d.add(x[e]);
