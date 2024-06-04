@@ -23,6 +23,7 @@ import DocsLandingSD from './StructuredData/DocsLandingSD';
 import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 import { InstruqtProvider } from './Instruqt/instruqt-context';
 import { SuspenseHelper } from './SuspenseHelper';
+import { TabProvider } from './Tabs/tab-context';
 
 // lazy load the unified footer to improve page load speed
 const LazyFooter = lazy(() => import('./Footer'));
@@ -103,32 +104,34 @@ const DocumentBody = (props) => {
 
   return (
     <>
-      <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
-        <Widgets
-          location={location}
-          pageOptions={page?.options}
-          pageTitle={pageTitle}
-          slug={slug}
-          isInPresentationMode={isInPresentationMode}
-          template={template}
-        >
-          <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
-            <FootnoteContext.Provider value={{ footnotes }}>
-              <div id="template-container">
-                <Template {...props} useChatbot={useChatbot}>
-                  {pageNodes.map((child, index) => (
-                    <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-                  ))}
-                </Template>
-              </div>
-            </FootnoteContext.Provider>
-          </ImageContextProvider>
-        </Widgets>
-      </InstruqtProvider>
+      <TabProvider selectors={page?.options?.selectors}>
+        <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
+          <Widgets
+            location={location}
+            pageOptions={page?.options}
+            pageTitle={pageTitle}
+            slug={slug}
+            isInPresentationMode={isInPresentationMode}
+            template={template}
+          >
+            <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
+              <FootnoteContext.Provider value={{ footnotes }}>
+                <div id="template-container">
+                  <Template {...props} useChatbot={useChatbot}>
+                    {pageNodes.map((child, index) => (
+                      <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                    ))}
+                  </Template>
+                </div>
+              </FootnoteContext.Provider>
+            </ImageContextProvider>
+          </Widgets>
+        </InstruqtProvider>
+      </TabProvider>
       {!isInPresentationMode && (
         <div data-testid="consistent-footer" id="footer-container">
           <SuspenseHelper fallback={null}>
-            <LazyFooter slug={slug} />
+            <LazyFooter />
           </SuspenseHelper>
         </div>
       )}
@@ -148,6 +151,12 @@ DocumentBody.propTypes = {
   pageContext: PropTypes.shape({
     slug: PropTypes.string.isRequired,
   }),
+  data: PropTypes.shape({
+    page: PropTypes.shape({
+      children: PropTypes.array,
+      options: PropTypes.object,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default DocumentBody;

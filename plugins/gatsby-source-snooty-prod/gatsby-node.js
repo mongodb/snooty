@@ -20,7 +20,7 @@ const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/i
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
-const { createProjectParentNodes } = require('../utils/project-parents.js');
+const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
 
 const assets = new Map();
 const projectComponents = new Set();
@@ -192,7 +192,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
-  await createProjectParentNodes({ db, createNode, createNodeId, createContentDigest, getNodesByType });
+  await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
 
   const umbrellaProduct = await db.realmInterface.getMetadata(
     {
@@ -214,9 +214,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   }
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
 
-  const { parentPaths, slugToTitle } = metadataMinusStatic;
+  const { parentPaths, slugToBreadcrumbLabel } = metadataMinusStatic;
   if (parentPaths) {
-    transformBreadcrumbs(parentPaths, slugToTitle);
+    transformBreadcrumbs(parentPaths, slugToBreadcrumbLabel);
   }
 
   //Save files in the static_files field of metadata document, including intersphinx inventories
@@ -413,9 +413,10 @@ exports.createSchemaCustomization = ({ actions }) => {
       productName: String
     }
 
-    type ProjectParent implements Node @dontInfer {
-      parents: JSON
-      project: String!
+    type Breadcrumb implements Node @dontInfer {
+      breadcrumbs: JSON
+      propertyUrl: String
     }
+
   `);
 };

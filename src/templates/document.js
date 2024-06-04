@@ -26,21 +26,20 @@ const StyledRightColumn = styled(RightColumn)`
   grid-area: right;
 `;
 
-const Document = ({ children, pageContext: { slug, page, repoBranches, isAssociatedProduct } }) => {
-  const { project, slugToTitle, title, toctreeOrder } = useSnootyMetadata();
+const Document = ({ children, pageContext: { slug, page, isAssociatedProduct } }) => {
+  const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
-  const isLanding = project === 'landing';
-  const breadcrumbsPageTitle = isLanding ? slugToTitle[slug] : null;
-  const breadcrumbsHomeUrl = isLanding ? '/' : null;
 
   return (
     <DocumentContainer>
       <StyledMainColumn>
         <div className="body">
-          <Breadcrumbs homeUrl={breadcrumbsHomeUrl} pageTitle={breadcrumbsPageTitle} siteTitle={title} slug={slug} />
+          <Breadcrumbs siteTitle={title} slug={slug} />
           {children}
-          {showPrevNext && <InternalPageNav slug={slug} slugTitleMapping={slugToTitle} toctreeOrder={toctreeOrder} />}
+          {showPrevNext && (
+            <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={toctreeOrder} />
+          )}
         </div>
       </StyledMainColumn>
       <StyledRightColumn>

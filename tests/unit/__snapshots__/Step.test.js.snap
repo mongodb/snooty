@@ -46,10 +46,12 @@ exports[`renders with "connected" styling 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
+  position: relative;
   background-color: #E3FCF7;
   color: #00684A;
   height: 34px;
   width: 34px;
+  z-index: 0;
 }
 
 .emotion-6 {
@@ -201,10 +203,12 @@ exports[`renders with "connected" styling by default 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
+  position: relative;
   background-color: #E3FCF7;
   color: #00684A;
   height: 34px;
   width: 34px;
+  z-index: 0;
 }
 
 .emotion-6 {
@@ -345,7 +349,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #333;
+  background-color: #001E2B;
   color: #FFFFFF;
   height: 24px;
   width: 24px;

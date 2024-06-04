@@ -9,6 +9,8 @@ import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { isGatsbyPreview } from '../utils/is-gatsby-preview';
+import { validateHTMAttributes } from '../utils/validate-element-attributes';
+import { getGatsbyPreviewLink } from '../utils/get-gatsby-preview-link';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -66,6 +68,8 @@ const Link = ({
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
+  const anchorProps = validateHTMAttributes('anchor', other);
+
   //used instead of LG showLinkArrow prop for consistency between LGLinks and GatsbyLinks(GatsbyLinks don't have that prop)
   const decoration = showLinkArrow ? (
     <span>
@@ -83,19 +87,7 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
-    if (isGatsbyPreview()) {
-      // If we're in preview mode, we build the pages of each project and branch of the site within
-      // its own namespace so each author can preview their own pages e.g.
-      // /project1/branch1/doc-path
-      // /project2/branch2/doc-path
-      //
-      // So to navigate with the namespaced site, we add to each link the current project and branch
-      // the user is browsing in.
-      const projectAndBranchPrefix = `/` + location.pathname.split(`/`).slice(1, 3).join(`/`);
-      if (!to.startsWith(projectAndBranchPrefix)) {
-        to = projectAndBranchPrefix + to;
-      }
-    }
+    if (isGatsbyPreview()) to = getGatsbyPreviewLink(to, location);
 
     return (
       <GatsbyLink
@@ -103,7 +95,7 @@ const Link = ({
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}
-        {...other}
+        {...anchorProps}
       >
         {children}
         {decoration}
@@ -122,7 +114,7 @@ const Link = ({
       href={to}
       hideExternalIcon={!showExtIcon}
       target={target}
-      {...other}
+      {...anchorProps}
     >
       {children}
       {decoration}

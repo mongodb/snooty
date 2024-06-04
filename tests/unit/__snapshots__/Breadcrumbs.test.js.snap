@@ -1,21 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly with pageTitle 1`] = `
+exports[`renders correctly as a homepage 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
   font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  font-size: 13px;
-}
-
-.emotion-0 strong,
-.emotion-0 b {
-  font-weight: 700;
 }
 
 .emotion-0 a {
@@ -23,6 +11,36 @@ exports[`renders correctly with pageTitle 1`] = `
 }
 
 .emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-3 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-3:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-3:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-4 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -51,10 +69,12 @@ exports[`renders correctly with pageTitle 1`] = `
   font-weight: 400;
   display: inline;
   font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
 }
 
-.emotion-1:hover,
-.emotion-1:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -63,139 +83,76 @@ exports[`renders correctly with pageTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-1:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-1:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-.emotion-1:focus {
-  text-decoration-color: #016BF8;
-}
-
-.emotion-1:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-1:hover,
-.emotion-1:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-1:hover:not(:last-of-type),
-.emotion-1:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-.emotion-2 {
-  cursor: default;
-}
-
-.emotion-2:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-4 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  line-height: 13px;
-  color: #016BF8;
-}
-
-.emotion-4>code {
-  color: #016BF8;
-}
-
-.emotion-4:focus,
 .emotion-4:hover {
-  text-decoration-line: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
+  text-decoration-color: #E8EDEB;
 }
 
 .emotion-4:focus {
   text-decoration-color: #016BF8;
-  outline: none;
 }
 
-.emotion-4:hover {
-  text-decoration-color: #E8EDEB;
+.emotion-4:hover,
+.emotion-4:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
 .emotion-5 {
-  font-size: 13px;
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
-.emotion-5:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-5:hover,
-.emotion-5:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-5:hover:not(:last-of-type),
-.emotion-5:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-<p
+<div
     class="emotion-0"
   >
-    <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/"
-      target="_self"
+    <div
+      class="emotion-1 emotion-2"
     >
-      <span>
-        Docs Home
+      <div
+        class="emotion-3"
+      >
+        <a
+          class="lg-ui-0001 emotion-4"
+          href="https://www.mongodb.com/docs/"
+          target="_self"
+        >
+          <span>
+            Docs Home
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-5 emotion-6"
+      >
+         / 
       </span>
-    </a>
-    <span
-      class="emotion-2 emotion-3"
-    >
-       → 
-    </span>
-    <a
-      class="emotion-4 emotion-5"
-      href="/view-analyze/"
-    >
-      View & Analyze Data
-    </a>
-  </p>
+      <div
+        class="emotion-3"
+      >
+        <a
+          class="lg-ui-0001 emotion-4"
+          href="https://www.mongodb.com/docs/atlas/"
+          target="_self"
+        >
+          <span>
+            MongoDB Atlas
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
 </DocumentFragment>
 `;
 
 exports[`renders correctly with siteTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
   font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  font-size: 13px;
-}
-
-.emotion-0 strong,
-.emotion-0 b {
-  font-weight: 700;
 }
 
 .emotion-0 a {
@@ -203,6 +160,36 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-3 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-3:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-3:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-4 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -231,10 +218,12 @@ exports[`renders correctly with siteTitle 1`] = `
   font-weight: 400;
   display: inline;
   font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
 }
 
-.emotion-1:hover,
-.emotion-1:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -243,42 +232,31 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-1:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-1:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-1:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
 }
 
-.emotion-1:last-of-type {
-  color: #1C2D38;
+.emotion-4:hover,
+.emotion-4:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
-.emotion-1:hover,
-.emotion-1:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-1:hover:not(:last-of-type),
-.emotion-1:focus:not(:last-of-type) {
-  color: #1C2D38;
-}
-
-.emotion-2 {
+.emotion-5 {
   cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
-.emotion-2:last-of-type {
-  color: #1C2D38;
-}
-
-.emotion-4 {
+.emotion-12 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -292,12 +270,12 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #016BF8;
 }
 
-.emotion-4>code {
+.emotion-12>code {
   color: #016BF8;
 }
 
-.emotion-4:focus,
-.emotion-4:hover {
+.emotion-12:focus,
+.emotion-12:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -305,57 +283,130 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-4:focus {
+.emotion-12:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-4:hover {
+.emotion-12:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-5 {
+.emotion-13 {
   font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
 }
 
-.emotion-5:last-of-type {
-  color: #1C2D38;
+.emotion-13:hover,
+.emotion-13:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
-.emotion-5:hover,
-.emotion-5:focus {
-  -webkit-text-decoration: none;
-  text-decoration: none;
+.emotion-16 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.emotion-5:hover:not(:last-of-type),
-.emotion-5:focus:not(:last-of-type) {
-  color: #1C2D38;
+.emotion-16:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
 }
 
-<p
+@media not all and (max-width: 480px) {
+  .emotion-16:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+<div
     class="emotion-0"
   >
-    <a
-      class="lg-ui-0001 emotion-1"
-      href="https://www.mongodb.com/docs/"
-      target="_self"
+    <div
+      class="emotion-1 emotion-2"
     >
-      <span>
-        Docs Home
+      <div
+        class="emotion-3"
+      >
+        <a
+          class="lg-ui-0001 emotion-4"
+          href="https://www.mongodb.com/docs/"
+          target="_self"
+        >
+          <span>
+            Docs Home
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-5 emotion-6"
+      >
+         / 
       </span>
-    </a>
-    <span
-      class="emotion-2 emotion-3"
-    >
-       → 
-    </span>
-    <a
-      class="emotion-4 emotion-5"
-      href="/"
-    >
-      MongoDB Compass
-    </a>
-  </p>
+      <div
+        class="emotion-3"
+      >
+        <a
+          class="lg-ui-0001 emotion-4"
+          href="https://www.mongodb.com/docs/atlas/"
+          target="_self"
+        >
+          <span>
+            MongoDB Atlas
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-5 emotion-6"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-3"
+      >
+        <a
+          class="emotion-12 emotion-13"
+          href="/"
+        >
+          Atlas Device SDKs
+        </a>
+      </div>
+      <span
+        class="emotion-5 emotion-6"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-16"
+      >
+        <a
+          class="emotion-12 emotion-13"
+          href="/sdk/cpp/"
+        >
+          Atlas Device SDK for C++
+        </a>
+      </div>
+      <span
+        class="emotion-5 emotion-6"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-16"
+      >
+        <a
+          class="emotion-12 emotion-13"
+          href="/sdk/cpp/application-services/"
+        >
+          Application Services - C++ SDK
+        </a>
+      </div>
+    </div>
+  </div>
 </DocumentFragment>
 `;

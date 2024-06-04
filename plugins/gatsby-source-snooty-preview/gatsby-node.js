@@ -63,10 +63,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
       productName: String
     }
 
-    type ProjectParent implements Node @dontInfer {
-      parents: JSON
-      project: String!
+    type Breadcrumb implements Node @dontInfer {
+      breadcrumbs: JSON
+      propertyUrl: String
     }
+
   `;
   createTypes(typeDefs);
 };

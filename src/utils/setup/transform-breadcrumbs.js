@@ -1,13 +1,10 @@
-const { getPlaintext } = require('../get-plaintext');
-
-const transformBreadcrumbs = (breadcrumbs, slugToTitle) => {
+const transformBreadcrumbs = (breadcrumbs, slugToBreadcrumbLabel) => {
   Object.entries(breadcrumbs).forEach(([slug, breadcrumbList]) => {
     breadcrumbs[slug] = breadcrumbList.map((path) => {
-      const title = slugToTitle?.[path] || [];
+      const title = slugToBreadcrumbLabel?.[path] || '';
       return {
         path,
         title,
-        plaintext: getPlaintext(title),
       };
     });
   });

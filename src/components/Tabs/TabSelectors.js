@@ -20,7 +20,7 @@ const getLabel = (name) => {
   }
 };
 
-const makeChoices = ({ name, iconMapping, options }) =>
+export const makeChoices = ({ name, iconMapping, options }) =>
   Object.entries(options).map(([tabId, title]) => ({
     text: getPlaintext(title),
     value: tabId,

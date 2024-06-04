@@ -13,7 +13,6 @@ import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
-import { baseUrl } from '../../utils/base-url';
 import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
@@ -23,11 +22,11 @@ import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
 import IATransition from './IATransition';
 import ProductsList from './ProductsList';
-import SidenavBackButton from './SidenavBackButton';
 import { SidenavContext } from './sidenav-context';
 import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
-import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
+import { sideNavItemBasePadding, sideNavItemFontSize, titleStyle } from './styles/sideNavItem';
+import DocsHomeButton from './DocsHomeButton';
 
 const SIDENAV_WIDTH = 268;
 
@@ -77,21 +76,6 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
 
 `;
 
-const titleStyle = LeafyCSS`
-  color: ${palette.gray.dark3};
-  font-size: ${theme.fontSize.small};
-  font-weight: bold;
-  line-height: 20px;
-  text-transform: none;
-  :hover {
-    background-color: inherit;
-
-    &:after, span:after {
-      display: none;
-    }
-  }
-`;
-
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
 const disableScroll = (shouldDisableScroll) => css`
   body {
@@ -107,7 +91,7 @@ const translatedFontFamilyStyles = css`
 
 // use eol status to determine side nav styling
 const getTopAndHeight = (topValue, template) => css`
-  ${template === 'landing'
+  ${template === 'landing' || process.env['GATSBY_ENABLE_DARK_MODE'] === 'true'
     ? `
     top: 0px;
     height: calc(100vh);`
@@ -141,7 +125,7 @@ const Spaceholder = styled('div')`
   min-height: ${theme.size.medium};
 `;
 
-const Border = styled('hr')`
+export const Border = styled('hr')`
   border: unset;
   border-bottom: 1px solid ${palette.gray.light2};
   margin: ${theme.size.small} 0;
@@ -197,7 +181,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const ia = page?.options?.ia;
 
   const template = page?.options?.template;
-  const isLanding = template === 'landing';
+  const hideIaHeader = template === 'landing' || template === 'search';
   const isGuidesLanding = project === 'guides' && template === 'product-landing';
   const isGuidesTemplate = template === 'guide';
 
@@ -260,24 +244,11 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <SideNavItem className={cx(titleStyle, sideNavItemBasePadding)} as={Link} to={baseUrl()}>
-                  MongoDB Documentation
-                </SideNavItem>
+                <DocsHomeButton />
                 <Border />
-                <SidenavBackButton
-                  handleClick={() => {
-                    setBack(true);
-                    hideMobileSidenav();
-                  }}
-                  project={project}
-                  currentSlug={slug}
-                  target={isGuidesTemplate ? '/' : ''}
-                  titleOverride={isGuidesTemplate ? siteTitle : ''}
-                  eol={eol}
-                />
                 {ia && (
                   <IA
-                    header={!isLanding && <span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
+                    header={!hideIaHeader ? <span className={cx([titleStyle])}>{formatText(pageTitle)}</span> : null}
                     handleClick={() => {
                       setBack(false);
                       hideMobileSidenav();
