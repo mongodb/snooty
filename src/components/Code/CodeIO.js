@@ -66,7 +66,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
       {needsIOToggle && (
         <>
           <Input nodeData={children[0]} />
-          <IOToggle borderColor={darkMode ? palette.gray.dark2 : palette.gray.light2}>
+          <IOToggle style={{ borderColor: darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
             <Button
               role="button"
               className={cx(outputButtonStyling)}
@@ -87,7 +87,6 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
 
 const IOToggle = styled.div`
   ${borderCodeStyle}
-  border-color: ${({ borderColor }) => borderColor};
   border-top: none;
 `;
 

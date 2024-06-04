@@ -116,7 +116,6 @@ const Code = ({
 
 const CaptionContainer = styled.div`
   ${borderCodeStyle}
-  border-color: ${({ borderColor }) => borderColor};
   border-bottom: none;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
@@ -124,7 +123,6 @@ const CaptionContainer = styled.div`
 
 const Caption = styled.div`
   padding: 10px;
-  color: ${({ textColor }) => textColor};
   font-size: 14px;
   margin-left: 5px;
   border-bottom: none;
