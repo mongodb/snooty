@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import Icon, { glyphs } from '@leafygreen-ui/icon';
 import ComponentFactory from '../ComponentFactory';
@@ -8,22 +9,35 @@ import { baseBannerStyle } from './styles/bannerItemStyle';
 
 const videoBannerStyling = css`
   ${baseBannerStyle};
-  background-color: ${palette.blue.light3};
-  border: 1px solid ${palette.blue.light2};
+  align-items: center;
   border-radius: 6px;
   display: flex;
-  align-items: center;
-  position: relative;
   font-size: 14px;
-  padding: 9px 12px 9px 20px;
-  color: ${palette.blue.dark2};
   margin: 24px 0px;
   min-height: 44px;
+  padding: 9px 12px 9px 20px;
+  position: relative;
 
   > p {
     margin-left: 15px;
   }
 `;
+
+const videoBannerDynamicStyles = (darkMode) => {
+  if (darkMode) {
+    return css`
+      background-color: ${palette.blue.dark3};
+      border: 1px solid ${palette.blue.dark2};
+      color: ${palette.blue.light2};
+    `;
+  }
+
+  return css`
+    background-color: ${palette.blue.light3};
+    border: 1px solid ${palette.blue.light2};
+    color: ${palette.blue.dark2};
+  `;
+};
 
 const lgIconStyling = css`
   width: 26px;
@@ -43,6 +57,7 @@ const linkStyling = css`
 `;
 
 const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
+  const { darkMode } = useDarkMode();
   // Handles case sensitivity for specified icons
   let lgIcon = 'Play';
   if (options?.icon) {
@@ -54,7 +69,7 @@ const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
 
   return (
     <a href={options?.url} css={linkStyling}>
-      <div css={videoBannerStyling}>
+      <div css={[videoBannerStyling, videoBannerDynamicStyles(darkMode)]}>
         <div css={lgIconStyling}>
           <Icon glyph={lgIcon} fill={palette.blue.base} />
         </div>

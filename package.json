@@ -66,7 +66,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.0.0",
     "@leafygreen-ui/badge": "^5.0.1",
-    "@leafygreen-ui/banner": "^4.0.0",
+    "@leafygreen-ui/banner": "^8.0.1",
     "@leafygreen-ui/box": "^3.0.6",
     "@leafygreen-ui/button": "^21.0.5",
     "@leafygreen-ui/callout": "^5.0.0",

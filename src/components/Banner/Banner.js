@@ -14,6 +14,10 @@ export const alertMap = {
 
 const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
   ${baseBannerStyle}
+  /* Overrides the top position set by the LG */
+  & svg {
+    top: 0;
+  }
 `;
 
 const Banner = ({ nodeData: { children, options }, ...rest }) => {
