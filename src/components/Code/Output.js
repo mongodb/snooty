@@ -27,7 +27,8 @@ const Output = ({ nodeData: { children }, ...rest }) => {
         `
           > div {
             border-top: none;
-          }`}
+          }
+        `}
       `}
     >
       <CodeBlock
