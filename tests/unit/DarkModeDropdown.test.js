@@ -23,7 +23,7 @@ jest.spyOn(window.localStorage.__proto__, 'setItem').mockImplementation((key, va
 const mountDarkModeDropdown = () => {
   return render(
     <DarkModeContext.Provider value={{ setDarkModePref, darkModePref }}>
-      <LeafyGreenProvider baseFontSize={16} darkMode={darkModePref === 'dark-theme' ? true : false}>
+      <LeafyGreenProvider baseFontSize={16} darkMode={darkModePref === 'dark-theme'}>
         <DarkModeDropdown />
       </LeafyGreenProvider>
     </DarkModeContext.Provider>
