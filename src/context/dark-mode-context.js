@@ -5,57 +5,80 @@
  * https://github.com/mongodb/leafygreen-ui/blob/main/STYLEGUIDE.md#consuming-darkmode-from-leafygreenprovider
  */
 
-import React, { createContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useMemo, useEffect, useRef, useState, useCallback } from 'react';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
-import Button from '@leafygreen-ui/button';
 import { setLocalValue } from '../utils/browser-storage';
+import useMedia from '../hooks/use-media';
 import { isBrowser } from '../utils/is-browser';
+import { theme } from '../theme/docsTheme';
 
 const DarkModeContext = createContext({
-  darkMode: false,
-  setDarkMode: () => {},
+  setDarkModePref: () => {},
+  darkModePref: 'light-theme',
 });
 
-const DARK_THEME_CLASSNAME = 'dark-theme';
-const LIGHT_THEME_CLASSNAME = 'light-theme';
+export const DARK_THEME_CLASSNAME = 'dark-theme';
+export const LIGHT_THEME_CLASSNAME = 'light-theme';
+export const SYSTEM_THEME_CLASSNAME = 'system';
 
 const DarkModeContextProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const docClassList = useMemo(() => isBrowser && window?.document?.documentElement?.classList, []);
+
+  // darkModePref   {str}   'light-theme' || 'dark-theme' || 'system';
+  const [darkModePref, setDarkModePref] = useState(() => 'light-theme');
   const loaded = useRef();
 
+  // update document class list to apply dark-theme/light-theme to whole document
+  const updateDocumentClasslist = useCallback((darkModePref, darkPref) => {
+    if (!isBrowser || !docClassList) return;
+    docClassList.add(darkModePref);
+    const removeClassnames = new Set([LIGHT_THEME_CLASSNAME, DARK_THEME_CLASSNAME, SYSTEM_THEME_CLASSNAME]);
+    removeClassnames.delete(darkModePref);
+    if (darkModePref === 'system') {
+      const themeClass = darkPref ? DARK_THEME_CLASSNAME : LIGHT_THEME_CLASSNAME;
+      docClassList.add(themeClass);
+      removeClassnames.delete(themeClass);
+    }
+    for (const className of removeClassnames) {
+      if (className !== darkModePref) docClassList.remove(className);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const darkPref = useMedia(theme.colorPreference.dark);
   // save to local value when darkmode changes, besides initial load
+  // also updates document classlist if darkModePref or darkPref changes
   useEffect(() => {
     if (!loaded.current) {
       loaded.current = true;
       return;
     }
-    setLocalValue('theme', darkMode ? DARK_THEME_CLASSNAME : LIGHT_THEME_CLASSNAME);
-    if (isBrowser) {
-      const documentClasses = window.document.documentElement.classList;
-      documentClasses.remove(LIGHT_THEME_CLASSNAME, DARK_THEME_CLASSNAME);
-      documentClasses.add(darkMode ? DARK_THEME_CLASSNAME : LIGHT_THEME_CLASSNAME);
-    }
-  }, [darkMode]);
+    setLocalValue('theme', darkModePref);
+    updateDocumentClasslist(darkModePref, darkPref);
+  }, [darkModePref, updateDocumentClasslist, darkPref]);
 
-  // NOTE: client side read of darkmode from document classnames
-  // which is derived from local storage (see gatsby-ssr script).
-  // This occurs after component mounts, not during build time
   useEffect(() => {
-    setDarkMode(isBrowser ? window?.document?.documentElement?.classList?.contains(DARK_THEME_CLASSNAME) : false);
+    if (!isBrowser || !docClassList) return;
+
+    // NOTE: client side read of darkmode from document classnames
+    // which is derived from local storage (see gatsby-ssr script).
+    // This occurs after component mounts, not during build time
+    setDarkModePref(
+      docClassList.contains(SYSTEM_THEME_CLASSNAME)
+        ? SYSTEM_THEME_CLASSNAME
+        : docClassList.contains(DARK_THEME_CLASSNAME)
+        ? DARK_THEME_CLASSNAME
+        : LIGHT_THEME_CLASSNAME
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
-      <LeafyGreenProvider baseFontSize={16} darkMode={darkMode}>
-        {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && (
-          <Button
-            onClick={() => {
-              setDarkMode(!darkMode);
-            }}
-          >
-            Click to toggle Dark Mode
-          </Button>
-        )}
+    <DarkModeContext.Provider value={{ setDarkModePref, darkModePref }}>
+      <LeafyGreenProvider
+        baseFontSize={16}
+        darkMode={darkModePref === 'dark-theme' || (darkModePref === 'system' && darkPref) ? true : false}
+      >
         {children}
       </LeafyGreenProvider>
     </DarkModeContext.Provider>

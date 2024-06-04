@@ -52,8 +52,10 @@ const Landing = ({ children, pageContext, useChatbot }) => {
   return (
     <>
       <div>
-        <Wrapper newChatbotLanding={useChatbot}>
-          {useChatbot && <ChatbotUi template={pageContext?.template} />}
+        <Wrapper newChatbotLanding={process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && useChatbot}>
+          {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && useChatbot && (
+            <ChatbotUi template={pageContext?.template} />
+          )}
           {children}
         </Wrapper>
       </div>

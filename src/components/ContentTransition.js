@@ -34,12 +34,7 @@ const fadeInOut = css`
 const ContentTransition = ({ children, slug }) => (
   <>
     <Global styles={fadeInOut} />
-    <TransitionGroup
-      css={css`
-        grid-area: contents;
-        margin: 0px;
-      `}
-    >
+    <TransitionGroup>
       <CSSTransition
         addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
         classNames="fade"
