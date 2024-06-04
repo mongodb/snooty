@@ -12,7 +12,7 @@ const List = styled('ul')`
 
 const StyledLabel = styled(Label)`
   font-weight: 500;
-  color: ${({ darkMode }) => (!darkMode ? palette.gray.dark1 : palette.gray.light1)};
+  color: ${({ darkMode }) => (darkMode ? palette.gray.light1 : palette.gray.dark1)};
 `;
 
 const ContentsList = ({ children, label }) => {
