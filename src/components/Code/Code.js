@@ -20,17 +20,6 @@ const sourceCodeStyle = css`
   justify-content: center;
 `;
 
-export const darkModeCodeBorder = css`
-  > div > div > pre,
-  > div > div > div:not(.code-caption) {
-    border: 1px solid ${palette.gray.dark2};
-  }
-
-  > div > div > pre {
-    border-right: none;
-  }
-`;
-
 const Code = ({
   nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
   darkMode: localDarkMode,
@@ -92,8 +81,6 @@ const Code = ({
           border-top-right-radius: ${captionBorderRadius};
           display: grid;
         }
-
-        ${darkMode && darkModeCodeBorder}
       `}
     >
       {captionSpecified && (

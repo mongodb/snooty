@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { default as CodeBlock } from '@leafygreen-ui/code';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { palette } from '@leafygreen-ui/palette';
 import { getLanguage } from '../../utils/get-language';
 
 const Output = ({ nodeData: { children }, ...rest }) => {
@@ -26,9 +25,9 @@ const Output = ({ nodeData: { children }, ...rest }) => {
 
         ${darkMode &&
         `
-          border: 1px solid ${palette.gray.dark2};
-          border-top: none;
-        `}
+          > div {
+            border-top: none;
+          }`}
       `}
     >
       <CodeBlock
