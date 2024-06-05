@@ -26,7 +26,7 @@ const NoResultText = styled('div')`
 `;
 
 const SupportingText = styled('p')`
-  color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.gray.dark1)};
+  color: var(--color);
   font-size: 13px;
   font-family: Euclid Circular A;
   font-style: normal;
@@ -41,7 +41,7 @@ const EmptyResults = ({ type }) => {
       <NoResults />
       <NoResultText>
         <H3>No results found</H3>
-        <SupportingText darkMode={darkMode}>
+        <SupportingText style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}>
           We weren’t able to find any results for your query. Try adjusting your keywords to find what you’re looking
           for.
         </SupportingText>

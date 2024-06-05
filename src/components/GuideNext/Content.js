@@ -22,7 +22,7 @@ const Container = styled('div')`
 `;
 
 const Heading = styled('div')`
-  color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.gray.dark1)};
+  color: var(--color);
   font-size: ${theme.fontSize.default};
   margin-bottom: ${theme.size.default};
 `;
@@ -62,7 +62,7 @@ const Content = ({ argument, children, guideData }) => {
 
   return (
     <Container>
-      <Heading darkMode={darkMode}>What's Next</Heading>
+      <Heading style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}>What's Next</Heading>
       <Title>
         {formatText(content.title)}
         {!!content.completion_time && <Time>{content.completion_time} mins</Time>}

@@ -19,17 +19,18 @@ import { getGatsbyPreviewLink } from '../utils/get-gatsby-preview-link';
  */
 
 // CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
-const gatsbyLinkStyling = (darkMode) => css`
+const gatsbyLinkStyling = css`
   align-items: center;
   cursor: pointer;
   position: relative;
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: ${darkMode ? palette.blue.light1 : palette.blue.base};
+  color: var(--color);
+  font-weight: var(--font-weight);
 
   > code {
-    color: ${darkMode ? palette.blue.light1 : palette.blue.base};
+    color: var(--color);
   }
 
   &:focus,
@@ -40,11 +41,11 @@ const gatsbyLinkStyling = (darkMode) => css`
     text-decoration-thickness: 2px;
   }
   &:focus {
-    text-decoration-color: ${darkMode ? palette.blue.light1 : palette.blue.base};
+    text-decoration-color: var(--focus-text-decoration-color);
     outline: none;
   }
   &:hover {
-    text-decoration-color: ${palette.gray.light2};
+    text-decoration-color: var(--hover-text-decoration-color);
   }
 `;
 
@@ -93,7 +94,13 @@ const Link = ({
 
     return (
       <GatsbyLink
-        className={joinClassNames(gatsbyLinkStyling(darkMode), className)}
+        className={joinClassNames(gatsbyLinkStyling, className)}
+        style={{
+          '--color': darkMode ? palette.blue.light1 : palette.blue.base,
+          '--focus-text-decoration-color': darkMode ? palette.blue.light1 : palette.blue.base,
+          '--hover-text-decoration-color': darkMode ? palette.gray.dark2 : palette.gray.light2,
+          '--font-weight': darkMode ? 700 : 'inherit',
+        }}
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}
