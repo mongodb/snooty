@@ -103,7 +103,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
 }
 
 .emotion-10 {
-  color: #016BF8;
+  color: var(--color);
   word-break: break-all;
 }
 
@@ -228,6 +228,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             <span>
               <h6
                 class="emotion-10 emotion-11 emotion-12"
+                style="--color: #016BF8;"
               >
                 PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
               </h6>
@@ -273,6 +274,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             <span>
               <h6
                 class="emotion-10 emotion-11 emotion-12"
+                style="--color: #016BF8;"
               >
                 PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
               </h6>
@@ -318,6 +320,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             <span>
               <h6
                 class="emotion-10 emotion-11 emotion-12"
+                style="--color: #016BF8;"
               >
                 GET /api/atlas/v2/groups/byName/{groupName}
               </h6>
@@ -375,6 +378,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             <span>
               <h6
                 class="emotion-10 emotion-11 emotion-12"
+                style="--color: #016BF8;"
               >
                 PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
               </h6>
@@ -515,6 +519,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             <span>
               <h6
                 class="emotion-10 emotion-11 emotion-12"
+                style="--color: #016BF8;"
               >
                 POST /api/atlas/v2/groups/{groupId}/accessList
               </h6>
@@ -565,6 +570,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders all version changelog co
             <span>
               <h6
                 class="emotion-10 emotion-11 emotion-12"
+                style="--color: #016BF8;"
               >
                 GET /api/atlas/v2/groups/byName/{groupName}
               </h6>
@@ -679,7 +685,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
 }
 
 .emotion-7 {
-  color: #016BF8;
+  color: var(--color);
   word-break: break-all;
 }
 
@@ -742,6 +748,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
           <span>
             <h6
               class="emotion-7 emotion-8 emotion-9"
+              style="--color: #016BF8;"
             >
               GET /api/atlas/v2/federationSettings/{federationSettingsId}/connectedOrgConfigs
             </h6>
@@ -856,6 +863,7 @@ exports[`OpenAPIChangelog ChangeList ChangeList renders diff changelog correctly
           <span>
             <h6
               class="emotion-7 emotion-8 emotion-9"
+              style="--color: #016BF8;"
             >
               POST /api/atlas/v2/groups/{groupId}/accessList
             </h6>

@@ -502,11 +502,12 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-0>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-0:focus,
@@ -519,17 +520,18 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
 }
 
 .emotion-0:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-0:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <a
     class="emotion-0 test-class"
     href="/drivers/c/"
+    style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
   >
     C Driver
   </a>
@@ -549,11 +551,12 @@ exports[`Link component renders a variety of strings correctly internal link que
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-0>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-0:focus,
@@ -566,17 +569,18 @@ exports[`Link component renders a variety of strings correctly internal link que
 }
 
 .emotion-0:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-0:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <a
     class="emotion-0 test-class"
     href="/drivers/ruby/?site=drivers"
+    style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
   >
     C Driver
   </a>
@@ -596,11 +600,12 @@ exports[`Link component renders a variety of strings correctly internal link tha
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-0>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-0:focus,
@@ -613,17 +618,18 @@ exports[`Link component renders a variety of strings correctly internal link tha
 }
 
 .emotion-0:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-0:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <a
     class="emotion-0 test-class"
     href="/drivers/nodejs/#installation"
+    style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
   >
     C Driver
   </a>
@@ -643,11 +649,12 @@ exports[`Link component renders a variety of strings correctly internal link wit
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-0>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-0:focus,
@@ -660,17 +667,18 @@ exports[`Link component renders a variety of strings correctly internal link wit
 }
 
 .emotion-0:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-0:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <a
     class="emotion-0 test-class"
     href="/drivers/pymongo/#installation"
+    style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
   >
     C Driver
   </a>

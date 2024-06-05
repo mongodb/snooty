@@ -662,7 +662,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-2>h1:first-of-type {
-  color: #00684A;
+  color: var(--color);
   padding-bottom: 24px;
   margin: unset;
 }
@@ -1223,7 +1223,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-32 {
   font-family: 'Euclid Circular A';
-  color: #016bf8;
+  color: var(--color);
   font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
@@ -1430,7 +1430,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  color: #3D4F58;
+  color: var(--color);
   font-size: 12px;
   line-height: 15px;
   text-transform: uppercase;
@@ -1833,6 +1833,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   >
     <div
       class="emotion-2 emotion-3"
+      style="--color: #00684A;"
     >
       <h1
         class="emotion-4"
@@ -1988,6 +1989,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         >
           <p
             class="emotion-32 emotion-33"
+            style="--color: #016BF8;"
           >
             stitch (realm filter)
           </p>
@@ -2105,6 +2107,7 @@ exports[`Search Results Page considers a given search filter query param and dis
     >
       <h2
         class="emotion-57 emotion-58"
+        style="--color: #3D4F58;"
       >
         Refine your search
       </h2>
@@ -2299,7 +2302,7 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-2>h1:first-of-type {
-  color: #00684A;
+  color: var(--color);
   padding-bottom: 24px;
   margin: unset;
 }
@@ -2752,7 +2755,7 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-27 {
-  color: #5C6C75;
+  color: var(--color);
   font-size: 13px;
   font-family: Euclid Circular A;
   font-style: normal;
@@ -2774,7 +2777,7 @@ exports[`Search Results Page does not return results for a given search term wit
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  color: #3D4F58;
+  color: var(--color);
   font-size: 12px;
   line-height: 15px;
   text-transform: uppercase;
@@ -3179,6 +3182,7 @@ exports[`Search Results Page does not return results for a given search term wit
   >
     <div
       class="emotion-2 emotion-3"
+      style="--color: #00684A;"
     >
       <h1
         class="emotion-4"
@@ -3568,6 +3572,7 @@ exports[`Search Results Page does not return results for a given search term wit
           </h3>
           <p
             class="emotion-27 emotion-28"
+            style="--color: #5C6C75;"
           >
             We weren’t able to find any results for your query. Try adjusting your keywords to find what you’re looking for.
           </p>
@@ -3579,6 +3584,7 @@ exports[`Search Results Page does not return results for a given search term wit
     >
       <h2
         class="emotion-31 emotion-32"
+        style="--color: #3D4F58;"
       >
         Refine your search
       </h2>
@@ -3773,7 +3779,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 }
 
 .emotion-2>h1:first-of-type {
-  color: #00684A;
+  color: var(--color);
   padding-bottom: 24px;
   margin: unset;
 }
@@ -4086,6 +4092,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   >
     <div
       class="emotion-2 emotion-3"
+      style="--color: #00684A;"
     >
       <h1
         class="emotion-4"
@@ -4205,7 +4212,7 @@ exports[`Search Results Page renders loading images before returning no results 
 }
 
 .emotion-2>h1:first-of-type {
-  color: #00684A;
+  color: var(--color);
   padding-bottom: 24px;
   margin: unset;
 }
@@ -4718,7 +4725,7 @@ exports[`Search Results Page renders loading images before returning no results 
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  color: #3D4F58;
+  color: var(--color);
   font-size: 12px;
   line-height: 15px;
   text-transform: uppercase;
@@ -5123,6 +5130,7 @@ exports[`Search Results Page renders loading images before returning no results 
   >
     <div
       class="emotion-2 emotion-3"
+      style="--color: #00684A;"
     >
       <h1
         class="emotion-4"
@@ -5695,6 +5703,7 @@ exports[`Search Results Page renders loading images before returning no results 
     >
       <h2
         class="emotion-44 emotion-45"
+        style="--color: #3D4F58;"
       >
         Refine your search
       </h2>
@@ -5889,7 +5898,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
 }
 
 .emotion-2>h1:first-of-type {
-  color: #00684A;
+  color: var(--color);
   padding-bottom: 24px;
   margin: unset;
 }
@@ -6402,7 +6411,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  color: #3D4F58;
+  color: var(--color);
   font-size: 12px;
   line-height: 15px;
   text-transform: uppercase;
@@ -6807,6 +6816,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   >
     <div
       class="emotion-2 emotion-3"
+      style="--color: #00684A;"
     >
       <h1
         class="emotion-4"
@@ -7379,6 +7389,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
     >
       <h2
         class="emotion-44 emotion-45"
+        style="--color: #3D4F58;"
       >
         Refine your search
       </h2>
@@ -7573,7 +7584,7 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-2>h1:first-of-type {
-  color: #00684A;
+  color: var(--color);
   padding-bottom: 24px;
   margin: unset;
 }
@@ -8085,7 +8096,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-27 {
   font-family: 'Euclid Circular A';
-  color: #016bf8;
+  color: var(--color);
   font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
@@ -8336,7 +8347,7 @@ exports[`Search Results Page renders results from a given search term query para
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  color: #3D4F58;
+  color: var(--color);
   font-size: 12px;
   line-height: 15px;
   text-transform: uppercase;
@@ -8741,6 +8752,7 @@ exports[`Search Results Page renders results from a given search term query para
   >
     <div
       class="emotion-2 emotion-3"
+      style="--color: #00684A;"
     >
       <h1
         class="emotion-4"
@@ -8866,6 +8878,7 @@ exports[`Search Results Page renders results from a given search term query para
         >
           <p
             class="emotion-27 emotion-28"
+            style="--color: #016BF8;"
           >
             stitch (no filters)
           </p>
@@ -8983,6 +8996,7 @@ exports[`Search Results Page renders results from a given search term query para
     >
       <h2
         class="emotion-52 emotion-53"
+        style="--color: #3D4F58;"
       >
         Refine your search
       </h2>
