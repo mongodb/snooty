@@ -14,23 +14,23 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
-  background-color: #E1F7FF;
-  border: 1px solid #C3E7FE;
-  border-radius: 6px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  position: relative;
+  background-color: var(--background-color);
+  border-radius: 6px;
+  border: var(--border);
+  color: var(--color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   font-size: 14px;
-  padding: 9px 12px 9px 20px;
-  color: #083C90;
   margin: 24px 0px;
   min-height: 44px;
+  padding: 9px 12px 9px 20px;
+  position: relative;
 }
 
 .emotion-0>div>div>* {
@@ -156,6 +156,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 
 <div
     class="emotion-0"
+    style="--background-color: #E1F7FF; --border: #C3E7FE; --color: #083C90;"
   >
     <a
       class="emotion-1"
@@ -218,23 +219,23 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
-  background-color: #E1F7FF;
-  border: 1px solid #C3E7FE;
-  border-radius: 6px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  position: relative;
+  background-color: var(--background-color);
+  border-radius: 6px;
+  border: var(--border);
+  color: var(--color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   font-size: 14px;
-  padding: 9px 12px 9px 20px;
-  color: #083C90;
   margin: 24px 0px;
   min-height: 44px;
+  padding: 9px 12px 9px 20px;
+  position: relative;
 }
 
 .emotion-0>div>div>* {
@@ -360,6 +361,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 
 <div
     class="emotion-0"
+    style="--background-color: #E1F7FF; --border: #C3E7FE; --color: #083C90;"
   >
     <a
       class="emotion-1"
@@ -424,23 +426,23 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
-  background-color: #E1F7FF;
-  border: 1px solid #C3E7FE;
-  border-radius: 6px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  position: relative;
+  background-color: var(--background-color);
+  border-radius: 6px;
+  border: var(--border);
+  color: var(--color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   font-size: 14px;
-  padding: 9px 12px 9px 20px;
-  color: #083C90;
   margin: 24px 0px;
   min-height: 44px;
+  padding: 9px 12px 9px 20px;
+  position: relative;
 }
 
 .emotion-0>div>div>* {
@@ -566,6 +568,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 
 <div
     class="emotion-0"
+    style="--background-color: #E1F7FF; --border: #C3E7FE; --color: #083C90;"
   >
     <a
       class="emotion-1"
@@ -628,23 +631,23 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
-  background-color: #E1F7FF;
-  border: 1px solid #C3E7FE;
-  border-radius: 6px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  position: relative;
+  background-color: var(--background-color);
+  border-radius: 6px;
+  border: var(--border);
+  color: var(--color);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   font-size: 14px;
-  padding: 9px 12px 9px 20px;
-  color: #083C90;
   margin: 24px 0px;
   min-height: 44px;
+  padding: 9px 12px 9px 20px;
+  position: relative;
 }
 
 .emotion-0>div>div>* {
@@ -770,6 +773,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 
 <div
     class="emotion-0"
+    style="--background-color: #E1F7FF; --border: #C3E7FE; --color: #083C90;"
   >
     <a
       class="emotion-1"
