@@ -363,6 +363,15 @@ exports[`CodeIO renders correctly 1`] = `
   border-bottom-left-radius: 12px;
 }
 
+.emotion-21>div {
+  border: var(--code-container-border);
+}
+
+.emotion-21>div>div>pre {
+  border: var(--code-pre-border);
+  border-top: var(--code-pre-border-top);
+}
+
 .emotion-22 {
   border: 1px solid #3D4F58;
   border-radius: 12px;
@@ -605,7 +614,7 @@ exports[`CodeIO renders correctly 1`] = `
     </div>
     <div
       class="emotion-21"
-      style="--code-border-top: none;"
+      style="--code-container-border: auto; --code-pre-border: none; --code-pre-border-top: none;"
     >
       <div
         class="emotion-22"
