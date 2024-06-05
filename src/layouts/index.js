@@ -12,6 +12,7 @@ import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
+import ActionBar from '../components/ActionBar/ActionBar';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -83,6 +84,11 @@ const GlobalGrid = styled('div')`
   overflow: clip;
 `;
 
+const StyledContentContainer = styled('div')`
+  grid-area: contents;
+  margin: 0px;
+`;
+
 const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, slugToTitle, title, toctree, eol, project } = useSnootyMetadata();
@@ -124,7 +130,10 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
           ) : (
             <div />
           )}
-          <ContentTransition slug={slug}>{children}</ContentTransition>
+          <StyledContentContainer>
+            {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && <ActionBar />}
+            <ContentTransition slug={slug}>{children}</ContentTransition>
+          </StyledContentContainer>
         </GlobalGrid>
       </RootProvider>
     </>
