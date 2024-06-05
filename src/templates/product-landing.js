@@ -14,7 +14,7 @@ const Wrapper = styled('main')`
   width: 100%;
 
   h1 {
-    color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.black)};
+    color: var(--color);
   }
 
   h2 {
@@ -199,7 +199,7 @@ const ProductLanding = ({ children, data: { page } }) => {
       useHero={useHero}
       hasBanner={!!bannerNode}
       hasMaxWidthParagraphs={hasMaxWidthParagraphs}
-      darkMode={darkMode}
+      style={{ '--color': darkMode ? palette.gray.light2 : palette.black }}
     >
       {children}
     </Wrapper>

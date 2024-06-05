@@ -46,7 +46,7 @@ const SearchResultContainer = styled('div')`
 
 const StyledResultTitle = styled('p')`
   font-family: 'Euclid Circular A';
-  color: ${({ darkMode }) => (darkMode ? palette.blue.light1 : palette.blue.base)};
+  color: var(--color);
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
@@ -150,7 +150,7 @@ const SearchResult = React.memo(
       <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
         <SearchResultContainer>
           <StyledResultTitle
-            darkMode={darkMode}
+            style={{ '--color': darkMode ? palette.blue.light1 : palette.blue.base }}
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(title),
             }}

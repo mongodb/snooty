@@ -132,7 +132,7 @@ const OpenAPIChangelog = () => {
   return (
     <ChangelogPage>
       <ChangelogHeader>
-        <Title darkMode={darkMode}>
+        <Title>
           <H2 as="h1">API Changelog</H2>
           <Body style={{ color: darkMode ? palette.gray.light2 : palette.gray.dark1 }}>
             (2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})
