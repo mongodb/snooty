@@ -39,7 +39,7 @@ const unstyleThead = css`
 
 // Temporary workaround to overwrite certain styling for dark mode due to difficulties with LG Table version upgrade (DOP-3614)
 const darkModeStyle = {
-  backgroundColor: 'var(--lg-bg-dark)',
+  backgroundColor: palette.black,
 };
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
