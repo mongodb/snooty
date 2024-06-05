@@ -41,7 +41,7 @@ const Output = ({ nodeData: { children }, ...rest }) => {
               '--code-pre-border-top': 'none',
             }
           : {
-              '--code-container-border': 'auto',
+              '--code-container-border': 'initial',
               '--code-pre-border': `none`,
               '--code-pre-border-top': 'none',
             }
