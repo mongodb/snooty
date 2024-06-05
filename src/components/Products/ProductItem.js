@@ -37,7 +37,7 @@ const StyledArticle = styled.article`
   }
 
   a {
-    color: ${({ darkMode }) => (darkMode ? palette.blue.light1 : palette.blue.base)};
+    color: var(--color);
     font-size: ${FONT_SIZE};
     font-weight: normal;
   }
@@ -54,7 +54,7 @@ const ProductItem = ({ nodeData: { children, options, argument } }) => {
   return (
     <StyledSection>
       <img src={withPrefix(icon)} alt={iconAlt} height={HEIGHT} width={WIDTH} />
-      <StyledArticle darkMode={darkMode}>
+      <StyledArticle style={{ '--color': darkMode ? palette.blue.light1 : palette.blue.base }}>
         <SectionHeader customStyles={customStyleHeader}>
           {argument.map((child, i) => (
             <ComponentFactory nodeData={child} key={i} />

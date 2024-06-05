@@ -228,11 +228,12 @@ exports[`renders a page IA with IA linked data 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-10>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-10:focus,
@@ -245,12 +246,12 @@ exports[`renders a page IA with IA linked data 1`] = `
 }
 
 .emotion-10:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-10:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-11 {
@@ -591,6 +592,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           aria-disabled="false"
           class="emotion-10 constant-classname emotion-11"
           href="/tools-and-connectors/"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           Tools and Connectors
         </a>
@@ -1169,11 +1171,12 @@ exports[`renders a simple page IA correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-10>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-10:focus,
@@ -1186,12 +1189,12 @@ exports[`renders a simple page IA correctly 1`] = `
 }
 
 .emotion-10:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-10:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-11 {
@@ -1343,6 +1346,7 @@ exports[`renders a simple page IA correctly 1`] = `
           aria-disabled="false"
           class="emotion-10 constant-classname emotion-11"
           href="/tools-and-connectors/"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           Tools and Connectors
         </a>

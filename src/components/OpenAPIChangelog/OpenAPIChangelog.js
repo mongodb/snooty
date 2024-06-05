@@ -44,10 +44,6 @@ const Title = styled.div`
   align-items: end;
   gap: 10px;
 
-  p {
-    color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.gray.dark1)};
-  }
-
   @media ${theme.screenSize.upToMedium} {
     flex-direction: column;
     align-items: start;
@@ -136,9 +132,11 @@ const OpenAPIChangelog = () => {
   return (
     <ChangelogPage>
       <ChangelogHeader>
-        <Title darkMode={darkMode}>
+        <Title>
           <H2 as="h1">API Changelog</H2>
-          <Body>(2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})</Body>
+          <Body style={{ color: darkMode ? palette.gray.light2 : palette.gray.dark1 }}>
+            (2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})
+          </Body>
         </Title>
         <DownloadButton href={downloadChangelogUrl} disabled={!index.runId}>
           Download Full API Changelog

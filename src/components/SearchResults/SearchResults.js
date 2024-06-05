@@ -56,7 +56,7 @@ const HeaderContainer = styled('div')`
   grid-area: header;
 
   > h1:first-of-type {
-    color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.green.dark2)};
+    color: var(--color);
     padding-bottom: 24px;
     margin: unset;
   }
@@ -71,7 +71,7 @@ const FiltersContainer = styled('div')`
 
 const FilterHeader = styled('h2')`
   align-self: center;
-  color: ${({ darkMode }) => (darkMode ? palette.gray.light2 : palette.gray.dark2)};
+  color: var(--color);
   font-size: ${theme.fontSize.tiny};
   line-height: 15px;
   text-transform: uppercase;
@@ -408,7 +408,7 @@ const SearchResults = () => {
       />
       <SearchResultsContainer showFacets={showFacets}>
         {/* new header for search bar */}
-        <HeaderContainer darkMode={darkMode}>
+        <HeaderContainer style={{ '--color': darkMode ? palette.gray.light2 : palette.green.dark2 }}>
           <H3 as="h1">Search Results</H3>
           <SearchInput
             ref={searchBoxRef}
@@ -521,7 +521,9 @@ const SearchResults = () => {
               </>
             ) : (
               <>
-                <FilterHeader darkMode={darkMode}>{specifySearchText}</FilterHeader>
+                <FilterHeader style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark2 }}>
+                  {specifySearchText}
+                </FilterHeader>
                 <StyledSearchFilters />
               </>
             )}

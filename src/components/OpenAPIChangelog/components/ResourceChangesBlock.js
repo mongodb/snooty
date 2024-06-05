@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const ResourceHeader = styled(Subtitle)`
-  color: ${({ darkMode }) => (darkMode ? palette.blue.light1 : palette.blue.base)};
+  color: var(--color);
   word-break: break-all;
 `;
 
@@ -54,7 +54,7 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, ver
     <Wrapper data-testid="resource-changes-block">
       <FlexLinkWrapper>
         <LGLink href={resourceLinkUrl} hideExternalIcon>
-          <ResourceHeader darkMode={darkMode}>
+          <ResourceHeader style={{ '--color': darkMode ? palette.blue.light1 : palette.blue.base }}>
             {httpMethod} {path}
           </ResourceHeader>
         </LGLink>
