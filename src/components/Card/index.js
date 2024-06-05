@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix, navigate } from 'gatsby';
 import styled from '@emotion/styled';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
@@ -132,10 +133,11 @@ const Card = ({
   page,
   nodeData: {
     children,
-    options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
+    options: { cta, headline, icon, 'icon-dark': iconDark, 'icon-alt': iconAlt, tag, url },
   },
 }) => {
   const template = page?.options?.template;
+  const { darkMode } = useDarkMode();
 
   const isLanding = template === 'landing';
 
@@ -155,11 +157,25 @@ const Card = ({
     isLanding && !isLargeIconStyle ? landingStyles : '', // must come after other styles to override
   ];
 
+  let iconSrc = '';
+  if (icon) {
+    if (icon.includes('/')) {
+      if (darkMode && iconDark) {
+        iconSrc = withPrefix(iconDark);
+      } else {
+        iconSrc = withPrefix(icon);
+      }
+    } else {
+      const getIcon = `${icon}${darkMode ? '_inverse' : ''}`;
+      iconSrc = `https://webimages.mongodb.com/_com_assets/icons/${getIcon}.svg`;
+    }
+  }
+
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
       {icon && (
         <img
-          src={withPrefix(icon)}
+          src={iconSrc}
           alt={iconAlt}
           width={imgSize}
           height={imgSize}
@@ -204,6 +220,7 @@ Card.propTypes = {
       cta: PropTypes.string,
       headline: PropTypes.string,
       icon: PropTypes.string,
+      'icon-dark': PropTypes.string,
       'icon-alt': PropTypes.string,
       tag: PropTypes.string,
       url: PropTypes.string,
