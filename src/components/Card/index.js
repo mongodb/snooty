@@ -157,7 +157,7 @@ const Card = ({
     isLanding && !isLargeIconStyle ? landingStyles : '', // must come after other styles to override
   ];
 
-  let iconSrc = '';
+  let iconSrc;
   if (icon) {
     if (icon.includes('/')) {
       if (darkMode && iconDark) {
@@ -166,6 +166,7 @@ const Card = ({
         iconSrc = withPrefix(icon);
       }
     } else {
+      // image comes from web branding, not path to image in content repo
       const getIcon = `${icon}${darkMode ? '_inverse' : ''}`;
       iconSrc = `https://webimages.mongodb.com/_com_assets/icons/${getIcon}.svg`;
     }
