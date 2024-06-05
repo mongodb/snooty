@@ -25,35 +25,35 @@ const StepBlock = styled('div')`
 const Content = 'div';
 
 const circleStyles = {
-  connected: (darkMode) => css`
+  connected: () => css`
     position: relative;
-    background-color: ${darkMode ? palette.green.dark2 : palette.green.light3};
-    color: ${darkMode ? palette.gray.light2 : palette.green.dark2};
+    background-color: var(--background-color);
+    color: var(--color);
     height: 34px;
     width: 34px;
-    z-index: ${darkMode ? '1' : '0'};
+    z-index: var(--z-index);
   `,
-  normal: (darkMode) => css`
-    background-color: ${darkMode ? palette.gray.dark2 : palette.black};
-    color: ${darkMode ? palette.gray.light2 : palette.white};
+  normal: () => css`
+    background-color: var(--background-color);
+    color: var(--color);
     height: ${theme.size.medium};
     width: ${theme.size.medium};
   `,
 };
 
 const landingStepStyles = {
-  connected: (darkMode) => css`
+  connected: () => css`
     position: relative;
     gap: 33px;
 
     :not(:last-child):after {
       content: '';
-      border-left: 2px dashed ${darkMode ? palette.gray.dark1 : palette.gray.light2};
+      border-left: 2px dashed var(--border-left);
       bottom: 0;
       left: 16px;
       position: absolute;
       top: 0;
-      z-index: ${darkMode ? '0' : ' -1'};
+      z-index: var(--z-index);
     }
 
     h2,
@@ -85,11 +85,37 @@ const contentStyles = {
   `,
 };
 
+const getStepStyleDynamicStyles = (darkMode, stepType) => {
+  return {
+    connected: {
+      '--border-left': darkMode ? palette.gray.dark1 : palette.gray.light2,
+      '--z-index': darkMode ? '0' : ' -1',
+    },
+    normal: {},
+  }[stepType];
+};
+
+const getCircleDynamicStyles = (darkMode, stepStyle) => {
+  return {
+    connected: {
+      '--background-color': darkMode ? palette.green.dark2 : palette.green.light3,
+      '--color': darkMode ? palette.gray.light2 : palette.green.dark2,
+      '--z-index': darkMode ? '1' : '0',
+    },
+    normal: {
+      '--background-color': darkMode ? palette.gray.dark2 : palette.black,
+      '--color': darkMode ? palette.gray.light2 : palette.white,
+    },
+  }[stepStyle];
+};
+
 const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', darkMode, ...rest }) => {
   return (
-    <StyledStep css={landingStepStyles[stepStyle](darkMode)}>
+    <StyledStep css={landingStepStyles[stepStyle]} style={getStepStyleDynamicStyles(darkMode, stepStyle)}>
       <StepBlock>
-        <Circle css={circleStyles[stepStyle](darkMode)}>{stepNumber}</Circle>
+        <Circle css={circleStyles[stepStyle]} style={getCircleDynamicStyles(darkMode, stepStyle)}>
+          {stepNumber}
+        </Circle>
       </StepBlock>
       <Content css={contentStyles[stepStyle]}>
         {children.map((child, i) => (
