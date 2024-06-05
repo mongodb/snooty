@@ -614,7 +614,7 @@ exports[`CodeIO renders correctly 1`] = `
     </div>
     <div
       class="emotion-21"
-      style="--code-container-border: auto; --code-pre-border: none; --code-pre-border-top: none;"
+      style="--code-container-border: initial; --code-pre-border: none; --code-pre-border-top: none;"
     >
       <div
         class="emotion-22"
