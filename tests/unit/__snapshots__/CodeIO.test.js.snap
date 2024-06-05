@@ -372,13 +372,13 @@ exports[`CodeIO renders correctly 1`] = `
   border-top: var(--code-pre-border-top);
 }
 
-.emotion-22 {
+.emotion-23 {
   border: 1px solid #3D4F58;
   border-radius: 12px;
   overflow: hidden;
 }
 
-.emotion-23 {
+.emotion-24 {
   position: relative;
   display: grid;
   grid-template-areas: 'code panel';
@@ -388,8 +388,8 @@ exports[`CodeIO renders correctly 1`] = `
   grid-template-areas: 'code code';
 }
 
-.emotion-23:before,
-.emotion-23:after {
+.emotion-24:before,
+.emotion-24:after {
   content: '';
   display: block;
   position: absolute;
@@ -403,20 +403,20 @@ exports[`CodeIO renders correctly 1`] = `
   transition: box-shadow 100ms ease-in-out;
 }
 
-.emotion-23:before {
+.emotion-24:before {
   grid-column: 1;
   left: -40px;
 }
 
-.emotion-23:after {
+.emotion-24:after {
   grid-column: 2;
 }
 
-.emotion-23:after {
+.emotion-24:after {
   grid-column: -1;
 }
 
-.emotion-24 {
+.emotion-25 {
   grid-area: code;
   overflow-x: auto;
   border-radius: inherit;
@@ -449,45 +449,45 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-24 {
+  .emotion-25 {
     white-space: pre-wrap;
   }
 }
 
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-24 {
+  .emotion-25 {
     white-space: pre;
   }
 }
 
-.emotion-24:focus-visible {
+.emotion-25:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px #0498EC inset;
 }
 
-.emotion-27 {
+.emotion-28 {
   background-color: transparent;
   background-image: linear-gradient(90deg, #1C2D38, #001E2B);
   background-attachment: fixed;
 }
 
-.emotion-27>td {
+.emotion-28>td {
   border-top: 1px solid #1C2D38;
 }
 
-.emotion-27+tr>td {
+.emotion-28+tr>td {
   border-top: 1px solid #1C2D38;
 }
 
-.emotion-27+.emotion-27>td {
+.emotion-28+.emotion-28>td {
   border-top: 0;
 }
 
-.emotion-27:last-child>td {
+.emotion-28:last-child>td {
   border-bottom: 1px solid #1C2D38;
 }
 
-.emotion-28 {
+.emotion-29 {
   border-spacing: 0;
   vertical-align: top;
   padding: 0 16px;
@@ -613,17 +613,17 @@ exports[`CodeIO renders correctly 1`] = `
       </button>
     </div>
     <div
-      class="emotion-21"
+      class="emotion-21 emotion-22"
       style="--code-container-border: initial; --code-pre-border: none; --code-pre-border-top: none;"
     >
       <div
-        class="emotion-22"
+        class="emotion-23"
       >
         <div
-          class="emotion-23"
+          class="emotion-24"
         >
           <pre
-            class="emotion-24"
+            class="emotion-25"
             tabindex="-1"
           >
             <code
@@ -634,10 +634,10 @@ exports[`CodeIO renders correctly 1`] = `
               >
                 <tbody>
                   <tr
-                    class="emotion-27"
+                    class="emotion-28"
                   >
                     <td
-                      class="emotion-28"
+                      class="emotion-29"
                     >
                       1
                     </td>
