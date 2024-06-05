@@ -51,12 +51,14 @@ exports[`CodeIO renders correctly 1`] = `
 .emotion-2 {
   border-width: 1px;
   border-style: solid;
+  border-color: var(--border-color);
   border-bottom: none;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
 }
 
 .emotion-4 {
+  color: var(--color);
   padding: 10px;
   font-size: 14px;
   margin-left: 5px;
@@ -232,6 +234,7 @@ exports[`CodeIO renders correctly 1`] = `
 .emotion-15 {
   border-width: 1px;
   border-style: solid;
+  border-color: var(--border-color);
   border-top: none;
 }
 
@@ -498,11 +501,11 @@ exports[`CodeIO renders correctly 1`] = `
       <div>
         <div
           class="emotion-2 emotion-3"
-          style="border-color: #e8edeb;"
+          style="--border-color: #E8EDEB;"
         >
           <div
             class="code-caption emotion-4 emotion-5"
-            style="color: rgb(92, 108, 117);"
+            style="--color: #5C6C75;"
           >
             Title of Example
           </div>
@@ -563,7 +566,7 @@ exports[`CodeIO renders correctly 1`] = `
     </div>
     <div
       class="emotion-15 emotion-16"
-      style="border-color: #e8edeb;"
+      style="--border-color: #E8EDEB;"
     >
       <button
         aria-disabled="false"
@@ -602,6 +605,7 @@ exports[`CodeIO renders correctly 1`] = `
     </div>
     <div
       class="emotion-21"
+      style="--code-border-top: none;"
     >
       <div
         class="emotion-22"

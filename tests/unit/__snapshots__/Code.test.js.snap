@@ -28,12 +28,14 @@ exports[`renders correctly 1`] = `
 .emotion-1 {
   border-width: 1px;
   border-style: solid;
+  border-color: var(--border-color);
   border-bottom: none;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
 }
 
 .emotion-3 {
+  color: var(--color);
   padding: 10px;
   font-size: 14px;
   margin-left: 5px;
@@ -166,11 +168,11 @@ exports[`renders correctly 1`] = `
     <div>
       <div
         class="emotion-1 emotion-2"
-        style="border-color: #e8edeb;"
+        style="--border-color: #E8EDEB;"
       >
         <div
           class="code-caption emotion-3 emotion-4"
-          style="color: rgb(92, 108, 117);"
+          style="--color: #5C6C75;"
         >
           Test Caption
         </div>
