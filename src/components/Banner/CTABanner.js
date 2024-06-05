@@ -10,7 +10,10 @@ import { baseBannerStyle } from './styles/bannerItemStyle';
 const videoBannerStyling = css`
   ${baseBannerStyle};
   align-items: center;
+  background-color: var(--background-color);
   border-radius: 6px;
+  border: var(--border);
+  color: var(--color);
   display: flex;
   font-size: 14px;
   margin: 24px 0px;
@@ -22,22 +25,6 @@ const videoBannerStyling = css`
     margin-left: 15px;
   }
 `;
-
-const videoBannerDynamicStyles = (darkMode) => {
-  if (darkMode) {
-    return css`
-      background-color: ${palette.blue.dark3};
-      border: 1px solid ${palette.blue.dark2};
-      color: ${palette.blue.light2};
-    `;
-  }
-
-  return css`
-    background-color: ${palette.blue.light3};
-    border: 1px solid ${palette.blue.light2};
-    color: ${palette.blue.dark2};
-  `;
-};
 
 const lgIconStyling = css`
   width: 26px;
@@ -69,7 +56,14 @@ const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
 
   return (
     <a href={options?.url} css={linkStyling}>
-      <div css={[videoBannerStyling, videoBannerDynamicStyles(darkMode)]}>
+      <div
+        css={videoBannerStyling}
+        style={{
+          '--background-color': darkMode ? palette.blue.dark3 : palette.blue.light3,
+          '--border': darkMode ? palette.blue.dark2 : palette.blue.light2,
+          '--color': darkMode ? palette.blue.light2 : palette.blue.dark2,
+        }}
+      >
         <div css={lgIconStyling}>
           <Icon glyph={lgIcon} fill={palette.blue.base} />
         </div>
