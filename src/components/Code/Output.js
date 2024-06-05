@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { default as CodeBlock } from '@leafygreen-ui/code';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { palette } from '@leafygreen-ui/palette';
 import { getLanguage } from '../../utils/get-language';
 
 const Output = ({ nodeData: { children }, ...rest }) => {
@@ -24,14 +25,27 @@ const Output = ({ nodeData: { children }, ...rest }) => {
         }
 
         /* Ensures no double border */
-        ${darkMode &&
-        `
-          > div {
-            border-top: var(--code-border-top);
-          }
-        `}
+        > div {
+          border: var(--code-container-border);
+        }
+        > div > div > pre {
+          border: var(--code-pre-border);
+          border-top: var(--code-pre-border-top);
+        }
       `}
-      style={{ '--code-border-top': 'none' }}
+      style={
+        darkMode
+          ? {
+              '--code-container-border': 'none',
+              '--code-pre-border': `1px solid ${palette.gray.dark2}`,
+              '--code-pre-border-top': 'none',
+            }
+          : {
+              '--code-container-border': 'auto',
+              '--code-pre-border': `none`,
+              '--code-pre-border-top': 'none',
+            }
+      }
     >
       <CodeBlock
         highlightLines={emphasize_lines}
