@@ -24,7 +24,7 @@ const Output = ({ nodeData: { children }, ...rest }) => {
           border-bottom-left-radius: 12px;
         }
 
-        /* Ensures no double border */
+        /* Fixes border differences with dark mode and normal codeblock */
         > div {
           border: var(--code-container-border);
         }
