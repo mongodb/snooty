@@ -8,7 +8,7 @@ import { H3 } from '@leafygreen-ui/typography';
 const SectionHeader = ({ children, customStyles }) => {
   const { darkMode } = useDarkMode();
   return (
-    <H3 as="h2" className={cx(customStyles)} style={{ '--color': darkMode ? palette.gray.light2 : palette.black }}>
+    <H3 as="h2" className={cx(customStyles)} style={{ color: darkMode ? palette.gray.light2 : palette.black }}>
       {children}
     </H3>
   );
