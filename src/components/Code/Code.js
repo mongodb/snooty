@@ -40,7 +40,7 @@ const Code = ({
   let customActionButtonList = [];
   if (sourceSpecified) {
     customActionButtonList = [
-      <IconButton aria-label="View full source in new tab" href={source} darkMode={darkMode}>
+      <IconButton aria-label="View full source in new tab" href={source}>
         <Tooltip
           triggerEvent="hover"
           align="bottom"
