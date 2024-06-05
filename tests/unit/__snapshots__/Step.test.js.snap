@@ -13,12 +13,12 @@ exports[`renders with "connected" styling 1`] = `
 
 .emotion-0:not(:last-child):after {
   content: '';
-  border-left: 2px dashed #E8EDEB;
+  border-left: 2px dashed var(--border-left);
   bottom: 0;
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: -1;
+  z-index: var(--z-index);
 }
 
 .emotion-0 h2,
@@ -47,11 +47,11 @@ exports[`renders with "connected" styling 1`] = `
   -webkit-justify-content: center;
   justify-content: center;
   position: relative;
-  background-color: #E3FCF7;
-  color: #00684A;
+  background-color: var(--background-color);
+  color: var(--color);
   height: 34px;
   width: 34px;
-  z-index: 0;
+  z-index: var(--z-index);
 }
 
 .emotion-6 {
@@ -125,12 +125,14 @@ exports[`renders with "connected" styling 1`] = `
 
 <div
     class="emotion-0 emotion-1"
+    style="--border-left: #E8EDEB; --z-index: -1;"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
         class="emotion-4 emotion-5"
+        style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
       >
         1
       </div>
@@ -172,12 +174,12 @@ exports[`renders with "connected" styling by default 1`] = `
 
 .emotion-0:not(:last-child):after {
   content: '';
-  border-left: 2px dashed #E8EDEB;
+  border-left: 2px dashed var(--border-left);
   bottom: 0;
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: -1;
+  z-index: var(--z-index);
 }
 
 .emotion-0 h2,
@@ -206,11 +208,11 @@ exports[`renders with "connected" styling by default 1`] = `
   -webkit-justify-content: center;
   justify-content: center;
   position: relative;
-  background-color: #E3FCF7;
-  color: #00684A;
+  background-color: var(--background-color);
+  color: var(--color);
   height: 34px;
   width: 34px;
-  z-index: 0;
+  z-index: var(--z-index);
 }
 
 .emotion-6 {
@@ -284,12 +286,14 @@ exports[`renders with "connected" styling by default 1`] = `
 
 <div
     class="emotion-0 emotion-1"
+    style="--border-left: #E8EDEB; --z-index: -1;"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
         class="emotion-4 emotion-5"
+        style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
       >
         1
       </div>
@@ -353,8 +357,8 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #001E2B;
-  color: #FFFFFF;
+  background-color: var(--background-color);
+  color: var(--color);
   height: 24px;
   width: 24px;
 }
@@ -420,6 +424,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
     >
       <div
         class="emotion-4 emotion-5"
+        style="--background-color: #001E2B; --color: #FFFFFF;"
       >
         1
       </div>
