@@ -67,7 +67,6 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
             <Button
               role="button"
               className={cx(outputButtonStyling)}
-              darkMode={false}
               disabled={false}
               onClick={handleClick}
               leftGlyph={<Icon glyph={arrow} fill="#FF0000" />}
