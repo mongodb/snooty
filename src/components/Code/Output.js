@@ -27,10 +27,11 @@ const Output = ({ nodeData: { children }, ...rest }) => {
         ${darkMode &&
         `
           > div {
-            border-top: none;
+            border-top: var(--code-border-top);
           }
         `}
       `}
+      style={{ '--code-border-top': 'none' }}
     >
       <CodeBlock
         highlightLines={emphasize_lines}

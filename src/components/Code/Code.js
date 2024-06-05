@@ -22,7 +22,7 @@ const sourceCodeStyle = css`
 
 const Code = ({
   nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
-  darkMode: localDarkMode,
+  darkMode: darkModeProp,
 }) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
@@ -85,8 +85,11 @@ const Code = ({
     >
       {captionSpecified && (
         <div>
-          <CaptionContainer style={{ borderColor: darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
-            <Caption className="code-caption" style={{ color: darkMode ? palette.gray.light2 : palette.gray.dark1 }}>
+          <CaptionContainer style={{ '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
+            <Caption
+              className="code-caption"
+              style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}
+            >
               {caption}
             </Caption>
           </CaptionContainer>
@@ -97,7 +100,7 @@ const Code = ({
         highlightLines={emphasizeLines}
         language={language}
         languageOptions={languageOptions}
-        darkMode={localDarkMode ?? darkMode}
+        darkMode={darkModeProp ?? darkMode}
         onChange={(selectedOption) => {
           const tabsetName = 'drivers';
           setActiveTab({ name: tabsetName, value: selectedOption.id });
@@ -116,12 +119,14 @@ const Code = ({
 
 const CaptionContainer = styled.div`
   ${borderCodeStyle}
+  border-color: var(--border-color);
   border-bottom: none;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
 `;
 
 const Caption = styled.div`
+  color: var(--color);
   padding: 10px;
   font-size: 14px;
   margin-left: 5px;
