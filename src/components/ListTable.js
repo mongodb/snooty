@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 
@@ -36,6 +37,11 @@ const unstyleThead = css`
   }
 `;
 
+// Temporary workaround to overwrite certain styling for dark mode due to difficulties with LG Table version upgrade (DOP-3614)
+const darkModeStyle = {
+  backgroundColor: 'var(--lg-bg-dark)',
+};
+
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
 
 /**
@@ -66,8 +72,8 @@ const getReferenceIds = (nodeList) => {
   return results;
 };
 
-const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
-  <Row>
+const ListTableRow = ({ row = [], stubColumnCount, darkMode = false, ...rest }) => (
+  <Row style={{ ...(darkMode && darkModeStyle) }}>
     {row.map((cell, colIndex) => {
       const isStub = colIndex <= stubColumnCount - 1;
       const skipPTag = hasOneChild(cell.children);
@@ -126,6 +132,7 @@ ListTableRow.propTypes = {
 };
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
+  const { darkMode } = useDarkMode();
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
   const bodyRows = children[0].children.slice(headerRowCount);
@@ -175,6 +182,9 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                     }
                     ${widths && `width: ${widths[colIndex]}%`}
                   `)}
+                  style={{
+                    ...(darkMode && darkModeStyle),
+                  }}
                   key={`${rowIndex}-${colIndex}`}
                   label={cell.children.map((child, i) => (
                     <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
@@ -185,9 +195,15 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           </HeaderRow>
         ))}
         data={bodyRows}
+        darkMode={darkMode}
       >
         {({ datum }) => (
-          <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />
+          <ListTableRow
+            {...rest}
+            stubColumnCount={stubColumnCount}
+            row={datum?.children?.[0]?.children}
+            darkMode={darkMode}
+          />
         )}
       </Table>
     </>
