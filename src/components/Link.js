@@ -4,6 +4,7 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { Link as GatsbyLink } from 'gatsby';
 import { css } from '@leafygreen-ui/emotion';
 import { Link as LGLink } from '@leafygreen-ui/typography';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
@@ -25,10 +26,11 @@ const gatsbyLinkStyling = css`
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: ${palette.blue.base};
+  color: var(--color);
+  font-weight: var(--font-weight);
 
   > code {
-    color: ${palette.blue.base};
+    color: var(--color);
   }
 
   &:focus,
@@ -39,11 +41,11 @@ const gatsbyLinkStyling = css`
     text-decoration-thickness: 2px;
   }
   &:focus {
-    text-decoration-color: ${palette.blue.base};
+    text-decoration-color: var(--focus-text-decoration-color);
     outline: none;
   }
   &:hover {
-    text-decoration-color: ${palette.gray.light2};
+    text-decoration-color: var(--hover-text-decoration-color);
   }
 `;
 
@@ -69,6 +71,7 @@ const Link = ({
   const anchor = to.startsWith('#');
 
   const anchorProps = validateHTMAttributes('anchor', other);
+  const { darkMode } = useDarkMode();
 
   //used instead of LG showLinkArrow prop for consistency between LGLinks and GatsbyLinks(GatsbyLinks don't have that prop)
   const decoration = showLinkArrow ? (
@@ -92,6 +95,12 @@ const Link = ({
     return (
       <GatsbyLink
         className={joinClassNames(gatsbyLinkStyling, className)}
+        style={{
+          '--color': darkMode ? palette.blue.light1 : palette.blue.base,
+          '--focus-text-decoration-color': darkMode ? palette.blue.light1 : palette.blue.base,
+          '--hover-text-decoration-color': darkMode ? palette.gray.dark2 : palette.gray.light2,
+          '--font-weight': darkMode ? 700 : 'inherit',
+        }}
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}

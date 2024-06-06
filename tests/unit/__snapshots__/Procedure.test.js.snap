@@ -115,11 +115,12 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-11>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-11:focus,
@@ -132,12 +133,12 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-11:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-11:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <div
@@ -169,6 +170,7 @@ exports[`renders correctly 1`] = `
           <a
             class="emotion-11"
             href="/connect/#std-label-connect-run-compass"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             To learn more, see Connect to MongoDB
           </a>
@@ -201,6 +203,7 @@ exports[`renders correctly 1`] = `
           <a
             class="emotion-11"
             href="/import-export/#std-label-compass-import-export"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             To learn more, see Import and Export Data
           </a>
@@ -753,11 +756,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-11>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-11:focus,
@@ -770,12 +774,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 }
 
 .emotion-11:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-11:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <div
@@ -807,6 +811,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
           <a
             class="emotion-11"
             href="/connect/#std-label-connect-run-compass"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             To learn more, see Connect to MongoDB
           </a>
@@ -839,6 +844,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
           <a
             class="emotion-11"
             href="/import-export/#std-label-compass-import-export"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             To learn more, see Import and Export Data
           </a>
