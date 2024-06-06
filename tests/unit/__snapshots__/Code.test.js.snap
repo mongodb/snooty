@@ -63,8 +63,8 @@ exports[`renders correctly 1`] = `
   z-index: 1;
   top: 0;
   height: 100%;
-  width: 40px;
-  border-radius: 40%;
+  width: 8px;
+  border-radius: 100%;
   box-shadow: unset;
   -webkit-transition: box-shadow 100ms ease-in-out;
   transition: box-shadow 100ms ease-in-out;
@@ -72,7 +72,31 @@ exports[`renders correctly 1`] = `
 
 .emotion-5:before {
   grid-column: 1;
-  left: -40px;
+  left: -8px;
+}
+
+.emotion-5:after {
+  grid-column: 2;
+}
+
+.emotion-5:before,
+.emotion-5:after {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  height: 100%;
+  width: 8px;
+  border-radius: 100%;
+  box-shadow: unset;
+  -webkit-transition: box-shadow 100ms ease-in-out;
+  transition: box-shadow 100ms ease-in-out;
+}
+
+.emotion-5:before {
+  grid-column: 1;
+  left: -8px;
 }
 
 .emotion-5:after {
@@ -93,6 +117,7 @@ exports[`renders correctly 1`] = `
   -webkit-transition: box-shadow 100ms ease-in-out;
   transition: box-shadow 100ms ease-in-out;
   white-space: pre;
+  border-color: #E8EDEB;
   background-color: #F9FBFA;
   color: #001E2B;
 }
@@ -109,20 +134,25 @@ exports[`renders correctly 1`] = `
   }
 }
 
-.emotion-6:focus-visible {
+.emotion-6:focus,
+.emotion-6:active,
+.emotion-6:focus-visible,
+.emotion-6:focus-within {
   outline: none;
   box-shadow: 0 0 0 2px #0498EC inset;
 }
 
 .emotion-7 {
   color: inherit;
-  font-family: 'Source Code Pro',Menlo,monospace;
   font-size: 13px;
-  line-height: 20px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  line-height: 24px;
+  font-size: 13px;
 }
 
 .emotion-8 {
   border-spacing: 0;
+  width: 100%;
 }
 
 .emotion-9 {
@@ -140,16 +170,16 @@ exports[`renders correctly 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   gap: 4px;
-  background-color: #FFFFFF;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   padding: 6px;
   border-left: solid 1px;
+  background-color: #FFFFFF;
   border-color: #E8EDEB;
   z-index: 2;
   grid-area: panel;
@@ -291,8 +321,8 @@ exports[`renders correctly when none is passed in as a language 1`] = `
   z-index: 1;
   top: 0;
   height: 100%;
-  width: 40px;
-  border-radius: 40%;
+  width: 8px;
+  border-radius: 100%;
   box-shadow: unset;
   -webkit-transition: box-shadow 100ms ease-in-out;
   transition: box-shadow 100ms ease-in-out;
@@ -300,7 +330,31 @@ exports[`renders correctly when none is passed in as a language 1`] = `
 
 .emotion-2:before {
   grid-column: 1;
-  left: -40px;
+  left: -8px;
+}
+
+.emotion-2:after {
+  grid-column: 2;
+}
+
+.emotion-2:before,
+.emotion-2:after {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  height: 100%;
+  width: 8px;
+  border-radius: 100%;
+  box-shadow: unset;
+  -webkit-transition: box-shadow 100ms ease-in-out;
+  transition: box-shadow 100ms ease-in-out;
+}
+
+.emotion-2:before {
+  grid-column: 1;
+  left: -8px;
 }
 
 .emotion-2:after {
@@ -321,6 +375,7 @@ exports[`renders correctly when none is passed in as a language 1`] = `
   -webkit-transition: box-shadow 100ms ease-in-out;
   transition: box-shadow 100ms ease-in-out;
   white-space: pre;
+  border-color: #E8EDEB;
   background-color: #F9FBFA;
   color: #001E2B;
   display: -webkit-box;
@@ -347,20 +402,25 @@ exports[`renders correctly when none is passed in as a language 1`] = `
   }
 }
 
-.emotion-3:focus-visible {
+.emotion-3:focus,
+.emotion-3:active,
+.emotion-3:focus-visible,
+.emotion-3:focus-within {
   outline: none;
   box-shadow: 0 0 0 2px #0498EC inset;
 }
 
 .emotion-4 {
   color: inherit;
-  font-family: 'Source Code Pro',Menlo,monospace;
   font-size: 13px;
-  line-height: 20px;
+  font-family: 'Source Code Pro',Menlo,monospace;
+  line-height: 24px;
+  font-size: 13px;
 }
 
 .emotion-5 {
   border-spacing: 0;
+  width: 100%;
 }
 
 .emotion-6 {
@@ -378,16 +438,16 @@ exports[`renders correctly when none is passed in as a language 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   gap: 4px;
-  background-color: #FFFFFF;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   padding: 6px;
   border-left: solid 1px;
+  background-color: #FFFFFF;
   border-color: #E8EDEB;
   z-index: 2;
   grid-area: panel;
