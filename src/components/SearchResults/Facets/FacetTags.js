@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } 
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { Overline } from '@leafygreen-ui/typography';
 import { theme } from '../../../theme/docsTheme';
@@ -71,9 +72,13 @@ const ExpandFlexbox = styled('div')`
   flex: 0 0 fit-content;
 `;
 
-const overlineStyling = css`
-  color: ${palette.gray.dark2};
+const overlineBaseStyling = css`
   margin-right: ${theme.size.small};
+`;
+
+const overlineLightStyling = css`
+  color: ${palette.gray.dark2};
+  ${overlineBaseStyling}
 `;
 
 const FacetTag = ({ facet: { name, key, id, facets } }) => {
@@ -120,6 +125,7 @@ const FacetTags = ({ resultsCount }) => {
 
   const [needExpansion, setNeedExpansion] = useState(false);
   const refContainer = useRef();
+  const { darkMode } = useDarkMode();
 
   // resize affect. show/hide `Show More` button if there is no real estate
   useEffect(() => {
@@ -141,7 +147,12 @@ const FacetTags = ({ resultsCount }) => {
     <TagsFlexbox>
       <SelectionsFlexbox ref={refContainer} expanded={expanded}>
         {Number.isInteger(resultsCount) && (
-          <Overline className={cx(overlineStyling)}>
+          <Overline
+            className={cx({
+              [overlineBaseStyling]: darkMode === true,
+              [overlineLightStyling]: darkMode === false,
+            })}
+          >
             <>{resultsCount} RESULTS</>
           </Overline>
         )}

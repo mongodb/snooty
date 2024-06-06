@@ -54,10 +54,6 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   gap: 10px;
 }
 
-.emotion-4 p {
-  color: #5C6C75;
-}
-
 @media only screen and (max-width: 767px) {
   .emotion-4 {
     -webkit-flex-direction: column;
@@ -747,7 +743,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 }
 
 .emotion-53 {
-  color: #016BF8;
+  color: var(--color);
   word-break: break-all;
 }
 
@@ -862,6 +858,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         </h1>
         <p
           class="emotion-7"
+          style="color: rgb(92, 108, 117);"
         >
           (2.0~422ab47f864)
         </p>
@@ -1051,6 +1048,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
@@ -1096,6 +1094,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
@@ -1141,6 +1140,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   GET /api/atlas/v2/groups/byName/{groupName}
                 </h6>
@@ -1198,6 +1198,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
@@ -1338,6 +1339,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   POST /api/atlas/v2/groups/{groupId}/accessList
                 </h6>
@@ -1388,6 +1390,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   GET /api/atlas/v2/groups/byName/{groupName}
                 </h6>
