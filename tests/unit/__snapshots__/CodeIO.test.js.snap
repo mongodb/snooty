@@ -513,7 +513,7 @@ exports[`CodeIO renders correctly 1`] = `
           style="--border-color: #E8EDEB;"
         >
           <div
-            class="code-caption emotion-4 emotion-5"
+            class="emotion-4 emotion-5"
             style="--color: #5C6C75;"
           >
             Title of Example

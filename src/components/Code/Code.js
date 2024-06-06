@@ -86,12 +86,7 @@ const Code = ({
       {captionSpecified && (
         <div>
           <CaptionContainer style={{ '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
-            <Caption
-              className="code-caption"
-              style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}
-            >
-              {caption}
-            </Caption>
+            <Caption style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}>{caption}</Caption>
           </CaptionContainer>
         </div>
       )}

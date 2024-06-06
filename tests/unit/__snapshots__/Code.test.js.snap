@@ -171,7 +171,7 @@ exports[`renders correctly 1`] = `
         style="--border-color: #E8EDEB;"
       >
         <div
-          class="code-caption emotion-3 emotion-4"
+          class="emotion-3 emotion-4"
           style="--color: #5C6C75;"
         >
           Test Caption
