@@ -12,7 +12,7 @@ exports[`renders border correctly when specified as an option 1`] = `
   max-width: 100%;
   height: auto;
   border: 0.5px solid #C1C7C6;
-  border-radius: 4px;
+  border-radius: 16px;
 }
 
 <div
