@@ -23,7 +23,7 @@ const OutputContainer = styled.div`
   }
   > div > div > pre {
     border: var(--code-pre-border);
-    border-top: var(--code-pre-border-top);
+    border-top: none;
   }
 `;
 
@@ -39,12 +39,10 @@ const Output = ({ nodeData: { children }, ...rest }) => {
           ? {
               '--code-container-border': 'none',
               '--code-pre-border': `1px solid ${palette.gray.dark2}`,
-              '--code-pre-border-top': 'none',
             }
           : {
               '--code-container-border': 'initial',
               '--code-pre-border': `none`,
-              '--code-pre-border-top': 'none',
             }
       }
     >
