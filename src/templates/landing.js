@@ -106,7 +106,7 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             }
           }
           main h1:first-of-type {
-            color: ${darkMode ? palette.gray.light2 : palette.black};
+            color: ${palette.gray.light2};
             grid-column: 2/-1;
             margin-top: ${size.medium};
             font-size: 48px;

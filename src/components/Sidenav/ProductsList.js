@@ -90,6 +90,10 @@ const ProductLink = styled(Link)`
     text-decoration: none;
   }
 
+  :focus {
+    text-decoration: none;
+  }
+
   @media ${theme.screenSize.upToSmall} {
     padding: ${theme.size.small} ${theme.size.medium} ${theme.size.small} 44px;
   }
