@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
@@ -62,7 +63,6 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
     ${isCollapsed && 'display: none;'}
   }
 
-  a,
   p {
     letter-spacing: unset;
     color: ${palette.black};
@@ -164,6 +164,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
 
+  const { darkMode } = useDarkMode();
+
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(eol);
 
@@ -264,7 +266,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                   />
                 )}
               </NavTopContainer>
-              {showAllProducts && <ProductsList />}
+              {showAllProducts && <ProductsList darkMode={darkMode} />}
             </IATransition>
 
             {!ia && !showAllProducts && (

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -46,6 +47,7 @@ const HeadingTitle = styled('span')`
 
 const Products = styled(`ul`)`
   display: none;
+  background-color: var(--background-color);
   list-style-type: none;
   padding: 0;
   li > a {
@@ -60,8 +62,8 @@ const ProductsListContainer = styled('div')`
 
 const ProductsListHeading = styled('div')`
   align-items: center;
-  background-color: ${palette.gray.light3};
-  color: ${({ isOpen }) => (isOpen ? palette.gray.dark3 : palette.gray.dark1)};
+  background-color: var(--background-color);
+  color: var(--color);
   cursor: pointer;
   display: flex;
   padding: ${theme.size.default} ${theme.size.medium} 12px;
@@ -70,12 +72,12 @@ const ProductsListHeading = styled('div')`
   z-index: 1;
 
   :hover {
-    color: ${palette.gray.dark3};
+    color: var(--hover-color);
   }
 `;
 
 const ProductLink = styled(Link)`
-  color: ${palette.gray.dark2};
+  color: var(--color);
   display: inline-block;
   font-size: ${theme.fontSize.small};
   letter-spacing: 0;
@@ -83,7 +85,7 @@ const ProductLink = styled(Link)`
   width: 100%;
 
   :hover {
-    color: ${palette.gray.dark2};
+    color: var(--hover-color);
     font-weight: bold;
     text-decoration: none;
   }
@@ -101,7 +103,17 @@ const iconStyle = ({ isOpen }) => LeafyCSS`
   transition: transform ${chevronRotationDuration};
 `;
 
-const ProductsList = () => {
+const getProductListHeadingDynamicStyles = (darkMode, isOpen) => {
+  const darkThemeColor = isOpen ? palette.gray.light2 : palette.gray.light1;
+  const lightThemeColor = isOpen ? palette.gray.dark3 : palette.gray.dark1;
+  return {
+    '--color': darkMode ? darkThemeColor : lightThemeColor,
+    '--background-color': darkMode ? palette.gray.dark2 : palette.gray.light3,
+    '--hover-color': darkMode ? palette.gray.light2 : palette.gray.dark3,
+  };
+};
+
+const ProductsList = ({ darkMode }) => {
   const products = useAllProducts();
   const [isOpen, setOpen] = useState(false);
 
@@ -109,7 +121,10 @@ const ProductsList = () => {
     <>
       <Global styles={transitionClasses} />
       <ProductsListContainer>
-        <ProductsListHeading isOpen={isOpen} onClick={() => setOpen(!isOpen)}>
+        <ProductsListHeading
+          style={getProductListHeadingDynamicStyles(darkMode, isOpen)}
+          onClick={() => setOpen(!isOpen)}
+        >
           <Icon className={cx(iconStyle({ isOpen }))} glyph="ChevronUp" />
           <HeadingTitle>View all products</HeadingTitle>
         </ProductsListHeading>
@@ -119,11 +134,19 @@ const ProductsList = () => {
         classNames="products-list"
         addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
       >
-        <Products>
+        <Products style={{ '--background-color': darkMode ? palette.gray.dark2 : 'inherit' }}>
           {products.map(({ title, url }, index) => {
             return (
               <li key={index}>
-                <ProductLink to={url}>{title}</ProductLink>
+                <ProductLink
+                  style={{
+                    '--color': darkMode ? palette.gray.light1 : palette.black,
+                    '--hover-color': darkMode ? palette.gray.light2 : palette.gray.dark2,
+                  }}
+                  to={url}
+                >
+                  {title}
+                </ProductLink>
               </li>
             );
           })}
@@ -131,6 +154,10 @@ const ProductsList = () => {
       </CSSTransition>
     </>
   );
+};
+
+ProductsList.propTypes = {
+  darkMode: PropTypes.bool,
 };
 
 export default ProductsList;
