@@ -369,7 +369,7 @@ exports[`CodeIO renders correctly 1`] = `
 
 .emotion-21>div>div>pre {
   border: var(--code-pre-border);
-  border-top: var(--code-pre-border-top);
+  border-top: none;
 }
 
 .emotion-23 {
@@ -614,7 +614,7 @@ exports[`CodeIO renders correctly 1`] = `
     </div>
     <div
       class="emotion-21 emotion-22"
-      style="--code-container-border: initial; --code-pre-border: none; --code-pre-border-top: none;"
+      style="--code-container-border: initial; --code-pre-border: none;"
     >
       <div
         class="emotion-23"
