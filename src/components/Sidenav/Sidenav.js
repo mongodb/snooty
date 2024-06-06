@@ -242,6 +242,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             collapsed={isCollapsed}
             setCollapsed={setCollapsed}
             widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
+            style={{ backgroundColor: darkMode && palette.gray.dark2 }}
           >
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>

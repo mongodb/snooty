@@ -138,7 +138,7 @@ const ProductsList = ({ darkMode }) => {
         classNames="products-list"
         addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
       >
-        <Products style={{ '--background-color': darkMode ? palette.gray.dark2 : 'inherit' }}>
+        <Products>
           {products.map(({ title, url }, index) => {
             return (
               <li key={index}>
