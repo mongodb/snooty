@@ -18,7 +18,7 @@ exports[`renders with "connected" styling 1`] = `
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: var(--z-index);
+  z-index: 0;
 }
 
 .emotion-0 h2,
@@ -51,7 +51,7 @@ exports[`renders with "connected" styling 1`] = `
   color: var(--color);
   height: 34px;
   width: 34px;
-  z-index: var(--z-index);
+  z-index: 1;
 }
 
 .emotion-6 {
@@ -125,14 +125,14 @@ exports[`renders with "connected" styling 1`] = `
 
 <div
     class="emotion-0 emotion-1"
-    style="--border-left: #E8EDEB; --z-index: -1;"
+    style="--border-left: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
         class="emotion-4 emotion-5"
-        style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+        style="--background-color: #E3FCF7; --color: #00684A;"
       >
         1
       </div>
@@ -179,7 +179,7 @@ exports[`renders with "connected" styling by default 1`] = `
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: var(--z-index);
+  z-index: 0;
 }
 
 .emotion-0 h2,
@@ -212,7 +212,7 @@ exports[`renders with "connected" styling by default 1`] = `
   color: var(--color);
   height: 34px;
   width: 34px;
-  z-index: var(--z-index);
+  z-index: 1;
 }
 
 .emotion-6 {
@@ -286,14 +286,14 @@ exports[`renders with "connected" styling by default 1`] = `
 
 <div
     class="emotion-0 emotion-1"
-    style="--border-left: #E8EDEB; --z-index: -1;"
+    style="--border-left: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
         class="emotion-4 emotion-5"
-        style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+        style="--background-color: #E3FCF7; --color: #00684A;"
       >
         1
       </div>

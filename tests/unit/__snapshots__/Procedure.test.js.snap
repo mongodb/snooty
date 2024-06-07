@@ -36,7 +36,7 @@ exports[`renders correctly 1`] = `
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: var(--z-index);
+  z-index: 0;
 }
 
 .emotion-2 h2,
@@ -69,7 +69,7 @@ exports[`renders correctly 1`] = `
   color: var(--color);
   height: 34px;
   width: 34px;
-  z-index: var(--z-index);
+  z-index: 1;
 }
 
 .emotion-8 {
@@ -147,14 +147,14 @@ exports[`renders correctly 1`] = `
   >
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB; --z-index: -1;"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           1
         </div>
@@ -182,14 +182,14 @@ exports[`renders correctly 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB; --z-index: -1;"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           2
         </div>
@@ -255,7 +255,7 @@ exports[`renders steps nested in include nodes 1`] = `
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: var(--z-index);
+  z-index: 0;
 }
 
 .emotion-2 h2,
@@ -288,7 +288,7 @@ exports[`renders steps nested in include nodes 1`] = `
   color: var(--color);
   height: 34px;
   width: 34px;
-  z-index: var(--z-index);
+  z-index: 1;
 }
 
 .emotion-8 {
@@ -364,14 +364,14 @@ exports[`renders steps nested in include nodes 1`] = `
   >
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB; --z-index: -1;"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           1
         </div>
@@ -412,14 +412,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB; --z-index: -1;"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           2
         </div>
@@ -460,14 +460,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB; --z-index: -1;"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           3
         </div>
@@ -508,14 +508,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB; --z-index: -1;"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           4
         </div>
@@ -556,14 +556,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB; --z-index: -1;"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           5
         </div>
@@ -604,14 +604,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB; --z-index: -1;"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           6
         </div>
@@ -652,14 +652,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB; --z-index: -1;"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A; --z-index: 0;"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           7
         </div>
