@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ImageContext from '../context/image-context';
 import { getNestedValue } from '../utils/get-nested-value';
 import { removeLeadingSlash } from '../utils/remove-leading-slash';
+import { theme } from '../theme/docsTheme';
 
 const defaultStyling = css`
   max-width: 100%;
@@ -14,10 +16,11 @@ const defaultStyling = css`
 `;
 const borderStyling = css`
   border: 0.5px solid ${palette.gray.light1};
-  border-radius: 4px;
+  border-radius: ${theme.size.default};
 `;
 const gatsbyContainerStyle = css`
   height: max-content;
+  overflow: hidden;
 `;
 
 function getImageProps({
@@ -47,8 +50,14 @@ function getImageProps({
 
   if (gatsbyImage && loading === 'lazy') {
     imageProps['image'] = gatsbyImage;
-    imageProps['imgClassName'] = cx(defaultStyling, hasBorder ? borderStyling : '');
-    imageProps['className'] = cx(gatsbyContainerStyle, directiveClass, customAlign, className);
+    imageProps['imgClassName'] = cx(defaultStyling);
+    imageProps['className'] = cx(
+      gatsbyContainerStyle,
+      directiveClass,
+      customAlign,
+      className,
+      hasBorder ? borderStyling : ''
+    );
   } else {
     imageProps['src'] = imgSrc;
     imageProps['srcSet'] = srcSet;
@@ -70,6 +79,7 @@ const Image = ({ nodeData, className }) => {
   let height = getNestedValue(['options', 'height'], nodeData);
   const loading = getNestedValue(['options', 'loading'], nodeData);
   const directiveClass = getNestedValue(['options', 'class'], nodeData);
+  const { darkMode } = useDarkMode();
 
   let imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
   const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
@@ -105,7 +115,7 @@ const Image = ({ nodeData, className }) => {
     width,
     height,
     gatsbyImage,
-    hasBorder,
+    hasBorder: hasBorder || darkMode,
     customAlign,
     className,
     directiveClass,
