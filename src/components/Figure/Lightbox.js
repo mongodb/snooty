@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '@leafygreen-ui/modal';
 import styled from '@emotion/styled';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { palette } from '@leafygreen-ui/palette';
 import Image from '../Image';
 import { theme } from '../../theme/docsTheme.js';
 import CaptionLegend from './CaptionLegend';
@@ -14,7 +16,7 @@ const MODAL_DIALOG_PADDING = '40px';
 const StyledModal = styled(Modal)`
   // Set z-index to appear above side nav and top navbar
   z-index: 10;
-  margin-top: ${theme.header.navbarHeight};
+  ${process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' ? `margin-top: ${theme.header.navbarHeight}` : ''};
 
   div[role='dialog'] {
     max-width: 80%;
@@ -44,7 +46,7 @@ const StyledModal = styled(Modal)`
 `;
 
 const LightboxCaption = styled('div')`
-  color: #444;
+  color: var(--color);
   font-size: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -62,6 +64,7 @@ const LightboxWrapper = styled('div')`
 
 const Lightbox = ({ nodeData, ...rest }) => {
   const [open, setOpen] = useState(false);
+  const { darkMode } = useDarkMode();
   const figureWidth = nodeData.options?.figwidth || 'auto';
   const openModal = useCallback(() => {
     setOpen((prevOpen) => !prevOpen);
@@ -72,7 +75,13 @@ const Lightbox = ({ nodeData, ...rest }) => {
       <LightboxWrapper figwidth={figureWidth}>
         <div onClick={openModal} role="button" tabIndex="-1">
           <Image nodeData={nodeData} />
-          <LightboxCaption>{CAPTION_TEXT}</LightboxCaption>
+          <LightboxCaption
+            style={{
+              '--color': darkMode ? palette.gray.light2 : '#444',
+            }}
+          >
+            {CAPTION_TEXT}
+          </LightboxCaption>
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
       </LightboxWrapper>
