@@ -158,18 +158,13 @@ const Card = ({
   ];
 
   let iconSrc;
+
   if (icon) {
-    if (icon.includes('/')) {
-      if (darkMode && iconDark) {
-        iconSrc = withPrefix(iconDark);
-      } else {
-        iconSrc = withPrefix(icon);
-      }
-    } else {
-      // image comes from web branding, not path to image in content repo
-      const getIcon = `${icon}${darkMode ? '_inverse' : ''}`;
-      iconSrc = `https://webimages.mongodb.com/_com_assets/icons/${getIcon}.svg`;
-    }
+    const isPath = icon.includes('/');
+    const getIcon = `${icon}${darkMode ? '_inverse' : ''}`;
+    const imageUrl = `https://webimages.mongodb.com/_com_assets/icons/${getIcon}.svg`;
+
+    iconSrc = isPath ? (darkMode && iconDark ? withPrefix(iconDark) : withPrefix(icon)) : imageUrl;
   }
 
   return (
