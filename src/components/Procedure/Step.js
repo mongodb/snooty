@@ -31,7 +31,7 @@ const circleStyles = {
     color: var(--color);
     height: 34px;
     width: 34px;
-    z-index: var(--z-index);
+    z-index: 1;
   `,
   normal: () => css`
     background-color: var(--background-color);
@@ -53,7 +53,7 @@ const landingStepStyles = {
       left: 16px;
       position: absolute;
       top: 0;
-      z-index: var(--z-index);
+      z-index: 0;
     }
 
     h2,
@@ -89,7 +89,6 @@ const getStepStyleDynamicStyles = (darkMode, stepType) => {
   return {
     connected: {
       '--border-left': darkMode ? palette.gray.dark1 : palette.gray.light2,
-      '--z-index': darkMode ? '0' : ' -1',
     },
     normal: {},
   }[stepType];
@@ -100,7 +99,6 @@ const getCircleDynamicStyles = (darkMode, stepStyle) => {
     connected: {
       '--background-color': darkMode ? palette.green.dark2 : palette.green.light3,
       '--color': darkMode ? palette.gray.light2 : palette.green.dark2,
-      '--z-index': darkMode ? '1' : '0',
     },
     normal: {
       '--background-color': darkMode ? palette.gray.dark2 : palette.black,
