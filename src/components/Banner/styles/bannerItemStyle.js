@@ -26,4 +26,11 @@ export const baseBannerStyle = css`
     font-size: ${theme.fontSize.small};
     line-height: ${theme.fontSize.small};
   }
+
+  a {
+    &: hover {
+      text-decoration-color: var(--text-decoration-color);
+      text-underline-offset: 3px;
+    }
+  }
 `;

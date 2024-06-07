@@ -12,7 +12,7 @@ const videoBannerStyling = css`
   align-items: center;
   background-color: var(--background-color);
   border-radius: 6px;
-  border: var(--border);
+  border: 1px solid var(--border);
   color: var(--color);
   display: flex;
   font-size: 14px;
@@ -23,6 +23,17 @@ const videoBannerStyling = css`
 
   > p {
     margin-left: 15px;
+  }
+
+  a {
+    color: var(--anchor-color);
+    text-decoration: underline 2px;
+    text-underline-offset: 3px;
+    font-weight: 700;
+
+    &: hover {
+      color: var(--anchor-color-hover);
+    }
   }
 `;
 
@@ -62,6 +73,9 @@ const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
           '--background-color': darkMode ? palette.blue.dark3 : palette.blue.light3,
           '--border': darkMode ? palette.blue.dark2 : palette.blue.light2,
           '--color': darkMode ? palette.blue.light2 : palette.blue.dark2,
+          '--anchor-color': darkMode ? palette.blue.light3 : palette.blue.dark3,
+          '--anchor-color-hover': darkMode ? palette.blue.light2 : palette.blue.dark2,
+          '--text-decoration-color': darkMode ? palette.blue.light2 : palette.blue.dark2,
         }}
       >
         <div css={lgIconStyling}>
