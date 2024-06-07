@@ -8,17 +8,18 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
   padding: unset;
   display: inline-block;
   border-radius: 100px;
-  color: #89979B;
   position: relative;
   cursor: pointer;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-transition: color 150ms ease-in-out;
-  transition: color 150ms ease-in-out;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: color,box-shadow;
   background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
+  color: #5C6C75;
   cursor: pointer;
 }
 
@@ -55,20 +56,21 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
 
 .emotion-0:active,
 .emotion-0:hover {
-  color: #3D4F58;
+  color: #001E2B;
 }
 
 .emotion-0:active:before,
 .emotion-0:hover:before {
-  background-color: #E7EEEC;
+  background-color: #E8EDEB;
 }
 
-.emotion-0:focus {
-  color: #1A567E;
+.emotion-0:focus-visible {
+  color: #001E2B;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-0:focus:before {
-  background-color: #C5E4F2;
+.emotion-0:focus-visible:before {
+  background-color: #E8EDEB;
 }
 
 .emotion-1 {
@@ -131,17 +133,18 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   padding: unset;
   display: inline-block;
   border-radius: 100px;
-  color: #89979B;
   position: relative;
   cursor: pointer;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-transition: color 150ms ease-in-out;
-  transition: color 150ms ease-in-out;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: color,box-shadow;
   background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
+  color: #5C6C75;
   cursor: pointer;
 }
 
@@ -178,20 +181,21 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
 
 .emotion-0:active,
 .emotion-0:hover {
-  color: #3D4F58;
+  color: #001E2B;
 }
 
 .emotion-0:active:before,
 .emotion-0:hover:before {
-  background-color: #E7EEEC;
+  background-color: #E8EDEB;
 }
 
-.emotion-0:focus {
-  color: #1A567E;
+.emotion-0:focus-visible {
+  color: #001E2B;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-0:focus:before {
-  background-color: #C5E4F2;
+.emotion-0:focus-visible:before {
+  background-color: #E8EDEB;
 }
 
 .emotion-1 {
@@ -740,17 +744,18 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
   padding: unset;
   display: inline-block;
   border-radius: 100px;
-  color: #89979B;
   position: relative;
   cursor: pointer;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-transition: color 150ms ease-in-out;
-  transition: color 150ms ease-in-out;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: color,box-shadow;
   background-color: rgba(255, 255, 255, 0);
   height: 28px;
   width: 28px;
+  color: #C1C7C6;
   cursor: pointer;
 }
 
@@ -787,20 +792,21 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
 
 .emotion-0:active,
 .emotion-0:hover {
-  color: #3D4F58;
+  color: #F9FBFA;
 }
 
 .emotion-0:active:before,
 .emotion-0:hover:before {
-  background-color: #E7EEEC;
+  background-color: #3D4F58;
 }
 
-.emotion-0:focus {
-  color: #1A567E;
+.emotion-0:focus-visible {
+  color: #F9FBFA;
+  box-shadow: 0 0 0 2px #001E2B,0 0 0 4px #0498EC;
 }
 
-.emotion-0:focus:before {
-  background-color: #C5E4F2;
+.emotion-0:focus-visible:before {
+  background-color: #5C6C75;
 }
 
 .emotion-1 {

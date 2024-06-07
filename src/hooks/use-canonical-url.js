@@ -1,14 +1,16 @@
 import { assertTrailingSlash } from '../utils/assert-trailing-slash';
-import { generatePrefix } from '../components/VersionDropdown/utils';
 import { normalizePath } from '../utils/normalize-path';
+import { generateVersionedPrefix } from '../utils/generate-versioned-prefix';
 import { useSiteMetadata } from './use-site-metadata';
 
 export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
   const siteMetadata = useSiteMetadata();
   const { siteUrl, parserBranch } = siteMetadata;
-  const urlSlug = repoBranches.branches.find((branch) => branch.gitBranchName === parserBranch)?.urlSlug;
+  // Use parserBranch by default to avoid undefined slugs when testing
+  const urlSlug =
+    repoBranches.branches.find((branch) => branch.gitBranchName === parserBranch)?.urlSlug ?? parserBranch;
   const siteBasePrefix = repoBranches.siteBasePrefix;
-  const pathPrefix = generatePrefix(urlSlug, siteMetadata, siteBasePrefix);
+  const pathPrefix = generateVersionedPrefix(urlSlug, siteBasePrefix);
 
   // Use default logic assuming there is no canonical provided from the meta directive
   let canonical = `${siteUrl}${normalizePath(`${pathPrefix}/${slug === '/' ? '' : slug}`)}`;
