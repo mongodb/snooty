@@ -17,11 +17,12 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-1>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-1:focus,
@@ -34,12 +35,12 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-1:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-2 {
@@ -159,6 +160,7 @@ exports[`renders correctly 1`] = `
       aria-disabled="false"
       class="emotion-1 constant-classname emotion-2"
       href="/"
+      style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
     >
       Overview
     </a>
@@ -178,11 +180,12 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-1>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-1:focus,
@@ -195,12 +198,12 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-1:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-2 {
@@ -302,6 +305,7 @@ exports[`renders correctly 1`] = `
       aria-disabled="false"
       class="emotion-1 constant-classname emotion-2"
       href="/cloud/account/"
+      style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
     >
       Atlas
     </a>
@@ -321,11 +325,12 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-1>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-1:focus,
@@ -338,12 +343,12 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-1:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-2 {
@@ -445,6 +450,7 @@ exports[`renders correctly 1`] = `
       aria-disabled="false"
       class="emotion-1 constant-classname emotion-2"
       href="/server/read/"
+      style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
     >
       CRUD
     </a>

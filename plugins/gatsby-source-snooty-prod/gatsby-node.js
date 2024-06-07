@@ -257,11 +257,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       throw errMsg;
     }
 
-    // Handle inconsistent env names. Default to 'dotcomprd' when possible since this is what we will most likely use.
+    // Handle inconsistent env names. Default to 'dotcomstg' for staging data on local builds.
     // dotcom environments seem to be consistent.
     let envKey = siteMetadata.snootyEnv;
     if (!envKey || envKey === 'development') {
-      envKey = 'dotcomprd';
+      envKey = 'dotcomstg';
     } else if (envKey === 'production') {
       envKey = 'prd';
     } else if (envKey === 'staging') {

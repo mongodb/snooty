@@ -267,11 +267,12 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-12>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-12:focus,
@@ -284,12 +285,12 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-12:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-12:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-13 {
@@ -372,6 +373,7 @@ exports[`renders correctly with siteTitle 1`] = `
         <a
           class="emotion-12 emotion-13"
           href="/"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           Atlas Device SDKs
         </a>
@@ -387,6 +389,7 @@ exports[`renders correctly with siteTitle 1`] = `
         <a
           class="emotion-12 emotion-13"
           href="/sdk/cpp/"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           Atlas Device SDK for C++
         </a>
@@ -402,6 +405,7 @@ exports[`renders correctly with siteTitle 1`] = `
         <a
           class="emotion-12 emotion-13"
           href="/sdk/cpp/application-services/"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           Application Services - C++ SDK
         </a>
