@@ -18,13 +18,18 @@ const align = (key) => {
   }
 };
 
-const styleTable = ({ customAlign, customWidth }) => css`
+const styleTable = ({ customAlign, customWidth, overrideDarkZebraStripes }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
 
   table & {
     margin: 0;
+  }
+
+  tbody > tr:nth-of-type(2n) {
+    // Need this since we're overriding background color for all rows for dark mode
+    ${overrideDarkZebraStripes && `background-color: ${palette.gray.dark4} !important;`}
   }
 `;
 
@@ -38,9 +43,9 @@ const unstyleThead = css`
 `;
 
 // Temporary workaround to overwrite certain styling for dark mode due to difficulties with LG Table version upgrade (DOP-3614)
-const darkModeStyle = {
-  backgroundColor: palette.black,
-};
+const darkModeStyle = css`
+  background-color: ${palette.black};
+`;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
 
@@ -73,7 +78,7 @@ const getReferenceIds = (nodeList) => {
 };
 
 const ListTableRow = ({ row = [], stubColumnCount, darkMode = false, ...rest }) => (
-  <Row style={{ ...(darkMode && darkModeStyle) }}>
+  <Row className={cx(darkMode && darkModeStyle)}>
     {row.map((cell, colIndex) => {
       const isStub = colIndex <= stubColumnCount - 1;
       const skipPTag = hasOneChild(cell.children);
@@ -167,6 +172,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           styleTable({
             customAlign: options?.align,
             customWidth: options?.width,
+            overrideDarkZebraStripes: darkMode && bodyRows.length > 10,
           })
         )}
         columns={headerRows.map((row, rowIndex) => (
@@ -175,16 +181,16 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
               const skipPTag = hasOneChild(cell.children);
               return (
                 <TableHeader
-                  className={cx(css`
-                    * {
-                      font-size: ${theme.fontSize.small};
-                      font-weight: 600;
-                    }
-                    ${widths && `width: ${widths[colIndex]}%`}
-                  `)}
-                  style={{
-                    ...(darkMode && darkModeStyle),
-                  }}
+                  className={cx(
+                    css`
+                      * {
+                        font-size: ${theme.fontSize.small};
+                        font-weight: 600;
+                      }
+                      ${widths && `width: ${widths[colIndex]}%`}
+                    `,
+                    darkMode && darkModeStyle
+                  )}
                   key={`${rowIndex}-${colIndex}`}
                   label={cell.children.map((child, i) => (
                     <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
