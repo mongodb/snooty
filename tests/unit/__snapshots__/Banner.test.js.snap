@@ -25,6 +25,11 @@ exports[`renders a Banner correctly 1`] = `
   line-height: 13px;
 }
 
+.emotion-0 a:hover {
+  text-decoration-color: var(--text-decoration-color);
+  text-underline-offset: 3px;
+}
+
 .emotion-2 {
   position: relative;
   display: -webkit-box;
@@ -139,6 +144,7 @@ exports[`renders a Banner correctly 1`] = `
 <div
     class="emotion-0 emotion-1 emotion-2"
     role="alert"
+    style="--text-decoration-color: #083C90;"
   >
     <svg
       aria-label="Info With Circle Icon"
