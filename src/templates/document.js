@@ -27,7 +27,7 @@ const StyledRightColumn = styled(RightColumn)`
 `;
 
 const Document = ({ children, pageContext: { slug, page, isAssociatedProduct } }) => {
-  const { slugToTitle, title, toctreeOrder } = useSnootyMetadata();
+  const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
 
@@ -37,7 +37,9 @@ const Document = ({ children, pageContext: { slug, page, isAssociatedProduct } }
         <div className="body">
           <Breadcrumbs siteTitle={title} slug={slug} />
           {children}
-          {showPrevNext && <InternalPageNav slug={slug} slugTitleMapping={slugToTitle} toctreeOrder={toctreeOrder} />}
+          {showPrevNext && (
+            <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={toctreeOrder} />
+          )}
         </div>
       </StyledMainColumn>
       <StyledRightColumn>

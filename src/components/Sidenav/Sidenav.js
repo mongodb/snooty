@@ -91,7 +91,7 @@ const translatedFontFamilyStyles = css`
 
 // use eol status to determine side nav styling
 const getTopAndHeight = (topValue, template) => css`
-  ${template === 'landing'
+  ${template === 'landing' || process.env['GATSBY_ENABLE_DARK_MODE'] === 'true'
     ? `
     top: 0px;
     height: calc(100vh);`
@@ -181,7 +181,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const ia = page?.options?.ia;
 
   const template = page?.options?.template;
-  const isLanding = template === 'landing';
+  const hideIaHeader = template === 'landing' || template === 'search';
   const isGuidesLanding = project === 'guides' && template === 'product-landing';
   const isGuidesTemplate = template === 'guide';
 
@@ -248,7 +248,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                 <Border />
                 {ia && (
                   <IA
-                    header={!isLanding && <span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
+                    header={!hideIaHeader ? <span className={cx([titleStyle])}>{formatText(pageTitle)}</span> : null}
                     handleClick={() => {
                       setBack(false);
                       hideMobileSidenav();

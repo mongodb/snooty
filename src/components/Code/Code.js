@@ -7,19 +7,12 @@ import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import Tooltip from '@leafygreen-ui/tooltip';
 import { palette } from '@leafygreen-ui/palette';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
 import { CodeContext } from './code-context';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
-
-const captionStyle = css`
-  padding: 10px;
-  color: ${palette.gray.dark1};
-  font-size: 14px;
-  margin-left: 5px;
-  border-bottom: none;
-`;
 
 const sourceCodeStyle = css`
   display: flex;
@@ -29,10 +22,11 @@ const sourceCodeStyle = css`
 
 const Code = ({
   nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
-  darkMode,
+  darkMode: darkModeProp,
 }) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
+  const { darkMode } = useDarkMode();
   const code = value;
   let language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
   // none should take precedence over language switcher
@@ -91,8 +85,8 @@ const Code = ({
     >
       {captionSpecified && (
         <div>
-          <CaptionContainer>
-            <div css={captionStyle}>{caption}</div>
+          <CaptionContainer style={{ '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
+            <Caption style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}>{caption}</Caption>
           </CaptionContainer>
         </div>
       )}
@@ -101,7 +95,7 @@ const Code = ({
         highlightLines={emphasizeLines}
         language={language}
         languageOptions={languageOptions}
-        darkMode={darkMode}
+        darkMode={darkModeProp ?? darkMode}
         onChange={(selectedOption) => {
           const tabsetName = 'drivers';
           setActiveTab({ name: tabsetName, value: selectedOption.id });
@@ -120,9 +114,18 @@ const Code = ({
 
 const CaptionContainer = styled.div`
   ${borderCodeStyle}
+  border-color: var(--border-color);
   border-bottom: none;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
+`;
+
+const Caption = styled.div`
+  color: var(--color);
+  padding: 10px;
+  font-size: 14px;
+  margin-left: 5px;
+  border-bottom: none;
 `;
 
 Code.propTypes = {

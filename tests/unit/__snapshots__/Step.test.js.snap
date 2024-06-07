@@ -46,10 +46,12 @@ exports[`renders with "connected" styling 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
+  position: relative;
   background-color: #E3FCF7;
   color: #00684A;
   height: 34px;
   width: 34px;
+  z-index: 0;
 }
 
 .emotion-6 {
@@ -95,11 +97,12 @@ exports[`renders with "connected" styling 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-9>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-9:focus,
@@ -112,12 +115,12 @@ exports[`renders with "connected" styling 1`] = `
 }
 
 .emotion-9:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-9:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <div
@@ -146,6 +149,7 @@ exports[`renders with "connected" styling 1`] = `
         <a
           class="emotion-9"
           href="/import-export/#std-label-compass-import-export"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           To learn more, see Import and Export Data
         </a>
@@ -201,10 +205,12 @@ exports[`renders with "connected" styling by default 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
+  position: relative;
   background-color: #E3FCF7;
   color: #00684A;
   height: 34px;
   width: 34px;
+  z-index: 0;
 }
 
 .emotion-6 {
@@ -250,11 +256,12 @@ exports[`renders with "connected" styling by default 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-9>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-9:focus,
@@ -267,12 +274,12 @@ exports[`renders with "connected" styling by default 1`] = `
 }
 
 .emotion-9:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-9:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <div
@@ -301,6 +308,7 @@ exports[`renders with "connected" styling by default 1`] = `
         <a
           class="emotion-9"
           href="/import-export/#std-label-compass-import-export"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           To learn more, see Import and Export Data
         </a>
@@ -345,7 +353,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #333;
+  background-color: #001E2B;
   color: #FFFFFF;
   height: 24px;
   width: 24px;
@@ -378,11 +386,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-9>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-9:focus,
@@ -395,12 +404,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 }
 
 .emotion-9:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-9:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <div
@@ -429,6 +438,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
         <a
           class="emotion-9"
           href="/import-export/#std-label-compass-import-export"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           To learn more, see Import and Export Data
         </a>

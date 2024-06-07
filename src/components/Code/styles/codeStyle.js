@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 
 export const baseCodeStyle = css`
@@ -16,5 +15,6 @@ export const baseCodeStyle = css`
 `;
 
 export const borderCodeStyle = css`
-  border: 1px solid ${palette.gray.light2};
+  border-width: 1px;
+  border-style: solid;
 `;

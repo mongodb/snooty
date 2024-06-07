@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Badge from '@leafygreen-ui/badge';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { Link as LGLink, Subtitle } from '@leafygreen-ui/typography';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
@@ -15,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const ResourceHeader = styled(Subtitle)`
-  color: ${palette.blue.base};
+  color: var(--color);
   word-break: break-all;
 `;
 
@@ -39,6 +40,7 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, ver
   const metadata = useSiteMetadata();
   const { openapi_pages, project } = useSnootyMetadata();
   const resourceLinkUrl = getResourceLinkUrl(metadata, project, tag, operationId, openapi_pages);
+  const { darkMode } = useDarkMode();
 
   const allResourceChanges =
     changes || versions.map((version) => (version.changes ? version.changes.map((change) => change) : null)).flat();
@@ -52,7 +54,7 @@ const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, ver
     <Wrapper data-testid="resource-changes-block">
       <FlexLinkWrapper>
         <LGLink href={resourceLinkUrl} hideExternalIcon>
-          <ResourceHeader>
+          <ResourceHeader style={{ '--color': darkMode ? palette.blue.light1 : palette.blue.base }}>
             {httpMethod} {path}
           </ResourceHeader>
         </LGLink>
