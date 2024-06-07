@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { Body, H2 } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
@@ -43,10 +44,6 @@ const Title = styled.div`
   align-items: end;
   gap: 10px;
 
-  p {
-    color: ${palette.gray.dark1};
-  }
-
   @media ${theme.screenSize.upToMedium} {
     flex-direction: column;
     align-items: start;
@@ -71,6 +68,7 @@ const StyledLoadingSkeleton = styled.div`
 
 const OpenAPIChangelog = () => {
   const { snootyEnv } = useSiteMetadata();
+  const { darkMode } = useDarkMode();
   const { index = {}, changelog = [], changelogResourcesList = [] } = useChangelogData();
 
   const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
@@ -136,7 +134,9 @@ const OpenAPIChangelog = () => {
       <ChangelogHeader>
         <Title>
           <H2 as="h1">API Changelog</H2>
-          <Body>(2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})</Body>
+          <Body style={{ color: darkMode ? palette.gray.light2 : palette.gray.dark1 }}>
+            (2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})
+          </Body>
         </Title>
         <DownloadButton href={downloadChangelogUrl} disabled={!index.runId}>
           Download Full API Changelog

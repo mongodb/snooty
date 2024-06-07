@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.16.14",
+  "version": "0.16.15",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -72,7 +72,7 @@
     "@leafygreen-ui/callout": "^5.0.0",
     "@leafygreen-ui/card": "^6.0.1",
     "@leafygreen-ui/checkbox": "^12.0.8",
-    "@leafygreen-ui/code": "^11.0.0",
+    "@leafygreen-ui/code": "^14.3.3",
     "@leafygreen-ui/combobox": "^6.0.0",
     "@leafygreen-ui/emotion": "^4.0.0",
     "@leafygreen-ui/hooks": "^6.0.1",
@@ -91,7 +91,7 @@
     "@leafygreen-ui/select": "^7.0.0",
     "@leafygreen-ui/side-nav": "^10.0.0",
     "@leafygreen-ui/table": "^6.1.0",
-    "@leafygreen-ui/tabs": "^8.0.0",
+    "@leafygreen-ui/tabs": "^11.2.0",
     "@leafygreen-ui/text-area": "^6.1.0",
     "@leafygreen-ui/text-input": "^10.1.0",
     "@leafygreen-ui/toast": "^6.1.4",

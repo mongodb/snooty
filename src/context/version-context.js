@@ -241,7 +241,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
         gitBranchName === LEGACY_GIT_BRANCH
           ? gitBranchName
           : targetBranch.urlSlug || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
-      const urlTarget = getUrl(target, metadata.project, metadata, repoBranches?.siteBasePrefix, slug);
+      const urlTarget = getUrl(target, metadata.project, repoBranches?.siteBasePrefix, slug);
       navigate(urlTarget);
     },
     [availableVersions, metadata, repoBranches, slug]
