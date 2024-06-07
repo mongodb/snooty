@@ -16,7 +16,7 @@ exports[`Lightbox renders correctly 1`] = `
 }
 
 .emotion-3 {
-  color: #444;
+  color: var(--color);
   font-size: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -40,6 +40,7 @@ exports[`Lightbox renders correctly 1`] = `
       />
       <div
         class="emotion-3 emotion-4"
+        style="--color: #444;"
       >
         click to enlarge
       </div>
