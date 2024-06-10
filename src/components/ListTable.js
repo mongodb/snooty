@@ -7,6 +7,19 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 
+const CUSTOM_THEME_STYLES = {
+  // Need to redefine original styling to avoid undefined values. Needed while custom dark mode row styling exists
+  light: {
+    '--background-color': palette.white,
+    '--zebra-stripe-color': palette.gray.light3,
+  },
+  // Temporary workaround to overwrite certain styling for dark mode due to difficulties with LG Table version upgrade (DOP-3614)
+  dark: {
+    '--background-color': palette.black,
+    '--zebra-stripe-color': palette.gray.dark4,
+  },
+};
+
 const align = (key) => {
   switch (key) {
     case 'left':
@@ -18,7 +31,7 @@ const align = (key) => {
   }
 };
 
-const styleTable = ({ customAlign, customWidth, overrideDarkZebraStripes }) => css`
+const styleTable = ({ customAlign, customWidth, overrideZebraStripes }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
@@ -29,7 +42,7 @@ const styleTable = ({ customAlign, customWidth, overrideDarkZebraStripes }) => c
 
   tbody > tr:nth-of-type(2n) {
     // Need this since we're overriding background color for all rows for dark mode
-    ${overrideDarkZebraStripes && `background-color: ${palette.gray.dark4} !important;`}
+    ${overrideZebraStripes && `background-color: var(--zebra-stripe-color) !important;`}
   }
 `;
 
@@ -42,9 +55,8 @@ const unstyleThead = css`
   }
 `;
 
-// Temporary workaround to overwrite certain styling for dark mode due to difficulties with LG Table version upgrade (DOP-3614)
-const darkModeStyle = css`
-  background-color: ${palette.black};
+const backgroundColorStyle = css`
+  background-color: var(--background-color);
 `;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
@@ -77,8 +89,11 @@ const getReferenceIds = (nodeList) => {
   return results;
 };
 
-const ListTableRow = ({ row = [], stubColumnCount, darkMode = false, ...rest }) => (
-  <Row className={cx(darkMode && darkModeStyle)}>
+const ListTableRow = ({ row = [], stubColumnCount, colorTheme, ...rest }) => (
+  <Row
+    className={cx(backgroundColorStyle)}
+    style={{ '--background-color': CUSTOM_THEME_STYLES[colorTheme]['--background-color'] }}
+  >
     {row.map((cell, colIndex) => {
       const isStub = colIndex <= stubColumnCount - 1;
       const skipPTag = hasOneChild(cell.children);
@@ -95,7 +110,7 @@ const ListTableRow = ({ row = [], stubColumnCount, darkMode = false, ...rest }) 
             vertical-align: top;
 
             /* Apply grey background to stub <th> cells (PD-1216) */
-            ${isStub && `background-clip: padding-box; background-color: ${palette.gray.light3};`}
+            ${isStub && `background-clip: padding-box; background-color: var(--stub-bg-color);`}
 
             * {
               font-size: ${theme.fontSize.small} !important;
@@ -121,6 +136,7 @@ const ListTableRow = ({ row = [], stubColumnCount, darkMode = false, ...rest }) 
               margin-bottom: 0;
             }
           `)}
+          style={{ '--stub-bg-color': CUSTOM_THEME_STYLES[colorTheme]['--zebra-stripe-color'] }}
           isHeader={isStub}
           key={colIndex}
         >
@@ -138,6 +154,7 @@ ListTableRow.propTypes = {
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const { darkMode } = useDarkMode();
+  const colorTheme = darkMode ? 'dark' : 'light';
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
   const bodyRows = children[0].children.slice(headerRowCount);
@@ -172,9 +189,12 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           styleTable({
             customAlign: options?.align,
             customWidth: options?.width,
-            overrideDarkZebraStripes: darkMode && bodyRows.length > 10,
+            overrideZebraStripes: bodyRows.length > 10,
           })
         )}
+        style={{
+          ...CUSTOM_THEME_STYLES[colorTheme],
+        }}
         columns={headerRows.map((row, rowIndex) => (
           <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
             {row.children.map((cell, colIndex) => {
@@ -189,7 +209,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                       }
                       ${widths && `width: ${widths[colIndex]}%`}
                     `,
-                    darkMode && darkModeStyle
+                    backgroundColorStyle
                   )}
                   key={`${rowIndex}-${colIndex}`}
                   label={cell.children.map((child, i) => (
@@ -209,6 +229,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             stubColumnCount={stubColumnCount}
             row={datum?.children?.[0]?.children}
             darkMode={darkMode}
+            colorTheme={colorTheme}
           />
         )}
       </Table>
