@@ -87,7 +87,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
       <div
         css={css`
           margin-left: ${hasChildren || isTocIcon ? '0px' : '21px'};
-          color: ${isActive ? `${palette.green.dark3};` : `${palette.gray.dark3};`};
           scroll-margin-bottom: ${theme.size.xxlarge};
         `}
         ref={tocNodeRef}
