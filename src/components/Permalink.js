@@ -1,28 +1,21 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
-import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
+import { cx, css } from '@leafygreen-ui/emotion';
 import Tooltip from '@leafygreen-ui/tooltip';
+import Icon from '@leafygreen-ui/icon';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import useCopyClipboard from '../hooks/useCopyClipboard';
 import useHashAnchor from '../hooks/use-hash-anchor';
 
-const tooltipStyle = LeafyCSS` 
+const tooltipStyle = css`
   padding: 2px 8px;
   font-size: ${theme.fontSize.xsmall};
 
   > div {
     font-size: ${theme.fontSize.tiny};
   }
-`;
-
-const LinkIcon = styled.img`
-  border-radius: 0 !important;
-  display: initial !important;
-  margin: initial !important;
 `;
 
 const HeaderBuffer = styled.div`
@@ -57,14 +50,13 @@ const Permalink = ({ id, description, buffer }) => {
   return (
     <>
       <a
-        className="headerlink"
+        className={cx('headerlink', headingStyle(copied))}
         ref={setHeadingNode}
-        css={headingStyle(copied)}
         href={`#${id}`}
         title={'Permalink to this ' + description}
         onClick={handleClick}
       >
-        <LinkIcon src={withPrefix('assets/link.svg')} width={10} height={10} />
+        <Icon glyph={'Link'} size={12} fill="#89979B" />
         <Tooltip
           className={cx(tooltipStyle)}
           triggerEvent="click"
