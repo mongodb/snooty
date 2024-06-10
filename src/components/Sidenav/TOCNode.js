@@ -11,7 +11,6 @@ import { VersionContext } from '../../context/version-context';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
-import SyncCloud from '../SyncCloud';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import VersionSelector from './VersionSelector';
 
@@ -109,7 +108,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
           }}
         >
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
-          {isTocIcon && <SyncCloud />}
           {formattedTitle}
           {hasVersions && activeVersions[options.project] && (
             <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
@@ -132,7 +130,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
         {hasChildren && (
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
         )}
-        {isTocIcon && <SyncCloud />}
         {formattedTitle}
         {hasVersions && activeVersions[options.project] && (
           <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
