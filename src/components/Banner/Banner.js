@@ -16,6 +16,10 @@ export const alertMap = {
 
 const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
   ${baseBannerStyle}
+
+  a:hover {
+    text-decoration-color: var(--text-decoration-color);
+  }
 `;
 
 const Banner = ({ nodeData: { children, options }, ...rest }) => {

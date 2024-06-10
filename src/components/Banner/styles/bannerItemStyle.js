@@ -24,12 +24,10 @@ export const baseBannerStyle = css`
   p,
   a {
     font-size: ${theme.fontSize.small};
-    line-height: ${theme.fontSize.small};
   }
 
   a {
-    &: hover {
-      text-decoration-color: var(--text-decoration-color);
+    &:hover {
       text-underline-offset: 3px;
     }
   }
