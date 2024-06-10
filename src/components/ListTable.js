@@ -35,6 +35,8 @@ const styleTable = ({ customAlign, customWidth, overrideZebraStripes }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
+  // Font family was incorrect for certain tables in dark mode, most likely due to outdated component
+  font-family: 'Euclid Circular A', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   table & {
     margin: 0;
