@@ -26,7 +26,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-2 {
-  color: #89979B;
+  color: #889397;
 }
 
 .emotion-3 {

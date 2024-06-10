@@ -2,8 +2,10 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
-import Tooltip from '@leafygreen-ui/tooltip';
 import Icon from '@leafygreen-ui/icon';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { palette } from '@leafygreen-ui/palette';
+import Tooltip from '@leafygreen-ui/tooltip';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import useCopyClipboard from '../hooks/useCopyClipboard';
@@ -35,6 +37,7 @@ const headingStyle = (copied) => css`
 const Permalink = ({ id, description, buffer }) => {
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
+  const { darkMode } = useDarkMode();
   const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
   const bufferSpace = buffer || `-${theme.header.navbarScrollOffset}`;
 
@@ -56,7 +59,7 @@ const Permalink = ({ id, description, buffer }) => {
         title={'Permalink to this ' + description}
         onClick={handleClick}
       >
-        <Icon glyph={'Link'} size={12} fill="#89979B" />
+        <Icon glyph={'Link'} size={12} fill={darkMode ? palette.gray.light1 : palette.gray.base} />
         <Tooltip
           className={cx(tooltipStyle)}
           triggerEvent="click"
