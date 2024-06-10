@@ -46,7 +46,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
     <StyledContainer
       style={{
         '--arrow-color': darkMode ? palette.gray.light2 : palette.black,
-        '--underline-color': darkMode ? '#5C6C75' : palette.gray.light2,
+        '--underline-color': darkMode ? palette.gray.dark1 : palette.gray.light2,
       }}
     >
       {prevSlug && (
