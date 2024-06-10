@@ -8,17 +8,8 @@ import Step from './Step';
 
 const StyledProcedure = styled('div')`
   margin-top: ${theme.size.default};
-  ${({ darkMode }) =>
-    darkMode
-      ? `
-        background-color: ${palette.black};
-        color: ${palette.gray.light2};
-  `
-      : `
-        background-color: initial;
-        color: initial;
-      `}
-
+  background-color: var(--background-color);
+  color: var(--color);
   ${({ procedureStyle }) =>
     procedureStyle === 'connected' &&
     `
@@ -63,7 +54,13 @@ const Procedure = ({ nodeData: { children, options }, ...rest }) => {
   const { darkMode } = useDarkMode();
 
   return (
-    <StyledProcedure procedureStyle={style} darkMode={darkMode}>
+    <StyledProcedure
+      procedureStyle={style}
+      style={{
+        '--background-color': darkMode ? palette.black : 'initial',
+        '--color': darkMode ? palette.gray.light2 : 'initial',
+      }}
+    >
       {steps.map((child, i) => (
         <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} darkMode={darkMode} />
       ))}

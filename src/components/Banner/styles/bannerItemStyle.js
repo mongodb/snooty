@@ -24,6 +24,11 @@ export const baseBannerStyle = css`
   p,
   a {
     font-size: ${theme.fontSize.small};
-    line-height: ${theme.fontSize.small};
+  }
+
+  a {
+    &:hover {
+      text-underline-offset: 3px;
+    }
   }
 `;
