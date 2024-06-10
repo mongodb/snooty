@@ -40,9 +40,15 @@ const styleTable = ({ customAlign, customWidth, overrideZebraStripes }) => css`
     margin: 0;
   }
 
-  tbody > tr:nth-of-type(2n) {
-    // Need this since we're overriding background color for all rows for dark mode
-    ${overrideZebraStripes && `background-color: var(--zebra-stripe-color) !important;`}
+  tbody > tr:nth-of-type(even) {
+    // Overriding bg color for dark mode rows prevents zebra striping. Adding this rule to restore zebra striping
+    ${overrideZebraStripes && `background-color: var(--zebra-stripe-color);`}
+  }
+
+  // This CSS target is the same one LG uses to force one of their styles. Use the same one to prevent it from overriding
+  // our styles https://github.com/mongodb/leafygreen-ui/blob/bc02626ea8779407b56a481a989e6b0f0bcd624c/packages/table/src/Row.tsx#L74
+  tbody > tr:nth-of-type(odd) > th {
+    ${overrideZebraStripes && `background-color: inherit;`}
   }
 `;
 
@@ -136,7 +142,7 @@ const ListTableRow = ({ row = [], stubColumnCount, colorTheme, ...rest }) => (
               margin-bottom: 0;
             }
           `)}
-          style={{ '--stub-bg-color': CUSTOM_THEME_STYLES[colorTheme]['--zebra-stripe-color'] }}
+          style={{ ...(isStub && { '--stub-bg-color': CUSTOM_THEME_STYLES[colorTheme]['--zebra-stripe-color'] }) }}
           isHeader={isStub}
           key={colIndex}
         >
