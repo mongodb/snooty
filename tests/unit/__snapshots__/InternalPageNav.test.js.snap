@@ -37,7 +37,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  color: #001E2B;
+  color: var(--arrow-color);
 }
 
 .emotion-5 {
@@ -79,10 +79,12 @@ exports[`renders a page with next and previous links correctly 1`] = `
 
 .emotion-6 {
   line-height: 28px;
+  --hover-text-decoration-color: var(--underline-color)!important;
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--arrow-color: #001E2B; --underline-color: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
@@ -159,7 +161,7 @@ exports[`renders a page with no next link correctly 1`] = `
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  color: #001E2B;
+  color: var(--arrow-color);
 }
 
 .emotion-5 {
@@ -201,10 +203,12 @@ exports[`renders a page with no next link correctly 1`] = `
 
 .emotion-6 {
   line-height: 28px;
+  --hover-text-decoration-color: var(--underline-color)!important;
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--arrow-color: #001E2B; --underline-color: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
@@ -298,6 +302,7 @@ exports[`renders a page with no previous link correctly 1`] = `
 
 .emotion-5 {
   line-height: 28px;
+  --hover-text-decoration-color: var(--underline-color)!important;
 }
 
 .emotion-6 {
@@ -305,11 +310,12 @@ exports[`renders a page with no previous link correctly 1`] = `
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  color: #001E2B;
+  color: var(--arrow-color);
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--arrow-color: #001E2B; --underline-color: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"

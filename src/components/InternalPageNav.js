@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import { getPageTitle } from '../utils/get-page-title';
 import Link from './Link';
@@ -23,11 +24,12 @@ const StyledContainer = styled.div`
 const arrowStyling = css`
   line-height: 28px;
   align-content: center;
-  color: ${palette.black};
+  color: var(--arrow-color);
 `;
 
 const titleSpanStyling = css`
   line-height: 28px;
+  --hover-text-decoration-color: var(--underline-color) !important;
 `;
 
 const LinkContentContainer = styled.div`
@@ -36,11 +38,17 @@ const LinkContentContainer = styled.div`
 `;
 
 const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
+  const { darkMode } = useDarkMode();
   const slugIndex = toctreeOrder.indexOf(slug);
   const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
   const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
   return (
-    <StyledContainer>
+    <StyledContainer
+      style={{
+        '--arrow-color': darkMode ? palette.gray.light2 : palette.black,
+        '--underline-color': darkMode ? '#5C6C75' : palette.gray.light2,
+      }}
+    >
       {prevSlug && (
         <React.Fragment>
           <LinkContentContainer>
