@@ -22,12 +22,14 @@ exports[`renders a Banner correctly 1`] = `
 .emotion-0 p,
 .emotion-0 a {
   font-size: 13px;
-  line-height: 13px;
+}
+
+.emotion-0 a:hover {
+  text-underline-offset: 3px;
 }
 
 .emotion-0 a:hover {
   text-decoration-color: var(--text-decoration-color);
-  text-underline-offset: 3px;
 }
 
 .emotion-2 {
