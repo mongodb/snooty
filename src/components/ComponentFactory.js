@@ -22,7 +22,6 @@ import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionList/DefinitionListItem';
 import DeprecatedVersionSelector from './DeprecatedVersionSelector';
 import Describe from './Describe';
-import DriversIndexTiles from './DriversIndexTiles';
 import Emphasis from './Emphasis';
 import Extract from './Extract';
 import Field from './FieldList/Field';
@@ -151,7 +150,6 @@ const componentMap = {
   deprecated: VersionModified,
   'deprecated-version-selector': DeprecatedVersionSelector,
   describe: Describe,
-  'drivers-index-tiles': DriversIndexTiles, // deprecated.
   emphasis: Emphasis,
   extract: Extract,
   field: Field,
