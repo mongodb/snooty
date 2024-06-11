@@ -1,10 +1,11 @@
 import React from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { withPrefix } from 'gatsby';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
+import { getSuitableIcon } from '../../utils/get-suitable-icon';
 
 const ulStyling = css`
   display: grid;
@@ -62,12 +63,14 @@ const liStyling = css`
 `;
 
 const IALinkedData = ({ linkedData }) => {
+  const { darkMode } = useDarkMode();
   return (
     <ul className={cx(ulStyling)}>
-      {linkedData.map(({ headline, url, icon, 'icon-alt': iconAlt }, index) => {
+      {linkedData.map(({ headline, url, icon, 'icon-alt': iconAlt, 'icon-dark': iconDark }, index) => {
+        const iconSrc = getSuitableIcon(darkMode, iconDark, icon);
         return (
           <SideNavItem key={index} className={cx(liStyling)} as={Link} to={url}>
-            <img height={16} width={16} src={withPrefix(icon)} alt={iconAlt} />
+            <img height={16} width={16} src={iconSrc} alt={iconAlt} />
             <span>{headline}</span>
           </SideNavItem>
         );
