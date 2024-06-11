@@ -104,6 +104,60 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
           </ul>
         </div>
       )}
+      {isPageTitle && (
+        <div className="sl_opaque">
+          Language Selector
+          <ul>
+            <li>
+              <a className="sl_opaque" href="https://www.mongodb.com/docs/">
+                English
+              </a>
+            </li>
+            <li>
+              <a className="sl_opaque" href="https://www.mongodb.com/pt-br/docs/">
+                Português
+              </a>
+            </li>
+            <li>
+              <a className="sl_opaque" href="https://www.mongodb.com/ko-kr/docs/">
+                한국어
+              </a>
+            </li>
+            <li>
+              <a className="sl_opaque" href="https://www.mongodb.com/zh-cn/docs/">
+                简体中文
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
+      {isPageTitle && (
+        <div>
+          Language Selector
+          <ul>
+            <li>
+              <a className="sl_opaque" href="https://www.mongodb.com/docs/">
+                English
+              </a>
+            </li>
+            <li>
+              <a className="sl_opaque" href="https://www.mongodb.com/pt-br/docs/">
+                Português
+              </a>
+            </li>
+            <li>
+              <a className="sl_opaque" href="https://www.mongodb.com/ko-kr/docs/">
+                한국어
+              </a>
+            </li>
+            <li>
+              <a className="sl_opaque" href="https://www.mongodb.com/zh-cn/docs/">
+                简体中文
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   );
 };
