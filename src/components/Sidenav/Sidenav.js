@@ -160,6 +160,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
 
   const { darkMode } = useDarkMode();
 
+  const borderBottomStyle = darkMode ? palette.gray.dark2 : palette.gray.light2;
+
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(eol);
 
@@ -241,7 +243,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
               <NavTopContainer style={{ '--background-color': darkMode ? palette.gray.dark4 : palette.gray.light3 }}>
                 <ArtificialPadding />
                 <DocsHomeButton darkMode={darkMode} />
-                <Border style={{ '--border-bottom-color': darkMode ? palette.gray.dark2 : palette.gray.light2 }} />
+                <Border style={{ '--border-bottom-color': borderBottomStyle }} />
                 {ia && (
                   <IA
                     header={!hideIaHeader ? <span className={cx([titleStyle])}>{formatText(pageTitle)}</span> : null}
@@ -257,7 +259,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                     css={css`
                       margin-bottom: 0;
                     `}
-                    style={{ '--border-bottom-color': darkMode ? palette.gray.dark2 : palette.gray.light2 }}
+                    style={{ '--border-bottom-color': borderBottomStyle }}
                   />
                 )}
               </NavTopContainer>
