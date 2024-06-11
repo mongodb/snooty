@@ -73,6 +73,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   width: 100%;
   z-index: 0;
   margin: 24px 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 
 table .emotion-4 {
@@ -97,6 +98,7 @@ table .emotion-4 {
   border-bottom: 3px solid;
   border-color: #E8EDEB;
   width: 5%;
+  background-color: var(--background-color);
 }
 
 .emotion-6 * {
@@ -135,6 +137,7 @@ table .emotion-4 {
   border-bottom: 3px solid;
   border-color: #E8EDEB;
   width: 10%;
+  background-color: var(--background-color);
 }
 
 .emotion-9 * {
@@ -154,6 +157,7 @@ table .emotion-4 {
   border-bottom: 3px solid;
   border-color: #E8EDEB;
   width: 15%;
+  background-color: var(--background-color);
 }
 
 .emotion-12 * {
@@ -173,6 +177,7 @@ table .emotion-4 {
   border-bottom: 3px solid;
   border-color: #E8EDEB;
   width: 20%;
+  background-color: var(--background-color);
 }
 
 .emotion-15 * {
@@ -192,6 +197,7 @@ table .emotion-4 {
   border-bottom: 3px solid;
   border-color: #E8EDEB;
   width: 30%;
+  background-color: var(--background-color);
 }
 
 .emotion-18 * {
@@ -205,6 +211,7 @@ table .emotion-4 {
   z-index: 1;
   background-color: #FFFFFF;
   color: #1C2D38;
+  background-color: var(--background-color);
 }
 
 .emotion-24>:is(td, th)>[data-leafygreen-ui="td-inner-div"] {
@@ -336,6 +343,7 @@ table .emotion-4 {
         cellpadding="0"
         cellspacing="0"
         class="emotion-4"
+        style="--background-color: #FFFFFF; --zebra-stripe-color: #F9FBFA;"
       >
         <thead>
           <tr
@@ -433,6 +441,7 @@ table .emotion-4 {
             aria-disabled="false"
             class="emotion-24"
             role="row"
+            style="--background-color: #FFFFFF;"
           >
             <td
               class="emotion-25"
@@ -599,6 +608,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   width: 100%;
   z-index: 0;
   margin: 24px 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 
 table .emotion-4 {
@@ -616,6 +626,7 @@ table .emotion-4 {
   line-height: 20px;
   border-bottom: 3px solid;
   border-color: #E8EDEB;
+  background-color: var(--background-color);
 }
 
 .emotion-5 * {
@@ -648,6 +659,7 @@ table .emotion-4 {
   z-index: 1;
   background-color: #FFFFFF;
   color: #1C2D38;
+  background-color: var(--background-color);
 }
 
 .emotion-23>:is(td, th)>[data-leafygreen-ui="td-inner-div"] {
@@ -720,7 +732,7 @@ table .emotion-4 {
   vertical-align: top;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  background-color: #F9FBFA;
+  background-color: var(--stub-bg-color);
 }
 
 .emotion-24 * {
@@ -829,6 +841,7 @@ table .emotion-4 {
         cellpadding="0"
         cellspacing="0"
         class="emotion-4"
+        style="--background-color: #FFFFFF; --zebra-stripe-color: #F9FBFA;"
       >
         <thead>
           <tr
@@ -938,11 +951,13 @@ table .emotion-4 {
             aria-disabled="false"
             class="emotion-23"
             role="row"
+            style="--background-color: #FFFFFF;"
           >
             <th
               class="emotion-24"
               role="rowheader"
               scope="row"
+              style="--stub-bg-color: #F9FBFA;"
             >
               <div
                 class="emotion-25"
@@ -1030,11 +1045,13 @@ table .emotion-4 {
             aria-disabled="false"
             class="emotion-23"
             role="row"
+            style="--background-color: #FFFFFF;"
           >
             <th
               class="emotion-24"
               role="rowheader"
               scope="row"
+              style="--stub-bg-color: #F9FBFA;"
             >
               <div
                 class="emotion-25"
@@ -1122,11 +1139,13 @@ table .emotion-4 {
             aria-disabled="false"
             class="emotion-23"
             role="row"
+            style="--background-color: #FFFFFF;"
           >
             <th
               class="emotion-24"
               role="rowheader"
               scope="row"
+              style="--stub-bg-color: #F9FBFA;"
             >
               <div
                 class="emotion-25"
@@ -1214,11 +1233,13 @@ table .emotion-4 {
             aria-disabled="false"
             class="emotion-23"
             role="row"
+            style="--background-color: #FFFFFF;"
           >
             <th
               class="emotion-24"
               role="rowheader"
               scope="row"
+              style="--stub-bg-color: #F9FBFA;"
             >
               <div
                 class="emotion-25"
@@ -1306,11 +1327,13 @@ table .emotion-4 {
             aria-disabled="false"
             class="emotion-23"
             role="row"
+            style="--background-color: #FFFFFF;"
           >
             <th
               class="emotion-24"
               role="rowheader"
               scope="row"
+              style="--stub-bg-color: #F9FBFA;"
             >
               <div
                 class="emotion-25"
