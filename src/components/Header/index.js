@@ -25,15 +25,17 @@ const Header = ({ sidenav, eol, template }) => {
       <SiteBanner />
       <>
         {!eol && (
-          <UnifiedNav
-            fullWidth="true"
-            position="relative"
-            property={{ name: unifiedNavProperty }}
-            showLanguageSelector={true}
-            onSelectLocale={onSelectLocale}
-            locale={getCurrLocale()}
-            enabledLocales={enabledLocales}
-          />
+          <div className="sl_opaque" style={{ position: 'relative' }}>
+            <UnifiedNav
+              fullWidth="true"
+              position="relative"
+              property={{ name: unifiedNavProperty }}
+              showLanguageSelector={true}
+              onSelectLocale={onSelectLocale}
+              locale={getCurrLocale()}
+              enabledLocales={enabledLocales}
+            />
+          </div>
         )}
         {sidenav && <SidenavMobileMenuDropdown />}
       </>
