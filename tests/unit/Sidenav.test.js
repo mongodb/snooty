@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
 import { mockLocation } from '../utils/mock-location';
-import { Sidenav, SidenavContextProvider, SidenavMobileMenuButton } from '../../src/components/Sidenav';
+import { Sidenav, SidenavContextProvider } from '../../src/components/Sidenav';
 import { theme } from '../../src/theme/docsTheme';
 import { tick, setMatchMedia, setMobile } from '../utils';
 
@@ -24,7 +24,6 @@ useStaticQuery.mockImplementation(() => ({
 const mountSidenav = async () => {
   const wrapper = render(
     <SidenavContextProvider>
-      <SidenavMobileMenuButton />
       <Sidenav page={{}} slug={''} toctree={{ children: [] }} />
     </SidenavContextProvider>
   );
