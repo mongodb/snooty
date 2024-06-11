@@ -24,6 +24,8 @@ exports[`renders correctly 1`] = `
 
 .emotion-2 {
   color: #889397;
+  vertical-align: middle;
+  margin-top: -2px;
 }
 
 .emotion-3 {
@@ -94,6 +96,8 @@ exports[`renders correctly in dark mode 1`] = `
 
 .emotion-2 {
   color: #C1C7C6;
+  vertical-align: middle;
+  margin-top: -2px;
 }
 
 .emotion-3 {

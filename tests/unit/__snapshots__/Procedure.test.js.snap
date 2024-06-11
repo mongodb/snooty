@@ -332,6 +332,8 @@ exports[`renders steps nested in include nodes 1`] = `
 
 .emotion-11 {
   color: #889397;
+  vertical-align: middle;
+  margin-top: -2px;
 }
 
 .emotion-12 {

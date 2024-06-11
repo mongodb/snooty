@@ -48,6 +48,8 @@ a .emotion-0 {
 
 .emotion-2 {
   color: #889397;
+  vertical-align: middle;
+  margin-top: -2px;
 }
 
 .emotion-3 {

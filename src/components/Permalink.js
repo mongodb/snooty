@@ -34,6 +34,11 @@ const headingStyle = (copied) => css`
   visibility: hidden;
 `;
 
+const iconStyling = css`
+  vertical-align: middle;
+  margin-top: -2px;
+`;
+
 const Permalink = ({ id, description, buffer }) => {
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
@@ -59,7 +64,12 @@ const Permalink = ({ id, description, buffer }) => {
         title={'Permalink to this ' + description}
         onClick={handleClick}
       >
-        <Icon glyph={'Link'} size={12} fill={darkMode ? palette.gray.light1 : palette.gray.base} />
+        <Icon
+          className={cx(iconStyling)}
+          glyph={'Link'}
+          size={12}
+          fill={darkMode ? palette.gray.light1 : palette.gray.base}
+        />
         <Tooltip
           className={cx(tooltipStyle)}
           triggerEvent="click"
