@@ -60,6 +60,7 @@ const LightboxWrapper = styled('div')`
   margin-top: ${theme.size.medium};
   margin-bottom: ${theme.size.medium};
   display: block;
+  max-width: 100%;
 `;
 
 const Lightbox = ({ nodeData, ...rest }) => {
@@ -74,7 +75,7 @@ const Lightbox = ({ nodeData, ...rest }) => {
     <React.Fragment>
       <LightboxWrapper figwidth={figureWidth}>
         <div onClick={openModal} role="button" tabIndex="-1">
-          <Image nodeData={nodeData} />
+          <Image nodeData={nodeData} {...rest} />
           <LightboxCaption
             style={{
               '--color': darkMode ? palette.gray.light2 : '#444',
