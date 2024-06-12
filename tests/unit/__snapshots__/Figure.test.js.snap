@@ -8,14 +8,9 @@ exports[`renders border correctly when specified as an option 1`] = `
   margin-bottom: 24px;
 }
 
-.emotion-1 img,
-.emotion-1>img {
+.emotion-1 {
   max-width: 100%;
   height: auto;
-}
-
-.emotion-1 img,
-.emotion-1>img {
   border-radius: 16px;
   border: 0.5px solid var(--border-color);
 }
@@ -42,8 +37,7 @@ exports[`renders correctly 1`] = `
   margin-bottom: 24px;
 }
 
-.emotion-1 img,
-.emotion-1>img {
+.emotion-1 {
   max-width: 100%;
   height: auto;
 }
@@ -75,8 +69,7 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
   max-width: 100%;
 }
 
-.emotion-2 img,
-.emotion-2>img {
+.emotion-2 {
   max-width: 100%;
   height: auto;
 }

@@ -12,18 +12,24 @@ import { removeLeadingSlash } from '../utils/remove-leading-slash';
 import { theme } from '../theme/docsTheme';
 
 const defaultImageStyling = css`
-  img,
+  max-width: 100%;
+  height: auto;
+`;
+
+const defaultContainerStyling = css`
   > img {
-    max-width: 100%;
-    height: auto;
+    ${defaultImageStyling}
   }
 `;
 
 const borderStyling = css`
-  img,
+  border-radius: ${theme.size.default};
+  border: 0.5px solid var(--border-color);
+`;
+
+const borderContainerStyling = css`
   > img {
-    border-radius: ${theme.size.default};
-    border: 0.5px solid var(--border-color);
+    ${borderStyling}
   }
 `;
 const gatsbyContainerStyle = css`
@@ -68,8 +74,8 @@ function getImageProps({
       directiveClass,
       customAlign,
       className,
-      defaultImageStyling,
-      applyBorder ? borderStyling : ''
+      defaultContainerStyling,
+      applyBorder ? borderContainerStyling : ''
     );
     imageProps['imgStyle'] = {
       '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light1,
