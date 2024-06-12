@@ -13,13 +13,13 @@ const communityPillVariants = {
   green: Variant.Green,
 };
 
-const CommunityPillLink = ({ nodeData, variant, text = 'community built' }) => {
+const CommunityPillLink = ({ nodeData, variant = 'lightGray', text = 'community built' }) => {
   const { argument, options: { url } = {} } = nodeData || {};
 
   return (
     <div>
       {nodeData && argument && url && <Link to={url}>{getPlaintext(argument)}</Link>}
-      <Badge variant={communityPillVariants[variant] || Variant.LightGray}>{text}</Badge>
+      <Badge variant={communityPillVariants[variant]}>{text}</Badge>
     </div>
   );
 };
