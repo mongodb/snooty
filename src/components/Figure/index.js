@@ -16,7 +16,7 @@ const Figure = ({ ...props }) => {
   const { nodeData, ...rest } = props;
 
   if (isLightboxSize || (nodeData.options && nodeData.options.lightbox)) {
-    return <Lightbox nodeData={nodeData} />;
+    return <Lightbox {...props} nodeData={nodeData} />;
   }
 
   return (
@@ -29,7 +29,7 @@ const Figure = ({ ...props }) => {
       `}
       style={{ width: getNestedValue(['options', 'figwidth'], nodeData) || 'auto' }}
     >
-      <Image nodeData={nodeData} />
+      <Image nodeData={nodeData} {...props} />
       <CaptionLegend {...rest} nodeData={nodeData} />
     </div>
   );
