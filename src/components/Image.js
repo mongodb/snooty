@@ -7,16 +7,24 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ImageContext from '../context/image-context';
 import { getNestedValue } from '../utils/get-nested-value';
+import { getPageSlug } from '../utils/get-page-slug';
 import { removeLeadingSlash } from '../utils/remove-leading-slash';
 import { theme } from '../theme/docsTheme';
 
-const defaultStyling = css`
-  max-width: 100%;
-  height: auto;
+const defaultImageStyling = css`
+  img,
+  > img {
+    max-width: 100%;
+    height: auto;
+  }
 `;
+
 const borderStyling = css`
-  border: 0.5px solid ${palette.gray.light1};
-  border-radius: ${theme.size.default};
+  img,
+  > img {
+    border-radius: ${theme.size.default};
+    border: 0.5px solid var(--border-color);
+  }
 `;
 const gatsbyContainerStyle = css`
   height: max-content;
@@ -26,10 +34,13 @@ const gatsbyContainerStyle = css`
 function getImageProps({
   altText,
   userOptionStyle,
+  slug,
+  sectionDepth,
   width,
   height,
   gatsbyImage,
   hasBorder,
+  darkMode,
   customAlign,
   className,
   directiveClass,
@@ -48,32 +59,40 @@ function getImageProps({
     imageProps['height'] = height;
   }
 
+  const applyBorder = hasBorder || (darkMode && getPageSlug(slug) !== '/' && sectionDepth > 1);
+
   if (gatsbyImage && loading === 'lazy') {
     imageProps['image'] = gatsbyImage;
-    imageProps['imgClassName'] = cx(defaultStyling);
     imageProps['className'] = cx(
       gatsbyContainerStyle,
       directiveClass,
       customAlign,
       className,
-      hasBorder ? borderStyling : ''
+      defaultImageStyling,
+      applyBorder ? borderStyling : ''
     );
+    imageProps['imgStyle'] = {
+      '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light1,
+    };
   } else {
     imageProps['src'] = imgSrc;
     imageProps['srcSet'] = srcSet;
     imageProps['className'] = cx(
-      defaultStyling,
-      hasBorder ? borderStyling : '',
+      defaultImageStyling,
+      applyBorder ? borderStyling : '',
       directiveClass,
       customAlign,
       className
     );
+    imageProps['style'] = {
+      '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light1,
+    };
   }
 
   return imageProps;
 }
 
-const Image = ({ nodeData, className }) => {
+const Image = ({ nodeData, className, slug, sectionDepth }) => {
   const scale = (parseInt(getNestedValue(['options', 'scale'], nodeData), 10) || 100) / 100;
   const widthOption = getNestedValue(['options', 'width'], nodeData);
   let height = getNestedValue(['options', 'height'], nodeData);
@@ -115,7 +134,10 @@ const Image = ({ nodeData, className }) => {
     width,
     height,
     gatsbyImage,
-    hasBorder: hasBorder || darkMode,
+    slug,
+    sectionDepth,
+    hasBorder,
+    darkMode,
     customAlign,
     className,
     directiveClass,
