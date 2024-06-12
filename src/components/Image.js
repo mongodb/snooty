@@ -16,12 +16,6 @@ const defaultImageStyling = css`
   height: auto;
 `;
 
-const defaultContainerStyling = css`
-  > img {
-    ${defaultImageStyling}
-  }
-`;
-
 const borderStyling = css`
   border-radius: ${theme.size.default};
   border: 0.5px solid var(--border-color);
@@ -32,9 +26,13 @@ const borderContainerStyling = css`
     ${borderStyling}
   }
 `;
+
 const gatsbyContainerStyle = css`
   height: max-content;
   overflow: hidden;
+  > img {
+    ${defaultImageStyling}
+  }
 `;
 
 function getImageProps({
@@ -66,6 +64,7 @@ function getImageProps({
   }
 
   const applyBorder = hasBorder || (darkMode && getPageSlug(slug) !== '/' && sectionDepth > 1);
+  const borderColor = darkMode && hasBorder ? palette.gray.dark2 : darkMode ? 'transparent' : palette.gray.light1;
 
   if (gatsbyImage && loading === 'lazy') {
     imageProps['image'] = gatsbyImage;
@@ -74,11 +73,10 @@ function getImageProps({
       directiveClass,
       customAlign,
       className,
-      defaultContainerStyling,
       applyBorder ? borderContainerStyling : ''
     );
     imageProps['imgStyle'] = {
-      '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light1,
+      '--border-color': borderColor,
     };
   } else {
     imageProps['src'] = imgSrc;
@@ -91,7 +89,7 @@ function getImageProps({
       className
     );
     imageProps['style'] = {
-      '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light1,
+      '--border-color': borderColor,
     };
   }
 
