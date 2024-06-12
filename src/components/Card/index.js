@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix, navigate } from 'gatsby';
+import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import LeafyGreenCard from '@leafygreen-ui/card';
@@ -12,6 +12,7 @@ import ConditionalWrapper from '../ConditionalWrapper';
 import Link from '../Link';
 import Tag from '../Tag';
 import { isRelativeUrl } from '../../utils/is-relative-url';
+import { getSuitableIcon } from '../../utils/get-suitable-icon';
 
 const cardBaseStyles = css`
   display: flex;
@@ -157,15 +158,7 @@ const Card = ({
     isLanding && !isLargeIconStyle ? landingStyles : '', // must come after other styles to override
   ];
 
-  let iconSrc;
-
-  if (icon) {
-    const isPath = icon.includes('/');
-    const getIcon = `${icon}${darkMode ? '_inverse' : ''}`;
-    const imageUrl = `https://webimages.mongodb.com/_com_assets/icons/${getIcon}.svg`;
-
-    iconSrc = isPath ? (darkMode && iconDark ? withPrefix(iconDark) : withPrefix(icon)) : imageUrl;
-  }
+  const iconSrc = getSuitableIcon(icon, iconDark, darkMode);
 
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
