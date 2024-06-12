@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
-import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
+import styled from '@emotion/styled';
+import { cx, css } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
@@ -18,16 +18,21 @@ import VersionSelector from './VersionSelector';
 // with recursive depth
 const BASE_NODE_LEVEL = 1;
 
-const caretStyle = LeafyCSS`
+const caretStyle = css`
   margin-top: 3px;
   margin-right: 5px;
   min-width: 16px;
 `;
 
-const overwriteLinkStyle = LeafyCSS`
+const overwriteLinkStyle = css`
   span {
     display: flex;
   }
+`;
+
+const FormatTitle = styled.div`
+  margin-left: var(--margin-left);
+  scroll-margin-bottom: ${theme.size.xxlarge};
 `;
 
 const scrollBehavior = { block: 'nearest', behavior: 'smooth' };
@@ -84,16 +89,9 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     };
     // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
     const formattedTitle = (
-      <div
-        css={css`
-          margin-left: ${hasChildren || isTocIcon ? '0px' : '21px'};
-          color: ${isActive ? `${palette.green.dark3};` : `${palette.gray.dark3};`};
-          scroll-margin-bottom: ${theme.size.xxlarge};
-        `}
-        ref={tocNodeRef}
-      >
+      <FormatTitle ref={tocNodeRef} style={{ '--margin-left': hasChildren || isTocIcon ? '0px' : '21px' }}>
         {formatText(title, formatTextOptions)}
-      </div>
+      </FormatTitle>
     );
 
     const iconType = isOpen ? 'CaretDown' : 'CaretRight';
