@@ -13,18 +13,6 @@ const communityPillVariants = {
   green: Variant.Green,
 };
 
-/**
- * CommunityPillLink component
- *
- * @param {Object} param0 - The parameters object
- * @param {Object} param0.nodeData - Data for the node
- * @param {String} param0.nodeData.argument - Text to display for Link
- * @param {Object} [param0.nodeData.options] - Options for the node data
- * @param {string} [param0.nodeData.options.url] - URL in the options
- * @param {string} param0.variant - Variant of the community pill link
- * @param {string} [param0.text='community built'] - Text to display, defaults to 'community built'
- * @returns {JSX.Element} The rendered CommunityPillLink component
- */
 const CommunityPillLink = ({ nodeData, variant, text = 'community built' }) => {
   const { argument, options: { url } = {} } = nodeData || {};
 
