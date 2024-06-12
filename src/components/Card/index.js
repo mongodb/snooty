@@ -158,7 +158,7 @@ const Card = ({
     isLanding && !isLargeIconStyle ? landingStyles : '', // must come after other styles to override
   ];
 
-  let iconSrc = getSuitableIcon(darkMode, iconDark, icon);
+  const iconSrc = getSuitableIcon(icon, iconDark, darkMode);
 
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
