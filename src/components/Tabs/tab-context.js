@@ -12,12 +12,15 @@ import IconCpp from '../icons/Cpp';
 import IconCsharp from '../icons/Csharp';
 import IconGo from '../icons/Go';
 import IconJava from '../icons/Java';
+import IconJavaDark from '../icons/JavaDark';
 import IconKotlin from '../icons/Kotlin';
 import IconNode from '../icons/Node';
+import IconNodeDark from '../icons/NodeDark';
 import IconPHP from '../icons/Php';
 import IconPython from '../icons/Python';
 import IconRuby from '../icons/Ruby';
 import IconRust from '../icons/Rust';
+import IconRustDark from '../icons/RustDark';
 import IconScala from '../icons/Scala';
 import IconShell from '../icons/Shell';
 import IconSwift from '../icons/Swift';
@@ -61,9 +64,42 @@ const DRIVER_ICON_MAP = {
   typescript: IconTypescript,
 };
 
+const DRIVER_ICON_MAP_DARK = {
+  c: IconC,
+  compass: IconCompass,
+  cpp: IconCpp,
+  'cpp-sdk': IconCpp,
+  csharp: IconCsharp,
+  dart: IconDart,
+  go: IconGo,
+  java: IconJavaDark,
+  'java-sync': IconJavaDark,
+  'java-async': IconJavaDark,
+  javascript: IconJavascript,
+  kotlin: IconKotlin,
+  'java-kotlin': IconKotlin,
+  'kotlin-coroutine': IconKotlin,
+  'kotlin-sync': IconKotlin,
+  nodejs: IconNodeDark,
+  objectivec: IconObjectiveC,
+  php: IconPHP,
+  python: IconPython,
+  ruby: IconRuby,
+  rust: IconRustDark,
+  'rust-sync': IconRustDark,
+  'rust-async': IconRustDark,
+  scala: IconScala,
+  shell: IconShell,
+  swift: IconSwift,
+  'swift-async': IconSwift,
+  'swift-sync': IconSwift,
+  typescript: IconTypescript,
+};
+
 const defaultContextValue = {
   activeTabs: {},
   driverIconMap: DRIVER_ICON_MAP,
+  driverIconMapDark: DRIVER_ICON_MAP_DARK,
   selectors: {},
   setActiveTab: () => {},
 };
@@ -134,7 +170,15 @@ const TabProvider = ({ children, selectors = {} }) => {
   }, [activeTabs]);
 
   return (
-    <TabContext.Provider value={{ activeTabs, driverIconMap: DRIVER_ICON_MAP, selectors, setActiveTab }}>
+    <TabContext.Provider
+      value={{
+        activeTabs,
+        driverIconMap: DRIVER_ICON_MAP,
+        driverIconMapDark: DRIVER_ICON_MAP_DARK,
+        selectors,
+        setActiveTab,
+      }}
+    >
       {children}
     </TabContext.Provider>
   );
