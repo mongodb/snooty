@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - "main"
-      - "skunk-upload-lighthouse"
   pull_request:
     types: ["opened", "synchronize"]
 
@@ -46,7 +45,7 @@ jobs:
           lhci collect --additive --config=.desktop-lighthouserc.js
           lhci upload --target=filesystem --outputDir=./lhci
       - name: Upload Lighthouse to MongoDB
-        uses: mongodb/docs-worker-actions/upload-lighthouse@skunk-upload-lighthouse
+        uses: mongodb/docs-worker-actions/upload-lighthouse@main
         env:
           PROJECT_TO_BUILD: ${{ matrix.project }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
