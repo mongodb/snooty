@@ -1,6 +1,5 @@
 import React, { useContext, useMemo } from 'react';
 import { Language } from '@leafygreen-ui/code';
-import LeafyIcon from '@leafygreen-ui/icon';
 import { TabContext } from '../Tabs/tab-context';
 import { getPlaintext } from '../../utils/get-plaintext';
 
@@ -41,7 +40,7 @@ const getDriverLanguage = (driverArg) => {
 };
 
 // Generates language options for code block based on drivers tabset on current page
-const generateLanguageOptions = (selectors = {}, driverIconMap) => {
+const generateLanguageOptions = (selectors = {}) => {
   const drivers = selectors?.['drivers'];
   const languageOptions = [];
 
@@ -69,8 +68,8 @@ const getCurrentLanguageOption = (languageOptions, activeTabs) => {
 };
 
 const CodeProvider = ({ children }) => {
-  const { activeTabs, driverIconMap, selectors } = useContext(TabContext);
-  const languageOptions = useMemo(() => generateLanguageOptions(selectors, driverIconMap), [driverIconMap, selectors]);
+  const { activeTabs, selectors } = useContext(TabContext);
+  const languageOptions = useMemo(() => generateLanguageOptions(selectors), [selectors]);
   const codeBlockLanguage = useMemo(
     () => getCurrentLanguageOption(languageOptions, activeTabs),
     [activeTabs, languageOptions]
