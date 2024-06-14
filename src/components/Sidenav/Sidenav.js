@@ -66,12 +66,6 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
   p {
     letter-spacing: unset;
     color: ${palette.black};
-  },
-  
-  // avoid GatsbyLink underline styling being applied to side nav
-  // may need to remove during DOP-2880
-  a:hover::after {
-    background-color: unset;
   }
 
 `;
@@ -127,7 +121,7 @@ const Spaceholder = styled('div')`
 
 export const Border = styled('hr')`
   border: unset;
-  border-bottom: 1px solid ${palette.gray.light2};
+  border-bottom: 1px solid var(--border-bottom-color);
   margin: ${theme.size.small} 0;
   width: 100%;
 `;
@@ -142,7 +136,7 @@ const ArtificialPadding = styled('div')`
 // This allows the products in the ProductsList to slide up/down when closing/opening the list
 // without appearing inline with above text
 const NavTopContainer = styled('div')`
-  background-color: ${palette.gray.light3};
+  background-color: var(--background-color);
   position: relative;
   z-index: 1;
 `;
@@ -242,12 +236,16 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             collapsed={isCollapsed}
             setCollapsed={setCollapsed}
             widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
-            style={{ backgroundColor: darkMode && palette.gray.dark2 }}
           >
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
-              <NavTopContainer>
+              <NavTopContainer
+                style={{
+                  '--background-color': darkMode ? palette.gray.dark4 : palette.gray.light3,
+                  '--border-bottom-color': darkMode ? palette.gray.dark2 : palette.gray.light2,
+                }}
+              >
                 <ArtificialPadding />
-                <DocsHomeButton />
+                <DocsHomeButton darkMode={darkMode} />
                 <Border />
                 {ia && (
                   <IA
@@ -278,6 +276,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                   as={Link}
                   to={isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/'}
                   hideExternalIcon={true}
+                  style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark3 }}
                 >
                   {navTitle}
                 </SideNavItem>

@@ -8,6 +8,7 @@ exports[`Lightbox renders correctly 1`] = `
   margin-top: 24px;
   margin-bottom: 24px;
   display: block;
+  max-width: 100%;
 }
 
 .emotion-2 {
@@ -36,6 +37,7 @@ exports[`Lightbox renders correctly 1`] = `
         class="emotion-2 hero-img align-test-align"
         height="3000"
         src="/images/firstcluster.png"
+        style="--border-color: #C1C7C6;"
         width="5000"
       />
       <div

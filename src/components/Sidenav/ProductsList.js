@@ -112,7 +112,7 @@ const getProductListHeadingDynamicStyles = (darkMode, isOpen) => {
   const lightThemeColor = isOpen ? palette.gray.dark3 : palette.gray.dark1;
   return {
     '--color': darkMode ? darkThemeColor : lightThemeColor,
-    '--background-color': darkMode ? palette.gray.dark2 : palette.gray.light3,
+    '--background-color': darkMode ? palette.gray.dark4 : palette.gray.light3,
     '--hover-color': darkMode ? palette.gray.light2 : palette.gray.dark3,
   };
 };
