@@ -65,9 +65,10 @@ const Code = ({
   driverIconMap['rust-async'] = RustIcon;
   driverIconMap['rust-sync'] = RustIcon;
 
-  for (const i in languageOptions) {
-    languageOptions[i].image = getDriverImage(languageOptions[i].id, driverIconMap);
-  }
+  languageOptions.map((option) => {
+    option.image = getDriverImage(option.id, driverIconMap);
+    return option;
+  });
 
   // none should take precedence over language switcher
   if (getLanguage(lang) === 'none') {
