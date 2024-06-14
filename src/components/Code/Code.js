@@ -11,13 +11,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
-import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
-import IconJavaDark from '../icons/JavaDark';
-import IconNodeDark from '../icons/NodeDark';
-import IconRustDark from '../icons/RustDark';
-import IconJava from '../icons/Java';
-import IconRust from '../icons/Rust';
-import IconNode from '../icons/Node';
+import { setDriversIconsMap } from '../icons/DriverIconMap';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 import { CodeContext } from './code-context';
 
@@ -51,19 +45,7 @@ const Code = ({
   const code = value;
   let language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
 
-  const driverIconMap = DRIVER_ICON_MAP;
-
-  const anyDarkMode = darkMode || darkModeProp;
-  const JavaIcon = anyDarkMode ? IconJavaDark : IconJava;
-  const RustIcon = anyDarkMode ? IconRustDark : IconRust;
-
-  driverIconMap.java = JavaIcon;
-  driverIconMap['java-sync'] = JavaIcon;
-  driverIconMap['java-async'] = JavaIcon;
-  driverIconMap.nodejs = anyDarkMode ? IconNodeDark : IconNode;
-  driverIconMap.rust = RustIcon;
-  driverIconMap['rust-async'] = RustIcon;
-  driverIconMap['rust-sync'] = RustIcon;
+  const driverIconMap = setDriversIconsMap(darkMode || darkModeProp);
 
   languageOptions.map((option) => {
     option.image = getDriverImage(option.id, driverIconMap);
