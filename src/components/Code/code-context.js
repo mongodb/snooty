@@ -40,20 +40,6 @@ const getDriverLanguage = (driverArg) => {
   return 'none';
 };
 
-// Returns the icon associated with the driver language that would be
-// shown on our TabSelector component
-const getDriverImage = (driver, driverIconMap) => {
-  const DriverIcon = driverIconMap?.[driver];
-  if (DriverIcon) {
-    return <DriverIcon />;
-  }
-
-  // Use LG File icon as our default placeholder for images. This overwrites
-  // LG's Language Switcher current default icon. See:
-  // https://github.com/mongodb/leafygreen-ui/blob/6041b89bf5f9dc1e5ea76018bc2cd84bc1fd6faf/packages/code/src/LanguageSwitcher.tsx#L135-L136
-  return <LeafyIcon glyph="File" />;
-};
-
 // Generates language options for code block based on drivers tabset on current page
 const generateLanguageOptions = (selectors = {}, driverIconMap) => {
   const drivers = selectors?.['drivers'];
@@ -63,7 +49,6 @@ const generateLanguageOptions = (selectors = {}, driverIconMap) => {
     languageOptions.push({
       id: driver,
       displayName: getPlaintext(drivers[driver]),
-      image: getDriverImage(driver, driverIconMap),
       language: getDriverLanguage(driver),
     });
   }

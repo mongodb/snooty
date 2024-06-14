@@ -13,12 +13,33 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
 import { CodeContext } from './code-context';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
+import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
+import IconJavaDark from '../icons/JavaDark';
+import IconNodeDark from '../icons/NodeDark';
+import IconRustDark from '../icons/RustDark';
+import IconJava from '../icons/Java';
+import IconRust from '../icons/Rust';
+import IconNode from '../icons/Node';
 
 const sourceCodeStyle = css`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
+
+// Returns the icon associated with the driver language that would be
+// shown on our TabSelector component
+const getDriverImage = (driver, driverIconMap) => {
+  const DriverIcon = driverIconMap?.[driver];
+  if (DriverIcon) {
+    return <DriverIcon />;
+  }
+
+  // Use LG File icon as our default placeholder for images. This overwrites
+  // LG's Language Switcher current default icon. See:
+  // https://github.com/mongodb/leafygreen-ui/blob/6041b89bf5f9dc1e5ea76018bc2cd84bc1fd6faf/packages/code/src/LanguageSwitcher.tsx#L135-L136
+  return <Icon glyph="File" />;
+};
 
 const Code = ({
   nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
@@ -29,6 +50,35 @@ const Code = ({
   const { darkMode } = useDarkMode();
   const code = value;
   let language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
+
+  const driverIconMap = DRIVER_ICON_MAP;
+
+  console.log('DRIVER ICON MAP POST ASSIGN', driverIconMap);
+  const anyDarkMode = darkMode || darkModeProp;
+  const JavaIcon = anyDarkMode ? IconJavaDark : IconJava;
+  const RustIcon = anyDarkMode ? IconRustDark : IconRust;
+
+  driverIconMap.java = JavaIcon;
+  driverIconMap['java-sync'] = JavaIcon;
+  driverIconMap['java-async'] = JavaIcon;
+  driverIconMap.nodejs = anyDarkMode ? IconNodeDark : IconNode;
+  driverIconMap.rust = RustIcon;
+  driverIconMap['rust-async'] = RustIcon;
+  driverIconMap['rust-sync'] = RustIcon;
+
+  console.log('DIRVER ICON MAP', driverIconMap);
+
+  for (const i in languageOptions) {
+    languageOptions[i].image = getDriverImage(languageOptions[i].id, driverIconMap);
+  }
+
+  console.log('DRIVER ICON MAP', DRIVER_ICON_MAP);
+  console.log('LANGUAGE OPTIONS', languageOptions);
+  // const uwu = languageOptions?.map((x) => {
+  //   x.image = IconNode;
+  //   return x;
+  // });
+
   // none should take precedence over language switcher
   if (getLanguage(lang) === 'none') {
     language = getLanguage(lang);
