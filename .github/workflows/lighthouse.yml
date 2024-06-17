@@ -48,7 +48,7 @@ jobs:
         id: commit_msg_timestamp
         run: |
           message=$(git log -1 --format=oneline --pretty=format:"%s")
-          timestamp=$(git log -1 --format=%cd --date=local)
+          timestamp=$(git log -1 --format=%cd --date=iso-strict)
           echo "::set-output name=commit_message::$message"
           echo "::set-output name=commit_timestamp::$timestamp"
       - name: Upload Lighthouse to MongoDB
