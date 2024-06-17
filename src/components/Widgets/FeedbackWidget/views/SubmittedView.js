@@ -43,7 +43,9 @@ const SubmittedView = () => {
         {shouldShowSupportLink && (
           <SupportCase>
             {`${SUBMITTED_VIEW_TEXT.SUPPORT_CTA} `}
-            <a href={SUBMITTED_VIEW_SUPPORT_LINK.href}>{SUBMITTED_VIEW_SUPPORT_LINK.text}</a>
+            <Link href={SUBMITTED_VIEW_SUPPORT_LINK.href} baseFontSize={13} hideExternalIcon={true}>
+              {SUBMITTED_VIEW_SUPPORT_LINK.text}
+            </Link>
           </SupportCase>
         )}
       </Subheading>
