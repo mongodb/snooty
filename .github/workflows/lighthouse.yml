@@ -48,8 +48,8 @@ jobs:
         uses: mongodb/docs-worker-actions/upload-lighthouse@skunk-upload-lighthouse
         env:
           PROJECT_TO_BUILD: ${{ matrix.project }}
-          COMMIT_MESSAGE: git log -1 --format=oneline --pretty=format:"%s"
-          COMMIT_TIMESTAMP: git log -1 --format=%cd --date=iso-strict
+          COMMIT_MESSAGE: ${{ git log -1 --format=oneline --pretty=format:"%s" }}
+          COMMIT_TIMESTAMP: ${{ echo git log -1 --format=%cd --date=iso-strict }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
           
