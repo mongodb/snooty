@@ -44,12 +44,19 @@ jobs:
           lhci collect --additive --config=.mobile-lighthouserc.js
           lhci collect --additive --config=.desktop-lighthouserc.js
           lhci upload --target=filesystem --outputDir=./lhci
+      - name: Output commit message and timestamp
+        id: commit_msg_timestamp
+        run: |
+          message=$(git log -1 --format=oneline --pretty=format:"%s")
+          timestamp=$(git log -1 --format=%cd --date=local)
+          echo "::set-output name=commit_message::$message"
+          echo "::set-output name=commit_timestamp::$timestamp"
       - name: Upload Lighthouse to MongoDB
         uses: mongodb/docs-worker-actions/upload-lighthouse@skunk-upload-lighthouse
         env:
           PROJECT_TO_BUILD: ${{ matrix.project }}
-          COMMIT_MESSAGE: ${{ git log -1 --format=oneline --pretty=format:"%s" }}
-          COMMIT_TIMESTAMP: ${{ echo git log -1 --format=%cd --date=iso-strict }}
+          COMMIT_MESSAGE: ${{ steps.commit_msg_timestamp.outputs.commit_message }}
+          COMMIT_TIMESTAMP: ${{ steps.commit_msg_timestamp.outputs.commit_timestamp }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
           
