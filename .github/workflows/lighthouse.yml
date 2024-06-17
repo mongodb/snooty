@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - "main"
-      - "skunk-upload-lighthouse"
   pull_request:
     types: ["opened", "synchronize"]
 
