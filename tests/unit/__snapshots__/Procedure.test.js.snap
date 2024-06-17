@@ -4,6 +4,8 @@ exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin-top: 16px;
+  background-color: var(--background-color);
+  color: var(--color);
 }
 
 @media only screen and (max-width: 1024px) {
@@ -29,12 +31,12 @@ exports[`renders correctly 1`] = `
 
 .emotion-2:not(:last-child):after {
   content: '';
-  border-left: 2px dashed #E8EDEB;
+  border-left: 2px dashed var(--border-left);
   bottom: 0;
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 .emotion-2 h2,
@@ -62,10 +64,12 @@ exports[`renders correctly 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #E3FCF7;
-  color: #00684A;
+  position: relative;
+  background-color: var(--background-color);
+  color: var(--color);
   height: 34px;
   width: 34px;
+  z-index: 1;
 }
 
 .emotion-8 {
@@ -111,11 +115,12 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-11>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-11:focus,
@@ -128,25 +133,28 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-11:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-11:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--background-color: initial; --color: initial;"
   >
     <div
       class="emotion-2 emotion-3"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           1
         </div>
@@ -165,6 +173,7 @@ exports[`renders correctly 1`] = `
           <a
             class="emotion-11"
             href="/connect/#std-label-connect-run-compass"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             To learn more, see Connect to MongoDB
           </a>
@@ -173,12 +182,14 @@ exports[`renders correctly 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           2
         </div>
@@ -197,6 +208,7 @@ exports[`renders correctly 1`] = `
           <a
             class="emotion-11"
             href="/import-export/#std-label-compass-import-export"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             To learn more, see Import and Export Data
           </a>
@@ -211,6 +223,8 @@ exports[`renders steps nested in include nodes 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin-top: 16px;
+  background-color: var(--background-color);
+  color: var(--color);
 }
 
 @media only screen and (max-width: 1024px) {
@@ -236,12 +250,12 @@ exports[`renders steps nested in include nodes 1`] = `
 
 .emotion-2:not(:last-child):after {
   content: '';
-  border-left: 2px dashed #E8EDEB;
+  border-left: 2px dashed var(--border-left);
   bottom: 0;
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 .emotion-2 h2,
@@ -269,10 +283,12 @@ exports[`renders steps nested in include nodes 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #E3FCF7;
-  color: #00684A;
+  position: relative;
+  background-color: var(--background-color);
+  color: var(--color);
   height: 34px;
   width: 34px;
+  z-index: 1;
 }
 
 .emotion-8 {
@@ -315,18 +331,18 @@ exports[`renders steps nested in include nodes 1`] = `
 }
 
 .emotion-11 {
-  border-radius: 0!important;
-  display: initial!important;
-  margin: initial!important;
+  color: #889397;
+  vertical-align: middle;
+  margin-top: -2px;
 }
 
-.emotion-13 {
+.emotion-12 {
   margin-top: -175px;
   position: absolute;
   padding-bottom: 2px;
 }
 
-.emotion-15 {
+.emotion-14 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -337,22 +353,25 @@ exports[`renders steps nested in include nodes 1`] = `
   margin-bottom: 16px;
 }
 
-.emotion-15 strong,
-.emotion-15 b {
+.emotion-14 strong,
+.emotion-14 b {
   font-weight: 700;
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--background-color: initial; --color: initial;"
   >
     <div
       class="emotion-2 emotion-3"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           1
         </div>
@@ -371,20 +390,33 @@ exports[`renders steps nested in include nodes 1`] = `
               href="#step-1"
               title="Permalink to this heading"
             >
-              <img
-                class="emotion-11 emotion-12"
-                height="10"
-                src="/assets/link.svg"
-                width="10"
-              />
+              <svg
+                aria-label="Link Icon"
+                class="emotion-11"
+                fill="none"
+                height="12"
+                role="img"
+                viewBox="0 0 16 16"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.039 9.953a3.596 3.596 0 0 1-.327-.38l1.45-1.445a1.553 1.553 0 0 0 2.496.423l2.885-2.87a1.57 1.57 0 0 0 .01-2.213 1.553 1.553 0 0 0-2.203-.01l-.379.377A.995.995 0 0 1 8.56 3.83a1.005 1.005 0 0 1 .006-1.418l.38-.377a3.542 3.542 0 0 1 5.024.023 3.58 3.58 0 0 1-.022 5.047l-2.884 2.871a3.542 3.542 0 0 1-5.025-.022Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 0 0-2.496-.423l-2.885 2.87a1.57 1.57 0 0 0-.01 2.213 1.553 1.553 0 0 0 2.203.01l.379-.377a.995.995 0 0 1 1.411.006 1.005 1.005 0 0 1-.006 1.418l-.38.377a3.542 3.542 0 0 1-5.024-.023 3.58 3.58 0 0 1 .022-5.047l2.884-2.871a3.542 3.542 0 0 1 5.025.022Z"
+                  fill="currentColor"
+                />
+              </svg>
             </a>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-12 emotion-13"
               id="step-1"
             />
           </h1>
           <p
-            class="emotion-15"
+            class="emotion-14"
           >
             Content for step 1
           </p>
@@ -393,12 +425,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           2
         </div>
@@ -417,20 +451,33 @@ exports[`renders steps nested in include nodes 1`] = `
               href="#step-2"
               title="Permalink to this heading"
             >
-              <img
-                class="emotion-11 emotion-12"
-                height="10"
-                src="/assets/link.svg"
-                width="10"
-              />
+              <svg
+                aria-label="Link Icon"
+                class="emotion-11"
+                fill="none"
+                height="12"
+                role="img"
+                viewBox="0 0 16 16"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.039 9.953a3.596 3.596 0 0 1-.327-.38l1.45-1.445a1.553 1.553 0 0 0 2.496.423l2.885-2.87a1.57 1.57 0 0 0 .01-2.213 1.553 1.553 0 0 0-2.203-.01l-.379.377A.995.995 0 0 1 8.56 3.83a1.005 1.005 0 0 1 .006-1.418l.38-.377a3.542 3.542 0 0 1 5.024.023 3.58 3.58 0 0 1-.022 5.047l-2.884 2.871a3.542 3.542 0 0 1-5.025-.022Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 0 0-2.496-.423l-2.885 2.87a1.57 1.57 0 0 0-.01 2.213 1.553 1.553 0 0 0 2.203.01l.379-.377a.995.995 0 0 1 1.411.006 1.005 1.005 0 0 1-.006 1.418l-.38.377a3.542 3.542 0 0 1-5.024-.023 3.58 3.58 0 0 1 .022-5.047l2.884-2.871a3.542 3.542 0 0 1 5.025.022Z"
+                  fill="currentColor"
+                />
+              </svg>
             </a>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-12 emotion-13"
               id="step-2"
             />
           </h1>
           <p
-            class="emotion-15"
+            class="emotion-14"
           >
             Content for step 2
           </p>
@@ -439,12 +486,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           3
         </div>
@@ -463,20 +512,33 @@ exports[`renders steps nested in include nodes 1`] = `
               href="#step-3"
               title="Permalink to this heading"
             >
-              <img
-                class="emotion-11 emotion-12"
-                height="10"
-                src="/assets/link.svg"
-                width="10"
-              />
+              <svg
+                aria-label="Link Icon"
+                class="emotion-11"
+                fill="none"
+                height="12"
+                role="img"
+                viewBox="0 0 16 16"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.039 9.953a3.596 3.596 0 0 1-.327-.38l1.45-1.445a1.553 1.553 0 0 0 2.496.423l2.885-2.87a1.57 1.57 0 0 0 .01-2.213 1.553 1.553 0 0 0-2.203-.01l-.379.377A.995.995 0 0 1 8.56 3.83a1.005 1.005 0 0 1 .006-1.418l.38-.377a3.542 3.542 0 0 1 5.024.023 3.58 3.58 0 0 1-.022 5.047l-2.884 2.871a3.542 3.542 0 0 1-5.025-.022Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 0 0-2.496-.423l-2.885 2.87a1.57 1.57 0 0 0-.01 2.213 1.553 1.553 0 0 0 2.203.01l.379-.377a.995.995 0 0 1 1.411.006 1.005 1.005 0 0 1-.006 1.418l-.38.377a3.542 3.542 0 0 1-5.024-.023 3.58 3.58 0 0 1 .022-5.047l2.884-2.871a3.542 3.542 0 0 1 5.025.022Z"
+                  fill="currentColor"
+                />
+              </svg>
             </a>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-12 emotion-13"
               id="step-3"
             />
           </h1>
           <p
-            class="emotion-15"
+            class="emotion-14"
           >
             Content for step 3
           </p>
@@ -485,12 +547,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           4
         </div>
@@ -509,20 +573,33 @@ exports[`renders steps nested in include nodes 1`] = `
               href="#step-4"
               title="Permalink to this heading"
             >
-              <img
-                class="emotion-11 emotion-12"
-                height="10"
-                src="/assets/link.svg"
-                width="10"
-              />
+              <svg
+                aria-label="Link Icon"
+                class="emotion-11"
+                fill="none"
+                height="12"
+                role="img"
+                viewBox="0 0 16 16"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.039 9.953a3.596 3.596 0 0 1-.327-.38l1.45-1.445a1.553 1.553 0 0 0 2.496.423l2.885-2.87a1.57 1.57 0 0 0 .01-2.213 1.553 1.553 0 0 0-2.203-.01l-.379.377A.995.995 0 0 1 8.56 3.83a1.005 1.005 0 0 1 .006-1.418l.38-.377a3.542 3.542 0 0 1 5.024.023 3.58 3.58 0 0 1-.022 5.047l-2.884 2.871a3.542 3.542 0 0 1-5.025-.022Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 0 0-2.496-.423l-2.885 2.87a1.57 1.57 0 0 0-.01 2.213 1.553 1.553 0 0 0 2.203.01l.379-.377a.995.995 0 0 1 1.411.006 1.005 1.005 0 0 1-.006 1.418l-.38.377a3.542 3.542 0 0 1-5.024-.023 3.58 3.58 0 0 1 .022-5.047l2.884-2.871a3.542 3.542 0 0 1 5.025.022Z"
+                  fill="currentColor"
+                />
+              </svg>
             </a>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-12 emotion-13"
               id="step-4"
             />
           </h1>
           <p
-            class="emotion-15"
+            class="emotion-14"
           >
             Content for step 4
           </p>
@@ -531,12 +608,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           5
         </div>
@@ -555,20 +634,33 @@ exports[`renders steps nested in include nodes 1`] = `
               href="#step-5"
               title="Permalink to this heading"
             >
-              <img
-                class="emotion-11 emotion-12"
-                height="10"
-                src="/assets/link.svg"
-                width="10"
-              />
+              <svg
+                aria-label="Link Icon"
+                class="emotion-11"
+                fill="none"
+                height="12"
+                role="img"
+                viewBox="0 0 16 16"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.039 9.953a3.596 3.596 0 0 1-.327-.38l1.45-1.445a1.553 1.553 0 0 0 2.496.423l2.885-2.87a1.57 1.57 0 0 0 .01-2.213 1.553 1.553 0 0 0-2.203-.01l-.379.377A.995.995 0 0 1 8.56 3.83a1.005 1.005 0 0 1 .006-1.418l.38-.377a3.542 3.542 0 0 1 5.024.023 3.58 3.58 0 0 1-.022 5.047l-2.884 2.871a3.542 3.542 0 0 1-5.025-.022Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 0 0-2.496-.423l-2.885 2.87a1.57 1.57 0 0 0-.01 2.213 1.553 1.553 0 0 0 2.203.01l.379-.377a.995.995 0 0 1 1.411.006 1.005 1.005 0 0 1-.006 1.418l-.38.377a3.542 3.542 0 0 1-5.024-.023 3.58 3.58 0 0 1 .022-5.047l2.884-2.871a3.542 3.542 0 0 1 5.025.022Z"
+                  fill="currentColor"
+                />
+              </svg>
             </a>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-12 emotion-13"
               id="step-5"
             />
           </h1>
           <p
-            class="emotion-15"
+            class="emotion-14"
           >
             Content for step 5
           </p>
@@ -577,12 +669,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           6
         </div>
@@ -601,20 +695,33 @@ exports[`renders steps nested in include nodes 1`] = `
               href="#step-6"
               title="Permalink to this heading"
             >
-              <img
-                class="emotion-11 emotion-12"
-                height="10"
-                src="/assets/link.svg"
-                width="10"
-              />
+              <svg
+                aria-label="Link Icon"
+                class="emotion-11"
+                fill="none"
+                height="12"
+                role="img"
+                viewBox="0 0 16 16"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.039 9.953a3.596 3.596 0 0 1-.327-.38l1.45-1.445a1.553 1.553 0 0 0 2.496.423l2.885-2.87a1.57 1.57 0 0 0 .01-2.213 1.553 1.553 0 0 0-2.203-.01l-.379.377A.995.995 0 0 1 8.56 3.83a1.005 1.005 0 0 1 .006-1.418l.38-.377a3.542 3.542 0 0 1 5.024.023 3.58 3.58 0 0 1-.022 5.047l-2.884 2.871a3.542 3.542 0 0 1-5.025-.022Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 0 0-2.496-.423l-2.885 2.87a1.57 1.57 0 0 0-.01 2.213 1.553 1.553 0 0 0 2.203.01l.379-.377a.995.995 0 0 1 1.411.006 1.005 1.005 0 0 1-.006 1.418l-.38.377a3.542 3.542 0 0 1-5.024-.023 3.58 3.58 0 0 1 .022-5.047l2.884-2.871a3.542 3.542 0 0 1 5.025.022Z"
+                  fill="currentColor"
+                />
+              </svg>
             </a>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-12 emotion-13"
               id="step-6"
             />
           </h1>
           <p
-            class="emotion-15"
+            class="emotion-14"
           >
             Content for step 6
           </p>
@@ -623,12 +730,14 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
+      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           7
         </div>
@@ -647,20 +756,33 @@ exports[`renders steps nested in include nodes 1`] = `
               href="#step-7"
               title="Permalink to this heading"
             >
-              <img
-                class="emotion-11 emotion-12"
-                height="10"
-                src="/assets/link.svg"
-                width="10"
-              />
+              <svg
+                aria-label="Link Icon"
+                class="emotion-11"
+                fill="none"
+                height="12"
+                role="img"
+                viewBox="0 0 16 16"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.039 9.953a3.596 3.596 0 0 1-.327-.38l1.45-1.445a1.553 1.553 0 0 0 2.496.423l2.885-2.87a1.57 1.57 0 0 0 .01-2.213 1.553 1.553 0 0 0-2.203-.01l-.379.377A.995.995 0 0 1 8.56 3.83a1.005 1.005 0 0 1 .006-1.418l.38-.377a3.542 3.542 0 0 1 5.024.023 3.58 3.58 0 0 1-.022 5.047l-2.884 2.871a3.542 3.542 0 0 1-5.025-.022Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 0 0-2.496-.423l-2.885 2.87a1.57 1.57 0 0 0-.01 2.213 1.553 1.553 0 0 0 2.203.01l.379-.377a.995.995 0 0 1 1.411.006 1.005 1.005 0 0 1-.006 1.418l-.38.377a3.542 3.542 0 0 1-5.024-.023 3.58 3.58 0 0 1 .022-5.047l2.884-2.871a3.542 3.542 0 0 1 5.025.022Z"
+                  fill="currentColor"
+                />
+              </svg>
             </a>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-12 emotion-13"
               id="step-7"
             />
           </h1>
           <p
-            class="emotion-15"
+            class="emotion-14"
           >
             Content for step 7
           </p>
@@ -675,6 +797,8 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin-top: 16px;
+  background-color: var(--background-color);
+  color: var(--color);
 }
 
 .emotion-2 {
@@ -710,8 +834,8 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #333;
-  color: #FFFFFF;
+  background-color: var(--background-color);
+  color: var(--color);
   height: 24px;
   width: 24px;
 }
@@ -743,11 +867,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-11>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-11:focus,
@@ -760,16 +885,17 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 }
 
 .emotion-11:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-11:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--background-color: initial; --color: initial;"
   >
     <div
       class="emotion-2 emotion-3"
@@ -779,6 +905,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #001E2B; --color: #FFFFFF;"
         >
           1
         </div>
@@ -797,6 +924,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
           <a
             class="emotion-11"
             href="/connect/#std-label-connect-run-compass"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             To learn more, see Connect to MongoDB
           </a>
@@ -811,6 +939,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
       >
         <div
           class="emotion-6 emotion-7"
+          style="--background-color: #001E2B; --color: #FFFFFF;"
         >
           2
         </div>
@@ -829,6 +958,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
           <a
             class="emotion-11"
             href="/import-export/#std-label-compass-import-export"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             To learn more, see Import and Export Data
           </a>

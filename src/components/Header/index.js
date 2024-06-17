@@ -11,7 +11,7 @@ const StyledHeaderContainer = styled.header(
   grid-area: header;
   top: 0;
   z-index: ${theme.zIndexes.header};
-  ${props.template === 'landing' ? '' : 'position: sticky;'}
+  ${props.template === 'landing' || process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' ? '' : 'position: sticky;'}
   `
 );
 

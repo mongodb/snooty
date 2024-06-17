@@ -93,6 +93,13 @@ const zIndexes = {
   widgets: 2000,
 };
 
+// media queries that define system color preference
+const colorPreference = {
+  dark: '(prefers-color-scheme: dark)',
+  light: '(prefers-color-scheme: light)',
+  auto: '(prefers-color-scheme: auto)',
+};
+
 export const theme = {
   breakpoints,
   fontSize,
@@ -102,4 +109,5 @@ export const theme = {
   size,
   transitionSpeed,
   zIndexes,
+  colorPreference,
 };

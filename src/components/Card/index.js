@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix, navigate } from 'gatsby';
+import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
@@ -9,8 +10,9 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import ConditionalWrapper from '../ConditionalWrapper';
 import Link from '../Link';
-import Tag from '../Tag';
+import CommunityPillLink from '../CommunityPillLink';
 import { isRelativeUrl } from '../../utils/is-relative-url';
+import { getSuitableIcon } from '../../utils/get-suitable-icon';
 
 const cardBaseStyles = css`
   display: flex;
@@ -90,10 +92,6 @@ const headingStyling = ({ isCompact, isExtraCompact, isLargeIconStyle }) => css`
   ${isLargeIconStyle && 'margin-bottom: 36px;'}
 `;
 
-const FlexTag = styled(Tag)`
-  margin-right: auto;
-`;
-
 const compactCardStyling = css`
   align-items: flex-start;
   flex-direction: row;
@@ -132,10 +130,11 @@ const Card = ({
   page,
   nodeData: {
     children,
-    options: { cta, headline, icon, 'icon-alt': iconAlt, tag, url },
+    options: { cta, headline, icon, 'icon-dark': iconDark, 'icon-alt': iconAlt, tag, url },
   },
 }) => {
   const template = page?.options?.template;
+  const { darkMode } = useDarkMode();
 
   const isLanding = template === 'landing';
 
@@ -155,11 +154,13 @@ const Card = ({
     isLanding && !isLargeIconStyle ? landingStyles : '', // must come after other styles to override
   ];
 
+  const iconSrc = getSuitableIcon(icon, iconDark, darkMode);
+
   return (
     <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
       {icon && (
         <img
-          src={withPrefix(icon)}
+          src={iconSrc}
           alt={iconAlt}
           width={imgSize}
           height={imgSize}
@@ -170,7 +171,7 @@ const Card = ({
         condition={isCompact || isExtraCompact}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
       >
-        {tag && <FlexTag>{tag}</FlexTag>}
+        {tag && <CommunityPillLink variant="green" text={tag} />}
         <div>
           {headline && (
             <Body className={cx(headingStyling({ isCompact, isExtraCompact, isLargeIconStyle }))} weight="medium">
@@ -204,6 +205,7 @@ Card.propTypes = {
       cta: PropTypes.string,
       headline: PropTypes.string,
       icon: PropTypes.string,
+      'icon-dark': PropTypes.string,
       'icon-alt': PropTypes.string,
       tag: PropTypes.string,
       url: PropTypes.string,

@@ -10,6 +10,7 @@ import Card from './Card';
 import CardGroup from './Card/CardGroup';
 import Chapter from './Chapters/Chapter';
 import Chapters from './Chapters';
+import ChatbotUi from './ChatbotUi';
 import Code from './Code/Code';
 import CodeIO from './Code/CodeIO';
 import CommunityPillLink from './CommunityPillLink';
@@ -21,7 +22,6 @@ import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionList/DefinitionListItem';
 import DeprecatedVersionSelector from './DeprecatedVersionSelector';
 import Describe from './Describe';
-import DriversIndexTiles from './DriversIndexTiles';
 import Emphasis from './Emphasis';
 import Extract from './Extract';
 import Field from './FieldList/Field';
@@ -67,7 +67,6 @@ import Time from './Time';
 import TitleReference from './TitleReference';
 import Topic from './Topic';
 import Transition from './Transition';
-import ChatbotUi from './ChatbotUi';
 
 import VersionModified from './VersionModified';
 
@@ -151,7 +150,6 @@ const componentMap = {
   deprecated: VersionModified,
   'deprecated-version-selector': DeprecatedVersionSelector,
   describe: Describe,
-  'drivers-index-tiles': DriversIndexTiles, // deprecated.
   emphasis: Emphasis,
   extract: Extract,
   field: Field,
