@@ -22,6 +22,8 @@ const ActionBarContainer = styled('div')`
 `;
 
 const ActionBarSearchContainer = styled.div`
+  align-items: center;
+  display: flex;
   width: 80%;
 `;
 
