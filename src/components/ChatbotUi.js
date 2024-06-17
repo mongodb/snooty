@@ -101,12 +101,7 @@ const ChatbotUi = ({ template, darkMode }) => {
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
       <SuspenseHelper fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
-        <Chatbot
-          maxInputCharacters={DEFAULT_MAX_INPUT}
-          serverBaseUrl={CHATBOT_SERVER_BASE_URL}
-          darkMode={darkMode}
-          isExperimental={false}
-        >
+        <Chatbot maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
           <DocsChatbot suggestedPrompts={defaultSuggestedPrompts} darkMode={darkMode} />
         </Chatbot>
       </SuspenseHelper>
