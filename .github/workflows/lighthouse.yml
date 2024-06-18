@@ -57,10 +57,8 @@ jobs:
           last_commit=$(echo "$response" | jq '.[-1]')
           echo "::set-output name=last_commit::$last_commit"
           echo "$response.length"
-          echo ${{ fromJson($response).length }}
           echo "$last_commit"
           echo "$last_commit.commit.message"
-          echo ${{ fromJson($last_commit).commit.message }}
       # - name: Upload Lighthouse to MongoDB
       #   uses: mongodb/docs-worker-actions/upload-lighthouse@main
       #   env:
