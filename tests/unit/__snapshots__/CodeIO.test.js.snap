@@ -42,6 +42,10 @@ exports[`CodeIO renders correctly 1`] = `
   grid-template-columns: code panel;
 }
 
+.emotion-1>div>div>pre {
+  background-color: var(--background-color);
+}
+
 .emotion-1>div {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
@@ -506,6 +510,7 @@ exports[`CodeIO renders correctly 1`] = `
   >
     <div
       class="emotion-1"
+      style="--background-color: #F9FBFA;"
     >
       <div>
         <div

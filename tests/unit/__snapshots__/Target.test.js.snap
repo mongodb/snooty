@@ -17,6 +17,7 @@ exports[`renders correctly with a directive_argument node 1`] = `
   white-space: nowrap;
   font-size: unset;
   display: inline;
+  background-color: var(--background-color);
 }
 
 .lg-ui-0000:hover>.emotion-0 {
@@ -117,6 +118,7 @@ a .emotion-0 {
     <dt>
       <code
         class="emotion-0"
+        style="--background-color: #F9FBFA;"
       >
         --config &lt;filename&gt;, -f &lt;filename&gt;
       </code>
@@ -164,6 +166,7 @@ configuration file is the preferred method for runtime configuration of
         >
           <code
             class="emotion-0"
+            style="--background-color: #F9FBFA;"
           >
             mongos
           </code>
@@ -191,6 +194,7 @@ more information.
         >
           <code
             class="emotion-0"
+            style="--background-color: #F9FBFA;"
           >
             mongos
           </code>

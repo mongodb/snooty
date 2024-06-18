@@ -19,6 +19,10 @@ exports[`renders correctly 1`] = `
   grid-template-columns: code panel;
 }
 
+.emotion-0>div>div>pre {
+  background-color: var(--background-color);
+}
+
 .emotion-0>div {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -193,6 +197,7 @@ exports[`renders correctly 1`] = `
 
 <div
     class="emotion-0"
+    style="--background-color: #F9FBFA;"
   >
     <div
       class="emotion-1"

@@ -39,6 +39,7 @@ exports[`renders correctly 1`] = `
   white-space: nowrap;
   font-size: unset;
   display: inline;
+  background-color: var(--background-color);
 }
 
 .lg-ui-0000:hover>.emotion-3 {
@@ -82,6 +83,7 @@ a .emotion-3 {
           A JSON Web Token string encoded for the provided 
           <code
             class="emotion-3"
+            style="--background-color: #F9FBFA;"
           >
             payload
           </code>
