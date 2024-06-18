@@ -85,7 +85,7 @@ const Code = ({
           display: grid;
         }
       `}
-      style={{ '--background-color': darkMode ? palette.gray.dark4 : palette.gray.light3 }}
+      style={{ '--background-color': darkModeProp || darkMode ? palette.gray.dark4 : palette.gray.light3 }}
     >
       {captionSpecified && (
         <div>
