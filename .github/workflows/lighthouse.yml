@@ -56,8 +56,9 @@ jobs:
           response=$(curl --request GET --url 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits' --header 'Accept: application/vnd.github.v3+json' --header 'Content-Type: application/json')
           last_message=$(echo "$response" | jq '.[-1]')
           echo "::set-output name=last_message::$last_message"
+          echo "$response.length"
+          echo ${{ fromJson(response).length }}
           echo "$last_message"
-          echo $last_message
       # - name: Upload Lighthouse to MongoDB
       #   uses: mongodb/docs-worker-actions/upload-lighthouse@main
       #   env:
