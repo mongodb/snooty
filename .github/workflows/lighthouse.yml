@@ -36,9 +36,6 @@ jobs:
       - name: Run Lighthouse
         env: 
           GATSBY_SITE: ${{ matrix.project }}
-          LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
-          LIGHTHOUSE_BUILD_TOKEN: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
-          LHCI_BUILD_CONTEXT__CURRENT_BRANCH: ${{ matrix.project }}
         run: |
           npm install -g @lhci/cli
           lhci collect --additive --config=.mobile-lighthouserc.js
