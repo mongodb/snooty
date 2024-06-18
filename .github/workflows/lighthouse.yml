@@ -18,32 +18,32 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
-      - name: Access Build Data
-        uses: mongodb/docs-worker-actions/build-artifact@main
-        env: 
-          PROJECT_TO_BUILD: ${{ matrix.project }}
-      - name: Build Snooty
-        env:
-          NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
-          NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
-          GATSBY_BUILD_FROM_JSON: true
-          GATSBY_PARSER_USER: docsworker-xlarge
-          GATSBY_SITE: ${{ matrix.project }}
-          GATSBY_PARSER_BRANCH: main
-        run: |
-          npm ci --legacy-peer-deps
-          npm run build
-      - name: Run Lighthouse
-        env: 
-          GATSBY_SITE: ${{ matrix.project }}
-          LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
-          LIGHTHOUSE_BUILD_TOKEN: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
-          LHCI_BUILD_CONTEXT__CURRENT_BRANCH: ${{ matrix.project }}
-        run: |
-          npm install -g @lhci/cli
-          lhci collect --additive --config=.mobile-lighthouserc.js
-          lhci collect --additive --config=.desktop-lighthouserc.js
-          lhci upload --target=filesystem --outputDir=./lhci
+      # - name: Access Build Data
+      #   uses: mongodb/docs-worker-actions/build-artifact@main
+      #   env: 
+      #     PROJECT_TO_BUILD: ${{ matrix.project }}
+      # - name: Build Snooty
+      #   env:
+      #     NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
+      #     NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
+      #     GATSBY_BUILD_FROM_JSON: true
+      #     GATSBY_PARSER_USER: docsworker-xlarge
+      #     GATSBY_SITE: ${{ matrix.project }}
+      #     GATSBY_PARSER_BRANCH: main
+      #   run: |
+      #     npm ci --legacy-peer-deps
+      #     npm run build
+      # - name: Run Lighthouse
+      #   env: 
+      #     GATSBY_SITE: ${{ matrix.project }}
+      #     LIGHTHOUSE_SERVER_URL: ${{ secrets.LIGHTHOUSE_SERVER_URL }}
+      #     LIGHTHOUSE_BUILD_TOKEN: ${{ secrets.LIGHTHOUSE_BUILD_TOKEN }}
+      #     LHCI_BUILD_CONTEXT__CURRENT_BRANCH: ${{ matrix.project }}
+      #   run: |
+      #     npm install -g @lhci/cli
+      #     lhci collect --additive --config=.mobile-lighthouserc.js
+      #     lhci collect --additive --config=.desktop-lighthouserc.js
+      #     lhci upload --target=filesystem --outputDir=./lhci
       - name: Output commit message and timestamp
         id: commit_msg_timestamp
         run: |
