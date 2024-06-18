@@ -51,12 +51,21 @@ jobs:
           timestamp=$(git log -1 --format=%cd --date=iso-strict)
           echo "::set-output name=commit_message::$message"
           echo "::set-output name=commit_timestamp::$timestamp"
-      - name: Upload Lighthouse to MongoDB
-        uses: mongodb/docs-worker-actions/upload-lighthouse@skunk-upload-lighthouse
-        env:
-          PROJECT_TO_BUILD: ${{ matrix.project }}
-          COMMIT_MESSAGE: ${{ steps.commit_msg_timestamp.outputs.commit_message }}
-          COMMIT_TIMESTAMP: ${{ steps.commit_msg_timestamp.outputs.commit_timestamp }}
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-          ATLAS_URI: ${{ secrets.ATLAS_URI }}
+      - name: List commits on the pull request
+        run: |
+          response=$(curl --request GET 
+          --url 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits' 
+          --header 'Accept: application/vnd.github.v3+json' 
+          --header 'Content-Type: application/json')
+          echo "::set-output name=response::$response"
+          last_message=$(echo "$response" | jq '.[-1]')
+          echo "::set-output name=last_message::$last_message"
+      # - name: Upload Lighthouse to MongoDB
+      #   uses: mongodb/docs-worker-actions/upload-lighthouse@skunk-upload-lighthouse
+      #   env:
+      #     PROJECT_TO_BUILD: ${{ matrix.project }}
+      #     COMMIT_MESSAGE: ${{ steps.commit_msg_timestamp.outputs.commit_message }}
+      #     COMMIT_TIMESTAMP: ${{ steps.commit_msg_timestamp.outputs.commit_timestamp }}
+      #     BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+      #     ATLAS_URI: ${{ secrets.ATLAS_URI }}
           
