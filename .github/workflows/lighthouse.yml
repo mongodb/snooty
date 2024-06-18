@@ -53,10 +53,7 @@ jobs:
           echo "::set-output name=commit_timestamp::$timestamp"
       - name: List commits on the pull request
         run: |
-          response=$(curl --request GET 
-          --url 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits' 
-          --header 'Accept: application/vnd.github.v3+json' 
-          --header 'Content-Type: application/json')
+          response=$(curl --request GET --url 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits' --header 'Accept: application/vnd.github.v3+json' --header 'Content-Type: application/json')
           echo "::set-output name=response::$response"
           last_message=$(echo "$response" | jq '.[-1]')
           echo "::set-output name=last_message::$last_message"
