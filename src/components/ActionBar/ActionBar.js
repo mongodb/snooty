@@ -12,7 +12,6 @@ const ActionBarContainer = styled('div')`
   padding-top: ${theme.size.small};
   padding-bottom: ${theme.size.small};
   padding-right: ${theme.size.large};
-  height: auto;
   width: 100%;
   position: sticky;
   top: 0;
