@@ -59,7 +59,7 @@ jobs:
         uses: mongodb/docs-worker-actions/upload-lighthouse@main
         env:
           PROJECT_TO_BUILD: ${{ matrix.project }}
-          COMMIT_MESSAGE: ${{ steps.commit_message_step.outputs.last_commit_message }}
+          COMMIT_MESSAGE: ${{ fromJson(steps.commit_message_step.outputs.last_commit_message) }}
           COMMIT_TIMESTAMP: ${{ steps.commit_timestamp_step.outputs.commit_timestamp }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
