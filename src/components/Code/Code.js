@@ -74,6 +74,9 @@ const Code = ({
           grid-template-columns: ${!copyable && (languageOptions?.length === 0 || language === 'none')
             ? 'auto 0px !important'
             : 'code panel'};
+          > pre {
+            background-color: var(--background-color);
+          }
         }
 
         > div {
@@ -82,6 +85,7 @@ const Code = ({
           display: grid;
         }
       `}
+      style={{ '--background-color': darkMode ? palette.gray.dark4 : palette.gray.light3 }}
     >
       {captionSpecified && (
         <div>
