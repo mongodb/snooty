@@ -5,7 +5,7 @@ import MainColumn from '../components/MainColumn';
 import { theme } from '../theme/docsTheme';
 
 const Wrapper = styled(MainColumn)`
-  max-width: unset;
+  max-width: 775px;
   grid-area: main;
   overflow-x: auto;
   margin-right: 64px;

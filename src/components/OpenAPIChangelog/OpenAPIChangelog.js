@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import Skeleton from 'react-loading-skeleton';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -165,10 +165,16 @@ const OpenAPIChangelog = () => {
         <SkeletonWrapper>
           {[...Array(3)].map((_, index) => (
             <StyledLoadingSkeleton key={index}>
-              <Skeleton borderRadius="12px" width="50%" height="25px" />
-              <ul>
-                <Skeleton count={4} borderRadius="12px" height="15px" style={{ margin: '10px 0' }} />
-              </ul>
+              <SkeletonTheme
+                baseColor={darkMode ? palette.gray.dark2 : palette.gray.light2}
+                highlightColor={darkMode ? palette.gray.dark1 : palette.gray.light3}
+                borderRadius="12px"
+              >
+                <Skeleton width="50%" height="25px" />
+                <ul>
+                  <Skeleton count={4} height="15px" style={{ margin: '10px 0' }} />
+                </ul>
+              </SkeletonTheme>
             </StyledLoadingSkeleton>
           ))}
         </SkeletonWrapper>
