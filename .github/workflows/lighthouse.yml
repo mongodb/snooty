@@ -68,4 +68,3 @@ jobs:
           COMMIT_TIMESTAMP: ${{ env.COMMIT_TIMESTAMP }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
-          
