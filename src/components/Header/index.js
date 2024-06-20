@@ -23,7 +23,7 @@ const Header = ({ sidenav, eol, template }) => {
   return (
     <StyledHeaderContainer template={template}>
       <SiteBanner />
-      <>
+      <div className="sl_opaque">
         {!eol && (
           <UnifiedNav
             fullWidth="true"
@@ -36,7 +36,7 @@ const Header = ({ sidenav, eol, template }) => {
           />
         )}
         {sidenav && <SidenavMobileMenuDropdown />}
-      </>
+      </div>
     </StyledHeaderContainer>
   );
 };
