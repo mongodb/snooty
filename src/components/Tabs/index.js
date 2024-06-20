@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
 import { CodeProvider } from '../Code/code-context';
@@ -24,6 +25,7 @@ const getPosition = (element) => {
 };
 
 const defaultTabsStyling = css`
+  margin-bottom: ${theme.size.medium};
   ${TAB_BUTTON_SELECTOR} {
     font-size: ${theme.size.default};
     align-items: center;
@@ -80,9 +82,25 @@ const landingTabStyling = css`
   }
 `;
 
-const getTabStyling = ({ isProductLanding }) => css`
-  ${isProductLanding && landingTabStyling}
-  margin-top: 24px;
+const TabContent = styled('div')`
+  margin-top: ${theme.size.medium};
+  ${(props) =>
+    props.isProductLanding
+      ? `  display: grid;
+  column-gap: ${theme.size.medium};
+  grid-template-columns: repeat(2, 1fr);
+
+  img {
+    border-radius: ${theme.size.small};
+    grid-column: 2;
+    margin-top: 0px;
+    display: block;
+  }
+
+  @media ${theme.screenSize.upToLarge} {
+    display: block;
+  }`
+      : ''}
 `;
 
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
@@ -139,6 +157,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
           setSelected={handleClick}
+          forceRenderAllTabPanels={true}
         >
           {children.map((tab) => {
             if (tab.name !== 'tab') {
@@ -152,10 +171,12 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
-                {tab.children.map((child, i) => (
-                  <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
-                ))}
+              <LeafyTab className={cx(isProductLanding ? landingTabStyling : '')} key={tabId} name={tabTitle}>
+                <TabContent isProductLanding={isProductLanding}>
+                  {tab.children.map((child, i) => (
+                    <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
+                  ))}
+                </TabContent>
               </LeafyTab>
             );
           })}
