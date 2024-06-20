@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
+import ChatbotUi from '../ChatbotUi';
 import DarkModeDropdown from './DarkModeDropdown';
 
 const ActionBarContainer = styled('div')`
@@ -11,33 +12,68 @@ const ActionBarContainer = styled('div')`
   padding-top: ${theme.size.small};
   padding-bottom: ${theme.size.small};
   padding-right: ${theme.size.large};
-  padding-left: ${theme.size.xlarge};
   width: 100%;
   position: sticky;
   top: 0;
+  flex-wrap: wrap;
   z-index: ${theme.zIndexes.header};
   background-color: ${(props) => (props.darkMode ? palette.black : palette.white)};
   border-bottom: 1px solid ${(props) => (props.darkMode ? palette.gray.dark2 : palette.gray.light2)};
+
+  @media ${theme.screenSize.mediumAndUp} {
+    & > div {
+      flex: 0 1 auto;
+    }
+  }
+
+  @media ${theme.screenSize.upToMedium} {
+    justify-content: space-between;
+    padding-right: 0;
+  }
 `;
 
-const SearchBarPlacholder = styled('div')``;
+const ActionBarSearchContainer = styled.div`
+  align-items: center;
+  display: flex;
+  width: 80%;
+
+  @media ${theme.screenSize.upToMedium} {
+    width: 100%;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    & > div {
+      padding: ${theme.size.default} 32px;
+    }
+  }
+`;
 
 const ActionsBox = styled('div')`
   display: flex;
   align-items: center;
   column-gap: ${theme.size.default};
+
+  @media ${theme.screenSize.upToMedium} {
+    padding-left: 3rem;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    padding-left: 2rem;
+  }
 `;
 
 const ActionBar = ({ ...props }) => {
   const { darkMode } = useDarkMode();
   return (
     <ActionBarContainer className={props.className} darkMode={darkMode}>
-      <SearchBarPlacholder>
-        <input placeholder="This will be search chatbot"></input>
-      </SearchBarPlacholder>
+      <ActionBarSearchContainer>
+        <ChatbotUi darkMode={darkMode} />
+      </ActionBarSearchContainer>
       <ActionsBox>
         <DarkModeDropdown></DarkModeDropdown>
-        Feedback Button here
+        <div>
+          <button>Feedback</button>
+        </div>
       </ActionsBox>
     </ActionBarContainer>
   );
