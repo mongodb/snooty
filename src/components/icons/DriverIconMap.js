@@ -1,23 +1,22 @@
-import IconC from '../icons/C';
-import IconCompass from '../icons/Compass';
-import IconCpp from '../icons/Cpp';
-import IconCsharp from '../icons/Csharp';
-import IconGo from '../icons/Go';
-import IconJava from '../icons/Java';
-import IconKotlin from '../icons/Kotlin';
-import IconNode from '../icons/Node';
-import IconPHP from '../icons/Php';
-import IconPython from '../icons/Python';
-import IconRuby from '../icons/Ruby';
-import IconRust from '../icons/Rust';
-import IconScala from '../icons/Scala';
-import IconShell from '../icons/Shell';
-import IconSwift from '../icons/Swift';
-import IconObjectiveC from '../icons/ObjectiveC';
-import IconJavascript from '../icons/Javascript';
-import IconTypescript from '../icons/Typescript';
-import IconDart from '../icons/Dart';
-import IconRustDark from './RustDark';
+import IconC from './C';
+import IconCompass from './Compass';
+import IconCpp from './Cpp';
+import IconCsharp from './Csharp';
+import IconGo from './Go';
+import IconJava from './Java';
+import IconKotlin from './Kotlin';
+import IconNode from './Node';
+import IconPHP from './Php';
+import IconPython from './Python';
+import IconRuby from './Ruby';
+import IconRust from './Rust';
+import IconScala from './Scala';
+import IconShell from './Shell';
+import IconSwift from './Swift';
+import IconObjectiveC from './ObjectiveC';
+import IconJavascript from './Javascript';
+import IconTypescript from './Typescript';
+import IconDart from './Dart';
 import IconNodeDark from './NodeDark';
 import IconJavaDark from './JavaDark';
 
@@ -61,9 +60,9 @@ export const setDriversIconsMap = (darkMode) => {
     driverIconMap['java-sync'] = IconJavaDark;
     driverIconMap['java-async'] = IconJavaDark;
     driverIconMap.nodejs = IconNodeDark;
-    driverIconMap.rust = IconRustDark;
-    driverIconMap['rust-async'] = IconRustDark;
-    driverIconMap['rust-sync'] = IconRustDark;
+    //driverIconMap.rust = IconRustDark;
+    // driverIconMap['rust-async'] = IconRustDark;
+    // driverIconMap['rust-sync'] = IconRustDark;
   }
 
   return driverIconMap;
