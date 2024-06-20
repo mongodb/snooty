@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
 import { CodeProvider } from '../Code/code-context';
@@ -64,29 +64,11 @@ const getTabsStyling = ({ isHidden, isProductLanding }) => css`
   ${isProductLanding && landingTabsStyling};
 `;
 
-const landingTabStyling = css`
-  display: grid;
-  column-gap: ${theme.size.medium};
-  grid-template-columns: repeat(2, 1fr);
-  margin-top: unset !important;
-
-  img {
-    border-radius: ${theme.size.small};
-    grid-column: 2;
-    margin-top: 0px;
-    display: block;
-  }
-
-  @media ${theme.screenSize.upToLarge} {
-    display: block;
-  }
-`;
-
 const TabContent = styled('div')`
   margin-top: ${theme.size.medium};
   ${(props) =>
-    props.isProductLanding
-      ? `  display: grid;
+    props.isProductLanding &&
+    `  display: grid;
   column-gap: ${theme.size.medium};
   grid-template-columns: repeat(2, 1fr);
 
@@ -99,8 +81,7 @@ const TabContent = styled('div')`
 
   @media ${theme.screenSize.upToLarge} {
     display: block;
-  }`
-      : ''}
+  }`}
 `;
 
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
@@ -171,7 +152,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab className={cx(isProductLanding ? landingTabStyling : '')} key={tabId} name={tabTitle}>
+              <LeafyTab key={tabId} name={tabTitle}>
                 <TabContent isProductLanding={isProductLanding}>
                   {tab.children.map((child, i) => (
                     <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
