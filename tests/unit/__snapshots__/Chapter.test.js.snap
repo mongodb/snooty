@@ -7,16 +7,16 @@ exports[`renders correctly 1`] = `
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
   transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
   border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size: 13px;
   line-height: 20px;
   padding: 24px;
   min-height: 68px;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: #FFFFFF;
+  color: #1C2D38;
   background-color: #FFFFFF;
   border: 1px solid #F9FBFA;
   padding: 32px 24px;
@@ -144,11 +144,12 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-12>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-12:focus,
@@ -161,12 +162,12 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-12:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-12:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-13 {
@@ -246,6 +247,7 @@ exports[`renders correctly 1`] = `
         <a
           class="emotion-12 emotion-13 emotion-14"
           href="/cloud/account/"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           <span>
             Create and Manage a MongoDB Account
@@ -259,6 +261,7 @@ exports[`renders correctly 1`] = `
         <a
           class="emotion-12 emotion-13 emotion-14"
           href="/cloud/connectionstring/"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           <span>
             Set Up Atlas Connectivity
@@ -270,6 +273,7 @@ exports[`renders correctly 1`] = `
         <a
           class="emotion-12 emotion-13 emotion-14"
           href="/cloud/migrate-from-aws-to-atlas/"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           <span>
             Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas

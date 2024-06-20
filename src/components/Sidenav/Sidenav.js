@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
@@ -62,16 +63,9 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
     ${isCollapsed && 'display: none;'}
   }
 
-  a,
   p {
     letter-spacing: unset;
     color: ${palette.black};
-  },
-  
-  // avoid GatsbyLink underline styling being applied to side nav
-  // may need to remove during DOP-2880
-  a:hover::after {
-    background-color: unset;
   }
 
 `;
@@ -91,7 +85,7 @@ const translatedFontFamilyStyles = css`
 
 // use eol status to determine side nav styling
 const getTopAndHeight = (topValue, template) => css`
-  ${template === 'landing'
+  ${template === 'landing' || process.env['GATSBY_ENABLE_DARK_MODE'] === 'true'
     ? `
     top: 0px;
     height: calc(100vh);`
@@ -127,7 +121,7 @@ const Spaceholder = styled('div')`
 
 export const Border = styled('hr')`
   border: unset;
-  border-bottom: 1px solid ${palette.gray.light2};
+  border-bottom: 1px solid var(--border-bottom-color);
   margin: ${theme.size.small} 0;
   width: 100%;
 `;
@@ -142,7 +136,7 @@ const ArtificialPadding = styled('div')`
 // This allows the products in the ProductsList to slide up/down when closing/opening the list
 // without appearing inline with above text
 const NavTopContainer = styled('div')`
-  background-color: ${palette.gray.light3};
+  background-color: var(--background-color);
   position: relative;
   z-index: 1;
 `;
@@ -164,6 +158,8 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
 
+  const { darkMode } = useDarkMode();
+
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(eol);
 
@@ -181,7 +177,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const ia = page?.options?.ia;
 
   const template = page?.options?.template;
-  const isLanding = template === 'landing';
+  const hideIaHeader = template === 'landing' || template === 'search';
   const isGuidesLanding = project === 'guides' && template === 'product-landing';
   const isGuidesTemplate = template === 'guide';
 
@@ -242,13 +238,18 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
           >
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
-              <NavTopContainer>
+              <NavTopContainer
+                style={{
+                  '--background-color': darkMode ? palette.gray.dark4 : palette.gray.light3,
+                  '--border-bottom-color': darkMode ? palette.gray.dark2 : palette.gray.light2,
+                }}
+              >
                 <ArtificialPadding />
-                <DocsHomeButton />
+                <DocsHomeButton darkMode={darkMode} />
                 <Border />
                 {ia && (
                   <IA
-                    header={!isLanding && <span className={cx([titleStyle])}>{formatText(pageTitle)}</span>}
+                    header={!hideIaHeader ? <span className={cx([titleStyle])}>{formatText(pageTitle)}</span> : null}
                     handleClick={() => {
                       setBack(false);
                       hideMobileSidenav();
@@ -264,7 +265,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                   />
                 )}
               </NavTopContainer>
-              {showAllProducts && <ProductsList />}
+              {showAllProducts && <ProductsList darkMode={darkMode} />}
             </IATransition>
 
             {!ia && !showAllProducts && (
@@ -275,6 +276,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                   as={Link}
                   to={isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/'}
                   hideExternalIcon={true}
+                  style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark3 }}
                 >
                   {navTitle}
                 </SideNavItem>

@@ -22,7 +22,6 @@ import DefinitionList from './DefinitionList';
 import DefinitionListItem from './DefinitionList/DefinitionListItem';
 import DeprecatedVersionSelector from './DeprecatedVersionSelector';
 import Describe from './Describe';
-import DriversIndexTiles from './DriversIndexTiles';
 import Emphasis from './Emphasis';
 import Extract from './Extract';
 import Field from './FieldList/Field';
@@ -66,7 +65,6 @@ import Target from './Target';
 import Text from './Text';
 import Time from './Time';
 import TitleReference from './TitleReference';
-import Topic from './Topic';
 import Transition from './Transition';
 
 import VersionModified from './VersionModified';
@@ -101,7 +99,7 @@ const IGNORED_NAMES = new Set([
   'facet',
 ]);
 const IGNORED_TYPES = new Set(['comment', 'inline_target', 'named_reference', 'substitution_definition']);
-const DEPRECATED_ADMONITIONS = new Set(['admonition', 'topic', 'caution', 'danger']);
+const DEPRECATED_ADMONITIONS = new Set(['admonition', 'caution', 'danger']);
 
 const roleMap = {
   abbr: RoleAbbr,
@@ -151,7 +149,6 @@ const componentMap = {
   deprecated: VersionModified,
   'deprecated-version-selector': DeprecatedVersionSelector,
   describe: Describe,
-  'drivers-index-tiles': DriversIndexTiles, // deprecated.
   emphasis: Emphasis,
   extract: Extract,
   field: Field,
@@ -200,7 +197,6 @@ const componentMap = {
   text: Text,
   time: Time,
   title_reference: TitleReference,
-  topic: Topic,
   transition: Transition,
 
   versionadded: VersionModified,

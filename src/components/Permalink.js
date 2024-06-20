@@ -1,28 +1,23 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
-import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
+import { cx, css } from '@leafygreen-ui/emotion';
+import Icon from '@leafygreen-ui/icon';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { palette } from '@leafygreen-ui/palette';
 import Tooltip from '@leafygreen-ui/tooltip';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import useCopyClipboard from '../hooks/useCopyClipboard';
 import useHashAnchor from '../hooks/use-hash-anchor';
 
-const tooltipStyle = LeafyCSS` 
+const tooltipStyle = css`
   padding: 2px 8px;
   font-size: ${theme.fontSize.xsmall};
 
   > div {
     font-size: ${theme.fontSize.tiny};
   }
-`;
-
-const LinkIcon = styled.img`
-  border-radius: 0 !important;
-  display: initial !important;
-  margin: initial !important;
 `;
 
 const HeaderBuffer = styled.div`
@@ -39,9 +34,15 @@ const headingStyle = (copied) => css`
   visibility: hidden;
 `;
 
+const iconStyling = css`
+  vertical-align: middle;
+  margin-top: -2px;
+`;
+
 const Permalink = ({ id, description, buffer }) => {
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
+  const { darkMode } = useDarkMode();
   const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
   const bufferSpace = buffer || `-${theme.header.navbarScrollOffset}`;
 
@@ -57,14 +58,18 @@ const Permalink = ({ id, description, buffer }) => {
   return (
     <>
       <a
-        className="headerlink"
+        className={cx('headerlink', headingStyle(copied))}
         ref={setHeadingNode}
-        css={headingStyle(copied)}
         href={`#${id}`}
         title={'Permalink to this ' + description}
         onClick={handleClick}
       >
-        <LinkIcon src={withPrefix('assets/link.svg')} width={10} height={10} />
+        <Icon
+          className={cx(iconStyling)}
+          glyph={'Link'}
+          size={12}
+          fill={darkMode ? palette.gray.light1 : palette.gray.base}
+        />
         <Tooltip
           className={cx(tooltipStyle)}
           triggerEvent="click"

@@ -53,16 +53,16 @@ exports[`card correctly with and without url 1`] = `
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
   transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
   border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size: 13px;
   line-height: 20px;
   padding: 24px;
   min-height: 68px;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: #FFFFFF;
+  color: #1C2D38;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -153,11 +153,12 @@ exports[`card correctly with and without url 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-8>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-8:focus,
@@ -170,12 +171,12 @@ exports[`card correctly with and without url 1`] = `
 }
 
 .emotion-8:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-8:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-9 {
@@ -200,16 +201,16 @@ exports[`card correctly with and without url 1`] = `
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
   transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
   border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size: 13px;
   line-height: 20px;
   padding: 24px;
   min-height: 68px;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: #FFFFFF;
+  color: #1C2D38;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
@@ -357,6 +358,7 @@ exports[`card correctly with and without url 1`] = `
             <a
               class="emotion-8 emotion-9"
               href="/sdk/android/#std-label-android-intro"
+              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               Android
             </a>
@@ -365,6 +367,7 @@ exports[`card correctly with and without url 1`] = `
             <a
               class="emotion-8 emotion-9"
               href="/sdk/ios/#std-label-ios-intro"
+              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               iOS
             </a>
@@ -373,6 +376,7 @@ exports[`card correctly with and without url 1`] = `
             <a
               class="emotion-8 emotion-9"
               href="/sdk/dotnet/#std-label-dotnet-intro"
+              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               .Net
             </a>
@@ -381,6 +385,7 @@ exports[`card correctly with and without url 1`] = `
             <a
               class="emotion-8 emotion-9"
               href="/web/#std-label-web-intro"
+              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               Web
             </a>
@@ -389,6 +394,7 @@ exports[`card correctly with and without url 1`] = `
             <a
               class="emotion-8 emotion-9"
               href="/sdk/react-native/#std-label-react-native-intro"
+              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               React Native
             </a>
@@ -397,6 +403,7 @@ exports[`card correctly with and without url 1`] = `
             <a
               class="emotion-8 emotion-9"
               href="/sdk/node/#std-label-node-intro"
+              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               Node.js
             </a>

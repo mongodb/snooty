@@ -54,10 +54,6 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   gap: 10px;
 }
 
-.emotion-4 p {
-  color: #5C6C75;
-}
-
 @media only screen and (max-width: 767px) {
   .emotion-4 {
     -webkit-flex-direction: column;
@@ -747,7 +743,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 }
 
 .emotion-53 {
-  color: #016BF8;
+  color: var(--color);
   word-break: break-all;
 }
 
@@ -766,7 +762,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 }
 
 .emotion-58 {
-  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -778,13 +774,13 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   font-weight: 700;
   font-size: 12px;
   line-height: 16px;
-  border-radius: 5px;
+  border-radius: 24px;
   height: 18px;
   padding-left: 6px;
   padding-right: 6px;
   text-transform: uppercase;
   border: 1px solid;
-  letter-spacing: 1px;
+  letter-spacing: 0.4px;
   background-color: #FFEAE5;
   border-color: #FFCDC7;
   color: #970606;
@@ -801,7 +797,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 }
 
 .emotion-94 {
-  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -813,13 +809,13 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   font-weight: 700;
   font-size: 12px;
   line-height: 16px;
-  border-radius: 5px;
+  border-radius: 24px;
   height: 18px;
   padding-left: 6px;
   padding-right: 6px;
   text-transform: uppercase;
   border: 1px solid;
-  letter-spacing: 1px;
+  letter-spacing: 0.4px;
   background-color: #E3FCF7;
   border-color: #C0FAE6;
   color: #00684A;
@@ -862,6 +858,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         </h1>
         <p
           class="emotion-7"
+          style="color: rgb(92, 108, 117);"
         >
           (2.0~422ab47f864)
         </p>
@@ -1051,6 +1048,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
@@ -1096,6 +1094,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
@@ -1141,6 +1140,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   GET /api/atlas/v2/groups/byName/{groupName}
                 </h6>
@@ -1198,6 +1198,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   PUT /api/atlas/v2/groups/{groupId}/alertConfigs/{alertConfigId}
                 </h6>
@@ -1338,6 +1339,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   POST /api/atlas/v2/groups/{groupId}/accessList
                 </h6>
@@ -1388,6 +1390,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
               <span>
                 <h6
                   class="emotion-53 emotion-54 emotion-55"
+                  style="--color: #016BF8;"
                 >
                   GET /api/atlas/v2/groups/byName/{groupName}
                 </h6>

@@ -180,17 +180,6 @@ Snapshots may require updates when making changes to snooty components
 npm test -- -u
 ```
 
-## Lighthouse Scores
-
-We use [Lighthouse](https://github.com/GoogleChrome/lighthouse) to keep track of our [Core Web Vitals](https://developers.google.com/search/docs/appearance/core-web-vitals) over time.
-
-### LHCI
-
-Our dedicated DOP Lighthouse Server is hosted on Kanopy at https://docs-lighthouse-server.docs.prod.corp.mongodb.com/
-The server code can be found [here](https://github.com/10gen/docs-lighthouse-server).
-
-Every push to Snooty's `main` branch runs Lighthouse reports on the current `docs` and `cloud-docs` landing pages and uploads them to our Lighthouse Server for easy access and comparison.
-
 ## Linting & Style
 
 We use [ESLint](https://eslint.org) and [Prettier](https://prettier.io) to help with linting and style.

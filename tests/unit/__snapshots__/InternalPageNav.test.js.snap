@@ -37,7 +37,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  color: #001E2B;
+  color: var(--arrow-color);
 }
 
 .emotion-5 {
@@ -51,11 +51,12 @@ exports[`renders a page with next and previous links correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-5>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-5:focus,
@@ -68,20 +69,22 @@ exports[`renders a page with next and previous links correctly 1`] = `
 }
 
 .emotion-5:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-5:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-6 {
   line-height: 28px;
+  --hover-text-decoration-color: var(--underline-color)!important;
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--arrow-color: #001E2B; --underline-color: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
@@ -94,6 +97,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
       <a
         class="emotion-5 emotion-6"
         href="/drivers/csharp/"
+        style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         title="Previous Section"
       >
         MongoDB C#/.NET Driver
@@ -105,6 +109,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
       <a
         class="emotion-5 emotion-6"
         href="/drivers/java/"
+        style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         title="Next Section"
       >
         Java MongoDB Driver
@@ -156,7 +161,7 @@ exports[`renders a page with no next link correctly 1`] = `
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  color: #001E2B;
+  color: var(--arrow-color);
 }
 
 .emotion-5 {
@@ -170,11 +175,12 @@ exports[`renders a page with no next link correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-5>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-5:focus,
@@ -187,20 +193,22 @@ exports[`renders a page with no next link correctly 1`] = `
 }
 
 .emotion-5:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-5:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-6 {
   line-height: 28px;
+  --hover-text-decoration-color: var(--underline-color)!important;
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--arrow-color: #001E2B; --underline-color: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
@@ -213,6 +221,7 @@ exports[`renders a page with no next link correctly 1`] = `
       <a
         class="emotion-5 emotion-6"
         href="/drivers/go/"
+        style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         title="Previous Section"
       >
         MongoDB Go Driver
@@ -265,11 +274,12 @@ exports[`renders a page with no previous link correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-4>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-4:focus,
@@ -282,16 +292,17 @@ exports[`renders a page with no previous link correctly 1`] = `
 }
 
 .emotion-4:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-4:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-5 {
   line-height: 28px;
+  --hover-text-decoration-color: var(--underline-color)!important;
 }
 
 .emotion-6 {
@@ -299,11 +310,12 @@ exports[`renders a page with no previous link correctly 1`] = `
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
-  color: #001E2B;
+  color: var(--arrow-color);
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--arrow-color: #001E2B; --underline-color: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
@@ -311,6 +323,7 @@ exports[`renders a page with no previous link correctly 1`] = `
       <a
         class="emotion-4 emotion-5"
         href="/drivers/go/"
+        style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         title="Next Section"
       >
         MongoDB Go Driver

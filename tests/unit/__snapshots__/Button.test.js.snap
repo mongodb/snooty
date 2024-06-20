@@ -13,11 +13,12 @@ exports[`button component renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-0>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-0:focus,
@@ -30,12 +31,12 @@ exports[`button component renders correctly 1`] = `
 }
 
 .emotion-0:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-0:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-0 {
@@ -49,11 +50,12 @@ exports[`button component renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-0>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-0:focus,
@@ -66,12 +68,12 @@ exports[`button component renders correctly 1`] = `
 }
 
 .emotion-0:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-0:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-1 {
@@ -188,6 +190,7 @@ exports[`button component renders correctly 1`] = `
     class="emotion-0 lg-ui-button-0000 button emotion-1"
     data-lgid="lg-button"
     href="/install/"
+    style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
   >
     <div
       class="emotion-2"

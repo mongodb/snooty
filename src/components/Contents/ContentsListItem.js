@@ -2,17 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
 
 const LINK_DEPTH_PADDING = 16;
 
-const activeBorderLeftCSS = css`
-  border-left: 2px solid ${palette.black};
-  padding-left: 0;
-`;
-
-const listItemStyling = ({ isActive }) => css`
+const listItemStyling = ({ isActive, darkMode }) => css`
   padding: 6px 0 6px 1px;
 
   &:hover,
@@ -21,17 +17,32 @@ const listItemStyling = ({ isActive }) => css`
   }
 
   @media ${theme.screenSize.largeAndUp} {
-    ${isActive ? activeBorderLeftCSS : `border-left: 1px solid ${palette.gray.light2};`}
+    border-left-style: solid;
+    border-left-width: ${isActive ? '2px' : '1px'};
+    border-left-color: ${isActive
+      ? darkMode
+        ? // active & dark
+          palette.gray.light1
+        : // active & light
+          palette.black
+      : darkMode
+      ? // inactive & dark
+        palette.gray.dark2
+      : // inactive & light
+        palette.gray.light2};
+    ${isActive && 'padding-left: 0;'}
 
     &:hover,
     &:active {
-      ${activeBorderLeftCSS}
+      border-left-width: 2px;
+      border-left-color: ${darkMode ? palette.gray.light1 : palette.black};
+      padding-left: 0;
     }
   }
 `;
 
-const linkStyling = ({ depth, isActive }) => css`
-  color: ${palette.black};
+const linkStyling = ({ depth, isActive, darkMode }) => css`
+  color: ${darkMode ? palette.gray.light2 : palette.black};
   font-size: ${theme.fontSize.small};
   line-height: ${theme.fontSize.default};
   font-weight: normal;
@@ -54,9 +65,11 @@ const linkStyling = ({ depth, isActive }) => css`
 `;
 
 const ContentsListItem = ({ children, depth = 0, id, isActive = false }) => {
+  const { darkMode } = useDarkMode();
+
   return (
-    <li className={listItemStyling({ isActive })}>
-      <Link className={linkStyling({ depth, isActive })} to={`#${id}`} depth={depth} isActive={isActive}>
+    <li className={listItemStyling({ isActive, darkMode })}>
+      <Link className={linkStyling({ depth, isActive, darkMode })} to={`#${id}`} depth={depth} isActive={isActive}>
         {children}
       </Link>
     </li>

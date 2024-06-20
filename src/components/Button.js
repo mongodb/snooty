@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import LeafyButton from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 
@@ -19,12 +20,13 @@ const Button = ({
     options: { uri },
   },
   variant = 'primary',
-  darkMode,
+  darkMode: darkModeProp,
   size = 'default',
   baseFontSize,
   rightGlyph,
   ...rest
 }) => {
+  const { darkMode } = useDarkMode();
   const componentProps = {};
   if (uri) {
     componentProps.as = Link;
@@ -37,7 +39,7 @@ const Button = ({
       className={cx(componentProps.as ? buttonStyling : '', 'button')}
       baseFontSize={baseFontSize}
       size={size}
-      darkMode={darkMode}
+      darkMode={darkModeProp ?? darkMode}
       variant={variant}
       rightGlyph={rightGlyph ? <Icon glyph={rightGlyph} /> : null}
       {...componentProps}

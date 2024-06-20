@@ -1,5 +1,4 @@
 import { css } from '@leafygreen-ui/emotion';
-import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 
 export const sideNavItemBasePadding = css`
@@ -34,7 +33,7 @@ export const sideNavItemFontSize = css`
 `;
 
 export const titleStyle = css`
-  color: ${palette.gray.dark3};
+  color: var(--color);
   font-size: ${theme.fontSize.small};
   font-weight: bold;
   line-height: 20px;

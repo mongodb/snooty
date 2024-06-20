@@ -13,12 +13,12 @@ exports[`renders with "connected" styling 1`] = `
 
 .emotion-0:not(:last-child):after {
   content: '';
-  border-left: 2px dashed #E8EDEB;
+  border-left: 2px dashed var(--border-left);
   bottom: 0;
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 .emotion-0 h2,
@@ -47,11 +47,11 @@ exports[`renders with "connected" styling 1`] = `
   -webkit-justify-content: center;
   justify-content: center;
   position: relative;
-  background-color: #E3FCF7;
-  color: #00684A;
+  background-color: var(--background-color);
+  color: var(--color);
   height: 34px;
   width: 34px;
-  z-index: 0;
+  z-index: 1;
 }
 
 .emotion-6 {
@@ -97,11 +97,12 @@ exports[`renders with "connected" styling 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-9>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-9:focus,
@@ -114,22 +115,24 @@ exports[`renders with "connected" styling 1`] = `
 }
 
 .emotion-9:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-9:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--border-left: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
         class="emotion-4 emotion-5"
+        style="--background-color: #E3FCF7; --color: #00684A;"
       >
         1
       </div>
@@ -148,6 +151,7 @@ exports[`renders with "connected" styling 1`] = `
         <a
           class="emotion-9"
           href="/import-export/#std-label-compass-import-export"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           To learn more, see Import and Export Data
         </a>
@@ -170,12 +174,12 @@ exports[`renders with "connected" styling by default 1`] = `
 
 .emotion-0:not(:last-child):after {
   content: '';
-  border-left: 2px dashed #E8EDEB;
+  border-left: 2px dashed var(--border-left);
   bottom: 0;
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 .emotion-0 h2,
@@ -204,11 +208,11 @@ exports[`renders with "connected" styling by default 1`] = `
   -webkit-justify-content: center;
   justify-content: center;
   position: relative;
-  background-color: #E3FCF7;
-  color: #00684A;
+  background-color: var(--background-color);
+  color: var(--color);
   height: 34px;
   width: 34px;
-  z-index: 0;
+  z-index: 1;
 }
 
 .emotion-6 {
@@ -254,11 +258,12 @@ exports[`renders with "connected" styling by default 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-9>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-9:focus,
@@ -271,22 +276,24 @@ exports[`renders with "connected" styling by default 1`] = `
 }
 
 .emotion-9:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-9:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <div
     class="emotion-0 emotion-1"
+    style="--border-left: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
         class="emotion-4 emotion-5"
+        style="--background-color: #E3FCF7; --color: #00684A;"
       >
         1
       </div>
@@ -305,6 +312,7 @@ exports[`renders with "connected" styling by default 1`] = `
         <a
           class="emotion-9"
           href="/import-export/#std-label-compass-import-export"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           To learn more, see Import and Export Data
         </a>
@@ -349,8 +357,8 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #001E2B;
-  color: #FFFFFF;
+  background-color: var(--background-color);
+  color: var(--color);
   height: 24px;
   width: 24px;
 }
@@ -382,11 +390,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-9>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-9:focus,
@@ -399,12 +408,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 }
 
 .emotion-9:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-9:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 <div
@@ -415,6 +424,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
     >
       <div
         class="emotion-4 emotion-5"
+        style="--background-color: #001E2B; --color: #FFFFFF;"
       >
         1
       </div>
@@ -433,6 +443,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
         <a
           class="emotion-9"
           href="/import-export/#std-label-compass-import-export"
+          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           To learn more, see Import and Export Data
         </a>

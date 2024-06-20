@@ -39,7 +39,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-4 {
-  color: #5C6C75;
+  color: var(--color);
   font-size: 16px;
   margin-bottom: 16px;
 }
@@ -209,16 +209,16 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
   transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
   border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size: 13px;
   line-height: 20px;
   padding: 24px;
   min-height: 68px;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: #FFFFFF;
+  color: #1C2D38;
   margin-top: 40px;
   padding: 40px 24px;
 }
@@ -344,11 +344,12 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-26>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-26:focus,
@@ -361,12 +362,12 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .emotion-26:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-26:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-27 {
@@ -390,6 +391,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
     >
       <div
         class="emotion-4 emotion-5"
+        style="--color: #5C6C75;"
       >
         What's Next
       </div>
@@ -469,6 +471,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
           <a
             class="emotion-26 emotion-27 emotion-28"
             href="/server/read/"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             Read Data in MongoDB
           </a>
@@ -518,7 +521,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-4 {
-  color: #5C6C75;
+  color: var(--color);
   font-size: 16px;
   margin-bottom: 16px;
 }
@@ -539,11 +542,12 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-8>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-8:focus,
@@ -556,12 +560,12 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .emotion-8:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-8:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-9 {
@@ -675,16 +679,16 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
   transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
   border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size: 13px;
   line-height: 20px;
   padding: 24px;
   min-height: 68px;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: #FFFFFF;
+  color: #1C2D38;
   margin-top: 40px;
   padding: 40px 24px;
 }
@@ -820,6 +824,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
     >
       <div
         class="emotion-4 emotion-5"
+        style="--color: #5C6C75;"
       >
         What's Next
       </div>
@@ -833,6 +838,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
         class="emotion-8 lg-ui-button-0000 emotion-9"
         data-lgid="lg-button"
         href="/server/read/"
+        style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         type="button"
       >
         <div
@@ -889,6 +895,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
           <a
             class="emotion-8 emotion-28 emotion-29"
             href="/server/read/"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             Read Data in MongoDB
           </a>
@@ -938,7 +945,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-4 {
-  color: #5C6C75;
+  color: var(--color);
   font-size: 16px;
   margin-bottom: 16px;
 }
@@ -959,11 +966,12 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--color);
+  font-weight: var(--font-weight);
 }
 
 .emotion-8>code {
-  color: #016BF8;
+  color: var(--color);
 }
 
 .emotion-8:focus,
@@ -976,12 +984,12 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .emotion-8:focus {
-  text-decoration-color: #016BF8;
+  text-decoration-color: var(--focus-text-decoration-color);
   outline: none;
 }
 
 .emotion-8:hover {
-  text-decoration-color: #E8EDEB;
+  text-decoration-color: var(--hover-text-decoration-color);
 }
 
 .emotion-9 {
@@ -1095,16 +1103,16 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
   transition-property: border,box-shadow;
-  border: 1px solid #E8EDEB;
-  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
-  background-color: white;
-  color: #1C2D38;
   border-radius: 24px;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-size: 13px;
   line-height: 20px;
   padding: 24px;
   min-height: 68px;
+  border: 1px solid #E8EDEB;
+  box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
+  background-color: #FFFFFF;
+  color: #1C2D38;
   margin-top: 40px;
   padding: 40px 24px;
 }
@@ -1295,6 +1303,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
     >
       <div
         class="emotion-4 emotion-5"
+        style="--color: #5C6C75;"
       >
         What's Next
       </div>
@@ -1308,6 +1317,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
         class="emotion-8 lg-ui-button-0000 emotion-9"
         data-lgid="lg-button"
         href="/cloud/connectionstring/"
+        style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         type="button"
       >
         <div
@@ -1369,6 +1379,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
           <a
             class="emotion-8 emotion-28 emotion-29"
             href="/cloud/account/"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             Create and Manage a MongoDB Account
           </a>
@@ -1397,6 +1408,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
           <a
             class="emotion-8 emotion-28 emotion-29"
             href="/cloud/connectionstring/"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             Set Up Atlas Connectivity
           </a>
@@ -1425,6 +1437,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
           <a
             class="emotion-8 emotion-28 emotion-29"
             href="/cloud/migrate-from-aws-to-atlas/"
+            style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
           >
             Migrate a MongoDB Replicate Set from AWS to MongoDB Atlas
           </a>
