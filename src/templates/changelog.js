@@ -9,7 +9,7 @@ const Wrapper = styled('div')`
   overflow-x: auto;
 `;
 
-const DocumentContainer = styled('div')`
+const DocumentContainer = styled('main')`
   display: grid;
   grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(2, minmax(0, ${CONTENT_MAX_WIDTH / 2}px)) minmax(
       ${theme.size.xlarge},
