@@ -49,24 +49,32 @@ exports[`renders correctly 1`] = `
   margin-bottom: 0;
 }
 
-.emotion-2 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
+.emotion-1 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  padding: 4px 8px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 24px;
+  height: 18px;
+  padding-left: 6px;
+  padding-right: 6px;
+  text-transform: uppercase;
+  border: 1px solid;
+  letter-spacing: 0.4px;
   background-color: #E3FCF7;
-  border: 1px solid #C0FAE6;
+  border-color: #C0FAE6;
   color: #00684A;
-  margin-right: auto;
 }
 
-.emotion-3 {
+.emotion-2 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -77,6 +85,22 @@ exports[`renders correctly 1`] = `
   font-weight: 500;
   letter-spacing: 0.5px;
   margin: 16px 0 8px 0;
+}
+
+.emotion-2 strong,
+.emotion-2 b {
+  font-weight: 700;
+}
+
+.emotion-3 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  margin-bottom: 16px;
 }
 
 .emotion-3 strong,
@@ -92,7 +116,6 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
-  margin-bottom: 16px;
 }
 
 .emotion-4 strong,
@@ -100,26 +123,11 @@ exports[`renders correctly 1`] = `
   font-weight: 700;
 }
 
-.emotion-5 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-}
-
-.emotion-5 strong,
-.emotion-5 b {
-  font-weight: 700;
-}
-
-.emotion-5 a {
+.emotion-4 a {
   line-height: unset;
 }
 
-.emotion-6 {
+.emotion-5 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -149,8 +157,8 @@ exports[`renders correctly 1`] = `
   display: inline;
 }
 
-.emotion-6:hover,
-.emotion-6:focus {
+.emotion-5:hover,
+.emotion-5:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -159,15 +167,15 @@ exports[`renders correctly 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-6:focus {
+.emotion-5:focus {
   outline: none;
 }
 
-.emotion-6:hover {
+.emotion-5:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-6:focus {
+.emotion-5:focus {
   text-decoration-color: #016BF8;
 }
 
@@ -185,27 +193,29 @@ exports[`renders correctly 1`] = `
       src="/images/icons/university.svg"
       width="24px"
     />
-    <span
-      class="emotion-1 emotion-2"
-    >
-      Test card tag
-    </span>
+    <div>
+      <div
+        class="emotion-1"
+      >
+        Test card tag
+      </div>
+    </div>
     <div>
       <p
-        class="emotion-3"
+        class="emotion-2"
       >
         Test card headline
       </p>
       <p
-        class="emotion-4"
+        class="emotion-3"
       >
         Test card paragraph
       </p>
       <p
-        class="emotion-5"
+        class="emotion-4"
       >
         <a
-          class="lg-ui-0001 emotion-6"
+          class="lg-ui-0001 emotion-5"
           href="https://university.mongodb.com/courses/M001/about"
           target="_self"
         >

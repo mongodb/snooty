@@ -10,7 +10,7 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import ConditionalWrapper from '../ConditionalWrapper';
 import Link from '../Link';
-import Tag from '../Tag';
+import CommunityPillLink from '../CommunityPillLink';
 import { isRelativeUrl } from '../../utils/is-relative-url';
 import { getSuitableIcon } from '../../utils/get-suitable-icon';
 
@@ -92,10 +92,6 @@ const headingStyling = ({ isCompact, isExtraCompact, isLargeIconStyle }) => css`
   ${isLargeIconStyle && 'margin-bottom: 36px;'}
 `;
 
-const FlexTag = styled(Tag)`
-  margin-right: auto;
-`;
-
 const compactCardStyling = css`
   align-items: flex-start;
   flex-direction: row;
@@ -175,7 +171,7 @@ const Card = ({
         condition={isCompact || isExtraCompact}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
       >
-        {tag && <FlexTag>{tag}</FlexTag>}
+        {tag && <CommunityPillLink variant="green" text={tag} />}
         <div>
           {headline && (
             <Body className={cx(headingStyling({ isCompact, isExtraCompact, isLargeIconStyle }))} weight="medium">

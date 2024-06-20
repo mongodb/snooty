@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { withPrefix } from 'gatsby';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
@@ -236,6 +237,9 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   // lock the page when element is selected
   useNoScroll(!!currElem.current && domElementClickedRef.current === 'solid');
 
+  const { darkMode } = useDarkMode();
+  const glyphImage = darkMode ? 'assets/screenshoticon-dark.svg' : 'assets/screenshoticon-light.svg';
+
   return (
     <>
       {isScreenshotButtonClicked && (
@@ -328,7 +332,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
       <ScreenshotSelect
         onClick={takeNewScreenshot}
-        leftGlyph={<img src={withPrefix('assets/screenshoticon.svg')} alt="Screenshot Button" />}
+        leftGlyph={<img src={withPrefix(glyphImage)} alt="Screenshot Button" />}
         {...props}
       >
         {SCREENSHOT_BUTTON_TEXT}

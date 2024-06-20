@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@leafygreen-ui/button';
 import styled from '@emotion/styled';
-import { Subtitle } from '@leafygreen-ui/typography';
+import { Link, Subtitle } from '@leafygreen-ui/typography';
 import { useFeedbackContext } from '../context';
 import useScreenSize from '../../../../hooks/useScreenSize';
 import { Layout, Subheading } from '../components/view-components';
@@ -35,13 +35,17 @@ const SubmittedView = () => {
         {SUBMITTED_VIEW_RESOURCE_LINKS.map(({ text, href }, index) => (
           <React.Fragment key={index}>
             <br />
-            <a href={href}>{text}</a>
+            <Link href={href} baseFontSize={13} hideExternalIcon={true}>
+              {text}
+            </Link>
           </React.Fragment>
         ))}
         {shouldShowSupportLink && (
           <SupportCase>
             {`${SUBMITTED_VIEW_TEXT.SUPPORT_CTA} `}
-            <a href={SUBMITTED_VIEW_SUPPORT_LINK.href}>{SUBMITTED_VIEW_SUPPORT_LINK.text}</a>
+            <Link href={SUBMITTED_VIEW_SUPPORT_LINK.href} baseFontSize={13} hideExternalIcon={true}>
+              {SUBMITTED_VIEW_SUPPORT_LINK.text}
+            </Link>
           </SupportCase>
         )}
       </Subheading>
