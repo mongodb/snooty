@@ -1,6 +1,7 @@
 import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
+import { palette } from '@leafygreen-ui/palette';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { theme } from '../theme/docsTheme';
@@ -58,7 +59,7 @@ const StyledChatBotUiContainer = styled.div`
   padding: ${theme.size.default} 50px;
   z-index: 1;
   width: 100%;
-  background: inherit;
+  background: ${process.env.GATSBY_ENABLE_DARK_MODE === 'true' ? 'inherit' : palette.white};
   min-height: 96px;
   align-items: center;
 
