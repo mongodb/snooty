@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
-import ComponentFactory from '../../src/components/ComponentFactory';
+import ActionBar from '../../src/components/ActionBar/ActionBar';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),
@@ -8,7 +8,7 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
 
 describe('Chatbot Ui', () => {
   it('renders the chatbot through the ComponentFactor', async () => {
-    const wrapper = render(<ComponentFactory nodeData={{ type: 'chatbot' }} />);
+    const wrapper = render(<ActionBar />);
     await waitFor(() => expect(wrapper.getByTestId('chatbot-ui')).toBeInTheDocument());
   });
 });

@@ -263,8 +263,7 @@ table {
   }
 }
 body,
-div.highlight,
-div.topic {
+div.highlight{
   background-color: #fff;
 }
 body {
@@ -905,10 +904,7 @@ img {
 dd {
   margin-top: 3px;
 }
-p.topic-title {
-  font-size: 1.1em;
-  font-weight: 700;
-}
+
 div.body {
   transition: opacity 0.25s linear;
 }
@@ -918,14 +914,7 @@ div.body {
 .linenos pre {
   background-color: transparent;
 }
-div.topic {
-  border: 1px solid #ccc;
-  padding: 7px 7px 0;
-  margin: 10px 0;
-}
-p.topic-title {
-  margin-top: 10px;
-}
+
 dd {
   margin-left: 30px;
 }
