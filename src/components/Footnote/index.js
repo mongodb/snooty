@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { palette } from '@leafygreen-ui/palette';
 import { css } from '@emotion/react';
 import ComponentFactory from '../ComponentFactory';
 import { getNestedValue } from '../../utils/get-nested-value';
@@ -17,8 +19,12 @@ const tableStyling = css`
     background-color: inherit;
   }
 
+  tbody tr td a {
+    color: var(--color);
+  }
+
   :target {
-    background-color: #ffa;
+    background-color: var(--background-color);
   }
 `;
 
@@ -29,6 +35,7 @@ const tdStyling = css`
 
 const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   const { footnotes } = useContext(FootnoteContext);
+  const { darkMode } = useDarkMode();
   const ref = name || id.replace('id', '');
   const label = getNestedValue([ref, 'label'], footnotes);
   const uid = name ? `${name}-` : '';
@@ -39,7 +46,17 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
     </a>
   ));
   return (
-    <table className="header-buffer" css={tableStyling} frame="void" id={`footnote-${ref}`} rules="none">
+    <table
+      className="header-buffer"
+      css={tableStyling}
+      style={{
+        '--background-color': darkMode ? palette.gray.dark1 : '#ffa',
+        '--color': darkMode ? palette.blue.light1 : 'inherit',
+      }}
+      frame="void"
+      id={`footnote-${ref}`}
+      rules="none"
+    >
       <colgroup>
         <col />
       </colgroup>
