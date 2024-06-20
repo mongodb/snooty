@@ -10,7 +10,6 @@ import Card from './Card';
 import CardGroup from './Card/CardGroup';
 import Chapter from './Chapters/Chapter';
 import Chapters from './Chapters';
-import ChatbotUi from './ChatbotUi';
 import Code from './Code/Code';
 import CodeIO from './Code/CodeIO';
 import CommunityPillLink from './CommunityPillLink';
@@ -136,7 +135,6 @@ const componentMap = {
   'card-group': CardGroup,
   chapter: Chapter,
   chapters: Chapters,
-  chatbot: ChatbotUi,
   code: Code,
   'community-driver': CommunityPillLink,
   'io-code-block': CodeIO,
