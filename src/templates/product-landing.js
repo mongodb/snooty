@@ -7,7 +7,7 @@ import { theme } from '../theme/docsTheme.js';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
 import useSnootyMetadata from '../utils/use-snooty-metadata.js';
 
-const CONTENT_MAX_WIDTH = 1200;
+export const CONTENT_MAX_WIDTH = 1200;
 
 const Wrapper = styled('main')`
   ${({ isGuides }) => !isGuides && `margin: 0 auto ${theme.size.xlarge} auto;`}
