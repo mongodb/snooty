@@ -14,10 +14,6 @@ exports[`renders correctly 1`] = `
   background-color: inherit;
 }
 
-.emotion-0 tbody tr td a {
-  color: var(--color);
-}
-
 .emotion-0:target {
   background-color: var(--background-color);
 }
@@ -32,7 +28,7 @@ exports[`renders correctly 1`] = `
     frame="void"
     id="footnote-1"
     rules="none"
-    style="--background-color: #ffa; --color: inherit;"
+    style="--background-color: #ffa;"
   >
     <colgroup>
       <col />

@@ -8,7 +8,7 @@ import { getNestedValue } from '../../utils/get-nested-value';
 import { intersperse } from '../../utils/intersperse';
 import FootnoteContext from './footnote-context';
 
-const tableStyling = css`
+const tableStyling = (darkMode) => css`
   border: 0;
   border-collapse: collapse;
   margin: 24px 0;
@@ -19,9 +19,12 @@ const tableStyling = css`
     background-color: inherit;
   }
 
-  tbody tr td a {
-    color: var(--color);
-  }
+  ${darkMode &&
+  `
+      tbody tr td a {
+        color: var(--color);
+      }
+    `}
 
   :target {
     background-color: var(--background-color);
@@ -45,14 +48,22 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
       {index + 1}
     </a>
   ));
+
+  let footnoteDynamicStyles = {
+    '--background-color': '#ffa',
+  };
+
+  if (darkMode) {
+    footnoteDynamicStyles = {
+      '--background-color': palette.gray.dark1,
+      '--color': palette.blue.light1,
+    };
+  }
   return (
     <table
       className="header-buffer"
-      css={tableStyling}
-      style={{
-        '--background-color': darkMode ? palette.gray.dark1 : '#ffa',
-        '--color': darkMode ? palette.blue.light1 : palette.blue.base,
-      }}
+      css={tableStyling(darkMode)}
+      style={footnoteDynamicStyles}
       frame="void"
       id={`footnote-${ref}`}
       rules="none"
