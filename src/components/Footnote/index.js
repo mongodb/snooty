@@ -55,7 +55,7 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
 
   if (darkMode) {
     footnoteDynamicStyles = {
-      '--background-color': palette.gray.dark1,
+      '--background-color': palette.gray.dark2,
       '--color': palette.blue.light1,
     };
   }
