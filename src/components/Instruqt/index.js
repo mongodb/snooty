@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import LabDrawer from './LabDrawer';
 import InstruqtFrame from './InstruqtFrame';
 import { InstruqtContext } from './instruqt-context';
@@ -8,6 +9,7 @@ const Instruqt = ({ nodeData }) => {
   const title = nodeData?.options?.title;
   const isDrawer = nodeData?.options?.drawer;
   const { isOpen } = useContext(InstruqtContext);
+  const { darkMode } = useDarkMode();
 
   if (!embedValue) {
     return null;
@@ -18,11 +20,11 @@ const Instruqt = ({ nodeData }) => {
       {isDrawer ? (
         isOpen && (
           <>
-            <LabDrawer embedValue={embedValue} title={title} />
+            <LabDrawer darkMode={darkMode} embedValue={embedValue} title={title} />
           </>
         )
       ) : (
-        <InstruqtFrame title={title} embedValue={embedValue} />
+        <InstruqtFrame darkMode={darkMode} title={title} embedValue={embedValue} />
       )}
     </>
   );
