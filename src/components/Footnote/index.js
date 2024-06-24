@@ -51,7 +51,7 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
       css={tableStyling}
       style={{
         '--background-color': darkMode ? palette.gray.dark1 : '#ffa',
-        '--color': darkMode ? palette.blue.light1 : 'inherit',
+        '--color': darkMode ? palette.blue.light1 : palette.blue.base,
       }}
       frame="void"
       id={`footnote-${ref}`}
