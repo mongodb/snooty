@@ -23,7 +23,7 @@ const Header = ({ sidenav, eol, template }) => {
   return (
     <StyledHeaderContainer template={template}>
       <SiteBanner />
-      <div className="sl_opaque">
+      <div>
         {!eol && (
           <UnifiedNav
             fullWidth="true"
