@@ -172,7 +172,6 @@ const SearchResult = React.memo(
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(highlightedPreviewText),
             }}
-            style={{ '--color': darkMode ? palette.gray.light3 : 'initial' }}
           />
           {!showFacets && (
             <StylingTagContainer>
