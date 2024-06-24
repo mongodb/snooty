@@ -4,14 +4,15 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../../theme/docsTheme';
 import Tag, { searchTagStyle, tagHeightStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import { getFacetTagVariant } from './Facets/utils';
+import { getBoxShadowColor } from './SearchResults';
 
-const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
-const SEARCH_MATCH_STYLE = `background-color: ${palette.green.light2} ; border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
+const SEARCH_MATCH_STYLE = `border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
 
 const largeResultTitle = css`
   font-size: ${theme.size.default};
@@ -46,7 +47,7 @@ const SearchResultContainer = styled('div')`
 
 const StyledResultTitle = styled('p')`
   font-family: 'Euclid Circular A';
-  color: var(--color);
+  color: var(--title-color);
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
@@ -62,21 +63,25 @@ const StyledResultTitle = styled('p')`
 `;
 
 const SearchResultLink = styled('a')`
-  color: ${LINK_COLOR};
+  color: var(--title-color);
   height: 100%;
   text-decoration: none;
   border-radius: ${theme.size.medium};
+  :visited {
+    p:first-child {
+      color: var(--title-color-on-visited);
+    }
+  }
   :hover,
   :focus {
-    color: ${LINK_COLOR};
-    text-decoration: none;
+    p:first-child {
+      color: var(--title-color);
+      text-decoration: none;
+    }
     ${SearchResultContainer} {
       background-color: rgba(231, 238, 236, 0.4);
       transition: background-color 150ms ease-in;
     }
-  }
-  :visited {
-    ${StyledResultTitle}
   }
 `;
 
@@ -102,14 +107,17 @@ const StylingTagContainer = styled('div')`
 
 const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-const highlightSearchTerm = (text, searchTerm) =>
+const highlightSearchTerm = (text, searchTerm, darkMode) =>
   text.replace(
     new RegExp(escapeRegExp(searchTerm), 'gi'),
-    (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
+    (result) =>
+      `<span style="background-color: ${
+        darkMode ? palette.green.dark2 : palette.green.light2
+      };${SEARCH_MATCH_STYLE}">${result}</span>`
   );
 
 const spanAllowedStyles = {
-  'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
+  'background-color': [new RegExp(`^${palette.green.light2}$`, 'i'), new RegExp(`^${palette.green.dark2}$`, 'i')],
   'border-radius': [new RegExp(`^3px$`)],
   'padding-left': [new RegExp(`^2px$`)],
   'padding-right': [new RegExp(`^2px$`)],
@@ -136,21 +144,24 @@ const SearchResult = React.memo(
     searchProperty,
     url,
     facets,
-    darkMode,
     ...props
   }) => {
+    const { darkMode } = useDarkMode();
     const { searchPropertyMapping, searchTerm, getFacetName, showFacets } = useContext(SearchContext);
-    const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
+    const highlightedPreviewText = highlightSearchTerm(preview, searchTerm, darkMode);
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
     const validFacets = facets?.filter(getFacetName);
 
     return (
-      <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
+      <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} style={getBoxShadowColor(darkMode)} {...props}>
         <SearchResultContainer>
           <StyledResultTitle
-            style={{ '--color': darkMode ? palette.blue.light1 : palette.blue.base }}
+            style={{
+              '--title-color': darkMode ? palette.blue.light1 : palette.blue.base,
+              '--title-color-on-visited': darkMode ? palette.purple.light2 : palette.purple.dark2,
+            }}
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(title),
             }}
@@ -161,6 +172,7 @@ const SearchResult = React.memo(
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(highlightedPreviewText),
             }}
+            style={{ '--color': darkMode ? palette.gray.light3 : 'initial' }}
           />
           {!showFacets && (
             <StylingTagContainer>
