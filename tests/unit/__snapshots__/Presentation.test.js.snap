@@ -344,12 +344,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   align-items: center;
 }
 
-.emotion-52 {
-  margin-right: 16px;
-  max-width: 16px;
-}
-
-.emotion-71 {
+.emotion-58 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -362,7 +357,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-71 {
+  .emotion-58 {
     display: none;
   }
 }
@@ -529,11 +524,11 @@ exports[`DocumentBody renders the necessary elements 1`] = `
           >
             <a
               class=" emotion-25"
-              href="https://www.mongodb.com/legal/legal-notices"
+              href="https://www.mongodb.com/legal"
               rel="noreferrer noopener"
               target="_self"
             >
-              Legal Notices
+              Legal
             </a>
           </li>
           <li
@@ -541,11 +536,11 @@ exports[`DocumentBody renders the necessary elements 1`] = `
           >
             <a
               class=" emotion-25"
-              href="https://www.mongodb.com/legal/privacy-policy"
+              href="https://github.com/mongodb"
               rel="noreferrer noopener"
               target="_self"
             >
-              Privacy Notices
+              GitHub
             </a>
           </li>
           <li
@@ -570,6 +565,18 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               Trust Center
+            </a>
+          </li>
+          <li
+            class="emotion-24"
+          >
+            <a
+              class=" emotion-25"
+              href="https://www.mongodb.com/company/contact/social-media-hub"
+              rel="noreferrer noopener"
+              target="_self"
+            >
+              Connect with Us
             </a>
           </li>
         </ul>
@@ -641,7 +648,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         <p
           class="emotion-22"
         >
-          Social
+          Deployment Options
         </p>
         <ul
           class="emotion-23"
@@ -651,18 +658,11 @@ exports[`DocumentBody renders the necessary elements 1`] = `
           >
             <a
               class=" emotion-25"
-              href="https://github.com/mongodb"
+              href="https://www.mongodb.com/cloud/atlas/register"
               rel="noreferrer noopener"
               target="_self"
             >
-              <img
-                alt="GitHub"
-                class="emotion-52"
-                height="16"
-                src="https://webimages.mongodb.com/_com_assets/cms/kr6wrvghw9q75ytq1-github.svg?auto=format%252Ccompress"
-                width="16"
-              />
-              GitHub
+              MongoDB Atlas
             </a>
           </li>
           <li
@@ -670,18 +670,11 @@ exports[`DocumentBody renders the necessary elements 1`] = `
           >
             <a
               class=" emotion-25"
-              href="https://stackoverflow.com/tags/mongodb/info"
+              href="https://www.mongodb.com/try/download/enterprise"
               rel="noreferrer noopener"
               target="_self"
             >
-              <img
-                alt="Stack Overflow"
-                class="emotion-52"
-                height="22"
-                src="https://webimages.mongodb.com/_com_assets/cms/kr6wsfh9d9z2m4jvx-stackoverflow.svg?auto=format%252Ccompress"
-                width="16"
-              />
-              Stack Overflow
+              Enterprise Advanced
             </a>
           </li>
           <li
@@ -689,100 +682,17 @@ exports[`DocumentBody renders the necessary elements 1`] = `
           >
             <a
               class=" emotion-25"
-              href="https://www.linkedin.com/company/mongodbinc/"
+              href=" https://www.mongodb.com/try/download/community"
               rel="noreferrer noopener"
               target="_self"
             >
-              <img
-                alt="LinkedIn"
-                class="emotion-52"
-                height="16"
-                src="https://webimages.mongodb.com/_com_assets/cms/kr6wsmr3g1ckzd0hs-linkedin.svg?auto=format%252Ccompress"
-                width="16"
-              />
-              LinkedIn
-            </a>
-          </li>
-          <li
-            class="emotion-24"
-          >
-            <a
-              class=" emotion-25"
-              href="https://youtube.com/user/mongodb"
-              rel="noreferrer noopener"
-              target="_self"
-            >
-              <img
-                alt="YouTube"
-                class="emotion-52"
-                height="12"
-                src="https://webimages.mongodb.com/_com_assets/cms/kr6wsxwxsvrivp4q4-youtube.svg?auto=format%252Ccompress"
-                width="16"
-              />
-              YouTube
-            </a>
-          </li>
-          <li
-            class="emotion-24"
-          >
-            <a
-              class=" emotion-25"
-              href="https://twitter.com/mongodb"
-              rel="noreferrer noopener"
-              target="_self"
-            >
-              <img
-                alt="X"
-                class="emotion-52"
-                height="16"
-                src="https://webimages.mongodb.com/_com_assets/cms/lrym6kl0k3hc1rjgc-x_light.svg?auto=format%252Ccompress"
-                width="16"
-              />
-              X
-            </a>
-          </li>
-          <li
-            class="emotion-24"
-          >
-            <a
-              class=" emotion-25"
-              href="https://twitch.tv/mongodb/videos"
-              rel="noreferrer noopener"
-              target="_self"
-            >
-              <img
-                alt="Twitch"
-                class="emotion-52"
-                height="18"
-                src="https://webimages.mongodb.com/_com_assets/cms/kr6wtbzfgc05d27pb-twitch.svg?auto=format%252Ccompress"
-                width="16"
-              />
-              Twitch
-            </a>
-          </li>
-          <li
-            class="emotion-24"
-          >
-            <a
-              class=" emotion-25"
-              href="https://facebook.com/mongodb"
-              rel="noreferrer noopener"
-              target="_self"
-            >
-              <img
-                alt="Facebook"
-                class="emotion-52"
-                height="16"
-                src="https://webimages.mongodb.com/_com_assets/cms/kr6wtks9piclp67yr-facebook.svg?auto=format%252Ccompress"
-                width="9"
-              />
-              Facebook
+              Community Edition
             </a>
           </li>
         </ul>
       </div>
       <div
-        class="emotion-71"
+        class="emotion-58"
       >
         © 2024 MongoDB, Inc.
       </div>
