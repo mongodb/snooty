@@ -24,7 +24,7 @@ const sourceCodeStyle = css`
 // Returns the icon associated with the driver language that would be
 // shown on our TabSelector component
 const getDriverImage = (driver, driverIconMap) => {
-  const DriverIcon = driverIconMap?.[driver];
+  const DriverIcon = driverIconMap[driver];
   if (DriverIcon) {
     return <DriverIcon />;
   }
@@ -45,7 +45,7 @@ const Code = ({
   const code = value;
   let language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
 
-  const driverIconMap = setDriversIconsMap(darkMode || darkModeProp);
+  const driverIconMap = setDriversIconsMap();
 
   languageOptions.map((option) => {
     option.image = getDriverImage(option.id, driverIconMap);

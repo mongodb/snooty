@@ -1,6 +1,5 @@
 import React, { useContext, useMemo } from 'react';
 import { useTheme, css } from '@emotion/react';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import Select from '../Select';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -64,7 +63,6 @@ const TabSelector = ({ activeTab, handleClick, iconMapping, name, options }) => 
 
 const TabSelectors = () => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
-  const { darkMode } = useDarkMode();
 
   if (!selectors || Object.keys(selectors).length === 0) {
     return null;
@@ -75,7 +73,7 @@ const TabSelectors = () => {
       {Object.entries(selectors).map(([name, options]) => {
         let iconMapping = {};
         if (name === 'drivers') {
-          iconMapping = setDriversIconsMap(darkMode);
+          iconMapping = setDriversIconsMap();
         }
 
         return (

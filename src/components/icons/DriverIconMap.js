@@ -50,7 +50,7 @@ export const DRIVER_ICON_MAP = {
   typescript: IconTypescript,
 };
 
-export const setDriversIconsMap = (darkMode) => {
+export const setDriversIconsMap = () => {
   const driverIconMap = Object.create(DRIVER_ICON_MAP);
   return driverIconMap;
 };
