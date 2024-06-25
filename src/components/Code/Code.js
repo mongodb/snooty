@@ -11,7 +11,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
-import { setDriversIconsMap } from '../icons/DriverIconMap';
+import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 import { CodeContext } from './code-context';
 
@@ -45,7 +45,7 @@ const Code = ({
   const code = value;
   let language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
 
-  const driverIconMap = setDriversIconsMap();
+  const driverIconMap = DRIVER_ICON_MAP;
 
   languageOptions.map((option) => {
     option.image = getDriverImage(option.id, driverIconMap);

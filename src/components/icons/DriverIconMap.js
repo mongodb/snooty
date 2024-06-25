@@ -49,8 +49,3 @@ export const DRIVER_ICON_MAP = {
   'swift-sync': IconSwift,
   typescript: IconTypescript,
 };
-
-export const setDriversIconsMap = () => {
-  const driverIconMap = Object.create(DRIVER_ICON_MAP);
-  return driverIconMap;
-};
