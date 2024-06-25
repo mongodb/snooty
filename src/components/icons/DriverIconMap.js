@@ -17,7 +17,6 @@ import IconObjectiveC from './ObjectiveC';
 import IconJavascript from './Javascript';
 import IconTypescript from './Typescript';
 import IconDart from './Dart';
-import IconNodeDark from './NodeDark';
 
 export const DRIVER_ICON_MAP = {
   c: IconC,
@@ -53,16 +52,5 @@ export const DRIVER_ICON_MAP = {
 
 export const setDriversIconsMap = (darkMode) => {
   const driverIconMap = Object.create(DRIVER_ICON_MAP);
-
-  if (darkMode) {
-    // driverIconMap.java = IconJavaDark;
-    // driverIconMap['java-sync'] = IconJavaDark;
-    // driverIconMap['java-async'] = IconJavaDark;
-    driverIconMap.nodejs = IconNodeDark;
-    //driverIconMap.rust = IconRustDark;
-    // driverIconMap['rust-async'] = IconRustDark;
-    // driverIconMap['rust-sync'] = IconRustDark;
-  }
-
   return driverIconMap;
 };
