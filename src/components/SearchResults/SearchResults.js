@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
-import Skeleton from 'react-loading-skeleton';
 import { css } from '@emotion/react';
 import { cx, css as leafyCss } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
@@ -12,6 +11,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { H3, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
+import { ParagraphSkeleton } from '@leafygreen-ui/skeleton-loader';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -31,7 +31,6 @@ const FILTER_COLUMN_WIDTH = '173px';
 const LANDING_MODULE_MARGIN = '28px';
 const LANDING_PAGE_MARGIN = '40px';
 const ROW_GAP = theme.size.default;
-const SKELETON_BORDER_RADIUS = '12px';
 const SEARCH_RESULT_HEIGHT = '152px';
 
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
@@ -190,11 +189,6 @@ const StyledSearchResult = styled(SearchResult)`
 const StyledLoadingSkeletonContainer = styled('div')`
   ${searchResultStyling}
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 1) !important;
-  color: red;
-
-  /* inner div padding */
-  box-sizing: border-box;
-  padding: 15px;
 
   * {
     padding: 2px;
@@ -454,9 +448,7 @@ const SearchResults = () => {
           <StyledSearchResults>
             {[...Array(10)].map((_, index) => (
               <StyledLoadingSkeletonContainer key={index} style={getBoxShadowColor(darkMode)}>
-                <Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={200} />
-                <Skeleton borderRadius={SKELETON_BORDER_RADIUS} />
-                <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} inline width={60} />
+                <ParagraphSkeleton withHeader />
               </StyledLoadingSkeletonContainer>
             ))}
           </StyledSearchResults>
