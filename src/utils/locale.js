@@ -3,6 +3,7 @@ import { assertTrailingSlash } from './assert-trailing-slash';
 import { isBrowser } from './is-browser';
 import { normalizePath } from './normalize-path';
 import { removeLeadingSlash } from './remove-leading-slash';
+import { setLocalValue } from './browser-storage';
 
 /**
  * Key used to access browser storage for user's preferred locale
@@ -138,4 +139,11 @@ export const getLocaleMapping = (siteUrl, slug) => {
   });
 
   return localeHrefMap;
+};
+
+export const onSelectLocale = (locale) => {
+  const location = window.location;
+  setLocalValue(STORAGE_KEY_PREF_LOCALE, locale);
+  const localizedPath = localizePath(location.pathname, locale);
+  window.location.href = localizedPath;
 };

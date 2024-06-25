@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import Skeleton from 'react-loading-skeleton';
 import { css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -7,6 +6,7 @@ import { palette } from '@leafygreen-ui/palette';
 import { Body, H2 } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
 import { Toast, ToastProvider, Variant } from '@leafygreen-ui/toast';
+import { ParagraphSkeleton } from '@leafygreen-ui/skeleton-loader';
 import { theme } from '../../theme/docsTheme';
 import useChangelogData from '../../utils/use-changelog-data';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
@@ -165,10 +165,7 @@ const OpenAPIChangelog = () => {
         <SkeletonWrapper>
           {[...Array(3)].map((_, index) => (
             <StyledLoadingSkeleton key={index}>
-              <Skeleton borderRadius="12px" width="50%" height="25px" />
-              <ul>
-                <Skeleton count={4} borderRadius="12px" height="15px" style={{ margin: '10px 0' }} />
-              </ul>
+              <ParagraphSkeleton withHeader={true}></ParagraphSkeleton>
             </StyledLoadingSkeleton>
           ))}
         </SkeletonWrapper>

@@ -1,24 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import MainColumn from '../components/MainColumn';
 import { theme } from '../theme/docsTheme';
+import { CONTENT_MAX_WIDTH } from './product-landing';
 
-const Wrapper = styled(MainColumn)`
-  max-width: unset;
-  grid-area: main;
+const Wrapper = styled('div')`
+  grid-column: 2/ -2;
   overflow-x: auto;
-  margin-right: 64px;
-  margin-left: 75px;
-
-  @media ${theme.screenSize.upToMedium} {
-    margin: ${theme.size.default} ${theme.size.medium} ${theme.size.xlarge} !important;
-  }
 `;
 
-const DocumentContainer = styled('div')`
+const DocumentContainer = styled('main')`
   display: grid;
-  grid-template-areas: 'main';
+  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(2, minmax(0, ${CONTENT_MAX_WIDTH / 2}px)) minmax(
+      ${theme.size.xlarge},
+      1fr
+    );
+  @media ${theme.screenSize.upToLarge} {
+    grid-template-columns: 48px 1fr 48px;
+  }
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+  }
 `;
 
 const Changelog = ({ children }) => (
