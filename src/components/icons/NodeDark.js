@@ -1,7 +1,7 @@
 import React from 'react';
 
 const IconNodeDark = ({ ...styles }) => (
-  <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg" {...styles}>
+  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...styles}>
     <g clip-path="url(#clip0_2131_12968)">
       <mask id="mask0_2131_12968" maskUnits="userSpaceOnUse" x="0" y="6" width="30" height="19">
         <path d="M30 6.04395H0V24.3825H30V6.04395Z" fill="white" />
