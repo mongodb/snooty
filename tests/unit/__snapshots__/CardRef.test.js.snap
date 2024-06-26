@@ -153,33 +153,8 @@ exports[`card correctly with and without url 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: var(--color);
-  font-weight: var(--font-weight);
-}
-
-.emotion-8>code {
-  color: var(--color);
-}
-
-.emotion-8:focus,
-.emotion-8:hover {
-  text-decoration-line: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-8:focus {
-  text-decoration-color: var(--focus-text-decoration-color);
-  outline: none;
-}
-
-.emotion-8:hover {
-  text-decoration-color: var(--hover-text-decoration-color);
-}
-
-.emotion-9 {
+  color: #016BF8;
+  font-weight: inherit;
   background: #F9FBFA;
   border-radius: 4px;
   border: 1px solid #C1C7C6;
@@ -192,11 +167,33 @@ exports[`card correctly with and without url 1`] = `
   padding: 4px;
 }
 
-.emotion-9:after {
+.emotion-8>code {
+  color: #016BF8;
+}
+
+.emotion-8:focus,
+.emotion-8:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-8:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-8:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-8:after {
   content: ' ➔';
 }
 
-.emotion-20 {
+.emotion-14 {
   position: relative;
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
@@ -231,27 +228,27 @@ exports[`card correctly with and without url 1`] = `
   padding: 32px 24px;
 }
 
-.emotion-20:focus {
+.emotion-14:focus {
   outline: none;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
 }
 
-.emotion-20:hover,
-.emotion-20:active {
+.emotion-14:hover,
+.emotion-14:active {
   border: 1px solid #E8EDEB;
   box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-20:hover:focus,
-.emotion-20:active:focus {
+.emotion-14:hover:focus,
+.emotion-14:active:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-20 p:last-of-type {
+.emotion-14 p:last-of-type {
   margin-bottom: 0;
 }
 
-.emotion-25 {
+.emotion-19 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -261,16 +258,16 @@ exports[`card correctly with and without url 1`] = `
   font-weight: 400;
 }
 
-.emotion-25 strong,
-.emotion-25 b {
+.emotion-19 strong,
+.emotion-19 b {
   font-weight: 700;
 }
 
-.emotion-25 a {
+.emotion-19 a {
   line-height: unset;
 }
 
-.emotion-26 {
+.emotion-20 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -300,8 +297,8 @@ exports[`card correctly with and without url 1`] = `
   display: inline;
 }
 
-.emotion-26:hover,
-.emotion-26:focus {
+.emotion-20:hover,
+.emotion-20:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -310,15 +307,15 @@ exports[`card correctly with and without url 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-26:focus {
+.emotion-20:focus {
   outline: none;
 }
 
-.emotion-26:hover {
+.emotion-20:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-26:focus {
+.emotion-20:focus {
   text-decoration-color: #016BF8;
 }
 
@@ -356,54 +353,48 @@ exports[`card correctly with and without url 1`] = `
             class="emotion-6"
           >
             <a
-              class="emotion-8 emotion-9"
+              class="emotion-8"
               href="/sdk/android/#std-label-android-intro"
-              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               Android
             </a>
             
 
             <a
-              class="emotion-8 emotion-9"
+              class="emotion-8"
               href="/sdk/ios/#std-label-ios-intro"
-              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               iOS
             </a>
             
 
             <a
-              class="emotion-8 emotion-9"
+              class="emotion-8"
               href="/sdk/dotnet/#std-label-dotnet-intro"
-              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               .Net
             </a>
             
 
             <a
-              class="emotion-8 emotion-9"
+              class="emotion-8"
               href="/web/#std-label-web-intro"
-              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               Web
             </a>
             
 
             <a
-              class="emotion-8 emotion-9"
+              class="emotion-8"
               href="/sdk/react-native/#std-label-react-native-intro"
-              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               React Native
             </a>
             
 
             <a
-              class="emotion-8 emotion-9"
+              class="emotion-8"
               href="/sdk/node/#std-label-node-intro"
-              style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
             >
               Node.js
             </a>
@@ -412,7 +403,7 @@ exports[`card correctly with and without url 1`] = `
       </div>
     </div>
     <div
-      class="emotion-20"
+      class="emotion-14"
     >
       <img
         class="
@@ -439,10 +430,10 @@ exports[`card correctly with and without url 1`] = `
             Discover how to sync data, define permissions, and connect to other services, including MongoDB Atlas.
           </p>
           <p
-            class="emotion-25"
+            class="emotion-19"
           >
             <a
-              class="lg-ui-0001 emotion-26"
+              class="lg-ui-0001 emotion-20"
               href="https://docs.mongodb.com/realm/services/"
               target="_self"
             >

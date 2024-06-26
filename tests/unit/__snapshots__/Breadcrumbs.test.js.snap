@@ -267,12 +267,15 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: var(--color);
-  font-weight: var(--font-weight);
+  color: #016BF8;
+  font-weight: inherit;
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
 }
 
 .emotion-12>code {
-  color: var(--color);
+  color: #016BF8;
 }
 
 .emotion-12:focus,
@@ -285,40 +288,34 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-12:focus {
-  text-decoration-color: var(--focus-text-decoration-color);
+  text-decoration-color: #016BF8;
   outline: none;
 }
 
 .emotion-12:hover {
-  text-decoration-color: var(--hover-text-decoration-color);
+  text-decoration-color: #E8EDEB;
 }
 
-.emotion-13 {
-  font-size: 13px;
-  vertical-align: middle;
-  line-height: unset;
-}
-
-.emotion-13:hover,
-.emotion-13:focus {
+.emotion-12:hover,
+.emotion-12:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.emotion-16 {
+.emotion-15 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.emotion-16:first-child {
+.emotion-15:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
 }
 
 @media not all and (max-width: 480px) {
-  .emotion-16:last-child {
+  .emotion-15:last-child {
     min-width: -webkit-max-content;
     min-width: -moz-max-content;
     min-width: max-content;
@@ -371,9 +368,8 @@ exports[`renders correctly with siteTitle 1`] = `
         class="emotion-3"
       >
         <a
-          class="emotion-12 emotion-13"
+          class="emotion-12"
           href="/"
-          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           Atlas Device SDKs
         </a>
@@ -384,12 +380,11 @@ exports[`renders correctly with siteTitle 1`] = `
          / 
       </span>
       <div
-        class="emotion-16"
+        class="emotion-15"
       >
         <a
-          class="emotion-12 emotion-13"
+          class="emotion-12"
           href="/sdk/cpp/"
-          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           Atlas Device SDK for C++
         </a>
@@ -400,12 +395,11 @@ exports[`renders correctly with siteTitle 1`] = `
          / 
       </span>
       <div
-        class="emotion-16"
+        class="emotion-15"
       >
         <a
-          class="emotion-12 emotion-13"
+          class="emotion-12"
           href="/sdk/cpp/application-services/"
-          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           Application Services - C++ SDK
         </a>
