@@ -54,6 +54,14 @@ const lgLinkStyling = css`
   display: inline;
 `;
 
+// this detail might be diff. functional css or ternary with two classnames
+const linkStyling = (darkMode) => css`
+  '--color': ${darkMode ? palette.blue.light1 : palette.blue.base},
+  '--focus-text-decoration-color': ${darkMode ? palette.blue.light1 : palette.blue.base},
+  '--hover-text-decoration-color': ${darkMode ? palette.gray.dark2 : palette.gray.light2},
+  '--font-weight': ${darkMode ? 700 : 'inherit'},
+`;
+
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
 // destructure the prop here and pass it only to GatsbyLink.
 const Link = ({
@@ -94,13 +102,7 @@ const Link = ({
 
     return (
       <GatsbyLink
-        className={joinClassNames(gatsbyLinkStyling, className)}
-        style={{
-          '--color': darkMode ? palette.blue.light1 : palette.blue.base,
-          '--focus-text-decoration-color': darkMode ? palette.blue.light1 : palette.blue.base,
-          '--hover-text-decoration-color': darkMode ? palette.gray.dark2 : palette.gray.light2,
-          '--font-weight': darkMode ? 700 : 'inherit',
-        }}
+        className={joinClassNames(gatsbyLinkStyling, className, linkStyling(darkMode))}
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}
@@ -119,7 +121,7 @@ const Link = ({
 
   return (
     <LGLink
-      className={joinClassNames(lgLinkStyling, className)}
+      className={joinClassNames(linkStyling, lgLinkStyling, className)}
       href={to}
       hideExternalIcon={!showExtIcon}
       target={target}
