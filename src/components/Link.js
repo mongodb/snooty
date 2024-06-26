@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { Link as GatsbyLink } from 'gatsby';
-import { css } from '@leafygreen-ui/emotion';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { Link as LGLink } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { getTheme } from '@leafygreen-ui/lib';
 import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
@@ -18,19 +19,45 @@ import { getGatsbyPreviewLink } from '../utils/get-gatsby-preview-link';
  * https://www.gatsbyjs.org/docs/gatsby-link/#recommendations-for-programmatic-in-app-navigation
  */
 
-// CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
-const gatsbyLinkStyling = css`
+/**
+ * @typedef ThemeStyle
+ * @type {object}
+ * @property {string} color
+ * @property {string} focusTextDecorColor
+ * @property {string} hoverTextDecorColor
+ * @property {string | number} fontWeight
+ */
+const THEME_STYLES = {
+  light: {
+    color: palette.blue.base,
+    focusTextDecorColor: palette.blue.base,
+    hoverTextDecorColor: palette.gray.light2,
+    fontWeight: 'inherit',
+  },
+  dark: {
+    color: palette.blue.light1,
+    focusTextDecorColor: palette.blue.light1,
+    hoverTextDecorColor: palette.gray.dark2,
+    fontWeight: 700,
+  },
+};
+
+/**
+ * CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
+ * @param {ThemeStyle} theme
+ */
+const gatsbyLinkStyling = (theme) => css`
   align-items: center;
   cursor: pointer;
   position: relative;
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: var(--color);
-  font-weight: var(--font-weight);
+  color: ${theme.color};
+  font-weight: ${theme.fontWeight};
 
   > code {
-    color: var(--color);
+    color: ${theme.color};
   }
 
   &:focus,
@@ -41,11 +68,11 @@ const gatsbyLinkStyling = css`
     text-decoration-thickness: 2px;
   }
   &:focus {
-    text-decoration-color: var(--focus-text-decoration-color);
+    text-decoration-color: ${theme.focusTextDecorColor};
     outline: none;
   }
   &:hover {
-    text-decoration-color: var(--hover-text-decoration-color);
+    text-decoration-color: ${theme.hoverTextDecorColor};
   }
 `;
 
@@ -72,6 +99,7 @@ const Link = ({
 
   const anchorProps = validateHTMAttributes('anchor', other);
   const { darkMode } = useDarkMode();
+  const theme = getTheme(darkMode);
 
   //used instead of LG showLinkArrow prop for consistency between LGLinks and GatsbyLinks(GatsbyLinks don't have that prop)
   const decoration = showLinkArrow ? (
@@ -94,13 +122,7 @@ const Link = ({
 
     return (
       <GatsbyLink
-        className={joinClassNames(gatsbyLinkStyling, className)}
-        style={{
-          '--color': darkMode ? palette.blue.light1 : palette.blue.base,
-          '--focus-text-decoration-color': darkMode ? palette.blue.light1 : palette.blue.base,
-          '--hover-text-decoration-color': darkMode ? palette.gray.dark2 : palette.gray.light2,
-          '--font-weight': darkMode ? 700 : 'inherit',
-        }}
+        className={cx(gatsbyLinkStyling(THEME_STYLES[theme]), className)}
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}
