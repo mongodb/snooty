@@ -81,13 +81,13 @@ const Landing = ({ children, pageContext, useChatbot }) => {
           p {
             color: ${palette.black};
             font-size: ${fontSize.small};
-            letter-spacing: 0.5px;
+            letter-spacing: 0;
             margin-bottom: ${size.default};
           }
           a {
             color: ${palette.blue.base};
             font-size: ${fontSize.small};
-            letter-spacing: 0.5px;
+            letter-spacing: 0;
           }
           a:hover {
             text-decoration: none;
