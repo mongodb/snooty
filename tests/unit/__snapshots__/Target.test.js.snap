@@ -85,12 +85,12 @@ a .emotion-0 {
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: var(--color);
-  font-weight: var(--font-weight);
+  color: #016BF8;
+  font-weight: inherit;
 }
 
 .emotion-6>code {
-  color: var(--color);
+  color: #016BF8;
 }
 
 .emotion-6:focus,
@@ -103,12 +103,12 @@ a .emotion-0 {
 }
 
 .emotion-6:focus {
-  text-decoration-color: var(--focus-text-decoration-color);
+  text-decoration-color: #016BF8;
   outline: none;
 }
 
 .emotion-6:hover {
-  text-decoration-color: var(--hover-text-decoration-color);
+  text-decoration-color: #E8EDEB;
 }
 
 <dl
@@ -160,7 +160,6 @@ configuration file is the preferred method for runtime configuration of
         <a
           class="emotion-6"
           href="/reference/program/mongos/#std-program-mongos"
-          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           <code
             class="emotion-0"
@@ -173,7 +172,6 @@ configuration options. See
         <a
           class="emotion-6"
           href="/reference/configuration-options/"
-          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           Configuration File Options
         </a>
@@ -187,7 +185,6 @@ more information.
         <a
           class="emotion-6"
           href="/reference/program/mongos/#std-program-mongos"
-          style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
         >
           <code
             class="emotion-0"

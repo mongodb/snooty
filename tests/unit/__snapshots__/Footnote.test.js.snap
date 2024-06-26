@@ -15,7 +15,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-0:target {
-  background-color: var(--background-color);
+  background-color: #ffa;
 }
 
 .emotion-1 {
@@ -28,7 +28,6 @@ exports[`renders correctly 1`] = `
     frame="void"
     id="footnote-1"
     rules="none"
-    style="--background-color: #ffa;"
   >
     <colgroup>
       <col />
