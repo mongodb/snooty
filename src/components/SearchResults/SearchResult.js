@@ -9,7 +9,7 @@ import { theme } from '../../theme/docsTheme';
 import Tag, { searchTagStyle, tagHeightStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import { getFacetTagVariant } from './Facets/utils';
-import { getBoxShadowColor } from './SearchResults';
+import { SEARCH_THEME_STYLES, searchResultDynamicStyling } from './SearchResults';
 
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
@@ -45,11 +45,8 @@ const SearchResultContainer = styled('div')`
   height: 100%;
 `;
 
-const StyledResultTitle = styled('p')``;
-
-const resultTitleStyling = () => css`
+const StyledResultTitle = styled('p')`
   font-family: 'Euclid Circular A';
-  color: var(--title-color);
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
@@ -64,25 +61,26 @@ const resultTitleStyling = () => css`
   position: relative;
 `;
 
-const SearchResultLink = styled('a')``;
-
-const searchResultLinkStyling = () => css`
-  color: var(--title-color);
+const searchResultLinkStyling = ({ searchResultTitleColor, searchResultTitleColorOnVisited }) => css`
+  color: ${searchResultTitleColor};
+  p:first-child {
+    color: ${searchResultTitleColor};
+  }
   height: 100%;
   text-decoration: none;
   border-radius: ${theme.size.medium};
   :visited {
     p:first-child {
-      color: var(--title-color-on-visited);
+      color: ${searchResultTitleColorOnVisited};
     }
   }
   :hover,
   :focus {
     p:first-child {
-      color: var(--title-color);
+      color: ${searchResultTitleColor};
       text-decoration: none;
     }
-    > div {
+    ${SearchResultContainer} {
       background-color: rgba(231, 238, 236, 0.4);
       transition: background-color 150ms ease-in;
     }
@@ -150,7 +148,7 @@ const SearchResult = React.memo(
     facets,
     ...props
   }) => {
-    const { darkMode } = useDarkMode();
+    const { darkMode, theme: siteTheme } = useDarkMode();
     const { searchPropertyMapping, searchTerm, getFacetName, showFacets } = useContext(SearchContext);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm, darkMode);
     const resultLinkRef = useRef(null);
@@ -159,21 +157,19 @@ const SearchResult = React.memo(
     const validFacets = facets?.filter(getFacetName);
 
     return (
-      <SearchResultLink
+      <a
         ref={resultLinkRef}
         href={url}
         onClick={onClick}
-        className={cx(searchResultLinkStyling())}
-        style={getBoxShadowColor(darkMode)}
         {...props}
+        className={cx(
+          props.className,
+          searchResultLinkStyling(SEARCH_THEME_STYLES[siteTheme]),
+          searchResultDynamicStyling(SEARCH_THEME_STYLES[siteTheme])
+        )}
       >
         <SearchResultContainer>
           <StyledResultTitle
-            style={{
-              '--title-color': darkMode ? palette.blue.light1 : palette.blue.base,
-              '--title-color-on-visited': darkMode ? palette.purple.light2 : palette.purple.dark2,
-            }}
-            className={cx(resultTitleStyling())}
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(title),
             }}
@@ -209,10 +205,9 @@ const SearchResult = React.memo(
             </MobileFooterContainer>
           )}
         </SearchResultContainer>
-      </SearchResultLink>
+      </a>
     );
   }
 );
 
-export { SearchResultLink };
 export default SearchResult;

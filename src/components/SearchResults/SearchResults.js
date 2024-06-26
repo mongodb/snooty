@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 // import { css } from '@emotion/react';
 import { cx, css } from '@leafygreen-ui/emotion';
+import { Theme } from '@leafygreen-ui/lib';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -33,13 +34,33 @@ const LANDING_PAGE_MARGIN = '40px';
 const ROW_GAP = theme.size.default;
 const SEARCH_RESULT_HEIGHT = '152px';
 
+/**
+ * @typedef ThemeStyle
+ * @type {object}
+ * @property {string} headingColor
+ * @property {string} boxShadow
+ * @property {string} boxShadowOnHover
+ */
+export const SEARCH_THEME_STYLES = {
+  [Theme.Light]: {
+    headingColor: palette.green.dark2,
+    boxShadow: '0px 0px 3px 0px rgba(0, 0, 0, 0.1)',
+    boxShadowOnHover: '0px 0px 5px 1px rgba(58, 63, 60, 0.15)',
+    filterHeaderColor: palette.gray.dark2,
+    searchResultTitleColor: palette.blue.base,
+    searchResultTitleColorOnVisited: palette.purple.dark2,
+  },
+  [Theme.Dark]: {
+    headingColor: palette.gray.light2,
+    boxShadow: '0px 0px 3px 0px rgba(255, 255, 255, 0.15)',
+    boxShadowOnHover: '0px 0px 5px 3px rgba(92, 97, 94, 0.15)',
+    filterHeaderColor: palette.gray.light2,
+    searchResultTitleColor: palette.blue.light1,
+    searchResultTitleColorOnVisited: palette.purple.light2,
+  },
+};
+
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
-export const getBoxShadowColor = (darkMode) => ({
-  '--box-shadow': darkMode ? '0px 0px 3px 0px rgba(255, 255, 255, 0.15)' : '0px 0px 3px 0px rgba(0, 0, 0, 0.1)',
-  '--box-shadow-on-hover': darkMode
-    ? '0px 0px 5px 3px rgba(92, 97, 94, 0.15)'
-    : '0px 0px 5px 1px rgba(58, 63, 60, 0.15)',
-});
 
 const commonTextStyling = `
   font-family: 'Euclid Circular A';
@@ -59,9 +80,11 @@ const EmptyResultsContainer = styled('div')`
 
 const HeaderContainer = styled('div')`
   grid-area: header;
+`;
 
+const headerContainerDynamicStyles = ({ headingColor }) => css`
   > h1:first-of-type {
-    color: var(--color);
+    color: ${headingColor};
     padding-bottom: 24px;
     margin: unset;
   }
@@ -76,7 +99,6 @@ const FiltersContainer = styled('div')`
 
 const FilterHeader = styled('h2')`
   align-self: center;
-  color: var(--color);
   font-size: ${theme.fontSize.tiny};
   line-height: 15px;
   text-transform: uppercase;
@@ -85,6 +107,10 @@ const FilterHeader = styled('h2')`
 
   // Override
   margin-bottom: ${theme.size.default};
+`;
+
+const filterHeaderDynamicStyles = ({ filterHeaderColor }) => css`
+  color: ${filterHeaderColor};
 `;
 
 const SearchResultsContainer = styled('div')`
@@ -150,7 +176,6 @@ const StyledSearchFilters = styled(SearchFilters)`
 `;
 
 const searchResultStyling = `
-  box-shadow: var(--box-shadow);
   border-radius: 45px;
   height: ${SEARCH_RESULT_HEIGHT};
   position: relative;
@@ -182,6 +207,15 @@ const searchResultStyling = `
   }
 `;
 
+export const searchResultDynamicStyling = ({ boxShadow, boxShadowOnHover }) => css`
+  box-shadow: ${boxShadow};
+
+  :hover {
+    opacity: 1;
+    box-shadow: ${boxShadowOnHover};
+  }
+`;
+
 const StyledSearchResult = styled(SearchResult)`
   ${searchResultStyling}
 `;
@@ -210,14 +244,6 @@ const StyledSearchResults = styled('div')`
   height: 100%;
   width: 100%;
   /* Create the opaque effect on hover by opaquing everything but a hovered result */
-  :hover {
-    > ${StyledSearchResult} {
-      :hover {
-        opacity: 1;
-        box-shadow: var(--box-shadow-on-hover);
-      }
-    }
-  }
   :not(:hover) {
     > ${StyledSearchResult} {
       opacity: 1;
@@ -285,7 +311,7 @@ const SearchResults = () => {
   const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
 
-  const { darkMode } = useDarkMode();
+  const { theme: siteTheme } = useDarkMode();
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
@@ -399,7 +425,7 @@ const SearchResults = () => {
   return (
     <SearchResultsContainer showFacets={showFacets}>
       {/* new header for search bar */}
-      <HeaderContainer style={{ '--color': darkMode ? palette.gray.light2 : palette.green.dark2 }}>
+      <HeaderContainer className={cx(headerContainerDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
         <H3 as="h1">Search Results</H3>
         <SearchInput
           ref={searchBoxRef}
@@ -447,7 +473,10 @@ const SearchResults = () => {
         <>
           <StyledSearchResults>
             {[...Array(10)].map((_, index) => (
-              <StyledLoadingSkeletonContainer key={index} style={getBoxShadowColor(darkMode)}>
+              <StyledLoadingSkeletonContainer
+                key={index}
+                className={cx(searchResultDynamicStyling(SEARCH_THEME_STYLES[siteTheme]))}
+              >
                 <ParagraphSkeleton withHeader />
               </StyledLoadingSkeletonContainer>
             ))}
@@ -509,7 +538,7 @@ const SearchResults = () => {
             </>
           ) : (
             <>
-              <FilterHeader style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark2 }}>
+              <FilterHeader className={cx(filterHeaderDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
                 {specifySearchText}
               </FilterHeader>
               <StyledSearchFilters />
