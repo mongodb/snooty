@@ -87,7 +87,7 @@ const compactIconStyle = `
 
 const headingStyling = ({ isCompact, isExtraCompact, isLargeIconStyle }) => css`
   font-weight: 500;
-  letter-spacing: 0;
+  letter-spacing: normal;
   margin: ${isCompact || isExtraCompact ? `0 0 ${theme.size.small}` : `${theme.size.default} 0 ${theme.size.small} 0`};
   ${isLargeIconStyle && 'margin-bottom: 36px;'}
 `;
