@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
-import { css } from '@emotion/react';
-import { cx, css as leafyCss } from '@leafygreen-ui/emotion';
+// import { css } from '@emotion/react';
+import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -41,7 +41,7 @@ export const getBoxShadowColor = (darkMode) => ({
     : '0px 0px 5px 1px rgba(58, 63, 60, 0.15)',
 });
 
-const commonTextStyling = css`
+const commonTextStyling = `
   font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
@@ -149,7 +149,7 @@ const StyledSearchFilters = styled(SearchFilters)`
   }
 `;
 
-const searchResultStyling = css`
+const searchResultStyling = `
   box-shadow: var(--box-shadow);
   border-radius: 45px;
   height: ${SEARCH_RESULT_HEIGHT};
@@ -240,11 +240,11 @@ const ResultTag = styled('div')`
   align-items: center;
 `;
 
-const overlineStyle = leafyCss`
+const overlineStyle = css`
   padding-right: 8px;
 `;
 
-const iconStyle = leafyCss`
+const iconStyle = css`
   margin-left: 8px;
   margin-right: -2px;
 `;

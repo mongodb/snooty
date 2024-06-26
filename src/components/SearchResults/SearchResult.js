@@ -1,10 +1,10 @@
 import React, { useContext, useRef } from 'react';
 import sanitizeHtml from 'sanitize-html';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import Tag, { searchTagStyle, tagHeightStyle } from '../Tag';
 import SearchContext from './SearchContext';
@@ -14,14 +14,14 @@ import { getBoxShadowColor } from './SearchResults';
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
 
-const largeResultTitle = css`
+const largeResultTitle = `
   font-size: ${theme.size.default};
   line-height: ${theme.size.medium};
   font-weight: 600;
 `;
 
 // Truncates text to a maximum number of lines
-const truncate = (maxLines) => css`
+const truncate = (maxLines) => `
   display: -webkit-box;
   -webkit-line-clamp: ${maxLines}; /* supported cross browser */
   -webkit-box-orient: vertical;
@@ -45,7 +45,9 @@ const SearchResultContainer = styled('div')`
   height: 100%;
 `;
 
-const StyledResultTitle = styled('p')`
+const StyledResultTitle = styled('p')``;
+
+const resultTitleStyling = () => css`
   font-family: 'Euclid Circular A';
   color: var(--title-color);
   font-size: ${theme.fontSize.small};
@@ -62,7 +64,9 @@ const StyledResultTitle = styled('p')`
   position: relative;
 `;
 
-const SearchResultLink = styled('a')`
+const SearchResultLink = styled('a')``;
+
+const searchResultLinkStyling = () => css`
   color: var(--title-color);
   height: 100%;
   text-decoration: none;
@@ -78,7 +82,7 @@ const SearchResultLink = styled('a')`
       color: var(--title-color);
       text-decoration: none;
     }
-    ${SearchResultContainer} {
+    > div {
       background-color: rgba(231, 238, 236, 0.4);
       transition: background-color 150ms ease-in;
     }
@@ -155,13 +159,21 @@ const SearchResult = React.memo(
     const validFacets = facets?.filter(getFacetName);
 
     return (
-      <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} style={getBoxShadowColor(darkMode)} {...props}>
+      <SearchResultLink
+        ref={resultLinkRef}
+        href={url}
+        onClick={onClick}
+        className={cx(searchResultLinkStyling())}
+        style={getBoxShadowColor(darkMode)}
+        {...props}
+      >
         <SearchResultContainer>
           <StyledResultTitle
             style={{
               '--title-color': darkMode ? palette.blue.light1 : palette.blue.base,
               '--title-color-on-visited': darkMode ? palette.purple.light2 : palette.purple.dark2,
             }}
+            className={cx(resultTitleStyling())}
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(title),
             }}
