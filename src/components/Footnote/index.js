@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
-import { css } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from '../ComponentFactory';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { intersperse } from '../../utils/intersperse';
@@ -22,12 +22,12 @@ const tableStyling = (darkMode) => css`
   ${darkMode &&
   `
       tbody tr td a {
-        color: var(--color);
+        color: ${palette.blue.light1};
       }
     `}
 
   :target {
-    background-color: var(--background-color);
+    background-color: ${darkMode ? palette.gray.dark2 : '#ffa'};
   }
 `;
 
@@ -49,35 +49,18 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
     </a>
   ));
 
-  let footnoteDynamicStyles = {
-    '--background-color': '#ffa',
-  };
-
-  if (darkMode) {
-    footnoteDynamicStyles = {
-      '--background-color': palette.gray.dark2,
-      '--color': palette.blue.light1,
-    };
-  }
   return (
-    <table
-      className="header-buffer"
-      css={tableStyling(darkMode)}
-      style={footnoteDynamicStyles}
-      frame="void"
-      id={`footnote-${ref}`}
-      rules="none"
-    >
+    <table className={cx('header-buffer', tableStyling(darkMode))} frame="void" id={`footnote-${ref}`} rules="none">
       <colgroup>
         <col />
       </colgroup>
       <tbody valign="top">
         <tr>
-          <td css={tdStyling}>
+          <td className={cx(tdStyling)}>
             [{footnoteReferenceNodes.length !== 1 ? label : <a href={`#ref-${uid}${footnoteReferences[0]}`}>{label}</a>}
             ]
           </td>
-          <td css={tdStyling}>
+          <td className={cx(tdStyling)}>
             {footnoteReferenceNodes.length > 1 && <em>({intersperse(footnoteReferenceNodes)})</em>}{' '}
             {children.map((child, index) => (
               <ComponentFactory {...rest} nodeData={child} key={index} parentNode="footnote" />
