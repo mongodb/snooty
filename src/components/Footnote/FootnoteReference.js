@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { css } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 import { getNestedValue } from '../../utils/get-nested-value';
@@ -34,8 +34,7 @@ const FootnoteReference = ({ nodeData: { id, refname } }) => {
 
   return (
     <a
-      className="footnote-reference header-buffer"
-      css={refStyles(darkMode)}
+      className={cx('footnote-reference header-buffer', refStyles(darkMode))}
       href={`#footnote-${ref}`}
       id={`ref-${uid}`}
     >
