@@ -22,12 +22,12 @@ const tableStyling = (darkMode) => css`
   ${darkMode &&
   `
       tbody tr td a {
-        color: var(--color);
+        color: ${palette.blue.light1};
       }
     `}
 
   :target {
-    background-color: var(--background-color);
+    background-color: ${darkMode ? palette.gray.dark2 : '#ffa'};
   }
 `;
 
@@ -49,25 +49,8 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
     </a>
   ));
 
-  let footnoteDynamicStyles = {
-    '--background-color': '#ffa',
-  };
-
-  if (darkMode) {
-    footnoteDynamicStyles = {
-      '--background-color': palette.gray.dark2,
-      '--color': palette.blue.light1,
-    };
-  }
   return (
-    <table
-      className="header-buffer"
-      css={tableStyling(darkMode)}
-      style={footnoteDynamicStyles}
-      frame="void"
-      id={`footnote-${ref}`}
-      rules="none"
-    >
+    <table className="header-buffer" css={tableStyling(darkMode)} frame="void" id={`footnote-${ref}`} rules="none">
       <colgroup>
         <col />
       </colgroup>
