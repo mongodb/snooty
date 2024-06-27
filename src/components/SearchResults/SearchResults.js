@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
-// import { css } from '@emotion/react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { Theme } from '@leafygreen-ui/lib';
 import styled from '@emotion/styled';

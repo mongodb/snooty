@@ -63,20 +63,21 @@ const StyledResultTitle = styled('p')`
 
 const searchResultLinkStyling = ({ searchResultTitleColor, searchResultTitleColorOnVisited }) => css`
   color: ${searchResultTitleColor};
-  p:first-child {
-    color: ${searchResultTitleColor};
-  }
   height: 100%;
   text-decoration: none;
   border-radius: ${theme.size.medium};
+
+  ${StyledResultTitle} {
+    color: ${searchResultTitleColor};
+  }
   :visited {
-    p:first-child {
+    ${StyledResultTitle} {
       color: ${searchResultTitleColorOnVisited};
     }
   }
   :hover,
   :focus {
-    p:first-child {
+    ${StyledResultTitle} {
       color: ${searchResultTitleColor};
       text-decoration: none;
     }
