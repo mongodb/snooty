@@ -7,7 +7,7 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
 }));
 
 describe('Chatbot Ui', () => {
-  it('renders the chatbot through the ComponentFactor', async () => {
+  it('renders the chatbot through the ActionBar Component', async () => {
     const wrapper = render(<ActionBar />);
     await waitFor(() => expect(wrapper.getByTestId('chatbot-ui')).toBeInTheDocument());
   });

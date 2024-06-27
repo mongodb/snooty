@@ -13,70 +13,8 @@ exports[`button component renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: var(--color);
-  font-weight: var(--font-weight);
-}
-
-.emotion-0>code {
-  color: var(--color);
-}
-
-.emotion-0:focus,
-.emotion-0:hover {
-  text-decoration-line: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-0:focus {
-  text-decoration-color: var(--focus-text-decoration-color);
-  outline: none;
-}
-
-.emotion-0:hover {
-  text-decoration-color: var(--hover-text-decoration-color);
-}
-
-.emotion-0 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  line-height: 13px;
-  color: var(--color);
-  font-weight: var(--font-weight);
-}
-
-.emotion-0>code {
-  color: var(--color);
-}
-
-.emotion-0:focus,
-.emotion-0:hover {
-  text-decoration-line: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-0:focus {
-  text-decoration-color: var(--focus-text-decoration-color);
-  outline: none;
-}
-
-.emotion-0:hover {
-  text-decoration-color: var(--hover-text-decoration-color);
-}
-
-.emotion-1 {
+  color: #016BF8;
+  font-weight: inherit;
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -111,46 +49,68 @@ exports[`button component renders correctly 1`] = `
   height: 36px;
 }
 
-.emotion-1:focus-visible,
-.emotion-1[data-focus="true"] {
+.emotion-0>code {
+  color: #016BF8;
+}
+
+.emotion-0:focus,
+.emotion-0:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-0:focus {
+  text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-1:active,
-.emotion-1[data-active="true"],
-.emotion-1:focus,
-.emotion-1:hover {
+.emotion-0:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-0:focus-visible,
+.emotion-0[data-focus="true"] {
+  outline: none;
+}
+
+.emotion-0:active,
+.emotion-0[data-active="true"],
+.emotion-0:focus,
+.emotion-0:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-1:focus-visible,
-.emotion-1[data-focus="true"] {
+.emotion-0:focus-visible,
+.emotion-0[data-focus="true"] {
   color: #FFFFFF;
 }
 
-.emotion-1:hover,
-.emotion-1[data-hover="true"],
-.emotion-1:active,
-.emotion-1[data-active="true"] {
+.emotion-0:hover,
+.emotion-0[data-hover="true"],
+.emotion-0:active,
+.emotion-0[data-active="true"] {
   color: #FFFFFF;
   background-color: #00593f;
   border-color: #00593f;
   box-shadow: 0 0 0 3px #C0FAE6;
 }
 
-.emotion-1:focus-visible,
-.emotion-1[data-focus="true"] {
+.emotion-0:focus-visible,
+.emotion-0[data-focus="true"] {
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-1.button {
+.emotion-0.button {
   color: #ffffff;
 }
 
-.emotion-2 {
+.emotion-1 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -160,7 +120,7 @@ exports[`button component renders correctly 1`] = `
   border-radius: 5px;
 }
 
-.emotion-3 {
+.emotion-2 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -187,16 +147,15 @@ exports[`button component renders correctly 1`] = `
 
 <a
     aria-disabled="false"
-    class="emotion-0 lg-ui-button-0000 button emotion-1"
+    class="lg-ui-button-0000 button emotion-0"
     data-lgid="lg-button"
     href="/install/"
-    style="--color: #016BF8; --focus-text-decoration-color: #016BF8; --hover-text-decoration-color: #E8EDEB; --font-weight: inherit;"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     />
     <div
-      class="emotion-3"
+      class="emotion-2"
     >
       Download Compass
     </div>
