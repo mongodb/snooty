@@ -6,15 +6,12 @@ import PropTypes from 'prop-types';
 import { getNestedValue } from '../../utils/get-nested-value';
 import FootnoteContext from './footnote-context';
 
-const refStyles = (darkMode) => css`
-  ${darkMode &&
-  `
-      color: ${palette.blue.light1};
+const refStyles = css`
+  color: ${palette.blue.light1};
 
-      &:visited {
-        color: ${palette.purple.base};
-      }
-    `}
+  &:visited {
+    color: ${palette.purple.base};
+  }
 `;
 
 /**
@@ -34,7 +31,7 @@ const FootnoteReference = ({ nodeData: { id, refname } }) => {
 
   return (
     <a
-      className={cx('footnote-reference header-buffer', refStyles(darkMode))}
+      className={cx('footnote-reference header-buffer', darkMode && refStyles)}
       href={`#footnote-${ref}`}
       id={`ref-${uid}`}
     >
