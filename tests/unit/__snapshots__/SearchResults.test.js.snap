@@ -1200,16 +1200,16 @@ exports[`Search Results Page considers a given search filter query param and dis
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-.emotion-30 p:first-child {
+.emotion-30 .emotion-34 {
   color: #016BF8;
 }
 
-.emotion-30:visited p:first-child {
+.emotion-30:visited .emotion-34 {
   color: #5E0C9E;
 }
 
-.emotion-30:hover p:first-child,
-.emotion-30:focus p:first-child {
+.emotion-30:hover .emotion-34,
+.emotion-30:focus .emotion-34 {
   color: #016BF8;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -7814,16 +7814,16 @@ exports[`Search Results Page renders results from a given search term query para
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-.emotion-25 p:first-child {
+.emotion-25 .emotion-29 {
   color: #016BF8;
 }
 
-.emotion-25:visited p:first-child {
+.emotion-25:visited .emotion-29 {
   color: #5E0C9E;
 }
 
-.emotion-25:hover p:first-child,
-.emotion-25:focus p:first-child {
+.emotion-25:hover .emotion-29,
+.emotion-25:focus .emotion-29 {
   color: #016BF8;
   -webkit-text-decoration: none;
   text-decoration: none;
