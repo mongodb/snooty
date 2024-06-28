@@ -24,7 +24,6 @@ const getPosition = (element) => {
 };
 
 const defaultTabsStyling = css`
-  margin-bottom: ${theme.size.medium};
   ${TAB_BUTTON_SELECTOR} {
     font-size: ${theme.size.default};
     align-items: center;
@@ -63,14 +62,11 @@ const getTabsStyling = ({ isHidden, isProductLanding }) => css`
   ${isProductLanding && landingTabsStyling};
 `;
 
-const tabContentStyling = css`
-  margin-top: ${theme.size.medium};
-`;
-
-const productLandingTabContentStyling = css`
+const landingTabStyling = css`
   display: grid;
   column-gap: ${theme.size.medium};
   grid-template-columns: repeat(2, 1fr);
+  margin-top: unset !important;
 
   img {
     border-radius: ${theme.size.small};
@@ -82,6 +78,11 @@ const productLandingTabContentStyling = css`
   @media ${theme.screenSize.upToLarge} {
     display: block;
   }
+`;
+
+const getTabStyling = ({ isProductLanding }) => css`
+  ${isProductLanding && landingTabStyling}
+  margin-top: 24px;
 `;
 
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
@@ -138,7 +139,6 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
           setSelected={handleClick}
-          forceRenderAllTabPanels={true}
         >
           {children.map((tab) => {
             if (tab.name !== 'tab') {
@@ -152,12 +152,10 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab key={tabId} name={tabTitle}>
-                <div className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}>
-                  {tab.children.map((child, i) => (
-                    <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
-                  ))}
-                </div>
+              <LeafyTab className={cx(getTabStyling({ isProductLanding }))} key={tabId} name={tabTitle}>
+                {tab.children.map((child, i) => (
+                  <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
+                ))}
               </LeafyTab>
             );
           })}
