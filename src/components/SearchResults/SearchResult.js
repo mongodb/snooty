@@ -9,14 +9,15 @@ import { theme } from '../../theme/docsTheme';
 import Tag, { searchTagStyle, tagHeightStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import { getFacetTagVariant } from './Facets/utils';
-import { SEARCH_THEME_STYLES, searchResultDynamicStyling } from './SearchResults';
+import { searchResultDynamicStyling } from './SearchResults';
+import { SEARCH_THEME_STYLES } from './styles/searchThemeStyles';
 
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
 
 const largeResultTitle = `
   font-size: ${theme.size.default};
-  line-height: ${theme.size.medium};
+  line-height: 28px;
   font-weight: 600;
 `;
 
@@ -46,7 +47,6 @@ const SearchResultContainer = styled('div')`
 `;
 
 const StyledResultTitle = styled('p')`
-  font-family: 'Euclid Circular A';
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { Theme } from '@leafygreen-ui/lib';
+import { css } from '@emotion/react';
 import { theme } from '../theme/docsTheme';
 
 const baseStyle = css`
@@ -26,7 +27,7 @@ export const searchTagStyle = css`
 `;
 
 const VARIANTS = {
-  light: {
+  [Theme.Light]: {
     blue: css`
       background-color: ${palette.blue.light3};
       border: 1px solid ${palette.blue.light2};
@@ -48,7 +49,7 @@ const VARIANTS = {
       color: ${palette.gray.dark2};
     `,
   },
-  dark: {
+  [Theme.Dark]: {
     blue: css`
       background-color: ${palette.blue.dark3};
       border: 1px solid ${palette.blue.dark2};
@@ -73,9 +74,8 @@ const VARIANTS = {
 };
 
 const Tag = ({ children, variant, ...rest }) => {
-  const { darkMode } = useDarkMode();
-  const mode = darkMode ? 'dark' : 'light';
-  const variantStyle = VARIANTS[mode][variant] || VARIANTS[mode]['green'];
+  const { theme: siteTheme } = useDarkMode();
+  const variantStyle = VARIANTS[siteTheme][variant] || VARIANTS[siteTheme]['green'];
 
   return (
     <span css={[baseStyle, variantStyle]} {...rest}>

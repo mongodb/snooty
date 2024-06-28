@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
-import { Theme } from '@leafygreen-ui/lib';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -8,7 +7,6 @@ import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { palette } from '@leafygreen-ui/palette';
 import { H3, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import { ParagraphSkeleton } from '@leafygreen-ui/skeleton-loader';
@@ -26,38 +24,13 @@ import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import MobileFilters from './MobileFilters';
 import { Facets, FacetTags } from './Facets';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { SEARCH_THEME_STYLES } from './styles/searchThemeStyles';
 
 const FILTER_COLUMN_WIDTH = '173px';
 const LANDING_MODULE_MARGIN = '28px';
 const LANDING_PAGE_MARGIN = '40px';
 const ROW_GAP = theme.size.default;
 const SEARCH_RESULT_HEIGHT = '152px';
-
-/**
- * @typedef ThemeStyle
- * @type {object}
- * @property {string} headingColor
- * @property {string} boxShadow
- * @property {string} boxShadowOnHover
- */
-export const SEARCH_THEME_STYLES = {
-  [Theme.Light]: {
-    headingColor: palette.green.dark2,
-    boxShadow: '0px 0px 3px 0px rgba(0, 0, 0, 0.1)',
-    boxShadowOnHover: '0px 0px 5px 1px rgba(58, 63, 60, 0.15)',
-    filterHeaderColor: palette.gray.dark2,
-    searchResultTitleColor: palette.blue.base,
-    searchResultTitleColorOnVisited: palette.purple.dark2,
-  },
-  [Theme.Dark]: {
-    headingColor: palette.gray.light2,
-    boxShadow: '0px 0px 3px 0px rgba(255, 255, 255, 0.15)',
-    boxShadowOnHover: '0px 0px 5px 3px rgba(92, 97, 94, 0.15)',
-    filterHeaderColor: palette.gray.light2,
-    searchResultTitleColor: palette.blue.light1,
-    searchResultTitleColorOnVisited: palette.purple.light2,
-  },
-};
 
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
 
@@ -423,7 +396,6 @@ const SearchResults = () => {
 
   return (
     <SearchResultsContainer showFacets={showFacets}>
-      {/* new header for search bar */}
       <HeaderContainer className={cx(headerContainerDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
         <H3 as="h1">Search Results</H3>
         <SearchInput
