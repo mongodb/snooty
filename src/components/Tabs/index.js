@@ -139,6 +139,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
           setSelected={handleClick}
+          forceRenderAllTabPanels={true}
         >
           {children.map((tab) => {
             if (tab.name !== 'tab') {
