@@ -1,7 +1,18 @@
 import React, { useContext } from 'react';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { css, cx } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
 import { getNestedValue } from '../../utils/get-nested-value';
 import FootnoteContext from './footnote-context';
+
+const refStyles = css`
+  color: ${palette.blue.light1};
+
+  &:visited {
+    color: ${palette.purple.base};
+  }
+`;
 
 /**
  * Component used to show a clickable reference to footnote on page
@@ -9,6 +20,7 @@ import FootnoteContext from './footnote-context';
  */
 const FootnoteReference = ({ nodeData: { id, refname } }) => {
   const { footnotes } = useContext(FootnoteContext);
+  const { darkMode } = useDarkMode();
 
   // the nodeData originates from docutils, and may be incorrect for
   // anonymous footnoteReferences originating from included files -- docutils
@@ -16,8 +28,13 @@ const FootnoteReference = ({ nodeData: { id, refname } }) => {
 
   const ref = refname || id.replace('id', '');
   const uid = refname ? `${refname}-${id}` : id;
+
   return (
-    <a className="footnote-reference header-buffer" href={`#footnote-${ref}`} id={`ref-${uid}`}>
+    <a
+      className={cx('footnote-reference header-buffer', darkMode && refStyles)}
+      href={`#footnote-${ref}`}
+      id={`ref-${uid}`}
+    >
       [{getNestedValue([ref, 'label'], footnotes) || ref}]
     </a>
   );
