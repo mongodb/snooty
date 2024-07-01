@@ -1,26 +1,28 @@
 import React, { useContext, useRef } from 'react';
 import sanitizeHtml from 'sanitize-html';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import Tag, { searchTagStyle, tagHeightStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import { getFacetTagVariant } from './Facets/utils';
+import { searchResultDynamicStyling } from './SearchResults';
+import { SEARCH_THEME_STYLES } from './styles/searchThemeStyles';
 
-const LINK_COLOR = '#494747';
 // Use string for match styles due to replace/innerHTML
-const SEARCH_MATCH_STYLE = `background-color: ${palette.green.light2} ; border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
+const SEARCH_MATCH_STYLE = `border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
 
-const largeResultTitle = css`
+const largeResultTitle = `
   font-size: ${theme.size.default};
-  line-height: ${theme.size.medium};
+  line-height: 28px;
   font-weight: 600;
 `;
 
 // Truncates text to a maximum number of lines
-const truncate = (maxLines) => css`
+const truncate = (maxLines) => `
   display: -webkit-box;
   -webkit-line-clamp: ${maxLines}; /* supported cross browser */
   -webkit-box-orient: vertical;
@@ -45,8 +47,6 @@ const SearchResultContainer = styled('div')`
 `;
 
 const StyledResultTitle = styled('p')`
-  font-family: 'Euclid Circular A';
-  color: var(--color);
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
@@ -61,22 +61,30 @@ const StyledResultTitle = styled('p')`
   position: relative;
 `;
 
-const SearchResultLink = styled('a')`
-  color: ${LINK_COLOR};
+const searchResultLinkStyling = ({ searchResultTitleColor, searchResultTitleColorOnVisited }) => css`
+  color: ${searchResultTitleColor};
   height: 100%;
   text-decoration: none;
   border-radius: ${theme.size.medium};
+
+  ${StyledResultTitle} {
+    color: ${searchResultTitleColor};
+  }
+  :visited {
+    ${StyledResultTitle} {
+      color: ${searchResultTitleColorOnVisited};
+    }
+  }
   :hover,
   :focus {
-    color: ${LINK_COLOR};
-    text-decoration: none;
+    ${StyledResultTitle} {
+      color: ${searchResultTitleColor};
+      text-decoration: none;
+    }
     ${SearchResultContainer} {
       background-color: rgba(231, 238, 236, 0.4);
       transition: background-color 150ms ease-in;
     }
-  }
-  :visited {
-    ${StyledResultTitle}
   }
 `;
 
@@ -102,14 +110,17 @@ const StylingTagContainer = styled('div')`
 
 const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-const highlightSearchTerm = (text, searchTerm) =>
+const highlightSearchTerm = (text, searchTerm, darkMode) =>
   text.replace(
     new RegExp(escapeRegExp(searchTerm), 'gi'),
-    (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
+    (result) =>
+      `<span style="background-color: ${
+        darkMode ? palette.green.dark2 : palette.green.light2
+      };${SEARCH_MATCH_STYLE}">${result}</span>`
   );
 
 const spanAllowedStyles = {
-  'background-color': [new RegExp(`^${palette.green.light2}$`, 'i')],
+  'background-color': [new RegExp(`^${palette.green.light2}$`, 'i'), new RegExp(`^${palette.green.dark2}$`, 'i')],
   'border-radius': [new RegExp(`^3px$`)],
   'padding-left': [new RegExp(`^2px$`)],
   'padding-right': [new RegExp(`^2px$`)],
@@ -136,21 +147,30 @@ const SearchResult = React.memo(
     searchProperty,
     url,
     facets,
-    darkMode,
     ...props
   }) => {
+    const { darkMode, theme: siteTheme } = useDarkMode();
     const { searchPropertyMapping, searchTerm, getFacetName, showFacets } = useContext(SearchContext);
-    const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
+    const highlightedPreviewText = highlightSearchTerm(preview, searchTerm, darkMode);
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
     const validFacets = facets?.filter(getFacetName);
 
     return (
-      <SearchResultLink ref={resultLinkRef} href={url} onClick={onClick} {...props}>
+      <a
+        ref={resultLinkRef}
+        href={url}
+        onClick={onClick}
+        {...props}
+        className={cx(
+          props.className,
+          searchResultLinkStyling(SEARCH_THEME_STYLES[siteTheme]),
+          searchResultDynamicStyling(SEARCH_THEME_STYLES[siteTheme])
+        )}
+      >
         <SearchResultContainer>
           <StyledResultTitle
-            style={{ '--color': darkMode ? palette.blue.light1 : palette.blue.base }}
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(title),
             }}
@@ -186,10 +206,9 @@ const SearchResult = React.memo(
             </MobileFooterContainer>
           )}
         </SearchResultContainer>
-      </SearchResultLink>
+      </a>
     );
   }
 );
 
-export { SearchResultLink };
 export default SearchResult;
