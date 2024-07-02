@@ -1,6 +1,5 @@
 import React, { useContext, useMemo } from 'react';
 import { Language } from '@leafygreen-ui/code';
-import LeafyIcon from '@leafygreen-ui/icon';
 import { TabContext } from '../Tabs/tab-context';
 import { getPlaintext } from '../../utils/get-plaintext';
 
@@ -40,22 +39,8 @@ const getDriverLanguage = (driverArg) => {
   return 'none';
 };
 
-// Returns the icon associated with the driver language that would be
-// shown on our TabSelector component
-const getDriverImage = (driver, driverIconMap) => {
-  const DriverIcon = driverIconMap?.[driver];
-  if (DriverIcon) {
-    return <DriverIcon />;
-  }
-
-  // Use LG File icon as our default placeholder for images. This overwrites
-  // LG's Language Switcher current default icon. See:
-  // https://github.com/mongodb/leafygreen-ui/blob/6041b89bf5f9dc1e5ea76018bc2cd84bc1fd6faf/packages/code/src/LanguageSwitcher.tsx#L135-L136
-  return <LeafyIcon glyph="File" />;
-};
-
 // Generates language options for code block based on drivers tabset on current page
-const generateLanguageOptions = (selectors = {}, driverIconMap) => {
+const generateLanguageOptions = (selectors = {}) => {
   const drivers = selectors?.['drivers'];
   const languageOptions = [];
 
@@ -63,7 +48,6 @@ const generateLanguageOptions = (selectors = {}, driverIconMap) => {
     languageOptions.push({
       id: driver,
       displayName: getPlaintext(drivers[driver]),
-      image: getDriverImage(driver, driverIconMap),
       language: getDriverLanguage(driver),
     });
   }
@@ -84,8 +68,8 @@ const getCurrentLanguageOption = (languageOptions, activeTabs) => {
 };
 
 const CodeProvider = ({ children }) => {
-  const { activeTabs, driverIconMap, selectors } = useContext(TabContext);
-  const languageOptions = useMemo(() => generateLanguageOptions(selectors, driverIconMap), [driverIconMap, selectors]);
+  const { activeTabs, selectors } = useContext(TabContext);
+  const languageOptions = useMemo(() => generateLanguageOptions(selectors), [selectors]);
   const codeBlockLanguage = useMemo(
     () => getCurrentLanguageOption(languageOptions, activeTabs),
     [activeTabs, languageOptions]

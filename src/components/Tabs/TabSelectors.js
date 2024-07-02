@@ -3,6 +3,7 @@ import { useTheme, css } from '@emotion/react';
 import Select from '../Select';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { TabContext } from './tab-context';
 
 const capitalizeFirstLetter = (str) => str.trim().replace(/^\w/, (c) => c.toUpperCase());
@@ -61,7 +62,7 @@ const TabSelector = ({ activeTab, handleClick, iconMapping, name, options }) => 
 };
 
 const TabSelectors = () => {
-  const { activeTabs, driverIconMap, selectors, setActiveTab } = useContext(TabContext);
+  const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
 
   if (!selectors || Object.keys(selectors).length === 0) {
     return null;
@@ -72,7 +73,7 @@ const TabSelectors = () => {
       {Object.entries(selectors).map(([name, options]) => {
         let iconMapping = {};
         if (name === 'drivers') {
-          iconMapping = driverIconMap;
+          iconMapping = DRIVER_ICON_MAP;
         }
 
         return (
