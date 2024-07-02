@@ -87,7 +87,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
             }();
           `,
         }}
-      />,
+      />
     );
   }
   setHeadComponents(headComponents);
