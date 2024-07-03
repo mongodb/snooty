@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
+import Button from '@leafygreen-ui/button';
+import { Body } from '@leafygreen-ui/typography';
+import Icon, { glyphs } from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import { getPageTitle } from '../utils/get-page-title';
 import Link from './Link';
 
-const StyledContainer = styled.div`
+const styledContainer = css`
   padding-top: 2em;
   padding-bottom: 2.5em;
   width: 100%;
@@ -21,55 +22,89 @@ const StyledContainer = styled.div`
   }
 `;
 
-const arrowStyling = css`
-  line-height: 28px;
-  align-content: center;
-  color: var(--arrow-color);
+const commonTextStyles = css`
+  font-size: ${theme.fontSize.small};
+  line-height: 20px;
 `;
 
-const titleSpanStyling = css`
-  line-height: 28px;
-  --hover-text-decoration-color: var(--underline-color) !important;
+const commonNextPrevTextStyling = css`
+  ${commonTextStyles}
+  font-weight: 500;
 `;
 
-const LinkContentContainer = styled.div`
+const nextTextStyling = css`
+  ${commonNextPrevTextStyling}
+  text-align: end;
+`;
+
+const prevTextStyling = css`
+  ${commonNextPrevTextStyling}
+  text-align: start;
+`;
+
+const nextPrevTitleTextStyling = css`
+  ${commonTextStyles}
+  color: ${palette.gray.base};
+`;
+
+const commonLinkContentContainer = css`
+  align-items: center;
   display: flex;
-  column-gap: ${theme.size.tiny};
+  column-gap: 14px;
 `;
+
+const nextLinkContainer = css`
+  ${commonLinkContentContainer}
+  flex-direction: row-reverse;
+`;
+
+const prevLinkContainer = css`
+  ${commonLinkContentContainer}
+  flex-direction: row;
+`;
+
+const NextPrevLink = ({ icon, direction, pageTitle }) => {
+  const isNext = direction?.toLowerCase() === 'next';
+  const isPrev = direction?.toLowerCase() === 'back';
+
+  return (
+    <div className={cx({ [nextLinkContainer]: isNext, [prevLinkContainer]: isPrev })}>
+      <Button size="large">
+        <Icon glyph={icon} />
+      </Button>
+      <div>
+        <Body className={cx({ [nextTextStyling]: isNext }, { [prevTextStyling]: isPrev })}>{direction}</Body>
+        <Body className={cx(nextPrevTitleTextStyling)}>{pageTitle}</Body>
+      </div>
+    </div>
+  );
+};
 
 const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
-  const { darkMode } = useDarkMode();
   const slugIndex = toctreeOrder.indexOf(slug);
   const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
   const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
   return (
-    <StyledContainer
-      style={{
-        '--arrow-color': darkMode ? palette.gray.light2 : palette.black,
-        '--underline-color': darkMode ? palette.gray.dark1 : palette.gray.light2,
-      }}
-    >
+    <div className={cx(styledContainer)}>
       {prevSlug && (
-        <React.Fragment>
-          <LinkContentContainer>
-            <span className={cx([arrowStyling])}>←&nbsp;</span>
-            <Link className={cx(titleSpanStyling)} to={prevSlug} title="Previous Section">
-              {getPageTitle(prevSlug, slugTitleMapping)}
-            </Link>
-          </LinkContentContainer>
-        </React.Fragment>
+        <Link to={prevSlug} title="Previous Section">
+          <NextPrevLink
+            icon={glyphs.ArrowLeft.displayName}
+            direction="Back"
+            pageTitle={getPageTitle(prevSlug, slugTitleMapping)}
+          />
+        </Link>
       )}
       {nextSlug && (
-        <React.Fragment>
-          <LinkContentContainer>
-            <Link className={cx(titleSpanStyling)} to={nextSlug} title="Next Section">
-              {getPageTitle(nextSlug, slugTitleMapping)}
-            </Link>
-            <span className={cx([arrowStyling])}>&nbsp;→</span>
-          </LinkContentContainer>
-        </React.Fragment>
+        <Link to={nextSlug} title="Next Section">
+          <NextPrevLink
+            icon={glyphs.ArrowRight.displayName}
+            direction="Next"
+            pageTitle={getPageTitle(nextSlug, slugTitleMapping)}
+          />
+        </Link>
       )}
-    </StyledContainer>
+    </div>
   );
 };
 
