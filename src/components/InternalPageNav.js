@@ -16,6 +16,7 @@ const styledContainer = css`
   display: flex;
   justify-content: space-between;
   column-gap: ${theme.size.default};
+  margin-top: 88px;
 
   @media print {
     display: none;

@@ -15,6 +15,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
   justify-content: space-between;
   -webkit-column-gap: 16px;
   column-gap: 16px;
+  margin-top: 88px;
 }
 
 @media print {
@@ -377,6 +378,7 @@ exports[`renders a page with no next link correctly 1`] = `
   justify-content: space-between;
   -webkit-column-gap: 16px;
   column-gap: 16px;
+  margin-top: 88px;
 }
 
 @media print {
@@ -653,6 +655,7 @@ exports[`renders a page with no previous link correctly 1`] = `
   justify-content: space-between;
   -webkit-column-gap: 16px;
   column-gap: 16px;
+  margin-top: 88px;
 }
 
 @media print {
