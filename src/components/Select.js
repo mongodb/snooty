@@ -41,9 +41,9 @@ const selectStyle = css`
 const optionStyling = css`
   align-items: center;
 
-  // & > span > svg {
-  //   display: none;
-  // }
+  & > span > svg {
+    display: none;
+  }
 `;
 
 const PortalContainer = forwardRef(({ ...props }, ref) => (
