@@ -307,6 +307,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   // const elmIdsForScroll = getReferenceIds(headerRows[0].children.concat(bodyRows.slice(0, 3)));
   return (
     <Table>
+      {/* TODO: Need to double-check if this is performant with SSG styles */}
       {widths && (
         <colgroup>
           {widths.map((width) => (
