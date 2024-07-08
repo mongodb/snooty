@@ -287,11 +287,11 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const bodyRows = children[0].children.slice(headerRowCount);
   const columnCount = bodyRows[0].children[0].children.length;
 
-  // If :header-rows: 0 is specified or :header-rows: is omitted, spoof empty <thead> content to avoid LeafyGreen component crashing
+  // Check if :header-rows: 0 is specified or :header-rows: is omitted
   const headerRows =
     headerRowCount > 0
       ? children[0].children[0].children.slice(0, headerRowCount)
-      : [{ children: Array(columnCount).fill({ type: 'text', value: '', children: [] }) }];
+      : [];
 
   let widths = null;
   const customWidths = options?.widths;
