@@ -307,6 +307,13 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   // const elmIdsForScroll = getReferenceIds(headerRows[0].children.concat(bodyRows.slice(0, 3)));
   return (
     <Table>
+      {widths && (
+        <colgroup>
+          {widths.map((width) => (
+            <col style={{width: `${width}%`}} />
+          ))}
+        </colgroup>
+      )}
       <TableHead>
         {headerRows.map((row, rowIndex) => (
           <HeaderRow key={rowIndex}>
