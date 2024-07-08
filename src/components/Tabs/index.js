@@ -152,7 +152,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab className={'test-leafy-tab-here'} key={tabId} name={tabTitle}>
+              <LeafyTab key={tabId} name={tabTitle}>
                 <div className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}>
                   {tab.children.map((child, i) => (
                     <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
