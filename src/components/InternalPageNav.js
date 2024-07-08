@@ -10,13 +10,18 @@ import { getPageTitle } from '../utils/get-page-title';
 import Link from './Link';
 
 const styledContainer = css`
-  padding-top: 2em;
   padding-bottom: 2.5em;
   width: 100%;
   display: flex;
   justify-content: space-between;
   column-gap: ${theme.size.default};
   margin-top: 88px;
+
+  @media ${theme.screenSize.upToSmall} {
+    flex-direction: column-reverse;
+    row-gap: 64px;
+    margin-top: 66px;
+  }
 
   @media print {
     display: none;
@@ -34,12 +39,10 @@ const commonNextPrevTextStyling = css`
 `;
 
 const nextTextStyling = css`
-  ${commonNextPrevTextStyling}
   text-align: end;
 `;
 
 const prevTextStyling = css`
-  ${commonNextPrevTextStyling}
   text-align: start;
 `;
 
@@ -73,8 +76,8 @@ const NextPrevLink = ({ icon, direction, pageTitle }) => {
       <Button size="large">
         <Icon glyph={icon} />
       </Button>
-      <div>
-        <Body className={cx({ [nextTextStyling]: isNext }, { [prevTextStyling]: isPrev })}>{direction}</Body>
+      <div className={cx({ [nextTextStyling]: isNext }, { [prevTextStyling]: isPrev })}>
+        <Body className={cx(commonNextPrevTextStyling)}>{direction}</Body>
         <Body className={cx(nextPrevTitleTextStyling)}>{pageTitle}</Body>
       </div>
     </div>

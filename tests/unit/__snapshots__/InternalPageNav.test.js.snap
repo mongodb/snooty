@@ -3,7 +3,6 @@
 exports[`renders a page with next and previous links correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  padding-top: 2em;
   padding-bottom: 2.5em;
   width: 100%;
   display: -webkit-box;
@@ -16,6 +15,16 @@ exports[`renders a page with next and previous links correctly 1`] = `
   -webkit-column-gap: 16px;
   column-gap: 16px;
   margin-top: 88px;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    row-gap: 64px;
+    margin-top: 66px;
+  }
 }
 
 @media print {
@@ -183,22 +192,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
 }
 
 .emotion-6 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 500;
   text-align: start;
-}
-
-.emotion-6 strong,
-.emotion-6 b {
-  font-weight: 700;
 }
 
 .emotion-7 {
@@ -211,7 +205,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
-  color: #889397;
+  font-weight: 500;
 }
 
 .emotion-7 strong,
@@ -219,7 +213,25 @@ exports[`renders a page with next and previous links correctly 1`] = `
   font-weight: 700;
 }
 
-.emotion-9 {
+.emotion-8 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  color: #889397;
+}
+
+.emotion-8 strong,
+.emotion-8 b {
+  font-weight: 700;
+}
+
+.emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -235,23 +247,8 @@ exports[`renders a page with next and previous links correctly 1`] = `
   flex-direction: row-reverse;
 }
 
-.emotion-13 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 500;
+.emotion-14 {
   text-align: end;
-}
-
-.emotion-13 strong,
-.emotion-13 b {
-  font-weight: 700;
 }
 
 <div
@@ -294,14 +291,16 @@ exports[`renders a page with next and previous links correctly 1`] = `
             </svg>
           </div>
         </button>
-        <div>
+        <div
+          class="emotion-6"
+        >
           <p
-            class="emotion-6"
+            class="emotion-7"
           >
             Back
           </p>
           <p
-            class="emotion-7"
+            class="emotion-8"
           >
             MongoDB C#/.NET Driver
           </p>
@@ -314,7 +313,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
       title="Next Section"
     >
       <div
-        class="emotion-9"
+        class="emotion-10"
       >
         <button
           aria-disabled="false"
@@ -345,14 +344,16 @@ exports[`renders a page with next and previous links correctly 1`] = `
             </svg>
           </div>
         </button>
-        <div>
+        <div
+          class="emotion-14"
+        >
           <p
-            class="emotion-13"
+            class="emotion-7"
           >
             Next
           </p>
           <p
-            class="emotion-7"
+            class="emotion-8"
           >
             Java MongoDB Driver
           </p>
@@ -366,7 +367,6 @@ exports[`renders a page with next and previous links correctly 1`] = `
 exports[`renders a page with no next link correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  padding-top: 2em;
   padding-bottom: 2.5em;
   width: 100%;
   display: -webkit-box;
@@ -379,6 +379,16 @@ exports[`renders a page with no next link correctly 1`] = `
   -webkit-column-gap: 16px;
   column-gap: 16px;
   margin-top: 88px;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    row-gap: 64px;
+    margin-top: 66px;
+  }
 }
 
 @media print {
@@ -546,22 +556,7 @@ exports[`renders a page with no next link correctly 1`] = `
 }
 
 .emotion-6 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 500;
   text-align: start;
-}
-
-.emotion-6 strong,
-.emotion-6 b {
-  font-weight: 700;
 }
 
 .emotion-7 {
@@ -574,11 +569,29 @@ exports[`renders a page with no next link correctly 1`] = `
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
-  color: #889397;
+  font-weight: 500;
 }
 
 .emotion-7 strong,
 .emotion-7 b {
+  font-weight: 700;
+}
+
+.emotion-8 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  color: #889397;
+}
+
+.emotion-8 strong,
+.emotion-8 b {
   font-weight: 700;
 }
 
@@ -622,14 +635,16 @@ exports[`renders a page with no next link correctly 1`] = `
             </svg>
           </div>
         </button>
-        <div>
+        <div
+          class="emotion-6"
+        >
           <p
-            class="emotion-6"
+            class="emotion-7"
           >
             Back
           </p>
           <p
-            class="emotion-7"
+            class="emotion-8"
           >
             MongoDB Go Driver
           </p>
@@ -643,7 +658,6 @@ exports[`renders a page with no next link correctly 1`] = `
 exports[`renders a page with no previous link correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  padding-top: 2em;
   padding-bottom: 2.5em;
   width: 100%;
   display: -webkit-box;
@@ -656,6 +670,16 @@ exports[`renders a page with no previous link correctly 1`] = `
   -webkit-column-gap: 16px;
   column-gap: 16px;
   margin-top: 88px;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    row-gap: 64px;
+    margin-top: 66px;
+  }
 }
 
 @media print {
@@ -823,22 +847,7 @@ exports[`renders a page with no previous link correctly 1`] = `
 }
 
 .emotion-6 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 500;
   text-align: end;
-}
-
-.emotion-6 strong,
-.emotion-6 b {
-  font-weight: 700;
 }
 
 .emotion-7 {
@@ -851,11 +860,29 @@ exports[`renders a page with no previous link correctly 1`] = `
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
-  color: #889397;
+  font-weight: 500;
 }
 
 .emotion-7 strong,
 .emotion-7 b {
+  font-weight: 700;
+}
+
+.emotion-8 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  color: #889397;
+}
+
+.emotion-8 strong,
+.emotion-8 b {
   font-weight: 700;
 }
 
@@ -899,14 +926,16 @@ exports[`renders a page with no previous link correctly 1`] = `
             </svg>
           </div>
         </button>
-        <div>
+        <div
+          class="emotion-6"
+        >
           <p
-            class="emotion-6"
+            class="emotion-7"
           >
             Next
           </p>
           <p
-            class="emotion-7"
+            class="emotion-8"
           >
             MongoDB Go Driver
           </p>
