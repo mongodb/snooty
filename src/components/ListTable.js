@@ -25,6 +25,7 @@ const baseCellStyle = css`
   padding: 10px ${theme.size.small} !important;
 
   * {
+    // Wrap in selector to ensure it cascades down to every element
     font-size: ${theme.fontSize.small} !important;
   }
 
@@ -42,7 +43,6 @@ const bodyCellStyle = css`
   vertical-align: top;
 
   * {
-    font-size: ${theme.fontSize.small} !important;
     line-height: 20px;
   }
 
@@ -58,10 +58,9 @@ const bodyCellStyle = css`
 `;
 
 const headerCellStyle = css`
-  * {
-    font-size: ${theme.fontSize.small};
-    font-weight: 600;
-  }
+  line-height: 24px;
+  font-weight: 600;
+  font-size: ${theme.fontSize.small};
 `;
 
 // const align = (key) => {
@@ -272,7 +271,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
       ));
       return (
         <Cell className={cx(baseCellStyle, bodyCellStyle)}>
-          {/* Ensure contents are grouped together */}
+          {/* Wrap in div to ensure contents are structured properly */}
           <div>{contents}</div>
         </Cell>
       );
@@ -316,10 +315,13 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
               return (
                 <HeaderCell 
                   className={cx(baseCellStyle, headerCellStyle)} 
-                  key={colIndex}>
-                  {cell.children.map((child, i) => (
-                    <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-                  ))}
+                  key={colIndex}
+                >
+                  <div>
+                    {cell.children.map((child, i) => (
+                      <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
+                    ))}
+                  </div>
                 </HeaderCell>
               );
             })}
