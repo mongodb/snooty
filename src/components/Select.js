@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef } from 'react';
+import React, { useRef, forwardRef, useEffect } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { Option, Select as LGSelect } from '@leafygreen-ui/select';
@@ -64,6 +64,10 @@ const Select = ({
 }) => {
   // show select after portal container has loaded for scroll + zindex consistency
   const portalContainer = useRef();
+
+  useEffect(() => {
+    console.log('CLASSNAME', className, 'PROPS', props, 'PORTAL CONTAINER', portalContainer.current);
+  }, [portalContainer]);
 
   return (
     <PortalContainer className={`${className} ${cx(selectStyle)}`} ref={portalContainer}>
