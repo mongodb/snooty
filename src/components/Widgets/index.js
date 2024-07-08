@@ -37,29 +37,32 @@ const WidgetsContainer = styled.div`
   }
 `;
 
-const Widgets = ({ children, pageOptions, pageTitle, slug, isInPresentationMode, template }) => {
+const Widgets = ({ children, pageTitle, slug, isInPresentationMode, template }) => {
   const { isOpen } = useContext(InstruqtContext);
   const url = isBrowser ? window.location.href : null;
-  const hideFeedbackHeader = pageOptions.hidefeedback === 'header';
   const feedbackData = useFeedbackData({
     slug,
     url,
     title: pageTitle || 'Home',
   });
 
-  // DOP-4025: hide feedback tab on homepage
-  const hideFeedback = pageOptions.hidefeedback === 'page';
+  const hideWidgets = template === 'landing';
+  const hideFeedback = template === 'errorpage';
 
   return (
-    <FeedbackProvider page={feedbackData} hideHeader={hideFeedbackHeader}>
+    <FeedbackProvider page={feedbackData}>
       {children}
-      {!isInPresentationMode && !hideFeedback && (
+      {!isInPresentationMode && !hideWidgets && (
         /* Suspense at this level ensures that widgets will appear simultaneously rather than one-by-one as loaded */
         <SuspenseHelper fallback={null}>
           <WidgetsContainer className={widgetsContainer} hasOpenLabDrawer={isOpen}>
-            <FeedbackButton />
-            <FeedbackForm />
-            {template !== 'landing' && <ChatbotFab />}
+            {hideFeedback && (
+              <>
+                <FeedbackButton />
+                <FeedbackForm />
+              </>
+            )}
+            <ChatbotFab />
           </WidgetsContainer>
         </SuspenseHelper>
       )}
@@ -69,16 +72,9 @@ const Widgets = ({ children, pageOptions, pageTitle, slug, isInPresentationMode,
 
 Widgets.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  pageOptions: PropTypes.shape({
-    hideFeedback: PropTypes.string,
-  }),
   pageTitle: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   isInPresentationMode: PropTypes.bool,
-};
-
-Widgets.defaultProps = {
-  pageOptions: {},
 };
 
 export const widgetsContainer = 'widgets';
