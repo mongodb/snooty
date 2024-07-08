@@ -315,7 +315,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
               return (
                 <HeaderCell 
                   className={cx(baseCellStyle, headerCellStyle)} 
-                  key={colIndex}
+                  key={`${rowIndex}-${colIndex}`}
                 >
                   <div>
                     {cell.children.map((child, i) => (
