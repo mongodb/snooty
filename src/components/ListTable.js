@@ -20,11 +20,24 @@ const CUSTOM_THEME_STYLES = {
   },
 };
 
-const cellStyle = css`
-  overflow-wrap: anywhere;
-  word-break: break-word;
+const baseCellStyle = css`
   // Keep legacy padding; important to prevent first-child and last-child overwrites
   padding: 10px ${theme.size.small} !important;
+
+  * {
+    font-size: ${theme.fontSize.small} !important;
+  }
+
+  // Ensure each cell is no higher than the highest content in row
+  & > div {
+    height: unset;
+    min-height: unset;
+  }
+`;
+
+const bodyCellStyle = css`
+  overflow-wrap: anywhere;
+  word-break: break-word;
   // Force top alignment rather than LeafyGreen default middle (PD-1217)
   vertical-align: top;
 
@@ -36,7 +49,6 @@ const cellStyle = css`
   & > div {
     // Ensure inner content starts at the top for cells larger than minimum height
     align-items: flex-start;
-    min-height: unset;
   }
 
   // Prevent extra margin below last element (such as when multiple paragraphs are present)
@@ -49,10 +61,6 @@ const headerCellStyle = css`
   * {
     font-size: ${theme.fontSize.small};
     font-weight: 600;
-  }
-
-  & > div {
-    height: unset;
   }
 `;
 
@@ -263,7 +271,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
         <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
       ));
       return (
-        <Cell className={cellStyle}>
+        <Cell className={cx(baseCellStyle, bodyCellStyle)}>
           {/* Ensure contents are grouped together */}
           <div>{contents}</div>
         </Cell>
@@ -307,7 +315,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
               const skipPTag = hasOneChild(cell.children);
               return (
                 <HeaderCell 
-                  className={cx(headerCellStyle)} 
+                  className={cx(baseCellStyle, headerCellStyle)} 
                   key={colIndex}>
                   {cell.children.map((child, i) => (
                     <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
