@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HeaderCell, HeaderRow, Table, TableHead } from '@leafygreen-ui/table';
+import { Cell, HeaderCell, HeaderRow, Row, Table, TableBody, TableHead } from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -19,6 +19,42 @@ const CUSTOM_THEME_STYLES = {
     '--zebra-stripe-color': palette.gray.dark4,
   },
 };
+
+const cellStyle = css`
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  // Keep legacy padding; important to prevent first-child and last-child overwrites
+  padding: 10px ${theme.size.small} !important;
+  // Force top alignment rather than LeafyGreen default middle (PD-1217)
+  vertical-align: top;
+
+  * {
+    font-size: ${theme.fontSize.small} !important;
+    line-height: 20px;
+  }
+
+  & > div {
+    // Ensure inner content starts at the top for cells larger than minimum height
+    align-items: flex-start;
+    min-height: unset;
+  }
+
+  // Prevent extra margin below last element (such as when multiple paragraphs are present)
+  & > div > div > *:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const headerCellStyle = css`
+  * {
+    font-size: ${theme.fontSize.small};
+    font-weight: 600;
+  }
+
+  & > div {
+    height: unset;
+  }
+`;
 
 // const align = (key) => {
 //   switch (key) {
@@ -218,6 +254,24 @@ const hasOneChild = (children) => children.length === 1 && children[0].type === 
 //   );
 // };
 
+const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
+  <Row>
+    {row.map((cell, colIndex) => {
+      const isStub = colIndex <= stubColumnCount - 1;
+      const skipPTag = hasOneChild(cell.children);
+      const contents = cell.children.map((child, i) => (
+        <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
+      ));
+      return (
+        <Cell className={cellStyle}>
+          {/* Ensure contents are grouped together */}
+          <div>{contents}</div>
+        </Cell>
+      );
+    })}
+  </Row>
+);
+
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const { darkMode } = useDarkMode();
   const colorTheme = darkMode ? 'dark' : 'light';
@@ -252,7 +306,9 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             {row.children.map((cell, colIndex) => {
               const skipPTag = hasOneChild(cell.children);
               return (
-                <HeaderCell key={colIndex}>
+                <HeaderCell 
+                  className={cx(headerCellStyle)} 
+                  key={colIndex}>
                   {cell.children.map((child, i) => (
                     <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
                   ))}
@@ -262,6 +318,11 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           </HeaderRow>
         ))}
       </TableHead>
+      <TableBody>
+        {bodyRows.map((row) => (
+          <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={row.children?.[0]?.children} />
+        ))}
+      </TableBody>
     </Table>
   );
 };
