@@ -9,7 +9,7 @@ import { theme } from '../theme/docsTheme';
 import { getPageTitle } from '../utils/get-page-title';
 import Link from './Link';
 
-const styledContainer = css`
+const containerStyling = css`
   padding-bottom: 2.5em;
   width: 100%;
   display: flex;
@@ -33,7 +33,7 @@ const commonTextStyles = css`
   line-height: 20px;
 `;
 
-const commonNextPrevTextStyling = css`
+const nextPrevTextStyling = css`
   ${commonTextStyles}
   font-weight: 500;
 `;
@@ -51,19 +51,19 @@ const nextPrevTitleTextStyling = css`
   color: ${palette.gray.base};
 `;
 
-const commonLinkContentContainer = css`
+const commonLinkContentContainerStyling = css`
   align-items: center;
   display: flex;
   column-gap: 14px;
 `;
 
-const nextLinkContainer = css`
-  ${commonLinkContentContainer}
+const nextLinkContainerStyling = css`
+  ${commonLinkContentContainerStyling}
   flex-direction: row-reverse;
 `;
 
-const prevLinkContainer = css`
-  ${commonLinkContentContainer}
+const prevLinkContainerStyling = css`
+  ${commonLinkContentContainerStyling}
   flex-direction: row;
 `;
 
@@ -72,12 +72,12 @@ const NextPrevLink = ({ icon, direction, pageTitle }) => {
   const isPrev = direction?.toLowerCase() === 'back';
 
   return (
-    <div className={cx({ [nextLinkContainer]: isNext, [prevLinkContainer]: isPrev })}>
+    <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
       <Button size="large">
         <Icon glyph={icon} />
       </Button>
       <div className={cx({ [nextTextStyling]: isNext }, { [prevTextStyling]: isPrev })}>
-        <Body className={cx(commonNextPrevTextStyling)}>{direction}</Body>
+        <Body className={cx(nextPrevTextStyling)}>{direction}</Body>
         <Body className={cx(nextPrevTitleTextStyling)}>{pageTitle}</Body>
       </div>
     </div>
@@ -89,7 +89,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
   const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
   const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
   return (
-    <div className={cx(styledContainer)}>
+    <div className={cx(containerStyling)}>
       {prevSlug && (
         <Link to={prevSlug} title="Previous Section">
           <NextPrevLink
