@@ -93,9 +93,9 @@ const headerCellStyle = css`
 `;
 
 const stubCellStyle = ({ stubCellBgColor, stubBorderColor }) => css`
-  background-clip: padding-box; 
   background-color: ${stubCellBgColor};
   border-right: 3px solid ${stubBorderColor};
+  font-weight: 600;
 `;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
@@ -137,11 +137,10 @@ const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
       ));
 
       const isStub = colIndex <= stubColumnCount - 1;
-      const CellType = isStub ? 'th' : Cell;
       const role = isStub ? 'rowheader' : null;
 
       return (
-        <CellType
+        <Cell
           key={colIndex} 
           className={cx(
             baseCellStyle,
@@ -152,7 +151,7 @@ const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
         >
           {/* Wrap in div to ensure contents are structured properly */}
           <div>{contents}</div>
-        </CellType>
+        </Cell>
       );
     })}
   </Row>
