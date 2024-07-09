@@ -87,48 +87,39 @@ const headerCellStyle = css`
   font-size: ${theme.fontSize.small};
 `;
 
-// /* When using an empty <thead> as required by LeafyGreen, unstyle it to the best of our ability */
-// const unstyleThead = css`
-//   & * {
-//     border: 0 !important;
-//     min-height: unset !important;
-//     padding: 0 !important;
-//   }
-// `;
-
 const backgroundColorStyle = css`
   background-color: var(--background-color);
 `;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
 
-// /**
-//  * recursive traversal of nodeLists' children to look for
-//  * id values of footnote references
-//  *
-//  * @param nodeList @node[]
-//  * @returns str[]
-//  */
-// const getReferenceIds = (nodeList) => {
-//   const referenceType = `footnote_reference`;
-//   const results = [];
-//   const iter = (node) => {
-//     if (node['type'] === referenceType) {
-//       results.push(`ref-${node['refname']}-${node['id']}`);
-//     }
-//     if (!node.children || !node.children.length) {
-//       return;
-//     }
-//     for (let childNode of node.children) {
-//       iter(childNode);
-//     }
-//   };
+/**
+ * recursive traversal of nodeLists' children to look for
+ * id values of footnote references
+ *
+ * @param nodeList @node[]
+ * @returns str[]
+ */
+const getReferenceIds = (nodeList) => {
+  const referenceType = `footnote_reference`;
+  const results = [];
+  const iter = (node) => {
+    if (node['type'] === referenceType) {
+      results.push(`ref-${node['refname']}-${node['id']}`);
+    }
+    if (!node.children || !node.children.length) {
+      return;
+    }
+    for (let childNode of node.children) {
+      iter(childNode);
+    }
+  };
 
-//   for (let node of nodeList) {
-//     iter(node);
-//   }
-//   return results;
-// };
+  for (let node of nodeList) {
+    iter(node);
+  }
+  return results;
+};
 
 // const ListTableRow = ({ row = [], stubColumnCount, colorTheme, ...rest }) => (
 //   <Row
@@ -305,43 +296,56 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   }
 
   // get all ID's for elements within header, or first two rows of body
-  // const elmIdsForScroll = getReferenceIds(headerRows[0].children.concat(bodyRows.slice(0, 3)));
+  const firstHeaderRowChildren = headerRows[0]?.children ?? [];
+  const elmIdsForScroll = getReferenceIds(firstHeaderRowChildren.concat(bodyRows.slice(0, 3)));
   return (
-    <Table className={cx(styleTable)}>
-      {widths && (
-        <colgroup>
-          {widths.map((width) => (
-            <col style={{width: `${width}%`}} />
+    <>
+      {elmIdsForScroll.map((id) => (
+        <div className="header-buffer" key={id} id={id} />
+      ))}
+      <Table
+        className={cx(
+          styleTable({
+            customAlign: options?.align,
+            customWidth: options?.width,
+          })
+        )}
+      >
+        {widths && (
+          <colgroup>
+            {widths.map((width) => (
+              <col style={{width: `${width}%`}} />
+            ))}
+          </colgroup>
+        )}
+        <TableHead>
+          {headerRows.map((row, rowIndex) => (
+            <HeaderRow key={rowIndex}>
+              {row.children.map((cell, colIndex) => {
+                const skipPTag = hasOneChild(cell.children);
+                return (
+                  <HeaderCell 
+                    className={cx(baseCellStyle, headerCellStyle)} 
+                    key={`${rowIndex}-${colIndex}`}
+                  >
+                    <div>
+                      {cell.children.map((child, i) => (
+                        <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
+                      ))}
+                    </div>
+                  </HeaderCell>
+                );
+              })}
+            </HeaderRow>
           ))}
-        </colgroup>
-      )}
-      <TableHead>
-        {headerRows.map((row, rowIndex) => (
-          <HeaderRow key={rowIndex}>
-            {row.children.map((cell, colIndex) => {
-              const skipPTag = hasOneChild(cell.children);
-              return (
-                <HeaderCell 
-                  className={cx(baseCellStyle, headerCellStyle)} 
-                  key={`${rowIndex}-${colIndex}`}
-                >
-                  <div>
-                    {cell.children.map((child, i) => (
-                      <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-                    ))}
-                  </div>
-                </HeaderCell>
-              );
-            })}
-          </HeaderRow>
-        ))}
-      </TableHead>
-      <TableBody>
-        {bodyRows.map((row) => (
-          <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={row.children?.[0]?.children} />
-        ))}
-      </TableBody>
-    </Table>
+        </TableHead>
+        <TableBody>
+          {bodyRows.map((row) => (
+            <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={row.children?.[0]?.children} />
+          ))}
+        </TableBody>
+      </Table>
+    </>
   );
 };
 
