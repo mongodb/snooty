@@ -4,9 +4,9 @@ import { Cell, HeaderCell, HeaderRow, Row, Table, TableBody, TableHead } from '@
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { Theme } from '@leafygreen-ui/lib';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
-import { Theme } from '@leafygreen-ui/lib';
 
 // Need to define custom styles for custom components, such as stub cells
 const LIST_TABLE_THEME_STYLES = {
@@ -128,138 +128,6 @@ const getReferenceIds = (nodeList) => {
   return results;
 };
 
-// const ListTableRow = ({ row = [], stubColumnCount, colorTheme, ...rest }) => (
-//   <Row
-//     className={cx(backgroundColorStyle)}
-//     style={{ '--background-color': CUSTOM_THEME_STYLES[colorTheme]['--background-color'] }}
-//   >
-//     {row.map((cell, colIndex) => {
-//       const isStub = colIndex <= stubColumnCount - 1;
-//       const skipPTag = hasOneChild(cell.children);
-//       const contents = cell.children.map((child, i) => (
-//         <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
-//       ));
-//       return (
-//         <Cell
-//           className={cx(css`
-//             overflow-wrap: anywhere;
-//             word-break: break-word;
-
-//             /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
-//             vertical-align: top;
-
-//             /* Apply grey background to stub <th> cells (PD-1216) */
-//             ${isStub && `background-clip: padding-box; background-color: var(--stub-bg-color);`}
-
-//             * {
-//               font-size: ${theme.fontSize.small} !important;
-//             }
-
-//             & > div {
-//               align-items: start;
-//             }
-
-//             & > div > span {
-//               display: block;
-//               align-self: center;
-//             }
-
-//             & > div > span > *,
-//             & > div > span p {
-//               margin: 0 0 12px;
-//               line-height: inherit;
-//             }
-
-//             /* Prevent extra margin below last element */
-//             & > div > span > *:last-child {
-//               margin-bottom: 0;
-//             }
-//           `)}
-//           style={{ ...(isStub && { '--stub-bg-color': CUSTOM_THEME_STYLES[colorTheme]['--zebra-stripe-color'] }) }}
-//           isHeader={isStub}
-//           key={colIndex}
-//         >
-//           {contents}
-//         </Cell>
-//       );
-//     })}
-//   </Row>
-// );
-
-// ListTableRow.propTypes = {
-//   row: PropTypes.arrayOf(PropTypes.object),
-//   stubColumnCount: PropTypes.number.isRequired,
-// };
-
-// const ListTable = ({ nodeData: { children, options }, ...rest }) => {
-//   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
-//   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
-//   const bodyRows = children[0].children.slice(headerRowCount);
-//   const columnCount = bodyRows[0].children[0].children.length;
-
-//   // If :header-rows: 0 is specified or :header-rows: is omitted, spoof empty <thead> content to avoid LeafyGreen component crashing
-//   const headerRows =
-//     headerRowCount > 0
-//       ? children[0].children[0].children.slice(0, headerRowCount)
-//       : [{ children: Array(columnCount).fill({ type: 'text', value: '', children: [] }) }];
-
-//   let widths = null;
-//   const customWidths = options?.widths;
-//   if (customWidths && customWidths !== 'auto') {
-//     widths = customWidths.split(/[ ,]+/);
-//     if (columnCount !== widths.length) {
-//       // If custom width specification does not match number of columns, do not apply
-//       widths = null;
-//     }
-//   }
-
-//   // get all ID's for elements within header, or first two rows of body
-//   const elmIdsForScroll = getReferenceIds(headerRows[0].children.concat(bodyRows.slice(0, 3)));
-
-//   return (
-//     <>
-//       {elmIdsForScroll.map((id) => (
-//         <div className="header-buffer" key={id} id={id} />
-//       ))}
-//       <Table
-//         className={cx(
-//           styleTable({
-//             customAlign: options?.align,
-//             customWidth: options?.width,
-//           })
-//         )}
-//         columns={headerRows.map((row, rowIndex) => (
-//           <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
-//             {row.children.map((cell, colIndex) => {
-//               const skipPTag = hasOneChild(cell.children);
-//               return (
-//                 <TableHeader
-//                   className={cx(css`
-//                     * {
-//                       font-size: ${theme.fontSize.small};
-//                       font-weight: 600;
-//                     }
-//                     ${widths && `width: ${widths[colIndex]}%`}
-//                   `)}
-//                   key={`${rowIndex}-${colIndex}`}
-//                   label={cell.children.map((child, i) => (
-//                     <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-//                   ))}
-//                 />
-//               );
-//             })}
-//           </HeaderRow>
-//         ))}
-//         data={bodyRows}
-//       >
-//         {({ datum }) => (
-//           <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />
-//         )}
-//       </Table>
-//     </>
-//   );
-// };
-
 const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
   <Row>
     {row.map((cell, colIndex) => {
@@ -286,6 +154,12 @@ const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
     })}
   </Row>
 );
+
+ListTableRow.propTypes = {
+  row: PropTypes.arrayOf(PropTypes.object),
+  stubColumnCount: PropTypes.number.isRequired,
+  siteTheme: PropTypes.oneOfType([Theme.Light, Theme.Dark]).isRequired,
+};
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const { theme: siteTheme } = useDarkMode();
