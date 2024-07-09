@@ -141,7 +141,8 @@ const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
       const role = isStub ? 'rowheader' : null;
 
       return (
-        <CellType 
+        <CellType
+          key={colIndex} 
           className={cx(
             baseCellStyle,
             bodyCellStyle,
@@ -160,7 +161,7 @@ const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
 ListTableRow.propTypes = {
   row: PropTypes.arrayOf(PropTypes.object),
   stubColumnCount: PropTypes.number.isRequired,
-  siteTheme: PropTypes.oneOfType([Theme.Light, Theme.Dark]).isRequired,
+  siteTheme: PropTypes.oneOf(Object.values(Theme)).isRequired,
 };
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
@@ -206,8 +207,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
       >
         {widths && (
           <colgroup>
-            {widths.map((width) => (
-              <col style={{width: `${width}%`}} />
+            {widths.map((width, i) => (
+              <col key={i} style={{width: `${width}%`}} />
             ))}
           </colgroup>
         )}
@@ -234,8 +235,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           ))}
         </TableHead>
         <TableBody>
-          {bodyRows.map((row) => (
-            <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={row.children?.[0]?.children} siteTheme={siteTheme} />
+          {bodyRows.map((row, i) => (
+            <ListTableRow key={i} {...rest} stubColumnCount={stubColumnCount} row={row.children?.[0]?.children} siteTheme={siteTheme} />
           ))}
         </TableBody>
       </Table>
