@@ -20,6 +20,23 @@ const CUSTOM_THEME_STYLES = {
   },
 };
 
+const align = (key) => {
+  switch (key) {
+    case 'left':
+    case 'right':
+    case 'center':
+      return key;
+    default:
+      return 'inherit';
+  }
+};
+
+const styleTable = ({ customAlign, customWidth }) => css`
+  ${customAlign && `text-align: ${align(customAlign)}`};
+  ${customWidth && `width: ${customWidth}`};
+  margin: ${theme.size.medium} 0;
+`;
+
 const baseCellStyle = css`
   // Keep legacy padding; important to prevent first-child and last-child overwrites
   padding: 10px ${theme.size.small} !important;
@@ -51,7 +68,7 @@ const bodyCellStyle = css`
     align-items: flex-start;
   }
 
-  // Target any nested components and any paragraphs within those nested components (like in admonitions)
+  // Target any nested components (paragraphs, admonitions, tables) and any paragraphs within those nested components
   & > div > div > *,
   & > div > div p {
     margin: 0 0 12px;
@@ -69,29 +86,6 @@ const headerCellStyle = css`
   font-weight: 600;
   font-size: ${theme.fontSize.small};
 `;
-
-// const align = (key) => {
-//   switch (key) {
-//     case 'left':
-//     case 'right':
-//     case 'center':
-//       return key;
-//     default:
-//       return 'inherit';
-//   }
-// };
-
-// const styleTable = ({ customAlign, customWidth, overrideZebraStripes }) => css`
-//   ${customAlign && `text-align: ${align(customAlign)}`};
-//   ${customWidth && `width: ${customWidth}`};
-//   margin: ${theme.size.medium} 0;
-  // Font family was incorrect for certain tables in dark mode, most likely due to outdated component
-//   font-family: 'Euclid Circular A', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-
-//   table & {
-//     margin: 0;
-//   }
-// `;
 
 // /* When using an empty <thead> as required by LeafyGreen, unstyle it to the best of our ability */
 // const unstyleThead = css`
@@ -313,7 +307,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   // get all ID's for elements within header, or first two rows of body
   // const elmIdsForScroll = getReferenceIds(headerRows[0].children.concat(bodyRows.slice(0, 3)));
   return (
-    <Table>
+    <Table className={cx(styleTable)}>
       {widths && (
         <colgroup>
           {widths.map((width) => (
