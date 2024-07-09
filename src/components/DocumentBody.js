@@ -108,7 +108,6 @@ const DocumentBody = (props) => {
         <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
           <Widgets
             location={location}
-            pageOptions={page?.options}
             pageTitle={pageTitle}
             slug={slug}
             isInPresentationMode={isInPresentationMode}
