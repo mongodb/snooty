@@ -51,6 +51,13 @@ const bodyCellStyle = css`
     align-items: flex-start;
   }
 
+  // Target any nested components and any paragraphs within those nested components (like in admonitions)
+  & > div > div > *,
+  & > div > div p {
+    margin: 0 0 12px;
+    line-height: inherit;
+  }
+
   // Prevent extra margin below last element (such as when multiple paragraphs are present)
   & > div > div > *:last-child {
     margin-bottom: 0;
@@ -307,7 +314,6 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   // const elmIdsForScroll = getReferenceIds(headerRows[0].children.concat(bodyRows.slice(0, 3)));
   return (
     <Table>
-      {/* TODO: Need to double-check if this is performant with SSG styles */}
       {widths && (
         <colgroup>
           {widths.map((width) => (
