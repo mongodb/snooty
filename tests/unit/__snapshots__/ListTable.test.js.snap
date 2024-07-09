@@ -307,14 +307,27 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 }
 
 .emotion-16 {
+  padding: 0 8px;
+  overflow: hidden;
   padding: 10px 8px!important;
   vertical-align: top;
   overflow-wrap: anywhere;
   word-break: break-word;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   background-color: #F9FBFA;
   border-right: 3px solid #E8EDEB;
+  font-weight: 600;
+}
+
+.emotion-16:focus-visible {
+  box-shadow: inset;
+}
+
+.emotion-16:last-child {
+  padding-right: 24px;
+}
+
+.emotion-16:first-child {
+  padding-left: 32px;
 }
 
 .emotion-16 * {
@@ -348,57 +361,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 }
 
 .emotion-17 {
-  padding: 0 8px;
-  overflow: hidden;
-  padding: 10px 8px!important;
-  vertical-align: top;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.emotion-17:focus-visible {
-  box-shadow: inset;
-}
-
-.emotion-17:last-child {
-  padding-right: 24px;
-}
-
-.emotion-17:first-child {
-  padding-left: 32px;
-}
-
-.emotion-17 * {
-  font-size: 13px!important;
-}
-
-.emotion-17>div {
-  height: unset;
-  min-height: unset;
-}
-
-.emotion-17 * {
-  line-height: 20px;
-}
-
-.emotion-17>div {
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.emotion-17>div>div>*,
-.emotion-17>div>div p {
-  margin: 0 0 12px;
-  line-height: inherit;
-}
-
-.emotion-17>div>div>*:last-child {
-  margin-bottom: 0;
-}
-
-.emotion-18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -416,6 +378,57 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   -webkit-justify-content: left;
   justify-content: left;
   text-align: left;
+}
+
+.emotion-18 {
+  padding: 0 8px;
+  overflow: hidden;
+  padding: 10px 8px!important;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.emotion-18:focus-visible {
+  box-shadow: inset;
+}
+
+.emotion-18:last-child {
+  padding-right: 24px;
+}
+
+.emotion-18:first-child {
+  padding-left: 32px;
+}
+
+.emotion-18 * {
+  font-size: 13px!important;
+}
+
+.emotion-18>div {
+  height: unset;
+  min-height: unset;
+}
+
+.emotion-18 * {
+  line-height: 20px;
+}
+
+.emotion-18>div {
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-18>div>div>*,
+.emotion-18>div>div p {
+  margin: 0 0 12px;
+  line-height: inherit;
+}
+
+.emotion-18>div>div>*:last-child {
+  margin-bottom: 0;
 }
 
 <div
@@ -515,19 +528,23 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tr
           class="emotion-15"
         >
-          <th
+          <td
             class="emotion-16"
             role="rowheader"
           >
-            <div>
-              journal
+            <div
+              class="emotion-17"
+            >
+              <div>
+                journal
+              </div>
             </div>
-          </th>
+          </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 25
@@ -535,10 +552,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 14x21,cm
@@ -546,10 +563,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 A
@@ -557,10 +574,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 brown, lined
@@ -568,10 +585,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 9
@@ -582,19 +599,23 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tr
           class="emotion-15"
         >
-          <th
+          <td
             class="emotion-16"
             role="rowheader"
           >
-            <div>
-              notebook
+            <div
+              class="emotion-17"
+            >
+              <div>
+                notebook
+              </div>
             </div>
-          </th>
+          </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 50
@@ -602,10 +623,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 8.5x11,in
@@ -613,10 +634,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 A
@@ -624,10 +645,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 college-ruled,perforated
@@ -635,10 +656,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 8
@@ -649,19 +670,23 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tr
           class="emotion-15"
         >
-          <th
+          <td
             class="emotion-16"
             role="rowheader"
           >
-            <div>
-              paper
+            <div
+              class="emotion-17"
+            >
+              <div>
+                paper
+              </div>
             </div>
-          </th>
+          </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 100
@@ -669,10 +694,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 8.5x11,in
@@ -680,10 +705,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 D
@@ -691,10 +716,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 watercolor
@@ -702,10 +727,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 10
@@ -716,19 +741,23 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tr
           class="emotion-15"
         >
-          <th
+          <td
             class="emotion-16"
             role="rowheader"
           >
-            <div>
-              planner
+            <div
+              class="emotion-17"
+            >
+              <div>
+                planner
+              </div>
             </div>
-          </th>
+          </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 75
@@ -736,10 +765,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 22.85x30,cm
@@ -747,10 +776,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 D
@@ -758,10 +787,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 2019
@@ -769,10 +798,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 10
@@ -783,19 +812,23 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tr
           class="emotion-15"
         >
-          <th
+          <td
             class="emotion-16"
             role="rowheader"
           >
-            <div>
-              postcard
+            <div
+              class="emotion-17"
+            >
+              <div>
+                postcard
+              </div>
             </div>
-          </th>
+          </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 45
@@ -803,10 +836,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 10x,cm
@@ -814,10 +847,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 D
@@ -825,10 +858,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 double-sided,white
@@ -836,10 +869,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="emotion-17"
+            class="emotion-18"
           >
             <div
-              class="emotion-18"
+              class="emotion-17"
             >
               <div>
                 2
