@@ -25,7 +25,14 @@ const DarkModeContextProvider = ({ children }) => {
   const docClassList = useMemo(() => isBrowser && window?.document?.documentElement?.classList, []);
 
   // darkModePref   {str}   'light-theme' || 'dark-theme' || 'system';
-  const [darkModePref, setDarkModePref] = useState(() => 'light-theme');
+  const [darkModePref, setDarkModePref] = useState(() => {
+    if (!docClassList) return 'light-theme';
+    return docClassList.contains(SYSTEM_THEME_CLASSNAME)
+      ? SYSTEM_THEME_CLASSNAME
+      : docClassList.contains(DARK_THEME_CLASSNAME)
+      ? DARK_THEME_CLASSNAME
+      : LIGHT_THEME_CLASSNAME;
+  });
   const loaded = useRef();
 
   // update document class list to apply dark-theme/light-theme to whole document
@@ -56,22 +63,6 @@ const DarkModeContextProvider = ({ children }) => {
     setLocalValue('theme', darkModePref);
     updateDocumentClasslist(darkModePref, darkPref);
   }, [darkModePref, updateDocumentClasslist, darkPref]);
-
-  useEffect(() => {
-    if (!isBrowser || !docClassList) return;
-
-    // NOTE: client side read of darkmode from document classnames
-    // which is derived from local storage (see gatsby-ssr script).
-    // This occurs after component mounts, not during build time
-    setDarkModePref(
-      docClassList.contains(SYSTEM_THEME_CLASSNAME)
-        ? SYSTEM_THEME_CLASSNAME
-        : docClassList.contains(DARK_THEME_CLASSNAME)
-        ? DARK_THEME_CLASSNAME
-        : LIGHT_THEME_CLASSNAME
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <DarkModeContext.Provider value={{ setDarkModePref, darkModePref }}>

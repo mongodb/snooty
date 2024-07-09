@@ -1,4 +1,5 @@
 import React from 'react';
+import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './src/theme/docsTheme';
 import './src/styles/mongodb-docs.css';
@@ -12,4 +13,11 @@ export const shouldUpdateScroll = ({ routerProps: { location } }) => {
     return false;
   }
   return true;
+};
+
+export const replaceHydrateFunction = () => {
+  return (element, container) => {
+    const root = createRoot(container);
+    root.render(element);
+  };
 };
