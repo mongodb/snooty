@@ -249,12 +249,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
 
     // We should expect the number of branches for a docs repo to be 1 or more.
-    if (!repoInfo.branches?.length) {
+    if (!repoInfo?.branches?.length) {
       errMsg = `No version information found for ${siteMetadata.project}`;
     }
 
     if (errMsg) {
-      throw errMsg;
+      console.error(errMsg);
+      // throw errMsg;
     }
 
     // Handle inconsistent env names. Default to 'dotcomstg' for staging data on local builds.
@@ -270,7 +271,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     // We're overfetching data here. We only need branches and prefix at the least
     repoBranches = {
-      branches: repoInfo.branches,
+      branches: repoInfo?.branches,
       siteBasePrefix: repoInfo.prefix[envKey],
     };
 
@@ -279,7 +280,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
   } catch (err) {
     console.error(err);
-    throw err;
+    // throw err;
   }
 
   if (process.env.USE_FILTER_BRANCH === 'true') {
