@@ -141,12 +141,8 @@ const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
 
       return (
         <Cell
-          key={colIndex} 
-          className={cx(
-            baseCellStyle,
-            bodyCellStyle,
-            isStub && stubCellStyle(LIST_TABLE_THEME_STYLES[siteTheme]),
-          )}
+          key={colIndex}
+          className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle(LIST_TABLE_THEME_STYLES[siteTheme]))}
           role={role}
         >
           {/* Wrap in div to ensure contents are structured properly */}
@@ -171,10 +167,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const columnCount = bodyRows[0].children[0].children.length;
 
   // Check if :header-rows: 0 is specified or :header-rows: is omitted
-  const headerRows =
-    headerRowCount > 0
-      ? children[0].children[0].children.slice(0, headerRowCount)
-      : [];
+  const headerRows = headerRowCount > 0 ? children[0].children[0].children.slice(0, headerRowCount) : [];
 
   let widths = null;
   const customWidths = options?.widths;
@@ -207,20 +200,20 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
         {widths && (
           <colgroup>
             {widths.map((width, i) => (
-              <col key={i} style={{width: `${width}%`}} />
+              <col key={i} style={{ width: `${width}%` }} />
             ))}
           </colgroup>
         )}
         <TableHead className={cx(theadStyle)}>
           {headerRows.map((row, rowIndex) => (
-            <HeaderRow key={rowIndex} data-testid='leafygreen-ui-header-row'>
+            <HeaderRow key={rowIndex} data-testid="leafygreen-ui-header-row">
               {row.children.map((cell, colIndex) => {
                 const skipPTag = hasOneChild(cell.children);
                 return (
-                  <HeaderCell 
-                    className={cx(baseCellStyle, headerCellStyle)} 
+                  <HeaderCell
+                    className={cx(baseCellStyle, headerCellStyle)}
                     key={`${rowIndex}-${colIndex}`}
-                    role='columnheader'
+                    role="columnheader"
                   >
                     <div>
                       {cell.children.map((child, i) => (
@@ -235,7 +228,13 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
         </TableHead>
         <TableBody>
           {bodyRows.map((row, i) => (
-            <ListTableRow key={i} {...rest} stubColumnCount={stubColumnCount} row={row.children?.[0]?.children} siteTheme={siteTheme} />
+            <ListTableRow
+              key={i}
+              {...rest}
+              stubColumnCount={stubColumnCount}
+              row={row.children?.[0]?.children}
+              siteTheme={siteTheme}
+            />
           ))}
         </TableBody>
       </Table>
