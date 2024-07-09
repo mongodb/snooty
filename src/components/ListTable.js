@@ -138,6 +138,7 @@ const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
 
       const isStub = colIndex <= stubColumnCount - 1;
       const CellType = isStub ? 'th' : Cell;
+      const role = isStub ? 'rowheader' : null;
 
       return (
         <CellType 
@@ -146,6 +147,7 @@ const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
             bodyCellStyle,
             isStub && stubCellStyle(LIST_TABLE_THEME_STYLES[siteTheme]),
           )}
+          role={role}
         >
           {/* Wrap in div to ensure contents are structured properly */}
           <div>{contents}</div>
@@ -211,13 +213,14 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
         )}
         <TableHead className={cx(theadStyle)}>
           {headerRows.map((row, rowIndex) => (
-            <HeaderRow key={rowIndex}>
+            <HeaderRow key={rowIndex} data-testid='leafygreen-ui-header-row'>
               {row.children.map((cell, colIndex) => {
                 const skipPTag = hasOneChild(cell.children);
                 return (
                   <HeaderCell 
                     className={cx(baseCellStyle, headerCellStyle)} 
                     key={`${rowIndex}-${colIndex}`}
+                    role='columnheader'
                   >
                     <div>
                       {cell.children.map((child, i) => (
