@@ -37,9 +37,16 @@ const styleTable = ({ customAlign, customWidth }) => css`
   margin: ${theme.size.medium} 0;
 `;
 
+const theadStyle = css`
+  // Allows its box shadow to appear above stub cell's background color
+  position: relative;
+`;
+
 const baseCellStyle = css`
   // Keep legacy padding; important to prevent first-child and last-child overwrites
   padding: 10px ${theme.size.small} !important;
+  // Force top alignment rather than LeafyGreen default middle (PD-1217)
+  vertical-align: top;
 
   * {
     // Wrap in selector to ensure it cascades down to every element
@@ -56,8 +63,6 @@ const baseCellStyle = css`
 const bodyCellStyle = css`
   overflow-wrap: anywhere;
   word-break: break-word;
-  // Force top alignment rather than LeafyGreen default middle (PD-1217)
-  vertical-align: top;
 
   * {
     line-height: 20px;
@@ -85,6 +90,12 @@ const headerCellStyle = css`
   line-height: 24px;
   font-weight: 600;
   font-size: ${theme.fontSize.small};
+`;
+
+const stubCellStyle = css`
+  background-clip: padding-box; 
+  background-color: ${palette.gray.light3};
+  border-right: 3px solid ${palette.gray.light2};
 `;
 
 const backgroundColorStyle = css`
@@ -256,16 +267,25 @@ const getReferenceIds = (nodeList) => {
 const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
   <Row>
     {row.map((cell, colIndex) => {
-      const isStub = colIndex <= stubColumnCount - 1;
       const skipPTag = hasOneChild(cell.children);
       const contents = cell.children.map((child, i) => (
         <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
       ));
+
+      const isStub = colIndex <= stubColumnCount - 1;
+      const CellType = isStub ? 'th' : Cell;
+
       return (
-        <Cell className={cx(baseCellStyle, bodyCellStyle)}>
+        <CellType 
+          className={cx(
+            baseCellStyle,
+            bodyCellStyle,
+            isStub && stubCellStyle,
+          )}
+        >
           {/* Wrap in div to ensure contents are structured properly */}
           <div>{contents}</div>
-        </Cell>
+        </CellType>
       );
     })}
   </Row>
@@ -318,7 +338,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             ))}
           </colgroup>
         )}
-        <TableHead>
+        <TableHead className={cx(theadStyle)}>
           {headerRows.map((row, rowIndex) => (
             <HeaderRow key={rowIndex}>
               {row.children.map((cell, colIndex) => {
