@@ -6,17 +6,17 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
+import { Theme } from '@leafygreen-ui/lib';
 
-const CUSTOM_THEME_STYLES = {
-  // Need to redefine original styling to avoid undefined values. Needed while custom dark mode row styling exists
-  light: {
-    '--background-color': palette.white,
-    '--zebra-stripe-color': palette.gray.light3,
+// Need to define custom styles for custom components, such as stub cells
+const LIST_TABLE_THEME_STYLES = {
+  [Theme.Light]: {
+    stubCellBgColor: palette.gray.light3,
+    stubBorderColor: palette.gray.light2,
   },
-  // Temporary workaround to overwrite certain styling for dark mode due to difficulties with LG Table version upgrade (DOP-3614)
-  dark: {
-    '--background-color': palette.black,
-    '--zebra-stripe-color': palette.gray.dark4,
+  [Theme.Dark]: {
+    stubCellBgColor: palette.gray.dark4,
+    stubBorderColor: palette.gray.dark2,
   },
 };
 
@@ -92,14 +92,10 @@ const headerCellStyle = css`
   font-size: ${theme.fontSize.small};
 `;
 
-const stubCellStyle = css`
+const stubCellStyle = ({ stubCellBgColor, stubBorderColor }) => css`
   background-clip: padding-box; 
-  background-color: ${palette.gray.light3};
-  border-right: 3px solid ${palette.gray.light2};
-`;
-
-const backgroundColorStyle = css`
-  background-color: var(--background-color);
+  background-color: ${stubCellBgColor};
+  border-right: 3px solid ${stubBorderColor};
 `;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
@@ -264,7 +260,7 @@ const getReferenceIds = (nodeList) => {
 //   );
 // };
 
-const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
+const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
   <Row>
     {row.map((cell, colIndex) => {
       const skipPTag = hasOneChild(cell.children);
@@ -280,7 +276,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
           className={cx(
             baseCellStyle,
             bodyCellStyle,
-            isStub && stubCellStyle,
+            isStub && stubCellStyle(LIST_TABLE_THEME_STYLES[siteTheme]),
           )}
         >
           {/* Wrap in div to ensure contents are structured properly */}
@@ -292,8 +288,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
 );
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
-  const { darkMode } = useDarkMode();
-  const colorTheme = darkMode ? 'dark' : 'light';
+  const { theme: siteTheme } = useDarkMode();
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
   const bodyRows = children[0].children.slice(headerRowCount);
@@ -318,6 +313,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   // get all ID's for elements within header, or first two rows of body
   const firstHeaderRowChildren = headerRows[0]?.children ?? [];
   const elmIdsForScroll = getReferenceIds(firstHeaderRowChildren.concat(bodyRows.slice(0, 3)));
+
   return (
     <>
       {elmIdsForScroll.map((id) => (
@@ -330,6 +326,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             customWidth: options?.width,
           })
         )}
+        shouldAlternateRowColor={bodyRows.length > 4}
       >
         {widths && (
           <colgroup>
@@ -361,7 +358,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
         </TableHead>
         <TableBody>
           {bodyRows.map((row) => (
-            <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={row.children?.[0]?.children} />
+            <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={row.children?.[0]?.children} siteTheme={siteTheme} />
           ))}
         </TableBody>
       </Table>
