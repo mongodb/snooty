@@ -99,7 +99,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     if (isDrawer && hasChildren) {
       return (
         <SideNavItem
-          className={cx(sideNavItemTOCStyling({ level }))}
+          className={cx(sideNavItemTOCStyling({ level, isSelected }))}
           as="a"
           onClick={() => {
             setIsOpen(!isOpen);
@@ -119,7 +119,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
         as={Link}
         to={target}
         active={isSelected}
-        className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
+        className={cx(sideNavItemTOCStyling({ level, isSelected }), overwriteLinkStyle)}
         onClick={(e) => {
           setIsOpen(!isOpen);
         }}

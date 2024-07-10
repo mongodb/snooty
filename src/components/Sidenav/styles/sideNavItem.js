@@ -8,7 +8,7 @@ export const sideNavItemBasePadding = css`
   padding-bottom: ${theme.size.small};
 `;
 
-export const sideNavItemTOCStyling = ({ level = 1 }) => css`
+export const sideNavItemTOCStyling = ({ level = 1, isSelected }) => css`
   padding-bottom: ${theme.size.small};
   padding-left: calc(${theme.size.tiny} + (${level} * ${theme.size.default}));
   padding-right: ${theme.size.medium};
@@ -22,12 +22,21 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
   // overwrite LG link underlines
   // @leafygreen-ui/typography v13.0.0
   :hover {
-    background-color: var(--background-tertiary);
     &:after,
     span:after {
       display: none;
     }
   }
+
+  ${isSelected
+    ? `
+    background-color: var(--green-secondary) !important;
+  `
+    : `
+    :hover {
+      background-color: var(--background-tertiary) !important;
+    }
+  `}
 `;
 
 export const sideNavItemFontSize = css`

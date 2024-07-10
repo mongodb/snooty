@@ -27,6 +27,16 @@ const iconStyling = css`
 
 /* Override LG mobile style of enlarged mobile font */
 const selectStyle = css`
+  > button {
+    background-color: var(--background-primary);
+    color: var(--font-primary-color);
+
+    &:hover {
+      background-color: var(--background-primary);
+      color: var(--font-primary-color);
+    }
+  }
+
   @media ${theme.screenSize.upToLarge} {
     label,
     p,

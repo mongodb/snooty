@@ -21,7 +21,7 @@
 .dark-theme {
   --font-color-primary: '#FFFFFF';
   --green-primary: '#00684A';
-  --green-secondary: '#023430';
+  --green-secondary: #023430;
   --background-primary: #001E2B;
   --background-secondary: #112733;
   --background-tertiary: #1C2D38;
