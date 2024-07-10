@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { palette } from '@leafygreen-ui/palette';
+import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from '../ComponentFactory';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { intersperse } from '../../utils/intersperse';
 import FootnoteContext from './footnote-context';
 
-const tableStyling = css`
+const tableStyling = (darkMode) => css`
   border: 0;
   border-collapse: collapse;
   margin: 24px 0;
@@ -17,8 +19,15 @@ const tableStyling = css`
     background-color: inherit;
   }
 
+  ${darkMode &&
+  `
+      tbody tr td a {
+        color: ${palette.blue.light1};
+      }
+    `}
+
   :target {
-    background-color: #ffa;
+    background-color: ${darkMode ? palette.gray.dark2 : '#ffa'};
   }
 `;
 
@@ -29,6 +38,7 @@ const tdStyling = css`
 
 const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   const { footnotes } = useContext(FootnoteContext);
+  const { darkMode } = useDarkMode();
   const ref = name || id.replace('id', '');
   const label = getNestedValue([ref, 'label'], footnotes);
   const uid = name ? `${name}-` : '';
@@ -38,18 +48,19 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
       {index + 1}
     </a>
   ));
+
   return (
-    <table className="header-buffer" css={tableStyling} frame="void" id={`footnote-${ref}`} rules="none">
+    <table className={cx('header-buffer', tableStyling(darkMode))} frame="void" id={`footnote-${ref}`} rules="none">
       <colgroup>
         <col />
       </colgroup>
       <tbody valign="top">
         <tr>
-          <td css={tdStyling}>
+          <td className={cx(tdStyling)}>
             [{footnoteReferenceNodes.length !== 1 ? label : <a href={`#ref-${uid}${footnoteReferences[0]}`}>{label}</a>}
             ]
           </td>
-          <td css={tdStyling}>
+          <td className={cx(tdStyling)}>
             {footnoteReferenceNodes.length > 1 && <em>({intersperse(footnoteReferenceNodes)})</em>}{' '}
             {children.map((child, index) => (
               <ComponentFactory {...rest} nodeData={child} key={index} parentNode="footnote" />

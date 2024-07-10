@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import { css, Global } from '@emotion/react';
-import { cx, css as leafyCss } from '@leafygreen-ui/emotion';
+import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
@@ -9,9 +7,9 @@ import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { palette } from '@leafygreen-ui/palette';
 import { H3, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
+import { ParagraphSkeleton } from '@leafygreen-ui/skeleton-loader';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -26,17 +24,17 @@ import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import MobileFilters from './MobileFilters';
 import { Facets, FacetTags } from './Facets';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { SEARCH_THEME_STYLES } from './styles/searchThemeStyles';
 
 const FILTER_COLUMN_WIDTH = '173px';
 const LANDING_MODULE_MARGIN = '28px';
 const LANDING_PAGE_MARGIN = '40px';
 const ROW_GAP = theme.size.default;
-const SKELETON_BORDER_RADIUS = '12px';
 const SEARCH_RESULT_HEIGHT = '152px';
 
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
 
-const commonTextStyling = css`
+const commonTextStyling = `
   font-family: 'Euclid Circular A';
   font-weight: bolder;
   letter-spacing: 0.5px;
@@ -54,9 +52,11 @@ const EmptyResultsContainer = styled('div')`
 
 const HeaderContainer = styled('div')`
   grid-area: header;
+`;
 
+const headerContainerDynamicStyles = ({ headingColor }) => css`
   > h1:first-of-type {
-    color: var(--color);
+    color: ${headingColor};
     padding-bottom: 24px;
     margin: unset;
   }
@@ -71,7 +71,6 @@ const FiltersContainer = styled('div')`
 
 const FilterHeader = styled('h2')`
   align-self: center;
-  color: var(--color);
   font-size: ${theme.fontSize.tiny};
   line-height: 15px;
   text-transform: uppercase;
@@ -80,6 +79,10 @@ const FilterHeader = styled('h2')`
 
   // Override
   margin-bottom: ${theme.size.default};
+`;
+
+const filterHeaderDynamicStyles = ({ filterHeaderColor }) => css`
+  color: ${filterHeaderColor};
 `;
 
 const SearchResultsContainer = styled('div')`
@@ -144,10 +147,8 @@ const StyledSearchFilters = styled(SearchFilters)`
   }
 `;
 
-const searchResultStyling = css`
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+const searchResultStyling = `
   border-radius: 45px;
-  background-color: #fff;
   height: ${SEARCH_RESULT_HEIGHT};
   position: relative;
   /* place-self adds both align-self and justify-self for flexbox */
@@ -178,6 +179,15 @@ const searchResultStyling = css`
   }
 `;
 
+export const searchResultDynamicStyling = ({ boxShadow, boxShadowOnHover }) => css`
+  box-shadow: ${boxShadow};
+
+  :hover {
+    opacity: 1;
+    box-shadow: ${boxShadowOnHover};
+  }
+`;
+
 const StyledSearchResult = styled(SearchResult)`
   ${searchResultStyling}
 `;
@@ -185,11 +195,6 @@ const StyledSearchResult = styled(SearchResult)`
 const StyledLoadingSkeletonContainer = styled('div')`
   ${searchResultStyling}
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 1) !important;
-  color: red;
-
-  /* inner div padding */
-  box-sizing: border-box;
-  padding: 15px;
 
   * {
     padding: 2px;
@@ -211,14 +216,6 @@ const StyledSearchResults = styled('div')`
   height: 100%;
   width: 100%;
   /* Create the opaque effect on hover by opaquing everything but a hovered result */
-  :hover {
-    > ${StyledSearchResult} {
-      :hover {
-        opacity: 1;
-        box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
-      }
-    }
-  }
   :not(:hover) {
     > ${StyledSearchResult} {
       opacity: 1;
@@ -241,11 +238,11 @@ const ResultTag = styled('div')`
   align-items: center;
 `;
 
-const overlineStyle = leafyCss`
+const overlineStyle = css`
   padding-right: 8px;
 `;
 
-const iconStyle = leafyCss`
+const iconStyle = css`
   margin-left: 8px;
   margin-right: -2px;
 `;
@@ -286,7 +283,7 @@ const SearchResults = () => {
   const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
 
-  const { darkMode } = useDarkMode();
+  const { theme: siteTheme } = useDarkMode();
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
@@ -398,140 +395,130 @@ const SearchResults = () => {
   );
 
   return (
-    <>
-      <Global
-        styles={css`
-          body {
-            background-color: #ffffff !important;
-          }
-        `}
-      />
-      <SearchResultsContainer showFacets={showFacets}>
-        {/* new header for search bar */}
-        <HeaderContainer style={{ '--color': darkMode ? palette.gray.light2 : palette.green.dark2 }}>
-          <H3 as="h1">Search Results</H3>
-          <SearchInput
-            ref={searchBoxRef}
-            value={searchField}
-            placeholder="Search"
-            onSubmit={submitNewSearch}
-            onChange={(e) => {
-              setSearchField(e.target.value);
-            }}
-          />
-          {/* Classname-attached searchTerm needed for Smartling localization */}
-          <span style={{ display: 'none' }} className="sl-search-keyword">
-            {searchTerm}
-          </span>
-          {searchTerm && (
-            <ResultTag>
-              {!showFacets && Number.isInteger(searchCount) && (
-                <Overline className={cx(overlineStyle)}>
-                  <>{searchCount} RESULTS</>
-                </Overline>
-              )}
-              {!!searchFilter && (
-                <div>
-                  {selectedCategory && (
-                    <StyledTag variant="green" onClick={resetFilters}>
-                      {selectedCategory}
-                      <Icon className={cx(iconStyle)} glyph="X" />
-                    </StyledTag>
-                  )}
-                  {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-                </div>
-              )}
-              {showFacets && <FacetTags resultsCount={searchCount}></FacetTags>}
-            </ResultTag>
-          )}
-          <MobileSearchButtonWrapper>
-            <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
-              {mobileFilterButton.text}
-            </Button>
-          </MobileSearchButtonWrapper>
-        </HeaderContainer>
-
-        {/* loading state for new search input */}
-        {!!searchTerm && !searchFinished && (
-          <>
-            <StyledSearchResults>
-              {[...Array(10)].map((_, index) => (
-                <StyledLoadingSkeletonContainer key={index}>
-                  <Skeleton borderRadius={SKELETON_BORDER_RADIUS} width={200} />
-                  <Skeleton borderRadius={SKELETON_BORDER_RADIUS} />
-                  <Skeleton count={2} borderRadius={SKELETON_BORDER_RADIUS} inline width={60} />
-                </StyledLoadingSkeletonContainer>
-              ))}
-            </StyledSearchResults>
-          </>
-        )}
-
-        {/* empty search results */}
-        {searchTerm && searchFinished && !searchResults?.length && (
-          <>
-            <>
-              <EmptyResultsContainer>
-                <EmptyResults />
-              </EmptyResultsContainer>
-            </>
-          </>
-        )}
-
-        {/* search results for new search page */}
-        {!!searchTerm && !!searchFinished && !!searchResults.length && (
-          <>
-            <StyledSearchResults>
-              {searchResults.map(({ title, preview, url, searchProperty, facets }, index) => (
-                <StyledSearchResult
-                  key={`${url}${index}`}
-                  onClick={() =>
-                    reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
-                  }
-                  title={title}
-                  preview={escapeHtml(preview)}
-                  url={url}
-                  useLargeTitle
-                  searchProperty={searchProperty?.[0]}
-                  facets={facets}
-                  darkMode={darkMode}
-                />
-              ))}
-              {
-                <>
-                  <Pagination
-                    currentPage={parseInt(new URLSearchParams(search).get('page') || 1)}
-                    numTotalItems={searchCount}
-                    onForwardArrowClick={onPageClick.bind(null, true)}
-                    onBackArrowClick={onPageClick.bind(null, false)}
-                    shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
-                    shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
-                  ></Pagination>
-                </>
-              }
-            </StyledSearchResults>
-          </>
-        )}
-
-        {searchParams.get('q') && (
-          <FiltersContainer>
-            {showFacets ? (
-              <>
-                {/* Avoid showing Facets component to avoid clashing values with mobile filter */}
-                {!showMobileFilters && <Facets facets={searchResultFacets} />}
-              </>
-            ) : (
-              <>
-                <FilterHeader style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark2 }}>
-                  {specifySearchText}
-                </FilterHeader>
-                <StyledSearchFilters />
-              </>
+    <SearchResultsContainer showFacets={showFacets}>
+      <HeaderContainer className={cx(headerContainerDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
+        <H3 as="h1">Search Results</H3>
+        <SearchInput
+          ref={searchBoxRef}
+          value={searchField}
+          placeholder="Search"
+          onSubmit={submitNewSearch}
+          onChange={(e) => {
+            setSearchField(e.target.value);
+          }}
+        />
+        {/* Classname-attached searchTerm needed for Smartling localization */}
+        <span style={{ display: 'none' }} className="sl-search-keyword">
+          {searchTerm}
+        </span>
+        {searchTerm && (
+          <ResultTag>
+            {!showFacets && Number.isInteger(searchCount) && (
+              <Overline className={cx(overlineStyle)}>
+                <>{searchCount} RESULTS</>
+              </Overline>
             )}
-          </FiltersContainer>
+            {!!searchFilter && (
+              <div>
+                {selectedCategory && (
+                  <StyledTag variant="green" onClick={resetFilters}>
+                    {selectedCategory}
+                    <Icon className={cx(iconStyle)} glyph="X" />
+                  </StyledTag>
+                )}
+                {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+              </div>
+            )}
+            {showFacets && <FacetTags resultsCount={searchCount}></FacetTags>}
+          </ResultTag>
         )}
-        {showMobileFilters && isTabletOrMobile && <MobileFilters facets={searchResultFacets} />}
-      </SearchResultsContainer>
-    </>
+        <MobileSearchButtonWrapper>
+          <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
+            {mobileFilterButton.text}
+          </Button>
+        </MobileSearchButtonWrapper>
+      </HeaderContainer>
+
+      {/* loading state for new search input */}
+      {!!searchTerm && !searchFinished && (
+        <>
+          <StyledSearchResults>
+            {[...Array(10)].map((_, index) => (
+              <StyledLoadingSkeletonContainer
+                key={index}
+                className={cx(searchResultDynamicStyling(SEARCH_THEME_STYLES[siteTheme]))}
+              >
+                <ParagraphSkeleton withHeader />
+              </StyledLoadingSkeletonContainer>
+            ))}
+          </StyledSearchResults>
+        </>
+      )}
+
+      {/* empty search results */}
+      {searchTerm && searchFinished && !searchResults?.length && (
+        <>
+          <>
+            <EmptyResultsContainer>
+              <EmptyResults />
+            </EmptyResultsContainer>
+          </>
+        </>
+      )}
+
+      {/* search results for new search page */}
+      {!!searchTerm && !!searchFinished && !!searchResults.length && (
+        <>
+          <StyledSearchResults>
+            {searchResults.map(({ title, preview, url, searchProperty, facets }, index) => (
+              <StyledSearchResult
+                key={`${url}${index}`}
+                onClick={() =>
+                  reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
+                }
+                title={title}
+                preview={escapeHtml(preview)}
+                url={url}
+                useLargeTitle
+                searchProperty={searchProperty?.[0]}
+                facets={facets}
+              />
+            ))}
+            {
+              <>
+                <Pagination
+                  currentPage={parseInt(new URLSearchParams(search).get('page') || 1)}
+                  numTotalItems={searchCount}
+                  onForwardArrowClick={onPageClick.bind(null, true)}
+                  onBackArrowClick={onPageClick.bind(null, false)}
+                  shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
+                  shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
+                ></Pagination>
+              </>
+            }
+          </StyledSearchResults>
+        </>
+      )}
+
+      {searchParams.get('q') && (
+        <FiltersContainer>
+          {showFacets ? (
+            <>
+              {/* Avoid showing Facets component to avoid clashing values with mobile filter */}
+              {!showMobileFilters && <Facets facets={searchResultFacets} />}
+            </>
+          ) : (
+            <>
+              <FilterHeader className={cx(filterHeaderDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
+                {specifySearchText}
+              </FilterHeader>
+              <StyledSearchFilters />
+            </>
+          )}
+        </FiltersContainer>
+      )}
+      {showMobileFilters && isTabletOrMobile && <MobileFilters facets={searchResultFacets} />}
+    </SearchResultsContainer>
   );
 };
 

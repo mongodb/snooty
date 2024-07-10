@@ -6,64 +6,13 @@
  */
 
 import React, { useEffect, useReducer } from 'react';
-import IconC from '../icons/C';
-import IconCompass from '../icons/Compass';
-import IconCpp from '../icons/Cpp';
-import IconCsharp from '../icons/Csharp';
-import IconGo from '../icons/Go';
-import IconJava from '../icons/Java';
-import IconKotlin from '../icons/Kotlin';
-import IconNode from '../icons/Node';
-import IconPHP from '../icons/Php';
-import IconPython from '../icons/Python';
-import IconRuby from '../icons/Ruby';
-import IconRust from '../icons/Rust';
-import IconScala from '../icons/Scala';
-import IconShell from '../icons/Shell';
-import IconSwift from '../icons/Swift';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
-import IconObjectiveC from '../icons/ObjectiveC';
-import IconJavascript from '../icons/Javascript';
-import IconTypescript from '../icons/Typescript';
-import IconDart from '../icons/Dart';
 import { isBrowser } from '../../utils/is-browser';
+import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { makeChoices } from './TabSelectors';
-
-const DRIVER_ICON_MAP = {
-  c: IconC,
-  compass: IconCompass,
-  cpp: IconCpp,
-  'cpp-sdk': IconCpp,
-  csharp: IconCsharp,
-  dart: IconDart,
-  go: IconGo,
-  java: IconJava,
-  'java-sync': IconJava,
-  'java-async': IconJava,
-  javascript: IconJavascript,
-  kotlin: IconKotlin,
-  'java-kotlin': IconKotlin,
-  'kotlin-coroutine': IconKotlin,
-  'kotlin-sync': IconKotlin,
-  nodejs: IconNode,
-  objectivec: IconObjectiveC,
-  php: IconPHP,
-  python: IconPython,
-  ruby: IconRuby,
-  rust: IconRust,
-  'rust-sync': IconRust,
-  'rust-async': IconRust,
-  scala: IconScala,
-  shell: IconShell,
-  swift: IconSwift,
-  'swift-async': IconSwift,
-  'swift-sync': IconSwift,
-  typescript: IconTypescript,
-};
 
 const defaultContextValue = {
   activeTabs: {},
-  driverIconMap: DRIVER_ICON_MAP,
   selectors: {},
   setActiveTab: () => {},
 };
@@ -134,7 +83,13 @@ const TabProvider = ({ children, selectors = {} }) => {
   }, [activeTabs]);
 
   return (
-    <TabContext.Provider value={{ activeTabs, driverIconMap: DRIVER_ICON_MAP, selectors, setActiveTab }}>
+    <TabContext.Provider
+      value={{
+        activeTabs,
+        selectors,
+        setActiveTab,
+      }}
+    >
       {children}
     </TabContext.Provider>
   );
