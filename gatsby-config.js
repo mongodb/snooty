@@ -41,4 +41,7 @@ module.exports = {
   plugins,
   pathPrefix,
   siteMetadata,
+  flags: {
+    DEV_SSR: true,
+  },
 };

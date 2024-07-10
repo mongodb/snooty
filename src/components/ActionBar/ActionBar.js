@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { palette } from '@leafygreen-ui/palette';
+// import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import ChatbotUi from '../ChatbotUi';
 import DarkModeDropdown from './DarkModeDropdown';
@@ -17,8 +17,8 @@ const ActionBarContainer = styled('div')`
   top: 0;
   flex-wrap: wrap;
   z-index: ${theme.zIndexes.header};
-  background-color: ${(props) => (props.darkMode ? palette.black : palette.white)};
-  border-bottom: 1px solid ${(props) => (props.darkMode ? palette.gray.dark2 : palette.gray.light2)};
+  background-color: var(--background-primary);
+  border-bottom: 1px solid var(--border-secondary);
 
   @media ${theme.screenSize.mediumAndUp} {
     & > div {

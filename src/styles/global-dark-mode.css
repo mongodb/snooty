@@ -1,9 +1,29 @@
 .dark-theme body {
-     background-color: var(--lg-bg-dark-mode);
-     color: var(--lg-color-dark-mode);
+  background-color: var(--lg-bg-dark-mode);
+  color: var(--lg-color-dark-mode);
 }
 
 .light-theme body {
-    background-color: initial;
-    color: initial;
+  background-color: initial;
+  color: initial;
+}
+
+.light-theme {
+  --font-color-primary: '#001E2B';
+  --green-primary: '#00684A';
+  --green-secondary: '#E3FCF7';
+  --background-primary: #FFFFFF;
+  --background-secondary: #F9FBFA;
+  --background-tertiary: #E8EDEB;
+  --border-secondary: #E8EDEB;
+}
+
+.dark-theme {
+  --font-color-primary: '#FFFFFF';
+  --green-primary: '#00684A';
+  --green-secondary: '#023430';
+  --background-primary: #001E2B;
+  --background-secondary: #112733;
+  --background-tertiary: #1C2D38;
+  --border-secondary: #3D4F58;
 }

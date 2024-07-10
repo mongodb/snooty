@@ -9,6 +9,7 @@ const SKIP_P_TAGS = new Set(['caption', 'footnote', 'field']);
 
 const paragraphStyling = css`
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 `;
 
 const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }) => {
@@ -18,7 +19,7 @@ const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }) => {
     return children.map((element, index) => <ComponentFactory {...rest} nodeData={element} key={index} />);
   }
   return (
-    <Body className={cx(paragraphStyling)}>
+    <Body className={cx(`snooty-paragraph`, paragraphStyling)}>
       {children.map((element, index) => (
         <ComponentFactory {...rest} nodeData={element} key={index} />
       ))}

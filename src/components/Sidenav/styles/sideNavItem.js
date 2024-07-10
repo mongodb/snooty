@@ -17,10 +17,12 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
   font-size: ${theme.fontSize.small};
   text-transform: none;
   line-height: 20px !important;
+  color: var(--font-color-primary);
 
   // overwrite LG link underlines
   // @leafygreen-ui/typography v13.0.0
   :hover {
+    background-color: var(--background-tertiary);
     &:after,
     span:after {
       display: none;
@@ -33,7 +35,7 @@ export const sideNavItemFontSize = css`
 `;
 
 export const titleStyle = css`
-  color: var(--color);
+  color: var(--font-color-primary);
   font-size: ${theme.fontSize.small};
   font-weight: bold;
   line-height: 20px;

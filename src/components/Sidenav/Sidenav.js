@@ -36,6 +36,8 @@ const fontFamily = getCurrentLocaleFontFamilyValue();
 // Use LG's css here to style the component without passing props
 const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
   height: 100%;
+  background-color: var(--background-secondary);
+  border-color: var(--border-secondary);
 
   // Mobile & Tablet nav
   @media ${theme.screenSize.upToLarge} {
@@ -66,6 +68,10 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
   p {
     letter-spacing: unset;
     color: ${palette.black};
+  }
+
+  nav {
+    background-color: inherit;
   }
 
 `;
@@ -136,7 +142,6 @@ const ArtificialPadding = styled('div')`
 // This allows the products in the ProductsList to slide up/down when closing/opening the list
 // without appearing inline with above text
 const NavTopContainer = styled('div')`
-  background-color: var(--background-color);
   position: relative;
   z-index: 1;
 `;
@@ -232,18 +237,13 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
-            className={cx(sideNavStyling({ hideMobile, isCollapsed }))}
+            className={cx('leafy-sidenav', sideNavStyling({ hideMobile, isCollapsed }))}
             collapsed={isCollapsed}
             setCollapsed={setCollapsed}
             widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
           >
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
-              <NavTopContainer
-                style={{
-                  '--background-color': darkMode ? palette.gray.dark4 : palette.gray.light3,
-                  '--border-bottom-color': darkMode ? palette.gray.dark2 : palette.gray.light2,
-                }}
-              >
+              <NavTopContainer>
                 <ArtificialPadding />
                 <DocsHomeButton darkMode={darkMode} />
                 <Border />
