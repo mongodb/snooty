@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef, useEffect } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { Option, Select as LGSelect } from '@leafygreen-ui/select';
@@ -56,6 +56,7 @@ const Select = ({
   className,
   choices,
   onChange,
+  usePortal = true,
   defaultText = '',
   disabled = false,
   label = null,
@@ -64,10 +65,6 @@ const Select = ({
 }) => {
   // show select after portal container has loaded for scroll + zindex consistency
   const portalContainer = useRef();
-
-  useEffect(() => {
-    console.log('CLASSNAME', className, 'PROPS', props, 'PORTAL CONTAINER', portalContainer.current);
-  }, [portalContainer]);
 
   return (
     <PortalContainer className={`${className} ${cx(selectStyle)}`} ref={portalContainer}>
@@ -79,6 +76,7 @@ const Select = ({
         size="default"
         allowDeselect={false}
         disabled={disabled}
+        usePortal={usePortal}
         portalContainer={portalContainer.current}
         scrollContainer={portalContainer.current}
         popoverZIndex={2}
@@ -114,6 +112,7 @@ Select.propTypes = {
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+  usePortal: PropTypes.bool,
   defaultText: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
@@ -122,6 +121,7 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
+  usePortal: true,
   defaultText: '',
   disabled: false,
   label: null,
