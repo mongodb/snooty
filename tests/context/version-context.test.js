@@ -310,6 +310,7 @@ describe('Version Context', () => {
     await act(async () => {
       wrapper = mountAtlasCliConsumer(true);
     });
+    wrapper.debug();
     for (let branch of mockedAssociatedRepoInfo['atlas-cli'].branches) {
       expect(await wrapper.findByText(getKey(project, branch.gitBranchName))).toBeTruthy();
     }
