@@ -9,7 +9,6 @@ import Tooltip from '@leafygreen-ui/tooltip';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import useCopyClipboard from '../hooks/useCopyClipboard';
-import useHashAnchor from '../hooks/use-hash-anchor';
 
 const tooltipStyle = css`
   padding: 2px 8px;
@@ -53,7 +52,6 @@ const Permalink = ({ id, description, buffer }) => {
   };
 
   const linkRef = useRef();
-  useHashAnchor(id, linkRef);
 
   return (
     <>
