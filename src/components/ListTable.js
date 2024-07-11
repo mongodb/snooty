@@ -3,8 +3,22 @@ import PropTypes from 'prop-types';
 import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
+
+const CUSTOM_THEME_STYLES = {
+  // Need to redefine original styling to avoid undefined values. Needed while custom dark mode row styling exists
+  light: {
+    '--background-color': palette.white,
+    '--zebra-stripe-color': palette.gray.light3,
+  },
+  // Temporary workaround to overwrite certain styling for dark mode due to difficulties with LG Table version upgrade (DOP-3614)
+  dark: {
+    '--background-color': palette.black,
+    '--zebra-stripe-color': palette.gray.dark4,
+  },
+};
 
 const align = (key) => {
   switch (key) {
@@ -17,13 +31,26 @@ const align = (key) => {
   }
 };
 
-const styleTable = ({ customAlign, customWidth }) => css`
+const styleTable = ({ customAlign, customWidth, overrideZebraStripes }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
+  // Font family was incorrect for certain tables in dark mode, most likely due to outdated component
+  font-family: 'Euclid Circular A', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   table & {
     margin: 0;
+  }
+
+  tbody > tr:nth-of-type(even) {
+    // Overriding bg color for dark mode rows prevents zebra striping. Adding this rule to restore zebra striping
+    ${overrideZebraStripes && `background-color: var(--zebra-stripe-color);`}
+  }
+
+  // This CSS target is the same one LG uses to force one of their styles. Use the same one to prevent it from overriding
+  // our styles https://github.com/mongodb/leafygreen-ui/blob/bc02626ea8779407b56a481a989e6b0f0bcd624c/packages/table/src/Row.tsx#L74
+  tbody > tr:nth-of-type(odd) > th {
+    ${overrideZebraStripes && `background-color: inherit;`}
   }
 `;
 
@@ -34,6 +61,10 @@ const unstyleThead = css`
     min-height: unset !important;
     padding: 0 !important;
   }
+`;
+
+const backgroundColorStyle = css`
+  background-color: var(--background-color);
 `;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
@@ -66,8 +97,11 @@ const getReferenceIds = (nodeList) => {
   return results;
 };
 
-const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
-  <Row>
+const ListTableRow = ({ row = [], stubColumnCount, colorTheme, ...rest }) => (
+  <Row
+    className={cx(backgroundColorStyle)}
+    style={{ '--background-color': CUSTOM_THEME_STYLES[colorTheme]['--background-color'] }}
+  >
     {row.map((cell, colIndex) => {
       const isStub = colIndex <= stubColumnCount - 1;
       const skipPTag = hasOneChild(cell.children);
@@ -84,7 +118,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
             vertical-align: top;
 
             /* Apply grey background to stub <th> cells (PD-1216) */
-            ${isStub && `background-clip: padding-box; background-color: ${palette.gray.light3};`}
+            ${isStub && `background-clip: padding-box; background-color: var(--stub-bg-color);`}
 
             * {
               font-size: ${theme.fontSize.small} !important;
@@ -110,6 +144,7 @@ const ListTableRow = ({ row = [], stubColumnCount, ...rest }) => (
               margin-bottom: 0;
             }
           `)}
+          style={{ ...(isStub && { '--stub-bg-color': CUSTOM_THEME_STYLES[colorTheme]['--zebra-stripe-color'] }) }}
           isHeader={isStub}
           key={colIndex}
         >
@@ -126,6 +161,8 @@ ListTableRow.propTypes = {
 };
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
+  const { darkMode } = useDarkMode();
+  const colorTheme = darkMode ? 'dark' : 'light';
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
   const bodyRows = children[0].children.slice(headerRowCount);
@@ -160,21 +197,28 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           styleTable({
             customAlign: options?.align,
             customWidth: options?.width,
+            overrideZebraStripes: bodyRows.length > 10,
           })
         )}
+        style={{
+          ...CUSTOM_THEME_STYLES[colorTheme],
+        }}
         columns={headerRows.map((row, rowIndex) => (
           <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
             {row.children.map((cell, colIndex) => {
               const skipPTag = hasOneChild(cell.children);
               return (
                 <TableHeader
-                  className={cx(css`
-                    * {
-                      font-size: ${theme.fontSize.small};
-                      font-weight: 600;
-                    }
-                    ${widths && `width: ${widths[colIndex]}%`}
-                  `)}
+                  className={cx(
+                    css`
+                      * {
+                        font-size: ${theme.fontSize.small};
+                        font-weight: 600;
+                      }
+                      ${widths && `width: ${widths[colIndex]}%`}
+                    `,
+                    backgroundColorStyle
+                  )}
                   key={`${rowIndex}-${colIndex}`}
                   label={cell.children.map((child, i) => (
                     <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
@@ -185,9 +229,16 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           </HeaderRow>
         ))}
         data={bodyRows}
+        darkMode={darkMode}
       >
         {({ datum }) => (
-          <ListTableRow {...rest} stubColumnCount={stubColumnCount} row={datum?.children?.[0]?.children} />
+          <ListTableRow
+            {...rest}
+            stubColumnCount={stubColumnCount}
+            row={datum?.children?.[0]?.children}
+            darkMode={darkMode}
+            colorTheme={colorTheme}
+          />
         )}
       </Table>
     </>
