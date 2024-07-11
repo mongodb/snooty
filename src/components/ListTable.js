@@ -40,6 +40,8 @@ const styleTable = ({ customAlign, customWidth }) => css`
 const theadStyle = css`
   // Allows its box shadow to appear above stub cell's background color
   position: relative;
+  // Avoid different color for tables nested in other components (tables, admonitions)
+  background-color: inherit;
 `;
 
 const baseCellStyle = css`
