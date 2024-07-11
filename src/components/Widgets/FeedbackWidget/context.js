@@ -4,7 +4,7 @@ import { createNewFeedback, useRealmUser } from './realm';
 
 const FeedbackContext = createContext();
 
-export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
+export function FeedbackProvider({ page, test = {}, ...props }) {
   const hasExistingFeedback =
     !!test.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
   const [feedback, setFeedback] = useState((hasExistingFeedback && test.feedback) || null);
@@ -121,7 +121,6 @@ export function FeedbackProvider({ page, hideHeader, test = {}, ...props }) {
     setProgress,
     submitAllFeedback,
     abandon,
-    hideHeader,
     selectedRating,
     setSelectedRating,
     selectInitialRating,

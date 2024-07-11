@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 
 const IconNode = ({ ...styles }) => {
+  const hash = useId();
   const { darkMode } = useDarkMode();
   const jsFill = darkMode ? '#5FA04E' : 'black';
   const nodeFill = darkMode ? 'white' : 'black';
-  const gradientFill0 = darkMode ? 'url(#paint0_linear_2131_12968)' : 'black';
-  const gradientFill1 = darkMode ? 'url(#paint1_linear_2131_12968)' : 'black';
+  const gradient0 = `${hash}paint0`;
+  const gradient1 = `${hash}paint1`;
+  const gradientFill0 = darkMode ? `url(#${gradient0})` : 'black';
+  const gradientFill1 = darkMode ? `url(#${gradient1})` : 'black';
+  const gradient2 = `${hash}paint2`;
+  const gradientFill2 = `url(#${gradient2})`;
   return (
     <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" {...styles}>
       <g clip-path="url(#clip0_2131_12968)">
@@ -64,14 +69,14 @@ const IconNode = ({ ...styles }) => {
             />
             <path
               d="M14.136 15.8715C14.2187 15.8231 14.2933 15.7327 14.2933 15.6236L11.1154 10.1879C11.0326 10.1741 10.943 10.181 10.8671 10.2293L7.9707 11.8985L11.0947 17.5958C11.1361 17.5889 11.1843 17.5751 11.2257 17.5544L14.136 15.8715Z"
-              fill="url(#paint2_linear_2131_12968)"
+              fill={gradientFill2}
             />
           </g>
         </g>
       </g>
       <defs>
         <linearGradient
-          id="paint0_linear_2131_12968"
+          id={gradient0}
           x1="12.2396"
           y1="11.4775"
           x2="9.61385"
@@ -85,7 +90,7 @@ const IconNode = ({ ...styles }) => {
           <stop offset="1" stop-color="#3DAE2B" />
         </linearGradient>
         <linearGradient
-          id="paint1_linear_2131_12968"
+          id={gradient1}
           x1="10.6159"
           y1="14.2811"
           x2="17.9826"
@@ -98,7 +103,7 @@ const IconNode = ({ ...styles }) => {
           <stop offset="0.9081" stop-color="#6ABF4B" />
         </linearGradient>
         <linearGradient
-          id="paint2_linear_2131_12968"
+          id={gradient2}
           x1="7.69907"
           y1="13.8874"
           x2="14.4172"
