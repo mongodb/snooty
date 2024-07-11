@@ -4,14 +4,14 @@ import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 
-const Red = ({ nodeData: { children } }) => (
+const Red = ({ nodeData: { children }, ...rest }) => (
   <strong
     css={css`
       color: ${palette.red.dark2};
     `}
   >
     {children.map((node, i) => (
-      <ComponentFactory key={i} nodeData={node} />
+      <ComponentFactory key={i} nodeData={node} {...rest} />
     ))}
   </strong>
 );

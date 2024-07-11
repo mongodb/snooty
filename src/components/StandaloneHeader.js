@@ -17,12 +17,12 @@ const StyledStandaloneContainer = styled.div`
   }
 `;
 
-const StandaloneHeader = ({ nodeData: { argument, options } }) => {
+const StandaloneHeader = ({ nodeData: { argument, options }, ...rest }) => {
   return (
     <StyledStandaloneContainer>
       <SectionHeader>
         {argument.map((child, i) => (
-          <ComponentFactory nodeData={child} key={i} />
+          <ComponentFactory nodeData={child} key={i} {...rest} />
         ))}
       </SectionHeader>
       <Link to={options.url} showLinkArrow={true}>

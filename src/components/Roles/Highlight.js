@@ -25,7 +25,7 @@ const COLOR_MAP = {
   },
 };
 
-const Highlight = ({ nodeData: { children, name } }) => {
+const Highlight = ({ nodeData: { children, name }, ...rest }) => {
   const { darkMode } = useDarkMode();
   const colorTheme = darkMode ? 'dark' : 'light';
   const backgroundColor = COLOR_MAP[colorTheme][name];
@@ -44,7 +44,7 @@ const Highlight = ({ nodeData: { children, name } }) => {
       }}
     >
       {children.map((node, i) => (
-        <ComponentFactory key={i} nodeData={node} />
+        <ComponentFactory key={i} nodeData={node} {...rest} />
       ))}
     </span>
   );

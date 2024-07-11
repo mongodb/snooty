@@ -8,11 +8,11 @@ const guiLabelStyle = css`
   font-weight: 700;
 `;
 
-const RoleGUILabel = ({ nodeData: { children } }) => (
+const RoleGUILabel = ({ nodeData: { children }, ...rest }) => (
   // Keep "guilabel" className for styling when this component is inside of a Heading.
   <span className="guilabel" css={guiLabelStyle}>
     {children.map((node, i) => (
-      <ComponentFactory key={i} nodeData={node} />
+      <ComponentFactory key={i} nodeData={node} {...rest} />
     ))}
   </span>
 );

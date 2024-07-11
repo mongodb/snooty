@@ -118,7 +118,14 @@ const DocumentBody = (props) => {
                 <div id="template-container">
                   <Template {...props} useChatbot={useChatbot}>
                     {pageNodes.map((child, index) => (
-                      <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                      <ComponentFactory
+                        key={index}
+                        metadata={metadata}
+                        nodeData={child}
+                        page={page}
+                        template={template}
+                        slug={slug}
+                      />
                     ))}
                   </Template>
                 </div>

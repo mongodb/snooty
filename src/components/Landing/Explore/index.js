@@ -88,6 +88,7 @@ const Explore = ({ nodeData: { children, argument }, ...rest }) => {
                 variant={'default'}
                 rightGlyph={'Export'}
                 hideExternalIcon={true}
+                {...rest}
               ></ComponentFactory>
             ))}
           </div>
@@ -99,6 +100,7 @@ const Explore = ({ nodeData: { children, argument }, ...rest }) => {
             darkMode={true}
             showLineNumbers={false}
             overflow={false}
+            {...rest}
           ></ComponentFactory>
         </div>
       </ExploreContent>
