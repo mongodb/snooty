@@ -8,10 +8,11 @@ import './src/styles/global-dark-mode.css';
 export const wrapRootElement = ({ element }) => <ThemeProvider theme={theme}>{element}</ThemeProvider>;
 
 export const shouldUpdateScroll = ({ routerProps: { location } }) => {
-  if (location?.hash?.length > 1) {
-    return location?.hash.slice(1) || false;
+  const { hash, state } = location;
+  if (hash) {
+    return decodeURI(hash.slice(1));
   }
-  if (location?.state?.preserveScroll) {
+  if (state?.preserveScroll) {
     return false;
   }
   return true;
