@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Contents from '../components/Contents';
 import InternalPageNav from '../components/InternalPageNav';
+import MultiPageTutorials from '../components/MultiPageTutorials';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/Tabs/TabSelectors';
@@ -29,16 +30,25 @@ const StyledRightColumn = styled(RightColumn)`
 `;
 
 const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedProduct } }) => {
-  const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
+  const { slugToBreadcrumbLabel, title, toctreeOrder, multiPageTutorials } = useSnootyMetadata();
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const hasMethodSelector = pageOptions?.has_method_selector;
+
+  const activeTutorial = Object.keys(multiPageTutorials).reduce((result, key) => {
+    if (multiPageTutorials[key].slugs.includes(slug)) {
+      result = multiPageTutorials[key];
+    }
+
+    return result;
+  }, null);
 
   return (
     <DocumentContainer>
       <StyledMainColumn>
         <div className="body">
           <Breadcrumbs siteTitle={title} slug={slug} />
+          {activeTutorial && <MultiPageTutorials slug={slug} activeTutorial={activeTutorial} />}
           {children}
           {showPrevNext && (
             <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={toctreeOrder} />
