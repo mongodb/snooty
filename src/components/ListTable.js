@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Cell, HeaderCell, HeaderRow, Row, Table, TableBody, TableHead } from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
@@ -6,6 +6,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { Theme } from '@leafygreen-ui/lib';
 import { theme } from '../theme/docsTheme';
+import { AncestorComponentContextProvider, useAncestorComponentContext } from '../context/ancestor-components-context';
 import ComponentFactory from './ComponentFactory';
 
 // Need to define custom styles for custom components, such as stub cells
@@ -130,6 +131,27 @@ const getReferenceIds = (nodeList) => {
   return results;
 };
 
+/**
+ * Checks every row for the existence of a nested table.
+ * @param {object[]} rows
+ * @returns {boolean}
+ */
+const includesNestedTable = (rows) => {
+  const checkNodeForTable = (nodeData) => {
+    if (nodeData.type === 'directive' && nodeData.name === 'list-table') {
+      return true;
+    }
+
+    if (!nodeData.children || nodeData.children === 0) {
+      return false;
+    }
+
+    return nodeData.children.some((node) => checkNodeForTable(node));
+  };
+
+  return rows.some((row) => checkNodeForTable(row));
+};
+
 const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
   <Row>
     {row.map((cell, colIndex) => {
@@ -162,6 +184,7 @@ ListTableRow.propTypes = {
 };
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
+  const ancestors = useAncestorComponentContext();
   const { theme: siteTheme } = useDarkMode();
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
@@ -185,8 +208,11 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const firstHeaderRowChildren = headerRows[0]?.children ?? [];
   const elmIdsForScroll = getReferenceIds(firstHeaderRowChildren.concat(bodyRows.slice(0, 3)));
 
+  const hasNestedTable = useMemo(() => includesNestedTable(bodyRows), [bodyRows]);
+  const noTableNesting = !hasNestedTable && !ancestors?.table;
+
   return (
-    <>
+    <AncestorComponentContextProvider component={'table'}>
       {elmIdsForScroll.map((id) => (
         <div className="header-buffer" key={id} id={id} />
       ))}
@@ -197,7 +223,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             customWidth: options?.width,
           })
         )}
-        shouldAlternateRowColor={bodyRows.length > 4}
+        shouldAlternateRowColor={noTableNesting && bodyRows.length > 4}
       >
         {widths && (
           <colgroup>
@@ -240,7 +266,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           ))}
         </TableBody>
       </Table>
-    </>
+    </AncestorComponentContextProvider>
   );
 };
 
