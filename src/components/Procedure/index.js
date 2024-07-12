@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
@@ -6,10 +7,24 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../../theme/docsTheme';
 import Step from './Step';
 
+const THEME_STYLES = {
+  light: {
+    backgroundColor: 'initial',
+    color: 'initial',
+  },
+  dark: {
+    backgroundColor: palette.black,
+    color: palette.gray.light2,
+  },
+};
+
+const procedureStyles = (themeObj) => css`
+  background-color: ${themeObj.backgroundColor};
+  color: ${themeObj.color};
+`;
+
 const StyledProcedure = styled('div')`
   margin-top: ${theme.size.default};
-  background-color: var(--background-color);
-  color: var(--color);
   ${({ procedureStyle }) =>
     procedureStyle === 'connected' &&
     `
@@ -45,24 +60,28 @@ const getSteps = (children) => {
   return steps;
 };
 
-const Procedure = ({ nodeData: { children, options }, ...rest }) => {
-  // Make the style 'connected' by default for now to give time for PLPs that use this directive to
-  // add the "style" option
-  const style = options?.style || 'connected';
+const Procedure = ({ nodeData: { children, options }, template, ...rest }) => {
+  // Procedures will be 'connected' (or whatever is provided) on Landing pages or product landing
+  // pages, and not connected on others
+
+  const useLandingStyles = ['landing', 'product-landing'].includes(template);
+  const style = useLandingStyles ? options?.style || 'connected' : 'normal';
   const steps = useMemo(() => getSteps(children), [children]);
 
-  const { darkMode } = useDarkMode();
+  const { darkMode, theme: siteTheme } = useDarkMode();
 
   return (
-    <StyledProcedure
-      procedureStyle={style}
-      style={{
-        '--background-color': darkMode ? palette.black : 'initial',
-        '--color': darkMode ? palette.gray.light2 : 'initial',
-      }}
-    >
+    <StyledProcedure procedureStyle={style} className={cx(procedureStyles(THEME_STYLES[siteTheme]))}>
       {steps.map((child, i) => (
-        <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} darkMode={darkMode} />
+        <Step
+          {...rest}
+          nodeData={child}
+          stepNumber={i + 1}
+          stepStyle={style}
+          template={template}
+          key={i}
+          darkMode={darkMode}
+        />
       ))}
     </StyledProcedure>
   );

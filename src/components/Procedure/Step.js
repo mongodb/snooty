@@ -6,16 +6,85 @@ import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 
+const getCircleDynamicStyles = (darkMode, stepStyle) => {
+  return {
+    connected: {
+      backgroundColor: darkMode ? palette.green.dark2 : palette.green.light3,
+      color: darkMode ? palette.gray.light2 : palette.green.dark2,
+      dimension: '34px',
+    },
+    normal: {
+      backgroundColor: 'inherit',
+      color: darkMode ? palette.white : palette.black,
+      dimension: '27px',
+    },
+  }[stepStyle];
+};
+
+const circleIndividualStyles = {
+  connected: () => css`
+    position: relative;
+    font-weight: bold;
+    z-index: 1;
+  `,
+  normal: () => css`
+    border: 1px solid ${palette.gray.light1};
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+  `,
+};
+
 const Circle = styled('div')`
   align-items: center;
   border-radius: 50%;
   display: flex;
-  font-weight: bold;
   justify-content: center;
+  background-color: ${(props) => props.styleObj.backgroundColor};
+  color: ${(props) => props.styleObj.color};
+  height: ${(props) => props.styleObj.dimension};
+  width: ${(props) => props.styleObj.dimension};
 `;
+
+const getStepStyleDynamicStyles = (stepType) => {
+  return {
+    connected: {
+      gap: '33px',
+      marginTop: theme.size.tiny,
+    },
+    normal: {
+      gap: theme.size.large,
+      marginTop: 'unset',
+    },
+  }[stepType];
+};
+
+const landingStepStyles = {
+  connected: (darkMode) => css`
+    position: relative;
+
+    :not(:last-child):after {
+      content: '';
+      border-left: 2px dashed ${darkMode ? palette.gray.dark1 : palette.gray.light2};
+      bottom: 0;
+      left: 16px;
+      position: absolute;
+      top: 0;
+      z-index: 0;
+    }
+  `,
+  normal: () => {},
+};
 
 const StyledStep = styled('div')`
   display: flex;
+  gap: ${(props) => props.styleObj.gap};
+
+  h2,
+  h3,
+  h4 {
+    margin-top: ${(props) => props.styleObj.marginTop};
+  }
 `;
 
 const StepBlock = styled('div')`
@@ -23,55 +92,6 @@ const StepBlock = styled('div')`
 `;
 
 const Content = 'div';
-
-const circleStyles = {
-  connected: () => css`
-    position: relative;
-    background-color: var(--background-color);
-    color: var(--color);
-    height: 34px;
-    width: 34px;
-    z-index: 1;
-  `,
-  normal: () => css`
-    background-color: var(--background-color);
-    color: var(--color);
-    height: ${theme.size.medium};
-    width: ${theme.size.medium};
-  `,
-};
-
-const landingStepStyles = {
-  connected: () => css`
-    position: relative;
-    gap: 33px;
-
-    :not(:last-child):after {
-      content: '';
-      border-left: 2px dashed var(--border-left);
-      bottom: 0;
-      left: 16px;
-      position: absolute;
-      top: 0;
-      z-index: 0;
-    }
-
-    h2,
-    h3,
-    h4 {
-      margin-top: ${theme.size.tiny};
-    }
-  `,
-  normal: () => css`
-    gap: ${theme.size.default};
-
-    h2,
-    h3,
-    h4 {
-      margin-top: unset;
-    }
-  `,
-};
 
 const contentStyles = {
   connected: css`
@@ -85,39 +105,20 @@ const contentStyles = {
   `,
 };
 
-const getStepStyleDynamicStyles = (darkMode, stepType) => {
-  return {
-    connected: {
-      '--border-left': darkMode ? palette.gray.dark1 : palette.gray.light2,
-    },
-    normal: {},
-  }[stepType];
-};
+const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'normal', darkMode, template, ...rest }) => {
+  const useLandingStyles = ['landing', 'product-landing'].includes(template);
+  stepStyle = useLandingStyles ? 'connected' : 'normal';
 
-const getCircleDynamicStyles = (darkMode, stepStyle) => {
-  return {
-    connected: {
-      '--background-color': darkMode ? palette.green.dark2 : palette.green.light3,
-      '--color': darkMode ? palette.gray.light2 : palette.green.dark2,
-    },
-    normal: {
-      '--background-color': darkMode ? palette.gray.dark2 : palette.black,
-      '--color': darkMode ? palette.gray.light2 : palette.white,
-    },
-  }[stepStyle];
-};
-
-const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', darkMode, ...rest }) => {
   return (
-    <StyledStep css={landingStepStyles[stepStyle]} style={getStepStyleDynamicStyles(darkMode, stepStyle)}>
+    <StyledStep styleObj={getStepStyleDynamicStyles(stepStyle)} css={landingStepStyles[stepStyle](darkMode)}>
       <StepBlock>
-        <Circle css={circleStyles[stepStyle]} style={getCircleDynamicStyles(darkMode, stepStyle)}>
+        <Circle styleObj={getCircleDynamicStyles(darkMode, stepStyle)} css={circleIndividualStyles[stepStyle]}>
           {stepNumber}
         </Circle>
       </StepBlock>
       <Content css={contentStyles[stepStyle]}>
         {children.map((child, i) => (
-          <ComponentFactory {...rest} nodeData={child} key={i} />
+          <ComponentFactory {...rest} nodeData={child} template={template} key={i} />
         ))}
       </Content>
     </StyledStep>
