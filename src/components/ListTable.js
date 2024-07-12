@@ -163,7 +163,6 @@ const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
 
       return (
         <Cell
-          as="th"
           key={colIndex}
           className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle(LIST_TABLE_THEME_STYLES[siteTheme]))}
           role={role}
