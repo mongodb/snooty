@@ -35,6 +35,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const hasMethodSelector = pageOptions?.has_method_selector;
 
+  // Use for the demo, when actually work kicks off, this should become a utility
   const activeTutorial = Object.keys(multiPageTutorials).reduce((result, key) => {
     if (multiPageTutorials[key].slugs.includes(slug)) {
       result = multiPageTutorials[key];
