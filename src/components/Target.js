@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import useHashAnchor from '../hooks/use-hash-anchor';
 import ComponentFactory from './ComponentFactory';
 import Permalink from './Permalink';
 
@@ -36,9 +37,11 @@ const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => 
   const [, dictList] = partition(children, (elem) => elem.type === 'target_identifier');
   const [[descriptionTerm], descriptionDetails] = partition(dictList, (elem) => elem.type === 'directive_argument');
   const hidden = options && options.hidden ? true : false;
+  const targetRef = useRef();
+  useHashAnchor(html_id, targetRef);
 
   return (
-    <React.Fragment>
+    <div ref={targetRef}>
       {/* Render binary and program targets **and targets with the :hidden: flag
       as empty spans such that their IDs are rendered on the page. */}
       {dictList.length > 0 && !['binary', 'program'].includes(name) && !hidden ? (
@@ -53,7 +56,7 @@ const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => 
       ) : (
         <span className="header-buffer" id={html_id} />
       )}
-    </React.Fragment>
+    </div>
   );
 };
 
