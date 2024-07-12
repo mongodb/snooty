@@ -111,105 +111,101 @@ a .emotion-0 {
   text-decoration-color: #E8EDEB;
 }
 
-<div>
-    <dl
-      class="option"
-    >
-      <dt>
-        <code
-          class="emotion-0"
+<dl
+    class="option"
+  >
+    <dt>
+      <code
+        class="emotion-0"
+      >
+        --config &lt;filename&gt;, -f &lt;filename&gt;
+      </code>
+      <a
+        class="headerlink emotion-1"
+        href="#std-option-mongos.--config"
+        title="Permalink to this definition"
+      >
+        <svg
+          aria-label="Link Icon"
+          class="emotion-2"
+          fill="none"
+          height="12"
+          role="img"
+          viewBox="0 0 16 16"
+          width="12"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          --config &lt;filename&gt;, -f &lt;filename&gt;
-        </code>
-        <a
-          class="headerlink emotion-1"
-          href="#std-option-mongos.--config"
-          title="Permalink to this definition"
-        >
-          <svg
-            aria-label="Link Icon"
-            class="emotion-2"
-            fill="none"
-            height="12"
-            role="img"
-            viewBox="0 0 16 16"
-            width="12"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6.039 9.953a3.596 3.596 0 0 1-.327-.38l1.45-1.445a1.553 1.553 0 0 0 2.496.423l2.885-2.87a1.57 1.57 0 0 0 .01-2.213 1.553 1.553 0 0 0-2.203-.01l-.379.377A.995.995 0 0 1 8.56 3.83a1.005 1.005 0 0 1 .006-1.418l.38-.377a3.542 3.542 0 0 1 5.024.023 3.58 3.58 0 0 1-.022 5.047l-2.884 2.871a3.542 3.542 0 0 1-5.025-.022Z"
-              fill="currentColor"
-            />
-            <path
-              d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 0 0-2.496-.423l-2.885 2.87a1.57 1.57 0 0 0-.01 2.213 1.553 1.553 0 0 0 2.203.01l.379-.377a.995.995 0 0 1 1.411.006 1.005 1.005 0 0 1-.006 1.418l-.38.377a3.542 3.542 0 0 1-5.024-.023 3.58 3.58 0 0 1 .022-5.047l2.884-2.871a3.542 3.542 0 0 1 5.025.022Z"
-              fill="currentColor"
-            />
-          </svg>
-        </a>
-        <div
-          class="emotion-3 emotion-4"
-          id="std-option-mongos.--config"
-        />
-      </dt>
-      <dd>
-        <p
-          class="emotion-5"
-        >
-          Specifies a configuration file for runtime configuration options. The
+          <path
+            d="M6.039 9.953a3.596 3.596 0 0 1-.327-.38l1.45-1.445a1.553 1.553 0 0 0 2.496.423l2.885-2.87a1.57 1.57 0 0 0 .01-2.213 1.553 1.553 0 0 0-2.203-.01l-.379.377A.995.995 0 0 1 8.56 3.83a1.005 1.005 0 0 1 .006-1.418l.38-.377a3.542 3.542 0 0 1 5.024.023 3.58 3.58 0 0 1-.022 5.047l-2.884 2.871a3.542 3.542 0 0 1-5.025-.022Z"
+            fill="currentColor"
+          />
+          <path
+            d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 0 0-2.496-.423l-2.885 2.87a1.57 1.57 0 0 0-.01 2.213 1.553 1.553 0 0 0 2.203.01l.379-.377a.995.995 0 0 1 1.411.006 1.005 1.005 0 0 1-.006 1.418l-.38.377a3.542 3.542 0 0 1-5.024-.023 3.58 3.58 0 0 1 .022-5.047l2.884-2.871a3.542 3.542 0 0 1 5.025.022Z"
+            fill="currentColor"
+          />
+        </svg>
+      </a>
+      <div
+        class="emotion-3 emotion-4"
+        id="std-option-mongos.--config"
+      />
+    </dt>
+    <dd>
+      <p
+        class="emotion-5"
+      >
+        Specifies a configuration file for runtime configuration options. The
 configuration file is the preferred method for runtime configuration of
 
-          <a
-            class="emotion-6"
-            href="/reference/program/mongos/#std-program-mongos"
-          >
-            <code
-              class="emotion-0"
-            >
-              mongos
-            </code>
-          </a>
-          . The options are equivalent to the command-line
-configuration options. See 
-          <a
-            class="emotion-6"
-            href="/reference/configuration-options/"
-          >
-            Configuration File Options
-          </a>
-           for
-more information.
-        </p>
-        <p
-          class="emotion-5"
+        <a
+          class="emotion-6"
+          href="/reference/program/mongos/#std-program-mongos"
         >
-          Ensure the configuration file uses ASCII encoding. The 
-          <a
-            class="emotion-6"
-            href="/reference/program/mongos/#std-program-mongos"
+          <code
+            class="emotion-0"
           >
-            <code
-              class="emotion-0"
-            >
-              mongos
-            </code>
-          </a>
-          
+            mongos
+          </code>
+        </a>
+        . The options are equivalent to the command-line
+configuration options. See 
+        <a
+          class="emotion-6"
+          href="/reference/configuration-options/"
+        >
+          Configuration File Options
+        </a>
+         for
+more information.
+      </p>
+      <p
+        class="emotion-5"
+      >
+        Ensure the configuration file uses ASCII encoding. The 
+        <a
+          class="emotion-6"
+          href="/reference/program/mongos/#std-program-mongos"
+        >
+          <code
+            class="emotion-0"
+          >
+            mongos
+          </code>
+        </a>
+        
 instance does not support configuration files with non-ASCII encoding,
 including UTF-8.
-        </p>
-      </dd>
-    </dl>
-  </div>
+      </p>
+    </dd>
+  </dl>
 </DocumentFragment>
 `;
 
 exports[`renders correctly with no directive_argument nodes 1`] = `
 <DocumentFragment>
-  <div>
-    <span
-      class="header-buffer"
-      id="std-label-php-language-center"
-    />
-  </div>
+  <span
+    class="header-buffer"
+    id="std-label-php-language-center"
+  />
 </DocumentFragment>
 `;

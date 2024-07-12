@@ -13,7 +13,7 @@ const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
   return (
     <>
       {targetIdentifier && (
-        <HeaderBuffer id={targetIdentifier.html_id} bufferSpace={`-${theme.header.navbarScrollOffset}`}></HeaderBuffer>
+        <HeaderBuffer id={targetIdentifier.html_id} bufferSpace={`-${theme.header.navbarScrollOffset}`} />
       )}
       <dt {...termProps}>
         {term.map((child, index) => (

@@ -41,7 +41,7 @@ const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => 
   useHashAnchor(html_id, targetRef);
 
   return (
-    <div ref={targetRef}>
+    <React.Fragment>
       {/* Render binary and program targets **and targets with the :hidden: flag
       as empty spans such that their IDs are rendered on the page. */}
       {dictList.length > 0 && !['binary', 'program'].includes(name) && !hidden ? (
@@ -54,9 +54,9 @@ const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => 
           </dd>
         </dl>
       ) : (
-        <span className="header-buffer" id={html_id} />
+        <span ref={targetRef} className="header-buffer" id={html_id} />
       )}
-    </div>
+    </React.Fragment>
   );
 };
 
