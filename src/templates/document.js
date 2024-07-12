@@ -32,6 +32,7 @@ const Document = ({ children, pageContext: { slug, page, isAssociatedProduct } }
   const pageOptions = page?.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
 
+  // Use for the demo, when actually work kicks off, this should become a utility
   const activeTutorial = Object.keys(multiPageTutorials).reduce((result, key) => {
     if (multiPageTutorials[key].slugs.includes(slug)) {
       result = multiPageTutorials[key];
