@@ -47,8 +47,8 @@ const Widgets = ({ children, pageTitle, slug, isInPresentationMode, template }) 
     title: pageTitle || 'Home',
   });
 
-  const hideWidgets = template === 'landing';
-  const hideFeedback = template === 'errorpage' || template === 'openapi';
+  const hideWidgets = ['landing', 'errorpage'].includes(template);
+  const hideFeedback = template === 'openapi';
 
   return (
     <FeedbackProvider page={feedbackData}>
