@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 
+// Hook that scrolls the current ref element into view
+// if it is the same as the current location's hash.
+// This is required on elements with id attribute
+// to overcome DOM tree being pushed down by rehydrated content
+// ie. saved tabbed content from local storage
 const useHashAnchor = (id, ref) => {
   const { hash } = useLocation();
 
@@ -10,7 +15,7 @@ const useHashAnchor = (id, ref) => {
       return;
     }
     setTimeout(() => {
-      ref.current.scrollIntoView(true);
+      ref.current.scrollIntoView();
     }, 100);
   }, [hash, id, ref]);
 };
