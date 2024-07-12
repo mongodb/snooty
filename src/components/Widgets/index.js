@@ -17,6 +17,7 @@ const WidgetsContainer = styled.div`
   position: fixed;
   right: ${theme.size.large};
   bottom: ${({ hasOpenLabDrawer }) => (hasOpenLabDrawer ? '70px' : theme.size.large)};
+  z-index: 1000;
 
   @media ${theme.screenSize.upToSmall} {
     background-color: white;
@@ -47,6 +48,7 @@ const Widgets = ({ children, pageTitle, slug, isInPresentationMode, template }) 
   });
 
   const hideWidgets = ['landing', 'errorpage'].includes(template);
+  const hideFeedback = template === 'openapi';
 
   return (
     <FeedbackProvider page={feedbackData}>
@@ -55,8 +57,12 @@ const Widgets = ({ children, pageTitle, slug, isInPresentationMode, template }) 
         /* Suspense at this level ensures that widgets will appear simultaneously rather than one-by-one as loaded */
         <SuspenseHelper fallback={null}>
           <WidgetsContainer className={widgetsContainer} hasOpenLabDrawer={isOpen}>
-            <FeedbackButton />
-            <FeedbackForm />
+            {!hideFeedback && (
+              <>
+                <FeedbackButton />
+                <FeedbackForm />
+              </>
+            )}
             <ChatbotFab />
           </WidgetsContainer>
         </SuspenseHelper>
