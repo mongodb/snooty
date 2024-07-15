@@ -7,18 +7,26 @@ import {
 
 const TEXT_NESTED_IN_A = 'Nested in A';
 const TEXT_NESTED_IN_B = 'Nested in B';
+const TEXT_NESTED_IN_C = 'Nested in C';
+const TEXT_NESTED_IN_D = 'Nested in D';
 const COMPONENT_A = 'testComponentA';
 const COMPONENT_B = 'testComponentB';
+const COMPONENT_C = 'testComponentC';
+const COMPONENT_D = 'testComponentD';
 
 const TestComponent = ({ children }) => {
   const ancestors = useAncestorComponentContext();
-  const isNestedInA = !!ancestors.testComponentA;
-  const isNestedInB = !!ancestors.testComponentB;
+  const isNestedInA = !!ancestors[COMPONENT_A];
+  const isNestedInB = !!ancestors[COMPONENT_B];
+  const isNestedInC = !!ancestors[COMPONENT_C];
+  const isNestedInD = !!ancestors[COMPONENT_D];
 
   return (
     <div>
       {isNestedInA && <span>{TEXT_NESTED_IN_A}</span>}
       {isNestedInB && <span>{TEXT_NESTED_IN_B}</span>}
+      {isNestedInC && <span>{TEXT_NESTED_IN_C}</span>}
+      {isNestedInD && <span>{TEXT_NESTED_IN_D}</span>}
       {children}
     </div>
   );
@@ -29,6 +37,8 @@ describe('Tests ancestor components context', () => {
     const wrapper = render(<TestComponent />);
     expect(wrapper.queryAllByText(TEXT_NESTED_IN_A)).toHaveLength(0);
     expect(wrapper.queryAllByText(TEXT_NESTED_IN_B)).toHaveLength(0);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_C)).toHaveLength(0);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_D)).toHaveLength(0);
   });
 
   it('keeps ancestor counts separate', () => {
@@ -49,6 +59,8 @@ describe('Tests ancestor components context', () => {
 
     expect(wrapper.queryAllByText(TEXT_NESTED_IN_A)).toHaveLength(2);
     expect(wrapper.queryAllByText(TEXT_NESTED_IN_B)).toHaveLength(1);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_C)).toHaveLength(0);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_D)).toHaveLength(0);
   });
 
   it('persists ancestors from previous providers', () => {
@@ -56,8 +68,8 @@ describe('Tests ancestor components context', () => {
       <AncestorComponentContextProvider component={COMPONENT_B}>
         <TestComponent>
           <AncestorComponentContextProvider component={COMPONENT_A}>
-            <AncestorComponentContextProvider component={COMPONENT_B}>
-              <AncestorComponentContextProvider component={COMPONENT_A}>
+            <AncestorComponentContextProvider component={COMPONENT_C}>
+              <AncestorComponentContextProvider component={COMPONENT_D}>
                 <TestComponent />
               </AncestorComponentContextProvider>
             </AncestorComponentContextProvider>
@@ -70,6 +82,27 @@ describe('Tests ancestor components context', () => {
 
     expect(wrapper.queryAllByText(TEXT_NESTED_IN_A)).toHaveLength(1);
     expect(wrapper.queryAllByText(TEXT_NESTED_IN_B)).toHaveLength(3);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_C)).toHaveLength(1);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_D)).toHaveLength(1);
+  });
+
+  it('maintains truthy value when component is nested multiple times', () => {
+    const wrapper = render(
+      <AncestorComponentContextProvider component={COMPONENT_A}>
+        <AncestorComponentContextProvider component={COMPONENT_A}>
+          <div>
+            <AncestorComponentContextProvider component={COMPONENT_A}>
+              <TestComponent />
+            </AncestorComponentContextProvider>
+          </div>
+        </AncestorComponentContextProvider>
+      </AncestorComponentContextProvider>
+    );
+
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_A)).toHaveLength(1);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_B)).toHaveLength(0);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_C)).toHaveLength(0);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_D)).toHaveLength(0);
   });
 
   it('does not add an ancestor when component is not added', () => {
@@ -81,5 +114,7 @@ describe('Tests ancestor components context', () => {
 
     expect(wrapper.queryAllByText(TEXT_NESTED_IN_A)).toHaveLength(0);
     expect(wrapper.queryAllByText(TEXT_NESTED_IN_B)).toHaveLength(0);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_C)).toHaveLength(0);
+    expect(wrapper.queryAllByText(TEXT_NESTED_IN_D)).toHaveLength(0);
   });
 });
