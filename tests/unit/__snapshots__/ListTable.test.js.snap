@@ -47,6 +47,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-3 * {
   font-size: 13px!important;
+  line-height: inherit;
 }
 
 .emotion-3>div {
@@ -58,17 +59,9 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   line-height: 20px;
 }
 
-.emotion-3>div {
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
 .emotion-3>div>div>*,
 .emotion-3>div>div p {
   margin: 0 0 12px;
-  line-height: inherit;
 }
 
 .emotion-3>div>div>*:last-child {
@@ -247,6 +240,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-3 * {
   font-size: 13px!important;
+  line-height: inherit;
 }
 
 .emotion-3>div {
@@ -295,6 +289,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-5 * {
   font-size: 13px!important;
+  line-height: inherit;
 }
 
 .emotion-5>div {
@@ -332,6 +327,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-16 * {
   font-size: 13px!important;
+  line-height: inherit;
 }
 
 .emotion-16>div {
@@ -343,17 +339,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   line-height: 20px;
 }
 
-.emotion-16>div {
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
 .emotion-16>div>div>*,
 .emotion-16>div>div p {
   margin: 0 0 12px;
-  line-height: inherit;
 }
 
 .emotion-16>div>div>*:last-child {
@@ -403,6 +391,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-18 * {
   font-size: 13px!important;
+  line-height: inherit;
 }
 
 .emotion-18>div {
@@ -414,17 +403,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   line-height: 20px;
 }
 
-.emotion-18>div {
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
 .emotion-18>div>div>*,
 .emotion-18>div>div p {
   margin: 0 0 12px;
-  line-height: inherit;
 }
 
 .emotion-18>div>div>*:last-child {
