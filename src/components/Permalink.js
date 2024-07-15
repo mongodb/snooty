@@ -20,7 +20,7 @@ const tooltipStyle = css`
   }
 `;
 
-const HeaderBuffer = styled.div`
+export const HeaderBuffer = styled.div`
   margin-top: ${({ bufferSpace }) => bufferSpace};
   position: absolute;
   // Add a bit of padding to help headings be more accurately set as "active" on FF and Safari
