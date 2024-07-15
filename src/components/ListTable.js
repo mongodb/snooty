@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Row, Cell, TableHeader, HeaderRow } from '@leafygreen-ui/table';
+import { Cell, HeaderCell, HeaderRow, Row, Table, TableBody, TableHead } from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { Theme } from '@leafygreen-ui/lib';
 import { theme } from '../theme/docsTheme';
+import { AncestorComponentContextProvider, useAncestorComponentContext } from '../context/ancestor-components-context';
 import ComponentFactory from './ComponentFactory';
 
-const CUSTOM_THEME_STYLES = {
-  // Need to redefine original styling to avoid undefined values. Needed while custom dark mode row styling exists
-  light: {
-    '--background-color': palette.white,
-    '--zebra-stripe-color': palette.gray.light3,
+// Need to define custom styles for custom components, such as stub cells
+const LIST_TABLE_THEME_STYLES = {
+  [Theme.Light]: {
+    stubCellBgColor: palette.gray.light3,
+    stubBorderColor: palette.gray.light2,
   },
-  // Temporary workaround to overwrite certain styling for dark mode due to difficulties with LG Table version upgrade (DOP-3614)
-  dark: {
-    '--background-color': palette.black,
-    '--zebra-stripe-color': palette.gray.dark4,
+  [Theme.Dark]: {
+    stubCellBgColor: palette.gray.dark4,
+    stubBorderColor: palette.gray.dark2,
   },
 };
 
@@ -31,40 +32,66 @@ const align = (key) => {
   }
 };
 
-const styleTable = ({ customAlign, customWidth, overrideZebraStripes }) => css`
+const styleTable = ({ customAlign, customWidth }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
-  // Font family was incorrect for certain tables in dark mode, most likely due to outdated component
-  font-family: 'Euclid Circular A', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+`;
 
-  table & {
-    margin: 0;
+const theadStyle = css`
+  // Allows its box shadow to appear above stub cell's background color
+  position: relative;
+`;
+
+const baseCellStyle = css`
+  // Keep legacy padding; important to prevent first-child and last-child overwrites
+  padding: 10px ${theme.size.small} !important;
+  // Force top alignment rather than LeafyGreen default middle (PD-1217)
+  vertical-align: top;
+
+  * {
+    // Wrap in selector to ensure it cascades down to every element
+    font-size: ${theme.fontSize.small} !important;
+    line-height: inherit;
   }
 
-  tbody > tr:nth-of-type(even) {
-    // Overriding bg color for dark mode rows prevents zebra striping. Adding this rule to restore zebra striping
-    ${overrideZebraStripes && `background-color: var(--zebra-stripe-color);`}
-  }
-
-  // This CSS target is the same one LG uses to force one of their styles. Use the same one to prevent it from overriding
-  // our styles https://github.com/mongodb/leafygreen-ui/blob/bc02626ea8779407b56a481a989e6b0f0bcd624c/packages/table/src/Row.tsx#L74
-  tbody > tr:nth-of-type(odd) > th {
-    ${overrideZebraStripes && `background-color: inherit;`}
+  // Ensure each cell is no higher than the highest content in row
+  & > div {
+    height: unset;
+    min-height: unset;
   }
 `;
 
-/* When using an empty <thead> as required by LeafyGreen, unstyle it to the best of our ability */
-const unstyleThead = css`
-  & * {
-    border: 0 !important;
-    min-height: unset !important;
-    padding: 0 !important;
+const bodyCellStyle = css`
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  * {
+    line-height: 20px;
+  }
+
+  // Target any nested components (paragraphs, admonitions, tables) and any paragraphs within those nested components
+  & > div > div > *,
+  & > div > div p {
+    margin: 0 0 12px;
+  }
+
+  // Prevent extra margin below last element (such as when multiple paragraphs are present)
+  & > div > div > *:last-child {
+    margin-bottom: 0;
   }
 `;
 
-const backgroundColorStyle = css`
-  background-color: var(--background-color);
+const headerCellStyle = css`
+  line-height: 24px;
+  font-weight: 600;
+  font-size: ${theme.fontSize.small};
+`;
+
+const stubCellStyle = ({ stubCellBgColor, stubBorderColor }) => css`
+  background-color: ${stubCellBgColor};
+  border-right: 3px solid ${stubBorderColor};
+  font-weight: 600;
 `;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
@@ -97,58 +124,46 @@ const getReferenceIds = (nodeList) => {
   return results;
 };
 
-const ListTableRow = ({ row = [], stubColumnCount, colorTheme, ...rest }) => (
-  <Row
-    className={cx(backgroundColorStyle)}
-    style={{ '--background-color': CUSTOM_THEME_STYLES[colorTheme]['--background-color'] }}
-  >
+/**
+ * Checks every row for the existence of a nested table.
+ * @param {object[]} rows
+ * @returns {boolean}
+ */
+const includesNestedTable = (rows) => {
+  const checkNodeForTable = (nodeData) => {
+    if (nodeData.type === 'directive' && nodeData.name === 'list-table') {
+      return true;
+    }
+
+    if (!nodeData.children || nodeData.children === 0) {
+      return false;
+    }
+
+    return nodeData.children.some((node) => checkNodeForTable(node));
+  };
+
+  return rows.some((row) => checkNodeForTable(row));
+};
+
+const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
+  <Row>
     {row.map((cell, colIndex) => {
-      const isStub = colIndex <= stubColumnCount - 1;
       const skipPTag = hasOneChild(cell.children);
       const contents = cell.children.map((child, i) => (
         <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
       ));
+
+      const isStub = colIndex <= stubColumnCount - 1;
+      const role = isStub ? 'rowheader' : null;
+
       return (
         <Cell
-          className={cx(css`
-            overflow-wrap: anywhere;
-            word-break: break-word;
-
-            /* Force top alignment rather than LeafyGreen default middle (PD-1217) */
-            vertical-align: top;
-
-            /* Apply grey background to stub <th> cells (PD-1216) */
-            ${isStub && `background-clip: padding-box; background-color: var(--stub-bg-color);`}
-
-            * {
-              font-size: ${theme.fontSize.small} !important;
-            }
-
-            & > div {
-              align-items: start;
-            }
-
-            & > div > span {
-              display: block;
-              align-self: center;
-            }
-
-            & > div > span > *,
-            & > div > span p {
-              margin: 0 0 12px;
-              line-height: inherit;
-            }
-
-            /* Prevent extra margin below last element */
-            & > div > span > *:last-child {
-              margin-bottom: 0;
-            }
-          `)}
-          style={{ ...(isStub && { '--stub-bg-color': CUSTOM_THEME_STYLES[colorTheme]['--zebra-stripe-color'] }) }}
-          isHeader={isStub}
           key={colIndex}
+          className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle(LIST_TABLE_THEME_STYLES[siteTheme]))}
+          role={role}
         >
-          {contents}
+          {/* Wrap in div to ensure contents are structured properly */}
+          <div>{contents}</div>
         </Cell>
       );
     })}
@@ -158,21 +173,19 @@ const ListTableRow = ({ row = [], stubColumnCount, colorTheme, ...rest }) => (
 ListTableRow.propTypes = {
   row: PropTypes.arrayOf(PropTypes.object),
   stubColumnCount: PropTypes.number.isRequired,
+  siteTheme: PropTypes.oneOf(Object.values(Theme)).isRequired,
 };
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
-  const { darkMode } = useDarkMode();
-  const colorTheme = darkMode ? 'dark' : 'light';
+  const ancestors = useAncestorComponentContext();
+  const { theme: siteTheme } = useDarkMode();
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
   const bodyRows = children[0].children.slice(headerRowCount);
   const columnCount = bodyRows[0].children[0].children.length;
 
-  // If :header-rows: 0 is specified or :header-rows: is omitted, spoof empty <thead> content to avoid LeafyGreen component crashing
-  const headerRows =
-    headerRowCount > 0
-      ? children[0].children[0].children.slice(0, headerRowCount)
-      : [{ children: Array(columnCount).fill({ type: 'text', value: '', children: [] }) }];
+  // Check if :header-rows: 0 is specified or :header-rows: is omitted
+  const headerRows = headerRowCount > 0 ? children[0].children[0].children.slice(0, headerRowCount) : [];
 
   let widths = null;
   const customWidths = options?.widths;
@@ -185,10 +198,14 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   }
 
   // get all ID's for elements within header, or first two rows of body
-  const elmIdsForScroll = getReferenceIds(headerRows[0].children.concat(bodyRows.slice(0, 3)));
+  const firstHeaderRowChildren = headerRows[0]?.children ?? [];
+  const elmIdsForScroll = getReferenceIds(firstHeaderRowChildren.concat(bodyRows.slice(0, 3)));
+
+  const hasNestedTable = useMemo(() => includesNestedTable(bodyRows), [bodyRows]);
+  const noTableNesting = !hasNestedTable && !ancestors?.table;
 
   return (
-    <>
+    <AncestorComponentContextProvider component={'table'}>
       {elmIdsForScroll.map((id) => (
         <div className="header-buffer" key={id} id={id} />
       ))}
@@ -197,51 +214,52 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           styleTable({
             customAlign: options?.align,
             customWidth: options?.width,
-            overrideZebraStripes: bodyRows.length > 10,
           })
         )}
-        style={{
-          ...CUSTOM_THEME_STYLES[colorTheme],
-        }}
-        columns={headerRows.map((row, rowIndex) => (
-          <HeaderRow key={rowIndex} className={cx(headerRowCount === 0 ? unstyleThead : null)}>
-            {row.children.map((cell, colIndex) => {
-              const skipPTag = hasOneChild(cell.children);
-              return (
-                <TableHeader
-                  className={cx(
-                    css`
-                      * {
-                        font-size: ${theme.fontSize.small};
-                        font-weight: 600;
-                      }
-                      ${widths && `width: ${widths[colIndex]}%`}
-                    `,
-                    backgroundColorStyle
-                  )}
-                  key={`${rowIndex}-${colIndex}`}
-                  label={cell.children.map((child, i) => (
-                    <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-                  ))}
-                />
-              );
-            })}
-          </HeaderRow>
-        ))}
-        data={bodyRows}
-        darkMode={darkMode}
+        shouldAlternateRowColor={noTableNesting && bodyRows.length > 4}
       >
-        {({ datum }) => (
-          <ListTableRow
-            {...rest}
-            stubColumnCount={stubColumnCount}
-            row={datum?.children?.[0]?.children}
-            darkMode={darkMode}
-            colorTheme={colorTheme}
-          />
+        {widths && (
+          <colgroup>
+            {widths.map((width, i) => (
+              <col key={i} style={{ width: `${width}%` }} />
+            ))}
+          </colgroup>
         )}
+        <TableHead className={cx(theadStyle)}>
+          {headerRows.map((row, rowIndex) => (
+            <HeaderRow key={rowIndex} data-testid="leafygreen-ui-header-row">
+              {row.children.map((cell, colIndex) => {
+                const skipPTag = hasOneChild(cell.children);
+                return (
+                  <HeaderCell
+                    className={cx(baseCellStyle, headerCellStyle)}
+                    key={`${rowIndex}-${colIndex}`}
+                    role="columnheader"
+                  >
+                    <div>
+                      {cell.children.map((child, i) => (
+                        <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
+                      ))}
+                    </div>
+                  </HeaderCell>
+                );
+              })}
+            </HeaderRow>
+          ))}
+        </TableHead>
+        <TableBody>
+          {bodyRows.map((row, i) => (
+            <ListTableRow
+              key={i}
+              {...rest}
+              stubColumnCount={stubColumnCount}
+              row={row.children?.[0]?.children}
+              siteTheme={siteTheme}
+            />
+          ))}
+        </TableBody>
       </Table>
-    </>
+    </AncestorComponentContextProvider>
   );
 };
 
