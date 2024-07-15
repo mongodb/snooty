@@ -7,12 +7,15 @@ import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
 import Link from '../components/Link';
+import ChatbotUi from '../components/ChatbotUi';
 
 const ErrorBox = styled('div')`
-  padding: 0px ${theme.size.default};
+  padding: 0 0 0 ${theme.size.default};
+  max-width: 455px;
 
   @media ${theme.screenSize.upToSmall} {
     padding: 0px ${theme.size.default};
+    width: unset;
   }
 `;
 
@@ -33,11 +36,22 @@ const SupportLink = styled(Link)`
   }
 `;
 
+const ImageContainer = styled.div`
+  width: 455px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+`;
+
 const NotFoundImage = () => {
   const altText = 'Page not found';
   const imgPath = 'assets/404.png';
 
-  return <img src={withPrefix(imgPath)} alt={altText} height={444} width={444} />;
+  return (
+    <ImageContainer>
+      <img src={withPrefix(imgPath)} alt={altText} height={444} width={444} />
+    </ImageContainer>
+  );
 };
 
 const ErrorBoxContainer = () => {
@@ -96,6 +110,7 @@ const ErrorBoxContainer = () => {
 const NotFound = () => {
   return (
     <main>
+      {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && <ChatbotUi template="errorpage" />}
       <div
         css={css`
           align-items: center;

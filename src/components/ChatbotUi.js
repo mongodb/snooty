@@ -47,13 +47,62 @@ const landingTemplateStyling = css`
     grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
   }
 
+  > div {
+    max-width: 862px;
+
+    @media ${theme.screenSize.upToLarge} {
+      max-width: unset;
+    }
+  }
+
   // Ensure direct children (Chatbot and Loading Skeleton) of the container are
   // in the correct column
   > div,
   span {
     grid-column: 2 / -2;
   }
+
+  // Styling the chatbot's loading skeleton
+  > span {
+    display: flex;
+    height: 48px;
+    align-items: self-end;
+  }
 `;
+
+const errorPageTemplateStyling = css`
+  position: sticky;
+  top: 0px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  padding: 16px 0px 0px 0px;
+
+  > div {
+    max-width: 910px;
+    margin: auto;
+
+    @media only screen and (max-width: 1038px) {
+      margin: 0 64px;
+    }
+  }
+
+  // Styling the chatbot's loading skeleton
+  > span {
+    max-width: 910px;
+    margin: auto;
+    display: flex;
+    height: 48px;
+    align-items: self-end;
+
+    @media only screen and (max-width: 1038px) {
+      margin: 0 64px;
+    }
+  }
+`;
+
+const templateStylingMap = {
+  errorpage: errorPageTemplateStyling,
+  landing: landingTemplateStyling,
+};
 
 const StyledChatBotUiContainer = styled.div`
   padding: ${theme.size.default} 50px;
@@ -63,23 +112,10 @@ const StyledChatBotUiContainer = styled.div`
   min-height: 96px;
   align-items: center;
 
-  > div {
-    max-width: 862px;
-
-    @media ${theme.screenSize.upToLarge} {
-      max-width: unset;
-    }
-  }
-
-  // Styling the chatbot's loading skeleton
-  > span {
-    display: flex;
-    height: 48px;
-    align-items: self-end;
-  }
-
   ${({ template }) =>
-    template === 'landing' && process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && landingTemplateStyling};
+    template in templateStylingMap &&
+    process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' &&
+    templateStylingMap[template]};
 `;
 
 const DocsChatbot = lazy(() =>
