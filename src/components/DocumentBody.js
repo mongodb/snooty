@@ -13,6 +13,7 @@ import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
 import { getSiteTitle } from '../utils/get-site-title';
+import { PageContext } from '../context/page-context';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -115,20 +116,22 @@ const DocumentBody = (props) => {
           >
             <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
               <FootnoteContext.Provider value={{ footnotes }}>
-                <div id="template-container">
-                  <Template {...props} useChatbot={useChatbot}>
-                    {pageNodes.map((child, index) => (
-                      <ComponentFactory
-                        key={index}
-                        metadata={metadata}
-                        nodeData={child}
-                        page={page}
-                        template={template}
-                        slug={slug}
-                      />
-                    ))}
-                  </Template>
-                </div>
+                <PageContext.Provider value={{ page, template, slug }}>
+                  <div id="template-container">
+                    <Template {...props} useChatbot={useChatbot}>
+                      {pageNodes.map((child, index) => (
+                        <ComponentFactory
+                          key={index}
+                          metadata={metadata}
+                          nodeData={child}
+                          page={page}
+                          template={template}
+                          slug={slug}
+                        />
+                      ))}
+                    </Template>
+                  </div>
+                </PageContext.Provider>
               </FootnoteContext.Provider>
             </ImageContextProvider>
           </Widgets>

@@ -7,6 +7,7 @@ import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import Layout from '../layouts/preview-layout';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
+import { PageContext } from '../context/page-context';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -91,6 +92,8 @@ const DocumentBody = (props) => {
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
+  // create context here ?
+
   return (
     <Layout
       pageContext={{
@@ -113,11 +116,13 @@ const DocumentBody = (props) => {
             isInPresentationMode={isInPresentationMode}
           >
             <FootnoteContext.Provider value={{ footnotes }}>
-              <Template {...props} useChatbot={useChatbot}>
-                {pageNodes.map((child, index) => (
-                  <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-                ))}
-              </Template>
+              <PageContext.Provider value={{ page, template, slug }}>
+                <Template {...props} useChatbot={useChatbot}>
+                  {pageNodes.map((child, index) => (
+                    <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                  ))}
+                </Template>
+              </PageContext.Provider>
             </FootnoteContext.Provider>
           </Widgets>
         </InstruqtProvider>
