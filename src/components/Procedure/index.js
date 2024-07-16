@@ -1,5 +1,4 @@
 import React, { useMemo, useContext } from 'react';
-import { css, cx } from '@leafygreen-ui/emotion';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
@@ -7,22 +6,6 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../../theme/docsTheme';
 import { PageContext } from '../../context/page-context';
 import Step from './Step';
-
-const THEME_STYLES = {
-  light: {
-    backgroundColor: 'initial',
-    color: 'initial',
-  },
-  dark: {
-    backgroundColor: palette.black,
-    color: palette.gray.light2,
-  },
-};
-
-const procedureStyles = (themeObj) => css`
-  background-color: ${themeObj.backgroundColor};
-  color: ${themeObj.color};
-`;
 
 const StyledProcedure = styled('div')`
   margin-top: ${theme.size.default};
@@ -35,7 +18,12 @@ const StyledProcedure = styled('div')`
     @media ${theme.screenSize.upToSmall} {
       padding-bottom: ${theme.size.medium};
     }
+ 
   `}
+  ${({ darkMode }) =>
+    `
+    background-color: ${darkMode ? palette.black : 'initial'};
+    color: ${darkMode ? palette.gray.light2 : 'initial'};`}
 `;
 
 // Returns an array of all "step" nodes nested within the "procedure" node and nested "include" nodes
@@ -64,17 +52,15 @@ const getSteps = (children) => {
 const Procedure = ({ nodeData: { children, options }, ...rest }) => {
   // Procedures will be 'connected' (or whatever is provided) on Landing pages or product landing
   // pages, and not connected on others
-
   const { template } = useContext(PageContext);
+  const { darkMode } = useDarkMode();
 
   const useLandingStyles = ['landing', 'product-landing'].includes(template);
   const style = useLandingStyles ? options?.style || 'connected' : 'normal';
   const steps = useMemo(() => getSteps(children), [children]);
 
-  const { darkMode, theme: siteTheme } = useDarkMode();
-
   return (
-    <StyledProcedure procedureStyle={style} className={cx(procedureStyles(THEME_STYLES[siteTheme]))}>
+    <StyledProcedure procedureStyle={style} darkMode={darkMode}>
       {steps.map((child, i) => (
         <Step
           {...rest}
