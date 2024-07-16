@@ -58,9 +58,14 @@ const landingStepStyles = {
   `,
   normal: (darkMode) => css`
     gap: ${theme.size.large};
+    h2 {
+      margin-top: -2px;
+    }
 
-    h2,
-    h3,
+    h3 {
+      margin-top: 2px;
+    }
+
     h4 {
       margin-top: unset;
     }
@@ -73,6 +78,9 @@ const StyledStep = styled('div')`
 
 const StepBlock = styled('div')`
   position: relative;
+
+  // want to add margin to top of circle if procedure style = normal
+  // and paragraph is h2
 `;
 
 const Content = 'div';
