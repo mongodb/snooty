@@ -97,7 +97,7 @@ const contentStyles = {
   `,
 };
 
-const Step = ({ nodeData: { children }, stepNumber, stepStyle, darkMode, template, ...rest }) => {
+const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'normal', darkMode, template, ...rest }) => {
   return (
     <StyledStep css={landingStepStyles[stepStyle](darkMode)}>
       <StepBlock>
