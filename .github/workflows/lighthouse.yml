@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - "main"
+      - "mmeigs-experiment-workflow"
   pull_request:
     types: ["opened", "synchronize"]
 
@@ -14,54 +15,8 @@ jobs:
       matrix: 
         project: ['cloud-docs', 'docs']
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
-      - name: Access Build Data
-        uses: mongodb/docs-worker-actions/build-artifact@main
-        env: 
-          PROJECT_TO_BUILD: ${{ matrix.project }}
-      - name: Build Snooty
-        env:
-          NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
-          NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
-          GATSBY_BUILD_FROM_JSON: true
-          GATSBY_PARSER_USER: docsworker-xlarge
-          GATSBY_SITE: ${{ matrix.project }}
-          GATSBY_PARSER_BRANCH: main
-        run: |
-          npm ci --legacy-peer-deps
-          npm run build
-      - name: Run Lighthouse
-        env: 
-          GATSBY_SITE: ${{ matrix.project }}
-        run: |
-          npm install -g @lhci/cli
-          lhci collect --additive --config=.mobile-lighthouserc.js
-          lhci collect --additive --config=.desktop-lighthouserc.js
-          lhci upload --target=filesystem --outputDir=./lhci
-      - name: Output commit timestamp
-        id: commit_timestamp_step
-        run: |
-          TIMESTAMP=$(git log -1 --format=%cd --date=iso-strict)
-          echo "COMMIT_TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
-      - name: Output commit message on the pull request
-        id: commit_message_step
-        run: |
-          if ${{ github.ref != 'refs/heads/main' }} == true; then
-            response=$(curl --request GET --url 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits?page=1&per_page=1000' --header 'Accept: application/vnd.github.v3+json' --header 'Content-Type: application/json')
-            last_commit_message=$(echo "$response" | jq '.[-1].commit.message')
-            echo "COMMIT_MESSAGE=$last_commit_message"
-            COMMIT_MESSAGE=$last_commit_message
-            echo "COMMIT_MESSAGE=${COMMIT_MESSAGE}" >> $GITHUB_ENV
-          else
-            FULL_MESSAGE="${{ github.event.head_commit.message }}"
-            FIRST_LINE=$(echo "$FULL_MESSAGE" | head -n 1)
-            echo "COMMIT_MESSAGE=${FIRST_LINE}" >> $GITHUB_ENV
-          fi
       - name: Upload Lighthouse to MongoDB
-        uses: mongodb/docs-worker-actions/upload-lighthouse@main
+        uses: mongodb/docs-worker-actions/upload-lighthouse@DOP-4831-save-s3
         env:
           PROJECT_TO_BUILD: ${{ matrix.project }}
           COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
