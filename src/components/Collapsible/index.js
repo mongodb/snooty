@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 import Box from '@leafygreen-ui/box';
 import { Body } from '@leafygreen-ui/typography';
 import Icon from '@leafygreen-ui/icon';
@@ -9,7 +10,10 @@ import Heading from '../Heading';
 import { collapsibleStyle, headerContainerStyle, headerStyle, iconStyle, innerContentStyle } from './styles';
 import './styles.css';
 
-// Collapsible component that contains
+// Collapsible component that contains:
+// options.heading        @str        (req)
+// options.sub_heading    @str
+// nodeData.children      nodeData[]
 const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
   const { darkMode } = useDarkMode();
   const { id, heading, sub_heading: subHeading } = options;
@@ -46,6 +50,15 @@ const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
   );
 };
 
-Collapsible.propTypes = {};
+Collapsible.propTypes = {
+  nodeData: PropTypes.shape({
+    children: PropTypes.arrayOf(PropTypes.object),
+    options: PropTypes.shape({
+      heading: PropTypes.string.isRequired,
+      sub_heading: PropTypes.string,
+      id: PropTypes.string,
+    }),
+  }),
+};
 
 export default Collapsible;

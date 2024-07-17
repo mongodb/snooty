@@ -1,11 +1,11 @@
 /* minor css to change nth child properties in browsers without support for :nth-child(n of [selector]) */
 
-body .collapsible {
+.collapsible {
   border-top: 1px solid #e8edeb;
   margin-top: 32px;
 }
 
-body .collapsible ~ .collapsible {
+.collapsible ~ .collapsible {
    border-top: none;
    margin-top: 0;
 }
