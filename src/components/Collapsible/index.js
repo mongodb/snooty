@@ -7,6 +7,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import ComponentFactory from '../ComponentFactory';
 import Heading from '../Heading';
 import { collapsibleStyle, headerContainerStyle, headerStyle, iconStyle, innerContentStyle } from './styles';
+import './styles.css';
 
 // Collapsible component that contains
 const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
@@ -22,7 +23,7 @@ const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
   );
 
   return (
-    <Box className={cx(collapsibleStyle)}>
+    <Box className={cx('collapsible', collapsibleStyle)}>
       <Box className={cx(headerContainerStyle)}>
         <Box>
           <Heading className={cx(headerStyle)} sectionDepth={2} nodeData={headingNodeData}>

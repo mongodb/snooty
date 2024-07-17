@@ -3,11 +3,15 @@ import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 
 export const collapsibleStyle = css`
-  margin-top: ${theme.size.large};
-  border-top: 1px solid ${palette.gray.light2};
   border-bottom: 1px solid ${palette.gray.light2};
-  @media ${theme.screenSize['2XLargeAndUp']} {
-    // min-width: 775px;
+
+  &:nth-child(1 of .collapsible) {
+    border-top: 1px solid ${palette.gray.light2};
+    margin-top: ${theme.size.large};
+  }
+
+  &:nth-last-child(1 of .collapsible) {
+    margin-bottom: ${theme.size.large};
   }
 `;
 
