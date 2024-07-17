@@ -20,7 +20,8 @@ const ErrorBox = styled('div')`
   }
 `;
 
-const SupportLink = styled(Link)`
+const getSupportLinkDynamicStyle = (darkMode) => css`
+  ${!darkMode && `color: ${palette.gray.dark1};`}
   display: inline-block;
   font-size: ${theme.fontSize.small};
   line-height: 20px;
@@ -30,10 +31,6 @@ const SupportLink = styled(Link)`
     margin-top: ${theme.size.default};
     margin-left: 0;
   }
-`;
-
-const getSupportLinkDynamicStyle = (darkMode) => css`
-  ${!darkMode && `color: ${palette.gray.dark1};`}
 `;
 
 const ImageContainer = styled.div`
@@ -96,13 +93,13 @@ const ErrorBoxContainer = () => {
         >
           Go to Docs Home
         </Button>
-        <SupportLink
+        <Link
           to="https://support.mongodb.com/welcome"
           hideExternalIcon={true}
           className={cx(getSupportLinkDynamicStyle(darkMode))}
         >
           Contact Support →
-        </SupportLink>
+        </Link>
       </LinkContainer>
     </ErrorBox>
   );
