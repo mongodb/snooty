@@ -28,7 +28,6 @@ export const headerStyle = css`
 
 export const iconStyle = (darkMode) => css`
   align-self: center;
-  cursor: pointer;
   flex-shrink: 0;
   ${!darkMode && `color: ${palette.gray.dark1}`}
 `;
@@ -36,5 +35,7 @@ export const iconStyle = (darkMode) => css`
 export const innerContentStyle = (open) => css`
   overflow: hidden;
   height: 0;
+  visibility: hidden;
   ${open && `height: auto;`}
+  ${open && `visibility: visible;`}
 `;

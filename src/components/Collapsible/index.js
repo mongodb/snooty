@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@leafygreen-ui/box';
-import { Body } from '@leafygreen-ui/typography';
 import Icon from '@leafygreen-ui/icon';
+import IconButton from '@leafygreen-ui/icon-button';
 import { cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { Body } from '@leafygreen-ui/typography';
 import ComponentFactory from '../ComponentFactory';
 import Heading from '../Heading';
 import { collapsibleStyle, headerContainerStyle, headerStyle, iconStyle, innerContentStyle } from './styles';
@@ -35,11 +36,13 @@ const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
           </Heading>
           <Body baseFontSize={13}>{subHeading}</Body>
         </Box>
-        <Icon
-          className={cx(iconStyle(darkMode))}
-          glyph={open ? 'ChevronDown' : 'ChevronRight'}
+        <IconButton
+          className={iconStyle(darkMode)}
+          aria-labelledby={'Expand the collapsed content'}
           onClick={() => setOpen(!open)}
-        />
+        >
+          <Icon glyph={open ? 'ChevronDown' : 'ChevronRight'} />
+        </IconButton>
       </Box>
       <Box className={cx(innerContentStyle(open))}>
         {children.map((c, i) => (
