@@ -63,7 +63,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
         )}
       >
         <HeadingTag
-          className={cx(headingStyles, 'contains-headerlink', sectionDepth === 1 ? h2Styling : '')}
+          className={cx(headingStyles, 'contains-headerlink', sectionDepth === 1 ? h2Styling : '', rest.className)}
           as={asHeading}
           weight="medium"
         >

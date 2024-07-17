@@ -12,6 +12,7 @@ import Chapter from './Chapters/Chapter';
 import Chapters from './Chapters';
 import Code from './Code/Code';
 import CodeIO from './Code/CodeIO';
+import Collapsible from './Collapsible';
 import CommunityPillLink from './CommunityPillLink';
 import Cond from './Cond';
 import Container from './Container';
@@ -136,6 +137,7 @@ const componentMap = {
   chapter: Chapter,
   chapters: Chapters,
   code: Code,
+  collapsible: Collapsible,
   'community-driver': CommunityPillLink,
   'io-code-block': CodeIO,
   cond: Cond,
