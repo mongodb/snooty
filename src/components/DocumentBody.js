@@ -165,7 +165,7 @@ export const Head = ({ pageContext, data }) => {
   const pageAst = data.page?.ast;
 
   if (!pageAst) {
-    console.error('Gatsby Head is missing important page AST');
+    throw new Error('Gatsby Head is missing important page AST');
   }
 
   const pageNodes = getNestedValue(['children'], pageAst) || [];
