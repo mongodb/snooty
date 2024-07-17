@@ -67,7 +67,7 @@ jobs:
             echo "COMMIT_MESSAGE=${FIRST_LINE}" >> $GITHUB_ENV
           fi
       - name: Upload Lighthouse to MongoDB
-        uses: mongodb/docs-worker-actions/upload-lighthouse@main
+        uses: mongodb/docs-worker-actions/upload-lighthouse@DOP-4831-save-s3
         env:
           PROJECT_TO_BUILD: ${{ matrix.project }}
           COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
