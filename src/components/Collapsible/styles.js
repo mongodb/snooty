@@ -34,7 +34,6 @@ export const iconStyle = (darkMode) => css`
 `;
 
 export const innerContentStyle = (open) => css`
-  transition: 0.3s linear;
   overflow: hidden;
   height: 0;
   ${open && `height: auto;`}
