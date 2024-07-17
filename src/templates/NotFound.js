@@ -1,9 +1,10 @@
 import React from 'react';
 import { withPrefix } from 'gatsby';
-import { css } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
 import Link from '../components/Link';
@@ -20,20 +21,19 @@ const ErrorBox = styled('div')`
 `;
 
 const SupportLink = styled(Link)`
-  color: ${palette.gray.dark1};
   display: inline-block;
   font-size: ${theme.fontSize.small};
   line-height: 20px;
   margin-left: 16px;
 
-  :hover {
-    color: ${palette.gray.dark1};
-  }
-
   @media ${theme.screenSize.upToSmall} {
     margin-top: ${theme.size.default};
     margin-left: 0;
   }
+`;
+
+const getSupportLinkDynamicStyle = (darkMode) => css`
+  ${!darkMode && `color: ${palette.gray.dark1};`}
 `;
 
 const ImageContainer = styled.div`
@@ -54,79 +54,80 @@ const NotFoundImage = () => {
   );
 };
 
+const ErrorTitle = styled.p`
+  font-family: 'MongoDB Value Serif';
+  font-size: 32px;
+  line-height: 40px;
+
+  @media ${theme.screenSize.upToSmall} {
+    font-size: ${theme.fontSize.h2};
+  }
+`;
+
+const ErrorSubtitle = styled.p`
+  font-size: ${theme.fontSize.default};
+  line-height: 28px;
+`;
+
+const LinkContainer = styled.div`
+  margin-top: ${theme.size.medium};
+
+  @media ${theme.screenSize.upToSmall} {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
 const ErrorBoxContainer = () => {
+  const { darkMode } = useDarkMode();
   return (
     <ErrorBox>
-      <p
-        css={css`
-          font-family: 'MongoDB Value Serif';
-          font-size: 32px;
-          line-height: 40px;
-
-          @media ${theme.screenSize.upToSmall} {
-            font-size: ${theme.fontSize.h2};
-          }
-        `}
-      >
-        Sorry, we can't find that page.
-      </p>
-      <p
-        css={css`
-          font-size: ${theme.fontSize.default};
-          line-height: 28px;
-        `}
-      >
-        The page might have been moved or deleted.
-      </p>
-      <div
-        css={css`
-          margin-top: ${theme.size.medium};
-
-          @media ${theme.screenSize.upToSmall} {
-            display: flex;
-            flex-direction: column;
-          }
-        `}
-      >
+      <ErrorTitle>Sorry, we can't find that page.</ErrorTitle>
+      <ErrorSubtitle>The page might have been moved or deleted.</ErrorSubtitle>
+      <LinkContainer>
         <Button
           href={baseUrl()}
           variant="primary"
-          css={css`
+          className={cx(css`
             @media ${theme.screenSize.upToSmall} {
               max-width: 150px;
             }
-          `}
+          `)}
         >
           Go to Docs Home
         </Button>
-        <SupportLink to="https://support.mongodb.com/welcome" hideExternalIcon={true}>
+        <SupportLink
+          to="https://support.mongodb.com/welcome"
+          hideExternalIcon={true}
+          className={cx(getSupportLinkDynamicStyle(darkMode))}
+        >
           Contact Support →
         </SupportLink>
-      </div>
+      </LinkContainer>
     </ErrorBox>
   );
 };
+
+const NotFoundContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-flow: row-reverse wrap;
+  justify-content: center;
+  margin-bottom: ${theme.size.xxlarge};
+
+  @media ${theme.screenSize.upToSmall} {
+    margin-top: -${theme.size.large};
+  }
+`;
 
 const NotFound = () => {
   return (
     <main>
       {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && <ChatbotUi template="errorpage" />}
-      <div
-        css={css`
-          align-items: center;
-          display: flex;
-          flex-flow: row-reverse wrap;
-          justify-content: center;
-          margin-bottom: ${theme.size.xxlarge};
-
-          @media ${theme.screenSize.upToSmall} {
-            margin-top: -${theme.size.large};
-          }
-        `}
-      >
+      <NotFoundContainer>
         <NotFoundImage />
         <ErrorBoxContainer />
-      </div>
+      </NotFoundContainer>
     </main>
   );
 };
