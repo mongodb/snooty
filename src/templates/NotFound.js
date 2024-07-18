@@ -52,24 +52,26 @@ const NotFoundImage = () => {
   );
 };
 
-const ErrorTitle = styled(Body)`
+const commonBodyStyling = `
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+`;
+
+const errorTitleStyling = css`
+  ${commonBodyStyling}
   font-family: 'MongoDB Value Serif';
   font-size: 32px;
   line-height: 40px;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
 
   @media ${theme.screenSize.upToSmall} {
     font-size: ${theme.fontSize.h2};
   }
 `;
 
-const ErrorSubtitle = styled(Body)`
+const errorSubtitleStyling = css`
+  ${commonBodyStyling}
   font-size: ${theme.fontSize.default};
   line-height: 28px;
-
-  margin-block-start: 1em;
-  margin-block-end: 1em;
 `;
 
 const LinkContainer = styled.div`
@@ -85,8 +87,8 @@ const ErrorBoxContainer = () => {
   const { darkMode } = useDarkMode();
   return (
     <ErrorBox>
-      <ErrorTitle>Sorry, we can't find that page.</ErrorTitle>
-      <ErrorSubtitle>The page might have been moved or deleted.</ErrorSubtitle>
+      <Body className={cx(errorTitleStyling)}>Sorry, we can't find that page.</Body>
+      <Body className={cx(errorSubtitleStyling)}>The page might have been moved or deleted.</Body>
       <LinkContainer>
         <Button
           href={baseUrl()}
