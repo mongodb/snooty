@@ -3,10 +3,10 @@
 exports[`admonitions render correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
-  background-color: #FFFFFF;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 16px;
   position: relative;
+  background-color: #FFFFFF;
   color: #0C2657;
   border: 2px solid #C3E7FE;
   box-shadow: inset 0px 2px 0px 0px #E1F7FF;
@@ -60,19 +60,25 @@ exports[`admonitions render correctly 1`] = `
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  left: 20px;
   position: absolute;
+  left: 20px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .emotion-3 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
-  line-height: 16px;
-  letter-spacing: 0.3px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  color: #001E2B;
   color: inherit;
   letter-spacing: 0.6px;
 }
@@ -92,6 +98,60 @@ exports[`admonitions render correctly 1`] = `
 .emotion-5 {
   font-size: 16px;
   line-height: 28px;
+}
+
+.emotion-5 .lg-ui-0001,
+.emotion-5 a {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 700;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+  border-radius: 2px;
+}
+
+.emotion-5 .lg-ui-0001:hover,
+.emotion-5 a:hover,
+.emotion-5 .lg-ui-0001:focus,
+.emotion-5 a:focus,
+.emotion-5 .lg-ui-0001:focus-visible,
+.emotion-5 a:focus-visible {
+  outline: none;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-5 .lg-ui-0001:hover span::after,
+.emotion-5 a:hover span::after,
+.emotion-5 .lg-ui-0001:focus span::after,
+.emotion-5 a:focus span::after,
+.emotion-5 .lg-ui-0001:focus-visible span::after,
+.emotion-5 a:focus-visible span::after {
+  display: none;
+}
+
+.emotion-5 .lg-ui-0001:focus-visible,
+.emotion-5 a:focus-visible {
+  position: relative;
+}
+
+.emotion-5 .lg-ui-0001,
+.emotion-5 a {
+  color: #0C2657;
+}
+
+.emotion-5 .lg-ui-0001:hover,
+.emotion-5 a:hover {
+  color: #083C90;
+}
+
+.emotion-5 .lg-ui-0001:focus-visible,
+.emotion-5 a:focus-visible {
+  box-shadow: 0 0 0 3px #FFFFFF,0 0 0 5px #0498EC;
 }
 
 <div

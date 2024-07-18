@@ -27,7 +27,7 @@ describe('Head', () => {
       useSnootyMetadata.mockImplementation(() => mockEOLSnootyMetadata);
     });
     it('renders the canonical tag from the snooty.toml', () => {
-      render(<Head pageContext={mockCompleteEOLPageContext} />);
+      render(<Head pageContext={mockCompleteEOLPageContext.pageContext} data={mockCompleteEOLPageContext.data} />);
       const _canonical = mockEOLSnootyMetadata.canonical;
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
@@ -46,9 +46,9 @@ describe('Head', () => {
       siteMetadataMock.mockImplementation(() => ({
         siteUrl: mockSiteUrl,
       }));
-      render(<Head pageContext={mockHeadPageContext} />);
+      render(<Head pageContext={mockHeadPageContext.pageContext} data={mockHeadPageContext.data} />);
       const urlSlug = 'stable';
-      const siteBasePrefix = mockHeadPageContext.repoBranches.siteBasePrefix;
+      const siteBasePrefix = mockHeadPageContext.pageContext.repoBranches.siteBasePrefix;
 
       const currentVersion = `${mockSiteUrl}/${siteBasePrefix}/${urlSlug}/`;
 
@@ -71,7 +71,7 @@ describe('Head', () => {
         siteUrl: 'https://www.mongodb.com',
         parserBranch: 'master',
       }));
-      render(<Head pageContext={mockHeadPageContext} />);
+      render(<Head pageContext={mockHeadPageContext.pageContext} data={mockHeadPageContext.data} />);
 
       const expectedCanonical = 'https://www.mongodb.com/docs/mongocli/upcoming/';
 
@@ -88,8 +88,8 @@ describe('Head', () => {
         parserBranch: 'v1.26',
       }));
 
-      const pageContext = { ...mockHeadPageContext, slug: '/introduction' };
-      render(<Head pageContext={pageContext} />);
+      const pageContext = { ...mockHeadPageContext.pageContext, slug: '/introduction' };
+      render(<Head pageContext={pageContext} data={mockHeadPageContext.data} />);
 
       const expectedCanonical = 'https://www.mongodb.com/docs/mongocli/stable/introduction/';
 
@@ -106,7 +106,7 @@ describe('Head', () => {
         siteUrl: 'https://www.mongodb.com',
         parserBranch: mockedParserBranch,
       }));
-      render(<Head pageContext={mockHeadPageContext} />);
+      render(<Head pageContext={mockHeadPageContext.pageContext} data={mockHeadPageContext.data} />);
 
       const expectedCanonical = `https://www.mongodb.com/docs/mongocli/${mockedParserBranch}/`;
 
@@ -136,14 +136,14 @@ describe('Head', () => {
         },
       ];
       const mockNonVersionedContext = {
-        ...mockHeadPageContext,
+        ...mockHeadPageContext.pageContext,
         slug: '/atlas-search/introduction',
         repoBranches: {
           branches: nonVersionedBranchArr,
           siteBasePrefix: 'docs/atlas',
         },
       };
-      render(<Head pageContext={mockNonVersionedContext} />);
+      render(<Head pageContext={mockNonVersionedContext} data={mockHeadPageContext.data} />);
 
       const expectedCanonical = 'https://www.mongodb.com/docs/atlas/atlas-search/introduction/';
 
@@ -178,19 +178,21 @@ describe('Head', () => {
       expect(canonicalTag).toHaveAttribute('href', metaCanonical.options.canonical);
     };
 
-    let mockPageContext = mockHeadPageContext;
     it('renders the canonical tag from directive rather than pulling from snooty.toml', () => {
-      mockPageContext = mockCompleteEOLPageContext;
-      mockPageContext.page.children.push(metaCanonical);
-      render(<Head pageContext={mockPageContext} />);
+      const mockPageContext = { ...mockHeadPageContext.pageContext };
+      const mockData = { ...mockCompleteEOLPageContext.data };
+      mockData.page.ast.children.push(metaCanonical);
+      render(<Head pageContext={mockPageContext} data={mockData} />);
 
       const canonicalTag = screen.getByTestId('canonical');
       expectCanonicalTagToBeCorrect(canonicalTag);
     });
 
     it("renders the canonical tag from directive rather than pulling from stable branch (version eol'd)", () => {
-      mockPageContext.page.children.push(metaCanonical);
-      render(<Head pageContext={mockPageContext} />);
+      const mockPageContext = { ...mockHeadPageContext.pageContext };
+      const mockData = { ...mockHeadPageContext.data };
+      mockData.page.ast.children.push(metaCanonical);
+      render(<Head pageContext={mockPageContext} data={mockData} />);
 
       const canonicalTag = screen.getByTestId('canonical');
       expectCanonicalTagToBeCorrect(canonicalTag);
@@ -201,8 +203,10 @@ describe('Head', () => {
       const modMockEOLSnootyMetadataToBeNotEOL = { ...mockEOLSnootyMetadata, eol: false };
       useSnootyMetadata.mockImplementation(() => modMockEOLSnootyMetadataToBeNotEOL);
 
-      mockPageContext.page.children.push(metaCanonical);
-      render(<Head pageContext={mockPageContext} />);
+      const mockPageContext = { ...mockHeadPageContext.pageContext };
+      const mockData = { ...mockHeadPageContext.data };
+      mockData.page.ast.children.push(metaCanonical);
+      render(<Head pageContext={mockPageContext} data={mockData} />);
 
       const canonicalTag = screen.getByTestId('canonical');
       expectCanonicalTagToBeCorrect(canonicalTag);
@@ -215,8 +219,9 @@ describe('Head', () => {
     });
 
     it.each([['/'], ['foo']])('renders based on slug', (slug) => {
-      const mockPageContext = { ...mockHeadPageContext, slug };
-      const { container } = render(<Head pageContext={mockPageContext} />);
+      const mockPageContext = { ...mockHeadPageContext.pageContext, slug };
+      const mockData = { ...mockHeadPageContext.data };
+      const { container } = render(<Head pageContext={mockPageContext} data={mockData} />);
       const hrefLangLinks = container.querySelectorAll('link.sl_opaque');
       expect(hrefLangLinks).toHaveLength(AVAILABLE_LANGUAGES.length);
       expect(hrefLangLinks).toMatchSnapshot();
@@ -231,13 +236,18 @@ describe('Head', () => {
       slug: mockPageId,
       repoBranches: { branches: [] },
     };
+    const mockData = {
+      page: {
+        ast: {},
+      },
+    };
     beforeEach(function () {
       metadata = { ...metadataWithoutToc };
       useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
     });
 
     it('correctly applies title, project name, and version', function () {
-      const { container } = render(<Head pageContext={pageContext} />);
+      const { container } = render(<Head pageContext={pageContext} data={mockData} />);
       const title = container.querySelector('title');
       expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title} ${metadata.branch}`);
     });
@@ -245,7 +255,7 @@ describe('Head', () => {
     it('defaults to project name and version if no page title', function () {
       metadata.slugToTitle = {};
       useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
-      const { container } = render(<Head pageContext={pageContext} />);
+      const { container } = render(<Head pageContext={pageContext} data={mockData} />);
       const title = container.querySelector('title');
       expect(title.innerHTML).toBe(`${metadata.title} ${metadata.branch}`);
     });
@@ -253,7 +263,7 @@ describe('Head', () => {
     it('only applies branch versions starting with a version number (v)', function () {
       metadata.branch = 'master';
       useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
-      const { container } = render(<Head pageContext={pageContext} />);
+      const { container } = render(<Head pageContext={pageContext} data={mockData} />);
       const title = container.querySelector('title');
       expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title}`);
     });
@@ -264,7 +274,7 @@ describe('Head', () => {
       delete metadata.title;
       metadata.slugToTitle = {};
       useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
-      const { container } = render(<Head pageContext={pageContext} />);
+      const { container } = render(<Head pageContext={pageContext} data={mockData} />);
       const title = container.querySelector('title');
       expect(title.innerHTML).toBe(`MongoDB Documentation`);
     });
