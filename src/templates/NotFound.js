@@ -5,12 +5,13 @@ import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
 import Link from '../components/Link';
 import ChatbotUi from '../components/ChatbotUi';
 
-const ErrorBox = styled('div')`
+const ErrorBox = styled.div`
   padding: 0 0 0 ${theme.size.default};
   max-width: 455px;
 
@@ -51,19 +52,24 @@ const NotFoundImage = () => {
   );
 };
 
-const ErrorTitle = styled.p`
+const ErrorTitle = styled(Body)`
   font-family: 'MongoDB Value Serif';
   font-size: 32px;
   line-height: 40px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
 
   @media ${theme.screenSize.upToSmall} {
     font-size: ${theme.fontSize.h2};
   }
 `;
 
-const ErrorSubtitle = styled.p`
+const ErrorSubtitle = styled(Body)`
   font-size: ${theme.fontSize.default};
   line-height: 28px;
+
+  margin-block-start: 1em;
+  margin-block-end: 1em;
 `;
 
 const LinkContainer = styled.div`
