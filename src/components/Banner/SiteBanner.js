@@ -28,10 +28,6 @@ const StyledBannerContent = styled.div(
     height: 100%;
 
     @media ${theme.screenSize.upToMedium} {
-      background-image: url(${getBannerSource(props.tabletImgPath)});
-    }
-
-    @media ${theme.screenSize.upToSmall} {
       background-image: url(${getBannerSource(props.mobileImgPath)});
     }
   `
@@ -60,11 +56,7 @@ const SiteBanner = () => {
 
   return (
     <StyledBannerContainer href={bannerContent.url} title={bannerContent.altText}>
-      <StyledBannerContent
-        imgPath={bannerContent.imgPath}
-        tabletImgPath={bannerContent.tabletImgPath}
-        mobileImgPath={bannerContent.mobileImgPath}
-      />
+      <StyledBannerContent imgPath={bannerContent.imgPath} mobileImgPath={bannerContent.mobileImgPath} />
     </StyledBannerContainer>
   );
 };
