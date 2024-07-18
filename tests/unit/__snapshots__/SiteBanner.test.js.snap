@@ -19,6 +19,12 @@ exports[`Banner component renders with a banner image 1`] = `
 
 @media only screen and (max-width: 767px) {
   .emotion-2 {
+    background-image: url(null);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-2 {
     background-image: url(https://snooty-koueq.mongodbstitch.com/banners/test-mobile.png);
   }
 }
