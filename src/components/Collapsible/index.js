@@ -11,10 +11,6 @@ import Heading from '../Heading';
 import { collapsibleStyle, headerContainerStyle, headerStyle, iconStyle, innerContentStyle } from './styles';
 import './styles.css';
 
-// Collapsible component that contains:
-// options.heading        @str        (req)
-// options.sub_heading    @str
-// nodeData.children      nodeData[]
 const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
   const { darkMode } = useDarkMode();
   const { id, heading, sub_heading: subHeading } = options;
