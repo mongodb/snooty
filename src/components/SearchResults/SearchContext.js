@@ -69,8 +69,8 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   // get vars from URL
   // state management for Search is within URL.
   const [searchParams, setSearchParams] = useState(() => new URLSearchParams(search));
-  const page = parseInt(searchParams.get('page') || 1);
   const searchTerm = searchParams.get('q');
+  const page = parseInt(searchParams.get('page') || 1);
   const searchFilter = searchParams.get('searchProperty');
 
   // state vars to derive selected category and versions in dropdown
@@ -97,8 +97,9 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
     if (page) {
       newSearch.set('page', page);
     }
+
     setSearchParams(newSearch);
-    navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
+    navigate(`/search?${newSearch.toString()}`, { state: { preserveScroll: true } });
   };
 
   const handleFacetChange = useCallback(

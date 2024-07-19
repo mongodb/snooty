@@ -6,7 +6,6 @@ import { theme } from '../../theme/docsTheme';
 import { InstruqtContext } from '../Instruqt/instruqt-context';
 import { SuspenseHelper } from '../SuspenseHelper';
 import { FeedbackProvider, FeedbackForm, FeedbackButton, useFeedbackData } from './FeedbackWidget';
-import ChatbotFab from './ChatbotWidget/ChatbotFab';
 
 const WidgetsContainer = styled.div`
   display: flex;
@@ -63,7 +62,6 @@ const Widgets = ({ children, pageTitle, slug, isInPresentationMode, template }) 
                 <FeedbackForm />
               </>
             )}
-            <ChatbotFab />
           </WidgetsContainer>
         </SuspenseHelper>
       )}

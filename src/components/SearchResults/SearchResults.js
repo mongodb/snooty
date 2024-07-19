@@ -4,11 +4,9 @@ import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
-import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { H3, Overline } from '@leafygreen-ui/typography';
-import queryString from 'query-string';
 import { ParagraphSkeleton } from '@leafygreen-ui/skeleton-loader';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
@@ -274,7 +272,6 @@ const SearchResults = () => {
 
   const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
-  const [searchField, setSearchField] = useState(searchTerm || '');
 
   const [searchFinished, setSearchFinished] = useState(() => !searchTerm);
   const [searchCount, setSearchCount] = useState();
@@ -374,14 +371,6 @@ const SearchResults = () => {
       });
   }, [searchTerm]);
 
-  const submitNewSearch = (event) => {
-    const newValue = event.target[0]?.value;
-    const { page } = queryString.parse(search);
-    if (!newValue || (newValue === searchTerm && parseInt(page) === 1)) return;
-
-    setSearchTerm(newValue);
-  };
-
   const onPageClick = useCallback(
     async (isForward) => {
       const currentPage = parseInt(searchParams.get('page')) || 1;
@@ -398,15 +387,6 @@ const SearchResults = () => {
     <SearchResultsContainer showFacets={showFacets}>
       <HeaderContainer className={cx(headerContainerDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
         <H3 as="h1">Search Results</H3>
-        <SearchInput
-          ref={searchBoxRef}
-          value={searchField}
-          placeholder="Search"
-          onSubmit={submitNewSearch}
-          onChange={(e) => {
-            setSearchField(e.target.value);
-          }}
-        />
         {/* Classname-attached searchTerm needed for Smartling localization */}
         <span style={{ display: 'none' }} className="sl-search-keyword">
           {searchTerm}

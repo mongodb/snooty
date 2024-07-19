@@ -6,6 +6,7 @@ import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
 import { Sidenav } from '../components/Sidenav';
 import RootProvider from '../components/RootProvider';
+import { SearchContextProvider } from '../components/SearchResults/SearchContext';
 import { getTemplate } from '../utils/get-template';
 import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
@@ -13,6 +14,12 @@ import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
 import ActionBar from '../components/ActionBar/ActionBar';
+
+/**
+ * Check for feature flag here to make it easier to pass down for testing purposes
+ * This is duplicated from SearchWrapper
+ */
+const SHOW_FACETS = process.env.GATSBY_FEATURE_FACETED_SEARCH === 'true';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -103,7 +110,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
   useDelightedSurvey(slug, project);
 
   return (
-    <>
+    <div id="main-container">
       <Global styles={globalCSS} />
       <RootProvider
         slug={slug}
@@ -112,31 +119,33 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
         remoteMetadata={remoteMetadata}
         project={project}
       >
-        <GlobalGrid isInPresentationMode={isInPresentationMode}>
-          {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} slug={slug} template={template} /> : <div />}
-          {sidenav && !isInPresentationMode ? (
-            <Sidenav
-              chapters={chapters}
-              guides={guides}
-              page={page.ast}
-              pageTitle={pageTitle}
-              repoBranches={repoBranches}
-              siteTitle={title}
-              slug={slug}
-              toctree={toctree}
-              eol={eol}
-              template={template}
-            />
-          ) : (
-            <div />
-          )}
-          <StyledContentContainer>
-            {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && <ActionBar template={template} />}
-            <ContentTransition slug={slug}>{children}</ContentTransition>
-          </StyledContentContainer>
-        </GlobalGrid>
+        <SearchContextProvider showFacets={SHOW_FACETS}>
+          <GlobalGrid isInPresentationMode={isInPresentationMode}>
+            {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} slug={slug} template={template} /> : <div />}
+            {sidenav && !isInPresentationMode ? (
+              <Sidenav
+                chapters={chapters}
+                guides={guides}
+                page={page.ast}
+                pageTitle={pageTitle}
+                repoBranches={repoBranches}
+                siteTitle={title}
+                slug={slug}
+                toctree={toctree}
+                eol={eol}
+                template={template}
+              />
+            ) : (
+              <div />
+            )}
+            <StyledContentContainer>
+              {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && <ActionBar template={template} />}
+              <ContentTransition slug={slug}>{children}</ContentTransition>
+            </StyledContentContainer>
+          </GlobalGrid>
+        </SearchContextProvider>
       </RootProvider>
-    </>
+    </div>
   );
 };
 

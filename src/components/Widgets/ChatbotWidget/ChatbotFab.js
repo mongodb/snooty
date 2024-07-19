@@ -1,16 +1,13 @@
 import { lazy, Fragment } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@leafygreen-ui/emotion';
-
+import { useChatbotContext } from 'mongodb-chatbot-ui';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { DEFAULT_MAX_INPUT, defaultSuggestedPrompts } from '../../ChatbotUi';
 import { MongoDbLegalDisclosure } from './MongoDBLegal';
 import { PoweredByAtlasVectorSearch } from './PoweredByAtlasSearch';
 
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
-const FloatingActionButtonTrigger = lazy(() =>
-  import('mongodb-chatbot-ui').then((module) => ({ default: module.FloatingActionButtonTrigger }))
-);
 const ModalView = lazy(() => import('mongodb-chatbot-ui').then((module) => ({ default: module.ModalView })));
 
 const StyledChatBotFabContainer = styled.div`
@@ -20,7 +17,17 @@ const StyledChatBotFabContainer = styled.div`
   }
 `;
 
-const ChatbotFab = () => {
+const ChatbotFabActionButton = ({ text }) => {
+  const { openChat, setInputText, handleSubmit } = useChatbotContext();
+  const onHandleChatAction = () => {
+    setInputText(text);
+    openChat();
+    handleSubmit();
+  };
+  return <div onClick={onHandleChatAction}>{`${CHATBOT_WIDGET_TEXT} ${text}`}</div>;
+};
+
+const ChatbotFab = ({ text }) => {
   const { snootyEnv } = useSiteMetadata();
   const CHATBOT_SERVER_BASE_URL =
     snootyEnv === 'dotcomprd'
@@ -32,7 +39,7 @@ const ChatbotFab = () => {
       className={fabChatbot}
     >
       <Chatbot name="MongoDB AI" maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
-        <FloatingActionButtonTrigger text={CHATBOT_WIDGET_TEXT} />
+        <ChatbotFabActionButton text={text} />
         <ModalView
           disclaimer={
             <Fragment>
