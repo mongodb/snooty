@@ -62,7 +62,7 @@ const SiteBanner = () => {
     <StyledBannerContainer href={bannerContent.url} title={bannerContent.altText}>
       <StyledBannerContent
         imgPath={bannerContent.imgPath}
-        tabletImgPath={bannerContent.tabletImgPath}
+        tabletImgPath={bannerContent.tabletImgPath ?? bannerContent.mobileImgPath}
         mobileImgPath={bannerContent.mobileImgPath}
       />
     </StyledBannerContainer>
