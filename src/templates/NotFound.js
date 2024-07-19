@@ -52,26 +52,16 @@ const NotFoundImage = () => {
   );
 };
 
-const commonBodyStyling = `
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-`;
-
 const errorTitleStyling = css`
-  ${commonBodyStyling}
   font-family: 'MongoDB Value Serif';
   font-size: 32px;
   line-height: 40px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
 
   @media ${theme.screenSize.upToSmall} {
     font-size: ${theme.fontSize.h2};
   }
-`;
-
-const errorSubtitleStyling = css`
-  ${commonBodyStyling}
-  font-size: ${theme.fontSize.default};
-  line-height: 28px;
 `;
 
 const LinkContainer = styled.div`
@@ -88,7 +78,7 @@ const ErrorBoxContainer = () => {
   return (
     <ErrorBox>
       <Body className={cx(errorTitleStyling)}>Sorry, we can't find that page.</Body>
-      <Body className={cx(errorSubtitleStyling)}>The page might have been moved or deleted.</Body>
+      <Body>The page might have been moved or deleted.</Body>
       <LinkContainer>
         <Button
           href={baseUrl()}
