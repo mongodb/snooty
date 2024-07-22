@@ -20,6 +20,7 @@ const mockSnootyEnv = (snootyEnv) => {
 const mockBannerContent = {
   altText: 'Test',
   imgPath: '/banners/test.png',
+  tabletImgPath: '/banners/test-tablet.png',
   mobileImgPath: '/banners/test-mobile.png',
   url: 'https://mongodb.com',
 };

@@ -1,0 +1,36 @@
+import React from 'react';
+import { render, act } from '@testing-library/react';
+
+import Collapsible from '../../src/components/Collapsible';
+import mockData from './data/Collapsible.test.json';
+
+describe('collapsible component', () => {
+  it('renders all the content in the options and children', () => {
+    const renderResult = render(<Collapsible nodeData={mockData}></Collapsible>);
+    expect(renderResult.asFragment()).toMatchSnapshot();
+    expect(renderResult.getByText('This is a heading')).toBeTruthy();
+    expect(renderResult.getByText('This is a subheading')).toBeTruthy();
+    expect(renderResult.getByText('This is collapsible content')).toBeTruthy();
+  });
+
+  it('renders the content and correct icon when interacted', async () => {
+    const renderResult = render(<Collapsible nodeData={mockData}></Collapsible>);
+    let button = renderResult.getByRole('button');
+    const collapsedContent = renderResult.getByText('This is collapsible content');
+
+    let icon = button.querySelector('[role=img]');
+    expect(icon.getAttribute('aria-label')).toContain('Chevron');
+    expect(icon.getAttribute('aria-label')).toContain('Right');
+    expect(collapsedContent).not.toBeVisible();
+
+    await act(async () => {
+      button.click();
+    });
+
+    button = renderResult.getByRole('button');
+    icon = button.querySelector('[role=img]');
+    expect(icon.getAttribute('aria-label')).toContain('Chevron');
+    expect(icon.getAttribute('aria-label')).toContain('Down');
+    expect(collapsedContent).toBeVisible();
+  });
+});

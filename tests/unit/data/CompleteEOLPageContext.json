@@ -1,280 +1,286 @@
 {
-  "slug": "/",
-  "repoBranches": {
-    "branches": [{
-      "gitBranchName": "master",
-      "active": false,
-      "urlAliases": null,
-      "publishOriginalBranchName": false,
-      "urlSlug": "master",
-      "versionSelectorLabel": "master",
-      "isStableBranch": false,
-      "buildsWithSnooty": true
-    }],
-    "siteBasePrefix": "docs/atlas-open-service-broker"
+  "pageContext": {
+    "slug": "/",
+    "repoBranches": {
+      "branches": [{
+        "gitBranchName": "master",
+        "active": false,
+        "urlAliases": null,
+        "publishOriginalBranchName": false,
+        "urlSlug": "master",
+        "versionSelectorLabel": "master",
+        "isStableBranch": false,
+        "buildsWithSnooty": true
+      }],
+      "siteBasePrefix": "docs/atlas-open-service-broker"
+    },
+    "associatedReposInfo": {},
+    "isAssociatedProduct": false
   },
-  "associatedReposInfo": {},
-  "isAssociatedProduct": false,
-  "page": {
-    "type": "root",
-    "children": [{
-        "type": "target",
+  "data": {
+    "page": {
+      "ast": {
+        "type": "root",
         "children": [{
-          "type": "target_identifier",
-          "children": [],
-          "ids": [
-            "atlas-osb"
-          ]
-        }],
-        "domain": "std",
-        "name": "label",
-        "html_id": "std-label-atlas-osb"
-      },
-      {
-        "type": "directive",
-        "children": [],
-        "domain": "",
-        "name": "meta",
-        "argument": [],
-        "options": {
-          "robots": "none"
-        }
-      },
-      {
-        "type": "section",
-        "children": [{
-            "type": "heading",
+            "type": "target",
             "children": [{
-                "type": "text",
-                "value": "MongoDB Atlas Open Service Broker on "
-              },
-              {
-                "type": "substitution_reference",
-                "children": [{
-                  "type": "text",
-                  "value": "Kubernetes"
-                }],
-                "name": "k8s"
-              }
-            ],
-            "id": "mongodb-atlas-open-service-broker-on-k8s"
+              "type": "target_identifier",
+              "children": [],
+              "ids": [
+                "atlas-osb"
+              ]
+            }],
+            "domain": "std",
+            "name": "label",
+            "html_id": "std-label-atlas-osb"
           },
           {
             "type": "directive",
             "children": [],
             "domain": "",
-            "name": "default-domain",
-            "argument": [{
-              "type": "text",
-              "position": {
-                "start": {
-                  "line": 11
-                }
-              },
-              "value": "mongodb"
-            }]
-          },
-          {
-            "type": "directive",
-            "children": [{
-              "type": "root",
-              "children": [{
-                "type": "directive",
-                "children": [{
-                  "type": "paragraph",
-                  "children": [{
-                      "type": "text",
-                      "value": "Atlas Open Service Broker is deprecated. Use the "
-                    },
-                    {
-                      "type": "reference",
-                      "children": [{
-                        "type": "text",
-                        "value": "MongoDB Atlas Operator"
-                      }],
-                      "refuri": "https://github.com//mongodb/mongodb-atlas-kubernetes"
-                    },
-                    {
-                      "type": "text",
-                      "value": " instead."
-                    }
-                  ]
-                }],
-                "domain": "",
-                "name": "important",
-                "argument": []
-              }],
-              "fileid": "includes/deprecate-osb.rst"
-            }],
-            "domain": "",
-            "name": "include",
-            "argument": [{
-              "type": "text",
-              "position": {
-                "start": {
-                  "line": 13
-                }
-              },
-              "value": "/includes/deprecate-osb.rst"
-            }]
-          },
-          {
-            "type": "directive",
-            "children": [],
-            "domain": "",
-            "name": "contents",
-            "argument": [{
-              "type": "text",
-              "position": {
-                "start": {
-                  "line": 15
-                }
-              },
-              "value": "On this page"
-            }],
+            "name": "meta",
+            "argument": [],
             "options": {
-              "local": true,
-              "backlinks": "none",
-              "depth": 1,
-              "class": "singlecol"
+              "robots": "none"
             }
           },
           {
-            "type": "paragraph",
+            "type": "section",
             "children": [{
-                "type": "text",
-                "value": "The MongoDB Atlas Open Service Broker allows you to deploy\n"
-              },
-              {
-                "type": "reference",
+                "type": "heading",
                 "children": [{
+                    "type": "text",
+                    "value": "MongoDB Atlas Open Service Broker on "
+                  },
+                  {
+                    "type": "substitution_reference",
+                    "children": [{
+                      "type": "text",
+                      "value": "Kubernetes"
+                    }],
+                    "name": "k8s"
+                  }
+                ],
+                "id": "mongodb-atlas-open-service-broker-on-k8s"
+              },
+              {
+                "type": "directive",
+                "children": [],
+                "domain": "",
+                "name": "default-domain",
+                "argument": [{
                   "type": "text",
-                  "value": "MongoDB Atlas"
-                }],
-                "refuri": "https://www.mongodb.com/docs/atlas/getting-started/"
+                  "position": {
+                    "start": {
+                      "line": 11
+                    }
+                  },
+                  "value": "mongodb"
+                }]
               },
               {
-                "type": "text",
-                "value": " clusters with any platform\nthat supports the\n"
-              },
-              {
-                "type": "reference",
+                "type": "directive",
                 "children": [{
-                  "type": "text",
-                  "value": "Open Service Broker API"
+                  "type": "root",
+                  "children": [{
+                    "type": "directive",
+                    "children": [{
+                      "type": "paragraph",
+                      "children": [{
+                          "type": "text",
+                          "value": "Atlas Open Service Broker is deprecated. Use the "
+                        },
+                        {
+                          "type": "reference",
+                          "children": [{
+                            "type": "text",
+                            "value": "MongoDB Atlas Operator"
+                          }],
+                          "refuri": "https://github.com//mongodb/mongodb-atlas-kubernetes"
+                        },
+                        {
+                          "type": "text",
+                          "value": " instead."
+                        }
+                      ]
+                    }],
+                    "domain": "",
+                    "name": "important",
+                    "argument": []
+                  }],
+                  "fileid": "includes/deprecate-osb.rst"
                 }],
-                "refuri": "https://www.openservicebrokerapi.org/"
+                "domain": "",
+                "name": "include",
+                "argument": [{
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 13
+                    }
+                  },
+                  "value": "/includes/deprecate-osb.rst"
+                }]
               },
               {
-                "type": "text",
-                "value": ",\nsuch as "
+                "type": "directive",
+                "children": [],
+                "domain": "",
+                "name": "contents",
+                "argument": [{
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "value": "On this page"
+                }],
+                "options": {
+                  "local": true,
+                  "backlinks": "none",
+                  "depth": 1,
+                  "class": "singlecol"
+                }
               },
               {
-                "type": "reference",
+                "type": "paragraph",
                 "children": [{
-                  "type": "text",
-                  "value": "Kubernetes"
-                }],
-                "refuri": "https://kubernetes.io/docs/home"
+                    "type": "text",
+                    "value": "The MongoDB Atlas Open Service Broker allows you to deploy\n"
+                  },
+                  {
+                    "type": "reference",
+                    "children": [{
+                      "type": "text",
+                      "value": "MongoDB Atlas"
+                    }],
+                    "refuri": "https://www.mongodb.com/docs/atlas/getting-started/"
+                  },
+                  {
+                    "type": "text",
+                    "value": " clusters with any platform\nthat supports the\n"
+                  },
+                  {
+                    "type": "reference",
+                    "children": [{
+                      "type": "text",
+                      "value": "Open Service Broker API"
+                    }],
+                    "refuri": "https://www.openservicebrokerapi.org/"
+                  },
+                  {
+                    "type": "text",
+                    "value": ",\nsuch as "
+                  },
+                  {
+                    "type": "reference",
+                    "children": [{
+                      "type": "text",
+                      "value": "Kubernetes"
+                    }],
+                    "refuri": "https://kubernetes.io/docs/home"
+                  },
+                  {
+                    "type": "text",
+                    "value": ". The broker\nuses "
+                  },
+                  {
+                    "type": "reference",
+                    "children": [{
+                      "type": "text",
+                      "value": "Atlas Public API"
+                    }],
+                    "refuri": "https://www.mongodb.com/docs/atlas/reference/api-resources/"
+                  },
+                  {
+                    "type": "text",
+                    "value": " endpoints to\ndeploy replica set and sharded cluster deployments that "
+                  },
+                  {
+                    "type": "substitution_reference",
+                    "children": [{
+                      "type": "text",
+                      "value": "Atlas"
+                    }],
+                    "name": "service"
+                  },
+                  {
+                    "type": "text",
+                    "value": "\nmanages. By integrating with the Atlas Open Service Broker, cloud-native platforms can\nfully automate the deployment and management of MongoDB "
+                  },
+                  {
+                    "type": "substitution_reference",
+                    "children": [{
+                      "type": "text",
+                      "value": "Atlas"
+                    }],
+                    "name": "service"
+                  },
+                  {
+                    "type": "text",
+                    "value": "\nclusters."
+                  }
+                ]
               },
               {
-                "type": "text",
-                "value": ". The broker\nuses "
-              },
-              {
-                "type": "reference",
+                "type": "paragraph",
                 "children": [{
-                  "type": "text",
-                  "value": "Atlas Public API"
-                }],
-                "refuri": "https://www.mongodb.com/docs/atlas/reference/api-resources/"
+                    "type": "text",
+                    "value": "You provide the Atlas Open Service Broker with the specifications for your MongoDB\ncluster. The Atlas Open Service Broker uses this information to tell "
+                  },
+                  {
+                    "type": "substitution_reference",
+                    "children": [{
+                      "type": "text",
+                      "value": "Kubernetes"
+                    }],
+                    "name": "k8s"
+                  },
+                  {
+                    "type": "text",
+                    "value": " how to\nconfigure that cluster including provisioning storage, setting up the\nnetwork connections, and configuring database users."
+                  }
+                ]
               },
               {
-                "type": "text",
-                "value": " endpoints to\ndeploy replica set and sharded cluster deployments that "
-              },
-              {
-                "type": "substitution_reference",
-                "children": [{
-                  "type": "text",
-                  "value": "Atlas"
-                }],
-                "name": "service"
-              },
-              {
-                "type": "text",
-                "value": "\nmanages. By integrating with the Atlas Open Service Broker, cloud-native platforms can\nfully automate the deployment and management of MongoDB "
-              },
-              {
-                "type": "substitution_reference",
-                "children": [{
-                  "type": "text",
-                  "value": "Atlas"
-                }],
-                "name": "service"
-              },
-              {
-                "type": "text",
-                "value": "\nclusters."
-              }
-            ]
-          },
-          {
-            "type": "paragraph",
-            "children": [{
-                "type": "text",
-                "value": "You provide the Atlas Open Service Broker with the specifications for your MongoDB\ncluster. The Atlas Open Service Broker uses this information to tell "
-              },
-              {
-                "type": "substitution_reference",
-                "children": [{
-                  "type": "text",
-                  "value": "Kubernetes"
-                }],
-                "name": "k8s"
-              },
-              {
-                "type": "text",
-                "value": " how to\nconfigure that cluster including provisioning storage, setting up the\nnetwork connections, and configuring database users."
-              }
-            ]
-          },
-          {
-            "type": "directive",
-            "children": [],
-            "domain": "",
-            "name": "toctree",
-            "argument": [],
-            "options": {
-              "titlesonly": true
-            },
-            "entries": [{
-                "title": "Installation",
-                "slug": "/installation"
-              },
-              {
-                "title": "Database Deployment",
-                "slug": "/deploy"
-              },
-              {
-                "title": "User Management",
-                "slug": "/tutorial/manage-database-users"
-              },
-              {
-                "slug": "/third-party-licenses"
-              },
-              {
-                "title": "Release Notes",
-                "slug": "/release-notes"
+                "type": "directive",
+                "children": [],
+                "domain": "",
+                "name": "toctree",
+                "argument": [],
+                "options": {
+                  "titlesonly": true
+                },
+                "entries": [{
+                    "title": "Installation",
+                    "slug": "/installation"
+                  },
+                  {
+                    "title": "Database Deployment",
+                    "slug": "/deploy"
+                  },
+                  {
+                    "title": "User Management",
+                    "slug": "/tutorial/manage-database-users"
+                  },
+                  {
+                    "slug": "/third-party-licenses"
+                  },
+                  {
+                    "title": "Release Notes",
+                    "slug": "/release-notes"
+                  }
+                ]
               }
             ]
           }
-        ]
+        ],
+        "fileid": "index.txt",
+        "options": {
+          "noprevnext": ""
+        }
       }
-    ],
-    "fileid": "index.txt",
-    "options": {
-      "noprevnext": ""
     }
   }
 }
