@@ -67,7 +67,7 @@ const blockStyle = css`
   }
 `;
 
-const Explore = ({ nodeData: { children, argument }, ...rest }) => {
+const Explore = ({ nodeData: { children, argument } }) => {
   const title = argument[0]?.value;
   return (
     <ExploreItem>
@@ -88,7 +88,6 @@ const Explore = ({ nodeData: { children, argument }, ...rest }) => {
                 variant={'default'}
                 rightGlyph={'Export'}
                 hideExternalIcon={true}
-                {...rest}
               ></ComponentFactory>
             ))}
           </div>
@@ -100,7 +99,6 @@ const Explore = ({ nodeData: { children, argument }, ...rest }) => {
             darkMode={true}
             showLineNumbers={false}
             overflow={false}
-            {...rest}
           ></ComponentFactory>
         </div>
       </ExploreContent>

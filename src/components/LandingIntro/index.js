@@ -61,22 +61,22 @@ const headerStyling = css`
   margin-bottom: 20px;
 `;
 
-const LandingIntro = ({ nodeData: { children, argument }, ...rest }) => (
+const LandingIntro = ({ nodeData: { children, argument } }) => (
   <FlexboxContainer>
     <DescriptionContainer>
       <H3 as="h2" className={cx(headerStyling)}>
         {argument.map((child, i) => (
-          <ComponentFactory nodeData={child} key={i} {...rest} />
+          <ComponentFactory nodeData={child} key={i} />
         ))}
       </H3>
       {/* assume first two children are paragraph and button */}
       {children.slice(0, 2).map((child, i) => (
-        <ComponentFactory nodeData={child} key={i} {...rest} />
+        <ComponentFactory nodeData={child} key={i} />
       ))}
     </DescriptionContainer>
     <ImageContainer>
       {/* assume last child is image */}
-      <ComponentFactory nodeData={children[2]} {...rest} />
+      <ComponentFactory nodeData={children[2]} />
     </ImageContainer>
   </FlexboxContainer>
 );
