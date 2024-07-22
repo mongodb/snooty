@@ -5,7 +5,7 @@ on:
   pull_request:
     types: ["opened", "synchronize"]
 
-name: Run and Upload Lighthouse Reports to MongoDB
+name: Run and Upload Lighthouse Reports
 jobs: 
   staging:
     permissions: write-all
