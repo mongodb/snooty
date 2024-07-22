@@ -48,14 +48,14 @@ describe('when rendering a list table with fixed widths', () => {
     expect(wrapper.asFragment()).toMatchSnapshot();
   });
 
-  it('displays six header columns', () => {
+  it('displays no header columns', () => {
     const wrapper = mountListTable(data);
-    expect(wrapper.queryAllByRole('columnheader')).toHaveLength(6);
+    expect(wrapper.queryAllByRole('columnheader')).toHaveLength(0);
   });
 
-  it('displays no content in the header row', () => {
+  it('displays no header row when none are set', () => {
     const wrapper = mountListTable(data);
-    expect(wrapper.getByTestId('leafygreen-ui-header-row')).toBeTruthy();
+    expect(wrapper.queryByTestId('leafygreen-ui-header-row')).toBeFalsy();
     expect(wrapper.queryByText('name')).not.toBeTruthy();
   });
 

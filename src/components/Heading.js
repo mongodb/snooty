@@ -39,7 +39,7 @@ const determineHeading = (sectionDepth) => {
   return Body; // use weight=medium prop to style appropriately
 };
 
-const Heading = ({ sectionDepth, nodeData, ...rest }) => {
+const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = determineHeading(sectionDepth);
   const asHeading = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
@@ -63,7 +63,7 @@ const Heading = ({ sectionDepth, nodeData, ...rest }) => {
         )}
       >
         <HeadingTag
-          className={cx(headingStyles, 'contains-headerlink', sectionDepth === 1 ? h2Styling : '')}
+          className={cx(headingStyles, 'contains-headerlink', sectionDepth === 1 ? h2Styling : '', className)}
           as={asHeading}
           weight="medium"
         >

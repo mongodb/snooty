@@ -170,10 +170,15 @@ DocumentBody.propTypes = {
 
 export default DocumentBody;
 
-export const Head = ({ pageContext }) => {
-  const { slug, page, template, repoBranches } = pageContext;
+export const Head = ({ pageContext, data }) => {
+  const { slug, template, repoBranches } = pageContext;
+  const pageAst = data.page?.ast;
 
-  const pageNodes = getNestedValue(['children'], page) || [];
+  if (!pageAst) {
+    throw new Error('Gatsby Head is missing important page AST');
+  }
+
+  const pageNodes = getNestedValue(['children'], pageAst) || [];
 
   const meta = getMetaFromDirective('section', pageNodes, 'meta');
   const twitter = getMetaFromDirective('section', pageNodes, 'twitter');
