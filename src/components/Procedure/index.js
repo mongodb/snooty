@@ -1,10 +1,9 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../../theme/docsTheme';
-import { PageContext } from '../../context/page-context';
 import Step from './Step';
 
 const StyledProcedure = styled('div')`
@@ -50,27 +49,16 @@ const getSteps = (children) => {
 };
 
 const Procedure = ({ nodeData: { children, options }, ...rest }) => {
-  // Procedures will be 'connected' (or whatever is provided) on Landing pages or product landing
-  // pages, and not connected on others
-  const { template } = useContext(PageContext);
+  // Make the style 'connected' by default for now to give time for PLPs that use this directive to
+  // add the "style" option
+  const style = options?.style || 'connected';
   const { darkMode } = useDarkMode();
-
-  const useLandingStyles = ['landing', 'product-landing'].includes(template);
-  const style = useLandingStyles ? options?.style || 'connected' : 'normal';
   const steps = useMemo(() => getSteps(children), [children]);
 
   return (
     <StyledProcedure procedureStyle={style} darkMode={darkMode}>
       {steps.map((child, i) => (
-        <Step
-          {...rest}
-          nodeData={child}
-          stepNumber={i + 1}
-          stepStyle={style}
-          template={template}
-          key={i}
-          darkMode={darkMode}
-        />
+        <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} darkMode={darkMode} />
       ))}
     </StyledProcedure>
   );

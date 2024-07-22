@@ -58,16 +58,12 @@ const landingStepStyles = {
   `,
   normal: (darkMode) => css`
     gap: ${theme.size.large};
-    h2 {
-      margin-top: -2px;
-    }
-
-    h3 {
-      margin-top: 2px;
-    }
-
+    h2,
     h4 {
       margin-top: unset;
+    }
+    h3 {
+      margin-top: 2px;
     }
   `,
 };
@@ -79,8 +75,8 @@ const StyledStep = styled('div')`
 const StepBlock = styled('div')`
   position: relative;
 
-  // want to add margin to top of circle if procedure style = normal
-  // and paragraph is h2
+  // 27 for circle height + 32px minimum spacing between circles
+  min-height: 59px;
 `;
 
 const Content = 'div';
@@ -95,9 +91,16 @@ const contentStyles = {
       padding-bottom: ${theme.size.large};
     }
   `,
+  normal: css`
+    section > *,
+    ol p,
+    ul p {
+      margin-bottom: 24px;
+    }
+  `,
 };
 
-const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'normal', darkMode, template, ...rest }) => {
+const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', darkMode, template, ...rest }) => {
   return (
     <StyledStep css={landingStepStyles[stepStyle](darkMode)}>
       <StepBlock>
