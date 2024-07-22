@@ -55,13 +55,13 @@ const quizCompleteHeader = (
   </QuizHeader>
 );
 
-const QuizCompleteSubtitle = ({ question, ...rest }) => {
+const QuizCompleteSubtitle = ({ question }) => {
   return (
     <>
       <QuizSubtitle>Question</QuizSubtitle>
       <QuizQuestion>
         {question.map((node, i) => (
-          <ComponentFactory nodeData={node} key={i} {...rest} />
+          <ComponentFactory nodeData={node} key={i} />
         ))}
       </QuizQuestion>
     </>
@@ -115,7 +115,7 @@ const unwrappedOptions = (options) => {
   };
 };
 
-const QuizWidget = ({ nodeData: { children, options }, ...rest }) => {
+const QuizWidget = ({ nodeData: { children, options } }) => {
   const [question, ...choices] = children;
   const [selectedResponse, setSelectedResponse] = useState();
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -135,7 +135,6 @@ const QuizWidget = ({ nodeData: { children, options }, ...rest }) => {
             selectedResponse={selectedResponse}
             setSelectedResponse={setSelectedResponse}
             isSubmitted={isSubmitted}
-            {...rest}
           />
         ))}
         {!isSubmitted && (

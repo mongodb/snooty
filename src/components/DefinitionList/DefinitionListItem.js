@@ -17,7 +17,7 @@ const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
       )}
       <dt {...termProps}>
         {term.map((child, index) => (
-          <ComponentFactory nodeData={child} key={`dt-${index}`} {...rest} />
+          <ComponentFactory nodeData={child} key={`dt-${index}`} />
         ))}
       </dt>
       <dd

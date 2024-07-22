@@ -132,7 +132,6 @@ const Card = ({
     children,
     options: { cta, headline, icon, 'icon-dark': iconDark, 'icon-alt': iconAlt, tag, url },
   },
-  ...rest
 }) => {
   const template = page?.options?.template;
   const { darkMode } = useDarkMode();
@@ -181,7 +180,7 @@ const Card = ({
           )}
           {children.map((child, i) => (
             // The cardRef prop's purpose to distinguish wich RefRoles are coming from the Card component (a workaround while we figure out card-ref support in the parser/)
-            <ComponentFactory nodeData={child} key={i} cardRef={true} {...rest} />
+            <ComponentFactory nodeData={child} key={i} cardRef={true} />
           ))}
 
           {cta && (

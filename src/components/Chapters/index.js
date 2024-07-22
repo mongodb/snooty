@@ -159,7 +159,7 @@ const Views = {
   },
 };
 
-const Chapters = ({ metadata, nodeData: { children }, ...rest }) => {
+const Chapters = ({ metadata, nodeData: { children } }) => {
   const [view, setView] = useState(Views.Chapter.name);
   const galleryViewData = useMemo(() => getGuidesViewData(metadata), [metadata]);
   const topValues = useStickyTopValues();
@@ -187,7 +187,7 @@ const Chapters = ({ metadata, nodeData: { children }, ...rest }) => {
               <RightColumn chapters={metadata?.chapters} />
               <LeftColumn>
                 {children.map((child, i) => (
-                  <ComponentFactory key={i} metadata={metadata} nodeData={child} {...rest} />
+                  <ComponentFactory key={i} metadata={metadata} nodeData={child} />
                 ))}
               </LeftColumn>
             </ChapterView>

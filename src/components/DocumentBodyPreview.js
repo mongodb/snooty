@@ -92,8 +92,6 @@ const DocumentBody = (props) => {
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
-  // create context here ?
-
   return (
     <Layout
       pageContext={{

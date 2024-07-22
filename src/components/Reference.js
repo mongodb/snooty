@@ -7,7 +7,7 @@ const Reference = ({ nodeData, ...rest }) => {
   return (
     <Link to={nodeData.refuri} {...rest}>
       {nodeData.children.map((element, index) => (
-        <ComponentFactory key={index} nodeData={element} {...rest} />
+        <ComponentFactory key={index} nodeData={element} />
       ))}
     </Link>
   );

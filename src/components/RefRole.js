@@ -29,14 +29,14 @@ const stopPropagation = function (e) {
   e.nativeEvent.stopImmediatePropagation();
 };
 
-const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, cardRef, showLinkArrow, ...rest }) => {
+const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, cardRef, showLinkArrow }) => {
   // Render intersphinx target links
   const stylingClass = cardRef ? cardRefStyling : '';
   if (url) {
     return (
       <Link className={cx(stylingClass)} to={url} showLinkArrow={showLinkArrow}>
         {children.map((node, i) => (
-          <ComponentFactory key={i} nodeData={node} {...rest} />
+          <ComponentFactory key={i} nodeData={node} />
         ))}
       </Link>
     );
@@ -67,7 +67,7 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, card
       showLinkArrow={showLinkArrow}
     >
       {children.map((node, i) => (
-        <ComponentFactory key={i} nodeData={node} {...rest} />
+        <ComponentFactory key={i} nodeData={node} />
       ))}
     </Link>
   );

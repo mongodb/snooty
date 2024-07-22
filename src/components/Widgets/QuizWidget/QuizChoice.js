@@ -48,11 +48,11 @@ const getCardStyling = ({ isSelected, isSubmitted, isCorrect }) => css`
   ${isSubmitted ? submittedStyle({ isCorrect }) : `:hover{ border-color: ${palette.black} !important; }`}
 `;
 
-const AnswerDescription = ({ description, ...rest }) => {
+const AnswerDescription = ({ description }) => {
   return (
     <DescriptionBody>
       {description.map((node, i) => (
-        <ComponentFactory nodeData={node} key={i} {...rest} />
+        <ComponentFactory nodeData={node} key={i} />
       ))}
     </DescriptionBody>
   );
@@ -81,7 +81,6 @@ const QuizChoice = ({
   setSelectedResponse,
   idx,
   isSubmitted,
-  ...rest
 }) => {
   const isCorrect = !!options?.['is-true'];
   const isSelected = selectedResponse?.index === idx;
@@ -95,7 +94,7 @@ const QuizChoice = ({
     >
       <ChoiceIconFactory isSubmitted={isSubmitted} isSelected={isSelected} isCorrect={isCorrect} />
       {argument.map((node, i) => (
-        <ComponentFactory nodeData={node} key={i} {...rest} />
+        <ComponentFactory nodeData={node} key={i} />
       ))}
       {isSubmitted && children && <AnswerDescription description={children} />}
     </Card>

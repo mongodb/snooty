@@ -10,11 +10,11 @@ const StyledSectionContainer = styled.section`
   margin-top: 60px;
 `;
 
-const Products = ({ nodeData: { children }, ...rest }) => {
+const Products = ({ nodeData: { children } }) => {
   return (
     <StyledSectionContainer>
       {children.map((child, i) => (
-        <ComponentFactory nodeData={child} key={i} {...rest} />
+        <ComponentFactory nodeData={child} key={i} />
       ))}
     </StyledSectionContainer>
   );

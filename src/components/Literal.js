@@ -21,14 +21,14 @@ const StyledNavigationInlineCode = styled('code')`
   color: unset;
 `;
 
-const Literal = ({ nodeData: { children }, formatTextOptions, ...rest }) => {
+const Literal = ({ nodeData: { children }, formatTextOptions }) => {
   const navigationStyle = formatTextOptions?.literalEnableInline;
   const CurrInlineCode = navigationStyle ? StyledNavigationInlineCode : InlineCode;
 
   return (
     <CurrInlineCode className={cx(navigationStyle ? '' : inlineCodeStyling)}>
       {children.map((node, i) => (
-        <ComponentFactory nodeData={node} key={i} {...rest} />
+        <ComponentFactory nodeData={node} key={i} />
       ))}
     </CurrInlineCode>
   );

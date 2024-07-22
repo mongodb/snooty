@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 
-const RoleFile = ({ nodeData: { children }, ...rest }) => (
+const RoleFile = ({ nodeData: { children } }) => (
   <code className="file docutils literal">
     <span className="pre">
       {children.map((node, i) => (
-        <ComponentFactory key={i} nodeData={node} {...rest} />
+        <ComponentFactory key={i} nodeData={node} />
       ))}
     </span>
   </code>

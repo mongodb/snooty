@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 
-const RoleClass = ({ nodeData: { children, target }, ...rest }) => (
+const RoleClass = ({ nodeData: { children, target } }) => (
   <a href={`${target}`}>
     {children.map((node, i) => (
-      <ComponentFactory key={i} nodeData={node} {...rest} />
+      <ComponentFactory key={i} nodeData={node} />
     ))}
   </a>
 );
