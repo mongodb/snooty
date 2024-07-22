@@ -18,16 +18,16 @@ const StyledChatBotFabContainer = styled.div`
 `;
 
 const ChatbotFabActionButton = ({ text }) => {
-  const { openChat, setInputText, handleSubmit } = useChatbotContext();
+  const { openChat, setInputText } = useChatbotContext();
+
   const onHandleChatAction = () => {
     setInputText(text);
     openChat();
-    handleSubmit();
   };
-  return <div onClick={onHandleChatAction}>{`${CHATBOT_WIDGET_TEXT} ${text}`}</div>;
+  return <span onClick={onHandleChatAction}>{`${CHATBOT_WIDGET_TEXT} ${text}`}</span>;
 };
 
-const ChatbotFab = ({ text }) => {
+const ChatbotFab = ({ text, onClosePopover }) => {
   const { snootyEnv } = useSiteMetadata();
   const CHATBOT_SERVER_BASE_URL =
     snootyEnv === 'dotcomprd'
@@ -38,7 +38,14 @@ const ChatbotFab = ({ text }) => {
       // Classname below to help ignore element for screenshots
       className={fabChatbot}
     >
-      <Chatbot name="MongoDB AI" maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
+      <Chatbot
+        name="MongoDB AI"
+        maxInputCharacters={DEFAULT_MAX_INPUT}
+        serverBaseUrl={CHATBOT_SERVER_BASE_URL}
+        onClose={() => {
+          onClosePopover();
+        }}
+      >
         <ChatbotFabActionButton text={text} />
         <ModalView
           disclaimer={

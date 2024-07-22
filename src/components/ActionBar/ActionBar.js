@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, lazy } from 'react';
 import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { SearchInput } from '@leafygreen-ui/search-input';
@@ -12,6 +12,8 @@ import SearchContext from '../SearchResults/SearchContext';
 import { isBrowser } from '../../utils/is-browser';
 import { SuspenseHelper } from '../SuspenseHelper';
 import DarkModeDropdown from './DarkModeDropdown';
+
+const ChatbotFab = lazy(() => import('../Widgets/ChatbotWidget/ChatbotFab'));
 
 const ActionBarContainer = styled('div')`
   display: flex;
@@ -134,54 +136,59 @@ const ActionBar = ({ template, ...props }) => {
   };
 
   return (
-    <SuspenseHelper fallback={null}>
-      <ActionBarContainer className={props.className} darkMode={darkMode}>
-        <ActionBarSearchContainer>
-          <CustomSearchInput
-            size="large"
-            value={searchField}
-            placeholder="Search"
-            onSubmit={(e) => {
-              submitNewSearch();
-            }}
-            onClick={() => {
-              setActivateSearchPopover(true);
-            }}
-            onChange={(e) => {
-              setSearchField(e.target.value);
-            }}
-          />
-          {activateSearchPopover && (
-            <CustomCard id="search-option-popover">
-              <SearchOptionContainer>
-                <SearchOptionButton
-                  onClick={() => {
-                    submitNewSearch();
-                  }}
-                >
-                  <Icon fill={palette.green.dark1} glyph={glyphs.Sparkle.displayName} />
-                  <SearchOptionBody>{searchField ? `Search "${searchField}"` : 'Search'}</SearchOptionBody>
-                </SearchOptionButton>
-                <SearchOptionButton>
-                  <Icon fill={palette.green.dark1} glyph={glyphs.Sparkle.displayName} />
-                  <SearchOptionBody css={{ color: palette.green.dark1, fontWeight: '400' }}>
-                    {/* <ChatbotFab text={searchField ? `"${searchField}"` : ''} /> */}
-                  </SearchOptionBody>
-                </SearchOptionButton>
-              </SearchOptionContainer>
-            </CustomCard>
-          )}
-        </ActionBarSearchContainer>
-        <ActionsBox>
-          <DarkModeDropdown />
-          {template !== 'errorpage' && (
-            <div>
-              <button>Feedback</button>
-            </div>
-          )}
-        </ActionsBox>
-      </ActionBarContainer>
-    </SuspenseHelper>
+    <ActionBarContainer className={props.className} darkMode={darkMode}>
+      <ActionBarSearchContainer>
+        <CustomSearchInput
+          size="large"
+          value={searchField}
+          placeholder="Search"
+          onSubmit={(e) => {
+            submitNewSearch();
+          }}
+          onClick={() => {
+            setActivateSearchPopover(true);
+          }}
+          onChange={(e) => {
+            setSearchField(e.target.value);
+          }}
+        />
+        {activateSearchPopover && (
+          <CustomCard id="search-option-popover">
+            <SearchOptionContainer>
+              <SearchOptionButton
+                onClick={() => {
+                  submitNewSearch();
+                }}
+              >
+                <Icon fill={palette.green.dark1} glyph={glyphs.Sparkle.displayName} />
+                <SearchOptionBody>{searchField ? `Search "${searchField}"` : 'Search'}</SearchOptionBody>
+              </SearchOptionButton>
+              <SearchOptionButton>
+                <Icon fill={palette.green.dark1} glyph={glyphs.Sparkle.displayName} />
+                <SearchOptionBody css={{ color: palette.green.dark1, fontWeight: '400' }}>
+                  <SuspenseHelper fallback={<p>Loading</p>}>
+                    <ChatbotFab
+                      text={searchField ? `"${searchField}"` : ''}
+                      onClosePopover={() => {
+                        setActivateSearchPopover(false);
+                      }}
+                    />
+                  </SuspenseHelper>
+                </SearchOptionBody>
+              </SearchOptionButton>
+            </SearchOptionContainer>
+          </CustomCard>
+        )}
+      </ActionBarSearchContainer>
+      <ActionsBox>
+        <DarkModeDropdown />
+        {template !== 'errorpage' && (
+          <div>
+            <button>Feedback</button>
+          </div>
+        )}
+      </ActionsBox>
+    </ActionBarContainer>
   );
 };
 
