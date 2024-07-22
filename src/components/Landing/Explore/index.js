@@ -67,7 +67,7 @@ const blockStyle = css`
   }
 `;
 
-const Explore = ({ nodeData: { children, argument } }) => {
+const Explore = ({ nodeData: { children, argument }, ...rest }) => {
   const title = argument[0]?.value;
   return (
     <ExploreItem>
