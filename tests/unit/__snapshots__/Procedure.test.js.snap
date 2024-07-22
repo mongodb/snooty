@@ -8,28 +8,46 @@ exports[`renders correctly 1`] = `
   color: initial;
 }
 
+@media only screen and (max-width: 1024px) {
+  .emotion-0 {
+    padding-bottom: 32px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    padding-bottom: 24px;
+  }
+}
+
 .emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 32px;
+  position: relative;
+  gap: 33px;
 }
 
-.emotion-2 h2 {
-  margin-top: -2px;
-}
-
-.emotion-2 h3 {
-  margin-top: 2px;
-}
-
+.emotion-2 h2,
+.emotion-2 h3,
 .emotion-2 h4 {
-  margin-top: unset;
+  margin-top: 4px;
+}
+
+.emotion-2:not(:last-child):after {
+  content: '';
+  border-left: 2px dashed #E8EDEB;
+  bottom: 0;
+  left: 16px;
+  position: absolute;
+  top: 0;
+  z-index: 0;
 }
 
 .emotion-4 {
   position: relative;
+  min-height: 59px;
 }
 
 .emotion-6 {
@@ -46,14 +64,29 @@ exports[`renders correctly 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  border: 1px solid #C1C7C6;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 28px;
-  background-color: inherit;
-  color: #001E2B;
-  height: 27px;
-  width: 27px;
+  position: relative;
+  font-weight: bold;
+  z-index: 1;
+  background-color: #E3FCF7;
+  color: #00684A;
+  height: 34px;
+  width: 34px;
+}
+
+.emotion-8 {
+  padding-bottom: 64px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-8 {
+    padding-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-8 {
+    padding-bottom: 32px;
+  }
 }
 
 .emotion-9 {
@@ -188,28 +221,46 @@ exports[`renders steps nested in include nodes 1`] = `
   color: initial;
 }
 
+@media only screen and (max-width: 1024px) {
+  .emotion-0 {
+    padding-bottom: 32px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    padding-bottom: 24px;
+  }
+}
+
 .emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 32px;
+  position: relative;
+  gap: 33px;
 }
 
-.emotion-2 h2 {
-  margin-top: -2px;
-}
-
-.emotion-2 h3 {
-  margin-top: 2px;
-}
-
+.emotion-2 h2,
+.emotion-2 h3,
 .emotion-2 h4 {
-  margin-top: unset;
+  margin-top: 4px;
+}
+
+.emotion-2:not(:last-child):after {
+  content: '';
+  border-left: 2px dashed #E8EDEB;
+  bottom: 0;
+  left: 16px;
+  position: absolute;
+  top: 0;
+  z-index: 0;
 }
 
 .emotion-4 {
   position: relative;
+  min-height: 59px;
 }
 
 .emotion-6 {
@@ -226,14 +277,29 @@ exports[`renders steps nested in include nodes 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  border: 1px solid #C1C7C6;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 28px;
-  background-color: inherit;
-  color: #001E2B;
-  height: 27px;
-  width: 27px;
+  position: relative;
+  font-weight: bold;
+  z-index: 1;
+  background-color: #E3FCF7;
+  color: #00684A;
+  height: 34px;
+  width: 34px;
+}
+
+.emotion-8 {
+  padding-bottom: 64px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-8 {
+    padding-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-8 {
+    padding-bottom: 32px;
+  }
 }
 
 .emotion-9 {
@@ -723,20 +789,18 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   gap: 32px;
 }
 
-.emotion-2 h2 {
-  margin-top: -2px;
+.emotion-2 h2,
+.emotion-2 h4 {
+  margin-top: unset;
 }
 
 .emotion-2 h3 {
   margin-top: 2px;
 }
 
-.emotion-2 h4 {
-  margin-top: unset;
-}
-
 .emotion-4 {
   position: relative;
+  min-height: 59px;
 }
 
 .emotion-6 {
@@ -761,6 +825,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   color: #001E2B;
   height: 27px;
   width: 27px;
+}
+
+.emotion-8 section>*,
+.emotion-8 ol p,
+.emotion-8 ul p {
+  margin-bottom: 24px;
 }
 
 .emotion-9 {

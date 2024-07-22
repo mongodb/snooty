@@ -29,6 +29,166 @@ exports[`renders with "connected" styling 1`] = `
 
 .emotion-2 {
   position: relative;
+  min-height: 59px;
+}
+
+.emotion-4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: relative;
+  font-weight: bold;
+  z-index: 1;
+  background-color: #E3FCF7;
+  color: #00684A;
+  height: 34px;
+  width: 34px;
+}
+
+.emotion-6 {
+  padding-bottom: 64px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-6 {
+    padding-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-6 {
+    padding-bottom: 32px;
+  }
+}
+
+.emotion-7 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.emotion-7 strong,
+.emotion-7 b {
+  font-weight: 700;
+}
+
+.emotion-9 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: #016BF8;
+  font-weight: inherit;
+}
+
+.emotion-9>code {
+  color: #016BF8;
+}
+
+.emotion-9:focus,
+.emotion-9:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-9:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-9:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+<div
+    class="emotion-0 emotion-1"
+  >
+    <div
+      class="emotion-2 emotion-3"
+    >
+      <div
+        class="emotion-4 emotion-5"
+      >
+        1
+      </div>
+    </div>
+    <div
+      class="emotion-6"
+    >
+      <p
+        class="emotion-7"
+      >
+        Import data from CSV or JSON files into your MongoDB database.
+      </p>
+      <p
+        class="emotion-7"
+      >
+        <a
+          class="emotion-9"
+          href="/import-export/#std-label-compass-import-export"
+        >
+          To learn more, see Import and Export Data
+        </a>
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`renders with "connected" styling by default 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  gap: 33px;
+}
+
+.emotion-0 h2,
+.emotion-0 h3,
+.emotion-0 h4 {
+  margin-top: 4px;
+}
+
+.emotion-0:not(:last-child):after {
+  content: '';
+  border-left: 2px dashed #E8EDEB;
+  bottom: 0;
+  left: 16px;
+  position: absolute;
+  top: 0;
+  z-index: 0;
+}
+
+.emotion-2 {
+  position: relative;
+  min-height: 59px;
 }
 
 .emotion-4 {
@@ -168,20 +328,18 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   gap: 32px;
 }
 
-.emotion-0 h2 {
-  margin-top: -2px;
+.emotion-0 h2,
+.emotion-0 h4 {
+  margin-top: unset;
 }
 
 .emotion-0 h3 {
   margin-top: 2px;
 }
 
-.emotion-0 h4 {
-  margin-top: unset;
-}
-
 .emotion-2 {
   position: relative;
+  min-height: 59px;
 }
 
 .emotion-4 {
@@ -208,142 +366,10 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   width: 27px;
 }
 
-.emotion-7 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  margin-bottom: 16px;
-}
-
-.emotion-7 strong,
-.emotion-7 b {
-  font-weight: 700;
-}
-
-.emotion-9 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-decoration-color: transparent;
-  line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
-}
-
-.emotion-9>code {
-  color: #016BF8;
-}
-
-.emotion-9:focus,
-.emotion-9:hover {
-  text-decoration-line: underline;
-  -webkit-transition: text-decoration 150ms ease-in-out;
-  transition: text-decoration 150ms ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-}
-
-.emotion-9:focus {
-  text-decoration-color: #016BF8;
-  outline: none;
-}
-
-.emotion-9:hover {
-  text-decoration-color: #E8EDEB;
-}
-
-<div
-    class="emotion-0 emotion-1"
-  >
-    <div
-      class="emotion-2 emotion-3"
-    >
-      <div
-        class="emotion-4 emotion-5"
-      >
-        1
-      </div>
-    </div>
-    <div
-      class="emotion-6"
-    >
-      <p
-        class="emotion-7"
-      >
-        Import data from CSV or JSON files into your MongoDB database.
-      </p>
-      <p
-        class="emotion-7"
-      >
-        <a
-          class="emotion-9"
-          href="/import-export/#std-label-compass-import-export"
-        >
-          To learn more, see Import and Export Data
-        </a>
-      </p>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`renders with "normal" styling by default 1`] = `
-<DocumentFragment>
-  .emotion-0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 32px;
-}
-
-.emotion-0 h2 {
-  margin-top: -2px;
-}
-
-.emotion-0 h3 {
-  margin-top: 2px;
-}
-
-.emotion-0 h4 {
-  margin-top: unset;
-}
-
-.emotion-2 {
-  position: relative;
-}
-
-.emotion-4 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 50%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  border: 1px solid #C1C7C6;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 28px;
-  background-color: inherit;
-  color: #001E2B;
-  height: 27px;
-  width: 27px;
+.emotion-6 section>*,
+.emotion-6 ol p,
+.emotion-6 ul p {
+  margin-bottom: 24px;
 }
 
 .emotion-7 {

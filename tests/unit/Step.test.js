@@ -10,7 +10,7 @@ beforeAll(() => {
   mockLocation(null, `/`);
 });
 
-it('renders with "normal" styling by default', () => {
+it('renders with "connected" styling by default', () => {
   const tree = render(<Step nodeData={mockData} stepNumber={1} />);
   expect(tree.asFragment()).toMatchSnapshot();
 });
