@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { palette } from '@leafygreen-ui/palette';
 import { feedbackId } from '../FeedbackWidget/FeedbackForm';
 import { theme } from '../../../../src/theme/docsTheme';
 import useScreenSize from '../../../hooks/useScreenSize';
@@ -19,9 +21,11 @@ const FloatingContainer = styled.div`
   right: ${theme.size.large};
 
   @media ${theme.screenSize.upToSmall} {
-    position: fixed;
+    padding-top: ${({ top }) => `${top}`};
     right: 0;
-    top: ${({ top }) => top};
+    top: 0;
+    bottom: 60px;
+    background-color: ${({ darkMode }) => (darkMode ? palette.black : palette.white)};
   }
 `;
 
@@ -37,11 +41,10 @@ const Card = styled(LeafygreenCard)`
   }
 
   @media ${theme.screenSize.upToSmall} {
-    height: calc(100vh - ${({ top }) => top});
     width: 100vw;
     border-radius: 0;
     border-width: 0px;
-    padding-top: 40px;
+    box-shadow: none;
   }
 `;
 
@@ -50,18 +53,19 @@ const FeedbackCard = ({ isOpen, children }) => {
   const { isOpen: isLabOpen } = useContext(InstruqtContext);
   // Ensure FeedbackCard can be fullscreen size
   const { isMobile } = useScreenSize();
-  const { topSmall } = useStickyTopValues();
+  const { darkMode } = useDarkMode();
+  const { topSmall } = useStickyTopValues(false, process.env['GATSBY_ENABLE_DARK_MODE'] && isMobile);
   useNoScroll(isMobile);
 
   const onClose = () => {
     abandon();
     // reset the z-index set by the screenshot button in ScreenshotButton.js
-    elementZIndex.resetZIndex('.widgets');
+    elementZIndex.setZIndex('.widgets', 1000);
   };
 
   return (
     isOpen && (
-      <FloatingContainer top={topSmall} id={feedbackId} hasOpenLabDrawer={isLabOpen}>
+      <FloatingContainer darkMode={darkMode} top={topSmall} id={feedbackId} hasOpenLabDrawer={isLabOpen}>
         <Card top={topSmall}>
           <CloseButton onClick={onClose} />
           <ProgressBar />

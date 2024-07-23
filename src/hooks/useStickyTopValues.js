@@ -21,17 +21,33 @@ const getTopValue = (bannerEnabled, eol, heights) => {
   return `${topValue}px`;
 };
 
-const useStickyTopValues = (eol) => {
+const useStickyTopValues = (eol, includeActionBar = false) => {
   const { bannerContent } = useContext(HeaderContext);
   const bannerEnabled = bannerContent?.isEnabled;
-  const topLarge = useMemo(() => getTopValue(bannerEnabled, eol, [theme.header.navbarHeight]), [bannerEnabled, eol]);
+  const topLarge = useMemo(
+    () =>
+      getTopValue(bannerEnabled, eol, [
+        theme.header.navbarHeight,
+        ...(includeActionBar ? [theme.header.actionBarHeight] : []),
+      ]),
+    [bannerEnabled, eol, includeActionBar]
+  );
   const topMedium = useMemo(
-    () => getTopValue(bannerEnabled, eol, [theme.header.navbarMobileHeight]),
-    [bannerEnabled, eol]
+    () =>
+      getTopValue(bannerEnabled, eol, [
+        theme.header.navbarMobileHeight,
+        ...(includeActionBar ? [theme.header.actionBarMobileHeight] : []),
+      ]),
+    [bannerEnabled, eol, includeActionBar]
   );
   const topSmall = useMemo(
-    () => getTopValue(bannerEnabled, eol, [theme.header.navbarMobileHeight, theme.header.docsMobileMenuHeight]),
-    [bannerEnabled, eol]
+    () =>
+      getTopValue(bannerEnabled, eol, [
+        theme.header.navbarMobileHeight,
+        theme.header.docsMobileMenuHeight,
+        ...(includeActionBar ? [theme.header.actionBarMobileHeight] : []),
+      ]),
+    [bannerEnabled, eol, includeActionBar]
   );
 
   return { topLarge, topMedium, topSmall };
