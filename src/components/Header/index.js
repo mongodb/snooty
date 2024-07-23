@@ -11,6 +11,8 @@ const StyledHeaderContainer = styled.header(
   (props) => `
   grid-area: header;
   top: 0;
+  // TODO : CHANGE THIS
+  margin-top: 40px;
   z-index: ${theme.zIndexes.header};
   ${
     props.template === 'landing' || props.template === 'errorpage' || process.env['GATSBY_ENABLE_DARK_MODE'] === 'true'
@@ -25,23 +27,25 @@ const Header = ({ sidenav, eol, template }) => {
 
   const enabledLocales = AVAILABLE_LANGUAGES.map((language) => language.localeCode);
   return (
-    <StyledHeaderContainer template={template}>
+    <>
       <SiteBanner />
-      <>
-        {!eol && (
-          <UnifiedNav
-            fullWidth="true"
-            position="relative"
-            property={{ name: unifiedNavProperty }}
-            showLanguageSelector={true}
-            onSelectLocale={onSelectLocale}
-            locale={getCurrLocale()}
-            enabledLocales={enabledLocales}
-          />
-        )}
-        {sidenav && <SidenavMobileMenuDropdown />}
-      </>
-    </StyledHeaderContainer>
+      <StyledHeaderContainer template={template}>
+        <>
+          {!eol && (
+            <UnifiedNav
+              fullWidth="true"
+              position="relative"
+              property={{ name: unifiedNavProperty }}
+              showLanguageSelector={true}
+              onSelectLocale={onSelectLocale}
+              locale={getCurrLocale()}
+              enabledLocales={enabledLocales}
+            />
+          )}
+          {sidenav && <SidenavMobileMenuDropdown />}
+        </>
+      </StyledHeaderContainer>
+    </>
   );
 };
 

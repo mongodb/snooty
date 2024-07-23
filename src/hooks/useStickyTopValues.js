@@ -10,13 +10,13 @@ const getTopValue = (bannerEnabled, eol, heights) => {
   });
 
   const bannerHeight = theme.size.stripUnit(theme.header.bannerHeight);
-  if (bannerEnabled) {
-    topValue = eol ? bannerHeight : bannerHeight + topValue;
-  } else {
-    if (eol) {
-      topValue = 0;
-    }
+  // if (bannerEnabled) {
+  //   topValue = eol ? bannerHeight : bannerHeight + topValue;
+  // } else {
+  if (eol) {
+    topValue = 0;
   }
+  // }
 
   return `${topValue}px`;
 };
