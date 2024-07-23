@@ -11,9 +11,15 @@ exports[`renders with "connected" styling 1`] = `
   gap: 33px;
 }
 
+.emotion-0 h2,
+.emotion-0 h3,
+.emotion-0 h4 {
+  margin-top: 4px;
+}
+
 .emotion-0:not(:last-child):after {
   content: '';
-  border-left: 2px dashed var(--border-left);
+  border-left: 2px dashed #E8EDEB;
   bottom: 0;
   left: 16px;
   position: absolute;
@@ -21,14 +27,9 @@ exports[`renders with "connected" styling 1`] = `
   z-index: 0;
 }
 
-.emotion-0 h2,
-.emotion-0 h3,
-.emotion-0 h4 {
-  margin-top: 4px;
-}
-
 .emotion-2 {
   position: relative;
+  min-height: 59px;
 }
 
 .emotion-4 {
@@ -41,17 +42,17 @@ exports[`renders with "connected" styling 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  font-weight: bold;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
   position: relative;
-  background-color: var(--background-color);
-  color: var(--color);
+  font-weight: bold;
+  z-index: 1;
+  background-color: #E3FCF7;
+  color: #00684A;
   height: 34px;
   width: 34px;
-  z-index: 1;
 }
 
 .emotion-6 {
@@ -125,14 +126,12 @@ exports[`renders with "connected" styling 1`] = `
 
 <div
     class="emotion-0 emotion-1"
-    style="--border-left: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
         class="emotion-4 emotion-5"
-        style="--background-color: #E3FCF7; --color: #00684A;"
       >
         1
       </div>
@@ -171,9 +170,15 @@ exports[`renders with "connected" styling by default 1`] = `
   gap: 33px;
 }
 
+.emotion-0 h2,
+.emotion-0 h3,
+.emotion-0 h4 {
+  margin-top: 4px;
+}
+
 .emotion-0:not(:last-child):after {
   content: '';
-  border-left: 2px dashed var(--border-left);
+  border-left: 2px dashed #E8EDEB;
   bottom: 0;
   left: 16px;
   position: absolute;
@@ -181,14 +186,9 @@ exports[`renders with "connected" styling by default 1`] = `
   z-index: 0;
 }
 
-.emotion-0 h2,
-.emotion-0 h3,
-.emotion-0 h4 {
-  margin-top: 4px;
-}
-
 .emotion-2 {
   position: relative;
+  min-height: 59px;
 }
 
 .emotion-4 {
@@ -201,17 +201,17 @@ exports[`renders with "connected" styling by default 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  font-weight: bold;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
   position: relative;
-  background-color: var(--background-color);
-  color: var(--color);
+  font-weight: bold;
+  z-index: 1;
+  background-color: #E3FCF7;
+  color: #00684A;
   height: 34px;
   width: 34px;
-  z-index: 1;
 }
 
 .emotion-6 {
@@ -285,14 +285,12 @@ exports[`renders with "connected" styling by default 1`] = `
 
 <div
     class="emotion-0 emotion-1"
-    style="--border-left: #E8EDEB;"
   >
     <div
       class="emotion-2 emotion-3"
     >
       <div
         class="emotion-4 emotion-5"
-        style="--background-color: #E3FCF7; --color: #00684A;"
       >
         1
       </div>
@@ -327,17 +325,21 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 16px;
+  gap: 32px;
 }
 
 .emotion-0 h2,
-.emotion-0 h3,
 .emotion-0 h4 {
   margin-top: unset;
 }
 
+.emotion-0 h3 {
+  margin-top: 2px;
+}
+
 .emotion-2 {
   position: relative;
+  min-height: 59px;
 }
 
 .emotion-4 {
@@ -350,15 +352,24 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  font-weight: bold;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: var(--background-color);
-  color: var(--color);
-  height: 24px;
-  width: 24px;
+  border: 1px solid #C1C7C6;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  background-color: inherit;
+  color: #001E2B;
+  height: 27px;
+  width: 27px;
+}
+
+.emotion-6 section>*,
+.emotion-6 ol p,
+.emotion-6 ul p {
+  margin-bottom: 24px;
 }
 
 .emotion-7 {
@@ -422,7 +433,6 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
     >
       <div
         class="emotion-4 emotion-5"
-        style="--background-color: #001E2B; --color: #FFFFFF;"
       >
         1
       </div>

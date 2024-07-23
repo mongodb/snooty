@@ -8,8 +8,6 @@ import Step from './Step';
 
 const StyledProcedure = styled('div')`
   margin-top: ${theme.size.default};
-  background-color: var(--background-color);
-  color: var(--color);
   ${({ procedureStyle }) =>
     procedureStyle === 'connected' &&
     `
@@ -19,7 +17,12 @@ const StyledProcedure = styled('div')`
     @media ${theme.screenSize.upToSmall} {
       padding-bottom: ${theme.size.medium};
     }
+ 
   `}
+  ${({ darkMode }) =>
+    `
+    background-color: ${darkMode ? palette.black : 'initial'};
+    color: ${darkMode ? palette.gray.light2 : 'initial'};`}
 `;
 
 // Returns an array of all "step" nodes nested within the "procedure" node and nested "include" nodes
@@ -49,18 +52,11 @@ const Procedure = ({ nodeData: { children, options }, ...rest }) => {
   // Make the style 'connected' by default for now to give time for PLPs that use this directive to
   // add the "style" option
   const style = options?.style || 'connected';
+  const { darkMode } = useDarkMode();
   const steps = useMemo(() => getSteps(children), [children]);
 
-  const { darkMode } = useDarkMode();
-
   return (
-    <StyledProcedure
-      procedureStyle={style}
-      style={{
-        '--background-color': darkMode ? palette.black : 'initial',
-        '--color': darkMode ? palette.gray.light2 : 'initial',
-      }}
-    >
+    <StyledProcedure procedureStyle={style} darkMode={darkMode}>
       {steps.map((child, i) => (
         <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} darkMode={darkMode} />
       ))}

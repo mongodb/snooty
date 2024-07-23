@@ -4,8 +4,8 @@ exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin-top: 16px;
-  background-color: var(--background-color);
-  color: var(--color);
+  background-color: initial;
+  color: initial;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -29,9 +29,15 @@ exports[`renders correctly 1`] = `
   gap: 33px;
 }
 
+.emotion-2 h2,
+.emotion-2 h3,
+.emotion-2 h4 {
+  margin-top: 4px;
+}
+
 .emotion-2:not(:last-child):after {
   content: '';
-  border-left: 2px dashed var(--border-left);
+  border-left: 2px dashed #E8EDEB;
   bottom: 0;
   left: 16px;
   position: absolute;
@@ -39,14 +45,9 @@ exports[`renders correctly 1`] = `
   z-index: 0;
 }
 
-.emotion-2 h2,
-.emotion-2 h3,
-.emotion-2 h4 {
-  margin-top: 4px;
-}
-
 .emotion-4 {
   position: relative;
+  min-height: 59px;
 }
 
 .emotion-6 {
@@ -59,17 +60,17 @@ exports[`renders correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  font-weight: bold;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
   position: relative;
-  background-color: var(--background-color);
-  color: var(--color);
+  font-weight: bold;
+  z-index: 1;
+  background-color: #E3FCF7;
+  color: #00684A;
   height: 34px;
   width: 34px;
-  z-index: 1;
 }
 
 .emotion-8 {
@@ -143,18 +144,15 @@ exports[`renders correctly 1`] = `
 
 <div
     class="emotion-0 emotion-1"
-    style="--background-color: initial; --color: initial;"
   >
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           1
         </div>
@@ -181,14 +179,12 @@ exports[`renders correctly 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           2
         </div>
@@ -221,8 +217,8 @@ exports[`renders steps nested in include nodes 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin-top: 16px;
-  background-color: var(--background-color);
-  color: var(--color);
+  background-color: initial;
+  color: initial;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -246,9 +242,15 @@ exports[`renders steps nested in include nodes 1`] = `
   gap: 33px;
 }
 
+.emotion-2 h2,
+.emotion-2 h3,
+.emotion-2 h4 {
+  margin-top: 4px;
+}
+
 .emotion-2:not(:last-child):after {
   content: '';
-  border-left: 2px dashed var(--border-left);
+  border-left: 2px dashed #E8EDEB;
   bottom: 0;
   left: 16px;
   position: absolute;
@@ -256,14 +258,9 @@ exports[`renders steps nested in include nodes 1`] = `
   z-index: 0;
 }
 
-.emotion-2 h2,
-.emotion-2 h3,
-.emotion-2 h4 {
-  margin-top: 4px;
-}
-
 .emotion-4 {
   position: relative;
+  min-height: 59px;
 }
 
 .emotion-6 {
@@ -276,17 +273,17 @@ exports[`renders steps nested in include nodes 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  font-weight: bold;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
   position: relative;
-  background-color: var(--background-color);
-  color: var(--color);
+  font-weight: bold;
+  z-index: 1;
+  background-color: #E3FCF7;
+  color: #00684A;
   height: 34px;
   width: 34px;
-  z-index: 1;
 }
 
 .emotion-8 {
@@ -358,18 +355,15 @@ exports[`renders steps nested in include nodes 1`] = `
 
 <div
     class="emotion-0 emotion-1"
-    style="--background-color: initial; --color: initial;"
   >
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           1
         </div>
@@ -423,14 +417,12 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           2
         </div>
@@ -484,14 +476,12 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           3
         </div>
@@ -545,14 +535,12 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           4
         </div>
@@ -606,14 +594,12 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           5
         </div>
@@ -667,14 +653,12 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           6
         </div>
@@ -728,14 +712,12 @@ exports[`renders steps nested in include nodes 1`] = `
     </div>
     <div
       class="emotion-2 emotion-3"
-      style="--border-left: #E8EDEB;"
     >
       <div
         class="emotion-4 emotion-5"
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #E3FCF7; --color: #00684A;"
         >
           7
         </div>
@@ -795,8 +777,8 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin-top: 16px;
-  background-color: var(--background-color);
-  color: var(--color);
+  background-color: initial;
+  color: initial;
 }
 
 .emotion-2 {
@@ -804,17 +786,21 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 16px;
+  gap: 32px;
 }
 
 .emotion-2 h2,
-.emotion-2 h3,
 .emotion-2 h4 {
   margin-top: unset;
 }
 
+.emotion-2 h3 {
+  margin-top: 2px;
+}
+
 .emotion-4 {
   position: relative;
+  min-height: 59px;
 }
 
 .emotion-6 {
@@ -827,15 +813,24 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  font-weight: bold;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: var(--background-color);
-  color: var(--color);
-  height: 24px;
-  width: 24px;
+  border: 1px solid #C1C7C6;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  background-color: inherit;
+  color: #001E2B;
+  height: 27px;
+  width: 27px;
+}
+
+.emotion-8 section>*,
+.emotion-8 ol p,
+.emotion-8 ul p {
+  margin-bottom: 24px;
 }
 
 .emotion-9 {
@@ -893,7 +888,6 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 
 <div
     class="emotion-0 emotion-1"
-    style="--background-color: initial; --color: initial;"
   >
     <div
       class="emotion-2 emotion-3"
@@ -903,7 +897,6 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #001E2B; --color: #FFFFFF;"
         >
           1
         </div>
@@ -936,7 +929,6 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
       >
         <div
           class="emotion-6 emotion-7"
-          style="--background-color: #001E2B; --color: #FFFFFF;"
         >
           2
         </div>
