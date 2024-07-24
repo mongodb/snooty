@@ -32,22 +32,23 @@ const useStickyTopValues = (eol, includeActionBar = false) => {
       ]),
     [bannerEnabled, eol, includeActionBar]
   );
+
+  const actionBarHeight = useMemo(
+    () => (includeActionBar ? [theme.header.actionBarMobileHeight] : []),
+    [includeActionBar]
+  );
   const topMedium = useMemo(
-    () =>
-      getTopValue(bannerEnabled, eol, [
-        theme.header.navbarMobileHeight,
-        ...(includeActionBar ? [theme.header.actionBarMobileHeight] : []),
-      ]),
-    [bannerEnabled, eol, includeActionBar]
+    () => getTopValue(bannerEnabled, eol, [theme.header.navbarMobileHeight, ...actionBarHeight]),
+    [actionBarHeight, bannerEnabled, eol]
   );
   const topSmall = useMemo(
     () =>
       getTopValue(bannerEnabled, eol, [
         theme.header.navbarMobileHeight,
         theme.header.docsMobileMenuHeight,
-        ...(includeActionBar ? [theme.header.actionBarMobileHeight] : []),
+        ...actionBarHeight,
       ]),
-    [bannerEnabled, eol, includeActionBar]
+    [actionBarHeight, bannerEnabled, eol]
   );
 
   return { topLarge, topMedium, topSmall };

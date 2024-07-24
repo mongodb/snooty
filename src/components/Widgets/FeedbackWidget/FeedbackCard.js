@@ -60,7 +60,7 @@ const FeedbackCard = ({ isOpen, children }) => {
   const onClose = () => {
     abandon();
     // reset the z-index set by the screenshot button in ScreenshotButton.js
-    elementZIndex.setZIndex('.widgets', 1000);
+    elementZIndex.setZIndex('.widgets', theme.zIndexes.header);
   };
 
   return (

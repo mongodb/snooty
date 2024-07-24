@@ -17,7 +17,7 @@ const WidgetsContainer = styled.div`
   position: fixed;
   right: ${theme.size.large};
   bottom: ${({ hasOpenLabDrawer }) => (hasOpenLabDrawer ? '70px' : theme.size.large)};
-  z-index: 1000;
+  z-index: ${theme.zIndexes.header};
 
   @media ${theme.screenSize.upToSmall} {
     background-color: white;
