@@ -16,7 +16,7 @@ const ActionBarContainer = styled('div')`
   position: sticky;
   top: 0;
   flex-wrap: wrap;
-  z-index: ${theme.zIndexes.header - 100};
+  z-index: ${theme.zIndexes.actionBar};
   background-color: ${(props) => (props.darkMode ? palette.black : palette.white)};
   border-bottom: 1px solid ${(props) => (props.darkMode ? palette.gray.dark2 : palette.gray.light2)};
 

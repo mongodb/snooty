@@ -91,6 +91,8 @@ const transitionSpeed = {
 
 // z-indexes for topmost major elements on the site. Subcomponents should have their own z-indexes set
 const zIndexes = {
+  actionBar: 800,
+  sidenav: 900,
   header: 1000,
   widgets: 2000,
 };
