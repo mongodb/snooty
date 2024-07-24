@@ -18,6 +18,7 @@ const StyledBannerContainer = styled.a`
   display: block;
   height: ${theme.header.bannerHeight};
   width: 100vw;
+  position: absolute;
 `;
 
 const StyledBannerContent = styled.div(
