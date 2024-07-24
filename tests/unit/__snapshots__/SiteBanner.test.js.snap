@@ -7,6 +7,7 @@ exports[`Banner component renders with a banner image 1`] = `
   height: 40px;
   width: 100vw;
   position: absolute;
+  z-index: 1000;
 }
 
 .emotion-2 {
