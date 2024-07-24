@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -9,6 +9,7 @@ import useScreenSize from '../../../hooks/useScreenSize';
 import useStickyTopValues from '../../../hooks/useStickyTopValues';
 import { InstruqtContext } from '../../Instruqt/instruqt-context';
 import { elementZIndex } from '../../../utils/dynamically-set-z-index';
+import { HeaderContext } from '../../Header/header-context';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
@@ -56,6 +57,11 @@ const FeedbackCard = ({ isOpen, children }) => {
   const { darkMode } = useDarkMode();
   const { topSmall } = useStickyTopValues(false, process.env['GATSBY_ENABLE_DARK_MODE'] && isMobile);
   useNoScroll(isMobile);
+  const { bannerContent } = useContext(HeaderContext);
+  const topBuffer = useMemo(
+    () => parseInt(topSmall, 10) + (!!bannerContent ? parseInt(theme.header.bannerHeight, 10) : 0) + 'px',
+    [bannerContent, topSmall]
+  );
 
   const onClose = () => {
     abandon();
@@ -65,8 +71,8 @@ const FeedbackCard = ({ isOpen, children }) => {
 
   return (
     isOpen && (
-      <FloatingContainer darkMode={darkMode} top={topSmall} id={feedbackId} hasOpenLabDrawer={isLabOpen}>
-        <Card top={topSmall}>
+      <FloatingContainer darkMode={darkMode} top={topBuffer} id={feedbackId} hasOpenLabDrawer={isLabOpen}>
+        <Card>
           <CloseButton onClick={onClose} />
           <ProgressBar />
           <div>{children}</div>
