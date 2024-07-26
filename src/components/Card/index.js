@@ -15,6 +15,9 @@ import { isRelativeUrl } from '../../utils/is-relative-url';
 import { getSuitableIcon } from '../../utils/get-suitable-icon';
 
 const cardBaseStyles = css`
+  color: var(--font-color-primary);
+  background-color: var(--background-primary);
+  border-color: var(--border-secondary);
   display: flex;
   height: 100%;
 `;

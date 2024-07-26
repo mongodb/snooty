@@ -54,7 +54,13 @@ const Landing = ({ children, pageContext, useChatbot }) => {
   return (
     <>
       <div>
-        <Wrapper newChatbotLanding={process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && useChatbot}>
+        <Wrapper
+          newChatbotLanding={process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && useChatbot}
+          style={{
+            '--header-color': darkMode ? palette.gray.light2 : palette.black,
+            '--special-h2': darkMode ? palette.gray.light2 : palette.gray.dark4,
+          }}
+        >
           {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && useChatbot && (
             <ChatbotUi template={pageContext?.template} />
           )}
@@ -67,7 +73,7 @@ const Landing = ({ children, pageContext, useChatbot }) => {
           h2,
           h3,
           h4 {
-            color: ${darkMode ? palette.gray.light2 : palette.black};
+            color: var(--header-color);
           }
 
           h1,
@@ -124,7 +130,7 @@ const Landing = ({ children, pageContext, useChatbot }) => {
             above LeafyGreen class selector */
           }
           main>section>section:first-of-type h2 {
-            color: ${darkMode ? palette.gray.light2 : palette.gray.dark4};
+            color: var(--special-h2);
             font-size: 32px;
             font-family: 'MongoDB Value Serif';
             font-weight: 400;

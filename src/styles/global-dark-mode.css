@@ -7,3 +7,15 @@
     background-color: initial;
     color: initial;
 }
+
+.light-theme {
+    --font-color-primary: '#001E2B';
+    --background-primary: #FFFFFF;
+    --border-secondary: #E8EDEB;
+}
+
+.dark-theme {
+    --font-color-primary: '#FFFFFF';
+    --background-primary: #001E2B;
+    --border-secondary: #3D4F58;
+}
