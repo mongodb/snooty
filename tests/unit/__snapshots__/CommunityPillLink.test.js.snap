@@ -2,7 +2,11 @@
 
 exports[`community drivers directives render correctly 1`] = `
 <DocumentFragment>
-  .emotion-0 {
+  .emotion-0:last-of-type {
+  margin-bottom: 16px;
+}
+
+.emotion-1 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -32,8 +36,8 @@ exports[`community drivers directives render correctly 1`] = `
   display: inline;
 }
 
-.emotion-0:hover,
-.emotion-0:focus {
+.emotion-1:hover,
+.emotion-1:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -42,19 +46,19 @@ exports[`community drivers directives render correctly 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-0:hover {
+.emotion-1:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   text-decoration-color: #016BF8;
 }
 
-.emotion-1 {
+.emotion-2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -64,7 +68,7 @@ exports[`community drivers directives render correctly 1`] = `
   height: 12px;
 }
 
-.emotion-2 {
+.emotion-3 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -89,9 +93,11 @@ exports[`community drivers directives render correctly 1`] = `
   color: #5C6C75;
 }
 
-<div>
+<div
+    class="emotion-0"
+  >
     <a
-      class="lg-ui-0001 emotion-0"
+      class="lg-ui-0001 emotion-1"
       href="https://example.com"
       rel="noopener noreferrer"
     >
@@ -101,7 +107,7 @@ exports[`community drivers directives render correctly 1`] = `
       <svg
         alt=""
         aria-hidden="true"
-        class="emotion-1"
+        class="emotion-2"
         height="16"
         role="presentation"
         viewBox="0 0 16 16"
@@ -118,7 +124,7 @@ exports[`community drivers directives render correctly 1`] = `
       </svg>
     </a>
     <div
-      class="emotion-2"
+      class="emotion-3"
     >
       community built
     </div>
