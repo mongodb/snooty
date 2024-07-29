@@ -19,20 +19,17 @@ const defaultContextValue = {
 
 const TabContext = React.createContext(defaultContextValue);
 
-const reducer = (prevState, { name, value }) => {
+const reducer = (prevState, newState) => {
   return {
     ...prevState,
-    [name]: value,
+    ...newState,
   };
 };
 
-const initActiveTabs = (choicesPerSelector, localActiveTabs) => {
-  // all tabbed content is read from browser local storage
-  // if there is no browser, wait for client side local storage
-  // hidden content should be handled from tab components
-  if (!isBrowser) {
-    return {};
-  }
+const initActiveTabs = (choicesPerSelector) => {
+  // setting active tabs on server side
+  // since SSG expects same result for server and client,
+  // handle reading local storage in a separate useEffect
   // get default tabs based on availability
   const defaultRes = Object.keys(choicesPerSelector || {}).reduce((res, selectorKey) => {
     const nodeOptionIdx = choicesPerSelector[selectorKey].findIndex((tab) => tab.value === 'nodejs');
@@ -45,18 +42,7 @@ const initActiveTabs = (choicesPerSelector, localActiveTabs) => {
     return res;
   }, {});
 
-  // get local active tabs
-  const activeTabsRes = Object.keys(localActiveTabs || {}).reduce((res, activeTabKey) => {
-    if (typeof localActiveTabs[activeTabKey] === 'string') {
-      res[activeTabKey] = localActiveTabs[activeTabKey];
-    }
-    return res;
-  }, {});
-
-  // tabs initialize with default tabs overwritten by local storage tabs
-  const initialTabs = { ...defaultRes, ...activeTabsRes };
-  setLocalValue('activeTabs', initialTabs);
-  return initialTabs;
+  return defaultRes;
 };
 
 const TabProvider = ({ children, selectors = {} }) => {
@@ -81,6 +67,22 @@ const TabProvider = ({ children, selectors = {} }) => {
   useEffect(() => {
     setLocalValue('activeTabs', activeTabs);
   }, [activeTabs]);
+
+  useEffect(() => {
+    // get local active tabs
+    if (!isBrowser) return;
+    const localActiveTabs = getLocalValue('activeTabs');
+
+    const activeTabsRes = Object.keys(localActiveTabs || {}).reduce((res, activeTabKey) => {
+      if (typeof localActiveTabs[activeTabKey] === 'string') {
+        res[activeTabKey] = localActiveTabs[activeTabKey];
+      }
+      return res;
+    }, {});
+
+    setActiveTab({ ...activeTabsRes });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <TabContext.Provider

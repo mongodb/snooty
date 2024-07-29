@@ -112,10 +112,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       const tabId = tabIds[index];
       const priorAnchorOffset = getPosition(scrollAnchorRef.current).y;
 
-      setActiveTab({
-        name: tabsetName,
-        value: tabId,
-      });
+      setActiveTab({ [tabsetName]: tabId });
       reportAnalytics('Tab Selected', {
         tabId,
         tabSet: tabsetName,
