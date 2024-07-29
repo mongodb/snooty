@@ -116,6 +116,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
           <StyledContentContainer>
             <ContentTransition slug={slug}>{children}</ContentTransition>
           </StyledContentContainer>
+          {/* Sidenav is after the Content to ensure DOM hierarchy without using z-index */}
           {sidenav && !isInPresentationMode ? (
             <Sidenav
               chapters={chapters}
