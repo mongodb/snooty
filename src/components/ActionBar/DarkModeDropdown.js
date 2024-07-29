@@ -5,7 +5,6 @@ import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { Menu, MenuItem } from '@leafygreen-ui/menu';
-import { Align } from '@leafygreen-ui/tooltip';
 import { DarkModeContext } from '../../context/dark-mode-context';
 import { theme } from '../../theme/docsTheme';
 import IconComputer from '../icons/Computer';
@@ -39,7 +38,7 @@ const DarkModeDropdown = ({ ...props }) => {
       className={cx(menuStyling)}
       usePortal={true}
       justify={'start'}
-      align={Align.Bottom}
+      align={'bottom'}
       open={open}
       setOpen={setOpen}
       trigger={
