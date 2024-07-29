@@ -37,7 +37,6 @@ const DarkModeDropdown = ({ ...props }) => {
   return (
     <Menu
       className={cx(menuStyling)}
-      // When in ActionBar, this should be usePortal={false}
       usePortal={true}
       justify={'start'}
       align={Align.Bottom}
