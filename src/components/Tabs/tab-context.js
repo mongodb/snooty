@@ -5,7 +5,7 @@
  * child components to read and update
  */
 
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { isBrowser } from '../../utils/is-browser';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
@@ -64,16 +64,29 @@ const TabProvider = ({ children, selectors = {} }) => {
     initActiveTabs.bind(null, choicesPerSelector)
   );
 
+  const initLoaded = useRef(false);
+
   useEffect(() => {
+    // dont update local value on initial load
+    if (!initLoaded.current) return;
     setLocalValue('activeTabs', activeTabs);
   }, [activeTabs]);
 
   useEffect(() => {
-    // get local active tabs
     if (!isBrowser) return;
-    const localActiveTabs = getLocalValue('activeTabs');
+    // get local active tabs and set as active tabs
+    // if they exist on page.
+    // otherwise, defaults will take precedence
+    const localActiveTabs = getLocalValue('activeTabs') || {};
 
-    const activeTabsRes = Object.keys(localActiveTabs || {}).reduce((res, activeTabKey) => {
+    const activeTabsRes = Object.keys(localActiveTabs).reduce((res, activeTabKey) => {
+      if (
+        activeTabKey === 'drivers' &&
+        selectors?.[activeTabKey] &&
+        !selectors?.[activeTabKey][localActiveTabs[activeTabKey]]
+      ) {
+        return res;
+      }
       if (typeof localActiveTabs[activeTabKey] === 'string') {
         res[activeTabKey] = localActiveTabs[activeTabKey];
       }
@@ -81,6 +94,7 @@ const TabProvider = ({ children, selectors = {} }) => {
     }, {});
 
     setActiveTab({ ...activeTabsRes });
+    initLoaded.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
