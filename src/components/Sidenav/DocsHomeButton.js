@@ -6,6 +6,7 @@ import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Link } from '@leafygreen-ui/typography';
 import { baseUrl } from '../../utils/base-url';
+import DarkModeDropdown from '../ActionBar/DarkModeDropdown';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import { titleStyle } from './styles/sideNavItem';
 
@@ -21,18 +22,35 @@ const homeLinkStyle = LeafyCSS`
   }
 `;
 
+const containerStyle = LeafyCSS`
+  display: flex;
+  align-items: center;
+`;
+
+const darkModeContainerStyle = LeafyCSS`
+  display: flex;
+  padding: 16px;
+`;
+
 const DocsHomeButton = ({ darkMode }) => {
   return (
-    <SideNavItem
-      className={cx(titleStyle, sideNavItemBasePadding, homeLinkStyle)}
-      as={Link}
-      href={baseUrl()}
-      hideExternalIcon={true}
-      style={{ '--color': darkMode ? palette.gray.light1 : palette.gray.dark1 }}
-    >
-      <Icon glyph="Home"></Icon>
-      Docs Home
-    </SideNavItem>
+    <div className={cx(containerStyle)}>
+      <SideNavItem
+        className={cx(titleStyle, sideNavItemBasePadding, homeLinkStyle)}
+        as={Link}
+        href={baseUrl()}
+        hideExternalIcon={true}
+        style={{ '--color': darkMode ? palette.gray.light1 : palette.gray.dark1 }}
+      >
+        <Icon glyph="Home"></Icon>
+        Docs Home
+      </SideNavItem>
+      {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && (
+        <div className={cx(darkModeContainerStyle)}>
+          <DarkModeDropdown />
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -114,6 +114,9 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} slug={slug} template={template} /> : <div />}
+          <StyledContentContainer>
+            <ContentTransition slug={slug}>{children}</ContentTransition>
+          </StyledContentContainer>
           {sidenav && !isInPresentationMode ? (
             <Sidenav
               chapters={chapters}
@@ -130,10 +133,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
           ) : (
             <div />
           )}
-          <StyledContentContainer>
-            {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && <ActionBar template={template} />}
-            <ContentTransition slug={slug}>{children}</ContentTransition>
-          </StyledContentContainer>
+          {process.env['GATSBY_ENABLE_DARK_MODE'] === true && <ActionBar />}
         </GlobalGrid>
       </RootProvider>
     </>
