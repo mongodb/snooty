@@ -48,6 +48,7 @@ const TabSelector = ({ activeTab, handleClick, iconMapping, name, options }) => 
       `}
       choices={choices}
       label={getLabel(name)}
+      usePortal={false}
       onChange={({ value }) => {
         handleClick({ name, value });
         reportAnalytics('LanguageSelection', {

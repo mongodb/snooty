@@ -56,6 +56,7 @@ const Select = ({
   className,
   choices,
   onChange,
+  usePortal = true,
   defaultText = '',
   disabled = false,
   label = null,
@@ -75,6 +76,7 @@ const Select = ({
         size="default"
         allowDeselect={false}
         disabled={disabled}
+        usePortal={usePortal}
         portalContainer={portalContainer.current}
         scrollContainer={portalContainer.current}
         popoverZIndex={2}
@@ -110,6 +112,7 @@ Select.propTypes = {
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+  usePortal: PropTypes.bool,
   defaultText: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
@@ -118,6 +121,7 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
+  usePortal: true,
   defaultText: '',
   disabled: false,
   label: null,

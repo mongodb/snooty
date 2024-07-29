@@ -31,7 +31,7 @@ const Contents = ({ displayOnDesktopOnly }) => {
       <ContentsList label={label}>
         {headingNodes.map(({ depth, id, title }) => {
           // Depth of heading nodes refers to their depth in the AST
-          const listItemDepth = depth - 2;
+          const listItemDepth = Math.max(depth - 2, 0);
           return (
             <ContentsListItem depth={listItemDepth} key={id} id={id} isActive={activeHeadingId === id}>
               {formatText(title, formatTextOptions)}

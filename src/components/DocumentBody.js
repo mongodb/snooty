@@ -13,6 +13,7 @@ import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
 import { getSiteTitle } from '../utils/get-site-title';
+import { PageContext } from '../context/page-context';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -115,13 +116,22 @@ const DocumentBody = (props) => {
           >
             <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
               <FootnoteContext.Provider value={{ footnotes }}>
-                <div id="template-container">
-                  <Template {...props} useChatbot={useChatbot}>
-                    {pageNodes.map((child, index) => (
-                      <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-                    ))}
-                  </Template>
-                </div>
+                <PageContext.Provider value={{ page, template, slug }}>
+                  <div id="template-container">
+                    <Template {...props} useChatbot={useChatbot}>
+                      {pageNodes.map((child, index) => (
+                        <ComponentFactory
+                          key={index}
+                          metadata={metadata}
+                          nodeData={child}
+                          page={page}
+                          template={template}
+                          slug={slug}
+                        />
+                      ))}
+                    </Template>
+                  </div>
+                </PageContext.Provider>
               </FootnoteContext.Provider>
             </ImageContextProvider>
           </Widgets>
@@ -160,10 +170,15 @@ DocumentBody.propTypes = {
 
 export default DocumentBody;
 
-export const Head = ({ pageContext }) => {
-  const { slug, page, template, repoBranches } = pageContext;
+export const Head = ({ pageContext, data }) => {
+  const { slug, template, repoBranches } = pageContext;
+  const pageAst = data.page?.ast;
 
-  const pageNodes = getNestedValue(['children'], page) || [];
+  if (!pageAst) {
+    throw new Error('Gatsby Head is missing important page AST');
+  }
+
+  const pageNodes = getNestedValue(['children'], pageAst) || [];
 
   const meta = getMetaFromDirective('section', pageNodes, 'meta');
   const twitter = getMetaFromDirective('section', pageNodes, 'twitter');

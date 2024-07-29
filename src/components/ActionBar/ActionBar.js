@@ -16,7 +16,7 @@ const ActionBarContainer = styled('div')`
   position: sticky;
   top: 0;
   flex-wrap: wrap;
-  z-index: ${theme.zIndexes.header};
+  z-index: ${theme.zIndexes.actionBar};
   background-color: ${(props) => (props.darkMode ? palette.black : palette.white)};
   border-bottom: 1px solid ${(props) => (props.darkMode ? palette.gray.dark2 : palette.gray.light2)};
 
@@ -62,7 +62,8 @@ const ActionsBox = styled('div')`
   }
 `;
 
-const ActionBar = ({ ...props }) => {
+// Note: When working on this component further, please check with design on how it should look in the errorpage template (404) as well!
+const ActionBar = ({ template, ...props }) => {
   const { darkMode } = useDarkMode();
   return (
     <ActionBarContainer className={props.className} darkMode={darkMode}>
@@ -71,9 +72,11 @@ const ActionBar = ({ ...props }) => {
       </ActionBarSearchContainer>
       <ActionsBox>
         <DarkModeDropdown></DarkModeDropdown>
-        <div>
-          <button>Feedback</button>
-        </div>
+        {template !== 'errorpage' && (
+          <div>
+            <button>Feedback</button>
+          </div>
+        )}
       </ActionsBox>
     </ActionBarContainer>
   );

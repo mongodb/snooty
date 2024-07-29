@@ -12,6 +12,7 @@ import Chapter from './Chapters/Chapter';
 import Chapters from './Chapters';
 import Code from './Code/Code';
 import CodeIO from './Code/CodeIO';
+import Collapsible from './Collapsible';
 import CommunityPillLink from './CommunityPillLink';
 import Cond from './Cond';
 import Container from './Container';
@@ -36,7 +37,6 @@ import Image from './Image';
 import Include from './Include';
 import Introduction from './Introduction';
 import Kicker from './Kicker';
-import LandingIntro from './LandingIntro';
 import Line from './LineBlock/Line';
 import LineBlock from './LineBlock';
 import List from './List';
@@ -78,11 +78,6 @@ import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleRequired from './Roles/Required';
-import Explore from './Landing/Explore';
-import { MoreWays } from './Landing/MoreWays';
-import Products from './Products';
-import ProductItem from './Products/ProductItem';
-import StandaloneHeader from './StandaloneHeader';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -136,6 +131,7 @@ const componentMap = {
   chapter: Chapter,
   chapters: Chapters,
   code: Code,
+  collapsible: Collapsible,
   'community-driver': CommunityPillLink,
   'io-code-block': CodeIO,
   cond: Cond,
@@ -162,12 +158,6 @@ const componentMap = {
   include: Include,
   introduction: Introduction,
   kicker: Kicker,
-  'landing:explore': Explore,
-  'landing:more-ways': MoreWays,
-  'landing:client-libraries': StandaloneHeader,
-  'landing:introduction': LandingIntro,
-  'landing:product': ProductItem,
-  'landing:products': Products,
   line: Line,
   line_block: LineBlock,
   list: List,

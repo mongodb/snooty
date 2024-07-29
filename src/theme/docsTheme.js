@@ -75,6 +75,8 @@ const header = {
   docsMobileMenuHeight: '52px',
   // used for scrolling elements into place, considering sticky header
   navbarScrollOffset: '175px',
+  actionBarHeight: '115px',
+  actionBarMobileHeight: '185px', // TODO: update after mobile designs are finalized
 };
 
 const widgets = {
@@ -89,6 +91,8 @@ const transitionSpeed = {
 
 // z-indexes for topmost major elements on the site. Subcomponents should have their own z-indexes set
 const zIndexes = {
+  actionBar: 800,
+  sidenav: 900,
   header: 1000,
   widgets: 2000,
 };
