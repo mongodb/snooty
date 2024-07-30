@@ -100,6 +100,7 @@ const SidenavContainer = styled.div(
   ({ topLarge, topMedium, topSmall, template }) => css`
     grid-area: sidenav;
     position: sticky;
+    z-index: ${theme.zIndexes.sidenav};
     ${getTopAndHeight(topLarge, template)};
 
     @media ${theme.screenSize.upToLarge} {
