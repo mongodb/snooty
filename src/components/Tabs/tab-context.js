@@ -5,9 +5,8 @@
  * child components to read and update
  */
 
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
-import { isBrowser } from '../../utils/is-browser';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { makeChoices } from './TabSelectors';
 
@@ -19,22 +18,18 @@ const defaultContextValue = {
 
 const TabContext = React.createContext(defaultContextValue);
 
-const reducer = (prevState, { name, value }) => {
+const reducer = (prevState, newState) => {
   return {
     ...prevState,
-    [name]: value,
+    ...newState,
   };
 };
 
-const initActiveTabs = (choicesPerSelector, localActiveTabs) => {
-  // all tabbed content is read from browser local storage
-  // if there is no browser, wait for client side local storage
-  // hidden content should be handled from tab components
-  if (!isBrowser) {
-    return {};
-  }
-  // get default tabs based on availability
-  const defaultRes = Object.keys(choicesPerSelector || {}).reduce((res, selectorKey) => {
+// Helper fn to get default tabs for fallback (when no local storage found).
+// If drivers tabs, return 'nodejs' if found.
+// Otherwise, return first choice.
+const getDefaultTabs = (choicesPerSelector) =>
+  Object.keys(choicesPerSelector || {}).reduce((res, selectorKey) => {
     const nodeOptionIdx = choicesPerSelector[selectorKey].findIndex((tab) => tab.value === 'nodejs');
     // NOTE: default tabs should be specified here
     if (selectorKey === 'drivers' && nodeOptionIdx > -1) {
@@ -45,42 +40,51 @@ const initActiveTabs = (choicesPerSelector, localActiveTabs) => {
     return res;
   }, {});
 
-  // get local active tabs
-  const activeTabsRes = Object.keys(localActiveTabs || {}).reduce((res, activeTabKey) => {
-    if (typeof localActiveTabs[activeTabKey] === 'string') {
-      res[activeTabKey] = localActiveTabs[activeTabKey];
+// Helper fn to extract tab values from local storage values
+// If drivers, verify this is part of selectors.
+// Otherwise, return tab choice
+const getLocalTabs = (localTabs, selectors) =>
+  Object.keys(localTabs).reduce((res, activeTabKey) => {
+    if (selectors?.[activeTabKey]?.[localTabs[activeTabKey]]) {
+      res[activeTabKey] = localTabs[activeTabKey];
     }
     return res;
   }, {});
 
-  // tabs initialize with default tabs overwritten by local storage tabs
-  const initialTabs = { ...defaultRes, ...activeTabsRes };
-  setLocalValue('activeTabs', initialTabs);
-  return initialTabs;
-};
-
 const TabProvider = ({ children, selectors = {} }) => {
-  // convert selectors to tab options first here, then set init values
-  // selectors are determined at build time
+  // init value to {} to match server and client side
+  const [activeTabs, setActiveTab] = useReducer(reducer, {});
 
-  const choicesPerSelector = Object.keys(selectors).reduce((res, selector) => {
-    res[selector] = makeChoices({
-      name: selector,
-      options: selectors[selector],
-      ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
-    });
-    return res;
-  }, {});
-
-  const [activeTabs, setActiveTab] = useReducer(
-    reducer,
-    getLocalValue('activeTabs'),
-    initActiveTabs.bind(null, choicesPerSelector)
-  );
+  const initLoaded = useRef(false);
 
   useEffect(() => {
+    // dont update local value on initial load
+    if (!initLoaded.current) return;
     setLocalValue('activeTabs', activeTabs);
   }, [activeTabs]);
+
+  // initial effect to read from local storage
+  // used in an effect to keep SSG HTML consistent
+  useEffect(() => {
+    // convert selectors to tab options first here, then set init values
+    // selectors are determined at build time
+    const choicesPerSelector = Object.keys(selectors).reduce((res, selector) => {
+      res[selector] = makeChoices({
+        name: selector,
+        options: selectors[selector],
+        ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
+      });
+      return res;
+    }, {});
+    const defaultRes = getDefaultTabs(choicesPerSelector);
+    // get local active tabs and set as active tabs
+    // if they exist on page.
+    // otherwise, defaults will take precedence
+    const localActiveTabs = getLocalTabs(getLocalValue('activeTabs') || {}, selectors);
+    initLoaded.current = true;
+    setActiveTab({ ...defaultRes, ...localActiveTabs });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <TabContext.Provider
