@@ -36,7 +36,7 @@ const DarkModeDropdown = ({ ...props }) => {
   return (
     <Menu
       className={cx(menuStyling)}
-      usePortal={true}
+      usePortal={false}
       justify={'start'}
       align={'bottom'}
       open={open}
