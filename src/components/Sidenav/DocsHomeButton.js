@@ -6,9 +6,9 @@ import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Link } from '@leafygreen-ui/typography';
 import { baseUrl } from '../../utils/base-url';
-import DarkModeDropdown from '../ActionBar/DarkModeDropdown';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import { titleStyle } from './styles/sideNavItem';
+import DarkModeToggle from './DarkModeToggle';
 
 const homeLinkStyle = LeafyCSS`
   span {
@@ -27,11 +27,6 @@ const containerStyle = LeafyCSS`
   align-items: center;
 `;
 
-const darkModeContainerStyle = LeafyCSS`
-  display: flex;
-  padding: 0 16px;
-`;
-
 const DocsHomeButton = ({ darkMode }) => {
   return (
     <div className={cx(containerStyle)}>
@@ -45,11 +40,7 @@ const DocsHomeButton = ({ darkMode }) => {
         <Icon glyph="Home"></Icon>
         Docs Home
       </SideNavItem>
-      {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && (
-        <div className={cx(darkModeContainerStyle)}>
-          <DarkModeDropdown />
-        </div>
-      )}
+      {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && <DarkModeToggle />}
     </div>
   );
 };
