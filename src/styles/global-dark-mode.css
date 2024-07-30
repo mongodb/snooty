@@ -1,9 +1,29 @@
 .dark-theme body {
-     background-color: var(--lg-bg-dark-mode);
-     color: var(--lg-color-dark-mode);
+  background-color: var(--lg-bg-dark-mode);
+  color: var(--lg-color-dark-mode);
 }
 
 .light-theme body {
-    background-color: initial;
-    color: initial;
+  background-color: initial;
+  color: initial;
+}
+
+.light-theme {
+  --font-color-primary: var(--gray-dark4);
+  --font-color-light: #889397;
+
+  --link-color-primary: #016bf8;
+
+  --background-color-primary: #ffffff;
+  --background-color-secondary: #f9fbfa;
+}
+
+.dark-theme {
+  --font-color-primary: var(--day-spa);
+  --font-color-light: var(--day-spa);
+
+  --link-color-primary: #0498ec;
+
+  --background-color-primary: #1c2d38;
+  --background-color-secondary: transparent;
 }
