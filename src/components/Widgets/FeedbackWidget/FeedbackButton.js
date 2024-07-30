@@ -19,7 +19,7 @@ const FEEDBACK_FAB_COLORS = {
     color: palette.blue.light1,
     bgColor: palette.gray.dark4,
     boxShadow: 'none',
-    boxShadowOnHover: `0px 0px 0px 3px ${palette.blue.dark2}`,
+    boxShadowOnHover: `0px 0px 0px 3px #083C90`,
   },
 };
 
