@@ -222,6 +222,338 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   display: none;
 }
 
+.emotion-3 {
+  position: absolute;
+  -webkit-transition: -webkit-transform 150ms ease-in-out,opacity 150ms ease-in-out;
+  transition: transform 150ms ease-in-out,opacity 150ms ease-in-out;
+  opacity: 0;
+  top: calc(100% + 6px);
+  left: 0;
+  transform-origin: left top;
+  -webkit-transform: translate3d(0, -6px, 0) scale(0.8);
+  -moz-transform: translate3d(0, -6px, 0) scale(0.8);
+  -ms-transform: translate3d(0, -6px, 0) scale(0.8);
+  transform: translate3d(0, -6px, 0) scale(0.8);
+}
+
+.emotion-4 {
+  width: 210px;
+  border-radius: 12px;
+  overflow: auto;
+  padding: 14px 0;
+  background-color: #001E2B;
+  border: 1px solid #001E2B;
+  max-height: 344px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 8px;
+}
+
+.emotion-5 {
+  overflow: auto;
+  list-style: none;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  -webkit-padding-start: 0px;
+  padding-inline-start: 0px;
+  padding: 0px;
+}
+
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  margin: unset;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+  color: #FFFFFF;
+  background-color: #001E2B;
+  min-height: 36px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: #001E2B;
+}
+
+.emotion-6:focus {
+  outline: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-6:before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  left: 0px;
+  border-radius: 0 4px 4px 0;
+  background-color: transparent;
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+}
+
+.emotion-6:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-6:hover,
+.emotion-6:active {
+  background-color: #1C2D38;
+}
+
+.emotion-6:before {
+  height: 22px;
+}
+
+.emotion-6:before {
+  background-color: #00ED64;
+}
+
+.emotion-6:hover {
+  color: #00ED64;
+}
+
+.emotion-6:hover:before {
+  background-color: #00ED64;
+}
+
+.emotion-6:focus-visible {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: #0C2657;
+  color: #FFFFFF;
+}
+
+.emotion-6:focus-visible:before {
+  background-color: #0498EC;
+}
+
+.emotion-6::-moz-focus-inner {
+  border: 0;
+}
+
+.emotion-7 {
+  margin-right: 16px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+  color: #00ED64;
+}
+
+.lg-ui-menu-item-container-0000:focus-visible .emotion-7 {
+  color: #E1F7FF;
+}
+
+.emotion-8 {
+  width: 100%;
+  overflow: hidden;
+  padding: 2px 0;
+}
+
+.emotion-9 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 500;
+  font-weight: 700;
+  color: #00ED64;
+}
+
+.emotion-9:after {
+  content: attr(data-text);
+  height: 0;
+  font-weight: 700;
+  visibility: hidden;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.emotion-9 .lg-ui-menu-item-container-0000:not(:disabled):hover .emotion-9 .lg-ui-menu-item-container-0000 {
+  font-weight: 700;
+}
+
+.emotion-9 .lg-ui-menu-item-container-0000:not(:disabled):hover .emotion-9 .lg-ui-menu-item-container-0000 {
+  color: #00ED64;
+}
+
+.lg-ui-menu-item-container-0000:focus-visible .emotion-9 {
+  color: #E1F7FF;
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  margin: unset;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  text-align: left;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+  color: #FFFFFF;
+  background-color: #001E2B;
+  min-height: 36px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-10:focus {
+  outline: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-10:before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  left: 0px;
+  border-radius: 0 4px 4px 0;
+  background-color: transparent;
+  -webkit-transition: background-color 150ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
+}
+
+.emotion-10:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-10:hover,
+.emotion-10:active {
+  background-color: #1C2D38;
+}
+
+.emotion-10:before {
+  height: 22px;
+}
+
+.emotion-10:focus-visible {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: #0C2657;
+  color: #FFFFFF;
+}
+
+.emotion-10:focus-visible:before {
+  background-color: #0498EC;
+}
+
+.emotion-10::-moz-focus-inner {
+  border: 0;
+}
+
+.emotion-11 {
+  margin-right: 16px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #889397;
+}
+
+.lg-ui-menu-item-container-0000:focus-visible .emotion-11 {
+  color: #E1F7FF;
+}
+
+.emotion-13 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.emotion-13:after {
+  content: attr(data-text);
+  height: 0;
+  font-weight: 700;
+  visibility: hidden;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.emotion-13 .lg-ui-menu-item-container-0000:not(:disabled):hover .emotion-13 .lg-ui-menu-item-container-0000 {
+  font-weight: 700;
+}
+
+.lg-ui-menu-item-container-0000:focus-visible .emotion-13 {
+  color: #E1F7FF;
+}
+
 <div
     aria-disabled="false"
     aria-expanded="true"
@@ -252,6 +584,153 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
       <span
         class="emotion-2"
       />
+      <div
+        class="emotion-3"
+      >
+        <div
+          class="lg-ui-popover-content-0000"
+        >
+          <div
+            class="emotion-4"
+          >
+            <ul
+              class="emotion-5"
+              role="menu"
+            >
+              <li
+                role="none"
+              >
+                <button
+                  aria-current="true"
+                  aria-disabled="false"
+                  class="lg-ui-menu-item-container-0000 emotion-6"
+                  role="menuitem"
+                  tabindex="-1"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-7"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.24 10.83a.996.996 0 1 0-1.41 1.41l.71.71a.996.996 0 1 0 1.41-1.41l-.71-.71ZM8 12c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1s1-.45 1-1v-1c0-.55-.45-1-1-1ZM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM14 7h-1c-.55 0-1 .45-1 1s.45 1 1 1h1c.55 0 1-.45 1-1s-.45-1-1-1ZM3.76 10.83l-.71.71a.996.996 0 1 0 1.41 1.41l.71-.71a.996.996 0 1 0-1.41-1.41ZM8 4c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1v1c0 .55.45 1 1 1ZM3.76 5.17a.996.996 0 1 0 1.41-1.41l-.71-.71a.996.996 0 1 0-1.41 1.41l.71.71ZM4 8c0-.55-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1h1c.55 0 1-.45 1-1ZM12.24 5.17l.71-.71a.996.996 0 1 0-1.41-1.41l-.71.71a.996.996 0 1 0 1.41 1.41Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <div
+                    class="emotion-8"
+                  >
+                    <div
+                      class="emotion-9"
+                      data-text="Light"
+                    >
+                      Light
+                    </div>
+                  </div>
+                </button>
+              </li>
+              <li
+                role="none"
+              >
+                <button
+                  aria-current="false"
+                  aria-disabled="false"
+                  class="lg-ui-menu-item-container-0000 emotion-10"
+                  role="menuitem"
+                  tabindex="-1"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-11"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M13.787 10.074a.713.713 0 0 0-.864-.116c-.125.077-.26.135-.394.192-1.766.72-3.888-.21-4.704-2.208-.73-1.795-.086-3.734 1.344-4.617a.72.72 0 0 0 .317-.807A.709.709 0 0 0 8.795 2H8.67c-3.312 0-6 2.688-6 6s2.688 6 6 6a6.003 6.003 0 0 0 5.232-3.062.715.715 0 0 0-.125-.864h.01Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <div
+                    class="emotion-8"
+                  >
+                    <div
+                      class="emotion-13"
+                      data-text="Dark"
+                    >
+                      Dark
+                    </div>
+                  </div>
+                </button>
+              </li>
+              <li
+                role="none"
+              >
+                <button
+                  aria-current="false"
+                  aria-disabled="false"
+                  class="lg-ui-menu-item-container-0000 emotion-10"
+                  role="menuitem"
+                  tabindex="-1"
+                >
+                  <svg
+                    class="emotion-11"
+                    fill="none"
+                    height="20"
+                    role="presentation"
+                    viewBox="0 0 20 20"
+                    width="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <mask
+                      height="20"
+                      id="mask0_2936_7195"
+                      maskUnits="userSpaceOnUse"
+                      width="20"
+                      x="0"
+                      y="0"
+                    >
+                      <rect
+                        fill="#D9D9D9"
+                        height="20"
+                        width="20"
+                      />
+                    </mask>
+                    <g
+                      mask="url(#mask0_2936_7195)"
+                    >
+                      <path
+                        d="M3.49677 14.9433C3.00064 14.9433 2.57799 14.7687 2.22883 14.4196C1.87966 14.0704 1.70508 13.6478 1.70508 13.1516V4.30927C1.70508 3.81314 1.87966 3.39049 2.22883 3.04133C2.57799 2.69216 3.00064 2.51758 3.49677 2.51758H16.5022C16.9983 2.51758 17.421 2.69216 17.7701 3.04133C18.1193 3.39049 18.2939 3.81314 18.2939 4.30927V13.1516C18.2939 13.6478 18.1193 14.0704 17.7701 14.4196C17.421 14.7687 16.9983 14.9433 16.5022 14.9433H13.937L14.6068 15.6181C14.6932 15.7038 14.7579 15.8001 14.8011 15.9072C14.8443 16.0142 14.8659 16.1268 14.8659 16.245V16.6304C14.8659 16.8654 14.7828 17.066 14.6167 17.2321C14.4505 17.3983 14.2499 17.4814 14.0149 17.4814H5.98408C5.74904 17.4814 5.54844 17.3983 5.38229 17.2321C5.21615 17.066 5.13308 16.8654 5.13308 16.6304V16.245C5.13308 16.1268 5.15467 16.0142 5.19785 15.9072C5.24102 15.8001 5.30578 15.7038 5.39214 15.6181L6.06197 14.9433H3.49677ZM3.49677 13.1516H16.5022V4.30927H3.49677V13.1516Z"
+                        fill="#889397"
+                      />
+                    </g>
+                  </svg>
+                  <div
+                    class="emotion-8"
+                  >
+                    <div
+                      class="emotion-13"
+                      data-text="System"
+                    >
+                      System
+                    </div>
+                  </div>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </DocumentFragment>
