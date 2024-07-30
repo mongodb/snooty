@@ -5,7 +5,7 @@
  * child components to read and update
  */
 
-import React, { useEffect, useMemo, useReducer, useRef } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { makeChoices } from './TabSelectors';
@@ -55,19 +55,6 @@ const TabProvider = ({ children, selectors = {} }) => {
   // init value to {} to match server and client side
   const [activeTabs, setActiveTab] = useReducer(reducer, {});
 
-  // convert selectors to tab options first here, then set init values
-  // selectors are determined at build time
-  const choicesPerSelector = useMemo(() => {
-    return Object.keys(selectors).reduce((res, selector) => {
-      res[selector] = makeChoices({
-        name: selector,
-        options: selectors[selector],
-        ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
-      });
-      return res;
-    }, {});
-  }, [selectors]);
-
   const initLoaded = useRef(false);
 
   useEffect(() => {
@@ -76,7 +63,19 @@ const TabProvider = ({ children, selectors = {} }) => {
     setLocalValue('activeTabs', activeTabs);
   }, [activeTabs]);
 
+  // initial effect to read from local storage
+  // used in an effect to keep SSG HTML consistent
   useEffect(() => {
+    // convert selectors to tab options first here, then set init values
+    // selectors are determined at build time
+    const choicesPerSelector = Object.keys(selectors).reduce((res, selector) => {
+      res[selector] = makeChoices({
+        name: selector,
+        options: selectors[selector],
+        ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
+      });
+      return res;
+    }, {});
     const defaultRes = getDefaultTabs(choicesPerSelector);
     // get local active tabs and set as active tabs
     // if they exist on page.
