@@ -53,12 +53,19 @@ const LinkContainer = styled.div`
   margin-top: ${theme.size.large};
 `;
 
+const click = () => {
+  history.back();
+};
+
 const ContentContainer = () => {
+  const ref = typeof window === 'undefined' ? null : window.document.referrer;
+  console.log('REFERENCE', ref);
+  console.log('TYPE', typeof ref);
   return (
     <ContentBox>
       <H2 className={cx(titleStyling)}>We're sorry, this page isn't available in the version you selected.</H2>
       <LinkContainer>
-        <Button href={baseUrl()} variant="default">
+        <Button href={ref} variant="default" onClick={click}>
           Go back to previous page
         </Button>
       </LinkContainer>
