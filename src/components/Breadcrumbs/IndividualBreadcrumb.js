@@ -10,6 +10,8 @@ const linkStyling = LeafyCss`
   font-size: ${theme.fontSize.small};
   vertical-align: middle;
   line-height: unset;
+  // Important to overwrite GatsbyLink dark-theme font-weight
+  font-weight: 400;
 
   :hover,
   :focus {
