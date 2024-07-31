@@ -68,6 +68,7 @@ exports[`renders correctly as a homepage 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -217,6 +218,7 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -267,7 +269,7 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--link-color-primary);
   font-weight: inherit;
   font-size: 13px;
   vertical-align: middle;
@@ -275,7 +277,7 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 .emotion-12>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
 }
 
 .emotion-12:focus,

@@ -11,6 +11,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-0 strong,
@@ -46,6 +47,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-1:hover,
@@ -97,6 +99,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-0 strong,
@@ -132,6 +135,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-1:hover,
@@ -183,6 +187,7 @@ exports[`Paragraph unit tests renders correctly 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-0 strong,

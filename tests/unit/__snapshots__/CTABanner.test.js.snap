@@ -98,6 +98,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-4 strong,
@@ -133,6 +134,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-6:hover,
@@ -306,6 +308,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-4 strong,
@@ -341,6 +344,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-6:hover,
@@ -516,6 +520,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-4 strong,
@@ -551,6 +556,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-6:hover,
@@ -724,6 +730,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-4 strong,
@@ -759,6 +766,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-6:hover,

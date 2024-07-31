@@ -60,6 +60,7 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -251,6 +252,7 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -321,7 +323,7 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--link-color-primary);
   font-weight: inherit;
   font-size: 13px;
   vertical-align: middle;
@@ -329,7 +331,7 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
 }
 
 .emotion-11>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
 }
 
 .emotion-11:focus,
@@ -484,6 +486,7 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -659,6 +662,7 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -729,7 +733,7 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--link-color-primary);
   font-weight: inherit;
   font-size: 13px;
   vertical-align: middle;
@@ -737,7 +741,7 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
 }
 
 .emotion-11>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
 }
 
 .emotion-11:focus,

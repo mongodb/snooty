@@ -30,6 +30,7 @@ exports[`renders correctly 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:hover,

@@ -44,12 +44,12 @@ exports[`renders a page with next and previous links correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--link-color-primary);
   font-weight: inherit;
 }
 
 .emotion-1>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
 }
 
 .emotion-1:focus,
@@ -408,12 +408,12 @@ exports[`renders a page with no next link correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--link-color-primary);
   font-weight: inherit;
 }
 
 .emotion-1>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
 }
 
 .emotion-1:focus,
@@ -699,12 +699,12 @@ exports[`renders a page with no previous link correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--link-color-primary);
   font-weight: inherit;
 }
 
 .emotion-1>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
 }
 
 .emotion-1:focus,

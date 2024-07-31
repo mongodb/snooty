@@ -30,6 +30,7 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:hover,
@@ -95,6 +96,7 @@ exports[`Link component renders a variety of strings correctly external MDB docs
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:hover,
@@ -161,6 +163,7 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:hover,
@@ -227,6 +230,7 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:hover,
@@ -293,6 +297,7 @@ exports[`Link component renders a variety of strings correctly external URL with
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:hover,
@@ -359,6 +364,7 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:hover,
@@ -453,6 +459,7 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:hover,
@@ -502,12 +509,12 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--link-color-primary);
   font-weight: inherit;
 }
 
 .emotion-0>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:focus,
@@ -550,12 +557,12 @@ exports[`Link component renders a variety of strings correctly internal link que
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--link-color-primary);
   font-weight: inherit;
 }
 
 .emotion-0>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:focus,
@@ -598,12 +605,12 @@ exports[`Link component renders a variety of strings correctly internal link tha
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--link-color-primary);
   font-weight: inherit;
 }
 
 .emotion-0>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:focus,
@@ -646,12 +653,12 @@ exports[`Link component renders a variety of strings correctly internal link wit
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
+  color: var(--link-color-primary);
   font-weight: inherit;
 }
 
 .emotion-0>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
 }
 
 .emotion-0:focus,
