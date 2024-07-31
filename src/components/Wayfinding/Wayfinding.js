@@ -34,34 +34,30 @@ const optionsContainerStyle = css`
 `;
 
 const Wayfinding = ({ nodeData: { children } }) => {
-  const [showMore, setShowMore] = useState(false);
+  const [showAll, setShowAll] = useState(false);
   const maxInitialOptions = 4;
 
   const priorityOptions = children.slice(0, maxInitialOptions);
   const otherOptions = children.slice(maxInitialOptions);
 
-  const showButtonText = showMore ? 'Collapse' : 'Show More';
+  const showButtonText = showAll ? 'Collapse' : 'Show all';
+
+  const renderWayfindingOptions = (option) => {
+    if (option.name !== 'wayfinding-option') {
+      return null;
+    }
+    return <WayfindingOption nodeData={option}>option</WayfindingOption>;
+  };
 
   return (
     <div className={cx(containerStyle)}>
       <Body className={titleStyle}>{TITLE_TEXT}</Body>
       <Body baseFontSize={13}>{DESCRIPTION_TEXT}</Body>
       <div className={cx(optionsContainerStyle)}>
-        {priorityOptions.map((option) => {
-          if (option.name !== 'wayfinding-option') {
-            return null;
-          }
-          return <WayfindingOption nodeData={option}>option</WayfindingOption>;
-        })}
-        {showMore &&
-          otherOptions.map((option) => {
-            if (option.name !== 'wayfinding-option') {
-              return null;
-            }
-            return <WayfindingOption nodeData={option}>option</WayfindingOption>;
-          })}
+        {priorityOptions.map(renderWayfindingOptions)}
+        {showAll && otherOptions.map(renderWayfindingOptions)}
       </div>
-      {children.length > maxInitialOptions && <div onClick={() => setShowMore((prev) => !prev)}>{showButtonText}</div>}
+      {children.length > maxInitialOptions && <div onClick={() => setShowAll((prev) => !prev)}>{showButtonText}</div>}
     </div>
   );
 };

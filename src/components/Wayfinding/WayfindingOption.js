@@ -4,6 +4,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
+import { NOTRANSLATE_CLASS } from '../../utils/locale';
 
 const optionStyle = css`
   box-shadow: unset;
@@ -29,10 +30,11 @@ const WayfindingOption = ({ nodeData: { options, argument } }) => {
   const title = options?.title;
   const lang = options?.language;
   const optionId = options?.id;
+
   const Icon = DRIVER_ICON_MAP[optionId] || DRIVER_ICON_MAP[lang];
 
   return (
-    <Card className={cx(optionStyle)} href={optionLink}>
+    <Card className={cx(optionStyle, NOTRANSLATE_CLASS)} href={optionLink}>
       {Icon && <Icon className={imgStyle} width={24} height={24} />}
       <span>{title}</span>
     </Card>
