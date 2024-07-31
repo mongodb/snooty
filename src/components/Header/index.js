@@ -14,11 +14,7 @@ const StyledHeaderContainer = styled.header(
   top: 0;
   margin-top: ${props.hasBanner ? theme.header.bannerHeight : '0px'};
   z-index: ${theme.zIndexes.header};
-  ${
-    props.template === 'landing' || props.template === 'errorpage' || process.env['GATSBY_ENABLE_DARK_MODE'] === 'true'
-      ? ''
-      : 'position: sticky;'
-  }
+  ${props.template === 'landing' || props.template === 'errorpage' ? '' : 'position: sticky;'}
   `
 );
 

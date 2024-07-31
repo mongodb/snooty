@@ -17,14 +17,13 @@ exports[`renders with "connected" styling 1`] = `
   margin-top: 4px;
 }
 
-.emotion-0:not(:last-child):after {
+.emotion-0:not(:last-child):before {
   content: '';
   border-left: 2px dashed #E8EDEB;
   bottom: 0;
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: 0;
 }
 
 .emotion-2 {
@@ -48,7 +47,6 @@ exports[`renders with "connected" styling 1`] = `
   justify-content: center;
   position: relative;
   font-weight: bold;
-  z-index: 1;
   background-color: #E3FCF7;
   color: #00684A;
   height: 34px;
@@ -177,14 +175,13 @@ exports[`renders with "connected" styling by default 1`] = `
   margin-top: 4px;
 }
 
-.emotion-0:not(:last-child):after {
+.emotion-0:not(:last-child):before {
   content: '';
   border-left: 2px dashed #E8EDEB;
   bottom: 0;
   left: 16px;
   position: absolute;
   top: 0;
-  z-index: 0;
 }
 
 .emotion-2 {
@@ -208,7 +205,6 @@ exports[`renders with "connected" styling by default 1`] = `
   justify-content: center;
   position: relative;
   font-weight: bold;
-  z-index: 1;
   background-color: #E3FCF7;
   color: #00684A;
   height: 34px;
