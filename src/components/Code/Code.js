@@ -120,8 +120,7 @@ const Code = ({
         languageOptions={languageOptions}
         darkMode={darkModeProp ?? darkMode}
         onChange={(selectedOption) => {
-          const tabsetName = 'drivers';
-          setActiveTab({ name: tabsetName, value: selectedOption.id });
+          setActiveTab({ drivers: selectedOption.id });
         }}
         onCopy={reportCodeCopied}
         showLineNumbers={linenos}
