@@ -21,7 +21,7 @@ const Flexbox = styled('div')`
 
   a,
   span {
-    color: ${({ darkMode }) => (darkMode ? palette.gray.light1 : '#5C6C75')};
+    color: ${({ darkMode }) => (darkMode ? palette.gray.light1 : palette.gray.dark1)};
   }
 `;
 
