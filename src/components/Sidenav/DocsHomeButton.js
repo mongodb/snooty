@@ -8,6 +8,7 @@ import { Link } from '@leafygreen-ui/typography';
 import { baseUrl } from '../../utils/base-url';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import { titleStyle } from './styles/sideNavItem';
+import DarkModeToggle from './DarkModeToggle';
 
 const homeLinkStyle = LeafyCSS`
   span {
@@ -21,18 +22,26 @@ const homeLinkStyle = LeafyCSS`
   }
 `;
 
+const containerStyle = LeafyCSS`
+  display: flex;
+  align-items: center;
+`;
+
 const DocsHomeButton = ({ darkMode }) => {
   return (
-    <SideNavItem
-      className={cx(titleStyle, sideNavItemBasePadding, homeLinkStyle)}
-      as={Link}
-      href={baseUrl()}
-      hideExternalIcon={true}
-      style={{ '--color': darkMode ? palette.gray.light1 : palette.gray.dark1 }}
-    >
-      <Icon glyph="Home"></Icon>
-      Docs Home
-    </SideNavItem>
+    <div className={cx(containerStyle)}>
+      <SideNavItem
+        className={cx(titleStyle, sideNavItemBasePadding, homeLinkStyle)}
+        as={Link}
+        href={baseUrl()}
+        hideExternalIcon={true}
+        style={{ '--color': darkMode ? palette.gray.light1 : palette.gray.dark1 }}
+      >
+        <Icon glyph="Home"></Icon>
+        Docs Home
+      </SideNavItem>
+      {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && <DarkModeToggle />}
+    </div>
   );
 };
 
