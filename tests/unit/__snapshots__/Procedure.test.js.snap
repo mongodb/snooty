@@ -310,7 +310,7 @@ exports[`renders steps nested in include nodes 1`] = `
   color: #00684A;
   margin-top: 24px;
   margin-bottom: 8px;
-  color: var(--font-color-primary);
+  color: var(--heading-color-primary);
   margin-top: 16px;
   margin-bottom: 24px;
 }

@@ -1,16 +1,17 @@
+body {
+  background-color: initial;
+  color: initial;
+}
+
 .dark-theme body {
   background-color: var(--lg-bg-dark-mode);
   color: var(--lg-color-dark-mode);
 }
 
-.light-theme body {
-  background-color: initial;
-  color: initial;
-}
-
-.light-theme {
+body {
   --font-color-primary: var(--black);
   --font-color-light: var(--gray-base);
+  --heading-color-primary: var(--green-dark2);
 
   --link-color-primary: var(--blue-base);
 
@@ -18,9 +19,10 @@
   --background-color-secondary: var(--gray-light3);
 }
 
-.dark-theme {
+.dark-theme body {
   --font-color-primary: var(--gray-light2);
   --font-color-light: var(--gray-light2);
+  --heading-color-primary: var(--gray-light2);
 
   --link-color-primary: var(--blue-light1);
 
