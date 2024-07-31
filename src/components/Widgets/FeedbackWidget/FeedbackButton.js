@@ -19,28 +19,28 @@ const FEEDBACK_FAB_COLORS = {
     color: palette.blue.light1,
     bgColor: palette.gray.dark4,
     boxShadow: 'none',
-    boxShadowOnHover: `0px 0px 0px 3px #083C90`,
+    boxShadowOnHover: `0px 0px 0px 3px ${palette.blue.dark2}`,
   },
 };
 
-const containerStyle = (darkTheme) => css`
+const containerStyle = (siteTheme) => css`
   display: flex;
   align-items: center;
   gap: 4px;
   cursor: pointer;
   padding: 12px ${theme.size.default};
-  background-color: ${FEEDBACK_FAB_COLORS[darkTheme].bgColor};
+  background-color: ${FEEDBACK_FAB_COLORS[siteTheme].bgColor};
   border: 1px solid ${palette.blue.light1};
   border-radius: 40px;
-  box-shadow: ${FEEDBACK_FAB_COLORS[darkTheme].boxShadow};
+  box-shadow: ${FEEDBACK_FAB_COLORS[siteTheme].boxShadow};
   z-index: 9;
-  color: ${FEEDBACK_FAB_COLORS[darkTheme].color};
+  color: ${FEEDBACK_FAB_COLORS[siteTheme].color};
   font-weight: 600;
   font-size: 13px;
   line-height: 20px;
 
   :hover {
-    box-shadow: ${FEEDBACK_FAB_COLORS[darkTheme].boxShadowOnHover};
+    box-shadow: ${FEEDBACK_FAB_COLORS[siteTheme].boxShadowOnHover};
   }
 
   @media ${theme.screenSize.upToSmall} {
