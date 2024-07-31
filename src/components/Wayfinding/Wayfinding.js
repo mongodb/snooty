@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
+import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import WayfindingOption from './WayfindingOption';
 
@@ -33,31 +34,44 @@ const optionsContainerStyle = css`
   }
 `;
 
+const showAllButtonStyle = css`
+  background-color: inherit;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: ${palette.blue.base};
+  font-size: 13px;
+  line-height: 20px;
+`;
+
 const Wayfinding = ({ nodeData: { children } }) => {
   const [showAll, setShowAll] = useState(false);
   const maxInitialOptions = 4;
 
-  const priorityOptions = children.slice(0, maxInitialOptions);
-  const otherOptions = children.slice(maxInitialOptions);
-
+  const shownOptions = showAll ? children : children.slice(0, 4);
   const showButtonText = showAll ? 'Collapse' : 'Show all';
-
-  const renderWayfindingOptions = (option) => {
-    if (option.name !== 'wayfinding-option') {
-      return null;
-    }
-    return <WayfindingOption nodeData={option}>option</WayfindingOption>;
-  };
+  const showButtonGlyph = showAll ? 'ChevronUp' : 'ChevronDown';
 
   return (
     <div className={cx(containerStyle)}>
       <Body className={titleStyle}>{TITLE_TEXT}</Body>
       <Body baseFontSize={13}>{DESCRIPTION_TEXT}</Body>
       <div className={cx(optionsContainerStyle)}>
-        {priorityOptions.map(renderWayfindingOptions)}
-        {showAll && otherOptions.map(renderWayfindingOptions)}
+        {shownOptions.map((option) => {
+          if (option.name !== 'wayfinding-option') {
+            return null;
+          }
+          return <WayfindingOption nodeData={option} />;
+        })}
       </div>
-      {children.length > maxInitialOptions && <div onClick={() => setShowAll((prev) => !prev)}>{showButtonText}</div>}
+      {children.length > maxInitialOptions && (
+        <button className={cx(showAllButtonStyle)} onClick={() => setShowAll((prev) => !prev)}>
+          {showButtonText}
+          <Icon glyph={showButtonGlyph} />
+        </button>
+      )}
     </div>
   );
 };
