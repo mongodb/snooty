@@ -10,7 +10,6 @@ const circleIndividualStyles = {
   connected: (darkMode) => css`
     position: relative;
     font-weight: bold;
-    z-index: 1;
     background-color: ${darkMode ? palette.green.dark2 : palette.green.light3};
     color: ${darkMode ? palette.gray.light2 : palette.green.dark2};
     height: 34px;
@@ -46,14 +45,13 @@ const landingStepStyles = {
       margin-top: ${theme.size.tiny};
     }
 
-    :not(:last-child):after {
+    :not(:last-child):before {
       content: '';
       border-left: 2px dashed ${darkMode ? palette.gray.dark1 : palette.gray.light2};
       bottom: 0;
       left: 16px;
       position: absolute;
       top: 0;
-      z-index: 0;
     }
   `,
   normal: (darkMode) => css`
