@@ -9,21 +9,21 @@
 }
 
 .light-theme {
-  --font-color-primary: var(--gray-dark4);
-  --font-color-light: #889397;
+  --font-color-primary: var(--black);
+  --font-color-light: var(--gray-base);
 
-  --link-color-primary: #016bf8;
+  --link-color-primary: var(--blue-base);
 
-  --background-color-primary: #ffffff;
-  --background-color-secondary: #f9fbfa;
+  --background-color-primary: var(--white);
+  --background-color-secondary: var(--gray-light3);
 }
 
 .dark-theme {
-  --font-color-primary: var(--day-spa);
-  --font-color-light: var(--day-spa);
+  --font-color-primary: var(--gray-light2);
+  --font-color-light: var(--gray-light2);
 
-  --link-color-primary: #0498ec;
+  --link-color-primary: var(--blue-light1);
 
-  --background-color-primary: #1c2d38;
+  --background-color-primary: var(--gray-dark3);
   --background-color-secondary: transparent;
 }
