@@ -31,6 +31,7 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:hover,
@@ -97,6 +98,7 @@ exports[`Link component renders a variety of strings correctly external MDB docs
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:hover,
@@ -164,6 +166,7 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:hover,
@@ -231,6 +234,7 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:hover,
@@ -298,6 +302,7 @@ exports[`Link component renders a variety of strings correctly external URL with
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:hover,
@@ -365,6 +370,7 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:hover,
@@ -460,6 +466,7 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:hover,
@@ -510,11 +517,12 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:focus,
@@ -558,11 +566,12 @@ exports[`Link component renders a variety of strings correctly internal link que
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:focus,
@@ -606,11 +615,12 @@ exports[`Link component renders a variety of strings correctly internal link tha
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:focus,
@@ -654,11 +664,12 @@ exports[`Link component renders a variety of strings correctly internal link wit
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:focus,

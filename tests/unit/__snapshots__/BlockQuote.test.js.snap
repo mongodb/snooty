@@ -56,6 +56,7 @@ exports[`renders correctly 1`] = `
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-8:hover,

@@ -78,6 +78,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -346,11 +347,12 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-26>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-26:focus,
@@ -543,7 +545,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -581,6 +583,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 
 .emotion-8>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-8:focus,
@@ -812,11 +815,12 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-26>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-26:focus,
@@ -999,7 +1003,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -1037,6 +1041,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 
 .emotion-8>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-8:focus,
@@ -1268,11 +1273,12 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-26>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-26:focus,

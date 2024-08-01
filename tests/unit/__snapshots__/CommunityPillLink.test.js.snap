@@ -35,6 +35,7 @@ exports[`community drivers directives render correctly 1`] = `
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-1:hover,

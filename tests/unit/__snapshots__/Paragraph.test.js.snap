@@ -48,6 +48,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-1:hover,
@@ -136,6 +137,7 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   font-weight: 400;
   display: inline;
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-1:hover,

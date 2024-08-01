@@ -14,7 +14,7 @@ exports[`button component renders correctly 1`] = `
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -51,6 +51,7 @@ exports[`button component renders correctly 1`] = `
 
 .emotion-0>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0:focus,

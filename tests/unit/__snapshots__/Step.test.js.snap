@@ -98,11 +98,12 @@ exports[`renders with "connected" styling 1`] = `
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9:focus,
@@ -256,11 +257,12 @@ exports[`renders with "connected" styling by default 1`] = `
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9:focus,
@@ -399,11 +401,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   text-decoration-color: transparent;
   line-height: 13px;
   color: var(--link-color-primary);
-  font-weight: inherit;
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9>code {
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9:focus,
