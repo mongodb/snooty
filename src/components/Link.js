@@ -43,6 +43,7 @@ const THEME_STYLES = {
 
 const sharedDarkModeOverwriteStyles = `
   color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 `;
 
 /**
@@ -57,7 +58,6 @@ const gatsbyLinkStyling = (linkThemeStyle) => css`
   text-decoration-color: transparent;
   line-height: 13px;
   ${sharedDarkModeOverwriteStyles};
-  font-weight: ${linkThemeStyle.fontWeight};
 
   > code {
     ${sharedDarkModeOverwriteStyles}
