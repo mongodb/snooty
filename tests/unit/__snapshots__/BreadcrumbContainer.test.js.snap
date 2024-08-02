@@ -13,11 +13,6 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   align-items: center;
 }
 
-.emotion-0 a,
-.emotion-0 span {
-  color: #5C6C75;
-}
-
 .emotion-2 {
   overflow: hidden;
   white-space: nowrap;
@@ -65,6 +60,8 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -210,11 +207,6 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   align-items: center;
 }
 
-.emotion-0 a,
-.emotion-0 span {
-  color: #5C6C75;
-}
-
 .emotion-2 {
   overflow: hidden;
   white-space: nowrap;
@@ -262,6 +254,8 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -333,8 +327,8 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -342,7 +336,8 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
 }
 
 .emotion-11>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-11:focus,
@@ -450,11 +445,6 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
   align-items: center;
 }
 
-.emotion-0 a,
-.emotion-0 span {
-  color: #5C6C75;
-}
-
 .emotion-2 {
   overflow: hidden;
   white-space: nowrap;
@@ -502,6 +492,8 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -631,11 +623,6 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   align-items: center;
 }
 
-.emotion-0 a,
-.emotion-0 span {
-  color: #5C6C75;
-}
-
 .emotion-2 {
   overflow: hidden;
   white-space: nowrap;
@@ -683,6 +670,8 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -754,8 +743,8 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
@@ -763,7 +752,8 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
 }
 
 .emotion-11>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-11:focus,

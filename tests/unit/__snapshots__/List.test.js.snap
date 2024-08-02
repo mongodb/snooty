@@ -19,6 +19,7 @@ exports[`List renders correctly 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-2 strong,

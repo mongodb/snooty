@@ -12,6 +12,7 @@ exports[`renders correctly 1`] = `
   color: #001E2B;
   margin-top: 24px;
   margin-bottom: 8px;
+  color: var(--font-color-primary);
 }
 
 .emotion-1 {
@@ -84,6 +85,7 @@ exports[`renders correctly in dark mode 1`] = `
   color: #E8EDEB;
   margin-top: 24px;
   margin-bottom: 8px;
+  color: var(--font-color-primary);
 }
 
 .emotion-1 {
