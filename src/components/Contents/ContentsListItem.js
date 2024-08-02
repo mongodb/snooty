@@ -39,7 +39,7 @@ const listItemStyling = ({ isActive }) => css`
 `;
 
 const linkStyling = ({ depth, isActive }) => css`
-  color: var(--font-color-priamry);
+  color: var(--font-color-primary);
   font-size: ${theme.fontSize.small};
   line-height: ${theme.fontSize.default};
   font-weight: normal;
