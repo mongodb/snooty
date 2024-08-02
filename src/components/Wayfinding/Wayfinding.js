@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
+import ComponentFactory from '../ComponentFactory';
+import { getPlaintext } from '../../utils/get-plaintext';
 import WayfindingOption from './WayfindingOption';
 
-const TITLE_TEXT = 'MongoDB with drivers';
-const DESCRIPTION_TEXT =
-  'This page documents a mongosh method. To view the equivalent method in a MongoDB driver, visit the drivers page for your programming language';
+const MAX_INIT_OPTIONS = 4;
+const CHILD_DESCRIPTION_NAME = 'wayfinding-description';
+const CHILD_OPTION_NAME = 'wayfinding-option';
 
 const containerStyle = css`
   width: 100%;
@@ -21,6 +23,18 @@ const containerStyle = css`
 const titleStyle = css`
   margin-bottom: 2px;
   font-weight: 600;
+`;
+
+// Style attempts to overwrite child nodes to get them to conform to wayfinding styling
+const descriptionStyle = css`
+  * {
+    font-size: ${theme.fontSize.small} !important;
+    line-height: 20px !important;
+  }
+
+  *:last-child {
+    margin-bottom: 0 !important;
+  }
 `;
 
 const optionsContainerStyle = css`
@@ -46,9 +60,24 @@ const showAllButtonStyle = css`
   line-height: 20px;
 `;
 
-const Wayfinding = ({ nodeData: { children } }) => {
+const getWayfindingComponents = (children) => {
+  const descriptionNodeIdx = children.findIndex(({ name }) => name === CHILD_DESCRIPTION_NAME);
+  const [descriptionNode] = descriptionNodeIdx >= 0 ? children.splice(descriptionNodeIdx, 1) : [];
+  return {
+    descriptionNode,
+    optionNodes: children,
+  };
+};
+
+const Wayfinding = ({ nodeData: { children, argument } }) => {
   const [showAll, setShowAll] = useState(false);
-  const maxInitialOptions = 4;
+
+  // Memoize so that children nodes doesn't keep getting spliced
+  const { descriptionNode, optionNodes } = useMemo(() => {
+    // Create copy of children to avoid issues with hot reload
+    return getWayfindingComponents([...children]);
+  }, [children]);
+  const titleText = getPlaintext(argument);
 
   const { showButtonText, showButtonGlyph } = showAll
     ? {
@@ -62,18 +91,22 @@ const Wayfinding = ({ nodeData: { children } }) => {
 
   return (
     <div className={cx(containerStyle)}>
-      <Body className={titleStyle}>{TITLE_TEXT}</Body>
-      <Body baseFontSize={13}>{DESCRIPTION_TEXT}</Body>
+      <Body className={titleStyle}>{titleText}</Body>
+      <div className={cx(descriptionStyle)}>
+        {descriptionNode?.children?.map((child, index) => {
+          return <ComponentFactory key={index} nodeData={child} />;
+        })}
+      </div>
       <div className={cx(optionsContainerStyle)}>
-        {children.map((option, index) => {
-          if (option.name !== 'wayfinding-option') {
+        {optionNodes.map((option, index) => {
+          if (option.name !== CHILD_OPTION_NAME) {
             return null;
           }
-          const shouldHideOption = !showAll && index > maxInitialOptions - 1;
+          const shouldHideOption = !showAll && index > MAX_INIT_OPTIONS - 1;
           return <WayfindingOption key={index} hideOption={shouldHideOption} nodeData={option} />;
         })}
       </div>
-      {children.length > maxInitialOptions && (
+      {optionNodes.length > MAX_INIT_OPTIONS && (
         <button className={cx(showAllButtonStyle)} onClick={() => setShowAll((prev) => !prev)}>
           {showButtonText}
           <Icon glyph={showButtonGlyph} />
