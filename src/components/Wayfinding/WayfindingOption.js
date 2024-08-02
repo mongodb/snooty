@@ -6,11 +6,11 @@ import { getPlaintext } from '../../utils/get-plaintext';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { NOTRANSLATE_CLASS } from '../../utils/locale';
 
-const optionStyle = css`
+const optionStyle = ({ hideOption }) => css`
   box-shadow: unset;
   padding: 6px 12px;
   text-decoration: none;
-  display: flex;
+  display: ${hideOption ? 'none' : 'flex'};
   align-items: center;
   min-height: 36px;
   border-radius: 8px;
@@ -25,7 +25,7 @@ const imgStyle = css`
   margin-right: 12px;
 `;
 
-const WayfindingOption = ({ nodeData: { options, argument } }) => {
+const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false }) => {
   const optionLink = getPlaintext(argument);
   const title = options?.title;
   const lang = options?.language;
@@ -34,7 +34,7 @@ const WayfindingOption = ({ nodeData: { options, argument } }) => {
   const Icon = DRIVER_ICON_MAP[optionId] || DRIVER_ICON_MAP[lang];
 
   return (
-    <Card className={cx(optionStyle, NOTRANSLATE_CLASS)} href={optionLink}>
+    <Card className={cx(NOTRANSLATE_CLASS, optionStyle({ hideOption }))} href={optionLink}>
       {Icon && <Icon className={imgStyle} width={24} height={24} />}
       <span>{title}</span>
     </Card>

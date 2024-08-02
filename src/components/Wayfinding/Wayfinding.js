@@ -24,7 +24,7 @@ const titleStyle = css`
 `;
 
 const optionsContainerStyle = css`
-  margin: 16px 0;
+  padding: 16px 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, 164px);
   gap: 8px 6px;
@@ -50,20 +50,27 @@ const Wayfinding = ({ nodeData: { children } }) => {
   const [showAll, setShowAll] = useState(false);
   const maxInitialOptions = 4;
 
-  const shownOptions = showAll ? children : children.slice(0, 4);
-  const showButtonText = showAll ? 'Collapse' : 'Show all';
-  const showButtonGlyph = showAll ? 'ChevronUp' : 'ChevronDown';
+  const { showButtonText, showButtonGlyph } = showAll
+    ? {
+        showButtonText: 'Collapse',
+        showButtonGlyph: 'ChevronUp',
+      }
+    : {
+        showButtonText: 'Show all',
+        showButtonGlyph: 'ChevronDown',
+      };
 
   return (
     <div className={cx(containerStyle)}>
       <Body className={titleStyle}>{TITLE_TEXT}</Body>
       <Body baseFontSize={13}>{DESCRIPTION_TEXT}</Body>
       <div className={cx(optionsContainerStyle)}>
-        {shownOptions.map((option) => {
+        {children.map((option, index) => {
           if (option.name !== 'wayfinding-option') {
             return null;
           }
-          return <WayfindingOption nodeData={option} />;
+          const shouldHideOption = !showAll && index > maxInitialOptions - 1;
+          return <WayfindingOption key={index} hideOption={shouldHideOption} nodeData={option} />;
         })}
       </div>
       {children.length > maxInitialOptions && (
