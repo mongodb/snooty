@@ -26,8 +26,13 @@ const getPosition = (element) => {
 const defaultTabsStyling = css`
   margin-bottom: ${theme.size.medium};
   ${TAB_BUTTON_SELECTOR} {
+    color: var(--tab-color-primary);
     font-size: ${theme.size.default};
     align-items: center;
+
+    &[aria-selected='true'] {
+      color: var(--tab-color-secondary);
+    }
   }
 
   @media ${theme.screenSize.upTo2XLarge} {

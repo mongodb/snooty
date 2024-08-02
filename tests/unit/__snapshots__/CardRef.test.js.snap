@@ -135,6 +135,7 @@ exports[`card correctly with and without url 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-6 strong,
@@ -153,8 +154,8 @@ exports[`card correctly with and without url 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   background: #F9FBFA;
   border-radius: 4px;
   border: 1px solid #C1C7C6;
@@ -168,7 +169,8 @@ exports[`card correctly with and without url 1`] = `
 }
 
 .emotion-8>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-8:focus,
@@ -295,6 +297,8 @@ exports[`card correctly with and without url 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-20:hover,
