@@ -5,6 +5,7 @@ import { getPlaintext } from '../../utils/get-plaintext';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { NOTRANSLATE_CLASS } from '../../utils/locale';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
 
 const optionStyle = ({ hideOption }) => css`
   box-shadow: unset;
@@ -39,7 +40,16 @@ const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false 
   const Icon = DRIVER_ICON_MAP[optionId] || DRIVER_ICON_MAP[lang];
 
   return (
-    <a className={cx(NOTRANSLATE_CLASS, optionStyle({ hideOption }))} href={optionLink}>
+    <a
+      className={cx(NOTRANSLATE_CLASS, optionStyle({ hideOption }))}
+      href={optionLink}
+      onClick={() => {
+        reportAnalytics('WayfindingOptionClicked', {
+          optionId,
+          optionLink,
+        });
+      }}
+    >
       {Icon && <Icon className={imgStyle} width={24} height={24} />}
       <span>{title}</span>
     </a>
