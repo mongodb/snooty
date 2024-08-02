@@ -18,6 +18,9 @@ body {
 
   --background-color-primary: var(--white);
   --background-color-secondary: var(--gray-light3);
+
+  --tab-color-primary: var(--gray-dark1);
+  --tab-color-secondary: var(--green-dark2);
 }
 
 .dark-theme body {
@@ -30,4 +33,7 @@ body {
 
   --background-color-primary: var(--gray-dark3);
   --background-color-secondary: transparent;
+
+  --tab-color-primary: var(--gray-light1);
+  --tab-color-secondary: var(--gray-light2);
 }
