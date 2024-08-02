@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
@@ -15,14 +14,15 @@ const CHILD_OPTION_NAME = 'wayfinding-option';
 const containerStyle = css`
   width: 100%;
   border-radius: 24px;
-  border: 1px solid ${palette.gray.light2};
-  background-color: ${palette.gray.light3};
+  border: 1px solid var(--wayfinding-border-color);
+  background-color: var(--wayfinding-bg-color);
   padding: 24px 32px;
 `;
 
 const titleStyle = css`
   margin-bottom: 2px;
   font-weight: 600;
+  color: var(--font-color-primary);
 `;
 
 // Style attempts to overwrite child nodes to get them to conform to wayfinding styling
@@ -38,7 +38,7 @@ const descriptionStyle = css`
 `;
 
 const optionsContainerStyle = css`
-  padding: 16px 0;
+  margin: 16px 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, 164px);
   gap: 8px 6px;
@@ -55,7 +55,7 @@ const showAllButtonStyle = css`
   display: flex;
   align-items: center;
   gap: 8px;
-  color: ${palette.blue.base};
+  color: var(--link-color-primary);
   font-size: 13px;
   line-height: 20px;
 `;

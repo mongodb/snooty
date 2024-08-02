@@ -21,6 +21,10 @@ body {
 
   --tab-color-primary: var(--gray-dark1);
   --tab-color-secondary: var(--green-dark2);
+
+  --wayfinding-bg-color: var(--gray-light3);
+  --wayfinding-border-color: var(--gray-light2);
+  --wayfinding-option-bg-color: var(--white);
 }
 
 .dark-theme body {
@@ -36,4 +40,8 @@ body {
 
   --tab-color-primary: var(--gray-light1);
   --tab-color-secondary: var(--gray-light2);
+
+  --wayfinding-bg-color: var(--gray-dark3);
+  --wayfinding-border-color: var(--gray-dark2);
+  --wayfinding-option-bg-color: var(--black);
 }
