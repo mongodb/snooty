@@ -14,16 +14,6 @@ const StyledHeaderContainer = styled.header(
   margin-top: ${props.hasBanner ? theme.header.bannerHeight : '0px'};
   z-index: ${theme.zIndexes.header};
   ${props.template === 'landing' || props.template === 'errorpage' ? '' : 'position: sticky;'}
-
-  --breadcrumb-color: ${palette.gray.dark1};
-  .dark-theme & {
-    --breadcrumb-color: ${palette.gray.light1};
-  }
-
-
-  nav {
-    background-
-  }
   `
 );
 
