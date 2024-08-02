@@ -59,15 +59,15 @@ const Header = ({ sidenav }) => {
   const { bannerContent } = useContext(HeaderContext);
 
   return (
-    <StyledHeaderContainer hasBanner={!!bannerContent}>
+    <>
       <SiteBanner />
-      <>
+      <StyledHeaderContainer hasBanner={!!bannerContent}>
         <StyledUnifiedNavPlaceholder>
           <StyledStagingWarning>This is a staging build.</StyledStagingWarning>
         </StyledUnifiedNavPlaceholder>
         {sidenav && <SidenavMobileMenuDropdown />}
-      </>
-    </StyledHeaderContainer>
+      </StyledHeaderContainer>
+    </>
   );
 };
 
