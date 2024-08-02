@@ -3,13 +3,11 @@
 exports[`admonitions render correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  font-family: Euclid Circular A,‘Helvetica Neue’,Helvetica,Arial,sans-serif;
-  background-color: #FFFFFF;
-  border-radius: 16px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  -webkit-padding-start: 12px;
+  padding-inline-start: 12px;
   position: relative;
-  color: #0C2657;
-  border: 2px solid #C3E7FE;
-  box-shadow: inset 0px 2px 0px 0px #E1F7FF;
   margin-top: 24px;
   margin-bottom: 24px;
 }
@@ -17,19 +15,12 @@ exports[`admonitions render correctly 1`] = `
 .emotion-0:after {
   content: '';
   position: absolute;
-  width: 16px;
-  left: -2px;
-  top: -2px;
-  bottom: -2px;
-  border-radius: 16px 0px 0px 16px;
-}
-
-.emotion-0:after {
-  background: linear-gradient(
-                to left,
-                transparent 9px,
-                #016BF8 9px
-              );
+  width: 3px;
+  top: 0px;
+  bottom: 0px;
+  left: 0;
+  border-radius: 2px;
+  background-color: #016BF8;
 }
 
 .emotion-0 p {
@@ -45,92 +36,98 @@ exports[`admonitions render correctly 1`] = `
 }
 
 .emotion-1 {
-  padding: 12px 24px 12px 52px;
-  position: relative;
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 12px;
+  font-weight: 700;
   text-transform: uppercase;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  color: #001E2B;
   width: 100%;
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
-  background-color: #E1F7FF;
+  margin-block-end: 4px;
   color: #1254B7;
 }
 
 .emotion-2 {
-  color: #016BF8;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  left: 20px;
-  position: absolute;
-}
-
-.emotion-3 {
   margin: unset;
-  font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-size: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
-  line-height: 16px;
-  letter-spacing: 0.3px;
-  color: inherit;
-  letter-spacing: 0.6px;
-}
-
-.emotion-4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding: 16px 24px 16px 52px;
+  font-size: 16px;
+  line-height: 28px;
+  color: #001E2B;
   font-weight: 400;
 }
 
-.emotion-5 {
-  font-size: 16px;
-  line-height: 28px;
+.emotion-2 strong,
+.emotion-2 b {
+  font-weight: 700;
+}
+
+.emotion-2 a:not(.lg-ui-0001) {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: inline;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #016BF8;
+  font-weight: 400;
+}
+
+.emotion-2 a:not(.lg-ui-0001):hover,
+.emotion-2 a:not(.lg-ui-0001)[data-hover='true'],
+.emotion-2 a:not(.lg-ui-0001):focus-visible,
+.emotion-2 a:not(.lg-ui-0001)[data-focus='true'] {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-2 a:not(.lg-ui-0001):focus {
+  outline: none;
+}
+
+.emotion-2 a:not(.lg-ui-0001):hover,
+.emotion-2 a:not(.lg-ui-0001)[data-hover='true'] {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-2 a:not(.lg-ui-0001):focus-visible,
+.emotion-2 a:not(.lg-ui-0001)[data-focus='true'] {
+  text-decoration-color: #016BF8;
 }
 
 <div
     class="emotion-0"
     role="note"
   >
-    <div
+    <h2
       class="emotion-1"
     >
-      <svg
-        alt=""
-        aria-hidden="true"
-        class="emotion-2"
-        height="16"
-        role="presentation"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          clip-rule="evenodd"
-          d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM9 4C9 4.55228 8.55228 5 8 5C7.44772 5 7 4.55228 7 4C7 3.44772 7.44772 3 8 3C8.55228 3 9 3.44772 9 4ZM8 6C8.55228 6 9 6.44772 9 7V11H9.5C9.77614 11 10 11.2239 10 11.5C10 11.7761 9.77614 12 9.5 12H6.5C6.22386 12 6 11.7761 6 11.5C6 11.2239 6.22386 11 6.5 11H7V7H6.5C6.22386 7 6 6.77614 6 6.5C6 6.22386 6.22386 6 6.5 6H8Z"
-          fill="currentColor"
-          fill-rule="evenodd"
-        />
-      </svg>
-      <h2
-        class="emotion-3"
-      >
-        Note
-      </h2>
-    </div>
+      Note
+    </h2>
     <div
-      class="emotion-4"
+      class="emotion-2"
     >
-      <div
-        class="emotion-5"
-      >
-        These instructions are for installing MongoDB directly from
-      </div>
+      These instructions are for installing MongoDB directly from
     </div>
   </div>
 </DocumentFragment>
