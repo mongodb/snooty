@@ -96,6 +96,7 @@ exports[`renders correctly 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-9 strong,
@@ -114,12 +115,13 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-11>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-11:focus,
@@ -309,6 +311,7 @@ exports[`renders steps nested in include nodes 1`] = `
   color: #00684A;
   margin-top: 24px;
   margin-bottom: 8px;
+  color: var(--heading-color-primary);
   margin-top: 16px;
   margin-bottom: 24px;
 }
@@ -342,6 +345,7 @@ exports[`renders steps nested in include nodes 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-14 strong,
@@ -838,6 +842,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-9 strong,
@@ -856,12 +861,13 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-11>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-11:focus,

@@ -78,6 +78,7 @@ exports[`renders with "connected" styling 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-7 strong,
@@ -96,12 +97,13 @@ exports[`renders with "connected" styling 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9:focus,
@@ -235,6 +237,7 @@ exports[`renders with "connected" styling by default 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-7 strong,
@@ -253,12 +256,13 @@ exports[`renders with "connected" styling by default 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9:focus,
@@ -377,6 +381,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-7 strong,
@@ -395,12 +400,13 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-9:focus,
