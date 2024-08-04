@@ -7,7 +7,7 @@ import ComponentFactory from '../ComponentFactory';
 import { getPlaintext } from '../../utils/get-plaintext';
 import WayfindingOption from './WayfindingOption';
 
-const MAX_INIT_OPTIONS = 4;
+export const MAX_INIT_OPTIONS = 4;
 const CHILD_DESCRIPTION_NAME = 'wayfinding-description';
 const CHILD_OPTION_NAME = 'wayfinding-option';
 
