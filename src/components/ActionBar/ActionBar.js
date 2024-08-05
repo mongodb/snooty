@@ -19,8 +19,14 @@ const ActionBarContainer = styled('div')`
   top: 0;
   flex-wrap: wrap;
   z-index: ${theme.zIndexes.actionBar};
-  background-color: ${(props) => (props.darkMode ? palette.black : palette.white)};
-  border-bottom: 1px solid ${(props) => (props.darkMode ? palette.gray.dark2 : palette.gray.light2)};
+  background-color: var(--background-color-primary);
+  border-bottom: 1px solid var(--border-color);
+
+  --border-color: ${palette.gray.light2};
+
+  .dark-theme & {
+    --border-color: ${palette.gray.dark2};
+  }
 
   @media ${theme.screenSize.mediumAndUp} {
     & > div {
@@ -78,7 +84,7 @@ const ActionBar = ({ template, pageTitle, slug, ...props }) => {
     title: pageTitle || 'Home',
   });
   return (
-    <ActionBarContainer className={props.className} darkMode={darkMode}>
+    <ActionBarContainer className={props.className}>
       <ActionBarSearchContainer>
         <ChatbotUi darkMode={darkMode} />
       </ActionBarSearchContainer>
