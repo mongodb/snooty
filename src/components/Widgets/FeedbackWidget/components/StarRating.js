@@ -5,7 +5,6 @@ import { palette } from '@leafygreen-ui/palette';
 import { css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { useFeedbackContext } from '../context';
-import { isBrowser } from '../../../../utils/is-browser';
 import useScreenSize from '../../../../hooks/useScreenSize';
 import { theme } from '../../../../theme/docsTheme';
 const Tooltip = loadable(() => import('./LeafygreenTooltip'));
@@ -52,6 +51,14 @@ const Layout = styled.div`
 
 const StarContainer = styled.div`
   cursor: pointer;
+`;
+
+const CaptionContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 16px;
+  align-items: center;
 `;
 
 export const StarRatingLabel = styled.div`
@@ -140,7 +147,7 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
   };
 
   return (
-    isBrowser && (
+    <>
       <Layout className={className} onMouseLeave={resetHoverStates}>
         {[1, 2, 3, 4, 5].map((ratingValue) => {
           const isHighlighted = hoveredRating ? hoveredRating >= ratingValue : selectedRating >= ratingValue;
@@ -166,7 +173,12 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
           );
         })}
       </Layout>
-    )
+      <CaptionContainer>
+        Poor
+        <Icon glyph="ArrowRight" />
+        Excellent
+      </CaptionContainer>
+    </>
   );
 };
 
