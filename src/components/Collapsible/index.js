@@ -1,5 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from '@gatsbyjs/reach-router';
 import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
@@ -16,6 +17,7 @@ const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
   const { darkMode } = useDarkMode();
   const { id, heading, sub_heading: subHeading } = options;
   const [open, setOpen] = useState(false);
+  const { hash } = useLocation();
   const headingNodeData = useMemo(
     () => ({
       id,
@@ -31,6 +33,13 @@ const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
     });
     setOpen(!open);
   }, [heading, open]);
+
+  useEffect(() => {
+    const hashId = hash?.slice(1) ?? '';
+    if (id === hashId) {
+      setOpen(true);
+    }
+  }, [hash, id]);
 
   return (
     <Box className={cx('collapsible', collapsibleStyle)}>
