@@ -71,8 +71,6 @@ const getWayfindingComponents = (children) => {
 
 const Wayfinding = ({ nodeData: { children, argument } }) => {
   const [showAll, setShowAll] = useState(false);
-
-  // Memoize so that children nodes doesn't keep getting spliced
   const { descriptionNode, optionNodes } = useMemo(() => {
     // Create copy of children to avoid issues with hot reload
     return getWayfindingComponents([...children]);
