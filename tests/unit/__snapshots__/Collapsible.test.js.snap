@@ -38,6 +38,7 @@ exports[`collapsible component renders all the content in the options and childr
   color: #001E2B;
   margin-top: 24px;
   margin-bottom: 8px;
+  color: var(--font-color-primary);
   margin-top: 0;
 }
 
@@ -188,6 +189,7 @@ exports[`collapsible component renders all the content in the options and childr
   color: #001E2B;
   font-weight: 400;
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 }
 
 .emotion-11 strong,

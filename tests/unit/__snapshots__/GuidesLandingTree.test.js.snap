@@ -18,8 +18,8 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -68,7 +68,8 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-1:focus,
@@ -191,8 +192,8 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -236,7 +237,8 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-1:focus,
@@ -343,8 +345,8 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   margin: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -388,7 +390,8 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-1:focus,

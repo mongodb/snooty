@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { palette } from '@leafygreen-ui/palette';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { theme } from '../../theme/docsTheme';
 import { getFullBreadcrumbPath } from '../../utils/get-complete-breadcrumb-data';
@@ -18,18 +16,12 @@ const StyledSlash = styled('span')`
 const Flexbox = styled('div')`
   display: flex;
   align-items: center;
-
-  a,
-  span {
-    color: ${({ darkMode }) => (darkMode ? palette.gray.light1 : palette.gray.dark1)};
-  }
 `;
 
 const MIN_BREADCRUMBS = 3;
 const initialMaxCrumbs = (breadcrumbs) => breadcrumbs.length + 1;
 
 const BreadcrumbContainer = ({ breadcrumbs }) => {
-  const { darkMode } = useDarkMode();
   const [maxCrumbs, setMaxCrumbs] = React.useState(initialMaxCrumbs(breadcrumbs));
 
   React.useEffect(() => {
@@ -61,7 +53,7 @@ const BreadcrumbContainer = ({ breadcrumbs }) => {
   };
 
   return (
-    <Flexbox darkMode={darkMode}>
+    <Flexbox>
       {processedBreadcrumbs.map((crumb, index) => {
         const isFirst = index === 0;
         return (

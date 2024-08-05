@@ -144,12 +144,13 @@ exports[`renders correctly 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-12>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-12:focus,
