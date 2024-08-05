@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, act } from '@testing-library/react';
 
+import { mockLocation } from '../utils/mock-location';
 import Collapsible from '../../src/components/Collapsible';
 import mockData from './data/Collapsible.test.json';
 
@@ -32,5 +33,14 @@ describe('collapsible component', () => {
     expect(icon.getAttribute('aria-label')).toContain('Chevron');
     expect(icon.getAttribute('aria-label')).toContain('Down');
     expect(collapsedContent).toBeVisible();
+  });
+
+  it('opens the collapsible content if hash is found in the URL', async () => {
+    mockLocation(null, '/', '#this-is-a-heading');
+    let renderResult = render(<Collapsible nodeData={mockData}></Collapsible>),
+      button = renderResult.getByRole('button'),
+      icon = button.querySelector('[role=img]');
+    expect(icon.getAttribute('aria-label')).toContain('Chevron');
+    expect(icon.getAttribute('aria-label')).toContain('Down');
   });
 });
