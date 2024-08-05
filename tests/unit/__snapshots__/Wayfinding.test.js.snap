@@ -163,6 +163,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-5"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -212,6 +213,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-5"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -261,6 +263,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-5"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -454,6 +457,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-5"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -538,6 +542,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -576,6 +581,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -620,6 +626,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -657,6 +664,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -706,6 +714,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -838,6 +847,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -970,6 +980,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -1086,6 +1097,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -1170,6 +1182,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -1254,6 +1267,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -1803,6 +1817,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -1846,6 +1861,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -1901,6 +1917,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
@@ -1925,6 +1942,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
       <a
         class="notranslate emotion-13"
         href="https://www.mongodb.com/docs/"
+        target="_self"
       >
         <svg
           class="emotion-6"
