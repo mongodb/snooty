@@ -43,6 +43,7 @@ const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false 
     <a
       className={cx(NOTRANSLATE_CLASS, optionStyle({ hideOption }))}
       href={optionLink}
+      target={'_self'}
       onClick={() => {
         reportAnalytics('WayfindingOptionClicked', {
           optionId,
