@@ -10,8 +10,14 @@ import BreadcrumbContainer from './BreadcrumbContainer';
 
 const breadcrumbBodyStyle = css`
   font-size: ${theme.fontSize.small};
-  a {
-    color: ${palette.gray.dark1};
+  --breadcrumb-color: ${palette.gray.dark1};
+  .dark-theme & {
+    --breadcrumb-color: ${palette.gray.light1};
+  }
+
+  a,
+  span {
+    color: var(--breadcrumb-color);
   }
 `;
 

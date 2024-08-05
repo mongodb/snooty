@@ -19,9 +19,10 @@ const h2Styling = css`
   margin-bottom: 24px;
 `;
 
-const headingStyles = css`
+const headingStyles = (sectionDepth) => css`
   margin-top: 24px;
   margin-bottom: 8px;
+  color: ${sectionDepth < 2 ? `var(--heading-color-primary)` : `var(--font-color-primary)`};
 `;
 
 const labButtonStyling = css`
@@ -63,7 +64,12 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
         )}
       >
         <HeadingTag
-          className={cx(headingStyles, 'contains-headerlink', sectionDepth === 1 ? h2Styling : '', className)}
+          className={cx(
+            headingStyles(sectionDepth),
+            'contains-headerlink',
+            sectionDepth === 1 ? h2Styling : '',
+            className
+          )}
           as={asHeading}
           weight="medium"
         >
