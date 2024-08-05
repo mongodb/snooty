@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import loadable from '@loadable/component';
 import { palette } from '@leafygreen-ui/palette';
-import { css } from '@leafygreen-ui/emotion';
+import { css, cx } from '@leafygreen-ui/emotion';
+import { Body } from '@leafygreen-ui/typography';
 import Icon from '@leafygreen-ui/icon';
 import { useFeedbackContext } from '../context';
 import useScreenSize from '../../../../hooks/useScreenSize';
@@ -42,7 +43,7 @@ const Layout = styled.div`
   display: flex;
   gap: ${theme.size.small};
   justify-content: center;
-  margin: ${theme.size.default} 0 ${theme.size.small};
+  margin: ${theme.size.default} 0 10px;
 
   @media ${theme.screenSize.upToLarge} {
     gap: 12px;
@@ -53,12 +54,19 @@ const StarContainer = styled.div`
   cursor: pointer;
 `;
 
-const CaptionContainer = styled.div`
+const captionStyling = css`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  padding: 0 16px;
-  align-items: center;
+  padding: 0 ${theme.size.default};
+  color: var(--tab-color-primary);
+  column-gap: ${theme.size.medium};
+  margin-left: ${theme.size.small};
+`;
+
+const StyledArrow = styled.span`
+  line-height: ${theme.fontSize.tiny};
+  font-size: ${theme.fontSize.h2};
 `;
 
 export const StarRatingLabel = styled.div`
@@ -119,7 +127,7 @@ const Star = ({
   );
 };
 
-const StarRating = ({ className, handleRatingSelection = () => {}, editable = true }) => {
+const StarRating = ({ className, handleRatingSelection = () => {}, editable = true, showCaption = true }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
   const [lastHoveredRating, setLastHoveredRating] = useState(null);
   const { selectedRating } = useFeedbackContext();
@@ -173,11 +181,13 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
           );
         })}
       </Layout>
-      <CaptionContainer>
-        Poor
-        <Icon glyph="ArrowRight" />
-        Excellent
-      </CaptionContainer>
+      {showCaption && (
+        <Body baseFontSize={13} className={cx(captionStyling)}>
+          Poor
+          <StyledArrow>&#10230;</StyledArrow>
+          Excellent
+        </Body>
+      )}
     </>
   );
 };

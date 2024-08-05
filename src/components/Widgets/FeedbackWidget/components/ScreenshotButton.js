@@ -11,7 +11,7 @@ import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
 import { theme } from '../../../../theme/docsTheme';
-import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_OVERLAY_ALT_TEXT } from '../constants';
+import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_BUTTON_TEXT_LOW, SCREENSHOT_OVERLAY_ALT_TEXT } from '../constants';
 import { elementZIndex } from '../../../../utils/dynamically-set-z-index';
 
 const HIGHLIGHT_BORDER_SIZE = 5;
@@ -79,11 +79,10 @@ const ScreenshotSelect = styled(Button)`
   height: 28px;
   margin: 0 auto ${theme.size.small} 0;
   z-index: 5;
-  width: 158px !important;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
-  const { setScreenshotTaken } = useFeedbackContext();
+  const { setScreenshotTaken, selectedRating } = useFeedbackContext();
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [currElemState, setCurrElemState] = useState(null);
 
@@ -335,7 +334,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         leftGlyph={<img src={withPrefix(glyphImage)} alt="Screenshot Button" />}
         {...props}
       >
-        {SCREENSHOT_BUTTON_TEXT}
+        {selectedRating < 4 ? SCREENSHOT_BUTTON_TEXT_LOW : SCREENSHOT_BUTTON_TEXT}
       </ScreenshotSelect>
     </>
   );

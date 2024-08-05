@@ -16,6 +16,7 @@ import StarRating from '../components/StarRating';
 import { theme } from '../../../../theme/docsTheme';
 import {
   COMMENT_PLACEHOLDER_TEXT,
+  COMMENT_PLACEHOLDER_TEXT_LOW,
   EMAIL_ERROR_TEXT,
   EMAIL_PLACEHOLDER_TEXT,
   FEEDBACK_SUBMIT_BUTTON_TEXT,
@@ -96,7 +97,7 @@ const useValidation = (inputValue, validator) => {
 };
 
 const CommentView = () => {
-  const { submitAllFeedback, screenshotTaken, setSelectedRating } = useFeedbackContext();
+  const { submitAllFeedback, screenshotTaken, setSelectedRating, selectedRating } = useFeedbackContext();
 
   const [comment, setComment] = useState('');
   const [email, setEmail] = useState('');
@@ -123,12 +124,12 @@ const CommentView = () => {
 
   return (
     <Layout>
-      <StyledStarRating handleRatingSelection={setSelectedRating} />
+      <StyledStarRating handleRatingSelection={setSelectedRating} showCaption={false} />
       <StyledCommentInput
         type="text"
         id="feedback-comment"
         aria-labelledby="Comment Text Box"
-        placeholder={COMMENT_PLACEHOLDER_TEXT}
+        placeholder={selectedRating < 4 ? COMMENT_PLACEHOLDER_TEXT_LOW : COMMENT_PLACEHOLDER_TEXT}
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         baseFontSize={13}

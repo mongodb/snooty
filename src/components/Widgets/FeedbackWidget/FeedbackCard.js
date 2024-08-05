@@ -27,7 +27,8 @@ const FloatingContainer = styled.div`
 
 const Card = styled(LeafygreenCard)`
   /* Card Size */
-  width: 234px;
+  width: 290px;
+  padding: ${theme.size.medium} ${theme.size.default};
   display: flex;
   flex-direction: column;
   position: relative;

@@ -8,9 +8,11 @@ export const SCREENSHOT_OVERLAY_ALT_TEXT = 'Screenshot';
 export const FEEDBACK_BUTTON_TEXT = 'Feedback';
 export const RATING_QUESTION_TEXT = 'How would you rate this page?';
 export const COMMENT_PLACEHOLDER_TEXT = 'Tell us more about your experience';
+export const COMMENT_PLACEHOLDER_TEXT_LOW = 'Tell us how we can improve';
 export const EMAIL_PLACEHOLDER_TEXT = 'Email Address';
 export const EMAIL_ERROR_TEXT = 'Please enter a valid email.';
-export const SCREENSHOT_BUTTON_TEXT = 'Take a screenshot';
+export const SCREENSHOT_BUTTON_TEXT = 'Show us a screenshot';
+export const SCREENSHOT_BUTTON_TEXT_LOW = 'Show us where the problem is';
 export const FEEDBACK_SUBMIT_BUTTON_TEXT = 'Send';
 
 export const SUBMITTED_VIEW_TEXT = {
