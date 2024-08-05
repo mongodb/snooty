@@ -16,11 +16,6 @@ import { useFeedbackContext } from './context';
 import useNoScroll from './hooks/useNoScroll';
 
 const FloatingContainer = styled.div`
-  position: fixed;
-  z-index: 14;
-  bottom: ${({ hasOpenLabDrawer }) => (hasOpenLabDrawer ? '70px' : theme.size.large)};
-  right: ${theme.size.large};
-
   @media ${theme.screenSize.upToSmall} {
     padding-top: ${({ top }) => `${top}`};
     right: 0;

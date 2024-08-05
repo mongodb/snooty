@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
+import ActionBar from '../components/ActionBar/ActionBar';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
 import { Sidenav } from '../components/Sidenav';
@@ -130,6 +131,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
             <div />
           )}
           <StyledContentContainer>
+            <ActionBar template={template} />
             <ContentTransition slug={slug}>{children}</ContentTransition>
           </StyledContentContainer>
         </GlobalGrid>

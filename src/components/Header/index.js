@@ -14,7 +14,6 @@ const StyledHeaderContainer = styled.header(
   top: 0;
   margin-top: ${props.hasBanner ? theme.header.bannerHeight : '0px'};
   z-index: ${theme.zIndexes.header};
-  ${props.template === 'landing' || props.template === 'errorpage' ? '' : 'position: sticky;'}
   `
 );
 

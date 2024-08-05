@@ -3,7 +3,9 @@ import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
+import { isBrowser } from '../../utils/is-browser';
 import ChatbotUi from '../ChatbotUi';
+import { FeedbackProvider, FeedbackForm, FeedbackButton, useFeedbackData } from '../Widgets/FeedbackWidget';
 import DarkModeDropdown from './DarkModeDropdown';
 
 const ActionBarContainer = styled('div')`
@@ -62,9 +64,19 @@ const ActionsBox = styled('div')`
   }
 `;
 
+const FeedbackContainer = styled.div`
+  position: relative;
+`;
+
 // Note: When working on this component further, please check with design on how it should look in the errorpage template (404) as well!
-const ActionBar = ({ template, ...props }) => {
+const ActionBar = ({ template, pageTitle, slug, ...props }) => {
   const { darkMode } = useDarkMode();
+  const url = isBrowser ? window.location.href : null;
+  const feedbackData = useFeedbackData({
+    slug,
+    url,
+    title: pageTitle || 'Home',
+  });
   return (
     <ActionBarContainer className={props.className} darkMode={darkMode}>
       <ActionBarSearchContainer>
@@ -73,9 +85,12 @@ const ActionBar = ({ template, ...props }) => {
       <ActionsBox>
         <DarkModeDropdown></DarkModeDropdown>
         {template !== 'errorpage' && (
-          <div>
-            <button>Feedback</button>
-          </div>
+          <FeedbackProvider page={feedbackData}>
+            <FeedbackContainer>
+              <FeedbackButton />
+              <FeedbackForm />
+            </FeedbackContainer>
+          </FeedbackProvider>
         )}
       </ActionsBox>
     </ActionBarContainer>
