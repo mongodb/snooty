@@ -25,6 +25,7 @@ import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 import { InstruqtProvider } from './Instruqt/instruqt-context';
 import { SuspenseHelper } from './SuspenseHelper';
 import { TabProvider } from './Tabs/tab-context';
+import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
 
 // lazy load the unified footer to improve page load speed
 const LazyFooter = lazy(() => import('./Footer'));
@@ -101,7 +102,22 @@ const DocumentBody = (props) => {
 
   const { Template, useChatbot } = getTemplate(template);
 
+  const siteTitle = getSiteTitle(metadata);
+
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
+  if (typeof window !== 'undefined' && template !== 'feature-not-avail') {
+    console.log('TEAMPLATE', template);
+    console.log('SLUG', slug);
+    const { parentPaths } = useSnootyMetadata();
+    console.log('PARENTPATH', JSON.stringify(parentPaths));
+    const queriedCrumbs = useBreadcrumbs();
+    console.log('QUERIed CRUMBS', queriedCrumbs);
+    sessionStorage.clear();
+    sessionStorage.setItem('parentPaths', JSON.stringify(parentPaths));
+    sessionStorage.setItem('queriedCrumbs', JSON.stringify(queriedCrumbs));
+    sessionStorage.setItem('siteTitle', siteTitle);
+    sessionStorage.setItem('slug', slug);
+  }
 
   return (
     <>

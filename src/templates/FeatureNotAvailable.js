@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { withPrefix } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { H2 } from '@leafygreen-ui/typography';
 import { theme } from '../theme/docsTheme';
-import { baseUrl } from '../utils/base-url';
+import Breadcrumbs from '../components/Breadcrumbs';
 import ChatbotUi from '../components/ChatbotUi';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { PageContext } from '../context/page-context';
+import { splitUrlIntoParts } from '../utils/split-url-into-parts';
+
+const StyledMain = styled.main`
+  margin: 16px 64px 64px;
+`;
 
 const ContentBox = styled.div`
   max-width: 560px;
@@ -53,19 +60,27 @@ const LinkContainer = styled.div`
   margin-top: ${theme.size.large};
 `;
 
+//const { displayName, slug } = splitUrlIntoParts('https://www.mongodb.com/docs/bi-connector/current/launch');
+
 const click = () => {
   history.back();
 };
-
 const ContentContainer = () => {
-  const ref = typeof window === 'undefined' ? null : window.document.referrer;
-  console.log('REFERENCE', ref);
-  console.log('TYPE', typeof ref);
+  // const ref = typeof window === 'undefined' ? null : window.document.referrer;
+  // console.log('REFERENCE', ref);
+  // console.log('TYPE', typeof ref);
+  // page context
+  // site title
+  //   const { slug } = useContext(PageContext);
+  //   console.log('SLUG', slug);
+  //   const { title } = useSnootyMetadata();
+  //   console.log('TITLTE', title);
+
   return (
     <ContentBox>
       <H2 className={cx(titleStyling)}>We're sorry, this page isn't available in the version you selected.</H2>
       <LinkContainer>
-        <Button href={ref} variant="default" onClick={click}>
+        <Button onClick={click} variant="default">
           Go back to previous page
         </Button>
       </LinkContainer>
@@ -82,14 +97,32 @@ const FeatureNotAvailContainer = styled.div`
 `;
 
 const FeatureNotAvailable = () => {
+  // const { displayName, slug } = splitUrlIntoParts(
+  //   'https://www.mongodb.com/docs/atlas/atlas-search/atlas-search-overview/'
+  // );
+  let parentPaths, queriedCrumbs, siteTitle, slug;
+  if (typeof window !== 'undefined') {
+    parentPaths = JSON.parse(sessionStorage.getItem('parentPaths'));
+    queriedCrumbs = JSON.parse(sessionStorage.getItem('queriedCrumbs'));
+    siteTitle = sessionStorage.getItem('siteTitle');
+    slug = sessionStorage.getItem('slug');
+    console.log('PARENTPATHS', parentPaths, 'QUEREIDCRUMBES', queriedCrumbs);
+    console.log('SITE TITLE', siteTitle, 'SLUG', slug);
+    //console.log('Data', JSON.stringify(JSON.stringify(data)));
+  }
+  //console.log('DATA', toString(data));
+  //console.log('FROM PAGE', displayName, slug);
   return (
-    <main>
+    <StyledMain>
       {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && <ChatbotUi template="errorpage" />}
+      {typeof window !== 'undefined' && (
+        <Breadcrumbs siteTitle={siteTitle} slug={slug} defParentPaths={parentPaths} defQueriedCrumbs={queriedCrumbs} />
+      )}
       <FeatureNotAvailContainer>
         <FeatureNotAvailImage />
         <ContentContainer />
       </FeatureNotAvailContainer>
-    </main>
+    </StyledMain>
   );
 };
 
