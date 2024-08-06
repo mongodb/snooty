@@ -25,13 +25,16 @@ const formStyle = css`
   margin-top: ${theme.size.tiny};
 `;
 
+export const feedbackId = 'feedback-card';
+export const fwFormId = 'feedback-form';
+
 const FeedbackForm = () => {
   const { view } = useFeedbackContext();
   const { isMobile } = useScreenSize();
   const isOpen = view !== 'waiting';
 
   const renderedComponent = isOpen && (
-    <div className={cx(fwFormId, formStyle)} hidden={!isOpen}>
+    <div className={cx(fwFormId, formStyle)} id={feedbackId} hidden={!isOpen}>
       <FeedbackCard isOpen={isOpen}>
         <FeedbackContent view={view} />
       </FeedbackCard>
@@ -40,8 +43,5 @@ const FeedbackForm = () => {
 
   return isMobile ? createPortal(renderedComponent, document.body) : renderedComponent;
 };
-
-export const feedbackId = 'feedback-card';
-export const fwFormId = 'feedback-form';
 
 export default FeedbackForm;

@@ -21,7 +21,6 @@ import {
   EMAIL_PLACEHOLDER_TEXT,
   FEEDBACK_SUBMIT_BUTTON_TEXT,
 } from '../constants';
-import { elementZIndex } from '../../../../utils/dynamically-set-z-index';
 const ScreenshotButton = Loadable(() => import('../components/ScreenshotButton'));
 
 const SubmitButton = styled(Button)`
@@ -108,8 +107,6 @@ const CommentView = () => {
   const { isMobile } = useScreenSize();
 
   const handleSubmit = async () => {
-    elementZIndex.resetZIndex('.widgets');
-
     if (isValidEmail) {
       if (screenshotTaken) {
         const dataUri = await retrieveDataUri();

@@ -1,4 +1,5 @@
-import React, { useState, useContext, createContext, useTransition } from 'react';
+import React, { useState, useCallback, useContext, useEffect, createContext, useTransition } from 'react';
+import { globalHistory } from '@gatsbyjs/reach-router';
 import { getViewport } from '../../../hooks/useViewport';
 import { createNewFeedback, useRealmUser } from './realm';
 
@@ -101,15 +102,14 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
 
   // Stop giving feedback (if in progress) and reset the widget to the
   // initial state.
-  const abandon = () => {
-    // Reset to the initial state
+  const abandon = useCallback(() => {
     setView('waiting');
     if (feedback) {
       // set the rating and feedback to null
       setFeedback(null);
       setSelectedRating(null);
     }
-  };
+  }, [feedback]);
 
   const value = {
     feedback,
@@ -125,6 +125,13 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     setSelectedRating,
     selectInitialRating,
   };
+
+  // reset feedback when route changes
+  useEffect(() => {
+    return globalHistory.listen((location, action) => {
+      abandon();
+    });
+  }, [abandon]);
 
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
 }
