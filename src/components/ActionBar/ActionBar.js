@@ -4,6 +4,9 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
+import { getPlaintext } from '../../utils/get-plaintext';
+import { getNestedValue } from '../../utils/get-nested-value';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import ChatbotUi from '../ChatbotUi';
 import { FeedbackProvider, FeedbackForm, FeedbackButton, useFeedbackData } from '../Widgets/FeedbackWidget';
 import DarkModeDropdown from './DarkModeDropdown';
@@ -75,13 +78,15 @@ const FeedbackContainer = styled.div`
 `;
 
 // Note: When working on this component further, please check with design on how it should look in the errorpage template (404) as well!
-const ActionBar = ({ template, pageTitle, slug, ...props }) => {
+const ActionBar = ({ template, slug, ...props }) => {
   const { darkMode } = useDarkMode();
   const url = isBrowser ? window.location.href : null;
+  const metadata = useSnootyMetadata();
   const feedbackData = useFeedbackData({
     slug,
     url,
-    title: pageTitle || 'Home',
+    title:
+      getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
   });
   return (
     <ActionBarContainer className={props.className}>

@@ -131,7 +131,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
             <div />
           )}
           <StyledContentContainer>
-            <ActionBar template={template} />
+            <ActionBar template={template} slug={slug} />
             <ContentTransition slug={slug}>{children}</ContentTransition>
           </StyledContentContainer>
         </GlobalGrid>
