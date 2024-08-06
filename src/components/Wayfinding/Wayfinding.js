@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
 import Icon from '@leafygreen-ui/icon';
@@ -112,6 +113,13 @@ const Wayfinding = ({ nodeData: { children, argument } }) => {
       )}
     </div>
   );
+};
+
+Wayfinding.propTypes = {
+  nodeData: PropTypes.shape({
+    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
+    children: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }).isRequired,
 };
 
 export default Wayfinding;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { getPlaintext } from '../../utils/get-plaintext';
@@ -55,6 +56,17 @@ const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false 
       <span>{title}</span>
     </a>
   );
+};
+
+WayfindingOption.propTypes = {
+  nodeData: PropTypes.shape({
+    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
+    options: PropTypes.shape({
+      title: PropTypes.string,
+      language: PropTypes.string,
+      id: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default WayfindingOption;
