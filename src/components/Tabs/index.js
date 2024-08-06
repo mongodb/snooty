@@ -26,8 +26,13 @@ const getPosition = (element) => {
 const defaultTabsStyling = css`
   margin-bottom: ${theme.size.medium};
   ${TAB_BUTTON_SELECTOR} {
+    color: var(--tab-color-primary);
     font-size: ${theme.size.default};
     align-items: center;
+
+    &[aria-selected='true'] {
+      color: var(--tab-color-secondary);
+    }
   }
 
   @media ${theme.screenSize.upTo2XLarge} {
@@ -112,10 +117,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       const tabId = tabIds[index];
       const priorAnchorOffset = getPosition(scrollAnchorRef.current).y;
 
-      setActiveTab({
-        name: tabsetName,
-        value: tabId,
-      });
+      setActiveTab({ [tabsetName]: tabId });
       reportAnalytics('Tab Selected', {
         tabId,
         tabSet: tabsetName,

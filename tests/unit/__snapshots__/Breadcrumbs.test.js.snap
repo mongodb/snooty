@@ -4,10 +4,16 @@ exports[`renders correctly as a homepage 1`] = `
 <DocumentFragment>
   .emotion-0 {
   font-size: 13px;
+  --breadcrumb-color: #5C6C75;
 }
 
-.emotion-0 a {
-  color: #5C6C75;
+.dark-theme .emotion-0 {
+  --breadcrumb-color: #C1C7C6;
+}
+
+.emotion-0 a,
+.emotion-0 span {
+  color: var(--breadcrumb-color);
 }
 
 .emotion-1 {
@@ -68,9 +74,12 @@ exports[`renders correctly as a homepage 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
+  font-weight: 400;
 }
 
 .emotion-4:hover,
@@ -153,10 +162,16 @@ exports[`renders correctly with siteTitle 1`] = `
 <DocumentFragment>
   .emotion-0 {
   font-size: 13px;
+  --breadcrumb-color: #5C6C75;
 }
 
-.emotion-0 a {
-  color: #5C6C75;
+.dark-theme .emotion-0 {
+  --breadcrumb-color: #C1C7C6;
+}
+
+.emotion-0 a,
+.emotion-0 span {
+  color: var(--breadcrumb-color);
 }
 
 .emotion-1 {
@@ -217,9 +232,12 @@ exports[`renders correctly with siteTitle 1`] = `
   color: #016BF8;
   font-weight: 400;
   display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
+  font-weight: 400;
 }
 
 .emotion-4:hover,
@@ -267,15 +285,17 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  color: #016BF8;
-  font-weight: inherit;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
   font-size: 13px;
   vertical-align: middle;
   line-height: unset;
+  font-weight: 400;
 }
 
 .emotion-12>code {
-  color: #016BF8;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-12:focus,

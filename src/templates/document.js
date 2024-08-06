@@ -26,9 +26,9 @@ const StyledRightColumn = styled(RightColumn)`
   grid-area: right;
 `;
 
-const Document = ({ children, pageContext: { slug, page, isAssociatedProduct } }) => {
+const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedProduct } }) => {
   const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
-  const pageOptions = page?.options;
+  const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
 
   return (
@@ -57,8 +57,10 @@ Document.propTypes = {
   }).isRequired,
   data: PropTypes.shape({
     page: PropTypes.shape({
-      children: PropTypes.array,
-      options: PropTypes.object,
+      ast: PropTypes.shape({
+        children: PropTypes.array,
+        options: PropTypes.object,
+      }).isRequired,
     }).isRequired,
   }),
 };
