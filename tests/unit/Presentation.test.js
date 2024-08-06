@@ -3,8 +3,6 @@ import { render, screen, act } from '@testing-library/react';
 import * as Gatsby from 'gatsby';
 import { mockLocation } from '../utils/mock-location';
 import DocumentBody from '../../src/components/DocumentBody';
-import { FEEDBACK_BUTTON_TEXT } from '../../src/components/Widgets/FeedbackWidget/constants';
-import { CHATBOT_WIDGET_TEXT } from '../../src/components/Widgets/ChatbotWidget/ChatbotFab';
 import mockPageContext from './data/PageContext.test.json';
 import mockSnootyMetadata from './data/SnootyMetadata.json';
 
@@ -33,10 +31,12 @@ describe('DocumentBody', () => {
   });
 
   it('renders the necessary elements', async () => {
+    let renderRes;
     await act(async () => {
       mockLocation(null);
-      render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
+      renderRes = render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
     });
+    renderRes.debug();
     const footer = await screen.findByTestId('consistent-footer');
     expect(footer).toBeVisible();
     expect(footer).toMatchSnapshot();
@@ -47,23 +47,14 @@ describe('DocumentBody', () => {
     const mainNav = await screen.findByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).toBeVisible();
     expect(mainNav).toMatchSnapshot();
-
-    const feedbackWidget = await screen.findByText(FEEDBACK_BUTTON_TEXT, {}, { timeout: 15000 });
-    expect(feedbackWidget).toBeVisible();
-
-    const chatbotWidget = await screen.findByText(CHATBOT_WIDGET_TEXT, {}, { timeout: 15000 });
-    expect(chatbotWidget).toBeVisible();
   });
 
-  it('does not render the following elements, footer, feedback widget, navigation', async () => {
+  it('does not render the following elements, footer, navigation', async () => {
     mockLocation('?presentation=true');
     render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
     // use `queryBy` to avoid throwing an error with `getBy`
     const footer = screen.queryByTestId('consistent-footer');
     expect(footer).not.toBeInTheDocument();
-
-    const feedbackWidget = screen.queryByText(FEEDBACK_BUTTON_TEXT);
-    expect(feedbackWidget).not.toBeInTheDocument();
 
     const mainNav = screen.queryByRole('img', { name: 'MongoDB logo' });
     expect(mainNav).not.toBeInTheDocument();

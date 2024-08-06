@@ -110,12 +110,10 @@ describe('FeedbackWidget', () => {
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
 
       // Focus and simulate keyboard interaction
-      const fwButon = wrapper.getByText(FEEDBACK_BUTTON_TEXT);
+      const fwButon = wrapper.getByRole('button');
       fwButon.focus();
       userEvent.keyboard('{Enter}');
       await tick();
-
-      // Ensure rating view appears
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
     });
 
@@ -198,6 +196,7 @@ describe('FeedbackWidget', () => {
             view: 'comment',
             comment: 'This is a test comment.',
             user: { email: 'test@example.com' },
+            rating: 5,
           });
 
           // click on screenshot button; use closest() because of LG implementation of `"pointer-events": "none"`
