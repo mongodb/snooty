@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -13,7 +13,7 @@ import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
 import useNoScroll from './hooks/useNoScroll';
 
-const FloatingContainer = styled.div`
+const CardContainer = styled.div`
   @media ${theme.screenSize.upToSmall} {
     padding-top: ${({ top }) => `${top}`};
     right: 0;
@@ -61,15 +61,33 @@ const FeedbackCard = ({ isOpen, children }) => {
     abandon();
   };
 
+  const ref = useRef(null);
+
+  // Effect to detect click outside of FeedbackCard
+  useEffect(() => {
+    // close feedback if clicked somewhere outside
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        abandon();
+      }
+    }
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [abandon, ref]);
+
   return (
     isOpen && (
-      <FloatingContainer darkMode={darkMode} top={topBuffer} hasOpenLabDrawer={isLabOpen}>
+      <CardContainer ref={ref} darkMode={darkMode} top={topBuffer} hasOpenLabDrawer={isLabOpen}>
         <Card>
           <CloseButton onClick={onClose} />
           <ProgressBar />
           <div>{children}</div>
         </Card>
-      </FloatingContainer>
+      </CardContainer>
     )
   );
 };
