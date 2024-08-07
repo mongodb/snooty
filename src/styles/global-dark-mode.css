@@ -24,7 +24,6 @@ body {
 
   --wayfinding-bg-color: var(--gray-light3);
   --wayfinding-border-color: var(--gray-light2);
-  --wayfinding-option-bg-color: var(--white);
 }
 
 .dark-theme body {
