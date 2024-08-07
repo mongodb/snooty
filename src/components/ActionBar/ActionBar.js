@@ -8,7 +8,13 @@ import { getPlaintext } from '../../utils/get-plaintext';
 import { getNestedValue } from '../../utils/get-nested-value';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import ChatbotUi from '../ChatbotUi';
-import { FeedbackProvider, FeedbackForm, FeedbackButton, useFeedbackData } from '../Widgets/FeedbackWidget';
+import {
+  FeedbackProvider,
+  FeedbackForm,
+  FeedbackButton,
+  useFeedbackData,
+  FeedbackContainer,
+} from '../Widgets/FeedbackWidget';
 import DarkModeDropdown from './DarkModeDropdown';
 
 const ActionBarContainer = styled('div')`
@@ -71,10 +77,6 @@ const ActionsBox = styled('div')`
   @media ${theme.screenSize.upToSmall} {
     padding-left: 2rem;
   }
-`;
-
-const FeedbackContainer = styled.div`
-  position: relative;
 `;
 
 // Note: When working on this component further, please check with design on how it should look in the errorpage template (404) as well!

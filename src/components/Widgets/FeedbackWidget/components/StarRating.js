@@ -133,7 +133,7 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
               }
             : {};
 
-          return <Star key={ratingValue} isHighlighted={isHighlighted} triggerEnabled={editable} {...eventProps} />;
+          return <Star key={ratingValue} isHighlighted={isHighlighted} {...eventProps} />;
         })}
       </Layout>
       {showCaption && (

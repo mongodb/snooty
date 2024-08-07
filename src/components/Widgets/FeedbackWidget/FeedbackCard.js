@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useRef } from 'react';
+import React, { useContext, useMemo } from 'react';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -61,27 +61,9 @@ const FeedbackCard = ({ isOpen, children }) => {
     abandon();
   };
 
-  const ref = useRef(null);
-
-  // Effect to detect click outside of FeedbackCard
-  useEffect(() => {
-    // close feedback if clicked somewhere outside
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        abandon();
-      }
-    }
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [abandon, ref]);
-
   return (
     isOpen && (
-      <CardContainer ref={ref} darkMode={darkMode} top={topBuffer} hasOpenLabDrawer={isLabOpen}>
+      <CardContainer darkMode={darkMode} top={topBuffer} hasOpenLabDrawer={isLabOpen}>
         <Card>
           <CloseButton onClick={onClose} />
           <ProgressBar />
