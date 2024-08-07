@@ -3,7 +3,18 @@ import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
+import { isBrowser } from '../../utils/is-browser';
+import { getPlaintext } from '../../utils/get-plaintext';
+import { getNestedValue } from '../../utils/get-nested-value';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import ChatbotUi from '../ChatbotUi';
+import {
+  FeedbackProvider,
+  FeedbackForm,
+  FeedbackButton,
+  useFeedbackData,
+  FeedbackContainer,
+} from '../Widgets/FeedbackWidget';
 import DarkModeDropdown from './DarkModeDropdown';
 
 const ActionBarContainer = styled('div')`
@@ -17,8 +28,14 @@ const ActionBarContainer = styled('div')`
   top: 0;
   flex-wrap: wrap;
   z-index: ${theme.zIndexes.actionBar};
-  background-color: ${(props) => (props.darkMode ? palette.black : palette.white)};
-  border-bottom: 1px solid ${(props) => (props.darkMode ? palette.gray.dark2 : palette.gray.light2)};
+  background-color: var(--background-color-primary);
+  border-bottom: 1px solid var(--border-color);
+
+  --border-color: ${palette.gray.light2};
+
+  .dark-theme & {
+    --border-color: ${palette.gray.dark2};
+  }
 
   @media ${theme.screenSize.mediumAndUp} {
     & > div {
@@ -63,19 +80,30 @@ const ActionsBox = styled('div')`
 `;
 
 // Note: When working on this component further, please check with design on how it should look in the errorpage template (404) as well!
-const ActionBar = ({ template, ...props }) => {
+const ActionBar = ({ template, slug, ...props }) => {
   const { darkMode } = useDarkMode();
+  const url = isBrowser ? window.location.href : null;
+  const metadata = useSnootyMetadata();
+  const feedbackData = useFeedbackData({
+    slug,
+    url,
+    title:
+      getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
+  });
   return (
-    <ActionBarContainer className={props.className} darkMode={darkMode}>
+    <ActionBarContainer className={props.className}>
       <ActionBarSearchContainer>
         <ChatbotUi darkMode={darkMode} />
       </ActionBarSearchContainer>
       <ActionsBox>
         <DarkModeDropdown></DarkModeDropdown>
         {template !== 'errorpage' && (
-          <div>
-            <button>Feedback</button>
-          </div>
+          <FeedbackProvider page={feedbackData}>
+            <FeedbackContainer>
+              <FeedbackButton />
+              <FeedbackForm />
+            </FeedbackContainer>
+          </FeedbackProvider>
         )}
       </ActionsBox>
     </ActionBarContainer>

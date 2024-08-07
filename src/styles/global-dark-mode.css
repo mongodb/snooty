@@ -1,14 +1,4 @@
 body {
-  background-color: initial;
-  color: initial;
-}
-
-.dark-theme body {
-  background-color: var(--lg-bg-dark-mode);
-  color: var(--lg-color-dark-mode);
-}
-
-body {
   --font-color-primary: var(--black);
   --font-color-light: var(--gray-base);
   --heading-color-primary: var(--green-dark2);
@@ -31,9 +21,19 @@ body {
   --link-color-primary: var(--blue-light1);
   --link-font-weight: 700;
 
-  --background-color-primary: var(--gray-dark3);
+  --background-color-primary: var(--black);
   --background-color-secondary: transparent;
 
   --tab-color-primary: var(--gray-light1);
   --tab-color-secondary: var(--gray-light2);
+}
+
+body {
+  background-color: initial;
+  color: initial;
+}
+
+.dark-theme body {
+  background-color: var(--background-color-primary);
+  color: var(--font-color-primary);
 }

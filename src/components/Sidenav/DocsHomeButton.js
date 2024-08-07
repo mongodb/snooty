@@ -8,7 +8,6 @@ import { Link } from '@leafygreen-ui/typography';
 import { baseUrl } from '../../utils/base-url';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import { titleStyle } from './styles/sideNavItem';
-import DarkModeToggle from './DarkModeToggle';
 
 const homeLinkStyle = LeafyCSS`
   span {
@@ -40,7 +39,6 @@ const DocsHomeButton = ({ darkMode }) => {
         <Icon glyph="Home"></Icon>
         Docs Home
       </SideNavItem>
-      {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && <DarkModeToggle />}
     </div>
   );
 };
