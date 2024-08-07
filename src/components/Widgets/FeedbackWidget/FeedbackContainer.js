@@ -9,9 +9,11 @@ const Container = styled.div`
 
 const FeedbackContainer = ({ children }) => {
   const ref = useRef(null);
-  const { abandon } = useFeedbackContext();
+  const { abandon, isScreenshotButtonClicked } = useFeedbackContext();
 
-  useClickOutside(ref, abandon);
+  useClickOutside(ref, () => {
+    !isScreenshotButtonClicked && abandon();
+  });
 
   return <Container ref={ref}>{children}</Container>;
 };

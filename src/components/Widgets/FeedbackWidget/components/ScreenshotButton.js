@@ -81,8 +81,8 @@ const ScreenshotSelect = styled(Button)`
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
-  const { setScreenshotTaken, selectedRating } = useFeedbackContext();
-  const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
+  const { setScreenshotTaken, selectedRating, isScreenshotButtonClicked, setIsScreenshotButtonClicked } =
+    useFeedbackContext();
   const [currElemState, setCurrElemState] = useState(null);
 
   // border around highlighted element
@@ -182,7 +182,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setIsScreenshotButtonClicked(true);
     domElementClickedRef.current = 'dashed';
     setSelectedElementBorderStyle('dashed');
-  }, []);
+  }, [setIsScreenshotButtonClicked]);
 
   // close out the instructions panel
   const handleInstructionClick = () => {

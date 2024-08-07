@@ -13,6 +13,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
+  const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [, startTransition] = useTransition();
   const { user, reassignCurrentUser } = useRealmUser();
   const { href } = useLocation();
@@ -110,6 +111,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
       setFeedback(null);
       setSelectedRating(null);
     }
+    setIsScreenshotButtonClicked(false);
   }, [feedback]);
 
   const value = {
@@ -125,6 +127,8 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     selectedRating,
     setSelectedRating,
     selectInitialRating,
+    isScreenshotButtonClicked,
+    setIsScreenshotButtonClicked,
   };
 
   // reset feedback when route changes
