@@ -16,6 +16,7 @@ import {
   mockScreenshotFunctions,
   clearMockScreenshotFunctions,
 } from '../utils/data/feedbackWidgetScreenshotFunctions';
+import { mockLocation } from '../utils/mock-location';
 import {
   CLOSE_BUTTON_ALT_TEXT,
   COMMENT_PLACEHOLDER_TEXT,
@@ -91,6 +92,7 @@ describe('FeedbackWidget', () => {
   afterEach(clearMockStitchFunctions);
   beforeEach(mockScreenshotFunctions);
   afterEach(clearMockScreenshotFunctions);
+  beforeEach(() => mockLocation('', '', '', 'https://mongodb.com/docs/atlas'));
 
   describe('FeedbackButton', () => {
     it('shows the rating view when clicked', async () => {
@@ -132,6 +134,20 @@ describe('FeedbackWidget', () => {
       userEvent.click(wrapper.getByLabelText(CLOSE_BUTTON_ALT_TEXT));
       await tick();
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
+    });
+
+    it('closes when navigating to a different page', async () => {
+      wrapper = await mountFormWithFeedbackState({});
+      // Click the button
+      userEvent.click(wrapper.getByText(FEEDBACK_BUTTON_TEXT));
+      await tick();
+      // Expect rating question to be on screen
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
+
+      mockLocation('', '', '', 'https://mongodb.com/docs/atlas/getting-started');
+      await tick();
+      // Form is closed when navigating to new page
+      expect(wrapper.queryAllByTestId(RATING_QUESTION_TEXT)).toHaveLength(0);
     });
 
     describe('RatingView', () => {

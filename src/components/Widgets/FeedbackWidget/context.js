@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useContext, useEffect, createContext, useTransition } from 'react';
-import { globalHistory } from '@gatsbyjs/reach-router';
+import { useLocation } from '@gatsbyjs/reach-router';
 import { getViewport } from '../../../hooks/useViewport';
 import { createNewFeedback, useRealmUser } from './realm';
 
@@ -15,6 +15,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   const [progress, setProgress] = useState([true, false, false]);
   const [, startTransition] = useTransition();
   const { user, reassignCurrentUser } = useRealmUser();
+  const { href } = useLocation();
 
   // Create a new feedback document
   const initializeFeedback = (nextView = 'rating') => {
@@ -128,10 +129,11 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
 
   // reset feedback when route changes
   useEffect(() => {
-    return globalHistory.listen((location, action) => {
-      abandon();
-    });
-  }, [abandon]);
+    // disable effect for testing views
+    if (test?.view) return;
+    abandon();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [href]);
 
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
 }

@@ -21,7 +21,6 @@ body {
   --link-color-primary: var(--blue-light1);
   --link-font-weight: 700;
 
-  /* TODO: check this is correct color */
   --background-color-primary: var(--black);
   --background-color-secondary: transparent;
 

@@ -31,12 +31,10 @@ describe('DocumentBody', () => {
   });
 
   it('renders the necessary elements', async () => {
-    let renderRes;
     await act(async () => {
       mockLocation(null);
-      renderRes = render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
+      render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
     });
-    renderRes.debug();
     const footer = await screen.findByTestId('consistent-footer');
     expect(footer).toBeVisible();
     expect(footer).toMatchSnapshot();
