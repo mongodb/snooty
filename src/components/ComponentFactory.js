@@ -45,6 +45,7 @@ import ListTable from './ListTable';
 import Literal from './Literal';
 import LiteralBlock from './LiteralBlock';
 import LiteralInclude from './LiteralInclude';
+import { MethodSelector } from './MethodSelector';
 import OpenAPIChangelog from './OpenAPIChangelog';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
@@ -65,7 +66,6 @@ import Text from './Text';
 import Time from './Time';
 import TitleReference from './TitleReference';
 import Transition from './Transition';
-
 import VersionModified from './VersionModified';
 
 import RoleAbbr from './Roles/Abbr';
@@ -166,6 +166,7 @@ const componentMap = {
   literal: Literal,
   literal_block: LiteralBlock,
   literalinclude: LiteralInclude,
+  'method-selector': MethodSelector,
   only: Cond,
   'openapi-changelog': OpenAPIChangelog,
   paragraph: Paragraph,

@@ -19,7 +19,6 @@ const DocumentContainer = styled('div')`
 const StyledMainColumn = styled(MainColumn)`
   grid-area: main;
   max-width: 775px;
-  overflow-x: auto;
 `;
 
 const StyledRightColumn = styled(RightColumn)`
