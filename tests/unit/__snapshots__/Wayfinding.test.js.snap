@@ -57,18 +57,17 @@ exports[`Wayfinding component renders all options with description 1`] = `
 .emotion-4 {
   margin: 16px 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 164px);
-  gap: 8px 6px;
+  grid-template-columns: repeat(auto-fill, minmax(133px, 1fr));
+  gap: 6px 8px;
 }
 
-@media only screen and (max-width: 480px) {
+@media not all and (max-width: 767px) {
   .emotion-4 {
-    grid-template-columns: repeat(auto-fill, 133px);
+    grid-template-columns: repeat(auto-fill, 164px);
   }
 }
 
 .emotion-5 {
-  box-shadow: unset;
   padding: 6px 12px;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -84,13 +83,12 @@ exports[`Wayfinding component renders all options with description 1`] = `
   border-radius: 8px;
   border: 1px solid var(--wayfinding-border-color);
   color: var(--font-color-primary);
-  background-color: var(--wayfinding-option-bg-color);
+  background-color: var(--background-color-primary);
   font-size: 13px;
   line-height: 20px;
 }
 
 .emotion-5:hover {
-  box-shadow: unset;
   border-color: #889397;
 }
 
@@ -99,7 +97,6 @@ exports[`Wayfinding component renders all options with description 1`] = `
 }
 
 .emotion-13 {
-  box-shadow: unset;
   padding: 6px 12px;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -112,13 +109,12 @@ exports[`Wayfinding component renders all options with description 1`] = `
   border-radius: 8px;
   border: 1px solid var(--wayfinding-border-color);
   color: var(--font-color-primary);
-  background-color: var(--wayfinding-option-bg-color);
+  background-color: var(--background-color-primary);
   font-size: 13px;
   line-height: 20px;
 }
 
 .emotion-13:hover {
-  box-shadow: unset;
   border-color: #889397;
 }
 
@@ -138,6 +134,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
   color: var(--link-color-primary);
   font-size: 13px;
   line-height: 20px;
+  font-weight: 500;
 }
 
 <div
@@ -158,10 +155,10 @@ exports[`Wayfinding component renders all options with description 1`] = `
       </p>
     </div>
     <div
-      class="emotion-4"
+      class="emotion-4 notranslate"
     >
       <a
-        class="notranslate emotion-5"
+        class="emotion-5"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -229,7 +226,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-5"
+        class="emotion-5"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -279,7 +276,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-5"
+        class="emotion-5"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -473,7 +470,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-5"
+        class="emotion-5"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -558,7 +555,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -630,7 +627,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -702,7 +699,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -740,7 +737,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -790,7 +787,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -835,7 +832,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -880,7 +877,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -997,7 +994,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1082,7 +1079,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1167,7 +1164,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1717,7 +1714,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1761,7 +1758,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1817,7 +1814,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1842,7 +1839,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="notranslate emotion-13"
+        class="emotion-13"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
