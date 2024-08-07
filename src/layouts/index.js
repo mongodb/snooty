@@ -84,7 +84,7 @@ const GlobalGrid = styled('div')`
   overflow: clip;
 `;
 
-const StyledContentContainer = styled('div')`
+export const StyledContentContainer = styled('div')`
   grid-area: contents;
   margin: 0px;
 `;

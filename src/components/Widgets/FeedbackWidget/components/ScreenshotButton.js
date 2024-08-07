@@ -202,8 +202,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   const handleDOMElementClick = (e) => {
     e.preventDefault();
 
-    //conditionally set the z-index on the widget card when the screenshot is clicked
-
     domElementClickedRef.current = 'solid';
     setSelectedElementBorderStyle(domElementClickedRef.current);
     setScreenshotTaken(true);
