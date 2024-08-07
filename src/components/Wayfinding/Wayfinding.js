@@ -6,6 +6,7 @@ import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import { getPlaintext } from '../../utils/get-plaintext';
+import { NOTRANSLATE_CLASS } from '../../utils/locale';
 import WayfindingOption from './WayfindingOption';
 
 export const MAX_INIT_OPTIONS = 4;
@@ -14,10 +15,10 @@ const CHILD_OPTION_NAME = 'wayfinding-option';
 
 const containerStyle = css`
   width: 100%;
-  border-radius: 24px;
+  border-radius: ${theme.size.medium};
   border: 1px solid var(--wayfinding-border-color);
   background-color: var(--wayfinding-bg-color);
-  padding: 24px 32px;
+  padding: ${theme.size.medium} ${theme.size.large};
 `;
 
 const titleStyle = css`
@@ -39,13 +40,13 @@ const descriptionStyle = css`
 `;
 
 const optionsContainerStyle = css`
-  margin: 16px 0;
+  margin: ${theme.size.default} 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 164px);
-  gap: 8px 6px;
+  grid-template-columns: repeat(auto-fill, minmax(133px, 1fr));
+  gap: 6px ${theme.size.small};
 
-  @media ${theme.screenSize.upToSmall} {
-    grid-template-columns: repeat(auto-fill, 133px);
+  @media ${theme.screenSize.mediumAndUp} {
+    grid-template-columns: repeat(auto-fill, 164px);
   }
 `;
 
@@ -55,10 +56,11 @@ const showAllButtonStyle = css`
   padding: 0;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: ${theme.size.small};
   color: var(--link-color-primary);
-  font-size: 13px;
+  font-size: ${theme.fontSize.small};
   line-height: 20px;
+  font-weight: 500;
 `;
 
 const getWayfindingComponents = (children) => {
@@ -96,7 +98,7 @@ const Wayfinding = ({ nodeData: { children, argument } }) => {
           return <ComponentFactory key={index} nodeData={child} />;
         })}
       </div>
-      <div className={cx(optionsContainerStyle)}>
+      <div className={cx(optionsContainerStyle, NOTRANSLATE_CLASS)}>
         {optionNodes.map((option, index) => {
           if (option.name !== CHILD_OPTION_NAME) {
             return null;
