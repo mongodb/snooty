@@ -92,7 +92,7 @@ const Wayfinding = ({ nodeData: { children, argument } }) => {
 
   return (
     <div className={cx(containerStyle)}>
-      <Body className={titleStyle}>{titleText}</Body>
+      <Body className={cx(titleStyle)}>{titleText}</Body>
       <div className={cx(descriptionStyle)}>
         {descriptionNode?.children?.map((child, index) => {
           return <ComponentFactory key={index} nodeData={child} />;
