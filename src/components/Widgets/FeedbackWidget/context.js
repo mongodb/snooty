@@ -1,4 +1,5 @@
-import React, { useState, useContext, createContext, useTransition } from 'react';
+import React, { useState, useCallback, useContext, useEffect, createContext, useTransition } from 'react';
+import { useLocation } from '@gatsbyjs/reach-router';
 import { getViewport } from '../../../hooks/useViewport';
 import { createNewFeedback, useRealmUser } from './realm';
 
@@ -12,8 +13,10 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
+  const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [, startTransition] = useTransition();
   const { user, reassignCurrentUser } = useRealmUser();
+  const { href } = useLocation();
 
   // Create a new feedback document
   const initializeFeedback = (nextView = 'rating') => {
@@ -101,15 +104,15 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
 
   // Stop giving feedback (if in progress) and reset the widget to the
   // initial state.
-  const abandon = () => {
-    // Reset to the initial state
+  const abandon = useCallback(() => {
     setView('waiting');
     if (feedback) {
       // set the rating and feedback to null
       setFeedback(null);
       setSelectedRating(null);
     }
-  };
+    setIsScreenshotButtonClicked(false);
+  }, [feedback]);
 
   const value = {
     feedback,
@@ -124,7 +127,17 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     selectedRating,
     setSelectedRating,
     selectInitialRating,
+    isScreenshotButtonClicked,
+    setIsScreenshotButtonClicked,
   };
+
+  // reset feedback when route changes
+  useEffect(() => {
+    // disable effect for testing views
+    if (test?.view) return;
+    abandon();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [href]);
 
   return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
 }
