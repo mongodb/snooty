@@ -9,6 +9,7 @@ const SKIP_P_TAGS = new Set(['caption', 'footnote', 'field']);
 
 const paragraphStyling = css`
   margin-bottom: 16px;
+  color: var(--font-color-primary);
 `;
 
 const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }) => {

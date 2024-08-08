@@ -9,6 +9,8 @@ const inlineCodeStyling = css`
   /* Unset font size so it inherits it from its context */
   font-size: unset;
   display: inline;
+  color: var(--font-color-primary);
+  background: var(--background-color-secondary);
 
   a & {
     color: inherit;

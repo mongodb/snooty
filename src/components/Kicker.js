@@ -11,6 +11,7 @@ const kickerBaseStyling = css`
   grid-column: 2;
   margin-top: 48px;
   margin-bottom: 0px;
+  color: var(--font-color-light);
   @media ${theme.screenSize.upToSmall} {
     padding-top: 56px;
   }

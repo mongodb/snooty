@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { Label } from '../Select';
 
 const List = styled('ul')`
@@ -12,15 +11,16 @@ const List = styled('ul')`
 
 const StyledLabel = styled(Label)`
   font-weight: 500;
-  color: ${({ darkMode }) => (darkMode ? palette.gray.light1 : palette.gray.dark1)};
+  --label-color: ${palette.gray.dark2};
+  .dark-theme & {
+    --label-color: ${palette.gray.light1};
+  }
 `;
 
 const ContentsList = ({ children, label }) => {
-  const { darkMode } = useDarkMode();
-
   return (
     <>
-      <StyledLabel darkMode={darkMode}>{label}</StyledLabel>
+      <StyledLabel>{label}</StyledLabel>
       <List>{children}</List>
     </>
   );

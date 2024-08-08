@@ -2,6 +2,7 @@ import { lazy, Fragment } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@leafygreen-ui/emotion';
 
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { DEFAULT_MAX_INPUT, defaultSuggestedPrompts } from '../../ChatbotUi';
 import { MongoDbLegalDisclosure } from './MongoDBLegal';
@@ -21,6 +22,7 @@ const StyledChatBotFabContainer = styled.div`
 `;
 
 const ChatbotFab = () => {
+  const { darkMode } = useDarkMode();
   const { snootyEnv } = useSiteMetadata();
   const CHATBOT_SERVER_BASE_URL =
     snootyEnv === 'dotcomprd'
@@ -31,7 +33,12 @@ const ChatbotFab = () => {
       // Classname below to help ignore element for screenshots
       className={fabChatbot}
     >
-      <Chatbot name="MongoDB AI" maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
+      <Chatbot
+        name="MongoDB AI"
+        maxInputCharacters={DEFAULT_MAX_INPUT}
+        serverBaseUrl={CHATBOT_SERVER_BASE_URL}
+        darkMode={darkMode}
+      >
         <FloatingActionButtonTrigger text={CHATBOT_WIDGET_TEXT} />
         <ModalView
           disclaimer={

@@ -20,7 +20,7 @@ const DescriptionTerm = ({ children, html_id, ...rest }) => {
       {children.map((child, j) => (
         <ComponentFactory key={j} {...rest} nodeData={child} />
       ))}
-      <Permalink id={html_id} description="definition" buffer="-150px" />
+      <Permalink id={html_id} description="definition" />
     </dt>
   );
 };
