@@ -18,6 +18,7 @@ const StyledMain = styled.main`
     @media ${theme.screenSize.upToSmall} {
       margin: ${theme.size.default} 48px ${theme.size.xlarge};
     }
+    overflow-x: auto;
   }
 `;
 
