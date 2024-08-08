@@ -65,8 +65,8 @@ import Text from './Text';
 import Time from './Time';
 import TitleReference from './TitleReference';
 import Transition from './Transition';
-
 import VersionModified from './VersionModified';
+import { Wayfinding } from './Wayfinding';
 
 import RoleAbbr from './Roles/Abbr';
 import RoleClass from './Roles/Class';
@@ -186,9 +186,9 @@ const componentMap = {
   time: Time,
   title_reference: TitleReference,
   transition: Transition,
-
   versionadded: VersionModified,
   versionchanged: VersionModified,
+  wayfinding: Wayfinding,
 };
 
 function getComponentType(type, name) {
