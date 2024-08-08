@@ -29,11 +29,6 @@ body {
 }
 
 body {
-  background-color: initial;
-  color: initial;
-}
-
-.dark-theme body {
   background-color: var(--background-color-primary);
   color: var(--font-color-primary);
 }
