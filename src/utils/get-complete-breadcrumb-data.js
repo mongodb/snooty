@@ -35,7 +35,7 @@ export const getFullBreadcrumbPath = (path, needsPrefix) => {
   return assertTrailingSlash(path);
 };
 
-export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, parentPaths }) => {
+export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, parentPaths, selfCrumbContent = null }) => {
   //get intermediate breadcrumbs
   const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
     return { ...crumb, path: getFullBreadcrumbPath(crumb.path, false) };
@@ -65,7 +65,19 @@ export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, pare
     };
   });
 
+  const selfCrumb = selfCrumbContent
+    ? {
+        title: selfCrumbContent.title,
+        path: getFullBreadcrumbPath(selfCrumbContent.slug, true),
+      }
+    : null;
+
+  if (typeof window !== 'undefined') console.log('SELF CRUMB', selfCrumb);
   return propertyCrumb
-    ? [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents]
+    ? selfCrumb
+      ? [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents, selfCrumb]
+      : [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents]
+    : selfCrumb
+    ? [homeCrumb, ...intermediateCrumbs, ...parents, selfCrumb]
     : [homeCrumb, ...intermediateCrumbs, ...parents];
 };

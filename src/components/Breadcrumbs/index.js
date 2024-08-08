@@ -15,27 +15,17 @@ const breadcrumbBodyStyle = css`
   }
 `;
 
-// THIS ALL NEEDS TO BE CHANGED ...
-
-const Breadcrumbs = ({ siteTitle, slug, defQueriedCrumbs = null, defParentPaths = null }) => {
-  console.log('USE BREADCRUMBS', useBreadcrumbs());
+const Breadcrumbs = ({ siteTitle, slug, defQueriedCrumbs = null, defParentPaths = null, selfCrumbContent = null }) => {
   const queriedCrumbs = defQueriedCrumbs ?? useBreadcrumbs();
-  console.log('DEF QUERIED CRUMBS', defQueriedCrumbs);
-  console.log('QUERIEDCRUMBS', queriedCrumbs);
-  //console.log('QUERIEDCURMBS', queriedCrumbs);
-  //const uwu = useSnootyMetadata();
-  //console.log(uwu);useSnootyMetadata();
   if (!defParentPaths) {
-    console.log('USING NATIVE PARENT PATHS');
     const { parentPaths } = useSnootyMetadata();
     defParentPaths = parentPaths;
   }
   let parentPaths = defParentPaths;
-  console.log('PARENTPATHS', parentPaths);
 
   const breadcrumbs = React.useMemo(
-    () => getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths }),
-    [parentPaths, queriedCrumbs, siteTitle, slug]
+    () => getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths, selfCrumbContent }),
+    [parentPaths, queriedCrumbs, siteTitle, slug, selfCrumbContent]
   );
 
   return (

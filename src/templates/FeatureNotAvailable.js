@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { withPrefix } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
@@ -7,12 +7,16 @@ import { H2 } from '@leafygreen-ui/typography';
 import { theme } from '../theme/docsTheme';
 import Breadcrumbs from '../components/Breadcrumbs';
 import ChatbotUi from '../components/ChatbotUi';
-import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { PageContext } from '../context/page-context';
-import { splitUrlIntoParts } from '../utils/split-url-into-parts';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 
 const StyledMain = styled.main`
-  margin: 16px 64px 64px;
+  max-width: 100vw;
+  .body {
+    margin: ${theme.size.default} ${theme.size.xlarge} ${theme.size.xlarge};
+    @media ${theme.screenSize.upToSmall} {
+      margin: ${theme.size.default} 48px ${theme.size.xlarge};
+    }
+  }
 `;
 
 const ContentBox = styled.div`
@@ -39,7 +43,6 @@ const ImageContainer = styled.div`
   }
 `;
 
-// change this to our image
 const FeatureNotAvailImage = () => {
   const altText = 'Feature not available';
   const imgPath = 'assets/feature-not-avail.svg';
@@ -51,8 +54,8 @@ const FeatureNotAvailImage = () => {
   );
 };
 
-const titleStyling = css`
-  color: black;
+const titleStyling = (darkMode) => css`
+  color: ${darkMode ? 'white' : 'black'};
   text-align: center;
 `;
 
@@ -60,32 +63,8 @@ const LinkContainer = styled.div`
   margin-top: ${theme.size.large};
 `;
 
-//const { displayName, slug } = splitUrlIntoParts('https://www.mongodb.com/docs/bi-connector/current/launch');
-
 const click = () => {
   history.back();
-};
-const ContentContainer = () => {
-  // const ref = typeof window === 'undefined' ? null : window.document.referrer;
-  // console.log('REFERENCE', ref);
-  // console.log('TYPE', typeof ref);
-  // page context
-  // site title
-  //   const { slug } = useContext(PageContext);
-  //   console.log('SLUG', slug);
-  //   const { title } = useSnootyMetadata();
-  //   console.log('TITLTE', title);
-
-  return (
-    <ContentBox>
-      <H2 className={cx(titleStyling)}>We're sorry, this page isn't available in the version you selected.</H2>
-      <LinkContainer>
-        <Button onClick={click} variant="default">
-          Go back to previous page
-        </Button>
-      </LinkContainer>
-    </ContentBox>
-  );
 };
 
 const FeatureNotAvailContainer = styled.div`
@@ -100,28 +79,49 @@ const FeatureNotAvailable = () => {
   // const { displayName, slug } = splitUrlIntoParts(
   //   'https://www.mongodb.com/docs/atlas/atlas-search/atlas-search-overview/'
   // );
-  let parentPaths, queriedCrumbs, siteTitle, slug;
+  let parentPaths, queriedCrumbs, siteTitle, slug, pageTitle;
   if (typeof window !== 'undefined') {
     parentPaths = JSON.parse(sessionStorage.getItem('parentPaths'));
     queriedCrumbs = JSON.parse(sessionStorage.getItem('queriedCrumbs'));
     siteTitle = sessionStorage.getItem('siteTitle');
     slug = sessionStorage.getItem('slug');
-    console.log('PARENTPATHS', parentPaths, 'QUEREIDCRUMBES', queriedCrumbs);
-    console.log('SITE TITLE', siteTitle, 'SLUG', slug);
-    //console.log('Data', JSON.stringify(JSON.stringify(data)));
+    pageTitle = sessionStorage.getItem('pageTitle');
   }
-  //console.log('DATA', toString(data));
-  //console.log('FROM PAGE', displayName, slug);
+
+  const selfBreadcrumb = {
+    title: pageTitle,
+    slug: `/${slug}`,
+  };
+
+  const { darkMode } = useDarkMode();
+
   return (
     <StyledMain>
-      {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && <ChatbotUi template="errorpage" />}
-      {typeof window !== 'undefined' && (
-        <Breadcrumbs siteTitle={siteTitle} slug={slug} defParentPaths={parentPaths} defQueriedCrumbs={queriedCrumbs} />
-      )}
-      <FeatureNotAvailContainer>
-        <FeatureNotAvailImage />
-        <ContentContainer />
-      </FeatureNotAvailContainer>
+      <div class="body">
+        {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && <ChatbotUi template="errorpage" />}
+        {typeof window !== 'undefined' && (
+          <Breadcrumbs
+            siteTitle={siteTitle}
+            slug={slug}
+            defParentPaths={parentPaths}
+            defQueriedCrumbs={queriedCrumbs}
+            selfCrumbContent={selfBreadcrumb}
+          />
+        )}
+        <FeatureNotAvailContainer>
+          <FeatureNotAvailImage />
+          <ContentBox>
+            <H2 darkMode={darkMode} className={cx(titleStyling(darkMode))}>
+              We're sorry, this page isn't available in the version you selected.
+            </H2>
+            <LinkContainer>
+              <Button onClick={click} variant="default">
+                Go back to previous page
+              </Button>
+            </LinkContainer>
+          </ContentBox>
+        </FeatureNotAvailContainer>
+      </div>
     </StyledMain>
   );
 };

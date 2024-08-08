@@ -106,17 +106,16 @@ const DocumentBody = (props) => {
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
   if (typeof window !== 'undefined' && template !== 'feature-not-avail') {
-    console.log('TEAMPLATE', template);
-    console.log('SLUG', slug);
     const { parentPaths } = useSnootyMetadata();
-    console.log('PARENTPATH', JSON.stringify(parentPaths));
     const queriedCrumbs = useBreadcrumbs();
-    console.log('QUERIed CRUMBS', queriedCrumbs);
+    const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
+
     sessionStorage.clear();
     sessionStorage.setItem('parentPaths', JSON.stringify(parentPaths));
     sessionStorage.setItem('queriedCrumbs', JSON.stringify(queriedCrumbs));
     sessionStorage.setItem('siteTitle', siteTitle);
     sessionStorage.setItem('slug', slug);
+    sessionStorage.setItem('pageTitle', pageTitle);
   }
 
   return (
