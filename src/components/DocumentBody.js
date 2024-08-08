@@ -14,6 +14,8 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
 import { getSiteTitle } from '../utils/get-site-title';
 import { PageContext } from '../context/page-context';
+import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
+import { isBrowser } from '../utils/is-browser';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -25,7 +27,6 @@ import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 import { InstruqtProvider } from './Instruqt/instruqt-context';
 import { SuspenseHelper } from './SuspenseHelper';
 import { TabProvider } from './Tabs/tab-context';
-import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
 
 // lazy load the unified footer to improve page load speed
 const LazyFooter = lazy(() => import('./Footer'));
@@ -105,17 +106,21 @@ const DocumentBody = (props) => {
   const siteTitle = getSiteTitle(metadata);
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
-  if (typeof window !== 'undefined' && template !== 'feature-not-avail') {
-    const { parentPaths } = useSnootyMetadata();
-    const queriedCrumbs = useBreadcrumbs();
-    const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
+
+  const { parentPaths } = useSnootyMetadata();
+  const queriedCrumbs = useBreadcrumbs();
+
+  if (isBrowser && template !== 'feature-not-avail') {
+    let breadcrumbInfo = {
+      parentPaths: parentPaths,
+      queriedCrumbs: queriedCrumbs,
+      siteTitle: siteTitle,
+      slug: slug,
+      pageTitle: pageTitle,
+    };
 
     sessionStorage.clear();
-    sessionStorage.setItem('parentPaths', JSON.stringify(parentPaths));
-    sessionStorage.setItem('queriedCrumbs', JSON.stringify(queriedCrumbs));
-    sessionStorage.setItem('siteTitle', siteTitle);
-    sessionStorage.setItem('slug', slug);
-    sessionStorage.setItem('pageTitle', pageTitle);
+    sessionStorage.setItem('breadcrumbInfo', JSON.stringify(breadcrumbInfo));
   }
 
   return (

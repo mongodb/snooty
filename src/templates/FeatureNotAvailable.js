@@ -1,13 +1,15 @@
 import React from 'react';
+
 import { withPrefix } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { H2 } from '@leafygreen-ui/typography';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import Breadcrumbs from '../components/Breadcrumbs';
 import ChatbotUi from '../components/ChatbotUi';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { isBrowser } from '../utils/is-browser';
 
 const StyledMain = styled.main`
   max-width: 100vw;
@@ -64,7 +66,9 @@ const LinkContainer = styled.div`
 `;
 
 const click = () => {
-  history.back();
+  if (isBrowser) {
+    window.history.back();
+  }
 };
 
 const FeatureNotAvailContainer = styled.div`
@@ -76,22 +80,16 @@ const FeatureNotAvailContainer = styled.div`
 `;
 
 const FeatureNotAvailable = () => {
-  // const { displayName, slug } = splitUrlIntoParts(
-  //   'https://www.mongodb.com/docs/atlas/atlas-search/atlas-search-overview/'
-  // );
-  let parentPaths, queriedCrumbs, siteTitle, slug, pageTitle;
-  if (typeof window !== 'undefined') {
-    parentPaths = JSON.parse(sessionStorage.getItem('parentPaths'));
-    queriedCrumbs = JSON.parse(sessionStorage.getItem('queriedCrumbs'));
-    siteTitle = sessionStorage.getItem('siteTitle');
-    slug = sessionStorage.getItem('slug');
-    pageTitle = sessionStorage.getItem('pageTitle');
-  }
+  let breadcrumbInfo = null,
+    selfBreadcrumb = null;
 
-  const selfBreadcrumb = {
-    title: pageTitle,
-    slug: `/${slug}`,
-  };
+  if (isBrowser) {
+    breadcrumbInfo = JSON.parse(sessionStorage.getItem('breadcrumbInfo'));
+    selfBreadcrumb = {
+      title: breadcrumbInfo?.pageTitle,
+      slug: `/${breadcrumbInfo?.slug}`,
+    };
+  }
 
   const { darkMode } = useDarkMode();
 
@@ -99,13 +97,13 @@ const FeatureNotAvailable = () => {
     <StyledMain>
       <div class="body">
         {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && <ChatbotUi template="errorpage" />}
-        {typeof window !== 'undefined' && (
+        {breadcrumbInfo && (
           <Breadcrumbs
-            siteTitle={siteTitle}
-            slug={slug}
-            defParentPaths={parentPaths}
-            defQueriedCrumbs={queriedCrumbs}
-            selfCrumbContent={selfBreadcrumb}
+            siteTitle={breadcrumbInfo.siteTitle}
+            slug={breadcrumbInfo.slug}
+            parentPathsProp={breadcrumbInfo.parentPaths}
+            queriedCrumbsProp={breadcrumbInfo.queriedCrumbs}
+            selfCrumb={selfBreadcrumb}
           />
         )}
         <FeatureNotAvailContainer>

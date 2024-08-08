@@ -15,17 +15,23 @@ const breadcrumbBodyStyle = css`
   }
 `;
 
-const Breadcrumbs = ({ siteTitle, slug, defQueriedCrumbs = null, defParentPaths = null, selfCrumbContent = null }) => {
-  const queriedCrumbs = defQueriedCrumbs ?? useBreadcrumbs();
-  if (!defParentPaths) {
-    const { parentPaths } = useSnootyMetadata();
-    defParentPaths = parentPaths;
-  }
-  let parentPaths = defParentPaths;
+const Breadcrumbs = ({ siteTitle, slug, queriedCrumbsProp = null, parentPathsProp = null, selfCrumb = null }) => {
+  let queriedCrumbsHook = useBreadcrumbs();
+  const queriedCrumbs = queriedCrumbsProp ?? queriedCrumbsHook;
+
+  const { parentPaths } = useSnootyMetadata();
+  const parentPathsData = parentPathsProp ?? parentPaths;
 
   const breadcrumbs = React.useMemo(
-    () => getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths, selfCrumbContent }),
-    [parentPaths, queriedCrumbs, siteTitle, slug, selfCrumbContent]
+    () =>
+      getCompleteBreadcrumbData({
+        siteTitle,
+        slug,
+        queriedCrumbs,
+        parentPaths: parentPathsData,
+        selfCrumbContent: selfCrumb,
+      }),
+    [parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb]
   );
 
   return (
