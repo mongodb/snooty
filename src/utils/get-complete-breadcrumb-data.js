@@ -84,11 +84,9 @@ export const getCompleteBreadcrumbData = ({
       }
     : null;
 
-  return propertyCrumb
-    ? selfCrumb
-      ? [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents, selfCrumb]
-      : [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents]
-    : selfCrumb
-    ? [homeCrumb, ...intermediateCrumbs, ...parents, selfCrumb]
+  const almostFinalCrumbs = propertyCrumb
+    ? [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents]
     : [homeCrumb, ...intermediateCrumbs, ...parents];
+
+  return selfCrumb ? [...almostFinalCrumbs, selfCrumb] : almostFinalCrumbs;
 };
