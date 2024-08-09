@@ -4,6 +4,7 @@ import { assertTrailingSlash } from './assert-trailing-slash';
 import { removeLeadingSlash } from './remove-leading-slash';
 import { assertLeadingSlash } from './assert-leading-slash';
 import { isRelativeUrl } from './is-relative-url';
+import { getUrl } from './url-utils';
 
 const nodesToString = (titleNodes) => {
   if (typeof titleNodes === 'string') {
@@ -35,7 +36,14 @@ export const getFullBreadcrumbPath = (path, needsPrefix) => {
   return assertTrailingSlash(path);
 };
 
-export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, parentPaths, selfCrumbContent = null }) => {
+export const getCompleteBreadcrumbData = ({
+  siteTitle,
+  slug,
+  queriedCrumbs,
+  parentPaths,
+  selfCrumbContent = null,
+  pageInfo = null,
+}) => {
   //get intermediate breadcrumbs
   const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
     return { ...crumb, path: getFullBreadcrumbPath(crumb.path, false) };
@@ -49,30 +57,33 @@ export const getCompleteBreadcrumbData = ({ siteTitle, slug, queriedCrumbs, pare
   // If site is the property homepage, leave the propertyCrumb blank
   let propertyCrumb;
   if (slug !== '/') {
+    let path = pageInfo ? getUrl(pageInfo.urlSlug, pageInfo.project, pageInfo.siteBasePrefix, '/') : '/';
     propertyCrumb = {
       title: nodesToString(siteTitle),
-      path: '/',
+      path: path,
     };
   }
 
   //get direct parents of the current page from parentPaths
   //add respective url to each direct parent crumb
   const parents = (parentPaths[slug] ?? []).map((crumb) => {
+    let path = pageInfo
+      ? getUrl(pageInfo.urlSlug, pageInfo.project, pageInfo.siteBasePrefix, crumb.path)
+      : assertLeadingSlash(crumb.path);
     return {
       ...crumb,
       title: nodesToString(crumb.title),
-      path: assertLeadingSlash(crumb.path),
+      path: path,
     };
   });
 
   const selfCrumb = selfCrumbContent
     ? {
         title: selfCrumbContent.title,
-        path: getFullBreadcrumbPath(selfCrumbContent.slug, true),
+        path: getUrl(pageInfo.urlSlug, pageInfo.project, pageInfo.siteBasePrefix, selfCrumbContent.slug),
       }
     : null;
 
-  if (typeof window !== 'undefined') console.log('SELF CRUMB', selfCrumb);
   return propertyCrumb
     ? selfCrumb
       ? [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents, selfCrumb]

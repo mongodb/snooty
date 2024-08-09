@@ -82,7 +82,8 @@ const FeatureNotAvailContainer = styled.div`
 
 const FeatureNotAvailable = () => {
   let breadcrumbInfo = null,
-    selfBreadcrumb = null;
+    selfBreadcrumb = null,
+    pageInfo = null;
 
   if (isBrowser) {
     breadcrumbInfo = JSON.parse(sessionStorage.getItem('breadcrumbInfo'));
@@ -90,6 +91,7 @@ const FeatureNotAvailable = () => {
       title: breadcrumbInfo?.pageTitle,
       slug: `/${breadcrumbInfo?.slug}`,
     };
+    pageInfo = JSON.parse(sessionStorage.getItem('pageInfo'));
   }
 
   const { darkMode } = useDarkMode();
@@ -105,6 +107,7 @@ const FeatureNotAvailable = () => {
             parentPathsProp={breadcrumbInfo.parentPaths}
             queriedCrumbsProp={breadcrumbInfo.queriedCrumbs}
             selfCrumb={selfBreadcrumb}
+            pageInfo={pageInfo}
           />
         )}
         <FeatureNotAvailContainer>

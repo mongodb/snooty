@@ -21,7 +21,14 @@ const breadcrumbBodyStyle = css`
   }
 `;
 
-const Breadcrumbs = ({ siteTitle, slug, queriedCrumbsProp = null, parentPathsProp = null, selfCrumb = null }) => {
+const Breadcrumbs = ({
+  siteTitle,
+  slug,
+  queriedCrumbsProp = null,
+  parentPathsProp = null,
+  selfCrumb = null,
+  pageInfo = null,
+}) => {
   let queriedCrumbsHook = useBreadcrumbs();
   const queriedCrumbs = queriedCrumbsProp ?? queriedCrumbsHook;
 
@@ -36,8 +43,9 @@ const Breadcrumbs = ({ siteTitle, slug, queriedCrumbsProp = null, parentPathsPro
         queriedCrumbs,
         parentPaths: parentPathsData,
         selfCrumbContent: selfCrumb,
+        pageInfo: pageInfo,
       }),
-    [parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb]
+    [parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb, pageInfo]
   );
 
   return (

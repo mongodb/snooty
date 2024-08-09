@@ -85,7 +85,7 @@ const fontFamily = getCurrentLocaleFontFamilyValue();
 const DocumentBody = (props) => {
   const { location, data, pageContext } = props;
   const page = data?.page?.ast;
-  const { slug, template } = pageContext;
+  const { slug, template, repoBranches } = pageContext;
 
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
@@ -107,8 +107,16 @@ const DocumentBody = (props) => {
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
-  const { parentPaths } = useSnootyMetadata();
+  const { parentPaths, branch } = useSnootyMetadata();
   const queriedCrumbs = useBreadcrumbs();
+
+  const siteBasePrefix = repoBranches.siteBasePrefix;
+
+  // TODO: Move this into util function since the same logic
+  // is used in useCanonicalUrl();
+  const urlSlug = repoBranches.branches.find((br) => br.gitBranchName === branch)?.urlSlug ?? branch;
+
+  const { project } = metadata;
 
   if (isBrowser && template !== 'feature-not-avail') {
     let breadcrumbInfo = {
@@ -119,8 +127,15 @@ const DocumentBody = (props) => {
       pageTitle: pageTitle,
     };
 
+    let pageInfo = {
+      project: project,
+      urlSlug: urlSlug,
+      siteBasePrefix: siteBasePrefix,
+    };
+
     sessionStorage.clear();
     sessionStorage.setItem('breadcrumbInfo', JSON.stringify(breadcrumbInfo));
+    sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
   }
 
   return (
