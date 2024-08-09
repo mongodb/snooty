@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { lazy } from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { getNestedValue } from '../../utils/get-nested-value';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import ChatbotUi from '../ChatbotUi';
 import {
   FeedbackProvider,
   FeedbackForm,
@@ -16,6 +15,10 @@ import {
   FeedbackContainer,
 } from '../Widgets/FeedbackWidget';
 import DarkModeDropdown from './DarkModeDropdown';
+// import { SuspenseHelper } from '../SuspenseHelper';
+
+const SearchBar = lazy(() => import('./SearchInput'));
+const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 
 const ActionBarContainer = styled('div')`
   display: flex;
@@ -53,6 +56,7 @@ const ActionBarSearchContainer = styled.div`
   align-items: center;
   display: flex;
   width: 80%;
+  margin-left: ${theme.size.xlarge};
 
   @media ${theme.screenSize.upToMedium} {
     width: 100%;
@@ -81,7 +85,6 @@ const ActionsBox = styled('div')`
 
 // Note: When working on this component further, please check with design on how it should look in the errorpage template (404) as well!
 const ActionBar = ({ template, slug, ...props }) => {
-  const { darkMode } = useDarkMode();
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
   const feedbackData = useFeedbackData({
@@ -93,7 +96,9 @@ const ActionBar = ({ template, slug, ...props }) => {
   return (
     <ActionBarContainer className={props.className}>
       <ActionBarSearchContainer>
-        <ChatbotUi darkMode={darkMode} />
+        <Chatbot serverBaseUrl={'https://knowledge.staging.corp.mongodb.com/api/v1'}>
+          <SearchBar />
+        </Chatbot>
       </ActionBarSearchContainer>
       <ActionsBox>
         <DarkModeDropdown></DarkModeDropdown>
@@ -110,6 +115,9 @@ const ActionBar = ({ template, slug, ...props }) => {
   );
 };
 
-ActionBar.propTypes = {};
+ActionBar.propTypes = {
+  template: PropTypes.string,
+  slug: PropTypes.string,
+};
 
 export default ActionBar;
