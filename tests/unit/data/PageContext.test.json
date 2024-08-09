@@ -1,6 +1,6 @@
 {
   "slug": "community-supported-drivers",
-  "repoBranch": {
+  "repoBranches": {
     "branches": [
       {
         "name": "master",
