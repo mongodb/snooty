@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { css, cx } from '@leafygreen-ui/emotion';
-import Icon from '@leafygreen-ui/icon';
-import { SearchInput, SearchResult } from '@leafygreen-ui/search-input';
 import { ModalView, useChatbotContext } from 'mongodb-chatbot-ui';
-// import { theme } from '../../theme/docsTheme';
+import { css, cx } from '@leafygreen-ui/emotion';
+import { SearchInput, SearchResult } from '@leafygreen-ui/search-input';
 import debounce from '../../utils/debounce';
+import { SparkleIcon } from './SparkIcon';
 
 const PLACEHOLDER_TEXT = `Search MongoDB Docs or Ask MongoDB AI`;
 
@@ -42,7 +41,7 @@ const SearchBar = ({ className }) => {
         onClick: () => {
           openChat();
         },
-        icon: <Icon glyph={'Sparkle'} />,
+        icon: <SparkleIcon glyph={'Sparkle'} />,
       },
     ],
     [openChat]
