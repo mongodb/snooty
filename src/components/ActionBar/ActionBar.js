@@ -54,7 +54,7 @@ const ActionBar = ({ template, slug, ...props }) => {
       getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
   });
 
-  const { fakeColumns, className } = getContainerStyling(template);
+  const { fakeColumns, containerClassname, searchContainerClassname } = getContainerStyling(template);
 
   const CHATBOT_SERVER_BASE_URL =
     metadata?.snootyEnv === 'dotcomprd'
@@ -62,17 +62,16 @@ const ActionBar = ({ template, slug, ...props }) => {
       : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
-    <div className={cx(props.className, actionBarStyling, className)}>
+    <div className={cx(props.className, actionBarStyling, containerClassname)}>
       {fakeColumns && <div></div>}
-      {/* opted for classname styling vs styled props due to smartling costs */}
-      <ActionBarSearchContainer>
+      <ActionBarSearchContainer className={cx(searchContainerClassname)}>
         <SuspenseHelper>
           <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
             <SearchBar />
           </Chatbot>
         </SuspenseHelper>
       </ActionBarSearchContainer>
-      <ActionsBox className={cx(actionsBoxStyling({ template }))}>
+      <ActionsBox className={cx(actionsBoxStyling({ fakeColumns }))}>
         <DarkModeDropdown></DarkModeDropdown>
         {template !== 'errorpage' && (
           <FeedbackProvider page={feedbackData}>

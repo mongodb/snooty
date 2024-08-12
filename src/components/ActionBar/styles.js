@@ -3,6 +3,7 @@ import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { CONTENT_MAX_WIDTH } from '../../templates/product-landing';
 
+// default styling for all Action Bars
 export const actionBarStyling = css`
   height: 60px;
   padding-top: ${theme.size.small};
@@ -31,6 +32,7 @@ export const actionBarStyling = css`
   }
 `;
 
+// used for :template: options - 'product-landing', 'changelog'
 const gridStyling = css`
   display: grid;
   grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${CONTENT_MAX_WIDTH}px) minmax(
@@ -46,40 +48,61 @@ const gridStyling = css`
   }
 `;
 
+// use strictly for :template: landing
+const landingGridStyling = css`
+  display: grid;
+  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, 1440px) minmax(${theme.size.xlarge}, 1fr);
+`;
+
 const flexStyling = css`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   padding-left: ${theme.size.xlarge};
 `;
 
+const middleAlignment = css`
+  max-width: 770px;
+  margin: auto;
+`;
+
 export const getContainerStyling = (template) => {
-  let className, fakeColumns;
+  let containerClassname,
+    searchContainerClassname,
+    fakeColumns = false;
   switch (template) {
     case 'product-landing':
-      className = gridStyling;
+      containerClassname = gridStyling;
       fakeColumns = true;
       break;
     case 'landing':
-      className = gridStyling;
+      containerClassname = landingGridStyling;
+      fakeColumns = true;
+      break;
+    case 'changelog':
+      containerClassname = gridStyling;
+      fakeColumns = true;
+      break;
+    case 'blank':
+      searchContainerClassname = middleAlignment;
       fakeColumns = true;
       break;
     default:
-      className = flexStyling;
+      containerClassname = flexStyling;
       break;
   }
 
-  return { className, fakeColumns };
+  return { containerClassname, fakeColumns, searchContainerClassname };
 };
 
-export const actionsBoxStyling = ({ template }) => css`
-  ${template === 'product-landing' &&
+export const actionsBoxStyling = ({ fakeColumns }) => css`
+  ${fakeColumns &&
   `position: absolute;
   top: ${theme.fontSize.tiny};
   right: ${theme.size.large};`}
 
-  ${template !== 'product-landing' &&
+  ${!fakeColumns &&
   `
   margin-left: auto;
   padding-right: ${theme.size.large};
