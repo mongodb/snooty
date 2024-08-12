@@ -1,7 +1,7 @@
 import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { palette } from '@leafygreen-ui/palette';
+import { cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
@@ -14,49 +14,17 @@ import {
   useFeedbackData,
   FeedbackContainer,
 } from '../Widgets/FeedbackWidget';
+import { SuspenseHelper } from '../SuspenseHelper';
 import DarkModeDropdown from './DarkModeDropdown';
-// import { SuspenseHelper } from '../SuspenseHelper';
+import { actionsBoxStyling, actionBarStyling, getContainerStyling } from './styles';
 
 const SearchBar = lazy(() => import('./SearchInput'));
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
-
-const ActionBarContainer = styled('div')`
-  display: flex;
-  justify-content: space-between;
-  padding-top: ${theme.size.small};
-  padding-bottom: ${theme.size.small};
-  padding-right: ${theme.size.large};
-  width: 100%;
-  position: sticky;
-  top: 0;
-  flex-wrap: wrap;
-  z-index: ${theme.zIndexes.actionBar};
-  background-color: var(--background-color-primary);
-  border-bottom: 1px solid var(--border-color);
-
-  --border-color: ${palette.gray.light2};
-
-  .dark-theme & {
-    --border-color: ${palette.gray.dark2};
-  }
-
-  @media ${theme.screenSize.mediumAndUp} {
-    & > div {
-      flex: 0 1 auto;
-    }
-  }
-
-  @media ${theme.screenSize.upToMedium} {
-    justify-content: space-between;
-    padding-right: 0;
-  }
-`;
 
 const ActionBarSearchContainer = styled.div`
   align-items: center;
   display: flex;
   width: 80%;
-  margin-left: ${theme.size.xlarge};
 
   @media ${theme.screenSize.upToMedium} {
     width: 100%;
@@ -64,7 +32,7 @@ const ActionBarSearchContainer = styled.div`
 
   @media ${theme.screenSize.upToSmall} {
     & > div {
-      padding: ${theme.size.default} 32px;
+      padding: ${theme.size.default} ${theme.size.large};
     }
   }
 `;
@@ -73,14 +41,6 @@ const ActionsBox = styled('div')`
   display: flex;
   align-items: center;
   column-gap: ${theme.size.default};
-
-  @media ${theme.screenSize.upToMedium} {
-    padding-left: 3rem;
-  }
-
-  @media ${theme.screenSize.upToSmall} {
-    padding-left: 2rem;
-  }
 `;
 
 // Note: When working on this component further, please check with design on how it should look in the errorpage template (404) as well!
@@ -93,14 +53,26 @@ const ActionBar = ({ template, slug, ...props }) => {
     title:
       getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
   });
+
+  const { fakeColumns, className } = getContainerStyling(template);
+
+  const CHATBOT_SERVER_BASE_URL =
+    metadata?.snootyEnv === 'dotcomprd'
+      ? 'https://knowledge.mongodb.com/api/v1'
+      : 'https://knowledge.staging.corp.mongodb.com/api/v1';
+
   return (
-    <ActionBarContainer className={props.className}>
+    <div className={cx(props.className, actionBarStyling, className)}>
+      {fakeColumns && <div></div>}
+      {/* opted for classname styling vs styled props due to smartling costs */}
       <ActionBarSearchContainer>
-        <Chatbot serverBaseUrl={'https://knowledge.staging.corp.mongodb.com/api/v1'}>
-          <SearchBar />
-        </Chatbot>
+        <SuspenseHelper>
+          <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
+            <SearchBar />
+          </Chatbot>
+        </SuspenseHelper>
       </ActionBarSearchContainer>
-      <ActionsBox>
+      <ActionsBox className={cx(actionsBoxStyling({ template }))}>
         <DarkModeDropdown></DarkModeDropdown>
         {template !== 'errorpage' && (
           <FeedbackProvider page={feedbackData}>
@@ -111,7 +83,7 @@ const ActionBar = ({ template, slug, ...props }) => {
           </FeedbackProvider>
         )}
       </ActionsBox>
-    </ActionBarContainer>
+    </div>
   );
 };
 
