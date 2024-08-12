@@ -48,13 +48,14 @@ const SearchBar = ({ className }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const shortcutKeyPressed = useRef(false);
-  const { handleSubmit } = useChatbotContext();
+  const { openChat, handleSubmit } = useChatbotContext();
   const SEARCH_SUGGESTIONS = useMemo(
     () => [
       {
         copy: 'Search',
-        onClick: () => {
+        onClick: async () => {
           if (shortcutKeyPressed.current) {
+            await openChat();
             return handleSubmit(searchValue);
           }
           console.log('redirecting');
@@ -63,14 +64,15 @@ const SearchBar = ({ className }) => {
       },
       {
         copy: 'Ask MongoDB AI',
-        onClick: () => {
+        onClick: async () => {
+          await openChat();
           handleSubmit(searchValue);
         },
         icon: <SparkleIcon glyph={'Sparkle'} />,
         shortcutIcon: <InlineCode>&#8984;K</InlineCode>,
       },
     ],
-    [handleSubmit, searchValue]
+    [handleSubmit, searchValue, openChat]
   );
 
   const keyPressHandler = useCallback((event) => {
