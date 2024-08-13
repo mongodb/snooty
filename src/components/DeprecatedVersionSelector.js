@@ -136,7 +136,7 @@ const DeprecatedVersionSelector = () => {
   const generateUrl = (currentVersion) => {
     // Our current LG button version has a bug where a disabled button with an href allows the disabled
     // button to be clickable. This logic can be removed when LG button is version >= 12.0.4.
-    if (buttonDisabled || !currentVersion || isEmpty(reposMap) || !hasValidHostName(reposMap[product])) {
+    if (buttonDisabled || !currentVersion || isEmpty(reposMap)) {
       return null;
     }
 
@@ -145,9 +145,12 @@ const DeprecatedVersionSelector = () => {
       const bucket = 'https://www.mongodb.com/docs/offline';
       return `${bucket}/${product}-${currentVersion.urlSlug}.tar.gz`;
     }
-
-    const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
-    return `${hostName}/${currentVersion.urlSlug}`;
+    if (hasValidHostName(reposMap[product])) {
+      const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
+      return `${hostName}/${currentVersion.urlSlug}`;
+    } else {
+      console.error(`Invalid hostname, url could not be generated for ${currentVersion}`);
+    }
   };
 
   return (
