@@ -9,7 +9,6 @@ import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
 import Link from '../components/Link';
-import ChatbotUi from '../components/ChatbotUi';
 
 const ErrorBox = styled.div`
   padding: 0 0 0 ${theme.size.default};
@@ -118,7 +117,6 @@ const NotFoundContainer = styled.div`
 const NotFound = () => {
   return (
     <main>
-      {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && <ChatbotUi template="errorpage" />}
       <NotFoundContainer>
         <NotFoundImage />
         <ErrorBoxContainer />

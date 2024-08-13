@@ -88,6 +88,10 @@ export const getContainerStyling = (template) => {
       searchContainerClassname = middleAlignment;
       fakeColumns = true;
       break;
+    case 'errorpage':
+      containerClassname = gridStyling;
+      fakeColumns = true;
+      break;
     default:
       containerClassname = flexStyling;
       break;

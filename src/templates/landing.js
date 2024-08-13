@@ -4,7 +4,6 @@ import { useTheme, Global, css } from '@emotion/react';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
-import ChatbotUi from '../components/ChatbotUi';
 
 const CONTENT_MAX_WIDTH = 1440;
 
@@ -48,18 +47,13 @@ const Wrapper = styled('main')`
 `;
 
 // The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
-const Landing = ({ children, pageContext, useChatbot }) => {
+const Landing = ({ children }) => {
   const { fontSize, screenSize, size } = useTheme();
   const { darkMode } = useDarkMode();
   return (
     <>
       <div>
-        <Wrapper newChatbotLanding={process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && useChatbot}>
-          {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && useChatbot && (
-            <ChatbotUi template={pageContext?.template} />
-          )}
-          {children}
-        </Wrapper>
+        <Wrapper>{children}</Wrapper>
       </div>
       <Global
         styles={css`
@@ -199,10 +193,6 @@ const Landing = ({ children, pageContext, useChatbot }) => {
 
 Landing.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  pageContext: PropTypes.shape({
-    template: PropTypes.string,
-  }).isRequired,
-  useChatbot: PropTypes.bool,
 };
 
 export default Landing;
