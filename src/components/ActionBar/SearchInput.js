@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch, useChatbotContext } from 'mongodb-chatbot-ui';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import { SearchInput, SearchResult } from '@leafygreen-ui/search-input';
+import { SearchInput as LGSearchInput, SearchResult } from '@leafygreen-ui/search-input';
 import { theme } from '../../theme/docsTheme';
 import debounce from '../../utils/debounce';
 import { isBrowser } from '../../utils/is-browser';
@@ -48,7 +48,7 @@ const suggestionStyling = ({ copy }) => css`
   }
 `;
 
-const SearchBar = ({ className }) => {
+const SearchInput = ({ className }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const shortcutKeyPressed = useRef(false);
@@ -96,9 +96,7 @@ const SearchBar = ({ className }) => {
   );
 
   const keyPressHandler = useCallback((event) => {
-    if (navigator.userAgent.includes('Mac') && event.key === 'Meta') {
-      shortcutKeyPressed.current = event.type === 'keydown';
-    } else if (event.key === 'Control') {
+    if ((navigator.userAgent.includes('Mac') && event.key === 'Meta') || event.key === 'Control') {
       shortcutKeyPressed.current = event.type === 'keydown';
     }
   }, []);
@@ -127,7 +125,8 @@ const SearchBar = ({ className }) => {
 
   return (
     <>
-      <SearchInput
+      <LGSearchInput
+        usePortal={false}
         aria-label="Search MongoDB Docs"
         value={searchValue}
         placeholder={PLACEHOLDER_TEXT}
@@ -154,7 +153,7 @@ const SearchBar = ({ className }) => {
               );
             })
           : undefined}
-      </SearchInput>
+      </LGSearchInput>
       <ModalView
         inputBottomText={
           'This is an experimental generative AI chatbot. All information should be verified prior to use.'
@@ -175,8 +174,8 @@ const SearchBar = ({ className }) => {
   );
 };
 
-export default SearchBar;
+export default SearchInput;
 
-SearchBar.propTypes = {
+SearchInput.propTypes = {
   className: PropTypes.string,
 };

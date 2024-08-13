@@ -19,7 +19,7 @@ import { SuspenseHelper } from '../SuspenseHelper';
 import DarkModeDropdown from './DarkModeDropdown';
 import { actionsBoxStyling, actionBarStyling, getContainerStyling } from './styles';
 
-const SearchBar = lazy(() => import('./SearchInput'));
+const SearchInput = lazy(() => import('./SearchInput'));
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 
 const ActionBarSearchContainer = styled.div`
@@ -70,7 +70,7 @@ const ActionBar = ({ template, slug, ...props }) => {
       <ActionBarSearchContainer className={cx(searchContainerClassname)}>
         <SuspenseHelper>
           <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-            <SearchBar />
+            <SearchInput />
           </Chatbot>
         </SuspenseHelper>
       </ActionBarSearchContainer>
