@@ -126,7 +126,6 @@ const SearchInput = ({ className }) => {
   return (
     <>
       <LGSearchInput
-        usePortal={false}
         aria-label="Search MongoDB Docs"
         value={searchValue}
         placeholder={PLACEHOLDER_TEXT}
