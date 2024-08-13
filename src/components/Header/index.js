@@ -30,15 +30,30 @@ const Header = ({ sidenav, eol, template }) => {
       <StyledHeaderContainer template={template} hasBanner={!!bannerContent}>
         <>
           {!eol && (
-            <UnifiedNav
-              fullWidth="true"
-              position="relative"
-              property={{ name: unifiedNavProperty }}
-              showLanguageSelector={true}
-              onSelectLocale={onSelectLocale}
-              locale={getCurrLocale()}
-              enabledLocales={enabledLocales}
-            />
+            <>
+              <UnifiedNav
+                fullWidth="true"
+                position="relative"
+                property={{ name: unifiedNavProperty }}
+                showLanguageSelector={true}
+                onSelectLocale={onSelectLocale}
+                locale={getCurrLocale()}
+                enabledLocales={enabledLocales}
+                darkMode={false}
+                className="nav-light"
+              />
+              <UnifiedNav
+                fullWidth="true"
+                position="relative"
+                property={{ name: unifiedNavProperty }}
+                showLanguageSelector={true}
+                onSelectLocale={onSelectLocale}
+                locale={getCurrLocale()}
+                enabledLocales={enabledLocales}
+                darkMode={true}
+                className="nav-dark"
+              />
+            </>
           )}
           {sidenav && <SidenavMobileMenuDropdown />}
         </>

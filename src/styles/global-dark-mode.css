@@ -37,3 +37,19 @@ body {
   --tab-color-primary: var(--gray-light1);
   --tab-color-secondary: var(--gray-light2);
 }
+
+.nav-dark {
+  display: none;
+}
+
+.nav-light {
+  display: initial;
+}
+
+.dark-theme .nav-dark {
+  display: initial;
+}
+
+.dark-theme .nav-light {
+  display: none;
+}
