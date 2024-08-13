@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { ModalView, useChatbotContext } from 'mongodb-chatbot-ui';
+import { ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch, useChatbotContext } from 'mongodb-chatbot-ui';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { SearchInput, SearchResult } from '@leafygreen-ui/search-input';
 import { theme } from '../../theme/docsTheme';
@@ -133,21 +133,13 @@ const SearchBar = ({ className }) => {
       >
         {isOpen && searchValue.length
           ? SEARCH_SUGGESTIONS.map((suggestion, i) => {
-              const { copy, icon } = suggestion;
-              const suggestionProps = {};
-              if (suggestion.href) {
-                suggestionProps['href'] = suggestion.href + searchValue;
-                suggestionProps['as'] = 'a';
-              }
-              if (suggestion.onClick) {
-                suggestionProps['onClick'] = suggestion.onClick;
-              }
+              const { copy, icon, onClick } = suggestion;
 
               return (
                 <SearchResult
                   className={cx('search-result', suggestionStyling({ copy, icon }))}
                   key={i}
-                  {...suggestionProps}
+                  onClick={onClick}
                 >
                   {suggestion.icon}
                   {searchValue}
@@ -160,6 +152,17 @@ const SearchBar = ({ className }) => {
       <ModalView
         inputBottomText={
           'This is an experimental generative AI chatbot. All information should be verified prior to use.'
+        }
+        disclaimer={
+          <>
+            <MongoDbLegalDisclosure />
+            <PoweredByAtlasVectorSearch
+              linkStyle="text"
+              className={css`
+                margin-top: 8px;
+              `}
+            />
+          </>
         }
       />
     </>
