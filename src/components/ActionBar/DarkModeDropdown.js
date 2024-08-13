@@ -10,6 +10,7 @@ import { theme } from '../../theme/docsTheme';
 import IconComputer from '../icons/Computer';
 
 const iconStyling = css`
+  align-content: center
   cursor: pointer;
 `;
 

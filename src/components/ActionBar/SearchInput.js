@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import PropTypes from 'prop-types';
 import { ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch, useChatbotContext } from 'mongodb-chatbot-ui';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
 import { SearchInput, SearchResult } from '@leafygreen-ui/search-input';
 import { theme } from '../../theme/docsTheme';
 import debounce from '../../utils/debounce';
@@ -13,6 +14,15 @@ const PLACEHOLDER_TEXT = `Search MongoDB Docs or Ask MongoDB AI`;
 const inputStyling = css`
   width: 100%;
   max-width: 610px;
+
+  > div[role='searchbox'] {
+    background-color: var(--search-input-background-color);
+  }
+
+  --search-input-background-color: ${palette.white};
+  .dark-theme & {
+    --search-input-background-color: ${palette.gray.dark4};
+  }
 `;
 
 // using content before/after to prevent event bubbling up from lg/search-input/search-result
@@ -136,11 +146,7 @@ const SearchBar = ({ className }) => {
               const { copy, icon, onClick } = suggestion;
 
               return (
-                <SearchResult
-                  className={cx('search-result', suggestionStyling({ copy, icon }))}
-                  key={i}
-                  onClick={onClick}
-                >
+                <SearchResult className={cx(suggestionStyling({ copy, icon }))} key={i} onClick={onClick}>
                   {suggestion.icon}
                   {searchValue}
                   {suggestion.shortcutIcon}
