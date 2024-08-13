@@ -2,13 +2,11 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import PropTypes from 'prop-types';
 import { ModalView, useChatbotContext } from 'mongodb-chatbot-ui';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { palette } from '@leafygreen-ui/palette';
 import { SearchInput, SearchResult } from '@leafygreen-ui/search-input';
-import { InlineCode } from '@leafygreen-ui/typography';
 import { theme } from '../../theme/docsTheme';
 import debounce from '../../utils/debounce';
 import { isBrowser } from '../../utils/is-browser';
-import { SparkleIcon } from './SparkIcon';
+import { ShortcutIcon, SparkleIcon } from './SparkIcon';
 
 const PLACEHOLDER_TEXT = `Search MongoDB Docs or Ask MongoDB AI`;
 
@@ -28,19 +26,15 @@ const suggestionStyling = ({ copy }) => css`
     content: '"';
   }
 
-  svg {
+  svg:first-of-type {
     float: left;
-    margin-right ${theme.size.tiny};
+    margin-right: ${theme.size.tiny};
   }
 
   padding: ${theme.fontSize.tiny} ${theme.size.medium};
 
-  & code { 
+  svg:last-of-type {
     float: right;
-    color: ${palette.gray.dark1};
-    border-radius: ${theme.size.medium};
-    line-height: inherit;
-    padding: 0 6px;
   }
 `;
 
@@ -48,31 +42,47 @@ const SearchBar = ({ className }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const shortcutKeyPressed = useRef(false);
-  const { openChat, handleSubmit } = useChatbotContext();
+  const { setInputText, handleSubmit, conversation } = useChatbotContext();
+
+  const createConversation = useCallback(async () => {
+    try {
+      await conversation.createConversation();
+    } catch (e) {
+      console.error('Chatbot not available: ', e);
+    }
+  }, [conversation]);
+
+  const handleClick = useCallback(
+    async (open) => {
+      if (!conversation.conversationId) {
+        await createConversation();
+      }
+      if (open) {
+        return handleSubmit(searchValue);
+      }
+      window.location.href = `https://mongodb.com/docs/search/?q=${searchValue}`;
+    },
+    [conversation.conversationId, createConversation, handleSubmit, searchValue]
+  );
+
   const SEARCH_SUGGESTIONS = useMemo(
     () => [
       {
         copy: 'Search',
         onClick: async () => {
-          if (shortcutKeyPressed.current) {
-            await openChat();
-            return handleSubmit(searchValue);
-          }
-          console.log('redirecting');
-          window.location.href = `https://mongodb.com/docs/search/?q=${searchValue}`;
+          handleClick(shortcutKeyPressed.current);
         },
       },
       {
         copy: 'Ask MongoDB AI',
         onClick: async () => {
-          await openChat();
-          handleSubmit(searchValue);
+          handleClick(true);
         },
         icon: <SparkleIcon glyph={'Sparkle'} />,
-        shortcutIcon: <InlineCode>&#8984;K</InlineCode>,
+        shortcutIcon: <ShortcutIcon width={30} height={18} />,
       },
     ],
-    [handleSubmit, searchValue, openChat]
+    [handleClick]
   );
 
   const keyPressHandler = useCallback((event) => {
@@ -84,6 +94,7 @@ const SearchBar = ({ className }) => {
   }, []);
 
   useEffect(() => {
+    setInputText(searchValue);
     if (!searchValue.length) {
       return setIsOpen(false);
     }
@@ -91,6 +102,7 @@ const SearchBar = ({ className }) => {
       setIsOpen(searchValue.length > 0);
     }, 500);
     return debounced();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
   useEffect(() => {
@@ -112,6 +124,11 @@ const SearchBar = ({ className }) => {
         className={cx(inputStyling, className)}
         onChange={(e) => {
           setSearchValue(e.target.value);
+        }}
+        onFocus={() => {
+          if (!conversation.conversationId) {
+            createConversation();
+          }
         }}
       >
         {isOpen && searchValue.length

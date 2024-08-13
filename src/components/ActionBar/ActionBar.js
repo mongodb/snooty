@@ -2,6 +2,7 @@ import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx } from '@leafygreen-ui/emotion';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
@@ -54,6 +55,8 @@ const ActionBar = ({ template, slug, ...props }) => {
       getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
   });
 
+  const { darkMode } = useDarkMode();
+
   const { fakeColumns, containerClassname, searchContainerClassname } = getContainerStyling(template);
 
   const CHATBOT_SERVER_BASE_URL =
@@ -66,7 +69,7 @@ const ActionBar = ({ template, slug, ...props }) => {
       {fakeColumns && <div></div>}
       <ActionBarSearchContainer className={cx(searchContainerClassname)}>
         <SuspenseHelper>
-          <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
+          <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
             <SearchBar />
           </Chatbot>
         </SuspenseHelper>
