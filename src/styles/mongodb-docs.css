@@ -560,7 +560,6 @@ th {
   --check-circle: '\f058';
 
   /* Supporting the new dark mode with LG styles */
-  --lg-bg-dark-mode: var(--gray-dark4);
   --lg-color-dark-mode: var(--day-spa);
 } /*!
  * Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
