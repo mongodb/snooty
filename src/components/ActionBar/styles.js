@@ -5,6 +5,7 @@ import { CONTENT_MAX_WIDTH } from '../../templates/product-landing';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
+  display: flex;
   height: 60px;
   padding-top: ${theme.size.small};
   padding-bottom: ${theme.size.small};
@@ -13,6 +14,7 @@ export const actionBarStyling = css`
   z-index: ${theme.zIndexes.actionBar};
   background-color: var(--background-color-primary);
   border-bottom: 1px solid var(--border-color);
+  align-content: center;
 
   --border-color: ${palette.gray.light2};
 
@@ -52,6 +54,9 @@ const gridStyling = css`
 const landingGridStyling = css`
   display: grid;
   grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, 1440px) minmax(${theme.size.xlarge}, 1fr);
+  @media ${theme.screenSize.upToMedium} {
+    grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+  }
 `;
 
 const flexStyling = css`
@@ -60,6 +65,9 @@ const flexStyling = css`
   width: 100%;
   flex-wrap: nowrap;
   padding-left: ${theme.size.xlarge};
+  @media ${theme.screenSize.upToLarge} {
+    padding-left: 48px;
+  }
 `;
 
 const middleAlignment = css`
@@ -89,7 +97,7 @@ export const getContainerStyling = (template) => {
       fakeColumns = true;
       break;
     case 'errorpage':
-      containerClassname = gridStyling;
+      searchContainerClassname = middleAlignment;
       fakeColumns = true;
       break;
     default:
@@ -100,22 +108,18 @@ export const getContainerStyling = (template) => {
   return { containerClassname, fakeColumns, searchContainerClassname };
 };
 
-export const actionsBoxStyling = ({ fakeColumns }) => css`
-  ${fakeColumns &&
-  `position: absolute;
-  top: ${theme.fontSize.tiny};
-  right: ${theme.size.large};`}
+export const actionsBoxStyling = css`
+  position: relative;
+  top: 0;
+  right: ${theme.size.large};
+  justify-self: flex-end;
 
-  ${!fakeColumns &&
-  `
-  margin-left: auto;
-  padding-right: ${theme.size.large};
-  @media ${theme.screenSize.upToMedium} {
+  @media ${theme.screenSize.upToLarge} {
+    right: ${theme.size.medium};
     padding-left: 3rem;
   }
 
   @media ${theme.screenSize.upToSmall} {
     padding-left: 2rem;
   }
-`}
 `;

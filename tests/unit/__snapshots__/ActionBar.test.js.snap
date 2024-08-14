@@ -4,6 +4,10 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 {
   "asFragment": [Function],
   "baseElement": .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   height: 60px;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -13,6 +17,9 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   z-index: 800;
   background-color: var(--background-color-primary);
   border-bottom: 1px solid var(--border-color);
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
   --border-color: #E8EDEB;
   display: -webkit-box;
   display: -webkit-flex;
@@ -50,6 +57,12 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   }
 }
 
+@media only screen and (max-width: 1024px) {
+  .emotion-0 {
+    padding-left: 48px;
+  }
+}
+
 .emotion-1 {
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -60,6 +73,12 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   display: -ms-flexbox;
   display: flex;
   width: 80%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-1 {
+    max-width: 340px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -253,12 +272,15 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 .emotion-7 {
-  margin-left: auto;
-  padding-right: 32px;
+  position: relative;
+  top: 0;
+  right: 32px;
+  justify-self: flex-end;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1024px) {
   .emotion-7 {
+    right: 24px;
     padding-left: 3rem;
   }
 }
@@ -300,7 +322,10 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   height: 28px;
   width: 28px;
   color: #5C6C75;
-  align-content:center cursor: pointer;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  cursor: pointer;
 }
 
 .emotion-10:before {
@@ -351,6 +376,10 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 
 .emotion-10:focus-visible:before {
   background-color: #E8EDEB;
+}
+
+.emotion-10>div {
+  position: relative;
 }
 
 .emotion-11 {
@@ -609,6 +638,10 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
     </div>
   </body>,
   "container": .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   height: 60px;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -618,6 +651,9 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   z-index: 800;
   background-color: var(--background-color-primary);
   border-bottom: 1px solid var(--border-color);
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
   --border-color: #E8EDEB;
   display: -webkit-box;
   display: -webkit-flex;
@@ -655,6 +691,12 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   }
 }
 
+@media only screen and (max-width: 1024px) {
+  .emotion-0 {
+    padding-left: 48px;
+  }
+}
+
 .emotion-1 {
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -665,6 +707,12 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   display: -ms-flexbox;
   display: flex;
   width: 80%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-1 {
+    max-width: 340px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -858,12 +906,15 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 .emotion-7 {
-  margin-left: auto;
-  padding-right: 32px;
+  position: relative;
+  top: 0;
+  right: 32px;
+  justify-self: flex-end;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1024px) {
   .emotion-7 {
+    right: 24px;
     padding-left: 3rem;
   }
 }
@@ -905,7 +956,10 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   height: 28px;
   width: 28px;
   color: #5C6C75;
-  align-content:center cursor: pointer;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  cursor: pointer;
 }
 
 .emotion-10:before {
@@ -956,6 +1010,10 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 
 .emotion-10:focus-visible:before {
   background-color: #E8EDEB;
+}
+
+.emotion-10>div {
+  position: relative;
 }
 
 .emotion-11 {

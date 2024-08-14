@@ -27,6 +27,10 @@ const ActionBarSearchContainer = styled.div`
   display: flex;
   width: 80%;
 
+  @media ${theme.screenSize.upToLarge} {
+    max-width: 340px;
+  }
+
   @media ${theme.screenSize.upToMedium} {
     width: 100%;
   }
@@ -74,7 +78,7 @@ const ActionBar = ({ template, slug, ...props }) => {
           </Chatbot>
         </SuspenseHelper>
       </ActionBarSearchContainer>
-      <ActionsBox className={cx(actionsBoxStyling({ fakeColumns }))}>
+      <ActionsBox className={cx(actionsBoxStyling)}>
         <DarkModeDropdown></DarkModeDropdown>
         {template !== 'errorpage' && (
           <FeedbackProvider page={feedbackData}>

@@ -26,7 +26,8 @@ const inputStyling = css`
 `;
 
 // using content before/after to prevent event bubbling up from lg/search-input/search-result
-// https://github.com/mongodb/leafygreen-ui/blob/%40leafygreen-ui/search-input%402.1.4/packages/search-input/src/SearchInput/SearchInput.tsx#L155
+// package above gets all text inside node, and sets the value of Input node of all text within search result:
+// https://github.com/mongodb/leafygreen-ui/blob/%40leafygreen-ui/search-input%402.1.4/packages/search-input/src/SearchInput/SearchInput.tsx#L149-L155
 const suggestionStyling = ({ copy }) => css`
   & > div:before {
     content: '${copy} "';
@@ -64,6 +65,7 @@ const SearchInput = ({ className }) => {
 
   const handleClick = useCallback(
     async (open) => {
+      setInputText(searchValue);
       if (!conversation.conversationId) {
         await createConversation();
       }
@@ -72,7 +74,7 @@ const SearchInput = ({ className }) => {
       }
       window.location.href = `https://mongodb.com/docs/search/?q=${searchValue}`;
     },
-    [conversation.conversationId, createConversation, handleSubmit, searchValue]
+    [conversation.conversationId, createConversation, handleSubmit, searchValue, setInputText]
   );
 
   const SEARCH_SUGGESTIONS = useMemo(
@@ -102,15 +104,13 @@ const SearchInput = ({ className }) => {
   }, []);
 
   useEffect(() => {
-    setInputText(searchValue);
     if (!searchValue.length) {
       return setIsOpen(false);
     }
     const debounced = debounce(() => {
       setIsOpen(searchValue.length > 0);
     }, 500);
-    return debounced();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => debounced();
   }, [searchValue]);
 
   useEffect(() => {
