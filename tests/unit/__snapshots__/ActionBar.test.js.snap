@@ -459,6 +459,11 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   line-height: 20px;
   font-weight: 500;
   height: 36px;
+  color: var(--feedback-font-color);
+  background: var(--feedback-background-color);
+  border-color: #889397;
+  --feedback-font-color: #001E2B;
+  --feedback-background-color: #F9FBFA;
 }
 
 .emotion-14:focus-visible,
@@ -492,6 +497,11 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 .emotion-14[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.dark-theme .emotion-14 {
+  --feedback-font-color: #FFFFFF;
+  --feedback-background-color: #3D4F58;
 }
 
 .emotion-15 {
@@ -1093,6 +1103,11 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   line-height: 20px;
   font-weight: 500;
   height: 36px;
+  color: var(--feedback-font-color);
+  background: var(--feedback-background-color);
+  border-color: #889397;
+  --feedback-font-color: #001E2B;
+  --feedback-background-color: #F9FBFA;
 }
 
 .emotion-14:focus-visible,
@@ -1126,6 +1141,11 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 .emotion-14[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.dark-theme .emotion-14 {
+  --feedback-font-color: #FFFFFF;
+  --feedback-background-color: #3D4F58;
 }
 
 .emotion-15 {
