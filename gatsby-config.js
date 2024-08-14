@@ -39,6 +39,6 @@ if (!isPreview) {
 
 module.exports = {
   plugins,
-  pathPrefix,
+  pathPrefix: process.env.PATH_PREFIX ?? pathPrefix,
   siteMetadata,
 };
