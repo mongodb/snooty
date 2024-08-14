@@ -71,6 +71,7 @@ const flexStyling = css`
 `;
 
 const middleAlignment = css`
+  padding-left: 60px;
   max-width: 770px;
   margin: auto;
 `;
