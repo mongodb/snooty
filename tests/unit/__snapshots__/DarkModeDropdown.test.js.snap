@@ -20,7 +20,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
   height: 28px;
   width: 28px;
   color: #5C6C75;
-  cursor: pointer;
+  align-content:center cursor: pointer;
 }
 
 .emotion-0:before {
@@ -145,7 +145,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   height: 28px;
   width: 28px;
   color: #5C6C75;
-  cursor: pointer;
+  align-content:center cursor: pointer;
 }
 
 .emotion-0:before {
@@ -756,7 +756,7 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
   height: 28px;
   width: 28px;
   color: #C1C7C6;
-  cursor: pointer;
+  align-content:center cursor: pointer;
 }
 
 .emotion-0:before {
