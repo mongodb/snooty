@@ -75,6 +75,12 @@ const middleAlignment = css`
   margin: auto;
 `;
 
+const errorPageAlignment = css`
+  flex: 0 1 870px !important;
+  margin: auto;
+  max-width: unset;
+`;
+
 export const getContainerStyling = (template) => {
   let containerClassname,
     searchContainerClassname,
@@ -97,7 +103,7 @@ export const getContainerStyling = (template) => {
       fakeColumns = true;
       break;
     case 'errorpage':
-      searchContainerClassname = middleAlignment;
+      searchContainerClassname = errorPageAlignment;
       fakeColumns = true;
       break;
     default:
