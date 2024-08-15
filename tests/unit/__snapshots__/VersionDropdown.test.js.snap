@@ -23,6 +23,12 @@ exports[`VersionDropdown Component renders correctly 1`] = `
 
 .emotion-1 button {
   z-index: 2;
+  background-color: var(--select-button-bg-color);
+  color: var(--select-button-color);
+}
+
+.emotion-1 button div:last-child svg {
+  color: var(--select-button-carot);
 }
 
 @media only screen and (max-width: 1024px) {
