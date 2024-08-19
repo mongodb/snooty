@@ -4,10 +4,8 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { H2 } from '@leafygreen-ui/typography';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import Breadcrumbs from '../components/Breadcrumbs';
-import ChatbotUi from '../components/ChatbotUi';
 import { isBrowser } from '../utils/is-browser';
 
 const StyledMain = styled.main`
@@ -39,8 +37,8 @@ const ImageContainer = styled.div`
   margin-bottom: ${theme.size.default};
   img {
     @media ${theme.screenSize.upToSmall} {
-      height: 180px;
       width: 270px;
+      height: auto;
     }
   }
 `;
@@ -56,8 +54,12 @@ const FeatureNotAvailImage = () => {
   );
 };
 
-const titleStyling = (darkMode) => css`
-  color: ${darkMode ? 'white' : 'black'};
+const titleStyling = css`
+  --color: black;
+  .dark-theme & {
+    --color: white;
+  }
+  color: var(--color);
   text-align: center;
 `;
 
@@ -96,12 +98,9 @@ const FeatureNotAvailable = () => {
     pageInfo = JSON.parse(sessionStorage.getItem('pageInfo'));
   }
 
-  const { darkMode } = useDarkMode();
-
   return (
     <StyledMain>
       <div class="body">
-        {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && <ChatbotUi template="errorpage" />}
         {breadcrumbInfo && (
           <Breadcrumbs
             siteTitle={breadcrumbInfo.siteTitle}
@@ -115,9 +114,7 @@ const FeatureNotAvailable = () => {
         <FeatureNotAvailContainer>
           <FeatureNotAvailImage />
           <ContentBox>
-            <H2 className={cx(titleStyling(darkMode))}>
-              We're sorry, this page isn't available in the version you selected.
-            </H2>
+            <H2 className={cx(titleStyling)}>We're sorry, this page isn't available in the version you selected.</H2>
             <LinkContainer>
               <Button onClick={click} variant="default">
                 Go back to previous page
