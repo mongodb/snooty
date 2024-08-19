@@ -1,8 +1,7 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx } from '@leafygreen-ui/emotion';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
@@ -15,12 +14,9 @@ import {
   useFeedbackData,
   FeedbackContainer,
 } from '../Widgets/FeedbackWidget';
-import { SuspenseHelper } from '../SuspenseHelper';
 import DarkModeDropdown from './DarkModeDropdown';
+import SearchInput from './SearchInput';
 import { actionsBoxStyling, actionBarStyling, getContainerStyling } from './styles';
-
-const SearchInput = lazy(() => import('./SearchInput'));
-const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 
 const ActionBarSearchContainer = styled.div`
   align-items: center;
@@ -59,24 +55,13 @@ const ActionBar = ({ template, slug, ...props }) => {
       getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
   });
 
-  const { darkMode } = useDarkMode();
-
   const { fakeColumns, containerClassname, searchContainerClassname } = getContainerStyling(template);
-
-  const CHATBOT_SERVER_BASE_URL =
-    metadata?.snootyEnv === 'dotcomprd'
-      ? 'https://knowledge.mongodb.com/api/v1'
-      : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
     <div className={cx(props.className, actionBarStyling, containerClassname)}>
       {fakeColumns && <div></div>}
       <ActionBarSearchContainer className={cx(searchContainerClassname)}>
-        <SuspenseHelper>
-          <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-            <SearchInput />
-          </Chatbot>
-        </SuspenseHelper>
+        <SearchInput />
       </ActionBarSearchContainer>
       <ActionsBox className={cx(actionsBoxStyling)}>
         <DarkModeDropdown></DarkModeDropdown>
