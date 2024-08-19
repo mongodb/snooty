@@ -11,7 +11,7 @@ import DarkModeToggle from './DarkModeToggle';
 
 const homeLinkStyle = LeafyCSS`
   span {
-    color: var(--docs-home-button);
+    color: var(--tab-color-primary);
     font-weight: 400;
     display: flex;
     gap: 6px;

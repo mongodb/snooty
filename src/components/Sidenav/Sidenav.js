@@ -120,7 +120,7 @@ const SidenavContainer = styled.div(
     }
 
     [data-testid='side-nav-collapse-toggle'] {
-      background-color: var(--sidenav-toggle-bg-color);
+      background-color: var(--select-button-bg-color);
       color: var(--sidenav-toggle-color);
       border-color: var(--sidenav-toggle-border-color);
     }

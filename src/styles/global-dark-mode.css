@@ -23,9 +23,7 @@ body {
   --sidenav-border-bottom-color: var(--gray-light2);
 
   --sidenav-toggle-color: var(--green-dark2);
-  --sidenav-toggle-bg-color: var(--white);
   --sidenav-toggle-border-color: var(--gray-light2);
-  --docs-home-button: var(--gray-dark1);
 
   --sidenav-item-title: var(--gray-dark3);
   --sidenav-item-color: var(--black);
@@ -37,6 +35,7 @@ body {
   --select-button-color: var(--black);
   --select-button-carot: var(--gray-dark2);
 
+  /* --tab-color-primary also accounts for the Docs Home button */
   --tab-color-primary: var(--gray-dark1);
   --tab-color-secondary: var(--green-dark2);
 
@@ -59,9 +58,7 @@ body {
   --sidenav-border-bottom-color: var(--gray-dark2);
 
   --sidenav-toggle-color: var(--gray-light1);
-  --sidenav-toggle-bg-color: var(--gray-dark4);
   --sidenav-toggle-border-color: var(--gray-dark2);
-  --docs-home-button: var(--gray-light1);
 
   --sidenav-item-title: var(--gray-light2);
   --sidenav-item-color: var(--gray-light2);
