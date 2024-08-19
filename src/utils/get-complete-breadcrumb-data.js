@@ -57,7 +57,7 @@ export const getCompleteBreadcrumbData = ({
   // If site is the property homepage, leave the propertyCrumb blank
   let propertyCrumb;
   if (slug !== '/') {
-    let path = pageInfo ? getUrl(pageInfo.urlSlug, pageInfo.project, pageInfo.siteBasePrefix, '/') : '/';
+    const path = pageInfo ? getUrl(pageInfo.urlSlug, pageInfo.project, pageInfo.siteBasePrefix, '/') : '/';
     propertyCrumb = {
       title: nodesToString(siteTitle),
       path: path,
@@ -67,7 +67,7 @@ export const getCompleteBreadcrumbData = ({
   //get direct parents of the current page from parentPaths
   //add respective url to each direct parent crumb
   const parents = (parentPaths[slug] ?? []).map((crumb) => {
-    let path = pageInfo
+    const path = pageInfo
       ? getUrl(pageInfo.urlSlug, pageInfo.project, pageInfo.siteBasePrefix, crumb.path)
       : assertLeadingSlash(crumb.path);
     return {

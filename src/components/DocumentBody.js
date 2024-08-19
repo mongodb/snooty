@@ -119,7 +119,7 @@ const DocumentBody = (props) => {
   const { project } = metadata;
 
   if (isBrowser && template !== 'feature-not-avail') {
-    let breadcrumbInfo = {
+    const breadcrumbInfo = {
       parentPaths: parentPaths,
       queriedCrumbs: queriedCrumbs,
       siteTitle: siteTitle,
@@ -127,13 +127,12 @@ const DocumentBody = (props) => {
       pageTitle: pageTitle,
     };
 
-    let pageInfo = {
+    const pageInfo = {
       project: project,
       urlSlug: urlSlug,
       siteBasePrefix: siteBasePrefix,
     };
 
-    sessionStorage.clear();
     sessionStorage.setItem('breadcrumbInfo', JSON.stringify(breadcrumbInfo));
     sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
   }

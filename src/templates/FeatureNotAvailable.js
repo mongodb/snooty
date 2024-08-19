@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { withPrefix } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
@@ -16,7 +15,7 @@ const StyledMain = styled.main`
   .body {
     margin: ${theme.size.default} ${theme.size.xlarge} ${theme.size.xlarge};
     @media ${theme.screenSize.upToSmall} {
-      margin: ${theme.size.default} 48px ${theme.size.xlarge};
+      margin: ${theme.size.default} ${theme.size.medium} ${theme.size.xlarge};
     }
     overflow-x: auto;
   }
@@ -33,7 +32,7 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-top: 120px;
+  margin-top: ${theme.size.xxlarge};
   @media ${theme.screenSize.upToSmall} {
     margin-top: ${theme.size.medium};
   }
@@ -78,6 +77,9 @@ const FeatureNotAvailContainer = styled.div`
   flex-flow: column;
   justify-content: center;
   margin-bottom: ${theme.size.xxlarge};
+  @media ${theme.screenSize.upToSmall} {
+    margin-bottom: 72px;
+  }
 `;
 
 const FeatureNotAvailable = () => {
@@ -113,7 +115,7 @@ const FeatureNotAvailable = () => {
         <FeatureNotAvailContainer>
           <FeatureNotAvailImage />
           <ContentBox>
-            <H2 darkMode={darkMode} className={cx(titleStyling(darkMode))}>
+            <H2 className={cx(titleStyling(darkMode))}>
               We're sorry, this page isn't available in the version you selected.
             </H2>
             <LinkContainer>

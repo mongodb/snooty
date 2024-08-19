@@ -29,7 +29,7 @@ const Breadcrumbs = ({
   selfCrumb = null,
   pageInfo = null,
 }) => {
-  let queriedCrumbsHook = useBreadcrumbs();
+  const queriedCrumbsHook = useBreadcrumbs();
   const queriedCrumbs = queriedCrumbsProp ?? queriedCrumbsHook;
 
   const { parentPaths } = useSnootyMetadata();
