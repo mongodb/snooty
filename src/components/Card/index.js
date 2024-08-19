@@ -17,6 +17,8 @@ import { getSuitableIcon } from '../../utils/get-suitable-icon';
 const cardBaseStyles = css`
   display: flex;
   height: 100%;
+  background-color: var(--background-color-primary);
+  border-color: var(--wayfinding-border-color);
 `;
 
 const landingStyles = css`
@@ -88,6 +90,7 @@ const compactIconStyle = `
 const headingStyling = ({ isCompact, isExtraCompact, isLargeIconStyle }) => css`
   font-weight: 500;
   letter-spacing: normal;
+  color: var(--font-color-primary);
   margin: ${isCompact || isExtraCompact ? `0 0 ${theme.size.small}` : `${theme.size.default} 0 ${theme.size.small} 0`};
   ${isLargeIconStyle && 'margin-bottom: 36px;'}
 `;

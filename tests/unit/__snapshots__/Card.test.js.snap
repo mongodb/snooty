@@ -23,6 +23,8 @@ exports[`renders correctly 1`] = `
   display: -ms-flexbox;
   display: flex;
   height: 100%;
+  background-color: var(--background-color-primary);
+  border-color: var(--wayfinding-border-color);
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -88,6 +90,7 @@ exports[`renders correctly 1`] = `
   font-weight: 500;
   font-weight: 500;
   letter-spacing: normal;
+  color: var(--font-color-primary);
   margin: 16px 0 8px 0;
 }
 

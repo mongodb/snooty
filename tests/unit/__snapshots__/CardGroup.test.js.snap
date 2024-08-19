@@ -71,6 +71,8 @@ exports[`renders correctly 1`] = `
   display: -ms-flexbox;
   display: flex;
   height: 100%;
+  background-color: var(--background-color-primary);
+  border-color: var(--wayfinding-border-color);
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
