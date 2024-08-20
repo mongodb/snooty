@@ -48,6 +48,8 @@ export const getCompleteBreadcrumbData = ({
   const project = pageInfo?.project;
   const siteBasePrefix = pageInfo?.siteBasePrefix;
 
+  const isLanding = project === 'landing';
+
   //get intermediate breadcrumbs
   const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
     return { ...crumb, path: getFullBreadcrumbPath(crumb.path, false) };
@@ -61,7 +63,7 @@ export const getCompleteBreadcrumbData = ({
   // If site is the property homepage, leave the propertyCrumb blank
   let propertyCrumb;
   if (slug !== '/') {
-    const path = pageInfo ? getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, '/')) : '/';
+    const path = pageInfo && !isLanding ? getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, '/')) : '/';
     propertyCrumb = {
       title: nodesToString(siteTitle),
       path: path,
@@ -71,9 +73,10 @@ export const getCompleteBreadcrumbData = ({
   //get direct parents of the current page from parentPaths
   //add respective url to each direct parent crumb
   const parents = (parentPaths ?? []).map((crumb) => {
-    const path = pageInfo
-      ? getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, crumb.path))
-      : assertLeadingSlash(crumb.path);
+    const path =
+      pageInfo && !isLanding
+        ? getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, crumb.path))
+        : assertLeadingSlash(crumb.path);
     return {
       ...crumb,
       title: nodesToString(crumb.title),
@@ -81,10 +84,15 @@ export const getCompleteBreadcrumbData = ({
     };
   });
 
+  const selfCrumbPath =
+    selfCrumbContent && !isLanding
+      ? getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, selfCrumbContent.slug))
+      : selfCrumbContent?.slug;
+
   const selfCrumb = selfCrumbContent
     ? {
         title: selfCrumbContent.title,
-        path: getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, selfCrumbContent.slug)),
+        path: selfCrumbPath,
       }
     : null;
 
