@@ -14,22 +14,41 @@ const displayStyle = (isSelectedOption) => css`
 // Use flex with calculated widths, 0 flex-grow, and flex-wrap if we want a consistent width that wraps
 const radioBoxGroupStyle = (count) => css`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  grid-template-columns: repeat(${count > 3 ? 2 : 1}, minmax(0, 1fr));
   gap: ${HORIZONTAL_GAP};
   // Force component to hit content's max width on pages that have minimal content
   max-width: 100vw;
+
+  @media ${theme.screenSize.mediumAndUp} {
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  }
+
+  // Must try to auto-fit at this breakpoint because of difficulties
+  // getting radio boxes to be the same width when side nav takes up half the screen
+  @media ${theme.screenSize.largeAndUp} {
+    grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  }
 `;
 
 const radioBoxStyle = (count) => css`
   height: 48px;
   margin: 0;
+
+  div {
+    // Reduce padding to allow boxes to fit better on tablet screen sizes
+    padding: 14px 12px;
+  }
+
+  :not(:last-of-type) {
+    margin: 0;
+  }
 `;
 
 const MethodSelector = ({ nodeData: { children } }) => {
   const [selectedMethod, setSelectedMethod] = useState(null);
 
   // children.splice(0, 3);
-  const content = children;
+  const content = children.slice(2);
 
   return (
     <>
@@ -59,9 +78,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
       >
         {content.map(({ options: { title, id } }) => {
           return (
-            <div>
-              <RadioBox key={id} className={radioBoxStyle(content.length)} value={id}>{title}</RadioBox>
-            </div>
+            <RadioBox key={id} className={radioBoxStyle(content.length)} value={id}>{title}</RadioBox>
           );
         })}
       </RadioBoxGroup>

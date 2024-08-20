@@ -10,15 +10,17 @@ import TabSelectors from '../components/Tabs/TabSelectors';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 
+const MAX_CONTENT_WIDTH = '775px';
+
 const DocumentContainer = styled('div')`
   display: grid;
   grid-template-areas: 'main right';
-  grid-template-columns: minmax(0, auto) 1fr;
+  grid-template-columns: minmax(0, ${MAX_CONTENT_WIDTH}) 1fr;
 `;
 
 const StyledMainColumn = styled(MainColumn)`
   grid-area: main;
-  max-width: 775px;
+  max-width: ${MAX_CONTENT_WIDTH};
 `;
 
 const StyledRightColumn = styled(RightColumn)`
