@@ -23,7 +23,6 @@ body {
   --tab-color-secondary: var(--green-dark2);
 
   --wayfinding-bg-color: var(--gray-light3);
-  /* --wayfinding-border-color also covers Card border color */
   --wayfinding-border-color: var(--gray-light2);
 }
 

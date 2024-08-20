@@ -24,7 +24,7 @@ exports[`renders correctly 1`] = `
   display: flex;
   height: 100%;
   background-color: var(--background-color-primary);
-  border-color: var(--wayfinding-border-color);
+  border-color: #E8EDEB;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -45,6 +45,10 @@ exports[`renders correctly 1`] = `
 .emotion-0:hover:focus,
 .emotion-0:active:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
+}
+
+.dark-theme .emotion-0 {
+  border-color: #3D4F58;
 }
 
 .emotion-0 p:last-of-type {

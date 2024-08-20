@@ -6,6 +6,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import ConditionalWrapper from '../ConditionalWrapper';
@@ -18,7 +19,11 @@ const cardBaseStyles = css`
   display: flex;
   height: 100%;
   background-color: var(--background-color-primary);
-  border-color: var(--wayfinding-border-color);
+  border-color: ${palette.gray.light2};
+
+  .dark-theme & {
+    border-color: ${palette.gray.dark2};
+  }
 `;
 
 const landingStyles = css`
