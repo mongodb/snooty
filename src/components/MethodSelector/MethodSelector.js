@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RadioBox, RadioBoxGroup } from '@leafygreen-ui/radio-box-group';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import MethodOptionContent from './MethodOptionContent';
+import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
+
+const STORAGE_KEY = 'methodSelectorId';
 
 // NOTE-4686: Use grid if we want to have column widths responsive while keeping all widths the same
 // Use flex with calculated widths, 0 flex-grow, and flex-wrap if we want a consistent width that wraps
@@ -40,10 +43,22 @@ const radioBoxStyle = css`
 `;
 
 const MethodSelector = ({ nodeData: { children } }) => {
-  const [selectedMethod, setSelectedMethod] = useState(null);
-
   // TODO-4686: Remove content once done developing.
   const content = children.slice(0);
+  const [selectedMethod, setSelectedMethod] = useState(content[0]?.options?.id);
+
+  // Load method ID saved from last session, if applicable.
+  useEffect(() => {
+    const savedMethodId = getLocalValue(STORAGE_KEY);
+    const validOptions = children.reduce((arr, child) => {
+      arr.push(child?.options?.id);
+      return arr;
+    }, []);
+
+    if (savedMethodId && validOptions.includes(savedMethodId)) {
+      setSelectedMethod(savedMethodId);
+    }
+  }, [children]);
 
   return (
     <>
@@ -53,12 +68,13 @@ const MethodSelector = ({ nodeData: { children } }) => {
         size={'full'}
         onChange={({ target: { defaultValue } }) => {
           setSelectedMethod(defaultValue);
+          setLocalValue(STORAGE_KEY, defaultValue);
           // TODO-4686: Report analytics on selection
         }}
       >
         {content.map(({ options: { title, id } }) => {
           return (
-            <RadioBox key={id} className={cx(radioBoxStyle)} value={id}>{title}</RadioBox>
+            <RadioBox key={id} className={cx(radioBoxStyle)} value={id} checked={selectedMethod === id}>{title}</RadioBox>
           );
         })}
       </RadioBoxGroup>
