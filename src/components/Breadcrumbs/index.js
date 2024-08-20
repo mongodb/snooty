@@ -33,7 +33,7 @@ const Breadcrumbs = ({
   const queriedCrumbs = queriedCrumbsProp ?? queriedCrumbsHook;
 
   const { parentPaths } = useSnootyMetadata();
-  const parentPathsData = parentPathsProp ?? parentPaths;
+  const parentPathsData = parentPathsProp ?? parentPaths[slug];
 
   const breadcrumbs = React.useMemo(
     () =>

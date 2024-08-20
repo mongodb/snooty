@@ -105,7 +105,7 @@ const FeatureNotAvailable = () => {
           <Breadcrumbs
             siteTitle={breadcrumbInfo.siteTitle}
             slug={breadcrumbInfo.slug}
-            parentPathsProp={breadcrumbInfo.parentPaths}
+            parentPathsProp={breadcrumbInfo.parentPathsSlug}
             queriedCrumbsProp={breadcrumbInfo.queriedCrumbs}
             selfCrumb={selfBreadcrumb}
             pageInfo={pageInfo}

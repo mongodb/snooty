@@ -120,7 +120,7 @@ const DocumentBody = (props) => {
 
   if (isBrowser && template !== 'feature-not-avail') {
     const breadcrumbInfo = {
-      parentPaths: parentPaths,
+      parentPathsSlug: parentPaths[slug],
       queriedCrumbs: queriedCrumbs,
       siteTitle: siteTitle,
       slug: slug,

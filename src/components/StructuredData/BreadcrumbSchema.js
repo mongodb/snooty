@@ -19,10 +19,16 @@ const getBreadcrumbList = (breadcrumbs) =>
 const BreadcrumbSchema = ({ slug }) => {
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
 
+  const parentPathsSlug = parentPaths[slug];
+
   const queriedCrumbs = useBreadcrumbs();
   const breadcrumbList = React.useMemo(
-    () => [...getBreadcrumbList([...getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths })])],
-    [siteTitle, slug, queriedCrumbs, parentPaths]
+    () => [
+      ...getBreadcrumbList([
+        ...getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths: parentPathsSlug }),
+      ]),
+    ],
+    [siteTitle, slug, queriedCrumbs, parentPathsSlug]
   );
 
   return (
