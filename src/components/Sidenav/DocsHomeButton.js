@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Icon from '@leafygreen-ui/icon';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
-import { palette } from '@leafygreen-ui/palette';
 import { Link } from '@leafygreen-ui/typography';
 import { baseUrl } from '../../utils/base-url';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
@@ -12,7 +11,7 @@ import DarkModeToggle from './DarkModeToggle';
 
 const homeLinkStyle = LeafyCSS`
   span {
-    color: var(--color);
+    color: var(--tab-color-primary);
     font-weight: 400;
     display: flex;
     gap: 6px;
@@ -35,7 +34,6 @@ const DocsHomeButton = ({ darkMode }) => {
         as={Link}
         href={baseUrl()}
         hideExternalIcon={true}
-        style={{ '--color': darkMode ? palette.gray.light1 : palette.gray.dark1 }}
       >
         <Icon glyph="Home"></Icon>
         Docs Home
