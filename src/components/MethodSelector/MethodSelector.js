@@ -3,12 +3,9 @@ import { RadioBox, RadioBoxGroup } from '@leafygreen-ui/radio-box-group';
 import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
+import MethodOptionContent from './MethodOptionContent';
 
 const HORIZONTAL_GAP = '16px';
-
-const displayStyle = (isSelectedOption) => css`
-  ${!isSelectedOption && 'display: none;'}
-`;
 
 // NOTE-4686: Use grid if we want to have column widths responsive while keeping all widths the same
 // Use flex with calculated widths, 0 flex-grow, and flex-wrap if we want a consistent width that wraps
@@ -30,7 +27,7 @@ const radioBoxGroupStyle = (count) => css`
   }
 `;
 
-const radioBoxStyle = (count) => css`
+const radioBoxStyle = css`
   height: 48px;
   margin: 0;
 
@@ -74,24 +71,19 @@ const MethodSelector = ({ nodeData: { children } }) => {
         size={'full'}
         onChange={({ target: { defaultValue } }) => {
           setSelectedMethod(defaultValue);
+          // TODO-4686: Report analytics on selection
         }}
       >
         {content.map(({ options: { title, id } }) => {
           return (
-            <RadioBox key={id} className={radioBoxStyle(content.length)} value={id}>{title}</RadioBox>
+            <RadioBox key={id} className={cx(radioBoxStyle)} value={id}>{title}</RadioBox>
           );
         })}
       </RadioBoxGroup>
-      {/* TODO-4686: Split this into separate component for cleanliness */}
-      {children.map(({ children, options: { id } }, index) => {
-        const isSelectedOption = id === selectedMethod;
+      {children.map((child, index) => {
+        if (child.name !== 'method-option') return null;
         return (
-          <div key={index} className={cx(displayStyle(isSelectedOption))}>
-            {/* TODO-4686: Split out method description */}
-            {children.map((node, index) => {
-              return (<ComponentFactory key={index} nodeData={node} />);
-            })}
-          </div>
+          <MethodOptionContent key={index} nodeData={child} selectedMethod={selectedMethod} />
         );
       })}
     </>
