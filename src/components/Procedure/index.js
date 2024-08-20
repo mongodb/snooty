@@ -19,10 +19,9 @@ const StyledProcedure = styled('div')`
     }
  
   `}
-  ${({ darkMode }) =>
-    `
-    background-color: ${darkMode ? palette.gray.dark4 : 'initial'};
-    color: ${darkMode ? palette.gray.light2 : 'initial'};`}
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
 `;
 
 // Returns an array of all "step" nodes nested within the "procedure" node and nested "include" nodes
@@ -58,7 +57,7 @@ const Procedure = ({ nodeData: { children, options }, ...rest }) => {
   return (
     <StyledProcedure procedureStyle={style} darkMode={darkMode}>
       {steps.map((child, i) => (
-        <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} darkMode={darkMode} />
+        <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} />
       ))}
     </StyledProcedure>
   );
