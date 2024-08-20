@@ -25,8 +25,8 @@ export const SparkleIcon = createGlyphComponent('Sparkle', (props) => (
         y2="14"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.0931517" stop-color="#00ED64" />
-        <stop offset="1" stop-color="#0498EC" />
+        <stop offset="0.0931517" stopColor="#00ED64" />
+        <stop offset="1" stopColor="#0498EC" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_7198_11304"
@@ -36,8 +36,8 @@ export const SparkleIcon = createGlyphComponent('Sparkle', (props) => (
         y2="14"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.0931517" stop-color="#00ED64" />
-        <stop offset="1" stop-color="#0498EC" />
+        <stop offset="0.0931517" stopColor="#00ED64" />
+        <stop offset="1" stopColor="#0498EC" />
       </linearGradient>
       <linearGradient
         id="paint2_linear_7198_11304"
@@ -47,20 +47,17 @@ export const SparkleIcon = createGlyphComponent('Sparkle', (props) => (
         y2="14"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.0931517" stop-color="#00ED64" />
-        <stop offset="1" stop-color="#0498EC" />
+        <stop offset="0.0931517" stopColor="#00ED64" />
+        <stop offset="1" stopColor="#0498EC" />
       </linearGradient>
     </defs>
   </svg>
 ));
 
 export const ShortcutIcon = createGlyphComponent('MacShortcut', (props) => (
-  <svg width="31" height="18" viewBox="0 0 31 18" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-    <rect x="0.5" y="0.5" width="30" height="17" rx="8.5" fill="#F9FBFA" />
-    <rect x="0.5" y="0.5" width="30" height="17" rx="8.5" stroke="#E8EDEB" />
-    <path
-      d="M8.69527 13C7.57927 13 6.85927 12.292 6.85927 11.188C6.85927 10.024 7.55527 9.34 8.92327 9.34H9.63127V8.02H8.92327C7.55527 8.02 6.85927 7.336 6.85927 6.172C6.85927 5.068 7.57927 4.36 8.69527 4.36C10.0393 4.36 10.4713 5.2 10.4713 6.208V7.204H11.7913V6.208C11.7913 5.2 12.2233 4.36 13.5673 4.36C14.6833 4.36 15.4033 5.068 15.4033 6.172C15.4033 7.336 14.7073 8.02 13.3393 8.02H12.6313V9.34H13.3393C14.7073 9.34 15.4033 10.024 15.4033 11.188C15.4033 12.292 14.6833 13 13.5673 13C12.2233 13 11.7913 12.16 11.7913 11.152V10.156H10.4713V11.152C10.4713 12.16 10.0393 13 8.69527 13ZM12.6313 6.184V7.204H13.3393C14.1913 7.204 14.5513 6.856 14.5513 6.172C14.5513 5.464 14.1313 5.188 13.5673 5.188C12.9433 5.188 12.6313 5.572 12.6313 6.184ZM8.92327 7.204H9.63127V6.184C9.63127 5.572 9.31927 5.188 8.69527 5.188C8.13127 5.188 7.71127 5.464 7.71127 6.172C7.71127 6.856 8.07127 7.204 8.92327 7.204ZM10.4713 9.34H11.7913V8.02H10.4713V9.34ZM8.69527 12.172C9.31927 12.172 9.63127 11.788 9.63127 11.176V10.156H8.92327C8.07127 10.156 7.71127 10.504 7.71127 11.188C7.71127 11.896 8.13127 12.172 8.69527 12.172ZM12.6313 11.176C12.6313 11.788 12.9433 12.172 13.5673 12.172C14.1313 12.172 14.5513 11.896 14.5513 11.188C14.5513 10.504 14.1913 10.156 13.3393 10.156H12.6313V11.176ZM17.3687 13V4.48H19.0967V8.08L22.1687 4.48H24.3167L20.8127 8.572L25.0487 13H22.7927L19.0967 9.124V13H17.3687Z"
-      fill="#5C6C75"
-    />
+  <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0.5" y="0.5" width="18" height="17" rx="8.5" fill="#F9FBFA" />
+    <rect x="0.5" y="0.5" width="18" height="17" rx="8.5" stroke="#E8EDEB" />
+    <path d="M6.44061 14.32L11.0726 4.48H12.5606L7.92861 14.32H6.44061Z" fill="#5C6C75" />
   </svg>
 ));

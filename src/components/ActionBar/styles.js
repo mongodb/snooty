@@ -130,3 +130,41 @@ export const actionsBoxStyling = css`
     padding-left: 2rem;
   }
 `;
+
+export const inputStyling = css`
+  width: 100%;
+  max-width: 610px;
+
+  > div[role='searchbox'] {
+    background-color: var(--search-input-background-color);
+  }
+
+  --search-input-background-color: ${palette.white};
+  .dark-theme & {
+    --search-input-background-color: ${palette.gray.dark4};
+  }
+`;
+
+// using content before/after to prevent event bubbling up from lg/search-input/search-result
+// package above gets all text inside node, and sets the value of Input node of all text within search result:
+// https://github.com/mongodb/leafygreen-ui/blob/%40leafygreen-ui/search-input%402.1.4/packages/search-input/src/SearchInput/SearchInput.tsx#L149-L155
+export const suggestionStyling = ({ copy }) => css`
+  & > div:before {
+    content: '${copy} "';
+  }
+
+  & > div:after {
+    content: '"';
+  }
+
+  svg:first-of-type {
+    float: left;
+    margin-right: ${theme.size.tiny};
+  }
+
+  padding: ${theme.fontSize.tiny} ${theme.size.medium};
+
+  svg:last-of-type {
+    float: right;
+  }
+`;
