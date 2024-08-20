@@ -13,6 +13,7 @@ const radioBoxGroupStyle = (count) => css`
   display: grid;
   grid-template-columns: repeat(${count > 3 ? 2 : 1}, minmax(0, 1fr));
   gap: ${HORIZONTAL_GAP};
+  margin-bottom: ${theme.size.medium};
   // Force component to hit content's max width on pages that have minimal content
   max-width: 100vw;
 
@@ -20,10 +21,10 @@ const radioBoxGroupStyle = (count) => css`
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   }
 
-  // Must try to auto-fit at this breakpoint because of difficulties
+  // Must try to auto-fit with minimum width at this breakpoint because of difficulties
   // getting radio boxes to be the same width when side nav takes up half the screen
   @media ${theme.screenSize.largeAndUp} {
-    grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(94px, 1fr));
   }
 `;
 
@@ -45,7 +46,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
   const [selectedMethod, setSelectedMethod] = useState(null);
 
   // children.splice(0, 3);
-  const content = children.slice(2);
+  const content = children.slice(0);
 
   return (
     <>

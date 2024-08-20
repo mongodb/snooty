@@ -8,7 +8,7 @@ const displayStyle = (isSelectedOption) => css`
 `;
 
 const containerStyle = css`
-  margin-top: ${theme.size.default};
+  margin-top: ${theme.size.medium};
 `;
 
 const MethodOptionContent = ({ nodeData: { children, options: { id } }, selectedMethod }) => {
