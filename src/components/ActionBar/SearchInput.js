@@ -70,7 +70,7 @@ const SearchInput = ({ className }) => {
     return () => debounced();
   }, [searchValue]);
 
-  const keyPressHandler = useCallback((event) => {
+  const keyPressHandler = useCallback(async (event) => {
     // cmd+k or ctrl+k focuses search bar,
     // unless already focused on an input field
     const holdingCtrlCmd = (navigator.userAgent.includes('Mac') && event.metaKey) || event.ctrlKey;
@@ -84,6 +84,7 @@ const SearchInput = ({ className }) => {
     // activates the chatbot modal
     if (event.target.isSameNode(inputRef.current) && event.key === '/') {
       event.preventDefault();
+      setIsOpen(false);
       return menuRef.current?.select(1);
     }
   }, []);

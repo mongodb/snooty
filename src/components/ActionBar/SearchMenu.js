@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useImperativeHandle } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { SearchResultsMenu, SearchResult } from '@leafygreen-ui/search-input';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch, useChatbotContext } from 'mongodb-chatbot-ui';
@@ -10,38 +10,53 @@ import { SEARCH_SUGGESTIONS } from './SearchInput';
 // to expose lazy loaded child (chatbot) behaviors to parent (SearchInput)
 // https://react.dev/reference/react/useImperativeHandle
 const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, isOpen, selectedOption }, ref) {
-  const { setInputText, handleSubmit, openChat } = useChatbotContext();
+  const { handleSubmit, conversation } = useChatbotContext();
+  const menuRef = useRef();
+  const [chatbotAvailable, setChatbotAvailable] = useState(false);
 
   const handleSearchResultClick = useCallback(
     async (isChatbotRes) => {
       if (!isChatbotRes) {
         return (window.location.href = `https://mongodb.com/docs/search/?q=${searchValue}`);
       }
-      await openChat();
-      setInputText(searchValue);
-      handleSubmit(searchValue);
+      return handleSubmit(searchValue);
     },
-    [handleSubmit, openChat, searchValue, setInputText]
+    [handleSubmit, searchValue]
   );
+
   useImperativeHandle(
     ref,
     () => {
       return {
         contains(el) {
-          return searchBoxRef.current?.contains(el);
+          return menuRef.current?.contains(el);
         },
-        select(index) {
+        async select(index) {
           return handleSearchResultClick(index === 1);
         },
       };
     },
-    [handleSearchResultClick, searchBoxRef]
+    [handleSearchResultClick]
   );
+
+  useEffect(() => {
+    // on init, set a conversation id
+    // workaround the chatbot bug of not having createConversation be async
+    if (!isOpen || chatbotAvailable) {
+      return;
+    }
+    const initConvo = async () => {
+      await conversation.createConversation();
+      setChatbotAvailable(!conversation.error);
+    };
+    if (!conversation.conversationId) initConvo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   return (
     <>
-      <SearchResultsMenu open={isOpen} refEl={searchBoxRef} ref={ref}>
-        {SEARCH_SUGGESTIONS.map((suggestion, i) => {
+      <SearchResultsMenu open={isOpen} refEl={searchBoxRef} ref={menuRef}>
+        {SEARCH_SUGGESTIONS.slice(chatbotAvailable ? 0 : 1, 2).map((suggestion, i) => {
           const { copy } = suggestion;
           const isChatbot = i === 1;
           return (
@@ -49,9 +64,7 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
               className={cx(suggestionStyling({ copy }))}
               key={`result-${i}`}
               id={`result-${i}`}
-              onClick={() => {
-                handleSearchResultClick(i === 1);
-              }}
+              onClick={async () => handleSearchResultClick(i === 1)}
               highlighted={selectedOption === i}
             >
               {!isChatbot && <>{searchValue}</>}
