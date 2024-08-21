@@ -135,7 +135,7 @@ export const inputStyling = css`
   width: 100%;
   max-width: 610px;
 
-  > div[role='searchbox'] {
+  div[role='searchbox'] {
     background-color: var(--search-input-background-color);
   }
 

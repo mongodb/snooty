@@ -6,6 +6,7 @@ import { SearchInput as LGSearchInput } from '@leafygreen-ui/search-input';
 import debounce from '../../utils/debounce';
 import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { SuspenseHelper } from '../SuspenseHelper';
 import { inputStyling } from './styles';
 import { ShortcutIcon, SparkleIcon } from './SparkIcon';
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
@@ -154,15 +155,17 @@ const SearchInput = ({ className }) => {
         }}
         ref={inputRef}
       />
-      <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-        <SearchMenu
-          isOpen={isOpen && searchValue.length > 1}
-          searchBoxRef={searchBoxRef}
-          searchValue={searchValue}
-          ref={menuRef}
-          selectedOption={selectedOption}
-        ></SearchMenu>
-      </Chatbot>
+      <SuspenseHelper>
+        <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
+          <SearchMenu
+            isOpen={isOpen && searchValue.length > 1}
+            searchBoxRef={searchBoxRef}
+            searchValue={searchValue}
+            ref={menuRef}
+            selectedOption={selectedOption}
+          ></SearchMenu>
+        </Chatbot>
+      </SuspenseHelper>
     </div>
   );
 };
