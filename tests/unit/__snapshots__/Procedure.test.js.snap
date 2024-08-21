@@ -4,8 +4,6 @@ exports[`renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin-top: 16px;
-  background-color: initial;
-  color: initial;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -18,6 +16,10 @@ exports[`renders correctly 1`] = `
   .emotion-0 {
     padding-bottom: 24px;
   }
+}
+
+.dark-theme .emotion-0 {
+  color: #E8EDEB;
 }
 
 .emotion-2 {
@@ -42,6 +44,10 @@ exports[`renders correctly 1`] = `
   left: 16px;
   position: absolute;
   top: 0;
+}
+
+.dark-theme .emotion-2:not(:last-child):before {
+  border-left-color: #5C6C75;
 }
 
 .emotion-4 {
@@ -69,6 +75,11 @@ exports[`renders correctly 1`] = `
   color: #00684A;
   height: 34px;
   width: 34px;
+}
+
+.dark-theme .emotion-6 {
+  background-color: #00684A;
+  color: #E8EDEB;
 }
 
 .emotion-8 {
@@ -217,8 +228,6 @@ exports[`renders steps nested in include nodes 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin-top: 16px;
-  background-color: initial;
-  color: initial;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -231,6 +240,10 @@ exports[`renders steps nested in include nodes 1`] = `
   .emotion-0 {
     padding-bottom: 24px;
   }
+}
+
+.dark-theme .emotion-0 {
+  color: #E8EDEB;
 }
 
 .emotion-2 {
@@ -255,6 +268,10 @@ exports[`renders steps nested in include nodes 1`] = `
   left: 16px;
   position: absolute;
   top: 0;
+}
+
+.dark-theme .emotion-2:not(:last-child):before {
+  border-left-color: #5C6C75;
 }
 
 .emotion-4 {
@@ -282,6 +299,11 @@ exports[`renders steps nested in include nodes 1`] = `
   color: #00684A;
   height: 34px;
   width: 34px;
+}
+
+.dark-theme .emotion-6 {
+  background-color: #00684A;
+  color: #E8EDEB;
 }
 
 .emotion-8 {
@@ -777,8 +799,10 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin-top: 16px;
-  background-color: initial;
-  color: initial;
+}
+
+.dark-theme .emotion-0 {
+  color: #E8EDEB;
 }
 
 .emotion-2 {
@@ -822,7 +846,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   font-size: 16px;
   line-height: 28px;
   background-color: inherit;
-  color: #001E2B;
+  color: var(--opposite-color);
   height: 27px;
   width: 27px;
 }
