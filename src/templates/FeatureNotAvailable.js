@@ -1,4 +1,5 @@
 import React from 'react';
+import { palette } from '@leafygreen-ui/palette';
 import { withPrefix } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
@@ -63,6 +64,17 @@ const titleStyling = css`
   text-align: center;
 `;
 
+const buttonStyling = css`
+  --background-color: ${palette.gray.light3};
+  --color: ${palette.black};
+  .dark-theme & {
+    --background-color: ${palette.gray.dark2};
+    --color: white;
+  }
+  background-color: var(--background-color);
+  color: var(--color);
+`;
+
 const LinkContainer = styled.div`
   margin-top: ${theme.size.large};
 `;
@@ -116,7 +128,7 @@ const FeatureNotAvailable = () => {
           <ContentBox>
             <H2 className={cx(titleStyling)}>We're sorry, this page isn't available in the version you selected.</H2>
             <LinkContainer>
-              <Button onClick={click} variant="default">
+              <Button onClick={click} variant="default" className={cx(buttonStyling)}>
                 Go back to previous page
               </Button>
             </LinkContainer>

@@ -44,9 +44,7 @@ export const getCompleteBreadcrumbData = ({
   selfCrumbContent = null,
   pageInfo = null,
 }) => {
-  const urlSlug = pageInfo?.urlSlug;
-  const project = pageInfo?.project;
-  const siteBasePrefix = pageInfo?.siteBasePrefix;
+  const { urlSlug, project, siteBasePrefix } = pageInfo || {};
 
   const isLanding = project === 'landing';
 
