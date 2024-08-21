@@ -16,7 +16,7 @@ const circleIndividualStyles = {
     width: 34px;
   `,
   normal: (darkMode) => css`
-    border: 1px solid ${palette.gray.light1};
+    border: 1.5px solid ${palette.gray.light1};
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
@@ -55,7 +55,7 @@ const landingStepStyles = {
     }
   `,
   normal: (darkMode) => css`
-    gap: ${theme.size.large};
+    gap: ${theme.size.default};
     h2,
     h4 {
       margin-top: unset;
