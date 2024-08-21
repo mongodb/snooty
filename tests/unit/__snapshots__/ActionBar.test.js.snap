@@ -94,13 +94,12 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 .emotion-3 {
-  outline: none;
   width: 100%;
   max-width: 610px;
   --search-input-background-color: #FFFFFF;
 }
 
-.emotion-3>div[role='searchbox'] {
+.emotion-3 div[role='searchbox'] {
   background-color: var(--search-input-background-color);
 }
 
@@ -109,6 +108,14 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 .emotion-4 {
+  outline: none;
+}
+
+.emotion-4 {
+  outline: none;
+}
+
+.emotion-5 {
   position: relative;
   display: grid;
   grid-auto-flow: column;
@@ -133,12 +140,12 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   border-color: #889397;
 }
 
-.emotion-4:hover:not(:disabled):not(:focus-within),
-.emotion-4:active:not(:disabled):not(:focus-within) {
+.emotion-5:hover:not(:disabled):not(:focus-within),
+.emotion-5:active:not(:disabled):not(:focus-within) {
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-5 {
+.emotion-6 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -146,7 +153,7 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   left: 12px;
 }
 
-.emotion-6 {
+.emotion-7 {
   font-size: inherit;
   line-height: inherit;
   color: inherit;
@@ -161,107 +168,107 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   padding: 0;
 }
 
-.emotion-6[aria-disabled='true'] {
+.emotion-7[aria-disabled='true'] {
   cursor: not-allowed;
 }
 
-.emotion-6[aria-disabled='true']:hover,
-.emotion-6[aria-disabled='true']:active {
+.emotion-7[aria-disabled='true']:hover,
+.emotion-7[aria-disabled='true']:active {
   box-shadow: none;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-7::-webkit-input-placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-7::-moz-placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-7:-ms-input-placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-6::placeholder {
+.emotion-7::placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-6::-ms-clear,
-.emotion-6::-ms-reveal {
+.emotion-7::-ms-clear,
+.emotion-7::-ms-reveal {
   display: none;
   width: 0;
   height: 0;
 }
 
-.emotion-6::-webkit-search-decoration,
-.emotion-6::-webkit-search-cancel-button,
-.emotion-6::-webkit-search-results-button,
-.emotion-6::-webkit-search-results-decoration {
+.emotion-7::-webkit-search-decoration,
+.emotion-7::-webkit-search-cancel-button,
+.emotion-7::-webkit-search-results-button,
+.emotion-7::-webkit-search-results-decoration {
   display: none;
 }
 
-.emotion-6:-webkit-autofill {
+.emotion-7:-webkit-autofill {
   color: inherit;
   background: transparent;
   border: none;
   -webkit-text-fill-color: inherit;
 }
 
-.emotion-6:-webkit-autofill[aria-disabled='false'] {
+.emotion-7:-webkit-autofill[aria-disabled='false'] {
   box-shadow: 0 0 0 100px #FFFFFF inset;
 }
 
-.emotion-6:-webkit-autofill[aria-disabled='false']:focus {
+.emotion-7:-webkit-autofill[aria-disabled='false']:focus {
   box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #0498EC;
 }
 
-.emotion-6:-webkit-autofill[aria-disabled='false']:hover:not(:focus) {
+.emotion-7:-webkit-autofill[aria-disabled='false']:hover:not(:focus) {
   box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #E8EDEB;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-7::-webkit-input-placeholder {
   color: #889397;
   font-weight: 400;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-7::-moz-placeholder {
   color: #889397;
   font-weight: 400;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-7:-ms-input-placeholder {
   color: #889397;
   font-weight: 400;
 }
 
-.emotion-6::placeholder {
+.emotion-7::placeholder {
   color: #889397;
   font-weight: 400;
 }
 
-.emotion-6[aria-disabled='true']::-webkit-input-placeholder {
+.emotion-7[aria-disabled='true']::-webkit-input-placeholder {
   color: #889397;
 }
 
-.emotion-6[aria-disabled='true']::-moz-placeholder {
+.emotion-7[aria-disabled='true']::-moz-placeholder {
   color: #889397;
 }
 
-.emotion-6[aria-disabled='true']:-ms-input-placeholder {
+.emotion-7[aria-disabled='true']:-ms-input-placeholder {
   color: #889397;
 }
 
-.emotion-6[aria-disabled='true']::placeholder {
+.emotion-7[aria-disabled='true']::placeholder {
   color: #889397;
 }
 
-.emotion-6[aria-disabled='true']:-webkit-autofill,
-.emotion-6[aria-disabled='true']:-webkit-autofill:hover,
-.emotion-6[aria-disabled='true']:-webkit-autofill:focus {
+.emotion-7[aria-disabled='true']:-webkit-autofill,
+.emotion-7[aria-disabled='true']:-webkit-autofill:hover,
+.emotion-7[aria-disabled='true']:-webkit-autofill:focus {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -271,7 +278,7 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   box-shadow: 0 0 0 100px #E8EDEB inset;
 }
 
-.emotion-7 {
+.emotion-8 {
   position: relative;
   top: 0;
   right: 32px;
@@ -279,19 +286,19 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-7 {
+  .emotion-8 {
     right: 24px;
     padding-left: 3rem;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-7 {
+  .emotion-8 {
     padding-left: 2rem;
   }
 }
 
-.emotion-8 {
+.emotion-9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -304,7 +311,7 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   column-gap: 16px;
 }
 
-.emotion-10 {
+.emotion-11 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -328,7 +335,7 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   cursor: pointer;
 }
 
-.emotion-10:before {
+.emotion-11:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -345,9 +352,9 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   transform: scale(0.8);
 }
 
-.emotion-10:active:before,
-.emotion-10:hover:before,
-.emotion-10:focus:before {
+.emotion-11:active:before,
+.emotion-11:hover:before,
+.emotion-11:focus:before {
   opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -355,54 +362,34 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   transform: scale(1);
 }
 
-.emotion-10:focus {
+.emotion-11:focus {
   outline: none;
 }
 
-.emotion-10:active,
-.emotion-10:hover {
+.emotion-11:active,
+.emotion-11:hover {
   color: #001E2B;
 }
 
-.emotion-10:active:before,
-.emotion-10:hover:before {
+.emotion-11:active:before,
+.emotion-11:hover:before {
   background-color: #E8EDEB;
 }
 
-.emotion-10:focus-visible {
+.emotion-11:focus-visible {
   color: #001E2B;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-10:focus-visible:before {
+.emotion-11:focus-visible:before {
   background-color: #E8EDEB;
 }
 
-.emotion-10>div {
+.emotion-11>div {
   position: relative;
 }
 
-.emotion-11 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.emotion-11 {
+.emotion-12 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -423,10 +410,30 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 .emotion-12 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-13 {
   position: relative;
 }
 
-.emotion-14 {
+.emotion-15 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -466,55 +473,45 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   --feedback-background-color: #F9FBFA;
 }
 
-.emotion-14:focus-visible,
-.emotion-14[data-focus="true"] {
+.emotion-15:focus-visible,
+.emotion-15[data-focus="true"] {
   outline: none;
 }
 
-.emotion-14:active,
-.emotion-14[data-active="true"],
-.emotion-14:focus,
-.emotion-14:hover {
+.emotion-15:active,
+.emotion-15[data-active="true"],
+.emotion-15:focus,
+.emotion-15:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-14:focus-visible,
-.emotion-14[data-focus="true"] {
+.emotion-15:focus-visible,
+.emotion-15[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-14:hover,
-.emotion-14[data-hover="true"],
-.emotion-14:active,
-.emotion-14[data-active="true"] {
+.emotion-15:hover,
+.emotion-15[data-hover="true"],
+.emotion-15:active,
+.emotion-15[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-14:focus-visible,
-.emotion-14[data-focus="true"] {
+.emotion-15:focus-visible,
+.emotion-15[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.dark-theme .emotion-14 {
+.dark-theme .emotion-15 {
   --feedback-font-color: #FFFFFF;
   --feedback-background-color: #3D4F58;
 }
 
-.emotion-15 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
-}
-
-.emotion-15 {
+.emotion-16 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -525,6 +522,16 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 .emotion-16 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.emotion-17 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -557,43 +564,47 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
         <div
           class=" emotion-1 emotion-2"
         >
-          <form
+          <div
             class="emotion-3"
-            role="search"
           >
-            <div
-              aria-label="Search MongoDB Docs"
+            <form
               class="emotion-4"
-              role="searchbox"
-              tabindex="-1"
+              role="search"
             >
-              <svg
-                alt=""
-                aria-hidden="true"
+              <div
+                aria-label="Search MongoDB Docs"
                 class="emotion-5"
-                height="16"
-                role="presentation"
-                viewBox="0 0 16 16"
-                width="16"
+                role="searchbox"
+                tabindex="-1"
               >
-                <path
-                  clip-rule="evenodd"
-                  d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
-                  fill="currentColor"
-                  fill-rule="evenodd"
+                <svg
+                  alt=""
+                  aria-hidden="true"
+                  class="emotion-6"
+                  height="16"
+                  role="presentation"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                  />
+                </svg>
+                <input
+                  class="emotion-7"
+                  placeholder="Search MongoDB Docs or Ask MongoDB AI"
+                  type="search"
+                  value=""
                 />
-              </svg>
-              <input
-                class="emotion-6"
-                placeholder="Search MongoDB Docs or Ask MongoDB AI"
-                type="search"
-                value=""
-              />
-            </div>
-          </form>
+              </div>
+            </form>
+          </div>
         </div>
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-8 emotion-9 emotion-10"
         >
           <div
             aria-disabled="false"
@@ -601,11 +612,11 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
             aria-haspopup="true"
             aria-label="Dark Mode Menu"
             aria-labelledby="Dark Mode Menu"
-            class="emotion-10"
+            class="emotion-11"
             tabindex="0"
           >
             <div
-              class="emotion-11"
+              class="emotion-12"
             >
               <svg
                 aria-label="Sun Icon"
@@ -625,19 +636,19 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
             </div>
           </div>
           <div
-            class="emotion-12 emotion-13"
+            class="emotion-13 emotion-14"
           >
             <button
               aria-disabled="false"
-              class="lg-ui-button-0000 emotion-14"
+              class="lg-ui-button-0000 emotion-15"
               data-lgid="lg-button"
               type="button"
             >
               <div
-                class="emotion-15"
+                class="emotion-16"
               />
               <div
-                class="emotion-16"
+                class="emotion-17"
               >
                 Feedback
               </div>
@@ -738,13 +749,12 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 .emotion-3 {
-  outline: none;
   width: 100%;
   max-width: 610px;
   --search-input-background-color: #FFFFFF;
 }
 
-.emotion-3>div[role='searchbox'] {
+.emotion-3 div[role='searchbox'] {
   background-color: var(--search-input-background-color);
 }
 
@@ -753,6 +763,14 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 .emotion-4 {
+  outline: none;
+}
+
+.emotion-4 {
+  outline: none;
+}
+
+.emotion-5 {
   position: relative;
   display: grid;
   grid-auto-flow: column;
@@ -777,12 +795,12 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   border-color: #889397;
 }
 
-.emotion-4:hover:not(:disabled):not(:focus-within),
-.emotion-4:active:not(:disabled):not(:focus-within) {
+.emotion-5:hover:not(:disabled):not(:focus-within),
+.emotion-5:active:not(:disabled):not(:focus-within) {
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-5 {
+.emotion-6 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -790,7 +808,7 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   left: 12px;
 }
 
-.emotion-6 {
+.emotion-7 {
   font-size: inherit;
   line-height: inherit;
   color: inherit;
@@ -805,107 +823,107 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   padding: 0;
 }
 
-.emotion-6[aria-disabled='true'] {
+.emotion-7[aria-disabled='true'] {
   cursor: not-allowed;
 }
 
-.emotion-6[aria-disabled='true']:hover,
-.emotion-6[aria-disabled='true']:active {
+.emotion-7[aria-disabled='true']:hover,
+.emotion-7[aria-disabled='true']:active {
   box-shadow: none;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-7::-webkit-input-placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-7::-moz-placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-7:-ms-input-placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-6::placeholder {
+.emotion-7::placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-6::-ms-clear,
-.emotion-6::-ms-reveal {
+.emotion-7::-ms-clear,
+.emotion-7::-ms-reveal {
   display: none;
   width: 0;
   height: 0;
 }
 
-.emotion-6::-webkit-search-decoration,
-.emotion-6::-webkit-search-cancel-button,
-.emotion-6::-webkit-search-results-button,
-.emotion-6::-webkit-search-results-decoration {
+.emotion-7::-webkit-search-decoration,
+.emotion-7::-webkit-search-cancel-button,
+.emotion-7::-webkit-search-results-button,
+.emotion-7::-webkit-search-results-decoration {
   display: none;
 }
 
-.emotion-6:-webkit-autofill {
+.emotion-7:-webkit-autofill {
   color: inherit;
   background: transparent;
   border: none;
   -webkit-text-fill-color: inherit;
 }
 
-.emotion-6:-webkit-autofill[aria-disabled='false'] {
+.emotion-7:-webkit-autofill[aria-disabled='false'] {
   box-shadow: 0 0 0 100px #FFFFFF inset;
 }
 
-.emotion-6:-webkit-autofill[aria-disabled='false']:focus {
+.emotion-7:-webkit-autofill[aria-disabled='false']:focus {
   box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #0498EC;
 }
 
-.emotion-6:-webkit-autofill[aria-disabled='false']:hover:not(:focus) {
+.emotion-7:-webkit-autofill[aria-disabled='false']:hover:not(:focus) {
   box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #E8EDEB;
 }
 
-.emotion-6::-webkit-input-placeholder {
+.emotion-7::-webkit-input-placeholder {
   color: #889397;
   font-weight: 400;
 }
 
-.emotion-6::-moz-placeholder {
+.emotion-7::-moz-placeholder {
   color: #889397;
   font-weight: 400;
 }
 
-.emotion-6:-ms-input-placeholder {
+.emotion-7:-ms-input-placeholder {
   color: #889397;
   font-weight: 400;
 }
 
-.emotion-6::placeholder {
+.emotion-7::placeholder {
   color: #889397;
   font-weight: 400;
 }
 
-.emotion-6[aria-disabled='true']::-webkit-input-placeholder {
+.emotion-7[aria-disabled='true']::-webkit-input-placeholder {
   color: #889397;
 }
 
-.emotion-6[aria-disabled='true']::-moz-placeholder {
+.emotion-7[aria-disabled='true']::-moz-placeholder {
   color: #889397;
 }
 
-.emotion-6[aria-disabled='true']:-ms-input-placeholder {
+.emotion-7[aria-disabled='true']:-ms-input-placeholder {
   color: #889397;
 }
 
-.emotion-6[aria-disabled='true']::placeholder {
+.emotion-7[aria-disabled='true']::placeholder {
   color: #889397;
 }
 
-.emotion-6[aria-disabled='true']:-webkit-autofill,
-.emotion-6[aria-disabled='true']:-webkit-autofill:hover,
-.emotion-6[aria-disabled='true']:-webkit-autofill:focus {
+.emotion-7[aria-disabled='true']:-webkit-autofill,
+.emotion-7[aria-disabled='true']:-webkit-autofill:hover,
+.emotion-7[aria-disabled='true']:-webkit-autofill:focus {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -915,7 +933,7 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   box-shadow: 0 0 0 100px #E8EDEB inset;
 }
 
-.emotion-7 {
+.emotion-8 {
   position: relative;
   top: 0;
   right: 32px;
@@ -923,19 +941,19 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-7 {
+  .emotion-8 {
     right: 24px;
     padding-left: 3rem;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-7 {
+  .emotion-8 {
     padding-left: 2rem;
   }
 }
 
-.emotion-8 {
+.emotion-9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -948,7 +966,7 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   column-gap: 16px;
 }
 
-.emotion-10 {
+.emotion-11 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -972,7 +990,7 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   cursor: pointer;
 }
 
-.emotion-10:before {
+.emotion-11:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -989,9 +1007,9 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   transform: scale(0.8);
 }
 
-.emotion-10:active:before,
-.emotion-10:hover:before,
-.emotion-10:focus:before {
+.emotion-11:active:before,
+.emotion-11:hover:before,
+.emotion-11:focus:before {
   opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -999,54 +1017,34 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   transform: scale(1);
 }
 
-.emotion-10:focus {
+.emotion-11:focus {
   outline: none;
 }
 
-.emotion-10:active,
-.emotion-10:hover {
+.emotion-11:active,
+.emotion-11:hover {
   color: #001E2B;
 }
 
-.emotion-10:active:before,
-.emotion-10:hover:before {
+.emotion-11:active:before,
+.emotion-11:hover:before {
   background-color: #E8EDEB;
 }
 
-.emotion-10:focus-visible {
+.emotion-11:focus-visible {
   color: #001E2B;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-10:focus-visible:before {
+.emotion-11:focus-visible:before {
   background-color: #E8EDEB;
 }
 
-.emotion-10>div {
+.emotion-11>div {
   position: relative;
 }
 
-.emotion-11 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.emotion-11 {
+.emotion-12 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1067,10 +1065,30 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 .emotion-12 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-13 {
   position: relative;
 }
 
-.emotion-14 {
+.emotion-15 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -1110,55 +1128,45 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   --feedback-background-color: #F9FBFA;
 }
 
-.emotion-14:focus-visible,
-.emotion-14[data-focus="true"] {
+.emotion-15:focus-visible,
+.emotion-15[data-focus="true"] {
   outline: none;
 }
 
-.emotion-14:active,
-.emotion-14[data-active="true"],
-.emotion-14:focus,
-.emotion-14:hover {
+.emotion-15:active,
+.emotion-15[data-active="true"],
+.emotion-15:focus,
+.emotion-15:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-14:focus-visible,
-.emotion-14[data-focus="true"] {
+.emotion-15:focus-visible,
+.emotion-15[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-14:hover,
-.emotion-14[data-hover="true"],
-.emotion-14:active,
-.emotion-14[data-active="true"] {
+.emotion-15:hover,
+.emotion-15[data-hover="true"],
+.emotion-15:active,
+.emotion-15[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-14:focus-visible,
-.emotion-14[data-focus="true"] {
+.emotion-15:focus-visible,
+.emotion-15[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.dark-theme .emotion-14 {
+.dark-theme .emotion-15 {
   --feedback-font-color: #FFFFFF;
   --feedback-background-color: #3D4F58;
 }
 
-.emotion-15 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
-}
-
-.emotion-15 {
+.emotion-16 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -1169,6 +1177,16 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 }
 
 .emotion-16 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.emotion-17 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -1200,43 +1218,47 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
       <div
         class=" emotion-1 emotion-2"
       >
-        <form
+        <div
           class="emotion-3"
-          role="search"
         >
-          <div
-            aria-label="Search MongoDB Docs"
+          <form
             class="emotion-4"
-            role="searchbox"
-            tabindex="-1"
+            role="search"
           >
-            <svg
-              alt=""
-              aria-hidden="true"
+            <div
+              aria-label="Search MongoDB Docs"
               class="emotion-5"
-              height="16"
-              role="presentation"
-              viewBox="0 0 16 16"
-              width="16"
+              role="searchbox"
+              tabindex="-1"
             >
-              <path
-                clip-rule="evenodd"
-                d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
-                fill="currentColor"
-                fill-rule="evenodd"
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="emotion-6"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+              <input
+                class="emotion-7"
+                placeholder="Search MongoDB Docs or Ask MongoDB AI"
+                type="search"
+                value=""
               />
-            </svg>
-            <input
-              class="emotion-6"
-              placeholder="Search MongoDB Docs or Ask MongoDB AI"
-              type="search"
-              value=""
-            />
-          </div>
-        </form>
+            </div>
+          </form>
+        </div>
       </div>
       <div
-        class="emotion-7 emotion-8 emotion-9"
+        class="emotion-8 emotion-9 emotion-10"
       >
         <div
           aria-disabled="false"
@@ -1244,11 +1266,11 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
           aria-haspopup="true"
           aria-label="Dark Mode Menu"
           aria-labelledby="Dark Mode Menu"
-          class="emotion-10"
+          class="emotion-11"
           tabindex="0"
         >
           <div
-            class="emotion-11"
+            class="emotion-12"
           >
             <svg
               aria-label="Sun Icon"
@@ -1268,19 +1290,19 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
           </div>
         </div>
         <div
-          class="emotion-12 emotion-13"
+          class="emotion-13 emotion-14"
         >
           <button
             aria-disabled="false"
-            class="lg-ui-button-0000 emotion-14"
+            class="lg-ui-button-0000 emotion-15"
             data-lgid="lg-button"
             type="button"
           >
             <div
-              class="emotion-15"
+              class="emotion-16"
             />
             <div
-              class="emotion-16"
+              class="emotion-17"
             >
               Feedback
             </div>

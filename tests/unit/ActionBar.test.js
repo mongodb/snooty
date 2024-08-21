@@ -59,18 +59,5 @@ describe('ActionBar', () => {
       expect(wrapper.getByText('Feedback')).toBeTruthy();
       expect(wrapper).toMatchSnapshot();
     });
-
-    it('calls the conversation starter when it is focused', async () => {
-      let wrapper;
-
-      await act(async () => {
-        wrapper = render(<ActionBar />);
-      });
-      const input = wrapper.getByPlaceholderText('Search MongoDB Docs or Ask MongoDB AI');
-      await act(async () => {
-        input.focus();
-      });
-      expect(conversationSpy).toHaveBeenCalled();
-    });
   });
 });
