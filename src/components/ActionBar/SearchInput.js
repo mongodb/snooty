@@ -1,6 +1,7 @@
 import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@leafygreen-ui/emotion';
+import { useBackdropClick } from '@leafygreen-ui/hooks';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { SearchInput as LGSearchInput } from '@leafygreen-ui/search-input';
 import debounce from '../../utils/debounce';
@@ -51,12 +52,20 @@ const SearchInput = ({ className }) => {
   const { darkMode } = useDarkMode();
   const [selectedOption, setSelectedOption] = useState(0);
 
+  useBackdropClick(
+    () => {
+      setIsOpen(false);
+    },
+    [searchBoxRef, menuRef],
+    isOpen
+  );
+
   useEffect(() => {
     if (!searchValue.length) {
       return setIsOpen(false);
     }
     const debounced = debounce(() => {
-      setIsOpen(searchValue.length > 0);
+      setIsOpen(searchValue.length > 1);
     }, 500);
     return () => debounced();
   }, [searchValue]);
@@ -99,6 +108,7 @@ const SearchInput = ({ className }) => {
     switch (e.key) {
       case keyMap.Enter: {
         menuRef.current?.select?.(selectedOption);
+        setIsOpen(false);
         break;
       }
 
@@ -134,7 +144,7 @@ const SearchInput = ({ className }) => {
       }
 
       default: {
-        setIsOpen(searchValue.length > 0);
+        break;
       }
     }
   };
@@ -153,12 +163,15 @@ const SearchInput = ({ className }) => {
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
+        onClick={() => {
+          setIsOpen(searchValue.length > 1);
+        }}
         ref={inputRef}
       />
       <SuspenseHelper>
         <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
           <SearchMenu
-            isOpen={isOpen && searchValue.length > 1}
+            isOpen={isOpen}
             searchBoxRef={searchBoxRef}
             searchValue={searchValue}
             ref={menuRef}
