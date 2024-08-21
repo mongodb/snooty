@@ -16,6 +16,12 @@ const StyledSelect = styled(Select)`
   ${'' /* Render version dropdown text in front of the Sidebar text */}
   button {
     z-index: 2;
+    background-color: var(--select-button-bg-color);
+    color: var(--select-button-color);
+
+    div:last-child svg {
+      color: var(--select-button-carot);
+    }
   }
 
   /* Override LG mobile style of enlarged mobile font */

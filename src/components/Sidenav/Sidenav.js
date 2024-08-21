@@ -110,6 +110,29 @@ const SidenavContainer = styled.div(
     @media ${theme.screenSize.upToSmall} {
       ${getTopAndHeight(topSmall, template)};
     }
+
+    nav {
+      background-color: var(--sidenav-bg-color);
+    }
+
+    a[class*='lg-ui-side-nav-item'] {
+      color: var(--sidenav-item-color);
+    }
+
+    [data-testid='side-nav-collapse-toggle'] {
+      background-color: var(--select-button-bg-color);
+      color: var(--sidenav-toggle-color);
+      border-color: var(--sidenav-toggle-border-color);
+    }
+
+    a[aria-current='page'] {
+      background-color: var(--sidenav-active-bg-color);
+      color: var(--sidenav-active-color);
+
+      &:before {
+        background-color: var(--sidenav-active-before-color);
+      }
+    }
   `
 );
 
@@ -121,7 +144,7 @@ const Spaceholder = styled('div')`
 
 export const Border = styled('hr')`
   border: unset;
-  border-bottom: 1px solid var(--border-bottom-color);
+  border-bottom: 1px solid var(--sidenav-border-bottom-color);
   margin: ${theme.size.small} 0;
   width: 100%;
 `;
@@ -136,7 +159,7 @@ const ArtificialPadding = styled('div')`
 // This allows the products in the ProductsList to slide up/down when closing/opening the list
 // without appearing inline with above text
 const NavTopContainer = styled('div')`
-  background-color: var(--background-color);
+  background-color: var(--sidenav-bg-color);
   position: relative;
   z-index: 1;
 `;
@@ -238,12 +261,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
           >
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
-              <NavTopContainer
-                style={{
-                  '--background-color': darkMode ? palette.gray.dark4 : palette.gray.light3,
-                  '--border-bottom-color': darkMode ? palette.gray.dark2 : palette.gray.light2,
-                }}
-              >
+              <NavTopContainer>
                 <ArtificialPadding />
                 <DocsHomeButton darkMode={darkMode} />
                 <Border />
@@ -276,7 +294,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                   as={Link}
                   to={isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/'}
                   hideExternalIcon={true}
-                  style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark3 }}
                 >
                   {navTitle}
                 </SideNavItem>
