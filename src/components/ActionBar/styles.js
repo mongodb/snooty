@@ -1,7 +1,9 @@
+import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { CONTENT_MAX_WIDTH } from '../../templates/product-landing';
+import { displayNone } from '../../utils/display-none';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
@@ -37,16 +39,13 @@ export const actionBarStyling = css`
 // used for :template: options - 'product-landing', 'changelog'
 const gridStyling = css`
   display: grid;
-  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${CONTENT_MAX_WIDTH}px) minmax(
-      ${theme.size.xlarge},
-      1fr
-    );
+  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${CONTENT_MAX_WIDTH}px) fit-content(100%);
 
   @media ${theme.screenSize.upToLarge} {
-    grid-template-columns: 48px 1fr 48px;
+    grid-template-columns: 48px 1fr fit-content(100%);
   }
   @media ${theme.screenSize.upToMedium} {
-    grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+    grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
   }
 `;
 
@@ -54,8 +53,8 @@ const gridStyling = css`
 const landingGridStyling = css`
   display: grid;
   grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, 1440px) minmax(${theme.size.xlarge}, 1fr);
-  @media ${theme.screenSize.upToMedium} {
-    grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+  @media ${theme.screenSize.upToLarge} {
+    grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
   }
 `;
 
@@ -115,34 +114,123 @@ export const getContainerStyling = (template) => {
   return { containerClassname, fakeColumns, searchContainerClassname };
 };
 
-export const actionsBoxStyling = css`
-  position: relative;
-  top: 0;
-  right: ${theme.size.large};
-  justify-self: flex-end;
+export const ActionBarSearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 80%;
+  background: inherit;
 
   @media ${theme.screenSize.upToLarge} {
-    right: ${theme.size.medium};
-    padding-left: 3rem;
-  }
-
-  @media ${theme.screenSize.upToSmall} {
-    padding-left: 2rem;
+    max-width: unset;
+    justify-content: space-between;
+    width: 100%;
+    width: 100%;
   }
 `;
 
-export const inputStyling = css`
+export const StyledInputContainer = styled.div`
   width: 100%;
   max-width: 610px;
+  background: inherit;
 
   div[role='searchbox'] {
     background-color: var(--search-input-background-color);
+    width: 100%;
   }
 
   --search-input-background-color: ${palette.white};
   .dark-theme & {
     --search-input-background-color: ${palette.gray.dark4};
   }
+
+  @media ${theme.screenSize.mediumAndUp} {
+    width: 70%;
+  }
+
+  ${(props) => {
+    return (
+      props.mobileSearchActive &&
+      `
+      display: flex !important;
+      position: absolute;
+      width: calc(100% - ${theme.size.medium} - ${theme.size.medium});
+      z-index: 40;
+      max-width: unset;
+      left: ${theme.size.medium};
+
+      > form {
+        width: 100%;
+        margin-right: ${theme.size.medium};
+      }
+    `
+    );
+  }}
+`;
+
+export const searchInputStyling = ({ mobileSearchActive }) => {
+  console.log({ mobileSearchActive });
+  return css`
+    ${displayNone.onMedium};
+    ${mobileSearchActive &&
+    `
+    display: flex !important;
+    width: calc(100% - ${theme.size.medium} - ${theme.size.medium});
+    z-index: 40;
+    max-width: unset;
+    background: var(--background-color-primary);
+    align-items: center;
+
+    > form {
+      width: 100%;
+      margin-right: ${theme.size.medium};
+    }
+  `}
+  `;
+};
+
+export const ActionsBox = styled('div')`
+  display: flex;
+  align-items: center;
+  column-gap: ${theme.size.default};
+  position: relative;
+  top: 0;
+  padding-right: ${theme.size.large};
+  padding-left: ${theme.size.default};
+  justify-self: flex-end;
+
+  @media ${theme.screenSize.upToLarge} {
+    padding-right: ${theme.size.medium};
+  }
+
+  @media ${theme.screenSize.upToMedium} {
+    padding-left: ${theme.size.small};
+    column-gap: ${theme.size.small};
+  }
+`;
+
+export const MobileStyledLink = styled.a`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: ${palette.gray.dark1};
+  text-transform: uppercase;
+  text-wrap: nowrap;
+  font-weight: 600;
+  cursor: pointer;
+  ${displayNone.onLargerThanTablet};
+
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
+
+  > svg {
+    margin-right: ${theme.size.small};
+  }
+`;
+
+export const searchIconStyling = css`
+  ${displayNone.onLargerThanMedium};
+  float: right;
 `;
 
 // using content before/after to prevent event bubbling up from lg/search-input/search-result

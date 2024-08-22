@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import { cx } from '@leafygreen-ui/emotion';
-import { theme } from '../../theme/docsTheme';
+import Icon from '@leafygreen-ui/icon';
 import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { getNestedValue } from '../../utils/get-nested-value';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { SidenavContext } from '../Sidenav';
 import {
   FeedbackProvider,
   FeedbackForm,
@@ -16,36 +16,16 @@ import {
 } from '../Widgets/FeedbackWidget';
 import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
-import { actionsBoxStyling, actionBarStyling, getContainerStyling } from './styles';
-
-const ActionBarSearchContainer = styled.div`
-  align-items: center;
-  display: flex;
-  width: 80%;
-
-  @media ${theme.screenSize.upToLarge} {
-    max-width: 340px;
-  }
-
-  @media ${theme.screenSize.upToMedium} {
-    width: 100%;
-  }
-
-  @media ${theme.screenSize.upToSmall} {
-    & > div {
-      padding: ${theme.size.default} ${theme.size.large};
-    }
-  }
-`;
-
-const ActionsBox = styled('div')`
-  display: flex;
-  align-items: center;
-  column-gap: ${theme.size.default};
-`;
+import {
+  ActionBarSearchContainer,
+  ActionsBox,
+  actionBarStyling,
+  getContainerStyling,
+  MobileStyledLink,
+} from './styles';
 
 // Note: When working on this component further, please check with design on how it should look in the errorpage template (404) as well!
-const ActionBar = ({ template, slug, ...props }) => {
+const ActionBar = ({ template, slug, sidenav, ...props }) => {
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
   const feedbackData = useFeedbackData({
@@ -57,13 +37,22 @@ const ActionBar = ({ template, slug, ...props }) => {
 
   const { fakeColumns, containerClassname, searchContainerClassname } = getContainerStyling(template);
 
+  const { hideMobile, setHideMobile } = useContext(SidenavContext);
+
   return (
     <div className={cx(props.className, actionBarStyling, containerClassname)}>
       {fakeColumns && <div></div>}
       <ActionBarSearchContainer className={cx(searchContainerClassname)}>
+        {sidenav && (
+          <MobileStyledLink onClick={() => setHideMobile((state) => !state)}>
+            <Icon glyph={hideMobile ? 'ChevronDown' : 'ChevronUp'} />
+            Docs Menu
+          </MobileStyledLink>
+        )}
+        {/*  */}
         <SearchInput />
       </ActionBarSearchContainer>
-      <ActionsBox className={cx(actionsBoxStyling)}>
+      <ActionsBox>
         <DarkModeDropdown></DarkModeDropdown>
         {template !== 'errorpage' && (
           <FeedbackProvider page={feedbackData}>
@@ -79,8 +68,9 @@ const ActionBar = ({ template, slug, ...props }) => {
 };
 
 ActionBar.propTypes = {
-  template: PropTypes.string,
-  slug: PropTypes.string,
+  template: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  sidenav: PropTypes.bool.isRequired,
 };
 
 export default ActionBar;

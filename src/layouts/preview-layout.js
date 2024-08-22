@@ -173,7 +173,7 @@ const DefaultLayout = ({
               />
             )}
             <StyledContentContainer>
-              <ActionBar template={template} slug={slug} />
+              <ActionBar template={template} slug={slug} sidenav={sidenav} />
               <ContentTransition slug={slug}>{children}</ContentTransition>
             </StyledContentContainer>
           </GlobalGrid>

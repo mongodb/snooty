@@ -49,6 +49,7 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
   // Tablet and mobile position
   @media ${theme.screenSize.upToLarge} {
     position: absolute;
+    top: ${theme.header.actionBarMobileHeight};
   }
 
   // Allows Spaceholder element to flex grow for AdditionalLinks
@@ -105,6 +106,7 @@ const SidenavContainer = styled.div(
 
     @media ${theme.screenSize.upToLarge} {
       ${getTopAndHeight(topMedium, template)};
+      z-index: ${theme.zIndexes.actionBar - 1};
     }
 
     @media ${theme.screenSize.upToSmall} {

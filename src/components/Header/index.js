@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { UnifiedNav } from '@mdb/consistent-nav';
-import { SidenavMobileMenuDropdown } from '../Sidenav';
 import SiteBanner from '../Banner/SiteBanner';
 import { theme } from '../../theme/docsTheme';
 import { AVAILABLE_LANGUAGES, getCurrLocale, onSelectLocale } from '../../utils/locale';
@@ -17,7 +16,7 @@ const StyledHeaderContainer = styled.header(
   `
 );
 
-const Header = ({ sidenav, eol, template }) => {
+const Header = ({ sidenav, eol, template, slug }) => {
   const unifiedNavProperty = 'DOCS';
 
   const enabledLocales = AVAILABLE_LANGUAGES.map((language) => language.localeCode);
@@ -39,7 +38,6 @@ const Header = ({ sidenav, eol, template }) => {
               enabledLocales={enabledLocales}
             />
           )}
-          {sidenav && <SidenavMobileMenuDropdown />}
         </>
       </StyledHeaderContainer>
     </>
@@ -49,6 +47,8 @@ const Header = ({ sidenav, eol, template }) => {
 Header.propTypes = {
   sidenav: PropTypes.bool,
   eol: PropTypes.bool.isRequired,
+  slug: PropTypes.string.isRequired,
+  template: PropTypes.string.isRequired,
 };
 
 export default Header;

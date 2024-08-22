@@ -1,14 +1,18 @@
 import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@leafygreen-ui/emotion';
+import IconButton from '@leafygreen-ui/icon-button';
+import Icon from '@leafygreen-ui/icon';
 import { useBackdropClick } from '@leafygreen-ui/hooks';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { SearchInput as LGSearchInput } from '@leafygreen-ui/search-input';
+import { Link } from '@leafygreen-ui/typography';
+import useScreenSize from '../../hooks/useScreenSize';
 import debounce from '../../utils/debounce';
 import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { SuspenseHelper } from '../SuspenseHelper';
-import { inputStyling } from './styles';
+import { searchIconStyling, searchInputStyling, StyledInputContainer } from './styles';
 import { ShortcutIcon, SparkleIcon } from './SparkIcon';
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const SearchMenu = lazy(() => import('./SearchMenu'));
@@ -51,6 +55,7 @@ const SearchInput = ({ className }) => {
   const metadata = useSnootyMetadata();
   const { darkMode } = useDarkMode();
   const [selectedOption, setSelectedOption] = useState(0);
+  const [mobileSearchActive, setMobileSearchActive] = useState(false);
 
   useBackdropClick(
     () => {
@@ -97,6 +102,15 @@ const SearchInput = ({ className }) => {
       document.removeEventListener('keydown', keyPressHandler);
     };
   }, [keyPressHandler]);
+
+  // focus on mobile open
+  useEffect(() => {
+    if (mobileSearchActive) {
+      inputRef.current?.focus();
+    }
+  }, [mobileSearchActive]);
+
+  const { isMedium } = useScreenSize();
 
   const handleSearchBoxKeyDown = (e) => {
     const isFocusInMenu = menuRef.current?.contains && menuRef.current.contains(document.activeElement);
@@ -156,9 +170,15 @@ const SearchInput = ({ className }) => {
       : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
-    <div className={cx(inputStyling, className)} ref={searchBoxRef} onKeyDown={handleSearchBoxKeyDown}>
+    <StyledInputContainer
+      className={cx(className)}
+      mobileSearchActive={mobileSearchActive}
+      ref={searchBoxRef}
+      onKeyDown={handleSearchBoxKeyDown}
+    >
       <LGSearchInput
         aria-label="Search MongoDB Docs"
+        className={searchInputStyling({ mobileSearchActive })}
         value={searchValue}
         placeholder={PLACEHOLDER_TEXT}
         onChange={(e) => {
@@ -169,6 +189,7 @@ const SearchInput = ({ className }) => {
         }}
         ref={inputRef}
       />
+      {isMedium && mobileSearchActive && <Link onClick={() => setMobileSearchActive(false)}>Cancel</Link>}
       <SuspenseHelper>
         <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
           <SearchMenu
@@ -180,7 +201,16 @@ const SearchInput = ({ className }) => {
           ></SearchMenu>
         </Chatbot>
       </SuspenseHelper>
-    </div>
+      {!mobileSearchActive && (
+        <IconButton
+          aria-label="Search MongoDB Docs"
+          className={searchIconStyling}
+          onClick={() => setMobileSearchActive((state) => !state)}
+        >
+          <Icon glyph={'MagnifyingGlass'} />
+        </IconButton>
+      )}
+    </StyledInputContainer>
   );
 };
 
