@@ -18,6 +18,16 @@ export const defaultSuggestedPrompts = [
 
 const SKELETON_BORDER_RADIUS = '12px';
 
+const StyledSkeleton = styled(Skeleton)`
+  --base-color: #ebebeb;
+  --highlight-color: #f5f5f5;
+
+  .dark-theme & {
+    --base-color: var(--gray-dark2);
+    --highlight-color: var(--gray-dark1);
+  }
+`;
+
 // Match landing template max width for alignment purposes
 const CONTENT_MAX_WIDTH = theme.breakpoints.xxLarge;
 
@@ -137,7 +147,7 @@ const ChatbotUi = ({ template, darkMode }) => {
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
-      <SuspenseHelper fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
+      <SuspenseHelper fallback={<StyledSkeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
         <Chatbot maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
           <DocsChatbot suggestedPrompts={defaultSuggestedPrompts} darkMode={darkMode} />
         </Chatbot>

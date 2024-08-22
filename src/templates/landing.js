@@ -55,7 +55,7 @@ const Landing = ({ children, pageContext, useChatbot }) => {
     <>
       <div>
         <Wrapper>
-          {useChatbot && <ChatbotUi template={pageContext?.template} />}
+          {useChatbot && <ChatbotUi template={pageContext?.template} darkMode={darkMode} />}
           {children}
         </Wrapper>
       </div>
