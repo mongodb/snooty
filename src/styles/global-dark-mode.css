@@ -65,6 +65,7 @@ body {
 
   --wayfinding-bg-color: var(--gray-dark3);
   --wayfinding-border-color: var(--gray-dark2);
+}
 
 body {
   background-color: var(--background-color-primary);
