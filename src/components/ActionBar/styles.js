@@ -65,7 +65,7 @@ const flexStyling = css`
   flex-wrap: nowrap;
   padding-left: ${theme.size.xlarge};
   @media ${theme.screenSize.upToLarge} {
-    padding-left: 48px;
+    padding-left: ${theme.size.medium};
   }
 `;
 
