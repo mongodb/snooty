@@ -104,7 +104,7 @@ const DeprecatedVersionSelector = () => {
 
   const versionChoicesMap = useMemo(() => keyBy(versionChoices, 'value'), [versionChoices]);
 
-  const buttonDisabled = !(product && version);
+  const buttonDisabled = !(product && version && !isEmpty(reposMap));
 
   // Fetch docsets for url
   useEffect(() => {
@@ -134,20 +134,20 @@ const DeprecatedVersionSelector = () => {
   }, [reposMap]);
 
   const generateUrl = (currentVersion) => {
-    // Our current LG button version has a bug where a disabled button with an href allows the disabled
-    // button to be clickable. This logic can be removed when LG button is version >= 12.0.4.
-    if (buttonDisabled || !currentVersion || isEmpty(reposMap) || !hasValidHostName(reposMap[product])) {
+    if (!currentVersion) {
       return null;
     }
 
     // Utilizing hardcoded env or aws bucket path because legacy sites are not available on dev/stage
     if (currentVersion.icon) {
-      const bucket = 'https://www.mongodb.com/docs/offline';
-      return `${bucket}/${product}-${currentVersion.urlSlug}.tar.gz`;
+      const offlineURL = 'https://www.mongodb.com/docs/offline';
+      return `${offlineURL}/${product}-${currentVersion.urlSlug}.tar.gz`;
     }
-
-    const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
-    return `${hostName}/${currentVersion.urlSlug}`;
+    if (hasValidHostName(reposMap[product])) {
+      const hostName = reposMap[product].url.dotcomprd + reposMap[product].prefix.dotcomprd;
+      return `${hostName}/${currentVersion.urlSlug}`;
+    }
+    console.error(`Invalid hostname, url could not be generated for ${currentVersion}`);
   };
 
   return (
