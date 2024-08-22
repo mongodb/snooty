@@ -56,7 +56,7 @@ const FeatureNotAvailImage = () => {
 };
 
 const titleStyling = css`
-  --color: black;
+  --color: ${palette.black};
   .dark-theme & {
     --color: white;
   }
