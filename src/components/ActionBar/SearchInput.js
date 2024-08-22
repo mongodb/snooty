@@ -205,7 +205,10 @@ const SearchInput = ({ className }) => {
         <IconButton
           aria-label="Search MongoDB Docs"
           className={searchIconStyling}
-          onClick={() => setMobileSearchActive((state) => !state)}
+          onClick={() => {
+            setIsOpen(false);
+            setMobileSearchActive((state) => !state);
+          }}
         >
           <Icon glyph={'MagnifyingGlass'} />
         </IconButton>
