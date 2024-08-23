@@ -41,7 +41,7 @@ const THEME_STYLES = {
   },
 };
 
-const sharedDarkModeOverwriteStyles = `
+export const sharedDarkModeOverwriteStyles = `
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 `;
@@ -57,7 +57,7 @@ const gatsbyLinkStyling = (linkThemeStyle) => css`
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
-  ${sharedDarkModeOverwriteStyles};
+  ${sharedDarkModeOverwriteStyles}
 
   > code {
     ${sharedDarkModeOverwriteStyles}
@@ -82,7 +82,7 @@ const gatsbyLinkStyling = (linkThemeStyle) => css`
 // DOP-3091: LG anchors are not inline by default
 const lgLinkStyling = css`
   display: inline;
-  ${sharedDarkModeOverwriteStyles};
+  ${sharedDarkModeOverwriteStyles}
 `;
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
