@@ -57,7 +57,8 @@ const landingStepStyles = {
   normal: (darkMode) => css`
     gap: ${theme.size.default};
     h2,
-    h4 {
+    h4,
+    h6 {
       margin-top: unset;
     }
     h3 {
@@ -93,7 +94,7 @@ const contentStyles = {
     section > *,
     ol p,
     ul p {
-      margin-bottom: 24px;
+      margin-bottom: ${theme.size.default};
     }
   `,
 };

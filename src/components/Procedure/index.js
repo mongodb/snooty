@@ -21,7 +21,7 @@ const StyledProcedure = styled('div')`
   `}
   ${({ darkMode }) =>
     `
-    background-color: ${darkMode ? palette.gray.dark4 : 'initial'};
+    background-color: ${darkMode ? palette.black : 'initial'};
     color: ${darkMode ? palette.gray.light2 : 'initial'};`}
 `;
 
