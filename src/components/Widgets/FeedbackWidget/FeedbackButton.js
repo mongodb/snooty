@@ -44,6 +44,7 @@ const FeedbackButton = () => {
         {FEEDBACK_BUTTON_TEXT}
       </Button>
       <IconButton
+        aria-label="Submit feedback"
         className={cx(
           css`
             ${displayNone.onLargerThanTablet}

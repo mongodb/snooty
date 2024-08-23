@@ -183,7 +183,6 @@ export const StyledInputContainer = styled.div`
 `;
 
 export const searchInputStyling = ({ mobileSearchActive }) => {
-  console.log({ mobileSearchActive });
   return css`
     ${displayNone.onMedium};
     ${mobileSearchActive &&
