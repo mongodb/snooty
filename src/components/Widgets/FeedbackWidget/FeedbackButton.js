@@ -33,6 +33,7 @@ const FeedbackButton = () => {
   return (
     <ButtonContainer>
       <Button
+        aria-label={'Submit Feedback'}
         className={cx(
           darkModePrestyling,
           css`

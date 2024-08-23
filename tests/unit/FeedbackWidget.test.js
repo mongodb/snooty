@@ -112,7 +112,7 @@ describe('FeedbackWidget', () => {
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
 
       // Focus and simulate keyboard interaction
-      const fwButon = wrapper.getByRole('button');
+      const fwButon = wrapper.getAllByRole('button')[0];
       fwButon.focus();
       userEvent.keyboard('{Enter}');
       await tick();
