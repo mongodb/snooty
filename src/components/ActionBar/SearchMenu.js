@@ -3,6 +3,7 @@ import { SearchResultsMenu, SearchResult } from '@leafygreen-ui/search-input';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch, useChatbotContext } from 'mongodb-chatbot-ui';
 import PropTypes from 'prop-types';
+import { reportAnalytics } from '../../utils/report-analytics';
 import { suggestionStyling } from './styles';
 import { SEARCH_SUGGESTIONS } from './SearchInput';
 
@@ -16,6 +17,10 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
 
   const handleSearchResultClick = useCallback(
     async (isChatbotRes) => {
+      reportAnalytics('Search bar used', {
+        type: isChatbotRes ? 'chatbot' : 'docs-search',
+        query: searchValue,
+      });
       if (!isChatbotRes) {
         return (window.location.href = `https://mongodb.com/docs/search/?q=${searchValue}`);
       }

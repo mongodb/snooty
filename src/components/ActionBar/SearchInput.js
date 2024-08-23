@@ -71,7 +71,7 @@ const SearchInput = ({ className }) => {
       return setIsOpen(false);
     }
     const debounced = debounce(() => {
-      setIsOpen(searchValue.length > 1);
+      setIsOpen(!!searchValue.length);
     }, 500);
     return () => debounced();
   }, [searchValue]);
@@ -186,7 +186,7 @@ const SearchInput = ({ className }) => {
           setSearchValue(e.target.value);
         }}
         onClick={() => {
-          setIsOpen(searchValue.length > 1);
+          setIsOpen(!!searchValue.length);
         }}
         ref={inputRef}
       />
@@ -205,7 +205,7 @@ const SearchInput = ({ className }) => {
       <SuspenseHelper>
         <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
           <SearchMenu
-            isOpen={isOpen}
+            isOpen={searchValue.length && isOpen}
             searchBoxRef={searchBoxRef}
             searchValue={searchValue}
             ref={menuRef}
