@@ -14,6 +14,8 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
 import { getSiteTitle } from '../utils/get-site-title';
 import { PageContext } from '../context/page-context';
+import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
+import { isBrowser } from '../utils/is-browser';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -83,7 +85,7 @@ const fontFamily = getCurrentLocaleFontFamilyValue();
 const DocumentBody = (props) => {
   const { location, data, pageContext } = props;
   const page = data?.page?.ast;
-  const { slug, template } = pageContext;
+  const { slug, template, repoBranches } = pageContext;
 
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
@@ -101,7 +103,39 @@ const DocumentBody = (props) => {
 
   const { Template, useChatbot } = getTemplate(template);
 
+  const siteTitle = getSiteTitle(metadata);
+
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
+
+  const { parentPaths, branch } = useSnootyMetadata();
+  const queriedCrumbs = useBreadcrumbs();
+
+  const siteBasePrefix = repoBranches.siteBasePrefix;
+
+  // TODO: Move this into util function since the same logic
+  // is used in useCanonicalUrl();
+  const urlSlug = repoBranches.branches.find((br) => br.gitBranchName === branch)?.urlSlug ?? branch;
+
+  const { project } = metadata;
+
+  if (isBrowser && template !== 'feature-not-avail') {
+    const breadcrumbInfo = {
+      parentPathsSlug: parentPaths[slug],
+      queriedCrumbs: queriedCrumbs,
+      siteTitle: siteTitle,
+      slug: slug,
+      pageTitle: pageTitle,
+    };
+
+    const pageInfo = {
+      project: project,
+      urlSlug: urlSlug,
+      siteBasePrefix: siteBasePrefix,
+    };
+
+    sessionStorage.setItem('breadcrumbInfo', JSON.stringify(breadcrumbInfo));
+    sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
+  }
 
   return (
     <>
