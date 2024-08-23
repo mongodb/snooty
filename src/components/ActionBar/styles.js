@@ -234,7 +234,7 @@ export const MobileStyledLink = styled.a`
   cursor: pointer;
   ${displayNone.onLargerThanTablet};
   font-size: ${theme.fontSize.tiny};
-
+  padding-right: ${theme.size.large};
   .dark-theme & {
     color: ${palette.gray.light2};
   }
