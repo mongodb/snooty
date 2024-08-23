@@ -39,12 +39,12 @@ export const actionBarStyling = css`
 // used for :template: options - 'product-landing', 'changelog'
 const gridStyling = css`
   display: grid;
-  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${CONTENT_MAX_WIDTH}px) fit-content(100%);
+  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${CONTENT_MAX_WIDTH}px) minmax(
+      ${theme.size.xlarge},
+      1fr
+    );
 
   @media ${theme.screenSize.upToLarge} {
-    grid-template-columns: 48px 1fr fit-content(100%);
-  }
-  @media ${theme.screenSize.upToMedium} {
     grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
   }
 `;
