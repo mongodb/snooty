@@ -50,7 +50,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
           </MobileStyledLink>
         )}
         {/*  */}
-        <SearchInput />
+        <SearchInput sidenav={sidenav} />
       </ActionBarSearchContainer>
       <ActionsBox>
         <DarkModeDropdown></DarkModeDropdown>

@@ -52,7 +52,10 @@ const gridStyling = css`
 // use strictly for :template: landing
 const landingGridStyling = css`
   display: grid;
-  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, 1440px) minmax(${theme.size.xlarge}, 1fr);
+  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${theme.breakpoints.xxLarge}) minmax(
+      ${theme.size.xlarge},
+      1fr
+    );
   @media ${theme.screenSize.upToLarge} {
     grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
   }
@@ -70,15 +73,25 @@ const flexStyling = css`
 `;
 
 const middleAlignment = css`
-  padding-left: 60px;
-  max-width: 770px;
-  margin: auto;
+  display: grid;
+  grid-template-columns: ${theme.size.xlarge} repeat(12, minmax(0, 1fr)) ${theme.size.xlarge};
 `;
 
-const errorPageAlignment = css`
-  flex: 0 1 870px !important;
-  margin: auto;
-  max-width: unset;
+const centerInGrid = css`
+  grid-column: 4/-4;
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-column: 2/-2;
+  }
+  @media ${theme.screenSize.upToLarge} {
+    grid-column: 3/-3;
+  }
+  @media ${theme.screenSize.largeAndUp} {
+    grid-column: 4/-4;
+  }
+  @media ${theme.screenSize.xLargeAndUp} {
+    grid-column: 5/-5;
+  }
 `;
 
 export const getContainerStyling = (template) => {
@@ -99,11 +112,13 @@ export const getContainerStyling = (template) => {
       fakeColumns = true;
       break;
     case 'blank':
-      searchContainerClassname = middleAlignment;
+      containerClassname = middleAlignment;
+      searchContainerClassname = centerInGrid;
       fakeColumns = true;
       break;
     case 'errorpage':
-      searchContainerClassname = errorPageAlignment;
+      containerClassname = middleAlignment;
+      searchContainerClassname = centerInGrid;
       fakeColumns = true;
       break;
     default:
@@ -124,7 +139,6 @@ export const ActionBarSearchContainer = styled.div`
     max-width: unset;
     justify-content: space-between;
     width: 100%;
-    width: 100%;
   }
 `;
 
@@ -144,7 +158,8 @@ export const StyledInputContainer = styled.div`
   }
 
   @media ${theme.screenSize.mediumAndUp} {
-    width: 70%;
+    width: ${({ sidenav }) => (sidenav ? '70' : '100')}%;
+    padding-right: ${theme.size.medium};
   }
 
   ${(props) => {
@@ -195,8 +210,8 @@ export const ActionsBox = styled('div')`
   position: relative;
   top: 0;
   padding-right: ${theme.size.large};
-  padding-left: ${theme.size.default};
   justify-self: flex-end;
+  grid-column: -2/-1;
 
   @media ${theme.screenSize.upToLarge} {
     padding-right: ${theme.size.medium};

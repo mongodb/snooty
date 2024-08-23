@@ -46,7 +46,7 @@ export const SEARCH_SUGGESTIONS = [
   },
 ];
 
-const SearchInput = ({ className }) => {
+const SearchInput = ({ className, sidenav }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const searchBoxRef = useRef();
@@ -171,6 +171,7 @@ const SearchInput = ({ className }) => {
 
   return (
     <StyledInputContainer
+      sidenav={sidenav}
       className={cx(className)}
       mobileSearchActive={mobileSearchActive}
       ref={searchBoxRef}
@@ -221,4 +222,5 @@ export default SearchInput;
 
 SearchInput.propTypes = {
   className: PropTypes.string,
+  sidenav: PropTypes.bool,
 };
