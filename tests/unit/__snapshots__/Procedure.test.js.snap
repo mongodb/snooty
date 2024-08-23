@@ -786,11 +786,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 32px;
+  gap: 16px;
 }
 
 .emotion-2 h2,
-.emotion-2 h4 {
+.emotion-2 h4,
+.emotion-2 h6 {
   margin-top: unset;
 }
 
@@ -817,7 +818,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  border: 1px solid #C1C7C6;
+  border: 1.5px solid #C1C7C6;
   font-weight: 400;
   font-size: 16px;
   line-height: 28px;
@@ -830,7 +831,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 .emotion-8 section>*,
 .emotion-8 ol p,
 .emotion-8 ul p {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .emotion-9 {
