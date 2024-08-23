@@ -52,7 +52,7 @@ const gridStyling = css`
 // use strictly for :template: landing
 const landingGridStyling = css`
   display: grid;
-  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${theme.breakpoints.xxLarge}) minmax(
+  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${theme.breakpoints.xxLarge}px) minmax(
       ${theme.size.xlarge},
       1fr
     );
@@ -233,6 +233,7 @@ export const MobileStyledLink = styled.a`
   font-weight: 600;
   cursor: pointer;
   ${displayNone.onLargerThanTablet};
+  font-size: ${theme.fontSize.tiny};
 
   .dark-theme & {
     color: ${palette.gray.light2};

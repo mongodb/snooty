@@ -1,6 +1,6 @@
 import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { cx } from '@leafygreen-ui/emotion';
+import { css, cx } from '@leafygreen-ui/emotion';
 import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
 import { useBackdropClick } from '@leafygreen-ui/hooks';
@@ -8,6 +8,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { SearchInput as LGSearchInput } from '@leafygreen-ui/search-input';
 import { Link } from '@leafygreen-ui/typography';
 import useScreenSize from '../../hooks/useScreenSize';
+import { theme } from '../../theme/docsTheme';
 import debounce from '../../utils/debounce';
 import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
@@ -46,7 +47,7 @@ export const SEARCH_SUGGESTIONS = [
   },
 ];
 
-const SearchInput = ({ className, sidenav }) => {
+const SearchInput = ({ className }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const searchBoxRef = useRef();
@@ -171,7 +172,6 @@ const SearchInput = ({ className, sidenav }) => {
 
   return (
     <StyledInputContainer
-      sidenav={sidenav}
       className={cx(className)}
       mobileSearchActive={mobileSearchActive}
       ref={searchBoxRef}
@@ -190,7 +190,18 @@ const SearchInput = ({ className, sidenav }) => {
         }}
         ref={inputRef}
       />
-      {isMedium && mobileSearchActive && <Link onClick={() => setMobileSearchActive(false)}>Cancel</Link>}
+      {isMedium && mobileSearchActive && (
+        <Link
+          className={cx(
+            css`
+              font-size: ${theme.fontSize.small};
+            `
+          )}
+          onClick={() => setMobileSearchActive(false)}
+        >
+          Cancel
+        </Link>
+      )}
       <SuspenseHelper>
         <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
           <SearchMenu
@@ -222,5 +233,4 @@ export default SearchInput;
 
 SearchInput.propTypes = {
   className: PropTypes.string,
-  sidenav: PropTypes.bool,
 };
