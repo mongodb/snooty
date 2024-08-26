@@ -1,5 +1,5 @@
 import { assertTrailingSlash } from './assert-trailing-slash';
-import { DOTCOM_BASE_URL } from './base-url';
+import { joinUrlAndPath, DOTCOM_BASE_URL } from './base-url';
 import { generateVersionedPrefix } from './generate-versioned-prefix';
 import { localizePath } from './locale';
 
@@ -11,4 +11,8 @@ export const getUrl = (branchUrlSlug, project, siteBasePrefix, slug) => {
   }
   const prefixWithVersion = generateVersionedPrefix(branchUrlSlug, siteBasePrefix);
   return assertTrailingSlash(localizePath(`${prefixWithVersion}/${slug}`));
+};
+
+export const getCompleteUrl = (path) => {
+  return joinUrlAndPath(DOTCOM_BASE_URL, path);
 };
