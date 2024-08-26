@@ -20,8 +20,10 @@ export const borderCodeStyle = css`
   border-style: solid;
 `;
 
-/* Explanatory interface copied from LG for clarity */
 /**
+ * Styles copied and pared down from LG for clarity and for light mode flash
+ * https://github.com/mongodb/leafygreen-ui/blob/main/packages/code/src/globalStyles.tsx
+ * 
  * interface Base16Palette {
   0: string; // Background
   1: string; // Borders / non-text graphical accents
@@ -36,7 +38,7 @@ export const borderCodeStyle = css`
   10: string; // Keywords, Storage, Selector, Markup Italic, Diff Changed
  */
 
-export const variantColors = {
+const variantColors = {
   light: {
     0: palette.gray.light3,
     1: palette.gray.light2,

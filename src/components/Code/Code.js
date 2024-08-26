@@ -102,7 +102,6 @@ const Code = ({
           border-top-left-radius: ${captionBorderRadius};
           border-top-right-radius: ${captionBorderRadius};
           display: grid;
-
           border-color: ${palette.gray.light2};
 
           .dark-theme & {
@@ -127,14 +126,6 @@ const Code = ({
           .dark-theme & {
             background-color: ${palette.gray.dark2};
             border-color: ${palette.gray.dark2};
-          }
-
-          > button {
-            color: ${palette.gray.base};
-
-            .dark-theme & {
-              color: ${palette.gray.light1};
-            }
           }
         }
 
