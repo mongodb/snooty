@@ -119,6 +119,12 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-5 {
+    font-size: 16px;
+  }
+}
+
 .emotion-6 {
   position: relative;
   display: grid;
@@ -1005,6 +1011,12 @@ exports[`ActionBar Universal Search input  lazy loads the input search bar, init
 @media only screen and (max-width: 767px) {
   .emotion-5 {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-5 {
+    font-size: 16px;
   }
 }
 

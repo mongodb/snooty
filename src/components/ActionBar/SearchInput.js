@@ -195,6 +195,7 @@ const SearchInput = ({ className }) => {
           className={cx(
             css`
               font-size: ${theme.fontSize.small};
+              font-weight: 400;
             `
           )}
           onClick={() => setMobileSearchActive(false)}

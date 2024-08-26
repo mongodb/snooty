@@ -182,11 +182,15 @@ export const StyledInputContainer = styled.div`
   }}
 `;
 
-export const searchInputStyling = ({ mobileSearchActive }) => {
-  return css`
-    ${displayNone.onMedium};
-    ${mobileSearchActive &&
-    `
+export const searchInputStyling = ({ mobileSearchActive }) => css`
+  ${displayNone.onMedium};
+
+  @media ${theme.screenSize.upToMedium} {
+    font-size: ${theme.fontSize.default};
+  }
+
+  ${mobileSearchActive &&
+  `
     display: flex !important;
     width: calc(100% - ${theme.size.medium} - ${theme.size.medium});
     z-index: 40;
@@ -199,9 +203,7 @@ export const searchInputStyling = ({ mobileSearchActive }) => {
       margin-right: ${theme.size.medium};
     }
   `}
-  `;
-};
-
+`;
 export const ActionsBox = styled('div')`
   display: flex;
   align-items: center;
