@@ -19,6 +19,7 @@ const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const SearchMenu = lazy(() => import('./SearchMenu'));
 
 const PLACEHOLDER_TEXT = `Search MongoDB Docs or Ask MongoDB AI`;
+const PLACEHOLDER_TEXT_MOBILE = 'Search or AI';
 
 // taken from LG/lib - our library is out of date
 // https://github.com/mongodb/leafygreen-ui/blob/main/packages/lib/src/index.ts#L102
@@ -111,7 +112,7 @@ const SearchInput = ({ className }) => {
     }
   }, [mobileSearchActive]);
 
-  const { isMedium } = useScreenSize();
+  const { isMedium, isMobile } = useScreenSize();
 
   // reset search input size on screen resize
   useEffect(() => {
@@ -188,7 +189,7 @@ const SearchInput = ({ className }) => {
         aria-label="Search MongoDB Docs"
         className={searchInputStyling({ mobileSearchActive })}
         value={searchValue}
-        placeholder={PLACEHOLDER_TEXT}
+        placeholder={isMobile ? PLACEHOLDER_TEXT_MOBILE : PLACEHOLDER_TEXT}
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
