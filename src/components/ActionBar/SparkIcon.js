@@ -54,7 +54,7 @@ export const SparkleIcon = createGlyphComponent('Sparkle', (props) => (
   </svg>
 ));
 
-export const ShortcutIcon = createGlyphComponent('MacShortcut', (props) => (
+export const ShortcutIcon = createGlyphComponent('MacShortcut', () => (
   <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="0.5" y="0.5" width="18" height="17" rx="8.5" fill="#F9FBFA" />
     <rect x="0.5" y="0.5" width="18" height="17" rx="8.5" stroke="#E8EDEB" />

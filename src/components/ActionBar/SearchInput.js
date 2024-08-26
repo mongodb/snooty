@@ -99,11 +99,11 @@ const SearchInput = ({ className }) => {
   }, [keyPressHandler]);
 
   const handleSearchBoxKeyDown = (e) => {
-    const isFocusInMenu = menuRef.current?.contains && menuRef.current.contains(document.activeElement);
+    const isFocusOnMenu = menuRef.current?.contains && menuRef.current.contains(document.activeElement);
     const isFocusOnSearchBox = searchBoxRef.current?.contains(document.activeElement);
-    const isFocusInComponent = isFocusOnSearchBox || isFocusInMenu;
+    const isFocusOnComponent = isFocusOnSearchBox || isFocusOnMenu;
 
-    if (!isFocusInComponent) {
+    if (!isFocusOnComponent) {
       return;
     }
     switch (e.key) {
