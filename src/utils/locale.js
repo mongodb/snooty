@@ -5,6 +5,10 @@ import { normalizePath } from './normalize-path';
 import { removeLeadingSlash } from './remove-leading-slash';
 import { setLocalValue } from './browser-storage';
 
+// Prevents Smartling from translating content within HTML block
+// (https://help.smartling.com/hc/en-us/articles/13274689281307-Default-Translatable-Content-In-The-GDN)
+export const NOTRANSLATE_CLASS = 'notranslate';
+
 /**
  * Key used to access browser storage for user's preferred locale
  */

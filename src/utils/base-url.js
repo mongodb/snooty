@@ -59,4 +59,4 @@ const baseUrl = (url = DOTCOM_BASE_URL, options = {}) => {
   return assertTrailingSlash(needsProtocol ? baseUrl.toString() : baseUrl.toString().split('//')[1]);
 };
 
-module.exports = { baseUrl, DOTCOM_BASE_PREFIX, DOTCOM_BASE_URL };
+module.exports = { joinUrlAndPath, baseUrl, DOTCOM_BASE_PREFIX, DOTCOM_BASE_URL };

@@ -33,7 +33,7 @@ export const sideNavItemFontSize = css`
 `;
 
 export const titleStyle = css`
-  color: var(--color);
+  color: var(--sidenav-item-title);
   font-size: ${theme.fontSize.small};
   font-weight: bold;
   line-height: 20px;

@@ -8,6 +8,7 @@ import {
   ProductLanding,
   NotFound,
   Changelog,
+  FeatureNotAvailable,
 } from '../templates';
 
 const getTemplate = (templateName) => {
@@ -24,6 +25,9 @@ const getTemplate = (templateName) => {
       break;
     case 'errorpage':
       template = NotFound;
+      break;
+    case 'feature-not-avail':
+      template = FeatureNotAvailable;
       break;
     case 'instruqt':
       template = Instruqt;
