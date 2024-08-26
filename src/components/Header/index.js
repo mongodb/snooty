@@ -29,6 +29,7 @@ const Header = ({ eol, template }) => {
         <>
           {!eol && (
             <UnifiedNav
+              hideSearch="true"
               fullWidth="true"
               position="relative"
               property={{ name: unifiedNavProperty }}
