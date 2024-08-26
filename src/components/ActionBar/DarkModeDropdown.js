@@ -10,7 +10,12 @@ import { theme } from '../../theme/docsTheme';
 import IconComputer from '../icons/Computer';
 
 const iconStyling = css`
+  align-content: center;
   cursor: pointer;
+
+  > div {
+    position: relative;
+  }
 `;
 
 const menuStyling = css`
@@ -18,7 +23,7 @@ const menuStyling = css`
   margin-top: ${theme.size.small};
 `;
 
-const DarkModeDropdown = ({ ...props }) => {
+const DarkModeDropdown = () => {
   // not using dark mode from LG/provider here to account for case of 'system' dark theme
   const { setDarkModePref, darkModePref } = useContext(DarkModeContext);
   const { darkMode } = useDarkMode();

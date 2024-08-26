@@ -20,6 +20,9 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
   height: 28px;
   width: 28px;
   color: #5C6C75;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
   cursor: pointer;
 }
 
@@ -71,6 +74,10 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
 
 .emotion-0:focus-visible:before {
   background-color: #E8EDEB;
+}
+
+.emotion-0>div {
+  position: relative;
 }
 
 .emotion-1 {
@@ -145,6 +152,9 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   height: 28px;
   width: 28px;
   color: #5C6C75;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
   cursor: pointer;
 }
 
@@ -196,6 +206,10 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
 
 .emotion-0:focus-visible:before {
   background-color: #E8EDEB;
+}
+
+.emotion-0>div {
+  position: relative;
 }
 
 .emotion-1 {
@@ -756,6 +770,9 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
   height: 28px;
   width: 28px;
   color: #C1C7C6;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
   cursor: pointer;
 }
 
@@ -807,6 +824,10 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
 
 .emotion-0:focus-visible:before {
   background-color: #5C6C75;
+}
+
+.emotion-0>div {
+  position: relative;
 }
 
 .emotion-1 {
