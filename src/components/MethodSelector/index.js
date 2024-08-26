@@ -1,3 +1,3 @@
-import MethodSelector from "./MethodSelector"
+import MethodSelector from './MethodSelector';
 
 export { MethodSelector };

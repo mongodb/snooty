@@ -6,6 +6,7 @@ import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import useScreenSize from '../hooks/useScreenSize';
+import { usePageContext } from '../context/page-context';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -13,7 +14,6 @@ import { InstruqtContext } from './Instruqt/instruqt-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
-import { usePageContext } from '../context/page-context';
 
 const h2Styling = css`
   margin-top: 16px;

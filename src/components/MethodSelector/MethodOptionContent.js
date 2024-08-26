@@ -1,6 +1,6 @@
 import React from 'react';
-import ComponentFactory from '../ComponentFactory';
 import { css, cx } from '@leafygreen-ui/emotion';
+import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
 import MethodDescription from './MethodDescription';
 
@@ -14,7 +14,13 @@ const containerStyle = css`
   margin-top: ${theme.size.medium};
 `;
 
-const MethodOptionContent = ({ nodeData: { children, options: { id } }, selectedMethod }) => {
+const MethodOptionContent = ({
+  nodeData: {
+    children,
+    options: { id },
+  },
+  selectedMethod,
+}) => {
   const isSelectedOption = id === selectedMethod;
   const methodDescription = children.find(({ name }) => name === METHOD_DESCRIPTION_NAME);
 
@@ -23,7 +29,7 @@ const MethodOptionContent = ({ nodeData: { children, options: { id } }, selected
       {methodDescription && <MethodDescription nodeData={methodDescription} />}
       {children.map((node, index) => {
         if (node.name === METHOD_DESCRIPTION_NAME) return null;
-        return (<ComponentFactory key={index} sectionDepth={1} nodeData={node} />);
+        return <ComponentFactory key={index} sectionDepth={1} nodeData={node} />;
       })}
     </div>
   );
