@@ -4,6 +4,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import MethodOptionContent from './MethodOptionContent';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
+import { reportAnalytics } from '../../utils/report-analytics';
 
 const STORAGE_KEY = 'methodSelectorId';
 
@@ -68,7 +69,9 @@ const MethodSelector = ({ nodeData: { children } }) => {
         onChange={({ target: { defaultValue } }) => {
           setSelectedMethod(defaultValue);
           setLocalValue(STORAGE_KEY, defaultValue);
-          // TODO-4686: Report analytics on selection
+          reportAnalytics('MethodOptionSelected', {
+            methodOption: defaultValue,
+          });
         }}
       >
         {content.map(({ options: { title, id } }) => {
