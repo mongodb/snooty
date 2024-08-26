@@ -119,10 +119,7 @@ const StyledChatBotUiContainer = styled.div`
   min-height: 96px;
   align-items: center;
 
-  ${({ template }) =>
-    template in templateStylingMap &&
-    process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' &&
-    templateStylingMap[template]};
+  ${({ template }) => template in templateStylingMap && templateStylingMap[template]};
 `;
 
 const DocsChatbot = lazy(() =>
