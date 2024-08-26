@@ -23,8 +23,14 @@ exports[`admonitions render correctly 1`] = `
   background-color: #016BF8;
 }
 
-.emotion-0 p {
-  color: unset;
+.emotion-0 p,
+.emotion-0 li::marker {
+  color: var(--font-color-primary);
+}
+
+.emotion-0 p>a[class^='leafy'] {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-0>li:last-of-type,
@@ -33,6 +39,18 @@ exports[`admonitions render correctly 1`] = `
 .emotion-0>li:last-of-type>p,
 .emotion-0>p:last-of-type {
   margin-bottom: 0px;
+}
+
+.emotion-0 h2 {
+  color: #1254B7;
+}
+
+.emotion-0:after {
+  background-color: #016BF8;
+}
+
+.dark-theme .emotion-0 h2 {
+  color: #C3E7FE;
 }
 
 .emotion-1 {
