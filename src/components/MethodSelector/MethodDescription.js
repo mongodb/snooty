@@ -24,7 +24,7 @@ const MethodDescription = ({ nodeData: { children } }) => {
     <div className={cx(containerStyle)}>
       {children.map((child, index) => {
         if (child.name === 'tabs-selector') {
-          return <TabSelectors className={cx(tabSelectorStyle)} />;
+          return <TabSelectors key={index} className={cx(tabSelectorStyle)} />;
         }
 
         return <ComponentFactory key={index} nodeData={child} />;

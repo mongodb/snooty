@@ -10,6 +10,8 @@ const displayStyle = (isSelectedOption) => css`
   ${!isSelectedOption && 'display: none;'}
 `;
 
+export const getTestId = (optionId) => `method-option-content-${optionId}`;
+
 const containerStyle = css`
   margin-top: ${theme.size.medium};
 `;
@@ -25,7 +27,7 @@ const MethodOptionContent = ({
   const methodDescription = children.find(({ name }) => name === METHOD_DESCRIPTION_NAME);
 
   return (
-    <div className={cx(containerStyle, displayStyle(isSelectedOption))}>
+    <div className={cx(containerStyle, displayStyle(isSelectedOption))} data-testid={getTestId(id)}>
       {methodDescription && <MethodDescription nodeData={methodDescription} />}
       {children.map((node, index) => {
         if (node.name === METHOD_DESCRIPTION_NAME) return null;
