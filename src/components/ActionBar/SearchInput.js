@@ -198,7 +198,10 @@ const SearchInput = ({ className }) => {
               font-weight: 400;
             `
           )}
-          onClick={() => setMobileSearchActive(false)}
+          onClick={() => {
+            setSearchValue('');
+            setMobileSearchActive(false);
+          }}
         >
           Cancel
         </Link>
