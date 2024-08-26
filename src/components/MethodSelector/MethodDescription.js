@@ -13,12 +13,18 @@ const containerStyle = css`
   }
 `;
 
+const tabSelectorStyle = css`
+  @media ${theme.screenSize.smallAndUp} {
+    max-width: 400px;
+  }
+`;
+
 const MethodDescription = ({ nodeData: { children } }) => {
   return (
     <div className={cx(containerStyle)}>
       {children.map((child, index) => {
         if (child.name === 'tabs-selector') {
-          return <TabSelectors />;
+          return <TabSelectors className={cx(tabSelectorStyle)} />;
         }
 
         return <ComponentFactory key={index} nodeData={child} />;
