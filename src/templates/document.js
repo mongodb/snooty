@@ -31,6 +31,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
+  const hasMethodSelector = pageOptions?.has_method_selector;
 
   return (
     <DocumentContainer>
@@ -45,7 +46,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       </StyledMainColumn>
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
-        <TabSelectors />
+        {!hasMethodSelector && <TabSelectors />}
         <Contents displayOnDesktopOnly={true} />
       </StyledRightColumn>
     </DocumentContainer>
