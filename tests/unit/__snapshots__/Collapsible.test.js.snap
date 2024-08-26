@@ -114,6 +114,7 @@ exports[`collapsible component renders all the content in the options and childr
   left: 0;
   right: 0;
   border-radius: 100%;
+  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -123,6 +124,7 @@ exports[`collapsible component renders all the content in the options and childr
 .emotion-8:active:before,
 .emotion-8:hover:before,
 .emotion-8:focus:before {
+  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -140,7 +142,7 @@ exports[`collapsible component renders all the content in the options and childr
 
 .emotion-8:active:before,
 .emotion-8:hover:before {
-  background-color: rgba(61,79,88,0.1);
+  background-color: #E8EDEB;
 }
 
 .emotion-8:focus-visible {
@@ -149,7 +151,7 @@ exports[`collapsible component renders all the content in the options and childr
 }
 
 .emotion-8:focus-visible:before {
-  background-color: rgba(61,79,88,0.1);
+  background-color: #E8EDEB;
 }
 
 .emotion-9 {

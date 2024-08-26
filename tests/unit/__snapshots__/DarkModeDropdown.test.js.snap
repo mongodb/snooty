@@ -33,6 +33,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
   left: 0;
   right: 0;
   border-radius: 100%;
+  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -42,6 +43,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
 .emotion-0:active:before,
 .emotion-0:hover:before,
 .emotion-0:focus:before {
+  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -59,7 +61,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
 
 .emotion-0:active:before,
 .emotion-0:hover:before {
-  background-color: rgba(61,79,88,0.1);
+  background-color: #E8EDEB;
 }
 
 .emotion-0:focus-visible {
@@ -68,7 +70,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
 }
 
 .emotion-0:focus-visible:before {
-  background-color: rgba(61,79,88,0.1);
+  background-color: #E8EDEB;
 }
 
 .emotion-1 {
@@ -156,6 +158,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   left: 0;
   right: 0;
   border-radius: 100%;
+  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -165,6 +168,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
 .emotion-0:active:before,
 .emotion-0:hover:before,
 .emotion-0:focus:before {
+  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -182,7 +186,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
 
 .emotion-0:active:before,
 .emotion-0:hover:before {
-  background-color: rgba(61,79,88,0.1);
+  background-color: #E8EDEB;
 }
 
 .emotion-0:focus-visible {
@@ -191,7 +195,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
 }
 
 .emotion-0:focus-visible:before {
-  background-color: rgba(61,79,88,0.1);
+  background-color: #E8EDEB;
 }
 
 .emotion-1 {
@@ -765,6 +769,7 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
   left: 0;
   right: 0;
   border-radius: 100%;
+  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -774,6 +779,7 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
 .emotion-0:active:before,
 .emotion-0:hover:before,
 .emotion-0:focus:before {
+  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -791,7 +797,7 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
 
 .emotion-0:active:before,
 .emotion-0:hover:before {
-  background-color: rgba(232,237,235,0.1);
+  background-color: #3D4F58;
 }
 
 .emotion-0:focus-visible {
@@ -800,7 +806,7 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
 }
 
 .emotion-0:focus-visible:before {
-  background-color: rgba(232,237,235,0.1);
+  background-color: #5C6C75;
 }
 
 .emotion-1 {
