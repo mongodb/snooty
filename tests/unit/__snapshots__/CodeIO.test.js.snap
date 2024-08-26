@@ -73,14 +73,6 @@ exports[`CodeIO renders correctly 1`] = `
   border-color: #3D4F58;
 }
 
-.emotion-1 [data-testid='leafygreen-code-panel']>button {
-  color: #889397;
-}
-
-.dark-theme .emotion-1 [data-testid='leafygreen-code-panel']>button {
-  color: #C1C7C6;
-}
-
 .emotion-1 [class*="lg-highlight-hljs-"] .lg-highlight-keyword,
 .emotion-1 [class*="lg-highlight-hljs-"] .lg-highlight-keyword.lg-highlight-function,
 .emotion-1 [class*="lg-highlight-hljs-"] .lg-highlight-keyword.lg-highlight-class,

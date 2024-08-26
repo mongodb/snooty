@@ -18,10 +18,6 @@ exports[`renders correctly 1`] = `
   }
 }
 
-.dark-theme .emotion-0 {
-  color: #E8EDEB;
-}
-
 .emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -240,10 +236,6 @@ exports[`renders steps nested in include nodes 1`] = `
   .emotion-0 {
     padding-bottom: 24px;
   }
-}
-
-.dark-theme .emotion-0 {
-  color: #E8EDEB;
 }
 
 .emotion-2 {
@@ -799,10 +791,6 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin-top: 16px;
-}
-
-.dark-theme .emotion-0 {
-  color: #E8EDEB;
 }
 
 .emotion-2 {

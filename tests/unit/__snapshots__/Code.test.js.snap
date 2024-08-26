@@ -50,14 +50,6 @@ exports[`renders correctly 1`] = `
   border-color: #3D4F58;
 }
 
-.emotion-0 [data-testid='leafygreen-code-panel']>button {
-  color: #889397;
-}
-
-.dark-theme .emotion-0 [data-testid='leafygreen-code-panel']>button {
-  color: #C1C7C6;
-}
-
 .emotion-0 [class*="lg-highlight-hljs-"] .lg-highlight-keyword,
 .emotion-0 [class*="lg-highlight-hljs-"] .lg-highlight-keyword.lg-highlight-function,
 .emotion-0 [class*="lg-highlight-hljs-"] .lg-highlight-keyword.lg-highlight-class,
@@ -456,14 +448,6 @@ exports[`renders correctly when none is passed in as a language 1`] = `
 .dark-theme .emotion-0 [data-testid='leafygreen-code-panel'] {
   background-color: #3D4F58;
   border-color: #3D4F58;
-}
-
-.emotion-0 [data-testid='leafygreen-code-panel']>button {
-  color: #889397;
-}
-
-.dark-theme .emotion-0 [data-testid='leafygreen-code-panel']>button {
-  color: #C1C7C6;
 }
 
 .emotion-0 [class*="lg-highlight-hljs-"] .lg-highlight-keyword,
