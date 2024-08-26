@@ -113,6 +113,13 @@ const SearchInput = ({ className }) => {
 
   const { isMedium } = useScreenSize();
 
+  // reset search input size on screen resize
+  useEffect(() => {
+    if (!isMedium) {
+      setMobileSearchActive(false);
+    }
+  }, [isMedium]);
+
   const handleSearchBoxKeyDown = (e) => {
     const isFocusInMenu = menuRef.current?.contains && menuRef.current.contains(document.activeElement);
     const isFocusOnSearchBox = searchBoxRef.current?.contains(document.activeElement);
