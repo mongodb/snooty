@@ -33,6 +33,8 @@ const radioBoxStyle = css`
   div {
     // Reduce padding to allow boxes to fit better on tablet screen sizes
     padding: 14px 12px;
+    background-color: inherit;
+    color: inherit;
   }
 
   :not(:last-of-type) {

@@ -9,7 +9,7 @@ const containerStyle = css`
   margin: ${theme.size.medium} 0 ${theme.size.large};
 
   * {
-    font-size: ${theme.fontSize.small};
+    font-size: ${theme.fontSize.small} !important;
   }
 `;
 
