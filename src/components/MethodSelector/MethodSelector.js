@@ -41,9 +41,7 @@ const radioBoxStyle = css`
 `;
 
 const MethodSelector = ({ nodeData: { children } }) => {
-  // TODO-4686: Remove content once done developing.
-  const content = children.slice(0);
-  const [selectedMethod, setSelectedMethod] = useState(content[0]?.options?.id);
+  const [selectedMethod, setSelectedMethod] = useState(children[0]?.options?.id);
 
   // Load method ID saved from last session, if applicable.
   useEffect(() => {
@@ -61,8 +59,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
   return (
     <>
       <RadioBoxGroup
-        // TODO-4686: Try checking side nav collapsed state for layout considerations
-        className={cx(radioBoxGroupStyle(content.length))}
+        className={cx(radioBoxGroupStyle(children.length))}
         size={'full'}
         onChange={({ target: { defaultValue } }) => {
           setSelectedMethod(defaultValue);
@@ -72,7 +69,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
           });
         }}
       >
-        {content.map(({ options: { title, id } }) => {
+        {children.map(({ options: { title, id } }) => {
           return (
             <RadioBox key={id} className={cx(radioBoxStyle)} value={id} checked={selectedMethod === id}>
               {title}
