@@ -16,7 +16,7 @@ const StyledHeaderContainer = styled.header(
   `
 );
 
-const Header = ({ sidenav, eol, template, slug }) => {
+const Header = ({ eol, template }) => {
   const unifiedNavProperty = 'DOCS';
 
   const enabledLocales = AVAILABLE_LANGUAGES.map((language) => language.localeCode);
@@ -45,9 +45,7 @@ const Header = ({ sidenav, eol, template, slug }) => {
 };
 
 Header.propTypes = {
-  sidenav: PropTypes.bool,
   eol: PropTypes.bool.isRequired,
-  slug: PropTypes.string.isRequired,
   template: PropTypes.string.isRequired,
 };
 

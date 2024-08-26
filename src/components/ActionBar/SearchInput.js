@@ -205,7 +205,7 @@ const SearchInput = ({ className }) => {
       <SuspenseHelper>
         <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
           <SearchMenu
-            isOpen={searchValue.length && isOpen}
+            isOpen={!!searchValue.length && isOpen}
             searchBoxRef={searchBoxRef}
             searchValue={searchValue}
             ref={menuRef}

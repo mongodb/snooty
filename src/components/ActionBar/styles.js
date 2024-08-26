@@ -222,7 +222,7 @@ export const ActionsBox = styled('div')`
   }
 `;
 
-export const MobileStyledLink = styled.a`
+export const overlineStyling = css`
   display: flex;
   flex-direction: row;
   align-items: center;

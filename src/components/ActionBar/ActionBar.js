@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
+import { Overline } from '@leafygreen-ui/typography';
 import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { getNestedValue } from '../../utils/get-nested-value';
@@ -16,13 +17,7 @@ import {
 } from '../Widgets/FeedbackWidget';
 import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
-import {
-  ActionBarSearchContainer,
-  ActionsBox,
-  actionBarStyling,
-  getContainerStyling,
-  MobileStyledLink,
-} from './styles';
+import { ActionBarSearchContainer, ActionsBox, actionBarStyling, getContainerStyling, overlineStyling } from './styles';
 
 // Note: When working on this component further, please check with design on how it should look in the errorpage template (404) as well!
 const ActionBar = ({ template, slug, sidenav, ...props }) => {
@@ -44,12 +39,11 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
       {fakeColumns && <div></div>}
       <ActionBarSearchContainer className={cx(searchContainerClassname)}>
         {sidenav && (
-          <MobileStyledLink onClick={() => setHideMobile((state) => !state)}>
+          <Overline className={cx(overlineStyling)} onClick={() => setHideMobile((state) => !state)}>
             <Icon glyph={hideMobile ? 'ChevronDown' : 'ChevronUp'} />
             Docs Menu
-          </MobileStyledLink>
+          </Overline>
         )}
-        {/*  */}
         <SearchInput sidenav={sidenav} />
       </ActionBarSearchContainer>
       <ActionsBox>

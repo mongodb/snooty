@@ -113,7 +113,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
         project={project}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
-          {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} slug={slug} template={template} /> : <div />}
+          {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
           {sidenav && !isInPresentationMode ? (
             <Sidenav
               chapters={chapters}
