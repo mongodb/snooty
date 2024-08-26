@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { RadioBox, RadioBoxGroup } from '@leafygreen-ui/radio-box-group';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
-import MethodOptionContent from './MethodOptionContent';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { reportAnalytics } from '../../utils/report-analytics';
+import MethodOptionContent from './MethodOptionContent';
 
 const STORAGE_KEY = 'methodSelectorId';
 
-// NOTE-4686: Use grid if we want to have column widths responsive while keeping all widths the same
-// Use flex with calculated widths, 0 flex-grow, and flex-wrap if we want a consistent width that wraps
 const radioBoxGroupStyle = (count) => css`
   display: grid;
   grid-template-columns: repeat(${count > 3 ? 2 : 1}, minmax(0, 1fr));
@@ -62,7 +60,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
 
   return (
     <>
-      <RadioBoxGroup 
+      <RadioBoxGroup
         // TODO-4686: Try checking side nav collapsed state for layout considerations
         className={cx(radioBoxGroupStyle(content.length))}
         size={'full'}
@@ -76,15 +74,15 @@ const MethodSelector = ({ nodeData: { children } }) => {
       >
         {content.map(({ options: { title, id } }) => {
           return (
-            <RadioBox key={id} className={cx(radioBoxStyle)} value={id} checked={selectedMethod === id}>{title}</RadioBox>
+            <RadioBox key={id} className={cx(radioBoxStyle)} value={id} checked={selectedMethod === id}>
+              {title}
+            </RadioBox>
           );
         })}
       </RadioBoxGroup>
       {children.map((child, index) => {
         if (child.name !== 'method-option') return null;
-        return (
-          <MethodOptionContent key={index} nodeData={child} selectedMethod={selectedMethod} />
-        );
+        return <MethodOptionContent key={index} nodeData={child} selectedMethod={selectedMethod} />;
       })}
     </>
   );
