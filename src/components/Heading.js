@@ -13,6 +13,7 @@ import { InstruqtContext } from './Instruqt/instruqt-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
+import { usePageContext } from '../context/page-context';
 
 const h2Styling = css`
   margin-top: 16px;
@@ -50,7 +51,9 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
   const { hasDrawer, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
   const shouldShowLabButton = isPageTitle && hasDrawer;
-  const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors);
+  const { page } = usePageContext();
+  const hasMethodSelector = page?.options?.['has_method_selector'];
+  const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
 
   return (
     <>

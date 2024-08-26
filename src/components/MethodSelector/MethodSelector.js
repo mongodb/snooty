@@ -21,10 +21,9 @@ const radioBoxGroupStyle = (count) => css`
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   }
 
-  // Must try to auto-fit with minimum width at this breakpoint because of difficulties
-  // getting radio boxes to be the same width when side nav takes up half the screen
   @media ${theme.screenSize.largeAndUp} {
-    grid-template-columns: repeat(auto-fit, minmax(94px, 1fr));
+    // Setting min width to get options in one row on desktop size when side nav is closed
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
   }
 `;
 
