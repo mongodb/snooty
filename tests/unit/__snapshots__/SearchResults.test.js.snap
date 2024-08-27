@@ -2193,8 +2193,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-68"
             >
               <button
-                aria-controls="select-17-menu"
-                aria-describedby="select-17-description"
+                aria-controls="select-81-menu"
+                aria-describedby="select-81-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -2202,7 +2202,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 class="emotion-69"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-18"
+                id="select-82"
                 type="button"
                 value="Realm"
               >
@@ -2250,8 +2250,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="disabledSelectStyles emotion-68"
             >
               <button
-                aria-controls="select-19-menu"
-                aria-describedby="select-19-description"
+                aria-controls="select-83-menu"
+                aria-describedby="select-83-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -2260,7 +2260,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-20"
+                id="select-84"
                 type="button"
                 value="Latest"
               >
@@ -3734,8 +3734,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-42"
             >
               <button
-                aria-controls="select-21-menu"
-                aria-describedby="select-21-description"
+                aria-controls="select-109-menu"
+                aria-describedby="select-109-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -3743,7 +3743,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 class="emotion-43"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-22"
+                id="select-110"
                 type="button"
                 value=""
               >
@@ -3791,8 +3791,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="disabledSelectStyles emotion-42"
             >
               <button
-                aria-controls="select-23-menu"
-                aria-describedby="select-23-description"
+                aria-controls="select-111-menu"
+                aria-describedby="select-111-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -3801,7 +3801,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-24"
+                id="select-112"
                 type="button"
                 value=""
               >
@@ -5781,8 +5781,8 @@ exports[`Search Results Page renders loading images before returning no results 
               class="emotion-115"
             >
               <button
-                aria-controls="select-5-menu"
-                aria-describedby="select-5-description"
+                aria-controls="select-17-menu"
+                aria-describedby="select-17-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -5790,7 +5790,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 class="emotion-116"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-6"
+                id="select-18"
                 type="button"
                 value=""
               >
@@ -5838,8 +5838,8 @@ exports[`Search Results Page renders loading images before returning no results 
               class="disabledSelectStyles emotion-115"
             >
               <button
-                aria-controls="select-7-menu"
-                aria-describedby="select-7-description"
+                aria-controls="select-19-menu"
+                aria-describedby="select-19-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -5848,7 +5848,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-8"
+                id="select-20"
                 type="button"
                 value=""
               >
@@ -9072,8 +9072,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-63"
             >
               <button
-                aria-controls="select-13-menu"
-                aria-describedby="select-13-description"
+                aria-controls="select-57-menu"
+                aria-describedby="select-57-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -9081,7 +9081,7 @@ exports[`Search Results Page renders results from a given search term query para
                 class="emotion-64"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-14"
+                id="select-58"
                 type="button"
                 value=""
               >
@@ -9129,8 +9129,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="disabledSelectStyles emotion-63"
             >
               <button
-                aria-controls="select-15-menu"
-                aria-describedby="select-15-description"
+                aria-controls="select-59-menu"
+                aria-describedby="select-59-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -9139,7 +9139,7 @@ exports[`Search Results Page renders results from a given search term query para
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-16"
+                id="select-60"
                 type="button"
                 value=""
               >
