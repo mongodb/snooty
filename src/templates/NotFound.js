@@ -11,8 +11,8 @@ import { baseUrl } from '../utils/base-url';
 import Link from '../components/Link';
 
 const ErrorBox = styled.div`
-  padding: 0 0 0 ${theme.size.default};
   max-width: 455px;
+  flex: 1 0.5 auto;
 
   @media ${theme.screenSize.upToSmall} {
     padding: 0px ${theme.size.default};
@@ -34,10 +34,14 @@ const getSupportLinkDynamicStyle = (darkMode) => css`
 `;
 
 const ImageContainer = styled.div`
-  width: 455px;
+  max-width: 455px;
   display: flex;
-  justify-content: center;
-  align-content: center;
+  justify-content: flex-start;
+  flex: 0.5 1 auto;
+  > img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const NotFoundImage = () => {
@@ -105,23 +109,59 @@ const ErrorBoxContainer = () => {
 const NotFoundContainer = styled.div`
   align-items: center;
   display: flex;
-  flex-flow: row-reverse wrap;
-  justify-content: center;
+  flex-flow: no-wrap;
+  justify-content: space-between;
   margin-bottom: ${theme.size.xxlarge};
 
   @media ${theme.screenSize.upToSmall} {
     margin-top: -${theme.size.large};
   }
+
+  @media ${({ theme }) => theme.screenSize.upToMedium} {
+    grid-column: 2/-2;
+    flex-flow: column-reverse;
+  }
+
+  @media ${({ theme }) => theme.screenSize.upToLarge} {
+    grid-column: 3/-3;
+  }
+
+  @media ${({ theme }) => theme.screenSize.largeAndUp} {
+    grid-column: 4/-4;
+  }
+  @media ${({ theme }) => theme.screenSize.xLargeAndUp} {
+    grid-column: 5/-5;
+    justify-content: start;
+  }
+`;
+
+const Wrapper = styled('main')`
+  display: grid;
+  @media ${({ theme }) => theme.screenSize.mediumAndUp} {
+    grid-template-columns: ${({ theme }) => `${theme.size.xlarge} repeat(12, minmax(0, 1fr)) ${theme.size.xlarge};`};
+  }
+
+  @media ${({ theme }) => theme.screenSize.upToMedium} {
+    grid-template-columns: 48px repeat(12, 1fr) 48px;
+  }
+
+  @media ${({ theme }) => theme.screenSize.upToSmall} {
+    grid-template-columns: ${({ theme }) => theme.size.large} 1fr ${({ theme }) => theme.size.large};
+  }
+
+  @media ${({ theme }) => theme.screenSize.upToXSmall} {
+    grid-template-columns: ${({ theme }) => theme.size.medium} 1fr ${({ theme }) => theme.size.medium};
+  }
 `;
 
 const NotFound = () => {
   return (
-    <main>
+    <Wrapper>
       <NotFoundContainer>
-        <NotFoundImage />
         <ErrorBoxContainer />
+        <NotFoundImage />
       </NotFoundContainer>
-    </main>
+    </Wrapper>
   );
 };
 

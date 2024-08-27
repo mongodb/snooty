@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
-import { SidenavMobileMenuDropdown } from '../Sidenav';
 import SiteBanner from '../Banner/SiteBanner';
 import { theme } from '../../theme/docsTheme';
 import { HeaderContext } from './header-context';
@@ -45,7 +43,7 @@ const StyledStagingWarning = styled.p`
   }
 `;
 
-const Header = ({ sidenav }) => {
+const Header = () => {
   const { bannerContent } = useContext(HeaderContext);
 
   return (
@@ -55,14 +53,11 @@ const Header = ({ sidenav }) => {
         <StyledUnifiedNavPlaceholder>
           <StyledStagingWarning>This is a staging build.</StyledStagingWarning>
         </StyledUnifiedNavPlaceholder>
-        {sidenav && <SidenavMobileMenuDropdown />}
       </StyledHeaderContainer>
     </>
   );
 };
 
-Header.propTypes = {
-  sidenav: PropTypes.bool,
-};
+Header.propTypes = {};
 
 export default Header;

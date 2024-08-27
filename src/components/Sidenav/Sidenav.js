@@ -105,6 +105,7 @@ const SidenavContainer = styled.div(
 
     @media ${theme.screenSize.upToLarge} {
       ${getTopAndHeight(topMedium, template)};
+      z-index: ${theme.zIndexes.actionBar - 1};
     }
 
     @media ${theme.screenSize.upToSmall} {

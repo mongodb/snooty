@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from 'react';
 import { SearchResultsMenu, SearchResult } from '@leafygreen-ui/search-input';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch, useChatbotContext } from 'mongodb-chatbot-ui';
@@ -13,7 +13,6 @@ import { SEARCH_SUGGESTIONS } from './SearchInput';
 const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, isOpen, selectedOption }, ref) {
   const { handleSubmit, conversation } = useChatbotContext();
   const menuRef = useRef();
-  const [chatbotAvailable, setChatbotAvailable] = useState(false);
 
   const handleSearchResultClick = useCallback(
     async (isChatbotRes) => {
@@ -47,42 +46,43 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
   useEffect(() => {
     // on init, set a conversation id
     // workaround the chatbot bug of not having createConversation be async
-    if (!isOpen || chatbotAvailable) {
+    if (!isOpen || !!conversation.conversationId) {
       return;
     }
     const initConvo = async () => {
       await conversation.createConversation();
-      setChatbotAvailable(!conversation.error);
     };
-    if (!conversation.conversationId) initConvo();
+    initConvo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   return (
     <>
       <SearchResultsMenu open={isOpen} refEl={searchBoxRef} ref={menuRef}>
-        {SEARCH_SUGGESTIONS.slice(chatbotAvailable ? 0 : 1, 2).map((suggestion, i) => {
-          const { copy } = suggestion;
-          const isChatbot = i === 1;
-          return (
-            <SearchResult
-              className={cx(suggestionStyling({ copy }))}
-              key={`result-${i}`}
-              id={`result-${i}`}
-              onClick={async () => handleSearchResultClick(i === 1)}
-              highlighted={selectedOption === i}
-            >
-              {!isChatbot && <>{searchValue}</>}
-              {isChatbot && (
-                <>
-                  {suggestion.icon}
-                  {searchValue}
-                  {suggestion.shortcutIcon}
-                </>
-              )}
-            </SearchResult>
-          );
-        })}
+        {SEARCH_SUGGESTIONS.slice(0, !conversation.conversationId ? 1 : SEARCH_SUGGESTIONS.length).map(
+          (suggestion, i) => {
+            const { copy } = suggestion;
+            const isChatbot = i === 1;
+            return (
+              <SearchResult
+                className={cx(suggestionStyling({ copy }))}
+                key={`result-${i}`}
+                id={`result-${i}`}
+                onClick={async () => handleSearchResultClick(i === 1)}
+                highlighted={selectedOption === i}
+              >
+                {!isChatbot && <>{searchValue}</>}
+                {isChatbot && (
+                  <>
+                    {suggestion.icon}
+                    {searchValue}
+                    {suggestion.shortcutIcon}
+                  </>
+                )}
+              </SearchResult>
+            );
+          }
+        )}
       </SearchResultsMenu>
       <ModalView
         inputBottomText={

@@ -1,19 +1,25 @@
 import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { cx } from '@leafygreen-ui/emotion';
+import { css, cx } from '@leafygreen-ui/emotion';
+import IconButton from '@leafygreen-ui/icon-button';
+import Icon from '@leafygreen-ui/icon';
 import { useBackdropClick } from '@leafygreen-ui/hooks';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { SearchInput as LGSearchInput } from '@leafygreen-ui/search-input';
+import { Link } from '@leafygreen-ui/typography';
+import useScreenSize from '../../hooks/useScreenSize';
+import { theme } from '../../theme/docsTheme';
 import debounce from '../../utils/debounce';
 import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { SuspenseHelper } from '../SuspenseHelper';
-import { inputStyling } from './styles';
+import { searchIconStyling, searchInputStyling, StyledInputContainer } from './styles';
 import { ShortcutIcon, SparkleIcon } from './SparkIcon';
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const SearchMenu = lazy(() => import('./SearchMenu'));
 
 const PLACEHOLDER_TEXT = `Search MongoDB Docs or Ask MongoDB AI`;
+const PLACEHOLDER_TEXT_MOBILE = 'Search or AI';
 
 // taken from LG/lib - our library is out of date
 // https://github.com/mongodb/leafygreen-ui/blob/main/packages/lib/src/index.ts#L102
@@ -51,6 +57,7 @@ const SearchInput = ({ className }) => {
   const metadata = useSnootyMetadata();
   const { darkMode } = useDarkMode();
   const [selectedOption, setSelectedOption] = useState(0);
+  const [mobileSearchActive, setMobileSearchActive] = useState(false);
 
   useBackdropClick(
     () => {
@@ -98,12 +105,28 @@ const SearchInput = ({ className }) => {
     };
   }, [keyPressHandler]);
 
-  const handleSearchBoxKeyDown = (e) => {
-    const isFocusOnMenu = menuRef.current?.contains && menuRef.current.contains(document.activeElement);
-    const isFocusOnSearchBox = searchBoxRef.current?.contains(document.activeElement);
-    const isFocusOnComponent = isFocusOnSearchBox || isFocusOnMenu;
+  // focus on mobile open
+  useEffect(() => {
+    if (mobileSearchActive) {
+      inputRef.current?.focus();
+    }
+  }, [mobileSearchActive]);
 
-    if (!isFocusOnComponent) {
+  const { isMedium, isMobile } = useScreenSize();
+
+  // reset search input size on screen resize
+  useEffect(() => {
+    if (!isMedium) {
+      setMobileSearchActive(false);
+    }
+  }, [isMedium]);
+
+  const handleSearchBoxKeyDown = (e) => {
+    const isFocusInMenu = menuRef.current?.contains && menuRef.current.contains(document.activeElement);
+    const isFocusOnSearchBox = searchBoxRef.current?.contains(document.activeElement);
+    const isFocusInComponent = isFocusOnSearchBox || isFocusInMenu;
+
+    if (!isFocusInComponent) {
       return;
     }
     switch (e.key) {
@@ -156,11 +179,17 @@ const SearchInput = ({ className }) => {
       : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
-    <div className={cx(inputStyling, className)} ref={searchBoxRef} onKeyDown={handleSearchBoxKeyDown}>
+    <StyledInputContainer
+      className={cx(className)}
+      mobileSearchActive={mobileSearchActive}
+      ref={searchBoxRef}
+      onKeyDown={handleSearchBoxKeyDown}
+    >
       <LGSearchInput
         aria-label="Search MongoDB Docs"
+        className={searchInputStyling({ mobileSearchActive })}
         value={searchValue}
-        placeholder={PLACEHOLDER_TEXT}
+        placeholder={isMobile ? PLACEHOLDER_TEXT_MOBILE : PLACEHOLDER_TEXT}
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
@@ -169,10 +198,26 @@ const SearchInput = ({ className }) => {
         }}
         ref={inputRef}
       />
+      {isMedium && mobileSearchActive && (
+        <Link
+          className={cx(
+            css`
+              font-size: ${theme.fontSize.small};
+              font-weight: 400;
+            `
+          )}
+          onClick={() => {
+            setSearchValue('');
+            setMobileSearchActive(false);
+          }}
+        >
+          Cancel
+        </Link>
+      )}
       <SuspenseHelper>
         <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
           <SearchMenu
-            isOpen={searchValue.length && isOpen}
+            isOpen={!!searchValue.length && isOpen}
             searchBoxRef={searchBoxRef}
             searchValue={searchValue}
             ref={menuRef}
@@ -180,7 +225,19 @@ const SearchInput = ({ className }) => {
           ></SearchMenu>
         </Chatbot>
       </SuspenseHelper>
-    </div>
+      {!mobileSearchActive && (
+        <IconButton
+          aria-label="Search MongoDB Docs"
+          className={searchIconStyling}
+          onClick={() => {
+            setIsOpen(false);
+            setMobileSearchActive((state) => !state);
+          }}
+        >
+          <Icon glyph={'MagnifyingGlass'} />
+        </IconButton>
+      )}
+    </StyledInputContainer>
   );
 };
 

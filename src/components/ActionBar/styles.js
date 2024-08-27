@@ -1,7 +1,9 @@
+import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { CONTENT_MAX_WIDTH } from '../../templates/product-landing';
+import { displayNone } from '../../utils/display-none';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
@@ -43,19 +45,19 @@ const gridStyling = css`
     );
 
   @media ${theme.screenSize.upToLarge} {
-    grid-template-columns: 48px 1fr 48px;
-  }
-  @media ${theme.screenSize.upToMedium} {
-    grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+    grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
   }
 `;
 
 // use strictly for :template: landing
 const landingGridStyling = css`
   display: grid;
-  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, 1440px) minmax(${theme.size.xlarge}, 1fr);
-  @media ${theme.screenSize.upToMedium} {
-    grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${theme.breakpoints.xxLarge}px) minmax(
+      ${theme.size.xlarge},
+      1fr
+    );
+  @media ${theme.screenSize.upToLarge} {
+    grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
   }
 `;
 
@@ -66,20 +68,30 @@ const flexStyling = css`
   flex-wrap: nowrap;
   padding-left: ${theme.size.xlarge};
   @media ${theme.screenSize.upToLarge} {
-    padding-left: 48px;
+    padding-left: ${theme.size.medium};
   }
 `;
 
 const middleAlignment = css`
-  padding-left: 60px;
-  max-width: 770px;
-  margin: auto;
+  display: grid;
+  grid-template-columns: ${theme.size.xlarge} repeat(12, minmax(0, 1fr)) ${theme.size.xlarge};
 `;
 
-const errorPageAlignment = css`
-  flex: 0 1 870px !important;
-  margin: auto;
-  max-width: unset;
+const centerInGrid = css`
+  grid-column: 4/-4;
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-column: 2/-2;
+  }
+  @media ${theme.screenSize.upToLarge} {
+    grid-column: 3/-3;
+  }
+  @media ${theme.screenSize.largeAndUp} {
+    grid-column: 4/-4;
+  }
+  @media ${theme.screenSize.xLargeAndUp} {
+    grid-column: 5/-5;
+  }
 `;
 
 export const getContainerStyling = (template) => {
@@ -100,11 +112,13 @@ export const getContainerStyling = (template) => {
       fakeColumns = true;
       break;
     case 'blank':
-      searchContainerClassname = middleAlignment;
+      containerClassname = middleAlignment;
+      searchContainerClassname = centerInGrid;
       fakeColumns = true;
       break;
     case 'errorpage':
-      searchContainerClassname = errorPageAlignment;
+      containerClassname = middleAlignment;
+      searchContainerClassname = centerInGrid;
       fakeColumns = true;
       break;
     default:
@@ -115,34 +129,125 @@ export const getContainerStyling = (template) => {
   return { containerClassname, fakeColumns, searchContainerClassname };
 };
 
-export const actionsBoxStyling = css`
-  position: relative;
-  top: 0;
-  right: ${theme.size.large};
-  justify-self: flex-end;
+export const ActionBarSearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 80%;
+  background: inherit;
 
   @media ${theme.screenSize.upToLarge} {
-    right: ${theme.size.medium};
-    padding-left: 3rem;
-  }
-
-  @media ${theme.screenSize.upToSmall} {
-    padding-left: 2rem;
+    max-width: unset;
+    justify-content: space-between;
+    width: 100%;
   }
 `;
 
-export const inputStyling = css`
+export const StyledInputContainer = styled.div`
   width: 100%;
   max-width: 610px;
+  background: inherit;
 
   div[role='searchbox'] {
     background-color: var(--search-input-background-color);
+    width: 100%;
   }
 
   --search-input-background-color: ${palette.white};
   .dark-theme & {
     --search-input-background-color: ${palette.gray.dark4};
   }
+
+  @media ${theme.screenSize.mediumAndUp} {
+    width: ${({ sidenav }) => (sidenav ? '70' : '100')}%;
+    padding-right: ${theme.size.medium};
+  }
+
+  ${(props) => {
+    return (
+      props.mobileSearchActive &&
+      `
+      display: flex !important;
+      position: absolute;
+      width: calc(100% - ${theme.size.medium} - ${theme.size.medium});
+      z-index: 40;
+      max-width: unset;
+      left: ${theme.size.medium};
+
+      > form {
+        width: 100%;
+        margin-right: ${theme.size.medium};
+      }
+    `
+    );
+  }}
+`;
+
+export const searchInputStyling = ({ mobileSearchActive }) => css`
+  ${displayNone.onMedium};
+
+  @media ${theme.screenSize.upToMedium} {
+    font-size: ${theme.fontSize.default};
+  }
+
+  ${mobileSearchActive &&
+  `
+    display: flex !important;
+    width: calc(100% - ${theme.size.medium} - ${theme.size.medium});
+    z-index: 40;
+    max-width: unset;
+    background: var(--background-color-primary);
+    align-items: center;
+
+    > form {
+      width: 100%;
+      margin-right: ${theme.size.medium};
+    }
+  `}
+`;
+export const ActionsBox = styled('div')`
+  display: flex;
+  align-items: center;
+  column-gap: ${theme.size.default};
+  position: relative;
+  top: 0;
+  padding-right: ${theme.size.large};
+  justify-self: flex-end;
+  grid-column: -2/-1;
+
+  @media ${theme.screenSize.upToLarge} {
+    padding-right: ${theme.size.medium};
+  }
+
+  @media ${theme.screenSize.upToMedium} {
+    padding-left: ${theme.size.small};
+    column-gap: ${theme.size.small};
+  }
+`;
+
+export const overlineStyling = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: ${palette.gray.dark1};
+  text-transform: uppercase;
+  text-wrap: nowrap;
+  font-weight: 600;
+  cursor: pointer;
+  ${displayNone.onLargerThanTablet};
+  font-size: ${theme.fontSize.tiny};
+  padding-right: ${theme.size.large};
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
+
+  > svg {
+    margin-right: ${theme.size.small};
+  }
+`;
+
+export const searchIconStyling = css`
+  ${displayNone.onLargerThanMedium};
+  float: right;
 `;
 
 // using content before/after to prevent event bubbling up from lg/search-input/search-result
