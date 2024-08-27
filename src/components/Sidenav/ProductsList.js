@@ -47,7 +47,7 @@ const HeadingTitle = styled('span')`
 
 const Products = styled(`ul`)`
   display: none;
-  background-color: var(--background-color);
+  background-color: var(--sidenav-bg-color);
   list-style-type: none;
   padding: 0;
   li > a {
@@ -61,9 +61,16 @@ const ProductsListContainer = styled('div')`
 `;
 
 const ProductsListHeading = styled('div')`
+  --all-products-color-open: ${palette.gray.dark3};
+  --all-products-color-closed: ${palette.gray.dark1};
+  .dark-theme & {
+    --all-products-color-open: ${palette.gray.light2};
+    --all-products-color-closed: ${palette.gray.light1};
+  }
+
   align-items: center;
-  background-color: var(--background-color);
-  color: var(--color);
+  background-color: var(--sidenav-bg-color);
+  color: ${({ open }) => (open ? 'var(--all-products-color-open)' : 'var(--all-products-color-closed)')};
   cursor: pointer;
   display: flex;
   padding: ${theme.size.default} ${theme.size.medium} 12px;
@@ -72,11 +79,18 @@ const ProductsListHeading = styled('div')`
   z-index: 1;
 
   :hover {
-    color: var(--hover-color);
+    color: var(--all-products-color-open);
   }
 `;
 
 const ProductLink = styled(Link)`
+  --color: ${palette.black};
+  --on-hover: ${palette.gray.dark2};
+  .dark-theme & {
+    --color: ${palette.gray.light1};
+    --on-hover: ${palette.gray.light2};
+  }
+
   color: var(--color);
   display: inline-block;
   font-size: ${theme.fontSize.small};
@@ -85,7 +99,7 @@ const ProductLink = styled(Link)`
   width: 100%;
 
   :hover {
-    color: var(--hover-color);
+    color: var(--on-hover);
     font-weight: bold;
     text-decoration: none;
   }
@@ -107,16 +121,6 @@ const iconStyle = ({ isOpen }) => LeafyCSS`
   transition: transform ${chevronRotationDuration};
 `;
 
-const getProductListHeadingDynamicStyles = (darkMode, isOpen) => {
-  const darkThemeColor = isOpen ? palette.gray.light2 : palette.gray.light1;
-  const lightThemeColor = isOpen ? palette.gray.dark3 : palette.gray.dark1;
-  return {
-    '--color': darkMode ? darkThemeColor : lightThemeColor,
-    '--background-color': darkMode ? palette.gray.dark4 : palette.gray.light3,
-    '--hover-color': darkMode ? palette.gray.light2 : palette.gray.dark3,
-  };
-};
-
 const ProductsList = ({ darkMode }) => {
   const products = useAllProducts();
   const [isOpen, setOpen] = useState(false);
@@ -125,10 +129,7 @@ const ProductsList = ({ darkMode }) => {
     <>
       <Global styles={transitionClasses} />
       <ProductsListContainer>
-        <ProductsListHeading
-          style={getProductListHeadingDynamicStyles(darkMode, isOpen)}
-          onClick={() => setOpen(!isOpen)}
-        >
+        <ProductsListHeading open={isOpen} onClick={() => setOpen(!isOpen)}>
           <Icon className={cx(iconStyle({ isOpen }))} glyph="ChevronUp" />
           <HeadingTitle>View all products</HeadingTitle>
         </ProductsListHeading>
@@ -142,15 +143,7 @@ const ProductsList = ({ darkMode }) => {
           {products.map(({ title, url }, index) => {
             return (
               <li key={index}>
-                <ProductLink
-                  style={{
-                    '--color': darkMode ? palette.gray.light1 : palette.black,
-                    '--hover-color': darkMode ? palette.gray.light2 : palette.gray.dark2,
-                  }}
-                  to={url}
-                >
-                  {title}
-                </ProductLink>
+                <ProductLink to={url}>{title}</ProductLink>
               </li>
             );
           })}
