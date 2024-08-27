@@ -6,6 +6,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import ConditionalWrapper from '../ConditionalWrapper';
@@ -17,6 +18,12 @@ import { getSuitableIcon } from '../../utils/get-suitable-icon';
 const cardBaseStyles = css`
   display: flex;
   height: 100%;
+  background-color: var(--background-color-primary);
+  border-color: ${palette.gray.light2};
+
+  .dark-theme & {
+    border-color: ${palette.gray.dark2};
+  }
 `;
 
 const landingStyles = css`
@@ -88,6 +95,7 @@ const compactIconStyle = `
 const headingStyling = ({ isCompact, isExtraCompact, isLargeIconStyle }) => css`
   font-weight: 500;
   letter-spacing: normal;
+  color: var(--font-color-primary);
   margin: ${isCompact || isExtraCompact ? `0 0 ${theme.size.small}` : `${theme.size.default} 0 ${theme.size.small} 0`};
   ${isLargeIconStyle && 'margin-bottom: 36px;'}
 `;
