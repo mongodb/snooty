@@ -6,7 +6,7 @@ import TabSelectors from '../Tabs/TabSelectors';
 
 const containerStyle = css`
   font-size: ${theme.fontSize.small};
-  margin: ${theme.size.medium} 0 ${theme.size.large};
+  margin-bottom: ${theme.size.large};
 
   * {
     font-size: ${theme.fontSize.small} !important;

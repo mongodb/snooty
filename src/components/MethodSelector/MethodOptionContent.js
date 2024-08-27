@@ -13,7 +13,7 @@ const displayStyle = (isSelectedOption) => css`
 export const getTestId = (optionId) => `method-option-content-${optionId}`;
 
 const containerStyle = css`
-  margin-top: ${theme.size.medium};
+  margin-top: ${theme.size.default};
 `;
 
 const MethodOptionContent = ({

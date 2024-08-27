@@ -93,7 +93,7 @@ const hrStyle = (count, isSidenavCollapsed) => css`
 
   @media ${theme.screenSize.mediumAndUp} {
     border: 1.5px solid ${palette.green.dark1};
-    margin: ${theme.size.medium} 0;
+    margin: ${theme.size.medium} 0 ${theme.size.default};
     display: block;
   }
 
