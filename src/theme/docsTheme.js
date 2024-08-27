@@ -75,7 +75,6 @@ const header = {
   docsMobileMenuHeight: '52px',
   // used for scrolling elements into place, considering sticky header
   navbarScrollOffset: '175px',
-  actionBarHeight: '115px',
   actionBarMobileHeight: '60px',
 };
 

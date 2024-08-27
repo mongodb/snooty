@@ -14,24 +14,12 @@ const getTopValue = (eol, heights) => {
   return `${topValue}px`;
 };
 
-const useStickyTopValues = (eol, includeActionBar = false) => {
-  const topLarge = useMemo(
-    () => getTopValue(eol, [theme.header.navbarHeight, ...(includeActionBar ? [theme.header.actionBarHeight] : [])]),
-    [eol, includeActionBar]
-  );
+const useStickyTopValues = (eol) => {
+  const topLarge = useMemo(() => getTopValue(eol, [theme.header.navbarHeight]), [eol]);
 
-  const actionBarHeight = useMemo(
-    () => (includeActionBar ? [theme.header.actionBarMobileHeight] : []),
-    [includeActionBar]
-  );
-  const topMedium = useMemo(
-    () => getTopValue(eol, [theme.header.navbarMobileHeight, ...actionBarHeight]),
-    [actionBarHeight, eol]
-  );
-  const topSmall = useMemo(
-    () => getTopValue(eol, [theme.header.navbarMobileHeight, theme.header.docsMobileMenuHeight, ...actionBarHeight]),
-    [actionBarHeight, eol]
-  );
+  const topMedium = useMemo(() => getTopValue(eol, [theme.header.actionBarMobileHeight]), [eol]);
+
+  const topSmall = useMemo(() => getTopValue(eol, [theme.header.actionBarMobileHeight]), [eol]);
 
   return { topLarge, topMedium, topSmall };
 };

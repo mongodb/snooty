@@ -18,6 +18,7 @@ import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../../utils/locale';
+import useViewport from '../../hooks/useViewport';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -84,32 +85,29 @@ const translatedFontFamilyStyles = css`
 `;
 
 // use eol status to determine side nav styling
-const getTopAndHeight = (topValue, template) => css`
-  ${template === 'landing'
-    ? `
-    top: 0px;
-    height: calc(100vh);`
-    : `
-    top: ${topValue};
+const getTopAndHeight = (topValue, scrollY) => {
+  return css`
+    top: calc(${topValue} + max(${theme.header.navbarMobileHeight} - ${scrollY}px, 0px));
     height: calc(100vh - ${topValue});
-  `}
-`;
+  `;
+};
 
 // Keep the side nav container sticky to allow LG's side nav to push content seamlessly
 const SidenavContainer = styled.div(
-  ({ topLarge, topMedium, topSmall, template }) => css`
+  ({ topMedium, topSmall, scrollY }) => css`
     grid-area: sidenav;
     position: sticky;
     z-index: ${theme.zIndexes.sidenav};
-    ${getTopAndHeight(topLarge, template)};
+    top: 0px;
+    height: calc(100vh - max(min(${theme.header.navbarHeight} - ${scrollY}px, ${theme.header.navbarHeight}), 0px));
 
     @media ${theme.screenSize.upToLarge} {
-      ${getTopAndHeight(topMedium, template)};
+      ${getTopAndHeight(topMedium, scrollY)};
       z-index: ${theme.zIndexes.actionBar - 1};
     }
 
     @media ${theme.screenSize.upToSmall} {
-      ${getTopAndHeight(topSmall, template)};
+      ${getTopAndHeight(topSmall, scrollY)};
     }
 
     nav {
@@ -153,7 +151,7 @@ export const Border = styled('hr')`
 // Create artificial "padding" at the top of the SideNav to allow products list to transition without being seen
 // by the gap in the SideNav's original padding.
 const ArtificialPadding = styled('div')`
-  height: 16px;
+  height: 15px;
 `;
 
 // Children of this div should appear 1 z-index higher than the ProductsList component.
@@ -245,6 +243,9 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
     return chapters[chapterName]?.['chapter_number'];
   }, [chapters, guides, isGuidesTemplate, slug]);
 
+  // listen for scrolls for mobile and tablet menu
+  const viewport = useViewport(false);
+
   return (
     <>
       <Global
@@ -252,7 +253,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
           ${disableScroll(!hideMobile)} ${translatedFontFamilyStyles}
         `}
       />
-      <SidenavContainer {...topValues} template={template}>
+      <SidenavContainer {...topValues} template={template} scrollY={viewport.scrollY}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
