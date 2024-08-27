@@ -70,7 +70,7 @@ const DocsHomeButton = () => {
   );
   return (
     <div className={cx(containerStyle)}>
-      {isTabletOrMobile || viewport.scrollY > parseInt(theme.header.navbarHeight, 10) ? homeNav : sideNavHome}
+      {!isTabletOrMobile && viewport.scrollY > parseInt(theme.header.navbarHeight, 10) ? homeNav : sideNavHome}
     </div>
   );
 };
