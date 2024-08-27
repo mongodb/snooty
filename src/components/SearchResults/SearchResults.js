@@ -23,7 +23,6 @@ import SearchResult from './SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import MobileFilters from './MobileFilters';
 import { Facets, FacetTags } from './Facets';
-import 'react-loading-skeleton/dist/skeleton.css';
 import { SEARCH_THEME_STYLES } from './styles/searchThemeStyles';
 
 const FILTER_COLUMN_WIDTH = '173px';
