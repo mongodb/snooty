@@ -1525,6 +1525,14 @@ exports[`Search Results Page considers a given search filter query param and dis
   }
 }
 
+.emotion-67 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-67 label {
+  color: #E8EDEB;
+}
+
 .emotion-68 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1540,14 +1548,71 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-top: 3px;
 }
 
-@media only screen and (max-width: 1024px) {
-  .emotion-68 label,
-  .emotion-68 p,
-  .emotion-68 button,
-  .emotion-68 div,
-  .emotion-68 span {
-    font-size: 13px;
-  }
+.emotion-68>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-68>button::-webkit-input-placeholder {
+  color: #889397;
+}
+
+.emotion-68>button::-moz-placeholder {
+  color: #889397;
+}
+
+.emotion-68>button:-ms-input-placeholder {
+  color: #889397;
+}
+
+.emotion-68>button::placeholder {
+  color: #889397;
+}
+
+.emotion-68>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-68>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-68>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-68>button::-webkit-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-68>button::-moz-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-68>button:-ms-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-68>button::placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-68>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.dark-theme .emotion-68>button:hover,
+.dark-theme .emotion-68>button:active,
+.dark-theme .emotion-68>button:focus {
+  background-color: #112733;
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-68>button:focus-visible {
+  background-color: #112733;
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
 }
 
 .emotion-69 {
@@ -2128,8 +2193,8 @@ exports[`Search Results Page considers a given search filter query param and dis
               class="emotion-68"
             >
               <button
-                aria-controls="select-81-menu"
-                aria-describedby="select-81-description"
+                aria-controls="select-17-menu"
+                aria-describedby="select-17-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -2137,7 +2202,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 class="emotion-69"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-82"
+                id="select-18"
                 type="button"
                 value="Realm"
               >
@@ -2179,14 +2244,14 @@ exports[`Search Results Page considers a given search filter query param and dis
           class="emotion-63 emotion-64"
         >
           <div
-            class="emotion-65 emotion-66 emotion-67"
+            class="emotion-65 emotion-66 disabledLabelStyle emotion-67"
           >
             <div
-              class="emotion-68"
+              class="disabledSelectStyles emotion-68"
             >
               <button
-                aria-controls="select-83-menu"
-                aria-describedby="select-83-description"
+                aria-controls="select-19-menu"
+                aria-describedby="select-19-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -2195,7 +2260,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-84"
+                id="select-20"
                 type="button"
                 value="Latest"
               >
@@ -2870,6 +2935,14 @@ exports[`Search Results Page does not return results for a given search term wit
   }
 }
 
+.emotion-41 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-41 label {
+  color: #E8EDEB;
+}
+
 .emotion-42 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2885,14 +2958,71 @@ exports[`Search Results Page does not return results for a given search term wit
   margin-top: 3px;
 }
 
-@media only screen and (max-width: 1024px) {
-  .emotion-42 label,
-  .emotion-42 p,
-  .emotion-42 button,
-  .emotion-42 div,
-  .emotion-42 span {
-    font-size: 13px;
-  }
+.emotion-42>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-42>button::-webkit-input-placeholder {
+  color: #889397;
+}
+
+.emotion-42>button::-moz-placeholder {
+  color: #889397;
+}
+
+.emotion-42>button:-ms-input-placeholder {
+  color: #889397;
+}
+
+.emotion-42>button::placeholder {
+  color: #889397;
+}
+
+.emotion-42>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-42>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-42>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-42>button::-webkit-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-42>button::-moz-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-42>button:-ms-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-42>button::placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-42>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.dark-theme .emotion-42>button:hover,
+.dark-theme .emotion-42>button:active,
+.dark-theme .emotion-42>button:focus {
+  background-color: #112733;
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-42>button:focus-visible {
+  background-color: #112733;
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
 }
 
 .emotion-43 {
@@ -3604,8 +3734,8 @@ exports[`Search Results Page does not return results for a given search term wit
               class="emotion-42"
             >
               <button
-                aria-controls="select-109-menu"
-                aria-describedby="select-109-description"
+                aria-controls="select-21-menu"
+                aria-describedby="select-21-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -3613,7 +3743,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 class="emotion-43"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-110"
+                id="select-22"
                 type="button"
                 value=""
               >
@@ -3655,14 +3785,14 @@ exports[`Search Results Page does not return results for a given search term wit
           class="emotion-37 emotion-38"
         >
           <div
-            class="emotion-39 emotion-40 emotion-41"
+            class="emotion-39 emotion-40 disabledLabelStyle emotion-41"
           >
             <div
-              class="emotion-42"
+              class="disabledSelectStyles emotion-42"
             >
               <button
-                aria-controls="select-111-menu"
-                aria-describedby="select-111-description"
+                aria-controls="select-23-menu"
+                aria-describedby="select-23-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -3671,7 +3801,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-112"
+                id="select-24"
                 type="button"
                 value=""
               >
@@ -4871,6 +5001,14 @@ exports[`Search Results Page renders loading images before returning no results 
   }
 }
 
+.emotion-114 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-114 label {
+  color: #E8EDEB;
+}
+
 .emotion-115 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -4886,14 +5024,71 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-top: 3px;
 }
 
-@media only screen and (max-width: 1024px) {
-  .emotion-115 label,
-  .emotion-115 p,
-  .emotion-115 button,
-  .emotion-115 div,
-  .emotion-115 span {
-    font-size: 13px;
-  }
+.emotion-115>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-115>button::-webkit-input-placeholder {
+  color: #889397;
+}
+
+.emotion-115>button::-moz-placeholder {
+  color: #889397;
+}
+
+.emotion-115>button:-ms-input-placeholder {
+  color: #889397;
+}
+
+.emotion-115>button::placeholder {
+  color: #889397;
+}
+
+.emotion-115>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-115>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-115>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-115>button::-webkit-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-115>button::-moz-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-115>button:-ms-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-115>button::placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-115>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.dark-theme .emotion-115>button:hover,
+.dark-theme .emotion-115>button:active,
+.dark-theme .emotion-115>button:focus {
+  background-color: #112733;
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-115>button:focus-visible {
+  background-color: #112733;
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
 }
 
 .emotion-116 {
@@ -5586,8 +5781,8 @@ exports[`Search Results Page renders loading images before returning no results 
               class="emotion-115"
             >
               <button
-                aria-controls="select-17-menu"
-                aria-describedby="select-17-description"
+                aria-controls="select-5-menu"
+                aria-describedby="select-5-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -5595,7 +5790,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 class="emotion-116"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-18"
+                id="select-6"
                 type="button"
                 value=""
               >
@@ -5637,14 +5832,14 @@ exports[`Search Results Page renders loading images before returning no results 
           class="emotion-110 emotion-111"
         >
           <div
-            class="emotion-112 emotion-113 emotion-114"
+            class="emotion-112 emotion-113 disabledLabelStyle emotion-114"
           >
             <div
-              class="emotion-115"
+              class="disabledSelectStyles emotion-115"
             >
               <button
-                aria-controls="select-19-menu"
-                aria-describedby="select-19-description"
+                aria-controls="select-7-menu"
+                aria-describedby="select-7-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -5653,7 +5848,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-20"
+                id="select-8"
                 type="button"
                 value=""
               >
@@ -6421,6 +6616,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
   }
 }
 
+.emotion-114 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-114 label {
+  color: #E8EDEB;
+}
+
 .emotion-115 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -6436,14 +6639,71 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin-top: 3px;
 }
 
-@media only screen and (max-width: 1024px) {
-  .emotion-115 label,
-  .emotion-115 p,
-  .emotion-115 button,
-  .emotion-115 div,
-  .emotion-115 span {
-    font-size: 13px;
-  }
+.emotion-115>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-115>button::-webkit-input-placeholder {
+  color: #889397;
+}
+
+.emotion-115>button::-moz-placeholder {
+  color: #889397;
+}
+
+.emotion-115>button:-ms-input-placeholder {
+  color: #889397;
+}
+
+.emotion-115>button::placeholder {
+  color: #889397;
+}
+
+.emotion-115>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-115>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-115>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-115>button::-webkit-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-115>button::-moz-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-115>button:-ms-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-115>button::placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-115>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.dark-theme .emotion-115>button:hover,
+.dark-theme .emotion-115>button:active,
+.dark-theme .emotion-115>button:focus {
+  background-color: #112733;
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-115>button:focus-visible {
+  background-color: #112733;
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
 }
 
 .emotion-116 {
@@ -7187,10 +7447,10 @@ exports[`Search Results Page renders loading images before returning nonempty re
           class="emotion-110 emotion-111"
         >
           <div
-            class="emotion-112 emotion-113 emotion-114"
+            class="emotion-112 emotion-113 disabledLabelStyle emotion-114"
           >
             <div
-              class="emotion-115"
+              class="disabledSelectStyles emotion-115"
             >
               <button
                 aria-controls="select-3-menu"
@@ -8172,6 +8432,14 @@ exports[`Search Results Page renders results from a given search term query para
   }
 }
 
+.emotion-62 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-62 label {
+  color: #E8EDEB;
+}
+
 .emotion-63 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -8187,14 +8455,71 @@ exports[`Search Results Page renders results from a given search term query para
   margin-top: 3px;
 }
 
-@media only screen and (max-width: 1024px) {
-  .emotion-63 label,
-  .emotion-63 p,
-  .emotion-63 button,
-  .emotion-63 div,
-  .emotion-63 span {
-    font-size: 13px;
-  }
+.emotion-63>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-63>button::-webkit-input-placeholder {
+  color: #889397;
+}
+
+.emotion-63>button::-moz-placeholder {
+  color: #889397;
+}
+
+.emotion-63>button:-ms-input-placeholder {
+  color: #889397;
+}
+
+.emotion-63>button::placeholder {
+  color: #889397;
+}
+
+.emotion-63>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-63>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-63>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-63>button::-webkit-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-63>button::-moz-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-63>button:-ms-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-63>button::placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-63>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.dark-theme .emotion-63>button:hover,
+.dark-theme .emotion-63>button:active,
+.dark-theme .emotion-63>button:focus {
+  background-color: #112733;
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-63>button:focus-visible {
+  background-color: #112733;
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
 }
 
 .emotion-64 {
@@ -8747,8 +9072,8 @@ exports[`Search Results Page renders results from a given search term query para
               class="emotion-63"
             >
               <button
-                aria-controls="select-57-menu"
-                aria-describedby="select-57-description"
+                aria-controls="select-13-menu"
+                aria-describedby="select-13-description"
                 aria-disabled="false"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -8756,7 +9081,7 @@ exports[`Search Results Page renders results from a given search term query para
                 class="emotion-64"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
-                id="select-58"
+                id="select-14"
                 type="button"
                 value=""
               >
@@ -8798,14 +9123,14 @@ exports[`Search Results Page renders results from a given search term query para
           class="emotion-58 emotion-59"
         >
           <div
-            class="emotion-60 emotion-61 emotion-62"
+            class="emotion-60 emotion-61 disabledLabelStyle emotion-62"
           >
             <div
-              class="emotion-63"
+              class="disabledSelectStyles emotion-63"
             >
               <button
-                aria-controls="select-59-menu"
-                aria-describedby="select-59-description"
+                aria-controls="select-15-menu"
+                aria-describedby="select-15-description"
                 aria-disabled="true"
                 aria-expanded="false"
                 aria-invalid="false"
@@ -8814,7 +9139,7 @@ exports[`Search Results Page renders results from a given search term query para
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
-                id="select-60"
+                id="select-16"
                 type="button"
                 value=""
               >

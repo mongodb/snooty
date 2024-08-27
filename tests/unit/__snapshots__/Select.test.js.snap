@@ -16,6 +16,14 @@ exports[`Select renders select correctly 1`] = `
   }
 }
 
+.emotion-0 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-0 label {
+  color: #E8EDEB;
+}
+
 .emotion-1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -31,14 +39,71 @@ exports[`Select renders select correctly 1`] = `
   margin-top: 3px;
 }
 
-@media only screen and (max-width: 1024px) {
-  .emotion-1 label,
-  .emotion-1 p,
-  .emotion-1 button,
-  .emotion-1 div,
-  .emotion-1 span {
-    font-size: 13px;
-  }
+.emotion-1>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-1>button::-webkit-input-placeholder {
+  color: #889397;
+}
+
+.emotion-1>button::-moz-placeholder {
+  color: #889397;
+}
+
+.emotion-1>button:-ms-input-placeholder {
+  color: #889397;
+}
+
+.emotion-1>button::placeholder {
+  color: #889397;
+}
+
+.emotion-1>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-1>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-1>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-1>button::-webkit-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-1>button::-moz-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-1>button:-ms-input-placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-1>button::placeholder {
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-1>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.dark-theme .emotion-1>button:hover,
+.dark-theme .emotion-1>button:active,
+.dark-theme .emotion-1>button:focus {
+  background-color: #112733;
+  color: #E8EDEB;
+}
+
+.dark-theme .emotion-1>button:focus-visible {
+  background-color: #112733;
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
 }
 
 .emotion-2 {
