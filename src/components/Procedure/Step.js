@@ -7,21 +7,26 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 
 const circleIndividualStyles = {
-  connected: (darkMode) => css`
+  connected: css`
     position: relative;
     font-weight: bold;
-    background-color: ${darkMode ? palette.green.dark2 : palette.green.light3};
-    color: ${darkMode ? palette.gray.light2 : palette.green.dark2};
+    background-color: ${palette.green.light3};
+    color: ${palette.green.dark2};
     height: 34px;
     width: 34px;
+
+    .dark-theme & {
+      background-color: ${palette.green.dark2};
+      color: ${palette.gray.light2};
+    }
   `,
-  normal: (darkMode) => css`
+  normal: css`
     border: 1px solid ${palette.gray.light1};
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
     background-color: inherit;
-    color: ${darkMode ? palette.white : palette.black};
+    color: var(--opposite-color);
     height: 27px;
     width: 27px;
   `,
@@ -35,7 +40,7 @@ const Circle = styled('div')`
 `;
 
 const landingStepStyles = {
-  connected: (darkMode) => css`
+  connected: css`
     position: relative;
     gap: 33px;
 
@@ -47,14 +52,18 @@ const landingStepStyles = {
 
     :not(:last-child):before {
       content: '';
-      border-left: 2px dashed ${darkMode ? palette.gray.dark1 : palette.gray.light2};
+      border-left: 2px dashed ${palette.gray.light2};
       bottom: 0;
       left: 16px;
       position: absolute;
       top: 0;
+
+      .dark-theme & {
+        border-left-color: ${palette.gray.dark1};
+      }
     }
   `,
-  normal: (darkMode) => css`
+  normal: css`
     gap: ${theme.size.large};
     h2,
     h4 {
@@ -98,11 +107,11 @@ const contentStyles = {
   `,
 };
 
-const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', darkMode, template, ...rest }) => {
+const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', template, ...rest }) => {
   return (
-    <StyledStep css={landingStepStyles[stepStyle](darkMode)}>
+    <StyledStep css={landingStepStyles[stepStyle]}>
       <StepBlock>
-        <Circle css={circleIndividualStyles[stepStyle](darkMode)}>{stepNumber}</Circle>
+        <Circle css={circleIndividualStyles[stepStyle]}>{stepNumber}</Circle>
       </StepBlock>
       <Content css={contentStyles[stepStyle]}>
         {children.map((child, i) => (

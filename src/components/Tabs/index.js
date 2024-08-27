@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
+import { palette } from '@leafygreen-ui/palette';
 import { CodeProvider } from '../Code/code-context';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
@@ -66,6 +67,16 @@ const getTabsStyling = ({ isHidden, isProductLanding }) => css`
   ${defaultTabsStyling};
   ${isHidden && hiddenTabsStyling};
   ${isProductLanding && landingTabsStyling};
+
+  [aria-label*='Tabs to describe usage of'] {
+    /* Using a background allows the "border" to appear underneath the individual tab color */
+    background: linear-gradient(0deg, ${palette.gray.light2} 1px, rgb(255 255 255 / 0%) 1px);
+
+    .dark-theme & {
+      /* Using a background allows the "border" to appear underneath the individual tab color */
+      background: linear-gradient(0deg, ${palette.gray.dark2} 1px, rgb(255 255 255 / 0%) 1px);
+    }
+  }
 `;
 
 const tabContentStyling = css`
