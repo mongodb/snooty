@@ -15,6 +15,7 @@ const getTopValue = (eol, heights) => {
 };
 
 const useStickyTopValues = (eol) => {
+  // TODO: clean these up into single value and update dependencies
   const topLarge = useMemo(() => getTopValue(eol, [theme.header.actionBarMobileHeight]), [eol]);
 
   const topMedium = useMemo(() => getTopValue(eol, [theme.header.actionBarMobileHeight]), [eol]);

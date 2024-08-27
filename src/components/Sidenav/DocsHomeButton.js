@@ -41,7 +41,7 @@ const logoTextStyling = LeafyCSS`
 
 const DocsHomeButton = () => {
   const viewport = useViewport(false);
-  const { isMobile } = useScreenSize();
+  const { isTabletOrMobile } = useScreenSize();
   const { darkMode } = useDarkMode();
 
   const sideNavHome = useMemo(
@@ -70,7 +70,7 @@ const DocsHomeButton = () => {
   );
   return (
     <div className={cx(containerStyle)}>
-      {!isMobile && viewport.scrollY > parseInt(theme.header.navbarHeight, 10) ? homeNav : sideNavHome}
+      {isTabletOrMobile || viewport.scrollY > parseInt(theme.header.navbarHeight, 10) ? homeNav : sideNavHome}
     </div>
   );
 };
