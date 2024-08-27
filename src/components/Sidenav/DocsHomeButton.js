@@ -15,12 +15,18 @@ import { titleStyle, logoLinkStyling } from './styles/sideNavItem';
 
 const homeLinkStyle = LeafyCSS`
   span {
-    color: var(--tab-color-primary);
-    font-weight: 400;
+    color: ${palette.gray.dark2};
+    font-weight: 600;
     display: flex;
     gap: 6px;
     svg {
       height: 17px;
+    }
+  }
+
+  .dark-theme & {
+    span {
+      color: ${palette.gray.light2};
     }
   }
 `;
