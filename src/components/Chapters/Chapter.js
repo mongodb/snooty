@@ -15,6 +15,7 @@ import ChapterNumberLabel from './ChapterNumberLabel';
 const IMAGE_SIZE = 200;
 
 const cardStyling = css`
+  border: 1px solid;
   background-color: ${palette.white};
   border-color: ${palette.gray.light3};
   .dark-theme & {

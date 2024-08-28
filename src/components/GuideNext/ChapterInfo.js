@@ -48,7 +48,7 @@ const StyledChapterNumberLabel = styled(ChapterNumberLabel)`
 const ChapterTitle = styled('div')`
   color: ${palette.black};
   .dark-theme & {
-    color: ${palette.white};
+    color: ${palette.gray.light2};
   }
   font-weight: bold;
 `;
