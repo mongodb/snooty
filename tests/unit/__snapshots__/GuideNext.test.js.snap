@@ -292,7 +292,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .dark-theme .emotion-17 {
-  color: #FFFFFF;
+  color: #E8EDEB;
 }
 
 .emotion-19 {
@@ -780,7 +780,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .dark-theme .emotion-17 {
-  color: #FFFFFF;
+  color: #E8EDEB;
 }
 
 .emotion-19 {
@@ -1258,7 +1258,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .dark-theme .emotion-17 {
-  color: #FFFFFF;
+  color: #E8EDEB;
 }
 
 .emotion-19 {
