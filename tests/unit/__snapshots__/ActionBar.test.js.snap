@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ActionBar Universal Search input  lazy loads the input search bar, initially loads dark mode menu and feedback button 1`] = `
+exports[`ActionBar Universal Search input  loads the input search bar, dark mode menu and feedback button 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .emotion-0 {

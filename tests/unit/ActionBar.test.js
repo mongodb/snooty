@@ -47,7 +47,7 @@ describe('ActionBar', () => {
   afterAll(() => consoleSpy.mockRestore());
 
   describe('Universal Search input ', () => {
-    it('lazy loads the input search bar, initially loads dark mode menu and feedback button', async () => {
+    it('loads the input search bar, dark mode menu and feedback button', async () => {
       let wrapper;
 
       await act(async () => {
