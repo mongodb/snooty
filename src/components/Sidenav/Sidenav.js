@@ -84,30 +84,29 @@ const translatedFontFamilyStyles = css`
   }
 `;
 
-// use eol status to determine side nav styling
-const getTopAndHeight = (topValue, scrollY) => {
+const getTopAndHeight = (topValue) => {
   return css`
-    top: calc(${topValue} + max(${theme.header.navbarMobileHeight} - ${scrollY}px, 0px));
+    top: calc(${topValue} + max(${theme.header.navbarMobileHeight} - var(--scroll-y), 0px));
     height: calc(100vh - ${topValue});
   `;
 };
 
 // Keep the side nav container sticky to allow LG's side nav to push content seamlessly
 const SidenavContainer = styled.div(
-  ({ topMedium, topSmall, scrollY }) => css`
+  ({ topMedium, topSmall }) => css`
     grid-area: sidenav;
     position: sticky;
     z-index: ${theme.zIndexes.sidenav};
     top: 0px;
-    height: calc(100vh - max(min(${theme.header.navbarHeight} - ${scrollY}px, ${theme.header.navbarHeight}), 0px));
+    height: calc(100vh - max(min(${theme.header.navbarHeight} - var(--scroll-y), ${theme.header.navbarHeight}), 0px));
 
     @media ${theme.screenSize.upToLarge} {
-      ${getTopAndHeight(topMedium, scrollY)};
+      ${getTopAndHeight(topMedium)};
       z-index: ${theme.zIndexes.actionBar - 1};
     }
 
     @media ${theme.screenSize.upToSmall} {
-      ${getTopAndHeight(topSmall, scrollY)};
+      ${getTopAndHeight(topSmall)};
     }
 
     nav {
@@ -253,7 +252,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
           ${disableScroll(!hideMobile)} ${translatedFontFamilyStyles}
         `}
       />
-      <SidenavContainer {...topValues} template={template} scrollY={viewport.scrollY}>
+      <SidenavContainer {...topValues} template={template} style={{ '--scroll-y': `${viewport.scrollY}px` }}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"

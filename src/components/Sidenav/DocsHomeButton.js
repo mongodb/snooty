@@ -68,7 +68,7 @@ const DocsHomeButton = () => {
   const homeNav = useMemo(
     () => (
       <a className={cx(logoLinkStyling)} href="https://mongodb.com/docs">
-        <MongoDBLogoMark height={34} color={darkMode ? 'white' : 'black'}></MongoDBLogoMark>
+        <MongoDBLogoMark height={34} color={darkMode ? 'white' : 'black'} />
         <Body className={cx(logoTextStyling)}>MongoDB Docs</Body>
       </a>
     ),
