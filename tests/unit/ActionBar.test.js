@@ -10,7 +10,6 @@ jest.spyOn(snootyMetadata, 'default').mockImplementation(() => ({
   branch: 'master',
   project: '',
 }));
-jest.useFakeTimers();
 
 const conversationSpy = jest.fn();
 // eslint-disable-next-line no-unused-vars
