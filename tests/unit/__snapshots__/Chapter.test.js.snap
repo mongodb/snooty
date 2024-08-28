@@ -17,16 +17,14 @@ exports[`renders correctly 1`] = `
   box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
   background-color: #FFFFFF;
   color: #1C2D38;
-  --background-color: #FFFFFF;
-  --border-color: #F9FBFA;
-  background-color: var(--background-color);
-  border: 1px solid var(--border-color);
+  background-color: #FFFFFF;
+  border-color: #F9FBFA;
   padding: 32px 24px;
 }
 
 .dark-theme .emotion-0 {
-  --background-color: #001E2B;
-  --border-color: #3D4F58;
+  background-color: #001E2B;
+  border-color: #3D4F58;
 }
 
 @media not all and (max-width: 767px) {
@@ -115,7 +113,7 @@ exports[`renders correctly 1`] = `
 }
 
 .dark-theme .emotion-7 {
-  color: white;
+  color: #FFFFFF;
 }
 
 .emotion-9 {

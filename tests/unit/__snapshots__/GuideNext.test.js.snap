@@ -249,8 +249,8 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .dark-theme .emotion-11 {
-  background-color: #001E2B;
-  border-color: #3D4F58;
+  background-color: #112733;
+  border-color: #1C2D38;
 }
 
 .emotion-12 {
@@ -396,7 +396,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 }
 
 .dark-theme .emotion-27 {
-  color: #FFFFFF;
+  color: #E8EDEB;
 }
 
 .emotion-27:hover,
@@ -737,8 +737,8 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .dark-theme .emotion-11 {
-  background-color: #001E2B;
-  border-color: #3D4F58;
+  background-color: #112733;
+  border-color: #1C2D38;
 }
 
 .emotion-12 {
@@ -884,7 +884,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
 }
 
 .dark-theme .emotion-27 {
-  color: #FFFFFF;
+  color: #E8EDEB;
 }
 
 .emotion-27:hover,
@@ -1215,8 +1215,8 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .dark-theme .emotion-11 {
-  background-color: #001E2B;
-  border-color: #3D4F58;
+  background-color: #112733;
+  border-color: #1C2D38;
 }
 
 .emotion-12 {
@@ -1362,7 +1362,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 }
 
 .dark-theme .emotion-27 {
-  color: #FFFFFF;
+  color: #E8EDEB;
 }
 
 .emotion-27:hover,
