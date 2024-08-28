@@ -881,7 +881,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   left: 0;
   right: 0;
   border-radius: 100%;
-  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -891,7 +890,6 @@ exports[`Search Results Page considers a given search filter query param and dis
 .emotion-10:active:before,
 .emotion-10:hover:before,
 .emotion-10:focus:before {
-  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -909,7 +907,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-10:active:before,
 .emotion-10:hover:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-10:focus-visible {
@@ -918,7 +916,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-10:focus-visible:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-11 {
@@ -1366,7 +1364,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   left: 0;
   right: 0;
   border-radius: 100%;
-  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -1376,7 +1373,6 @@ exports[`Search Results Page considers a given search filter query param and dis
 .emotion-50:active:before,
 .emotion-50:hover:before,
 .emotion-50:focus:before {
-  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -1394,7 +1390,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-50:active:before,
 .emotion-50:hover:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-50:focus-visible {
@@ -1403,7 +1399,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-50:focus-visible:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-50:active,
@@ -2529,7 +2525,6 @@ exports[`Search Results Page does not return results for a given search term wit
   left: 0;
   right: 0;
   border-radius: 100%;
-  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -2539,7 +2534,6 @@ exports[`Search Results Page does not return results for a given search term wit
 .emotion-10:active:before,
 .emotion-10:hover:before,
 .emotion-10:focus:before {
-  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -2557,7 +2551,7 @@ exports[`Search Results Page does not return results for a given search term wit
 
 .emotion-10:active:before,
 .emotion-10:hover:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-10:focus-visible {
@@ -2566,7 +2560,7 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-10:focus-visible:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-11 {
@@ -4439,7 +4433,6 @@ exports[`Search Results Page renders loading images before returning no results 
   left: 0;
   right: 0;
   border-radius: 100%;
-  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -4449,7 +4442,6 @@ exports[`Search Results Page renders loading images before returning no results 
 .emotion-10:active:before,
 .emotion-10:hover:before,
 .emotion-10:focus:before {
-  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -4467,7 +4459,7 @@ exports[`Search Results Page renders loading images before returning no results 
 
 .emotion-10:active:before,
 .emotion-10:hover:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-10:focus-visible {
@@ -4476,7 +4468,7 @@ exports[`Search Results Page renders loading images before returning no results 
 }
 
 .emotion-10:focus-visible:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-11 {
@@ -5991,7 +5983,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
   left: 0;
   right: 0;
   border-radius: 100%;
-  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -6001,7 +5992,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
 .emotion-10:active:before,
 .emotion-10:hover:before,
 .emotion-10:focus:before {
-  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -6019,7 +6009,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
 
 .emotion-10:active:before,
 .emotion-10:hover:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-10:focus-visible {
@@ -6028,7 +6018,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
 }
 
 .emotion-10:focus-visible:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-11 {
@@ -7543,7 +7533,6 @@ exports[`Search Results Page renders results from a given search term query para
   left: 0;
   right: 0;
   border-radius: 100%;
-  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -7553,7 +7542,6 @@ exports[`Search Results Page renders results from a given search term query para
 .emotion-10:active:before,
 .emotion-10:hover:before,
 .emotion-10:focus:before {
-  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -7571,7 +7559,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-10:active:before,
 .emotion-10:hover:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-10:focus-visible {
@@ -7580,7 +7568,7 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-10:focus-visible:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-11 {
@@ -8023,7 +8011,6 @@ exports[`Search Results Page renders results from a given search term query para
   left: 0;
   right: 0;
   border-radius: 100%;
-  opacity: 0;
   -webkit-transform: scale(0.8);
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
@@ -8033,7 +8020,6 @@ exports[`Search Results Page renders results from a given search term query para
 .emotion-45:active:before,
 .emotion-45:hover:before,
 .emotion-45:focus:before {
-  opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
@@ -8051,7 +8037,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-45:active:before,
 .emotion-45:hover:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-45:focus-visible {
@@ -8060,7 +8046,7 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-45:focus-visible:before {
-  background-color: #E8EDEB;
+  background-color: rgba(61,79,88,0.1);
 }
 
 .emotion-45:active,

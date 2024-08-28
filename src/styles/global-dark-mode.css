@@ -2,6 +2,7 @@ body {
   --font-color-primary: var(--black);
   --font-color-light: var(--gray-base);
   --heading-color-primary: var(--green-dark2);
+  --opposite-color: var(--black);
 
   --link-color-primary: var(--blue-base);
   --link-font-weight: 500;
@@ -37,6 +38,7 @@ body {
   --font-color-primary: var(--gray-light2);
   --font-color-light: var(--gray-light2);
   --heading-color-primary: var(--gray-light2);
+  --opposite-color: var(--white);
 
   --link-color-primary: var(--blue-light1);
   --link-font-weight: 700;

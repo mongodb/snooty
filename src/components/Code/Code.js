@@ -12,7 +12,7 @@ import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
-import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
+import { baseCodeStyle, borderCodeStyle, lgStyles } from './styles/codeStyle';
 import { CodeContext } from './code-context';
 
 const sourceCodeStyle = css`
@@ -37,7 +37,6 @@ const getDriverImage = (driver, driverIconMap) => {
 
 const Code = ({
   nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
-  darkMode: darkModeProp,
 }) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
@@ -103,7 +102,34 @@ const Code = ({
           border-top-left-radius: ${captionBorderRadius};
           border-top-right-radius: ${captionBorderRadius};
           display: grid;
+          border-color: ${palette.gray.light2};
+
+          .dark-theme & {
+            border-color: ${palette.gray.dark2};
+          }
         }
+
+        pre {
+          background-color: ${palette.gray.light3};
+          color: ${palette.black};
+
+          .dark-theme & {
+            background-color: ${palette.black};
+            color: ${palette.gray.light3};
+          }
+        }
+
+        [data-testid='leafygreen-code-panel'] {
+          background-color: ${palette.white};
+          border-color: ${palette.gray.light2};
+
+          .dark-theme & {
+            background-color: ${palette.gray.dark2};
+            border-color: ${palette.gray.dark2};
+          }
+        }
+
+        ${lgStyles}
       `}
     >
       {captionSpecified && (
@@ -118,7 +144,6 @@ const Code = ({
         highlightLines={emphasizeLines}
         language={language}
         languageOptions={languageOptions}
-        darkMode={darkModeProp ?? darkMode}
         onChange={(selectedOption) => {
           setActiveTab({ drivers: selectedOption.id });
         }}

@@ -21,13 +21,31 @@ const breadcrumbBodyStyle = css`
   }
 `;
 
-const Breadcrumbs = ({ siteTitle, slug }) => {
-  const queriedCrumbs = useBreadcrumbs();
+const Breadcrumbs = ({
+  siteTitle,
+  slug,
+  queriedCrumbsProp = null,
+  parentPathsProp = null,
+  selfCrumb = null,
+  pageInfo = null,
+}) => {
+  const queriedCrumbsHook = useBreadcrumbs();
+  const queriedCrumbs = queriedCrumbsProp ?? queriedCrumbsHook;
 
   const { parentPaths } = useSnootyMetadata();
+  const parentPathsData = parentPathsProp ?? parentPaths[slug];
+
   const breadcrumbs = React.useMemo(
-    () => getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths }),
-    [parentPaths, queriedCrumbs, siteTitle, slug]
+    () =>
+      getCompleteBreadcrumbData({
+        siteTitle,
+        slug,
+        queriedCrumbs,
+        parentPaths: parentPathsData,
+        selfCrumbContent: selfCrumb,
+        pageInfo: pageInfo,
+      }),
+    [parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb, pageInfo]
   );
 
   return (
