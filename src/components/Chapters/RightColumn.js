@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
+import { palette } from '@leafygreen-ui/palette';
 import ContentsList from '../Contents/ContentsList';
 import ContentsListItem from '../Contents/ContentsListItem';
 import Link from '../Link';
@@ -13,6 +14,15 @@ import useVisibleOnScroll from '../../hooks/useVisibleOnScroll';
 import { theme } from '../../theme/docsTheme';
 
 const learningCardStyle = ({ isVisible }) => css`
+  background-color: ${palette.white};
+  border-color: ${palette.gray.light2};
+  color: ${palette.gray.dark3};
+  .dark-theme & {
+    background-color: ${palette.black};
+    border-color: ${palette.gray.dark2};
+    color: ${palette.white};
+  }
+
   display: flex;
   flex-direction: column;
   padding: ${theme.size.large};
@@ -66,8 +76,10 @@ const linkStyling = css`
   gap: 0 ${theme.size.small};
   margin-top: ${theme.size.small};
 
-  svg {
-    margin-top: ${theme.size.tiny};
+  span {
+    gap: ${theme.size.tiny};
+    display: flex;
+    align-items: center;
   }
 
   @media ${theme.screenSize.largeAndUp} {

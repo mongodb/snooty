@@ -15,14 +15,12 @@ import ChapterNumberLabel from './ChapterNumberLabel';
 const IMAGE_SIZE = 200;
 
 const cardStyling = css`
-  --background-color: ${palette.white};
-  --border-color: ${palette.gray.light3};
+  background-color: ${palette.white};
+  border-color: ${palette.gray.light3};
   .dark-theme & {
-    --background-color: ${palette.black};
-    --border-color: ${palette.gray.dark2};
+    background-color: ${palette.black};
+    border-color: ${palette.gray.dark2};
   }
-  background-color: var(--background-color);
-  border: 1px solid var(--border-color);
   padding: ${theme.size.large} ${theme.size.medium};
 
   @media ${theme.screenSize.mediumAndUp} {
@@ -85,7 +83,7 @@ const ChapterTitle = styled('div')`
   font-weight: 500;
   margin-top: ${theme.size.small};
   .dark-theme & {
-    color: white;
+    color: ${palette.white};
   }
 `;
 

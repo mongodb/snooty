@@ -26,8 +26,8 @@ const cardStyling = css`
   background-color: ${palette.white};
   border-color: ${palette.gray.light2};
   .dark-theme & {
-    background-color: ${palette.black};
-    border-color: ${palette.gray.dark2};
+    background-color: ${palette.gray.dark4};
+    border-color: ${palette.gray.dark3};
   }
 `;
 

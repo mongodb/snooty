@@ -46,7 +46,7 @@ const Circle = styled('div')`
 const GuideTitle = styled(Link)`
   color: ${palette.black};
   .dark-theme & {
-    color: ${palette.white};
+    color: ${palette.gray.light2};
   }
 
   text-decoration: none;
