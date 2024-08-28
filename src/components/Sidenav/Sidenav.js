@@ -188,8 +188,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
 
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(false, true, !!bannerContent);
-  console.log(`topValues ${topValues.topSmall}`);
-  console.log(bannerContent);
 
   let showVersions = repoBranches?.branches?.filter((b) => b.active)?.length > 1;
 
