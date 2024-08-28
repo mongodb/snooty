@@ -16,9 +16,7 @@ import useNoScroll from './hooks/useNoScroll';
 const CardContainer = styled.div`
   @media ${theme.screenSize.upToSmall} {
     padding-top: ${({ top }) => `${top}`};
-    right: 0;
-    top: 0;
-    bottom: 60px;
+    height: 100%;
     background-color: ${({ darkMode }) => (darkMode ? palette.black : palette.white)};
   }
 `;
@@ -36,6 +34,7 @@ const Card = styled(LeafygreenCard)`
   }
 
   @media ${theme.screenSize.upToSmall} {
+    padding-top: 20%;
     width: 100vw;
     border-radius: 0;
     border-width: 0px;
@@ -49,7 +48,7 @@ const FeedbackCard = ({ isOpen, children }) => {
   // Ensure FeedbackCard can be fullscreen size
   const { isMobile } = useScreenSize();
   const { darkMode } = useDarkMode();
-  const { topSmall } = useStickyTopValues(false, process.env['GATSBY_ENABLE_DARK_MODE'] && isMobile);
+  const { topSmall } = useStickyTopValues(false, true);
   useNoScroll(isMobile);
   const { bannerContent } = useContext(HeaderContext);
   const topBuffer = useMemo(

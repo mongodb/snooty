@@ -23,6 +23,15 @@ const formStyle = css`
   position: absolute;
   right: 0;
   margin-top: ${theme.size.tiny};
+
+  @media ${theme.screenSize.upToSmall} {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
 `;
 
 export const feedbackId = 'feedback-card';
