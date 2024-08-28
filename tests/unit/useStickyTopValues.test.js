@@ -36,7 +36,6 @@ const TestComponent = ({ mockBannerContent, HelperComponent }) => {
 describe('useStickyTopValues()', () => {
   it('provides the correct top values without any banner content and eol false', () => {
     const wrapper = render(<TestComponent mockBannerContent={null} HelperComponent={HelperComponent} />);
-    wrapper.debug();
     expect(wrapper.queryAllByText('60px').length).toBeGreaterThan(0);
   });
 
