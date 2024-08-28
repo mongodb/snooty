@@ -88,7 +88,7 @@ const translatedFontFamilyStyles = css`
 const getTopAndHeight = (topValue) => {
   return css`
     top: max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight});
-    height: calc(100vh - max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight});
+    height: calc(100vh - max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight}));
   `;
 };
 
