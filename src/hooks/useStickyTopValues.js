@@ -14,13 +14,35 @@ const getTopValue = (eol, heights) => {
   return `${topValue}px`;
 };
 
-const useStickyTopValues = (eol) => {
-  // TODO: clean these up into single value and update dependencies
-  const topLarge = useMemo(() => getTopValue(eol, [theme.header.actionBarMobileHeight]), [eol]);
+/**
+ *
+ *
+ * @param {boolean}     eol           if product is eol, meaning no nav bar
+ * @param {boolean}     isAbsolute    if element will be absolute positioned and
+ *                                    needs to consider universal navbar height
+ * @returns {[key: string]: string}
+ */
+// isAbsolute if element will be absolute positioned
+// and needs to
+const useStickyTopValues = (eol, isAbsolute) => {
+  const topLarge = useMemo(
+    () => getTopValue(eol, [theme.header.actionBarMobileHeight].concat(isAbsolute ? [theme.header.navbarHeight] : [])),
+    [eol, isAbsolute]
+  );
 
-  const topMedium = useMemo(() => getTopValue(eol, [theme.header.actionBarMobileHeight]), [eol]);
+  const topMedium = useMemo(
+    () => getTopValue(eol, [theme.header.actionBarMobileHeight].concat(isAbsolute ? [theme.header.navbarHeight] : [])),
+    [eol, isAbsolute]
+  );
 
-  const topSmall = useMemo(() => getTopValue(eol, [theme.header.actionBarMobileHeight]), [eol]);
+  const topSmall = useMemo(
+    () =>
+      getTopValue(
+        eol,
+        [theme.header.actionBarMobileHeight].concat(isAbsolute ? [theme.header.navbarMobileHeight] : [])
+      ),
+    [eol, isAbsolute]
+  );
 
   return { topLarge, topMedium, topSmall };
 };
