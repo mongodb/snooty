@@ -51,7 +51,7 @@ describe('ActionBar', () => {
       let wrapper;
 
       await act(async () => {
-        wrapper = render(<ActionBar />);
+        wrapper = render(<ActionBar template="document" slug="/" sidenav={true} />);
       });
       expect(wrapper.getByRole('search')).toBeTruthy();
       expect(wrapper.getByPlaceholderText('Search MongoDB Docs or Ask MongoDB AI')).toBeTruthy();
