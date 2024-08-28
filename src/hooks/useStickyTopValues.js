@@ -20,26 +20,40 @@ const getTopValue = (eol, heights) => {
  * @param {boolean}     eol           if product is eol, meaning no nav bar
  * @param {boolean}     isAbsolute    if element will be absolute positioned and
  *                                    needs to consider universal navbar height
+ * * @param {boolean}   hasBanner     if there is a banner, absolute elements need to
+ *                                    clear
+ *
  * @returns {[key: string]: string}
  */
-const useStickyTopValues = (eol, isAbsolute) => {
+const useStickyTopValues = (eol, isAbsolute, hasBanner) => {
   const topLarge = useMemo(
-    () => getTopValue(eol, [theme.header.actionBarMobileHeight].concat(isAbsolute ? [theme.header.navbarHeight] : [])),
-    [eol, isAbsolute]
+    () =>
+      getTopValue(eol, [
+        theme.header.actionBarMobileHeight,
+        ...(isAbsolute ? [theme.header.navbarHeight] : []),
+        ...(hasBanner ? [theme.header.bannerHeight] : []),
+      ]),
+    [eol, isAbsolute, hasBanner]
   );
 
   const topMedium = useMemo(
-    () => getTopValue(eol, [theme.header.actionBarMobileHeight].concat(isAbsolute ? [theme.header.navbarHeight] : [])),
-    [eol, isAbsolute]
+    () =>
+      getTopValue(eol, [
+        theme.header.actionBarMobileHeight,
+        ...(isAbsolute ? [theme.header.navbarMobileHeight] : []),
+        ...(hasBanner ? [theme.header.bannerHeight] : []),
+      ]),
+    [eol, hasBanner, isAbsolute]
   );
 
   const topSmall = useMemo(
     () =>
-      getTopValue(
-        eol,
-        [theme.header.actionBarMobileHeight].concat(isAbsolute ? [theme.header.navbarMobileHeight] : [])
-      ),
-    [eol, isAbsolute]
+      getTopValue(eol, [
+        theme.header.actionBarMobileHeight,
+        ...(isAbsolute ? [theme.header.navbarMobileHeight] : []),
+        ...(hasBanner ? [theme.header.bannerHeight] : []),
+      ]),
+    [eol, isAbsolute, hasBanner]
   );
 
   return { topLarge, topMedium, topSmall };
