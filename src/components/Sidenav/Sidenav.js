@@ -19,6 +19,7 @@ import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../../utils/locale';
 import useViewport from '../../hooks/useViewport';
+import { HeaderContext } from '../Header/header-context';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -86,19 +87,22 @@ const translatedFontFamilyStyles = css`
 
 const getTopAndHeight = (topValue) => {
   return css`
-    top: calc(${topValue} + max(${theme.header.navbarMobileHeight} - var(--scroll-y), 0px));
-    height: calc(100vh - ${topValue});
+    top: max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight});
+    height: calc(100vh - max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight});
   `;
 };
 
 // Keep the side nav container sticky to allow LG's side nav to push content seamlessly
 const SidenavContainer = styled.div(
-  ({ topMedium, topSmall }) => css`
+  ({ topLarge, topMedium, topSmall }) => css`
     grid-area: sidenav;
     position: sticky;
     z-index: ${theme.zIndexes.sidenav};
     top: 0px;
-    height: calc(100vh - max(min(${theme.header.navbarHeight} - var(--scroll-y), ${theme.header.navbarHeight}), 0px));
+    height: calc(
+      100vh + ${theme.header.actionBarMobileHeight} - ${topLarge} +
+        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(--scroll-y))
+    );
 
     @media ${theme.screenSize.upToLarge} {
       ${getTopAndHeight(topMedium)};
@@ -178,11 +182,14 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
   const isDocsLanding = project === 'landing';
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
+  const { bannerContent } = useContext(HeaderContext);
 
   const { darkMode } = useDarkMode();
 
   // CSS top property values for sticky side nav based on header height
-  const topValues = useStickyTopValues(eol);
+  const topValues = useStickyTopValues(false, true, !!bannerContent);
+  console.log(`topValues ${topValues.topSmall}`);
+  console.log(bannerContent);
 
   let showVersions = repoBranches?.branches?.filter((b) => b.active)?.length > 1;
 
