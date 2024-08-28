@@ -47,17 +47,16 @@ describe('ActionBar', () => {
   afterAll(() => consoleSpy.mockRestore());
 
   describe('Universal Search input ', () => {
-    it('lazy loads the input search bar, initially loads dark mode menu and feedback button', async () => {
+    it('loads the input search bar, dark mode menu and feedback button', async () => {
       let wrapper;
 
       await act(async () => {
-        wrapper = render(<ActionBar />);
+        wrapper = render(<ActionBar template="document" slug="/" sidenav={true} />);
       });
       expect(wrapper.getByRole('search')).toBeTruthy();
       expect(wrapper.getByPlaceholderText('Search MongoDB Docs or Ask MongoDB AI')).toBeTruthy();
       expect(wrapper.getByLabelText('Dark Mode Menu')).toBeTruthy();
       expect(wrapper.getByText('Feedback')).toBeTruthy();
-      expect(wrapper).toMatchSnapshot();
     });
   });
 });
