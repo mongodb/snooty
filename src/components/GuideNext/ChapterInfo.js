@@ -23,6 +23,12 @@ const cardStyling = css`
     margin-top: 0;
     max-width: 510px;
   }
+  background-color: ${palette.white};
+  border-color: ${palette.gray.light2};
+  .dark-theme & {
+    background-color: ${palette.black};
+    border-color: ${palette.gray.dark2};
+  }
 `;
 
 const TopWrapper = styled('div')`
@@ -41,6 +47,9 @@ const StyledChapterNumberLabel = styled(ChapterNumberLabel)`
 
 const ChapterTitle = styled('div')`
   color: ${palette.black};
+  .dark-theme & {
+    color: ${palette.white};
+  }
   font-weight: bold;
 `;
 

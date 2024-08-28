@@ -6,8 +6,8 @@ import Card from '@leafygreen-ui/card';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
-import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
+import Link from '../Link';
 import { getPlaintext } from '../../utils/get-plaintext';
 import ChapterNumberLabel from './ChapterNumberLabel';
 
@@ -15,8 +15,14 @@ import ChapterNumberLabel from './ChapterNumberLabel';
 const IMAGE_SIZE = 200;
 
 const cardStyling = css`
-  background-color: ${palette.white};
-  border: 1px solid ${palette.gray.light3};
+  --background-color: ${palette.white};
+  --border-color: ${palette.gray.light3};
+  .dark-theme & {
+    --background-color: ${palette.black};
+    --border-color: ${palette.gray.dark2};
+  }
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
   padding: ${theme.size.large} ${theme.size.medium};
 
   @media ${theme.screenSize.mediumAndUp} {
@@ -76,17 +82,26 @@ const DescriptionContainer = styled('div')`
 
 const ChapterTitle = styled('div')`
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 500;
   margin-top: ${theme.size.small};
+  .dark-theme & {
+    color: white;
+  }
 `;
 
 const decriptionStyling = css`
   margin-top: ${theme.size.small};
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
 `;
 
 const GuidesList = styled('ul')`
   list-style-type: none;
   list-style-image: url(${withPrefix('assets/lightning-bolt.svg')});
+  .dark-theme & {
+    list-style-image: url(${withPrefix('assets/lightning-bolt-dark.svg')});
+  }
   margin-bottom: 0;
   margin-top: ${theme.size.medium};
   padding-inline-start: 14px;
@@ -100,6 +115,10 @@ const GuideLink = styled(Link)`
   border-radius: ${theme.size.tiny};
   display: flex;
   color: unset;
+  font-weight: inherit;
+  .dark-theme & {
+    color: ${palette.gray.light1};
+  }
   flex-direction: column;
   padding: ${theme.size.small};
   position: relative;
@@ -108,8 +127,10 @@ const GuideLink = styled(Link)`
 
   :hover {
     background-color: ${palette.gray.light2};
-    color: unset;
-
+    .dark-theme & {
+      background-color: ${palette.gray.dark3};
+      text-decoration: none;
+    }
     ::after {
       content: none;
     }

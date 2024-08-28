@@ -45,6 +45,10 @@ const Circle = styled('div')`
 
 const GuideTitle = styled(Link)`
   color: ${palette.black};
+  .dark-theme & {
+    color: ${palette.white};
+  }
+
   text-decoration: none;
 
   :hover,
@@ -77,6 +81,9 @@ const STATUSES = {
       <IconLightningBolt
         css={css`
           color: ${palette.gray.dark2};
+          .dark-theme & {
+            color: ${palette.gray.light2};
+          }
         `}
       />
     ),
