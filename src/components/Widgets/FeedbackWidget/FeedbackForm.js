@@ -25,6 +25,7 @@ const formStyle = css`
   margin-top: ${theme.size.tiny};
 
   @media ${theme.screenSize.upToSmall} {
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
