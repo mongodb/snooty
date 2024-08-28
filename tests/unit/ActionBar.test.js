@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, act } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
 import ActionBar from '../../src/components/ActionBar/ActionBar';
 
@@ -10,6 +10,7 @@ jest.spyOn(snootyMetadata, 'default').mockImplementation(() => ({
   branch: 'master',
   project: '',
 }));
+jest.useFakeTimers();
 
 const conversationSpy = jest.fn();
 // eslint-disable-next-line no-unused-vars
@@ -49,9 +50,7 @@ describe('ActionBar', () => {
     it('loads the input search bar, dark mode menu and feedback button', async () => {
       let wrapper;
 
-      await act(async () => {
-        wrapper = render(<ActionBar template="document" slug="/" sidenav={true} />);
-      });
+      wrapper = render(<ActionBar template="document" slug="/" sidenav={true} />);
       expect(wrapper.getByRole('search')).toBeTruthy();
       expect(wrapper.getByPlaceholderText('Search MongoDB Docs or Ask MongoDB AI')).toBeTruthy();
       expect(wrapper.getByLabelText('Dark Mode Menu')).toBeTruthy();

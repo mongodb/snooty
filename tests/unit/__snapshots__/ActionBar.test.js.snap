@@ -429,26 +429,6 @@ exports[`ActionBar Universal Search input  loads the input search bar, dark mode
   justify-content: center;
 }
 
-.emotion-11 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
 .emotion-12 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -656,16 +636,6 @@ exports[`ActionBar Universal Search input  loads the input search bar, dark mode
   .emotion-20 {
     display: none;
   }
-}
-
-.emotion-21 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
 }
 
 .emotion-21 {
@@ -1390,26 +1360,6 @@ exports[`ActionBar Universal Search input  loads the input search bar, dark mode
   justify-content: center;
 }
 
-.emotion-11 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
 .emotion-12 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1617,16 +1567,6 @@ exports[`ActionBar Universal Search input  loads the input search bar, dark mode
   .emotion-20 {
     display: none;
   }
-}
-
-.emotion-21 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
 }
 
 .emotion-21 {
