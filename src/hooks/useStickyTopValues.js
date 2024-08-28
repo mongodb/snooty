@@ -15,15 +15,13 @@ const getTopValue = (eol, heights) => {
 };
 
 /**
- *
+ *  Get string values (px units) of buffers needed for sticky elements
  *
  * @param {boolean}     eol           if product is eol, meaning no nav bar
  * @param {boolean}     isAbsolute    if element will be absolute positioned and
  *                                    needs to consider universal navbar height
  * @returns {[key: string]: string}
  */
-// isAbsolute if element will be absolute positioned
-// and needs to
 const useStickyTopValues = (eol, isAbsolute) => {
   const topLarge = useMemo(
     () => getTopValue(eol, [theme.header.actionBarMobileHeight].concat(isAbsolute ? [theme.header.navbarHeight] : [])),
