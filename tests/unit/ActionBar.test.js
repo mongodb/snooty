@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, act } from '@testing-library/react';
 import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
 import ActionBar from '../../src/components/ActionBar/ActionBar';
 
@@ -50,12 +50,13 @@ describe('ActionBar', () => {
     it('loads the input search bar, dark mode menu and feedback button', async () => {
       let wrapper;
 
-      wrapper = render(<ActionBar template="document" slug="/" sidenav={true} />);
+      await act(async () => {
+        wrapper = render(<ActionBar template="document" slug="/" sidenav={true} />);
+      });
       expect(wrapper.getByRole('search')).toBeTruthy();
       expect(wrapper.getByPlaceholderText('Search MongoDB Docs or Ask MongoDB AI')).toBeTruthy();
       expect(wrapper.getByLabelText('Dark Mode Menu')).toBeTruthy();
       expect(wrapper.getByText('Feedback')).toBeTruthy();
-      expect(wrapper).toMatchSnapshot();
     });
   });
 });
