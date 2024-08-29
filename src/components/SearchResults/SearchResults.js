@@ -55,7 +55,7 @@ const HeaderContainer = styled('div')`
 
 const headerContainerDynamicStyles = ({ headingColor }) => css`
   > h1:first-of-type {
-    color: ${headingColor};
+    color: var(--heading-color-primary);
     padding-bottom: 24px;
     margin: unset;
   }
@@ -396,7 +396,7 @@ const SearchResults = () => {
   return (
     <SearchResultsContainer showFacets={showFacets}>
       <HeaderContainer className={cx(headerContainerDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
-        <H3 as="h1">Search Results</H3>
+        <H3 as="h1">Search Results </H3>
         <SearchInput
           ref={searchBoxRef}
           value={searchField}
