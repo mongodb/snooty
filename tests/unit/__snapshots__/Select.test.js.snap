@@ -43,22 +43,6 @@ exports[`Select renders select correctly 1`] = `
   background-color: #FFFFFF;
 }
 
-.emotion-1>button::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-1>button::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-1>button:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-1>button::placeholder {
-  color: #889397;
-}
-
 .emotion-1>button>*:last-child>svg {
   color: #5C6C75;
 }
@@ -71,22 +55,6 @@ exports[`Select renders select correctly 1`] = `
 .dark-theme .emotion-1>button {
   border-color: #889397;
   background-color: #112733;
-}
-
-.dark-theme .emotion-1>button::-webkit-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-1>button::-moz-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-1>button:-ms-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-1>button::placeholder {
-  color: #E8EDEB;
 }
 
 .dark-theme .emotion-1>button>*:last-child>svg {

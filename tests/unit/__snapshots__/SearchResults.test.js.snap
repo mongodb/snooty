@@ -1552,22 +1552,6 @@ exports[`Search Results Page considers a given search filter query param and dis
   background-color: #FFFFFF;
 }
 
-.emotion-68>button::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-68>button::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-68>button:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-68>button::placeholder {
-  color: #889397;
-}
-
 .emotion-68>button>*:last-child>svg {
   color: #5C6C75;
 }
@@ -1580,22 +1564,6 @@ exports[`Search Results Page considers a given search filter query param and dis
 .dark-theme .emotion-68>button {
   border-color: #889397;
   background-color: #112733;
-}
-
-.dark-theme .emotion-68>button::-webkit-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-68>button::-moz-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-68>button:-ms-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-68>button::placeholder {
-  color: #E8EDEB;
 }
 
 .dark-theme .emotion-68>button>*:last-child>svg {
@@ -1771,6 +1739,106 @@ exports[`Search Results Page considers a given search filter query param and dis
   height: 16px;
   width: 16px;
   justify-self: left;
+}
+
+.emotion-79 {
+  position: relative;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-79 label,
+  .emotion-79 p,
+  .emotion-79 button,
+  .emotion-79 div,
+  .emotion-79 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-79 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-79 label {
+  color: #E8EDEB;
+}
+
+.emotion-79 label {
+  color: #889397;
+}
+
+.dark-theme .emotion-79 label {
+  color: #5C6C75;
+}
+
+.emotion-80 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-80>label+button,
+.emotion-80>p+button {
+  margin-top: 3px;
+}
+
+.emotion-80>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-80>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-80>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-80>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-80>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.emotion-80>button {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-80>button:active {
+  pointer-events: none;
+}
+
+.emotion-80>button[aria-disabled='true'] {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+}
+
+.dark-theme .emotion-80>button[aria-disabled='true'] {
+  background-color: #1C2D38;
+  border-color: #3D4F58;
+}
+
+.emotion-80>button[aria-disabled='true']:hover,
+.emotion-80>button[aria-disabled='true']:active {
+  box-shadow: inherit;
+}
+
+.emotion-80>button[aria-disabled='true']>*:last-child>svg {
+  color: #889397;
+}
+
+.dark-theme .emotion-80>button[aria-disabled='true']>*:last-child>svg {
+  color: #5C6C75;
 }
 
 .emotion-81 {
@@ -2244,10 +2312,10 @@ exports[`Search Results Page considers a given search filter query param and dis
           class="emotion-63 emotion-64"
         >
           <div
-            class="emotion-65 emotion-66 disabledLabelStyle emotion-67"
+            class="emotion-65 emotion-66 emotion-79"
           >
             <div
-              class="disabledSelectStyles emotion-68"
+              class="emotion-80"
             >
               <button
                 aria-controls="select-83-menu"
@@ -2962,22 +3030,6 @@ exports[`Search Results Page does not return results for a given search term wit
   background-color: #FFFFFF;
 }
 
-.emotion-42>button::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-42>button::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-42>button:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-42>button::placeholder {
-  color: #889397;
-}
-
 .emotion-42>button>*:last-child>svg {
   color: #5C6C75;
 }
@@ -2990,22 +3042,6 @@ exports[`Search Results Page does not return results for a given search term wit
 .dark-theme .emotion-42>button {
   border-color: #889397;
   background-color: #112733;
-}
-
-.dark-theme .emotion-42>button::-webkit-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-42>button::-moz-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-42>button:-ms-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-42>button::placeholder {
-  color: #E8EDEB;
 }
 
 .dark-theme .emotion-42>button>*:last-child>svg {
@@ -3182,6 +3218,106 @@ exports[`Search Results Page does not return results for a given search term wit
   height: 16px;
   width: 16px;
   justify-self: left;
+}
+
+.emotion-53 {
+  position: relative;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-53 label,
+  .emotion-53 p,
+  .emotion-53 button,
+  .emotion-53 div,
+  .emotion-53 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-53 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-53 label {
+  color: #E8EDEB;
+}
+
+.emotion-53 label {
+  color: #889397;
+}
+
+.dark-theme .emotion-53 label {
+  color: #5C6C75;
+}
+
+.emotion-54 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-54>label+button,
+.emotion-54>p+button {
+  margin-top: 3px;
+}
+
+.emotion-54>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-54>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-54>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-54>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-54>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.emotion-54>button {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-54>button:active {
+  pointer-events: none;
+}
+
+.emotion-54>button[aria-disabled='true'] {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+}
+
+.dark-theme .emotion-54>button[aria-disabled='true'] {
+  background-color: #1C2D38;
+  border-color: #3D4F58;
+}
+
+.emotion-54>button[aria-disabled='true']:hover,
+.emotion-54>button[aria-disabled='true']:active {
+  box-shadow: inherit;
+}
+
+.emotion-54>button[aria-disabled='true']>*:last-child>svg {
+  color: #889397;
+}
+
+.dark-theme .emotion-54>button[aria-disabled='true']>*:last-child>svg {
+  color: #5C6C75;
 }
 
 .emotion-55 {
@@ -3785,10 +3921,10 @@ exports[`Search Results Page does not return results for a given search term wit
           class="emotion-37 emotion-38"
         >
           <div
-            class="emotion-39 emotion-40 disabledLabelStyle emotion-41"
+            class="emotion-39 emotion-40 emotion-53"
           >
             <div
-              class="disabledSelectStyles emotion-42"
+              class="emotion-54"
             >
               <button
                 aria-controls="select-111-menu"
@@ -5028,22 +5164,6 @@ exports[`Search Results Page renders loading images before returning no results 
   background-color: #FFFFFF;
 }
 
-.emotion-115>button::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-115>button::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-115>button:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-115>button::placeholder {
-  color: #889397;
-}
-
 .emotion-115>button>*:last-child>svg {
   color: #5C6C75;
 }
@@ -5056,22 +5176,6 @@ exports[`Search Results Page renders loading images before returning no results 
 .dark-theme .emotion-115>button {
   border-color: #889397;
   background-color: #112733;
-}
-
-.dark-theme .emotion-115>button::-webkit-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-115>button::-moz-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-115>button:-ms-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-115>button::placeholder {
-  color: #E8EDEB;
 }
 
 .dark-theme .emotion-115>button>*:last-child>svg {
@@ -5248,6 +5352,106 @@ exports[`Search Results Page renders loading images before returning no results 
   height: 16px;
   width: 16px;
   justify-self: left;
+}
+
+.emotion-126 {
+  position: relative;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-126 label,
+  .emotion-126 p,
+  .emotion-126 button,
+  .emotion-126 div,
+  .emotion-126 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-126 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-126 label {
+  color: #E8EDEB;
+}
+
+.emotion-126 label {
+  color: #889397;
+}
+
+.dark-theme .emotion-126 label {
+  color: #5C6C75;
+}
+
+.emotion-127 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-127>label+button,
+.emotion-127>p+button {
+  margin-top: 3px;
+}
+
+.emotion-127>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-127>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-127>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-127>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-127>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.emotion-127>button {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-127>button:active {
+  pointer-events: none;
+}
+
+.emotion-127>button[aria-disabled='true'] {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+}
+
+.dark-theme .emotion-127>button[aria-disabled='true'] {
+  background-color: #1C2D38;
+  border-color: #3D4F58;
+}
+
+.emotion-127>button[aria-disabled='true']:hover,
+.emotion-127>button[aria-disabled='true']:active {
+  box-shadow: inherit;
+}
+
+.emotion-127>button[aria-disabled='true']>*:last-child>svg {
+  color: #889397;
+}
+
+.dark-theme .emotion-127>button[aria-disabled='true']>*:last-child>svg {
+  color: #5C6C75;
 }
 
 .emotion-128 {
@@ -5832,10 +6036,10 @@ exports[`Search Results Page renders loading images before returning no results 
           class="emotion-110 emotion-111"
         >
           <div
-            class="emotion-112 emotion-113 disabledLabelStyle emotion-114"
+            class="emotion-112 emotion-113 emotion-126"
           >
             <div
-              class="disabledSelectStyles emotion-115"
+              class="emotion-127"
             >
               <button
                 aria-controls="select-19-menu"
@@ -6643,22 +6847,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
   background-color: #FFFFFF;
 }
 
-.emotion-115>button::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-115>button::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-115>button:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-115>button::placeholder {
-  color: #889397;
-}
-
 .emotion-115>button>*:last-child>svg {
   color: #5C6C75;
 }
@@ -6671,22 +6859,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
 .dark-theme .emotion-115>button {
   border-color: #889397;
   background-color: #112733;
-}
-
-.dark-theme .emotion-115>button::-webkit-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-115>button::-moz-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-115>button:-ms-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-115>button::placeholder {
-  color: #E8EDEB;
 }
 
 .dark-theme .emotion-115>button>*:last-child>svg {
@@ -6863,6 +7035,106 @@ exports[`Search Results Page renders loading images before returning nonempty re
   height: 16px;
   width: 16px;
   justify-self: left;
+}
+
+.emotion-126 {
+  position: relative;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-126 label,
+  .emotion-126 p,
+  .emotion-126 button,
+  .emotion-126 div,
+  .emotion-126 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-126 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-126 label {
+  color: #E8EDEB;
+}
+
+.emotion-126 label {
+  color: #889397;
+}
+
+.dark-theme .emotion-126 label {
+  color: #5C6C75;
+}
+
+.emotion-127 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-127>label+button,
+.emotion-127>p+button {
+  margin-top: 3px;
+}
+
+.emotion-127>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-127>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-127>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-127>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-127>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.emotion-127>button {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-127>button:active {
+  pointer-events: none;
+}
+
+.emotion-127>button[aria-disabled='true'] {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+}
+
+.dark-theme .emotion-127>button[aria-disabled='true'] {
+  background-color: #1C2D38;
+  border-color: #3D4F58;
+}
+
+.emotion-127>button[aria-disabled='true']:hover,
+.emotion-127>button[aria-disabled='true']:active {
+  box-shadow: inherit;
+}
+
+.emotion-127>button[aria-disabled='true']>*:last-child>svg {
+  color: #889397;
+}
+
+.dark-theme .emotion-127>button[aria-disabled='true']>*:last-child>svg {
+  color: #5C6C75;
 }
 
 .emotion-128 {
@@ -7447,10 +7719,10 @@ exports[`Search Results Page renders loading images before returning nonempty re
           class="emotion-110 emotion-111"
         >
           <div
-            class="emotion-112 emotion-113 disabledLabelStyle emotion-114"
+            class="emotion-112 emotion-113 emotion-126"
           >
             <div
-              class="disabledSelectStyles emotion-115"
+              class="emotion-127"
             >
               <button
                 aria-controls="select-3-menu"
@@ -8459,22 +8731,6 @@ exports[`Search Results Page renders results from a given search term query para
   background-color: #FFFFFF;
 }
 
-.emotion-63>button::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-63>button::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-63>button:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-63>button::placeholder {
-  color: #889397;
-}
-
 .emotion-63>button>*:last-child>svg {
   color: #5C6C75;
 }
@@ -8487,22 +8743,6 @@ exports[`Search Results Page renders results from a given search term query para
 .dark-theme .emotion-63>button {
   border-color: #889397;
   background-color: #112733;
-}
-
-.dark-theme .emotion-63>button::-webkit-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-63>button::-moz-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-63>button:-ms-input-placeholder {
-  color: #E8EDEB;
-}
-
-.dark-theme .emotion-63>button::placeholder {
-  color: #E8EDEB;
 }
 
 .dark-theme .emotion-63>button>*:last-child>svg {
@@ -8679,6 +8919,106 @@ exports[`Search Results Page renders results from a given search term query para
   height: 16px;
   width: 16px;
   justify-self: left;
+}
+
+.emotion-74 {
+  position: relative;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-74 label,
+  .emotion-74 p,
+  .emotion-74 button,
+  .emotion-74 div,
+  .emotion-74 span {
+    font-size: 13px;
+  }
+}
+
+.emotion-74 label {
+  color: #001E2B;
+}
+
+.dark-theme .emotion-74 label {
+  color: #E8EDEB;
+}
+
+.emotion-74 label {
+  color: #889397;
+}
+
+.dark-theme .emotion-74 label {
+  color: #5C6C75;
+}
+
+.emotion-75 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-75>label+button,
+.emotion-75>p+button {
+  margin-top: 3px;
+}
+
+.emotion-75>button {
+  background-color: #FFFFFF;
+}
+
+.emotion-75>button>*:last-child>svg {
+  color: #5C6C75;
+}
+
+.emotion-75>button:focus-visible {
+  box-shadow: 0 0 0 3px #0498EC;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.dark-theme .emotion-75>button {
+  border-color: #889397;
+  background-color: #112733;
+}
+
+.dark-theme .emotion-75>button>*:last-child>svg {
+  color: #C1C7C6;
+}
+
+.emotion-75>button {
+  cursor: not-allowed;
+  pointer-events: unset;
+  box-shadow: unset;
+}
+
+.emotion-75>button:active {
+  pointer-events: none;
+}
+
+.emotion-75>button[aria-disabled='true'] {
+  background-color: #E8EDEB;
+  border-color: #C1C7C6;
+}
+
+.dark-theme .emotion-75>button[aria-disabled='true'] {
+  background-color: #1C2D38;
+  border-color: #3D4F58;
+}
+
+.emotion-75>button[aria-disabled='true']:hover,
+.emotion-75>button[aria-disabled='true']:active {
+  box-shadow: inherit;
+}
+
+.emotion-75>button[aria-disabled='true']>*:last-child>svg {
+  color: #889397;
+}
+
+.dark-theme .emotion-75>button[aria-disabled='true']>*:last-child>svg {
+  color: #5C6C75;
 }
 
 .emotion-76 {
@@ -9123,10 +9463,10 @@ exports[`Search Results Page renders results from a given search term query para
           class="emotion-58 emotion-59"
         >
           <div
-            class="emotion-60 emotion-61 disabledLabelStyle emotion-62"
+            class="emotion-60 emotion-61 emotion-74"
           >
             <div
-              class="disabledSelectStyles emotion-63"
+              class="emotion-75"
             >
               <button
                 aria-controls="select-59-menu"
