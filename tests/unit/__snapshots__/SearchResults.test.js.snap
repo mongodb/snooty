@@ -632,28 +632,27 @@ exports[`Search Results Page considers a given search filter query param and dis
 <DocumentFragment>
   .emotion-0 {
   display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  grid-template-areas: 'header .' 'results filters';
+  grid-template-areas: 'header .' 'main right';
   grid-template-columns: auto 173px;
-  margin: 32px 108px 64px 32px;
+  margin: 16px 64px 64px;
   max-width: 1150px;
   row-gap: 32px;
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1024px) {
   .emotion-0 {
-    margin: 32px 40px 64px 40px;
+    margin: 16px 24px 64px;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .emotion-0 {
-    -webkit-column-gap: 0;
-    column-gap: 0;
-    grid-template-areas: 'header' 'results';
+    grid-template-areas: 'header' 'main';
     grid-template-columns: auto;
-    margin: 32px 24px 64px 24px;
+    margin: 16px 24px 64px;
   }
 }
 
@@ -678,274 +677,6 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-6 {
-  outline: none;
-}
-
-.emotion-7 {
-  position: relative;
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  justify-items: center;
-  border: 1px solid;
-  border-radius: 6px;
-  z-index: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border-color,box-shadow;
-  font-size: 13px;
-  line-height: 20px;
-  height: 36px;
-  grid-template-columns: 36px 1fr;
-  grid-auto-columns: 36px;
-  color: #001E2B;
-  background: #FFFFFF;
-  border-color: #889397;
-}
-
-.emotion-7:not(:disabled):focus-within {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: #FFFFFF;
-}
-
-.emotion-7:hover:not(:disabled):not(:focus-within),
-.emotion-7:active:not(:disabled):not(:focus-within) {
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
-.emotion-8 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  color: #5C6C75;
-  left: 12px;
-}
-
-.emotion-9 {
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  background-color: inherit;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  width: 100%;
-  height: 1.5em;
-  font-weight: 400;
-  z-index: 1;
-  outline: none;
-  border: none;
-  padding: 0;
-}
-
-.emotion-9[aria-disabled='true'] {
-  cursor: not-allowed;
-}
-
-.emotion-9[aria-disabled='true']:hover,
-.emotion-9[aria-disabled='true']:active {
-  box-shadow: none;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-moz-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9:-ms-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-ms-clear,
-.emotion-9::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.emotion-9::-webkit-search-decoration,
-.emotion-9::-webkit-search-cancel-button,
-.emotion-9::-webkit-search-results-button,
-.emotion-9::-webkit-search-results-decoration {
-  display: none;
-}
-
-.emotion-9:-webkit-autofill {
-  color: inherit;
-  background: transparent;
-  border: none;
-  -webkit-text-fill-color: inherit;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false'] {
-  box-shadow: 0 0 0 100px #FFFFFF inset;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:focus {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #0498EC;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:hover:not(:focus) {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #E8EDEB;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::-moz-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9:-ms-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9[aria-disabled='true']::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-webkit-autofill,
-.emotion-9[aria-disabled='true']:-webkit-autofill:hover,
-.emotion-9[aria-disabled='true']:-webkit-autofill:focus {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  border: 1px solid #889397;
-  -webkit-text-fill-color: #889397;
-  box-shadow: 0 0 0 100px #E8EDEB inset;
-}
-
-.emotion-10 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: color,box-shadow;
-  background-color: rgba(255, 255, 255, 0);
-  height: 28px;
-  width: 28px;
-  color: #5C6C75;
-  height: 28px;
-  width: 28px;
-}
-
-.emotion-10:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
-}
-
-.emotion-10:active:before,
-.emotion-10:hover:before,
-.emotion-10:focus:before {
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.emotion-10:focus {
-  outline: none;
-}
-
-.emotion-10:active,
-.emotion-10:hover {
-  color: #001E2B;
-}
-
-.emotion-10:active:before,
-.emotion-10:hover:before {
-  background-color: rgba(61,79,88,0.1);
-}
-
-.emotion-10:focus-visible {
-  color: #001E2B;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-10:focus-visible:before {
-  background-color: rgba(61,79,88,0.1);
-}
-
-.emotion-11 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.emotion-12 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
-.emotion-13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -969,7 +700,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   align-items: center;
 }
 
-.emotion-16 {
+.emotion-9 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -991,12 +722,12 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-right: 8px;
 }
 
-.emotion-17 {
+.emotion-10 {
   margin-left: 8px;
   margin-right: -2px;
 }
 
-.emotion-19 {
+.emotion-12 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1018,18 +749,18 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-right: 8px;
 }
 
-.emotion-20 {
+.emotion-13 {
   display: none;
   margin-top: 16px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-20 {
+  .emotion-13 {
     display: block;
   }
 }
 
-.emotion-22 {
+.emotion-15 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -1064,40 +795,40 @@ exports[`Search Results Page considers a given search filter query param and dis
   height: 36px;
 }
 
-.emotion-22:focus-visible,
-.emotion-22[data-focus="true"] {
+.emotion-15:focus-visible,
+.emotion-15[data-focus="true"] {
   outline: none;
 }
 
-.emotion-22:active,
-.emotion-22[data-active="true"],
-.emotion-22:focus,
-.emotion-22:hover {
+.emotion-15:active,
+.emotion-15[data-active="true"],
+.emotion-15:focus,
+.emotion-15:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-22:focus-visible,
-.emotion-22[data-focus="true"] {
+.emotion-15:focus-visible,
+.emotion-15[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-22:hover,
-.emotion-22[data-hover="true"],
-.emotion-22:active,
-.emotion-22[data-active="true"] {
+.emotion-15:hover,
+.emotion-15[data-hover="true"],
+.emotion-15:active,
+.emotion-15[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-22:focus-visible,
-.emotion-22[data-focus="true"] {
+.emotion-15:focus-visible,
+.emotion-15[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-23 {
+.emotion-16 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -1107,7 +838,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   border-radius: 5px;
 }
 
-.emotion-24 {
+.emotion-17 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -1132,29 +863,29 @@ exports[`Search Results Page considers a given search filter query param and dis
   gap: 6px;
 }
 
-.emotion-25 {
+.emotion-18 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-26 {
+.emotion-19 {
   box-shadow: none;
   display: grid;
-  grid-area: results;
+  grid-area: main;
   grid-auto-rows: calc(152px + 16px);
   height: 100%;
   width: 100%;
 }
 
-.emotion-26:not(:hover)>.emotion-29 {
+.emotion-19:not(:hover)>.emotion-22 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-28 {
+.emotion-21 {
   border-radius: 45px;
   height: 152px;
   position: relative;
@@ -1162,24 +893,24 @@ exports[`Search Results Page considers a given search filter query param and dis
   width: 100%;
 }
 
-.emotion-28>div {
+.emotion-21>div {
   padding: 20px;
   padding-left: 30px;
 }
 
-.emotion-28:hover,
-.emotion-28:focus {
+.emotion-21:hover,
+.emotion-21:focus {
   color: unset;
   -webkit-text-decoration: unset;
   text-decoration: unset;
 }
 
-.emotion-28:hover>div,
-.emotion-28:focus>div {
+.emotion-21:hover>div,
+.emotion-21:focus>div {
   background-color: unset!important;
 }
 
-.emotion-28:before {
+.emotion-21:before {
   content: '';
   position: absolute;
   top: calc(-16px / 2);
@@ -1189,7 +920,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   background-color: transparent;
 }
 
-.emotion-30 {
+.emotion-23 {
   color: #016BF8;
   height: 100%;
   -webkit-text-decoration: none;
@@ -1198,38 +929,38 @@ exports[`Search Results Page considers a given search filter query param and dis
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-.emotion-30 .emotion-34 {
+.emotion-23 .emotion-27 {
   color: #016BF8;
 }
 
-.emotion-30:visited .emotion-34 {
+.emotion-23:visited .emotion-27 {
   color: #5E0C9E;
 }
 
-.emotion-30:hover .emotion-34,
-.emotion-30:focus .emotion-34 {
+.emotion-23:hover .emotion-27,
+.emotion-23:focus .emotion-27 {
   color: #016BF8;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-30:hover .emotion-32,
-.emotion-30:focus .emotion-32 {
+.emotion-23:hover .emotion-25,
+.emotion-23:focus .emotion-25 {
   background-color: rgba(231, 238, 236, 0.4);
   -webkit-transition: background-color 150ms ease-in;
   transition: background-color 150ms ease-in;
 }
 
-.emotion-30:hover {
+.emotion-23:hover {
   opacity: 1;
   box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
 }
 
-.emotion-31 {
+.emotion-24 {
   height: 100%;
 }
 
-.emotion-33 {
+.emotion-26 {
   font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
@@ -1247,14 +978,14 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-33 {
+  .emotion-26 {
     font-size: 16px;
     line-height: 28px;
     font-weight: 600;
   }
 }
 
-.emotion-35 {
+.emotion-28 {
   font-size: 13px;
   line-height: 20px;
   margin-bottom: 16px;
@@ -1265,7 +996,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   min-height: 20px;
 }
 
-.emotion-37 {
+.emotion-30 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -1275,19 +1006,19 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-weight: 400;
 }
 
-.emotion-37 strong,
-.emotion-37 b {
+.emotion-30 strong,
+.emotion-30 b {
   font-weight: 700;
 }
 
-.emotion-38 {
+.emotion-31 {
   bottom: 0;
   margin-bottom: 24px;
   overflow: hidden;
   height: 26px;
 }
 
-.emotion-44 {
+.emotion-37 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1298,21 +1029,28 @@ exports[`Search Results Page considers a given search filter query param and dis
   width: 100%;
 }
 
-.emotion-44>div:first-child {
+.emotion-37>div:first-child {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-44>div:last-child {
+.emotion-37>div:last-child {
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
-.emotion-45 {
+@media only screen and (max-width: 767px) {
+  .emotion-37 * {
+    font-size: 13px;
+    line-height: 16px;
+  }
+}
+
+.emotion-38 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -1331,7 +1069,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: center;
 }
 
-.emotion-50 {
+.emotion-43 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -1354,7 +1092,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-50:before {
+.emotion-43:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -1370,71 +1108,97 @@ exports[`Search Results Page considers a given search filter query param and dis
   transform: scale(0.8);
 }
 
-.emotion-50:active:before,
-.emotion-50:hover:before,
-.emotion-50:focus:before {
+.emotion-43:active:before,
+.emotion-43:hover:before,
+.emotion-43:focus:before {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
 }
 
-.emotion-50:focus {
+.emotion-43:focus {
   outline: none;
 }
 
-.emotion-50:active,
-.emotion-50:hover {
+.emotion-43:active,
+.emotion-43:hover {
   color: #001E2B;
 }
 
-.emotion-50:active:before,
-.emotion-50:hover:before {
+.emotion-43:active:before,
+.emotion-43:hover:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-50:focus-visible {
+.emotion-43:focus-visible {
   color: #001E2B;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-50:focus-visible:before {
+.emotion-43:focus-visible:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-50:active,
-.emotion-50:hover {
+.emotion-43:active,
+.emotion-43:hover {
   color: #C1C7C6;
 }
 
-.emotion-50:active:before,
-.emotion-50:hover:before {
+.emotion-43:active:before,
+.emotion-43:hover:before {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-50:focus {
+.emotion-43:focus {
   color: #C1C7C6;
 }
 
-.emotion-50:focus:before {
+.emotion-43:focus:before {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-56 {
-  grid-area: filters;
+.emotion-44 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-45 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.emotion-49 {
+  grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-56 {
+  .emotion-49 {
     display: none;
   }
 }
 
-.emotion-58 {
+.emotion-51 {
   color: #3D4F58;
 }
 
-.emotion-59 {
+.emotion-52 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -1449,12 +1213,12 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-bottom: 16px;
 }
 
-.emotion-61 {
-  grid-area: filters;
+.emotion-54 {
+  grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-61 {
+  .emotion-54 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -1465,34 +1229,34 @@ exports[`Search Results Page considers a given search filter query param and dis
     flex-direction: row;
   }
 
-  .emotion-61>div {
+  .emotion-54>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-61 {
+  .emotion-54 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-61>div {
+  .emotion-54>div {
     width: 100%;
   }
 
-  .emotion-61>div:first-of-type {
+  .emotion-54>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 
-  .emotion-61>div>div {
+  .emotion-54>div>div {
     width: 100%;
   }
 }
 
-.emotion-63 {
+.emotion-56 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1507,25 +1271,25 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-bottom: 16px;
 }
 
-.emotion-65 {
+.emotion-58 {
   width: 175px;
 }
 
-.emotion-67 {
+.emotion-60 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-67 label,
-  .emotion-67 p,
-  .emotion-67 button,
-  .emotion-67 div,
-  .emotion-67 span {
+  .emotion-60 label,
+  .emotion-60 p,
+  .emotion-60 button,
+  .emotion-60 div,
+  .emotion-60 span {
     font-size: 13px;
   }
 }
 
-.emotion-68 {
+.emotion-61 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1535,22 +1299,22 @@ exports[`Search Results Page considers a given search filter query param and dis
   flex-direction: column;
 }
 
-.emotion-68>label+button,
-.emotion-68>p+button {
+.emotion-61>label+button,
+.emotion-61>p+button {
   margin-top: 3px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-68 label,
-  .emotion-68 p,
-  .emotion-68 button,
-  .emotion-68 div,
-  .emotion-68 span {
+  .emotion-61 label,
+  .emotion-61 p,
+  .emotion-61 button,
+  .emotion-61 div,
+  .emotion-61 span {
     font-size: 13px;
   }
 }
 
-.emotion-69 {
+.emotion-62 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -1589,35 +1353,35 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-size: 13px;
 }
 
-.emotion-69:focus {
+.emotion-62:focus {
   outline: none;
 }
 
-.emotion-69[disabled],
-.emotion-69:disabled {
+.emotion-62[disabled],
+.emotion-62:disabled {
   pointer-events: none;
 }
 
-.emotion-69:active,
-.emotion-69:focus,
-.emotion-69:hover {
+.emotion-62:active,
+.emotion-62:focus,
+.emotion-62:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-69:hover,
-.emotion-69:active {
+.emotion-62:hover,
+.emotion-62:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-69:focus {
+.emotion-62:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-69>*:last-child {
+.emotion-62>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -1625,33 +1389,33 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: flex-start;
 }
 
-.emotion-69>*:last-child>svg {
+.emotion-62>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-69>*:last-child>svg {
+.emotion-62>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-69>*:last-child {
+.emotion-62>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-69:focus {
+.emotion-62:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-69 {
+  .emotion-62 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-71 {
+.emotion-64 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -1671,7 +1435,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   gap: 6px;
 }
 
-.emotion-72 {
+.emotion-65 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1691,14 +1455,14 @@ exports[`Search Results Page considers a given search filter query param and dis
   overflow: hidden;
 }
 
-.emotion-73 {
+.emotion-66 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-74 {
+.emotion-67 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -1708,7 +1472,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-self: left;
 }
 
-.emotion-81 {
+.emotion-74 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -1747,42 +1511,42 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-size: 13px;
 }
 
-.emotion-81:focus {
+.emotion-74:focus {
   outline: none;
 }
 
-.emotion-81[disabled],
-.emotion-81:disabled {
+.emotion-74[disabled],
+.emotion-74:disabled {
   pointer-events: none;
 }
 
-.emotion-81:active,
-.emotion-81:focus,
-.emotion-81:hover {
+.emotion-74:active,
+.emotion-74:focus,
+.emotion-74:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-81:hover,
-.emotion-81:active {
+.emotion-74:hover,
+.emotion-74:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-81,
-.emotion-81:hover {
+.emotion-74,
+.emotion-74:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-81:focus {
+.emotion-74:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-81>*:last-child {
+.emotion-74>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -1790,46 +1554,46 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: flex-start;
 }
 
-.emotion-81>*:last-child>svg {
+.emotion-74>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-81>*:last-child>svg {
+.emotion-74>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-81>*:last-child {
+.emotion-74>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-81:focus {
+.emotion-74:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-81:disabled {
+.emotion-74:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-81:disabled:active {
+.emotion-74:disabled:active {
   pointer-events: none;
 }
 
-.emotion-81:disabled {
+.emotion-74:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-81:disabled>*:last-child>svg {
+.emotion-74:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-81 {
+  .emotion-74 {
     height: 36px;
     font-size: 16px;
   }
@@ -1846,66 +1610,6 @@ exports[`Search Results Page considers a given search filter query param and dis
       >
         Search Results
       </h1>
-      <form
-        class="emotion-6"
-        role="search"
-      >
-        <div
-          class="emotion-7"
-          role="searchbox"
-          tabindex="-1"
-        >
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-8"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
-              fill="currentColor"
-              fill-rule="evenodd"
-            />
-          </svg>
-          <input
-            class="emotion-9 sl-search-input"
-            placeholder="Search"
-            type="search"
-            value="stitch"
-          />
-          <button
-            aria-disabled="false"
-            aria-label="Clear search"
-            class="emotion-10"
-            tabindex="0"
-            type="button"
-          >
-            <div
-              class="emotion-11"
-            >
-              <svg
-                aria-label="XWith Circle Icon"
-                class="emotion-12"
-                height="16"
-                role="img"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  clip-rule="evenodd"
-                  d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM9.41421 5.17157C9.80474 4.78105 10.4379 4.78105 10.8284 5.17157C11.219 5.5621 11.219 6.19526 10.8284 6.58579L9.41421 8L10.8284 9.41421C11.219 9.80474 11.219 10.4379 10.8284 10.8284C10.4379 11.219 9.80474 11.219 9.41421 10.8284L8 9.41421L6.58579 10.8284C6.19526 11.219 5.5621 11.219 5.17157 10.8284C4.78105 10.4379 4.78105 9.80474 5.17157 9.41421L6.58579 8L5.17157 6.58579C4.78105 6.19526 4.78105 5.5621 5.17157 5.17157C5.5621 4.78105 6.19526 4.78105 6.58579 5.17157L8 6.58579L9.41421 5.17157Z"
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                />
-              </svg>
-            </div>
-          </button>
-        </div>
-      </form>
       <span
         class="sl-search-keyword"
         style="display: none;"
@@ -1913,16 +1617,16 @@ exports[`Search Results Page considers a given search filter query param and dis
         stitch
       </span>
       <div
-        class="emotion-13 emotion-14"
+        class="emotion-6 emotion-7"
       >
         <div>
           <span
-            class="emotion-15 emotion-16"
+            class="emotion-8 emotion-9"
           >
             Realm
             <svg
               aria-label="X Icon"
-              class="emotion-17"
+              class="emotion-10"
               fill="none"
               height="16"
               role="img"
@@ -1939,31 +1643,31 @@ exports[`Search Results Page considers a given search filter query param and dis
             </svg>
           </span>
           <span
-            class="emotion-15 emotion-19"
+            class="emotion-8 emotion-12"
           >
             Latest
           </span>
         </div>
       </div>
       <div
-        class="emotion-20 emotion-21"
+        class="emotion-13 emotion-14"
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-22"
+          class="lg-ui-button-0000 emotion-15"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-23"
+            class="emotion-16"
           />
           <div
-            class="emotion-24"
+            class="emotion-17"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-25"
+              class="emotion-18"
               fill="none"
               height="16"
               role="presentation"
@@ -1984,22 +1688,22 @@ exports[`Search Results Page considers a given search filter query param and dis
       </div>
     </div>
     <div
-      class="emotion-26 emotion-27"
+      class="emotion-19 emotion-20"
     >
       <a
-        class="emotion-28 emotion-29 emotion-30"
+        class="emotion-21 emotion-22 emotion-23"
         href="stitch.withfilters"
       >
         <div
-          class="emotion-31 emotion-32"
+          class="emotion-24 emotion-25"
         >
           <p
-            class="emotion-33 emotion-34"
+            class="emotion-26 emotion-27"
           >
             stitch (realm filter)
           </p>
           <p
-            class="emotion-35 emotion-36 emotion-37"
+            class="emotion-28 emotion-29 emotion-30"
             maxlines="2"
           >
             <span
@@ -2010,15 +1714,15 @@ exports[`Search Results Page considers a given search filter query param and dis
              preview (with realm filter)
           </p>
           <div
-            class="emotion-38 emotion-39"
+            class="emotion-31 emotion-32"
           >
             <span
-              class="emotion-40 emotion-16"
+              class="emotion-33 emotion-9"
             >
               Realm
             </span>
             <span
-              class="emotion-40 emotion-19"
+              class="emotion-33 emotion-12"
             >
               Latest
             </span>
@@ -2026,26 +1730,26 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
       </a>
       <div
-        class="emotion-44"
+        class="emotion-37"
       >
         <div
-          class="emotion-45"
+          class="emotion-38"
         />
         <div
-          class="emotion-45"
+          class="emotion-38"
         >
           <p
-            class="emotion-37"
+            class="emotion-30"
             data-testid="lg-pagination-item-range"
           >
             1 - 10 of many
           </p>
         </div>
         <div
-          class="emotion-45"
+          class="emotion-38"
         >
           <p
-            class="emotion-37"
+            class="emotion-30"
             data-testid="lg-pagination-page-range"
           >
             1 of many
@@ -2053,16 +1757,16 @@ exports[`Search Results Page considers a given search filter query param and dis
           <button
             aria-disabled="true"
             aria-label="Previous page"
-            class="emotion-50"
+            class="emotion-43"
             data-testid="lg-pagination-back-button"
             tabindex="0"
           >
             <div
-              class="emotion-11"
+              class="emotion-44"
             >
               <svg
                 aria-label="Chevron Left Icon"
-                class="emotion-12"
+                class="emotion-45"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
@@ -2080,16 +1784,16 @@ exports[`Search Results Page considers a given search filter query param and dis
           <button
             aria-disabled="true"
             aria-label="Next page"
-            class="emotion-50"
+            class="emotion-43"
             data-testid="lg-pagination-next-button"
             tabindex="0"
           >
             <div
-              class="emotion-11"
+              class="emotion-44"
             >
               <svg
                 aria-label="Chevron Right Icon"
-                class="emotion-12"
+                class="emotion-45"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
@@ -2108,24 +1812,24 @@ exports[`Search Results Page considers a given search filter query param and dis
       </div>
     </div>
     <div
-      class="emotion-56 emotion-57"
+      class="emotion-49 emotion-70"
     >
       <h2
-        class="emotion-58 emotion-59 emotion-60"
+        class="emotion-51 emotion-52 emotion-53"
       >
         Refine your search
       </h2>
       <div
-        class="emotion-61 emotion-62"
+        class="emotion-54 emotion-55"
       >
         <div
-          class="emotion-63 emotion-64"
+          class="emotion-56 emotion-57"
         >
           <div
-            class="emotion-65 emotion-66 emotion-67"
+            class="emotion-58 emotion-59 emotion-60"
           >
             <div
-              class="emotion-68"
+              class="emotion-61"
             >
               <button
                 aria-controls="select-81-menu"
@@ -2134,7 +1838,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-69"
+                class="emotion-62"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-82"
@@ -2142,16 +1846,16 @@ exports[`Search Results Page considers a given search filter query param and dis
                 value="Realm"
               >
                 <div
-                  class="emotion-23"
+                  class="emotion-16"
                 />
                 <div
-                  class="emotion-71"
+                  class="emotion-64"
                 >
                   <div
-                    class="emotion-72"
+                    class="emotion-65"
                   >
                     <div
-                      class="emotion-73"
+                      class="emotion-66"
                     >
                       Realm
                     </div>
@@ -2159,7 +1863,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-74"
+                    class="emotion-67"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -2176,13 +1880,13 @@ exports[`Search Results Page considers a given search filter query param and dis
           </div>
         </div>
         <div
-          class="emotion-63 emotion-64"
+          class="emotion-56 emotion-57"
         >
           <div
-            class="emotion-65 emotion-66 emotion-67"
+            class="emotion-58 emotion-59 emotion-60"
           >
             <div
-              class="emotion-68"
+              class="emotion-61"
             >
               <button
                 aria-controls="select-83-menu"
@@ -2191,7 +1895,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-81"
+                class="emotion-74"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -2200,16 +1904,16 @@ exports[`Search Results Page considers a given search filter query param and dis
                 value="Latest"
               >
                 <div
-                  class="emotion-23"
+                  class="emotion-16"
                 />
                 <div
-                  class="emotion-71"
+                  class="emotion-64"
                 >
                   <div
-                    class="emotion-72"
+                    class="emotion-65"
                   >
                     <div
-                      class="emotion-73"
+                      class="emotion-66"
                     >
                       Latest
                     </div>
@@ -2217,7 +1921,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-74"
+                    class="emotion-67"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -2235,20 +1939,20 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-22"
+          class="lg-ui-button-0000 emotion-15"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-23"
+            class="emotion-16"
           />
           <div
-            class="emotion-24"
+            class="emotion-17"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-25"
+              class="emotion-18"
               fill="none"
               height="16"
               role="presentation"
@@ -2276,28 +1980,27 @@ exports[`Search Results Page does not return results for a given search term wit
 <DocumentFragment>
   .emotion-0 {
   display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  grid-template-areas: 'header .' 'results filters';
+  grid-template-areas: 'header .' 'main right';
   grid-template-columns: auto 173px;
-  margin: 32px 108px 64px 32px;
+  margin: 16px 64px 64px;
   max-width: 1150px;
   row-gap: 32px;
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1024px) {
   .emotion-0 {
-    margin: 32px 40px 64px 40px;
+    margin: 16px 24px 64px;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .emotion-0 {
-    -webkit-column-gap: 0;
-    column-gap: 0;
-    grid-template-areas: 'header' 'results';
+    grid-template-areas: 'header' 'main';
     grid-template-columns: auto;
-    margin: 32px 24px 64px 24px;
+    margin: 16px 24px 64px;
   }
 }
 
@@ -2322,274 +2025,6 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-6 {
-  outline: none;
-}
-
-.emotion-7 {
-  position: relative;
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  justify-items: center;
-  border: 1px solid;
-  border-radius: 6px;
-  z-index: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border-color,box-shadow;
-  font-size: 13px;
-  line-height: 20px;
-  height: 36px;
-  grid-template-columns: 36px 1fr;
-  grid-auto-columns: 36px;
-  color: #001E2B;
-  background: #FFFFFF;
-  border-color: #889397;
-}
-
-.emotion-7:not(:disabled):focus-within {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: #FFFFFF;
-}
-
-.emotion-7:hover:not(:disabled):not(:focus-within),
-.emotion-7:active:not(:disabled):not(:focus-within) {
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
-.emotion-8 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  color: #5C6C75;
-  left: 12px;
-}
-
-.emotion-9 {
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  background-color: inherit;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  width: 100%;
-  height: 1.5em;
-  font-weight: 400;
-  z-index: 1;
-  outline: none;
-  border: none;
-  padding: 0;
-}
-
-.emotion-9[aria-disabled='true'] {
-  cursor: not-allowed;
-}
-
-.emotion-9[aria-disabled='true']:hover,
-.emotion-9[aria-disabled='true']:active {
-  box-shadow: none;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-moz-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9:-ms-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-ms-clear,
-.emotion-9::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.emotion-9::-webkit-search-decoration,
-.emotion-9::-webkit-search-cancel-button,
-.emotion-9::-webkit-search-results-button,
-.emotion-9::-webkit-search-results-decoration {
-  display: none;
-}
-
-.emotion-9:-webkit-autofill {
-  color: inherit;
-  background: transparent;
-  border: none;
-  -webkit-text-fill-color: inherit;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false'] {
-  box-shadow: 0 0 0 100px #FFFFFF inset;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:focus {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #0498EC;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:hover:not(:focus) {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #E8EDEB;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::-moz-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9:-ms-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9[aria-disabled='true']::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-webkit-autofill,
-.emotion-9[aria-disabled='true']:-webkit-autofill:hover,
-.emotion-9[aria-disabled='true']:-webkit-autofill:focus {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  border: 1px solid #889397;
-  -webkit-text-fill-color: #889397;
-  box-shadow: 0 0 0 100px #E8EDEB inset;
-}
-
-.emotion-10 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: color,box-shadow;
-  background-color: rgba(255, 255, 255, 0);
-  height: 28px;
-  width: 28px;
-  color: #5C6C75;
-  height: 28px;
-  width: 28px;
-}
-
-.emotion-10:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
-}
-
-.emotion-10:active:before,
-.emotion-10:hover:before,
-.emotion-10:focus:before {
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.emotion-10:focus {
-  outline: none;
-}
-
-.emotion-10:active,
-.emotion-10:hover {
-  color: #001E2B;
-}
-
-.emotion-10:active:before,
-.emotion-10:hover:before {
-  background-color: rgba(61,79,88,0.1);
-}
-
-.emotion-10:focus-visible {
-  color: #001E2B;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-10:focus-visible:before {
-  background-color: rgba(61,79,88,0.1);
-}
-
-.emotion-11 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.emotion-12 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
-.emotion-13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2613,18 +2048,18 @@ exports[`Search Results Page does not return results for a given search term wit
   align-items: center;
 }
 
-.emotion-15 {
+.emotion-8 {
   display: none;
   margin-top: 16px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-15 {
+  .emotion-8 {
     display: block;
   }
 }
 
-.emotion-17 {
+.emotion-10 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -2659,40 +2094,40 @@ exports[`Search Results Page does not return results for a given search term wit
   height: 36px;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   outline: none;
 }
 
-.emotion-17:active,
-.emotion-17[data-active="true"],
-.emotion-17:focus,
-.emotion-17:hover {
+.emotion-10:active,
+.emotion-10[data-active="true"],
+.emotion-10:focus,
+.emotion-10:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-17:hover,
-.emotion-17[data-hover="true"],
-.emotion-17:active,
-.emotion-17[data-active="true"] {
+.emotion-10:hover,
+.emotion-10[data-hover="true"],
+.emotion-10:active,
+.emotion-10[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-18 {
+.emotion-11 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -2702,7 +2137,7 @@ exports[`Search Results Page does not return results for a given search term wit
   border-radius: 5px;
 }
 
-.emotion-19 {
+.emotion-12 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -2727,20 +2162,20 @@ exports[`Search Results Page does not return results for a given search term wit
   gap: 6px;
 }
 
-.emotion-20 {
+.emotion-13 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-21 {
+.emotion-14 {
   margin-bottom: calc(50vh - 28px - 40px - 166px / 2);
-  grid-area: results;
+  grid-area: main;
   margin-top: 80px;
 }
 
-.emotion-23 {
+.emotion-16 {
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto;
@@ -2751,12 +2186,12 @@ exports[`Search Results Page does not return results for a given search term wit
   max-width: 637px;
 }
 
-.emotion-25 {
+.emotion-18 {
   padding-left: 56px;
   padding-top: 20px;
 }
 
-.emotion-28 {
+.emotion-21 {
   color: var(--color);
   font-size: 13px;
   font-family: Euclid Circular A;
@@ -2765,21 +2200,21 @@ exports[`Search Results Page does not return results for a given search term wit
   line-height: 20px;
 }
 
-.emotion-30 {
-  grid-area: filters;
+.emotion-23 {
+  grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-30 {
+  .emotion-23 {
     display: none;
   }
 }
 
-.emotion-32 {
+.emotion-25 {
   color: #3D4F58;
 }
 
-.emotion-33 {
+.emotion-26 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -2794,12 +2229,12 @@ exports[`Search Results Page does not return results for a given search term wit
   margin-bottom: 16px;
 }
 
-.emotion-35 {
-  grid-area: filters;
+.emotion-28 {
+  grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-35 {
+  .emotion-28 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -2810,34 +2245,34 @@ exports[`Search Results Page does not return results for a given search term wit
     flex-direction: row;
   }
 
-  .emotion-35>div {
+  .emotion-28>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-35 {
+  .emotion-28 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-35>div {
+  .emotion-28>div {
     width: 100%;
   }
 
-  .emotion-35>div:first-of-type {
+  .emotion-28>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 
-  .emotion-35>div>div {
+  .emotion-28>div>div {
     width: 100%;
   }
 }
 
-.emotion-37 {
+.emotion-30 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -2852,25 +2287,25 @@ exports[`Search Results Page does not return results for a given search term wit
   margin-bottom: 16px;
 }
 
-.emotion-39 {
+.emotion-32 {
   width: 175px;
 }
 
-.emotion-41 {
+.emotion-34 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-41 label,
-  .emotion-41 p,
-  .emotion-41 button,
-  .emotion-41 div,
-  .emotion-41 span {
+  .emotion-34 label,
+  .emotion-34 p,
+  .emotion-34 button,
+  .emotion-34 div,
+  .emotion-34 span {
     font-size: 13px;
   }
 }
 
-.emotion-42 {
+.emotion-35 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2880,22 +2315,22 @@ exports[`Search Results Page does not return results for a given search term wit
   flex-direction: column;
 }
 
-.emotion-42>label+button,
-.emotion-42>p+button {
+.emotion-35>label+button,
+.emotion-35>p+button {
   margin-top: 3px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-42 label,
-  .emotion-42 p,
-  .emotion-42 button,
-  .emotion-42 div,
-  .emotion-42 span {
+  .emotion-35 label,
+  .emotion-35 p,
+  .emotion-35 button,
+  .emotion-35 div,
+  .emotion-35 span {
     font-size: 13px;
   }
 }
 
-.emotion-43 {
+.emotion-36 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -2935,35 +2370,35 @@ exports[`Search Results Page does not return results for a given search term wit
   font-size: 13px;
 }
 
-.emotion-43:focus {
+.emotion-36:focus {
   outline: none;
 }
 
-.emotion-43[disabled],
-.emotion-43:disabled {
+.emotion-36[disabled],
+.emotion-36:disabled {
   pointer-events: none;
 }
 
-.emotion-43:active,
-.emotion-43:focus,
-.emotion-43:hover {
+.emotion-36:active,
+.emotion-36:focus,
+.emotion-36:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-43:hover,
-.emotion-43:active {
+.emotion-36:hover,
+.emotion-36:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-43:focus {
+.emotion-36:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-43>*:last-child {
+.emotion-36>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -2971,33 +2406,33 @@ exports[`Search Results Page does not return results for a given search term wit
   justify-content: flex-start;
 }
 
-.emotion-43>*:last-child>svg {
+.emotion-36>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-43>*:last-child>svg {
+.emotion-36>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-43>*:last-child {
+.emotion-36>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-43:focus {
+.emotion-36:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-43 {
+  .emotion-36 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-45 {
+.emotion-38 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -3017,7 +2452,7 @@ exports[`Search Results Page does not return results for a given search term wit
   gap: 6px;
 }
 
-.emotion-46 {
+.emotion-39 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3037,14 +2472,14 @@ exports[`Search Results Page does not return results for a given search term wit
   overflow: hidden;
 }
 
-.emotion-47 {
+.emotion-40 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-48 {
+.emotion-41 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -3054,7 +2489,7 @@ exports[`Search Results Page does not return results for a given search term wit
   justify-self: left;
 }
 
-.emotion-55 {
+.emotion-48 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -3094,42 +2529,42 @@ exports[`Search Results Page does not return results for a given search term wit
   font-size: 13px;
 }
 
-.emotion-55:focus {
+.emotion-48:focus {
   outline: none;
 }
 
-.emotion-55[disabled],
-.emotion-55:disabled {
+.emotion-48[disabled],
+.emotion-48:disabled {
   pointer-events: none;
 }
 
-.emotion-55:active,
-.emotion-55:focus,
-.emotion-55:hover {
+.emotion-48:active,
+.emotion-48:focus,
+.emotion-48:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-55:hover,
-.emotion-55:active {
+.emotion-48:hover,
+.emotion-48:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-55,
-.emotion-55:hover {
+.emotion-48,
+.emotion-48:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-55:focus {
+.emotion-48:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-55>*:last-child {
+.emotion-48>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -3137,46 +2572,46 @@ exports[`Search Results Page does not return results for a given search term wit
   justify-content: flex-start;
 }
 
-.emotion-55>*:last-child>svg {
+.emotion-48>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-55>*:last-child>svg {
+.emotion-48>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-55>*:last-child {
+.emotion-48>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-55:focus {
+.emotion-48:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-55:disabled {
+.emotion-48:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-55:disabled:active {
+.emotion-48:disabled:active {
   pointer-events: none;
 }
 
-.emotion-55:disabled {
+.emotion-48:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-55:disabled>*:last-child>svg {
+.emotion-48:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-55 {
+  .emotion-48 {
     height: 36px;
     font-size: 16px;
   }
@@ -3193,66 +2628,6 @@ exports[`Search Results Page does not return results for a given search term wit
       >
         Search Results
       </h1>
-      <form
-        class="emotion-6"
-        role="search"
-      >
-        <div
-          class="emotion-7"
-          role="searchbox"
-          tabindex="-1"
-        >
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-8"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
-              fill="currentColor"
-              fill-rule="evenodd"
-            />
-          </svg>
-          <input
-            class="emotion-9 sl-search-input"
-            placeholder="Search"
-            type="search"
-            value="realm"
-          />
-          <button
-            aria-disabled="false"
-            aria-label="Clear search"
-            class="emotion-10"
-            tabindex="0"
-            type="button"
-          >
-            <div
-              class="emotion-11"
-            >
-              <svg
-                aria-label="XWith Circle Icon"
-                class="emotion-12"
-                height="16"
-                role="img"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  clip-rule="evenodd"
-                  d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM9.41421 5.17157C9.80474 4.78105 10.4379 4.78105 10.8284 5.17157C11.219 5.5621 11.219 6.19526 10.8284 6.58579L9.41421 8L10.8284 9.41421C11.219 9.80474 11.219 10.4379 10.8284 10.8284C10.4379 11.219 9.80474 11.219 9.41421 10.8284L8 9.41421L6.58579 10.8284C6.19526 11.219 5.5621 11.219 5.17157 10.8284C4.78105 10.4379 4.78105 9.80474 5.17157 9.41421L6.58579 8L5.17157 6.58579C4.78105 6.19526 4.78105 5.5621 5.17157 5.17157C5.5621 4.78105 6.19526 4.78105 6.58579 5.17157L8 6.58579L9.41421 5.17157Z"
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                />
-              </svg>
-            </div>
-          </button>
-        </div>
-      </form>
       <span
         class="sl-search-keyword"
         style="display: none;"
@@ -3260,27 +2635,27 @@ exports[`Search Results Page does not return results for a given search term wit
         realm
       </span>
       <div
-        class="emotion-13 emotion-14"
+        class="emotion-6 emotion-7"
       />
       <div
-        class="emotion-15 emotion-16"
+        class="emotion-8 emotion-9"
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-10"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-18"
+            class="emotion-11"
           />
           <div
-            class="emotion-19"
+            class="emotion-12"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-20"
+              class="emotion-13"
               fill="none"
               height="16"
               role="presentation"
@@ -3301,10 +2676,10 @@ exports[`Search Results Page does not return results for a given search term wit
       </div>
     </div>
     <div
-      class="emotion-21 emotion-141"
+      class="emotion-14 emotion-72"
     >
       <div
-        class="emotion-23 emotion-24"
+        class="emotion-16 emotion-17"
       >
         <svg
           fill="none"
@@ -3567,7 +2942,7 @@ exports[`Search Results Page does not return results for a given search term wit
           </defs>
         </svg>
         <div
-          class="emotion-25 emotion-26"
+          class="emotion-18 emotion-19"
         >
           <h3
             class="emotion-5"
@@ -3575,7 +2950,7 @@ exports[`Search Results Page does not return results for a given search term wit
             No results found
           </h3>
           <p
-            class="emotion-28 emotion-29"
+            class="emotion-21 emotion-22"
             style="--color: #5C6C75;"
           >
             We weren’t able to find any results for your query. Try adjusting your keywords to find what you’re looking for.
@@ -3584,24 +2959,24 @@ exports[`Search Results Page does not return results for a given search term wit
       </div>
     </div>
     <div
-      class="emotion-30 emotion-31"
+      class="emotion-23 emotion-70"
     >
       <h2
-        class="emotion-32 emotion-33 emotion-34"
+        class="emotion-25 emotion-26 emotion-27"
       >
         Refine your search
       </h2>
       <div
-        class="emotion-35 emotion-36"
+        class="emotion-28 emotion-29"
       >
         <div
-          class="emotion-37 emotion-38"
+          class="emotion-30 emotion-31"
         >
           <div
-            class="emotion-39 emotion-40 emotion-41"
+            class="emotion-32 emotion-33 emotion-34"
           >
             <div
-              class="emotion-42"
+              class="emotion-35"
             >
               <button
                 aria-controls="select-109-menu"
@@ -3610,7 +2985,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-43"
+                class="emotion-36"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-110"
@@ -3618,16 +2993,16 @@ exports[`Search Results Page does not return results for a given search term wit
                 value=""
               >
                 <div
-                  class="emotion-18"
+                  class="emotion-11"
                 />
                 <div
-                  class="emotion-45"
+                  class="emotion-38"
                 >
                   <div
-                    class="emotion-46"
+                    class="emotion-39"
                   >
                     <div
-                      class="emotion-47"
+                      class="emotion-40"
                     >
                       Filter by Category
                     </div>
@@ -3635,7 +3010,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-48"
+                    class="emotion-41"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -3652,13 +3027,13 @@ exports[`Search Results Page does not return results for a given search term wit
           </div>
         </div>
         <div
-          class="emotion-37 emotion-38"
+          class="emotion-30 emotion-31"
         >
           <div
-            class="emotion-39 emotion-40 emotion-41"
+            class="emotion-32 emotion-33 emotion-34"
           >
             <div
-              class="emotion-42"
+              class="emotion-35"
             >
               <button
                 aria-controls="select-111-menu"
@@ -3667,7 +3042,7 @@ exports[`Search Results Page does not return results for a given search term wit
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-55"
+                class="emotion-48"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -3676,16 +3051,16 @@ exports[`Search Results Page does not return results for a given search term wit
                 value=""
               >
                 <div
-                  class="emotion-18"
+                  class="emotion-11"
                 />
                 <div
-                  class="emotion-45"
+                  class="emotion-38"
                 >
                   <div
-                    class="emotion-46"
+                    class="emotion-39"
                   >
                     <div
-                      class="emotion-47"
+                      class="emotion-40"
                     >
                       Filter by Version
                     </div>
@@ -3693,7 +3068,7 @@ exports[`Search Results Page does not return results for a given search term wit
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-48"
+                    class="emotion-41"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -3711,20 +3086,20 @@ exports[`Search Results Page does not return results for a given search term wit
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-10"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-18"
+            class="emotion-11"
           />
           <div
-            class="emotion-19"
+            class="emotion-12"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-20"
+              class="emotion-13"
               fill="none"
               height="16"
               role="presentation"
@@ -3752,28 +3127,27 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 <DocumentFragment>
   .emotion-0 {
   display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  grid-template-areas: 'header .' 'results filters';
+  grid-template-areas: 'header .' 'main right';
   grid-template-columns: auto 173px;
-  margin: 32px 108px 64px 32px;
+  margin: 16px 64px 64px;
   max-width: 1150px;
   row-gap: 32px;
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1024px) {
   .emotion-0 {
-    margin: 32px 40px 64px 40px;
+    margin: 16px 24px 64px;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .emotion-0 {
-    -webkit-column-gap: 0;
-    column-gap: 0;
-    grid-template-areas: 'header' 'results';
+    grid-template-areas: 'header' 'main';
     grid-template-columns: auto;
-    margin: 32px 24px 64px 24px;
+    margin: 16px 24px 64px;
   }
 }
 
@@ -3798,189 +3172,17 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 }
 
 .emotion-6 {
-  outline: none;
-}
-
-.emotion-7 {
-  position: relative;
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  justify-items: center;
-  border: 1px solid;
-  border-radius: 6px;
-  z-index: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border-color,box-shadow;
-  font-size: 13px;
-  line-height: 20px;
-  height: 36px;
-  grid-template-columns: 36px 1fr;
-  grid-auto-columns: 36px;
-  color: #001E2B;
-  background: #FFFFFF;
-  border-color: #889397;
-}
-
-.emotion-7:not(:disabled):focus-within {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: #FFFFFF;
-}
-
-.emotion-7:hover:not(:disabled):not(:focus-within),
-.emotion-7:active:not(:disabled):not(:focus-within) {
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
-.emotion-8 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  color: #5C6C75;
-  left: 12px;
-}
-
-.emotion-9 {
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  background-color: inherit;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  width: 100%;
-  height: 1.5em;
-  font-weight: 400;
-  z-index: 1;
-  outline: none;
-  border: none;
-  padding: 0;
-}
-
-.emotion-9[aria-disabled='true'] {
-  cursor: not-allowed;
-}
-
-.emotion-9[aria-disabled='true']:hover,
-.emotion-9[aria-disabled='true']:active {
-  box-shadow: none;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-moz-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9:-ms-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-ms-clear,
-.emotion-9::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.emotion-9::-webkit-search-decoration,
-.emotion-9::-webkit-search-cancel-button,
-.emotion-9::-webkit-search-results-button,
-.emotion-9::-webkit-search-results-decoration {
-  display: none;
-}
-
-.emotion-9:-webkit-autofill {
-  color: inherit;
-  background: transparent;
-  border: none;
-  -webkit-text-fill-color: inherit;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false'] {
-  box-shadow: 0 0 0 100px #FFFFFF inset;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:focus {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #0498EC;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:hover:not(:focus) {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #E8EDEB;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::-moz-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9:-ms-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9[aria-disabled='true']::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-webkit-autofill,
-.emotion-9[aria-disabled='true']:-webkit-autofill:hover,
-.emotion-9[aria-disabled='true']:-webkit-autofill:focus {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  border: 1px solid #889397;
-  -webkit-text-fill-color: #889397;
-  box-shadow: 0 0 0 100px #E8EDEB inset;
-}
-
-.emotion-10 {
   display: none;
   margin-top: 16px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-10 {
+  .emotion-6 {
     display: block;
   }
 }
 
-.emotion-12 {
+.emotion-8 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -4015,40 +3217,40 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   height: 36px;
 }
 
-.emotion-12:focus-visible,
-.emotion-12[data-focus="true"] {
+.emotion-8:focus-visible,
+.emotion-8[data-focus="true"] {
   outline: none;
 }
 
-.emotion-12:active,
-.emotion-12[data-active="true"],
-.emotion-12:focus,
-.emotion-12:hover {
+.emotion-8:active,
+.emotion-8[data-active="true"],
+.emotion-8:focus,
+.emotion-8:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-12:focus-visible,
-.emotion-12[data-focus="true"] {
+.emotion-8:focus-visible,
+.emotion-8[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-12:hover,
-.emotion-12[data-hover="true"],
-.emotion-12:active,
-.emotion-12[data-active="true"] {
+.emotion-8:hover,
+.emotion-8[data-hover="true"],
+.emotion-8:active,
+.emotion-8[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-12:focus-visible,
-.emotion-12[data-focus="true"] {
+.emotion-8:focus-visible,
+.emotion-8[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-13 {
+.emotion-9 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -4058,7 +3260,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   border-radius: 5px;
 }
 
-.emotion-14 {
+.emotion-10 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -4083,7 +3285,7 @@ exports[`Search Results Page renders correctly without browser 1`] = `
   gap: 6px;
 }
 
-.emotion-15 {
+.emotion-11 {
   color: #889397;
   height: 16px;
   width: 16px;
@@ -4101,62 +3303,29 @@ exports[`Search Results Page renders correctly without browser 1`] = `
       >
         Search Results
       </h1>
-      <form
-        class="emotion-6"
-        role="search"
-      >
-        <div
-          class="emotion-7"
-          role="searchbox"
-          tabindex="-1"
-        >
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-8"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
-              fill="currentColor"
-              fill-rule="evenodd"
-            />
-          </svg>
-          <input
-            class="emotion-9 sl-search-input"
-            placeholder="Search"
-            type="search"
-            value=""
-          />
-        </div>
-      </form>
       <span
         class="sl-search-keyword"
         style="display: none;"
       />
       <div
-        class="emotion-10 emotion-11"
+        class="emotion-6 emotion-7"
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-12"
+          class="lg-ui-button-0000 emotion-8"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-13"
+            class="emotion-9"
           />
           <div
-            class="emotion-14"
+            class="emotion-10"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-15"
+              class="emotion-11"
               fill="none"
               height="16"
               role="presentation"
@@ -4184,28 +3353,27 @@ exports[`Search Results Page renders loading images before returning no results 
 <DocumentFragment>
   .emotion-0 {
   display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  grid-template-areas: 'header .' 'results filters';
+  grid-template-areas: 'header .' 'main right';
   grid-template-columns: auto 173px;
-  margin: 32px 108px 64px 32px;
+  margin: 16px 64px 64px;
   max-width: 1150px;
   row-gap: 32px;
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1024px) {
   .emotion-0 {
-    margin: 32px 40px 64px 40px;
+    margin: 16px 24px 64px;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .emotion-0 {
-    -webkit-column-gap: 0;
-    column-gap: 0;
-    grid-template-areas: 'header' 'results';
+    grid-template-areas: 'header' 'main';
     grid-template-columns: auto;
-    margin: 32px 24px 64px 24px;
+    margin: 16px 24px 64px;
   }
 }
 
@@ -4230,274 +3398,6 @@ exports[`Search Results Page renders loading images before returning no results 
 }
 
 .emotion-6 {
-  outline: none;
-}
-
-.emotion-7 {
-  position: relative;
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  justify-items: center;
-  border: 1px solid;
-  border-radius: 6px;
-  z-index: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border-color,box-shadow;
-  font-size: 13px;
-  line-height: 20px;
-  height: 36px;
-  grid-template-columns: 36px 1fr;
-  grid-auto-columns: 36px;
-  color: #001E2B;
-  background: #FFFFFF;
-  border-color: #889397;
-}
-
-.emotion-7:not(:disabled):focus-within {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: #FFFFFF;
-}
-
-.emotion-7:hover:not(:disabled):not(:focus-within),
-.emotion-7:active:not(:disabled):not(:focus-within) {
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
-.emotion-8 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  color: #5C6C75;
-  left: 12px;
-}
-
-.emotion-9 {
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  background-color: inherit;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  width: 100%;
-  height: 1.5em;
-  font-weight: 400;
-  z-index: 1;
-  outline: none;
-  border: none;
-  padding: 0;
-}
-
-.emotion-9[aria-disabled='true'] {
-  cursor: not-allowed;
-}
-
-.emotion-9[aria-disabled='true']:hover,
-.emotion-9[aria-disabled='true']:active {
-  box-shadow: none;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-moz-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9:-ms-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-ms-clear,
-.emotion-9::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.emotion-9::-webkit-search-decoration,
-.emotion-9::-webkit-search-cancel-button,
-.emotion-9::-webkit-search-results-button,
-.emotion-9::-webkit-search-results-decoration {
-  display: none;
-}
-
-.emotion-9:-webkit-autofill {
-  color: inherit;
-  background: transparent;
-  border: none;
-  -webkit-text-fill-color: inherit;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false'] {
-  box-shadow: 0 0 0 100px #FFFFFF inset;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:focus {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #0498EC;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:hover:not(:focus) {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #E8EDEB;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::-moz-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9:-ms-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9[aria-disabled='true']::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-webkit-autofill,
-.emotion-9[aria-disabled='true']:-webkit-autofill:hover,
-.emotion-9[aria-disabled='true']:-webkit-autofill:focus {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  border: 1px solid #889397;
-  -webkit-text-fill-color: #889397;
-  box-shadow: 0 0 0 100px #E8EDEB inset;
-}
-
-.emotion-10 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: color,box-shadow;
-  background-color: rgba(255, 255, 255, 0);
-  height: 28px;
-  width: 28px;
-  color: #5C6C75;
-  height: 28px;
-  width: 28px;
-}
-
-.emotion-10:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
-}
-
-.emotion-10:active:before,
-.emotion-10:hover:before,
-.emotion-10:focus:before {
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.emotion-10:focus {
-  outline: none;
-}
-
-.emotion-10:active,
-.emotion-10:hover {
-  color: #001E2B;
-}
-
-.emotion-10:active:before,
-.emotion-10:hover:before {
-  background-color: rgba(61,79,88,0.1);
-}
-
-.emotion-10:focus-visible {
-  color: #001E2B;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-10:focus-visible:before {
-  background-color: rgba(61,79,88,0.1);
-}
-
-.emotion-11 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.emotion-12 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
-.emotion-13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4521,18 +3421,18 @@ exports[`Search Results Page renders loading images before returning no results 
   align-items: center;
 }
 
-.emotion-15 {
+.emotion-8 {
   display: none;
   margin-top: 16px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-15 {
+  .emotion-8 {
     display: block;
   }
 }
 
-.emotion-17 {
+.emotion-10 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -4567,40 +3467,40 @@ exports[`Search Results Page renders loading images before returning no results 
   height: 36px;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   outline: none;
 }
 
-.emotion-17:active,
-.emotion-17[data-active="true"],
-.emotion-17:focus,
-.emotion-17:hover {
+.emotion-10:active,
+.emotion-10[data-active="true"],
+.emotion-10:focus,
+.emotion-10:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-17:hover,
-.emotion-17[data-hover="true"],
-.emotion-17:active,
-.emotion-17[data-active="true"] {
+.emotion-10:hover,
+.emotion-10[data-hover="true"],
+.emotion-10:active,
+.emotion-10[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-18 {
+.emotion-11 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -4610,7 +3510,7 @@ exports[`Search Results Page renders loading images before returning no results 
   border-radius: 5px;
 }
 
-.emotion-19 {
+.emotion-12 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -4635,38 +3535,65 @@ exports[`Search Results Page renders loading images before returning no results 
   gap: 6px;
 }
 
-.emotion-20 {
+.emotion-13 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-21 {
+.emotion-15 {
+  margin: 16px 64px 64px;
+  max-width: 800px;
+  min-height: 600px;
+  grid-area: main;
+  max-width: 775px;
+  overflow-x: auto;
+}
+
+@media only screen and (max-width: 320px) {
+  .emotion-15 {
+    margin: 16px 24px 64px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-15 {
+    margin: 16px 32px 64px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-15 {
+    margin: 16px 48px 64px;
+  }
+}
+
+.emotion-16 {
   box-shadow: none;
   display: grid;
-  grid-area: results;
+  grid-area: main;
   grid-auto-rows: calc(152px + 16px);
   height: 100%;
   width: 100%;
 }
 
-.emotion-21:not(:hover)>.e1yoi6mj5 {
+.emotion-16:not(:hover)>.e1yoi6mj5 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-23 {
+.emotion-18 {
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-.emotion-23:hover {
+.emotion-18:hover {
   opacity: 1;
   box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
 }
 
-.emotion-24 {
+.emotion-19 {
   border-radius: 45px;
   height: 152px;
   position: relative;
@@ -4677,24 +3604,24 @@ exports[`Search Results Page renders loading images before returning no results 
   grid-template-rows: 1fr 2fr 1fr;
 }
 
-.emotion-24>div {
+.emotion-19>div {
   padding: 20px;
   padding-left: 30px;
 }
 
-.emotion-24:hover,
-.emotion-24:focus {
+.emotion-19:hover,
+.emotion-19:focus {
   color: unset;
   -webkit-text-decoration: unset;
   text-decoration: unset;
 }
 
-.emotion-24:hover>div,
-.emotion-24:focus>div {
+.emotion-19:hover>div,
+.emotion-19:focus>div {
   background-color: unset!important;
 }
 
-.emotion-24:before {
+.emotion-19:before {
   content: '';
   position: absolute;
   top: calc(-16px / 2);
@@ -4704,17 +3631,17 @@ exports[`Search Results Page renders loading images before returning no results 
   background-color: transparent;
 }
 
-.emotion-24 * {
+.emotion-19 * {
   padding: 2px;
   height: 15px!important;
   margin-right: 10px!important;
 }
 
-.emotion-26 {
+.emotion-21 {
   width: 100%;
 }
 
-.emotion-27 {
+.emotion-22 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -4732,7 +3659,7 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-bottom: 20px;
 }
 
-.emotion-28 {
+.emotion-23 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -4749,7 +3676,7 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-bottom: 16px;
 }
 
-.emotion-30 {
+.emotion-25 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -4766,21 +3693,21 @@ exports[`Search Results Page renders loading images before returning no results 
   width: 350px;
 }
 
-.emotion-103 {
-  grid-area: filters;
+.emotion-98 {
+  grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-103 {
+  .emotion-98 {
     display: none;
   }
 }
 
-.emotion-105 {
+.emotion-100 {
   color: #3D4F58;
 }
 
-.emotion-106 {
+.emotion-101 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -4795,12 +3722,12 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-bottom: 16px;
 }
 
-.emotion-108 {
-  grid-area: filters;
+.emotion-103 {
+  grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-108 {
+  .emotion-103 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -4811,34 +3738,34 @@ exports[`Search Results Page renders loading images before returning no results 
     flex-direction: row;
   }
 
-  .emotion-108>div {
+  .emotion-103>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-108 {
+  .emotion-103 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-108>div {
+  .emotion-103>div {
     width: 100%;
   }
 
-  .emotion-108>div:first-of-type {
+  .emotion-103>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 
-  .emotion-108>div>div {
+  .emotion-103>div>div {
     width: 100%;
   }
 }
 
-.emotion-110 {
+.emotion-105 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -4853,25 +3780,25 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-bottom: 16px;
 }
 
-.emotion-112 {
+.emotion-107 {
   width: 175px;
 }
 
-.emotion-114 {
+.emotion-109 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-114 label,
-  .emotion-114 p,
-  .emotion-114 button,
-  .emotion-114 div,
-  .emotion-114 span {
+  .emotion-109 label,
+  .emotion-109 p,
+  .emotion-109 button,
+  .emotion-109 div,
+  .emotion-109 span {
     font-size: 13px;
   }
 }
 
-.emotion-115 {
+.emotion-110 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4881,22 +3808,22 @@ exports[`Search Results Page renders loading images before returning no results 
   flex-direction: column;
 }
 
-.emotion-115>label+button,
-.emotion-115>p+button {
+.emotion-110>label+button,
+.emotion-110>p+button {
   margin-top: 3px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-115 label,
-  .emotion-115 p,
-  .emotion-115 button,
-  .emotion-115 div,
-  .emotion-115 span {
+  .emotion-110 label,
+  .emotion-110 p,
+  .emotion-110 button,
+  .emotion-110 div,
+  .emotion-110 span {
     font-size: 13px;
   }
 }
 
-.emotion-116 {
+.emotion-111 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -4936,35 +3863,35 @@ exports[`Search Results Page renders loading images before returning no results 
   font-size: 13px;
 }
 
-.emotion-116:focus {
+.emotion-111:focus {
   outline: none;
 }
 
-.emotion-116[disabled],
-.emotion-116:disabled {
+.emotion-111[disabled],
+.emotion-111:disabled {
   pointer-events: none;
 }
 
-.emotion-116:active,
-.emotion-116:focus,
-.emotion-116:hover {
+.emotion-111:active,
+.emotion-111:focus,
+.emotion-111:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-116:hover,
-.emotion-116:active {
+.emotion-111:hover,
+.emotion-111:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-116:focus {
+.emotion-111:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-116>*:last-child {
+.emotion-111>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -4972,33 +3899,33 @@ exports[`Search Results Page renders loading images before returning no results 
   justify-content: flex-start;
 }
 
-.emotion-116>*:last-child>svg {
+.emotion-111>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-116>*:last-child>svg {
+.emotion-111>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-116>*:last-child {
+.emotion-111>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-116:focus {
+.emotion-111:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-116 {
+  .emotion-111 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-118 {
+.emotion-113 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -5018,7 +3945,7 @@ exports[`Search Results Page renders loading images before returning no results 
   gap: 6px;
 }
 
-.emotion-119 {
+.emotion-114 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5038,14 +3965,14 @@ exports[`Search Results Page renders loading images before returning no results 
   overflow: hidden;
 }
 
-.emotion-120 {
+.emotion-115 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-121 {
+.emotion-116 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -5055,7 +3982,7 @@ exports[`Search Results Page renders loading images before returning no results 
   justify-self: left;
 }
 
-.emotion-128 {
+.emotion-123 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -5095,42 +4022,42 @@ exports[`Search Results Page renders loading images before returning no results 
   font-size: 13px;
 }
 
-.emotion-128:focus {
+.emotion-123:focus {
   outline: none;
 }
 
-.emotion-128[disabled],
-.emotion-128:disabled {
+.emotion-123[disabled],
+.emotion-123:disabled {
   pointer-events: none;
 }
 
-.emotion-128:active,
-.emotion-128:focus,
-.emotion-128:hover {
+.emotion-123:active,
+.emotion-123:focus,
+.emotion-123:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-128:hover,
-.emotion-128:active {
+.emotion-123:hover,
+.emotion-123:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-128,
-.emotion-128:hover {
+.emotion-123,
+.emotion-123:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-128:focus {
+.emotion-123:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-128>*:last-child {
+.emotion-123>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -5138,46 +4065,46 @@ exports[`Search Results Page renders loading images before returning no results 
   justify-content: flex-start;
 }
 
-.emotion-128>*:last-child>svg {
+.emotion-123>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-128>*:last-child>svg {
+.emotion-123>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-128>*:last-child {
+.emotion-123>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-128:focus {
+.emotion-123:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-128:disabled {
+.emotion-123:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-128:disabled:active {
+.emotion-123:disabled:active {
   pointer-events: none;
 }
 
-.emotion-128:disabled {
+.emotion-123:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-128:disabled>*:last-child>svg {
+.emotion-123:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-128 {
+  .emotion-123 {
     height: 36px;
     font-size: 16px;
   }
@@ -5194,66 +4121,6 @@ exports[`Search Results Page renders loading images before returning no results 
       >
         Search Results
       </h1>
-      <form
-        class="emotion-6"
-        role="search"
-      >
-        <div
-          class="emotion-7"
-          role="searchbox"
-          tabindex="-1"
-        >
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-8"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
-              fill="currentColor"
-              fill-rule="evenodd"
-            />
-          </svg>
-          <input
-            class="emotion-9 sl-search-input"
-            placeholder="Search"
-            type="search"
-            value="noresultsreturned"
-          />
-          <button
-            aria-disabled="false"
-            aria-label="Clear search"
-            class="emotion-10"
-            tabindex="0"
-            type="button"
-          >
-            <div
-              class="emotion-11"
-            >
-              <svg
-                aria-label="XWith Circle Icon"
-                class="emotion-12"
-                height="16"
-                role="img"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  clip-rule="evenodd"
-                  d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM9.41421 5.17157C9.80474 4.78105 10.4379 4.78105 10.8284 5.17157C11.219 5.5621 11.219 6.19526 10.8284 6.58579L9.41421 8L10.8284 9.41421C11.219 9.80474 11.219 10.4379 10.8284 10.8284C10.4379 11.219 9.80474 11.219 9.41421 10.8284L8 9.41421L6.58579 10.8284C6.19526 11.219 5.5621 11.219 5.17157 10.8284C4.78105 10.4379 4.78105 9.80474 5.17157 9.41421L6.58579 8L5.17157 6.58579C4.78105 6.19526 4.78105 5.5621 5.17157 5.17157C5.5621 4.78105 6.19526 4.78105 6.58579 5.17157L8 6.58579L9.41421 5.17157Z"
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                />
-              </svg>
-            </div>
-          </button>
-        </div>
-      </form>
       <span
         class="sl-search-keyword"
         style="display: none;"
@@ -5261,27 +4128,27 @@ exports[`Search Results Page renders loading images before returning no results 
         noresultsreturned
       </span>
       <div
-        class="emotion-13 emotion-14"
+        class="emotion-6 emotion-7"
       />
       <div
-        class="emotion-15 emotion-16"
+        class="emotion-8 emotion-9"
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-10"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-18"
+            class="emotion-11"
           />
           <div
-            class="emotion-19"
+            class="emotion-12"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-20"
+              class="emotion-13"
               fill="none"
               height="16"
               role="presentation"
@@ -5301,289 +4168,293 @@ exports[`Search Results Page renders loading images before returning no results 
         </button>
       </div>
     </div>
-    <div
-      class="emotion-21 emotion-22"
+    <main
+      class="main-column emotion-14 emotion-15"
     >
       <div
-        class="emotion-23 emotion-24 emotion-25"
+        class="emotion-16 emotion-17"
       >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </main>
     <div
-      class="emotion-103 emotion-104"
+      class="emotion-98 emotion-70"
     >
       <h2
-        class="emotion-105 emotion-106 emotion-107"
+        class="emotion-100 emotion-101 emotion-102"
       >
         Refine your search
       </h2>
       <div
-        class="emotion-108 emotion-109"
+        class="emotion-103 emotion-104"
       >
         <div
-          class="emotion-110 emotion-111"
+          class="emotion-105 emotion-106"
         >
           <div
-            class="emotion-112 emotion-113 emotion-114"
+            class="emotion-107 emotion-108 emotion-109"
           >
             <div
-              class="emotion-115"
+              class="emotion-110"
             >
               <button
                 aria-controls="select-17-menu"
@@ -5592,7 +4463,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-116"
+                class="emotion-111"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-18"
@@ -5600,16 +4471,16 @@ exports[`Search Results Page renders loading images before returning no results 
                 value=""
               >
                 <div
-                  class="emotion-18"
+                  class="emotion-11"
                 />
                 <div
-                  class="emotion-118"
+                  class="emotion-113"
                 >
                   <div
-                    class="emotion-119"
+                    class="emotion-114"
                   >
                     <div
-                      class="emotion-120"
+                      class="emotion-115"
                     >
                       Filter by Category
                     </div>
@@ -5617,7 +4488,7 @@ exports[`Search Results Page renders loading images before returning no results 
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-121"
+                    class="emotion-116"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -5634,13 +4505,13 @@ exports[`Search Results Page renders loading images before returning no results 
           </div>
         </div>
         <div
-          class="emotion-110 emotion-111"
+          class="emotion-105 emotion-106"
         >
           <div
-            class="emotion-112 emotion-113 emotion-114"
+            class="emotion-107 emotion-108 emotion-109"
           >
             <div
-              class="emotion-115"
+              class="emotion-110"
             >
               <button
                 aria-controls="select-19-menu"
@@ -5649,7 +4520,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-128"
+                class="emotion-123"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -5658,16 +4529,16 @@ exports[`Search Results Page renders loading images before returning no results 
                 value=""
               >
                 <div
-                  class="emotion-18"
+                  class="emotion-11"
                 />
                 <div
-                  class="emotion-118"
+                  class="emotion-113"
                 >
                   <div
-                    class="emotion-119"
+                    class="emotion-114"
                   >
                     <div
-                      class="emotion-120"
+                      class="emotion-115"
                     >
                       Filter by Version
                     </div>
@@ -5675,7 +4546,7 @@ exports[`Search Results Page renders loading images before returning no results 
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-121"
+                    class="emotion-116"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -5693,20 +4564,20 @@ exports[`Search Results Page renders loading images before returning no results 
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-10"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-18"
+            class="emotion-11"
           />
           <div
-            class="emotion-19"
+            class="emotion-12"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-20"
+              class="emotion-13"
               fill="none"
               height="16"
               role="presentation"
@@ -5734,28 +4605,27 @@ exports[`Search Results Page renders loading images before returning nonempty re
 <DocumentFragment>
   .emotion-0 {
   display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  grid-template-areas: 'header .' 'results filters';
+  grid-template-areas: 'header .' 'main right';
   grid-template-columns: auto 173px;
-  margin: 32px 108px 64px 32px;
+  margin: 16px 64px 64px;
   max-width: 1150px;
   row-gap: 32px;
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1024px) {
   .emotion-0 {
-    margin: 32px 40px 64px 40px;
+    margin: 16px 24px 64px;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .emotion-0 {
-    -webkit-column-gap: 0;
-    column-gap: 0;
-    grid-template-areas: 'header' 'results';
+    grid-template-areas: 'header' 'main';
     grid-template-columns: auto;
-    margin: 32px 24px 64px 24px;
+    margin: 16px 24px 64px;
   }
 }
 
@@ -5780,274 +4650,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
 }
 
 .emotion-6 {
-  outline: none;
-}
-
-.emotion-7 {
-  position: relative;
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  justify-items: center;
-  border: 1px solid;
-  border-radius: 6px;
-  z-index: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border-color,box-shadow;
-  font-size: 13px;
-  line-height: 20px;
-  height: 36px;
-  grid-template-columns: 36px 1fr;
-  grid-auto-columns: 36px;
-  color: #001E2B;
-  background: #FFFFFF;
-  border-color: #889397;
-}
-
-.emotion-7:not(:disabled):focus-within {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: #FFFFFF;
-}
-
-.emotion-7:hover:not(:disabled):not(:focus-within),
-.emotion-7:active:not(:disabled):not(:focus-within) {
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
-.emotion-8 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  color: #5C6C75;
-  left: 12px;
-}
-
-.emotion-9 {
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  background-color: inherit;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  width: 100%;
-  height: 1.5em;
-  font-weight: 400;
-  z-index: 1;
-  outline: none;
-  border: none;
-  padding: 0;
-}
-
-.emotion-9[aria-disabled='true'] {
-  cursor: not-allowed;
-}
-
-.emotion-9[aria-disabled='true']:hover,
-.emotion-9[aria-disabled='true']:active {
-  box-shadow: none;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-moz-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9:-ms-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-ms-clear,
-.emotion-9::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.emotion-9::-webkit-search-decoration,
-.emotion-9::-webkit-search-cancel-button,
-.emotion-9::-webkit-search-results-button,
-.emotion-9::-webkit-search-results-decoration {
-  display: none;
-}
-
-.emotion-9:-webkit-autofill {
-  color: inherit;
-  background: transparent;
-  border: none;
-  -webkit-text-fill-color: inherit;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false'] {
-  box-shadow: 0 0 0 100px #FFFFFF inset;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:focus {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #0498EC;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:hover:not(:focus) {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #E8EDEB;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::-moz-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9:-ms-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9[aria-disabled='true']::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-webkit-autofill,
-.emotion-9[aria-disabled='true']:-webkit-autofill:hover,
-.emotion-9[aria-disabled='true']:-webkit-autofill:focus {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  border: 1px solid #889397;
-  -webkit-text-fill-color: #889397;
-  box-shadow: 0 0 0 100px #E8EDEB inset;
-}
-
-.emotion-10 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: color,box-shadow;
-  background-color: rgba(255, 255, 255, 0);
-  height: 28px;
-  width: 28px;
-  color: #5C6C75;
-  height: 28px;
-  width: 28px;
-}
-
-.emotion-10:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
-}
-
-.emotion-10:active:before,
-.emotion-10:hover:before,
-.emotion-10:focus:before {
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.emotion-10:focus {
-  outline: none;
-}
-
-.emotion-10:active,
-.emotion-10:hover {
-  color: #001E2B;
-}
-
-.emotion-10:active:before,
-.emotion-10:hover:before {
-  background-color: rgba(61,79,88,0.1);
-}
-
-.emotion-10:focus-visible {
-  color: #001E2B;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-10:focus-visible:before {
-  background-color: rgba(61,79,88,0.1);
-}
-
-.emotion-11 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.emotion-12 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
-.emotion-13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6071,18 +4673,18 @@ exports[`Search Results Page renders loading images before returning nonempty re
   align-items: center;
 }
 
-.emotion-15 {
+.emotion-8 {
   display: none;
   margin-top: 16px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-15 {
+  .emotion-8 {
     display: block;
   }
 }
 
-.emotion-17 {
+.emotion-10 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -6117,40 +4719,40 @@ exports[`Search Results Page renders loading images before returning nonempty re
   height: 36px;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   outline: none;
 }
 
-.emotion-17:active,
-.emotion-17[data-active="true"],
-.emotion-17:focus,
-.emotion-17:hover {
+.emotion-10:active,
+.emotion-10[data-active="true"],
+.emotion-10:focus,
+.emotion-10:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-17:hover,
-.emotion-17[data-hover="true"],
-.emotion-17:active,
-.emotion-17[data-active="true"] {
+.emotion-10:hover,
+.emotion-10[data-hover="true"],
+.emotion-10:active,
+.emotion-10[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-18 {
+.emotion-11 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -6160,7 +4762,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   border-radius: 5px;
 }
 
-.emotion-19 {
+.emotion-12 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -6185,38 +4787,65 @@ exports[`Search Results Page renders loading images before returning nonempty re
   gap: 6px;
 }
 
-.emotion-20 {
+.emotion-13 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-21 {
+.emotion-15 {
+  margin: 16px 64px 64px;
+  max-width: 800px;
+  min-height: 600px;
+  grid-area: main;
+  max-width: 775px;
+  overflow-x: auto;
+}
+
+@media only screen and (max-width: 320px) {
+  .emotion-15 {
+    margin: 16px 24px 64px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-15 {
+    margin: 16px 32px 64px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-15 {
+    margin: 16px 48px 64px;
+  }
+}
+
+.emotion-16 {
   box-shadow: none;
   display: grid;
-  grid-area: results;
+  grid-area: main;
   grid-auto-rows: calc(152px + 16px);
   height: 100%;
   width: 100%;
 }
 
-.emotion-21:not(:hover)>.e1yoi6mj5 {
+.emotion-16:not(:hover)>.e1yoi6mj5 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-23 {
+.emotion-18 {
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-.emotion-23:hover {
+.emotion-18:hover {
   opacity: 1;
   box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
 }
 
-.emotion-24 {
+.emotion-19 {
   border-radius: 45px;
   height: 152px;
   position: relative;
@@ -6227,24 +4856,24 @@ exports[`Search Results Page renders loading images before returning nonempty re
   grid-template-rows: 1fr 2fr 1fr;
 }
 
-.emotion-24>div {
+.emotion-19>div {
   padding: 20px;
   padding-left: 30px;
 }
 
-.emotion-24:hover,
-.emotion-24:focus {
+.emotion-19:hover,
+.emotion-19:focus {
   color: unset;
   -webkit-text-decoration: unset;
   text-decoration: unset;
 }
 
-.emotion-24:hover>div,
-.emotion-24:focus>div {
+.emotion-19:hover>div,
+.emotion-19:focus>div {
   background-color: unset!important;
 }
 
-.emotion-24:before {
+.emotion-19:before {
   content: '';
   position: absolute;
   top: calc(-16px / 2);
@@ -6254,17 +4883,17 @@ exports[`Search Results Page renders loading images before returning nonempty re
   background-color: transparent;
 }
 
-.emotion-24 * {
+.emotion-19 * {
   padding: 2px;
   height: 15px!important;
   margin-right: 10px!important;
 }
 
-.emotion-26 {
+.emotion-21 {
   width: 100%;
 }
 
-.emotion-27 {
+.emotion-22 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -6282,7 +4911,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin-bottom: 20px;
 }
 
-.emotion-28 {
+.emotion-23 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -6299,7 +4928,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin-bottom: 16px;
 }
 
-.emotion-30 {
+.emotion-25 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -6316,21 +4945,21 @@ exports[`Search Results Page renders loading images before returning nonempty re
   width: 350px;
 }
 
-.emotion-103 {
-  grid-area: filters;
+.emotion-98 {
+  grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-103 {
+  .emotion-98 {
     display: none;
   }
 }
 
-.emotion-105 {
+.emotion-100 {
   color: #3D4F58;
 }
 
-.emotion-106 {
+.emotion-101 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -6345,12 +4974,12 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin-bottom: 16px;
 }
 
-.emotion-108 {
-  grid-area: filters;
+.emotion-103 {
+  grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-108 {
+  .emotion-103 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -6361,34 +4990,34 @@ exports[`Search Results Page renders loading images before returning nonempty re
     flex-direction: row;
   }
 
-  .emotion-108>div {
+  .emotion-103>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-108 {
+  .emotion-103 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-108>div {
+  .emotion-103>div {
     width: 100%;
   }
 
-  .emotion-108>div:first-of-type {
+  .emotion-103>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 
-  .emotion-108>div>div {
+  .emotion-103>div>div {
     width: 100%;
   }
 }
 
-.emotion-110 {
+.emotion-105 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -6403,25 +5032,25 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin-bottom: 16px;
 }
 
-.emotion-112 {
+.emotion-107 {
   width: 175px;
 }
 
-.emotion-114 {
+.emotion-109 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-114 label,
-  .emotion-114 p,
-  .emotion-114 button,
-  .emotion-114 div,
-  .emotion-114 span {
+  .emotion-109 label,
+  .emotion-109 p,
+  .emotion-109 button,
+  .emotion-109 div,
+  .emotion-109 span {
     font-size: 13px;
   }
 }
 
-.emotion-115 {
+.emotion-110 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6431,22 +5060,22 @@ exports[`Search Results Page renders loading images before returning nonempty re
   flex-direction: column;
 }
 
-.emotion-115>label+button,
-.emotion-115>p+button {
+.emotion-110>label+button,
+.emotion-110>p+button {
   margin-top: 3px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-115 label,
-  .emotion-115 p,
-  .emotion-115 button,
-  .emotion-115 div,
-  .emotion-115 span {
+  .emotion-110 label,
+  .emotion-110 p,
+  .emotion-110 button,
+  .emotion-110 div,
+  .emotion-110 span {
     font-size: 13px;
   }
 }
 
-.emotion-116 {
+.emotion-111 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -6486,35 +5115,35 @@ exports[`Search Results Page renders loading images before returning nonempty re
   font-size: 13px;
 }
 
-.emotion-116:focus {
+.emotion-111:focus {
   outline: none;
 }
 
-.emotion-116[disabled],
-.emotion-116:disabled {
+.emotion-111[disabled],
+.emotion-111:disabled {
   pointer-events: none;
 }
 
-.emotion-116:active,
-.emotion-116:focus,
-.emotion-116:hover {
+.emotion-111:active,
+.emotion-111:focus,
+.emotion-111:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-116:hover,
-.emotion-116:active {
+.emotion-111:hover,
+.emotion-111:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-116:focus {
+.emotion-111:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-116>*:last-child {
+.emotion-111>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -6522,33 +5151,33 @@ exports[`Search Results Page renders loading images before returning nonempty re
   justify-content: flex-start;
 }
 
-.emotion-116>*:last-child>svg {
+.emotion-111>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-116>*:last-child>svg {
+.emotion-111>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-116>*:last-child {
+.emotion-111>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-116:focus {
+.emotion-111:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-116 {
+  .emotion-111 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-118 {
+.emotion-113 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -6568,7 +5197,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   gap: 6px;
 }
 
-.emotion-119 {
+.emotion-114 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6588,14 +5217,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
   overflow: hidden;
 }
 
-.emotion-120 {
+.emotion-115 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-121 {
+.emotion-116 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -6605,7 +5234,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   justify-self: left;
 }
 
-.emotion-128 {
+.emotion-123 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -6645,42 +5274,42 @@ exports[`Search Results Page renders loading images before returning nonempty re
   font-size: 13px;
 }
 
-.emotion-128:focus {
+.emotion-123:focus {
   outline: none;
 }
 
-.emotion-128[disabled],
-.emotion-128:disabled {
+.emotion-123[disabled],
+.emotion-123:disabled {
   pointer-events: none;
 }
 
-.emotion-128:active,
-.emotion-128:focus,
-.emotion-128:hover {
+.emotion-123:active,
+.emotion-123:focus,
+.emotion-123:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-128:hover,
-.emotion-128:active {
+.emotion-123:hover,
+.emotion-123:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-128,
-.emotion-128:hover {
+.emotion-123,
+.emotion-123:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-128:focus {
+.emotion-123:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-128>*:last-child {
+.emotion-123>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -6688,46 +5317,46 @@ exports[`Search Results Page renders loading images before returning nonempty re
   justify-content: flex-start;
 }
 
-.emotion-128>*:last-child>svg {
+.emotion-123>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-128>*:last-child>svg {
+.emotion-123>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-128>*:last-child {
+.emotion-123>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-128:focus {
+.emotion-123:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-128:disabled {
+.emotion-123:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-128:disabled:active {
+.emotion-123:disabled:active {
   pointer-events: none;
 }
 
-.emotion-128:disabled {
+.emotion-123:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-128:disabled>*:last-child>svg {
+.emotion-123:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-128 {
+  .emotion-123 {
     height: 36px;
     font-size: 16px;
   }
@@ -6744,66 +5373,6 @@ exports[`Search Results Page renders loading images before returning nonempty re
       >
         Search Results
       </h1>
-      <form
-        class="emotion-6"
-        role="search"
-      >
-        <div
-          class="emotion-7"
-          role="searchbox"
-          tabindex="-1"
-        >
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-8"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
-              fill="currentColor"
-              fill-rule="evenodd"
-            />
-          </svg>
-          <input
-            class="emotion-9 sl-search-input"
-            placeholder="Search"
-            type="search"
-            value="stitch"
-          />
-          <button
-            aria-disabled="false"
-            aria-label="Clear search"
-            class="emotion-10"
-            tabindex="0"
-            type="button"
-          >
-            <div
-              class="emotion-11"
-            >
-              <svg
-                aria-label="XWith Circle Icon"
-                class="emotion-12"
-                height="16"
-                role="img"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  clip-rule="evenodd"
-                  d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM9.41421 5.17157C9.80474 4.78105 10.4379 4.78105 10.8284 5.17157C11.219 5.5621 11.219 6.19526 10.8284 6.58579L9.41421 8L10.8284 9.41421C11.219 9.80474 11.219 10.4379 10.8284 10.8284C10.4379 11.219 9.80474 11.219 9.41421 10.8284L8 9.41421L6.58579 10.8284C6.19526 11.219 5.5621 11.219 5.17157 10.8284C4.78105 10.4379 4.78105 9.80474 5.17157 9.41421L6.58579 8L5.17157 6.58579C4.78105 6.19526 4.78105 5.5621 5.17157 5.17157C5.5621 4.78105 6.19526 4.78105 6.58579 5.17157L8 6.58579L9.41421 5.17157Z"
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                />
-              </svg>
-            </div>
-          </button>
-        </div>
-      </form>
       <span
         class="sl-search-keyword"
         style="display: none;"
@@ -6811,27 +5380,27 @@ exports[`Search Results Page renders loading images before returning nonempty re
         stitch
       </span>
       <div
-        class="emotion-13 emotion-14"
+        class="emotion-6 emotion-7"
       />
       <div
-        class="emotion-15 emotion-16"
+        class="emotion-8 emotion-9"
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-10"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-18"
+            class="emotion-11"
           />
           <div
-            class="emotion-19"
+            class="emotion-12"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-20"
+              class="emotion-13"
               fill="none"
               height="16"
               role="presentation"
@@ -6851,289 +5420,293 @@ exports[`Search Results Page renders loading images before returning nonempty re
         </button>
       </div>
     </div>
-    <div
-      class="emotion-21 emotion-22"
+    <main
+      class="main-column emotion-14 emotion-15"
     >
       <div
-        class="emotion-23 emotion-24 emotion-25"
+        class="emotion-16 emotion-17"
       >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="emotion-23 emotion-24 emotion-25"
-      >
         <div
-          aria-busy="true"
-          class="emotion-26"
+          class="emotion-18 emotion-19 emotion-20"
         >
           <div
-            aria-hidden="true"
-            class="emotion-27"
-            data-testid="lg-paragraph-skeleton-header"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-28"
-          />
-          <div
-            aria-hidden="true"
-            class="emotion-30"
-          />
+            aria-busy="true"
+            class="emotion-21"
+          >
+            <div
+              aria-hidden="true"
+              class="emotion-22"
+              data-testid="lg-paragraph-skeleton-header"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-23"
+            />
+            <div
+              aria-hidden="true"
+              class="emotion-25"
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </main>
     <div
-      class="emotion-103 emotion-104"
+      class="emotion-98 emotion-70"
     >
       <h2
-        class="emotion-105 emotion-106 emotion-107"
+        class="emotion-100 emotion-101 emotion-102"
       >
         Refine your search
       </h2>
       <div
-        class="emotion-108 emotion-109"
+        class="emotion-103 emotion-104"
       >
         <div
-          class="emotion-110 emotion-111"
+          class="emotion-105 emotion-106"
         >
           <div
-            class="emotion-112 emotion-113 emotion-114"
+            class="emotion-107 emotion-108 emotion-109"
           >
             <div
-              class="emotion-115"
+              class="emotion-110"
             >
               <button
                 aria-controls="select-1-menu"
@@ -7142,7 +5715,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-116"
+                class="emotion-111"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-2"
@@ -7150,16 +5723,16 @@ exports[`Search Results Page renders loading images before returning nonempty re
                 value=""
               >
                 <div
-                  class="emotion-18"
+                  class="emotion-11"
                 />
                 <div
-                  class="emotion-118"
+                  class="emotion-113"
                 >
                   <div
-                    class="emotion-119"
+                    class="emotion-114"
                   >
                     <div
-                      class="emotion-120"
+                      class="emotion-115"
                     >
                       Filter by Category
                     </div>
@@ -7167,7 +5740,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-121"
+                    class="emotion-116"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -7184,13 +5757,13 @@ exports[`Search Results Page renders loading images before returning nonempty re
           </div>
         </div>
         <div
-          class="emotion-110 emotion-111"
+          class="emotion-105 emotion-106"
         >
           <div
-            class="emotion-112 emotion-113 emotion-114"
+            class="emotion-107 emotion-108 emotion-109"
           >
             <div
-              class="emotion-115"
+              class="emotion-110"
             >
               <button
                 aria-controls="select-3-menu"
@@ -7199,7 +5772,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-128"
+                class="emotion-123"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -7208,16 +5781,16 @@ exports[`Search Results Page renders loading images before returning nonempty re
                 value=""
               >
                 <div
-                  class="emotion-18"
+                  class="emotion-11"
                 />
                 <div
-                  class="emotion-118"
+                  class="emotion-113"
                 >
                   <div
-                    class="emotion-119"
+                    class="emotion-114"
                   >
                     <div
-                      class="emotion-120"
+                      class="emotion-115"
                     >
                       Filter by Version
                     </div>
@@ -7225,7 +5798,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-121"
+                    class="emotion-116"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -7243,20 +5816,20 @@ exports[`Search Results Page renders loading images before returning nonempty re
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-10"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-18"
+            class="emotion-11"
           />
           <div
-            class="emotion-19"
+            class="emotion-12"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-20"
+              class="emotion-13"
               fill="none"
               height="16"
               role="presentation"
@@ -7284,28 +5857,27 @@ exports[`Search Results Page renders results from a given search term query para
 <DocumentFragment>
   .emotion-0 {
   display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
   -webkit-column-gap: 46px;
   column-gap: 46px;
-  grid-template-areas: 'header .' 'results filters';
+  grid-template-areas: 'header .' 'main right';
   grid-template-columns: auto 173px;
-  margin: 32px 108px 64px 32px;
+  margin: 16px 64px 64px;
   max-width: 1150px;
   row-gap: 32px;
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1024px) {
   .emotion-0 {
-    margin: 32px 40px 64px 40px;
+    margin: 16px 24px 64px;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .emotion-0 {
-    -webkit-column-gap: 0;
-    column-gap: 0;
-    grid-template-areas: 'header' 'results';
+    grid-template-areas: 'header' 'main';
     grid-template-columns: auto;
-    margin: 32px 24px 64px 24px;
+    margin: 16px 24px 64px;
   }
 }
 
@@ -7330,274 +5902,6 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-6 {
-  outline: none;
-}
-
-.emotion-7 {
-  position: relative;
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  justify-items: center;
-  border: 1px solid;
-  border-radius: 6px;
-  z-index: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: border-color,box-shadow;
-  font-size: 13px;
-  line-height: 20px;
-  height: 36px;
-  grid-template-columns: 36px 1fr;
-  grid-auto-columns: 36px;
-  color: #001E2B;
-  background: #FFFFFF;
-  border-color: #889397;
-}
-
-.emotion-7:not(:disabled):focus-within {
-  box-shadow: 0 0 0 3px #0498EC;
-  border-color: #FFFFFF;
-}
-
-.emotion-7:hover:not(:disabled):not(:focus-within),
-.emotion-7:active:not(:disabled):not(:focus-within) {
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
-.emotion-8 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  color: #5C6C75;
-  left: 12px;
-}
-
-.emotion-9 {
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  background-color: inherit;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  width: 100%;
-  height: 1.5em;
-  font-weight: 400;
-  z-index: 1;
-  outline: none;
-  border: none;
-  padding: 0;
-}
-
-.emotion-9[aria-disabled='true'] {
-  cursor: not-allowed;
-}
-
-.emotion-9[aria-disabled='true']:hover,
-.emotion-9[aria-disabled='true']:active {
-  box-shadow: none;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-moz-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9:-ms-input-placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::placeholder {
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.emotion-9::-ms-clear,
-.emotion-9::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.emotion-9::-webkit-search-decoration,
-.emotion-9::-webkit-search-cancel-button,
-.emotion-9::-webkit-search-results-button,
-.emotion-9::-webkit-search-results-decoration {
-  display: none;
-}
-
-.emotion-9:-webkit-autofill {
-  color: inherit;
-  background: transparent;
-  border: none;
-  -webkit-text-fill-color: inherit;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false'] {
-  box-shadow: 0 0 0 100px #FFFFFF inset;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:focus {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #0498EC;
-}
-
-.emotion-9:-webkit-autofill[aria-disabled='false']:hover:not(:focus) {
-  box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #E8EDEB;
-}
-
-.emotion-9::-webkit-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::-moz-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9:-ms-input-placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9::placeholder {
-  color: #889397;
-  font-weight: 400;
-}
-
-.emotion-9[aria-disabled='true']::-webkit-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::-moz-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-ms-input-placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']::placeholder {
-  color: #889397;
-}
-
-.emotion-9[aria-disabled='true']:-webkit-autofill,
-.emotion-9[aria-disabled='true']:-webkit-autofill:hover,
-.emotion-9[aria-disabled='true']:-webkit-autofill:focus {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  border: 1px solid #889397;
-  -webkit-text-fill-color: #889397;
-  box-shadow: 0 0 0 100px #E8EDEB inset;
-}
-
-.emotion-10 {
-  border: none;
-  -webkit-appearance: unset;
-  padding: unset;
-  display: inline-block;
-  border-radius: 100px;
-  position: relative;
-  cursor: pointer;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: 150ms ease-in-out;
-  transition: 150ms ease-in-out;
-  transition-property: color,box-shadow;
-  background-color: rgba(255, 255, 255, 0);
-  height: 28px;
-  width: 28px;
-  color: #5C6C75;
-  height: 28px;
-  width: 28px;
-}
-
-.emotion-10:before {
-  content: '';
-  -webkit-transition: 150ms all ease-in-out;
-  transition: 150ms all ease-in-out;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 100%;
-  -webkit-transform: scale(0.8);
-  -moz-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
-}
-
-.emotion-10:active:before,
-.emotion-10:hover:before,
-.emotion-10:focus:before {
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.emotion-10:focus {
-  outline: none;
-}
-
-.emotion-10:active,
-.emotion-10:hover {
-  color: #001E2B;
-}
-
-.emotion-10:active:before,
-.emotion-10:hover:before {
-  background-color: rgba(61,79,88,0.1);
-}
-
-.emotion-10:focus-visible {
-  color: #001E2B;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-10:focus-visible:before {
-  background-color: rgba(61,79,88,0.1);
-}
-
-.emotion-11 {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
-.emotion-12 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
-.emotion-13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -7621,18 +5925,18 @@ exports[`Search Results Page renders results from a given search term query para
   align-items: center;
 }
 
-.emotion-15 {
+.emotion-8 {
   display: none;
   margin-top: 16px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-15 {
+  .emotion-8 {
     display: block;
   }
 }
 
-.emotion-17 {
+.emotion-10 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -7667,40 +5971,40 @@ exports[`Search Results Page renders results from a given search term query para
   height: 36px;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   outline: none;
 }
 
-.emotion-17:active,
-.emotion-17[data-active="true"],
-.emotion-17:focus,
-.emotion-17:hover {
+.emotion-10:active,
+.emotion-10[data-active="true"],
+.emotion-10:focus,
+.emotion-10:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-17:hover,
-.emotion-17[data-hover="true"],
-.emotion-17:active,
-.emotion-17[data-active="true"] {
+.emotion-10:hover,
+.emotion-10[data-hover="true"],
+.emotion-10:active,
+.emotion-10[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-17:focus-visible,
-.emotion-17[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-18 {
+.emotion-11 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -7710,7 +6014,7 @@ exports[`Search Results Page renders results from a given search term query para
   border-radius: 5px;
 }
 
-.emotion-19 {
+.emotion-12 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -7735,29 +6039,29 @@ exports[`Search Results Page renders results from a given search term query para
   gap: 6px;
 }
 
-.emotion-20 {
+.emotion-13 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-21 {
+.emotion-14 {
   box-shadow: none;
   display: grid;
-  grid-area: results;
+  grid-area: main;
   grid-auto-rows: calc(152px + 16px);
   height: 100%;
   width: 100%;
 }
 
-.emotion-21:not(:hover)>.emotion-24 {
+.emotion-14:not(:hover)>.emotion-17 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-23 {
+.emotion-16 {
   border-radius: 45px;
   height: 152px;
   position: relative;
@@ -7765,24 +6069,24 @@ exports[`Search Results Page renders results from a given search term query para
   width: 100%;
 }
 
-.emotion-23>div {
+.emotion-16>div {
   padding: 20px;
   padding-left: 30px;
 }
 
-.emotion-23:hover,
-.emotion-23:focus {
+.emotion-16:hover,
+.emotion-16:focus {
   color: unset;
   -webkit-text-decoration: unset;
   text-decoration: unset;
 }
 
-.emotion-23:hover>div,
-.emotion-23:focus>div {
+.emotion-16:hover>div,
+.emotion-16:focus>div {
   background-color: unset!important;
 }
 
-.emotion-23:before {
+.emotion-16:before {
   content: '';
   position: absolute;
   top: calc(-16px / 2);
@@ -7792,7 +6096,7 @@ exports[`Search Results Page renders results from a given search term query para
   background-color: transparent;
 }
 
-.emotion-25 {
+.emotion-18 {
   color: #016BF8;
   height: 100%;
   -webkit-text-decoration: none;
@@ -7801,38 +6105,38 @@ exports[`Search Results Page renders results from a given search term query para
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-.emotion-25 .emotion-29 {
+.emotion-18 .emotion-22 {
   color: #016BF8;
 }
 
-.emotion-25:visited .emotion-29 {
+.emotion-18:visited .emotion-22 {
   color: #5E0C9E;
 }
 
-.emotion-25:hover .emotion-29,
-.emotion-25:focus .emotion-29 {
+.emotion-18:hover .emotion-22,
+.emotion-18:focus .emotion-22 {
   color: #016BF8;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-25:hover .emotion-27,
-.emotion-25:focus .emotion-27 {
+.emotion-18:hover .emotion-20,
+.emotion-18:focus .emotion-20 {
   background-color: rgba(231, 238, 236, 0.4);
   -webkit-transition: background-color 150ms ease-in;
   transition: background-color 150ms ease-in;
 }
 
-.emotion-25:hover {
+.emotion-18:hover {
   opacity: 1;
   box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
 }
 
-.emotion-26 {
+.emotion-19 {
   height: 100%;
 }
 
-.emotion-28 {
+.emotion-21 {
   font-size: 13px;
   line-height: 24px;
   letter-spacing: 0.5px;
@@ -7850,14 +6154,14 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-28 {
+  .emotion-21 {
     font-size: 16px;
     line-height: 28px;
     font-weight: 600;
   }
 }
 
-.emotion-30 {
+.emotion-23 {
   font-size: 13px;
   line-height: 20px;
   margin-bottom: 16px;
@@ -7868,7 +6172,7 @@ exports[`Search Results Page renders results from a given search term query para
   min-height: 20px;
 }
 
-.emotion-32 {
+.emotion-25 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -7878,19 +6182,19 @@ exports[`Search Results Page renders results from a given search term query para
   font-weight: 400;
 }
 
-.emotion-32 strong,
-.emotion-32 b {
+.emotion-25 strong,
+.emotion-25 b {
   font-weight: 700;
 }
 
-.emotion-33 {
+.emotion-26 {
   bottom: 0;
   margin-bottom: 24px;
   overflow: hidden;
   height: 26px;
 }
 
-.emotion-36 {
+.emotion-29 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -7912,7 +6216,7 @@ exports[`Search Results Page renders results from a given search term query para
   margin-right: 8px;
 }
 
-.emotion-38 {
+.emotion-31 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -7934,7 +6238,7 @@ exports[`Search Results Page renders results from a given search term query para
   margin-right: 8px;
 }
 
-.emotion-39 {
+.emotion-32 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -7945,21 +6249,28 @@ exports[`Search Results Page renders results from a given search term query para
   width: 100%;
 }
 
-.emotion-39>div:first-child {
+.emotion-32>div:first-child {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-39>div:last-child {
+.emotion-32>div:last-child {
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   -webkit-justify-content: flex-end;
   justify-content: flex-end;
 }
 
-.emotion-40 {
+@media only screen and (max-width: 767px) {
+  .emotion-32 * {
+    font-size: 13px;
+    line-height: 16px;
+  }
+}
+
+.emotion-33 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -7978,7 +6289,7 @@ exports[`Search Results Page renders results from a given search term query para
   justify-content: center;
 }
 
-.emotion-45 {
+.emotion-38 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -8001,7 +6312,7 @@ exports[`Search Results Page renders results from a given search term query para
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-45:before {
+.emotion-38:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -8017,71 +6328,97 @@ exports[`Search Results Page renders results from a given search term query para
   transform: scale(0.8);
 }
 
-.emotion-45:active:before,
-.emotion-45:hover:before,
-.emotion-45:focus:before {
+.emotion-38:active:before,
+.emotion-38:hover:before,
+.emotion-38:focus:before {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
 }
 
-.emotion-45:focus {
+.emotion-38:focus {
   outline: none;
 }
 
-.emotion-45:active,
-.emotion-45:hover {
+.emotion-38:active,
+.emotion-38:hover {
   color: #001E2B;
 }
 
-.emotion-45:active:before,
-.emotion-45:hover:before {
+.emotion-38:active:before,
+.emotion-38:hover:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-45:focus-visible {
+.emotion-38:focus-visible {
   color: #001E2B;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-45:focus-visible:before {
+.emotion-38:focus-visible:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-45:active,
-.emotion-45:hover {
+.emotion-38:active,
+.emotion-38:hover {
   color: #C1C7C6;
 }
 
-.emotion-45:active:before,
-.emotion-45:hover:before {
+.emotion-38:active:before,
+.emotion-38:hover:before {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-45:focus {
+.emotion-38:focus {
   color: #C1C7C6;
 }
 
-.emotion-45:focus:before {
+.emotion-38:focus:before {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-51 {
-  grid-area: filters;
+.emotion-39 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-40 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.emotion-44 {
+  grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-51 {
+  .emotion-44 {
     display: none;
   }
 }
 
-.emotion-53 {
+.emotion-46 {
   color: #3D4F58;
 }
 
-.emotion-54 {
+.emotion-47 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -8096,12 +6433,12 @@ exports[`Search Results Page renders results from a given search term query para
   margin-bottom: 16px;
 }
 
-.emotion-56 {
-  grid-area: filters;
+.emotion-49 {
+  grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-56 {
+  .emotion-49 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -8112,34 +6449,34 @@ exports[`Search Results Page renders results from a given search term query para
     flex-direction: row;
   }
 
-  .emotion-56>div {
+  .emotion-49>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-56 {
+  .emotion-49 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-56>div {
+  .emotion-49>div {
     width: 100%;
   }
 
-  .emotion-56>div:first-of-type {
+  .emotion-49>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 
-  .emotion-56>div>div {
+  .emotion-49>div>div {
     width: 100%;
   }
 }
 
-.emotion-58 {
+.emotion-51 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -8154,25 +6491,25 @@ exports[`Search Results Page renders results from a given search term query para
   margin-bottom: 16px;
 }
 
-.emotion-60 {
+.emotion-53 {
   width: 175px;
 }
 
-.emotion-62 {
+.emotion-55 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-62 label,
-  .emotion-62 p,
-  .emotion-62 button,
-  .emotion-62 div,
-  .emotion-62 span {
+  .emotion-55 label,
+  .emotion-55 p,
+  .emotion-55 button,
+  .emotion-55 div,
+  .emotion-55 span {
     font-size: 13px;
   }
 }
 
-.emotion-63 {
+.emotion-56 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8182,22 +6519,22 @@ exports[`Search Results Page renders results from a given search term query para
   flex-direction: column;
 }
 
-.emotion-63>label+button,
-.emotion-63>p+button {
+.emotion-56>label+button,
+.emotion-56>p+button {
   margin-top: 3px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-63 label,
-  .emotion-63 p,
-  .emotion-63 button,
-  .emotion-63 div,
-  .emotion-63 span {
+  .emotion-56 label,
+  .emotion-56 p,
+  .emotion-56 button,
+  .emotion-56 div,
+  .emotion-56 span {
     font-size: 13px;
   }
 }
 
-.emotion-64 {
+.emotion-57 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -8237,35 +6574,35 @@ exports[`Search Results Page renders results from a given search term query para
   font-size: 13px;
 }
 
-.emotion-64:focus {
+.emotion-57:focus {
   outline: none;
 }
 
-.emotion-64[disabled],
-.emotion-64:disabled {
+.emotion-57[disabled],
+.emotion-57:disabled {
   pointer-events: none;
 }
 
-.emotion-64:active,
-.emotion-64:focus,
-.emotion-64:hover {
+.emotion-57:active,
+.emotion-57:focus,
+.emotion-57:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-64:hover,
-.emotion-64:active {
+.emotion-57:hover,
+.emotion-57:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-64:focus {
+.emotion-57:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-64>*:last-child {
+.emotion-57>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -8273,33 +6610,33 @@ exports[`Search Results Page renders results from a given search term query para
   justify-content: flex-start;
 }
 
-.emotion-64>*:last-child>svg {
+.emotion-57>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-64>*:last-child>svg {
+.emotion-57>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-64>*:last-child {
+.emotion-57>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-64:focus {
+.emotion-57:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-64 {
+  .emotion-57 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-66 {
+.emotion-59 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -8319,7 +6656,7 @@ exports[`Search Results Page renders results from a given search term query para
   gap: 6px;
 }
 
-.emotion-67 {
+.emotion-60 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8339,14 +6676,14 @@ exports[`Search Results Page renders results from a given search term query para
   overflow: hidden;
 }
 
-.emotion-68 {
+.emotion-61 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-69 {
+.emotion-62 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -8356,7 +6693,7 @@ exports[`Search Results Page renders results from a given search term query para
   justify-self: left;
 }
 
-.emotion-76 {
+.emotion-69 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -8396,42 +6733,42 @@ exports[`Search Results Page renders results from a given search term query para
   font-size: 13px;
 }
 
-.emotion-76:focus {
+.emotion-69:focus {
   outline: none;
 }
 
-.emotion-76[disabled],
-.emotion-76:disabled {
+.emotion-69[disabled],
+.emotion-69:disabled {
   pointer-events: none;
 }
 
-.emotion-76:active,
-.emotion-76:focus,
-.emotion-76:hover {
+.emotion-69:active,
+.emotion-69:focus,
+.emotion-69:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-76:hover,
-.emotion-76:active {
+.emotion-69:hover,
+.emotion-69:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-76,
-.emotion-76:hover {
+.emotion-69,
+.emotion-69:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-76:focus {
+.emotion-69:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-76>*:last-child {
+.emotion-69>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -8439,46 +6776,46 @@ exports[`Search Results Page renders results from a given search term query para
   justify-content: flex-start;
 }
 
-.emotion-76>*:last-child>svg {
+.emotion-69>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-76>*:last-child>svg {
+.emotion-69>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-76>*:last-child {
+.emotion-69>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-76:focus {
+.emotion-69:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-76:disabled {
+.emotion-69:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-76:disabled:active {
+.emotion-69:disabled:active {
   pointer-events: none;
 }
 
-.emotion-76:disabled {
+.emotion-69:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-76:disabled>*:last-child>svg {
+.emotion-69:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-76 {
+  .emotion-69 {
     height: 36px;
     font-size: 16px;
   }
@@ -8495,66 +6832,6 @@ exports[`Search Results Page renders results from a given search term query para
       >
         Search Results
       </h1>
-      <form
-        class="emotion-6"
-        role="search"
-      >
-        <div
-          class="emotion-7"
-          role="searchbox"
-          tabindex="-1"
-        >
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-8"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M2.3234 9.81874C4.07618 11.5715 6.75062 11.8398 8.78588 10.6244L12.93 14.7685C13.4377 15.2762 14.2608 15.2762 14.7685 14.7685C15.2762 14.2608 15.2762 13.4377 14.7685 12.93L10.6244 8.78588C11.8398 6.75062 11.5715 4.07619 9.81873 2.32341C7.74896 0.253628 4.39318 0.253628 2.3234 2.32341C0.253624 4.39319 0.253624 7.74896 2.3234 9.81874ZM7.98026 4.16188C9.03467 5.2163 9.03467 6.92585 7.98026 7.98026C6.92584 9.03468 5.2163 9.03468 4.16188 7.98026C3.10746 6.92585 3.10746 5.2163 4.16188 4.16188C5.2163 3.10747 6.92584 3.10747 7.98026 4.16188Z"
-              fill="currentColor"
-              fill-rule="evenodd"
-            />
-          </svg>
-          <input
-            class="emotion-9 sl-search-input"
-            placeholder="Search"
-            type="search"
-            value="stitch"
-          />
-          <button
-            aria-disabled="false"
-            aria-label="Clear search"
-            class="emotion-10"
-            tabindex="0"
-            type="button"
-          >
-            <div
-              class="emotion-11"
-            >
-              <svg
-                aria-label="XWith Circle Icon"
-                class="emotion-12"
-                height="16"
-                role="img"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  clip-rule="evenodd"
-                  d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM9.41421 5.17157C9.80474 4.78105 10.4379 4.78105 10.8284 5.17157C11.219 5.5621 11.219 6.19526 10.8284 6.58579L9.41421 8L10.8284 9.41421C11.219 9.80474 11.219 10.4379 10.8284 10.8284C10.4379 11.219 9.80474 11.219 9.41421 10.8284L8 9.41421L6.58579 10.8284C6.19526 11.219 5.5621 11.219 5.17157 10.8284C4.78105 10.4379 4.78105 9.80474 5.17157 9.41421L6.58579 8L5.17157 6.58579C4.78105 6.19526 4.78105 5.5621 5.17157 5.17157C5.5621 4.78105 6.19526 4.78105 6.58579 5.17157L8 6.58579L9.41421 5.17157Z"
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                />
-              </svg>
-            </div>
-          </button>
-        </div>
-      </form>
       <span
         class="sl-search-keyword"
         style="display: none;"
@@ -8562,27 +6839,27 @@ exports[`Search Results Page renders results from a given search term query para
         stitch
       </span>
       <div
-        class="emotion-13 emotion-14"
+        class="emotion-6 emotion-7"
       />
       <div
-        class="emotion-15 emotion-16"
+        class="emotion-8 emotion-9"
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-10"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-18"
+            class="emotion-11"
           />
           <div
-            class="emotion-19"
+            class="emotion-12"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-20"
+              class="emotion-13"
               fill="none"
               height="16"
               role="presentation"
@@ -8603,22 +6880,22 @@ exports[`Search Results Page renders results from a given search term query para
       </div>
     </div>
     <div
-      class="emotion-21 emotion-22"
+      class="emotion-14 emotion-15"
     >
       <a
-        class="emotion-23 emotion-24 emotion-25"
+        class="emotion-16 emotion-17 emotion-18"
         href="stitch.nofilters"
       >
         <div
-          class="emotion-26 emotion-27"
+          class="emotion-19 emotion-20"
         >
           <p
-            class="emotion-28 emotion-29"
+            class="emotion-21 emotion-22"
           >
             stitch (no filters)
           </p>
           <p
-            class="emotion-30 emotion-31 emotion-32"
+            class="emotion-23 emotion-24 emotion-25"
             maxlines="2"
           >
             <span
@@ -8629,15 +6906,15 @@ exports[`Search Results Page renders results from a given search term query para
              preview (no filters)
           </p>
           <div
-            class="emotion-33 emotion-34"
+            class="emotion-26 emotion-27"
           >
             <span
-              class="emotion-35 emotion-36"
+              class="emotion-28 emotion-29"
             >
               Realm
             </span>
             <span
-              class="emotion-35 emotion-38"
+              class="emotion-28 emotion-31"
             >
               Latest
             </span>
@@ -8645,26 +6922,26 @@ exports[`Search Results Page renders results from a given search term query para
         </div>
       </a>
       <div
-        class="emotion-39"
+        class="emotion-32"
       >
         <div
-          class="emotion-40"
+          class="emotion-33"
         />
         <div
-          class="emotion-40"
+          class="emotion-33"
         >
           <p
-            class="emotion-32"
+            class="emotion-25"
             data-testid="lg-pagination-item-range"
           >
             1 - 10 of many
           </p>
         </div>
         <div
-          class="emotion-40"
+          class="emotion-33"
         >
           <p
-            class="emotion-32"
+            class="emotion-25"
             data-testid="lg-pagination-page-range"
           >
             1 of many
@@ -8672,16 +6949,16 @@ exports[`Search Results Page renders results from a given search term query para
           <button
             aria-disabled="true"
             aria-label="Previous page"
-            class="emotion-45"
+            class="emotion-38"
             data-testid="lg-pagination-back-button"
             tabindex="0"
           >
             <div
-              class="emotion-11"
+              class="emotion-39"
             >
               <svg
                 aria-label="Chevron Left Icon"
-                class="emotion-12"
+                class="emotion-40"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
@@ -8699,16 +6976,16 @@ exports[`Search Results Page renders results from a given search term query para
           <button
             aria-disabled="true"
             aria-label="Next page"
-            class="emotion-45"
+            class="emotion-38"
             data-testid="lg-pagination-next-button"
             tabindex="0"
           >
             <div
-              class="emotion-11"
+              class="emotion-39"
             >
               <svg
                 aria-label="Chevron Right Icon"
-                class="emotion-12"
+                class="emotion-40"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
@@ -8727,24 +7004,24 @@ exports[`Search Results Page renders results from a given search term query para
       </div>
     </div>
     <div
-      class="emotion-51 emotion-52"
+      class="emotion-44 emotion-70"
     >
       <h2
-        class="emotion-53 emotion-54 emotion-55"
+        class="emotion-46 emotion-47 emotion-48"
       >
         Refine your search
       </h2>
       <div
-        class="emotion-56 emotion-57"
+        class="emotion-49 emotion-50"
       >
         <div
-          class="emotion-58 emotion-59"
+          class="emotion-51 emotion-52"
         >
           <div
-            class="emotion-60 emotion-61 emotion-62"
+            class="emotion-53 emotion-54 emotion-55"
           >
             <div
-              class="emotion-63"
+              class="emotion-56"
             >
               <button
                 aria-controls="select-57-menu"
@@ -8753,7 +7030,7 @@ exports[`Search Results Page renders results from a given search term query para
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-64"
+                class="emotion-57"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-58"
@@ -8761,16 +7038,16 @@ exports[`Search Results Page renders results from a given search term query para
                 value=""
               >
                 <div
-                  class="emotion-18"
+                  class="emotion-11"
                 />
                 <div
-                  class="emotion-66"
+                  class="emotion-59"
                 >
                   <div
-                    class="emotion-67"
+                    class="emotion-60"
                   >
                     <div
-                      class="emotion-68"
+                      class="emotion-61"
                     >
                       Filter by Category
                     </div>
@@ -8778,7 +7055,7 @@ exports[`Search Results Page renders results from a given search term query para
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-69"
+                    class="emotion-62"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -8795,13 +7072,13 @@ exports[`Search Results Page renders results from a given search term query para
           </div>
         </div>
         <div
-          class="emotion-58 emotion-59"
+          class="emotion-51 emotion-52"
         >
           <div
-            class="emotion-60 emotion-61 emotion-62"
+            class="emotion-53 emotion-54 emotion-55"
           >
             <div
-              class="emotion-63"
+              class="emotion-56"
             >
               <button
                 aria-controls="select-59-menu"
@@ -8810,7 +7087,7 @@ exports[`Search Results Page renders results from a given search term query para
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-76"
+                class="emotion-69"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -8819,16 +7096,16 @@ exports[`Search Results Page renders results from a given search term query para
                 value=""
               >
                 <div
-                  class="emotion-18"
+                  class="emotion-11"
                 />
                 <div
-                  class="emotion-66"
+                  class="emotion-59"
                 >
                   <div
-                    class="emotion-67"
+                    class="emotion-60"
                   >
                     <div
-                      class="emotion-68"
+                      class="emotion-61"
                     >
                       Filter by Version
                     </div>
@@ -8836,7 +7113,7 @@ exports[`Search Results Page renders results from a given search term query para
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-69"
+                    class="emotion-62"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -8854,20 +7131,20 @@ exports[`Search Results Page renders results from a given search term query para
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-10"
           data-lgid="lg-button"
           type="button"
         >
           <div
-            class="emotion-18"
+            class="emotion-11"
           />
           <div
-            class="emotion-19"
+            class="emotion-12"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-20"
+              class="emotion-13"
               fill="none"
               height="16"
               role="presentation"

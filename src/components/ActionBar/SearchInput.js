@@ -1,5 +1,6 @@
 import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from '@gatsbyjs/reach-router';
 import { css, cx } from '@leafygreen-ui/emotion';
 import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
@@ -58,6 +59,7 @@ const SearchInput = ({ className }) => {
   const { darkMode } = useDarkMode();
   const [selectedOption, setSelectedOption] = useState(0);
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
+  const { search } = useLocation();
 
   useBackdropClick(
     () => {
@@ -120,6 +122,14 @@ const SearchInput = ({ className }) => {
       setMobileSearchActive(false);
     }
   }, [isMedium]);
+
+  // on init, populate search input field with search params (if any)
+  useEffect(() => {
+    const searchTerm = new URLSearchParams(search).get('q');
+    if (searchTerm) {
+      setSearchValue(searchTerm);
+    }
+  }, [search]);
 
   const handleSearchBoxKeyDown = (e) => {
     const isFocusInMenu = menuRef.current?.contains && menuRef.current.contains(document.activeElement);
