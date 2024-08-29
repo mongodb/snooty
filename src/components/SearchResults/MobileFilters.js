@@ -46,7 +46,7 @@ const Label = styled('div')`
 `;
 
 const MobileFilters = ({ facets }) => {
-  const { topSmall } = useStickyTopValues();
+  const { topSmall } = useStickyTopValues(false, true);
   const { setShowMobileFilters, showFacets } = useContext(SearchContext);
 
   const closeMobileFilters = useCallback(() => {

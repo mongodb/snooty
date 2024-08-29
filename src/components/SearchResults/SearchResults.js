@@ -53,10 +53,8 @@ const HeaderContainer = styled('div')`
 `;
 
 const headerContainerDynamicStyles = ({ headingColor }) => css`
-  > h1:first-of-type {
+  > h3:first-of-type {
     color: ${headingColor};
-    padding-bottom: 24px;
-    margin: unset;
   }
 `;
 
@@ -89,16 +87,17 @@ const SearchResultsContainer = styled('div')`
   column-gap: 46px;
   grid-template-areas: 'header .' 'main right';
   grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
-  margin: ${theme.size.default} ${theme.size.xlarge} ${theme.size.xlarge};
+  margin: ${theme.size.large} ${theme.size.xlarge} ${theme.size.xlarge};
 
   @media ${theme.screenSize.upToLarge} {
-    margin: ${theme.size.default} ${theme.size.medium} ${theme.size.xlarge};
+    margin: ${theme.size.large} ${theme.size.medium} ${theme.size.xlarge};
   }
 
   @media ${theme.screenSize.upToMedium} {
     grid-template-areas: 'header' 'main';
     grid-template-columns: auto;
     margin: ${theme.size.default} ${theme.size.medium} ${theme.size.xlarge};
+    row-gap: ${theme.size.default};
   }
   max-width: 1150px;
   row-gap: ${theme.size.large};
@@ -246,7 +245,7 @@ const ResultTag = styled('div')`
   align-items: center;
   flex-wrap: wrap;
   row-gap: ${theme.size.small};
-  padding-top: ${theme.size.default};
+  padding-top: ${theme.size.small};
   align-items: center;
 `;
 
@@ -261,7 +260,7 @@ const iconStyle = css`
 
 const MobileSearchButtonWrapper = styled('div')`
   display: none;
-  margin-top: ${theme.size.default};
+  margin-top: ${theme.size.medium};
 
   @media ${theme.screenSize.upToMedium} {
     display: block;
@@ -400,7 +399,7 @@ const SearchResults = () => {
   return (
     <SearchResultsContainer showFacets={showFacets}>
       <HeaderContainer className={cx(headerContainerDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
-        <H3 as="h1">Search Results</H3>
+        <H3>Search Results</H3>
         {/* Classname-attached searchTerm needed for Smartling localization */}
         <span style={{ display: 'none' }} className="sl-search-keyword">
           {searchTerm}
