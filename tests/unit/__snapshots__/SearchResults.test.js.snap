@@ -1811,7 +1811,7 @@ exports[`Search Results Page considers a given search filter query param and dis
       </div>
     </div>
     <div
-      class="emotion-49 emotion-70"
+      class="emotion-49 emotion-50"
     >
       <h2
         class="emotion-51 emotion-52 emotion-53"
@@ -2674,7 +2674,7 @@ exports[`Search Results Page does not return results for a given search term wit
       </div>
     </div>
     <div
-      class="emotion-14 emotion-72"
+      class="emotion-14 emotion-71"
     >
       <div
         class="emotion-16 emotion-17"
@@ -2957,7 +2957,7 @@ exports[`Search Results Page does not return results for a given search term wit
       </div>
     </div>
     <div
-      class="emotion-23 emotion-70"
+      class="emotion-23 emotion-24"
     >
       <h2
         class="emotion-25 emotion-26 emotion-27"
@@ -3538,34 +3538,7 @@ exports[`Search Results Page renders loading images before returning no results 
   justify-self: right;
 }
 
-.emotion-15 {
-  margin: 16px 64px 64px;
-  max-width: 800px;
-  min-height: 600px;
-  grid-area: main;
-  max-width: 775px;
-  overflow-x: auto;
-}
-
-@media only screen and (max-width: 320px) {
-  .emotion-15 {
-    margin: 16px 24px 64px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-15 {
-    margin: 16px 32px 64px;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .emotion-15 {
-    margin: 16px 48px 64px;
-  }
-}
-
-.emotion-16 {
+.emotion-14 {
   box-shadow: none;
   display: grid;
   grid-area: main;
@@ -3574,22 +3547,22 @@ exports[`Search Results Page renders loading images before returning no results 
   width: 100%;
 }
 
-.emotion-16:not(:hover)>.e1yoi6mj5 {
+.emotion-14:not(:hover)>.e1yoi6mj5 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-18 {
+.emotion-16 {
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-.emotion-18:hover {
+.emotion-16:hover {
   opacity: 1;
   box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
 }
 
-.emotion-19 {
+.emotion-17 {
   border-radius: 45px;
   height: 152px;
   position: relative;
@@ -3600,24 +3573,24 @@ exports[`Search Results Page renders loading images before returning no results 
   grid-template-rows: 1fr 2fr 1fr;
 }
 
-.emotion-19>div {
+.emotion-17>div {
   padding: 20px;
   padding-left: 30px;
 }
 
-.emotion-19:hover,
-.emotion-19:focus {
+.emotion-17:hover,
+.emotion-17:focus {
   color: unset;
   -webkit-text-decoration: unset;
   text-decoration: unset;
 }
 
-.emotion-19:hover>div,
-.emotion-19:focus>div {
+.emotion-17:hover>div,
+.emotion-17:focus>div {
   background-color: unset!important;
 }
 
-.emotion-19:before {
+.emotion-17:before {
   content: '';
   position: absolute;
   top: calc(-16px / 2);
@@ -3627,17 +3600,17 @@ exports[`Search Results Page renders loading images before returning no results 
   background-color: transparent;
 }
 
-.emotion-19 * {
+.emotion-17 * {
   padding: 2px;
   height: 15px!important;
   margin-right: 10px!important;
 }
 
-.emotion-21 {
+.emotion-19 {
   width: 100%;
 }
 
-.emotion-22 {
+.emotion-20 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -3655,7 +3628,7 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-bottom: 20px;
 }
 
-.emotion-23 {
+.emotion-21 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -3672,7 +3645,7 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-bottom: 16px;
 }
 
-.emotion-25 {
+.emotion-23 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -3689,21 +3662,21 @@ exports[`Search Results Page renders loading images before returning no results 
   width: 350px;
 }
 
-.emotion-98 {
+.emotion-96 {
   grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-98 {
+  .emotion-96 {
     display: none;
   }
 }
 
-.emotion-100 {
+.emotion-98 {
   color: #3D4F58;
 }
 
-.emotion-101 {
+.emotion-99 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -3718,12 +3691,12 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-bottom: 16px;
 }
 
-.emotion-103 {
+.emotion-101 {
   grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-103 {
+  .emotion-101 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -3734,34 +3707,34 @@ exports[`Search Results Page renders loading images before returning no results 
     flex-direction: row;
   }
 
-  .emotion-103>div {
+  .emotion-101>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-103 {
+  .emotion-101 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-103>div {
+  .emotion-101>div {
     width: 100%;
   }
 
-  .emotion-103>div:first-of-type {
+  .emotion-101>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 
-  .emotion-103>div>div {
+  .emotion-101>div>div {
     width: 100%;
   }
 }
 
-.emotion-105 {
+.emotion-103 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -3776,25 +3749,25 @@ exports[`Search Results Page renders loading images before returning no results 
   margin-bottom: 16px;
 }
 
-.emotion-107 {
+.emotion-105 {
   width: 175px;
 }
 
-.emotion-109 {
+.emotion-107 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-109 label,
-  .emotion-109 p,
-  .emotion-109 button,
-  .emotion-109 div,
-  .emotion-109 span {
+  .emotion-107 label,
+  .emotion-107 p,
+  .emotion-107 button,
+  .emotion-107 div,
+  .emotion-107 span {
     font-size: 13px;
   }
 }
 
-.emotion-110 {
+.emotion-108 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3804,22 +3777,22 @@ exports[`Search Results Page renders loading images before returning no results 
   flex-direction: column;
 }
 
-.emotion-110>label+button,
-.emotion-110>p+button {
+.emotion-108>label+button,
+.emotion-108>p+button {
   margin-top: 3px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-110 label,
-  .emotion-110 p,
-  .emotion-110 button,
-  .emotion-110 div,
-  .emotion-110 span {
+  .emotion-108 label,
+  .emotion-108 p,
+  .emotion-108 button,
+  .emotion-108 div,
+  .emotion-108 span {
     font-size: 13px;
   }
 }
 
-.emotion-111 {
+.emotion-109 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -3859,35 +3832,35 @@ exports[`Search Results Page renders loading images before returning no results 
   font-size: 13px;
 }
 
-.emotion-111:focus {
+.emotion-109:focus {
   outline: none;
 }
 
-.emotion-111[disabled],
-.emotion-111:disabled {
+.emotion-109[disabled],
+.emotion-109:disabled {
   pointer-events: none;
 }
 
-.emotion-111:active,
-.emotion-111:focus,
-.emotion-111:hover {
+.emotion-109:active,
+.emotion-109:focus,
+.emotion-109:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-111:hover,
-.emotion-111:active {
+.emotion-109:hover,
+.emotion-109:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-111:focus {
+.emotion-109:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-111>*:last-child {
+.emotion-109>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -3895,33 +3868,33 @@ exports[`Search Results Page renders loading images before returning no results 
   justify-content: flex-start;
 }
 
-.emotion-111>*:last-child>svg {
+.emotion-109>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-111>*:last-child>svg {
+.emotion-109>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-111>*:last-child {
+.emotion-109>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-111:focus {
+.emotion-109:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-111 {
+  .emotion-109 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-113 {
+.emotion-111 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -3941,7 +3914,7 @@ exports[`Search Results Page renders loading images before returning no results 
   gap: 6px;
 }
 
-.emotion-114 {
+.emotion-112 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3961,14 +3934,14 @@ exports[`Search Results Page renders loading images before returning no results 
   overflow: hidden;
 }
 
-.emotion-115 {
+.emotion-113 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-116 {
+.emotion-114 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -3978,7 +3951,7 @@ exports[`Search Results Page renders loading images before returning no results 
   justify-self: left;
 }
 
-.emotion-123 {
+.emotion-121 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -4018,42 +3991,42 @@ exports[`Search Results Page renders loading images before returning no results 
   font-size: 13px;
 }
 
-.emotion-123:focus {
+.emotion-121:focus {
   outline: none;
 }
 
-.emotion-123[disabled],
-.emotion-123:disabled {
+.emotion-121[disabled],
+.emotion-121:disabled {
   pointer-events: none;
 }
 
-.emotion-123:active,
-.emotion-123:focus,
-.emotion-123:hover {
+.emotion-121:active,
+.emotion-121:focus,
+.emotion-121:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-123:hover,
-.emotion-123:active {
+.emotion-121:hover,
+.emotion-121:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-123,
-.emotion-123:hover {
+.emotion-121,
+.emotion-121:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-123:focus {
+.emotion-121:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-123>*:last-child {
+.emotion-121>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -4061,46 +4034,46 @@ exports[`Search Results Page renders loading images before returning no results 
   justify-content: flex-start;
 }
 
-.emotion-123>*:last-child>svg {
+.emotion-121>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-123>*:last-child>svg {
+.emotion-121>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-123>*:last-child {
+.emotion-121>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-123:focus {
+.emotion-121:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-123:disabled {
+.emotion-121:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-123:disabled:active {
+.emotion-121:disabled:active {
   pointer-events: none;
 }
 
-.emotion-123:disabled {
+.emotion-121:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-123:disabled>*:last-child>svg {
+.emotion-121:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-123 {
+  .emotion-121 {
     height: 36px;
     font-size: 16px;
   }
@@ -4164,293 +4137,289 @@ exports[`Search Results Page renders loading images before returning no results 
         </button>
       </div>
     </div>
-    <main
-      class="main-column emotion-14 emotion-15"
+    <div
+      class="emotion-14 emotion-15"
     >
       <div
-        class="emotion-16 emotion-17"
+        class="emotion-16 emotion-17 emotion-18"
       >
         <div
-          class="emotion-18 emotion-19 emotion-20"
+          aria-busy="true"
+          class="emotion-19"
         >
           <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
           <div
-            aria-busy="true"
+            aria-hidden="true"
             class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
+          />
           <div
-            aria-busy="true"
+            aria-hidden="true"
             class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
+          />
           <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
+            aria-hidden="true"
+            class="emotion-23"
+          />
         </div>
       </div>
-    </main>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+    </div>
     <div
-      class="emotion-98 emotion-70"
+      class="emotion-96 emotion-97"
     >
       <h2
-        class="emotion-100 emotion-101 emotion-102"
+        class="emotion-98 emotion-99 emotion-100"
       >
         Refine your search
       </h2>
       <div
-        class="emotion-103 emotion-104"
+        class="emotion-101 emotion-102"
       >
         <div
-          class="emotion-105 emotion-106"
+          class="emotion-103 emotion-104"
         >
           <div
-            class="emotion-107 emotion-108 emotion-109"
+            class="emotion-105 emotion-106 emotion-107"
           >
             <div
-              class="emotion-110"
+              class="emotion-108"
             >
               <button
                 aria-controls="select-17-menu"
@@ -4459,7 +4428,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-111"
+                class="emotion-109"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-18"
@@ -4470,13 +4439,13 @@ exports[`Search Results Page renders loading images before returning no results 
                   class="emotion-11"
                 />
                 <div
-                  class="emotion-113"
+                  class="emotion-111"
                 >
                   <div
-                    class="emotion-114"
+                    class="emotion-112"
                   >
                     <div
-                      class="emotion-115"
+                      class="emotion-113"
                     >
                       Filter by Category
                     </div>
@@ -4484,7 +4453,7 @@ exports[`Search Results Page renders loading images before returning no results 
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-116"
+                    class="emotion-114"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -4501,13 +4470,13 @@ exports[`Search Results Page renders loading images before returning no results 
           </div>
         </div>
         <div
-          class="emotion-105 emotion-106"
+          class="emotion-103 emotion-104"
         >
           <div
-            class="emotion-107 emotion-108 emotion-109"
+            class="emotion-105 emotion-106 emotion-107"
           >
             <div
-              class="emotion-110"
+              class="emotion-108"
             >
               <button
                 aria-controls="select-19-menu"
@@ -4516,7 +4485,7 @@ exports[`Search Results Page renders loading images before returning no results 
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-123"
+                class="emotion-121"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -4528,13 +4497,13 @@ exports[`Search Results Page renders loading images before returning no results 
                   class="emotion-11"
                 />
                 <div
-                  class="emotion-113"
+                  class="emotion-111"
                 >
                   <div
-                    class="emotion-114"
+                    class="emotion-112"
                   >
                     <div
-                      class="emotion-115"
+                      class="emotion-113"
                     >
                       Filter by Version
                     </div>
@@ -4542,7 +4511,7 @@ exports[`Search Results Page renders loading images before returning no results 
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-116"
+                    class="emotion-114"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -4789,34 +4758,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   justify-self: right;
 }
 
-.emotion-15 {
-  margin: 16px 64px 64px;
-  max-width: 800px;
-  min-height: 600px;
-  grid-area: main;
-  max-width: 775px;
-  overflow-x: auto;
-}
-
-@media only screen and (max-width: 320px) {
-  .emotion-15 {
-    margin: 16px 24px 64px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-15 {
-    margin: 16px 32px 64px;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .emotion-15 {
-    margin: 16px 48px 64px;
-  }
-}
-
-.emotion-16 {
+.emotion-14 {
   box-shadow: none;
   display: grid;
   grid-area: main;
@@ -4825,22 +4767,22 @@ exports[`Search Results Page renders loading images before returning nonempty re
   width: 100%;
 }
 
-.emotion-16:not(:hover)>.e1yoi6mj5 {
+.emotion-14:not(:hover)>.e1yoi6mj5 {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in;
   transition: opacity 150ms ease-in;
 }
 
-.emotion-18 {
+.emotion-16 {
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-.emotion-18:hover {
+.emotion-16:hover {
   opacity: 1;
   box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
 }
 
-.emotion-19 {
+.emotion-17 {
   border-radius: 45px;
   height: 152px;
   position: relative;
@@ -4851,24 +4793,24 @@ exports[`Search Results Page renders loading images before returning nonempty re
   grid-template-rows: 1fr 2fr 1fr;
 }
 
-.emotion-19>div {
+.emotion-17>div {
   padding: 20px;
   padding-left: 30px;
 }
 
-.emotion-19:hover,
-.emotion-19:focus {
+.emotion-17:hover,
+.emotion-17:focus {
   color: unset;
   -webkit-text-decoration: unset;
   text-decoration: unset;
 }
 
-.emotion-19:hover>div,
-.emotion-19:focus>div {
+.emotion-17:hover>div,
+.emotion-17:focus>div {
   background-color: unset!important;
 }
 
-.emotion-19:before {
+.emotion-17:before {
   content: '';
   position: absolute;
   top: calc(-16px / 2);
@@ -4878,17 +4820,17 @@ exports[`Search Results Page renders loading images before returning nonempty re
   background-color: transparent;
 }
 
-.emotion-19 * {
+.emotion-17 * {
   padding: 2px;
   height: 15px!important;
   margin-right: 10px!important;
 }
 
-.emotion-21 {
+.emotion-19 {
   width: 100%;
 }
 
-.emotion-22 {
+.emotion-20 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -4906,7 +4848,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin-bottom: 20px;
 }
 
-.emotion-23 {
+.emotion-21 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -4923,7 +4865,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin-bottom: 16px;
 }
 
-.emotion-25 {
+.emotion-23 {
   width: 100%;
   border-radius: 6px;
   -webkit-background-position: 50vw 0;
@@ -4940,21 +4882,21 @@ exports[`Search Results Page renders loading images before returning nonempty re
   width: 350px;
 }
 
-.emotion-98 {
+.emotion-96 {
   grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-98 {
+  .emotion-96 {
     display: none;
   }
 }
 
-.emotion-100 {
+.emotion-98 {
   color: #3D4F58;
 }
 
-.emotion-101 {
+.emotion-99 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -4969,12 +4911,12 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin-bottom: 16px;
 }
 
-.emotion-103 {
+.emotion-101 {
   grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-103 {
+  .emotion-101 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -4985,34 +4927,34 @@ exports[`Search Results Page renders loading images before returning nonempty re
     flex-direction: row;
   }
 
-  .emotion-103>div {
+  .emotion-101>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-103 {
+  .emotion-101 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-103>div {
+  .emotion-101>div {
     width: 100%;
   }
 
-  .emotion-103>div:first-of-type {
+  .emotion-101>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 
-  .emotion-103>div>div {
+  .emotion-101>div>div {
     width: 100%;
   }
 }
 
-.emotion-105 {
+.emotion-103 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -5027,25 +4969,25 @@ exports[`Search Results Page renders loading images before returning nonempty re
   margin-bottom: 16px;
 }
 
-.emotion-107 {
+.emotion-105 {
   width: 175px;
 }
 
-.emotion-109 {
+.emotion-107 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-109 label,
-  .emotion-109 p,
-  .emotion-109 button,
-  .emotion-109 div,
-  .emotion-109 span {
+  .emotion-107 label,
+  .emotion-107 p,
+  .emotion-107 button,
+  .emotion-107 div,
+  .emotion-107 span {
     font-size: 13px;
   }
 }
 
-.emotion-110 {
+.emotion-108 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5055,22 +4997,22 @@ exports[`Search Results Page renders loading images before returning nonempty re
   flex-direction: column;
 }
 
-.emotion-110>label+button,
-.emotion-110>p+button {
+.emotion-108>label+button,
+.emotion-108>p+button {
   margin-top: 3px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-110 label,
-  .emotion-110 p,
-  .emotion-110 button,
-  .emotion-110 div,
-  .emotion-110 span {
+  .emotion-108 label,
+  .emotion-108 p,
+  .emotion-108 button,
+  .emotion-108 div,
+  .emotion-108 span {
     font-size: 13px;
   }
 }
 
-.emotion-111 {
+.emotion-109 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -5110,35 +5052,35 @@ exports[`Search Results Page renders loading images before returning nonempty re
   font-size: 13px;
 }
 
-.emotion-111:focus {
+.emotion-109:focus {
   outline: none;
 }
 
-.emotion-111[disabled],
-.emotion-111:disabled {
+.emotion-109[disabled],
+.emotion-109:disabled {
   pointer-events: none;
 }
 
-.emotion-111:active,
-.emotion-111:focus,
-.emotion-111:hover {
+.emotion-109:active,
+.emotion-109:focus,
+.emotion-109:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-111:hover,
-.emotion-111:active {
+.emotion-109:hover,
+.emotion-109:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-111:focus {
+.emotion-109:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-111>*:last-child {
+.emotion-109>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -5146,33 +5088,33 @@ exports[`Search Results Page renders loading images before returning nonempty re
   justify-content: flex-start;
 }
 
-.emotion-111>*:last-child>svg {
+.emotion-109>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-111>*:last-child>svg {
+.emotion-109>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-111>*:last-child {
+.emotion-109>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-111:focus {
+.emotion-109:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-111 {
+  .emotion-109 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-113 {
+.emotion-111 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -5192,7 +5134,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   gap: 6px;
 }
 
-.emotion-114 {
+.emotion-112 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5212,14 +5154,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
   overflow: hidden;
 }
 
-.emotion-115 {
+.emotion-113 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-116 {
+.emotion-114 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -5229,7 +5171,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
   justify-self: left;
 }
 
-.emotion-123 {
+.emotion-121 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -5269,42 +5211,42 @@ exports[`Search Results Page renders loading images before returning nonempty re
   font-size: 13px;
 }
 
-.emotion-123:focus {
+.emotion-121:focus {
   outline: none;
 }
 
-.emotion-123[disabled],
-.emotion-123:disabled {
+.emotion-121[disabled],
+.emotion-121:disabled {
   pointer-events: none;
 }
 
-.emotion-123:active,
-.emotion-123:focus,
-.emotion-123:hover {
+.emotion-121:active,
+.emotion-121:focus,
+.emotion-121:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-123:hover,
-.emotion-123:active {
+.emotion-121:hover,
+.emotion-121:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-123,
-.emotion-123:hover {
+.emotion-121,
+.emotion-121:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-123:focus {
+.emotion-121:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-123>*:last-child {
+.emotion-121>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -5312,46 +5254,46 @@ exports[`Search Results Page renders loading images before returning nonempty re
   justify-content: flex-start;
 }
 
-.emotion-123>*:last-child>svg {
+.emotion-121>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-123>*:last-child>svg {
+.emotion-121>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-123>*:last-child {
+.emotion-121>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-123:focus {
+.emotion-121:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-123:disabled {
+.emotion-121:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-123:disabled:active {
+.emotion-121:disabled:active {
   pointer-events: none;
 }
 
-.emotion-123:disabled {
+.emotion-121:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-123:disabled>*:last-child>svg {
+.emotion-121:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-123 {
+  .emotion-121 {
     height: 36px;
     font-size: 16px;
   }
@@ -5415,293 +5357,289 @@ exports[`Search Results Page renders loading images before returning nonempty re
         </button>
       </div>
     </div>
-    <main
-      class="main-column emotion-14 emotion-15"
+    <div
+      class="emotion-14 emotion-15"
     >
       <div
-        class="emotion-16 emotion-17"
+        class="emotion-16 emotion-17 emotion-18"
       >
         <div
-          class="emotion-18 emotion-19 emotion-20"
+          aria-busy="true"
+          class="emotion-19"
         >
           <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
           <div
-            aria-busy="true"
+            aria-hidden="true"
             class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
+          />
           <div
-            aria-busy="true"
+            aria-hidden="true"
             class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
+          />
           <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
-        </div>
-        <div
-          class="emotion-18 emotion-19 emotion-20"
-        >
-          <div
-            aria-busy="true"
-            class="emotion-21"
-          >
-            <div
-              aria-hidden="true"
-              class="emotion-22"
-              data-testid="lg-paragraph-skeleton-header"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-23"
-            />
-            <div
-              aria-hidden="true"
-              class="emotion-25"
-            />
-          </div>
+            aria-hidden="true"
+            class="emotion-23"
+          />
         </div>
       </div>
-    </main>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+      <div
+        class="emotion-16 emotion-17 emotion-18"
+      >
+        <div
+          aria-busy="true"
+          class="emotion-19"
+        >
+          <div
+            aria-hidden="true"
+            class="emotion-20"
+            data-testid="lg-paragraph-skeleton-header"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-21"
+          />
+          <div
+            aria-hidden="true"
+            class="emotion-23"
+          />
+        </div>
+      </div>
+    </div>
     <div
-      class="emotion-98 emotion-70"
+      class="emotion-96 emotion-97"
     >
       <h2
-        class="emotion-100 emotion-101 emotion-102"
+        class="emotion-98 emotion-99 emotion-100"
       >
         Refine your search
       </h2>
       <div
-        class="emotion-103 emotion-104"
+        class="emotion-101 emotion-102"
       >
         <div
-          class="emotion-105 emotion-106"
+          class="emotion-103 emotion-104"
         >
           <div
-            class="emotion-107 emotion-108 emotion-109"
+            class="emotion-105 emotion-106 emotion-107"
           >
             <div
-              class="emotion-110"
+              class="emotion-108"
             >
               <button
                 aria-controls="select-1-menu"
@@ -5710,7 +5648,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-111"
+                class="emotion-109"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-2"
@@ -5721,13 +5659,13 @@ exports[`Search Results Page renders loading images before returning nonempty re
                   class="emotion-11"
                 />
                 <div
-                  class="emotion-113"
+                  class="emotion-111"
                 >
                   <div
-                    class="emotion-114"
+                    class="emotion-112"
                   >
                     <div
-                      class="emotion-115"
+                      class="emotion-113"
                     >
                       Filter by Category
                     </div>
@@ -5735,7 +5673,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-116"
+                    class="emotion-114"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -5752,13 +5690,13 @@ exports[`Search Results Page renders loading images before returning nonempty re
           </div>
         </div>
         <div
-          class="emotion-105 emotion-106"
+          class="emotion-103 emotion-104"
         >
           <div
-            class="emotion-107 emotion-108 emotion-109"
+            class="emotion-105 emotion-106 emotion-107"
           >
             <div
-              class="emotion-110"
+              class="emotion-108"
             >
               <button
                 aria-controls="select-3-menu"
@@ -5767,7 +5705,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-123"
+                class="emotion-121"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -5779,13 +5717,13 @@ exports[`Search Results Page renders loading images before returning nonempty re
                   class="emotion-11"
                 />
                 <div
-                  class="emotion-113"
+                  class="emotion-111"
                 >
                   <div
-                    class="emotion-114"
+                    class="emotion-112"
                   >
                     <div
-                      class="emotion-115"
+                      class="emotion-113"
                     >
                       Filter by Version
                     </div>
@@ -5793,7 +5731,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-116"
+                    class="emotion-114"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -6998,7 +6936,7 @@ exports[`Search Results Page renders results from a given search term query para
       </div>
     </div>
     <div
-      class="emotion-44 emotion-70"
+      class="emotion-44 emotion-45"
     >
       <h2
         class="emotion-46 emotion-47 emotion-48"
