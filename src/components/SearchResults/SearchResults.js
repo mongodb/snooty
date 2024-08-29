@@ -15,7 +15,6 @@ import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToMetaURL, searchParamsToURL } from '../../utils/search-params-to-url';
 import { requestHeaders } from '../../utils/search-facet-constants';
 import Tag, { searchTagStyle } from '../Tag';
-import MainColumn from '../MainColumn';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
 import SearchResult from './SearchResult';
@@ -113,12 +112,6 @@ const SearchResultsContainer = styled('div')`
       margin: ${theme.size.large} 71px ${theme.size.xlarge} 52px;
     }
   `}
-`;
-
-const StyledMainColumn = styled(MainColumn)`
-  grid-area: main;
-  max-width: 775px;
-  overflow-x: auto;
 `;
 
 const StyledSearchFilters = styled(SearchFilters)`
@@ -434,18 +427,16 @@ const SearchResults = () => {
 
       {/* loading state for new search input */}
       {!!searchTerm && !searchFinished && (
-        <StyledMainColumn>
-          <StyledSearchResults>
-            {[...Array(10)].map((_, index) => (
-              <StyledLoadingSkeletonContainer
-                key={index}
-                className={cx(searchResultDynamicStyling(SEARCH_THEME_STYLES[siteTheme]))}
-              >
-                <ParagraphSkeleton withHeader />
-              </StyledLoadingSkeletonContainer>
-            ))}
-          </StyledSearchResults>
-        </StyledMainColumn>
+        <StyledSearchResults>
+          {[...Array(10)].map((_, index) => (
+            <StyledLoadingSkeletonContainer
+              key={index}
+              className={cx(searchResultDynamicStyling(SEARCH_THEME_STYLES[siteTheme]))}
+            >
+              <ParagraphSkeleton withHeader />
+            </StyledLoadingSkeletonContainer>
+          ))}
+        </StyledSearchResults>
       )}
 
       {/* empty search results */}
