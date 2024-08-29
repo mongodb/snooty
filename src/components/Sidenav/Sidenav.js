@@ -117,6 +117,12 @@ const SidenavContainer = styled.div(
 
     a[class*='lg-ui-side-nav-item'] {
       color: var(--sidenav-item-color);
+      :hover {
+        background-color: ${palette.gray.light2};
+        .dark-theme & {
+          background-color: ${palette.gray.dark3};
+        }
+      }
     }
 
     [data-testid='side-nav-collapse-toggle'] {
