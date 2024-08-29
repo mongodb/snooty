@@ -20,7 +20,7 @@ const portalStyle = css`
   position: relative;
 `;
 
-const iconStyling = css`
+const iconStyle = css`
   display: inline-block;
   margin-right: ${theme.size.small};
   max-height: 20px;
@@ -50,7 +50,6 @@ const labelStyle = css`
   }
 `;
 
-// eslint-disable-next-line no-unused-vars
 const disabledLabelStyle = css`
   label {
     color: ${color.light.text.disabled.default};
@@ -64,9 +63,6 @@ const disabledLabelStyle = css`
 const selectStyle = css`
   > button {
     background-color: ${color.light.background.primary.default};
-    ::placeholder {
-      color: ${palette.gray.base};
-    }
 
     // Override button default color
     > *:last-child {
@@ -83,9 +79,6 @@ const selectStyle = css`
     .dark-theme & {
       border-color: ${color.dark.border.primary.default};
       background-color: ${palette.gray.dark4};
-      ::placeholder {
-        color: ${color.dark.text.primary.default};
-      }
 
       // Override button default color
       > *:last-child {
@@ -93,7 +86,13 @@ const selectStyle = css`
           color: ${color.dark.icon.primary.default};
         }
       }
+    }
+  }
+`;
 
+const enabledSelectHoverStyles = css`
+  > button {
+    .dark-theme & {
       &:hover,
       &:active,
       &:focus {
@@ -110,7 +109,6 @@ const selectStyle = css`
   }
 `;
 
-// eslint-disable-next-line no-unused-vars
 const disabledSelectStyles = css`
   > button {
     cursor: not-allowed;
@@ -124,16 +122,10 @@ const disabledSelectStyles = css`
     &[aria-disabled='true'] {
       background-color: ${color.light.background.disabled.default};
       border-color: ${color.light.border.disabled.default};
-      ::placeholder {
-        color: ${color.light.text.disabled.default};
-      }
 
       .dark-theme & {
         background-color: ${color.dark.background.disabled.default};
         border-color: ${color.dark.border.disabled.default};
-        ::placeholder {
-          color: ${color.dark.text.disabled.default};
-        }
       }
 
       &:hover,
@@ -184,7 +176,7 @@ const Select = ({
 
   return (
     <PortalContainer
-      className={`${className} ${cx(selectWrapperStyle, labelStyle, { disabledLabelStyle: disabled })}`}
+      className={`${className} ${cx(selectWrapperStyle, labelStyle, { [disabledLabelStyle]: disabled })}`}
       ref={portalContainer}
     >
       <LGSelect
@@ -204,7 +196,7 @@ const Select = ({
         onChange={(value) => {
           onChange({ value });
         }}
-        className={cx(selectStyle, { disabledSelectStyles: disabled })}
+        className={cx(selectStyle, { [disabledSelectStyles]: disabled, [enabledSelectHoverStyles]: !disabled })}
         {...props}
       >
         {choices.map((choice) => (
@@ -215,7 +207,7 @@ const Select = ({
             glyph={choice.icon}
             role="option"
           >
-            {choice.tabSelectorIcon && <choice.tabSelectorIcon className={cx(iconStyling)} />}
+            {choice.tabSelectorIcon && <choice.tabSelectorIcon className={cx(iconStyle)} />}
             {choice.text}
           </Option>
         ))}
