@@ -41,12 +41,15 @@ const Wrapper = styled('main')`
   ${({ isRealm }) =>
     isRealm &&
     `
-    h1 {
-      color: ${palette.black};
-    }
 
-    .introduction > p:first-of-type {
-      color: ${palette.black};
+    @media ${theme.screenSize.mediumAndUp} {
+      h1 {
+        color: ${palette.black};
+      }
+
+      .introduction > p:first-of-type {
+        color: ${palette.black};
+      }
     }
 
     section > p {
