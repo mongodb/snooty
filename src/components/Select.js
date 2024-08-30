@@ -196,7 +196,7 @@ const Select = ({
         onChange={(value) => {
           onChange({ value });
         }}
-        className={cx(selectStyle, { [disabledSelectStyles]: disabled, [enabledSelectHoverStyles]: !disabled })}
+        className={cx(selectStyle, disabled ? disabledSelectStyles : enabledSelectHoverStyles)}
         {...props}
       >
         {choices.map((choice) => (

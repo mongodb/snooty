@@ -26,7 +26,7 @@ const selectStyle = css`
 
 const focusBoxShadow = (color) => `
     0 0 0 2px ${color}, 
-    0 0 0 4px ${palette.blue.light1};
+    0 0 0 ${theme.size.tiny} ${palette.blue.light1};
 `;
 
 const disabledStyles = css`
