@@ -41,6 +41,14 @@ const Wrapper = styled('main')`
   ${({ isRealm }) =>
     isRealm &&
     `
+    h1 {
+      color: ${palette.black};
+    }
+
+    .introduction > p:first-of-type {
+      color: ${palette.black};
+    }
+
     section > p {
       grid-column: 2/-2;
       max-width: 775px;
