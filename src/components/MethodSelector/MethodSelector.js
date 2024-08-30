@@ -147,7 +147,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
         </RadioBoxGroup>
         {/* Keep separate div for triangle to allow for relative positioning */}
         <div className={cx(lineStyle)}>
-          <div className={triangleStyle(optionCount, selectedIdx)} />
+          <div className={cx(triangleStyle(optionCount, selectedIdx))} />
           <hr className={cx(hrStyle)} />
         </div>
       </div>
