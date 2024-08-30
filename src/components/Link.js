@@ -83,6 +83,9 @@ const gatsbyLinkStyling = (linkThemeStyle) => css`
 const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
+  span > span {
+    position: unset;
+  }
 `;
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
