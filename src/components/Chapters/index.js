@@ -27,7 +27,11 @@ const plpGridColumns = css`
 `;
 
 const Container = styled('div')`
-  background-color: ${palette.gray.light3};
+  --background-color: ${palette.gray.light3};
+  .dark-theme & {
+    --background-color: ${palette.black};
+  }
+  background-color: var(--background-color);
 `;
 
 // Additional div to allow the Container to stretch across the page, while keeping
@@ -42,7 +46,7 @@ const Content = styled('div')`
 `;
 
 const ViewController = styled('div')`
-  background-color: ${palette.gray.light3};
+  background-color: var(--background-color);
   margin-bottom: 20px;
   min-height: 84px;
   position: sticky;
@@ -68,7 +72,11 @@ const ViewOptions = styled('div')`
 
 const ViewOption = styled('span')`
   align-items: center;
-  color: ${({ isActive }) => (isActive ? palette.black : palette.gray.base)};
+  --color-active: ${palette.black};
+  .dark-theme & {
+    --color-active: ${palette.white};
+  }
+  color: ${({ isActive }) => (isActive ? `var(--color-active)` : palette.gray.base)};
   cursor: pointer;
   display: flex;
 
@@ -78,6 +86,9 @@ const ViewOption = styled('span')`
 
   :hover {
     color: ${palette.black};
+    .dark-theme & {
+      color: ${palette.white};
+    }
   }
 `;
 

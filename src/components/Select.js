@@ -3,6 +3,8 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { Option, Select as LGSelect } from '@leafygreen-ui/select';
 import PropTypes from 'prop-types';
+import { palette } from '@leafygreen-ui/palette';
+import { color, focusRing } from '@leafygreen-ui/tokens';
 import { theme } from '../theme/docsTheme';
 
 const Label = styled('p')`
@@ -18,7 +20,7 @@ const portalStyle = css`
   position: relative;
 `;
 
-const iconStyling = css`
+const iconStyle = css`
   display: inline-block;
   margin-right: ${theme.size.small};
   max-height: 20px;
@@ -26,7 +28,7 @@ const iconStyling = css`
 `;
 
 /* Override LG mobile style of enlarged mobile font */
-const selectStyle = css`
+const selectWrapperStyle = css`
   @media ${theme.screenSize.upToLarge} {
     label,
     p,
@@ -34,6 +36,112 @@ const selectStyle = css`
     div,
     span {
       font-size: ${theme.fontSize.small};
+    }
+  }
+`;
+
+const labelStyle = css`
+  label {
+    color: ${color.light.text.primary.default};
+
+    .dark-theme & {
+      color: ${color.dark.text.primary.default};
+    }
+  }
+`;
+
+const disabledLabelStyle = css`
+  label {
+    color: ${color.light.text.disabled.default};
+
+    .dark-theme & {
+      color: ${color.dark.text.disabled.default};
+    }
+  }
+`;
+
+const selectStyle = css`
+  > button {
+    background-color: ${color.light.background.primary.default};
+
+    // Override button default color
+    > *:last-child {
+      > svg {
+        color: ${color.light.icon.primary.default};
+      }
+    }
+
+    &:focus-visible {
+      box-shadow: ${focusRing.light.input};
+      border-color: rgba(255, 255, 255, 0);
+    }
+
+    .dark-theme & {
+      border-color: ${color.dark.border.primary.default};
+      background-color: ${palette.gray.dark4};
+
+      // Override button default color
+      > *:last-child {
+        > svg {
+          color: ${color.dark.icon.primary.default};
+        }
+      }
+    }
+  }
+`;
+
+const enabledSelectHoverStyles = css`
+  > button {
+    .dark-theme & {
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: ${palette.gray.dark4};
+        color: ${color.dark.text.primary.hover};
+      }
+
+      &:focus-visible {
+        background-color: ${palette.gray.dark4};
+        box-shadow: ${focusRing.dark.input};
+        border-color: rgba(255, 255, 255, 0);
+      }
+    }
+  }
+`;
+
+const disabledSelectStyles = css`
+  > button {
+    cursor: not-allowed;
+    pointer-events: unset;
+    box-shadow: unset;
+
+    &:active {
+      pointer-events: none;
+    }
+
+    &[aria-disabled='true'] {
+      background-color: ${color.light.background.disabled.default};
+      border-color: ${color.light.border.disabled.default};
+
+      .dark-theme & {
+        background-color: ${color.dark.background.disabled.default};
+        border-color: ${color.dark.border.disabled.default};
+      }
+
+      &:hover,
+      &:active {
+        box-shadow: inherit;
+      }
+
+      > *:last-child {
+        > svg {
+          color: ${color.light.icon.disabled.default};
+
+          .dark-theme & {
+            color: ${color.dark.icon.disabled.default};
+          }
+        }
+      }
     }
   }
 `;
@@ -67,7 +175,10 @@ const Select = ({
   const portalContainer = useRef();
 
   return (
-    <PortalContainer className={`${className} ${cx(selectStyle)}`} ref={portalContainer}>
+    <PortalContainer
+      className={`${className} ${cx(selectWrapperStyle, labelStyle, { [disabledLabelStyle]: disabled })}`}
+      ref={portalContainer}
+    >
       <LGSelect
         data-testid="lg-select"
         value={value || ''}
@@ -85,7 +196,7 @@ const Select = ({
         onChange={(value) => {
           onChange({ value });
         }}
-        className={cx(selectStyle)}
+        className={cx(selectStyle, disabled ? disabledSelectStyles : enabledSelectHoverStyles)}
         {...props}
       >
         {choices.map((choice) => (
@@ -96,7 +207,7 @@ const Select = ({
             glyph={choice.icon}
             role="option"
           >
-            {choice.tabSelectorIcon && <choice.tabSelectorIcon className={cx(iconStyling)} />}
+            {choice.tabSelectorIcon && <choice.tabSelectorIcon className={cx(iconStyle)} />}
             {choice.text}
           </Option>
         ))}
