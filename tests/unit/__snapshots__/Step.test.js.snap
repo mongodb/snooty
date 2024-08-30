@@ -26,6 +26,10 @@ exports[`renders with "connected" styling 1`] = `
   top: 0;
 }
 
+.dark-theme .emotion-0:not(:last-child):before {
+  border-left-color: #5C6C75;
+}
+
 .emotion-2 {
   position: relative;
   min-height: 59px;
@@ -51,6 +55,11 @@ exports[`renders with "connected" styling 1`] = `
   color: #00684A;
   height: 34px;
   width: 34px;
+}
+
+.dark-theme .emotion-4 {
+  background-color: #00684A;
+  color: #E8EDEB;
 }
 
 .emotion-6 {
@@ -185,6 +194,10 @@ exports[`renders with "connected" styling by default 1`] = `
   top: 0;
 }
 
+.dark-theme .emotion-0:not(:last-child):before {
+  border-left-color: #5C6C75;
+}
+
 .emotion-2 {
   position: relative;
   min-height: 59px;
@@ -210,6 +223,11 @@ exports[`renders with "connected" styling by default 1`] = `
   color: #00684A;
   height: 34px;
   width: 34px;
+}
+
+.dark-theme .emotion-4 {
+  background-color: #00684A;
+  color: #E8EDEB;
 }
 
 .emotion-6 {
@@ -325,11 +343,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 32px;
+  gap: 16px;
 }
 
 .emotion-0 h2,
-.emotion-0 h4 {
+.emotion-0 h4,
+.emotion-0 h6 {
   margin-top: unset;
 }
 
@@ -356,12 +375,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  border: 1px solid #C1C7C6;
+  border: 1.5px solid #C1C7C6;
   font-weight: 400;
   font-size: 16px;
   line-height: 28px;
   background-color: inherit;
-  color: #001E2B;
+  color: var(--opposite-color);
   height: 27px;
   width: 27px;
 }
@@ -369,7 +388,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 .emotion-6 section>*,
 .emotion-6 ol p,
 .emotion-6 ul p {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .emotion-7 {

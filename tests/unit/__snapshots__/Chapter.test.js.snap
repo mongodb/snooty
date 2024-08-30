@@ -17,9 +17,15 @@ exports[`renders correctly 1`] = `
   box-shadow: 0 4px 10px -4px rgba(0,30,43,0.3);
   background-color: #FFFFFF;
   color: #1C2D38;
+  border: 1px solid;
   background-color: #FFFFFF;
-  border: 1px solid #F9FBFA;
+  border-color: #F9FBFA;
   padding: 32px 24px;
+}
+
+.dark-theme .emotion-0 {
+  background-color: #001E2B;
+  border-color: #3D4F58;
 }
 
 @media not all and (max-width: 767px) {
@@ -96,10 +102,19 @@ exports[`renders correctly 1`] = `
   width: 83px;
 }
 
+.dark-theme .emotion-5 {
+  background-color: #0C2657;
+  color: #C3E7FE;
+}
+
 .emotion-7 {
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 500;
   margin-top: 8px;
+}
+
+.dark-theme .emotion-7 {
+  color: #FFFFFF;
 }
 
 .emotion-9 {
@@ -118,6 +133,10 @@ exports[`renders correctly 1`] = `
   font-weight: 700;
 }
 
+.dark-theme .emotion-9 {
+  color: #E8EDEB;
+}
+
 .emotion-10 {
   list-style-type: none;
   list-style-image: url(/assets/lightning-bolt.svg);
@@ -125,6 +144,10 @@ exports[`renders correctly 1`] = `
   margin-top: 24px;
   -webkit-padding-start: 14px;
   padding-inline-start: 14px;
+}
+
+.dark-theme .emotion-10 {
+  list-style-image: url(/assets/lightning-bolt-dark.svg);
 }
 
 @media not all and (max-width: 767px) {
@@ -178,6 +201,7 @@ exports[`renders correctly 1`] = `
   display: -ms-flexbox;
   display: flex;
   color: unset;
+  font-weight: inherit;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -187,9 +211,18 @@ exports[`renders correctly 1`] = `
   line-height: 24px;
 }
 
+.dark-theme .emotion-13 {
+  color: #C1C7C6;
+}
+
 .emotion-13:hover {
   background-color: #E8EDEB;
-  color: unset;
+}
+
+.dark-theme .emotion-13:hover {
+  background-color: #1C2D38;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-13:hover::after {

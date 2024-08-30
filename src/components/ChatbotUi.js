@@ -1,11 +1,10 @@
 import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
-import Skeleton from 'react-loading-skeleton';
+import { Skeleton } from '@leafygreen-ui/skeleton-loader';
 import { palette } from '@leafygreen-ui/palette';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { theme } from '../theme/docsTheme';
-import 'react-loading-skeleton/dist/skeleton.css';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { SuspenseHelper } from './SuspenseHelper';
 
@@ -16,7 +15,15 @@ export const defaultSuggestedPrompts = [
   'Why should I use Atlas Search?',
 ];
 
-const SKELETON_BORDER_RADIUS = '12px';
+const StyledSkeleton = styled(Skeleton)`
+  background: linear-gradient(110deg, rgb(232, 237, 235) 35%, rgb(249, 251, 250), rgb(232, 237, 235) 65%) 0px 0px /
+    100vw 100% fixed;
+
+  .dark-theme & {
+    background: linear-gradient(110deg, rgb(61, 79, 88) 35%, rgb(92, 108, 117), rgb(61, 79, 88) 65%) 0px 0px / 100vw
+      100% fixed;
+  }
+`;
 
 // Match landing template max width for alignment purposes
 const CONTENT_MAX_WIDTH = theme.breakpoints.xxLarge;
@@ -112,10 +119,7 @@ const StyledChatBotUiContainer = styled.div`
   min-height: 96px;
   align-items: center;
 
-  ${({ template }) =>
-    template in templateStylingMap &&
-    process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' &&
-    templateStylingMap[template]};
+  ${({ template }) => template in templateStylingMap && templateStylingMap[template]};
 `;
 
 const DocsChatbot = lazy(() =>
@@ -137,7 +141,7 @@ const ChatbotUi = ({ template, darkMode }) => {
   return (
     <StyledChatBotUiContainer data-testid="chatbot-ui" template={template}>
       {/* We wrapped this in a Suspense. We can use this opportunity to render a loading state if we decided we want that */}
-      <SuspenseHelper fallback={<Skeleton borderRadius={SKELETON_BORDER_RADIUS} height={48} />}>
+      <SuspenseHelper fallback={<StyledSkeleton darkMode={darkMode} />}>
         <Chatbot maxInputCharacters={DEFAULT_MAX_INPUT} serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
           <DocsChatbot suggestedPrompts={defaultSuggestedPrompts} darkMode={darkMode} />
         </Chatbot>
