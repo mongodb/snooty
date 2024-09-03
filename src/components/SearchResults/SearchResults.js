@@ -6,10 +6,10 @@ import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { H3, Overline } from '@leafygreen-ui/typography';
 import queryString from 'query-string';
 import { ParagraphSkeleton } from '@leafygreen-ui/skeleton-loader';
+import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -23,7 +23,6 @@ import SearchResult from './SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import MobileFilters from './MobileFilters';
 import { Facets, FacetTags } from './Facets';
-import { SEARCH_THEME_STYLES } from './styles/searchThemeStyles';
 
 const FILTER_COLUMN_WIDTH = '173px';
 const LANDING_MODULE_MARGIN = '28px';
@@ -80,8 +79,12 @@ const FilterHeader = styled('h2')`
   margin-bottom: ${theme.size.default};
 `;
 
-const filterHeaderDynamicStyles = ({ filterHeaderColor }) => css`
-  color: ${filterHeaderColor};
+const filterHeaderDynamicStyles = css`
+  color: ${palette.gray.dark2};
+
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
 `;
 
 const SearchResultsContainer = styled('div')`
@@ -159,7 +162,6 @@ const searchResultStyling = `
   }
   :hover,
   :focus {
-    color: unset;
     text-decoration: unset;
     > div {
       background-color: unset !important;
@@ -178,12 +180,21 @@ const searchResultStyling = `
   }
 `;
 
-export const searchResultDynamicStyling = ({ boxShadow, boxShadowOnHover }) => css`
-  box-shadow: ${boxShadow};
+export const searchResultDynamicStyling = css`
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 
   :hover {
     opacity: 1;
-    box-shadow: ${boxShadowOnHover};
+    box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
+  }
+
+  .dark-theme & {
+    box-shadow: 0px 0px 3px 0px rgba(255, 255, 255, 0.15);
+
+    :hover {
+      opacity: 1;
+      box-shadow: 0px 0px 5px 3px rgba(92, 97, 94, 0.15);
+    }
   }
 `;
 
@@ -204,6 +215,29 @@ const StyledLoadingSkeletonContainer = styled('div')`
   /* grid to handle loading skeleton structure */
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
+`;
+
+const StyledParagraphSkeleton = styled(ParagraphSkeleton)`
+  > div {
+    /*background: var(--sidenav-bg-color);*/
+
+    background: linear-gradient(110deg, ${palette.gray.light2} 35%, ${palette.gray.light3}, ${palette.gray.light2} 65%)
+      0 0/ 100vw 100% fixed;
+
+    background-position: 50vw 0;
+    animation: SkeletonShimmer 1.5s infinite linear;
+
+    @keyframes SkeletonShimmer {
+      to {
+        background-position: 100vw 0;
+      }
+    }
+
+    .dark-theme & {
+      background: linear-gradient(110deg, ${palette.gray.dark2} 35%, ${palette.gray.dark1}, ${palette.gray.dark2} 65%) 0
+        0/ 100vw 100% fixed;
+    }
+  }
 `;
 
 const StyledSearchResults = styled('div')`
@@ -239,6 +273,11 @@ const ResultTag = styled('div')`
 
 const overlineStyle = css`
   padding-right: 8px;
+  color: ${palette.gray.dark2};
+
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
 `;
 
 const iconStyle = css`
@@ -281,8 +320,6 @@ const SearchResults = () => {
 
   const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
-
-  const { theme: siteTheme } = useDarkMode();
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
@@ -392,13 +429,11 @@ const SearchResults = () => {
     },
     [searchParams, searchTerm, setSearchTerm]
   );
-
   return (
     <SearchResultsContainer showFacets={showFacets}>
       <HeaderContainer className={cx(headerContainerDynamicStyles)}>
         <H3 as="h1">Search Results </H3>
         <SearchInput
-          ref={searchBoxRef}
           value={searchField}
           placeholder="Search"
           onSubmit={submitNewSearch}
@@ -443,11 +478,8 @@ const SearchResults = () => {
         <>
           <StyledSearchResults>
             {[...Array(10)].map((_, index) => (
-              <StyledLoadingSkeletonContainer
-                key={index}
-                className={cx(searchResultDynamicStyling(SEARCH_THEME_STYLES[siteTheme]))}
-              >
-                <ParagraphSkeleton withHeader />
+              <StyledLoadingSkeletonContainer key={index} className={cx(searchResultDynamicStyling)}>
+                <StyledParagraphSkeleton withHeader />
               </StyledLoadingSkeletonContainer>
             ))}
           </StyledSearchResults>
@@ -508,9 +540,7 @@ const SearchResults = () => {
             </>
           ) : (
             <>
-              <FilterHeader className={cx(filterHeaderDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
-                {specifySearchText}
-              </FilterHeader>
+              <FilterHeader className={cx(filterHeaderDynamicStyles)}>{specifySearchText}</FilterHeader>
               <StyledSearchFilters />
             </>
           )}

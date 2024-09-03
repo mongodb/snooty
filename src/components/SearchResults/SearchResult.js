@@ -166,7 +166,7 @@ const SearchResult = React.memo(
         className={cx(
           props.className,
           searchResultLinkStyling(SEARCH_THEME_STYLES[siteTheme]),
-          searchResultDynamicStyling(SEARCH_THEME_STYLES[siteTheme])
+          searchResultDynamicStyling
         )}
       >
         <SearchResultContainer>
