@@ -27,8 +27,6 @@ const radioBoxGroupStyle = (count) => css`
   grid-template-columns: repeat(${count > 3 ? 2 : 1}, minmax(0, 1fr));
   gap: ${OPTIONS_GAP};
   margin-bottom: ${theme.size.medium};
-  // Force component to hit content's max width on pages that have minimal content
-  max-width: 100vw;
   padding: ${OPTIONS_GRID_PADDING};
   padding-bottom: 0px;
 

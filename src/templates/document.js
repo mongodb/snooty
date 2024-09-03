@@ -9,13 +9,14 @@ import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/Tabs/TabSelectors';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
+import { theme } from '../theme/docsTheme';
 
 const MAX_CONTENT_WIDTH = '775px';
 
 const DocumentContainer = styled('div')`
   display: grid;
   grid-template-areas: 'main right';
-  grid-template-columns: minmax(0, ${MAX_CONTENT_WIDTH}) 1fr;
+  grid-template-columns: minmax(0, calc(${MAX_CONTENT_WIDTH} + ${theme.size.xlarge} * 2)) 1fr;
 `;
 
 const StyledMainColumn = styled(MainColumn)`
