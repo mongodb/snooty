@@ -14,6 +14,8 @@ const containerStyle = css`
 `;
 
 const tabSelectorStyle = css`
+  margin-top: ${theme.size.large};
+
   @media ${theme.screenSize.smallAndUp} {
     max-width: 400px;
   }
