@@ -1,0 +1,711 @@
+{
+  "type": "directive",
+  "position": {
+    "start": {
+      "line": 8
+    }
+  },
+  "children": [
+    {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 10
+        }
+      },
+      "children": [
+        {
+          "type": "directive",
+          "position": {
+            "start": {
+              "line": 13
+            }
+          },
+          "children": [
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 15
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "value": "This is an optional description. Learn more about drivers at "
+                },
+                {
+                  "type": "reference",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 15
+                        }
+                      },
+                      "value": "MongoDB Documentation"
+                    }
+                  ],
+                  "refuri": "https://www.mongodb.com/docs/drivers/"
+                },
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 15
+                    }
+                  },
+                  "value": "."
+                }
+              ]
+            },
+            {
+              "type": "directive",
+              "position": {
+                "start": {
+                  "line": 17
+                }
+              },
+              "children": [],
+              "domain": "",
+              "name": "tabs-selector",
+              "argument": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 17
+                    }
+                  },
+                  "value": "drivers"
+                }
+              ]
+            }
+          ],
+          "domain": "mongodb",
+          "name": "method-description",
+          "argument": []
+        },
+        {
+          "type": "paragraph",
+          "position": {
+            "start": {
+              "line": 19
+            }
+          },
+          "children": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 19
+                }
+              },
+              "value": "This is content in the Driver method haha."
+            }
+          ]
+        },
+        {
+          "type": "directive",
+          "position": {
+            "start": {
+              "line": 21
+            }
+          },
+          "children": [
+            {
+              "type": "directive",
+              "position": {
+                "start": {
+                  "line": 25
+                }
+              },
+              "children": [
+                {
+                  "type": "directive",
+                  "position": {
+                    "start": {
+                      "line": 32
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "position": {
+                        "start": {
+                          "line": 35
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "position": {
+                            "start": {
+                              "line": 35
+                            }
+                          },
+                          "value": "Content in Driver method, C tab."
+                        }
+                      ]
+                    }
+                  ],
+                  "domain": "",
+                  "name": "tab",
+                  "argument": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 25
+                        }
+                      },
+                      "value": "C"
+                    }
+                  ],
+                  "options": {
+                    "tabid": "c"
+                  }
+                },
+                {
+                  "type": "directive",
+                  "position": {
+                    "start": {
+                      "line": 27
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "position": {
+                        "start": {
+                          "line": 30
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "position": {
+                            "start": {
+                              "line": 30
+                            }
+                          },
+                          "value": "Content in Driver method, Node.js tab."
+                        }
+                      ]
+                    }
+                  ],
+                  "domain": "",
+                  "name": "tab",
+                  "argument": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 25
+                        }
+                      },
+                      "value": "Node.js"
+                    }
+                  ],
+                  "options": {
+                    "tabid": "nodejs"
+                  }
+                }
+              ],
+              "domain": "",
+              "name": "tabs",
+              "argument": [],
+              "options": {
+                "tabset": "drivers"
+              }
+            },
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 37
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 37
+                    }
+                  },
+                  "value": "This is the end of the collapsible."
+                }
+              ]
+            }
+          ],
+          "domain": "mongodb",
+          "name": "collapsible",
+          "argument": [],
+          "options": {
+            "heading": "Testing collapsible",
+            "sub_heading": "This is a sub heading",
+            "id": "testing-collapsible"
+          }
+        },
+        {
+          "type": "directive",
+          "position": {
+            "start": {
+              "line": 39
+            }
+          },
+          "children": [
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 43
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 43
+                    }
+                  },
+                  "value": "This is collapsible 2."
+                }
+              ]
+            }
+          ],
+          "domain": "mongodb",
+          "name": "collapsible",
+          "argument": [],
+          "options": {
+            "heading": "Testing collapsible 2",
+            "sub_heading": "This is a sub heading",
+            "id": "testing-collapsible-2"
+          }
+        },
+        {
+          "type": "directive",
+          "position": {
+            "start": {
+              "line": 45
+            }
+          },
+          "children": [
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 49
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 49
+                    }
+                  },
+                  "value": "This is collapsible 3."
+                }
+              ]
+            }
+          ],
+          "domain": "mongodb",
+          "name": "collapsible",
+          "argument": [],
+          "options": {
+            "heading": "Testing collapsible 3",
+            "sub_heading": "This is a sub heading",
+            "id": "testing-collapsible-3"
+          }
+        }
+      ],
+      "domain": "mongodb",
+      "name": "method-option",
+      "argument": [],
+      "options": {
+        "id": "driver",
+        "title": "Driver"
+      }
+    },
+    {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 51
+        }
+      },
+      "children": [
+        {
+          "type": "section",
+          "position": {
+            "start": {
+              "line": 55
+            }
+          },
+          "children": [
+            {
+              "type": "heading",
+              "position": {
+                "start": {
+                  "line": 55
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 55
+                    }
+                  },
+                  "value": "This is a heading"
+                }
+              ],
+              "id": "this-is-a-heading"
+            },
+            {
+              "type": "directive",
+              "position": {
+                "start": {
+                  "line": 57
+                }
+              },
+              "children": [
+                {
+                  "type": "directive",
+                  "position": {
+                    "start": {
+                      "line": 59
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "position": {
+                        "start": {
+                          "line": 62
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "position": {
+                            "start": {
+                              "line": 62
+                            }
+                          },
+                          "value": "This is content in tab foo."
+                        }
+                      ]
+                    }
+                  ],
+                  "domain": "",
+                  "name": "tab",
+                  "argument": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 59
+                        }
+                      },
+                      "value": "Foo"
+                    }
+                  ],
+                  "options": {
+                    "tabid": "foo"
+                  }
+                },
+                {
+                  "type": "directive",
+                  "position": {
+                    "start": {
+                      "line": 64
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "position": {
+                        "start": {
+                          "line": 67
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "position": {
+                            "start": {
+                              "line": 67
+                            }
+                          },
+                          "value": "This is content in bar foo."
+                        }
+                      ]
+                    }
+                  ],
+                  "domain": "",
+                  "name": "tab",
+                  "argument": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 64
+                        }
+                      },
+                      "value": "Bar"
+                    }
+                  ],
+                  "options": {
+                    "tabid": "bar"
+                  }
+                }
+              ],
+              "domain": "",
+              "name": "tabs",
+              "argument": []
+            },
+            {
+              "type": "paragraph",
+              "position": {
+                "start": {
+                  "line": 69
+                }
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "position": {
+                    "start": {
+                      "line": 69
+                    }
+                  },
+                  "value": "This is content in the CLI method haha."
+                }
+              ]
+            },
+            {
+              "type": "section",
+              "position": {
+                "start": {
+                  "line": 72
+                }
+              },
+              "children": [
+                {
+                  "type": "heading",
+                  "position": {
+                    "start": {
+                      "line": 72
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 72
+                        }
+                      },
+                      "value": "This is a deeper heading"
+                    }
+                  ],
+                  "id": "this-is-a-deeper-heading"
+                },
+                {
+                  "type": "paragraph",
+                  "position": {
+                    "start": {
+                      "line": 74
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "position": {
+                        "start": {
+                          "line": 74
+                        }
+                      },
+                      "value": "Foo"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "domain": "mongodb",
+      "name": "method-option",
+      "argument": [],
+      "options": {
+        "id": "cli",
+        "title": "CLI"
+      }
+    },
+    {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 76
+        }
+      },
+      "children": [
+        {
+          "type": "paragraph",
+          "position": {
+            "start": {
+              "line": 79
+            }
+          },
+          "children": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 79
+                }
+              },
+              "value": "This is content in the API method haha."
+            }
+          ]
+        }
+      ],
+      "domain": "mongodb",
+      "name": "method-option",
+      "argument": [],
+      "options": {
+        "id": "api",
+        "title": "API"
+      }
+    },
+    {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 81
+        }
+      },
+      "children": [
+        {
+          "type": "paragraph",
+          "position": {
+            "start": {
+              "line": 84
+            }
+          },
+          "children": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 84
+                }
+              },
+              "value": "Foo"
+            }
+          ]
+        }
+      ],
+      "domain": "mongodb",
+      "name": "method-option",
+      "argument": [],
+      "options": {
+        "id": "mongosh",
+        "title": "Mongosh"
+      }
+    },
+    {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 86
+        }
+      },
+      "children": [
+        {
+          "type": "paragraph",
+          "position": {
+            "start": {
+              "line": 89
+            }
+          },
+          "children": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 89
+                }
+              },
+              "value": "Bar"
+            }
+          ]
+        }
+      ],
+      "domain": "mongodb",
+      "name": "method-option",
+      "argument": [],
+      "options": {
+        "id": "ui",
+        "title": "UI"
+      }
+    },
+    {
+      "type": "directive",
+      "position": {
+        "start": {
+          "line": 91
+        }
+      },
+      "children": [
+        {
+          "type": "paragraph",
+          "position": {
+            "start": {
+              "line": 94
+            }
+          },
+          "children": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": 94
+                }
+              },
+              "value": "Baz"
+            }
+          ]
+        }
+      ],
+      "domain": "mongodb",
+      "name": "method-option",
+      "argument": [],
+      "options": {
+        "id": "compass",
+        "title": "Compass"
+      }
+    }
+  ],
+  "domain": "mongodb",
+  "name": "method-selector",
+  "argument": []
+}
