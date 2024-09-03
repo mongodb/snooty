@@ -66,7 +66,9 @@ const bodyCellStyle = css`
   overflow-wrap: anywhere;
   word-break: break-word;
 
-  * {
+  *,
+  p,
+  a {
     line-height: 20px;
   }
 
