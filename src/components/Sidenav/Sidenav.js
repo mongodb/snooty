@@ -119,6 +119,9 @@ const SidenavContainer = styled.div(
 
     a[class*='lg-ui-side-nav-item'] {
       color: var(--sidenav-item-color);
+      :not([aria-current='page']):hover {
+        background-color: var(--sidenav-hover-bg-color);
+      }
     }
 
     [data-testid='side-nav-collapse-toggle'] {

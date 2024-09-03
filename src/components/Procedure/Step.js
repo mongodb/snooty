@@ -20,8 +20,8 @@ const circleIndividualStyles = {
       color: ${palette.gray.light2};
     }
   `,
-  normal: css`
-    border: 1px solid ${palette.gray.light1};
+  normal: (darkMode) => css`
+    border: 1.5px solid ${palette.gray.light1};
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
@@ -63,10 +63,11 @@ const landingStepStyles = {
       }
     }
   `,
-  normal: css`
-    gap: ${theme.size.large};
+  normal: (darkMode) => css`
+    gap: ${theme.size.default};
     h2,
-    h4 {
+    h4,
+    h6 {
       margin-top: unset;
     }
     h3 {
@@ -102,7 +103,7 @@ const contentStyles = {
     section > *,
     ol p,
     ul p {
-      margin-bottom: 24px;
+      margin-bottom: ${theme.size.default};
     }
   `,
 };
