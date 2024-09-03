@@ -86,6 +86,7 @@
     "@leafygreen-ui/modal": "^10.1.0",
     "@leafygreen-ui/pagination": "^1.0.9",
     "@leafygreen-ui/palette": "^3.4.7",
+    "@leafygreen-ui/radio-box-group": "^13.0.1",
     "@leafygreen-ui/search-input": "^2.1.4",
     "@leafygreen-ui/segmented-control": "^8.0.0",
     "@leafygreen-ui/select": "^7.0.0",
