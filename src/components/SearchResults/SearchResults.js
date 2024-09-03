@@ -230,11 +230,8 @@ const StyledLoadingSkeletonContainer = styled('div')`
 
 const StyledParagraphSkeleton = styled(ParagraphSkeleton)`
   > div {
-    /*background: var(--sidenav-bg-color);*/
-
     background: linear-gradient(110deg, ${palette.gray.light2} 35%, ${palette.gray.light3}, ${palette.gray.light2} 65%)
       0 0/ 100vw 100% fixed;
-
     background-position: 50vw 0;
     animation: SkeletonShimmer 1.5s infinite linear;
 
