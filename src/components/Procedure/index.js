@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import Step from './Step';
 
@@ -17,6 +18,10 @@ const StyledProcedure = styled('div')`
     }
  
   `}
+  ${({ darkMode }) =>
+    `
+    background-color: ${darkMode ? palette.black : 'initial'};
+    color: ${darkMode ? palette.gray.light2 : 'initial'};`}
 `;
 
 // Returns an array of all "step" nodes nested within the "procedure" node and nested "include" nodes
