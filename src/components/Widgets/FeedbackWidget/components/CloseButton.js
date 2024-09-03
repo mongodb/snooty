@@ -14,7 +14,7 @@ const buttonStyles = css`
   width: ${theme.size.default};
 
   @media ${theme.screenSize.upToSmall} {
-    top: ${theme.size.large};
+    top: ${theme.size.default};
     right: ${theme.size.medium};
   }
 `;

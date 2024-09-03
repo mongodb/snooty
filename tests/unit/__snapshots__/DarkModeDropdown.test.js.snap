@@ -20,6 +20,9 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
   height: 28px;
   width: 28px;
   color: #5C6C75;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
   cursor: pointer;
 }
 
@@ -69,6 +72,10 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
 
 .emotion-0:focus-visible:before {
   background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-0>div {
+  position: relative;
 }
 
 .emotion-1 {
@@ -143,6 +150,9 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   height: 28px;
   width: 28px;
   color: #5C6C75;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
   cursor: pointer;
 }
 
@@ -192,6 +202,10 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
 
 .emotion-0:focus-visible:before {
   background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-0>div {
+  position: relative;
 }
 
 .emotion-1 {
@@ -688,28 +702,10 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
                     width="20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <mask
-                      height="20"
-                      id="mask0_2936_7195"
-                      maskUnits="userSpaceOnUse"
-                      width="20"
-                      x="0"
-                      y="0"
-                    >
-                      <rect
-                        fill="#D9D9D9"
-                        height="20"
-                        width="20"
-                      />
-                    </mask>
-                    <g
-                      mask="url(#mask0_2936_7195)"
-                    >
-                      <path
-                        d="M3.49677 14.9433C3.00064 14.9433 2.57799 14.7687 2.22883 14.4196C1.87966 14.0704 1.70508 13.6478 1.70508 13.1516V4.30927C1.70508 3.81314 1.87966 3.39049 2.22883 3.04133C2.57799 2.69216 3.00064 2.51758 3.49677 2.51758H16.5022C16.9983 2.51758 17.421 2.69216 17.7701 3.04133C18.1193 3.39049 18.2939 3.81314 18.2939 4.30927V13.1516C18.2939 13.6478 18.1193 14.0704 17.7701 14.4196C17.421 14.7687 16.9983 14.9433 16.5022 14.9433H13.937L14.6068 15.6181C14.6932 15.7038 14.7579 15.8001 14.8011 15.9072C14.8443 16.0142 14.8659 16.1268 14.8659 16.245V16.6304C14.8659 16.8654 14.7828 17.066 14.6167 17.2321C14.4505 17.3983 14.2499 17.4814 14.0149 17.4814H5.98408C5.74904 17.4814 5.54844 17.3983 5.38229 17.2321C5.21615 17.066 5.13308 16.8654 5.13308 16.6304V16.245C5.13308 16.1268 5.15467 16.0142 5.19785 15.9072C5.24102 15.8001 5.30578 15.7038 5.39214 15.6181L6.06197 14.9433H3.49677ZM3.49677 13.1516H16.5022V4.30927H3.49677V13.1516Z"
-                        fill="#889397"
-                      />
-                    </g>
+                    <path
+                      d="M3.49677 14.9433C3.00064 14.9433 2.57799 14.7687 2.22883 14.4196C1.87966 14.0704 1.70508 13.6478 1.70508 13.1516V4.30927C1.70508 3.81314 1.87966 3.39049 2.22883 3.04133C2.57799 2.69216 3.00064 2.51758 3.49677 2.51758H16.5022C16.9983 2.51758 17.421 2.69216 17.7701 3.04133C18.1193 3.39049 18.2939 3.81314 18.2939 4.30927V13.1516C18.2939 13.6478 18.1193 14.0704 17.7701 14.4196C17.421 14.7687 16.9983 14.9433 16.5022 14.9433H13.937L14.6068 15.6181C14.6932 15.7038 14.7579 15.8001 14.8011 15.9072C14.8443 16.0142 14.8659 16.1268 14.8659 16.245V16.6304C14.8659 16.8654 14.7828 17.066 14.6167 17.2321C14.4505 17.3983 14.2499 17.4814 14.0149 17.4814H5.98408C5.74904 17.4814 5.54844 17.3983 5.38229 17.2321C5.21615 17.066 5.13308 16.8654 5.13308 16.6304V16.245C5.13308 16.1268 5.15467 16.0142 5.19785 15.9072C5.24102 15.8001 5.30578 15.7038 5.39214 15.6181L6.06197 14.9433H3.49677ZM3.49677 13.1516H16.5022V4.30927H3.49677V13.1516Z"
+                      fill="#5C6C75"
+                    />
                   </svg>
                   <div
                     class="emotion-8"
@@ -752,6 +748,9 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
   height: 28px;
   width: 28px;
   color: #C1C7C6;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
   cursor: pointer;
 }
 
@@ -801,6 +800,10 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
 
 .emotion-0:focus-visible:before {
   background-color: rgba(232,237,235,0.1);
+}
+
+.emotion-0>div {
+  position: relative;
 }
 
 .emotion-1 {

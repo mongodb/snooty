@@ -8,6 +8,9 @@ jest.mock('@gatsbyjs/reach-router', () => ({
     hash: '',
   })),
   navigate: jest.fn(),
+  globalHistory: {
+    listen: jest.fn(),
+  },
 }));
 
 export const mockLocation = (search, pathname) => useLocation.mockImplementation(() => ({ search, pathname }));
