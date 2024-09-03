@@ -1,4 +1,4 @@
-import { createContext, useCallback, useMemo, useState } from 'react';
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { navigate } from 'gatsby';
 import { useMarianManifests } from '../../hooks/use-marian-manifests';
@@ -55,7 +55,7 @@ const SearchContext = createContext({
 });
 
 const SearchContextProvider = ({ children, showFacets = false }) => {
-  const { search } = useLocation();
+  const { search, state } = useLocation();
   const { filters, searchPropertyMapping } = useMarianManifests();
   const facets = useFacets();
   const facetNamesByKeyId = useMemo(() => constructFacetNamesByKey(facets), [facets]);
@@ -131,6 +131,12 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
     navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
     setSearchParams(newSearch);
   }, [searchTerm]);
+
+  useEffect(() => {
+    if (state.searchValue) {
+      setSearchParams(new URLSearchParams(`?q=${state.searchValue}`));
+    }
+  }, [state.searchValue]);
 
   return (
     <SearchContext.Provider
