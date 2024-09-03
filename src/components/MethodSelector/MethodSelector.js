@@ -77,7 +77,8 @@ const trianglePosCalc = (count, selectedIdx) => {
   const numGaps = `${count - 1} * ${OPTIONS_GAP}`;
   const fullHorizontalPadding = `${OPTIONS_GRID_PADDING} * 2`;
   const widthOfOneOption = `(100% - ${fullHorizontalPadding} - ${numGaps}) / ${count}`;
-  return `calc(${OPTIONS_GRID_PADDING} + (${widthOfOneOption} / 2) + ${selectedIdx} * (${OPTIONS_GAP} + ${widthOfOneOption}))`;
+  const skipOptions = `${selectedIdx} * (${OPTIONS_GAP} + ${widthOfOneOption})`;
+  return `calc(${OPTIONS_GRID_PADDING} + ${skipOptions} + (${widthOfOneOption} / 2))`;
 };
 
 const triangleStyle = (count, selectedIdx = 0) => css`
