@@ -4,10 +4,8 @@ import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
-import { SearchInput } from '@leafygreen-ui/search-input';
 import Pagination from '@leafygreen-ui/pagination';
 import { H3, Overline } from '@leafygreen-ui/typography';
-import queryString from 'query-string';
 import { ParagraphSkeleton } from '@leafygreen-ui/skeleton-loader';
 import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
@@ -44,7 +42,7 @@ const EmptyResultsContainer = styled('div')`
   must account for any margins added from using the blank landing template,
   and half of the height of the empty state component */
   margin-bottom: ${CALC_MARGIN};
-  grid-area: results;
+  grid-area: main;
   margin-top: 80px;
 `;
 
@@ -53,7 +51,7 @@ const HeaderContainer = styled('div')`
 `;
 
 const headerContainerDynamicStyles = css`
-  > h1:first-of-type {
+  > h3:first-of-type {
     color: var(--heading-color-primary);
     padding-bottom: 24px;
     margin: unset;
@@ -61,7 +59,7 @@ const headerContainerDynamicStyles = css`
 `;
 
 const FiltersContainer = styled('div')`
-  grid-area: filters;
+  grid-area: right;
   @media ${theme.screenSize.upToMedium} {
     display: none;
   }
@@ -89,9 +87,28 @@ const filterHeaderDynamicStyles = css`
 
 const SearchResultsContainer = styled('div')`
   display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
+  column-gap: 46px;
+  grid-template-areas: 'header .' 'main right';
+  grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
+  margin: ${theme.size.large} ${theme.size.xlarge} ${theme.size.xlarge};
+
+  @media ${theme.screenSize.upToLarge} {
+    margin: ${theme.size.large} ${theme.size.medium} ${theme.size.xlarge};
+  }
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-template-areas: 'header' 'main';
+    grid-template-columns: auto;
+    margin: ${theme.size.default} ${theme.size.medium} ${theme.size.xlarge};
+    row-gap: ${theme.size.default};
+  }
+  max-width: 1150px;
+  row-gap: ${theme.size.large};
+
   ${({ showFacets }) =>
-    showFacets
-      ? `
+    showFacets &&
+    `
     column-gap: 16px;
     grid-template-areas: 'header header' 'filters results';
     grid-template-columns: 188px auto;
@@ -99,30 +116,11 @@ const SearchResultsContainer = styled('div')`
     @media ${theme.screenSize.upTo2XLarge} {
       margin: ${theme.size.large} 71px ${theme.size.xlarge} 52px;
     }
-  `
-      : `
-    column-gap: 46px;
-    grid-template-areas: 'header .' 'results filters';
-    grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
-
-    @media ${theme.screenSize.upTo2XLarge} {
-      margin: ${theme.size.large} 40px ${theme.size.xlarge} 40px;
-    }
   `}
-  margin: ${theme.size.large} 108px ${theme.size.xlarge} ${theme.size.large};
-  max-width: 1150px;
-  row-gap: ${theme.size.large};
-
-  @media ${theme.screenSize.upToMedium} {
-    column-gap: 0;
-    grid-template-areas: 'header' 'results';
-    grid-template-columns: auto;
-    margin: ${theme.size.large} ${theme.size.medium} ${theme.size.xlarge} ${theme.size.medium};
-  }
 `;
 
 const StyledSearchFilters = styled(SearchFilters)`
-  grid-area: filters;
+  grid-area: right;
   @media ${theme.screenSize.upToMedium} {
     align-items: center;
     display: none;
@@ -180,6 +178,15 @@ const searchResultStyling = `
   }
 `;
 
+const paginationStyling = css`
+  @media ${theme.screenSize.upToMedium} {
+    * {
+      font-size: ${theme.fontSize.small};
+      line-height: ${theme.fontSize.default};
+    }
+  }
+`;
+
 export const searchResultDynamicStyling = css`
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 
@@ -205,6 +212,10 @@ const StyledSearchResult = styled(SearchResult)`
 const StyledLoadingSkeletonContainer = styled('div')`
   ${searchResultStyling}
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 1) !important;
+
+  .dark-theme & {
+    box-shadow: 0px 0px 3px 0px rgba(255, 255, 255, 0.15) !important;
+  }
 
   * {
     padding: 2px;
@@ -243,7 +254,7 @@ const StyledParagraphSkeleton = styled(ParagraphSkeleton)`
 const StyledSearchResults = styled('div')`
   box-shadow: none;
   display: grid;
-  grid-area: results;
+  grid-area: main;
   /* Build space between rows into row height for hover effect */
   grid-auto-rows: calc(${SEARCH_RESULT_HEIGHT} + ${ROW_GAP});
   height: 100%;
@@ -267,7 +278,7 @@ const ResultTag = styled('div')`
   align-items: center;
   flex-wrap: wrap;
   row-gap: ${theme.size.small};
-  padding-top: ${theme.size.default};
+  padding-top: ${theme.size.small};
   align-items: center;
 `;
 
@@ -287,7 +298,7 @@ const iconStyle = css`
 
 const MobileSearchButtonWrapper = styled('div')`
   display: none;
-  margin-top: ${theme.size.default};
+  margin-top: ${theme.size.medium};
 
   @media ${theme.screenSize.upToMedium} {
     display: block;
@@ -312,7 +323,6 @@ const SearchResults = () => {
 
   const { isTabletOrMobile } = useScreenSize();
   const [searchResults, setSearchResults] = useState([]);
-  const [searchField, setSearchField] = useState(searchTerm || '');
 
   const [searchFinished, setSearchFinished] = useState(() => !searchTerm);
   const [searchCount, setSearchCount] = useState();
@@ -410,14 +420,6 @@ const SearchResults = () => {
       });
   }, [searchTerm]);
 
-  const submitNewSearch = (event) => {
-    const newValue = event.target[0]?.value;
-    const { page } = queryString.parse(search);
-    if (!newValue || (newValue === searchTerm && parseInt(page) === 1)) return;
-
-    setSearchTerm(newValue);
-  };
-
   const onPageClick = useCallback(
     async (isForward) => {
       const currentPage = parseInt(searchParams.get('page')) || 1;
@@ -432,15 +434,7 @@ const SearchResults = () => {
   return (
     <SearchResultsContainer showFacets={showFacets}>
       <HeaderContainer className={cx(headerContainerDynamicStyles)}>
-        <H3 as="h1">Search Results </H3>
-        <SearchInput
-          value={searchField}
-          placeholder="Search"
-          onSubmit={submitNewSearch}
-          onChange={(e) => {
-            setSearchField(e.target.value);
-          }}
-        />
+        <H3>Search Results</H3>
         {/* Classname-attached searchTerm needed for Smartling localization */}
         <span style={{ display: 'none' }} className="sl-search-keyword">
           {searchTerm}
@@ -518,6 +512,7 @@ const SearchResults = () => {
             {
               <>
                 <Pagination
+                  className={paginationStyling}
                   currentPage={parseInt(new URLSearchParams(search).get('page') || 1)}
                   numTotalItems={searchCount}
                   onForwardArrowClick={onPageClick.bind(null, true)}

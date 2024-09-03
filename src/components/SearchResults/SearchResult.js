@@ -68,17 +68,29 @@ const searchResultLinkStyling = ({ searchResultTitleColor, searchResultTitleColo
   border-radius: ${theme.size.medium};
 
   ${StyledResultTitle} {
-    color: ${searchResultTitleColor};
+    color: ${palette.blue.base};
+
+    .dark-theme & {
+      color: ${palette.blue.light1};
+    }
   }
   :visited {
     ${StyledResultTitle} {
-      color: ${searchResultTitleColorOnVisited};
+      color: ${palette.purple.dark2};
+
+      .dark-theme & {
+        color: ${palette.purple.light2};
+      }
     }
   }
   :hover,
   :focus {
     ${StyledResultTitle} {
-      color: ${searchResultTitleColor};
+      color: ${palette.blue.base};
+
+      .dark-theme & {
+        color: ${palette.blue.light1};
+      }
       text-decoration: none;
     }
     ${SearchResultContainer} {
@@ -90,15 +102,60 @@ const searchResultLinkStyling = ({ searchResultTitleColor, searchResultTitleColo
 
 const StyledPreviewText = styled(Body)`
   font-size: ${theme.fontSize.small};
+  color: var(--font-color-primary);
   line-height: 20px;
   margin-bottom: ${theme.size.default};
   ${({ maxLines }) => truncate(maxLines)};
   // Reserve some space inside of the search result card when there is no preview
   min-height: 20px;
+
+  > span {
+    .dark-theme & {
+      background-color: ${palette.green.dark2};
+    }
+
+    background-color: ${palette.green.light2};
+  }
 `;
 
 const StyledTag = styled(Tag)`
   ${searchTagStyle}
+`;
+
+const styledTagGreen = css`
+  background-color: ${palette.green.light3};
+  border: 1px solid ${palette.green.light2};
+  color: ${palette.green.dark2};
+
+  .dark-theme & {
+    background-color: ${palette.green.dark3};
+    border: 1px solid ${palette.green.dark2};
+    color: ${palette.green.light1};
+  }
+`;
+
+const styledTagBlue = css`
+  background-color: ${palette.blue.light3};
+  border: 1px solid ${palette.blue.light2};
+  color: ${palette.blue.dark1};
+
+  .dark-theme & {
+    background-color: ${palette.blue.dark3};
+    border: 1px solid ${palette.blue.dark2};
+    color: ${palette.blue.light1};
+  }
+`;
+
+const styledTagPurple = css`
+  background-color: ${palette.purple.light3};
+  border: 1px solid ${palette.purple.light2};
+  color: ${palette.purple.dark2};
+
+  .dark-theme & {
+    background-color: ${palette.purple.dark3};
+    border: 1px solid ${palette.purple.dark2};
+    color: ${palette.purple.light2};
+  }
 `;
 
 const StylingTagContainer = styled('div')`
@@ -113,10 +170,7 @@ const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const highlightSearchTerm = (text, searchTerm, darkMode) =>
   text.replace(
     new RegExp(escapeRegExp(searchTerm), 'gi'),
-    (result) =>
-      `<span style="background-color: ${
-        darkMode ? palette.green.dark2 : palette.green.light2
-      };${SEARCH_MATCH_STYLE}">${result}</span>`
+    (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
   );
 
 const spanAllowedStyles = {
@@ -184,9 +238,21 @@ const SearchResult = React.memo(
           />
           {!showFacets && (
             <StylingTagContainer>
-              {!!category && <StyledTag variant="green">{category}</StyledTag>}
-              {!!version && <StyledTag variant="blue">{version}</StyledTag>}
-              {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
+              {!!category && (
+                <StyledTag variant="green" className={cx(styledTagGreen)}>
+                  {category}
+                </StyledTag>
+              )}
+              {!!version && (
+                <StyledTag variant="blue" className={cx(styledTagBlue)}>
+                  {version}
+                </StyledTag>
+              )}
+              {url.includes('/api/') && (
+                <StyledTag variant="purple" className={cx(styledTagPurple)}>
+                  {'API'}
+                </StyledTag>
+              )}
             </StylingTagContainer>
           )}
           {showFacets && validFacets?.length > 0 && (
