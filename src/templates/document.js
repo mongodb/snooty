@@ -9,17 +9,19 @@ import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/Tabs/TabSelectors';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
+import { theme } from '../theme/docsTheme';
+
+const MAX_CONTENT_WIDTH = '775px';
 
 const DocumentContainer = styled('div')`
   display: grid;
   grid-template-areas: 'main right';
-  grid-template-columns: minmax(0, auto) 1fr;
+  grid-template-columns: minmax(0, calc(${MAX_CONTENT_WIDTH} + ${theme.size.xlarge} * 2)) 1fr;
 `;
 
 const StyledMainColumn = styled(MainColumn)`
   grid-area: main;
-  max-width: 775px;
-  overflow-x: auto;
+  max-width: ${MAX_CONTENT_WIDTH};
 `;
 
 const StyledRightColumn = styled(RightColumn)`
@@ -30,6 +32,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
+  const hasMethodSelector = pageOptions?.has_method_selector;
 
   return (
     <DocumentContainer>
@@ -44,7 +47,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       </StyledMainColumn>
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
-        <TabSelectors />
+        {!hasMethodSelector && <TabSelectors />}
         <Contents displayOnDesktopOnly={true} />
       </StyledRightColumn>
     </DocumentContainer>
