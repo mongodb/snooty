@@ -8,7 +8,6 @@ import { useAllDocsets } from '../../hooks/useAllDocsets';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
-import { normalizePath } from '../../utils/normalize-path';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { suggestionStyling } from './styles';
 import { SEARCH_SUGGESTIONS } from './SearchInput';
@@ -29,10 +28,10 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
     const ENVS_WITH_SEARCH = ['dotcomstg', 'dotcomprd'];
     const targetEnv = ENVS_WITH_SEARCH.includes(snootyEnv) ? snootyEnv : ENVS_WITH_SEARCH[1];
     const landingDocset = docsets.find((d) => d.project === 'landing');
-    return normalizePath(
+    return (
       assertTrailingSlash(landingDocset.url[targetEnv]) +
-        assertTrailingSlash(landingDocset.prefix[targetEnv]) +
-        'search'
+      assertTrailingSlash(landingDocset.prefix[targetEnv]) +
+      'search'
     );
   }, [docsets, snootyEnv]);
 
