@@ -38,24 +38,9 @@ const Wrapper = styled('main')`
   }
 
   // realm PLP has full width p
-  ${({ isRealm, hasLightHero }) =>
+  ${({ isRealm }) =>
     isRealm &&
     `
-    ${
-      hasLightHero &&
-      `
-      @media ${theme.screenSize.mediumAndUp} {
-        h1 {
-          color: ${palette.black};
-        }
-
-        .introduction > p:first-of-type {
-          color: ${palette.black};
-        }
-      }
-    `
-    }
-
     section > p {
       grid-column: 2/-2;
       max-width: 775px;
@@ -64,6 +49,21 @@ const Wrapper = styled('main')`
     section ul  {
       grid-column: 2;
       max-width: 500px;
+    }
+  `}
+
+  // Light-colored hero styling
+  ${({ hasLightHero }) =>
+    hasLightHero &&
+    `
+    @media ${theme.screenSize.mediumAndUp} {
+      h1 {
+        color: ${palette.black};
+      }
+
+      .introduction > p:first-of-type {
+        color: ${palette.black};
+      }
     }
   `}
 
@@ -180,7 +180,7 @@ const Wrapper = styled('main')`
   }
 `;
 
-const LIGHT_HERO_PAGES = ['index.txt'];
+const REALM_LIGHT_HERO_PAGES = ['index.txt'];
 
 const ProductLanding = ({ children, data: { page } }) => {
   const { project } = useSnootyMetadata();
@@ -189,7 +189,7 @@ const ProductLanding = ({ children, data: { page } }) => {
   const isRealm = project === 'realm';
   const pageOptions = page?.ast?.options;
   const hasMaxWidthParagraphs = ['', 'true'].includes(pageOptions?.['pl-max-width-paragraphs']);
-  const hasLightHero = LIGHT_HERO_PAGES.includes(page?.ast?.fileid);
+  const hasLightHero = isRealm && REALM_LIGHT_HERO_PAGES.includes(page?.ast?.fileid);
 
   // shallow copy children, and search for existence of banner
   const shallowChildren = children.reduce((res, child) => {
