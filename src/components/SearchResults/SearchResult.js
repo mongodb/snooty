@@ -3,14 +3,12 @@ import sanitizeHtml from 'sanitize-html';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import Tag, { searchTagStyle, tagHeightStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import { getFacetTagVariant } from './Facets/utils';
 import { searchResultDynamicStyling } from './SearchResults';
-import { SEARCH_THEME_STYLES } from './styles/searchThemeStyles';
 
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
@@ -61,8 +59,7 @@ const StyledResultTitle = styled('p')`
   position: relative;
 `;
 
-const searchResultLinkStyling = ({ searchResultTitleColor, searchResultTitleColorOnVisited }) => css`
-  color: ${searchResultTitleColor};
+const searchResultLinkStyling = css`
   height: 100%;
   text-decoration: none;
   border-radius: ${theme.size.medium};
@@ -167,7 +164,7 @@ const StylingTagContainer = styled('div')`
 
 const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-const highlightSearchTerm = (text, searchTerm, darkMode) =>
+const highlightSearchTerm = (text, searchTerm) =>
   text.replace(
     new RegExp(escapeRegExp(searchTerm), 'gi'),
     (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
@@ -203,9 +200,8 @@ const SearchResult = React.memo(
     facets,
     ...props
   }) => {
-    const { darkMode, theme: siteTheme } = useDarkMode();
     const { searchPropertyMapping, searchTerm, getFacetName, showFacets } = useContext(SearchContext);
-    const highlightedPreviewText = highlightSearchTerm(preview, searchTerm, darkMode);
+    const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
@@ -217,11 +213,7 @@ const SearchResult = React.memo(
         href={url}
         onClick={onClick}
         {...props}
-        className={cx(
-          props.className,
-          searchResultLinkStyling(SEARCH_THEME_STYLES[siteTheme]),
-          searchResultDynamicStyling
-        )}
+        className={cx(props.className, searchResultLinkStyling, searchResultDynamicStyling)}
       >
         <SearchResultContainer>
           <StyledResultTitle
