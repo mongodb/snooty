@@ -6,8 +6,9 @@ import { ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch, useChatb
 import PropTypes from 'prop-types';
 import { useAllDocsets } from '../../hooks/useAllDocsets';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { reportAnalytics } from '../../utils/report-analytics';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
+import { localizePath } from '../../utils/locale';
+import { reportAnalytics } from '../../utils/report-analytics';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { suggestionStyling } from './styles';
 import { SEARCH_SUGGESTIONS } from './SearchInput';
@@ -30,8 +31,7 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
     const landingDocset = docsets.find((d) => d.project === 'landing');
     return (
       assertTrailingSlash(landingDocset.url[targetEnv]) +
-      assertTrailingSlash(landingDocset.prefix[targetEnv]) +
-      'search'
+      localizePath(assertTrailingSlash(landingDocset.prefix[targetEnv]) + 'search')
     );
   }, [docsets, snootyEnv]);
 
