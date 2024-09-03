@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, act } from '@testing-library/react';
 import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
+import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import ActionBar from '../../src/components/ActionBar/ActionBar';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
@@ -11,6 +12,15 @@ jest.spyOn(snootyMetadata, 'default').mockImplementation(() => ({
   project: '',
 }));
 jest.useFakeTimers();
+const useAllDocsetsMock = jest.spyOn(useAllDocsets, 'useAllDocsets');
+useAllDocsetsMock.mockImplementation(() => [
+  {
+    project: 'landing',
+    branches: [],
+    url: {},
+    prefix: {},
+  },
+]);
 
 const conversationSpy = jest.fn();
 // eslint-disable-next-line no-unused-vars
