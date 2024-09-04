@@ -6,13 +6,18 @@ import { NextPrevLink } from '../InternalPageNav';
 import { theme } from '../../theme/docsTheme';
 
 const baseStyle = css`
+  display: none;
   float: right;
   margin-left: ${theme.size.medium};
   // Add negative margin in an attempt to align float from bottom of element instead of its top
   margin-top: -10px;
+
+  @media ${theme.screenSize.mediumAndUp} {
+    display: initial;
+  }
 `;
 
-const MPTNextLink = () => {
+const MPTNextLinkFull = () => {
   const activeTutorial = useActiveMPTutorial();
   if (!activeTutorial || !activeTutorial.next) {
     return null;
@@ -30,4 +35,4 @@ const MPTNextLink = () => {
   );
 };
 
-export default MPTNextLink;
+export default MPTNextLinkFull;

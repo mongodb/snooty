@@ -5,6 +5,7 @@ import { getPlaintext } from '../utils/get-plaintext';
 import { usePageContext } from '../context/page-context';
 import { theme } from '../theme/docsTheme';
 import Overline from './Internal/Overline';
+import { MPTNextLinkMini } from './MultiPageTutorials';
 
 const timeBaseStyle = css`
   font-weight: 600;
@@ -29,7 +30,12 @@ const Time = ({ nodeData: { argument } }) => {
     );
   }
 
-  return <Overline className={timeBaseStyle}>Read time {time} min</Overline>;
+  return (
+    <>
+      <MPTNextLinkMini />
+      <Overline className={timeBaseStyle}>Read time {time} min</Overline>
+    </>
+  );
 };
 
 Time.propTypes = {
