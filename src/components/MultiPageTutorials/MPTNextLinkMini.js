@@ -7,6 +7,7 @@ import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
 import { usePageContext } from '../../context/page-context';
 import { shouldShowNext } from './utils';
+import { LINK_TITLE } from './constants';
 
 const baseStyle = css`
   float: right;
@@ -39,10 +40,11 @@ const MPTNextLinkMini = () => {
         className={buttonStyle}
         as={Link}
         to={activeTutorial.next.targetSlug}
+        title={LINK_TITLE}
         leftGlyph={<Icon glyph={glyphs.ArrowRight.displayName} />}
         size="xsmall"
       >
-        Next Step
+        {LINK_TITLE}
       </Button>
     </div>
   );

@@ -6,13 +6,14 @@ import { NextPrevLink } from '../InternalPageNav';
 import { theme } from '../../theme/docsTheme';
 import { usePageContext } from '../../context/page-context';
 import { shouldShowNext } from './utils';
+import { LINK_TITLE } from './constants';
 
 const baseStyle = css`
   display: none;
   float: right;
   margin-left: ${theme.size.medium};
-  // Add negative margin in an attempt to align float from bottom of element instead of its top
-  margin-top: -10px;
+  // Add negative margin in an attempt to align bottom of element to bottom of first row of heading
+  margin-top: -14px;
 
   @media ${theme.screenSize.mediumAndUp} {
     display: initial;
@@ -34,7 +35,7 @@ const MPTNextLinkFull = () => {
       direction={'Next'}
       pageTitle={activeTutorial.next.pageTitle}
       targetSlug={activeTutorial.next.targetSlug}
-      title={'Next Step'}
+      title={LINK_TITLE}
     />
   );
 };
