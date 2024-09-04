@@ -1,10 +1,25 @@
 import React, { useContext, useMemo } from 'react';
-import { useTheme, css } from '@emotion/react';
+import { cx, css } from '@leafygreen-ui/emotion';
 import Select from '../Select';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
+import { theme } from '../../theme/docsTheme';
 import { TabContext } from './tab-context';
+
+const selectStyle = css`
+  width: 100%;
+
+  & button > div > div > div {
+    display: flex;
+    align-items: center;
+  }
+
+  @media ${theme.screenSize.smallAndUp} {
+    /* Min width of right panel */
+    max-width: 180px;
+  }
+`;
 
 const capitalizeFirstLetter = (str) => str.trim().replace(/^\w/, (c) => c.toUpperCase());
 
@@ -28,24 +43,11 @@ export const makeChoices = ({ name, iconMapping, options }) =>
     ...(name === 'drivers' && { tabSelectorIcon: iconMapping[tabId] }),
   }));
 
-const TabSelector = ({ activeTab, handleClick, iconMapping, name, options }) => {
+const TabSelector = ({ className, activeTab, handleClick, iconMapping, name, options }) => {
   const choices = useMemo(() => makeChoices({ name, iconMapping, options }), [name, iconMapping, options]);
-  const { screenSize } = useTheme();
   return (
     <Select
-      css={css`
-        width: 100%;
-
-        & button > div > div > div {
-          display: flex;
-          align-items: center;
-        }
-
-        @media ${screenSize.smallAndUp} {
-          /* Min width of right panel */
-          max-width: 180px;
-        }
-      `}
+      className={cx(selectStyle, className)}
       choices={choices}
       label={getLabel(name)}
       usePortal={false}
@@ -62,7 +64,7 @@ const TabSelector = ({ activeTab, handleClick, iconMapping, name, options }) => 
   );
 };
 
-const TabSelectors = () => {
+const TabSelectors = ({ className }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
 
   if (!selectors || Object.keys(selectors).length === 0) {
@@ -80,6 +82,7 @@ const TabSelectors = () => {
         return (
           <TabSelector
             key={name}
+            className={className}
             activeTab={activeTabs[name]}
             handleClick={setActiveTab}
             iconMapping={iconMapping}
