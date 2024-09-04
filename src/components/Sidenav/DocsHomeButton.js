@@ -26,7 +26,7 @@ const containerStyle = LeafyCSS`
   align-items: center;
 `;
 
-const DocsHomeButton = ({ darkMode }) => {
+const DocsHomeButton = ({ hideDarkModeToggle }) => {
   return (
     <div className={cx(containerStyle)}>
       <SideNavItem
@@ -38,13 +38,13 @@ const DocsHomeButton = ({ darkMode }) => {
         <Icon glyph="Home"></Icon>
         Docs Home
       </SideNavItem>
-      {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && <DarkModeToggle />}
+      {process.env['GATSBY_ENABLE_DARK_MODE'] === 'true' && !hideDarkModeToggle && <DarkModeToggle />}
     </div>
   );
 };
 
 DocsHomeButton.propTypes = {
-  darkMode: PropTypes.bool,
+  hideDarkModeToggle: PropTypes.bool,
 };
 
 export default DocsHomeButton;

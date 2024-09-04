@@ -9,7 +9,7 @@ import { ContentsProvider } from './Contents/contents-context';
 
 const RootProvider = ({ children, headingNodes, slug, repoBranches, remoteMetadata }) => {
   return (
-    <DarkModeContextProvider>
+    <DarkModeContextProvider slug={slug}>
       <ContentsProvider headingNodes={headingNodes}>
         <HeaderContextProvider>
           <VersionContextProvider repoBranches={repoBranches} slug={slug}>
