@@ -18,7 +18,7 @@ const disableBodyScroll = css`
 `;
 
 const Container = styled('div')`
-  background-color: ${palette.white};
+  background-color: var(--background-color-primary);
   position: fixed;
   left: 0;
   top: ${({ topValue }) => topValue};
