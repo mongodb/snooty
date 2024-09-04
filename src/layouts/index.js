@@ -90,7 +90,7 @@ const StyledContentContainer = styled('div')`
 
 const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
-  const { chapters, guides, slugToTitle, title, toctree, eol, project } = useSnootyMetadata();
+  const { chapters, guides, slugToTitle, toctree, eol, project } = useSnootyMetadata();
   const remoteMetadata = useRemoteMetadata();
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
@@ -120,7 +120,6 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
               page={page.ast}
               pageTitle={pageTitle}
               repoBranches={repoBranches}
-              siteTitle={title}
               slug={slug}
               toctree={toctree}
               eol={eol}
