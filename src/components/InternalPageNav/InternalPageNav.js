@@ -5,9 +5,9 @@ import { Body } from '@leafygreen-ui/typography';
 import Icon, { glyphs } from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import { theme } from '../theme/docsTheme';
-import { getPageTitle } from '../utils/get-page-title';
-import Link from './Link';
+import { theme } from '../../theme/docsTheme';
+import { getPageTitle } from '../../utils/get-page-title';
+import Link from '../Link';
 
 const containerStyling = css`
   padding-bottom: 2.5em;

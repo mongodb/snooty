@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Contents from '../components/Contents';
-import InternalPageNav from '../components/InternalPageNav';
+import { InternalPageNav } from '../components/InternalPageNav';
 import { StepNumber } from '../components/MultiPageTutorials';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
