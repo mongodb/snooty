@@ -13,7 +13,7 @@ const baseStyle = css`
   float: right;
   margin-left: ${theme.size.medium};
   // Add top margin to align bottom of container to bottom of overline
-  margin-top: 10px;
+  margin-top: -38px;
   width: 103px;
   height: 22px;
 

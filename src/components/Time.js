@@ -32,8 +32,9 @@ const Time = ({ nodeData: { argument } }) => {
 
   return (
     <>
-      <MPTNextLinkMini />
       <Overline className={timeBaseStyle}>Read time {time} min</Overline>
+      {/* Keeping at the bottom so that it can be more easily aligned regardless of what's above the Time component*/}
+      <MPTNextLinkMini />
     </>
   );
 };
