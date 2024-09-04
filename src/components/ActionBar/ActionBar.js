@@ -71,7 +71,7 @@ const ActionBar = ({ template, ...props }) => {
         <ChatbotUi darkMode={darkMode} />
       </ActionBarSearchContainer>
       <ActionsBox>
-        <DarkModeDropdown></DarkModeDropdown>
+        {template !== 'openapi' && <DarkModeDropdown />}
         {template !== 'errorpage' && (
           <div>
             <button>Feedback</button>
