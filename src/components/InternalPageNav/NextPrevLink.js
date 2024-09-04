@@ -5,6 +5,7 @@ import { Body } from '@leafygreen-ui/typography';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
+import Link from '../Link';
 
 const commonTextStyles = css`
   font-size: ${theme.fontSize.small};
@@ -45,20 +46,22 @@ const prevLinkContainerStyling = css`
   flex-direction: row;
 `;
 
-const NextPrevLink = ({ icon, direction, pageTitle }) => {
+const NextPrevLink = ({ icon, direction, pageTitle, targetSlug, title }) => {
   const isNext = direction?.toLowerCase() === 'next';
   const isPrev = direction?.toLowerCase() === 'back';
 
   return (
-    <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
-      <Button size="large">
-        <Icon glyph={icon} />
-      </Button>
-      <div className={cx({ [nextTextStyling]: isNext }, { [prevTextStyling]: isPrev })}>
-        <Body className={cx(nextPrevTextStyling)}>{direction}</Body>
-        <Body className={cx(nextPrevTitleTextStyling)}>{pageTitle}</Body>
+    <Link to={targetSlug} title={title}>
+      <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
+        <Button size="large">
+          <Icon glyph={icon} />
+        </Button>
+        <div className={cx({ [nextTextStyling]: isNext }, { [prevTextStyling]: isPrev })}>
+          <Body className={cx(nextPrevTextStyling)}>{direction}</Body>
+          <Body className={cx(nextPrevTitleTextStyling)}>{pageTitle}</Body>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

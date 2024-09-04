@@ -4,7 +4,6 @@ import { glyphs } from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { getPageTitle } from '../../utils/get-page-title';
-import Link from '../Link';
 import NextPrevLink from './NextPrevLink';
 
 const containerStyling = css`
@@ -33,22 +32,22 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
   return (
     <div className={cx(containerStyling)}>
       {prevSlug && (
-        <Link to={prevSlug} title="Previous Section">
-          <NextPrevLink
-            icon={glyphs.ArrowLeft.displayName}
-            direction="Back"
-            pageTitle={getPageTitle(prevSlug, slugTitleMapping)}
-          />
-        </Link>
+        <NextPrevLink
+          icon={glyphs.ArrowLeft.displayName}
+          direction="Back"
+          targetSlug={prevSlug}
+          pageTitle={getPageTitle(prevSlug, slugTitleMapping)}
+          title="Previous Section"
+        />
       )}
       {nextSlug && (
-        <Link to={nextSlug} title="Next Section">
-          <NextPrevLink
-            icon={glyphs.ArrowRight.displayName}
-            direction="Next"
-            pageTitle={getPageTitle(nextSlug, slugTitleMapping)}
-          />
-        </Link>
+        <NextPrevLink
+          icon={glyphs.ArrowRight.displayName}
+          direction="Next"
+          targetSlug={nextSlug}
+          pageTitle={getPageTitle(nextSlug, slugTitleMapping)}
+          title="Next Section"
+        />
       )}
     </div>
   );
