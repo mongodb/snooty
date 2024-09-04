@@ -25,10 +25,16 @@ const kickerLightStyling = css`
   ${kickerBaseStyling}
 `;
 
-const Kicker = ({ nodeData: { argument }, ...rest }) => {
+const Kicker = ({ className, nodeData: { argument }, ...rest }) => {
   const { darkMode } = useDarkMode();
   return (
-    <Overline className={cx({ [kickerBaseStyling]: darkMode === true }, { [kickerLightStyling]: darkMode === false })}>
+    <Overline
+      className={cx(
+        { [kickerBaseStyling]: darkMode === true },
+        { [kickerLightStyling]: darkMode === false },
+        className
+      )}
+    >
       {argument.map((child, i) => (
         <ComponentFactory {...rest} nodeData={child} key={i} />
       ))}

@@ -4,13 +4,14 @@ import styled from '@emotion/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Contents from '../components/Contents';
 import InternalPageNav from '../components/InternalPageNav';
-import MultiPageTutorials from '../components/MultiPageTutorials';
+import { StepNumber } from '../components/MultiPageTutorials';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/Tabs/TabSelectors';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 import { theme } from '../theme/docsTheme';
+import { useActiveMPTutorial } from '../hooks/use-active-mp-tutorial';
 
 const MAX_CONTENT_WIDTH = '775px';
 
@@ -30,26 +31,18 @@ const StyledRightColumn = styled(RightColumn)`
 `;
 
 const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedProduct } }) => {
-  const { slugToBreadcrumbLabel, title, toctreeOrder, multiPageTutorials } = useSnootyMetadata();
+  const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const hasMethodSelector = pageOptions?.has_method_selector;
-
-  // Use for the demo, when actually work kicks off, this should become a utility
-  const activeTutorial = Object.keys(multiPageTutorials).reduce((result, key) => {
-    if (multiPageTutorials[key].slugs.includes(slug)) {
-      result = multiPageTutorials[key];
-    }
-
-    return result;
-  }, null);
+  const activeTutorial = useActiveMPTutorial();
 
   return (
     <DocumentContainer>
       <StyledMainColumn>
         <div className="body">
           <Breadcrumbs siteTitle={title} slug={slug} />
-          {activeTutorial && <MultiPageTutorials slug={slug} activeTutorial={activeTutorial} />}
+          {activeTutorial && <StepNumber slug={slug} activeTutorial={activeTutorial} />}
           {children}
           {showPrevNext && (
             <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={toctreeOrder} />
