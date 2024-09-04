@@ -24,7 +24,8 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
   const { snootyEnv } = useSiteMetadata();
 
   // get search url for staging and prod environments
-  // all other environments will fall back to prodF
+  // all other environments will fall back to prod
+  // considers localization as well
   const fullSearchUrl = useMemo(() => {
     const ENVS_WITH_SEARCH = ['dotcomstg', 'dotcomprd'];
     const targetEnv = ENVS_WITH_SEARCH.includes(snootyEnv) ? snootyEnv : ENVS_WITH_SEARCH[1];
