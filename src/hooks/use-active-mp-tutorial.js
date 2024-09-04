@@ -6,7 +6,7 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
  */
 export const useActiveMPTutorial = () => {
   const { slug } = usePageContext();
-  const { multiPageTutorials } = useSnootyMetadata();
+  const { multiPageTutorials = {} } = useSnootyMetadata();
 
   const activeTutorial = Object.keys(multiPageTutorials).reduce((result, key) => {
     if (multiPageTutorials[key].slugs.includes(slug)) {
