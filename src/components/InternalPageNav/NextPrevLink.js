@@ -46,22 +46,24 @@ const prevLinkContainerStyling = css`
   flex-direction: row;
 `;
 
-const NextPrevLink = ({ icon, direction, pageTitle, targetSlug, title }) => {
+const NextPrevLink = ({ className, icon, direction, pageTitle, targetSlug, title }) => {
   const isNext = direction?.toLowerCase() === 'next';
   const isPrev = direction?.toLowerCase() === 'back';
 
   return (
-    <Link to={targetSlug} title={title}>
-      <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
-        <Button size="large">
-          <Icon glyph={icon} />
-        </Button>
-        <div className={cx({ [nextTextStyling]: isNext }, { [prevTextStyling]: isPrev })}>
-          <Body className={cx(nextPrevTextStyling)}>{direction}</Body>
-          <Body className={cx(nextPrevTitleTextStyling)}>{pageTitle}</Body>
+    <div className={className}>
+      <Link to={targetSlug} title={title}>
+        <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
+          <Button size="large">
+            <Icon glyph={icon} />
+          </Button>
+          <div className={cx({ [nextTextStyling]: isNext }, { [prevTextStyling]: isPrev })}>
+            <Body className={cx(nextPrevTextStyling)}>{direction}</Body>
+            <Body className={cx(nextPrevTitleTextStyling)}>{pageTitle}</Body>
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

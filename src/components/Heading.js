@@ -14,6 +14,7 @@ import { InstruqtContext } from './Instruqt/instruqt-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
+import MPTNextLink from './MultiPageTutorials/MPTNextLink';
 
 const h2Styling = css`
   margin-top: 16px;
@@ -76,6 +77,7 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
           as={asHeading}
           weight="medium"
         >
+          {isPageTitle && <MPTNextLink />}
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}
