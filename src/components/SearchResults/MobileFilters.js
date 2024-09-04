@@ -37,6 +37,10 @@ const BackButton = styled('div')`
   cursor: pointer;
   display: flex;
   gap: 0 ${theme.size.small};
+
+  .dark-theme & {
+    color: ${palette.gray.light1};
+  }
 `;
 
 const Label = styled('div')`
