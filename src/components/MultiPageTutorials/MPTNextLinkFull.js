@@ -4,6 +4,8 @@ import { css } from '@leafygreen-ui/emotion';
 import { useActiveMPTutorial } from '../../hooks/use-active-mp-tutorial';
 import { NextPrevLink } from '../InternalPageNav';
 import { theme } from '../../theme/docsTheme';
+import { usePageContext } from '../../context/page-context';
+import { shouldShowNext } from './utils';
 
 const baseStyle = css`
   display: none;
@@ -18,8 +20,10 @@ const baseStyle = css`
 `;
 
 const MPTNextLinkFull = () => {
+  const { options } = usePageContext();
   const activeTutorial = useActiveMPTutorial();
-  if (!activeTutorial || !activeTutorial.next) {
+
+  if (!shouldShowNext(activeTutorial, options)) {
     return null;
   }
 

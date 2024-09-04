@@ -5,6 +5,8 @@ import Button from '@leafygreen-ui/button';
 import { useActiveMPTutorial } from '../../hooks/use-active-mp-tutorial';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
+import { usePageContext } from '../../context/page-context';
+import { shouldShowNext } from './utils';
 
 const baseStyle = css`
   float: right;
@@ -24,8 +26,10 @@ const buttonStyle = css`
 `;
 
 const MPTNextLinkMini = () => {
+  const { options } = usePageContext();
   const activeTutorial = useActiveMPTutorial();
-  if (!activeTutorial || !activeTutorial.next) {
+
+  if (!shouldShowNext(activeTutorial, options)) {
     return null;
   }
 
