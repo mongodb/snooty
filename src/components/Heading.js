@@ -67,6 +67,7 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
           </HeadingContainer>
         )}
       >
+        {isPageTitle && <MPTNextLink />}
         <HeadingTag
           className={cx(
             headingStyles(sectionDepth),
@@ -77,7 +78,6 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
           as={asHeading}
           weight="medium"
         >
-          {isPageTitle && <MPTNextLink />}
           {nodeData.children.map((element, index) => {
             return <ComponentFactory {...rest} nodeData={element} key={index} />;
           })}

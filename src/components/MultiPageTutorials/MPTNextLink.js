@@ -8,6 +8,8 @@ import { theme } from '../../theme/docsTheme';
 const baseStyle = css`
   float: right;
   margin-left: ${theme.size.medium};
+  // Add negative margin in an attempt to align float from bottom of element instead of its top
+  margin-top: -10px;
 `;
 
 const MPTNextLink = () => {
