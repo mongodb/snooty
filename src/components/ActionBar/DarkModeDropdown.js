@@ -53,7 +53,7 @@ const DarkModeDropdown = () => {
           {darkModePref === 'system' ? (
             <IconComputer darkMode={darkMode} />
           ) : (
-            <Icon glyph={darkModePref === 'dark-theme' ? 'Moon' : 'Sun'} />
+            <Icon size={28} glyph={darkModePref === 'dark-theme' ? 'Moon' : 'Sun'} />
           )}
         </IconButton>
       }
@@ -61,14 +61,14 @@ const DarkModeDropdown = () => {
       <MenuItem
         active={darkModePref === 'light-theme'}
         onClick={() => select('light-theme')}
-        glyph={<Icon glyph={'Sun'} />}
+        glyph={<Icon size={24} glyph={'Sun'} />}
       >
         Light
       </MenuItem>
       <MenuItem
         active={darkModePref === 'dark-theme'}
         onClick={() => select('dark-theme')}
-        glyph={<Icon glyph={'Moon'} />}
+        glyph={<Icon size={24} glyph={'Moon'} />}
       >
         Dark
       </MenuItem>
