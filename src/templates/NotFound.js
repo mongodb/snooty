@@ -106,7 +106,7 @@ const ErrorBoxContainer = () => {
   );
 };
 
-const NotFoundContainer = styled.div`
+export const NotFoundContainer = styled.div`
   align-items: center;
   display: flex;
   flex-flow: no-wrap;
@@ -130,12 +130,12 @@ const NotFoundContainer = styled.div`
     grid-column: 4/-4;
   }
   @media ${({ theme }) => theme.screenSize.xLargeAndUp} {
-    grid-column: 5/-5;
+    grid-column: 6/-5;
     justify-content: start;
   }
 `;
 
-const Wrapper = styled('main')`
+export const Wrapper = styled('main')`
   display: grid;
   @media ${({ theme }) => theme.screenSize.mediumAndUp} {
     grid-template-columns: ${({ theme }) => `${theme.size.xlarge} repeat(12, minmax(0, 1fr)) ${theme.size.xlarge};`};
