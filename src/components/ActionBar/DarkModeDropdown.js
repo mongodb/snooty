@@ -57,7 +57,7 @@ const DarkModeDropdown = () => {
           {darkModePref === 'system' ? (
             <IconDarkmode />
           ) : (
-            <Icon size={28} glyph={darkModePref === 'dark-theme' ? 'Moon' : 'Sun'} />
+            <Icon size={24} glyph={darkModePref === 'dark-theme' ? 'Moon' : 'Sun'} />
           )}
         </IconButton>
       }
