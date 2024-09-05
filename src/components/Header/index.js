@@ -29,6 +29,7 @@ const Header = ({ sidenav, eol, template }) => {
       <SiteBanner />
       <StyledHeaderContainer template={template} hasBanner={!!bannerContent}>
         <>
+          {/* Two navs used intentionally: one for light mode, one for dark mode */}
           {!eol && (
             <>
               <UnifiedNav
