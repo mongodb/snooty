@@ -53,8 +53,6 @@ const HeaderContainer = styled('div')`
 const headerContainerDynamicStyles = css`
   > h3:first-of-type {
     color: var(--heading-color-primary);
-    padding-bottom: 24px;
-    margin: unset;
   }
 `;
 
@@ -299,6 +297,45 @@ const MobileSearchButtonWrapper = styled('div')`
 
   @media ${theme.screenSize.upToMedium} {
     display: block;
+  }
+  > Button {
+    background-color: ${palette.gray.light3};
+    border-color: ${palette.gray.base};
+    color: ${palette.black};
+
+    &:focus-visible,
+    &[data-focus='true'] {
+      color: ${palette.black};
+    }
+
+    &:hover,
+    &[data-hover='true'],
+    &:active,
+    &[data-active='true'] {
+      color: ${palette.black};
+      background-color: ${palette.white};
+      box-shadow: 0 0 0 3px ${palette.gray.light2};
+    }
+    .dark-theme & {
+      background-color: ${palette.gray.dark2};
+      border-color: ${palette.gray.base};
+      color: ${palette.white};
+
+      &:focus-visible,
+      &[data-focus='true'] {
+        color: ${palette.white};
+      }
+
+      &:hover,
+      &[data-hover='true'],
+      &:active,
+      &[data-active='true'] {
+        background-color: ${palette.gray.dark1};
+        border-color: ${palette.gray.base};
+        color: ${palette.white};
+        box-shadow: 0px 0px 0px 3px ${palette.gray.dark2};
+      }
+    }
   }
 `;
 
