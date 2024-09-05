@@ -6,6 +6,7 @@ import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import useScreenSize from '../hooks/useScreenSize';
+import { usePageContext } from '../context/page-context';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -50,7 +51,9 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
   const { hasDrawer, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
   const shouldShowLabButton = isPageTitle && hasDrawer;
-  const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors);
+  const { page } = usePageContext();
+  const hasMethodSelector = page?.options?.['has_method_selector'];
+  const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
 
   return (
     <>

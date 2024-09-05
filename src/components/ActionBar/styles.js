@@ -78,11 +78,8 @@ const middleAlignment = css`
 `;
 
 const centerInGrid = css`
-  grid-column: 4/-4;
+  grid-column: 2/-2;
 
-  @media ${theme.screenSize.upToMedium} {
-    grid-column: 2/-2;
-  }
   @media ${theme.screenSize.upToLarge} {
     grid-column: 3/-3;
   }
@@ -90,7 +87,7 @@ const centerInGrid = css`
     grid-column: 4/-4;
   }
   @media ${theme.screenSize.xLargeAndUp} {
-    grid-column: 5/-5;
+    grid-column: 6/-5;
   }
 `;
 

@@ -59,6 +59,9 @@ const linkStyling = ({ depth, isActive }) => css`
     color: currentColor;
     text-decoration: none;
   }
+  span > span {
+    position: unset;
+  }
 `;
 
 const ContentsListItem = ({ children, depth = 0, id, isActive = false }) => {
