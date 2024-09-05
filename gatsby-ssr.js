@@ -72,6 +72,8 @@ export const onRenderBody = ({ setHeadComponents }) => {
               try {
                 var d = document.documentElement.classList;
                 d.remove("light-theme", "dark-theme");
+                var h = window.location.href;
+                if (h.includes('/openapi/preview')) return;
                 var e = JSON.parse(localStorage.getItem("mongodb-docs"))?.["theme"];
                 if ("system" === e || (!e)) {
                   var t = "(prefers-color-scheme: dark)",
