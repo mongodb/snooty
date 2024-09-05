@@ -106,12 +106,13 @@ const StyledPreviewText = styled(Body)`
   // Reserve some space inside of the search result card when there is no preview
   min-height: 20px;
 
+  // Changes the highlight color of text in the cards of the search term
   > span {
+    background-color: ${palette.green.light2};
+
     .dark-theme & {
       background-color: ${palette.green.dark2};
     }
-
-    background-color: ${palette.green.light2};
   }
 `;
 
@@ -119,7 +120,7 @@ const StyledTag = styled(Tag)`
   ${searchTagStyle}
 `;
 
-const styledTagGreen = css`
+const greenTagStyles = css`
   background-color: ${palette.green.light3};
   border: 1px solid ${palette.green.light2};
   color: ${palette.green.dark2};
@@ -131,7 +132,7 @@ const styledTagGreen = css`
   }
 `;
 
-const styledTagBlue = css`
+const blueTagStyles = css`
   background-color: ${palette.blue.light3};
   border: 1px solid ${palette.blue.light2};
   color: ${palette.blue.dark1};
@@ -143,7 +144,7 @@ const styledTagBlue = css`
   }
 `;
 
-const styledTagPurple = css`
+const purpleTagStyles = css`
   background-color: ${palette.purple.light3};
   border: 1px solid ${palette.purple.light2};
   color: ${palette.purple.dark2};
@@ -231,17 +232,17 @@ const SearchResult = React.memo(
           {!showFacets && (
             <StylingTagContainer>
               {!!category && (
-                <StyledTag variant="green" className={cx(styledTagGreen)}>
+                <StyledTag variant="green" className={cx(greenTagStyles)}>
                   {category}
                 </StyledTag>
               )}
               {!!version && (
-                <StyledTag variant="blue" className={cx(styledTagBlue)}>
+                <StyledTag variant="blue" className={cx(blueTagStyles)}>
                   {version}
                 </StyledTag>
               )}
               {url.includes('/api/') && (
-                <StyledTag variant="purple" className={cx(styledTagPurple)}>
+                <StyledTag variant="purple" className={cx(purpleTagStyles)}>
                   {'API'}
                 </StyledTag>
               )}

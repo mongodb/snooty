@@ -230,14 +230,6 @@ const StyledParagraphSkeleton = styled(ParagraphSkeleton)`
   > div {
     background: linear-gradient(110deg, ${palette.gray.light2} 35%, ${palette.gray.light3}, ${palette.gray.light2} 65%)
       0 0/ 100vw 100% fixed;
-    background-position: 50vw 0;
-    animation: SkeletonShimmer 1.5s infinite linear;
-
-    @keyframes SkeletonShimmer {
-      to {
-        background-position: 100vw 0;
-      }
-    }
 
     .dark-theme & {
       background: linear-gradient(110deg, ${palette.gray.dark2} 35%, ${palette.gray.dark1}, ${palette.gray.dark2} 65%) 0
