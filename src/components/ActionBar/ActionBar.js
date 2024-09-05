@@ -44,7 +44,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
             Docs Menu
           </Overline>
         )}
-        <SearchInput />
+        <SearchInput slug={slug} />
       </ActionBarSearchContainer>
       <ActionsBox>
         <DarkModeDropdown></DarkModeDropdown>

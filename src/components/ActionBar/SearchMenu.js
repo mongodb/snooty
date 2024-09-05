@@ -1,18 +1,40 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
+import { navigate } from 'gatsby';
 import { SearchResultsMenu, SearchResult } from '@leafygreen-ui/search-input';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch, useChatbotContext } from 'mongodb-chatbot-ui';
 import PropTypes from 'prop-types';
+import { useAllDocsets } from '../../hooks/useAllDocsets';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
+import { localizePath } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { suggestionStyling } from './styles';
 import { SEARCH_SUGGESTIONS } from './SearchInput';
 
 // Using a forward ref and imperative handle
 // to expose lazy loaded child (chatbot) behaviors to parent (SearchInput)
 // https://react.dev/reference/react/useImperativeHandle
-const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, isOpen, selectedOption }, ref) {
+const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, isOpen, selectedOption, slug }, ref) {
   const { handleSubmit, conversation } = useChatbotContext();
   const menuRef = useRef();
+  const { project } = useSnootyMetadata();
+  const docsets = useAllDocsets();
+  const { snootyEnv } = useSiteMetadata();
+
+  // get search url for staging and prod environments
+  // all other environments will fall back to prod
+  // considers localization as well
+  const fullSearchUrl = useMemo(() => {
+    const ENVS_WITH_SEARCH = ['dotcomstg', 'dotcomprd'];
+    const targetEnv = ENVS_WITH_SEARCH.includes(snootyEnv) ? snootyEnv : ENVS_WITH_SEARCH[1];
+    const landingDocset = docsets.find((d) => d.project === 'landing');
+    return (
+      assertTrailingSlash(landingDocset.url[targetEnv]) +
+      localizePath(assertTrailingSlash(landingDocset.prefix[targetEnv]) + 'search')
+    );
+  }, [docsets, snootyEnv]);
 
   const handleSearchResultClick = useCallback(
     async (isChatbotRes) => {
@@ -20,12 +42,17 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
         type: isChatbotRes ? 'chatbot' : 'docs-search',
         query: searchValue,
       });
-      if (!isChatbotRes) {
-        return (window.location.href = `https://mongodb.com/docs/search/?q=${searchValue}`);
+      if (isChatbotRes) {
+        return handleSubmit(searchValue);
       }
-      return handleSubmit(searchValue);
+      if (project === 'landing' && slug === 'search') {
+        const newSearch = new URLSearchParams();
+        newSearch.set('q', searchValue);
+        return navigate(`?${newSearch.toString()}`, { state: { searchValue } });
+      }
+      return (window.location.href = `${fullSearchUrl}/?q=${searchValue}`);
     },
-    [handleSubmit, searchValue]
+    [handleSubmit, project, fullSearchUrl, searchValue, slug]
   );
 
   useImperativeHandle(
@@ -111,4 +138,5 @@ SearchMenu.propTypes = {
   searchBoxRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.instanceOf(Element) })]),
   isOpen: PropTypes.bool,
   selectedOption: PropTypes.number,
+  slug: PropTypes.string,
 };
