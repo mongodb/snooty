@@ -49,7 +49,7 @@ export const SEARCH_SUGGESTIONS = [
   },
 ];
 
-const SearchInput = ({ className }) => {
+const SearchInput = ({ className, slug }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const searchBoxRef = useRef();
@@ -64,6 +64,7 @@ const SearchInput = ({ className }) => {
   useBackdropClick(
     () => {
       setIsOpen(false);
+      inputRef.current?.blur();
     },
     [searchBoxRef, menuRef],
     isOpen
@@ -74,7 +75,7 @@ const SearchInput = ({ className }) => {
       return setIsOpen(false);
     }
     const debounced = debounce(() => {
-      setIsOpen(!!searchValue.length);
+      setIsOpen(!!searchValue.length && document?.activeElement === inputRef.current);
     }, 500);
     return () => debounced();
   }, [searchValue]);
@@ -130,6 +131,16 @@ const SearchInput = ({ className }) => {
       setSearchValue(searchTerm);
     }
   }, [search]);
+
+  // close menu when changing screen size
+  useEffect(() => {
+    function handleResize() {
+      setIsOpen(false);
+    }
+    window.addEventListener('resize', handleResize);
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobile, mobileSearchActive]);
 
   const handleSearchBoxKeyDown = (e) => {
     const isFocusInMenu = menuRef.current?.contains && menuRef.current.contains(document.activeElement);
@@ -206,6 +217,10 @@ const SearchInput = ({ className }) => {
         onClick={() => {
           setIsOpen(!!searchValue.length);
         }}
+        onSubmit={(e) => {
+          inputRef.current?.blur();
+          setIsOpen(false);
+        }}
         ref={inputRef}
       />
       {isMedium && mobileSearchActive && (
@@ -232,6 +247,7 @@ const SearchInput = ({ className }) => {
             searchValue={searchValue}
             ref={menuRef}
             selectedOption={selectedOption}
+            slug={slug}
           ></SearchMenu>
         </Chatbot>
       </SuspenseHelper>
@@ -255,4 +271,5 @@ export default SearchInput;
 
 SearchInput.propTypes = {
   className: PropTypes.string,
+  slug: PropTypes.string,
 };

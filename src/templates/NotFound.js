@@ -106,7 +106,7 @@ const ErrorBoxContainer = () => {
   );
 };
 
-const NotFoundContainer = styled.div`
+export const NotFoundContainer = styled.div`
   align-items: center;
   display: flex;
   flex-flow: no-wrap;
@@ -117,40 +117,40 @@ const NotFoundContainer = styled.div`
     margin-top: -${theme.size.large};
   }
 
-  @media ${({ theme }) => theme.screenSize.upToMedium} {
+  @media ${theme.screenSize.upToMedium} {
     grid-column: 2/-2;
     flex-flow: column-reverse;
   }
 
-  @media ${({ theme }) => theme.screenSize.upToLarge} {
+  @media ${theme.screenSize.upToLarge} {
     grid-column: 3/-3;
   }
 
-  @media ${({ theme }) => theme.screenSize.largeAndUp} {
+  @media ${theme.screenSize.largeAndUp} {
     grid-column: 4/-4;
   }
-  @media ${({ theme }) => theme.screenSize.xLargeAndUp} {
-    grid-column: 5/-5;
+  @media ${theme.screenSize.xLargeAndUp} {
+    grid-column: 6/-5;
     justify-content: start;
   }
 `;
 
-const Wrapper = styled('main')`
+export const Wrapper = styled('main')`
   display: grid;
-  @media ${({ theme }) => theme.screenSize.mediumAndUp} {
-    grid-template-columns: ${({ theme }) => `${theme.size.xlarge} repeat(12, minmax(0, 1fr)) ${theme.size.xlarge};`};
+  @media ${theme.screenSize.mediumAndUp} {
+    grid-template-columns: ${`${theme.size.xlarge} repeat(12, minmax(0, 1fr)) ${theme.size.xlarge};`};
   }
 
-  @media ${({ theme }) => theme.screenSize.upToMedium} {
+  @media ${theme.screenSize.upToMedium} {
     grid-template-columns: 48px repeat(12, 1fr) 48px;
   }
 
-  @media ${({ theme }) => theme.screenSize.upToSmall} {
-    grid-template-columns: ${({ theme }) => theme.size.large} 1fr ${({ theme }) => theme.size.large};
+  @media ${theme.screenSize.upToSmall} {
+    grid-template-columns: ${theme.size.large} 1fr ${theme.size.large};
   }
 
-  @media ${({ theme }) => theme.screenSize.upToXSmall} {
-    grid-template-columns: ${({ theme }) => theme.size.medium} 1fr ${({ theme }) => theme.size.medium};
+  @media ${theme.screenSize.upToXSmall} {
+    grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
   }
 `;
 

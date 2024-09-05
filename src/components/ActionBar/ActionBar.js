@@ -44,10 +44,10 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
             Docs Menu
           </Overline>
         )}
-        <SearchInput />
+        <SearchInput slug={slug} />
       </ActionBarSearchContainer>
       <ActionsBox>
-        <DarkModeDropdown></DarkModeDropdown>
+        {template !== 'openapi' && <DarkModeDropdown />}
         {template !== 'errorpage' && (
           <FeedbackProvider page={feedbackData}>
             <FeedbackContainer>

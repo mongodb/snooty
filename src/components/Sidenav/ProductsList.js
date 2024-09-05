@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -121,7 +120,7 @@ const iconStyle = ({ isOpen }) => LeafyCSS`
   transition: transform ${chevronRotationDuration};
 `;
 
-const ProductsList = ({ darkMode }) => {
+const ProductsList = () => {
   const products = useAllProducts();
   const [isOpen, setOpen] = useState(false);
 
@@ -151,10 +150,6 @@ const ProductsList = ({ darkMode }) => {
       </CSSTransition>
     </>
   );
-};
-
-ProductsList.propTypes = {
-  darkMode: PropTypes.bool,
 };
 
 export default ProductsList;

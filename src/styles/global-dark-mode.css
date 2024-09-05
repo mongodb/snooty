@@ -18,6 +18,7 @@ body {
 
   --sidenav-item-title: var(--gray-dark3);
   --sidenav-item-color: var(--black);
+  --sidenav-hover-bg-color: var(--gray-light2);
   --sidenav-active-bg-color: var(--green-light3);
   --sidenav-active-color: var(--green-dark2);
   --sidenav-active-before-color: var(--green-dark1);
@@ -54,6 +55,7 @@ body {
 
   --sidenav-item-title: var(--gray-light2);
   --sidenav-item-color: var(--gray-light2);
+  --sidenav-hover-bg-color: var(--gray-dark3);
   --sidenav-active-bg-color: var(--green-dark3);
   --sidenav-active-color: var(--white);
   --sidenav-active-before-color: var(--green-base);

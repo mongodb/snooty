@@ -128,7 +128,7 @@ const LoadingWidget = ({ className }) => (
 const MenuTitleContainer = ({ pageTitle }) => {
   return (
     <>
-      <DocsHomeButton />
+      <DocsHomeButton hideDarkModeToggle={true} />
       <Border />
       <MenuTitle>{pageTitle}</MenuTitle>
     </>
