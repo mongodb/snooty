@@ -12,8 +12,6 @@ const baseStyle = css`
   display: none;
   float: right;
   margin-left: ${theme.size.medium};
-  // Add negative margin in an attempt to align bottom of element to bottom of first row of heading
-  margin-top: -14px;
 
   @media ${theme.screenSize.mediumAndUp} {
     display: initial;

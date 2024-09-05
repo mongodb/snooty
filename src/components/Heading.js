@@ -14,7 +14,6 @@ import { InstruqtContext } from './Instruqt/instruqt-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
-import { MPTNextLinkFull } from './MultiPageTutorials';
 
 const h2Styling = css`
   margin-top: 16px;
@@ -67,7 +66,6 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
           </HeadingContainer>
         )}
       >
-        {isPageTitle && <MPTNextLinkFull />}
         <HeadingTag
           className={cx(
             headingStyles(sectionDepth),

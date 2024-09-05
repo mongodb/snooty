@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import Overline from '../Internal/Overline';
+import MPTNextLinkFull from './MPTNextLinkFull';
 
 const overlineStyle = css`
   font-weight: 600;
@@ -15,9 +16,12 @@ const StepNumber = ({ slug, activeTutorial }) => {
   const currentStep = activeTutorial.slugs.indexOf(slug) + 1;
 
   return (
-    <Overline className={overlineStyle}>
-      Step {currentStep} of {totalSteps}
-    </Overline>
+    <>
+      <Overline className={overlineStyle}>
+        Step {currentStep} of {totalSteps}
+      </Overline>
+      <MPTNextLinkFull />
+    </>
   );
 };
 
