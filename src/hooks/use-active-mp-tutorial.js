@@ -1,24 +1,36 @@
 import { usePageContext } from '../context/page-context';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 
-const addNextTutorial = (slugTitleMapping, slug, activeTutorial) => {
+const addPrevNextTutorials = (slugTitleMapping, slug, activeTutorial) => {
   if (!activeTutorial || Object.keys(activeTutorial).length === 0) {
     return;
   }
 
-  const key = 'next';
-  activeTutorial[key] = null;
-  const nextPageIdx = activeTutorial.slugs.indexOf(slug) + 1;
-  if (nextPageIdx >= activeTutorial.total_steps) {
-    return;
+  const currPageIdx = activeTutorial.slugs.indexOf(slug);
+  const keyNext = 'next';
+  const keyPrev = 'prev';
+  activeTutorial[keyNext] = null;
+  activeTutorial[keyPrev] = null;
+
+  const nextPageIdx = currPageIdx + 1;
+  if (nextPageIdx < activeTutorial.total_steps) {
+    const targetSlug = activeTutorial.slugs[nextPageIdx];
+    const pageTitle = slugTitleMapping[targetSlug];
+    activeTutorial[keyNext] = {
+      targetSlug,
+      pageTitle,
+    };
   }
 
-  const targetSlug = activeTutorial.slugs[nextPageIdx];
-  const pageTitle = slugTitleMapping[targetSlug];
-  activeTutorial[key] = {
-    targetSlug,
-    pageTitle,
-  };
+  const prevPageIdx = currPageIdx - 1;
+  if (prevPageIdx >= 0) {
+    const targetSlug = activeTutorial.slugs[prevPageIdx];
+    const pageTitle = slugTitleMapping[targetSlug];
+    activeTutorial[keyPrev] = {
+      targetSlug,
+      pageTitle,
+    };
+  }
 };
 
 /**
@@ -36,7 +48,7 @@ export const useActiveMPTutorial = () => {
     return result;
   }, null);
 
-  addNextTutorial(slugToBreadcrumbLabel, slug, activeTutorial);
+  addPrevNextTutorials(slugToBreadcrumbLabel, slug, activeTutorial);
 
   return activeTutorial;
 };

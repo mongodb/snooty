@@ -4,6 +4,7 @@ import { glyphs } from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { getPageTitle } from '../../utils/get-page-title';
+import { useActiveMPTutorial } from '../../hooks/use-active-mp-tutorial';
 import NextPrevLink from './NextPrevLink';
 
 const containerStyling = css`
@@ -25,28 +26,64 @@ const containerStyling = css`
   }
 `;
 
-const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
-  const slugIndex = toctreeOrder.indexOf(slug);
+const getPrev = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
+  if (activeTutorial?.prev) {
+    return {
+      prevSlug: activeTutorial.prev.targetSlug,
+      prevPageTitle: activeTutorial.prev.pageTitle,
+      prevLinkTitle: 'Previous Step',
+    };
+  }
+
   const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
+  return {
+    prevSlug: prevSlug,
+    prevPageTitle: prevSlug ? getPageTitle(prevSlug, slugTitleMapping) : null,
+    prevLinkTitle: 'Previous Section',
+  };
+};
+
+const getNext = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
+  if (activeTutorial?.next) {
+    return {
+      nextSlug: activeTutorial.next.targetSlug,
+      nextPageTitle: activeTutorial.next.pageTitle,
+      nextLinkTitle: 'Next Step',
+    };
+  }
+
   const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
+  return {
+    nextSlug: nextSlug,
+    nextPageTitle: nextSlug ? getPageTitle(nextSlug, slugTitleMapping) : null,
+    nextLinkTitle: 'Next Section',
+  };
+};
+
+const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
+  const activeTutorial = useActiveMPTutorial();
+  const slugIndex = toctreeOrder.indexOf(slug);
+  const prevPage = getPrev(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
+  const nextPage = getNext(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
+
   return (
     <div className={cx(containerStyling)}>
-      {prevSlug && (
+      {prevPage?.prevSlug && (
         <NextPrevLink
           icon={glyphs.ArrowLeft.displayName}
           direction="Back"
-          targetSlug={prevSlug}
-          pageTitle={getPageTitle(prevSlug, slugTitleMapping)}
-          title="Previous Section"
+          targetSlug={prevPage.prevSlug}
+          pageTitle={prevPage.prevPageTitle}
+          title={prevPage.prevLinkTitle}
         />
       )}
-      {nextSlug && (
+      {nextPage?.nextSlug && (
         <NextPrevLink
           icon={glyphs.ArrowRight.displayName}
           direction="Next"
-          targetSlug={nextSlug}
-          pageTitle={getPageTitle(nextSlug, slugTitleMapping)}
-          title="Next Section"
+          targetSlug={nextPage.nextSlug}
+          pageTitle={nextPage.nextPageTitle}
+          title={nextPage.nextLinkTitle}
         />
       )}
     </div>
