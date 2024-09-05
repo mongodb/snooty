@@ -29,6 +29,7 @@ const StyledSkeleton = styled(Skeleton)`
 const CONTENT_MAX_WIDTH = theme.breakpoints.xxLarge;
 
 const landingTemplateStyling = css`
+  background: ${palette.white};
   position: sticky;
   top: 0px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
