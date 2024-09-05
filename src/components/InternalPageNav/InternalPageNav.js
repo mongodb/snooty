@@ -29,34 +29,34 @@ const containerStyling = css`
 const getPrev = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
   if (activeTutorial?.prev) {
     return {
-      prevSlug: activeTutorial.prev.targetSlug,
-      prevPageTitle: activeTutorial.prev.pageTitle,
-      prevLinkTitle: 'Previous Step',
+      targetSlug: activeTutorial.prev.targetSlug,
+      pageTitle: activeTutorial.prev.pageTitle,
+      linkTitle: 'Previous Step',
     };
   }
 
   const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
   return {
-    prevSlug: prevSlug,
-    prevPageTitle: prevSlug ? getPageTitle(prevSlug, slugTitleMapping) : null,
-    prevLinkTitle: 'Previous Section',
+    targetSlug: prevSlug,
+    pageTitle: prevSlug ? getPageTitle(prevSlug, slugTitleMapping) : null,
+    linkTitle: 'Previous Section',
   };
 };
 
 const getNext = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
   if (activeTutorial?.next) {
     return {
-      nextSlug: activeTutorial.next.targetSlug,
-      nextPageTitle: activeTutorial.next.pageTitle,
-      nextLinkTitle: 'Next Step',
+      targetSlug: activeTutorial.next.targetSlug,
+      pageTitle: activeTutorial.next.pageTitle,
+      linkTitle: 'Next Step',
     };
   }
 
   const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
   return {
-    nextSlug: nextSlug,
-    nextPageTitle: nextSlug ? getPageTitle(nextSlug, slugTitleMapping) : null,
-    nextLinkTitle: 'Next Section',
+    targetSlug: nextSlug,
+    pageTitle: nextSlug ? getPageTitle(nextSlug, slugTitleMapping) : null,
+    linkTitle: 'Next Section',
   };
 };
 
@@ -68,22 +68,22 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
 
   return (
     <div className={cx(containerStyling)}>
-      {prevPage?.prevSlug && (
+      {prevPage?.targetSlug && (
         <NextPrevLink
           icon={glyphs.ArrowLeft.displayName}
           direction="Back"
-          targetSlug={prevPage.prevSlug}
-          pageTitle={prevPage.prevPageTitle}
-          title={prevPage.prevLinkTitle}
+          targetSlug={prevPage.targetSlug}
+          pageTitle={prevPage.pageTitle}
+          title={prevPage.linkTitle}
         />
       )}
-      {nextPage?.nextSlug && (
+      {nextPage?.targetSlug && (
         <NextPrevLink
           icon={glyphs.ArrowRight.displayName}
           direction="Next"
-          targetSlug={nextPage.nextSlug}
-          pageTitle={nextPage.nextPageTitle}
-          title={nextPage.nextLinkTitle}
+          targetSlug={nextPage.targetSlug}
+          pageTitle={nextPage.pageTitle}
+          title={nextPage.linkTitle}
         />
       )}
     </div>
