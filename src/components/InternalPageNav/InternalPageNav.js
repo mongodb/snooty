@@ -26,38 +26,38 @@ const containerStyling = css`
   }
 `;
 
-const getPrev = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
-  if (activeTutorial?.prev) {
-    return {
-      targetSlug: activeTutorial.prev.targetSlug,
-      pageTitle: activeTutorial.prev.pageTitle,
-      linkTitle: 'Previous Step',
-    };
-  }
-
-  const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
+const getActiveTutorialPage = (activeTutorial, key, linkTitle) => {
   return {
-    targetSlug: prevSlug,
-    pageTitle: prevSlug ? getPageTitle(prevSlug, slugTitleMapping) : null,
-    linkTitle: 'Previous Section',
+    targetSlug: activeTutorial[key].targetSlug,
+    pageTitle: activeTutorial[key].pageTitle,
+    linkTitle,
   };
 };
 
-const getNext = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
-  if (activeTutorial?.next) {
-    return {
-      targetSlug: activeTutorial.next.targetSlug,
-      pageTitle: activeTutorial.next.pageTitle,
-      linkTitle: 'Next Step',
-    };
-  }
-
-  const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
+const getTocPage = (targetSlug, slugTitleMapping, linkTitle) => {
   return {
-    targetSlug: nextSlug,
-    pageTitle: nextSlug ? getPageTitle(nextSlug, slugTitleMapping) : null,
-    linkTitle: 'Next Section',
+    targetSlug,
+    pageTitle: targetSlug ? getPageTitle(targetSlug, slugTitleMapping) : null,
+    linkTitle,
   };
+};
+
+const getPrev = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
+  const key = 'prev';
+  if (activeTutorial?.[key]) {
+    return getActiveTutorialPage(activeTutorial, key, 'Previous Step');
+  }
+  const prevSlug = slugIndex > 0 ? toctreeOrder[slugIndex - 1] : null;
+  return getTocPage(prevSlug, slugTitleMapping, 'Previous Section');
+};
+
+const getNext = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
+  const key = 'next';
+  if (activeTutorial?.[key]) {
+    return getActiveTutorialPage(activeTutorial, key, 'Next Step');
+  }
+  const nextSlug = slugIndex < toctreeOrder.length - 1 ? toctreeOrder[slugIndex + 1] : null;
+  return getTocPage(nextSlug, slugTitleMapping, 'Next Section');
 };
 
 const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
