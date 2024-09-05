@@ -53,7 +53,7 @@ const FeedbackButton = () => {
         )}
         onClick={() => (!feedback ? initializeFeedback() : abandon())}
       >
-        <Icon glyph={'Megaphone'} />
+        <Icon size={22} glyph={'Megaphone'} />
       </IconButton>
     </ButtonContainer>
   );
