@@ -15,6 +15,11 @@ const timeBaseStyle = css`
 export const TimeRequired = () => {
   const options = useMptPageOptions();
   const time = options?.time_required;
+
+  if (!time) {
+    return null;
+  }
+
   return (
     <>
       <Overline className={timeBaseStyle}>Read time {time} min</Overline>
