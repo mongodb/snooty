@@ -106,7 +106,7 @@ const StyledPreviewText = styled(Body)`
   // Reserve some space inside of the search result card when there is no preview
   min-height: 20px;
 
-  // Changes the highlight color of text in the cards of the search term
+  // Targets highlighted search term
   > span {
     background-color: ${palette.green.light2};
 
