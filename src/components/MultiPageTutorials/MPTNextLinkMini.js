@@ -1,9 +1,10 @@
 import React from 'react';
 import Icon, { glyphs } from '@leafygreen-ui/icon';
-import { css } from '@leafygreen-ui/emotion';
+import { css, cx } from '@leafygreen-ui/emotion';
 import Button from '@leafygreen-ui/button';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
+import { navLinkButtonStyle } from '../InternalPageNav';
 import { LINK_TITLE } from './constants';
 import { useShouldShowNext } from './hooks/useShouldShowNext';
 import { useActiveMpTutorial } from './hooks/useActiveMpTutorial';
@@ -36,7 +37,7 @@ export const MPTNextLinkMini = () => {
   return (
     <div className={baseStyle}>
       <Button
-        className={buttonStyle}
+        className={cx(buttonStyle, navLinkButtonStyle)}
         as={Link}
         to={activeTutorial.next.targetSlug}
         title={LINK_TITLE}

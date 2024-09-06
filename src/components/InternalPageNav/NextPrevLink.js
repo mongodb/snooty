@@ -6,6 +6,7 @@ import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
+import { navLinkButtonStyle } from './styles';
 
 const commonTextStyles = css`
   font-size: ${theme.fontSize.small};
@@ -15,6 +16,7 @@ const commonTextStyles = css`
 const nextPrevTextStyling = css`
   ${commonTextStyles}
   font-weight: 500;
+  color: var(--font-color-primary);
 `;
 
 const nextTextStyling = css`
@@ -54,7 +56,7 @@ const NextPrevLink = ({ className, icon, direction, pageTitle, targetSlug, title
     <div className={className}>
       <Link to={targetSlug} title={title}>
         <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
-          <Button size="large">
+          <Button className={navLinkButtonStyle} size="large">
             <Icon glyph={icon} />
           </Button>
           <div className={cx({ [nextTextStyling]: isNext }, { [prevTextStyling]: isPrev })}>

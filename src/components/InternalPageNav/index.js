@@ -1,4 +1,3 @@
-import InternalPageNav from './InternalPageNav';
-import NextPrevLink from './NextPrevLink';
-
-export { InternalPageNav, NextPrevLink };
+export { default as InternalPageNav } from './InternalPageNav';
+export { default as NextPrevLink } from './NextPrevLink';
+export { navLinkButtonStyle } from './styles';
