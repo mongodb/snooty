@@ -348,6 +348,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
 
 .emotion-0 h2,
 .emotion-0 h4,
+.emotion-0 h5,
 .emotion-0 h6 {
   margin-top: unset;
 }
