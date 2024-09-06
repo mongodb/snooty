@@ -4,7 +4,7 @@ import { glyphs } from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { getPageTitle } from '../../utils/get-page-title';
-import { useActiveMPTutorial } from '../../hooks/use-active-mp-tutorial';
+import { useActiveMpTutorial } from '../MultiPageTutorials';
 import NextPrevLink from './NextPrevLink';
 
 const containerStyling = css`
@@ -61,7 +61,7 @@ const getNext = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
 };
 
 const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
-  const activeTutorial = useActiveMPTutorial();
+  const activeTutorial = useActiveMpTutorial();
   const slugIndex = toctreeOrder.indexOf(slug);
   const prevPage = getPrev(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
   const nextPage = getNext(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);

@@ -1,11 +1,11 @@
 import React from 'react';
 import { glyphs } from '@leafygreen-ui/icon';
 import { css } from '@leafygreen-ui/emotion';
-import { useActiveMPTutorial } from '../../hooks/use-active-mp-tutorial';
 import { NextPrevLink } from '../InternalPageNav';
 import { theme } from '../../theme/docsTheme';
 import { LINK_TITLE } from './constants';
 import { useShouldShowNext } from './hooks/useShouldShowNext';
+import { useActiveMpTutorial } from './hooks/useActiveMpTutorial';
 
 const baseStyle = css`
   display: none;
@@ -17,8 +17,8 @@ const baseStyle = css`
   }
 `;
 
-const MPTNextLinkFull = () => {
-  const activeTutorial = useActiveMPTutorial();
+export const MPTNextLinkFull = () => {
+  const activeTutorial = useActiveMpTutorial();
   const showNext = useShouldShowNext();
 
   if (!showNext) {
@@ -36,5 +36,3 @@ const MPTNextLinkFull = () => {
     />
   );
 };
-
-export default MPTNextLinkFull;

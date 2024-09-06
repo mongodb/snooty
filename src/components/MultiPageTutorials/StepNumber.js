@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import Overline from '../Internal/Overline';
-import MPTNextLinkFull from './MPTNextLinkFull';
+import { MPTNextLinkFull } from './MPTNextLinkFull';
 
 const overlineStyle = css`
   font-weight: 600;
@@ -11,7 +11,7 @@ const overlineStyle = css`
   padding-top: 0 !important;
 `;
 
-const StepNumber = ({ slug, activeTutorial }) => {
+export const StepNumber = ({ slug, activeTutorial }) => {
   const totalSteps = activeTutorial.total_steps;
   const currentStep = activeTutorial.slugs.indexOf(slug) + 1;
 
@@ -33,5 +33,3 @@ StepNumber.propTypes = {
     slugs: PropTypes.arrayOf(PropTypes.string),
   }),
 };
-
-export default StepNumber;

@@ -1,5 +1,5 @@
-import { usePageContext } from '../context/page-context';
-import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { usePageContext } from '../../../context/page-context';
+import useSnootyMetadata from '../../../utils/use-snooty-metadata';
 
 const addPrevNextTutorials = (slugTitleMapping, slug, activeTutorial) => {
   if (!activeTutorial || Object.keys(activeTutorial).length === 0) {
@@ -34,9 +34,9 @@ const addPrevNextTutorials = (slugTitleMapping, slug, activeTutorial) => {
 };
 
 /**
- * @returns {object | null} Metadata about a multi page tutorial, if the current page is part of one. Otherwise, null is returned.
+ * @returns {object | null} Metadata about a multi-page tutorial, if the current page is part of one. Otherwise, null is returned.
  */
-export const useActiveMPTutorial = () => {
+export const useActiveMpTutorial = () => {
   const { slug } = usePageContext();
   const { multiPageTutorials = {}, slugToBreadcrumbLabel } = useSnootyMetadata();
 

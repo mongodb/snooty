@@ -2,11 +2,11 @@ import React from 'react';
 import Icon, { glyphs } from '@leafygreen-ui/icon';
 import { css } from '@leafygreen-ui/emotion';
 import Button from '@leafygreen-ui/button';
-import { useActiveMPTutorial } from '../../hooks/use-active-mp-tutorial';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
 import { LINK_TITLE } from './constants';
 import { useShouldShowNext } from './hooks/useShouldShowNext';
+import { useActiveMpTutorial } from './hooks/useActiveMpTutorial';
 
 const baseStyle = css`
   float: right;
@@ -25,8 +25,8 @@ const buttonStyle = css`
   width: 100%;
 `;
 
-const MPTNextLinkMini = () => {
-  const activeTutorial = useActiveMPTutorial();
+export const MPTNextLinkMini = () => {
+  const activeTutorial = useActiveMpTutorial();
   const showNext = useShouldShowNext();
 
   if (!showNext) {
@@ -48,5 +48,3 @@ const MPTNextLinkMini = () => {
     </div>
   );
 };
-
-export default MPTNextLinkMini;

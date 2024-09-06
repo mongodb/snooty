@@ -4,14 +4,13 @@ import styled from '@emotion/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Contents from '../components/Contents';
 import { InternalPageNav } from '../components/InternalPageNav';
-import { StepNumber } from '../components/MultiPageTutorials';
+import { StepNumber, useActiveMpTutorial } from '../components/MultiPageTutorials';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/Tabs/TabSelectors';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 import { theme } from '../theme/docsTheme';
-import { useActiveMPTutorial } from '../hooks/use-active-mp-tutorial';
 
 const MAX_CONTENT_WIDTH = '775px';
 
@@ -35,7 +34,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const hasMethodSelector = pageOptions?.has_method_selector;
-  const activeTutorial = useActiveMPTutorial();
+  const activeTutorial = useActiveMpTutorial();
 
   return (
     <DocumentContainer>

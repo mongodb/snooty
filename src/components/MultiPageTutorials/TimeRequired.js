@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@leafygreen-ui/emotion';
 import Overline from '../Internal/Overline';
 import { theme } from '../../theme/docsTheme';
-import MPTNextLinkMini from './MPTNextLinkMini';
+import { MPTNextLinkMini } from './MPTNextLinkMini';
 import { useMptPageOptions } from './hooks/useMptPageOptions';
 
 const timeBaseStyle = css`
@@ -12,7 +12,7 @@ const timeBaseStyle = css`
   margin-bottom: ${theme.size.default};
 `;
 
-const TimeRequired = () => {
+export const TimeRequired = () => {
   const options = useMptPageOptions();
   const time = options?.time_required;
   return (
@@ -23,5 +23,3 @@ const TimeRequired = () => {
     </>
   );
 };
-
-export default TimeRequired;
