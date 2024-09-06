@@ -48,6 +48,16 @@ const prevLinkContainerStyling = css`
   flex-direction: row;
 `;
 
+const baseButtonStyle = css`
+  width: 52px;
+  height: 48px;
+
+  @media ${theme.screenSize.mediumAndUp} {
+    width: 40px;
+    height: 36px;
+  }
+`;
+
 const NextPrevLink = ({ className, icon, direction, pageTitle, targetSlug, title }) => {
   const isNext = direction?.toLowerCase() === 'next';
   const isPrev = direction?.toLowerCase() === 'back';
@@ -56,7 +66,7 @@ const NextPrevLink = ({ className, icon, direction, pageTitle, targetSlug, title
     <div className={className}>
       <Link to={targetSlug} title={title}>
         <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
-          <Button className={navLinkButtonStyle} size="large">
+          <Button className={cx(baseButtonStyle, navLinkButtonStyle)}>
             <Icon glyph={icon} />
           </Button>
           <div className={cx({ [nextTextStyling]: isNext }, { [prevTextStyling]: isPrev })}>

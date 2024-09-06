@@ -11,6 +11,8 @@ const baseStyle = css`
   display: none;
   float: right;
   margin-left: ${theme.size.medium};
+  // Top margin to help align title of next page with the middle of heading
+  margin-top: 6px;
 
   @media ${theme.screenSize.mediumAndUp} {
     display: initial;
