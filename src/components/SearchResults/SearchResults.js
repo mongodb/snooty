@@ -5,9 +5,9 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import Pagination from '@leafygreen-ui/pagination';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { H3, Overline } from '@leafygreen-ui/typography';
 import { ParagraphSkeleton } from '@leafygreen-ui/skeleton-loader';
+import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -21,7 +21,6 @@ import SearchResult from './SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import MobileFilters from './MobileFilters';
 import { Facets, FacetTags } from './Facets';
-import { SEARCH_THEME_STYLES } from './styles/searchThemeStyles';
 
 const FILTER_COLUMN_WIDTH = '173px';
 const LANDING_MODULE_MARGIN = '28px';
@@ -51,9 +50,9 @@ const HeaderContainer = styled('div')`
   grid-area: header;
 `;
 
-const headerContainerDynamicStyles = ({ headingColor }) => css`
+const headerContainerDynamicStyles = css`
   > h3:first-of-type {
-    color: ${headingColor};
+    color: var(--heading-color-primary);
   }
 `;
 
@@ -76,8 +75,12 @@ const FilterHeader = styled('h2')`
   margin-bottom: ${theme.size.default};
 `;
 
-const filterHeaderDynamicStyles = ({ filterHeaderColor }) => css`
-  color: ${filterHeaderColor};
+const filterHeaderDynamicStyles = css`
+  color: ${palette.gray.dark2};
+
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
 `;
 
 const SearchResultsContainer = styled('div')`
@@ -155,7 +158,6 @@ const searchResultStyling = `
   }
   :hover,
   :focus {
-    color: unset;
     text-decoration: unset;
     > div {
       background-color: unset !important;
@@ -183,12 +185,21 @@ const paginationStyling = css`
   }
 `;
 
-export const searchResultDynamicStyling = ({ boxShadow, boxShadowOnHover }) => css`
-  box-shadow: ${boxShadow};
+export const searchResultDynamicStyling = css`
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 
   :hover {
     opacity: 1;
-    box-shadow: ${boxShadowOnHover};
+    box-shadow: 0px 0px 5px 1px rgba(58, 63, 60, 0.15);
+  }
+
+  .dark-theme & {
+    box-shadow: 0px 0px 3px 0px rgba(255, 255, 255, 0.15);
+
+    :hover {
+      opacity: 1;
+      box-shadow: 0px 0px 5px 3px rgba(92, 97, 94, 0.15);
+    }
   }
 `;
 
@@ -200,6 +211,10 @@ const StyledLoadingSkeletonContainer = styled('div')`
   ${searchResultStyling}
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 1) !important;
 
+  .dark-theme & {
+    box-shadow: 0px 0px 3px 0px rgba(255, 255, 255, 0.15) !important;
+  }
+
   * {
     padding: 2px;
     height: 15px !important;
@@ -209,6 +224,18 @@ const StyledLoadingSkeletonContainer = styled('div')`
   /* grid to handle loading skeleton structure */
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
+`;
+
+const StyledParagraphSkeleton = styled(ParagraphSkeleton)`
+  > div {
+    background: linear-gradient(110deg, ${palette.gray.light2} 35%, ${palette.gray.light3}, ${palette.gray.light2} 65%)
+      0 0/ 100vw 100% fixed;
+
+    .dark-theme & {
+      background: linear-gradient(110deg, ${palette.gray.dark2} 35%, ${palette.gray.dark1}, ${palette.gray.dark2} 65%) 0
+        0/ 100vw 100% fixed;
+    }
+  }
 `;
 
 const StyledSearchResults = styled('div')`
@@ -244,6 +271,11 @@ const ResultTag = styled('div')`
 
 const overlineStyle = css`
   padding-right: 8px;
+  color: ${palette.gray.dark2};
+
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
 `;
 
 const iconStyle = css`
@@ -257,6 +289,45 @@ const MobileSearchButtonWrapper = styled('div')`
 
   @media ${theme.screenSize.upToMedium} {
     display: block;
+  }
+  > Button {
+    background-color: ${palette.gray.light3};
+    border-color: ${palette.gray.base};
+    color: ${palette.black};
+
+    &:focus-visible,
+    &[data-focus='true'] {
+      color: ${palette.black};
+    }
+
+    &:hover,
+    &[data-hover='true'],
+    &:active,
+    &[data-active='true'] {
+      color: ${palette.black};
+      background-color: ${palette.white};
+      box-shadow: 0 0 0 3px ${palette.gray.light2};
+    }
+    .dark-theme & {
+      background-color: ${palette.gray.dark2};
+      border-color: ${palette.gray.base};
+      color: ${palette.white};
+
+      &:focus-visible,
+      &[data-focus='true'] {
+        color: ${palette.white};
+      }
+
+      &:hover,
+      &[data-hover='true'],
+      &:active,
+      &[data-active='true'] {
+        background-color: ${palette.gray.dark1};
+        border-color: ${palette.gray.base};
+        color: ${palette.white};
+        box-shadow: 0px 0px 0px 3px ${palette.gray.dark2};
+      }
+    }
   }
 `;
 
@@ -285,8 +356,6 @@ const SearchResults = () => {
 
   const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
-
-  const { theme: siteTheme } = useDarkMode();
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
@@ -388,10 +457,9 @@ const SearchResults = () => {
     },
     [searchParams, searchTerm, setSearchTerm]
   );
-
   return (
     <SearchResultsContainer showFacets={showFacets}>
-      <HeaderContainer className={cx(headerContainerDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
+      <HeaderContainer className={cx(headerContainerDynamicStyles)}>
         <H3>Search Results</H3>
         {/* Classname-attached searchTerm needed for Smartling localization */}
         <span style={{ display: 'none' }} className="sl-search-keyword">
@@ -427,16 +495,15 @@ const SearchResults = () => {
 
       {/* loading state for new search input */}
       {!!searchTerm && !searchFinished && (
-        <StyledSearchResults>
-          {[...Array(10)].map((_, index) => (
-            <StyledLoadingSkeletonContainer
-              key={index}
-              className={cx(searchResultDynamicStyling(SEARCH_THEME_STYLES[siteTheme]))}
-            >
-              <ParagraphSkeleton withHeader />
-            </StyledLoadingSkeletonContainer>
-          ))}
-        </StyledSearchResults>
+        <>
+          <StyledSearchResults>
+            {[...Array(10)].map((_, index) => (
+              <StyledLoadingSkeletonContainer key={index} className={cx(searchResultDynamicStyling)}>
+                <StyledParagraphSkeleton withHeader />
+              </StyledLoadingSkeletonContainer>
+            ))}
+          </StyledSearchResults>
+        </>
       )}
 
       {/* empty search results */}
@@ -494,9 +561,7 @@ const SearchResults = () => {
             </>
           ) : (
             <>
-              <FilterHeader className={cx(filterHeaderDynamicStyles(SEARCH_THEME_STYLES[siteTheme]))}>
-                {specifySearchText}
-              </FilterHeader>
+              <FilterHeader className={cx(filterHeaderDynamicStyles)}>{specifySearchText}</FilterHeader>
               <StyledSearchFilters />
             </>
           )}
