@@ -27,17 +27,32 @@ const Header = ({ eol, template }) => {
       <SiteBanner />
       <StyledHeaderContainer template={template} hasBanner={!!bannerContent}>
         <>
+          {/* Two navs used intentionally: one for light mode, one for dark mode */}
           {!eol && (
-            <UnifiedNav
-              hideSearch="true"
-              fullWidth="true"
-              position="relative"
-              property={{ name: unifiedNavProperty }}
-              showLanguageSelector={true}
-              onSelectLocale={onSelectLocale}
-              locale={getCurrLocale()}
-              enabledLocales={enabledLocales}
-            />
+            <>
+              <UnifiedNav
+                fullWidth="true"
+                position="relative"
+                property={{ name: unifiedNavProperty }}
+                showLanguageSelector={true}
+                onSelectLocale={onSelectLocale}
+                locale={getCurrLocale()}
+                enabledLocales={enabledLocales}
+                darkMode={false}
+                className="nav-light"
+              />
+              <UnifiedNav
+                fullWidth="true"
+                position="relative"
+                property={{ name: unifiedNavProperty }}
+                showLanguageSelector={true}
+                onSelectLocale={onSelectLocale}
+                locale={getCurrLocale()}
+                enabledLocales={enabledLocales}
+                darkMode={true}
+                className="nav-dark"
+              />
+            </>
           )}
         </>
       </StyledHeaderContainer>

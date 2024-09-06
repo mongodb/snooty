@@ -75,3 +75,19 @@ body {
   background-color: var(--background-color-primary);
   color: var(--font-color-primary);
 }
+
+.nav-dark {
+  display: none;
+}
+
+.nav-light {
+  display: initial;
+}
+
+.dark-theme .nav-dark {
+  display: initial;
+}
+
+.dark-theme .nav-light {
+  display: none;
+}

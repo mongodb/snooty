@@ -183,6 +183,8 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   font-weight: 300;
   background-color: transparent;
   padding-left: 0;
+  color: #3d4f58;
+  border-color: #b8c4c2;
 }
 
 .emotion-10 {
@@ -548,7 +550,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
           >
             <a
               class=" emotion-25"
-              href="https://www.mongodb.com/security"
+              href="https://www.mongodb.com/company/contact/mongodb-vulnerability-disclosure-policy"
               rel="noreferrer noopener"
               target="_self"
             >
@@ -560,7 +562,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
           >
             <a
               class=" emotion-25"
-              href="https://www.mongodb.com/cloud/trust"
+              href="https://www.mongodb.com/products/platform/trust"
               rel="noreferrer noopener"
               target="_self"
             >
@@ -597,7 +599,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
           >
             <a
               class=" emotion-25"
-              href="https://www.mongodb.com/contact"
+              href="https://www.mongodb.com/company/contact"
               rel="noreferrer noopener"
               target="_self"
             >
@@ -633,7 +635,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
           >
             <a
               class=" emotion-25"
-              href="https://www.mongodb.com/support"
+              href="https://www.mongodb.com/services/support"
               rel="noreferrer noopener"
               target="_self"
             >
