@@ -119,9 +119,11 @@ exports[`renders a page with next and previous links correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
+  height: 36px;
+  width: 52px;
   height: 48px;
-  font-size: 18px;
-  line-height: 24px;
+  background-color: #F9FBFA;
+  color: #001E2B;
 }
 
 .emotion-3:focus-visible,
@@ -157,6 +159,18 @@ exports[`renders a page with next and previous links correctly 1`] = `
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
+@media not all and (max-width: 767px) {
+  .emotion-3 {
+    width: 40px;
+    height: 36px;
+  }
+}
+
+.dark-theme .emotion-3 {
+  background-color: #3D4F58;
+  color: #FFFFFF;
+}
+
 .emotion-4 {
   overflow: hidden;
   position: absolute;
@@ -188,8 +202,8 @@ exports[`renders a page with next and previous links correctly 1`] = `
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
-  padding: 0 15px;
-  gap: 8px;
+  padding: 0 11px;
+  gap: 6px;
 }
 
 .emotion-6 {
@@ -207,6 +221,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
+  color: var(--font-color-primary);
 }
 
 .emotion-7 strong,
@@ -255,112 +270,116 @@ exports[`renders a page with next and previous links correctly 1`] = `
 <div
     class="emotion-0"
   >
-    <a
-      class="emotion-1"
-      href="/drivers/csharp/"
-      title="Previous Section"
-    >
-      <div
-        class="emotion-2"
+    <div>
+      <a
+        class="emotion-1"
+        href="/drivers/csharp/"
+        title="Previous Section"
       >
-        <button
-          aria-disabled="false"
-          class="lg-ui-button-0000 emotion-3"
-          data-lgid="lg-button"
-          type="button"
-        >
-          <div
-            class="emotion-4"
-          />
-          <div
-            class="emotion-5"
-          >
-            <svg
-              aria-label="Arrow Left Icon"
-              class=""
-              fill="none"
-              height="16"
-              role="img"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
-                fill="currentColor"
-              />
-            </svg>
-          </div>
-        </button>
         <div
-          class="emotion-6"
+          class="emotion-2"
         >
-          <p
-            class="emotion-7"
+          <button
+            aria-disabled="false"
+            class="lg-ui-button-0000 emotion-3"
+            data-lgid="lg-button"
+            type="button"
           >
-            Back
-          </p>
-          <p
-            class="emotion-8"
+            <div
+              class="emotion-4"
+            />
+            <div
+              class="emotion-5"
+            >
+              <svg
+                aria-label="Arrow Left Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+          <div
+            class="emotion-6"
           >
-            MongoDB C#/.NET Driver
-          </p>
+            <p
+              class="emotion-7"
+            >
+              Back
+            </p>
+            <p
+              class="emotion-8"
+            >
+              MongoDB C#/.NET Driver
+            </p>
+          </div>
         </div>
-      </div>
-    </a>
-    <a
-      class="emotion-1"
-      href="/drivers/java/"
-      title="Next Section"
-    >
-      <div
-        class="emotion-10"
+      </a>
+    </div>
+    <div>
+      <a
+        class="emotion-1"
+        href="/drivers/java/"
+        title="Next Section"
       >
-        <button
-          aria-disabled="false"
-          class="lg-ui-button-0000 emotion-3"
-          data-lgid="lg-button"
-          type="button"
-        >
-          <div
-            class="emotion-4"
-          />
-          <div
-            class="emotion-5"
-          >
-            <svg
-              aria-label="Arrow Right Icon"
-              class=""
-              fill="none"
-              height="16"
-              role="img"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
-                fill="currentColor"
-              />
-            </svg>
-          </div>
-        </button>
         <div
-          class="emotion-14"
+          class="emotion-10"
         >
-          <p
-            class="emotion-7"
+          <button
+            aria-disabled="false"
+            class="lg-ui-button-0000 emotion-3"
+            data-lgid="lg-button"
+            type="button"
           >
-            Next
-          </p>
-          <p
-            class="emotion-8"
+            <div
+              class="emotion-4"
+            />
+            <div
+              class="emotion-5"
+            >
+              <svg
+                aria-label="Arrow Right Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+          <div
+            class="emotion-14"
           >
-            Java MongoDB Driver
-          </p>
+            <p
+              class="emotion-7"
+            >
+              Next
+            </p>
+            <p
+              class="emotion-8"
+            >
+              Java MongoDB Driver
+            </p>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -484,9 +503,11 @@ exports[`renders a page with no next link correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
+  height: 36px;
+  width: 52px;
   height: 48px;
-  font-size: 18px;
-  line-height: 24px;
+  background-color: #F9FBFA;
+  color: #001E2B;
 }
 
 .emotion-3:focus-visible,
@@ -522,6 +543,18 @@ exports[`renders a page with no next link correctly 1`] = `
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
+@media not all and (max-width: 767px) {
+  .emotion-3 {
+    width: 40px;
+    height: 36px;
+  }
+}
+
+.dark-theme .emotion-3 {
+  background-color: #3D4F58;
+  color: #FFFFFF;
+}
+
 .emotion-4 {
   overflow: hidden;
   position: absolute;
@@ -553,8 +586,8 @@ exports[`renders a page with no next link correctly 1`] = `
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
-  padding: 0 15px;
-  gap: 8px;
+  padding: 0 11px;
+  gap: 6px;
 }
 
 .emotion-6 {
@@ -572,6 +605,7 @@ exports[`renders a page with no next link correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
+  color: var(--font-color-primary);
 }
 
 .emotion-7 strong,
@@ -600,59 +634,61 @@ exports[`renders a page with no next link correctly 1`] = `
 <div
     class="emotion-0"
   >
-    <a
-      class="emotion-1"
-      href="/drivers/go/"
-      title="Previous Section"
-    >
-      <div
-        class="emotion-2"
+    <div>
+      <a
+        class="emotion-1"
+        href="/drivers/go/"
+        title="Previous Section"
       >
-        <button
-          aria-disabled="false"
-          class="lg-ui-button-0000 emotion-3"
-          data-lgid="lg-button"
-          type="button"
-        >
-          <div
-            class="emotion-4"
-          />
-          <div
-            class="emotion-5"
-          >
-            <svg
-              aria-label="Arrow Left Icon"
-              class=""
-              fill="none"
-              height="16"
-              role="img"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
-                fill="currentColor"
-              />
-            </svg>
-          </div>
-        </button>
         <div
-          class="emotion-6"
+          class="emotion-2"
         >
-          <p
-            class="emotion-7"
+          <button
+            aria-disabled="false"
+            class="lg-ui-button-0000 emotion-3"
+            data-lgid="lg-button"
+            type="button"
           >
-            Back
-          </p>
-          <p
-            class="emotion-8"
+            <div
+              class="emotion-4"
+            />
+            <div
+              class="emotion-5"
+            >
+              <svg
+                aria-label="Arrow Left Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+          <div
+            class="emotion-6"
           >
-            MongoDB Go Driver
-          </p>
+            <p
+              class="emotion-7"
+            >
+              Back
+            </p>
+            <p
+              class="emotion-8"
+            >
+              MongoDB Go Driver
+            </p>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -776,9 +812,11 @@ exports[`renders a page with no previous link correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
+  height: 36px;
+  width: 52px;
   height: 48px;
-  font-size: 18px;
-  line-height: 24px;
+  background-color: #F9FBFA;
+  color: #001E2B;
 }
 
 .emotion-3:focus-visible,
@@ -814,6 +852,18 @@ exports[`renders a page with no previous link correctly 1`] = `
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
+@media not all and (max-width: 767px) {
+  .emotion-3 {
+    width: 40px;
+    height: 36px;
+  }
+}
+
+.dark-theme .emotion-3 {
+  background-color: #3D4F58;
+  color: #FFFFFF;
+}
+
 .emotion-4 {
   overflow: hidden;
   position: absolute;
@@ -845,8 +895,8 @@ exports[`renders a page with no previous link correctly 1`] = `
   z-index: 0;
   -webkit-transition: all 150 ease-in-out;
   transition: all 150 ease-in-out;
-  padding: 0 15px;
-  gap: 8px;
+  padding: 0 11px;
+  gap: 6px;
 }
 
 .emotion-6 {
@@ -864,6 +914,7 @@ exports[`renders a page with no previous link correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
+  color: var(--font-color-primary);
 }
 
 .emotion-7 strong,
@@ -892,59 +943,61 @@ exports[`renders a page with no previous link correctly 1`] = `
 <div
     class="emotion-0"
   >
-    <a
-      class="emotion-1"
-      href="/drivers/go/"
-      title="Next Section"
-    >
-      <div
-        class="emotion-2"
+    <div>
+      <a
+        class="emotion-1"
+        href="/drivers/go/"
+        title="Next Section"
       >
-        <button
-          aria-disabled="false"
-          class="lg-ui-button-0000 emotion-3"
-          data-lgid="lg-button"
-          type="button"
-        >
-          <div
-            class="emotion-4"
-          />
-          <div
-            class="emotion-5"
-          >
-            <svg
-              aria-label="Arrow Right Icon"
-              class=""
-              fill="none"
-              height="16"
-              role="img"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
-                fill="currentColor"
-              />
-            </svg>
-          </div>
-        </button>
         <div
-          class="emotion-6"
+          class="emotion-2"
         >
-          <p
-            class="emotion-7"
+          <button
+            aria-disabled="false"
+            class="lg-ui-button-0000 emotion-3"
+            data-lgid="lg-button"
+            type="button"
           >
-            Next
-          </p>
-          <p
-            class="emotion-8"
+            <div
+              class="emotion-4"
+            />
+            <div
+              class="emotion-5"
+            >
+              <svg
+                aria-label="Arrow Right Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+          <div
+            class="emotion-6"
           >
-            MongoDB Go Driver
-          </p>
+            <p
+              class="emotion-7"
+            >
+              Next
+            </p>
+            <p
+              class="emotion-8"
+            >
+              MongoDB Go Driver
+            </p>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </DocumentFragment>
 `;
