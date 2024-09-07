@@ -1,5 +1,4 @@
 import { usePageContext } from '../../../context/page-context';
-import { getPlaintext } from '../../../utils/get-plaintext';
 import useSnootyMetadata from '../../../utils/use-snooty-metadata';
 
 const addPrevNextTutorials = (slugTitleMapping, slug, activeTutorial) => {
@@ -19,7 +18,7 @@ const addPrevNextTutorials = (slugTitleMapping, slug, activeTutorial) => {
     const pageTitle = slugTitleMapping[targetSlug];
     activeTutorial[keyNext] = {
       targetSlug,
-      pageTitle: getPlaintext(pageTitle),
+      pageTitle: pageTitle,
     };
   }
 
@@ -29,7 +28,7 @@ const addPrevNextTutorials = (slugTitleMapping, slug, activeTutorial) => {
     const pageTitle = slugTitleMapping[targetSlug];
     activeTutorial[keyPrev] = {
       targetSlug,
-      pageTitle: getPlaintext(pageTitle),
+      pageTitle: pageTitle,
     };
   }
 };

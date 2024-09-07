@@ -4,7 +4,7 @@ import { mockLocation } from '../utils/mock-location';
 import { InternalPageNav } from '../../src/components/InternalPageNav';
 import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
 import { PageContext } from '../../src/context/page-context';
-import slugTitleMapping from './data/ecosystem/slugTitleMapping.json';
+import slugToBreadcrumbLabel from './data/ecosystem/slugToBreadcrumbLabel.json';
 
 const data = ['drivers/csharp', 'drivers/go', 'drivers/java', 'drivers/motor', 'drivers/cxx'];
 
@@ -13,7 +13,7 @@ jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 const renderNav = (slug) =>
   render(
     <PageContext.Provider value={{ slug }}>
-      <InternalPageNav slug={slug} slugTitleMapping={slugTitleMapping} toctreeOrder={data} />
+      <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={data} />
     </PageContext.Provider>
   );
 
@@ -47,7 +47,7 @@ describe('multi-page tutorials', () => {
           total_steps: mockData.length,
         },
       },
-      slugToBreadcrumbLabel: slugTitleMapping,
+      slugToBreadcrumbLabel,
     }));
 
     const tree = renderNav('drivers/go');
@@ -63,7 +63,7 @@ describe('multi-page tutorials', () => {
           total_steps: mockData.length,
         },
       },
-      slugToBreadcrumbLabel: slugTitleMapping,
+      slugToBreadcrumbLabel,
     }));
 
     const tree = renderNav('drivers/go');
@@ -79,7 +79,7 @@ describe('multi-page tutorials', () => {
           total_steps: mockData.length,
         },
       },
-      slugToBreadcrumbLabel: slugTitleMapping,
+      slugToBreadcrumbLabel,
     }));
 
     const tree = renderNav('drivers/motor');
