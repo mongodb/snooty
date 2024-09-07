@@ -4,6 +4,7 @@ import Overline from '../Internal/Overline';
 import { theme } from '../../theme/docsTheme';
 import { MPTNextLinkMini } from './MPTNextLinkMini';
 import { useMptPageOptions } from './hooks/use-mpt-page-options';
+import { OPTION_KEY_TIME_REQUIRED } from './constants';
 
 const timeBaseStyle = css`
   font-weight: 600;
@@ -14,7 +15,7 @@ const timeBaseStyle = css`
 
 export const TimeRequired = () => {
   const options = useMptPageOptions();
-  const time = options?.time_required;
+  const time = options?.[OPTION_KEY_TIME_REQUIRED];
 
   if (!time) {
     return null;
