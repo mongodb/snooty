@@ -6,6 +6,7 @@ import { theme } from '../../theme/docsTheme';
 import { LINK_TITLE } from './constants';
 import { useShouldShowNext } from './hooks/use-should-show-next';
 import { useActiveMpTutorial } from './hooks/use-active-mp-tutorial';
+import { reportMPTAnalytics } from './utils';
 
 const baseStyle = css`
   display: none;
@@ -35,6 +36,7 @@ export const MPTNextLinkFull = () => {
       pageTitle={activeTutorial.next.pageTitle}
       targetSlug={activeTutorial.next.targetSlug}
       title={LINK_TITLE}
+      onClick={() => reportMPTAnalytics(activeTutorial.next.targetSlug, 'full')}
     />
   );
 };

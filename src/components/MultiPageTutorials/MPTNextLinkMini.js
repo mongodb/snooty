@@ -8,6 +8,7 @@ import { navLinkButtonStyle } from '../InternalPageNav';
 import { LINK_TITLE } from './constants';
 import { useShouldShowNext } from './hooks/use-should-show-next';
 import { useActiveMpTutorial } from './hooks/use-active-mp-tutorial';
+import { reportMPTAnalytics } from './utils';
 
 const baseStyle = css`
   float: right;
@@ -35,7 +36,7 @@ export const MPTNextLinkMini = () => {
   }
 
   return (
-    <div className={baseStyle}>
+    <div className={baseStyle} onClick={() => reportMPTAnalytics(activeTutorial.next.targetSlug, 'mini')}>
       <Button
         className={cx(buttonStyle, navLinkButtonStyle)}
         as={Link}

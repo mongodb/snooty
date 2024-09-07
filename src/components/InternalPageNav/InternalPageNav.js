@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { glyphs } from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -67,12 +67,12 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
   const prevPage = getPrev(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
   const nextPage = getNext(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
 
-  const handleClick = useCallback((direction, targetSlug) => {
+  const handleClick = (direction, targetSlug) => {
     reportAnalytics('InternalPageNavClicked', {
       direction,
       targetSlug,
     });
-  }, []);
+  };
 
   return (
     <div className={cx(containerStyling)}>
