@@ -1,5 +1,1157 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`multi-page tutorials renders a page with next and previous page steps 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  padding-bottom: 2.5em;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-column-gap: 16px;
+  column-gap: 16px;
+  margin-top: 88px;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    row-gap: 64px;
+    margin-top: 66px;
+  }
+}
+
+@media print {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+.emotion-1 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-1>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-1:focus,
+.emotion-1:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-1:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-1:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 14px;
+  column-gap: 14px;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-3 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  width: 52px;
+  height: 48px;
+  background-color: #F9FBFA;
+  color: #001E2B;
+}
+
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
+  outline: none;
+}
+
+.emotion-3:active,
+.emotion-3[data-active="true"],
+.emotion-3:focus,
+.emotion-3:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
+  color: #001E2B;
+}
+
+.emotion-3:hover,
+.emotion-3[data-hover="true"],
+.emotion-3:active,
+.emotion-3[data-active="true"] {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+@media not all and (max-width: 767px) {
+  .emotion-3 {
+    width: 40px;
+    height: 36px;
+  }
+}
+
+.dark-theme .emotion-3 {
+  background-color: #3D4F58;
+  color: #FFFFFF;
+}
+
+.emotion-4 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.emotion-5 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-6 {
+  text-align: start;
+}
+
+.emotion-7 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--font-color-primary);
+}
+
+.emotion-7 strong,
+.emotion-7 b {
+  font-weight: 700;
+}
+
+.emotion-8 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  color: #889397;
+}
+
+.emotion-8 strong,
+.emotion-8 b {
+  font-weight: 700;
+}
+
+.emotion-10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 14px;
+  column-gap: 14px;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.emotion-14 {
+  text-align: end;
+}
+
+<div
+    class="emotion-0"
+  >
+    <div>
+      <a
+        class="emotion-1"
+        href="/drivers/csharp/"
+        title="Previous Section"
+      >
+        <div
+          class="emotion-2"
+        >
+          <button
+            aria-disabled="false"
+            class="lg-ui-button-0000 emotion-3"
+            data-lgid="lg-button"
+            type="button"
+          >
+            <div
+              class="emotion-4"
+            />
+            <div
+              class="emotion-5"
+            >
+              <svg
+                aria-label="Arrow Left Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+          <div
+            class="emotion-6"
+          >
+            <p
+              class="emotion-7"
+            >
+              Back
+            </p>
+            <p
+              class="emotion-8"
+            >
+              MongoDB C#/.NET Driver
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a
+        class="emotion-1"
+        href="/drivers/java/"
+        title="Next Section"
+      >
+        <div
+          class="emotion-10"
+        >
+          <button
+            aria-disabled="false"
+            class="lg-ui-button-0000 emotion-3"
+            data-lgid="lg-button"
+            type="button"
+          >
+            <div
+              class="emotion-4"
+            />
+            <div
+              class="emotion-5"
+            >
+              <svg
+                aria-label="Arrow Right Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+          <div
+            class="emotion-14"
+          >
+            <p
+              class="emotion-7"
+            >
+              Next
+            </p>
+            <p
+              class="emotion-8"
+            >
+              Java MongoDB Driver
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`multi-page tutorials renders a page with next in multi-page tutorial, and previous toctree order 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  padding-bottom: 2.5em;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-column-gap: 16px;
+  column-gap: 16px;
+  margin-top: 88px;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    row-gap: 64px;
+    margin-top: 66px;
+  }
+}
+
+@media print {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+.emotion-1 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-1>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-1:focus,
+.emotion-1:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-1:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-1:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 14px;
+  column-gap: 14px;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-3 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  width: 52px;
+  height: 48px;
+  background-color: #F9FBFA;
+  color: #001E2B;
+}
+
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
+  outline: none;
+}
+
+.emotion-3:active,
+.emotion-3[data-active="true"],
+.emotion-3:focus,
+.emotion-3:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
+  color: #001E2B;
+}
+
+.emotion-3:hover,
+.emotion-3[data-hover="true"],
+.emotion-3:active,
+.emotion-3[data-active="true"] {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+@media not all and (max-width: 767px) {
+  .emotion-3 {
+    width: 40px;
+    height: 36px;
+  }
+}
+
+.dark-theme .emotion-3 {
+  background-color: #3D4F58;
+  color: #FFFFFF;
+}
+
+.emotion-4 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.emotion-5 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-6 {
+  text-align: start;
+}
+
+.emotion-7 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--font-color-primary);
+}
+
+.emotion-7 strong,
+.emotion-7 b {
+  font-weight: 700;
+}
+
+.emotion-8 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  color: #889397;
+}
+
+.emotion-8 strong,
+.emotion-8 b {
+  font-weight: 700;
+}
+
+.emotion-10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 14px;
+  column-gap: 14px;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.emotion-14 {
+  text-align: end;
+}
+
+<div
+    class="emotion-0"
+  >
+    <div>
+      <a
+        class="emotion-1"
+        href="/drivers/csharp/"
+        title="Previous Section"
+      >
+        <div
+          class="emotion-2"
+        >
+          <button
+            aria-disabled="false"
+            class="lg-ui-button-0000 emotion-3"
+            data-lgid="lg-button"
+            type="button"
+          >
+            <div
+              class="emotion-4"
+            />
+            <div
+              class="emotion-5"
+            >
+              <svg
+                aria-label="Arrow Left Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+          <div
+            class="emotion-6"
+          >
+            <p
+              class="emotion-7"
+            >
+              Back
+            </p>
+            <p
+              class="emotion-8"
+            >
+              MongoDB C#/.NET Driver
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a
+        class="emotion-1"
+        href="/drivers/motor/"
+        title="Next Step"
+      >
+        <div
+          class="emotion-10"
+        >
+          <button
+            aria-disabled="false"
+            class="lg-ui-button-0000 emotion-3"
+            data-lgid="lg-button"
+            type="button"
+          >
+            <div
+              class="emotion-4"
+            />
+            <div
+              class="emotion-5"
+            >
+              <svg
+                aria-label="Arrow Right Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+          <div
+            class="emotion-14"
+          >
+            <p
+              class="emotion-7"
+            >
+              Next
+            </p>
+            <p
+              class="emotion-8"
+            >
+              Motor (Async Driver)
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`multi-page tutorials renders a page with previous in multi-page tutorial, and next toctree order 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  padding-bottom: 2.5em;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-column-gap: 16px;
+  column-gap: 16px;
+  margin-top: 88px;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    row-gap: 64px;
+    margin-top: 66px;
+  }
+}
+
+@media print {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+.emotion-1 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-1>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-1:focus,
+.emotion-1:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-1:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-1:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 14px;
+  column-gap: 14px;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.emotion-3 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+  width: 52px;
+  height: 48px;
+  background-color: #F9FBFA;
+  color: #001E2B;
+}
+
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
+  outline: none;
+}
+
+.emotion-3:active,
+.emotion-3[data-active="true"],
+.emotion-3:focus,
+.emotion-3:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
+  color: #001E2B;
+}
+
+.emotion-3:hover,
+.emotion-3[data-hover="true"],
+.emotion-3:active,
+.emotion-3[data-active="true"] {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+@media not all and (max-width: 767px) {
+  .emotion-3 {
+    width: 40px;
+    height: 36px;
+  }
+}
+
+.dark-theme .emotion-3 {
+  background-color: #3D4F58;
+  color: #FFFFFF;
+}
+
+.emotion-4 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.emotion-5 {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 0;
+  -webkit-transition: all 150 ease-in-out;
+  transition: all 150 ease-in-out;
+  padding: 0 11px;
+  gap: 6px;
+}
+
+.emotion-6 {
+  text-align: start;
+}
+
+.emotion-7 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--font-color-primary);
+}
+
+.emotion-7 strong,
+.emotion-7 b {
+  font-weight: 700;
+}
+
+.emotion-8 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  color: #889397;
+}
+
+.emotion-8 strong,
+.emotion-8 b {
+  font-weight: 700;
+}
+
+.emotion-10 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 14px;
+  column-gap: 14px;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.emotion-14 {
+  text-align: end;
+}
+
+<div
+    class="emotion-0"
+  >
+    <div>
+      <a
+        class="emotion-1"
+        href="/drivers/go/"
+        title="Previous Step"
+      >
+        <div
+          class="emotion-2"
+        >
+          <button
+            aria-disabled="false"
+            class="lg-ui-button-0000 emotion-3"
+            data-lgid="lg-button"
+            type="button"
+          >
+            <div
+              class="emotion-4"
+            />
+            <div
+              class="emotion-5"
+            >
+              <svg
+                aria-label="Arrow Left Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+          <div
+            class="emotion-6"
+          >
+            <p
+              class="emotion-7"
+            >
+              Back
+            </p>
+            <p
+              class="emotion-8"
+            >
+              MongoDB Go Driver
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a
+        class="emotion-1"
+        href="/drivers/cxx/"
+        title="Next Section"
+      >
+        <div
+          class="emotion-10"
+        >
+          <button
+            aria-disabled="false"
+            class="lg-ui-button-0000 emotion-3"
+            data-lgid="lg-button"
+            type="button"
+          >
+            <div
+              class="emotion-4"
+            />
+            <div
+              class="emotion-5"
+            >
+              <svg
+                aria-label="Arrow Right Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+          <div
+            class="emotion-14"
+          >
+            <p
+              class="emotion-7"
+            >
+              Next
+            </p>
+            <p
+              class="emotion-8"
+            >
+              MongoDB C++ Driver
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`renders a page with next and previous links correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
@@ -637,7 +1789,7 @@ exports[`renders a page with no next link correctly 1`] = `
     <div>
       <a
         class="emotion-1"
-        href="/drivers/go/"
+        href="/drivers/motor/"
         title="Previous Section"
       >
         <div
@@ -683,7 +1835,7 @@ exports[`renders a page with no next link correctly 1`] = `
             <p
               class="emotion-8"
             >
-              MongoDB Go Driver
+              Motor (Async Driver)
             </p>
           </div>
         </div>
