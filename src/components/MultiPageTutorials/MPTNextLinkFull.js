@@ -4,8 +4,8 @@ import { css } from '@leafygreen-ui/emotion';
 import { NextPrevLink } from '../InternalPageNav';
 import { theme } from '../../theme/docsTheme';
 import { LINK_TITLE } from './constants';
-import { useShouldShowNext } from './hooks/useShouldShowNext';
-import { useActiveMpTutorial } from './hooks/useActiveMpTutorial';
+import { useShouldShowNext } from './hooks/use-should-show-next';
+import { useActiveMpTutorial } from './hooks/use-active-mp-tutorial';
 
 const baseStyle = css`
   display: none;

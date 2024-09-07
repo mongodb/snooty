@@ -3,7 +3,7 @@ import { css } from '@leafygreen-ui/emotion';
 import Overline from '../Internal/Overline';
 import { theme } from '../../theme/docsTheme';
 import { MPTNextLinkMini } from './MPTNextLinkMini';
-import { useMptPageOptions } from './hooks/useMptPageOptions';
+import { useMptPageOptions } from './hooks/use-mpt-page-options';
 
 const timeBaseStyle = css`
   font-weight: 600;

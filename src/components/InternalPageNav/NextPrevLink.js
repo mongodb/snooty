@@ -58,12 +58,12 @@ const baseButtonStyle = css`
   }
 `;
 
-const NextPrevLink = ({ className, icon, direction, pageTitle, targetSlug, title }) => {
+const NextPrevLink = ({ className, icon, direction, pageTitle, targetSlug, title, onClick }) => {
   const isNext = direction?.toLowerCase() === 'next';
   const isPrev = direction?.toLowerCase() === 'back';
 
   return (
-    <div className={className}>
+    <div className={className} onClick={() => onClick(direction, targetSlug)}>
       <Link to={targetSlug} title={title}>
         <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
           <Button className={cx(baseButtonStyle, navLinkButtonStyle)}>

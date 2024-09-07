@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { glyphs } from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { getPageTitle } from '../../utils/get-page-title';
 import { useActiveMpTutorial } from '../MultiPageTutorials';
+import { reportAnalytics } from '../../utils/report-analytics';
 import NextPrevLink from './NextPrevLink';
 
 const containerStyling = css`
@@ -66,6 +67,13 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
   const prevPage = getPrev(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
   const nextPage = getNext(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
 
+  const handleClick = useCallback((direction, targetSlug) => {
+    reportAnalytics('InternalPageNavClicked', {
+      direction,
+      targetSlug,
+    });
+  }, []);
+
   return (
     <div className={cx(containerStyling)}>
       {prevPage?.targetSlug && (
@@ -75,6 +83,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
           targetSlug={prevPage.targetSlug}
           pageTitle={prevPage.pageTitle}
           title={prevPage.linkTitle}
+          onClick={handleClick}
         />
       )}
       {nextPage?.targetSlug && (
@@ -84,6 +93,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
           targetSlug={nextPage.targetSlug}
           pageTitle={nextPage.pageTitle}
           title={nextPage.linkTitle}
+          onClick={handleClick}
         />
       )}
     </div>

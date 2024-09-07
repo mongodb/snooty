@@ -1,5 +1,5 @@
-import { useActiveMpTutorial } from './useActiveMpTutorial';
-import { useMptPageOptions } from './useMptPageOptions';
+import { useActiveMpTutorial } from './use-active-mp-tutorial';
+import { useMptPageOptions } from './use-mpt-page-options';
 
 export const useShouldShowNext = () => {
   const activeTutorial = useActiveMpTutorial();
