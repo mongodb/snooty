@@ -20,6 +20,19 @@ const MaxWidthSelect = styled(Select)`
   width: ${FILTER_WIDTH};
 `;
 
+const FiltersButton = styled(Button)`
+  .dark-theme & {
+    background-color: var(--gray-dark1);
+    border-color: var(--gray-base);
+    color: var(--white);
+    box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+
+    svg {
+      color: var(--gray-light2);
+    }
+  }
+`;
+
 const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props }) => {
   const {
     filters,
@@ -176,11 +189,11 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
         />
       </SelectWrapper>
       {manuallyApplyFilters ? (
-        <Button onClick={applyFilters}>Apply filters</Button>
+        <FiltersButton onClick={applyFilters}>Apply filters</FiltersButton>
       ) : (
-        <Button leftGlyph={<Icon glyph="X" />} onClick={resetFilters}>
+        <FiltersButton leftGlyph={<Icon glyph="X" />} onClick={resetFilters}>
           Clear all filters
-        </Button>
+        </FiltersButton>
       )}
     </div>
   );
