@@ -5,6 +5,7 @@ import { getPlaintext } from '../../utils/get-plaintext';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { theme } from '../../theme/docsTheme';
+import { PageContext } from '../../context/page-context';
 import { TabContext } from './tab-context';
 
 const selectStyle = css`
@@ -19,6 +20,14 @@ const selectStyle = css`
     /* Min width of right panel */
     max-width: 180px;
   }
+`;
+
+const mainColumnStyles = css`
+  margin: 32px 0px;
+  div > button {
+    width: 458px;
+  }
+  border: 1px red solid;
 `;
 
 const capitalizeFirstLetter = (str) => str.trim().replace(/^\w/, (c) => c.toUpperCase());
@@ -43,11 +52,11 @@ export const makeChoices = ({ name, iconMapping, options }) =>
     ...(name === 'drivers' && { tabSelectorIcon: iconMapping[tabId] }),
   }));
 
-const TabSelector = ({ className, activeTab, handleClick, iconMapping, name, options }) => {
+const TabSelector = ({ className, activeTab, handleClick, iconMapping, name, options, mainColumn }) => {
   const choices = useMemo(() => makeChoices({ name, iconMapping, options }), [name, iconMapping, options]);
   return (
     <Select
-      className={cx(selectStyle, className)}
+      className={cx(selectStyle, className, mainColumn ? mainColumnStyles : '')}
       choices={choices}
       label={getLabel(name)}
       usePortal={false}
@@ -65,9 +74,11 @@ const TabSelector = ({ className, activeTab, handleClick, iconMapping, name, opt
 };
 
 const TabSelectors = ({ className }) => {
+  const { tabsMainColumn } = useContext(PageContext);
+  console.log('TABS MAIN CLOLUMN', tabsMainColumn);
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
 
-  if (!selectors || Object.keys(selectors).length === 0) {
+  if (!selectors || Object.keys(selectors).length === 0 || !tabsMainColumn) {
     return null;
   }
 
@@ -88,6 +99,7 @@ const TabSelectors = ({ className }) => {
             iconMapping={iconMapping}
             name={name}
             options={options}
+            mainColumn={tabsMainColumn}
           />
         );
       })}
