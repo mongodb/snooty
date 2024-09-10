@@ -237,7 +237,6 @@ exports[`renders a page IA with IA linked data 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
@@ -1213,7 +1212,6 @@ exports[`renders a simple page IA correctly 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;

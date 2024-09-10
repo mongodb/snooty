@@ -511,7 +511,6 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
@@ -560,7 +559,6 @@ exports[`Link component renders a variety of strings correctly internal link que
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
@@ -609,7 +607,6 @@ exports[`Link component renders a variety of strings correctly internal link tha
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
@@ -658,7 +655,6 @@ exports[`Link component renders a variety of strings correctly internal link wit
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;

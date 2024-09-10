@@ -357,7 +357,6 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
@@ -559,7 +558,6 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
@@ -845,7 +843,6 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
@@ -1037,7 +1034,6 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
@@ -1323,7 +1319,6 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;

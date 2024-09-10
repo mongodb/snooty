@@ -39,7 +39,6 @@ exports[`renders a page with next and previous links correctly 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
@@ -404,7 +403,6 @@ exports[`renders a page with no next link correctly 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
@@ -696,7 +694,6 @@ exports[`renders a page with no previous link correctly 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
