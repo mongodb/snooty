@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { isBrowser } from '../../utils/is-browser';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { theme } from '../../theme/docsTheme';
 import { InstruqtContext } from '../Instruqt/instruqt-context';
 import { SuspenseHelper } from '../SuspenseHelper';
@@ -38,7 +39,10 @@ const WidgetsContainer = styled.div`
   }
 `;
 
+const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
+
 const Widgets = ({ children, pageTitle, slug, isInPresentationMode, template }) => {
+  const { project } = useSnootyMetadata();
   const { isOpen } = useContext(InstruqtContext);
   const url = isBrowser ? window.location.href : null;
   const feedbackData = useFeedbackData({
@@ -47,7 +51,7 @@ const Widgets = ({ children, pageTitle, slug, isInPresentationMode, template }) 
     title: pageTitle || 'Home',
   });
 
-  const hideWidgets = ['landing', 'errorpage'].includes(template);
+  const hideWidgets = ['landing', 'errorpage'].includes(template) || DEPRECATED_PROJECTS.includes(project);
   const hideFeedback = template === 'openapi';
 
   return (
