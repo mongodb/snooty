@@ -4,6 +4,9 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import ComponentFactory from '../ComponentFactory';
 
 const listParagraphStyles = css`
+  ::marker {
+    color: var(--font-color-primary);
+  }
   & > p {
     margin-bottom: 8px;
   }

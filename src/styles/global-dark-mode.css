@@ -80,3 +80,19 @@ body {
   --wayfinding-bg-color: var(--gray-dark3);
   --wayfinding-border-color: var(--gray-dark2);
 }
+
+.nav-dark {
+  display: none;
+}
+
+.nav-light {
+  display: initial;
+}
+
+.dark-theme .nav-dark {
+  display: initial;
+}
+
+.dark-theme .nav-light {
+  display: none;
+}

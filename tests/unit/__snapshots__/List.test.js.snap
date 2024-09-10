@@ -6,6 +6,10 @@ exports[`List renders correctly 1`] = `
   margin-top: 0px;
 }
 
+.emotion-1::marker {
+  color: var(--font-color-primary);
+}
+
 .emotion-1>p {
   margin-bottom: 8px;
 }

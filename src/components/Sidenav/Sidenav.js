@@ -2,7 +2,6 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
@@ -177,14 +176,12 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://learn.mongodb.com/' },
 ];
 
-const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, slug, eol }) => {
+const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSnootyMetadata();
   const isDocsLanding = project === 'landing';
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
-
-  const { darkMode } = useDarkMode();
 
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(eol);
@@ -266,7 +263,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
             <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
-                <DocsHomeButton darkMode={darkMode} />
+                <DocsHomeButton />
                 <Border />
                 {ia && (
                   <IA
@@ -286,7 +283,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, siteTitle, s
                   />
                 )}
               </NavTopContainer>
-              {showAllProducts && <ProductsList darkMode={darkMode} />}
+              {showAllProducts && <ProductsList />}
             </IATransition>
 
             {!ia && !showAllProducts && (
@@ -335,7 +332,6 @@ Sidenav.propTypes = {
     options: PropTypes.object,
   }).isRequired,
   repoBranches: PropTypes.object,
-  siteTitle: PropTypes.string,
   slug: PropTypes.string.isRequired,
   eol: PropTypes.bool.isRequired,
 };
