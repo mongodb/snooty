@@ -1968,6 +1968,17 @@ exports[`Search Results Page considers a given search filter query param and dis
   }
 }
 
+.dark-theme .emotion-88 {
+  background-color: var(--gray-dark1);
+  border-color: var(--gray-base);
+  color: var(--white);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
+.dark-theme .emotion-88 svg {
+  color: var(--gray-light2);
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -2368,7 +2379,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-22"
+          class="lg-ui-button-0000 emotion-22 emotion-88 emotion-89"
           data-lgid="lg-button"
           type="button"
         >
@@ -3448,6 +3459,17 @@ exports[`Search Results Page does not return results for a given search term wit
   }
 }
 
+.dark-theme .emotion-62 {
+  background-color: var(--gray-dark1);
+  border-color: var(--gray-base);
+  color: var(--white);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
+.dark-theme .emotion-62 svg {
+  color: var(--gray-light2);
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -3977,7 +3999,7 @@ exports[`Search Results Page does not return results for a given search term wit
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-17 emotion-62 emotion-63"
           data-lgid="lg-button"
           type="button"
         >
@@ -5582,6 +5604,17 @@ exports[`Search Results Page renders loading images before returning no results 
   }
 }
 
+.dark-theme .emotion-135 {
+  background-color: var(--gray-dark1);
+  border-color: var(--gray-base);
+  color: var(--white);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
+.dark-theme .emotion-135 svg {
+  color: var(--gray-light2);
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -6092,7 +6125,7 @@ exports[`Search Results Page renders loading images before returning no results 
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-17 emotion-135 emotion-136"
           data-lgid="lg-button"
           type="button"
         >
@@ -7265,6 +7298,17 @@ exports[`Search Results Page renders loading images before returning nonempty re
   }
 }
 
+.dark-theme .emotion-135 {
+  background-color: var(--gray-dark1);
+  border-color: var(--gray-base);
+  color: var(--white);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
+.dark-theme .emotion-135 svg {
+  color: var(--gray-light2);
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -7775,7 +7819,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-17 emotion-135 emotion-136"
           data-lgid="lg-button"
           type="button"
         >
@@ -9149,6 +9193,17 @@ exports[`Search Results Page renders results from a given search term query para
   }
 }
 
+.dark-theme .emotion-83 {
+  background-color: var(--gray-dark1);
+  border-color: var(--gray-base);
+  color: var(--white);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
+.dark-theme .emotion-83 svg {
+  color: var(--gray-light2);
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -9519,7 +9574,7 @@ exports[`Search Results Page renders results from a given search term query para
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-17 emotion-83 emotion-84"
           data-lgid="lg-button"
           type="button"
         >
