@@ -1,12 +1,12 @@
 import React, { useContext, useMemo } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Select from '../Select';
-import { getPlaintext } from '../../utils/get-plaintext';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { theme } from '../../theme/docsTheme';
 import { PageContext } from '../../context/page-context';
 import { TabContext } from './tab-context';
+import { makeChoices } from './make-choices';
 
 const selectStyle = css`
   width: 100%;
@@ -23,11 +23,17 @@ const selectStyle = css`
 `;
 
 const mainColumnStyles = css`
-  margin: 32px 0px;
+  margin: ${theme.size.large} 0px;
   div > button {
+    display: flex;
     width: 458px;
+    @media ${theme.screenSize.upToMedium} {
+      width: 385px;
+    }
+    @media ${theme.screenSize.upToSmall} {
+      width: 100%;
+    }
   }
-  border: 1px red solid;
 `;
 
 const capitalizeFirstLetter = (str) => str.trim().replace(/^\w/, (c) => c.toUpperCase());
@@ -44,13 +50,6 @@ const getLabel = (name) => {
       capitalizeFirstLetter(name);
   }
 };
-
-export const makeChoices = ({ name, iconMapping, options }) =>
-  Object.entries(options).map(([tabId, title]) => ({
-    text: getPlaintext(title),
-    value: tabId,
-    ...(name === 'drivers' && { tabSelectorIcon: iconMapping[tabId] }),
-  }));
 
 const TabSelector = ({ className, activeTab, handleClick, iconMapping, name, options, mainColumn }) => {
   const choices = useMemo(() => makeChoices({ name, iconMapping, options }), [name, iconMapping, options]);
@@ -73,12 +72,11 @@ const TabSelector = ({ className, activeTab, handleClick, iconMapping, name, opt
   );
 };
 
-const TabSelectors = ({ className }) => {
+const TabSelectors = ({ className, rightColumn }) => {
   const { tabsMainColumn } = useContext(PageContext);
-  console.log('TABS MAIN CLOLUMN', tabsMainColumn);
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
 
-  if (!selectors || Object.keys(selectors).length === 0 || !tabsMainColumn) {
+  if (!selectors || Object.keys(selectors).length === 0 || (!tabsMainColumn && !rightColumn)) {
     return null;
   }
 

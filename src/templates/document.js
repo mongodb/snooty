@@ -50,7 +50,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       </StyledMainColumn>
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
-        {!hasMethodSelector && !tabsMainColumn && <TabSelectors />}
+        {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
         <Contents displayOnDesktopOnly={true} />
       </StyledRightColumn>
     </DocumentContainer>

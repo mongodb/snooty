@@ -51,7 +51,7 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
   const { hasDrawer, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
   const shouldShowLabButton = isPageTitle && hasDrawer;
-  const { page } = usePageContext();
+  const { page, tabsMainColumn } = usePageContext();
   const hasMethodSelector = page?.options?.['has_method_selector'];
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
 
@@ -62,7 +62,7 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
         wrapper={(children) => (
           <HeadingContainer stackVertically={isMobile}>
             {children}
-            <ChildContainer isStacked={isMobile}>{hasSelectors && <TabSelectors />}</ChildContainer>
+            <ChildContainer isStacked={isMobile}>{hasSelectors && !tabsMainColumn && <TabSelectors />}</ChildContainer>
           </HeadingContainer>
         )}
       >
