@@ -223,7 +223,7 @@ export const Head = ({ pageContext, data }) => {
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
   const siteTitle = getSiteTitle(metadata);
 
-  const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing';
+  const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing' && slug === '/';
   const needsBreadcrumbs = template === 'document' || template === undefined;
 
   // Retrieves the canonical URL based on certain situations
