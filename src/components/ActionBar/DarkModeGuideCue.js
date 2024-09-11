@@ -45,8 +45,9 @@ const VideoContainer = styled.div`
   justify-content: center;
 `;
 
-const videoStyles = css`
+const Video = styled.video`
   border-radius: 12px;
+  // This width is two pixels larger than container to cut off black border :/ hence the overflow hidden and flex of the container
   max-width: 244px;
   width: 244px;
 `;
@@ -62,9 +63,10 @@ const DarkModeGuideCue = ({ darkRef }) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  // Do not show in mobile
+  // Use localStorage to only show once to each user
   useEffect(() => {
     if (isMobile || !localStorage) return;
-    // Maybe need to check if window is defined
     const darkModeAnnounced = localStorage.getItem(DARK_MODE_ANNOUNCED);
     if (darkModeAnnounced !== 'true') setIsOpen(true);
   }, [isMobile]);
@@ -76,11 +78,10 @@ const DarkModeGuideCue = ({ darkRef }) => {
 
   useClickOutside(ref, onClose);
 
-  const stagingUrl = 'https://mongodbcom-cdn.website.staging.corp.mongodb.com/docs-qa/assets/darkModeGuideCue.mov';
-  const prodUrl = 'http://www.mongodb.com/docs/assets/darkModeGuideCue.mov';
-  console.log(prodUrl);
-
-  if (!isOpen) return <></>;
+  // Staging url is for local development - will delete before PR and uncomment the videoUrl
+  const videoUrl = 'https://mongodbcom-cdn.website.staging.corp.mongodb.com/docs-qa/assets/darkModeGuideCue.mov';
+  // S3 address to .mov
+  // const videoUrl = 'http://www.mongodb.com/docs/assets/darkModeGuideCue.mov';
 
   return (
     <GuideCue
@@ -95,10 +96,12 @@ const DarkModeGuideCue = ({ darkRef }) => {
       darkMode={darkMode}
       portalRef={ref}
       portalClassName={cx(css`
+        // Hide title label (ghost margin)
         #guide-cue-label {
           display: none;
         }
 
+        // Hide Footer with button (no way with LG to hide)
         div[role='dialog'] > div > div > div:last-child {
           display: none;
         }
@@ -129,9 +132,9 @@ const DarkModeGuideCue = ({ darkRef }) => {
             `)}
           />
           <VideoContainer>
-            <video autoPlay muted className={cx(videoStyles)}>
-              <source src={stagingUrl} type="video/mp4"></source>
-            </video>
+            <Video autoPlay muted>
+              <source src={videoUrl} type="video/mp4"></source>
+            </Video>
           </VideoContainer>
         </GuideCueHeader>
         <GuideCueFooter>

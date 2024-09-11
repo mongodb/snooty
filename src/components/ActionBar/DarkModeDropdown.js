@@ -46,6 +46,7 @@ const DarkModeDropdown = () => {
   );
 
   return (
+    // Remove Fragment and div when Dark Mode Guide Cue is removed - only used for guide cue placement
     <>
       <div ref={darkRef}>
         <Menu
