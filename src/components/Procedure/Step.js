@@ -67,6 +67,7 @@ const landingStepStyles = {
     gap: ${theme.size.default};
     h2,
     h4,
+    h5,
     h6 {
       margin-top: unset;
     }
