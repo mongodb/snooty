@@ -53,6 +53,7 @@ export const sharedDarkModeOverwriteStyles = `
 const gatsbyLinkStyling = (linkThemeStyle) => css`
   align-items: center;
   cursor: pointer;
+  position: relative;
   text-decoration: none;
   text-decoration-color: transparent;
   line-height: 13px;
