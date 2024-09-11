@@ -56,7 +56,7 @@ const GuideCueFooter = styled.div`
   padding: 24px 24px 16px;
 `;
 
-const DarkModeGuideCue = ({ darkRef }) => {
+const DarkModeGuideCue = ({ guideCueRef }) => {
   const ref = useRef();
   const { isMobile } = useScreenSize();
   const { darkMode } = useDarkMode();
@@ -89,7 +89,7 @@ const DarkModeGuideCue = ({ darkRef }) => {
       tooltipAlign="bottom"
       tooltipJustify="start"
       setOpen={setIsOpen}
-      refEl={darkRef}
+      refEl={guideCueRef}
       numberOfSteps={1}
       currentStep={1}
       popoverZIndex={20000}

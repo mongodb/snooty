@@ -30,7 +30,7 @@ const darkModeSvgStyle = {
 };
 
 const DarkModeDropdown = () => {
-  const darkRef = useRef();
+  const guideCueRef = useRef();
 
   // not using dark mode from LG/provider here to account for case of 'system' dark theme
   const { setDarkModePref, darkModePref } = useContext(DarkModeContext);
@@ -48,7 +48,7 @@ const DarkModeDropdown = () => {
   return (
     // Remove Fragment and div when Dark Mode Guide Cue is removed - only used for guide cue placement
     <>
-      <div ref={darkRef}>
+      <div ref={guideCueRef}>
         <Menu
           className={cx(menuStyling)}
           usePortal={false}
@@ -105,7 +105,7 @@ const DarkModeDropdown = () => {
           </MenuItem>
         </Menu>
       </div>
-      <DarkModeGuideCue darkRef={darkRef} />
+      <DarkModeGuideCue guideCueRef={guideCueRef} />
     </>
   );
 };
