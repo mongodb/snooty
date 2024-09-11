@@ -19,7 +19,8 @@ import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
 import { ActionBarSearchContainer, ActionsBox, actionBarStyling, getContainerStyling, overlineStyling } from './styles';
 
-// Note: When working on this component further, please check with design on how it should look in the errorpage template (404) as well!
+const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
+
 const ActionBar = ({ template, slug, sidenav, ...props }) => {
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
@@ -48,7 +49,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
       </ActionBarSearchContainer>
       <ActionsBox>
         {template !== 'openapi' && <DarkModeDropdown />}
-        {template !== 'errorpage' && (
+        {template !== 'errorpage' && !DEPRECATED_PROJECTS.includes(metadata.project) && (
           <FeedbackProvider page={feedbackData}>
             <FeedbackContainer>
               <FeedbackButton />
