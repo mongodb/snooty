@@ -53,12 +53,14 @@ const getLabel = (name) => {
 
 const TabSelector = ({ className, activeTab, handleClick, iconMapping, name, options, mainColumn }) => {
   const choices = useMemo(() => makeChoices({ name, iconMapping, options }), [name, iconMapping, options]);
+  // usePortal set to true when Select is in main column to
+  // prevent z-index issues with content overlapping dropdown
   return (
     <Select
       className={cx(selectStyle, className, mainColumn ? mainColumnStyles : '')}
       choices={choices}
       label={getLabel(name)}
-      usePortal={false}
+      usePortal={false || mainColumn}
       onChange={({ value }) => {
         handleClick({ [name]: value });
         reportAnalytics('LanguageSelection', {
