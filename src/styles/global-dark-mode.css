@@ -79,6 +79,19 @@ body {
 
   --wayfinding-bg-color: var(--gray-dark3);
   --wayfinding-border-color: var(--gray-dark2);
+
+  /* Style the scrollbar background */
+  ::-webkit-scrollbar {
+    background: var(--gray-dark3);
+  }
+
+  /* Style the scrollbar handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--gray-dark2);
+    border: 3px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+  }
 }
 
 .nav-dark {

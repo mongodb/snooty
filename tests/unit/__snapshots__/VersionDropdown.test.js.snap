@@ -31,6 +31,13 @@ exports[`VersionDropdown Component renders correctly 1`] = `
   color: var(--select-button-carot);
 }
 
+.dark-theme .emotion-1 button:hover {
+  background-color: var(--gray-dark4);
+  color: var(--gray-light3);
+  border-color: var(--gray-base);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
 @media only screen and (max-width: 1024px) {
   .emotion-1 div,
   .emotion-1 span {
