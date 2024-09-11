@@ -6,11 +6,13 @@ import { GuideCue } from '@leafygreen-ui/guide-cue';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 
+import { withPrefix } from 'gatsby';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import useScreenSize from '../../hooks/useScreenSize';
 import CloseButton from '../Widgets/FeedbackWidget/components/CloseButton';
 
-const DARK_MODE_ANNOUNCED = 'dark-mode-announced';
+export const DARK_MODE_ANNOUNCED = 'dark-mode-announced';
+const VIDEO_PATH = 'assets/darkModeGuideCue.mov';
 
 const GuideCueContent = styled.div`
   min-width: 359px;
@@ -60,7 +62,6 @@ const DarkModeGuideCue = ({ guideCueRef }) => {
   const ref = useRef();
   const { isMobile } = useScreenSize();
   const { darkMode } = useDarkMode();
-
   const [isOpen, setIsOpen] = useState(false);
 
   // Do not show in mobile
@@ -77,11 +78,6 @@ const DarkModeGuideCue = ({ guideCueRef }) => {
   };
 
   useClickOutside(ref, onClose);
-
-  // Staging url is for local development - will delete before PR and uncomment the videoUrl
-  const videoUrl = 'https://mongodbcom-cdn.website.staging.corp.mongodb.com/docs-qa/assets/darkModeGuideCue.mov';
-  // S3 address to .mov
-  // const videoUrl = 'http://www.mongodb.com/docs/assets/darkModeGuideCue.mov';
 
   return (
     <GuideCue
@@ -133,7 +129,7 @@ const DarkModeGuideCue = ({ guideCueRef }) => {
           />
           <VideoContainer>
             <Video autoPlay muted>
-              <source src={videoUrl} type="video/mp4"></source>
+              <source src={withPrefix(VIDEO_PATH)} type="video/mp4"></source>
             </Video>
           </VideoContainer>
         </GuideCueHeader>
