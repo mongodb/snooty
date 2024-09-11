@@ -83,6 +83,7 @@ a .emotion-0 {
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
+  position: relative;
   -webkit-text-decoration: none;
   text-decoration: none;
   text-decoration-color: transparent;
