@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Box from '@leafygreen-ui/box';
@@ -24,13 +24,6 @@ const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
     return findAllNestedAttribute(children, 'id');
   }, [children]);
 
-  // Below would be preferred, but cannot be used if using
-  // SSG + hydration. (possible with SSG + client side render)
-  // const [open, setOpen] = useState(() => {
-  //   const hashId = hash?.slice(1) ?? '';
-  //   return id === hashId || childrenHashIds.includes(hashId);
-  // });
-
   const [open, setOpen] = useState(() => false);
   const headingNodeData = {
     id,
@@ -45,30 +38,31 @@ const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
     setOpen(!open);
   }, [heading, open]);
 
+  // open the collapsible if the hash in URL is equal to collapsible heading id,
+  // or if the collapsible's children has the id
   useEffect(() => {
     if (!isBrowser) {
       return;
     }
     const hashId = hash?.slice(1) ?? '';
-    if (id === hashId) {
+    if (id === hashId || childrenHashIds.includes(hashId)) {
       return setOpen(true);
     }
+  }, [childrenHashIds, hash, id]);
+
+  const rendered = useRef(false);
+
+  // on first open, scroll the child with the URL hash id into view
+  useEffect(() => {
+    if (!open) return;
+    if (rendered.current) return;
+    rendered.current = true;
+    const hashId = hash?.slice(1) ?? '';
     if (childrenHashIds.includes(hashId)) {
       const child = document?.querySelector(`#${hashId}`);
-      setOpen(true);
-
-      // this workaround is required since browser has already
-      // tried to load and scroll into hash anchor, but
-      // we are using useEffect to open collapsible
-      const interval = setTimeout(() => {
-        child && child.scrollIntoView();
-      }, 500);
-
-      return () => {
-        clearTimeout(interval);
-      };
+      child && child.scrollIntoView();
     }
-  }, [childrenHashIds, hash, id]);
+  }, [childrenHashIds, hash, open]);
 
   return (
     <Box className={cx('collapsible', collapsibleStyle)}>
