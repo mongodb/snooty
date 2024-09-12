@@ -68,10 +68,26 @@ const getTheSupportedMedia = (url) => {
   return REACT_PLAYERS[supportedType];
 };
 
-const Video = ({ nodeData: { argument }, ...rest }) => {
+const Video = ({ nodeData: { argument, options } }) => {
   const url = `${argument[0]['refuri']}`;
   // use placeholder image for video thumbnail if invalid URL provided
   const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
+  const { name, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options;
+  // Required fields based on https://developers.google.com/search/docs/appearance/structured-data/video#video-object
+  const hasAllReqFields = [url, name, uploadDate, thumbnailUrl].every((val) => !!val);
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    embedUrl: url,
+    name,
+    uploadDate,
+    thumbnailUrl,
+  };
+
+  if (description) {
+    structuredData['description'] = description;
+  }
 
   useEffect(() => {
     // handles URL validity checking for well-formed YT links
@@ -104,19 +120,26 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
   }
 
   return (
-    <ReactPlayerWrapper>
-      <ReactPlayer
-        css={videoStyling(ReactSupportedMedia)}
-        config={ReactSupportedMedia.config}
-        controls
-        url={url}
-        width="100%"
-        height="100%"
-        playing
-        playIcon={<VideoPlayButton />}
-        light={previewImage}
-      />
-    </ReactPlayerWrapper>
+    <>
+      {hasAllReqFields && (
+        <script id="video-object-sd" type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      )}
+      <ReactPlayerWrapper>
+        <ReactPlayer
+          css={videoStyling(ReactSupportedMedia)}
+          config={ReactSupportedMedia.config}
+          controls
+          url={url}
+          width="100%"
+          height="100%"
+          playing
+          playIcon={<VideoPlayButton />}
+          light={previewImage}
+        />
+      </ReactPlayerWrapper>
+    </>
   );
 };
 
