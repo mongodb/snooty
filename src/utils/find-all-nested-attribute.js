@@ -7,13 +7,12 @@
 export const findAllNestedAttribute = (nodes, attribute) => {
   const results = [];
   const searchNode = (node) => {
-    if (node[attribute]) {
+    if (Object.hasOwn(node, attribute)) {
       results.push(node[attribute]);
     }
     if (node.children) {
       return node.children.forEach(searchNode);
     }
-    return null;
   };
   nodes.forEach(searchNode);
   return results;
