@@ -60,7 +60,7 @@ const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
     const hashId = hash?.slice(1) ?? '';
     if (childrenHashIds.includes(hashId)) {
       const child = document?.querySelector(`#${hashId}`);
-      child && child.scrollIntoView();
+      child && child.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
     }
   }, [childrenHashIds, hash, open]);
 
