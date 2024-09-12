@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
+import { cx, css } from '@leafygreen-ui/emotion';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
@@ -18,6 +19,19 @@ const SelectWrapper = styled('div')`
 
 const MaxWidthSelect = styled(Select)`
   width: ${FILTER_WIDTH};
+`;
+
+const filtersButtonStyles = css`
+  .dark-theme & {
+    background-color: var(--gray-dark1);
+    border-color: var(--gray-base);
+    color: var(--white);
+    box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+
+    svg {
+      color: var(--gray-light2);
+    }
+  }
 `;
 
 const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props }) => {
@@ -176,9 +190,11 @@ const SearchFilters = ({ manuallyApplyFilters = false, onApplyFilters, ...props 
         />
       </SelectWrapper>
       {manuallyApplyFilters ? (
-        <Button onClick={applyFilters}>Apply filters</Button>
+        <Button onClick={applyFilters} className={cx(filtersButtonStyles)}>
+          Apply filters
+        </Button>
       ) : (
-        <Button leftGlyph={<Icon glyph="X" />} onClick={resetFilters}>
+        <Button leftGlyph={<Icon glyph="X" />} onClick={resetFilters} className={cx(filtersButtonStyles)}>
           Clear all filters
         </Button>
       )}
