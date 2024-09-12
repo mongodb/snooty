@@ -63,21 +63,19 @@ const DarkModeGuideCue = ({ guideCueRef }) => {
   const { isMobile } = useScreenSize();
   const { darkMode } = useDarkMode();
   const [isOpen, setIsOpen] = useState(false);
-
-  // Do not show in mobile
-  // Use localStorage to only show once to each user
-  useEffect(() => {
-    if (isMobile || !localStorage) return;
-    const darkModeAnnounced = localStorage.getItem(DARK_MODE_ANNOUNCED);
-    if (darkModeAnnounced !== 'true') setIsOpen(true);
-  }, [isMobile]);
-
-  const onClose = () => {
-    setIsOpen(false);
-    localStorage.setItem(DARK_MODE_ANNOUNCED, 'true');
-  };
+  const onClose = () => setIsOpen(false);
 
   useClickOutside(ref, onClose);
+
+  // Use localStorage to only show once to each user
+  useEffect(() => {
+    if (!localStorage) return;
+    const darkModeAnnounced = localStorage.getItem(DARK_MODE_ANNOUNCED);
+    if (darkModeAnnounced !== 'true') setIsOpen(true);
+    localStorage.setItem(DARK_MODE_ANNOUNCED, 'true');
+  }, []);
+
+  if (isMobile) return null;
 
   return (
     <GuideCue
