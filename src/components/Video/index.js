@@ -72,15 +72,15 @@ const Video = ({ nodeData: { argument, options } }) => {
   const url = `${argument[0]['refuri']}`;
   // use placeholder image for video thumbnail if invalid URL provided
   const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
-  const { name, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options;
+  const { title, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options;
   // Required fields based on https://developers.google.com/search/docs/appearance/structured-data/video#video-object
-  const hasAllReqFields = [url, name, uploadDate, thumbnailUrl].every((val) => !!val);
+  const hasAllReqFields = [url, title, uploadDate, thumbnailUrl].every((val) => !!val);
 
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
     embedUrl: url,
-    name,
+    name: title,
     uploadDate,
     thumbnailUrl,
   };
@@ -122,7 +122,7 @@ const Video = ({ nodeData: { argument, options } }) => {
   return (
     <>
       {hasAllReqFields && (
-        <script id="video-object-sd" type="application/ld+json">
+        <script id={`video-object-sd-${url}`} type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
       )}
