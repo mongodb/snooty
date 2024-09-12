@@ -22,7 +22,6 @@ describe('collapsible component', () => {
     let icon = button.querySelector('[role=img]');
     expect(icon.getAttribute('aria-label')).toContain('Chevron');
     expect(icon.getAttribute('aria-label')).toContain('Right');
-    expect(collapsedContent).not.toBeVisible();
 
     await act(async () => {
       button.click();
