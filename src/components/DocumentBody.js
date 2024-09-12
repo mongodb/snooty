@@ -86,7 +86,7 @@ const DocumentBody = (props) => {
   const { location, data, pageContext } = props;
   const page = data?.page?.ast;
   const { slug, template, repoBranches } = pageContext;
-  const tabsMainColumn = page?.options?.tabs_position === 'main';
+  const tabsMainColumn = page?.options?.['tabs-selector-position'] === 'main';
 
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];

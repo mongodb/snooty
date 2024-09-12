@@ -57,10 +57,10 @@ const TabSelector = ({ className, activeTab, handleClick, iconMapping, name, opt
   // prevent z-index issues with content overlapping dropdown
   return (
     <Select
-      className={cx(selectStyle, className, mainColumn ? mainColumnStyles : '')}
+      className={cx(selectStyle, mainColumn ? mainColumnStyles : '', className)}
       choices={choices}
       label={getLabel(name)}
-      usePortal={false || mainColumn}
+      usePortal={mainColumn}
       onChange={({ value }) => {
         handleClick({ [name]: value });
         reportAnalytics('LanguageSelection', {
