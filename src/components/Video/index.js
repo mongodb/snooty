@@ -146,6 +146,12 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
 Video.propTypes = {
   nodeData: PropTypes.shape({
     argument: PropTypes.array.isRequired,
+    options: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      'upload-date': PropTypes.string,
+      'thumbnail-url': PropTypes.string,
+    }),
   }).isRequired,
 };
 
