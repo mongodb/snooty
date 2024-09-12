@@ -11,7 +11,7 @@ export const findAllNestedAttribute = (nodes, attribute) => {
       results.push(node[attribute]);
     }
     if (node.children) {
-      return node.children.forEach(searchNode);
+      node.children.forEach(searchNode);
     }
   };
   nodes.forEach(searchNode);
