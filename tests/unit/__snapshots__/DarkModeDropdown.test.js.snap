@@ -20,6 +20,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
   height: 28px;
   width: 28px;
   color: #5C6C75;
+  display: block;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -150,6 +151,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   height: 28px;
   width: 28px;
   color: #5C6C75;
+  display: block;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -787,6 +789,7 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
   height: 28px;
   width: 28px;
   color: #C1C7C6;
+  display: block;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;

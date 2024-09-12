@@ -9,6 +9,7 @@ import { theme } from '../../theme/docsTheme';
 import IconDarkmode from '../icons/Computer';
 
 const iconStyling = css`
+  display: block;
   align-content: center;
   cursor: pointer;
 

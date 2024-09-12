@@ -2,7 +2,15 @@ import React from 'react';
 
 const IconDarkmode = ({ styles, className }) => {
   return (
-    <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 24 24`} {...styles} className={className}>
+    <svg
+      id="Layer_1"
+      width="24"
+      height="24"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox={`0 0 24 24`}
+      {...styles}
+      className={className}
+    >
       <g fill="currentColor">
         <path d="M12,18.92c-.29,0-.55.11-.76.32-.21.21-.32.46-.32.76v2c0,.29.11.55.32.76.21.21.46.32.76.32s.55-.11.76-.32c.21-.21.32-.46.32-.76v-2c0-.29-.11-.55-.32-.76-.21-.21-.46-.32-.76-.32Z" />
         <path d="M5.59,7.1c.22.21.48.31.77.32.29,0,.54-.1.74-.32.21-.22.31-.47.31-.76,0-.29-.1-.54-.31-.76l-1.06-1.07c-.21-.22-.46-.33-.76-.32-.3,0-.55.12-.76.34-.21.22-.32.48-.33.78,0,.29.1.54.32.75l1.08,1.05Z" />
