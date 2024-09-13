@@ -6,7 +6,7 @@ import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
 import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang';
 
-export const onRenderBody = ({ setHeadComponents }) => {
+export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }, pluginOptions) => {
   const headComponents = [
     // GTM Pathway
     <script
@@ -92,6 +92,10 @@ export const onRenderBody = ({ setHeadComponents }) => {
       />
     );
   }
+  setHtmlAttributes({
+    // Help work with translated content locally; Smartling should handle rewriting the lang
+    lang: process.env.GATSBY_HTML_LANG ?? 'en',
+  });
   setHeadComponents(headComponents);
 };
 
