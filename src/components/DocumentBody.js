@@ -1,7 +1,6 @@
 import React, { useState, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-import { Global, css } from '@emotion/react';
 import { ImageContextProvider } from '../context/image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
@@ -11,7 +10,6 @@ import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
 import { getSiteTitle } from '../utils/get-site-title';
 import { PageContext } from '../context/page-context';
 import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
@@ -79,8 +77,6 @@ const getNamedFootnoteReferences = (footnoteReferences, refname) => {
 const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
-
-const fontFamily = getCurrentLocaleFontFamilyValue();
 
 const DocumentBody = (props) => {
   const { location, data, pageContext } = props;
@@ -178,13 +174,6 @@ const DocumentBody = (props) => {
           </SuspenseHelper>
         </div>
       )}
-      <Global
-        styles={css`
-          #template-container *:not(:is(code, code *)) {
-            font-family: ${fontFamily};
-          }
-        `}
-      />
     </>
   );
 };

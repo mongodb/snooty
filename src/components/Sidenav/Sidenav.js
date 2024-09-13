@@ -16,7 +16,6 @@ import { formatText } from '../../utils/format-text';
 import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { getCurrentLocaleFontFamilyValue } from '../../utils/locale';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -29,8 +28,6 @@ import { sideNavItemBasePadding, sideNavItemFontSize, titleStyle } from './style
 import DocsHomeButton from './DocsHomeButton';
 
 const SIDENAV_WIDTH = 268;
-
-const fontFamily = getCurrentLocaleFontFamilyValue();
 
 // Use LG's css here to style the component without passing props
 const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
@@ -73,12 +70,6 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
 const disableScroll = (shouldDisableScroll) => css`
   body {
     ${shouldDisableScroll && 'overflow: hidden;'}
-  }
-`;
-
-const translatedFontFamilyStyles = css`
-  #side-nav-1 * {
-    font-family: ${fontFamily};
   }
 `;
 
@@ -248,7 +239,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
     <>
       <Global
         styles={css`
-          ${disableScroll(!hideMobile)} ${translatedFontFamilyStyles}
+          ${disableScroll(!hideMobile)}
         `}
       />
       <SidenavContainer {...topValues} template={template}>

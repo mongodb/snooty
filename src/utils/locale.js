@@ -19,13 +19,13 @@ export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
 // in redirect-based-on-lang.js
 export const AVAILABLE_LANGUAGES = [
   { language: 'English', localeCode: 'en-us' },
-  { language: '简体中文', localeCode: 'zh-cn' },
-  { language: '한국어', localeCode: 'ko-kr' },
+  { language: '简体中文', localeCode: 'zh-cn', fontFamily: 'Noto Sans SC' },
+  { language: '한국어', localeCode: 'ko-kr', fontFamily: 'Noto Sans KR' },
   { language: 'Português', localeCode: 'pt-br' },
 ];
 
 if (process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
-  AVAILABLE_LANGUAGES.push({ language: '日本語', localeCode: 'ja-jp' });
+  AVAILABLE_LANGUAGES.push({ language: '日本語', localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' });
 }
 
 const validateLocaleCode = (potentialCode) =>
@@ -60,21 +60,24 @@ const stripLocale = (slug) => {
   }
 };
 
-/**
- * Returns the font-family name or undefined as a value based on the locale code
- * returned from getCurrentLocale, undefined to tell CSS to ignore this and work as
- * normal and use LG's styles.
- *
- * This is currently for overriding font-family from LG.
- */
-export const getCurrentLocaleFontFamilyValue = () => {
-  const fontFamilyMap = {
-    'zh-cn': 'Noto Sans SC',
-    'ko-kr': 'Noto Sans KR',
-    'ja-jp': 'Noto Sans JP',
-  };
-  const locale = getCurrLocale();
-  return fontFamilyMap[locale] ? `${fontFamilyMap[locale]}` : undefined;
+export const getAllLocaleCssStrings = () => {
+  const strings = [];
+
+  AVAILABLE_LANGUAGES.forEach(({ localeCode, fontFamily }) => {
+    if (!fontFamily) {
+      return;
+    }
+    const [languageCode] = localeCode.split('-');
+    // Only check that languageCode is in the beginning to be flexible when region code is capitalized
+    // For example: zh-cn and zh-CN will be treated the same
+    strings.push(`
+      html[lang^=${languageCode}] *:not(:is(code, code *)) {
+        font-family: ${fontFamily};
+      }
+    `);
+  });
+
+  return strings;
 };
 
 /**
