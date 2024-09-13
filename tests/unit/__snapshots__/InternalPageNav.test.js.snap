@@ -247,6 +247,10 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
   font-weight: 700;
 }
 
+.dark-theme .emotion-8 {
+  color: #C1C7C6;
+}
+
 .emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -629,6 +633,10 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
 .emotion-8 strong,
 .emotion-8 b {
   font-weight: 700;
+}
+
+.dark-theme .emotion-8 {
+  color: #C1C7C6;
 }
 
 .emotion-10 {
@@ -1015,6 +1023,10 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
   font-weight: 700;
 }
 
+.dark-theme .emotion-8 {
+  color: #C1C7C6;
+}
+
 .emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -1397,6 +1409,10 @@ exports[`renders a page with next and previous links correctly 1`] = `
 .emotion-8 strong,
 .emotion-8 b {
   font-weight: 700;
+}
+
+.dark-theme .emotion-8 {
+  color: #C1C7C6;
 }
 
 .emotion-10 {
@@ -1783,6 +1799,10 @@ exports[`renders a page with no next link correctly 1`] = `
   font-weight: 700;
 }
 
+.dark-theme .emotion-8 {
+  color: #C1C7C6;
+}
+
 <div
     class="emotion-0"
   >
@@ -2090,6 +2110,10 @@ exports[`renders a page with no previous link correctly 1`] = `
 .emotion-8 strong,
 .emotion-8 b {
   font-weight: 700;
+}
+
+.dark-theme .emotion-8 {
+  color: #C1C7C6;
 }
 
 <div
