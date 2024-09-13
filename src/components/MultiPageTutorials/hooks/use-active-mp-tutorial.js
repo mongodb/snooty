@@ -18,7 +18,7 @@ const addPrevNextTutorials = (slugTitleMapping, slug, activeTutorial) => {
     const pageTitle = slugTitleMapping[targetSlug];
     activeTutorial[keyNext] = {
       targetSlug,
-      pageTitle: pageTitle,
+      pageTitle,
     };
   }
 
@@ -28,7 +28,7 @@ const addPrevNextTutorials = (slugTitleMapping, slug, activeTutorial) => {
     const pageTitle = slugTitleMapping[targetSlug];
     activeTutorial[keyPrev] = {
       targetSlug,
-      pageTitle: pageTitle,
+      pageTitle,
     };
   }
 };
@@ -40,14 +40,7 @@ export const useActiveMpTutorial = () => {
   const { slug } = usePageContext();
   const { multiPageTutorials = {}, slugToBreadcrumbLabel } = useSnootyMetadata();
 
-  const activeTutorial = Object.keys(multiPageTutorials).reduce((result, key) => {
-    if (multiPageTutorials[key].slugs?.includes(slug)) {
-      result = multiPageTutorials[key];
-    }
-
-    return result;
-  }, null);
-
+  const activeTutorial = Object.values(multiPageTutorials).find((tutorial) => tutorial.slugs?.includes(slug)) ?? null;
   addPrevNextTutorials(slugToBreadcrumbLabel, slug, activeTutorial);
 
   return activeTutorial;
