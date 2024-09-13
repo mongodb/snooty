@@ -30,6 +30,10 @@ const prevTextStyling = css`
 const nextPrevTitleTextStyling = css`
   ${commonTextStyles}
   color: ${palette.gray.base};
+
+  .dark-theme & {
+    color: ${palette.gray.light1};
+  }
 `;
 
 const commonLinkContentContainerStyling = css`
