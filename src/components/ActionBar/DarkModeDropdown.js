@@ -6,9 +6,10 @@ import IconButton from '@leafygreen-ui/icon-button';
 import { Menu, MenuItem } from '@leafygreen-ui/menu';
 import { DarkModeContext } from '../../context/dark-mode-context';
 import { theme } from '../../theme/docsTheme';
-import IconDarkmode from '../icons/Computer';
+import IconDarkmode from '../icons/DarkMode';
 
 const iconStyling = css`
+  display: block;
   align-content: center;
   cursor: pointer;
 
