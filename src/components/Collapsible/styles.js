@@ -26,16 +26,16 @@ export const headerStyle = css`
   margin-top: 0;
 `;
 
-export const iconStyle = (darkMode) => css`
+export const iconStyle = css`
   align-self: center;
   flex-shrink: 0;
-  ${!darkMode && `color: ${palette.gray.dark1}`}
 `;
 
 export const innerContentStyle = (open) => css`
   overflow: hidden;
   height: 0;
-  visibility: hidden;
+  color: --font-color-primary;
+
   ${open && `height: auto;`}
   ${open && `visibility: visible;`}
 `;
