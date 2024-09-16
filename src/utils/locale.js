@@ -174,3 +174,19 @@ export const onSelectLocale = (locale) => {
   const localizedPath = localizePath(location.pathname, locale);
   window.location.href = localizedPath;
 };
+
+/**
+ * Ensures that a locale code has an all lowercase language code with an all uppercase region code,
+ * as described in https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang#region_subtag.
+ * @param {string} localeCode - A valid locale code with either 1 or 2 parts. Example: `zh-cn` or `zh`
+ * @returns {string | undefined}
+ */
+export const getHtmlLangFormat = (localeCode) => {
+  const parts = localeCode.split('-');
+  if (parts.length < 2) {
+    return localeCode;
+  }
+
+  const [langCode, regionCode] = parts;
+  return `${langCode.toLowerCase()}-${regionCode.toUpperCase()}`;
+};

@@ -1,4 +1,4 @@
-import { getAvailableLanguages, getLocaleMapping, localizePath } from '../../../src/utils/locale';
+import { getAvailableLanguages, getHtmlLangFormat, getLocaleMapping, localizePath } from '../../../src/utils/locale';
 
 describe('getLocaleMapping', () => {
   it.each([
@@ -74,6 +74,17 @@ describe('localizePath', () => {
     ['pt-br/docs/pt-br', 'zh-cn/docs/pt-br'],
   ])('handles slugs that already have a locale code', (slug, expectedRes) => {
     const res = localizePath(slug, 'zh-cn');
+    expect(res).toEqual(expectedRes);
+  });
+});
+
+describe('getHtmlLangFormat', () => {
+  it.each([
+    ['zh-cn', 'zh-CN'],
+    ['zh-CN', 'zh-CN'],
+    ['zh', 'zh'],
+  ])('transforms %s into %s', (input, expectedRes) => {
+    const res = getHtmlLangFormat(input);
     expect(res).toEqual(expectedRes);
   });
 });
