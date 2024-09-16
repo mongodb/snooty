@@ -14,6 +14,7 @@ import { getSiteTitle } from '../utils/get-site-title';
 import { PageContext } from '../context/page-context';
 import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
+import { TEMPLATE_CONTAINER_ID } from '../constants';
 import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
@@ -147,7 +148,7 @@ const DocumentBody = (props) => {
             <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
               <FootnoteContext.Provider value={{ footnotes }}>
                 <PageContext.Provider value={{ page, template, slug, options: page?.options }}>
-                  <div id="template-container">
+                  <div id={TEMPLATE_CONTAINER_ID}>
                     <Template {...props} useChatbot={useChatbot}>
                       {pageNodes.map((child, index) => (
                         <ComponentFactory

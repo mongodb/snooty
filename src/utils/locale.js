@@ -1,4 +1,5 @@
 import { withPrefix } from 'gatsby';
+import { SIDE_NAV_CONTAINER_ID, TEMPLATE_CONTAINER_ID } from '../constants';
 import { assertTrailingSlash } from './assert-trailing-slash';
 import { isBrowser } from './is-browser';
 import { normalizePath } from './normalize-path';
@@ -88,8 +89,8 @@ export const getAllLocaleCssStrings = () => {
     // We want to target everything except for inline code, code blocks, and the consistent-nav components
     strings.push(`
       html[lang^=${languageCode}] {
-        #template-container *:not(:is(code, code *)),
-        #side-nav-container * {
+        #${TEMPLATE_CONTAINER_ID} *:not(:is(code, code *)),
+        #${SIDE_NAV_CONTAINER_ID} * {
           font-family: ${fontFamily};
         }
       }

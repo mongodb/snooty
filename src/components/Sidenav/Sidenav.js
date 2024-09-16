@@ -16,6 +16,7 @@ import { formatText } from '../../utils/format-text';
 import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -242,7 +243,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
           ${disableScroll(!hideMobile)}
         `}
       />
-      <SidenavContainer {...topValues} template={template} id={'side-nav-container'}>
+      <SidenavContainer {...topValues} template={template} id={SIDE_NAV_CONTAINER_ID}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
