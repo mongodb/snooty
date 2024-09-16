@@ -70,7 +70,7 @@ const DarkModeGuideCue = ({ guideCueRef }) => {
   useEffect(() => {
     if (isMobile) return;
     const darkModeAnnounced = getLocalValue(DARK_MODE_ANNOUNCED);
-    if (darkModeAnnounced !== true) setIsOpen(true);
+    if (!darkModeAnnounced) setIsOpen(true);
     setLocalValue(DARK_MODE_ANNOUNCED, true);
   }, [isMobile]);
 
@@ -85,7 +85,6 @@ const DarkModeGuideCue = ({ guideCueRef }) => {
       refEl={guideCueRef}
       numberOfSteps={1}
       currentStep={1}
-      popoverZIndex={20000}
       portalRef={ref}
       scrollContainer={guideCueRef?.current}
       portalContainer={guideCueRef?.current}
@@ -116,7 +115,6 @@ const DarkModeGuideCue = ({ guideCueRef }) => {
             className={cx(css`
               color: ${palette.gray.base};
               &:hover,
-              &:focus-visible,
               &:active {
                 color: ${palette.black};
               }
