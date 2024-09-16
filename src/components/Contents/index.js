@@ -18,7 +18,7 @@ const formatTextOptions = {
 };
 
 const Contents = ({ displayOnDesktopOnly }) => {
-  const { activeHeadingId, headingNodes, showContentsComponent } = useContext(ContentsContext);
+  const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorId } = useContext(ContentsContext);
 
   if (headingNodes.length === 0 || !showContentsComponent) {
     return null;
@@ -29,15 +29,18 @@ const Contents = ({ displayOnDesktopOnly }) => {
   return (
     <StyledContents displayOnDesktopOnly={displayOnDesktopOnly}>
       <ContentsList label={label}>
-        {headingNodes.map(({ depth, id, title }) => {
-          // Depth of heading nodes refers to their depth in the AST
-          const listItemDepth = Math.max(depth - 2, 0);
-          return (
-            <ContentsListItem depth={listItemDepth} key={id} id={id} isActive={activeHeadingId === id}>
-              {formatText(title, formatTextOptions)}
-            </ContentsListItem>
-          );
-        })}
+        {headingNodes
+          // Don't filter if selector_id is null/undefined
+          .filter((headingNode) => !headingNode.selector_id || headingNode.selector_id === activeSelectorId)
+          .map(({ depth, id, title }) => {
+            // Depth of heading nodes refers to their depth in the AST
+            const listItemDepth = Math.max(depth - 2, 0);
+            return (
+              <ContentsListItem depth={listItemDepth} key={id} id={id} isActive={activeHeadingId === id}>
+                {formatText(title, formatTextOptions)}
+              </ContentsListItem>
+            );
+          })}
       </ContentsList>
     </StyledContents>
   );

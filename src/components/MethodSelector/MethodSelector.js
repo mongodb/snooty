@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { RadioBox, RadioBoxGroup } from '@leafygreen-ui/radio-box-group';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { ContentsContext } from '../Contents/contents-context';
 import MethodOptionContent from './MethodOptionContent';
 
 const STORAGE_KEY = 'methodSelectorId';
@@ -104,7 +105,10 @@ const hrStyle = css`
 const MethodSelector = ({ nodeData: { children } }) => {
   const optionCount = children.length;
   const [selectedMethod, setSelectedMethod] = useState(children[0]?.options?.id);
+  const { setActiveSelectorId } = useContext(ContentsContext);
   const [selectedIdx, setSelectedIdx] = useState(0);
+
+  setActiveSelectorId(selectedMethod);
 
   // Load method ID saved from last session, if applicable.
   useEffect(() => {
