@@ -1,4 +1,4 @@
-import { AVAILABLE_LANGUAGES, getLocaleMapping, localizePath } from '../../../src/utils/locale';
+import { getAvailableLanguages, getLocaleMapping, localizePath } from '../../../src/utils/locale';
 
 describe('getLocaleMapping', () => {
   it.each([
@@ -7,7 +7,7 @@ describe('getLocaleMapping', () => {
     ['https://www.mongodb.com', 'introduction'],
   ])('returns a valid mapping of URLs', (siteUrl, slug) => {
     const mapping = getLocaleMapping(siteUrl, slug);
-    expect(Object.keys(mapping)).toHaveLength(AVAILABLE_LANGUAGES.length);
+    expect(Object.keys(mapping)).toHaveLength(getAvailableLanguages().length);
     expect(mapping).toMatchSnapshot();
   });
 });

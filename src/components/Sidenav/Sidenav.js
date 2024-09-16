@@ -242,7 +242,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
           ${disableScroll(!hideMobile)}
         `}
       />
-      <SidenavContainer {...topValues} template={template}>
+      <SidenavContainer {...topValues} template={template} id={'side-nav-container'}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"

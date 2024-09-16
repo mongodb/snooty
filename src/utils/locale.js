@@ -24,12 +24,25 @@ export const AVAILABLE_LANGUAGES = [
   { language: 'Português', localeCode: 'pt-br' },
 ];
 
-if (process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
-  AVAILABLE_LANGUAGES.push({ language: '日本語', localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' });
-}
+// Languages in current development that we do not want displayed publicly yet
+const HIDDEN_LANGUAGES = [{ language: '日本語', localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' }];
+
+/**
+ * @param {boolean} forceAll - Bypasses feature flag requirements if necessary
+ * @returns An array of languages supported for translation
+ */
+export const getAvailableLanguages = (forceAll = false) => {
+  const langs = [...AVAILABLE_LANGUAGES];
+
+  if (forceAll || process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
+    langs.push(...HIDDEN_LANGUAGES);
+  }
+
+  return langs;
+};
 
 const validateLocaleCode = (potentialCode) =>
-  !!AVAILABLE_LANGUAGES.find(({ localeCode }) => potentialCode === localeCode);
+  !!getAvailableLanguages().find(({ localeCode }) => potentialCode === localeCode);
 
 /**
  * Strips the first locale code found in the slug. This function should be used to determine the original un-localized path of a page.
@@ -62,17 +75,23 @@ const stripLocale = (slug) => {
 
 export const getAllLocaleCssStrings = () => {
   const strings = [];
+  // We want to bypass feature flag requirements to ensure fonts for hidden languages are always included
+  const allLangs = getAvailableLanguages(true);
 
-  AVAILABLE_LANGUAGES.forEach(({ localeCode, fontFamily }) => {
+  allLangs.forEach(({ localeCode, fontFamily }) => {
     if (!fontFamily) {
       return;
     }
     const [languageCode] = localeCode.split('-');
     // Only check that languageCode is in the beginning to be flexible when region code is capitalized
-    // For example: zh-cn and zh-CN will be treated the same
+    // For example: zh-cn and zh-CN will be treated the same.
+    // We want to target everything except for inline code, code blocks, and the consistent-nav components
     strings.push(`
-      html[lang^=${languageCode}] *:not(:is(code, code *)) {
-        font-family: ${fontFamily};
+      html[lang^=${languageCode}] {
+        #template-container *:not(:is(code, code *)),
+        #side-nav-container * {
+          font-family: ${fontFamily};
+        }
       }
     `);
   });
@@ -139,7 +158,7 @@ export const getLocaleMapping = (siteUrl, slug) => {
   const normalizedSiteUrl = siteUrl?.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
   const localeHrefMap = {};
 
-  AVAILABLE_LANGUAGES.forEach(({ localeCode }) => {
+  getAvailableLanguages().forEach(({ localeCode }) => {
     const localizedPath = localizePath(slugForUrl, localeCode);
     const targetUrl = normalizedSiteUrl + localizedPath;
     localeHrefMap[localeCode] = assertTrailingSlash(targetUrl);
