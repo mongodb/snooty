@@ -14,6 +14,7 @@ import debounce from '../../utils/debounce';
 import { isBrowser } from '../../utils/is-browser';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { SuspenseHelper } from '../SuspenseHelper';
+import { getCurrLocale } from '../../utils/locale';
 import { searchIconStyling, searchInputStyling, StyledInputContainer } from './styles';
 import { ShortcutIcon, SparkleIcon } from './SparkIcon';
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
@@ -60,6 +61,7 @@ const SearchInput = ({ className, slug }) => {
   const [selectedOption, setSelectedOption] = useState(0);
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
   const { search } = useLocation();
+  const locale = getCurrLocale();
 
   useBackdropClick(
     () => {
@@ -80,24 +82,27 @@ const SearchInput = ({ className, slug }) => {
     return () => debounced();
   }, [searchValue]);
 
-  const keyPressHandler = useCallback(async (event) => {
-    // cmd+k or ctrl+k focuses search bar,
-    // unless already focused on an input field
-    const holdingCtrlCmd = (navigator.userAgent.includes('Mac') && event.metaKey) || event.ctrlKey;
-    if (holdingCtrlCmd && event.key === 'k' && document.activeElement.tagName.toLowerCase() !== 'input') {
-      event.preventDefault();
-      inputRef.current?.focus();
-      return;
-    }
+  const keyPressHandler = useCallback(
+    async (event) => {
+      // cmd+k or ctrl+k focuses search bar,
+      // unless already focused on an input field
+      const holdingCtrlCmd = (navigator.userAgent.includes('Mac') && event.metaKey) || event.ctrlKey;
+      if (holdingCtrlCmd && event.key === 'k' && document.activeElement.tagName.toLowerCase() !== 'input') {
+        event.preventDefault();
+        inputRef.current?.focus();
+        return;
+      }
 
-    // if currently focused on search input,
-    // activates the chatbot modal
-    if (event.target.isSameNode(inputRef.current) && event.key === '/') {
-      event.preventDefault();
-      setIsOpen(false);
-      return menuRef.current?.select(1);
-    }
-  }, []);
+      // if currently focused on search input,
+      // activates the chatbot modal
+      if (event.target.isSameNode(inputRef.current) && event.key === '/' && locale === 'en-us') {
+        event.preventDefault();
+        setIsOpen(false);
+        return menuRef.current?.select(1);
+      }
+    },
+    [locale]
+  );
 
   // adding keyboard shortcuts document wide
   useEffect(() => {

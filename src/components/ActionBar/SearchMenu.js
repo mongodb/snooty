@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { useAllDocsets } from '../../hooks/useAllDocsets';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
-import { localizePath } from '../../utils/locale';
+import { getCurrLocale, localizePath } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { suggestionStyling } from './styles';
@@ -22,6 +22,7 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
   const { project } = useSnootyMetadata();
   const docsets = useAllDocsets();
   const { snootyEnv } = useSiteMetadata();
+  const locale = getCurrLocale();
 
   // get search url for staging and prod environments
   // all other environments will fall back to prod
@@ -83,33 +84,36 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
+  const searchOptions = useMemo(() => {
+    const useChatbot = !!conversation.conversationId && locale === 'en-us';
+    return SEARCH_SUGGESTIONS.slice(0, useChatbot ? SEARCH_SUGGESTIONS.length : 1);
+  }, [conversation, locale]);
+
   return (
     <>
       <SearchResultsMenu open={isOpen} refEl={searchBoxRef} ref={menuRef}>
-        {SEARCH_SUGGESTIONS.slice(0, !conversation.conversationId ? 1 : SEARCH_SUGGESTIONS.length).map(
-          (suggestion, i) => {
-            const { copy } = suggestion;
-            const isChatbot = i === 1;
-            return (
-              <SearchResult
-                className={cx(suggestionStyling({ copy }))}
-                key={`result-${i}`}
-                id={`result-${i}`}
-                onClick={async () => handleSearchResultClick(i === 1)}
-                highlighted={selectedOption === i}
-              >
-                {!isChatbot && <>{searchValue}</>}
-                {isChatbot && (
-                  <>
-                    {suggestion.icon}
-                    {searchValue}
-                    {suggestion.shortcutIcon}
-                  </>
-                )}
-              </SearchResult>
-            );
-          }
-        )}
+        {searchOptions.map((suggestion, i) => {
+          const { copy } = suggestion;
+          const isChatbot = i === 1;
+          return (
+            <SearchResult
+              className={cx(suggestionStyling({ copy }))}
+              key={`result-${i}`}
+              id={`result-${i}`}
+              onClick={async () => handleSearchResultClick(i === 1)}
+              highlighted={selectedOption === i}
+            >
+              {!isChatbot && <>{searchValue}</>}
+              {isChatbot && (
+                <>
+                  {suggestion.icon}
+                  {searchValue}
+                  {suggestion.shortcutIcon}
+                </>
+              )}
+            </SearchResult>
+          );
+        })}
       </SearchResultsMenu>
       <ModalView
         inputBottomText={
