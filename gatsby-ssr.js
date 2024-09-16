@@ -6,7 +6,7 @@ import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
 import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang';
 
-export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }, pluginOptions) => {
+export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
   const headComponents = [
     // GTM Pathway
     <script
