@@ -45,6 +45,7 @@ class RealmInterface {
   }
 
   async fetchDocset(matchConditions = { project: siteMetadata.project }) {
+    console.log(siteMetadata.reposDatabase)
     return this.realmClient.callFunction('fetchDocset', siteMetadata.reposDatabase, matchConditions);
   }
 
