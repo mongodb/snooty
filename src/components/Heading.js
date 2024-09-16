@@ -7,6 +7,7 @@ import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import useScreenSize from '../hooks/useScreenSize';
 import { usePageContext } from '../context/page-context';
+import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -14,6 +15,7 @@ import { InstruqtContext } from './Instruqt/instruqt-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
+import { TimeRequired } from './MultiPageTutorials';
 
 const h2Styling = css`
   margin-top: 16px;
@@ -28,6 +30,14 @@ const headingStyles = (sectionDepth) => css`
 
 const labButtonStyling = css`
   margin-left: 18px;
+`;
+
+const contentsStyle = css`
+  margin-top: ${theme.size.medium};
+
+  @media ${theme.screenSize.largeAndUp} {
+    display: none;
+  }
 `;
 
 const determineHeading = (sectionDepth) => {
@@ -93,7 +103,12 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
           )}
         </HeadingTag>
       </ConditionalWrapper>
-      {isPageTitle && <Contents />}
+      {isPageTitle && (
+        <>
+          <TimeRequired />
+          <Contents className={contentsStyle} />
+        </>
+      )}
     </>
   );
 };

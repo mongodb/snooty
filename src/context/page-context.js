@@ -4,6 +4,7 @@ export const PageContext = createContext({
   page: null,
   template: null,
   slug: null,
+  options: null,
 });
 
 export const usePageContext = () => {

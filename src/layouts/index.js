@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import { Sidenav } from '../components/Sidenav';
 import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
-import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
@@ -99,7 +98,6 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
     () => page?.ast?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug],
     [slug] // eslint-disable-line react-hooks/exhaustive-deps
   );
-  useDelightedSurvey(slug, project);
 
   return (
     <>
