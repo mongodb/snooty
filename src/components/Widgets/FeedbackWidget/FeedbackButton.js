@@ -38,6 +38,8 @@ const FeedbackButton = () => {
           darkModePrestyling,
           css`
             ${displayNone.onMobileAndTablet}
+            // For vertical languages (chinese, korean, japanese)
+            text-wrap: nowrap;
           `
         )}
         onClick={() => (!feedback ? initializeFeedback() : abandon())}
