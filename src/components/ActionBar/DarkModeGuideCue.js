@@ -41,6 +41,16 @@ const GuideCueHeader = styled.div`
   justify-content: center;
 `;
 
+const FocusTrapInvisibleButton = styled.button`
+  border: none;
+  outline: none;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+`;
+
 const VideoContainer = styled.div`
   width: 242px;
   overflow: hidden;
@@ -110,6 +120,8 @@ const DarkModeGuideCue = ({ guideCueRef }) => {
     >
       <GuideCueContent>
         <GuideCueHeader>
+          {/* Invisible button to trap focus. Ask from design to not have close button auto-focused */}
+          <FocusTrapInvisibleButton />
           <CloseButton
             onClick={onClose}
             className={cx(css`
