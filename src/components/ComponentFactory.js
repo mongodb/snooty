@@ -61,6 +61,7 @@ import Subscript from './Subscript';
 import SubstitutionReference from './SubstitutionReference';
 import Superscript from './Superscript';
 import Tabs from './Tabs';
+import TabSelectors from './Tabs/TabSelectors';
 import Target from './Target';
 import Text from './Text';
 import Time from './Time';
@@ -88,7 +89,6 @@ const IGNORED_NAMES = new Set([
   'raw',
   'short-description',
   'tabs-pillstrip',
-  'tabs-selector',
   'toctree',
   'meta',
   'facet',
@@ -183,6 +183,7 @@ const componentMap = {
   strong: Strong,
   substitution_reference: SubstitutionReference,
   tabs: Tabs,
+  'tabs-selector': TabSelectors,
   target: Target,
   text: Text,
   time: Time,
