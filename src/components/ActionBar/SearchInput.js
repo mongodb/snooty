@@ -62,6 +62,7 @@ const SearchInput = ({ className, slug }) => {
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
   const { search } = useLocation();
   const locale = getCurrLocale();
+  const isEnglish = locale === 'en-us';
 
   useBackdropClick(
     () => {
@@ -95,13 +96,13 @@ const SearchInput = ({ className, slug }) => {
 
       // if currently focused on search input,
       // activates the chatbot modal
-      if (event.target.isSameNode(inputRef.current) && event.key === '/' && locale === 'en-us') {
+      if (event.target.isSameNode(inputRef.current) && event.key === '/' && isEnglish) {
         event.preventDefault();
         setIsOpen(false);
         return menuRef.current?.select(1);
       }
     },
-    [locale]
+    [isEnglish]
   );
 
   // adding keyboard shortcuts document wide
@@ -169,7 +170,7 @@ const SearchInput = ({ className, slug }) => {
       }
 
       case keyMap.ArrowDown: {
-        if (isOpen) {
+        if (isOpen && isEnglish) {
           setSelectedOption((selectedOption + 1) % 2);
           inputRef.current?.focus();
           e.preventDefault();
@@ -178,7 +179,7 @@ const SearchInput = ({ className, slug }) => {
       }
 
       case keyMap.ArrowUp: {
-        if (isOpen) {
+        if (isOpen && isEnglish) {
           setSelectedOption(Math.abs(selectedOption - (1 % 2)));
           inputRef.current?.focus();
           e.preventDefault();
