@@ -30,6 +30,10 @@ echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 echo GATSBY_SITE=landing
 echo GATSBY_PARSER_USER=bianca.laube
 echo GATSBY_PARSER_BRANCH=DOP-5025
+export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
+export GATSBY_SITE=landing
+export GATSBY_PARSER_USER=bianca.laube
+export GATSBY_PARSER_BRANCH=DOP-5025
 # do i need to set anymore variables
 
 # run the site
