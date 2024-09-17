@@ -1,9 +1,9 @@
 import React from 'react';
 import { UnifiedFooter } from '@mdb/consistent-nav';
-import { AVAILABLE_LANGUAGES, getCurrLocale, onSelectLocale } from '../utils/locale';
+import { getAvailableLanguages, getCurrLocale, onSelectLocale } from '../utils/locale';
 
 const Footer = () => {
-  const enabledLocales = AVAILABLE_LANGUAGES.map((language) => language.localeCode);
+  const enabledLocales = getAvailableLanguages().map((language) => language.localeCode);
   return <UnifiedFooter onSelectLocale={onSelectLocale} locale={getCurrLocale()} enabledLocales={enabledLocales} />;
 };
 

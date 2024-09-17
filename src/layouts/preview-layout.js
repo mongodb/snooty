@@ -7,7 +7,6 @@ import PreviewHeader from '../components/Header/preview-header';
 import { Sidenav } from '../components/Sidenav';
 import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
-import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { theme } from '../theme/docsTheme';
 import { MetadataProvider } from '../utils/use-snooty-metadata';
 import ActionBar from '../components/ActionBar/ActionBar';
@@ -144,7 +143,6 @@ const DefaultLayout = ({
   const { chapters, guides, slugToTitle, toctree, eol } = metadata;
 
   const pageTitle = React.useMemo(() => page?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug], [slug]); // eslint-disable-line react-hooks/exhaustive-deps
-  useDelightedSurvey(slug, metadata.project);
 
   return (
     <>

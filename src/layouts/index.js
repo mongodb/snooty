@@ -8,11 +8,11 @@ import Header from '../components/Header';
 import { Sidenav } from '../components/Sidenav';
 import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
-import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
+import { getAllLocaleCssStrings } from '../utils/locale';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -26,6 +26,8 @@ const footerOverrides = css`
 `;
 
 const globalCSS = css`
+  ${getAllLocaleCssStrings()}
+
   body {
     font-size: 16px;
     line-height: 24px;
@@ -100,7 +102,6 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
     () => page?.ast?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug],
     [slug] // eslint-disable-line react-hooks/exhaustive-deps
   );
-  useDelightedSurvey(slug, project);
 
   return (
     <>
