@@ -83,6 +83,7 @@ const DocumentBody = (props) => {
   const { location, data, pageContext } = props;
   const page = data?.page?.ast;
   const { slug, template, repoBranches } = pageContext;
+  const tabsMainColumn = page?.options?.['tabs-selector-position'] === 'main';
 
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
@@ -147,7 +148,7 @@ const DocumentBody = (props) => {
           >
             <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
               <FootnoteContext.Provider value={{ footnotes }}>
-                <PageContext.Provider value={{ page, template, slug, options: page?.options }}>
+                <PageContext.Provider value={{ page, template, slug, options: page?.options, tabsMainColumn }}>
                   <div id={TEMPLATE_CONTAINER_ID}>
                     <Template {...props} useChatbot={useChatbot}>
                       {pageNodes.map((child, index) => (

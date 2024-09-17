@@ -11,6 +11,7 @@ import TabSelectors from '../components/Tabs/TabSelectors';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 import { theme } from '../theme/docsTheme';
+import { usePageContext } from '../context/page-context';
 
 const MAX_CONTENT_WIDTH = '775px';
 
@@ -33,6 +34,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
+  const { tabsMainColumn } = usePageContext();
   const hasMethodSelector = pageOptions?.has_method_selector;
   const activeTutorial = useActiveMpTutorial();
 
@@ -50,7 +52,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       </StyledMainColumn>
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
-        {!hasMethodSelector && <TabSelectors />}
+        {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
         <Contents />
       </StyledRightColumn>
     </DocumentContainer>
