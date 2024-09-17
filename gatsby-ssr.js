@@ -5,8 +5,9 @@ import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
 import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang';
+import { getHtmlLangFormat } from './src/utils/locale';
 
-export const onRenderBody = ({ setHeadComponents }) => {
+export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
   const headComponents = [
     // GTM Pathway
     <script
@@ -84,6 +85,10 @@ export const onRenderBody = ({ setHeadComponents }) => {
       />
     );
   }
+  setHtmlAttributes({
+    // Help work with translated content locally; Smartling should handle rewriting the lang
+    lang: process.env.GATSBY_LOCALE ? getHtmlLangFormat(process.env.GATSBY_LOCALE) : 'en',
+  });
   setHeadComponents(headComponents);
 };
 

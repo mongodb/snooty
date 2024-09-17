@@ -11,6 +11,7 @@ import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
+import { getAllLocaleCssStrings } from '../utils/locale';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -24,6 +25,8 @@ const footerOverrides = css`
 `;
 
 const globalCSS = css`
+  ${getAllLocaleCssStrings()}
+
   body {
     font-size: 16px;
     line-height: 24px;
