@@ -94,7 +94,7 @@ const SearchInput = ({ className, slug }) => {
         return;
       }
 
-      // if currently focused on search input,
+      // if currently focused on search input and on English site (therefore, chatbot is an option),
       // activates the chatbot modal
       if (event.target.isSameNode(inputRef.current) && event.key === '/' && isEnglish) {
         event.preventDefault();
