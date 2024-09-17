@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Contents from '../components/Contents';
-import InternalPageNav from '../components/InternalPageNav';
+import { InternalPageNav } from '../components/InternalPageNav';
+import { StepNumber, useActiveMpTutorial } from '../components/MultiPageTutorials';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/Tabs/TabSelectors';
@@ -35,12 +36,14 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
   const { tabsMainColumn } = usePageContext();
   const hasMethodSelector = pageOptions?.has_method_selector;
+  const activeTutorial = useActiveMpTutorial();
 
   return (
     <DocumentContainer>
       <StyledMainColumn>
         <div className="body">
           <Breadcrumbs siteTitle={title} slug={slug} />
+          {activeTutorial && <StepNumber slug={slug} activeTutorial={activeTutorial} />}
           {children}
           {showPrevNext && (
             <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={toctreeOrder} />
@@ -50,7 +53,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
         {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
-        <Contents displayOnDesktopOnly={true} />
+        <Contents />
       </StyledRightColumn>
     </DocumentContainer>
   );

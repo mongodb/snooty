@@ -1968,6 +1968,85 @@ exports[`Search Results Page considers a given search filter query param and dis
   }
 }
 
+.emotion-87 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+}
+
+.emotion-87:focus-visible,
+.emotion-87[data-focus="true"] {
+  outline: none;
+}
+
+.emotion-87:active,
+.emotion-87[data-active="true"],
+.emotion-87:focus,
+.emotion-87:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-87:focus-visible,
+.emotion-87[data-focus="true"] {
+  color: #001E2B;
+}
+
+.emotion-87:hover,
+.emotion-87[data-hover="true"],
+.emotion-87:active,
+.emotion-87[data-active="true"] {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-87:focus-visible,
+.emotion-87[data-focus="true"] {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.dark-theme .emotion-87 {
+  background-color: var(--gray-dark1);
+  border-color: var(--gray-base);
+  color: var(--white);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
+.dark-theme .emotion-87 svg {
+  color: var(--gray-light2);
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -2368,7 +2447,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-22"
+          class="lg-ui-button-0000 emotion-87"
           data-lgid="lg-button"
           type="button"
         >
@@ -3448,6 +3527,85 @@ exports[`Search Results Page does not return results for a given search term wit
   }
 }
 
+.emotion-61 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+}
+
+.emotion-61:focus-visible,
+.emotion-61[data-focus="true"] {
+  outline: none;
+}
+
+.emotion-61:active,
+.emotion-61[data-active="true"],
+.emotion-61:focus,
+.emotion-61:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-61:focus-visible,
+.emotion-61[data-focus="true"] {
+  color: #001E2B;
+}
+
+.emotion-61:hover,
+.emotion-61[data-hover="true"],
+.emotion-61:active,
+.emotion-61[data-active="true"] {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-61:focus-visible,
+.emotion-61[data-focus="true"] {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.dark-theme .emotion-61 {
+  background-color: var(--gray-dark1);
+  border-color: var(--gray-base);
+  color: var(--white);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
+.dark-theme .emotion-61 svg {
+  color: var(--gray-light2);
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -3977,7 +4135,7 @@ exports[`Search Results Page does not return results for a given search term wit
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-61"
           data-lgid="lg-button"
           type="button"
         >
@@ -5582,6 +5740,85 @@ exports[`Search Results Page renders loading images before returning no results 
   }
 }
 
+.emotion-134 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+}
+
+.emotion-134:focus-visible,
+.emotion-134[data-focus="true"] {
+  outline: none;
+}
+
+.emotion-134:active,
+.emotion-134[data-active="true"],
+.emotion-134:focus,
+.emotion-134:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-134:focus-visible,
+.emotion-134[data-focus="true"] {
+  color: #001E2B;
+}
+
+.emotion-134:hover,
+.emotion-134[data-hover="true"],
+.emotion-134:active,
+.emotion-134[data-active="true"] {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-134:focus-visible,
+.emotion-134[data-focus="true"] {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.dark-theme .emotion-134 {
+  background-color: var(--gray-dark1);
+  border-color: var(--gray-base);
+  color: var(--white);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
+.dark-theme .emotion-134 svg {
+  color: var(--gray-light2);
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -6092,7 +6329,7 @@ exports[`Search Results Page renders loading images before returning no results 
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-134"
           data-lgid="lg-button"
           type="button"
         >
@@ -7265,6 +7502,85 @@ exports[`Search Results Page renders loading images before returning nonempty re
   }
 }
 
+.emotion-134 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+}
+
+.emotion-134:focus-visible,
+.emotion-134[data-focus="true"] {
+  outline: none;
+}
+
+.emotion-134:active,
+.emotion-134[data-active="true"],
+.emotion-134:focus,
+.emotion-134:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-134:focus-visible,
+.emotion-134[data-focus="true"] {
+  color: #001E2B;
+}
+
+.emotion-134:hover,
+.emotion-134[data-hover="true"],
+.emotion-134:active,
+.emotion-134[data-active="true"] {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-134:focus-visible,
+.emotion-134[data-focus="true"] {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.dark-theme .emotion-134 {
+  background-color: var(--gray-dark1);
+  border-color: var(--gray-base);
+  color: var(--white);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
+.dark-theme .emotion-134 svg {
+  color: var(--gray-light2);
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -7775,7 +8091,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-134"
           data-lgid="lg-button"
           type="button"
         >
@@ -9149,6 +9465,85 @@ exports[`Search Results Page renders results from a given search term query para
   }
 }
 
+.emotion-82 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 0;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  border-radius: 6px;
+  background-color: #F9FBFA;
+  border-color: #889397;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  height: 36px;
+}
+
+.emotion-82:focus-visible,
+.emotion-82[data-focus="true"] {
+  outline: none;
+}
+
+.emotion-82:active,
+.emotion-82[data-active="true"],
+.emotion-82:focus,
+.emotion-82:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.emotion-82:focus-visible,
+.emotion-82[data-focus="true"] {
+  color: #001E2B;
+}
+
+.emotion-82:hover,
+.emotion-82[data-hover="true"],
+.emotion-82:active,
+.emotion-82[data-active="true"] {
+  color: #001E2B;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px #E8EDEB;
+}
+
+.emotion-82:focus-visible,
+.emotion-82[data-focus="true"] {
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.dark-theme .emotion-82 {
+  background-color: var(--gray-dark1);
+  border-color: var(--gray-base);
+  color: var(--white);
+  box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+}
+
+.dark-theme .emotion-82 svg {
+  color: var(--gray-light2);
+}
+
 <div
     class="emotion-0 emotion-1"
   >
@@ -9519,7 +9914,7 @@ exports[`Search Results Page renders results from a given search term query para
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-17"
+          class="lg-ui-button-0000 emotion-82"
           data-lgid="lg-button"
           type="button"
         >

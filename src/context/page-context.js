@@ -5,6 +5,7 @@ export const PageContext = createContext({
   template: null,
   slug: null,
   tabsMainColumn: null,
+  options: null,
 });
 
 export const usePageContext = () => {

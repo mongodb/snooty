@@ -151,7 +151,7 @@ const DocumentBody = (props) => {
           >
             <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
               <FootnoteContext.Provider value={{ footnotes }}>
-                <PageContext.Provider value={{ page, template, slug, tabsMainColumn }}>
+                <PageContext.Provider value={{ page, template, slug, options: page?.options, tabsMainColumn }}>
                   <div id="template-container">
                     <Template {...props} useChatbot={useChatbot}>
                       {pageNodes.map((child, index) => (
