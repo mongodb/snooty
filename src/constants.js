@@ -1,4 +1,4 @@
-// Append "docs" to the beginning due to differentiate from LG's internal side-nav-container testid
+// Append "docs" to the beginning of SIDE_NAV_CONTAINER_ID due to differentiate from LG's internal side-nav-container testid
 export const SIDE_NAV_CONTAINER_ID = 'docs-side-nav-container';
 export const TEMPLATE_CONTAINER_ID = 'template-container';
 

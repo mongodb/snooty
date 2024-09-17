@@ -18,7 +18,7 @@ export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
 // Update this as more languages are introduced
 // Because the client-side redirect script cannot use an import, PLEASE remember to update the list of supported languages
 // in redirect-based-on-lang.js
-export const AVAILABLE_LANGUAGES = [
+const AVAILABLE_LANGUAGES = [
   { language: 'English', localeCode: 'en-us' },
   { language: '简体中文', localeCode: 'zh-cn', fontFamily: 'Noto Sans SC' },
   { language: '한국어', localeCode: 'ko-kr', fontFamily: 'Noto Sans KR' },
