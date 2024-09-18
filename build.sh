@@ -35,6 +35,6 @@ export GATSBY_PARSER_BRANCH=main
 # do i need to set anymore variables
 
 # run the site
-npm run build
+npm run build:no-prefix
 
 # make sure correct npm version ? 
