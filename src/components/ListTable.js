@@ -98,15 +98,15 @@ const stubCellStyle = css`
   }
 `;
 
-// const zebraStripingStyle = css`
-//   &:nth-of-type(even) {
-//     background-color: ${palette.gray.light3};
+const zebraStripingStyle = css`
+  &:nth-of-type(even) {
+    background-color: ${palette.gray.light3};
 
-//     .dark-theme & {
-//       background-color: ${palette.gray.dark4};
-//     }
-//   }
-// `;
+    .dark-theme & {
+      background-color: ${palette.gray.dark4};
+    }
+  }
+`;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
 
@@ -159,8 +159,8 @@ const includesNestedTable = (rows) => {
   return rows.some((row) => checkNodeForTable(row));
 };
 
-const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
-  <Row>
+const ListTableRow = ({ row = [], stubColumnCount, siteTheme, className, ...rest }) => (
+  <Row className={className}>
     {row.map((cell, colIndex) => {
       const skipPTag = hasOneChild(cell.children);
       const contents = cell.children.map((child, i) => (
@@ -266,6 +266,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
               stubColumnCount={stubColumnCount}
               row={row.children?.[0]?.children}
               siteTheme={siteTheme}
+              className={shouldAlternateRowColor && zebraStripingStyle}
             />
           ))}
         </TableBody>
