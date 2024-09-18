@@ -14,7 +14,7 @@ import Heading from '../Heading';
 import { collapsibleStyle, headerContainerStyle, headerStyle, iconStyle, innerContentStyle } from './styles';
 import './styles.css';
 
-const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
+const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest }) => {
   const { id, heading, sub_heading: subHeading } = options;
   const { hash } = useLocation();
 
@@ -68,7 +68,8 @@ const Collapsible = ({ nodeData: { children, options }, ...rest }) => {
     <Box className={cx('collapsible', collapsibleStyle)}>
       <Box className={cx(headerContainerStyle)}>
         <Box>
-          <Heading className={cx(headerStyle)} sectionDepth={2} nodeData={headingNodeData}>
+          {/* Adding 1 to reflect logic in parser */}
+          <Heading className={cx(headerStyle)} sectionDepth={sectionDepth + 1} nodeData={headingNodeData}>
             {heading}
           </Heading>
           <Body baseFontSize={13}>{subHeading}</Body>
