@@ -20,8 +20,8 @@ fi
 
 echo "======================================================================================================================================================================="
 echo "========================================================================== Running parser... =========================================================================="
-./snooty-parser/snooty/snooty build /Users/bianca.laube/Documents/repos/docs-content-repos/docs-landing --output=./bundle.zip
-#  snooty build path-to-repo/cloud-docs --output=bundle.zip
+./snooty-parser/snooty/snooty build $(pwd)/docs-landing --output=./bundle.zip
+#  ./snooty-parser/snooty/snooty build /Users/bianca.laube/Documents/repos/docs-content-repos/docs-landing --output=./bundle.zip
 echo "========================================================================== Parser complete ============================================================================"
 echo "======================================================================================================================================================================="
 
@@ -29,11 +29,11 @@ echo "==========================================================================
 echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 echo GATSBY_SITE=landing
 echo GATSBY_PARSER_USER=bianca.laube
-echo GATSBY_PARSER_BRANCH=DOP-5025
+echo GATSBY_PARSER_BRANCH=DOP-main
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 export GATSBY_SITE=landing
 export GATSBY_PARSER_USER=bianca.laube
-export GATSBY_PARSER_BRANCH=DOP-5025
+export GATSBY_PARSER_BRANCH=main
 # do i need to set anymore variables
 
 # run the site
