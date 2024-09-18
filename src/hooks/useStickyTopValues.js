@@ -14,23 +14,46 @@ const getTopValue = (eol, heights) => {
   return `${topValue}px`;
 };
 
-const useStickyTopValues = (eol, includeActionBar = false) => {
+/**
+ *  Get string values (px units) of buffers needed for sticky elements
+ *
+ * @param {boolean}     eol           if product is eol, meaning no nav bar
+ * @param {boolean}     isAbsolute    if element will be absolute positioned and
+ *                                    needs to consider universal navbar height
+ * * @param {boolean}   hasBanner     if there is a banner, absolute elements need to
+ *                                    clear
+ *
+ * @returns {[key: string]: string}
+ */
+const useStickyTopValues = (eol, isAbsolute, hasBanner) => {
   const topLarge = useMemo(
-    () => getTopValue(eol, [theme.header.navbarHeight, ...(includeActionBar ? [theme.header.actionBarHeight] : [])]),
-    [eol, includeActionBar]
+    () =>
+      getTopValue(eol, [
+        theme.header.actionBarMobileHeight,
+        ...(isAbsolute ? [theme.header.navbarHeight] : []),
+        ...(hasBanner ? [theme.header.bannerHeight] : []),
+      ]),
+    [eol, isAbsolute, hasBanner]
   );
 
-  const actionBarHeight = useMemo(
-    () => (includeActionBar ? [theme.header.actionBarMobileHeight] : []),
-    [includeActionBar]
-  );
   const topMedium = useMemo(
-    () => getTopValue(eol, [theme.header.navbarMobileHeight, ...actionBarHeight]),
-    [actionBarHeight, eol]
+    () =>
+      getTopValue(eol, [
+        theme.header.actionBarMobileHeight,
+        ...(isAbsolute ? [theme.header.navbarMobileHeight] : []),
+        ...(hasBanner ? [theme.header.bannerHeight] : []),
+      ]),
+    [eol, hasBanner, isAbsolute]
   );
+
   const topSmall = useMemo(
-    () => getTopValue(eol, [theme.header.navbarMobileHeight, theme.header.docsMobileMenuHeight, ...actionBarHeight]),
-    [actionBarHeight, eol]
+    () =>
+      getTopValue(eol, [
+        theme.header.actionBarMobileHeight,
+        ...(isAbsolute ? [theme.header.navbarMobileHeight] : []),
+        ...(hasBanner ? [theme.header.bannerHeight] : []),
+      ]),
+    [eol, isAbsolute, hasBanner]
   );
 
   return { topLarge, topMedium, topSmall };

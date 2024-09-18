@@ -3,36 +3,28 @@ import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
-import { feedbackId } from '../FeedbackWidget/FeedbackForm';
 import { theme } from '../../../../src/theme/docsTheme';
 import useScreenSize from '../../../hooks/useScreenSize';
 import useStickyTopValues from '../../../hooks/useStickyTopValues';
 import { InstruqtContext } from '../../Instruqt/instruqt-context';
-import { elementZIndex } from '../../../utils/dynamically-set-z-index';
 import { HeaderContext } from '../../Header/header-context';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
 import useNoScroll from './hooks/useNoScroll';
 
-const FloatingContainer = styled.div`
-  position: fixed;
-  z-index: 14;
-  bottom: ${({ hasOpenLabDrawer }) => (hasOpenLabDrawer ? '70px' : theme.size.large)};
-  right: ${theme.size.large};
-
+const CardContainer = styled.div`
   @media ${theme.screenSize.upToSmall} {
     padding-top: ${({ top }) => `${top}`};
-    right: 0;
-    top: 0;
-    bottom: 60px;
+    height: 100%;
     background-color: ${({ darkMode }) => (darkMode ? palette.black : palette.white)};
   }
 `;
 
 const Card = styled(LeafygreenCard)`
   /* Card Size */
-  width: 234px;
+  width: 290px;
+  padding: ${theme.size.medium} ${theme.size.default};
   display: flex;
   flex-direction: column;
   position: relative;
@@ -42,6 +34,7 @@ const Card = styled(LeafygreenCard)`
   }
 
   @media ${theme.screenSize.upToSmall} {
+    padding-top: 20%;
     width: 100vw;
     border-radius: 0;
     border-width: 0px;
@@ -55,7 +48,7 @@ const FeedbackCard = ({ isOpen, children }) => {
   // Ensure FeedbackCard can be fullscreen size
   const { isMobile } = useScreenSize();
   const { darkMode } = useDarkMode();
-  const { topSmall } = useStickyTopValues(false, process.env['GATSBY_ENABLE_DARK_MODE'] && isMobile);
+  const { topSmall } = useStickyTopValues(false, true);
   useNoScroll(isMobile);
   const { bannerContent } = useContext(HeaderContext);
   const topBuffer = useMemo(
@@ -65,19 +58,17 @@ const FeedbackCard = ({ isOpen, children }) => {
 
   const onClose = () => {
     abandon();
-    // reset the z-index set by the screenshot button in ScreenshotButton.js
-    elementZIndex.setZIndex('.widgets', theme.zIndexes.header);
   };
 
   return (
     isOpen && (
-      <FloatingContainer darkMode={darkMode} top={topBuffer} id={feedbackId} hasOpenLabDrawer={isLabOpen}>
+      <CardContainer darkMode={darkMode} top={topBuffer} hasOpenLabDrawer={isLabOpen}>
         <Card>
           <CloseButton onClick={onClose} />
           <ProgressBar />
           <div>{children}</div>
         </Card>
-      </FloatingContainer>
+      </CardContainer>
     )
   );
 };
