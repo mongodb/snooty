@@ -1,14 +1,4 @@
 body {
-  background-color: initial;
-  color: initial;
-}
-
-.dark-theme body {
-  background-color: var(--black);
-  color: var(--lg-color-dark-mode);
-}
-
-body {
   --font-color-primary: var(--black);
   --font-color-light: var(--gray-base);
   --heading-color-primary: var(--green-dark2);
@@ -92,6 +82,11 @@ body {
     border-radius: 9px;
     background-clip: content-box;
   }
+}
+
+body {
+  background-color: var(--background-color-primary);
+  color: var(--font-color-primary);
 }
 
 .nav-dark {

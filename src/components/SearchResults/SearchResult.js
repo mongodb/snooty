@@ -3,14 +3,12 @@ import sanitizeHtml from 'sanitize-html';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import Tag, { searchTagStyle, tagHeightStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import { getFacetTagVariant } from './Facets/utils';
 import { searchResultDynamicStyling } from './SearchResults';
-import { SEARCH_THEME_STYLES } from './styles/searchThemeStyles';
 
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
@@ -61,24 +59,35 @@ const StyledResultTitle = styled('p')`
   position: relative;
 `;
 
-const searchResultLinkStyling = ({ searchResultTitleColor, searchResultTitleColorOnVisited }) => css`
-  color: ${searchResultTitleColor};
+const searchResultLinkStyling = css`
   height: 100%;
   text-decoration: none;
   border-radius: ${theme.size.medium};
 
   ${StyledResultTitle} {
-    color: ${searchResultTitleColor};
+    color: ${palette.blue.base};
+
+    .dark-theme & {
+      color: ${palette.blue.light1};
+    }
   }
   :visited {
     ${StyledResultTitle} {
-      color: ${searchResultTitleColorOnVisited};
+      color: ${palette.purple.dark2};
+
+      .dark-theme & {
+        color: ${palette.purple.light2};
+      }
     }
   }
   :hover,
   :focus {
     ${StyledResultTitle} {
-      color: ${searchResultTitleColor};
+      color: ${palette.blue.base};
+
+      .dark-theme & {
+        color: ${palette.blue.light1};
+      }
       text-decoration: none;
     }
     ${SearchResultContainer} {
@@ -90,15 +99,61 @@ const searchResultLinkStyling = ({ searchResultTitleColor, searchResultTitleColo
 
 const StyledPreviewText = styled(Body)`
   font-size: ${theme.fontSize.small};
+  color: var(--font-color-primary);
   line-height: 20px;
   margin-bottom: ${theme.size.default};
   ${({ maxLines }) => truncate(maxLines)};
   // Reserve some space inside of the search result card when there is no preview
   min-height: 20px;
+
+  // Targets highlighted search term
+  > span {
+    background-color: ${palette.green.light2};
+
+    .dark-theme & {
+      background-color: ${palette.green.dark2};
+    }
+  }
 `;
 
 const StyledTag = styled(Tag)`
   ${searchTagStyle}
+`;
+
+const greenTagStyles = css`
+  background-color: ${palette.green.light3};
+  border: 1px solid ${palette.green.light2};
+  color: ${palette.green.dark2};
+
+  .dark-theme & {
+    background-color: ${palette.green.dark3};
+    border: 1px solid ${palette.green.dark2};
+    color: ${palette.green.light1};
+  }
+`;
+
+const blueTagStyles = css`
+  background-color: ${palette.blue.light3};
+  border: 1px solid ${palette.blue.light2};
+  color: ${palette.blue.dark1};
+
+  .dark-theme & {
+    background-color: ${palette.blue.dark3};
+    border: 1px solid ${palette.blue.dark2};
+    color: ${palette.blue.light1};
+  }
+`;
+
+const purpleTagStyles = css`
+  background-color: ${palette.purple.light3};
+  border: 1px solid ${palette.purple.light2};
+  color: ${palette.purple.dark2};
+
+  .dark-theme & {
+    background-color: ${palette.purple.dark3};
+    border: 1px solid ${palette.purple.dark2};
+    color: ${palette.purple.light2};
+  }
 `;
 
 const StylingTagContainer = styled('div')`
@@ -110,13 +165,10 @@ const StylingTagContainer = styled('div')`
 
 const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-const highlightSearchTerm = (text, searchTerm, darkMode) =>
+const highlightSearchTerm = (text, searchTerm) =>
   text.replace(
     new RegExp(escapeRegExp(searchTerm), 'gi'),
-    (result) =>
-      `<span style="background-color: ${
-        darkMode ? palette.green.dark2 : palette.green.light2
-      };${SEARCH_MATCH_STYLE}">${result}</span>`
+    (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
   );
 
 const spanAllowedStyles = {
@@ -149,9 +201,8 @@ const SearchResult = React.memo(
     facets,
     ...props
   }) => {
-    const { darkMode, theme: siteTheme } = useDarkMode();
     const { searchPropertyMapping, searchTerm, getFacetName, showFacets } = useContext(SearchContext);
-    const highlightedPreviewText = highlightSearchTerm(preview, searchTerm, darkMode);
+    const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
     const category = searchPropertyMapping?.[searchProperty]?.['categoryTitle'];
     const version = searchPropertyMapping?.[searchProperty]?.['versionSelectorLabel'];
@@ -163,11 +214,7 @@ const SearchResult = React.memo(
         href={url}
         onClick={onClick}
         {...props}
-        className={cx(
-          props.className,
-          searchResultLinkStyling(SEARCH_THEME_STYLES[siteTheme]),
-          searchResultDynamicStyling(SEARCH_THEME_STYLES[siteTheme])
-        )}
+        className={cx(props.className, searchResultLinkStyling, searchResultDynamicStyling)}
       >
         <SearchResultContainer>
           <StyledResultTitle
@@ -184,9 +231,21 @@ const SearchResult = React.memo(
           />
           {!showFacets && (
             <StylingTagContainer>
-              {!!category && <StyledTag variant="green">{category}</StyledTag>}
-              {!!version && <StyledTag variant="blue">{version}</StyledTag>}
-              {url.includes('/api/') && <StyledTag variant="purple">{'API'}</StyledTag>}
+              {!!category && (
+                <StyledTag variant="green" className={cx(greenTagStyles)}>
+                  {category}
+                </StyledTag>
+              )}
+              {!!version && (
+                <StyledTag variant="blue" className={cx(blueTagStyles)}>
+                  {version}
+                </StyledTag>
+              )}
+              {url.includes('/api/') && (
+                <StyledTag variant="purple" className={cx(purpleTagStyles)}>
+                  {'API'}
+                </StyledTag>
+              )}
             </StylingTagContainer>
           )}
           {showFacets && validFacets?.length > 0 && (

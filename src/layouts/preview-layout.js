@@ -9,6 +9,8 @@ import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
 import { theme } from '../theme/docsTheme';
 import { MetadataProvider } from '../utils/use-snooty-metadata';
+import ActionBar from '../components/ActionBar/ActionBar';
+import { StyledContentContainer } from '.';
 
 // These fonts are ported over from @mdb/flora design system repo
 // They are used on the content areas and are not included in Snooty itself
@@ -167,7 +169,10 @@ const DefaultLayout = ({
                 eol={eol}
               />
             )}
-            <ContentTransition slug={slug}>{children}</ContentTransition>
+            <StyledContentContainer>
+              <ActionBar template={template} slug={slug} sidenav={sidenav} />
+              <ContentTransition slug={slug}>{children}</ContentTransition>
+            </StyledContentContainer>
           </GlobalGrid>
         </RootProvider>
       </MetadataProvider>

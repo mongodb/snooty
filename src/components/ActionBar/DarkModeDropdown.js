@@ -3,14 +3,19 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { Menu, MenuItem } from '@leafygreen-ui/menu';
 import { DarkModeContext } from '../../context/dark-mode-context';
 import { theme } from '../../theme/docsTheme';
-import IconComputer from '../icons/Computer';
+import IconDarkmode from '../icons/DarkMode';
 
 const iconStyling = css`
+  display: block;
+  align-content: center;
   cursor: pointer;
+
+  > div {
+    position: relative;
+  }
 `;
 
 const menuStyling = css`
@@ -18,10 +23,15 @@ const menuStyling = css`
   margin-top: ${theme.size.small};
 `;
 
-const DarkModeDropdown = ({ ...props }) => {
+const DROPDOWN_ICON_SIZE = 20;
+const darkModeSvgStyle = {
+  width: DROPDOWN_ICON_SIZE,
+  height: DROPDOWN_ICON_SIZE,
+};
+
+const DarkModeDropdown = () => {
   // not using dark mode from LG/provider here to account for case of 'system' dark theme
   const { setDarkModePref, darkModePref } = useContext(DarkModeContext);
-  const { darkMode } = useDarkMode();
 
   const [open, setOpen] = useState(false);
 
@@ -46,9 +56,9 @@ const DarkModeDropdown = ({ ...props }) => {
         // since we are using usePortal=false to mitigate sticky header
         <IconButton as={Box} className={cx(iconStyling)} aria-label="Dark Mode Menu" aria-labelledby="Dark Mode Menu">
           {darkModePref === 'system' ? (
-            <IconComputer darkMode={darkMode} />
+            <IconDarkmode />
           ) : (
-            <Icon glyph={darkModePref === 'dark-theme' ? 'Moon' : 'Sun'} />
+            <Icon size={24} glyph={darkModePref === 'dark-theme' ? 'Moon' : 'Sun'} />
           )}
         </IconButton>
       }
@@ -56,21 +66,30 @@ const DarkModeDropdown = ({ ...props }) => {
       <MenuItem
         active={darkModePref === 'light-theme'}
         onClick={() => select('light-theme')}
-        glyph={<Icon glyph={'Sun'} />}
+        glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Sun'} />}
       >
         Light
       </MenuItem>
       <MenuItem
         active={darkModePref === 'dark-theme'}
         onClick={() => select('dark-theme')}
-        glyph={<Icon glyph={'Moon'} />}
+        glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Moon'} />}
       >
         Dark
       </MenuItem>
       <MenuItem
         active={darkModePref === 'system'}
         onClick={() => select('system')}
-        glyph={<IconComputer darkMode={darkMode} />}
+        glyph={
+          <IconDarkmode
+            className={css`
+              svg {
+                margin-right: ${theme.size.default};
+              }
+            `}
+            styles={darkModeSvgStyle}
+          />
+        }
       >
         System
       </MenuItem>
