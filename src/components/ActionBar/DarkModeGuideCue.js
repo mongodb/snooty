@@ -157,8 +157,8 @@ const DarkModeGuideCue = ({ guideCueRef, dropdownIsOpen }) => {
 };
 
 DarkModeGuideCue.propTypes = {
-  guideCueRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  dropdownIsOpen: PropTypes.bool,
+  guideCueRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
+  dropdownIsOpen: PropTypes.bool.isRequired,
 };
 
 export default DarkModeGuideCue;
