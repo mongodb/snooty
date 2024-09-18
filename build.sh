@@ -4,8 +4,6 @@ PARSER_VERSION=0.17.0
 # If the rule doesn't exist, the error doesn't interrupt the build process.
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
-
-
 echo "building docs-landing (temp, bianca's fork)"
 git clone https://github.com/biancalaube/docs-landing.git
 
@@ -28,11 +26,11 @@ echo "==========================================================================
 # putting docs-landing as the path
 echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 echo GATSBY_SITE=landing
-echo GATSBY_PARSER_USER=bianca.laube
+echo GATSBY_PARSER_USER=biancalaube
 echo GATSBY_PARSER_BRANCH=DOP-main
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 export GATSBY_SITE=landing
-export GATSBY_PARSER_USER=bianca.laube
+export GATSBY_PARSER_USER=biancalaube
 export GATSBY_PARSER_BRANCH=main
 # do i need to set anymore variables
 
