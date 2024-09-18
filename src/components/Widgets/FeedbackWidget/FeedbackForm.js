@@ -3,6 +3,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import Loadable from '@loadable/component';
 import { createPortal } from 'react-dom';
 import useScreenSize from '../../../hooks/useScreenSize';
+import { theme } from '../../../theme/docsTheme';
 import { useFeedbackContext } from './context';
 import FeedbackCard from './FeedbackCard';
 import RatingView from './views/RatingView';
@@ -19,8 +20,22 @@ export const FeedbackContent = ({ view }) => {
 };
 
 const formStyle = css`
-  position: relative;
+  position: absolute;
+  right: 0;
+  margin-top: ${theme.size.tiny};
+
+  @media ${theme.screenSize.upToSmall} {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
 `;
+
+export const feedbackId = 'feedback-card';
+export const fwFormId = 'feedback-form';
 
 const FeedbackForm = () => {
   const { view } = useFeedbackContext();
@@ -28,7 +43,7 @@ const FeedbackForm = () => {
   const isOpen = view !== 'waiting';
 
   const renderedComponent = isOpen && (
-    <div className={cx(fwFormId, formStyle)} hidden={!isOpen}>
+    <div className={cx(fwFormId, formStyle)} id={feedbackId} hidden={!isOpen}>
       <FeedbackCard isOpen={isOpen}>
         <FeedbackContent view={view} />
       </FeedbackCard>
@@ -37,8 +52,5 @@ const FeedbackForm = () => {
 
   return isMobile ? createPortal(renderedComponent, document.body) : renderedComponent;
 };
-
-export const feedbackId = 'feedback-card';
-export const fwFormId = 'feedback-form';
 
 export default FeedbackForm;

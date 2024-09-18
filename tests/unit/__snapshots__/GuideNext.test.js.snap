@@ -223,6 +223,8 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   color: #1C2D38;
   margin-top: 40px;
   padding: 40px 24px;
+  background-color: #FFFFFF;
+  border-color: #E8EDEB;
 }
 
 @media not all and (max-width: 767px) {
@@ -244,6 +246,11 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
     margin-top: 0;
     max-width: 510px;
   }
+}
+
+.dark-theme .emotion-11 {
+  background-color: #112733;
+  border-color: #1C2D38;
 }
 
 .emotion-12 {
@@ -274,9 +281,18 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   margin-bottom: 8px;
 }
 
+.dark-theme .emotion-15 {
+  background-color: #0C2657;
+  color: #C3E7FE;
+}
+
 .emotion-17 {
   color: #001E2B;
   font-weight: bold;
+}
+
+.dark-theme .emotion-17 {
+  color: #E8EDEB;
 }
 
 .emotion-19 {
@@ -377,6 +393,10 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   color: #001E2B;
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.dark-theme .emotion-27 {
+  color: #E8EDEB;
 }
 
 .emotion-27:hover,
@@ -691,6 +711,8 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   color: #1C2D38;
   margin-top: 40px;
   padding: 40px 24px;
+  background-color: #FFFFFF;
+  border-color: #E8EDEB;
 }
 
 @media not all and (max-width: 767px) {
@@ -712,6 +734,11 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
     margin-top: 0;
     max-width: 510px;
   }
+}
+
+.dark-theme .emotion-11 {
+  background-color: #112733;
+  border-color: #1C2D38;
 }
 
 .emotion-12 {
@@ -742,9 +769,18 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   margin-bottom: 8px;
 }
 
+.dark-theme .emotion-15 {
+  background-color: #0C2657;
+  color: #C3E7FE;
+}
+
 .emotion-17 {
   color: #001E2B;
   font-weight: bold;
+}
+
+.dark-theme .emotion-17 {
+  color: #E8EDEB;
 }
 
 .emotion-19 {
@@ -845,6 +881,10 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   color: #001E2B;
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.dark-theme .emotion-27 {
+  color: #E8EDEB;
 }
 
 .emotion-27:hover,
@@ -1149,6 +1189,8 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   color: #1C2D38;
   margin-top: 40px;
   padding: 40px 24px;
+  background-color: #FFFFFF;
+  border-color: #E8EDEB;
 }
 
 @media not all and (max-width: 767px) {
@@ -1170,6 +1212,11 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
     margin-top: 0;
     max-width: 510px;
   }
+}
+
+.dark-theme .emotion-11 {
+  background-color: #112733;
+  border-color: #1C2D38;
 }
 
 .emotion-12 {
@@ -1200,9 +1247,18 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   margin-bottom: 8px;
 }
 
+.dark-theme .emotion-15 {
+  background-color: #0C2657;
+  color: #C3E7FE;
+}
+
 .emotion-17 {
   color: #001E2B;
   font-weight: bold;
+}
+
+.dark-theme .emotion-17 {
+  color: #E8EDEB;
 }
 
 .emotion-19 {
@@ -1305,6 +1361,10 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   text-decoration: none;
 }
 
+.dark-theme .emotion-27 {
+  color: #E8EDEB;
+}
+
 .emotion-27:hover,
 .emotion-27:active {
   color: currentColor;
@@ -1365,6 +1425,10 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 
 .emotion-41 {
   color: #3D4F58;
+}
+
+.dark-theme .emotion-41 {
+  color: #E8EDEB;
 }
 
 <div

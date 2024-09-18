@@ -4,7 +4,7 @@ import { Head } from '../../src/components/DocumentBody';
 import mockStaticQuery from '../utils/mockStaticQuery';
 import * as siteMetadata from '../../src/hooks/use-site-metadata';
 import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
-import { AVAILABLE_LANGUAGES } from '../../src/utils/locale';
+import { getAvailableLanguages } from '../../src/utils/locale';
 import { DOTCOM_BASE_URL } from '../../src/utils/base-url';
 import mockCompleteEOLPageContext from './data/CompleteEOLPageContext.json';
 import mockEOLSnootyMetadata from './data/EOLSnootyMetadata.json';
@@ -223,7 +223,7 @@ describe('Head', () => {
       const mockData = { ...mockHeadPageContext.data };
       const { container } = render(<Head pageContext={mockPageContext} data={mockData} />);
       const hrefLangLinks = container.querySelectorAll('link.sl_opaque');
-      expect(hrefLangLinks).toHaveLength(AVAILABLE_LANGUAGES.length);
+      expect(hrefLangLinks).toHaveLength(getAvailableLanguages().length);
       expect(hrefLangLinks).toMatchSnapshot();
     });
   });

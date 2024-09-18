@@ -5,6 +5,9 @@ import { DarkModeContext } from '../../src/context/dark-mode-context';
 import * as MediaHooks from '../../src/hooks/use-media';
 import DarkModeDropdown from '../../src/components/ActionBar/DarkModeDropdown';
 
+import { setDesktop } from '../utils';
+import { DARK_MODE_ANNOUNCED } from '../../src/components/ActionBar/DarkModeGuideCue';
+
 let darkModePref = 'light-theme';
 
 const setDarkModePref = jest.fn((value) => {
@@ -15,7 +18,9 @@ const setDarkModePref = jest.fn((value) => {
 jest.spyOn(MediaHooks, 'default').mockImplementation(() => ({}));
 
 // mock window.localStorage
-const storage = {};
+const storage = {
+  [DARK_MODE_ANNOUNCED]: 'true',
+};
 jest.spyOn(window.localStorage.__proto__, 'setItem').mockImplementation((key, value) => {
   storage[key] = value;
 });
@@ -31,6 +36,8 @@ const mountDarkModeDropdown = () => {
 };
 
 describe('DarkMode Dropdown component', () => {
+  beforeEach(setDesktop);
+
   it('renders dark mode dropdown', async () => {
     // first snapshot of closed menu
     const elm = mountDarkModeDropdown();

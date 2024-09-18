@@ -21,7 +21,9 @@ export const DARK_THEME_CLASSNAME = 'dark-theme';
 export const LIGHT_THEME_CLASSNAME = 'light-theme';
 export const SYSTEM_THEME_CLASSNAME = 'system';
 
-const DarkModeContextProvider = ({ children }) => {
+const LIGHT_MODE_ONLY_PAGE_SLUGS = ['openapi/preview'];
+
+const DarkModeContextProvider = ({ children, slug }) => {
   const docClassList = useMemo(() => isBrowser && window?.document?.documentElement?.classList, []);
 
   // darkModePref   {str}   'light-theme' || 'dark-theme' || 'system';
@@ -53,12 +55,15 @@ const DarkModeContextProvider = ({ children }) => {
       loaded.current = true;
       return;
     }
-    setLocalValue('theme', darkModePref);
     updateDocumentClasslist(darkModePref, darkPref);
-  }, [darkModePref, updateDocumentClasslist, darkPref]);
+
+    // Do not save light mode preference to localStorage if on light-mode-only page
+    if (LIGHT_MODE_ONLY_PAGE_SLUGS.includes(slug)) return;
+    setLocalValue('theme', darkModePref);
+  }, [darkModePref, updateDocumentClasslist, darkPref, slug]);
 
   useEffect(() => {
-    if (!isBrowser || !docClassList) return;
+    if (!isBrowser || !docClassList || LIGHT_MODE_ONLY_PAGE_SLUGS.includes(slug)) return;
 
     // NOTE: client side read of darkmode from document classnames
     // which is derived from local storage (see gatsby-ssr script).

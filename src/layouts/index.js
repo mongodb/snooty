@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
+import ActionBar from '../components/ActionBar/ActionBar';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
 import { Sidenav } from '../components/Sidenav';
 import RootProvider from '../components/RootProvider';
 import { getTemplate } from '../utils/get-template';
-import { useDelightedSurvey } from '../hooks/useDelightedSurvey';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
+import { getAllLocaleCssStrings } from '../utils/locale';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -25,6 +26,8 @@ const footerOverrides = css`
 `;
 
 const globalCSS = css`
+  ${getAllLocaleCssStrings()}
+
   body {
     font-size: 16px;
     line-height: 24px;
@@ -83,14 +86,14 @@ const GlobalGrid = styled('div')`
   overflow: clip;
 `;
 
-const StyledContentContainer = styled('div')`
+export const StyledContentContainer = styled('div')`
   grid-area: contents;
   margin: 0px;
 `;
 
 const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
-  const { chapters, guides, slugToTitle, title, toctree, eol, project } = useSnootyMetadata();
+  const { chapters, guides, slugToTitle, toctree, eol, project } = useSnootyMetadata();
   const remoteMetadata = useRemoteMetadata();
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
@@ -99,7 +102,6 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
     () => page?.ast?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug],
     [slug] // eslint-disable-line react-hooks/exhaustive-deps
   );
-  useDelightedSurvey(slug, project);
 
   return (
     <>
@@ -112,7 +114,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
         project={project}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
-          {!isInPresentationMode ? <Header sidenav={sidenav} eol={eol} slug={slug} template={template} /> : <div />}
+          {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
           {sidenav && !isInPresentationMode ? (
             <Sidenav
               chapters={chapters}
@@ -120,7 +122,6 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
               page={page.ast}
               pageTitle={pageTitle}
               repoBranches={repoBranches}
-              siteTitle={title}
               slug={slug}
               toctree={toctree}
               eol={eol}
@@ -130,6 +131,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
             <div />
           )}
           <StyledContentContainer>
+            <ActionBar template={template} slug={slug} sidenav={sidenav} />
             <ContentTransition slug={slug}>{children}</ContentTransition>
           </StyledContentContainer>
         </GlobalGrid>

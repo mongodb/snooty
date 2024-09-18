@@ -1,68 +1,63 @@
 import React from 'react';
+import styled from '@emotion/styled';
+import Button from '@leafygreen-ui/button';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
-import { Theme } from '@leafygreen-ui/lib';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { theme } from '../../../../src/theme/docsTheme';
+import IconButton from '@leafygreen-ui/icon-button';
+import { displayNone } from '../../../utils/display-none';
 import { useFeedbackContext } from './context';
 import { FEEDBACK_BUTTON_TEXT } from './constants';
 
-const FEEDBACK_FAB_COLORS = {
-  [Theme.Light]: {
-    color: palette.blue.dark1,
-    bgColor: palette.white,
-    boxShadow: `0px 4px 10px -4px ${palette.gray.light2}`,
-    boxShadowOnHover: `0px 0px 0px 3px ${palette.blue.light2}`,
-  },
-  [Theme.Dark]: {
-    color: palette.blue.light1,
-    bgColor: palette.gray.dark4,
-    boxShadow: 'none',
-    boxShadowOnHover: `0px 0px 0px 3px ${palette.blue.dark2}`,
-  },
-};
+const darkModePrestyling = css`
+  color: var(--feedback-font-color);
+  background: var(--feedback-background-color);
+  border-color: ${palette.gray.base};
 
-const containerStyle = (siteTheme) => css`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  padding: 12px ${theme.size.default};
-  background-color: ${FEEDBACK_FAB_COLORS[siteTheme].bgColor};
-  border: 1px solid ${palette.blue.light1};
-  border-radius: 40px;
-  box-shadow: ${FEEDBACK_FAB_COLORS[siteTheme].boxShadow};
-  z-index: 9;
-  color: ${FEEDBACK_FAB_COLORS[siteTheme].color};
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 20px;
+  --feedback-font-color: ${palette.black};
+  --feedback-background-color: ${palette.gray.light3};
 
-  :hover {
-    box-shadow: ${FEEDBACK_FAB_COLORS[siteTheme].boxShadowOnHover};
-  }
-
-  @media ${theme.screenSize.upToSmall} {
-    bottom: ${theme.size.medium};
-    right: ${theme.size.medium};
+  .dark-theme & {
+    --feedback-font-color: ${palette.white};
+    --feedback-background-color: ${palette.gray.dark2};
   }
 `;
 
-const starIconStyle = css`
-  color: ${palette.blue.light1};
+const ButtonContainer = styled.div`
+  align-items: center;
+  display: flex;
 `;
 
 const FeedbackButton = () => {
-  const { theme } = useDarkMode();
-  const { feedback, initializeFeedback } = useFeedbackContext();
+  const { initializeFeedback, abandon, feedback } = useFeedbackContext();
   return (
-    !feedback && (
-      <button className={cx(containerStyle(theme))} onClick={() => initializeFeedback()}>
-        <Icon className={starIconStyle} glyph="Favorite" />
+    <ButtonContainer>
+      <Button
+        aria-label={'Submit Feedback'}
+        className={cx(
+          darkModePrestyling,
+          css`
+            ${displayNone.onMobileAndTablet}
+            // For vertical languages (chinese, korean, japanese)
+            text-wrap: nowrap;
+          `
+        )}
+        onClick={() => (!feedback ? initializeFeedback() : abandon())}
+      >
         {FEEDBACK_BUTTON_TEXT}
-      </button>
-    )
+      </Button>
+      <IconButton
+        aria-label="Submit feedback"
+        className={cx(
+          css`
+            ${displayNone.onLargerThanTablet}
+          `
+        )}
+        onClick={() => (!feedback ? initializeFeedback() : abandon())}
+      >
+        <Icon glyph={'Megaphone'} />
+      </IconButton>
+    </ButtonContainer>
   );
 };
 

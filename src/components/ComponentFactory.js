@@ -45,6 +45,7 @@ import ListTable from './ListTable';
 import Literal from './Literal';
 import LiteralBlock from './LiteralBlock';
 import LiteralInclude from './LiteralInclude';
+import { MethodSelector } from './MethodSelector';
 import OpenAPIChangelog from './OpenAPIChangelog';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
@@ -60,6 +61,7 @@ import Subscript from './Subscript';
 import SubstitutionReference from './SubstitutionReference';
 import Superscript from './Superscript';
 import Tabs from './Tabs';
+import TabSelectors from './Tabs/TabSelectors';
 import Target from './Target';
 import Text from './Text';
 import Time from './Time';
@@ -87,7 +89,6 @@ const IGNORED_NAMES = new Set([
   'raw',
   'short-description',
   'tabs-pillstrip',
-  'tabs-selector',
   'toctree',
   'meta',
   'facet',
@@ -166,6 +167,7 @@ const componentMap = {
   literal: Literal,
   literal_block: LiteralBlock,
   literalinclude: LiteralInclude,
+  'method-selector': MethodSelector,
   only: Cond,
   'openapi-changelog': OpenAPIChangelog,
   paragraph: Paragraph,
@@ -181,6 +183,7 @@ const componentMap = {
   strong: Strong,
   substitution_reference: SubstitutionReference,
   tabs: Tabs,
+  'tabs-selector': TabSelectors,
   target: Target,
   text: Text,
   time: Time,

@@ -57,7 +57,7 @@ exports[`collapsible component renders all the content in the options and childr
 }
 
 .emotion-5 {
-  margin-top: -175px;
+  margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
 }
@@ -101,7 +101,6 @@ exports[`collapsible component renders all the content in the options and childr
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #5C6C75;
 }
 
 .emotion-8:before {
@@ -175,7 +174,7 @@ exports[`collapsible component renders all the content in the options and childr
 .emotion-10 {
   overflow: hidden;
   height: 0;
-  visibility: hidden;
+  color: --font-color-primary;
 }
 
 .emotion-11 {
