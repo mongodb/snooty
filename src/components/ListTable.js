@@ -203,6 +203,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
 
   const hasNestedTable = useMemo(() => includesNestedTable(bodyRows), [bodyRows]);
   const noTableNesting = !hasNestedTable && !ancestors?.table;
+  const shouldAlternateRowColor = noTableNesting && bodyRows.length > 4;
 
   return (
     <AncestorComponentContextProvider component={'table'}>
@@ -216,7 +217,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             customWidth: options?.width,
           })
         )}
-        shouldAlternateRowColor={noTableNesting && bodyRows.length > 4}
+        shouldAlternateRowColor={shouldAlternateRowColor}
       >
         {widths && (
           <colgroup>
