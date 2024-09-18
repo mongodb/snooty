@@ -32,14 +32,19 @@ exports[`collapsible component renders all the content in the options and childr
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
   color: #001E2B;
+  font-weight: 500;
   margin-top: 24px;
   margin-bottom: 8px;
   color: var(--font-color-primary);
   margin-top: 0;
+}
+
+.emotion-2 strong,
+.emotion-2 b {
+  font-weight: 700;
 }
 
 .emotion-3 {
@@ -507,9 +512,8 @@ exports[`collapsible component renders all the content in the options and childr
       class="emotion-1"
     >
       <div>
-        <h2
+        <h6
           class="contains-headerlink emotion-2"
-          weight="medium"
         >
           This is a heading
           <a
@@ -541,7 +545,7 @@ exports[`collapsible component renders all the content in the options and childr
             class="emotion-5 emotion-6"
             id="this-is-a-heading"
           />
-        </h2>
+        </h6>
         <p
           class="emotion-7"
         >
