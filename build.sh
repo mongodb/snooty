@@ -20,13 +20,13 @@ fi
 
 echo "======================================================================================================================================================================="
 echo "========================================================================== Running parser... =========================================================================="
-./snooty-parser/snooty/snooty build $(pwd)/docs-landing --output=./bundle.zip
+./snooty-parser/snooty/snooty build /Users/bianca.laube/Documents/repos/docs-content-repos/docs-landing --output=./bundleTEST.zip
 #  snooty build path-to-repo/cloud-docs --output=bundle.zip
 echo "========================================================================== Parser complete ============================================================================"
 echo "======================================================================================================================================================================="
 
 # putting docs-landing as the path
-echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
+echo GATSBY_MANIFEST_PATH=$(pwd)/bundleTEST.zip
 echo GATSBY_SITE=landing
 echo GATSBY_PARSER_USER=bianca.laube
 echo GATSBY_PARSER_BRANCH=DOP-5025
