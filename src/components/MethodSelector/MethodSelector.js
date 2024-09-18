@@ -108,8 +108,6 @@ const MethodSelector = ({ nodeData: { children } }) => {
   const { setActiveSelectorId } = useContext(ContentsContext);
   const [selectedIdx, setSelectedIdx] = useState(0);
 
-  setActiveSelectorId(selectedMethod);
-
   // Load method ID saved from last session, if applicable.
   useEffect(() => {
     const savedMethodId = getLocalValue(STORAGE_KEY);
@@ -123,6 +121,10 @@ const MethodSelector = ({ nodeData: { children } }) => {
       setSelectedIdx(validOptions.indexOf(savedMethodId));
     }
   }, [children]);
+
+  useEffect(() => {
+    setActiveSelectorId(selectedMethod);
+  }, [selectedMethod, setActiveSelectorId]);
 
   return (
     <>
