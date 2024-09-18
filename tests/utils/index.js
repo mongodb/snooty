@@ -31,6 +31,8 @@ const {
 
 export const setMatchMedia = (...queries) => {
   window.matchMedia = (media) => ({
+    addEventListener: () => {},
+    removeEventListener: () => {},
     addListener: () => {},
     removeListener: () => {},
     matches: queries.some((query) => media === query),
