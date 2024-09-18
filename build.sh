@@ -27,7 +27,7 @@ echo "==========================================================================
 echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 echo GATSBY_SITE=landing
 echo GATSBY_PARSER_USER=biancalaube
-echo GATSBY_PARSER_BRANCH=DOP-main
+echo GATSBY_PARSER_BRANCH=main
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 export GATSBY_SITE=landing
 export GATSBY_PARSER_USER=biancalaube
