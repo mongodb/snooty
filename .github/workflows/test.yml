@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - main
-      - DOP-4616
 
 jobs:
   test:
