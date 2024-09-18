@@ -98,6 +98,16 @@ const stubCellStyle = css`
   }
 `;
 
+// const zebraStripingStyle = css`
+//   &:nth-of-type(even) {
+//     background-color: ${palette.gray.light3};
+
+//     .dark-theme & {
+//       background-color: ${palette.gray.dark4};
+//     }
+//   }
+// `;
+
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
 
 /**
