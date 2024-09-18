@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css, cx } from '@leafygreen-ui/emotion';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { Overline } from '@leafygreen-ui/typography';
-import { palette } from '@leafygreen-ui/palette';
+import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
+import Overline from './Internal/Overline';
 
-const kickerBaseStyling = css`
+const kickerBaseStyle = css`
   grid-column: 2;
-  margin-top: 48px;
-  margin-bottom: 0px;
-  color: var(--font-color-light);
   @media ${theme.screenSize.upToSmall} {
     padding-top: 56px;
   }
@@ -20,15 +15,9 @@ const kickerBaseStyling = css`
   }
 `;
 
-const kickerLightStyling = css`
-  color: ${palette.gray.base};
-  ${kickerBaseStyling}
-`;
-
 const Kicker = ({ nodeData: { argument }, ...rest }) => {
-  const { darkMode } = useDarkMode();
   return (
-    <Overline className={cx({ [kickerBaseStyling]: darkMode === true }, { [kickerLightStyling]: darkMode === false })}>
+    <Overline className={kickerBaseStyle}>
       {argument.map((child, i) => (
         <ComponentFactory {...rest} nodeData={child} key={i} />
       ))}

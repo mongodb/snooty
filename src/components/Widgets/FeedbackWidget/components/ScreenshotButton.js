@@ -11,8 +11,7 @@ import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
 import { theme } from '../../../../theme/docsTheme';
-import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_OVERLAY_ALT_TEXT } from '../constants';
-import { elementZIndex } from '../../../../utils/dynamically-set-z-index';
+import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_BUTTON_TEXT_LOW, SCREENSHOT_OVERLAY_ALT_TEXT } from '../constants';
 
 const HIGHLIGHT_BORDER_SIZE = 5;
 
@@ -79,12 +78,11 @@ const ScreenshotSelect = styled(Button)`
   height: 28px;
   margin: 0 auto ${theme.size.small} 0;
   z-index: 5;
-  width: 158px !important;
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
-  const { setScreenshotTaken } = useFeedbackContext();
-  const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
+  const { setScreenshotTaken, selectedRating, isScreenshotButtonClicked, setIsScreenshotButtonClicked } =
+    useFeedbackContext();
   const [currElemState, setCurrElemState] = useState(null);
 
   // border around highlighted element
@@ -184,12 +182,11 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setIsScreenshotButtonClicked(true);
     domElementClickedRef.current = 'dashed';
     setSelectedElementBorderStyle('dashed');
-    elementZIndex.resetZIndex('.widgets');
-  }, []);
+  }, [setIsScreenshotButtonClicked]);
 
   // close out the instructions panel
   const handleInstructionClick = () => {
-    document.getElementById(feedbackId).style.left = 'initial';
+    document.getElementById(feedbackId).style.right = null;
     resetProperties();
   };
 
@@ -200,20 +197,16 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setIsScreenshotButtonClicked(false);
     setCurrElemState(null);
     setScreenshotTaken(false);
-    elementZIndex.resetZIndex('.widgets');
   };
 
   const handleDOMElementClick = (e) => {
     e.preventDefault();
 
-    //conditionally set the z-index on the widget card when the screenshot is clicked
-    elementZIndex.setZIndex('.widgets', 14);
-
     domElementClickedRef.current = 'solid';
     setSelectedElementBorderStyle(domElementClickedRef.current);
     setScreenshotTaken(true);
 
-    document.getElementById(feedbackId).style.left = 'initial';
+    document.getElementById(feedbackId).style.right = null;
   };
 
   const handleExitButtonClick = (e) => {
@@ -228,7 +221,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   if (isScreenshotButtonClicked) {
     if (isBrowser && domElementClickedRef.current === 'dashed') {
-      document.getElementById(feedbackId).style.left = '-9000px';
+      document.getElementById(feedbackId).style.right = '-9000px';
       // highlight elements based on mouse movement
       document.addEventListener('mousemove', handleElementHighlight);
     }
@@ -335,7 +328,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         leftGlyph={<img src={withPrefix(glyphImage)} alt="Screenshot Button" />}
         {...props}
       >
-        {SCREENSHOT_BUTTON_TEXT}
+        {selectedRating < 4 ? SCREENSHOT_BUTTON_TEXT_LOW : SCREENSHOT_BUTTON_TEXT}
       </ScreenshotSelect>
     </>
   );
