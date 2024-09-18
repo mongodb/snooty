@@ -99,9 +99,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
   justify-content: center;
 }
 
-<div
-    class="guideCueRef"
-  >
+<div>
     <div
       aria-disabled="false"
       aria-expanded="false"
@@ -586,9 +584,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   margin-right: 16px;
 }
 
-<div
-    class="guideCueRef"
-  >
+<div>
     <div
       aria-disabled="false"
       aria-expanded="true"
@@ -876,9 +872,7 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
   justify-content: center;
 }
 
-<div
-    class="guideCueRef"
-  >
+<div>
     <div
       aria-disabled="false"
       aria-expanded="false"
