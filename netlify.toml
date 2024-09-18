@@ -2,5 +2,5 @@
 name = "snooty-cache-plugin"
 
 [build]
-publish = "snooty/public"
+publish = "public"
 command = ". ./build.sh"
