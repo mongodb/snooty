@@ -49,7 +49,7 @@ const DarkModeDropdown = () => {
   return (
     // Remove Fragment and div when Dark Mode Guide Cue is removed - only used for guide cue placement
     <>
-      <div ref={guideCueRef} className="guideCueRef">
+      <div ref={guideCueRef}>
         <Menu
           className={cx(menuStyling)}
           usePortal={false}
@@ -106,7 +106,7 @@ const DarkModeDropdown = () => {
           </MenuItem>
         </Menu>
       </div>
-      <DarkModeGuideCue guideCueRef={guideCueRef} />
+      <DarkModeGuideCue guideCueRef={guideCueRef} dropdownIsOpen={open} />
     </>
   );
 };

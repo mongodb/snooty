@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { GuideCue } from '@leafygreen-ui/guide-cue';
@@ -68,7 +69,7 @@ const GuideCueFooter = styled.div`
   padding: ${theme.size.medium} ${theme.size.medium} ${theme.size.small};
 `;
 
-const DarkModeGuideCue = ({ guideCueRef }) => {
+const DarkModeGuideCue = ({ guideCueRef, dropdownIsOpen }) => {
   const ref = useRef();
   const { isMobile } = useScreenSize();
   const [isOpen, setIsOpen] = useState(false);
@@ -83,6 +84,11 @@ const DarkModeGuideCue = ({ guideCueRef }) => {
     if (!darkModeAnnounced) setIsOpen(true);
     setLocalValue(DARK_MODE_ANNOUNCED, true);
   }, [isMobile]);
+
+  // Close GuideCue if dark mode dropdown is opened
+  useEffect(() => {
+    if (dropdownIsOpen) onClose();
+  }, [dropdownIsOpen]);
 
   if (isMobile) return null;
 
@@ -148,6 +154,11 @@ const DarkModeGuideCue = ({ guideCueRef }) => {
       </GuideCueContent>
     </GuideCue>
   );
+};
+
+DarkModeGuideCue.propTypes = {
+  guideCueRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  dropdownIsOpen: PropTypes.bool,
 };
 
 export default DarkModeGuideCue;
