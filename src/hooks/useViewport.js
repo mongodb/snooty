@@ -10,7 +10,10 @@ export function getViewport() {
         scrollY: Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop || 0),
         scrollX: Math.max(window.pageXOffset, document.documentElement.scrollLeft, document.body.scrollLeft || 0),
       }
-    : {};
+    : {
+        scrollY: 0,
+        scrollX: 0,
+      };
 
   return viewport;
 }
