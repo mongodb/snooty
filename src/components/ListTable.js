@@ -31,11 +31,11 @@ const theadStyle = css`
   position: relative;
   color: var(--font-color-primary);
   background-color: ${palette.white};
-  box-shadow: 0 4px ${palette.gray.light2};
+  box-shadow: 0 ${theme.size.tiny} ${palette.gray.light2};
 
   .dark-theme & {
     background-color: ${palette.black};
-    box-shadow: 0 4px ${palette.gray.dark2};
+    box-shadow: 0 ${theme.size.tiny} ${palette.gray.dark2};
   }
 `;
 
