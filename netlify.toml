@@ -7,5 +7,5 @@ command = ". ./build.sh"
 
 [[redirects]]
 from = "/*"
-to = "landing/buildbot/master/index/"
+to = "landing/buildbot/master/"
 status = 200
