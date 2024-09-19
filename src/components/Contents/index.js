@@ -17,7 +17,7 @@ const Contents = ({ className }) => {
     (headingNode) => !headingNode.selector_id || headingNode.selector_id === activeSelectorId
   );
 
-  if (headingNodes.length === 0 || filteredNodes.length === 0 || !showContentsComponent) {
+  if (filteredNodes.length === 0 || !showContentsComponent) {
     return null;
   }
 

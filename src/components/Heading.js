@@ -51,10 +51,11 @@ const determineHeading = (sectionDepth) => {
   return Body; // use weight=medium prop to style appropriately
 };
 
-const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
+const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = determineHeading(sectionDepth);
-  const asHeading = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
+  const asHeadingNumber = as ?? sectionDepth;
+  const asHeading = asHeadingNumber >= 1 && asHeadingNumber <= 6 ? `h${asHeadingNumber}` : 'h6';
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
   const { selectors } = useContext(TabContext);
@@ -140,6 +141,7 @@ Heading.propTypes = {
     id: PropTypes.string.isRequired,
   }).isRequired,
   isProductLanding: PropTypes.bool,
+  as: PropTypes.number,
 };
 
 export default Heading;

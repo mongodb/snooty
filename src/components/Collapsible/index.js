@@ -68,8 +68,8 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
     <Box className={cx('collapsible', collapsibleStyle)}>
       <Box className={cx(headerContainerStyle)}>
         <Box>
-          {/* Adding 1 to reflect logic in parser */}
-          <Heading className={cx(headerStyle)} sectionDepth={sectionDepth + 1} nodeData={headingNodeData}>
+          {/* Adding 1 to reflect logic in parser, but want to show up as H2 for SEO reasons */}
+          <Heading className={cx(headerStyle)} sectionDepth={sectionDepth + 1} as={2} nodeData={headingNodeData}>
             {heading}
           </Heading>
           <Body baseFontSize={13}>{subHeading}</Body>
@@ -80,7 +80,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
       </Box>
       <Box className={cx(innerContentStyle(open))}>
         {children.map((c, i) => (
-          <ComponentFactory nodeData={c} key={i} {...rest}></ComponentFactory>
+          <ComponentFactory nodeData={c} key={i} sectionDepth={sectionDepth} {...rest}></ComponentFactory>
         ))}
       </Box>
     </Box>
