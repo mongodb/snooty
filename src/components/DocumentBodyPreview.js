@@ -6,9 +6,7 @@ import { getNestedValue } from '../utils/get-nested-value';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import Layout from '../layouts/preview-layout';
-import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { PageContext } from '../context/page-context';
-import Widgets from './Widgets';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
@@ -66,7 +64,6 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
 
 const DocumentBody = (props) => {
   const {
-    location,
     pageContext: { slug },
     data,
   } = props;
@@ -90,8 +87,6 @@ const DocumentBody = (props) => {
   const siteTitle = getNestedValue(['title'], metadata) || '';
   const { Template, useChatbot } = getTemplate(template);
 
-  const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
-
   return (
     <Layout
       pageContext={{
@@ -106,23 +101,15 @@ const DocumentBody = (props) => {
       <SEO pageTitle={pageTitle} siteTitle={siteTitle} />
       <TabProvider selectors={page?.options?.selectors}>
         <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
-          <Widgets
-            location={location}
-            pageTitle={pageTitle}
-            slug={slug}
-            template={template}
-            isInPresentationMode={isInPresentationMode}
-          >
-            <FootnoteContext.Provider value={{ footnotes }}>
-              <PageContext.Provider value={{ page, template, slug }}>
-                <Template {...props} useChatbot={useChatbot}>
-                  {pageNodes.map((child, index) => (
-                    <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
-                  ))}
-                </Template>
-              </PageContext.Provider>
-            </FootnoteContext.Provider>
-          </Widgets>
+          <FootnoteContext.Provider value={{ footnotes }}>
+            <PageContext.Provider value={{ page, template, slug }}>
+              <Template {...props} useChatbot={useChatbot}>
+                {pageNodes.map((child, index) => (
+                  <ComponentFactory key={index} metadata={metadata} nodeData={child} page={page} slug={slug} />
+                ))}
+              </Template>
+            </PageContext.Provider>
+          </FootnoteContext.Provider>
         </InstruqtProvider>
       </TabProvider>
       <footer style={{ width: '100%', height: '568px', backgroundColor: '#061621' }}></footer>

@@ -14,16 +14,16 @@ const buttonStyles = css`
   width: ${theme.size.default};
 
   @media ${theme.screenSize.upToSmall} {
-    top: ${theme.size.large};
+    top: ${theme.size.default};
     right: ${theme.size.medium};
   }
 `;
 
-const CloseButton = ({ onClick, size = 'default', ...props }) => {
+const CloseButton = ({ onClick, size = 'default', className, ...props }) => {
   return (
     <IconButton
       aria-label={CLOSE_BUTTON_ALT_TEXT}
-      className={cx(buttonStyles)}
+      className={cx(buttonStyles, className)}
       onClick={onClick}
       size={size}
       fill={palette.gray.light1}

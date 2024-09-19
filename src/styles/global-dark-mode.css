@@ -1,14 +1,4 @@
 body {
-  background-color: initial;
-  color: initial;
-}
-
-.dark-theme body {
-  background-color: var(--black);
-  color: var(--lg-color-dark-mode);
-}
-
-body {
   --font-color-primary: var(--black);
   --font-color-light: var(--gray-base);
   --heading-color-primary: var(--green-dark2);
@@ -28,6 +18,7 @@ body {
 
   --sidenav-item-title: var(--gray-dark3);
   --sidenav-item-color: var(--black);
+  --sidenav-hover-bg-color: var(--gray-light2);
   --sidenav-active-bg-color: var(--green-light3);
   --sidenav-active-color: var(--green-dark2);
   --sidenav-active-before-color: var(--green-dark1);
@@ -64,6 +55,7 @@ body {
 
   --sidenav-item-title: var(--gray-light2);
   --sidenav-item-color: var(--gray-light2);
+  --sidenav-hover-bg-color: var(--gray-dark3);
   --sidenav-active-bg-color: var(--green-dark3);
   --sidenav-active-color: var(--white);
   --sidenav-active-before-color: var(--green-base);
@@ -77,4 +69,38 @@ body {
 
   --wayfinding-bg-color: var(--gray-dark3);
   --wayfinding-border-color: var(--gray-dark2);
+
+  /* Style the scrollbar background */
+  ::-webkit-scrollbar {
+    background: var(--gray-dark3);
+  }
+
+  /* Style the scrollbar handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--gray-dark2);
+    border: 3px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+  }
+}
+
+body {
+  background-color: var(--background-color-primary);
+  color: var(--font-color-primary);
+}
+
+.nav-dark {
+  display: none;
+}
+
+.nav-light {
+  display: initial;
+}
+
+.dark-theme .nav-dark {
+  display: initial;
+}
+
+.dark-theme .nav-light {
+  display: none;
 }

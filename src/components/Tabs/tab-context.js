@@ -8,7 +8,7 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
-import { makeChoices } from './TabSelectors';
+import { makeChoices } from './make-choices';
 
 const defaultContextValue = {
   activeTabs: {},

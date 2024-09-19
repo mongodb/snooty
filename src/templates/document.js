@@ -3,23 +3,27 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Contents from '../components/Contents';
-import InternalPageNav from '../components/InternalPageNav';
+import { InternalPageNav } from '../components/InternalPageNav';
+import { StepNumber, useActiveMpTutorial } from '../components/MultiPageTutorials';
 import MainColumn from '../components/MainColumn';
 import RightColumn from '../components/RightColumn';
 import TabSelectors from '../components/Tabs/TabSelectors';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
+import { theme } from '../theme/docsTheme';
+import { usePageContext } from '../context/page-context';
+
+const MAX_CONTENT_WIDTH = '775px';
 
 const DocumentContainer = styled('div')`
   display: grid;
   grid-template-areas: 'main right';
-  grid-template-columns: minmax(0, auto) 1fr;
+  grid-template-columns: minmax(0, calc(${MAX_CONTENT_WIDTH} + ${theme.size.xlarge} * 2)) 1fr;
 `;
 
 const StyledMainColumn = styled(MainColumn)`
   grid-area: main;
-  max-width: 775px;
-  overflow-x: auto;
+  max-width: ${MAX_CONTENT_WIDTH};
 `;
 
 const StyledRightColumn = styled(RightColumn)`
@@ -30,12 +34,16 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
+  const { tabsMainColumn } = usePageContext();
+  const hasMethodSelector = pageOptions?.has_method_selector;
+  const activeTutorial = useActiveMpTutorial();
 
   return (
     <DocumentContainer>
       <StyledMainColumn>
         <div className="body">
           <Breadcrumbs siteTitle={title} slug={slug} />
+          {activeTutorial && <StepNumber slug={slug} activeTutorial={activeTutorial} />}
           {children}
           {showPrevNext && (
             <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={toctreeOrder} />
@@ -44,8 +52,8 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       </StyledMainColumn>
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
-        <TabSelectors />
-        <Contents displayOnDesktopOnly={true} />
+        {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
+        <Contents />
       </StyledRightColumn>
     </DocumentContainer>
   );

@@ -19,6 +19,10 @@ const StyledHeading = styled(Subtitle)`
   text-align: center;
 `;
 
+const Container = styled(Layout)`
+  padding: 0 ${theme.size.default};
+`;
+
 const SubmittedView = () => {
   const { abandon } = useFeedbackContext();
   const { isMobile } = useScreenSize();
@@ -26,9 +30,9 @@ const SubmittedView = () => {
   const shouldShowSupportLink = selectedRating <= 3;
 
   return (
-    <Layout>
+    <Container>
       <StyledHeading>{SUBMITTED_VIEW_TEXT.HEADING}</StyledHeading>
-      <StarRating editable={false} />
+      <StarRating editable={false} showCaption={false} />
       <Subheading>{SUBMITTED_VIEW_TEXT.SUB_HEADING}</Subheading>
       <Subheading>
         <span>{SUBMITTED_VIEW_TEXT.RESOURCES_CTA}</span>
@@ -50,7 +54,7 @@ const SubmittedView = () => {
         )}
       </Subheading>
       {isMobile && <Button onClick={() => abandon()}>Return to the Documentation</Button>}
-    </Layout>
+    </Container>
   );
 };
 

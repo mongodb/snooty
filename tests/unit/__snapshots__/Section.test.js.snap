@@ -33,7 +33,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-3 {
-  margin-top: -175px;
+  margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
 }

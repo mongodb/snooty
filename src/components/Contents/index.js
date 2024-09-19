@@ -1,23 +1,15 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { ContentsContext } from './contents-context';
 import ContentsList from './ContentsList';
 import ContentsListItem from './ContentsListItem';
 
-const StyledContents = styled('div')`
-  @media ${theme.screenSize.largeAndUp} {
-    display: ${(props) => (props.displayOnDesktopOnly ? '' : 'none')};
-  }
-`;
-
 const formatTextOptions = {
   literalEnableInline: true,
 };
 
-const Contents = ({ displayOnDesktopOnly }) => {
+const Contents = ({ className }) => {
   const { activeHeadingId, headingNodes, showContentsComponent } = useContext(ContentsContext);
 
   if (headingNodes.length === 0 || !showContentsComponent) {
@@ -27,7 +19,7 @@ const Contents = ({ displayOnDesktopOnly }) => {
   const label = 'On this page';
 
   return (
-    <StyledContents displayOnDesktopOnly={displayOnDesktopOnly}>
+    <div className={className}>
       <ContentsList label={label}>
         {headingNodes.map(({ depth, id, title }) => {
           // Depth of heading nodes refers to their depth in the AST
@@ -39,12 +31,12 @@ const Contents = ({ displayOnDesktopOnly }) => {
           );
         })}
       </ContentsList>
-    </StyledContents>
+    </div>
   );
 };
 
 Contents.propTypes = {
-  displayOnDesktopOnly: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Contents;
