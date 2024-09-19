@@ -6,7 +6,7 @@ TESTING_CONTENT_REPO=docs-landing
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
 echo "building docs-landing (temp, bianca's fork)"
-git clone https://github.com/biancalaube/${TESTING_CONTENT_REPO}.git
+git clone https://github.com/mongodb/${TESTING_CONTENT_REPO}.git
 
 
 # running the parser 
@@ -26,7 +26,6 @@ echo "==========================================================================
 
 # putting docs-landing as the path
 echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
-
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 
 # do i need to set anymore variables
