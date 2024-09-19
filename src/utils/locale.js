@@ -95,7 +95,7 @@ export const getAllLocaleCssStrings = () => {
         }
 
         // Italicized non-latin characters may look confusing, so we want to replace them with bold
-        // without changing the source HTML tag (and potentially causing errors with)
+        // without changing the source HTML tag (and potentially causing errors with Smartling)
         em,
         div.deprecated > p > span,
         div.versionadded > p > span,
