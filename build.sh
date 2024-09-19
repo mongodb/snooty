@@ -25,13 +25,13 @@ echo "==========================================================================
 
 # putting docs-landing as the path
 echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
-echo GATSBY_SITE=landing
-echo GATSBY_PARSER_USER=biancalaube
-echo GATSBY_PARSER_BRANCH=main
+# echo GATSBY_SITE=landing
+# echo GATSBY_PARSER_USER=biancalaube
+# echo GATSBY_PARSER_BRANCH=main
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
-export GATSBY_SITE=landing
-export GATSBY_PARSER_USER=biancalaube
-export GATSBY_PARSER_BRANCH=main
+# export GATSBY_SITE=landing
+# export GATSBY_PARSER_USER=biancalaube
+# export GATSBY_PARSER_BRANCH=main
 # do i need to set anymore variables
 
 # run the site
