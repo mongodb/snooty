@@ -9,7 +9,7 @@ PARSER_VERSION=0.18.0
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
 # cloning the content repo
-echo "building docs-landing (temp, bianca's fork)"
+echo "cloning content repo: ${TESTING_CONTENT_REPO}"
 git clone https://github.com/${ORGANIZATION}/${TESTING_CONTENT_REPO}.git
 
 
