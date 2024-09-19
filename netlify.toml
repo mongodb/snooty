@@ -4,8 +4,3 @@ name = "snooty-cache-plugin"
 [build]
 publish = "public"
 command = ". ./build.sh"
-
-[[redirects]]
-from = "/*"
-to = "/landing/buildbot/master/index"
-status = 200
