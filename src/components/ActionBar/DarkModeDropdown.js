@@ -24,6 +24,10 @@ const menuStyling = css`
   margin-top: ${theme.size.small};
 `;
 
+const menuItemStyling = css`
+  tabindex: 0;
+`;
+
 const DROPDOWN_ICON_SIZE = 20;
 const darkModeSvgStyle = {
   width: DROPDOWN_ICON_SIZE,
@@ -60,12 +64,7 @@ const DarkModeDropdown = () => {
           trigger={
             // using Box here to prevent warning of Button within Button
             // since we are using usePortal=false to mitigate sticky header
-            <IconButton
-              as={Box}
-              className={cx(iconStyling)}
-              aria-label="Dark Mode Menu"
-              aria-labelledby="Dark Mode Menu"
-            >
+            <IconButton className={cx(iconStyling)} aria-label="Dark Mode Menu" aria-labelledby="Dark Mode Menu">
               {darkModePref === 'system' ? (
                 <IconDarkmode />
               ) : (
@@ -77,20 +76,27 @@ const DarkModeDropdown = () => {
           <MenuItem
             active={darkModePref === 'light-theme'}
             onClick={() => select('light-theme')}
+            onKeyDown={() => select('light-theme')}
             glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Sun'} />}
+            as={Box}
+            className={menuItemStyling}
           >
             Light
           </MenuItem>
           <MenuItem
             active={darkModePref === 'dark-theme'}
             onClick={() => select('dark-theme')}
+            onKeyDown={() => select('dark-theme')}
             glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Moon'} />}
+            as={Box}
+            className={menuItemStyling}
           >
             Dark
           </MenuItem>
           <MenuItem
             active={darkModePref === 'system'}
             onClick={() => select('system')}
+            onKeyDown={() => select('system')}
             glyph={
               <IconDarkmode
                 className={css`
@@ -101,6 +107,8 @@ const DarkModeDropdown = () => {
                 styles={darkModeSvgStyle}
               />
             }
+            as={Box}
+            className={menuItemStyling}
           >
             System
           </MenuItem>
