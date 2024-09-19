@@ -22,6 +22,13 @@ const StyledSelect = styled(Select)`
     div:last-child svg {
       color: var(--select-button-carot);
     }
+
+    .dark-theme &:hover {
+      background-color: var(--gray-dark4);
+      color: var(--gray-light3);
+      border-color: var(--gray-base);
+      box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+    }
   }
 
   /* Override LG mobile style of enlarged mobile font */

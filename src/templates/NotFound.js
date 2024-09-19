@@ -9,11 +9,10 @@ import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
 import Link from '../components/Link';
-import ChatbotUi from '../components/ChatbotUi';
 
 const ErrorBox = styled.div`
-  padding: 0 0 0 ${theme.size.default};
   max-width: 455px;
+  flex: 1 0.5 auto;
 
   @media ${theme.screenSize.upToSmall} {
     padding: 0px ${theme.size.default};
@@ -35,10 +34,14 @@ const getSupportLinkDynamicStyle = (darkMode) => css`
 `;
 
 const ImageContainer = styled.div`
-  width: 455px;
+  max-width: 455px;
   display: flex;
-  justify-content: center;
-  align-content: center;
+  justify-content: flex-start;
+  flex: 0.5 1 auto;
+  > img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const NotFoundImage = () => {
@@ -103,27 +106,62 @@ const ErrorBoxContainer = () => {
   );
 };
 
-const NotFoundContainer = styled.div`
+export const NotFoundContainer = styled.div`
   align-items: center;
   display: flex;
-  flex-flow: row-reverse wrap;
-  justify-content: center;
+  flex-flow: no-wrap;
+  justify-content: space-between;
   margin-bottom: ${theme.size.xxlarge};
 
   @media ${theme.screenSize.upToSmall} {
     margin-top: -${theme.size.large};
   }
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-column: 2/-2;
+    flex-flow: column-reverse;
+  }
+
+  @media ${theme.screenSize.upToLarge} {
+    grid-column: 3/-3;
+  }
+
+  @media ${theme.screenSize.largeAndUp} {
+    grid-column: 4/-4;
+  }
+  @media ${theme.screenSize.xLargeAndUp} {
+    grid-column: 6/-5;
+    justify-content: start;
+  }
+`;
+
+export const Wrapper = styled('main')`
+  display: grid;
+  @media ${theme.screenSize.mediumAndUp} {
+    grid-template-columns: ${`${theme.size.xlarge} repeat(12, minmax(0, 1fr)) ${theme.size.xlarge};`};
+  }
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-template-columns: 48px repeat(12, 1fr) 48px;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    grid-template-columns: ${theme.size.large} 1fr ${theme.size.large};
+  }
+
+  @media ${theme.screenSize.upToXSmall} {
+    grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+  }
 `;
 
 const NotFound = () => {
   return (
-    <main>
-      {process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' && <ChatbotUi template="errorpage" />}
+    <Wrapper>
       <NotFoundContainer>
-        <NotFoundImage />
         <ErrorBoxContainer />
+        <NotFoundImage />
       </NotFoundContainer>
-    </main>
+    </Wrapper>
   );
 };
 

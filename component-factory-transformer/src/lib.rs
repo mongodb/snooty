@@ -34,9 +34,13 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
         includes: includes_set.clone(),
         component_names: HashSet::from_iter(
             // Default values that we want to keep.
-            vec!["LAZY_COMPONENTS".to_string(), "Admonition".to_string()]
-                .iter()
-                .cloned(),
+            vec![
+                "LAZY_COMPONENTS".to_string(),
+                "Admonition".to_string(),
+                "Card".to_string(),
+            ]
+            .iter()
+            .cloned(),
         ),
     };
 

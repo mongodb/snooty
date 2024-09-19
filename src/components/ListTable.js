@@ -9,18 +9,6 @@ import { theme } from '../theme/docsTheme';
 import { AncestorComponentContextProvider, useAncestorComponentContext } from '../context/ancestor-components-context';
 import ComponentFactory from './ComponentFactory';
 
-// Need to define custom styles for custom components, such as stub cells
-const LIST_TABLE_THEME_STYLES = {
-  [Theme.Light]: {
-    stubCellBgColor: palette.gray.light3,
-    stubBorderColor: palette.gray.light2,
-  },
-  [Theme.Dark]: {
-    stubCellBgColor: palette.gray.dark4,
-    stubBorderColor: palette.gray.dark2,
-  },
-};
-
 const align = (key) => {
   switch (key) {
     case 'left':
@@ -41,6 +29,14 @@ const styleTable = ({ customAlign, customWidth }) => css`
 const theadStyle = css`
   // Allows its box shadow to appear above stub cell's background color
   position: relative;
+  color: var(--font-color-primary);
+  background-color: ${palette.white};
+  box-shadow: 0 ${theme.size.tiny} ${palette.gray.light2};
+
+  .dark-theme & {
+    background-color: ${palette.black};
+    box-shadow: 0 ${theme.size.tiny} ${palette.gray.dark2};
+  }
 `;
 
 const baseCellStyle = css`
@@ -48,6 +44,7 @@ const baseCellStyle = css`
   padding: 10px ${theme.size.small} !important;
   // Force top alignment rather than LeafyGreen default middle (PD-1217)
   vertical-align: top;
+  color: var(--font-color-primary);
 
   * {
     // Wrap in selector to ensure it cascades down to every element
@@ -90,10 +87,25 @@ const headerCellStyle = css`
   font-size: ${theme.fontSize.small};
 `;
 
-const stubCellStyle = ({ stubCellBgColor, stubBorderColor }) => css`
-  background-color: ${stubCellBgColor};
-  border-right: 3px solid ${stubBorderColor};
+const stubCellStyle = css`
+  background-color: ${palette.gray.light3};
+  border-right: 3px solid ${palette.gray.light2};
   font-weight: 600;
+
+  .dark-theme & {
+    background-color: ${palette.gray.dark4};
+    border-right: 3px solid ${palette.gray.dark2};
+  }
+`;
+
+const zebraStripingStyle = css`
+  &:nth-of-type(even) {
+    background-color: ${palette.gray.light3};
+
+    .dark-theme & {
+      background-color: ${palette.gray.dark4};
+    }
+  }
 `;
 
 const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
@@ -147,8 +159,8 @@ const includesNestedTable = (rows) => {
   return rows.some((row) => checkNodeForTable(row));
 };
 
-const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
-  <Row>
+const ListTableRow = ({ row = [], stubColumnCount, siteTheme, className, ...rest }) => (
+  <Row className={className}>
     {row.map((cell, colIndex) => {
       const skipPTag = hasOneChild(cell.children);
       const contents = cell.children.map((child, i) => (
@@ -159,11 +171,7 @@ const ListTableRow = ({ row = [], stubColumnCount, siteTheme, ...rest }) => (
       const role = isStub ? 'rowheader' : null;
 
       return (
-        <Cell
-          key={colIndex}
-          className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle(LIST_TABLE_THEME_STYLES[siteTheme]))}
-          role={role}
-        >
+        <Cell key={colIndex} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
           {/* Wrap in div to ensure contents are structured properly */}
           <div>{contents}</div>
         </Cell>
@@ -205,6 +213,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
 
   const hasNestedTable = useMemo(() => includesNestedTable(bodyRows), [bodyRows]);
   const noTableNesting = !hasNestedTable && !ancestors?.table;
+  const shouldAlternateRowColor = noTableNesting && bodyRows.length > 4;
 
   return (
     <AncestorComponentContextProvider component={'table'}>
@@ -218,7 +227,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             customWidth: options?.width,
           })
         )}
-        shouldAlternateRowColor={noTableNesting && bodyRows.length > 4}
+        shouldAlternateRowColor={shouldAlternateRowColor}
       >
         {widths && (
           <colgroup>
@@ -257,6 +266,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
               stubColumnCount={stubColumnCount}
               row={row.children?.[0]?.children}
               siteTheme={siteTheme}
+              className={shouldAlternateRowColor && zebraStripingStyle}
             />
           ))}
         </TableBody>

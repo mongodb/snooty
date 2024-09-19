@@ -10,26 +10,29 @@ export function getViewport() {
         scrollY: Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop || 0),
         scrollX: Math.max(window.pageXOffset, document.documentElement.scrollLeft, document.body.scrollLeft || 0),
       }
-    : {};
+    : {
+        scrollY: 0,
+        scrollX: 0,
+      };
 
   return viewport;
 }
 
-export default function useViewport() {
+export default function useViewport(useDebounce = true) {
   const [viewport, setViewport] = React.useState(getViewport());
   const onChange = () => {
     setViewport(getViewport());
   };
 
   React.useEffect(() => {
-    const debouncedOnChange = debounce(onChange, 200);
-    window.addEventListener('resize', debouncedOnChange);
-    window.addEventListener('scroll', debouncedOnChange);
+    const fnOnChange = useDebounce ? debounce(onChange, 200) : onChange;
+    window.addEventListener('resize', fnOnChange);
+    window.addEventListener('scroll', fnOnChange);
     return () => {
-      window.removeEventListener('resize', debouncedOnChange);
-      window.removeEventListener('scroll', debouncedOnChange);
+      window.removeEventListener('resize', fnOnChange);
+      window.removeEventListener('scroll', fnOnChange);
     };
-  }, []);
+  }, [useDebounce]);
 
   return viewport;
 }

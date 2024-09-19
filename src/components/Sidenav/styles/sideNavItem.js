@@ -1,4 +1,5 @@
 import { css } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 
 export const sideNavItemBasePadding = css`
@@ -44,6 +45,26 @@ export const titleStyle = css`
     &:after,
     span:after {
       display: none;
+    }
+  }
+`;
+
+export const logoLinkStyling = css`
+  padding-left: ${theme.size.medium};
+  display: flex;
+  text-decoration: none;
+
+  > svg {
+    margin-right: ${theme.size.default};
+
+    > path {
+      fill: ${palette.black};
+    }
+  }
+
+  .dark-theme & {
+    > svg > path {
+      fill: ${palette.white};
     }
   }
 `;
