@@ -9,10 +9,10 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { SearchInput as LGSearchInput } from '@leafygreen-ui/search-input';
 import { Link } from '@leafygreen-ui/typography';
 import useScreenSize from '../../hooks/useScreenSize';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import debounce from '../../utils/debounce';
 import { isBrowser } from '../../utils/is-browser';
-import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { SuspenseHelper } from '../SuspenseHelper';
 import { getCurrLocale } from '../../utils/locale';
 import { searchIconStyling, searchInputStyling, StyledInputContainer } from './styles';
@@ -56,7 +56,7 @@ const SearchInput = ({ className, slug }) => {
   const searchBoxRef = useRef();
   const inputRef = useRef();
   const menuRef = useRef();
-  const metadata = useSnootyMetadata();
+  const metadata = useSiteMetadata();
   const { darkMode } = useDarkMode();
   const [selectedOption, setSelectedOption] = useState(0);
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
@@ -200,10 +200,9 @@ const SearchInput = ({ className, slug }) => {
     }
   };
 
-  const CHATBOT_SERVER_BASE_URL =
-    metadata?.snootyEnv === 'dotcomprd'
-      ? 'https://knowledge.mongodb.com/api/v1'
-      : 'https://knowledge.staging.corp.mongodb.com/api/v1';
+  const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(metadata?.snootyEnv)
+    ? 'https://knowledge.mongodb.com/api/v1'
+    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
     <StyledInputContainer

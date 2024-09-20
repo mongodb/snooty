@@ -32,6 +32,7 @@ const Header = ({ eol, template }) => {
             <>
               <UnifiedNav
                 fullWidth="true"
+                hideSearch="true"
                 position="relative"
                 property={{ name: unifiedNavProperty }}
                 showLanguageSelector={true}
@@ -43,6 +44,7 @@ const Header = ({ eol, template }) => {
               />
               <UnifiedNav
                 fullWidth="true"
+                hideSearch="true"
                 position="relative"
                 property={{ name: unifiedNavProperty }}
                 showLanguageSelector={true}
