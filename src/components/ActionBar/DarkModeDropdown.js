@@ -24,10 +24,6 @@ const menuStyling = css`
   margin-top: ${theme.size.small};
 `;
 
-const menuItemStyling = css`
-  tabindex: 0;
-`;
-
 const DROPDOWN_ICON_SIZE = 20;
 const darkModeSvgStyle = {
   width: DROPDOWN_ICON_SIZE,
@@ -78,7 +74,6 @@ const DarkModeDropdown = () => {
             active={darkModePref === 'light-theme'}
             onClick={() => select('light-theme')}
             glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Sun'} />}
-            className={menuItemStyling}
           >
             Light
           </MenuItem>
@@ -86,7 +81,6 @@ const DarkModeDropdown = () => {
             active={darkModePref === 'dark-theme'}
             onClick={() => select('dark-theme')}
             glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Moon'} />}
-            className={menuItemStyling}
           >
             Dark
           </MenuItem>
@@ -103,7 +97,6 @@ const DarkModeDropdown = () => {
                 styles={darkModeSvgStyle}
               />
             }
-            className={menuItemStyling}
           >
             System
           </MenuItem>
