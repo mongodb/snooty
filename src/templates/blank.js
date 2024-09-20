@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MainColumn from '../components/MainColumn';
 import * as landingStyles from '../styles/landing.module.css';
+import { NotFoundContainer, Wrapper } from './NotFound';
 
 const Blank = ({ children }) => (
-  <div>
-    <MainColumn className={landingStyles.fullWidth}>
-      <div className={landingStyles.document}>{children}</div>
-    </MainColumn>
-  </div>
+  <Wrapper className={landingStyles.fullWidth}>
+    <NotFoundContainer>{children}</NotFoundContainer>
+  </Wrapper>
 );
 
 Blank.propTypes = {

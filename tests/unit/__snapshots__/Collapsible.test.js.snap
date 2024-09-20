@@ -62,7 +62,7 @@ exports[`collapsible component renders all the content in the options and childr
 }
 
 .emotion-5 {
-  margin-top: -175px;
+  margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
 }

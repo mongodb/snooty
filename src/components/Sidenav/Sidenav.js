@@ -16,7 +16,9 @@ import { formatText } from '../../utils/format-text';
 import { TocContext } from '../../context/toc-context';
 import { VersionContext } from '../../context/version-context';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { getCurrentLocaleFontFamilyValue } from '../../utils/locale';
+import useViewport from '../../hooks/useViewport';
+import { HeaderContext } from '../Header/header-context';
+import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -29,8 +31,6 @@ import { sideNavItemBasePadding, sideNavItemFontSize, titleStyle } from './style
 import DocsHomeButton from './DocsHomeButton';
 
 const SIDENAV_WIDTH = 268;
-
-const fontFamily = getCurrentLocaleFontFamilyValue();
 
 // Use LG's css here to style the component without passing props
 const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
@@ -76,38 +76,32 @@ const disableScroll = (shouldDisableScroll) => css`
   }
 `;
 
-const translatedFontFamilyStyles = css`
-  #side-nav-1 * {
-    font-family: ${fontFamily};
-  }
-`;
-
-// use eol status to determine side nav styling
-const getTopAndHeight = (topValue, template) => css`
-  ${template === 'landing'
-    ? `
-    top: 0px;
-    height: calc(100vh);`
-    : `
-    top: ${topValue};
-    height: calc(100vh - ${topValue});
-  `}
-`;
+const getTopAndHeight = (topValue) => {
+  return css`
+    top: max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight});
+    height: calc(100vh - max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight}));
+  `;
+};
 
 // Keep the side nav container sticky to allow LG's side nav to push content seamlessly
 const SidenavContainer = styled.div(
-  ({ topLarge, topMedium, topSmall, template }) => css`
+  ({ topLarge, topMedium, topSmall }) => css`
     grid-area: sidenav;
     position: sticky;
     z-index: ${theme.zIndexes.sidenav};
-    ${getTopAndHeight(topLarge, template)};
+    top: 0px;
+    height: calc(
+      100vh + ${theme.header.actionBarMobileHeight} - ${topLarge} +
+        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(--scroll-y))
+    );
 
     @media ${theme.screenSize.upToLarge} {
-      ${getTopAndHeight(topMedium, template)};
+      ${getTopAndHeight(topMedium)};
+      z-index: ${theme.zIndexes.actionBar - 1};
     }
 
     @media ${theme.screenSize.upToSmall} {
-      ${getTopAndHeight(topSmall, template)};
+      ${getTopAndHeight(topSmall)};
     }
 
     nav {
@@ -154,7 +148,7 @@ export const Border = styled('hr')`
 // Create artificial "padding" at the top of the SideNav to allow products list to transition without being seen
 // by the gap in the SideNav's original padding.
 const ArtificialPadding = styled('div')`
-  height: 16px;
+  height: 15px;
 `;
 
 // Children of this div should appear 1 z-index higher than the ProductsList component.
@@ -182,9 +176,10 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
   const isDocsLanding = project === 'landing';
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
+  const { bannerContent } = useContext(HeaderContext);
 
   // CSS top property values for sticky side nav based on header height
-  const topValues = useStickyTopValues(eol);
+  const topValues = useStickyTopValues(false, true, !!bannerContent);
 
   let showVersions = repoBranches?.branches?.filter((b) => b.active)?.length > 1;
 
@@ -244,14 +239,22 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
     return chapters[chapterName]?.['chapter_number'];
   }, [chapters, guides, isGuidesTemplate, slug]);
 
+  // listen for scrolls for mobile and tablet menu
+  const viewport = useViewport(false);
+
   return (
     <>
       <Global
         styles={css`
-          ${disableScroll(!hideMobile)} ${translatedFontFamilyStyles}
+          ${disableScroll(!hideMobile)}
         `}
       />
-      <SidenavContainer {...topValues} template={template}>
+      <SidenavContainer
+        {...topValues}
+        template={template}
+        style={{ '--scroll-y': `${viewport.scrollY}px` }}
+        id={SIDE_NAV_CONTAINER_ID}
+      >
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
