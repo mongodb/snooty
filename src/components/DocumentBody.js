@@ -1,4 +1,4 @@
-import React, { useState, lazy } from 'react';
+import React, { useState, useMemo, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import { Global, css } from '@emotion/react';
@@ -13,6 +13,7 @@ import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
 import { getSiteTitle } from '../utils/get-site-title';
+import { TechArticleSd } from '../utils/structured-data';
 import { PageContext } from '../context/page-context';
 import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
@@ -78,6 +79,39 @@ const getNamedFootnoteReferences = (footnoteReferences, refname) => {
 // we may return an empty array
 const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
+};
+
+// get TechArticle Structured Data from page facets and pageTitle.
+const constructTechArticles = ({ facets, pageTitle, _version }) => {
+  function buildProp(productName) {
+    // TODO: add version here
+    return {
+      mainEntity: { offers: {}, name: productName },
+      headline: pageTitle,
+    };
+  }
+
+  // find targetProduct from facets.
+  // subfacets (with category sub_product) are preferred over base facet of targetProduct
+  let techArticlePropsList = [];
+  const productFacets = facets?.filter((facet) => facet.category === 'target_product') || [];
+
+  for (let index = 0; index < productFacets.length; index++) {
+    const subProducts = productFacets[index].sub_facets?.filter((facet) => facet.category === 'sub_product') || [];
+    if (subProducts.length) {
+      techArticlePropsList = techArticlePropsList.concat(
+        subProducts.map((subProductFacet) => buildProp(subProductFacet['display_name']))
+      );
+    } else {
+      techArticlePropsList.push(buildProp(productFacets[index]['display_name']));
+    }
+  }
+  return techArticlePropsList
+    .map((techArticleProps) => {
+      const techArticle = new TechArticleSd(techArticleProps);
+      return techArticle.isValid() ? techArticle : null;
+    })
+    .filter((techArticle) => !!techArticle);
 };
 
 const fontFamily = getCurrentLocaleFontFamilyValue();
@@ -230,6 +264,12 @@ export const Head = ({ pageContext, data }) => {
   // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
   const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
 
+  // construct Structured Data
+  const techArticalSds = useMemo(
+    () => constructTechArticles({ facets: data.page.facets, pageTitle }),
+    [data.page.facets, pageTitle]
+  );
+
   return (
     <>
       <SEO
@@ -243,6 +283,14 @@ export const Head = ({ pageContext, data }) => {
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
+      {techArticalSds.map((techArticalSd, idx) => {
+        const key = `tech-article-sd-${idx}`;
+        return (
+          <script id={key} key={key} type="application/ld+json">
+            {techArticalSd.toString()}
+          </script>
+        );
+      })}
     </>
   );
 };
@@ -251,6 +299,7 @@ export const query = graphql`
   query ($page_id: String, $slug: String) {
     page(id: { eq: $page_id }) {
       ast
+      facets
     }
     pageImage(slug: { eq: $slug }) {
       slug

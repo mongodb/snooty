@@ -160,6 +160,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
         id: key,
         page_id: key,
         ast: doc.ast,
+        facets: doc.facets,
         internal: {
           type: 'Page',
           contentDigest: createContentDigest(doc),
@@ -379,6 +380,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       branch: String
       pagePath: String
       ast: JSON!
+      facets: JSON!
       metadata: SnootyMetadata @link
       componentNames: [String!]
     }
