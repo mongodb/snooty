@@ -81,37 +81,54 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
-// get TechArticle Structured Data from page facets and pageTitle.
-const constructTechArticles = ({ facets, pageTitle, _version }) => {
-  function buildProp(productName) {
-    // TODO: add version here
-    return {
-      mainEntity: { offers: {}, name: productName },
-      headline: pageTitle,
-    };
+/**
+ * get TechArticle Structured Data from page facets and pageTitle.
+ * @param   {{category: string, sub_facets: object[]}[]}  facets
+ * @param   {string}                                      pageTitle
+ * @param   {string}                                      version
+ * @returns {StructuredData}
+ */
+const constructTechArticle = ({ facets, pageTitle }) => {
+  // get display name from facets
+  function getDisplayName(facet) {
+    return facet.display_name;
   }
 
-  // find targetProduct from facets.
-  // subfacets (with category sub_product) are preferred over base facet of targetProduct
-  let techArticlePropsList = [];
-  const productFacets = facets?.filter((facet) => facet.category === 'target_product') || [];
+  // extract genre facets
+  function getGenreNames(facets) {
+    return facets?.filter((facet) => facet.category === 'genre').map(getDisplayName) || [];
+  }
 
-  for (let index = 0; index < productFacets.length; index++) {
-    const subProducts = productFacets[index].sub_facets?.filter((facet) => facet.category === 'sub_product') || [];
-    if (subProducts.length) {
-      techArticlePropsList = techArticlePropsList.concat(
-        subProducts.map((subProductFacet) => buildProp(subProductFacet['display_name']))
-      );
-    } else {
-      techArticlePropsList.push(buildProp(productFacets[index]['display_name']));
+  // extract target product facets
+  function getTargetProductsNames(facets) {
+    // TODO: these products and sub products need version data from facets
+    let res = [];
+    const productFacets = facets?.filter((facet) => facet.category === 'target_product') || [];
+    for (let index = 0; index < productFacets.length; index++) {
+      const productFacet = productFacets[index],
+        subProducts =
+          productFacet.sub_facets?.filter((facet) => facet.category === 'sub_product').map(getDisplayName) || [];
+      if (subProducts.length) {
+        res = res.concat(subProducts);
+      } else {
+        res.push(getDisplayName(productFacet));
+      }
     }
+
+    return res;
   }
-  return techArticlePropsList
-    .map((techArticleProps) => {
-      const techArticle = new TechArticleSd(techArticleProps);
-      return techArticle.isValid() ? techArticle : null;
-    })
-    .filter((techArticle) => !!techArticle);
+
+  const techArticleProps = {
+    mainEntity: { offers: {}, name: getTargetProductsNames(facets) },
+    headline: pageTitle,
+  };
+
+  const genres = getGenreNames(facets);
+  if (genres.length) {
+    techArticleProps['genre'] = genres;
+  }
+
+  return new TechArticleSd(techArticleProps);
 };
 
 const fontFamily = getCurrentLocaleFontFamilyValue();
@@ -265,8 +282,8 @@ export const Head = ({ pageContext, data }) => {
   const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
 
   // construct Structured Data
-  const techArticalSds = useMemo(
-    () => constructTechArticles({ facets: data.page.facets, pageTitle }),
+  const techArticleSd = useMemo(
+    () => constructTechArticle({ facets: data.page.facets, pageTitle }),
     [data.page.facets, pageTitle]
   );
 
@@ -283,14 +300,11 @@ export const Head = ({ pageContext, data }) => {
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
-      {techArticalSds.map((techArticalSd, idx) => {
-        const key = `tech-article-sd-${idx}`;
-        return (
-          <script id={key} key={key} type="application/ld+json">
-            {techArticalSd.toString()}
-          </script>
-        );
-      })}
+      {techArticleSd && techArticleSd.isValid() && (
+        <script id={'tech-article-sd'} type="application/ld+json">
+          {techArticleSd.toString()}
+        </script>
+      )}
     </>
   );
 };
