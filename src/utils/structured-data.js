@@ -31,6 +31,13 @@ export class StructuredData {
   toString() {
     return JSON.stringify(this);
   }
+
+  static addCompanyToName(name) {
+    if (name.toLowerCase().includes('mongodb')) {
+      return name;
+    }
+    return `MongoDB ` + name;
+  }
 }
 
 export class TechArticleSd extends StructuredData {
@@ -50,7 +57,7 @@ export class TechArticleSd extends StructuredData {
     this.headline = headline;
     this.mainEntity = {
       type: 'SoftwareApplication',
-      name, // TODO: make a class fn to verify name (prefixed with MongoDB if not already in the name)
+      name: StructuredData.addCompanyToName(name), // TODO: make a class fn to verify name (prefixed with MongoDB if not already in the name)
       applicationCategory: 'DeveloperApplication',
       offers: { price: 0 },
     };
