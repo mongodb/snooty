@@ -10,7 +10,7 @@ function redirectBasedOnLang() {
 
     // Based on locale utils; couldn't figure out how to use imports due to how webpack attempts to resolve them
     // PLEASE make sure this matches the AVAILABLE_LANGUAGES object, excluding English and other hidden languages
-    const supportedLocaleCodes = ['zh-cn', 'ko-kr', 'pt-br'];
+    const supportedLocaleCodes = ['zh-cn', 'ko-kr', 'pt-br', 'ja-jp'];
     const isEnglishSite = !supportedLocaleCodes.find((localeCode) =>
       window.location.pathname.startsWith('/' + localeCode)
     );
