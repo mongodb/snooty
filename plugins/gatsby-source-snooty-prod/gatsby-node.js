@@ -380,7 +380,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       branch: String
       pagePath: String
       ast: JSON!
-      facets: JSON!
+      facets: [JSON]
       metadata: SnootyMetadata @link
       componentNames: [String!]
     }

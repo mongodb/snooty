@@ -283,7 +283,7 @@ export const Head = ({ pageContext, data }) => {
 
   // construct Structured Data
   const techArticleSd = useMemo(
-    () => constructTechArticle({ facets: data.page.facets, pageTitle }),
+    () => constructTechArticle({ facets: data.page.facets || [], pageTitle }),
     [data.page.facets, pageTitle]
   );
 
