@@ -282,10 +282,12 @@ export const Head = ({ pageContext, data }) => {
   const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
 
   // construct Structured Data
-  const techArticleSd = useMemo(
-    () => constructTechArticle({ facets: data.page.facets || [], pageTitle }),
-    [data.page.facets, pageTitle]
-  );
+  const techArticleSd = useMemo(() => {
+    if (['product-landing', 'landing', 'search', 'errorpage'].includes(template)) {
+      return;
+    }
+    return constructTechArticle({ facets: data.page.facets || [], pageTitle });
+  }, [data.page.facets, pageTitle, template]);
 
   return (
     <>

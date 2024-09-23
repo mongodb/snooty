@@ -33,6 +33,9 @@ export class StructuredData {
   }
 
   static addCompanyToName(name) {
+    if (Array.isArray(name)) {
+      return name.map(this.addCompanyToName);
+    }
     if (name.toLowerCase().includes('mongodb')) {
       return name;
     }
