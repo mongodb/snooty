@@ -5,6 +5,9 @@ exports[`renders a Banner correctly 1`] = `
   .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
+  background-color: #E1F7FF;
+  color: #083C90;
+  border-color: #C3E7FE;
 }
 
 .emotion-0>div>div>* {
@@ -28,8 +31,18 @@ exports[`renders a Banner correctly 1`] = `
   text-underline-offset: 3px;
 }
 
-.emotion-0 a:hover {
-  text-decoration-color: var(--text-decoration-color);
+.emotion-0 a {
+  color: #0C2657;
+}
+
+.dark-theme .emotion-0 {
+  background-color: #0C2657;
+  color: #C3E7FE;
+  border-color: #083C90;
+}
+
+.dark-theme .emotion-0 a {
+  color: #E1F7FF;
 }
 
 .emotion-2 {
@@ -146,7 +159,6 @@ exports[`renders a Banner correctly 1`] = `
 <div
     class="emotion-0 emotion-1 emotion-2"
     role="alert"
-    style="--text-decoration-color: #083C90;"
   >
     <svg
       aria-label="Info With Circle Icon"
