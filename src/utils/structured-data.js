@@ -60,7 +60,7 @@ export class TechArticleSd extends StructuredData {
     this.headline = headline;
     this.mainEntity = {
       type: 'SoftwareApplication',
-      name: StructuredData.addCompanyToName(name), // TODO: make a class fn to verify name (prefixed with MongoDB if not already in the name)
+      name: StructuredData.addCompanyToName(name),
       applicationCategory: 'DeveloperApplication',
       offers: { price: 0 },
     };
