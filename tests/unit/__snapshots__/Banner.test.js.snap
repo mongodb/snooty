@@ -35,6 +35,11 @@ exports[`renders a Banner correctly 1`] = `
   color: #0C2657;
 }
 
+.emotion-0 a:hover {
+  color: #083C90;
+  text-decoration-color: #083C90;
+}
+
 .dark-theme .emotion-0 {
   background-color: #0C2657;
   color: #C3E7FE;
@@ -43,6 +48,11 @@ exports[`renders a Banner correctly 1`] = `
 
 .dark-theme .emotion-0 a {
   color: #E1F7FF;
+}
+
+.dark-theme .emotion-0 a:hover {
+  color: #C3E7FE;
+  text-decoration-color: #C3E7FE;
 }
 
 .emotion-2 {
