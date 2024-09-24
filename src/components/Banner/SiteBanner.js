@@ -17,7 +17,7 @@ const getBannerSource = (src) => {
 const StyledBannerContainer = styled.a`
   display: block;
   height: ${theme.header.bannerHeight};
-  width: 100vw;
+  width: 100%;
   position: absolute;
   z-index: ${theme.zIndexes.header};
 `;
