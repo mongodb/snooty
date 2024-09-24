@@ -42,6 +42,7 @@
     "build:clean": "npm run clean && npm run build",
     "build:clean:stage": "npm run build:clean && make stage",
     "build:netlify": "npm run build && echo -n $INCOMING_HOOK_BODY > build-hook.txt",
+    "build:no-prefix": "gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "develop:preview": "GATSBY_IS_PREVIEW=true gatsby develop",
