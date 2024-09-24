@@ -74,7 +74,8 @@ const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
   a {
     color: ${(props) => styleMapLight[props.variant].linkColor};
     :hover {
-      ${(props) => styleMapLight[props.variant].color};
+      color: ${(props) => styleMapLight[props.variant].color};
+      text-decoration-color: ${(props) => styleMapLight[props.variant].color};
     }
   }
 
@@ -85,7 +86,8 @@ const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
     a {
       color: ${(props) => styleMapDark[props.variant].linkColor};
       :hover {
-        ${(props) => styleMapDark[props.variant].color};
+        color: ${(props) => styleMapDark[props.variant].color};
+        text-decoration-color: ${(props) => styleMapDark[props.variant].color};
       }
     }
   }
