@@ -7,6 +7,11 @@
  */
 
 export class StructuredData {
+  constructor(type) {
+    this['@context'] = 'https://schema.org';
+    this['@type'] = 'TechArticle';
+  }
+
   isValid() {
     function recursiveValidity(param) {
       // array
@@ -44,31 +49,75 @@ export class StructuredData {
 }
 
 export class TechArticleSd extends StructuredData {
-  constructor({
-    headline,
-    mainEntity: {
-      name,
-      offers: { softwareVersion },
-    },
-    genre,
-  }) {
-    super();
+  constructor({ headline, mainEntity, genre }) {
+    super('TechArticle');
+
     this.author = {
       '@type': 'Organization',
       name: 'MongoDB Documentation Team',
     };
     this.headline = headline;
-    this.mainEntity = {
-      type: 'SoftwareApplication',
-      name: StructuredData.addCompanyToName(name),
-      applicationCategory: 'DeveloperApplication',
-      offers: { price: 0 },
-    };
+    this.mainEntity = mainEntity;
     if (genre) {
       this.genre = genre;
     }
-    if (softwareVersion) {
-      this.offers['softwareVersion'] = softwareVersion;
-    }
   }
 }
+
+/**
+ * get TechArticle Structured Data from page facets and pageTitle.
+ * @param   {{category: string, sub_facets: object[]}[]}  facets
+ * @param   {string}                                      pageTitle
+ * @returns {StructuredData}
+ */
+export const constructTechArticle = ({ facets, pageTitle }) => {
+  // get display name from facets
+  function getDisplayName(facet) {
+    return facet.display_name;
+  }
+
+  // extract genre facets
+  function getGenreNames(facets) {
+    return facets?.filter((facet) => facet.category === 'genre').map(getDisplayName) || [];
+  }
+
+  // extract target product facets
+  function getTargetProductsNames(facets) {
+    // TODO: these products and sub products need version data from facets
+    // https://jira.mongodb.org/browse/DOP-5037
+    let res = [];
+    const productFacets = facets?.filter((facet) => facet.category === 'target_product') || [];
+    for (let index = 0; index < productFacets.length; index++) {
+      const productFacet = productFacets[index];
+      const subProducts =
+        productFacet.sub_facets?.filter((facet) => facet.category === 'sub_product').map(getDisplayName) || [];
+      if (subProducts.length) {
+        res = res.concat(subProducts);
+      } else {
+        res.push(getDisplayName(productFacet));
+      }
+    }
+
+    return res;
+  }
+
+  const techArticleProps = {
+    mainEntity: getTargetProductsNames(facets).map((name) => ({
+      '@type': 'SoftwareApplication',
+      name: StructuredData.addCompanyToName(name),
+      applicationCategory: 'DeveloperApplication',
+      offers: {
+        price: 0,
+        priceCurrency: 'USD',
+      },
+    })),
+    headline: pageTitle,
+  };
+
+  const genres = getGenreNames(facets);
+  if (genres.length) {
+    techArticleProps['genre'] = genres;
+  }
+
+  return new TechArticleSd(techArticleProps);
+};

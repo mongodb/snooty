@@ -13,7 +13,7 @@ import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
 import { getSiteTitle } from '../utils/get-site-title';
-import { TechArticleSd } from '../utils/structured-data';
+import { constructTechArticle } from '../utils/structured-data';
 import { PageContext } from '../context/page-context';
 import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
@@ -79,56 +79,6 @@ const getNamedFootnoteReferences = (footnoteReferences, refname) => {
 // we may return an empty array
 const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
-};
-
-/**
- * get TechArticle Structured Data from page facets and pageTitle.
- * @param   {{category: string, sub_facets: object[]}[]}  facets
- * @param   {string}                                      pageTitle
- * @param   {string}                                      version
- * @returns {StructuredData}
- */
-const constructTechArticle = ({ facets, pageTitle }) => {
-  // get display name from facets
-  function getDisplayName(facet) {
-    return facet.display_name;
-  }
-
-  // extract genre facets
-  function getGenreNames(facets) {
-    return facets?.filter((facet) => facet.category === 'genre').map(getDisplayName) || [];
-  }
-
-  // extract target product facets
-  function getTargetProductsNames(facets) {
-    // TODO: these products and sub products need version data from facets
-    let res = [];
-    const productFacets = facets?.filter((facet) => facet.category === 'target_product') || [];
-    for (let index = 0; index < productFacets.length; index++) {
-      const productFacet = productFacets[index],
-        subProducts =
-          productFacet.sub_facets?.filter((facet) => facet.category === 'sub_product').map(getDisplayName) || [];
-      if (subProducts.length) {
-        res = res.concat(subProducts);
-      } else {
-        res.push(getDisplayName(productFacet));
-      }
-    }
-
-    return res;
-  }
-
-  const techArticleProps = {
-    mainEntity: { offers: {}, name: getTargetProductsNames(facets) },
-    headline: pageTitle,
-  };
-
-  const genres = getGenreNames(facets);
-  if (genres.length) {
-    techArticleProps['genre'] = genres;
-  }
-
-  return new TechArticleSd(techArticleProps);
 };
 
 const fontFamily = getCurrentLocaleFontFamilyValue();
@@ -286,7 +236,8 @@ export const Head = ({ pageContext, data }) => {
     if (['product-landing', 'landing', 'search', 'errorpage'].includes(template)) {
       return;
     }
-    return constructTechArticle({ facets: data.page.facets || [], pageTitle });
+    const techArticle = constructTechArticle({ facets: data.page.facets || [], pageTitle });
+    return techArticle.isValid() ? techArticle : undefined;
   }, [data.page.facets, pageTitle, template]);
 
   return (
@@ -302,7 +253,7 @@ export const Head = ({ pageContext, data }) => {
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
-      {techArticleSd && techArticleSd.isValid() && (
+      {techArticleSd && (
         <script id={'tech-article-sd'} type="application/ld+json">
           {techArticleSd.toString()}
         </script>
