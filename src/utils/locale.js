@@ -95,6 +95,19 @@ export const getAllLocaleCssStrings = () => {
         #${SIDE_NAV_CONTAINER_ID} * {
           font-family: ${fontFamily};
         }
+
+        // Italicized non-latin characters may look confusing, so we want to replace them with bold
+        // without changing the source HTML tag (and potentially causing errors with Smartling)
+        em,
+        h1 .guilabel,
+        h2 .guilabel,
+        h3 .guilabel,
+        h4 .guilabel,
+        h5 .guilabel,
+        h6 .guilabel {
+          font-style: normal;
+          font-weight: bold;
+        }
       }
     `);
   });
