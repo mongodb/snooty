@@ -98,7 +98,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
 
     if (isDrawer && hasChildren) {
       return (
-        <SideNavItem className={cx(sideNavItemTOCStyling({ level }))} as="a" onClick={handleClick}>
+        <SideNavItem className={cx(sideNavItemTOCStyling({ level }))} as="a" onClick={hasChildren ? null : handleClick}>
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
           {formattedTitle}
           {hasVersions && activeVersions[options.project] && (
@@ -114,7 +114,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
         to={target}
         active={isSelected}
         className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
-        onClick={handleClick}
+        onClick={hasChildren ? null : handleClick}
         hideExternalIcon={true}
       >
         {hasChildren && (
