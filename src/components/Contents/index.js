@@ -12,9 +12,11 @@ const formatTextOptions = {
 const Contents = ({ className }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorId } = useContext(ContentsContext);
 
+  console.log('heading nodes', headingNodes);
+
   // Don't filter if selector_id is null/undefined
   const filteredNodes = headingNodes.filter(
-    (headingNode) => !headingNode.selector_id || headingNode.selector_id === activeSelectorId
+    (headingNode) => !headingNode.selector_id || headingNode.selector_id.includes(activeSelectorId)
   );
 
   if (filteredNodes.length === 0 || !showContentsComponent) {
