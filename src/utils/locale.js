@@ -23,10 +23,11 @@ const AVAILABLE_LANGUAGES = [
   { language: '简体中文', localeCode: 'zh-cn', fontFamily: 'Noto Sans SC' },
   { language: '한국어', localeCode: 'ko-kr', fontFamily: 'Noto Sans KR' },
   { language: 'Português', localeCode: 'pt-br' },
+  { language: '日本語', localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' },
 ];
 
 // Languages in current development that we do not want displayed publicly yet
-const HIDDEN_LANGUAGES = [{ language: '日本語', localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' }];
+const HIDDEN_LANGUAGES = [];
 
 /**
  * @param {boolean} forceAll - Bypasses feature flag requirements if necessary
@@ -43,7 +44,8 @@ export const getAvailableLanguages = (forceAll = false) => {
 };
 
 const validateLocaleCode = (potentialCode) =>
-  !!getAvailableLanguages().find(({ localeCode }) => potentialCode === localeCode);
+  // Include hidden languages in validation to ensure current locale of hidden sites can still be captured correctly
+  !!getAvailableLanguages(true).find(({ localeCode }) => potentialCode === localeCode);
 
 /**
  * Strips the first locale code found in the slug. This function should be used to determine the original un-localized path of a page.
@@ -92,6 +94,19 @@ export const getAllLocaleCssStrings = () => {
         #${TEMPLATE_CONTAINER_ID} *:not(:is(code, code *)),
         #${SIDE_NAV_CONTAINER_ID} * {
           font-family: ${fontFamily};
+        }
+
+        // Italicized non-latin characters may look confusing, so we want to replace them with bold
+        // without changing the source HTML tag (and potentially causing errors with Smartling)
+        em,
+        h1 .guilabel,
+        h2 .guilabel,
+        h3 .guilabel,
+        h4 .guilabel,
+        h5 .guilabel,
+        h6 .guilabel {
+          font-style: normal;
+          font-weight: bold;
         }
       }
     `);
