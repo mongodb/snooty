@@ -38,6 +38,9 @@ export class StructuredData {
   }
 
   static addCompanyToName(name) {
+    if (!name) {
+      return name;
+    }
     if (Array.isArray(name)) {
       return name.map(this.addCompanyToName);
     }
