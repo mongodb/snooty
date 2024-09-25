@@ -82,6 +82,11 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     setIsOpen(!isOpen);
   };
 
+  const clickSideNav = (handleClick) => {
+    setIsOpen(!isOpen);
+    handleClick();
+  };
+
   const NodeLink = () => {
     // If title is a plaintext string, render as-is. Otherwise, iterate over the text nodes to properly format titles.
     const formatTextOptions = {
@@ -98,7 +103,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
 
     if (isDrawer && hasChildren) {
       return (
-        <SideNavItem className={cx(sideNavItemTOCStyling({ level }))} as="a" onClick={hasChildren ? null : handleClick}>
+        <SideNavItem className={cx(sideNavItemTOCStyling({ level }))} as="a" onClick={() => clickSideNav(handleClick)}>
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
           {formattedTitle}
           {hasVersions && activeVersions[options.project] && (
@@ -114,7 +119,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
         to={target}
         active={isSelected}
         className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
-        onClick={hasChildren ? null : handleClick}
+        onClick={() => clickSideNav(handleClick)}
         hideExternalIcon={true}
       >
         {hasChildren && (
