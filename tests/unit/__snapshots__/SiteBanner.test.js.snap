@@ -5,7 +5,7 @@ exports[`Banner component renders with a banner image 1`] = `
   .emotion-0 {
   display: block;
   height: 40px;
-  width: 100vw;
+  width: 100%;
   position: absolute;
   z-index: 1000;
 }
