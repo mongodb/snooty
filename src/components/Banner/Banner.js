@@ -19,18 +19,21 @@ const styleMapLight = {
     color: palette.blue.dark2,
     borderColor: palette.blue.light2,
     linkColor: palette.blue.dark3,
+    beforeColor: palette.blue.base,
   },
   warning: {
     backgroundColor: palette.yellow.light3,
     color: palette.yellow.dark2,
     borderColor: palette.yellow.light2,
     linkColor: palette.yellow.dark3,
+    beforeColor: palette.yellow.base,
   },
   danger: {
     backgroundColor: palette.red.light3,
     color: palette.red.dark2,
     borderColor: palette.red.light2,
     linkColor: palette.red.dark3,
+    beforeColor: palette.red.base,
   },
   success: {
     backgroundColor: palette.green.light3,
@@ -45,18 +48,21 @@ const styleMapDark = {
     color: palette.blue.light2,
     borderColor: palette.blue.dark2,
     linkColor: palette.blue.light3,
+    beforeColor: palette.blue.light1,
   },
   warning: {
     backgroundColor: palette.yellow.dark3,
     color: palette.yellow.light2,
     borderColor: palette.yellow.dark2,
     linkColor: palette.yellow.light3,
+    beforeColor: palette.yellow.dark2,
   },
   danger: {
     backgroundColor: palette.red.dark3,
     color: palette.red.light2,
     borderColor: palette.red.dark2,
     linkColor: palette.red.light3,
+    beforeColor: palette.red.base,
   },
   success: {
     backgroundColor: palette.green.dark3,
@@ -71,6 +77,10 @@ const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
   background-color: ${(props) => styleMapLight[props.variant].backgroundColor};
   color: ${(props) => styleMapLight[props.variant].color};
   border-color: ${(props) => styleMapLight[props.variant].borderColor};
+  // copied from LG
+  ::before {
+    background: linear-gradient(to left, transparent 6px, ${(props) => styleMapLight[props.variant].beforeColor}} 6px);
+  }
   a {
     color: ${(props) => styleMapLight[props.variant].linkColor};
     :hover {
@@ -83,6 +93,9 @@ const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
     background-color: ${(props) => styleMapDark[props.variant].backgroundColor};
     color: ${(props) => styleMapDark[props.variant].color};
     border-color: ${(props) => styleMapDark[props.variant].borderColor};
+    ::before {
+      background: linear-gradient(to left, transparent 6px, ${(props) => styleMapDark[props.variant].beforeColor} 6px);
+    }
     a {
       color: ${(props) => styleMapDark[props.variant].linkColor};
       :hover {
