@@ -5,6 +5,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   .emotion-0 {
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+  color: unset;
 }
 
 <a
@@ -67,6 +68,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 .emotion-1 {
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+  color: unset;
 }
 
 .emotion-2 {
@@ -221,6 +223,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   .emotion-0 {
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+  color: unset;
 }
 
 <a
@@ -283,6 +286,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 .emotion-1 {
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+  color: unset;
 }
 
 .emotion-2 {
@@ -439,6 +443,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   .emotion-0 {
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+  color: unset;
 }
 
 <a
@@ -501,6 +506,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 .emotion-1 {
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+  color: unset;
 }
 
 .emotion-2 {
@@ -655,6 +661,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   .emotion-0 {
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+  color: unset;
 }
 
 <a
@@ -717,6 +724,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 .emotion-1 {
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
+  color: unset;
 }
 
 .emotion-2 {

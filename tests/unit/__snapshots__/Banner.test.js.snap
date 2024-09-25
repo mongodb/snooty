@@ -31,6 +31,10 @@ exports[`renders a Banner correctly 1`] = `
   text-underline-offset: 3px;
 }
 
+.emotion-0::before {
+  background: linear-gradient(to left, transparent 6px, #016BF8} 6px);
+}
+
 .emotion-0 a {
   color: #0C2657;
 }
@@ -44,6 +48,10 @@ exports[`renders a Banner correctly 1`] = `
   background-color: #0C2657;
   color: #C3E7FE;
   border-color: #083C90;
+}
+
+.dark-theme .emotion-0::before {
+  background: linear-gradient(to left, transparent 6px, #0498EC 6px);
 }
 
 .dark-theme .emotion-0 a {
