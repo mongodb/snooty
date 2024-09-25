@@ -17,7 +17,7 @@ import mockData from './data/Toctree.test.json';
 //   /sdk/ios
 
 const mountToctree = (slug) => {
-  return render(<Toctree slug={slug} toctree={mockData?.toctree} />);
+  return render(<Toctree slug={slug} toctree={mockData?.toctree} handleClick={() => {}} />);
 };
 
 beforeAll(() => {
