@@ -1,8 +1,13 @@
-import React, { useMemo } from 'react';
+import React, { useId, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
+import {
+  AncestorComponentContextProvider,
+  useAncestorComponentContext,
+} from '../../context/ancestor-components-context';
 import { theme } from '../../theme/docsTheme';
+import { constructHowToSd } from '../../utils/structured-data';
 import Step from './Step';
 
 const StyledProcedure = styled('div')`
@@ -47,18 +52,38 @@ const getSteps = (children) => {
   return steps;
 };
 
-const Procedure = ({ nodeData: { children, options }, ...rest }) => {
+const Procedure = ({ nodeData, ...rest }) => {
   // Make the style 'connected' by default for now to give time for PLPs that use this directive to
   // add the "style" option
+  const children = nodeData['children'];
+  const options = nodeData['options'];
   const style = options?.style || 'connected';
   const steps = useMemo(() => getSteps(children), [children]);
+  const ancestors = useAncestorComponentContext();
+
+  // construct Structured Data
+  const howToSd = useMemo(() => {
+    if (ancestors['procedure']) return undefined;
+    const howToSd = constructHowToSd({ steps });
+    return howToSd.isValid() ? howToSd : undefined;
+  }, [steps, ancestors]);
+
+  //
+  const id = useId();
 
   return (
-    <StyledProcedure procedureStyle={style}>
-      {steps.map((child, i) => (
-        <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} />
-      ))}
-    </StyledProcedure>
+    <AncestorComponentContextProvider component={'procedure'}>
+      {howToSd && (
+        <script id={`how-to-sd-${id}`} type="application/ld+json">
+          {howToSd.toString()}
+        </script>
+      )}
+      <StyledProcedure procedureStyle={style}>
+        {steps.map((child, i) => (
+          <Step {...rest} nodeData={child} stepNumber={i + 1} stepStyle={style} key={i} />
+        ))}
+      </StyledProcedure>
+    </AncestorComponentContextProvider>
   );
 };
 
