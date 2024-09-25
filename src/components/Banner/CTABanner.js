@@ -47,6 +47,7 @@ const lgIconStyling = css`
 
 const linkStyling = css`
   text-decoration: none !important;
+  color: unset;
 `;
 
 const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
