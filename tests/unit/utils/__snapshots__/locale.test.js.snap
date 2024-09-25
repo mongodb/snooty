@@ -3,6 +3,7 @@
 exports[`getLocaleMapping returns a valid mapping of URLs 1`] = `
 {
   "en-us": "https://www.mongodb.com/docs/",
+  "ja-jp": "https://www.mongodb.com/docs/ja-jp/",
   "ko-kr": "https://www.mongodb.com/docs/ko-kr/",
   "pt-br": "https://www.mongodb.com/docs/pt-br/",
   "zh-cn": "https://www.mongodb.com/docs/zh-cn/",
@@ -12,6 +13,7 @@ exports[`getLocaleMapping returns a valid mapping of URLs 1`] = `
 exports[`getLocaleMapping returns a valid mapping of URLs 2`] = `
 {
   "en-us": "https://www.mongodb.com/docs/about/page/",
+  "ja-jp": "https://www.mongodb.com/docs/ja-jp/about/page/",
   "ko-kr": "https://www.mongodb.com/docs/ko-kr/about/page/",
   "pt-br": "https://www.mongodb.com/docs/pt-br/about/page/",
   "zh-cn": "https://www.mongodb.com/docs/zh-cn/about/page/",
@@ -21,6 +23,7 @@ exports[`getLocaleMapping returns a valid mapping of URLs 2`] = `
 exports[`getLocaleMapping returns a valid mapping of URLs 3`] = `
 {
   "en-us": "https://www.mongodb.com/introduction/",
+  "ja-jp": "https://www.mongodb.com/ja-jp/introduction/",
   "ko-kr": "https://www.mongodb.com/ko-kr/introduction/",
   "pt-br": "https://www.mongodb.com/pt-br/introduction/",
   "zh-cn": "https://www.mongodb.com/zh-cn/introduction/",
