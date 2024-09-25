@@ -137,10 +137,6 @@ class HowToSd extends StructuredData {
 }
 
 export const constructHowToSd = ({ steps }) => {
-  const howToProps = {
-    steps: [],
-  };
-
   function getHowToSection(procedureDirective, name) {
     const howToSection = {
       '@type': 'HowToSection',
@@ -179,14 +175,18 @@ export const constructHowToSd = ({ steps }) => {
       // build step
       const stepSD = {
         '@type': 'HowToStep',
-        text: bodyText,
+        text: bodyText.length ? bodyText : argText,
       };
-      if (argText) {
+      if (bodyText.length && argText) {
         stepSD['name'] = argText;
       }
       targetList.push(stepSD);
     }
   }
+
+  const howToProps = {
+    steps: [],
+  };
 
   for (const step of steps) {
     handleStep(step, howToProps['steps']);
