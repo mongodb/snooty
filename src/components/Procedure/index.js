@@ -65,18 +65,18 @@ const Procedure = ({ nodeData, ...rest }) => {
   const howToSd = useMemo(() => {
     if (ancestors['procedure']) return undefined;
     const howToSd = constructHowToSd({ steps });
-    return howToSd.isValid() ? howToSd : undefined;
+    return howToSd.isValid() ? howToSd.toString() : undefined;
   }, [steps, ancestors]);
 
-  //
+  // TODO: DOP-5040: remove id and use howToSd.name
   const id = useId();
 
   return (
     <AncestorComponentContextProvider component={'procedure'}>
       {howToSd && (
-        <script id={`how-to-sd-${id}`} type="application/ld+json">
-          {howToSd.toString()}
-        </script>
+        // using dangerouslySetInnerHTML as JSON is rendered with
+        // encoded quotes at build time
+        <script id={`how-to-sd-${id}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: howToSd }} />
       )}
       <StyledProcedure procedureStyle={style}>
         {steps.map((child, i) => (

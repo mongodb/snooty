@@ -133,6 +133,8 @@ class HowToSd extends StructuredData {
     super('HowTo');
 
     this.steps = steps;
+    // TODO: DOP-5040
+    // include name and default image
   }
 }
 
