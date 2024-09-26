@@ -20,6 +20,7 @@ const styleMapLight = {
     borderColor: palette.blue.light2,
     linkColor: palette.blue.dark3,
     beforeColor: palette.blue.base,
+    iconColor: palette.blue.base,
   },
   warning: {
     backgroundColor: palette.yellow.light3,
@@ -27,6 +28,7 @@ const styleMapLight = {
     borderColor: palette.yellow.light2,
     linkColor: palette.yellow.dark3,
     beforeColor: palette.yellow.base,
+    iconColor: palette.yellow.dark2,
   },
   danger: {
     backgroundColor: palette.red.light3,
@@ -34,6 +36,7 @@ const styleMapLight = {
     borderColor: palette.red.light2,
     linkColor: palette.red.dark3,
     beforeColor: palette.red.base,
+    iconColor: palette.red.base,
   },
   success: {
     backgroundColor: palette.green.light3,
@@ -49,6 +52,7 @@ const styleMapDark = {
     borderColor: palette.blue.dark2,
     linkColor: palette.blue.light3,
     beforeColor: palette.blue.light1,
+    iconColor: palette.blue.light1,
   },
   warning: {
     backgroundColor: palette.yellow.dark3,
@@ -56,6 +60,7 @@ const styleMapDark = {
     borderColor: palette.yellow.dark2,
     linkColor: palette.yellow.light3,
     beforeColor: palette.yellow.dark2,
+    iconColor: palette.yellow.base,
   },
   danger: {
     backgroundColor: palette.red.dark3,
@@ -63,6 +68,7 @@ const styleMapDark = {
     borderColor: palette.red.dark2,
     linkColor: palette.red.light3,
     beforeColor: palette.red.base,
+    iconColor: palette.red.light1,
   },
   success: {
     backgroundColor: palette.green.dark3,
@@ -88,6 +94,9 @@ const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
       text-decoration-color: ${(props) => styleMapLight[props.variant].color};
     }
   }
+  > svg {
+    color: ${(props) => styleMapLight[props.variant].iconColor};
+  }
 
   .dark-theme & {
     background-color: ${(props) => styleMapDark[props.variant].backgroundColor};
@@ -102,6 +111,9 @@ const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
         color: ${(props) => styleMapDark[props.variant].color};
         text-decoration-color: ${(props) => styleMapDark[props.variant].color};
       }
+    }
+    > svg {
+      color: ${(props) => styleMapDark[props.variant].iconColor};
     }
   }
 `;
