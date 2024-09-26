@@ -233,7 +233,7 @@ export const Head = ({ pageContext, data }) => {
 
   // construct Structured Data
   const techArticleSd = useMemo(() => {
-    if (['product-landing', 'landing', 'search', 'errorpage'].includes(template)) {
+    if (['product-landing', 'landing', 'search', 'errorpage', 'drivers-index'].includes(template)) {
       return;
     }
     const techArticle = constructTechArticle({ facets: data.page.facets || [], pageTitle });

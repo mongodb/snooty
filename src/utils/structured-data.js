@@ -9,7 +9,7 @@
 export class StructuredData {
   constructor(type) {
     this['@context'] = 'https://schema.org';
-    this['@type'] = 'TechArticle';
+    this['@type'] = type;
   }
 
   isValid() {
