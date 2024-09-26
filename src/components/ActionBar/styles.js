@@ -156,7 +156,6 @@ export const StyledInputContainer = styled.div`
 
   @media ${theme.screenSize.mediumAndUp} {
     width: ${({ sidenav }) => (sidenav ? '70' : '100')}%;
-    padding-right: ${theme.size.medium};
   }
 
   ${(props) => {
@@ -169,14 +168,20 @@ export const StyledInputContainer = styled.div`
       z-index: 40;
       max-width: unset;
       left: ${theme.size.medium};
+      column-gap: ${theme.size.medium};
 
-      > form {
+      form {
         width: 100%;
         margin-right: ${theme.size.medium};
       }
     `
     );
   }}
+`;
+
+// Used to ensure dropdown is same width as input
+export const StyledSearchBoxRef = styled.div`
+  width: 100%;
 `;
 
 export const searchInputStyling = ({ mobileSearchActive }) => css`
@@ -207,7 +212,7 @@ export const ActionsBox = styled('div')`
   column-gap: ${theme.size.default};
   position: relative;
   top: 0;
-  padding-right: ${theme.size.large};
+  padding: 0 ${theme.size.large} 0 ${theme.size.medium};
   justify-self: flex-end;
   grid-column: -2/-1;
 

@@ -15,7 +15,7 @@ import debounce from '../../utils/debounce';
 import { isBrowser } from '../../utils/is-browser';
 import { SuspenseHelper } from '../SuspenseHelper';
 import { getCurrLocale } from '../../utils/locale';
-import { searchIconStyling, searchInputStyling, StyledInputContainer } from './styles';
+import { searchIconStyling, searchInputStyling, StyledInputContainer, StyledSearchBoxRef } from './styles';
 import { ShortcutIcon, SparkleIcon } from './SparkIcon';
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const SearchMenu = lazy(() => import('./SearchMenu'));
@@ -208,26 +208,27 @@ const SearchInput = ({ className, slug }) => {
     <StyledInputContainer
       className={cx(className)}
       mobileSearchActive={mobileSearchActive}
-      ref={searchBoxRef}
       onKeyDown={handleSearchBoxKeyDown}
     >
-      <LGSearchInput
-        aria-label="Search MongoDB Docs"
-        className={searchInputStyling({ mobileSearchActive })}
-        value={searchValue}
-        placeholder={isMobile ? PLACEHOLDER_TEXT_MOBILE : PLACEHOLDER_TEXT}
-        onChange={(e) => {
-          setSearchValue(e.target.value);
-        }}
-        onClick={() => {
-          setIsOpen(!!searchValue.length);
-        }}
-        onSubmit={(e) => {
-          inputRef.current?.blur();
-          setIsOpen(false);
-        }}
-        ref={inputRef}
-      />
+      <StyledSearchBoxRef ref={searchBoxRef}>
+        <LGSearchInput
+          aria-label="Search MongoDB Docs"
+          className={searchInputStyling({ mobileSearchActive })}
+          value={searchValue}
+          placeholder={isMobile ? PLACEHOLDER_TEXT_MOBILE : PLACEHOLDER_TEXT}
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }}
+          onClick={() => {
+            setIsOpen(!!searchValue.length);
+          }}
+          onSubmit={(e) => {
+            inputRef.current?.blur();
+            setIsOpen(false);
+          }}
+          ref={inputRef}
+        />
+      </StyledSearchBoxRef>
       {isMedium && mobileSearchActive && (
         <Link
           className={cx(
