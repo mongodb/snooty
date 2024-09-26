@@ -26,6 +26,12 @@ NodeList [
     hreflang="pt-br"
     rel="alternate"
   />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/ja-jp/"
+    hreflang="ja-jp"
+    rel="alternate"
+  />,
 ]
 `;
 
@@ -53,6 +59,12 @@ NodeList [
     class="sl_opaque"
     href="https://www.mongodb.com/pt-br/foo/"
     hreflang="pt-br"
+    rel="alternate"
+  />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/ja-jp/foo/"
+    hreflang="ja-jp"
     rel="alternate"
   />,
 ]

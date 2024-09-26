@@ -262,7 +262,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   color: #0ad05b;
 }
 
-.emotion-20 {
+.emotion-21 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -274,12 +274,12 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-20 {
+  .emotion-21 {
     display: block;
   }
 }
 
-.emotion-21 {
+.emotion-22 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -290,12 +290,12 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-21 {
+  .emotion-22 {
     margin-top: 0px;
   }
 }
 
-.emotion-22 {
+.emotion-23 {
   font-family: Akzidenz-Grotesk Std;
   font-weight: 500;
   font-size: 16px;
@@ -305,12 +305,12 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-22 {
+  .emotion-23 {
     margin-top: initial;
   }
 }
 
-.emotion-23 {
+.emotion-24 {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -319,16 +319,16 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-23 {
+  .emotion-24 {
     display: block;
   }
 }
 
-.emotion-24 {
+.emotion-25 {
   margin-bottom: 24px;
 }
 
-.emotion-25 {
+.emotion-26 {
   color: #ffffff;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -346,7 +346,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   align-items: center;
 }
 
-.emotion-58 {
+.emotion-59 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -359,7 +359,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-58 {
+  .emotion-59 {
     display: none;
   }
 }
@@ -473,6 +473,13 @@ exports[`DocumentBody renders the necessary elements 1`] = `
                     role="option"
                     tabindex="0"
                   >
+                    日本語
+                  </li>
+                  <li
+                    class="emotion-16"
+                    role="option"
+                    tabindex="0"
+                  >
                     简体中文
                   </li>
                 </ul>
@@ -481,27 +488,27 @@ exports[`DocumentBody renders the necessary elements 1`] = `
           </div>
         </div>
         <div
-          class="emotion-20"
+          class="emotion-21"
         >
           © 2024 MongoDB, Inc.
         </div>
       </div>
       <div
-        class="emotion-21"
+        class="emotion-22"
       >
         <p
-          class="emotion-22"
+          class="emotion-23"
         >
           About
         </p>
         <ul
-          class="emotion-23"
+          class="emotion-24"
         >
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://www.mongodb.com/careers"
               rel="noreferrer noopener"
               target="_self"
@@ -510,10 +517,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://investors.mongodb.com"
               rel="noreferrer noopener"
               target="_self"
@@ -522,10 +529,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://www.mongodb.com/legal"
               rel="noreferrer noopener"
               target="_self"
@@ -534,10 +541,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://github.com/mongodb"
               rel="noreferrer noopener"
               target="_self"
@@ -546,10 +553,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://www.mongodb.com/company/contact/mongodb-vulnerability-disclosure-policy"
               rel="noreferrer noopener"
               target="_self"
@@ -558,10 +565,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://www.mongodb.com/products/platform/trust"
               rel="noreferrer noopener"
               target="_self"
@@ -570,10 +577,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://www.mongodb.com/company/contact/social-media-hub"
               rel="noreferrer noopener"
               target="_self"
@@ -584,21 +591,21 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         </ul>
       </div>
       <div
-        class="emotion-21"
+        class="emotion-22"
       >
         <p
-          class="emotion-22"
+          class="emotion-23"
         >
           Support
         </p>
         <ul
-          class="emotion-23"
+          class="emotion-24"
         >
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://www.mongodb.com/company/contact"
               rel="noreferrer noopener"
               target="_self"
@@ -607,10 +614,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://support.mongodb.com/welcome"
               rel="noreferrer noopener"
               target="_self"
@@ -619,10 +626,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://status.mongodb.com/"
               rel="noreferrer noopener"
               target="_self"
@@ -631,10 +638,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://www.mongodb.com/services/support"
               rel="noreferrer noopener"
               target="_self"
@@ -645,21 +652,21 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         </ul>
       </div>
       <div
-        class="emotion-21"
+        class="emotion-22"
       >
         <p
-          class="emotion-22"
+          class="emotion-23"
         >
           Deployment Options
         </p>
         <ul
-          class="emotion-23"
+          class="emotion-24"
         >
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://www.mongodb.com/cloud/atlas/register"
               rel="noreferrer noopener"
               target="_self"
@@ -668,10 +675,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href="https://www.mongodb.com/try/download/enterprise"
               rel="noreferrer noopener"
               target="_self"
@@ -680,10 +687,10 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             </a>
           </li>
           <li
-            class="emotion-24"
+            class="emotion-25"
           >
             <a
-              class=" emotion-25"
+              class=" emotion-26"
               href=" https://www.mongodb.com/try/download/community"
               rel="noreferrer noopener"
               target="_self"
@@ -694,7 +701,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         </ul>
       </div>
       <div
-        class="emotion-58"
+        class="emotion-59"
       >
         © 2024 MongoDB, Inc.
       </div>
