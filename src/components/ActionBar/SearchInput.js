@@ -15,7 +15,7 @@ import debounce from '../../utils/debounce';
 import { isBrowser } from '../../utils/is-browser';
 import { SuspenseHelper } from '../SuspenseHelper';
 import { getCurrLocale } from '../../utils/locale';
-import { searchIconStyling, searchInputStyling, StyledInputContainer } from './styles';
+import { searchIconStyling, searchInputStyling, StyledInputContainer, StyledSearchBoxRef } from './styles';
 import { ShortcutIcon, SparkleIcon } from './SparkIcon';
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const SearchMenu = lazy(() => import('./SearchMenu'));
@@ -205,70 +205,73 @@ const SearchInput = ({ className, slug }) => {
     : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
-    <StyledInputContainer
-      className={cx(className)}
-      mobileSearchActive={mobileSearchActive}
-      ref={searchBoxRef}
-      onKeyDown={handleSearchBoxKeyDown}
-    >
-      <LGSearchInput
-        aria-label="Search MongoDB Docs"
-        className={searchInputStyling({ mobileSearchActive })}
-        value={searchValue}
-        placeholder={isMobile ? PLACEHOLDER_TEXT_MOBILE : PLACEHOLDER_TEXT}
-        onChange={(e) => {
-          setSearchValue(e.target.value);
-        }}
-        onClick={() => {
-          setIsOpen(!!searchValue.length);
-        }}
-        onSubmit={(e) => {
-          inputRef.current?.blur();
-          setIsOpen(false);
-        }}
-        ref={inputRef}
-      />
-      {isMedium && mobileSearchActive && (
-        <Link
-          className={cx(
-            css`
-              font-size: ${theme.fontSize.small};
-              font-weight: 400;
-            `
-          )}
-          onClick={() => {
-            setSearchValue('');
-            setMobileSearchActive(false);
-          }}
-        >
-          Cancel
-        </Link>
-      )}
-      <SuspenseHelper>
-        <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-          <SearchMenu
-            isOpen={!!searchValue.length && isOpen}
-            searchBoxRef={searchBoxRef}
-            searchValue={searchValue}
-            ref={menuRef}
-            selectedOption={selectedOption}
-            slug={slug}
-          ></SearchMenu>
-        </Chatbot>
-      </SuspenseHelper>
-      {!mobileSearchActive && (
-        <IconButton
-          aria-label="Search MongoDB Docs"
-          className={searchIconStyling}
-          onClick={() => {
-            setIsOpen(false);
-            setMobileSearchActive((state) => !state);
-          }}
-        >
-          <Icon glyph={'MagnifyingGlass'} />
-        </IconButton>
-      )}
-    </StyledInputContainer>
+    <>
+      <StyledInputContainer
+        className={cx(className)}
+        mobileSearchActive={mobileSearchActive}
+        onKeyDown={handleSearchBoxKeyDown}
+      >
+        <StyledSearchBoxRef ref={searchBoxRef}>
+          <LGSearchInput
+            aria-label="Search MongoDB Docs"
+            className={searchInputStyling({ mobileSearchActive })}
+            value={searchValue}
+            placeholder={isMobile ? PLACEHOLDER_TEXT_MOBILE : PLACEHOLDER_TEXT}
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
+            onClick={() => {
+              setIsOpen(!!searchValue.length);
+            }}
+            onSubmit={(e) => {
+              inputRef.current?.blur();
+              setIsOpen(false);
+            }}
+            ref={inputRef}
+          />
+        </StyledSearchBoxRef>
+        {isMedium && mobileSearchActive && (
+          <Link
+            className={cx(
+              css`
+                font-size: ${theme.fontSize.small};
+                font-weight: 400;
+              `
+            )}
+            onClick={() => {
+              setSearchValue('');
+              setMobileSearchActive(false);
+            }}
+          >
+            Cancel
+          </Link>
+        )}
+        <SuspenseHelper>
+          <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
+            <SearchMenu
+              isOpen={!!searchValue.length && isOpen}
+              searchBoxRef={searchBoxRef}
+              searchValue={searchValue}
+              ref={menuRef}
+              selectedOption={selectedOption}
+              slug={slug}
+            ></SearchMenu>
+          </Chatbot>
+        </SuspenseHelper>
+        {!mobileSearchActive && (
+          <IconButton
+            aria-label="Search MongoDB Docs"
+            className={searchIconStyling}
+            onClick={() => {
+              setIsOpen(false);
+              setMobileSearchActive((state) => !state);
+            }}
+          >
+            <Icon glyph={'MagnifyingGlass'} />
+          </IconButton>
+        )}
+      </StyledInputContainer>
+    </>
   );
 };
 
