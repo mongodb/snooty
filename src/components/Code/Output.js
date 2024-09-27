@@ -32,11 +32,14 @@ const Output = ({ nodeData: { children } }) => {
   const { darkMode } = useDarkMode();
   const { emphasize_lines, value, linenos, lang, lineno_start } = children[0];
   const language = getLanguage(lang);
-  const softwareSourceCodeSd = useMemo(() => new SoftwareSourceCodeSd({ code: value, lang }), [value, lang]);
+  const softwareSourceCodeSd = useMemo(() => {
+    const sd = new SoftwareSourceCodeSd({ code: value, lang });
+    return sd.isValid() ? sd.toString() : undefined;
+  }, [value, lang]);
 
   return (
     <>
-      {softwareSourceCodeSd.isValid() && (
+      {softwareSourceCodeSd && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

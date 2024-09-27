@@ -74,10 +74,10 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
   // use placeholder image for video thumbnail if invalid URL provided
   const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
   const { title, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options;
-  const videoObjectSd = useMemo(
-    () => new VideoObjectSd({ embedUrl: url, name: title, uploadDate, thumbnailUrl, description }),
-    [url, title, uploadDate, thumbnailUrl, description]
-  );
+  const videoObjectSd = useMemo(() => {
+    const sd = new VideoObjectSd({ embedUrl: url, name: title, uploadDate, thumbnailUrl, description });
+    return sd.isValid() ? sd.toString() : undefined;
+  }, [url, title, uploadDate, thumbnailUrl, description]);
 
   useEffect(() => {
     // handles URL validity checking for well-formed YT links
@@ -111,7 +111,7 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
 
   return (
     <>
-      {videoObjectSd.isValid() && (
+      {videoObjectSd && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

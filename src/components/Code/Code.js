@@ -86,11 +86,14 @@ const Code = ({
     reportAnalytics('CodeblockCopied', { code });
   }, [code]);
 
-  const softwareSourceCodeSd = useMemo(() => new SoftwareSourceCodeSd({ code, lang }), [code, lang]);
+  const softwareSourceCodeSd = useMemo(() => {
+    const sd = new SoftwareSourceCodeSd({ code, lang });
+    return sd.isValid() ? sd.toString() : undefined;
+  }, [code, lang]);
 
   return (
     <>
-      {softwareSourceCodeSd.isValid() && (
+      {softwareSourceCodeSd && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
