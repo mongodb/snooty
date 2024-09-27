@@ -13,6 +13,7 @@ import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import VersionSelector from './VersionSelector';
+import { SidenavContext } from './sidenav-context';
 
 // Toctree nodes begin at level 1 (i.e. toctree-l1) for top-level sections and increase
 // with recursive depth
@@ -52,8 +53,10 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
   const isSelected = isSelectedTocNode(activeSection, slug);
   const isDrawer = !!(options && (options.drawer || options.versions)); // TODO: convert versions option to drawer in backend
   const isTocIcon = !!(options.tocicon === 'sync');
+  // const {pathname} = useLocation();
   const [isOpen, setIsOpen] = useState(isActive);
   const tocNodeRef = useRef(null);
+  const { setHideMobile } = useContext(SidenavContext);
 
   // effect of scrolling toc node into view on load
   const isScrolled = useRef(false);
@@ -77,14 +80,24 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     return null;
   }
 
-  const onCaretClick = (event) => {
-    event.preventDefault();
-    setIsOpen(!isOpen);
-  };
+  // useEffect(() => {
+  //   setIsOpen(false); // Close the navigation panel
+  // }, [ pathname ]);
+
+  const onCaretClick =
+    ((event) => {
+      event.preventDefault();
+      setIsOpen(!isOpen);
+      console.log('baby appa');
+      // setHideMobile(false);
+    },
+    [setHideMobile]);
 
   const clickSideNav = (handleClick) => {
     setIsOpen(!isOpen);
+    console.log('baby yoda');
     handleClick();
+    // setHideMobile(true);
   };
 
   const NodeLink = () => {
