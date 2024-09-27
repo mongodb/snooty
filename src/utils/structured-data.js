@@ -65,3 +65,23 @@ export class SoftwareSourceCodeSd extends StructuredData {
     }
   }
 }
+
+export class VideoObjectSd extends StructuredData {
+  constructor({ embedUrl, name, uploadDate, thumbnailUrl, description }) {
+    super('VideoObject');
+
+    this.embedUrl = embedUrl;
+    this.name = name;
+    this.uploadDate = uploadDate;
+    this.thumbnailUrl = thumbnailUrl;
+
+    if (description) {
+      this.description = description;
+    }
+  }
+
+  isValid() {
+    const hasAllReqFields = [this.embedUrl, this.name, this.uploadDate, this.thumbnailUrl].every((val) => !!val);
+    return hasAllReqFields && super.isValid();
+  }
+}

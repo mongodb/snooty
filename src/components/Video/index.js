@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ReactPlayerYT from 'react-player/youtube';
 import ReactPlayerWistia from 'react-player/wistia';
 import PropTypes from 'prop-types';
@@ -7,6 +7,7 @@ import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
+import { VideoObjectSd } from '../../utils/structured-data';
 import VideoPlayButton from './VideoPlayButton';
 
 // Imported both players to keep bundle size low and rendering the one associated to the URL being passed in
@@ -73,21 +74,10 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
   // use placeholder image for video thumbnail if invalid URL provided
   const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
   const { title, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options;
-  // Required fields based on https://developers.google.com/search/docs/appearance/structured-data/video#video-object
-  const hasAllReqFields = [url, title, uploadDate, thumbnailUrl].every((val) => !!val);
-
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'VideoObject',
-    embedUrl: url,
-    name: title,
-    uploadDate,
-    thumbnailUrl,
-  };
-
-  if (description) {
-    structuredData['description'] = description;
-  }
+  const videoObjectSd = useMemo(
+    () => new VideoObjectSd({ embedUrl: url, name: title, uploadDate, thumbnailUrl, description }),
+    [url, title, uploadDate, thumbnailUrl, description]
+  );
 
   useEffect(() => {
     // handles URL validity checking for well-formed YT links
@@ -121,10 +111,13 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
 
   return (
     <>
-      {hasAllReqFields && (
-        <script id={`video-object-sd-${url}`} type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
+      {videoObjectSd.isValid() && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: videoObjectSd.toString(),
+          }}
+        />
       )}
       <ReactPlayerWrapper>
         <ReactPlayer
