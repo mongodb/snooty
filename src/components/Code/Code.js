@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { default as CodeBlock } from '@leafygreen-ui/code';
@@ -12,6 +12,7 @@ import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
+import { SoftwareSourceCodeSd } from '../../utils/structured-data';
 import { baseCodeStyle, borderCodeStyle, lgStyles } from './styles/codeStyle';
 import { CodeContext } from './code-context';
 
@@ -85,77 +86,89 @@ const Code = ({
     reportAnalytics('CodeblockCopied', { code });
   }, [code]);
 
+  const softwareSourceCodeSd = useMemo(() => new SoftwareSourceCodeSd({ code, lang }), [code, lang]);
+
   return (
-    <div
-      css={css`
-        ${baseCodeStyle}
-
-        // Remove whitespace when copyable false
-        > div > div {
-          display: grid;
-          grid-template-columns: ${!copyable && (languageOptions?.length === 0 || language === 'none')
-            ? 'auto 0px !important'
-            : 'code panel'};
-        }
-
-        > div {
-          border-top-left-radius: ${captionBorderRadius};
-          border-top-right-radius: ${captionBorderRadius};
-          display: grid;
-          border-color: ${palette.gray.light2};
-
-          .dark-theme & {
-            border-color: ${palette.gray.dark2};
-          }
-        }
-
-        pre {
-          background-color: ${palette.gray.light3};
-          color: ${palette.black};
-
-          .dark-theme & {
-            background-color: ${palette.black};
-            color: ${palette.gray.light3};
-          }
-        }
-
-        [data-testid='leafygreen-code-panel'] {
-          background-color: ${palette.white};
-          border-color: ${palette.gray.light2};
-
-          .dark-theme & {
-            background-color: ${palette.gray.dark2};
-            border-color: ${palette.gray.dark2};
-          }
-        }
-
-        ${lgStyles}
-      `}
-    >
-      {captionSpecified && (
-        <div>
-          <CaptionContainer style={{ '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
-            <Caption style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}>{caption}</Caption>
-          </CaptionContainer>
-        </div>
+    <>
+      {softwareSourceCodeSd.isValid() && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: softwareSourceCodeSd.toString(),
+          }}
+        />
       )}
-      <CodeBlock
-        copyable={copyable}
-        highlightLines={emphasizeLines}
-        language={language}
-        languageOptions={languageOptions}
-        onChange={(selectedOption) => {
-          setActiveTab({ drivers: selectedOption.id });
-        }}
-        onCopy={reportCodeCopied}
-        showLineNumbers={linenos}
-        showCustomActionButtons={sourceSpecified}
-        customActionButtons={customActionButtonList}
-        lineNumberStart={lineno_start}
+      <div
+        css={css`
+          ${baseCodeStyle}
+
+          // Remove whitespace when copyable false
+          > div > div {
+            display: grid;
+            grid-template-columns: ${!copyable && (languageOptions?.length === 0 || language === 'none')
+              ? 'auto 0px !important'
+              : 'code panel'};
+          }
+
+          > div {
+            border-top-left-radius: ${captionBorderRadius};
+            border-top-right-radius: ${captionBorderRadius};
+            display: grid;
+            border-color: ${palette.gray.light2};
+
+            .dark-theme & {
+              border-color: ${palette.gray.dark2};
+            }
+          }
+
+          pre {
+            background-color: ${palette.gray.light3};
+            color: ${palette.black};
+
+            .dark-theme & {
+              background-color: ${palette.black};
+              color: ${palette.gray.light3};
+            }
+          }
+
+          [data-testid='leafygreen-code-panel'] {
+            background-color: ${palette.white};
+            border-color: ${palette.gray.light2};
+
+            .dark-theme & {
+              background-color: ${palette.gray.dark2};
+              border-color: ${palette.gray.dark2};
+            }
+          }
+
+          ${lgStyles}
+        `}
       >
-        {code}
-      </CodeBlock>
-    </div>
+        {captionSpecified && (
+          <div>
+            <CaptionContainer style={{ '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
+              <Caption style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}>{caption}</Caption>
+            </CaptionContainer>
+          </div>
+        )}
+        <CodeBlock
+          copyable={copyable}
+          highlightLines={emphasizeLines}
+          language={language}
+          languageOptions={languageOptions}
+          onChange={(selectedOption) => {
+            setActiveTab({ drivers: selectedOption.id });
+          }}
+          onCopy={reportCodeCopied}
+          showLineNumbers={linenos}
+          showCustomActionButtons={sourceSpecified}
+          customActionButtons={customActionButtonList}
+          lineNumberStart={lineno_start}
+        >
+          {code}
+        </CodeBlock>
+      </div>
+    </>
   );
 };
 

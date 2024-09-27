@@ -3,6 +3,44 @@
  */
 import { Language } from '@leafygreen-ui/code';
 
+// Mapping of formal language names based on loose inputs
+const LANGUAGE_NAMES = {
+  bash: 'Bash',
+  c: 'C',
+  cpp: 'C++',
+  'c#': 'C#',
+  cs: 'C#',
+  csharp: 'C#',
+  dart: 'Dart',
+  diff: 'Diff',
+  go: 'Golang',
+  graphql: 'GraphQL',
+  html: 'HTML',
+  http: 'HTTP',
+  ini: 'Ini',
+  java: 'Java',
+  javascript: 'JavaScript',
+  js: 'JavaScript',
+  json: 'JSON',
+  kotlin: 'Kotlin',
+  objectivec: 'Objective-C',
+  perl: 'Perl',
+  php: 'PHP',
+  properties: 'Properties',
+  python: 'Python',
+  ruby: 'Ruby',
+  rust: 'Rust',
+  scala: 'Scala',
+  sh: 'Shell',
+  shell: 'Shell',
+  sql: 'SQL',
+  swift: 'Swift',
+  ts: 'TypeScript',
+  typescript: 'TypeScript',
+  xml: 'XML',
+  yaml: 'YAML',
+};
+
 export const getLanguage = (lang) => {
   if (Object.values(Language).includes(lang)) {
     return lang;
@@ -14,4 +52,15 @@ export const getLanguage = (lang) => {
     return 'cs';
   }
   return 'none';
+};
+
+/**
+ * @param {string} lang The language passed to the code block directive
+ * @returns {string | undefined} The formal name of the language, if it exists
+ */
+export const getFullLanguageName = (lang) => {
+  if (!lang) {
+    return undefined;
+  }
+  return LANGUAGE_NAMES[lang];
 };
