@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { default as CodeBlock } from '@leafygreen-ui/code';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { getLanguage } from '../../utils/get-language';
+import { SoftwareSourceCodeSd } from '../../utils/structured-data';
 
 const OutputContainer = styled.div`
   > div > * {
@@ -27,36 +28,47 @@ const OutputContainer = styled.div`
   }
 `;
 
-const Output = ({ nodeData: { children }, ...rest }) => {
+const Output = ({ nodeData: { children } }) => {
   const { darkMode } = useDarkMode();
   const { emphasize_lines, value, linenos, lang, lineno_start } = children[0];
   const language = getLanguage(lang);
+  const softwareSourceCodeSd = useMemo(() => new SoftwareSourceCodeSd({ code: value, lang }), [value, lang]);
 
   return (
-    <OutputContainer
-      style={
-        darkMode
-          ? {
-              '--code-container-border': 'none',
-              '--code-pre-border': `1px solid ${palette.gray.dark2}`,
-            }
-          : {
-              '--code-container-border': 'initial',
-              '--code-pre-border': `none`,
-            }
-      }
-    >
-      <CodeBlock
-        highlightLines={emphasize_lines}
-        language={language}
-        showLineNumbers={linenos}
-        darkMode={true}
-        copyable={false}
-        lineNumberStart={lineno_start}
+    <>
+      {softwareSourceCodeSd.isValid() && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: softwareSourceCodeSd.toString(),
+          }}
+        />
+      )}
+      <OutputContainer
+        style={
+          darkMode
+            ? {
+                '--code-container-border': 'none',
+                '--code-pre-border': `1px solid ${palette.gray.dark2}`,
+              }
+            : {
+                '--code-container-border': 'initial',
+                '--code-pre-border': `none`,
+              }
+        }
       >
-        {value}
-      </CodeBlock>
-    </OutputContainer>
+        <CodeBlock
+          highlightLines={emphasize_lines}
+          language={language}
+          showLineNumbers={linenos}
+          darkMode={true}
+          copyable={false}
+          lineNumberStart={lineno_start}
+        >
+          {value}
+        </CodeBlock>
+      </OutputContainer>
+    </>
   );
 };
 
