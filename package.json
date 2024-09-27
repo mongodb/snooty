@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.18.2",
+  "version": "0.18.3",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -43,6 +43,7 @@
     "build:clean:stage": "npm run build:clean && make stage",
     "build:no-prefix": "gatsby build",
     "build:netlify": "npm run build && echo -n $INCOMING_HOOK_BODY > build-hook.txt",
+    "build:no-prefix": "gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "develop:preview": "GATSBY_IS_PREVIEW=true gatsby develop",
