@@ -62,5 +62,11 @@ export const getFullLanguageName = (lang) => {
   if (!lang) {
     return undefined;
   }
-  return LANGUAGE_NAMES[lang];
+
+  const fullLangName = LANGUAGE_NAMES[lang];
+  if (!fullLangName) {
+    console.warn(`${lang} does not have a valid language name for structured data SEO. Please contact DOP to add.`);
+  }
+
+  return fullLangName;
 };
