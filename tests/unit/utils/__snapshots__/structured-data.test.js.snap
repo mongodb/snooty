@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SoftwareSourceCode returns valid structured data with programmingLanguage 1`] = `
+SoftwareSourceCodeSd {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "codeSampleType": "code snippet",
+  "text": "print("hello world")",
+}
+`;
+
+exports[`SoftwareSourceCode returns valid structured data without programmingLangauge 1`] = `
+SoftwareSourceCodeSd {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "codeSampleType": "code snippet",
+  "text": "print("hello world")",
+}
+`;

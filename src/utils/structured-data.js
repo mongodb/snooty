@@ -57,7 +57,11 @@ export class SoftwareSourceCodeSd extends StructuredData {
   constructor({ code, lang }) {
     super('SoftwareSourceCode');
     this.codeSampleType = 'code snippet';
-    this.programmingLanguage = getFullLanguageName(lang);
     this.text = code;
+
+    const programmingLanguage = getFullLanguageName(lang);
+    if (programmingLanguage) {
+      this.programmingLanguage = programmingLanguage;
+    }
   }
 }

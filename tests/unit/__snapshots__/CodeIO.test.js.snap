@@ -657,6 +657,11 @@ exports[`CodeIO renders correctly 1`] = `
 <div
     class="emotion-0"
   >
+    <script
+      type="application/ld+json"
+    >
+      {"@context":"https://schema.org","@type":"SoftwareSourceCode","codeSampleType":"code snippet","text":"print('hello world')","programmingLanguage":"Python"}
+    </script>
     <div
       class="emotion-1"
     >
