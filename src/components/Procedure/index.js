@@ -1,4 +1,4 @@
-import React, { useId, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
@@ -68,15 +68,12 @@ const Procedure = ({ nodeData, ...rest }) => {
     return howToSd.isValid() ? howToSd.toString() : undefined;
   }, [steps, ancestors]);
 
-  // TODO: DOP-5040: remove id and use howToSd.name
-  const id = useId();
-
   return (
     <AncestorComponentContextProvider component={'procedure'}>
       {howToSd && (
         // using dangerouslySetInnerHTML as JSON is rendered with
         // encoded quotes at build time
-        <script id={`how-to-sd-${id}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: howToSd }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: howToSd }} />
       )}
       <StyledProcedure procedureStyle={style}>
         {steps.map((child, i) => (
