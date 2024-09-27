@@ -115,7 +115,7 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: videoObjectSd.toString(),
+            __html: videoObjectSd,
           }}
         />
       )}

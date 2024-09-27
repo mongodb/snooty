@@ -43,7 +43,7 @@ const Output = ({ nodeData: { children } }) => {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: softwareSourceCodeSd.toString(),
+            __html: softwareSourceCodeSd,
           }}
         />
       )}
