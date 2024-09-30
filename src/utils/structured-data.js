@@ -6,6 +6,7 @@
  * Optional overwrites can be set in params as default values
  */
 
+import { getFullLanguageName } from './get-language';
 import { findKeyValuePair } from './find-key-value-pair';
 import { getPlaintext } from './get-plaintext';
 
@@ -54,7 +55,30 @@ export class StructuredData {
   }
 }
 
-export class TechArticleSd extends StructuredData {
+class HowToSd extends StructuredData {
+  constructor({ steps }) {
+    super('HowTo');
+
+    this.steps = steps;
+    // TODO: DOP-5040
+    // include name and default image
+  }
+}
+
+export class SoftwareSourceCodeSd extends StructuredData {
+  constructor({ code, lang, slug }) {
+    super('SoftwareSourceCode');
+    this.codeSampleType = 'code snippet';
+    this.text = code;
+
+    const programmingLanguage = getFullLanguageName(lang, slug);
+    if (programmingLanguage) {
+      this.programmingLanguage = programmingLanguage;
+    }
+  }
+}
+
+class TechArticleSd extends StructuredData {
   constructor({ headline, mainEntity, genre }) {
     super('TechArticle');
 
@@ -67,6 +91,26 @@ export class TechArticleSd extends StructuredData {
     if (genre) {
       this.genre = genre;
     }
+  }
+}
+
+export class VideoObjectSd extends StructuredData {
+  constructor({ embedUrl, name, uploadDate, thumbnailUrl, description }) {
+    super('VideoObject');
+
+    this.embedUrl = embedUrl;
+    this.name = name;
+    this.uploadDate = uploadDate;
+    this.thumbnailUrl = thumbnailUrl;
+
+    if (description) {
+      this.description = description;
+    }
+  }
+
+  isValid() {
+    const hasAllReqFields = [this.embedUrl, this.name, this.uploadDate, this.thumbnailUrl].every((val) => !!val);
+    return hasAllReqFields && super.isValid();
   }
 }
 
@@ -127,16 +171,6 @@ export const constructTechArticle = ({ facets, pageTitle }) => {
 
   return new TechArticleSd(techArticleProps);
 };
-
-class HowToSd extends StructuredData {
-  constructor({ steps }) {
-    super('HowTo');
-
-    this.steps = steps;
-    // TODO: DOP-5040
-    // include name and default image
-  }
-}
 
 export const constructHowToSd = ({ steps }) => {
   function getHowToSection(procedureDirective, name) {

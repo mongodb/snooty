@@ -56,3 +56,44 @@ collection, and/mflix/users.json into the Users collection.",
   ],
 }
 `;
+
+exports[`Structured Data SoftwareSourceCode returns valid structured data with programmingLanguage 1`] = `
+SoftwareSourceCodeSd {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "codeSampleType": "code snippet",
+  "text": "print("hello world")",
+}
+`;
+
+exports[`Structured Data SoftwareSourceCode returns valid structured data without programmingLangauge 1`] = `
+SoftwareSourceCodeSd {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "codeSampleType": "code snippet",
+  "text": "print("hello world")",
+}
+`;
+
+exports[`Structured Data VideoObject returns valid structured data with description 1`] = `
+VideoObjectSd {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "description": "Learn more about indexes in Atlas Search",
+  "embedUrl": "https://www.youtube.com/embed/XrJG994YxD8",
+  "name": "Mastering Indexing for Perfect Query Matching",
+  "thumbnailUrl": "https://i.ytimg.com/vi/XrJG994YxD8/maxresdefault.jpg",
+  "uploadDate": "2023-11-08T05:00:28-08:00",
+}
+`;
+
+exports[`Structured Data VideoObject returns valid structured data without description 1`] = `
+VideoObjectSd {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "embedUrl": "https://www.youtube.com/embed/XrJG994YxD8",
+  "name": "Mastering Indexing for Perfect Query Matching",
+  "thumbnailUrl": "https://i.ytimg.com/vi/XrJG994YxD8/maxresdefault.jpg",
+  "uploadDate": "2023-11-08T05:00:28-08:00",
+}
+`;

@@ -17,6 +17,10 @@ const outputButtonStyling = LeafyCss`
   margin: 8px;
 `;
 
+const outputContainerStyle = (showOutput) => LeafyCss`
+  ${!showOutput && 'display: none;'}
+`;
+
 const CodeIO = ({ nodeData: { children }, ...rest }) => {
   const { darkMode } = useDarkMode();
   const needsIOToggle = children.length === 2;
@@ -32,12 +36,8 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   const outputBorderRadius = !showOutput ? '12px' : '0px';
   const singleInputBorderRadius = onlyInputSpecified ? '12px' : '0px';
 
-  const handleClick = (e) => {
-    if (showOutput) {
-      setShowOutput(false);
-    } else {
-      setShowOutput(true);
-    }
+  const handleClick = () => {
+    setShowOutput((val) => !val);
   };
 
   if (children.length === 0) {
@@ -77,7 +77,9 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
               {buttonText}
             </Button>
           </IOToggle>
-          {showOutput && <Output nodeData={children[1]} />}
+          <div className={outputContainerStyle(showOutput)}>
+            <Output nodeData={children[1]} />
+          </div>
         </>
       )}
       {onlyInputSpecified && <Input nodeData={children[0]} />}
