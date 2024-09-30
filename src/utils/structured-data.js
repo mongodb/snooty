@@ -7,6 +7,8 @@
  */
 
 import { getFullLanguageName } from './get-language';
+import { findKeyValuePair } from './find-key-value-pair';
+import { getPlaintext } from './get-plaintext';
 
 export class StructuredData {
   constructor(type) {
@@ -158,4 +160,73 @@ export const constructTechArticle = ({ facets, pageTitle }) => {
   }
 
   return new TechArticleSd(techArticleProps);
+};
+
+class HowToSd extends StructuredData {
+  constructor({ steps }) {
+    super('HowTo');
+
+    this.steps = steps;
+    // TODO: DOP-5040
+    // include name and default image
+  }
+}
+
+export const constructHowToSd = ({ steps }) => {
+  function getHowToSection(procedureDirective, name) {
+    const howToSection = {
+      '@type': 'HowToSection',
+      name,
+      itemListElement: [],
+    };
+
+    for (const step of procedureDirective.children) {
+      handleStep(step, howToSection['itemListElement']);
+    }
+
+    return howToSection;
+  }
+
+  /**
+   *
+   * @param {node}    step
+   * @param {step[]}  targetList  can be either steps[] of HowTo or itemListElement[] of HowToSection
+   */
+  function handleStep(step, targetList) {
+    if (step['name'] !== 'step') {
+      return;
+    }
+    // text of step is derived from children, or fallback to step's argument
+    const childText = getPlaintext(step.children);
+    const argText = getPlaintext(step.argument);
+    // NOTE: step.argument is repeated in step.children as a Heading component
+    // so strip the heading from children
+    const bodyText = childText.replace(argText, '');
+
+    // deep search for nested procedure to make sibling sections
+    const nestedProcedure = findKeyValuePair(step.children, 'name', 'procedure');
+    if (nestedProcedure) {
+      targetList.push(getHowToSection(nestedProcedure, argText || bodyText));
+    } else {
+      // build step
+      const stepSD = {
+        '@type': 'HowToStep',
+        text: bodyText.length ? bodyText : argText,
+      };
+      if (bodyText.length && argText) {
+        stepSD['name'] = argText;
+      }
+      targetList.push(stepSD);
+    }
+  }
+
+  const howToProps = {
+    steps: [],
+  };
+
+  for (const step of steps) {
+    handleStep(step, howToProps['steps']);
+  }
+
+  return new HowToSd(howToProps);
 };
