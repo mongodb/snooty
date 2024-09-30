@@ -55,6 +55,16 @@ export class StructuredData {
   }
 }
 
+class HowToSd extends StructuredData {
+  constructor({ steps }) {
+    super('HowTo');
+
+    this.steps = steps;
+    // TODO: DOP-5040
+    // include name and default image
+  }
+}
+
 export class SoftwareSourceCodeSd extends StructuredData {
   constructor({ code, lang }) {
     super('SoftwareSourceCode');
@@ -68,7 +78,7 @@ export class SoftwareSourceCodeSd extends StructuredData {
   }
 }
 
-export class TechArticleSd extends StructuredData {
+class TechArticleSd extends StructuredData {
   constructor({ headline, mainEntity, genre }) {
     super('TechArticle');
 
@@ -161,16 +171,6 @@ export const constructTechArticle = ({ facets, pageTitle }) => {
 
   return new TechArticleSd(techArticleProps);
 };
-
-class HowToSd extends StructuredData {
-  constructor({ steps }) {
-    super('HowTo');
-
-    this.steps = steps;
-    // TODO: DOP-5040
-    // include name and default image
-  }
-}
 
 export const constructHowToSd = ({ steps }) => {
   function getHowToSection(procedureDirective, name) {
