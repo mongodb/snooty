@@ -10,6 +10,7 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
 import { TabContext } from './tab-context';
+import { ContentsContext } from '../Contents/contents-context';
 
 const TAB_BUTTON_SELECTOR = 'button[role="tab"]';
 
@@ -104,6 +105,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map((child) => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
+  const { activeSelectorIds, setActiveSelectorIds } = useContext(ContentsContext);
   const [activeTab, setActiveTabIndex] = useState(() => {
     // activeTabIdx at build time should be -1 if tabsetName !== drivers
     // since no local storage to read, and no default tabs
@@ -122,6 +124,13 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       setActiveTabIndex(index);
     }
   }, [activeTabs, tabIds, tabsetName]);
+
+  // useEffect(() => {
+  //   setActiveSelectorIds({
+  //     ...activeSelectorIds,
+  //     tab: tabIds[activeTab],
+  //   });
+  // });
 
   const handleClick = useCallback(
     (index) => {

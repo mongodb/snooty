@@ -105,7 +105,7 @@ const hrStyle = css`
 const MethodSelector = ({ nodeData: { children } }) => {
   const optionCount = children.length;
   const [selectedMethod, setSelectedMethod] = useState(children[0]?.options?.id);
-  const { setActiveSelectorId } = useContext(ContentsContext);
+  const { activeSelectorIds, setActiveSelectorIds } = useContext(ContentsContext);
   const [selectedIdx, setSelectedIdx] = useState(0);
 
   // Load method ID saved from last session, if applicable.
@@ -123,8 +123,9 @@ const MethodSelector = ({ nodeData: { children } }) => {
   }, [children]);
 
   useEffect(() => {
-    setActiveSelectorId(selectedMethod);
-  }, [selectedMethod, setActiveSelectorId]);
+    //setActiveSelectorIds(selectedMethod);
+    setActiveSelectorIds({ ...activeSelectorIds, methodSelector: selectedMethod });
+  }, [selectedMethod, setActiveSelectorIds]);
 
   return (
     <>

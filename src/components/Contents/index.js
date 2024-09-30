@@ -10,14 +10,22 @@ const formatTextOptions = {
 };
 
 const Contents = ({ className }) => {
-  const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorId } = useContext(ContentsContext);
+  const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
 
   console.log('heading nodes', headingNodes);
+  console.log('Active selector ids', activeSelectorIds);
 
   // Don't filter if selector_id is null/undefined
-  const filteredNodes = headingNodes.filter(
-    (headingNode) => !headingNode.selector_id || headingNode.selector_id.includes(activeSelectorId)
-  );
+  const filteredNodes = headingNodes.filter((headingNode) => {
+    const a = headingNode.selector_ids.filter(
+      (selector_id) => selector_id['method-option'] === activeSelectorIds.methodSelector
+    );
+    return a?.length;
+  });
+
+  // console.log('HNODE', headingNode.selector_ids);
+  // console.log('active selector id', activeSelectorIds.methodSelector);
+  // return headingNode.selector_ids.includes({ 'method-option': activeSelectorIds.methodSelector });
 
   if (filteredNodes.length === 0 || !showContentsComponent) {
     return null;
