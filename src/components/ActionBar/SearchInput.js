@@ -53,6 +53,8 @@ export const SEARCH_SUGGESTIONS = [
 const SearchInput = ({ className, slug }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [selectedResult, setSelectedResult] = useState();
   const searchBoxRef = useRef();
   const inputRef = useRef();
   const menuRef = useRef();
@@ -62,6 +64,7 @@ const SearchInput = ({ className, slug }) => {
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
   const { search } = useLocation();
   const locale = getCurrLocale();
+  const [chatbotAvail, setChatbotAvail] = useState(false);
   const isEnglish = locale === 'en-us';
 
   useBackdropClick(
@@ -99,7 +102,7 @@ const SearchInput = ({ className, slug }) => {
       if (event.target.isSameNode(inputRef.current) && event.key === '/' && isEnglish) {
         event.preventDefault();
         setIsOpen(false);
-        return menuRef.current?.select(1);
+        setSelectedResult(1);
       }
     },
     [isEnglish]
@@ -158,7 +161,7 @@ const SearchInput = ({ className, slug }) => {
     }
     switch (e.key) {
       case keyMap.Enter: {
-        menuRef.current?.select?.(selectedOption);
+        setSelectedResult(selectedOption);
         setIsOpen(false);
         break;
       }
@@ -170,20 +173,20 @@ const SearchInput = ({ className, slug }) => {
       }
 
       case keyMap.ArrowDown: {
-        if (isOpen && isEnglish) {
+        if (isOpen && isEnglish && chatbotAvail) {
           setSelectedOption((selectedOption + 1) % 2);
           inputRef.current?.focus();
-          e.preventDefault();
         }
+        e.preventDefault();
         break;
       }
 
       case keyMap.ArrowUp: {
-        if (isOpen && isEnglish) {
+        if (isOpen && isEnglish && chatbotAvail) {
           setSelectedOption(Math.abs(selectedOption - (1 % 2)));
           inputRef.current?.focus();
-          e.preventDefault();
         }
+        e.preventDefault();
         break;
       }
 
@@ -203,6 +206,7 @@ const SearchInput = ({ className, slug }) => {
   const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(metadata?.snootyEnv)
     ? 'https://knowledge.mongodb.com/api/v1'
     : 'https://knowledge.staging.corp.mongodb.com/api/v1';
+  // const CHATBOT_SERVER_BASE_URL = 'http://localhost:3000/api/v1';
 
   return (
     <StyledInputContainer
@@ -225,6 +229,9 @@ const SearchInput = ({ className, slug }) => {
           onSubmit={(e) => {
             inputRef.current?.blur();
             setIsOpen(false);
+          }}
+          onFocus={() => {
+            setIsFocused(true);
           }}
           ref={inputRef}
         />
@@ -254,6 +261,10 @@ const SearchInput = ({ className, slug }) => {
             ref={menuRef}
             selectedOption={selectedOption}
             slug={slug}
+            isFocused={isFocused}
+            selectedResult={selectedResult}
+            setSelectedResult={setSelectedResult}
+            setChatbotAvail={setChatbotAvail}
           ></SearchMenu>
         </Chatbot>
       </SuspenseHelper>

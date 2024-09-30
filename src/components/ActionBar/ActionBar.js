@@ -63,7 +63,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
 };
 
 ActionBar.propTypes = {
-  template: PropTypes.string.isRequired,
+  template: PropTypes.string,
   slug: PropTypes.string.isRequired,
   sidenav: PropTypes.bool.isRequired,
 };
