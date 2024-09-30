@@ -8,6 +8,10 @@ const Red = ({ nodeData: { children } }) => (
   <strong
     css={css`
       color: ${palette.red.dark2};
+
+      .dark-theme & {
+        color: ${palette.red.light1};
+      }
     `}
   >
     {children.map((node, i) => (

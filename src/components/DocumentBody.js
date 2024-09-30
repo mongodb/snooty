@@ -1,7 +1,6 @@
 import React, { useState, useMemo, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-import { Global, css } from '@emotion/react';
 import { ImageContextProvider } from '../context/image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
@@ -11,13 +10,12 @@ import { getMetaFromDirective } from '../utils/get-meta-from-directive';
 import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { getCurrentLocaleFontFamilyValue } from '../utils/locale';
 import { getSiteTitle } from '../utils/get-site-title';
 import { constructTechArticle } from '../utils/structured-data';
 import { PageContext } from '../context/page-context';
 import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
-import Widgets from './Widgets';
+import { TEMPLATE_CONTAINER_ID } from '../constants';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
@@ -81,12 +79,11 @@ const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
-const fontFamily = getCurrentLocaleFontFamilyValue();
-
 const DocumentBody = (props) => {
-  const { location, data, pageContext } = props;
+  const { data, pageContext } = props;
   const page = data?.page?.ast;
   const { slug, template, repoBranches } = pageContext;
+  const tabsMainColumn = page?.options?.['tabs-selector-position'] === 'main';
 
   const initialization = () => {
     const pageNodes = getNestedValue(['children'], page) || [];
@@ -98,7 +95,6 @@ const DocumentBody = (props) => {
   const [{ pageNodes, footnotes }] = useState(initialization);
 
   const metadata = useSnootyMetadata();
-
   const lookup = slug === '/' ? 'index' : slug;
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
 
@@ -142,34 +138,26 @@ const DocumentBody = (props) => {
     <>
       <TabProvider selectors={page?.options?.selectors}>
         <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
-          <Widgets
-            location={location}
-            pageTitle={pageTitle}
-            slug={slug}
-            isInPresentationMode={isInPresentationMode}
-            template={template}
-          >
-            <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
-              <FootnoteContext.Provider value={{ footnotes }}>
-                <PageContext.Provider value={{ page, template, slug }}>
-                  <div id="template-container">
-                    <Template {...props} useChatbot={useChatbot}>
-                      {pageNodes.map((child, index) => (
-                        <ComponentFactory
-                          key={index}
-                          metadata={metadata}
-                          nodeData={child}
-                          page={page}
-                          template={template}
-                          slug={slug}
-                        />
-                      ))}
-                    </Template>
-                  </div>
-                </PageContext.Provider>
-              </FootnoteContext.Provider>
-            </ImageContextProvider>
-          </Widgets>
+          <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
+            <FootnoteContext.Provider value={{ footnotes }}>
+              <PageContext.Provider value={{ page, template, slug, options: page?.options, tabsMainColumn }}>
+                <div id={TEMPLATE_CONTAINER_ID}>
+                  <Template {...props} useChatbot={useChatbot}>
+                    {pageNodes.map((child, index) => (
+                      <ComponentFactory
+                        key={index}
+                        metadata={metadata}
+                        nodeData={child}
+                        page={page}
+                        template={template}
+                        slug={slug}
+                      />
+                    ))}
+                  </Template>
+                </div>
+              </PageContext.Provider>
+            </FootnoteContext.Provider>
+          </ImageContextProvider>
         </InstruqtProvider>
       </TabProvider>
       {!isInPresentationMode && (
@@ -179,13 +167,6 @@ const DocumentBody = (props) => {
           </SuspenseHelper>
         </div>
       )}
-      <Global
-        styles={css`
-          #template-container *:not(:is(code, code *)) {
-            font-family: ${fontFamily};
-          }
-        `}
-      />
     </>
   );
 };

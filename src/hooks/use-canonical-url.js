@@ -8,8 +8,8 @@ export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
   const { siteUrl, parserBranch } = siteMetadata;
   // Use parserBranch by default to avoid undefined slugs when testing
   const urlSlug =
-    repoBranches.branches.find((branch) => branch.gitBranchName === parserBranch)?.urlSlug ?? parserBranch;
-  const siteBasePrefix = repoBranches.siteBasePrefix;
+    repoBranches?.branches.find((branch) => branch.gitBranchName === parserBranch)?.urlSlug ?? parserBranch;
+  const siteBasePrefix = repoBranches?.siteBasePrefix;
   const pathPrefix = generateVersionedPrefix(urlSlug, siteBasePrefix);
 
   // Use default logic assuming there is no canonical provided from the meta directive
@@ -36,7 +36,7 @@ export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
 
   // else we check for EOL
   if (metadata.eol) {
-    const stableBranch = repoBranches.branches.find((branch) => {
+    const stableBranch = repoBranches?.branches.find((branch) => {
       return branch.active && branch.isStableBranch;
     });
 

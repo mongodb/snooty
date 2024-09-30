@@ -1,4 +1,5 @@
 import { withPrefix } from 'gatsby';
+import { SIDE_NAV_CONTAINER_ID, TEMPLATE_CONTAINER_ID } from '../constants';
 import { assertTrailingSlash } from './assert-trailing-slash';
 import { isBrowser } from './is-browser';
 import { normalizePath } from './normalize-path';
@@ -17,19 +18,34 @@ export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
 // Update this as more languages are introduced
 // Because the client-side redirect script cannot use an import, PLEASE remember to update the list of supported languages
 // in redirect-based-on-lang.js
-export const AVAILABLE_LANGUAGES = [
+const AVAILABLE_LANGUAGES = [
   { language: 'English', localeCode: 'en-us' },
-  { language: '简体中文', localeCode: 'zh-cn' },
-  { language: '한국어', localeCode: 'ko-kr' },
+  { language: '简体中文', localeCode: 'zh-cn', fontFamily: 'Noto Sans SC' },
+  { language: '한국어', localeCode: 'ko-kr', fontFamily: 'Noto Sans KR' },
   { language: 'Português', localeCode: 'pt-br' },
+  { language: '日本語', localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' },
 ];
 
-if (process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
-  AVAILABLE_LANGUAGES.push({ language: '日本語', localeCode: 'ja-jp' });
-}
+// Languages in current development that we do not want displayed publicly yet
+const HIDDEN_LANGUAGES = [];
+
+/**
+ * @param {boolean} forceAll - Bypasses feature flag requirements if necessary
+ * @returns An array of languages supported for translation
+ */
+export const getAvailableLanguages = (forceAll = false) => {
+  const langs = [...AVAILABLE_LANGUAGES];
+
+  if (forceAll || process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
+    langs.push(...HIDDEN_LANGUAGES);
+  }
+
+  return langs;
+};
 
 const validateLocaleCode = (potentialCode) =>
-  !!AVAILABLE_LANGUAGES.find(({ localeCode }) => potentialCode === localeCode);
+  // Include hidden languages in validation to ensure current locale of hidden sites can still be captured correctly
+  !!getAvailableLanguages(true).find(({ localeCode }) => potentialCode === localeCode);
 
 /**
  * Strips the first locale code found in the slug. This function should be used to determine the original un-localized path of a page.
@@ -60,21 +76,43 @@ const stripLocale = (slug) => {
   }
 };
 
-/**
- * Returns the font-family name or undefined as a value based on the locale code
- * returned from getCurrentLocale, undefined to tell CSS to ignore this and work as
- * normal and use LG's styles.
- *
- * This is currently for overriding font-family from LG.
- */
-export const getCurrentLocaleFontFamilyValue = () => {
-  const fontFamilyMap = {
-    'zh-cn': 'Noto Sans SC',
-    'ko-kr': 'Noto Sans KR',
-    'ja-jp': 'Noto Sans JP',
-  };
-  const locale = getCurrLocale();
-  return fontFamilyMap[locale] ? `${fontFamilyMap[locale]}` : undefined;
+export const getAllLocaleCssStrings = () => {
+  const strings = [];
+  // We want to bypass feature flag requirements to ensure fonts for hidden languages are always included
+  const allLangs = getAvailableLanguages(true);
+
+  allLangs.forEach(({ localeCode, fontFamily }) => {
+    if (!fontFamily) {
+      return;
+    }
+    const [languageCode] = localeCode.split('-');
+    // Only check that languageCode is in the beginning to be flexible when region code is capitalized
+    // For example: zh-cn and zh-CN will be treated the same.
+    // We want to target everything except for inline code, code blocks, and the consistent-nav components
+    strings.push(`
+      html[lang^=${languageCode}] {
+        #${TEMPLATE_CONTAINER_ID} *:not(:is(code, code *)),
+        #${SIDE_NAV_CONTAINER_ID} * {
+          font-family: ${fontFamily};
+        }
+
+        // Italicized non-latin characters may look confusing, so we want to replace them with bold
+        // without changing the source HTML tag (and potentially causing errors with Smartling)
+        em,
+        h1 .guilabel,
+        h2 .guilabel,
+        h3 .guilabel,
+        h4 .guilabel,
+        h5 .guilabel,
+        h6 .guilabel {
+          font-style: normal;
+          font-weight: bold;
+        }
+      }
+    `);
+  });
+
+  return strings;
 };
 
 /**
@@ -136,7 +174,7 @@ export const getLocaleMapping = (siteUrl, slug) => {
   const normalizedSiteUrl = siteUrl?.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
   const localeHrefMap = {};
 
-  AVAILABLE_LANGUAGES.forEach(({ localeCode }) => {
+  getAvailableLanguages().forEach(({ localeCode }) => {
     const localizedPath = localizePath(slugForUrl, localeCode);
     const targetUrl = normalizedSiteUrl + localizedPath;
     localeHrefMap[localeCode] = assertTrailingSlash(targetUrl);
@@ -150,4 +188,20 @@ export const onSelectLocale = (locale) => {
   setLocalValue(STORAGE_KEY_PREF_LOCALE, locale);
   const localizedPath = localizePath(location.pathname, locale);
   window.location.href = localizedPath;
+};
+
+/**
+ * Ensures that a locale code has an all lowercase language code with an all uppercase region code,
+ * as described in https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang#region_subtag.
+ * @param {string} localeCode - A valid locale code with either 1 or 2 parts. Example: `zh-cn` or `zh`
+ * @returns {string | undefined}
+ */
+export const getHtmlLangFormat = (localeCode) => {
+  const parts = localeCode.split('-');
+  if (parts.length < 2) {
+    return localeCode;
+  }
+
+  const [langCode, regionCode] = parts;
+  return `${langCode.toLowerCase()}-${regionCode.toUpperCase()}`;
 };

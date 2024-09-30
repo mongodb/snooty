@@ -22,6 +22,14 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   background-color: #FFFFFF;
   box-shadow: 0 4px #E8EDEB;
   position: relative;
+  color: var(--font-color-primary);
+  background-color: #FFFFFF;
+  box-shadow: 0 4px #E8EDEB;
+}
+
+.dark-theme .emotion-2 {
+  background-color: #001E2B;
+  box-shadow: 0 4px #3D4F58;
 }
 
 .emotion-3 {
@@ -29,6 +37,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   overflow: hidden;
   padding: 10px 8px!important;
   vertical-align: top;
+  color: var(--font-color-primary);
   overflow-wrap: anywhere;
   word-break: break-word;
 }
@@ -219,6 +228,14 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   background-color: #FFFFFF;
   box-shadow: 0 4px #E8EDEB;
   position: relative;
+  color: var(--font-color-primary);
+  background-color: #FFFFFF;
+  box-shadow: 0 4px #E8EDEB;
+}
+
+.dark-theme .emotion-2 {
+  background-color: #001E2B;
+  box-shadow: 0 4px #3D4F58;
 }
 
 .emotion-3 {
@@ -227,6 +244,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   padding-left: 32px;
   padding: 10px 8px!important;
   vertical-align: top;
+  color: var(--font-color-primary);
   line-height: 24px;
   font-weight: 600;
   font-size: 13px;
@@ -276,6 +294,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   overflow: hidden;
   padding: 10px 8px!important;
   vertical-align: top;
+  color: var(--font-color-primary);
   line-height: 24px;
   font-weight: 600;
   font-size: 13px;
@@ -303,11 +322,20 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   background-color: #F9FBFA;
 }
 
+.emotion-15:nth-of-type(even) {
+  background-color: #F9FBFA;
+}
+
+.dark-theme .emotion-15:nth-of-type(even) {
+  background-color: #112733;
+}
+
 .emotion-16 {
   padding: 0 8px;
   overflow: hidden;
   padding: 10px 8px!important;
   vertical-align: top;
+  color: var(--font-color-primary);
   overflow-wrap: anywhere;
   word-break: break-word;
   background-color: #F9FBFA;
@@ -352,6 +380,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   margin-bottom: 0;
 }
 
+.dark-theme .emotion-16 {
+  background-color: #112733;
+  border-right: 3px solid #3D4F58;
+}
+
 .emotion-17 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -377,6 +410,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   overflow: hidden;
   padding: 10px 8px!important;
   vertical-align: top;
+  color: var(--font-color-primary);
   overflow-wrap: anywhere;
   word-break: break-word;
 }

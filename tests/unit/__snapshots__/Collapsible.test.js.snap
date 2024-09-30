@@ -32,14 +32,19 @@ exports[`collapsible component renders all the content in the options and childr
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
   color: #001E2B;
+  font-weight: 500;
   margin-top: 24px;
   margin-bottom: 8px;
   color: var(--font-color-primary);
   margin-top: 0;
+}
+
+.emotion-2 strong,
+.emotion-2 b {
+  font-weight: 700;
 }
 
 .emotion-3 {
@@ -57,7 +62,7 @@ exports[`collapsible component renders all the content in the options and childr
 }
 
 .emotion-5 {
-  margin-top: -175px;
+  margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
 }
@@ -101,7 +106,6 @@ exports[`collapsible component renders all the content in the options and childr
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  color: #5C6C75;
 }
 
 .emotion-8:before {
@@ -175,7 +179,7 @@ exports[`collapsible component renders all the content in the options and childr
 .emotion-10 {
   overflow: hidden;
   height: 0;
-  visibility: hidden;
+  color: --font-color-primary;
 }
 
 .emotion-11 {
@@ -510,7 +514,6 @@ exports[`collapsible component renders all the content in the options and childr
       <div>
         <h2
           class="contains-headerlink emotion-2"
-          weight="medium"
         >
           This is a heading
           <a

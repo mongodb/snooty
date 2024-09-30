@@ -7,6 +7,7 @@ import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import useScreenSize from '../hooks/useScreenSize';
 import { usePageContext } from '../context/page-context';
+import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -14,6 +15,7 @@ import { InstruqtContext } from './Instruqt/instruqt-context';
 import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
+import { TimeRequired } from './MultiPageTutorials';
 
 const h2Styling = css`
   margin-top: 16px;
@@ -30,6 +32,14 @@ const labButtonStyling = css`
   margin-left: 18px;
 `;
 
+const contentsStyle = css`
+  margin-top: ${theme.size.medium};
+
+  @media ${theme.screenSize.largeAndUp} {
+    display: none;
+  }
+`;
+
 const determineHeading = (sectionDepth) => {
   if (sectionDepth === 1) {
     return H2;
@@ -41,17 +51,18 @@ const determineHeading = (sectionDepth) => {
   return Body; // use weight=medium prop to style appropriately
 };
 
-const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
+const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = determineHeading(sectionDepth);
-  const asHeading = sectionDepth >= 1 && sectionDepth <= 6 ? `h${sectionDepth}` : 'h6';
+  const asHeadingNumber = as ?? sectionDepth;
+  const asHeading = asHeadingNumber >= 1 && asHeadingNumber <= 6 ? `h${asHeadingNumber}` : 'h6';
   const isPageTitle = sectionDepth === 1;
   const { isMobile, isTabletOrMobile } = useScreenSize();
   const { selectors } = useContext(TabContext);
   const { hasDrawer, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
   const shouldShowLabButton = isPageTitle && hasDrawer;
-  const { page } = usePageContext();
+  const { page, tabsMainColumn } = usePageContext();
   const hasMethodSelector = page?.options?.['has_method_selector'];
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
 
@@ -62,7 +73,7 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
         wrapper={(children) => (
           <HeadingContainer stackVertically={isMobile}>
             {children}
-            <ChildContainer isStacked={isMobile}>{hasSelectors && <TabSelectors />}</ChildContainer>
+            <ChildContainer isStacked={isMobile}>{hasSelectors && !tabsMainColumn && <TabSelectors />}</ChildContainer>
           </HeadingContainer>
         )}
       >
@@ -93,7 +104,12 @@ const Heading = ({ sectionDepth, nodeData, className, ...rest }) => {
           )}
         </HeadingTag>
       </ConditionalWrapper>
-      {isPageTitle && <Contents />}
+      {isPageTitle && (
+        <>
+          <TimeRequired />
+          <Contents className={contentsStyle} />
+        </>
+      )}
     </>
   );
 };
@@ -125,6 +141,7 @@ Heading.propTypes = {
     id: PropTypes.string.isRequired,
   }).isRequired,
   isProductLanding: PropTypes.bool,
+  as: PropTypes.number,
 };
 
 export default Heading;

@@ -61,6 +61,7 @@ import Subscript from './Subscript';
 import SubstitutionReference from './SubstitutionReference';
 import Superscript from './Superscript';
 import Tabs from './Tabs';
+import TabSelectors from './Tabs/TabSelectors';
 import Target from './Target';
 import Text from './Text';
 import Time from './Time';
@@ -78,6 +79,7 @@ import RoleHighlight from './Roles/Highlight';
 import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
+import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
 
 const IGNORED_NAMES = new Set([
@@ -88,7 +90,6 @@ const IGNORED_NAMES = new Set([
   'raw',
   'short-description',
   'tabs-pillstrip',
-  'tabs-selector',
   'toctree',
   'meta',
   'facet',
@@ -115,6 +116,7 @@ const roleMap = {
   'icon-lg': RoleIcon,
   kbd: RoleKbd,
   red: RoleRed,
+  gold: RoleGold,
   required: RoleRequired,
   sub: Subscript,
   subscript: Subscript,
@@ -183,6 +185,7 @@ const componentMap = {
   strong: Strong,
   substitution_reference: SubstitutionReference,
   tabs: Tabs,
+  'tabs-selector': TabSelectors,
   target: Target,
   text: Text,
   time: Time,

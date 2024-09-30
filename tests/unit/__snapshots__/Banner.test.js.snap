@@ -5,6 +5,9 @@ exports[`renders a Banner correctly 1`] = `
   .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
+  background-color: #E1F7FF;
+  color: #083C90;
+  border-color: #C3E7FE;
 }
 
 .emotion-0>div>div>* {
@@ -28,8 +31,44 @@ exports[`renders a Banner correctly 1`] = `
   text-underline-offset: 3px;
 }
 
+.emotion-0::before {
+  background: linear-gradient(to left, transparent 6px, #016BF8} 6px);
+}
+
+.emotion-0 a {
+  color: #0C2657;
+}
+
 .emotion-0 a:hover {
-  text-decoration-color: var(--text-decoration-color);
+  color: #083C90;
+  text-decoration-color: #083C90;
+}
+
+.emotion-0>svg {
+  color: #016BF8;
+}
+
+.dark-theme .emotion-0 {
+  background-color: #0C2657;
+  color: #C3E7FE;
+  border-color: #083C90;
+}
+
+.dark-theme .emotion-0::before {
+  background: linear-gradient(to left, transparent 6px, #0498EC 6px);
+}
+
+.dark-theme .emotion-0 a {
+  color: #E1F7FF;
+}
+
+.dark-theme .emotion-0 a:hover {
+  color: #C3E7FE;
+  text-decoration-color: #C3E7FE;
+}
+
+.dark-theme .emotion-0>svg {
+  color: #0498EC;
 }
 
 .emotion-2 {
@@ -146,7 +185,6 @@ exports[`renders a Banner correctly 1`] = `
 <div
     class="emotion-0 emotion-1 emotion-2"
     role="alert"
-    style="--text-decoration-color: #083C90;"
   >
     <svg
       aria-label="Info With Circle Icon"
