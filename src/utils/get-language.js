@@ -59,7 +59,7 @@ export const getLanguage = (lang) => {
  * @returns {string | undefined} The formal name of the language, if it exists
  */
 export const getFullLanguageName = (lang) => {
-  if (!lang) {
+  if (!lang || lang === 'none') {
     return undefined;
   }
 
