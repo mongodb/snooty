@@ -131,7 +131,7 @@
     "lodash": "^4.6.0",
     "minimist": "^1.2.6",
     "mobx": "^6.1.5",
-    "mongodb-chatbot-ui": "^0.8.1",
+    "mongodb-chatbot-ui": "^0.10.0",
     "no-scroll": "^2.1.1",
     "node-fetch": "^3.3.2",
     "node-gyp": "^10.1.0",

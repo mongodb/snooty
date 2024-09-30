@@ -18,7 +18,10 @@ import { getCurrLocale } from '../../utils/locale';
 import { searchIconStyling, searchInputStyling, StyledInputContainer, StyledSearchBoxRef } from './styles';
 import { ShortcutIcon, SparkleIcon } from './SparkIcon';
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
-const SearchMenu = lazy(() => import('./SearchMenu'));
+// const SearchMenu = lazy(() => import('./SearchMenu'));
+const ActionButtonTrigger = lazy(() =>
+  import('mongodb-chatbot-ui').then((module) => ({ default: module.ActionButtonTrigger }))
+);
 
 const PLACEHOLDER_TEXT = `Search MongoDB Docs or Ask MongoDB AI`;
 const PLACEHOLDER_TEXT_MOBILE = 'Search or AI';
@@ -202,7 +205,7 @@ const SearchInput = ({ className, slug }) => {
 
   const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(metadata?.snootyEnv)
     ? 'https://knowledge.mongodb.com/api/v1'
-    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
+    : 'http://localhost:3000/api/v1';
 
   return (
     <StyledInputContainer
@@ -247,14 +250,7 @@ const SearchInput = ({ className, slug }) => {
       )}
       <SuspenseHelper>
         <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-          <SearchMenu
-            isOpen={!!searchValue.length && isOpen}
-            searchBoxRef={searchBoxRef}
-            searchValue={searchValue}
-            ref={menuRef}
-            selectedOption={selectedOption}
-            slug={slug}
-          ></SearchMenu>
+          <ActionButtonTrigger></ActionButtonTrigger>
         </Chatbot>
       </SuspenseHelper>
       {!mobileSearchActive && (
