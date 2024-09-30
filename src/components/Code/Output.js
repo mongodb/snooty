@@ -6,6 +6,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { getLanguage } from '../../utils/get-language';
 import { SoftwareSourceCodeSd } from '../../utils/structured-data';
+import { usePageContext } from '../../context/page-context';
 
 const OutputContainer = styled.div`
   > div > * {
@@ -32,10 +33,11 @@ const Output = ({ nodeData: { children } }) => {
   const { darkMode } = useDarkMode();
   const { emphasize_lines, value, linenos, lang, lineno_start } = children[0];
   const language = getLanguage(lang);
+  const { slug } = usePageContext();
   const softwareSourceCodeSd = useMemo(() => {
-    const sd = new SoftwareSourceCodeSd({ code: value, lang });
+    const sd = new SoftwareSourceCodeSd({ code: value, lang, slug });
     return sd.isValid() ? sd.toString() : undefined;
-  }, [value, lang]);
+  }, [value, lang, slug]);
 
   return (
     <>

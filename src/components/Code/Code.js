@@ -13,6 +13,7 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { SoftwareSourceCodeSd } from '../../utils/structured-data';
+import { usePageContext } from '../../context/page-context';
 import { baseCodeStyle, borderCodeStyle, lgStyles } from './styles/codeStyle';
 import { CodeContext } from './code-context';
 
@@ -42,6 +43,7 @@ const Code = ({
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
   const { darkMode } = useDarkMode();
+  const { slug } = usePageContext();
   const code = value;
   let language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
 
@@ -87,9 +89,9 @@ const Code = ({
   }, [code]);
 
   const softwareSourceCodeSd = useMemo(() => {
-    const sd = new SoftwareSourceCodeSd({ code, lang });
+    const sd = new SoftwareSourceCodeSd({ code, lang, slug });
     return sd.isValid() ? sd.toString() : undefined;
-  }, [code, lang]);
+  }, [code, lang, slug]);
 
   return (
     <>

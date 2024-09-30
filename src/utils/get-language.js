@@ -14,7 +14,9 @@ const LANGUAGE_NAMES = {
   dart: 'Dart',
   diff: 'Diff',
   go: 'Golang',
+  golang: 'Golang',
   graphql: 'GraphQL',
+  groovy: 'Groovy',
   html: 'HTML',
   http: 'HTTP',
   ini: 'Ini',
@@ -55,17 +57,20 @@ export const getLanguage = (lang) => {
 };
 
 /**
- * @param {string} lang The language passed to the code block directive
+ * @param {string | undefined} lang The language passed to the code block directive
  * @returns {string | undefined} The formal name of the language, if it exists
  */
-export const getFullLanguageName = (lang) => {
-  if (!lang || lang === 'none') {
+export const getFullLanguageName = (lang, slug) => {
+  const normalizedLang = lang?.toLowerCase();
+  if (!normalizedLang || ['none', 'text'].includes(normalizedLang)) {
     return undefined;
   }
 
-  const fullLangName = LANGUAGE_NAMES.hasOwnProperty(lang) ? LANGUAGE_NAMES[lang] : undefined;
+  const fullLangName = LANGUAGE_NAMES.hasOwnProperty(normalizedLang) ? LANGUAGE_NAMES[normalizedLang] : undefined;
   if (!fullLangName) {
-    console.warn(`${lang} does not have a valid language name for structured data SEO. Please contact DOP to add.`);
+    console.warn(
+      `${normalizedLang} in ${slug} does not have a valid language name for structured data SEO. Please contact DOP to add.`
+    );
   }
 
   return fullLangName;
