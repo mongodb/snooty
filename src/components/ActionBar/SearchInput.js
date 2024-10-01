@@ -1,4 +1,4 @@
-import React, { lazy, useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -50,11 +50,6 @@ export const SEARCH_SUGGESTIONS = [
   },
 ];
 
-function chatbotAvailReducer(state, action) {
-  if (state) return state;
-  return action;
-}
-
 const SearchInput = ({ className, slug }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -69,7 +64,7 @@ const SearchInput = ({ className, slug }) => {
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
   const { search } = useLocation();
   const locale = getCurrLocale();
-  const [chatbotAvail, setChatbotAvail] = useReducer(chatbotAvailReducer, false);
+  const [isChatbotAvail, setChatbotAvail] = useState(false);
   const isEnglish = locale === 'en-us';
 
   useBackdropClick(
@@ -160,7 +155,7 @@ const SearchInput = ({ className, slug }) => {
     const isFocusInMenu = menuRef.current?.contains?.(document.activeElement);
     const isFocusOnSearchBox = searchBoxRef.current?.contains?.(document.activeElement);
     const isFocusInComponent = isFocusOnSearchBox || isFocusInMenu;
-    const optionsCount = chatbotAvail ? 2 : 1;
+    const optionsCount = isChatbotAvail ? 2 : 1;
 
     if (!isFocusInComponent) {
       return;
@@ -179,7 +174,7 @@ const SearchInput = ({ className, slug }) => {
       }
 
       case keyMap.ArrowDown: {
-        if (isOpen && isEnglish && chatbotAvail) {
+        if (isOpen && isEnglish && isChatbotAvail) {
           setSelectedOption((selectedOption + 1) % optionsCount);
           inputRef.current?.focus();
         }
@@ -188,7 +183,7 @@ const SearchInput = ({ className, slug }) => {
       }
 
       case keyMap.ArrowUp: {
-        if (isOpen && isEnglish && chatbotAvail) {
+        if (isOpen && isEnglish && isChatbotAvail) {
           setSelectedOption(Math.abs(selectedOption - (1 % optionsCount)));
           inputRef.current?.focus();
         }

@@ -63,15 +63,6 @@ const SearchMenu = forwardRef(function SearchMenu(
     return (window.location.href = `${fullSearchUrl}/?q=${searchValue}`);
   };
 
-  // NOTE: would prefer not to have this effect
-  // but createConversation has no return value in promise
-  useEffect(() => {
-    if (!conversation.conversationId) {
-      return;
-    }
-    setChatbotAvail(!!conversation.conversationId);
-  }, [conversation, setChatbotAvail]);
-
   useEffect(() => {
     if (!Number.isInteger(selectedResult)) {
       return;
@@ -81,20 +72,23 @@ const SearchMenu = forwardRef(function SearchMenu(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedResult]);
 
+  // NOTE: conversation is updated in effect below
+  useEffect(() => {
+    if (!conversation.conversationId) {
+      return;
+    }
+    setChatbotAvail(!conversation.error && !!conversation.conversationId);
+  }, [conversation, setChatbotAvail]);
+
   useEffect(() => {
     if (!isFocused || conversationInit || conversation.conversationId) {
       return;
     }
     setConversationInit(true);
-    conversation
-      .createConversation()
-      .then((e) => {
-        // NOTE: create conversation does not return anything
-      })
-      .catch((e) => {
-        // no errors here
-      })
-      .finally((e) => setConversationInit(false));
+    // NOTE: createConversation does not resolve / throw errors.
+    // updates conversation from useChatbotContext instead
+    // https://github.com/mongodb/chatbot/blob/mongodb-chatbot-ui-v0.8.1/packages/mongodb-chatbot-ui/src/useConversation.tsx#L409
+    conversation.createConversation().finally((e) => setConversationInit(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
 
