@@ -205,7 +205,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
     setHideMobile(true);
   }, [setHideMobile]);
 
-  // close navigation panel on mobile screen, but leaves open if they click on a twsity
+  // close navigation panel on mobile screen, but leaves open if they click on a twisty
   useEffect(() => {
     setHideMobile(true);
   }, [pathname, setHideMobile]);
