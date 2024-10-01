@@ -1,4 +1,4 @@
-import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
+import React, { lazy, useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -50,6 +50,11 @@ export const SEARCH_SUGGESTIONS = [
   },
 ];
 
+function chatbotAvailReducer(state, action) {
+  if (state) return state;
+  return action;
+}
+
 const SearchInput = ({ className, slug }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +69,7 @@ const SearchInput = ({ className, slug }) => {
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
   const { search } = useLocation();
   const locale = getCurrLocale();
-  const [chatbotAvail, setChatbotAvail] = useState(false);
+  const [chatbotAvail, setChatbotAvail] = useReducer(chatbotAvailReducer, false);
   const isEnglish = locale === 'en-us';
 
   useBackdropClick(
@@ -152,9 +157,10 @@ const SearchInput = ({ className, slug }) => {
   }, [isMobile, mobileSearchActive]);
 
   const handleSearchBoxKeyDown = (e) => {
-    const isFocusInMenu = menuRef.current?.contains && menuRef.current.contains(document.activeElement);
-    const isFocusOnSearchBox = searchBoxRef.current?.contains(document.activeElement);
+    const isFocusInMenu = menuRef.current?.contains?.(document.activeElement);
+    const isFocusOnSearchBox = searchBoxRef.current?.contains?.(document.activeElement);
     const isFocusInComponent = isFocusOnSearchBox || isFocusInMenu;
+    const optionsCount = chatbotAvail ? 2 : 1;
 
     if (!isFocusInComponent) {
       return;
@@ -174,7 +180,7 @@ const SearchInput = ({ className, slug }) => {
 
       case keyMap.ArrowDown: {
         if (isOpen && isEnglish && chatbotAvail) {
-          setSelectedOption((selectedOption + 1) % 2);
+          setSelectedOption((selectedOption + 1) % optionsCount);
           inputRef.current?.focus();
         }
         e.preventDefault();
@@ -183,7 +189,7 @@ const SearchInput = ({ className, slug }) => {
 
       case keyMap.ArrowUp: {
         if (isOpen && isEnglish && chatbotAvail) {
-          setSelectedOption(Math.abs(selectedOption - (1 % 2)));
+          setSelectedOption(Math.abs(selectedOption - (1 % optionsCount)));
           inputRef.current?.focus();
         }
         e.preventDefault();
@@ -206,6 +212,7 @@ const SearchInput = ({ className, slug }) => {
   const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(metadata?.snootyEnv)
     ? 'https://knowledge.mongodb.com/api/v1'
     : 'https://knowledge.staging.corp.mongodb.com/api/v1';
+  // TODO: revert. for local testing
   // const CHATBOT_SERVER_BASE_URL = 'http://localhost:3000/api/v1';
 
   return (

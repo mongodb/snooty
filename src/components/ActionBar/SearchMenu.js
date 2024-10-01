@@ -63,8 +63,10 @@ const SearchMenu = forwardRef(function SearchMenu(
     return (window.location.href = `${fullSearchUrl}/?q=${searchValue}`);
   };
 
+  // NOTE: would prefer not to have this effect
+  // but createConversation has no return value in promise
   useEffect(() => {
-    if (conversation.conversationId) {
+    if (!conversation.conversationId) {
       return;
     }
     setChatbotAvail(!!conversation.conversationId);
@@ -87,13 +89,12 @@ const SearchMenu = forwardRef(function SearchMenu(
     conversation
       .createConversation()
       .then((e) => {
-        // NOTE: these async functions are not succeeding/failing correctly. still have to check for conversationId
-        // EAI-550 addresses these
+        // NOTE: create conversation does not return anything
       })
       .catch((e) => {
-        console.error(e);
-      });
-    // .finally((e) => setConversationInit(false));
+        // no errors here
+      })
+      .finally((e) => setConversationInit(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
 
@@ -113,7 +114,7 @@ const SearchMenu = forwardRef(function SearchMenu(
               className={cx(suggestionStyling({ copy }))}
               key={`result-${i}`}
               id={`result-${i}`}
-              onClick={async () => setSelectedResult(i)}
+              onClick={() => setSelectedResult(i)}
               highlighted={selectedOption === i}
             >
               {!isChatbot && <>{searchValue}</>}
