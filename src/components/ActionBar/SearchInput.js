@@ -207,8 +207,6 @@ const SearchInput = ({ className, slug }) => {
   const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(metadata?.snootyEnv)
     ? 'https://knowledge.mongodb.com/api/v1'
     : 'https://knowledge.staging.corp.mongodb.com/api/v1';
-  // TODO: revert. for local testing
-  // const CHATBOT_SERVER_BASE_URL = 'http://localhost:3000/api/v1';
 
   return (
     <StyledInputContainer
