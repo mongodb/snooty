@@ -5,6 +5,7 @@ import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { theme } from '../../theme/docsTheme';
+import { HeaderContext } from '../Header/header-context';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
 import { Facets } from './Facets';
@@ -13,7 +14,7 @@ import { Facets } from './Facets';
 // this component is mounted.
 const disableBodyScroll = css`
   body {
-    overflow: hidden;
+    overflow: hidden !important;
   }
 `;
 
@@ -50,7 +51,8 @@ const Label = styled('div')`
 `;
 
 const MobileFilters = ({ facets }) => {
-  const { topSmall } = useStickyTopValues(false, true);
+  const { bannerContent } = useContext(HeaderContext);
+  const { topSmall } = useStickyTopValues(false, true, !!bannerContent);
   const { setShowMobileFilters, showFacets } = useContext(SearchContext);
 
   const closeMobileFilters = useCallback(() => {
