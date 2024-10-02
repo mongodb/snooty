@@ -221,6 +221,7 @@ const SearchInput = ({ className, slug }) => {
           value={searchValue}
           placeholder={isMobile ? PLACEHOLDER_TEXT_MOBILE : PLACEHOLDER_TEXT}
           onChange={(e) => {
+            setIsFocused(true);
             setSearchValue(e.target.value);
           }}
           onClick={() => {
