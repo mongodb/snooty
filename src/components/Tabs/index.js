@@ -105,6 +105,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map((child) => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
+  //console.log('tabsetname', tabsetName);
   const { activeSelectorIds, setActiveSelectorIds } = useContext(ContentsContext);
   const [activeTab, setActiveTabIndex] = useState(() => {
     // activeTabIdx at build time should be -1 if tabsetName !== drivers
@@ -112,6 +113,10 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
     const activeTabIdx = tabIds.indexOf(activeTabs?.[tabsetName]);
     return activeTabIdx > -1 ? activeTabIdx : 0;
   });
+
+  console.log('ACTIVE TABS', activeTabs);
+  console.log('tabsetname', tabsetName, 'tabids', tabIds, 'selectors', selectors);
+  console.log('activeTab', activeTab);
 
   const scrollAnchorRef = useRef();
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
@@ -124,13 +129,6 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       setActiveTabIndex(index);
     }
   }, [activeTabs, tabIds, tabsetName]);
-
-  // useEffect(() => {
-  //   setActiveSelectorIds({
-  //     ...activeSelectorIds,
-  //     tab: tabIds[activeTab],
-  //   });
-  // });
 
   const handleClick = useCallback(
     (index) => {

@@ -9,19 +9,36 @@ const formatTextOptions = {
   literalEnableInline: true,
 };
 
+// recursively go through header nodes and make sure present
+// everything in headingSelectorIds must be present in activeSelectorIds
+const checkNodes = (headingSelectorIds, activeSelectorIds) => {
+  console.log('HEADING NODES HERE', headingSelectorIds);
+  if (!headingSelectorIds || JSON.stringify(headingSelectorIds) === '{}') return true;
+  if (headingSelectorIds['method-option'] && headingSelectorIds['method-option'] !== activeSelectorIds.methodSelector) {
+    console.log('REATURNING FALSE IN METHOD', headingSelectorIds['method-option'], activeSelectorIds.methodSelector);
+    return false;
+  }
+  if (headingSelectorIds['tab'] && !activeSelectorIds.tab?.includes(headingSelectorIds['tab'])) {
+    console.log('RETURN INF FALSE IN TAB ', headingSelectorIds['tab'], activeSelectorIds.tab);
+    return false;
+  }
+  console.log('HEADLLO', headingSelectorIds.children);
+  return checkNodes(headingSelectorIds.children ?? {}, activeSelectorIds);
+};
+
 const Contents = ({ className }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
 
   console.log('heading nodes', headingNodes);
   console.log('Active selector ids', activeSelectorIds);
 
-  // Don't filter if selector_id is null/undefined
   const filteredNodes = headingNodes.filter((headingNode) => {
-    const a = headingNode.selector_ids.filter(
-      (selector_id) => selector_id['method-option'] === activeSelectorIds.methodSelector
-    );
-    return a?.length;
+    console.log('STARTING FILTERING FOR ', headingNode);
+    const a = checkNodes(headingNode.selector_ids, activeSelectorIds);
+    console.log('CHECK NODES FOR', headingNode, ' WHICH IS ', a);
+    return a;
   });
+  console.log('FILTERED NODES', filteredNodes);
 
   // console.log('HNODE', headingNode.selector_ids);
   // console.log('active selector id', activeSelectorIds.methodSelector);

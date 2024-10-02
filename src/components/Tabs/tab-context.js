@@ -5,10 +5,11 @@
  * child components to read and update
  */
 
-import React, { useEffect, useReducer, useRef } from 'react';
+import React, { useContext, useEffect, useReducer, useRef } from 'react';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { makeChoices } from './make-choices';
+import { ContentsContext } from '../Contents/contents-context';
 
 const defaultContextValue = {
   activeTabs: {},
@@ -54,6 +55,12 @@ const getLocalTabs = (localTabs, selectors) =>
 const TabProvider = ({ children, selectors = {} }) => {
   // init value to {} to match server and client side
   const [activeTabs, setActiveTab] = useReducer(reducer, {});
+  const { activeSelectorIds, setActiveSelectorIds } = useContext(ContentsContext);
+  //console.log('ACTIE TBA RN', activeTabs);
+
+  //console.log('ACTIVE TABS FROM TAB CONTEXT', activeTabs);
+
+  //console.log('acrive selector id', activeSelectorIds);
 
   const initLoaded = useRef(false);
 
@@ -63,6 +70,7 @@ const TabProvider = ({ children, selectors = {} }) => {
     setLocalValue('activeTabs', activeTabs);
   }, [activeTabs]);
 
+  console.log('FROM CONTEXT:', activeTabs, activeSelectorIds);
   // initial effect to read from local storage
   // used in an effect to keep SSG HTML consistent
   useEffect(() => {
@@ -83,8 +91,21 @@ const TabProvider = ({ children, selectors = {} }) => {
     const localActiveTabs = getLocalTabs(getLocalValue('activeTabs') || {}, selectors);
     initLoaded.current = true;
     setActiveTab({ ...defaultRes, ...localActiveTabs });
+    setActiveSelectorIds({
+      ...activeSelectorIds,
+      tab: Object.values(activeTabs),
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log('FROM CONTEXT:', activeTabs, activeSelectorIds);
+
+  useEffect(() => {
+    setActiveSelectorIds({
+      ...activeSelectorIds,
+      tab: Object.values(activeTabs),
+    });
+  }, [activeTabs, activeSelectorIds, setActiveSelectorIds]);
 
   return (
     <TabContext.Provider

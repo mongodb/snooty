@@ -123,9 +123,8 @@ const MethodSelector = ({ nodeData: { children } }) => {
   }, [children]);
 
   useEffect(() => {
-    //setActiveSelectorIds(selectedMethod);
     setActiveSelectorIds({ ...activeSelectorIds, methodSelector: selectedMethod });
-  }, [selectedMethod, setActiveSelectorIds]);
+  }, [selectedMethod, activeSelectorIds, setActiveSelectorIds]);
 
   return (
     <>
