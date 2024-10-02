@@ -11,6 +11,7 @@ describe('path prefix testing', () => {
   const pathPrefixSlash = '/PATH_PREFIX_SLASH';
   const siteMetadata = {
     parserBranch,
+    project,
     snootyBranch,
     user,
   };
@@ -19,7 +20,7 @@ describe('path prefix testing', () => {
   let prefix;
 
   it('should generate a prefix when none is provided', () => {
-    prefix = generatePathPrefix(siteMetadata, project);
+    prefix = generatePathPrefix(siteMetadata);
     expect(prefix).toBe(`/${project}/${user}/${parserBranch}`);
   });
 
@@ -34,7 +35,7 @@ describe('path prefix testing', () => {
 
     it('should generate a different prefix if GATSBY_SNOOTY_DEV is enabled', () => {
       expect(process.env.GATSBY_SNOOTY_DEV).toBe('true');
-      prefix = generatePathPrefix(siteMetadata, project);
+      prefix = generatePathPrefix(siteMetadata);
       expect(prefix).toBe(`/${parserBranch}/${project}/${user}/${snootyBranch}`);
     });
   });
@@ -42,26 +43,26 @@ describe('path prefix testing', () => {
   it('should included the commit hash, if specified', () => {
     expect(process.env.GATSBY_SNOOTY_DEV).toBeUndefined();
     siteMetadata.commitHash = commitHash;
-    prefix = generatePathPrefix(siteMetadata, project);
+    prefix = generatePathPrefix(siteMetadata);
     expect(prefix).toBe(`/${commitHash}/${project}/${user}/${parserBranch}`);
   });
 
   it('should included the patch ID, if specified', () => {
     siteMetadata.patchId = patchId;
-    prefix = generatePathPrefix(siteMetadata, project);
+    prefix = generatePathPrefix(siteMetadata);
     expect(prefix).toBe(`/${commitHash}/${patchId}/${project}/${user}/${parserBranch}`);
   });
 
   describe('when using a defined path prefix vairable', () => {
     it('should prepend a slash if the variable does not include one', () => {
       siteMetadata.pathPrefix = pathPrefix;
-      prefix = generatePathPrefix(siteMetadata, project);
+      prefix = generatePathPrefix(siteMetadata);
       expect(prefix).toBe(`/${pathPrefix}`);
     });
 
     it('should not prepend an additional slash', () => {
       siteMetadata.pathPrefix = pathPrefixSlash;
-      prefix = generatePathPrefix(siteMetadata, project);
+      prefix = generatePathPrefix(siteMetadata);
       expect(prefix).toBe(pathPrefixSlash);
     });
   });
