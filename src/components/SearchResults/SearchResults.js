@@ -457,41 +457,44 @@ const SearchResults = () => {
     },
     [searchParams, searchTerm, setSearchTerm]
   );
+
   return (
     <SearchResultsContainer showFacets={showFacets}>
-      <HeaderContainer className={cx(headerContainerDynamicStyles)}>
-        <H3>Search Results</H3>
-        {/* Classname-attached searchTerm needed for Smartling localization */}
-        <span style={{ display: 'none' }} className="sl-search-keyword">
-          {searchTerm}
-        </span>
-        {searchTerm && (
-          <ResultTag>
-            {!showFacets && Number.isInteger(searchCount) && (
-              <Overline className={cx(overlineStyle)}>
-                <>{searchCount} RESULTS</>
-              </Overline>
-            )}
-            {!!searchFilter && (
-              <div>
-                {selectedCategory && (
-                  <StyledTag variant="green" onClick={resetFilters}>
-                    {selectedCategory}
-                    <Icon className={cx(iconStyle)} glyph="X" />
-                  </StyledTag>
-                )}
-                {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-              </div>
-            )}
-            {showFacets && <FacetTags resultsCount={searchCount}></FacetTags>}
-          </ResultTag>
-        )}
-        <MobileSearchButtonWrapper>
-          <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
-            {mobileFilterButton.text}
-          </Button>
-        </MobileSearchButtonWrapper>
-      </HeaderContainer>
+      {!showMobileFilters && (
+        <HeaderContainer className={cx(headerContainerDynamicStyles)}>
+          <H3>Search Results</H3>
+          {/* Classname-attached searchTerm needed for Smartling localization */}
+          <span style={{ display: 'none' }} className="sl-search-keyword">
+            {searchTerm}
+          </span>
+          {searchTerm && (
+            <ResultTag>
+              {!showFacets && Number.isInteger(searchCount) && (
+                <Overline className={cx(overlineStyle)}>
+                  <>{searchCount} RESULTS</>
+                </Overline>
+              )}
+              {!!searchFilter && (
+                <div>
+                  {selectedCategory && (
+                    <StyledTag variant="green" onClick={resetFilters}>
+                      {selectedCategory}
+                      <Icon className={cx(iconStyle)} glyph="X" />
+                    </StyledTag>
+                  )}
+                  {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                </div>
+              )}
+              {showFacets && <FacetTags resultsCount={searchCount}></FacetTags>}
+            </ResultTag>
+          )}
+          <MobileSearchButtonWrapper>
+            <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
+              {mobileFilterButton.text}
+            </Button>
+          </MobileSearchButtonWrapper>
+        </HeaderContainer>
+      )}
 
       {/* loading state for new search input */}
       {!!searchTerm && !searchFinished && (
@@ -518,7 +521,7 @@ const SearchResults = () => {
       )}
 
       {/* search results for new search page */}
-      {!!searchTerm && !!searchFinished && !!searchResults.length && (
+      {!!searchTerm && !!searchFinished && !!searchResults.length && !showMobileFilters && (
         <>
           <StyledSearchResults>
             {searchResults.map(({ title, preview, url, searchProperty, facets }, index) => (
