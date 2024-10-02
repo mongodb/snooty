@@ -56,12 +56,6 @@ const TabProvider = ({ children, selectors = {} }) => {
   // init value to {} to match server and client side
   const [activeTabs, setActiveTab] = useReducer(reducer, {});
   const { activeSelectorIds, setActiveSelectorIds } = useContext(ContentsContext);
-  //console.log('ACTIE TBA RN', activeTabs);
-
-  //console.log('ACTIVE TABS FROM TAB CONTEXT', activeTabs);
-
-  //console.log('acrive selector id', activeSelectorIds);
-
   const initLoaded = useRef(false);
 
   useEffect(() => {
@@ -70,7 +64,6 @@ const TabProvider = ({ children, selectors = {} }) => {
     setLocalValue('activeTabs', activeTabs);
   }, [activeTabs]);
 
-  console.log('FROM CONTEXT:', activeTabs, activeSelectorIds);
   // initial effect to read from local storage
   // used in an effect to keep SSG HTML consistent
   useEffect(() => {
@@ -98,14 +91,12 @@ const TabProvider = ({ children, selectors = {} }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log('FROM CONTEXT:', activeTabs, activeSelectorIds);
-
   useEffect(() => {
     setActiveSelectorIds({
       ...activeSelectorIds,
       tab: Object.values(activeTabs),
     });
-  }, [activeTabs, activeSelectorIds, setActiveSelectorIds]);
+  }, [activeTabs]);
 
   return (
     <TabContext.Provider
