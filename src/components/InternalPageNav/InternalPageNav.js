@@ -27,6 +27,14 @@ const containerStyling = css`
   }
 `;
 
+const prevStyle = css`
+  margin-right: auto;
+`;
+
+const nextStyle = css`
+  margin-left: auto;
+`;
+
 const getActiveTutorialPage = (activeTutorial, key, linkTitle) => {
   return {
     targetSlug: activeTutorial[key].targetSlug,
@@ -78,6 +86,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
     <div className={cx(containerStyling)}>
       {prevPage?.targetSlug && (
         <NextPrevLink
+          className={prevStyle}
           icon={glyphs.ArrowLeft.displayName}
           direction="Back"
           targetSlug={prevPage.targetSlug}
@@ -88,6 +97,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
       )}
       {nextPage?.targetSlug && (
         <NextPrevLink
+          className={nextStyle}
           icon={glyphs.ArrowRight.displayName}
           direction="Next"
           targetSlug={nextPage.targetSlug}
