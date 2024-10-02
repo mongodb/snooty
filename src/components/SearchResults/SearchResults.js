@@ -460,117 +460,120 @@ const SearchResults = () => {
 
   return (
     <SearchResultsContainer showFacets={showFacets}>
-      {!showMobileFilters && (
-        <HeaderContainer className={cx(headerContainerDynamicStyles)}>
-          <H3>Search Results</H3>
-          {/* Classname-attached searchTerm needed for Smartling localization */}
-          <span style={{ display: 'none' }} className="sl-search-keyword">
-            {searchTerm}
-          </span>
-          {searchTerm && (
-            <ResultTag>
-              {!showFacets && Number.isInteger(searchCount) && (
-                <Overline className={cx(overlineStyle)}>
-                  <>{searchCount} RESULTS</>
-                </Overline>
-              )}
-              {!!searchFilter && (
-                <div>
-                  {selectedCategory && (
-                    <StyledTag variant="green" onClick={resetFilters}>
-                      {selectedCategory}
-                      <Icon className={cx(iconStyle)} glyph="X" />
-                    </StyledTag>
-                  )}
-                  {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
-                </div>
-              )}
-              {showFacets && <FacetTags resultsCount={searchCount}></FacetTags>}
-            </ResultTag>
+      {showMobileFilters && isTabletOrMobile ? (
+        <MobileFilters facets={searchResultFacets} />
+      ) : (
+        <>
+          <HeaderContainer className={cx(headerContainerDynamicStyles)}>
+            <H3>Search Results</H3>
+            {/* Classname-attached searchTerm needed for Smartling localization */}
+            <span style={{ display: 'none' }} className="sl-search-keyword">
+              {searchTerm}
+            </span>
+            {searchTerm && (
+              <ResultTag>
+                {!showFacets && Number.isInteger(searchCount) && (
+                  <Overline className={cx(overlineStyle)}>
+                    <>{searchCount} RESULTS</>
+                  </Overline>
+                )}
+                {!!searchFilter && (
+                  <div>
+                    {selectedCategory && (
+                      <StyledTag variant="green" onClick={resetFilters}>
+                        {selectedCategory}
+                        <Icon className={cx(iconStyle)} glyph="X" />
+                      </StyledTag>
+                    )}
+                    {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                  </div>
+                )}
+                {showFacets && <FacetTags resultsCount={searchCount}></FacetTags>}
+              </ResultTag>
+            )}
+            <MobileSearchButtonWrapper>
+              <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
+                {mobileFilterButton.text}
+              </Button>
+            </MobileSearchButtonWrapper>
+          </HeaderContainer>
+
+          {/* loading state for new search input */}
+          {!!searchTerm && !searchFinished && (
+            <>
+              <StyledSearchResults>
+                {[...Array(10)].map((_, index) => (
+                  <StyledLoadingSkeletonContainer key={index} className={cx(searchResultDynamicStyling)}>
+                    <StyledParagraphSkeleton withHeader />
+                  </StyledLoadingSkeletonContainer>
+                ))}
+              </StyledSearchResults>
+            </>
           )}
-          <MobileSearchButtonWrapper>
-            <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
-              {mobileFilterButton.text}
-            </Button>
-          </MobileSearchButtonWrapper>
-        </HeaderContainer>
-      )}
 
-      {/* loading state for new search input */}
-      {!!searchTerm && !searchFinished && (
-        <>
-          <StyledSearchResults>
-            {[...Array(10)].map((_, index) => (
-              <StyledLoadingSkeletonContainer key={index} className={cx(searchResultDynamicStyling)}>
-                <StyledParagraphSkeleton withHeader />
-              </StyledLoadingSkeletonContainer>
-            ))}
-          </StyledSearchResults>
-        </>
-      )}
-
-      {/* empty search results */}
-      {searchTerm && searchFinished && !searchResults?.length && (
-        <>
-          <>
-            <EmptyResultsContainer>
-              <EmptyResults />
-            </EmptyResultsContainer>
-          </>
-        </>
-      )}
-
-      {/* search results for new search page */}
-      {!!searchTerm && !!searchFinished && !!searchResults.length && !showMobileFilters && (
-        <>
-          <StyledSearchResults>
-            {searchResults.map(({ title, preview, url, searchProperty, facets }, index) => (
-              <StyledSearchResult
-                key={`${url}${index}`}
-                onClick={() =>
-                  reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
-                }
-                title={title}
-                preview={escapeHtml(preview)}
-                url={url}
-                useLargeTitle
-                searchProperty={searchProperty?.[0]}
-                facets={facets}
-              />
-            ))}
-            {
+          {/* empty search results */}
+          {searchTerm && searchFinished && !searchResults?.length && (
+            <>
               <>
-                <Pagination
-                  className={paginationStyling}
-                  currentPage={parseInt(new URLSearchParams(search).get('page') || 1)}
-                  numTotalItems={searchCount}
-                  onForwardArrowClick={onPageClick.bind(null, true)}
-                  onBackArrowClick={onPageClick.bind(null, false)}
-                  shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
-                  shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
-                ></Pagination>
+                <EmptyResultsContainer>
+                  <EmptyResults />
+                </EmptyResultsContainer>
               </>
-            }
-          </StyledSearchResults>
-        </>
-      )}
-
-      {searchParams.get('q') && (
-        <FiltersContainer>
-          {showFacets ? (
-            <>
-              {/* Avoid showing Facets component to avoid clashing values with mobile filter */}
-              {!showMobileFilters && <Facets facets={searchResultFacets} />}
-            </>
-          ) : (
-            <>
-              <FilterHeader className={cx(filterHeaderDynamicStyles)}>{specifySearchText}</FilterHeader>
-              <StyledSearchFilters />
             </>
           )}
-        </FiltersContainer>
+
+          {/* search results for new search page */}
+          {!!searchTerm && !!searchFinished && !!searchResults.length && (
+            <>
+              <StyledSearchResults>
+                {searchResults.map(({ title, preview, url, searchProperty, facets }, index) => (
+                  <StyledSearchResult
+                    key={`${url}${index}`}
+                    onClick={() =>
+                      reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
+                    }
+                    title={title}
+                    preview={escapeHtml(preview)}
+                    url={url}
+                    useLargeTitle
+                    searchProperty={searchProperty?.[0]}
+                    facets={facets}
+                  />
+                ))}
+                {
+                  <>
+                    <Pagination
+                      className={paginationStyling}
+                      currentPage={parseInt(new URLSearchParams(search).get('page') || 1)}
+                      numTotalItems={searchCount}
+                      onForwardArrowClick={onPageClick.bind(null, true)}
+                      onBackArrowClick={onPageClick.bind(null, false)}
+                      shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
+                      shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
+                    ></Pagination>
+                  </>
+                }
+              </StyledSearchResults>
+            </>
+          )}
+
+          {searchParams.get('q') && (
+            <FiltersContainer>
+              {showFacets ? (
+                <>
+                  {/* Avoid showing Facets component to avoid clashing values with mobile filter */}
+                  {!showMobileFilters && <Facets facets={searchResultFacets} />}
+                </>
+              ) : (
+                <>
+                  <FilterHeader className={cx(filterHeaderDynamicStyles)}>{specifySearchText}</FilterHeader>
+                  <StyledSearchFilters />
+                </>
+              )}
+            </FiltersContainer>
+          )}
+        </>
       )}
-      {showMobileFilters && isTabletOrMobile && <MobileFilters facets={searchResultFacets} />}
     </SearchResultsContainer>
   );
 };
