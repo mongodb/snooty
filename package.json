@@ -45,7 +45,6 @@
     "build:no-prefix": "gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
-    "develop:preview": "GATSBY_IS_PREVIEW=true gatsby develop",
     "ensure-main": "node scripts/ensure-main.js",
     "format": "npm run prettier -- --check",
     "format:fix": "npm run prettier -- --write",
