@@ -55,7 +55,6 @@ const TabProvider = ({ children, selectors = {} }) => {
   // init value to {} to match server and client side
   const [activeTabs, setActiveTab] = useReducer(reducer, {});
   const initLoaded = useRef(false);
-
   useEffect(() => {
     // dont update local value on initial load
     if (!initLoaded.current) return;
