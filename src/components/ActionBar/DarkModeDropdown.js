@@ -50,7 +50,7 @@ const DarkModeDropdown = () => {
   );
 
   const { isTabletOrMobile } = useScreenSize();
-  const justify = isTabletOrMobile ? 'start' : 'end';
+  const justify = isTabletOrMobile || DEPRECATED_PROJECTS.includes(metadata.project) ? 'start' : 'end';
 
   return (
     <>
@@ -59,7 +59,6 @@ const DarkModeDropdown = () => {
           className={cx(menuStyling)}
           portalContainer={dropdownRef.current}
           scrollContainer={dropdownRef.current}
-          usePortal={DEPRECATED_PROJECTS.includes(metadata.project) ? false : true}
           justify={justify}
           align={'bottom'}
           open={open}
