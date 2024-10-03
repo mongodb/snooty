@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as realm from '../../src/utils/realm';
 import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
-import { mockChangelog, mockDiff, mockIndex } from './data/OpenAPIChangelog';
+import { mockChangelog, mockDiff, mockChangelogMetadata } from './data/OpenAPIChangelog';
 
 /**
  * Helper function to strip HTML from combobox list options
@@ -56,7 +56,7 @@ useStaticQuery.mockImplementation(() => ({
     nodes: [
       {
         changelogData: {
-          index: mockIndex,
+          changelogMetadata: mockChangelogMetadata,
           changelog: mockChangelog,
           changelogResourcesList: mockChangelogResourcesList,
         },
@@ -66,18 +66,18 @@ useStaticQuery.mockImplementation(() => ({
 }));
 
 describe('OpenAPIChangelog tests', () => {
-  let mockFetchOADiff;
+  let mockFetchOpenAPIChangelogDiff;
 
   beforeEach(() => {
-    mockFetchOADiff = jest
-      .spyOn(realm, 'fetchOADiff')
-      .mockImplementation(async (runId, fromAndToDiffString, snootyEnv) => {
+    mockFetchOpenAPIChangelogDiff = jest
+      .spyOn(realm, 'fetchOpenAPIChangelogDiff')
+      .mockImplementation(async (fromAndToDiffString, snootyEnv) => {
         return mockDiff;
       });
   });
 
   afterAll(() => {
-    mockFetchOADiff.mockClear();
+    mockFetchOpenAPIChangelogDiff.mockClear();
   });
 
   it('OpenAPIChangelog renders correctly', () => {
@@ -88,7 +88,7 @@ describe('OpenAPIChangelog tests', () => {
   it('should show specRevision short hash', () => {
     const { queryByText } = render(<OpenAPIChangelog />);
 
-    expect(queryByText(new RegExp(mockIndex.specRevisionShort, 'i'))).toBeInTheDocument();
+    expect(queryByText(new RegExp(mockChangelogMetadata.specRevisionShort, 'i'))).toBeInTheDocument();
   });
 
   describe('Version Mode segmented control tests', () => {

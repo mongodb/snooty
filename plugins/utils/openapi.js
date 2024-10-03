@@ -54,7 +54,7 @@ const fetchChangelogData = async (siteMetadata) => {
   };
 };
 
-/* Creates node for ChangelogData, cuyrrently only used for OpenAPI Changelog in cloud-docs. */
+/* Creates node for ChangelogData, currently only used for OpenAPI Changelog in cloud-docs. */
 const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest, siteMetadata }) => {
   try {
     const changelogData = await fetchChangelogData(siteMetadata);
