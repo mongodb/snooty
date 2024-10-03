@@ -18,14 +18,19 @@ const HeadingContext = createContext(defaultVal);
  * @param {boolean}   removeHeading
  * @returns
  */
-const HeadingContextProvider = ({ children, heading, ignoreNextheading }) => {
-  const { headings: prevHeadings, ignoreNextheading: skipHeading } = useHeadingContext();
+const HeadingContextProvider = ({ children, heading, ignoreNextHeading }) => {
+  const { headings: prevHeadings, ignoreNextHeading: skipHeading } = useHeadingContext();
+
   const headings = [...prevHeadings];
   if (heading && !skipHeading) {
     headings.push(heading);
   }
 
-  return <HeadingContext.Provider value={{ headings, ignoreNextheading }}>{children}</HeadingContext.Provider>;
+  return (
+    <HeadingContext.Provider value={{ headings, ignoreNextHeading: ignoreNextHeading ?? false }}>
+      {children}
+    </HeadingContext.Provider>
+  );
 };
 
 const useHeadingContext = () => {

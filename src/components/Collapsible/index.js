@@ -66,7 +66,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
   }, [childrenHashIds, hash, open]);
 
   return (
-    <HeadingContextProvider ignoreNextheading={true} heading={heading}>
+    <HeadingContextProvider ignoreNextHeading={true} heading={heading}>
       <Box className={cx('collapsible', collapsibleStyle)}>
         <Box className={cx(headerContainerStyle)}>
           <Box>
