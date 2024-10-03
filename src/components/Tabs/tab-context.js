@@ -5,11 +5,10 @@
  * child components to read and update
  */
 
-import React, { useContext, useEffect, useReducer, useRef } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { makeChoices } from './make-choices';
-import { ContentsContext } from '../Contents/contents-context';
 
 const defaultContextValue = {
   activeTabs: {},
@@ -55,7 +54,6 @@ const getLocalTabs = (localTabs, selectors) =>
 const TabProvider = ({ children, selectors = {} }) => {
   // init value to {} to match server and client side
   const [activeTabs, setActiveTab] = useReducer(reducer, {});
-  const { activeSelectorIds, setActiveSelectorIds } = useContext(ContentsContext);
   const initLoaded = useRef(false);
 
   useEffect(() => {
@@ -84,19 +82,8 @@ const TabProvider = ({ children, selectors = {} }) => {
     const localActiveTabs = getLocalTabs(getLocalValue('activeTabs') || {}, selectors);
     initLoaded.current = true;
     setActiveTab({ ...defaultRes, ...localActiveTabs });
-    setActiveSelectorIds({
-      ...activeSelectorIds,
-      tab: Object.values(activeTabs),
-    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    setActiveSelectorIds({
-      ...activeSelectorIds,
-      tab: Object.values(activeTabs),
-    });
-  }, [activeTabs]);
 
   return (
     <TabContext.Provider

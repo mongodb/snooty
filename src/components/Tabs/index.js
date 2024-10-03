@@ -9,8 +9,9 @@ import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
-import { TabContext } from './tab-context';
+import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { ContentsContext } from '../Contents/contents-context';
+import { TabContext } from './tab-context';
 
 const TAB_BUTTON_SELECTOR = 'button[role="tab"]';
 
@@ -101,9 +102,18 @@ const productLandingTabContentStyling = css`
   }
 `;
 
+const compare = (activeTabs, activeTabsSelector) => {
+  let tab;
+  for (tab of activeTabs) {
+    if (!activeTabsSelector['tab']?.includes(tab)) return false;
+  }
+  return true;
+};
+
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map((child) => getTabId(child));
+  const { activeSelectorIds, setActiveSelectorIds } = useContext(ContentsContext);
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
   const [activeTab, setActiveTabIndex] = useState(() => {
     // activeTabIdx at build time should be -1 if tabsetName !== drivers
@@ -112,10 +122,32 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
     return activeTabIdx > -1 ? activeTabIdx : 0;
   });
 
+  if (!compare(Object.values(activeTabs), activeSelectorIds)) {
+    setActiveSelectorIds({
+      ...activeSelectorIds,
+      tab: Object.values(activeTabs),
+    });
+  }
+
   const scrollAnchorRef = useRef();
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
   const isHidden = options.hidden || Object.keys(selectors).includes(tabsetName);
   const isProductLanding = page?.options?.template === 'product-landing';
+
+  const initLoad = useRef(false);
+
+  // get/set non-TabSelector tabs in localstorage
+  useEffect(() => {
+    if (initLoad.current) return;
+    initLoad.current = true;
+
+    const localTabs = getLocalValue('activeTabs');
+    let activeTabIdx = tabIds.indexOf(localTabs?.[tabsetName]);
+    activeTabIdx = activeTabIdx > -1 ? activeTabIdx : 0;
+    setActiveTabIndex(activeTabIdx);
+    setActiveTab({ [tabsetName]: tabIds[activeTabIdx] });
+    setLocalValue('activeTabs', activeTabs);
+  }, [activeTabs, setActiveTab, tabIds, tabsetName]);
 
   useEffect(() => {
     const index = tabIds.indexOf(activeTabs[tabsetName]);

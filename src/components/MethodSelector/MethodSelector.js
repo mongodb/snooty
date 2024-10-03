@@ -107,8 +107,12 @@ const MethodSelector = ({ nodeData: { children } }) => {
   const [selectedMethod, setSelectedMethod] = useState(children[0]?.options?.id);
   const { activeSelectorIds, setActiveSelectorIds } = useContext(ContentsContext);
   const [selectedIdx, setSelectedIdx] = useState(0);
-  // setActiveSelectorIds({ ...activeSelectorIds, methodSelector: selectedMethod });
 
+  if (activeSelectorIds.methodSelector !== selectedMethod) {
+    setActiveSelectorIds({ ...activeSelectorIds, methodSelector: selectedMethod });
+  }
+
+  // set on initial load
   // Load method ID saved from last session, if applicable.
   useEffect(() => {
     const savedMethodId = getLocalValue(STORAGE_KEY);
@@ -123,10 +127,6 @@ const MethodSelector = ({ nodeData: { children } }) => {
     }
   }, [children]);
 
-  useEffect(() => {
-    setActiveSelectorIds({ ...activeSelectorIds, methodSelector: selectedMethod });
-  }, [selectedMethod]);
-
   return (
     <>
       <div className={optionsContainer}>
@@ -136,6 +136,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
           onChange={({ target: { defaultValue } }) => {
             const [id, idx] = defaultValue.split('-');
             setSelectedMethod(id);
+            setActiveSelectorIds({ ...activeSelectorIds, methodSelector: id });
             setSelectedIdx(idx);
             setLocalValue(STORAGE_KEY, id);
             reportAnalytics('MethodOptionSelected', {
