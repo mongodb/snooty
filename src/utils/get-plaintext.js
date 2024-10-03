@@ -10,6 +10,7 @@ const getPlaintext = (nodeArray) => {
     } else if (node.children) {
       return title + node.children.reduce(extractText, '');
     }
+    return title;
   };
 
   return nodeArray && nodeArray.length > 0 ? nodeArray.reduce(extractText, '') : '';

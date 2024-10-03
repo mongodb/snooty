@@ -9,6 +9,8 @@ import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
+import { HeadingContextProvider } from '../../context/heading-context';
+import { getPlaintext } from '../../utils/get-plaintext';
 import { TabContext } from './tab-context';
 
 const TAB_BUTTON_SELECTOR = 'button[role="tab"]';
@@ -166,11 +168,13 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
 
             return (
               <LeafyTab key={tabId} name={tabTitle}>
-                <div className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}>
-                  {tab.children.map((child, i) => (
-                    <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
-                  ))}
-                </div>
+                <HeadingContextProvider heading={getPlaintext(tab.argument)}>
+                  <div className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}>
+                    {tab.children.map((child, i) => (
+                      <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
+                    ))}
+                  </div>
+                </HeadingContextProvider>
               </LeafyTab>
             );
           })}

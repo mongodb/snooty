@@ -6,6 +6,7 @@ import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
+import { HeadingContextProvider } from '../../context/heading-context';
 import { findAllNestedAttribute } from '../../utils/find-all-nested-attribute';
 import { isBrowser } from '../../utils/is-browser';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -65,25 +66,27 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
   }, [childrenHashIds, hash, open]);
 
   return (
-    <Box className={cx('collapsible', collapsibleStyle)}>
-      <Box className={cx(headerContainerStyle)}>
-        <Box>
-          {/* Adding 1 to reflect logic in parser, but want to show up as H2 for SEO reasons */}
-          <Heading className={cx(headerStyle)} sectionDepth={sectionDepth + 1} as={2} nodeData={headingNodeData}>
-            {heading}
-          </Heading>
-          <Body baseFontSize={13}>{subHeading}</Body>
+    <HeadingContextProvider ignoreNextheading={true} heading={heading}>
+      <Box className={cx('collapsible', collapsibleStyle)}>
+        <Box className={cx(headerContainerStyle)}>
+          <Box>
+            {/* Adding 1 to reflect logic in parser, but want to show up as H2 for SEO reasons */}
+            <Heading className={cx(headerStyle)} sectionDepth={sectionDepth + 1} as={2} nodeData={headingNodeData}>
+              {heading}
+            </Heading>
+            <Body baseFontSize={13}>{subHeading}</Body>
+          </Box>
+          <IconButton className={iconStyle} aria-labelledby={'Expand the collapsed content'} onClick={onIconClick}>
+            <Icon glyph={open ? 'ChevronDown' : 'ChevronRight'} />
+          </IconButton>
         </Box>
-        <IconButton className={iconStyle} aria-labelledby={'Expand the collapsed content'} onClick={onIconClick}>
-          <Icon glyph={open ? 'ChevronDown' : 'ChevronRight'} />
-        </IconButton>
+        <Box className={cx(innerContentStyle(open))}>
+          {children.map((c, i) => (
+            <ComponentFactory nodeData={c} key={i} sectionDepth={sectionDepth} {...rest}></ComponentFactory>
+          ))}
+        </Box>
       </Box>
-      <Box className={cx(innerContentStyle(open))}>
-        {children.map((c, i) => (
-          <ComponentFactory nodeData={c} key={i} sectionDepth={sectionDepth} {...rest}></ComponentFactory>
-        ))}
-      </Box>
-    </Box>
+    </HeadingContextProvider>
   );
 };
 
