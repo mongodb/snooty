@@ -206,7 +206,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
 
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
-    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata, db });
+    await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata });
 
   await saveAssetFiles(assets, db);
   if (!siteMetadata.manifestPath) {

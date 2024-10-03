@@ -1,87 +1,63 @@
 const { hideChanges, hideDiffChanges } = require('../../src/components/OpenAPIChangelog/utils/filterHiddenChanges');
 
-const atlasAdminProdChangelogS3Prefix = 'https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog';
-const atlasAdminDevChangelogS3Prefix = 'https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog';
+const fetchChangelogMetadata = async (branch) => {
+  const metadataResp = await fetch(
+    `https://raw.githubusercontent.com/mongodb/openapi/${branch}/changelog/internal/metadata.json`
+  );
+  return metadataResp.json();
+};
 
-const fetchChangelogData = async (runId, versions, s3Prefix) => {
-  try {
-    /* Using metadata runId, fetch OpenAPI Changelog full change list */
-    const changelogResp = await fetch(`${s3Prefix}/${runId}/changelog.json`);
-    const unfilteredChangelog = await changelogResp.json();
-    const changelog = hideChanges(unfilteredChangelog);
+const fetchChangelog = async (branch) => {
+  const changelogResp = await fetch(
+    `https://raw.githubusercontent.com/mongodb/openapi/${branch}/changelog/changelog.json`
+  );
+  const unfilteredChangelog = await changelogResp.json();
+  return hideChanges(unfilteredChangelog);
+};
 
-    /* Aggregate all Resources in changelog for frontend filter */
-    const resourcesListSet = new Set();
-    changelog.forEach((release) =>
-      release.paths.forEach(({ httpMethod, path }) => resourcesListSet.add(`${httpMethod} ${path}`))
-    );
-    const changelogResourcesList = Array.from(resourcesListSet);
+const fetchMostRecentDiff = async (metadata, branch) => {
+  const mostRecentResourceVersions = metadata.versions.slice(-2);
+  const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
 
-    /* Fetch most recent Resource Versions' diff */
-    const mostRecentResourceVersions = versions.slice(-2);
-    const mostRecentDiffLabel = mostRecentResourceVersions.join('_');
-    const mostRecentDiffResp = await fetch(`${s3Prefix}/${runId}/${mostRecentDiffLabel}.json`);
-    const mostRecentUnfilteredDiffData = await mostRecentDiffResp.json();
-    const mostRecentDiffData = hideDiffChanges(mostRecentUnfilteredDiffData);
+  const mostRecentDiffResp = await fetch(
+    `https://raw.githubusercontent.com/mongodb/openapi/${branch}/changelog/version-diff/${mostRecentDiffLabel}.json`
+  );
+  const mostRecentUnfilteredDiffData = await mostRecentDiffResp.json();
+  const mostRecentDiffData = hideDiffChanges(mostRecentUnfilteredDiffData);
 
-    return {
-      changelog,
-      changelogResourcesList,
-      mostRecentDiff: {
-        mostRecentDiffLabel,
-        mostRecentDiffData,
-      },
-    };
-  } catch (error) {
-    console.warn('Changelog error: Most recent runId not successful. Using last successful runId to build Changelog.');
-    throw error;
-  }
+  return {
+    mostRecentDiffLabel,
+    mostRecentDiffData,
+  };
+};
+
+const fetchChangelogData = async (siteMetadata) => {
+  const { snootyEnv } = siteMetadata;
+  const branch = snootyEnv === 'staging' || snootyEnv === 'development' ? 'qa' : 'main';
+
+  const metadata = await fetchChangelogMetadata(branch);
+  const changelog = await fetchChangelog(branch);
+  const mostRecentDiff = await fetchMostRecentDiff(metadata, branch);
+
+  /* Aggregate all Resources in changelog for frontend filter */
+  const resourcesListSet = new Set();
+  changelog.forEach((release) =>
+    release.paths.forEach(({ httpMethod, path }) => resourcesListSet.add(`${httpMethod} ${path}`))
+  );
+  const changelogResourcesList = Array.from(resourcesListSet);
+
+  return {
+    changelogMetadata: metadata,
+    changelog,
+    changelogResourcesList,
+    mostRecentDiff,
+  };
 };
 
 /* Creates node for ChangelogData, cuyrrently only used for OpenAPI Changelog in cloud-docs. */
-const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest, siteMetadata, db }) => {
+const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createContentDigest, siteMetadata }) => {
   try {
-    const { snootyEnv } = siteMetadata;
-    let atlasAdminChangelogS3Prefix;
-    let indexLocation;
-    switch (snootyEnv) {
-      case 'staging':
-      case 'development':
-        atlasAdminChangelogS3Prefix = atlasAdminDevChangelogS3Prefix;
-        indexLocation = 'dev.json';
-        break;
-      case 'production':
-      default:
-        atlasAdminChangelogS3Prefix = atlasAdminProdChangelogS3Prefix;
-        indexLocation = 'prod.json';
-    }
-    /* Fetch OpenAPI Changelog metadata */
-    const indexResp = await fetch(`${atlasAdminChangelogS3Prefix}/${indexLocation}`);
-    const index = await indexResp.json();
-
-    const { runId, versions } = index;
-
-    if (!runId || typeof runId !== 'string')
-      throw new Error('OpenAPI Changelog Error: `runId` not available in S3 index.json!');
-
-    let changelogData = {
-      index,
-    };
-    try {
-      const receivedChangelogData = await fetchChangelogData(runId, versions, atlasAdminChangelogS3Prefix);
-      changelogData = { ...changelogData, ...receivedChangelogData };
-      if (snootyEnv === 'production') await db.realmInterface.updateOAChangelogMetadata(index);
-    } catch (error) {
-      /* If any error occurs, fetch last successful metadata and build changelog node */
-      const lastSuccessfulIndex = await db.realmInterface.fetchDocument(
-        'openapi_changelog',
-        'atlas_admin_metadata',
-        {}
-      );
-      const { runId: lastRunId, versions: lastVersions } = lastSuccessfulIndex;
-      const receivedChangelogData = fetchChangelogData(lastRunId, lastVersions, atlasAdminProdChangelogS3Prefix);
-      changelogData = { index: lastSuccessfulIndex, ...receivedChangelogData };
-    }
+    const changelogData = await fetchChangelogData(siteMetadata);
 
     /* Create Node for useStaticQuery with all Changelog data */
     createNode({
@@ -95,7 +71,7 @@ const createOpenAPIChangelogNode = async ({ createNode, createNodeId, createCont
       changelogData: changelogData,
     });
   } catch (e) {
-    console.error('Error while fetching OpenAPI Changelog data from S3');
+    console.error('Error while fetching OpenAPI Changelog data from Github');
     console.error(e);
 
     /* Create empty Node for useStaticQuery to ensure successful build */

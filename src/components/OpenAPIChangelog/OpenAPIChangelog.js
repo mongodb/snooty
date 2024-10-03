@@ -69,10 +69,10 @@ const StyledLoadingSkeleton = styled.div`
 const OpenAPIChangelog = () => {
   const { snootyEnv } = useSiteMetadata();
   const { darkMode } = useDarkMode();
-  const { index = {}, changelog = [], changelogResourcesList = [] } = useChangelogData();
+  const { changelogMetadata = {}, changelog = [], changelogResourcesList = [] } = useChangelogData();
 
-  const resourceVersions = index.versions?.length ? index.versions.slice().reverse() : [];
-  const downloadChangelogUrl = useMemo(() => getDownloadChangelogUrl(index.runId, snootyEnv), [index, snootyEnv]);
+  const resourceVersions = changelogMetadata.versions?.length ? changelogMetadata.versions.slice().reverse() : [];
+  const downloadChangelogUrl = useMemo(() => getDownloadChangelogUrl(snootyEnv), [snootyEnv]);
 
   const [versionMode, setVersionMode] = useState(ALL_VERSIONS);
   const [selectedResources, setSelectedResources] = useState([]);
@@ -135,12 +135,10 @@ const OpenAPIChangelog = () => {
         <Title>
           <H2 as="h1">API Changelog</H2>
           <Body style={{ color: darkMode ? palette.gray.light2 : palette.gray.dark1 }}>
-            (2.0{!!index.specRevisionShort && `~${index.specRevisionShort}`})
+            (2.0{!!changelogMetadata.specRevisionShort && `~${changelogMetadata.specRevisionShort}`})
           </Body>
         </Title>
-        <DownloadButton href={downloadChangelogUrl} disabled={!index.runId}>
-          Download Full API Changelog
-        </DownloadButton>
+        <DownloadButton href={downloadChangelogUrl}>Download Full API Changelog</DownloadButton>
       </ChangelogHeader>
       <FiltersPanel
         resources={versionMode === ALL_VERSIONS ? changelogResourcesList : diffResourcesList}
@@ -163,8 +161,8 @@ const OpenAPIChangelog = () => {
       )}
       {isLoading && (
         <SkeletonWrapper>
-          {[...Array(3)].map((_, index) => (
-            <StyledLoadingSkeleton key={index}>
+          {[...Array(3)].map((_, i) => (
+            <StyledLoadingSkeleton key={i}>
               <ParagraphSkeleton withHeader={true}></ParagraphSkeleton>
             </StyledLoadingSkeleton>
           ))}

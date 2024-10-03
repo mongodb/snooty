@@ -83,3 +83,7 @@ export const fetchDocsets = async (database) => {
 export const fetchOADiff = async (runId, diffString, snootyEnv) => {
   return callAuthenticatedFunction('fetchOADiff', runId, diffString, snootyEnv);
 };
+
+export const fetchOpenAPIChangelogDiff = async (diffString, snootyEnv) => {
+  return callAuthenticatedFunction('fetchOpenAPIChangelogDiff', diffString, snootyEnv);
+};
