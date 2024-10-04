@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { intersperse } from '../../utils/intersperse';
@@ -12,11 +13,11 @@ const tableStyling = (darkMode) => css`
   border: 0;
   border-collapse: collapse;
   margin: 24px 0;
-  font-size: 13px;
+  font-size: ${theme.fontSize.small};
   line-height: 24px;
 
   tbody tr td a {
-    font-size: 13px;
+    font-size: ${theme.fontSize.small};
   }
 
   tbody tr td div.highlight pre {
