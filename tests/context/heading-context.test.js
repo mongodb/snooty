@@ -2,15 +2,15 @@ import { render } from '@testing-library/react';
 import { HeadingContextProvider, useHeadingContext } from '../../src/context/heading-context';
 
 const Consumer = ({ test_id }) => {
-  const { headings } = useHeadingContext();
-  return <span data-testid={test_id}>{JSON.stringify(headings)}</span>;
+  const { lastHeading } = useHeadingContext();
+  return <span data-testid={test_id}>{lastHeading}</span>;
 };
 
 describe('Heading Context', () => {
-  it('initializes with an empty array', () => {
+  it('initializes with an empty string', () => {
     const testId = 'check-headings';
     const wrapper = render(<Consumer test_id={testId} />);
-    expect(wrapper.queryByTestId(testId)?.innerHTML).toEqual(JSON.stringify([]));
+    expect(wrapper.queryByTestId(testId).innerHTML).toBeFalsy();
   });
 
   it('is used by consumer to get all the preceding headings on the page', () => {
@@ -28,13 +28,9 @@ describe('Heading Context', () => {
       </HeadingContextProvider>
     );
 
-    expect(wrapper.queryByTestId('consumer-1').innerHTML).toEqual(
-      JSON.stringify(['Heading 1', 'Heading 1A', 'Heading 1Aa'])
-    );
-    expect(wrapper.queryByTestId('consumer-2').innerHTML).toEqual(
-      JSON.stringify(['Heading 1', 'Heading 1A', 'Heading 1Aa'])
-    );
-    expect(wrapper.queryByTestId('consumer-3').innerHTML).toEqual(JSON.stringify(['Heading 1', 'Heading 1B']));
+    expect(wrapper.queryByTestId('consumer-1').innerHTML).toEqual('Heading 1Aa');
+    expect(wrapper.queryByTestId('consumer-2').innerHTML).toEqual('Heading 1Aa');
+    expect(wrapper.queryByTestId('consumer-3').innerHTML).toEqual('Heading 1B');
   });
 
   it('can ignore the next heading if specified', () => {
@@ -48,6 +44,6 @@ describe('Heading Context', () => {
       </HeadingContextProvider>
     );
 
-    expect(wrapper.queryByTestId('ignore-prev-heading-1').innerHTML).toEqual(JSON.stringify(['Heading 1']));
+    expect(wrapper.queryByTestId('ignore-prev-heading-1').innerHTML).toEqual('Heading 1');
   });
 });

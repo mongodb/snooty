@@ -61,16 +61,15 @@ const Procedure = ({ nodeData, ...rest }) => {
   const style = options?.style || 'connected';
   const steps = useMemo(() => getSteps(children), [children]);
   const ancestors = useAncestorComponentContext();
-  const { headings } = useHeadingContext();
+  const { lastHeading } = useHeadingContext();
 
   // construct Structured Data
   const howToSd = useMemo(() => {
     if (ancestors['procedure']) return undefined;
-    const parentHeading = headings[headings.length - 1];
 
-    const howToSd = constructHowToSd({ steps, parentHeading });
+    const howToSd = constructHowToSd({ steps, parentHeading: lastHeading });
     return howToSd.isValid() ? howToSd.toString() : undefined;
-  }, [ancestors, headings, steps]);
+  }, [ancestors, lastHeading, steps]);
 
   return (
     <AncestorComponentContextProvider component={'procedure'}>

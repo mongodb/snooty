@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 
 const defaultVal = {
-  headings: [],
+  lastHeading: '',
   ignoreNextheading: false,
 };
 
@@ -19,15 +19,12 @@ const HeadingContext = createContext(defaultVal);
  * @returns
  */
 const HeadingContextProvider = ({ children, heading, ignoreNextHeading }) => {
-  const { headings: prevHeadings, ignoreNextHeading: skipHeading } = useHeadingContext();
+  const { lastHeading: prevHeading, ignoreNextHeading: skipHeading } = useHeadingContext();
 
-  const headings = [...prevHeadings];
-  if (heading && !skipHeading) {
-    headings.push(heading);
-  }
+  const newHeading = skipHeading || !heading ? prevHeading : heading;
 
   return (
-    <HeadingContext.Provider value={{ headings, ignoreNextHeading: ignoreNextHeading ?? false }}>
+    <HeadingContext.Provider value={{ lastHeading: newHeading, ignoreNextHeading: ignoreNextHeading ?? false }}>
       {children}
     </HeadingContext.Provider>
   );

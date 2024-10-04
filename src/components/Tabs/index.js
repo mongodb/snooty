@@ -9,7 +9,7 @@ import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
-import { HeadingContextProvider } from '../../context/heading-context';
+import { HeadingContextProvider, useHeadingContext } from '../../context/heading-context';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { TabContext } from './tab-context';
 
@@ -117,6 +117,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
   const isHidden = options.hidden || Object.keys(selectors).includes(tabsetName);
   const isProductLanding = page?.options?.template === 'product-landing';
+  const { lastHeading } = useHeadingContext();
 
   useEffect(() => {
     const index = tabIds.indexOf(activeTabs[tabsetName]);
@@ -168,7 +169,9 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
 
             return (
               <LeafyTab key={tabId} name={tabTitle}>
-                <HeadingContextProvider heading={getPlaintext(tab.argument)}>
+                <HeadingContextProvider
+                  heading={lastHeading ? `${lastHeading}-${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
+                >
                   <div className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}>
                     {tab.children.map((child, i) => (
                       <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
