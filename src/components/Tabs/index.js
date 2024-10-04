@@ -9,7 +9,7 @@ import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
-import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
+import { getLocalValue } from '../../utils/browser-storage';
 import { ContentsContext } from '../Contents/contents-context';
 import { TabContext } from './tab-context';
 
@@ -135,7 +135,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
 
   const initLoad = useRef(false);
 
-  // get/set non-TabSelector tabs in localstorage
+  // get non-TabSelector tabs in localstorage
   useEffect(() => {
     if (initLoad.current) return;
     initLoad.current = true;
@@ -145,8 +145,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
     activeTabIdx = activeTabIdx > -1 ? activeTabIdx : 0;
     setActiveTabIndex(activeTabIdx);
     setActiveTab({ [tabsetName]: tabIds[activeTabIdx] });
-    setLocalValue('activeTabs', activeTabs);
-  }, [activeTabs, setActiveTab, tabIds, tabsetName]);
+  }, [setActiveTab, tabIds, tabsetName]);
 
   useEffect(() => {
     const index = tabIds.indexOf(activeTabs[tabsetName]);
