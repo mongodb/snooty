@@ -12,8 +12,12 @@ const tableStyling = (darkMode) => css`
   border: 0;
   border-collapse: collapse;
   margin: 24px 0;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 24px;
+
+  tbody tr td a {
+    font-size: 13px;
+  }
 
   tbody tr td div.highlight pre {
     background-color: inherit;
