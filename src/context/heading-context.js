@@ -15,7 +15,7 @@ const HeadingContext = createContext(defaultVal);
  *
  * @param {node[]}    children
  * @param {string}    heading
- * @param {boolean}   removeHeading
+ * @param {boolean}   ignoreNextHeading
  * @returns
  */
 const HeadingContextProvider = ({ children, heading, ignoreNextHeading }) => {

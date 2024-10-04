@@ -28,7 +28,6 @@ describe('Heading Context', () => {
       </HeadingContextProvider>
     );
 
-    console.log(wrapper.queryByTestId('consumer-1').innerHTML);
     expect(wrapper.queryByTestId('consumer-1').innerHTML).toEqual(
       JSON.stringify(['Heading 1', 'Heading 1A', 'Heading 1Aa'])
     );
