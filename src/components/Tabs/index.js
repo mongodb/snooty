@@ -170,7 +170,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
             return (
               <LeafyTab key={tabId} name={tabTitle}>
                 <HeadingContextProvider
-                  heading={lastHeading ? `${lastHeading}-${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
+                  heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
                 >
                   <div className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}>
                     {tab.children.map((child, i) => (
