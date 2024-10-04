@@ -103,8 +103,7 @@ const productLandingTabContentStyling = css`
 `;
 
 const compare = (activeTabs, activeTabsSelector) => {
-  let tab;
-  for (tab of activeTabs) {
+  for (const tab of activeTabs) {
     if (!activeTabsSelector['tab']?.includes(tab)) return false;
   }
   return true;
