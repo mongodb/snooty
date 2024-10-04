@@ -212,16 +212,16 @@ export const ActionsBox = styled('div')`
   column-gap: ${theme.size.default};
   position: relative;
   top: 0;
-  padding: 0 ${theme.size.large} 0 ${theme.size.medium};
+  margin: 0 ${theme.size.large} 0 ${theme.size.medium};
   justify-self: flex-end;
   grid-column: -2/-1;
 
   @media ${theme.screenSize.upToLarge} {
-    padding-right: ${theme.size.medium};
+    margin-right: ${theme.size.medium};
   }
 
   @media ${theme.screenSize.upToMedium} {
-    padding-left: ${theme.size.small};
+    margin-left: ${theme.size.small};
     column-gap: ${theme.size.small};
   }
 `;

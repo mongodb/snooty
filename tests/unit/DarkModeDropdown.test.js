@@ -2,6 +2,7 @@ import React from 'react';
 import { render, act } from '@testing-library/react';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import { DarkModeContext } from '../../src/context/dark-mode-context';
+import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
 import * as MediaHooks from '../../src/hooks/use-media';
 import DarkModeDropdown from '../../src/components/ActionBar/DarkModeDropdown';
 
@@ -13,6 +14,11 @@ let darkModePref = 'light-theme';
 const setDarkModePref = jest.fn((value) => {
   darkModePref = value;
 });
+
+// mock useSnootyMetadata
+jest.spyOn(snootyMetadata, 'default').mockImplementation(() => ({
+  project: 'landing',
+}));
 
 // mock useMedia
 jest.spyOn(MediaHooks, 'default').mockImplementation(() => ({}));

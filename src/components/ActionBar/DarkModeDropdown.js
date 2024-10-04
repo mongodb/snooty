@@ -7,7 +7,9 @@ import { DarkModeContext } from '../../context/dark-mode-context';
 import { theme } from '../../theme/docsTheme';
 import IconDarkmode from '../icons/DarkMode';
 import useScreenSize from '../../hooks/useScreenSize';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import DarkModeGuideCue from './DarkModeGuideCue';
+import { DEPRECATED_PROJECTS } from './ActionBar';
 
 const iconStyling = css`
   display: block;
@@ -31,6 +33,7 @@ const darkModeSvgStyle = {
 };
 
 const DarkModeDropdown = () => {
+  const metadata = useSnootyMetadata();
   const dropdownRef = useRef();
 
   // not using dark mode from LG/provider here to account for case of 'system' dark theme
@@ -47,7 +50,7 @@ const DarkModeDropdown = () => {
   );
 
   const { isTabletOrMobile } = useScreenSize();
-  const justify = isTabletOrMobile ? 'start' : 'end';
+  const justify = isTabletOrMobile || DEPRECATED_PROJECTS.includes(metadata.project) ? 'start' : 'end';
 
   return (
     <>

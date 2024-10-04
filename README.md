@@ -80,26 +80,6 @@ GATSBY_MANIFEST_PATH=/path/to/zipped/ast/file.zip
 GATSBY_SNOOTY_DEV=true
 ```
 
-### Running with Gatsby Cloud preview
-
-Snooty uses Gatsby Cloud to perform content staging builds for MongoDB documentation. These builds source their ASTs through the [Snooty Data API](https://github.com/mongodb/snooty-data-api) and require additional environment variables for setup. To emulate a Gatsby Cloud preview build locally, include the following in your `.env.development` file:
-
-```
-GATSBY_CLOUD_SITE_USER=<YOUR GITHUB USERNAME>
-```
-
-Since building with the Gatsby Cloud preview source plugin expects build data to be present in our team's database, please use the Autobuilder to perform one or more builds prior to running the frontend. Otherwise, use a different `GATSBY_CLOUD_SITE_USER`.
-
-When ready, run the following command:
-
-```shell
-npm run develop:preview
-```
-
-This command will run the `gatsby-source-snooty-preview` source plugin, where all AST data for the specified `GATSBY_CLOUD_SITE_USER` will be used to mimic a Gatsby Cloud site locally. All build data across every unique project + branch combination for that user will be built on the single site. To access the built content, go to `http://localhost:8000/<PROJECT>/<BRANCH>/<PAGE_PATH>`.
-
-Note that this process assumes that the default public Snooty Data API endpoint is being used. If the staging instance of the API is desired, you will need to set the `API_BASE` env to the staging URL, include the expected client credentials as environment variables (found in Parameter Store), and then run the build on the office VPN. Please see the team's Gatsby Cloud template sites as examples.
-
 ## Staging
 
 Install libxml2 with `brew install libxml2` on mac and `apt-get install libxml2` on linux
@@ -112,10 +92,6 @@ npm run build:clean:stage
 
 :warning: Note: This will promote the contents of your local public directory. Your instance in staging may break or be outdated if you haven't run `npm run build` before `make stage`.
 
-### Staging with Gatsby Cloud preview
-
-If your changes specifically affect Gatsby Cloud preview builds, set up and use your own Gatsby Cloud site (denoted by GitHub username) in our team's organization. The feature branch can be assigned to the Gatsby Cloud site. Multiple feature branches in parallel may require the use of multiple Gatsby Cloud sites. See this [wiki page](https://wiki.corp.mongodb.com/display/DE/How+to+Set+Up+a+New+Gatsby+Cloud+Site) for help with setup.
-
 ## Releasing
 
 We have configured an automatic release process using [GitHub Actions](https://github.com/features/actions) that is triggered by [npm-version](https://docs.npmjs.com/cli/version). To release a version, you must have admin privileges in this repo. Then proceed as follows:
@@ -125,25 +101,6 @@ We have configured an automatic release process using [GitHub Actions](https://g
 3. Update the release draft found [here](https://github.com/mongodb/snooty/releases) using the automatically generated [CHANGELOG.md](https://github.com/mongodb/snooty/blob/main/CHANGELOG.md) and publish the release. Keep "pre-release" checked until version 1.0.0.
 
 :warning: This process cannot be completed if the releaser's `origin` points to a fork.
-
-### Gatsby Cloud
-
-Gatsby Cloud uses set GitHub branches to build sites. Right now, we have:
-
-1. `gatsby-cloud-latest` - Used by the Gatsby Cloud sites for the docs team. This branch should typically have the latest production release tag used by the Autobuilder.
-2. `gatsby-cloud-rc` - Used by Gatsby Cloud sites designated for pre-production. This branch should be used for testing release candidates end-to-end with the Autobuilder in preprd.
-
-When a new frontend release tag is made, use the commands below to update the desired Gatsby Cloud branch.
-
-:warning: Note that the following commands include a force push to make it easy to update and rollback the branch as needed.
-
-```sh
-git fetch origin --tags
-git checkout tags/<tag>
-git push -f origin HEAD:<gatsby-cloud-rc|gatsby-cloud-latest>
-```
-
-Once the branch is updated with a given tag, all Gatsby Cloud sites using that branch will be rebuilt. Ideally, `gatsby-cloud-latest` is only updated after the Autobuilder has completed its latest release, to ensure versions of the frontend and parser are compatible.
 
 ## Testing
 
