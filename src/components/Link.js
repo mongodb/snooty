@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from '@gatsbyjs/reach-router';
 import { Link as GatsbyLink } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Link as LGLink } from '@leafygreen-ui/typography';
@@ -9,9 +8,7 @@ import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
-import { isGatsbyPreview } from '../utils/is-gatsby-preview';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
-import { getGatsbyPreviewLink } from '../utils/get-gatsby-preview-link';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -97,7 +94,6 @@ const Link = ({
   hideExternalIcon: hideExternalIconProp,
   ...other
 }) => {
-  const location = useLocation();
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
@@ -120,8 +116,6 @@ const Link = ({
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
-
-    if (isGatsbyPreview()) to = getGatsbyPreviewLink(to, location);
 
     return (
       <GatsbyLink
