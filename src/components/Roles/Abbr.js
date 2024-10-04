@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InlineDefinition from '@leafygreen-ui/inline-definition';
+import { theme } from '../../theme/docsTheme';
 
 const Abbr = ({
   nodeData: {
@@ -17,7 +18,11 @@ const Abbr = ({
     expansion = expansion.split(')')[0];
     abbr = abbr.trim();
   }
-  return <InlineDefinition definition={expansion}>{abbr}</InlineDefinition>;
+  return (
+    <InlineDefinition popoverZIndex={theme.zIndexes.popovers} definition={expansion}>
+      {abbr}
+    </InlineDefinition>
+  );
 };
 
 Abbr.propTypes = {

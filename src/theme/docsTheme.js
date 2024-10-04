@@ -94,6 +94,7 @@ const zIndexes = {
   sidenav: 900,
   header: 1000,
   widgets: 2000,
+  popovers: 9999,
 };
 
 // media queries that define system color preference
