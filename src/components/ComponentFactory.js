@@ -79,6 +79,7 @@ import RoleHighlight from './Roles/Highlight';
 import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
+import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
 
 const IGNORED_NAMES = new Set([
@@ -115,6 +116,7 @@ const roleMap = {
   'icon-lg': RoleIcon,
   kbd: RoleKbd,
   red: RoleRed,
+  gold: RoleGold,
   required: RoleRequired,
   sub: Subscript,
   subscript: Subscript,

@@ -1,9 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
-const { isGatsbyPreview } = require('../is-gatsby-preview');
 
 const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
-const isPreview = isGatsbyPreview();
 
 const saveFile = async (file, data) => {
   // save files both to "public" and "src/images" directories
@@ -13,8 +11,7 @@ const saveFile = async (file, data) => {
   });
   await fs.writeFile(path.join('public', file), data, 'binary');
 
-  const pathList =
-    !isPreview && GATSBY_IMAGE_EXTENSIONS.some((ext) => file.endsWith(ext)) ? ['src', 'images'] : ['public'];
+  const pathList = GATSBY_IMAGE_EXTENSIONS.some((ext) => file.endsWith(ext)) ? ['src', 'images'] : ['public'];
   await fs.mkdir(path.join(...pathList, path.dirname(file)), {
     recursive: true,
   });

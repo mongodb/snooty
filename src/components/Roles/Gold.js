@@ -4,13 +4,13 @@ import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 
-const Red = ({ nodeData: { children } }) => (
+const Gold = ({ nodeData: { children } }) => (
   <strong
     css={css`
-      color: ${palette.red.dark2};
+      color: ${palette.yellow.dark2};
 
       .dark-theme & {
-        color: ${palette.red.light1};
+        color: ${palette.yellow.light2};
       }
     `}
   >
@@ -20,10 +20,10 @@ const Red = ({ nodeData: { children } }) => (
   </strong>
 );
 
-Red.propTypes = {
+Gold.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
 };
 
-export default Red;
+export default Gold;

@@ -19,7 +19,7 @@ import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
 import { ActionBarSearchContainer, ActionsBox, actionBarStyling, getContainerStyling, overlineStyling } from './styles';
 
-const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
+export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
 
 const ActionBar = ({ template, slug, sidenav, ...props }) => {
   const url = isBrowser ? window.location.href : null;
@@ -63,7 +63,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
 };
 
 ActionBar.propTypes = {
-  template: PropTypes.string.isRequired,
+  template: PropTypes.string,
   slug: PropTypes.string.isRequired,
   sidenav: PropTypes.bool.isRequired,
 };

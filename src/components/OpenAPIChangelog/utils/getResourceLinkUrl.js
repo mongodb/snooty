@@ -1,8 +1,8 @@
 import { generatePathPrefix } from '../../../utils/generate-path-prefix';
 import { normalizePath } from '../../../utils/normalize-path';
 
-const getResourceLinkUrl = (metadata, project, tag, operationId, openapi_pages = {}) => {
-  const pathPrefix = generatePathPrefix(metadata, project);
+const getResourceLinkUrl = (metadata, tag, operationId, openapi_pages = {}) => {
+  const pathPrefix = generatePathPrefix(metadata);
   const resourceTag = `#tag/${tag.split(' ').join('-')}/operation/${operationId}`;
   const oaSpecPageRoute =
     Object.keys(openapi_pages).find((page) => page.includes('v2')) ||
