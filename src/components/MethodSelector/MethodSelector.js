@@ -108,10 +108,6 @@ const MethodSelector = ({ nodeData: { children } }) => {
   const { activeSelectorIds, setActiveSelectorIds } = useContext(ContentsContext);
   const [selectedIdx, setSelectedIdx] = useState(0);
 
-  if (activeSelectorIds.methodSelector !== selectedMethod) {
-    setActiveSelectorIds({ ...activeSelectorIds, methodSelector: selectedMethod });
-  }
-
   // set on initial load
   // Load method ID saved from last session, if applicable.
   useEffect(() => {
@@ -125,7 +121,8 @@ const MethodSelector = ({ nodeData: { children } }) => {
       setSelectedMethod(savedMethodId);
       setSelectedIdx(validOptions.indexOf(savedMethodId));
     }
-  }, [children]);
+    setActiveSelectorIds({ ...activeSelectorIds, methodSelector: savedMethodId || selectedMethod });
+  }, [children, activeSelectorIds, selectedMethod, setActiveSelectorIds]);
 
   return (
     <>
