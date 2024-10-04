@@ -56,12 +56,15 @@ export class StructuredData {
 }
 
 class HowToSd extends StructuredData {
-  constructor({ steps }) {
+  constructor({ steps, name }) {
     super('HowTo');
 
     this.steps = steps;
-    // TODO: DOP-5040
-    // include name and default image
+    this.name = name;
+    // image comes from Flora constants
+    // https://github.com/10gen/flora/blob/v1.14.2/src/MDBLogo/constants.ts
+    this.image =
+      'https://webimages.mongodb.com/_com_assets/cms/kuyj2focmkbxv7gh3-stacked_default_slate_blue.svg?auto=format%252Ccompress';
   }
 }
 
@@ -172,7 +175,7 @@ export const constructTechArticle = ({ facets, pageTitle }) => {
   return new TechArticleSd(techArticleProps);
 };
 
-export const constructHowToSd = ({ steps }) => {
+export const constructHowToSd = ({ steps, parentHeading }) => {
   function getHowToSection(procedureDirective, name) {
     const howToSection = {
       '@type': 'HowToSection',
@@ -222,6 +225,7 @@ export const constructHowToSd = ({ steps }) => {
 
   const howToProps = {
     steps: [],
+    name: parentHeading,
   };
 
   for (const step of steps) {

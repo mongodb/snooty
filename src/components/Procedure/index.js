@@ -8,6 +8,7 @@ import {
 } from '../../context/ancestor-components-context';
 import { theme } from '../../theme/docsTheme';
 import { constructHowToSd } from '../../utils/structured-data';
+import { useHeadingContext } from '../../context/heading-context';
 import Step from './Step';
 
 const StyledProcedure = styled('div')`
@@ -60,13 +61,15 @@ const Procedure = ({ nodeData, ...rest }) => {
   const style = options?.style || 'connected';
   const steps = useMemo(() => getSteps(children), [children]);
   const ancestors = useAncestorComponentContext();
+  const { lastHeading } = useHeadingContext();
 
   // construct Structured Data
   const howToSd = useMemo(() => {
     if (ancestors['procedure']) return undefined;
-    const howToSd = constructHowToSd({ steps });
+
+    const howToSd = constructHowToSd({ steps, parentHeading: lastHeading });
     return howToSd.isValid() ? howToSd.toString() : undefined;
-  }, [steps, ancestors]);
+  }, [ancestors, lastHeading, steps]);
 
   return (
     <AncestorComponentContextProvider component={'procedure'}>

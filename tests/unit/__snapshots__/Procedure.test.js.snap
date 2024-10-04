@@ -2,11 +2,6 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
-  <script
-    type="application/ld+json"
-  >
-    {"@context":"https://schema.org","@type":"HowTo","steps":[{"@type":"HowToStep","text":"Connect to a MongoDB deployment hosted on MongoDB Atlas, or a deployment hosted locally on your own machine.To learn more, see Connect to MongoDB","name":"Connect to your deployment"},{"@type":"HowToStep","text":"Import data from CSV or JSON files into your MongoDB database.To learn more, see Import and Export Data","name":"Import your data"}]}
-  </script>
   .emotion-0 {
   margin-top: 16px;
   background-color: initial;
@@ -229,11 +224,6 @@ exports[`renders correctly 1`] = `
 
 exports[`renders steps nested in include nodes 1`] = `
 <DocumentFragment>
-  <script
-    type="application/ld+json"
-  >
-    {"@context":"https://schema.org","@type":"HowTo","steps":[{"@type":"HowToStep","text":"Content for step 1","name":"Step 1"},{"@type":"HowToStep","text":"Content for step 2","name":"Step 2"},{"@type":"HowToStep","text":"Content for step 3","name":"Step 3"},{"@type":"HowToStep","text":"Content for step 4","name":"Step 4"},{"@type":"HowToStep","text":"Content for step 5","name":"Step 5"},{"@type":"HowToStep","text":"Content for step 6","name":"Step 6"},{"@type":"HowToStep","text":"Content for step 7","name":"Step 7"}]}
-  </script>
   .emotion-0 {
   margin-top: 16px;
   background-color: initial;
@@ -803,11 +793,6 @@ exports[`renders steps nested in include nodes 1`] = `
 
 exports[`renders with "normal" or YAML steps styling 1`] = `
 <DocumentFragment>
-  <script
-    type="application/ld+json"
-  >
-    {"@context":"https://schema.org","@type":"HowTo","steps":[{"@type":"HowToStep","text":"Connect to a MongoDB deployment hosted on MongoDB Atlas, or a deployment hosted locally on your own machine.To learn more, see Connect to MongoDB","name":"Connect to your deployment"},{"@type":"HowToStep","text":"Import data from CSV or JSON files into your MongoDB database.To learn more, see Import and Export Data","name":"Import your data"}]}
-  </script>
   .emotion-0 {
   margin-top: 16px;
   background-color: initial;
