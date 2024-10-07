@@ -4,7 +4,7 @@ exports[`renders a Banner correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   margin: 16px 0;
-  font-size: 13px;
+  font-size: 13px!important;
   background-color: #E1F7FF;
   color: #083C90;
   border-color: #C3E7FE;
