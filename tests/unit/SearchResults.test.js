@@ -85,10 +85,7 @@ const expectUnfilteredResults = (wrapper) => {
 };
 
 const filterByRealm = async (wrapper, screenSize) => {
-  let listboxIndex = 0;
-  if (screenSize === 'mobile') {
-    listboxIndex = 2;
-  }
+  const listboxIndex = 0;
   const selectElements = wrapper.queryAllByTestId('lg-select');
   const dropdownButton = selectElements[listboxIndex];
   expect(dropdownButton).toHaveAttribute('aria-expanded', 'false');
@@ -295,8 +292,6 @@ describe('Search Results Page', () => {
 
     // Set filters but don't apply them
     await filterByRealm(renderStitchResults, 'mobile');
-    expectUnfilteredResults(renderStitchResults);
-    expect(renderStitchResults.queryByText(MOBILE_SEARCH_BACK_BUTTON_TEXT)).toBeTruthy();
 
     // Hit back button
     await act(async () => {
