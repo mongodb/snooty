@@ -3,6 +3,8 @@ import { theme } from '../../../theme/docsTheme';
 
 export const baseBannerStyle = css`
   margin: ${theme.size.default} 0;
+  /* Force all content to be 13px in banners */
+  font-size: ${theme.fontSize.small} !important;
 
   /* Add margins below all child elements in the banner */
   & > div > div > * {
@@ -16,14 +18,6 @@ export const baseBannerStyle = css`
   /* Remove margins on individual paragraphs */
   p {
     margin: 0;
-  }
-
-  /* Force all content to be 13px in banners */
-  font-size: ${theme.fontSize.small};
-
-  p,
-  a {
-    font-size: ${theme.fontSize.small};
   }
 
   a {
