@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { formatText } from '../../utils/format-text';
 import { ContentsContext } from './contents-context';
@@ -12,7 +13,7 @@ const formatTextOptions = {
 // recursively go through selector ids defined by parser
 // everything in headingSelectorIds must be present in activeSelectorIds
 const checkNodes = (headingSelectorIds, activeSelectorIds) => {
-  if (!headingSelectorIds || JSON.stringify(headingSelectorIds) === '{}') return true;
+  if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
   if (headingSelectorIds['method-option'] && headingSelectorIds['method-option'] !== activeSelectorIds.methodSelector) {
     return false;
   }
