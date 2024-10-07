@@ -1,34 +1,16 @@
 import React, { useContext, useCallback } from 'react';
-import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
-import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { theme } from '../../theme/docsTheme';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
 import { Facets } from './Facets';
 
-// Temporarily apply this css rule to prevent body scrolling only while
-// this component is mounted.
-const disableBodyScroll = css`
-  body {
-    overflow: hidden;
-  }
-`;
-
 const Container = styled('div')`
   background-color: var(--background-color-primary);
-  position: fixed;
-  left: 0;
-  top: ${({ topValue }) => topValue};
-  height: calc(100vh - ${({ topValue }) => topValue});
-  overflow-y: scroll;
-  right: 0;
-  bottom: 0;
+  padding-top: ${theme.size.large};
   width: 100%;
-  padding: ${theme.size.large} ${theme.size.medium};
-  z-index: 1;
 `;
 
 const BackButton = styled('div')`
@@ -37,6 +19,8 @@ const BackButton = styled('div')`
   cursor: pointer;
   display: flex;
   gap: 0 ${theme.size.small};
+  font-size: ${theme.fontSize.default};
+  line-height: ${theme.size.medium};
 
   .dark-theme & {
     color: ${palette.gray.light1};
@@ -50,7 +34,6 @@ const Label = styled('div')`
 `;
 
 const MobileFilters = ({ facets }) => {
-  const { topSmall } = useStickyTopValues(false, true);
   const { setShowMobileFilters, showFacets } = useContext(SearchContext);
 
   const closeMobileFilters = useCallback(() => {
@@ -58,21 +41,18 @@ const MobileFilters = ({ facets }) => {
   }, [setShowMobileFilters]);
 
   return (
-    <>
-      <Global styles={disableBodyScroll} />
-      <Container topValue={topSmall}>
-        <BackButton onClick={closeMobileFilters}>
-          <Icon glyph="ArrowLeft" />
-          Back to search results
-        </BackButton>
-        <Label>Refine your search</Label>
-        {showFacets ? (
-          <Facets facets={facets} />
-        ) : (
-          <SearchFilters manuallyApplyFilters={true} onApplyFilters={closeMobileFilters} />
-        )}
-      </Container>
-    </>
+    <Container>
+      <BackButton onClick={closeMobileFilters}>
+        <Icon glyph="ArrowLeft" />
+        Back to search results
+      </BackButton>
+      <Label>Refine your search</Label>
+      {showFacets ? (
+        <Facets facets={facets} />
+      ) : (
+        <SearchFilters manuallyApplyFilters={true} onApplyFilters={closeMobileFilters} />
+      )}
+    </Container>
   );
 };
 
