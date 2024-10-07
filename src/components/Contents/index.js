@@ -10,8 +10,26 @@ const formatTextOptions = {
   literalEnableInline: true,
 };
 
-// recursively go through selector ids defined by parser
-// everything in headingSelectorIds must be present in activeSelectorIds
+/* recursively go through selector ids defined by parser
+everything in headingSelectorIds must be present in activeSelectorIds
+activeSelectorIds structure:
+{
+  methodSelector: str,
+  tab: [str, str, ...]
+}
+headingSelectorIds structure (comes from parser):
+{
+  method-option | tab: str,
+  children: {
+    tab: str,
+    children: {
+      tab: str,
+    }
+  }
+} 
+where method-option, if exists, must be a top-level key
+and children is optional
+*/
 const checkNodes = (headingSelectorIds, activeSelectorIds) => {
   if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
   if (headingSelectorIds['method-option'] && headingSelectorIds['method-option'] !== activeSelectorIds.methodSelector) {
