@@ -14,21 +14,20 @@ const formatTextOptions = {
 everything in headingSelectorIds must be present in activeSelectorIds
 activeSelectorIds structure:
 {
-  methodSelector: str,
-  tab: [str, str, ...]
+  methodSelector?: str,
+  tab?: [str],
 }
 headingSelectorIds structure (comes from parser):
 {
   method-option | tab: str,
-  children: {
+  children?: {
     tab: str,
-    children: {
+    children?: {
       tab: str,
+      ...
     }
   }
 } 
-where method-option, if exists, must be a top-level key
-and children is optional
 */
 const checkNodes = (headingSelectorIds, activeSelectorIds) => {
   if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
