@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -7,6 +7,7 @@ import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
+import { useLocation } from '@gatsbyjs/reach-router';
 import Link from '../Link';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
@@ -177,6 +178,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
   const { bannerContent } = useContext(HeaderContext);
+  const { pathname } = useLocation();
 
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(false, true, !!bannerContent);
@@ -202,6 +204,11 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
   const hideMobileSidenav = useCallback(() => {
     setHideMobile(true);
   }, [setHideMobile]);
+
+  // close navigation panel on mobile screen, but leaves open if they click on a twisty
+  useEffect(() => {
+    setHideMobile(true);
+  }, [pathname, setHideMobile]);
 
   const { activeToc } = useContext(TocContext);
 

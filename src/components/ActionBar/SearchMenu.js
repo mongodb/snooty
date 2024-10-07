@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
+import React, { forwardRef, useEffect, useMemo, useState } from 'react';
 import { navigate } from 'gatsby';
 import { SearchResultsMenu, SearchResult } from '@leafygreen-ui/search-input';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -13,16 +13,26 @@ import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { suggestionStyling } from './styles';
 import { SEARCH_SUGGESTIONS } from './SearchInput';
 
-// Using a forward ref and imperative handle
-// to expose lazy loaded child (chatbot) behaviors to parent (SearchInput)
-// https://react.dev/reference/react/useImperativeHandle
-const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, isOpen, selectedOption, slug }, ref) {
+const SearchMenu = forwardRef(function SearchMenu(
+  {
+    searchValue,
+    searchBoxRef,
+    isOpen,
+    selectedOption,
+    slug,
+    selectedResult,
+    setSelectedResult,
+    isFocused,
+    setChatbotAvail,
+  },
+  ref
+) {
   const { handleSubmit, conversation } = useChatbotContext();
-  const menuRef = useRef();
   const { project } = useSnootyMetadata();
   const docsets = useAllDocsets();
   const { snootyEnv } = useSiteMetadata();
   const locale = getCurrLocale();
+  const [conversationInit, setConversationInit] = useState(false);
 
   // get search url for staging and prod environments
   // all other environments will fall back to prod
@@ -37,52 +47,50 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
     );
   }, [docsets, snootyEnv]);
 
-  const handleSearchResultClick = useCallback(
-    async (isChatbotRes) => {
-      reportAnalytics('Search bar used', {
-        type: isChatbotRes ? 'chatbot' : 'docs-search',
-        query: searchValue,
-      });
-      if (isChatbotRes) {
-        return handleSubmit(searchValue);
-      }
-      if (project === 'landing' && slug === 'search') {
-        const newSearch = new URLSearchParams();
-        newSearch.set('q', searchValue);
-        return navigate(`?${newSearch.toString()}`, { state: { searchValue } });
-      }
-      return (window.location.href = `${fullSearchUrl}/?q=${searchValue}`);
-    },
-    [handleSubmit, project, fullSearchUrl, searchValue, slug]
-  );
-
-  useImperativeHandle(
-    ref,
-    () => {
-      return {
-        contains(el) {
-          return menuRef.current?.contains(el);
-        },
-        async select(index) {
-          return handleSearchResultClick(index === 1);
-        },
-      };
-    },
-    [handleSearchResultClick]
-  );
+  const handleSearchResultClick = async (isChatbotRes) => {
+    reportAnalytics('Search bar used', {
+      type: isChatbotRes ? 'chatbot' : 'docs-search',
+      query: searchValue,
+    });
+    if (isChatbotRes) {
+      return handleSubmit(searchValue).catch((e) => console.error(e));
+    }
+    if (project === 'landing' && slug === 'search') {
+      const newSearch = new URLSearchParams();
+      newSearch.set('q', searchValue);
+      return navigate(`?${newSearch.toString()}`, { state: { searchValue } });
+    }
+    return (window.location.href = `${fullSearchUrl}/?q=${searchValue}`);
+  };
 
   useEffect(() => {
-    // on init, set a conversation id
-    // workaround the chatbot bug of not having createConversation be async
-    if (!isOpen || !!conversation.conversationId) {
+    if (!Number.isInteger(selectedResult)) {
       return;
     }
-    const initConvo = async () => {
-      await conversation.createConversation();
-    };
-    initConvo();
+    handleSearchResultClick(selectedResult > 0);
+    // NOTE: this effect should only run when selected result is changed
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+  }, [selectedResult]);
+
+  // NOTE: conversation is updated in effect below
+  useEffect(() => {
+    if (!conversation.conversationId) {
+      return;
+    }
+    setChatbotAvail(!conversation.error && !!conversation.conversationId);
+  }, [conversation, setChatbotAvail]);
+
+  useEffect(() => {
+    if (!isFocused || conversationInit || conversation.conversationId) {
+      return;
+    }
+    setConversationInit(true);
+    // NOTE: createConversation does not resolve / throw errors.
+    // updates conversation from useChatbotContext instead
+    // https://github.com/mongodb/chatbot/blob/mongodb-chatbot-ui-v0.8.1/packages/mongodb-chatbot-ui/src/useConversation.tsx#L409
+    conversation.createConversation().finally((e) => setConversationInit(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFocused]);
 
   const searchOptions = useMemo(() => {
     const useChatbot = !!conversation.conversationId && locale === 'en-us';
@@ -91,7 +99,7 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
 
   return (
     <>
-      <SearchResultsMenu open={isOpen} refEl={searchBoxRef} ref={menuRef}>
+      <SearchResultsMenu open={isOpen} refEl={searchBoxRef} ref={ref}>
         {searchOptions.map((suggestion, i) => {
           const { copy } = suggestion;
           const isChatbot = i === 1;
@@ -100,7 +108,7 @@ const SearchMenu = forwardRef(function SearchMenu({ searchValue, searchBoxRef, i
               className={cx(suggestionStyling({ copy }))}
               key={`result-${i}`}
               id={`result-${i}`}
-              onClick={async () => handleSearchResultClick(i === 1)}
+              onClick={() => setSelectedResult(i)}
               highlighted={selectedOption === i}
             >
               {!isChatbot && <>{searchValue}</>}

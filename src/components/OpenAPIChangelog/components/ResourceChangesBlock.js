@@ -38,8 +38,8 @@ const ChangeListUL = styled.ul`
 
 const ResourceChangesBlock = ({ path, httpMethod, operationId, tag, changes, versions }) => {
   const metadata = useSiteMetadata();
-  const { openapi_pages, project } = useSnootyMetadata();
-  const resourceLinkUrl = getResourceLinkUrl(metadata, project, tag, operationId, openapi_pages);
+  const { openapi_pages } = useSnootyMetadata();
+  const resourceLinkUrl = getResourceLinkUrl(metadata, tag, operationId, openapi_pages);
   const { darkMode } = useDarkMode();
 
   const allResourceChanges =
