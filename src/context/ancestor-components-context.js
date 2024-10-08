@@ -2,6 +2,7 @@ import React, { createContext, useContext } from 'react';
 
 const defaultVal = {
   table: false,
+  procedure: false,
 };
 
 const AncestorComponentContext = createContext(defaultVal);
