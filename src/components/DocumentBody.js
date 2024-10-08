@@ -211,6 +211,7 @@ export const Head = ({ pageContext, data }) => {
   // Retrieves the canonical URL based on certain situations
   // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
   const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
+  const noIndexing = repoBranches.branches.find((br) => br.gitBranchName === metadata.branch)?.noIndexing;
 
   // construct Structured Data
   const techArticleSd = useMemo(() => {
@@ -229,6 +230,7 @@ export const Head = ({ pageContext, data }) => {
         siteTitle={siteTitle}
         showDocsLandingTitle={isDocsLandingHomepage && slug === '/'}
         slug={slug}
+        noIndexing={noIndexing}
       />
       {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
