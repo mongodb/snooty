@@ -210,7 +210,7 @@ export const Head = ({ pageContext, data }) => {
   // Retrieves the canonical URL based on certain situations
   // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
   const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
-  const hideFromCrawlers = repoBranches.branches.find((br) => br.gitBranchName === metadata.branch)?.hideFromCrawlers;
+  const noIndexing = repoBranches.branches.find((br) => br.gitBranchName === metadata.branch)?.noIndexing;
 
   return (
     <>
@@ -220,7 +220,7 @@ export const Head = ({ pageContext, data }) => {
         siteTitle={siteTitle}
         showDocsLandingTitle={isDocsLandingHomepage && slug === '/'}
         slug={slug}
-        hideFromCrawlers={hideFromCrawlers}
+        noIndexing={noIndexing}
       />
       {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}

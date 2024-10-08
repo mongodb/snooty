@@ -6,7 +6,7 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 const DEFAULT_TWITTER_SITE = '@mongodb';
 const metaUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
 
-const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, hideFromCrawlers }) => {
+const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIndexing }) => {
   // Using static siteUrl instead of location.origin due to origin being undefined at build time
   const { siteUrl } = useSiteMetadata();
   const localeHrefMap = getLocaleMapping(siteUrl, slug);
@@ -32,7 +32,7 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, hide
       <meta property="twitter:title" content={pageTitle} />
       <meta name="twitter:image" content={metaUrl} />
       <meta name="twitter:image:alt" content="MongoDB logo featuring a green leaf on a dark green background." />
-      {hideFromCrawlers && <meta name="robots" content="noindex" />}
+      {noIndexing && <meta name="robots" content="noindex" />}
       {canonical && <link data-testid="canonical" id="canonical" rel="canonical" key={canonical} href={canonical} />}
     </>
   );
@@ -43,7 +43,7 @@ SEO.propTypes = {
   siteTitle: PropTypes.string.isRequired,
   showDocsLandingTitle: PropTypes.bool,
   canonical: PropTypes.string,
-  hideFromCrawlers: PropTypes.bool,
+  noIndexing: PropTypes.bool,
 };
 
 export default SEO;
