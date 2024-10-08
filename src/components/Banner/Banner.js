@@ -78,7 +78,7 @@ const styleMapDark = {
   },
 };
 
-const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
+const StyledBanner = styled((props) => <LeafyBanner baseFontSize="13" {...props} />)`
   ${baseBannerStyle}
   background-color: ${(props) => styleMapLight[props.variant].backgroundColor};
   color: ${(props) => styleMapLight[props.variant].color};

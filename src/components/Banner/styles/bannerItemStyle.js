@@ -19,7 +19,7 @@ export const baseBannerStyle = css`
   }
 
   /* Force all content to be 13px in banners */
-  font-size: ${theme.fontSize.small} !important;
+  font-size: ${theme.fontSize.small};
 
   p,
   a {
