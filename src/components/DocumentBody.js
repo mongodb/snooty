@@ -1,4 +1,4 @@
-import React, { useState, lazy } from 'react';
+import React, { useState, useMemo, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import { ImageContextProvider } from '../context/image-context';
@@ -11,6 +11,7 @@ import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getSiteTitle } from '../utils/get-site-title';
+import { constructTechArticle } from '../utils/structured-data';
 import { PageContext } from '../context/page-context';
 import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
@@ -204,12 +205,21 @@ export const Head = ({ pageContext, data }) => {
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
   const siteTitle = getSiteTitle(metadata);
 
-  const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing';
+  const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing' && slug === '/';
   const needsBreadcrumbs = template === 'document' || template === undefined;
 
   // Retrieves the canonical URL based on certain situations
   // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
   const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
+
+  // construct Structured Data
+  const techArticleSd = useMemo(() => {
+    if (['product-landing', 'landing', 'search', 'errorpage', 'drivers-index'].includes(template)) {
+      return;
+    }
+    const techArticle = constructTechArticle({ facets: data.page.facets || [], pageTitle });
+    return techArticle.isValid() ? techArticle : undefined;
+  }, [data.page.facets, pageTitle, template]);
 
   return (
     <>
@@ -224,6 +234,11 @@ export const Head = ({ pageContext, data }) => {
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
+      {techArticleSd && (
+        <script id={'tech-article-sd'} type="application/ld+json">
+          {techArticleSd.toString()}
+        </script>
+      )}
     </>
   );
 };
@@ -232,6 +247,7 @@ export const query = graphql`
   query ($page_id: String, $slug: String) {
     page(id: { eq: $page_id }) {
       ast
+      facets
     }
     pageImage(slug: { eq: $slug }) {
       slug
