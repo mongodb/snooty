@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ReactPlayerYT from 'react-player/youtube';
 import ReactPlayerWistia from 'react-player/wistia';
 import PropTypes from 'prop-types';
@@ -7,6 +7,7 @@ import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
+import { VideoObjectSd } from '../../utils/structured-data';
 import VideoPlayButton from './VideoPlayButton';
 
 // Imported both players to keep bundle size low and rendering the one associated to the URL being passed in
@@ -68,10 +69,15 @@ const getTheSupportedMedia = (url) => {
   return REACT_PLAYERS[supportedType];
 };
 
-const Video = ({ nodeData: { argument }, ...rest }) => {
+const Video = ({ nodeData: { argument, options = {} } }) => {
   const url = `${argument[0]['refuri']}`;
   // use placeholder image for video thumbnail if invalid URL provided
   const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
+  const { title, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options;
+  const videoObjectSd = useMemo(() => {
+    const sd = new VideoObjectSd({ embedUrl: url, name: title, uploadDate, thumbnailUrl, description });
+    return sd.isValid() ? sd.toString() : undefined;
+  }, [url, title, uploadDate, thumbnailUrl, description]);
 
   useEffect(() => {
     // handles URL validity checking for well-formed YT links
@@ -104,25 +110,41 @@ const Video = ({ nodeData: { argument }, ...rest }) => {
   }
 
   return (
-    <ReactPlayerWrapper>
-      <ReactPlayer
-        css={videoStyling(ReactSupportedMedia)}
-        config={ReactSupportedMedia.config}
-        controls
-        url={url}
-        width="100%"
-        height="100%"
-        playing
-        playIcon={<VideoPlayButton />}
-        light={previewImage}
-      />
-    </ReactPlayerWrapper>
+    <>
+      {videoObjectSd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: videoObjectSd,
+          }}
+        />
+      )}
+      <ReactPlayerWrapper>
+        <ReactPlayer
+          css={videoStyling(ReactSupportedMedia)}
+          config={ReactSupportedMedia.config}
+          controls
+          url={url}
+          width="100%"
+          height="100%"
+          playing
+          playIcon={<VideoPlayButton />}
+          light={previewImage}
+        />
+      </ReactPlayerWrapper>
+    </>
   );
 };
 
 Video.propTypes = {
   nodeData: PropTypes.shape({
     argument: PropTypes.array.isRequired,
+    options: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      'upload-date': PropTypes.string,
+      'thumbnail-url': PropTypes.string,
+    }),
   }).isRequired,
 };
 

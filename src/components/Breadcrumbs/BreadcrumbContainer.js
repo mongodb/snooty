@@ -86,7 +86,7 @@ const crumbObjectShape = {
 };
 
 BreadcrumbContainer.propTypes = {
-  breadcrumbs: PropTypes.shape(crumbObjectShape).isRequired,
+  breadcrumbs: PropTypes.arrayOf(PropTypes.shape(crumbObjectShape)).isRequired,
 };
 
 export default BreadcrumbContainer;
