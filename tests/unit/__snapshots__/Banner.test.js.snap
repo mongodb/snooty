@@ -3,11 +3,59 @@
 exports[`renders a Banner correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px 12px 10px 20px;
+  border-width: 1px 1px 1px 0px;
+  border-style: solid;
+  border-radius: 12px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  color: #083C90;
+  border-color: #C3E7FE;
+  background-color: #E1F7FF;
   margin: 16px 0;
   font-size: 13px;
   background-color: #E1F7FF;
   color: #083C90;
   border-color: #C3E7FE;
+}
+
+.emotion-0:before {
+  content: '';
+  position: absolute;
+  width: 13px;
+  top: -1px;
+  bottom: -1px;
+  left: 0px;
+  border-radius: 12px 0px 0px 12px;
+}
+
+.emotion-0 .lg-ui-0001,
+.emotion-0 a {
+  color: #0C2657;
+}
+
+.emotion-0 .lg-ui-0001:hover,
+.emotion-0 a:hover {
+  color: #083C90;
+}
+
+.emotion-0 .lg-ui-0001:focus-visible,
+.emotion-0 a:focus-visible {
+  box-shadow: 0 0 0 3px #E1F7FF,0 0 0 5px #FFFFFF,0 0 0 7px #0498EC;
+}
+
+.emotion-0:before {
+  background: linear-gradient(
+        to left,
+        transparent 6px,
+        #016BF8 6px
+      );
 }
 
 .emotion-0>div>div>* {
@@ -71,58 +119,7 @@ exports[`renders a Banner correctly 1`] = `
   color: #0498EC;
 }
 
-.emotion-2 {
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 10px 12px 10px 20px;
-  border-width: 1px 1px 1px 0px;
-  border-style: solid;
-  border-radius: 12px;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  line-height: 20px;
-  color: #083C90;
-  border-color: #C3E7FE;
-  background-color: #E1F7FF;
-}
-
-.emotion-2:before {
-  content: '';
-  position: absolute;
-  width: 13px;
-  top: -1px;
-  bottom: -1px;
-  left: 0px;
-  border-radius: 12px 0px 0px 12px;
-}
-
-.emotion-2 .lg-ui-0001,
-.emotion-2 a {
-  color: #0C2657;
-}
-
-.emotion-2 .lg-ui-0001:hover,
-.emotion-2 a:hover {
-  color: #083C90;
-}
-
-.emotion-2 .lg-ui-0001:focus-visible,
-.emotion-2 a:focus-visible {
-  box-shadow: 0 0 0 3px #E1F7FF,0 0 0 5px #FFFFFF,0 0 0 7px #0498EC;
-}
-
-.emotion-2:before {
-  background: linear-gradient(
-        to left,
-        transparent 6px,
-        #016BF8 6px
-      );
-}
-
-.emotion-3 {
+.emotion-1 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -134,7 +131,7 @@ exports[`renders a Banner correctly 1`] = `
   top: 2px;
 }
 
-.emotion-4 {
+.emotion-2 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -146,8 +143,8 @@ exports[`renders a Banner correctly 1`] = `
   margin-right: 10px;
 }
 
-.emotion-4 .lg-ui-0001,
-.emotion-4 a {
+.emotion-2 .lg-ui-0001,
+.emotion-2 a {
   font-size: inherit;
   line-height: inherit;
   font-weight: 700;
@@ -159,36 +156,36 @@ exports[`renders a Banner correctly 1`] = `
   display: inline;
 }
 
-.emotion-4 .lg-ui-0001:hover,
-.emotion-4 a:hover,
-.emotion-4 .lg-ui-0001:focus,
-.emotion-4 a:focus,
-.emotion-4 .lg-ui-0001:focus-visible,
-.emotion-4 a:focus-visible {
+.emotion-2 .lg-ui-0001:hover,
+.emotion-2 a:hover,
+.emotion-2 .lg-ui-0001:focus,
+.emotion-2 a:focus,
+.emotion-2 .lg-ui-0001:focus-visible,
+.emotion-2 a:focus-visible {
   outline: none;
 }
 
-.emotion-4 .lg-ui-0001:hover span::after,
-.emotion-4 a:hover span::after,
-.emotion-4 .lg-ui-0001:focus span::after,
-.emotion-4 a:focus span::after,
-.emotion-4 .lg-ui-0001:focus-visible span::after,
-.emotion-4 a:focus-visible span::after {
+.emotion-2 .lg-ui-0001:hover span::after,
+.emotion-2 a:hover span::after,
+.emotion-2 .lg-ui-0001:focus span::after,
+.emotion-2 a:focus span::after,
+.emotion-2 .lg-ui-0001:focus-visible span::after,
+.emotion-2 a:focus-visible span::after {
   display: none;
 }
 
-.emotion-4 .lg-ui-0001:focus-visible,
-.emotion-4 a:focus-visible {
+.emotion-2 .lg-ui-0001:focus-visible,
+.emotion-2 a:focus-visible {
   position: relative;
 }
 
 <div
-    class="emotion-0 emotion-1 emotion-2"
+    class="emotion-0"
     role="alert"
   >
     <svg
       aria-label="Info With Circle Icon"
-      class="emotion-3"
+      class="emotion-1"
       height="16"
       role="img"
       viewBox="0 0 16 16"
@@ -202,7 +199,7 @@ exports[`renders a Banner correctly 1`] = `
       />
     </svg>
     <div
-      class="emotion-4"
+      class="emotion-2"
     >
       These instructions are for installing MongoDB directly from
     </div>
