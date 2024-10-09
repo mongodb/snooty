@@ -29,22 +29,24 @@ headingSelectorIds structure (comes from parser):
   }
 } 
 */
-const checkNodes = (headingSelectorIds, activeSelectorIds) => {
+const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
   if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
-  if (headingSelectorIds['method-option'] && headingSelectorIds['method-option'] !== activeSelectorIds.methodSelector) {
+  const headingsMethodParent = headingSelectorIds['method-option'];
+  const headingsTabParent = headingSelectorIds['tab'];
+  if (
+    (headingsMethodParent && headingsMethodParent !== activeSelectorIds.methodSelector) ||
+    (headingsTabParent && !activeSelectorIds.tab?.includes(headingsTabParent))
+  ) {
     return false;
   }
-  if (headingSelectorIds['tab'] && !activeSelectorIds.tab?.includes(headingSelectorIds['tab'])) {
-    return false;
-  }
-  return checkNodes(headingSelectorIds.children ?? {}, activeSelectorIds);
+  return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
 };
 
 const Contents = ({ className }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
 
   const filteredNodes = headingNodes.filter((headingNode) => {
-    return checkNodes(headingNode.selector_ids, activeSelectorIds);
+    return isHeadingVisible(headingNode.selector_ids, activeSelectorIds);
   });
 
   if (filteredNodes.length === 0 || !showContentsComponent) {
