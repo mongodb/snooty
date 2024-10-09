@@ -16,7 +16,7 @@ import { collapsibleStyle, headerContainerStyle, headerStyle, iconStyle, innerCo
 import './styles.css';
 
 const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest }) => {
-  const { id, heading, sub_heading: subHeading } = options;
+  const { id, heading, expanded, sub_heading: subHeading } = options;
   const { hash } = useLocation();
 
   // get a list of all ids in collapsible content
@@ -25,7 +25,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
     return findAllNestedAttribute(children, 'id');
   }, [children]);
 
-  const [open, setOpen] = useState(!!options.expanded);
+  const [open, setOpen] = useState(!!expanded);
   const headingNodeData = {
     id,
     children: [{ type: 'text', value: heading }],
