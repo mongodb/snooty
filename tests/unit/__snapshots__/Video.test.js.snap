@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DailyMotion video renders correctly 1`] = `<DocumentFragment />`;
+exports[`DailyMotion video renders null 1`] = `<DocumentFragment />`;
 
-exports[`Vimeo video renders correctly 1`] = `<DocumentFragment />`;
+exports[`Vimeo video renders null 1`] = `<DocumentFragment />`;
 
 exports[`Wistia video renders correctly 1`] = `
 <DocumentFragment>
