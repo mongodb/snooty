@@ -505,33 +505,33 @@ exports[`CodeIO renders correctly 1`] = `
   justify-self: right;
 }
 
-.emotion-21>div>* {
+.emotion-22>div>* {
   display: inline!important;
 }
 
-.emotion-21 * {
+.emotion-22 * {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
 }
 
-.emotion-21>div {
+.emotion-22>div {
   border: var(--code-container-border);
 }
 
-.emotion-21>div>div>pre {
+.emotion-22>div>div>pre {
   border: var(--code-pre-border);
   border-top: none;
 }
 
-.emotion-23 {
+.emotion-24 {
   border: 1px solid #3D4F58;
   border-radius: 12px;
   overflow: hidden;
 }
 
-.emotion-24 {
+.emotion-25 {
   position: relative;
   display: grid;
   grid-template-areas: 'code panel';
@@ -541,8 +541,8 @@ exports[`CodeIO renders correctly 1`] = `
   grid-template-areas: 'code code';
 }
 
-.emotion-24:before,
-.emotion-24:after {
+.emotion-25:before,
+.emotion-25:after {
   content: '';
   display: block;
   position: absolute;
@@ -556,20 +556,20 @@ exports[`CodeIO renders correctly 1`] = `
   transition: box-shadow 100ms ease-in-out;
 }
 
-.emotion-24:before {
+.emotion-25:before {
   grid-column: 1;
   left: -40px;
 }
 
-.emotion-24:after {
+.emotion-25:after {
   grid-column: 2;
 }
 
-.emotion-24:after {
+.emotion-25:after {
   grid-column: -1;
 }
 
-.emotion-25 {
+.emotion-26 {
   grid-area: code;
   overflow-x: auto;
   border-radius: inherit;
@@ -602,45 +602,45 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-25 {
+  .emotion-26 {
     white-space: pre-wrap;
   }
 }
 
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-25 {
+  .emotion-26 {
     white-space: pre;
   }
 }
 
-.emotion-25:focus-visible {
+.emotion-26:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px #0498EC inset;
 }
 
-.emotion-28 {
+.emotion-29 {
   background-color: transparent;
   background-image: linear-gradient(90deg, #1C2D38, #001E2B);
   background-attachment: fixed;
 }
 
-.emotion-28>td {
+.emotion-29>td {
   border-top: 1px solid #1C2D38;
 }
 
-.emotion-28+tr>td {
+.emotion-29+tr>td {
   border-top: 1px solid #1C2D38;
 }
 
-.emotion-28+.emotion-28>td {
+.emotion-29+.emotion-29>td {
   border-top: 0;
 }
 
-.emotion-28:last-child>td {
+.emotion-29:last-child>td {
   border-bottom: 1px solid #1C2D38;
 }
 
-.emotion-29 {
+.emotion-30 {
   border-spacing: 0;
   vertical-align: top;
   padding: 0 16px;
@@ -657,6 +657,11 @@ exports[`CodeIO renders correctly 1`] = `
 <div
     class="emotion-0"
   >
+    <script
+      type="application/ld+json"
+    >
+      {"@context":"https://schema.org","@type":"SoftwareSourceCode","codeSampleType":"code snippet","text":"print('hello world')","programmingLanguage":"Python"}
+    </script>
     <div
       class="emotion-1"
     >
@@ -766,44 +771,53 @@ exports[`CodeIO renders correctly 1`] = `
       </button>
     </div>
     <div
-      class="emotion-21 emotion-22"
-      style="--code-container-border: initial; --code-pre-border: none;"
+      class="emotion-21"
     >
+      <script
+        type="application/ld+json"
+      >
+        {"@context":"https://schema.org","@type":"SoftwareSourceCode","codeSampleType":"code snippet","text":"hello world","programmingLanguage":"Python"}
+      </script>
       <div
-        class="emotion-23"
+        class="emotion-22 emotion-23"
+        style="--code-container-border: initial; --code-pre-border: none;"
       >
         <div
           class="emotion-24"
         >
-          <pre
+          <div
             class="emotion-25"
-            tabindex="-1"
           >
-            <code
-              class="lg-highlight-hljs-dark python emotion-9"
+            <pre
+              class="emotion-26"
+              tabindex="-1"
             >
-              <table
-                class="emotion-10"
+              <code
+                class="lg-highlight-hljs-dark python emotion-9"
               >
-                <tbody>
-                  <tr
-                    class="emotion-28"
-                  >
-                    <td
+                <table
+                  class="emotion-10"
+                >
+                  <tbody>
+                    <tr
                       class="emotion-29"
                     >
-                      1
-                    </td>
-                    <td
-                      class="emotion-13"
-                    >
-                      hello world
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </code>
-          </pre>
+                      <td
+                        class="emotion-30"
+                      >
+                        1
+                      </td>
+                      <td
+                        class="emotion-13"
+                      >
+                        hello world
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </code>
+            </pre>
+          </div>
         </div>
       </div>
     </div>

@@ -15,16 +15,16 @@ describe('CodeIO', () => {
   it('closes and opens output code snippet on io button click when output is visible by default', () => {
     const wrapper = render(<CodeIO nodeData={mockData.outputVisibleByDefault} />);
     userEvent.click(wrapper.getByRole('button'));
-    expect(wrapper.queryAllByText('hello world')).toHaveLength(0);
+    expect(wrapper.getByText('hello world')).not.toBeVisible();
     userEvent.click(wrapper.getByRole('button'));
-    expect(wrapper.getByText('hello world')).toBeTruthy();
+    expect(wrapper.getByText('hello world')).toBeVisible();
   });
 
   it('opens and closes output code snippet on io button click when output is hidden by default', () => {
     const wrapper = render(<CodeIO nodeData={mockData.outputHiddenByDefault} />);
     userEvent.click(wrapper.getByRole('button'));
-    expect(wrapper.getByText('hello world')).toBeTruthy();
+    expect(wrapper.getByText('hello world')).toBeVisible();
     userEvent.click(wrapper.getByRole('button'));
-    expect(wrapper.queryAllByText('hello world')).toHaveLength(0);
+    expect(wrapper.getByText('hello world')).not.toBeVisible();
   });
 });

@@ -8,6 +8,7 @@ import { theme } from '../../theme/docsTheme';
 import IconDarkmode from '../icons/DarkMode';
 import useScreenSize from '../../hooks/useScreenSize';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { reportAnalytics } from '../../utils/report-analytics';
 import DarkModeGuideCue from './DarkModeGuideCue';
 import { DEPRECATED_PROJECTS } from './ActionBar';
 
@@ -43,6 +44,9 @@ const DarkModeDropdown = () => {
 
   const select = useCallback(
     (selectedPref) => {
+      reportAnalytics('DarkModeSelection', {
+        value: selectedPref,
+      });
       setDarkModePref(selectedPref);
       setOpen(false);
     },
@@ -62,7 +66,12 @@ const DarkModeDropdown = () => {
           justify={justify}
           align={'bottom'}
           open={open}
-          setOpen={setOpen}
+          setOpen={() => {
+            reportAnalytics('DarkModeMenu', {
+              action: open ? 'closed' : 'opened',
+            });
+            setOpen((e) => !e);
+          }}
           trigger={
             <IconButton className={cx(iconStyling)} aria-label="Dark Mode Menu" aria-labelledby="Dark Mode Menu">
               {darkModePref === 'system' ? (
