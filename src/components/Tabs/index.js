@@ -5,11 +5,12 @@ import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
 import { palette } from '@leafygreen-ui/palette';
 import { CodeProvider } from '../Code/code-context';
 import ComponentFactory from '../ComponentFactory';
+import { HeadingContextProvider, useHeadingContext } from '../../context/heading-context';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
-import { HeadingContextProvider, useHeadingContext } from '../../context/heading-context';
+import { getLocalValue } from '../../utils/browser-storage';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { TabContext } from './tab-context';
 
@@ -119,6 +120,20 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const isProductLanding = page?.options?.template === 'product-landing';
   const { lastHeading } = useHeadingContext();
 
+  const initLoad = useRef(false);
+
+  // get non-TabSelector tabs in localstorage
+  useEffect(() => {
+    if (initLoad.current) return;
+    initLoad.current = true;
+
+    const localTabs = getLocalValue('activeTabs');
+    let activeTabIdx = tabIds.indexOf(localTabs?.[tabsetName]);
+    activeTabIdx = activeTabIdx > -1 ? activeTabIdx : 0;
+    setActiveTabIndex(activeTabIdx);
+    setActiveTab({ [tabsetName]: tabIds[activeTabIdx] });
+  }, [setActiveTab, tabIds, tabsetName]);
+
   useEffect(() => {
     const index = tabIds.indexOf(activeTabs[tabsetName]);
     if (index !== -1) {
@@ -128,6 +143,9 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
 
   const handleClick = useCallback(
     (index) => {
+      if (activeTab === index) {
+        return;
+      }
       const tabId = tabIds[index];
       const priorAnchorOffset = getPosition(scrollAnchorRef.current).y;
 
@@ -142,7 +160,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
         window.scrollTo(0, getPosition(scrollAnchorRef.current).y + window.scrollY - priorAnchorOffset);
       }, 40);
     },
-    [setActiveTab, tabIds, tabsetName] // eslint-disable-line react-hooks/exhaustive-deps
+    [activeTab, setActiveTab, tabIds, tabsetName]
   );
 
   return (

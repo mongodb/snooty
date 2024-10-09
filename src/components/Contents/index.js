@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { formatText } from '../../utils/format-text';
 import { ContentsContext } from './contents-context';
@@ -9,13 +10,44 @@ const formatTextOptions = {
   literalEnableInline: true,
 };
 
-const Contents = ({ className }) => {
-  const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorId } = useContext(ContentsContext);
+/* recursively go through selector ids defined by parser
+everything in headingSelectorIds must be present in activeSelectorIds
+activeSelectorIds structure:
+{
+  methodSelector?: str,
+  tab?: [str],
+}
+headingSelectorIds structure (comes from parser):
+{
+  method-option | tab: str,
+  children?: {
+    tab: str,
+    children?: {
+      tab: str,
+      ...
+    }
+  }
+} 
+*/
+const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
+  if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
+  const headingsMethodParent = headingSelectorIds['method-option'];
+  const headingsTabParent = headingSelectorIds['tab'];
+  if (
+    (headingsMethodParent && headingsMethodParent !== activeSelectorIds.methodSelector) ||
+    (headingsTabParent && !activeSelectorIds.tab?.includes(headingsTabParent))
+  ) {
+    return false;
+  }
+  return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
+};
 
-  // Don't filter if selector_id is null/undefined
-  const filteredNodes = headingNodes.filter(
-    (headingNode) => !headingNode.selector_id || headingNode.selector_id === activeSelectorId
-  );
+const Contents = ({ className }) => {
+  const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
+
+  const filteredNodes = headingNodes.filter((headingNode) => {
+    return isHeadingVisible(headingNode.selector_ids, activeSelectorIds);
+  });
 
   if (filteredNodes.length === 0 || !showContentsComponent) {
     return null;

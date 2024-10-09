@@ -6,15 +6,15 @@ const defaultContextValue = {
   activeHeadingId: null,
   headingNodes: [],
   showContentsComponent: true,
-  activeSelectorId: null,
-  setActiveSelectorId: () => {},
+  activeSelectorIds: {},
+  setActiveSelectorIds: () => {},
 };
 
 const ContentsContext = React.createContext(defaultContextValue);
 
 const ContentsProvider = ({ children, headingNodes = [] }) => {
   const activeHeadingId = useActiveHeading(headingNodes);
-  const [activeSelectorId, setActiveSelectorId] = useState(null);
+  const [activeSelectorIds, setActiveSelectorIds] = useState({});
 
   const { project } = useSnootyMetadata();
   // The guides site is the only site that takes advantage of headings, but never uses the Contents component
@@ -22,7 +22,7 @@ const ContentsProvider = ({ children, headingNodes = [] }) => {
 
   return (
     <ContentsContext.Provider
-      value={{ activeHeadingId, headingNodes, showContentsComponent, activeSelectorId, setActiveSelectorId }}
+      value={{ activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds, setActiveSelectorIds }}
     >
       {children}
     </ContentsContext.Provider>
