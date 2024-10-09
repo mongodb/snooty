@@ -1,12 +1,10 @@
-import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { isEmpty } from 'lodash';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
 import { palette } from '@leafygreen-ui/palette';
 import { CodeProvider } from '../Code/code-context';
 import ComponentFactory from '../ComponentFactory';
-import { ContentsContext } from '../Contents/contents-context';
 import { HeadingContextProvider, useHeadingContext } from '../../context/heading-context';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -105,13 +103,9 @@ const productLandingTabContentStyling = css`
   }
 `;
 
-const activeMethodIncludesActiveTab = (activeTabValues, activeTabsSelector) =>
-  activeTabValues.every((tabValue) => activeTabsSelector['tab']?.includes(tabValue));
-
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map((child) => getTabId(child));
-  const { activeSelectorIds, setActiveSelectorIds } = useContext(ContentsContext);
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
   const [activeTab, setActiveTabIndex] = useState(() => {
     // activeTabIdx at build time should be -1 if tabsetName !== drivers
@@ -119,26 +113,6 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
     const activeTabIdx = tabIds.indexOf(activeTabs?.[tabsetName]);
     return activeTabIdx > -1 ? activeTabIdx : 0;
   });
-
-  const correctedSelectorIds = useMemo(() => {
-    if (isEmpty(activeTabs)) {
-      return;
-    }
-    if (!activeMethodIncludesActiveTab(Object.values(activeTabs), activeSelectorIds)) {
-      return {
-        ...activeSelectorIds,
-        tab: Object.values(activeTabs),
-      };
-    }
-  }, [activeSelectorIds, activeTabs]);
-
-  useEffect(() => {
-    if (!correctedSelectorIds) {
-      return;
-    }
-
-    setActiveSelectorIds(correctedSelectorIds);
-  }, [correctedSelectorIds, setActiveSelectorIds]);
 
   const scrollAnchorRef = useRef();
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
@@ -169,6 +143,9 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
 
   const handleClick = useCallback(
     (index) => {
+      if (activeTab === index) {
+        return;
+      }
       const tabId = tabIds[index];
       const priorAnchorOffset = getPosition(scrollAnchorRef.current).y;
 
@@ -183,7 +160,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
         window.scrollTo(0, getPosition(scrollAnchorRef.current).y + window.scrollY - priorAnchorOffset);
       }, 40);
     },
-    [setActiveTab, tabIds, tabsetName] // eslint-disable-line react-hooks/exhaustive-deps
+    [activeTab, setActiveTab, tabIds, tabsetName]
   );
 
   return (

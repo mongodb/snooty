@@ -5,9 +5,11 @@
  * child components to read and update
  */
 
-import React, { useEffect, useReducer, useRef } from 'react';
+import React, { useContext, useEffect, useReducer, useRef } from 'react';
+import { isEmpty } from 'lodash';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
+import { ContentsContext } from '../Contents/contents-context';
 import { makeChoices } from './make-choices';
 
 const defaultContextValue = {
@@ -54,6 +56,7 @@ const getLocalTabs = (localTabs, selectors) =>
 const TabProvider = ({ children, selectors = {} }) => {
   // init value to {} to match server and client side
   const [activeTabs, setActiveTab] = useReducer(reducer, {});
+  const { setActiveSelectorIds } = useContext(ContentsContext);
 
   const initLoaded = useRef(false);
 
@@ -61,7 +64,15 @@ const TabProvider = ({ children, selectors = {} }) => {
     // dont update local value on initial load
     if (!initLoaded.current) return;
     setLocalValue('activeTabs', activeTabs);
-  }, [activeTabs]);
+
+    if (isEmpty(activeTabs)) {
+      return;
+    }
+
+    // on Tab update, update the active selector ids
+    // so headings can be shown/hidden
+    setActiveSelectorIds((activeSelectorIds) => ({ ...activeSelectorIds, tab: Object.values(activeTabs) }));
+  }, [activeTabs, setActiveSelectorIds]);
 
   // initial effect to read from local storage
   // used in an effect to keep SSG HTML consistent
