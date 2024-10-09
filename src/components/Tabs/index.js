@@ -1,4 +1,5 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
@@ -102,12 +103,8 @@ const productLandingTabContentStyling = css`
   }
 `;
 
-const compare = (activeTabs, activeTabsSelector) => {
-  for (const tab of activeTabs) {
-    if (!activeTabsSelector['tab']?.includes(tab)) return false;
-  }
-  return true;
-};
+const activeMethodIncludesActiveTab = (activeTabValues, activeTabsSelector) =>
+  activeTabValues.every((tabValue) => activeTabsSelector['tab']?.includes(tabValue));
 
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
@@ -121,12 +118,25 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
     return activeTabIdx > -1 ? activeTabIdx : 0;
   });
 
-  if (!compare(Object.values(activeTabs), activeSelectorIds)) {
-    setActiveSelectorIds({
-      ...activeSelectorIds,
-      tab: Object.values(activeTabs),
-    });
-  }
+  const correctedSelectorIds = useMemo(() => {
+    if (isEmpty(activeTabs)) {
+      return;
+    }
+    if (!activeMethodIncludesActiveTab(Object.values(activeTabs), activeSelectorIds)) {
+      return {
+        ...activeSelectorIds,
+        tab: Object.values(activeTabs),
+      };
+    }
+  }, [activeSelectorIds, activeTabs]);
+
+  useEffect(() => {
+    if (!correctedSelectorIds) {
+      return;
+    }
+
+    setActiveSelectorIds(correctedSelectorIds);
+  }, [correctedSelectorIds, setActiveSelectorIds]);
 
   const scrollAnchorRef = useRef();
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
