@@ -2,6 +2,11 @@
 
 exports[`renders correctly 1`] = `
 <DocumentFragment>
+  <script
+    type="application/ld+json"
+  >
+    {"@context":"https://schema.org","@type":"SoftwareSourceCode","codeSampleType":"code snippet","text":"test code"}
+  </script>
   .emotion-0 {
   display: table;
   margin: 24px 0;
