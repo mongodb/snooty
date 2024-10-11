@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef } from 'react';
+import React, { useRef, forwardRef, useId } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { Option, Select as LGSelect } from '@leafygreen-ui/select';
@@ -164,6 +164,7 @@ const Select = ({
   className,
   choices,
   onChange,
+  id,
   usePortal = true,
   defaultText = '',
   disabled = false,
@@ -173,6 +174,7 @@ const Select = ({
 }) => {
   // show select after portal container has loaded for scroll + zindex consistency
   const portalContainer = useRef();
+  const defaultId = useId();
 
   return (
     <PortalContainer
@@ -182,6 +184,7 @@ const Select = ({
       <LGSelect
         data-testid="lg-select"
         value={value || ''}
+        id={id || defaultId}
         label={label}
         aria-labelledby={(!label && 'select') || null}
         size="default"
@@ -212,7 +215,39 @@ const Select = ({
           </Option>
         ))}
       </LGSelect>
+      {process.env['OFFLINE_DOCS'] === 'true' && <OfflineMenu id={id || defaultId} choices={choices}></OfflineMenu>}
     </PortalContainer>
+  );
+};
+
+const StyledMenu = styled('div')`
+  display: none;
+  position: absolute;
+  top: 100%;
+
+  ul {
+    list-style: none;
+    font-size: ${theme.fontSize.default};
+  }
+
+  li.selected {
+    font-weight: bold;
+  }
+`;
+
+const OfflineMenu = ({ choices, id }) => {
+  return (
+    <StyledMenu id={id}>
+      <ul>
+        {choices.map((choice) => {
+          return (
+            <li value={choice.value}>
+              <span>{choice.text}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </StyledMenu>
   );
 };
 

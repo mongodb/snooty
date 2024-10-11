@@ -131,7 +131,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
             <div />
           )}
           <StyledContentContainer>
-            <ActionBar template={template} slug={slug} sidenav={sidenav} />
+            {!process.env['OFFLINE_DOCS'] && <ActionBar template={template} slug={slug} sidenav={sidenav} />}
             <ContentTransition slug={slug}>{children}</ContentTransition>
           </StyledContentContainer>
         </GlobalGrid>

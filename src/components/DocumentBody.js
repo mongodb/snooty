@@ -106,11 +106,11 @@ const DocumentBody = (props) => {
   const { parentPaths, branch } = useSnootyMetadata();
   const queriedCrumbs = useBreadcrumbs();
 
-  const siteBasePrefix = repoBranches.siteBasePrefix;
+  const siteBasePrefix = repoBranches?.siteBasePrefix;
 
   // TODO: Move this into util function since the same logic
   // is used in useCanonicalUrl();
-  const urlSlug = repoBranches.branches.find((br) => br.gitBranchName === branch)?.urlSlug ?? branch;
+  const urlSlug = repoBranches?.branches.find((br) => br.gitBranchName === branch)?.urlSlug ?? branch;
 
   const { project } = metadata;
 

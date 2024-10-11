@@ -105,10 +105,10 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const tabIds = children.map((child) => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
   const [activeTab, setActiveTabIndex] = useState(() => {
-    // activeTabIdx at build time should be -1 if tabsetName !== drivers
-    // since no local storage to read, and no default tabs
+    // set activeTabIdx to 1 if tabsetName !== drivers
+    // local storage useeffect may override this
     const activeTabIdx = tabIds.indexOf(activeTabs?.[tabsetName]);
-    return activeTabIdx > -1 ? activeTabIdx : 0;
+    return activeTabIdx > -1 ? activeTabIdx : 1;
   });
 
   const scrollAnchorRef = useRef();
@@ -147,7 +147,10 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
       <CodeProvider>
         <LeafyTabs
-          className={cx(getTabsStyling({ isHidden, isProductLanding }))}
+          className={cx(
+            `offline-tabs tabs-id-${tabsetName.replace(/[^a-zA-Z]/g, '')}`,
+            getTabsStyling({ isHidden, isProductLanding })
+          )}
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
           setSelected={handleClick}
@@ -165,8 +168,20 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab key={tabId} name={tabTitle}>
-                <div className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}>
+              <LeafyTab
+                className={`offline-tab tabs-id-${tabsetName.replace(/[^a-zA-Z]/g, '')}`}
+                key={tabId}
+                name={tabTitle}
+                id={tabId}
+              >
+                <div
+                  className={cx(
+                    'test-leafy-tab-inner-div',
+                    `tabs-inner-id-${tabsetName}}`,
+                    tabContentStyling,
+                    isProductLanding ? productLandingTabContentStyling : ''
+                  )}
+                >
                   {tab.children.map((child, i) => (
                     <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
                   ))}

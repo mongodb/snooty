@@ -53,7 +53,19 @@ const getLocalTabs = (localTabs, selectors) =>
 
 const TabProvider = ({ children, selectors = {} }) => {
   // init value to {} to match server and client side
-  const [activeTabs, setActiveTab] = useReducer(reducer, {});
+  const [activeTabs, setActiveTab] = useReducer(reducer, () => {
+    // TODO:
+    // if env not offline mode, return {}
+    const choicesPerSelector = Object.keys(selectors).reduce((res, selector) => {
+      res[selector] = makeChoices({
+        name: selector,
+        options: selectors[selector],
+        ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
+      });
+      return res;
+    }, {});
+    return getDefaultTabs(choicesPerSelector);
+  });
 
   const initLoaded = useRef(false);
 

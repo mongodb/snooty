@@ -254,7 +254,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
 
     if (errMsg) {
-      throw errMsg;
+      // throw errMsg;
     }
 
     // Handle inconsistent env names. Default to 'dotcomstg' for staging data on local builds.
@@ -279,7 +279,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
   } catch (err) {
     console.error(err);
-    throw err;
+    // throw err;
   }
 
   if (process.env.USE_FILTER_BRANCH === 'true') {
