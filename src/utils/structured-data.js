@@ -10,6 +10,7 @@ import { getFullLanguageName } from './get-language';
 import { findKeyValuePair } from './find-key-value-pair';
 import { getPlaintext } from './get-plaintext';
 
+// Class name to help Smartling identify all structured data, if needed
 export const STRUCTURED_DATA_CLASSNAME = 'structured_data';
 
 export class StructuredData {
