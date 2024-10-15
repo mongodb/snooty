@@ -10,6 +10,8 @@ import { getFullLanguageName } from './get-language';
 import { findKeyValuePair } from './find-key-value-pair';
 import { getPlaintext } from './get-plaintext';
 
+export const STRUCTURED_DATA_CLASSNAME = 'structured_data';
+
 export class StructuredData {
   constructor(type) {
     this['@context'] = 'https://schema.org';

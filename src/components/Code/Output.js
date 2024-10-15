@@ -5,7 +5,7 @@ import { default as CodeBlock } from '@leafygreen-ui/code';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { getLanguage } from '../../utils/get-language';
-import { SoftwareSourceCodeSd } from '../../utils/structured-data';
+import { STRUCTURED_DATA_CLASSNAME, SoftwareSourceCodeSd } from '../../utils/structured-data';
 import { usePageContext } from '../../context/page-context';
 
 const OutputContainer = styled.div`
@@ -43,6 +43,7 @@ const Output = ({ nodeData: { children } }) => {
     <>
       {softwareSourceCodeSd && (
         <script
+          className={STRUCTURED_DATA_CLASSNAME}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: softwareSourceCodeSd,
