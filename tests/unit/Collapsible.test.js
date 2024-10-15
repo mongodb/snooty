@@ -4,6 +4,7 @@ import { render, act } from '@testing-library/react';
 import { mockLocation } from '../utils/mock-location';
 import Collapsible from '../../src/components/Collapsible';
 import mockData from './data/Collapsible.test.json';
+import expandedMockData from './data/CollapsibleExpanded.test.json';
 
 describe('collapsible component', () => {
   it('renders all the content in the options and children', () => {
@@ -37,6 +38,14 @@ describe('collapsible component', () => {
   it('opens the collapsible content if hash is found in the URL', async () => {
     mockLocation(null, '/', '#this-is-a-heading');
     let renderResult = render(<Collapsible nodeData={mockData}></Collapsible>),
+      button = renderResult.getByRole('button'),
+      icon = button.querySelector('[role=img]');
+    expect(icon.getAttribute('aria-label')).toContain('Chevron');
+    expect(icon.getAttribute('aria-label')).toContain('Down');
+  });
+
+  it('is default expanded if expanded option is truthy', async () => {
+    const renderResult = render(<Collapsible nodeData={expandedMockData} />),
       button = renderResult.getByRole('button'),
       icon = button.querySelector('[role=img]');
     expect(icon.getAttribute('aria-label')).toContain('Chevron');
