@@ -12,7 +12,7 @@ import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
-import { SoftwareSourceCodeSd } from '../../utils/structured-data';
+import { STRUCTURED_DATA_CLASSNAME, SoftwareSourceCodeSd } from '../../utils/structured-data';
 import { usePageContext } from '../../context/page-context';
 import { baseCodeStyle, borderCodeStyle, lgStyles } from './styles/codeStyle';
 import { CodeContext } from './code-context';
@@ -97,6 +97,7 @@ const Code = ({
     <>
       {softwareSourceCodeSd && (
         <script
+          className={STRUCTURED_DATA_CLASSNAME}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: softwareSourceCodeSd,

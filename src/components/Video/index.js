@@ -7,7 +7,7 @@ import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
-import { VideoObjectSd } from '../../utils/structured-data';
+import { STRUCTURED_DATA_CLASSNAME, VideoObjectSd } from '../../utils/structured-data';
 import VideoPlayButton from './VideoPlayButton';
 
 // Imported both players to keep bundle size low and rendering the one associated to the URL being passed in
@@ -113,6 +113,7 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
     <>
       {videoObjectSd && (
         <script
+          className={STRUCTURED_DATA_CLASSNAME}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: videoObjectSd,
