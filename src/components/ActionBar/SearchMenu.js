@@ -52,6 +52,7 @@ const SearchMenu = forwardRef(function SearchMenu(
       type: isChatbotRes ? 'chatbot' : 'docs-search',
       query: searchValue,
     });
+    setSelectedResult(undefined);
     if (isChatbotRes) {
       return handleSubmit(searchValue).catch((e) => console.error(e));
     }
