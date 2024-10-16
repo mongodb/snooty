@@ -847,7 +847,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   -webkit-justify-content: center;
   justify-content: center;
   border: 1.5px solid #C1C7C6;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 16px;
   line-height: 28px;
   background-color: inherit;
