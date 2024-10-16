@@ -129,6 +129,27 @@ const OpenAPIChangelog = () => {
     }
   }, [selectedResources, changelog]);
 
+  const onDownloadChangelog = async () => {
+    fetch(downloadChangelogUrl)
+      .then((res) => res.json())
+      .then((res) => {
+        // Create blob link to download
+        const url = window.URL.createObjectURL(new Blob([JSON.stringify(res)], { type: 'application/json' }));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `changelog.json`);
+
+        // Append to html link element page
+        document.body.appendChild(link);
+
+        // Start download
+        link.click();
+
+        // Clean up and remove the link
+        link.parentNode.removeChild(link);
+      });
+  };
+
   return (
     <ChangelogPage>
       <ChangelogHeader>
@@ -138,7 +159,7 @@ const OpenAPIChangelog = () => {
             (2.0{!!changelogMetadata.specRevisionShort && `~${changelogMetadata.specRevisionShort}`})
           </Body>
         </Title>
-        <DownloadButton href={downloadChangelogUrl}>Download Full API Changelog</DownloadButton>
+        <DownloadButton onClick={onDownloadChangelog}>Download Full API Changelog</DownloadButton>
       </ChangelogHeader>
       <FiltersPanel
         resources={versionMode === ALL_VERSIONS ? changelogResourcesList : diffResourcesList}
