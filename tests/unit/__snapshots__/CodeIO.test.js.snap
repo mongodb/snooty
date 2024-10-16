@@ -658,6 +658,7 @@ exports[`CodeIO renders correctly 1`] = `
     class="emotion-0"
   >
     <script
+      class="structured_data"
       type="application/ld+json"
     >
       {"@context":"https://schema.org","@type":"SoftwareSourceCode","codeSampleType":"code snippet","text":"print('hello world')","programmingLanguage":"Python"}
@@ -774,6 +775,7 @@ exports[`CodeIO renders correctly 1`] = `
       class="emotion-21"
     >
       <script
+        class="structured_data"
         type="application/ld+json"
       >
         {"@context":"https://schema.org","@type":"SoftwareSourceCode","codeSampleType":"code snippet","text":"hello world","programmingLanguage":"Python"}

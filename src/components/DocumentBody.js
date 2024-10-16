@@ -11,7 +11,7 @@ import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getSiteTitle } from '../utils/get-site-title';
-import { constructTechArticle } from '../utils/structured-data';
+import { STRUCTURED_DATA_CLASSNAME, constructTechArticle } from '../utils/structured-data';
 import { PageContext } from '../context/page-context';
 import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
@@ -237,7 +237,7 @@ export const Head = ({ pageContext, data }) => {
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
       {techArticleSd && (
-        <script id={'tech-article-sd'} type="application/ld+json">
+        <script className={STRUCTURED_DATA_CLASSNAME} id={'tech-article-sd'} type="application/ld+json">
           {techArticleSd.toString()}
         </script>
       )}

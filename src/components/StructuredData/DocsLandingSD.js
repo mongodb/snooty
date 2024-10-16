@@ -1,8 +1,9 @@
 import React from 'react';
 import { baseUrl } from '../../utils/base-url';
+import { STRUCTURED_DATA_CLASSNAME } from '../../utils/structured-data';
 
 const DocsLandingSD = () => (
-  <script type="application/ld+json">
+  <script className={STRUCTURED_DATA_CLASSNAME} type="application/ld+json">
     {JSON.stringify({
       '@context': 'http://schema.org',
       '@type': 'WebSite',

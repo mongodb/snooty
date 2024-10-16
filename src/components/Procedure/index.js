@@ -7,7 +7,7 @@ import {
   useAncestorComponentContext,
 } from '../../context/ancestor-components-context';
 import { theme } from '../../theme/docsTheme';
-import { constructHowToSd } from '../../utils/structured-data';
+import { STRUCTURED_DATA_CLASSNAME, constructHowToSd } from '../../utils/structured-data';
 import { useHeadingContext } from '../../context/heading-context';
 import Step from './Step';
 
@@ -76,7 +76,11 @@ const Procedure = ({ nodeData, ...rest }) => {
       {howToSd && (
         // using dangerouslySetInnerHTML as JSON is rendered with
         // encoded quotes at build time
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: howToSd }} />
+        <script
+          className={STRUCTURED_DATA_CLASSNAME}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: howToSd }}
+        />
       )}
       <StyledProcedure procedureStyle={style}>
         {steps.map((child, i) => (

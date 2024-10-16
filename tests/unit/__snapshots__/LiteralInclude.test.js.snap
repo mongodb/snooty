@@ -3,6 +3,7 @@
 exports[`renders correctly 1`] = `
 <DocumentFragment>
   <script
+    class="structured_data"
     type="application/ld+json"
   >
     {"@context":"https://schema.org","@type":"SoftwareSourceCode","codeSampleType":"code snippet","text":"sample code","programmingLanguage":"Java"}
