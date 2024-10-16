@@ -13,6 +13,12 @@ import Step from './Step';
 
 const StyledProcedure = styled('div')`
   margin-top: ${theme.size.default};
+
+  .dark-theme & {
+    color: ${palette.gray.light2};
+    background-color: ${palette.black};
+  }
+
   ${({ procedureStyle }) =>
     procedureStyle === 'connected' &&
     `
@@ -24,10 +30,6 @@ const StyledProcedure = styled('div')`
     }
  
   `}
-  ${({ darkMode }) =>
-    `
-    background-color: ${darkMode ? palette.black : 'initial'};
-    color: ${darkMode ? palette.gray.light2 : 'initial'};`}
 `;
 
 // Returns an array of all "step" nodes nested within the "procedure" node and nested "include" nodes
