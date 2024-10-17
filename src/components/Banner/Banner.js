@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { palette } from '@leafygreen-ui/palette';
-import styled from '@emotion/styled';
 import LeafyBanner, { Variant as LeafyVariant } from '@leafygreen-ui/banner';
+import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from '../ComponentFactory';
 import { baseBannerStyle } from './styles/bannerItemStyle';
 
@@ -78,53 +78,53 @@ const styleMapDark = {
   },
 };
 
-const StyledBanner = styled((props) => <LeafyBanner {...props} />)`
+const bannerStyle = ({ variant }) => css`
   ${baseBannerStyle}
-  background-color: ${(props) => styleMapLight[props.variant].backgroundColor};
-  color: ${(props) => styleMapLight[props.variant].color};
-  border-color: ${(props) => styleMapLight[props.variant].borderColor};
+  background-color: ${styleMapLight[variant].backgroundColor};
+  color: ${styleMapLight[variant].color};
+  border-color: ${styleMapLight[variant].borderColor};
   // copied from LG
   ::before {
-    background: linear-gradient(to left, transparent 6px, ${(props) => styleMapLight[props.variant].beforeColor}} 6px);
+    background: linear-gradient(to left, transparent 6px, ${styleMapLight[variant].beforeColor}} 6px);
   }
   a {
-    color: ${(props) => styleMapLight[props.variant].linkColor};
+    color: ${styleMapLight[variant].linkColor};
     :hover {
-      color: ${(props) => styleMapLight[props.variant].color};
-      text-decoration-color: ${(props) => styleMapLight[props.variant].color};
+      color: ${styleMapLight[variant].color};
+      text-decoration-color: ${styleMapLight[variant].color};
     }
   }
   > svg {
-    color: ${(props) => styleMapLight[props.variant].iconColor};
+    color: ${styleMapLight[variant].iconColor};
   }
 
   .dark-theme & {
-    background-color: ${(props) => styleMapDark[props.variant].backgroundColor};
-    color: ${(props) => styleMapDark[props.variant].color};
-    border-color: ${(props) => styleMapDark[props.variant].borderColor};
+    background-color: ${styleMapDark[variant].backgroundColor};
+    color: ${styleMapDark[variant].color};
+    border-color: ${styleMapDark[variant].borderColor};
     ::before {
-      background: linear-gradient(to left, transparent 6px, ${(props) => styleMapDark[props.variant].beforeColor} 6px);
+      background: linear-gradient(to left, transparent 6px, ${styleMapDark[variant].beforeColor} 6px);
     }
     a {
-      color: ${(props) => styleMapDark[props.variant].linkColor};
+      color: ${styleMapDark[variant].linkColor};
       :hover {
-        color: ${(props) => styleMapDark[props.variant].color};
-        text-decoration-color: ${(props) => styleMapDark[props.variant].color};
+        color: ${styleMapDark[variant].color};
+        text-decoration-color: ${styleMapDark[variant].color};
       }
     }
     > svg {
-      color: ${(props) => styleMapDark[props.variant].iconColor};
+      color: ${styleMapDark[variant].iconColor};
     }
   }
 `;
 
 const Banner = ({ nodeData: { children, options }, ...rest }) => {
   return (
-    <StyledBanner variant={alertMap[options?.variant] || LeafyVariant.Info}>
+    <LeafyBanner className={cx(bannerStyle({ variant: alertMap[options?.variant] || LeafyVariant.Info }))}>
       {children.map((child, i) => (
         <ComponentFactory {...rest} key={i} nodeData={child} />
       ))}
-    </StyledBanner>
+    </LeafyBanner>
   );
 };
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { getCompleteBreadcrumbData, getFullBreadcrumbPath } from '../../utils/get-complete-breadcrumb-data.js';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { STRUCTURED_DATA_CLASSNAME } from '../../utils/structured-data.js';
 
 const getBreadcrumbList = (breadcrumbs) =>
   breadcrumbs.map(({ path, title }, index) => {
@@ -34,7 +35,7 @@ const BreadcrumbSchema = ({ slug }) => {
   return (
     <>
       {Array.isArray(queriedCrumbs.breadcrumbs) && (
-        <script type="application/ld+json">
+        <script className={STRUCTURED_DATA_CLASSNAME} type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',

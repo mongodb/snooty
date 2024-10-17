@@ -7,12 +7,18 @@ import {
   useAncestorComponentContext,
 } from '../../context/ancestor-components-context';
 import { theme } from '../../theme/docsTheme';
-import { constructHowToSd } from '../../utils/structured-data';
+import { STRUCTURED_DATA_CLASSNAME, constructHowToSd } from '../../utils/structured-data';
 import { useHeadingContext } from '../../context/heading-context';
 import Step from './Step';
 
 const StyledProcedure = styled('div')`
   margin-top: ${theme.size.default};
+
+  .dark-theme & {
+    color: ${palette.gray.light2};
+    background-color: ${palette.black};
+  }
+
   ${({ procedureStyle }) =>
     procedureStyle === 'connected' &&
     `
@@ -24,10 +30,6 @@ const StyledProcedure = styled('div')`
     }
  
   `}
-  ${({ darkMode }) =>
-    `
-    background-color: ${darkMode ? palette.black : 'initial'};
-    color: ${darkMode ? palette.gray.light2 : 'initial'};`}
 `;
 
 // Returns an array of all "step" nodes nested within the "procedure" node and nested "include" nodes
@@ -76,7 +78,11 @@ const Procedure = ({ nodeData, ...rest }) => {
       {howToSd && (
         // using dangerouslySetInnerHTML as JSON is rendered with
         // encoded quotes at build time
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: howToSd }} />
+        <script
+          className={STRUCTURED_DATA_CLASSNAME}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: howToSd }}
+        />
       )}
       <StyledProcedure procedureStyle={style}>
         {steps.map((child, i) => (

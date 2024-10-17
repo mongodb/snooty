@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import { fetchOADiff } from '../../../utils/realm';
+import { fetchOpenAPIChangelogDiff } from '../../../utils/realm';
 import useChangelogData from '../../../utils/use-changelog-data';
 import { getDiffRequestFormat } from './getDiffRequestFormat';
 import { hideDiffChanges } from './filterHiddenChanges';
 
 export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoading, setToastOpen, snootyEnv) => {
-  const { index = {}, mostRecentDiff = {} } = useChangelogData();
+  const { mostRecentDiff = {} } = useChangelogData();
   const [diff, setDiff] = useState([]);
 
   useEffect(() => {
-    if (!resourceVersionOne || !resourceVersionTwo || !index.runId) return;
+    if (!resourceVersionOne || !resourceVersionTwo) return;
 
     const fromAndToDiffLabel = getDiffRequestFormat(resourceVersionOne, resourceVersionTwo);
     const { mostRecentDiffLabel, mostRecentDiffData } = mostRecentDiff;
@@ -19,7 +19,7 @@ export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoadin
       setIsLoading(false);
     } else {
       setIsLoading(true);
-      fetchOADiff(index.runId, fromAndToDiffLabel, snootyEnv)
+      fetchOpenAPIChangelogDiff(fromAndToDiffLabel, snootyEnv)
         .then((response) => {
           const filteredDiff = hideDiffChanges(response);
           setDiff(filteredDiff);
@@ -32,7 +32,7 @@ export const useFetchDiff = (resourceVersionOne, resourceVersionTwo, setIsLoadin
           setTimeout(() => setToastOpen(false), 5000);
         });
     }
-  }, [resourceVersionOne, resourceVersionTwo, index, mostRecentDiff, setIsLoading, setToastOpen, snootyEnv]);
+  }, [resourceVersionOne, resourceVersionTwo, mostRecentDiff, setIsLoading, setToastOpen, snootyEnv]);
 
   return [diff, setDiff];
 };
