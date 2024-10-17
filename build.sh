@@ -2,7 +2,7 @@
 TESTING_CONTENT_REPO=docs-landing # name of content repo
 ORGANIZATION=mongodb # name of org, usually mongodb or 10gen
 # -------------------------------------------------------------------------------------------------------------------------
-PARSER_VERSION=0.18.0
+PARSER_VERSION=0.18.4
 
 # This make command curls the examples for certain repos.
 # If the rule doesn't exist, the error doesn't interrupt the build process.
