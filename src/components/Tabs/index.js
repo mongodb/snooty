@@ -12,6 +12,7 @@ import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
 import { getLocalValue } from '../../utils/browser-storage';
 import { getPlaintext } from '../../utils/get-plaintext';
+import { getOfflineId, TABS_CLASSNAME } from '../../utils/head-scripts/offline-ui/tabs';
 import { TabContext } from './tab-context';
 
 const TAB_BUTTON_SELECTOR = 'button[role="tab"]';
@@ -103,6 +104,17 @@ const productLandingTabContentStyling = css`
   }
 `;
 
+const offlineStyling = css`
+  &[aria-selected='true'] {
+    font-weight: 700;
+
+    &::after {
+      background-color: var(--green-dark1);
+      transform: scaleX(1);
+    }
+  }
+`;
+
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map((child) => getTabId(child));
@@ -168,9 +180,13 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
       <CodeProvider>
         <LeafyTabs
-          className={cx(getTabsStyling({ isHidden, isProductLanding }))}
+          className={cx(
+            getTabsStyling({ isHidden, isProductLanding }),
+            process.env['OFFLINE_DOCS'] === 'true' ? TABS_CLASSNAME : ''
+          )}
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
+          id={process.env['OFFLINE_DOCS'] ? `offline-tabs-${getOfflineId(tabsetName)}` : undefined}
           setSelected={handleClick}
           forceRenderAllTabPanels={true}
         >
@@ -186,7 +202,12 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab key={tabId} name={tabTitle}>
+              <LeafyTab
+                className={process.env['OFFLINE_DOCS'] === 'true' && offlineStyling}
+                key={tabId}
+                name={tabTitle}
+              >
+                {/* note. new attribute added. verify its not added with non offline builds for smartling to not retranslate */}
                 <HeadingContextProvider
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
                 >
