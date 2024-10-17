@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { theme } from '../../theme/docsTheme';
 import { getFullBreadcrumbPath } from '../../utils/get-complete-breadcrumb-data';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import IndividualBreadcrumb from './IndividualBreadcrumb';
 import CollapsedBreadcrumbs from './CollapsedBreadcrumbs';
 
@@ -23,6 +24,7 @@ const initialMaxCrumbs = (breadcrumbs) => breadcrumbs.length + 1;
 
 const BreadcrumbContainer = ({ breadcrumbs }) => {
   const [maxCrumbs, setMaxCrumbs] = React.useState(initialMaxCrumbs(breadcrumbs));
+  const { siteUrl } = useSiteMetadata();
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -68,7 +70,7 @@ const BreadcrumbContainer = ({ breadcrumbs }) => {
                 setIsExcessivelyTruncated={collapseBreadcrumbs}
                 onClick={() =>
                   reportAnalytics('BreadcrumbClick', {
-                    breadcrumbClicked: getFullBreadcrumbPath(crumb.path, true),
+                    breadcrumbClicked: getFullBreadcrumbPath(siteUrl, crumb.path, true),
                   })
                 }
               ></IndividualBreadcrumb>

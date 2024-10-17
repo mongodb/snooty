@@ -34,6 +34,11 @@ useStaticQuery.mockImplementation(() => ({
       },
     ],
   },
+  site: {
+    siteMetadata: {
+      siteUrl: 'https://www.mongodb.com/docs/',
+    },
+  },
 }));
 
 it('renders correctly with siteTitle', () => {

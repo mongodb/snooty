@@ -4,10 +4,11 @@ import { getCompleteBreadcrumbData, getFullBreadcrumbPath } from '../../utils/ge
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { STRUCTURED_DATA_CLASSNAME } from '../../utils/structured-data.js';
+import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
 
-const getBreadcrumbList = (breadcrumbs) =>
+const getBreadcrumbList = (breadcrumbs, siteUrl) =>
   breadcrumbs.map(({ path, title }, index) => {
-    path = getFullBreadcrumbPath(path, true);
+    path = getFullBreadcrumbPath(siteUrl, path, true);
 
     return {
       '@type': 'ListItem',
@@ -19,17 +20,19 @@ const getBreadcrumbList = (breadcrumbs) =>
 
 const BreadcrumbSchema = ({ slug }) => {
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
+  const { siteUrl } = useSiteMetadata();
 
   const parentPathsSlug = parentPaths[slug];
 
   const queriedCrumbs = useBreadcrumbs();
   const breadcrumbList = React.useMemo(
     () => [
-      ...getBreadcrumbList([
-        ...getCompleteBreadcrumbData({ siteTitle, slug, queriedCrumbs, parentPaths: parentPathsSlug }),
-      ]),
+      ...getBreadcrumbList(
+        [...getCompleteBreadcrumbData({ siteUrl, siteTitle, slug, queriedCrumbs, parentPaths: parentPathsSlug })],
+        siteUrl
+      ),
     ],
-    [siteTitle, slug, queriedCrumbs, parentPathsSlug]
+    [siteUrl, siteTitle, slug, queriedCrumbs, parentPathsSlug]
   );
 
   return (
