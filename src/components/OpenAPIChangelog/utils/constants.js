@@ -3,10 +3,9 @@ import { Variant } from '@leafygreen-ui/badge';
 export const ALL_VERSIONS = 'ALL_VERSIONS';
 export const COMPARE_VERSIONS = 'COMPARE_VERSIONS';
 
-export const getDownloadChangelogUrl = (runId, snootyEnv) => {
-  return snootyEnv === 'production' || snootyEnv === 'dotcomprd'
-    ? `https://mongodb-mms-prod-build-server.s3.amazonaws.com/openapi/changelog/${runId}/changelog.json`
-    : `https://mongodb-mms-build-server.s3.amazonaws.com/openapi/changelog/${runId}/changelog.json`;
+export const getDownloadChangelogUrl = (snootyEnv) => {
+  const branch = snootyEnv === 'staging' || snootyEnv === 'development' ? 'qa' : 'main';
+  return `https://raw.githubusercontent.com/mongodb/openapi/${branch}/changelog/changelog.json`;
 };
 
 export const changeTypeBadges = {
