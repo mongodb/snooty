@@ -3,6 +3,7 @@ import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import DeprecatedVersionSelector from '../../src/components/DeprecatedVersionSelector';
 import * as realm from '../../src/utils/realm';
+import { useAllDocsets } from '../../src/hooks/useAllDocsets';
 
 const mockedReposBranches = [
   {
@@ -60,7 +61,7 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
 }));
 
 jest.mock('../../src/hooks/useAllDocsets', () => ({
-  useAllDocsets: () => mockedReposBranches,
+  useAllDocsets: jest.fn(),
 }));
 
 describe('DeprecatedVersionSelector when rendered', () => {
@@ -70,10 +71,12 @@ describe('DeprecatedVersionSelector when rendered', () => {
     mockFetchDocuments = jest.spyOn(realm, 'fetchDocsets').mockImplementation(async (dbName) => {
       return mockedReposBranches;
     });
+    useAllDocsets.mockImplementation(() => mockedReposBranches);
   });
 
   afterAll(() => {
     mockFetchDocuments.mockClear();
+    useAllDocsets.mockClear();
   });
 
   it('shows two dropdowns', async () => {
@@ -157,6 +160,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
       ],
     ])('generates the correct docs URL or download link', async (product, versionSelection, expectedUrl) => {
       const wrapper = render(<DeprecatedVersionSelector />);
+      await waitFor(() => expect(mockFetchDocuments).toBeCalled());
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
       const productOption = await wrapper.findByText(product);
@@ -173,7 +177,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
     });
   });
 
-  describe('when the selected product has multiple deprecated versions, versions are sorted correctly', () => {
+  it('when the selected product has multiple deprecated versions, versions are sorted correctly', () => {
     const wrapper = render(<DeprecatedVersionSelector />);
     const productDropdown = wrapper.container.querySelectorAll('button')[0];
     userEvent.click(productDropdown);
@@ -204,19 +208,28 @@ describe('DeprecatedVersionSelector when rendered', () => {
     }
   });
 
-  describe('if fetching the dropdown data from atlas fails', () => {
-    it('still populates the dropdown using build-time data', () => {
-      mockFetchDocuments = jest.spyOn(realm, 'fetchDocsets').mockImplementation(async (dbName) => {
-        return Promise.reject();
-      });
-
-      wrapper = render(<DeprecatedVersionSelector />);
-
-      const productDropdown = wrapper.container.querySelectorAll('button')[0];
-      userEvent.click(productDropdown);
-
-      expect(wrapper.findByText('MongoDB Manual')).toBeTruthy();
-      expect(wrapper.findByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
+  it('populates the dropdown using build-time data if atlas fails', () => {
+    mockFetchDocuments = jest.spyOn(realm, 'fetchDocsets').mockImplementation(async (dbName) => {
+      return Promise.reject();
     });
+
+    wrapper = render(<DeprecatedVersionSelector />);
+
+    const productDropdown = wrapper.container.querySelectorAll('button')[0];
+    userEvent.click(productDropdown);
+
+    expect(wrapper.findByText('MongoDB Manual')).toBeTruthy();
+    expect(wrapper.findByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
+  });
+
+  it('client-side fetchDocsets overwrites build-time data', () => {
+    useAllDocsets.mockImplementation(() => []);
+    wrapper = render(<DeprecatedVersionSelector />);
+
+    const productDropdown = wrapper.container.querySelectorAll('button')[0];
+    userEvent.click(productDropdown);
+
+    expect(wrapper.findByText('MongoDB Manual')).toBeTruthy();
+    expect(wrapper.findByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
   });
 });
