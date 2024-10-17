@@ -1,7 +1,6 @@
 import { withPrefix } from 'gatsby';
-import { baseUrl } from './base-url';
+import { baseUrl, joinUrlAndPath } from './base-url';
 import { assertTrailingSlash } from './assert-trailing-slash';
-import { removeLeadingSlash } from './remove-leading-slash';
 import { assertLeadingSlash } from './assert-leading-slash';
 import { isRelativeUrl } from './is-relative-url';
 import { getUrl, getCompleteUrl } from './url-utils';
@@ -26,17 +25,18 @@ const nodesToString = (titleNodes) => {
     .join('');
 };
 
-export const getFullBreadcrumbPath = (path, needsPrefix) => {
+export const getFullBreadcrumbPath = (siteUrl, path, needsPrefix) => {
   if (needsPrefix) {
     path = withPrefix(path);
   }
   if (isRelativeUrl(path)) {
-    path = baseUrl() + removeLeadingSlash(path);
+    path = joinUrlAndPath(siteUrl, path);
   }
   return assertTrailingSlash(path);
 };
 
 export const getCompleteBreadcrumbData = ({
+  siteUrl,
   siteTitle,
   slug,
   queriedCrumbs,
@@ -50,7 +50,7 @@ export const getCompleteBreadcrumbData = ({
 
   //get intermediate breadcrumbs
   const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
-    return { ...crumb, path: getFullBreadcrumbPath(crumb.path, false) };
+    return { ...crumb, path: getFullBreadcrumbPath(siteUrl, crumb.path, false) };
   });
 
   const homeCrumb = {
