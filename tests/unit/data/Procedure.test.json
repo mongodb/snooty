@@ -168,6 +168,9 @@
     ],
     "domain": "landing",
     "name": "procedure",
+    "options": {
+      "title": "Connect to a MongoDB deployment hosted on MongoDB Atlas"
+    },
     "argument": []
   },
   "nestedSteps": {
