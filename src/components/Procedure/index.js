@@ -69,9 +69,9 @@ const Procedure = ({ nodeData, ...rest }) => {
   const howToSd = useMemo(() => {
     if (ancestors['procedure']) return undefined;
 
-    const howToSd = constructHowToSd({ steps, parentHeading: lastHeading });
+    const howToSd = constructHowToSd({ steps, parentHeading: options?.title ?? lastHeading });
     return howToSd.isValid() ? howToSd.toString() : undefined;
-  }, [ancestors, lastHeading, steps]);
+  }, [ancestors, lastHeading, steps, options]);
 
   return (
     <AncestorComponentContextProvider component={'procedure'}>
