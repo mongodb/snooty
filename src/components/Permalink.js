@@ -10,6 +10,7 @@ import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import useCopyClipboard from '../hooks/useCopyClipboard';
 import useHashAnchor from '../hooks/use-hash-anchor';
+import useScreenSize from '../hooks/useScreenSize';
 
 const tooltipStyle = css`
   padding: 2px 8px;
@@ -39,12 +40,13 @@ const iconStyling = css`
   margin-top: -2px;
 `;
 
-const Permalink = ({ id, description, buffer }) => {
+const Permalink = ({ id, description }) => {
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
   const { darkMode } = useDarkMode();
+  const { isMobile } = useScreenSize();
   const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
-  const bufferSpace = buffer || `-${theme.header.navbarScrollOffset}`;
+  const bufferSpace = isMobile ? `-${theme.header.navbarScrollMobileOffset}` : `-${theme.header.navbarScrollOffset}`;
 
   useCopyClipboard(copied, setCopied, headingNode, url);
 
@@ -89,7 +91,6 @@ const Permalink = ({ id, description, buffer }) => {
 Permalink.propTypes = {
   id: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  buffer: PropTypes.string,
 };
 
 export default Permalink;
