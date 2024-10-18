@@ -12,6 +12,8 @@ import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
 import { getLocalValue } from '../../utils/browser-storage';
 import { getPlaintext } from '../../utils/get-plaintext';
+import { getOfflineId, TABS_ID } from '../../utils/head-scripts/offline-ui/tabs';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { TabContext } from './tab-context';
 
 const TAB_BUTTON_SELECTOR = 'button[role="tab"]';
@@ -103,6 +105,17 @@ const productLandingTabContentStyling = css`
   }
 `;
 
+const offlineStyling = css`
+  &[aria-selected='true'] {
+    font-weight: 700;
+
+    &::after {
+      background-color: var(--green-dark1);
+      transform: scaleX(1);
+    }
+  }
+`;
+
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const tabIds = children.map((child) => getTabId(child));
@@ -168,9 +181,10 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
       <CodeProvider>
         <LeafyTabs
-          className={cx(getTabsStyling({ isHidden, isProductLanding }))}
+          className={cx(getTabsStyling({ isHidden, isProductLanding }), isOfflineDocsBuild ? TABS_ID : '')}
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
+          id={isOfflineDocsBuild ? `${TABS_ID}-${getOfflineId(tabsetName)}` : undefined}
           setSelected={handleClick}
           forceRenderAllTabPanels={true}
         >
@@ -186,7 +200,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab key={tabId} name={tabTitle}>
+              <LeafyTab className={isOfflineDocsBuild && offlineStyling} key={tabId} name={tabTitle}>
                 <HeadingContextProvider
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
                 >
