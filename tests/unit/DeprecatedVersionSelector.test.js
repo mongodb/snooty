@@ -121,8 +121,8 @@ describe('DeprecatedVersionSelector when rendered', () => {
       const productDropdown = wrapper.container.querySelectorAll('button')[0];
       userEvent.click(productDropdown);
 
-      expect(wrapper.findByText('MongoDB Manual')).toBeTruthy();
-      expect(wrapper.findByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
+      expect(wrapper.getByText('MongoDB Manual')).toBeTruthy();
+      expect(wrapper.getByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
     });
 
     it('version dropdown text is correct', () => {
@@ -209,7 +209,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
   });
 
   it('populates the dropdown using build-time data if atlas fails', () => {
-    mockFetchDocuments = jest.spyOn(realm, 'fetchDocsets').mockImplementation(async (dbName) => {
+    mockFetchDocuments.mockImplementation(async (dbName) => {
       return Promise.reject();
     });
 
@@ -218,18 +218,19 @@ describe('DeprecatedVersionSelector when rendered', () => {
     const productDropdown = wrapper.container.querySelectorAll('button')[0];
     userEvent.click(productDropdown);
 
-    expect(wrapper.findByText('MongoDB Manual')).toBeTruthy();
-    expect(wrapper.findByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
+    expect(wrapper.getByText('MongoDB Manual')).toBeTruthy();
+    expect(wrapper.getByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
   });
 
-  it('client-side fetchDocsets overwrites build-time data', () => {
+  it('client-side fetchDocsets overwrites build-time data', async () => {
     useAllDocsets.mockImplementation(() => []);
     wrapper = render(<DeprecatedVersionSelector />);
+    await waitFor(() => expect(mockFetchDocuments).toBeCalled());
 
     const productDropdown = wrapper.container.querySelectorAll('button')[0];
     userEvent.click(productDropdown);
 
-    expect(wrapper.findByText('MongoDB Manual')).toBeTruthy();
-    expect(wrapper.findByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
+    expect(wrapper.getByText('MongoDB Manual')).toBeTruthy();
+    expect(wrapper.getByText('MongoDB Atlas Open Service Broker on Kubernetes')).toBeTruthy();
   });
 });
