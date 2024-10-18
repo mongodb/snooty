@@ -6,9 +6,8 @@
 
 function bindTabUI() {
   const onContentLoaded = () => {
-    // process all snooty tab components
-    // find all leafy tabs
     try {
+      // process all snooty tab components
       const snootyTabComponents = document.querySelectorAll(`.offline-tabs`);
       for (const snootyTab of snootyTabComponents) {
         const tabId = snootyTab['id'];

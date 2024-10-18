@@ -207,7 +207,6 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 key={tabId}
                 name={tabTitle}
               >
-                {/* note. new attribute added. verify its not added with non offline builds for smartling to not retranslate */}
                 <HeadingContextProvider
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
                 >
