@@ -45,8 +45,8 @@ function bindTabUI() {
 
 export default bindTabUI;
 
-// add classnames to identify tabs in scripts
-// replace all non letter characters with dash
+// return an id to get for tabs
+// replace all non letter/number characters with dash
 export function getOfflineId(tabsetName) {
   return tabsetName.replace(/[^a-zA-Z0-9]/g, '-');
 }
