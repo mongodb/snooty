@@ -26,10 +26,10 @@ const nodesToString = (titleNodes) => {
 };
 
 export const getFullBreadcrumbPath = (siteUrl, path, needsPrefix) => {
-  if (needsPrefix) {
-    path = withPrefix(path);
-  }
   if (isRelativeUrl(path)) {
+    if (needsPrefix) {
+      path = withPrefix(path);
+    }
     path = joinUrlAndPath(siteUrl, path);
   }
   return assertTrailingSlash(path);
