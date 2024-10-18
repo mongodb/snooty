@@ -186,7 +186,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
           )}
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
-          id={process.env['OFFLINE_DOCS'] ? `offline-tabs-${getOfflineId(tabsetName)}` : undefined}
+          id={process.env['OFFLINE_DOCS'] === 'true' ? `offline-tabs-${getOfflineId(tabsetName)}` : undefined}
           setSelected={handleClick}
           forceRenderAllTabPanels={true}
         >
