@@ -29,7 +29,7 @@ function bindTabUI() {
               tabPanelDom.style.display = tabButtonIdx === tabPanelIdx ? 'block' : 'none';
             });
             tabButtons.forEach((tb, tbIdx) => {
-              tb.setAttribute('aria-selected', tbIdx === tabButtonIdx ? true : false);
+              tb.setAttribute('aria-selected', tbIdx === tabButtonIdx);
             });
           });
         });
@@ -51,4 +51,4 @@ export function getOfflineId(tabsetName) {
   return tabsetName.replace(/[^a-zA-Z0-9]/g, '-');
 }
 
-export const TABS_CLASSNAME = `offline-tabs`;
+export const TABS_ID = `offline-tabs`;

@@ -12,7 +12,8 @@ import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
 import { getLocalValue } from '../../utils/browser-storage';
 import { getPlaintext } from '../../utils/get-plaintext';
-import { getOfflineId, TABS_CLASSNAME } from '../../utils/head-scripts/offline-ui/tabs';
+import { getOfflineId, TABS_ID } from '../../utils/head-scripts/offline-ui/tabs';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { TabContext } from './tab-context';
 
 const TAB_BUTTON_SELECTOR = 'button[role="tab"]';
@@ -180,13 +181,10 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
       <CodeProvider>
         <LeafyTabs
-          className={cx(
-            getTabsStyling({ isHidden, isProductLanding }),
-            process.env['OFFLINE_DOCS'] === 'true' ? TABS_CLASSNAME : ''
-          )}
+          className={cx(getTabsStyling({ isHidden, isProductLanding }), isOfflineDocsBuild ? TABS_ID : '')}
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
-          id={process.env['OFFLINE_DOCS'] === 'true' ? `offline-tabs-${getOfflineId(tabsetName)}` : undefined}
+          id={isOfflineDocsBuild ? `${TABS_ID}-${getOfflineId(tabsetName)}` : undefined}
           setSelected={handleClick}
           forceRenderAllTabPanels={true}
         >
@@ -202,11 +200,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab
-                className={process.env['OFFLINE_DOCS'] === 'true' && offlineStyling}
-                key={tabId}
-                name={tabTitle}
-              >
+              <LeafyTab className={isOfflineDocsBuild && offlineStyling} key={tabId} name={tabTitle}>
                 <HeadingContextProvider
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
                 >
