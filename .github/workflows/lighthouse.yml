@@ -7,7 +7,6 @@ on:
     # REVERT BEFORE MERGE
     branches:
       - main
-      - "DOP-4616"
 
 name: Run and Upload Lighthouse Reports
 jobs: 

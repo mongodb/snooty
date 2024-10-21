@@ -7,7 +7,6 @@ import * as MediaHooks from '../../src/hooks/use-media';
 import DarkModeDropdown from '../../src/components/ActionBar/DarkModeDropdown';
 
 import { setDesktop } from '../utils';
-import { DARK_MODE_ANNOUNCED } from '../../src/components/ActionBar/DarkModeGuideCue';
 
 let darkModePref = 'light-theme';
 
@@ -24,9 +23,7 @@ jest.spyOn(snootyMetadata, 'default').mockImplementation(() => ({
 jest.spyOn(MediaHooks, 'default').mockImplementation(() => ({}));
 
 // mock window.localStorage
-const storage = {
-  [DARK_MODE_ANNOUNCED]: 'true',
-};
+const storage = {};
 jest.spyOn(window.localStorage.__proto__, 'setItem').mockImplementation((key, value) => {
   storage[key] = value;
 });
