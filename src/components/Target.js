@@ -1,8 +1,15 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import { cx, css } from '@leafygreen-ui/emotion';
 import useHashAnchor from '../hooks/use-hash-anchor';
 import ComponentFactory from './ComponentFactory';
 import Permalink from './Permalink';
+
+const HeaderBuffer = (html_id) => css`
+  ${console.log('im in header buffer', html_id)}
+  scroll-margin-top: 85px;
+  position: absolute;
+`;
 
 // Based on condition isValid, split array into two arrays: [[valid, invalid]]
 const partition = (array, isValid) => {
@@ -54,7 +61,7 @@ const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => 
           </dd>
         </dl>
       ) : (
-        <span ref={targetRef} className="header-buffer" id={html_id} />
+        <span ref={targetRef} className={cx(HeaderBuffer(html_id))} id={html_id} />
       )}
     </React.Fragment>
   );
