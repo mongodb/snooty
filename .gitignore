@@ -10,10 +10,6 @@ docs-tools/
 coverage/
 .coverage
 .env.*
-.lighthouseci
-.lighthouseci/
-.lighthouseci/*
-.lighthouseci/links.json
 .vscode/
 .env
 .swc/
