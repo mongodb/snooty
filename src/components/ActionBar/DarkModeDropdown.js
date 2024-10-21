@@ -9,7 +9,6 @@ import IconDarkmode from '../icons/DarkMode';
 import useScreenSize from '../../hooks/useScreenSize';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { reportAnalytics } from '../../utils/report-analytics';
-import DarkModeGuideCue from './DarkModeGuideCue';
 import { DEPRECATED_PROJECTS } from './ActionBar';
 
 const iconStyling = css`
@@ -57,65 +56,62 @@ const DarkModeDropdown = () => {
   const justify = isTabletOrMobile || DEPRECATED_PROJECTS.includes(metadata.project) ? 'start' : 'end';
 
   return (
-    <>
-      <div ref={dropdownRef}>
-        <Menu
-          className={cx(menuStyling)}
-          portalContainer={dropdownRef.current}
-          scrollContainer={dropdownRef.current}
-          justify={justify}
-          align={'bottom'}
-          open={open}
-          setOpen={() => {
-            reportAnalytics('DarkModeMenu', {
-              action: open ? 'closed' : 'opened',
-            });
-            setOpen((e) => !e);
-          }}
-          trigger={
-            <IconButton className={cx(iconStyling)} aria-label="Dark Mode Menu" aria-labelledby="Dark Mode Menu">
-              {darkModePref === 'system' ? (
-                <IconDarkmode />
-              ) : (
-                <Icon size={24} glyph={darkModePref === 'dark-theme' ? 'Moon' : 'Sun'} />
-              )}
-            </IconButton>
+    <div ref={dropdownRef}>
+      <Menu
+        className={cx(menuStyling)}
+        portalContainer={dropdownRef.current}
+        scrollContainer={dropdownRef.current}
+        justify={justify}
+        align={'bottom'}
+        open={open}
+        setOpen={() => {
+          reportAnalytics('DarkModeMenu', {
+            action: open ? 'closed' : 'opened',
+          });
+          setOpen((e) => !e);
+        }}
+        trigger={
+          <IconButton className={cx(iconStyling)} aria-label="Dark Mode Menu" aria-labelledby="Dark Mode Menu">
+            {darkModePref === 'system' ? (
+              <IconDarkmode />
+            ) : (
+              <Icon size={24} glyph={darkModePref === 'dark-theme' ? 'Moon' : 'Sun'} />
+            )}
+          </IconButton>
+        }
+      >
+        <MenuItem
+          active={darkModePref === 'light-theme'}
+          onClick={() => select('light-theme')}
+          glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Sun'} />}
+        >
+          Light
+        </MenuItem>
+        <MenuItem
+          active={darkModePref === 'dark-theme'}
+          onClick={() => select('dark-theme')}
+          glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Moon'} />}
+        >
+          Dark
+        </MenuItem>
+        <MenuItem
+          active={darkModePref === 'system'}
+          onClick={() => select('system')}
+          glyph={
+            <IconDarkmode
+              className={css`
+                svg {
+                  margin-right: ${theme.size.default};
+                }
+              `}
+              styles={darkModeSvgStyle}
+            />
           }
         >
-          <MenuItem
-            active={darkModePref === 'light-theme'}
-            onClick={() => select('light-theme')}
-            glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Sun'} />}
-          >
-            Light
-          </MenuItem>
-          <MenuItem
-            active={darkModePref === 'dark-theme'}
-            onClick={() => select('dark-theme')}
-            glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Moon'} />}
-          >
-            Dark
-          </MenuItem>
-          <MenuItem
-            active={darkModePref === 'system'}
-            onClick={() => select('system')}
-            glyph={
-              <IconDarkmode
-                className={css`
-                  svg {
-                    margin-right: ${theme.size.default};
-                  }
-                `}
-                styles={darkModeSvgStyle}
-              />
-            }
-          >
-            System
-          </MenuItem>
-        </Menu>
-      </div>
-      <DarkModeGuideCue guideCueRef={dropdownRef} dropdownIsOpen={open} />
-    </>
+          System
+        </MenuItem>
+      </Menu>
+    </div>
   );
 };
 
