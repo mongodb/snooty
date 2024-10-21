@@ -4,6 +4,7 @@ import { render } from '@testing-library/react';
 import Breadcrumbs from '../../src/components/Breadcrumbs/index';
 import useSnootyMetadata from '../../src/utils/use-snooty-metadata';
 
+import { mockWithPrefix } from '../utils/mock-with-prefix';
 import mockData from './data/Breadcrumbs.test.json';
 
 jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
@@ -18,7 +19,7 @@ beforeAll(() => {
 const mockIntermediateCrumbs = [
   {
     title: 'MongoDB Atlas',
-    path: '/atlas',
+    path: 'https://www.mongodb.com/docs/atlas/',
   },
 ];
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
@@ -36,10 +37,12 @@ useStaticQuery.mockImplementation(() => ({
   },
   site: {
     siteMetadata: {
-      siteUrl: 'https://www.mongodb.com/docs/',
+      siteUrl: 'https://www.mongodb.com/',
     },
   },
 }));
+
+mockWithPrefix('/docs/atlas/device-sdks');
 
 it('renders correctly with siteTitle', () => {
   const tree = render(<Breadcrumbs siteTitle={'Atlas Device SDKs'} slug={'sdk/cpp/app-services/call-a-function'} />);

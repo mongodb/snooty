@@ -10,7 +10,7 @@ const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
 useStaticQuery.mockImplementation(() => ({
   site: {
     siteMetadata: {
-      siteUrl: 'https://www.mongodb.com/docs/',
+      siteUrl: 'https://www.mongodb.com/',
     },
   },
 }));

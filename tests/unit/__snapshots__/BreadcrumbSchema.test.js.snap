@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BreadcrumbSchema returns correct structured data 1`] = `
+exports[`BreadcrumbSchema returns correct structured data with parents and intermediate breadcrumbs 1`] = `
 <DocumentFragment>
   <script
     class="structured_data"
