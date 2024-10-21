@@ -207,8 +207,13 @@ including UTF-8.
 
 exports[`renders correctly with no directive_argument nodes 1`] = `
 <DocumentFragment>
-  <span
-    class="header-buffer"
+  .emotion-0 {
+  scroll-margin-top: 85px;
+  position: absolute;
+}
+
+<span
+    class="emotion-0"
     id="std-label-php-language-center"
   />
 </DocumentFragment>
