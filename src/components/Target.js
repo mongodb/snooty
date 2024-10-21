@@ -5,8 +5,7 @@ import useHashAnchor from '../hooks/use-hash-anchor';
 import ComponentFactory from './ComponentFactory';
 import Permalink from './Permalink';
 
-const HeaderBuffer = (html_id) => css`
-  ${console.log('im in header buffer', html_id)}
+const HeaderBuffer = css`
   scroll-margin-top: 85px;
   position: absolute;
 `;
@@ -61,7 +60,7 @@ const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => 
           </dd>
         </dl>
       ) : (
-        <span ref={targetRef} className={cx(HeaderBuffer(html_id))} id={html_id} />
+        <span ref={targetRef} className={cx(HeaderBuffer)} id={html_id} />
       )}
     </React.Fragment>
   );
