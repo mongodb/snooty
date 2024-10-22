@@ -2,11 +2,12 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import useHashAnchor from '../hooks/use-hash-anchor';
+import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 import Permalink from './Permalink';
 
-const HeaderBuffer = css`
-  scroll-margin-top: 85px;
+const headerBuffer = css`
+  scroll-margin-top: ${theme.header.navbarScrollOffset};
   position: absolute;
 `;
 
@@ -60,7 +61,7 @@ const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => 
           </dd>
         </dl>
       ) : (
-        <span ref={targetRef} className={cx(HeaderBuffer)} id={html_id} />
+        <span ref={targetRef} className={cx(headerBuffer)} id={html_id} />
       )}
     </React.Fragment>
   );
