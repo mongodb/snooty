@@ -6,6 +6,7 @@ import { theme } from '../../theme/docsTheme';
 import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-data.js';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
 import BreadcrumbContainer from './BreadcrumbContainer';
 
 const breadcrumbBodyStyle = css`
@@ -35,9 +36,11 @@ const Breadcrumbs = ({
   const { parentPaths } = useSnootyMetadata();
   const parentPathsData = parentPathsProp ?? parentPaths[slug];
 
+  const { siteUrl } = useSiteMetadata();
   const breadcrumbs = React.useMemo(
     () =>
       getCompleteBreadcrumbData({
+        siteUrl,
         siteTitle,
         slug,
         queriedCrumbs,
@@ -45,7 +48,7 @@ const Breadcrumbs = ({
         selfCrumbContent: selfCrumb,
         pageInfo: pageInfo,
       }),
-    [parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb, pageInfo]
+    [siteUrl, parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb, pageInfo]
   );
 
   return (

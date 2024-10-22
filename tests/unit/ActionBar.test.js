@@ -3,7 +3,6 @@ import { render, act } from '@testing-library/react';
 import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import ActionBar from '../../src/components/ActionBar/ActionBar';
-import * as DarkModeGuideCue from '../../src/components/ActionBar/DarkModeGuideCue';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),
@@ -22,8 +21,6 @@ useAllDocsetsMock.mockImplementation(() => [
     prefix: {},
   },
 ]);
-// Not testing Guide Cue announcement here
-jest.spyOn(DarkModeGuideCue, 'default').mockImplementation(() => <></>);
 
 const conversationSpy = jest.fn();
 // eslint-disable-next-line no-unused-vars
