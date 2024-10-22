@@ -41,6 +41,7 @@ a .emotion-0 {
 }
 
 .emotion-1 {
+  position: relative;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -55,6 +56,9 @@ a .emotion-0 {
 }
 
 .emotion-3 {
+  display: inline;
+  left: 0;
+  top: 0;
   margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
@@ -148,11 +152,11 @@ a .emotion-0 {
             fill="currentColor"
           />
         </svg>
+        <div
+          class="emotion-3 emotion-4"
+          id="std-option-mongos.--config"
+        />
       </a>
-      <div
-        class="emotion-3 emotion-4"
-        id="std-option-mongos.--config"
-      />
     </dt>
     <dd>
       <p
