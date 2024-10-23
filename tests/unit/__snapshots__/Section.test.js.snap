@@ -19,6 +19,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1 {
+  position: relative;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -33,6 +34,9 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-3 {
+  display: inline;
+  left: 0;
+  top: 0;
   margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
@@ -68,11 +72,11 @@ exports[`renders correctly 1`] = `
             fill="currentColor"
           />
         </svg>
+        <div
+          class="emotion-3 emotion-4"
+          id=""
+        />
       </a>
-      <div
-        class="emotion-3 emotion-4"
-        id=""
-      />
     </h1>
   </section>
 </DocumentFragment>

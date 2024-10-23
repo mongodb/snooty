@@ -16,6 +16,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1 {
+  position: relative;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -30,6 +31,9 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-3 {
+  display: inline;
+  left: 0;
+  top: 0;
   margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
@@ -64,11 +68,11 @@ exports[`renders correctly 1`] = `
           fill="currentColor"
         />
       </svg>
+      <div
+        class="emotion-3 emotion-4"
+        id="create-an-administrative-username-and-password"
+      />
     </a>
-    <div
-      class="emotion-3 emotion-4"
-      id="create-an-administrative-username-and-password"
-    />
   </h3>
 </DocumentFragment>
 `;
@@ -89,6 +93,7 @@ exports[`renders correctly in dark mode 1`] = `
 }
 
 .emotion-1 {
+  position: relative;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -103,6 +108,9 @@ exports[`renders correctly in dark mode 1`] = `
 }
 
 .emotion-3 {
+  display: inline;
+  left: 0;
+  top: 0;
   margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
@@ -137,11 +145,11 @@ exports[`renders correctly in dark mode 1`] = `
           fill="currentColor"
         />
       </svg>
+      <div
+        class="emotion-3 emotion-4"
+        id="create-an-administrative-username-and-password"
+      />
     </a>
-    <div
-      class="emotion-3 emotion-4"
-      id="create-an-administrative-username-and-password"
-    />
   </h3>
 </DocumentFragment>
 `;
