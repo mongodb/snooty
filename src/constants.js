@@ -17,9 +17,3 @@ export const REF_TARGETS = {
 };
 
 export const MARIAN_URL = process.env.GATSBY_MARIAN_URL || 'https://docs-search-transport.mongodb.com/';
-
-// Class names to be used by mut for search indexing
-// https://github.com/mongodb/mut/blob/main/mut/index/Document.py#L68
-export const MUT_CANDIDATES = {
-  mainColumn: 'main-column',
-};
