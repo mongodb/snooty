@@ -20,8 +20,11 @@ const tooltipStyle = css`
   }
 `;
 
-export const HeaderBuffer = styled.div`
-  margin-top: ${({ bufferSpace }) => bufferSpace};
+const HeaderBuffer = styled.div`
+  display: inline;
+  left: 0;
+  top: 0;
+  margin-top: -${theme.header.navbarScrollOffset};
   position: absolute;
   // Add a bit of padding to help headings be more accurately set as "active" on FF and Safari
   padding-bottom: 2px;
@@ -29,6 +32,7 @@ export const HeaderBuffer = styled.div`
 
 const headingStyle = (copied) => css`
   ${!!copied && 'visibility: visible !important;'}
+  position:relative;
   align-self: center;
   padding: 0 10px;
   visibility: hidden;
@@ -39,12 +43,11 @@ const iconStyling = css`
   margin-top: -2px;
 `;
 
-const Permalink = ({ id, description, buffer }) => {
+const Permalink = ({ id, description }) => {
   const [copied, setCopied] = useState(false);
   const [headingNode, setHeadingNode] = useState(null);
   const { darkMode } = useDarkMode();
   const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
-  const bufferSpace = buffer || `-${theme.header.navbarScrollOffset}`;
 
   useCopyClipboard(copied, setCopied, headingNode, url);
 
@@ -56,40 +59,37 @@ const Permalink = ({ id, description, buffer }) => {
   useHashAnchor(id, linkRef);
 
   return (
-    <>
-      <a
-        className={cx('headerlink', headingStyle(copied))}
-        ref={setHeadingNode}
-        href={`#${id}`}
-        title={'Permalink to this ' + description}
-        onClick={handleClick}
+    <a
+      className={cx('headerlink', headingStyle(copied))}
+      ref={setHeadingNode}
+      href={`#${id}`}
+      title={'Permalink to this ' + description}
+      onClick={handleClick}
+    >
+      <Icon
+        className={cx(iconStyling)}
+        glyph={'Link'}
+        size={12}
+        fill={darkMode ? palette.gray.light1 : palette.gray.base}
+      />
+      <Tooltip
+        className={cx(tooltipStyle)}
+        triggerEvent="click"
+        open={copied}
+        align="top"
+        justify="middle"
+        darkMode={true}
       >
-        <Icon
-          className={cx(iconStyling)}
-          glyph={'Link'}
-          size={12}
-          fill={darkMode ? palette.gray.light1 : palette.gray.base}
-        />
-        <Tooltip
-          className={cx(tooltipStyle)}
-          triggerEvent="click"
-          open={copied}
-          align="top"
-          justify="middle"
-          darkMode={true}
-        >
-          {'copied'}
-        </Tooltip>
-      </a>
-      <HeaderBuffer ref={linkRef} id={id} bufferSpace={bufferSpace} />
-    </>
+        {'copied'}
+      </Tooltip>
+      <HeaderBuffer ref={linkRef} id={id} />
+    </a>
   );
 };
 
 Permalink.propTypes = {
   id: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  buffer: PropTypes.string,
 };
 
 export default Permalink;
