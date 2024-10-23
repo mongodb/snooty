@@ -15,7 +15,6 @@ function updateSidenavHeight() {
     });
   };
 
-  // TODO: account for multiple browsers here. Which are we supporting? verify with PD
   document.addEventListener('DOMContentLoaded', updateScrollY, false);
 }
 
