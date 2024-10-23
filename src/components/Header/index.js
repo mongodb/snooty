@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { UnifiedNav } from '@mdb/consistent-nav';
 import SiteBanner from '../Banner/SiteBanner';
 import { theme } from '../../theme/docsTheme';
 import { getAvailableLanguages, getCurrLocale, onSelectLocale } from '../../utils/locale';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { HeaderContext } from './header-context';
 
 const StyledHeaderContainer = styled.header(
@@ -15,6 +17,16 @@ const StyledHeaderContainer = styled.header(
   z-index: ${theme.zIndexes.header};
   `
 );
+
+const offlineClass = css`
+  & > div > div > div {
+    display: none;
+  }
+
+  button {
+    display: none;
+  }
+`;
 
 const Header = ({ eol, template }) => {
   const unifiedNavProperty = 'DOCS';
@@ -40,7 +52,7 @@ const Header = ({ eol, template }) => {
                 locale={getCurrLocale()}
                 enabledLocales={enabledLocales}
                 darkMode={false}
-                className="nav-light"
+                className={cx('nav-light', isOfflineDocsBuild ? offlineClass : '')}
               />
               <UnifiedNav
                 fullWidth="true"
@@ -52,7 +64,7 @@ const Header = ({ eol, template }) => {
                 locale={getCurrLocale()}
                 enabledLocales={enabledLocales}
                 darkMode={true}
-                className="nav-dark"
+                className={cx('nav-dark', isOfflineDocsBuild ? offlineClass : '')}
               />
             </>
           )}
