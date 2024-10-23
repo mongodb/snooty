@@ -6,6 +6,7 @@
  * Optional overwrites can be set in params as default values
  */
 
+import sanitize from 'sanitize-html';
 import { getFullLanguageName } from './get-language';
 import { findKeyValuePair } from './find-key-value-pair';
 import { getPlaintext } from './get-plaintext';
@@ -97,7 +98,8 @@ export class SoftwareSourceCodeSd extends StructuredData {
   constructor({ code, lang, slug }) {
     super('SoftwareSourceCode');
     this.codeSampleType = 'code snippet';
-    this.text = code;
+    // Sanitize all input in case HTML snippets are labeled with different language
+    this.text = sanitize(code, { disallowedTagsMode: 'escape' });
 
     const programmingLanguage = getFullLanguageName(lang, slug);
     if (programmingLanguage) {

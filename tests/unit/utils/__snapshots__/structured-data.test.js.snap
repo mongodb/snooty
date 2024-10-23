@@ -77,6 +77,15 @@ SoftwareSourceCodeSd {
 }
 `;
 
+exports[`Structured Data SoftwareSourceCode sanitizes and escapes unsafe HTML examples 1`] = `
+SoftwareSourceCodeSd {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "codeSampleType": "code snippet",
+  "text": " &lt;script&gt;&lt;/script&gt;  &lt;script&gt; const app = new Realm.App({ id: "&lt;your_realm_app_id&gt;", }); // Callback used in \`data-callback\` to handle Google's response and log user into App Services function handleCredentialsResponse(response) { const credentials = Realm.Credentials.google({ idToken: response.credential }); app .logIn(credentials) .then((user) =&gt; alert(\`Logged in with id: user.id\`)); } &lt;/script&gt;",
+}
+`;
+
 exports[`Structured Data VideoObject returns valid structured data with description 1`] = `
 VideoObjectSd {
   "@context": "https://schema.org",
