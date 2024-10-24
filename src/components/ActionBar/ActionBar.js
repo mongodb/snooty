@@ -6,6 +6,7 @@ import { Overline } from '@leafygreen-ui/typography';
 import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { getNestedValue } from '../../utils/get-nested-value';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { SidenavContext } from '../Sidenav';
 import {
@@ -17,7 +18,14 @@ import {
 } from '../Widgets/FeedbackWidget';
 import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
-import { ActionBarSearchContainer, ActionsBox, actionBarStyling, getContainerStyling, overlineStyling } from './styles';
+import {
+  ActionBarSearchContainer,
+  ActionsBox,
+  actionBarStyling,
+  getContainerStyling,
+  offlineStyling,
+  overlineStyling,
+} from './styles';
 
 export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
 
@@ -36,7 +44,9 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
 
   return (
-    <div className={cx(props.className, actionBarStyling, containerClassname)}>
+    <div
+      className={cx(props.className, actionBarStyling, containerClassname, isOfflineDocsBuild ? offlineStyling : '')}
+    >
       {fakeColumns && <div></div>}
       <ActionBarSearchContainer className={cx(searchContainerClassname)}>
         {sidenav && (
@@ -45,19 +55,21 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
             Docs Menu
           </Overline>
         )}
-        <SearchInput slug={slug} />
+        {!isOfflineDocsBuild && <SearchInput slug={slug} />}
       </ActionBarSearchContainer>
-      <ActionsBox>
-        {template !== 'openapi' && <DarkModeDropdown />}
-        {template !== 'errorpage' && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-          <FeedbackProvider page={feedbackData}>
-            <FeedbackContainer>
-              <FeedbackButton />
-              <FeedbackForm />
-            </FeedbackContainer>
-          </FeedbackProvider>
-        )}
-      </ActionsBox>
+      {!isOfflineDocsBuild && (
+        <ActionsBox>
+          {template !== 'openapi' && <DarkModeDropdown />}
+          {template !== 'errorpage' && !DEPRECATED_PROJECTS.includes(metadata.project) && (
+            <FeedbackProvider page={feedbackData}>
+              <FeedbackContainer>
+                <FeedbackButton />
+                <FeedbackForm />
+              </FeedbackContainer>
+            </FeedbackProvider>
+          )}
+        </ActionsBox>
+      )}
     </div>
   );
 };

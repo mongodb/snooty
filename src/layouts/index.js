@@ -13,7 +13,6 @@ import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
 import { getAllLocaleCssStrings } from '../utils/locale';
-import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -132,7 +131,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
             <div />
           )}
           <StyledContentContainer>
-            {!isOfflineDocsBuild && <ActionBar template={template} slug={slug} sidenav={sidenav} />}
+            <ActionBar template={template} slug={slug} sidenav={sidenav} />
             <ContentTransition slug={slug}>{children}</ContentTransition>
           </StyledContentContainer>
         </GlobalGrid>
