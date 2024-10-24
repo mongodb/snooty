@@ -19,11 +19,11 @@ const StyledHeaderContainer = styled.header(
 );
 
 const offlineClass = css`
-  & > div > div > div {
+  .header-desktop-buttons {
     display: none;
   }
 
-  button {
+  button[aria-label='Open Links'] {
     display: none;
   }
 `;
