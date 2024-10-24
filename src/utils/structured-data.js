@@ -9,6 +9,7 @@
 import { getFullLanguageName } from './get-language';
 import { findKeyValuePair } from './find-key-value-pair';
 import { getPlaintext } from './get-plaintext';
+import { getCompleteBreadcrumbData, getFullBreadcrumbPath } from './get-complete-breadcrumb-data';
 
 // Class name to help Smartling identify all structured data, if needed
 export const STRUCTURED_DATA_CLASSNAME = 'structured_data';
@@ -55,6 +56,27 @@ export class StructuredData {
       return name;
     }
     return `MongoDB ` + name;
+  }
+}
+
+export class BreadcrumbListSd extends StructuredData {
+  constructor({ siteUrl, siteTitle, slug, queriedCrumbs, parentPaths }) {
+    super('BreadcrumbList');
+    const breadcrumbs = getCompleteBreadcrumbData({ siteUrl, siteTitle, slug, queriedCrumbs, parentPaths });
+    this.itemListElement = this.getBreadcrumbList(breadcrumbs, siteUrl);
+  }
+
+  /**
+   * @param {object[]} breadcrumbs
+   * @param {string} siteUrl
+   */
+  getBreadcrumbList(breadcrumbs, siteUrl) {
+    return breadcrumbs.map(({ path, title }, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: title,
+      item: getFullBreadcrumbPath(siteUrl, path, true),
+    }));
   }
 }
 

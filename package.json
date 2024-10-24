@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.18.7",
+  "version": "0.18.8",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -75,7 +75,6 @@
     "@leafygreen-ui/code": "^14.3.3",
     "@leafygreen-ui/combobox": "^6.0.0",
     "@leafygreen-ui/emotion": "^4.0.0",
-    "@leafygreen-ui/guide-cue": "^5.1.0",
     "@leafygreen-ui/hooks": "^8.1.3",
     "@leafygreen-ui/icon": "^12.4.0",
     "@leafygreen-ui/icon-button": "^15.0.23",

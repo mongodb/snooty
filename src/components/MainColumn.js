@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import { theme } from '../theme/docsTheme';
-import { MUT_CANDIDATES } from '../constants';
-import { joinClassNames } from '../utils/join-class-names';
 
 const MainColumn = ({ children, className }) => (
   <main
-    className={joinClassNames(MUT_CANDIDATES.mainColumn, className)}
+    className={className}
     css={css`
       margin: ${theme.size.default} ${theme.size.xlarge} ${theme.size.xlarge};
       max-width: 800px;

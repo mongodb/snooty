@@ -6,6 +6,8 @@ import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
 import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang';
 import { getHtmlLangFormat } from './src/utils/locale';
+import bindTabUI from './src/utils/head-scripts/offline-ui/tabs';
+import { isOfflineDocsBuild } from './src/utils/is-offline-docs-build';
 
 export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
   const headComponents = [
@@ -81,6 +83,18 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
               }
             }();
           `,
+        }}
+      />
+    );
+  }
+  if (isOfflineDocsBuild) {
+    headComponents.push(
+      <script
+        key="offline-docs-ui"
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          // Call function immediately on load
+          __html: `!${bindTabUI}()`,
         }}
       />
     );

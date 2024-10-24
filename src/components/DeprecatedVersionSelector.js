@@ -151,7 +151,7 @@ const DeprecatedVersionSelector = () => {
             resp.filter((project) => project.hasEolVersions),
             'project'
           );
-          if (reposBranchesMap.size > 0) setReposMap(reposBranchesMap);
+          if (!isEmpty(reposBranchesMap)) setReposMap(reposBranchesMap);
         })
         .catch((error) => {
           console.error(`ERROR: could not access ${reposDatabase} for dropdown data.`);

@@ -1,15 +1,23 @@
 import React from 'react';
+import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import BreadcrumbContainer from '../../src/components/Breadcrumbs/BreadcrumbContainer';
 import mockData from './data/Breadcrumbs.test.json';
 
 jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 
+const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+useStaticQuery.mockImplementation(() => ({
+  site: {
+    siteMetadata: {
+      siteUrl: 'https://www.mongodb.com/',
+    },
+  },
+}));
+
 const mountBreadcrumbContainer = (breadcrumbs) => {
   return render(<BreadcrumbContainer breadcrumbs={breadcrumbs} />);
 };
-
-jest.mock(`../../src/utils/use-snooty-metadata`, () => jest.fn());
 
 const mockIntermediateCrumbs = {
   title: 'MongoDB Atlas',
