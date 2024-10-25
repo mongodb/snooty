@@ -81,7 +81,7 @@ const OfflineNotAvailable = ({ assetLabel }) => {
       <hr className={cx(hrStyling)} />
       <Wrapper>
         <ImageContainer>
-          {/* TODO: Ticket ... should allow this to be correctly rendered */}
+          {/* TODO: Ticket for sourcing images offline should allow this to be correctly rendered */}
           <img src={imgPath} alt={altText} height={130} width={198} />
         </ImageContainer>
         <div>
