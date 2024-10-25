@@ -8,6 +8,7 @@ import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang
 import { getHtmlLangFormat } from './src/utils/locale';
 import bindTabUI from './src/utils/head-scripts/offline-ui/tabs';
 import { isOfflineDocsBuild } from './src/utils/is-offline-docs-build';
+import enableTooltipsOffline from './src/utils/head-scripts/offline-ui/tooltips';
 
 export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
   const headComponents = [
@@ -95,6 +96,14 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
         dangerouslySetInnerHTML={{
           // Call function immediately on load
           __html: `!${bindTabUI}()`,
+        }}
+      />,
+      <script
+        key="offline-tooltips-ui"
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          // Call function immediately on load
+          __html: `!${enableTooltipsOffline}()`,
         }}
       />
     );

@@ -5,9 +5,11 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
+import Tooltip from '@leafygreen-ui/tooltip';
 import useScreenSize from '../hooks/useScreenSize';
 import { usePageContext } from '../context/page-context';
 import { theme } from '../theme/docsTheme';
+import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -92,15 +94,29 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
           })}
           <Permalink id={id} description="heading" />
           {shouldShowLabButton && (
-            <Button
-              role="button"
-              className={cx(labButtonStyling)}
-              disabled={isOpen}
-              onClick={() => setIsOpen(true)}
-              leftGlyph={<Icon glyph="Code" />}
+            <Tooltip
+              // triggerEvent="hover"
+              className="offline-tooltip-instruqt"
+              popoverZIndex={9001}
+              trigger={
+                <Button
+                  role="button"
+                  className={cx(labButtonStyling)}
+                  disabled={isOfflineDocsBuild || isOpen}
+                  onClick={() => setIsOpen(true)}
+                  leftGlyph={<Icon glyph="Code" />}
+                >
+                  {'Open Interactive Tutorial'}
+                </Button>
+              }
+              align="top"
+              justify="middle"
+              darkMode={true}
+              open={true}
+              // disabled={!isOfflineDocsBuild}
             >
-              {'Open Interactive Tutorial'}
-            </Button>
+              This feature is unavailable in offline mode
+            </Tooltip>
           )}
         </HeadingTag>
       </ConditionalWrapper>
