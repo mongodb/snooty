@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: ${theme.size.default};
+  gap: 20px;
   padding: 40px;
 
   > div {
@@ -81,11 +81,13 @@ const OfflineNotAvailable = ({ assetLabel }) => {
       <hr className={cx(hrStyling)} />
       <Wrapper>
         <ImageContainer>
+          {/* TODO: Ticket ... should allow this to be correctly rendered */}
           <img src={imgPath} alt={altText} height={130} width={198} />
         </ImageContainer>
         <div>
           <Body className={cx(titleStyling)}>{assetLabel} unavailable</Body>
           <Body className={cx(subtitleStyling)}>{assetLabel}s are unavailable in offline mode</Body>
+          {/* TODO: Ticket https://jira.mongodb.org/browse/DOP-5105 will most likely come up with better solution for this */}
           <StyledLink to={prodUrl} showExternalIcon={true}>
             Link to live site
           </StyledLink>
