@@ -39,7 +39,6 @@ function bindTabUI() {
     }
   };
 
-  // TODO: account for multiple browsers here. Which are we supporting? verify with PD
   document.addEventListener('DOMContentLoaded', onContentLoaded, false);
 }
 
