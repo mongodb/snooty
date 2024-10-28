@@ -13,7 +13,7 @@ const ComponentMap = {
 
 export const LAZY_COMPONENTS = Object.keys(ComponentMap).reduce((res, key) => {
   if (isOfflineDocsBuild && key === 'instruqt') {
-    res[key] = (props) => (!props.nodeData?.options?.drawer ? <OfflineNotAvailable assetLabel="Lab" /> : null);
+    res[key] = (props) => (!props.nodeData?.options?.drawer ? <OfflineNotAvailable assetKey={key} /> : null);
   } else {
     const LazyComponent = ComponentMap[key];
     res[key] = (props) => (

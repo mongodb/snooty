@@ -61,15 +61,21 @@ const hrStyling = css`
   margin: ${theme.size.medium} 0;
 `;
 
+const assetLabelFromKey = {
+  instruqt: 'Lab',
+  video: 'Video',
+};
+
 /**
- * @param {string} assetLabel - 'Lab', 'Video', etc
+ * @param {string} assetKey - 'instruqt', 'video', etc
  */
-const OfflineNotAvailable = ({ assetLabel }) => {
+const OfflineNotAvailable = ({ assetKey }) => {
   const docsets = useAllDocsets();
   const { project } = useSnootyMetadata();
   const { slug } = usePageContext();
   const { activeVersions } = useContext(VersionContext);
 
+  const assetLabel = assetLabelFromKey[assetKey];
   const altText = 'Unavailable offline';
   const imgPath = withPrefix('assets/offline-asset.png');
 
