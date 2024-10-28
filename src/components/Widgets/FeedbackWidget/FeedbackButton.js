@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Button from '@leafygreen-ui/button';
+import Button, { Variant } from '@leafygreen-ui/button';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
@@ -10,16 +10,20 @@ import { useFeedbackContext } from './context';
 import { FEEDBACK_BUTTON_TEXT } from './constants';
 
 const darkModePrestyling = css`
-  color: var(--feedback-font-color);
-  background: var(--feedback-background-color);
-  border-color: ${palette.gray.base};
+  color: ${palette.green.dark2};
+  border-color: ${palette.green.dark2};
 
-  --feedback-font-color: ${palette.black};
-  --feedback-background-color: ${palette.gray.light3};
+  svg {
+    color: ${palette.green.dark2};
+  }
 
   .dark-theme & {
-    --feedback-font-color: ${palette.white};
-    --feedback-background-color: ${palette.gray.dark2};
+    color: ${palette.green.base};
+    border-color: ${palette.green.base};
+
+    svg {
+      color: ${palette.green.base};
+    }
   }
 `;
 
@@ -43,6 +47,16 @@ const FeedbackButton = () => {
           `
         )}
         onClick={() => (!feedback ? initializeFeedback() : abandon())}
+        variant={Variant.PrimaryOutline}
+        leftGlyph={
+          <Icon
+            // className={starIconStyle(isHighlighted)}
+            glyph="Favorite"
+            // size={starSize}
+            // Change default viewbox to allow focus outline to be more centered
+            // viewBox="0 -0.5 16 16"
+          />
+        }
       >
         {FEEDBACK_BUTTON_TEXT}
       </Button>
