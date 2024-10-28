@@ -45,7 +45,6 @@ exports[`CodeIO renders correctly 1`] = `
 .emotion-1>div {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  display: grid;
   border-color: #E8EDEB;
 }
 
