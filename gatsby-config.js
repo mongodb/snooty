@@ -32,8 +32,6 @@ const plugins = [
   },
 ];
 
-console.log('plugins ', plugins);
-
 module.exports = {
   plugins,
   pathPrefix,
