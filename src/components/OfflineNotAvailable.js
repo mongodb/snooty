@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { Body } from '@leafygreen-ui/typography';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -7,10 +7,7 @@ import { withPrefix } from 'gatsby';
 import { theme } from '../theme/docsTheme';
 import Link from '../components/Link';
 import { usePageContext } from '../context/page-context';
-import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { useAllDocsets } from '../hooks/useAllDocsets';
-import { getCompleteUrl, getUrl } from '../utils/url-utils';
-import { VersionContext } from '../context/version-context';
+import { getCompleteUrl } from '../utils/url-utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -70,17 +67,12 @@ const assetLabelFromKey = {
  * @param {string} assetKey - 'instruqt', 'video', etc
  */
 const OfflineNotAvailable = ({ assetKey }) => {
-  const docsets = useAllDocsets();
-  const { project } = useSnootyMetadata();
   const { slug } = usePageContext();
-  const { activeVersions } = useContext(VersionContext);
 
   const assetLabel = assetLabelFromKey[assetKey];
   const altText = 'Unavailable offline';
   const imgPath = withPrefix('assets/offline-asset.png');
-
-  const projectPrefix = docsets.find((docset) => docset.project === project)?.prefix?.dotcomprd;
-  const prodUrl = getCompleteUrl(getUrl(activeVersions[project], project, projectPrefix, slug));
+  const completeUrl = getCompleteUrl(withPrefix(slug));
 
   return (
     <>
@@ -93,8 +85,7 @@ const OfflineNotAvailable = ({ assetKey }) => {
         <div>
           <Body className={cx(titleStyling)}>{assetLabel} unavailable</Body>
           <Body className={cx(subtitleStyling)}>{assetLabel}s are unavailable in offline mode</Body>
-          {/* TODO: Ticket https://jira.mongodb.org/browse/DOP-5105 will most likely come up with better solution for this */}
-          <StyledLink to={prodUrl} showExternalIcon={true}>
+          <StyledLink to={completeUrl} showExternalIcon={true}>
             Link to live site
           </StyledLink>
         </div>
