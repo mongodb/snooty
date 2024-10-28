@@ -6,7 +6,9 @@ const layoutComponentRelativePath = `./src/layouts/index.js`;
 
 console.log('PATH PREFIX', pathPrefix);
 
-const useImagePlugin = process.env.SNOOTY_ENV === 'dotcomprd' || process.env.SNOOTY_ENV === 'dotcomstg';
+// Disallow gatsby-plugin-image on staging builds - unnecessary adds time to build
+const stagingEnvs = ['stg', 'prd', 'dev', 'staging'];
+const useImagePlugin = !stagingEnvs.includes(process.env.SNOOTY_ENV);
 
 // Specifies which plugins to use depending on build environment
 // Keep our main plugin at top to include file saving before image plugins
