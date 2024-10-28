@@ -6,13 +6,15 @@ const layoutComponentRelativePath = `./src/layouts/index.js`;
 
 console.log('PATH PREFIX', pathPrefix);
 
+const useImagePlugin = process.env.SNOOTY_ENV === 'dotcomprd' || process.env.SNOOTY_ENV === 'dotcomstg';
+
 // Specifies which plugins to use depending on build environment
 // Keep our main plugin at top to include file saving before image plugins
 const plugins = [
   'gatsby-source-snooty-prod',
-  `gatsby-plugin-image`,
-  `gatsby-plugin-sharp`,
-  `gatsby-transformer-sharp`, // Needed for dynamic images
+  ...(useImagePlugin ? ['gatsby-plugin-image'] : []),
+  'gatsby-plugin-sharp',
+  'gatsby-transformer-sharp', // Needed for dynamic images
   {
     resolve: 'gatsby-source-filesystem',
     options: {
@@ -29,6 +31,8 @@ const plugins = [
     },
   },
 ];
+
+console.log('plugins ', plugins);
 
 module.exports = {
   plugins,
