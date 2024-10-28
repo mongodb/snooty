@@ -275,3 +275,9 @@ export const suggestionStyling = ({ copy }) => css`
     float: right;
   }
 `;
+
+export const offlineStyling = css`
+  @media ${theme.screenSize.largeAndUp} {
+    display: none;
+  }
+`;
