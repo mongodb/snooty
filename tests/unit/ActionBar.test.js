@@ -66,7 +66,7 @@ describe('ActionBar', () => {
       expect(wrapper.getByRole('search')).toBeTruthy();
       expect(wrapper.getByPlaceholderText('Search MongoDB Docs or Ask MongoDB AI')).toBeTruthy();
       expect(wrapper.getByLabelText('Dark Mode Menu')).toBeTruthy();
-      expect(wrapper.getByText('Feedback')).toBeTruthy();
+      expect(wrapper.getByText('Rate This Page')).toBeTruthy();
     });
   });
 });
