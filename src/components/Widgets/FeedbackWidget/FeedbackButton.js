@@ -48,15 +48,7 @@ const FeedbackButton = () => {
         )}
         onClick={() => (!feedback ? initializeFeedback() : abandon())}
         variant={Variant.PrimaryOutline}
-        leftGlyph={
-          <Icon
-            // className={starIconStyle(isHighlighted)}
-            glyph="Favorite"
-            // size={starSize}
-            // Change default viewbox to allow focus outline to be more centered
-            // viewBox="0 -0.5 16 16"
-          />
-        }
+        leftGlyph={<Icon glyph="Favorite" />}
       >
         {FEEDBACK_BUTTON_TEXT}
       </Button>
