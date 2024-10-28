@@ -6,7 +6,7 @@ const layoutComponentRelativePath = `./src/layouts/index.js`;
 
 console.log('PATH PREFIX', pathPrefix);
 
-// Disallow gatsby-plugin-image on staging builds - unnecessary adds time to build
+// Disallow gatsby-plugin-image on staging builds - unnecessarily adds time to build
 const stagingEnvs = ['stg', 'prd', 'dev', 'staging'];
 const useImagePlugin = !stagingEnvs.includes(process.env.SNOOTY_ENV);
 
