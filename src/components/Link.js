@@ -92,6 +92,7 @@ const Link = ({
   partiallyActive,
   showLinkArrow,
   hideExternalIcon: hideExternalIconProp,
+  showExternalIcon,
   ...other
 }) => {
   if (!to) to = '';
@@ -133,7 +134,7 @@ const Link = ({
 
   const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
   const isMDBLink = strippedUrl.includes('mongodb.com');
-  const showExtIcon = !anchor && !isMDBLink;
+  const showExtIcon = showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
   const target = !showExtIcon ? '_self' : undefined;
 
   return (
