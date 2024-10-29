@@ -46,7 +46,7 @@ const Breadcrumbs = ({
         queriedCrumbs,
         parentPaths: parentPathsData,
         selfCrumbContent: selfCrumb,
-        pageInfo: pageInfo,
+        pageInfo,
       }),
     [siteUrl, parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb, pageInfo]
   );
