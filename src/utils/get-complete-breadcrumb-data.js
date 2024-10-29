@@ -40,7 +40,7 @@ export const getSelfCrumbPath = (selfCrumbContent, urlSlug, project, siteBasePre
   const isLanding = project === 'landing';
   if (!isLanding && selfCrumbContent)
     return getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, selfCrumbContent.slug));
-  return selfCrumbContent?.slug;
+  return selfCrumbContent?.slug ?? baseUrl();
 };
 
 export const getCompleteBreadcrumbData = ({
