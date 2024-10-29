@@ -8,6 +8,7 @@ import Icon from '@leafygreen-ui/icon';
 import useScreenSize from '../hooks/useScreenSize';
 import { usePageContext } from '../context/page-context';
 import { theme } from '../theme/docsTheme';
+import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -95,7 +96,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
             <Button
               role="button"
               className={cx(labButtonStyling)}
-              disabled={isOpen}
+              disabled={isOfflineDocsBuild || isOpen}
               onClick={() => setIsOpen(true)}
               leftGlyph={<Icon glyph="Code" />}
             >
