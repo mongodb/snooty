@@ -1,6 +1,6 @@
 import React from 'react';
 import { palette } from '@leafygreen-ui/palette';
-import { withPrefix } from 'gatsby';
+import { withPrefix, Link as GatsbyLink } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -8,6 +8,7 @@ import { H2 } from '@leafygreen-ui/typography';
 import { theme } from '../theme/docsTheme';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
+import { getSelfCrumbPath } from '../utils/get-complete-breadcrumb-data';
 
 const StyledMain = styled.main`
   max-width: 100vw;
@@ -79,12 +80,6 @@ const LinkContainer = styled.div`
   margin-top: ${theme.size.large};
 `;
 
-const click = () => {
-  if (isBrowser) {
-    window.history.back();
-  }
-};
-
 const FeatureNotAvailContainer = styled.div`
   align-items: center;
   display: flex;
@@ -110,6 +105,11 @@ const FeatureNotAvailable = () => {
     pageInfo = JSON.parse(sessionStorage.getItem('pageInfo'));
   }
 
+  const { urlSlug, project, siteBasePrefix } = pageInfo || {};
+  const isLanding = project === 'landing';
+
+  const selfCrumbPath = getSelfCrumbPath(selfBreadcrumb, isLanding, urlSlug, project, siteBasePrefix);
+
   return (
     <StyledMain>
       <div class="body">
@@ -128,9 +128,11 @@ const FeatureNotAvailable = () => {
           <ContentBox>
             <H2 className={cx(titleStyling)}>We're sorry, this page isn't available in the version you selected.</H2>
             <LinkContainer>
-              <Button onClick={click} variant="default" className={cx(buttonStyling)}>
-                Go back to previous page
-              </Button>
+              <GatsbyLink to={selfCrumbPath}>
+                <Button variant="default" className={cx(buttonStyling)}>
+                  Go back to previous page
+                </Button>
+              </GatsbyLink>
             </LinkContainer>
           </ContentBox>
         </FeatureNotAvailContainer>
