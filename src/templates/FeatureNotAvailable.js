@@ -106,9 +106,7 @@ const FeatureNotAvailable = () => {
   }
 
   const { urlSlug, project, siteBasePrefix } = pageInfo || {};
-  const isLanding = project === 'landing';
-
-  const selfCrumbPath = getSelfCrumbPath(selfBreadcrumb, isLanding, urlSlug, project, siteBasePrefix);
+  const selfCrumbPath = getSelfCrumbPath(selfBreadcrumb, urlSlug, project, siteBasePrefix);
 
   return (
     <StyledMain>

@@ -35,10 +35,13 @@ export const getFullBreadcrumbPath = (siteUrl, path, needsPrefix) => {
   return assertTrailingSlash(path);
 };
 
-export const getSelfCrumbPath = (selfCrumbContent, isLanding, urlSlug, project, siteBasePrefix) =>
-  selfCrumbContent && !isLanding
-    ? getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, selfCrumbContent.slug))
-    : selfCrumbContent?.slug;
+export const getSelfCrumbPath = (selfCrumbContent, urlSlug, project, siteBasePrefix) => {
+  if (!urlSlug || !project || !siteBasePrefix) return baseUrl();
+  const isLanding = project === 'landing';
+  if (!isLanding && selfCrumbContent)
+    return getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, selfCrumbContent.slug));
+  return selfCrumbContent?.slug;
+};
 
 export const getCompleteBreadcrumbData = ({
   siteUrl,
@@ -90,7 +93,7 @@ export const getCompleteBreadcrumbData = ({
   const selfCrumb = selfCrumbContent
     ? {
         title: selfCrumbContent.title,
-        path: getSelfCrumbPath(selfCrumbContent, isLanding, urlSlug, project, siteBasePrefix),
+        path: getSelfCrumbPath(selfCrumbContent, urlSlug, project, siteBasePrefix),
       }
     : null;
 
