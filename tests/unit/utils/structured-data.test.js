@@ -24,6 +24,14 @@ describe('Structured Data', () => {
       expect(softwareSourceCodeSd.isValid()).toBeTruthy();
       expect(softwareSourceCodeSd).toMatchSnapshot();
     });
+
+    it('sanitizes and escapes unsafe HTML examples', () => {
+      const code =
+        '<!-- Load Google One Tap --> <script src="https://accounts.google.com/gsi/clien"></script> <!-- Log in with Realm and Google Authentication --> <script async defer> const app = new Realm.App({ id: "<your_realm_app_id>", }); // Callback used in `data-callback` to handle Google\'s response and log user into App Services function handleCredentialsResponse(response) { const credentials = Realm.Credentials.google({ idToken: response.credential }); app .logIn(credentials) .then((user) => alert(`Logged in with id: user.id`)); } </script>';
+      const softwareSourceCodeSd = new SoftwareSourceCodeSd({ code });
+      expect(softwareSourceCodeSd.isValid()).toBeTruthy();
+      expect(softwareSourceCodeSd).toMatchSnapshot();
+    });
   });
 
   describe('VideoObject', () => {
