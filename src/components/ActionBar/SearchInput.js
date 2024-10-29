@@ -20,7 +20,7 @@ import { ShortcutIcon, SparkleIcon } from './SparkIcon';
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const SearchMenu = lazy(() => import('./SearchMenu'));
 
-const PLACEHOLDER_TEXT = `Search MongoDB Docs or Ask MongoDB AI`;
+export const PLACEHOLDER_TEXT = `Search MongoDB Docs or Ask MongoDB AI`;
 const PLACEHOLDER_TEXT_MOBILE = 'Search or AI';
 
 // taken from LG/lib - our library is out of date

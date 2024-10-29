@@ -8,5 +8,7 @@
  * @param {string} siteBasePrefix The current docs site's base prefix to append the version to.
  */
 export const generateVersionedPrefix = (version, siteBasePrefix) => {
-  return `/${siteBasePrefix}/${version}`;
+  let versionedPrefix = `/${siteBasePrefix}`;
+  if (version) versionedPrefix += `/${version}`;
+  return versionedPrefix;
 };
