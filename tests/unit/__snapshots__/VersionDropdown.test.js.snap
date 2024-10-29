@@ -10,6 +10,7 @@ exports[`VersionDropdown Component renders correctly 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  margin: 8px 24px 8px 24px;
 }
 
 .emotion-0>label+button,
@@ -17,21 +18,17 @@ exports[`VersionDropdown Component renders correctly 1`] = `
   margin-top: 3px;
 }
 
-.emotion-1 {
-  margin: 8px 24px 8px 24px;
-}
-
-.emotion-1 button {
+.emotion-0 button {
   z-index: 2;
   background-color: var(--select-button-bg-color);
   color: var(--select-button-color);
 }
 
-.emotion-1 button div:last-child svg {
+.emotion-0 button div:last-child svg {
   color: var(--select-button-carot);
 }
 
-.dark-theme .emotion-1 button:hover {
+.dark-theme .emotion-0 button:hover {
   background-color: var(--gray-dark4);
   color: var(--gray-light3);
   border-color: var(--gray-base);
@@ -39,13 +36,13 @@ exports[`VersionDropdown Component renders correctly 1`] = `
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-1 div,
-  .emotion-1 span {
+  .emotion-0 div,
+  .emotion-0 span {
     font-size: 13px;
   }
 }
 
-.emotion-3 {
+.emotion-1 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -84,35 +81,35 @@ exports[`VersionDropdown Component renders correctly 1`] = `
   font-size: 13px;
 }
 
-.emotion-3:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-3[disabled],
-.emotion-3:disabled {
+.emotion-1[disabled],
+.emotion-1:disabled {
   pointer-events: none;
 }
 
-.emotion-3:active,
-.emotion-3:focus,
-.emotion-3:hover {
+.emotion-1:active,
+.emotion-1:focus,
+.emotion-1:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-3:hover,
-.emotion-3:active {
+.emotion-1:hover,
+.emotion-1:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-3:focus {
+.emotion-1:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-3>*:last-child {
+.emotion-1>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -120,33 +117,33 @@ exports[`VersionDropdown Component renders correctly 1`] = `
   justify-content: flex-start;
 }
 
-.emotion-3>*:last-child>svg {
+.emotion-1>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-3>*:last-child>svg {
+.emotion-1>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-3>*:last-child {
+.emotion-1>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-3:focus {
+.emotion-1:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-3 {
+  .emotion-1 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-4 {
+.emotion-2 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -156,7 +153,7 @@ exports[`VersionDropdown Component renders correctly 1`] = `
   border-radius: 5px;
 }
 
-.emotion-5 {
+.emotion-3 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -176,7 +173,7 @@ exports[`VersionDropdown Component renders correctly 1`] = `
   gap: 6px;
 }
 
-.emotion-6 {
+.emotion-4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -196,14 +193,14 @@ exports[`VersionDropdown Component renders correctly 1`] = `
   overflow: hidden;
 }
 
-.emotion-7 {
+.emotion-5 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-8 {
+.emotion-6 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -214,7 +211,7 @@ exports[`VersionDropdown Component renders correctly 1`] = `
 }
 
 <div
-    class="emotion-0  emotion-1 emotion-2"
+    class="emotion-0"
   >
     <button
       aria-controls="select-1-menu"
@@ -223,7 +220,7 @@ exports[`VersionDropdown Component renders correctly 1`] = `
       aria-expanded="false"
       aria-invalid="false"
       aria-labelledby="View a different version of documentation."
-      class="emotion-3"
+      class="emotion-1"
       data-leafygreen-ui="button"
       data-testid="leafygreen-ui-select-menubutton"
       id="select-2"
@@ -232,16 +229,16 @@ exports[`VersionDropdown Component renders correctly 1`] = `
       value="master"
     >
       <div
-        class="emotion-4"
+        class="emotion-2"
       />
       <div
-        class="emotion-5"
+        class="emotion-3"
       >
         <div
-          class="emotion-6"
+          class="emotion-4"
         >
           <div
-            class="emotion-7"
+            class="emotion-5"
           >
             master
           </div>
@@ -249,7 +246,7 @@ exports[`VersionDropdown Component renders correctly 1`] = `
         <svg
           alt=""
           aria-hidden="true"
-          class="emotion-8"
+          class="emotion-6"
           height="16"
           role="presentation"
           viewBox="0 0 16 16"
