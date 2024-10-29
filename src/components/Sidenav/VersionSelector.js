@@ -3,6 +3,7 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
 import { theme } from '../../theme/docsTheme';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 
 const buildChoice = (branch) => {
   return {
@@ -85,6 +86,7 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
         popoverZIndex={2}
         allowDeselect={false}
         choices={options}
+        disabled={isOfflineDocsBuild}
       ></Select>
     </div>
   );
