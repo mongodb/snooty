@@ -13,5 +13,5 @@ export const useRemoteMetadata = () => {
       }
     `
   );
-  return data.allRemoteMetadata.nodes[0].remoteMetadata;
+  return data.allRemoteMetadata.nodes[0]?.remoteMetadata ?? {};
 };

@@ -28,7 +28,6 @@ exports[`renders correctly 1`] = `
 .emotion-0>div {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  display: grid;
   border-color: #E8EDEB;
 }
 
@@ -434,7 +433,6 @@ exports[`renders correctly when none is passed in as a language 1`] = `
 .emotion-0>div {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  display: grid;
   border-color: #E8EDEB;
 }
 

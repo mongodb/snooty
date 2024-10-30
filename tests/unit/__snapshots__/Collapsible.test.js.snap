@@ -223,7 +223,6 @@ exports[`collapsible component renders all the content in the options and childr
 .emotion-12>div {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  display: grid;
   border-color: #E8EDEB;
 }
 

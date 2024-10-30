@@ -1,7 +1,10 @@
 const fs = require('fs').promises;
 const path = require('path');
+const { siteMetadata } = require('../site-metadata');
 
 const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
+
+const needsImageOptimization = ['dotcomprd', 'dotcomstg'].includes(siteMetadata.snootyEnv);
 
 const saveFile = async (file, data) => {
   // save files both to "public" and "src/images" directories
@@ -10,6 +13,10 @@ const saveFile = async (file, data) => {
     recursive: true,
   });
   await fs.writeFile(path.join('public', file), data, 'binary');
+
+  // For staging, skip adding images to src/images dir
+  // This will functionally skip image optimization, as the plugins source from that dir
+  if (!needsImageOptimization) return;
 
   const pathList = GATSBY_IMAGE_EXTENSIONS.some((ext) => file.endsWith(ext)) ? ['src', 'images'] : ['public'];
   await fs.mkdir(path.join(...pathList, path.dirname(file)), {

@@ -119,7 +119,6 @@ const Code = ({
           > div {
             border-top-left-radius: ${captionBorderRadius};
             border-top-right-radius: ${captionBorderRadius};
-            display: grid;
             border-color: ${palette.gray.light2};
 
             .dark-theme & {
