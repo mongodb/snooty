@@ -195,16 +195,16 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
 
-  const umbrellaProduct = await db.realmInterface.getMetadata(
-    {
-      'associated_products.name': siteMetadata.project,
-    },
-    { associated_products: 1 }
-  );
-
-  await createAssociatedProductNodes({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
-
-  await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+  if (process.env['OFFLINE_DOCS'] !== 'true') {
+    const umbrellaProduct = await db.realmInterface.getMetadata(
+      {
+        'associated_products.name': siteMetadata.project,
+      },
+      { associated_products: 1 }
+    );
+    await createAssociatedProductNodes({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+    await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+  }
 
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
     await createOpenAPIChangelogNode({ createNode, createNodeId, createContentDigest, siteMetadata });
