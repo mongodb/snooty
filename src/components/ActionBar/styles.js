@@ -5,6 +5,8 @@ import { theme } from '../../theme/docsTheme';
 import { CONTENT_MAX_WIDTH } from '../../templates/product-landing';
 import { displayNone } from '../../utils/display-none';
 
+const DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH = '236px';
+
 // default styling for all Action Bars
 export const actionBarStyling = css`
   display: flex;
@@ -40,7 +42,7 @@ export const actionBarStyling = css`
 const gridStyling = css`
   display: grid;
   grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${CONTENT_MAX_WIDTH}px) minmax(
-      ${theme.size.xlarge},
+      ${DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH},
       1fr
     );
 
@@ -53,7 +55,7 @@ const gridStyling = css`
 const landingGridStyling = css`
   display: grid;
   grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${theme.breakpoints.xxLarge}px) minmax(
-      ${theme.size.xlarge},
+      ${DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH},
       1fr
     );
   @media ${theme.screenSize.upToLarge} {
@@ -129,7 +131,7 @@ export const getContainerStyling = (template) => {
 export const ActionBarSearchContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
+  width: 100%;
   background: inherit;
 
   @media ${theme.screenSize.upToLarge} {
@@ -273,5 +275,11 @@ export const suggestionStyling = ({ copy }) => css`
 
   svg:last-of-type {
     float: right;
+  }
+`;
+
+export const offlineStyling = css`
+  @media ${theme.screenSize.largeAndUp} {
+    display: none;
   }
 `;

@@ -1,6 +1,5 @@
 import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
@@ -9,8 +8,9 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
 import { useCurrentUrlSlug, getBranchSlug } from '../../hooks/use-current-url-slug';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 
-const StyledSelect = styled(Select)`
+const selectStyling = LeafyCSS`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
 
   ${'' /* Render version dropdown text in front of the Sidebar text */}
@@ -152,10 +152,10 @@ const VersionDropdown = ({ eol }) => {
   // OR have the OptionGroup not take up space when a label is empty-string. For now,
   // ungrouped branches are handled in a separate array.
   return (
-    <StyledSelect
+    <Select
       role="button"
       allowDeselect={false}
-      className={cx(eol ? eolVersionFlipperStyle : '')}
+      className={cx(selectStyling, eol ? eolVersionFlipperStyle : '')}
       aria-labelledby="View a different version of documentation."
       defaultValue="master"
       onChange={onSelectChange}
@@ -163,7 +163,7 @@ const VersionDropdown = ({ eol }) => {
       popoverZIndex={3}
       value={activeVersions[project]}
       usePortal={false}
-      disabled={eol}
+      disabled={isOfflineDocsBuild || eol}
     >
       {activeUngroupedBranches?.map((b) => createOption(b))}
       {groups?.map((group) => {
@@ -183,7 +183,7 @@ const VersionDropdown = ({ eol }) => {
         );
       })}
       {showEol && <Option value="legacy">Legacy Docs</Option>}
-    </StyledSelect>
+    </Select>
   );
 };
 

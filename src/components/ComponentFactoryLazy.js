@@ -1,5 +1,7 @@
 import React, { lazy } from 'react';
+import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { SuspenseHelper } from './SuspenseHelper';
+import OfflineNotAvailable from './OfflineNotAvailable';
 
 const ComponentMap = {
   openapi: lazy(() => import('./OpenAPI')),
@@ -10,11 +12,15 @@ const ComponentMap = {
 };
 
 export const LAZY_COMPONENTS = Object.keys(ComponentMap).reduce((res, key) => {
-  const LazyComponent = ComponentMap[key];
-  res[key] = (props) => (
-    <SuspenseHelper fallback={null}>
-      <LazyComponent {...props} />
-    </SuspenseHelper>
-  );
+  if (isOfflineDocsBuild && key === 'instruqt') {
+    res[key] = (props) => (!props.nodeData?.options?.drawer ? <OfflineNotAvailable assetKey={key} /> : null);
+  } else {
+    const LazyComponent = ComponentMap[key];
+    res[key] = (props) => (
+      <SuspenseHelper fallback={null}>
+        <LazyComponent {...props} />
+      </SuspenseHelper>
+    );
+  }
   return res;
 }, {});
