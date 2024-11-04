@@ -1,6 +1,6 @@
 import React from 'react';
 import { palette } from '@leafygreen-ui/palette';
-import { withPrefix, Link as GatsbyLink } from 'gatsby';
+import { withPrefix } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
@@ -126,11 +126,9 @@ const FeatureNotAvailable = () => {
           <ContentBox>
             <H2 className={cx(titleStyling)}>We're sorry, this page isn't available in the version you selected.</H2>
             <LinkContainer>
-              <GatsbyLink to={selfCrumbPath}>
-                <Button variant="default" className={cx(buttonStyling)}>
-                  Go back to previous page
-                </Button>
-              </GatsbyLink>
+              <Button href={withPrefix(selfCrumbPath)} variant="default" className={cx(buttonStyling)}>
+                Go back to previous page
+              </Button>
             </LinkContainer>
           </ContentBox>
         </FeatureNotAvailContainer>
