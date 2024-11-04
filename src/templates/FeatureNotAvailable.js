@@ -8,7 +8,7 @@ import { H2 } from '@leafygreen-ui/typography';
 import { theme } from '../theme/docsTheme';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
-import { getSelfCrumbPath } from '../utils/get-complete-breadcrumb-data';
+import { getCompleteUrl, getUrl } from '../utils/url-utils';
 
 const StyledMain = styled.main`
   max-width: 100vw;
@@ -106,7 +106,7 @@ const FeatureNotAvailable = () => {
   }
 
   const { urlSlug, project, siteBasePrefix } = pageInfo || {};
-  const selfCrumbPath = getSelfCrumbPath(selfBreadcrumb, urlSlug, project, siteBasePrefix);
+  const selfCrumbPath = getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, selfBreadcrumb?.slug));
 
   return (
     <StyledMain>
