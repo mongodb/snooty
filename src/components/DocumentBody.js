@@ -134,9 +134,11 @@ const DocumentBody = (props) => {
     sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
   }
 
+  console.log('page ', page?.options);
+
   return (
     <>
-      <TabProvider selectors={page?.options?.selectors}>
+      <TabProvider selectors={page?.options?.selectors} defaultTabs={page?.options?.default_tabs}>
         <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
           <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
             <FootnoteContext.Provider value={{ footnotes }}>
