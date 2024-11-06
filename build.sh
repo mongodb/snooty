@@ -28,8 +28,8 @@ echo "==========================================================================
 echo "======================================================================================================================================================================="
 
 # putting set conent-repo as the path
-echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
-export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
+echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip  >> .env.production
+# export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 
 # run the site
 npm run build:no-prefix
