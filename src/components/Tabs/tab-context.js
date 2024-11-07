@@ -34,7 +34,7 @@ const reducer = (prevState, newState) => {
 // Otherwise, return first choice.
 const getDefaultTabs = (choicesPerSelector, defaultTabs) =>
   Object.keys(choicesPerSelector || {}).reduce((res, selectorKey) => {
-    const defaultTabId = defaultTabs[selectorKey] ?? 'nodesjs';
+    const defaultTabId = defaultTabs[selectorKey] ?? 'nodejs';
     const defaultOptionIdx = choicesPerSelector[selectorKey].findIndex((tab) => tab.value === defaultTabId);
     // NOTE: default tabs should be specified here
     if (selectorKey === 'drivers' && defaultOptionIdx > -1) {
