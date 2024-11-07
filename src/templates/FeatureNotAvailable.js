@@ -8,6 +8,7 @@ import { H2 } from '@leafygreen-ui/typography';
 import { theme } from '../theme/docsTheme';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
+import { getCompleteUrl, getUrl } from '../utils/url-utils';
 
 const StyledMain = styled.main`
   max-width: 100vw;
@@ -79,12 +80,6 @@ const LinkContainer = styled.div`
   margin-top: ${theme.size.large};
 `;
 
-const click = () => {
-  if (isBrowser) {
-    window.history.back();
-  }
-};
-
 const FeatureNotAvailContainer = styled.div`
   align-items: center;
   display: flex;
@@ -110,6 +105,9 @@ const FeatureNotAvailable = () => {
     pageInfo = JSON.parse(sessionStorage.getItem('pageInfo'));
   }
 
+  const { urlSlug, project, siteBasePrefix } = pageInfo || {};
+  const selfCrumbPath = getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, selfBreadcrumb?.slug));
+
   return (
     <StyledMain>
       <div class="body">
@@ -128,7 +126,7 @@ const FeatureNotAvailable = () => {
           <ContentBox>
             <H2 className={cx(titleStyling)}>We're sorry, this page isn't available in the version you selected.</H2>
             <LinkContainer>
-              <Button onClick={click} variant="default" className={cx(buttonStyling)}>
+              <Button href={withPrefix(selfCrumbPath)} variant="default" className={cx(buttonStyling)}>
                 Go back to previous page
               </Button>
             </LinkContainer>
