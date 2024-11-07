@@ -206,3 +206,230 @@ exports[`renders a Banner correctly 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`renders an offline banner correctly 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px 12px 10px 20px;
+  border-width: 1px 1px 1px 0px;
+  border-style: solid;
+  border-radius: 12px;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  color: #944F01;
+  border-color: #FFEC9E;
+  background-color: #FEF7DB;
+  margin: 16px 0;
+  font-size: 13px;
+}
+
+.emotion-0:before {
+  content: '';
+  position: absolute;
+  width: 13px;
+  top: -1px;
+  bottom: -1px;
+  left: 0px;
+  border-radius: 12px 0px 0px 12px;
+}
+
+.emotion-0 .lg-ui-0001,
+.emotion-0 a {
+  color: #4C2100;
+}
+
+.emotion-0 .lg-ui-0001:hover,
+.emotion-0 a:hover {
+  color: #944F01;
+}
+
+.emotion-0 .lg-ui-0001:focus-visible,
+.emotion-0 a:focus-visible {
+  box-shadow: 0 0 0 3px #FEF7DB,0 0 0 5px #FFFFFF,0 0 0 7px #0498EC;
+}
+
+.emotion-0:before {
+  background: linear-gradient(
+        to left,
+        transparent 6px,
+        #FFC010 6px
+      );
+}
+
+.emotion-0>div>div>* {
+  margin: 0 0 12px;
+}
+
+.emotion-0>div>div>*:last-child {
+  margin: 0;
+}
+
+.emotion-0 p {
+  margin: 0;
+}
+
+.emotion-0 p,
+.emotion-0 a {
+  font-size: 13px;
+}
+
+.emotion-0 a:hover {
+  text-underline-offset: 3px;
+}
+
+.emotion-1 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: relative;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #944F01;
+  top: 2px;
+}
+
+.emotion-2 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin-left: 13px;
+  margin-right: 10px;
+}
+
+.emotion-2 .lg-ui-0001,
+.emotion-2 a {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 700;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+  border-radius: 4px;
+  display: inline;
+}
+
+.emotion-2 .lg-ui-0001:hover,
+.emotion-2 a:hover,
+.emotion-2 .lg-ui-0001:focus,
+.emotion-2 a:focus,
+.emotion-2 .lg-ui-0001:focus-visible,
+.emotion-2 a:focus-visible {
+  outline: none;
+}
+
+.emotion-2 .lg-ui-0001:hover span::after,
+.emotion-2 a:hover span::after,
+.emotion-2 .lg-ui-0001:focus span::after,
+.emotion-2 a:focus span::after,
+.emotion-2 .lg-ui-0001:focus-visible span::after,
+.emotion-2 a:focus-visible span::after {
+  display: none;
+}
+
+.emotion-2 .lg-ui-0001:focus-visible,
+.emotion-2 a:focus-visible {
+  position: relative;
+}
+
+.emotion-3 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-3:hover,
+.emotion-3:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-3:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-3:focus {
+  text-decoration-color: #016BF8;
+}
+
+<div
+    class="emotion-0"
+    role="alert"
+  >
+    <svg
+      aria-label="Important With Circle Icon"
+      class="emotion-1"
+      height="16"
+      role="img"
+      viewBox="0 0 16 16"
+      width="16"
+    >
+      <path
+        clip-rule="evenodd"
+        d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM7 4.5C7 3.94772 7.44772 3.5 8 3.5C8.55228 3.5 9 3.94772 9 4.5V8.5C9 9.05228 8.55228 9.5 8 9.5C7.44772 9.5 7 9.05228 7 8.5V4.5ZM9 11.5C9 12.0523 8.55228 12.5 8 12.5C7.44772 12.5 7 12.0523 7 11.5C7 10.9477 7.44772 10.5 8 10.5C8.55228 10.5 9 10.9477 9 11.5Z"
+        fill="currentColor"
+        fill-rule="evenodd"
+      />
+    </svg>
+    <div
+      class="emotion-2"
+    >
+      You are viewing an offline version of MongoDB documentation. Some page features might be unavailable. To view the latest version of the page or use interactive features, visit the 
+      <a
+        class="lg-ui-0001 emotion-3"
+        href="https://mongodb.com/docs"
+        target="_self"
+      >
+        <span>
+          live page.
+        </span>
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;

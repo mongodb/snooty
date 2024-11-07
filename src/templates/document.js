@@ -12,6 +12,9 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 import { theme } from '../theme/docsTheme';
 import { usePageContext } from '../context/page-context';
+import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
+import { findKeyValuePair } from '../utils/find-key-value-pair';
+import OfflineBanner from '../components/Banner/OfflineBanner';
 
 const MAX_CONTENT_WIDTH = '775px';
 
@@ -37,11 +40,14 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const { tabsMainColumn } = usePageContext();
   const hasMethodSelector = pageOptions?.has_method_selector;
   const activeTutorial = useActiveMpTutorial();
+  const videoComponent = findKeyValuePair(page?.ast?.children || [], 'name', 'video');
+  const hasInstruqtLab = page?.ast?.options?.['instruqt'] ?? false;
 
   return (
     <DocumentContainer>
       <StyledMainColumn>
         <div className="body">
+          {isOfflineDocsBuild && (videoComponent || hasInstruqtLab) && <OfflineBanner />}
           <Breadcrumbs siteTitle={title} slug={slug} />
           {activeTutorial && <StepNumber slug={slug} activeTutorial={activeTutorial} />}
           {children}
