@@ -134,8 +134,6 @@ const DocumentBody = (props) => {
     sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
   }
 
-  console.log('page ', page?.options);
-
   return (
     <>
       <TabProvider selectors={page?.options?.selectors} defaultTabs={page?.options?.default_tabs}>

@@ -82,7 +82,6 @@ const TabProvider = ({ children, selectors = {}, defaultTabs = {} }) => {
   useEffect(() => {
     // convert selectors to tab options first here, then set init values
     // selectors are determined at build time
-    console.log('selectors ', selectors, defaultTabs);
     const choicesPerSelector = Object.keys(selectors).reduce((res, selector) => {
       res[selector] = makeChoices({
         name: selector,
@@ -91,7 +90,6 @@ const TabProvider = ({ children, selectors = {}, defaultTabs = {} }) => {
       });
       return res;
     }, {});
-    console.log('choicesPerSelector ', choicesPerSelector);
     const defaultRes = getDefaultTabs(choicesPerSelector, defaultTabs);
     // get local active tabs and set as active tabs
     // if they exist on page.
