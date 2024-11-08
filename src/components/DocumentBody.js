@@ -156,9 +156,7 @@ const DocumentBody = (props) => {
                       // prepend the page nodes with a banner for offline docs
                       isOfflineDocsBuild ? (
                         <OfflineBanner
-                          linkUrl={getCompleteUrl(
-                            getUrl(currentBranchPrefix, project, repoBranches.siteBasePrefix, slug)
-                          )}
+                          linkUrl={getCompleteUrl(getUrl(currentBranchPrefix, project, 'docs', slug))}
                           nodeData={{}}
                         />
                       ) : (
