@@ -34,10 +34,8 @@ export const baseBannerStyle = css`
   }
 `;
 
-export const offlineBannerStyle = ({ template }) => {
-  return css`
-    max-width: ${CONTENT_MAX_WIDTH}px;
-    margin-left: auto;
-    margin-right: auto;
-  `;
-};
+export const offlineBannerStyle = css`
+  max-width: ${CONTENT_MAX_WIDTH}px;
+  margin-left: auto;
+  margin-right: auto;
+`;
