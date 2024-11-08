@@ -1,5 +1,4 @@
 import { css } from '@leafygreen-ui/emotion';
-import styled from 'styled-components';
 import { theme } from '../../../theme/docsTheme';
 import { CONTENT_MAX_WIDTH } from '../../../templates/product-landing';
 
@@ -47,10 +46,9 @@ export const offlineBannerStyle = css`
 // instruqt,
 // changelog
 // update styling if needed for other templates
-export const OfflineBannerContainer = styled.div(
-  ({ template }) => `
-  ${
-    template === 'product-landing' &&
+export const offlineBannerContainerStyle = ({ template }) => {
+  return css`
+    ${template === 'product-landing' &&
     `
     display: grid;
     grid-template-columns: minmax(64px, 1fr) repeat(1, minmax(0, ${CONTENT_MAX_WIDTH}px)) minmax(64px, 1fr);
@@ -66,7 +64,6 @@ export const OfflineBannerContainer = styled.div(
     > [role=alert] {
       grid-column: 2/2;
     }
-  `
-  }
-`
-);
+  `}
+  `;
+};
