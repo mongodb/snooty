@@ -158,6 +158,7 @@ const DocumentBody = (props) => {
                         <OfflineBanner
                           linkUrl={getCompleteUrl(getUrl(currentBranchPrefix, project, 'docs', slug))}
                           nodeData={{}}
+                          template={template}
                         />
                       ) : (
                         <></>
