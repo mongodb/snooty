@@ -16,6 +16,9 @@ import { PageContext } from '../context/page-context';
 import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
 import { TEMPLATE_CONTAINER_ID } from '../constants';
+import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
+import { getCompleteUrl, getUrl } from '../utils/url-utils';
+import OfflineBanner from './Banner/OfflineBanner';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
@@ -107,6 +110,12 @@ const DocumentBody = (props) => {
   const { parentPaths, branch } = useSnootyMetadata();
   const queriedCrumbs = useBreadcrumbs();
 
+  const [currentBranchPrefix] = useState(() => {
+    if (!isOfflineDocsBuild) return '';
+    const currentBranch = repoBranches.branches.find((repoBranch) => repoBranch.gitBranchName === branch);
+    return (currentBranch?.urlSlug || currentBranch?.urlSlug || currentBranch?.urlSlug) ?? '';
+  }, [branch, repoBranches.branches]);
+
   const siteBasePrefix = repoBranches.siteBasePrefix;
 
   // TODO: Move this into util function since the same logic
@@ -143,16 +152,30 @@ const DocumentBody = (props) => {
               <PageContext.Provider value={{ page, template, slug, options: page?.options, tabsMainColumn }}>
                 <div id={TEMPLATE_CONTAINER_ID}>
                   <Template {...props} useChatbot={useChatbot}>
-                    {pageNodes.map((child, index) => (
-                      <ComponentFactory
-                        key={index}
-                        metadata={metadata}
-                        nodeData={child}
-                        page={page}
-                        template={template}
-                        slug={slug}
-                      />
-                    ))}
+                    {[
+                      // prepend the page nodes with a banner for offline docs
+                      isOfflineDocsBuild ? (
+                        <OfflineBanner
+                          linkUrl={getCompleteUrl(
+                            getUrl(currentBranchPrefix, project, repoBranches.siteBasePrefix, slug)
+                          )}
+                          nodeData={{}}
+                        />
+                      ) : (
+                        <></>
+                      ),
+                    ].concat(
+                      pageNodes.map((child, index) => (
+                        <ComponentFactory
+                          key={index}
+                          metadata={metadata}
+                          nodeData={child}
+                          page={page}
+                          template={template}
+                          slug={slug}
+                        />
+                      ))
+                    )}
                   </Template>
                 </div>
               </PageContext.Provider>

@@ -1,5 +1,6 @@
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../../theme/docsTheme';
+import { CONTENT_MAX_WIDTH } from '../../../templates/product-landing';
 
 export const baseBannerStyle = css`
   margin: ${theme.size.default} 0;
@@ -32,3 +33,11 @@ export const baseBannerStyle = css`
     }
   }
 `;
+
+export const offlineBannerStyle = ({ template }) => {
+  return css`
+    max-width: ${CONTENT_MAX_WIDTH}px;
+    margin-left: auto;
+    margin-right: auto;
+  `;
+};

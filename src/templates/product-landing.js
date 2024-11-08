@@ -193,15 +193,16 @@ const ProductLanding = ({ children, data: { page } }) => {
 
   // shallow copy children, and search for existence of banner
   const shallowChildren = children.reduce((res, child) => {
-    const copiedChildren = child.props.nodeData.children.map((childNode) => {
-      const newNode = {};
-      for (let property in childNode) {
-        if (property !== 'children') {
-          newNode[property] = childNode[property];
+    const copiedChildren =
+      child.props.nodeData?.children?.map((childNode) => {
+        const newNode = {};
+        for (let property in childNode) {
+          if (property !== 'children') {
+            newNode[property] = childNode[property];
+          }
         }
-      }
-      return newNode;
-    });
+        return newNode;
+      }) ?? [];
     res = res.concat(copiedChildren);
     return res;
   }, []);
