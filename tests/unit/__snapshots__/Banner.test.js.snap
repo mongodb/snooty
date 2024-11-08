@@ -227,6 +227,9 @@ exports[`renders an offline banner correctly 1`] = `
   background-color: #FEF7DB;
   margin: 16px 0;
   font-size: 13px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .emotion-0:before {
