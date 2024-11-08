@@ -34,6 +34,8 @@ export const baseBannerStyle = css`
   }
 `;
 
+// NOTE: banner is styled for document, product-landing, instruqt, changelog templates
+// update styling if needed for other templates
 export const offlineBannerStyle = css`
   max-width: ${CONTENT_MAX_WIDTH}px;
   margin-left: auto;
