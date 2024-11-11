@@ -141,11 +141,14 @@ const DocumentBody = (props) => {
     if (!isOfflineDocsBuild) return <></>;
     const currentBranch = repoBranches.branches.find((repoBranch) => repoBranch.gitBranchName === branch);
     const currentBranchPrefix =
-      currentBranch?.urlSlug || currentBranch?.urlAliases?.[0] || currentBranch?.urlSlug || '';
+      currentBranch?.urlSlug ?? currentBranch?.urlAliases?.[0] ?? currentBranch?.gitBranchName ?? '';
     return (
-      <OfflineBanner linkUrl={getCompleteUrl(getUrl(currentBranchPrefix, project, 'docs', slug))} template={template} />
+      <OfflineBanner
+        linkUrl={getCompleteUrl(getUrl(currentBranchPrefix, project, repoBranches.siteBasePrefix, slug))}
+        template={template}
+      />
     );
-  }, [branch, project, repoBranches.branches, slug, template]);
+  }, [branch, project, repoBranches.branches, repoBranches.siteBasePrefix, slug, template]);
 
   return (
     <>
