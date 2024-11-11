@@ -85,7 +85,7 @@ const bannerStyle = ({ variant }) => css`
   border-color: ${styleMapLight[variant].borderColor};
   // copied from LG
   ::before {
-    background: linear-gradient(to left, transparent 6px, ${styleMapLight[variant].beforeColor}} 6px);
+    background: linear-gradient(to left, transparent 6px, ${styleMapLight[variant].beforeColor} 6px);
   }
   a {
     color: ${styleMapLight[variant].linkColor};
