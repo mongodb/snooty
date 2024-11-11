@@ -80,7 +80,7 @@ exports[`renders a Banner correctly 1`] = `
 }
 
 .emotion-0::before {
-  background: linear-gradient(to left, transparent 6px, #016BF8} 6px);
+  background: linear-gradient(to left, transparent 6px, #016BF8 6px);
 }
 
 .emotion-0 a {
