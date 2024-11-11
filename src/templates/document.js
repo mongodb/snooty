@@ -13,7 +13,7 @@ import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 import { theme } from '../theme/docsTheme';
 import { usePageContext } from '../context/page-context';
 
-export const MAX_CONTENT_WIDTH = '775px';
+const MAX_CONTENT_WIDTH = '775px';
 
 const DocumentContainer = styled('div')`
   display: grid;
