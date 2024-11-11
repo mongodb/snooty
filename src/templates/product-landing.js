@@ -182,7 +182,7 @@ const Wrapper = styled('main')`
 
 const REALM_LIGHT_HERO_PAGES = ['index.txt'];
 
-const ProductLanding = ({ children, data: { page } }) => {
+const ProductLanding = ({ children, data: { page }, offlineBanner }) => {
   const { project } = useSnootyMetadata();
   const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
@@ -218,6 +218,7 @@ const ProductLanding = ({ children, data: { page } }) => {
       hasLightHero={hasLightHero}
       hasMaxWidthParagraphs={hasMaxWidthParagraphs}
     >
+      {offlineBanner}
       {children}
     </Wrapper>
   );

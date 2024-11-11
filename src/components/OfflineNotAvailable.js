@@ -72,6 +72,7 @@ const OfflineNotAvailable = ({ assetKey }) => {
   const assetLabel = assetLabelFromKey[assetKey];
   const altText = 'Unavailable offline';
   const imgPath = withPrefix('assets/offline-asset.png');
+  // TODO: update this URL. missing project in url
   const completeUrl = getCompleteUrl(withPrefix(slug));
 
   return (

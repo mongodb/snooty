@@ -8,7 +8,7 @@ import { baseBannerStyle, offlineBannerStyle, offlineBannerContainerStyle } from
 const OfflineBanner = ({ linkUrl = 'https://mongodb.com/docs', template = 'document' }) => {
   return (
     <div className={cx(offlineBannerContainerStyle({ template }))}>
-      <LeafyBanner className={cx(baseBannerStyle, offlineBannerStyle)} variant={'warning'}>
+      <LeafyBanner className={cx(baseBannerStyle, offlineBannerStyle({ template }))} variant={'warning'}>
         You are viewing an offline version of MongoDB documentation. Some page features might be unavailable. To view
         the latest version of the page or use interactive features, visit the&nbsp;
         <Link to={linkUrl}>live page.</Link>

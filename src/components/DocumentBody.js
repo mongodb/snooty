@@ -110,12 +110,6 @@ const DocumentBody = (props) => {
   const { parentPaths, branch } = useSnootyMetadata();
   const queriedCrumbs = useBreadcrumbs();
 
-  const [currentBranchPrefix] = useState(() => {
-    if (!isOfflineDocsBuild) return '';
-    const currentBranch = repoBranches.branches.find((repoBranch) => repoBranch.gitBranchName === branch);
-    return (currentBranch?.urlSlug || currentBranch?.urlSlug || currentBranch?.urlSlug) ?? '';
-  }, [branch, repoBranches.branches]);
-
   const siteBasePrefix = repoBranches.siteBasePrefix;
 
   // TODO: Move this into util function since the same logic
@@ -143,6 +137,16 @@ const DocumentBody = (props) => {
     sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
   }
 
+  const [OfflineBannerComponent] = useState(() => {
+    if (!isOfflineDocsBuild) return <></>;
+    const currentBranch = repoBranches.branches.find((repoBranch) => repoBranch.gitBranchName === branch);
+    const currentBranchPrefix =
+      currentBranch?.urlSlug || currentBranch?.urlAliases?.[0] || currentBranch?.urlSlug || '';
+    return (
+      <OfflineBanner linkUrl={getCompleteUrl(getUrl(currentBranchPrefix, project, 'docs', slug))} template={template} />
+    );
+  });
+
   return (
     <>
       <TabProvider selectors={page?.options?.selectors}>
@@ -151,30 +155,17 @@ const DocumentBody = (props) => {
             <FootnoteContext.Provider value={{ footnotes }}>
               <PageContext.Provider value={{ page, template, slug, options: page?.options, tabsMainColumn }}>
                 <div id={TEMPLATE_CONTAINER_ID}>
-                  <Template {...props} useChatbot={useChatbot}>
-                    {[
-                      // prepend the page nodes with a banner for offline docs
-                      isOfflineDocsBuild ? (
-                        <OfflineBanner
-                          linkUrl={getCompleteUrl(getUrl(currentBranchPrefix, project, 'docs', slug))}
-                          nodeData={{}}
-                          template={template}
-                        />
-                      ) : (
-                        <></>
-                      ),
-                    ].concat(
-                      pageNodes.map((child, index) => (
-                        <ComponentFactory
-                          key={index}
-                          metadata={metadata}
-                          nodeData={child}
-                          page={page}
-                          template={template}
-                          slug={slug}
-                        />
-                      ))
-                    )}
+                  <Template {...props} useChatbot={useChatbot} offlineBanner={OfflineBannerComponent}>
+                    {pageNodes.map((child, index) => (
+                      <ComponentFactory
+                        key={index}
+                        metadata={metadata}
+                        nodeData={child}
+                        page={page}
+                        template={template}
+                        slug={slug}
+                      />
+                    ))}
                   </Template>
                 </div>
               </PageContext.Provider>

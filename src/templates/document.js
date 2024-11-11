@@ -30,7 +30,7 @@ const StyledRightColumn = styled(RightColumn)`
   grid-area: right;
 `;
 
-const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedProduct } }) => {
+const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedProduct }, offlineBanner }) => {
   const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
@@ -44,6 +44,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
         <div className="body">
           <Breadcrumbs siteTitle={title} slug={slug} />
           {activeTutorial && <StepNumber slug={slug} activeTutorial={activeTutorial} />}
+          {offlineBanner}
           {children}
           {showPrevNext && (
             <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={toctreeOrder} />

@@ -34,10 +34,11 @@ export const baseBannerStyle = css`
   }
 `;
 
-export const offlineBannerStyle = css`
+export const offlineBannerStyle = ({ template }) => css`
   max-width: ${CONTENT_MAX_WIDTH}px;
-  margin-left: auto;
-  margin-right: auto;
+  ${template !== 'instruqt' &&
+  `margin-left: auto;
+  margin-right: auto;`}
 `;
 
 // NOTE: banner is styled for
