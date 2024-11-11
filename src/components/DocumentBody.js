@@ -137,7 +137,7 @@ const DocumentBody = (props) => {
     sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
   }
 
-  const [OfflineBannerComponent] = useState(() => {
+  const OfflineBannerComponent = useMemo(() => {
     if (!isOfflineDocsBuild) return <></>;
     const currentBranch = repoBranches.branches.find((repoBranch) => repoBranch.gitBranchName === branch);
     const currentBranchPrefix =
@@ -145,7 +145,7 @@ const DocumentBody = (props) => {
     return (
       <OfflineBanner linkUrl={getCompleteUrl(getUrl(currentBranchPrefix, project, 'docs', slug))} template={template} />
     );
-  });
+  }, [branch, project, repoBranches.branches, slug, template]);
 
   return (
     <>
