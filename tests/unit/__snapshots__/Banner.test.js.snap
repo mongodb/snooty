@@ -209,7 +209,7 @@ exports[`renders a Banner correctly 1`] = `
 
 exports[`renders an offline banner correctly 1`] = `
 <DocumentFragment>
-  .emotion-0 {
+  .emotion-1 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -232,7 +232,7 @@ exports[`renders an offline banner correctly 1`] = `
   margin-right: auto;
 }
 
-.emotion-0:before {
+.emotion-1:before {
   content: '';
   position: absolute;
   width: 13px;
@@ -242,22 +242,22 @@ exports[`renders an offline banner correctly 1`] = `
   border-radius: 12px 0px 0px 12px;
 }
 
-.emotion-0 .lg-ui-0001,
-.emotion-0 a {
+.emotion-1 .lg-ui-0001,
+.emotion-1 a {
   color: #4C2100;
 }
 
-.emotion-0 .lg-ui-0001:hover,
-.emotion-0 a:hover {
+.emotion-1 .lg-ui-0001:hover,
+.emotion-1 a:hover {
   color: #944F01;
 }
 
-.emotion-0 .lg-ui-0001:focus-visible,
-.emotion-0 a:focus-visible {
+.emotion-1 .lg-ui-0001:focus-visible,
+.emotion-1 a:focus-visible {
   box-shadow: 0 0 0 3px #FEF7DB,0 0 0 5px #FFFFFF,0 0 0 7px #0498EC;
 }
 
-.emotion-0:before {
+.emotion-1:before {
   background: linear-gradient(
         to left,
         transparent 6px,
@@ -265,28 +265,28 @@ exports[`renders an offline banner correctly 1`] = `
       );
 }
 
-.emotion-0>div>div>* {
+.emotion-1>div>div>* {
   margin: 0 0 12px;
 }
 
-.emotion-0>div>div>*:last-child {
+.emotion-1>div>div>*:last-child {
   margin: 0;
 }
 
-.emotion-0 p {
+.emotion-1 p {
   margin: 0;
 }
 
-.emotion-0 p,
-.emotion-0 a {
+.emotion-1 p,
+.emotion-1 a {
   font-size: 13px;
 }
 
-.emotion-0 a:hover {
+.emotion-1 a:hover {
   text-underline-offset: 3px;
 }
 
-.emotion-1 {
+.emotion-2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -298,7 +298,7 @@ exports[`renders an offline banner correctly 1`] = `
   top: 2px;
 }
 
-.emotion-2 {
+.emotion-3 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -310,8 +310,8 @@ exports[`renders an offline banner correctly 1`] = `
   margin-right: 10px;
 }
 
-.emotion-2 .lg-ui-0001,
-.emotion-2 a {
+.emotion-3 .lg-ui-0001,
+.emotion-3 a {
   font-size: inherit;
   line-height: inherit;
   font-weight: 700;
@@ -323,30 +323,30 @@ exports[`renders an offline banner correctly 1`] = `
   display: inline;
 }
 
-.emotion-2 .lg-ui-0001:hover,
-.emotion-2 a:hover,
-.emotion-2 .lg-ui-0001:focus,
-.emotion-2 a:focus,
-.emotion-2 .lg-ui-0001:focus-visible,
-.emotion-2 a:focus-visible {
+.emotion-3 .lg-ui-0001:hover,
+.emotion-3 a:hover,
+.emotion-3 .lg-ui-0001:focus,
+.emotion-3 a:focus,
+.emotion-3 .lg-ui-0001:focus-visible,
+.emotion-3 a:focus-visible {
   outline: none;
 }
 
-.emotion-2 .lg-ui-0001:hover span::after,
-.emotion-2 a:hover span::after,
-.emotion-2 .lg-ui-0001:focus span::after,
-.emotion-2 a:focus span::after,
-.emotion-2 .lg-ui-0001:focus-visible span::after,
-.emotion-2 a:focus-visible span::after {
+.emotion-3 .lg-ui-0001:hover span::after,
+.emotion-3 a:hover span::after,
+.emotion-3 .lg-ui-0001:focus span::after,
+.emotion-3 a:focus span::after,
+.emotion-3 .lg-ui-0001:focus-visible span::after,
+.emotion-3 a:focus-visible span::after {
   display: none;
 }
 
-.emotion-2 .lg-ui-0001:focus-visible,
-.emotion-2 a:focus-visible {
+.emotion-3 .lg-ui-0001:focus-visible,
+.emotion-3 a:focus-visible {
   position: relative;
 }
 
-.emotion-3 {
+.emotion-4 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -378,8 +378,8 @@ exports[`renders an offline banner correctly 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-3:hover,
-.emotion-3:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -388,28 +388,28 @@ exports[`renders an offline banner correctly 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-3:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-3:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-3:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
 }
 
 <div
-    class="sc-bcXHqe brXMoO"
+    class="emotion-0"
   >
     <div
-      class="emotion-0"
+      class="emotion-1"
       role="alert"
     >
       <svg
         aria-label="Important With Circle Icon"
-        class="emotion-1"
+        class="emotion-2"
         height="16"
         role="img"
         viewBox="0 0 16 16"
@@ -423,11 +423,11 @@ exports[`renders an offline banner correctly 1`] = `
         />
       </svg>
       <div
-        class="emotion-2"
+        class="emotion-3"
       >
         You are viewing an offline version of MongoDB documentation. Some page features might be unavailable. To view the latest version of the page or use interactive features, visit the 
         <a
-          class="lg-ui-0001 emotion-3"
+          class="lg-ui-0001 emotion-4"
           href="https://mongodb.com/docs"
           target="_self"
         >
