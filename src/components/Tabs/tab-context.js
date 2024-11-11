@@ -28,14 +28,17 @@ const reducer = (prevState, newState) => {
 };
 
 // Helper fn to get default tabs for fallback (when no local storage found).
-// If drivers tabs, return 'nodejs' if found.
+// For drivers tabs,
+// 1. return default tab if available
+// 2. return 'nodejs' if found
 // Otherwise, return first choice.
-const getDefaultTabs = (choicesPerSelector) =>
+const getDefaultTabs = (choicesPerSelector, defaultTabs) =>
   Object.keys(choicesPerSelector || {}).reduce((res, selectorKey) => {
-    const nodeOptionIdx = choicesPerSelector[selectorKey].findIndex((tab) => tab.value === 'nodejs');
+    const defaultTabId = defaultTabs[selectorKey] ?? 'nodejs';
+    const defaultOptionIdx = choicesPerSelector[selectorKey].findIndex((tab) => tab.value === defaultTabId);
     // NOTE: default tabs should be specified here
-    if (selectorKey === 'drivers' && nodeOptionIdx > -1) {
-      res[selectorKey] = 'nodejs';
+    if (selectorKey === 'drivers' && defaultOptionIdx > -1) {
+      res[selectorKey] = defaultTabId;
     } else {
       res[selectorKey] = choicesPerSelector[selectorKey][0].value;
     }
@@ -53,7 +56,7 @@ const getLocalTabs = (localTabs, selectors) =>
     return res;
   }, {});
 
-const TabProvider = ({ children, selectors = {} }) => {
+const TabProvider = ({ children, selectors = {}, defaultTabs = {} }) => {
   // init value to {} to match server and client side
   const [activeTabs, setActiveTab] = useReducer(reducer, {});
   const { setActiveSelectorIds } = useContext(ContentsContext);
@@ -87,7 +90,7 @@ const TabProvider = ({ children, selectors = {} }) => {
       });
       return res;
     }, {});
-    const defaultRes = getDefaultTabs(choicesPerSelector);
+    const defaultRes = getDefaultTabs(choicesPerSelector, defaultTabs);
     // get local active tabs and set as active tabs
     // if they exist on page.
     // otherwise, defaults will take precedence
