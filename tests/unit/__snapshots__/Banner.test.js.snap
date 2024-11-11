@@ -428,7 +428,7 @@ exports[`renders an offline banner correctly 1`] = `
         You are viewing an offline version of MongoDB documentation. Some page features might be unavailable. To view the latest version of the page or use interactive features, visit the 
         <a
           class="lg-ui-0001 emotion-4"
-          href="https://mongodb.com/docs"
+          href="https://mongodb.com/docs/"
           target="_self"
         >
           <span>
