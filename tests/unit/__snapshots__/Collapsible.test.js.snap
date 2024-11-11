@@ -184,8 +184,6 @@ exports[`collapsible component renders all the content in the options and childr
   overflow: hidden;
   height: 0;
   color: --font-color-primary;
-  height: auto;
-  visibility: visible;
 }
 
 .emotion-11 {
@@ -567,7 +565,7 @@ exports[`collapsible component renders all the content in the options and childr
           class="emotion-9"
         >
           <svg
-            aria-label="Chevron Down Icon"
+            aria-label="Chevron Right Icon"
             class=""
             fill="none"
             height="16"
@@ -578,7 +576,7 @@ exports[`collapsible component renders all the content in the options and childr
           >
             <path
               clip-rule="evenodd"
-              d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+              d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
               fill="currentColor"
               fill-rule="evenodd"
             />
