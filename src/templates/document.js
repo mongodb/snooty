@@ -42,9 +42,9 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
     <DocumentContainer>
       <StyledMainColumn>
         <div className="body">
+          {offlineBanner}
           <Breadcrumbs siteTitle={title} slug={slug} />
           {activeTutorial && <StepNumber slug={slug} activeTutorial={activeTutorial} />}
-          {offlineBanner}
           {children}
           {showPrevNext && (
             <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={toctreeOrder} />

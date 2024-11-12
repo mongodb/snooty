@@ -13,6 +13,8 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  margin: 16px 0;
+  font-size: 13px;
   background-color: #E1F7FF;
   border: 1px solid #C3E7FE;
   color: #083C90;
@@ -30,6 +32,27 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   min-height: 44px;
   padding: 9px 12px 9px 20px;
   position: relative;
+}
+
+.emotion-0>div>div>* {
+  margin: 0 0 12px;
+}
+
+.emotion-0>div>div>*:last-child {
+  margin: 0;
+}
+
+.emotion-0 p {
+  margin: 0;
+}
+
+.emotion-0 p,
+.emotion-0 a {
+  font-size: 13px;
+}
+
+.emotion-0 a:hover {
+  text-underline-offset: 3px;
 }
 
 .dark-theme .emotion-0 {
@@ -208,6 +231,8 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  margin: 16px 0;
+  font-size: 13px;
   background-color: #E1F7FF;
   border: 1px solid #C3E7FE;
   color: #083C90;
@@ -225,6 +250,27 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   min-height: 44px;
   padding: 9px 12px 9px 20px;
   position: relative;
+}
+
+.emotion-0>div>div>* {
+  margin: 0 0 12px;
+}
+
+.emotion-0>div>div>*:last-child {
+  margin: 0;
+}
+
+.emotion-0 p {
+  margin: 0;
+}
+
+.emotion-0 p,
+.emotion-0 a {
+  font-size: 13px;
+}
+
+.emotion-0 a:hover {
+  text-underline-offset: 3px;
 }
 
 .dark-theme .emotion-0 {
@@ -405,6 +451,8 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  margin: 16px 0;
+  font-size: 13px;
   background-color: #E1F7FF;
   border: 1px solid #C3E7FE;
   color: #083C90;
@@ -422,6 +470,27 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   min-height: 44px;
   padding: 9px 12px 9px 20px;
   position: relative;
+}
+
+.emotion-0>div>div>* {
+  margin: 0 0 12px;
+}
+
+.emotion-0>div>div>*:last-child {
+  margin: 0;
+}
+
+.emotion-0 p {
+  margin: 0;
+}
+
+.emotion-0 p,
+.emotion-0 a {
+  font-size: 13px;
+}
+
+.emotion-0 a:hover {
+  text-underline-offset: 3px;
 }
 
 .dark-theme .emotion-0 {
@@ -600,6 +669,8 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
     href="https://university.mongodb.com/"
   />
   .emotion-0 {
+  margin: 16px 0;
+  font-size: 13px;
   background-color: #E1F7FF;
   border: 1px solid #C3E7FE;
   color: #083C90;
@@ -617,6 +688,27 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   min-height: 44px;
   padding: 9px 12px 9px 20px;
   position: relative;
+}
+
+.emotion-0>div>div>* {
+  margin: 0 0 12px;
+}
+
+.emotion-0>div>div>*:last-child {
+  margin: 0;
+}
+
+.emotion-0 p {
+  margin: 0;
+}
+
+.emotion-0 p,
+.emotion-0 a {
+  font-size: 13px;
+}
+
+.emotion-0 a:hover {
+  text-underline-offset: 3px;
 }
 
 .dark-theme .emotion-0 {
