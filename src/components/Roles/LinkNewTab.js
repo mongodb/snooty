@@ -14,6 +14,7 @@ const LinkNewTab = ({ nodeData: { children, target } }) => (
 LinkNewTab.propTypes = {
   nodeData: PropTypes.shape({
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
+    target: PropTypes.string.isRequired,
   }).isRequired,
 };
 
