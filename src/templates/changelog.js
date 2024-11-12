@@ -24,9 +24,12 @@ const DocumentContainer = styled('main')`
   }
 `;
 
-const Changelog = ({ children }) => (
+const Changelog = ({ children, offlineBanner }) => (
   <DocumentContainer>
-    <Wrapper>{children}</Wrapper>
+    <Wrapper>
+      {offlineBanner}
+      {children}
+    </Wrapper>
   </DocumentContainer>
 );
 

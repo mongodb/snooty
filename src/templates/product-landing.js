@@ -182,7 +182,7 @@ const Wrapper = styled('main')`
 
 const REALM_LIGHT_HERO_PAGES = ['index.txt'];
 
-const ProductLanding = ({ children, data: { page } }) => {
+const ProductLanding = ({ children, data: { page }, offlineBanner }) => {
   const { project } = useSnootyMetadata();
   const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
@@ -193,15 +193,16 @@ const ProductLanding = ({ children, data: { page } }) => {
 
   // shallow copy children, and search for existence of banner
   const shallowChildren = children.reduce((res, child) => {
-    const copiedChildren = child.props.nodeData.children.map((childNode) => {
-      const newNode = {};
-      for (let property in childNode) {
-        if (property !== 'children') {
-          newNode[property] = childNode[property];
+    const copiedChildren =
+      child.props.nodeData?.children?.map((childNode) => {
+        const newNode = {};
+        for (let property in childNode) {
+          if (property !== 'children') {
+            newNode[property] = childNode[property];
+          }
         }
-      }
-      return newNode;
-    });
+        return newNode;
+      }) ?? [];
     res = res.concat(copiedChildren);
     return res;
   }, []);
@@ -217,6 +218,7 @@ const ProductLanding = ({ children, data: { page } }) => {
       hasLightHero={hasLightHero}
       hasMaxWidthParagraphs={hasMaxWidthParagraphs}
     >
+      {offlineBanner}
       {children}
     </Wrapper>
   );

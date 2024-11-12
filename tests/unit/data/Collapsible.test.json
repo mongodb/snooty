@@ -53,6 +53,7 @@
    "options": {
       "heading": "This is a heading",
       "sub_heading": "This is a subheading",
-      "id": "this-is-a-heading"
+      "id": "this-is-a-heading",
+      "expanded": false
    }
 }
