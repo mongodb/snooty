@@ -8,7 +8,12 @@ const Wrapper = styled(MainColumn)`
   margin-right: 160px;
 `;
 
-const Instruqt = ({ children }) => <Wrapper>{children}</Wrapper>;
+const Instruqt = ({ children, offlineBanner }) => (
+  <Wrapper>
+    {offlineBanner}
+    {children}
+  </Wrapper>
+);
 
 Instruqt.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
