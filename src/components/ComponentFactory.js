@@ -78,10 +78,10 @@ import RoleGUILabel from './Roles/GUILabel';
 import RoleHighlight from './Roles/Highlight';
 import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
+import RoleLinkNewTab from './Roles/LinkNewTab';
 import RoleRed from './Roles/Red';
 import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
-import LinkNewTab from './Roles/LinkNewTab';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -123,7 +123,7 @@ const roleMap = {
   subscript: Subscript,
   sup: Superscript,
   superscript: Superscript,
-  'link-new-tab': LinkNewTab,
+  'link-new-tab': RoleLinkNewTab,
 };
 
 const componentMap = {
