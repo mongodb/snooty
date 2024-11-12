@@ -93,6 +93,7 @@ const Link = ({
   showLinkArrow,
   hideExternalIcon: hideExternalIconProp,
   showExternalIcon,
+  openInNewTab,
   ...other
 }) => {
   if (!to) to = '';
@@ -142,7 +143,7 @@ const Link = ({
       className={joinClassNames(lgLinkStyling, className)}
       href={to}
       hideExternalIcon={!showExtIcon}
-      target={target}
+      target={openInNewTab ? '_blank' : target}
       {...anchorProps}
     >
       {children}

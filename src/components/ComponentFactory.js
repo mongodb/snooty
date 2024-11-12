@@ -81,6 +81,7 @@ import RoleKbd from './Roles/Kbd';
 import RoleRed from './Roles/Red';
 import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
+import LinkNewTab from './Roles/LinkNewTab';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -122,6 +123,7 @@ const roleMap = {
   subscript: Subscript,
   sup: Superscript,
   superscript: Superscript,
+  'link-new-tab': LinkNewTab,
 };
 
 const componentMap = {
