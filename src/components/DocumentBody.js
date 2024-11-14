@@ -16,6 +16,9 @@ import { PageContext } from '../context/page-context';
 import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
 import { TEMPLATE_CONTAINER_ID } from '../constants';
+import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
+import { getCompleteUrl, getUrl } from '../utils/url-utils';
+import OfflineBanner from './Banner/OfflineBanner';
 import SEO from './SEO';
 import FootnoteContext from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
@@ -134,15 +137,28 @@ const DocumentBody = (props) => {
     sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
   }
 
+  const OfflineBannerComponent = useMemo(() => {
+    if (!isOfflineDocsBuild) return <></>;
+    const currentBranch = repoBranches.branches.find((repoBranch) => repoBranch.gitBranchName === branch);
+    const currentBranchPrefix =
+      currentBranch?.urlSlug ?? currentBranch?.urlAliases?.[0] ?? currentBranch?.gitBranchName ?? '';
+    return (
+      <OfflineBanner
+        linkUrl={getCompleteUrl(getUrl(currentBranchPrefix, project, repoBranches.siteBasePrefix, slug))}
+        template={template}
+      />
+    );
+  }, [branch, project, repoBranches.branches, repoBranches.siteBasePrefix, slug, template]);
+
   return (
     <>
-      <TabProvider selectors={page?.options?.selectors}>
+      <TabProvider selectors={page?.options?.selectors} defaultTabs={page?.options?.default_tabs}>
         <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
           <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
             <FootnoteContext.Provider value={{ footnotes }}>
               <PageContext.Provider value={{ page, template, slug, options: page?.options, tabsMainColumn }}>
                 <div id={TEMPLATE_CONTAINER_ID}>
-                  <Template {...props} useChatbot={useChatbot}>
+                  <Template {...props} useChatbot={useChatbot} offlineBanner={OfflineBannerComponent}>
                     {pageNodes.map((child, index) => (
                       <ComponentFactory
                         key={index}

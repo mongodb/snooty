@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Icon, { glyphs } from '@leafygreen-ui/icon';
 import ComponentFactory from '../ComponentFactory';
@@ -61,9 +61,9 @@ const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
   }
 
   return (
-    <a href={options?.url} css={linkStyling}>
-      <div css={videoBannerStyling}>
-        <div css={lgIconStyling}>
+    <a href={options?.url} className={cx(linkStyling)}>
+      <div className={cx(videoBannerStyling)}>
+        <div className={cx(lgIconStyling)}>
           <Icon glyph={lgIcon} fill={palette.blue.base} />
         </div>
         {children.map((child, i) => (

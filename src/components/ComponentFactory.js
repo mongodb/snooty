@@ -78,6 +78,7 @@ import RoleGUILabel from './Roles/GUILabel';
 import RoleHighlight from './Roles/Highlight';
 import RoleIcon from './Roles/Icon';
 import RoleKbd from './Roles/Kbd';
+import RoleLinkNewTab from './Roles/LinkNewTab';
 import RoleRed from './Roles/Red';
 import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
@@ -122,6 +123,7 @@ const roleMap = {
   subscript: Subscript,
   sup: Superscript,
   superscript: Superscript,
+  'link-new-tab': RoleLinkNewTab,
 };
 
 const componentMap = {
