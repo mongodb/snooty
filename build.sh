@@ -8,7 +8,7 @@ PARSER_VERSION=0.18.6
 # If the rule doesn't exist, the error doesn't interrupt the build process.
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
-echo "printing the repo name $1"
+echo "printing the repo name $1 and second arg $2"
 # cloning the content repo
 echo "cloning content repo: ${TESTING_CONTENT_REPO}"
 git clone https://github.com/${ORGANIZATION}/${TESTING_CONTENT_REPO}.git
