@@ -12,8 +12,8 @@ echo "Parser version $PARSER_VERSION"
 
 # cloning the content repo
 echo "Cloning content repo: ${TESTING_REPO_NAME}"
-git clone https://github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}.git 
-cd $TESTING_REPO_NAME && git checkout $TESTING_BRANCH_NAME
+git clone -b ${TESTING_BRANCH_NAME} https://github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}.git 
+
 
 
 # running the parser 
@@ -26,7 +26,7 @@ fi
 
 echo "======================================================================================================================================================================="
 echo "========================================================================== Running parser... =========================================================================="
-./snooty-parser/snooty/snooty build $(pwd)/${TESTING_REPO_NAME} --output=./bundle.zip
+./snooty-parser/snooty/snooty build $(pwd)/${TESTING_REPO_NAME}  --output=./bundle.zip
 echo "========================================================================== Parser complete ============================================================================"
 echo "======================================================================================================================================================================="
 
