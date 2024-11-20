@@ -3,7 +3,7 @@ name = "snooty-cache-plugin"
 
 [build]
 publish = "public"
-command = ". ./build.sh $TESTING_REPO"
+command = ". ./build.sh $REPO_ENTRY.repoName"
 
 [build.environment]
 TESTING_REPO = "docs-landing"
