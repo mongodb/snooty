@@ -13,7 +13,7 @@ echo "parser version $PARSER_VERSION"
 echo "printing the repo name $1 and args $2 $3 $4"
 # cloning the content repo
 echo "Cloning content repo: ${TESTING_REPO_NAME}"
-git clone https://github.com/${TESTING_REPO_NAME}/${TESTING_REPO_NAME}.git
+git clone https://github.com/${TESTING_REPO_NAME}/tree/${TESTING_BRANCH_NAME}.git
 
 
 # running the parser 
