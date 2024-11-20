@@ -1,18 +1,19 @@
 # variables that need to be changed based on the content repo you're working on -------------------------------------------
-TESTING_BRANCH=$1d
-TESTING_CONTENT_REPO=$2 # name of content repo
-ORGANIZATION=mongodb # name of org, usually mongodb or 10gen
+TESTING_ORGANIZATION=$1 # name of org, usually mongodb or 10gen
+TESTING_REPO_NAME=$2 # name of content repo
+TESTING_BRANCH_NAME=$3
 # -------------------------------------------------------------------------------------------------------------------------
-PARSER_VERSION=0.18.6
+PARSER_VERSION=$4
+echo "parser version $PARSER_VERSION"
 
 # This make command curls the examples for certain repos.
 # If the rule doesn't exist, the error doesn't interrupt the build process.
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
-echo "printing the repo name $1 and second arg $2"
+echo "printing the repo name $1 and args $2 $3 $4"
 # cloning the content repo
-echo "cloning content repo: ${TESTING_CONTENT_REPO}"
-git clone https://github.com/${ORGANIZATION}/${TESTING_CONTENT_REPO}.git
+echo "Cloning content repo: ${TESTING_REPO_NAME}"
+git clone https://github.com/${TESTING_REPO_NAME}/${TESTING_REPO_NAME}.git
 
 
 # running the parser 
@@ -25,7 +26,7 @@ fi
 
 echo "======================================================================================================================================================================="
 echo "========================================================================== Running parser... =========================================================================="
-./snooty-parser/snooty/snooty build $(pwd)/${TESTING_CONTENT_REPO} --output=./bundle.zip
+./snooty-parser/snooty/snooty build $(pwd)/${TESTING_REPO_NAME} --output=./bundle.zip
 echo "========================================================================== Parser complete ============================================================================"
 echo "======================================================================================================================================================================="
 
