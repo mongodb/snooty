@@ -60,6 +60,7 @@ const getPathPrefix = (pathPrefix) => {
  * Get site metadata used to identify this build and query correct documents
  */
 
+
 const siteMetadata = {
   useUnifiedSidenav: Boolean(process.env.USE_UNIFIED_SIDENAV),
   commitHash: process.env.COMMIT_HASH || '',
