@@ -4,3 +4,6 @@ name = "snooty-cache-plugin"
 [build]
 publish = "public"
 command = ". ./build.sh"
+
+[build.environment]
+TESTING_REPO = "docs-landing"
