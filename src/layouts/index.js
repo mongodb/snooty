@@ -13,6 +13,7 @@ import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
 import { getAllLocaleCssStrings } from '../utils/locale';
+import { siteMetadata } from '../utils/site-metadata';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -115,7 +116,8 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
-          {sidenav && !isInPresentationMode ? (
+          { siteMetadata.useUnifiedSidenav  ? <></> :
+          sidenav && !isInPresentationMode ? (
             <Sidenav
               chapters={chapters}
               guides={guides}

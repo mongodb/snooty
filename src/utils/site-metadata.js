@@ -60,8 +60,9 @@ const getPathPrefix = (pathPrefix) => {
  * Get site metadata used to identify this build and query correct documents
  */
 
-console.log(manifestMetadata)
+
 const siteMetadata = {
+  useUnifiedSidenav: Boolean(process.env.USE_UNIFIED_SIDENAV),
   commitHash: process.env.COMMIT_HASH || '',
   database: getDatabase(process.env.SNOOTY_ENV),
   reposDatabase: getReposDatabase(process.env.SNOOTY_ENV),
