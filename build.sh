@@ -4,16 +4,16 @@ TESTING_REPO_NAME=$2 # name of content repo
 TESTING_BRANCH_NAME=$3
 # -------------------------------------------------------------------------------------------------------------------------
 PARSER_VERSION=$4
-echo "parser version $PARSER_VERSION"
+echo "Parser version $PARSER_VERSION"
 
 # This make command curls the examples for certain repos.
 # If the rule doesn't exist, the error doesn't interrupt the build process.
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
-echo "printing the repo name $1 and args $2 $3 $4"
 # cloning the content repo
 echo "Cloning content repo: ${TESTING_REPO_NAME}"
-git clone https://github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}/tree/${TESTING_BRANCH_NAME}
+git clone https://github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}.git 
+cd $TESTING_REPO_NAME && git checkout $TESTING_BRANCH_NAME
 
 
 # running the parser 
