@@ -1,5 +1,5 @@
 # variables that need to be changed based on the content repo you're working on -------------------------------------------
-TESTING_CONTENT_REPO=docs-landing # name of content repo
+TESTING_CONTENT_REPO=$2 # name of content repo
 ORGANIZATION=mongodb # name of org, usually mongodb or 10gen
 # -------------------------------------------------------------------------------------------------------------------------
 PARSER_VERSION=0.18.6
