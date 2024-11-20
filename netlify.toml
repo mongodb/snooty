@@ -4,6 +4,3 @@ name = "snooty-cache-plugin"
 [build]
 publish = "public"
 command = ". ./build.sh $BRANCH_NAME $REPO_NAME"
-
-[build.environment]
-REPO_NAME = "docs-cpp"
