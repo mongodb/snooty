@@ -10,19 +10,12 @@ import { useFeedbackContext } from './context';
 import { FEEDBACK_BUTTON_TEXT } from './constants';
 
 const darkModePrestyling = css`
-  color: ${palette.green.dark2};
-  border-color: ${palette.green.dark2};
-
-  svg {
-    color: ${palette.green.dark2};
-  }
-
   .dark-theme & {
-    color: ${palette.green.base};
-    border-color: ${palette.green.base};
+    color: ${palette.white};
+    border-color: ${palette.gray.base};
 
     svg {
-      color: ${palette.green.base};
+      color: ${palette.white};
     }
   }
 `;
@@ -47,7 +40,7 @@ const FeedbackButton = () => {
           `
         )}
         onClick={() => (!feedback ? initializeFeedback() : abandon())}
-        variant={Variant.PrimaryOutline}
+        variant={Variant.Default}
         leftGlyph={<Icon glyph="Favorite" />}
       >
         {FEEDBACK_BUTTON_TEXT}
