@@ -96,7 +96,7 @@ npm run build:clean:stage
 
 When a commit is pushed, this automatically triggers a Netlify build on your branch. For every push, a deploy and deploy preview will be generated. 
 
-By default, the master branch of `docs-landing` will be parsed with the parser version specified in the `Netlify.toml` and built with the frontend version of your branch. However, if you'd like to build a different site or branch, or build with a different parser version, this can be easily done by just updating the values in the Netlify.toml accordingly(don't forget to update the `ORG_NAME` to `mongodb` or `10gen` depending on which org your repo belongs to!)
+By default, the master branch of `docs-landing` will be parsed with the parser version specified in the `Netlify.toml` and built using your branch as the frontend. If you'd like to build a different site or branch or build with a different parser version, this can be easily done by just updating the values in the Netlify.toml accordingly. Don't forget to update the `ORG_NAME` to `mongodb` or `10gen` depending on which org your repo belongs to!
 
 ## Releasing
 
