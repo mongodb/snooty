@@ -39,7 +39,8 @@ async function handler(req, context) {
     return handleURL({ url });
   }
 
-  return new Response('', { status: 200 });
+  // Expected to only work when a url query param is defined
+  return new Response(null, { status: 400 });
 }
 
 export default handler;
