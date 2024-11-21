@@ -92,6 +92,12 @@ npm run build:clean:stage
 
 :warning: Note: This will promote the contents of your local public directory. Your instance in staging may break or be outdated if you haven't run `npm run build` before `make stage`.
 
+## Staging with Netlify
+
+When a commit is pushed, this automatically triggers a Netlify build on your branch. For every push, a deploy and deploy preview will be generated. 
+
+By default, the master branch of `docs-landing` will be parsed with the parser version specified in the `Netlify.toml` and built with the frontend version of your branch. However, if you'd like to build a different site or branch, or build with a different parser version, this can be easily done by just updating the values in the Netlify.toml accordingly(don't forget to update the `ORG_NAME` to `mongodb` or `10gen` depending on which org your repo belongs to!)
+
 ## Releasing
 
 We have configured an automatic release process using [GitHub Actions](https://github.com/features/actions) that is triggered by [npm-version](https://docs.npmjs.com/cli/version). To release a version, you must have admin privileges in this repo. Then proceed as follows:
