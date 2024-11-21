@@ -1,15 +1,8 @@
 import axios from 'axios';
 
-async function handleURL({ url, ifModifiedSince }) {
+async function handleURL({ url }) {
   try {
-    const reqHeaders = {};
-
-    if (ifModifiedSince) {
-      reqHeaders['If-Modified-Since'] = ifModifiedSince;
-    }
-
-    const { data, status } = await axios.get(url, {
-      headers: reqHeaders,
+    const { data } = await axios.get(url, {
       // Throw error whenever response status >= 400
       validateStatus: (status) => {
         console.log(`Returning status ${status} for ${url}`);
@@ -18,7 +11,7 @@ async function handleURL({ url, ifModifiedSince }) {
     });
 
     return new Response(data, {
-      status,
+      status: 200,
       headers: {
         'Cache-Control': 'public, durable, max-age=300',
       },
@@ -36,15 +29,12 @@ async function handleURL({ url, ifModifiedSince }) {
 async function handler(req, context) {
   const params = context.url.searchParams;
   const url = params.get('url');
-  // Netlify does not seem to allow If-Modified-Since header, so we have to receive it differently
-  // https://docs.netlify.com/platform/caching/#vary-by-header
-  const ifModifiedSince = params.get('ifModifiedSince');
 
   // Log to help keep track of requests
   console.log({ req, context });
 
   if (url) {
-    return handleURL({ url, ifModifiedSince });
+    return handleURL({ url });
   }
 
   return new Response('', { status: 200 });
