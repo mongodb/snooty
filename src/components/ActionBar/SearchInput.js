@@ -37,7 +37,6 @@ const SearchInput = ({ className, slug }) => {
   const searchBoxRef = useRef();
   const inputRef = useRef();
   const { project, snootyEnv } = useSiteMetadata();
-  // const { darkMode } = useDarkMode();
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
   const { search } = useLocation();
   const docsets = useAllDocsets();
