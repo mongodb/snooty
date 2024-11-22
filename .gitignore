@@ -14,3 +14,5 @@ coverage/
 .env
 .swc/
 bundle.zip
+# Local Netlify folder
+.netlify
