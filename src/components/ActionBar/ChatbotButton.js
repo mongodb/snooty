@@ -1,5 +1,5 @@
 import React from 'react';
-import { useChatbotContext } from 'mongodb-chatbot-ui';
+import { useChatbotContext, ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch } from 'mongodb-chatbot-ui';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
@@ -37,6 +37,22 @@ const ChatbotButton = () => {
       <IconButton className={iconStyling} variant={'primaryOutline'} aria-label="Ask MongoDB AI" onClick={onClick}>
         <SparkleIcon />
       </IconButton>
+      <ModalView
+        inputBottomText={
+          'This is an experimental generative AI chatbot. All information should be verified prior to use.'
+        }
+        disclaimer={
+          <>
+            <MongoDbLegalDisclosure />
+            <PoweredByAtlasVectorSearch
+              linkStyle="text"
+              className={css`
+                margin-top: 8px;
+              `}
+            />
+          </>
+        }
+      />
     </>
   );
 };
