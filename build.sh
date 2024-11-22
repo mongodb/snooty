@@ -1,21 +1,23 @@
 # variables that need to be changed based on the content repo you're working on -------------------------------------------
-TESTING_CONTENT_REPO=docs-landing # name of content repo
-ORGANIZATION=mongodb # name of org, usually mongodb or 10gen
+TESTING_ORGANIZATION=$1 # name of org, usually mongodb or 10gen
+TESTING_REPO_NAME=$2 # name of content repo
+TESTING_BRANCH_NAME=$3 # name of the branch
+PARSER_VERSION=$4 # version of the parser to download
 # -------------------------------------------------------------------------------------------------------------------------
-PARSER_VERSION=0.18.7
 
 # This make command curls the examples for certain repos.
 # If the rule doesn't exist, the error doesn't interrupt the build process.
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
 # cloning the content repo
-echo "cloning content repo: ${TESTING_CONTENT_REPO}"
-git clone https://github.com/${ORGANIZATION}/${TESTING_CONTENT_REPO}.git
+echo "Cloning content repo: ${TESTING_REPO_NAME}"
+git clone -b ${TESTING_BRANCH_NAME} https://github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}.git 
+
 
 
 # running the parser 
 if [ ! -d "snooty-parser" ]; then
-  echo "snooty parser not installed, downloading..."
+  echo "Snooty parser not installed, downloading parser version $PARSER_VERSION ..."
   curl -L -o snooty-parser.zip https://github.com/mongodb/snooty-parser/releases/download/v${PARSER_VERSION}/snooty-v${PARSER_VERSION}-linux_x86_64.zip
   unzip -d ./snooty-parser snooty-parser.zip
   chmod +x ./snooty-parser/snooty
@@ -23,7 +25,7 @@ fi
 
 echo "======================================================================================================================================================================="
 echo "========================================================================== Running parser... =========================================================================="
-./snooty-parser/snooty/snooty build $(pwd)/${TESTING_CONTENT_REPO} --output=./bundle.zip
+./snooty-parser/snooty/snooty build $(pwd)/${TESTING_REPO_NAME}  --output=./bundle.zip
 echo "========================================================================== Parser complete ============================================================================"
 echo "======================================================================================================================================================================="
 
