@@ -2,10 +2,9 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
-import { CONTENT_MAX_WIDTH } from '../../templates/product-landing';
 import { displayNone } from '../../utils/display-none';
 
-const DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH = '236px';
+const DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH = '400px';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
@@ -41,10 +40,7 @@ export const actionBarStyling = css`
 // used for :template: options - 'product-landing', 'changelog'
 const gridStyling = css`
   display: grid;
-  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${CONTENT_MAX_WIDTH}px) minmax(
-      ${DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH},
-      1fr
-    );
+  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(2, minmax(0, 600px)) minmax(${theme.size.xlarge}, 1fr);
 
   @media ${theme.screenSize.upToLarge} {
     grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
@@ -219,12 +215,12 @@ export const ActionsBox = styled('div')`
   grid-column: -2/-1;
 
   @media ${theme.screenSize.upToLarge} {
+    column-gap: 1px;
     margin-right: ${theme.size.medium};
   }
 
   @media ${theme.screenSize.upToMedium} {
-    margin-left: ${theme.size.small};
-    column-gap: ${theme.size.small};
+    margin-left: 1px;
   }
 `;
 
@@ -252,6 +248,7 @@ export const overlineStyling = css`
 export const searchIconStyling = css`
   ${displayNone.onLargerThanMedium};
   float: right;
+  justify-content: right;
 `;
 
 // using content before/after to prevent event bubbling up from lg/search-input/search-result

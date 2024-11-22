@@ -117,10 +117,6 @@ const SearchInput = ({ className, slug }) => {
     return (window.location.href = `${fullSearchUrl}/?q=${searchValue}`);
   };
 
-  // const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(snootyEnv)
-  //   ? 'https://knowledge.mongodb.com/api/v1'
-  //   : 'https://knowledge.staging.corp.mongodb.com/api/v1';
-
   return (
     <StyledInputContainer className={cx(className)} mobileSearchActive={mobileSearchActive}>
       <StyledSearchBoxRef ref={searchBoxRef}>
@@ -155,22 +151,6 @@ const SearchInput = ({ className, slug }) => {
           Cancel
         </Link>
       )}
-      {/* <SuspenseHelper>
-        <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-          <SearchMenu
-            isOpen={!!searchValue.length && isOpen}
-            searchBoxRef={searchBoxRef}
-            searchValue={searchValue}
-            ref={menuRef}
-            selectedOption={selectedOption}
-            slug={slug}
-            isFocused={isFocused}
-            selectedResult={selectedResult}
-            setSelectedResult={setSelectedResult}
-            setChatbotAvail={setChatbotAvail}
-          ></SearchMenu>
-        </Chatbot>
-      </SuspenseHelper> */}
       {!mobileSearchActive && (
         <IconButton
           aria-label="Search MongoDB Docs"

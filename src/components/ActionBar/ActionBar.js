@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { lazy, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { Overline } from '@leafygreen-ui/typography';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { getNestedValue } from '../../utils/get-nested-value';
@@ -16,6 +17,7 @@ import {
   useFeedbackData,
   FeedbackContainer,
 } from '../Widgets/FeedbackWidget';
+import { SuspenseHelper } from '../SuspenseHelper';
 import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
 import {
@@ -27,11 +29,15 @@ import {
   overlineStyling,
 } from './styles';
 
+const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
+const ChatbotButton = lazy(() => import('./ChatbotButton'));
+
 export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
 
 const ActionBar = ({ template, slug, sidenav, ...props }) => {
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
+  const { snootyEnv } = useSiteMetadata();
   const feedbackData = useFeedbackData({
     slug,
     url,
@@ -42,6 +48,10 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
   const { fakeColumns, containerClassname, searchContainerClassname } = getContainerStyling(template);
 
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
+
+  const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(snootyEnv)
+    ? 'https://knowledge.mongodb.com/api/v1'
+    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
     <div
@@ -60,6 +70,12 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
       {!isOfflineDocsBuild && (
         <ActionsBox>
           {template !== 'openapi' && <DarkModeDropdown />}
+          <SuspenseHelper>
+            <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
+              <ChatbotButton></ChatbotButton>
+            </Chatbot>
+          </SuspenseHelper>
+
           {template !== 'errorpage' && !DEPRECATED_PROJECTS.includes(metadata.project) && (
             <FeedbackProvider page={feedbackData}>
               <FeedbackContainer>
