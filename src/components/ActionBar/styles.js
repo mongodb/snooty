@@ -186,7 +186,9 @@ export const searchInputStyling = ({ mobileSearchActive }) => css`
   ${displayNone.onMedium};
 
   @media ${theme.screenSize.upToMedium} {
-    font-size: ${theme.fontSize.default};
+    input[type='search'] {
+      font-size: ${theme.fontSize.default};
+    }
   }
 
   ${mobileSearchActive &&
