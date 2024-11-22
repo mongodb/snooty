@@ -5,7 +5,6 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { css, cx } from '@leafygreen-ui/emotion';
 import IconButton from '@leafygreen-ui/icon-button';
 import Icon from '@leafygreen-ui/icon';
-// import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { SearchInput as LGSearchInput } from '@leafygreen-ui/search-input';
 import { Link } from '@leafygreen-ui/typography';
 import { useAllDocsets } from '../../hooks/useAllDocsets';
@@ -18,9 +17,6 @@ import { localizePath } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { searchIconStyling, searchInputStyling, StyledInputContainer, StyledSearchBoxRef } from './styles';
 import { ShortcutIcon, SparkleIcon } from './SparkIcon';
-
-// const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
-// const SearchMenu = lazy(() => import('./SearchMenu'));
 
 export const PLACEHOLDER_TEXT = `Search MongoDB Docs`;
 const PLACEHOLDER_TEXT_MOBILE = 'Search';

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { Overline } from '@leafygreen-ui/typography';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
@@ -37,6 +38,7 @@ export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
 const ActionBar = ({ template, slug, sidenav, ...props }) => {
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
+  const { darkMode } = useDarkMode();
   const { snootyEnv } = useSiteMetadata();
   const feedbackData = useFeedbackData({
     slug,
@@ -71,8 +73,8 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
         <ActionsBox>
           {template !== 'openapi' && <DarkModeDropdown />}
           <SuspenseHelper>
-            <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL}>
-              <ChatbotButton></ChatbotButton>
+            <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
+              <ChatbotButton />
             </Chatbot>
           </SuspenseHelper>
 
