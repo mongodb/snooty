@@ -9,6 +9,7 @@ import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { getCurrLocale } from '../../utils/locale';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { SidenavContext } from '../Sidenav';
 import {
@@ -40,6 +41,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
   const metadata = useSnootyMetadata();
   const { darkMode } = useDarkMode();
   const { snootyEnv } = useSiteMetadata();
+  const locale = getCurrLocale();
   const feedbackData = useFeedbackData({
     slug,
     url,
@@ -72,11 +74,13 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
       {!isOfflineDocsBuild && (
         <ActionsBox>
           {template !== 'openapi' && <DarkModeDropdown />}
-          <SuspenseHelper>
-            <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-              <ChatbotButton />
-            </Chatbot>
-          </SuspenseHelper>
+          {locale === 'en-us' && (
+            <SuspenseHelper>
+              <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
+                <ChatbotButton />
+              </Chatbot>
+            </SuspenseHelper>
+          )}
 
           {template !== 'errorpage' && !DEPRECATED_PROJECTS.includes(metadata.project) && (
             <FeedbackProvider page={feedbackData}>
