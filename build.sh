@@ -10,7 +10,7 @@ PARSER_VERSION=$4 # version of the parser to download
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
 # cloning the content repo
-echo "Cloning content repo: ${TESTING_REPO_NAME}"
+echo "Cloning content repo: ${TESTING_REPO_NAME}, ${testing_key"
 echo " this is the ${testing_key}"
 git clone -b ${TESTING_BRANCH_NAME} https://github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}.git 
 
