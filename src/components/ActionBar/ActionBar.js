@@ -32,12 +32,15 @@ import {
   offlineStyling,
   overlineStyling,
   buttonStyling,
+  mobileButtonStyling,
 } from './styles';
+import { SparkleIcon } from './SparkIcon';
 
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
-const LazyChatbot = lazy(() => import('./LazyChatbot'));
+const ChatbotModal = lazy(() => import('./ChatbotModal'));
 
 export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
+const CHATBOT_TEXT = 'Ask MongoDB AI';
 
 const ActionBar = ({ template, slug, sidenav, ...props }) => {
   const url = isBrowser ? window.location.href : null;
@@ -55,7 +58,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
 
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
 
-  const onClick = () => {
+  const openChatbot = () => {
     reportAnalytics('Chatbot button clicked');
     setChatbotClicked((currVal) => !currVal);
   };
@@ -82,21 +85,20 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
       {!isOfflineDocsBuild && (
         <ActionsBox>
           {template !== 'openapi' && <DarkModeDropdown />}
-          {locale === 'en-us' && (
-            <Button
-              className={cx(buttonStyling)}
-              leftGlyph={<Icon glyph="Sparkle" />}
-              aria-label={'Ask MongoDB AI'}
-              variant={'primaryOutline'}
-              onClick={onClick}
-            >
-              Ask Mongodb AI
-            </Button>
-          )}
+          <Button
+            className={cx(buttonStyling)}
+            leftGlyph={<Icon glyph="Sparkle" />}
+            aria-label={CHATBOT_TEXT}
+            variant={'primaryOutline'}
+            onClick={openChatbot}
+          >
+            {CHATBOT_TEXT}
+          </Button>
+          <SparkleIcon className={cx(mobileButtonStyling)} glyph={'Sparkle'} onClick={openChatbot} />
           {locale === 'en-us' && (
             <SuspenseHelper>
               <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-                <LazyChatbot chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
+                <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
               </Chatbot>
             </SuspenseHelper>
           )}

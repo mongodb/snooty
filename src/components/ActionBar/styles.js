@@ -70,6 +70,10 @@ const flexStyling = css`
 const middleAlignment = css`
   display: grid;
   ${centerGridStyling}
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-template-columns: repeat(12, 1fr);
+  }
 `;
 
 const leftInGrid = css`
@@ -99,7 +103,6 @@ const centerInGrid = css`
   }
   @media ${theme.screenSize.upToMedium} {
     grid-column: 3/-2;
-    padding-right: ${theme.size.small};
   }
 `;
 
@@ -272,6 +275,12 @@ export const searchIconStyling = css`
   ${displayNone.onLargerThanMedium};
   float: right;
   justify-content: right;
+
+  @media ${theme.screenSize.upToMedium} {
+    > div {
+      justify-content: flex-end;
+    }
+  }
 `;
 
 export const offlineStyling = css`
@@ -282,5 +291,14 @@ export const offlineStyling = css`
 
 export const buttonStyling = css`
   text-wrap-mode: nowrap;
-  ${displayNone.onMobileAndTablet}
+  ${displayNone.onMobileAndTablet};
+
+  &:not(:lang(EN)) {
+    display: none;
+  }
+`;
+
+export const mobileButtonStyling = css`
+  cursor: pointer;
+  ${displayNone.onLargerThanTablet};
 `;

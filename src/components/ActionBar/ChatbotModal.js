@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useChatbotContext, ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch } from 'mongodb-chatbot-ui';
 import { css } from '@leafygreen-ui/emotion';
 
-const LazyChatbot = ({ chatbotClicked, setChatbotClicked }) => {
+const ChatbotModal = ({ chatbotClicked, setChatbotClicked }) => {
   const { openChat } = useChatbotContext();
   useEffect(() => {
     if (chatbotClicked) {
@@ -31,4 +31,4 @@ const LazyChatbot = ({ chatbotClicked, setChatbotClicked }) => {
   );
 };
 
-export default LazyChatbot;
+export default ChatbotModal;
