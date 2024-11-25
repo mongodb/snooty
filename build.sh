@@ -19,7 +19,7 @@ git clone -b ${TESTING_BRANCH_NAME} https://github.com/${TESTING_ORGANIZATION}/$
 # running the parser 
 if [ ! -d "snooty-parser" ]; then
   echo "Snooty parser not installed, downloading parser version $PARSER_VERSION ..."
-  curl -L -o snooty-parser.zip https://github.com/mongodb/snooty-parser/releases/download/v${PARSER_VERSION}/snooty-v${PARSER_VERSION}-linux_x86_64.zip
+  curl -L -o snooty-parser.zip https://${GITHUB_BOT_PWD}@github.com/mongodb/snooty-parser/releases/download/v${PARSER_VERSION}/snooty-v${PARSER_VERSION}-linux_x86_64.zip
   unzip -d ./snooty-parser snooty-parser.zip
   chmod +x ./snooty-parser/snooty
 fi
