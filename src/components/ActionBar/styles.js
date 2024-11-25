@@ -4,7 +4,7 @@ import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { displayNone } from '../../utils/display-none';
 
-const DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH = '400px';
+const DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH = '375px';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
@@ -129,6 +129,7 @@ export const ActionBarSearchContainer = styled.div`
   align-items: center;
   width: 100%;
   background: inherit;
+  padding-right: ${theme.size.default};
 
   @media ${theme.screenSize.upToLarge} {
     max-width: unset;
