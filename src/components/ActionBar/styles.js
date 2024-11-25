@@ -108,7 +108,6 @@ export const getContainerStyling = (template) => {
     searchContainerClassname,
     fakeColumns = false;
 
-  console.log('check template ', template);
   switch (template) {
     case 'product-landing':
       containerClassname = gridStyling;
@@ -146,7 +145,10 @@ export const ActionBarSearchContainer = styled.div`
   align-items: center;
   width: 100%;
   background: inherit;
-  padding-right: ${theme.size.default};
+
+  @media ${theme.screenSize.mediumAndUp} {
+    padding-right: ${theme.size.default};
+  }
 
   @media ${theme.screenSize.upToLarge} {
     max-width: unset;
