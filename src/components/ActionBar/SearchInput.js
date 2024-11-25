@@ -16,21 +16,9 @@ import { isBrowser } from '../../utils/is-browser';
 import { localizePath } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { searchIconStyling, searchInputStyling, StyledInputContainer, StyledSearchBoxRef } from './styles';
-import { ShortcutIcon, SparkleIcon } from './SparkIcon';
 
 export const PLACEHOLDER_TEXT = `Search MongoDB Docs`;
 const PLACEHOLDER_TEXT_MOBILE = 'Search';
-
-export const SEARCH_SUGGESTIONS = [
-  {
-    copy: 'Search',
-  },
-  {
-    copy: 'Ask MongoDB AI',
-    icon: <SparkleIcon glyph={'Sparkle'} />,
-    shortcutIcon: <ShortcutIcon width={30} height={18} />,
-  },
-];
 
 const SearchInput = ({ className, slug }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -116,7 +104,7 @@ const SearchInput = ({ className, slug }) => {
     <StyledInputContainer className={cx(className)} mobileSearchActive={mobileSearchActive}>
       <StyledSearchBoxRef ref={searchBoxRef}>
         <LGSearchInput
-          aria-label="Search MongoDB Docs"
+          aria-label={PLACEHOLDER_TEXT}
           className={searchInputStyling({ mobileSearchActive })}
           value={searchValue}
           placeholder={isMobile ? PLACEHOLDER_TEXT_MOBILE : PLACEHOLDER_TEXT}
@@ -148,7 +136,7 @@ const SearchInput = ({ className, slug }) => {
       )}
       {!mobileSearchActive && (
         <IconButton
-          aria-label="Search MongoDB Docs"
+          aria-label={PLACEHOLDER_TEXT}
           className={searchIconStyling}
           onClick={() => {
             setMobileSearchActive((state) => !state);
