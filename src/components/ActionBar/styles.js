@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { css } from '@leafygreen-ui/emotion';
 import { gridStyling as landingTemplateGridStyling } from '../../templates/landing';
+import { gridStyling as centerGridStyling } from '../../templates/NotFound';
 import { theme } from '../../theme/docsTheme';
 import { displayNone } from '../../utils/display-none';
 
@@ -68,20 +69,37 @@ const flexStyling = css`
 
 const middleAlignment = css`
   display: grid;
-  grid-template-columns: ${theme.size.xlarge} repeat(12, minmax(0, 1fr)) ${theme.size.xlarge};
+  ${centerGridStyling}
 `;
 
-const centerInGrid = css`
+const leftInGrid = css`
   grid-column: 2/-2;
 
   @media ${theme.screenSize.upToLarge} {
     grid-column: 2/-3;
+    padding-right: 0;
   }
   @media ${theme.screenSize.largeAndUp} {
     grid-column: 2/-8;
   }
   @media ${theme.screenSize.xLargeAndUp} {
     grid-column: 2/-7;
+  }
+`;
+
+const centerInGrid = css`
+  grid-column: 6/-5;
+
+  @media ${theme.screenSize.upToXLarge} {
+    grid-column: 4/-6;
+  }
+
+  @media ${theme.screenSize.upToLarge} {
+    grid-column: 3/-8;
+  }
+  @media ${theme.screenSize.upToMedium} {
+    grid-column: 3/-2;
+    padding-right: ${theme.size.small};
   }
 `;
 
@@ -98,7 +116,7 @@ export const getContainerStyling = (template) => {
       break;
     case 'landing':
       containerClassname = landingGridStyling;
-      searchContainerClassname = centerInGrid;
+      searchContainerClassname = leftInGrid;
       fakeColumns = true;
       break;
     case 'changelog':
@@ -134,10 +152,6 @@ export const ActionBarSearchContainer = styled.div`
     max-width: unset;
     justify-content: space-between;
     width: 100%;
-  }
-
-  @media ${theme.screenSize.upToLarge} {
-    padding-right: 0;
   }
 `;
 
