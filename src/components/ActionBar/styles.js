@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { css } from '@leafygreen-ui/emotion';
+import { gridStyling as landingTemplateGridStyling } from '../../templates/landing';
 import { theme } from '../../theme/docsTheme';
 import { displayNone } from '../../utils/display-none';
-
-const DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH = '375px';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
@@ -50,10 +49,7 @@ const gridStyling = css`
 // use strictly for :template: landing
 const landingGridStyling = css`
   display: grid;
-  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${theme.breakpoints.xxLarge}px) minmax(
-      ${DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH},
-      1fr
-    );
+  ${landingTemplateGridStyling}
   @media ${theme.screenSize.upToLarge} {
     grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
   }
@@ -79,13 +75,13 @@ const centerInGrid = css`
   grid-column: 2/-2;
 
   @media ${theme.screenSize.upToLarge} {
-    grid-column: 3/-3;
+    grid-column: 2/-3;
   }
   @media ${theme.screenSize.largeAndUp} {
-    grid-column: 4/-4;
+    grid-column: 2/-8;
   }
   @media ${theme.screenSize.xLargeAndUp} {
-    grid-column: 6/-5;
+    grid-column: 2/-7;
   }
 `;
 
@@ -93,6 +89,8 @@ export const getContainerStyling = (template) => {
   let containerClassname,
     searchContainerClassname,
     fakeColumns = false;
+
+  console.log('check template ', template);
   switch (template) {
     case 'product-landing':
       containerClassname = gridStyling;
@@ -100,6 +98,7 @@ export const getContainerStyling = (template) => {
       break;
     case 'landing':
       containerClassname = landingGridStyling;
+      searchContainerClassname = centerInGrid;
       fakeColumns = true;
       break;
     case 'changelog':
@@ -135,6 +134,10 @@ export const ActionBarSearchContainer = styled.div`
     max-width: unset;
     justify-content: space-between;
     width: 100%;
+  }
+
+  @media ${theme.screenSize.upToLarge} {
+    padding-right: 0;
   }
 `;
 
@@ -220,6 +223,7 @@ export const ActionsBox = styled('div')`
   @media ${theme.screenSize.upToLarge} {
     column-gap: 1px;
     margin-right: ${theme.size.medium};
+    margin-left: ${theme.size.small};
   }
 
   @media ${theme.screenSize.upToMedium} {
@@ -258,4 +262,9 @@ export const offlineStyling = css`
   @media ${theme.screenSize.largeAndUp} {
     display: none;
   }
+`;
+
+export const buttonStyling = css`
+  text-wrap-mode: nowrap;
+  ${displayNone.onMobileAndTablet}
 `;
