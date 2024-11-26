@@ -296,7 +296,11 @@ export const chatbotButtonStyling = css`
 `;
 
 export const chatbotMobileButtonStyling = css`
-  cursor: pointer;
   ${displayNone.onLargerThanTablet}
   ${hideOnEnLang}
+  color: ${palette.green.dark2};
+
+  .dark-theme & {
+    color: ${palette.green.dark1};
+  }
 `;

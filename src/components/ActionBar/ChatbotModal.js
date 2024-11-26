@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useChatbotContext, ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch } from 'mongodb-chatbot-ui';
 import { css } from '@leafygreen-ui/emotion';
+import { defaultSuggestedPrompts } from '../ChatbotUi';
 
 const ChatbotModal = ({ chatbotClicked, setChatbotClicked }) => {
   const { openChat } = useChatbotContext();
@@ -27,6 +28,8 @@ const ChatbotModal = ({ chatbotClicked, setChatbotClicked }) => {
           />
         </>
       }
+      initialMessageText={'Welcome to MongoDB AI'}
+      initialMessageSuggestedPrompts={defaultSuggestedPrompts}
     />
   );
 };

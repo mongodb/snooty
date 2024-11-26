@@ -5,6 +5,7 @@ import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { Overline } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import IconButton from '@leafygreen-ui/icon-button';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isBrowser } from '../../utils/is-browser';
 import { getPlaintext } from '../../utils/get-plaintext';
@@ -34,7 +35,6 @@ import {
   chatbotButtonStyling,
   chatbotMobileButtonStyling,
 } from './styles';
-import { SparkleIcon } from './SparkIcon';
 
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const ChatbotModal = lazy(() => import('./ChatbotModal'));
@@ -84,7 +84,6 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
       </ActionBarSearchContainer>
       {!isOfflineDocsBuild && (
         <ActionsBox>
-          {template !== 'openapi' && <DarkModeDropdown />}
           <Button
             className={cx(chatbotButtonStyling)}
             leftGlyph={<Icon glyph="Sparkle" />}
@@ -94,7 +93,9 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
           >
             {CHATBOT_TEXT}
           </Button>
-          <SparkleIcon className={cx(chatbotMobileButtonStyling)} glyph={'Sparkle'} onClick={openChatbot} />
+          <IconButton className={chatbotMobileButtonStyling} aria-label={CHATBOT_TEXT} onClick={openChatbot}>
+            <Icon glyph={'Sparkle'} />
+          </IconButton>
           {locale === 'en-us' && (
             <SuspenseHelper>
               <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
@@ -111,6 +112,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
               </FeedbackContainer>
             </FeedbackProvider>
           )}
+          {template !== 'openapi' && <DarkModeDropdown />}
         </ActionsBox>
       )}
     </div>
