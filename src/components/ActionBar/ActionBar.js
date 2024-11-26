@@ -31,8 +31,8 @@ import {
   getContainerStyling,
   offlineStyling,
   overlineStyling,
-  buttonStyling,
-  mobileButtonStyling,
+  chatbotButtonStyling,
+  chatbotMobileButtonStyling,
 } from './styles';
 import { SparkleIcon } from './SparkIcon';
 
@@ -86,7 +86,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
         <ActionsBox>
           {template !== 'openapi' && <DarkModeDropdown />}
           <Button
-            className={cx(buttonStyling)}
+            className={cx(chatbotButtonStyling)}
             leftGlyph={<Icon glyph="Sparkle" />}
             aria-label={CHATBOT_TEXT}
             variant={'primaryOutline'}
@@ -94,7 +94,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
           >
             {CHATBOT_TEXT}
           </Button>
-          <SparkleIcon className={cx(mobileButtonStyling)} glyph={'Sparkle'} onClick={openChatbot} />
+          <SparkleIcon className={cx(chatbotMobileButtonStyling)} glyph={'Sparkle'} onClick={openChatbot} />
           {locale === 'en-us' && (
             <SuspenseHelper>
               <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>

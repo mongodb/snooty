@@ -240,7 +240,7 @@ export const ActionsBox = styled('div')`
   grid-column: -2/-1;
 
   @media ${theme.screenSize.upToLarge} {
-    column-gap: 1px;
+    column-gap: 6px;
     margin-right: ${theme.size.medium};
     margin-left: ${theme.size.small};
   }
@@ -275,12 +275,6 @@ export const searchIconStyling = css`
   ${displayNone.onLargerThanMedium};
   float: right;
   justify-content: right;
-
-  @media ${theme.screenSize.upToMedium} {
-    > div {
-      justify-content: flex-end;
-    }
-  }
 `;
 
 export const offlineStyling = css`
@@ -289,16 +283,20 @@ export const offlineStyling = css`
   }
 `;
 
-export const buttonStyling = css`
-  text-wrap-mode: nowrap;
-  ${displayNone.onMobileAndTablet};
-
+const hideOnEnLang = `
   &:not(:lang(EN)) {
     display: none;
   }
 `;
 
-export const mobileButtonStyling = css`
+export const chatbotButtonStyling = css`
+  text-wrap-mode: nowrap;
+  ${displayNone.onMobileAndTablet};
+  ${hideOnEnLang}
+`;
+
+export const chatbotMobileButtonStyling = css`
   cursor: pointer;
-  ${displayNone.onLargerThanTablet};
+  ${displayNone.onLargerThanTablet}
+  ${hideOnEnLang}
 `;
