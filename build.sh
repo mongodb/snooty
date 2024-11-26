@@ -12,14 +12,14 @@ PARSER_VERSION=$4 # version of the parser to download
 # cloning the content repo
 echo "Cloning content repo: ${TESTING_REPO_NAME}, ${TESTING_KEY}"
 echo " this is the fifth arg $5"
-git clone -b ${TESTING_BRANCH_NAME} https://github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}.git 
+git clone -b ${TESTING_BRANCH_NAME} https://${GITHUB_BOT_PWD}@github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}.git 
 
 
 
 # running the parser 
 if [ ! -d "snooty-parser" ]; then
   echo "Snooty parser not installed, downloading parser version $PARSER_VERSION ..."
-  curl -L -o snooty-parser.zip https://${GITHUB_BOT_PWD}@github.com/mongodb/snooty-parser/releases/download/v${PARSER_VERSION}/snooty-v${PARSER_VERSION}-linux_x86_64.zip
+  curl -L -o snooty-parser.zip https://github.com/mongodb/snooty-parser/releases/download/v${PARSER_VERSION}/snooty-v${PARSER_VERSION}-linux_x86_64.zip
   unzip -d ./snooty-parser snooty-parser.zip
   chmod +x ./snooty-parser/snooty
 fi
