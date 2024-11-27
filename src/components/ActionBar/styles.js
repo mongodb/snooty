@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { css } from '@leafygreen-ui/emotion';
+import { gridStyling as landingTemplateGridStyling } from '../../templates/landing';
+import { gridStyling as centerGridStyling } from '../../templates/NotFound';
 import { theme } from '../../theme/docsTheme';
-import { CONTENT_MAX_WIDTH } from '../../templates/product-landing';
 import { displayNone } from '../../utils/display-none';
-
-const DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH = '236px';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
@@ -41,10 +40,7 @@ export const actionBarStyling = css`
 // used for :template: options - 'product-landing', 'changelog'
 const gridStyling = css`
   display: grid;
-  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${CONTENT_MAX_WIDTH}px) minmax(
-      ${DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH},
-      1fr
-    );
+  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(2, minmax(0, 600px)) minmax(${theme.size.xlarge}, 1fr);
 
   @media ${theme.screenSize.upToLarge} {
     grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
@@ -54,10 +50,7 @@ const gridStyling = css`
 // use strictly for :template: landing
 const landingGridStyling = css`
   display: grid;
-  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) minmax(0, ${theme.breakpoints.xxLarge}px) minmax(
-      ${DESKTOP_DARK_MODE_AND_FEEDBACK_BUTTONS_WIDTH},
-      1fr
-    );
+  ${landingTemplateGridStyling}
   @media ${theme.screenSize.upToLarge} {
     grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
   }
@@ -76,20 +69,40 @@ const flexStyling = css`
 
 const middleAlignment = css`
   display: grid;
-  grid-template-columns: ${theme.size.xlarge} repeat(12, minmax(0, 1fr)) ${theme.size.xlarge};
+  ${centerGridStyling}
+
+  @media ${theme.screenSize.upToMedium} {
+    grid-template-columns: repeat(12, 1fr);
+  }
 `;
 
-const centerInGrid = css`
+const leftInGrid = css`
   grid-column: 2/-2;
 
   @media ${theme.screenSize.upToLarge} {
-    grid-column: 3/-3;
+    grid-column: 2/-3;
+    padding-right: 0;
   }
   @media ${theme.screenSize.largeAndUp} {
-    grid-column: 4/-4;
+    grid-column: 2/-8;
   }
   @media ${theme.screenSize.xLargeAndUp} {
-    grid-column: 6/-5;
+    grid-column: 2/-7;
+  }
+`;
+
+const centerInGrid = css`
+  grid-column: 6/-5;
+
+  @media ${theme.screenSize.upToXLarge} {
+    grid-column: 4/-6;
+  }
+
+  @media ${theme.screenSize.upToLarge} {
+    grid-column: 3/-8;
+  }
+  @media ${theme.screenSize.upToMedium} {
+    grid-column: 3/-2;
   }
 `;
 
@@ -97,6 +110,7 @@ export const getContainerStyling = (template) => {
   let containerClassname,
     searchContainerClassname,
     fakeColumns = false;
+
   switch (template) {
     case 'product-landing':
       containerClassname = gridStyling;
@@ -104,6 +118,7 @@ export const getContainerStyling = (template) => {
       break;
     case 'landing':
       containerClassname = landingGridStyling;
+      searchContainerClassname = leftInGrid;
       fakeColumns = true;
       break;
     case 'changelog':
@@ -133,6 +148,10 @@ export const ActionBarSearchContainer = styled.div`
   align-items: center;
   width: 100%;
   background: inherit;
+
+  @media ${theme.screenSize.mediumAndUp} {
+    padding-right: ${theme.size.default};
+  }
 
   @media ${theme.screenSize.upToLarge} {
     max-width: unset;
@@ -221,12 +240,13 @@ export const ActionsBox = styled('div')`
   grid-column: -2/-1;
 
   @media ${theme.screenSize.upToLarge} {
+    column-gap: 6px;
     margin-right: ${theme.size.medium};
+    margin-left: ${theme.size.small};
   }
 
   @media ${theme.screenSize.upToMedium} {
-    margin-left: ${theme.size.small};
-    column-gap: ${theme.size.small};
+    margin-left: 1px;
   }
 `;
 
@@ -254,34 +274,33 @@ export const overlineStyling = css`
 export const searchIconStyling = css`
   ${displayNone.onLargerThanMedium};
   float: right;
-`;
-
-// using content before/after to prevent event bubbling up from lg/search-input/search-result
-// package above gets all text inside node, and sets the value of Input node of all text within search result:
-// https://github.com/mongodb/leafygreen-ui/blob/%40leafygreen-ui/search-input%402.1.4/packages/search-input/src/SearchInput/SearchInput.tsx#L149-L155
-export const suggestionStyling = ({ copy }) => css`
-  & > div:before {
-    content: '${copy} "';
-  }
-
-  & > div:after {
-    content: '"';
-  }
-
-  svg:first-of-type {
-    float: left;
-    margin-right: ${theme.size.tiny};
-  }
-
-  padding: ${theme.fontSize.tiny} ${theme.size.medium};
-
-  svg:last-of-type {
-    float: right;
-  }
+  justify-content: right;
 `;
 
 export const offlineStyling = css`
   @media ${theme.screenSize.largeAndUp} {
     display: none;
+  }
+`;
+
+const hideOnEnLang = `
+  &:not(:lang(EN)) {
+    display: none;
+  }
+`;
+
+export const chatbotButtonStyling = css`
+  text-wrap-mode: nowrap;
+  ${displayNone.onMobileAndTablet};
+  ${hideOnEnLang}
+`;
+
+export const chatbotMobileButtonStyling = css`
+  ${displayNone.onLargerThanTablet}
+  ${hideOnEnLang}
+  color: ${palette.green.dark2};
+
+  .dark-theme & {
+    color: ${palette.green.dark1};
   }
 `;
