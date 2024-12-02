@@ -5,11 +5,8 @@ import IconButton from '@leafygreen-ui/icon-button';
 import { Menu, MenuItem } from '@leafygreen-ui/menu';
 import { DarkModeContext } from '../../context/dark-mode-context';
 import { theme } from '../../theme/docsTheme';
-import IconDarkmode from '../icons/DarkMode';
-import useScreenSize from '../../hooks/useScreenSize';
-import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { reportAnalytics } from '../../utils/report-analytics';
-import { DEPRECATED_PROJECTS } from './ActionBar';
+import IconDarkmode from '../icons/DarkMode';
 
 const iconStyling = css`
   display: block;
@@ -33,7 +30,6 @@ const darkModeSvgStyle = {
 };
 
 const DarkModeDropdown = () => {
-  const metadata = useSnootyMetadata();
   const dropdownRef = useRef();
 
   // not using dark mode from LG/provider here to account for case of 'system' dark theme
@@ -52,16 +48,20 @@ const DarkModeDropdown = () => {
     [setDarkModePref, setOpen]
   );
 
-  const { isTabletOrMobile } = useScreenSize();
-  const justify = isTabletOrMobile || DEPRECATED_PROJECTS.includes(metadata.project) ? 'start' : 'end';
-
   return (
-    <div ref={dropdownRef}>
+    <div
+      className={cx(
+        css`
+          position: relative;
+        `
+      )}
+      ref={dropdownRef}
+    >
       <Menu
         className={cx(menuStyling)}
         portalContainer={dropdownRef.current}
         scrollContainer={dropdownRef.current}
-        justify={justify}
+        justify={'start'}
         align={'bottom'}
         open={open}
         setOpen={() => {
