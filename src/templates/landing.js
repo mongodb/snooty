@@ -4,8 +4,33 @@ import { useTheme, Global, css } from '@emotion/react';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import PropTypes from 'prop-types';
+import { theme } from '../theme/docsTheme';
 
 const CONTENT_MAX_WIDTH = 1440;
+
+export const gridStyling = `
+
+// Use leftmost and rightmost grid columns as "margins" to allow the hero image
+// to span across the page while remaining as part of the document flow
+@media ${theme.screenSize.mediumAndUp} {
+  grid-template-columns: ${`minmax(${theme.size.xlarge}, 1fr) repeat(12, minmax(0, ${
+    CONTENT_MAX_WIDTH / 12
+  }px)) minmax(${theme.size.xlarge}, 1fr);`};
+}
+
+@media ${theme.screenSize.upToMedium} {
+  grid-template-columns: 48px repeat(12, 1fr) 48px;
+}
+
+@media ${theme.screenSize.upToSmall} {
+  grid-template-columns: ${theme.size.large} 1fr ${theme.size.large};
+}
+
+@media ${theme.screenSize.upToXSmall} {
+  grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
+}
+
+`;
 
 const Wrapper = styled('main')`
   margin: 0 auto;
@@ -16,26 +41,7 @@ const Wrapper = styled('main')`
     display: grid;
     grid-column: 1 / -1;
 
-    // Use leftmost and rightmost grid columns as "margins" to allow the hero image
-    // to span across the page while remaining as part of the document flow
-    @media ${({ theme }) => theme.screenSize.mediumAndUp} {
-      grid-template-columns: ${({ theme }) =>
-        `minmax(${theme.size.xlarge}, 1fr) repeat(12, minmax(0, ${CONTENT_MAX_WIDTH / 12}px)) minmax(${
-          theme.size.xlarge
-        }, 1fr);`};
-    }
-
-    @media ${({ theme }) => theme.screenSize.upToMedium} {
-      grid-template-columns: 48px repeat(12, 1fr) 48px;
-    }
-
-    @media ${({ theme }) => theme.screenSize.upToSmall} {
-      grid-template-columns: ${({ theme }) => theme.size.large} 1fr ${({ theme }) => theme.size.large};
-    }
-
-    @media ${({ theme }) => theme.screenSize.upToXSmall} {
-      grid-template-columns: ${({ theme }) => theme.size.medium} 1fr ${({ theme }) => theme.size.medium};
-    }
+    ${gridStyling};
 
     & > .card-group {
       @media ${({ theme }) => theme.screenSize.mediumAndUp} {
