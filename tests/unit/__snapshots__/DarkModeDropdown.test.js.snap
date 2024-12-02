@@ -3,6 +3,10 @@
 exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  position: relative;
+}
+
+.emotion-1 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -27,7 +31,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
   cursor: pointer;
 }
 
-.emotion-0:before {
+.emotion-1:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -43,43 +47,43 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
   transform: scale(0.8);
 }
 
-.emotion-0:active:before,
-.emotion-0:hover:before,
-.emotion-0:focus:before {
+.emotion-1:active:before,
+.emotion-1:hover:before,
+.emotion-1:focus:before {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-0:active,
-.emotion-0:hover {
+.emotion-1:active,
+.emotion-1:hover {
   color: #001E2B;
 }
 
-.emotion-0:active:before,
-.emotion-0:hover:before {
+.emotion-1:active:before,
+.emotion-1:hover:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-0:focus-visible {
+.emotion-1:focus-visible {
   color: #001E2B;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-0:focus-visible:before {
+.emotion-1:focus-visible:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-0>div {
+.emotion-1>div {
   position: relative;
 }
 
-.emotion-1 {
+.emotion-2 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -99,18 +103,20 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
   justify-content: center;
 }
 
-<div>
+<div
+    class="emotion-0"
+  >
     <button
       aria-disabled="false"
       aria-expanded="false"
       aria-haspopup="true"
       aria-label="Dark Mode Menu"
       aria-labelledby="Dark Mode Menu"
-      class="emotion-0"
+      class="emotion-1"
       tabindex="0"
     >
       <div
-        class="emotion-1"
+        class="emotion-2"
       >
         <svg
           aria-label="Sun Icon"
@@ -136,6 +142,10 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 1`] = `
 exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
 <DocumentFragment>
   .emotion-0 {
+  position: relative;
+}
+
+.emotion-1 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -160,7 +170,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   cursor: pointer;
 }
 
-.emotion-0:before {
+.emotion-1:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -176,43 +186,43 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   transform: scale(0.8);
 }
 
-.emotion-0:active:before,
-.emotion-0:hover:before,
-.emotion-0:focus:before {
+.emotion-1:active:before,
+.emotion-1:hover:before,
+.emotion-1:focus:before {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-0:active,
-.emotion-0:hover {
+.emotion-1:active,
+.emotion-1:hover {
   color: #001E2B;
 }
 
-.emotion-0:active:before,
-.emotion-0:hover:before {
+.emotion-1:active:before,
+.emotion-1:hover:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-0:focus-visible {
+.emotion-1:focus-visible {
   color: #001E2B;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-0:focus-visible:before {
+.emotion-1:focus-visible:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-0>div {
+.emotion-1>div {
   position: relative;
 }
 
-.emotion-1 {
+.emotion-2 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -232,11 +242,11 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   justify-content: center;
 }
 
-.emotion-2 {
+.emotion-3 {
   display: none;
 }
 
-.emotion-3 {
+.emotion-4 {
   position: absolute;
   -webkit-transition: -webkit-transform 150ms ease-in-out,opacity 150ms ease-in-out;
   transition: transform 150ms ease-in-out,opacity 150ms ease-in-out;
@@ -250,7 +260,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   transform: translate3d(0, -6px, 0) scale(0.8);
 }
 
-.emotion-4 {
+.emotion-5 {
   width: 210px;
   border-radius: 12px;
   overflow: auto;
@@ -264,7 +274,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   margin-top: 8px;
 }
 
-.emotion-5 {
+.emotion-6 {
   overflow: auto;
   list-style: none;
   margin-block-start: 0px;
@@ -274,7 +284,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   padding: 0px;
 }
 
-.emotion-6 {
+.emotion-7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -309,13 +319,13 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   background-color: #001E2B;
 }
 
-.emotion-6:focus {
+.emotion-7:focus {
   outline: none;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-6:before {
+.emotion-7:before {
   content: '';
   position: absolute;
   width: 4px;
@@ -326,48 +336,48 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   transition: background-color 150ms ease-in-out;
 }
 
-.emotion-6:hover {
+.emotion-7:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-6:hover,
-.emotion-6:active {
+.emotion-7:hover,
+.emotion-7:active {
   background-color: #1C2D38;
 }
 
-.emotion-6:before {
+.emotion-7:before {
   height: 22px;
 }
 
-.emotion-6:before {
+.emotion-7:before {
   background-color: #00ED64;
 }
 
-.emotion-6:hover {
+.emotion-7:hover {
   color: #00ED64;
 }
 
-.emotion-6:hover:before {
+.emotion-7:hover:before {
   background-color: #00ED64;
 }
 
-.emotion-6:focus-visible {
+.emotion-7:focus-visible {
   -webkit-text-decoration: none;
   text-decoration: none;
   background-color: #0C2657;
   color: #FFFFFF;
 }
 
-.emotion-6:focus-visible:before {
+.emotion-7:focus-visible:before {
   background-color: #0498EC;
 }
 
-.emotion-6::-moz-focus-inner {
+.emotion-7::-moz-focus-inner {
   border: 0;
 }
 
-.emotion-7 {
+.emotion-8 {
   margin-right: 16px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
@@ -376,17 +386,17 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   color: #00ED64;
 }
 
-.lg-ui-menu-item-container-0000:focus-visible .emotion-7 {
+.lg-ui-menu-item-container-0000:focus-visible .emotion-8 {
   color: #E1F7FF;
 }
 
-.emotion-8 {
+.emotion-9 {
   width: 100%;
   overflow: hidden;
   padding: 2px 0;
 }
 
-.emotion-9 {
+.emotion-10 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -409,7 +419,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   color: #00ED64;
 }
 
-.emotion-9:after {
+.emotion-10:after {
   content: attr(data-text);
   height: 0;
   font-weight: 700;
@@ -422,19 +432,19 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   pointer-events: none;
 }
 
-.emotion-9 .lg-ui-menu-item-container-0000:not(:disabled):hover .emotion-9 .lg-ui-menu-item-container-0000 {
+.emotion-10 .lg-ui-menu-item-container-0000:not(:disabled):hover .emotion-10 .lg-ui-menu-item-container-0000 {
   font-weight: 700;
 }
 
-.emotion-9 .lg-ui-menu-item-container-0000:not(:disabled):hover .emotion-9 .lg-ui-menu-item-container-0000 {
+.emotion-10 .lg-ui-menu-item-container-0000:not(:disabled):hover .emotion-10 .lg-ui-menu-item-container-0000 {
   color: #00ED64;
 }
 
-.lg-ui-menu-item-container-0000:focus-visible .emotion-9 {
+.lg-ui-menu-item-container-0000:focus-visible .emotion-10 {
   color: #E1F7FF;
 }
 
-.emotion-10 {
+.emotion-11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -468,13 +478,13 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   text-decoration: none;
 }
 
-.emotion-10:focus {
+.emotion-11:focus {
   outline: none;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-10:before {
+.emotion-11:before {
   content: '';
   position: absolute;
   width: 4px;
@@ -485,36 +495,36 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   transition: background-color 150ms ease-in-out;
 }
 
-.emotion-10:hover {
+.emotion-11:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-10:hover,
-.emotion-10:active {
+.emotion-11:hover,
+.emotion-11:active {
   background-color: #1C2D38;
 }
 
-.emotion-10:before {
+.emotion-11:before {
   height: 22px;
 }
 
-.emotion-10:focus-visible {
+.emotion-11:focus-visible {
   -webkit-text-decoration: none;
   text-decoration: none;
   background-color: #0C2657;
   color: #FFFFFF;
 }
 
-.emotion-10:focus-visible:before {
+.emotion-11:focus-visible:before {
   background-color: #0498EC;
 }
 
-.emotion-10::-moz-focus-inner {
+.emotion-11::-moz-focus-inner {
   border: 0;
 }
 
-.emotion-11 {
+.emotion-12 {
   margin-right: 16px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
@@ -522,11 +532,11 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   color: #889397;
 }
 
-.lg-ui-menu-item-container-0000:focus-visible .emotion-11 {
+.lg-ui-menu-item-container-0000:focus-visible .emotion-12 {
   color: #E1F7FF;
 }
 
-.emotion-13 {
+.emotion-14 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -547,7 +557,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   font-weight: 500;
 }
 
-.emotion-13:after {
+.emotion-14:after {
   content: attr(data-text);
   height: 0;
   font-weight: 700;
@@ -560,15 +570,15 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   pointer-events: none;
 }
 
-.emotion-13 .lg-ui-menu-item-container-0000:not(:disabled):hover .emotion-13 .lg-ui-menu-item-container-0000 {
+.emotion-14 .lg-ui-menu-item-container-0000:not(:disabled):hover .emotion-14 .lg-ui-menu-item-container-0000 {
   font-weight: 700;
 }
 
-.lg-ui-menu-item-container-0000:focus-visible .emotion-13 {
+.lg-ui-menu-item-container-0000:focus-visible .emotion-14 {
   color: #E1F7FF;
 }
 
-.emotion-15 {
+.emotion-16 {
   margin-right: 16px;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
@@ -576,26 +586,28 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
   color: #889397;
 }
 
-.lg-ui-menu-item-container-0000:focus-visible .emotion-15 {
+.lg-ui-menu-item-container-0000:focus-visible .emotion-16 {
   color: #E1F7FF;
 }
 
-.emotion-15 svg {
+.emotion-16 svg {
   margin-right: 16px;
 }
 
-<div>
+<div
+    class="emotion-0"
+  >
     <button
       aria-disabled="false"
       aria-expanded="true"
       aria-haspopup="true"
       aria-label="Dark Mode Menu"
       aria-labelledby="Dark Mode Menu"
-      class="emotion-0"
+      class="emotion-1"
       tabindex="0"
     >
       <div
-        class="emotion-1"
+        class="emotion-2"
       >
         <svg
           aria-label="Sun Icon"
@@ -613,21 +625,21 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
           />
         </svg>
         <span
-          class="emotion-2"
+          class="emotion-3"
         />
       </div>
     </button>
     <div
-      class="emotion-3"
+      class="emotion-4"
     >
       <div
         class="lg-ui-popover-content-0000"
       >
         <div
-          class="emotion-4"
+          class="emotion-5"
         >
           <ul
-            class="emotion-5"
+            class="emotion-6"
             role="menu"
           >
             <li
@@ -636,14 +648,14 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
               <button
                 aria-current="true"
                 aria-disabled="false"
-                class="lg-ui-menu-item-container-0000 emotion-6"
+                class="lg-ui-menu-item-container-0000 emotion-7"
                 role="menuitem"
                 tabindex="-1"
               >
                 <svg
                   alt=""
                   aria-hidden="true"
-                  class="emotion-7"
+                  class="emotion-8"
                   fill="none"
                   height="20"
                   role="presentation"
@@ -657,10 +669,10 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
                   />
                 </svg>
                 <div
-                  class="emotion-8"
+                  class="emotion-9"
                 >
                   <div
-                    class="emotion-9"
+                    class="emotion-10"
                     data-text="Light"
                   >
                     Light
@@ -674,14 +686,14 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
               <button
                 aria-current="false"
                 aria-disabled="false"
-                class="lg-ui-menu-item-container-0000 emotion-10"
+                class="lg-ui-menu-item-container-0000 emotion-11"
                 role="menuitem"
                 tabindex="-1"
               >
                 <svg
                   alt=""
                   aria-hidden="true"
-                  class="emotion-11"
+                  class="emotion-12"
                   fill="none"
                   height="20"
                   role="presentation"
@@ -695,10 +707,10 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
                   />
                 </svg>
                 <div
-                  class="emotion-8"
+                  class="emotion-9"
                 >
                   <div
-                    class="emotion-13"
+                    class="emotion-14"
                     data-text="Dark"
                   >
                     Dark
@@ -712,12 +724,12 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
               <button
                 aria-current="false"
                 aria-disabled="false"
-                class="lg-ui-menu-item-container-0000 emotion-10"
+                class="lg-ui-menu-item-container-0000 emotion-11"
                 role="menuitem"
                 tabindex="-1"
               >
                 <svg
-                  class="emotion-15"
+                  class="emotion-16"
                   height="20"
                   id="Layer_1"
                   viewBox="0 0 24 24"
@@ -754,10 +766,10 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
                   </g>
                 </svg>
                 <div
-                  class="emotion-8"
+                  class="emotion-9"
                 >
                   <div
-                    class="emotion-13"
+                    class="emotion-14"
                     data-text="System"
                   >
                     System
@@ -776,6 +788,10 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
 exports[`DarkMode Dropdown component updates dark mode when selecting a different option 1`] = `
 <DocumentFragment>
   .emotion-0 {
+  position: relative;
+}
+
+.emotion-1 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -800,7 +816,7 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
   cursor: pointer;
 }
 
-.emotion-0:before {
+.emotion-1:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -816,43 +832,43 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
   transform: scale(0.8);
 }
 
-.emotion-0:active:before,
-.emotion-0:hover:before,
-.emotion-0:focus:before {
+.emotion-1:active:before,
+.emotion-1:hover:before,
+.emotion-1:focus:before {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
 }
 
-.emotion-0:focus {
+.emotion-1:focus {
   outline: none;
 }
 
-.emotion-0:active,
-.emotion-0:hover {
+.emotion-1:active,
+.emotion-1:hover {
   color: #F9FBFA;
 }
 
-.emotion-0:active:before,
-.emotion-0:hover:before {
+.emotion-1:active:before,
+.emotion-1:hover:before {
   background-color: rgba(232,237,235,0.1);
 }
 
-.emotion-0:focus-visible {
+.emotion-1:focus-visible {
   color: #F9FBFA;
   box-shadow: 0 0 0 2px #001E2B,0 0 0 4px #0498EC;
 }
 
-.emotion-0:focus-visible:before {
+.emotion-1:focus-visible:before {
   background-color: rgba(232,237,235,0.1);
 }
 
-.emotion-0>div {
+.emotion-1>div {
   position: relative;
 }
 
-.emotion-1 {
+.emotion-2 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -872,18 +888,20 @@ exports[`DarkMode Dropdown component updates dark mode when selecting a differen
   justify-content: center;
 }
 
-<div>
+<div
+    class="emotion-0"
+  >
     <button
       aria-disabled="false"
       aria-expanded="false"
       aria-haspopup="true"
       aria-label="Dark Mode Menu"
       aria-labelledby="Dark Mode Menu"
-      class="emotion-0"
+      class="emotion-1"
       tabindex="0"
     >
       <div
-        class="emotion-1"
+        class="emotion-2"
       >
         <svg
           aria-label="Moon Icon"
