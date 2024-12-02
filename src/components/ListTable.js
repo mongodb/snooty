@@ -1,12 +1,23 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
+import { snakeCase } from 'lodash';
 import PropTypes from 'prop-types';
-import { Cell, HeaderCell, HeaderRow, Row, Table, TableBody, TableHead } from '@leafygreen-ui/table';
+import {
+  Cell,
+  HeaderCell,
+  flexRender,
+  HeaderRow,
+  Row,
+  Table,
+  TableBody,
+  TableHead,
+  useLeafyGreenTable,
+} from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { Theme } from '@leafygreen-ui/lib';
+// import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import { AncestorComponentContextProvider, useAncestorComponentContext } from '../context/ancestor-components-context';
+import { findKeyValuePair } from '../utils/find-key-value-pair';
 import ComponentFactory from './ComponentFactory';
 
 const align = (key) => {
@@ -62,6 +73,14 @@ const baseCellStyle = css`
 const bodyCellStyle = css`
   overflow-wrap: anywhere;
   word-break: break-word;
+  align-content: flex-start;
+
+  & > div {
+    min-height: unset;
+    max-height: unset;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
   *,
   p,
@@ -85,30 +104,31 @@ const headerCellStyle = css`
   line-height: 24px;
   font-weight: 600;
   font-size: ${theme.fontSize.small};
+
+  // TODO: this can be updated with dicated widths
+  width: auto;
 `;
 
-const stubCellStyle = css`
-  background-color: ${palette.gray.light3};
-  border-right: 3px solid ${palette.gray.light2};
-  font-weight: 600;
+// const stubCellStyle = css`
+//   background-color: ${palette.gray.light3};
+//   border-right: 3px solid ${palette.gray.light2};
+//   font-weight: 600;
 
-  .dark-theme & {
-    background-color: ${palette.gray.dark4};
-    border-right: 3px solid ${palette.gray.dark2};
-  }
-`;
+//   .dark-theme & {
+//     background-color: ${palette.gray.dark4};
+//     border-right: 3px solid ${palette.gray.dark2};
+//   }
+// `;
 
-const zebraStripingStyle = css`
-  &:nth-of-type(even) {
-    background-color: ${palette.gray.light3};
+// const zebraStripingStyle = css`
+//   &:nth-of-type(even) {
+//     background-color: ${palette.gray.light3};
 
-    .dark-theme & {
-      background-color: ${palette.gray.dark4};
-    }
-  }
-`;
-
-const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
+//     .dark-theme & {
+//       background-color: ${palette.gray.dark4};
+//     }
+//   }
+// `;
 
 /**
  * recursive traversal of nodeLists' children to look for
@@ -159,43 +179,53 @@ const includesNestedTable = (rows) => {
   return rows.some((row) => checkNodeForTable(row));
 };
 
-const ListTableRow = ({ row = [], stubColumnCount, siteTheme, className, ...rest }) => (
-  <Row className={className}>
-    {row.map((cell, colIndex) => {
-      const skipPTag = hasOneChild(cell.children);
-      const contents = cell.children.map((child, i) => (
-        <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
-      ));
+const generateColumns = (headerRow, bodyRows) => {
+  const rowNames = (headerRow?.children ?? bodyRows).reduce((res, currNode) => {
+    const name = findKeyValuePair(currNode?.children ?? [], 'type', 'text')?.value ?? '';
+    res.push(name);
+    return res;
+  }, []);
 
-      const isStub = colIndex <= stubColumnCount - 1;
-      const role = isStub ? 'rowheader' : null;
+  return rowNames.map((rowName, index) => ({
+    accessorKey: rowName ? snakeCase(rowName) : index,
+    header: rowName,
+    // TODO: dictate width with widths option. can enable sorting, dictate width
+  }));
+};
 
-      return (
-        <Cell key={colIndex} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
-          {/* Wrap in div to ensure contents are structured properly */}
-          <div>{contents}</div>
-        </Cell>
+const generateRowsData = (bodyRowNodes, columns) => {
+  const rowNodes = bodyRowNodes.map((node) => node?.children[0]?.children ?? []);
+  const rows = rowNodes.map((rowNode) => {
+    return rowNode.reduce((res, columnNode, colIndex) => {
+      res[columns[colIndex].accessorKey] = (
+        <>
+          {columnNode.children.map((cellNode) => (
+            <ComponentFactory nodeData={cellNode} />
+          ))}
+        </>
       );
-    })}
-  </Row>
-);
+      return res;
+    }, {});
+  });
 
-ListTableRow.propTypes = {
-  row: PropTypes.arrayOf(PropTypes.object),
-  stubColumnCount: PropTypes.number.isRequired,
-  siteTheme: PropTypes.oneOf(Object.values(Theme)).isRequired,
+  return rows;
 };
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const ancestors = useAncestorComponentContext();
-  const { theme: siteTheme } = useDarkMode();
+  // const { theme: siteTheme } = useDarkMode();
+  // TODO: header row count should not be more than 1
+  // need a warning in parser
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
-  const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
+  // const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
   const bodyRows = children[0].children.slice(headerRowCount);
   const columnCount = bodyRows[0].children[0].children.length;
 
   // Check if :header-rows: 0 is specified or :header-rows: is omitted
-  const headerRows = headerRowCount > 0 ? children[0].children[0].children.slice(0, headerRowCount) : [];
+  const headerRows = useMemo(
+    () => (headerRowCount > 0 ? children[0].children[0].children.slice(0, headerRowCount) : []),
+    [children, headerRowCount]
+  );
 
   let widths = null;
   const customWidths = options?.widths;
@@ -215,6 +245,16 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const noTableNesting = !hasNestedTable && !ancestors?.table;
   const shouldAlternateRowColor = noTableNesting && bodyRows.length > 4;
 
+  const tableRef = useRef();
+  const columns = useMemo(() => generateColumns(headerRows[0], bodyRows), [headerRows, bodyRows]);
+  const data = useMemo(() => generateRowsData(bodyRows, columns), [bodyRows, columns]);
+  const table = useLeafyGreenTable({
+    containerRef: tableRef,
+    columns: columns,
+    data: data,
+  });
+  const { rows } = table.getRowModel();
+
   return (
     <AncestorComponentContextProvider component={'table'}>
       {elmIdsForScroll.map((id) => (
@@ -227,6 +267,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             customWidth: options?.width,
           })
         )}
+        ref={tableRef}
         shouldAlternateRowColor={shouldAlternateRowColor}
       >
         {widths && (
@@ -237,21 +278,12 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           </colgroup>
         )}
         <TableHead className={cx(theadStyle)}>
-          {headerRows.map((row, rowIndex) => (
-            <HeaderRow key={rowIndex} data-testid="leafygreen-ui-header-row">
-              {row.children.map((cell, colIndex) => {
-                const skipPTag = hasOneChild(cell.children);
+          {table.getHeaderGroups().map((headerGroup) => (
+            <HeaderRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
                 return (
-                  <HeaderCell
-                    className={cx(baseCellStyle, headerCellStyle)}
-                    key={`${rowIndex}-${colIndex}`}
-                    role="columnheader"
-                  >
-                    <div>
-                      {cell.children.map((child, i) => (
-                        <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-                      ))}
-                    </div>
+                  <HeaderCell className={cx(baseCellStyle, headerCellStyle)} key={header.id} header={header}>
+                    {flexRender(header.column.columnDef.header, header.getContext())}
                   </HeaderCell>
                 );
               })}
@@ -259,16 +291,19 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           ))}
         </TableHead>
         <TableBody>
-          {bodyRows.map((row, i) => (
-            <ListTableRow
-              key={i}
-              {...rest}
-              stubColumnCount={stubColumnCount}
-              row={row.children?.[0]?.children}
-              siteTheme={siteTheme}
-              className={shouldAlternateRowColor && zebraStripingStyle}
-            />
-          ))}
+          {rows.map((row) => {
+            return (
+              <Row key={row.id} row={row} className={cx('test-row')}>
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <Cell key={cell.id} className={cx(bodyCellStyle, baseCellStyle, 'body-cell')}>
+                      {cell.renderValue()}
+                    </Cell>
+                  );
+                })}
+              </Row>
+            );
+          })}
         </TableBody>
       </Table>
     </AncestorComponentContextProvider>
