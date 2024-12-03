@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Cell,
@@ -32,7 +32,9 @@ const styleTable = ({ customAlign, customWidth }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
-  table-layout: fixed;
+  > table {
+    table-layout: fixed;
+  }
 `;
 
 const theadStyle = css`
@@ -230,7 +232,6 @@ const generateRowsData = (bodyRowNodes, columns) => {
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const ancestors = useAncestorComponentContext();
-  // const { theme: siteTheme } = useDarkMode();
   // TODO: header row count should not be more than 1
   // need a warning in parser
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
@@ -239,9 +240,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const columnCount = bodyRows[0].children[0].children.length;
 
   // Check if :header-rows: 0 is specified or :header-rows: is omitted
-  const headerRows = useMemo(
-    () => (headerRowCount > 0 ? children[0].children[0].children.slice(0, headerRowCount) : []),
-    [children, headerRowCount]
+  const [headerRows] = useState(() =>
+    headerRowCount > 0 ? children[0].children[0].children.slice(0, headerRowCount) : []
   );
 
   let widths = null;
@@ -263,8 +263,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const shouldAlternateRowColor = noTableNesting && bodyRows.length > 4;
 
   const tableRef = useRef();
-  const columns = useMemo(() => generateColumns(headerRows[0], bodyRows), [headerRows, bodyRows]);
-  const data = useMemo(() => generateRowsData(bodyRows, columns), [bodyRows, columns]);
+  const [columns] = useState(() => generateColumns(headerRows[0], bodyRows));
+  const [data] = useState(() => generateRowsData(bodyRows, columns));
   const table = useLeafyGreenTable({
     containerRef: tableRef,
     columns: columns,

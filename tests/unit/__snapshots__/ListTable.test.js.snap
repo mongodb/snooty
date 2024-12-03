@@ -7,6 +7,9 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   width: 100%;
   position: relative;
   margin: 24px 0;
+}
+
+.emotion-0>table {
   table-layout: fixed;
 }
 
@@ -327,6 +330,9 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   width: 100%;
   position: relative;
   margin: 24px 0;
+}
+
+.emotion-0>table {
   table-layout: fixed;
 }
 
