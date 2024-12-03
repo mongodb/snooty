@@ -13,7 +13,6 @@ import {
 } from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
-// import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import { AncestorComponentContextProvider, useAncestorComponentContext } from '../context/ancestor-components-context';
 import ComponentFactory from './ComponentFactory';
@@ -33,6 +32,7 @@ const styleTable = ({ customAlign, customWidth }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
+  table-layout: fixed;
 `;
 
 const theadStyle = css`
@@ -180,11 +180,18 @@ const includesNestedTable = (rows) => {
 
 const generateColumns = (headerRow, bodyRows) => {
   if (!headerRow?.children) {
-    return bodyRows.map((_bodyRow, index) => ({
-      id: `column-${index}`,
-      accessorKey: `column-${index}`,
-      header: '',
-    }));
+    // generate columns from bodyRows
+    const flattenedRows = bodyRows.map((bodyRow) => bodyRow.children[0].children);
+    const maxColumns = Math.max(...flattenedRows.map((row) => row.length));
+    const res = [];
+    for (let colIndex = 0; colIndex < maxColumns; colIndex++) {
+      res.push({
+        id: `column-${colIndex}`,
+        accessorKey: `column-${colIndex}`,
+        header: '',
+      });
+    }
+    return res;
   }
 
   return headerRow.children.map((listItemNode, index) => {
