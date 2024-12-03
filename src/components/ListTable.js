@@ -1,5 +1,4 @@
 import React, { useMemo, useRef } from 'react';
-import { snakeCase } from 'lodash';
 import PropTypes from 'prop-types';
 import {
   Cell,
@@ -17,7 +16,6 @@ import { css, cx } from '@leafygreen-ui/emotion';
 // import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../theme/docsTheme';
 import { AncestorComponentContextProvider, useAncestorComponentContext } from '../context/ancestor-components-context';
-import { findKeyValuePair } from '../utils/find-key-value-pair';
 import ComponentFactory from './ComponentFactory';
 
 const align = (key) => {
@@ -89,13 +87,14 @@ const bodyCellStyle = css`
   }
 
   // Target any nested components (paragraphs, admonitions, tables) and any paragraphs within those nested components
-  & > div > div > *,
+  & > div > *,
   & > div > div p {
     margin: 0 0 12px;
   }
 
   // Prevent extra margin below last element (such as when multiple paragraphs are present)
-  & > div > div > *:last-child {
+  & > div > div *:last-child,
+  & > div > *:last-child {
     margin-bottom: 0;
   }
 `;
@@ -104,31 +103,31 @@ const headerCellStyle = css`
   line-height: 24px;
   font-weight: 600;
   font-size: ${theme.fontSize.small};
-
-  // TODO: this can be updated with dicated widths
   width: auto;
 `;
 
-// const stubCellStyle = css`
-//   background-color: ${palette.gray.light3};
-//   border-right: 3px solid ${palette.gray.light2};
-//   font-weight: 600;
+const stubCellStyle = css`
+  background-color: ${palette.gray.light3};
+  border-right: 3px solid ${palette.gray.light2};
+  font-weight: 600;
 
-//   .dark-theme & {
-//     background-color: ${palette.gray.dark4};
-//     border-right: 3px solid ${palette.gray.dark2};
-//   }
-// `;
+  .dark-theme & {
+    background-color: ${palette.gray.dark4};
+    border-right: 3px solid ${palette.gray.dark2};
+  }
+`;
 
-// const zebraStripingStyle = css`
-//   &:nth-of-type(even) {
-//     background-color: ${palette.gray.light3};
+const zebraStripingStyle = css`
+  &:nth-of-type(even) {
+    background-color: ${palette.gray.light3};
 
-//     .dark-theme & {
-//       background-color: ${palette.gray.dark4};
-//     }
-//   }
-// `;
+    .dark-theme & {
+      background-color: ${palette.gray.dark4};
+    }
+  }
+`;
+
+const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
 
 /**
  * recursive traversal of nodeLists' children to look for
@@ -180,17 +179,28 @@ const includesNestedTable = (rows) => {
 };
 
 const generateColumns = (headerRow, bodyRows) => {
-  const rowNames = (headerRow?.children ?? bodyRows).reduce((res, currNode) => {
-    const name = findKeyValuePair(currNode?.children ?? [], 'type', 'text')?.value ?? '';
-    res.push(name);
-    return res;
-  }, []);
+  if (!headerRow?.children) {
+    return bodyRows.map((_bodyRow, index) => ({
+      id: `column-${index}`,
+      accessorKey: `column-${index}`,
+      header: '',
+    }));
+  }
 
-  return rowNames.map((rowName, index) => ({
-    accessorKey: rowName ? snakeCase(rowName) : index,
-    header: rowName,
-    // TODO: dictate width with widths option. can enable sorting, dictate width
-  }));
+  return headerRow.children.map((listItemNode, index) => {
+    const skipPTag = hasOneChild(listItemNode.children);
+    return {
+      id: `column-${index}`,
+      accessorKey: `column-${index}`,
+      header: (
+        <>
+          {listItemNode.children.map((childNode) => (
+            <ComponentFactory nodeData={childNode} skipPTag={skipPTag} />
+          ))}
+        </>
+      ),
+    };
+  });
 };
 
 const generateRowsData = (bodyRowNodes, columns) => {
@@ -217,7 +227,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   // TODO: header row count should not be more than 1
   // need a warning in parser
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
-  // const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
+  const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
   const bodyRows = children[0].children.slice(headerRowCount);
   const columnCount = bodyRows[0].children[0].children.length;
 
@@ -278,32 +288,37 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           </colgroup>
         )}
         <TableHead className={cx(theadStyle)}>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <HeaderRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <HeaderCell className={cx(baseCellStyle, headerCellStyle)} key={header.id} header={header}>
-                    {flexRender(header.column.columnDef.header, header.getContext())}
-                  </HeaderCell>
-                );
-              })}
-            </HeaderRow>
-          ))}
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => {
-            return (
-              <Row key={row.id} row={row} className={cx('test-row')}>
-                {row.getVisibleCells().map((cell) => {
+          {headerRowCount > 0 &&
+            table.getHeaderGroups().map((headerGroup) => (
+              <HeaderRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
                   return (
-                    <Cell key={cell.id} className={cx(bodyCellStyle, baseCellStyle, 'body-cell')}>
-                      {cell.renderValue()}
-                    </Cell>
+                    <HeaderCell className={cx(baseCellStyle, headerCellStyle)} key={header.id} header={header}>
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                    </HeaderCell>
                   );
                 })}
-              </Row>
-            );
-          })}
+              </HeaderRow>
+            ))}
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <Row key={row.id} row={row} className={cx(shouldAlternateRowColor && zebraStripingStyle)}>
+              {row.getVisibleCells().map((cell, colIndex) => {
+                const isStub = colIndex <= stubColumnCount - 1;
+                const role = isStub ? 'rowheader' : null;
+                return (
+                  <Cell
+                    key={cell.id}
+                    className={cx(baseCellStyle, bodyCellStyle, 'body-cell', isStub && stubCellStyle)}
+                    role={role}
+                  >
+                    {cell.renderValue()}
+                  </Cell>
+                );
+              })}
+            </Row>
+          ))}
         </TableBody>
       </Table>
     </AncestorComponentContextProvider>
