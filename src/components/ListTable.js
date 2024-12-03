@@ -297,7 +297,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
         <TableHead className={cx(theadStyle)}>
           {headerRowCount > 0 &&
             table.getHeaderGroups().map((headerGroup) => (
-              <HeaderRow key={headerGroup.id}>
+              <HeaderRow key={headerGroup.id} data-testid="leafygreen-ui-header-row">
                 {headerGroup.headers.map((header) => {
                   return (
                     <HeaderCell className={cx(baseCellStyle, headerCellStyle)} key={header.id} header={header}>
