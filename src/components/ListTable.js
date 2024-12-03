@@ -32,9 +32,6 @@ const styleTable = ({ customAlign, customWidth }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
-  > table {
-    table-layout: fixed;
-  }
 `;
 
 const theadStyle = css`
