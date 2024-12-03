@@ -38,19 +38,25 @@ const StyledBannerContent = styled.div(
     justify-content: center;
     gap: 20px;
     padding: 0 11px;
+    font-size: 13px;
+    line-height: 20px;
 
     @media ${theme.screenSize.upToMedium} {
       background-image: url(${getBannerSource(props.tabletImgPath)});
+      gap: 104px;
     }
 
     @media ${theme.screenSize.upToSmall} {
       background-image: url(${getBannerSource(props.mobileImgPath)});
+      gap: 28px;
+      font-size: 11px;
     }
   `
 );
 
 const bannerTextStyle = css`
   align-self: center;
+  max-height: 40px;
 `;
 
 const pillContainer = css`
