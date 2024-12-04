@@ -101,15 +101,6 @@ const SiteBanner = () => {
     const fetchBannerContent = async () => {
       try {
         setBannerContent(await fetchBanner(snootyEnv));
-        // TODO-5132: Remove and test with App Services when done
-        const bannerContentMock = {
-          text: 'Join us at AWS re:Invent 2024! Learn how to use MongoDB for AI use cases.',
-          altText: 'Hello World!',
-          pillText: 'LEARN MORE',
-          bgColor: palette.green.dark3,
-          url: 'https://www.mongodb.com/docs/',
-        };
-        setBannerContent(bannerContentMock);
       } catch (err) {
         console.error(err);
       }
@@ -126,6 +117,8 @@ const SiteBanner = () => {
   return (
     <StyledBannerContainer href={bannerContent.url} title={bannerContent.altText}>
       <StyledBannerContent
+        // Ensure Smartling doesn't translate the banner or rewrite the link
+        className={'sl_opaque notranslate'}
         imgPath={bannerContent.imgPath}
         tabletImgPath={bannerContent.tabletImgPath ?? bannerContent.mobileImgPath}
         mobileImgPath={bannerContent.mobileImgPath}
