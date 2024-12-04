@@ -7,7 +7,6 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ImageContext from '../context/image-context';
 import { getNestedValue } from '../utils/get-nested-value';
-import { getPageSlug } from '../utils/get-page-slug';
 import { removeLeadingSlash } from '../utils/remove-leading-slash';
 import { theme } from '../theme/docsTheme';
 
@@ -38,8 +37,6 @@ const gatsbyContainerStyle = css`
 function getImageProps({
   altText,
   userOptionStyle,
-  slug,
-  sectionDepth,
   width,
   height,
   gatsbyImage,
@@ -63,7 +60,6 @@ function getImageProps({
     imageProps['height'] = height;
   }
 
-  const applyBorder = hasBorder || (darkMode && getPageSlug(slug) !== '/' && sectionDepth > 1);
   const borderColor = darkMode && hasBorder ? palette.gray.dark2 : darkMode ? 'transparent' : palette.gray.light1;
 
   if (gatsbyImage && loading === 'lazy') {
@@ -73,7 +69,7 @@ function getImageProps({
       directiveClass,
       customAlign,
       className,
-      applyBorder ? borderContainerStyling : ''
+      hasBorder ? borderContainerStyling : ''
     );
     imageProps['imgStyle'] = {
       '--border-color': borderColor,
@@ -83,7 +79,7 @@ function getImageProps({
     imageProps['srcSet'] = srcSet;
     imageProps['className'] = cx(
       defaultImageStyling,
-      applyBorder ? borderStyling : '',
+      hasBorder ? borderStyling : '',
       directiveClass,
       customAlign,
       className
@@ -96,7 +92,7 @@ function getImageProps({
   return imageProps;
 }
 
-const Image = ({ nodeData, className, slug, sectionDepth }) => {
+const Image = ({ nodeData, className }) => {
   const scale = (parseInt(getNestedValue(['options', 'scale'], nodeData), 10) || 100) / 100;
   const widthOption = getNestedValue(['options', 'width'], nodeData);
   let height = getNestedValue(['options', 'height'], nodeData);
@@ -138,8 +134,6 @@ const Image = ({ nodeData, className, slug, sectionDepth }) => {
     width,
     height,
     gatsbyImage,
-    slug,
-    sectionDepth,
     hasBorder,
     darkMode,
     customAlign,
