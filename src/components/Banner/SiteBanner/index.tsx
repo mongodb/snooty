@@ -31,7 +31,7 @@ const bannerContentStyle = (bannerContent: Partial<SiteBannerContent>) => css`
   background-image: url(${getBannerSource(bannerContent.imgPath)});
   background-position: center;
   background-size: cover;
-  background-color: ${bannerContent.bgColor};
+  ${bannerContent.bgColor && `background-color: ${bannerContent.bgColor};`}
   height: 100%;
   display: flex;
   justify-content: center;

@@ -5,9 +5,10 @@ import * as RealmUtil from '../../src/utils/realm';
 import SiteBanner from '../../src/components/Banner/SiteBanner';
 import { HeaderContext } from '../../src/components/Header/header-context';
 import { tick } from '../utils';
+import { palette } from '@leafygreen-ui/palette';
 
 const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
-const mockSnootyEnv = (snootyEnv) => {
+const mockSnootyEnv = (snootyEnv: string) => {
   useStaticQuery.mockImplementation(() => ({
     site: {
       siteMetadata: {
@@ -18,6 +19,7 @@ const mockSnootyEnv = (snootyEnv) => {
 };
 
 const mockBannerContent = {
+  isEnabled: true,
   altText: 'Test',
   imgPath: '/banners/test.png',
   tabletImgPath: '/banners/test-tablet.png',
@@ -38,10 +40,31 @@ describe('Banner component', () => {
 
   it('renders with a banner image', async () => {
     jest.useFakeTimers();
-    jest.spyOn(RealmUtil, 'fetchBanner').mockImplementation(() => mockBannerContent);
+    jest.spyOn(RealmUtil, 'fetchBanner').mockResolvedValueOnce(() => mockBannerContent);
     const setBannerContent = jest.fn();
     const wrapper = render(
-      <HeaderContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: setBannerContent }}>
+      <HeaderContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: setBannerContent, totalHeaderHeight: '' }}>
+        <SiteBanner />
+      </HeaderContext.Provider>
+    );
+    await tick();
+    expect(wrapper.asFragment()).toMatchSnapshot();
+  });
+
+  it('renders with custom text', async () => {
+    jest.useFakeTimers();
+    const bannerContent = {
+      isEnabled: true,
+      altText: mockBannerContent.altText,
+      bgColor: palette.green.dark3,
+      text: 'This is custom banner text',
+      pillText: 'DOP',
+      url: mockBannerContent.url,
+    };
+    jest.spyOn(RealmUtil, 'fetchBanner').mockResolvedValueOnce(() => bannerContent);
+    const setBannerContent = jest.fn();
+    const wrapper = render(
+      <HeaderContext.Provider value={{ bannerContent, setBannerContent: setBannerContent, totalHeaderHeight: '' }}>
         <SiteBanner />
       </HeaderContext.Provider>
     );

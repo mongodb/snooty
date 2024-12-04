@@ -7,6 +7,7 @@ module.exports = {
   projects: [
     {
       displayName: 'unit',
+      preset: 'ts-jest',
       globals: {
         __PATH_PREFIX__: '',
       },
@@ -19,6 +20,7 @@ module.exports = {
       testMatch: ['<rootDir>/tests/unit/**/*.test.js'],
       transform: {
         '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,
+        '^.+\\.(ts|tsx)$': 'ts-jest',
       },
     },
     {
