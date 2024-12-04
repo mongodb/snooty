@@ -115,10 +115,13 @@ const SiteBanner = () => {
   }
 
   return (
-    <StyledBannerContainer href={bannerContent.url} title={bannerContent.altText}>
+    <StyledBannerContainer
+      // Ensure Smartling doesn't translate the banner or rewrite the link
+      className={'sl_opaque notranslate'}
+      href={bannerContent.url}
+      title={bannerContent.altText}
+    >
       <StyledBannerContent
-        // Ensure Smartling doesn't translate the banner or rewrite the link
-        className={'sl_opaque notranslate'}
         imgPath={bannerContent.imgPath}
         tabletImgPath={bannerContent.tabletImgPath ?? bannerContent.mobileImgPath}
         mobileImgPath={bannerContent.mobileImgPath}
