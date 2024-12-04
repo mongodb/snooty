@@ -229,7 +229,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
           id="lg-table-row-0"
         >
           <td
-            class="body-cell emotion-3"
+            class="emotion-3"
           >
             <div
               class="emotion-4"
@@ -243,7 +243,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-6"
+            class="emotion-6"
           >
             <div
               class="emotion-4"
@@ -257,7 +257,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-6"
+            class="emotion-6"
           >
             <div
               class="emotion-4"
@@ -271,7 +271,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-6"
+            class="emotion-6"
           >
             <div
               class="emotion-4"
@@ -285,7 +285,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-6"
+            class="emotion-6"
           >
             <div
               class="emotion-4"
@@ -299,7 +299,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-6"
+            class="emotion-6"
           >
             <div
               class="emotion-4"
@@ -697,7 +697,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           id="lg-table-row-0"
         >
           <td
-            class="body-cell emotion-16"
+            class="emotion-16"
             role="rowheader"
           >
             <div
@@ -712,7 +712,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -726,7 +726,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -740,7 +740,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -754,7 +754,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -768,7 +768,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -789,7 +789,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           id="lg-table-row-1"
         >
           <td
-            class="body-cell emotion-16"
+            class="emotion-16"
             role="rowheader"
           >
             <div
@@ -804,7 +804,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -818,7 +818,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -832,7 +832,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -846,7 +846,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -860,7 +860,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -881,7 +881,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           id="lg-table-row-2"
         >
           <td
-            class="body-cell emotion-16"
+            class="emotion-16"
             role="rowheader"
           >
             <div
@@ -896,7 +896,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -910,7 +910,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -924,7 +924,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -938,7 +938,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -952,7 +952,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -973,7 +973,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           id="lg-table-row-3"
         >
           <td
-            class="body-cell emotion-16"
+            class="emotion-16"
             role="rowheader"
           >
             <div
@@ -988,7 +988,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -1002,7 +1002,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -1016,7 +1016,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -1030,7 +1030,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -1044,7 +1044,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -1065,7 +1065,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           id="lg-table-row-4"
         >
           <td
-            class="body-cell emotion-16"
+            class="emotion-16"
             role="rowheader"
           >
             <div
@@ -1080,7 +1080,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -1094,7 +1094,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -1108,7 +1108,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -1122,7 +1122,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"
@@ -1136,7 +1136,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
             </div>
           </td>
           <td
-            class="body-cell emotion-19"
+            class="emotion-19"
           >
             <div
               class="emotion-17"

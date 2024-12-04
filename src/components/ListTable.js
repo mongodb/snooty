@@ -317,11 +317,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 const isStub = colIndex <= stubColumnCount - 1;
                 const role = isStub ? 'rowheader' : null;
                 return (
-                  <Cell
-                    key={cell.id}
-                    className={cx(baseCellStyle, bodyCellStyle, 'body-cell', isStub && stubCellStyle)}
-                    role={role}
-                  >
+                  <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
                     {cell.renderValue()}
                   </Cell>
                 );
