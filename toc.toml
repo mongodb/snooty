@@ -1,32 +1,31 @@
 
-
 # First group
 [[toc]]
 label = "Get Started"
 group = true
-[[toc.children]]
+[[toc.items]]
 label = "Create Account"
 url = "/create-account"
-children = "./source/whatever/toc.toml"
-[[toc.children]]
+items = "./source/whatever/toc.toml"
+[[toc.items]]
 label = "Deploy a Free Cluster"
 url = "/deploy-cluster"
-[[toc.children]]
+[[toc.items]]
 label = "Manage Database Users"
 url = "/manage-users"
-[[toc.children]]
+[[toc.items]]
 label = "Manage the IP Access List"
 url = "/access-list"
-[[toc.children]]
+[[toc.items]]
 label = "Connect to the Cluster"
 url = "/connect-to-the-cluster"
-[[toc.children]]
+[[toc.items]]
 label = "Insert and View a Document"
 url = "/insert-and-view"
-[[toc.children]]
+[[toc.items]]
 label = "Load Sample Data"
 url = "/load-data"
-[[toc.children]]
+[[toc.items]]
 label = "Generate Synthetic Data"
 url = "/generate-data"
 
@@ -34,9 +33,15 @@ url = "/generate-data"
 [[toc]]
 label = "Application Development"
 group = true
-[[toc.children]]
+[[toc.items]]
 label = "Connect to Clusters"
-nested = true
-[[toc.children.children]]
+collapsible = true
+[[toc.items.items]]
 label = "Nested under 'Connect to Clusters'"
 url = "/some-nested-element"
+
+
+# toc : [ { items: [ { label: 'blah' }], label: 'blah' }  ]
+
+
+# toc : [ { getSta: [ { label: 'blah' }], label: 'blah' }, { ApplicationDevelopment: [ { label: 'blah' }], label: 'blah' }  ]

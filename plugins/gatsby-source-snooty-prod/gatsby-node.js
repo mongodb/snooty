@@ -205,7 +205,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
     console.log(toc);
     createNode({
-      children: toc,
+      tocTree: toc,
       id: createNodeId('toc'),
       internal: {
         contentDigest: createContentDigest(toc),
@@ -443,7 +443,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type TOC implements Node @dontInfer {
-      children: JSON
+      tocTree: JSON!
     }
   `);
 };
