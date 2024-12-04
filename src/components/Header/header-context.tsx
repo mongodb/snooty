@@ -6,7 +6,7 @@ interface HeaderContextType {
   bannerContent: SiteBannerContent | null;
   setBannerContent: Function;
   totalHeaderHeight: string;
-};
+}
 
 const HeaderContext = createContext<HeaderContextType>({
   bannerContent: null,

@@ -43,7 +43,9 @@ describe('Banner component', () => {
     jest.spyOn(RealmUtil, 'fetchBanner').mockResolvedValueOnce(() => mockBannerContent);
     const setBannerContent = jest.fn();
     const wrapper = render(
-      <HeaderContext.Provider value={{ bannerContent: mockBannerContent, setBannerContent: setBannerContent, totalHeaderHeight: '' }}>
+      <HeaderContext.Provider
+        value={{ bannerContent: mockBannerContent, setBannerContent: setBannerContent, totalHeaderHeight: '' }}
+      >
         <SiteBanner />
       </HeaderContext.Provider>
     );
