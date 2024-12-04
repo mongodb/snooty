@@ -97,7 +97,11 @@ const SiteBanner = () => {
   useEffect(() => {
     const fetchBannerContent = async () => {
       try {
-        setBannerContent(await fetchBanner(snootyEnv));
+        const res = await fetchBanner(snootyEnv);
+        // Guard against missing banner content
+        if (res && (res.imgPath || res.text)) {
+          setBannerContent(res);
+        }
       } catch (err) {
         console.error(err);
       }
@@ -107,7 +111,7 @@ const SiteBanner = () => {
     }
   }, [setBannerContent, snootyEnv]);
 
-  if (bannerContent === null) {
+  if (!bannerContent) {
     return null;
   }
 
