@@ -9,8 +9,9 @@ import { isBrowser } from '../../../utils/is-browser';
 import { normalizePath } from '../../../utils/normalize-path';
 import { fetchBanner } from '../../../utils/realm';
 import BrandingShape from './BrandingShape';
+import { SiteBannerContent } from '../../../types';
 
-const getBannerSource = (src) => {
+const getBannerSource = (src?: string) => {
   if (src == null || src === '') return null;
   const srcUrl = `${SNOOTY_REALM_APP_ID}.mongodbstitch.com/${src}`;
   return `https://${normalizePath(srcUrl)}`;
@@ -26,11 +27,11 @@ const bannerContainerStyle = css`
   text-decoration: none;
 `;
 
-const bannerContentStyle = (props) => css`
-  background-image: url(${getBannerSource(props.imgPath)});
+const bannerContentStyle = (bannerContent: Partial<SiteBannerContent>) => css`
+  background-image: url(${getBannerSource(bannerContent.imgPath)});
   background-position: center;
   background-size: cover;
-  background-color: ${props.bgColor};
+  background-color: ${bannerContent.bgColor};
   height: 100%;
   display: flex;
   justify-content: center;
@@ -40,12 +41,12 @@ const bannerContentStyle = (props) => css`
   line-height: 20px;
 
   @media ${theme.screenSize.upToMedium} {
-    background-image: url(${getBannerSource(props.tabletImgPath)});
+    background-image: url(${getBannerSource(bannerContent.tabletImgPath)});
     gap: 104px;
   }
 
   @media ${theme.screenSize.upToSmall} {
-    background-image: url(${getBannerSource(props.mobileImgPath)});
+    background-image: url(${getBannerSource(bannerContent.mobileImgPath)});
     gap: 28px;
     font-size: 11px;
   }

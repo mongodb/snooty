@@ -1,13 +1,20 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, PropsWithChildren, useEffect, useState } from 'react';
 import { theme } from '../../theme/docsTheme';
+import { SiteBannerContent } from '../../types';
 
-const HeaderContext = createContext({
+interface HeaderContextType {
+  bannerContent: SiteBannerContent | null;
+  setBannerContent: Function;
+  totalHeaderHeight: string;
+};
+
+const HeaderContext = createContext<HeaderContextType>({
   bannerContent: null,
   setBannerContent: () => {},
   totalHeaderHeight: theme.header.navbarHeight,
 });
 
-const HeaderContextProvider = ({ children }) => {
+const HeaderContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [bannerContent, setBannerContent] = useState(null);
   const [totalHeaderHeight, setTotalHeaderHeight] = useState(theme.header.navbarHeight);
 
