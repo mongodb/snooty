@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
-import { css } from '@leafygreen-ui/emotion';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { HeaderContext } from '../../Header/header-context';
 import { SNOOTY_REALM_APP_ID } from '../../../build-constants';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
@@ -17,7 +16,7 @@ const getBannerSource = (src) => {
   return `https://${normalizePath(srcUrl)}`;
 };
 
-const StyledBannerContainer = styled.a`
+const bannerContainerStyle = css`
   display: block;
   height: ${theme.header.bannerHeight};
   width: 100%;
@@ -27,32 +26,30 @@ const StyledBannerContainer = styled.a`
   text-decoration: none;
 `;
 
-const StyledBannerContent = styled.div(
-  (props) => `
-    background-image: url(${getBannerSource(props.imgPath)});
-    background-position: center;
-    background-size: cover;
-    background-color: ${props.bgColor};
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 0 11px;
-    font-size: 13px;
-    line-height: 20px;
+const bannerContentStyle = (props) => css`
+  background-image: url(${getBannerSource(props.imgPath)});
+  background-position: center;
+  background-size: cover;
+  background-color: ${props.bgColor};
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 11px;
+  font-size: 13px;
+  line-height: 20px;
 
-    @media ${theme.screenSize.upToMedium} {
-      background-image: url(${getBannerSource(props.tabletImgPath)});
-      gap: 104px;
-    }
+  @media ${theme.screenSize.upToMedium} {
+    background-image: url(${getBannerSource(props.tabletImgPath)});
+    gap: 104px;
+  }
 
-    @media ${theme.screenSize.upToSmall} {
-      background-image: url(${getBannerSource(props.mobileImgPath)});
-      gap: 28px;
-      font-size: 11px;
-    }
-  `
-);
+  @media ${theme.screenSize.upToSmall} {
+    background-image: url(${getBannerSource(props.mobileImgPath)});
+    gap: 28px;
+    font-size: 11px;
+  }
+`;
 
 const bannerTextStyle = css`
   align-self: center;
@@ -110,36 +107,44 @@ const SiteBanner = () => {
     }
   }, [setBannerContent, snootyEnv]);
 
-  if (bannerContent == null) {
+  if (bannerContent === null) {
     return null;
   }
 
+  // Ensure Smartling doesn't translate the banner or rewrite anything
+  const smartlingClassNames = 'sl_opaque notranslate';
+  // Backup class name in case Smartling needs to target the whole element
+  const bannerClassName = 'site-banner';
+
   return (
-    <StyledBannerContainer
-      // Ensure Smartling doesn't translate the banner or rewrite the link
-      className={'sl_opaque notranslate'}
+    <a
+      className={cx(bannerClassName, smartlingClassNames, bannerContainerStyle)}
       href={bannerContent.url}
       title={bannerContent.altText}
     >
-      <StyledBannerContent
-        imgPath={bannerContent.imgPath}
-        tabletImgPath={bannerContent.tabletImgPath ?? bannerContent.mobileImgPath}
-        mobileImgPath={bannerContent.mobileImgPath}
-        bgColor={bannerContent.bgColor}
+      <div
+        className={bannerContentStyle({
+          imgPath: bannerContent.imgPath,
+          tabletImgPath: bannerContent.tabletImgPath ?? bannerContent.mobileImgPath,
+          mobileImgPath: bannerContent.mobileImgPath,
+          bgColor: bannerContent.bgColor,
+        })}
       >
         {bannerContent.text && (
           <>
-            <span className={bannerTextStyle}>{bannerContent.text}</span>
+            <span className={cx(smartlingClassNames, bannerTextStyle)}>{bannerContent.text}</span>
             <div className={pillContainer}>
               <div className={brandingContainer}>
                 <BrandingShape />
               </div>
-              {bannerContent.pillText && <span className={pillStyle}>{bannerContent.pillText}</span>}
+              {bannerContent.pillText && (
+                <span className={cx(smartlingClassNames, pillStyle)}>{bannerContent.pillText}</span>
+              )}
             </div>
           </>
         )}
-      </StyledBannerContent>
-    </StyledBannerContainer>
+      </div>
+    </a>
   );
 };
 
