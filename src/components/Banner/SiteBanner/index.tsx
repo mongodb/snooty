@@ -8,8 +8,8 @@ import { theme } from '../../../theme/docsTheme';
 import { isBrowser } from '../../../utils/is-browser';
 import { normalizePath } from '../../../utils/normalize-path';
 import { fetchBanner } from '../../../utils/realm';
-import BrandingShape from './BrandingShape';
 import { SiteBannerContent } from '../../../types';
+import BrandingShape from './BrandingShape';
 
 const getBannerSource = (src?: string) => {
   if (src == null || src === '') return null;
