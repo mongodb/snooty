@@ -385,7 +385,8 @@ q:before {
     max-width: 970px;
   }
 }
-label {
+/* :not negation used to disallow these styles from affecting chatbot modal like/dislike buttons */
+label:not([for*='-message-rating']) {
   margin-bottom: 5px;
   font-weight: 700;
 }
