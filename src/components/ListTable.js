@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   Cell,
@@ -200,8 +200,8 @@ const generateColumns = (headerRow, bodyRows) => {
       accessorKey: `column-${index}`,
       header: (
         <>
-          {listItemNode.children.map((childNode) => (
-            <ComponentFactory nodeData={childNode} skipPTag={skipPTag} />
+          {listItemNode.children.map((childNode, index) => (
+            <ComponentFactory key={index} nodeData={childNode} skipPTag={skipPTag} />
           ))}
         </>
       ),
@@ -215,8 +215,8 @@ const generateRowsData = (bodyRowNodes, columns) => {
     return rowNode.reduce((res, columnNode, colIndex) => {
       res[columns[colIndex].accessorKey] = (
         <>
-          {columnNode.children.map((cellNode) => (
-            <ComponentFactory nodeData={cellNode} />
+          {columnNode.children.map((cellNode, index) => (
+            <ComponentFactory key={index} nodeData={cellNode} />
           ))}
         </>
       );
@@ -229,19 +229,20 @@ const generateRowsData = (bodyRowNodes, columns) => {
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const ancestors = useAncestorComponentContext();
-  // TODO: header row count should not be more than 1
-  // need a warning in parser
-  const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
-  const bodyRows = children[0].children.slice(headerRowCount);
+  const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
 
   // Check if :header-rows: 0 is specified or :header-rows: is omitted
-  const [headerRows] = useState(() => {
+  const headerRows = useMemo(() => {
     const MAX_HEADER_ROW = 1;
     return headerRowCount > 0
       ? children[0].children[0].children.slice(0, Math.min(MAX_HEADER_ROW, headerRowCount))
       : [];
-  });
+  }, [children, headerRowCount]);
+
+  const bodyRows = useMemo(() => {
+    return children[0].children.slice(headerRowCount);
+  }, [children, headerRowCount]);
 
   // get all ID's for elements within header, or first two rows of body
   const firstHeaderRowChildren = headerRows[0]?.children ?? [];
@@ -252,8 +253,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const shouldAlternateRowColor = noTableNesting && bodyRows.length > 4;
 
   const tableRef = useRef();
-  const [columns] = useState(() => generateColumns(headerRows[0], bodyRows));
-  const [data] = useState(() => generateRowsData(bodyRows, columns));
+  const columns = useMemo(() => generateColumns(headerRows[0], bodyRows), [bodyRows, headerRows]);
+  const data = useMemo(() => generateRowsData(bodyRows, columns), [bodyRows, columns]);
   const table = useLeafyGreenTable({
     containerRef: tableRef,
     columns: columns,
