@@ -1,17 +1,8 @@
 import React from 'react';
 
-const BrandingShape = ({ size }) => {
-  let width = 0;
-  let height = 0;
-
-  if (size === 'desktop') {
-    width = 109;
-    height = 40;
-  } else if (['tablet', 'mobile'].includes(size)) {
-    width = 119;
-    height = 56;
-  }
-
+const BrandingShape = () => {
+  const width = 109;
+  const height = 40;
   const viewBox = `0 0 ${width} ${height}`;
 
   return (

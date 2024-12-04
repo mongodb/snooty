@@ -136,7 +136,7 @@ const SiteBanner = () => {
             <span className={bannerTextStyle}>{bannerContent.text}</span>
             <div className={pillContainer}>
               <div className={brandingContainer}>
-                <BrandingShape size={'desktop'} />
+                <BrandingShape />
               </div>
               {bannerContent.pillText && <span className={pillStyle}>{bannerContent.pillText}</span>}
             </div>
