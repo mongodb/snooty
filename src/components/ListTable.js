@@ -234,22 +234,14 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
   const bodyRows = children[0].children.slice(headerRowCount);
-  const columnCount = bodyRows[0].children[0].children.length;
 
   // Check if :header-rows: 0 is specified or :header-rows: is omitted
-  const [headerRows] = useState(() =>
-    headerRowCount > 0 ? children[0].children[0].children.slice(0, headerRowCount) : []
-  );
-
-  let widths = null;
-  const customWidths = options?.widths;
-  if (customWidths && customWidths !== 'auto') {
-    widths = customWidths.split(/[ ,]+/);
-    if (columnCount !== widths.length) {
-      // If custom width specification does not match number of columns, do not apply
-      widths = null;
-    }
-  }
+  const [headerRows] = useState(() => {
+    const MAX_HEADER_ROW = 1;
+    return headerRowCount > 0
+      ? children[0].children[0].children.slice(0, Math.min(MAX_HEADER_ROW, headerRowCount))
+      : [];
+  });
 
   // get all ID's for elements within header, or first two rows of body
   const firstHeaderRowChildren = headerRows[0]?.children ?? [];
@@ -268,6 +260,18 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
     data: data,
   });
   const { rows } = table.getRowModel();
+
+  const columnCount = columns.length;
+
+  let widths = null;
+  const customWidths = options?.widths;
+  if (customWidths && customWidths !== 'auto') {
+    widths = customWidths.split(/[ ,]+/);
+    if (columnCount !== widths.length) {
+      // If custom width specification does not match number of columns, do not apply
+      widths = null;
+    }
+  }
 
   return (
     <AncestorComponentContextProvider component={'table'}>
