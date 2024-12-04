@@ -19,6 +19,9 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.13",
+    "@types/react-dom": "^18.3.1",
     "auto-changelog": "^2.2.1",
     "babel-jest": "^29.5.0",
     "babel-plugin-emotion": "^11.0.0",
@@ -34,6 +37,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
+    "typescript": "^5.7.2",
     "xmlhttprequest-ssl": ">=1.6.2"
   },
   "scripts": {
