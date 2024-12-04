@@ -62,22 +62,6 @@ export function UnifiedSidenav() {
         {tocTree.map((navItems) => (
           <UnifiedTocNavItem {...navItems} />
         ))}
-
-        {/* <SideNavItem>Overview</SideNavItem>
-        <SideNavItem>Introduction</SideNavItem>
-        <SideNavItem>
-          Android SDK
-          <SideNavItem>Install MongoDB Community Edition</SideNavItem>
-          <SideNavGroup header="Fundamentals" collapsible glyph={<Icon glyph="Building" />}>
-            <SideNavItem active>Upgrade MongoDB Community to MongoDB Enterprise</SideNavItem>
-            <SideNavItem>Verify Integrity of MongoDB Packages</SideNavItem>
-            <SideNavGroup header="Preferences">
-              <SideNavItem>Privacy</SideNavItem>
-              <SideNavItem>Security</SideNavItem>
-              <SideNavItem>New Link</SideNavItem>
-            </SideNavGroup>
-          </SideNavGroup>
-        </SideNavItem> */}
       </SideNav>
     </>
   );
