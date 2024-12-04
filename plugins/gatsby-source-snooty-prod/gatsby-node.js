@@ -1,4 +1,5 @@
 const swc = require('@swc/core');
+const { load } = require('js-toml');
 const path = require('path');
 const fs = require('fs/promises');
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
@@ -127,6 +128,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     );
     process.exit(1);
   }
+
   const pageIdPrefix = constructPageIdPrefix(siteMetadata);
   documents.forEach((doc) => {
     const { page_id, ...rest } = doc;
@@ -194,6 +196,26 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
+
+  // create TOC nodes
+
+  try {
+    const tomlContents = (await fs.readFile(`${process.cwd()}/toc.toml`)).toString();
+    const toc = load(tomlContents);
+
+    console.log(toc);
+    createNode({
+      children: toc,
+      id: createNodeId('toc'),
+      internal: {
+        contentDigest: createContentDigest(toc),
+        type: 'TOC',
+      },
+      parent: null,
+    });
+  } catch (e) {
+    console.error('error occurred', e);
+  }
 
   if (process.env['OFFLINE_DOCS'] !== 'true') {
     const umbrellaProduct = await db.realmInterface.getMetadata(
@@ -420,5 +442,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       propertyUrl: String
     }
 
+    type TOC implements Node @dontInfer {
+      children: JSON
+    }
   `);
 };

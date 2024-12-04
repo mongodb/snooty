@@ -1,0 +1,42 @@
+
+
+# First group
+[[toc]]
+label = "Get Started"
+group = true
+[[toc.children]]
+label = "Create Account"
+url = "/create-account"
+children = "./source/whatever/toc.toml"
+[[toc.children]]
+label = "Deploy a Free Cluster"
+url = "/deploy-cluster"
+[[toc.children]]
+label = "Manage Database Users"
+url = "/manage-users"
+[[toc.children]]
+label = "Manage the IP Access List"
+url = "/access-list"
+[[toc.children]]
+label = "Connect to the Cluster"
+url = "/connect-to-the-cluster"
+[[toc.children]]
+label = "Insert and View a Document"
+url = "/insert-and-view"
+[[toc.children]]
+label = "Load Sample Data"
+url = "/load-data"
+[[toc.children]]
+label = "Generate Synthetic Data"
+url = "/generate-data"
+
+# second group
+[[toc]]
+label = "Application Development"
+group = true
+[[toc.children]]
+label = "Connect to Clusters"
+nested = true
+[[toc.children.children]]
+label = "Nested under 'Connect to Clusters'"
+url = "/some-nested-element"
