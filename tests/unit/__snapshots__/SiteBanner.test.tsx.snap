@@ -120,18 +120,6 @@ exports[`Banner component renders with custom text 1`] = `
   max-height: 40px;
 }
 
-@media only screen and (max-width: 767px) {
-  .emotion-2 {
-    max-width: 543px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .emotion-2 {
-    max-width: 200px;
-  }
-}
-
 .emotion-3 {
   display: grid;
   justify-items: center;
