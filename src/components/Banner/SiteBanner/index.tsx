@@ -42,19 +42,28 @@ const bannerContentStyle = (bannerContent: Partial<SiteBannerContent>) => css`
 
   @media ${theme.screenSize.upToMedium} {
     background-image: url(${getBannerSource(bannerContent.tabletImgPath)});
-    gap: 104px;
+    justify-content: space-between;
   }
 
   @media ${theme.screenSize.upToSmall} {
     background-image: url(${getBannerSource(bannerContent.mobileImgPath)});
     gap: 28px;
     font-size: 11px;
+    justify-content: space-between;
   }
 `;
 
 const bannerTextStyle = css`
   align-self: center;
   max-height: 40px;
+
+  @media ${theme.screenSize.upToMedium} {
+    max-width: 543px;
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    max-width: 200px;
+  }
 `;
 
 const pillContainer = css`
@@ -98,9 +107,9 @@ const SiteBanner = () => {
   useEffect(() => {
     const fetchBannerContent = async () => {
       try {
-        const res: SiteBannerContent = await fetchBanner(snootyEnv);
+        const res: SiteBannerContent | null = await fetchBanner(snootyEnv);
         // Guard against missing banner content
-        if (res && (res.imgPath || res.text)) {
+        if (res && res.url && (res.imgPath || res.text)) {
           setBannerContent(res);
         }
       } catch (err) {
