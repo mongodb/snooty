@@ -37,7 +37,9 @@ exports[`Banner component renders with a banner image 1`] = `
 @media only screen and (max-width: 767px) {
   .emotion-1 {
     background-image: url(https://snooty-koueq.mongodbstitch.com/banners/test-tablet.png);
-    gap: 104px;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
   }
 }
 
@@ -46,6 +48,9 @@ exports[`Banner component renders with a banner image 1`] = `
     background-image: url(https://snooty-koueq.mongodbstitch.com/banners/test-mobile.png);
     gap: 28px;
     font-size: 11px;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
   }
 }
 
@@ -99,7 +104,9 @@ exports[`Banner component renders with custom text 1`] = `
 @media only screen and (max-width: 767px) {
   .emotion-1 {
     background-image: url();
-    gap: 104px;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
   }
 }
 
@@ -108,6 +115,9 @@ exports[`Banner component renders with custom text 1`] = `
     background-image: url();
     gap: 28px;
     font-size: 11px;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
   }
 }
 
@@ -116,6 +126,18 @@ exports[`Banner component renders with custom text 1`] = `
   -ms-flex-item-align: center;
   align-self: center;
   max-height: 40px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-2 {
+    max-width: 543px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-2 {
+    max-width: 200px;
+  }
 }
 
 .emotion-3 {
