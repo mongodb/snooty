@@ -1,10 +1,18 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Cell, HeaderCell, HeaderRow, Row, Table, TableBody, TableHead } from '@leafygreen-ui/table';
+import {
+  Cell,
+  HeaderCell,
+  flexRender,
+  HeaderRow,
+  Row,
+  Table,
+  TableBody,
+  TableHead,
+  useLeafyGreenTable,
+} from '@leafygreen-ui/table';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { Theme } from '@leafygreen-ui/lib';
 import { theme } from '../theme/docsTheme';
 import { AncestorComponentContextProvider, useAncestorComponentContext } from '../context/ancestor-components-context';
 import ComponentFactory from './ComponentFactory';
@@ -62,6 +70,14 @@ const baseCellStyle = css`
 const bodyCellStyle = css`
   overflow-wrap: anywhere;
   word-break: break-word;
+  align-content: flex-start;
+
+  & > div {
+    min-height: unset;
+    max-height: unset;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
   *,
   p,
@@ -70,13 +86,14 @@ const bodyCellStyle = css`
   }
 
   // Target any nested components (paragraphs, admonitions, tables) and any paragraphs within those nested components
-  & > div > div > *,
+  & > div > *,
   & > div > div p {
     margin: 0 0 12px;
   }
 
   // Prevent extra margin below last element (such as when multiple paragraphs are present)
-  & > div > div > *:last-child {
+  & > div > div *:last-child,
+  & > div > *:last-child {
     margin-bottom: 0;
   }
 `;
@@ -85,6 +102,7 @@ const headerCellStyle = css`
   line-height: 24px;
   font-weight: 600;
   font-size: ${theme.fontSize.small};
+  width: auto;
 `;
 
 const stubCellStyle = css`
@@ -159,43 +177,92 @@ const includesNestedTable = (rows) => {
   return rows.some((row) => checkNodeForTable(row));
 };
 
-const ListTableRow = ({ row = [], stubColumnCount, siteTheme, className, ...rest }) => (
-  <Row className={className}>
-    {row.map((cell, colIndex) => {
-      const skipPTag = hasOneChild(cell.children);
-      const contents = cell.children.map((child, i) => (
-        <ComponentFactory {...rest} key={`${colIndex}-${i}`} nodeData={child} skipPTag={skipPTag} />
-      ));
+const generateColumns = (headerRow, bodyRows) => {
+  if (!headerRow?.children) {
+    // generate columns from bodyRows
+    const flattenedRows = bodyRows.map((bodyRow) => bodyRow.children[0].children);
+    const maxColumns = Math.max(...flattenedRows.map((row) => row.length));
+    const res = [];
+    for (let colIndex = 0; colIndex < maxColumns; colIndex++) {
+      res.push({
+        id: `column-${colIndex}`,
+        accessorKey: `column-${colIndex}`,
+        header: '',
+      });
+    }
+    return res;
+  }
 
-      const isStub = colIndex <= stubColumnCount - 1;
-      const role = isStub ? 'rowheader' : null;
+  return headerRow.children.map((listItemNode, index) => {
+    const skipPTag = hasOneChild(listItemNode.children);
+    return {
+      id: `column-${index}`,
+      accessorKey: `column-${index}`,
+      header: (
+        <>
+          {listItemNode.children.map((childNode, index) => (
+            <ComponentFactory key={index} nodeData={childNode} skipPTag={skipPTag} />
+          ))}
+        </>
+      ),
+    };
+  });
+};
 
-      return (
-        <Cell key={colIndex} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
-          {/* Wrap in div to ensure contents are structured properly */}
-          <div>{contents}</div>
-        </Cell>
+const generateRowsData = (bodyRowNodes, columns) => {
+  const rowNodes = bodyRowNodes.map((node) => node?.children[0]?.children ?? []);
+  const rows = rowNodes.map((rowNode) => {
+    return rowNode.reduce((res, columnNode, colIndex) => {
+      res[columns[colIndex].accessorKey] = (
+        <>
+          {columnNode.children.map((cellNode, index) => (
+            <ComponentFactory key={index} nodeData={cellNode} />
+          ))}
+        </>
       );
-    })}
-  </Row>
-);
+      return res;
+    }, {});
+  });
 
-ListTableRow.propTypes = {
-  row: PropTypes.arrayOf(PropTypes.object),
-  stubColumnCount: PropTypes.number.isRequired,
-  siteTheme: PropTypes.oneOf(Object.values(Theme)).isRequired,
+  return rows;
 };
 
 const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const ancestors = useAncestorComponentContext();
-  const { theme: siteTheme } = useDarkMode();
-  const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
   const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
-  const bodyRows = children[0].children.slice(headerRowCount);
-  const columnCount = bodyRows[0].children[0].children.length;
+  const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
 
   // Check if :header-rows: 0 is specified or :header-rows: is omitted
-  const headerRows = headerRowCount > 0 ? children[0].children[0].children.slice(0, headerRowCount) : [];
+  const headerRows = useMemo(() => {
+    const MAX_HEADER_ROW = 1;
+    return headerRowCount > 0
+      ? children[0].children[0].children.slice(0, Math.min(MAX_HEADER_ROW, headerRowCount))
+      : [];
+  }, [children, headerRowCount]);
+
+  const bodyRows = useMemo(() => {
+    return children[0].children.slice(headerRowCount);
+  }, [children, headerRowCount]);
+
+  // get all ID's for elements within header, or first two rows of body
+  const firstHeaderRowChildren = headerRows[0]?.children ?? [];
+  const elmIdsForScroll = getReferenceIds(firstHeaderRowChildren.concat(bodyRows.slice(0, 3)));
+
+  const hasNestedTable = useMemo(() => includesNestedTable(bodyRows), [bodyRows]);
+  const noTableNesting = !hasNestedTable && !ancestors?.table;
+  const shouldAlternateRowColor = noTableNesting && bodyRows.length > 4;
+
+  const tableRef = useRef();
+  const columns = useMemo(() => generateColumns(headerRows[0], bodyRows), [bodyRows, headerRows]);
+  const data = useMemo(() => generateRowsData(bodyRows, columns), [bodyRows, columns]);
+  const table = useLeafyGreenTable({
+    containerRef: tableRef,
+    columns: columns,
+    data: data,
+  });
+  const { rows } = table.getRowModel();
+
+  const columnCount = columns.length;
 
   let widths = null;
   const customWidths = options?.widths;
@@ -206,14 +273,6 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
       widths = null;
     }
   }
-
-  // get all ID's for elements within header, or first two rows of body
-  const firstHeaderRowChildren = headerRows[0]?.children ?? [];
-  const elmIdsForScroll = getReferenceIds(firstHeaderRowChildren.concat(bodyRows.slice(0, 3)));
-
-  const hasNestedTable = useMemo(() => includesNestedTable(bodyRows), [bodyRows]);
-  const noTableNesting = !hasNestedTable && !ancestors?.table;
-  const shouldAlternateRowColor = noTableNesting && bodyRows.length > 4;
 
   return (
     <AncestorComponentContextProvider component={'table'}>
@@ -227,6 +286,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
             customWidth: options?.width,
           })
         )}
+        ref={tableRef}
         shouldAlternateRowColor={shouldAlternateRowColor}
       >
         {widths && (
@@ -237,37 +297,32 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
           </colgroup>
         )}
         <TableHead className={cx(theadStyle)}>
-          {headerRows.map((row, rowIndex) => (
-            <HeaderRow key={rowIndex} data-testid="leafygreen-ui-header-row">
-              {row.children.map((cell, colIndex) => {
-                const skipPTag = hasOneChild(cell.children);
-                return (
-                  <HeaderCell
-                    className={cx(baseCellStyle, headerCellStyle)}
-                    key={`${rowIndex}-${colIndex}`}
-                    role="columnheader"
-                  >
-                    <div>
-                      {cell.children.map((child, i) => (
-                        <ComponentFactory {...rest} key={i} nodeData={child} skipPTag={skipPTag} />
-                      ))}
-                    </div>
-                  </HeaderCell>
-                );
-              })}
-            </HeaderRow>
-          ))}
+          {headerRowCount > 0 &&
+            table.getHeaderGroups().map((headerGroup) => (
+              <HeaderRow key={headerGroup.id} data-testid="leafygreen-ui-header-row">
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <HeaderCell className={cx(baseCellStyle, headerCellStyle)} key={header.id} header={header}>
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                    </HeaderCell>
+                  );
+                })}
+              </HeaderRow>
+            ))}
         </TableHead>
         <TableBody>
-          {bodyRows.map((row, i) => (
-            <ListTableRow
-              key={i}
-              {...rest}
-              stubColumnCount={stubColumnCount}
-              row={row.children?.[0]?.children}
-              siteTheme={siteTheme}
-              className={shouldAlternateRowColor && zebraStripingStyle}
-            />
+          {rows.map((row) => (
+            <Row key={row.id} row={row} className={cx(shouldAlternateRowColor && zebraStripingStyle)}>
+              {row.getVisibleCells().map((cell, colIndex) => {
+                const isStub = colIndex <= stubColumnCount - 1;
+                const role = isStub ? 'rowheader' : null;
+                return (
+                  <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
+                    {cell.renderValue()}
+                  </Cell>
+                );
+              })}
+            </Row>
           ))}
         </TableBody>
       </Table>
