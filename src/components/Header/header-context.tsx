@@ -1,6 +1,6 @@
 import React, { createContext, PropsWithChildren, useEffect, useState } from 'react';
 import { theme } from '../../theme/docsTheme';
-import { SiteBannerContent } from '../../types';
+import { SiteBannerContent } from '../Banner/SiteBanner/types';
 
 interface HeaderContextType {
   bannerContent: SiteBannerContent | null;
