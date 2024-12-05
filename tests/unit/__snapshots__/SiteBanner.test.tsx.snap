@@ -46,11 +46,7 @@ exports[`Banner component renders with a banner image 1`] = `
 @media only screen and (max-width: 480px) {
   .emotion-1 {
     background-image: url(https://snooty-koueq.mongodbstitch.com/banners/test-mobile.png);
-    gap: 28px;
     font-size: 11px;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
   }
 }
 
@@ -113,11 +109,7 @@ exports[`Banner component renders with custom text 1`] = `
 @media only screen and (max-width: 480px) {
   .emotion-1 {
     background-image: url();
-    gap: 28px;
     font-size: 11px;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
   }
 }
 
