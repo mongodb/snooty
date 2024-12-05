@@ -37,7 +37,7 @@ const bannerContentStyle = (bannerContent: Partial<SiteBannerContent>) => css`
   justify-content: center;
   gap: 20px;
   padding: 0 11px;
-  font-size: 13px;
+  font-size: ${theme.fontSize.small};
   line-height: 20px;
 
   @media ${theme.screenSize.upToMedium} {
@@ -47,9 +47,7 @@ const bannerContentStyle = (bannerContent: Partial<SiteBannerContent>) => css`
 
   @media ${theme.screenSize.upToSmall} {
     background-image: url(${getBannerSource(bannerContent.mobileImgPath)});
-    gap: 28px;
-    font-size: 11px;
-    justify-content: space-between;
+    font-size: ${theme.fontSize.xsmall};
   }
 `;
 
@@ -88,7 +86,7 @@ const pillStyle = css`
   color: ${palette.green.dark3};
   font-weight: 600;
   line-height: 16px;
-  font-size: 12px;
+  font-size: ${theme.fontSize.tiny};
   background-color: ${palette.green.base};
   border: 1px solid ${palette.green.dark2};
   border-radius: 6px;
