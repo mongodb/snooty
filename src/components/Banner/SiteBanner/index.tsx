@@ -54,14 +54,6 @@ const bannerContentStyle = (bannerContent: Partial<SiteBannerContent>) => css`
 const bannerTextStyle = css`
   align-self: center;
   max-height: 40px;
-
-  @media ${theme.screenSize.upToMedium} {
-    max-width: 543px;
-  }
-
-  @media ${theme.screenSize.upToSmall} {
-    max-width: 200px;
-  }
 `;
 
 const pillContainer = css`
