@@ -2,7 +2,7 @@
 name = "snooty-cache-plugin"
 
 [build]
-publish = "public"
+publish = "bi-connector/public"
 command = ". ./build.sh $ORG_NAME $REPO_NAME $BRANCH_NAME $PARSER_VERSION $TESTING_KEY"
 
 [build.environment]
