@@ -104,8 +104,8 @@ We have configured an automatic release process using [GitHub Actions](https://g
 
 :warning: This process cannot be completed if the releaser's `origin` points to a fork.
 
-:warning: Please **do not** create new git tags directly through the GH UI or CLI. The following instructions may result in merge conflicts or
-git tag errors.
+:warning: Please **do not** create new git tags directly through the GH UI or CLI. Doing so may result in a merge conflict or git tag error when
+performing the following instructions.
 
 Then proceed as follows:
 
