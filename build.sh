@@ -12,7 +12,6 @@ PARSER_VERSION=$4 # version of the parser to download
 # cloning the content repo
 echo "Cloning content repo: ${TESTING_REPO_NAME}, ${TESTING_KEY}"
 echo " this is the fifth arg $5"
-git clone -b ${TESTING_BRANCH_NAME} https://${GITHUB_BOT_PWD}@github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}.git 
 
 
 
@@ -33,9 +32,7 @@ echo "==========================================================================
 # putting set conent-repo as the path
 echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
-echo process.env.GATSBY_PARSER_USER = 'buildbot'
-export process.env.GATSBY_PARSER_USER = 'buildbot'
-echo process.env.PATH_PREFIX = '/bi-connector/v2.14'
+
 
 # run the site
-npm run build
+npm run build:no-prefix
