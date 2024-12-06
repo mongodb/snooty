@@ -35,6 +35,7 @@ echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 echo process.env.GATSBY_PARSER_USER = 'buildbot'
 export process.env.GATSBY_PARSER_USER = 'buildbot'
+echo process.env.PATH_PREFIX = '/bi-connector/v2.14'
 
 # run the site
 npm run build
