@@ -33,6 +33,8 @@ echo "==========================================================================
 # putting set conent-repo as the path
 echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
+echo process.env.GATSBY_PARSER_USER = 'buildbot'
+export process.env.GATSBY_PARSER_USER = 'buildbot'
 
 # run the site
 npm run build
