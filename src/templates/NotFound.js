@@ -135,8 +135,7 @@ export const NotFoundContainer = styled.div`
   }
 `;
 
-export const Wrapper = styled('main')`
-  display: grid;
+export const gridStyling = `
   @media ${theme.screenSize.mediumAndUp} {
     grid-template-columns: ${`${theme.size.xlarge} repeat(12, minmax(0, 1fr)) ${theme.size.xlarge};`};
   }
@@ -152,6 +151,11 @@ export const Wrapper = styled('main')`
   @media ${theme.screenSize.upToXSmall} {
     grid-template-columns: ${theme.size.medium} 1fr ${theme.size.medium};
   }
+`;
+
+export const Wrapper = styled('main')`
+  display: grid;
+  ${gridStyling}
 `;
 
 const NotFound = () => {
