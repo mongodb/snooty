@@ -9,10 +9,12 @@ PARSER_VERSION=$4 # version of the parser to download
 # If the rule doesn't exist, the error doesn't interrupt the build process.
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
-# cloning the content repo
-echo "Cloning content repo: ${TESTING_REPO_NAME}"
-git clone -b ${TESTING_BRANCH_NAME} https://github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}.git 
-
+# Check that content repo has been successfully cloned
+if [ -d "$TESTING_REPO_NAME}" ]; then
+  echo "Directory ${TESTING_REPO_NAME} exists"
+else
+  echo "Content repository directory does not exist, parse and build will fail"
+fi
 
 
 # running the parser 
