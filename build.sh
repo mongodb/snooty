@@ -8,7 +8,7 @@ PARSER_VERSION=$2 # version of the parser to download
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
 # Check that content repo has been successfully cloned
-if [ -d "$TESTING_REPO_NAME}" ]; then
+if [ -d "$TESTING_REPO_NAME" ]; then
   echo "Directory ${TESTING_REPO_NAME} exists"
 else
   echo "Content repository directory does not exist, parse and build will fail"
