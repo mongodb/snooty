@@ -1,8 +1,6 @@
 # variables that need to be changed based on the content repo you're working on -------------------------------------------
-TESTING_ORGANIZATION=$1 # name of org, usually mongodb or 10gen
-TESTING_REPO_NAME=$2 # name of content repo
-TESTING_BRANCH_NAME=$3 # name of the branch
-PARSER_VERSION=$4 # version of the parser to download
+TESTING_REPO_NAME=$1 # name of content repo
+PARSER_VERSION=$2 # version of the parser to download
 # -------------------------------------------------------------------------------------------------------------------------
 
 # This make command curls the examples for certain repos.
