@@ -3,17 +3,12 @@ TESTING_REPO_NAME=$1 # name of content repo
 PARSER_VERSION=$2 # version of the parser to download
 # -------------------------------------------------------------------------------------------------------------------------
 
-# This make command curls the examples for certain repos.
-# If the rule doesn't exist, the error doesn't interrupt the build process.
-# make examples - we don't need this for docs-landing, but have it here for when we change repos
-
 # Check that content repo has been successfully cloned
 if [ -d "${TESTING_REPO_NAME}" ]; then
   echo "Directory ${TESTING_REPO_NAME} exists"
 else
   echo "Content repository directory for ${TESTING_REPO_NAME} does not exist, parse and build will fail"
 fi
-
 
 # running the parser 
 if [ ! -d "snooty-parser" ]; then
