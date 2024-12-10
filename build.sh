@@ -29,4 +29,4 @@ echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 
 # run the site
-npm run build:no-prefix
+npm run build
