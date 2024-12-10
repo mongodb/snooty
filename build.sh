@@ -10,8 +10,8 @@ PARSER_VERSION=$4 # version of the parser to download
 # make examples - we don't need this for docs-landing, but have it here for when we change repos
 
 # cloning the content repo
-echo "Cloning content repo: ${TESTING_REPO_NAME}"
-git clone -b ${TESTING_BRANCH_NAME} https://github.com/${TESTING_ORGANIZATION}/${TESTING_REPO_NAME}.git 
+echo "Cloning content repo: ${TESTING_REPO_NAME}, ${TESTING_KEY}"
+echo " this is the fifth arg $5"
 
 
 
@@ -32,6 +32,7 @@ echo "==========================================================================
 # putting set conent-repo as the path
 echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
+
 
 # run the site
 npm run build:no-prefix
