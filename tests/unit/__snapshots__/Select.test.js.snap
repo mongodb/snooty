@@ -41,6 +41,7 @@ exports[`Select renders select correctly 1`] = `
 
 .emotion-1>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-1>button>*:last-child>svg {
@@ -245,6 +246,7 @@ exports[`Select renders select correctly 1`] = `
 
 <div
     class="undefined emotion-0"
+    id="offline-select"
   >
     <div
       class="emotion-1"

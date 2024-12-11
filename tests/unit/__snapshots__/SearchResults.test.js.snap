@@ -1411,6 +1411,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-63>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-63>button>*:last-child>svg {
@@ -1649,6 +1650,7 @@ exports[`Search Results Page considers a given search filter query param and dis
 
 .emotion-75>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-75>button>*:last-child>svg {
@@ -2136,6 +2138,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         >
           <div
             class="emotion-60 emotion-61 emotion-62"
+            id="offline-select"
           >
             <div
               class="emotion-63"
@@ -2193,6 +2196,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         >
           <div
             class="emotion-60 emotion-61 emotion-74"
+            id="offline-select"
           >
             <div
               class="emotion-75"
@@ -2683,6 +2687,7 @@ exports[`Search Results Page does not return results for a given search term wit
 
 .emotion-35>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-35>button>*:last-child>svg {
@@ -2922,6 +2927,7 @@ exports[`Search Results Page does not return results for a given search term wit
 
 .emotion-47>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-47>button>*:last-child>svg {
@@ -3539,6 +3545,7 @@ exports[`Search Results Page does not return results for a given search term wit
         >
           <div
             class="emotion-32 emotion-33 emotion-34"
+            id="offline-select"
           >
             <div
               class="emotion-35"
@@ -3596,6 +3603,7 @@ exports[`Search Results Page does not return results for a given search term wit
         >
           <div
             class="emotion-32 emotion-33 emotion-46"
+            id="offline-select"
           >
             <div
               class="emotion-47"
@@ -4465,6 +4473,7 @@ exports[`Search Results Page renders loading images before returning no results 
 
 .emotion-128>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-128>button>*:last-child>svg {
@@ -4704,6 +4713,7 @@ exports[`Search Results Page renders loading images before returning no results 
 
 .emotion-140>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-140>button>*:last-child>svg {
@@ -5302,6 +5312,7 @@ exports[`Search Results Page renders loading images before returning no results 
         >
           <div
             class="emotion-125 emotion-126 emotion-127"
+            id="offline-select"
           >
             <div
               class="emotion-128"
@@ -5359,6 +5370,7 @@ exports[`Search Results Page renders loading images before returning no results 
         >
           <div
             class="emotion-125 emotion-126 emotion-139"
+            id="offline-select"
           >
             <div
               class="emotion-140"
@@ -5962,6 +5974,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
 
 .emotion-128>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-128>button>*:last-child>svg {
@@ -6201,6 +6214,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
 
 .emotion-140>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-140>button>*:last-child>svg {
@@ -6799,6 +6813,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
         >
           <div
             class="emotion-125 emotion-126 emotion-127"
+            id="offline-select"
           >
             <div
               class="emotion-128"
@@ -6856,6 +6871,7 @@ exports[`Search Results Page renders loading images before returning nonempty re
         >
           <div
             class="emotion-125 emotion-126 emotion-139"
+            id="offline-select"
           >
             <div
               class="emotion-140"
@@ -7726,6 +7742,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-58>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-58>button>*:last-child>svg {
@@ -7965,6 +7982,7 @@ exports[`Search Results Page renders results from a given search term query para
 
 .emotion-70>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-70>button>*:last-child>svg {
@@ -8423,6 +8441,7 @@ exports[`Search Results Page renders results from a given search term query para
         >
           <div
             class="emotion-55 emotion-56 emotion-57"
+            id="offline-select"
           >
             <div
               class="emotion-58"
@@ -8480,6 +8499,7 @@ exports[`Search Results Page renders results from a given search term query para
         >
           <div
             class="emotion-55 emotion-56 emotion-69"
+            id="offline-select"
           >
             <div
               class="emotion-70"
