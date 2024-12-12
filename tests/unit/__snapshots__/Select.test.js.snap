@@ -246,7 +246,6 @@ exports[`Select renders select correctly 1`] = `
 
 <div
     class="undefined emotion-0"
-    id="offline-select"
   >
     <div
       class="emotion-1"
