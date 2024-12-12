@@ -5,12 +5,14 @@ import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
 import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang';
-import { getHtmlLangFormat } from './src/utils/locale';
-import bindTabUI from './src/utils/head-scripts/offline-ui/tabs';
+import { OFFLINE_HEAD_SCRIPTS } from './src/utils/head-scripts/offline-ui';
 import { isOfflineDocsBuild } from './src/utils/is-offline-docs-build';
-import updateSidenavHeight from './src/utils/head-scripts/offline-ui/sidenav';
+import { getHtmlLangFormat } from './src/utils/locale';
 
 export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
+  if (isOfflineDocsBuild) {
+    return setHeadComponents([...OFFLINE_HEAD_SCRIPTS]);
+  }
   const headComponents = [
     // GTM Pathway
     <script
@@ -84,28 +86,6 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
               }
             }();
           `,
-        }}
-      />
-    );
-  }
-  if (isOfflineDocsBuild) {
-    headComponents.push(
-      <script
-        key="offline-docs-ui"
-        type="text/javascript"
-        dangerouslySetInnerHTML={{
-          // Call function immediately on load
-          __html: `!${bindTabUI}()`,
-        }}
-      />
-    );
-    headComponents.push(
-      <script
-        key="offline-sidenav-ui"
-        type="text/javascript"
-        dangerouslySetInnerHTML={{
-          // Call function immediately on load
-          __html: `!${updateSidenavHeight}()`,
         }}
       />
     );
