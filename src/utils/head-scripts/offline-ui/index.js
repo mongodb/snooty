@@ -1,7 +1,6 @@
 import bindTabUI from './tabs';
 import updateSidenavHeight from './sidenav';
 import bindTabsSelectorsUI from './tabs-selectors';
-// TODO: add script for tab selectors
 const OFFLINE_UI_CLASSNAME = 'snooty-offline-ui';
 
 const getScript = ({ key, fn }) => (

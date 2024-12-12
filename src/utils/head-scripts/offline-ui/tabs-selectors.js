@@ -60,7 +60,6 @@ function bindTabsSelectorsUI() {
 
     // bind document click to close menu
     document.addEventListener('click', (e) => {
-      debugger;
       if (!selectPortal.contains(e.target)) {
         menu.setAttribute('hidden', true);
       }
