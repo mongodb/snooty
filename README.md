@@ -100,13 +100,18 @@ By default, the master branch of `docs-landing` will be parsed with the parser v
 
 ## Releasing
 
-We have configured an automatic release process using [GitHub Actions](https://github.com/features/actions) that is triggered by [npm-version](https://docs.npmjs.com/cli/version). To release a version, you must have admin privileges in this repo. Then proceed as follows:
+We have configured an automatic release process using [GitHub Actions](https://github.com/features/actions) that is triggered by [npm-version](https://docs.npmjs.com/cli/version). To release a version, you must have admin privileges in this repo.
+
+:warning: This process cannot be completed if the releaser's `origin` points to a fork.
+
+:warning: Please **do not** create new git tags directly through the GH UI or CLI. Doing so may result in a merge conflict or git tag error when
+performing the following instructions.
+
+Then proceed as follows:
 
 1. On the `main` branch, run `git pull` followed by `npm ci`.
 2. Run `npm version [major | minor | patch]`, using [Semantic Versioning](https://semver.org) guidelines to correctly increment the version number. Keep the minor version consistent with [snooty-parser versioning](https://github.com/mongodb/snooty-parser/tags). GitHub Actions will create a new git tag and push it to GitHub.
 3. Update the release draft found [here](https://github.com/mongodb/snooty/releases) using the automatically generated [CHANGELOG.md](https://github.com/mongodb/snooty/blob/main/CHANGELOG.md) and publish the release. Keep "pre-release" checked until version 1.0.0.
-
-:warning: This process cannot be completed if the releaser's `origin` points to a fork.
 
 ## Testing
 
