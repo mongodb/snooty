@@ -161,7 +161,7 @@ const optionStyling = css`
 const OFFLINE_SELECT_ID = 'offline-select';
 
 const PortalContainer = forwardRef(({ ...props }, ref) => (
-  <div id={OFFLINE_SELECT_ID} className={cx(portalStyle, props.className)} ref={ref}>
+  <div id={isOfflineDocsBuild ? OFFLINE_SELECT_ID : null} className={cx(portalStyle, props.className)} ref={ref}>
     {props.children}
   </div>
 ));
