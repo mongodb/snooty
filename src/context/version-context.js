@@ -241,10 +241,9 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
         gitBranchName === LEGACY_GIT_BRANCH
           ? gitBranchName
           : targetBranch.urlSlug || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
-      const urlTarget = getUrl(target, metadata.project, repoBranches?.siteBasePrefix, slug);
-      navigate(urlTarget);
+      navigate(target);
     },
-    [availableVersions, metadata, repoBranches, slug]
+    [availableVersions, metadata]
   );
 
   // attempts to find branch by given url alias. can be alias, urlAliases, or gitBranchName
