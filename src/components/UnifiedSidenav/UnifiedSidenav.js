@@ -38,17 +38,17 @@ function CollapsibleNavItem({ items, label, level = 1 }) {
         <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
         {label}
       </SideNavItem>
-      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} />)}
+      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} />)}
     </>
   );
 }
 
-function UnifiedTocNavItem({ label, group, url, collapsible, items }) {
+function UnifiedTocNavItem({ label, group, url, collapsible, items, level = 1 }) {
   // groups are for adding a static header, these can also be collapsible
   if (group) {
     console.log(items);
     return (
-      <SideNavGroup header={label} collapsible={collapsible}>
+      <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavItemTOCStyling({ level }))}>
         {items?.map((tocItem) => (
           <UnifiedTocNavItem {...tocItem} />
         ))}
@@ -58,11 +58,11 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items }) {
 
   // collapsible is for items that have nested links
   if (collapsible) {
-    return <CollapsibleNavItem items={items} label={label} />;
+    return <CollapsibleNavItem items={items} label={label} className={cx(sideNavItemTOCStyling({ level }))} />;
   }
 
   return (
-    <SideNavItem aria-label={label} as={Link} to={url}>
+    <SideNavItem aria-label={label} as={Link} to={url} className={cx(sideNavItemTOCStyling({ level }))}>
       {label}
     </SideNavItem>
   );
