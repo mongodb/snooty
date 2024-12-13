@@ -5,6 +5,7 @@ import { css, Global } from '@emotion/react';
 import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
+import Link from '../Link';
 
 import { sideNavItemTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
@@ -23,12 +24,7 @@ const caretStyle = css`
   min-width: 16px;
 `;
 
-const FormatTitle = styled.div`
-  margin-left: var(--margin-left);
-  scroll-margin-bottom: ${theme.size.xxlarge};
-`;
-
-function CollapsibleNavItem({ items }) {
+function CollapsibleNavItem({ items, label, level = 1 }) {
   const [isOpen, setIsOpen] = useState(false);
   const iconType = isOpen ? 'CaretDown' : 'CaretRight';
   const onCaretClick = (event) => {
@@ -36,14 +32,13 @@ function CollapsibleNavItem({ items }) {
     setIsOpen(!isOpen);
   };
   return (
-    <SideNavItem className={cx(sideNavItemTOCStyling({ level: 1 }))}>
-      <FormatTitle></FormatTitle>
-      <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
-
-      {items?.map((tocItem) => (
-        <UnifiedTocNavItem {...tocItem} />
-      ))}
-    </SideNavItem>
+    <>
+      <SideNavItem as="a" className={cx(sideNavItemTOCStyling({ level }))} onClick={() => setIsOpen(!isOpen)}>
+        <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
+        {label}
+      </SideNavItem>
+      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} />)}
+    </>
   );
 }
 
@@ -63,7 +58,13 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items }) {
   if (collapsible) {
     return <CollapsibleNavItem items={items} label={label} />;
   }
-  return <SideNavItem>{label}</SideNavItem>;
+
+  console.log(url);
+  return (
+    <SideNavItem aria-label={label} as={Link} to={url}>
+      {label}
+    </SideNavItem>
+  );
 }
 
 export function UnifiedSidenav() {

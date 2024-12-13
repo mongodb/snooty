@@ -33,6 +33,7 @@ url = "/generate-data"
 [[toc]]
 label = "Application Development"
 group = true
+collapsible = true
 [[toc.items]]
 label = "Connect to Clusters"
 collapsible = true
