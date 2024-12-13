@@ -31,6 +31,7 @@ function CollapsibleNavItem({ items, label, level = 1 }) {
     event.preventDefault();
     setIsOpen(!isOpen);
   };
+  console.log(items, isOpen);
   return (
     <>
       <SideNavItem as="a" className={cx(sideNavItemTOCStyling({ level }))} onClick={() => setIsOpen(!isOpen)}>
@@ -45,6 +46,7 @@ function CollapsibleNavItem({ items, label, level = 1 }) {
 function UnifiedTocNavItem({ label, group, url, collapsible, items }) {
   // groups are for adding a static header, these can also be collapsible
   if (group) {
+    console.log(items);
     return (
       <SideNavGroup header={label} collapsible={collapsible}>
         {items?.map((tocItem) => (
@@ -59,7 +61,6 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items }) {
     return <CollapsibleNavItem items={items} label={label} />;
   }
 
-  console.log(url);
   return (
     <SideNavItem aria-label={label} as={Link} to={url}>
       {label}
@@ -74,11 +75,7 @@ export function UnifiedSidenav() {
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
   return (
     <>
-      <Global
-        styles={css`
-          ${disableScroll(false)}
-        `}
-      />
+      <Global />
 
       <SideNav
         widthOverride={300}
