@@ -155,7 +155,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
     currentPageComponents.forEach((componentName) => projectComponents.add(componentName));
 
-    if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
+    const validPageExtensions = ['.txt', '.ast'];
+    const isValidPageExtension = validPageExtensions.some((ext) => filename.endsWith(ext));
+    if (isValidPageExtension && !manifestMetadata.openapi_pages?.[key]) {
       createNode({
         id: key,
         page_id: key,
