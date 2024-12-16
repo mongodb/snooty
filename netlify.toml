@@ -8,6 +8,6 @@ ignore = "/bin/false"
 
 [build.environment]
 ORG_NAME = "mongodb"
-REPO_NAME = "docs-landing"
+REPO_NAME = "docs-laravel"
 BRANCH_NAME = "master"
 PARSER_VERSION = "0.18.8"
