@@ -17,6 +17,10 @@ const disableScroll = (shouldDisableScroll) => css`
     ${shouldDisableScroll && 'overflow: hidden;'}
   }
 `;
+const FormatTitle = styled.div`
+  margin-left: var(--margin-left);
+  scroll-margin-bottom: ${theme.size.xxlarge};
+`;
 
 const caretStyle = css`
   margin-top: 3px;
@@ -27,16 +31,17 @@ const caretStyle = css`
 function CollapsibleNavItem({ items, label, level = 1 }) {
   const [isOpen, setIsOpen] = useState(false);
   const iconType = isOpen ? 'CaretDown' : 'CaretRight';
+
   const onCaretClick = (event) => {
     event.preventDefault();
     setIsOpen(!isOpen);
   };
-  console.log(items, isOpen);
+
   return (
     <>
       <SideNavItem as="a" className={cx(sideNavItemTOCStyling({ level }))} onClick={() => setIsOpen(!isOpen)}>
         <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
-        {label}
+        <FormatTitle style={{ '--margin-left': '21px' }}>{label}</FormatTitle>
       </SideNavItem>
       {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} />)}
     </>
@@ -46,7 +51,6 @@ function CollapsibleNavItem({ items, label, level = 1 }) {
 function UnifiedTocNavItem({ label, group, url, collapsible, items, level = 1 }) {
   // groups are for adding a static header, these can also be collapsible
   if (group) {
-    console.log(items);
     return (
       <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavItemTOCStyling({ level }))}>
         {items?.map((tocItem) => (

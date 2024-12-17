@@ -37,10 +37,58 @@ group = true
 label = "Connect to Clusters"
 collapsible = true
 [[toc.items.items]]
-label = "Nested under 'Connect to Clusters'"
-url = "/some-nested-element"
-
-
+label = "Drivers"
+url = "/drivers"
+[[toc.items.items]]
+label = "Compass"
+url = "/compass"
+[[toc.items.items]]
+label = "mongosh"
+url = "/mongosh"
+[[toc.items.items]]
+collapsible = true
+label = "BI Connector"
+url = "/bi-connector"
+# BI Connector items
+[[toc.items.items.items]]
+label = "Transition to Atlas SQL"
+url = "/transition-atlas-sql"
+[[toc.items.items.items]]
+label = "System DSN"
+url = "/system-dsn"
+[[toc.items.items.items]]
+label = "Excel"
+url = "/excel"
+[[toc.items.items.items]]
+label = "Tableau Desktop"
+url = "/tableau"
+[[toc.items.items.items]]
+label = "Qlik Sense"
+url = "/qlik-sense"
+[[toc.items.items.items]]
+label = "MySQL Workbench"
+url = "/mysql-workbench"
+[[toc.items.items.items]]
+label = "Power BI Desktop"
+url = "/power-bi-desktop"
+[[toc.items]]
+label = "Command Line Tools"
+url = "/cli-tools"
+[[toc.items]]
+label = "VS Code"
+url = "/vs-code"
+[[toc.items]]
+label = "AWS Lambda"
+url = "/aws-lambda"
+[[toc.items]]
+label = "Azure Functions"
+url = "/azure-functions"
+[[toc.items]]
+label = "Google Cloud Functions"
+url = "/google-cloud-functions"
+[[toc.items]]
+label = "Troubleshoot"
+url = "/troubleshoot"
 # toc : [ { items: [ { label: 'blah' }], label: 'blah' }  ]
 
 
