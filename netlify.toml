@@ -3,10 +3,10 @@ name = "snooty-cache-plugin"
 
 [build]
 publish = "public"
-command = ". ./build.sh $ORG_NAME $REPO_NAME $BRANCH_NAME $PARSER_VERSION"
+command = ". ./build.sh $REPO_NAME $PARSER_VERSION"
 
 [build.environment]
 ORG_NAME = "mongodb"
 REPO_NAME = "docs-landing"
 BRANCH_NAME = "master"
-PARSER_VERSION = "0.18.6"
+PARSER_VERSION = "0.18.9"

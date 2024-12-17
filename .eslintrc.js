@@ -21,7 +21,14 @@ module.exports = {
     'import/resolver': {
       node: {
         moduleDirectory: ['node_modules', '.'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      parser: '@typescript-eslint/parser',
+    },
+  ],
 };

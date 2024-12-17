@@ -50,4 +50,4 @@ export function getOfflineId(tabsetName) {
   return tabsetName.replace(/[^a-zA-Z0-9]/g, '-');
 }
 
-export const TABS_ID = `offline-tabs`;
+export const TABS_CLASSNAME = `offline-tabs`;
