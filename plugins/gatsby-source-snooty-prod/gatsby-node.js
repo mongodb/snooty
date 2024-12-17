@@ -203,7 +203,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     const tomlContents = (await fs.readFile(`${process.cwd()}/toc.toml`)).toString();
     const toc = load(tomlContents);
 
-    console.log(toc);
     createNode({
       tocTree: toc,
       id: createNodeId('toc'),
@@ -214,7 +213,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
       parent: null,
     });
   } catch (e) {
-    console.error('error occurred', e);
+    console.error('error occurred when reading the toc.toml', e);
   }
 
   if (process.env['OFFLINE_DOCS'] !== 'true') {
