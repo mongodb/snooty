@@ -12,7 +12,7 @@ import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
 import { getLocalValue } from '../../utils/browser-storage';
 import { getPlaintext } from '../../utils/get-plaintext';
-import { getOfflineId, TABS_ID } from '../../utils/head-scripts/offline-ui/tabs';
+import { TABS_CLASSNAME, getOfflineId } from '../../utils/head-scripts/offline-ui/tabs';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { TabContext } from './tab-context';
 
@@ -176,15 +176,21 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
     [activeTab, setActiveTab, tabIds, tabsetName]
   );
 
+  // TODO: if this is a drivers tabs set, include drivers in classname
+
   return (
     <>
       <div ref={scrollAnchorRef} aria-hidden="true"></div>
       <CodeProvider>
         <LeafyTabs
-          className={cx(getTabsStyling({ isHidden, isProductLanding }), isOfflineDocsBuild ? TABS_ID : '')}
+          className={cx(
+            getTabsStyling({ isHidden, isProductLanding }),
+            isOfflineDocsBuild ? TABS_CLASSNAME : '',
+            tabsetName
+          )}
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
-          id={isOfflineDocsBuild ? `${TABS_ID}-${getOfflineId(tabsetName)}` : undefined}
+          id={isOfflineDocsBuild ? `${TABS_CLASSNAME}-${getOfflineId(tabsetName)}` : undefined}
           setSelected={handleClick}
           forceRenderAllTabPanels={true}
         >
@@ -204,7 +210,10 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 <HeadingContextProvider
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
                 >
-                  <div className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}>
+                  <div
+                    data-value={isOfflineDocsBuild ? tabId : null}
+                    className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}
+                  >
                     {tab.children.map((child, i) => (
                       <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
                     ))}

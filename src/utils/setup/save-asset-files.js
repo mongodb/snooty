@@ -4,7 +4,8 @@ const { siteMetadata } = require('../site-metadata');
 
 const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
 
-const needsImageOptimization = ['dotcomprd', 'dotcomstg'].includes(siteMetadata.snootyEnv);
+const needsImageOptimization =
+  ['dotcomprd', 'dotcomstg'].includes(siteMetadata.snootyEnv) && process.env['OFFLINE_DOCS'] !== 'true';
 
 const saveFile = async (file, data) => {
   // save files both to "public" and "src/images" directories

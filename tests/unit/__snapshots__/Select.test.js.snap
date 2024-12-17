@@ -41,6 +41,7 @@ exports[`Select renders select correctly 1`] = `
 
 .emotion-1>button {
   background-color: #FFFFFF;
+  text-align: left;
 }
 
 .emotion-1>button>*:last-child>svg {
