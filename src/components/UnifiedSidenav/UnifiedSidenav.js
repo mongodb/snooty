@@ -11,12 +11,6 @@ import { sideNavItemTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
 
-// Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
-const disableScroll = (shouldDisableScroll) => css`
-  body {
-    ${shouldDisableScroll && 'overflow: hidden;'}
-  }
-`;
 const FormatTitle = styled.div`
   margin-left: var(--margin-left);
   scroll-margin-bottom: ${theme.size.xxlarge};

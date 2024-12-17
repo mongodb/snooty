@@ -22,7 +22,7 @@ const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
-
+const { createTocNodes } = require('../utils/unified-toc.js');
 const assets = new Map();
 const projectComponents = new Set();
 
@@ -198,23 +198,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
 
   // create TOC nodes
-
-  try {
-    const tomlContents = (await fs.readFile(`${process.cwd()}/toc.toml`)).toString();
-    const toc = load(tomlContents);
-
-    createNode({
-      tocTree: toc,
-      id: createNodeId('toc'),
-      internal: {
-        contentDigest: createContentDigest(toc),
-        type: 'TOC',
-      },
-      parent: null,
-    });
-  } catch (e) {
-    console.error('error occurred when reading the toc.toml', e);
-  }
+  await createTocNodes({ createNode, createNodeId, createContentDigest });
 
   if (process.env['OFFLINE_DOCS'] !== 'true') {
     const umbrellaProduct = await db.realmInterface.getMetadata(

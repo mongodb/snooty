@@ -14,6 +14,7 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
 import { getAllLocaleCssStrings } from '../utils/locale';
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
+import { getFeatureFlags } from '../utils/feature-flags';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -95,7 +96,7 @@ export const StyledContentContainer = styled('div')`
 const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, slugToTitle, toctree, eol, project } = useSnootyMetadata();
-
+  const { isUnifiedToc } = getFeatureFlags();
   const remoteMetadata = useRemoteMetadata();
 
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
@@ -117,7 +118,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
-          {process.env.GATSBY_USE_UNIFIED_TOC ? (
+          {isUnifiedToc ? (
             <UnifiedSidenav />
           ) : sidenav && !isInPresentationMode ? (
             <Sidenav
