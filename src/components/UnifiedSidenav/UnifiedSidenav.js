@@ -23,7 +23,7 @@ const caretStyle = css`
 `;
 
 function isSelectedTab(slug) {
-  if (!window) return;
+  if (typeof window === 'undefined') return false;
 
   return window.location.pathname === `${slug}/`;
 }
