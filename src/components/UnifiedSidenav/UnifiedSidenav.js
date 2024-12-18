@@ -34,12 +34,12 @@ function CollapsibleNavItem({ items, label, url, level = 1 }) {
     setIsOpen(!isOpen);
   };
 
-  console.log();
   return (
     <>
       <SideNavItem
         hideExternalIcon={true}
-        as="a"
+        as={Link}
+        to={url}
         active={isSelectedTab(url)}
         className={cx(sideNavItemTOCStyling({ level }))}
         onClick={() => setIsOpen(!isOpen)}
@@ -92,7 +92,6 @@ export function UnifiedSidenav() {
   return (
     <>
       <Global />
-
       <SideNav
         widthOverride={300}
         className={css`
