@@ -12,5 +12,5 @@ BRANCH_NAME = "master"
 PARSER_VERSION = "0.18.9"
 
 # remove when merged 
-[context."feat/unified-nav".environment]
+[context.deploy-preview.environment]
 GATSBY_USE_UNIFIED_TOC = true
