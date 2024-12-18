@@ -119,7 +119,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
           {isUnifiedToc ? (
-            <UnifiedSidenav />
+            <UnifiedSidenav slug={slug} />
           ) : sidenav && !isInPresentationMode ? (
             <Sidenav
               chapters={chapters}

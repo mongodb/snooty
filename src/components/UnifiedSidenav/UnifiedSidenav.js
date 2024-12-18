@@ -22,7 +22,10 @@ const caretStyle = css`
   min-width: 16px;
 `;
 
-function CollapsibleNavItem({ items, label, level = 1 }) {
+function isSelectedTab(slug) {
+  return window.location.pathname === `${slug}/`;
+}
+function CollapsibleNavItem({ items, label, url, level = 1 }) {
   const [isOpen, setIsOpen] = useState(false);
   const iconType = isOpen ? 'CaretDown' : 'CaretRight';
 
@@ -31,11 +34,18 @@ function CollapsibleNavItem({ items, label, level = 1 }) {
     setIsOpen(!isOpen);
   };
 
+  console.log();
   return (
     <>
-      <SideNavItem as="a" className={cx(sideNavItemTOCStyling({ level }))} onClick={() => setIsOpen(!isOpen)}>
+      <SideNavItem
+        hideExternalIcon={true}
+        as="a"
+        active={isSelectedTab(url)}
+        className={cx(sideNavItemTOCStyling({ level }))}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
-        <FormatTitle style={{ '--margin-left': '21px' }}>{label}</FormatTitle>
+        <FormatTitle style={{ '--margin-left': '3px' }}>{label}</FormatTitle>
       </SideNavItem>
       {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} />)}
     </>
@@ -56,11 +66,19 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, level = 1 })
 
   // collapsible is for items that have nested links
   if (collapsible) {
-    return <CollapsibleNavItem items={items} label={label} className={cx(sideNavItemTOCStyling({ level }))} />;
+    return (
+      <CollapsibleNavItem items={items} label={label} url={url} className={cx(sideNavItemTOCStyling({ level }))} />
+    );
   }
 
   return (
-    <SideNavItem aria-label={label} as={Link} to={url} className={cx(sideNavItemTOCStyling({ level }))}>
+    <SideNavItem
+      active={isSelectedTab(url)}
+      aria-label={label}
+      as={Link}
+      to={url}
+      className={cx(sideNavItemTOCStyling({ level }))}
+    >
       {label}
     </SideNavItem>
   );
