@@ -23,6 +23,8 @@ const caretStyle = css`
 `;
 
 function isSelectedTab(slug) {
+  if (!window) return;
+
   return window.location.pathname === `${slug}/`;
 }
 function CollapsibleNavItem({ items, label, url, level = 1 }) {
