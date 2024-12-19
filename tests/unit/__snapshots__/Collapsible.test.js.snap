@@ -193,7 +193,7 @@ exports[`collapsible component renders all the content in the options and childr
   color: --font-color-primary;
 }
 
-[aria-expanded=true] .emotion-10 {
+[aria-expanded='true'] .emotion-10 {
   height: auto;
 }
 
