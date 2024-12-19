@@ -27,7 +27,10 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
     return findAllNestedAttribute(children, 'id');
   }, [children]);
 
-  const [open, setOpen] = useState(() => (expanded || isOfflineDocsBuild) ?? true);
+  const [open, setOpen] = useState(() => {
+    if (isOfflineDocsBuild || expanded) return true;
+    return expanded ?? true;
+  });
   const headingNodeData = {
     id,
     children: [{ type: 'text', value: heading }],
