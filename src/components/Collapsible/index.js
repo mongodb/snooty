@@ -27,7 +27,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
     return findAllNestedAttribute(children, 'id');
   }, [children]);
 
-  const [open, setOpen] = useState(() => expanded ?? true);
+  const [open, setOpen] = useState(() => (expanded || isOfflineDocsBuild) ?? true);
   const headingNodeData = {
     id,
     children: [{ type: 'text', value: heading }],
@@ -84,7 +84,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
             aria-expanded={open}
             onClick={onIconClick}
           >
-            <Icon glyph={open || isOfflineDocsBuild ? 'ChevronDown' : 'ChevronRight'} />
+            <Icon glyph={open ? 'ChevronDown' : 'ChevronRight'} />
           </IconButton>
         </Box>
         <Box className={cx(innerContentStyle, isOfflineDocsBuild ? CONTENT_CLASSNAME : '')}>
