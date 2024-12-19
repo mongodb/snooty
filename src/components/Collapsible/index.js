@@ -8,7 +8,9 @@ import { cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
 import { HeadingContextProvider } from '../../context/heading-context';
 import { findAllNestedAttribute } from '../../utils/find-all-nested-attribute';
+import { CLASSNAME, CONTENT_CLASSNAME } from '../../utils/head-scripts/offline-ui/collapsible';
 import { isBrowser } from '../../utils/is-browser';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { reportAnalytics } from '../../utils/report-analytics';
 import ComponentFactory from '../ComponentFactory';
 import Heading from '../Heading';
@@ -25,7 +27,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
     return findAllNestedAttribute(children, 'id');
   }, [children]);
 
-  const [open, setOpen] = useState(expanded ?? true);
+  const [open, setOpen] = useState(() => expanded ?? true);
   const headingNodeData = {
     id,
     children: [{ type: 'text', value: heading }],
@@ -67,7 +69,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
 
   return (
     <HeadingContextProvider ignoreNextHeading={true} heading={heading}>
-      <Box className={cx('collapsible', collapsibleStyle)}>
+      <Box aria-expanded={open} className={cx('collapsible', collapsibleStyle, isOfflineDocsBuild ? CLASSNAME : '')}>
         <Box className={cx(headerContainerStyle)}>
           <Box>
             {/* Adding 1 to reflect logic in parser, but want to show up as H2 for SEO reasons */}
@@ -76,11 +78,16 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
             </Heading>
             <Body baseFontSize={13}>{subHeading}</Body>
           </Box>
-          <IconButton className={iconStyle} aria-labelledby={'Expand the collapsed content'} onClick={onIconClick}>
-            <Icon glyph={open ? 'ChevronDown' : 'ChevronRight'} />
+          <IconButton
+            className={iconStyle}
+            aria-labelledby={'Expand the collapsed content'}
+            aria-expanded={open}
+            onClick={onIconClick}
+          >
+            <Icon glyph={open || isOfflineDocsBuild ? 'ChevronDown' : 'ChevronRight'} />
           </IconButton>
         </Box>
-        <Box className={cx(innerContentStyle(open))}>
+        <Box className={cx(innerContentStyle, isOfflineDocsBuild ? CONTENT_CLASSNAME : '')}>
           {children.map((c, i) => (
             <ComponentFactory nodeData={c} key={i} sectionDepth={sectionDepth} {...rest}></ComponentFactory>
           ))}
