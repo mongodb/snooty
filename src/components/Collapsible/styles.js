@@ -1,7 +1,7 @@
 import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
-import { CLASSNAME as OFFLINE_CLASSNAME } from '../../utils/head-scripts/offline-ui/collapsible';
+import { OFFLINE_CLASSNAME } from '../../utils/head-scripts/offline-ui/collapsible';
 
 export const collapsibleStyle = css`
   border-bottom: 1px solid ${palette.gray.light2};

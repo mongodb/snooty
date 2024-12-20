@@ -6,8 +6,7 @@ function bindCollapsibleUI() {
         // bind event to button
         const button = collapsible.querySelector('button');
         button?.addEventListener('click', () => {
-          console.log('click');
-          const newVal = button.getAttribute('aria-expanded') === 'false' ? true : false;
+          const newVal = button.getAttribute('aria-expanded') === 'false';
           button.setAttribute('aria-expanded', newVal);
           collapsible.setAttribute('aria-expanded', newVal);
         });
@@ -22,5 +21,4 @@ function bindCollapsibleUI() {
 
 export default bindCollapsibleUI;
 
-export const CLASSNAME = `offline-collapsible`;
-export const CONTENT_CLASSNAME = `offline-collapsible-content`;
+export const OFFLINE_CLASSNAME = `offline-collapsible`;

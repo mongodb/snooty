@@ -8,7 +8,7 @@ import { cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
 import { HeadingContextProvider } from '../../context/heading-context';
 import { findAllNestedAttribute } from '../../utils/find-all-nested-attribute';
-import { CLASSNAME, CONTENT_CLASSNAME } from '../../utils/head-scripts/offline-ui/collapsible';
+import { OFFLINE_CLASSNAME } from '../../utils/head-scripts/offline-ui/collapsible';
 import { isBrowser } from '../../utils/is-browser';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -72,7 +72,10 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
 
   return (
     <HeadingContextProvider ignoreNextHeading={true} heading={heading}>
-      <Box aria-expanded={open} className={cx('collapsible', collapsibleStyle, isOfflineDocsBuild ? CLASSNAME : '')}>
+      <Box
+        aria-expanded={open}
+        className={cx('collapsible', collapsibleStyle, isOfflineDocsBuild ? OFFLINE_CLASSNAME : '')}
+      >
         <Box className={cx(headerContainerStyle)}>
           <Box>
             {/* Adding 1 to reflect logic in parser, but want to show up as H2 for SEO reasons */}
@@ -90,7 +93,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
             <Icon glyph={open ? 'ChevronDown' : 'ChevronRight'} />
           </IconButton>
         </Box>
-        <Box className={cx(innerContentStyle, isOfflineDocsBuild ? CONTENT_CLASSNAME : '')}>
+        <Box className={cx(innerContentStyle)}>
           {children.map((c, i) => (
             <ComponentFactory nodeData={c} key={i} sectionDepth={sectionDepth} {...rest}></ComponentFactory>
           ))}
