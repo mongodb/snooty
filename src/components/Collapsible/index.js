@@ -28,7 +28,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
   }, [children]);
 
   const [open, setOpen] = useState(() => {
-    if (isOfflineDocsBuild || expanded) return true;
+    if (isOfflineDocsBuild) return true;
     return expanded ?? true;
   });
   const headingNodeData = {
