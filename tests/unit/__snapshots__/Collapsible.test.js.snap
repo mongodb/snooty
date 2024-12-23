@@ -160,6 +160,13 @@ exports[`collapsible component renders all the content in the options and childr
   background-color: rgba(61,79,88,0.1);
 }
 
+.offline-collapsible[aria-expanded=false] .emotion-8 {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
 .emotion-9 {
   position: absolute;
   top: 0;
@@ -184,6 +191,10 @@ exports[`collapsible component renders all the content in the options and childr
   overflow: hidden;
   height: 0;
   color: --font-color-primary;
+}
+
+[aria-expanded='true'] .emotion-10 {
+  height: auto;
 }
 
 .emotion-11 {
@@ -509,6 +520,7 @@ exports[`collapsible component renders all the content in the options and childr
 }
 
 <div
+    aria-expanded="false"
     class="collapsible emotion-0"
   >
     <div
@@ -557,6 +569,7 @@ exports[`collapsible component renders all the content in the options and childr
       </div>
       <button
         aria-disabled="false"
+        aria-expanded="false"
         aria-labelledby="Expand the collapsed content"
         class="emotion-8"
         tabindex="0"

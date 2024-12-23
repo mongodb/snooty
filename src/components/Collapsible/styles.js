@@ -1,6 +1,7 @@
 import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
+import { OFFLINE_CLASSNAME } from '../../utils/head-scripts/offline-ui/collapsible';
 
 export const collapsibleStyle = css`
   border-bottom: 1px solid ${palette.gray.light2};
@@ -29,13 +30,18 @@ export const headerStyle = css`
 export const iconStyle = css`
   align-self: center;
   flex-shrink: 0;
+
+  .${OFFLINE_CLASSNAME}[aria-expanded=false] & {
+    transform: rotate(-90deg);
+  }
 `;
 
-export const innerContentStyle = (open) => css`
+export const innerContentStyle = css`
   overflow: hidden;
   height: 0;
   color: --font-color-primary;
 
-  ${open && `height: auto;`}
-  ${open && `visibility: visible;`}
+  [aria-expanded='true'] & {
+    height: auto;
+  }
 `;
