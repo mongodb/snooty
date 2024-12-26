@@ -18,7 +18,7 @@ function bindMethodSelectorUI() {
         const labels = methodSelectorComponent.querySelectorAll('label');
 
         // for each input, find value `{name}-{index}` ie.  `driver-0`
-        // find data-testid=[method-option-content-{name}] and show
+        // find content div with data-testid=[method-option-content-{name}] and show that content div
         for (let idx = 0; idx < buttons.length; idx++) {
           const button = buttons[idx];
           button.addEventListener('click', (e) => {
@@ -33,6 +33,9 @@ function bindMethodSelectorUI() {
             }
           });
         }
+
+        // on load, set first label as active
+        labels[0]?.setAttribute('aria-selected', true);
       }
     } catch (e) {
       console.error(e);

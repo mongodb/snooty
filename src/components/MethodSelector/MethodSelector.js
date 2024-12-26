@@ -168,7 +168,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
                 className={cx(radioBoxStyle)}
                 value={`${id}-${index}`}
                 checked={selectedMethod === id}
-                aria-selected={isOfflineDocsBuild ? index === 0 : null}
+                aria-selected={isOfflineDocsBuild ? selectedMethod === id : null}
               >
                 {title}
               </RadioBox>
