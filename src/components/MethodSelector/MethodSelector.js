@@ -6,6 +6,8 @@ import { theme } from '../../theme/docsTheme';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { ContentsContext } from '../Contents/contents-context';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { OFFLINE_CLASSNAME } from '../../utils/head-scripts/offline-ui/method-selector';
 import MethodOptionContent from './MethodOptionContent';
 
 const STORAGE_KEY = 'methodSelectorId';
@@ -129,7 +131,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
 
   return (
     <>
-      <div className={optionsContainer}>
+      <div className={cx(optionsContainer, isOfflineDocsBuild ? OFFLINE_CLASSNAME : '')}>
         <RadioBoxGroup
           className={cx(radioBoxGroupStyle(children.length))}
           size={'full'}
@@ -146,17 +148,26 @@ const MethodSelector = ({ nodeData: { children } }) => {
         >
           {children.map(({ options: { title, id } }, index) => {
             return (
-              <RadioBox key={id} className={cx(radioBoxStyle)} value={`${id}-${index}`} checked={selectedMethod === id}>
+              <RadioBox
+                id={id}
+                key={id}
+                className={cx(radioBoxStyle)}
+                value={`${id}-${index}`}
+                checked={selectedMethod === id}
+              >
                 {title}
               </RadioBox>
             );
           })}
         </RadioBoxGroup>
         {/* Keep separate div for triangle to allow for relative positioning */}
-        <div className={cx(lineStyle)}>
-          <div className={cx(triangleStyle(optionCount, selectedIdx))} />
-          <hr className={cx(hrStyle)} />
-        </div>
+        {/* Offline docs will not have this triangle indicator */}
+        {!isOfflineDocsBuild && (
+          <div className={cx(lineStyle)}>
+            <div className={cx(triangleStyle(optionCount, selectedIdx))} />
+            <hr className={cx(hrStyle)} />
+          </div>
+        )}
       </div>
       {children.map((child, index) => {
         if (child.name !== 'method-option') return null;
