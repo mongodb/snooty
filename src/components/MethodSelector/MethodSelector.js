@@ -52,7 +52,21 @@ const radioBoxStyle = css`
     padding: 14px 12px;
     background-color: inherit;
     color: inherit;
+
+    ${isOfflineDocsBuild &&
+    `
+      border-color: ${palette.gray.base};
+      box-shadow: none;
+    `}
   }
+
+  ${isOfflineDocsBuild &&
+  `
+    &[aria-selected=true] div {
+      border-color: transparent;
+      box-shadow: 0 0 0 3px ${palette.green.dark1};
+    }
+  `}
 
   :not(:last-of-type) {
     margin: 0;
@@ -154,6 +168,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
                 className={cx(radioBoxStyle)}
                 value={`${id}-${index}`}
                 checked={selectedMethod === id}
+                aria-selected={isOfflineDocsBuild ? index === 0 : null}
               >
                 {title}
               </RadioBox>

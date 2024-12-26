@@ -9,24 +9,27 @@ function bindMethodSelectorUI() {
 
         // find the radio box inputs within button group and bind action
         const buttons = buttonGroup?.querySelectorAll('input') ?? [];
-        console.log('buttons');
-        console.log(buttons);
 
         // find all the content within method selectors
         const contentDivs =
           methodSelectorComponent.parentElement?.querySelectorAll('.offline-method-selector-content') ?? [];
+
+        // find all the labels to style for selected
+        const labels = methodSelectorComponent.querySelectorAll('label');
 
         // for each input, find value `{name}-{index}` ie.  `driver-0`
         // find data-testid=[method-option-content-{name}] and show
         for (let idx = 0; idx < buttons.length; idx++) {
           const button = buttons[idx];
           button.addEventListener('click', (e) => {
-            console.log('click');
-            const id = (button.getAttribute('value') || '').split('-')[0];
-            console.log('id ', id);
+            const id = (e.currentTarget.getAttribute('value') || '').split('-')[0];
             const targetTestId = 'method-option-content-' + id;
+            const parentLabel = button.parentElement;
             for (const contentDiv of contentDivs) {
               contentDiv.setAttribute('aria-expanded', targetTestId === contentDiv.getAttribute('data-testid'));
+            }
+            for (const label of labels) {
+              label.setAttribute('aria-selected', label.isSameNode(parentLabel));
             }
           });
         }
