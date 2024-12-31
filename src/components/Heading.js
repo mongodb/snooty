@@ -74,7 +74,9 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
         wrapper={(children) => (
           <HeadingContainer stackVertically={isMobile}>
             {children}
-            <ChildContainer isStacked={isMobile}>{hasSelectors && !tabsMainColumn && <TabSelectors />}</ChildContainer>
+            <ChildContainer isStacked={isMobile}>
+              {hasSelectors && !tabsMainColumn && <TabSelectors rightColumn={true} />}
+            </ChildContainer>
           </HeadingContainer>
         )}
       >
