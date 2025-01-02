@@ -47,5 +47,5 @@ function bindMethodSelectorUI() {
 
 export default bindMethodSelectorUI;
 
-export const OFFLINE_CLASSNAME = `offline-method-selector`;
+export const OFFLINE_METHOD_SELECTOR_CLASSNAME = `offline-method-selector`;
 export const OFFLINE_CONTENT_CLASSNAME = `offline-method-selector-content`;

@@ -7,7 +7,7 @@ import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { ContentsContext } from '../Contents/contents-context';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
-import { OFFLINE_CLASSNAME } from '../../utils/head-scripts/offline-ui/method-selector';
+import { OFFLINE_METHOD_SELECTOR_CLASSNAME } from '../../utils/head-scripts/offline-ui/method-selector';
 import MethodOptionContent from './MethodOptionContent';
 
 const STORAGE_KEY = 'methodSelectorId';
@@ -145,7 +145,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
 
   return (
     <>
-      <div className={cx(optionsContainer, isOfflineDocsBuild ? OFFLINE_CLASSNAME : '')}>
+      <div className={cx(optionsContainer, isOfflineDocsBuild ? OFFLINE_METHOD_SELECTOR_CLASSNAME : '')}>
         <RadioBoxGroup
           className={cx(radioBoxGroupStyle(children.length))}
           size={'full'}
