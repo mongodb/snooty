@@ -7,6 +7,7 @@ import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { baseBannerStyle, offlineBannerStyle, offlineBannerContainerStyle } from './styles/bannerItemStyle';
 
 const OfflineBanner = ({ linkUrl = 'https://mongodb.com/docs/', template = 'document' }) => {
+  console.log('check linkUrl ', linkUrl);
   return (
     <div className={cx(offlineBannerContainerStyle({ template }))}>
       <LeafyBanner className={cx(baseBannerStyle, offlineBannerStyle({ template }))} variant={'warning'}>

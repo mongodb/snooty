@@ -139,6 +139,7 @@ const DocumentBody = (props) => {
 
   const OfflineBannerComponent = useMemo(() => {
     if (!isOfflineDocsBuild) return <></>;
+    console.log('check repoBranches for siteBasePrefix ', repoBranches);
     const currentBranch = repoBranches.branches.find((repoBranch) => repoBranch.gitBranchName === branch);
     const currentBranchPrefix =
       currentBranch?.urlSlug ?? currentBranch?.urlAliases?.[0] ?? currentBranch?.gitBranchName ?? '';
@@ -148,7 +149,7 @@ const DocumentBody = (props) => {
         template={template}
       />
     );
-  }, [branch, project, repoBranches.branches, repoBranches.siteBasePrefix, slug, template]);
+  }, [branch, project, repoBranches, slug, template]);
 
   return (
     <>
