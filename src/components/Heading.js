@@ -58,7 +58,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const asHeadingNumber = as ?? sectionDepth;
   const asHeading = asHeadingNumber >= 1 && asHeadingNumber <= 6 ? `h${asHeadingNumber}` : 'h6';
   const isPageTitle = sectionDepth === 1;
-  const { isMobile, isTabletOrMobile } = useScreenSize();
+  const { isTabletOrMobile } = useScreenSize();
   const { selectors } = useContext(TabContext);
   const { hasDrawer, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
@@ -72,9 +72,9 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
       <ConditionalWrapper
         condition={shouldShowMobileHeader}
         wrapper={(children) => (
-          <HeadingContainer stackVertically={isMobile}>
+          <HeadingContainer stackVertically={isTabletOrMobile}>
             {children}
-            <ChildContainer isStacked={isMobile}>
+            <ChildContainer isStacked={isTabletOrMobile}>
               {hasSelectors && !tabsMainColumn && <TabSelectors rightColumn={true} />}
             </ChildContainer>
           </HeadingContainer>
