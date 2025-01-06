@@ -17,8 +17,7 @@ const selectStyle = css`
   }
 
   @media ${theme.screenSize.smallAndUp} {
-    /* Min width of right panel */
-    max-width: 180px;
+    max-width: 300px;
   }
 `;
 
