@@ -21,4 +21,4 @@ function bindCollapsibleUI() {
 
 export default bindCollapsibleUI;
 
-export const OFFLINE_CLASSNAME = `offline-collapsible`;
+export const OFFLINE_COLLAPSIBLE_CLASSNAME = `offline-collapsible`;

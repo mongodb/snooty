@@ -160,13 +160,6 @@ exports[`collapsible component renders all the content in the options and childr
   background-color: rgba(61,79,88,0.1);
 }
 
-.offline-collapsible[aria-expanded=false] .emotion-8 {
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  transform: rotate(-90deg);
-}
-
 .emotion-9 {
   position: absolute;
   top: 0;
