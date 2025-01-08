@@ -28,5 +28,9 @@ echo "==========================================================================
 echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 
+if [ -d "docs-worker-pool" ]; then
+  node --unhandled-rejections=strict docs-worker-pool/modules/persistence/dist/index.js --path bundle.zip --githubUser netlify
+fi
+
 # run the site
 npm run build:no-prefix
