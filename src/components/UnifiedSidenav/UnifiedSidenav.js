@@ -6,6 +6,7 @@ import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
+import { formatText } from '../../utils/format-text';
 
 import { sideNavItemTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
@@ -15,7 +16,11 @@ const FormatTitle = styled.div`
   margin-left: var(--margin-left);
   scroll-margin-bottom: ${theme.size.xxlarge};
 `;
-
+const overwriteLinkStyle = css`
+  span {
+    display: flex;
+  }
+`;
 const caretStyle = css`
   margin-top: 3px;
   margin-right: 5px;
@@ -39,15 +44,15 @@ function CollapsibleNavItem({ items, label, url, level = 1 }) {
   return (
     <>
       <SideNavItem
-        hideExternalIcon={true}
         as={Link}
         to={url}
         active={isSelectedTab(url)}
-        className={cx(sideNavItemTOCStyling({ level }))}
+        className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
         onClick={() => setIsOpen(!isOpen)}
+        hideExternalIcon={true}
       >
         <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
-        <FormatTitle style={{ '--margin-left': '3px' }}>{label}</FormatTitle>
+        <FormatTitle style={{ '--margin-left': '21px' }}>{formatText(label)}</FormatTitle>
       </SideNavItem>
       {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} />)}
     </>
