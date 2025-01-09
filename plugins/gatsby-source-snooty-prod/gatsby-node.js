@@ -296,7 +296,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         experimental: {
           plugins: [
             [
-              `${process.cwd()}/component-factory-transformer/target/wasm32-wasi/release/component_factory_filter.wasm`,
+              `${process.cwd()}/component-factory-transformer/target/wasm32-wasip1/release/component_factory_filter.wasm`,
               { includes: [...Array.from(projectComponents)] },
             ],
           ],

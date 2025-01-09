@@ -20,13 +20,17 @@ fi
 
 echo "======================================================================================================================================================================="
 echo "========================================================================== Running parser... =========================================================================="
-./snooty-parser/snooty/snooty build $(pwd)/${TESTING_REPO_NAME}  --output=./bundle.zip
+./snooty-parser/snooty/snooty build $(pwd)/${TESTING_REPO_NAME} --no-caching --output=./bundle.zip
 echo "========================================================================== Parser complete ============================================================================"
 echo "======================================================================================================================================================================="
 
 # putting set conent-repo as the path
 echo GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
 export GATSBY_MANIFEST_PATH=$(pwd)/bundle.zip
+
+if [ -d "docs-worker-pool" ]; then
+  node --unhandled-rejections=strict docs-worker-pool/modules/persistence/dist/index.js --path bundle.zip --githubUser netlify
+fi
 
 # run the site
 npm run build:no-prefix

@@ -178,7 +178,7 @@ The component factory filter process uses [SWC](https://swc.rs/) to remove unuse
 
 To use the custom plugin, you'll first need to install [Rust](https://www.rust-lang.org/tools/install).
 
-Once Rust is installed, you'll need to build the plugin. Change directory to `component-factory-transformer`, run `cargo build && rustup target add wasm32-wasi` if you haven't, and then run `npm run prepublishOnly`.
+Once Rust is installed, you'll need to build the plugin. Change directory to `component-factory-transformer`, run `cargo build && rustup target add wasm32-wasip1` if you haven't, and then run `npm run prepublishOnly`.
 
 The `USE_FILTER_BRANCH` environment variable needs to be added in the `.env.production` file and set to `true` for this to work.
 
