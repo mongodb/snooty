@@ -34,34 +34,37 @@ const OfflineDownloadContext = createContext(defaultValues);
  * used to process repos from snooty data api into OfflineRepo
  */
 function processRepos(repos: Repo[]) {
-  return repos.reduce((res: OfflineRepo[], repo) => {
-    const offlineRepo: OfflineRepo = {
-      displayName: assertLeadingBrand(repo?.search?.categoryTitle ?? repo.project),
-      versions: [],
-    };
+  return repos
+    .reduce((res: OfflineRepo[], repo) => {
+      const offlineRepo: OfflineRepo = {
+        displayName: assertLeadingBrand(repo?.search?.categoryTitle ?? repo.project, { titleCase: true }),
+        versions: [],
+      };
 
-    for (const branch of repo.branches) {
-      if (branch.offlineUrl) {
-        offlineRepo.versions.push({
-          displayName: branch.label,
-          url: branch.offlineUrl,
-        });
+      for (const branch of repo.branches) {
+        if (branch.offlineUrl) {
+          offlineRepo.versions.push({
+            displayName: branch.label,
+            url: branch.offlineUrl,
+          });
+        }
+        // TODO: REMOVE TESTING
+        else {
+          offlineRepo.versions.push({
+            displayName: branch.label,
+            url: branch.fullUrl,
+            // url: 'https://www.mongodb.com/docs/offline/bi-connector-v1.1.tar.gz'
+          });
+        }
       }
-      // TODO: REMOVE TESTING
-      else {
-        offlineRepo.versions.push({
-          displayName: branch.label,
-          url: branch.fullUrl,
-        });
-      }
-    }
 
-    // only return this repo if it has offline versions
-    if (offlineRepo.versions.length) {
-      res.push(offlineRepo);
-    }
-    return res;
-  }, []).sort((a, b) => a.displayName > b.displayName ? 1 : -1);
+      // only return this repo if it has offline versions
+      if (offlineRepo.versions.length) {
+        res.push(offlineRepo);
+      }
+      return res;
+    }, [])
+    .sort((a, b) => (a.displayName > b.displayName ? 1 : -1));
 }
 
 type ProviderProps = {

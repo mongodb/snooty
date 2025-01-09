@@ -1,4 +1,4 @@
-const  fetchAndSaveFile = async (url: string, filename: string) => {
+const fetchAndSaveFile = async (url: string, filename: string) => {
   try {
     // Fetch the resource
     const response = await fetch(url);
@@ -26,6 +26,6 @@ const  fetchAndSaveFile = async (url: string, filename: string) => {
   } catch (error) {
     console.error('Error fetching and saving the file:', error);
   }
-}
+};
 
 export default fetchAndSaveFile;

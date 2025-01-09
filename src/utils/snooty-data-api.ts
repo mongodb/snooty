@@ -11,12 +11,12 @@ function getBaseUrl(snootyEnv: string) {
       return 'https://snooty-data-api.mongodb.com/';
     case 'production':
       return 'https://snooty-data-api.mongodb.com/';
-    // case 'dotcomstg':
-    //   return 'https://snooty-data-api.docs.staging.corp.mongodb.com/';
+    case 'dotcomstg':
+      return 'https://snooty-data-api.docs.staging.corp.mongodb.com/';
     default:
       // return 'https://snooty-data-api.docs.staging.corp.mongodb.com/';
       return 'https://snooty-data-api.mongodb.com/';
-      // TEST WITH LOCAL DEV
+    // TEST WITH LOCAL DEV
   }
 }
 
@@ -39,6 +39,8 @@ export type Repo = {
     categoryTitle: string;
   };
   branches: Branch[];
+  // TODO: not returned from snooty data API, but stored in db
+  // displayName?: string;
 };
 
 export const getAllRepos = async () => {
