@@ -279,6 +279,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                   <IA
                     header={!hideIaHeader ? <span className={cx([titleStyle])}>{formatText(pageTitle)}</span> : null}
                     handleClick={() => {
+                      console.log('click ia under border');
                       setBack(false);
                       hideMobileSidenav();
                     }}
@@ -300,7 +301,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
               <>
                 {isGuidesTemplate && <StyledChapterNumberLabel number={guidesChapterNumber} />}
                 <SideNavItem
-                  className={cx(titleStyle, sideNavItemBasePadding)}
+                  className={cx('not-ia', titleStyle, sideNavItemBasePadding)}
                   as={Link}
                   to={isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/'}
                   hideExternalIcon={true}

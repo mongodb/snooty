@@ -74,6 +74,8 @@ const siteMetadata = {
   user: userInfo().username,
   manifestPath: process.env.GATSBY_MANIFEST_PATH,
 };
+console.log('SITE METADATA');
+console.log(siteMetadata.reposDatabase);
 
 module.exports.siteMetadata = siteMetadata;
 module.exports.manifestMetadata = manifestMetadata;

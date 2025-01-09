@@ -13,7 +13,6 @@ const fontSize = {
   h4: '16px',
 };
 /**
- * @type {Object}
  * @property {string} size returns px value
  * @property {function(string): number} stripUnit removes px unit
  */
