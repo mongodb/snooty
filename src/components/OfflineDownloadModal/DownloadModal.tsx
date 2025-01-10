@@ -274,7 +274,9 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
 
       <Box className={footerStyling}>
         <Button onClick={() => setOpen(false)}>Cancel</Button>
-        <Button disabled={!rowSelection || !Object.keys(rowSelection)?.length} onClick={onDownload}>Download</Button>
+        <Button disabled={!rowSelection || !Object.keys(rowSelection)?.length} onClick={onDownload}>
+          Download
+        </Button>
       </Box>
     </Modal>
   );
