@@ -58,7 +58,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const asHeadingNumber = as ?? sectionDepth;
   const asHeading = asHeadingNumber >= 1 && asHeadingNumber <= 6 ? `h${asHeadingNumber}` : 'h6';
   const isPageTitle = sectionDepth === 1;
-  const { isMobile, isTabletOrMobile } = useScreenSize();
+  const { isTabletOrMobile } = useScreenSize();
   const { selectors } = useContext(TabContext);
   const { hasDrawer, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
@@ -72,9 +72,9 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
       <ConditionalWrapper
         condition={shouldShowMobileHeader}
         wrapper={(children) => (
-          <HeadingContainer stackVertically={isMobile}>
+          <HeadingContainer>
             {children}
-            <ChildContainer isStacked={isMobile}>{hasSelectors && !tabsMainColumn && <TabSelectors />}</ChildContainer>
+            <ChildContainer>{hasSelectors && !tabsMainColumn && <TabSelectors rightColumn={true} />}</ChildContainer>
           </HeadingContainer>
         )}
       >
@@ -117,19 +117,25 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
 
 const HeadingContainer = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.stackVertically ? 'column' : 'row')};
+  flex-direction: row;
   justify-content: space-between;
+
+  @media ${theme.screenSize.upToLarge} {
+    flex-direction: column;
+  }
 `;
 
-const ChildContainer = styled.div(
-  ({ isStacked }) => css`
-    ${isStacked && 'margin: 4px 0 16px 0;'}
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: ${isStacked ? 'flex-start' : 'center'};
-  `
-);
+const ChildContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media ${theme.screenSize.upToLarge} {
+    margin: 4px 0 16px 0;
+    align-items: flex-start;
+  }
+`;
 
 Heading.propTypes = {
   sectionDepth: PropTypes.number.isRequired,

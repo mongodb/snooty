@@ -186,6 +186,10 @@ exports[`collapsible component renders all the content in the options and childr
   color: --font-color-primary;
 }
 
+[aria-expanded='true'] .emotion-10 {
+  height: auto;
+}
+
 .emotion-11 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -509,6 +513,7 @@ exports[`collapsible component renders all the content in the options and childr
 }
 
 <div
+    aria-expanded="false"
     class="collapsible emotion-0"
   >
     <div
@@ -557,6 +562,7 @@ exports[`collapsible component renders all the content in the options and childr
       </div>
       <button
         aria-disabled="false"
+        aria-expanded="false"
         aria-labelledby="Expand the collapsed content"
         class="emotion-8"
         tabindex="0"
