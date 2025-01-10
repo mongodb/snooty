@@ -2,7 +2,7 @@ import React, { ForwardedRef, forwardRef, useEffect, useMemo, useRef, useState }
 import { css, cx } from '@leafygreen-ui/emotion';
 import Modal from '@leafygreen-ui/modal';
 import { Body, H3, Link } from '@leafygreen-ui/typography';
-import TextInput from '@leafygreen-ui/text-input';
+// import TextInput from '@leafygreen-ui/text-input';
 import {
   Cell,
   flexRender,
@@ -79,8 +79,6 @@ const selectStyling = css`
   + div {
     z-index: 9;
   }
-
-
 `;
 
 const portalStyling = css`
@@ -147,7 +145,7 @@ type ModalProps = {
 };
 
 const DownloadModal = ({ open, setOpen }: ModalProps) => {
-  const [searchText, setSearchText] = useState('');
+  // const [searchText, setSearchText] = useState('');
   const tableRef = useRef<HTMLDivElement>(null);
   const [rowSelection, setRowSelection] = useState({});
   const { repos } = useOfflineDownloadContext();
