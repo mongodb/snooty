@@ -26,6 +26,8 @@ const DownloadButton = () => {
         className={downloadIconStyling}
         aria-label="Download Offline Docs"
         onClick={(e) => {
+          // required to prevent being used within links
+          e.preventDefault();
           openDownloadModal();
         }}
       >
