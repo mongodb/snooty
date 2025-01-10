@@ -41,8 +41,8 @@ export const titleStyle = css`
   font-weight: bold;
   line-height: 20px;
   text-transform: none;
-  :hover {
-    background-color: inherit;
+  &:hover {
+    background-color: var(--sidenav-hover-bg-color);
 
     &:after,
     span:after {

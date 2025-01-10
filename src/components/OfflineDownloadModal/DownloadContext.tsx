@@ -93,7 +93,6 @@ const OfflineDownloadProvider = ({ children, modalOpen }: ProviderProps) => {
     promise.current = getAllRepos()
       .then((res) => {
         setOfflineRepos(processRepos(res));
-        console.log('process the res here for populating offlineRepos');
       })
       .catch((e) => {
         console.error('Error while fetching repos, returning build data');

@@ -8,7 +8,7 @@ import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
 import { useLocation } from '@gatsbyjs/reach-router';
-import Link from '../Link';
+import { navigate } from 'gatsby';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -303,8 +303,9 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                 {isGuidesTemplate && <StyledChapterNumberLabel number={guidesChapterNumber} />}
                 <SideNavItem
                   className={cx('not-ia', titleStyle, sideNavItemBasePadding)}
-                  as={Link}
-                  to={isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/'}
+                  onClick={() => {
+                    navigate(isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/');
+                  }}
                   hideExternalIcon={true}
                 >
                   {navTitle}
