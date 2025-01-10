@@ -220,7 +220,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
       <Body className={cx(bodyStyle)}>
         Navigate the table to find the product and version you wish to download. Looking for another product? Visit
         our&nbsp;
-        <Link hideExternalIcon={false} href={'https://www.mongodb.com/docs/legacy/'}>
+        <Link hideExternalIcon={false} href={'https://mongodb.com/docs/legacy/'}>
           legacy docs site
         </Link>
       </Body>
