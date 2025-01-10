@@ -151,6 +151,11 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
   const { repos } = useOfflineDownloadContext();
   const selectedVersions = useRef<Record<OfflineRepo['displayName'], OfflineVersion>>({});
 
+  useEffect(() => {
+    // reset row selection when modal is opened/closed
+    setRowSelection({});
+  }, [open]);
+
   const data = useMemo(() => repos, [repos]);
   const columns = useMemo(() => {
     return [
@@ -269,7 +274,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
 
       <Box className={footerStyling}>
         <Button onClick={() => setOpen(false)}>Cancel</Button>
-        <Button onClick={onDownload}>Download</Button>
+        <Button disabled={!rowSelection || !Object.keys(rowSelection)?.length} onClick={onDownload}>Download</Button>
       </Box>
     </Modal>
   );
