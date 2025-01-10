@@ -3,8 +3,6 @@
  * Snooty Data API service.
  */
 
-import { normalizePath } from './normalize-path';
-
 function getBaseUrl(snootyEnv: string) {
   switch (snootyEnv) {
     case 'dotcomprd':

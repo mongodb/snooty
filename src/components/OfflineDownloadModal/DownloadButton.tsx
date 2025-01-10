@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { css } from '@leafygreen-ui/emotion';
+import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
-import IconButton from '@leafygreen-ui/icon-button';
 // import { reportAnalytics } from '../../utils/report-analytics';
 import DownloadModal from './DownloadModal';
 import { OfflineDownloadProvider } from './DownloadContext';
 
-const downloadIconStyling = css``;
+const downloadIconStyling = css`
+  width: 32px;
+  height: 22px;
+`;
 
 const DownloadButton = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,9 +21,18 @@ const DownloadButton = () => {
 
   return (
     <>
-      <IconButton className={downloadIconStyling} aria-label="Download Offline Docs" onClick={openDownloadModal}>
-        <Icon glyph={'Download'} />
-      </IconButton>
+      <Button
+        size={'small'}
+        className={downloadIconStyling}
+        aria-label="Download Offline Docs"
+        onClick={(e) => {
+          // required to prevent being used within links
+          e.preventDefault();
+          openDownloadModal();
+        }}
+      >
+        <Icon size={14} glyph={'Download'} />
+      </Button>
 
       <OfflineDownloadProvider modalOpen={modalOpen}>
         <DownloadModal open={modalOpen} setOpen={setModalOpen} />

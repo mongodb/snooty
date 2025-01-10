@@ -20,6 +20,7 @@ import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import useViewport from '../../hooks/useViewport';
 import { HeaderContext } from '../Header/header-context';
 import { SIDE_NAV_CONTAINER_ID } from '../../constants';
+import { DownloadButton } from '../OfflineDownloadModal';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -307,6 +308,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                   hideExternalIcon={true}
                 >
                   {navTitle}
+                  {process.env['GATSBY_OFFLINE_DOWNLOAD_UI'] && <DownloadButton />}
                 </SideNavItem>
               </>
             )}

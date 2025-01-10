@@ -10,7 +10,6 @@ import useViewport from '../../hooks/useViewport';
 import { baseUrl } from '../../utils/base-url';
 import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
-import { DownloadButton } from '../OfflineDownloadModal';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import { titleStyle, logoLinkStyling } from './styles/sideNavItem';
 
@@ -78,8 +77,6 @@ const DocsHomeButton = () => {
   return (
     <div className={cx(containerStyle)}>
       {!isTabletOrMobile && viewport.scrollY > parseInt(theme.header.navbarHeight, 10) ? homeNav : sideNavHome}
-      {/* TODO: move this to  */}
-      {process.env['GATSBY_OFFLINE_DOWNLOAD_UI'] && <DownloadButton />}
     </div>
   );
 };

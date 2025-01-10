@@ -34,6 +34,8 @@ export const sideNavItemFontSize = css`
 `;
 
 export const titleStyle = css`
+  display: flex;
+  justify-content: space-between;
   color: var(--sidenav-item-title);
   font-size: ${theme.fontSize.small};
   font-weight: bold;
