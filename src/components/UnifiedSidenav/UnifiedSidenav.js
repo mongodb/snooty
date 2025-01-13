@@ -11,6 +11,7 @@ import { formatText } from '../../utils/format-text';
 import { sideNavItemTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
+import { isBrowser } from '../../utils/is-browser';
 
 const FormatTitle = styled.div`
   margin-left: var(--margin-left);
@@ -28,7 +29,7 @@ const caretStyle = css`
 `;
 
 function isSelectedTab(slug) {
-  if (typeof window === 'undefined') return false;
+  if (!isBrowser) return false;
 
   return window.location.pathname === `${slug}/`;
 }
@@ -98,7 +99,6 @@ export function UnifiedSidenav() {
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
   return (
     <>
-      <Global />
       <SideNav
         widthOverride={300}
         className={css`
