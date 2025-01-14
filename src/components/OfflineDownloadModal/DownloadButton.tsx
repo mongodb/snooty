@@ -15,7 +15,7 @@ const downloadIconStyling = css`
 
 const toastPortalStyling = css`
   z-index: ${theme.zIndexes.sidenav + 1};
-`
+`;
 
 const DownloadButton = () => {
   const [modalOpen, setModalOpen] = useState(false);
