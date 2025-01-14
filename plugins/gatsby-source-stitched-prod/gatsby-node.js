@@ -242,6 +242,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   console.log(siteMetadata);
 
   let repoBranches = null;
+
+  console.log('STITCHED PROD');
   try {
     const repoInfo = await db.realmInterface.fetchDocset();
     let errMsg;
