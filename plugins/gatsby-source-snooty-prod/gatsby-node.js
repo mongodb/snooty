@@ -1,5 +1,5 @@
 const swc = require('@swc/core');
-const { load } = require('js-toml');
+// const { load } = require('js-toml');
 const path = require('path');
 const fs = require('fs/promises');
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
