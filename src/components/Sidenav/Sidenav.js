@@ -281,7 +281,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                   <IA
                     header={!hideIaHeader ? <span className={cx([titleStyle])}>{formatText(pageTitle)}</span> : null}
                     handleClick={() => {
-                      console.log('click ia under border');
                       setBack(false);
                       hideMobileSidenav();
                     }}
