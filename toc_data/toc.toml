@@ -1,0 +1,132 @@
+# Static left pane item 1
+[[toc]]
+label = "Get Started"
+url = "/getting-started"
+isTab = true
+glyph = "LightningBolt"
+# items = "/get-started-toc.toml"
+
+# Tab 1, First group
+[[toc.items]]
+label = "Get Started"
+group = true
+[[toc.items.items]]
+label = "Create Account"
+url = "/tutorial/create-atlas-account"
+# items = "./source/whatever/toc.toml"
+[[toc.items.items]]
+label = "Deploy a Free Cluster"
+url = "/tutorial/deploy-free-tier-cluster"
+[[toc.items.items]]
+label = "Manage Database Users"
+url = "/tutorial/manage-users"
+[[toc.items.items]]
+label = "Manage the IP Access List"
+url = "/tutorial/access-list"
+[[toc.items.items]]
+label = "Connect to the Cluster"
+url = "/tutorial/connect-to-the-cluster"
+[[toc.items.items]]
+label = "Insert and View a Document"
+url = "/tutorial/insert-and-view"
+[[toc.items.items]]
+label = "Load Sample Data"
+url = "/tutorial/load-data"
+[[toc.items.items]]
+label = "Generate Synthetic Data"
+url = "/tutorial/generate-data"
+
+# static left pane item 2
+[[toc]]
+label = "Application Development"
+url = "/application-development"
+glyph = "Code"
+# items = "/application-development-toc.toml"
+isTab = true
+
+# Tab 2, group A
+[[toc.items]]
+label = "Application Development"
+group = true
+[[toc.items.items]]
+label = "link test"
+url = "/link"
+[[toc.items.items]]
+label = "Connect to Clusters"
+url = "/connect-to-clusters"
+collapsible = true
+[[toc.items.items.items]]
+label = "Drivers"
+url = "/drivers"
+[[toc.items.items.items]]
+label = "Compass"
+url = "/compass"
+[[toc.items.items.items]]
+label = "mongosh"
+url = "/mongosh"
+[[toc.items.items.items]]
+collapsible = true
+label = "BI Connector"
+url = "/bi-connector"
+# BI Connector items
+[[toc.items.items.items.items]]
+label = "Transition to Atlas SQL"
+url = "/transition-atlas-sql"
+[[toc.items.items.items.items]]
+label = "System DSN"
+url = "/system-dsn"
+[[toc.items.items.items.items]]
+label = "Excel"
+url = "/excel"
+[[toc.items.items.items.items]]
+label = "Tableau Desktop"
+url = "/tableau"
+[[toc.items.items.items.items]]
+label = "Qlik Sense"
+url = "/qlik-sense"
+[[toc.items.items.items.items]]
+label = "MySQL Workbench"
+url = "/mysql-workbench"
+[[toc.items.items.items.items]]
+label = "Power BI Desktop"
+url = "/power-bi-desktop"
+[[toc.items.items]]
+label = "Command Line Tools"
+url = "/cli-tools"
+[[toc.items.items]]
+label = "VS Code"
+url = "/vs-code"
+[[toc.items.items]]
+label = "AWS Lambda"
+url = "/aws-lambda"
+[[toc.items.items]]
+label = "Azure Functions"
+url = "/azure-functions"
+[[toc.items.items]]
+label = "Google Cloud Functions"
+url = "/google-cloud-functions"
+[[toc.items.items]]
+label = "Troubleshoot"
+url = "/troubleshoot"
+
+# Tab 2, group B 
+[[toc.items]]
+label = "Security"
+group = true
+[[toc.items.items]]
+label = "Authentication"
+url = "/authenticatio"
+[[toc.items.items]]
+label = "Auditing"
+url = "/auditing"
+[[toc.items.items]]
+label = "Encryption"
+url = "/encryption"
+[[toc.items.items]]
+label = "Support Access"
+url = "/support-acces"
+
+
+
+# toc : [ { items: [ { label: 'blah' }], label: 'blah' }  ]
+# toc : [ { getSta: [ { label: 'blah' }], label: 'blah' }, { ApplicationDevelopment: [ { label: 'blah' }], label: 'blah' }  ]
