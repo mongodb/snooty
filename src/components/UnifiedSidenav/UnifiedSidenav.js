@@ -6,15 +6,21 @@ import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
+// import { formatText } from '../../utils/format-text';
 
 import { sideNavItemTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
+import { isBrowser } from '../../utils/is-browser';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
 `;
-
+const overwriteLinkStyle = LeafyCSS`
+  span {
+    display: flex;
+  }
+`;
 const sideNavStyle = LeafyCSS`
   padding: 0px;
   div > ul {
@@ -56,8 +62,8 @@ const rightPane = LeafyCSS`
 
 // we will have to edit this function in the future since if we have double panned side nav in theory two things should be selected at same time
 function isSelectedTab(slug) {
-  if (typeof window === 'undefined') return false;
-  // maybe want to change this so its checking for '/' and adding if not there
+  if (!isBrowser) return false;
+
   return window.location.pathname === `${slug}/`;
 }
 
@@ -73,12 +79,12 @@ function CollapsibleNavItem({ items, label, url, level }) {
   return (
     <>
       <SideNavItem
-        hideExternalIcon={true}
         as={Link}
         to={url}
         active={isSelectedTab(url)}
-        className={cx(sideNavItemTOCStyling({ level }))}
+        className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
         onClick={() => setIsOpen(!isOpen)}
+        hideExternalIcon={true}
       >
         <FormatTitle>{label}</FormatTitle>
         <Icon glyph={chevronType} fill={palette.gray.base} onClick={onChevronClick} />
