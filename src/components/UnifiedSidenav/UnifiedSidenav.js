@@ -21,6 +21,11 @@ const overwriteLinkStyle = LeafyCSS`
     display: flex;
   }
 `;
+
+const chevronStyle = LeafyCSS`
+  margin-top: 3px;
+`;
+
 const sideNavStyle = LeafyCSS`
   padding: 0px;
   div > ul {
@@ -87,7 +92,7 @@ function CollapsibleNavItem({ items, label, url, level }) {
         hideExternalIcon={true}
       >
         <FormatTitle>{label}</FormatTitle>
-        <Icon glyph={chevronType} fill={palette.gray.base} onClick={onChevronClick} />
+        <Icon className={cx(chevronStyle)} glyph={chevronType} fill={palette.gray.base} onClick={onChevronClick} />
       </SideNavItem>
       {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} />)}
     </>
