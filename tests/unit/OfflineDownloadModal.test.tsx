@@ -23,10 +23,6 @@ describe('Offline download button', () => {
     await waitFor(() => {
       expect(renderRes.getByRole('dialog')).toBeTruthy();
     });
-    await waitFor(() => {
-      return expect(renderRes.findByRole('row')).toBeTruthy()
-    }, );
-    renderRes.debug();
 
     expect(renderRes.baseElement).toMatchSnapshot();
   });

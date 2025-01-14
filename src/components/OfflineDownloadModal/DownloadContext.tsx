@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
-// import { useAllDocsets } from '../../hooks/useAllDocsets';
+import { useAllDocsets } from '../../hooks/useAllDocsets';
 import { getAllRepos, type Repo } from '../../utils/snooty-data-api';
 import assertLeadingBrand from '../../utils/assert-leading-brand';
 
@@ -25,10 +25,32 @@ const OfflineDownloadContext = createContext(defaultValues);
 /**
  * used to process docsets from graphql into OfflineRepo
  */
-// function processDocsets(docsets: any) {
-//   // TODO: process snooty graphql docsets on build time. different from snooty data api
-//   return [];
-// }
+function processDocsets(docsets: any): OfflineRepo[] {
+  return docsets.reduce((offlineRepos: OfflineRepo[], docset: any) => {
+    if (!docset.displayName || !docset.branches) {
+      return offlineRepos;
+    }
+
+    const offlineRepo: OfflineRepo = {
+      displayName: assertLeadingBrand(docset.displayName),
+      versions: [],
+    };
+
+    for (const branch of docset.branches) {
+      if (branch.active && branch.offlineUrl) {
+        offlineRepo.versions.push({
+          displayName: branch.versionSelectorLabel,
+          url: branch.offlineUrl,
+        });
+      }
+    }
+
+    if (offlineRepo.versions.length) {
+      offlineRepos.push(offlineRepo);
+    }
+    return offlineRepos;
+  }, []);
+}
 
 /**
  * used to process repos from snooty data api into OfflineRepo
@@ -45,7 +67,7 @@ function processRepos(repos: Repo[]) {
         // only show branches that are active
         // and have an offline url
         if (!branch.active) {
-          continue
+          continue;
         }
         if (branch.offlineUrl) {
           offlineRepo.versions.push({
@@ -58,7 +80,7 @@ function processRepos(repos: Repo[]) {
           offlineRepo.versions.push({
             displayName: branch.label,
             // url: branch.fullUrl,
-            url: 'https://www.mongodb.com/docs/offline/bi-connector-v1.1.tar.gz'
+            url: 'https://www.mongodb.com/docs/offline/bi-connector-v1.1.tar.gz',
           });
         }
       }
@@ -83,11 +105,8 @@ type ProviderProps = {
  *
  */
 const OfflineDownloadProvider = ({ children, modalOpen }: ProviderProps) => {
-  // const allDocsets = useAllDocsets();
-  const [offlineRepos, setOfflineRepos] = useState<OfflineRepo[]>(() => {
-    // TODO: use allDocsets to come up with initial offlineRepos
-    return [];
-  });
+  const allDocsets = useAllDocsets();
+  const [offlineRepos, setOfflineRepos] = useState<OfflineRepo[]>(() => processDocsets(allDocsets));
   const promise = useRef<Promise<void>>();
 
   useEffect(() => {
@@ -101,8 +120,11 @@ const OfflineDownloadProvider = ({ children, modalOpen }: ProviderProps) => {
       })
       .catch((e) => {
         console.error('Error while fetching repos, returning build data');
+      })
+      .finally(() => {
+        promise.current = undefined;
       });
-  }, [modalOpen]);
+  }, [modalOpen, offlineRepos]);
 
   return <OfflineDownloadContext.Provider value={{ repos: offlineRepos }}>{children}</OfflineDownloadContext.Provider>;
 };
