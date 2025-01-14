@@ -42,6 +42,11 @@ function processRepos(repos: Repo[]) {
       };
 
       for (const branch of repo.branches) {
+        // only show branches that are active
+        // and have an offline url
+        if (!branch.active) {
+          continue
+        }
         if (branch.offlineUrl) {
           offlineRepo.versions.push({
             displayName: branch.label,
@@ -52,8 +57,8 @@ function processRepos(repos: Repo[]) {
         else {
           offlineRepo.versions.push({
             displayName: branch.label,
-            url: branch.fullUrl,
-            // url: 'https://www.mongodb.com/docs/offline/bi-connector-v1.1.tar.gz'
+            // url: branch.fullUrl,
+            url: 'https://www.mongodb.com/docs/offline/bi-connector-v1.1.tar.gz'
           });
         }
       }

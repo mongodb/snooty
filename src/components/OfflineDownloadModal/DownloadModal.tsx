@@ -1,35 +1,34 @@
-import React, { ForwardedRef, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Modal from '@leafygreen-ui/modal';
-import { Body, H3, Link } from '@leafygreen-ui/typography';
-// import TextInput from '@leafygreen-ui/text-input';
 import {
   Cell,
   flexRender,
   HeaderCell,
   HeaderRow,
-  Row,
-  Table,
+  Row as LeafyRow,
+  Table as LeafyTable,
   TableBody,
   TableHead,
   useLeafyGreenTable,
-  type HeaderGroup,
-  type LGColumnDef,
-  type LeafyGreenTableRow,
+  getFilteredRowModel,
 } from '@leafygreen-ui/table';
-import { Select, Option } from '@leafygreen-ui/select';
+import type { HeaderGroup, LGColumnDef, LeafyGreenTableRow, CoreRow } from '@leafygreen-ui/table';
+import TextInput from '@leafygreen-ui/text-input';
+import { useToast, Variant } from '@leafygreen-ui/toast';
+import { Body, H3, Link } from '@leafygreen-ui/typography';
 import Box from '@leafygreen-ui/box';
 import Button from '@leafygreen-ui/button';
 import { theme } from '../../theme/docsTheme';
 import fetchAndSaveFile from '../../utils/download-file';
 import { useOfflineDownloadContext, type OfflineVersion, type OfflineRepo } from './DownloadContext';
+import VersionSelect from './VersionSelector';
 
 const modalStyle = css`
   [role='dialog'] {
     max-height: 520px;
     max-width: 690px;
     padding: 40px 36px;
-    overflow-y: scroll;
     display: flex;
     flex-direction: column;
   }
@@ -40,15 +39,15 @@ const headingStyle = css`
 const bodyStyle = css`
   margin-bottom: ${theme.size.small};
 `;
-// TODO: search input
-// const searchInputStyle = css`
-//   margin-bottom: ${theme.size.small};
-// `;
+const searchInputStyle = css`
+  margin-bottom: ${theme.size.default};
+  max-width: 260px;
+`;
 const tableStyling = css``;
 
 const footerStyling = css`
   display: flex;
-  margin-top: ${theme.size.xlarge};
+  margin-top: ${theme.size.large};
   column-gap: 8px;
   justify-content: flex-end;
 `;
@@ -70,99 +69,31 @@ const headerCellStyling = css`
   }
 `;
 
-// TODO: separate file for version select
-const selectStyling = css`
-  max-width: 80%;
-  min-width: 90px;
-  height: ${theme.size.medium};
-
-  + div {
-    z-index: 9;
-  }
-`;
-
-const portalStyling = css`
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const optionStyling = css`
-  line-height: ${theme.fontSize.small};
-
-  > *:nth-child(1) {
-    display: none;
-  }
-`;
-
-const PortalContainer = forwardRef(
-  (
-    { className, children }: { className?: string; children: JSX.Element[] | JSX.Element },
-    forwardRef: ForwardedRef<HTMLDivElement | null>
-  ) => (
-    <div className={cx(portalStyling, className)} ref={forwardRef}>
-      {children}
-    </div>
-  )
-);
-
-type VersionSelectProps = { versions: OfflineVersion[]; onSelect: (e: string) => void };
-const VersionSelect = ({ versions, onSelect }: VersionSelectProps) => {
-  const [selected, setSelected] = useState(() => versions[0].url);
-  const portalRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    onSelect(selected);
-  }, [onSelect, selected]);
-  return (
-    <PortalContainer ref={portalRef}>
-      <Select
-        onChange={(e) => {
-          setSelected(e);
-        }}
-        portalContainer={portalRef.current}
-        scrollContainer={portalRef.current}
-        className={cx(selectStyling)}
-        allowDeselect={false}
-        aria-labelledby={'Select Offline Version'}
-        value={selected}
-        disabled={versions.length < 2}
-      >
-        {versions.map((version: OfflineVersion, i: number) => {
-          return (
-            <Option className={optionStyling} key={i} value={version.url}>
-              {version.displayName}
-            </Option>
-          );
-        })}
-      </Select>
-    </PortalContainer>
-  );
-};
-
 type ModalProps = {
   open: boolean;
   setOpen: (open: boolean) => void;
 };
 
 const DownloadModal = ({ open, setOpen }: ModalProps) => {
-  // const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('');
   const tableRef = useRef<HTMLDivElement>(null);
-  const [rowSelection, setRowSelection] = useState({});
+  const [rowSelection, setRowSelection] = useState<{ [key: string]: boolean }>({});
   const { repos } = useOfflineDownloadContext();
   const selectedVersions = useRef<Record<OfflineRepo['displayName'], OfflineVersion>>({});
+  const { pushToast } = useToast();
 
   useEffect(() => {
     // reset row selection when modal is opened/closed
     setRowSelection({});
   }, [open]);
 
-  const data = useMemo(() => repos, [repos]);
   const columns = useMemo(() => {
     return [
       {
         header: 'Products',
         accessorKey: 'displayName',
         size: 420,
+        enableGlobalFilter: true,
       },
       {
         header: 'Version',
@@ -170,11 +101,15 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         cell: (cellContext) => {
           const versions = (cellContext.getValue() ?? []) as OfflineVersion[];
           const repoDisplayName = cellContext.row.original.displayName;
+          if (versions?.length < 2) {
+            selectedVersions.current[repoDisplayName] = versions[0];
+            return;
+          }
           return (
             <VersionSelect
               versions={versions}
-              onSelect={(e: string) => {
-                const version = versions.find((version) => version.url === e);
+              onSelect={(index: number) => {
+                const version = versions[index];
                 if (version) {
                   selectedVersions.current[repoDisplayName] = version;
                 }
@@ -184,19 +119,37 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         },
         size: 140,
         align: 'right',
+        enableGlobalFilter: true,
       },
     ] as LGColumnDef<OfflineRepo>[];
   }, []);
 
+  const filter = useCallback((row: CoreRow<OfflineRepo>, _columnId: string, filterValue: string) => {
+    const searchText = filterValue.toLowerCase();
+    const offlineRepo = row.original;
+    return (
+      offlineRepo.displayName.toLowerCase().includes(searchText) ||
+      offlineRepo.versions
+        .reduce((res, version) => {
+          return res + ' ' + version.displayName;
+        }, '')
+        ?.includes(searchText)
+    );
+  }, []);
+
   const table = useLeafyGreenTable({
     containerRef: tableRef,
-    data: data,
+    data: repos,
     columns: columns,
     hasSelectableRows: true,
     state: {
       rowSelection,
+      globalFilter: searchText,
     },
     onRowSelectionChange: setRowSelection,
+    getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: filter,
+    onGlobalFilterChange: setSearchText,
   });
   const { rows } = table.getRowModel();
 
@@ -210,16 +163,31 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         url: selectedVersions.current[displayName].url,
       });
     }
-
-    return Promise.all(
+    await Promise.all(
       urlsToRequest.map(async (urlData) => {
-        return fetchAndSaveFile(urlData.url, `${urlData.repo}.tar.gz`);
+        try {
+          await fetchAndSaveFile(urlData.url, `${urlData.repo}.tar.gz`);
+          pushToast({
+            title: 'Download Initiated',
+            description: urlData.repo,
+            variant: Variant.Success,
+            dismissible: true,
+          });
+        } catch (e) {
+          pushToast({
+            title: 'Download Failed',
+            description: urlData.repo,
+            variant: Variant.Warning,
+            dismissible: true,
+          });
+        }
       })
     );
+    setOpen(false);
   };
 
   return (
-    <Modal className={cx(modalStyle)} size={'large'} open={open} setOpen={setOpen}>
+    <Modal onClick={(e) => e.stopPropagation()} className={cx(modalStyle)} size={'large'} open={open} setOpen={setOpen}>
       <H3 className={cx(headingStyle)}>Download Documentation</H3>
 
       <Body className={cx(bodyStyle)}>
@@ -230,17 +198,17 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         </Link>
       </Body>
 
-      {/* <TextInput
+      <TextInput
         className={cx(searchInputStyle)}
         aria-labelledby={'Search for offline documentation'}
         onChange={(e) => {
-          setSearchText(e.target.value);
-          // TODO: filterResults
+          table.setGlobalFilter(String(e.target.value));
         }}
+        placeholder={'Search products'}
         value={searchText}
-      ></TextInput> */}
+      ></TextInput>
 
-      <Table table={table} ref={tableRef} className={cx(tableStyling)}>
+      <LeafyTable shouldAlternateRowColor={true} table={table} ref={tableRef} className={cx(tableStyling)}>
         <TableHead>
           {table.getHeaderGroups().map((headerGroup: HeaderGroup<OfflineRepo>) => (
             <HeaderRow key={headerGroup.id}>
@@ -258,7 +226,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         <TableBody>
           {rows.map((row: LeafyGreenTableRow<OfflineRepo>) => {
             return (
-              <Row key={row.id} row={row}>
+              <LeafyRow key={row.id} row={row}>
                 {row.getVisibleCells().map((cell) => {
                   return (
                     <Cell className={cx(cellStyling)} key={cell.id}>
@@ -266,11 +234,11 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
                     </Cell>
                   );
                 })}
-              </Row>
+              </LeafyRow>
             );
           })}
         </TableBody>
-      </Table>
+      </LeafyTable>
 
       <Box className={footerStyling}>
         <Button onClick={() => setOpen(false)}>Cancel</Button>

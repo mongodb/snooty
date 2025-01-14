@@ -25,6 +25,7 @@ const fetchAndSaveFile = async (url: string, filename: string) => {
     URL.revokeObjectURL(objectURL);
   } catch (error) {
     console.error('Error fetching and saving the file:', error);
+    throw error;
   }
 };
 
