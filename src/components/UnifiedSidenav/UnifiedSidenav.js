@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
-import { Global } from '@emotion/react';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
+
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
@@ -173,7 +173,6 @@ export function UnifiedSidenav() {
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
   return (
     <>
-      <Global />
       <SideNav widthOverride={400} className={cx(sideNavStyle)} aria-label="Bianca's Side navigation">
         <div className={cx(leftPane)}>
           {staticToc.map((navItems) => {
