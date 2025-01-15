@@ -31,6 +31,7 @@ const modalStyle = css`
     padding: 40px 36px;
     display: flex;
     flex-direction: column;
+    background-color: var(--background-color-primary);
   }
 `;
 const headingStyle = css`

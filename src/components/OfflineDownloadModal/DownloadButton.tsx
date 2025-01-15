@@ -11,6 +11,11 @@ import { OfflineDownloadProvider } from './DownloadContext';
 const downloadIconStyling = css`
   width: 32px;
   height: 22px;
+
+  .dark-theme & {
+    color: var(--white);
+    background-color: var(--gray-dark2);
+  }
 `;
 
 const toastPortalStyling = css`

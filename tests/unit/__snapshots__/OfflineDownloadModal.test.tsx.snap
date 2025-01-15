@@ -71,6 +71,11 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
+.dark-theme .emotion-0 {
+  color: var(--white);
+  background-color: var(--gray-dark2);
+}
+
 .emotion-1 {
   overflow: hidden;
   position: absolute;
@@ -229,6 +234,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  background-color: var(--background-color-primary);
 }
 
 .emotion-8 {
