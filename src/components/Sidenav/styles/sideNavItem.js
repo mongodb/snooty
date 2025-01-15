@@ -9,24 +9,19 @@ export const sideNavItemBasePadding = css`
   padding-bottom: ${theme.size.small};
 `;
 
-export const sideNavItemTOCStyling = ({ level = 1 }) => css`
-  padding-bottom: ${theme.size.small};
-  padding-left: calc(${theme.size.tiny} + (${level} * ${theme.size.default}));
-  padding-right: ${theme.size.medium};
-  padding-top: ${theme.size.small};
+export const sideNavItemTOCStyling = ({ level }) => css`
   align-items: flex-start !important;
   font-size: ${theme.fontSize.small};
   text-transform: none;
   line-height: 20px !important;
+  padding-left: calc(16px + ${(level - 1) * 25}px);
+`;
 
-  // overwrite LG link underlines
-  // @leafygreen-ui/typography v13.0.0
-  :hover {
-    &:after,
-    span:after {
-      display: none;
-    }
-  }
+export const sideNavGroupTOCStyling = ({ level }) => css`
+  align-items: flex-start !important;
+  font-size: ${theme.fontSize.small};
+  text-transform: none;
+  line-height: 20px !important;
 `;
 
 export const sideNavItemFontSize = css`

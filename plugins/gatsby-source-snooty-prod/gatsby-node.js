@@ -1,4 +1,5 @@
 const swc = require('@swc/core');
+// const { load } = require('js-toml');
 const path = require('path');
 const fs = require('fs/promises');
 const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
@@ -21,7 +22,7 @@ const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
-
+const { createTocNodes } = require('../utils/unified-toc.js');
 const assets = new Map();
 const projectComponents = new Set();
 
@@ -127,6 +128,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     );
     process.exit(1);
   }
+
   const pageIdPrefix = constructPageIdPrefix(siteMetadata);
   documents.forEach((doc) => {
     const { page_id, ...rest } = doc;
@@ -194,6 +196,9 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
+
+  // create TOC nodes
+  await createTocNodes({ createNode, createNodeId, createContentDigest });
 
   if (process.env['OFFLINE_DOCS'] !== 'true') {
     const umbrellaProduct = await db.realmInterface.getMetadata(
@@ -420,5 +425,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       propertyUrl: String
     }
 
+    type TOC implements Node @dontInfer {
+      tocTree: JSON!
+    }
   `);
 };
