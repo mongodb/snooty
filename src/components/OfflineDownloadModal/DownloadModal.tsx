@@ -201,6 +201,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
       <TextInput
         className={cx(searchInputStyle)}
         aria-label={'Search for offline documentation'}
+        label={null}
         onChange={(e) => {
           table.setGlobalFilter(String(e.target.value));
         }}
