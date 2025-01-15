@@ -1,5 +1,7 @@
 import React from 'react';
 
+import * as Gatsby from 'gatsby';
+
 import { render, waitFor, fireEvent } from '@testing-library/react';
 import { DownloadButton } from '../../src/components/OfflineDownloadModal';
 import * as SnootyDataApi from '../../src/utils/snooty-data-api';
@@ -10,10 +12,18 @@ const mockDataApi = () => {
   mockGetAllRepos.mockResolvedValue([] as SnootyDataApi.Repo[]);
 };
 
+const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+const mockStaticQuery = () => {
+  useStaticQuery.mockImplementation(() => ({
+    allDocset: { nodes: [] },
+  }));
+};
+
 describe('Offline download button', () => {
   beforeAll(() => {
     mockDataApi();
     setMatchMedia();
+    mockStaticQuery();
   });
 
   it('opens the offline modal when clicked', async () => {
