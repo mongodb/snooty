@@ -124,7 +124,7 @@ const OfflineDownloadProvider = ({ children, modalOpen }: ProviderProps) => {
       .finally(() => {
         promise.current = undefined;
       });
-  }, [modalOpen, offlineRepos]);
+  }, [modalOpen]);
 
   return <OfflineDownloadContext.Provider value={{ repos: offlineRepos }}>{children}</OfflineDownloadContext.Provider>;
 };

@@ -1214,7 +1214,8 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
             >
               <input
                 aria-invalid="false"
-                aria-label="Search for offline documentation"
+                aria-label="Search for Offline Documentation"
+                aria-labelledby="null"
                 autocomplete="on"
                 class="emotion-16"
                 id="textinput-1"

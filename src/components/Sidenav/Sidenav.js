@@ -307,7 +307,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                   onClick={() => {
                     navigate(isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/');
                   }}
-                  hideExternalIcon={true}
                 >
                   <span>{navTitle}</span>
                   {process.env['GATSBY_OFFLINE_DOWNLOAD_UI'] && <DownloadButton />}

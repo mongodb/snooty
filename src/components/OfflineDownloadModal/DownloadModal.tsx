@@ -107,6 +107,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
           }
           return (
             <VersionSelect
+              offlineRepo={cellContext.row.original}
               versions={versions}
               onSelect={(index: number) => {
                 const version = versions[index];
@@ -200,8 +201,9 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
 
       <TextInput
         className={cx(searchInputStyle)}
-        aria-label={'Search for offline documentation'}
-        label={null}
+        // TODO: can remove aria-labelledby after upgrading LG/TextInput
+        aria-labelledby={'null'}
+        aria-label={'Search for Offline Documentation'}
         onChange={(e) => {
           table.setGlobalFilter(String(e.target.value));
         }}

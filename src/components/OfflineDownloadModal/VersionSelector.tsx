@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useRef, useState, type ForwardedRef } fro
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Select, Option } from '@leafygreen-ui/select';
 import { theme } from '../../theme/docsTheme';
-import { type OfflineVersion } from './DownloadContext';
+import { type OfflineVersion, type OfflineRepo } from './DownloadContext';
 
 const selectStyling = css`
   max-width: 80%;
@@ -39,8 +39,8 @@ const PortalContainer = forwardRef(
   )
 );
 
-type VersionSelectProps = { versions: OfflineVersion[]; onSelect: (e: number) => void };
-const VersionSelect = ({ versions, onSelect }: VersionSelectProps) => {
+type VersionSelectProps = { offlineRepo: OfflineRepo; versions: OfflineVersion[]; onSelect: (e: number) => void };
+const VersionSelect = ({ offlineRepo, versions, onSelect }: VersionSelectProps) => {
   const [selected, setSelected] = useState(() => 0);
   const portalRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -56,7 +56,10 @@ const VersionSelect = ({ versions, onSelect }: VersionSelectProps) => {
         scrollContainer={portalRef.current}
         className={cx(selectStyling)}
         allowDeselect={false}
-        aria-labelledby={'Select Offline Version'}
+        // TODO: can remove aria-labelledby after upgrading LG/Select
+        // https://github.com/mongodb/leafygreen-ui/blob/%40leafygreen-ui/select%407.0.1/packages/select/src/Select.tsx#L105
+        aria-labelledby={'null'}
+        aria-label={`Select Offline Version for ${offlineRepo.displayName}`}
         value={selected.toString()}
         disabled={versions.length < 2}
       >
