@@ -35,8 +35,7 @@ export type Repo = {
     categoryTitle: string;
   };
   branches: Branch[];
-  // TODO: not returned from snooty data API, but stored in db
-  // displayName?: string;
+  displayName?: string;
 };
 
 export const getAllRepos = async () => {

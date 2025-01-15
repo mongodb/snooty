@@ -59,7 +59,9 @@ function processRepos(repos: Repo[]) {
   return repos
     .reduce((res: OfflineRepo[], repo) => {
       const offlineRepo: OfflineRepo = {
-        displayName: assertLeadingBrand(repo?.search?.categoryTitle ?? repo.project, { titleCase: true }),
+        displayName: assertLeadingBrand(repo.displayName ?? repo?.search?.categoryTitle ?? repo.project, {
+          titleCase: true,
+        }),
         versions: [],
       };
 
