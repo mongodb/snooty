@@ -75,14 +75,6 @@ function processRepos(repos: Repo[]) {
             url: branch.offlineUrl,
           });
         }
-        // TODO: REMOVE TESTING
-        else {
-          offlineRepo.versions.push({
-            displayName: branch.label,
-            // url: branch.fullUrl,
-            url: 'https://www.mongodb.com/docs/offline/bi-connector-v1.1.tar.gz',
-          });
-        }
       }
 
       // only return this repo if it has offline versions
