@@ -15,7 +15,7 @@ const fetchAndSaveFile = async (url: string, filename: string) => {
     const objectURL = URL.createObjectURL(blob);
     const a = Object.assign(document.createElement('a'), {
       href: objectURL,
-      download: filename || 'downloaded-file',
+      download: filename,
     });
 
     // Trigger the download

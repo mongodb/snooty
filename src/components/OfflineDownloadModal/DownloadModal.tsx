@@ -166,7 +166,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
     await Promise.all(
       urlsToRequest.map(async (urlData) => {
         try {
-          await fetchAndSaveFile(urlData.url, `${urlData.repo}.tar.gz`);
+          await fetchAndSaveFile(urlData.url, `${urlData.repo}-${urlData.version}.tar.gz`);
           pushToast({
             title: 'Download Initiated',
             description: urlData.repo,
@@ -200,7 +200,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
 
       <TextInput
         className={cx(searchInputStyle)}
-        aria-labelledby={'Search for offline documentation'}
+        aria-label={'Search for offline documentation'}
         onChange={(e) => {
           table.setGlobalFilter(String(e.target.value));
         }}

@@ -303,7 +303,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                 {isGuidesTemplate && <StyledChapterNumberLabel number={guidesChapterNumber} />}
                 <SideNavItem
                   as={Box}
-                  className={cx('not-ia', titleStyle, sideNavItemBasePadding)}
+                  className={cx(titleStyle, sideNavItemBasePadding)}
                   onClick={() => {
                     navigate(isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/');
                   }}
