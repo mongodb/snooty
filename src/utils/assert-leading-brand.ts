@@ -17,7 +17,9 @@ const assertLeadingBrand = (title: string, options?: options): string => {
   if (!titleIncludesBrand) {
     return `MongoDB ${casingFn(title.replace(/mongodb/i, ''))}`.trimEnd();
   }
-  return casingFn(title).replace(/mongodb/i, 'MongoDB').trimEnd();
+  return casingFn(title)
+    .replace(/mongodb/i, 'MongoDB')
+    .trimEnd();
 };
 
 export default assertLeadingBrand;
