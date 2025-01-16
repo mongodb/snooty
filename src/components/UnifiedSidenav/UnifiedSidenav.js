@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect, useContext, useRef, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { Global } from '@emotion/react';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
+// import { SidenavContext } from '../Sidenav/sidenav-context';
 import Link from '../Link';
 // import { formatText } from '../../utils/format-text';
 
@@ -99,9 +101,10 @@ function CollapsibleNavItem({ items, label, url, level }) {
   );
 }
 
-function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, level }) {
+function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, level, activeTab }) {
   // these are the tab items that we dont need to show in the second pane but need to go through recursively
   if (isTab) {
+    // if (label === activeTab) {
     return (
       <>
         {items?.map((tocItem) => (
@@ -109,6 +112,7 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, level
         ))}
       </>
     );
+    // }
   }
 
   // groups are for adding a static header, these can also be collapsible
@@ -157,17 +161,71 @@ function StaticNavItem({ label, group, url, collapsible, items, glyph, isTab, se
       as={Link}
       to={url}
       className={cx(sideNavItemTOCStyling({ level }))}
-      onClick={() => setActiveTab(`${url}/`)}
+      // onClick={() => setActiveTab(`${url}/`)}
+      onClick={() => setActiveTab(label)}
     >
       {label}
     </SideNavItem>
   );
 }
 
-export function UnifiedSidenav() {
+// function LoadSideContent({unifiedTocTree}) {
+//   console.log(" the unified toc is", unifiedTocTree)
+//   if (!unifiedTocTree) return;
+//   const [activeTab, setActiveTab] = useState('');
+//   const staticToc = unifiedTocTree.filter((item) => item?.isTab);
+
+//   return (<>
+//     <div className={cx(leftPane)}>
+//           {staticToc.map((navItems) => {
+//             return <StaticNavItem {...navItems} setActiveTab={setActiveTab} />;
+//           })}
+//         </div>
+//         <div className={cx(rightPane)}>
+//           {unifiedTocTree.map((navItems) => {
+//             // if (`${navItems.url}/` === activeTab) {
+//             if (navItems.label === activeTab) {
+//               return <UnifiedTocNavItem {...navItems} level={1} />;
+//             }
+//             return null;
+//           })}
+//         </div>
+//   </>)
+// }
+
+export function UnifiedSidenav(/*{activeTab, setActiveTab}*/) {
   const unifiedTocTree = useUnifiedToc();
-  const [activeTab, setActiveTab] = useState(window.location.pathname);
+  // const [activeTab, setActiveTab] = useState(window.location.pathname);
+  // const [activeTab, setActiveTab] = useState(() => { return 'Get Started';});
+  const [activeTab, setActiveTab] = useState('');
+  // const currentTab = useRef(activeTab);
+  // const {activeTab, setActiveTab } = useContext(SidenavContext);
   const staticToc = unifiedTocTree.filter((item) => item?.isTab);
+
+  // solutions: use page slug , page context provide to find page slug
+  // slug problem: relative to pathprefix comppard to pathname (gatsby has with prefix function)
+  // solution 2:
+  // do useEffect in initial state
+  // PROBLEM , ONLY WORKS ONCE, change the state will flash
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  //           useEffect(() => {
+  //   currentTab.current = activeTab;
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [activeTab]);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // const loadmydata = useMemo(() => {
+  //   return unifiedTocTree
+  //     .filter((navItems) => navItems.label === activeTab)
+  //     .map((navItems) => (
+  //       <UnifiedTocNavItem {...navItems} level={1} activeTab={activeTab} />
+  //     ));
+  // }, [activeTab]);
+
+  useEffect(() => {
+    console.log('the active state is', activeTab);
+  }, [activeTab]);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
@@ -182,12 +240,15 @@ export function UnifiedSidenav() {
         </div>
         <div className={cx(rightPane)}>
           {unifiedTocTree.map((navItems) => {
-            if (`${navItems.url}/` === activeTab) {
-              return <UnifiedTocNavItem {...navItems} level={1} />;
+            if (navItems.label === activeTab) {
+              return <UnifiedTocNavItem {...navItems} level={1} activeTab={activeTab} />;
             }
             return null;
           })}
+          {/* {loadmydata}*/}
         </div>
+        {/* <LoadSideContent unifiedTocTree={unifiedTocTree} /> */}
+        {/* {loadmydata} */}
       </SideNav>
     </>
   );

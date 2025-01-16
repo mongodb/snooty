@@ -98,7 +98,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
   const { chapters, guides, slugToTitle, toctree, eol, project } = useSnootyMetadata();
   const { isUnifiedToc } = getFeatureFlags();
   const remoteMetadata = useRemoteMetadata();
-
+  // const [activeTab, setActiveTab] = useState('Get Started');
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
   const pageTitle = React.useMemo(
@@ -119,7 +119,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
           {isUnifiedToc ? (
-            <UnifiedSidenav slug={slug} />
+            <UnifiedSidenav slug={slug} /*activeTab={activeTab} setActiveTab={setActiveTab}*/ />
           ) : sidenav && !isInPresentationMode ? (
             <Sidenav
               chapters={chapters}

@@ -62,6 +62,7 @@ const DarkModeContextProvider = ({ children, slug }) => {
     setLocalValue('theme', darkModePref);
   }, [darkModePref, updateDocumentClasslist, darkPref, slug]);
 
+  // GOOD EXAMPLE OF USEFFFECT IF YOU WANT TO RUN IT ONCE
   useEffect(() => {
     if (!isBrowser || !docClassList || LIGHT_MODE_ONLY_PAGE_SLUGS.includes(slug)) return;
 

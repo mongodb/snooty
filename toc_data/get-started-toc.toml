@@ -1,20 +1,7 @@
 # First group
 [[toc]]
-label = "Get Started"
+label = "This is a 2nd group"
 group = true
-[[toc.items]]
-label = "Create Account"
-url = "/create-account"
-items = "./source/whatever/toc.toml"
-[[toc.items]]
-label = "Deploy a Free Cluster"
-url = "/deploy-cluster"
-[[toc.items]]
-label = "Manage Database Users"
-url = "/manage-users"
-[[toc.items]]
-label = "Manage the IP Access List"
-url = "/access-list"
 [[toc.items]]
 label = "Connect to the Cluster"
 url = "/connect-to-the-cluster"

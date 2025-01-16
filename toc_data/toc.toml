@@ -4,7 +4,6 @@ label = "Get Started"
 url = "/getting-started"
 isTab = true
 glyph = "LightningBolt"
-# items = "/get-started-toc.toml"
 
 # Tab 1, First group
 [[toc.items]]
