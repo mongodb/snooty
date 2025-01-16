@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // import React, { useState, useEffect, useContext, useRef, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
@@ -14,6 +14,7 @@ import { sideNavItemTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
+import { isCurrentPage } from '../../utils/is-current-page';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -152,17 +153,17 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, level
   );
 }
 
-function StaticNavItem({ label, group, url, collapsible, items, glyph, isTab, setActiveTab, level = 1 }) {
+function StaticNavItem({ activeTab, label, group, url, collapsible, items, glyph, isTab, setActiveTab, level = 1 }) {
   return (
     <SideNavItem
-      active={isSelectedTab(url)}
+      active={activeTab === url}
       glyph={<Icon glyph={glyph} />}
       aria-label={label}
       as={Link}
       to={url}
       className={cx(sideNavItemTOCStyling({ level }))}
       // onClick={() => setActiveTab(`${url}/`)}
-      onClick={() => setActiveTab(label)}
+      // onClick={() => setActiveTab(label)}
     >
       {label}
     </SideNavItem>
@@ -193,14 +194,28 @@ function StaticNavItem({ label, group, url, collapsible, items, glyph, isTab, se
 //   </>)
 // }
 
-export function UnifiedSidenav(/*{activeTab, setActiveTab}*/) {
+const isActiveTocNode = (currentUrl, slug, children) => {
+  if (currentUrl === undefined) return false;
+  if (isCurrentPage(currentUrl, slug)) return true;
+  if (children) {
+    return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.url, b.items), false);
+  }
+  return false;
+};
+
+export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   // const [activeTab, setActiveTab] = useState(window.location.pathname);
   // const [activeTab, setActiveTab] = useState(() => { return 'Get Started';});
-  const [activeTab, setActiveTab] = useState('');
   // const currentTab = useRef(activeTab);
   // const {activeTab, setActiveTab } = useContext(SidenavContext);
-  const staticToc = unifiedTocTree.filter((item) => item?.isTab);
+  const staticTocs = unifiedTocTree.filter((item) => item?.isTab);
+  const [activeTabUrl, setActiveTabUrl] = useState(() => {
+    const activeToc = staticTocs.find((staticToc) => {
+      return isActiveTocNode(slug, staticToc.url, staticToc.items);
+    });
+    return activeToc?.url;
+  });
 
   // solutions: use page slug , page context provide to find page slug
   // slug problem: relative to pathprefix comppard to pathname (gatsby has with prefix function)
@@ -223,9 +238,9 @@ export function UnifiedSidenav(/*{activeTab, setActiveTab}*/) {
   //     ));
   // }, [activeTab]);
 
-  useEffect(() => {
-    console.log('the active state is', activeTab);
-  }, [activeTab]);
+  // useEffect(() => {
+  //   console.log('the active state is', activeTab);
+  // }, [activeTab]);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
@@ -233,19 +248,21 @@ export function UnifiedSidenav(/*{activeTab, setActiveTab}*/) {
     <>
       <SideNav widthOverride={400} className={cx(sideNavStyle)} aria-label="Bianca's Side navigation">
         <div className={cx(leftPane)}>
-          {staticToc.map((navItems) => {
-            return <StaticNavItem {...navItems} setActiveTab={setActiveTab} />;
+          {staticTocs.map((navItem) => {
+            return <StaticNavItem activeTabUrl={activeTabUrl} {...navItem} setActiveTabUrl={setActiveTabUrl} />;
           })}
         </div>
-        <div className={cx(rightPane)}>
-          {unifiedTocTree.map((navItems) => {
-            if (navItems.label === activeTab) {
-              return <UnifiedTocNavItem {...navItems} level={1} activeTab={activeTab} />;
-            }
-            return null;
-          })}
-          {/* {loadmydata}*/}
-        </div>
+        {activeTabUrl && (
+          <div className={cx(rightPane)}>
+            {unifiedTocTree.map((navItem) => {
+              if (navItem.url === activeTabUrl) {
+                return <UnifiedTocNavItem {...navItem} level={1} activeTabUrl={activeTabUrl} />;
+              }
+              return null;
+            })}
+            {/* {loadmydata}*/}
+          </div>
+        )}
         {/* <LoadSideContent unifiedTocTree={unifiedTocTree} /> */}
         {/* {loadmydata} */}
       </SideNav>
