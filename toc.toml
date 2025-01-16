@@ -89,7 +89,3 @@ url = "/google-cloud-functions"
 [[toc.items]]
 label = "Troubleshoot"
 url = "/troubleshoot"
-# toc : [ { items: [ { label: 'blah' }], label: 'blah' }  ]
-
-
-# toc : [ { getSta: [ { label: 'blah' }], label: 'blah' }, { ApplicationDevelopment: [ { label: 'blah' }], label: 'blah' }  ]

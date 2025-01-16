@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 // import React, { useState, useEffect, useContext, useRef, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
-import { Global } from '@emotion/react';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
+
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 // import { SidenavContext } from '../Sidenav/sidenav-context';
@@ -231,7 +231,6 @@ export function UnifiedSidenav(/*{activeTab, setActiveTab}*/) {
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
   return (
     <>
-      <Global />
       <SideNav widthOverride={400} className={cx(sideNavStyle)} aria-label="Bianca's Side navigation">
         <div className={cx(leftPane)}>
           {staticToc.map((navItems) => {
