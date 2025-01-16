@@ -13,6 +13,7 @@ const darkModePrestyling = css`
   .dark-theme & {
     color: ${palette.white};
     border-color: ${palette.gray.base};
+    background-color: ${palette.gray.dark2};
 
     svg {
       color: ${palette.white};
