@@ -14,6 +14,7 @@ import { sideNavItemTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
 import { isBrowser } from '../../utils/is-browser';
+// import { isActiveTocNode } from '../../utils/is-active-toc-node';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -193,7 +194,8 @@ function StaticNavItem({ label, group, url, collapsible, items, glyph, isTab, se
 //   </>)
 // }
 
-export function UnifiedSidenav(/*{activeTab, setActiveTab}*/) {
+export function UnifiedSidenav({ slug } /*{activeTab, setActiveTab}*/) {
+  console.log('the slug is', slug);
   const unifiedTocTree = useUnifiedToc();
   // const [activeTab, setActiveTab] = useState(window.location.pathname);
   // const [activeTab, setActiveTab] = useState(() => { return 'Get Started';});
