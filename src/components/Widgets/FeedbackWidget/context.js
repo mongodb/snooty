@@ -9,9 +9,9 @@ const FeedbackContext = createContext();
 export function FeedbackProvider({ page, test = {}, ...props }) {
   const hasExistingFeedback =
     !!test.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
-  const [feedback, setFeedback] = useState(() => (hasExistingFeedback && test.feedback) || null);
-  const [feedbackId, setFeedbackId] = useState();
-  const [selectedRating, setSelectedRating] = useState(test.feedback?.rating || null);
+  const [feedback, setFeedback] = useState(() => (hasExistingFeedback && test.feedback) || undefined);
+  const [feedbackId, setFeedbackId] = useState(() => undefined);
+  const [selectedRating, setSelectedRating] = useState(test.feedback?.rating || undefined);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
@@ -136,8 +136,8 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   const abandon = useCallback(() => {
     setView('waiting');
     // set the rating and feedback to null
-    setFeedback(null);
-    setSelectedRating(null);
+    setFeedback();
+    setSelectedRating();
     setFeedbackId();
     setIsScreenshotButtonClicked(false);
   }, []);

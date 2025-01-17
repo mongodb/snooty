@@ -6,7 +6,7 @@ const Toctree = ({ handleClick, slug, toctree: { children } }) => {
   return (
     <>
       {children.map((c, idx) => (
-        <TOCNode key={c.slug || c.url || idx} activeSection={slug} handleClick={handleClick} node={c} />
+        <TOCNode key={idx} activeSection={slug} handleClick={handleClick} node={c} />
       ))}
     </>
   );
