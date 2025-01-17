@@ -67,6 +67,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
       setFeedback(newFeedback);
       setView(nextView);
       setProgress([true, false, false]);
+      setSelectedRating();
     });
     return { newFeedback };
   };
@@ -126,7 +127,6 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
       }
     } finally {
       setFeedback();
-      setSelectedRating();
       setFeedbackId();
     }
   };
@@ -135,7 +135,6 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   // initial state.
   const abandon = useCallback(() => {
     setView('waiting');
-    // set the rating and feedback to null
     setFeedback();
     setSelectedRating();
     setFeedbackId();
