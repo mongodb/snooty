@@ -48,65 +48,35 @@ isTab = true
 label = "Application Development"
 group = true
 [[toc.items.items]]
-label = "link test"
-url = "/create-database-deployment"
-[[toc.items.items]]
 label = "Connect to Clusters"
-url = "/connect-to-clusters"
+url = "/connect-to-database-deployment"
 collapsible = true
 [[toc.items.items.items]]
 label = "Drivers"
-url = "/drivers"
+url = "/driver-connection"
 [[toc.items.items.items]]
 label = "Compass"
-url = "/compass"
+url = "/compass-connection"
 [[toc.items.items.items]]
 label = "mongosh"
-url = "/mongosh"
+url = "/mongo-shell-connection"
 [[toc.items.items.items]]
 collapsible = true
 label = "BI Connector"
-url = "/bi-connector"
+url = "/bi-connection"
 # BI Connector items
 [[toc.items.items.items.items]]
 label = "Transition to Atlas SQL"
-url = "/transition-atlas-sql"
+url = "/tutorial/transition-bic-to-atlas-sql"
 [[toc.items.items.items.items]]
 label = "System DSN"
-url = "/system-dsn"
-[[toc.items.items.items.items]]
-label = "Excel"
-url = "/excel"
-[[toc.items.items.items.items]]
-label = "Tableau Desktop"
-url = "/tableau"
-[[toc.items.items.items.items]]
-label = "Qlik Sense"
-url = "/qlik-sense"
-[[toc.items.items.items.items]]
-label = "MySQL Workbench"
-url = "/mysql-workbench"
-[[toc.items.items.items.items]]
-label = "Power BI Desktop"
-url = "/power-bi-desktop"
+url = "/tutorial/create-system-dsn"
 [[toc.items.items]]
 label = "Command Line Tools"
-url = "/cli-tools"
+url = "/command-line-tools"
 [[toc.items.items]]
 label = "VS Code"
-url = "/vs-code"
-[[toc.items.items]]
-label = "AWS Lambda"
-url = "/aws-lambda"
-[[toc.items.items]]
-label = "Azure Functions"
-url = "/azure-functions"
-[[toc.items.items]]
-label = "Google Cloud Functions"
-url = "/google-cloud-functions"
-[[toc.items.items]]
-label = "Troubleshoot"
-url = "/troubleshoot"
+url = "/mongodb-for-vscode"
 
 # Tab 2, group B 
 [[toc.items]]
