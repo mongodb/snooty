@@ -98,7 +98,6 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
   const { chapters, guides, slugToTitle, toctree, eol, project } = useSnootyMetadata();
   const { isUnifiedToc } = getFeatureFlags();
   const remoteMetadata = useRemoteMetadata();
-  // const [activeTab, setActiveTab] = useState('Get Started');
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
   const pageTitle = React.useMemo(
