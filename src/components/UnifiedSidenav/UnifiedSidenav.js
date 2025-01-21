@@ -8,8 +8,8 @@ import Link from '../Link';
 import { sideNavItemTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
-import { isBrowser } from '../../utils/is-browser';
 import { isCurrentPage } from '../../utils/is-current-page';
+import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -66,13 +66,11 @@ const rightPane = LeafyCSS`
 `;
 
 // we will maybe have to edit this function in the future since if we have double panned side nav in theory two things should be selected at same time
-function isSelectedTab(slug) {
-  if (!isBrowser) return false;
-
-  return window.location.pathname === `${slug}/`;
+function isSelectedTab(url, slug) {
+  return isSelectedTocNode(url, slug);
 }
 
-function CollapsibleNavItem({ items, label, url, level }) {
+function CollapsibleNavItem({ items, label, url, slug, level }) {
   const [isOpen, setIsOpen] = useState(false);
   const chevronType = isOpen ? 'ChevronDown' : 'ChevronRight';
 
@@ -86,7 +84,7 @@ function CollapsibleNavItem({ items, label, url, level }) {
       <SideNavItem
         as={Link}
         to={url}
-        active={isSelectedTab(url)}
+        active={isSelectedTab(url, slug)}
         className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
         onClick={() => setIsOpen(!isOpen)}
         hideExternalIcon={true}
@@ -94,18 +92,18 @@ function CollapsibleNavItem({ items, label, url, level }) {
         <FormatTitle>{label}</FormatTitle>
         <Icon className={cx(chevronStyle)} glyph={chevronType} fill={palette.gray.base} onClick={onChevronClick} />
       </SideNavItem>
-      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} />)}
+      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} slug={slug} />)}
     </>
   );
 }
 
-function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, level }) {
+function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, slug, level }) {
   // these are the tab items that we dont need to show in the second pane but need to go through recursively
   if (isTab) {
     return (
       <>
         {items?.map((tocItem) => (
-          <UnifiedTocNavItem {...tocItem} level={level} />
+          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} />
         ))}
       </>
     );
@@ -116,7 +114,7 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, level
     return (
       <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavGroupTOCStyling({ level }))}>
         {items?.map((tocItem) => (
-          <UnifiedTocNavItem {...tocItem} level={level} />
+          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} />
         ))}
       </SideNavGroup>
     );
@@ -130,6 +128,7 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, level
         label={label}
         url={url}
         level={level}
+        slug={slug}
         className={cx(sideNavItemTOCStyling({ level }))}
       />
     );
@@ -137,7 +136,7 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, level
 
   return (
     <SideNavItem
-      active={isSelectedTab(url)}
+      active={isSelectedTab(url, slug)}
       aria-label={label}
       as={Link}
       to={url}
@@ -148,10 +147,10 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, level
   );
 }
 
-function StaticNavItem({ label, url, glyph, level = 1 }) {
+function StaticNavItem({ label, url, glyph, slug, level = 1 }) {
   return (
     <SideNavItem
-      active={isSelectedTab(url)}
+      active={isSelectedTab(url, slug)}
       glyph={<Icon glyph={glyph} />}
       aria-label={label}
       as={Link}
@@ -201,13 +200,13 @@ export function UnifiedSidenav({ slug }) {
         <div className={cx(leftPane)}>
           {staticToc.map((navItems) => {
             // biome-ignore lint/correctness/useJsxKeyInIterable: iterating through navItems which doesn't have a key
-            return <StaticNavItem {...navItems} />;
+            return <StaticNavItem {...navItems} slug={slug} />;
           })}
         </div>
         <div className={cx(rightPane)}>
           {unifiedTocTree.map((navItems) => {
             if (navItems.url === activeTabUrl) {
-              return <UnifiedTocNavItem {...navItems} level={1} />;
+              return <UnifiedTocNavItem {...navItems} level={1} slug={slug} />;
             }
             return null;
           })}
