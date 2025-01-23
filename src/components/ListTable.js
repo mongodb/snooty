@@ -213,7 +213,12 @@ const generateRowsData = (bodyRowNodes, columns) => {
   const rowNodes = bodyRowNodes.map((node) => node?.children[0]?.children ?? []);
   const rows = rowNodes.map((rowNode) => {
     return rowNode.reduce((res, columnNode, colIndex) => {
-      res[columns[colIndex].accessorKey] = (
+      const column = columns[colIndex];
+      if (!column) {
+        console.warn(`Row has too many items (index ${colIndex}) for table with ${columns.length} columns`);
+        return res;
+      }
+      res[column?.accessorKey ?? colIndex] = (
         <>
           {columnNode.children.map((cellNode, index) => (
             <ComponentFactory key={index} nodeData={cellNode} />

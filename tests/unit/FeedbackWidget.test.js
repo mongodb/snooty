@@ -158,7 +158,7 @@ describe('FeedbackWidget', () => {
         expect(wrapper.getAllByTestId('rating-star')).toHaveLength(5);
       });
 
-      it('transitions to the comment view when a rating is clicked', async () => {
+      it('transitions to the comment view and submits a feedback when a rating is clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
           view: 'rating',
         });
@@ -170,6 +170,7 @@ describe('FeedbackWidget', () => {
 
         checkSelectedStars(wrapper, selectedRating);
         expect(wrapper.getByPlaceholderText(COMMENT_PLACEHOLDER_TEXT)).toBeTruthy();
+        expect(stitchFunctionMocks['upsertFeedback']).toHaveBeenCalledTimes(1);
       });
 
       it('transitions to the comment view when using keyboard to select a rating', async () => {
@@ -187,6 +188,7 @@ describe('FeedbackWidget', () => {
 
         checkSelectedStars(wrapper, selectedRating);
         expect(wrapper.getByPlaceholderText(COMMENT_PLACEHOLDER_TEXT)).toBeTruthy();
+        expect(stitchFunctionMocks['upsertFeedback']).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -255,7 +257,7 @@ describe('FeedbackWidget', () => {
           // Click the submit button
           userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
-          expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
+          expect(stitchFunctionMocks['upsertFeedback']).toHaveBeenCalledTimes(1);
         });
 
         it('raises an input error if an invalid email is specified', async () => {
@@ -276,7 +278,7 @@ describe('FeedbackWidget', () => {
         it('attempts to resubmit on 401 error', async () => {
           const customError = new Error('mock error message');
           customError.statusCode = 401;
-          stitchFunctionMocks['createNewFeedback'].mockRejectedValueOnce(customError);
+          stitchFunctionMocks['upsertFeedback'].mockRejectedValueOnce(customError);
 
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
@@ -287,7 +289,7 @@ describe('FeedbackWidget', () => {
           });
           userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
-          expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(2);
+          expect(stitchFunctionMocks['upsertFeedback']).toHaveBeenCalledTimes(2);
         });
       });
     });

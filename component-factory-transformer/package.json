@@ -5,7 +5,7 @@
     "author": "",
     "license": "ISC",
     "keywords": ["swc-plugin"],
-    "main": "target/wasm32-wasi/release/component-factory-transformer.wasm",
+    "main": "target/wasm32-wasip1/release/component-factory-transformer.wasm",
     "scripts": {
         "prepublishOnly": "cargo build-wasi --release"    
     },
