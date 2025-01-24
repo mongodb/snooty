@@ -11,6 +11,7 @@ import { VersionContext } from '../../context/version-context';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import VersionSelector from './VersionSelector';
 
@@ -104,6 +105,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
           onClick={() => {
             setIsOpen(!isOpen);
           }}
+          to={isOfflineDocsBuild ? target : null}
         >
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
           {formattedTitle}
