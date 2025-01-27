@@ -11,5 +11,5 @@ export function useUnifiedToc() {
       }
     `
   );
-  return data.toc.tocTree.toc ?? {};
+  return data.toc.tocTree.toc ?? [];
 }

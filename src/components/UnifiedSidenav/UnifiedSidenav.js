@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
-import { sideNavItemTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
+import { sideNavItemUniTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
 import { isCurrentPage } from '../../utils/is-current-page';
@@ -85,7 +85,7 @@ function CollapsibleNavItem({ items, label, url, slug, level }) {
         as={Link}
         to={url}
         active={isSelectedTab(url, slug)}
-        className={cx(sideNavItemTOCStyling({ level }), overwriteLinkStyle)}
+        className={cx(sideNavItemUniTOCStyling({ level }), overwriteLinkStyle)}
         onClick={() => setIsOpen(!isOpen)}
         hideExternalIcon={true}
       >
@@ -129,7 +129,7 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, slug,
         url={url}
         level={level}
         slug={slug}
-        className={cx(sideNavItemTOCStyling({ level }))}
+        className={cx(sideNavItemUniTOCStyling({ level }))}
       />
     );
   }
@@ -140,7 +140,7 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, slug,
       aria-label={label}
       as={Link}
       to={url}
-      className={cx(sideNavItemTOCStyling({ level }))}
+      className={cx(sideNavItemUniTOCStyling({ level }))}
     >
       {label}
     </SideNavItem>
@@ -155,7 +155,7 @@ function StaticNavItem({ label, url, glyph, slug, level = 1 }) {
       aria-label={label}
       as={Link}
       to={url}
-      className={cx(sideNavItemTOCStyling({ level }))}
+      className={cx(sideNavItemUniTOCStyling({ level }))}
     >
       {label}
     </SideNavItem>
@@ -174,23 +174,25 @@ const isActiveTocNode = (currentUrl, slug, children) => {
 
 export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
-  const staticToc = unifiedTocTree.filter((item) => item?.isTab);
+  const staticTocItems = useMemo(() => {
+    unifiedTocTree.filter((item) => item?.isTab);
+  }, [unifiedTocTree]);
 
   const [activeTabUrl, setActiveTabUrl] = useState(() => {
-    const activeToc = staticToc.find((staticToc) => {
-      return isActiveTocNode(slug, staticToc.url, staticToc.items);
+    const activeToc = staticTocItems.find((staticTocItem) => {
+      return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
     });
     return activeToc?.url;
   });
 
   useEffect(() => {
     setActiveTabUrl(() => {
-      const activeToc = staticToc.find((staticToc) => {
-        return isActiveTocNode(slug, staticToc.url, staticToc.items);
+      const activeToc = staticTocItems.find((staticTocItem) => {
+        return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
       });
       return activeToc?.url;
     });
-  }, [slug, staticToc]);
+  }, [slug, staticTocItems]);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
@@ -198,19 +200,21 @@ export function UnifiedSidenav({ slug }) {
     <>
       <SideNav widthOverride={400} className={cx(sideNavStyle)} aria-label="Bianca's Side navigation">
         <div className={cx(leftPane)}>
-          {staticToc.map((navItems) => {
+          {staticTocItems.map((staticTocItem) => {
             // biome-ignore lint/correctness/useJsxKeyInIterable: iterating through navItems which doesn't have a key
-            return <StaticNavItem {...navItems} slug={slug} />;
+            return <StaticNavItem {...staticTocItem} slug={slug} />;
           })}
         </div>
-        <div className={cx(rightPane)}>
-          {unifiedTocTree.map((navItems) => {
-            if (navItems.url === activeTabUrl) {
-              return <UnifiedTocNavItem {...navItems} level={1} slug={slug} />;
-            }
-            return null;
-          })}
-        </div>
+        {activeTabUrl && (
+          <div className={cx(rightPane)}>
+            {unifiedTocTree.map((navItems) => {
+              if (navItems.url === activeTabUrl) {
+                return <UnifiedTocNavItem {...navItems} level={1} slug={slug} />;
+              }
+              return null;
+            })}
+          </div>
+        )}
       </SideNav>
     </>
   );
