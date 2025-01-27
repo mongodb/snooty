@@ -175,7 +175,7 @@ const isActiveTocNode = (currentUrl, slug, children) => {
 export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   const staticTocItems = useMemo(() => {
-    unifiedTocTree.filter((item) => item?.isTab);
+    return unifiedTocTree.filter((item) => item?.isTab);
   }, [unifiedTocTree]);
 
   const [activeTabUrl, setActiveTabUrl] = useState(() => {
