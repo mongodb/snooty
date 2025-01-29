@@ -79,6 +79,13 @@ function CollapsibleNavItem({ items, label, url, slug, level }) {
     setIsOpen(!isOpen);
   };
 
+  const handleClick = () => {
+    // Allows the collapsed item if the chevren was selected first before
+    if (!(url !== `/${slug}` && isOpen)) {
+      setIsOpen(!isOpen);
+    }
+  };
+
   return (
     <>
       <SideNavItem
@@ -86,7 +93,7 @@ function CollapsibleNavItem({ items, label, url, slug, level }) {
         to={url}
         active={isSelectedTab(url, slug)}
         className={cx(sideNavItemUniTOCStyling({ level }), overwriteLinkStyle)}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleClick}
         hideExternalIcon={true}
       >
         <FormatTitle>{label}</FormatTitle>
