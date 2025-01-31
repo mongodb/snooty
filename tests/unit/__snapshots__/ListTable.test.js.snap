@@ -61,10 +61,6 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 .emotion-4 {
@@ -100,12 +96,12 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-5>*,
 .emotion-5>div p {
-  margin: 0 0 12px;
+  margin: 0 0 12px!important;
 }
 
 .emotion-5>div *:last-child,
 .emotion-5>*:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0!important;
 }
 
 .emotion-6 {
@@ -133,10 +129,6 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 <div
@@ -333,10 +325,6 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 .emotion-4 {
@@ -390,10 +378,6 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 .emotion-7 {
@@ -426,10 +410,6 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 .emotion-9 {
@@ -563,12 +543,12 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
 
 .emotion-13>*,
 .emotion-13>div p {
-  margin: 0 0 12px;
+  margin: 0 0 12px!important;
 }
 
 .emotion-13>div *:last-child,
 .emotion-13>*:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0!important;
 }
 
 .emotion-14 {
@@ -596,10 +576,6 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 .emotion-17[aria-hidden='true'] {
@@ -632,10 +608,6 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 .emotion-68 {
@@ -1966,10 +1938,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 .emotion-4 {
@@ -2023,10 +1991,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 .emotion-15:nth-of-type(even) {
@@ -2070,10 +2034,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 .dark-theme .emotion-16 {
@@ -2114,12 +2074,12 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-18>*,
 .emotion-18>div p {
-  margin: 0 0 12px;
+  margin: 0 0 12px!important;
 }
 
 .emotion-18>div *:last-child,
 .emotion-18>*:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0!important;
 }
 
 .emotion-19 {
@@ -2147,10 +2107,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   height: unset;
   min-height: unset;
   max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
 }
 
 <div
