@@ -9,6 +9,10 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   margin: 24px 0;
 }
 
+.dark-theme .emotion-0 tbody[data-expanded='true'] {
+  background-color: #112733;
+}
+
 .emotion-1 {
   border-spacing: 0;
   border-collapse: collapse;
@@ -50,7 +54,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-3 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-3>div {
@@ -94,31 +98,13 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   align-content: flex-start;
 }
 
-.emotion-5>div {
-  min-height: unset;
-  max-height: unset;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.emotion-5 *,
-.emotion-5 p,
-.emotion-5 a {
-  line-height: 20px;
-}
-
-.emotion-5>div>*,
-.emotion-5>div>div p {
+.emotion-5>*,
+.emotion-5>div p {
   margin: 0 0 12px;
 }
 
-.emotion-5>div>div *:last-child,
-.emotion-5>div>*:last-child {
+.emotion-5>div *:last-child,
+.emotion-5>*:last-child {
   margin-bottom: 0;
 }
 
@@ -140,7 +126,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-6 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-6>div {
@@ -290,6 +276,10 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   margin: 24px 0;
 }
 
+.dark-theme .emotion-0 tbody[data-expanded='true'] {
+  background-color: #112733;
+}
+
 .emotion-1 {
   border-spacing: 0;
   border-collapse: collapse;
@@ -336,7 +326,7 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
 
 .emotion-3 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-3>div {
@@ -393,7 +383,7 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
 
 .emotion-5 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-5>div {
@@ -429,7 +419,7 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
 
 .emotion-8 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-8>div {
@@ -571,31 +561,13 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   align-content: flex-start;
 }
 
-.emotion-13>div {
-  min-height: unset;
-  max-height: unset;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.emotion-13 *,
-.emotion-13 p,
-.emotion-13 a {
-  line-height: 20px;
-}
-
-.emotion-13>div>*,
-.emotion-13>div>div p {
+.emotion-13>*,
+.emotion-13>div p {
   margin: 0 0 12px;
 }
 
-.emotion-13>div>div *:last-child,
-.emotion-13>div>*:last-child {
+.emotion-13>div *:last-child,
+.emotion-13>*:last-child {
   margin-bottom: 0;
 }
 
@@ -617,7 +589,7 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
 
 .emotion-14 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-14>div {
@@ -641,11 +613,6 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   padding: 10px 8px!important;
   vertical-align: top;
   color: var(--font-color-primary);
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: flex-start;
-  align-content: flex-start;
 }
 
 .emotion-18:focus-visible {
@@ -658,7 +625,7 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
 
 .emotion-18 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-18>div {
@@ -671,99 +638,7 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   align-items: flex-start;
 }
 
-.emotion-18>div {
-  min-height: unset;
-  max-height: unset;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.emotion-18 *,
-.emotion-18 p,
-.emotion-18 a {
-  line-height: 20px;
-}
-
-.emotion-18>div>*,
-.emotion-18>div>div p {
-  margin: 0 0 12px;
-}
-
-.emotion-18>div>div *:last-child,
-.emotion-18>div>*:last-child {
-  margin-bottom: 0;
-}
-
-.emotion-20 {
-  padding: 0 8px;
-  overflow: hidden;
-  padding: 10px 8px!important;
-  vertical-align: top;
-  color: var(--font-color-primary);
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: flex-start;
-  align-content: flex-start;
-}
-
-.emotion-20:focus-visible {
-  box-shadow: inset;
-}
-
-.emotion-20:last-child {
-  padding-right: 24px;
-}
-
-.emotion-20 * {
-  font-size: 13px!important;
-  line-height: inherit;
-}
-
-.emotion-20>div {
-  height: unset;
-  min-height: unset;
-  max-height: unset;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.emotion-20>div {
-  min-height: unset;
-  max-height: unset;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.emotion-20 *,
-.emotion-20 p,
-.emotion-20 a {
-  line-height: 20px;
-}
-
-.emotion-20>div>*,
-.emotion-20>div>div p {
-  margin: 0 0 12px;
-}
-
-.emotion-20>div>div *:last-child,
-.emotion-20>div>*:last-child {
-  margin-bottom: 0;
-}
-
-.emotion-62 {
+.emotion-68 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -775,12 +650,12 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   color: var(--font-color-primary);
 }
 
-.emotion-62 strong,
-.emotion-62 b {
+.emotion-68 strong,
+.emotion-68 b {
   font-weight: 700;
 }
 
-.emotion-63 {
+.emotion-69 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
   -webkit-padding-start: 12px;
@@ -790,7 +665,7 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   margin-bottom: 24px;
 }
 
-.emotion-63:after {
+.emotion-69:after {
   content: '';
   position: absolute;
   width: 3px;
@@ -801,37 +676,37 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   background-color: #FFC010;
 }
 
-.emotion-63 p,
-.emotion-63 li::marker {
+.emotion-69 p,
+.emotion-69 li::marker {
   color: var(--font-color-primary);
 }
 
-.emotion-63 p>a[class^='leafy'] {
+.emotion-69 p>a[class^='leafy'] {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-63>li:last-of-type,
-.emotion-63>ul:last-of-type,
-.emotion-63>ol:last-of-type,
-.emotion-63>li:last-of-type>p,
-.emotion-63>p:last-of-type {
+.emotion-69>li:last-of-type,
+.emotion-69>ul:last-of-type,
+.emotion-69>ol:last-of-type,
+.emotion-69>li:last-of-type>p,
+.emotion-69>p:last-of-type {
   margin-bottom: 0px;
 }
 
-.emotion-63 h2 {
+.emotion-69 h2 {
   color: #944F01;
 }
 
-.emotion-63:after {
+.emotion-69:after {
   background-color: #FFC010;
 }
 
-.dark-theme .emotion-63 h2 {
+.dark-theme .emotion-69 h2 {
   color: #FFEC9E;
 }
 
-.emotion-64 {
+.emotion-70 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -846,7 +721,7 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   color: #944F01;
 }
 
-.emotion-65 {
+.emotion-71 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -856,12 +731,12 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   font-weight: 400;
 }
 
-.emotion-65 strong,
-.emotion-65 b {
+.emotion-71 strong,
+.emotion-71 b {
   font-weight: 700;
 }
 
-.emotion-65 a:not(.lg-ui-0001) {
+.emotion-71 a:not(.lg-ui-0001) {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: inline;
   -webkit-align-items: center;
@@ -885,10 +760,10 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   font-weight: 400;
 }
 
-.emotion-65 a:not(.lg-ui-0001):hover,
-.emotion-65 a:not(.lg-ui-0001)[data-hover='true'],
-.emotion-65 a:not(.lg-ui-0001):focus-visible,
-.emotion-65 a:not(.lg-ui-0001)[data-focus='true'] {
+.emotion-71 a:not(.lg-ui-0001):hover,
+.emotion-71 a:not(.lg-ui-0001)[data-hover='true'],
+.emotion-71 a:not(.lg-ui-0001):focus-visible,
+.emotion-71 a:not(.lg-ui-0001)[data-focus='true'] {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -897,21 +772,21 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   text-decoration-thickness: 2px;
 }
 
-.emotion-65 a:not(.lg-ui-0001):focus {
+.emotion-71 a:not(.lg-ui-0001):focus {
   outline: none;
 }
 
-.emotion-65 a:not(.lg-ui-0001):hover,
-.emotion-65 a:not(.lg-ui-0001)[data-hover='true'] {
+.emotion-71 a:not(.lg-ui-0001):hover,
+.emotion-71 a:not(.lg-ui-0001)[data-hover='true'] {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-65 a:not(.lg-ui-0001):focus-visible,
-.emotion-65 a:not(.lg-ui-0001)[data-focus='true'] {
+.emotion-71 a:not(.lg-ui-0001):focus-visible,
+.emotion-71 a:not(.lg-ui-0001)[data-focus='true'] {
   text-decoration-color: #016BF8;
 }
 
-.emotion-66 {
+.emotion-72 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -923,12 +798,12 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   color: var(--font-color-primary);
 }
 
-.emotion-66 strong,
-.emotion-66 b {
+.emotion-72 strong,
+.emotion-72 b {
   font-weight: 700;
 }
 
-.emotion-68 {
+.emotion-74 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -960,8 +835,8 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   font-weight: var(--link-font-weight);
 }
 
-.emotion-68:hover,
-.emotion-68:focus {
+.emotion-74:hover,
+.emotion-74:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -970,19 +845,19 @@ exports[`when rendering a list table with fixed widths when rendering a list tab
   text-decoration-thickness: 2px;
 }
 
-.emotion-68:focus {
+.emotion-74:focus {
   outline: none;
 }
 
-.emotion-68:hover {
+.emotion-74:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-68:focus {
+.emotion-74:focus {
   text-decoration-color: #016BF8;
 }
 
-.emotion-69 {
+.emotion-75 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -1109,15 +984,23 @@ contain the following fields:
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
           <td
-            class="emotion-20"
+            class="emotion-14"
           >
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
         </tr>
       </tbody>
@@ -1203,15 +1086,23 @@ contain the following fields:
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
           <td
-            class="emotion-20"
+            class="emotion-14"
           >
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
         </tr>
       </tbody>
@@ -1297,15 +1188,23 @@ contain the following fields:
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
           <td
-            class="emotion-20"
+            class="emotion-14"
           >
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
         </tr>
       </tbody>
@@ -1374,37 +1273,37 @@ contain the following fields:
                 class="emotion-13"
               >
                 <p
-                  class="emotion-62"
+                  class="emotion-68"
                 >
                   A returned New Relic integration configuration object will
 contain the following fields:
                 </p>
                 <div
-                  class="emotion-63"
+                  class="emotion-69"
                   role="note"
                 >
                   <h2
-                    class="emotion-64"
+                    class="emotion-70"
                   >
                     Important
                   </h2>
                   <div
-                    class="emotion-65"
+                    class="emotion-71"
                   >
                     <p
-                      class="emotion-66"
+                      class="emotion-72"
                     >
                       Effective Wednesday, June 16th, 2021, New Relic no longer supports
 the plugin-based integration with MongoDB. We do not recommend
 that you sign up for the plugin-based integration.
                     </p>
                     <p
-                      class="emotion-66"
+                      class="emotion-72"
                     >
                       To learn more,
 see the 
                       <a
-                        class="lg-ui-0001 emotion-68"
+                        class="lg-ui-0001 emotion-74"
                         href="https://discuss.newrelic.com/t/new-relic-plugin-eol-wednesday-june-16th-2021/127267"
                         rel="noopener noreferrer"
                       >
@@ -1414,7 +1313,7 @@ see the
                         <svg
                           alt=""
                           aria-hidden="true"
-                          class="emotion-69"
+                          class="emotion-75"
                           height="16"
                           role="presentation"
                           viewBox="0 0 16 16"
@@ -1452,15 +1351,23 @@ June 16th to maintain visibility into your MongoDB deployments.
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
           <td
-            class="emotion-20"
+            class="emotion-14"
           >
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
         </tr>
       </tbody>
@@ -1546,15 +1453,23 @@ contain the following fields:
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
           <td
-            class="emotion-20"
+            class="emotion-14"
           >
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
         </tr>
       </tbody>
@@ -1640,21 +1555,29 @@ contain the following fields:
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
           <td
-            class="emotion-20"
+            class="emotion-14"
           >
             <div
               class="emotion-9"
               data-state="entered"
             >
-              <p
-                class="emotion-62"
+              <div
+                class="emotion-13"
               >
-                The configuration object may also contain the following
+                <p
+                  class="emotion-68"
+                >
+                  The configuration object may also contain the following
 fields, depending on your configuration:
-              </p>
+                </p>
+              </div>
             </div>
           </td>
         </tr>
@@ -1741,21 +1664,29 @@ contain the following fields:
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
           <td
-            class="emotion-20"
+            class="emotion-14"
           >
             <div
               class="emotion-9"
               data-state="entered"
             >
-              <p
-                class="emotion-62"
+              <div
+                class="emotion-13"
               >
-                The configuration object may also contain the following
+                <p
+                  class="emotion-68"
+                >
+                  The configuration object may also contain the following
 fields, depending on your configuration:
-              </p>
+                </p>
+              </div>
             </div>
           </td>
         </tr>
@@ -1842,15 +1773,23 @@ contain the following fields:
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
           <td
-            class="emotion-20"
+            class="emotion-14"
           >
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
         </tr>
       </tbody>
@@ -1936,15 +1875,23 @@ contain the following fields:
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
           <td
-            class="emotion-20"
+            class="emotion-14"
           >
             <div
               class="emotion-9"
               data-state="entered"
-            />
+            >
+              <div
+                class="emotion-13"
+              />
+            </div>
           </td>
         </tr>
       </tbody>
@@ -1960,6 +1907,10 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   width: 100%;
   position: relative;
   margin: 24px 0;
+}
+
+.dark-theme .emotion-0 tbody[data-expanded='true'] {
+  background-color: #112733;
 }
 
 .emotion-1 {
@@ -2008,7 +1959,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-3 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-3>div {
@@ -2065,7 +2016,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-5 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-5>div {
@@ -2112,7 +2063,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-16 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-16>div {
@@ -2161,31 +2112,13 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   align-content: flex-start;
 }
 
-.emotion-18>div {
-  min-height: unset;
-  max-height: unset;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-}
-
-.emotion-18 *,
-.emotion-18 p,
-.emotion-18 a {
-  line-height: 20px;
-}
-
-.emotion-18>div>*,
-.emotion-18>div>div p {
+.emotion-18>*,
+.emotion-18>div p {
   margin: 0 0 12px;
 }
 
-.emotion-18>div>div *:last-child,
-.emotion-18>div>*:last-child {
+.emotion-18>div *:last-child,
+.emotion-18>*:last-child {
   margin-bottom: 0;
 }
 
@@ -2207,7 +2140,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-19 * {
   font-size: 13px!important;
-  line-height: inherit;
+  line-height: 20px!important;
 }
 
 .emotion-19>div {
