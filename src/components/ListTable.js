@@ -64,6 +64,8 @@ const baseCellStyle = css`
   & > div {
     height: unset;
     min-height: unset;
+    max-height: unset;
+    align-items: flex-start;
   }
 `;
 
@@ -242,10 +244,11 @@ const generateRowsData = (bodyRowNodes, columns, isNested = false) => {
         return res;
       }
 
+      const skipPTag = hasOneChild(cell.children);
       res[column.accessorKey ?? colIdx] = (
         <>
           {cell.children.map((contentNode, index) => (
-            <ComponentFactory key={index} nodeData={contentNode} />
+            <ComponentFactory key={index} nodeData={contentNode} skipPTag={skipPTag} />
           ))}
         </>
       );
@@ -294,9 +297,6 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
     containerRef: tableRef,
     columns: columns,
     data: data,
-    // initialState: {
-    //   expanded,
-    // },
     state: {
       expanded,
     },
@@ -361,8 +361,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 const isStub = colIndex <= stubColumnCount - 1;
                 const role = isStub ? 'rowheader' : null;
                 return (
-                  <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
-                    {cell.renderValue()}
+                  <Cell key={cell.id} className={cx(baseCellStyle, isStub && stubCellStyle)} role={role}>
+                    <div className={cx(bodyCellStyle)}>{cell.renderValue()}</div>
                   </Cell>
                 );
               })}
