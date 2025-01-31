@@ -64,7 +64,7 @@ const baseCellStyle = css`
   * {
     // Wrap in selector to ensure it cascades down to every element
     font-size: ${theme.fontSize.small} !important;
-    line-height: inherit;
+    line-height: 20px !important;
   }
 
   // Ensure each cell is no higher than the highest content in row
@@ -80,12 +80,6 @@ const bodyCellStyle = css`
   overflow-wrap: anywhere;
   word-break: break-word;
   align-content: flex-start;
-
-  *,
-  p,
-  a {
-    line-height: 20px;
-  }
 
   // Target any nested components (paragraphs, admonitions, tables) and any paragraphs within those nested components
   & > *,
