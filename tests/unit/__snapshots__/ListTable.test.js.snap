@@ -23,12 +23,11 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   box-shadow: 0 4px #E8EDEB;
   position: relative;
   color: var(--font-color-primary);
-  background-color: #FFFFFF;
+  background-color: inherit;
   box-shadow: 0 4px #E8EDEB;
 }
 
 .dark-theme .emotion-2 {
-  background-color: #001E2B;
   box-shadow: 0 4px #3D4F58;
 }
 
@@ -39,11 +38,6 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   padding: 10px 8px!important;
   vertical-align: top;
   color: var(--font-color-primary);
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: flex-start;
-  align-content: flex-start;
 }
 
 .emotion-3:focus-visible {
@@ -62,34 +56,11 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 .emotion-3>div {
   height: unset;
   min-height: unset;
-}
-
-.emotion-3>div {
-  min-height: unset;
   max-height: unset;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-}
-
-.emotion-3 *,
-.emotion-3 p,
-.emotion-3 a {
-  line-height: 20px;
-}
-
-.emotion-3>div>*,
-.emotion-3>div>div p {
-  margin: 0 0 12px;
-}
-
-.emotion-3>div>div *:last-child,
-.emotion-3>div>*:last-child {
-  margin-bottom: 0;
 }
 
 .emotion-4 {
@@ -116,20 +87,39 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 }
 
 .emotion-5 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  margin-bottom: 16px;
-  color: var(--font-color-primary);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: flex-start;
+  align-content: flex-start;
 }
 
-.emotion-5 strong,
-.emotion-5 b {
-  font-weight: 700;
+.emotion-5>div {
+  min-height: unset;
+  max-height: unset;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-5 *,
+.emotion-5 p,
+.emotion-5 a {
+  line-height: 20px;
+}
+
+.emotion-5>div>*,
+.emotion-5>div>div p {
+  margin: 0 0 12px;
+}
+
+.emotion-5>div>div *:last-child,
+.emotion-5>div>*:last-child {
+  margin-bottom: 0;
 }
 
 .emotion-6 {
@@ -138,11 +128,6 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   padding: 10px 8px!important;
   vertical-align: top;
   color: var(--font-color-primary);
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: flex-start;
-  align-content: flex-start;
 }
 
 .emotion-6:focus-visible {
@@ -161,34 +146,11 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 .emotion-6>div {
   height: unset;
   min-height: unset;
-}
-
-.emotion-6>div {
-  min-height: unset;
   max-height: unset;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-}
-
-.emotion-6 *,
-.emotion-6 p,
-.emotion-6 a {
-  line-height: 20px;
-}
-
-.emotion-6>div>*,
-.emotion-6>div>div p {
-  margin: 0 0 12px;
-}
-
-.emotion-6>div>div *:last-child,
-.emotion-6>div>*:last-child {
-  margin-bottom: 0;
 }
 
 <div
@@ -235,11 +197,11 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               class="emotion-4"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-5"
               >
                 notebook
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -249,11 +211,11 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               class="emotion-4"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-5"
               >
                 50
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -263,11 +225,11 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               class="emotion-4"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-5"
               >
                 8.5x11,in
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -277,11 +239,11 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               class="emotion-4"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-5"
               >
                 A
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -291,11 +253,11 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               class="emotion-4"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-5"
               >
                 college-ruled,perforated
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -305,11 +267,11 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
               class="emotion-4"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-5"
               >
                 8
-              </p>
+              </div>
             </div>
           </td>
         </tr>
@@ -319,7 +281,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 </DocumentFragment>
 `;
 
-exports[`when rendering a list-table directive renders correctly 1`] = `
+exports[`when rendering a list table with fixed widths when rendering a list table with nested rows renders correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   overflow: auto;
@@ -342,12 +304,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   box-shadow: 0 4px #E8EDEB;
   position: relative;
   color: var(--font-color-primary);
-  background-color: #FFFFFF;
+  background-color: inherit;
   box-shadow: 0 4px #E8EDEB;
 }
 
 .dark-theme .emotion-2 {
-  background-color: #001E2B;
   box-shadow: 0 4px #3D4F58;
 }
 
@@ -381,6 +342,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 .emotion-3>div {
   height: unset;
   min-height: unset;
+  max-height: unset;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
 }
 
 .emotion-4 {
@@ -433,6 +399,1683 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 .emotion-5>div {
   height: unset;
   min-height: unset;
+  max-height: unset;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-7 {
+  background-color: #F9FBFA;
+}
+
+.emotion-8 {
+  padding: 0 8px;
+  overflow: hidden;
+  padding-left: 24px;
+  padding: 10px 8px!important;
+  vertical-align: top;
+  color: var(--font-color-primary);
+}
+
+.emotion-8:focus-visible {
+  box-shadow: inset;
+}
+
+.emotion-8:last-child {
+  padding-right: 24px;
+}
+
+.emotion-8 * {
+  font-size: 13px!important;
+  line-height: inherit;
+}
+
+.emotion-8>div {
+  height: unset;
+  min-height: unset;
+  max-height: unset;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 40px;
+  transition-property: min-height,max-height,opacity,padding,transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+  opacity: 1;
+  min-height: 40px;
+  max-height: 40px;
+  -webkit-box-pack: left;
+  -ms-flex-pack: left;
+  -webkit-justify-content: left;
+  justify-content: left;
+  text-align: left;
+}
+
+.emotion-10 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: color,box-shadow;
+  background-color: rgba(255, 255, 255, 0);
+  height: 28px;
+  width: 28px;
+  color: #5C6C75;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+}
+
+.emotion-10:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-10:active:before,
+.emotion-10:hover:before,
+.emotion-10:focus:before {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-10:focus {
+  outline: none;
+}
+
+.emotion-10:active,
+.emotion-10:hover {
+  color: #001E2B;
+}
+
+.emotion-10:active:before,
+.emotion-10:hover:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-10:focus-visible {
+  color: #001E2B;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-10:focus-visible:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-11 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-12 {
+  color: #5C6C75;
+}
+
+.emotion-13 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: flex-start;
+  align-content: flex-start;
+}
+
+.emotion-13>div {
+  min-height: unset;
+  max-height: unset;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-13 *,
+.emotion-13 p,
+.emotion-13 a {
+  line-height: 20px;
+}
+
+.emotion-13>div>*,
+.emotion-13>div>div p {
+  margin: 0 0 12px;
+}
+
+.emotion-13>div>div *:last-child,
+.emotion-13>div>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-14 {
+  padding: 0 8px;
+  overflow: hidden;
+  padding: 10px 8px!important;
+  vertical-align: top;
+  color: var(--font-color-primary);
+}
+
+.emotion-14:focus-visible {
+  box-shadow: inset;
+}
+
+.emotion-14:last-child {
+  padding-right: 24px;
+}
+
+.emotion-14 * {
+  font-size: 13px!important;
+  line-height: inherit;
+}
+
+.emotion-14>div {
+  height: unset;
+  min-height: unset;
+  max-height: unset;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-17[aria-hidden='true'] {
+  display: none;
+}
+
+.emotion-18 {
+  padding: 0 8px;
+  overflow: hidden;
+  padding-left: 52px;
+  padding: 10px 8px!important;
+  vertical-align: top;
+  color: var(--font-color-primary);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: flex-start;
+  align-content: flex-start;
+}
+
+.emotion-18:focus-visible {
+  box-shadow: inset;
+}
+
+.emotion-18:last-child {
+  padding-right: 24px;
+}
+
+.emotion-18 * {
+  font-size: 13px!important;
+  line-height: inherit;
+}
+
+.emotion-18>div {
+  height: unset;
+  min-height: unset;
+  max-height: unset;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-18>div {
+  min-height: unset;
+  max-height: unset;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-18 *,
+.emotion-18 p,
+.emotion-18 a {
+  line-height: 20px;
+}
+
+.emotion-18>div>*,
+.emotion-18>div>div p {
+  margin: 0 0 12px;
+}
+
+.emotion-18>div>div *:last-child,
+.emotion-18>div>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-20 {
+  padding: 0 8px;
+  overflow: hidden;
+  padding: 10px 8px!important;
+  vertical-align: top;
+  color: var(--font-color-primary);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: flex-start;
+  align-content: flex-start;
+}
+
+.emotion-20:focus-visible {
+  box-shadow: inset;
+}
+
+.emotion-20:last-child {
+  padding-right: 24px;
+}
+
+.emotion-20 * {
+  font-size: 13px!important;
+  line-height: inherit;
+}
+
+.emotion-20>div {
+  height: unset;
+  min-height: unset;
+  max-height: unset;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-20>div {
+  min-height: unset;
+  max-height: unset;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-20 *,
+.emotion-20 p,
+.emotion-20 a {
+  line-height: 20px;
+}
+
+.emotion-20>div>*,
+.emotion-20>div>div p {
+  margin: 0 0 12px;
+}
+
+.emotion-20>div>div *:last-child,
+.emotion-20>div>*:last-child {
+  margin-bottom: 0;
+}
+
+.emotion-62 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 13px;
+  line-height: 20px;
+  color: #001E2B;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: var(--font-color-primary);
+}
+
+.emotion-62 strong,
+.emotion-62 b {
+  font-weight: 700;
+}
+
+.emotion-63 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  -webkit-padding-start: 12px;
+  padding-inline-start: 12px;
+  position: relative;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.emotion-63:after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  top: 0px;
+  bottom: 0px;
+  left: 0;
+  border-radius: 2px;
+  background-color: #FFC010;
+}
+
+.emotion-63 p,
+.emotion-63 li::marker {
+  color: var(--font-color-primary);
+}
+
+.emotion-63 p>a[class^='leafy'] {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-63>li:last-of-type,
+.emotion-63>ul:last-of-type,
+.emotion-63>ol:last-of-type,
+.emotion-63>li:last-of-type>p,
+.emotion-63>p:last-of-type {
+  margin-bottom: 0px;
+}
+
+.emotion-63 h2 {
+  color: #944F01;
+}
+
+.emotion-63:after {
+  background-color: #FFC010;
+}
+
+.dark-theme .emotion-63 h2 {
+  color: #FFEC9E;
+}
+
+.emotion-64 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  color: #001E2B;
+  width: 100%;
+  margin-block-end: 4px;
+  color: #944F01;
+}
+
+.emotion-65 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 16px;
+  line-height: 28px;
+  color: #001E2B;
+  font-weight: 400;
+}
+
+.emotion-65 strong,
+.emotion-65 b {
+  font-weight: 700;
+}
+
+.emotion-65 a:not(.lg-ui-0001) {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: inline;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #016BF8;
+  font-weight: 400;
+}
+
+.emotion-65 a:not(.lg-ui-0001):hover,
+.emotion-65 a:not(.lg-ui-0001)[data-hover='true'],
+.emotion-65 a:not(.lg-ui-0001):focus-visible,
+.emotion-65 a:not(.lg-ui-0001)[data-focus='true'] {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-65 a:not(.lg-ui-0001):focus {
+  outline: none;
+}
+
+.emotion-65 a:not(.lg-ui-0001):hover,
+.emotion-65 a:not(.lg-ui-0001)[data-hover='true'] {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-65 a:not(.lg-ui-0001):focus-visible,
+.emotion-65 a:not(.lg-ui-0001)[data-focus='true'] {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-66 {
+  margin: unset;
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  color: #001E2B;
+  font-size: 16px;
+  line-height: 28px;
+  color: #001E2B;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: var(--font-color-primary);
+}
+
+.emotion-66 strong,
+.emotion-66 b {
+  font-weight: 700;
+}
+
+.emotion-68 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  line-height: 28px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-68:hover,
+.emotion-68:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-68:focus {
+  outline: none;
+}
+
+.emotion-68:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-68:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-69 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: relative;
+  bottom: 4px;
+  left: -1px;
+  height: 12px;
+}
+
+<div
+    class="emotion-0"
+    tabindex="0"
+  >
+    <table
+      class="emotion-1"
+    >
+      <thead
+        class="emotion-2"
+      >
+        <tr
+          data-testid="leafygreen-ui-header-row"
+        >
+          <th
+            class="emotion-3"
+            scope="col"
+          >
+            <div
+              class="emotion-4"
+            >
+              Service
+            </div>
+          </th>
+          <th
+            class="emotion-5"
+            scope="col"
+          >
+            <div
+              class="emotion-4"
+            >
+              Result
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="emotion-7"
+        data-expanded="true"
+      >
+        <tr
+          aria-hidden="false"
+          class=""
+          data-selected="false"
+          id="lg-table-row-0"
+        >
+          <td
+            class="emotion-8"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <button
+                aria-disabled="false"
+                aria-hidden="false"
+                aria-label="Collapse row"
+                class="emotion-10"
+                tabindex="0"
+              >
+                <div
+                  class="emotion-11"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-12"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="emotion-13"
+              >
+                PagerDuty
+              </div>
+            </div>
+          </td>
+          <td
+            class="emotion-14"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <div
+                class="emotion-13"
+              >
+                A returned PagerDuty integration configuration object will
+contain the following fields:
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-hidden="false"
+          class="emotion-17"
+          data-selected="false"
+          id="lg-table-row-0.0"
+        >
+          <td
+            class="emotion-18"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+          <td
+            class="emotion-20"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+        </tr>
+      </tbody>
+      <tbody
+        class="emotion-7"
+        data-expanded="true"
+      >
+        <tr
+          aria-hidden="false"
+          class=""
+          data-selected="false"
+          id="lg-table-row-1"
+        >
+          <td
+            class="emotion-8"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <button
+                aria-disabled="false"
+                aria-hidden="false"
+                aria-label="Collapse row"
+                class="emotion-10"
+                tabindex="0"
+              >
+                <div
+                  class="emotion-11"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-12"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="emotion-13"
+              >
+                Slack
+              </div>
+            </div>
+          </td>
+          <td
+            class="emotion-14"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <div
+                class="emotion-13"
+              >
+                A returned Slack integration configuration object will
+contain the following fields:
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-hidden="false"
+          class="emotion-17"
+          data-selected="false"
+          id="lg-table-row-1.0"
+        >
+          <td
+            class="emotion-18"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+          <td
+            class="emotion-20"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+        </tr>
+      </tbody>
+      <tbody
+        class="emotion-7"
+        data-expanded="true"
+      >
+        <tr
+          aria-hidden="false"
+          class=""
+          data-selected="false"
+          id="lg-table-row-2"
+        >
+          <td
+            class="emotion-8"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <button
+                aria-disabled="false"
+                aria-hidden="false"
+                aria-label="Collapse row"
+                class="emotion-10"
+                tabindex="0"
+              >
+                <div
+                  class="emotion-11"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-12"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="emotion-13"
+              >
+                Datadog
+              </div>
+            </div>
+          </td>
+          <td
+            class="emotion-14"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <div
+                class="emotion-13"
+              >
+                A returned Datadog integration configuration object will
+contain the following fields:
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-hidden="false"
+          class="emotion-17"
+          data-selected="false"
+          id="lg-table-row-2.0"
+        >
+          <td
+            class="emotion-18"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+          <td
+            class="emotion-20"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+        </tr>
+      </tbody>
+      <tbody
+        class="emotion-7"
+        data-expanded="true"
+      >
+        <tr
+          aria-hidden="false"
+          class=""
+          data-selected="false"
+          id="lg-table-row-3"
+        >
+          <td
+            class="emotion-8"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <button
+                aria-disabled="false"
+                aria-hidden="false"
+                aria-label="Collapse row"
+                class="emotion-10"
+                tabindex="0"
+              >
+                <div
+                  class="emotion-11"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-12"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="emotion-13"
+              >
+                New Relic
+              </div>
+            </div>
+          </td>
+          <td
+            class="emotion-14"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <div
+                class="emotion-13"
+              >
+                <p
+                  class="emotion-62"
+                >
+                  A returned New Relic integration configuration object will
+contain the following fields:
+                </p>
+                <div
+                  class="emotion-63"
+                  role="note"
+                >
+                  <h2
+                    class="emotion-64"
+                  >
+                    Important
+                  </h2>
+                  <div
+                    class="emotion-65"
+                  >
+                    <p
+                      class="emotion-66"
+                    >
+                      Effective Wednesday, June 16th, 2021, New Relic no longer supports
+the plugin-based integration with MongoDB. We do not recommend
+that you sign up for the plugin-based integration.
+                    </p>
+                    <p
+                      class="emotion-66"
+                    >
+                      To learn more,
+see the 
+                      <a
+                        class="lg-ui-0001 emotion-68"
+                        href="https://discuss.newrelic.com/t/new-relic-plugin-eol-wednesday-june-16th-2021/127267"
+                        rel="noopener noreferrer"
+                      >
+                        <span>
+                          New Relic Plugin EOL Statement
+                        </span>
+                        <svg
+                          alt=""
+                          aria-hidden="true"
+                          class="emotion-69"
+                          height="16"
+                          role="presentation"
+                          viewBox="0 0 16 16"
+                          width="16"
+                        >
+                          <path
+                            d="M13.823 2.4491C13.8201 2.30008 13.6999 2.17994 13.5509 2.17704L9.5062 2.09836C9.25654 2.09351 9.12821 2.39519 9.30482 2.5718L10.3856 3.65257L7.93433 6.10383C7.87964 6.15852 7.83047 6.21665 7.78683 6.27752L5.99909 8.06525C5.46457 8.59977 5.46457 9.4664 5.99909 10.0009C6.53361 10.5354 7.40023 10.5354 7.93475 10.0009L9.72249 8.21317C9.78336 8.16953 9.84148 8.12037 9.89618 8.06567L12.3474 5.61441L13.4282 6.69518C13.6048 6.87179 13.9065 6.74347 13.9016 6.4938L13.823 2.4491Z"
+                            fill="currentColor"
+                          />
+                          <path
+                            d="M7.25 3.12893C7.66421 3.12893 8 3.46472 8 3.87893C8 4.29315 7.66421 4.62893 7.25 4.62893H4C3.72386 4.62893 3.5 4.85279 3.5 5.12893V11.9929C3.5 12.2691 3.72386 12.4929 4 12.4929H10.864C11.1401 12.4929 11.364 12.2691 11.364 11.9929V8.75C11.364 8.33579 11.6998 8 12.114 8C12.5282 8 12.864 8.33579 12.864 8.75V11.9929C12.864 13.0975 11.9686 13.9929 10.864 13.9929H4C2.89543 13.9929 2 13.0975 2 11.9929V5.12893C2 4.02436 2.89543 3.12893 4 3.12893H7.25Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </a>
+                      .
+Consider configuring an alternative monitoring integration before
+June 16th to maintain visibility into your MongoDB deployments.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-hidden="false"
+          class="emotion-17"
+          data-selected="false"
+          id="lg-table-row-3.0"
+        >
+          <td
+            class="emotion-18"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+          <td
+            class="emotion-20"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+        </tr>
+      </tbody>
+      <tbody
+        class="emotion-7"
+        data-expanded="true"
+      >
+        <tr
+          aria-hidden="false"
+          class=""
+          data-selected="false"
+          id="lg-table-row-4"
+        >
+          <td
+            class="emotion-8"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <button
+                aria-disabled="false"
+                aria-hidden="false"
+                aria-label="Collapse row"
+                class="emotion-10"
+                tabindex="0"
+              >
+                <div
+                  class="emotion-11"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-12"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="emotion-13"
+              >
+                Opsgenie
+              </div>
+            </div>
+          </td>
+          <td
+            class="emotion-14"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <div
+                class="emotion-13"
+              >
+                A returned Opsgenie integration configuration object will
+contain the following fields:
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-hidden="false"
+          class="emotion-17"
+          data-selected="false"
+          id="lg-table-row-4.0"
+        >
+          <td
+            class="emotion-18"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+          <td
+            class="emotion-20"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+        </tr>
+      </tbody>
+      <tbody
+        class="emotion-7"
+        data-expanded="true"
+      >
+        <tr
+          aria-hidden="false"
+          class=""
+          data-selected="false"
+          id="lg-table-row-5"
+        >
+          <td
+            class="emotion-8"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <button
+                aria-disabled="false"
+                aria-hidden="false"
+                aria-label="Collapse row"
+                class="emotion-10"
+                tabindex="0"
+              >
+                <div
+                  class="emotion-11"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-12"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="emotion-13"
+              >
+                VictorOps
+              </div>
+            </div>
+          </td>
+          <td
+            class="emotion-14"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <div
+                class="emotion-13"
+              >
+                A returned VictorOps integration configuration object will
+contain the following fields:
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-hidden="false"
+          class="emotion-17"
+          data-selected="false"
+          id="lg-table-row-5.0"
+        >
+          <td
+            class="emotion-18"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+          <td
+            class="emotion-20"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <p
+                class="emotion-62"
+              >
+                The configuration object may also contain the following
+fields, depending on your configuration:
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tbody
+        class="emotion-7"
+        data-expanded="true"
+      >
+        <tr
+          aria-hidden="false"
+          class=""
+          data-selected="false"
+          id="lg-table-row-6"
+        >
+          <td
+            class="emotion-8"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <button
+                aria-disabled="false"
+                aria-hidden="false"
+                aria-label="Collapse row"
+                class="emotion-10"
+                tabindex="0"
+              >
+                <div
+                  class="emotion-11"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-12"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="emotion-13"
+              >
+                Webhook Settings
+              </div>
+            </div>
+          </td>
+          <td
+            class="emotion-14"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <div
+                class="emotion-13"
+              >
+                A returned webhook configuration object will
+contain the following fields:
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-hidden="false"
+          class="emotion-17"
+          data-selected="false"
+          id="lg-table-row-6.0"
+        >
+          <td
+            class="emotion-18"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+          <td
+            class="emotion-20"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <p
+                class="emotion-62"
+              >
+                The configuration object may also contain the following
+fields, depending on your configuration:
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tbody
+        class="emotion-7"
+        data-expanded="true"
+      >
+        <tr
+          aria-hidden="false"
+          class=""
+          data-selected="false"
+          id="lg-table-row-7"
+        >
+          <td
+            class="emotion-8"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <button
+                aria-disabled="false"
+                aria-hidden="false"
+                aria-label="Collapse row"
+                class="emotion-10"
+                tabindex="0"
+              >
+                <div
+                  class="emotion-11"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-12"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="emotion-13"
+              >
+                Microsoft Teams
+              </div>
+            </div>
+          </td>
+          <td
+            class="emotion-14"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <div
+                class="emotion-13"
+              >
+                A returned Microsoft Teams configuration object will
+contain the following fields:
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-hidden="false"
+          class="emotion-17"
+          data-selected="false"
+          id="lg-table-row-7.0"
+        >
+          <td
+            class="emotion-18"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+          <td
+            class="emotion-20"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+        </tr>
+      </tbody>
+      <tbody
+        class="emotion-7"
+        data-expanded="true"
+      >
+        <tr
+          aria-hidden="false"
+          class=""
+          data-selected="false"
+          id="lg-table-row-8"
+        >
+          <td
+            class="emotion-8"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <button
+                aria-disabled="false"
+                aria-hidden="false"
+                aria-label="Collapse row"
+                class="emotion-10"
+                tabindex="0"
+              >
+                <div
+                  class="emotion-11"
+                >
+                  <svg
+                    alt=""
+                    aria-hidden="true"
+                    class="emotion-12"
+                    fill="none"
+                    height="16"
+                    role="presentation"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="emotion-13"
+              >
+                Prometheus
+              </div>
+            </div>
+          </td>
+          <td
+            class="emotion-14"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            >
+              <div
+                class="emotion-13"
+              >
+                A returned Prometheus configuration object will
+contain the following fields:
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-hidden="false"
+          class="emotion-17"
+          data-selected="false"
+          id="lg-table-row-8.0"
+        >
+          <td
+            class="emotion-18"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+          <td
+            class="emotion-20"
+          >
+            <div
+              class="emotion-9"
+              data-state="entered"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`when rendering a list-table directive renders correctly 1`] = `
+<DocumentFragment>
+  .emotion-0 {
+  overflow: auto;
+  width: 100%;
+  position: relative;
+  margin: 24px 0;
+}
+
+.emotion-1 {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  color: #1C2D38;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.emotion-2 {
+  background-color: #FFFFFF;
+  box-shadow: 0 4px #E8EDEB;
+  position: relative;
+  color: var(--font-color-primary);
+  background-color: inherit;
+  box-shadow: 0 4px #E8EDEB;
+}
+
+.dark-theme .emotion-2 {
+  box-shadow: 0 4px #3D4F58;
+}
+
+.emotion-3 {
+  padding: 0 8px;
+  overflow: hidden;
+  padding-left: 32px;
+  width: 150px;
+  padding: 10px 8px!important;
+  vertical-align: top;
+  color: var(--font-color-primary);
+  line-height: 24px;
+  font-weight: 600;
+  font-size: 13px;
+  width: auto;
+}
+
+.emotion-3:focus-visible {
+  box-shadow: inset;
+}
+
+.emotion-3:last-child {
+  padding-right: 24px;
+}
+
+.emotion-3 * {
+  font-size: 13px!important;
+  line-height: inherit;
+}
+
+.emotion-3>div {
+  height: unset;
+  min-height: unset;
+  max-height: unset;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 40px;
+  transition-property: min-height,max-height,opacity,padding,transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+  height: 40px;
+  -webkit-box-pack: left;
+  -ms-flex-pack: left;
+  -webkit-justify-content: left;
+  justify-content: left;
+  text-align: left;
+}
+
+.emotion-5 {
+  padding: 0 8px;
+  overflow: hidden;
+  width: 150px;
+  padding: 10px 8px!important;
+  vertical-align: top;
+  color: var(--font-color-primary);
+  line-height: 24px;
+  font-weight: 600;
+  font-size: 13px;
+  width: auto;
+}
+
+.emotion-5:focus-visible {
+  box-shadow: inset;
+}
+
+.emotion-5:last-child {
+  padding-right: 24px;
+}
+
+.emotion-5 * {
+  font-size: 13px!important;
+  line-height: inherit;
+}
+
+.emotion-5>div {
+  height: unset;
+  min-height: unset;
+  max-height: unset;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
 }
 
 .emotion-15:nth-of-type(even) {
@@ -454,11 +2097,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   padding: 10px 8px!important;
   vertical-align: top;
   color: var(--font-color-primary);
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: flex-start;
-  align-content: flex-start;
   background-color: #F9FBFA;
   border-right: 3px solid #E8EDEB;
   font-weight: 600;
@@ -480,34 +2118,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 .emotion-16>div {
   height: unset;
   min-height: unset;
-}
-
-.emotion-16>div {
-  min-height: unset;
   max-height: unset;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-}
-
-.emotion-16 *,
-.emotion-16 p,
-.emotion-16 a {
-  line-height: 20px;
-}
-
-.emotion-16>div>*,
-.emotion-16>div>div p {
-  margin: 0 0 12px;
-}
-
-.emotion-16>div>div *:last-child,
-.emotion-16>div>*:last-child {
-  margin-bottom: 0;
 }
 
 .dark-theme .emotion-16 {
@@ -539,20 +2154,39 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 }
 
 .emotion-18 {
-  margin: unset;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  color: #001E2B;
-  font-weight: 400;
-  margin-bottom: 16px;
-  color: var(--font-color-primary);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: flex-start;
+  align-content: flex-start;
 }
 
-.emotion-18 strong,
-.emotion-18 b {
-  font-weight: 700;
+.emotion-18>div {
+  min-height: unset;
+  max-height: unset;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.emotion-18 *,
+.emotion-18 p,
+.emotion-18 a {
+  line-height: 20px;
+}
+
+.emotion-18>div>*,
+.emotion-18>div>div p {
+  margin: 0 0 12px;
+}
+
+.emotion-18>div>div *:last-child,
+.emotion-18>div>*:last-child {
+  margin-bottom: 0;
 }
 
 .emotion-19 {
@@ -561,11 +2195,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   padding: 10px 8px!important;
   vertical-align: top;
   color: var(--font-color-primary);
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: flex-start;
-  align-content: flex-start;
 }
 
 .emotion-19:focus-visible {
@@ -584,34 +2213,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 .emotion-19>div {
   height: unset;
   min-height: unset;
-}
-
-.emotion-19>div {
-  min-height: unset;
   max-height: unset;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
-}
-
-.emotion-19 *,
-.emotion-19 p,
-.emotion-19 a {
-  line-height: 20px;
-}
-
-.emotion-19>div>*,
-.emotion-19>div>div p {
-  margin: 0 0 12px;
-}
-
-.emotion-19>div>div *:last-child,
-.emotion-19>div>*:last-child {
-  margin-bottom: 0;
 }
 
 <div
@@ -704,11 +2310,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 journal
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -718,11 +2324,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 25
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -732,11 +2338,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 14x21,cm
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -746,11 +2352,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 A
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -760,11 +2366,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 brown, lined
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -774,11 +2380,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 9
-              </p>
+              </div>
             </div>
           </td>
         </tr>
@@ -796,11 +2402,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 notebook
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -810,11 +2416,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 50
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -824,11 +2430,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 8.5x11,in
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -838,11 +2444,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 A
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -852,11 +2458,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 college-ruled,perforated
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -866,11 +2472,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 8
-              </p>
+              </div>
             </div>
           </td>
         </tr>
@@ -888,11 +2494,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 paper
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -902,11 +2508,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 100
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -916,11 +2522,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 8.5x11,in
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -930,11 +2536,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 D
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -944,11 +2550,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 watercolor
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -958,11 +2564,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 10
-              </p>
+              </div>
             </div>
           </td>
         </tr>
@@ -980,11 +2586,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 planner
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -994,11 +2600,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 75
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -1008,11 +2614,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 22.85x30,cm
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -1022,11 +2628,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 D
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -1036,11 +2642,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 2019
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -1050,11 +2656,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 10
-              </p>
+              </div>
             </div>
           </td>
         </tr>
@@ -1072,11 +2678,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 postcard
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -1086,11 +2692,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 45
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -1100,11 +2706,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 10x,cm
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -1114,11 +2720,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 D
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -1128,11 +2734,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 double-sided,white
-              </p>
+              </div>
             </div>
           </td>
           <td
@@ -1142,11 +2748,11 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
               class="emotion-17"
               data-state="entered"
             >
-              <p
+              <div
                 class="emotion-18"
               >
                 2
-              </p>
+              </div>
             </div>
           </td>
         </tr>

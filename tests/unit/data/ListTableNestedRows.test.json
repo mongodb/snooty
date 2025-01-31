@@ -1,0 +1,3613 @@
+{
+  "type": "directive",
+  "children": [
+    {
+      "type": "list",
+      "children": [
+        {
+          "type": "listItem",
+          "children": [
+            {
+              "type": "list",
+              "children": [
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Service"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Result"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "enumtype": "unordered"
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "children": [
+            {
+              "type": "list",
+              "children": [
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "PagerDuty"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "A returned PagerDuty integration configuration object will\ncontain the following fields:"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "directive",
+                  "children": [
+                    {
+                      "type": "directive",
+                      "children": [],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    },
+                    {
+                      "type": "directive",
+                      "children": [
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "type"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "PAGER_DUTY"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "serviceKey"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your Service Key."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "directive",
+                                              "children": [
+                                                {
+                                                  "type": "root",
+                                                  "children": [
+                                                    {
+                                                      "type": "directive",
+                                                      "children": [
+                                                        {
+                                                          "type": "paragraph",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "After you create a notification which requires an API or integration\nkey, the key appears partially redacted when you:"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "type": "list",
+                                                          "children": [
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "paragraph",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "text",
+                                                                      "value": "View or edit the alert through the Atlas UI."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "paragraph",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "text",
+                                                                      "value": "Query the alert for the notification through the Atlas Administration API."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ],
+                                                          "enumtype": "unordered"
+                                                        }
+                                                      ],
+                                                      "domain": "",
+                                                      "name": "note",
+                                                      "argument": []
+                                                    }
+                                                  ],
+                                                  "fileid": "includes/fact-api-key-redacted.rst"
+                                                }
+                                              ],
+                                              "domain": "",
+                                              "name": "include",
+                                              "argument": [
+                                                {
+                                                  "type": "text",
+                                                  "position": {
+                                                    "start": {
+                                                      "line": 374
+                                                    }
+                                                  },
+                                                  "value": "/includes/fact-api-key-redacted.rst"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        }
+                      ],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    }
+                  ],
+                  "domain": "mongodb",
+                  "name": "row",
+                  "argument": []
+                }
+              ],
+              "enumtype": "unordered"
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "children": [
+            {
+              "type": "list",
+              "children": [
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Slack"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "A returned Slack integration configuration object will\ncontain the following fields:"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "directive",
+                  "children": [
+                    {
+                      "type": "directive",
+                      "children": [],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    },
+                    {
+                      "type": "directive",
+                      "children": [
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "type"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "SLACK"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "apiToken"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your API Token."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "directive",
+                                              "children": [
+                                                {
+                                                  "type": "root",
+                                                  "children": [
+                                                    {
+                                                      "type": "directive",
+                                                      "children": [
+                                                        {
+                                                          "type": "paragraph",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "After you create a notification which requires an API or integration\nkey, the key appears partially redacted when you:"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "type": "list",
+                                                          "children": [
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "paragraph",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "text",
+                                                                      "value": "View or edit the alert through the Atlas UI."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "paragraph",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "text",
+                                                                      "value": "Query the alert for the notification through the Atlas Administration API."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ],
+                                                          "enumtype": "unordered"
+                                                        }
+                                                      ],
+                                                      "domain": "",
+                                                      "name": "note",
+                                                      "argument": []
+                                                    }
+                                                  ],
+                                                  "fileid": "includes/fact-api-key-redacted.rst"
+                                                }
+                                              ],
+                                              "domain": "",
+                                              "name": "include",
+                                              "argument": [
+                                                {
+                                                  "type": "text",
+                                                  "position": {
+                                                    "start": {
+                                                      "line": 393
+                                                    }
+                                                  },
+                                                  "value": "/includes/fact-api-key-redacted.rst"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "teamName"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your team name. This field may not be present with a\nlegacy Slack integration."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "channelName"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "The configured Slack channel name. An empty string if\nthe value is not set."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        }
+                      ],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    }
+                  ],
+                  "domain": "mongodb",
+                  "name": "row",
+                  "argument": []
+                }
+              ],
+              "enumtype": "unordered"
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "children": [
+            {
+              "type": "list",
+              "children": [
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Datadog"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "A returned Datadog integration configuration object will\ncontain the following fields:"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "directive",
+                  "children": [
+                    {
+                      "type": "directive",
+                      "children": [],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    },
+                    {
+                      "type": "directive",
+                      "children": [
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "type"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "DATADOG"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "apiKey"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your API Key."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "directive",
+                                              "children": [
+                                                {
+                                                  "type": "root",
+                                                  "children": [
+                                                    {
+                                                      "type": "directive",
+                                                      "children": [
+                                                        {
+                                                          "type": "paragraph",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "After you create a notification which requires an API or integration\nkey, the key appears partially redacted when you:"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "type": "list",
+                                                          "children": [
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "paragraph",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "text",
+                                                                      "value": "View or edit the alert through the Atlas UI."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "paragraph",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "text",
+                                                                      "value": "Query the alert for the notification through the Atlas Administration API."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ],
+                                                          "enumtype": "unordered"
+                                                        }
+                                                      ],
+                                                      "domain": "",
+                                                      "name": "note",
+                                                      "argument": []
+                                                    }
+                                                  ],
+                                                  "fileid": "includes/fact-api-key-redacted.rst"
+                                                }
+                                              ],
+                                              "domain": "",
+                                              "name": "include",
+                                              "argument": [
+                                                {
+                                                  "type": "text",
+                                                  "position": {
+                                                    "start": {
+                                                      "line": 420
+                                                    }
+                                                  },
+                                                  "value": "/includes/fact-api-key-redacted.rst"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "region"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Indicates the API URL to use."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "directive",
+                                              "children": [
+                                                {
+                                                  "type": "root",
+                                                  "children": [
+                                                    {
+                                                      "type": "paragraph",
+                                                      "children": [
+                                                        {
+                                                          "type": "substitution_reference",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "Atlas"
+                                                            }
+                                                          ],
+                                                          "name": "service"
+                                                        },
+                                                        {
+                                                          "type": "text",
+                                                          "value": " supports the following Datadog regions in the\nAtlas Administration API:"
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "type": "directive",
+                                                      "children": [
+                                                        {
+                                                          "type": "list",
+                                                          "children": [
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "list",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "text",
+                                                                              "value": "Atlas Administration API region"
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "text",
+                                                                              "value": "Corresponding Datadog region"
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ],
+                                                                  "enumtype": "unordered"
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "list",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "literal",
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "text",
+                                                                                  "value": "US"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "literal",
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "text",
+                                                                                  "value": "US1"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ],
+                                                                  "enumtype": "unordered"
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "list",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "literal",
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "text",
+                                                                                  "value": "US3"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "literal",
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "text",
+                                                                                  "value": "US3"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ],
+                                                                  "enumtype": "unordered"
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "list",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "literal",
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "text",
+                                                                                  "value": "US5"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "literal",
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "text",
+                                                                                  "value": "US5"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ],
+                                                                  "enumtype": "unordered"
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "list",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "literal",
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "text",
+                                                                                  "value": "EU"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "literal",
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "text",
+                                                                                  "value": "EU1"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ],
+                                                                  "enumtype": "unordered"
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "list",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "literal",
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "text",
+                                                                                  "value": "AP1"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    },
+                                                                    {
+                                                                      "type": "listItem",
+                                                                      "children": [
+                                                                        {
+                                                                          "type": "paragraph",
+                                                                          "children": [
+                                                                            {
+                                                                              "type": "literal",
+                                                                              "children": [
+                                                                                {
+                                                                                  "type": "text",
+                                                                                  "value": "AP1"
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ],
+                                                                  "enumtype": "unordered"
+                                                                }
+                                                              ]
+                                                            }
+                                                          ],
+                                                          "enumtype": "unordered"
+                                                        }
+                                                      ],
+                                                      "domain": "",
+                                                      "name": "list-table",
+                                                      "argument": [],
+                                                      "options": {
+                                                        "widths": "50 50",
+                                                        "header-rows": 1
+                                                      }
+                                                    },
+                                                    {
+                                                      "type": "paragraph",
+                                                      "children": [
+                                                        {
+                                                          "type": "text",
+                                                          "value": "Datadog uses "
+                                                        },
+                                                        {
+                                                          "type": "literal",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "US1"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "type": "text",
+                                                          "value": " ("
+                                                        },
+                                                        {
+                                                          "type": "literal",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "US"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "type": "text",
+                                                          "value": " in the Atlas Administration API) by default."
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "type": "paragraph",
+                                                      "children": [
+                                                        {
+                                                          "type": "text",
+                                                          "value": "To learn more about Datadog's regions, see "
+                                                        },
+                                                        {
+                                                          "type": "reference",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "Datadog Sites"
+                                                            }
+                                                          ],
+                                                          "refuri": "https://docs.datadoghq.com/getting_started/site/"
+                                                        },
+                                                        {
+                                                          "type": "text",
+                                                          "value": "."
+                                                        }
+                                                      ]
+                                                    }
+                                                  ],
+                                                  "fileid": "includes/fact-datadog-supported-regions-api.rst"
+                                                }
+                                              ],
+                                              "domain": "",
+                                              "name": "include",
+                                              "argument": [
+                                                {
+                                                  "type": "text",
+                                                  "position": {
+                                                    "start": {
+                                                      "line": 425
+                                                    }
+                                                  },
+                                                  "value": "/includes/fact-datadog-supported-regions-api.rst"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        }
+                      ],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    }
+                  ],
+                  "domain": "mongodb",
+                  "name": "row",
+                  "argument": []
+                }
+              ],
+              "enumtype": "unordered"
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "children": [
+            {
+              "type": "list",
+              "children": [
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "New Relic"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "A returned New Relic integration configuration object will\ncontain the following fields:"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "directive",
+                      "children": [
+                        {
+                          "type": "root",
+                          "children": [
+                            {
+                              "type": "directive",
+                              "children": [
+                                {
+                                  "type": "paragraph",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "value": "Effective Wednesday, June 16th, 2021, New Relic no longer supports\nthe plugin-based integration with MongoDB. We do not recommend\nthat you sign up for the plugin-based integration."
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "paragraph",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "value": "To learn more,\nsee the "
+                                    },
+                                    {
+                                      "type": "reference",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "New Relic Plugin EOL Statement"
+                                        }
+                                      ],
+                                      "refuri": "https://discuss.newrelic.com/t/new-relic-plugin-eol-wednesday-june-16th-2021/127267"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "value": ".\nConsider configuring an alternative monitoring integration before\nJune 16th to maintain visibility into your MongoDB deployments."
+                                    }
+                                  ]
+                                }
+                              ],
+                              "domain": "",
+                              "name": "important",
+                              "argument": []
+                            }
+                          ],
+                          "fileid": "includes/fact-new-relic-deprecated.rst"
+                        }
+                      ],
+                      "domain": "",
+                      "name": "include",
+                      "argument": [
+                        {
+                          "type": "text",
+                          "position": {
+                            "start": {
+                              "line": 431
+                            }
+                          },
+                          "value": "/includes/fact-new-relic-deprecated.rst"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "directive",
+                  "children": [
+                    {
+                      "type": "directive",
+                      "children": [],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    },
+                    {
+                      "type": "directive",
+                      "children": [
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "type"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "NEW_RELIC"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "licenseKey"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your License Key."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "accountId"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Unique identifier of your New Relic account."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "writeToken"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your Insights Insert Key."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "readToken"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your Insights Query Key."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        }
+                      ],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    }
+                  ],
+                  "domain": "mongodb",
+                  "name": "row",
+                  "argument": []
+                }
+              ],
+              "enumtype": "unordered"
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "children": [
+            {
+              "type": "list",
+              "children": [
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Opsgenie"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "A returned Opsgenie integration configuration object will\ncontain the following fields:"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "directive",
+                  "children": [
+                    {
+                      "type": "directive",
+                      "children": [],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    },
+                    {
+                      "type": "directive",
+                      "children": [
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "type"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "OPS_GENIE"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "apiKey"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your API Key."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "directive",
+                                              "children": [
+                                                {
+                                                  "type": "root",
+                                                  "children": [
+                                                    {
+                                                      "type": "directive",
+                                                      "children": [
+                                                        {
+                                                          "type": "paragraph",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "After you create a notification which requires an API or integration\nkey, the key appears partially redacted when you:"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "type": "list",
+                                                          "children": [
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "paragraph",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "text",
+                                                                      "value": "View or edit the alert through the Atlas UI."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "paragraph",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "text",
+                                                                      "value": "Query the alert for the notification through the Atlas Administration API."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ],
+                                                          "enumtype": "unordered"
+                                                        }
+                                                      ],
+                                                      "domain": "",
+                                                      "name": "note",
+                                                      "argument": []
+                                                    }
+                                                  ],
+                                                  "fileid": "includes/fact-api-key-redacted.rst"
+                                                }
+                                              ],
+                                              "domain": "",
+                                              "name": "include",
+                                              "argument": [
+                                                {
+                                                  "type": "text",
+                                                  "position": {
+                                                    "start": {
+                                                      "line": 472
+                                                    }
+                                                  },
+                                                  "value": "/includes/fact-api-key-redacted.rst"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "region"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Indicates which API URL is used, either "
+                                                },
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "US"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "text",
+                                                  "value": " or\n"
+                                                },
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "EU"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "text",
+                                                  "value": ". Opsgenie will use "
+                                                },
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "US"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "text",
+                                                  "value": " by default."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        }
+                      ],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    }
+                  ],
+                  "domain": "mongodb",
+                  "name": "row",
+                  "argument": []
+                }
+              ],
+              "enumtype": "unordered"
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "children": [
+            {
+              "type": "list",
+              "children": [
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "VictorOps"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "A returned VictorOps integration configuration object will\ncontain the following fields:"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "directive",
+                  "children": [
+                    {
+                      "type": "directive",
+                      "children": [],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    },
+                    {
+                      "type": "directive",
+                      "children": [
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "type"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "VICTOR_OPS"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "apiKey"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your API Key."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "directive",
+                                              "children": [
+                                                {
+                                                  "type": "root",
+                                                  "children": [
+                                                    {
+                                                      "type": "directive",
+                                                      "children": [
+                                                        {
+                                                          "type": "paragraph",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "After you create a notification which requires an API or integration\nkey, the key appears partially redacted when you:"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "type": "list",
+                                                          "children": [
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "paragraph",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "text",
+                                                                      "value": "View or edit the alert through the Atlas UI."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "type": "listItem",
+                                                              "children": [
+                                                                {
+                                                                  "type": "paragraph",
+                                                                  "children": [
+                                                                    {
+                                                                      "type": "text",
+                                                                      "value": "Query the alert for the notification through the Atlas Administration API."
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ],
+                                                          "enumtype": "unordered"
+                                                        }
+                                                      ],
+                                                      "domain": "",
+                                                      "name": "note",
+                                                      "argument": []
+                                                    }
+                                                  ],
+                                                  "fileid": "includes/fact-api-key-redacted.rst"
+                                                }
+                                              ],
+                                              "domain": "",
+                                              "name": "include",
+                                              "argument": [
+                                                {
+                                                  "type": "text",
+                                                  "position": {
+                                                    "start": {
+                                                      "line": 495
+                                                    }
+                                                  },
+                                                  "value": "/includes/fact-api-key-redacted.rst"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        },
+                        {
+                          "type": "paragraph",
+                          "children": [
+                            {
+                              "type": "text",
+                              "value": "The configuration object may also contain the following\nfields, depending on your configuration:"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "routingKey"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "An optional field returned if you have a Routing Key\nconfigured."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        }
+                      ],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    }
+                  ],
+                  "domain": "mongodb",
+                  "name": "row",
+                  "argument": []
+                }
+              ],
+              "enumtype": "unordered"
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "children": [
+            {
+              "type": "list",
+              "children": [
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Webhook Settings"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "A returned webhook configuration object will\ncontain the following fields:"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "directive",
+                  "children": [
+                    {
+                      "type": "directive",
+                      "children": [],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    },
+                    {
+                      "type": "directive",
+                      "children": [
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "type"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "WEBHOOK"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "url"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your webhook URL."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        },
+                        {
+                          "type": "paragraph",
+                          "children": [
+                            {
+                              "type": "text",
+                              "value": "The configuration object may also contain the following\nfields, depending on your configuration:"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "secret"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "An optional field returned if your webhook is\nconfigured with a secret."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "directive",
+                                              "children": [
+                                                {
+                                                  "type": "root",
+                                                  "children": [
+                                                    {
+                                                      "type": "directive",
+                                                      "children": [
+                                                        {
+                                                          "type": "paragraph",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "When you view or edit the alert for a webhook\nnotification, the URL appears partially redacted, and the\nsecret appears completely redacted."
+                                                            }
+                                                          ]
+                                                        }
+                                                      ],
+                                                      "domain": "",
+                                                      "name": "note",
+                                                      "argument": []
+                                                    }
+                                                  ],
+                                                  "fileid": "includes/fact-webhook-redacted.rst"
+                                                }
+                                              ],
+                                              "domain": "",
+                                              "name": "include",
+                                              "argument": [
+                                                {
+                                                  "type": "text",
+                                                  "position": {
+                                                    "start": {
+                                                      "line": 542
+                                                    }
+                                                  },
+                                                  "value": "/includes/fact-webhook-redacted.rst"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        }
+                      ],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    }
+                  ],
+                  "domain": "mongodb",
+                  "name": "row",
+                  "argument": []
+                }
+              ],
+              "enumtype": "unordered"
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "children": [
+            {
+              "type": "list",
+              "children": [
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Microsoft Teams"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "A returned Microsoft Teams configuration object will\ncontain the following fields:"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "directive",
+                  "children": [
+                    {
+                      "type": "directive",
+                      "children": [],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    },
+                    {
+                      "type": "directive",
+                      "children": [
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "type"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "MICROSOFT_TEAMS"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "microsoftTeamsWebhookUrl"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your Microsoft Teams incoming webhook URL."
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "directive",
+                                              "children": [
+                                                {
+                                                  "type": "root",
+                                                  "children": [
+                                                    {
+                                                      "type": "directive",
+                                                      "children": [
+                                                        {
+                                                          "type": "paragraph",
+                                                          "children": [
+                                                            {
+                                                              "type": "text",
+                                                              "value": "When you view or edit the alert for a Microsoft Teams notification, the\nURL appears partially redacted."
+                                                            }
+                                                          ]
+                                                        }
+                                                      ],
+                                                      "domain": "",
+                                                      "name": "note",
+                                                      "argument": []
+                                                    }
+                                                  ],
+                                                  "fileid": "includes/fact-ms-teams-redacted.rst"
+                                                }
+                                              ],
+                                              "domain": "",
+                                              "name": "include",
+                                              "argument": [
+                                                {
+                                                  "type": "text",
+                                                  "position": {
+                                                    "start": {
+                                                      "line": 561
+                                                    }
+                                                  },
+                                                  "value": "/includes/fact-ms-teams-redacted.rst"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        }
+                      ],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    }
+                  ],
+                  "domain": "mongodb",
+                  "name": "row",
+                  "argument": []
+                }
+              ],
+              "enumtype": "unordered"
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "children": [
+            {
+              "type": "list",
+              "children": [
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "Prometheus"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "A returned Prometheus configuration object will\ncontain the following fields:"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "directive",
+                  "children": [
+                    {
+                      "type": "directive",
+                      "children": [],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    },
+                    {
+                      "type": "directive",
+                      "children": [
+                        {
+                          "type": "directive",
+                          "children": [
+                            {
+                              "type": "list",
+                              "children": [
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Property"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Description"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "type"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "PROMETHEUS"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "username"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your Prometheus username."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "serviceDiscovery"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Indicates which service discovery method is\nused, either "
+                                                },
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "file"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "text",
+                                                  "value": " or "
+                                                },
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "http"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "text",
+                                                  "value": "."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "scheme"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Your Prometheus protocol scheme configured for requests."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "listItem",
+                                  "children": [
+                                    {
+                                      "type": "list",
+                                      "children": [
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "literal",
+                                                  "children": [
+                                                    {
+                                                      "type": "text",
+                                                      "value": "enabled"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "listItem",
+                                          "children": [
+                                            {
+                                              "type": "paragraph",
+                                              "children": [
+                                                {
+                                                  "type": "text",
+                                                  "value": "Whether your cluster has Prometheus enabled."
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "enumtype": "unordered"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "enumtype": "unordered"
+                            }
+                          ],
+                          "domain": "",
+                          "name": "list-table",
+                          "argument": [],
+                          "options": {
+                            "widths": "30 70",
+                            "header-rows": 1
+                          }
+                        }
+                      ],
+                      "domain": "mongodb",
+                      "name": "cell",
+                      "argument": []
+                    }
+                  ],
+                  "domain": "mongodb",
+                  "name": "row",
+                  "argument": []
+                }
+              ],
+              "enumtype": "unordered"
+            }
+          ]
+        }
+      ],
+      "enumtype": "unordered"
+    }
+  ],
+  "domain": "",
+  "name": "list-table",
+  "argument": [],
+  "options": {
+    "header-rows": 1
+  }
+}

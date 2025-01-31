@@ -5,6 +5,7 @@ import ListTable from '../../src/components/ListTable';
 
 import mockData from './data/ListTable.test.json';
 import mockDataFixedWidths from './data/ListTableFixedWidths.test.json';
+import mockDataNestedRows from './data/ListTableNestedRows.test.json';
 
 expect.extend(matchers);
 
@@ -62,5 +63,13 @@ describe('when rendering a list table with fixed widths', () => {
   it('displays no stub columns', () => {
     const wrapper = mountListTable(data);
     expect(wrapper.queryAllByRole('rowheader')).toHaveLength(0);
+  });
+
+  describe('when rendering a list table with nested rows', () => {
+    const data = mockDataNestedRows;
+    it('renders correctly', () => {
+      const wrapper = mountListTable(data);
+      expect(wrapper.asFragment()).toMatchSnapshot();
+    });
   });
 });

@@ -303,8 +303,6 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
     onExpandedChange: setExpanded,
   });
   const { rows } = table.getRowModel();
-  console.log({ rowModel: rows });
-
   const columnCount = columns.length;
 
   let widths = null;
@@ -371,7 +369,6 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 row.subRows.map((subRow) => (
                   <Row key={subRow.id} row={subRow} className={cx(subRowStyle)}>
                     {subRow.getVisibleCells().map((cell) => {
-                      console.log({ subRowCell: cell, row: row });
                       return (
                         <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle)}>
                           {cell.renderValue()}
