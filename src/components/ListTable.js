@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Cell,
@@ -38,11 +38,11 @@ const theadStyle = css`
   // Allows its box shadow to appear above stub cell's background color
   position: relative;
   color: var(--font-color-primary);
-  background-color: ${palette.white};
+  // Allow nested tables to inherit background of the current row
+  background-color: inherit;
   box-shadow: 0 ${theme.size.tiny} ${palette.gray.light2};
 
   .dark-theme & {
-    background-color: ${palette.black};
     box-shadow: 0 ${theme.size.tiny} ${palette.gray.dark2};
   }
 `;
@@ -113,6 +113,14 @@ const stubCellStyle = css`
   .dark-theme & {
     background-color: ${palette.gray.dark4};
     border-right: 3px solid ${palette.gray.dark2};
+  }
+`;
+
+const subRowStyle = css`
+  // For some reason, collapsed subrows were causing the row to still take up space,
+  // so this is our workaround for now
+  &[aria-hidden='true'] {
+    display: none;
   }
 `;
 
@@ -209,24 +217,45 @@ const generateColumns = (headerRow, bodyRows) => {
   });
 };
 
-const generateRowsData = (bodyRowNodes, columns) => {
-  const rowNodes = bodyRowNodes.map((node) => node?.children[0]?.children ?? []);
-  const rows = rowNodes.map((rowNode) => {
-    return rowNode.reduce((res, columnNode, colIndex) => {
-      const column = columns[colIndex];
+const generateRowsData = (bodyRowNodes, columns, isNested = false) => {
+  // The shape of list-table's "rows" are slightly different from a traditional row directive, so we need to
+  // account for that
+  const rowNodes = isNested ? bodyRowNodes : bodyRowNodes.map((node) => node?.children[0]?.children ?? []);
+  const rows = rowNodes.map((row) => {
+    const res = {};
+    const cells = [];
+    const nestedRows = [];
+
+    const potentialCells = isNested ? row.children : row;
+    for (const item of potentialCells) {
+      if (item.type === 'directive' && item.name === 'row') {
+        nestedRows.push(item);
+      } else {
+        cells.push(item);
+      }
+    }
+
+    cells.forEach((cell, colIdx) => {
+      const column = columns[colIdx];
       if (!column) {
-        console.warn(`Row has too many items (index ${colIndex}) for table with ${columns.length} columns`);
+        console.warn(`Row has too many items (index ${colIdx}) for table with ${columns.length} columns`);
         return res;
       }
-      res[column?.accessorKey ?? colIndex] = (
+
+      res[column.accessorKey ?? colIdx] = (
         <>
-          {columnNode.children.map((cellNode, index) => (
-            <ComponentFactory key={index} nodeData={cellNode} />
+          {cell.children.map((contentNode, index) => (
+            <ComponentFactory key={index} nodeData={contentNode} />
           ))}
         </>
       );
-      return res;
-    }, {});
+    });
+
+    if (nestedRows.length > 0) {
+      res['subRows'] = generateRowsData(nestedRows, columns, true);
+    }
+
+    return res;
   });
 
   return rows;
@@ -260,12 +289,21 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   const tableRef = useRef();
   const columns = useMemo(() => generateColumns(headerRows[0], bodyRows), [bodyRows, headerRows]);
   const data = useMemo(() => generateRowsData(bodyRows, columns), [bodyRows, columns]);
+  const [expanded, setExpanded] = useState(true);
   const table = useLeafyGreenTable({
     containerRef: tableRef,
     columns: columns,
     data: data,
+    // initialState: {
+    //   expanded,
+    // },
+    state: {
+      expanded,
+    },
+    onExpandedChange: setExpanded,
   });
   const { rows } = table.getRowModel();
+  console.log({ rowModel: rows });
 
   const columnCount = columns.length;
 
@@ -285,6 +323,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
         <div className="header-buffer" key={id} id={id} />
       ))}
       <Table
+        table={table}
         className={cx(
           styleTable({
             customAlign: options?.align,
@@ -327,6 +366,20 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                   </Cell>
                 );
               })}
+
+              {row.subRows &&
+                row.subRows.map((subRow) => (
+                  <Row key={subRow.id} row={subRow} className={cx(subRowStyle)}>
+                    {subRow.getVisibleCells().map((cell) => {
+                      console.log({ subRowCell: cell, row: row });
+                      return (
+                        <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle)}>
+                          {cell.renderValue()}
+                        </Cell>
+                      );
+                    })}
+                  </Row>
+                ))}
             </Row>
           ))}
         </TableBody>
