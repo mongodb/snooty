@@ -32,6 +32,13 @@ const styleTable = ({ customAlign, customWidth }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
+
+  tbody[data-expanded='true'] {
+    // Avoid flash of light mode
+    .dark-theme & {
+      background-color: ${palette.gray.dark4};
+    }
+  }
 `;
 
 const theadStyle = css`
@@ -74,13 +81,6 @@ const bodyCellStyle = css`
   word-break: break-word;
   align-content: flex-start;
 
-  & > div {
-    min-height: unset;
-    max-height: unset;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   *,
   p,
   a {
@@ -88,14 +88,14 @@ const bodyCellStyle = css`
   }
 
   // Target any nested components (paragraphs, admonitions, tables) and any paragraphs within those nested components
-  & > div > *,
-  & > div > div p {
+  & > *,
+  & > div p {
     margin: 0 0 12px;
   }
 
   // Prevent extra margin below last element (such as when multiple paragraphs are present)
-  & > div > div *:last-child,
-  & > div > *:last-child {
+  & > div *:last-child,
+  & > *:last-child {
     margin-bottom: 0;
   }
 `;
@@ -370,8 +370,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                   <Row key={subRow.id} row={subRow} className={cx(subRowStyle)}>
                     {subRow.getVisibleCells().map((cell) => {
                       return (
-                        <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle)}>
-                          {cell.renderValue()}
+                        <Cell key={cell.id} className={cx(baseCellStyle)}>
+                          <div className={cx(bodyCellStyle)}>{cell.renderValue()}</div>
                         </Cell>
                       );
                     })}
