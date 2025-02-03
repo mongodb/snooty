@@ -70,6 +70,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
     }
   }, [childrenHashIds, hash, open]);
 
+  console.log('in collapsible', headingNodeData, options);
   return (
     <HeadingContextProvider ignoreNextHeading={true} heading={heading}>
       <Box

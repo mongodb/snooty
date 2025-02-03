@@ -34,6 +34,9 @@ url = "/tutorial/load-data"
 [[toc.items.items]]
 label = "Generate Synthetic Data"
 url = "/tutorial/generate-data"
+[[toc.items.items]]
+label = "Atlas cli"
+url = "/cli/v1.32"
 
 # static left pane item 2
 [[toc]]

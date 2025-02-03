@@ -1,0 +1,67 @@
+[[repo]]
+repoName = "cloud-docs"
+repoSlug = 'atlas/'
+versioned = false
+
+[[repo]]
+repoName = "docs-atlas-cli"
+repoSlug = 'atlas/cli/'
+versioned = true
+[[repo.version]]
+name = 'master'
+urlAliases = ['1.36', 'upcoming', 'master']
+urlSlug = 'upcoming'
+versionSelectorLabel = '1.36 (upcoming)'
+isStableBranch = false
+# do we want to do publishOriginalBranchName
+[[repo.version]]
+name = 'v1.35'
+urlAliases = ['1.35', 'current']
+urlSlug = 'current'
+versionSelectorLabel = '1.35'
+isStableBranch = true
+[[repo.version]]
+name = 'v1.34'
+urlAliases = ['1.34']
+urlSlug = 'v1.34'
+versionSelectorLabel = '1.34'
+isStableBranch = false
+
+[[repo]]
+repoName = "docs-atlas-operator"
+repoSlug = "atlas/operator/"
+versioned = true
+[[repo.version]]
+name = 'master'
+urlAliases = ['upcoming']
+urlSlug = 'upcoming'
+versionSelectorLabel = 'upcoming'
+isStableBranch = false
+[[repo.version]]
+name = 'v2.6'
+urlAliases = ['current', 'v2.6']
+urlSlug = 'v2.6'
+versionSelectorLabel = 'v2.6'
+isStableBranch = true
+[[repo.version]]
+name = 'v2.5'
+urlAliases = ['v2.5']
+urlSlug = 'v2.5'
+versionSelectorLabel = 'v2.5'
+isStableBranch = true
+
+[[repo]]
+repoName = "docs-csharp"
+repoSlug = 'drivers/csharp/'
+versioned = true
+[[repo.version]]
+name = 'master'
+urlAliases = ['upcoming']
+urlSlug = "upcoming"
+isStableBranch = false
+[[repo.version]]
+name = 'v3.1'
+urlAliases = ['v3.1', 'current']
+urlSlug = 'v3.1'
+versionSelectorLabel = 'v3.1 (current)'
+isStableBranch = true

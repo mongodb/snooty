@@ -67,6 +67,9 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const hasMethodSelector = page?.options?.['has_method_selector'];
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
 
+  // add version selector here ?
+  console.log('in heading', sectionDepth, nodeData, rest);
+
   return (
     <>
       <ConditionalWrapper
