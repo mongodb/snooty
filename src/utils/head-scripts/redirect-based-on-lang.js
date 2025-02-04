@@ -40,7 +40,8 @@ function redirectBasedOnLang() {
       // Check to see if browser's language is one that is already translated
       const matchedLocale = supportedLocaleCodes.find((localeCode) => localeCode.startsWith(lang));
       if (matchedLocale) {
-        const targetPath = '/' + matchedLocale + window.location.pathname;
+        const targetPath =
+          '/' + matchedLocale + window.location.pathname + window.location.search + window.location.hash;
         window.location.href = targetPath;
       }
     }
