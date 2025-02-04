@@ -131,6 +131,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   documents.forEach((doc) => {
     const { page_id, ...rest } = doc;
     const key = page_id.replace(`${pageIdPrefix}/`, '');
+
     const val = rest;
 
     const pageNode = getNestedValue(['ast', 'children'], val);
@@ -139,7 +140,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     // Parse each document before pages are created via createPage
     // to remove all positions fields as it is only used in the parser for logging
     removeNestedValue('position', 'children', [val?.ast]);
-
+    const projectSet = new Set();
     if (pageNode) {
       val.static_assets.forEach((asset) => {
         const checksum = asset.checksum;
@@ -154,6 +155,14 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     const currentPageComponents = getPageComponents(pageNode);
 
     currentPageComponents.forEach((componentName) => projectComponents.add(componentName));
+    const splitPageId = page_id.split('/');
+
+    const project = splitPageId[0];
+    const version = !!splitPageId[1].match(/v\d+.\d+/) ? splitPageId[1] : null;
+
+    projectSet.add(project);
+
+    console.log(JSON.stringify(doc.ast, null, 4));
 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       createNode({
@@ -161,6 +170,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
         page_id: key,
         ast: doc.ast,
         facets: doc.facets,
+        project,
+        version,
         internal: {
           type: 'Page',
           contentDigest: createContentDigest(doc),
@@ -216,6 +227,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
 
   const { parentPaths, slugToBreadcrumbLabel } = metadataMinusStatic;
+
   if (parentPaths) {
     transformBreadcrumbs(parentPaths, slugToBreadcrumbLabel);
   }
@@ -237,54 +249,64 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   });
 };
 
+async function getStitchedRepoBranches(projects) {
+  const repoBranches = {};
+
+  await Promise.all(
+    projects.map(async (project) => {
+      try {
+        const repoInfo = await db.realmInterface.fetchDocset({ project });
+        let errMsg;
+
+        if (!repoInfo) {
+          errMsg = `Repo data for ${project} could not be found.`;
+        }
+
+        // We should expect the number of branches for a docs repo to be 1 or more.
+        if (!repoInfo.branches?.length) {
+          errMsg = `No version information found for ${project}`;
+        }
+
+        if (errMsg) {
+          throw errMsg;
+        }
+
+        // Handle inconsistent env names. Default to 'dotcomstg' for staging data on local builds.
+        // dotcom environments seem to be consistent.
+        let envKey = siteMetadata.snootyEnv;
+        if (!envKey || envKey === 'development') {
+          envKey = 'dotcomstg';
+        } else if (envKey === 'production') {
+          envKey = 'prd';
+        } else if (envKey === 'staging') {
+          envKey = 'stg';
+        }
+
+        // We're overfetching data here. We only need branches and prefix at the least
+        repoBranches[project] = {
+          branches: repoInfo.branches,
+          siteBasePrefix: repoInfo.prefix[envKey],
+        };
+
+        if (repoInfo.groups?.length > 0) {
+          repoBranches.groups = repoInfo.groups;
+        }
+      } catch (err) {
+        console.error(err);
+        throw err;
+      }
+    })
+  );
+
+  return repoBranches;
+}
+
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
-  console.log(siteMetadata);
 
-  let repoBranches = null;
+  const projects = siteMetadata.sites.map(({ project }) => project);
 
-  console.log('STITCHED PROD');
-  try {
-    const repoInfo = await db.realmInterface.fetchDocset();
-    let errMsg;
-
-    if (!repoInfo) {
-      errMsg = `Repo data for ${siteMetadata.project} could not be found.`;
-    }
-
-    // We should expect the number of branches for a docs repo to be 1 or more.
-    if (!repoInfo.branches?.length) {
-      errMsg = `No version information found for ${siteMetadata.project}`;
-    }
-
-    if (errMsg) {
-      throw errMsg;
-    }
-
-    // Handle inconsistent env names. Default to 'dotcomstg' for staging data on local builds.
-    // dotcom environments seem to be consistent.
-    let envKey = siteMetadata.snootyEnv;
-    if (!envKey || envKey === 'development') {
-      envKey = 'dotcomstg';
-    } else if (envKey === 'production') {
-      envKey = 'prd';
-    } else if (envKey === 'staging') {
-      envKey = 'stg';
-    }
-
-    // We're overfetching data here. We only need branches and prefix at the least
-    repoBranches = {
-      branches: repoInfo.branches,
-      siteBasePrefix: repoInfo.prefix[envKey],
-    };
-
-    if (repoInfo.groups?.length > 0) {
-      repoBranches.groups = repoInfo.groups;
-    }
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
+  const repoBranches = await getStitchedRepoBranches(projects);
 
   if (process.env.USE_FILTER_BRANCH === 'true') {
     const { code } = await swc.transformFile(`${process.cwd()}/src/components/ComponentFactory.js`, {
@@ -307,8 +329,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       },
     });
 
-    console.log(code);
-
     if (process.env.FILTER_DRY_RUN !== 'true')
       await fs.writeFile(`${process.cwd()}/src/components/ComponentFactory.js`, code);
   }
@@ -321,6 +341,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           page_id
           ast
           componentNames
+          project
+          version
         }
       }
     }
@@ -344,7 +366,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         context: {
           page_id: page.page_id,
           slug,
-          repoBranches,
+          repoBranches: repoBranches[page.project],
           template: pageNodes?.options?.template,
         },
       });
@@ -382,6 +404,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       page_id: String
       branch: String
       pagePath: String
+      project: String
+      version: String
       ast: JSON!
       facets: [JSON]
       metadata: SnootyMetadata @link

@@ -110,6 +110,8 @@ const DocumentBody = (props) => {
   const { parentPaths, branch } = useSnootyMetadata();
   const queriedCrumbs = useBreadcrumbs();
 
+  console.log(repoBranches);
+
   const siteBasePrefix = repoBranches.siteBasePrefix;
 
   // TODO: Move this into util function since the same logic

@@ -239,7 +239,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
-  console.log(siteMetadata);
 
   let repoBranches = null;
   try {

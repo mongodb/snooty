@@ -59,6 +59,7 @@ const getPathPrefix = (pathPrefix) => {
 /**
  * Get site metadata used to identify this build and query correct documents
  */
+
 const siteMetadata = {
   commitHash: process.env.COMMIT_HASH || '',
   database: getDatabase(process.env.SNOOTY_ENV),
@@ -69,6 +70,7 @@ const siteMetadata = {
   pathPrefix: getPathPrefix(process.env.PATH_PREFIX),
   project: manifestMetadata['project'] || process.env.GATSBY_SITE,
   siteUrl: DOTCOM_BASE_URL,
+  sites: manifestMetadata.sites || [],
   snootyBranch: gitBranch,
   snootyEnv: process.env.SNOOTY_ENV || 'development',
   user: userInfo().username,
