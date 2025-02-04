@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Cell,
@@ -32,17 +32,24 @@ const styleTable = ({ customAlign, customWidth }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
+
+  tbody[data-expanded='true'] {
+    // Avoid flash of light mode
+    .dark-theme & {
+      background-color: ${palette.gray.dark4};
+    }
+  }
 `;
 
 const theadStyle = css`
   // Allows its box shadow to appear above stub cell's background color
   position: relative;
   color: var(--font-color-primary);
-  background-color: ${palette.white};
+  // Allow nested tables to inherit background of the current row
+  background-color: inherit;
   box-shadow: 0 ${theme.size.tiny} ${palette.gray.light2};
 
   .dark-theme & {
-    background-color: ${palette.black};
     box-shadow: 0 ${theme.size.tiny} ${palette.gray.dark2};
   }
 `;
@@ -57,13 +64,14 @@ const baseCellStyle = css`
   * {
     // Wrap in selector to ensure it cascades down to every element
     font-size: ${theme.fontSize.small} !important;
-    line-height: inherit;
+    line-height: 20px !important;
   }
 
   // Ensure each cell is no higher than the highest content in row
   & > div {
     height: unset;
     min-height: unset;
+    max-height: unset;
   }
 `;
 
@@ -72,29 +80,16 @@ const bodyCellStyle = css`
   word-break: break-word;
   align-content: flex-start;
 
-  & > div {
-    min-height: unset;
-    max-height: unset;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  *,
-  p,
-  a {
-    line-height: 20px;
-  }
-
   // Target any nested components (paragraphs, admonitions, tables) and any paragraphs within those nested components
-  & > div > *,
-  & > div > div p {
-    margin: 0 0 12px;
+  & > *,
+  & > div p {
+    margin: 0 0 12px !important;
   }
 
   // Prevent extra margin below last element (such as when multiple paragraphs are present)
-  & > div > div *:last-child,
-  & > div > *:last-child {
-    margin-bottom: 0;
+  & > div *:last-child,
+  & > *:last-child {
+    margin-bottom: 0 !important;
   }
 `;
 
@@ -113,6 +108,14 @@ const stubCellStyle = css`
   .dark-theme & {
     background-color: ${palette.gray.dark4};
     border-right: 3px solid ${palette.gray.dark2};
+  }
+`;
+
+const subRowStyle = css`
+  // For some reason, collapsed subrows were causing the row to still take up space,
+  // so this is our workaround for now
+  &[aria-hidden='true'] {
+    display: none;
   }
 `;
 
@@ -209,24 +212,43 @@ const generateColumns = (headerRow, bodyRows) => {
   });
 };
 
-const generateRowsData = (bodyRowNodes, columns) => {
-  const rowNodes = bodyRowNodes.map((node) => node?.children[0]?.children ?? []);
-  const rows = rowNodes.map((rowNode) => {
-    return rowNode.reduce((res, columnNode, colIndex) => {
-      const column = columns[colIndex];
+const generateRowsData = (rowNodes, columns, isNested = false) => {
+  const rows = rowNodes.map((row) => {
+    const res = {};
+    const cells = [];
+    const nestedRows = [];
+
+    const potentialCells = isNested ? row.children : row;
+    for (const item of potentialCells) {
+      if (item.type === 'directive' && item.name === 'row') {
+        nestedRows.push(item);
+      } else {
+        cells.push(item);
+      }
+    }
+
+    cells.forEach((cell, colIdx) => {
+      const column = columns[colIdx];
       if (!column) {
-        console.warn(`Row has too many items (index ${colIndex}) for table with ${columns.length} columns`);
+        console.warn(`Row has too many items (index ${colIdx}) for table with ${columns.length} columns`);
         return res;
       }
-      res[column?.accessorKey ?? colIndex] = (
+
+      const skipPTag = hasOneChild(cell.children);
+      res[column.accessorKey ?? colIdx] = (
         <>
-          {columnNode.children.map((cellNode, index) => (
-            <ComponentFactory key={index} nodeData={cellNode} />
+          {cell.children.map((contentNode, index) => (
+            <ComponentFactory key={index} nodeData={contentNode} skipPTag={skipPTag} />
           ))}
         </>
       );
-      return res;
-    }, {});
+    });
+
+    if (nestedRows.length > 0) {
+      res['subRows'] = generateRowsData(nestedRows, columns, true);
+    }
+
+    return res;
   });
 
   return rows;
@@ -259,14 +281,26 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
 
   const tableRef = useRef();
   const columns = useMemo(() => generateColumns(headerRows[0], bodyRows), [bodyRows, headerRows]);
-  const data = useMemo(() => generateRowsData(bodyRows, columns), [bodyRows, columns]);
+  // Destructure bodyRows' list element structure
+  const data = useMemo(
+    () =>
+      generateRowsData(
+        bodyRows.map((node) => node?.children[0]?.children ?? []),
+        columns
+      ),
+    [bodyRows, columns]
+  );
+  const [expanded, setExpanded] = useState(true);
   const table = useLeafyGreenTable({
     containerRef: tableRef,
     columns: columns,
     data: data,
+    state: {
+      expanded,
+    },
+    onExpandedChange: setExpanded,
   });
   const { rows } = table.getRowModel();
-
   const columnCount = columns.length;
 
   let widths = null;
@@ -285,6 +319,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
         <div className="header-buffer" key={id} id={id} />
       ))}
       <Table
+        table={table}
         className={cx(
           styleTable({
             customAlign: options?.align,
@@ -322,11 +357,24 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 const isStub = colIndex <= stubColumnCount - 1;
                 const role = isStub ? 'rowheader' : null;
                 return (
-                  <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
-                    {cell.renderValue()}
+                  <Cell key={cell.id} className={cx(baseCellStyle, isStub && stubCellStyle)} role={role}>
+                    <div className={cx(bodyCellStyle)}>{cell.renderValue()}</div>
                   </Cell>
                 );
               })}
+
+              {row.subRows &&
+                row.subRows.map((subRow) => (
+                  <Row key={subRow.id} row={subRow} className={cx(subRowStyle)}>
+                    {subRow.getVisibleCells().map((cell) => {
+                      return (
+                        <Cell key={cell.id} className={cx(baseCellStyle)}>
+                          <div className={cx(bodyCellStyle)}>{cell.renderValue()}</div>
+                        </Cell>
+                      );
+                    })}
+                  </Row>
+                ))}
             </Row>
           ))}
         </TableBody>
