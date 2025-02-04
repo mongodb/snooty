@@ -212,10 +212,7 @@ const generateColumns = (headerRow, bodyRows) => {
   });
 };
 
-const generateRowsData = (bodyRowNodes, columns, isNested = false) => {
-  // The shape of list-table's "rows" are slightly different from a traditional row directive, so we need to
-  // account for that
-  const rowNodes = isNested ? bodyRowNodes : bodyRowNodes.map((node) => node?.children[0]?.children ?? []);
+const generateRowsData = (rowNodes, columns, isNested = false) => {
   const rows = rowNodes.map((row) => {
     const res = {};
     const cells = [];
@@ -284,7 +281,15 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
 
   const tableRef = useRef();
   const columns = useMemo(() => generateColumns(headerRows[0], bodyRows), [bodyRows, headerRows]);
-  const data = useMemo(() => generateRowsData(bodyRows, columns), [bodyRows, columns]);
+  // Destructure bodyRows' list element structure
+  const data = useMemo(
+    () =>
+      generateRowsData(
+        bodyRows.map((node) => node?.children[0]?.children ?? []),
+        columns
+      ),
+    [bodyRows, columns]
+  );
   const [expanded, setExpanded] = useState(true);
   const table = useLeafyGreenTable({
     containerRef: tableRef,
