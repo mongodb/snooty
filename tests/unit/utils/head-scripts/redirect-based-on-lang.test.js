@@ -12,19 +12,20 @@ const defineWindowLocation = (value = {}) => {
   });
 };
 
-const runFuncTest = (originalPathname, expectedPathname) => {
-  const { hash, search, pathname } = new URL(originalPathname, 'https://mongodb.com');
+const runFuncTest = (originalHref, expectedHref) => {
+  // Destructure URL parts to help mock location
+  const { hash, search, pathname } = new URL(originalHref, 'https://mongodb.com');
   defineWindowLocation({
-    // Implementation detail: window.location.href should be defined since it won't be set if no redirect occurs
+    // Implementation detail: window.location.pathname should be defined since it won't be set if no redirect occurs
     // For testing purposes, we don't care about the base url, so we just use whatever the original pathname was
-    href: originalPathname,
     pathname,
     hash,
     search,
   });
 
   redirectBasedOnLang();
-  expect(window.location.href).toBe(expectedPathname);
+  const resultingHref = window.location.pathname + window.location.search + window.location.hash;
+  expect(resultingHref).toBe(expectedHref);
 };
 
 describe('redirectBasedOnLang', () => {
