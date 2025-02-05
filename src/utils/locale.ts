@@ -15,25 +15,30 @@ export const NOTRANSLATE_CLASS = 'notranslate';
  */
 export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
 
+interface Locale {
+  localeCode: string;
+  fontFamily?: string;
+};
+
 // Update this as more languages are introduced
 // Because the client-side redirect script cannot use an import, PLEASE remember to update the list of supported languages
 // in redirect-based-on-lang.js
-const AVAILABLE_LANGUAGES = [
-  { language: 'English', localeCode: 'en-us' },
-  { language: '简体中文', localeCode: 'zh-cn', fontFamily: 'Noto Sans SC' },
-  { language: '한국어', localeCode: 'ko-kr', fontFamily: 'Noto Sans KR' },
-  { language: 'Português', localeCode: 'pt-br' },
-  { language: '日本語', localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' },
+const AVAILABLE_LANGUAGES: Locale[] = [
+  { localeCode: 'en-us' },
+  { localeCode: 'zh-cn', fontFamily: 'Noto Sans SC' },
+  { localeCode: 'ko-kr', fontFamily: 'Noto Sans KR' },
+  { localeCode: 'pt-br' },
+  { localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' },
 ];
 
 // Languages in current development that we do not want displayed publicly yet
-const HIDDEN_LANGUAGES = [];
+const HIDDEN_LANGUAGES: Locale[] = [];
 
 /**
- * @param {boolean} forceAll - Bypasses feature flag requirements if necessary
+ * @param forceAll - Bypasses feature flag requirements if necessary
  * @returns An array of languages supported for translation
  */
-export const getAvailableLanguages = (forceAll = false) => {
+export const getAvailableLanguages = (forceAll = false): Locale[] => {
   const langs = [...AVAILABLE_LANGUAGES];
 
   if (forceAll || process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
@@ -43,17 +48,15 @@ export const getAvailableLanguages = (forceAll = false) => {
   return langs;
 };
 
-const validateLocaleCode = (potentialCode) =>
+const validateLocaleCode = (potentialCode: string): boolean =>
   // Include hidden languages in validation to ensure current locale of hidden sites can still be captured correctly
   !!getAvailableLanguages(true).find(({ localeCode }) => potentialCode === localeCode);
 
 /**
  * Strips the first locale code found in the slug. This function should be used to determine the original un-localized path of a page.
  * This assumes that the locale code is the first part of the URL slug. For example: "/zh-cn/docs/foo".
- * @param {string} slug
- * @returns {string}
  */
-const stripLocale = (slug) => {
+const stripLocale = (slug: string): string => {
   // Smartling has extensive replace logic for URLs and slugs that follow the pattern of "https://www.mongodb.com/docs". However,
   // there are instances where we can't rely on them for certain components
   if (!slug) {
@@ -76,8 +79,8 @@ const stripLocale = (slug) => {
   }
 };
 
-export const getAllLocaleCssStrings = () => {
-  const strings = [];
+export const getAllLocaleCssStrings = (): string[] => {
+  const strings: string[] = [];
   // We want to bypass feature flag requirements to ensure fonts for hidden languages are always included
   const allLangs = getAvailableLanguages(true);
 
@@ -117,9 +120,8 @@ export const getAllLocaleCssStrings = () => {
 
 /**
  * Returns the locale code based on the current location pathname of the page.
- * @returns {string}
  */
-export const getCurrLocale = () => {
+export const getCurrLocale = (): string => {
   const defaultLang = 'en-us';
 
   if (!isBrowser) {
@@ -143,11 +145,10 @@ export const getCurrLocale = () => {
 
 /**
  * Returns the pathname with its locale code prepended. Leading slashes are preserved, if they exist.
- * @param {string} pathname - Path name or slug of the page
- * @param {string?} localeCode - Optional locale code. By default, the code is determined based on the current location of the page
- * @returns {string}
+ * @param pathname - Path name or slug of the page
+ * @param localeCode - Optional locale code. By default, the code is determined based on the current location of the page
  */
-export const localizePath = (pathname, localeCode) => {
+export const localizePath = (pathname: string, localeCode?: string): string => {
   if (!pathname) {
     return '';
   }
@@ -164,15 +165,12 @@ export const localizePath = (pathname, localeCode) => {
 
 /**
  * Returns a mapping of a page's URL and its equivalent URLs for different languages.
- * @param {string} siteUrl
- * @param {string} slug
- * @returns {object}
  */
-export const getLocaleMapping = (siteUrl, slug) => {
+export const getLocaleMapping = (siteUrl: string, slug: string): Record<string, string> => {
   // handle the `/` path
   const slugForUrl = slug === '/' ? withPrefix('') : withPrefix(slug);
   const normalizedSiteUrl = siteUrl?.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
-  const localeHrefMap = {};
+  const localeHrefMap: Record<string, string> = {};
 
   getAvailableLanguages().forEach(({ localeCode }) => {
     const localizedPath = localizePath(slugForUrl, localeCode);
@@ -183,7 +181,7 @@ export const getLocaleMapping = (siteUrl, slug) => {
   return localeHrefMap;
 };
 
-export const onSelectLocale = (locale) => {
+export const onSelectLocale = (locale: string): void => {
   const location = window.location;
   setLocalValue(STORAGE_KEY_PREF_LOCALE, locale);
   const localizedPath = localizePath(location.pathname, locale);
@@ -193,10 +191,9 @@ export const onSelectLocale = (locale) => {
 /**
  * Ensures that a locale code has an all lowercase language code with an all uppercase region code,
  * as described in https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang#region_subtag.
- * @param {string} localeCode - A valid locale code with either 1 or 2 parts. Example: `zh-cn` or `zh`
- * @returns {string | undefined}
+ * @param localeCode - A valid locale code with either 1 or 2 parts. Example: `zh-cn` or `zh`
  */
-export const getHtmlLangFormat = (localeCode) => {
+export const getHtmlLangFormat = (localeCode: string): string => {
   const parts = localeCode.split('-');
   if (parts.length < 2) {
     return localeCode;
