@@ -13,10 +13,14 @@ const defineWindowLocation = (value = {}) => {
 };
 
 const runFuncTest = (originalPathname, expectedPathname) => {
+  const { hash, search, pathname } = new URL(originalPathname, 'https://mongodb.com');
   defineWindowLocation({
-    pathname: originalPathname,
     // Implementation detail: window.location.href should be defined since it won't be set if no redirect occurs
+    // For testing purposes, we don't care about the base url, so we just use whatever the original pathname was
     href: originalPathname,
+    pathname,
+    hash,
+    search,
   });
 
   redirectBasedOnLang();
@@ -81,5 +85,12 @@ describe('redirectBasedOnLang', () => {
     // "en" should take precedence over "ko" here
     mockedBrowserLangs.mockReturnValue(['en-uk', 'ko-kr']);
     runFuncTest(DEFAULT_SLUG, DEFAULT_SLUG);
+  });
+
+  it('includes the query string and/or hash', () => {
+    mockedBrowserLangs.mockReturnValue(['zh-cn', 'en']);
+    runFuncTest('/docs/bar?a=b#c', '/zh-cn/docs/bar?a=b#c');
+    runFuncTest('/docs/bar?a=b', '/zh-cn/docs/bar?a=b');
+    runFuncTest('/docs/bar#c', '/zh-cn/docs/bar#c');
   });
 });
