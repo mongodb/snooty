@@ -154,10 +154,10 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, slug,
   );
 }
 
-function StaticNavItem({ label, url, glyph, slug, level = 1 }) {
+function StaticNavItem({ label, url, glyph, slug, items, level = 1 }) {
   return (
     <SideNavItem
-      active={isSelectedTab(url, slug)}
+      active={isActiveTocNode(slug, url, items)}
       glyph={<Icon glyph={glyph} />}
       aria-label={label}
       as={Link}
