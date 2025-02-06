@@ -69,11 +69,11 @@ const createVersionLabel = (urlSlug = '', gitBranchName = '') => {
   return label;
 };
 
-// Returns all branches that are neither in 'groups' nor inactive
-const getActiveUngroupedBranches = (branches = [], groups = []) => {
-  const groupedBranchNames = groups.map((g) => g['includedBranches']).flat() || [];
-  return branches.filter((b) => !groupedBranchNames.includes(b['gitBranchName']) && !!b['active']);
-};
+// // Returns all branches that are neither in 'groups' nor inactive
+// const getActiveUngroupedBranches = (branches = [], groups = []) => {
+//   const groupedBranchNames = groups.map((g) => g['includedBranches']).flat() || [];
+//   return branches.filter((b) => !groupedBranchNames.includes(b['gitBranchName']) && !!b['active']);
+// };
 
 // Return a branch object from branches that matches supplied branchName
 // Typically used to associate a branchName from 'groups' with a branchName in 'branches'
@@ -96,6 +96,7 @@ const getBranch = (branchName = '', branches = []) => {
 const createOption = (branch) => {
   const UIlabel = getUILabel(branch);
   const slug = getBranchSlug(branch);
+  console.log(UIlabel, slug, 'totoro');
   return (
     <Option key={slug} value={branch.gitBranchName}>
       {UIlabel}
@@ -103,7 +104,16 @@ const createOption = (branch) => {
   );
 };
 
-const VersionDropdown = ({ eol }) => {
+const unifiedOption = (slug, verName, label) => {
+  console.log(slug, verName, label, 'totoro');
+  return (
+    <Option key={slug} value={verName}>
+      {label}
+    </Option>
+  );
+};
+
+const UnifiedVersions = ({ eol, versionData }) => {
   const { parserBranch } = useSiteMetadata();
   // this is good to know
   const { project } = useSnootyMetadata();
@@ -111,7 +121,7 @@ const VersionDropdown = ({ eol }) => {
   let branches = availableVersions[project];
   let groups = availableGroups[project];
 
-  console.log('inversion', project, availableVersions);
+  console.log('inversion', project, versionData);
 
   const onSelectChange = useCallback(
     (value) => {
@@ -141,7 +151,7 @@ const VersionDropdown = ({ eol }) => {
     }
   }
 
-  const activeUngroupedBranches = getActiveUngroupedBranches(branches, groups) || [];
+  //   const activeUngroupedBranches = getActiveUngroupedBranches(branches, groups) || [];
 
   const eolVersionFlipperStyle = LeafyCSS`
     & > button {
@@ -150,6 +160,7 @@ const VersionDropdown = ({ eol }) => {
     }
   `;
 
+  console.log('bianca is here');
   // TODO: Unfortunately, the Select component seems to buck the ConditionalWrapper component
   // It would be nice to either use the ConditionalWrapper to disable the OptionGroup
   // OR have the OptionGroup not take up space when a label is empty-string. For now,
@@ -168,11 +179,14 @@ const VersionDropdown = ({ eol }) => {
       usePortal={false}
       disabled={isOfflineDocsBuild || eol}
     >
-      {activeUngroupedBranches?.map((b) => createOption(b))}
+      {versionData.version.map((v) => unifiedOption(v.urlSlug, v.name, v.versionSelectorLabel))}
+      {/* {activeUngroupedBranches?.map((b) => createOption(b))} */}
       {groups?.map((group) => {
         const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
+        console.log('the group is', group);
         return (
           <OptionGroup key={groupLabel} label={groupLabel}>
+            {/* biome-ignore lint/complexity/noUselessFragments: <explanation> */}
             <>
               {groupedBranchNames?.reduce((res, bn) => {
                 const branch = getBranch(bn, branches);
@@ -190,7 +204,7 @@ const VersionDropdown = ({ eol }) => {
   );
 };
 
-VersionDropdown.propTypes = {
+UnifiedVersions.propTypes = {
   // TODO: add active version dropdown prop
   // consume from version context
   repoBranches: PropTypes.shape({
@@ -215,4 +229,4 @@ VersionDropdown.propTypes = {
   eol: PropTypes.bool.isRequired,
 };
 
-export default VersionDropdown;
+export default UnifiedVersions;

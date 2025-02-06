@@ -14,7 +14,9 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 const STORAGE_KEY = 'activeVersions';
 const LEGACY_GIT_BRANCH = 'legacy';
 
+// we will be wanting something like this, but want to search versions.toml instead of branches since we are switching to directories
 const getInitBranchName = (branches) => {
+  // what is the format of branches
   const activeBranch = branches.find((b) => b.active);
   if (activeBranch) {
     return activeBranch.gitBranchName;
@@ -22,6 +24,7 @@ const getInitBranchName = (branches) => {
   return branches[0]?.gitBranchName || null;
 };
 
+// this searches local browser storage , problem is that it only works per site so will need to update to per version
 const getInitVersions = (branchListByProduct) => {
   const initState = {};
   const localStorage = getLocalValue(STORAGE_KEY);
@@ -31,6 +34,7 @@ const getInitVersions = (branchListByProduct) => {
   return initState;
 };
 
+// wont be needing this
 const findBranchByGit = (gitBranchName, branches) => {
   if (!branches || !branches.length) {
     return;
@@ -39,6 +43,7 @@ const findBranchByGit = (gitBranchName, branches) => {
   return branches.find((b) => b.gitBranchName === gitBranchName);
 };
 
+// no idea what this does
 // version state reducer helper fn
 // overwrite current state with any new state attributes
 const versionStateReducer = (state, newState) => {
@@ -87,6 +92,7 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
   }
 };
 
+// wont need
 const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
   const { project, parserBranch } = metadata;
   const versions = {};
@@ -100,6 +106,7 @@ const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
   return versions;
 };
 
+// wont need
 const getDefaultGroups = (project, repoBranches) => {
   const groups = {};
   const GROUP_KEY = 'groups';

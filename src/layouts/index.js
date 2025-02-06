@@ -105,6 +105,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
     [slug] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
+  console.log('the stuff for versions is', eol, repoBranches, slug);
   return (
     <>
       <Global styles={globalCSS} />

@@ -1,3 +1,32 @@
+# static pane item
+[[toc]]
+label = "C# Quick Start"
+url = "/quick-start"
+isTab = true
+glyph = 'Bulb'
+
+[[toc.items]]
+label = "C# Documentation"
+group = true
+[[toc.items.items]]
+label = "Quick Reference"
+url = "/quick-reference"
+[[toc.items.items]]
+label = "Usage Examples"
+url = "/usage-examples"
+collapsible = true
+[[toc.items.items.items]]
+label = "Find a Document"
+url = "/usage-examples/findOne"
+[[toc.items.items.items]]
+label = "Find Multiple Documents"
+url = "/usage-examples/findMany"
+[[toc.items.items.items]]
+label = "Insert a Document"
+url = "/usage-examples/insertOne"
+
+
+
 # Static left pane item 1
 [[toc]]
 label = "Get Started"
