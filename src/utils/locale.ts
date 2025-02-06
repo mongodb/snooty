@@ -15,8 +15,12 @@ export const NOTRANSLATE_CLASS = 'notranslate';
  */
 export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
 
+// Copied from consistent-nav package since it's not exported
+const navLocales = ["en-us", "pt-br", "es", "ko-kr", "ja-jp", "it-it", "de-de", "fr-fr", "zh-cn"] as const;
+type AvailableLocale = typeof navLocales[number];
+
 interface Locale {
-  localeCode: string;
+  localeCode: AvailableLocale;
   fontFamily?: string;
 };
 
@@ -38,19 +42,23 @@ const HIDDEN_LANGUAGES: Locale[] = [];
  * @param forceAll - Bypasses feature flag requirements if necessary
  * @returns An array of languages supported for translation
  */
-export const getAvailableLanguages = (forceAll = false): Locale[] => {
+export const getAvailableLanguages = (slug?: string, forceAll = false): Locale[] => {
   const langs = [...AVAILABLE_LANGUAGES];
 
   if (forceAll || process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
     langs.push(...HIDDEN_LANGUAGES);
   }
 
+  // POC code - Should accept an array of limited languages, iterate through them, and if their locale code is not
+  // already in the array, add them.
+  if (slug === 'getting-started') {
+    langs.push({ localeCode: 'es' })
+  }
+
   return langs;
 };
 
-const validateLocaleCode = (potentialCode: string): boolean =>
-  // Include hidden languages in validation to ensure current locale of hidden sites can still be captured correctly
-  !!getAvailableLanguages(true).find(({ localeCode }) => potentialCode === localeCode);
+const validateLocaleCode = (potentialCode: string): boolean => navLocales.includes(potentialCode as AvailableLocale);
 
 /**
  * Strips the first locale code found in the slug. This function should be used to determine the original un-localized path of a page.
@@ -82,7 +90,7 @@ const stripLocale = (slug: string): string => {
 export const getAllLocaleCssStrings = (): string[] => {
   const strings: string[] = [];
   // We want to bypass feature flag requirements to ensure fonts for hidden languages are always included
-  const allLangs = getAvailableLanguages(true);
+  const allLangs = getAvailableLanguages('', true);
 
   allLangs.forEach(({ localeCode, fontFamily }) => {
     if (!fontFamily) {

@@ -4,7 +4,10 @@
  * Consequently, the trade-off is that no imports are included due to how Webpack parses the JS. This might result in
  * repetitive code.
  */
-function redirectBasedOnLang() {
+function redirectBasedOnLang(props) {
+  console.log('HELLO???');
+  console.log({ internalFoo: 'hyuck', props });
+
   try {
     const storedPrefLocale = JSON.parse(localStorage.getItem('mongodb-docs'))?.['preferredLocale'];
 

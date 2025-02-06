@@ -8,8 +8,19 @@ import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang
 import { OFFLINE_HEAD_SCRIPTS } from './src/utils/head-scripts/offline-ui';
 import { isOfflineDocsBuild } from './src/utils/is-offline-docs-build';
 import { getHtmlLangFormat } from './src/utils/locale';
+// Wondering if this is causing webpack errors with unsafe execSync?
+// import { manifestMetadata } from './src/utils/site-metadata';
 
-export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
+const props = {
+  beep: 'boop',
+  boop: 'beep',
+  bwahaha: 'waluigi',
+};
+
+export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }, pluginOptions) => {
+  // The below is possible... maybe we stringify for limited locales and pass it to redirectBasedOnLang?
+  // console.log({toctree: manifestMetadata['toctree']});
+
   if (isOfflineDocsBuild) {
     return setHeadComponents([...OFFLINE_HEAD_SCRIPTS]);
   }
@@ -28,7 +39,9 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
       type="text/javascript"
       dangerouslySetInnerHTML={{
         // Call function immediately on load
-        __html: `!${redirectBasedOnLang}()`,
+        // POC code - We could probably try to use metadata doc to create mapping of slugs and have the redirect logic 
+        // use that?
+        __html: `!${redirectBasedOnLang}(${JSON.stringify(props)})`,
       }}
     />,
     <link

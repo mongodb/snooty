@@ -9,7 +9,15 @@ console.log('PATH PREFIX', pathPrefix);
 // Specifies which plugins to use depending on build environment
 // Keep our main plugin at top to include file saving before image plugins
 const plugins = [
-  'gatsby-source-snooty-prod',
+  {
+    resolve: 'gatsby-source-snooty-prod',
+    options: {
+      mapping: {
+        beepboop: 'boopbeep',
+        other: 'thing',
+      },
+    },
+  },
   'gatsby-plugin-image',
   'gatsby-plugin-sharp',
   'gatsby-transformer-sharp', // Needed for dynamic images

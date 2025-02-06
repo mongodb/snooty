@@ -8,6 +8,7 @@ import { theme } from '../../theme/docsTheme';
 import { getAvailableLanguages, getCurrLocale, onSelectLocale } from '../../utils/locale';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { HeaderContext } from './header-context';
+import { PageContext } from '../../context/page-context';
 
 const StyledHeaderContainer = styled.header(
   (props) => `
@@ -28,10 +29,12 @@ const offlineClass = css`
   }
 `;
 
-const Header = ({ eol, template }) => {
+const Header = ({ eol, slug, template }) => {
   const unifiedNavProperty = 'DOCS';
+  const foo = useContext(PageContext);
+  // console.log({ foo, slug });
 
-  const enabledLocales = getAvailableLanguages().map((language) => language.localeCode);
+  const enabledLocales = getAvailableLanguages(slug).map((language) => language.localeCode);
   const { bannerContent } = useContext(HeaderContext);
 
   return (
