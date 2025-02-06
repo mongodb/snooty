@@ -187,7 +187,7 @@ export const onSelectLocale = (locale) => {
   const location = window.location;
   setLocalValue(STORAGE_KEY_PREF_LOCALE, locale);
   const localizedPath = localizePath(location.pathname, locale);
-  window.location.href = localizedPath;
+  window.location.pathname = localizedPath;
 };
 
 /**
