@@ -18,7 +18,7 @@ const createTocNodes = async ({ createNode, createNodeId, createContentDigest })
       parent: null,
     });
   } catch (e) {
-    console.error('error occurred when reading the toc.toml', e);
+    throw Error('Error occurred when reading the toc.toml:', e);
   }
 };
 
