@@ -128,6 +128,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     process.exit(1);
   }
   const pageIdPrefix = constructPageIdPrefix(siteMetadata);
+  console.log(`pageIdPrefix ${pageIdPrefix}`);
   documents.forEach((doc) => {
     const { page_id, ...rest } = doc;
     console.log(page_id);
