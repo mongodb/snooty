@@ -128,10 +128,14 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     process.exit(1);
   }
   const pageIdPrefix = constructPageIdPrefix(siteMetadata);
+  // biome-ignore lint/complexity/noForEach: <explanation>
   documents.forEach((doc) => {
     const { page_id, ...rest } = doc;
+    console.log('pagid before', page_id);
     const key = page_id.replace(`${pageIdPrefix}/`, '');
     const val = rest;
+
+    console.log('pagid after', page_id);
 
     const pageNode = getNestedValue(['ast', 'children'], val);
     const filename = getNestedValue(['filename'], val) || '';
@@ -141,6 +145,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     removeNestedValue('position', 'children', [val?.ast]);
 
     if (pageNode) {
+      // biome-ignore lint/complexity/noForEach: <explanation>
       val.static_assets.forEach((asset) => {
         const checksum = asset.checksum;
         if (assets.has(checksum)) {
@@ -153,6 +158,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
     const currentPageComponents = getPageComponents(pageNode);
 
+    // biome-ignore lint/complexity/noForEach: <explanation>
     currentPageComponents.forEach((componentName) => projectComponents.add(componentName));
 
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
