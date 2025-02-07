@@ -13,6 +13,7 @@ export const setLocalValue = (key, value) => {
   }
 };
 
+// this is an important page to use
 export const getLocalValue = (key) => {
   try {
     if (isValidStorage && JSON.parse(window.localStorage.getItem('mongodb-docs'))) {

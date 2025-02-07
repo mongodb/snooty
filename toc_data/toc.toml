@@ -10,7 +10,7 @@ label = "C# Documentation"
 group = true
 [[toc.items.items]]
 label = "Quick Reference"
-url = "/quick-reference"
+url = "/docs-qa/drivers/csharp/${version}/quick-reference/"
 [[toc.items.items]]
 label = "Usage Examples"
 url = "/usage-examples"
@@ -116,7 +116,7 @@ label = "Security"
 group = true
 [[toc.items.items]]
 label = "Authentication"
-url = "/authenticatio"
+url = "/authentication"
 [[toc.items.items]]
 label = "Auditing"
 url = "/auditing"

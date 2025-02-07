@@ -54,8 +54,8 @@ urlSlug = "upcoming"
 versionSelectorLabel = 'upcoming'
 isStableBranch = false
 [[repo.version]]
-name = 'v3.1'
-urlAliases = ['v3.1', 'current']
-urlSlug = 'v3.1'
-versionSelectorLabel = 'v3.1 (current)'
+name = 'v2.23'
+urlAliases = ['v2.23']
+urlSlug = 'v2.23'
+versionSelectorLabel = 'v2.23 (current)'
 isStableBranch = true

@@ -271,6 +271,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
   // if context values differ from url, fix context.
   // ie. user lands on "upcoming" version URL whilst context stores "stable"
   const currentUrlSlug = useCurrentUrlSlug(metadata.parserBranch, availableVersions[metadata.project]);
+  console.log('for the current context, ', currentUrlSlug, metadata.parserBranch, availableVersions[metadata.project]);
   useEffect(() => {
     // if current version differs from browser storage version
     // update browser local storage
