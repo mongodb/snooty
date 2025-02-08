@@ -78,7 +78,9 @@ const bodyCellStyle = css`
     flex-direction: column;
     align-items: flex-start;
   }
+`;
 
+const bodyCellContentStyle = css`
   *,
   p,
   a {
@@ -86,14 +88,14 @@ const bodyCellStyle = css`
   }
 
   // Target any nested components (paragraphs, admonitions, tables) and any paragraphs within those nested components
-  & > div > *,
-  & > div > div p {
+  & > *,
+  & > div p {
     margin: 0 0 12px;
   }
 
   // Prevent extra margin below last element (such as when multiple paragraphs are present)
-  & > div > div *:last-child,
-  & > div > *:last-child {
+  & > div *:last-child,
+  & > *:last-child {
     margin-bottom: 0;
   }
 `;
@@ -308,7 +310,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 {headerGroup.headers.map((header) => {
                   return (
                     <HeaderCell className={cx(baseCellStyle, headerCellStyle)} key={header.id} header={header}>
-                      {flexRender(header.column.columnDef.header, header.getContext())}
+                      <div>{flexRender(header.column.columnDef.header, header.getContext())}</div>
                     </HeaderCell>
                   );
                 })}
@@ -323,7 +325,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 const role = isStub ? 'rowheader' : null;
                 return (
                   <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
-                    {cell.renderValue()}
+                    <div className={cx(bodyCellContentStyle)}>{cell.renderValue()}</div>
                   </Cell>
                 );
               })}
