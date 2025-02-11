@@ -57,7 +57,6 @@ const baseCellStyle = css`
   * {
     // Wrap in selector to ensure it cascades down to every element
     font-size: ${theme.fontSize.small} !important;
-    line-height: inherit;
   }
 
   // Ensure each cell is no higher than the highest content in row
@@ -90,13 +89,13 @@ const bodyCellContentStyle = css`
   // Target any nested components (paragraphs, admonitions, tables) and any paragraphs within those nested components
   & > *,
   & > div p {
-    margin: 0 0 12px;
+    margin: 0 0 12px !important;
   }
 
   // Prevent extra margin below last element (such as when multiple paragraphs are present)
   & > div *:last-child,
   & > *:last-child {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
   }
 `;
 
