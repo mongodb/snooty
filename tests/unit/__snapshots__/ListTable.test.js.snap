@@ -56,7 +56,6 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-3 * {
   font-size: 13px!important;
-  line-height: inherit;
 }
 
 .emotion-3>div {
@@ -107,12 +106,12 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-5>*,
 .emotion-5>div p {
-  margin: 0 0 12px;
+  margin: 0 0 12px!important;
 }
 
 .emotion-5>div *:last-child,
 .emotion-5>*:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0!important;
 }
 
 .emotion-6 {
@@ -155,7 +154,6 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
 
 .emotion-7 * {
   font-size: 13px!important;
-  line-height: inherit;
 }
 
 .emotion-7>div {
@@ -383,7 +381,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-3 * {
   font-size: 13px!important;
-  line-height: inherit;
 }
 
 .emotion-3>div {
@@ -435,7 +432,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-5 * {
   font-size: 13px!important;
-  line-height: inherit;
 }
 
 .emotion-5>div {
@@ -482,7 +478,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-16 * {
   font-size: 13px!important;
-  line-height: inherit;
 }
 
 .emotion-16>div {
@@ -538,12 +533,12 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-18>*,
 .emotion-18>div p {
-  margin: 0 0 12px;
+  margin: 0 0 12px!important;
 }
 
 .emotion-18>div *:last-child,
 .emotion-18>*:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0!important;
 }
 
 .emotion-19 {
@@ -586,7 +581,6 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
 
 .emotion-20 * {
   font-size: 13px!important;
-  line-height: inherit;
 }
 
 .emotion-20>div {
