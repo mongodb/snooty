@@ -17,6 +17,11 @@ const inlineCodeStyling = css`
   }
 `;
 
+const wordWrapStyle = css`
+  word-wrap: break-word;
+  white-space: unset;
+`;
+
 const StyledNavigationInlineCode = styled('code')`
   /* Used for Literals that don't need LeafyGreen's InlineCode component */
   font-family: 'Source Code Pro';
@@ -28,7 +33,7 @@ const Literal = ({ nodeData: { children }, formatTextOptions }) => {
   const CurrInlineCode = navigationStyle ? StyledNavigationInlineCode : InlineCode;
 
   return (
-    <CurrInlineCode className={cx(navigationStyle ? '' : inlineCodeStyling)}>
+    <CurrInlineCode className={cx(navigationStyle ? '' : inlineCodeStyling, wordWrapStyle)}>
       {children.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />
       ))}

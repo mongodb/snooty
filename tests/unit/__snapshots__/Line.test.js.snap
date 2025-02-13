@@ -29,6 +29,8 @@ exports[`renders correctly 1`] = `
   display: inline;
   color: var(--font-color-primary);
   background: var(--background-color-secondary);
+  word-wrap: break-word;
+  white-space: unset;
 }
 
 .lg-ui-0000:hover>.emotion-0 {

@@ -57,7 +57,6 @@ const baseCellStyle = css`
   * {
     // Wrap in selector to ensure it cascades down to every element
     font-size: ${theme.fontSize.small} !important;
-    line-height: inherit;
   }
 
   // Ensure each cell is no higher than the highest content in row
@@ -78,7 +77,9 @@ const bodyCellStyle = css`
     flex-direction: column;
     align-items: flex-start;
   }
+`;
 
+const bodyCellContentStyle = css`
   *,
   p,
   a {
@@ -86,15 +87,15 @@ const bodyCellStyle = css`
   }
 
   // Target any nested components (paragraphs, admonitions, tables) and any paragraphs within those nested components
-  & > div > *,
-  & > div > div p {
-    margin: 0 0 12px;
+  & > *,
+  & > div p {
+    margin: 0 0 12px !important;
   }
 
   // Prevent extra margin below last element (such as when multiple paragraphs are present)
-  & > div > div *:last-child,
-  & > div > *:last-child {
-    margin-bottom: 0;
+  & > div *:last-child,
+  & > *:last-child {
+    margin-bottom: 0 !important;
   }
 `;
 
@@ -308,7 +309,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 {headerGroup.headers.map((header) => {
                   return (
                     <HeaderCell className={cx(baseCellStyle, headerCellStyle)} key={header.id} header={header}>
-                      {flexRender(header.column.columnDef.header, header.getContext())}
+                      {/* Wraps cell content inside of a div so that all of its content are together when laid out. */}
+                      <div>{flexRender(header.column.columnDef.header, header.getContext())}</div>
                     </HeaderCell>
                   );
                 })}
@@ -323,7 +325,8 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 const role = isStub ? 'rowheader' : null;
                 return (
                   <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
-                    {cell.renderValue()}
+                    {/* Wraps cell content inside of a div so that all of its content are together when laid out. */}
+                    <div className={cx(bodyCellContentStyle)}>{cell.renderValue()}</div>
                   </Cell>
                 );
               })}
