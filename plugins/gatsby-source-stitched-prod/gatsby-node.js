@@ -162,8 +162,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
     projectSet.add(project);
 
-    console.log(JSON.stringify(doc.ast, null, 4));
-
     if (filename.endsWith('.txt') && !manifestMetadata.openapi_pages?.[key]) {
       createNode({
         id: key,
@@ -224,12 +222,26 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   if (!siteMetadata.manifestPath) {
     console.error('Getting metadata from realm without filters');
   }
-  const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
+  const { static_files: staticFiles, sites } = await db.getMetadata();
 
-  const { parentPaths, slugToBreadcrumbLabel } = metadataMinusStatic;
+  const globalParentPaths = {};
+  const globalSlugToBreadcrumbLabel = {};
 
-  if (parentPaths) {
-    transformBreadcrumbs(parentPaths, slugToBreadcrumbLabel);
+  sites.forEach((metadata) => {
+    createNode({
+      children: [],
+      id: createNodeId(`project-${metadata.project}`),
+      internal: {
+        contentDigest: createContentDigest(metadata),
+        type: 'SnootyMetadata',
+      },
+      parent: null,
+      metadata,
+    });
+  });
+
+  if (Object.keys(globalParentPaths).length) {
+    transformBreadcrumbs(globalParentPaths, globalSlugToBreadcrumbLabel);
   }
 
   //Save files in the static_files field of metadata document, including intersphinx inventories
@@ -241,11 +253,11 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     children: [],
     id: createNodeId('metadata'),
     internal: {
-      contentDigest: createContentDigest(metadataMinusStatic),
+      contentDigest: createContentDigest(sites),
       type: 'SnootyMetadata',
     },
     parent: null,
-    metadata: metadataMinusStatic,
+    metadata: sites,
   });
 };
 

@@ -2,11 +2,11 @@ const { siteMetadata } = require('../../src/utils/site-metadata');
 
 const breadcrumbType = `Breadcrumb`;
 
-const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createContentDigest }) => {
+const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createContentDigest, monorepoProject }) => {
   const { database, project } = siteMetadata;
   let breadcrumbData;
   try {
-    breadcrumbData = await db.fetchBreadcrumbs(database, project);
+    breadcrumbData = await db.fetchBreadcrumbs(database, monorepoProject);
   } catch (e) {
     console.error(`Error while fetching breadcrumb data from Atlas: ${e}`);
   }

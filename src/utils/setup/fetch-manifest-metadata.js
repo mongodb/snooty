@@ -20,6 +20,7 @@ const fetchManifestMetadata = () => {
     for (const entry of zipEntries) {
       if (entry.entryName === 'site.bson') {
         metadata = BSON.deserialize(entry.getData());
+        console.log(metadata);
       }
     }
   }

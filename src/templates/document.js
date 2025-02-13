@@ -43,7 +43,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       <StyledMainColumn>
         <div className="body">
           {offlineBanner}
-          <Breadcrumbs siteTitle={title} slug={slug} />
+          <Breadcrumbs siteTitle={title} slug={slug} project={page.project} />
           {activeTutorial && <StepNumber slug={slug} activeTutorial={activeTutorial} />}
           {children}
           {showPrevNext && (

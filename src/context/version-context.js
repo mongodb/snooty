@@ -83,6 +83,7 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
       groups: getDefaultGroups(metadata.project, repoBranches),
       hasEolBranches,
     };
+
     // on error of realm function, fall back to build time fetches
   }
 };

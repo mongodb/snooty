@@ -25,6 +25,7 @@ const breadcrumbBodyStyle = css`
 const Breadcrumbs = ({
   siteTitle,
   slug,
+  project,
   queriedCrumbsProp = null,
   parentPathsProp = null,
   selfCrumb = null,
