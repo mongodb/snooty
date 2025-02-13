@@ -3,6 +3,7 @@
 repoName = "docs-atlas-cli"
 repoSlug = 'atlas/cli/'
 [[repo.version]]
+# name is what is saved in activeVersion
 name = 'master'
 urlAliases = ['1.36', 'upcoming', 'master']
 urlSlug = 'upcoming'

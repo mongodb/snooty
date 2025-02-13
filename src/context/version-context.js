@@ -34,7 +34,7 @@ const getInitVersions = (branchListByProduct) => {
   return initState;
 };
 
-// wont be needing this
+// // wont be needing this
 const findBranchByGit = (gitBranchName, branches) => {
   if (!branches || !branches.length) {
     return;
@@ -119,6 +119,7 @@ const getDefaultActiveVersions = (metadata) => {
   const { project, parserBranch } = metadata;
   let versions = {};
   versions[project] = parserBranch;
+  console.log('in get defaultactive versions', versions, project, parserBranch);
   // for any umbrella / associated products
   // we should depend on local storage after data fetch
   // otherwise, setting init on build will be overwritten by local storage
@@ -150,6 +151,7 @@ const VersionContext = createContext({
   showEol: false,
   isAssociatedProduct: false,
   onVersionSelect: () => {},
+  onTomlVersion: () => {},
 });
 
 const VersionContextProvider = ({ repoBranches, slug, children }) => {
@@ -254,6 +256,26 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
     [availableVersions, metadata, repoBranches, slug]
   );
 
+  const onTomlVersion = useCallback(
+    (targetProject, versionName, location) => {
+      // store previous version
+      const prevVersion = activeVersions[targetProject];
+
+      // update to new version
+      const updatedVersion = {};
+      updatedVersion[targetProject] = versionName;
+      setActiveVersions(updatedVersion);
+
+      // navigate to location replacing old version with new version
+      console.log('peakaboo', location);
+
+      // should really be calling replace version here.
+      const newlocation = location.replace(prevVersion, versionName);
+      console.log(newlocation);
+      navigate(newlocation + 'index.html');
+    },
+    [activeVersions]
+  );
   // attempts to find branch by given url alias. can be alias, urlAliases, or gitBranchName
   const findBranchByAlias = useCallback(
     (alias) => {
@@ -284,9 +306,10 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
       return;
     }
     if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
-      const newState = { ...activeVersions };
-      newState[metadata.project] = currentBranch.gitBranchName;
-      setActiveVersions(newState);
+      console.log('i shouldnt be here');
+      // const newState = { ...activeVersions };
+      // newState[metadata.project] = currentBranch.gitBranchName;
+      // setActiveVersions(newState);
     }
   }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions]);
 
@@ -299,6 +322,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
         availableGroups,
         showVersionDropdown,
         onVersionSelect,
+        onTomlVersion,
         isAssociatedProduct,
         showEol,
       }}

@@ -4,28 +4,31 @@ label = "C# Quick Start"
 url = "/quick-start"
 isTab = true
 glyph = 'Bulb'
+prefix = '/drivers/csharp/${version}'
+# prefix = '/master/csharp/bianca.laube/DOP-5356'
 
 [[toc.items]]
 label = "C# Documentation"
 group = true
 [[toc.items.items]]
 label = "Quick Reference"
-url = "/docs-qa/drivers/csharp/${version}/quick-reference/"
+url = "/quick-reference/"
 [[toc.items.items]]
 label = "Usage Examples"
 url = "/usage-examples"
 collapsible = true
 [[toc.items.items.items]]
 label = "Find a Document"
-url = "/usage-examples/findOne"
+url = "/usage-examples/findOne/"
 [[toc.items.items.items]]
 label = "Find Multiple Documents"
-url = "/usage-examples/findMany"
+url = "/usage-examples/findMany/"
 [[toc.items.items.items]]
 label = "Insert a Document"
 url = "/usage-examples/insertOne"
 
-
+# /master/csharp/bianca.laube/DOP-5356/quick-reference/
+# /docs-qa/drivers/csharp/v2.23/quick-start/
 
 # Static left pane item 1
 [[toc]]

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
+import { useLocation } from '@gatsbyjs/reach-router';
 import { VersionContext } from '../../context/version-context';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
@@ -104,31 +105,51 @@ const createOption = (branch) => {
   );
 };
 
-const unifiedOption = (slug, verName, label) => {
-  console.log(slug, verName, label, 'totoro');
-  return (
-    <Option key={slug} value={verName}>
-      {label}
-    </Option>
-  );
-};
-
 const UnifiedVersions = ({ eol, versionData }) => {
+  console.log('HIYA');
   const { parserBranch } = useSiteMetadata();
   // this is good to know
   const { project } = useSnootyMetadata();
-  const { availableVersions, availableGroups, onVersionSelect, showEol, activeVersions } = useContext(VersionContext);
+  const { availableVersions, availableGroups, showEol, activeVersions, onTomlVersion } = useContext(VersionContext);
   let branches = availableVersions[project];
   let groups = availableGroups[project];
+  const location = useLocation();
 
-  console.log('inversion', project, versionData);
-
+  // value is the branch/version we want to switch to
   const onSelectChange = useCallback(
-    (value) => {
-      onVersionSelect(project, value);
+    (value, key) => {
+      console.log('lol', value, project, location);
+      onTomlVersion(project, value, location.pathname);
     },
-    [onVersionSelect, project]
+    [onTomlVersion, project, location]
   );
+
+  // const onNewFnction = (value, project) => {
+  //   //  xelect(project, value);
+  //   // const updatedVersion = {};
+
+  //   // console.log()
+  //   // updatedVersion[project] = value;
+  //   // console.log(updatedVersion);
+  //   // setActiveVersions(updatedVersion);
+
+  //   // // add the current env
+  //   // const postfix = snootyEnv === 'dotcomprd' ? '/docs' + slug : '/docs-qa' + slug;
+
+  //   // // console.log('the postfix is', postfix);
+  //   // console.log('the location is', useLocation());
+  //   // }
+  //   // [project, slug]
+  // };
+
+  const unifiedOption = (slug, verName, label) => {
+    // VALUE needs to change to active version
+    return (
+      <Option key={slug} value={verName}>
+        {label}
+      </Option>
+    );
+  };
 
   // Attempts to reconcile differences between urlSlug and the parserBranch provided to this component
   // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
@@ -160,7 +181,7 @@ const UnifiedVersions = ({ eol, versionData }) => {
     }
   `;
 
-  console.log('bianca is here');
+  // }
   // TODO: Unfortunately, the Select component seems to buck the ConditionalWrapper component
   // It would be nice to either use the ConditionalWrapper to disable the OptionGroup
   // OR have the OptionGroup not take up space when a label is empty-string. For now,
