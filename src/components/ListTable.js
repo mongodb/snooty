@@ -309,6 +309,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 {headerGroup.headers.map((header) => {
                   return (
                     <HeaderCell className={cx(baseCellStyle, headerCellStyle)} key={header.id} header={header}>
+                      {/* Wraps cell content inside of a div so that all of its content are together when laid out. */}
                       <div>{flexRender(header.column.columnDef.header, header.getContext())}</div>
                     </HeaderCell>
                   );
@@ -324,6 +325,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 const role = isStub ? 'rowheader' : null;
                 return (
                   <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
+                    {/* Wraps cell content inside of a div so that all of its content are together when laid out. */}
                     <div className={cx(bodyCellContentStyle)}>{cell.renderValue()}</div>
                   </Cell>
                 );
