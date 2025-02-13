@@ -22,7 +22,6 @@ import useViewport from '../../hooks/useViewport';
 import { HeaderContext } from '../Header/header-context';
 import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { DownloadButton } from '../OfflineDownloadModal';
-import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -310,7 +309,9 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                   }}
                 >
                   <span>{navTitle}</span>
-                  {process.env['GATSBY_OFFLINE_DOWNLOAD_UI'] && !isOfflineDocsBuild && <DownloadButton />}
+                  {process.env['GATSBY_OFFLINE_DOWNLOAD_UI'] === 'true' && process.env['OFFLINE_DOCS'] !== 'true' && (
+                    <DownloadButton />
+                  )}
                 </SideNavItem>
               </>
             )}
