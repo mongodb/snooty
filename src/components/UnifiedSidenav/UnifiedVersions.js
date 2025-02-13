@@ -107,7 +107,7 @@ const createOption = (branch) => {
 
 const UnifiedVersions = ({ eol, versionData }) => {
   console.log('HIYA');
-  const { parserBranch } = useSiteMetadata();
+  const { parserBranch, snootyEnv } = useSiteMetadata();
   // this is good to know
   const { project } = useSnootyMetadata();
   const { availableVersions, availableGroups, showEol, activeVersions, onTomlVersion } = useContext(VersionContext);
@@ -118,10 +118,10 @@ const UnifiedVersions = ({ eol, versionData }) => {
   // value is the branch/version we want to switch to
   const onSelectChange = useCallback(
     (value, key) => {
-      console.log('lol', value, project, location);
-      onTomlVersion(project, value, location.pathname);
+      console.log('lol', value, project, snootyEnv);
+      onTomlVersion(project, value, location.pathname, snootyEnv);
     },
-    [onTomlVersion, project, location]
+    [onTomlVersion, project, location, snootyEnv]
   );
 
   // const onNewFnction = (value, project) => {

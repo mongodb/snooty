@@ -194,7 +194,7 @@ const replaceVersion = (url, currentVersion, versions, project) => {
   // Find the version data for the current content we are in
   const content = findVersionedRepo(versions, project, 'repoName');
 
-  // based on the activeVersio, find the correct alias
+  // based on the activeVersion, find the correct alias
   const alias = findVersionedRepo(content[0].version, currentVersion, 'name');
 
   // input the correct version into the url

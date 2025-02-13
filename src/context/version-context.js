@@ -9,6 +9,7 @@ import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { fetchDocset, fetchDocument } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { useVersionsToml } from '../hooks/use-versions-toml';
 
 // <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';
@@ -47,6 +48,7 @@ const findBranchByGit = (gitBranchName, branches) => {
 // version state reducer helper fn
 // overwrite current state with any new state attributes
 const versionStateReducer = (state, newState) => {
+  console.log('checkmate', state, newState);
   return {
     ...state,
     ...newState,
@@ -127,6 +129,24 @@ const getDefaultActiveVersions = (metadata) => {
   return versions;
 };
 
+const findVersionedRepo = (arr, searchText, key) => {
+  return arr.filter((obj) => obj[key] === searchText);
+};
+
+// TODO: what are we doing with parserBranch for when we convert to versions.toml
+const getDefaultActiveVersionsToml = (bigData) => {
+  const { project, versionsToml } = bigData;
+  // get the version for currentRepo
+  const curVersionData = findVersionedRepo(versionsToml, project, 'repoName');
+
+  const initVersion = {};
+
+  initVersion[project] = curVersionData[0].version[0].name;
+  console.log(curVersionData, initVersion);
+
+  return initVersion;
+};
+
 const getUmbrellaProject = async (project, dbName) => {
   try {
     const query = {
@@ -156,6 +176,7 @@ const VersionContext = createContext({
 
 const VersionContextProvider = ({ repoBranches, slug, children }) => {
   const siteMetadata = useSiteMetadata();
+  const versionsToml = useVersionsToml();
   const associatedProductNames = useAllAssociatedProducts();
   const docsets = useAllDocsets();
   const { project } = useSnootyMetadata();
@@ -182,7 +203,13 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
 
   // TODO check whats going on here for 404 pages
   // tracks active versions across app
+  const bigData = { project, versionsToml };
+  const initver = getDefaultActiveVersionsToml(bigData);
+
+  console.log('swag time', initver);
+  // const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, bigData, getDefaultActiveVersionsToml);
   const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, metadata, getDefaultActiveVersions);
+
   // update local storage when active versions change
   useEffect(() => {
     const existing = getLocalValue(STORAGE_KEY);
@@ -257,7 +284,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
   );
 
   const onTomlVersion = useCallback(
-    (targetProject, versionName, location) => {
+    (targetProject, versionName, location, snootyEnv) => {
       // store previous version
       const prevVersion = activeVersions[targetProject];
 
@@ -267,12 +294,13 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
       setActiveVersions(updatedVersion);
 
       // navigate to location replacing old version with new version
-      console.log('peakaboo', location);
+      console.log('peakaboo', location, snootyEnv);
 
       // should really be calling replace version here.
-      const newlocation = location.replace(prevVersion, versionName);
+      let newlocation = location.replace(prevVersion, versionName);
+      if (snootyEnv === 'development') newlocation = newlocation + 'index.html';
       console.log(newlocation);
-      navigate(newlocation + 'index.html');
+      navigate(newlocation);
     },
     [activeVersions]
   );
