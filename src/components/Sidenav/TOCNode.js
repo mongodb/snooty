@@ -103,7 +103,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
       return (
         <SideNavItem
           className={cx(sideNavItemTOCStyling({ level }))}
-          as={Link}
+          as={isOfflineDocsBuild ? Link : 'a'}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
