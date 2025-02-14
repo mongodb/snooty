@@ -7,7 +7,6 @@ const createVersionNodes = async ({ createNode, createNodeId, createContentDiges
   try {
     const tomlContents = (await fs.readFile(`${process.cwd()}/toc_data/versions.toml`)).toString();
     const repo = load(tomlContents);
-    console.log('the toml contents are', repo);
 
     createNode({
       versionsList: repo,

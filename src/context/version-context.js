@@ -111,7 +111,6 @@ const getDefaultActiveVersions = (metadata) => {
   const { project, parserBranch } = metadata;
   let versions = {};
   versions[project] = parserBranch;
-  console.log('in get defaultactive versions', versions, project, parserBranch);
   // for any umbrella / associated products
   // we should depend on local storage after data fetch
   // otherwise, setting init on build will be overwritten by local storage
@@ -261,11 +260,8 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
       setActiveVersions(updatedVersion);
 
       // navigate to location replacing old version with new version
-
-      // should really be calling replace version here.
       let newlocation = location.replace(prevVersion, versionName);
       if (snootyEnv === 'development') newlocation = newlocation + 'index.html';
-      console.log(newlocation);
       navigate(newlocation);
     },
     [activeVersions]

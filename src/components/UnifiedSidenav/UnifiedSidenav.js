@@ -182,7 +182,7 @@ const isActiveTocNode = (currentUrl, slug, children) => {
   return false;
 };
 
-// This function helps us
+// This function helps us query data in the versions.toml
 const findVersionedData = (arr, searchText, key) => {
   const object = arr.filter((obj) => obj[key] === searchText);
   return object[0];
@@ -203,6 +203,7 @@ const replaceVersion = (url, currentVersion, versions, project) => {
   return result;
 };
 
+// Function that adds a prefix to all the urls
 const updateURLs = (tree, prefix, activeVersions, versions, project, snootyEnv) => {
   tree?.map((item) => {
     // Getting the path prefix and editing it based on the environment so links work correctly
@@ -229,9 +230,9 @@ export function UnifiedSidenav({ slug }) {
   const { activeVersions } = useContext(VersionContext);
   const tree = structuredClone(unifiedTocTree);
 
-  // TODO: updates all the URL's in the toc tree to load correctly based
+  // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
   updateURLs(tree, '', activeVersions, versions, project, snootyEnv);
-  console.log('The editing toctree with is:', tree);
+  console.log('The edited toctree with prefixes is:', tree);
 
   const staticTocItems = useMemo(() => {
     return unifiedTocTree.filter((item) => item?.isTab);

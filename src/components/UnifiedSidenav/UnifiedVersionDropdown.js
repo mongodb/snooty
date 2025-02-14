@@ -45,7 +45,7 @@ const UnifiedVersionDropdown = ({ versionData }) => {
   const { activeVersions, onTomlVersion } = useContext(VersionContext);
   const location = useLocation();
 
-  // value is the branch/version we want to switch to
+  // value is the version we want to switch to
   const onSelectChange = useCallback(
     (value, key) => {
       onTomlVersion(project, value, location.pathname, snootyEnv);
