@@ -7,12 +7,12 @@ import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
 import { sideNavItemUniTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
-import { useVersionsToml } from '../../hooks/use-versions-toml';
 import { theme } from '../../theme/docsTheme';
 import { isCurrentPage } from '../../utils/is-current-page';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { VersionContext } from '../../context/version-context';
+import { useVersionsToml } from '../../hooks/use-versions-toml';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -182,36 +182,38 @@ const isActiveTocNode = (currentUrl, slug, children) => {
   return false;
 };
 
-const findVersionedRepo = (arr, searchText, key) => {
-  return arr.filter((obj) => obj[key] === searchText);
+// This function helps us
+const findVersionedData = (arr, searchText, key) => {
+  const object = arr.filter((obj) => obj[key] === searchText);
+  return object[0];
 };
 
 const replaceVersion = (url, currentVersion, versions, project) => {
   if (!url) return;
 
-  // TODO: want to add the url paths if in prerpd or dotcomprd
-
   // Find the version data for the current content we are in
-  const content = findVersionedRepo(versions, project, 'repoName');
+  const content = findVersionedData(versions, project, 'repoName');
 
-  // based on the activeVersion, find the correct alias
-  const alias = findVersionedRepo(content[0].version, currentVersion, 'name');
+  // based on the activeVersion, find the correct verion
+  const ver = findVersionedData(content.version, currentVersion, 'name');
 
-  // input the correct version into the url
-  const result = url?.replace(/\$\{([^}]+)\}/g, alias[0].urlAliases[0]);
+  // input the correct alias into the url
+  const result = url?.replace(/\$\{([^}]+)\}/g, ver.urlSlug);
 
   return result;
 };
 
 const updateURLs = (tree, prefix, activeVersions, versions, project, snootyEnv) => {
   tree?.map((item) => {
+    // Getting the path prefix and editing it based on the environment so links work correctly
     if (item.prefix) {
-      if (snootyEnv === 'dotcomprd') item.prefix = '/docs' + item.prefix;
-      if (snootyEnv === 'dotcomstg') item.prefix = '/docs-qa' + item.prefix;
+      if (snootyEnv === 'dotcomprd') item.prefix = `/docs${item.prefix}`;
+      if (snootyEnv === 'dotcomstg') item.prefix = `/docs-qa${item.prefix}`;
       const result = replaceVersion(item.prefix, activeVersions[project], versions, project);
-      prefix = result + prefix;
+      prefix = result;
     }
 
+    // Edit the url with the correct path
     if (item.url) item.url = prefix + item.url;
 
     if (item.items) updateURLs(item.items, prefix, activeVersions, versions, project, snootyEnv);
@@ -225,14 +227,11 @@ export function UnifiedSidenav({ slug }) {
   const versions = useVersionsToml();
   const { project, snootyEnv } = useSnootyMetadata();
   const { activeVersions } = useContext(VersionContext);
-  console.log('the active version kitten', activeVersions);
-  let tree = structuredClone(unifiedTocTree);
+  const tree = structuredClone(unifiedTocTree);
 
+  // TODO: updates all the URL's in the toc tree to load correctly based
   updateURLs(tree, '', activeVersions, versions, project, snootyEnv);
-  // useEffect(() => {
-  //   updateURLs(tree, '', activeVersions, versions, project);
-  // },[]);
-  console.log('wham', tree[0]);
+  console.log('The editing toctree with is:', tree);
 
   const staticTocItems = useMemo(() => {
     return unifiedTocTree.filter((item) => item?.isTab);

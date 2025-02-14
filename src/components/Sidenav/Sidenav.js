@@ -309,7 +309,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                 </SideNavItem>
               </>
             )}
-            {console.log('the stuff for versions', slug, repoBranches, eol)}
             {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} eol={eol} />}
             {!ia && navContent}
 

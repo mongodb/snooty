@@ -10,6 +10,7 @@ import { usePageContext } from '../context/page-context';
 import { theme } from '../theme/docsTheme';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { useVersionsToml } from '../hooks/use-versions-toml';
+import { getFeatureFlags } from '../utils/feature-flags';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -18,7 +19,7 @@ import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
 import { TimeRequired } from './MultiPageTutorials';
-import UnifiedVersions from './UnifiedSidenav/UnifiedVersions';
+import UnifiedVersionDropdown from './UnifiedSidenav/UnifiedVersionDropdown';
 
 const h2Styling = css`
   margin-top: 16px;
@@ -54,12 +55,6 @@ const determineHeading = (sectionDepth) => {
   return Body; // use weight=medium prop to style appropriately
 };
 
-const isCurrentPageVersioned = (project, versions) => {
-  return versions.find((r) => r.repoName === project);
-  // console.log("the repo object is", curRepo);
-  // if (!curRepo)
-};
-
 const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const id = nodeData.id || '';
   const HeadingTag = determineHeading(sectionDepth);
@@ -74,12 +69,10 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const { page, tabsMainColumn } = usePageContext();
   const hasMethodSelector = page?.options?.['has_method_selector'];
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
+  // Data for versions.toml, if project is in versions.toml that means the repo is versioned.
   const versions = useVersionsToml();
-  // add version selector here ?
-  if (sectionDepth === 1) {
-    console.log('in heading', versions, rest);
-  }
-  const versionData = isCurrentPageVersioned(rest.metadata.project, versions);
+  const { isUnifiedToc } = getFeatureFlags();
+  const versionData = versions.find((r) => r.repoName === rest.metadata.project);
 
   return (
     <>
@@ -117,8 +110,12 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
               {'Open Interactive Tutorial'}
             </Button>
           )}
-          {sectionDepth === 1 && versionData && <UnifiedVersions eol={false} versionData={versionData} />}
-          {sectionDepth === 1 && <hr />}
+          {isUnifiedToc && sectionDepth === 1 && versionData && (
+            <>
+              <UnifiedVersionDropdown versionData={versionData} />
+              <hr />
+            </>
+          )}
         </HeadingTag>
       </ConditionalWrapper>
       {isPageTitle && (

@@ -2,7 +2,7 @@ const { load } = require('js-toml');
 const fs = require('fs/promises');
 
 const createVersionNodes = async ({ createNode, createNodeId, createContentDigest }) => {
-  // Get all MongoDB products for the sidenav
+  // Getting data for all our versioned repos
 
   try {
     const tomlContents = (await fs.readFile(`${process.cwd()}/toc_data/versions.toml`)).toString();

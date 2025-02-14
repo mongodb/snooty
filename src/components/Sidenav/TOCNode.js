@@ -129,7 +129,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
         )}
         {formattedTitle}
-        {/* this is important to copy over. */}
         {hasVersions && activeVersions[options.project] && (
           <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
         )}

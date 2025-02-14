@@ -105,13 +105,10 @@ const createOption = (branch) => {
 
 const VersionDropdown = ({ eol }) => {
   const { parserBranch } = useSiteMetadata();
-  // this is good to know
   const { project } = useSnootyMetadata();
   const { availableVersions, availableGroups, onVersionSelect, showEol, activeVersions } = useContext(VersionContext);
   let branches = availableVersions[project];
   let groups = availableGroups[project];
-
-  console.log('inversion', project, availableVersions);
 
   const onSelectChange = useCallback(
     (value) => {

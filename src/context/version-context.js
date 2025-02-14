@@ -9,15 +9,13 @@ import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { fetchDocset, fetchDocument } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { useVersionsToml } from '../hooks/use-versions-toml';
+import { getFeatureFlags } from '../utils/feature-flags';
 
 // <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';
 const LEGACY_GIT_BRANCH = 'legacy';
 
-// we will be wanting something like this, but want to search versions.toml instead of branches since we are switching to directories
 const getInitBranchName = (branches) => {
-  // what is the format of branches
   const activeBranch = branches.find((b) => b.active);
   if (activeBranch) {
     return activeBranch.gitBranchName;
@@ -25,7 +23,6 @@ const getInitBranchName = (branches) => {
   return branches[0]?.gitBranchName || null;
 };
 
-// this searches local browser storage , problem is that it only works per site so will need to update to per version
 const getInitVersions = (branchListByProduct) => {
   const initState = {};
   const localStorage = getLocalValue(STORAGE_KEY);
@@ -35,7 +32,6 @@ const getInitVersions = (branchListByProduct) => {
   return initState;
 };
 
-// // wont be needing this
 const findBranchByGit = (gitBranchName, branches) => {
   if (!branches || !branches.length) {
     return;
@@ -44,11 +40,7 @@ const findBranchByGit = (gitBranchName, branches) => {
   return branches.find((b) => b.gitBranchName === gitBranchName);
 };
 
-// no idea what this does
-// version state reducer helper fn
-// overwrite current state with any new state attributes
 const versionStateReducer = (state, newState) => {
-  console.log('checkmate', state, newState);
   return {
     ...state,
     ...newState,
@@ -94,7 +86,6 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
   }
 };
 
-// wont need
 const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
   const { project, parserBranch } = metadata;
   const versions = {};
@@ -108,7 +99,6 @@ const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
   return versions;
 };
 
-// wont need
 const getDefaultGroups = (project, repoBranches) => {
   const groups = {};
   const GROUP_KEY = 'groups';
@@ -127,24 +117,6 @@ const getDefaultActiveVersions = (metadata) => {
   // otherwise, setting init on build will be overwritten by local storage
   // and result in double render
   return versions;
-};
-
-const findVersionedRepo = (arr, searchText, key) => {
-  return arr.filter((obj) => obj[key] === searchText);
-};
-
-// TODO: what are we doing with parserBranch for when we convert to versions.toml
-const getDefaultActiveVersionsToml = (bigData) => {
-  const { project, versionsToml } = bigData;
-  // get the version for currentRepo
-  const curVersionData = findVersionedRepo(versionsToml, project, 'repoName');
-
-  const initVersion = {};
-
-  initVersion[project] = curVersionData[0].version[0].name;
-  console.log(curVersionData, initVersion);
-
-  return initVersion;
 };
 
 const getUmbrellaProject = async (project, dbName) => {
@@ -176,7 +148,7 @@ const VersionContext = createContext({
 
 const VersionContextProvider = ({ repoBranches, slug, children }) => {
   const siteMetadata = useSiteMetadata();
-  const versionsToml = useVersionsToml();
+  const { isUnifiedToc } = getFeatureFlags();
   const associatedProductNames = useAllAssociatedProducts();
   const docsets = useAllDocsets();
   const { project } = useSnootyMetadata();
@@ -201,13 +173,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
   }, [siteMetadata, project]);
   const mountRef = useRef(true);
 
-  // TODO check whats going on here for 404 pages
-  // tracks active versions across app
-  const bigData = { project, versionsToml };
-  const initver = getDefaultActiveVersionsToml(bigData);
-
-  console.log('swag time', initver);
-  // const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, bigData, getDefaultActiveVersionsToml);
+  // TODO: for when using versions.toml want to update this with that data instead of repobranches data
   const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, metadata, getDefaultActiveVersions);
 
   // update local storage when active versions change
@@ -283,6 +249,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
     [availableVersions, metadata, repoBranches, slug]
   );
 
+  // handler for a versions.toml dropdown
   const onTomlVersion = useCallback(
     (targetProject, versionName, location, snootyEnv) => {
       // store previous version
@@ -294,7 +261,6 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
       setActiveVersions(updatedVersion);
 
       // navigate to location replacing old version with new version
-      console.log('peakaboo', location, snootyEnv);
 
       // should really be calling replace version here.
       let newlocation = location.replace(prevVersion, versionName);
@@ -321,7 +287,6 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
   // if context values differ from url, fix context.
   // ie. user lands on "upcoming" version URL whilst context stores "stable"
   const currentUrlSlug = useCurrentUrlSlug(metadata.parserBranch, availableVersions[metadata.project]);
-  console.log('for the current context, ', currentUrlSlug, metadata.parserBranch, availableVersions[metadata.project]);
   useEffect(() => {
     // if current version differs from browser storage version
     // update browser local storage
@@ -333,13 +298,12 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
       console.error(`url <${currentUrlSlug}> does not correspond to any current branch`);
       return;
     }
-    if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
-      console.log('i shouldnt be here');
-      // const newState = { ...activeVersions };
-      // newState[metadata.project] = currentBranch.gitBranchName;
-      // setActiveVersions(newState);
+    if (activeVersions[metadata.project] !== currentBranch.gitBranchName && !isUnifiedToc) {
+      const newState = { ...activeVersions };
+      newState[metadata.project] = currentBranch.gitBranchName;
+      setActiveVersions(newState);
     }
-  }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions]);
+  }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions, isUnifiedToc]);
 
   return (
     <VersionContext.Provider

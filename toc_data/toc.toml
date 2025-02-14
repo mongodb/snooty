@@ -5,7 +5,6 @@ url = "/quick-start"
 isTab = true
 glyph = 'Bulb'
 prefix = '/drivers/csharp/${version}'
-# prefix = '/master/csharp/bianca.laube/DOP-5356'
 
 [[toc.items]]
 label = "C# Documentation"
@@ -26,9 +25,23 @@ url = "/usage-examples/findMany/"
 [[toc.items.items.items]]
 label = "Insert a Document"
 url = "/usage-examples/insertOne"
+[[toc.items.items]]
+label = "What's New"
+url = "/whats-new"
+[[toc.items]]
+label = "Fundamentals"
+group = true
+[[toc.items.items]]
+label = "Operations with Builders"
+url = "/fundamentals/builders"
+[[toc.items.items]]
+label = "Databases and Collections"
+url = "/fundamentals/database-collection"
+collapsible = true
+[[toc.items.items.items]]
+label = "Run a Database Command"
+url = "/fundamentals/databases-collections/run-command"
 
-# /master/csharp/bianca.laube/DOP-5356/quick-reference/
-# /docs-qa/drivers/csharp/v2.23/quick-start/
 
 # Static left pane item 1
 [[toc]]

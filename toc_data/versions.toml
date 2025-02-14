@@ -60,3 +60,9 @@ urlAliases = ['v2.23']
 urlSlug = 'v2.23'
 versionSelectorLabel = 'v2.23 (current)'
 isStableBranch = true
+[[repo.version]]
+name = 'v2.22'
+urlAliases = ['v2.22']
+urlSlug = 'v2.22'
+versionSelectorLabel = 'v2.22'
+isStableBranch = false

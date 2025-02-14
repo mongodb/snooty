@@ -55,7 +55,6 @@ const Contents = ({ className }) => {
 
   const label = 'On this page';
 
-  // add the version selector here for poc.
   return (
     <div className={className}>
       <ContentsList label={label}>
