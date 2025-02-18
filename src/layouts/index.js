@@ -15,6 +15,7 @@ import { useRemoteMetadata } from '../hooks/use-remote-metadata';
 import { getAllLocaleCssStrings } from '../utils/locale';
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
 import { getFeatureFlags } from '../utils/feature-flags';
+import { useVersionsToml } from '../hooks/use-versions-toml';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -99,6 +100,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
   const { isUnifiedToc } = getFeatureFlags();
   const remoteMetadata = useRemoteMetadata();
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
+  const versionsData = useVersionsToml();
 
   const pageTitle = React.useMemo(
     () => page?.ast?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug],
@@ -114,11 +116,12 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
         headingNodes={page?.ast?.options?.headings}
         remoteMetadata={remoteMetadata}
         project={project}
+        versionsData={versionsData}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
           {isUnifiedToc ? (
-            <UnifiedSidenav slug={slug} /*activeTab={activeTab} setActiveTab={setActiveTab}*/ />
+            <UnifiedSidenav slug={slug} versionsData={versionsData} />
           ) : sidenav && !isInPresentationMode ? (
             <Sidenav
               chapters={chapters}

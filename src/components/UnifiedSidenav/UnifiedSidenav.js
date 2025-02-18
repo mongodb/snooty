@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
@@ -10,6 +10,8 @@ import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
 import { isCurrentPage } from '../../utils/is-current-page';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { VersionContext } from '../../context/version-context';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -71,7 +73,7 @@ function isSelectedTab(url, slug) {
 }
 
 function CollapsibleNavItem({ items, label, url, slug, level }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
   const chevronType = isOpen ? 'ChevronDown' : 'ChevronRight';
 
   const onChevronClick = (event) => {
@@ -80,7 +82,7 @@ function CollapsibleNavItem({ items, label, url, slug, level }) {
   };
 
   const handleClick = () => {
-    // Allows the collapsed item if the chevren was selected first before
+    // Allows the collapsed item if the chevron was selected first before
     if (!(url !== `/${slug}` && isOpen)) {
       setIsOpen(!isOpen);
     }
@@ -179,8 +181,57 @@ const isActiveTocNode = (currentUrl, slug, children) => {
   return false;
 };
 
-export function UnifiedSidenav({ slug }) {
+// This function helps us query data in the versions.toml
+const findVersionedData = (arr, searchText, key) => {
+  const object = arr.filter((obj) => obj[key] === searchText);
+  return object[0];
+};
+
+const replaceVersion = (url, currentVersion, versions, project) => {
+  if (!url) return;
+
+  // Find the version data for the current content we are in
+  const content = findVersionedData(versions, project, 'repoName');
+
+  // based on the activeVersion, find the correct verion
+  const ver = findVersionedData(content.version, currentVersion, 'name');
+
+  // input the correct alias into the url
+  const result = url?.replace(/\$\{([^}]+)\}/g, ver.urlSlug);
+
+  return result;
+};
+
+// Function that adds a prefix to all the urls
+const updateURLs = (tree, prefix, activeVersions, versions, project, snootyEnv) => {
+  tree?.map((item) => {
+    // Getting the path prefix and editing it based on the environment so links work correctly
+    if (item.prefix) {
+      if (snootyEnv === 'dotcomprd') item.prefix = `/docs${item.prefix}`;
+      if (snootyEnv === 'dotcomstg') item.prefix = `/docs-qa${item.prefix}`;
+      const result = replaceVersion(item.prefix, activeVersions[project], versions, project);
+      prefix = result;
+    }
+
+    // Edit the url with the correct path
+    if (item.url) item.url = prefix + item.url;
+
+    if (item.items) updateURLs(item.items, prefix, activeVersions, versions, project, snootyEnv);
+    return item;
+  });
+  return tree;
+};
+
+export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
+  const { project, snootyEnv } = useSnootyMetadata();
+  const { activeVersions } = useContext(VersionContext);
+  const tree = structuredClone(unifiedTocTree);
+
+  // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
+  updateURLs(tree, '', activeVersions, versionsData, project, snootyEnv);
+  console.log('The edited toctree with prefixes is:', tree);
+
   const staticTocItems = useMemo(() => {
     return unifiedTocTree.filter((item) => item?.isTab);
   }, [unifiedTocTree]);
