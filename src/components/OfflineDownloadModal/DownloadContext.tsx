@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from 'react';
 import { useAllDocsets } from '../../hooks/useAllDocsets';
 import { getAllRepos, type Repo } from '../../utils/snooty-data-api';
 import assertLeadingBrand from '../../utils/assert-leading-brand';
+import DownloadModal from './DownloadModal';
 
 export type OfflineVersion = {
   displayName: string;
@@ -16,8 +17,12 @@ export type OfflineRepo = {
 
 const defaultValues: {
   repos: OfflineRepo[];
+  modalOpen: boolean;
+  setModalOpen: Dispatch<SetStateAction<boolean>>;
 } = {
   repos: [],
+  modalOpen: false,
+  setModalOpen: () => {},
 };
 
 const OfflineDownloadContext = createContext(defaultValues);
@@ -98,9 +103,10 @@ type ProviderProps = {
  * will download once when modal is opened
  *
  */
-const OfflineDownloadProvider = ({ children, modalOpen }: ProviderProps) => {
+const OfflineDownloadProvider = ({ children }: ProviderProps) => {
   const allDocsets = useAllDocsets();
   const [offlineRepos, setOfflineRepos] = useState<OfflineRepo[]>(() => processDocsets(allDocsets));
+  const [modalOpen, setModalOpen] = useState(() => false);
   const promise = useRef<Promise<void>>();
 
   useEffect(() => {
@@ -120,7 +126,12 @@ const OfflineDownloadProvider = ({ children, modalOpen }: ProviderProps) => {
       });
   }, [modalOpen]);
 
-  return <OfflineDownloadContext.Provider value={{ repos: offlineRepos }}>{children}</OfflineDownloadContext.Provider>;
+  return (
+    <OfflineDownloadContext.Provider value={{ repos: offlineRepos, modalOpen, setModalOpen }}>
+      {children}
+      <DownloadModal open={modalOpen} setOpen={setModalOpen} />
+    </OfflineDownloadContext.Provider>
+  );
 };
 
 const useOfflineDownloadContext = () => {
