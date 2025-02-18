@@ -82,8 +82,6 @@ const UnifiedVersionDropdown = ({ versionData }) => {
 };
 
 UnifiedVersionDropdown.propTypes = {
-  // TODO: add active version dropdown prop
-  // consume from version context
   slug: PropTypes.string.isRequired,
 };
 

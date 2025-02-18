@@ -200,6 +200,8 @@ const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) 
   const mountRef = useRef(true);
 
   // TODO: Might need to update this once we use this branch on a stitched project (DOP-5243 dependent)
+  // TODO check whats going on here for 404 pages
+  // tracks active versions across app
   const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, metadata, getDefaultActiveVersions);
 
   // update local storage when active versions change
