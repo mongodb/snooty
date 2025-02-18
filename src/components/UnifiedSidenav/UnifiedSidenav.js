@@ -12,7 +12,6 @@ import { isCurrentPage } from '../../utils/is-current-page';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { VersionContext } from '../../context/version-context';
-import { useVersionsToml } from '../../hooks/use-versions-toml';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -74,7 +73,7 @@ function isSelectedTab(url, slug) {
 }
 
 function CollapsibleNavItem({ items, label, url, slug, level }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
   const chevronType = isOpen ? 'ChevronDown' : 'ChevronRight';
 
   const onChevronClick = (event) => {
@@ -83,7 +82,7 @@ function CollapsibleNavItem({ items, label, url, slug, level }) {
   };
 
   const handleClick = () => {
-    // Allows the collapsed item if the chevren was selected first before
+    // Allows the collapsed item if the chevron was selected first before
     if (!(url !== `/${slug}` && isOpen)) {
       setIsOpen(!isOpen);
     }
@@ -223,15 +222,14 @@ const updateURLs = (tree, prefix, activeVersions, versions, project, snootyEnv) 
   return tree;
 };
 
-export function UnifiedSidenav({ slug }) {
+export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
-  const versions = useVersionsToml();
   const { project, snootyEnv } = useSnootyMetadata();
   const { activeVersions } = useContext(VersionContext);
   const tree = structuredClone(unifiedTocTree);
 
   // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
-  updateURLs(tree, '', activeVersions, versions, project, snootyEnv);
+  updateURLs(tree, '', activeVersions, versionsData, project, snootyEnv);
   console.log('The edited toctree with prefixes is:', tree);
 
   const staticTocItems = useMemo(() => {

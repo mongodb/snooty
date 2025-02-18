@@ -32,6 +32,20 @@ const getInitVersions = (branchListByProduct) => {
   return initState;
 };
 
+// Set the inital active version using versions.toml
+const getInitVersionsToml = (bigData) => {
+  const { project } = bigData;
+  let initState = {};
+  const localStorage = getLocalValue(STORAGE_KEY);
+  if (localStorage) {
+    initState[project] = localStorage[project];
+  } else {
+    initState = getDefaultActiveVersionsToml(bigData);
+  }
+
+  return initState;
+};
+
 const findBranchByGit = (gitBranchName, branches) => {
   if (!branches || !branches.length) {
     return;
@@ -99,6 +113,19 @@ const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
   return versions;
 };
 
+const findVersionedData = (arr, searchText, key) => {
+  const object = arr.filter((obj) => obj[key] === searchText);
+  return object[0];
+};
+
+// If repo not saved in local storage use the first version in the array from versions.toml
+const getDefaultActiveVersionsToml = (project, versionsData) => {
+  const initVersion = {};
+  const curVersionData = findVersionedData(versionsData, project, 'repoName');
+  initVersion[project] = curVersionData.version[0].name;
+  return initVersion;
+};
+
 const getDefaultGroups = (project, repoBranches) => {
   const groups = {};
   const GROUP_KEY = 'groups';
@@ -145,7 +172,7 @@ const VersionContext = createContext({
   onTomlVersion: () => {},
 });
 
-const VersionContextProvider = ({ repoBranches, slug, children }) => {
+const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) => {
   const siteMetadata = useSiteMetadata();
   const { isUnifiedToc } = getFeatureFlags();
   const associatedProductNames = useAllAssociatedProducts();
@@ -172,7 +199,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
   }, [siteMetadata, project]);
   const mountRef = useRef(true);
 
-  // TODO: for when using versions.toml want to update this with that data instead of repobranches data
+  // TODO: Might need to update this once we use this branch on a stitched project (DOP-5243 dependent)
   const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, metadata, getDefaultActiveVersions);
 
   // update local storage when active versions change
@@ -200,7 +227,9 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
         if (!mountRef.current) {
           return;
         }
-        setActiveVersions(getInitVersions(versions));
+        isUnifiedToc
+          ? setActiveVersions(getInitVersionsToml(project, versionsData))
+          : setActiveVersions(getInitVersions(versions));
         setAvailableGroups(groups);
         setAvailableVersions(versions);
         setShowEol(hasEolBranches);
