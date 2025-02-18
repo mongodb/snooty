@@ -112,105 +112,6 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
 }
 
 .emotion-3 {
-  position: relative;
-  z-index: 901;
-}
-
-.emotion-4 {
-  position: fixed;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column-reverse;
-  -ms-flex-direction: column-reverse;
-  flex-direction: column-reverse;
-  left: 12px;
-  bottom: 12px;
-  width: 408px;
-  max-height: calc(100vh - 16px);
-  z-index: 0;
-  overflow: unset;
-  min-height: 0px;
-  opacity: 0;
-  visibility: hidden;
-  perspective: 1600px;
-  perspective-origin: bottom;
-  transform-style: preserve-3d;
-  -webkit-transition: ease-in-out 300ms;
-  transition: ease-in-out 300ms;
-  transition-property: transform,bottom,opacity;
-  scroll-behavior: unset;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.emotion-4::-webkit-scrollbar {
-  display: none;
-}
-
-.emotion-5 {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  transform-style: inherit;
-  -webkit-transition: margin 150ms ease-in-out;
-  transition: margin 150ms ease-in-out;
-}
-
-.emotion-6 {
-  border: unset;
-  outline: unset;
-  position: absolute;
-  left: 4px;
-  bottom: 4px;
-  width: 400px;
-  height: 24px;
-  z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  line-height: 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  opacity: 0;
-  -webkit-transform: translate3d(0, 8px, -400px);
-  -moz-transform: translate3d(0, 8px, -400px);
-  -ms-transform: translate3d(0, 8px, -400px);
-  transform: translate3d(0, 8px, -400px);
-  -webkit-transition: 300ms ease-in-out;
-  transition: 300ms ease-in-out;
-  transition-property: background-color,opacity,transform;
-  background-color: #3D4F58;
-  color: #FFFFFF;
-  -webkit-transform: translate3d(
-        0,
-        24px,
-        -400px
-      );
-  -moz-transform: translate3d(
-        0,
-        24px,
-        -400px
-      );
-  -ms-transform: translate3d(
-        0,
-        24px,
-        -400px
-      );
-  transform: translate3d(
-        0,
-        24px,
-        -400px
-      );
-  opacity: 0;
-}
-
-.emotion-6:hover {
-  background-color: #1C2D38;
-}
-
-.emotion-7 {
   overflow-y: auto;
   position: fixed;
   top: 0;
@@ -223,7 +124,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   background-color: rgba(0,30,43,0.6);
 }
 
-.emotion-7 [role='dialog'] {
+.emotion-3 [role='dialog'] {
   max-height: 520px;
   max-width: 690px;
   padding: 40px 36px;
@@ -237,7 +138,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   background-color: var(--background-color-primary);
 }
 
-.emotion-8 {
+.emotion-4 {
   position: absolute;
   min-height: 100%;
   width: 100%;
@@ -257,7 +158,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   justify-content: center;
 }
 
-.emotion-9 {
+.emotion-5 {
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
   margin: auto;
@@ -278,23 +179,23 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   width: 720px;
 }
 
-.emotion-9:focus {
+.emotion-5:focus {
   outline: none;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-9 {
+  .emotion-5 {
     width: 720px;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .emotion-9 {
+  .emotion-5 {
     width: 960px;
   }
 }
 
-.emotion-10 {
+.emotion-6 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -305,7 +206,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   margin-bottom: 8px;
 }
 
-.emotion-11 {
+.emotion-7 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -316,12 +217,12 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   margin-bottom: 8px;
 }
 
-.emotion-11 strong,
-.emotion-11 b {
+.emotion-7 strong,
+.emotion-7 b {
   font-weight: 700;
 }
 
-.emotion-12 {
+.emotion-8 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -350,8 +251,8 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   font-weight: 400;
 }
 
-.emotion-12:hover,
-.emotion-12:focus {
+.emotion-8:hover,
+.emotion-8:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -360,19 +261,19 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-12:focus {
+.emotion-8:focus {
   outline: none;
 }
 
-.emotion-12:hover {
+.emotion-8:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-12:focus {
+.emotion-8:focus {
   text-decoration-color: #016BF8;
 }
 
-.emotion-13 {
+.emotion-9 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -382,7 +283,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   height: 12px;
 }
 
-.emotion-14 {
+.emotion-10 {
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-box;
   display: -webkit-flex;
@@ -397,7 +298,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   max-width: 260px;
 }
 
-.emotion-15 {
+.emotion-11 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -410,7 +311,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   z-index: 0;
 }
 
-.emotion-16 {
+.emotion-12 {
   font-size: inherit;
   line-height: inherit;
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -431,50 +332,50 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   padding-left: 12px;
 }
 
-.emotion-16:disabled {
+.emotion-12:disabled {
   cursor: not-allowed;
 }
 
-.emotion-16:disabled:hover,
-.emotion-16:disabled:active {
+.emotion-12:disabled:hover,
+.emotion-12:disabled:active {
   box-shadow: none;
 }
 
-.emotion-16::-webkit-input-placeholder {
+.emotion-12::-webkit-input-placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-16::-moz-placeholder {
+.emotion-12::-moz-placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-16:-ms-input-placeholder {
+.emotion-12:-ms-input-placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-16::placeholder {
+.emotion-12::placeholder {
   font-size: inherit;
   line-height: inherit;
 }
 
-.emotion-16[type='search']::-ms-clear,
-.emotion-16[type='search']::-ms-reveal {
+.emotion-12[type='search']::-ms-clear,
+.emotion-12[type='search']::-ms-reveal {
   display: none;
   width: 0;
   height: 0;
 }
 
-.emotion-16[type='search']::-webkit-search-decoration,
-.emotion-16[type='search']::-webkit-search-cancel-button,
-.emotion-16[type='search']::-webkit-search-results-button,
-.emotion-16[type='search']::-webkit-search-results-decoration {
+.emotion-12[type='search']::-webkit-search-decoration,
+.emotion-12[type='search']::-webkit-search-cancel-button,
+.emotion-12[type='search']::-webkit-search-results-button,
+.emotion-12[type='search']::-webkit-search-results-decoration {
   display: none;
 }
 
-.emotion-16:-webkit-autofill {
+.emotion-12:-webkit-autofill {
   color: #001E2B;
   background: #FFFFFF;
   border: 1px solid #889397;
@@ -482,65 +383,65 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   box-shadow: 0 0 0 100px #FFFFFF inset;
 }
 
-.emotion-16:-webkit-autofill:focus {
+.emotion-12:-webkit-autofill:focus {
   box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #0498EC;
   border-color: #FFFFFF;
 }
 
-.emotion-16:-webkit-autofill:hover:not(:focus) {
+.emotion-12:-webkit-autofill:hover:not(:focus) {
   box-shadow: 0 0 0 100px #FFFFFF inset,0 0 0 3px #E8EDEB;
 }
 
-.emotion-16::-webkit-input-placeholder {
+.emotion-12::-webkit-input-placeholder {
   color: #C1C7C6;
   font-weight: normal;
 }
 
-.emotion-16::-moz-placeholder {
+.emotion-12::-moz-placeholder {
   color: #C1C7C6;
   font-weight: normal;
 }
 
-.emotion-16:-ms-input-placeholder {
+.emotion-12:-ms-input-placeholder {
   color: #C1C7C6;
   font-weight: normal;
 }
 
-.emotion-16::placeholder {
+.emotion-12::placeholder {
   color: #C1C7C6;
   font-weight: normal;
 }
 
-.emotion-16:hover:not(:focus),
-.emotion-16:active:not(:focus) {
+.emotion-12:hover:not(:focus),
+.emotion-12:active:not(:focus) {
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-16:disabled {
+.emotion-12:disabled {
   color: #889397;
   background-color: #E8EDEB;
   border-color: #C1C7C6;
 }
 
-.emotion-16:disabled::-webkit-input-placeholder {
+.emotion-12:disabled::-webkit-input-placeholder {
   color: inherit;
 }
 
-.emotion-16:disabled::-moz-placeholder {
+.emotion-12:disabled::-moz-placeholder {
   color: inherit;
 }
 
-.emotion-16:disabled:-ms-input-placeholder {
+.emotion-12:disabled:-ms-input-placeholder {
   color: inherit;
 }
 
-.emotion-16:disabled::placeholder {
+.emotion-12:disabled::placeholder {
   color: inherit;
 }
 
-.emotion-16:disabled:-webkit-autofill,
-.emotion-16:disabled:-webkit-autofill:hover,
-.emotion-16:disabled:-webkit-autofill:focus {
+.emotion-12:disabled:-webkit-autofill,
+.emotion-12:disabled:-webkit-autofill:hover,
+.emotion-12:disabled:-webkit-autofill:focus {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -550,12 +451,12 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   box-shadow: 0 0 0 100px #E8EDEB inset;
 }
 
-.emotion-16:focus {
+.emotion-12:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: #FFFFFF;
 }
 
-.emotion-17 {
+.emotion-13 {
   position: absolute;
   display: -webkit-box;
   display: -webkit-flex;
@@ -569,13 +470,13 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   right: 12px;
 }
 
-.emotion-18 {
+.emotion-14 {
   overflow: auto;
   width: 100%;
   position: relative;
 }
 
-.emotion-19 {
+.emotion-15 {
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
@@ -584,12 +485,12 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   line-height: 20px;
 }
 
-.emotion-20 {
+.emotion-16 {
   background-color: #FFFFFF;
   box-shadow: 0 4px #E8EDEB;
 }
 
-.emotion-21 {
+.emotion-17 {
   padding: 0 8px;
   overflow: hidden;
   padding-left: 8px;
@@ -597,15 +498,15 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   width: 20px;
 }
 
-.emotion-21:focus-visible {
+.emotion-17:focus-visible {
   box-shadow: inset;
 }
 
-.emotion-21:last-child {
+.emotion-17:last-child {
   padding-right: 24px;
 }
 
-.emotion-21>* {
+.emotion-17>* {
   -webkit-box-pack: left;
   -ms-flex-pack: left;
   -webkit-justify-content: left;
@@ -613,7 +514,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   text-align: left;
 }
 
-.emotion-22 {
+.emotion-18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -634,7 +535,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   text-align: left;
 }
 
-.emotion-23 {
+.emotion-19 {
   display: grid;
   grid-template-columns: 14px auto;
   grid-template-areas: 'label label' '. description';
@@ -651,7 +552,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   z-index: 0;
 }
 
-.emotion-24 {
+.emotion-20 {
   color: #001E2B;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight: 700;
@@ -673,11 +574,11 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   cursor: pointer;
 }
 
-.emotion-24:hover:not(:focus-within)>.lg-ui-input-0000:not([disabled])+.lg-ui-check-wrapper-0000 {
+.emotion-20:hover:not(:focus-within)>.lg-ui-input-0000:not([disabled])+.lg-ui-check-wrapper-0000 {
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-25 {
+.emotion-21 {
   margin: 0;
   position: absolute;
   height: 0;
@@ -688,11 +589,11 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   opacity: 0;
 }
 
-.emotion-25:focus-visible+.lg-ui-check-wrapper-0000 {
+.emotion-21:focus-visible+.lg-ui-check-wrapper-0000 {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-26 {
+.emotion-22 {
   grid-area: check;
   position: relative;
   display: -webkit-box;
@@ -720,7 +621,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   border-color: #3D4F58;
 }
 
-.emotion-26:before {
+.emotion-22:before {
   content: '';
   position: absolute;
   inset: -41.42135623730951%;
@@ -736,11 +637,11 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   transition-delay: 50ms;
 }
 
-.emotion-26:before {
+.emotion-22:before {
   background-color: #016BF8;
 }
 
-.emotion-27 {
+.emotion-23 {
   z-index: 1;
   transform-origin: center;
   -webkit-transition: -webkit-transform 100ms ease-in-out;
@@ -751,7 +652,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   transform: scale(0) rotate(-45deg);
 }
 
-.emotion-28 {
+.emotion-24 {
   grid-area: check;
   position: relative;
   top: 2px;
@@ -771,21 +672,21 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   background-color: #1254B7;
 }
 
-.emotion-29 {
+.emotion-25 {
   padding: 0 8px;
   overflow: hidden;
   width: 420px;
 }
 
-.emotion-29:focus-visible {
+.emotion-25:focus-visible {
   box-shadow: inset;
 }
 
-.emotion-29:last-child {
+.emotion-25:last-child {
   padding-right: 24px;
 }
 
-.emotion-29>* {
+.emotion-25>* {
   -webkit-box-pack: left;
   -ms-flex-pack: left;
   -webkit-justify-content: left;
@@ -793,21 +694,21 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   text-align: left;
 }
 
-.emotion-31 {
+.emotion-27 {
   padding: 0 8px;
   overflow: hidden;
   width: 140px;
 }
 
-.emotion-31:focus-visible {
+.emotion-27:focus-visible {
   box-shadow: inset;
 }
 
-.emotion-31:last-child {
+.emotion-27:last-child {
   padding-right: 24px;
 }
 
-.emotion-31>* {
+.emotion-27>* {
   -webkit-box-pack: left;
   -ms-flex-pack: left;
   -webkit-justify-content: left;
@@ -815,7 +716,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   text-align: left;
 }
 
-.emotion-32 {
+.emotion-28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -836,7 +737,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   text-align: right;
 }
 
-.emotion-33 {
+.emotion-29 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -850,7 +751,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   justify-content: flex-end;
 }
 
-.emotion-34 {
+.emotion-30 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -885,40 +786,40 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   height: 36px;
 }
 
-.emotion-34:focus-visible,
-.emotion-34[data-focus="true"] {
+.emotion-30:focus-visible,
+.emotion-30[data-focus="true"] {
   outline: none;
 }
 
-.emotion-34:active,
-.emotion-34[data-active="true"],
-.emotion-34:focus,
-.emotion-34:hover {
+.emotion-30:active,
+.emotion-30[data-active="true"],
+.emotion-30:focus,
+.emotion-30:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-34:focus-visible,
-.emotion-34[data-focus="true"] {
+.emotion-30:focus-visible,
+.emotion-30[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-34:hover,
-.emotion-34[data-hover="true"],
-.emotion-34:active,
-.emotion-34[data-active="true"] {
+.emotion-30:hover,
+.emotion-30[data-hover="true"],
+.emotion-30:active,
+.emotion-30[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-34:focus-visible,
-.emotion-34[data-focus="true"] {
+.emotion-30:focus-visible,
+.emotion-30[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-37 {
+.emotion-33 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -953,38 +854,38 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   height: 36px;
 }
 
-.emotion-37:focus-visible,
-.emotion-37[data-focus="true"] {
+.emotion-33:focus-visible,
+.emotion-33[data-focus="true"] {
   outline: none;
 }
 
-.emotion-37:active,
-.emotion-37[data-active="true"],
-.emotion-37:focus,
-.emotion-37:hover {
+.emotion-33:active,
+.emotion-33[data-active="true"],
+.emotion-33:focus,
+.emotion-33:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-37:focus-visible,
-.emotion-37[data-focus="true"] {
+.emotion-33:focus-visible,
+.emotion-33[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-37:hover,
-.emotion-37[data-hover="true"],
-.emotion-37:active,
-.emotion-37[data-active="true"] {
+.emotion-33:hover,
+.emotion-33[data-hover="true"],
+.emotion-33:active,
+.emotion-33[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-37,
-.emotion-37:hover,
-.emotion-37[data-hover="true"],
-.emotion-37:active,
-.emotion-37[data-active="true"] {
+.emotion-33,
+.emotion-33:hover,
+.emotion-33[data-hover="true"],
+.emotion-33:active,
+.emotion-33[data-active="true"] {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
@@ -992,13 +893,13 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   cursor: not-allowed;
 }
 
-.emotion-37:focus-visible,
-.emotion-37[data-focus="true"] {
+.emotion-33:focus-visible,
+.emotion-33[data-focus="true"] {
   color: #889397;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-40 {
+.emotion-36 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -1023,7 +924,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   top: 18px;
 }
 
-.emotion-40:before {
+.emotion-36:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -1040,9 +941,9 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   transform: scale(0.8);
 }
 
-.emotion-40:active:before,
-.emotion-40:hover:before,
-.emotion-40:focus:before {
+.emotion-36:active:before,
+.emotion-36:hover:before,
+.emotion-36:focus:before {
   opacity: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -1050,30 +951,30 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   transform: scale(1);
 }
 
-.emotion-40:focus {
+.emotion-36:focus {
   outline: none;
 }
 
-.emotion-40:active,
-.emotion-40:hover {
+.emotion-36:active,
+.emotion-36:hover {
   color: #001E2B;
 }
 
-.emotion-40:active:before,
-.emotion-40:hover:before {
+.emotion-36:active:before,
+.emotion-36:hover:before {
   background-color: #E8EDEB;
 }
 
-.emotion-40:focus {
+.emotion-36:focus {
   color: #001E2B;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-40:focus:before {
+.emotion-36:focus:before {
   background-color: #E8EDEB;
 }
 
-.emotion-41 {
+.emotion-37 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1093,7 +994,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   justify-content: center;
 }
 
-.emotion-42 {
+.emotion-38 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -1135,56 +1036,32 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
     </button>
   </div>
   <div
-    class="lg-ui-toast-portal-0000 emotion-3"
-  >
-    <div
-      aria-live="polite"
-      aria-relevant="all"
-      class="emotion-4"
-      data-testid="lg-toast-region"
-      id="lg-toast-region"
-      role="status"
-    >
-      <div
-        class="emotion-5"
-        data-testid="lg-toast-scroll-container"
-      >
-        <button
-          class="emotion-6"
-        >
-          0
-           more notification
-        </button>
-      </div>
-    </div>
-  </div>
-  <div
     class=""
   >
     <div
-      class="emotion-7"
+      class="emotion-3"
       id="modal-1"
     >
       <div
-        class="emotion-8"
+        class="emotion-4"
       >
         <div
           aria-modal="true"
-          class="emotion-9"
+          class="emotion-5"
           role="dialog"
           tabindex="-1"
         >
           <h3
-            class="emotion-10"
+            class="emotion-6"
           >
             Download Documentation
           </h3>
           <p
-            class="emotion-11"
+            class="emotion-7"
           >
             Navigate the table to find the product and version you wish to download. Looking for another product? Visit our 
             <a
-              class="lg-ui-0001 emotion-12"
+              class="lg-ui-0001 emotion-8"
               href="https://mongodb.com/docs/legacy/"
               rel="noopener noreferrer"
               target="_blank"
@@ -1195,7 +1072,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
               <svg
                 alt=""
                 aria-hidden="true"
-                class="emotion-13"
+                class="emotion-9"
                 height="16"
                 role="presentation"
                 viewBox="0 0 16 16"
@@ -1213,17 +1090,17 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
             </a>
           </p>
           <div
-            class="emotion-14"
+            class="emotion-10"
           >
             <div
-              class="emotion-15"
+              class="emotion-11"
             >
               <input
                 aria-invalid="false"
                 aria-label="Search for Offline Documentation"
                 aria-labelledby="null"
                 autocomplete="on"
-                class="emotion-16"
+                class="emotion-12"
                 id="textinput-1"
                 placeholder="Search products"
                 required=""
@@ -1231,34 +1108,34 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
                 value=""
               />
               <div
-                class="constant-classname emotion-17"
+                class="constant-classname emotion-13"
               />
             </div>
           </div>
           <div
-            class="emotion-18"
+            class="emotion-14"
             tabindex="0"
           >
             <table
-              class="emotion-19"
+              class="emotion-15"
             >
               <thead
-                class="emotion-20"
+                class="emotion-16"
               >
                 <tr>
                   <th
-                    class="emotion-21"
+                    class="emotion-17"
                     scope="col"
                   >
                     <div
-                      class="emotion-22"
+                      class="emotion-18"
                     >
                       <div
-                        class="emotion-23"
+                        class="emotion-19"
                         data-lgid="lg-checkbox"
                       >
                         <label
-                          class="emotion-24"
+                          class="emotion-20"
                           data-lgid="lg-label"
                           for="checkbox-1"
                           id="checkbox-1-label"
@@ -1268,15 +1145,15 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
                             aria-disabled="false"
                             aria-label="Select all rows"
                             aria-labelledby="checkbox-1-label"
-                            class="lg-ui-input-0000 emotion-25"
+                            class="lg-ui-input-0000 emotion-21"
                             id="checkbox-1"
                             type="checkbox"
                           />
                           <div
-                            class="lg-ui-check-wrapper-0000 emotion-26"
+                            class="lg-ui-check-wrapper-0000 emotion-22"
                           >
                             <svg
-                              class="emotion-27"
+                              class="emotion-23"
                               fill="none"
                               height="10"
                               stroke="#FFFFFF"
@@ -1294,28 +1171,28 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
                             </svg>
                           </div>
                           <div
-                            class="lg-ui-ripple-0000 emotion-28"
+                            class="lg-ui-ripple-0000 emotion-24"
                           />
                         </label>
                       </div>
                     </div>
                   </th>
                   <th
-                    class="emotion-29"
+                    class="emotion-25"
                     scope="col"
                   >
                     <div
-                      class="emotion-22"
+                      class="emotion-18"
                     >
                       Products
                     </div>
                   </th>
                   <th
-                    class="emotion-31"
+                    class="emotion-27"
                     scope="col"
                   >
                     <div
-                      class="emotion-32"
+                      class="emotion-28"
                     >
                       Version
                     </div>
@@ -1326,11 +1203,11 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
             </table>
           </div>
           <div
-            class="emotion-33"
+            class="emotion-29"
           >
             <button
               aria-disabled="false"
-              class="lg-ui-button-0000 emotion-34"
+              class="lg-ui-button-0000 emotion-30"
               data-lgid="lg-button"
               type="button"
             >
@@ -1345,7 +1222,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
             </button>
             <button
               aria-disabled="true"
-              class="lg-ui-button-0000 emotion-37"
+              class="lg-ui-button-0000 emotion-33"
               data-lgid="lg-button"
               type="button"
             >
@@ -1362,15 +1239,15 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
           <button
             aria-disabled="false"
             aria-label="Close modal"
-            class="constant-classname emotion-40"
+            class="constant-classname emotion-36"
             tabindex="0"
           >
             <div
-              class="emotion-41"
+              class="emotion-37"
             >
               <svg
                 aria-label="X Icon"
-                class="emotion-42"
+                class="emotion-38"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"

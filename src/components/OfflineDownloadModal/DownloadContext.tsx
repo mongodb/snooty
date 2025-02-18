@@ -95,7 +95,6 @@ function processRepos(repos: Repo[]) {
 
 type ProviderProps = {
   children: JSX.Element[] | JSX.Element;
-  modalOpen: boolean;
 };
 
 /**
