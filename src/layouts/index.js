@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { ToastProvider } from '@leafygreen-ui/toast';
 import ActionBar from '../components/ActionBar/ActionBar';
 import ContentTransition from '../components/ContentTransition';
@@ -94,7 +95,7 @@ export const StyledContentContainer = styled('div')`
 `;
 
 // have Toasts come up with z index above the side nav
-const toastPortalStyling = css`
+const toastPortalStyling = LeafyCSS`
   z-index: ${theme.zIndexes.sidenav + 1};
 `;
 
@@ -123,7 +124,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
           {sidenav && !isInPresentationMode ? (
-            <ToastProvider portalClassName={toastPortalStyling}>
+            <ToastProvider portalClassName={cx(toastPortalStyling)}>
               <OfflineDownloadProvider>
                 <Sidenav
                   chapters={chapters}
