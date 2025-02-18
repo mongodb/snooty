@@ -3,7 +3,7 @@ import Button from '@leafygreen-ui/button';
 import { css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { reportAnalytics } from '../../utils/report-analytics';
-import {  useOfflineDownloadContext } from './DownloadContext';
+import { useOfflineDownloadContext } from './DownloadContext';
 
 const downloadIconStyling = css`
   width: 32px;
