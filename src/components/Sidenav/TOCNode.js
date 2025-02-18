@@ -34,6 +34,8 @@ const overwriteLinkStyle = css`
 const FormatTitle = styled.div`
   margin-left: var(--margin-left);
   scroll-margin-bottom: ${theme.size.xxlarge};
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const scrollBehavior = { block: 'nearest', behavior: 'smooth' };
