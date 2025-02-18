@@ -344,7 +344,9 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                     className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
                     key={'download-modal-link'}
                     glyph={<Icon glyph={'Download'} />}
-                  ></SideNavItem>
+                  >
+                    Download Documentation
+                  </SideNavItem>
                 )}
               </>
             )}
