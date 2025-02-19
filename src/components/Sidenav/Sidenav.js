@@ -22,7 +22,8 @@ import useViewport from '../../hooks/useViewport';
 import { HeaderContext } from '../Header/header-context';
 import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { DownloadButton } from '../OfflineDownloadModal';
-import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { useOfflineDownloadContext } from '../OfflineDownloadModal/DownloadContext';
+import { reportAnalytics } from '../../utils/report-analytics';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -181,6 +182,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
   const { bannerContent } = useContext(HeaderContext);
+  const { setModalOpen } = useOfflineDownloadContext();
   const { pathname } = useLocation();
 
   // CSS top property values for sticky side nav based on header height
@@ -310,7 +312,9 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                   }}
                 >
                   <span>{navTitle}</span>
-                  {process.env['GATSBY_OFFLINE_DOWNLOAD_UI'] && !isOfflineDocsBuild && <DownloadButton />}
+                  {process.env['GATSBY_OFFLINE_DOWNLOAD_UI'] === 'true' && process.env['OFFLINE_DOCS'] !== 'true' && (
+                    <DownloadButton />
+                  )}
                 </SideNavItem>
               </>
             )}
@@ -331,6 +335,18 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                     {title}
                   </SideNavItem>
                 ))}
+                {process.env['GATSBY_OFFLINE_DOWNLOAD_UI'] === 'true' && (
+                  <SideNavItem
+                    onClick={() => {
+                      reportAnalytics('Offline docs download button clicked');
+                      setModalOpen(true);
+                    }}
+                    className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
+                    glyph={<Icon glyph={'Download'} />}
+                  >
+                    Download Documentation
+                  </SideNavItem>
+                )}
               </>
             )}
           </LeafygreenSideNav>
