@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@leafygreen-ui/button';
+import Button, { Size } from '@leafygreen-ui/button';
 import { css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -25,7 +25,7 @@ const DownloadButton = () => {
 
   return (
     <Button
-      size={'small'}
+      size={Size.Small}
       className={downloadIconStyling}
       aria-label="Download Offline Docs"
       onClick={(e) => {
