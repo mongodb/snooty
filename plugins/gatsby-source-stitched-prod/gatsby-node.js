@@ -230,7 +230,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   sites.forEach((metadata) => {
     createNode({
       children: [],
-      id: createNodeId(`project-${metadata.project}`),
+      id: createNodeId(`metadata-${metadata.project}`),
       internal: {
         contentDigest: createContentDigest(metadata),
         type: 'SnootyMetadata',
