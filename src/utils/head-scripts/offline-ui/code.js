@@ -1,13 +1,15 @@
 function bindIOCode() {
   // NOTE: cannot insert string variables here. inserting this as a stringified script
   const onContentLoaded = () => {
+    // find all IO-code control buttons
     const controlBtns = document.querySelectorAll('.io-control-btn');
     for (const controlBtn of controlBtns) {
       const outputElm = controlBtn.parentElement?.parentElement?.querySelector('.io-control-output');
+      // on click of control button,
+      // hide output
+      // and toggle class for text+icon
       controlBtn.addEventListener('click', () => {
-        // hide output
         outputElm.toggleAttribute('hidden');
-        // toggle text
         controlBtn.classList.toggle('offline-hide-output');
       });
     }
@@ -18,10 +20,12 @@ function bindIOCode() {
 
 export function bindCodeCopy() {
   const onContentLoaded = () => {
+    // find all Code components
     const codeComponents = document.querySelectorAll('.code-component-container');
     for (const codeComponent of codeComponents) {
       const copyBtn = codeComponent.querySelector('[aria-label="Copy"]');
       const content = codeComponent.innerText;
+      // on click of custom copy button, copy to user navigator clipboard
       copyBtn?.addEventListener('click', () => {
         navigator?.clipboard?.writeText(content);
       });
