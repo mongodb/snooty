@@ -181,20 +181,12 @@ const isActiveTocNode = (currentUrl, slug, children) => {
   return false;
 };
 
-// This function helps us query data in the versions.toml
-const findVersionedData = (arr, searchText, key) => {
-  const object = arr.filter((obj) => obj[key] === searchText);
-  return object[0];
-};
-
 const replaceVersion = (url, currentVersion, versions, project) => {
-  if (!url) return;
-
   // Find the version data for the current content we are in
-  const content = findVersionedData(versions, project, 'repoName');
+  const content = versions.find((obj) => obj.repoName === project);
 
   // based on the activeVersion, find the correct verion
-  const ver = findVersionedData(content.version, currentVersion, 'name');
+  const ver = content.version.find((obj) => obj.name === currentVersion);
 
   // input the correct alias into the url
   const result = url?.replace(/\$\{([^}]+)\}/g, ver.urlSlug);
@@ -204,32 +196,40 @@ const replaceVersion = (url, currentVersion, versions, project) => {
 
 // Function that adds a prefix to all the urls
 const updateURLs = (tree, prefix, activeVersions, versions, project, snootyEnv) => {
-  tree?.map((item) => {
+  return tree?.map((item) => {
     // Getting the path prefix and editing it based on the environment so links work correctly
+    let updatedprefix = prefix;
     if (item.prefix) {
-      if (snootyEnv === 'dotcomprd') item.prefix = `/docs${item.prefix}`;
-      if (snootyEnv === 'dotcomstg') item.prefix = `/docs-qa${item.prefix}`;
+      item.prefix =
+        snootyEnv === 'dotcomprd'
+          ? `/docs${item.prefix}`
+          : snootyEnv === 'dotcomstg'
+          ? `/docs-qa${item.prefix}`
+          : item.prefix;
       const result = replaceVersion(item.prefix, activeVersions[project], versions, project);
-      prefix = result;
+      updatedprefix = result;
     }
 
-    // Edit the url with the correct path
-    if (item.url) item.url = prefix + item.url;
+    // Edit the url with the correct version path
+    const url = `${updatedprefix}${item.url ? item.url : ''}`;
 
-    if (item.items) updateURLs(item.items, prefix, activeVersions, versions, project, snootyEnv);
-    return item;
+    const items = updateURLs(item.items, updatedprefix, activeVersions, versions, project, snootyEnv);
+
+    return {
+      ...item,
+      url,
+      items,
+    };
   });
-  return tree;
 };
 
 export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
   const { project, snootyEnv } = useSnootyMetadata();
   const { activeVersions } = useContext(VersionContext);
-  const tree = structuredClone(unifiedTocTree);
 
   // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
-  updateURLs(tree, '', activeVersions, versionsData, project, snootyEnv);
+  const tree = updateURLs(unifiedTocTree, '', activeVersions, versionsData, project, snootyEnv);
   console.log('The edited toctree with prefixes is:', tree);
 
   const staticTocItems = useMemo(() => {

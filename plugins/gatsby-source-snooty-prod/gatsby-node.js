@@ -431,7 +431,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       tocTree: JSON!
     }
 
-    type versionsData implements Node @dontInfer {
+    type VersionsData implements Node @dontInfer {
       versionsList: JSON!
     }
 

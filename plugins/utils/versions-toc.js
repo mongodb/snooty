@@ -5,15 +5,15 @@ const createVersionNodes = async ({ createNode, createNodeId, createContentDiges
   // Getting data for all our versioned repos
 
   try {
-    const tomlContents = (await fs.readFile(`${process.cwd()}/toc_data/versions.toml`)).toString();
-    const repo = load(tomlContents);
+    const versionsList = (await fs.readFile(`${process.cwd()}/toc_data/versions.toml`)).toString();
+    const repo = load(versionsList);
 
     createNode({
       versionsList: repo,
       id: createNodeId('repo'),
       internal: {
         contentDigest: createContentDigest(repo),
-        type: 'versionsData',
+        type: 'VersionsData',
       },
       parent: null,
     });

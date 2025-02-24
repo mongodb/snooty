@@ -33,17 +33,12 @@ const getInitVersions = (branchListByProduct) => {
 };
 
 // Set the inital active version using versions.toml
-const getInitVersionsToml = (bigData) => {
-  const { project } = bigData;
-  let initState = {};
+const getInitVersionsToml = (project, versionsData) => {
   const localStorage = getLocalValue(STORAGE_KEY);
-  if (localStorage) {
-    initState[project] = localStorage[project];
-  } else {
-    initState = getDefaultActiveVersionsToml(bigData);
-  }
 
-  return initState;
+  if (localStorage) return localStorage[project];
+
+  return getDefaultActiveVersionsToml(project, versionsData);
 };
 
 const findBranchByGit = (gitBranchName, branches) => {
@@ -113,15 +108,10 @@ const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
   return versions;
 };
 
-const findVersionedData = (arr, searchText, key) => {
-  const object = arr.filter((obj) => obj[key] === searchText);
-  return object[0];
-};
-
 // If repo not saved in local storage use the first version in the array from versions.toml
 const getDefaultActiveVersionsToml = (project, versionsData) => {
   const initVersion = {};
-  const curVersionData = findVersionedData(versionsData, project, 'repoName');
+  const curVersionData = versionsData.find((obj) => obj.repoName === project);
   initVersion[project] = curVersionData.version[0].name;
   return initVersion;
 };
