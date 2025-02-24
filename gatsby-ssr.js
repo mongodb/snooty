@@ -8,8 +8,11 @@ import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang
 import { OFFLINE_HEAD_SCRIPTS } from './src/utils/head-scripts/offline-ui';
 import { isOfflineDocsBuild } from './src/utils/is-offline-docs-build';
 import { getHtmlLangFormat } from './src/utils/locale';
-// Wondering if this is causing webpack errors with unsafe execSync?
+// Wondering if this is causing webpack errors with unsafe execSync on npm run build?
+// Workaround may be to try to use pluginOptions
 // import { manifestMetadata } from './src/utils/site-metadata';
+import { fetchManifestMetadata } from './src/utils/setup/fetch-manifest-metadata';
+const manifestMetadata = fetchManifestMetadata();
 
 const props = {
   beep: 'boop',
@@ -24,6 +27,9 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }, pluginOpt
   if (isOfflineDocsBuild) {
     return setHeadComponents([...OFFLINE_HEAD_SCRIPTS]);
   }
+  const limitedTranslations = manifestMetadata?.['limited_translations'] || [];
+  limitedTranslations.push({ locale: 'foo', pages: [], callout: 'Foo' });
+  // const limitedTranslations = [];
   const headComponents = [
     // GTM Pathway
     <script
@@ -41,7 +47,8 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }, pluginOpt
         // Call function immediately on load
         // POC code - We could probably try to use metadata doc to create mapping of slugs and have the redirect logic 
         // use that?
-        __html: `!${redirectBasedOnLang}(${JSON.stringify(props)})`,
+        // __html: `!${redirectBasedOnLang}(${JSON.stringify(props)})`,
+        __html: `!${redirectBasedOnLang}(${JSON.stringify(limitedTranslations)})`,
       }}
     />,
     <link

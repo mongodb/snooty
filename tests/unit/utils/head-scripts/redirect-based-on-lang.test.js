@@ -12,14 +12,14 @@ const defineWindowLocation = (value = {}) => {
   });
 };
 
-const runFuncTest = (originalPathname, expectedPathname) => {
+const runFuncTest = (originalPathname, expectedPathname, props) => {
   defineWindowLocation({
     pathname: originalPathname,
     // Implementation detail: window.location.href should be defined since it won't be set if no redirect occurs
     href: originalPathname,
   });
 
-  redirectBasedOnLang();
+  redirectBasedOnLang(props);
   expect(window.location.href).toBe(expectedPathname);
 };
 
@@ -75,6 +75,11 @@ describe('redirectBasedOnLang', () => {
   it('does not redirect when no language matches', () => {
     mockedBrowserLangs.mockReturnValue(['aa-aa', 'bb-bb']);
     runFuncTest(DEFAULT_SLUG, DEFAULT_SLUG);
+  });
+
+  describe('limited translation', () => {
+    // it('redirects when on a page that is part of a pilot', () => {});
+    // it('redirects back to the English site when on a page that is not part of the pilot', () => {});
   });
 
   it('ignores region', () => {

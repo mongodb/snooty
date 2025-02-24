@@ -29,6 +29,7 @@ import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 import { InstruqtProvider } from './Instruqt/instruqt-context';
 import { SuspenseHelper } from './SuspenseHelper';
 import { TabProvider } from './Tabs/tab-context';
+import { useRedirectBasedOnLang } from '../hooks/use-redirect-based-on-lang';
 
 // lazy load the unified footer to improve page load speed
 const LazyFooter = lazy(() => import('./Footer'));
@@ -117,6 +118,7 @@ const DocumentBody = (props) => {
   const urlSlug = repoBranches.branches.find((br) => br.gitBranchName === branch)?.urlSlug ?? branch;
 
   const { project } = metadata;
+  useRedirectBasedOnLang();
 
   if (isBrowser && template !== 'feature-not-avail') {
     const breadcrumbInfo = {
