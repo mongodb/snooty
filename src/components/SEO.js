@@ -23,7 +23,7 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIn
       <title>
         {showDocsLandingTitle || (!siteTitle && !pageTitle)
           ? 'MongoDB Documentation'
-          : `${pageTitle ? `${pageTitle} - ` : ''}${siteTitle}`}
+          : `${pageTitle ? `${pageTitle} - ` : ''}${siteTitle} - MongoDB Docs`}
       </title>
       {hrefLangLinks}
       {/* Twitter Tags - default values, may be overwritten by Twitter component */}
