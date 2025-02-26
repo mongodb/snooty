@@ -211,7 +211,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
                 >
                   <div
-                    data-value={isOfflineDocsBuild ? tabId : null}
+                    data-tabid={isOfflineDocsBuild ? tabId : undefined}
                     className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}
                   >
                     {tab.children.map((child, i) => (

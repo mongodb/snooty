@@ -29,8 +29,8 @@ function bindTabUI() {
       // activte the tab panels
       const tabPanels = getTabPanels(snootyTab);
       for (const tabPanel of tabPanels) {
-        const tabId = tabPanel.querySelector(`[data-tabid=${CSS.escape(selectedTabId)}]`);
-        tabPanel.style.display = tabId === selectedTabId;
+        const tabElmWithSameId = tabPanel.querySelector(`[data-tabid=${CSS.escape(selectedTabId)}]`);
+        tabPanel.style.display = tabElmWithSameId ? 'block' : 'none';
       }
     }
   }
