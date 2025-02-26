@@ -118,7 +118,7 @@ const Code = ({
         />
       )}
       <div
-        className={isOfflineDocsBuild ? OFFLINE_CONTAINER_CLASSNAME : ''}
+        className={isOfflineDocsBuild ? OFFLINE_CONTAINER_CLASSNAME : undefined}
         css={css`
           ${baseCodeStyle}
 
