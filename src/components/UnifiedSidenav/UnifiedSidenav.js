@@ -186,10 +186,10 @@ const replaceVersion = ({ url, currentVersion, versionsData, project }) => {
   const content = versionsData.find((obj) => obj.repoName === project);
 
   // based on the activeVersion, find the correct verion
-  const ver = content.version.find((obj) => obj.name === currentVersion);
+  const ver = content?.version.find((obj) => obj.name === currentVersion);
 
   // input the correct alias into the url
-  const result = url?.replace(/\$\{([^}]+)\}/g, ver.urlSlug);
+  const result = url?.replace(/\$\{([^}]+)\}/g, ver?.urlSlug);
 
   return result;
 };
@@ -212,7 +212,8 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
         versionsData,
         project,
       });
-      updatedPrefix = result;
+      // For incase result is undefined
+      updatedPrefix = result ? result : prefix;
     }
 
     // Edit the url with the correct version path
