@@ -39,6 +39,8 @@ const outputButtonStyling = LeafyCss`
   }
 `;
 
+const getButtonText = (showOutput) => (showOutput ? 'HIDE OUTPUT' : 'VIEW OUTPUT');
+
 const outputContainerStyle = (showOutput) => LeafyCss`
   ${!showOutput && 'display: none;'}
 `;
@@ -53,7 +55,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
     initialOutputVisibility = !!children[1].options.visible;
   }
   const [showOutput, setShowOutput] = useState(() => (isOfflineDocsBuild ? true : initialOutputVisibility));
-  const buttonText = showOutput ? 'HIDE OUTPUT' : 'VIEW OUTPUT';
+  const buttonText = getButtonText(showOutput);
   const arrow = showOutput ? 'ChevronUp' : 'ChevronDown';
   const outputBorderRadius = !showOutput ? '12px' : '0px';
   const singleInputBorderRadius = onlyInputSpecified ? '12px' : '0px';
@@ -97,7 +99,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
               leftGlyph={<Icon glyph={arrow} fill="#FF0000" />}
             >
               <span>{buttonText}</span>
-              {isOfflineDocsBuild && <span>SHOW OUTPUT</span>}
+              {isOfflineDocsBuild && <span>{getButtonText(false)}</span>}
             </Button>
           </IOToggle>
           <div className={cx(outputContainerStyle(showOutput), isOfflineDocsBuild ? OFFLINE_OUTPUT_CLASSNAME : '')}>
