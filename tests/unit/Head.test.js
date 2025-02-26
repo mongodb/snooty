@@ -249,7 +249,7 @@ describe('Head', () => {
     it('correctly applies title, project name, and version', function () {
       const { container } = render(<Head pageContext={pageContext} data={mockData} />);
       const title = container.querySelector('title');
-      expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title} ${metadata.branch}`);
+      expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title} ${metadata.branch} - MongoDB Docs`);
     });
 
     it('defaults to project name and version if no page title', function () {
@@ -257,7 +257,7 @@ describe('Head', () => {
       useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
       const { container } = render(<Head pageContext={pageContext} data={mockData} />);
       const title = container.querySelector('title');
-      expect(title.innerHTML).toBe(`${metadata.title} ${metadata.branch}`);
+      expect(title.innerHTML).toBe(`${metadata.title} ${metadata.branch} - MongoDB Docs`);
     });
 
     it('only applies branch versions starting with a version number (v)', function () {
@@ -265,7 +265,7 @@ describe('Head', () => {
       useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
       const { container } = render(<Head pageContext={pageContext} data={mockData} />);
       const title = container.querySelector('title');
-      expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title}`);
+      expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title} - MongoDB Docs`);
     });
 
     // highly not likely to be missing project, title, and version
