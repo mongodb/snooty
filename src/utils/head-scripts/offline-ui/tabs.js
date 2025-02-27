@@ -6,11 +6,11 @@
 
 function bindTabUI() {
   function getTabPanels(snootyTab) {
-    return snootyTab.querySelectorAll(`.lg-ui-tab-panels-0000 > div > [role=tabpanel]`);
+    return snootyTab.querySelectorAll(`[class^="lg-ui-tab-panels"] > div > [role=tabpanel]`);
   }
 
   function getTabButtons(snootyTab) {
-    return snootyTab.querySelectorAll(`.lg-ui-tab-list-0000 > [role=tab]`);
+    return snootyTab.querySelectorAll(`.[class^="lg-ui-tab-list"] > [role=tab]`);
   }
 
   function handleButtonClick(tabButton, parentSnootyTab) {
@@ -26,7 +26,7 @@ function bindTabUI() {
         tabButton.setAttribute('aria-selected', tabButton.dataset.tabid === selectedTabId);
       }
 
-      // activte the tab panels
+      // activate the tab panels
       const tabPanels = getTabPanels(snootyTab);
       for (const tabPanel of tabPanels) {
         const tabElmWithSameId = tabPanel.querySelector(`[data-tabid=${CSS.escape(selectedTabId)}]`);
