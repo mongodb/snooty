@@ -22,6 +22,7 @@ const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
 const { createTocNodes } = require('../utils/unified-toc.js');
+const { createVersionNodes } = require('../utils/versions-toc.js');
 const assets = new Map();
 const projectComponents = new Set();
 
@@ -198,6 +199,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
   // create TOC nodes
   await createTocNodes({ createNode, createNodeId, createContentDigest });
+
+  await createVersionNodes({ createNode, createNodeId, createContentDigest });
 
   if (process.env['OFFLINE_DOCS'] !== 'true') {
     const umbrellaProduct = await db.realmInterface.getMetadata(
@@ -427,5 +430,10 @@ exports.createSchemaCustomization = ({ actions }) => {
     type TOC implements Node @dontInfer {
       tocTree: JSON!
     }
+
+    type VersionsData implements Node @dontInfer {
+      versionsList: JSON!
+    }
+
   `);
 };
