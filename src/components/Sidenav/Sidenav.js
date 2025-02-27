@@ -1,14 +1,15 @@
 import React, { useCallback, useContext, useMemo, useEffect } from 'react';
+import { navigate } from 'gatsby';
 import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
+import Box from '@leafygreen-ui/box';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useViewportSize } from '@leafygreen-ui/hooks';
 import Icon from '@leafygreen-ui/icon';
 import { SideNav as LeafygreenSideNav, SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
 import { useLocation } from '@gatsbyjs/reach-router';
-import Link from '../Link';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -20,6 +21,9 @@ import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import useViewport from '../../hooks/useViewport';
 import { HeaderContext } from '../Header/header-context';
 import { SIDE_NAV_CONTAINER_ID } from '../../constants';
+import { DownloadButton } from '../OfflineDownloadModal';
+import { useOfflineDownloadContext } from '../OfflineDownloadModal/DownloadContext';
+import { reportAnalytics } from '../../utils/report-analytics';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -178,6 +182,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
   const viewportSize = useViewportSize();
   const isMobile = viewportSize?.width <= theme.breakpoints.large;
   const { bannerContent } = useContext(HeaderContext);
+  const { setModalOpen } = useOfflineDownloadContext();
   const { pathname } = useLocation();
 
   // CSS top property values for sticky side nav based on header height
@@ -300,12 +305,16 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
               <>
                 {isGuidesTemplate && <StyledChapterNumberLabel number={guidesChapterNumber} />}
                 <SideNavItem
+                  as={Box}
                   className={cx(titleStyle, sideNavItemBasePadding)}
-                  as={Link}
-                  to={isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/'}
-                  hideExternalIcon={true}
+                  onClick={() => {
+                    navigate(isGuidesTemplate ? slug : activeToc.url || activeToc.slug || '/');
+                  }}
                 >
-                  {navTitle}
+                  <span>{navTitle}</span>
+                  {process.env['GATSBY_OFFLINE_DOWNLOAD_UI'] === 'true' && process.env['OFFLINE_DOCS'] !== 'true' && (
+                    <DownloadButton />
+                  )}
                 </SideNavItem>
               </>
             )}
@@ -326,6 +335,18 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                     {title}
                   </SideNavItem>
                 ))}
+                {process.env['GATSBY_OFFLINE_DOWNLOAD_UI'] === 'true' && (
+                  <SideNavItem
+                    onClick={() => {
+                      reportAnalytics('Offline docs download button clicked');
+                      setModalOpen(true);
+                    }}
+                    className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
+                    glyph={<Icon glyph={'Download'} />}
+                  >
+                    Download Documentation
+                  </SideNavItem>
+                )}
               </>
             )}
           </LeafygreenSideNav>

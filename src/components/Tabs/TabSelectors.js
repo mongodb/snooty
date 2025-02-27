@@ -18,7 +18,12 @@ const selectStyle = css`
 
   @media ${theme.screenSize.smallAndUp} {
     /* Min width of right panel */
-    max-width: 180px;
+    max-width: 140px;
+  }
+
+  @media ${theme.screenSize.upToLarge} {
+    /* Supports the alignment when on tablet or mobile */
+    max-width: 300px;
   }
 `;
 
