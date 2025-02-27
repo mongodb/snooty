@@ -14,6 +14,8 @@ import { getLanguage } from '../../utils/get-language';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { STRUCTURED_DATA_CLASSNAME, SoftwareSourceCodeSd } from '../../utils/structured-data';
 import { usePageContext } from '../../context/page-context';
+import { OFFLINE_CONTAINER_CLASSNAME } from '../../utils/head-scripts/offline-ui/code';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { baseCodeStyle, borderCodeStyle, lgStyles } from './styles/codeStyle';
 import { CodeContext } from './code-context';
 
@@ -63,8 +65,19 @@ const Code = ({
   const captionBorderRadius = captionSpecified ? '0px' : '12px';
 
   let customActionButtonList = [];
+
+  if (isOfflineDocsBuild) {
+    // LG/button renders copy button on state change. need to add custom button
+    // https://github.com/mongodb/leafygreen-ui/blob/%40leafygreen-ui/code%4014.3.3/packages/code/src/Code/Code.tsx#L78
+
+    customActionButtonList.push(
+      <IconButton aria-label="Copy">
+        <Icon glyph={'Copy'} />
+      </IconButton>
+    );
+  }
   if (sourceSpecified) {
-    customActionButtonList = [
+    customActionButtonList.push([
       <IconButton aria-label="View full source in new tab" href={source}>
         <Tooltip
           triggerEvent="hover"
@@ -81,7 +94,7 @@ const Code = ({
           View full source
         </Tooltip>
       </IconButton>,
-    ];
+    ]);
   }
 
   const reportCodeCopied = useCallback(() => {
@@ -105,6 +118,7 @@ const Code = ({
         />
       )}
       <div
+        className={isOfflineDocsBuild ? OFFLINE_CONTAINER_CLASSNAME : undefined}
         css={css`
           ${baseCodeStyle}
 
@@ -166,7 +180,7 @@ const Code = ({
           }}
           onCopy={reportCodeCopied}
           showLineNumbers={linenos}
-          showCustomActionButtons={sourceSpecified}
+          showCustomActionButtons={customActionButtonList.length > 0}
           customActionButtons={customActionButtonList}
           lineNumberStart={lineno_start}
         >
