@@ -82,6 +82,7 @@ import RoleLinkNewTab from './Roles/LinkNewTab';
 import RoleRed from './Roles/Red';
 import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
+import SeeAlso from './SeeAlso';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -207,8 +208,12 @@ function getComponentType(type, name) {
   }
 
   // Various admonition types are all handled by the Admonition component
-  if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
-    ComponentType = componentMap.admonition;
+  if (DEPRECATED_ADMONITIONS.has(name)) {
+    if (name === 'seealso') {
+      ComponentType = SeeAlso;
+    } else if (name in admonitionMap) {
+      ComponentType = componentMap.admonition;
+    }
   }
 
   if (LAZY_COMPONENTS[lookup]) {
