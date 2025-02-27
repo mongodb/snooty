@@ -184,6 +184,7 @@ const componentMap = {
   rubric: Rubric,
   'search-results': SearchResults,
   section: Section,
+  seealso: SeeAlso,
   sharedinclude: Include,
   strong: Strong,
   substitution_reference: SubstitutionReference,
@@ -208,12 +209,8 @@ function getComponentType(type, name) {
   }
 
   // Various admonition types are all handled by the Admonition component
-  if (DEPRECATED_ADMONITIONS.has(name)) {
-    if (name === 'seealso') {
-      ComponentType = SeeAlso;
-    } else if (name in admonitionMap) {
-      ComponentType = componentMap.admonition;
-    }
+  if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
+    ComponentType = componentMap.admonition;
   }
 
   if (LAZY_COMPONENTS[lookup]) {

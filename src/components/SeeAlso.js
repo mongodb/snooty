@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
@@ -15,16 +15,34 @@ const labelStyle = css`
   margin-bottom: 4px;
 `;
 
+/**
+ * Checks if all child content are unordered list nodes (no extra padding required)
+ * @param {object[]} children
+ * @returns {boolean}
+ */
+const hasOnlyUnorderedLists = (children) => {
+  const isListNode = (nodeData) => {
+    if (nodeData.type === 'list' && nodeData.enumtype === 'unordered') {
+      return true;
+    }
+    return false;
+  };
+
+  return children.every((child) => isListNode(child));
+};
+
 const SeeAlso = ({ nodeData: { argument, children }, ...rest }) => {
   let title = getPlaintext(argument);
   if (title.length) {
     title = ` ${title}`;
   }
 
+  const onlyUnorderedLists = useMemo(() => hasOnlyUnorderedLists(children), [children]);
+
   return (
     <section>
       <Body className={cx(labelStyle)}>See also:{title}</Body>
-      <div className={cx(indentedContainerStyle)}>
+      <div className={cx(!onlyUnorderedLists && indentedContainerStyle)}>
         {children.map((child, i) => (
           <ComponentFactory {...rest} key={i} nodeData={child} />
         ))}
