@@ -6,11 +6,11 @@
 
 function bindTabUI() {
   function getTabPanels(snootyTab) {
-    return snootyTab.querySelectorAll(`[class^="lg-ui-tab-panels"] > div > [role=tabpanel]`);
+    return snootyTab.querySelectorAll(`[class*="lg-ui-tab-panels"] > div > [role=tabpanel]`);
   }
 
   function getTabButtons(snootyTab) {
-    return snootyTab.querySelectorAll(`[class^="lg-ui-tab-list"] > [role=tab]`);
+    return snootyTab.querySelectorAll(`[class*="lg-ui-tab-list"] > [role=tab]`);
   }
 
   function handleButtonClick(tabButton, parentSnootyTab) {
