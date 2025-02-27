@@ -770,7 +770,9 @@ exports[`CodeIO renders correctly 1`] = `
               fill-rule="evenodd"
             />
           </svg>
-          HIDE OUTPUT
+          <span>
+            HIDE OUTPUT
+          </span>
         </div>
       </button>
     </div>
