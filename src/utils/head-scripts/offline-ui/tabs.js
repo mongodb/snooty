@@ -5,33 +5,55 @@
  */
 
 function bindTabUI() {
+  function getTabPanels(snootyTab) {
+    return snootyTab.querySelectorAll(`[class*="lg-ui-tab-panels"] > div > [role=tabpanel]`);
+  }
+
+  function getTabButtons(snootyTab) {
+    return snootyTab.querySelectorAll(`[class*="lg-ui-tab-list"] > [role=tab]`);
+  }
+
+  function handleButtonClick(tabButton, parentSnootyTab) {
+    // find snooty tabs with matching class
+    const tabsetsName = parentSnootyTab.dataset.tabids;
+    const selectedTabId = tabButton.dataset.tabid;
+    const snootyTabsWithSameTabSets = document.querySelectorAll(`[data-tabids=${CSS.escape(tabsetsName)}]`);
+
+    for (const snootyTab of snootyTabsWithSameTabSets) {
+      // activate the buttons
+      const tabButtons = getTabButtons(snootyTab);
+      for (const tabButton of tabButtons) {
+        tabButton.setAttribute('aria-selected', tabButton.dataset.tabid === selectedTabId);
+      }
+
+      // activate the tab panels
+      const tabPanels = getTabPanels(snootyTab);
+      for (const tabPanel of tabPanels) {
+        const tabElmWithSameId = tabPanel.querySelector(`[data-tabid=${CSS.escape(selectedTabId)}]`);
+        tabPanel.style.display = tabElmWithSameId ? 'block' : 'none';
+      }
+    }
+  }
   const onContentLoaded = () => {
     try {
       // process all snooty tab components
       const snootyTabComponents = document.querySelectorAll(`.offline-tabs`);
       for (const snootyTab of snootyTabComponents) {
-        const tabId = snootyTab['id'];
-        const tabPanels = document.querySelectorAll(`#${tabId} > .lg-ui-tab-panels-0000 > div > [role=tabpanel]`);
+        const tabPanels = getTabPanels(snootyTab);
+
+        // set the first tab as visible
         if (tabPanels.length) {
           tabPanels[0].style.display = 'block';
         }
-        // adds an event listener to each tab button of snooty tab component to show the
-        // corresponding tab panel of the same index
-        const tabButtons = snootyTab.querySelectorAll(
-          `#${tabId} > #${tabId}-undefined .lg-ui-tab-list-0000 > [role=tab]`
-        );
+
+        const tabButtons = getTabButtons(snootyTab);
+        // set the first button as selected
         if (tabButtons.length) {
           tabButtons[0].setAttribute('aria-selected', true);
         }
-        tabButtons.forEach((tabButton, tabButtonIdx) => {
-          tabButton.addEventListener('click', () => {
-            tabPanels.forEach((tabPanelDom, tabPanelIdx) => {
-              tabPanelDom.style.display = tabButtonIdx === tabPanelIdx ? 'block' : 'none';
-            });
-            tabButtons.forEach((tb, tbIdx) => {
-              tb.setAttribute('aria-selected', tbIdx === tabButtonIdx);
-            });
-          });
+        // adds an event listener to each tab button of snooty tab component across the page
+        tabButtons.forEach((tabButton) => {
+          tabButton.addEventListener('click', () => handleButtonClick(tabButton, snootyTab));
         });
       }
     } catch (e) {
@@ -43,11 +65,5 @@ function bindTabUI() {
 }
 
 export default bindTabUI;
-
-// return an id to get for tabs
-// replace all non letter/number characters with dash
-export function getOfflineId(tabsetName) {
-  return tabsetName.replace(/[^a-zA-Z0-9]/g, '-');
-}
 
 export const TABS_CLASSNAME = `offline-tabs`;

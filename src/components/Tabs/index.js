@@ -12,7 +12,7 @@ import { getNestedValue } from '../../utils/get-nested-value';
 import { isBrowser } from '../../utils/is-browser';
 import { getLocalValue } from '../../utils/browser-storage';
 import { getPlaintext } from '../../utils/get-plaintext';
-import { TABS_CLASSNAME, getOfflineId } from '../../utils/head-scripts/offline-ui/tabs';
+import { TABS_CLASSNAME } from '../../utils/head-scripts/offline-ui/tabs';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { TabContext } from './tab-context';
 
@@ -190,7 +190,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
           )}
           aria-label={`Tabs to describe usage of ${tabsetName}`}
           selected={activeTab}
-          id={isOfflineDocsBuild ? `${TABS_CLASSNAME}-${getOfflineId(tabsetName)}` : undefined}
+          data-tabids={isOfflineDocsBuild ? `${tabIds.join('/')}` : undefined}
           setSelected={handleClick}
           forceRenderAllTabPanels={true}
         >
@@ -206,12 +206,12 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab className={isOfflineDocsBuild && offlineStyling} key={tabId} name={tabTitle}>
+              <LeafyTab data-tabid={tabId} className={isOfflineDocsBuild && offlineStyling} key={tabId} name={tabTitle}>
                 <HeadingContextProvider
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
                 >
                   <div
-                    data-value={isOfflineDocsBuild ? tabId : null}
+                    data-tabid={isOfflineDocsBuild ? tabId : undefined}
                     className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}
                   >
                     {tab.children.map((child, i) => (
