@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
 import { getPlaintext } from '../utils/get-plaintext';
+import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
 
 const indentedContainerStyle = css`
-  padding-left: 24px;
+  padding-left: ${theme.size.medium};
 `;
 
 const labelStyle = css`
-  font-size: 16px;
+  font-size: ${theme.fontSize.default};
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: ${theme.size.tiny};
 `;
 
 /**
@@ -21,27 +22,17 @@ const labelStyle = css`
  * @returns {boolean}
  */
 const hasOnlyUnorderedLists = (children) => {
-  const isListNode = (nodeData) => {
-    if (nodeData.type === 'list' && nodeData.enumtype === 'unordered') {
-      return true;
-    }
-    return false;
-  };
-
+  const isListNode = (nodeData) => nodeData.type === 'list' && nodeData.enumtype === 'unordered';
   return children.every((child) => isListNode(child));
 };
 
 const SeeAlso = ({ nodeData: { argument, children }, ...rest }) => {
-  let title = getPlaintext(argument);
-  if (title.length) {
-    title = ` ${title}`;
-  }
-
+  const title = getPlaintext(argument);
   const onlyUnorderedLists = useMemo(() => hasOnlyUnorderedLists(children), [children]);
 
   return (
     <section>
-      <Body className={cx(labelStyle)}>See also:{title}</Body>
+      <Body className={cx(labelStyle)}>{`See also: ${title}`}</Body>
       <div className={cx(!onlyUnorderedLists && indentedContainerStyle)}>
         {children.map((child, i) => (
           <ComponentFactory {...rest} key={i} nodeData={child} />
