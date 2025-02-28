@@ -7,7 +7,6 @@ import ComponentFactory from './ComponentFactory';
 import { getPlaintext } from '../utils/get-plaintext';
 import { AdmonitionNode, Node } from '../types/ast';
 
-
 const indentedContainerStyle = css`
   padding-left: ${theme.size.medium};
 `;
