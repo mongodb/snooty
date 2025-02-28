@@ -18,5 +18,3 @@ export const getPlaintext = (nodeArray: Node[]) => {
 
   return nodeArray && nodeArray.length > 0 ? nodeArray.reduce(extractText, '') : '';
 };
-
-// module.exports = { getPlaintext };
