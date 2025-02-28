@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
-import { getPlaintext } from '../utils/get-plaintext';
+
 import { theme } from '../theme/docsTheme';
 import ComponentFactory from './ComponentFactory';
+import { getPlaintext } from '../utils/get-plaintext';
+import { AdmonitionNode, Node } from '../types/ast';
+
 
 const indentedContainerStyle = css`
   padding-left: ${theme.size.medium};
@@ -16,17 +18,17 @@ const labelStyle = css`
   margin-bottom: ${theme.size.tiny};
 `;
 
-/**
- * Checks if all child content are unordered list nodes (no extra padding required)
- * @param {object[]} children
- * @returns {boolean}
- */
-const hasOnlyUnorderedLists = (children) => {
-  const isListNode = (nodeData) => nodeData.type === 'list' && nodeData.enumtype === 'unordered';
+// Checks if all child content are unordered list nodes (no extra padding required)
+const hasOnlyUnorderedLists = (children: Node[]): boolean => {
+  const isListNode = (nodeData: Node) => nodeData.type === 'list' && 'enumtype' in nodeData && nodeData.enumtype === 'unordered';
   return children.every((child) => isListNode(child));
 };
 
-const SeeAlso = ({ nodeData: { argument, children }, ...rest }) => {
+interface SeeAlsoProps {
+  nodeData: AdmonitionNode;
+}
+
+const SeeAlso = ({ nodeData: { argument, children }, ...rest }: SeeAlsoProps) => {
   const title = getPlaintext(argument);
   const onlyUnorderedLists = useMemo(() => hasOnlyUnorderedLists(children), [children]);
 
@@ -40,13 +42,6 @@ const SeeAlso = ({ nodeData: { argument, children }, ...rest }) => {
       </div>
     </section>
   );
-};
-
-SeeAlso.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object),
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
 };
 
 export default SeeAlso;
