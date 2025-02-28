@@ -3,9 +3,9 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
 
 import { theme } from '../theme/docsTheme';
-import ComponentFactory from './ComponentFactory';
 import { getPlaintext } from '../utils/get-plaintext';
 import { AdmonitionNode, Node } from '../types/ast';
+import ComponentFactory from './ComponentFactory';
 
 const indentedContainerStyle = css`
   padding-left: ${theme.size.medium};
