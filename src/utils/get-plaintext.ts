@@ -3,8 +3,8 @@
  * Returns plaintext string indicating the nested title.
  */
 
-import { Node } from "../types/ast";
-import { isParentNode, isTextNode } from "../types/ast-utils";
+import { Node } from '../types/ast';
+import { isParentNode, isTextNode } from '../types/ast-utils';
 
 export const getPlaintext = (nodeArray: Node[]) => {
   const extractText = (title: string, node: Node): string => {

@@ -19,7 +19,8 @@ const labelStyle = css`
 
 // Checks if all child content are unordered list nodes (no extra padding required)
 const hasOnlyUnorderedLists = (children: Node[]): boolean => {
-  const isListNode = (nodeData: Node) => nodeData.type === 'list' && 'enumtype' in nodeData && nodeData.enumtype === 'unordered';
+  const isListNode = (nodeData: Node) =>
+    nodeData.type === 'list' && 'enumtype' in nodeData && nodeData.enumtype === 'unordered';
   return children.every((child) => isListNode(child));
 };
 
