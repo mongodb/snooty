@@ -108,6 +108,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
             setIsOpen(!isOpen);
           }}
           to={isOfflineDocsBuild ? target : null}
+          data-position={'tocnode'}
         >
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
           {formattedTitle}
@@ -128,6 +129,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
           setIsOpen(!isOpen);
         }}
         hideExternalIcon={true}
+        data-position={'tocnode'}
       >
         {hasChildren && (
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
