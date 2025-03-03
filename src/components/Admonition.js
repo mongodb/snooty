@@ -15,7 +15,6 @@ export const admonitionMap = {
   note: Variant.Note,
   tip: Variant.Tip,
   see: Variant.Tip,
-  seealso: Variant.Tip,
   warning: Variant.Warning,
 };
 
@@ -120,8 +119,6 @@ const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
   let title = getPlaintext(argument);
   if (name === 'see') {
     title = `See: ${title}`;
-  } else if (name === 'seealso') {
-    title = `See also: ${title}`;
   }
 
   return (
