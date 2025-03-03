@@ -31,20 +31,17 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
 
 export const sideNavItemUniTOCStyling = ({ level, isTab = false }) => css`
   align-items: flex-start !important;
+  // TODO: fix this style when design is finalized (DOP-5375)
   font-size: ${isTab ? theme.fontSize.default : theme.fontSize.small};
   text-transform: none;
   line-height: 20px !important;
   padding-left: calc(16px + ${(level - 1) * 25}px);
 `;
 
-export const sideNavGroupTOCStyling = ({ level, isTab }) => css`
+export const sideNavGroupTOCStyling = () => css`
   align-items: flex-start !important;
   text-transform: none;
   line-height: 20px !important;
-
-  div {
-    font-size: ${isTab ? '15px' : theme.fontSize.small};
-  }
 
   // overwrite LG link underlines
   // @leafygreen-ui/typography v13.0.0

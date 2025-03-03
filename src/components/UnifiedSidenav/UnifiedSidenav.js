@@ -75,7 +75,6 @@ const sideNavStyle = ({ hideMobile }) => LeafyCSS`
   }
   
   padding: 0px;
-  background-color: purple;
   div > ul {
     display: flex;
     flex-direction: row;
@@ -119,7 +118,7 @@ function isSelectedTab(url, slug) {
   return isSelectedTocNode(url, slug);
 }
 
-function CollapsibleNavItem({ items, label, url, slug, handleClick, level }) {
+function CollapsibleNavItem({ items, label, url, slug, level }) {
   const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
   const chevronType = isOpen ? 'ChevronDown' : 'ChevronRight';
 
@@ -128,7 +127,7 @@ function CollapsibleNavItem({ items, label, url, slug, handleClick, level }) {
     setIsOpen(!isOpen);
   };
 
-  const handleClick2 = () => {
+  const handleClick = () => {
     // Allows the collapsed item if the chevron was selected first before
     if (!(url !== `/${slug}` && isOpen)) {
       setIsOpen(!isOpen);
@@ -142,14 +141,13 @@ function CollapsibleNavItem({ items, label, url, slug, handleClick, level }) {
         to={url}
         active={isSelectedTab(url, slug)}
         className={cx(sideNavItemUniTOCStyling({ level }), overwriteLinkStyle)}
-        onClick={handleClick2}
+        onClick={handleClick}
         hideExternalIcon={true}
       >
         <FormatTitle>{label}</FormatTitle>
         <Icon className={cx(chevronStyle)} glyph={chevronType} fill={palette.gray.base} onClick={onChevronClick} />
       </SideNavItem>
-      {isOpen &&
-        items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} slug={slug} handleClick={handleClick} />)}
+      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} slug={slug} />)}
     </>
   );
 }
@@ -192,7 +190,7 @@ function UnifiedTocNavItem({
   // groups are for adding a static header, these can also be collapsible
   if (group) {
     return (
-      <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavGroupTOCStyling({ level, isTab }))}>
+      <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavGroupTOCStyling())}>
         {items?.map((tocItem) => (
           <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
         ))}
