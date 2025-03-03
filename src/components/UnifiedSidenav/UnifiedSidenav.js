@@ -5,6 +5,7 @@ import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { useViewportSize } from '@leafygreen-ui/hooks';
+import { useLocation } from '@gatsbyjs/reach-router';
 import Link from '../Link';
 import { sideNavItemUniTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
@@ -118,7 +119,7 @@ function isSelectedTab(url, slug) {
   return isSelectedTocNode(url, slug);
 }
 
-function CollapsibleNavItem({ items, label, url, slug, level }) {
+function CollapsibleNavItem({ items, label, url, slug, handleClick, level }) {
   const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
   const chevronType = isOpen ? 'ChevronDown' : 'ChevronRight';
 
@@ -127,8 +128,9 @@ function CollapsibleNavItem({ items, label, url, slug, level }) {
     setIsOpen(!isOpen);
   };
 
-  const handleClick = () => {
+  const handleClick2 = () => {
     // Allows the collapsed item if the chevron was selected first before
+    handleClick();
     if (!(url !== `/${slug}` && isOpen)) {
       setIsOpen(!isOpen);
     }
@@ -141,13 +143,14 @@ function CollapsibleNavItem({ items, label, url, slug, level }) {
         to={url}
         active={isSelectedTab(url, slug)}
         className={cx(sideNavItemUniTOCStyling({ level }), overwriteLinkStyle)}
-        onClick={handleClick}
+        onClick={handleClick2}
         hideExternalIcon={true}
       >
         <FormatTitle>{label}</FormatTitle>
         <Icon className={cx(chevronStyle)} glyph={chevronType} fill={palette.gray.base} onClick={onChevronClick} />
       </SideNavItem>
-      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} slug={slug} />)}
+      {isOpen &&
+        items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} slug={slug} handleClick={handleClick} />)}
     </>
   );
 }
@@ -226,7 +229,7 @@ function UnifiedTocNavItem({
         url={url}
         level={level}
         slug={slug}
-        onClick={handleClick}
+        handleClick={handleClick}
         className={cx(sideNavItemUniTOCStyling({ level }))}
       />
     );
@@ -340,6 +343,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const { isTabletOrMobile } = useScreenSize();
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
+  const { pathname } = useLocation();
 
   // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
   const tree = updateURLs({ tree: unifiedTocTree, prefix: '', activeVersions, versionsData, project, snootyEnv });
@@ -372,7 +376,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
   useEffect(() => {
     setHideMobile(true);
-  }, [setHideMobile]);
+  }, [pathname, setHideMobile]);
 
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
