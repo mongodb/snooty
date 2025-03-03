@@ -71,7 +71,8 @@ const cellStyling = css`
   overflow: visible;
   
   > div {
-    flow-direction: row;
+    flex-direction: column;
+    align-items: flex-start;
     max-height: unset;
     min-height: unset;
   }
