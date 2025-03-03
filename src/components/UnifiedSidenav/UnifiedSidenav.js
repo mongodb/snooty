@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo, useContext, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { useViewportSize } from '@leafygreen-ui/hooks';
-// import { useLocation } from '@gatsbyjs/reach-router';
+import { useLocation } from '@gatsbyjs/reach-router';
 import Link from '../Link';
 import { sideNavItemUniTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
@@ -130,7 +130,6 @@ function CollapsibleNavItem({ items, label, url, slug, handleClick, level }) {
 
   const handleClick2 = () => {
     // Allows the collapsed item if the chevron was selected first before
-    handleClick();
     if (!(url !== `/${slug}` && isOpen)) {
       setIsOpen(!isOpen);
     }
@@ -165,7 +164,6 @@ function UnifiedTocNavItem({
   slug,
   activeTabUrl,
   isTabletOrMobile,
-  handleClick,
   level,
 }) {
   // these are the tab items that we dont need to show in the second pane but need to go through recursively
@@ -176,13 +174,7 @@ function UnifiedTocNavItem({
           <StaticNavItem label={label} url={url} slug={slug} isTab={isTab} items={items} />
           {url === activeTabUrl &&
             items?.map((tocItem) => (
-              <UnifiedTocNavItem
-                {...tocItem}
-                level={level}
-                slug={slug}
-                isTabletOrMobile={isTabletOrMobile}
-                handleClick={handleClick}
-              />
+              <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
             ))}
         </>
       );
@@ -191,13 +183,7 @@ function UnifiedTocNavItem({
     return (
       <>
         {items?.map((tocItem) => (
-          <UnifiedTocNavItem
-            {...tocItem}
-            level={level}
-            slug={slug}
-            isTabletOrMobile={isTabletOrMobile}
-            handleClick={handleClick}
-          />
+          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
         ))}
       </>
     );
@@ -208,13 +194,7 @@ function UnifiedTocNavItem({
     return (
       <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavGroupTOCStyling({ level, isTab }))}>
         {items?.map((tocItem) => (
-          <UnifiedTocNavItem
-            {...tocItem}
-            level={level}
-            slug={slug}
-            isTabletOrMobile={isTabletOrMobile}
-            handleClick={handleClick}
-          />
+          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
         ))}
       </SideNavGroup>
     );
@@ -229,7 +209,6 @@ function UnifiedTocNavItem({
         url={url}
         level={level}
         slug={slug}
-        handleClick={handleClick}
         className={cx(sideNavItemUniTOCStyling({ level }))}
       />
     );
@@ -241,7 +220,6 @@ function UnifiedTocNavItem({
       aria-label={label}
       as={Link}
       to={url}
-      onClick={handleClick}
       className={cx(sideNavItemUniTOCStyling({ level }))}
     >
       {label}
@@ -343,7 +321,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const { isTabletOrMobile } = useScreenSize();
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
-  // const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
   // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
   const tree = updateURLs({ tree: unifiedTocTree, prefix: '', activeVersions, versionsData, project, snootyEnv });
@@ -369,14 +347,10 @@ export function UnifiedSidenav({ slug, versionsData }) {
     });
   }, [slug, staticTocItems]);
 
-  const hideMobileSidenav = useCallback(() => {
-    setHideMobile(true);
-  }, [setHideMobile]);
-
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
-  // useEffect(() => {
-  //   setHideMobile(false);
-  // }, [pathname, setHideMobile]);
+  useEffect(() => {
+    setHideMobile(true);
+  }, [pathname, setHideMobile]);
 
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
@@ -410,7 +384,6 @@ export function UnifiedSidenav({ slug, versionsData }) {
                       group={true}
                       activeTabUrl={activeTabUrl}
                       isTabletOrMobile={isTabletOrMobile}
-                      handleClick={() => hideMobileSidenav()}
                     />
                   );
                 })
@@ -424,14 +397,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
               {unifiedTocTree.map((navItems) => {
                 if (navItems.url === activeTabUrl) {
                   return (
-                    <UnifiedTocNavItem
-                      {...navItems}
-                      level={1}
-                      slug={slug}
-                      group={true}
-                      activeTabUrl={activeTabUrl}
-                      handleClick={() => hideMobileSidenav()}
-                    />
+                    <UnifiedTocNavItem {...navItems} level={1} slug={slug} group={true} activeTabUrl={activeTabUrl} />
                   );
                 }
                 return null;
