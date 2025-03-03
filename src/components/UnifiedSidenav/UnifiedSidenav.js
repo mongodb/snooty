@@ -5,7 +5,7 @@ import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { useViewportSize } from '@leafygreen-ui/hooks';
-import { useLocation } from '@gatsbyjs/reach-router';
+// import { useLocation } from '@gatsbyjs/reach-router';
 import Link from '../Link';
 import { sideNavItemUniTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
@@ -173,7 +173,7 @@ function UnifiedTocNavItem({
     if (isTabletOrMobile) {
       return (
         <>
-          <StaticNavItem label={label} url={url} slug={slug} isTab={isTab} />
+          <StaticNavItem label={label} url={url} slug={slug} isTab={isTab} items={items} />
           {url === activeTabUrl &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
@@ -249,11 +249,11 @@ function UnifiedTocNavItem({
   );
 }
 
-function StaticNavItem({ label, url, glyph, slug, isTab, level = 1 }) {
+function StaticNavItem({ label, url, glyph, slug, items, isTab, level = 1 }) {
   return (
     <SideNavItem
-      active={isSelectedTab(url, slug)}
       // glyph={<Icon glyph={glyph} />}
+      active={isActiveTocNode(slug, url, items)}
       aria-label={label}
       as={Link}
       to={url}
@@ -343,7 +343,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const { isTabletOrMobile } = useScreenSize();
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
   // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
   const tree = updateURLs({ tree: unifiedTocTree, prefix: '', activeVersions, versionsData, project, snootyEnv });
@@ -374,9 +374,9 @@ export function UnifiedSidenav({ slug, versionsData }) {
   }, [setHideMobile]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
-  useEffect(() => {
-    setHideMobile(true);
-  }, [pathname, setHideMobile]);
+  // useEffect(() => {
+  //   setHideMobile(false);
+  // }, [pathname, setHideMobile]);
 
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
