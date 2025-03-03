@@ -27,7 +27,7 @@ const defaultValues: {
 
 const OfflineDownloadContext = createContext(defaultValues);
 
-function lintVersionLabel (versionLabel: string) {
+function lintVersionLabel(versionLabel: string) {
   return versionLabel.toLowerCase();
 }
 

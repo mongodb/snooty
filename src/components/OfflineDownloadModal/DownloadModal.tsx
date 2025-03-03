@@ -69,7 +69,7 @@ const footerStyling = css`
 const cellStyling = css`
   padding: 10px 8px;
   overflow: visible;
-  
+
   > div {
     flex-direction: column;
     align-items: flex-start;
@@ -113,13 +113,18 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         cell: (cellContext) => {
           const displayName = (cellContext.getValue() ?? '') as OfflineRepo['displayName'];
           const repo = cellContext.row.original;
-          const subtitle = (repo.displayName.toLowerCase() === 'mongodb atlas') ? 'Includes Data Federation, Atlas Search, and Stream Processing' : '';
+          const subtitle =
+            repo.displayName.toLowerCase() === 'mongodb atlas'
+              ? 'Includes Data Federation, Atlas Search, and Stream Processing'
+              : '';
 
-          return <>
-            {displayName}
-            {subtitle && <Disclaimer>{subtitle}</Disclaimer>}
-          </>
-        }
+          return (
+            <>
+              {displayName}
+              {subtitle && <Disclaimer>{subtitle}</Disclaimer>}
+            </>
+          );
+        },
       },
       {
         header: 'Version',
