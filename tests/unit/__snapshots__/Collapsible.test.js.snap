@@ -52,7 +52,7 @@ exports[`collapsible component renders all the content in the options and childr
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  padding: 0 10px;
+  padding: 0 5px;
   visibility: hidden;
 }
 
