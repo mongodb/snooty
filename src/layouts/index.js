@@ -137,6 +137,17 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
           ) : (
             <div />
           )}
+          {/* <Sidenav
+              chapters={chapters}
+              guides={guides}
+              page={page.ast}
+              pageTitle={pageTitle}
+              repoBranches={repoBranches}
+              slug={slug}
+              toctree={toctree}
+              eol={eol}
+              template={template}
+            /> */}
           <StyledContentContainer>
             <ActionBar template={template} slug={slug} sidenav={sidenav} />
             <ContentTransition slug={slug}>{children}</ContentTransition>

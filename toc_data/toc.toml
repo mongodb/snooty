@@ -13,6 +13,7 @@ group = true
 label = "Quick Reference"
 url = "/quick-reference/"
 [[toc.items.items]]
+prefix = '/docs/atlas/operator'
 label = "Usage Examples"
 url = "/usage-examples"
 collapsible = true
