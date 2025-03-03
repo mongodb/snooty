@@ -125,7 +125,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
 }
 
 .emotion-3 [role='dialog'] {
-  max-height: 520px;
+  max-height: 600px;
   max-width: 690px;
   padding: 40px 36px;
   display: -webkit-box;
@@ -476,6 +476,17 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   position: relative;
 }
 
+.emotion-14 th:first-of-type,
+.emotion-14 td:first-of-type {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.emotion-14 th:first-of-type>*,
+.emotion-14 td:first-of-type>* {
+  width: 14px;
+}
+
 .emotion-15 {
   border-spacing: 0;
   border-collapse: collapse;
@@ -697,7 +708,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
 .emotion-27 {
   padding: 0 8px;
   overflow: hidden;
-  width: 140px;
+  width: 150px;
 }
 
 .emotion-27:focus-visible {
@@ -714,27 +725,6 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   -webkit-justify-content: left;
   justify-content: left;
   text-align: left;
-}
-
-.emotion-28 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  min-height: 40px;
-  transition-property: min-height,max-height,opacity,padding,transform;
-  transition-duration: 150ms;
-  transition-timing-function: ease;
-  height: 40px;
-  -webkit-box-pack: right;
-  -ms-flex-pack: right;
-  -webkit-justify-content: right;
-  justify-content: right;
-  text-align: right;
 }
 
 .emotion-29 {
@@ -845,9 +835,9 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   z-index: 0;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   border-radius: 6px;
-  background-color: #F9FBFA;
-  border-color: #889397;
-  color: #001E2B;
+  background-color: #00684A;
+  border-color: #00684A;
+  color: #FFFFFF;
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
@@ -869,16 +859,17 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
 
 .emotion-33:focus-visible,
 .emotion-33[data-focus="true"] {
-  color: #001E2B;
+  color: #FFFFFF;
 }
 
 .emotion-33:hover,
 .emotion-33[data-hover="true"],
 .emotion-33:active,
 .emotion-33[data-active="true"] {
-  color: #001E2B;
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 3px #E8EDEB;
+  color: #FFFFFF;
+  background-color: #00593f;
+  border-color: #00593f;
+  box-shadow: 0 0 0 3px #C0FAE6;
 }
 
 .emotion-33,
@@ -1192,7 +1183,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
                     scope="col"
                   >
                     <div
-                      class="emotion-28"
+                      class="emotion-18"
                     >
                       Version
                     </div>
