@@ -27,6 +27,10 @@ const defaultValues: {
 
 const OfflineDownloadContext = createContext(defaultValues);
 
+function lintVersionLabel (versionLabel: string) {
+  return versionLabel.toLowerCase();
+}
+
 /**
  * used to process docsets from graphql into OfflineRepo
  */
@@ -44,7 +48,7 @@ function processDocsets(docsets: any): OfflineRepo[] {
     for (const branch of docset.branches) {
       if (branch.active && branch.offlineUrl) {
         offlineRepo.versions.push({
-          displayName: branch.versionSelectorLabel,
+          displayName: lintVersionLabel(branch.versionSelectorLabel),
           url: branch.offlineUrl,
         });
       }
@@ -78,7 +82,7 @@ function processRepos(repos: Repo[]) {
         }
         if (branch.offlineUrl) {
           offlineRepo.versions.push({
-            displayName: branch.label,
+            displayName: lintVersionLabel(branch.label),
             url: branch.offlineUrl,
           });
         }

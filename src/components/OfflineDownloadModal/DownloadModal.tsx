@@ -16,9 +16,9 @@ import {
 import type { HeaderGroup, LGColumnDef, LeafyGreenTableRow, CoreRow } from '@leafygreen-ui/table';
 import TextInput from '@leafygreen-ui/text-input';
 import { useToast, Variant } from '@leafygreen-ui/toast';
-import { Body, H3, Link } from '@leafygreen-ui/typography';
+import { Body, Disclaimer, H3, Link } from '@leafygreen-ui/typography';
 import Box from '@leafygreen-ui/box';
-import Button from '@leafygreen-ui/button';
+import Button, { Variant as ButtonVariant } from '@leafygreen-ui/button';
 import { theme } from '../../theme/docsTheme';
 import fetchAndSaveFile from '../../utils/download-file';
 import { useOfflineDownloadContext, type OfflineVersion, type OfflineRepo } from './DownloadContext';
@@ -26,7 +26,7 @@ import VersionSelect from './VersionSelector';
 
 const modalStyle = css`
   [role='dialog'] {
-    max-height: 520px;
+    max-height: 600px;
     max-width: 690px;
     padding: 40px 36px;
     display: flex;
@@ -34,17 +34,30 @@ const modalStyle = css`
     background-color: var(--background-color-primary);
   }
 `;
+
 const headingStyle = css`
   margin-bottom: ${theme.size.small};
 `;
+
 const bodyStyle = css`
   margin-bottom: ${theme.size.small};
 `;
+
 const searchInputStyle = css`
   margin-bottom: ${theme.size.default};
   max-width: 260px;
 `;
-const tableStyling = css``;
+
+const tableStyling = css`
+  th:first-of-type,
+  td:first-of-type {
+    padding-left: 8px;
+    padding-right: 8px;
+    > * {
+      width: 14px;
+    }
+  }
+`;
 
 const footerStyling = css`
   display: flex;
@@ -56,9 +69,10 @@ const footerStyling = css`
 const cellStyling = css`
   padding: 10px 8px;
   overflow: visible;
-
+  
   > div {
-    height: 20px;
+    flow-direction: row;
+    max-height: unset;
     min-height: unset;
   }
 `;
@@ -95,10 +109,21 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         accessorKey: 'displayName',
         size: 420,
         enableGlobalFilter: true,
+        cell: (cellContext) => {
+          const displayName = (cellContext.getValue() ?? '') as OfflineRepo['displayName'];
+          const repo = cellContext.row.original;
+          const subtitle = (repo.displayName.toLowerCase() === 'mongodb atlas') ? 'Includes Data Federation, Atlas Search, and Stream Processing' : '';
+
+          return <>
+            {displayName}
+            {subtitle && <Disclaimer>{subtitle}</Disclaimer>}
+          </>
+        }
       },
       {
         header: 'Version',
         accessorKey: 'versions',
+        size: 150,
         cell: (cellContext) => {
           const versions = (cellContext.getValue() ?? []) as OfflineVersion[];
           const repoDisplayName = cellContext.row.original.displayName;
@@ -119,8 +144,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
             />
           );
         },
-        size: 140,
-        align: 'right',
+        align: 'left',
         enableGlobalFilter: true,
       },
     ] as LGColumnDef<OfflineRepo>[];
@@ -216,7 +240,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         <TableHead>
           {table.getHeaderGroups().map((headerGroup: HeaderGroup<OfflineRepo>) => (
             <HeaderRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
+              {headerGroup.headers.map((header, idx) => {
                 return (
                   <HeaderCell className={cx(headerCellStyling)} key={header.id} header={header}>
                     {flexRender(header.column.columnDef.header, header.getContext())}
@@ -231,7 +255,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
           {rows.map((row: LeafyGreenTableRow<OfflineRepo>) => {
             return (
               <LeafyRow key={row.id} row={row}>
-                {row.getVisibleCells().map((cell) => {
+                {row.getVisibleCells().map((cell, idx) => {
                   return (
                     <Cell className={cx(cellStyling)} key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -246,7 +270,11 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
 
       <Box className={footerStyling}>
         <Button onClick={() => setOpen(false)}>Cancel</Button>
-        <Button disabled={!rowSelection || !Object.keys(rowSelection)?.length} onClick={onDownload}>
+        <Button
+          variant={ButtonVariant.Primary}
+          disabled={!rowSelection || !Object.keys(rowSelection)?.length}
+          onClick={onDownload}
+        >
           Download
         </Button>
       </Box>

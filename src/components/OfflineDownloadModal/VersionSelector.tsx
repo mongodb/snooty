@@ -5,8 +5,7 @@ import { theme } from '../../theme/docsTheme';
 import { type OfflineVersion, type OfflineRepo } from './DownloadContext';
 
 const selectStyling = css`
-  max-width: 80%;
-  min-width: 90px;
+  width: 100%;
   height: ${theme.size.medium};
 
   + div {
@@ -17,7 +16,7 @@ const selectStyling = css`
 const portalStyling = css`
   position: relative;
   display: flex;
-  justify-content: flex-end;
+  width: 100%;
 `;
 
 const optionStyling = css`
@@ -40,6 +39,7 @@ const PortalContainer = forwardRef(
 );
 
 type VersionSelectProps = { offlineRepo: OfflineRepo; versions: OfflineVersion[]; onSelect: (e: number) => void };
+
 const VersionSelect = ({ offlineRepo, versions, onSelect }: VersionSelectProps) => {
   const [selected, setSelected] = useState(() => 0);
   const portalRef = useRef<HTMLDivElement>(null);
