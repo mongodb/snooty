@@ -69,7 +69,7 @@ const IALinkedData = ({ linkedData }) => {
       {linkedData.map(({ headline, url, icon, 'icon-alt': iconAlt, 'icon-dark': iconDark }, index) => {
         const iconSrc = getSuitableIcon(icon, iconDark, darkMode);
         return (
-          <SideNavItem key={index} className={cx(liStyling)} as={Link} to={url}>
+          <SideNavItem key={index} className={cx(liStyling)} as={Link} to={url} data-position={'tocnode'}>
             <img height={16} width={16} src={iconSrc} alt={iconAlt} />
             <span>{headline}</span>
           </SideNavItem>

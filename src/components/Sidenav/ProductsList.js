@@ -142,7 +142,9 @@ const ProductsList = () => {
           {products.map(({ title, url }, index) => {
             return (
               <li key={index}>
-                <ProductLink to={url}>{title}</ProductLink>
+                <ProductLink to={url} data-position={'tocnode'}>
+                  {title}
+                </ProductLink>
               </li>
             );
           })}

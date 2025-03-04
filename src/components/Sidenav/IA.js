@@ -67,6 +67,7 @@ const IA = ({ handleClick, header, ia }) => {
         // We use the linked data from the mapping since the linked data and the
         // IA entry might not always be on the same page (such as the "/search" page).
         const linkedData = linkedDataMapping[id];
+
         return (
           <React.Fragment key={index}>
             <SideNavItem
@@ -75,6 +76,7 @@ const IA = ({ handleClick, header, ia }) => {
               as={Link}
               onClick={handleClick}
               to={target}
+              data-position={'tocnode'}
             >
               {formatText(title)}
             </SideNavItem>
