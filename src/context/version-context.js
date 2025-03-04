@@ -117,7 +117,6 @@ const getDefaultActiveVersionsToml = (project, versionsData) => {
   const initVersion = {};
   const curVersionData = versionsData.find((obj) => obj.repoName === project);
   initVersion[project] = curVersionData.version[0].name;
-  console.log('in my function', initVersion);
   return initVersion;
 };
 
@@ -198,7 +197,6 @@ const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) 
   // TODO check whats going on here for 404 pages
   // tracks active versions across app
   const [activeVersions, setActiveVersions] = useReducer(versionStateReducer, metadata, getDefaultActiveVersions);
-  console.log('after the init set', activeVersions);
 
   // update local storage when active versions change
   useEffect(() => {
