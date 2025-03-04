@@ -72,7 +72,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   // Data for versions.toml, if project is in versions.toml that means the repo is versioned.
   const versions = useVersionsToml();
   const { isUnifiedToc } = getFeatureFlags();
-  const versionData = versions.find((r) => r.repoName === rest.metadata.project);
+  const versionData = versions.find((r) => r.repoName === rest.metadata?.project);
 
   return (
     <>
