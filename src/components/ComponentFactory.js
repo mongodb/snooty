@@ -82,6 +82,7 @@ import RoleLinkNewTab from './Roles/LinkNewTab';
 import RoleRed from './Roles/Red';
 import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
+import SeeAlso from './SeeAlso';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -183,6 +184,7 @@ const componentMap = {
   rubric: Rubric,
   'search-results': SearchResults,
   section: Section,
+  seealso: SeeAlso,
   sharedinclude: Include,
   strong: Strong,
   substitution_reference: SubstitutionReference,
