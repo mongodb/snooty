@@ -45,11 +45,6 @@ const lgIconStyling = css`
   margin-left: -5px;
 `;
 
-const linkStyling = css`
-  text-decoration: none !important;
-  color: unset;
-`;
-
 const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
   // Handles case sensitivity for specified icons
   let lgIcon = 'Play';
@@ -61,16 +56,14 @@ const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
   }
 
   return (
-    <a href={options?.url} className={cx(linkStyling)}>
-      <div className={cx(videoBannerStyling)}>
-        <div className={cx(lgIconStyling)}>
-          <Icon glyph={lgIcon} fill={palette.blue.base} />
-        </div>
-        {children.map((child, i) => (
-          <ComponentFactory {...rest} key={i} nodeData={child} />
-        ))}
+    <div className={cx(videoBannerStyling)}>
+      <div className={cx(lgIconStyling)}>
+        <Icon glyph={lgIcon} fill={palette.blue.base} />
       </div>
-    </a>
+      {children.map((child, i) => (
+        <ComponentFactory {...rest} key={i} nodeData={child} />
+      ))}
+    </div>
   );
 };
 
