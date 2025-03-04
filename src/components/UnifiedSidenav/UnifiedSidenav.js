@@ -19,6 +19,7 @@ import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { HeaderContext } from '../Header/header-context';
 import { SidenavContext } from '../Sidenav';
 import useViewport from '../../hooks/useViewport';
+import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -164,7 +165,8 @@ function UnifiedTocNavItem({
   isTabletOrMobile,
   level,
 }) {
-  // these are the tab items that we dont need to show in the second pane but need to go through recursively
+  // These are the tab items that we dont need to show in the second pane but need to go through recursively
+  // Unless in Mobile doing Accordian view
   if (isTab) {
     if (isTabletOrMobile) {
       return (
@@ -225,10 +227,9 @@ function UnifiedTocNavItem({
   );
 }
 
-function StaticNavItem({ label, url, glyph, slug, items, isTab, level = 1 }) {
+function StaticNavItem({ label, url, slug, items, isTab, level = 1 }) {
   return (
     <SideNavItem
-      // glyph={<Icon glyph={glyph} />}
       active={isActiveTocNode(slug, url, items)}
       aria-label={label}
       as={Link}
@@ -324,7 +325,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
   const tree = updateURLs({ tree: unifiedTocTree, prefix: '', activeVersions, versionsData, project, snootyEnv });
   console.log('The edited toctree with prefixes is:', tree);
-  console.log('the tablet', isTabletOrMobile);
+
   const staticTocItems = useMemo(() => {
     return unifiedTocTree.filter((item) => item?.isTab);
   }, [unifiedTocTree]);
@@ -360,17 +361,13 @@ export function UnifiedSidenav({ slug, versionsData }) {
       <div
         className={cx(SidenavContainer({ ...topValues }))}
         style={{ '--scroll-y': `${viewport.scrollY}px` }}
-        id={'biancas sidenav container '}
+        id={SIDE_NAV_CONTAINER_ID}
       >
         <SideNav
           widthOverride={isTabletOrMobile ? viewportSize.width : 375}
           className={cx(sideNavStyle({ hideMobile }))}
-          aria-label="Bianca's Side navigation"
+          aria-label="Side navigation Panel"
         >
-          {/* <NavTopContainer>
-         <DocsHomeButton />
-        <Border /> 
-      </NavTopContainer>   */}
           <div className={cx(leftPane)}>
             {isTabletOrMobile
               ? unifiedTocTree.map((navItems) => {

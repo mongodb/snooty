@@ -35,8 +35,8 @@ const getInitVersions = (branchListByProduct) => {
 // Set the inital active version using versions.toml
 const getInitVersionsToml = (project, versionsData) => {
   const localStorage = getLocalValue(STORAGE_KEY);
-  console.log('the local storage is', localStorage);
   const initState = {};
+
   if (localStorage) {
     initState[project] = localStorage[project];
     return initState;
