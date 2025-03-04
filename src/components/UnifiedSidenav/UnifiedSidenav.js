@@ -166,7 +166,7 @@ function UnifiedTocNavItem({
   level,
 }) {
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
-  // Unless in Mobile doing Accordian view
+  // Unless in Mobile doing Accordion view
   if (isTab) {
     if (isTabletOrMobile) {
       return (
