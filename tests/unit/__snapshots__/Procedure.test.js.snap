@@ -347,7 +347,7 @@ exports[`renders steps nested in include nodes 1`] = `
 }
 
 .emotion-10 {
-  position: relative;
+  position: absolute;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;

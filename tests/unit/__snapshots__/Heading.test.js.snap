@@ -16,7 +16,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1 {
-  position: relative;
+  position: absolute;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -93,7 +93,7 @@ exports[`renders correctly in dark mode 1`] = `
 }
 
 .emotion-1 {
-  position: relative;
+  position: absolute;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;

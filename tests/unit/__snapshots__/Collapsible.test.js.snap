@@ -48,7 +48,7 @@ exports[`collapsible component renders all the content in the options and childr
 }
 
 .emotion-3 {
-  position: relative;
+  position: absolute;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
