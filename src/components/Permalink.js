@@ -34,7 +34,7 @@ const headingStyle = (copied) => css`
   ${!!copied && 'visibility: visible !important;'}
   position:absolute;
   align-self: center;
-  padding: 0 5px;
+  padding: 0 10px;
   visibility: hidden;
 `;
 

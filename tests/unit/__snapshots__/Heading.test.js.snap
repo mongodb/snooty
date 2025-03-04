@@ -20,7 +20,7 @@ exports[`renders correctly 1`] = `
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  padding: 0 5px;
+  padding: 0 10px;
   visibility: hidden;
 }
 
@@ -97,7 +97,7 @@ exports[`renders correctly in dark mode 1`] = `
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
-  padding: 0 5px;
+  padding: 0 10px;
   visibility: hidden;
 }
 
