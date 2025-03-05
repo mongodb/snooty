@@ -16,35 +16,55 @@ import {
 import type { HeaderGroup, LGColumnDef, LeafyGreenTableRow, CoreRow } from '@leafygreen-ui/table';
 import TextInput from '@leafygreen-ui/text-input';
 import { useToast, Variant } from '@leafygreen-ui/toast';
-import { Body, H3, Link } from '@leafygreen-ui/typography';
+import { Body, Disclaimer, H3, Link } from '@leafygreen-ui/typography';
 import Box from '@leafygreen-ui/box';
-import Button from '@leafygreen-ui/button';
+import Button, { Variant as ButtonVariant } from '@leafygreen-ui/button';
 import { theme } from '../../theme/docsTheme';
 import fetchAndSaveFile from '../../utils/download-file';
+import useScreenSize from '../../hooks/useScreenSize';
 import { useOfflineDownloadContext, type OfflineVersion, type OfflineRepo } from './DownloadContext';
 import VersionSelect from './VersionSelector';
 
 const modalStyle = css`
   [role='dialog'] {
-    max-height: 520px;
+    max-height: 600px;
     max-width: 690px;
     padding: 40px 36px;
     display: flex;
     flex-direction: column;
     background-color: var(--background-color-primary);
+
+    @media ${theme.screenSize.upToSmall} {
+      padding: 36px 36px;
+    }
   }
 `;
+
 const headingStyle = css`
   margin-bottom: ${theme.size.small};
 `;
+
 const bodyStyle = css`
-  margin-bottom: ${theme.size.small};
-`;
-const searchInputStyle = css`
+  line-height: 18px;
   margin-bottom: ${theme.size.default};
+`;
+
+const searchInputStyle = css`
+  margin-bottom: ${theme.size.medium};
   max-width: 260px;
 `;
-const tableStyling = css``;
+
+const tableStyling = css`
+  margin-top: ${theme.size.tiny};
+  th:first-of-type,
+  td:first-of-type {
+    padding-left: 8px;
+    padding-right: 8px;
+    > * {
+      width: 14px;
+    }
+  }
+`;
 
 const footerStyling = css`
   display: flex;
@@ -58,17 +78,22 @@ const cellStyling = css`
   overflow: visible;
 
   > div {
-    height: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: unset;
     min-height: unset;
   }
 `;
 
 const headerCellStyling = css`
   > * {
+    font-size: ${theme.fontSize.small};
     justify-content: left;
     text-align: left;
   }
 `;
+
+const BASE_FONT_SIZE = 13;
 
 type ModalProps = {
   open: boolean;
@@ -82,6 +107,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
   const { repos } = useOfflineDownloadContext();
   const selectedVersions = useRef<Record<OfflineRepo['displayName'], OfflineVersion>>({});
   const { pushToast } = useToast();
+  const { isMobile } = useScreenSize();
 
   useEffect(() => {
     // reset row selection when modal is opened/closed
@@ -95,10 +121,37 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         accessorKey: 'displayName',
         size: 420,
         enableGlobalFilter: true,
+        cell: (cellContext) => {
+          const displayName = (cellContext.getValue() ?? '') as OfflineRepo['displayName'];
+          const repo = cellContext.row.original;
+          // TODO: DOP-5295 remove this hardcoded value and input into DB and return from API
+          const subtitle =
+            repo.displayName.toLowerCase() === 'mongodb atlas'
+              ? 'Includes Data Federation, Atlas Search, and Stream Processing'
+              : '';
+
+          return (
+            <>
+              <Body baseFontSize={13}>{displayName}</Body>
+              {subtitle && (
+                <Disclaimer
+                  className={cx(
+                    css`
+                      margin-top: ${theme.size.small};
+                    `
+                  )}
+                >
+                  {subtitle}
+                </Disclaimer>
+              )}
+            </>
+          );
+        },
       },
       {
         header: 'Version',
         accessorKey: 'versions',
+        size: isMobile ? 300 : 170,
         cell: (cellContext) => {
           const versions = (cellContext.getValue() ?? []) as OfflineVersion[];
           const repoDisplayName = cellContext.row.original.displayName;
@@ -119,12 +172,11 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
             />
           );
         },
-        size: 140,
-        align: 'right',
+        align: 'left',
         enableGlobalFilter: true,
       },
     ] as LGColumnDef<OfflineRepo>[];
-  }, []);
+  }, [isMobile]);
 
   const filter = useCallback((row: CoreRow<OfflineRepo>, _columnId: string, filterValue: string) => {
     const searchText = filterValue.toLowerCase();
@@ -192,16 +244,22 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
     <Modal onClick={(e) => e.stopPropagation()} className={cx(modalStyle)} size={'large'} open={open} setOpen={setOpen}>
       <H3 className={cx(headingStyle)}>Download Documentation</H3>
 
-      <Body className={cx(bodyStyle)}>
+      <Body baseFontSize={BASE_FONT_SIZE} className={cx(bodyStyle)}>
         Navigate the table to find the product and version you wish to download. Looking for another product? Visit
         our&nbsp;
-        <Link hideExternalIcon={false} href={'https://mongodb.com/docs/legacy/'}>
+        <Link
+          baseFontSize={BASE_FONT_SIZE}
+          hideExternalIcon={false}
+          href={'https://mongodb.com/docs/legacy/'}
+          target="_blank"
+        >
           legacy docs site
         </Link>
       </Body>
 
       <TextInput
         className={cx(searchInputStyle)}
+        baseFontSize={BASE_FONT_SIZE}
         // TODO: can remove aria-labelledby after upgrading LG/TextInput
         aria-labelledby={'null'}
         aria-label={'Search for Offline Documentation'}
@@ -246,7 +304,11 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
 
       <Box className={footerStyling}>
         <Button onClick={() => setOpen(false)}>Cancel</Button>
-        <Button disabled={!rowSelection || !Object.keys(rowSelection)?.length} onClick={onDownload}>
+        <Button
+          variant={ButtonVariant.Primary}
+          disabled={!rowSelection || !Object.keys(rowSelection)?.length}
+          onClick={onDownload}
+        >
           Download
         </Button>
       </Box>
