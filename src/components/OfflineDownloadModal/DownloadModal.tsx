@@ -247,7 +247,12 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
       <Body baseFontSize={BASE_FONT_SIZE} className={cx(bodyStyle)}>
         Navigate the table to find the product and version you wish to download. Looking for another product? Visit
         our&nbsp;
-        <Link baseFontSize={BASE_FONT_SIZE} hideExternalIcon={false} href={'https://mongodb.com/docs/legacy/'} target="_blank">
+        <Link
+          baseFontSize={BASE_FONT_SIZE}
+          hideExternalIcon={false}
+          href={'https://mongodb.com/docs/legacy/'}
+          target="_blank"
+        >
           legacy docs site
         </Link>
       </Body>
