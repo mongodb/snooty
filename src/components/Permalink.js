@@ -32,7 +32,7 @@ const HeaderBuffer = styled.div`
 
 const headingStyle = (copied) => css`
   ${!!copied && 'visibility: visible !important;'}
-  position:absolute;
+  position: absolute;
   align-self: center;
   padding: 0 10px;
   visibility: hidden;
