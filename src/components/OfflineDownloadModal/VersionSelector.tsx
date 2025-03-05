@@ -9,7 +9,7 @@ const selectStyling = css`
   width: 100%;
   height: ${theme.size.medium};
   > * {
-    font-size: ${theme.fontSize.small};
+    font-size: ${theme.fontSize.small} !important;
   }
 
   + div {
