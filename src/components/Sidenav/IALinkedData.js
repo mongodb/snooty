@@ -4,6 +4,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Link from '../Link';
+import { DATA_TOC_NODE } from '../../constants';
 import { theme } from '../../theme/docsTheme';
 import { getSuitableIcon } from '../../utils/get-suitable-icon';
 
@@ -69,7 +70,7 @@ const IALinkedData = ({ linkedData }) => {
       {linkedData.map(({ headline, url, icon, 'icon-alt': iconAlt, 'icon-dark': iconDark }, index) => {
         const iconSrc = getSuitableIcon(icon, iconDark, darkMode);
         return (
-          <SideNavItem key={index} className={cx(liStyling)} as={Link} to={url}>
+          <SideNavItem key={index} className={cx(liStyling)} as={Link} to={url} data-position={DATA_TOC_NODE}>
             <img height={16} width={16} src={iconSrc} alt={iconAlt} />
             <span>{headline}</span>
           </SideNavItem>

@@ -6,6 +6,7 @@ import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
+import { DATA_TOC_NODE } from '../../constants';
 import { useAllProducts } from '../../hooks/useAllProducts';
 import { theme } from '../../theme/docsTheme';
 
@@ -142,7 +143,9 @@ const ProductsList = () => {
           {products.map(({ title, url }, index) => {
             return (
               <li key={index}>
-                <ProductLink to={url}>{title}</ProductLink>
+                <ProductLink to={url} data-position={DATA_TOC_NODE}>
+                  {title}
+                </ProductLink>
               </li>
             );
           })}

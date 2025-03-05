@@ -7,6 +7,7 @@ import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
+import { DATA_TOC_NODE } from '../../constants';
 import { VersionContext } from '../../context/version-context';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
@@ -108,6 +109,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
             setIsOpen(!isOpen);
           }}
           to={isOfflineDocsBuild ? target : null}
+          data-position={DATA_TOC_NODE}
         >
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
           {formattedTitle}
@@ -128,6 +130,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
           setIsOpen(!isOpen);
         }}
         hideExternalIcon={true}
+        data-position={DATA_TOC_NODE}
       >
         {hasChildren && (
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
