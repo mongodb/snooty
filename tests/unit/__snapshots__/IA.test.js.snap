@@ -1388,6 +1388,7 @@ exports[`renders a simple page IA correctly 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
+          data-position="tocnode"
           href="https://www.mongodb.com/docs/atlas/getting-started/"
           target="_self"
         >
@@ -1403,6 +1404,7 @@ exports[`renders a simple page IA correctly 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
+          data-position="tocnode"
           href="https://www.mongodb.com/docs/manual/"
           target="_self"
         >
@@ -1418,6 +1420,7 @@ exports[`renders a simple page IA correctly 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-side-nav-item-0000 emotion-10"
+          data-position="tocnode"
           href="/tools-and-connectors/"
         >
           Tools and Connectors
@@ -1430,6 +1433,7 @@ exports[`renders a simple page IA correctly 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
+          data-position="tocnode"
           href="https://www.mongodb.com/docs/drivers/"
           target="_self"
         >
