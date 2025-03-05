@@ -138,6 +138,12 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   background-color: var(--background-color-primary);
 }
 
+@media only screen and (max-width: 480px) {
+  .emotion-3 [role='dialog'] {
+    padding: 36px 36px;
+  }
+}
+
 .emotion-4 {
   position: absolute;
   min-height: 100%;
@@ -214,7 +220,8 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   line-height: 20px;
   color: #001E2B;
   font-weight: 400;
-  margin-bottom: 8px;
+  line-height: 18px;
+  margin-bottom: 16px;
 }
 
 .emotion-7 strong,
@@ -294,7 +301,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   flex-direction: column;
   font-size: 13px;
   line-height: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   max-width: 260px;
 }
 
@@ -474,6 +481,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   overflow: auto;
   width: 100%;
   position: relative;
+  margin-top: 4px;
 }
 
 .emotion-14 th:first-of-type,
@@ -518,6 +526,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
 }
 
 .emotion-17>* {
+  font-size: 13px;
   -webkit-box-pack: left;
   -ms-flex-pack: left;
   -webkit-justify-content: left;
@@ -698,6 +707,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
 }
 
 .emotion-25>* {
+  font-size: 13px;
   -webkit-box-pack: left;
   -ms-flex-pack: left;
   -webkit-justify-content: left;
@@ -708,7 +718,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
 .emotion-27 {
   padding: 0 8px;
   overflow: hidden;
-  width: 150px;
+  width: 170px;
 }
 
 .emotion-27:focus-visible {
@@ -720,6 +730,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
 }
 
 .emotion-27>* {
+  font-size: 13px;
   -webkit-box-pack: left;
   -ms-flex-pack: left;
   -webkit-justify-content: left;
@@ -1054,7 +1065,6 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
             <a
               class="lg-ui-0001 emotion-8"
               href="https://mongodb.com/docs/legacy/"
-              rel="noopener noreferrer"
               target="_blank"
             >
               <span>

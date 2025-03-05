@@ -5,8 +5,12 @@ import { theme } from '../../theme/docsTheme';
 import { type OfflineVersion, type OfflineRepo } from './DownloadContext';
 
 const selectStyling = css`
+  min-width: 94px;
   width: 100%;
   height: ${theme.size.medium};
+  > * {
+    font-size: ${theme.fontSize.small};
+  }
 
   + div {
     z-index: 9;
@@ -21,6 +25,7 @@ const portalStyling = css`
 
 const optionStyling = css`
   line-height: ${theme.fontSize.small};
+  font-size: ${theme.fontSize.small};
 
   > *:nth-child(1) {
     display: none;
@@ -49,6 +54,7 @@ const VersionSelect = ({ offlineRepo, versions, onSelect }: VersionSelectProps) 
   return (
     <PortalContainer ref={portalRef}>
       <Select
+        baseFontSize={13}
         onChange={(e) => {
           setSelected(parseInt(e, 10));
         }}
