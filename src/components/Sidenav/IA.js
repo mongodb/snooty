@@ -5,6 +5,7 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { DATA_TOC_NODE } from '../../constants';
 import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import IALinkedData from './IALinkedData';
 
@@ -75,7 +76,7 @@ const IA = ({ handleClick, header, ia }) => {
               as={Link}
               onClick={handleClick}
               to={target}
-              data-position={'tocnode'}
+              data-position={DATA_TOC_NODE}
             >
               {formatText(title)}
             </SideNavItem>
