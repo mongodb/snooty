@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { navigate } from 'gatsby';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Icon, { glyphs } from '@leafygreen-ui/icon';
 import ComponentFactory from '../ComponentFactory';
+import { isRelativeUrl } from '../../utils/is-relative-url';
 import { baseBannerStyle } from './styles/bannerItemStyle';
 
 const videoBannerStyling = css`
@@ -26,6 +28,7 @@ const videoBannerStyling = css`
   min-height: 44px;
   padding: 9px 12px 9px 20px;
   position: relative;
+  cursor: pointer;
 
   > p {
     margin-left: 15px;
@@ -55,8 +58,13 @@ const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
     }
   }
 
+  const onClick = useCallback(() => {
+    if (!options?.url) return;
+    isRelativeUrl(options?.url) ? navigate(options?.url) : (window.location.href = options?.url);
+  }, [options?.url]);
+
   return (
-    <div className={cx(videoBannerStyling)}>
+    <div className={cx(videoBannerStyling)} onClick={() => onClick}>
       <div className={cx(lgIconStyling)}>
         <Icon glyph={lgIcon} fill={palette.blue.base} />
       </div>
