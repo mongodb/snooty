@@ -64,7 +64,7 @@ const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
   }, [options?.url]);
 
   return (
-    <div className={cx(videoBannerStyling)} onClick={() => onClick}>
+    <div className={cx(videoBannerStyling)} onClick={onClick}>
       <div className={cx(lgIconStyling)}>
         <Icon glyph={lgIcon} fill={palette.blue.base} />
       </div>
