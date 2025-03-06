@@ -102,7 +102,6 @@ const sideNavStyle = ({ hideMobile }) => LeafyCSS`
 
 const leftPane = LeafyCSS`
   flex: 1;
-  // padding: 10px;
   overflow-y: auto;
   background-color: #f8f9fa;
   border-right: 3px solid #ddd;
@@ -110,7 +109,6 @@ const leftPane = LeafyCSS`
 
 const rightPane = LeafyCSS`
   flex: 2;
-  // padding: 10px;
   overflow-y: auto;
 `;
 
@@ -325,6 +323,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
   const tree = updateURLs({ tree: unifiedTocTree, prefix: '', activeVersions, versionsData, project, snootyEnv });
   console.log('The edited toctree with prefixes is:', tree);
+  console.log(unifiedTocTree);
 
   const staticTocItems = useMemo(() => {
     return unifiedTocTree.filter((item) => item?.isTab);
