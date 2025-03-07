@@ -5,7 +5,7 @@ const createTocNodes = async ({ createNode, createNodeId, createContentDigest })
   // Get all MongoDB products for the sidenav
 
   try {
-    const tomlContents = (await fs.readFile(`${process.cwd()}/toc_data/toc.toml`)).toString();
+    const tomlContents = (await fs.readFile(`${process.cwd()}/toc_data/toc_example.toml`)).toString();
     const toc = load(tomlContents);
 
     createNode({
