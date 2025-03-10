@@ -4,6 +4,8 @@ import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
+import { useViewportSize } from '@leafygreen-ui/hooks';
+import { useLocation } from '@gatsbyjs/reach-router';
 import Link from '../Link';
 import { sideNavItemUniTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
@@ -12,6 +14,12 @@ import { isCurrentPage } from '../../utils/is-current-page';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { VersionContext } from '../../context/version-context';
+import useScreenSize from '../../hooks/useScreenSize';
+import useStickyTopValues from '../../hooks/useStickyTopValues';
+import { HeaderContext } from '../Header/header-context';
+import { SidenavContext } from '../Sidenav';
+import useViewport from '../../hooks/useViewport';
+import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -27,7 +35,46 @@ const chevronStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
-const sideNavStyle = LeafyCSS`
+const getTopAndHeight = (topValue) => {
+  return LeafyCSS`
+    top: max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight});
+    height: calc(100vh - max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight}));
+  `;
+};
+
+const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
+  grid-area: sidenav;
+  position: sticky;
+  z-index: ${theme.zIndexes.sidenav};
+  top: 0px;
+  height: calc(
+    100vh + ${theme.header.actionBarMobileHeight} - ${topLarge} +
+      min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(--scroll-y))
+  );
+
+  @media ${theme.screenSize.upToLarge} {
+    ${getTopAndHeight(topMedium)};
+  }
+
+  @media ${theme.screenSize.upToSmall} {
+    ${getTopAndHeight(topSmall)};
+  }
+`;
+
+const sideNavStyle = ({ hideMobile }) => LeafyCSS`  
+  height: 100%;
+
+
+  // Mobile & Tablet nav
+  @media ${theme.screenSize.upToLarge} {
+    position: absolute;
+    ${hideMobile && 'display: none;'}
+
+    button[data-testid="side-nav-collapse-toggle"] {
+      display: none;
+    }
+  }
+  
   padding: 0px;
   div > ul {
     display: flex;
@@ -106,13 +153,37 @@ function CollapsibleNavItem({ items, label, url, slug, level }) {
   );
 }
 
-function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, slug, level }) {
-  // these are the tab items that we dont need to show in the second pane but need to go through recursively
+function UnifiedTocNavItem({
+  label,
+  group,
+  url,
+  collapsible,
+  items,
+  isTab,
+  slug,
+  activeTabUrl,
+  isTabletOrMobile,
+  level,
+}) {
+  // These are the tab items that we dont need to show in the second pane but need to go through recursively
+  // Unless in Mobile doing Accordion view
   if (isTab) {
+    if (isTabletOrMobile) {
+      return (
+        <>
+          <StaticNavItem label={label} url={url} slug={slug} isTab={isTab} items={items} />
+          {url === activeTabUrl &&
+            items?.map((tocItem) => (
+              <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
+            ))}
+        </>
+      );
+    }
+
     return (
       <>
         {items?.map((tocItem) => (
-          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} />
+          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
         ))}
       </>
     );
@@ -121,9 +192,9 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, slug,
   // groups are for adding a static header, these can also be collapsible
   if (group) {
     return (
-      <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavGroupTOCStyling({ level }))}>
+      <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavGroupTOCStyling())}>
         {items?.map((tocItem) => (
-          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} />
+          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
         ))}
       </SideNavGroup>
     );
@@ -156,15 +227,14 @@ function UnifiedTocNavItem({ label, group, url, collapsible, items, isTab, slug,
   );
 }
 
-function StaticNavItem({ label, url, glyph, slug, items, level = 1 }) {
+function StaticNavItem({ label, url, slug, items, isTab, level = 1 }) {
   return (
     <SideNavItem
       active={isActiveTocNode(slug, url, items)}
-      glyph={<Icon glyph={glyph} />}
       aria-label={label}
       as={Link}
       to={url}
-      className={cx(sideNavItemUniTOCStyling({ level }))}
+      className={cx(sideNavItemUniTOCStyling({ level, isTab }))}
     >
       {label}
     </SideNavItem>
@@ -181,15 +251,20 @@ const isActiveTocNode = (currentUrl, slug, children) => {
   return false;
 };
 
-const replaceVersion = ({ url, currentVersion, versionsData, project }) => {
+const replaceVersion = ({ url, currentVersion, versionsData }) => {
   // Find the version data for the current content we are in
-  const content = versionsData.find((obj) => obj.repoName === project);
+  const noVersion = url.replace(/\$\{([^}]+)\}/g, '');
+  const content = versionsData.find((obj) => obj.repoSlug.replaceAll('/', '') === noVersion.replaceAll('/', ''));
+  if (!content) return;
+
+  const proj = content.repoName;
 
   // based on the activeVersion, find the correct verion
-  const ver = content?.version.find((obj) => obj.name === currentVersion);
+  const ver = content?.version.find((obj) => obj.name === currentVersion[proj]);
+  if (!ver) return;
 
   // input the correct alias into the url
-  const result = url?.replace(/\$\{([^}]+)\}/g, ver?.urlSlug);
+  const result = url?.replace(/\$\{([^}]+)\}/g, ver.urlSlug);
 
   return result;
 };
@@ -208,7 +283,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
           : item.prefix;
       const result = replaceVersion({
         url: item.prefix,
-        currentVersion: activeVersions[project],
+        currentVersion: activeVersions,
         versionsData,
         project,
       });
@@ -240,6 +315,12 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
   const { project, snootyEnv } = useSnootyMetadata();
   const { activeVersions } = useContext(VersionContext);
+  const { hideMobile, setHideMobile } = useContext(SidenavContext);
+  const viewportSize = useViewportSize();
+  const { isTabletOrMobile } = useScreenSize();
+  const { bannerContent } = useContext(HeaderContext);
+  const topValues = useStickyTopValues(false, true, !!bannerContent);
+  const { pathname } = useLocation();
 
   // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
   const tree = updateURLs({ tree: unifiedTocTree, prefix: '', activeVersions, versionsData, project, snootyEnv });
@@ -265,28 +346,61 @@ export function UnifiedSidenav({ slug, versionsData }) {
     });
   }, [slug, staticTocItems]);
 
+  // close navigation panel on mobile screen, but leaves open if they click on a twisty
+  useEffect(() => {
+    setHideMobile(true);
+  }, [pathname, setHideMobile]);
+
+  // listen for scrolls for mobile and tablet menu
+  const viewport = useViewport(false);
+
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
   return (
     <>
-      <SideNav widthOverride={400} className={cx(sideNavStyle)} aria-label="Bianca's Side navigation">
-        <div className={cx(leftPane)}>
-          {staticTocItems.map((staticTocItem) => {
-            // biome-ignore lint/correctness/useJsxKeyInIterable: iterating through navItems which doesn't have a key
-            return <StaticNavItem {...staticTocItem} slug={slug} />;
-          })}
-        </div>
-        {activeTabUrl && (
-          <div className={cx(rightPane)}>
-            {unifiedTocTree.map((navItems) => {
-              if (navItems.url === activeTabUrl) {
-                return <UnifiedTocNavItem {...navItems} level={1} slug={slug} />;
-              }
-              return null;
-            })}
+      <div
+        className={cx(SidenavContainer({ ...topValues }))}
+        style={{ '--scroll-y': `${viewport.scrollY}px` }}
+        id={SIDE_NAV_CONTAINER_ID}
+      >
+        <SideNav
+          widthOverride={isTabletOrMobile ? viewportSize.width : 375}
+          className={cx(sideNavStyle({ hideMobile }))}
+          aria-label="Side navigation Panel"
+        >
+          <div className={cx(leftPane)}>
+            {isTabletOrMobile
+              ? unifiedTocTree.map((navItems) => {
+                  return (
+                    <UnifiedTocNavItem
+                      {...navItems}
+                      level={1}
+                      slug={slug}
+                      group={true}
+                      activeTabUrl={activeTabUrl}
+                      isTabletOrMobile={isTabletOrMobile}
+                    />
+                  );
+                })
+              : staticTocItems.map((staticTocItem) => {
+                  // biome-ignore lint/correctness/useJsxKeyInIterable: iterating through navItems which doesn't have a key
+                  return <StaticNavItem {...staticTocItem} slug={slug} />;
+                })}
           </div>
-        )}
-      </SideNav>
+          {activeTabUrl && !isTabletOrMobile && (
+            <div className={cx(rightPane)}>
+              {unifiedTocTree.map((navItems) => {
+                if (navItems.url === activeTabUrl) {
+                  return (
+                    <UnifiedTocNavItem {...navItems} level={1} slug={slug} group={true} activeTabUrl={activeTabUrl} />
+                  );
+                }
+                return null;
+              })}
+            </div>
+          )}
+        </SideNav>
+      </div>
     </>
   );
 }
