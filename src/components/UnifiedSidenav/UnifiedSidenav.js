@@ -291,7 +291,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
     }
 
     // Edit the url with the correct version path
-    const url = `${updatedPrefix}${item.url ? item.url : ''}`;
+    const newUrl = `${updatedPrefix}${item.url ? item.url : ''}`;
 
     const items = updateURLs({
       tree: item.items,
@@ -304,7 +304,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
 
     return {
       ...item,
-      url,
+      newUrl,
       items,
     };
   });
@@ -355,7 +355,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
 
-  console.log(activeTabUrl);
+  console.log('ur mom', activeTabUrl);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
@@ -393,6 +393,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
           {activeTabUrl && !isTabletOrMobile && (
             <div className={cx(rightPane)}>
               {tree.map((navItems) => {
+                console.log('the active tab', activeTabUrl, navItems.url);
                 if (navItems.url === activeTabUrl) {
                   return (
                     <UnifiedTocNavItem {...navItems} level={1} slug={slug} group={true} activeTabUrl={activeTabUrl} />
