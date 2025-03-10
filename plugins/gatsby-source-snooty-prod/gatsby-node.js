@@ -232,15 +232,19 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     await saveStaticFiles(staticFiles);
   }
 
+  const snootyMetadata = {
+    ...metadataMinusStatic,
+    metadata: { ...metadataMinusStatic.metadata, pathPrefix: siteMetadata.pathPrefix },
+  };
   createNode({
     children: [],
     id: createNodeId('metadata'),
     internal: {
-      contentDigest: createContentDigest(metadataMinusStatic),
+      contentDigest: createContentDigest(snootyMetadata),
       type: 'SnootyMetadata',
     },
     parent: null,
-    metadata: metadataMinusStatic,
+    metadata: snootyMetadata,
   });
 };
 

@@ -6,7 +6,7 @@ import { Link as LGLink } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
-import { isRelativeUrl } from '../utils/is-relative-url';
+// import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 
@@ -101,7 +101,8 @@ const Link = ({
 
   const anchorProps = validateHTMAttributes('anchor', other);
   const { theme: siteTheme } = useDarkMode();
-
+  // const path = ''
+  // path.startsWith(pathPrefix)
   //used instead of LG showLinkArrow prop for consistency between LGLinks and GatsbyLinks(GatsbyLinks don't have that prop)
   const decoration = showLinkArrow ? (
     <span>
@@ -113,7 +114,7 @@ const Link = ({
   );
 
   // Use Gatsby Link for internal links, and <a> for others
-  if (to && isRelativeUrl(to) && !anchor) {
+  if (!to) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash

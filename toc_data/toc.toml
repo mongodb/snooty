@@ -4,7 +4,8 @@ label = "C# Quick Start"
 url = "/quick-start"
 isTab = true
 glyph = 'Bulb'
-prefix = '/drivers/csharp/${version}'
+# prefix = '/drivers/csharp/${version}'
+prefix = '/master/csharp/bianca.laube/DOP-5343'
 
 [[toc.items]]
 label = "C# Documentation"
@@ -13,7 +14,6 @@ group = true
 label = "Quick Reference"
 url = "/quick-reference/"
 [[toc.items.items]]
-prefix = '/docs/atlas/operator'
 label = "Usage Examples"
 url = "/usage-examples"
 collapsible = true
@@ -50,6 +50,7 @@ label = "Get Started"
 url = "/getting-started"
 isTab = true
 glyph = "LightningBolt"
+prefix = '/atlas'
 
 # Tab 1, First group
 [[toc.items]]
@@ -89,7 +90,7 @@ url = "/cli/v1.32"
 label = "Application Development"
 url = "/create-connect-deployments"
 glyph = "Code"
-# items = "/application-development-toc.toml"
+prefix = '/atlas'
 isTab = true
 
 # Tab 2, group A

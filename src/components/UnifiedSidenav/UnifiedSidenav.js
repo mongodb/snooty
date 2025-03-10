@@ -286,7 +286,8 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
         project,
       });
       // For incase result is undefined
-      updatedPrefix = result ? result : prefix;
+      updatedPrefix = result ? result : item.prefix;
+      console.log('updated prefix is', updatedPrefix);
     }
 
     // Edit the url with the correct version path
@@ -311,7 +312,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
 
 export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
-  const { project, snootyEnv } = useSnootyMetadata();
+  const { project, snootyEnv, pathPrefix } = useSnootyMetadata();
   const { activeVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const viewportSize = useViewportSize();
@@ -324,10 +325,11 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const tree = updateURLs({ tree: unifiedTocTree, prefix: '', activeVersions, versionsData, project, snootyEnv });
   console.log('The edited toctree with prefixes is:', tree);
   console.log(unifiedTocTree);
+  console.log('pathprefix', pathPrefix, project, snootyEnv);
 
   const staticTocItems = useMemo(() => {
-    return unifiedTocTree.filter((item) => item?.isTab);
-  }, [unifiedTocTree]);
+    return tree.filter((item) => item?.isTab);
+  }, [tree]);
 
   const [activeTabUrl, setActiveTabUrl] = useState(() => {
     const activeToc = staticTocItems.find((staticTocItem) => {
@@ -353,6 +355,8 @@ export function UnifiedSidenav({ slug, versionsData }) {
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
 
+  console.log(activeTabUrl);
+
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
   return (
@@ -369,7 +373,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
         >
           <div className={cx(leftPane)}>
             {isTabletOrMobile
-              ? unifiedTocTree.map((navItems) => {
+              ? tree.map((navItems) => {
                   return (
                     <UnifiedTocNavItem
                       {...navItems}
@@ -388,7 +392,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
           </div>
           {activeTabUrl && !isTabletOrMobile && (
             <div className={cx(rightPane)}>
-              {unifiedTocTree.map((navItems) => {
+              {tree.map((navItems) => {
                 if (navItems.url === activeTabUrl) {
                   return (
                     <UnifiedTocNavItem {...navItems} level={1} slug={slug} group={true} activeTabUrl={activeTabUrl} />
