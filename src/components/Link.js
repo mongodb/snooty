@@ -50,7 +50,7 @@ export const sharedDarkModeOverwriteStyles = `
  * @param {ThemeStyle} linkThemeStyle
  */
 const gatsbyLinkStyling = (linkThemeStyle) => css`
-  // align-items: center;
+  align-items: center;
   cursor: pointer;
   position: relative;
   text-decoration: none;
@@ -107,8 +107,7 @@ const Link = ({
 
   const anchorProps = validateHTMAttributes('anchor', other);
   const { theme: siteTheme } = useDarkMode();
-  // const path = ''
-  // path.startsWith(pathPrefix)
+
   //used instead of LG showLinkArrow prop for consistency between LGLinks and GatsbyLinks(GatsbyLinks don't have that prop)
   const decoration = showLinkArrow ? (
     <span>

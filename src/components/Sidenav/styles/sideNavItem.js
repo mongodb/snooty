@@ -36,10 +36,6 @@ export const sideNavItemUniTOCStyling = ({ level, isStatic = false }) => css`
   text-transform: none;
   line-height: 20px !important;
   padding-left: calc(16px + ${(level - 1) * 25}px);
-
-  icon {
-    float: right;
-  }
 `;
 
 export const sideNavGroupTOCStyling = () => css`

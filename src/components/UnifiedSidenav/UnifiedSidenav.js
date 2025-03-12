@@ -305,7 +305,6 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
       });
       // For incase result is undefined
       updatedPrefix = result ? result : item.prefix;
-      console.log('updated prefix is', updatedPrefix);
     }
 
     // Edit the url with the correct version path
@@ -388,7 +387,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
             {isTabletOrMobile
               ? tree.map((navItems) => {
                   return (
-                    // biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
+                    // biome-ignore lint/correctness/useJsxKeyInIterable: iterating through navItems which doesn't have a key
                     <UnifiedTocNavItem
                       {...navItems}
                       level={1}
@@ -408,7 +407,6 @@ export function UnifiedSidenav({ slug, versionsData }) {
           {activeTabUrl && !isTabletOrMobile && (
             <div className={cx(rightPane)}>
               {tree.map((navItems) => {
-                console.log('the active tab', activeTabUrl, navItems.url);
                 if (navItems.url === activeTabUrl) {
                   return (
                     <UnifiedTocNavItem
