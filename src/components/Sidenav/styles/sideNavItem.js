@@ -29,13 +29,17 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
   }
 `;
 
-export const sideNavItemUniTOCStyling = ({ level, isTab = false }) => css`
+export const sideNavItemUniTOCStyling = ({ level, isStatic = false }) => css`
   align-items: flex-start !important;
   // TODO: fix this style when design is finalized (DOP-5375)
-  font-size: ${isTab ? theme.fontSize.default : theme.fontSize.small};
+  font-size: ${isStatic ? theme.fontSize.default : theme.fontSize.small};
   text-transform: none;
   line-height: 20px !important;
   padding-left: calc(16px + ${(level - 1) * 25}px);
+
+  icon {
+    float: right;
+  }
 `;
 
 export const sideNavGroupTOCStyling = () => css`

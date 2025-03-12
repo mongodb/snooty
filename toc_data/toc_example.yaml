@@ -2,7 +2,6 @@ toc:
   - prefix: /drivers/csharp/${version}
     label: C# Quick Start
     url: /quick-start
-    isTab: true
     items:
       - label: Overview
         url: /
@@ -18,7 +17,6 @@ toc:
   - prefix: /csharp/${version}
     label: Fundamentals
     url: /fundamentals
-    isTab: true
     items:
       - label: Connection
         group: true
@@ -60,7 +58,6 @@ toc:
                 url: /fundamentals/crud/read-operations/project/
   - label: Examples
     url: /usage-examples/
-    isTab: true
     items:
       - label: Updating Documents
         group: true

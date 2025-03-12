@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { Link as LGLink } from '@leafygreen-ui/typography';
+// import { Link as LGLink } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 // import { isRelativeUrl } from '../utils/is-relative-url';
-import { joinClassNames } from '../utils/join-class-names';
+// import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -48,7 +50,7 @@ export const sharedDarkModeOverwriteStyles = `
  * @param {ThemeStyle} linkThemeStyle
  */
 const gatsbyLinkStyling = (linkThemeStyle) => css`
-  align-items: center;
+  // align-items: center;
   cursor: pointer;
   position: relative;
   text-decoration: none;
@@ -77,10 +79,10 @@ const gatsbyLinkStyling = (linkThemeStyle) => css`
 `;
 
 // DOP-3091: LG anchors are not inline by default
-const lgLinkStyling = css`
-  display: inline;
-  ${sharedDarkModeOverwriteStyles}
-`;
+// const lgLinkStyling = css`
+//   display: inline;
+//   ${sharedDarkModeOverwriteStyles}
+// `;
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
 // destructure the prop here and pass it only to GatsbyLink.
@@ -94,8 +96,12 @@ const Link = ({
   hideExternalIcon: hideExternalIconProp,
   showExternalIcon,
   openInNewTab,
+  prefix,
   ...other
 }) => {
+  const { pathPrefix } = useSnootyMetadata();
+  const { snootyEnv } = useSiteMetadata();
+
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
@@ -114,12 +120,11 @@ const Link = ({
   );
 
   // Use Gatsby Link for internal links, and <a> for others
-  if (!to) {
+  if (pathPrefix === prefix) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
-
     return (
       <GatsbyLink
         className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
@@ -137,19 +142,20 @@ const Link = ({
   const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
   const isMDBLink = strippedUrl.includes('mongodb.com');
   const showExtIcon = showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
-  const target = !showExtIcon ? '_self' : undefined;
+  // const target = !showExtIcon ? '_self' : undefined;
+  const href = snootyEnv === 'development' ? `${prefix + to}/index.html` : `${prefix + to}`;
 
   return (
-    <LGLink
-      className={joinClassNames(lgLinkStyling, className)}
-      href={to}
+    <a
+      className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
+      href={href}
       hideExternalIcon={!showExtIcon}
-      target={openInNewTab ? '_blank' : target}
+      // target={openInNewTab ? '_blank' : target}
       {...anchorProps}
     >
       {children}
       {decoration}
-    </LGLink>
+    </a>
   );
 };
 

@@ -3,7 +3,6 @@
 prefix = '/drivers/csharp/${version}'
 label = "C# Quick Start"
 url = "/quick-start"
-isTab = true
 
 [[toc.items]]
 label = 'Overview'
@@ -27,7 +26,6 @@ url = '/faq'
 prefix = '/csharp/${version}'
 label = "Fundamentals"
 url = "/fundamentals"
-isTab = true
 
 [[toc.items]]
 label = "Connection"
@@ -84,7 +82,6 @@ url = '/fundamentals/crud/read-operations/project/'
 [[toc]]
 label = "Examples"
 url = "/usage-examples/"
-isTab = true
 
 [[toc.items]]
 label = "Updating Documents"

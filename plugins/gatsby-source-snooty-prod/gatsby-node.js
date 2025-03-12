@@ -23,6 +23,7 @@ const { createDocsetNodes } = require('../utils/docsets.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
 const { createTocNodes } = require('../utils/unified-toc.js');
 const { createVersionNodes } = require('../utils/versions-toc.js');
+const { generatePathPrefix } = require('../../src/utils/generate-path-prefix.js');
 const assets = new Map();
 const projectComponents = new Set();
 
@@ -234,7 +235,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
   const snootyMetadata = {
     ...metadataMinusStatic,
-    metadata: { ...metadataMinusStatic.metadata, pathPrefix: siteMetadata.pathPrefix },
+    pathPrefix: generatePathPrefix(siteMetadata),
   };
   createNode({
     children: [],
@@ -400,6 +401,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       metadata: JSON
       branch: String
       project: String
+      pathPrefix: String
     }
 
     type PagePath implements Node @dontInfer {

@@ -5,7 +5,6 @@ export const tocData = () => {
         prefix: '/drivers/csharp/version', // this will be item one
         label: 'C# Quick Start',
         url: '/quick-start',
-        isTab: true,
         items: [
           {
             label: 'Overview',
@@ -35,7 +34,6 @@ export const tocData = () => {
         prefix: '/csharp/version', // this will be item 2
         label: 'Fundamentals',
         url: '/fundamentals',
-        isTab: true,
         items: [
           {
             label: 'Connection',
@@ -115,7 +113,6 @@ export const tocData = () => {
       {
         label: 'Examples', // this will be item 3
         url: '/usage-examples/',
-        isTab: true,
         items: [
           {
             label: 'Updating Documents',
