@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
-// import { Link as LGLink } from '@leafygreen-ui/typography';
+import { Link as LGLink } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
-// import { isRelativeUrl } from '../utils/is-relative-url';
-// import { joinClassNames } from '../utils/join-class-names';
+import { isRelativeUrl } from '../utils/is-relative-url';
+import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
@@ -79,10 +79,10 @@ const gatsbyLinkStyling = (linkThemeStyle) => css`
 `;
 
 // DOP-3091: LG anchors are not inline by default
-// const lgLinkStyling = css`
-//   display: inline;
-//   ${sharedDarkModeOverwriteStyles}
-// `;
+const lgLinkStyling = css`
+  display: inline;
+  ${sharedDarkModeOverwriteStyles}
+`;
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
 // destructure the prop here and pass it only to GatsbyLink.
@@ -119,8 +119,39 @@ const Link = ({
     ''
   );
 
+  // If prefix, that means we are coming from the UnifiedSideNav and not the old SideNav
+  if (prefix) {
+    if (!to.startsWith('/')) to = `/${to}`;
+
+    // Ensure trailing slash
+    to = to.replace(/\/?(\?|#|$)/, '/$1');
+    if (to && isRelativeUrl(to) && !anchor && pathPrefix === prefix) {
+      return (
+        <GatsbyLink
+          className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
+          activeClassName={activeClassName}
+          partiallyActive={partiallyActive}
+          to={to}
+          {...anchorProps}
+        >
+          {children}
+          {decoration}
+        </GatsbyLink>
+      );
+    }
+
+    // On the Unified SideNav but linking to a different site
+    const href = snootyEnv === 'development' ? `${prefix + to}/index.html` : `${prefix + to}`;
+    return (
+      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={href}>
+        {children}
+        {decoration}
+      </a>
+    );
+  }
+
   // Use Gatsby Link for internal links, and <a> for others
-  if (pathPrefix === prefix) {
+  if (to && isRelativeUrl(to) && !anchor && pathPrefix === prefix) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
@@ -142,20 +173,19 @@ const Link = ({
   const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
   const isMDBLink = strippedUrl.includes('mongodb.com');
   const showExtIcon = showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
-  // const target = !showExtIcon ? '_self' : undefined;
-  const href = snootyEnv === 'development' ? `${prefix + to}/index.html` : `${prefix + to}`;
+  const target = !showExtIcon ? '_self' : undefined;
 
   return (
-    <a
-      className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
-      href={href}
+    <LGLink
+      className={joinClassNames(lgLinkStyling, className)}
+      href={to}
       hideExternalIcon={!showExtIcon}
-      // target={openInNewTab ? '_blank' : target}
+      target={openInNewTab ? '_blank' : target}
       {...anchorProps}
     >
       {children}
       {decoration}
-    </a>
+    </LGLink>
   );
 };
 
