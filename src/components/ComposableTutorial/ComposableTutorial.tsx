@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  ComposableNode,
-  ComposableTutorialNode,
-} from '../../types/ast';
+import { useLocation } from '@gatsbyjs/reach-router';
+import { ComposableNode, ComposableTutorialNode } from '../../types/ast';
 import Composable from './Composable';
 import ConfigurableOption from './ConfigurableOption';
 
@@ -13,6 +11,7 @@ interface ComposableProps {
 const ComposableTutorial = ({ nodeData: { options, children }, ...rest }: ComposableProps) => {
   const composableOptions = options['composable-options'];
   const [currentSelections, setCurrentSelections] = useState<{ [key: string]: string }>(() => ({}));
+  const location = useLocation();
 
   // TODO:
   // read query params

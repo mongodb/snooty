@@ -10,7 +10,6 @@ interface ConfigurationOptionProps {
 }
 
 const ConfigurableOption = ({ option, selections, setCurrentSelections, showComposable }: ConfigurationOptionProps) => {
-
   const onSelect = useCallback(
     (value: string) => {
       setCurrentSelections({ ...selections, [option.value]: value });
