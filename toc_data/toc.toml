@@ -4,7 +4,7 @@ label = "C# Quick Start"
 url = "/quick-start"
 glyph = 'Bulb'
 # prefix = '/drivers/csharp/${version}'
-prefix = '/master/csharp/bianca.laube/DOP-5343'
+prefix = '/${version}/csharp/bianca.laube/DOP-5343'
 
 [[toc.items]] # group 1
 label = "C# Documentation"
