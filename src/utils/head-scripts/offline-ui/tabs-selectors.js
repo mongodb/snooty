@@ -6,7 +6,7 @@
 
 function bindTabsSelectorsUI() {
   function onChoiceClick({ e, choices, tabsComponents, menu, button }) {
-    // get the data-value attribute
+    // get the data-value attribute from Select component
     const tabName = e.currentTarget.getAttribute('data-value');
 
     // set choice selected for styling css
@@ -18,7 +18,8 @@ function bindTabsSelectorsUI() {
     // handle the tabsComponents
     for (const tabsComponent of tabsComponents) {
       // find the tab within each tabsComponent
-      const tabContent = tabsComponent.querySelector(`[data-value=${tabName}`);
+      // tabs are tied to data-tabid value
+      const tabContent = tabsComponent.querySelector(`[data-tabid=${tabName}`);
       if (!tabContent) {
         continue;
       }
