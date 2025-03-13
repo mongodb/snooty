@@ -19,13 +19,10 @@ function bindTabsSelectorsUI() {
     for (const tabsComponent of tabsComponents) {
       // find the tab within each tabsComponent
       // tabs are tied to data-tabid value
-      const tabContent = tabsComponent.querySelector(`[data-tabid=${tabName}`);
-      if (!tabContent) {
-        continue;
-      }
       // if it exists, hide all other tabs, and show this tab
       for (const tabPanel of tabsComponent.querySelectorAll('[role=tabpanel]')) {
-        tabPanel.style.display = tabPanel.contains(tabContent) ? 'block' : 'none';
+        const tabElmWithSameId = tabPanel.querySelector(`[data-tabid=${CSS.escape(tabName)}]`);
+        tabPanel.style.display = tabElmWithSameId ? 'block' : 'none';
       }
     }
     const buttonChildren = button.querySelectorAll('div');
