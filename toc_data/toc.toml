@@ -97,6 +97,18 @@ url = "/tutorial/generate-data"
 label = "Atlas cli"
 url = "/cli/v1.32"
 
+[[toc.items]]
+label = "Docs Compass"
+prefix = "/master/compass/bianca.laube/DOP-5343"
+group = true
+[[toc.items.items]]
+label = "Overview"
+url = "/"
+[[toc.items.items]]
+label = "Import and export"
+url = "/import-export"
+
+
 # static left pane item 2
 [[toc]]
 label = "Application Development"
