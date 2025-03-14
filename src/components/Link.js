@@ -124,7 +124,8 @@ const Link = ({
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
-    if (to && isRelativeUrl(to) && !anchor && pathPrefix === prefix) {
+
+    if (pathPrefix.replaceAll('/', '') === prefix.replaceAll('/', '')) {
       return (
         <GatsbyLink
           className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
@@ -139,6 +140,7 @@ const Link = ({
       );
     }
 
+    console.log('i made it ma', prefix + to);
     // On the Unified SideNav but linking to a different site
     const href = snootyEnv === 'development' ? `${prefix + to}index.html` : `${prefix + to}`;
     return (
@@ -148,6 +150,8 @@ const Link = ({
       </a>
     );
   }
+
+  console.log('WHWHHWHWHWHWHHWHWHWHHW');
 
   // Use Gatsby Link for internal links, and <a> for others
   if (to && isRelativeUrl(to) && !anchor && pathPrefix === prefix) {

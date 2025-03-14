@@ -276,8 +276,11 @@ const replaceVersion = ({ url, currentVersion, versionsData }) => {
   const proj = content.repoName;
 
   // based on the activeVersion, find the correct verion
-  const ver = content?.version.find((obj) => obj.name === currentVersion[proj]);
-  if (!ver) return;
+  let ver = content?.version.find((obj) => obj.name === currentVersion[proj]);
+  if (!ver) {
+    // If no current version, use first version in the array
+    ver = content.version[0];
+  }
 
   // input the correct alias into the url
   const result = url?.replace(/\$\{([^}]+)\}/g, ver.urlSlug);
