@@ -203,7 +203,7 @@ interface TocTreeDirective extends Directive<TocTreeOptions> {
 
 interface ComposableTutorialOption {
   default: string;
-  dependencies: { [key: string]: string }[];
+  dependencies: Record<string, string>[];
   selections: { value: string; text: string }[];
   text: string;
   value: string;

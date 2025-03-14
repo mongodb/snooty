@@ -4,9 +4,9 @@ import { ComposableTutorialOption } from '../../types/ast';
 
 interface ConfigurationOptionProps {
   option: ComposableTutorialOption;
-  selections: { [key: string]: string };
-  setCurrentSelections: React.Dispatch<{ [key: string]: string }>;
-  showComposable: (dependencies: { [key: string]: string }[]) => boolean;
+  selections: Record<string, string>;
+  setCurrentSelections: React.Dispatch<Record<string, string>>;
+  showComposable: (dependencies: Record<string, string>[]) => boolean;
 }
 
 const ConfigurableOption = ({ option, selections, setCurrentSelections, showComposable }: ConfigurationOptionProps) => {
@@ -24,9 +24,9 @@ const ConfigurableOption = ({ option, selections, setCurrentSelections, showComp
   }
 
   return (
-    <Select aria-labelledby={'null'} aria-label={`Select your ${option.text}`} onChange={onSelect}>
-      {option.selections.map((selection) => (
-        <Option value={selection.value}>{selection.text}</Option>
+    <Select value={selections[option.value]} aria-labelledby={'null'} aria-label={`Select your ${option.text}`} onChange={onSelect}>
+      {option.selections.map((selection, i) => (
+        <Option value={selection.value} key={i}>{selection.text}</Option>
       ))}
     </Select>
   );
