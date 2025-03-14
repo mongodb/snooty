@@ -2,18 +2,17 @@
 [[toc]]
 label = "C# Quick Start"
 url = "/quick-start"
-isTab = true
 glyph = 'Bulb'
-prefix = '/drivers/csharp/${version}'
+# prefix = '/drivers/csharp/${version}'
+prefix = '/${version}/csharp/bianca.laube/DOP-5343'
 
-[[toc.items]]
+[[toc.items]] # group 1
 label = "C# Documentation"
 group = true
 [[toc.items.items]]
 label = "Quick Reference"
 url = "/quick-reference/"
 [[toc.items.items]]
-prefix = '/docs/atlas/operator'
 label = "Usage Examples"
 url = "/usage-examples"
 collapsible = true
@@ -29,7 +28,7 @@ url = "/usage-examples/insertOne"
 [[toc.items.items]]
 label = "What's New"
 url = "/whats-new"
-[[toc.items]]
+[[toc.items]] # group 2 
 label = "Fundamentals"
 group = true
 [[toc.items.items]]
@@ -42,14 +41,28 @@ collapsible = true
 [[toc.items.items.items]]
 label = "Run a Database Command"
 url = "/fundamentals/databases-collections/run-command"
+[[toc.items]] # group 3
+label = "Connect to cloud"
+group = true
+prefix = '/master/cloud-docs/bianca.laube/DOP-5343'
+[[toc.items.items]]
+label = "Manage Clusters"
+url = "/manage-database-deployments"
+collapsible = true
+[[toc.items.items.items]]
+label = "Storage"
+url = "/customize-storage"
+[[toc.items.items.items]]
+label = "Auto-Scaling"
+url = "/cluster-autoscaling"
 
 
 # Static left pane item 1
 [[toc]]
 label = "Get Started"
 url = "/getting-started"
-isTab = true
 glyph = "LightningBolt"
+prefix = '/master/cloud-docs/bianca.laube/DOP-5343'
 
 # Tab 1, First group
 [[toc.items]]
@@ -84,13 +97,24 @@ url = "/tutorial/generate-data"
 label = "Atlas cli"
 url = "/cli/v1.32"
 
+[[toc.items]]
+label = "Docs Compass"
+prefix = "/master/compass/bianca.laube/DOP-5343"
+group = true
+[[toc.items.items]]
+label = "Overview"
+url = "/"
+[[toc.items.items]]
+label = "Import and export"
+url = "/import-export"
+
+
 # static left pane item 2
 [[toc]]
 label = "Application Development"
 url = "/create-connect-deployments"
 glyph = "Code"
-# items = "/application-development-toc.toml"
-isTab = true
+prefix = '/master/cloud-docs/bianca.laube/DOP-5343'
 
 # Tab 2, group A
 [[toc.items]]
