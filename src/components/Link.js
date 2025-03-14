@@ -140,7 +140,6 @@ const Link = ({
       );
     }
 
-    console.log('i made it ma', prefix + to);
     // On the Unified SideNav but linking to a different site
     const href = snootyEnv === 'development' ? `${prefix + to}index.html` : `${prefix + to}`;
     return (
@@ -150,8 +149,6 @@ const Link = ({
       </a>
     );
   }
-
-  console.log('WHWHHWHWHWHWHHWHWHWHHW');
 
   // Use Gatsby Link for internal links, and <a> for others
   if (to && isRelativeUrl(to) && !anchor && pathPrefix === prefix) {
