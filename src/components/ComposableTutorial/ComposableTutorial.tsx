@@ -59,14 +59,12 @@ const ComposableContainer = styled.div`
   display: flex;
   column-gap: ${theme.size.default};
   justify-items: space-between;
-
 `;
 
 const ComposableTutorial = ({ nodeData: { options, children }, ...rest }: ComposableProps) => {
   const composableOptions = options['composable-options'];
   const [currentSelections, setCurrentSelections] = useState<Record<string, string>>(() => ({}));
   const location = useLocation();
-
 
   // takes care of query param reading and rerouting
   // if query params fulfill all selections, show the selections
@@ -107,12 +105,15 @@ const ComposableTutorial = ({ nodeData: { options, children }, ...rest }: Compos
     [currentSelections]
   );
 
-  const onSelect = useCallback((value: string, option: string) => {
-    const newSelections = {...currentSelections, [option]: value};
-    setCurrentSelections(currentSelections);
-    const queryString = new URLSearchParams(newSelections).toString();
-    navigate(`?${queryString}`);
-  }, [currentSelections]);
+  const onSelect = useCallback(
+    (value: string, option: string) => {
+      const newSelections = { ...currentSelections, [option]: value };
+      setCurrentSelections(currentSelections);
+      const queryString = new URLSearchParams(newSelections).toString();
+      navigate(`?${queryString}`);
+    },
+    [currentSelections]
+  );
 
   return (
     <>

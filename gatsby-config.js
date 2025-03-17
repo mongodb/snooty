@@ -85,8 +85,6 @@ const plugins = [
 
           // construct query params
           const permutations = generatePermutations(composableNode.options['composable-options']);
-          console.log('check here');
-          console.log(permutations);
 
           for (const permutation of permutations) {
             const queryString = new URLSearchParams(permutation).toString();
