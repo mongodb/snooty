@@ -371,6 +371,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         page_id: TEST_SLUG,
         slug: TEST_SLUG,
         repoBranches,
+        options: {
+          consumables: true,
+        },
       },
     });
 

@@ -140,7 +140,7 @@ const componentMap = {
   code: Code,
   collapsible: Collapsible,
   'community-driver': CommunityPillLink,
-  'composable-tutorials': ComposableTutorial,
+  'composable-tutorial': ComposableTutorial,
   'io-code-block': CodeIO,
   cond: Cond,
   container: Container,

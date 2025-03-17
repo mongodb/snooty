@@ -2,9 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { parse, ParsedQuery } from 'query-string';
 import { navigate } from 'gatsby';
+import styled from '@emotion/styled';
 import { ComposableNode, ComposableTutorialNode } from '../../types/ast';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { isBrowser } from '../../utils/is-browser';
+import { theme } from '../../theme/docsTheme';
 import Composable from './Composable';
 import ConfigurableOption from './ConfigurableOption';
 
@@ -28,7 +30,7 @@ function filterValidQueryParams(
     }
   }
 
-  // fallback to of composableOptions if flagged
+  // fallback to of composableOptions if not present in query
   if (fallbackToDefaults) {
     for (const composableOption of composableOptions) {
       if (!res[composableOption.value]) {
@@ -52,6 +54,13 @@ interface ComposableProps {
 }
 
 const LOCAL_STORAGE_KEY = 'activeComposables';
+
+const ComposableContainer = styled.div`
+  display: flex;
+  column-gap: ${theme.size.default};
+  justify-items: space-between;
+
+`;
 
 const ComposableTutorial = ({ nodeData: { options, children }, ...rest }: ComposableProps) => {
   const composableOptions = options['composable-options'];
@@ -98,19 +107,26 @@ const ComposableTutorial = ({ nodeData: { options, children }, ...rest }: Compos
     [currentSelections]
   );
 
+  const onSelect = useCallback((value: string, option: string) => {
+    const newSelections = {...currentSelections, [option]: value};
+    setCurrentSelections(currentSelections);
+    const queryString = new URLSearchParams(newSelections).toString();
+    navigate(`?${queryString}`);
+  }, [currentSelections]);
+
   return (
     <>
-      <div>
+      <ComposableContainer>
         {composableOptions.map((option, index) => (
           <ConfigurableOption
             option={option}
             selections={currentSelections}
-            setCurrentSelections={setCurrentSelections}
+            onSelect={onSelect}
             showComposable={showComposable}
             key={index}
           />
         ))}
-      </div>
+      </ComposableContainer>
       {children.map((c, i) => {
         if (showComposable(c.options.selections)) {
           return <Composable nodeData={c as ComposableNode} key={i} />;
