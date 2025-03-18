@@ -30,7 +30,14 @@ export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
     // meta array because the canonical will be handle within
     meta.splice(canonicalIndex, 1);
 
+    // lets stop here because a canonical from a directive is highest ranked
     return canonical;
+  }
+
+  // else we check for EOL
+  if (metadata.eol && metadata.canonical) {
+    // if a canonical is provided by the writers
+    canonical = metadata.canonical;
   }
 
   canonical = assertTrailingSlash(canonical);
