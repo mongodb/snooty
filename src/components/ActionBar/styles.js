@@ -5,6 +5,10 @@ import { gridStyling as landingTemplateGridStyling } from '../../templates/landi
 import { gridStyling as centerGridStyling } from '../../templates/NotFound';
 import { theme } from '../../theme/docsTheme';
 import { displayNone } from '../../utils/display-none';
+import {
+  DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE,
+  DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE_LARGE_SCREEN,
+} from '../../templates/document';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
@@ -53,6 +57,20 @@ const landingGridStyling = css`
   ${landingTemplateGridStyling}
   @media ${theme.screenSize.upToLarge} {
     grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
+  }
+`;
+
+const standardContentStyling = css`
+  padding-left: max(
+    calc(((100% - (${DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE})) / 2) + ${theme.size.xlarge}),
+    ${theme.size.xlarge}
+  );
+
+  @media ${theme.screenSize['3XLargeAndUp']} {
+    padding-left: max(
+      calc(((100% - (${DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE_LARGE_SCREEN})) / 2) + ${theme.size.xlarge}),
+      ${theme.size.xlarge}
+    );
   }
 `;
 
@@ -112,31 +130,28 @@ export const getContainerStyling = (template) => {
     fakeColumns = false;
 
   switch (template) {
-    case 'product-landing':
-      containerClassname = gridStyling;
-      fakeColumns = true;
-      break;
     case 'landing':
       containerClassname = landingGridStyling;
       searchContainerClassname = leftInGrid;
       fakeColumns = true;
       break;
+    case 'product-landing':
     case 'changelog':
       containerClassname = gridStyling;
       fakeColumns = true;
       break;
     case 'blank':
-      containerClassname = middleAlignment;
-      searchContainerClassname = centerInGrid;
-      fakeColumns = true;
-      break;
     case 'errorpage':
       containerClassname = middleAlignment;
       searchContainerClassname = centerInGrid;
       fakeColumns = true;
       break;
-    default:
+    case 'drivers-index':
+    case 'guide':
       containerClassname = flexStyling;
+      break;
+    default:
+      containerClassname = standardContentStyling;
       break;
   }
 

@@ -35,6 +35,7 @@ const landingTemplateStyling = css`
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   display: grid;
   padding: 16px 0px 0px 0px;
+
   // Use landing template's grid layout to help with alignment
   @media ${theme.screenSize.mediumAndUp} {
     grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(12, minmax(0, ${CONTENT_MAX_WIDTH / 12}px)) minmax(
