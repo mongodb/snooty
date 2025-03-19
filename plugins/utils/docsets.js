@@ -13,13 +13,7 @@ const createDocsetNodes = async ({ db, createNode, createNodeId, createContentDi
       prefix: docset.prefix,
       project: docset.project,
       url: docset.url,
-      // branches: docset.branches,
-      // TODO: remove testing
-      branches:
-        docset.branches?.map((branch) => {
-          const { offlineUrl, ...rest } = branch;
-          return { ...rest };
-        }) ?? [],
+      branches: docset.branches,
       hasEolVersions: docset.hasEolVersions,
     });
   });
