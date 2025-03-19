@@ -18,7 +18,6 @@ function bindTabUI() {
     const tabsetsName = parentSnootyTab.dataset.tabids;
     const selectedTabId = tabButton.dataset.tabid;
     const snootyTabsWithSameTabSets = document.querySelectorAll(`[data-tabids=${CSS.escape(tabsetsName)}]`);
-    debugger;
 
     for (const snootyTab of snootyTabsWithSameTabSets) {
       // activate the buttons
@@ -48,7 +47,6 @@ function bindTabUI() {
         }
 
         const tabButtons = getTabButtons(snootyTab);
-        debugger;
         // set the first button as selected
         if (tabButtons.length) {
           tabButtons[0].setAttribute('aria-selected', true);
