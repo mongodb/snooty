@@ -89,7 +89,7 @@ function processRepos(repos: Repo[]) {
       }
 
       // only return this repo if it has offline versions
-      if (offlineRepo.versions.length) {
+      if (offlineRepo.versions.length > 0) {
         res.push(offlineRepo);
       }
       return res;
