@@ -12,7 +12,7 @@ function getBaseUrl(snootyEnv: string) {
     case 'dotcomstg':
       return 'https://snooty-data-api.docs.staging.corp.mongodb.com/';
     default:
-      return 'https://snooty-data-api.mongodb.com/';
+      return 'https://snooty-data-api.docs.staging.corp.mongodb.com/';
   }
 }
 
