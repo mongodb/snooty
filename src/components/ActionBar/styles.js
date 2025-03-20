@@ -76,6 +76,10 @@ const standardContentStyling = css`
       ${MAIN_COLUMN_HORIZONTAL_MARGIN}
     );
   }
+
+  @media ${theme.screenSize.upToLarge} {
+    padding-left: ${theme.size.medium};
+  }
 `;
 
 const flexStyling = css`
@@ -152,6 +156,7 @@ export const getContainerStyling = (template) => {
       break;
     case 'drivers-index':
     case 'guide':
+    case 'search':
       containerClassname = flexStyling;
       break;
     default:
