@@ -28,12 +28,12 @@ describe('Head', () => {
     });
     it('renders the canonical tag from the snooty.toml', () => {
       render(<Head pageContext={mockCompleteEOLPageContext.pageContext} data={mockCompleteEOLPageContext.data} />);
-      const _canonical = mockEOLSnootyMetadata.canonical;
+      const canonical = mockEOLSnootyMetadata.canonical;
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', _canonical);
+      expect(canonicalTag).toHaveAttribute('href', canonical);
     });
   });
 
@@ -47,16 +47,14 @@ describe('Head', () => {
         siteUrl: mockSiteUrl,
       }));
       render(<Head pageContext={mockHeadPageContext.pageContext} data={mockHeadPageContext.data} />);
-      const urlSlug = 'stable';
-      const siteBasePrefix = mockHeadPageContext.pageContext.repoBranches.siteBasePrefix;
 
-      const currentVersion = `${mockSiteUrl}/${siteBasePrefix}/${urlSlug}/`;
+      const canonical = `${mockEOLSnootyMetadata.canonical}`;
 
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', currentVersion);
+      expect(canonicalTag).toHaveAttribute('href', canonical);
     });
   });
 
