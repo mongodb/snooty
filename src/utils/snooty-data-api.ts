@@ -12,7 +12,7 @@ function getBaseUrl(snootyEnv: string) {
     case 'dotcomstg':
       return 'https://snooty-data-api.docs.staging.corp.mongodb.com/';
     default:
-      return 'https://snooty-data-api.mongodb.com/';
+      return 'https://snooty-data-api.docs.staging.corp.mongodb.com/';
   }
 }
 
@@ -41,7 +41,9 @@ export type Repo = {
 export const getAllRepos = async () => {
   const url: string = new URL('/projects', BASE_URL).toString();
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      credentials: 'include',
+    });
     const repos: Repo[] = (await res.json())['data'];
     return repos;
   } catch (e) {
