@@ -2,6 +2,7 @@ import React, { createContext, Dispatch, SetStateAction, useContext, useEffect, 
 import { useAllDocsets } from '../../hooks/useAllDocsets';
 import { getAllRepos, type Repo } from '../../utils/snooty-data-api';
 import assertLeadingBrand from '../../utils/assert-leading-brand';
+import useScreenSize from '../../hooks/useScreenSize';
 import DownloadModal from './DownloadModal';
 
 export type OfflineVersion = {
@@ -83,12 +84,7 @@ function processRepos(repos: Repo[]) {
         if (branch.offlineUrl) {
           offlineRepo.versions.push({
             displayName: lintVersionLabel(branch.label),
-            // url: branch.offlineUrl,
-            // TODO: revert testing code
-            url: branch.offlineUrl.replace(
-              'https://www.mongodb.com/docs/offline',
-              'https://mongodbcom-cdn.website.staging.corp.mongodb.com/docs-qa/offline'
-            ),
+            url: branch.offlineUrl,
           });
         }
       }
@@ -116,14 +112,17 @@ const OfflineDownloadProvider = ({ children }: ProviderProps) => {
   const [offlineRepos, setOfflineRepos] = useState<OfflineRepo[]>(() => processDocsets(allDocsets));
   const [modalOpen, setModalOpen] = useState(() => false);
   const promise = useRef<Promise<void>>();
+  const { isTabletOrMobile } = useScreenSize();
 
   useEffect(() => {
     if (promise.current || !modalOpen) {
       return;
     }
 
+    let isMounted = true;
     promise.current = getAllRepos()
       .then((res) => {
+        if (!isMounted) return;
         setOfflineRepos(processRepos(res));
       })
       .catch((e) => {
@@ -132,12 +131,16 @@ const OfflineDownloadProvider = ({ children }: ProviderProps) => {
       .finally(() => {
         promise.current = undefined;
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, [modalOpen]);
 
   return (
     <OfflineDownloadContext.Provider value={{ repos: offlineRepos, modalOpen, setModalOpen }}>
       {children}
-      <DownloadModal open={modalOpen} setOpen={setModalOpen} />
+      {!isTabletOrMobile && <DownloadModal open={modalOpen} setOpen={setModalOpen} />}
     </OfflineDownloadContext.Provider>
   );
 };

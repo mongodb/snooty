@@ -3,6 +3,8 @@ import Button, { Size } from '@leafygreen-ui/button';
 import { css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { displayNone } from '../../utils/display-none';
+import useScreenSize from '../../hooks/useScreenSize';
 import { useOfflineDownloadContext } from './DownloadContext';
 
 const downloadIconStyling = css`
@@ -13,12 +15,16 @@ const downloadIconStyling = css`
     color: var(--white);
     background-color: var(--gray-dark2);
   }
+
+  ${displayNone.onMobileAndTablet};
 `;
 
 const DownloadButton = () => {
   const { setModalOpen } = useOfflineDownloadContext();
+  const { isTabletOrMobile } = useScreenSize();
 
   const openDownloadModal = () => {
+    if (isTabletOrMobile) return;
     reportAnalytics('Offline docs download button clicked');
     setModalOpen(true);
   };

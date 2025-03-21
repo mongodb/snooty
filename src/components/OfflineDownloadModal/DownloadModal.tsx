@@ -109,8 +109,6 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
   const selectedVersions = useRef<Record<OfflineRepo['displayName'], OfflineVersion>>({});
   const { pushToast } = useToast();
   const { isMobile } = useScreenSize();
-  // TODO: remove testing code
-  const [status, setStatus] = useState('');
 
   useEffect(() => {
     // reset row selection when modal is opened/closed
@@ -247,10 +245,8 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         })
       );
       setOpen(false);
-      setStatus(`Downloaded ${urlsToRequest.map((u) => u.url)}`)
     } catch (e) {
       console.error(`Error downloading, `, e);
-      setStatus(JSON.stringify(e));
     } finally {
       setResultsLoading(false);
     }
@@ -318,13 +314,6 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         </TableBody>
       </LeafyTable>
 
-      {/* REMOVE TESTING CODE */}
-      <div>
-        CHECK STATUS HERE:
-      </div>
-      <div>
-        {status}
-      </div>
       <Box className={footerStyling}>
         <Button onClick={() => setOpen(false)}>Cancel</Button>
         <Button
