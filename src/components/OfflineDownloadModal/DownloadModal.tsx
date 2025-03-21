@@ -320,7 +320,9 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
 
       {/* REMOVE TESTING CODE */}
       <div>
-        CHECK STATUS HERE
+        CHECK STATUS HERE:
+      </div>
+      <div>
         {status}
       </div>
       <Box className={footerStyling}>

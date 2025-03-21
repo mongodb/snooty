@@ -83,7 +83,12 @@ function processRepos(repos: Repo[]) {
         if (branch.offlineUrl) {
           offlineRepo.versions.push({
             displayName: lintVersionLabel(branch.label),
-            url: branch.offlineUrl,
+            // url: branch.offlineUrl,
+            // TODO: revert testing code
+            url: branch.offlineUrl.replace(
+              'https://www.mongodb.com/docs/offline',
+              'https://mongodbcom-cdn.website.staging.corp.mongodb.com/docs-qa/offline'
+            ),
           });
         }
       }
