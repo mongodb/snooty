@@ -22,6 +22,7 @@ import Button, { Variant as ButtonVariant } from '@leafygreen-ui/button';
 import { theme } from '../../theme/docsTheme';
 import fetchAndSaveFile from '../../utils/download-file';
 import useScreenSize from '../../hooks/useScreenSize';
+import Spinner from '../Spinner';
 import { useOfflineDownloadContext, type OfflineVersion, type OfflineRepo } from './DownloadContext';
 import VersionSelect from './VersionSelector';
 
@@ -318,7 +319,13 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         <Button onClick={() => setOpen(false)}>Cancel</Button>
         <Button
           variant={ButtonVariant.Primary}
+          className={cx(css`
+            svg {
+              position: static;
+            }
+          `)}
           isLoading={resultsLoading}
+          loadingIndicator={<Spinner size={14} className={cx(css``)} />}
           disabled={!rowSelection || !Object.keys(rowSelection)?.length}
           onClick={onDownload}
         >
