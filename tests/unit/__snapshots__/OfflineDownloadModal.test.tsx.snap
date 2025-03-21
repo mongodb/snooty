@@ -76,6 +76,12 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   background-color: var(--gray-dark2);
 }
 
+@media only screen and (max-width: 1024px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
 .emotion-1 {
   overflow: hidden;
   position: absolute;
@@ -899,6 +905,10 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
 .emotion-33[data-focus="true"] {
   color: #889397;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-33 svg {
+  position: static;
 }
 
 .emotion-36 {
