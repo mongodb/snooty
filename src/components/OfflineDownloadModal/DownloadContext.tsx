@@ -137,6 +137,12 @@ const OfflineDownloadProvider = ({ children }: ProviderProps) => {
     };
   }, [modalOpen]);
 
+  useEffect(() => {
+    if (isTabletOrMobile) {
+      setModalOpen(false);
+    }
+  }, [isTabletOrMobile]);
+
   return (
     <OfflineDownloadContext.Provider value={{ repos: offlineRepos, modalOpen, setModalOpen }}>
       {children}
