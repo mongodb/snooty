@@ -227,7 +227,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
       await Promise.all(
         urlsToRequest.map(async (urlData) => {
           try {
-            await fetchAndSaveFile(urlData.url, `MongoDB - ${urlData.repo}-${urlData.version}.tar.gz`);
+            await fetchAndSaveFile(urlData.url, `${urlData.repo}-${urlData.version}.tar.gz`);
             pushToast({
               title: 'Download Initiated',
               description: urlData.repo,
