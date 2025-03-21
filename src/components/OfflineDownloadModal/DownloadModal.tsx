@@ -102,12 +102,15 @@ type ModalProps = {
 
 const DownloadModal = ({ open, setOpen }: ModalProps) => {
   const [searchText, setSearchText] = useState('');
+  const [resultsLoading, setResultsLoading] = useState(false);
   const tableRef = useRef<HTMLDivElement>(null);
   const [rowSelection, setRowSelection] = useState<{ [key: string]: boolean }>({});
   const { repos } = useOfflineDownloadContext();
   const selectedVersions = useRef<Record<OfflineRepo['displayName'], OfflineVersion>>({});
   const { pushToast } = useToast();
   const { isMobile } = useScreenSize();
+  // TODO: remove testing code
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     // reset row selection when modal is opened/closed
@@ -208,6 +211,10 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
   const { rows } = table.getRowModel();
 
   const onDownload = async () => {
+    if (!rowSelection || !Object.keys(rowSelection)?.length) {
+      return;
+    }
+    setResultsLoading(true);
     const selectedDisplayNames = table.getSelectedRowModel().flatRows.map((row) => row.original.displayName);
     const urlsToRequest: { repo: string; version: string; url: string }[] = [];
     for (const displayName of selectedDisplayNames) {
@@ -217,27 +224,36 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         url: selectedVersions.current[displayName].url,
       });
     }
-    await Promise.all(
-      urlsToRequest.map(async (urlData) => {
-        try {
-          await fetchAndSaveFile(urlData.url, `${urlData.repo}-${urlData.version}.tar.gz`);
-          pushToast({
-            title: 'Download Initiated',
-            description: urlData.repo,
-            variant: Variant.Success,
-            dismissible: true,
-          });
-        } catch (e) {
-          pushToast({
-            title: 'Download Failed',
-            description: urlData.repo,
-            variant: Variant.Warning,
-            dismissible: true,
-          });
-        }
-      })
-    );
-    setOpen(false);
+    try {
+      await Promise.all(
+        urlsToRequest.map(async (urlData) => {
+          try {
+            await fetchAndSaveFile(urlData.url, `MongoDB - ${urlData.repo}-${urlData.version}.tar.gz`);
+            pushToast({
+              title: 'Download Initiated',
+              description: urlData.repo,
+              variant: Variant.Success,
+              dismissible: true,
+            });
+          } catch (e) {
+            pushToast({
+              title: 'Download Failed',
+              description: urlData.repo,
+              variant: Variant.Warning,
+              dismissible: true,
+            });
+            throw e;
+          }
+        })
+      );
+      setOpen(false);
+      setStatus(`Downloaded ${urlsToRequest.map((u) => u.url)}`)
+    } catch (e) {
+      console.error(`Error downloading, `, e);
+      setStatus(JSON.stringify(e));
+    } finally {
+      setResultsLoading(false);
+    }
   };
 
   return (
@@ -302,10 +318,16 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         </TableBody>
       </LeafyTable>
 
+      {/* REMOVE TESTING CODE */}
+      <div>
+        CHECK STATUS HERE
+        {status}
+      </div>
       <Box className={footerStyling}>
         <Button onClick={() => setOpen(false)}>Cancel</Button>
         <Button
           variant={ButtonVariant.Primary}
+          isLoading={resultsLoading}
           disabled={!rowSelection || !Object.keys(rowSelection)?.length}
           onClick={onDownload}
         >
