@@ -325,7 +325,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
             }
           `)}
           isLoading={resultsLoading}
-          loadingIndicator={<Spinner size={14} className={cx(css``)} />}
+          loadingIndicator={<Spinner size={14} />}
           disabled={!rowSelection || !Object.keys(rowSelection)?.length}
           onClick={onDownload}
         >
