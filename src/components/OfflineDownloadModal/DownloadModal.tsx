@@ -22,6 +22,7 @@ import Button, { Variant as ButtonVariant } from '@leafygreen-ui/button';
 import { theme } from '../../theme/docsTheme';
 import fetchAndSaveFile from '../../utils/download-file';
 import useScreenSize from '../../hooks/useScreenSize';
+import Spinner from '../Spinner';
 import { useOfflineDownloadContext, type OfflineVersion, type OfflineRepo } from './DownloadContext';
 import VersionSelect from './VersionSelector';
 
@@ -102,6 +103,7 @@ type ModalProps = {
 
 const DownloadModal = ({ open, setOpen }: ModalProps) => {
   const [searchText, setSearchText] = useState('');
+  const [resultsLoading, setResultsLoading] = useState(false);
   const tableRef = useRef<HTMLDivElement>(null);
   const [rowSelection, setRowSelection] = useState<{ [key: string]: boolean }>({});
   const { repos } = useOfflineDownloadContext();
@@ -208,6 +210,10 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
   const { rows } = table.getRowModel();
 
   const onDownload = async () => {
+    if (!rowSelection || !Object.keys(rowSelection)?.length) {
+      return;
+    }
+    setResultsLoading(true);
     const selectedDisplayNames = table.getSelectedRowModel().flatRows.map((row) => row.original.displayName);
     const urlsToRequest: { repo: string; version: string; url: string }[] = [];
     for (const displayName of selectedDisplayNames) {
@@ -217,27 +223,34 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         url: selectedVersions.current[displayName].url,
       });
     }
-    await Promise.all(
-      urlsToRequest.map(async (urlData) => {
-        try {
-          await fetchAndSaveFile(urlData.url, `${urlData.repo}-${urlData.version}.tar.gz`);
-          pushToast({
-            title: 'Download Initiated',
-            description: urlData.repo,
-            variant: Variant.Success,
-            dismissible: true,
-          });
-        } catch (e) {
-          pushToast({
-            title: 'Download Failed',
-            description: urlData.repo,
-            variant: Variant.Warning,
-            dismissible: true,
-          });
-        }
-      })
-    );
-    setOpen(false);
+    try {
+      await Promise.all(
+        urlsToRequest.map(async (urlData) => {
+          try {
+            await fetchAndSaveFile(urlData.url, `${urlData.repo}-${urlData.version}.tar.gz`);
+            pushToast({
+              title: 'Download Initiated',
+              description: urlData.repo,
+              variant: Variant.Success,
+              dismissible: true,
+            });
+          } catch (e) {
+            pushToast({
+              title: 'Download Failed',
+              description: urlData.repo,
+              variant: Variant.Warning,
+              dismissible: true,
+            });
+            throw e;
+          }
+        })
+      );
+      setOpen(false);
+    } catch (e) {
+      console.error(`Error downloading, `, e);
+    } finally {
+      setResultsLoading(false);
+    }
   };
 
   return (
@@ -306,6 +319,13 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         <Button onClick={() => setOpen(false)}>Cancel</Button>
         <Button
           variant={ButtonVariant.Primary}
+          className={cx(css`
+            svg {
+              position: static;
+            }
+          `)}
+          isLoading={resultsLoading}
+          loadingIndicator={<Spinner size={14} />}
           disabled={!rowSelection || !Object.keys(rowSelection)?.length}
           onClick={onDownload}
         >
