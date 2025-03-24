@@ -121,8 +121,8 @@ const VersionDropdown = ({ eol }) => {
   // Used to ensure that the value of the select is set to the urlSlug if the urlSlug is present and differs from the gitBranchName
   const currentUrlSlug = useCurrentUrlSlug(parserBranch, branches);
 
-  if ((branches?.length ?? 0) < 2) {
-    console.warn('Insufficient branches supplied to VersionDropdown; expected 2 or more');
+  if ((branches?.length ?? 0) < 1) {
+    console.warn('Insufficient branches supplied to VersionDropdown; expected 1 or more');
     return null;
   }
 

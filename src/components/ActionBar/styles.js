@@ -5,6 +5,11 @@ import { gridStyling as landingTemplateGridStyling } from '../../templates/landi
 import { gridStyling as centerGridStyling } from '../../templates/NotFound';
 import { theme } from '../../theme/docsTheme';
 import { displayNone } from '../../utils/display-none';
+import {
+  DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE,
+  DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE_LARGE_SCREEN,
+} from '../../templates/document';
+import { MAIN_COLUMN_HORIZONTAL_MARGIN } from '../MainColumn';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
@@ -40,7 +45,10 @@ export const actionBarStyling = css`
 // used for :template: options - 'product-landing', 'changelog'
 const gridStyling = css`
   display: grid;
-  grid-template-columns: minmax(${theme.size.xlarge}, 1fr) repeat(2, minmax(0, 600px)) minmax(${theme.size.xlarge}, 1fr);
+  grid-template-columns: minmax(${MAIN_COLUMN_HORIZONTAL_MARGIN}, 1fr) repeat(2, minmax(0, 600px)) minmax(
+      ${MAIN_COLUMN_HORIZONTAL_MARGIN},
+      1fr
+    );
 
   @media ${theme.screenSize.upToLarge} {
     grid-template-columns: ${theme.size.medium} 1fr fit-content(100%);
@@ -56,12 +64,30 @@ const landingGridStyling = css`
   }
 `;
 
+const standardContentStyling = css`
+  padding-left: max(
+    calc(((100% - (${DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE})) / 2) + ${MAIN_COLUMN_HORIZONTAL_MARGIN}),
+    ${MAIN_COLUMN_HORIZONTAL_MARGIN}
+  );
+
+  @media ${theme.screenSize['3XLargeAndUp']} {
+    padding-left: max(
+      calc(((100% - (${DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE_LARGE_SCREEN})) / 2) + ${MAIN_COLUMN_HORIZONTAL_MARGIN}),
+      ${MAIN_COLUMN_HORIZONTAL_MARGIN}
+    );
+  }
+
+  @media ${theme.screenSize.upToLarge} {
+    padding-left: ${theme.size.medium};
+  }
+`;
+
 const flexStyling = css`
   display: flex;
   justify-content: space-between;
   width: 100%;
   flex-wrap: nowrap;
-  padding-left: ${theme.size.xlarge};
+  padding-left: ${MAIN_COLUMN_HORIZONTAL_MARGIN};
   @media ${theme.screenSize.upToLarge} {
     padding-left: ${theme.size.medium};
   }
@@ -112,31 +138,29 @@ export const getContainerStyling = (template) => {
     fakeColumns = false;
 
   switch (template) {
-    case 'product-landing':
-      containerClassname = gridStyling;
-      fakeColumns = true;
-      break;
     case 'landing':
       containerClassname = landingGridStyling;
       searchContainerClassname = leftInGrid;
       fakeColumns = true;
       break;
+    case 'product-landing':
     case 'changelog':
       containerClassname = gridStyling;
       fakeColumns = true;
       break;
     case 'blank':
-      containerClassname = middleAlignment;
-      searchContainerClassname = centerInGrid;
-      fakeColumns = true;
-      break;
     case 'errorpage':
       containerClassname = middleAlignment;
       searchContainerClassname = centerInGrid;
       fakeColumns = true;
       break;
-    default:
+    case 'drivers-index':
+    case 'guide':
+    case 'search':
       containerClassname = flexStyling;
+      break;
+    default:
+      containerClassname = standardContentStyling;
       break;
   }
 
