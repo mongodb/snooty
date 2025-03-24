@@ -18,6 +18,8 @@ const BreadcrumbSchema = ({ slug }) => {
     return sd.isValid() ? sd.toString() : undefined;
   }, [siteUrl, siteTitle, slug, queriedCrumbs, parentPathsSlug]);
 
+  console.log('UR MOM', breadcrumbSd);
+
   return (
     <>
       {Array.isArray(queriedCrumbs.breadcrumbs) && breadcrumbSd && (

@@ -78,6 +78,7 @@ export const getCompleteBreadcrumbData = ({
 
   //get direct parents of the current page from parentPaths
   //add respective url to each direct parent crumb
+  //this needs to be changed based on toc.toml!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   const parents = (parentPaths ?? []).map((crumb) => {
     const path =
       pageInfo && !isLanding
@@ -89,6 +90,8 @@ export const getCompleteBreadcrumbData = ({
       path: path,
     };
   });
+
+  console.log('mom and dad', parents);
 
   const selfCrumb = selfCrumbContent
     ? {

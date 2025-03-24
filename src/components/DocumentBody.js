@@ -133,6 +133,8 @@ const DocumentBody = (props) => {
       siteBasePrefix: siteBasePrefix,
     };
 
+    console.log('the brdcrumb info', breadcrumbInfo);
+
     sessionStorage.setItem('breadcrumbInfo', JSON.stringify(breadcrumbInfo));
     sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
   }
