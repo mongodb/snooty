@@ -92,7 +92,7 @@ const leftInGrid = css`
 `;
 
 const centerInGrid = css`
-  grid-column: 6/-5;
+  grid-column: 6/-6;
 
   @media ${theme.screenSize.upToXLarge} {
     grid-column: 4/-6;
