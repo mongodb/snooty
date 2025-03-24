@@ -9,6 +9,8 @@ import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -94,8 +96,12 @@ const Link = ({
   hideExternalIcon: hideExternalIconProp,
   showExternalIcon,
   openInNewTab,
+  prefix,
   ...other
 }) => {
+  const { pathPrefix } = useSnootyMetadata();
+  const { snootyEnv } = useSiteMetadata();
+
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
@@ -112,13 +118,44 @@ const Link = ({
     ''
   );
 
-  // Use Gatsby Link for internal links, and <a> for others
-  if (to && isRelativeUrl(to) && !anchor) {
+  // If prefix, that means we are coming from the UnifiedSideNav and not the old SideNav
+  if (prefix) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
+    if (pathPrefix.replaceAll('/', '') === prefix.replaceAll('/', '')) {
+      return (
+        <GatsbyLink
+          className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
+          activeClassName={activeClassName}
+          partiallyActive={partiallyActive}
+          to={to}
+          {...anchorProps}
+        >
+          {children}
+          {decoration}
+        </GatsbyLink>
+      );
+    }
+
+    // On the Unified SideNav but linking to a different site
+    const href = snootyEnv === 'development' ? `${prefix + to}index.html` : `${prefix + to}`;
+    return (
+      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={href}>
+        {children}
+        {decoration}
+      </a>
+    );
+  }
+
+  // Use Gatsby Link for internal links, and <a> for others
+  if (to && isRelativeUrl(to) && !anchor && pathPrefix === prefix) {
+    if (!to.startsWith('/')) to = `/${to}`;
+
+    // Ensure trailing slash
+    to = to.replace(/\/?(\?|#|$)/, '/$1');
     return (
       <GatsbyLink
         className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}

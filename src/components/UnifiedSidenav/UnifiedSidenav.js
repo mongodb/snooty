@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
@@ -10,16 +10,17 @@ import Link from '../Link';
 import { sideNavItemUniTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
+import useScreenSize from '../../hooks/useScreenSize';
 import { isCurrentPage } from '../../utils/is-current-page';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { VersionContext } from '../../context/version-context';
-import useScreenSize from '../../hooks/useScreenSize';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { HeaderContext } from '../Header/header-context';
 import { SidenavContext } from '../Sidenav';
 import useViewport from '../../hooks/useViewport';
 import { SIDE_NAV_CONTAINER_ID } from '../../constants';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -102,7 +103,6 @@ const sideNavStyle = ({ hideMobile }) => LeafyCSS`
 
 const leftPane = LeafyCSS`
   flex: 1;
-  // padding: 10px;
   overflow-y: auto;
   background-color: #f8f9fa;
   border-right: 3px solid #ddd;
@@ -110,7 +110,6 @@ const leftPane = LeafyCSS`
 
 const rightPane = LeafyCSS`
   flex: 2;
-  // padding: 10px;
   overflow-y: auto;
 `;
 
@@ -119,7 +118,7 @@ function isSelectedTab(url, slug) {
   return isSelectedTocNode(url, slug);
 }
 
-function CollapsibleNavItem({ items, label, url, slug, level }) {
+function CollapsibleNavItem({ items, label, url, slug, prefix, level }) {
   const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
   const chevronType = isOpen ? 'ChevronDown' : 'ChevronRight';
 
@@ -139,6 +138,7 @@ function CollapsibleNavItem({ items, label, url, slug, level }) {
     <>
       <SideNavItem
         as={Link}
+        prefix={prefix}
         to={url}
         active={isSelectedTab(url, slug)}
         className={cx(sideNavItemUniTOCStyling({ level }), overwriteLinkStyle)}
@@ -148,7 +148,7 @@ function CollapsibleNavItem({ items, label, url, slug, level }) {
         <FormatTitle>{label}</FormatTitle>
         <Icon className={cx(chevronStyle)} glyph={chevronType} fill={palette.gray.base} onClick={onChevronClick} />
       </SideNavItem>
-      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} slug={slug} />)}
+      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} key={slug} level={level + 1} slug={slug} />)}
     </>
   );
 }
@@ -159,7 +159,8 @@ function UnifiedTocNavItem({
   url,
   collapsible,
   items,
-  isTab,
+  isStatic,
+  prefix,
   slug,
   activeTabUrl,
   isTabletOrMobile,
@@ -167,14 +168,21 @@ function UnifiedTocNavItem({
 }) {
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
   // Unless in Mobile doing Accordion view
-  if (isTab) {
+  if (isStatic) {
     if (isTabletOrMobile) {
       return (
         <>
-          <StaticNavItem label={label} url={url} slug={slug} isTab={isTab} items={items} />
+          <StaticNavItem label={label} url={url} slug={slug} isStatic={isStatic} items={items} prefix={prefix} />
           {url === activeTabUrl &&
             items?.map((tocItem) => (
-              <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
+              <UnifiedTocNavItem
+                {...tocItem}
+                level={level}
+                key={slug}
+                slug={slug}
+                isStatic={false}
+                isTabletOrMobile={isTabletOrMobile}
+              />
             ))}
         </>
       );
@@ -183,7 +191,14 @@ function UnifiedTocNavItem({
     return (
       <>
         {items?.map((tocItem) => (
-          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
+          <UnifiedTocNavItem
+            {...tocItem}
+            level={level}
+            key={slug}
+            slug={slug}
+            isStatic={false}
+            isTabletOrMobile={isTabletOrMobile}
+          />
         ))}
       </>
     );
@@ -194,7 +209,7 @@ function UnifiedTocNavItem({
     return (
       <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavGroupTOCStyling())}>
         {items?.map((tocItem) => (
-          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
+          <UnifiedTocNavItem {...tocItem} level={level} key={slug} slug={slug} isTabletOrMobile={isTabletOrMobile} />
         ))}
       </SideNavGroup>
     );
@@ -209,6 +224,7 @@ function UnifiedTocNavItem({
         url={url}
         level={level}
         slug={slug}
+        prefix={prefix}
         className={cx(sideNavItemUniTOCStyling({ level }))}
       />
     );
@@ -219,6 +235,7 @@ function UnifiedTocNavItem({
       active={isSelectedTab(url, slug)}
       aria-label={label}
       as={Link}
+      prefix={prefix}
       to={url}
       className={cx(sideNavItemUniTOCStyling({ level }))}
     >
@@ -227,14 +244,15 @@ function UnifiedTocNavItem({
   );
 }
 
-function StaticNavItem({ label, url, slug, items, isTab, level = 1 }) {
+function StaticNavItem({ label, url, slug, items, isStatic, prefix, level = 1 }) {
   return (
     <SideNavItem
       active={isActiveTocNode(slug, url, items)}
       aria-label={label}
+      prefix={prefix}
       as={Link}
       to={url}
-      className={cx(sideNavItemUniTOCStyling({ level, isTab }))}
+      className={cx(sideNavItemUniTOCStyling({ level, isStatic }))}
     >
       {label}
     </SideNavItem>
@@ -260,8 +278,11 @@ const replaceVersion = ({ url, currentVersion, versionsData }) => {
   const proj = content.repoName;
 
   // based on the activeVersion, find the correct verion
-  const ver = content?.version.find((obj) => obj.name === currentVersion[proj]);
-  if (!ver) return;
+  let ver = content?.version.find((obj) => obj.name === currentVersion[proj]);
+  if (!ver) {
+    // If no current version, use first version in the array
+    ver = content.version[0];
+  }
 
   // input the correct alias into the url
   const result = url?.replace(/\$\{([^}]+)\}/g, ver.urlSlug);
@@ -288,11 +309,11 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
         project,
       });
       // For incase result is undefined
-      updatedPrefix = result ? result : prefix;
+      updatedPrefix = result ? result : item.prefix;
     }
 
     // Edit the url with the correct version path
-    const url = `${updatedPrefix}${item.url ? item.url : ''}`;
+    const newUrl = `${updatedPrefix}${item.url ? item.url : ''}`;
 
     const items = updateURLs({
       tree: item.items,
@@ -305,15 +326,17 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
 
     return {
       ...item,
-      url,
+      newUrl,
       items,
+      prefix: updatedPrefix,
     };
   });
 };
 
 export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
-  const { project, snootyEnv } = useSnootyMetadata();
+  const { project } = useSnootyMetadata();
+  const { snootyEnv } = useSiteMetadata();
   const { activeVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const viewportSize = useViewportSize();
@@ -325,13 +348,10 @@ export function UnifiedSidenav({ slug, versionsData }) {
   // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
   const tree = updateURLs({ tree: unifiedTocTree, prefix: '', activeVersions, versionsData, project, snootyEnv });
   console.log('The edited toctree with prefixes is:', tree);
-
-  const staticTocItems = useMemo(() => {
-    return unifiedTocTree.filter((item) => item?.isTab);
-  }, [unifiedTocTree]);
+  console.log(unifiedTocTree);
 
   const [activeTabUrl, setActiveTabUrl] = useState(() => {
-    const activeToc = staticTocItems.find((staticTocItem) => {
+    const activeToc = tree.find((staticTocItem) => {
       return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
     });
     return activeToc?.url;
@@ -339,12 +359,12 @@ export function UnifiedSidenav({ slug, versionsData }) {
 
   useEffect(() => {
     setActiveTabUrl(() => {
-      const activeToc = staticTocItems.find((staticTocItem) => {
+      const activeToc = tree.find((staticTocItem) => {
         return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
       });
       return activeToc?.url;
     });
-  }, [slug, staticTocItems]);
+  }, [slug, tree]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
   useEffect(() => {
@@ -370,29 +390,37 @@ export function UnifiedSidenav({ slug, versionsData }) {
         >
           <div className={cx(leftPane)}>
             {isTabletOrMobile
-              ? unifiedTocTree.map((navItems) => {
+              ? tree.map((navItems) => {
+                  return (
+                    <UnifiedTocNavItem
+                      {...navItems}
+                      level={1}
+                      key={slug}
+                      slug={slug}
+                      group={true}
+                      isStatic={true}
+                      activeTabUrl={activeTabUrl}
+                      isTabletOrMobile={isTabletOrMobile}
+                    />
+                  );
+                })
+              : tree.map((staticTocItem) => {
+                  return <StaticNavItem {...staticTocItem} key={slug} slug={slug} isStatic={true} />;
+                })}
+          </div>
+          {activeTabUrl && !isTabletOrMobile && (
+            <div className={cx(rightPane)}>
+              {tree.map((navItems) => {
+                if (navItems.url === activeTabUrl) {
                   return (
                     <UnifiedTocNavItem
                       {...navItems}
                       level={1}
                       slug={slug}
                       group={true}
+                      isStatic={true}
                       activeTabUrl={activeTabUrl}
-                      isTabletOrMobile={isTabletOrMobile}
                     />
-                  );
-                })
-              : staticTocItems.map((staticTocItem) => {
-                  // biome-ignore lint/correctness/useJsxKeyInIterable: iterating through navItems which doesn't have a key
-                  return <StaticNavItem {...staticTocItem} slug={slug} />;
-                })}
-          </div>
-          {activeTabUrl && !isTabletOrMobile && (
-            <div className={cx(rightPane)}>
-              {unifiedTocTree.map((navItems) => {
-                if (navItems.url === activeTabUrl) {
-                  return (
-                    <UnifiedTocNavItem {...navItems} level={1} slug={slug} group={true} activeTabUrl={activeTabUrl} />
                   );
                 }
                 return null;
