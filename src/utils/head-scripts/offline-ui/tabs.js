@@ -41,7 +41,7 @@ function bindTabUI() {
     const tabIds = (snootyTab.dataset.tabids ?? '').split('/');
     return tabList
       ? Array.from(tabList.children).filter(
-          (elm) => elm.getAttribute('role') === 'tab' && tabIds.includes(elm?.dataset?.tabid)
+          (elm) => elm.getAttribute('role') === 'tab' && tabIds.includes(elm.dataset.tabid)
         )
       : [];
   }
