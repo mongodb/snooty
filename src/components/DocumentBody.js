@@ -133,8 +133,6 @@ const DocumentBody = (props) => {
       siteBasePrefix: siteBasePrefix,
     };
 
-    console.log('the brdcrumb info', breadcrumbInfo);
-
     sessionStorage.setItem('breadcrumbInfo', JSON.stringify(breadcrumbInfo));
     sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
   }
@@ -240,7 +238,6 @@ export const Head = ({ pageContext, data }) => {
     return techArticle.isValid() ? techArticle : undefined;
   }, [data.page.facets, pageTitle, template]);
 
-  // here
   return (
     <>
       <SEO

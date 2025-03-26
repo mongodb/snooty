@@ -11,7 +11,6 @@ const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createConte
     console.error(`Error while fetching breadcrumb data from Atlas: ${e}`);
   }
 
-  console.log('the bread crumb is ', breadcrumbData);
   const [breadcrumbs, propertyUrl] = breadcrumbData
     ? [breadcrumbData.breadcrumbs, breadcrumbData.propertyUrl]
     : [null, ''];

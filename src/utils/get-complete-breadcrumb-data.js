@@ -79,7 +79,6 @@ export const getCompleteBreadcrumbData = ({
 
   //get direct parents of the current page from parentPaths
   //add respective url to each direct parent crumb
-  //this needs to be changed based on toc.toml!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   const parents = unifiedTocParents
     ? unifiedTocParents
     : (parentPaths ?? []).map((crumb) => {
