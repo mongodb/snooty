@@ -240,6 +240,7 @@ export const Head = ({ pageContext, data }) => {
     return techArticle.isValid() ? techArticle : undefined;
   }, [data.page.facets, pageTitle, template]);
 
+  // here
   return (
     <>
       <SEO

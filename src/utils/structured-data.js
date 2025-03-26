@@ -61,9 +61,17 @@ export class StructuredData {
 }
 
 export class BreadcrumbListSd extends StructuredData {
-  constructor({ siteUrl, siteTitle, slug, queriedCrumbs, parentPaths }) {
+  constructor({ siteUrl, siteTitle, slug, queriedCrumbs, parentPaths, unifiedTocParents }) {
     super('BreadcrumbList');
-    const breadcrumbs = getCompleteBreadcrumbData({ siteUrl, siteTitle, slug, queriedCrumbs, parentPaths });
+    console.log('WE ARE IN BOYS', unifiedTocParents);
+    const breadcrumbs = getCompleteBreadcrumbData({
+      siteUrl,
+      siteTitle,
+      slug,
+      queriedCrumbs,
+      parentPaths,
+      unifiedTocParents,
+    });
     this.itemListElement = this.getBreadcrumbList(breadcrumbs, siteUrl);
   }
 

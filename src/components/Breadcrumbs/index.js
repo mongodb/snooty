@@ -7,7 +7,10 @@ import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-d
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
+import { useUnifiedToc } from '../../hooks/use-unified-toc';
+import { getFeatureFlags } from '../../utils/feature-flags';
 import BreadcrumbContainer from './BreadcrumbContainer';
+import { createParentFromToc, findParentBreadCrumb } from './UnifiedTocBreadCrumbs';
 
 const breadcrumbBodyStyle = css`
   font-size: ${theme.fontSize.small};
@@ -30,12 +33,23 @@ const Breadcrumbs = ({
   selfCrumb = null,
   pageInfo = null,
 }) => {
+  const { isUnifiedToc } = getFeatureFlags();
+  const tocTree = useUnifiedToc();
+  let unifiedTocParents = null;
   const queriedCrumbsHook = useBreadcrumbs();
   const queriedCrumbs = queriedCrumbsProp ?? queriedCrumbsHook;
 
   const { parentPaths } = useSnootyMetadata();
 
-  /// call use UnifiedTocTomlHere
+  // find the parents if UnifiedTOC, uses toc.toml to build parent bread crumbs
+  if (isUnifiedToc) {
+    for (const StaticItems of tocTree) {
+      createParentFromToc(StaticItems, []);
+    }
+
+    unifiedTocParents = findParentBreadCrumb(slug, tocTree);
+  }
+
   const parentPathsData = parentPathsProp ?? parentPaths[slug];
 
   const { siteUrl } = useSiteMetadata();
@@ -49,8 +63,9 @@ const Breadcrumbs = ({
         parentPaths: parentPathsData,
         selfCrumbContent: selfCrumb,
         pageInfo,
+        unifiedTocParents,
       }),
-    [siteUrl, parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb, pageInfo]
+    [siteUrl, parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb, pageInfo, unifiedTocParents]
   );
 
   return (

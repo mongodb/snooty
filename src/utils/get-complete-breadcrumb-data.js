@@ -51,6 +51,7 @@ export const getCompleteBreadcrumbData = ({
   parentPaths,
   selfCrumbContent = null,
   pageInfo = null,
+  unifiedTocParents = null,
 }) => {
   const { urlSlug, project, siteBasePrefix } = pageInfo || {};
 
@@ -79,19 +80,21 @@ export const getCompleteBreadcrumbData = ({
   //get direct parents of the current page from parentPaths
   //add respective url to each direct parent crumb
   //this needs to be changed based on toc.toml!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const parents = (parentPaths ?? []).map((crumb) => {
-    const path =
-      pageInfo && !isLanding
-        ? getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, crumb.path))
-        : assertLeadingSlash(crumb.path);
-    return {
-      ...crumb,
-      title: nodesToString(crumb.title),
-      path: path,
-    };
-  });
+  const parents = unifiedTocParents
+    ? unifiedTocParents
+    : (parentPaths ?? []).map((crumb) => {
+        const path =
+          pageInfo && !isLanding
+            ? getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, crumb.path))
+            : assertLeadingSlash(crumb.path);
+        return {
+          ...crumb,
+          title: nodesToString(crumb.title),
+          path: path,
+        };
+      });
 
-  console.log('mom and dad', parents);
+  console.log('the parents is', parents, unifiedTocParents);
 
   const selfCrumb = selfCrumbContent
     ? {
