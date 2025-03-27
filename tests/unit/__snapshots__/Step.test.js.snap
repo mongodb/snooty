@@ -63,6 +63,10 @@ exports[`renders with "connected" styling 1`] = `
 }
 
 .emotion-6 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  min-width: 0;
   padding-bottom: 64px;
 }
 
@@ -78,7 +82,7 @@ exports[`renders with "connected" styling 1`] = `
   }
 }
 
-.emotion-7 {
+.emotion-8 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -90,12 +94,12 @@ exports[`renders with "connected" styling 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-7 strong,
-.emotion-7 b {
+.emotion-8 strong,
+.emotion-8 b {
   font-weight: 700;
 }
 
-.emotion-9 {
+.emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -110,13 +114,13 @@ exports[`renders with "connected" styling 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-9>code {
+.emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-9:focus,
-.emotion-9:hover {
+.emotion-10:focus,
+.emotion-10:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -124,12 +128,12 @@ exports[`renders with "connected" styling 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-9:focus {
+.emotion-10:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-9:hover {
+.emotion-10:hover {
   text-decoration-color: #E8EDEB;
 }
 
@@ -146,18 +150,18 @@ exports[`renders with "connected" styling 1`] = `
       </div>
     </div>
     <div
-      class="emotion-6"
+      class="emotion-6 emotion-7"
     >
       <p
-        class="emotion-7"
+        class="emotion-8"
       >
         Import data from CSV or JSON files into your MongoDB database.
       </p>
       <p
-        class="emotion-7"
+        class="emotion-8"
       >
         <a
-          class="emotion-9"
+          class="emotion-10"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
@@ -231,6 +235,10 @@ exports[`renders with "connected" styling by default 1`] = `
 }
 
 .emotion-6 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  min-width: 0;
   padding-bottom: 64px;
 }
 
@@ -246,7 +254,7 @@ exports[`renders with "connected" styling by default 1`] = `
   }
 }
 
-.emotion-7 {
+.emotion-8 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -258,12 +266,12 @@ exports[`renders with "connected" styling by default 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-7 strong,
-.emotion-7 b {
+.emotion-8 strong,
+.emotion-8 b {
   font-weight: 700;
 }
 
-.emotion-9 {
+.emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -278,13 +286,13 @@ exports[`renders with "connected" styling by default 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-9>code {
+.emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-9:focus,
-.emotion-9:hover {
+.emotion-10:focus,
+.emotion-10:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -292,12 +300,12 @@ exports[`renders with "connected" styling by default 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-9:focus {
+.emotion-10:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-9:hover {
+.emotion-10:hover {
   text-decoration-color: #E8EDEB;
 }
 
@@ -314,18 +322,18 @@ exports[`renders with "connected" styling by default 1`] = `
       </div>
     </div>
     <div
-      class="emotion-6"
+      class="emotion-6 emotion-7"
     >
       <p
-        class="emotion-7"
+        class="emotion-8"
       >
         Import data from CSV or JSON files into your MongoDB database.
       </p>
       <p
-        class="emotion-7"
+        class="emotion-8"
       >
         <a
-          class="emotion-9"
+          class="emotion-10"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
@@ -386,13 +394,20 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   width: 27px;
 }
 
+.emotion-6 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  min-width: 0;
+}
+
 .emotion-6 section>*,
 .emotion-6 ol p,
 .emotion-6 ul p {
   margin-bottom: 16px;
 }
 
-.emotion-7 {
+.emotion-8 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -404,12 +419,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-7 strong,
-.emotion-7 b {
+.emotion-8 strong,
+.emotion-8 b {
   font-weight: 700;
 }
 
-.emotion-9 {
+.emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -424,13 +439,13 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-9>code {
+.emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-9:focus,
-.emotion-9:hover {
+.emotion-10:focus,
+.emotion-10:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -438,12 +453,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-9:focus {
+.emotion-10:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-9:hover {
+.emotion-10:hover {
   text-decoration-color: #E8EDEB;
 }
 
@@ -460,18 +475,18 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
       </div>
     </div>
     <div
-      class="emotion-6"
+      class="emotion-6 emotion-7"
     >
       <p
-        class="emotion-7"
+        class="emotion-8"
       >
         Import data from CSV or JSON files into your MongoDB database.
       </p>
       <p
-        class="emotion-7"
+        class="emotion-8"
       >
         <a
-          class="emotion-9"
+          class="emotion-10"
           href="/import-export/#std-label-compass-import-export"
         >
           To learn more, see Import and Export Data
