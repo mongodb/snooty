@@ -5,6 +5,7 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
+import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../hooks/useScreenSize';
 import { usePageContext } from '../context/page-context';
 import { theme } from '../theme/docsTheme';
@@ -23,14 +24,24 @@ const h2Styling = css`
   margin-bottom: 24px;
 `;
 
-const headingStyles = (sectionDepth) => css`
+const headingStyles = (sectionDepth, shouldShowLabButton) => css`
   margin-top: 24px;
   margin-bottom: 8px;
   color: ${sectionDepth < 2 ? `var(--heading-color-primary)` : `var(--font-color-primary)`};
+  ${shouldShowLabButton && 'display: inline-block;'}
 `;
 
 const labButtonStyling = css`
   margin-left: 18px;
+  background-color: ${palette.gray.light3};
+  border-color: ${palette.gray.base};
+  color: ${palette.black};
+
+  .dark-theme & {
+    background-color: ${palette.gray.dark2};
+    border-color: ${palette.gray.base};
+    color: ${palette.white};
+  }
 `;
 
 const contentsStyle = css`
@@ -78,32 +89,40 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
           </HeadingContainer>
         )}
       >
-        <HeadingTag
-          className={cx(
-            headingStyles(sectionDepth),
-            'contains-headerlink',
-            sectionDepth === 1 ? h2Styling : '',
-            className
+        {/* Wrapper for Instruqt drawer button */}
+        <ConditionalWrapper
+          condition={shouldShowLabButton}
+          wrapper={(children) => (
+            <div>
+              {children}
+              <Button
+                role="button"
+                className={cx(labButtonStyling)}
+                disabled={isOfflineDocsBuild || isOpen}
+                onClick={() => setIsOpen(true)}
+                leftGlyph={<Icon glyph="Code" />}
+              >
+                {'Open Interactive Tutorial'}
+              </Button>
+            </div>
           )}
-          as={asHeading}
-          weight="medium"
         >
-          {nodeData.children.map((element, index) => {
-            return <ComponentFactory {...rest} nodeData={element} key={index} />;
-          })}
-          <Permalink id={id} description="heading" />
-          {shouldShowLabButton && (
-            <Button
-              role="button"
-              className={cx(labButtonStyling)}
-              disabled={isOfflineDocsBuild || isOpen}
-              onClick={() => setIsOpen(true)}
-              leftGlyph={<Icon glyph="Code" />}
-            >
-              {'Open Interactive Tutorial'}
-            </Button>
-          )}
-        </HeadingTag>
+          <HeadingTag
+            className={cx(
+              headingStyles(sectionDepth, shouldShowLabButton),
+              'contains-headerlink',
+              sectionDepth === 1 ? h2Styling : '',
+              className
+            )}
+            as={asHeading}
+            weight="medium"
+          >
+            {nodeData.children.map((element, index) => {
+              return <ComponentFactory {...rest} nodeData={element} key={index} />;
+            })}
+            <Permalink id={id} description="heading" />
+          </HeadingTag>
+        </ConditionalWrapper>
       </ConditionalWrapper>
       {isPageTitle && (
         <>
