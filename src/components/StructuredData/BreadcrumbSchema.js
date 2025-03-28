@@ -21,8 +21,8 @@ const BreadcrumbSchema = ({ slug }) => {
 
   // find the parents if UnifiedTOC, uses toc.toml to build parent bread crumbs
   if (isUnifiedToc) {
-    for (const StaticItems of tocTree) {
-      createParentFromToc(StaticItems, []);
+    for (const staticItems of tocTree) {
+      createParentFromToc(staticItems, []);
     }
     unifiedTocParents = findParentBreadCrumb(slug, tocTree);
   }
