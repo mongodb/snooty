@@ -5,27 +5,42 @@
  * child components to read and update
  */
 
-import React, { useContext, useEffect, useReducer, useRef } from 'react';
+import React, { ReactNode, useContext, useEffect, useReducer, useRef } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { isEmpty } from 'lodash';
+
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
-import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
+import { DRIVER_ICON_MAP, IconComponent } from '../icons/DriverIconMap';
 import { ContentsContext } from '../Contents/contents-context';
 import { makeChoices } from './make-choices';
+import { Node } from '../../types/ast';
 
-const defaultContextValue = {
+type Selectors = Record<string, Record<string, Node[]>>;
+type ActiveTabs = Record<string, string>;
+interface Choice {
+  tabSelectorIcon?: IconComponent;
+  text: string;
+  value: string;
+}
+type ChoicesPerSelector = Record<string, Choice[]>;
+interface TabContextState {
+  activeTabs: ActiveTabs;
+  selectors: Selectors;
+  setActiveTab: (activeTab: ActiveTabs) => void;
+}
+
+const defaultContextValue: TabContextState = {
   activeTabs: {},
   selectors: {},
-  setActiveTab: (activeTab) => {},
+  setActiveTab: (activeTab: ActiveTabs) => {},
 };
 
 const TabContext = React.createContext(defaultContextValue);
 
-const reducer = (prevState, newState) => {
-  return {
-    ...prevState,
-    ...newState,
-  };
+const reducer = (prevState: ActiveTabs, newState: Partial<ActiveTabs>): ActiveTabs => {
+  return Object.fromEntries(
+    Object.entries({ ...prevState, ...newState }).filter(([_, value]) => value !== undefined)
+  ) as ActiveTabs;
 };
 
 // Helper fn to get default tabs for fallback (when no local storage found).
@@ -33,8 +48,8 @@ const reducer = (prevState, newState) => {
 // 1. return default tab if available
 // 2. return 'nodejs' if found
 // Otherwise, return first choice.
-const getDefaultTabs = (choicesPerSelector, defaultTabs) =>
-  Object.keys(choicesPerSelector || {}).reduce((res, selectorKey) => {
+const getDefaultTabs = (choicesPerSelector: ChoicesPerSelector, defaultTabs: ActiveTabs) =>
+  Object.keys(choicesPerSelector || {}).reduce<ActiveTabs>((res, selectorKey) => {
     const defaultTabId = defaultTabs[selectorKey] ?? 'nodejs';
     const defaultOptionIdx = choicesPerSelector[selectorKey].findIndex((tab) => tab.value === defaultTabId);
     // NOTE: default tabs should be specified here
@@ -49,15 +64,15 @@ const getDefaultTabs = (choicesPerSelector, defaultTabs) =>
 // Helper fn to extract tab values from local storage values
 // If drivers, verify this is part of selectors.
 // Otherwise, return tab choice
-const getLocalTabs = (localTabs, selectors) =>
-  Object.keys(localTabs).reduce((res, activeTabKey) => {
+const getLocalTabs = (localTabs: ActiveTabs, selectors: Selectors) =>
+  Object.keys(localTabs).reduce<ActiveTabs>((res, activeTabKey) => {
     if (selectors?.[activeTabKey]?.[localTabs[activeTabKey]]) {
       res[activeTabKey] = localTabs[activeTabKey];
     }
     return res;
   }, {});
 
-const TabProvider = ({ children, selectors = {}, defaultTabs = {} }) => {
+const TabProvider = ({ children, selectors = {}, defaultTabs = {} }: { children: ReactNode; selectors: Selectors; defaultTabs: ActiveTabs }) => {
   // init value to {} to match server and client side
   const { hash } = useLocation();
   const [activeTabs, setActiveTab] = useReducer(reducer, {});
@@ -88,14 +103,15 @@ const TabProvider = ({ children, selectors = {}, defaultTabs = {} }) => {
     }
     // convert selectors to tab options first here, then set init values
     // selectors are determined at build time
-    const choicesPerSelector = Object.keys(selectors).reduce((res, selector) => {
-      res[selector] = makeChoices({
-        name: selector,
-        options: selectors[selector],
-        ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
-      });
-      return res;
-    }, {});
+    const choicesPerSelector =
+      Object.keys(selectors).reduce<ChoicesPerSelector>((res, selector) => {
+        res[selector] = makeChoices({
+          name: selector,
+          options: selectors[selector],
+          ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
+        });
+        return res;
+      }, {});
     const defaultRes = getDefaultTabs(choicesPerSelector, defaultTabs);
     // get local active tabs and set as active tabs
     // if they exist on page.
