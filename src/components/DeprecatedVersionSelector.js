@@ -4,13 +4,13 @@ import { keyBy, isEmpty } from 'lodash';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { palette } from '@leafygreen-ui/palette';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useAllDocsets } from '../hooks/useAllDocsets';
 import { fetchDocsets } from '../utils/realm';
 import { sortVersions } from '../utils/sort-versioned-branches';
+import { disabledStyle } from '../styles/button';
 import Select from './Select';
 
 const SELECT_WIDTH = '336px';
@@ -21,41 +21,6 @@ const selectStyle = css`
 
   @media ${theme.screenSize.upToSmall} {
     width: 100%;
-  }
-`;
-
-const focusBoxShadow = (color) => `
-    0 0 0 2px ${color}, 
-    0 0 0 ${theme.size.tiny} ${palette.blue.light1};
-`;
-
-const disabledStyles = css`
-  &[aria-disabled='true'] {
-    background-color: ${palette.gray.light2};
-    border-color: ${palette.gray.light1};
-    color: ${palette.gray.base};
-    box-shadow: none;
-    cursor: not-allowed;
-
-    &:focus-visible,
-    &[data-focus='true'] {
-      color: ${palette.gray.base};
-      box-shadow: ${focusBoxShadow(palette.white)};
-    }
-
-    .dark-theme & {
-      background-color: ${palette.gray.dark3};
-      border-color: ${palette.gray.dark2};
-      color: ${palette.gray.dark1};
-      box-shadow: none;
-      cursor: not-allowed;
-
-      &:focus-visible,
-      &[data-focus='true'] {
-        color: ${palette.gray.dark1};
-        box-shadow: ${focusBoxShadow(palette.black)};
-      }
-    }
   }
 `;
 
@@ -211,7 +176,7 @@ const DeprecatedVersionSelector = () => {
         rightGlyph={versionChoicesMap[version]?.icon}
         href={generateUrl(versionChoicesMap[version])}
         disabled={buttonDisabled}
-        className={cx(disabledStyles)}
+        className={cx(disabledStyle)}
       >
         {versionChoicesMap[version]?.icon ? 'Download Documentation' : 'View Documentation'}
       </Button>
