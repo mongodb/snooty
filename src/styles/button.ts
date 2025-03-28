@@ -1,5 +1,5 @@
-import { css } from "@leafygreen-ui/emotion";
-import { palette } from "@leafygreen-ui/palette";
+import { css } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
 
 const focusBoxShadow = (color: string) => `
   0 0 0 2px ${color}, 
@@ -10,8 +10,10 @@ const focusBoxShadow = (color: string) => `
 export const disabledStyle = css`
   &[aria-disabled='true'] {
     &,
-    &:hover, &[data-hover="true"],
-    &:active, &[data-active="true"] {
+    &:hover,
+    &[data-hover='true'],
+    &:active,
+    &[data-active='true'] {
       background-color: ${palette.gray.light2};
       border-color: ${palette.gray.light1};
       color: ${palette.gray.base};
@@ -19,7 +21,8 @@ export const disabledStyle = css`
       cursor: not-allowed;
     }
 
-    &:focus-visible, &[data-focus="true"] {
+    &:focus-visible,
+    &[data-focus='true'] {
       color: ${palette.gray.base};
       box-shadow: ${focusBoxShadow(palette.white)};
     }
@@ -27,8 +30,10 @@ export const disabledStyle = css`
     // Needs to be nested here to ensure proper cascading
     .dark-theme & {
       &,
-      &:hover, &[data-hover="true"],
-      &:active, &[data-active="true"] {
+      &:hover,
+      &[data-hover='true'],
+      &:active,
+      &[data-active='true'] {
         background-color: ${palette.gray.dark3};
         border-color: ${palette.gray.dark2};
         color: ${palette.gray.dark1};
@@ -36,7 +41,8 @@ export const disabledStyle = css`
         cursor: not-allowed;
       }
 
-      &:focus-visible, &[data-focus="true"] {
+      &:focus-visible,
+      &[data-focus='true'] {
         color: ${palette.gray.dark1};
         box-shadow: ${focusBoxShadow(palette.black)};
       }
