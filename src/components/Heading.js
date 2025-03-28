@@ -10,6 +10,7 @@ import useScreenSize from '../hooks/useScreenSize';
 import { usePageContext } from '../context/page-context';
 import { theme } from '../theme/docsTheme';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
+import { disabledStyle } from '../styles/button';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -31,6 +32,7 @@ const headingStyles = (sectionDepth, shouldShowLabButton) => css`
   ${shouldShowLabButton && 'display: inline-block;'}
 `;
 
+// Theme-specific styles were copied from the original Button component
 const labButtonStyling = css`
   margin-left: 18px;
   background-color: ${palette.gray.light3};
@@ -97,7 +99,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
               {children}
               <Button
                 role="button"
-                className={cx(labButtonStyling)}
+                className={cx(labButtonStyling, disabledStyle)}
                 disabled={isOfflineDocsBuild || isOpen}
                 onClick={() => setIsOpen(true)}
                 leftGlyph={<Icon glyph="Code" />}
