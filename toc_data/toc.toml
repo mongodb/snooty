@@ -45,7 +45,7 @@ url = "/fundamentals/databases-collections/run-command"
 [[toc.items]] # group 3
 label = "Connect to cloud"
 group = true
-prefix = '/master/cloud-docs/bianca.laube/DOP-5343'
+prefix = '/master/cloud-docs/bianca.laube/DOP-5382'
 [[toc.items.items]]
 label = "Manage Clusters"
 url = "/manage-database-deployments"
@@ -63,7 +63,7 @@ url = "/cluster-autoscaling"
 label = "Get Started"
 url = "/getting-started"
 glyph = "LightningBolt"
-prefix = '/master/cloud-docs/bianca.laube/DOP-5343'
+prefix = '/master/cloud-docs/bianca.laube/DOP-5382'
 
 # Tab 1, First group
 [[toc.items]]
@@ -100,7 +100,7 @@ url = "/cli/v1.32"
 
 [[toc.items]]
 label = "Docs Compass"
-prefix = "/master/compass/bianca.laube/DOP-5343"
+prefix = "/master/compass/bianca.laube/DOP-5382"
 group = true
 [[toc.items.items]]
 label = "Overview"
@@ -115,7 +115,7 @@ url = "/import-export"
 label = "Application Development"
 url = "/create-connect-deployments"
 glyph = "Code"
-prefix = '/master/cloud-docs/bianca.laube/DOP-5343'
+prefix = '/master/cloud-docs/bianca.laube/DOP-5382'
 
 # Tab 2, group A
 [[toc.items]]
