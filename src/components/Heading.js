@@ -20,21 +20,32 @@ import Contents from './Contents';
 import Permalink from './Permalink';
 import { TimeRequired } from './MultiPageTutorials';
 
-const h2Styling = css`
+const titleMarginStyle = css`
   margin-top: 16px;
   margin-bottom: 24px;
 `;
 
 const headingStyles = (sectionDepth, shouldShowLabButton) => css`
-  margin-top: 24px;
-  margin-bottom: 8px;
+  ${shouldShowLabButton
+    ? `
+      display: inline-block;
+    `
+    : `
+      margin-top: 24px;
+      margin-bottom: 8px;
+    `}
   color: ${sectionDepth < 2 ? `var(--heading-color-primary)` : `var(--font-color-primary)`};
-  ${shouldShowLabButton && 'display: inline-block;'}
+`;
+
+const labWrapperStyle = css`
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
 `;
 
 // Theme-specific styles were copied from the original Button component
 const labButtonStyling = css`
-  margin-left: 18px;
+  align-self: center;
   background-color: ${palette.gray.light3};
   border-color: ${palette.gray.base};
   color: ${palette.black};
@@ -95,7 +106,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
         <ConditionalWrapper
           condition={shouldShowLabButton}
           wrapper={(children) => (
-            <div>
+            <div className={cx(titleMarginStyle, labWrapperStyle)}>
               {children}
               <Button
                 role="button"
@@ -113,7 +124,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
             className={cx(
               headingStyles(sectionDepth, shouldShowLabButton),
               'contains-headerlink',
-              sectionDepth === 1 ? h2Styling : '',
+              isPageTitle && !hasDrawer ? titleMarginStyle : '',
               className
             )}
             as={asHeading}
