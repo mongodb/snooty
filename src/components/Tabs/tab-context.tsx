@@ -6,6 +6,7 @@
  */
 
 import React, { useContext, useEffect, useReducer, useRef } from 'react';
+import { useLocation } from '@gatsbyjs/reach-router';
 import { isEmpty } from 'lodash';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
@@ -15,7 +16,7 @@ import { makeChoices } from './make-choices';
 const defaultContextValue = {
   activeTabs: {},
   selectors: {},
-  setActiveTab: () => {},
+  setActiveTab: (activeTab) => {},
 };
 
 const TabContext = React.createContext(defaultContextValue);
@@ -58,6 +59,7 @@ const getLocalTabs = (localTabs, selectors) =>
 
 const TabProvider = ({ children, selectors = {}, defaultTabs = {} }) => {
   // init value to {} to match server and client side
+  const { hash } = useLocation();
   const [activeTabs, setActiveTab] = useReducer(reducer, {});
   const { setActiveSelectorIds } = useContext(ContentsContext);
 
@@ -80,6 +82,10 @@ const TabProvider = ({ children, selectors = {}, defaultTabs = {} }) => {
   // initial effect to read from local storage
   // used in an effect to keep SSG HTML consistent
   useEffect(() => {
+    if (hash.length > 1) {
+      initLoaded.current = true;
+      return;
+    }
     // convert selectors to tab options first here, then set init values
     // selectors are determined at build time
     const choicesPerSelector = Object.keys(selectors).reduce((res, selector) => {
