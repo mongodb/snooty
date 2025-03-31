@@ -1,5 +1,5 @@
-import { assertLeadingSlash } from '../../utils/assert-leading-slash';
-import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
+import { assertLeadingSlash } from '../utils/assert-leading-slash';
+import { removeTrailingSlash } from '../utils/remove-trailing-slash';
 
 // Goes through toc.toml and builds parent breadcrumb data for each entry
 export const createParentFromToc = (item, breadcrumbs) => {
@@ -29,6 +29,8 @@ export const findParentBreadCrumb = (slug, tocTree) => {
     }
 
     if (item.items) {
+      // const result = findParentBreadCrumb(slug, item.items);
+      // if (result) return result;
       return findParentBreadCrumb(slug, item.items);
     }
   }

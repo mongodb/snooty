@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
@@ -35,20 +35,20 @@ const Breadcrumbs = ({
 }) => {
   const { isUnifiedToc } = getFeatureFlags();
   const tocTree = useUnifiedToc();
-  let unifiedTocParents = null;
   const queriedCrumbsHook = useBreadcrumbs();
   const queriedCrumbs = queriedCrumbsProp ?? queriedCrumbsHook;
 
   const { parentPaths } = useSnootyMetadata();
 
-  // find the parents if UnifiedTOC, uses toc.toml to build parent bread crumbs
-  if (isUnifiedToc) {
+  const unifiedTocParents = useMemo(() => {
+    if (!isUnifiedToc) return null;
+
     for (const staticItems of tocTree) {
       createParentFromToc(staticItems, []);
     }
 
-    unifiedTocParents = findParentBreadCrumb(slug, tocTree);
-  }
+    return findParentBreadCrumb(slug, tocTree);
+  }, [slug, tocTree, isUnifiedToc]);
 
   const parentPathsData = parentPathsProp ?? parentPaths[slug];
 

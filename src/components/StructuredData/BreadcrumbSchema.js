@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
@@ -11,7 +11,6 @@ import { useUnifiedToc } from '../../hooks/use-unified-toc';
 const BreadcrumbSchema = ({ slug }) => {
   const { isUnifiedToc } = getFeatureFlags();
   const tocTree = useUnifiedToc();
-  let unifiedTocParents = null;
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
   const { siteUrl } = useSiteMetadata();
 
@@ -19,13 +18,15 @@ const BreadcrumbSchema = ({ slug }) => {
 
   const queriedCrumbs = useBreadcrumbs();
 
-  // find the parents if UnifiedTOC, uses toc.toml to build parent bread crumbs
-  if (isUnifiedToc) {
+  const unifiedTocParents = useMemo(() => {
+    if (!isUnifiedToc) return null;
+
     for (const staticItems of tocTree) {
       createParentFromToc(staticItems, []);
     }
-    unifiedTocParents = findParentBreadCrumb(slug, tocTree);
-  }
+
+    return findParentBreadCrumb(slug, tocTree);
+  }, [slug, tocTree, isUnifiedToc]);
 
   const breadcrumbSd = React.useMemo(() => {
     const sd = new BreadcrumbListSd({
