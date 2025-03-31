@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { formatText } from '../../utils/format-text';
-import ContentsList from './ContentsList';
 import { ContentsContext } from './contents-context';
+import ContentsList from './ContentsList';
 import ContentsListItem from './ContentsListItem';
 
 const formatTextOptions = {
