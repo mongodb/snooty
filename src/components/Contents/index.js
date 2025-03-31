@@ -2,9 +2,15 @@ import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { formatText } from '../../utils/format-text';
-import { ContentsContext } from './contents-context';
-import ContentsList from './ContentsList';
+import { isBrowser } from '../../utils/is-browser';
+import { getPlaintext } from '../../utils/get-plaintext';
+import { getNestedValue } from '../../utils/get-nested-value';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { FeedbackProvider, FeedbackForm, useFeedbackData, FeedbackContainer } from '../Widgets/FeedbackWidget';
+import { RatingView } from '../Widgets/FeedbackWidget/views';
 import ContentsListItem from './ContentsListItem';
+import ContentsList from './ContentsList';
+import { ContentsContext } from './contents-context';
 
 const formatTextOptions = {
   literalEnableInline: true,
@@ -42,8 +48,16 @@ const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
 };
 
-const Contents = ({ className }) => {
+const Contents = ({ className, slug }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
+  const url = isBrowser ? window.location.href : null;
+  const metadata = useSnootyMetadata();
+  const feedbackData = useFeedbackData({
+    slug,
+    url,
+    title:
+      getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
+  });
 
   const filteredNodes = headingNodes.filter((headingNode) => {
     return isHeadingVisible(headingNode.selector_ids, activeSelectorIds);
@@ -57,6 +71,15 @@ const Contents = ({ className }) => {
 
   return (
     <div className={className}>
+      {/* move feedback widget here */}
+      {console.log('whats up dog?')}
+      <FeedbackProvider page={feedbackData}>
+        <FeedbackContainer>
+          <FeedbackForm />
+          <RatingView />
+        </FeedbackContainer>
+      </FeedbackProvider>
+
       <ContentsList label={label}>
         {filteredNodes.map(({ depth, id, title }) => {
           // Depth of heading nodes refers to their depth in the AST
