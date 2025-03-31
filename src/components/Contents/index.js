@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { formatText } from '../../utils/format-text';
-import ContentsListItem from './ContentsListItem';
 import ContentsList from './ContentsList';
 import { ContentsContext } from './contents-context';
+import ContentsListItem from './ContentsListItem';
 
 const formatTextOptions = {
   literalEnableInline: true,
@@ -42,7 +42,7 @@ const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
 };
 
-const Contents = ({ className, slug }) => {
+const Contents = ({ className }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
   const filteredNodes = headingNodes.filter((headingNode) => {
     return isHeadingVisible(headingNode.selector_ids, activeSelectorIds);

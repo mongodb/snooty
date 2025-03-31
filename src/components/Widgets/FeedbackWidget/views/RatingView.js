@@ -20,7 +20,6 @@ const RatingView = () => {
   return (
     <>
       <StyledLabel>Rate this page</StyledLabel>
-      {/* <p>Rate this page</p> */}
       <StarRating handleRatingSelection={selectInitialRating} />
     </>
   );
