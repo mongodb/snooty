@@ -105,7 +105,7 @@ const TabProvider = ({
   // initial effect to read from local storage
   // used in an effect to keep SSG HTML consistent
   useEffect(() => {
-    if (hash.length > 1) {
+    if (hash?.length > 1) {
       initLoaded.current = true;
       return;
     }

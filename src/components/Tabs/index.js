@@ -142,7 +142,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
 
   // get non-TabSelector tabs in localstorage
   useEffect(() => {
-    if (initLoad.current || hash.length > 1) return;
+    if (initLoad.current || hash?.length > 1) return;
     initLoad.current = true;
 
     const localTabs = getLocalValue('activeTabs');
