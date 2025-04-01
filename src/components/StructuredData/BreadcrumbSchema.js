@@ -20,12 +20,9 @@ const BreadcrumbSchema = ({ slug }) => {
 
   const unifiedTocParents = useMemo(() => {
     if (!isUnifiedToc) return null;
+    const tree = createParentFromToc(tocTree, []);
 
-    for (const staticItems of tocTree) {
-      createParentFromToc(staticItems, []);
-    }
-
-    return findParentBreadCrumb(slug, tocTree);
+    return findParentBreadCrumb(slug, tree);
   }, [slug, tocTree, isUnifiedToc]);
 
   const breadcrumbSd = React.useMemo(() => {

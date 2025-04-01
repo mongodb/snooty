@@ -2,23 +2,24 @@ import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 
 // Goes through toc.toml and builds parent breadcrumb data for each entry
-export const createParentFromToc = (item, breadcrumbs) => {
-  const newCrumbs = [...breadcrumbs];
-  if (item.url) {
-    item.breadcrumbs = [...breadcrumbs];
-    const newBreadCrumb = {};
-    newBreadCrumb.path = assertLeadingSlash(removeTrailingSlash(item.url));
-    newBreadCrumb.title = item.label;
-    newCrumbs.push(newBreadCrumb);
-  }
-
-  if (item.items) {
-    for (const nestItem of item.items) {
-      createParentFromToc(nestItem, newCrumbs);
+export const createParentFromToc = (tree, breadcrumbs) => {
+  return tree?.map((item) => {
+    const newCrumbs = [...breadcrumbs];
+    if (item.url) {
+      item.breadcrumbs = [...breadcrumbs];
+      const newBreadCrumb = {};
+      newBreadCrumb.path = assertLeadingSlash(removeTrailingSlash(item.url));
+      newBreadCrumb.title = item.label;
+      newCrumbs.push(newBreadCrumb);
     }
-  }
 
-  return;
+    const items = createParentFromToc(item.items, newCrumbs);
+
+    return {
+      ...item,
+      items,
+    };
+  });
 };
 
 // Finds breadcrumb through slug

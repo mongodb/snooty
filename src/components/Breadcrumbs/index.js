@@ -42,12 +42,9 @@ const Breadcrumbs = ({
 
   const unifiedTocParents = useMemo(() => {
     if (!isUnifiedToc) return null;
+    const tree = createParentFromToc(tocTree, []);
 
-    for (const staticItems of tocTree) {
-      createParentFromToc(staticItems, []);
-    }
-
-    return findParentBreadCrumb(slug, tocTree);
+    return findParentBreadCrumb(slug, tree);
   }, [slug, tocTree, isUnifiedToc]);
 
   const parentPathsData = parentPathsProp ?? parentPaths[slug];
