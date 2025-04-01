@@ -21,25 +21,22 @@ import Permalink from './Permalink';
 import { TimeRequired } from './MultiPageTutorials';
 
 const titleMarginStyle = css`
-  margin-top: 16px;
-  margin-bottom: 24px;
+  margin-top: ${theme.size.default};
+  margin-bottom: ${theme.size.medium};
 `;
 
 const headingStyles = (sectionDepth, shouldShowLabButton) => css`
-  ${shouldShowLabButton
-    ? `
-      display: inline-block;
-    `
-    : `
-      margin-top: 24px;
-      margin-bottom: 8px;
-    `}
+  ${!shouldShowLabButton &&
+  `
+    margin-top: ${theme.size.medium};
+    margin-bottom: ${theme.size.small};
+  `}
   color: ${sectionDepth < 2 ? `var(--heading-color-primary)` : `var(--font-color-primary)`};
 `;
 
 const labWrapperStyle = css`
   display: flex;
-  gap: 18px;
+  gap: ${theme.size.default} ${theme.size.large};
   flex-wrap: wrap;
 `;
 
