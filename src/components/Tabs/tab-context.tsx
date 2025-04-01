@@ -12,8 +12,8 @@ import { isEmpty } from 'lodash';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { DRIVER_ICON_MAP, IconComponent } from '../icons/DriverIconMap';
 import { ContentsContext } from '../Contents/contents-context';
-import { makeChoices } from './make-choices';
 import { Node } from '../../types/ast';
+import { makeChoices } from './make-choices';
 
 type Selectors = Record<string, Record<string, Node[]>>;
 type ActiveTabs = Record<string, string>;

@@ -17,7 +17,7 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
   const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
-    if (!initialLoad || !hash) return;
+    if (!initialLoad || !hash || hasScrolled) return;
     setInitialLoad(false);
 
     const hashId = hash?.slice(1);
@@ -34,7 +34,7 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
     const timeout = 5000;
 
     const checkAndScroll = () => {
-      if (!element || hasScrolled) return;
+      if (!element) return;
 
       if (element.scrollHeight > 0) {
         const y = element.getBoundingClientRect().top + window.scrollY;
@@ -50,7 +50,7 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
 
     checkAndScroll();
 
-  }, [hash, id, ref, selectors, setActiveTabToHashTab]);
+  }, [hash, id, ref, selectors, setActiveTabToHashTab, hasScrolled, initialLoad]);
 };
 
 export default useHashAnchor;
