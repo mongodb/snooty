@@ -7,6 +7,7 @@ const focusBoxShadow = (color: string) => `
 `;
 
 // Theme-specific styles were copied from the original Button component
+// to allow pre-rendering for dark mode
 export const disabledStyle = css`
   &[aria-disabled='true'] {
     &,
