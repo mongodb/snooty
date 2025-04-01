@@ -30,7 +30,7 @@ const useActiveHeading = (headingNodes: HeadingNode[], intersectionRatio: number
   useEffect(() => {
     // Map indexes/order of headings to their ids
     // to avoid having to find it for each active heading id later
-    const headingsIndexMap: { [k:string]: number } = {};
+    const headingsIndexMap: { [k: string]: number } = {};
     headingNodes.forEach(({ id }, index) => {
       headingsIndexMap[id] = index;
     });
@@ -52,7 +52,7 @@ const useActiveHeading = (headingNodes: HeadingNode[], intersectionRatio: number
       }
 
       // Track highest visible heading and its index
-      let highestVisibleHeading: [(string | null), number] = [null, Number.MAX_SAFE_INTEGER];
+      let highestVisibleHeading: [string | null, number] = [null, Number.MAX_SAFE_INTEGER];
       // Find first/topmost heading that is in the viewport
       for (const headingId of headingsInViewport) {
         const currIdx = headingsIndexMap[headingId];

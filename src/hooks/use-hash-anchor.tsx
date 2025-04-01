@@ -49,7 +49,6 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
     };
 
     checkAndScroll();
-
   }, [hash, id, ref, selectors, setActiveTabToHashTab, hasScrolled, initialLoad]);
 };
 

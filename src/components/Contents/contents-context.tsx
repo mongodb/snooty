@@ -3,7 +3,7 @@ import useActiveHeading from '../../hooks/useActiveHeading';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { HeadingNode } from '../../types/ast';
 
-type ActiveSelectorIds = { methodSelector?: string; tab?: string[]; };
+type ActiveSelectorIds = { methodSelector?: string; tab?: string[] };
 
 interface ContentsContextValue {
   activeHeadingId: string | null;
@@ -23,7 +23,7 @@ const defaultContextValue: ContentsContextValue = {
 
 const ContentsContext = React.createContext(defaultContextValue);
 
-const ContentsProvider = ({ children, headingNodes = [] }: { children: ReactNode; headingNodes: HeadingNode[]; }) => {
+const ContentsProvider = ({ children, headingNodes = [] }: { children: ReactNode; headingNodes: HeadingNode[] }) => {
   const activeHeadingId = useActiveHeading(headingNodes);
   const [activeSelectorIds, setActiveSelectorIds] = useState<ActiveSelectorIds>({});
 

@@ -72,7 +72,15 @@ const getLocalTabs = (localTabs: ActiveTabs, selectors: Selectors) =>
     return res;
   }, {});
 
-const TabProvider = ({ children, selectors = {}, defaultTabs = {} }: { children: ReactNode; selectors: Selectors; defaultTabs: ActiveTabs }) => {
+const TabProvider = ({
+  children,
+  selectors = {},
+  defaultTabs = {},
+}: {
+  children: ReactNode;
+  selectors: Selectors;
+  defaultTabs: ActiveTabs;
+}) => {
   // init value to {} to match server and client side
   const { hash } = useLocation();
   const [activeTabs, setActiveTab] = useReducer(reducer, {});
@@ -103,15 +111,14 @@ const TabProvider = ({ children, selectors = {}, defaultTabs = {} }: { children:
     }
     // convert selectors to tab options first here, then set init values
     // selectors are determined at build time
-    const choicesPerSelector =
-      Object.keys(selectors).reduce<ChoicesPerSelector>((res, selector) => {
-        res[selector] = makeChoices({
-          name: selector,
-          options: selectors[selector],
-          ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
-        });
-        return res;
-      }, {});
+    const choicesPerSelector = Object.keys(selectors).reduce<ChoicesPerSelector>((res, selector) => {
+      res[selector] = makeChoices({
+        name: selector,
+        options: selectors[selector],
+        ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
+      });
+      return res;
+    }, {});
     const defaultRes = getDefaultTabs(choicesPerSelector, defaultTabs);
     // get local active tabs and set as active tabs
     // if they exist on page.
