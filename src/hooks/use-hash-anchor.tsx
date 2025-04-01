@@ -1,4 +1,4 @@
-import { MutableRefObject, useContext, useEffect } from 'react';
+import { MutableRefObject, useContext, useEffect, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 
 import { TabHashContext } from '../components/Tabs/tab-hash-context';
@@ -13,10 +13,14 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
   const { hash } = useLocation();
   const { setActiveTabToHashTab } = useContext(TabHashContext);
   const { selectors } = useContext(TabContext);
+  const [initialLoad, setInitialLoad] = useState<boolean>(true);
 
   useEffect(() => {
+    if (!initialLoad || !hash) return;
+    setInitialLoad(false);
+
     const hashId = hash?.slice(1);
-    if (!hash || id !== hashId || !ref.current) {
+    if (id !== hashId || !ref.current) {
       return;
     }
 
