@@ -28,7 +28,6 @@ import {
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const ChatbotModal = lazy(() => import('./ChatbotModal'));
 
-export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
 const CHATBOT_TEXT = 'Ask MongoDB AI';
 
 const ActionBar = ({ template, slug, sidenav, ...props }) => {

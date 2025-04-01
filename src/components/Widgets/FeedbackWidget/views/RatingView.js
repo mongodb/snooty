@@ -1,17 +1,17 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
+import { Label } from '@leafygreen-ui/typography';
 import { useFeedbackContext } from '../context';
 import StarRating from '../components/StarRating';
-import { Label } from '../../../Select';
 
-const StyledLabel = styled(Label)`
-  font-weight: 500;
+const styledLabel = css`
+  font-size: 13px;
+  font-weight: 500 !important;
   --label-color: ${palette.gray.dark2};
   .dark-theme & {
     --label-color: ${palette.gray.light1};
   }
-  margin: 0px !important;
 `;
 
 const RatingView = () => {
@@ -19,7 +19,7 @@ const RatingView = () => {
 
   return (
     <>
-      <StyledLabel>Rate this page</StyledLabel>
+      <Label className={cx(styledLabel)}>Rate this page</Label>
       <StarRating handleRatingSelection={selectInitialRating} />
     </>
   );
