@@ -29,7 +29,6 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
       setActiveTabToHashTab();
     }
 
-
     const element = ref.current;
     const startTime = Date.now();
     const timeout = 5000;
