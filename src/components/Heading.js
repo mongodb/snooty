@@ -5,10 +5,12 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
+import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../hooks/useScreenSize';
 import { usePageContext } from '../context/page-context';
 import { theme } from '../theme/docsTheme';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
+import { disabledStyle } from '../styles/button';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -18,19 +20,38 @@ import Contents from './Contents';
 import Permalink from './Permalink';
 import { TimeRequired } from './MultiPageTutorials';
 
-const h2Styling = css`
-  margin-top: 16px;
-  margin-bottom: 24px;
+const titleMarginStyle = css`
+  margin-top: ${theme.size.default};
+  margin-bottom: ${theme.size.medium};
 `;
 
-const headingStyles = (sectionDepth) => css`
-  margin-top: 24px;
-  margin-bottom: 8px;
+const headingStyles = (sectionDepth, shouldShowLabButton) => css`
+  ${!shouldShowLabButton &&
+  `
+    margin-top: ${theme.size.medium};
+    margin-bottom: ${theme.size.small};
+  `}
   color: ${sectionDepth < 2 ? `var(--heading-color-primary)` : `var(--font-color-primary)`};
 `;
 
+const labWrapperStyle = css`
+  display: flex;
+  gap: ${theme.size.default} ${theme.size.large};
+  flex-wrap: wrap;
+`;
+
+// Theme-specific styles were copied from the original Button component
 const labButtonStyling = css`
-  margin-left: 18px;
+  align-self: center;
+  background-color: ${palette.gray.light3};
+  border-color: ${palette.gray.base};
+  color: ${palette.black};
+
+  .dark-theme & {
+    background-color: ${palette.gray.dark2};
+    border-color: ${palette.gray.base};
+    color: ${palette.white};
+  }
 `;
 
 const contentsStyle = css`
@@ -78,32 +99,40 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
           </HeadingContainer>
         )}
       >
-        <HeadingTag
-          className={cx(
-            headingStyles(sectionDepth),
-            'contains-headerlink',
-            sectionDepth === 1 ? h2Styling : '',
-            className
+        {/* Wrapper for Instruqt drawer button */}
+        <ConditionalWrapper
+          condition={shouldShowLabButton}
+          wrapper={(children) => (
+            <div className={cx(titleMarginStyle, labWrapperStyle)}>
+              {children}
+              <Button
+                role="button"
+                className={cx(labButtonStyling, disabledStyle)}
+                disabled={isOfflineDocsBuild || isOpen}
+                onClick={() => setIsOpen(true)}
+                leftGlyph={<Icon glyph="Code" />}
+              >
+                {'Open Interactive Tutorial'}
+              </Button>
+            </div>
           )}
-          as={asHeading}
-          weight="medium"
         >
-          {nodeData.children.map((element, index) => {
-            return <ComponentFactory {...rest} nodeData={element} key={index} />;
-          })}
-          <Permalink id={id} description="heading" />
-          {shouldShowLabButton && (
-            <Button
-              role="button"
-              className={cx(labButtonStyling)}
-              disabled={isOfflineDocsBuild || isOpen}
-              onClick={() => setIsOpen(true)}
-              leftGlyph={<Icon glyph="Code" />}
-            >
-              {'Open Interactive Tutorial'}
-            </Button>
-          )}
-        </HeadingTag>
+          <HeadingTag
+            className={cx(
+              headingStyles(sectionDepth, shouldShowLabButton),
+              'contains-headerlink',
+              isPageTitle && !hasDrawer ? titleMarginStyle : '',
+              className
+            )}
+            as={asHeading}
+            weight="medium"
+          >
+            {nodeData.children.map((element, index) => {
+              return <ComponentFactory {...rest} nodeData={element} key={index} />;
+            })}
+            <Permalink id={id} description="heading" />
+          </HeadingTag>
+        </ConditionalWrapper>
       </ConditionalWrapper>
       {isPageTitle && (
         <>
