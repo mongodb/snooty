@@ -14,6 +14,7 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
   const { setActiveTabToHashTab } = useContext(TabHashContext);
   const { selectors } = useContext(TabContext);
   const [initialLoad, setInitialLoad] = useState<boolean>(true);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
     if (!initialLoad || !hash) return;
@@ -28,11 +29,28 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
       setActiveTabToHashTab();
     }
 
-    const delay = Object.keys(selectors).includes('drivers') ? 1500 : 100;
 
-    setTimeout(() => {
-      ref.current.scrollIntoView();
-    }, delay);
+    const element = ref.current;
+    const startTime = Date.now();
+    const timeout = 5000;
+
+    const checkAndScroll = () => {
+      if (!element || hasScrolled) return;
+
+      if (element.scrollHeight > 0) {
+        const y = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: y });
+        setHasScrolled(true);
+        return;
+      }
+
+      if (Date.now() - startTime < timeout) {
+        requestAnimationFrame(checkAndScroll);
+      }
+    };
+
+    checkAndScroll();
+
   }, [hash, id, ref, selectors, setActiveTabToHashTab]);
 };
 
