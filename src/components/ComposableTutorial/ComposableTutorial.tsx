@@ -141,7 +141,10 @@ const ComposableTutorial = ({
   const validSelections = useMemo(() => {
     let res: Set<string> = new Set();
     for (const composableNode of children) {
-      res = res.union(getSelectionPermutation(composableNode.options.selections));
+      const newSet = getSelectionPermutation(composableNode.options.selections);
+      for (const elm of newSet) {
+        res.add(elm);
+      }
     }
     return res;
   }, [children]);
