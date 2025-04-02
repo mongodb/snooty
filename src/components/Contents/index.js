@@ -2,9 +2,16 @@ import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { formatText } from '../../utils/format-text';
-import { ContentsContext } from './contents-context';
-import ContentsList from './ContentsList';
+import { FeedbackProvider, FeedbackForm, useFeedbackData, FeedbackContainer } from '../Widgets/FeedbackWidget';
+import { isBrowser } from '../../utils/is-browser';
+import { getPlaintext } from '../../utils/get-plaintext';
+import { getNestedValue } from '../../utils/get-nested-value';
+import { RatingView } from '../Widgets/FeedbackWidget/views';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import useScreenSize from '../../hooks/useScreenSize';
 import ContentsListItem from './ContentsListItem';
+import ContentsList from './ContentsList';
+import { ContentsContext } from './contents-context';
 
 const formatTextOptions = {
   literalEnableInline: true,
@@ -42,20 +49,46 @@ const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
 };
 
-const Contents = ({ className }) => {
+const Contents = ({ className, slug }) => {
+  const { isTabletOrMobile } = useScreenSize();
+  const url = isBrowser ? window.location.href : null;
+  const metadata = useSnootyMetadata();
+  const feedbackData = useFeedbackData({
+    slug,
+    url,
+    title:
+      getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
+  });
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
   const filteredNodes = headingNodes.filter((headingNode) => {
     return isHeadingVisible(headingNode.selector_ids, activeSelectorIds);
   });
 
   if (filteredNodes.length === 0 || !showContentsComponent) {
-    return null;
+    return (
+      <div className={className}>
+        <FeedbackProvider page={feedbackData}>
+          <FeedbackContainer>
+            <FeedbackForm />
+            <RatingView />
+          </FeedbackContainer>
+        </FeedbackProvider>
+      </div>
+    );
   }
 
   const label = 'On this page';
 
   return (
     <div className={className}>
+      {!isTabletOrMobile && (
+        <FeedbackProvider page={feedbackData}>
+          <FeedbackContainer>
+            <FeedbackForm />
+            <RatingView />
+          </FeedbackContainer>
+        </FeedbackProvider>
+      )}
       <ContentsList label={label}>
         {filteredNodes.map(({ depth, id, title }) => {
           // Depth of heading nodes refers to their depth in the AST
@@ -67,6 +100,14 @@ const Contents = ({ className }) => {
           );
         })}
       </ContentsList>
+      {isTabletOrMobile && (
+        <FeedbackProvider page={feedbackData}>
+          <FeedbackContainer>
+            <FeedbackForm />
+            <RatingView />
+          </FeedbackContainer>
+        </FeedbackProvider>
+      )}
     </div>
   );
 };

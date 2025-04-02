@@ -12,16 +12,6 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 import { theme } from '../theme/docsTheme';
 import { usePageContext } from '../context/page-context';
-import {
-  FeedbackProvider,
-  FeedbackForm,
-  useFeedbackData,
-  FeedbackContainer,
-} from '../components/Widgets/FeedbackWidget';
-import { isBrowser } from '../utils/is-browser';
-import { getPlaintext } from '../utils/get-plaintext';
-import { getNestedValue } from '../utils/get-nested-value';
-import { RatingView } from '../components/Widgets/FeedbackWidget/views';
 
 const MAX_ON_THIS_PAGE_WIDTH = '200px';
 const MAX_CONTENT_WIDTH = '775px';
@@ -65,14 +55,6 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const { tabsMainColumn } = usePageContext();
   const hasMethodSelector = pageOptions?.has_method_selector;
   const activeTutorial = useActiveMpTutorial();
-  const url = isBrowser ? window.location.href : null;
-  const metadata = useSnootyMetadata();
-  const feedbackData = useFeedbackData({
-    slug,
-    url,
-    title:
-      getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
-  });
 
   return (
     <DocumentContainer>
@@ -90,12 +72,6 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
         {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
-        <FeedbackProvider page={feedbackData}>
-          <FeedbackContainer>
-            <FeedbackForm />
-            <RatingView />
-          </FeedbackContainer>
-        </FeedbackProvider>
         <Contents slug={slug} />
       </StyledRightColumn>
     </DocumentContainer>
