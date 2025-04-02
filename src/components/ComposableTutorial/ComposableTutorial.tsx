@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { parse, ParsedQuery } from 'query-string';
 import { navigate } from 'gatsby';
@@ -12,29 +12,78 @@ import ConfigurableOption from './ConfigurableOption';
 
 function filterValidQueryParams(
   parsedQuery: ParsedQuery<string>,
-  composableOptions: ComposableTutorialNode['options']['composable-options'],
-  fallbackToDefaults: boolean
-  // localStorage: Record<string, string>
+  composableOptions: ComposableTutorialNode['composable-options'],
+  validSelections: Set<string>,
+  fallbackToDefaults = false
 ) {
-  const validQueryParams = composableOptions.reduce((res: Record<string, string[]>, composableOption) => {
-    res[composableOption['value']] = composableOption.selections.map((s) => s.value);
-    return res;
-  }, {});
+  const validQueryParams = composableOptions.reduce(
+    (res: Record<string, { values: string[]; dependencies: Record<string, string>[] }>, composableOption) => {
+      res[composableOption['value']] = {
+        values: composableOption.selections.map((s) => s.value),
+        dependencies: composableOption.dependencies,
+      };
+      return res;
+    },
+    {}
+  );
 
   const res: Record<string, string> = {};
 
   // query params take precedence
   for (const [key, value] of Object.entries(parsedQuery)) {
-    if (key in validQueryParams && typeof value === 'string' && validQueryParams[key].indexOf(value) > -1) {
+    const dependenciesMet = validQueryParams[key].dependencies.every((d) => {
+      const key = Object.keys(d)[0];
+      return parsedQuery[key] === Object.values(d)[0];
+    });
+    if (
+      key in validQueryParams &&
+      typeof value === 'string' &&
+      validQueryParams[key]['values'].indexOf(value) > -1 &&
+      dependenciesMet
+    ) {
       res[key] = value;
     }
   }
 
-  // fallback to of composableOptions if not present in query
-  if (fallbackToDefaults) {
-    for (const composableOption of composableOptions) {
-      if (!res[composableOption.value]) {
-        res[composableOption.value] = composableOption.default;
+  if (!fallbackToDefaults) {
+    return res;
+  }
+
+  // fallback to composableOptions if not present in query
+  for (const composableOption of composableOptions) {
+    const dependenciesMet = composableOption.dependencies.every((d) => {
+      const key = Object.keys(d)[0];
+      return res[key] === Object.values(d)[0];
+    });
+
+    // skip this composable option if
+    // there is already a valid value in parsed query,
+    // or this option has missing dependency
+    if (res[composableOption.value] || !dependenciesMet) {
+      continue;
+    }
+    // check if default value for this option has content
+    const targetObj = { ...res, [composableOption.value]: composableOption.default };
+    const targetString = Object.keys(targetObj)
+      .map((key) => `${key}=${targetObj[key]}`)
+      .sort()
+      .join('.');
+    if (validSelections.has(targetString)) {
+      res[composableOption.value] = composableOption.default;
+      continue;
+    }
+
+    // if the specified default does not have content (fault in data)
+    // safety to find a valid combination from children and select
+    const currentSelections = Object.keys({ ...res })
+      .map((key) => `${key}=${targetObj[key]}`)
+      .sort()
+      .join('.');
+    for (const [validSelection] of validSelections.entries()) {
+      const validSelectionParts = validSelection.split('.');
+      const selectionPartForOption = validSelectionParts.find((str) => str.includes(`${composableOption.value}=`));
+      if (validSelection.includes(currentSelections) && selectionPartForOption) {
+        res[composableOption.value] = selectionPartForOption.split('=')[1];
       }
     }
   }
@@ -44,9 +93,30 @@ function filterValidQueryParams(
 
 function fulfilledSelections(
   filteredParams: Record<string, string>,
-  composableOptions: ComposableTutorialNode['options']['composable-options']
+  composableOptions: ComposableTutorialNode['composable-options']
 ) {
-  return composableOptions.every((composableOption) => composableOption['value'] in filteredParams);
+  // every composable option should either
+  // have its value as a key in selections
+  // or its dependency was not met
+  return composableOptions.every((composableOption) => {
+    const dependenciesMet = composableOption.dependencies.every((d) => {
+      const key = Object.keys(d)[0];
+      return filteredParams[key] === Object.values(d)[0];
+    });
+    return composableOption['value'] in filteredParams || !dependenciesMet;
+  });
+}
+
+export function getSelectionPermutation(selections: Record<string, string>[]): Set<string> {
+  const res: Set<string> = new Set();
+  let partialRes: string[] = [];
+  for (const selection of selections) {
+    for (const [key, value] of Object.entries(selection)) {
+      partialRes.push(`${key}=${value}`);
+      res.add(partialRes.sort().join('.'));
+    }
+  }
+  return res;
 }
 
 interface ComposableProps {
@@ -61,10 +131,20 @@ const ComposableContainer = styled.div`
   justify-items: space-between;
 `;
 
-const ComposableTutorial = ({ nodeData: { options, children }, ...rest }: ComposableProps) => {
-  const composableOptions = options['composable-options'];
+const ComposableTutorial = ({
+  nodeData: { 'composable-options': composableOptions, children },
+  ...rest
+}: ComposableProps) => {
   const [currentSelections, setCurrentSelections] = useState<Record<string, string>>(() => ({}));
   const location = useLocation();
+
+  const validSelections = useMemo(() => {
+    let res: Set<string> = new Set();
+    for (const composableNode of children) {
+      res = res.union(getSelectionPermutation(composableNode.options.selections));
+    }
+    return res;
+  }, [children]);
 
   // takes care of query param reading and rerouting
   // if query params fulfill all selections, show the selections
@@ -76,7 +156,7 @@ const ComposableTutorial = ({ nodeData: { options, children }, ...rest }: Compos
 
     // read query params
     const queryParams = parse(location.search);
-    const filteredParams = filterValidQueryParams(queryParams, composableOptions, false);
+    const filteredParams = filterValidQueryParams(queryParams, composableOptions, validSelections, false);
 
     // if params fulfill selections, show the current selections
     if (fulfilledSelections(filteredParams, composableOptions)) {
@@ -87,13 +167,10 @@ const ComposableTutorial = ({ nodeData: { options, children }, ...rest }: Compos
 
     // params are missing. get default values using local storage and nodeData
     const localStorage: Record<string, string> = getLocalValue(LOCAL_STORAGE_KEY) ?? {};
-    const defaultParams = filterValidQueryParams(localStorage, composableOptions, true);
+    const defaultParams = filterValidQueryParams(localStorage, composableOptions, validSelections, true);
     const queryString = new URLSearchParams(defaultParams).toString();
-
     navigate(`?${queryString}`);
-
-    // if params, set the right ones for currentSelections
-  }, [composableOptions, location.pathname, location.search]);
+  }, [composableOptions, location.pathname, location.search, validSelections]);
 
   const showComposable = useCallback(
     (dependencies: { [key: string]: string }[]) =>
@@ -106,13 +183,37 @@ const ComposableTutorial = ({ nodeData: { options, children }, ...rest }: Compos
   );
 
   const onSelect = useCallback(
-    (value: string, option: string) => {
+    (value: string, option: string, index: number) => {
       const newSelections = { ...currentSelections, [option]: value };
-      setCurrentSelections(currentSelections);
-      const queryString = new URLSearchParams(newSelections).toString();
-      navigate(`?${queryString}`);
+      const targetString = Object.keys(newSelections)
+        .map((key) => `${key}=${newSelections[key]}`)
+        .sort()
+        .join('.');
+
+      if (validSelections.has(targetString)) {
+        setCurrentSelections(currentSelections);
+        const queryString = new URLSearchParams(newSelections).toString();
+        return navigate(`?${queryString}`);
+      }
+
+      // need to correct preceding options
+      // keep selections for previous composable options
+      // and generate valid selections
+      const persistSelections: Record<string, string> = {
+        [option]: value,
+      };
+      for (let idx = 0; idx < index; idx++) {
+        const composableOption = composableOptions[idx];
+        if (composableOption.value !== option && currentSelections[composableOption.value]) {
+          persistSelections[composableOption.value] = currentSelections[composableOption.value];
+        }
+      }
+
+      const defaultParams = filterValidQueryParams(persistSelections, composableOptions, validSelections, true);
+      const queryString = new URLSearchParams(defaultParams).toString();
+      return navigate(`?${queryString}`);
     },
-    [currentSelections]
+    [composableOptions, currentSelections, validSelections]
   );
 
   return (
@@ -120,11 +221,14 @@ const ComposableTutorial = ({ nodeData: { options, children }, ...rest }: Compos
       <ComposableContainer>
         {composableOptions.map((option, index) => (
           <ConfigurableOption
+            validSelections={validSelections}
             option={option}
             selections={currentSelections}
             onSelect={onSelect}
             showComposable={showComposable}
             key={index}
+            optionIndex={index}
+            precedingOptions={composableOptions.slice(0, index)}
           />
         ))}
       </ComposableContainer>

@@ -213,7 +213,7 @@ interface ComposableTutorialNode extends Directive<{ 'composable-options': Compo
   type: 'directive';
   name: 'composable-tutorials';
   children: ComposableNode[];
-  options: { 'composable-options': ComposableTutorialOption[] };
+  'composable-options': ComposableTutorialOption[];
 }
 
 interface ComposableNodeOption {
@@ -261,6 +261,7 @@ export type {
   AdmonitionName,
   TocTreeEntry,
   TocTreeDirective,
+  ComposableNodeOption,
   ComposableNode,
   ComposableTutorialNode,
   ComposableTutorialOption,

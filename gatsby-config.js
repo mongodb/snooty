@@ -84,6 +84,7 @@ const plugins = [
           }
 
           // construct query params
+          // TODO: this should be from children. not options
           const permutations = generatePermutations(composableNode.options['composable-options']);
 
           for (const permutation of permutations) {
