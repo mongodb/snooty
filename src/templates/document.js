@@ -29,6 +29,7 @@ const MAX_CONTENT_WIDTH_LARGE_SCREEN = '884px';
 // (max content width along with padding + max "On This Page" width along with padding)
 export const DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE = `(${MAX_CONTENT_WIDTH} + ${theme.size.xlarge} * 2) + (${MAX_ON_THIS_PAGE_WIDTH} + 5px + ${theme.size.medium})`;
 export const DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE_LARGE_SCREEN = `(${MAX_CONTENT_WIDTH_LARGE_SCREEN} + ${theme.size.xlarge} * 2) + (${MAX_ON_THIS_PAGE_WIDTH} + 5px + ${theme.size.medium})`;
+const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
 
 const DocumentContainer = styled('div')`
   display: grid;
@@ -90,12 +91,14 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
         {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
-        <FeedbackProvider page={feedbackData}>
-          <FeedbackContainer>
-            <FeedbackForm />
-            <RatingView />
-          </FeedbackContainer>
-        </FeedbackProvider>
+        {!DEPRECATED_PROJECTS.includes(metadata.project) && (
+          <FeedbackProvider page={feedbackData}>
+            <FeedbackContainer>
+              <FeedbackForm />
+              <RatingView />
+            </FeedbackContainer>
+          </FeedbackProvider>
+        )}
         <Contents slug={slug} />
       </StyledRightColumn>
     </DocumentContainer>
