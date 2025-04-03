@@ -88,19 +88,19 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
           )}
         </div>
       </StyledMainColumn>
-      <FeedbackProvider page={feedbackData}>
-        <FeedbackForm />
-        <StyledRightColumn>
-          {isAssociatedProduct && <AssociatedVersionSelector />}
-          {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
-          {!DEPRECATED_PROJECTS.includes(metadata.project) && (
+      <StyledRightColumn>
+        {isAssociatedProduct && <AssociatedVersionSelector />}
+        {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
+        {!DEPRECATED_PROJECTS.includes(metadata.project) && (
+          <FeedbackProvider page={feedbackData}>
             <FeedbackContainer>
+              <FeedbackForm />
               <RatingView />
             </FeedbackContainer>
-          )}
-          <Contents slug={slug} />
-        </StyledRightColumn>
-      </FeedbackProvider>
+          </FeedbackProvider>
+        )}
+        <Contents slug={slug} />
+      </StyledRightColumn>
     </DocumentContainer>
   );
 };

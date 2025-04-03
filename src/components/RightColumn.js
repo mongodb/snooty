@@ -24,7 +24,6 @@ const RightColumn = ({ children, className }) => {
           height: calc(100vh - 120px);
           position: sticky;
           top: calc(${topLarge} + ${theme.size.medium});
-          overflow-y: auto;
 
           & > * {
             margin-bottom: 30px;
