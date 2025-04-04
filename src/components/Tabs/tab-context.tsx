@@ -107,7 +107,7 @@ const TabProvider = ({
     // otherwise, defaults will take precedence
     const localActiveTabs = getLocalTabs(getLocalValue('activeTabs') || {}, selectors);
     setActiveTab({ ...defaultRes, ...localActiveTabs });
-  }
+  };
 
   useEffect(() => {
     // dont update local value on initial load
