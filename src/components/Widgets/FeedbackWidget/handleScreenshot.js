@@ -1,43 +1,11 @@
 // Client-side Only modules
 import { capture, OutputType } from 'html-screen-capture-js';
 import rasterizeHTML from 'rasterizehtml';
-import styled from '@emotion/styled';
 import { isBrowser } from '../../../utils/is-browser';
 import { fabChatbot } from '../ChatbotWidget/ChatbotFab';
-import { theme } from '../../../theme/docsTheme';
 import { fwTooltipId } from './components/LeafygreenTooltip';
 import { fwInstructionsId, fwExitButtonId } from './components/ScreenshotButton';
 import { fwFormId } from './FeedbackForm';
-
-const widgetsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: end;
-  gap: ${theme.size.small};
-  position: fixed;
-  right: ${theme.size.large};
-  bottom: ${({ hasOpenLabDrawer }) => (hasOpenLabDrawer ? '70px' : theme.size.large)};
-  z-index: ${theme.zIndexes.header};
-
-  @media ${theme.screenSize.upToSmall} {
-    background-color: white;
-    width: 100%;
-    height: ${theme.widgets.buttonContainerMobileHeight};
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.25);
-    right: 0;
-    bottom: 0;
-    min-width: max-content;
-
-    > button {
-      height: 44px;
-      position: unset;
-    }
-  }
-`;
 
 async function takeScreenshot(subject, config = {}) {
   // Convert the page into a "clean" html document that inlines all styles, images, etc.
@@ -72,7 +40,6 @@ async function takeFeedbackScreenshot() {
         fwInstructionsId, // Don't include instruction overlay
         fwExitButtonId, // Don't include the X button
         fabChatbot, // Don't include the FAB chatbot
-        widgetsContainer, // Don't include Widgets Container (visible on mobile)
       ],
     }));
   return dataUri;

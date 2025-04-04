@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
+import { cx, css } from '@leafygreen-ui/emotion';
 import { formatText } from '../../utils/format-text';
 import { FeedbackProvider, FeedbackForm, useFeedbackData, FeedbackContainer } from '../Widgets/FeedbackWidget';
 import { isBrowser } from '../../utils/is-browser';
@@ -49,6 +50,13 @@ const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
 };
 
+export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
+
+const styledContentList = css`
+  overflow: auto;
+  height: 90%;
+`;
+
 const Contents = ({ className, slug }) => {
   const { isTabletOrMobile } = useScreenSize();
   const url = isBrowser ? window.location.href : null;
@@ -80,8 +88,8 @@ const Contents = ({ className, slug }) => {
   const label = 'On this page';
 
   return (
-    <div className={className}>
-      {!isTabletOrMobile && (
+    <>
+      {!isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
         <FeedbackProvider page={feedbackData}>
           <FeedbackContainer>
             <FeedbackForm />
@@ -89,18 +97,20 @@ const Contents = ({ className, slug }) => {
           </FeedbackContainer>
         </FeedbackProvider>
       )}
-      <ContentsList label={label}>
-        {filteredNodes.map(({ depth, id, title }) => {
-          // Depth of heading nodes refers to their depth in the AST
-          const listItemDepth = Math.max(depth - 2, 0);
-          return (
-            <ContentsListItem depth={listItemDepth} key={id} id={id} isActive={activeHeadingId === id}>
-              {formatText(title, formatTextOptions)}
-            </ContentsListItem>
-          );
-        })}
-      </ContentsList>
-      {isTabletOrMobile && (
+      <div className={cx(className, styledContentList)}>
+        <ContentsList label={label}>
+          {filteredNodes.map(({ depth, id, title }) => {
+            // Depth of heading nodes refers to their depth in the AST
+            const listItemDepth = Math.max(depth - 2, 0);
+            return (
+              <ContentsListItem depth={listItemDepth} key={id} id={id} isActive={activeHeadingId === id}>
+                {formatText(title, formatTextOptions)}
+              </ContentsListItem>
+            );
+          })}
+        </ContentsList>
+      </div>
+      {isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
         <FeedbackProvider page={feedbackData}>
           <FeedbackContainer>
             <FeedbackForm />
@@ -108,7 +118,7 @@ const Contents = ({ className, slug }) => {
           </FeedbackContainer>
         </FeedbackProvider>
       )}
-    </div>
+    </>
   );
 };
 
