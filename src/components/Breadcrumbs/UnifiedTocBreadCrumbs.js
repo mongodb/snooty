@@ -6,7 +6,6 @@ export const createParentFromToc = (tree, breadcrumbs) => {
   return tree?.map((item) => {
     const newCrumbs = [...breadcrumbs];
     if (item.url) {
-      item.breadcrumbs = [...breadcrumbs];
       const newBreadCrumb = {};
       newBreadCrumb.path = assertLeadingSlash(removeTrailingSlash(item.url));
       newBreadCrumb.title = item.label;
@@ -18,6 +17,7 @@ export const createParentFromToc = (tree, breadcrumbs) => {
     return {
       ...item,
       items,
+      breadcrumbs: newCrumbs,
     };
   });
 };

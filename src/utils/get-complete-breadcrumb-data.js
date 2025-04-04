@@ -93,8 +93,6 @@ export const getCompleteBreadcrumbData = ({
       };
     });
 
-  console.log('the parents are', parents);
-
   const selfCrumb = selfCrumbContent
     ? {
         title: selfCrumbContent.title,

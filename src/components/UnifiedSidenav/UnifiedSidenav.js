@@ -148,7 +148,7 @@ function CollapsibleNavItem({ items, label, url, slug, prefix, level }) {
         <FormatTitle>{label}</FormatTitle>
         <Icon className={cx(chevronStyle)} glyph={chevronType} fill={palette.gray.base} onClick={onChevronClick} />
       </SideNavItem>
-      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} slug={slug} />)}
+      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} key={url} slug={slug} />)}
     </>
   );
 }
@@ -178,6 +178,7 @@ function UnifiedTocNavItem({
               <UnifiedTocNavItem
                 {...tocItem}
                 level={level}
+                key={url}
                 slug={slug}
                 isStatic={false}
                 isTabletOrMobile={isTabletOrMobile}
@@ -193,6 +194,7 @@ function UnifiedTocNavItem({
           <UnifiedTocNavItem
             {...tocItem}
             level={level}
+            key={url}
             slug={slug}
             isStatic={false}
             isTabletOrMobile={isTabletOrMobile}
@@ -207,7 +209,7 @@ function UnifiedTocNavItem({
     return (
       <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavGroupTOCStyling())}>
         {items?.map((tocItem) => (
-          <UnifiedTocNavItem {...tocItem} level={level} slug={slug} isTabletOrMobile={isTabletOrMobile} />
+          <UnifiedTocNavItem {...tocItem} level={level} key={url} slug={slug} isTabletOrMobile={isTabletOrMobile} />
         ))}
       </SideNavGroup>
     );
@@ -390,11 +392,11 @@ export function UnifiedSidenav({ slug, versionsData }) {
             {isTabletOrMobile
               ? tree.map((navItems) => {
                   return (
-                    // biome-ignore lint/correctness/useJsxKeyInIterable: iterating through navItems which doesn't have a key
                     <UnifiedTocNavItem
                       {...navItems}
                       level={1}
                       slug={slug}
+                      key={navItems.url}
                       group={true}
                       isStatic={true}
                       activeTabUrl={activeTabUrl}
@@ -403,8 +405,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
                   );
                 })
               : tree.map((staticTocItem) => {
-                  // biome-ignore lint/correctness/useJsxKeyInIterable: iterating through navItems which doesn't have a key
-                  return <StaticNavItem {...staticTocItem} slug={slug} isStatic={true} />;
+                  return <StaticNavItem {...staticTocItem} slug={slug} key={staticTocItem.url} isStatic={true} />;
                 })}
           </div>
           {activeTabUrl && !isTabletOrMobile && (
@@ -415,6 +416,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
                     <UnifiedTocNavItem
                       {...navItems}
                       level={1}
+                      key={navItems.url}
                       slug={slug}
                       group={true}
                       isStatic={true}
