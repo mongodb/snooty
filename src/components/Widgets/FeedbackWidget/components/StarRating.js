@@ -34,8 +34,7 @@ const starIconStyle = (isHighlighted) => css`
 const Layout = styled.div`
   display: flex;
   gap: ${theme.size.small};
-  justify-content: center;
-  margin: ${theme.size.default} 0 10px;
+  margin: 10px 0 ${theme.size.default};
 
   @media ${theme.screenSize.upToLarge} {
     gap: 12px;
@@ -90,7 +89,7 @@ const Star = ({ isHighlighted, onClick, onMouseEnter, onMouseLeave, onFocus, onK
   );
 };
 
-const StarRating = ({ className, handleRatingSelection = () => {}, editable = true, showCaption = true }) => {
+const StarRating = ({ className, handleRatingSelection = () => {}, editable = true, showCaption = false }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
   const [lastHoveredRating, setLastHoveredRating] = useState(null);
   const { selectedRating } = useFeedbackContext();
