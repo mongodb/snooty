@@ -35,10 +35,6 @@ const labButtonStyling = css`
 
 const contentsStyle = css`
   margin-top: ${theme.size.medium};
-
-  @media ${theme.screenSize.largeAndUp} {
-    display: none;
-  }
 `;
 
 const determineHeading = (sectionDepth) => {
@@ -105,7 +101,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
           )}
         </HeadingTag>
       </ConditionalWrapper>
-      {isPageTitle && (
+      {isPageTitle && isTabletOrMobile && (
         <>
           <TimeRequired />
           <Contents className={contentsStyle} />
