@@ -4,10 +4,10 @@ import { Label } from '@leafygreen-ui/typography';
 import { useFeedbackContext } from '../context';
 import StarRating from '../components/StarRating';
 
-const styledLabel = css`
+const labelStyling = css`
   font-size: 13px;
   font-weight: 500 !important;
-  color: var(--label-color);
+  color: --label-color;
 `;
 
 const RatingView = () => {
@@ -15,7 +15,7 @@ const RatingView = () => {
 
   return (
     <>
-      <Label className={cx(styledLabel)}>Rate this page</Label>
+      <Label className={cx(labelStyling)}>Rate this page</Label>
       <StarRating handleRatingSelection={selectInitialRating} />
     </>
   );
