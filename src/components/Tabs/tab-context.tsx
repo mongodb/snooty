@@ -27,12 +27,14 @@ interface TabContextState {
   activeTabs: ActiveTabs;
   selectors: Selectors;
   setActiveTab: (activeTab: ActiveTabs) => void;
+  setInitialTabs: () => void;
 }
 
 const defaultContextValue: TabContextState = {
   activeTabs: {},
   selectors: {},
   setActiveTab: (activeTab: ActiveTabs) => {},
+  setInitialTabs: () => {},
 };
 
 const TabContext = React.createContext(defaultContextValue);
@@ -77,7 +79,7 @@ const TabProvider = ({
   selectors = {},
   defaultTabs = {},
 }: {
-  children: ReactNode;
+  children: ReactNode[];
   selectors: Selectors;
   defaultTabs: ActiveTabs;
 }) => {
@@ -87,6 +89,25 @@ const TabProvider = ({
   const { setActiveSelectorIds } = useContext(ContentsContext);
 
   const initLoaded = useRef(false);
+
+  const setInitialTabs = () => {
+    // convert selectors to tab options first here, then set init values
+    // selectors are determined at build time
+    const choicesPerSelector = Object.keys(selectors).reduce<ChoicesPerSelector>((res, selector) => {
+      res[selector] = makeChoices({
+        name: selector,
+        options: selectors[selector],
+        ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
+      });
+      return res;
+    }, {});
+    const defaultRes = getDefaultTabs(choicesPerSelector, defaultTabs);
+    // get local active tabs and set as active tabs
+    // if they exist on page.
+    // otherwise, defaults will take precedence
+    const localActiveTabs = getLocalTabs(getLocalValue('activeTabs') || {}, selectors);
+    setActiveTab({ ...defaultRes, ...localActiveTabs });
+  }
 
   useEffect(() => {
     // dont update local value on initial load
@@ -105,27 +126,13 @@ const TabProvider = ({
   // initial effect to read from local storage
   // used in an effect to keep SSG HTML consistent
   useEffect(() => {
+    // If hash, do not set tabs (tab state will be set in use-hash-anchor.tsx)
     if (hash?.length > 1) {
       initLoaded.current = true;
       return;
     }
-    // convert selectors to tab options first here, then set init values
-    // selectors are determined at build time
-    const choicesPerSelector = Object.keys(selectors).reduce<ChoicesPerSelector>((res, selector) => {
-      res[selector] = makeChoices({
-        name: selector,
-        options: selectors[selector],
-        ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
-      });
-      return res;
-    }, {});
-    const defaultRes = getDefaultTabs(choicesPerSelector, defaultTabs);
-    // get local active tabs and set as active tabs
-    // if they exist on page.
-    // otherwise, defaults will take precedence
-    const localActiveTabs = getLocalTabs(getLocalValue('activeTabs') || {}, selectors);
+    setInitialTabs();
     initLoaded.current = true;
-    setActiveTab({ ...defaultRes, ...localActiveTabs });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -135,6 +142,7 @@ const TabProvider = ({
         activeTabs,
         selectors,
         setActiveTab,
+        setInitialTabs,
       }}
     >
       {children}
