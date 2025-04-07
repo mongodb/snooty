@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const metaUrl = `http://www.mongodb.com/docs/assets/meta_generic.png`;
-const metaSecureUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
 const faviconUrl = `https://www.mongodb.com/docs/assets/favicon.ico`;
 
 const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyComponents, postBodyComponents }) => (
@@ -14,8 +12,6 @@ const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyCom
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="release" content="1.0" />
       <meta name="version" content="master" />
-      <meta property="og:image" content={metaUrl} />
-      <meta property="og:image:secure_url" content={metaSecureUrl} />
       <link rel="shortcut icon" href={faviconUrl} />
       {headComponents}
     </head>
