@@ -3,13 +3,10 @@ import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { formatText } from '../../utils/format-text';
-import { FeedbackProvider, FeedbackForm, useFeedbackData, FeedbackContainer } from '../Widgets/FeedbackWidget';
-import { isBrowser } from '../../utils/is-browser';
-import { getPlaintext } from '../../utils/get-plaintext';
-import { getNestedValue } from '../../utils/get-nested-value';
-import { RatingView } from '../Widgets/FeedbackWidget/views';
-import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import NewFeedbackWidget from '../Widgets/FeedbackWidget';
 import useScreenSize from '../../hooks/useScreenSize';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { theme } from '../../theme/docsTheme';
 import ContentsListItem from './ContentsListItem';
 import ContentsList from './ContentsList';
 import { ContentsContext } from './contents-context';
@@ -17,6 +14,21 @@ import { ContentsContext } from './contents-context';
 const formatTextOptions = {
   literalEnableInline: true,
 };
+
+const formstyle = css`
+  position: absolute;
+  right: 0;
+  margin-top: ${theme.size.tiny};
+
+  @media ${theme.screenSize.upToLarge} {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
+`;
 
 /* recursively go through selector ids defined by parser
 everything in headingSelectorIds must be present in activeSelectorIds
@@ -59,28 +71,16 @@ const styledContentList = css`
 
 const Contents = ({ className, slug }) => {
   const { isTabletOrMobile } = useScreenSize();
-  const url = isBrowser ? window.location.href : null;
-  const metadata = useSnootyMetadata();
-  const feedbackData = useFeedbackData({
-    slug,
-    url,
-    title:
-      getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
-  });
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
   const filteredNodes = headingNodes.filter((headingNode) => {
     return isHeadingVisible(headingNode.selector_ids, activeSelectorIds);
   });
+  const metadata = useSnootyMetadata();
 
   if (filteredNodes.length === 0 || !showContentsComponent) {
     return (
       <div className={className}>
-        <FeedbackProvider page={feedbackData}>
-          <FeedbackContainer>
-            <FeedbackForm />
-            <RatingView />
-          </FeedbackContainer>
-        </FeedbackProvider>
+        <NewFeedbackWidget slug={slug} className={formstyle} />
       </div>
     );
   }
@@ -90,12 +90,7 @@ const Contents = ({ className, slug }) => {
   return (
     <>
       {!isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <FeedbackProvider page={feedbackData}>
-          <FeedbackContainer>
-            <FeedbackForm />
-            <RatingView />
-          </FeedbackContainer>
-        </FeedbackProvider>
+        <NewFeedbackWidget slug={slug} className={formstyle} />
       )}
       <div className={cx(className, styledContentList)}>
         <ContentsList label={label}>
@@ -111,12 +106,7 @@ const Contents = ({ className, slug }) => {
         </ContentsList>
       </div>
       {isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <FeedbackProvider page={feedbackData}>
-          <FeedbackContainer>
-            <FeedbackForm />
-            <RatingView />
-          </FeedbackContainer>
-        </FeedbackProvider>
+        <NewFeedbackWidget slug={slug} className={formstyle} />
       )}
     </>
   );
