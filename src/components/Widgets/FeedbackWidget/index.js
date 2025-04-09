@@ -8,7 +8,7 @@ import FeedbackForm from './FeedbackForm';
 import useFeedbackData from './useFeedbackData';
 import { FeedbackProvider, useFeedbackContext } from './context';
 
-const NewFeedbackWidget = ({ slug, className }) => {
+const FeedbackRating = ({ slug, className }) => {
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
   const feedbackData = useFeedbackData({
@@ -28,6 +28,6 @@ const NewFeedbackWidget = ({ slug, className }) => {
   );
 };
 
-export default NewFeedbackWidget;
+export default FeedbackRating;
 
 export { FeedbackProvider, useFeedbackContext, useFeedbackData, FeedbackForm, FeedbackContainer };

@@ -3,7 +3,7 @@ import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { formatText } from '../../utils/format-text';
-import NewFeedbackWidget from '../Widgets/FeedbackWidget';
+import FeedbackRating from '../Widgets/FeedbackWidget';
 import useScreenSize from '../../hooks/useScreenSize';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { theme } from '../../theme/docsTheme';
@@ -80,7 +80,7 @@ const Contents = ({ className, slug }) => {
   if (filteredNodes.length === 0 || !showContentsComponent) {
     return (
       <div className={className}>
-        <NewFeedbackWidget slug={slug} className={formstyle} />
+        <FeedbackRating slug={slug} className={formstyle} />
       </div>
     );
   }
@@ -90,7 +90,7 @@ const Contents = ({ className, slug }) => {
   return (
     <>
       {!isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <NewFeedbackWidget slug={slug} className={formstyle} />
+        <FeedbackRating slug={slug} className={formstyle} />
       )}
       <div className={cx(className, styledContentList)}>
         <ContentsList label={label}>
@@ -106,7 +106,7 @@ const Contents = ({ className, slug }) => {
         </ContentsList>
       </div>
       {isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <NewFeedbackWidget slug={slug} className={formstyle} />
+        <FeedbackRating slug={slug} className={formstyle} />
       )}
     </>
   );

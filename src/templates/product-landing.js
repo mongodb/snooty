@@ -6,7 +6,7 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme.js';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
 import useSnootyMetadata from '../utils/use-snooty-metadata.js';
-import NewFeedbackWidget from '../components/Widgets/FeedbackWidget';
+import FeedbackRating from '../components/Widgets/FeedbackWidget';
 
 export const CONTENT_MAX_WIDTH = 1200;
 
@@ -249,7 +249,7 @@ const ProductLanding = ({ children, data: { page }, offlineBanner }) => {
       {children}
       <hr className={cx(hrStyling)} />
       <div className={cx(ratingStlying)}>
-        <NewFeedbackWidget slug={'/'} className={formstyle} />
+        <FeedbackRating slug={'/'} className={formstyle} />
       </div>
     </Wrapper>
   );
