@@ -6,6 +6,7 @@ import { Theme } from '@leafygreen-ui/lib';
 import { palette } from '@leafygreen-ui/palette';
 import { getPlaintext } from '../utils/get-plaintext';
 import { theme } from '../theme/docsTheme';
+import { AdmonitionNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import { sharedDarkModeOverwriteStyles } from './Link';
 
@@ -114,7 +115,11 @@ const admonitionStyles = css`
   }
 `;
 
-const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
+export type AdmonitionProps = {
+  nodeData: AdmonitionNode;
+  name: string;
+};
+const Admonition = ({ nodeData: { argument, children, name }, ...rest }: AdmonitionProps) => {
   const variant = admonitionMap[name] || Variant.Note;
   let title = getPlaintext(argument);
   if (name === 'see') {
@@ -128,14 +133,6 @@ const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
       ))}
     </Callout>
   );
-};
-
-Admonition.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object),
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default Admonition;

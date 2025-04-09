@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Directive } from '../types/ast';
 import { getNestedValue } from '../utils/get-nested-value';
 import ComponentFactory from './ComponentFactory';
 
 // For now, explicitly define the arguments that should be accepted for Gatsby to build the node
 const VALID_COND_ARGS = ['html', '(not man)', 'cloud'];
 
-const Cond = ({ nodeData, ...rest }) => {
+export type CondProps = {
+  nodeData: Directive;
+};
+
+const Cond = ({ nodeData, ...rest }: CondProps) => {
   const argument = getNestedValue(['argument', 0, 'value'], nodeData);
   if (VALID_COND_ARGS.includes(argument)) {
     return nodeData.children.map((child, index) => <ComponentFactory {...rest} nodeData={child} key={index} />);

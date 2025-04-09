@@ -19,7 +19,13 @@ const buttonStyles = css`
   }
 `;
 
-const CloseButton = ({ onClick, size = 'default', className, ...props }) => {
+export type CloseButtonProps = {
+  onClick: Function;
+  size?: string;
+  className: string;
+};
+
+const CloseButton = ({ onClick, size = 'default', className, ...props }: CloseButtonProps) => {
   return (
     <IconButton
       aria-label={CLOSE_BUTTON_ALT_TEXT}

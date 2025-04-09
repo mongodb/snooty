@@ -3,11 +3,11 @@ import React, { createContext, useContext } from 'react';
 export type HeadingContextValue = {
   lastHeading: string;
   ignoreNextHeading: boolean;
-}
+};
 
-const defaultVal: HeadingContextValue = {
+const defaultVal = {
   lastHeading: '',
-  ignoreNextheading: false,
+  ignoreNextHeading: false,
 };
 
 const HeadingContext = createContext(defaultVal);
@@ -17,15 +17,15 @@ const HeadingContext = createContext(defaultVal);
  * Headings are pushed into a list, with the last being the nearest heading, upwards in the AST tree.
  * Designed to be called in the init, so each child node of sections
  * as consumers can access the section header.
- *
- * @param {node[]}    children
- * @param {string}    heading
- * @param {boolean}   ignoreNextHeading
- * @returns
  */
 
+export type HeadingContextProviderProps = {
+  children: React.ReactNode;
+  heading?: string;
+  ignoreNextHeading?: boolean;
+};
 
-const HeadingContextProvider = ({ children, heading, ignoreNextHeading }) => {
+const HeadingContextProvider = ({ children, heading, ignoreNextHeading }: HeadingContextProviderProps) => {
   const { lastHeading: prevHeading, ignoreNextHeading: skipHeading } = useHeadingContext();
 
   const newHeading = skipHeading || !heading ? prevHeading : heading;

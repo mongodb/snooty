@@ -1,11 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { HeadingContextProvider } from '../context/heading-context';
 import { getPlaintext } from '../utils/get-plaintext';
 import { findKeyValuePair } from '../utils/find-key-value-pair';
+import { ParentNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
-const Section = ({ sectionDepth, nodeData: { children }, ...rest }) => {
+export type SectionProps = {
+  sectionDepth: number;
+  nodeData: ParentNode;
+};
+
+const Section = ({ sectionDepth = 0, nodeData: { children }, ...rest }: SectionProps) => {
   const headingNode = findKeyValuePair(children, 'type', 'heading');
 
   return (
@@ -17,17 +22,6 @@ const Section = ({ sectionDepth, nodeData: { children }, ...rest }) => {
       </section>
     </HeadingContextProvider>
   );
-};
-
-Section.propTypes = {
-  sectionDepth: PropTypes.number,
-  nodeData: PropTypes.shape({
-    children: PropTypes.array.isRequired,
-  }).isRequired,
-};
-
-Section.defaultProps = {
-  sectionDepth: 0,
 };
 
 export default Section;

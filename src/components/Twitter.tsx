@@ -4,6 +4,8 @@ import { withPrefix } from 'gatsby';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getPlaintext } from '../utils/get-plaintext';
 
+export type TwitterProps = {};
+
 const isExternalUrl = /^http(s)?:\/\//;
 
 const getImageUrl = (src, siteUrl) => {

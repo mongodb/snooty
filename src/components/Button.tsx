@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import LeafyButton from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { Directive } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 
@@ -14,18 +14,25 @@ const buttonStyling = css`
   }
 `;
 
+export type ButtonProps = {
+  nodeData: Directive<{ uri?: string }>;
+  variant?: 'primary';
+  darkMode: boolean;
+  baseFontSize: string;
+  rightGlyph: React.ReactNode;
+  size: 'default';
+};
+
 const Button = ({
-  nodeData: {
-    argument,
-    options: { uri },
-  },
+  nodeData: { argument, options },
   variant = 'primary',
   darkMode: darkModeProp,
   size = 'default',
   baseFontSize,
   rightGlyph,
   ...rest
-}) => {
+}: ButtonProps) => {
+  const { uri } = options ?? { uri: undefined };
   const { darkMode } = useDarkMode();
   const componentProps = {};
   if (uri) {
@@ -49,12 +56,6 @@ const Button = ({
       ))}
     </LeafyButton>
   );
-};
-
-Button.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
 };
 
 export default Button;
