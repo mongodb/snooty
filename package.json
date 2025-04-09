@@ -2,6 +2,7 @@
   "name": "snooty",
   "version": "0.19.7",
   "repository": "github:mongodb/snooty",
+  "type": "module",
   "engines": {
     "node": "^18",
     "npm": "9.*"
