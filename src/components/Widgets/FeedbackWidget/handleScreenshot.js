@@ -3,7 +3,6 @@ import { capture, OutputType } from 'html-screen-capture-js';
 import rasterizeHTML from 'rasterizehtml';
 import { isBrowser } from '../../../utils/is-browser';
 import { fabChatbot } from '../ChatbotWidget/ChatbotFab';
-import { widgetsContainer } from '..';
 import { fwTooltipId } from './components/LeafygreenTooltip';
 import { fwInstructionsId, fwExitButtonId } from './components/ScreenshotButton';
 import { fwFormId } from './FeedbackForm';
@@ -41,7 +40,6 @@ async function takeFeedbackScreenshot() {
         fwInstructionsId, // Don't include instruction overlay
         fwExitButtonId, // Don't include the X button
         fabChatbot, // Don't include the FAB chatbot
-        widgetsContainer, // Don't include Widgets Container (visible on mobile)
       ],
     }));
   return dataUri;

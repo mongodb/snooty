@@ -45,6 +45,7 @@ const StyledMainColumn = styled(MainColumn)`
 
 const StyledRightColumn = styled(RightColumn)`
   grid-area: right;
+  overflow: visible;
 `;
 
 const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedProduct }, offlineBanner }) => {
@@ -71,7 +72,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
         {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
-        <Contents />
+        <Contents slug={slug} />
       </StyledRightColumn>
     </DocumentContainer>
   );
