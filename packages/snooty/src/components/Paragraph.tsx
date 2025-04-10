@@ -24,6 +24,7 @@ export type ParagraphProps = ComponentFactoryProps & {
 
 const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }: ParagraphProps) => {
   const children = appendTrailingPunctuation(nodeData.children);
+
   // For paragraph nodes that appear inside certain containers, skip <p> tags and just render their contents
   if (skipPTag || (parentNode && SKIP_P_TAGS.has(parentNode))) {
     return children.map((element, index) => <ComponentFactory {...rest} nodeData={element} key={index} />);

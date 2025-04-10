@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme.js';
-import { findKeyValuePair } from '../utils/find-key-value-pair.js';
-import useSnootyMetadata from '../utils/use-snooty-metadata.js';
+import { findKeyValuePair } from '../utils/find-key-value-pair';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
 
 export const CONTENT_MAX_WIDTH = 1200;
 

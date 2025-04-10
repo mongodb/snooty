@@ -7,14 +7,13 @@ import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { ParentNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
-
 export type SectionProps = {
   sectionDepth: number;
   nodeData: ParentNode;
 };
 
 const Section = ({ sectionDepth = 0, nodeData: { children }, ...rest }: SectionProps) => {
-  const headingNode = findKeyValuePair(children, 'type', 'heading');
+  const headingNode = findKeyValuePair(children, 'type', 'heading') as ParentNode;
 
   return (
     <HeadingContextProvider heading={getPlaintext(headingNode?.children ?? [])}>

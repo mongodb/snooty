@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import ComponentFactory from './ComponentFactory.js';
+import ComponentFactory from './ComponentFactory';
 
 const Describe = ({ nodeData: { argument, children }, ...rest }) => (
   <dl>

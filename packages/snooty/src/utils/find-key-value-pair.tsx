@@ -9,7 +9,7 @@ function hasStringKey(obj: unknown, key: string): obj is Record<string, unknown>
  * Recursively searches child nodes to find the specified key/value pair.
  * Prevents us from having to rely on a fixed depth for properties in the AST.
  */
-const findKeyValuePair = (nodes: Node[], key: string, value: string): Node | undefined => {
+export const findKeyValuePair = (nodes: Node[], key: string, value: string): Node | undefined => {
   let result;
   const iter = (node: Node) => {
     if (hasStringKey(node, key) && node[key] === value) {

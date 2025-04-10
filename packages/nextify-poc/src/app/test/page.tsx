@@ -12,7 +12,11 @@ export default async function Page() {
     <div>
       {file.children.map((node) => {
         switch (node.type) {
-          case "paragraph":
+          case "paragraph": {
+            const textNode = {
+              type: "text" as const,
+              value: "hello!",
+            };
             return (
               <Paragraph
                 slug="foo"
@@ -20,15 +24,11 @@ export default async function Page() {
                 parentNode=""
                 nodeData={{
                   type: "paragraph",
-                  children: [
-                    {
-                      type: "text",
-                      value: "hello!",
-                    } as unknown as { type: string } & Record<string, string>,
-                  ],
+                  children: [textNode],
                 }}
               />
             );
+          }
         }
       })}
     </div>
