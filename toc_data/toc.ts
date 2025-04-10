@@ -14,7 +14,7 @@ export const tocData = (): TocItem[] => {
       label: 'C# Quick Start',
       url: '/quick-start',
       glyph: 'Bulb',
-      prefix: '/version/csharp/bianca.laube/DOP-5343',
+      prefix: '/version/csharp/bianca.laube/DOP-5382',
       items: [
         {
           label: 'C# Documentation',
@@ -73,7 +73,7 @@ export const tocData = (): TocItem[] => {
         {
           label: 'Connect to cloud',
           group: true,
-          prefix: '/master/cloud-docs/bianca.laube/DOP-5343',
+          prefix: '/master/cloud-docs/bianca.laube/DOP-5382',
           items: [
             {
               label: 'Manage Clusters',
@@ -98,7 +98,7 @@ export const tocData = (): TocItem[] => {
       label: 'Get Started',
       url: '/getting-started',
       glyph: 'LightningBolt',
-      prefix: '/master/cloud-docs/bianca.laube/DOP-5343',
+      prefix: '/master/cloud-docs/bianca.laube/DOP-5382',
       items: [
         {
           label: 'Get Started',
@@ -144,7 +144,7 @@ export const tocData = (): TocItem[] => {
         },
         {
           label: 'Docs Compass',
-          prefix: '/master/compass/bianca.laube/DOP-5343',
+          prefix: '/master/compass/bianca.laube/DOP-5382',
           group: true,
           items: [
             {
@@ -163,7 +163,7 @@ export const tocData = (): TocItem[] => {
       label: 'Application Development',
       url: '/create-connect-deployments',
       glyph: 'Code',
-      prefix: '/master/cloud-docs/bianca.laube/DOP-5343',
+      prefix: '/master/cloud-docs/bianca.laube/DOP-5382',
       items: [
         {
           label: 'Application Development',
