@@ -1,12 +1,17 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { VersionModifiedNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
-const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) => {
+export type VersionModifiedProps = {
+  nodeData: VersionModifiedNode;
+}
+const VersionModified = ({ nodeData: { argument, children, name }, ...rest }: VersionModifiedProps) => {
   const { introText, childIndex } = useMemo(() => {
+    let additionalArg, text;
     const version = argument.length > 0 ? <ComponentFactory nodeData={argument[0]} /> : null;
     let childIndex = 0;
-    let additionalArg = '.';
+    additionalArg = '.';
     if (argument.length > 1) {
       additionalArg = (
         <>
@@ -24,7 +29,7 @@ const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) =>
         </>
       );
     }
-    let text = '';
+    text = '';
     if (name === 'deprecated') {
       text = <>Deprecated{version && <> since version {version}</>}</>;
     } else if (name === 'versionadded') {

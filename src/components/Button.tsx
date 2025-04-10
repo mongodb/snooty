@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import LeafyButton from '@leafygreen-ui/button';
 import { BaseFontSize } from '@leafygreen-ui/tokens';
 import Icon from '@leafygreen-ui/icon';
@@ -6,7 +6,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { Directive } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
-import Link from './Link';
+import Link, { LinkProps } from './Link';
 
 // TODO: include mapping of colors to use against button 'variant' attributes
 const buttonStyling = css`
@@ -22,6 +22,12 @@ export type ButtonProps = {
   baseFontSize: BaseFontSize;
   rightGlyph: string;
   size: 'default';
+};
+
+export type ComponentProps = {
+  as?: React.ComponentType<LinkProps>;
+  to?: string;
+  href?: string;
 };
 
 const Button = ({

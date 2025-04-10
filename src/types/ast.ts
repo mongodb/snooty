@@ -244,6 +244,13 @@ interface TargetIdentifierNode extends ParentNode {
   ids: string[];
 }
 
+interface valueNode extends Node {
+  value: string;
+}
+interface titleReferenceNode {
+  children: valueNode[];
+}
+
 type TwitterOptions = {
   creator: string;
   image: string;
@@ -252,7 +259,12 @@ type TwitterOptions = {
   title: string;
 };
 
-type TwitterNode = Directive<TwitterOptions>;
+interface TwitterNode extends Directive<TwitterOptions> {
+  options: TwitterOptions;
+}
+interface VersionModifiedNode extends Directive {
+  children: Node[];
+}
 
 type CollapsibleOptions = {
   heading?: string;
@@ -359,11 +371,14 @@ export type {
   StrongNode,
   TabsNode,
   TabNode,
-  TwitterNode,
   FacetNode,
   AdmonitionNode,
   AdmonitionName,
   TocTreeEntry,
   TocTreeDirective,
+  TwitterOptions,
+  TwitterNode,
+  VersionModifiedNode,
+  titleReferenceNode,
   BlockQuoteNode,
 };
