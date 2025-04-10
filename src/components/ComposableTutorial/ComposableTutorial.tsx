@@ -195,13 +195,7 @@ const ComposableTutorial = ({
   const onSelect = useCallback(
     (value: string, option: string, index: number) => {
       // the ones that occur less than index, take it
-      const newSelections = { [option]: value };
-      for (let idx = 0; idx < index; idx++) {
-        const composableOption = composableOptions[idx];
-        if (currentSelections[composableOption.value] && !newSelections[composableOption.value]) {
-          newSelections[composableOption.value] = currentSelections[composableOption.value];
-        }
-      }
+      const newSelections = { ...currentSelections, [option]: value };
 
       const targetString = Object.keys(newSelections)
         .map((key) => `${key}=${newSelections[key]}`)
