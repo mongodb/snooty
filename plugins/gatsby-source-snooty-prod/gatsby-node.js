@@ -21,7 +21,6 @@ const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
-const { createTocNodes } = require('../utils/unified-toc.js');
 const { createVersionNodes } = require('../utils/versions-toc.js');
 const { generatePathPrefix } = require('../../src/utils/generate-path-prefix.js');
 const assets = new Map();
@@ -197,9 +196,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
-
-  // create TOC nodes
-  await createTocNodes({ createNode, createNodeId, createContentDigest });
 
   await createVersionNodes({ createNode, createNodeId, createContentDigest });
 

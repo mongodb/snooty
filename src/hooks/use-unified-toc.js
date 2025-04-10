@@ -1,15 +1,5 @@
-const { useStaticQuery, graphql } = require('gatsby');
+import { tocData } from '../../toc_data/toc';
 
 export function useUnifiedToc() {
-  const data = useStaticQuery(
-    graphql`
-      query TocTree {
-        toc {
-          id
-          tocTree
-        }
-      }
-    `
-  );
-  return data.toc.tocTree.toc ?? [];
+  return tocData();
 }
