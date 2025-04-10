@@ -127,10 +127,12 @@ const TabProvider = ({
   // used in an effect to keep SSG HTML consistent
   useEffect(() => {
     // If hash, do not set tabs (tab state will be set in use-hash-anchor.tsx)
-    console.log('in set initial tabs ', hash);
     if (hash?.length > 1) {
-      initLoaded.current = true;
-      return;
+      const isOnPage = document.querySelector(hash);
+      if (isOnPage) {
+        initLoaded.current = true;
+        return;
+      }
     }
     setInitialTabs();
     initLoaded.current = true;
