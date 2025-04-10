@@ -1,5 +1,6 @@
 import React from 'react';
 import LeafyButton from '@leafygreen-ui/button';
+import { BaseFontSize } from '@leafygreen-ui/tokens';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -18,8 +19,8 @@ export type ButtonProps = {
   nodeData: Directive<{ uri?: string }>;
   variant?: 'primary';
   darkMode: boolean;
-  baseFontSize: string;
-  rightGlyph: React.ReactNode;
+  baseFontSize: BaseFontSize;
+  rightGlyph: string;
   size: 'default';
 };
 
@@ -34,7 +35,11 @@ const Button = ({
 }: ButtonProps) => {
   const { uri } = options ?? { uri: undefined };
   const { darkMode } = useDarkMode();
-  const componentProps = {};
+  const componentProps: Partial<{
+    as: typeof Link;
+    to: string;
+    href: string;
+  }> = {};
   if (uri) {
     componentProps.as = Link;
     componentProps.to = uri;
@@ -48,7 +53,7 @@ const Button = ({
       size={size}
       darkMode={darkModeProp ?? darkMode}
       variant={variant}
-      rightGlyph={rightGlyph ? <Icon glyph={rightGlyph} /> : null}
+      rightGlyph={rightGlyph ? <Icon glyph={rightGlyph} /> : undefined}
       {...componentProps}
     >
       {argument.map((child, i) => (

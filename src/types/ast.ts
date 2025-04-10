@@ -31,10 +31,6 @@ interface Root extends ParentNode {
   fileid: string;
 }
 
-interface AdmonitionNode extends ParentNode {
-  type: 'admonition';
-}
-
 interface BlockQuoteNode extends ParentNode {
   type: 'block-quote';
 }
@@ -143,12 +139,12 @@ type TwitterOptions = {
   image: string;
   'image-alt': string;
   site: string;
-  title: string
-}
+  title: string;
+};
 
-interface TwitterNode extends Directive<TwitterOptions>{
-  type: 'directive'
-  options
+interface TwitterNode extends Directive<TwitterOptions> {
+  type: 'directive';
+  options;
 }
 
 type CollapsibleOptions = {
