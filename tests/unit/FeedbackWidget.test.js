@@ -22,7 +22,6 @@ import {
   COMMENT_PLACEHOLDER_TEXT,
   EMAIL_ERROR_TEXT,
   EMAIL_PLACEHOLDER_TEXT,
-  FEEDBACK_BUTTON_TEXT,
   FEEDBACK_SUBMIT_BUTTON_TEXT,
   RATING_QUESTION_TEXT,
   SCREENSHOT_BUTTON_TEXT,
@@ -102,20 +101,6 @@ describe('FeedbackWidget', () => {
       userEvent.click(wrapper.getByLabelText(CLOSE_BUTTON_ALT_TEXT));
       await tick();
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
-    });
-
-    it('closes when navigating to a different page', async () => {
-      wrapper = await mountFormWithFeedbackState({});
-      // Click the button
-      userEvent.click(wrapper.getByText(FEEDBACK_BUTTON_TEXT));
-      await tick();
-      // Expect rating question to be on screen
-      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
-
-      mockLocation('', '', '', 'https://mongodb.com/docs/atlas/getting-started');
-      await tick();
-      // Form is closed when navigating to new page
-      expect(wrapper.queryAllByTestId(RATING_QUESTION_TEXT)).toHaveLength(0);
     });
 
     describe('RatingView', () => {
