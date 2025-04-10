@@ -31,10 +31,6 @@ interface Root extends ParentNode {
   fileid: string;
 }
 
-interface AdmonitionNode extends ParentNode {
-  type: 'admonition';
-}
-
 interface BlockQuoteNode extends ParentNode {
   type: 'block-quote';
 }
@@ -138,6 +134,14 @@ interface TargetIdentifierNode extends ParentNode {
   ids: string[];
 }
 
+interface valueNode extends Node {
+  value: string
+}
+interface titleReferenceNode  {
+  children: valueNode[]
+  
+}
+
 type TwitterOptions = {
   creator: string;
   image: string;
@@ -147,8 +151,10 @@ type TwitterOptions = {
 }
 
 interface TwitterNode extends Directive<TwitterOptions>{
-  type: 'directive'
-  options
+  options: TwitterOptions;
+}
+interface VersionModifiedNode extends Directive{
+  children: Node[]
 }
 
 type CollapsibleOptions = {
@@ -258,5 +264,9 @@ export type {
   AdmonitionName,
   TocTreeEntry,
   TocTreeDirective,
+  TwitterOptions,
+  TwitterNode,
+  VersionModifiedNode,
+  titleReferenceNode,
   BlockQuoteNode,
 };

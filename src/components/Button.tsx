@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { BaseFontSize } from '@leafygreen-ui/tokens';
 import LeafyButton from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { Directive } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
-import Link from './Link';
+import Link, { LinkProps } from './Link';
+
 
 // TODO: include mapping of colors to use against button 'variant' attributes
 const buttonStyling = css`
@@ -18,10 +20,16 @@ export type ButtonProps = {
   nodeData: Directive<{ uri?: string }>;
   variant?: 'primary';
   darkMode: boolean;
-  baseFontSize: string;
-  rightGlyph: React.ReactNode;
+  baseFontSize: BaseFontSize;
+  rightGlyph: string ;
   size: 'default';
 };
+
+export type ComponentProps = {
+  as?: React.ComponentType<LinkProps>;
+  to?: string;
+  href?: string
+}
 
 const Button = ({
   nodeData: { argument, options },
@@ -34,7 +42,7 @@ const Button = ({
 }: ButtonProps) => {
   const { uri } = options ?? { uri: undefined };
   const { darkMode } = useDarkMode();
-  const componentProps = {};
+  const componentProps: ComponentProps = {};
   if (uri) {
     componentProps.as = Link;
     componentProps.to = uri;

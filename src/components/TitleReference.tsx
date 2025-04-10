@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { titleReferenceNode } from '../types/ast';
+
+export type TitleReferenceProps = {
+  nodeData: titleReferenceNode;
+}
 
 const TitleReference = ({
   nodeData: {
     children: [{ value }],
   },
-}) => <cite>{value}</cite>;
+}: TitleReferenceProps) => <cite>{value}</cite>;
 
 TitleReference.propTypes = {
   nodeData: PropTypes.shape({
