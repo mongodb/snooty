@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { BlockQuoteNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
-const BlockQuote = ({ nodeData: { children }, ...rest }) => (
+export type BlockQuoteProps = {
+  nodeData: BlockQuoteNode;
+};
+
+const BlockQuote = ({ nodeData: { children }, ...rest }: BlockQuoteProps) => (
   <blockquote>
     {children.map((element, index) => (
       <ComponentFactory {...rest} nodeData={element} key={index} />

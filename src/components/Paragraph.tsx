@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
-import { ParagraphNode, Directive } from '../types/ast';
+import { ParagraphNode } from '../types/ast';
 import { appendTrailingPunctuation } from '../utils/append-trailing-punctuation';
 import ComponentFactory from './ComponentFactory';
 

@@ -1,8 +1,10 @@
+import { Node } from '../types/ast';
+
 /**
  * Recursively searches child nodes to find the specified key/value pair.
  * Prevents us from having to rely on a fixed depth for properties in the AST.
  */
-export const findKeyValuePair = (nodes, key, value) => {
+const findKeyValuePair = (nodes: Node[], key: string, value: string) => {
   let result;
   const iter = (node) => {
     if (node[key] === value) {

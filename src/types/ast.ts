@@ -1,4 +1,6 @@
 type NodeType =
+  | 'admonition'
+  | 'block-quote'
   | 'root'
   | 'section'
   | 'heading'
@@ -27,6 +29,14 @@ interface ParentNode extends Node {
 interface Root extends ParentNode {
   options: Record<string, any>;
   fileid: string;
+}
+
+interface AdmonitionNode extends ParentNode {
+  type: 'admonition';
+}
+
+interface BlockQuoteNode extends ParentNode {
+  type: 'block-quote';
 }
 
 interface HeadingNode extends ParentNode {
@@ -126,6 +136,19 @@ interface DirectiveArgumentNode extends ParentNode {
 interface TargetIdentifierNode extends ParentNode {
   type: 'target_identifier';
   ids: string[];
+}
+
+type TwitterOptions = {
+  creator: string;
+  image: string;
+  'image-alt': string;
+  site: string;
+  title: string
+}
+
+interface TwitterNode extends Directive<TwitterOptions>{
+  type: 'directive'
+  options
 }
 
 type CollapsibleOptions = {
@@ -235,4 +258,5 @@ export type {
   AdmonitionName,
   TocTreeEntry,
   TocTreeDirective,
+  BlockQuoteNode,
 };
