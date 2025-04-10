@@ -3,6 +3,7 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { parse, ParsedQuery } from 'query-string';
 import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
+import { palette } from '@leafygreen-ui/palette';
 import { ComposableNode, ComposableTutorialNode } from '../../types/ast';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { isBrowser } from '../../utils/is-browser';
@@ -127,8 +128,14 @@ const LOCAL_STORAGE_KEY = 'activeComposables';
 
 const ComposableContainer = styled.div`
   display: flex;
+  position: sticky;
+  top: ${theme.header.actionBarMobileHeight};
+  background: var(--background-color-primary);
   column-gap: ${theme.size.default};
+  row-gap: 12px;
   justify-items: space-between;
+  border-bottom: 1px solid ${palette.gray.light2};
+  padding-bottom: ${theme.size.medium};
 `;
 
 const ComposableTutorial = ({
@@ -187,7 +194,15 @@ const ComposableTutorial = ({
 
   const onSelect = useCallback(
     (value: string, option: string, index: number) => {
-      const newSelections = { ...currentSelections, [option]: value };
+      // the ones that occur less than index, take it
+      const newSelections = { [option]: value };
+      for (let idx = 0; idx < index; idx++) {
+        const composableOption = composableOptions[idx];
+        if (currentSelections[composableOption.value] && !newSelections[composableOption.value]) {
+          newSelections[composableOption.value] = currentSelections[composableOption.value];
+        }
+      }
+
       const targetString = Object.keys(newSelections)
         .map((key) => `${key}=${newSelections[key]}`)
         .sort()
