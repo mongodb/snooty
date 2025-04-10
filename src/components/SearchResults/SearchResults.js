@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';

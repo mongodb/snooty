@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState, Suspense } from 'react';
 
 /* Helper to avoid React minified errors. Compiles fallback component into the static HTML pages. */

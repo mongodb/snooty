@@ -1,4 +1,4 @@
-const assertTrailingSlash = (url) => {
+export const assertTrailingSlash = (url) => {
   if (url && url.match(/\/$/)) {
     return url;
   }

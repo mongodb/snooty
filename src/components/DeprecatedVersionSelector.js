@@ -1,3 +1,4 @@
+'use client';
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import queryString from 'query-string';
 import { keyBy, isEmpty } from 'lodash';

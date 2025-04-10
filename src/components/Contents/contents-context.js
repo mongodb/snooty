@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import useActiveHeading from '../../hooks/useActiveHeading';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';

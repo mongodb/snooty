@@ -1,3 +1,4 @@
+'use client';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from '@gatsbyjs/reach-router';

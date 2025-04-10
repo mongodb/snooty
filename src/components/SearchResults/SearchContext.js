@@ -1,3 +1,4 @@
+'use client';
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { navigate } from 'gatsby';

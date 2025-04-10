@@ -1,3 +1,4 @@
+'use client';
 /**
  * Context that contains language selector tab data
  * Stores which tab is currently active by reading local storage

@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect, useMemo } from 'react';
 import ReactPlayerYT from 'react-player/youtube';
 import ReactPlayerWistia from 'react-player/wistia';

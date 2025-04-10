@@ -1,6 +1,6 @@
 const { assertTrailingSlash } = require('./assert-trailing-slash');
-const DOTCOM_BASE_URL = 'https://www.mongodb.com';
-const DOTCOM_BASE_PREFIX = `docs`;
+export const DOTCOM_BASE_URL = 'https://www.mongodb.com';
+export const DOTCOM_BASE_PREFIX = `docs`;
 
 // Used to validate and match product mappings to legacy prefixes
 const productToPrefixMapping = (product) => {
@@ -13,7 +13,7 @@ const productToPrefixMapping = (product) => {
 };
 
 // Used to safely join together a url (or subpath) with another path
-const joinUrlAndPath = (url, path) => {
+export const joinUrlAndPath = (url, path) => {
   const needsTrim = url.endsWith('/') && path.startsWith('/');
   const needsSlash = !url.endsWith('/') && !path.startsWith('/');
 
@@ -33,7 +33,7 @@ const decomposeProductPrefixAndPath = (url) => {
 // Used to handle various needs to validate format of snooty-content urls, e.g.
 // ensuring protocol is present, or proper prefixing
 // Highly assumptive on being used only on `*.mongodb.com` domains.
-const baseUrl = (url = DOTCOM_BASE_URL, options = {}) => {
+export const baseUrl = (url = DOTCOM_BASE_URL, options = {}) => {
   // Any invalid inputs get assigned to DOTCOM_BASE_URL
   try {
     new URL(url);

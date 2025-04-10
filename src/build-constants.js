@@ -1,6 +1,4 @@
-module.exports = {
-  DOCUMENTS_COLLECTION: 'documents',
-  ASSETS_COLLECTION: 'assets',
-  METADATA_COLLECTION: 'metadata',
-  SNOOTY_REALM_APP_ID: 'snooty-koueq',
-};
+export const DOCUMENTS_COLLECTION = 'documents';
+export const ASSETS_COLLECTION = 'assets';
+export const METADATA_COLLECTION = 'metadata';
+export const SNOOTY_REALM_APP_ID = 'snooty-koueq';

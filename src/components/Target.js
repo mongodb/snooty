@@ -1,3 +1,4 @@
+'use client';
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';

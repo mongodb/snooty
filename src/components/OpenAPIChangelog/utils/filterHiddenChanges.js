@@ -30,7 +30,7 @@ const hideChanges = (changelog) => {
 
 //nested filtering out all changes with hideFromChangelog
 //hides changes on diffs
-const hideDiffChanges = (diffData) => {
+export const hideDiffChanges = (diffData) => {
   const pathUpdate = (path) => {
     const updatedPath = { ...path };
     if (path?.changes) {

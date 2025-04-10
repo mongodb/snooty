@@ -1,3 +1,4 @@
+'use client';
 import React, { useRef, forwardRef } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';

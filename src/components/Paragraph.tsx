@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
-import { ParagraphNode } from '../types/ast';
+import { ParagraphNode, Directive } from '../types/ast';
 import { appendTrailingPunctuation } from '../utils/append-trailing-punctuation';
 import ComponentFactory from './ComponentFactory';
 
@@ -12,11 +12,15 @@ const paragraphStyling = css`
   color: var(--font-color-primary);
 `;
 
-export type ParagraphProps = {
+export type ComponentFactoryProps = {
+  slug: string;
+};
+
+export type ParagraphProps = ComponentFactoryProps & {
   nodeData: ParagraphNode;
   parentNode?: string;
   skipPTag: boolean;
-}
+};
 
 const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }: ParagraphProps) => {
   const children = appendTrailingPunctuation(nodeData.children);

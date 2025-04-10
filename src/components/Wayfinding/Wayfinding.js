@@ -1,3 +1,4 @@
+'use client';
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';

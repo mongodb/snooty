@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@leafygreen-ui/icon';

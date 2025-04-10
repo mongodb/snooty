@@ -2,7 +2,7 @@
  * Recursively searches child nodes to find the specified key/value pair.
  * Prevents us from having to rely on a fixed depth for properties in the AST.
  */
-const findKeyValuePair = (nodes, key, value) => {
+export const findKeyValuePair = (nodes, key, value) => {
   let result;
   const iter = (node) => {
     if (node[key] === value) {

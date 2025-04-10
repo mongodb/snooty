@@ -1,3 +1,3 @@
-const removeLeadingSlash = (filePath) => filePath.replace(/^\/+/, '');
+export const removeLeadingSlash = (filePath) => filePath.replace(/^\/+/, '');
 
 module.exports.removeLeadingSlash = removeLeadingSlash;

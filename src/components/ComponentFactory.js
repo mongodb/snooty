@@ -1,52 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Directive } from '../types/ast';
 
 import { LAZY_COMPONENTS } from './ComponentFactoryLazy';
-import Admonition, { admonitionMap } from './Admonition';
-import Banner from './Banner/Banner';
-import BlockQuote from './BlockQuote';
-import Button from './Button';
-import Card from './Card';
-import CardGroup from './Card/CardGroup';
-import Chapter from './Chapters/Chapter';
-import Chapters from './Chapters';
-import Code from './Code/Code';
-import CodeIO from './Code/CodeIO';
-import Collapsible from './Collapsible';
-import CommunityPillLink from './CommunityPillLink';
-import Cond from './Cond';
-import Container from './Container';
-import CTA from './CTA';
-import CTABanner from './Banner/CTABanner';
-import DefinitionList from './DefinitionList';
-import DefinitionListItem from './DefinitionList/DefinitionListItem';
-import DeprecatedVersionSelector from './DeprecatedVersionSelector';
-import Describe from './Describe';
-import Emphasis from './Emphasis';
-import Extract from './Extract';
-import Field from './FieldList/Field';
-import FieldList from './FieldList';
-import Figure from './Figure';
-import Footnote from './Footnote';
-import FootnoteReference from './Footnote/FootnoteReference';
-import Glossary from './Glossary';
-import GuideNext from './GuideNext';
-import Heading from './Heading';
-import HorizontalList from './HorizontalList';
-import Image from './Image';
-import Include from './Include';
-import Introduction from './Introduction';
-import Kicker from './Kicker';
-import Line from './LineBlock/Line';
-import LineBlock from './LineBlock';
-import List from './List';
-import ListItem from './List/ListItem';
-import ListTable from './ListTable';
-import Literal from './Literal';
-import LiteralBlock from './LiteralBlock';
-import LiteralInclude from './LiteralInclude';
-import { MethodSelector } from './MethodSelector';
-import OpenAPIChangelog from './OpenAPIChangelog';
+
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
 import Reference from './Reference';
@@ -236,7 +192,7 @@ const ComponentFactory = (props) => {
       console.warn(`Domain '${domain}' not yet implemented ${name ? `for '${name}'` : ''}`);
     }
 
-    const ComponentType = getComponentType(type, name, props);
+    const ComponentType = getComponentType(type, name);
 
     if (!ComponentType) {
       console.warn(`${type} ${name ? `"${name}" ` : ''}not yet implemented${slug ? ` on page ${slug}` : ''}`);
@@ -248,15 +204,6 @@ const ComponentFactory = (props) => {
 
   if (!nodeData) return null;
   return selectComponent();
-};
-
-ComponentFactory.propTypes = {
-  nodeData: PropTypes.shape({
-    domain: PropTypes.string,
-    name: PropTypes.string,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
-  slug: PropTypes.string,
 };
 
 export default ComponentFactory;
