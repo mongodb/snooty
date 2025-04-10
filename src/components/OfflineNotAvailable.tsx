@@ -5,7 +5,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { withPrefix } from 'gatsby';
 import { theme } from '../theme/docsTheme';
-import Link from '../components/Link';
+import Link from './Link';
 import { usePageContext } from '../context/page-context';
 import { getCompleteUrl } from '../utils/url-utils';
 
@@ -63,16 +63,15 @@ const assetLabelFromKey = {
   video: 'Video',
 };
 
-/**
- * @param {string} assetKey - 'instruqt', 'video', etc
- */
-const OfflineNotAvailable = ({ assetKey }) => {
+const OfflineNotAvailable = ({ assetKey }: { assetKey: 'instruqt' | 'video' }) => {
   const { slug } = usePageContext();
 
   const assetLabel = assetLabelFromKey[assetKey];
   const altText = 'Unavailable offline';
   const imgPath = withPrefix('assets/offline-asset.png');
   // TODO alongside DOP-5172: update this URL. missing project in url
+  // TODO: Fix ts-ignore by typing usePageContext
+  // @ts-ignore
   const completeUrl = getCompleteUrl(withPrefix(slug));
 
   return (

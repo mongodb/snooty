@@ -1,8 +1,52 @@
 import React from 'react';
-import { Directive } from '../types/ast';
+import { ComponentType, Node, NodeName, NodeType, RoleName } from '../types/ast';
 
 import { LAZY_COMPONENTS } from './ComponentFactoryLazy';
-
+import Admonition, { admonitionMap } from './Admonition';
+import Banner from './Banner/Banner';
+import BlockQuote from './BlockQuote';
+import Button from './Button';
+import Card from './Card';
+import CardGroup from './Card/CardGroup';
+import Chapter from './Chapters/Chapter';
+import Chapters from './Chapters';
+import Code from './Code/Code';
+import CodeIO from './Code/CodeIO';
+import Collapsible from './Collapsible';
+import CommunityPillLink from './CommunityPillLink';
+import Cond from './Cond';
+import Container from './Container';
+import CTA from './CTA';
+import CTABanner from './Banner/CTABanner';
+import DefinitionList from './DefinitionList';
+import DefinitionListItem from './DefinitionList/DefinitionListItem';
+import DeprecatedVersionSelector from './DeprecatedVersionSelector';
+import Describe from './Describe';
+import Emphasis from './Emphasis';
+import Extract from './Extract';
+import Field from './FieldList/Field';
+import FieldList from './FieldList';
+import Figure from './Figure';
+import Footnote from './Footnote';
+import FootnoteReference from './Footnote/FootnoteReference';
+import Glossary from './Glossary';
+import GuideNext from './GuideNext';
+import Heading from './Heading';
+import HorizontalList from './HorizontalList';
+import Image from './Image';
+import Include from './Include';
+import Introduction from './Introduction';
+import Kicker from './Kicker';
+import Line from './LineBlock/Line';
+import LineBlock from './LineBlock';
+import List from './List';
+import ListItem from './List/ListItem';
+import ListTable from './ListTable';
+import Literal from './Literal';
+import LiteralBlock from './LiteralBlock';
+import LiteralInclude from './LiteralInclude';
+import { MethodSelector } from './MethodSelector';
+import OpenAPIChangelog from './OpenAPIChangelog';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
 import Reference from './Reference';
@@ -39,6 +83,7 @@ import RoleRed from './Roles/Red';
 import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
 import SeeAlso from './SeeAlso';
+import { isDirectiveNode, isRoleName } from '../types/ast-utils';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -55,7 +100,7 @@ const IGNORED_NAMES = new Set([
 const IGNORED_TYPES = new Set(['comment', 'inline_target', 'named_reference', 'substitution_definition']);
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'caution', 'danger']);
 
-const roleMap = {
+const roleMap: Record<RoleName, React.ComponentType<any>> = {
   abbr: RoleAbbr,
   class: RoleClass,
   command: RoleCommand,
@@ -83,7 +128,7 @@ const roleMap = {
   'link-new-tab': RoleLinkNewTab,
 };
 
-const componentMap = {
+const componentMap: Record<Exclude<ComponentType, 'block-quote'>, React.ComponentType<any>> = {
   admonition: Admonition,
   banner: Banner,
   blockquote: BlockQuote,
@@ -156,33 +201,49 @@ const componentMap = {
   wayfinding: Wayfinding,
 };
 
-function getComponentType(type, name) {
+function getComponentType(type: NodeType, name?: NodeName): React.ComponentType<any> | undefined {
   const lookup = type === 'directive' ? name : type;
-  let ComponentType = componentMap[lookup];
+  // @ts-ignore
+  let ComponentType: React.ComponentType<any> | undefined = lookup ? componentMap[lookup] : undefined;
 
-  if (type === 'role') {
-    ComponentType = roleMap[name];
+  if (name) {
+    if (type === 'role' && isRoleName(name)) {
+      ComponentType = roleMap[name];
+    }
+
+    // Various admonition types are all handled by the Admonition component
+    if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
+      ComponentType = componentMap.admonition;
+    }
   }
 
-  // Various admonition types are all handled by the Admonition component
-  if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
-    ComponentType = componentMap.admonition;
-  }
-
-  if (LAZY_COMPONENTS[lookup]) {
+  if (lookup && LAZY_COMPONENTS[lookup]) {
     return LAZY_COMPONENTS[lookup];
   }
 
   return ComponentType;
 }
 
-const ComponentFactory = (props) => {
+export type ComponentFactoryProps = {
+  nodeData: Node;
+  slug?: string;
+  sectionDepth?: string | number;
+};
+
+const ComponentFactory = (props: ComponentFactoryProps) => {
   const { nodeData, slug } = props;
 
   const selectComponent = () => {
-    const { domain, name, type } = nodeData;
+    let domain: string | undefined = '';
+    let name: NodeName | undefined;
+    const { type } = nodeData;
 
-    if (IGNORED_TYPES.has(type) || IGNORED_NAMES.has(name)) {
+    if (isDirectiveNode(nodeData)) {
+      domain = nodeData.domain;
+      name = nodeData.name;
+    }
+
+    if (IGNORED_TYPES.has(type) || (name && IGNORED_NAMES.has(name))) {
       return null;
     }
 
