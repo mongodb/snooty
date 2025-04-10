@@ -5,7 +5,6 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const DEFAULT_TWITTER_SITE = '@mongodb';
 const metaUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
-const metaSecureUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
 
 const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIndexing }) => {
   // Using static siteUrl instead of location.origin due to origin being undefined at build time
@@ -37,7 +36,7 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIn
       <meta property="og:title" content={title} />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={metaUrl} />
-      <meta property="og:image:secure_url" content={metaSecureUrl} />
+      <meta property="og:image:secure_url" content={metaUrl} />
       <meta property="og:type" content="website" />
       {noIndexing && <meta name="robots" content="noindex" />}
       {canonical && <link data-testid="canonical" id="canonical" rel="canonical" key={canonical} href={canonical} />}
