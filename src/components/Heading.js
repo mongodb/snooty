@@ -63,6 +63,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const hasMethodSelector = page?.options?.['has_method_selector'];
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
   const showRating = !(rest?.page?.options?.template === 'product-landing');
+
   return (
     <>
       <ConditionalWrapper
@@ -104,7 +105,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
       {isPageTitle && isTabletOrMobile && showRating && (
         <>
           <TimeRequired />
-          <Contents className={contentsStyle} />
+          <Contents className={contentsStyle} slug={rest.slug} />
         </>
       )}
     </>

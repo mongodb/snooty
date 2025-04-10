@@ -209,7 +209,7 @@ const Wrapper = styled('main')`
 
 const REALM_LIGHT_HERO_PAGES = ['index.txt'];
 
-const ProductLanding = ({ children, data: { page }, offlineBanner }) => {
+const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: { slug } }) => {
   const { project } = useSnootyMetadata();
   const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
@@ -249,7 +249,7 @@ const ProductLanding = ({ children, data: { page }, offlineBanner }) => {
       {children}
       <hr className={cx(hrStyling)} />
       <div className={cx(ratingStlying)}>
-        <FeedbackRating slug={'/'} className={formstyle} />
+        <FeedbackRating slug={slug} className={formstyle} />
       </div>
     </Wrapper>
   );
