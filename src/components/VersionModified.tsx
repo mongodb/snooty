@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { VersionModifiedNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
 export type VersionModifiedProps = {
   nodeData: VersionModifiedNode;
 };
+
 const VersionModified = ({ nodeData: { argument, children, name }, ...rest }: VersionModifiedProps) => {
   const { introText, childIndex } = useMemo(() => {
     let additionalArg, text;
@@ -57,18 +57,6 @@ const VersionModified = ({ nodeData: { argument, children, name }, ...rest }: Ve
       ))}
     </div>
   );
-};
-
-VersionModified.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string,
-      })
-    ).isRequired,
-    children: PropTypes.arrayOf(PropTypes.object),
-    name: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default VersionModified;
