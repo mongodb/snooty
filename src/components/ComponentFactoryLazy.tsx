@@ -3,7 +3,10 @@ import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { SuspenseHelper } from './SuspenseHelper';
 import OfflineNotAvailable from './OfflineNotAvailable';
 
-const ComponentMap = {
+type LazyComponentType = 'openapi' | 'video' | 'instruqt' | 'quiz' | 'quizchoice';
+type LazyComponentMap = Record<LazyComponentType, React.LazyExoticComponent<any>>;
+
+const ComponentMap: LazyComponentMap = {
   openapi: lazy(() => import('./OpenAPI')),
   video: lazy(() => import('./Video')),
   instruqt: lazy(() => import('./Instruqt')),
@@ -11,8 +14,12 @@ const ComponentMap = {
   quizchoice: lazy(() => import('./Widgets/QuizWidget/QuizChoice')),
 };
 
-export const LAZY_COMPONENTS = Object.keys(ComponentMap).reduce((res, key) => {
-  if (isOfflineDocsBuild && ['video', 'instruqt'].includes(key)) {
+const isOfflineNotAvailableKey = (key: LazyComponentType): key is 'video' | 'instruqt' => {
+  return ['video', 'instruqt'].includes(key);
+};
+
+export const LAZY_COMPONENTS: Record<string, React.ComponentType<any>> = (Object.keys(ComponentMap) as LazyComponentType[]).reduce((res, key) => {
+  if (isOfflineDocsBuild && isOfflineNotAvailableKey(key)) {
     res[key] = (props) => (!props.nodeData?.options?.drawer ? <OfflineNotAvailable assetKey={key} /> : null);
   } else {
     const LazyComponent = ComponentMap[key];
@@ -23,4 +30,4 @@ export const LAZY_COMPONENTS = Object.keys(ComponentMap).reduce((res, key) => {
     );
   }
   return res;
-}, {});
+}, {} as Record<string, React.ComponentType<any>>);

@@ -1,25 +1,127 @@
+// Need to figure out which is node type and which is component type
+type ComponentType =
+  | Exclude<NodeType, 'block-quote' | 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
+  | 'banner'
+  | 'blockquote'
+  | 'button'
+  | 'card'
+  | 'card-group'
+  | 'chapter'
+  | 'chapters'
+  | 'code'
+  | 'collapsible'
+  | 'community-driver'
+  | 'io-code-block'
+  | 'cond'
+  | 'container'
+  | 'cta'
+  | 'cta-banner'
+  | 'definitionList'
+  | 'definitionListItem'
+  | 'deprecated'
+  | 'deprecated-version-selector'
+  | 'describe'
+  | 'emphasis'
+  | 'extract'
+  | 'field'
+  | 'field_list'
+  | 'figure'
+  | 'footnote'
+  | 'footnote_reference'
+  | 'glossary'
+  | 'guide-next'
+  | 'heading'
+  | 'hlist'
+  | 'image'
+  | 'include'
+  | 'introduction'
+  | 'kicker'
+  | 'line'
+  | 'line_block'
+  | 'literal_block';
+
 type NodeType =
   | 'admonition'
+  | 'banner'
   | 'block-quote'
+  | 'code'
   | 'root'
   | 'section'
   | 'heading'
   | 'reference'
   | 'directive'
+  | 'directive_argument'
+  | 'line'
+  | 'line_block'
   | 'list'
   | 'list-table'
   | 'listItem'
   | 'text'
   | 'literal'
+  | 'literalinclude'
   | 'definitionList'
   | 'definitionListItem'
+  | 'emphasis'
+  | 'method-selector'
+  | 'only'
+  | 'openapi-changelog'
+  | 'paragraph'
+  | 'procedure'
+  | 'reference'
+  | 'ref_role'
+  | 'role'
+  | 'release_specification'
+  | 'rubric'
+  | 'search-results'
+  | 'section'
+  | 'seealso'
+  | 'sharedinclude'
+  | 'strong'
+  | 'substitution_reference'
+  | 'tabs-selector'
+  | 'time'
+  | 'title_reference'
+  | 'transition'
+  | 'versionadded'
+  | 'versionchanged'
+  | 'tabs'
   | 'target'
   | 'target_identifier'
-  | 'directive_argument'
-  | 'code';
+  | 'text'
+  | 'wayfinding';
+
+type RoleName = 
+  | 'abbr'
+  | 'class'
+  | 'command'
+  | 'file'
+  | 'guilabel'
+  | 'icon'
+  | 'highlight-blue'
+  | 'highlight-green'
+  | 'highlight-red'
+  | 'highlight-yellow'
+  | 'icon-fa5'
+  | 'icon-fa5-brands'
+  | 'icon-fa4'
+  | 'icon-mms'
+  | 'icon-charts'
+  | 'icon-lg'
+  | 'kbd'
+  | 'red'
+  | 'gold'
+  | 'required'
+  | 'sub'
+  | 'subscript'
+  | 'sup'
+  | 'superscript'
+  | 'link-new-tab';
+
+type NodeName = RoleName | AdmonitionName | 'list-table' | 'contents'
+  | 'collapsible' | 'tabs' | 'tab' | 'facet' | 'toctree';
 
 interface Node {
-  type: NodeType | string;
+  type: NodeType;
 }
 
 interface ParentNode extends Node {
@@ -29,10 +131,6 @@ interface ParentNode extends Node {
 interface Root extends ParentNode {
   options: Record<string, any>;
   fileid: string;
-}
-
-interface AdmonitionNode extends ParentNode {
-  type: 'admonition';
 }
 
 interface BlockQuoteNode extends ParentNode {
@@ -63,7 +161,7 @@ interface ReferenceNode extends ParentNode {
 
 interface Directive<TOptions = { [key: string]: string }> extends ParentNode {
   type: 'directive';
-  name: string;
+  name: NodeName;
   argument: Node[];
   domain?: string;
   options?: TOptions;
@@ -147,8 +245,7 @@ type TwitterOptions = {
 }
 
 interface TwitterNode extends Directive<TwitterOptions>{
-  type: 'directive'
-  options
+  options: TwitterOptions;
 }
 
 type CollapsibleOptions = {
@@ -225,7 +322,10 @@ interface TocTreeDirective extends Directive<TocTreeOptions> {
 }
 
 export type {
+  ComponentType,
   NodeType,
+  RoleName,
+  NodeName,
   Node,
   ParentNode,
   Root,
@@ -253,6 +353,7 @@ export type {
   StrongNode,
   TabsNode,
   TabNode,
+  TwitterNode,
   FacetNode,
   AdmonitionNode,
   AdmonitionName,

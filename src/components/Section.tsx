@@ -1,9 +1,12 @@
 import React from 'react';
 import { HeadingContextProvider } from '../context/heading-context';
 import { getPlaintext } from '../utils/get-plaintext';
+// TODO: Fix import
+// @ts-ignore
 import { findKeyValuePair } from '../utils/find-key-value-pair';
 import { ParentNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
+
 
 export type SectionProps = {
   sectionDepth: number;

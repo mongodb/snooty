@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { ComponentType, Node, NodeName, NodeType, RoleName } from '../types/ast';
 
 import { LAZY_COMPONENTS } from './ComponentFactoryLazy';
 import Admonition, { admonitionMap } from './Admonition';
@@ -83,6 +83,7 @@ import RoleRed from './Roles/Red';
 import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
 import SeeAlso from './SeeAlso';
+import { isDirectiveNode, isRoleName } from '../types/ast-utils';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -99,7 +100,7 @@ const IGNORED_NAMES = new Set([
 const IGNORED_TYPES = new Set(['comment', 'inline_target', 'named_reference', 'substitution_definition']);
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'caution', 'danger']);
 
-const roleMap = {
+const roleMap: Record<RoleName, React.ComponentType<any>> = {
   abbr: RoleAbbr,
   class: RoleClass,
   command: RoleCommand,
@@ -127,7 +128,7 @@ const roleMap = {
   'link-new-tab': RoleLinkNewTab,
 };
 
-const componentMap = {
+const componentMap: Record<Exclude<ComponentType, 'block-quote'>, React.ComponentType<any>> = {
   admonition: Admonition,
   banner: Banner,
   blockquote: BlockQuote,
@@ -200,33 +201,49 @@ const componentMap = {
   wayfinding: Wayfinding,
 };
 
-function getComponentType(type, name) {
+function getComponentType(type: NodeType, name?: NodeName): React.ComponentType<any> | undefined {
   const lookup = type === 'directive' ? name : type;
-  let ComponentType = componentMap[lookup];
+  // @ts-ignore
+  let ComponentType: (React.ComponentType<any> | undefined) = lookup ? componentMap[lookup] : undefined;
 
-  if (type === 'role') {
-    ComponentType = roleMap[name];
+  if (name) {
+    if (type === 'role' && isRoleName(name)) {
+      ComponentType = roleMap[name];
+    }
+  
+    // Various admonition types are all handled by the Admonition component
+    if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
+      ComponentType = componentMap.admonition;
+    }
   }
 
-  // Various admonition types are all handled by the Admonition component
-  if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
-    ComponentType = componentMap.admonition;
-  }
-
-  if (LAZY_COMPONENTS[lookup]) {
+  if (lookup && LAZY_COMPONENTS[lookup]) {
     return LAZY_COMPONENTS[lookup];
   }
 
   return ComponentType;
 }
 
-const ComponentFactory = (props) => {
+export type ComponentFactoryProps = {
+  nodeData: Node;
+  slug?: string;
+  sectionDepth?: string | number;
+}
+
+const ComponentFactory = (props: ComponentFactoryProps) => {
   const { nodeData, slug } = props;
 
   const selectComponent = () => {
-    const { domain, name, type } = nodeData;
+    let domain: string | undefined = '';
+    let name: NodeName | undefined;
+    const { type } = nodeData;
 
-    if (IGNORED_TYPES.has(type) || IGNORED_NAMES.has(name)) {
+    if (isDirectiveNode(nodeData)) {
+      domain = nodeData.domain;
+      name = nodeData.name;
+    }
+
+    if (IGNORED_TYPES.has(type) || (name && IGNORED_NAMES.has(name))) {
       return null;
     }
 
@@ -236,7 +253,7 @@ const ComponentFactory = (props) => {
       console.warn(`Domain '${domain}' not yet implemented ${name ? `for '${name}'` : ''}`);
     }
 
-    const ComponentType = getComponentType(type, name, props);
+    const ComponentType = getComponentType(type, name);
 
     if (!ComponentType) {
       console.warn(`${type} ${name ? `"${name}" ` : ''}not yet implemented${slug ? ` on page ${slug}` : ''}`);
@@ -248,15 +265,6 @@ const ComponentFactory = (props) => {
 
   if (!nodeData) return null;
   return selectComponent();
-};
-
-ComponentFactory.propTypes = {
-  nodeData: PropTypes.shape({
-    domain: PropTypes.string,
-    name: PropTypes.string,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
-  slug: PropTypes.string,
 };
 
 export default ComponentFactory;

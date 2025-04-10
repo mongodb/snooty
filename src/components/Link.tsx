@@ -92,7 +92,7 @@ const lgLinkStyling = css`
 `;
 
 export type LinkProps = {
-  children: ReactNode[];
+  children: ReactNode;
   to: string;
   activeClassName?: string;
   className?: string;
