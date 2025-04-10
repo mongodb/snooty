@@ -228,6 +228,7 @@ export type ComponentFactoryProps = {
   nodeData: Node;
   slug?: string;
   sectionDepth?: string | number;
+  [key: string]: unknown;
 };
 
 const ComponentFactory = (props: ComponentFactoryProps) => {

@@ -126,7 +126,10 @@ type NodeName =
   | 'tabs'
   | 'tab'
   | 'facet'
-  | 'toctree';
+  | 'toctree'
+  | 'deprecated'
+  | 'versionadded'
+  | 'versionchanged';
 
 interface Node {
   type: NodeType;

@@ -5,7 +5,7 @@ import ComponentFactory from './ComponentFactory';
 
 export type VersionModifiedProps = {
   nodeData: VersionModifiedNode;
-}
+};
 const VersionModified = ({ nodeData: { argument, children, name }, ...rest }: VersionModifiedProps) => {
   const { introText, childIndex } = useMemo(() => {
     let additionalArg, text;
