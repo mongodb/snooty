@@ -73,7 +73,7 @@ const Star = ({ isHighlighted, onClick, onMouseEnter, onMouseLeave, onFocus, onK
   );
 };
 
-const StarRating = ({ className, handleRatingSelection = () => {}, editable = true, showCaption = false }) => {
+const StarRating = ({ className, handleRatingSelection = () => {}, editable = true }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
   const [lastHoveredRating, setLastHoveredRating] = useState(null);
   const { selectedRating } = useFeedbackContext();
