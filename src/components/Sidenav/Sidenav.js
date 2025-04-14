@@ -24,6 +24,7 @@ import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { DownloadButton } from '../OfflineDownloadModal';
 import { useOfflineDownloadContext } from '../OfflineDownloadModal/DownloadContext';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { displayNone } from '../../utils/display-none';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -188,10 +189,10 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
   // CSS top property values for sticky side nav based on header height
   const topValues = useStickyTopValues(false, true, !!bannerContent);
 
-  let showVersions = repoBranches?.branches?.filter((b) => b.active)?.length > 1;
+  let showVersions = repoBranches?.branches?.length > 1;
 
-  const { showVersionDropdown } = useContext(VersionContext);
-  if (showVersionDropdown) {
+  const { hasEmbeddedVersionDropdown } = useContext(VersionContext);
+  if (hasEmbeddedVersionDropdown) {
     showVersions = false;
   }
 
@@ -341,7 +342,11 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                       reportAnalytics('Offline docs download button clicked');
                       setModalOpen(true);
                     }}
-                    className={cx(sideNavItemBasePadding, sideNavItemFontSize)}
+                    className={cx(
+                      sideNavItemBasePadding,
+                      sideNavItemFontSize,
+                      LeafyCSS`${displayNone.onMobileAndTablet}`
+                    )}
                     glyph={<Icon glyph={'Download'} />}
                   >
                     Download Documentation

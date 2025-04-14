@@ -41,9 +41,7 @@ export type Repo = {
 export const getAllRepos = async () => {
   const url: string = new URL('/projects', BASE_URL).toString();
   try {
-    const res = await fetch(url, {
-      credentials: 'include',
-    });
+    const res = await fetch(url);
     const repos: Repo[] = (await res.json())['data'];
     return repos;
   } catch (e) {
