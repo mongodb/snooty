@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Option, Select } from '@leafygreen-ui/select';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { ComposableTutorialOption } from '../../types/ast';
+import { joinKeyValuesAsString } from './ComposableTutorial';
 
 const selectStyling = css`
   flex: 1 0 auto;
@@ -37,10 +38,7 @@ const ConfigurableOption = ({
         }
       }
       const targetObj = { ...precedingSelections, [option.value]: selection.value };
-      const targetString = Object.keys(targetObj)
-        .map((key) => `${key}=${targetObj[key]}`)
-        .sort()
-        .join('.');
+      const targetString = joinKeyValuesAsString(targetObj);
 
       return validSelections.has(targetString);
     });

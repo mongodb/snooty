@@ -11,6 +11,16 @@ import { theme } from '../../theme/docsTheme';
 import Composable from './Composable';
 import ConfigurableOption from './ConfigurableOption';
 
+// helper function to join key-value pairs as one string
+// ordered by keys alphabetically
+// separated by "."
+export function joinKeyValuesAsString(targetObj: { [key: string]: string }) {
+  return Object.keys(targetObj)
+    .map((key) => `${key}=${targetObj[key]}`)
+    .sort()
+    .join('.');
+}
+
 function filterValidQueryParams(
   parsedQuery: ParsedQuery<string>,
   composableOptions: ComposableTutorialNode['composable-options'],
@@ -65,10 +75,7 @@ function filterValidQueryParams(
     }
     // check if default value for this option has content
     const targetObj = { ...res, [composableOption.value]: composableOption.default };
-    const targetString = Object.keys(targetObj)
-      .map((key) => `${key}=${targetObj[key]}`)
-      .sort()
-      .join('.');
+    const targetString = joinKeyValuesAsString(targetObj);
     if (validSelections.has(targetString)) {
       res[composableOption.value] = composableOption.default;
       continue;
@@ -76,10 +83,7 @@ function filterValidQueryParams(
 
     // if the specified default does not have content (fault in data)
     // safety to find a valid combination from children and select
-    const currentSelections = Object.keys({ ...res })
-      .map((key) => `${key}=${targetObj[key]}`)
-      .sort()
-      .join('.');
+    const currentSelections = joinKeyValuesAsString({...res});
     for (const [validSelection] of validSelections.entries()) {
       const validSelectionParts = validSelection.split('.');
       const selectionPartForOption = validSelectionParts.find((str) => str.includes(`${composableOption.value}=`));
@@ -197,10 +201,7 @@ const ComposableTutorial = ({
       // the ones that occur less than index, take it
       const newSelections = { ...currentSelections, [option]: value };
 
-      const targetString = Object.keys(newSelections)
-        .map((key) => `${key}=${newSelections[key]}`)
-        .sort()
-        .join('.');
+      const targetString = joinKeyValuesAsString(newSelections);
 
       if (validSelections.has(targetString)) {
         setCurrentSelections(currentSelections);
