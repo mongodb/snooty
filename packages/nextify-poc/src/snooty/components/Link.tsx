@@ -162,8 +162,6 @@ const Link = ({
     showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
   const target = !showExtIcon ? "_self" : undefined;
 
-  return <p>UNIMPLEMENTED: LINK</p>;
-  /*
   return (
     <LGLink
       className={joinClassNames(lgLinkStyling, className)}
@@ -176,7 +174,6 @@ const Link = ({
       {decoration}
     </LGLink>
   );
-  */
 };
 
 export default Link;

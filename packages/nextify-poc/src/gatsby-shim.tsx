@@ -8,10 +8,18 @@ import type {
   ReactNode,
 } from "react";
 
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const useLocation = (): Location => {
-  return window.location;
+  const [location, setLocation] = useState<Location | undefined>(undefined);
+  useEffect(() => {
+    setLocation(window.location);
+  }, []);
+  return (
+    location ?? {
+      search: "",
+    }
+  );
 };
 export class StaticQueryDocument {
   /** Prevents structural type widening. */

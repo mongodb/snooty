@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { navigate, useLocation } from "../../gatsby-shim";
+import { navigate, useLocation } from "../../../gatsby-shim";
 import PropTypes from "prop-types";
 import { css, cx } from "@leafygreen-ui/emotion";
 import IconButton from "@leafygreen-ui/icon-button";
@@ -31,6 +31,8 @@ export const PLACEHOLDER_TEXT = `Search MongoDB Docs`;
 const PLACEHOLDER_TEXT_MOBILE = "Search";
 
 const SearchInput = ({ className, slug }) => {
+  // TODO
+  return <></>;
   const [searchValue, setSearchValue] = useState("");
   const searchBoxRef = useRef();
   const inputRef = useRef();

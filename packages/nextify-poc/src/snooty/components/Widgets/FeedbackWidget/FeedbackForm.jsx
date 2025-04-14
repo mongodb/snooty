@@ -1,14 +1,16 @@
-import React from 'react';
-import { css, cx } from '@leafygreen-ui/emotion';
-import Loadable from '@loadable/component';
-import { createPortal } from 'react-dom';
-import useScreenSize from '../../../hooks/useScreenSize';
-import { theme } from '../../../theme/docsTheme';
-import { useFeedbackContext } from './context';
-import FeedbackCard from './FeedbackCard';
-import RatingView from './views/RatingView';
-import SubmittedView from './views/SubmittedView';
-const CommentView = Loadable(() => import('../FeedbackWidget/views/CommentView'));
+import React from "react";
+import { css, cx } from "@leafygreen-ui/emotion";
+import Loadable from "@loadable/component";
+import { createPortal } from "react-dom";
+import useScreenSize from "../../../hooks/useScreenSize";
+import { theme } from "../../../theme/docsTheme";
+import { useFeedbackContext } from "./context";
+import FeedbackCard from "./FeedbackCard";
+import RatingView from "./views/RatingView";
+import SubmittedView from "./views/SubmittedView";
+const CommentView = Loadable(() =>
+  import("../FeedbackWidget/views/CommentView")
+);
 
 export const FeedbackContent = ({ view }) => {
   const View = {
@@ -34,13 +36,13 @@ const formStyle = css`
   }
 `;
 
-export const feedbackId = 'feedback-card';
-export const fwFormId = 'feedback-form';
+export const feedbackId = "feedback-card";
+export const fwFormId = "feedback-form";
 
 const FeedbackForm = () => {
   const { view } = useFeedbackContext();
   const { isMobile } = useScreenSize();
-  const isOpen = view !== 'waiting';
+  const isOpen = view !== "waiting";
 
   const renderedComponent = isOpen && (
     <div className={cx(fwFormId, formStyle)} id={feedbackId} hidden={!isOpen}>
@@ -50,7 +52,9 @@ const FeedbackForm = () => {
     </div>
   );
 
-  return isMobile ? createPortal(renderedComponent, document.body) : renderedComponent;
+  return isMobile
+    ? createPortal(renderedComponent, document.body)
+    : renderedComponent;
 };
 
 export default FeedbackForm;

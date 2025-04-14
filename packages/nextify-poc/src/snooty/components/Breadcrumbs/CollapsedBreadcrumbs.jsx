@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Menu, MenuItem } from "@leafygreen-ui/menu";
 import IconButton from "@leafygreen-ui/icon-button";
-import { withPrefix } from "../../gatsby-shim";
+import { withPrefix } from "../../../gatsby-shim";
 import Icon from "@leafygreen-ui/icon";
 import { formatText } from "../../utils/format-text";
 

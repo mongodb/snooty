@@ -7,7 +7,7 @@ import React, {
   createContext,
   useTransition,
 } from "react";
-import { useLocation } from "../../gatsby-shim";
+import { useLocation } from "../../../../gatsby-shim";
 import { getViewport } from "../../../hooks/useViewport";
 import { useSiteMetadata } from "../../../hooks/use-site-metadata";
 import { upsertFeedback, useRealmUser } from "./realm";

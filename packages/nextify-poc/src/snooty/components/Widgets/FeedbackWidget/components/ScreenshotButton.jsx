@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useDarkMode } from "@leafygreen-ui/leafygreen-provider";
-import { withPrefix } from "../../gatsby-shim";
+import { withPrefix } from "../../../../../gatsby-shim";
 import Button from "@leafygreen-ui/button";
 import Icon from "@leafygreen-ui/icon";
 import Portal from "@leafygreen-ui/portal";
