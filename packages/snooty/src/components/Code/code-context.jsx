@@ -1,3 +1,4 @@
+'use client';
 import React, { useContext, useMemo } from 'react';
 import { Language } from '@leafygreen-ui/code';
 import { TabContext } from '../Tabs/tab-context';

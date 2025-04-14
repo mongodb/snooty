@@ -1,13 +1,12 @@
-import React, { ReactNode } from 'react';
-import { Link as GatsbyLink } from 'gatsby';
-import { css, cx } from '@leafygreen-ui/emotion';
-import { Link as LGLink } from '@leafygreen-ui/typography';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { palette } from '@leafygreen-ui/palette';
-import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
-import { isRelativeUrl } from '../utils/is-relative-url';
-import { joinClassNames } from '../utils/join-class-names';
-import { validateHTMAttributes } from '../utils/validate-element-attributes';
+import React, { ReactNode } from "react";
+import { css, cx } from "@leafygreen-ui/emotion";
+import { Link as LGLink } from "@leafygreen-ui/typography";
+import { useDarkMode } from "@leafygreen-ui/leafygreen-provider";
+import { palette } from "@leafygreen-ui/palette";
+import ArrowRightIcon from "@leafygreen-ui/icon/dist/ArrowRight";
+import { isRelativeUrl } from "../utils/is-relative-url";
+import { joinClassNames } from "../utils/join-class-names";
+import { validateHTMAttributes } from "../utils/validate-element-attributes";
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -37,7 +36,7 @@ const THEME_STYLES: LinkThemeStyles = {
     color: palette.blue.base,
     focusTextDecorColor: palette.blue.base,
     hoverTextDecorColor: palette.gray.light2,
-    fontWeight: 'inherit',
+    fontWeight: "inherit",
   },
   dark: {
     color: palette.blue.light1,
@@ -117,29 +116,30 @@ const Link = ({
   openInNewTab,
   ...other
 }: LinkProps) => {
-  if (!to) to = '';
-  const anchor = to.startsWith('#');
+  if (!to) to = "";
+  const anchor = to.startsWith("#");
 
-  const anchorProps = validateHTMAttributes('anchor', other);
+  const anchorProps = validateHTMAttributes("anchor", other);
   const { theme: siteTheme } = useDarkMode();
 
   //used instead of LG showLinkArrow prop for consistency between LGLinks and GatsbyLinks(GatsbyLinks don't have that prop)
   const decoration = showLinkArrow ? (
     <span>
-      {' '}
-      <ArrowRightIcon role="presentation" size={12} />{' '}
+      {" "}
+      <ArrowRightIcon role="presentation" size={12} />{" "}
     </span>
   ) : (
-    ''
+    ""
   );
 
   // Use Gatsby Link for internal links, and <a> for others
   if (to && isRelativeUrl(to) && !anchor) {
-    if (!to.startsWith('/')) to = `/${to}`;
+    if (!to.startsWith("/")) to = `/${to}`;
 
     // Ensure trailing slash
-    to = to.replace(/\/?(\?|#|$)/, '/$1');
+    to = to.replace(/\/?(\?|#|$)/, "/$1");
 
+    /*
     return (
       <GatsbyLink
         className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
@@ -152,19 +152,21 @@ const Link = ({
         {decoration}
       </GatsbyLink>
     );
+    */
   }
 
-  const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
-  const isMDBLink = strippedUrl.includes('mongodb.com');
-  const showExtIcon = showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
-  const target = !showExtIcon ? '_self' : undefined;
+  const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, "");
+  const isMDBLink = strippedUrl.includes("mongodb.com");
+  const showExtIcon =
+    showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
+  const target = !showExtIcon ? "_self" : undefined;
 
   return (
     <LGLink
       className={joinClassNames(lgLinkStyling, className)}
       href={to}
       hideExternalIcon={!showExtIcon}
-      target={openInNewTab ? '_blank' : target}
+      target={openInNewTab ? "_blank" : target}
       {...anchorProps}
     >
       {children}

@@ -1,8 +1,11 @@
-const storeComponentNames = (node, componentNameSet) => {
-  const componentNameProperty = node?.type === 'directive' || node?.type === 'role' ? 'name' : 'type';
+export const storeComponentNames = (node, componentNameSet) => {
+  const componentNameProperty =
+    node?.type === "directive" || node?.type === "role" ? "name" : "type";
   if (!node[componentNameProperty]) {
     console.error(
-      `Node of type ${node.type} has no property ${componentNameProperty}: ${JSON.stringify({
+      `Node of type ${
+        node.type
+      } has no property ${componentNameProperty}: ${JSON.stringify({
         type: node.type,
         position: node.position,
       })}`
@@ -21,7 +24,7 @@ const storeComponentNames = (node, componentNameSet) => {
  *
  * @param {node[]}    rootNodes
  */
-const getPageComponents = (rootNodes) => {
+export const getPageComponents = (rootNodes) => {
   const componentNameSet = new Set();
 
   // there usually is only one root node, but safeguarding in case
@@ -30,5 +33,3 @@ const getPageComponents = (rootNodes) => {
   });
   return [...componentNameSet];
 };
-
-module.exports = { getPageComponents };

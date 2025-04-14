@@ -1,15 +1,23 @@
-const { normalizePath } = require('./normalize-path');
+const { normalizePath } = require("./normalize-path");
 
-export const generatePathPrefix = ({ commitHash, parserBranch, patchId, pathPrefix, project, snootyBranch, user }) => {
+export const generatePathPrefix = ({
+  commitHash,
+  parserBranch,
+  patchId,
+  pathPrefix,
+  project,
+  snootyBranch,
+  user,
+}) => {
   // If user specified a PATH_PREFIX environment variable, ensure it begins with a prefix and use
   if (pathPrefix) {
-    if (pathPrefix.startsWith('/')) {
+    if (pathPrefix.startsWith("/")) {
       return pathPrefix;
     }
     return `/${pathPrefix}`;
   }
 
-  let prefix = '';
+  let prefix = "";
   if (commitHash) prefix += `${commitHash}`;
   if (patchId) prefix += `/${patchId}`;
 
@@ -24,7 +32,3 @@ export const generatePathPrefix = ({ commitHash, parserBranch, patchId, pathPref
     : `/${prefix}/${base}/${parserBranch}`;
   return normalizePath(path);
 };
-
-// TODO: switch to ES6 export syntax if Gatsby implements support for ES6 module imports
-// https://github.com/gatsbyjs/gatsby/issues/7810
-module.exports.generatePathPrefix = generatePathPrefix;

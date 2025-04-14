@@ -1,6 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { css, cx } from '@leafygreen-ui/emotion';
-import Modal from '@leafygreen-ui/modal';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { css, cx } from "@leafygreen-ui/emotion";
+import Modal from "@leafygreen-ui/modal";
 import {
   Cell,
   flexRender,
@@ -12,22 +18,31 @@ import {
   TableHead,
   useLeafyGreenTable,
   getFilteredRowModel,
-} from '@leafygreen-ui/table';
-import type { HeaderGroup, LGColumnDef, LeafyGreenTableRow, CoreRow } from '@leafygreen-ui/table';
-import TextInput from '@leafygreen-ui/text-input';
-import { useToast, Variant } from '@leafygreen-ui/toast';
-import { Body, Disclaimer, H3, Link } from '@leafygreen-ui/typography';
-import Box from '@leafygreen-ui/box';
-import Button, { Variant as ButtonVariant } from '@leafygreen-ui/button';
-import { theme } from '../../theme/docsTheme';
-import fetchAndSaveFile from '../../utils/download-file';
-import useScreenSize from '../../hooks/useScreenSize';
-import Spinner from '../Spinner';
-import { useOfflineDownloadContext, type OfflineVersion, type OfflineRepo } from './DownloadContext';
-import VersionSelect from './VersionSelector';
+} from "@leafygreen-ui/table";
+import type {
+  HeaderGroup,
+  LGColumnDef,
+  LeafyGreenTableRow,
+  CoreRow,
+} from "@leafygreen-ui/table";
+import TextInput from "@leafygreen-ui/text-input";
+import { useToast, Variant } from "@leafygreen-ui/toast";
+import { Body, Disclaimer, H3, Link } from "@leafygreen-ui/typography";
+import Box from "@leafygreen-ui/box";
+import Button, { Variant as ButtonVariant } from "@leafygreen-ui/button";
+import { theme } from "../../theme/docsTheme";
+import fetchAndSaveFile from "../../utils/download-file";
+import useScreenSize from "../../hooks/useScreenSize";
+import Spinner from "../Spinner";
+import {
+  useOfflineDownloadContext,
+  type OfflineVersion,
+  type OfflineRepo,
+} from "./DownloadContext";
+import VersionSelect from "./VersionSelector";
 
 const modalStyle = css`
-  [role='dialog'] {
+  [role="dialog"] {
     max-height: 600px;
     max-width: 690px;
     padding: 40px 36px;
@@ -102,12 +117,16 @@ type ModalProps = {
 };
 
 const DownloadModal = ({ open, setOpen }: ModalProps) => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [resultsLoading, setResultsLoading] = useState(false);
   const tableRef = useRef<HTMLDivElement>(null);
-  const [rowSelection, setRowSelection] = useState<{ [key: string]: boolean }>({});
+  const [rowSelection, setRowSelection] = useState<{ [key: string]: boolean }>(
+    {}
+  );
   const { repos } = useOfflineDownloadContext();
-  const selectedVersions = useRef<Record<OfflineRepo['displayName'], OfflineVersion>>({});
+  const selectedVersions = useRef<
+    Record<OfflineRepo["displayName"], OfflineVersion>
+  >({});
   const { pushToast } = useToast();
   const { isMobile } = useScreenSize();
 
@@ -119,18 +138,19 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
   const columns = useMemo(() => {
     return [
       {
-        header: 'Products',
-        accessorKey: 'displayName',
+        header: "Products",
+        accessorKey: "displayName",
         size: 420,
         enableGlobalFilter: true,
         cell: (cellContext) => {
-          const displayName = (cellContext.getValue() ?? '') as OfflineRepo['displayName'];
+          const displayName = (cellContext.getValue() ??
+            "") as OfflineRepo["displayName"];
           const repo = cellContext.row.original;
           // TODO: DOP-5295 remove this hardcoded value and input into DB and return from API
           const subtitle =
-            repo.displayName.toLowerCase() === 'mongodb atlas'
-              ? 'Includes Data Federation, Atlas Search, and Stream Processing'
-              : '';
+            repo.displayName.toLowerCase() === "mongodb atlas"
+              ? "Includes Data Federation, Atlas Search, and Stream Processing"
+              : "";
 
           return (
             <>
@@ -151,8 +171,8 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         },
       },
       {
-        header: 'Version',
-        accessorKey: 'versions',
+        header: "Version",
+        accessorKey: "versions",
         size: isMobile ? 300 : 170,
         cell: (cellContext) => {
           const versions = (cellContext.getValue() ?? []) as OfflineVersion[];
@@ -174,24 +194,27 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
             />
           );
         },
-        align: 'left',
+        align: "left",
         enableGlobalFilter: true,
       },
     ] as LGColumnDef<OfflineRepo>[];
   }, [isMobile]);
 
-  const filter = useCallback((row: CoreRow<OfflineRepo>, _columnId: string, filterValue: string) => {
-    const searchText = filterValue.toLowerCase();
-    const offlineRepo = row.original;
-    return (
-      offlineRepo.displayName.toLowerCase().includes(searchText) ||
-      offlineRepo.versions
-        .reduce((res, version) => {
-          return res + ' ' + version.displayName;
-        }, '')
-        ?.includes(searchText)
-    );
-  }, []);
+  const filter = useCallback(
+    (row: CoreRow<OfflineRepo>, _columnId: string, filterValue: string) => {
+      const searchText = filterValue.toLowerCase();
+      const offlineRepo = row.original;
+      return (
+        offlineRepo.displayName.toLowerCase().includes(searchText) ||
+        offlineRepo.versions
+          .reduce((res, version) => {
+            return res + " " + version.displayName;
+          }, "")
+          ?.includes(searchText)
+      );
+    },
+    []
+  );
 
   const table = useLeafyGreenTable({
     containerRef: tableRef,
@@ -214,7 +237,9 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
       return;
     }
     setResultsLoading(true);
-    const selectedDisplayNames = table.getSelectedRowModel().flatRows.map((row) => row.original.displayName);
+    const selectedDisplayNames = table
+      .getSelectedRowModel()
+      .flatRows.map((row) => row.original.displayName);
     const urlsToRequest: { repo: string; version: string; url: string }[] = [];
     for (const displayName of selectedDisplayNames) {
       urlsToRequest.push({
@@ -227,16 +252,19 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
       await Promise.all(
         urlsToRequest.map(async (urlData) => {
           try {
-            await fetchAndSaveFile(urlData.url, `${urlData.repo}-${urlData.version}.tar.gz`);
+            await fetchAndSaveFile(
+              urlData.url,
+              `${urlData.repo}-${urlData.version}.tar.gz`
+            );
             pushToast({
-              title: 'Download Initiated',
+              title: "Download Initiated",
               description: urlData.repo,
               variant: Variant.Success,
               dismissible: true,
             });
           } catch (e) {
             pushToast({
-              title: 'Download Failed',
+              title: "Download Failed",
               description: urlData.repo,
               variant: Variant.Warning,
               dismissible: true,
@@ -254,16 +282,22 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
   };
 
   return (
-    <Modal onClick={(e) => e.stopPropagation()} className={cx(modalStyle)} size={'large'} open={open} setOpen={setOpen}>
+    <Modal
+      onClick={(e) => e.stopPropagation()}
+      className={cx(modalStyle)}
+      size={"large"}
+      open={open}
+      setOpen={setOpen}
+    >
       <H3 className={cx(headingStyle)}>Download Documentation</H3>
 
       <Body baseFontSize={BASE_FONT_SIZE} className={cx(bodyStyle)}>
-        Navigate the table to find the product and version you wish to download. Looking for another product? Visit
-        our&nbsp;
+        Navigate the table to find the product and version you wish to download.
+        Looking for another product? Visit our&nbsp;
         <Link
           baseFontSize={BASE_FONT_SIZE}
           hideExternalIcon={false}
-          href={'https://mongodb.com/docs/legacy/'}
+          href={"https://mongodb.com/docs/legacy/"}
           target="_blank"
         >
           legacy docs site
@@ -274,28 +308,42 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
         className={cx(searchInputStyle)}
         baseFontSize={BASE_FONT_SIZE}
         // TODO: can remove aria-labelledby after upgrading LG/TextInput
-        aria-labelledby={'null'}
-        aria-label={'Search for Offline Documentation'}
+        aria-labelledby={"null"}
+        aria-label={"Search for Offline Documentation"}
         onChange={(e) => {
           table.setGlobalFilter(String(e.target.value));
         }}
-        placeholder={'Search products'}
+        placeholder={"Search products"}
         value={searchText}
       ></TextInput>
 
-      <LeafyTable shouldAlternateRowColor={true} table={table} ref={tableRef} className={cx(tableStyling)}>
+      <LeafyTable
+        shouldAlternateRowColor={true}
+        table={table}
+        ref={tableRef}
+        className={cx(tableStyling)}
+      >
         <TableHead>
-          {table.getHeaderGroups().map((headerGroup: HeaderGroup<OfflineRepo>) => (
-            <HeaderRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <HeaderCell className={cx(headerCellStyling)} key={header.id} header={header}>
-                    {flexRender(header.column.columnDef.header, header.getContext())}
-                  </HeaderCell>
-                );
-              })}
-            </HeaderRow>
-          ))}
+          {table
+            .getHeaderGroups()
+            .map((headerGroup: HeaderGroup<OfflineRepo>) => (
+              <HeaderRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <HeaderCell
+                      className={cx(headerCellStyling)}
+                      key={header.id}
+                      header={header}
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </HeaderCell>
+                  );
+                })}
+              </HeaderRow>
+            ))}
         </TableHead>
 
         <TableBody>
@@ -305,7 +353,10 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
                 {row.getVisibleCells().map((cell) => {
                   return (
                     <Cell className={cx(cellStyling)} key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
                     </Cell>
                   );
                 })}

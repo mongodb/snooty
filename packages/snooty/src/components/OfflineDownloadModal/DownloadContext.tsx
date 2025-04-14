@@ -1,9 +1,18 @@
-import React, { createContext, Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from 'react';
-import { useAllDocsets } from '../../hooks/useAllDocsets';
-import { getAllRepos, type Repo } from '../../utils/snooty-data-api';
-import assertLeadingBrand from '../../utils/assert-leading-brand';
-import useScreenSize from '../../hooks/useScreenSize';
-import DownloadModal from './DownloadModal';
+"use client";
+import React, {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useAllDocsets } from "../../hooks/useAllDocsets";
+import { getAllRepos, type Repo } from "../../utils/snooty-data-api";
+import assertLeadingBrand from "../../utils/assert-leading-brand";
+import useScreenSize from "../../hooks/useScreenSize";
+import DownloadModal from "./DownloadModal";
 
 export type OfflineVersion = {
   displayName: string;
@@ -69,9 +78,12 @@ function processRepos(repos: Repo[]) {
   return repos
     .reduce((res: OfflineRepo[], repo) => {
       const offlineRepo: OfflineRepo = {
-        displayName: assertLeadingBrand(repo.displayName ?? repo?.search?.categoryTitle ?? repo.project, {
-          titleCase: true,
-        }),
+        displayName: assertLeadingBrand(
+          repo.displayName ?? repo?.search?.categoryTitle ?? repo.project,
+          {
+            titleCase: true,
+          }
+        ),
         versions: [],
       };
 
@@ -109,9 +121,11 @@ type ProviderProps = {
  */
 const OfflineDownloadProvider = ({ children }: ProviderProps) => {
   const allDocsets = useAllDocsets();
-  const [offlineRepos, setOfflineRepos] = useState<OfflineRepo[]>(() => processDocsets(allDocsets));
+  const [offlineRepos, setOfflineRepos] = useState<OfflineRepo[]>(() =>
+    processDocsets(allDocsets)
+  );
   const [modalOpen, setModalOpen] = useState(() => false);
-  const promise = useRef<Promise<void>>();
+  const promise = useRef<Promise<void> | undefined>(undefined);
   const { isTabletOrMobile } = useScreenSize();
 
   useEffect(() => {
@@ -126,7 +140,7 @@ const OfflineDownloadProvider = ({ children }: ProviderProps) => {
         setOfflineRepos(processRepos(res));
       })
       .catch((e) => {
-        console.error('Error while fetching repos, returning build data');
+        console.error("Error while fetching repos, returning build data");
       })
       .finally(() => {
         promise.current = undefined;
@@ -144,9 +158,13 @@ const OfflineDownloadProvider = ({ children }: ProviderProps) => {
   }, [isTabletOrMobile]);
 
   return (
-    <OfflineDownloadContext.Provider value={{ repos: offlineRepos, modalOpen, setModalOpen }}>
+    <OfflineDownloadContext.Provider
+      value={{ repos: offlineRepos, modalOpen, setModalOpen }}
+    >
       {children}
-      {!isTabletOrMobile && <DownloadModal open={modalOpen} setOpen={setModalOpen} />}
+      {!isTabletOrMobile && (
+        <DownloadModal open={modalOpen} setOpen={setModalOpen} />
+      )}
     </OfflineDownloadContext.Provider>
   );
 };

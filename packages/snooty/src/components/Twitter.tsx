@@ -1,8 +1,8 @@
-import React from 'react';
-import { withPrefix } from 'gatsby';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { getPlaintext } from '../utils/get-plaintext';
-import { TwitterNode } from '../types/ast';
+import React from "react";
+import { withPrefix } from "../../gatsby-shim";
+import { useSiteMetadata } from "../hooks/use-site-metadata";
+import { getPlaintext } from "../utils/get-plaintext";
+import { TwitterNode } from "../types/ast";
 
 export type TwitterProps = {
   nodeData: TwitterNode;
@@ -21,7 +21,7 @@ const getImageUrl = (src: string, siteUrl: string) => {
 const Twitter = ({
   nodeData: {
     children,
-    options: { creator, image, 'image-alt': imageAlt, site, title },
+    options: { creator, image, "image-alt": imageAlt, site, title },
   },
 }: TwitterProps) => {
   const { siteUrl } = useSiteMetadata();
@@ -32,7 +32,9 @@ const Twitter = ({
       {site && <meta name="twitter:site" content={site} />}
       {creator && <meta name="twitter:creator" content={creator} />}
       {title && <meta property="twitter:title" content={title} />}
-      {description && <meta property="twitter:description" content={description} />}
+      {description && (
+        <meta property="twitter:description" content={description} />
+      )}
       {imageSrc && <meta name="twitter:image" content={imageSrc} />}
       {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
     </>

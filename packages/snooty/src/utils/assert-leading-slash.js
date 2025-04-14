@@ -4,5 +4,3 @@ export const assertLeadingSlash = (url) => {
   }
   return `/${url}`;
 };
-
-module.exports.assertLeadingSlash = assertLeadingSlash;

@@ -1,10 +1,12 @@
 //nested filtering out all changes with hideFromChangelog
 //hides changes on all versions changelog
-const hideChanges = (changelog) => {
+export const hideChanges = (changelog) => {
   const versionUpdate = (version) => {
     const updatedVersion = { ...version };
     if (version?.changes) {
-      updatedVersion.changes = version.changes.filter((change) => !change.hideFromChangelog);
+      updatedVersion.changes = version.changes.filter(
+        (change) => !change.hideFromChangelog
+      );
     }
     return updatedVersion;
   };
@@ -12,14 +14,21 @@ const hideChanges = (changelog) => {
   //pathUpdate takes the array of versions from the specific path passed in and takes each version and runs versionUpdate on it
   const pathUpdate = (path) => {
     const updatedPath = { ...path, versions: path.versions.map(versionUpdate) };
-    updatedPath.versions = updatedPath.versions.filter((version) => version.changes?.length);
+    updatedPath.versions = updatedPath.versions.filter(
+      (version) => version.changes?.length
+    );
     return updatedPath;
   };
 
   //dateUpdate takes the array of paths from the specific date section passed in and takes each path and runs pathUpdate on it
   const dateUpdate = (dateSection) => {
-    const updatedDateSection = { ...dateSection, paths: dateSection.paths.map(pathUpdate) };
-    updatedDateSection.paths = updatedDateSection.paths.filter((path) => path.versions?.length);
+    const updatedDateSection = {
+      ...dateSection,
+      paths: dateSection.paths.map(pathUpdate),
+    };
+    updatedDateSection.paths = updatedDateSection.paths.filter(
+      (path) => path.versions?.length
+    );
     return updatedDateSection;
   };
 
@@ -34,7 +43,9 @@ export const hideDiffChanges = (diffData) => {
   const pathUpdate = (path) => {
     const updatedPath = { ...path };
     if (path?.changes) {
-      updatedPath.changes = path.changes.filter((change) => !change.hideFromChangelog);
+      updatedPath.changes = path.changes.filter(
+        (change) => !change.hideFromChangelog
+      );
     }
     return updatedPath;
   };
@@ -42,5 +53,3 @@ export const hideDiffChanges = (diffData) => {
   const updatedDiffData = diffData.map(pathUpdate);
   return updatedDiffData.filter((path) => path.changes?.length);
 };
-
-module.exports = { hideChanges, hideDiffChanges };

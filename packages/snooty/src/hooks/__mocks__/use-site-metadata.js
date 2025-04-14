@@ -1,8 +1,6 @@
-module.exports = {
-  useSiteMetadata: jest.fn().mockReturnValue({
-    branch: 'master',
-    project: 'datalake',
-    title: 'MongoDB Datalake',
-    user: 'andrew',
-  }),
-};
+export const useSiteMetadata = jest.fn().mockReturnValue({
+  branch: "master",
+  project: "datalake",
+  title: "MongoDB Datalake",
+  user: "andrew",
+});

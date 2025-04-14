@@ -1,14 +1,14 @@
-import React from 'react';
-import { withPrefix } from 'gatsby';
-import { css, cx } from '@leafygreen-ui/emotion';
-import styled from '@emotion/styled';
-import Button from '@leafygreen-ui/button';
-import { palette } from '@leafygreen-ui/palette';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { Body } from '@leafygreen-ui/typography';
-import { theme } from '../theme/docsTheme';
-import { baseUrl } from '../utils/base-url';
-import Link from '../components/Link';
+import React from "react";
+import { withPrefix } from "../../gatsby-shim";
+import { css, cx } from "@leafygreen-ui/emotion";
+import styled from "@emotion/styled";
+import Button from "@leafygreen-ui/button";
+import { palette } from "@leafygreen-ui/palette";
+import { useDarkMode } from "@leafygreen-ui/leafygreen-provider";
+import { Body } from "@leafygreen-ui/typography";
+import { theme } from "../theme/docsTheme";
+import { baseUrl } from "../utils/base-url";
+import Link from "../components/Link";
 
 const ErrorBox = styled.div`
   max-width: 455px;
@@ -45,8 +45,8 @@ const ImageContainer = styled.div`
 `;
 
 const NotFoundImage = () => {
-  const altText = 'Page not found';
-  const imgPath = 'assets/404.png';
+  const altText = "Page not found";
+  const imgPath = "assets/404.png";
 
   return (
     <ImageContainer>
@@ -56,7 +56,7 @@ const NotFoundImage = () => {
 };
 
 const errorTitleStyling = css`
-  font-family: 'MongoDB Value Serif';
+  font-family: "MongoDB Value Serif";
   font-size: 32px;
   line-height: 40px;
   margin-block-start: 1em;
@@ -80,7 +80,9 @@ const ErrorBoxContainer = () => {
   const { darkMode } = useDarkMode();
   return (
     <ErrorBox>
-      <Body className={cx(errorTitleStyling)}>Sorry, we can't find that page.</Body>
+      <Body className={cx(errorTitleStyling)}>
+        Sorry, we can't find that page.
+      </Body>
       <Body>The page might have been moved or deleted.</Body>
       <LinkContainer>
         <Button
@@ -153,7 +155,7 @@ export const gridStyling = `
   }
 `;
 
-export const Wrapper = styled('main')`
+export const Wrapper = styled("main")`
   display: grid;
   ${gridStyling}
 `;

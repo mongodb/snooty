@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql } from "../../gatsby-shim";
 
 // Return an array of MongoDB products
 export const useAllProducts = () => {

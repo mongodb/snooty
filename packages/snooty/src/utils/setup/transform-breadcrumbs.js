@@ -1,7 +1,7 @@
-const transformBreadcrumbs = (breadcrumbs, slugToBreadcrumbLabel) => {
+export const transformBreadcrumbs = (breadcrumbs, slugToBreadcrumbLabel) => {
   Object.entries(breadcrumbs).forEach(([slug, breadcrumbList]) => {
     breadcrumbs[slug] = breadcrumbList.map((path) => {
-      const title = slugToBreadcrumbLabel?.[path] || '';
+      const title = slugToBreadcrumbLabel?.[path] || "";
       return {
         path,
         title,
@@ -9,5 +9,3 @@ const transformBreadcrumbs = (breadcrumbs, slugToBreadcrumbLabel) => {
     });
   });
 };
-
-module.exports = { transformBreadcrumbs };

@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql } from "../../gatsby-shim";
 
 export default function useChangelogData() {
   const data = useStaticQuery(graphql`

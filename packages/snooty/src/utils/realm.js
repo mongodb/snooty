@@ -1,6 +1,6 @@
-import * as Realm from 'realm-web';
-import { SNOOTY_REALM_APP_ID } from '../build-constants';
-import { currentRealmUsersCleanup } from './realm-user-management';
+import * as Realm from "realm-web";
+import { SNOOTY_REALM_APP_ID } from "../build-constants";
+import { currentRealmUsersCleanup } from "./realm-user-management";
 
 const app = new Realm.App({ id: SNOOTY_REALM_APP_ID });
 
@@ -30,7 +30,7 @@ const loginAnonymous = async () => {
       const user = await app.logIn(credentials);
       res(user);
     } catch (err) {
-      console.error('Failed to login', err);
+      console.error("Failed to login", err);
     }
   });
 
@@ -42,6 +42,7 @@ const loginAnonymous = async () => {
 const callAuthenticatedFunction = async (funcName, ...argsList) => {
   try {
     await loginAnonymous();
+    return {};
     return await app.currentUser.functions[funcName](...argsList);
   } catch (err) {
     console.error(`Failed to call function: ${funcName}`);
@@ -49,37 +50,65 @@ const callAuthenticatedFunction = async (funcName, ...argsList) => {
 };
 
 export const fetchBanner = async (snootyEnv) => {
-  return callAuthenticatedFunction('getBanner', snootyEnv === 'development');
+  return callAuthenticatedFunction("getBanner", snootyEnv === "development");
 };
 
 export const fetchBreadcrumbs = async (database, project) => {
-  return callAuthenticatedFunction('fetchBreadcrumbs', database, project);
+  return callAuthenticatedFunction("fetchBreadcrumbs", database, project);
 };
 
 export const fetchSearchPropertyMapping = async (snootyEnv) => {
-  return callAuthenticatedFunction('fetchSearchPropertyMapping', snootyEnv);
+  return callAuthenticatedFunction("fetchSearchPropertyMapping", snootyEnv);
 };
 
 export const fetchOASFile = async (apiName, database) => {
-  return callAuthenticatedFunction('fetchOASFile', apiName, database);
+  return callAuthenticatedFunction("fetchOASFile", apiName, database);
 };
 
-export const fetchDocument = async (database, collectionName, query, projections) => {
-  return callAuthenticatedFunction('fetchDocumentSorted', database, collectionName, query, projections);
+export const fetchDocument = async (
+  database,
+  collectionName,
+  query,
+  projections
+) => {
+  return callAuthenticatedFunction(
+    "fetchDocumentSorted",
+    database,
+    collectionName,
+    query,
+    projections
+  );
 };
 
 export const fetchDocset = async (database, matchConditions) => {
-  return callAuthenticatedFunction('fetchDocset', database, matchConditions);
+  return callAuthenticatedFunction("fetchDocset", database, matchConditions);
 };
 
-export const fetchDocuments = async (database, collectionName, query, projections, options) => {
-  return callAuthenticatedFunction('fetchDocuments', database, collectionName, query, projections, options);
+export const fetchDocuments = async (
+  database,
+  collectionName,
+  query,
+  projections,
+  options
+) => {
+  return callAuthenticatedFunction(
+    "fetchDocuments",
+    database,
+    collectionName,
+    query,
+    projections,
+    options
+  );
 };
 
 export const fetchDocsets = async (database) => {
-  return callAuthenticatedFunction('fetchDocsets', database);
+  return callAuthenticatedFunction("fetchDocsets", database);
 };
 
 export const fetchOpenAPIChangelogDiff = async (diffString, snootyEnv) => {
-  return callAuthenticatedFunction('fetchOpenAPIChangelogDiff', diffString, snootyEnv);
+  return callAuthenticatedFunction(
+    "fetchOpenAPIChangelogDiff",
+    diffString,
+    snootyEnv
+  );
 };

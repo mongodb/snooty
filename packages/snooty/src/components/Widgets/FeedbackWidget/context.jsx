@@ -1,21 +1,38 @@
-import React, { useState, useCallback, useContext, useEffect, createContext, useTransition } from 'react';
-import { useLocation } from '@gatsbyjs/reach-router';
-import { getViewport } from '../../../hooks/useViewport';
-import { useSiteMetadata } from '../../../hooks/use-site-metadata';
-import { upsertFeedback, useRealmUser } from './realm';
+"use client";
+import React, {
+  useState,
+  useCallback,
+  useContext,
+  useEffect,
+  createContext,
+  useTransition,
+} from "react";
+import { useLocation } from "../../../../gatsby-shim";
+import { getViewport } from "../../../hooks/useViewport";
+import { useSiteMetadata } from "../../../hooks/use-site-metadata";
+import { upsertFeedback, useRealmUser } from "./realm";
 
 const FeedbackContext = createContext();
 
 export function FeedbackProvider({ page, test = {}, ...props }) {
   const hasExistingFeedback =
-    !!test.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
-  const [feedback, setFeedback] = useState(() => (hasExistingFeedback && test.feedback) || undefined);
+    !!test.feedback &&
+    typeof test.feedback === "object" &&
+    Object.keys(test.feedback).length > 0;
+  const [feedback, setFeedback] = useState(
+    () => (hasExistingFeedback && test.feedback) || undefined
+  );
   const [feedbackId, setFeedbackId] = useState(() => undefined);
-  const [selectedRating, setSelectedRating] = useState(test.feedback?.rating || undefined);
-  const [view, setView] = useState(test.view || 'waiting');
-  const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
+  const [selectedRating, setSelectedRating] = useState(
+    test.feedback?.rating || undefined
+  );
+  const [view, setView] = useState(test.view || "waiting");
+  const [screenshotTaken, setScreenshotTaken] = useState(
+    test.screenshotTaken || false
+  );
   const [progress, setProgress] = useState([true, false, false]);
-  const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
+  const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] =
+    useState(false);
   const [, startTransition] = useTransition();
   const { user, reassignCurrentUser } = useRealmUser();
   const { href } = useLocation();
@@ -57,11 +74,20 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
 
       return res;
     },
-    [feedbackId, page.docs_property, page.slug, page.title, page.url, snootyEnv, test.feedback, user]
+    [
+      feedbackId,
+      page.docs_property,
+      page.slug,
+      page.title,
+      page.url,
+      snootyEnv,
+      test.feedback,
+      user,
+    ]
   );
 
   // Create a new feedback document
-  const initializeFeedback = (nextView = 'rating') => {
+  const initializeFeedback = (nextView = "rating") => {
     const newFeedback = {};
     startTransition(() => {
       setFeedback(newFeedback);
@@ -74,25 +100,25 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
 
   const selectInitialRating = async (ratingValue) => {
     setSelectedRating(ratingValue);
-    setView('comment');
+    setView("comment");
     setProgress([false, true, false]);
     const payload = createFeedbackPayload(ratingValue);
     try {
       const res = await upsertFeedback(payload);
       setFeedbackId(res);
     } catch (e) {
-      console.error('Error while creating new feedback');
+      console.error("Error while creating new feedback");
     }
   };
 
   // Create a placeholder sentiment based on the selected rating to avoid any breaking changes from external dependencies
   const createSentiment = (selectedRating) => {
     if (selectedRating < 3) {
-      return 'Negative';
+      return "Negative";
     } else if (selectedRating === 3) {
-      return 'Suggestion';
+      return "Suggestion";
     } else {
-      return 'Positive';
+      return "Positive";
     }
   };
 
@@ -103,24 +129,35 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
       await upsertFeedback(newFeedback);
       setFeedback(newFeedback);
     } catch (e) {
-      console.error('Error when retrying feedback submission', e);
+      console.error("Error when retrying feedback submission", e);
     }
   };
 
-  const submitAllFeedback = async ({ comment = '', email = '', dataUri, viewport }) => {
+  const submitAllFeedback = async ({
+    comment = "",
+    email = "",
+    dataUri,
+    viewport,
+  }) => {
     // Route the user to their "next steps"
     setProgress([false, false, true]);
-    setView('submitted');
+    setView("submitted");
 
     if (!selectedRating) return;
     // Submit the full feedback document
-    const newFeedback = createFeedbackPayload(selectedRating, email, dataUri, viewport, comment);
+    const newFeedback = createFeedbackPayload(
+      selectedRating,
+      email,
+      dataUri,
+      viewport,
+      comment
+    );
     try {
       await upsertFeedback(newFeedback);
     } catch (err) {
       // This catch block will most likely only be hit after Realm attempts internal retry logic
       // after access token is refreshed
-      console.error('There was an error submitting feedback', err);
+      console.error("There was an error submitting feedback", err);
       if (err.statusCode === 401) {
         // Explicitly retry 1 time to avoid any infinite loop
         await retryFeedbackSubmission(newFeedback);
@@ -134,7 +171,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   // Stop giving feedback (if in progress) and reset the widget to the
   // initial state.
   const abandon = useCallback(() => {
-    setView('waiting');
+    setView("waiting");
     setFeedback();
     setSelectedRating();
     setFeedbackId();
@@ -166,13 +203,19 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [href]);
 
-  return <FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>;
+  return (
+    <FeedbackContext.Provider value={value}>
+      {props.children}
+    </FeedbackContext.Provider>
+  );
 }
 
 export const useFeedbackContext = () => {
   const feedback = useContext(FeedbackContext);
   if (!feedback && feedback !== null) {
-    throw new Error('You must nest useFeedbackContext() inside of a FeedbackProvider.');
+    throw new Error(
+      "You must nest useFeedbackContext() inside of a FeedbackProvider."
+    );
   }
   return feedback;
 };

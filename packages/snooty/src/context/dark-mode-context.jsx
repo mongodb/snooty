@@ -1,3 +1,4 @@
+'use client';
 /**
  * Context to dictate dark mode UI for rest of page
  * Should be on top level, and dictates LG Provider Context

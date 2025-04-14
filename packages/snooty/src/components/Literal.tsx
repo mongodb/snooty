@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import { css, cx } from '@leafygreen-ui/emotion';
-import { InlineCode } from '@leafygreen-ui/typography';
-import { LiteralNode } from '../types/ast';
-import ComponentFactory from './ComponentFactory';
+import React from "react";
+import styled from "@emotion/styled";
+import { css, cx } from "@leafygreen-ui/emotion";
+import { InlineCode } from "@leafygreen-ui/typography";
+import { LiteralNode } from "../types/ast";
+import ComponentFactory from "./ComponentFactory";
 
 const inlineCodeStyling = css`
   /* Unset font size so it inherits it from its context */
@@ -22,9 +22,9 @@ const wordWrapStyle = css`
   white-space: unset;
 `;
 
-const StyledNavigationInlineCode = styled('code')`
+const StyledNavigationInlineCode = styled("code")`
   /* Used for Literals that don't need LeafyGreen's InlineCode component */
-  font-family: 'Source Code Pro';
+  font-family: "Source Code Pro";
   color: unset;
 `;
 
@@ -37,12 +37,19 @@ export type LiteralProps = {
   formatTextOptions?: FormatTextOptions;
 };
 
-const Literal = ({ nodeData: { children }, formatTextOptions }: LiteralProps) => {
+const Literal = ({
+  nodeData: { children },
+  formatTextOptions,
+}: LiteralProps) => {
   const navigationStyle = formatTextOptions?.literalEnableInline;
-  const CurrInlineCode = navigationStyle ? StyledNavigationInlineCode : InlineCode;
+  const CurrInlineCode = navigationStyle
+    ? StyledNavigationInlineCode
+    : InlineCode;
 
   return (
-    <CurrInlineCode className={cx(navigationStyle ? '' : inlineCodeStyling, wordWrapStyle)}>
+    <CurrInlineCode
+      className={cx(navigationStyle ? "" : inlineCodeStyling, wordWrapStyle)}
+    >
       {children.map((node, i) => (
         <ComponentFactory nodeData={node} key={i} />
       ))}

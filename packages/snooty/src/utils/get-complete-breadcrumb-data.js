@@ -1,12 +1,12 @@
-import { withPrefix } from 'gatsby';
-import { baseUrl, joinUrlAndPath } from './base-url';
-import { assertTrailingSlash } from './assert-trailing-slash';
-import { assertLeadingSlash } from './assert-leading-slash';
-import { isRelativeUrl } from './is-relative-url';
-import { getUrl, getCompleteUrl } from './url-utils';
+import { withPrefix } from "../../gatsby-shim";
+import { baseUrl, joinUrlAndPath } from "./base-url";
+import { assertTrailingSlash } from "./assert-trailing-slash";
+import { assertLeadingSlash } from "./assert-leading-slash";
+import { isRelativeUrl } from "./is-relative-url";
+import { getUrl, getCompleteUrl } from "./url-utils";
 
 const nodesToString = (titleNodes) => {
-  if (typeof titleNodes === 'string') {
+  if (typeof titleNodes === "string") {
     return titleNodes;
   }
 
@@ -16,13 +16,13 @@ const nodesToString = (titleNodes) => {
 
   return titleNodes
     .map((node) => {
-      if (node.type === 'text') {
+      if (node.type === "text") {
         return node.value;
       }
 
       return nodesToString(node.children);
     })
-    .join('');
+    .join("");
 };
 
 export const getFullBreadcrumbPath = (siteUrl, path, needsPrefix) => {
@@ -35,11 +35,18 @@ export const getFullBreadcrumbPath = (siteUrl, path, needsPrefix) => {
   return assertTrailingSlash(path);
 };
 
-export const getSelfCrumbPath = (selfCrumbContent, urlSlug, project, siteBasePrefix) => {
+export const getSelfCrumbPath = (
+  selfCrumbContent,
+  urlSlug,
+  project,
+  siteBasePrefix
+) => {
   if (!project || !siteBasePrefix) return baseUrl();
-  const isLanding = project === 'landing';
+  const isLanding = project === "landing";
   if (!isLanding && selfCrumbContent)
-    return getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, selfCrumbContent.slug));
+    return getCompleteUrl(
+      getUrl(urlSlug, project, siteBasePrefix, selfCrumbContent.slug)
+    );
   return selfCrumbContent?.slug ?? baseUrl();
 };
 
@@ -54,22 +61,28 @@ export const getCompleteBreadcrumbData = ({
 }) => {
   const { urlSlug, project, siteBasePrefix } = pageInfo || {};
 
-  const isLanding = project === 'landing';
+  const isLanding = project === "landing";
 
   //get intermediate breadcrumbs
   const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
-    return { ...crumb, path: getFullBreadcrumbPath(siteUrl, crumb.path, false) };
+    return {
+      ...crumb,
+      path: getFullBreadcrumbPath(siteUrl, crumb.path, false),
+    };
   });
 
   const homeCrumb = {
-    title: 'Docs Home',
+    title: "Docs Home",
     path: baseUrl(),
   };
 
   // If site is the property homepage, leave the propertyCrumb blank
   let propertyCrumb;
-  if (slug !== '/') {
-    const path = pageInfo && !isLanding ? getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, '/')) : '/';
+  if (slug !== "/") {
+    const path =
+      pageInfo && !isLanding
+        ? getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, "/"))
+        : "/";
     propertyCrumb = {
       title: nodesToString(siteTitle),
       path: path,
@@ -93,7 +106,12 @@ export const getCompleteBreadcrumbData = ({
   const selfCrumb = selfCrumbContent
     ? {
         title: selfCrumbContent.title,
-        path: getSelfCrumbPath(selfCrumbContent, urlSlug, project, siteBasePrefix),
+        path: getSelfCrumbPath(
+          selfCrumbContent,
+          urlSlug,
+          project,
+          siteBasePrefix
+        ),
       }
     : null;
 

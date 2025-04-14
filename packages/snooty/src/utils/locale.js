@@ -1,29 +1,29 @@
-import { withPrefix } from 'gatsby';
-import { SIDE_NAV_CONTAINER_ID, TEMPLATE_CONTAINER_ID } from '../constants';
-import { assertTrailingSlash } from './assert-trailing-slash';
-import { isBrowser } from './is-browser';
-import { normalizePath } from './normalize-path';
-import { removeLeadingSlash } from './remove-leading-slash';
-import { setLocalValue } from './browser-storage';
+import { withPrefix } from "../../gatsby-shim";
+import { SIDE_NAV_CONTAINER_ID, TEMPLATE_CONTAINER_ID } from "../constants";
+import { assertTrailingSlash } from "./assert-trailing-slash";
+import { isBrowser } from "./is-browser";
+import { normalizePath } from "./normalize-path";
+import { removeLeadingSlash } from "./remove-leading-slash";
+import { setLocalValue } from "./browser-storage";
 
 // Prevents Smartling from translating content within HTML block
 // (https://help.smartling.com/hc/en-us/articles/13274689281307-Default-Translatable-Content-In-The-GDN)
-export const NOTRANSLATE_CLASS = 'notranslate';
+export const NOTRANSLATE_CLASS = "notranslate";
 
 /**
  * Key used to access browser storage for user's preferred locale
  */
-export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
+export const STORAGE_KEY_PREF_LOCALE = "preferredLocale";
 
 // Update this as more languages are introduced
 // Because the client-side redirect script cannot use an import, PLEASE remember to update the list of supported languages
 // in redirect-based-on-lang.js
 const AVAILABLE_LANGUAGES = [
-  { language: 'English', localeCode: 'en-us' },
-  { language: '简体中文', localeCode: 'zh-cn', fontFamily: 'Noto Sans SC' },
-  { language: '한국어', localeCode: 'ko-kr', fontFamily: 'Noto Sans KR' },
-  { language: 'Português', localeCode: 'pt-br' },
-  { language: '日本語', localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' },
+  { language: "English", localeCode: "en-us" },
+  { language: "简体中文", localeCode: "zh-cn", fontFamily: "Noto Sans SC" },
+  { language: "한국어", localeCode: "ko-kr", fontFamily: "Noto Sans KR" },
+  { language: "Português", localeCode: "pt-br" },
+  { language: "日本語", localeCode: "ja-jp", fontFamily: "Noto Sans JP" },
 ];
 
 // Languages in current development that we do not want displayed publicly yet
@@ -36,7 +36,7 @@ const HIDDEN_LANGUAGES = [];
 export const getAvailableLanguages = (forceAll = false) => {
   const langs = [...AVAILABLE_LANGUAGES];
 
-  if (forceAll || process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === 'true') {
+  if (forceAll || process.env.GATSBY_FEATURE_SHOW_HIDDEN_LOCALES === "true") {
     langs.push(...HIDDEN_LANGUAGES);
   }
 
@@ -45,7 +45,9 @@ export const getAvailableLanguages = (forceAll = false) => {
 
 const validateLocaleCode = (potentialCode) =>
   // Include hidden languages in validation to ensure current locale of hidden sites can still be captured correctly
-  !!getAvailableLanguages(true).find(({ localeCode }) => potentialCode === localeCode);
+  !!getAvailableLanguages(true).find(
+    ({ localeCode }) => potentialCode === localeCode
+  );
 
 /**
  * Strips the first locale code found in the slug. This function should be used to determine the original un-localized path of a page.
@@ -57,19 +59,21 @@ const stripLocale = (slug) => {
   // Smartling has extensive replace logic for URLs and slugs that follow the pattern of "https://www.mongodb.com/docs". However,
   // there are instances where we can't rely on them for certain components
   if (!slug) {
-    return '';
+    return "";
   }
 
   // Normalize the slug in case any malformed slugs appear like: "//zh-cn/docs"
-  const slugWithSlash = slug.startsWith('/') ? slug : `/${slug}`;
+  const slugWithSlash = slug.startsWith("/") ? slug : `/${slug}`;
   const normalizedSlug = normalizePath(slugWithSlash);
-  const firstPathSlug = normalizedSlug.split('/', 2)[1];
+  const firstPathSlug = normalizedSlug.split("/", 2)[1];
 
   // Replace from the original slug to maintain original form
-  const res = validateLocaleCode(firstPathSlug) ? normalizePath(slug.replace(firstPathSlug, '')) : slug;
-  if (res.startsWith('/') && !slug.startsWith('/')) {
+  const res = validateLocaleCode(firstPathSlug)
+    ? normalizePath(slug.replace(firstPathSlug, ""))
+    : slug;
+  if (res.startsWith("/") && !slug.startsWith("/")) {
     return removeLeadingSlash(res);
-  } else if (!res.startsWith('/') && slug.startsWith('/')) {
+  } else if (!res.startsWith("/") && slug.startsWith("/")) {
     return `/${res}`;
   } else {
     return res;
@@ -85,7 +89,7 @@ export const getAllLocaleCssStrings = () => {
     if (!fontFamily) {
       return;
     }
-    const [languageCode] = localeCode.split('-');
+    const [languageCode] = localeCode.split("-");
     // Only check that languageCode is in the beginning to be flexible when region code is capitalized
     // For example: zh-cn and zh-CN will be treated the same.
     // We want to target everything except for inline code, code blocks, and the consistent-nav components
@@ -120,7 +124,7 @@ export const getAllLocaleCssStrings = () => {
  * @returns {string}
  */
 export const getCurrLocale = () => {
-  const defaultLang = 'en-us';
+  const defaultLang = "en-us";
 
   if (!isBrowser) {
     return defaultLang;
@@ -131,8 +135,8 @@ export const getCurrLocale = () => {
   // Example on https://www.mongodb.com/zh-cn/docs/manual/introduction:
   // expected pathname - /zh-cn/docs/manual/introduction; expected locale - "zh-cn"
   const pathname = window.location.pathname;
-  const expectedDocsPrefixes = ['docs', 'docs-qa'];
-  const firstPathSlug = pathname.split('/', 2)[1];
+  const expectedDocsPrefixes = ["docs", "docs-qa"];
+  const firstPathSlug = pathname.split("/", 2)[1];
   if (expectedDocsPrefixes.includes(firstPathSlug)) {
     return defaultLang;
   }
@@ -149,14 +153,15 @@ export const getCurrLocale = () => {
  */
 export const localizePath = (pathname, localeCode) => {
   if (!pathname) {
-    return '';
+    return "";
   }
 
   const unlocalizedPath = stripLocale(pathname);
-  const code = localeCode && validateLocaleCode(localeCode) ? localeCode : getCurrLocale();
-  const languagePrefix = code === 'en-us' ? '' : `${code}/`;
+  const code =
+    localeCode && validateLocaleCode(localeCode) ? localeCode : getCurrLocale();
+  const languagePrefix = code === "en-us" ? "" : `${code}/`;
   let newPath = languagePrefix + unlocalizedPath;
-  if (pathname.startsWith('/')) {
+  if (pathname.startsWith("/")) {
     newPath = `/${newPath}`;
   }
   return normalizePath(newPath);
@@ -170,8 +175,10 @@ export const localizePath = (pathname, localeCode) => {
  */
 export const getLocaleMapping = (siteUrl, slug) => {
   // handle the `/` path
-  const slugForUrl = slug === '/' ? withPrefix('') : withPrefix(slug);
-  const normalizedSiteUrl = siteUrl?.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
+  const slugForUrl = slug === "/" ? withPrefix("") : withPrefix(slug);
+  const normalizedSiteUrl = siteUrl?.endsWith("/")
+    ? siteUrl.slice(0, -1)
+    : siteUrl;
   const localeHrefMap = {};
 
   getAvailableLanguages().forEach(({ localeCode }) => {
@@ -197,7 +204,7 @@ export const onSelectLocale = (locale) => {
  * @returns {string | undefined}
  */
 export const getHtmlLangFormat = (localeCode) => {
-  const parts = localeCode.split('-');
+  const parts = localeCode.split("-");
   if (parts.length < 2) {
     return localeCode;
   }

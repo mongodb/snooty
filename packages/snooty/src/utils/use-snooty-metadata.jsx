@@ -1,4 +1,5 @@
-import React from 'react';
+"use client";
+import React from "react";
 
 const MetadataContext = React.createContext();
 
@@ -7,5 +8,9 @@ export default function useSnootyMetadata() {
 }
 
 export function MetadataProvider({ children, metadata }) {
-  return <MetadataContext.Provider value={metadata}>{children}</MetadataContext.Provider>;
+  return (
+    <MetadataContext.Provider value={metadata}>
+      {children}
+    </MetadataContext.Provider>
+  );
 }

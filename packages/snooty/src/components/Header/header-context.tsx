@@ -1,3 +1,4 @@
+'use client';
 import React, { createContext, PropsWithChildren, useEffect, useState } from 'react';
 import { theme } from '../../theme/docsTheme';
 import { SiteBannerContent } from '../Banner/SiteBanner/types';

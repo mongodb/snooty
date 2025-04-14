@@ -1,10 +1,11 @@
+"use client";
 /**
  * Context to provide image data to consumer components
  * with image data queried on page component
  */
 
-import { createContext } from 'react';
-import { getImage } from 'gatsby-plugin-image';
+import { createContext } from "react";
+import { getImage } from "../../gatsby-shim";
 
 const ImageContext = createContext({
   imageByPath: {},
@@ -21,7 +22,11 @@ const ImageContextProvider = ({ images, children }) => {
       console.warn(`Image does not have relativePath: ${image}`);
     }
   }
-  return <ImageContext.Provider value={{ imageByPath }}>{children} </ImageContext.Provider>;
+  return (
+    <ImageContext.Provider value={{ imageByPath }}>
+      {children}{" "}
+    </ImageContext.Provider>
+  );
 };
 
 export { ImageContextProvider };

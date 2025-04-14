@@ -1,11 +1,11 @@
-import React from 'react';
-import { css, cx } from '@leafygreen-ui/emotion';
-import { Body } from '@leafygreen-ui/typography';
-import { ParagraphNode } from '../types/ast';
-import { appendTrailingPunctuation } from '../utils/append-trailing-punctuation';
-import ComponentFactory from './ComponentFactory';
+import React from "react";
+import { css, cx } from "@leafygreen-ui/emotion";
+import { Body } from "@leafygreen-ui/typography";
+import { ParagraphNode } from "../types/ast";
+import { appendTrailingPunctuation } from "../utils/append-trailing-punctuation";
+import ComponentFactory from "./ComponentFactory";
 
-const SKIP_P_TAGS = new Set(['caption', 'footnote', 'field']);
+const SKIP_P_TAGS = new Set(["caption", "footnote", "field"]);
 
 const paragraphStyling = css`
   margin-bottom: 16px;
@@ -22,12 +22,18 @@ export type ParagraphProps = ComponentFactoryProps & {
   skipPTag: boolean;
 };
 
-const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }: ParagraphProps) => {
+const Paragraph = ({
+  nodeData,
+  parentNode,
+  skipPTag,
+  ...rest
+}: ParagraphProps) => {
   const children = appendTrailingPunctuation(nodeData.children);
-
   // For paragraph nodes that appear inside certain containers, skip <p> tags and just render their contents
   if (skipPTag || (parentNode && SKIP_P_TAGS.has(parentNode))) {
-    return children.map((element, index) => <ComponentFactory {...rest} nodeData={element} key={index} />);
+    return children.map((element, index) => (
+      <ComponentFactory {...rest} nodeData={element} key={index} />
+    ));
   }
   return (
     <Body className={cx(paragraphStyling)}>

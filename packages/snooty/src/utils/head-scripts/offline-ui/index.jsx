@@ -1,11 +1,11 @@
-import bindTabUI from './tabs';
-import bindCollapsibleUI from './collapsible';
-import updateSidenavHeight from './sidenav';
-import bindTabsSelectorsUI from './tabs-selectors';
-import bindMethodSelectorUI from './method-selector';
-import bindIOCode, { bindCodeCopy } from './code';
+import bindTabUI from "./tabs";
+import bindCollapsibleUI from "./collapsible";
+import updateSidenavHeight from "./sidenav";
+import bindTabsSelectorsUI from "./tabs-selectors";
+import bindMethodSelectorUI from "./method-selector";
+import bindIOCode, { bindCodeCopy } from "./code";
 
-const OFFLINE_UI_CLASSNAME = 'snooty-offline-ui';
+const OFFLINE_UI_CLASSNAME = "snooty-offline-ui";
 
 const getScript = ({ key, fn }) => (
   <script

@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect } from 'react';
 import * as Realm from 'realm-web';
 import { baseUrl } from './realm-constants';

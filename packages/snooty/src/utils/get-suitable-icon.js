@@ -1,4 +1,4 @@
-import { withPrefix } from 'gatsby';
+import { withPrefix } from "../../gatsby-shim";
 
 /**
  *
@@ -8,13 +8,17 @@ import { withPrefix } from 'gatsby';
  * @returns {string}
  */
 export const getSuitableIcon = (icon, iconDark, isDarkMode) => {
-  if (typeof icon == 'string') {
-    const isPath = icon.startsWith('/');
-    const getIcon = `${icon}${isDarkMode ? '_inverse' : ''}`;
+  if (typeof icon == "string") {
+    const isPath = icon.startsWith("/");
+    const getIcon = `${icon}${isDarkMode ? "_inverse" : ""}`;
     const imageUrl = `https://webimages.mongodb.com/_com_assets/icons/${getIcon}.svg`;
 
-    return isPath ? (isDarkMode && iconDark ? withPrefix(iconDark) : withPrefix(icon)) : imageUrl;
+    return isPath
+      ? isDarkMode && iconDark
+        ? withPrefix(iconDark)
+        : withPrefix(icon)
+      : imageUrl;
   }
 
-  return '';
+  return "";
 };

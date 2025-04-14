@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { withPrefix } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { css, cx } from '@leafygreen-ui/emotion';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { palette } from '@leafygreen-ui/palette';
-import ImageContext from '../context/image-context';
-import { getNestedValue } from '../utils/get-nested-value';
-import { removeLeadingSlash } from '../utils/remove-leading-slash';
-import { theme } from '../theme/docsTheme';
+import React, { useContext } from "react";
+import PropTypes from "prop-types";
+import { GatsbyImage, withPrefix } from "../../gatsby-shim";
+import { css, cx } from "@leafygreen-ui/emotion";
+import { useDarkMode } from "@leafygreen-ui/leafygreen-provider";
+import { palette } from "@leafygreen-ui/palette";
+import ImageContext from "../context/image-context";
+import { getNestedValue } from "../utils/get-nested-value";
+import { removeLeadingSlash } from "../utils/remove-leading-slash";
+import { theme } from "../theme/docsTheme";
 
 const defaultImageStyling = css`
   max-width: 100%;
@@ -50,42 +49,47 @@ function getImageProps({
   loading,
 }) {
   const imageProps = {
-    alt: altText ?? '',
+    alt: altText ?? "",
     style: userOptionStyle,
   };
   if (width) {
-    imageProps['width'] = width;
+    imageProps["width"] = width;
   }
   if (height) {
-    imageProps['height'] = height;
+    imageProps["height"] = height;
   }
 
-  const borderColor = darkMode && hasBorder ? palette.gray.dark2 : darkMode ? 'transparent' : palette.gray.light1;
+  const borderColor =
+    darkMode && hasBorder
+      ? palette.gray.dark2
+      : darkMode
+      ? "transparent"
+      : palette.gray.light1;
 
-  if (gatsbyImage && loading === 'lazy') {
-    imageProps['image'] = gatsbyImage;
-    imageProps['className'] = cx(
+  if (gatsbyImage && loading === "lazy") {
+    imageProps["image"] = gatsbyImage;
+    imageProps["className"] = cx(
       gatsbyContainerStyle,
       directiveClass,
       customAlign,
       className,
-      hasBorder ? borderContainerStyling : ''
+      hasBorder ? borderContainerStyling : ""
     );
-    imageProps['imgStyle'] = {
-      '--border-color': borderColor,
+    imageProps["imgStyle"] = {
+      "--border-color": borderColor,
     };
   } else {
-    imageProps['src'] = imgSrc;
-    imageProps['srcSet'] = srcSet;
-    imageProps['className'] = cx(
+    imageProps["src"] = imgSrc;
+    imageProps["srcSet"] = srcSet;
+    imageProps["className"] = cx(
       defaultImageStyling,
-      hasBorder ? borderStyling : '',
+      hasBorder ? borderStyling : "",
       directiveClass,
       customAlign,
       className
     );
-    imageProps['style'] = {
-      '--border-color': borderColor,
+    imageProps["style"] = {
+      "--border-color": borderColor,
     };
   }
 
@@ -93,19 +97,20 @@ function getImageProps({
 }
 
 const Image = ({ nodeData, className }) => {
-  const scale = (parseInt(getNestedValue(['options', 'scale'], nodeData), 10) || 100) / 100;
-  const widthOption = getNestedValue(['options', 'width'], nodeData);
-  let height = getNestedValue(['options', 'height'], nodeData);
-  const loading = getNestedValue(['options', 'loading'], nodeData);
-  const directiveClass = getNestedValue(['options', 'class'], nodeData);
+  const scale =
+    (parseInt(getNestedValue(["options", "scale"], nodeData), 10) || 100) / 100;
+  const widthOption = getNestedValue(["options", "width"], nodeData);
+  let height = getNestedValue(["options", "height"], nodeData);
+  const loading = getNestedValue(["options", "loading"], nodeData);
+  const directiveClass = getNestedValue(["options", "class"], nodeData);
   const { darkMode } = useDarkMode();
 
-  let imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
-  const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
-  const imgAlignment = getNestedValue(['options', 'align'], nodeData);
-  const customAlign = imgAlignment ? `align-${imgAlignment}` : '';
+  let imgSrc = getNestedValue(["argument", 0, "value"], nodeData);
+  const altText = getNestedValue(["options", "alt"], nodeData) || imgSrc;
+  const imgAlignment = getNestedValue(["options", "align"], nodeData);
+  const customAlign = imgAlignment ? `align-${imgAlignment}` : "";
 
-  const hasBorder = getNestedValue(['options', 'border'], nodeData);
+  const hasBorder = getNestedValue(["options", "border"], nodeData);
 
   const { imageByPath } = useContext(ImageContext);
   const gatsbyImage = imageByPath[removeLeadingSlash(imgSrc)];
@@ -124,8 +129,8 @@ const Image = ({ nodeData, className }) => {
   }
 
   const userOptionStyle = {};
-  if (widthOption?.endsWith('px')) {
-    userOptionStyle['width'] = widthOption;
+  if (widthOption?.endsWith("px")) {
+    userOptionStyle["width"] = widthOption;
   }
 
   const imageProps = getImageProps({
@@ -144,7 +149,7 @@ const Image = ({ nodeData, className }) => {
     loading,
   });
 
-  if (loading === 'lazy' && gatsbyImage) {
+  if (loading === "lazy" && gatsbyImage) {
     return <GatsbyImage {...imageProps} />;
   }
 
@@ -174,7 +179,7 @@ Image.propTypes = {
 };
 
 Image.defaultProps = {
-  className: '',
+  className: "",
   handleImageLoaded: () => {},
 };
 

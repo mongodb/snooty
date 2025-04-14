@@ -1,19 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { navigate } from 'gatsby';
-import styled from '@emotion/styled';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import LeafyGreenCard from '@leafygreen-ui/card';
-import { css, cx } from '@leafygreen-ui/emotion';
-import { Body } from '@leafygreen-ui/typography';
-import { palette } from '@leafygreen-ui/palette';
-import { theme } from '../../theme/docsTheme';
-import ComponentFactory from '../ComponentFactory';
-import ConditionalWrapper from '../ConditionalWrapper';
-import Link from '../Link';
-import CommunityPillLink from '../CommunityPillLink';
-import { isRelativeUrl } from '../../utils/is-relative-url';
-import { getSuitableIcon } from '../../utils/get-suitable-icon';
+import React from "react";
+import PropTypes from "prop-types";
+import { navigate } from "../../../gatsby-shim";
+import styled from "@emotion/styled";
+import { useDarkMode } from "@leafygreen-ui/leafygreen-provider";
+import LeafyGreenCard from "@leafygreen-ui/card";
+import { css, cx } from "@leafygreen-ui/emotion";
+import { Body } from "@leafygreen-ui/typography";
+import { palette } from "@leafygreen-ui/palette";
+import { theme } from "../../theme/docsTheme";
+import ComponentFactory from "../ComponentFactory";
+import ConditionalWrapper from "../ConditionalWrapper";
+import Link from "../Link";
+import CommunityPillLink from "../CommunityPillLink";
+import { isRelativeUrl } from "../../utils/is-relative-url";
+import { getSuitableIcon } from "../../utils/get-suitable-icon";
 
 const cardBaseStyles = css`
   display: flex;
@@ -44,7 +44,7 @@ const landingStyles = css`
     }
   }
 
-  ${'' /* Mobile view */}
+  ${"" /* Mobile view */}
   @media ${theme.screenSize.upToSmall} {
     flex-direction: column;
     img {
@@ -96,8 +96,10 @@ const headingStyling = ({ isCompact, isExtraCompact, isLargeIconStyle }) => css`
   font-weight: 500;
   letter-spacing: normal;
   color: var(--font-color-primary);
-  margin: ${isCompact || isExtraCompact ? `0 0 ${theme.size.small}` : `${theme.size.default} 0 ${theme.size.small} 0`};
-  ${isLargeIconStyle && 'margin-bottom: 36px;'}
+  margin: ${isCompact || isExtraCompact
+    ? `0 0 ${theme.size.small}`
+    : `${theme.size.default} 0 ${theme.size.small} 0`};
+  ${isLargeIconStyle && "margin-bottom: 36px;"}
 `;
 
 const compactCardStyling = css`
@@ -106,7 +108,7 @@ const compactCardStyling = css`
   padding: ${theme.size.large} ${theme.size.medium};
 `;
 
-const CompactTextWrapper = styled('div')`
+const CompactTextWrapper = styled("div")`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -138,51 +140,69 @@ const Card = ({
   page,
   nodeData: {
     children,
-    options: { cta, headline, icon, 'icon-dark': iconDark, 'icon-alt': iconAlt, tag, url },
+    options: {
+      cta,
+      headline,
+      icon,
+      "icon-dark": iconDark,
+      "icon-alt": iconAlt,
+      tag,
+      url,
+    },
   },
 }) => {
   const template = page?.options?.template;
   const { darkMode } = useDarkMode();
 
-  const isLanding = template === 'landing';
+  const isLanding = template === "landing";
 
   let imgSize;
-  if (isLargeIconStyle) imgSize = '50px';
+  if (isLargeIconStyle) imgSize = "50px";
   else if (isLanding) imgSize = theme.size.xlarge;
-  else if (template === 'product-landing') imgSize = theme.size.large;
+  else if (template === "product-landing") imgSize = theme.size.large;
   else imgSize = theme.size.medium;
 
-  const useCompactIcon = !['landing', 'product-landing'].includes(template);
+  const useCompactIcon = !["landing", "product-landing"].includes(template);
 
   const styling = [
     cardBaseStyles,
     isCenterContentStyle ? centerContentStyling : cardStyling,
-    isCompact || isExtraCompact ? compactCardStyling : '',
-    isLargeIconStyle ? largeIconStyling : '',
-    isLanding && !isLargeIconStyle ? landingStyles : '', // must come after other styles to override
+    isCompact || isExtraCompact ? compactCardStyling : "",
+    isLargeIconStyle ? largeIconStyling : "",
+    isLanding && !isLargeIconStyle ? landingStyles : "", // must come after other styles to override
   ];
 
   const iconSrc = getSuitableIcon(icon, iconDark, darkMode);
 
   return (
-    <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
+    <LeafyGreenCard
+      className={cx(styling)}
+      onClick={url ? () => onCardClick(url) : undefined}
+    >
       {icon && (
         <img
           src={iconSrc}
           alt={iconAlt}
           width={imgSize}
           height={imgSize}
-          className={useCompactIcon ? cx(compactIconStyle) : ''}
+          className={useCompactIcon ? cx(compactIconStyle) : ""}
         />
       )}
       <ConditionalWrapper
         condition={isCompact || isExtraCompact}
-        wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
+        wrapper={(children) => (
+          <CompactTextWrapper>{children}</CompactTextWrapper>
+        )}
       >
         {tag && <CommunityPillLink variant="green" text={tag} />}
         <div>
           {headline && (
-            <Body className={cx(headingStyling({ isCompact, isExtraCompact, isLargeIconStyle }))} weight="medium">
+            <Body
+              className={cx(
+                headingStyling({ isCompact, isExtraCompact, isLargeIconStyle })
+              )}
+              weight="medium"
+            >
               {headline}
             </Body>
           )}
@@ -213,8 +233,8 @@ Card.propTypes = {
       cta: PropTypes.string,
       headline: PropTypes.string,
       icon: PropTypes.string,
-      'icon-dark': PropTypes.string,
-      'icon-alt': PropTypes.string,
+      "icon-dark": PropTypes.string,
+      "icon-alt": PropTypes.string,
       tag: PropTypes.string,
       url: PropTypes.string,
     }),

@@ -4,5 +4,3 @@ export const assertTrailingSlash = (url) => {
   }
   return `${url}/`;
 };
-
-module.exports.assertTrailingSlash = assertTrailingSlash;

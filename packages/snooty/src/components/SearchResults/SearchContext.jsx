@@ -1,10 +1,19 @@
-'use client';
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
-import { useLocation } from '@gatsbyjs/reach-router';
-import { navigate } from 'gatsby';
-import { useMarianManifests } from '../../hooks/use-marian-manifests';
-import { FACETS_LEVEL_KEY, FACETS_KEY_PREFIX } from '../../utils/search-facet-constants';
-import useFacets from './Facets/useFacets';
+"use client";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+import { useLocation, navigate } from "../../../gatsby-shim";
+import { useMarianManifests } from "../../hooks/use-marian-manifests";
+import {
+  FACETS_LEVEL_KEY,
+  FACETS_KEY_PREFIX,
+} from "../../utils/search-facet-constants";
+import useFacets from "./Facets/useFacets";
 
 const combineKeyAndId = (facet) => `${facet.key}${FACETS_LEVEL_KEY}${facet.id}`;
 
@@ -38,7 +47,7 @@ const SearchContext = createContext({
   page: 1,
   searchFilter: null,
   searchPropertyMapping: {},
-  searchTerm: '',
+  searchTerm: "",
   selectedVersion: null,
   selectedCategory: null,
   setSearchFilter: null,
@@ -59,7 +68,10 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   const { search, state } = useLocation();
   const { filters, searchPropertyMapping } = useMarianManifests();
   const facets = useFacets();
-  const facetNamesByKeyId = useMemo(() => constructFacetNamesByKey(facets), [facets]);
+  const facetNamesByKeyId = useMemo(
+    () => constructFacetNamesByKey(facets),
+    [facets]
+  );
 
   const getFacetName = useCallback(
     (facet) => {
@@ -69,10 +81,12 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   );
   // get vars from URL
   // state management for Search is within URL.
-  const [searchParams, setSearchParams] = useState(() => new URLSearchParams(search));
-  const page = parseInt(searchParams.get('page') || 1);
-  const searchTerm = searchParams.get('q');
-  const searchFilter = searchParams.get('searchProperty');
+  const [searchParams, setSearchParams] = useState(
+    () => new URLSearchParams(search)
+  );
+  const page = parseInt(searchParams.get("page") || 1);
+  const searchTerm = searchParams.get("q");
+  const searchFilter = searchParams.get("searchProperty");
 
   // state vars to derive selected category and versions in dropdown
   // changes reflected in UI, not necessarily in URL
@@ -84,19 +98,19 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
   const onSearchChange = ({ searchTerm, searchFilter, page }) => {
     const newSearch = new URLSearchParams(search);
     if (searchTerm) {
-      newSearch.set('q', searchTerm);
+      newSearch.set("q", searchTerm);
     }
     if (searchFilter !== undefined) {
       // searchFilter can be null
       if (searchFilter === null) {
-        newSearch.delete('searchProperty');
+        newSearch.delete("searchProperty");
       } else {
-        newSearch.set('searchProperty', searchFilter);
+        newSearch.set("searchProperty", searchFilter);
       }
-      newSearch.set('page', 1);
+      newSearch.set("page", 1);
     }
     if (page) {
-      newSearch.set('page', page);
+      newSearch.set("page", page);
     }
     setSearchParams(newSearch);
     navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
@@ -117,7 +131,7 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
           newSearch.delete(FACETS_KEY_PREFIX + key, id);
         }
       });
-      newSearch.set('page', 1);
+      newSearch.set("page", 1);
       setSearchParams(newSearch);
       // The navigation might cause a small visual delay when facets are being checked
       navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
@@ -127,8 +141,8 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
 
   const clearFacets = useCallback(() => {
     const newSearch = new URLSearchParams();
-    newSearch.set('q', searchTerm);
-    newSearch.set('page', 1);
+    newSearch.set("q", searchTerm);
+    newSearch.set("page", 1);
     navigate(`?${newSearch.toString()}`, { state: { preserveScroll: true } });
     setSearchParams(newSearch);
   }, [searchTerm]);
@@ -153,7 +167,10 @@ const SearchContextProvider = ({ children, showFacets = false }) => {
         },
         searchFilter,
         setSearchFilter: (searchProperty) => {
-          onSearchChange({ searchTerm: searchTerm, searchFilter: searchProperty });
+          onSearchChange({
+            searchTerm: searchTerm,
+            searchFilter: searchProperty,
+          });
         },
         searchPropertyMapping,
         selectedCategory,
