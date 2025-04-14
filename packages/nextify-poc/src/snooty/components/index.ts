@@ -1,2 +1,3 @@
-import Paragraph from './Paragraph';
-export { Paragraph };
+import Paragraph from "./Paragraph";
+import ComponentFactory from "./ComponentFactory";
+export { Paragraph, ComponentFactory };

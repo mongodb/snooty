@@ -10,30 +10,8 @@ import type {
 
 import { createContext, useContext } from "react";
 
-const LocationContext = createContext<Location | null>(null);
-
-interface LocationProviderProps {
-  location: Location;
-  children: ReactNode;
-}
-
-export const LocationProvider: FC<LocationProviderProps> = ({
-  location,
-  children,
-}) => (
-  <LocationContext.Provider value={location}>
-    {children}
-  </LocationContext.Provider>
-);
-
 export const useLocation = (): Location => {
-  const location = useContext(LocationContext);
-
-  if (location == null) {
-    throw new Error("useLocation must be used inside LocationProvider");
-  }
-
-  return location;
+  return window.location;
 };
 export class StaticQueryDocument {
   /** Prevents structural type widening. */
@@ -61,6 +39,11 @@ export const graphql = (query: TemplateStringsArray): StaticQueryDocument => {
 
 export const useStaticQuery = (query: StaticQueryDocument) => {
   // TODO
+  return {
+    site: "foo",
+    allAssociatedProduct: { nodes: [] },
+    allDocset: { nodes: [] },
+  };
 };
 
 export interface GatsbyImageProps

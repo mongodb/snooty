@@ -1,28 +1,22 @@
 "use client";
-import { Paragraph } from "../../snooty/components";
+import RootProvider from "@/snooty/components/RootProvider";
 import { loadFile } from "@/hooks/useLoadFile";
+import Root from "@/snooty/components/Root";
+import { MetadataProvider } from "@/snooty/utils/use-snooty-metadata";
 
-export default async function Page() {
-  const file = await loadFile("./src/content/test.mdx");
-
-  console.log(file);
+export default function Page() {
+  const file = loadFile();
 
   return (
-    <div>
-      {file.children.map((node) => {
-        switch (node.type) {
-          case "paragraph": {
-            return (
-              <Paragraph
-                slug="foo"
-                skipPTag={false}
-                parentNode={undefined}
-                nodeData={file}
-              />
-            );
-          }
-        }
-      })}
-    </div>
+    <MetadataProvider metadata={{ project: "foo", database: {} }}>
+      <RootProvider
+        remoteMetadata={{}}
+        repoBranches={{}}
+        slug=""
+        headingNodes={[]}
+      >
+        <Root nodeData={file.data.ast} />
+      </RootProvider>
+    </MetadataProvider>
   );
 }
