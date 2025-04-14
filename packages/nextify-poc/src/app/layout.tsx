@@ -2,10 +2,10 @@
 import React from "react";
 import { loadFile } from "@/hooks/useLoadFile";
 
-import Root from "snooty/src/components/Root";
-import { Root as RootNode } from "snooty/src/types/ast";
-import { OFFLINE_HEAD_SCRIPTS } from "snooty/src/utils/head-scripts/offline-ui";
-import { DefaultLayout } from "snooty/src/DefaultLayout";
+import Root from "../snooty/components/Root";
+import { Root as RootNode } from "../snooty/types/ast";
+import { OFFLINE_HEAD_SCRIPTS } from "../snooty/utils/head-scripts/offline-ui";
+import { DefaultLayout } from "../snooty/DefaultLayout";
 
 const metaUrl = `http://www.mongodb.com/docs/assets/meta_generic.png`;
 const metaSecureUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
