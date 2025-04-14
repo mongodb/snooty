@@ -20,12 +20,14 @@ import { getAllLocaleCssStrings } from "@/snooty/utils/locale";
 import { OfflineDownloadProvider } from "@/snooty/components/OfflineDownloadModal/DownloadContext";
 import { loadFile } from "@/hooks/useLoadFile";
 import { TocContextProvider } from "@/snooty/context/toc-context";
+import Root from "@/snooty/components/Root";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const file = loadFile();
   return (
     <html lang="en">
       <body>
@@ -33,13 +35,15 @@ export default function RootLayout({
           metadata={{ project: "foo", database: {}, toctree: {} }}
         >
           <DefaultLayout
-            data={{ page: loadFile() }}
+            data={{ page: file }}
             pageContext={{
               slug: "",
               repoBranches: {},
               template: "none",
             }}
-          ></DefaultLayout>
+          >
+            <Root nodeData={file.data.ast} />
+          </DefaultLayout>
         </MetadataProvider>
       </body>
     </html>

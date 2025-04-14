@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "overrides": {
+    "react": "^18",
+    "react-dom": "^18"
+  },
   "dependencies": {
     "@emotion/cache": "11.11.0",
     "@emotion/css": "^11.0.0",
@@ -52,7 +56,7 @@
     "@mdb/flora": "1.14.2",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
-    "@next/mdx": "^15.3.0",
+    "@next/mdx": "^14",
     "@types/mdx": "^2.0.13",
     "abort-controller": "^3.0.0",
     "adm-zip": "^0.5.9",
@@ -72,7 +76,7 @@
     "minimist": "^1.2.6",
     "mobx": "^6.1.5",
     "mongodb-chatbot-ui": "^0.13.0",
-    "next": "^15",
+    "next": "^14",
     "no-scroll": "^2.1.1",
     "node-fetch": "^3.3.2",
     "node-gyp": "^10.1.0",
@@ -80,9 +84,9 @@
     "prop-types": "^15.7.2",
     "query-string": "^6.13.7",
     "rasterizehtml": "^1.3.0",
-    "react": "^19.1.0",
+    "react": "^18",
     "react-dev-utils": "^12.0.0",
-    "react-dom": "^19.1.0",
+    "react-dom": "^18",
     "react-loadable": "^5.5.0",
     "react-player": "^2.9.0",
     "react-resizable": "^3.0.5",

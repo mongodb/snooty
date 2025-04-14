@@ -1,6 +1,4 @@
-import { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+const nextConfig = {
   // Configure `pageExtensions` to include markdown and MDX files
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   compiler: {

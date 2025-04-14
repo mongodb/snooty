@@ -38,3 +38,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Weirdness
 
 - React 18 required for current leafygreen
+- Next.js v14 (not latest 15) needed to avoid "Cannot read properties of undefined (reading 'ReactCurrentDispatcher')"
