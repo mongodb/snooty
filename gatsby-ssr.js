@@ -84,9 +84,9 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
     );
   }
 
-  if (process.env.SNOOTY_ENV !== 'prd') {
+  // We want to exclude writers' staging (aka "production", aka "prd")
+  if (process.env.SNOOTY_ENV !== 'production') {
     // Client-side redirect based on browser's language settings.
-    // We want to exclude writers' staging
     headComponents.push(
       <script
         key="browser-lang-redirect"
