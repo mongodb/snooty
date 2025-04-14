@@ -8,14 +8,14 @@ function updateSidenavHeight() {
   const updateScrollY = () => {
     // pulled from SIDE_NAV_CONTAINER_ID
     // 'docs-side-nav-container'
-    const sidenavElm = document.querySelector('#docs-side-nav-container');
+    const sidenavElm = document.querySelector("#docs-side-nav-container");
     sidenavElm.style = `--scroll-y: ${window.scrollY}px`;
-    window.addEventListener('scroll', (e) => {
+    window.addEventListener("scroll", (e) => {
       sidenavElm.style = `--scroll-y: ${e.currentTarget.scrollY}px`;
     });
   };
 
-  document.addEventListener('DOMContentLoaded', updateScrollY, false);
+  document.addEventListener("DOMContentLoaded", updateScrollY, false);
 }
 
 export default updateSidenavHeight;

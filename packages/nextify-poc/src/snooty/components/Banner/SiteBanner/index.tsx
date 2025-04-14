@@ -1,18 +1,19 @@
-import React, { useContext, useEffect } from 'react';
-import { palette } from '@leafygreen-ui/palette';
-import { css, cx } from '@leafygreen-ui/emotion';
-import { HeaderContext } from '../../Header/header-context';
-import { SNOOTY_REALM_APP_ID } from '../../../build-constants';
-import { useSiteMetadata } from '../../../hooks/use-site-metadata';
-import { theme } from '../../../theme/docsTheme';
-import { isBrowser } from '../../../utils/is-browser';
-import { normalizePath } from '../../../utils/normalize-path';
-import { fetchBanner } from '../../../utils/realm';
-import { SiteBannerContent } from './types';
-import BrandingShape from './BrandingShape';
+"use client";
+import React, { useContext, useEffect } from "react";
+import { palette } from "@leafygreen-ui/palette";
+import { css, cx } from "@leafygreen-ui/emotion";
+import { HeaderContext } from "../../Header/header-context";
+import { SNOOTY_REALM_APP_ID } from "../../../build-constants";
+import { useSiteMetadata } from "../../../hooks/use-site-metadata";
+import { theme } from "../../../theme/docsTheme";
+import { isBrowser } from "../../../utils/is-browser";
+import { normalizePath } from "../../../utils/normalize-path";
+import { fetchBanner } from "../../../utils/realm";
+import { SiteBannerContent } from "./types";
+import BrandingShape from "./BrandingShape";
 
 const getBannerSource = (src?: string) => {
-  if (src == null || src === '') return null;
+  if (src == null || src === "") return null;
   const srcUrl = `${SNOOTY_REALM_APP_ID}.mongodbstitch.com/${src}`;
   return `https://${normalizePath(srcUrl)}`;
 };
@@ -116,9 +117,9 @@ const SiteBanner = () => {
   }
 
   // Ensure Smartling doesn't translate the banner or rewrite anything
-  const smartlingClassNames = 'sl_opaque notranslate';
+  const smartlingClassNames = "sl_opaque notranslate";
   // Backup class name in case Smartling needs to target the whole element
-  const bannerClassName = 'site-banner';
+  const bannerClassName = "site-banner";
 
   return (
     <a
@@ -129,20 +130,25 @@ const SiteBanner = () => {
       <div
         className={bannerContentStyle({
           imgPath: bannerContent.imgPath,
-          tabletImgPath: bannerContent.tabletImgPath ?? bannerContent.mobileImgPath,
+          tabletImgPath:
+            bannerContent.tabletImgPath ?? bannerContent.mobileImgPath,
           mobileImgPath: bannerContent.mobileImgPath,
           bgColor: bannerContent.bgColor,
         })}
       >
         {bannerContent.text && (
           <>
-            <span className={cx(smartlingClassNames, bannerTextStyle)}>{bannerContent.text}</span>
+            <span className={cx(smartlingClassNames, bannerTextStyle)}>
+              {bannerContent.text}
+            </span>
             <div className={pillContainer}>
               <div className={brandingContainer}>
                 <BrandingShape />
               </div>
               {bannerContent.pillText && (
-                <span className={cx(smartlingClassNames, pillStyle)}>{bannerContent.pillText}</span>
+                <span className={cx(smartlingClassNames, pillStyle)}>
+                  {bannerContent.pillText}
+                </span>
               )}
             </div>
           </>

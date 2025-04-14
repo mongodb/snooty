@@ -1,3 +1,4 @@
+"use client";
 import React, { useCallback, useContext, useMemo, useEffect } from "react";
 import { useLocation, navigate } from "../../../gatsby-shim";
 import PropTypes from "prop-types";

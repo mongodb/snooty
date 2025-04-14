@@ -14,12 +14,10 @@ import RootProvider from "@/snooty/components/RootProvider";
 import { getTemplate } from "@/snooty/utils/get-template";
 import { usePresentationMode } from "@/snooty/hooks/use-presentation-mode";
 import { theme } from "@/snooty/theme/docsTheme";
-import useSnootyMetadata from "@/snooty/utils/use-snooty-metadata";
 import { useRemoteMetadata } from "@/snooty/hooks/use-remote-metadata";
 import { getAllLocaleCssStrings } from "@/snooty/utils/locale";
 import { OfflineDownloadProvider } from "@/snooty/components/OfflineDownloadModal/DownloadContext";
 import { loadFile } from "@/hooks/useLoadFile";
-import { TocContextProvider } from "@/snooty/context/toc-context";
 import Root from "@/snooty/components/Root";
 
 import { ThemeProvider } from "@emotion/react";
@@ -27,6 +25,11 @@ import "@/snooty/styles/mongodb-docs.css";
 import "@/snooty/styles/icons.css";
 import "@/snooty/styles/global-dark-mode.css";
 import { Root as RootNode } from "@/snooty/types/ast";
+import { OFFLINE_HEAD_SCRIPTS } from "@/snooty/utils/head-scripts/offline-ui";
+
+const metaUrl = `http://www.mongodb.com/docs/assets/meta_generic.png`;
+const metaSecureUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
+const faviconUrl = `https://www.mongodb.com/docs/assets/favicon.ico`;
 
 export default function RootLayout({
   children,
@@ -36,6 +39,21 @@ export default function RootLayout({
   const file = loadFile();
   return (
     <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="release" content="1.0" />
+        <meta name="version" content="master" />
+        <meta property="og:image" content={metaUrl} />
+        <meta property="og:image:secure_url" content={metaSecureUrl} />
+        <link rel="shortcut icon" href={faviconUrl} />
+        {...OFFLINE_HEAD_SCRIPTS}
+      </head>
       <body>
         <ThemeProvider theme={theme}>
           <MetadataProvider
