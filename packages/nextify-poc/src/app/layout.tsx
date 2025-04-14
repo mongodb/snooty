@@ -22,6 +22,12 @@ import { loadFile } from "@/hooks/useLoadFile";
 import { TocContextProvider } from "@/snooty/context/toc-context";
 import Root from "@/snooty/components/Root";
 
+import { ThemeProvider } from "@emotion/react";
+import "@/snooty/styles/mongodb-docs.css";
+import "@/snooty/styles/icons.css";
+import "@/snooty/styles/global-dark-mode.css";
+import { Root as RootNode } from "@/snooty/types/ast";
+
 export default function RootLayout({
   children,
 }: {
@@ -31,20 +37,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <MetadataProvider
-          metadata={{ project: "foo", database: {}, toctree: {} }}
-        >
-          <DefaultLayout
-            data={{ page: file }}
-            pageContext={{
-              slug: "",
-              repoBranches: {},
-              template: "none",
-            }}
+        <ThemeProvider theme={theme}>
+          <MetadataProvider
+            metadata={{ project: "foo", database: {}, toctree: {} }}
           >
-            <Root nodeData={file.data.ast} />
-          </DefaultLayout>
-        </MetadataProvider>
+            <DefaultLayout
+              data={{ page: file }}
+              pageContext={{
+                slug: "",
+                repoBranches: {},
+                template: "none",
+              }}
+            >
+              <Root nodeData={file.data.ast as RootNode} />
+            </DefaultLayout>
+          </MetadataProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
@@ -170,9 +178,8 @@ const DefaultLayout = ({
         repoBranches={repoBranches}
         headingNodes={page?.ast?.options?.headings}
         remoteMetadata={remoteMetadata}
-        project={project}
       >
-        <GlobalGrid isInPresentationMode={isInPresentationMode}>
+        <GlobalGrid>
           {!isInPresentationMode ? (
             <Header eol={eol} template={template} />
           ) : (
@@ -188,9 +195,7 @@ const DefaultLayout = ({
                   pageTitle={pageTitle}
                   repoBranches={repoBranches}
                   slug={slug}
-                  toctree={toctree}
                   eol={eol}
-                  template={template}
                 />
               </OfflineDownloadProvider>
             </ToastProvider>

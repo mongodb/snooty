@@ -139,7 +139,6 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, "/$1");
 
-    console.warn("Unimplemented GatsbyLink");
     /*
     return (
       <GatsbyLink

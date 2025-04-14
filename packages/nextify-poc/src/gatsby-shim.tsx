@@ -16,9 +16,10 @@ export const useLocation = (): Location => {
     setLocation(window.location);
   }, []);
   return (
-    location ?? {
+    location ??
+    ({
       search: "",
-    }
+    } as Location)
   );
 };
 export class StaticQueryDocument {
