@@ -48,7 +48,7 @@ afterAll(() => {
   process.removeListener('unhandledRejection', rejectionHandler);
 });
 
-const crypto = require('crypto');
+import crypto from 'crypto';
 
 Object.defineProperty(global.self, 'crypto', {
   value: {

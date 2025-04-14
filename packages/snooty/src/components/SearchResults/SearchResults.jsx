@@ -1,42 +1,33 @@
-"use client";
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  useContext,
-  useRef,
-} from "react";
-import { cx, css } from "@leafygreen-ui/emotion";
-import styled from "@emotion/styled";
-import { useLocation } from "../../../gatsby-shim";
-import Button from "@leafygreen-ui/button";
-import Icon from "@leafygreen-ui/icon";
-import Pagination from "@leafygreen-ui/pagination";
-import { H3, Overline } from "@leafygreen-ui/typography";
-import { ParagraphSkeleton } from "@leafygreen-ui/skeleton-loader";
-import { palette } from "@leafygreen-ui/palette";
-import useScreenSize from "../../hooks/useScreenSize";
-import { theme } from "../../theme/docsTheme";
-import { reportAnalytics } from "../../utils/report-analytics";
-import { escapeHtml } from "../../utils/escape-reserved-html-characters";
-import {
-  searchParamsToMetaURL,
-  searchParamsToURL,
-} from "../../utils/search-params-to-url";
-import { requestHeaders } from "../../utils/search-facet-constants";
-import Tag, { searchTagStyle } from "../Tag";
-import SearchContext from "./SearchContext";
-import SearchFilters from "./SearchFilters";
-import SearchResult from "./SearchResult";
-import EmptyResults, { EMPTY_STATE_HEIGHT } from "./EmptyResults";
-import MobileFilters from "./MobileFilters";
-import { Facets, FacetTags } from "./Facets";
+'use client';
+import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
+import { cx, css } from '@leafygreen-ui/emotion';
+import styled from '@emotion/styled';
+import { useLocation } from '../../gatsby-shim';
+import Button from '@leafygreen-ui/button';
+import Icon from '@leafygreen-ui/icon';
+import Pagination from '@leafygreen-ui/pagination';
+import { H3, Overline } from '@leafygreen-ui/typography';
+import { ParagraphSkeleton } from '@leafygreen-ui/skeleton-loader';
+import { palette } from '@leafygreen-ui/palette';
+import useScreenSize from '../../hooks/useScreenSize';
+import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
+import { escapeHtml } from '../../utils/escape-reserved-html-characters';
+import { searchParamsToMetaURL, searchParamsToURL } from '../../utils/search-params-to-url';
+import { requestHeaders } from '../../utils/search-facet-constants';
+import Tag, { searchTagStyle } from '../Tag';
+import SearchContext from './SearchContext';
+import SearchFilters from './SearchFilters';
+import SearchResult from './SearchResult';
+import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
+import MobileFilters from './MobileFilters';
+import { Facets, FacetTags } from './Facets';
 
-const FILTER_COLUMN_WIDTH = "173px";
-const LANDING_MODULE_MARGIN = "28px";
-const LANDING_PAGE_MARGIN = "40px";
+const FILTER_COLUMN_WIDTH = '173px';
+const LANDING_MODULE_MARGIN = '28px';
+const LANDING_PAGE_MARGIN = '40px';
 const ROW_GAP = theme.size.default;
-const SEARCH_RESULT_HEIGHT = "152px";
+const SEARCH_RESULT_HEIGHT = '152px';
 
 const CALC_MARGIN = `calc(50vh - ${LANDING_MODULE_MARGIN} - ${LANDING_PAGE_MARGIN} - ${EMPTY_STATE_HEIGHT} / 2)`;
 
@@ -47,7 +38,7 @@ const commonTextStyling = `
   margin: 0;
 `;
 
-const EmptyResultsContainer = styled("div")`
+const EmptyResultsContainer = styled('div')`
   /* We want to place the empty state in the middle of the page. To do so, we
   must account for any margins added from using the blank landing template,
   and half of the height of the empty state component */
@@ -56,7 +47,7 @@ const EmptyResultsContainer = styled("div")`
   margin-top: 80px;
 `;
 
-const HeaderContainer = styled("div")`
+const HeaderContainer = styled('div')`
   grid-area: header;
 `;
 
@@ -66,14 +57,14 @@ const headerContainerDynamicStyles = css`
   }
 `;
 
-const FiltersContainer = styled("div")`
+const FiltersContainer = styled('div')`
   grid-area: right;
   @media ${theme.screenSize.upToMedium} {
     display: none;
   }
 `;
 
-const FilterHeader = styled("h2")`
+const FilterHeader = styled('h2')`
   align-self: center;
   font-size: ${theme.fontSize.tiny};
   line-height: 15px;
@@ -93,11 +84,11 @@ const filterHeaderDynamicStyles = css`
   }
 `;
 
-const SearchResultsContainer = styled("div")`
+const SearchResultsContainer = styled('div')`
   display: grid;
   grid-template-columns: minmax(0, auto) 1fr;
   column-gap: 46px;
-  grid-template-areas: "header ." "main right";
+  grid-template-areas: 'header .' 'main right';
   grid-template-columns: auto ${FILTER_COLUMN_WIDTH};
   margin: ${theme.size.large} ${theme.size.xlarge} ${theme.size.xlarge};
 
@@ -106,7 +97,7 @@ const SearchResultsContainer = styled("div")`
   }
 
   @media ${theme.screenSize.upToMedium} {
-    grid-template-areas: "header" "main";
+    grid-template-areas: 'header' 'main';
     grid-template-columns: auto;
     margin: ${theme.size.default} ${theme.size.medium} ${theme.size.xlarge};
     row-gap: ${theme.size.default};
@@ -217,7 +208,7 @@ const StyledSearchResult = styled(SearchResult)`
   ${searchResultStyling}
 `;
 
-const StyledLoadingSkeletonContainer = styled("div")`
+const StyledLoadingSkeletonContainer = styled('div')`
   ${searchResultStyling}
   box-shadow: 0 0 ${theme.size.tiny} 0 rgba(231, 238, 236, 1) !important;
 
@@ -238,27 +229,17 @@ const StyledLoadingSkeletonContainer = styled("div")`
 
 const StyledParagraphSkeleton = styled(ParagraphSkeleton)`
   > div {
-    background: linear-gradient(
-        110deg,
-        ${palette.gray.light2} 35%,
-        ${palette.gray.light3},
-        ${palette.gray.light2} 65%
-      )
+    background: linear-gradient(110deg, ${palette.gray.light2} 35%, ${palette.gray.light3}, ${palette.gray.light2} 65%)
       0 0/ 100vw 100% fixed;
 
     .dark-theme & {
-      background: linear-gradient(
-          110deg,
-          ${palette.gray.dark2} 35%,
-          ${palette.gray.dark1},
-          ${palette.gray.dark2} 65%
-        )
-        0 0/ 100vw 100% fixed;
+      background: linear-gradient(110deg, ${palette.gray.dark2} 35%, ${palette.gray.dark1}, ${palette.gray.dark2} 65%) 0
+        0/ 100vw 100% fixed;
     }
   }
 `;
 
-const StyledSearchResults = styled("div")`
+const StyledSearchResults = styled('div')`
   box-shadow: none;
   display: grid;
   grid-area: main;
@@ -279,7 +260,7 @@ const StyledTag = styled(Tag)`
   ${searchTagStyle}
 `;
 
-const ResultTag = styled("div")`
+const ResultTag = styled('div')`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -303,7 +284,7 @@ const iconStyle = css`
   margin-right: -2px;
 `;
 
-const MobileSearchButtonWrapper = styled("div")`
+const MobileSearchButtonWrapper = styled('div')`
   display: none;
   margin-top: ${theme.size.medium};
 
@@ -316,14 +297,14 @@ const MobileSearchButtonWrapper = styled("div")`
     color: ${palette.black};
 
     &:focus-visible,
-    &[data-focus="true"] {
+    &[data-focus='true'] {
       color: ${palette.black};
     }
 
     &:hover,
-    &[data-hover="true"],
+    &[data-hover='true'],
     &:active,
-    &[data-active="true"] {
+    &[data-active='true'] {
       color: ${palette.black};
       background-color: ${palette.white};
       box-shadow: 0 0 0 3px ${palette.gray.light2};
@@ -334,14 +315,14 @@ const MobileSearchButtonWrapper = styled("div")`
       color: ${palette.white};
 
       &:focus-visible,
-      &[data-focus="true"] {
+      &[data-focus='true'] {
         color: ${palette.white};
       }
 
       &:hover,
-      &[data-hover="true"],
+      &[data-hover='true'],
       &:active,
-      &[data-active="true"] {
+      &[data-active='true'] {
         background-color: ${palette.gray.dark1};
         border-color: ${palette.gray.base};
         color: ${palette.white};
@@ -374,7 +355,7 @@ const SearchResults = () => {
   const [searchCount, setSearchCount] = useState();
   const [searchResultFacets, setSearchResultFacets] = useState([]);
 
-  const specifySearchText = "Refine your search";
+  const specifySearchText = 'Refine your search';
   const searchBoxRef = useRef(null);
 
   const resetFilters = useCallback(() => {
@@ -386,13 +367,13 @@ const SearchResults = () => {
   }, [setShowMobileFilters]);
 
   let mobileFilterButton = {
-    glyph: "X",
+    glyph: 'X',
     onClick: resetFilters,
-    text: "Clear all filters",
+    text: 'Clear all filters',
   };
   if (!searchFilter) {
     mobileFilterButton = {
-      glyph: "Filter",
+      glyph: 'Filter',
       onClick: showFilterOptions,
       text: specifySearchText,
     };
@@ -403,14 +384,14 @@ const SearchResults = () => {
     if (searchBoxRef.current) {
       searchBoxRef.current.focus();
       // Add class for Smartling localization
-      searchBoxRef.current.classList.add("sl-search-input");
+      searchBoxRef.current.classList.add('sl-search-input');
     }
   }, []);
 
   // async call to fetch search results
   // effect is called if searchTerm, searchPropertyMapping are defined
   useEffect(() => {
-    if (!searchParams.get("q")) {
+    if (!searchParams.get('q')) {
       setSearchResults([]);
       return;
     }
@@ -422,10 +403,7 @@ const SearchResults = () => {
     };
 
     const fetchSearchMeta = async () => {
-      const res = await fetch(
-        searchParamsToMetaURL(searchParams),
-        requestHeaders
-      );
+      const res = await fetch(searchParamsToMetaURL(searchParams), requestHeaders);
       return res.json();
     };
 
@@ -455,10 +433,7 @@ const SearchResults = () => {
   // update filters only on search term change
   useEffect(() => {
     const fetchSearchMeta = async () => {
-      const res = await fetch(
-        searchParamsToMetaURL(null, searchTerm),
-        requestHeaders
-      );
+      const res = await fetch(searchParamsToMetaURL(null, searchTerm), requestHeaders);
       return res.json();
     };
 
@@ -474,7 +449,7 @@ const SearchResults = () => {
 
   const onPageClick = useCallback(
     async (isForward) => {
-      const currentPage = parseInt(searchParams.get("page")) || 1;
+      const currentPage = parseInt(searchParams.get('page')) || 1;
       const newPage = isForward ? currentPage + 1 : currentPage - 1;
       if (newPage < 1) {
         return;
@@ -493,7 +468,7 @@ const SearchResults = () => {
           <HeaderContainer className={cx(headerContainerDynamicStyles)}>
             <H3>Search Results</H3>
             {/* Classname-attached searchTerm needed for Smartling localization */}
-            <span style={{ display: "none" }} className="sl-search-keyword">
+            <span style={{ display: 'none' }} className="sl-search-keyword">
               {searchTerm}
             </span>
             {searchTerm && (
@@ -511,21 +486,14 @@ const SearchResults = () => {
                         <Icon className={cx(iconStyle)} glyph="X" />
                       </StyledTag>
                     )}
-                    {selectedVersion && (
-                      <StyledTag variant="blue">{selectedVersion}</StyledTag>
-                    )}
+                    {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
                   </div>
                 )}
-                {showFacets && (
-                  <FacetTags resultsCount={searchCount}></FacetTags>
-                )}
+                {showFacets && <FacetTags resultsCount={searchCount}></FacetTags>}
               </ResultTag>
             )}
             <MobileSearchButtonWrapper>
-              <Button
-                leftGlyph={<Icon glyph={mobileFilterButton.glyph} />}
-                onClick={mobileFilterButton.onClick}
-              >
+              <Button leftGlyph={<Icon glyph={mobileFilterButton.glyph} />} onClick={mobileFilterButton.onClick}>
                 {mobileFilterButton.text}
               </Button>
             </MobileSearchButtonWrapper>
@@ -536,10 +504,7 @@ const SearchResults = () => {
             <>
               <StyledSearchResults>
                 {[...Array(10)].map((_, index) => (
-                  <StyledLoadingSkeletonContainer
-                    key={index}
-                    className={cx(searchResultDynamicStyling)}
-                  >
+                  <StyledLoadingSkeletonContainer key={index} className={cx(searchResultDynamicStyling)}>
                     <StyledParagraphSkeleton withHeader />
                   </StyledLoadingSkeletonContainer>
                 ))}
@@ -562,42 +527,34 @@ const SearchResults = () => {
           {!!searchTerm && !!searchFinished && !!searchResults.length && (
             <>
               <StyledSearchResults>
-                {searchResults.map(
-                  ({ title, preview, url, searchProperty, facets }, index) => (
-                    <StyledSearchResult
-                      key={`${url}${index}`}
-                      onClick={() =>
-                        reportAnalytics("SearchSelection", {
-                          areaFrom: "ResultsPage",
-                          rank: index,
-                          selectionUrl: url,
-                        })
-                      }
-                      title={title}
-                      preview={escapeHtml(preview)}
-                      url={url}
-                      useLargeTitle
-                      searchProperty={searchProperty?.[0]}
-                      facets={facets}
-                    />
-                  )
-                )}
+                {searchResults.map(({ title, preview, url, searchProperty, facets }, index) => (
+                  <StyledSearchResult
+                    key={`${url}${index}`}
+                    onClick={() =>
+                      reportAnalytics('SearchSelection', {
+                        areaFrom: 'ResultsPage',
+                        rank: index,
+                        selectionUrl: url,
+                      })
+                    }
+                    title={title}
+                    preview={escapeHtml(preview)}
+                    url={url}
+                    useLargeTitle
+                    searchProperty={searchProperty?.[0]}
+                    facets={facets}
+                  />
+                ))}
                 {
                   <>
                     <Pagination
                       className={paginationStyling}
-                      currentPage={parseInt(
-                        new URLSearchParams(search).get("page") || 1
-                      )}
+                      currentPage={parseInt(new URLSearchParams(search).get('page') || 1)}
                       numTotalItems={searchCount}
                       onForwardArrowClick={onPageClick.bind(null, true)}
                       onBackArrowClick={onPageClick.bind(null, false)}
-                      shouldDisableBackArrow={
-                        parseInt(new URLSearchParams(search).get("page")) === 1
-                      }
-                      shouldDisableForwardArrow={
-                        searchResults?.length && searchResults.length < 10
-                      }
+                      shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
+                      shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
                     ></Pagination>
                   </>
                 }
@@ -605,7 +562,7 @@ const SearchResults = () => {
             </>
           )}
 
-          {searchParams.get("q") && (
+          {searchParams.get('q') && (
             <FiltersContainer>
               {showFacets ? (
                 <>
@@ -614,9 +571,7 @@ const SearchResults = () => {
                 </>
               ) : (
                 <>
-                  <FilterHeader className={cx(filterHeaderDynamicStyles)}>
-                    {specifySearchText}
-                  </FilterHeader>
+                  <FilterHeader className={cx(filterHeaderDynamicStyles)}>{specifySearchText}</FilterHeader>
                   <StyledSearchFilters />
                 </>
               )}

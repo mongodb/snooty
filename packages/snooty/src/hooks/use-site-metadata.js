@@ -1,19 +1,19 @@
-import { useStaticQuery, graphql } from "../../gatsby-shim";
+import { useStaticQuery, graphql } from '../gatsby-shim';
 
 export const useSiteMetadata = () => {
   return {
-    commitHash: "",
-    database: "",
-    parserBranch: "",
-    parserUser: "",
-    patchId: "",
-    pathPrefix: "",
-    project: "",
-    reposDatabase: "",
-    siteUrl: "",
-    snootyBranch: "",
-    snootyEnv: "",
-    user: "",
+    commitHash: '',
+    database: '',
+    parserBranch: '',
+    parserUser: '',
+    patchId: '',
+    pathPrefix: '',
+    project: '',
+    reposDatabase: '',
+    siteUrl: '',
+    snootyBranch: '',
+    snootyEnv: '',
+    user: '',
   };
   const { site } = useStaticQuery(
     graphql`

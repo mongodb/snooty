@@ -1,17 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "@emotion/styled";
-import { useDarkMode } from "@leafygreen-ui/leafygreen-provider";
-import { palette } from "@leafygreen-ui/palette";
-import { css } from "@leafygreen-ui/emotion";
-import { withPrefix } from "../../gatsby-shim";
-import { theme } from "../../theme/docsTheme";
-import ComponentFactory from "../ComponentFactory";
-import SectionHeader from "../SectionHeader";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
+import { palette } from '@leafygreen-ui/palette';
+import { css } from '@leafygreen-ui/emotion';
+import { withPrefix } from '../gatsby-shim';
+import { theme } from '../../theme/docsTheme';
+import ComponentFactory from '../ComponentFactory';
+import SectionHeader from '../SectionHeader';
 
 const FONT_SIZE = theme.fontSize.default;
-const HEIGHT = "61px";
-const WIDTH = "61px";
+const HEIGHT = '61px';
+const WIDTH = '61px';
 
 const StyledSection = styled.div`
   margin-bottom: 34px;
@@ -49,14 +49,14 @@ const customStyleHeader = css`
 
 const ProductItem = ({ nodeData: { children, options, argument } }) => {
   const icon = options.icon;
-  const iconAlt = options["icon-alt"];
+  const iconAlt = options['icon-alt'];
   const { darkMode } = useDarkMode();
   return (
     <StyledSection>
       <img src={withPrefix(icon)} alt={iconAlt} height={HEIGHT} width={WIDTH} />
       <StyledArticle
         style={{
-          "--color": darkMode ? palette.blue.light1 : palette.blue.base,
+          '--color': darkMode ? palette.blue.light1 : palette.blue.base,
         }}
       >
         <SectionHeader customStyles={customStyleHeader}>

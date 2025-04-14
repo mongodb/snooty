@@ -1,5 +1,5 @@
-const { generatePathPrefix } = require('./src/utils/generate-path-prefix');
-const { siteMetadata } = require('./src/utils/site-metadata');
+import { generatePathPrefix } from './src/utils/generate-path-prefix';
+import { siteMetadata } from './src/utils/site-metadata';
 
 const pathPrefix = generatePathPrefix(siteMetadata);
 const layoutComponentRelativePath = `./src/layouts/index.js`;

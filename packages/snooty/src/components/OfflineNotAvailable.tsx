@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { Body } from "@leafygreen-ui/typography";
-import { css, cx } from "@leafygreen-ui/emotion";
-import { palette } from "@leafygreen-ui/palette";
-import { withPrefix } from "../../gatsby-shim";
-import { theme } from "../theme/docsTheme";
-import Link from "./Link";
-import { usePageContext } from "../context/page-context";
-import { getCompleteUrl } from "../utils/url-utils";
+import React from 'react';
+import styled from '@emotion/styled';
+import { Body } from '@leafygreen-ui/typography';
+import { css, cx } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
+import { withPrefix } from '../gatsby-shim';
+import { theme } from '../theme/docsTheme';
+import Link from './Link';
+import { usePageContext } from '../context/page-context';
+import { getCompleteUrl } from '../utils/url-utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -59,20 +59,16 @@ const hrStyling = css`
 `;
 
 const assetLabelFromKey = {
-  instruqt: "Lab",
-  video: "Video",
+  instruqt: 'Lab',
+  video: 'Video',
 };
 
-const OfflineNotAvailable = ({
-  assetKey,
-}: {
-  assetKey: "instruqt" | "video";
-}) => {
+const OfflineNotAvailable = ({ assetKey }: { assetKey: 'instruqt' | 'video' }) => {
   const { slug } = usePageContext();
 
   const assetLabel = assetLabelFromKey[assetKey];
-  const altText = "Unavailable offline";
-  const imgPath = withPrefix("assets/offline-asset.png");
+  const altText = 'Unavailable offline';
+  const imgPath = withPrefix('assets/offline-asset.png');
   // TODO alongside DOP-5172: update this URL. missing project in url
   // TODO: Fix ts-ignore by typing usePageContext
   // @ts-ignore
@@ -88,9 +84,7 @@ const OfflineNotAvailable = ({
         </ImageContainer>
         <div>
           <Body className={cx(titleStyling)}>{assetLabel} unavailable</Body>
-          <Body className={cx(subtitleStyling)}>
-            {assetLabel}s are unavailable in offline mode
-          </Body>
+          <Body className={cx(subtitleStyling)}>{assetLabel}s are unavailable in offline mode</Body>
           <StyledLink to={completeUrl} showExternalIcon={true}>
             Link to live site
           </StyledLink>

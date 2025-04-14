@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from "../../gatsby-shim";
+import { useStaticQuery, graphql } from '../gatsby-shim';
 
 // Return the remote metadata node
 export const useRemoteMetadata = () => {

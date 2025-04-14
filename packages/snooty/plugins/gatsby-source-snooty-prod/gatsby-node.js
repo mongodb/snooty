@@ -1,26 +1,26 @@
-const swc = require('@swc/core');
-const path = require('path');
-const fs = require('fs/promises');
-const { transformBreadcrumbs } = require('../../src/utils/setup/transform-breadcrumbs.js');
-const { getPageComponents } = require('../../src/utils/setup/get-page-components.js');
+import swc from '@swc/core';
+import path from 'path';
+import fs from 'fs/promises';
+import { transformBreadcrumbs } from '../../src/utils/setup/transform-breadcrumbs.js';
+import { getPageComponents } from '../../src/utils/setup/get-page-components.js';
 const {
   saveAssetFiles,
   saveStaticFiles,
   GATSBY_IMAGE_EXTENSIONS,
 } = require('../../src/utils/setup/save-asset-files.js');
-const { validateEnvVariables } = require('../../src/utils/setup/validate-env-variables.js');
-const { getNestedValue } = require('../../src/utils/get-nested-value.js');
-const { removeNestedValue } = require('../../src/utils/remove-nested-value.js');
-const { getPageSlug } = require('../../src/utils/get-page-slug.js');
-const { removeLeadingSlash } = require('../../src/utils/remove-leading-slash.js');
-const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadata.js');
-const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash.js');
-const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix.js');
-const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
-const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
-const { createProductNodes } = require('../utils/products.js');
-const { createDocsetNodes } = require('../utils/docsets.js');
-const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
+import { validateEnvVariables } from '../../src/utils/setup/validate-env-variables.js';
+import { getNestedValue } from '../../src/utils/get-nested-value.js';
+import { removeNestedValue } from '../../src/utils/remove-nested-value.js';
+import { getPageSlug } from '../../src/utils/get-page-slug.js';
+import { removeLeadingSlash } from '../../src/utils/remove-leading-slash.js';
+import { manifestMetadata, siteMetadata } from '../../src/utils/site-metadata.js';
+import { assertTrailingSlash } from '../../src/utils/assert-trailing-slash.js';
+import { constructPageIdPrefix } from '../../src/utils/setup/construct-page-id-prefix.js';
+import { manifestDocumentDatabase, realmDocumentDatabase } from '../../src/init/DocumentDatabase.js';
+import { createOpenAPIChangelogNode } from '../utils/openapi.js';
+import { createProductNodes } from '../utils/products.js';
+import { createDocsetNodes } from '../utils/docsets.js';
+import { createBreadcrumbNodes } from '../utils/breadcrumbs.js';
 
 const assets = new Map();
 const projectComponents = new Set();

@@ -1,4 +1,4 @@
-const { siteMetadata } = require('../../src/utils/site-metadata');
+import { siteMetadata } from '../../src/utils/site-metadata';
 
 const breadcrumbType = `Breadcrumb`;
 

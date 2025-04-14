@@ -1,32 +1,29 @@
-const fs = require("fs").promises;
-const path = require("path");
-const { siteMetadata } = require("../site-metadata");
+const fs = require('fs').promises;
+import path from 'path';
+import { siteMetadata } from '../site-metadata';
 
-const GATSBY_IMAGE_EXTENSIONS = ["webp", "png", "avif"];
+const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
 
 const needsImageOptimization =
-  ["dotcomprd", "dotcomstg"].includes(siteMetadata.snootyEnv) &&
-  process.env["OFFLINE_DOCS"] !== "true";
+  ['dotcomprd', 'dotcomstg'].includes(siteMetadata.snootyEnv) && process.env['OFFLINE_DOCS'] !== 'true';
 
 export const saveFile = async (file, data) => {
   // save files both to "public" and "src/images" directories
   // the first is for public access, and the second is for image processing
-  await fs.mkdir(path.join("public", path.dirname(file)), {
+  await fs.mkdir(path.join('public', path.dirname(file)), {
     recursive: true,
   });
-  await fs.writeFile(path.join("public", file), data, "binary");
+  await fs.writeFile(path.join('public', file), data, 'binary');
 
   // For staging, skip adding images to src/images dir
   // This will functionally skip image optimization, as the plugins source from that dir
   if (!needsImageOptimization) return;
 
-  const pathList = GATSBY_IMAGE_EXTENSIONS.some((ext) => file.endsWith(ext))
-    ? ["src", "images"]
-    : ["public"];
+  const pathList = GATSBY_IMAGE_EXTENSIONS.some((ext) => file.endsWith(ext)) ? ['src', 'images'] : ['public'];
   await fs.mkdir(path.join(...pathList, path.dirname(file)), {
     recursive: true,
   });
-  await fs.writeFile(path.join(...pathList, file), data, "binary");
+  await fs.writeFile(path.join(...pathList, file), data, 'binary');
 };
 
 // Write assets to static directory
@@ -43,9 +40,7 @@ export const saveAssetFiles = async (assets, db) => {
         );
         process.exit(1);
       }
-      filenames.forEach((filename) =>
-        imageWrites.push(saveFile(filename, buffer))
-      );
+      filenames.forEach((filename) => imageWrites.push(saveFile(filename, buffer)));
     }
   }
   await Promise.all(imageWrites);

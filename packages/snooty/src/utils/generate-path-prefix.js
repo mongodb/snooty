@@ -1,23 +1,15 @@
-const { normalizePath } = require("./normalize-path");
+import { normalizePath } from './normalize-path';
 
-export const generatePathPrefix = ({
-  commitHash,
-  parserBranch,
-  patchId,
-  pathPrefix,
-  project,
-  snootyBranch,
-  user,
-}) => {
+export const generatePathPrefix = ({ commitHash, parserBranch, patchId, pathPrefix, project, snootyBranch, user }) => {
   // If user specified a PATH_PREFIX environment variable, ensure it begins with a prefix and use
   if (pathPrefix) {
-    if (pathPrefix.startsWith("/")) {
+    if (pathPrefix.startsWith('/')) {
       return pathPrefix;
     }
     return `/${pathPrefix}`;
   }
 
-  let prefix = "";
+  let prefix = '';
   if (commitHash) prefix += `${commitHash}`;
   if (patchId) prefix += `/${patchId}`;
 

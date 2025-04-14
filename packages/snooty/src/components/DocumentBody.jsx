@@ -1,54 +1,47 @@
-import React, { useState, useMemo, lazy } from "react";
-import PropTypes from "prop-types";
-import { graphql } from "../../gatsby-shim";
-import { ImageContextProvider } from "../context/image-context";
-import { usePresentationMode } from "../hooks/use-presentation-mode";
-import { useCanonicalUrl } from "../hooks/use-canonical-url";
-import { findAllKeyValuePairs } from "../utils/find-all-key-value-pairs";
-import { getNestedValue } from "../utils/get-nested-value";
-import { getMetaFromDirective } from "../utils/get-meta-from-directive";
-import { getPlaintext } from "../utils/get-plaintext";
-import { getTemplate } from "../utils/get-template";
-import useSnootyMetadata from "../utils/use-snooty-metadata";
-import { getSiteTitle } from "../utils/get-site-title";
-import {
-  STRUCTURED_DATA_CLASSNAME,
-  constructTechArticle,
-} from "../utils/structured-data";
-import { PageContext } from "../context/page-context";
-import { useBreadcrumbs } from "../hooks/use-breadcrumbs";
-import { isBrowser } from "../utils/is-browser";
-import { TEMPLATE_CONTAINER_ID } from "../constants";
-import { isOfflineDocsBuild } from "../utils/is-offline-docs-build";
-import { getCompleteUrl, getUrl } from "../utils/url-utils";
-import OfflineBanner from "./Banner/OfflineBanner";
-import SEO from "./SEO";
-import FootnoteContext from "./Footnote/footnote-context";
-import ComponentFactory from "./ComponentFactory";
-import Meta from "./Meta";
-import Twitter from "./Twitter";
-import DocsLandingSD from "./StructuredData/DocsLandingSD";
-import BreadcrumbSchema from "./StructuredData/BreadcrumbSchema";
-import { InstruqtProvider } from "./Instruqt/instruqt-context";
-import { SuspenseHelper } from "./SuspenseHelper";
-import { TabProvider } from "./Tabs/tab-context";
+import React, { useState, useMemo, lazy } from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from '../gatsby-shim';
+import { ImageContextProvider } from '../context/image-context';
+import { usePresentationMode } from '../hooks/use-presentation-mode';
+import { useCanonicalUrl } from '../hooks/use-canonical-url';
+import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
+import { getNestedValue } from '../utils/get-nested-value';
+import { getMetaFromDirective } from '../utils/get-meta-from-directive';
+import { getPlaintext } from '../utils/get-plaintext';
+import { getTemplate } from '../utils/get-template';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { getSiteTitle } from '../utils/get-site-title';
+import { STRUCTURED_DATA_CLASSNAME, constructTechArticle } from '../utils/structured-data';
+import { PageContext } from '../context/page-context';
+import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
+import { isBrowser } from '../utils/is-browser';
+import { TEMPLATE_CONTAINER_ID } from '../constants';
+import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
+import { getCompleteUrl, getUrl } from '../utils/url-utils';
+import OfflineBanner from './Banner/OfflineBanner';
+import SEO from './SEO';
+import FootnoteContext from './Footnote/footnote-context';
+import ComponentFactory from './ComponentFactory';
+import Meta from './Meta';
+import Twitter from './Twitter';
+import DocsLandingSD from './StructuredData/DocsLandingSD';
+import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
+import { InstruqtProvider } from './Instruqt/instruqt-context';
+import { SuspenseHelper } from './SuspenseHelper';
+import { TabProvider } from './Tabs/tab-context';
 
 // lazy load the unified footer to improve page load speed
-const LazyFooter = lazy(() => import("./Footer"));
+const LazyFooter = lazy(() => import('./Footer'));
 
 // Identify the footnotes on a page and all footnote_reference nodes that refer to them.
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
 // - labels: the numerical label for the footnote
 // - references: a list of the footnote reference ids that refer to this footnote
 const getFootnotes = (nodes) => {
-  const footnotes = findAllKeyValuePairs(nodes, "type", "footnote");
-  const footnoteReferences = findAllKeyValuePairs(
-    nodes,
-    "type",
-    "footnote_reference"
-  );
+  const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
+  const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
   const numAnonRefs = footnoteReferences.filter(
-    (node) => !Object.prototype.hasOwnProperty.call(node, "refname")
+    (node) => !Object.prototype.hasOwnProperty.call(node, 'refname')
   ).length;
   // We label our footnotes by their index, regardless of their names to
   // circumvent cases such as [[1], [#], [2], ...]
@@ -58,10 +51,7 @@ const getFootnotes = (nodes) => {
       // eslint-disable-next-line no-param-reassign
       map[footnote.name] = {
         label: index + 1,
-        references: getNamedFootnoteReferences(
-          footnoteReferences,
-          footnote.name
-        ),
+        references: getNamedFootnoteReferences(footnoteReferences, footnote.name),
       };
     } else {
       // Find references associated with an anonymous footnote
@@ -80,9 +70,7 @@ const getFootnotes = (nodes) => {
 // Find all footnote_reference node IDs associated with a given footnote by
 // that footnote's refname
 const getNamedFootnoteReferences = (footnoteReferences, refname) => {
-  return footnoteReferences
-    .filter((node) => node.refname === refname)
-    .map((node) => node.id);
+  return footnoteReferences.filter((node) => node.refname === refname).map((node) => node.id);
 };
 
 // They are used infrequently, but here we match an anonymous footnote to its reference.
@@ -98,10 +86,10 @@ const DocumentBody = (props) => {
   const { data, pageContext } = props;
   const page = data?.page?.ast;
   const { slug, template, repoBranches } = pageContext;
-  const tabsMainColumn = page?.options?.["tabs-selector-position"] === "main";
+  const tabsMainColumn = page?.options?.['tabs-selector-position'] === 'main';
 
   const initialization = () => {
-    const pageNodes = getNestedValue(["children"], page) || [];
+    const pageNodes = getNestedValue(['children'], page) || [];
     const footnotes = getFootnotes(pageNodes);
 
     return { pageNodes, footnotes };
@@ -110,17 +98,14 @@ const DocumentBody = (props) => {
   const [{ pageNodes, footnotes }] = useState(initialization);
 
   const metadata = useSnootyMetadata();
-  const lookup = slug === "/" ? "index" : slug;
-  const pageTitle =
-    getPlaintext(getNestedValue(["slugToTitle", lookup], metadata)) ||
-    "MongoDB Documentation";
+  const lookup = slug === '/' ? 'index' : slug;
+  const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
 
   const { Template, useChatbot } = getTemplate(template);
 
   const siteTitle = getSiteTitle(metadata);
 
-  const isInPresentationMode =
-    usePresentationMode()?.toLocaleLowerCase() === "true";
+  const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
   const { parentPaths, branch } = useSnootyMetadata();
   const queriedCrumbs = useBreadcrumbs();
@@ -129,13 +114,11 @@ const DocumentBody = (props) => {
 
   // TODO: Move this into util function since the same logic
   // is used in useCanonicalUrl();
-  const urlSlug =
-    repoBranches.branches.find((br) => br.gitBranchName === branch)?.urlSlug ??
-    branch;
+  const urlSlug = repoBranches.branches.find((br) => br.gitBranchName === branch)?.urlSlug ?? branch;
 
   const { project } = metadata;
 
-  if (isBrowser && template !== "feature-not-avail") {
+  if (isBrowser && template !== 'feature-not-avail') {
     const breadcrumbInfo = {
       parentPathsSlug: parentPaths[slug],
       queriedCrumbs: queriedCrumbs,
@@ -150,48 +133,26 @@ const DocumentBody = (props) => {
       siteBasePrefix: siteBasePrefix,
     };
 
-    sessionStorage.setItem("breadcrumbInfo", JSON.stringify(breadcrumbInfo));
-    sessionStorage.setItem("pageInfo", JSON.stringify(pageInfo));
+    sessionStorage.setItem('breadcrumbInfo', JSON.stringify(breadcrumbInfo));
+    sessionStorage.setItem('pageInfo', JSON.stringify(pageInfo));
   }
 
   const OfflineBannerComponent = useMemo(() => {
     if (!isOfflineDocsBuild) return <></>;
-    const currentBranch = repoBranches.branches.find(
-      (repoBranch) => repoBranch.gitBranchName === branch
-    );
+    const currentBranch = repoBranches.branches.find((repoBranch) => repoBranch.gitBranchName === branch);
     const currentBranchPrefix =
-      currentBranch?.urlSlug ??
-      currentBranch?.urlAliases?.[0] ??
-      currentBranch?.gitBranchName ??
-      "";
+      currentBranch?.urlSlug ?? currentBranch?.urlAliases?.[0] ?? currentBranch?.gitBranchName ?? '';
     return (
       <OfflineBanner
-        linkUrl={getCompleteUrl(
-          getUrl(
-            currentBranchPrefix,
-            project,
-            repoBranches.siteBasePrefix,
-            slug
-          )
-        )}
+        linkUrl={getCompleteUrl(getUrl(currentBranchPrefix, project, repoBranches.siteBasePrefix, slug))}
         template={template}
       />
     );
-  }, [
-    branch,
-    project,
-    repoBranches.branches,
-    repoBranches.siteBasePrefix,
-    slug,
-    template,
-  ]);
+  }, [branch, project, repoBranches.branches, repoBranches.siteBasePrefix, slug, template]);
 
   return (
     <>
-      <TabProvider
-        selectors={page?.options?.selectors}
-        defaultTabs={page?.options?.default_tabs}
-      >
+      <TabProvider selectors={page?.options?.selectors} defaultTabs={page?.options?.default_tabs}>
         <InstruqtProvider hasLabDrawer={page?.options?.instruqt}>
           <ImageContextProvider images={props.data?.pageImage?.images ?? []}>
             <FootnoteContext.Provider value={{ footnotes }}>
@@ -205,11 +166,7 @@ const DocumentBody = (props) => {
                 }}
               >
                 <div id={TEMPLATE_CONTAINER_ID}>
-                  <Template
-                    {...props}
-                    useChatbot={useChatbot}
-                    offlineBanner={OfflineBannerComponent}
-                  >
+                  <Template {...props} useChatbot={useChatbot} offlineBanner={OfflineBannerComponent}>
                     {pageNodes.map((child, index) => (
                       <ComponentFactory
                         key={index}
@@ -258,44 +215,31 @@ export const Head = ({ pageContext, data }) => {
   const pageAst = data.page?.ast;
 
   if (!pageAst) {
-    throw new Error("Gatsby Head is missing important page AST");
+    throw new Error('Gatsby Head is missing important page AST');
   }
 
-  const pageNodes = getNestedValue(["children"], pageAst) || [];
+  const pageNodes = getNestedValue(['children'], pageAst) || [];
 
-  const meta = getMetaFromDirective("section", pageNodes, "meta");
-  const twitter = getMetaFromDirective("section", pageNodes, "twitter");
+  const meta = getMetaFromDirective('section', pageNodes, 'meta');
+  const twitter = getMetaFromDirective('section', pageNodes, 'twitter');
 
   const metadata = useSnootyMetadata();
 
-  const lookup = slug === "/" ? "index" : slug;
-  const pageTitle = getPlaintext(
-    getNestedValue(["slugToTitle", lookup], metadata)
-  );
+  const lookup = slug === '/' ? 'index' : slug;
+  const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata));
   const siteTitle = getSiteTitle(metadata);
 
-  const isDocsLandingHomepage =
-    metadata.project === "landing" && template === "landing" && slug === "/";
-  const needsBreadcrumbs = template === "document" || template === undefined;
+  const isDocsLandingHomepage = metadata.project === 'landing' && template === 'landing' && slug === '/';
+  const needsBreadcrumbs = template === 'document' || template === undefined;
 
   // Retrieves the canonical URL based on certain situations
   // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
   const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
-  const noIndexing = repoBranches.branches.find(
-    (br) => br.gitBranchName === metadata.branch
-  )?.noIndexing;
+  const noIndexing = repoBranches.branches.find((br) => br.gitBranchName === metadata.branch)?.noIndexing;
 
   // construct Structured Data
   const techArticleSd = useMemo(() => {
-    if (
-      [
-        "product-landing",
-        "landing",
-        "search",
-        "errorpage",
-        "drivers-index",
-      ].includes(template)
-    ) {
+    if (['product-landing', 'landing', 'search', 'errorpage', 'drivers-index'].includes(template)) {
       return;
     }
     const techArticle = constructTechArticle({
@@ -311,21 +255,16 @@ export const Head = ({ pageContext, data }) => {
         canonical={canonical}
         pageTitle={pageTitle}
         siteTitle={siteTitle}
-        showDocsLandingTitle={isDocsLandingHomepage && slug === "/"}
+        showDocsLandingTitle={isDocsLandingHomepage && slug === '/'}
         slug={slug}
         noIndexing={noIndexing}
       />
-      {meta.length > 0 &&
-        meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
+      {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
       {techArticleSd && (
-        <script
-          className={STRUCTURED_DATA_CLASSNAME}
-          id={"tech-article-sd"}
-          type="application/ld+json"
-        >
+        <script className={STRUCTURED_DATA_CLASSNAME} id={'tech-article-sd'} type="application/ld+json">
           {techArticleSd.toString()}
         </script>
       )}
@@ -343,11 +282,7 @@ export const query = graphql`
       slug
       images {
         childImageSharp {
-          gatsbyImageData(
-            layout: CONSTRAINED
-            formats: [WEBP]
-            placeholder: NONE
-          )
+          gatsbyImageData(layout: CONSTRAINED, formats: [WEBP], placeholder: NONE)
         }
         relativePath
       }

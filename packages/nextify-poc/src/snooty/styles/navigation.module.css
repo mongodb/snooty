@@ -1,7 +1,0 @@
-.leftColumn.postRender {
-    display: flex !important;
-}
-
-.showNav.postRender {
-    display: block !important;
-}

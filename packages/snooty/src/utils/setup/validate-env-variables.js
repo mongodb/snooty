@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from 'fs';
 
 // env variables for building site along with use in front-end
 // https://www.gatsbyjs.org/docs/environment-variables/#defining-environment-variables
@@ -6,9 +6,7 @@ export const validateEnvVariables = (manifestMetadata) => {
   // only require env vars when no manifest path is specified
   if (
     !process.env.GATSBY_MANIFEST_PATH &&
-    (!process.env.GATSBY_SITE ||
-      !process.env.GATSBY_PARSER_USER ||
-      !process.env.GATSBY_PARSER_BRANCH)
+    (!process.env.GATSBY_SITE || !process.env.GATSBY_PARSER_USER || !process.env.GATSBY_PARSER_BRANCH)
   ) {
     return {
       error: true,
@@ -25,9 +23,9 @@ export const validateEnvVariables = (manifestMetadata) => {
 
 // set env vars accordingly if none are provided
 const validateManifestEnvVars = (manifestMetadata) => {
-  let envVars = "";
-  const site = `\nGATSBY_SITE=${manifestMetadata["project"]}`;
-  const branch = `\nGATSBY_PARSER_BRANCH=${manifestMetadata["branch"]}`;
+  let envVars = '';
+  const site = `\nGATSBY_SITE=${manifestMetadata['project']}`;
+  const branch = `\nGATSBY_PARSER_BRANCH=${manifestMetadata['branch']}`;
 
   if (!process.env.GATSBY_SITE) {
     envVars += site;
@@ -38,7 +36,7 @@ const validateManifestEnvVars = (manifestMetadata) => {
 
   // write to .env files with updated env vars
   try {
-    [".env.production", ".env.development"].forEach((file) => {
+    ['.env.production', '.env.development'].forEach((file) => {
       fs.appendFile(file, envVars, function (err) {
         if (err) {
           console.error(err);
@@ -53,19 +51,13 @@ const validateManifestEnvVars = (manifestMetadata) => {
 
   // if env variables are present, check that they are set to the correct values. Otherwise, override them.
   let incorrectEnvVars = [];
-  let correctEnvVars = "";
-  if (
-    process.env.GATSBY_SITE &&
-    process.env.GATSBY_SITE !== manifestMetadata["project"]
-  ) {
-    incorrectEnvVars.push("GATSBY_SITE");
+  let correctEnvVars = '';
+  if (process.env.GATSBY_SITE && process.env.GATSBY_SITE !== manifestMetadata['project']) {
+    incorrectEnvVars.push('GATSBY_SITE');
     correctEnvVars += site;
   }
-  if (
-    process.env.GATSBY_PARSER_BRANCH &&
-    process.env.GATSBY_PARSER_BRANCH !== manifestMetadata["branch"]
-  ) {
-    incorrectEnvVars.push("GATSBY_PARSER_BRANCH");
+  if (process.env.GATSBY_PARSER_BRANCH && process.env.GATSBY_PARSER_BRANCH !== manifestMetadata['branch']) {
+    incorrectEnvVars.push('GATSBY_PARSER_BRANCH');
     correctEnvVars += branch;
   }
   if (incorrectEnvVars.length > 0) {
@@ -75,14 +67,14 @@ const validateManifestEnvVars = (manifestMetadata) => {
 
 const replaceIncorrectEnvVars = (incorrectEnvVars, envVars) => {
   try {
-    [".env.production", ".env.development"].forEach((file) => {
-      fs.readFile(file, "utf8", (err, data) => {
+    ['.env.production', '.env.development'].forEach((file) => {
+      fs.readFile(file, 'utf8', (err, data) => {
         if (err) {
           console.error(err);
           throw err;
         }
 
-        const dataArray = data.split("\n");
+        const dataArray = data.split('\n');
 
         // remove incorrect variables from .env files
         for (const dataEntry in dataArray) {
@@ -94,7 +86,7 @@ const replaceIncorrectEnvVars = (incorrectEnvVars, envVars) => {
         }
 
         // write to .env files with updated env vars
-        fs.writeFile(file, dataArray.join("\n").concat(envVars), (err) => {
+        fs.writeFile(file, dataArray.join('\n').concat(envVars), (err) => {
           if (err) {
             console.error(err);
             throw err;

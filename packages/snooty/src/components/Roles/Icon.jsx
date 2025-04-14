@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withPrefix } from "../../../gatsby-shim";
-import Badge from "@leafygreen-ui/badge";
-import { css } from "@emotion/react";
-import Icon from "@leafygreen-ui/icon";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withPrefix } from '../../gatsby-shim';
+import Badge from '@leafygreen-ui/badge';
+import { css } from '@emotion/react';
+import Icon from '@leafygreen-ui/icon';
 
 const cloudSyncStyle = css`
   padding-right: 7px;
@@ -21,28 +21,24 @@ const leafyGreenIconStyle = css`
 `;
 
 const RoleIcon = ({ nodeData: { target, name } }) => {
-  if (target === "sync-pill") {
+  if (target === 'sync-pill') {
     return (
       <Badge variant="lightgray" css={syncPillStyle}>
-        <img
-          src={withPrefix("assets/cloud.png")}
-          alt="Sync"
-          css={cloudSyncStyle}
-        />
+        <img src={withPrefix('assets/cloud.png')} alt="Sync" css={cloudSyncStyle} />
         APP SERVICES
       </Badge>
     );
-  } else if ((name === "icon") | (name === "icon-fa5")) {
+  } else if ((name === 'icon') | (name === 'icon-fa5')) {
     return <i className={`fa-${target} fas`}></i>;
-  } else if (name === "icon-fa5-brands") {
+  } else if (name === 'icon-fa5-brands') {
     return <i className={`fab fa-${target}`}></i>;
-  } else if (name === "icon-fa4") {
+  } else if (name === 'icon-fa4') {
     return <i className={`fa4-${target} fa4`}></i>;
-  } else if (name === "icon-charts") {
+  } else if (name === 'icon-charts') {
     return <i className={`charts-icon-${target} charts-icon`}></i>;
-  } else if (name === "icon-mms") {
+  } else if (name === 'icon-mms') {
     return <i className={`mms-icon-${target} mms-icon`}></i>;
-  } else if (name === "icon-lg") {
+  } else if (name === 'icon-lg') {
     return <Icon glyph={target} css={leafyGreenIconStyle} />;
   }
 };

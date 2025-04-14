@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useLocation } from "../../gatsby-shim";
+import { useEffect } from 'react';
+import { useLocation } from '../gatsby-shim';
 
 // Hook that scrolls the current ref element into view
 // if it is the same as the current location's hash.

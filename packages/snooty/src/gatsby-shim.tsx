@@ -1,14 +1,11 @@
-"use client";
 import type {
   ElementType,
   ImgHTMLAttributes,
   CSSProperties,
   ReactEventHandler,
-  FC,
-  ReactNode,
 } from "react";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useLocation = (): Location => {
   const [location, setLocation] = useState<Location | undefined>(undefined);

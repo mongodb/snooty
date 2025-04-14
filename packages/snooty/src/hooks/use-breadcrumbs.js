@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from "../../gatsby-shim";
+import { useStaticQuery, graphql } from '../gatsby-shim';
 
 // Return an array containing the project property's Url and any intermediate breadcrumbs
 export const useBreadcrumbs = () => {

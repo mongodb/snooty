@@ -1,11 +1,11 @@
-const AdmZip = require('adm-zip');
-const BSON = require('bson');
-const fs = require('fs');
-const { promisify } = require('util');
-const { initRealm } = require('../utils/setup/init-realm');
-const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } = require('../build-constants');
-const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
-const { constructBuildFilter } = require('../utils/setup/construct-build-filter');
+import AdmZip from 'adm-zip';
+import BSON from 'bson';
+import fs from 'fs';
+import { promisify } from 'util';
+import { initRealm } from '../utils/setup/init-realm';
+import { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } from '../build-constants';
+import { manifestMetadata, siteMetadata } from '../utils/site-metadata';
+import { constructBuildFilter } from '../utils/setup/construct-build-filter';
 
 const DB = siteMetadata.database;
 const buildFilter = constructBuildFilter(siteMetadata);

@@ -1,9 +1,0 @@
-.sidebar {
-  display: block;
-}
-.sphinxsidebar {
-  display: block !important;
-  overflow-y: auto !important;
-  height: calc(100vh - 45px);
-  position: sticky !important;
-}

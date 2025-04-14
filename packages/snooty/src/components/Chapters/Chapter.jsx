@@ -1,15 +1,15 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
-import { withPrefix } from "../../../gatsby-shim";
-import styled from "@emotion/styled";
-import Card from "@leafygreen-ui/card";
-import { css, cx } from "@leafygreen-ui/emotion";
-import { palette } from "@leafygreen-ui/palette";
-import { Body } from "@leafygreen-ui/typography";
-import { theme } from "../../theme/docsTheme";
-import Link from "../Link";
-import { getPlaintext } from "../../utils/get-plaintext";
-import ChapterNumberLabel from "./ChapterNumberLabel";
+import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { withPrefix } from '../../gatsby-shim';
+import styled from '@emotion/styled';
+import Card from '@leafygreen-ui/card';
+import { css, cx } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
+import { Body } from '@leafygreen-ui/typography';
+import { theme } from '../../theme/docsTheme';
+import Link from '../Link';
+import { getPlaintext } from '../../utils/get-plaintext';
+import ChapterNumberLabel from './ChapterNumberLabel';
 
 // Height and width of image
 const IMAGE_SIZE = 200;
@@ -27,8 +27,8 @@ const cardStyling = css`
   @media ${theme.screenSize.mediumAndUp} {
     display: grid;
     grid-template-areas:
-      "description image"
-      "guides guides";
+      'description image'
+      'guides guides';
     padding: 48px 40px;
     grid-column-gap: ${theme.size.large};
   }
@@ -38,16 +38,16 @@ const cardStyling = css`
     scroll-margin-top: 180px;
   }
 
-  @media ${theme.screenSize["2XLargeAndUp"]} {
+  @media ${theme.screenSize['2XLargeAndUp']} {
     grid-column-gap: 50px;
   }
 
-  @media ${theme.screenSize["3XLargeAndUp"]} {
+  @media ${theme.screenSize['3XLargeAndUp']} {
     grid-column-gap: 108px;
   }
 `;
 
-const ChapterImage = styled("img")`
+const ChapterImage = styled('img')`
   display: block;
   margin: 0 auto ${theme.size.medium} auto;
   height: auto;
@@ -60,7 +60,7 @@ const ChapterImage = styled("img")`
 `;
 
 // Reserves enough space for chapters without images, while keeping existing images for chapters responsive
-const EmptyImage = styled("div")`
+const EmptyImage = styled('div')`
   height: auto;
   width: ${IMAGE_SIZE}px;
 
@@ -69,7 +69,7 @@ const EmptyImage = styled("div")`
   }
 `;
 
-const DescriptionContainer = styled("div")`
+const DescriptionContainer = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,7 +79,7 @@ const DescriptionContainer = styled("div")`
   }
 `;
 
-const ChapterTitle = styled("div")`
+const ChapterTitle = styled('div')`
   font-size: 18px;
   font-weight: 500;
   margin-top: ${theme.size.small};
@@ -95,11 +95,11 @@ const decriptionStyling = css`
   }
 `;
 
-const GuidesList = styled("ul")`
+const GuidesList = styled('ul')`
   list-style-type: none;
-  list-style-image: url(${withPrefix("assets/lightning-bolt.svg")});
+  list-style-image: url(${withPrefix('assets/lightning-bolt.svg')});
   .dark-theme & {
-    list-style-image: url(${withPrefix("assets/lightning-bolt-dark.svg")});
+    list-style-image: url(${withPrefix('assets/lightning-bolt-dark.svg')});
   }
   margin-bottom: 0;
   margin-top: ${theme.size.medium};
@@ -168,10 +168,7 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
   const chapterTitle = getPlaintext(argument);
   const currentChapter = metadata?.chapters?.[chapterTitle];
   const chapterNumber = currentChapter?.chapter_number;
-  const guides = useMemo(
-    () => getGuidesData(metadata, currentChapter),
-    [metadata, currentChapter]
-  );
+  const guides = useMemo(() => getGuidesData(metadata, currentChapter), [metadata, currentChapter]);
 
   return (
     // TODO: have to return specific typography here. card is explicit size 13 font
@@ -194,7 +191,7 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
       </DescriptionContainer>
       <GuidesList>
         {guides.map((guide, i) => {
-          const time = guide.time ? `${guide.time} mins` : "";
+          const time = guide.time ? `${guide.time} mins` : '';
           const guideTitle = getPlaintext(guide.title);
 
           return (

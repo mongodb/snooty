@@ -1,5 +1,5 @@
-const Realm = require("realm-web");
-const { SNOOTY_REALM_APP_ID } = require("../../build-constants");
+import Realm from 'realm-web';
+import { SNOOTY_REALM_APP_ID } from '../../build-constants';
 
 export const initRealm = async () => {
   // Returns an instance of an app.

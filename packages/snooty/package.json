@@ -3,9 +3,6 @@
   "version": "0.19.7",
   "repository": "github:mongodb/snooty",
   "type": "module",
-  "exports": {
-    "./components": "./build/src/components/index.js"
-  },
   "engines": {
     "node": "^18",
     "npm": "9.*"

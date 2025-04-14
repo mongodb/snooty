@@ -1,4 +1,4 @@
-const { hideChanges, hideDiffChanges } = require('../../src/components/OpenAPIChangelog/utils/filterHiddenChanges');
+import { hideChanges, hideDiffChanges } from '../../src/components/OpenAPIChangelog/utils/filterHiddenChanges';
 
 const fetchChangelogMetadata = async (branch) => {
   const metadataResp = await fetch(

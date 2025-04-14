@@ -1,14 +1,14 @@
-import React from "react";
-import { palette } from "@leafygreen-ui/palette";
-import { withPrefix } from "../../gatsby-shim";
-import { css, cx } from "@leafygreen-ui/emotion";
-import styled from "@emotion/styled";
-import Button from "@leafygreen-ui/button";
-import { H2 } from "@leafygreen-ui/typography";
-import { theme } from "../theme/docsTheme";
-import Breadcrumbs from "../components/Breadcrumbs";
-import { isBrowser } from "../utils/is-browser";
-import { getCompleteUrl, getUrl } from "../utils/url-utils";
+import React from 'react';
+import { palette } from '@leafygreen-ui/palette';
+import { withPrefix } from '../gatsby-shim';
+import { css, cx } from '@leafygreen-ui/emotion';
+import styled from '@emotion/styled';
+import Button from '@leafygreen-ui/button';
+import { H2 } from '@leafygreen-ui/typography';
+import { theme } from '../theme/docsTheme';
+import Breadcrumbs from '../components/Breadcrumbs';
+import { isBrowser } from '../utils/is-browser';
+import { getCompleteUrl, getUrl } from '../utils/url-utils';
 
 const StyledMain = styled.main`
   max-width: 100vw;
@@ -46,8 +46,8 @@ const ImageContainer = styled.div`
 `;
 
 const FeatureNotAvailImage = () => {
-  const altText = "Feature not available";
-  const imgPath = "assets/feature-not-avail.svg";
+  const altText = 'Feature not available';
+  const imgPath = 'assets/feature-not-avail.svg';
 
   return (
     <ImageContainer>
@@ -97,18 +97,16 @@ const FeatureNotAvailable = () => {
     pageInfo = null;
 
   if (isBrowser) {
-    breadcrumbInfo = JSON.parse(sessionStorage.getItem("breadcrumbInfo"));
+    breadcrumbInfo = JSON.parse(sessionStorage.getItem('breadcrumbInfo'));
     selfBreadcrumb = {
       title: breadcrumbInfo?.pageTitle,
       slug: breadcrumbInfo?.slug,
     };
-    pageInfo = JSON.parse(sessionStorage.getItem("pageInfo"));
+    pageInfo = JSON.parse(sessionStorage.getItem('pageInfo'));
   }
 
   const { urlSlug, project, siteBasePrefix } = pageInfo || {};
-  const selfCrumbPath = getCompleteUrl(
-    getUrl(urlSlug, project, siteBasePrefix, selfBreadcrumb?.slug)
-  );
+  const selfCrumbPath = getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, selfBreadcrumb?.slug));
 
   return (
     <StyledMain>
@@ -126,16 +124,9 @@ const FeatureNotAvailable = () => {
         <FeatureNotAvailContainer>
           <FeatureNotAvailImage />
           <ContentBox>
-            <H2 className={cx(titleStyling)}>
-              We're sorry, this page isn't available in the version you
-              selected.
-            </H2>
+            <H2 className={cx(titleStyling)}>We're sorry, this page isn't available in the version you selected.</H2>
             <LinkContainer>
-              <Button
-                href={withPrefix(selfCrumbPath)}
-                variant="default"
-                className={cx(buttonStyling)}
-              >
+              <Button href={withPrefix(selfCrumbPath)} variant="default" className={cx(buttonStyling)}>
                 Go back to previous page
               </Button>
             </LinkContainer>
