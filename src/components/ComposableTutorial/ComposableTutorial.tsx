@@ -83,7 +83,7 @@ function filterValidQueryParams(
 
     // if the specified default does not have content (fault in data)
     // safety to find a valid combination from children and select
-    const currentSelections = joinKeyValuesAsString({...res});
+    const currentSelections = joinKeyValuesAsString({ ...res });
     for (const [validSelection] of validSelections.entries()) {
       const validSelectionParts = validSelection.split('.');
       const selectionPartForOption = validSelectionParts.find((str) => str.includes(`${composableOption.value}=`));
