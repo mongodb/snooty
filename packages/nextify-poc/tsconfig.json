@@ -21,7 +21,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@content/*": ["./src/content/*"]
-    }
+    },
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
