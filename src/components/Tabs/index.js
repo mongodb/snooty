@@ -144,7 +144,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   useEffect(() => {
     if (initLoad.current) return;
     if (hash?.length > 1) {
-      const isOnPage = document.querySelector(hash);
+      const isOnPage = document.getElementById(hash.slice(1));
       if (isOnPage) {
         initLoad.current = true;
         return;

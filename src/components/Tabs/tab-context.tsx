@@ -128,7 +128,7 @@ const TabProvider = ({
   useEffect(() => {
     // If hash, do not set tabs (tab state will be set in use-hash-anchor.tsx)
     if (hash?.length > 1) {
-      const isOnPage = document.querySelector(hash);
+      const isOnPage = document.getElementById(hash.slice(1));
       if (isOnPage) {
         initLoaded.current = true;
         return;
