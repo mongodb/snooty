@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useLocation } from '@gatsbyjs/reach-router';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Tabs as LeafyTabs, Tab as LeafyTab } from '@leafygreen-ui/tabs';
@@ -15,6 +16,7 @@ import { getPlaintext } from '../../utils/get-plaintext';
 import { TABS_CLASSNAME } from '../../utils/head-scripts/offline-ui/tabs';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { TabContext } from './tab-context';
+import { TabHashContext, TabHashProvider } from './tab-hash-context';
 
 const TAB_BUTTON_SELECTOR = 'button[role="tab"]';
 
@@ -117,7 +119,10 @@ const offlineStyling = css`
 `;
 
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
+  const { hash } = useLocation();
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
+  const { setActiveTabToHashTab } = useContext(TabHashContext);
+
   const tabIds = children.map((child) => getTabId(child));
   const tabsetName = options.tabset || generateAnonymousTabsetName(tabIds);
   const [activeTab, setActiveTabIndex] = useState(() => {
@@ -138,6 +143,13 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   // get non-TabSelector tabs in localstorage
   useEffect(() => {
     if (initLoad.current) return;
+    if (hash?.length > 1) {
+      const isOnPage = document.getElementById(hash.slice(1));
+      if (isOnPage) {
+        initLoad.current = true;
+        return;
+      }
+    }
     initLoad.current = true;
 
     const localTabs = getLocalValue('activeTabs');
@@ -145,7 +157,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
     activeTabIdx = activeTabIdx > -1 ? activeTabIdx : 0;
     setActiveTabIndex(activeTabIdx);
     setActiveTab({ [tabsetName]: tabIds[activeTabIdx] });
-  }, [setActiveTab, tabIds, tabsetName]);
+  }, [setActiveTab, tabIds, tabsetName, hash]);
 
   useEffect(() => {
     const index = tabIds.indexOf(activeTabs[tabsetName]);
@@ -175,6 +187,12 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
     },
     [activeTab, setActiveTab, tabIds, tabsetName]
   );
+
+  const switchToParentTab = () => {
+    if (setActiveTabToHashTab) {
+      setActiveTabToHashTab();
+    }
+  };
 
   // TODO: if this is a drivers tabs set, include drivers in classname
 
@@ -210,14 +228,16 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 <HeadingContextProvider
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
                 >
-                  <div
-                    data-tabid={isOfflineDocsBuild ? tabId : undefined}
-                    className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}
-                  >
-                    {tab.children.map((child, i) => (
-                      <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
-                    ))}
-                  </div>
+                  <TabHashProvider tabName={tabsetName} tabId={tabId} switchToParentTab={switchToParentTab}>
+                    <div
+                      data-tabid={isOfflineDocsBuild ? tabId : undefined}
+                      className={cx(tabContentStyling, isProductLanding ? productLandingTabContentStyling : '')}
+                    >
+                      {tab.children.map((child, i) => (
+                        <ComponentFactory {...rest} key={`${tabId}-${i}`} nodeData={child} />
+                      ))}
+                    </div>
+                  </TabHashProvider>
                 </HeadingContextProvider>
               </LeafyTab>
             );
