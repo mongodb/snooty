@@ -43,7 +43,7 @@ const expectFilteredResults = (wrapper) => {
   // Check the result does link to the provided doc
   expect(wrapper.queryAllByText(/stitch/)[1].closest('a')).toHaveProperty(
     'href',
-    `http://localhost/${FILTERED_RESULT.url}`
+    `http://localhost/${FILTERED_RESULT.url}/`
   );
 
   // Check the dropdowns are filled in
@@ -77,7 +77,7 @@ const expectUnfilteredResults = (wrapper) => {
   // Check the result does link to the provided doc
   expect(wrapper.queryAllByText(/stitch/)[1].closest('a')).toHaveProperty(
     'href',
-    `http://localhost/${UNFILTERED_RESULT.url}`
+    `http://localhost/${UNFILTERED_RESULT.url}/`
   );
 
   // Check the dropdowns are not filled in
