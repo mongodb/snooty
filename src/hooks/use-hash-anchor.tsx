@@ -29,7 +29,7 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
       // If within tab, force correct tabs to be open
       setActiveTabToHashTab();
     } else {
-      // Otherwise, ensure default and localstorage-found tabs are selected
+      // Otherwise, ensure default and local storage-found tabs are selected
       setInitialTabs();
     }
 
