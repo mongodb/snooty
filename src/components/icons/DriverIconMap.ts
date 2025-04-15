@@ -18,7 +18,10 @@ import IconJavascript from './Javascript';
 import IconTypescript from './Typescript';
 import IconDart from './Dart';
 
-export const DRIVER_ICON_MAP = {
+export type IconComponent = (styles: Record<string, any>) => React.JSX.Element;
+export type DriverMap = Record<string, IconComponent>;
+
+export const DRIVER_ICON_MAP: DriverMap = {
   c: IconC,
   compass: IconCompass,
   cpp: IconCpp,
