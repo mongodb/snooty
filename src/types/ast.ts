@@ -213,18 +213,18 @@ interface ComposableTutorialNode extends Directive<{ 'composable-options': Compo
   type: 'directive';
   name: 'composable-tutorials';
   children: ComposableNode[];
-  'composable-options': ComposableTutorialOption[];
+  'composable_options': ComposableTutorialOption[];
 }
 
 interface ComposableNodeOption {
-  selections: { value: string; text: string }[];
+  selections: Record<string, string>;
 }
 
 interface ComposableNode extends Directive<ComposableNodeOption> {
   type: 'directive';
-  name: 'composable';
+  name: 'selected-content';
+  selections: Record<string, string>;
   children: Directive[];
-  options: ComposableNodeOption;
 }
 
 export type {

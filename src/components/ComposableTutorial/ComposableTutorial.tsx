@@ -23,7 +23,7 @@ export function joinKeyValuesAsString(targetObj: { [key: string]: string }) {
 
 function filterValidQueryParams(
   parsedQuery: ParsedQuery<string>,
-  composableOptions: ComposableTutorialNode['composable-options'],
+  composableOptions: ComposableTutorialNode['composable_options'],
   validSelections: Set<string>,
   fallbackToDefaults = false
 ) {
@@ -98,7 +98,7 @@ function filterValidQueryParams(
 
 function fulfilledSelections(
   filteredParams: Record<string, string>,
-  composableOptions: ComposableTutorialNode['composable-options']
+  composableOptions: ComposableTutorialNode['composable_options']
 ) {
   // every composable option should either
   // have its value as a key in selections
@@ -112,14 +112,16 @@ function fulfilledSelections(
   });
 }
 
-export function getSelectionPermutation(selections: Record<string, string>[]): Set<string> {
+export function getSelectionPermutation(selections: Record<string, string>): Set<string> {
   const res: Set<string> = new Set();
   let partialRes: string[] = [];
-  for (const selection of selections) {
-    for (const [key, value] of Object.entries(selection)) {
-      partialRes.push(`${key}=${value}`);
-      res.add(partialRes.sort().join('.'));
+  for (const key of Object.keys(selections)) {
+    const value = selections[key];
+    if (!value || value.toLowerCase() === 'none') {
+      continue;
     }
+    partialRes.push(`${key}=${value}`);
+    res.add(partialRes.sort().join('.'));
   }
   return res;
 }
@@ -143,7 +145,7 @@ const ComposableContainer = styled.div`
 `;
 
 const ComposableTutorial = ({
-  nodeData: { 'composable-options': composableOptions, children },
+  nodeData: { composable_options: composableOptions, children },
   ...rest
 }: ComposableProps) => {
   const [currentSelections, setCurrentSelections] = useState<Record<string, string>>(() => ({}));
@@ -152,7 +154,7 @@ const ComposableTutorial = ({
   const validSelections = useMemo(() => {
     let res: Set<string> = new Set();
     for (const composableNode of children) {
-      const newSet = getSelectionPermutation(composableNode.options.selections);
+      const newSet = getSelectionPermutation(composableNode.selections);
       for (const elm of newSet) {
         res.add(elm);
       }
@@ -187,12 +189,10 @@ const ComposableTutorial = ({
   }, [composableOptions, location.pathname, location.search, validSelections]);
 
   const showComposable = useCallback(
-    (dependencies: { [key: string]: string }[]) =>
-      dependencies.every((d) => {
-        const key = Object.keys(d)[0];
-        const value = Object.values(d)[0];
-        return currentSelections[key] === value;
-      }),
+    (dependencies: Record<string, string>[]) =>
+      dependencies.every((d) =>
+        Object.keys(d).every((key) => d[key]?.toLowerCase() === 'none' || currentSelections[key] === d[key])
+      ),
     [currentSelections]
   );
 
@@ -246,8 +246,8 @@ const ComposableTutorial = ({
         ))}
       </ComposableContainer>
       {children.map((c, i) => {
-        if (showComposable(c.options.selections)) {
-          return <Composable nodeData={c as ComposableNode} key={i} />;
+        if (showComposable([c.selections])) {
+          return <Composable nodeData={c as ComposableNode} key={i} {...rest} />;
         }
         return null;
       })}

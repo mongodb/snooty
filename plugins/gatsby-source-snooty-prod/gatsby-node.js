@@ -21,8 +21,6 @@ const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
-const TEST_PAGE_AST = require('../../tests/unit/data/Composable.test.json');
-const TEST_SLUG = 'composable-tutorial';
 
 const assets = new Map();
 const projectComponents = new Set();
@@ -191,19 +189,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
-  // TESTING PAGE WITH AST
-  createNode({
-    id: TEST_SLUG,
-    page_id: TEST_SLUG,
-    ast: TEST_PAGE_AST.ast,
-    facets: [],
-    internal: {
-      type: 'Page',
-      contentDigest: createContentDigest(TEST_PAGE_AST),
-    },
-    componentNames: projectComponents,
-  });
-
   await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
@@ -360,21 +345,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           template: pageNodes?.options?.template,
         },
       });
-    });
-
-    // TESTING DOP-5476
-    // TODO: remove before merge
-    createPage({
-      path: assertTrailingSlash(TEST_SLUG),
-      component: path.resolve(__dirname, `../../src/components/DocumentBody.js`),
-      context: {
-        page_id: TEST_SLUG,
-        slug: TEST_SLUG,
-        repoBranches,
-        options: {
-          consumables: true,
-        },
-      },
     });
 
     resolve();
