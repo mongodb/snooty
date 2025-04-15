@@ -56,10 +56,6 @@ const labButtonStyling = css`
 
 const contentsStyle = css`
   margin-top: ${theme.size.medium};
-
-  @media ${theme.screenSize.largeAndUp} {
-    display: none;
-  }
 `;
 
 const determineHeading = (sectionDepth) => {
@@ -87,6 +83,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const { page, tabsMainColumn } = usePageContext();
   const hasMethodSelector = page?.options?.['has_method_selector'];
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
+  const showRating = !(rest?.page?.options?.template === 'product-landing');
 
   return (
     <>
@@ -134,10 +131,10 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
           </HeadingTag>
         </ConditionalWrapper>
       </ConditionalWrapper>
-      {isPageTitle && (
+      {isPageTitle && isTabletOrMobile && showRating && (
         <>
           <TimeRequired />
-          <Contents className={contentsStyle} />
+          <Contents className={contentsStyle} slug={rest.slug} />
         </>
       )}
     </>

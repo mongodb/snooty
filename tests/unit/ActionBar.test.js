@@ -3,7 +3,6 @@ import { render, act } from '@testing-library/react';
 import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import ActionBar from '../../src/components/ActionBar/ActionBar';
-import { FEEDBACK_BUTTON_TEXT } from '../../src/components/Widgets/FeedbackWidget/constants';
 import { PLACEHOLDER_TEXT } from '../../src/components/ActionBar/SearchInput';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
@@ -68,7 +67,6 @@ describe('ActionBar', () => {
       expect(wrapper.getByRole('search')).toBeTruthy();
       expect(wrapper.getByPlaceholderText(PLACEHOLDER_TEXT)).toBeTruthy();
       expect(wrapper.getByLabelText('Dark Mode Menu')).toBeTruthy();
-      expect(wrapper.getByText(FEEDBACK_BUTTON_TEXT)).toBeTruthy();
     });
   });
 });

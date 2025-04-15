@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
-import { css, cx } from '@leafygreen-ui/emotion';
-import { Body } from '@leafygreen-ui/typography';
+import { css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { useFeedbackContext } from '../context';
 import useScreenSize from '../../../../hooks/useScreenSize';
@@ -34,8 +33,7 @@ const starIconStyle = (isHighlighted) => css`
 const Layout = styled.div`
   display: flex;
   gap: ${theme.size.small};
-  justify-content: center;
-  margin: ${theme.size.default} 0 10px;
+  margin: 10px 0 ${theme.size.default};
 
   @media ${theme.screenSize.upToLarge} {
     gap: 12px;
@@ -44,21 +42,6 @@ const Layout = styled.div`
 
 const StarContainer = styled.div`
   cursor: pointer;
-`;
-
-const captionStyling = css`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 0 ${theme.size.default};
-  color: var(--tab-color-primary);
-  column-gap: ${theme.size.medium};
-  margin-left: ${theme.size.small};
-`;
-
-const StyledArrow = styled.span`
-  line-height: ${theme.fontSize.tiny};
-  font-size: ${theme.fontSize.h2};
 `;
 
 export const StarRatingLabel = styled.div`
@@ -90,7 +73,7 @@ const Star = ({ isHighlighted, onClick, onMouseEnter, onMouseLeave, onFocus, onK
   );
 };
 
-const StarRating = ({ className, handleRatingSelection = () => {}, editable = true, showCaption = true }) => {
+const StarRating = ({ className, handleRatingSelection = () => {}, editable = true }) => {
   const [hoveredRating, setHoveredRating] = useState(null);
   const [lastHoveredRating, setLastHoveredRating] = useState(null);
   const { selectedRating } = useFeedbackContext();
@@ -136,13 +119,6 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
           return <Star key={ratingValue} isHighlighted={isHighlighted} {...eventProps} />;
         })}
       </Layout>
-      {showCaption && (
-        <Body baseFontSize={13} className={cx(captionStyling)}>
-          Poor
-          <StyledArrow>&#10230;</StyledArrow>
-          Excellent
-        </Body>
-      )}
     </>
   );
 };
