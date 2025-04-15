@@ -13,6 +13,7 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
   if (isOfflineDocsBuild) {
     return setHeadComponents([...OFFLINE_HEAD_SCRIPTS]);
   }
+
   const headComponents = [
     // GTM Pathway
     <script
@@ -20,15 +21,6 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `!function(e,n){var t=document.createElement("script"),o=null,x="pathway";t.async=!0,t.src='https://'+x+'.mongodb.com/'+(e?x+'-debug.js':''),document.head.append(t),t.addEventListener("load",function(){o=window.pathway.default,(n&&o.configure(n)),o.createProfile("mongodbcom").load(),window.segment=o})}();`,
-      }}
-    />,
-    // Client-side redirect based on browser's language settings
-    <script
-      key="browser-lang-redirect"
-      type="text/javascript"
-      dangerouslySetInnerHTML={{
-        // Call function immediately on load
-        __html: `!${redirectBasedOnLang}()`,
       }}
     />,
     <link
@@ -57,6 +49,7 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
       rel="stylesheet"
     ></link>,
   ];
+
   if (process.env['GATSBY_ENABLE_DARK_MODE'] === 'true') {
     // Detect dark mode
     // before document body
@@ -90,6 +83,22 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
       />
     );
   }
+
+  // We want to exclude writers' staging (aka "production", aka "prd")
+  if (process.env.SNOOTY_ENV !== 'production') {
+    // Client-side redirect based on browser's language settings.
+    headComponents.push(
+      <script
+        key="browser-lang-redirect"
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          // Call function immediately on load
+          __html: `!${redirectBasedOnLang}()`,
+        }}
+      />
+    );
+  }
+
   setHtmlAttributes({
     // Help work with translated content locally; Smartling should handle rewriting the lang
     lang: process.env.GATSBY_LOCALE ? getHtmlLangFormat(process.env.GATSBY_LOCALE) : 'en',

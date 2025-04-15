@@ -2003,7 +2003,7 @@ exports[`Search Results Page considers a given search filter query param and dis
     >
       <a
         class="emotion-21 emotion-22 emotion-23"
-        href="stitch.withfilters"
+        href="stitch.withfilters/"
       >
         <div
           class="emotion-24 emotion-25"
@@ -8298,7 +8298,7 @@ exports[`Search Results Page renders results from a given search term query para
     >
       <a
         class="emotion-16 emotion-17 emotion-18"
-        href="stitch.nofilters"
+        href="stitch.nofilters/"
       >
         <div
           class="emotion-19 emotion-20"

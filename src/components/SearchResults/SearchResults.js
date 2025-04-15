@@ -11,6 +11,7 @@ import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToMetaURL, searchParamsToURL } from '../../utils/search-params-to-url';
 import { requestHeaders } from '../../utils/search-facet-constants';
@@ -409,7 +410,8 @@ const SearchResults = () => {
     // fetch search results
     fetchSearchResults()
       .then((searchRes) => {
-        setSearchResults(searchRes || []);
+        const results = (searchRes || []).map((result) => ({ ...result, url: assertTrailingSlash(result.url) }));
+        setSearchResults(results);
       })
       .catch((e) => {
         console.error(`Error fetching search results: ${JSON.stringify(e)}`);
