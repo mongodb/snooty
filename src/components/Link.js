@@ -125,6 +125,8 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
+    console.log(' the prefixes are', pathPrefix, prefix);
+
     if (pathPrefix.replaceAll('/', '') === prefix.replaceAll('/', '')) {
       return (
         <GatsbyLink
@@ -151,7 +153,7 @@ const Link = ({
   }
 
   // Use Gatsby Link for internal links, and <a> for others
-  if (to && isRelativeUrl(to) && !anchor && pathPrefix === prefix) {
+  if (to && isRelativeUrl(to) && !anchor) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash

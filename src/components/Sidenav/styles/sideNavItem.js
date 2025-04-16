@@ -42,6 +42,8 @@ export const sideNavGroupTOCStyling = () => css`
   align-items: flex-start !important;
   text-transform: none;
   line-height: 20px !important;
+  color: black !important;
+  text-transform: none !important;
 
   // overwrite LG link underlines
   // @leafygreen-ui/typography v13.0.0
