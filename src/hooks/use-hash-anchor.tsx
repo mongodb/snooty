@@ -12,7 +12,7 @@ import { TabContext } from '../components/Tabs/tab-context';
 const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
   const { hash } = useLocation();
   const { setActiveTabToHashTab } = useContext(TabHashContext);
-  const { selectors, setInitialTabs } = useContext(TabContext);
+  const { selectors, setInitialTabs, setLanguageSelectorTab } = useContext(TabContext);
   const [initialLoad, setInitialLoad] = useState<boolean>(true);
   const [hasScrolled, setHasScrolled] = useState(false);
 
@@ -27,6 +27,7 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
 
     if (setActiveTabToHashTab) {
       // If within tab, force correct tabs to be open
+      setLanguageSelectorTab();
       setActiveTabToHashTab();
     } else {
       // Otherwise, ensure default and local storage-found tabs are selected

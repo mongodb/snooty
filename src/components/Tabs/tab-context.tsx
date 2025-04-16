@@ -28,6 +28,7 @@ interface TabContextState {
   selectors: Selectors;
   setActiveTab: (activeTab: ActiveTabs) => void;
   setInitialTabs: () => void;
+  setLanguageSelectorTab: () => void;
 }
 
 const defaultContextValue: TabContextState = {
@@ -35,6 +36,7 @@ const defaultContextValue: TabContextState = {
   selectors: {},
   setActiveTab: (activeTab: ActiveTabs) => {},
   setInitialTabs: () => {},
+  setLanguageSelectorTab: () => {},
 };
 
 const TabContext = React.createContext(defaultContextValue);
@@ -114,6 +116,13 @@ const TabProvider = ({
     setActiveTab(initialTabs);
   };
 
+  const setLanguageSelectorTab = () => {
+    const initialTabs = getInitialTabs(selectors, defaultTabs);
+    if ('drivers' in initialTabs) {
+      setActiveTab({ drivers: initialTabs.drivers });
+    }
+  }
+
   useEffect(() => {
     // dont update local value on initial load
     if (!initLoaded.current) return;
@@ -136,11 +145,6 @@ const TabProvider = ({
       const isOnPage = document.getElementById(hash.slice(1));
       if (isOnPage) {
         initLoaded.current = true;
-
-        const initialTabs = getInitialTabs(selectors, defaultTabs);
-        if ('drivers' in initialTabs) {
-          setActiveTab({ 'drivers': initialTabs.drivers });
-        }
         return;
       }
     }
@@ -156,6 +160,7 @@ const TabProvider = ({
         selectors,
         setActiveTab,
         setInitialTabs,
+        setLanguageSelectorTab,
       }}
     >
       {children}
