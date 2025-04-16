@@ -121,7 +121,7 @@ const TabProvider = ({
     if ('drivers' in initialTabs) {
       setActiveTab({ drivers: initialTabs.drivers });
     }
-  }
+  };
 
   useEffect(() => {
     // dont update local value on initial load
