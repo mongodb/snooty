@@ -1,0 +1,175 @@
+# static pane item
+[[toc]]
+label = "C# Quick Start"
+url = "/quick-start"
+glyph = 'Bulb'
+# prefix = '/drivers/csharp/${version}'
+prefix = '/${version}/csharp/bianca.laube/DOP-5382'
+
+
+[[toc.items]] # group 1
+label = "C# Documentation"
+group = true
+[[toc.items.items]]
+label = "Quick Reference"
+url = "/quick-reference/"
+[[toc.items.items]]
+label = "Usage Examples"
+url = "/usage-examples"
+collapsible = true
+[[toc.items.items.items]]
+label = "Find a Document"
+url = "/usage-examples/findOne/"
+[[toc.items.items.items]]
+label = "Find Multiple Documents"
+url = "/usage-examples/findMany/"
+[[toc.items.items.items]]
+label = "Insert a Document"
+url = "/usage-examples/insertOne"
+[[toc.items.items]]
+label = "What's New"
+url = "/whats-new"
+[[toc.items]] # group 2 
+label = "Fundamentals"
+group = true
+[[toc.items.items]]
+label = "Operations with Builders"
+url = "/fundamentals/builders"
+[[toc.items.items]]
+label = "Databases and Collections"
+url = "/fundamentals/database-collection"
+collapsible = true
+[[toc.items.items.items]]
+label = "Run a Database Command"
+url = "/fundamentals/databases-collections/run-command"
+[[toc.items]] # group 3
+label = "Connect to cloud"
+group = true
+prefix = '/master/cloud-docs/bianca.laube/DOP-5382'
+[[toc.items.items]]
+label = "Manage Clusters"
+url = "/manage-database-deployments"
+collapsible = true
+[[toc.items.items.items]]
+label = "Storage"
+url = "/customize-storage"
+[[toc.items.items.items]]
+label = "Auto-Scaling"
+url = "/cluster-autoscaling"
+
+
+# Static left pane item 1
+[[toc]]
+label = "Get Started"
+url = "/getting-started"
+glyph = "LightningBolt"
+prefix = '/master/cloud-docs/bianca.laube/DOP-5382'
+
+# Tab 1, First group
+[[toc.items]]
+label = "Get Started"
+group = true
+[[toc.items.items]]
+label = "Create Account"
+url = "/tutorial/create-atlas-account"
+# items = "./source/whatever/toc.toml"
+[[toc.items.items]]
+label = "Deploy a Free Cluster"
+url = "/tutorial/deploy-free-tier-cluster"
+[[toc.items.items]]
+label = "Manage Database Users"
+url = "/tutorial/manage-users"
+[[toc.items.items]]
+label = "Manage the IP Access List"
+url = "/tutorial/access-list"
+[[toc.items.items]]
+label = "Connect to the Cluster"
+url = "/tutorial/connect-to-the-cluster"
+[[toc.items.items]]
+label = "Insert and View a Document"
+url = "/tutorial/insert-and-view"
+[[toc.items.items]]
+label = "Load Sample Data"
+url = "/tutorial/load-data"
+[[toc.items.items]]
+label = "Generate Synthetic Data"
+url = "/tutorial/generate-data"
+[[toc.items.items]]
+label = "Atlas cli"
+url = "/cli/v1.32"
+
+[[toc.items]]
+label = "Docs Compass"
+prefix = "/master/compass/bianca.laube/DOP-5382"
+group = true
+[[toc.items.items]]
+label = "Overview"
+url = "/"
+[[toc.items.items]]
+label = "Import and export"
+url = "/import-export"
+
+
+# static left pane item 2
+[[toc]]
+label = "Application Development"
+url = "/create-connect-deployments"
+glyph = "Code"
+prefix = '/master/cloud-docs/bianca.laube/DOP-5382'
+
+# Tab 2, group A
+[[toc.items]]
+label = "Application Development"
+group = true
+[[toc.items.items]]
+label = "Connect to Clusters"
+url = "/connect-to-database-deployment"
+collapsible = true
+[[toc.items.items.items]]
+label = "Drivers"
+url = "/driver-connection"
+[[toc.items.items.items]]
+label = "Compass"
+url = "/compass-connection"
+[[toc.items.items.items]]
+label = "mongosh"
+url = "/mongo-shell-connection"
+[[toc.items.items.items]]
+collapsible = true
+label = "BI Connector"
+url = "/bi-connection"
+# BI Connector items
+[[toc.items.items.items.items]]
+label = "Transition to Atlas SQL"
+url = "/tutorial/transition-bic-to-atlas-sql"
+[[toc.items.items.items.items]]
+label = "System DSN"
+url = "/tutorial/create-system-dsn"
+[[toc.items.items]]
+label = "Command Line Tools"
+url = "/command-line-tools"
+[[toc.items.items]]
+label = "VS Code"
+url = "/mongodb-for-vscode"
+
+# Tab 2, group B 
+[[toc.items]]
+label = "Security"
+group = true
+[[toc.items.items]]
+label = "Authentication"
+url = "/authentication"
+[[toc.items.items]]
+label = "Auditing"
+url = "/auditing"
+[[toc.items.items]]
+label = "Encryption"
+url = "/encryption"
+[[toc.items.items]]
+label = "Support Access"
+url = "/support-acces"
+
+
+
+# toc : [ { items: [ { label: 'blah' }], label: 'blah' }  ]
+# toc : [ { getSta: [ { label: 'blah' }], label: 'blah' }, { ApplicationDevelopment: [ { label: 'blah' }], label: 'blah' }  ]
