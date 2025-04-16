@@ -91,7 +91,7 @@ const Permalink = ({ id, description }) => {
       >
         {'copied'}
       </Tooltip>
-      <HeaderBuffer hasComposable={options.has_composable_tutorial ?? false} ref={linkRef} id={id} />
+      <HeaderBuffer hasComposable={options?.has_composable_tutorial ?? false} ref={linkRef} id={id} />
     </a>
   );
 };
