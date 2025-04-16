@@ -28,6 +28,7 @@ interface TabContextState {
   selectors: Selectors;
   setActiveTab: (activeTab: ActiveTabs) => void;
   setInitialTabs: () => void;
+  setLanguageSelectorTab: () => void;
 }
 
 const defaultContextValue: TabContextState = {
@@ -35,6 +36,7 @@ const defaultContextValue: TabContextState = {
   selectors: {},
   setActiveTab: (activeTab: ActiveTabs) => {},
   setInitialTabs: () => {},
+  setLanguageSelectorTab: () => {},
 };
 
 const TabContext = React.createContext(defaultContextValue);
@@ -74,6 +76,25 @@ const getLocalTabs = (localTabs: ActiveTabs, selectors: Selectors) =>
     return res;
   }, {});
 
+const getInitialTabs = (selectors: Selectors, defaultTabs: ActiveTabs): Partial<ActiveTabs> => {
+  // convert selectors to tab options first here, then set init values
+  // selectors are determined at build time
+  const choicesPerSelector = Object.keys(selectors).reduce<ChoicesPerSelector>((res, selector) => {
+    res[selector] = makeChoices({
+      name: selector,
+      options: selectors[selector],
+      ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
+    });
+    return res;
+  }, {});
+  const defaultRes = getDefaultTabs(choicesPerSelector, defaultTabs);
+  // get local active tabs and set as active tabs
+  // if they exist on page.
+  // otherwise, defaults will take precedence
+  const localActiveTabs = getLocalTabs(getLocalValue('activeTabs') || {}, selectors);
+  return { ...defaultRes, ...localActiveTabs };
+};
+
 const TabProvider = ({
   children,
   selectors = {},
@@ -91,22 +112,15 @@ const TabProvider = ({
   const initLoaded = useRef(false);
 
   const setInitialTabs = () => {
-    // convert selectors to tab options first here, then set init values
-    // selectors are determined at build time
-    const choicesPerSelector = Object.keys(selectors).reduce<ChoicesPerSelector>((res, selector) => {
-      res[selector] = makeChoices({
-        name: selector,
-        options: selectors[selector],
-        ...(selector === 'drivers' && { iconMapping: DRIVER_ICON_MAP }),
-      });
-      return res;
-    }, {});
-    const defaultRes = getDefaultTabs(choicesPerSelector, defaultTabs);
-    // get local active tabs and set as active tabs
-    // if they exist on page.
-    // otherwise, defaults will take precedence
-    const localActiveTabs = getLocalTabs(getLocalValue('activeTabs') || {}, selectors);
-    setActiveTab({ ...defaultRes, ...localActiveTabs });
+    const initialTabs = getInitialTabs(selectors, defaultTabs);
+    setActiveTab(initialTabs);
+  };
+
+  const setLanguageSelectorTab = () => {
+    const initialTabs = getInitialTabs(selectors, defaultTabs);
+    if ('drivers' in initialTabs) {
+      setActiveTab({ drivers: initialTabs.drivers });
+    }
   };
 
   useEffect(() => {
@@ -146,6 +160,7 @@ const TabProvider = ({
         selectors,
         setActiveTab,
         setInitialTabs,
+        setLanguageSelectorTab,
       }}
     >
       {children}
