@@ -149,7 +149,7 @@ export const tocData = (): TocItem[] => {
           items: [
             {
               label: 'Overview',
-              url: '/',
+              url: '/new',
             },
             {
               label: 'Import and export',
@@ -232,6 +232,73 @@ export const tocData = (): TocItem[] => {
             {
               label: 'Support Access',
               url: '/support-acces',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Client Libraries and APIs',
+      url: '/',
+      prefix: '/master/java/bianca.laube/DOP-5375',
+      items: [
+        {
+          label: 'Client Libraries',
+          group: true,
+          items: [
+            {
+              label: 'Java Driver',
+              url: '/get-started/',
+            },
+            {
+              label: 'Connection Guide',
+              url: '/connection',
+              collapsible: true,
+              items: [
+                {
+                  label: 'Create Mongodb client',
+                  url: '/connection/mongoclient',
+                },
+                {
+                  label: 'Connection Troubleshooting',
+                  url: '/connection/connection-troubleshooting',
+                },
+              ],
+            },
+            {
+              collapsible: true,
+              label: 'CRUD Operator',
+              items: [
+                {
+                  label: 'Insert Operations',
+                  url: '/crud/insert',
+                },
+                {
+                  label: 'Update Documents',
+                  url: '/crud/update-documents/',
+                  collapsible: true,
+                  items: [
+                    {
+                      label: "Update Arrays",
+                      url: '/crud/update-documents/embedded-arrays'
+                    },
+                    {
+                      label: 'Upsert',
+                      url: '/crud/update-documents/upsert/'
+                    }
+                  ]
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'APIs',
+          group: true,
+          items: [
+            {
+              label: 'Atlas Search',
+              url: '/atlas-search',
             },
           ],
         },
