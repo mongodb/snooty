@@ -344,7 +344,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       const mainComponentRelativePath = `../../src/components/DocumentBody.js`;
 
       createPage({
-        path: assertTrailingSlash(slug),
+        path: path.join(process.env.PATH_PREFIX, assertTrailingSlash(slug)),
         component: path.resolve(__dirname, mainComponentRelativePath),
         context: {
           page_id: page.page_id,
