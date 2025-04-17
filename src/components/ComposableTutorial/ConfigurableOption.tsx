@@ -6,7 +6,7 @@ import { theme } from '../../theme/docsTheme';
 import { joinKeyValuesAsString } from './ComposableTutorial';
 
 const selectStyling = css`
-  flex: 1 0 auto;
+  flex: 1 1 200px;
   font-size: ${theme.fontSize.small};
   overflow: hidden;
 
