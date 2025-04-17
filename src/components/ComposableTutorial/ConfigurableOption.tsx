@@ -2,10 +2,32 @@ import React, { useMemo } from 'react';
 import { Option, Select } from '@leafygreen-ui/select';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { ComposableTutorialOption } from '../../types/ast';
+import { theme } from '../../theme/docsTheme';
 import { joinKeyValuesAsString } from './ComposableTutorial';
 
 const selectStyling = css`
   flex: 1 0 auto;
+  font-size: ${theme.fontSize.small};
+  overflow: hidden;
+
+  label,
+  button {
+    font-size: inherit;
+  }
+
+  label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  @media ${theme.screenSize.upToMedium} {
+    flex: 0 1 calc(50% - ${theme.size.small});
+  }
+`;
+
+const optionStyling = css`
+  font-size: ${theme.fontSize.small};
 `;
 
 interface ConfigurationOptionProps {
@@ -58,7 +80,7 @@ const ConfigurableOption = ({
       onChange={(value) => onSelect(value, option.value, optionIndex)}
     >
       {filteredOptions.map((selection, i) => (
-        <Option value={selection.value} key={i}>
+        <Option className={optionStyling} value={selection.value} key={i}>
           {selection.text}
         </Option>
       ))}

@@ -142,6 +142,11 @@ const ComposableContainer = styled.div`
   justify-items: space-between;
   border-bottom: 1px solid ${palette.gray.light2};
   padding-bottom: ${theme.size.medium};
+  padding-top: ${theme.size.small};
+
+  @media ${theme.screenSize.upToMedium} {
+    flex-wrap: wrap;
+  }
 `;
 
 const ComposableTutorial = ({
