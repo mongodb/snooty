@@ -34,6 +34,14 @@ const HeaderBuffer = styled.div(
   position: absolute;
   // Add a bit of padding to help headings be more accurately set as "active" on FF and Safari
   padding-bottom: 2px;
+
+  @media ${theme.screenSize.upToMedium} {
+    margin-top: ${
+      props.hasComposable
+        ? `calc(-1 * (${theme.header.composableMobileHeight} + ${theme.header.navbarScrollOffset}))`
+        : `-${theme.header.navbarScrollOffset}`
+    }
+  }
 `
 );
 
