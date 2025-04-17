@@ -8,7 +8,7 @@ interface TocItem {
   items?: TocItem[];
 }
 
-const DOCS = 'docs'
+const DOCS = 'docs';
 const ATLAS_PREFIX = 'atlas';
 
 export const tocData = (): TocItem[] => {
@@ -105,7 +105,7 @@ export const tocData = (): TocItem[] => {
         {
           label: 'Get Started',
           group: true,
-          prefix: "/docs/atlas",
+          prefix: '/docs/atlas',
           items: [
             {
               label: 'Create Account',
@@ -113,12 +113,12 @@ export const tocData = (): TocItem[] => {
             },
             {
               label: 'Deploy a Free Cluster',
-              prefix: "/docs/atlas",
+              prefix: '/docs/atlas',
               url: '/docs/atlas/tutorial/deploy-free-tier-cluster/',
             },
             {
               label: 'Manage Database Users',
-              prefix: "/docs/atlas",
+              prefix: '/docs/atlas',
               url: '/docs/relational-migrator/tutorial/create-mongodb-user-for-cluster/',
             },
             {
@@ -127,7 +127,7 @@ export const tocData = (): TocItem[] => {
             },
             {
               label: 'Connect to the Cluster',
-              prefix: "/docs/atlas",
+              prefix: '/docs/atlas',
               url: '/tutorial/connect-to-your-cluster/',
             },
             {
@@ -141,7 +141,7 @@ export const tocData = (): TocItem[] => {
             {
               label: "(Won't work) Generate Synthetic Data",
               url: '/tutorial/generate-data',
-            }
+            },
           ],
         },
         {
