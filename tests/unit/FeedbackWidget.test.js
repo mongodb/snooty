@@ -2,7 +2,7 @@ import React from 'react';
 import { act, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
-import { FeedbackProvider, FeedbackForm } from '../../src/components/Widgets/FeedbackWidget';
+import { FeedbackProvider, FeedbackForm, FeedbackButton } from '../../src/components/Widgets/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop } from '../utils';
 import {
@@ -53,6 +53,7 @@ async function mountFormWithFeedbackState(feedbackState = {}) {
       >
         <FeedbackForm />
         <div>
+          <FeedbackButton />
           <Heading nodeData={headingData} sectionDepth={1} />
         </div>
       </FeedbackProvider>
@@ -92,6 +93,37 @@ describe('FeedbackWidget', () => {
   beforeEach(mockScreenshotFunctions);
   afterEach(clearMockScreenshotFunctions);
   beforeEach(() => mockLocation('', '', '', 'https://mongodb.com/docs/atlas'));
+
+  describe('FeedbackButton', () => {
+    it('shows the rating view when clicked', async () => {
+      wrapper = await mountFormWithFeedbackState({});
+      // Before the click, the form is hidden
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
+      // Click the button
+      userEvent.click(wrapper.getByText(FEEDBACK_BUTTON_TEXT));
+
+      await tick();
+      // After the click new feedback is initialized
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
+    });
+
+    it('shows the rating view when using keyboard', async () => {
+      wrapper = await mountFormWithFeedbackState({});
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
+
+      // Focus and simulate keyboard interaction
+      const fwButon = wrapper.getAllByRole('button')[0];
+      fwButon.focus();
+      userEvent.keyboard('{Enter}');
+      await tick();
+      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
+    });
+
+    it('is visible in the waiting view on large/desktop screens', async () => {
+      wrapper = await mountFormWithFeedbackState({});
+      expect(wrapper.queryAllByText(FEEDBACK_BUTTON_TEXT)).toHaveLength(1);
+    });
+  });
 
   describe('FeedbackForm', () => {
     it('waiting state when the form is closed', async () => {

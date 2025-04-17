@@ -12,16 +12,6 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 import { theme } from '../theme/docsTheme';
 import { usePageContext } from '../context/page-context';
-import {
-  FeedbackProvider,
-  FeedbackForm,
-  useFeedbackData,
-  FeedbackContainer,
-} from '../components/Widgets/FeedbackWidget';
-import { isBrowser } from '../utils/is-browser';
-import { getPlaintext } from '../utils/get-plaintext';
-import { getNestedValue } from '../utils/get-nested-value';
-import { RatingView } from '../components/Widgets/FeedbackWidget/views';
 
 const MAX_ON_THIS_PAGE_WIDTH = '200px';
 const MAX_CONTENT_WIDTH = '775px';
@@ -29,7 +19,6 @@ const MAX_CONTENT_WIDTH_LARGE_SCREEN = '884px';
 // (max content width along with padding + max "On This Page" width along with padding)
 export const DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE = `(${MAX_CONTENT_WIDTH} + ${theme.size.xlarge} * 2) + (${MAX_ON_THIS_PAGE_WIDTH} + 5px + ${theme.size.medium})`;
 export const DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE_LARGE_SCREEN = `(${MAX_CONTENT_WIDTH_LARGE_SCREEN} + ${theme.size.xlarge} * 2) + (${MAX_ON_THIS_PAGE_WIDTH} + 5px + ${theme.size.medium})`;
-const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
 
 const DocumentContainer = styled('div')`
   display: grid;
@@ -56,7 +45,6 @@ const StyledMainColumn = styled(MainColumn)`
 
 const StyledRightColumn = styled(RightColumn)`
   grid-area: right;
-  overflow: visible;
 `;
 
 const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedProduct }, offlineBanner }) => {
@@ -66,14 +54,6 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const { tabsMainColumn } = usePageContext();
   const hasMethodSelector = pageOptions?.has_method_selector;
   const activeTutorial = useActiveMpTutorial();
-  const url = isBrowser ? window.location.href : null;
-  const metadata = useSnootyMetadata();
-  const feedbackData = useFeedbackData({
-    slug,
-    url,
-    title:
-      getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
-  });
 
   return (
     <DocumentContainer>
@@ -91,15 +71,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
         {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
-        {!DEPRECATED_PROJECTS.includes(metadata.project) && (
-          <FeedbackProvider page={feedbackData}>
-            <FeedbackContainer>
-              <FeedbackForm />
-              <RatingView />
-            </FeedbackContainer>
-          </FeedbackProvider>
-        )}
-        <Contents slug={slug} />
+        <Contents />
       </StyledRightColumn>
     </DocumentContainer>
   );

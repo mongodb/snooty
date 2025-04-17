@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
-import { cx, css } from '@leafygreen-ui/emotion';
 import { formatText } from '../../utils/format-text';
 import { ContentsContext } from './contents-context';
 import ContentsList from './ContentsList';
@@ -43,13 +42,9 @@ const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
 };
 
-const styledContentList = css`
-  overflow: auto;
-  height: 90%;
-`;
-
 const Contents = ({ className }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
+
   const filteredNodes = headingNodes.filter((headingNode) => {
     return isHeadingVisible(headingNode.selector_ids, activeSelectorIds);
   });
@@ -61,7 +56,7 @@ const Contents = ({ className }) => {
   const label = 'On this page';
 
   return (
-    <div className={cx(className, styledContentList)}>
+    <div className={className}>
       <ContentsList label={label}>
         {filteredNodes.map(({ depth, id, title }) => {
           // Depth of heading nodes refers to their depth in the AST
