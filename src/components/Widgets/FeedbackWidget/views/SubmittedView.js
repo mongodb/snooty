@@ -32,7 +32,7 @@ const SubmittedView = () => {
   return (
     <Container>
       <StyledHeading>{SUBMITTED_VIEW_TEXT.HEADING}</StyledHeading>
-      <StarRating editable={false} />
+      <StarRating editable={false} showCaption={false} />
       <Subheading>{SUBMITTED_VIEW_TEXT.SUB_HEADING}</Subheading>
       <Subheading>
         <span>{SUBMITTED_VIEW_TEXT.RESOURCES_CTA}</span>
