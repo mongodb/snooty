@@ -32,6 +32,6 @@ const plugins = [
 
 module.exports = {
   plugins,
-  pathPrefix,
+  // pathPrefix,
   siteMetadata,
 };

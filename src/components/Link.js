@@ -10,7 +10,6 @@ import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -100,7 +99,6 @@ const Link = ({
   ...other
 }) => {
   const { pathPrefix } = useSnootyMetadata();
-  const { snootyEnv } = useSiteMetadata();
 
   if (!to) to = '';
   const anchor = to.startsWith('#');
@@ -141,7 +139,7 @@ const Link = ({
     }
 
     // On the Unified SideNav but linking to a different site
-    const href = snootyEnv === 'development' ? `${prefix + to}index.html` : `${prefix + to}`;
+    const href = `${prefix + to}`;
     return (
       <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={href}>
         {children}
