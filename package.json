@@ -47,7 +47,6 @@
   },
   "scripts": {
     "info": "gatsby info --clipboard",
-    "build:no-retry": "gatsby build",
     "build": "./build-retry.sh --prefix-paths",
     "build:no-prefix": "./build-retry.sh",
     "build:clean": "npm run clean && npm run build",
