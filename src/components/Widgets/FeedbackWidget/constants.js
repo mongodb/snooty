@@ -5,6 +5,7 @@ export const CLOSE_BUTTON_ALT_TEXT = 'Close Feedback Form';
 export const SCREENSHOT_OVERLAY_ALT_TEXT = 'Screenshot';
 
 // TEXT
+export const FEEDBACK_BUTTON_TEXT = 'Rate This Page';
 export const RATING_QUESTION_TEXT = 'How would you rate this page?';
 export const COMMENT_PLACEHOLDER_TEXT = 'Tell us more about your experience';
 export const COMMENT_PLACEHOLDER_TEXT_LOW = 'Tell us how we can improve';
