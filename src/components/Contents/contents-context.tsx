@@ -3,7 +3,7 @@ import useActiveHeading from '../../hooks/useActiveHeading';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { HeadingNode } from '../../types/ast';
 
-type ActiveSelectorIds = { methodSelector?: string; tab?: string[] };
+export type ActiveSelectorIds = { methodSelector?: string; tab?: string[] };
 
 interface ContentsContextValue {
   activeHeadingId: string | null;
