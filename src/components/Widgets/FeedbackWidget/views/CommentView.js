@@ -102,12 +102,16 @@ const CommentView = () => {
   const [hasEmailError, setHasEmailError] = useState(false);
   const isValidEmail = useValidation(email, validateEmail);
   const viewport = useViewport();
-  const { isMobile } = useScreenSize();
+  const { isTabletOrMobile } = useScreenSize();
 
   const handleSubmit = async () => {
+    console.log('hello');
     if (isValidEmail) {
+      console.log('kitten');
       if (screenshotTaken) {
+        console.log('PLEASE');
         const dataUri = await retrieveDataUri();
+        console.log('i work');
         await submitAllFeedback({ comment, email, dataUri, viewport });
       } else {
         await submitAllFeedback({ comment, email });
@@ -140,7 +144,7 @@ const CommentView = () => {
         state={hasEmailError ? 'error' : 'none'}
         optional={true}
       />
-      {!isMobile && <ScreenshotButton />}
+      {!isTabletOrMobile && <ScreenshotButton />}
       <SubmitButton onClick={() => handleSubmit()} type="submit">
         {FEEDBACK_SUBMIT_BUTTON_TEXT}
       </SubmitButton>

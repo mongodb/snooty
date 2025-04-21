@@ -2,6 +2,7 @@ import React, { useState, useCallback, useContext, useEffect, createContext, use
 import { useLocation } from '@gatsbyjs/reach-router';
 import { getViewport } from '../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
+import { STYLED_RIGHT_COLUMN } from '../../RightColumn';
 import { upsertFeedback, useRealmUser } from './realm';
 
 const FeedbackContext = createContext();
@@ -134,6 +135,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   // Stop giving feedback (if in progress) and reset the widget to the
   // initial state.
   const abandon = useCallback(() => {
+    document.getElementById(STYLED_RIGHT_COLUMN).style.position = 'sticky';
     setView('waiting');
     setFeedback();
     setSelectedRating();

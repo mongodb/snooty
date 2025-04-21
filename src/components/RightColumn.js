@@ -5,6 +5,8 @@ import useStickyTopValues from '../hooks/useStickyTopValues';
 import { displayNone } from '../utils/display-none';
 import { theme } from '../theme/docsTheme';
 
+export const STYLED_RIGHT_COLUMN = 'styled-right-column';
+
 const RightColumn = ({ children, className }) => {
   const { topLarge } = useStickyTopValues();
 
@@ -30,6 +32,7 @@ const RightColumn = ({ children, className }) => {
             margin-right: 24px;
           }
         `}
+        id={STYLED_RIGHT_COLUMN}
       >
         {children}
       </div>

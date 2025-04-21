@@ -11,6 +11,7 @@ import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
 import { theme } from '../../../../theme/docsTheme';
+import { STYLED_RIGHT_COLUMN } from '../../../RightColumn';
 import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_BUTTON_TEXT_LOW, SCREENSHOT_OVERLAY_ALT_TEXT } from '../constants';
 
 const HIGHLIGHT_BORDER_SIZE = 5;
@@ -196,6 +197,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   const resetProperties = () => {
     currElem.current = null;
     currElemProperties.current = initialElemProperties;
+    document.getElementById(STYLED_RIGHT_COLUMN).style.position = 'sticky';
     setIsScreenshotButtonClicked(false);
     setCurrElemState(null);
     setScreenshotTaken(false);
@@ -208,14 +210,15 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setSelectedElementBorderStyle(domElementClickedRef.current);
     setScreenshotTaken(true);
 
-    const el = document.getElementById(feedbackId);
+    // Allows for the feeback widget to appear on top of the screenshot overlay
+    const rightColEl = document.getElementById(STYLED_RIGHT_COLUMN);
+    const fbFormEl = document.getElementById(feedbackId);
 
-    el.style.right = null;
-    document.body.appendChild(el);
-    el.style.position = 'fixed';
-    el.style.zIndex = '100';
-    el.style.top = `${savedPosition.top}px`;
-    el.style.left = `${savedPosition.left - 9000}px`;
+    rightColEl.style.position = 'unset';
+    fbFormEl.style.right = null;
+    fbFormEl.style.zIndex = '100';
+    fbFormEl.style.top = `${savedPosition.top}px`;
+    fbFormEl.style.left = `${savedPosition.left - 9000}px`;
   };
 
   const handleExitButtonClick = (e) => {
