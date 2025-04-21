@@ -26,6 +26,14 @@ const formstyle = css`
   }
 `;
 
+const formContainer = css`
+  position: relative;
+
+  @media ${theme.screenSize.tablet} {
+    z-index: 1;
+  }
+`;
+
 const hrStyling = css`
   border-color: ${palette.gray.light2};
   margin: ${theme.size.medium} ${theme.size.xlarge};
@@ -249,7 +257,7 @@ const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: 
       {children}
       <hr className={cx(hrStyling)} />
       <div className={cx(ratingStlying)}>
-        <FeedbackRating slug={slug} className={formstyle} />
+        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
       </div>
     </Wrapper>
   );

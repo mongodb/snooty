@@ -49,6 +49,13 @@ headingSelectorIds structure (comes from parser):
   }
 } 
 */
+
+const formContainer = css`
+  @media ${theme.screenSize.tablet} {
+    z-index: 1;
+  }
+`;
+
 const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
   if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
   const headingsMethodParent = headingSelectorIds['method-option'];
@@ -90,7 +97,7 @@ const Contents = ({ className, slug }) => {
   return (
     <>
       {!isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <FeedbackRating slug={slug} className={formstyle} />
+        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
       )}
       <div className={cx(className, styledContentList)}>
         <ContentsList label={label}>
@@ -106,7 +113,7 @@ const Contents = ({ className, slug }) => {
         </ContentsList>
       </div>
       {isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <FeedbackRating slug={slug} className={formstyle} />
+        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
       )}
     </>
   );

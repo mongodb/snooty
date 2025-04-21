@@ -8,7 +8,7 @@ import FeedbackForm from './FeedbackForm';
 import useFeedbackData from './useFeedbackData';
 import { FeedbackProvider, useFeedbackContext } from './context';
 
-const FeedbackRating = ({ slug, className }) => {
+const FeedbackRating = ({ slug, className, classNameContainer }) => {
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
   const feedbackData = useFeedbackData({
@@ -20,7 +20,7 @@ const FeedbackRating = ({ slug, className }) => {
 
   return (
     <FeedbackProvider page={feedbackData}>
-      <FeedbackContainer>
+      <FeedbackContainer className={classNameContainer}>
         <FeedbackForm className={className} />
         <RatingView />
       </FeedbackContainer>

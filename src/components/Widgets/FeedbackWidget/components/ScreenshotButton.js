@@ -15,6 +15,8 @@ import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_BUTTON_TEXT_LOW, SCREENSHOT_OVERLAY_
 
 const HIGHLIGHT_BORDER_SIZE = 5;
 
+let savedPosition = null;
+
 const instructionsBorderStyling = css`
   position: fixed;
   top: 0;
@@ -206,7 +208,14 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setSelectedElementBorderStyle(domElementClickedRef.current);
     setScreenshotTaken(true);
 
-    document.getElementById(feedbackId).style.right = null;
+    const el = document.getElementById(feedbackId);
+
+    el.style.right = null;
+    document.body.appendChild(el);
+    el.style.position = 'fixed';
+    el.style.zIndex = '100';
+    el.style.top = `${savedPosition.top}px`;
+    el.style.left = `${savedPosition.left - 9000}px`;
   };
 
   const handleExitButtonClick = (e) => {
@@ -221,6 +230,8 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   if (isScreenshotButtonClicked) {
     if (isBrowser && domElementClickedRef.current === 'dashed') {
+      savedPosition = document.getElementById(feedbackId).getBoundingClientRect();
+
       document.getElementById(feedbackId).style.right = '-9000px';
       // highlight elements based on mouse movement
       document.addEventListener('mousemove', handleElementHighlight);
