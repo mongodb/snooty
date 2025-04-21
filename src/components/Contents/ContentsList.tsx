@@ -1,5 +1,4 @@
 import React, { ReactNode, useState } from 'react';
-import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Box from '@leafygreen-ui/box';
@@ -82,9 +81,7 @@ const mobileListStyles = css`
   }
 `;
 
-
-
-const ContentsList = ({ children, label }: { children: ReactNode; label: string; }) => {
+const ContentsList = ({ children, label }: { children: ReactNode; label: string }) => {
   const { isMobile } = useScreenSize();
   const [open, setOpen] = useState<boolean>(false);
 
@@ -101,7 +98,7 @@ const ContentsList = ({ children, label }: { children: ReactNode; label: string;
       </Box>
     );
   }
-  
+
   return (
     <>
       <p className={cx(labelStyles, desktopLabelStyles)}>{label}</p>

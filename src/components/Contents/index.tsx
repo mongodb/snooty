@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
 import { formatText } from '../../utils/format-text';
+import { HeadingNodeSelectorIds } from '../../types/ast';
 import { ActiveSelectorIds, ContentsContext } from './contents-context';
 import ContentsList from './ContentsList';
 import ContentsListItem from './ContentsListItem';
-import { HeadingNodeSelectorIds } from '../../types/ast';
 
 const formatTextOptions = {
   literalEnableInline: true,
@@ -29,7 +29,10 @@ headingSelectorIds structure (comes from parser):
   }
 } 
 */
-const isHeadingVisible = (headingSelectorIds: HeadingNodeSelectorIds, activeSelectorIds: ActiveSelectorIds): boolean => {
+const isHeadingVisible = (
+  headingSelectorIds: HeadingNodeSelectorIds,
+  activeSelectorIds: ActiveSelectorIds
+): boolean => {
   if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
   const headingsMethodParent = headingSelectorIds['method-option'];
   const headingsTabParent = headingSelectorIds['tab'];

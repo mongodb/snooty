@@ -33,7 +33,7 @@ type HeadingNodeSelectorIds = {
   tab?: string;
   'method-option'?: string;
   children?: HeadingNodeSelectorIds;
-}
+};
 
 interface HeadingNode extends ParentNode {
   type: 'heading';
