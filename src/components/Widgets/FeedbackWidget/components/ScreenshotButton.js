@@ -210,7 +210,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setSelectedElementBorderStyle(domElementClickedRef.current);
     setScreenshotTaken(true);
 
-    // Allows for the feeback widget to appear on top of the screenshot overlay
+    // Allows for the feedback widget to appear on top of the screenshot overlay
     const rightColEl = document.getElementById(STYLED_RIGHT_COLUMN);
     const fbFormEl = document.getElementById(feedbackId);
 

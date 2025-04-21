@@ -105,13 +105,9 @@ const CommentView = () => {
   const { isTabletOrMobile } = useScreenSize();
 
   const handleSubmit = async () => {
-    console.log('hello');
     if (isValidEmail) {
-      console.log('kitten');
       if (screenshotTaken) {
-        console.log('PLEASE');
         const dataUri = await retrieveDataUri();
-        console.log('i work');
         await submitAllFeedback({ comment, email, dataUri, viewport });
       } else {
         await submitAllFeedback({ comment, email });
