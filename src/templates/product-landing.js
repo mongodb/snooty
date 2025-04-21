@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
-import { cx, css } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme.js';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
 import useSnootyMetadata from '../utils/use-snooty-metadata.js';
-import FeedbackRating from '../components/Widgets/FeedbackWidget';
 
 export const CONTENT_MAX_WIDTH = 1200;
 
@@ -217,7 +215,7 @@ const Wrapper = styled('main')`
 
 const REALM_LIGHT_HERO_PAGES = ['index.txt'];
 
-const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: { slug } }) => {
+const ProductLanding = ({ children, data: { page }, offlineBanner }) => {
   const { project } = useSnootyMetadata();
   const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
