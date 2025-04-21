@@ -18,8 +18,10 @@ interface TocItem {
 }
 
 // Goes through toc.toml and builds parent breadcrumb data for each entry
-export function createParentFromToc(tree: TocItem[] | undefined, breadcrumbs: BreadCrumb[]): 
-(TocItem & { breadcrumbs: BreadCrumb[] })[] | undefined {
+export function createParentFromToc(
+  tree: TocItem[] | undefined,
+  breadcrumbs: BreadCrumb[]
+): (TocItem & { breadcrumbs: BreadCrumb[] })[] | undefined {
   return tree?.map((item) => {
     const newCrumbs = [...breadcrumbs];
 
@@ -52,7 +54,6 @@ export function findParentBreadCrumb(slug: string, tocTree: TocItem[]): BreadCru
       const found = findParentBreadCrumb(slug, item.items);
       if (found) return found;
     }
-    
   }
 
   return undefined;
