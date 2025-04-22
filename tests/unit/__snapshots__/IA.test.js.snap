@@ -562,6 +562,7 @@ exports[`renders a page IA with IA linked data 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 8px;
+  text-transform: none;
 }
 
 .emotion-15>span:after {
