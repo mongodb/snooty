@@ -66,6 +66,12 @@ a .emotion-0 {
   padding-bottom: 2px;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-3 {
+    margin-top: -85px;
+  }
+}
+
 .emotion-5 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
