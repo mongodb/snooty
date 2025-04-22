@@ -119,7 +119,7 @@ export const tocData = (): TocItem[] => {
             {
               label: 'Manage Database Users',
               prefix: '/docs/atlas',
-              url: '/docs/relational-migrator/tutorial/create-mongodb-user-for-cluster/',
+              url: '/tutorial/create-mongodb-user-for-cluster/',
             },
             {
               label: "(Won't work) Manage the IP Access List",

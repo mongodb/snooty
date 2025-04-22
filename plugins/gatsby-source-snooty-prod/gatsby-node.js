@@ -25,8 +25,11 @@ const { createVersionNodes } = require('../utils/versions-toc.js');
 const { generatePathPrefix } = require('../../src/utils/generate-path-prefix.js');
 const assets = new Map();
 const projectComponents = new Set();
+const { SITE_PREFIXES } = require('../../src/constansts.js');
 
 let db;
+
+const SITE_PREFIX = SITE_PREFIXES[siteMetadata.project];
 
 // Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
 // or data are found, the node will be null
@@ -283,6 +286,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       siteBasePrefix: repoInfo.prefix[envKey],
     };
 
+    console.log('siteBasePrefix: ', repoBranches.siteBasePrefix);
+
     if (repoInfo.groups?.length > 0) {
       repoBranches.groups = repoInfo.groups;
     }
@@ -344,7 +349,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       const mainComponentRelativePath = `../../src/components/DocumentBody.js`;
 
       createPage({
-        path: path.join(process.env.PATH_PREFIX, assertTrailingSlash(slug)),
+        path: path.join(SITE_PREFIX, assertTrailingSlash(slug)),
         component: path.resolve(__dirname, mainComponentRelativePath),
         context: {
           page_id: page.page_id,
