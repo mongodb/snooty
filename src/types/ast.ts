@@ -224,7 +224,7 @@ interface ComposableNode extends Directive<ComposableNodeOption> {
   type: 'directive';
   name: 'selected-content';
   selections: Record<string, string>;
-  children: Directive[];
+  children: Node[];
 }
 
 export type {

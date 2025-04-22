@@ -32,6 +32,7 @@ const plugins = [
         {
           allSitePage {
             nodes {
+              id
               path
               pageContext
             }
@@ -74,6 +75,7 @@ const plugins = [
             continue;
           }
 
+          // make copies of this sitePage node, to include query params as part of the path in the sitemap
           const sitePage = findKeyValuePair(sitePages, 'path', assertLeadingSlash(assertTrailingSlash(astPage.id)));
 
           if (!sitePage) {
@@ -83,7 +85,7 @@ const plugins = [
             continue;
           }
 
-          sitePages = [...sitePages, ...getComposablePermutations(sitePage, astPage)];
+          sitePages.push(...getComposablePermutations(sitePage, astPage));
         }
 
         return sitePages;
