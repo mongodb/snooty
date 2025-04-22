@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Box from '@leafygreen-ui/box';
@@ -22,6 +22,8 @@ const headerStyles = css`
 `;
 
 const labelStyles = css`
+  font-size: ${theme.fontSize.small};
+
   --label-color: ${palette.gray.dark2};
   .dark-theme & {
     --label-color: ${palette.gray.light1};
@@ -40,13 +42,11 @@ const iconStyles = css`
 
 const mobileLabelStyles = css`
   font-weight: 400;
-  font-size: 13px;
   margin: 0;
   width: ${palette.gray.dark2};
 `;
 
 const desktopLabelStyles = css`
-  font-size: ${theme.fontSize.small};
   line-height: ${theme.fontSize.default};
   font-weight: bolder;
   letter-spacing: 0;
@@ -84,6 +84,23 @@ const mobileListStyles = css`
 const ContentsList = ({ children, label }: { children: ReactNode; label: string }) => {
   const { isMobile } = useScreenSize();
   const [open, setOpen] = useState<boolean>(false);
+  const [initialLoad, setInitialLoad] = useState<boolean>(true);
+
+  useEffect(() => {
+    setInitialLoad(false);
+  }, []);
+
+  // Waits to render until browser aware of screen size
+  if (initialLoad)
+    return (
+      <div
+        className={cx(
+          css`
+            height: 68px;
+          `
+        )}
+      />
+    );
 
   if (isMobile) {
     return (
