@@ -143,6 +143,7 @@ const ComposableContainer = styled.div`
   border-bottom: 1px solid ${palette.gray.light2};
   padding-bottom: ${theme.size.medium};
   padding-top: ${theme.size.small};
+  z-index: ${theme.zIndexes.actionBar - 1};
 
   @media ${theme.screenSize.upToMedium} {
     flex-wrap: wrap;
@@ -159,7 +160,7 @@ const ComposableTutorial = ({
   const validSelections = useMemo(() => {
     let res: Set<string> = new Set();
     for (const composableNode of children) {
-      const newSet = getSelectionPermutation(composableNode.selections);
+      const newSet = getSelectionPermutation(composableNode.selections ?? {});
       for (const elm of newSet) {
         res.add(elm);
       }
@@ -251,7 +252,8 @@ const ComposableTutorial = ({
         ))}
       </ComposableContainer>
       {children.map((c, i) => {
-        if (showComposable([c.selections])) {
+        // selections is empty, if child has bad data
+        if (c.selections && showComposable([c.selections])) {
           return <Composable nodeData={c as ComposableNode} key={i} {...rest} />;
         }
         return null;
