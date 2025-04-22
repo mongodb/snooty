@@ -8,13 +8,16 @@ interface TocItem {
   items?: TocItem[];
 }
 
+const DOCS = 'docs';
+const ATLAS_PREFIX = 'atlas';
+
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
     {
-      label: 'C# Quick Start',
-      url: '/quick-start',
+      label: "(Won't work) C# Quick Start",
+      url: '/c-sharp',
       glyph: 'Bulb',
-      prefix: '/version/csharp/bianca.laube/DOP-5343',
+      prefix: '/drivers/c-sharp',
       items: [
         {
           label: 'C# Documentation',
@@ -98,52 +101,51 @@ export const tocData = (): TocItem[] => {
       label: 'Get Started',
       url: '/getting-started',
       glyph: 'LightningBolt',
-      prefix: '/master/cloud-docs/bianca.laube/DOP-5343',
       items: [
         {
           label: 'Get Started',
           group: true,
+          prefix: '/docs/atlas',
           items: [
             {
               label: 'Create Account',
-              url: '/tutorial/create-atlas-account',
+              url: `/${DOCS}/${ATLAS_PREFIX}/tutorial/create-atlas-account/`,
             },
             {
               label: 'Deploy a Free Cluster',
-              url: '/tutorial/deploy-free-tier-cluster',
+              prefix: '/docs/atlas',
+              url: '/docs/atlas/tutorial/deploy-free-tier-cluster/',
             },
             {
               label: 'Manage Database Users',
-              url: '/tutorial/manage-users',
+              prefix: '/docs/atlas',
+              url: '/tutorial/create-mongodb-user-for-cluster/',
             },
             {
-              label: 'Manage the IP Access List',
-              url: '/tutorial/access-list',
+              label: "(Won't work) Manage the IP Access List",
+              url: '/tutorial/access-list/',
             },
             {
               label: 'Connect to the Cluster',
-              url: '/tutorial/connect-to-the-cluster',
+              prefix: '/docs/atlas',
+              url: '/tutorial/connect-to-your-cluster/',
             },
             {
-              label: 'Insert and View a Document',
+              label: "(Won't work) Insert and View a Document",
               url: '/tutorial/insert-and-view',
             },
             {
-              label: 'Load Sample Data',
+              label: "(Won't work) Load Sample Data",
               url: '/tutorial/load-data',
             },
             {
-              label: 'Generate Synthetic Data',
+              label: "(Won't work) Generate Synthetic Data",
               url: '/tutorial/generate-data',
-            },
-            {
-              label: 'Atlas cli',
-              url: '/cli/v1.32',
             },
           ],
         },
         {
-          label: 'Docs Compass',
+          label: "(Won't work) Docs Compass",
           prefix: '/master/compass/bianca.laube/DOP-5343',
           group: true,
           items: [

@@ -10,6 +10,7 @@ export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
   const urlSlug =
     repoBranches?.branches.find((branch) => branch.gitBranchName === parserBranch)?.urlSlug ?? parserBranch;
   const siteBasePrefix = repoBranches?.siteBasePrefix;
+  console.log('siteBasePrefix: ', repoBranches.siteBasePrefix);
   const pathPrefix = generateVersionedPrefix(urlSlug, siteBasePrefix);
 
   // Use default logic assuming there is no canonical provided from the meta directive

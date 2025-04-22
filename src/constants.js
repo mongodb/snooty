@@ -17,3 +17,7 @@ export const REF_TARGETS = {
 };
 
 export const MARIAN_URL = process.env.GATSBY_MARIAN_URL || 'https://docs-search-transport.mongodb.com/';
+
+export const SITE_PREFIXES = {
+  'cloud-docs': '/docs/atlas',
+};
