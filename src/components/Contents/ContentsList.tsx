@@ -6,6 +6,7 @@ import Icon from '@leafygreen-ui/icon';
 
 import { theme } from '../../theme/docsTheme';
 import { displayNone } from '../../utils/display-none';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 
 const hideOnMobile = css`
   ${displayNone.onMedium};
@@ -94,8 +95,8 @@ const ContentsList = ({ children, label }: { children: ReactNode; label: string 
 
   return (
     <>
-      {/* Mobile */}
-      <Box aria-expanded={open} className={cx(collapsibleStyles, hideOnDesktop)}>
+      {/* Mobile (except in Offline Mode) */}
+      <Box aria-expanded={open} className={cx(collapsibleStyles, hideOnDesktop, isOfflineDocsBuild && hideOnMobile)}>
         <Box className={cx(headerStyles)} onClick={() => setOpen(!open)}>
           <Icon className={cx(iconStyles)} glyph={open ? 'CaretDown' : 'CaretRight'} />
           <p className={cx(labelStyles, mobileLabelStyles)}>{label}</p>
@@ -105,7 +106,7 @@ const ContentsList = ({ children, label }: { children: ReactNode; label: string 
         </Box>
       </Box>
       {/* Desktop */}
-      <Box className={cx(hideOnMobile)}>
+      <Box className={cx(!isOfflineDocsBuild && hideOnMobile)}>
         <p className={cx(labelStyles, desktopLabelStyles)}>{label}</p>
         <ul className={cx(listStyles)}>{children}</ul>
       </Box>
