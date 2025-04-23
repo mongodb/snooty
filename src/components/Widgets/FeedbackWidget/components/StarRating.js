@@ -33,7 +33,6 @@ const starIconStyle = (isHighlighted) => css`
 const Layout = styled.div`
   display: flex;
   gap: ${theme.size.small};
-  justify-content: center;
   margin: 10px 0 ${theme.size.default};
 
   @media ${theme.screenSize.upToLarge} {

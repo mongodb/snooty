@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
-import { cx, css } from '@leafygreen-ui/emotion';
 import PropTypes from 'prop-types';
+import { cx, css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import FeedbackRating from '../Widgets/FeedbackWidget';
 import useScreenSize from '../../hooks/useScreenSize';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { ContentsContext } from './contents-context';
 import ContentsList from './ContentsList';
 import ContentsListItem from './ContentsListItem';
+import { ContentsContext } from './contents-context';
 
 const formatTextOptions = {
   literalEnableInline: true,
