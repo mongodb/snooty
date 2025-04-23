@@ -1,23 +1,17 @@
 import React from 'react';
-import { css, cx } from '@leafygreen-ui/emotion';
-import { Label } from '@leafygreen-ui/typography';
+import { Layout } from '../components/view-components';
 import { useFeedbackContext } from '../context';
+import ViewHeader from '../components/ViewHeader';
 import StarRating from '../components/StarRating';
-
-const labelStyling = css`
-  font-size: 13px;
-  font-weight: 500 !important;
-  color: --label-color;
-`;
 
 const RatingView = () => {
   const { selectInitialRating } = useFeedbackContext();
 
   return (
-    <>
-      <Label className={cx(labelStyling)}>Rate this page</Label>
+    <Layout>
+      <ViewHeader />
       <StarRating handleRatingSelection={selectInitialRating} />
-    </>
+    </Layout>
   );
 };
 
