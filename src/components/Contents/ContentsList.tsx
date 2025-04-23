@@ -8,11 +8,11 @@ import { theme } from '../../theme/docsTheme';
 import { displayNone } from '../../utils/display-none';
 
 const hideOnMobile = css`
-  ${displayNone.onMobile};
+  ${displayNone.onMedium};
 `;
 
 const hideOnDesktop = css`
-  ${displayNone.onLargerThanMobile}
+  ${displayNone.onLargerThanMedium}
 `;
 
 const collapsibleStyles = css`
@@ -95,7 +95,7 @@ const ContentsList = ({ children, label }: { children: ReactNode; label: string 
   return (
     <>
       {/* Mobile */}
-      <Box aria-expanded={open} className={cx(collapsibleStyles, hideOnDesktop)} data-testid="desktop-otp">
+      <Box aria-expanded={open} className={cx(collapsibleStyles, hideOnDesktop)}>
         <Box className={cx(headerStyles)} onClick={() => setOpen(!open)}>
           <Icon className={cx(iconStyles)} glyph={open ? 'CaretDown' : 'CaretRight'} />
           <p className={cx(labelStyles, mobileLabelStyles)}>{label}</p>
@@ -105,7 +105,7 @@ const ContentsList = ({ children, label }: { children: ReactNode; label: string 
         </Box>
       </Box>
       {/* Desktop */}
-      <Box className={cx(hideOnMobile)} data-testid="mobile-otp">
+      <Box className={cx(hideOnMobile)}>
         <p className={cx(labelStyles, desktopLabelStyles)}>{label}</p>
         <ul className={cx(listStyles)}>{children}</ul>
       </Box>
