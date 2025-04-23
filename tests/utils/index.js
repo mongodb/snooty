@@ -30,16 +30,13 @@ const {
 } = theme;
 
 export const setMatchMedia = (...queries) => {
-  window.matchMedia = jest.fn().mockImplementation((media) => ({
-    matches: queries.includes(media),
-    media,
-    onchange: null,
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    addListener: jest.fn(), // For older React versions or libraries
-    removeListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  }));
+  window.matchMedia = (media) => ({
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    addListener: () => {},
+    removeListener: () => {},
+    matches: queries.some((query) => media === query),
+  });
 };
 
 export const setMobile = () => {
