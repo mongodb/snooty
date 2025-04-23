@@ -16,15 +16,15 @@ describe('ContentsList', () => {
     const labelText = 'On This Page';
     const wrapper = renderContentsList(labelText);
 
-    expect(wrapper.getByText(labelText)).toBeTruthy();
-    expect(wrapper.container.querySelectorAll('li')).toHaveLength(2);
-    expect(wrapper.getAllByText('List Item', { exact: false })).toHaveLength(2);
+    expect(wrapper.getAllByText(labelText)).toHaveLength(2);
+    expect(wrapper.container.querySelectorAll('li')).toHaveLength(4);
+    expect(wrapper.getAllByText('List Item', { exact: false })).toHaveLength(4);
   });
 
   it('renders correctly without a label', () => {
     const wrapper = renderContentsList();
 
-    expect(wrapper.container.querySelectorAll('li')).toHaveLength(2);
-    expect(wrapper.getAllByText('List Item', { exact: false })).toHaveLength(2);
+    expect(wrapper.container.querySelectorAll('li')).toHaveLength(4);
+    expect(wrapper.getAllByText('List Item', { exact: false })).toHaveLength(4);
   });
 });
