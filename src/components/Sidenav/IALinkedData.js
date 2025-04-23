@@ -55,6 +55,7 @@ const liStyling = css`
     display: flex;
     align-items: center;
     gap: 8px;
+    text-transform: none;
 
     // Remove LG Link's existing underline pseudo-element
     :after {
