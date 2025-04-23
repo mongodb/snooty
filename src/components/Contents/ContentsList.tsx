@@ -5,17 +5,14 @@ import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 
 import { theme } from '../../theme/docsTheme';
+import { displayNone } from '../../utils/display-none';
 
 const hideOnMobile = css`
-  @media ${theme.screenSize.upToSmall} {
-    display: none;
-  }
+  ${displayNone.onMobile};
 `;
 
 const hideOnDesktop = css`
-  @media ${theme.screenSize.smallAndUp} {
-    display: none;
-  }
+  ${displayNone.onLargerThanMobile}
 `;
 
 const collapsibleStyles = css`
@@ -98,7 +95,7 @@ const ContentsList = ({ children, label }: { children: ReactNode; label: string 
   return (
     <>
       {/* Mobile */}
-      <Box aria-expanded={open} className={cx(collapsibleStyles, hideOnDesktop)}>
+      <Box aria-expanded={open} className={cx(collapsibleStyles, hideOnDesktop)} data-testid="desktop-otp">
         <Box className={cx(headerStyles)} onClick={() => setOpen(!open)}>
           <Icon className={cx(iconStyles)} glyph={open ? 'CaretDown' : 'CaretRight'} />
           <p className={cx(labelStyles, mobileLabelStyles)}>{label}</p>
@@ -108,7 +105,7 @@ const ContentsList = ({ children, label }: { children: ReactNode; label: string 
         </Box>
       </Box>
       {/* Desktop */}
-      <Box className={cx(hideOnMobile)}>
+      <Box className={cx(hideOnMobile)} data-testid="mobile-otp">
         <p className={cx(labelStyles, desktopLabelStyles)}>{label}</p>
         <ul className={cx(listStyles)}>{children}</ul>
       </Box>
