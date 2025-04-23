@@ -1,11 +1,22 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
 
-import useScreenSize from '../../hooks/useScreenSize';
 import { theme } from '../../theme/docsTheme';
+
+const hideOnMobile = css`
+  @media ${theme.screenSize.upToSmall} {
+    display: none;
+  }
+`;
+
+const hideOnDesktop = css`
+  @media ${theme.screenSize.smallAndUp} {
+    display: none;
+  }
+`;
 
 const collapsibleStyles = css`
   border-top: 1px solid ${palette.gray.light2};
@@ -82,29 +93,12 @@ const mobileListStyles = css`
 `;
 
 const ContentsList = ({ children, label }: { children: ReactNode; label: string }) => {
-  const { isMobile } = useScreenSize();
   const [open, setOpen] = useState<boolean>(false);
-  const [initialLoad, setInitialLoad] = useState<boolean>(true);
 
-  useEffect(() => {
-    setInitialLoad(false);
-  }, []);
-
-  // Waits to render until browser aware of screen size
-  if (initialLoad)
-    return (
-      <div
-        className={cx(
-          css`
-            height: 68px;
-          `
-        )}
-      />
-    );
-
-  if (isMobile) {
-    return (
-      <Box aria-expanded={open} className={cx(collapsibleStyles)}>
+  return (
+    <>
+      {/* Mobile */}
+      <Box aria-expanded={open} className={cx(collapsibleStyles, hideOnDesktop)}>
         <Box className={cx(headerStyles)} onClick={() => setOpen(!open)}>
           <Icon className={cx(iconStyles)} glyph={open ? 'CaretDown' : 'CaretRight'} />
           <p className={cx(labelStyles, mobileLabelStyles)}>{label}</p>
@@ -113,13 +107,11 @@ const ContentsList = ({ children, label }: { children: ReactNode; label: string 
           <ul className={cx(listStyles, mobileListStyles)}>{children}</ul>
         </Box>
       </Box>
-    );
-  }
-
-  return (
-    <>
-      <p className={cx(labelStyles, desktopLabelStyles)}>{label}</p>
-      <ul className={cx(listStyles)}>{children}</ul>
+      {/* Desktop */}
+      <Box className={cx(hideOnMobile)}>
+        <p className={cx(labelStyles, desktopLabelStyles)}>{label}</p>
+        <ul className={cx(listStyles)}>{children}</ul>
+      </Box>
     </>
   );
 };
