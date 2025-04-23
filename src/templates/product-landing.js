@@ -7,11 +7,6 @@ import { theme } from '../theme/docsTheme.js';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
 import useSnootyMetadata from '../utils/use-snooty-metadata.js';
 import FeedbackRating from '../components/Widgets/FeedbackWidget';
-import { isBrowser } from '../utils/is-browser.js';
-import { getPlaintext } from '../utils/get-plaintext';
-import { getNestedValue } from '../utils/get-nested-value';
-import { FeedbackProvider, useFeedbackData } from '../components/Widgets/FeedbackWidget';
-
 export const CONTENT_MAX_WIDTH = 1200;
 
 const formstyle = css`
@@ -229,15 +224,6 @@ const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: 
   const pageOptions = page?.ast?.options;
   const hasMaxWidthParagraphs = ['', 'true'].includes(pageOptions?.['pl-max-width-paragraphs']);
   const hasLightHero = isRealm && REALM_LIGHT_HERO_PAGES.includes(page?.ast?.fileid);
-  const url = isBrowser ? window.location.href : null;
-  const metadata = useSnootyMetadata();
-  const feedbackData = useFeedbackData({
-    slug,
-    url,
-    title:
-      getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
-  });
-
   // shallow copy children, and search for existence of banner
   const shallowChildren = children.reduce((res, child) => {
     const copiedChildren =
@@ -269,9 +255,7 @@ const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: 
       {children}
       <hr className={cx(hrStyling)} />
       <div className={cx(ratingStlying)}>
-        <FeedbackProvider page={feedbackData}>
-          <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
-        </FeedbackProvider>
+        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
       </div>
     </Wrapper>
   );

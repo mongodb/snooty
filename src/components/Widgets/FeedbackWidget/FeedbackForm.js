@@ -22,8 +22,8 @@ export const feedbackId = 'feedback-card';
 export const fwFormId = 'feedback-form';
 
 const FeedbackForm = ({ className }) => {
-  const { view } = useFeedbackContext();
-  const { isMobile } = useScreenSize();
+  const { view, detachForm } = useFeedbackContext();
+  const { isTabletOrMobile } = useScreenSize();
   const isOpen = view !== 'waiting';
 
   const renderedComponent = isOpen && (
@@ -34,7 +34,7 @@ const FeedbackForm = ({ className }) => {
     </div>
   );
 
-  return isMobile ? createPortal(renderedComponent, document.body) : renderedComponent;
+  return isTabletOrMobile || detachForm ? createPortal(renderedComponent, document.body) : renderedComponent;
 };
 
 export default FeedbackForm;

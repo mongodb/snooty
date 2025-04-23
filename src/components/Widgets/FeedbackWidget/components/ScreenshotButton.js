@@ -83,7 +83,7 @@ const ScreenshotSelect = styled(Button)`
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
-  const { setScreenshotTaken, selectedRating, isScreenshotButtonClicked, setIsScreenshotButtonClicked, setIsSticky } =
+  const { setScreenshotTaken, selectedRating, isScreenshotButtonClicked, setIsScreenshotButtonClicked, setDetachForm } =
     useFeedbackContext();
   const [currElemState, setCurrElemState] = useState(null);
 
@@ -181,10 +181,12 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // when screenshot button is first clicked
   const takeNewScreenshot = useCallback(() => {
+    savedPosition = document.getElementById(feedbackId).getBoundingClientRect();
     setIsScreenshotButtonClicked(true);
+    setDetachForm(true);
     domElementClickedRef.current = 'dashed';
     setSelectedElementBorderStyle('dashed');
-  }, [setIsScreenshotButtonClicked]);
+  }, [setIsScreenshotButtonClicked, setDetachForm]);
 
   // close out the instructions panel
   const handleInstructionClick = () => {
@@ -197,7 +199,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     currElem.current = null;
     currElemProperties.current = initialElemProperties;
     setIsScreenshotButtonClicked(false);
-    setIsSticky(true);
     setCurrElemState(null);
     setScreenshotTaken(false);
   };
@@ -210,19 +211,17 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setScreenshotTaken(true);
 
     // Allows for the feedback widget to appear on top of the screenshot overlay
-    // const rightColEl = document.getElementById(STYLED_RIGHT_COLUMN);
     const fbFormEl = document.getElementById(feedbackId);
-    setIsSticky(false);
-
-    // rightColEl.style.position = 'unset';
     fbFormEl.style.right = null;
+    fbFormEl.style.display = 'unset';
     fbFormEl.style.zIndex = '100';
-    fbFormEl.style.top = `${savedPosition.top}px`;
-    fbFormEl.style.left = `${savedPosition.left - 9000}px`;
+    fbFormEl.style.top = `${savedPosition.top + window.scrollY}px`;
+    fbFormEl.style.left = `${savedPosition.left}px`;
   };
 
   const handleExitButtonClick = (e) => {
     resetProperties();
+    document.getElementById(feedbackId).style.display = 'none';
 
     setIsScreenshotButtonClicked(true);
     domElementClickedRef.current = 'dashed';
@@ -233,8 +232,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   if (isScreenshotButtonClicked) {
     if (isBrowser && domElementClickedRef.current === 'dashed') {
-      savedPosition = document.getElementById(feedbackId).getBoundingClientRect();
-
       document.getElementById(feedbackId).style.right = '-9000px';
       // highlight elements based on mouse movement
       document.addEventListener('mousemove', handleElementHighlight);

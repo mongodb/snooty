@@ -55,14 +55,6 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const { tabsMainColumn } = usePageContext();
   const hasMethodSelector = pageOptions?.has_method_selector;
   const activeTutorial = useActiveMpTutorial();
-  // const url = isBrowser ? window.location.href : null;
-  // const metadata = useSnootyMetadata();
-  // const feedbackData = useFeedbackData({
-  //   slug,
-  //   url,
-  //   title:
-  //     getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
-  // });
 
   return (
     <DocumentContainer>
@@ -77,13 +69,11 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
           )}
         </div>
       </StyledMainColumn>
-      {/* <FeedbackProvider page={feedbackData}> */}
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
         {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
         <Contents slug={slug} />
       </StyledRightColumn>
-      {/* </FeedbackProvider> */}
     </DocumentContainer>
   );
 };

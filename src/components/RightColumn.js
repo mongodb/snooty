@@ -4,13 +4,9 @@ import { css } from '@emotion/react';
 import useStickyTopValues from '../hooks/useStickyTopValues';
 import { displayNone } from '../utils/display-none';
 import { theme } from '../theme/docsTheme';
-// import { useFeedbackContext } from './Widgets/FeedbackWidget';
 
 const RightColumn = ({ children, className }) => {
   const { topLarge } = useStickyTopValues();
-  // const { isSticky } = useFeedbackContext();
-  // position: ${isSticky ? 'sticky': 'unset'};
-
   return (
     <div
       className={className}

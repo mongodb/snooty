@@ -11,12 +11,12 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     !!test.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
   const [feedback, setFeedback] = useState(() => (hasExistingFeedback && test.feedback) || undefined);
   const [feedbackId, setFeedbackId] = useState(() => undefined);
+  const [detachForm, setDetachForm] = useState(false);
   const [selectedRating, setSelectedRating] = useState(test.feedback?.rating || undefined);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
-  const [isSticky, setIsSticky] = useState(true);
   const [, startTransition] = useTransition();
   const { user, reassignCurrentUser } = useRealmUser();
   const { href } = useLocation();
@@ -112,6 +112,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     // Route the user to their "next steps"
     setProgress([false, false, true]);
     setView('submitted');
+    setDetachForm(false);
 
     if (!selectedRating) return;
     // Submit the full feedback document
@@ -140,7 +141,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     setSelectedRating();
     setFeedbackId();
     setIsScreenshotButtonClicked(false);
-    setIsSticky(true);
+    setDetachForm(false);
   }, []);
 
   const value = {
@@ -158,8 +159,8 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     selectInitialRating,
     isScreenshotButtonClicked,
     setIsScreenshotButtonClicked,
-    isSticky,
-    setIsSticky,
+    detachForm,
+    setDetachForm,
   };
 
   // reset feedback when route changes
