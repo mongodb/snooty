@@ -205,25 +205,25 @@ interface ComposableTutorialOption {
   default: string;
   dependencies: Record<string, string>[];
   selections: { value: string; text: string }[];
+  // selections used to display list of dropdowns
+  // ie. [{value: 'nodejs', text: 'Node.js'}, {value: 'cpp', text: 'C++'}]
   text: string;
   value: string;
 }
 
-interface ComposableTutorialNode extends Directive<{ 'composable-options': ComposableTutorialOption[] }> {
+interface ComposableTutorialNode extends Directive {
   type: 'directive';
   name: 'composable-tutorials';
   children: ComposableNode[];
   composable_options: ComposableTutorialOption[];
 }
 
-interface ComposableNodeOption {
-  selections: Record<string, string>;
-}
-
-interface ComposableNode extends Directive<ComposableNodeOption> {
+interface ComposableNode extends Directive {
   type: 'directive';
   name: 'selected-content';
   selections: Record<string, string>;
+  // selections required to show this composable node
+  // ie. {interface: 'drivers', language: 'nodejs'}
   children: Node[];
 }
 

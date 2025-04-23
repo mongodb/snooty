@@ -115,8 +115,7 @@ function fulfilledSelections(
 export function getSelectionPermutation(selections: Record<string, string>): Set<string> {
   const res: Set<string> = new Set();
   let partialRes: string[] = [];
-  for (const key of Object.keys(selections)) {
-    const value = selections[key];
+  for (const [key, value] of Object.entries(selections)) {
     if (!value || value.toLowerCase() === 'none') {
       continue;
     }
@@ -151,11 +150,12 @@ const ComposableContainer = styled.div`
 `;
 
 const ComposableTutorial = ({
-  nodeData: { composable_options: composableOptions, children },
+  nodeData,
   ...rest
 }: ComposableProps) => {
   const [currentSelections, setCurrentSelections] = useState<Record<string, string>>(() => ({}));
   const location = useLocation();
+  const { composable_options: composableOptions, children } = nodeData;
 
   const validSelections = useMemo(() => {
     const res: Set<string> = new Set();
@@ -238,18 +238,22 @@ const ComposableTutorial = ({
   return (
     <>
       <ComposableContainer>
-        {composableOptions.map((option, index) => (
-          <ConfigurableOption
-            validSelections={validSelections}
-            option={option}
-            selections={currentSelections}
-            onSelect={onSelect}
-            showComposable={showComposable}
-            key={index}
-            optionIndex={index}
-            precedingOptions={composableOptions.slice(0, index)}
-          />
-        ))}
+        {composableOptions.map((option, index) => {
+          if (!showComposable(option.dependencies)) {
+            return null;
+          }
+          return (
+            <ConfigurableOption
+              validSelections={validSelections}
+              option={option}
+              selections={currentSelections}
+              onSelect={onSelect}
+              key={index}
+              optionIndex={index}
+              precedingOptions={composableOptions.slice(0, index)}
+            />
+          );
+        })}
       </ComposableContainer>
       {children.map((c, i) => {
         // selections is empty, if child has bad data

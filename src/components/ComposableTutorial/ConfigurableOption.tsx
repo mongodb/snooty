@@ -9,6 +9,7 @@ const selectStyling = css`
   flex: 1 1 200px;
   font-size: ${theme.fontSize.small};
   overflow: hidden;
+  z-index: ${theme.zIndexes.actionBar};
 
   label,
   button {
@@ -19,6 +20,18 @@ const selectStyling = css`
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+  }
+
+  // for dark mode initial load
+  > label {
+    color: var(--font-color-primary);
+  }
+
+  .dark-theme & {
+    > button {
+      background-color: var(--gray-dark4);
+      color: var(--gray-light3);
+    }
   }
 
   @media ${theme.screenSize.upToMedium} {
@@ -34,7 +47,6 @@ interface ConfigurationOptionProps {
   validSelections: Set<string>;
   option: ComposableTutorialOption;
   selections: Record<string, string>;
-  showComposable: (dependencies: Record<string, string>[]) => boolean;
   onSelect: (value: string, option: string, key: number) => void;
   precedingOptions: ComposableTutorialOption[];
   optionIndex: number;
@@ -44,7 +56,6 @@ const ConfigurableOption = ({
   option,
   selections,
   onSelect,
-  showComposable,
   validSelections,
   precedingOptions,
   optionIndex,
@@ -66,13 +77,10 @@ const ConfigurableOption = ({
     });
   }, [option, precedingOptions, selections, validSelections]);
 
-  if (!showComposable(option.dependencies)) {
-    return null;
-  }
-
   return (
     <Select
       className={cx(selectStyling)}
+      popoverZIndex={theme.zIndexes.actionBar - 1}
       label={option.text}
       allowDeselect={false}
       value={selections[option.value]}
