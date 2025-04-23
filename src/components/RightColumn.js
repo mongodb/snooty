@@ -7,6 +7,7 @@ import { theme } from '../theme/docsTheme';
 
 const RightColumn = ({ children, className }) => {
   const { topLarge } = useStickyTopValues();
+
   return (
     <div
       className={className}
