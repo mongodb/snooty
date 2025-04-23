@@ -190,7 +190,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // close out the instructions panel
   const handleInstructionClick = () => {
-    document.getElementById(feedbackId).style.right = null;
+    document.getElementById(feedbackId).style.left = null;
     resetProperties();
   };
 
@@ -212,7 +212,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
     // Allows for the feedback widget to appear on top of the screenshot overlay
     const fbFormEl = document.getElementById(feedbackId);
-    fbFormEl.style.right = null;
     fbFormEl.style.display = 'unset';
     fbFormEl.style.zIndex = '100';
     fbFormEl.style.top = `${savedPosition.top + window.scrollY}px`;
@@ -232,7 +231,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   if (isScreenshotButtonClicked) {
     if (isBrowser && domElementClickedRef.current === 'dashed') {
-      document.getElementById(feedbackId).style.right = '-9000px';
+      document.getElementById(feedbackId).style.left = '-9000px';
       // highlight elements based on mouse movement
       document.addEventListener('mousemove', handleElementHighlight);
     }
