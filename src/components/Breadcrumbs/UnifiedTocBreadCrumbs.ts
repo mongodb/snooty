@@ -1,27 +1,12 @@
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
-
-interface BreadCrumb {
-  path: string;
-  title: string;
-}
-
-interface TocItem {
-  label: string;
-  glyph?: string;
-  url?: string;
-  group?: boolean;
-  prefix?: string;
-  collapsible?: boolean;
-  breadcrumbs?: BreadCrumb[];
-  items?: TocItem[];
-}
+import type { TocItem, BreadCrumb } from '../UnifiedSidenav/UnifiedConstants';
 
 // Goes through toc.toml and builds parent breadcrumb data for each entry
 export function createParentFromToc(
   tree: TocItem[] | undefined,
   breadcrumbs: BreadCrumb[]
-): (TocItem & { breadcrumbs: BreadCrumb[] })[] | undefined {
+): (TocItem)[] | undefined {
   return tree?.map((item) => {
     const newCrumbs = [...breadcrumbs];
 

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
@@ -9,8 +9,8 @@ import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { getFeatureFlags } from '../../utils/feature-flags';
+import { usePageBreadcrumbs } from '../../hooks/useCreateBreadCrumbs';
 import BreadcrumbContainer from './BreadcrumbContainer';
-import { createParentFromToc, findParentBreadCrumb } from './UnifiedTocBreadCrumbs';
 
 const breadcrumbBodyStyle = css`
   font-size: ${theme.fontSize.small};
@@ -40,12 +40,7 @@ const Breadcrumbs = ({
 
   const { parentPaths } = useSnootyMetadata();
 
-  const unifiedTocParents = useMemo(() => {
-    if (!isUnifiedToc) return null;
-    const tree = createParentFromToc(tocTree, []);
-
-    return findParentBreadCrumb(slug, tree);
-  }, [slug, tocTree, isUnifiedToc]);
+  const unifiedTocParents = usePageBreadcrumbs(tocTree, slug, isUnifiedToc);
 
   const parentPathsData = parentPathsProp ?? parentPaths[slug];
 

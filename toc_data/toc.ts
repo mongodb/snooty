@@ -1,12 +1,4 @@
-interface TocItem {
-  label: string;
-  glyph?: string;
-  url?: string;
-  group?: boolean;
-  prefix?: string;
-  collapsible?: boolean;
-  items?: TocItem[];
-}
+import type { TocItem } from "../src/components/UnifiedSidenav/UnifiedConstants";
 
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
