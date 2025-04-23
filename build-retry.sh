@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Gatsby occasionally randomly fails with: "Failed to write page-data for ...
 # Couldn't find temp query result for ...". This appears to be a race condition
