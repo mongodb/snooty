@@ -1,8 +1,12 @@
-import { FeedbackProvider, useFeedbackContext } from './context';
-import useFeedbackData from './useFeedbackData';
-import FeedbackForm from './FeedbackForm';
-import FeedbackButton from './FeedbackButton';
+import { isBrowser } from '../../../utils/is-browser';
+import { getPlaintext } from '../../../utils/get-plaintext';
+import { getNestedValue } from '../../../utils/get-nested-value';
+import { RatingView } from '../../Widgets/FeedbackWidget/views';
+import useSnootyMetadata from '../../../utils/use-snooty-metadata';
 import FeedbackContainer from './FeedbackContainer';
+import FeedbackForm from './FeedbackForm';
+import useFeedbackData from './useFeedbackData';
+import { FeedbackProvider, useFeedbackContext } from './context';
 
 const FeedbackRating = ({ slug, className, classNameContainer }) => {
   const url = isBrowser ? window.location.href : null;
@@ -24,6 +28,16 @@ const FeedbackRating = ({ slug, className, classNameContainer }) => {
   );
 };
 
+// const FeedbackRating = ({ className, classNameContainer }) => {
+//   return (
+//       <FeedbackContainer className={classNameContainer}>
+//         <FeedbackForm className={className} />
+//         <RatingView />
+//       </FeedbackContainer>
+//   );
+// };
+
 export default FeedbackRating;
+// export default FeedbackRating2;
 
 export { FeedbackProvider, useFeedbackContext, useFeedbackData, FeedbackForm, FeedbackContainer };

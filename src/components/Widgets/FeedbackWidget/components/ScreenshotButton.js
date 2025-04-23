@@ -11,7 +11,6 @@ import { feedbackId } from '../FeedbackForm';
 import { isBrowser } from '../../../../utils/is-browser';
 import useNoScroll from '../hooks/useNoScroll';
 import { theme } from '../../../../theme/docsTheme';
-import { STYLED_RIGHT_COLUMN } from '../../../RightColumn';
 import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_BUTTON_TEXT_LOW, SCREENSHOT_OVERLAY_ALT_TEXT } from '../constants';
 
 const HIGHLIGHT_BORDER_SIZE = 5;
@@ -84,7 +83,7 @@ const ScreenshotSelect = styled(Button)`
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
-  const { setScreenshotTaken, selectedRating, isScreenshotButtonClicked, setIsScreenshotButtonClicked } =
+  const { setScreenshotTaken, selectedRating, isScreenshotButtonClicked, setIsScreenshotButtonClicked, setIsSticky } =
     useFeedbackContext();
   const [currElemState, setCurrElemState] = useState(null);
 
@@ -197,8 +196,8 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   const resetProperties = () => {
     currElem.current = null;
     currElemProperties.current = initialElemProperties;
-    document.getElementById(STYLED_RIGHT_COLUMN).style.position = 'sticky';
     setIsScreenshotButtonClicked(false);
+    setIsSticky(true);
     setCurrElemState(null);
     setScreenshotTaken(false);
   };
@@ -211,10 +210,11 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setScreenshotTaken(true);
 
     // Allows for the feedback widget to appear on top of the screenshot overlay
-    const rightColEl = document.getElementById(STYLED_RIGHT_COLUMN);
+    // const rightColEl = document.getElementById(STYLED_RIGHT_COLUMN);
     const fbFormEl = document.getElementById(feedbackId);
+    setIsSticky(false);
 
-    rightColEl.style.position = 'unset';
+    // rightColEl.style.position = 'unset';
     fbFormEl.style.right = null;
     fbFormEl.style.zIndex = '100';
     fbFormEl.style.top = `${savedPosition.top}px`;

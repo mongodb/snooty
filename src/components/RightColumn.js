@@ -4,11 +4,12 @@ import { css } from '@emotion/react';
 import useStickyTopValues from '../hooks/useStickyTopValues';
 import { displayNone } from '../utils/display-none';
 import { theme } from '../theme/docsTheme';
-
-export const STYLED_RIGHT_COLUMN = 'styled-right-column';
+// import { useFeedbackContext } from './Widgets/FeedbackWidget';
 
 const RightColumn = ({ children, className }) => {
   const { topLarge } = useStickyTopValues();
+  // const { isSticky } = useFeedbackContext();
+  // position: ${isSticky ? 'sticky': 'unset'};
 
   return (
     <div
@@ -24,7 +25,6 @@ const RightColumn = ({ children, className }) => {
       <div
         css={css`
           height: calc(100vh - 120px);
-          overflow: auto;
           position: sticky;
           top: calc(${topLarge} + ${theme.size.medium});
 
@@ -33,7 +33,6 @@ const RightColumn = ({ children, className }) => {
             margin-right: 24px;
           }
         `}
-        id={STYLED_RIGHT_COLUMN}
       >
         {children}
       </div>

@@ -1,7 +1,12 @@
 import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
+import { cx, css } from '@leafygreen-ui/emotion';
 import PropTypes from 'prop-types';
+import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
+import FeedbackRating from '../Widgets/FeedbackWidget';
+import useScreenSize from '../../hooks/useScreenSize';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { ContentsContext } from './contents-context';
 import ContentsList from './ContentsList';
 import ContentsListItem from './ContentsListItem';
@@ -36,6 +41,28 @@ const formContainer = css`
   }
 `;
 
+const formstyle = css`
+  position: absolute;
+  right: 0;
+  margin-top: ${theme.size.tiny};
+
+  @media ${theme.screenSize.upToLarge} {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
+`;
+
+const styledContentList = css`
+  overflow: auto;
+  height: 90%;
+`;
+
+export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
+
 const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
   if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
   const headingsMethodParent = headingSelectorIds['method-option'];
@@ -49,15 +76,21 @@ const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
 };
 
-const Contents = ({ className }) => {
+const Contents = ({ className, slug }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
+  const { isTabletOrMobile } = useScreenSize();
+  const metadata = useSnootyMetadata();
 
   const filteredNodes = headingNodes.filter((headingNode) => {
     return isHeadingVisible(headingNode.selector_ids, activeSelectorIds);
   });
 
   if (filteredNodes.length === 0 || !showContentsComponent) {
-    return null;
+    return (
+      <div className={className}>
+        <FeedbackRating slug={slug} className={formstyle} />
+      </div>
+    );
   }
 
   const label = 'On this page';
@@ -84,7 +117,6 @@ const Contents = ({ className }) => {
         <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
       )}
     </>
-
   );
 };
 

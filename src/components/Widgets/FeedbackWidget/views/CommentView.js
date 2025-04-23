@@ -119,7 +119,7 @@ const CommentView = () => {
 
   return (
     <Layout>
-      <StyledStarRating handleRatingSelection={setSelectedRating} showCaption={false} />
+      <StyledStarRating handleRatingSelection={setSelectedRating} />
       <StyledCommentInput
         type="text"
         id="feedback-comment"
