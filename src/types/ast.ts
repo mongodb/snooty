@@ -201,6 +201,32 @@ interface TocTreeDirective extends Directive<TocTreeOptions> {
   entries: TocTreeEntry[];
 }
 
+interface ComposableTutorialOption {
+  default: string;
+  dependencies: Record<string, string>[];
+  // selections used to display list of dropdowns
+  // ie. [{value: 'nodejs', text: 'Node.js'}, {value: 'cpp', text: 'C++'}]
+  selections: { value: string; text: string }[];
+  text: string;
+  value: string;
+}
+
+interface ComposableTutorialNode extends Directive {
+  type: 'directive';
+  name: 'composable-tutorials';
+  children: ComposableNode[];
+  composable_options: ComposableTutorialOption[];
+}
+
+interface ComposableNode extends Directive {
+  type: 'directive';
+  name: 'selected-content';
+  // selections required to show this composable node
+  // ie. {interface: 'drivers', language: 'nodejs'}
+  selections: Record<string, string>;
+  children: Node[];
+}
+
 export type {
   NodeType,
   Node,
@@ -235,4 +261,7 @@ export type {
   AdmonitionName,
   TocTreeEntry,
   TocTreeDirective,
+  ComposableNode,
+  ComposableTutorialNode,
+  ComposableTutorialOption,
 };

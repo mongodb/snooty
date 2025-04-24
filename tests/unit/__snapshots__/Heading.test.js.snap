@@ -39,6 +39,12 @@ exports[`renders correctly 1`] = `
   padding-bottom: 2px;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-3 {
+    margin-top: -85px;
+  }
+}
+
 <h3
     class="contains-headerlink emotion-0"
     weight="medium"
@@ -114,6 +120,12 @@ exports[`renders correctly in dark mode 1`] = `
   margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-3 {
+    margin-top: -85px;
+  }
 }
 
 <h3

@@ -1,0 +1,567 @@
+{
+  "ast": {
+    "children": [
+      {
+        "type": "root",
+        "position": {
+          "start": {
+            "line": {
+              "$numberInt": "0"
+            }
+          }
+        },
+        "children": [
+          {
+            "type": "section",
+            "position": {
+              "start": {
+                "line": {
+                  "$numberInt": "8"
+                }
+              }
+            },
+            "children": [
+              {
+                "type": "heading",
+                "position": {
+                  "start": {
+                    "line": {
+                      "$numberInt": "8"
+                    }
+                  }
+                },
+                "children": [
+                  {
+                    "type": "text",
+                    "position": {
+                      "start": {
+                        "line": {
+                          "$numberInt": "8"
+                        }
+                      }
+                    },
+                    "value": "DOP-5476"
+                  }
+                ],
+                "id": "DOP-5476"
+              },
+              {
+                "type": "directive",
+                "position": {
+                  "start": {
+                    "line": {
+                      "$numberInt": "173"
+                    }
+                  }
+                },
+                "domain": "",
+                "name": "composable-tutorial",
+                "argument": [],
+                "children": [
+                  {
+                    "type": "directive",
+                    "position": {
+                      "start": {
+                        "line": {
+                          "$numberInt": "173"
+                        }
+                      }
+                    },
+                    "domain": "",
+                    "name": "composable",
+                    "argument": [],
+                    "children": [
+                      {
+                        "type": "heading",
+                        "position": {
+                          "start": {
+                            "line": {
+                              "$numberInt": "179"
+                            }
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "position": {
+                              "start": {
+                                "line": {
+                                  "$numberInt": "8"
+                                }
+                              }
+                            },
+                            "value": "HEADING UNDER API REPLICATION AZURE"
+                          }
+                        ],
+                        "id": "api-standalone-aws"
+                      }
+                    ],
+                    "options": {
+                      "selections": [
+                        { "interface": "api" },
+                        { "deployment-type": "replication" },
+                        { "cloud-provider": "azure" }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "directive",
+                    "position": {
+                      "start": {
+                        "line": {
+                          "$numberInt": "173"
+                        }
+                      }
+                    },
+                    "domain": "",
+                    "name": "composable",
+                    "argument": [],
+                    "children": [
+                      {
+                        "type": "heading",
+                        "position": {
+                          "start": {
+                            "line": {
+                              "$numberInt": "179"
+                            }
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "position": {
+                              "start": {
+                                "line": {
+                                  "$numberInt": "8"
+                                }
+                              }
+                            },
+                            "value": "HEADING UNDER API STANDALONE GCP"
+                          }
+                        ],
+                        "id": "api-standalone-aws"
+                      }
+                    ],
+                    "options": {
+                      "selections": [
+                        { "interface": "api" },
+                        { "deployment-type": "standalone" },
+                        { "cloud-provider": "gcp" }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "directive",
+                    "position": {
+                      "start": {
+                        "line": {
+                          "$numberInt": "173"
+                        }
+                      }
+                    },
+                    "domain": "",
+                    "name": "composable",
+                    "argument": [],
+                    "children": [
+                      {
+                        "type": "heading",
+                        "position": {
+                          "start": {
+                            "line": {
+                              "$numberInt": "179"
+                            }
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "position": {
+                              "start": {
+                                "line": {
+                                  "$numberInt": "8"
+                                }
+                              }
+                            },
+                            "value": "HEADING UNDER API STANDALONE AZURE"
+                          }
+                        ],
+                        "id": "api-standalone-aws"
+                      }
+                    ],
+                    "options": {
+                      "selections": [
+                        { "interface": "api" },
+                        { "deployment-type": "standalone" },
+                        { "cloud-provider": "azure" }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "directive",
+                    "position": {
+                      "start": {
+                        "line": {
+                          "$numberInt": "173"
+                        }
+                      }
+                    },
+                    "domain": "",
+                    "name": "composable",
+                    "argument": [],
+                    "children": [
+                      {
+                        "type": "heading",
+                        "position": {
+                          "start": {
+                            "line": {
+                              "$numberInt": "179"
+                            }
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "position": {
+                              "start": {
+                                "line": {
+                                  "$numberInt": "8"
+                                }
+                              }
+                            },
+                            "value": "HEADING UNDER API REPLICATION AWS"
+                          }
+                        ],
+                        "id": "api-standalone-aws"
+                      }
+                    ],
+                    "options": {
+                      "selections": [
+                        { "interface": "api" },
+                        { "deployment-type": "replication" },
+                        { "cloud-provider": "aws" }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "directive",
+                    "position": {
+                      "start": {
+                        "line": {
+                          "$numberInt": "173"
+                        }
+                      }
+                    },
+                    "domain": "",
+                    "name": "composable",
+                    "argument": [],
+                    "children": [
+                      {
+                        "type": "heading",
+                        "position": {
+                          "start": {
+                            "line": {
+                              "$numberInt": "179"
+                            }
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "position": {
+                              "start": {
+                                "line": {
+                                  "$numberInt": "8"
+                                }
+                              }
+                            },
+                            "value": "HEADING UNDER API SHARDED AWS"
+                          }
+                        ],
+                        "id": "api-standalone-aws"
+                      }
+                    ],
+                    "options": {
+                      "selections": [
+                        { "interface": "api" },
+                        { "deployment-type": "sharded" },
+                        { "cloud-provider": "aws" }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "directive",
+                    "position": {
+                      "start": {
+                        "line": {
+                          "$numberInt": "173"
+                        }
+                      }
+                    },
+                    "domain": "",
+                    "name": "composable",
+                    "argument": [],
+                    "children": [
+                      {
+                        "type": "heading",
+                        "position": {
+                          "start": {
+                            "line": {
+                              "$numberInt": "179"
+                            }
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "position": {
+                              "start": {
+                                "line": {
+                                  "$numberInt": "8"
+                                }
+                              }
+                            },
+                            "value": "HEADING UNDER API SHARDED GCP"
+                          }
+                        ],
+                        "id": "api-standalone-aws"
+                      }
+                    ],
+                    "options": {
+                      "selections": [
+                        { "interface": "api" },
+                        { "deployment-type": "sharded" },
+                        { "cloud-provider": "gcp" }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "directive",
+                    "position": {
+                      "start": {
+                        "line": {
+                          "$numberInt": "173"
+                        }
+                      }
+                    },
+                    "domain": "",
+                    "name": "composable",
+                    "argument": [],
+                    "children": [
+                      {
+                        "type": "heading",
+                        "position": {
+                          "start": {
+                            "line": {
+                              "$numberInt": "179"
+                            }
+                          }
+                        },
+                        "children": [
+                          {
+                            "type": "text",
+                            "position": {
+                              "start": {
+                                "line": {
+                                  "$numberInt": "8"
+                                }
+                              }
+                            },
+                            "value": "HEADING UNDER DRIVER NODE REPLICATION AZURE"
+                          }
+                        ],
+                        "id": "api-standalone-aws"
+                      }
+                    ],
+                    "options": {
+                      "selections": [
+                        { "interface": "driver" },
+                        { "language": "nodejs" },
+                        { "deployment-type": "replication" },
+                        { "cloud-provider": "azure" }
+                      ]
+                    }
+                  }
+                ],
+                "composable-options": [
+                  {
+                    "value": "interface",
+                    "text": "Interface",
+                    "default": "driver",
+                    "dependencies": [],
+                    "selections": [
+                      {
+                        "value": "api",
+                        "text": "API"
+                      },
+                      {
+                        "value": "cli",
+                        "text": "CLI"
+                      },
+                      {
+                        "value": "compass",
+                        "text": "Compass"
+                      },
+                      {
+                        "value": "driver",
+                        "text": "Driver"
+                      },
+                      {
+                        "value": "ui",
+                        "text": "Atlas UI"
+                      }
+                    ]
+                  },
+                  {
+                    "value": "language",
+                    "text": "Language",
+                    "default": "nodejs",
+                    "dependencies": [{ "interface": "driver" }],
+                    "selections": [
+                      {
+                        "value": "c",
+                        "text": "C"
+                      },
+                      {
+                        "value": "java-async",
+                        "text": "Java (Async)"
+                      },
+                      {
+                        "value": "php",
+                        "text": "PHP"
+                      },
+                      {
+                        "value": "nodejs",
+                        "text": "Node.js"
+                      }
+                    ]
+                  },
+                  {
+                    "value": "deployment-type",
+                    "text": "Deployment Type",
+                    "default": "standalone",
+                    "dependencies": [],
+                    "selections": [
+                      {
+                        "value": "standalone",
+                        "text": "Standalone"
+                      },
+                      {
+                        "value": "replication",
+                        "text": "Replication"
+                      },
+                      {
+                        "value": "sharded",
+                        "text": "Sharded"
+                      }
+                    ]
+                  },
+                  {
+                    "value": "cloud-provider",
+                    "text": "Cloud Provider",
+                    "default": "aws",
+                    "dependencies": [],
+                    "selections": [
+                      {
+                        "value": "aws",
+                        "text": "AWS"
+                      },
+                      {
+                        "value": "gcp",
+                        "text": "GCP"
+                      },
+                      {
+                        "value": "azure",
+                        "text": "Azure"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "type": "root",
+    "fileid": "composable-tutorials.txt",
+    "options": {
+      "headings": [
+        {
+          "depth": 1,
+          "id": "insert-documents-in-the-mongodb-atlas-ui",
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "45"
+                  }
+                }
+              },
+              "value": "Insert Documents in the MongoDB Atlas UI"
+            }
+          ],
+          "selector_ids": {
+            "composable": [{ "drivers": "ui" }]
+          }
+        },
+        {
+          "depth": 1,
+          "id": "insert-a-single-document",
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "88"
+                  }
+                }
+              },
+              "value": "Insert a Single Document"
+            }
+          ],
+          "selector_ids": {}
+        },
+        {
+          "depth": 1,
+          "id": "insert-multiple-documents",
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "385"
+                  }
+                }
+              },
+              "value": "Insert Multiple Documents"
+            }
+          ],
+          "selector_ids": {}
+        },
+        {
+          "depth": 1,
+          "id": "insert-behavior",
+          "title": [
+            {
+              "type": "text",
+              "position": {
+                "start": {
+                  "line": {
+                    "$numberInt": "665"
+                  }
+                }
+              },
+              "value": "Insert Behavior"
+            }
+          ],
+          "selector_ids": {}
+        }
+      ],
+      "composables": true
+    }
+  }
+}
