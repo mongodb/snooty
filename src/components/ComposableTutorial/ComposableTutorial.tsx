@@ -150,10 +150,7 @@ const ComposableContainer = styled.div`
   }
 `;
 
-const ComposableTutorial = ({
-  nodeData,
-  ...rest
-}: ComposableProps) => {
+const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
   const [currentSelections, setCurrentSelections] = useState<Record<string, string>>(() => ({}));
   const location = useLocation();
   const { composable_options: composableOptions, children } = nodeData;
