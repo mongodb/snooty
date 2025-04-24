@@ -11,14 +11,15 @@ import { theme } from '../../theme/docsTheme';
 import Composable from './Composable';
 import ConfigurableOption from './ConfigurableOption';
 
+const DELIMITER_KEY = '**';
 // helper function to join key-value pairs as one string
 // ordered by keys alphabetically
-// separated by "."
+// separated by DELIMITER_KEY
 export function joinKeyValuesAsString(targetObj: { [key: string]: string }) {
   return Object.keys(targetObj)
     .map((key) => `${key}=${targetObj[key]}`)
     .sort()
-    .join('.');
+    .join(DELIMITER_KEY);
 }
 
 function filterValidQueryParams(
@@ -85,7 +86,7 @@ function filterValidQueryParams(
     // safety to find a valid combination from children and select
     const currentSelections = joinKeyValuesAsString({ ...res });
     for (const [validSelection] of validSelections.entries()) {
-      const validSelectionParts = validSelection.split('.');
+      const validSelectionParts = validSelection.split(DELIMITER_KEY);
       const selectionPartForOption = validSelectionParts.find((str) => str.includes(`${composableOption.value}=`));
       if (validSelection.includes(currentSelections) && selectionPartForOption) {
         res[composableOption.value] = selectionPartForOption.split('=')[1];
@@ -120,7 +121,7 @@ export function getSelectionPermutation(selections: Record<string, string>): Set
       continue;
     }
     partialRes.push(`${key}=${value}`);
-    res.add(partialRes.sort().join('.'));
+    res.add(partialRes.sort().join(DELIMITER_KEY));
   }
   return res;
 }
