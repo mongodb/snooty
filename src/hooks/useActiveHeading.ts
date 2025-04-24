@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { HeadingNode } from '../types/ast';
 
-const observeHeadings = (headingNodes, observer) =>
+const observeHeadings = (headingNodes: HeadingNode[], observer: IntersectionObserver) =>
   headingNodes.flatMap((heading) => {
     const el = document.getElementById(heading.id);
     if (el) {
@@ -10,7 +11,7 @@ const observeHeadings = (headingNodes, observer) =>
     return [];
   });
 
-const unobserveHeadings = (headings, observer) => {
+const unobserveHeadings = (headings: HTMLElement[], observer: IntersectionObserver) => {
   headings.forEach((el) => {
     observer.unobserve(el);
   });
@@ -23,25 +24,25 @@ const unobserveHeadings = (headings, observer) => {
  * @param {number} intersectionRatio The ratio to compare element intersection visibility with. If the element
  * is observed to be above this ratio, it will be eligible as active.
  */
-const useActiveHeading = (headingNodes, intersectionRatio) => {
+const useActiveHeading = (headingNodes: HeadingNode[], intersectionRatio: number = 0) => {
   const [activeHeadingId, setActiveHeadingId] = useState(headingNodes?.[0]?.id);
 
   useEffect(() => {
     // Map indexes/order of headings to their ids
     // to avoid having to find it for each active heading id later
-    const headingsIndexMap = {};
+    const headingsIndexMap: { [k: string]: number } = {};
     headingNodes.forEach(({ id }, index) => {
       headingsIndexMap[id] = index;
     });
     const targetRatio = intersectionRatio >= 0 ? intersectionRatio : 0;
-    const headingsInViewport = new Set();
+    const headingsInViewport = new Set<string>();
 
     const options = {
       // Check elements after every 25% of visibility, if possible
       threshold: [0, 0.25, 0.5, 0.75, 1.0],
     };
 
-    const callback = (entries) => {
+    const callback: IntersectionObserverCallback = (entries) => {
       for (const entry of entries) {
         if (entry.intersectionRatio > targetRatio) {
           headingsInViewport.add(entry.target.id);
@@ -51,7 +52,7 @@ const useActiveHeading = (headingNodes, intersectionRatio) => {
       }
 
       // Track highest visible heading and its index
-      let highestVisibleHeading = [null, Number.MAX_SAFE_INTEGER];
+      let highestVisibleHeading: [string | null, number] = [null, Number.MAX_SAFE_INTEGER];
       // Find first/topmost heading that is in the viewport
       for (const headingId of headingsInViewport) {
         const currIdx = headingsIndexMap[headingId];

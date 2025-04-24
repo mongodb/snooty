@@ -261,7 +261,6 @@ export type {
   AdmonitionName,
   TocTreeEntry,
   TocTreeDirective,
-  ComposableNodeOption,
   ComposableNode,
   ComposableTutorialNode,
   ComposableTutorialOption,

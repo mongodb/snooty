@@ -57,6 +57,7 @@ const searchInputStyle = css`
 
 const tableStyling = css`
   margin-top: ${theme.size.tiny};
+  min-height: 200px;
   th:first-of-type,
   td:first-of-type {
     padding-left: 8px;
