@@ -1,4 +1,4 @@
-import type { TocItem } from "../src/components/UnifiedSidenav/UnifiedConstants";
+import type { TocItem } from '../src/components/UnifiedSidenav/UnifiedConstants';
 
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [

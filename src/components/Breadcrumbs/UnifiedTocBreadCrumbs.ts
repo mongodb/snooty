@@ -3,10 +3,7 @@ import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import type { TocItem, BreadCrumb } from '../UnifiedSidenav/UnifiedConstants';
 
 // Goes through toc.toml and builds parent breadcrumb data for each entry
-export function createParentFromToc(
-  tree: TocItem[] | undefined,
-  breadcrumbs: BreadCrumb[]
-): (TocItem)[] | undefined {
+export function createParentFromToc(tree: TocItem[] | undefined, breadcrumbs: BreadCrumb[]): TocItem[] | undefined {
   return tree?.map((item) => {
     const newCrumbs = [...breadcrumbs];
 
