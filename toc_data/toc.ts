@@ -5,6 +5,7 @@ interface TocItem {
   group?: boolean;
   prefix?: string;
   collapsible?: boolean;
+  drivers?: boolean;
   items?: TocItem[];
 }
 
@@ -73,7 +74,7 @@ export const tocData = (): TocItem[] => {
         {
           label: 'Connect to cloud',
           group: true,
-          prefix: '/master/cloud-docs/bianca.laube/DOP-5382',
+          prefix: '/master/cloud-docs/bianca.laube/DOP-5375',
           items: [
             {
               label: 'Manage Clusters',
@@ -98,7 +99,7 @@ export const tocData = (): TocItem[] => {
       label: 'Get Started',
       url: '/getting-started',
       glyph: 'LightningBolt',
-      prefix: '/master/cloud-docs/bianca.laube/DOP-5382',
+      prefix: '/master/cloud-docs/bianca.laube/DOP-5375',
       items: [
         {
           label: 'Get Started',
@@ -144,7 +145,7 @@ export const tocData = (): TocItem[] => {
         },
         {
           label: 'Docs Compass',
-          prefix: '/master/compass/bianca.laube/DOP-5382',
+          prefix: '/master/compass/bianca.laube/DOP-5375',
           group: true,
           items: [
             {
@@ -163,7 +164,7 @@ export const tocData = (): TocItem[] => {
       label: 'Application Development',
       url: '/create-connect-deployments',
       glyph: 'Code',
-      prefix: '/master/cloud-docs/bianca.laube/DOP-5382',
+      prefix: '/master/cloud-docs/bianca.laube/DOP-5375',
       items: [
         {
           label: 'Application Development',
@@ -239,7 +240,7 @@ export const tocData = (): TocItem[] => {
     },
     {
       label: 'Client Libraries and APIs',
-      url: '/',
+      url: '/builders',
       prefix: '/master/java/bianca.laube/DOP-5375',
       items: [
         {
@@ -253,7 +254,7 @@ export const tocData = (): TocItem[] => {
             {
               label: 'Connection Guide',
               url: '/connection',
-              collapsible: true,
+              drivers: true,
               items: [
                 {
                   label: 'Create Mongodb client',
