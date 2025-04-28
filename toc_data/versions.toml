@@ -48,7 +48,7 @@ isStableBranch = true
 [[repo]]
 repoName = "csharp"
 # repoSlug = 'drivers/csharp/'
-repoSlug = 'csharp/bianca.laube/DOP-5343'
+repoSlug = 'csharp/bianca.laube/DOP-5382'
 [[repo.version]]
 name = 'master'
 urlAliases = ['upcoming']

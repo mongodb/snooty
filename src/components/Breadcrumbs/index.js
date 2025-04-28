@@ -7,6 +7,9 @@ import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-d
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
+import { useUnifiedToc } from '../../hooks/use-unified-toc';
+import { getFeatureFlags } from '../../utils/feature-flags';
+import { usePageBreadcrumbs } from '../../hooks/useCreateBreadCrumbs';
 import BreadcrumbContainer from './BreadcrumbContainer';
 
 const breadcrumbBodyStyle = css`
@@ -30,10 +33,15 @@ const Breadcrumbs = ({
   selfCrumb = null,
   pageInfo = null,
 }) => {
+  const { isUnifiedToc } = getFeatureFlags();
+  const tocTree = useUnifiedToc();
   const queriedCrumbsHook = useBreadcrumbs();
   const queriedCrumbs = queriedCrumbsProp ?? queriedCrumbsHook;
 
   const { parentPaths } = useSnootyMetadata();
+
+  const unifiedTocParents = usePageBreadcrumbs(tocTree, slug, isUnifiedToc);
+
   const parentPathsData = parentPathsProp ?? parentPaths[slug];
 
   const { siteUrl } = useSiteMetadata();
@@ -47,8 +55,9 @@ const Breadcrumbs = ({
         parentPaths: parentPathsData,
         selfCrumbContent: selfCrumb,
         pageInfo,
+        unifiedTocParents,
       }),
-    [siteUrl, parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb, pageInfo]
+    [siteUrl, parentPathsData, queriedCrumbs, siteTitle, slug, selfCrumb, pageInfo, unifiedTocParents]
   );
 
   return (

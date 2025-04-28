@@ -1,6 +1,7 @@
 # tab item 1
 [[toc]]
-prefix = '/drivers/csharp/${version}'
+# prefix = '/drivers/csharp/${version}'
+prefix = '/${version}/csharp/bianca.laube/DOP-5382'
 label = "C# Quick Start"
 url = "/quick-start"
 
@@ -23,7 +24,6 @@ url = '/faq'
 
 # tab item 2
 [[toc]]
-prefix = '/csharp/${version}'
 label = "Fundamentals"
 url = "/fundamentals"
 

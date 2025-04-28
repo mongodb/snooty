@@ -4,8 +4,13 @@ import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { BreadcrumbListSd, STRUCTURED_DATA_CLASSNAME } from '../../utils/structured-data.js';
 import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
+import { getFeatureFlags } from '../../utils/feature-flags';
+import { useUnifiedToc } from '../../hooks/use-unified-toc';
+import { usePageBreadcrumbs } from '../../hooks/useCreateBreadCrumbs';
 
 const BreadcrumbSchema = ({ slug }) => {
+  const { isUnifiedToc } = getFeatureFlags();
+  const tocTree = useUnifiedToc();
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
   const { siteUrl } = useSiteMetadata();
 
@@ -13,10 +18,19 @@ const BreadcrumbSchema = ({ slug }) => {
 
   const queriedCrumbs = useBreadcrumbs();
 
+  const unifiedTocParents = usePageBreadcrumbs(tocTree, slug, isUnifiedToc);
+
   const breadcrumbSd = React.useMemo(() => {
-    const sd = new BreadcrumbListSd({ siteUrl, siteTitle, slug, queriedCrumbs, parentPaths: parentPathsSlug });
+    const sd = new BreadcrumbListSd({
+      siteUrl,
+      siteTitle,
+      slug,
+      queriedCrumbs,
+      parentPaths: parentPathsSlug,
+      unifiedTocParents,
+    });
     return sd.isValid() ? sd.toString() : undefined;
-  }, [siteUrl, siteTitle, slug, queriedCrumbs, parentPathsSlug]);
+  }, [siteUrl, siteTitle, slug, queriedCrumbs, parentPathsSlug, unifiedTocParents]);
 
   return (
     <>
