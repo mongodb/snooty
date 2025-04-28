@@ -33,4 +33,4 @@ if [ -d "docs-worker-pool" ]; then
 fi
 
 # run the site
-npm run build:no-prefix
+npm run build
