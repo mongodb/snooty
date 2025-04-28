@@ -280,14 +280,14 @@ export const tocData = (): TocItem[] => {
                   collapsible: true,
                   items: [
                     {
-                      label: "Update Arrays",
-                      url: '/crud/update-documents/embedded-arrays'
+                      label: 'Update Arrays',
+                      url: '/crud/update-documents/embedded-arrays',
                     },
                     {
                       label: 'Upsert',
-                      url: '/crud/update-documents/upsert/'
-                    }
-                  ]
+                      url: '/crud/update-documents/upsert/',
+                    },
+                  ],
                 },
               ],
             },
