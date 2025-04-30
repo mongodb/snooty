@@ -1,7 +1,6 @@
-
 import type { TocItem } from '../src/components/UnifiedSidenav/UnifiedConstants';
 
-// each url has to be unique with the prefix!!!! 
+// each url has to be unique with the prefix!!!!
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
     {
