@@ -42,6 +42,12 @@ exports[`renders correctly 1`] = `
   padding-bottom: 2px;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-3 {
+    margin-top: -85px;
+  }
+}
+
 <section>
     <h1
       class="contains-headerlink emotion-0"
