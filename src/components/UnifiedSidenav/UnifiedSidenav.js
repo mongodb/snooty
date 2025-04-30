@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
@@ -22,6 +22,8 @@ import { SidenavContext } from '../Sidenav';
 import useViewport from '../../hooks/useViewport';
 import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { assertLeadingSlash } from '../../utils/assert-leading-slash';
+import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -149,7 +151,10 @@ function CollapsibleNavItem({ items, label, url, slug, prefix, level }) {
         <FormatTitle>{label}</FormatTitle>
         <Icon className={cx(chevronStyle)} glyph={chevronType} fill={palette.gray.base} onClick={onChevronClick} />
       </SideNavItem>
-      {isOpen && items.map((item) => <UnifiedTocNavItem {...item} level={level + 1} key={url} slug={slug} />)}
+      {isOpen &&
+        items.map((item) => (
+          <UnifiedTocNavItem {...item} level={level + 1} key={item.newUrl + item.label} slug={slug} />
+        ))}
     </>
   );
 }
@@ -164,9 +169,9 @@ function UnifiedTocNavItem({
   prefix,
   slug,
   drivers,
-  activeTabUrl,
+  currentL2s,
   isTabletOrMobile,
-  setActiveTabUrl,
+  setCurrentL2s,
   setChange,
   level,
 }) {
@@ -177,16 +182,16 @@ function UnifiedTocNavItem({
       return (
         <>
           <StaticNavItem label={label} url={url} slug={slug} isStatic={isStatic} items={items} prefix={prefix} />
-          {url === activeTabUrl &&
+          {url === currentL2s &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
                 {...tocItem}
                 level={level}
-                key={url}
+                key={tocItem.newUrl + tocItem.label}
                 slug={slug}
                 isStatic={false}
                 isTabletOrMobile={isTabletOrMobile}
-                setActiveTabUrl={setActiveTabUrl}
+                setCurrentL2s={setCurrentL2s}
               />
             ))}
         </>
@@ -199,11 +204,11 @@ function UnifiedTocNavItem({
           <UnifiedTocNavItem
             {...tocItem}
             level={level}
-            key={url}
+            key={tocItem.newUrl + tocItem.label}
             slug={slug}
             isStatic={false}
             isTabletOrMobile={isTabletOrMobile}
-            setActiveTabUrl={setActiveTabUrl}
+            setCurrentL2s={setCurrentL2s}
             setChange={setChange}
           />
         ))}
@@ -219,10 +224,10 @@ function UnifiedTocNavItem({
           <UnifiedTocNavItem
             {...tocItem}
             level={level}
-            key={url}
+            key={tocItem.newUrl + tocItem.label}
             slug={slug}
             isTabletOrMobile={isTabletOrMobile}
-            setActiveTabUrl={setActiveTabUrl}
+            setCurrentL2s={setCurrentL2s}
             setChange={setChange}
           />
         ))}
@@ -231,10 +236,9 @@ function UnifiedTocNavItem({
   }
 
   const handleClick = () => {
-    // Allows the collapsed item if the chevron was selected first before
-    console.log('i made it', items);
-    setChange(false);
-    setActiveTabUrl({ items: items });
+    // Allows for the drivers nodes to have their own L2 panel
+    setChange(true);
+    setCurrentL2s({ items: items });
   };
 
   if (drivers) {
@@ -282,7 +286,7 @@ function UnifiedTocNavItem({
   );
 }
 
-function StaticNavItem({ label, url, slug, items, isStatic, prefix, level = 1 }) {
+function StaticNavItem({ label, url, slug, items, isStatic, prefix, setCurrentL1, level = 1 }) {
   return (
     <SideNavItem
       active={isActiveTocNode(slug, url, items)}
@@ -290,6 +294,9 @@ function StaticNavItem({ label, url, slug, items, isStatic, prefix, level = 1 })
       prefix={prefix}
       as={Link}
       to={url}
+      onClick={() => {
+        setCurrentL1({ items: items });
+      }}
       className={cx(sideNavItemUniTOCStyling({ level, isStatic }))}
     >
       {label}
@@ -371,6 +378,42 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
   });
 };
 
+const findNodeOrParentWithDrivers = (tree, targetUrl) => {
+  const path = [];
+
+  const dfs = (node) => {
+    path.push(node); // Track the path we're visiting
+
+    if (assertLeadingSlash(removeTrailingSlash(node.url)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
+      // looks for if the current page is apart of the drivers sidenav (but doesnt include itself)
+      for (let i = path.length - 2; i >= 0; i--) {
+        if (path[i].drivers === true) {
+          return [true, path[i]];
+        }
+      }
+      return [false, path[0]]; // This is the parent driver node, but we dont want to show the driver sidenav yet
+    }
+
+    if (node.items) {
+      for (const child of node.items) {
+        const result = dfs(child);
+        if (result) return result;
+      }
+    }
+
+    path.pop();
+    return null;
+  };
+
+  for (const node of tree) {
+    const result = dfs(node);
+    if (result) return result;
+  }
+
+  // If not found, it should never get here tho
+  return [false, null];
+};
+
 export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
@@ -382,30 +425,44 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
-  const [change, setChange] = useState(true);
 
   // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
-  const tree = updateURLs({ tree: unifiedTocTree, prefix: '', activeVersions, versionsData, project, snootyEnv });
+  const tree = useMemo(() => {
+    return updateURLs({
+      tree: unifiedTocTree,
+      prefix: '',
+      activeVersions,
+      versionsData,
+      project,
+      snootyEnv,
+    });
+  }, [unifiedTocTree, activeVersions, versionsData, project, snootyEnv]);
+
   console.log('The edited toctree with prefixes is:', tree);
   console.log(unifiedTocTree);
 
-  const [activeTabUrl, setActiveTabUrl] = useState(() => {
-    const activeToc = tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
-    });
-    return activeToc;
-  });
+  const [isDriver, currentL2List] = findNodeOrParentWithDrivers(tree, slug);
+  const [change, setChange] = useState(isDriver);
+  const changeRef = useRef(change);
 
   useEffect(() => {
-    if (change) {
-      setActiveTabUrl(() => {
-        const activeToc = tree.find((staticTocItem) => {
-          return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
-        });
-        return activeToc;
-      });
-    }
-  }, [slug, change, tree]);
+    changeRef.current = change;
+  }, [change]);
+
+  const [currentL1, setCurrentL1] = useState(() => {
+    return tree.find((staticTocItem) => {
+      return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
+    });
+    // return (activeToc) ? activeToc.label : null;
+  });
+  const [currentL2s, setCurrentL2s] = useState(() => {
+    return currentL2List;
+  });
+
+  // i dont want this to always change, i only want this to load if the static item is selected
+  useEffect(() => {
+    if (!changeRef.current) setCurrentL2s(currentL1);
+  }, [currentL1]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
   useEffect(() => {
@@ -414,6 +471,8 @@ export function UnifiedSidenav({ slug, versionsData }) {
 
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
+
+  console.log('bah', currentL1);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
@@ -436,44 +495,48 @@ export function UnifiedSidenav({ slug, versionsData }) {
                     <UnifiedTocNavItem
                       {...navItems}
                       level={1}
-                      slug={slug}
-                      key={navItems.url}
+                      key={navItems.newUrl + navItems.label}
                       group={true}
                       isStatic={true}
-                      activeTabUrl={activeTabUrl.url}
+                      currentL2s={currentL2s.url}
                       isTabletOrMobile={isTabletOrMobile}
-                      setActiveTabUrl={setActiveTabUrl}
+                      setCurrentL2s={setCurrentL2s}
                     />
                   );
                 })
               : tree.map((staticTocItem) => {
-                  return <StaticNavItem {...staticTocItem} slug={slug} key={staticTocItem.url} isStatic={true} />;
+                  return (
+                    <StaticNavItem
+                      {...staticTocItem}
+                      slug={slug}
+                      key={staticTocItem.newUrl + staticTocItem.label}
+                      isStatic={true}
+                      setCurrentL1={setCurrentL1}
+                    />
+                  );
                 })}
           </div>
-          {activeTabUrl && !isTabletOrMobile && (
+          {currentL2s && !isTabletOrMobile && (
             <div className={cx(rightPane)}>
-              {!change && (
+              {change && (
                 <BackLink
                   onClick={() => {
-                    setChange(true);
+                    setCurrentL2s(currentL1);
+                    setChange(false);
                   }}
                 >
                   Back to Client Libraries
                 </BackLink>
               )}
-              {activeTabUrl.items?.map((navItems) => {
-                console.log('navitgem are', navItems);
+              {currentL2s.items?.map((navItems) => {
                 return (
                   <UnifiedTocNavItem
                     {...navItems}
                     level={1}
-                    key={navItems.url}
+                    key={navItems.newUrl + navItems.label}
                     slug={slug}
-                    setActiveTabUrl={setActiveTabUrl}
+                    setCurrentL2s={setCurrentL2s}
                     setChange={setChange}
-                    // group={true}
-                    // isStatic={true}
-                    // activeTabUrl={activeTabUrl}
                   />
                 );
               })}

@@ -1,21 +1,14 @@
-interface TocItem {
-  label: string;
-  glyph?: string;
-  url?: string;
-  group?: boolean;
-  prefix?: string;
-  collapsible?: boolean;
-  drivers?: boolean;
-  items?: TocItem[];
-}
 
+import type { TocItem } from '../src/components/UnifiedSidenav/UnifiedConstants';
+
+// each url has to be unique with the prefix!!!! 
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
     {
       label: 'C# Quick Start',
       url: '/quick-start',
       glyph: 'Bulb',
-      prefix: '/version/csharp/bianca.laube/DOP-5382',
+      prefix: '/version/csharp/bianca.laube/DOP-5375',
       items: [
         {
           label: 'C# Documentation',

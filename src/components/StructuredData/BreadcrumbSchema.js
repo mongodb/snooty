@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { BreadcrumbListSd, STRUCTURED_DATA_CLASSNAME } from '../../utils/structured-data.js';
 import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
 import { getFeatureFlags } from '../../utils/feature-flags';
-import { createParentFromToc, findParentBreadCrumb } from '../Breadcrumbs/UnifiedTocBreadCrumbs';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
+import { usePageBreadcrumbs } from '../../hooks/useCreateBreadCrumbs';
 
 const BreadcrumbSchema = ({ slug }) => {
   const { isUnifiedToc } = getFeatureFlags();
@@ -18,12 +18,7 @@ const BreadcrumbSchema = ({ slug }) => {
 
   const queriedCrumbs = useBreadcrumbs();
 
-  const unifiedTocParents = useMemo(() => {
-    if (!isUnifiedToc) return null;
-    const tree = createParentFromToc(tocTree, []);
-
-    return findParentBreadCrumb(slug, tree);
-  }, [slug, tocTree, isUnifiedToc]);
+  const unifiedTocParents = usePageBreadcrumbs(tocTree, slug, isUnifiedToc);
 
   const breadcrumbSd = React.useMemo(() => {
     const sd = new BreadcrumbListSd({
