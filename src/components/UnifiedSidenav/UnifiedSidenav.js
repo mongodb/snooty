@@ -386,12 +386,13 @@ const findNodeOrParentWithDrivers = (tree, targetUrl) => {
 
     if (assertLeadingSlash(removeTrailingSlash(node.url)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
       // looks for if the current page is apart of the drivers sidenav (but doesnt include itself)
-      for (let i = path.length - 2; i >= 0; i--) {
+      for (let i = path.length - 1; i >= 0; i--) {
         if (path[i].drivers === true) {
           return [true, path[i]];
         }
       }
-      return [false, path[0]]; // This is the parent driver node, but we dont want to show the driver sidenav yet
+      // Page is not apart of a driver, returns the assosiated L1
+      return [false, path[0]];
     }
 
     if (node.items) {
