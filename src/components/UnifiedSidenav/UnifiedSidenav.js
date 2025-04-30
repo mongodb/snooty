@@ -244,7 +244,6 @@ function UnifiedTocNavItem({
   if (drivers) {
     return (
       <SideNavItem
-        // active={isSelectedTab(url, slug)}
         aria-label={label}
         as={Link}
         prefix={prefix}
