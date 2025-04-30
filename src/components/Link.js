@@ -125,8 +125,6 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
-    console.log(' the prefixes are', pathPrefix, prefix);
-
     if (pathPrefix.replaceAll('/', '') === prefix.replaceAll('/', '')) {
       return (
         <GatsbyLink

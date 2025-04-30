@@ -292,8 +292,7 @@ export const tocData = (): TocItem[] => {
                     },
                   ],
                 },
-                
-              ]
+              ],
             },
             {
               label: 'C driver',
@@ -302,8 +301,8 @@ export const tocData = (): TocItem[] => {
               url: '/async-c-driver',
               items: [
                 {
-                  label: 'C Driver', 
-                  group: true, 
+                  label: 'C Driver',
+                  group: true,
                   items: [
                     {
                       label: 'Data Aggregation',
@@ -316,18 +315,18 @@ export const tocData = (): TocItem[] => {
                       items: [
                         {
                           label: 'Time series Data',
-                          url: '/databases-collections/time-series'
+                          url: '/databases-collections/time-series',
                         },
                         {
                           label: 'Run a Database Command',
-                          url: '/databases-collections/run-command'
-                        }
-                      ]
-                    }
-                  ]
+                          url: '/databases-collections/run-command',
+                        },
+                      ],
+                    },
+                  ],
                 },
               ],
-            }
+            },
           ],
         },
         {

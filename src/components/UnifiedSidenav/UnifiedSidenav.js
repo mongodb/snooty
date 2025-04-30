@@ -172,7 +172,7 @@ function UnifiedTocNavItem({
   currentL2s,
   isTabletOrMobile,
   setCurrentL2s,
-  setChange,
+  setShowDriverBackBtn,
   level,
 }) {
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
@@ -209,7 +209,7 @@ function UnifiedTocNavItem({
             isStatic={false}
             isTabletOrMobile={isTabletOrMobile}
             setCurrentL2s={setCurrentL2s}
-            setChange={setChange}
+            setShowDriverBackBtn={setShowDriverBackBtn}
           />
         ))}
       </>
@@ -228,7 +228,7 @@ function UnifiedTocNavItem({
             slug={slug}
             isTabletOrMobile={isTabletOrMobile}
             setCurrentL2s={setCurrentL2s}
-            setChange={setChange}
+            setShowDriverBackBtn={setShowDriverBackBtn}
           />
         ))}
       </SideNavGroup>
@@ -237,7 +237,7 @@ function UnifiedTocNavItem({
 
   const handleClick = () => {
     // Allows for the drivers nodes to have their own L2 panel
-    setChange(true);
+    setShowDriverBackBtn(true);
     setCurrentL2s({ items: items });
   };
 
@@ -378,14 +378,14 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
   });
 };
 
-const findNodeOrParentWithDrivers = (tree, targetUrl) => {
+const findPageParent = (tree, targetUrl) => {
   const path = [];
 
-  const dfs = (node) => {
-    path.push(node); // Track the path we're visiting
+  // If the page is apart of a driver toc, return driver as parent, if not return the L1
+  const dfs = (item) => {
+    path.push(item);
 
-    if (assertLeadingSlash(removeTrailingSlash(node.url)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
-      // looks for if the current page is apart of the drivers sidenav (but doesnt include itself)
+    if (assertLeadingSlash(removeTrailingSlash(item.url)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
       for (let i = path.length - 1; i >= 0; i--) {
         if (path[i].drivers === true) {
           return [true, path[i]];
@@ -395,8 +395,8 @@ const findNodeOrParentWithDrivers = (tree, targetUrl) => {
       return [false, path[0]];
     }
 
-    if (node.items) {
-      for (const child of node.items) {
+    if (item.items) {
+      for (const child of item.items) {
         const result = dfs(child);
         if (result) return result;
       }
@@ -406,12 +406,12 @@ const findNodeOrParentWithDrivers = (tree, targetUrl) => {
     return null;
   };
 
-  for (const node of tree) {
-    const result = dfs(node);
+  for (const item of tree) {
+    const result = dfs(item);
     if (result) return result;
   }
 
-  // If not found, it should never get here tho
+  // Should not get here
   return [false, null];
 };
 
@@ -427,7 +427,6 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
 
-  // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
   const tree = useMemo(() => {
     return updateURLs({
       tree: unifiedTocTree,
@@ -442,25 +441,25 @@ export function UnifiedSidenav({ slug, versionsData }) {
   console.log('The edited toctree with prefixes is:', tree);
   console.log(unifiedTocTree);
 
-  const [isDriver, currentL2List] = findNodeOrParentWithDrivers(tree, slug);
-  const [change, setChange] = useState(isDriver);
-  const changeRef = useRef(change);
+  const [isDriver, currentL2List] = findPageParent(tree, slug);
+  const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
+  const changeRef = useRef(showDriverBackBtn);
 
   useEffect(() => {
-    changeRef.current = change;
-  }, [change]);
+    changeRef.current = showDriverBackBtn;
+  }, [showDriverBackBtn]);
 
   const [currentL1, setCurrentL1] = useState(() => {
     return tree.find((staticTocItem) => {
       return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
     });
-    // return (activeToc) ? activeToc.label : null;
   });
+
   const [currentL2s, setCurrentL2s] = useState(() => {
     return currentL2List;
   });
 
-  // i dont want this to always change, i only want this to load if the static item is selected
+  // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
     if (!changeRef.current) setCurrentL2s(currentL1);
   }, [currentL1]);
@@ -472,8 +471,6 @@ export function UnifiedSidenav({ slug, versionsData }) {
 
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
-
-  console.log('bah', currentL1);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
@@ -519,11 +516,11 @@ export function UnifiedSidenav({ slug, versionsData }) {
           </div>
           {currentL2s && !isTabletOrMobile && (
             <div className={cx(rightPane)}>
-              {change && (
+              {showDriverBackBtn && (
                 <BackLink
                   onClick={() => {
                     setCurrentL2s(currentL1);
-                    setChange(false);
+                    setShowDriverBackBtn(false);
                   }}
                 >
                   Back to Client Libraries
@@ -537,7 +534,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
                     key={navItems.newUrl + navItems.label}
                     slug={slug}
                     setCurrentL2s={setCurrentL2s}
-                    setChange={setChange}
+                    setShowDriverBackBtn={setShowDriverBackBtn}
                   />
                 );
               })}
