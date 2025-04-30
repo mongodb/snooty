@@ -242,47 +242,92 @@ export const tocData = (): TocItem[] => {
             {
               label: 'Java Driver',
               url: '/get-started/',
-            },
-            {
-              label: 'Connection Guide',
-              url: '/connection',
+              prefix: '/master/java/bianca.laube/DOP-5375',
               drivers: true,
               items: [
                 {
-                  label: 'Create Mongodb client',
-                  url: '/connection/mongoclient',
-                },
-                {
-                  label: 'Connection Troubleshooting',
-                  url: '/connection/connection-troubleshooting',
-                },
-              ],
-            },
-            {
-              collapsible: true,
-              label: 'CRUD Operator',
-              items: [
-                {
-                  label: 'Insert Operations',
-                  url: '/crud/insert',
-                },
-                {
-                  label: 'Update Documents',
-                  url: '/crud/update-documents/',
-                  collapsible: true,
+                  label: 'Node js driver',
+                  group: true,
                   items: [
                     {
-                      label: 'Update Arrays',
-                      url: '/crud/update-documents/embedded-arrays',
+                      label: 'Connection Guide',
+                      collapsible: true,
+                      url: '/connection',
+                      items: [
+                        {
+                          label: 'Create Mongodb client',
+                          url: '/connection/mongoclient',
+                        },
+                        {
+                          label: 'Connection Troubleshooting',
+                          url: '/connection/connection-troubleshooting',
+                        },
+                      ],
                     },
                     {
-                      label: 'Upsert',
-                      url: '/crud/update-documents/upsert/',
+                      collapsible: true,
+                      label: 'CRUD Operator',
+                      url: '/crud',
+                      items: [
+                        {
+                          label: 'Insert Operations',
+                          url: '/crud/insert',
+                        },
+                        {
+                          label: 'Update Documents',
+                          url: '/crud/update-documents/',
+                          collapsible: true,
+                          items: [
+                            {
+                              label: 'Update Arrays',
+                              url: '/crud/update-documents/embedded-arrays',
+                            },
+                            {
+                              label: 'Upsert',
+                              url: '/crud/update-documents/upsert/',
+                            },
+                          ],
+                        },
+                      ],
                     },
                   ],
                 },
-              ],
+                
+              ]
             },
+            {
+              label: 'C driver',
+              drivers: true,
+              prefix: '/master/c/bianca.laube/DOP-5375',
+              url: '/async-c-driver',
+              items: [
+                {
+                  label: 'C Driver', 
+                  group: true, 
+                  items: [
+                    {
+                      label: 'Data Aggregation',
+                      url: '/aggregation',
+                    },
+                    {
+                      label: 'Databases and Connections',
+                      url: '/databases-collections',
+                      collapsible: true,
+                      items: [
+                        {
+                          label: 'Time series Data',
+                          url: '/databases-collections/time-series'
+                        },
+                        {
+                          label: 'Run a Database Command',
+                          url: '/databases-collections/run-command'
+                        }
+                      ]
+                    }
+                  ]
+                },
+              ],
+            }
           ],
         },
         {
@@ -291,6 +336,7 @@ export const tocData = (): TocItem[] => {
           items: [
             {
               label: 'Atlas Search',
+              prefix: '/master/java/bianca.laube/DOP-5375',
               url: '/atlas-search',
             },
           ],
