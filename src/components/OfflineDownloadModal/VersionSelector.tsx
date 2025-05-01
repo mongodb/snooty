@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState, type ForwardedRef } from 'react';
+import React, { forwardRef, RefObject, useEffect, useRef, useState, type ForwardedRef } from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Select, Option } from '@leafygreen-ui/select';
 import { theme } from '../../theme/docsTheme';
@@ -37,20 +37,40 @@ const PortalContainer = forwardRef(
     { className, children }: { className?: string; children: JSX.Element[] | JSX.Element },
     forwardRef: ForwardedRef<HTMLDivElement | null>
   ) => (
-    <div className={cx(portalStyling, className)} ref={forwardRef}>
+    <div className={cx('this-the-portal', portalStyling, className)} ref={forwardRef}>
       {children}
     </div>
   )
 );
 
-type VersionSelectProps = { offlineRepo: OfflineRepo; versions: OfflineVersion[]; onSelect: (e: number) => void };
+type VersionSelectProps = {
+  offlineRepo: OfflineRepo;
+  versions: OfflineVersion[];
+  onSelect: (e: number) => void;
+  tableRef: RefObject<HTMLDivElement>;
+};
 
-const VersionSelect = ({ offlineRepo, versions, onSelect }: VersionSelectProps) => {
+const VersionSelect = ({ offlineRepo, versions, onSelect, tableRef }: VersionSelectProps) => {
   const [selected, setSelected] = useState(() => 0);
   const portalRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     onSelect(selected);
   }, [onSelect, selected]);
+
+
+  useEffect(() => {
+    const scrollFn = () => {
+      // WANT TO SET CLOSE HERE
+      tableRef.current?.click();
+    }
+    const currentRef = tableRef.current;
+    currentRef?.addEventListener('scroll',scrollFn);
+
+    return () => {
+      currentRef?.removeEventListener('scroll', scrollFn);
+    }
+  }, [tableRef]);
+
   return (
     <PortalContainer ref={portalRef}>
       <Select
@@ -58,8 +78,6 @@ const VersionSelect = ({ offlineRepo, versions, onSelect }: VersionSelectProps) 
         onChange={(e) => {
           setSelected(parseInt(e, 10));
         }}
-        portalContainer={portalRef.current}
-        scrollContainer={portalRef.current}
         className={cx(selectStyling)}
         allowDeselect={false}
         // TODO: can remove aria-labelledby after upgrading LG/Select
