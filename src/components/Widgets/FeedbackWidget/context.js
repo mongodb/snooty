@@ -11,6 +11,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     !!test.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
   const [feedback, setFeedback] = useState(() => (hasExistingFeedback && test.feedback) || undefined);
   const [feedbackId, setFeedbackId] = useState(() => undefined);
+  const [detachForm, setDetachForm] = useState(false);
   const [selectedRating, setSelectedRating] = useState(test.feedback?.rating || undefined);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
@@ -111,6 +112,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     // Route the user to their "next steps"
     setProgress([false, false, true]);
     setView('submitted');
+    setDetachForm(false);
 
     if (!selectedRating) return;
     // Submit the full feedback document
@@ -139,6 +141,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     setSelectedRating();
     setFeedbackId();
     setIsScreenshotButtonClicked(false);
+    setDetachForm(false);
   }, []);
 
   const value = {
@@ -156,6 +159,8 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     selectInitialRating,
     isScreenshotButtonClicked,
     setIsScreenshotButtonClicked,
+    detachForm,
+    setDetachForm,
   };
 
   // reset feedback when route changes

@@ -1,14 +1,10 @@
 import React, { useRef } from 'react';
-import styled from '@emotion/styled';
+import { cx } from '@leafygreen-ui/emotion';
 import { useClickOutside } from '../../../hooks/use-click-outside';
 import useScreenSize from '../../../hooks/useScreenSize';
 import { useFeedbackContext } from './context';
 
-const Container = styled.div`
-  position: relative;
-`;
-
-const FeedbackContainer = ({ children }) => {
+const FeedbackContainer = ({ children, className }) => {
   const ref = useRef(null);
   const { abandon, isScreenshotButtonClicked } = useFeedbackContext();
   const { isMobile } = useScreenSize();
@@ -17,7 +13,11 @@ const FeedbackContainer = ({ children }) => {
     !isMobile && !isScreenshotButtonClicked && abandon();
   });
 
-  return <Container ref={ref}>{children}</Container>;
+  return (
+    <div className={cx(className)} ref={ref}>
+      {children}
+    </div>
+  );
 };
 
 export default FeedbackContainer;

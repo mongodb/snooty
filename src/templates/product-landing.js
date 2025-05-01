@@ -1,12 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme.js';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
 import useSnootyMetadata from '../utils/use-snooty-metadata.js';
-
+import FeedbackRating from '../components/Widgets/FeedbackWidget';
 export const CONTENT_MAX_WIDTH = 1200;
+
+const formstyle = css`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-top: ${theme.size.tiny};
+
+  @media ${theme.screenSize.upToLarge} {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
+`;
+
+const formContainer = css`
+  position: relative;
+
+  @media ${theme.screenSize.tablet} {
+    z-index: 1;
+  }
+`;
+
+const hrStyling = css`
+  border-color: ${palette.gray.light2};
+  margin: ${theme.size.medium} ${theme.size.xlarge};
+`;
+
+const ratingStlying = css`
+  margin: 0px ${theme.size.xlarge};
+`;
 
 const Wrapper = styled('main')`
   ${({ isGuides }) => !isGuides && `margin: 0 auto ${theme.size.xlarge} auto;`}
@@ -182,7 +216,7 @@ const Wrapper = styled('main')`
 
 const REALM_LIGHT_HERO_PAGES = ['index.txt'];
 
-const ProductLanding = ({ children, data: { page }, offlineBanner }) => {
+const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: { slug } }) => {
   const { project } = useSnootyMetadata();
   const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
@@ -190,7 +224,6 @@ const ProductLanding = ({ children, data: { page }, offlineBanner }) => {
   const pageOptions = page?.ast?.options;
   const hasMaxWidthParagraphs = ['', 'true'].includes(pageOptions?.['pl-max-width-paragraphs']);
   const hasLightHero = isRealm && REALM_LIGHT_HERO_PAGES.includes(page?.ast?.fileid);
-
   // shallow copy children, and search for existence of banner
   const shallowChildren = children.reduce((res, child) => {
     const copiedChildren =
@@ -220,6 +253,10 @@ const ProductLanding = ({ children, data: { page }, offlineBanner }) => {
     >
       {offlineBanner}
       {children}
+      <hr className={cx(hrStyling)} />
+      <div className={cx(ratingStlying)}>
+        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
+      </div>
     </Wrapper>
   );
 };

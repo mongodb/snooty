@@ -15,6 +15,8 @@ import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_BUTTON_TEXT_LOW, SCREENSHOT_OVERLAY_
 
 const HIGHLIGHT_BORDER_SIZE = 5;
 
+let savedPosition = null;
+
 const instructionsBorderStyling = css`
   position: fixed;
   top: 0;
@@ -81,7 +83,7 @@ const ScreenshotSelect = styled(Button)`
 `;
 
 const ScreenshotButton = ({ size = 'default', ...props }) => {
-  const { setScreenshotTaken, selectedRating, isScreenshotButtonClicked, setIsScreenshotButtonClicked } =
+  const { setScreenshotTaken, selectedRating, isScreenshotButtonClicked, setIsScreenshotButtonClicked, setDetachForm } =
     useFeedbackContext();
   const [currElemState, setCurrElemState] = useState(null);
 
@@ -179,14 +181,16 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // when screenshot button is first clicked
   const takeNewScreenshot = useCallback(() => {
+    savedPosition = document.getElementById(feedbackId).getBoundingClientRect();
     setIsScreenshotButtonClicked(true);
+    setDetachForm(true);
     domElementClickedRef.current = 'dashed';
     setSelectedElementBorderStyle('dashed');
-  }, [setIsScreenshotButtonClicked]);
+  }, [setIsScreenshotButtonClicked, setDetachForm]);
 
   // close out the instructions panel
   const handleInstructionClick = () => {
-    document.getElementById(feedbackId).style.right = null;
+    document.getElementById(feedbackId).style.left = null;
     resetProperties();
   };
 
@@ -206,11 +210,17 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setSelectedElementBorderStyle(domElementClickedRef.current);
     setScreenshotTaken(true);
 
-    document.getElementById(feedbackId).style.right = null;
+    // Allows for the feedback widget to appear on top of the screenshot overlay
+    const fbFormEl = document.getElementById(feedbackId);
+    fbFormEl.style.display = 'unset';
+    fbFormEl.style.zIndex = '100';
+    fbFormEl.style.top = `${savedPosition.top + window.scrollY}px`;
+    fbFormEl.style.left = `${savedPosition.left}px`;
   };
 
   const handleExitButtonClick = (e) => {
     resetProperties();
+    document.getElementById(feedbackId).style.display = 'none';
 
     setIsScreenshotButtonClicked(true);
     domElementClickedRef.current = 'dashed';
@@ -221,7 +231,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   if (isScreenshotButtonClicked) {
     if (isBrowser && domElementClickedRef.current === 'dashed') {
-      document.getElementById(feedbackId).style.right = '-9000px';
+      document.getElementById(feedbackId).style.left = '-9000px';
       // highlight elements based on mouse movement
       document.addEventListener('mousemove', handleElementHighlight);
     }
