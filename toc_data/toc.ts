@@ -243,7 +243,7 @@ export const tocData = (): TocItem[] => {
               label: 'Java Driver',
               url: '/get-started/',
               prefix: '/master/java/bianca.laube/DOP-5375',
-              drivers: true,
+              showSubNav: true,
               items: [
                 {
                   label: 'Node js driver',
@@ -296,7 +296,7 @@ export const tocData = (): TocItem[] => {
             },
             {
               label: 'C driver',
-              drivers: true,
+              showSubNav: true,
               prefix: '/master/c/bianca.laube/DOP-5375',
               url: '/async-c-driver',
               items: [

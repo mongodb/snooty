@@ -168,7 +168,7 @@ function UnifiedTocNavItem({
   isStatic,
   prefix,
   slug,
-  drivers,
+  showSubNav,
   currentL2s,
   isTabletOrMobile,
   setCurrentL2s,
@@ -236,12 +236,12 @@ function UnifiedTocNavItem({
   }
 
   const handleClick = () => {
-    // Allows for the drivers nodes to have their own L2 panel
+    // Allows for the showSubNav nodes to have their own L2 panel
     setShowDriverBackBtn(true);
-    setCurrentL2s({ items: items });
+    setCurrentL2s({ items });
   };
 
-  if (drivers) {
+  if (showSubNav) {
     return (
       <SideNavItem
         aria-label={label}
@@ -380,17 +380,17 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
 const findPageParent = (tree, targetUrl) => {
   const path = [];
 
-  // If the page is apart of a driver toc, return driver as parent, if not return the L1
+  // If the page is a part of a driver toc, return driver as parent, if not return the L1
   const dfs = (item) => {
     path.push(item);
 
     if (assertLeadingSlash(removeTrailingSlash(item.url)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
       for (let i = path.length - 1; i >= 0; i--) {
-        if (path[i].drivers === true) {
+        if (path[i].showSubNav === true) {
           return [true, path[i]];
         }
       }
-      // Page is not apart of a driver, returns the assosiated L1
+      // Page is not a part of a driver, returns the associated L1
       return [false, path[0]];
     }
 
@@ -410,7 +410,7 @@ const findPageParent = (tree, targetUrl) => {
     if (result) return result;
   }
 
-  // Should not get here
+  // No L1 selected (docs home page)
   return [false, null];
 };
 
