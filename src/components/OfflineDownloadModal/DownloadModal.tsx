@@ -56,8 +56,9 @@ const searchInputStyle = css`
 `;
 
 const tableStyling = css`
+  overflow: auto;
   margin-top: ${theme.size.tiny};
-  min-height: 200px;
+  min-height: 280px;
   th:first-of-type,
   td:first-of-type {
     padding-left: 8px;
@@ -165,6 +166,7 @@ const DownloadModal = ({ open, setOpen }: ModalProps) => {
           return (
             <VersionSelect
               offlineRepo={cellContext.row.original}
+              tableRef={tableRef}
               versions={versions}
               onSelect={(index: number) => {
                 const version = versions[index];
