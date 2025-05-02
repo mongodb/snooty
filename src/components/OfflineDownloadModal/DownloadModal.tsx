@@ -56,9 +56,9 @@ const searchInputStyle = css`
 `;
 
 const tableStyling = css`
-  // overflow: visible;
+  overflow: auto;
   margin-top: ${theme.size.tiny};
-  min-height: 200px;
+  min-height: 280px;
   th:first-of-type,
   td:first-of-type {
     padding-left: 8px;
