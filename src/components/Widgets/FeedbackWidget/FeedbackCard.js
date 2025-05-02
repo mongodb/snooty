@@ -2,7 +2,6 @@ import React, { useContext, useMemo } from 'react';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../../src/theme/docsTheme';
 import useScreenSize from '../../../hooks/useScreenSize';
 import useStickyTopValues from '../../../hooks/useStickyTopValues';
@@ -14,10 +13,9 @@ import { useFeedbackContext } from './context';
 import useNoScroll from './hooks/useNoScroll';
 
 const CardContainer = styled.div`
-  @media ${theme.screenSize.upToSmall} {
-    padding-top: ${({ top }) => `${top}`};
+  @media ${theme.screenSize.upToLarge} {
     height: 100%;
-    background-color: ${({ darkMode }) => (darkMode ? palette.black : palette.white)};
+    background-color: rgba(0, 30, 43, 0.6); /* #001E2B with 60% opacity */
   }
 `;
 
@@ -30,15 +28,17 @@ const Card = styled(LeafygreenCard)`
   position: relative;
 
   @media ${theme.screenSize.upToLarge} {
-    width: 262px;
+    width: 50%;
+    padding: 20px;
+    margin: auto;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   @media ${theme.screenSize.upToSmall} {
-    padding-top: 20%;
-    width: 100vw;
-    border-radius: 0;
-    border-width: 0px;
-    box-shadow: none;
+    width: 90%;
   }
 `;
 

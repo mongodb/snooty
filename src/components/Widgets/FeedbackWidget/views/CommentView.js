@@ -102,7 +102,7 @@ const CommentView = () => {
   const [hasEmailError, setHasEmailError] = useState(false);
   const isValidEmail = useValidation(email, validateEmail);
   const viewport = useViewport();
-  const { isMobile } = useScreenSize();
+  const { isTabletOrMobile } = useScreenSize();
 
   const handleSubmit = async () => {
     if (isValidEmail) {
@@ -119,7 +119,7 @@ const CommentView = () => {
 
   return (
     <Layout>
-      <StyledStarRating handleRatingSelection={setSelectedRating} showCaption={false} />
+      <StyledStarRating handleRatingSelection={setSelectedRating} />
       <StyledCommentInput
         type="text"
         id="feedback-comment"
@@ -140,7 +140,7 @@ const CommentView = () => {
         state={hasEmailError ? 'error' : 'none'}
         optional={true}
       />
-      {!isMobile && <ScreenshotButton />}
+      {!isTabletOrMobile && <ScreenshotButton />}
       <SubmitButton onClick={() => handleSubmit()} type="submit">
         {FEEDBACK_SUBMIT_BUTTON_TEXT}
       </SubmitButton>
