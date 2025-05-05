@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
@@ -181,7 +181,15 @@ function UnifiedTocNavItem({
     if (isTabletOrMobile) {
       return (
         <>
-          <StaticNavItem label={label} url={url} slug={slug} isStatic={isStatic} items={items} prefix={prefix} />
+          <StaticNavItem
+            label={label}
+            url={url}
+            slug={slug}
+            isStatic={isStatic}
+            items={items}
+            prefix={prefix}
+            setShowDriverBackBtn={setShowDriverBackBtn}
+          />
           {url === currentL2s &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
@@ -285,7 +293,7 @@ function UnifiedTocNavItem({
   );
 }
 
-function StaticNavItem({ label, url, slug, items, isStatic, prefix, setCurrentL1, level = 1 }) {
+function StaticNavItem({ label, url, slug, items, isStatic, prefix, setCurrentL1, setShowDriverBackBtn, level = 1 }) {
   return (
     <SideNavItem
       active={isActiveTocNode(slug, url, items)}
@@ -295,6 +303,7 @@ function StaticNavItem({ label, url, slug, items, isStatic, prefix, setCurrentL1
       to={url}
       onClick={() => {
         setCurrentL1({ items: items });
+        setShowDriverBackBtn(false);
       }}
       className={cx(sideNavItemUniTOCStyling({ level, isStatic }))}
     >
@@ -442,11 +451,6 @@ export function UnifiedSidenav({ slug, versionsData }) {
 
   const [isDriver, currentL2List] = findPageParent(tree, slug);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
-  const changeRef = useRef(showDriverBackBtn);
-
-  useEffect(() => {
-    changeRef.current = showDriverBackBtn;
-  }, [showDriverBackBtn]);
 
   const [currentL1, setCurrentL1] = useState(() => {
     return tree.find((staticTocItem) => {
@@ -460,8 +464,8 @@ export function UnifiedSidenav({ slug, versionsData }) {
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
-    if (!changeRef.current) setCurrentL2s(currentL1);
-  }, [currentL1]);
+    if (!showDriverBackBtn) setCurrentL2s(currentL1);
+  }, [currentL1, showDriverBackBtn]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
   useEffect(() => {
@@ -498,6 +502,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
                       currentL2s={currentL2s.url}
                       isTabletOrMobile={isTabletOrMobile}
                       setCurrentL2s={setCurrentL2s}
+                      setShowDriverBackBtn={setShowDriverBackBtn}
                     />
                   );
                 })
@@ -509,6 +514,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
                       key={staticTocItem.newUrl + staticTocItem.label}
                       isStatic={true}
                       setCurrentL1={setCurrentL1}
+                      setShowDriverBackBtn={setShowDriverBackBtn}
                     />
                   );
                 })}
@@ -518,7 +524,6 @@ export function UnifiedSidenav({ slug, versionsData }) {
               {showDriverBackBtn && (
                 <BackLink
                   onClick={() => {
-                    setCurrentL2s(currentL1);
                     setShowDriverBackBtn(false);
                   }}
                 >
