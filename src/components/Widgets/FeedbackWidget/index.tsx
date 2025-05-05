@@ -1,14 +1,22 @@
 import { isBrowser } from '../../../utils/is-browser';
 import { getPlaintext } from '../../../utils/get-plaintext';
 import { getNestedValue } from '../../../utils/get-nested-value';
-import { RatingView } from '../../Widgets/FeedbackWidget/views';
 import useSnootyMetadata from '../../../utils/use-snooty-metadata';
+import { RatingView } from './views';
 import FeedbackContainer from './FeedbackContainer';
 import FeedbackForm from './FeedbackForm';
 import useFeedbackData from './useFeedbackData';
 import { FeedbackProvider, useFeedbackContext } from './context';
 
-const FeedbackRating = ({ slug, className, classNameContainer }) => {
+const FeedbackRating = ({
+  slug,
+  className,
+  classNameContainer,
+}: {
+  slug: string;
+  className: string;
+  classNameContainer?: string;
+}) => {
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
   const feedbackData = useFeedbackData({

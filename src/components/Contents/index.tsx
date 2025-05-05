@@ -2,15 +2,15 @@ import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
 import { cx, css } from '@leafygreen-ui/emotion';
 
-import ContentsList from './ContentsList';
-import ContentsListItem from './ContentsListItem';
 import FeedbackRating from '../Widgets/FeedbackWidget';
 import { formatText } from '../../utils/format-text';
 import { HeadingNodeSelectorIds } from '../../types/ast';
-import { type ActiveSelectorIds, ContentsContext } from './contents-context';
 import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import ContentsList from './ContentsList';
+import ContentsListItem from './ContentsListItem';
+import { type ActiveSelectorIds, ContentsContext } from './contents-context';
 
 const formatTextOptions = {
   literalEnableInline: true,
@@ -79,7 +79,7 @@ const isHeadingVisible = (
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
 };
 
-const Contents = ({ className, slug }: { className: string; slug: string; }) => {
+const Contents = ({ className, slug }: { className: string; slug: string }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
   const { isTabletOrMobile } = useScreenSize();
   const metadata = useSnootyMetadata();
