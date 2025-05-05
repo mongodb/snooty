@@ -1,14 +1,48 @@
 import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
-import { formatText } from '../../utils/format-text';
-import { HeadingNodeSelectorIds } from '../../types/ast';
-import { ActiveSelectorIds, ContentsContext } from './contents-context';
+import { cx, css } from '@leafygreen-ui/emotion';
+
 import ContentsList from './ContentsList';
 import ContentsListItem from './ContentsListItem';
+import FeedbackRating from '../Widgets/FeedbackWidget';
+import { formatText } from '../../utils/format-text';
+import { HeadingNodeSelectorIds } from '../../types/ast';
+import { type ActiveSelectorIds, ContentsContext } from './contents-context';
+import { theme } from '../../theme/docsTheme';
+import useScreenSize from '../../hooks/useScreenSize';
+import useSnootyMetadata from '../../utils/use-snooty-metadata';
 
 const formatTextOptions = {
   literalEnableInline: true,
 };
+
+const formContainer = css`
+  @media ${theme.screenSize.tablet} {
+    z-index: 1;
+  }
+`;
+
+const formstyle = css`
+  position: absolute;
+  right: 0;
+  margin-top: ${theme.size.tiny};
+
+  @media ${theme.screenSize.upToLarge} {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
+`;
+
+const styledContentList = css`
+  overflow: auto;
+  height: 90%;
+`;
+
+export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
 
 /* recursively go through selector ids defined by parser
 everything in headingSelectorIds must be present in activeSelectorIds
@@ -45,33 +79,47 @@ const isHeadingVisible = (
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
 };
 
-const Contents = ({ className }: { className: string }) => {
+const Contents = ({ className, slug }: { className: string; slug: string; }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
+  const { isTabletOrMobile } = useScreenSize();
+  const metadata = useSnootyMetadata();
 
   const filteredNodes = headingNodes.filter((headingNode) => {
     return isHeadingVisible(headingNode.selector_ids, activeSelectorIds);
   });
 
   if (filteredNodes.length === 0 || !showContentsComponent) {
-    return null;
+    return (
+      <div className={className}>
+        <FeedbackRating slug={slug} className={formstyle} />
+      </div>
+    );
   }
 
   const label = 'On this page';
 
   return (
-    <div className={className}>
-      <ContentsList label={label}>
-        {filteredNodes.map(({ depth, id, title }) => {
-          // Depth of heading nodes refers to their depth in the AST
-          const listItemDepth = Math.max(depth - 2, 0);
-          return (
-            <ContentsListItem depth={listItemDepth} key={id} id={id} isActive={activeHeadingId === id}>
-              {formatText(title, formatTextOptions)}
-            </ContentsListItem>
-          );
-        })}
-      </ContentsList>
-    </div>
+    <>
+      {!isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
+        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
+      )}
+      <div className={cx(className, styledContentList)}>
+        <ContentsList label={label}>
+          {filteredNodes.map(({ depth, id, title }) => {
+            // Depth of heading nodes refers to their depth in the AST
+            const listItemDepth = Math.max(depth - 2, 0);
+            return (
+              <ContentsListItem depth={listItemDepth} key={id} id={id} isActive={activeHeadingId === id}>
+                {formatText(title, formatTextOptions)}
+              </ContentsListItem>
+            );
+          })}
+        </ContentsList>
+      </div>
+      {isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
+        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
+      )}
+    </>
   );
 };
 

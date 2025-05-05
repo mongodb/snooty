@@ -75,6 +75,8 @@ const header = {
   // used for scrolling elements into place, considering sticky header
   navbarScrollOffset: '85px',
   actionBarMobileHeight: '60px',
+  composableDesktopHeight: '90px',
+  composableMobileheight: '190px',
 };
 
 const widgets = {

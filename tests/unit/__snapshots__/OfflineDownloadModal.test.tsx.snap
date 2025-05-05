@@ -487,8 +487,9 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
   overflow: auto;
   width: 100%;
   position: relative;
+  overflow: auto;
   margin-top: 4px;
-  min-height: 200px;
+  min-height: 280px;
 }
 
 .emotion-14 th:first-of-type,

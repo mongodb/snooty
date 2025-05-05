@@ -10,6 +10,7 @@ import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import useCopyClipboard from '../hooks/useCopyClipboard';
 import useHashAnchor from '../hooks/use-hash-anchor';
+import { usePageContext } from '../context/page-context';
 
 const tooltipStyle = css`
   padding: 2px 8px;
@@ -20,15 +21,29 @@ const tooltipStyle = css`
   }
 `;
 
-const HeaderBuffer = styled.div`
+const HeaderBuffer = styled.div(
+  (props) => `
   display: inline;
   left: 0;
   top: 0;
-  margin-top: -${theme.header.navbarScrollOffset};
+  margin-top: ${
+    props.hasComposable
+      ? `calc(-1 * (${theme.header.composableDesktopHeight} + ${theme.header.navbarScrollOffset}))`
+      : `-${theme.header.navbarScrollOffset}`
+  };
   position: absolute;
   // Add a bit of padding to help headings be more accurately set as "active" on FF and Safari
   padding-bottom: 2px;
-`;
+
+  @media ${theme.screenSize.upToMedium} {
+    margin-top: ${
+      props.hasComposable
+        ? `calc(-1 * (${theme.header.composableMobileHeight} + ${theme.header.navbarScrollOffset}))`
+        : `-${theme.header.navbarScrollOffset}`
+    }
+  }
+`
+);
 
 const headingStyle = (copied) => css`
   ${!!copied && 'visibility: visible !important;'}
@@ -50,6 +65,8 @@ const Permalink = ({ id, description }) => {
   const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
 
   useCopyClipboard(copied, setCopied, headingNode, url);
+
+  const { options } = usePageContext();
 
   const handleClick = (e) => {
     setCopied(true);
@@ -82,7 +99,7 @@ const Permalink = ({ id, description }) => {
       >
         {'copied'}
       </Tooltip>
-      <HeaderBuffer ref={linkRef} id={id} />
+      <HeaderBuffer hasComposable={options?.has_composable_tutorial ?? false} ref={linkRef} id={id} />
     </a>
   );
 };

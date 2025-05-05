@@ -378,6 +378,12 @@ exports[`renders steps nested in include nodes 1`] = `
   padding-bottom: 2px;
 }
 
+@media only screen and (max-width: 767px) {
+  .emotion-13 {
+    margin-top: -85px;
+  }
+}
+
 .emotion-15 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;

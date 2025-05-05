@@ -7,21 +7,10 @@ import { Overline } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import IconButton from '@leafygreen-ui/icon-button';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { isBrowser } from '../../utils/is-browser';
-import { getPlaintext } from '../../utils/get-plaintext';
-import { getNestedValue } from '../../utils/get-nested-value';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { getCurrLocale } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
-import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { SidenavContext } from '../Sidenav';
-import {
-  FeedbackProvider,
-  FeedbackForm,
-  FeedbackButton,
-  useFeedbackData,
-  FeedbackContainer,
-} from '../Widgets/FeedbackWidget';
 import { SuspenseHelper } from '../SuspenseHelper';
 import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
@@ -39,20 +28,11 @@ import {
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const ChatbotModal = lazy(() => import('./ChatbotModal'));
 
-export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
 const CHATBOT_TEXT = 'Ask MongoDB AI';
 
 const ActionBar = ({ template, slug, sidenav, ...props }) => {
-  const url = isBrowser ? window.location.href : null;
-  const metadata = useSnootyMetadata();
   const [chatbotClicked, setChatbotClicked] = useState(false);
   const locale = getCurrLocale();
-  const feedbackData = useFeedbackData({
-    slug,
-    url,
-    title:
-      getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
-  });
 
   const { fakeColumns, containerClassname, searchContainerClassname } = getContainerStyling(template);
 
@@ -102,15 +82,6 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
                 <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
               </Chatbot>
             </SuspenseHelper>
-          )}
-
-          {template !== 'errorpage' && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-            <FeedbackProvider page={feedbackData}>
-              <FeedbackContainer>
-                <FeedbackButton />
-                <FeedbackForm />
-              </FeedbackContainer>
-            </FeedbackProvider>
           )}
           {template !== 'openapi' && <DarkModeDropdown />}
         </ActionsBox>
