@@ -29,9 +29,18 @@ interface Root extends ParentNode {
   fileid: string;
 }
 
+type HeadingNodeSelectorIds = {
+  tab?: string;
+  'method-option'?: string;
+  children?: HeadingNodeSelectorIds;
+};
+
 interface HeadingNode extends ParentNode {
   type: 'heading';
+  depth: number;
+  title: string;
   id: string;
+  selector_ids: HeadingNodeSelectorIds;
 }
 
 interface ParagraphNode extends ParentNode {
@@ -233,6 +242,7 @@ export type {
   ParentNode,
   Root,
   HeadingNode,
+  HeadingNodeSelectorIds,
   ReferenceNode,
   TextNode,
   CodeNode,

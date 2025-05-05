@@ -1,39 +1,20 @@
 import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
-import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
-import { theme } from '../../theme/docsTheme';
-import { formatText } from '../../utils/format-text';
+
 import FeedbackRating from '../Widgets/FeedbackWidget';
+import { formatText } from '../../utils/format-text';
+import { HeadingNodeSelectorIds } from '../../types/ast';
+import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import ContentsList from './ContentsList';
 import ContentsListItem from './ContentsListItem';
-import { ContentsContext } from './contents-context';
+import { type ActiveSelectorIds, ContentsContext } from './contents-context';
 
 const formatTextOptions = {
   literalEnableInline: true,
 };
-
-/* recursively go through selector ids defined by parser
-everything in headingSelectorIds must be present in activeSelectorIds
-activeSelectorIds structure:
-{
-  methodSelector?: str,
-  tab?: [str],
-}
-headingSelectorIds structure (comes from parser):
-{
-  method-option | tab: str,
-  children?: {
-    tab: str,
-    children?: {
-      tab: str,
-      ...
-    }
-  }
-} 
-*/
 
 const formContainer = css`
   @media ${theme.screenSize.tablet} {
@@ -41,7 +22,7 @@ const formContainer = css`
   }
 `;
 
-const formstyle = css`
+const formStyle = css`
   position: absolute;
   right: 0;
   margin-top: ${theme.size.tiny};
@@ -63,7 +44,29 @@ const styledContentList = css`
 
 export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
 
-const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
+/* recursively go through selector ids defined by parser
+everything in headingSelectorIds must be present in activeSelectorIds
+activeSelectorIds structure:
+{
+  methodSelector?: str,
+  tab?: [str],
+}
+headingSelectorIds structure (comes from parser):
+{
+  method-option | tab: str,
+  children?: {
+    tab: str,
+    children?: {
+      tab: str,
+      ...
+    }
+  }
+} 
+*/
+const isHeadingVisible = (
+  headingSelectorIds: HeadingNodeSelectorIds,
+  activeSelectorIds: ActiveSelectorIds
+): boolean => {
   if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
   const headingsMethodParent = headingSelectorIds['method-option'];
   const headingsTabParent = headingSelectorIds['tab'];
@@ -76,7 +79,7 @@ const isHeadingVisible = (headingSelectorIds, activeSelectorIds) => {
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
 };
 
-const Contents = ({ className, slug }) => {
+const Contents = ({ className, slug }: { className: string; slug: string }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
   const { isTabletOrMobile } = useScreenSize();
   const metadata = useSnootyMetadata();
@@ -88,7 +91,7 @@ const Contents = ({ className, slug }) => {
   if (filteredNodes.length === 0 || !showContentsComponent) {
     return (
       <div className={className}>
-        <FeedbackRating slug={slug} className={formstyle} />
+        <FeedbackRating slug={slug} className={formStyle} />
       </div>
     );
   }
@@ -98,7 +101,7 @@ const Contents = ({ className, slug }) => {
   return (
     <>
       {!isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
+        <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />
       )}
       <div className={cx(className, styledContentList)}>
         <ContentsList label={label}>
@@ -114,14 +117,10 @@ const Contents = ({ className, slug }) => {
         </ContentsList>
       </div>
       {isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
+        <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />
       )}
     </>
   );
-};
-
-Contents.propTypes = {
-  className: PropTypes.string,
 };
 
 export default Contents;
