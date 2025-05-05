@@ -9,11 +9,11 @@ import { displayNone } from '../../utils/display-none';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 
 const hideOnMobile = css`
-  ${displayNone.onMedium};
+  ${displayNone.onMobileAndTablet};
 `;
 
 const hideOnDesktop = css`
-  ${displayNone.onLargerThanMedium}
+  ${displayNone.onLargerThanTablet}
 `;
 
 const collapsibleStyles = css`

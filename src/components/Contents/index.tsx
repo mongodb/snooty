@@ -22,7 +22,7 @@ const formContainer = css`
   }
 `;
 
-const formstyle = css`
+const formStyle = css`
   position: absolute;
   right: 0;
   margin-top: ${theme.size.tiny};
@@ -91,7 +91,7 @@ const Contents = ({ className, slug }: { className: string; slug: string }) => {
   if (filteredNodes.length === 0 || !showContentsComponent) {
     return (
       <div className={className}>
-        <FeedbackRating slug={slug} className={formstyle} />
+        <FeedbackRating slug={slug} className={formStyle} />
       </div>
     );
   }
@@ -101,7 +101,7 @@ const Contents = ({ className, slug }: { className: string; slug: string }) => {
   return (
     <>
       {!isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
+        <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />
       )}
       <div className={cx(className, styledContentList)}>
         <ContentsList label={label}>
@@ -117,7 +117,7 @@ const Contents = ({ className, slug }: { className: string; slug: string }) => {
         </ContentsList>
       </div>
       {isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
+        <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />
       )}
     </>
   );
