@@ -41,7 +41,7 @@ function redirectBasedOnLang() {
       const matchedLocale = supportedLocaleCodes.find((localeCode) => localeCode.startsWith(lang));
       if (matchedLocale) {
         const targetPath = '/' + matchedLocale + window.location.pathname;
-        window.location.href = targetPath;
+        window.location.pathname = targetPath;
       }
     }
   } catch (e) {

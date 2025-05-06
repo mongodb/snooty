@@ -19,6 +19,8 @@ exports[`renders correctly with a directive_argument node 1`] = `
   display: inline;
   color: var(--font-color-primary);
   background: var(--background-color-secondary);
+  word-wrap: break-word;
+  white-space: unset;
 }
 
 .lg-ui-0000:hover>.emotion-0 {
@@ -41,7 +43,7 @@ a .emotion-0 {
 }
 
 .emotion-1 {
-  position: relative;
+  position: absolute;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -62,6 +64,12 @@ a .emotion-0 {
   margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-3 {
+    margin-top: -85px;
+  }
 }
 
 .emotion-5 {

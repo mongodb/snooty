@@ -304,7 +304,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         experimental: {
           plugins: [
             [
-              `${process.cwd()}/component-factory-transformer/target/wasm32-wasi/release/component_factory_filter.wasm`,
+              `${process.cwd()}/component-factory-transformer/target/wasm32-wasip1/release/component_factory_filter.wasm`,
               { includes: [...Array.from(projectComponents)] },
             ],
           ],
@@ -429,6 +429,33 @@ exports.createSchemaCustomization = ({ actions }) => {
       propertyUrl: String
     }
 
+    type EnvKeys implements Node @dontInfer {
+      dev: String
+      stg: String
+      prd: String
+      dotcomprd: String
+      dotcomstg: String
+      regression: String
+    }
+
+    type Branch implements Node @dontInfer {
+      active: Boolean
+      eol_type: String
+      gitBranchName: String
+      offlineUrl: String
+      urlSlug: String
+      urlAliases: [String]
+      versionSelectorLabel: String
+    }
+
+    type Docset implements Node @dontInfer {
+      displayName: String
+      prefix: EnvKeys
+      project: String
+      branches: [Branch]
+      hasEolVersions: Boolean
+      url: EnvKeys
+    }
     type TOC implements Node @dontInfer {
       tocTree: JSON!
     }

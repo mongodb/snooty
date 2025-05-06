@@ -3,11 +3,11 @@ import * as realm from '../../src/components/Widgets/FeedbackWidget/realm';
 
 export const stitchFunctionMocks = {};
 export function mockStitchFunctions() {
-  stitchFunctionMocks['createNewFeedback'] = jest
-    .spyOn(realm, 'createNewFeedback')
+  stitchFunctionMocks['upsertFeedback'] = jest
+    .spyOn(realm, 'upsertFeedback')
     .mockImplementation(({ page, user, ...rest }) => {
       return {
-        _id: new Realm.BSON.ObjectId(),
+        _id: rest.feedback_id ?? new Realm.BSON.ObjectId(),
         page,
         user,
         ...rest,

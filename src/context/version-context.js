@@ -159,7 +159,7 @@ const VersionContext = createContext({
   availableVersions: {},
   availableGroups: {},
   setAvailableVersions: () => {},
-  showVersionDropdown: false,
+  hasEmbeddedVersionDropdown: false,
   showEol: false,
   isAssociatedProduct: false,
   onVersionSelect: () => {},
@@ -236,13 +236,13 @@ const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [showVersionDropdown, setShowVersionDropdown] = useState(isAssociatedProduct);
+  const [hasEmbeddedVersionDropdown, setHasEmbeddedVersionDropdown] = useState(isAssociatedProduct);
   useEffect(() => {
     getUmbrellaProject(metadata.project, metadata.database).then((umbrellaMetadata) => {
       if (!mountRef.current) {
         return;
       }
-      setShowVersionDropdown(!!umbrellaMetadata);
+      setHasEmbeddedVersionDropdown(!!umbrellaMetadata);
     });
   }, [metadata.project, metadata.database]);
 
@@ -333,7 +333,7 @@ const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) 
         setActiveVersions,
         availableVersions,
         availableGroups,
-        showVersionDropdown,
+        hasEmbeddedVersionDropdown,
         onVersionSelect,
         onTomlVersion,
         isAssociatedProduct,

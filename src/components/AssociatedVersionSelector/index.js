@@ -29,7 +29,7 @@ const StyledSelect = styled(Select)`
 
 const AssociatedVersionSelector = () => {
   const { project } = useSnootyMetadata();
-  const { activeVersions, availableVersions, showVersionDropdown, onVersionSelect } = useContext(VersionContext);
+  const { activeVersions, availableVersions, hasEmbeddedVersionDropdown, onVersionSelect } = useContext(VersionContext);
 
   const onSelectChange = useCallback(
     ({ value }) => {
@@ -40,7 +40,7 @@ const AssociatedVersionSelector = () => {
 
   return (
     <>
-      {showVersionDropdown &&
+      {hasEmbeddedVersionDropdown &&
         activeVersions[project] &&
         availableVersions[project] &&
         availableVersions[project].length > 0 && (

@@ -1,15 +1,18 @@
 import React, { useState, useCallback, useContext, useEffect, createContext, useTransition } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { getViewport } from '../../../hooks/useViewport';
-import { createNewFeedback, useRealmUser } from './realm';
+import { useSiteMetadata } from '../../../hooks/use-site-metadata';
+import { upsertFeedback, useRealmUser } from './realm';
 
 const FeedbackContext = createContext();
 
 export function FeedbackProvider({ page, test = {}, ...props }) {
   const hasExistingFeedback =
     !!test.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
-  const [feedback, setFeedback] = useState((hasExistingFeedback && test.feedback) || null);
-  const [selectedRating, setSelectedRating] = useState(test.feedback?.rating || null);
+  const [feedback, setFeedback] = useState(() => (hasExistingFeedback && test.feedback) || undefined);
+  const [feedbackId, setFeedbackId] = useState(() => undefined);
+  const [detachForm, setDetachForm] = useState(false);
+  const [selectedRating, setSelectedRating] = useState(test.feedback?.rating || undefined);
   const [view, setView] = useState(test.view || 'waiting');
   const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
@@ -17,22 +20,70 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   const [, startTransition] = useTransition();
   const { user, reassignCurrentUser } = useRealmUser();
   const { href } = useLocation();
+  const { snootyEnv } = useSiteMetadata();
+
+  const createFeedbackPayload = useCallback(
+    (rating, email, dataUri, viewport, comment) => {
+      const res = {
+        page: {
+          title: page.title,
+          slug: page.slug,
+          url: page.url,
+          docs_property: page.docs_property,
+        },
+        user: {},
+        attachment: {},
+        viewport: getViewport(),
+        comment,
+        category: createSentiment(rating),
+        rating: rating,
+        snootyEnv,
+        ...test.feedback,
+      };
+      if (user && user.id) {
+        res.user.stitch_id = user.id;
+      }
+      if (email) {
+        res.user.email = email;
+      }
+      if (dataUri) {
+        res.attachment.dataUri = dataUri;
+      }
+      if (dataUri) {
+        res.attachment.viewport = viewport;
+      }
+      if (feedbackId) {
+        res.feedback_id = feedbackId;
+      }
+
+      return res;
+    },
+    [feedbackId, page.docs_property, page.slug, page.title, page.url, snootyEnv, test.feedback, user]
+  );
 
   // Create a new feedback document
   const initializeFeedback = (nextView = 'rating') => {
     const newFeedback = {};
     startTransition(() => {
-      setFeedback({ newFeedback });
+      setFeedback(newFeedback);
       setView(nextView);
       setProgress([true, false, false]);
+      setSelectedRating();
     });
     return { newFeedback };
   };
 
-  const selectInitialRating = (ratingValue) => {
+  const selectInitialRating = async (ratingValue) => {
     setSelectedRating(ratingValue);
     setView('comment');
     setProgress([false, true, false]);
+    const payload = createFeedbackPayload(ratingValue);
+    try {
+      const res = await upsertFeedback(payload);
+      setFeedbackId(res);
+    } catch (e) {
+      console.error('Error while creating new feedback');
+    }
   };
 
   // Create a placeholder sentiment based on the selected rating to avoid any breaking changes from external dependencies
@@ -50,47 +101,24 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     try {
       const newUser = await reassignCurrentUser();
       newFeedback.user.stitch_id = newUser.id;
-      await createNewFeedback(newFeedback);
+      await upsertFeedback(newFeedback);
       setFeedback(newFeedback);
     } catch (e) {
       console.error('Error when retrying feedback submission', e);
     }
   };
 
-  const submitAllFeedback = async ({ comment = '', email = '', snootyEnv, dataUri, viewport }) => {
+  const submitAllFeedback = async ({ comment = '', email = '', dataUri, viewport }) => {
     // Route the user to their "next steps"
-
     setProgress([false, false, true]);
     setView('submitted');
+    setDetachForm(false);
 
     if (!selectedRating) return;
     // Submit the full feedback document
-    const newFeedback = {
-      page: {
-        title: page.title,
-        slug: page.slug,
-        url: page.url,
-        docs_property: page.docs_property,
-      },
-      user: {
-        stitch_id: user && user.id,
-        email: email,
-      },
-      attachment: {
-        dataUri,
-        viewport,
-      },
-      viewport: getViewport(),
-      comment,
-      category: createSentiment(selectedRating),
-      rating: selectedRating,
-      snootyEnv,
-      ...test.feedback,
-    };
-
+    const newFeedback = createFeedbackPayload(selectedRating, email, dataUri, viewport, comment);
     try {
-      await createNewFeedback(newFeedback);
-      setFeedback(newFeedback);
+      await upsertFeedback(newFeedback);
     } catch (err) {
       // This catch block will most likely only be hit after Realm attempts internal retry logic
       // after access token is refreshed
@@ -99,6 +127,9 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
         // Explicitly retry 1 time to avoid any infinite loop
         await retryFeedbackSubmission(newFeedback);
       }
+    } finally {
+      setFeedback();
+      setFeedbackId();
     }
   };
 
@@ -106,13 +137,12 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   // initial state.
   const abandon = useCallback(() => {
     setView('waiting');
-    if (feedback) {
-      // set the rating and feedback to null
-      setFeedback(null);
-      setSelectedRating(null);
-    }
+    setFeedback();
+    setSelectedRating();
+    setFeedbackId();
     setIsScreenshotButtonClicked(false);
-  }, [feedback]);
+    setDetachForm(false);
+  }, []);
 
   const value = {
     feedback,
@@ -129,6 +159,8 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     selectInitialRating,
     isScreenshotButtonClicked,
     setIsScreenshotButtonClicked,
+    detachForm,
+    setDetachForm,
   };
 
   // reset feedback when route changes

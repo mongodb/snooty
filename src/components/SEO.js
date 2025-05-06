@@ -18,20 +18,26 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIn
     return <link key={hrefLang} className={smartlingNoRewriteClass} rel="alternate" hrefLang={hrefLang} href={href} />;
   });
 
+  const title =
+    showDocsLandingTitle || (!siteTitle && !pageTitle)
+      ? 'MongoDB Documentation'
+      : `${pageTitle ? `${pageTitle} - ` : ''}${siteTitle} - MongoDB Docs`;
+
   return (
     <>
-      <title>
-        {showDocsLandingTitle || (!siteTitle && !pageTitle)
-          ? 'MongoDB Documentation'
-          : `${pageTitle ? `${pageTitle} - ` : ''}${siteTitle}`}
-      </title>
+      <title>{title}</title>
       {hrefLangLinks}
       {/* Twitter Tags - default values, may be overwritten by Twitter component */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={DEFAULT_TWITTER_SITE} />
-      <meta property="twitter:title" content={pageTitle} />
+      <meta property="twitter:title" content={title} />
       <meta name="twitter:image" content={metaUrl} />
       <meta name="twitter:image:alt" content="MongoDB logo featuring a green leaf on a dark green background." />
+      <meta property="og:title" content={title} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:image" content={metaUrl} />
+      <meta property="og:image:secure_url" content={metaUrl} />
+      <meta property="og:type" content="website" />
       {noIndexing && <meta name="robots" content="noindex" />}
       {canonical && <link data-testid="canonical" id="canonical" rel="canonical" key={canonical} href={canonical} />}
     </>

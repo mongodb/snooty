@@ -8,7 +8,7 @@ import { cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
 import { HeadingContextProvider } from '../../context/heading-context';
 import { findAllNestedAttribute } from '../../utils/find-all-nested-attribute';
-import { OFFLINE_CLASSNAME } from '../../utils/head-scripts/offline-ui/collapsible';
+import { OFFLINE_COLLAPSIBLE_CLASSNAME } from '../../utils/head-scripts/offline-ui/collapsible';
 import { isBrowser } from '../../utils/is-browser';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -74,7 +74,7 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
     <HeadingContextProvider ignoreNextHeading={true} heading={heading}>
       <Box
         aria-expanded={open}
-        className={cx('collapsible', collapsibleStyle, isOfflineDocsBuild ? OFFLINE_CLASSNAME : '')}
+        className={cx('collapsible', collapsibleStyle, isOfflineDocsBuild ? OFFLINE_COLLAPSIBLE_CLASSNAME : '')}
       >
         <Box className={cx(headerContainerStyle)}>
           <Box>

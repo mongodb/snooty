@@ -6,6 +6,8 @@ import { theme } from '../../theme/docsTheme';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { ContentsContext } from '../Contents/contents-context';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { OFFLINE_METHOD_SELECTOR_CLASSNAME } from '../../utils/head-scripts/offline-ui/method-selector';
 import MethodOptionContent from './MethodOptionContent';
 
 const STORAGE_KEY = 'methodSelectorId';
@@ -50,7 +52,21 @@ const radioBoxStyle = css`
     padding: 14px 12px;
     background-color: inherit;
     color: inherit;
+
+    ${isOfflineDocsBuild &&
+    `
+      border-color: ${palette.gray.base};
+      box-shadow: none;
+    `}
   }
+
+  ${isOfflineDocsBuild &&
+  `
+    &[aria-selected=true] div {
+      border-color: transparent;
+      box-shadow: 0 0 0 3px ${palette.green.dark1};
+    }
+  `}
 
   :not(:last-of-type) {
     margin: 0;
@@ -129,7 +145,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
 
   return (
     <>
-      <div className={optionsContainer}>
+      <div className={cx(optionsContainer, isOfflineDocsBuild ? OFFLINE_METHOD_SELECTOR_CLASSNAME : '')}>
         <RadioBoxGroup
           className={cx(radioBoxGroupStyle(children.length))}
           size={'full'}
@@ -146,17 +162,27 @@ const MethodSelector = ({ nodeData: { children } }) => {
         >
           {children.map(({ options: { title, id } }, index) => {
             return (
-              <RadioBox key={id} className={cx(radioBoxStyle)} value={`${id}-${index}`} checked={selectedMethod === id}>
+              <RadioBox
+                id={id}
+                key={id}
+                className={cx(radioBoxStyle)}
+                value={`${id}-${index}`}
+                checked={selectedMethod === id}
+                aria-selected={isOfflineDocsBuild ? selectedMethod === id : null}
+              >
                 {title}
               </RadioBox>
             );
           })}
         </RadioBoxGroup>
         {/* Keep separate div for triangle to allow for relative positioning */}
-        <div className={cx(lineStyle)}>
-          <div className={cx(triangleStyle(optionCount, selectedIdx))} />
-          <hr className={cx(hrStyle)} />
-        </div>
+        {/* Offline docs will not have this triangle indicator */}
+        {!isOfflineDocsBuild && (
+          <div className={cx(lineStyle)}>
+            <div className={cx(triangleStyle(optionCount, selectedIdx))} />
+            <hr className={cx(hrStyle)} />
+          </div>
+        )}
       </div>
       {children.map((child, index) => {
         if (child.name !== 'method-option') return null;

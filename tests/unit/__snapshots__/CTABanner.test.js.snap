@@ -3,16 +3,6 @@
 exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  color: unset;
-}
-
-<a
-    class="emotion-0"
-    href="https://university.mongodb.com/"
-  />
-  .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
   background-color: #E1F7FF;
@@ -32,6 +22,7 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   min-height: 44px;
   padding: 9px 12px 9px 20px;
   position: relative;
+  cursor: pointer;
 }
 
 .emotion-0>div>div>* {
@@ -66,12 +57,6 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 }
 
 .emotion-1 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  color: unset;
-}
-
-.emotion-2 {
   width: 26px;
   min-width: 26px;
   height: 26px;
@@ -93,11 +78,11 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   margin-left: -5px;
 }
 
-.emotion-3 {
+.emotion-2 {
   color: #016BF8;
 }
 
-.emotion-4 {
+.emotion-3 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -109,12 +94,12 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-4 strong,
-.emotion-4 b {
+.emotion-3 strong,
+.emotion-3 b {
   font-weight: 700;
 }
 
-.emotion-6 {
+.emotion-4 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -146,8 +131,8 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-6:hover,
-.emotion-6:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -156,56 +141,46 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-6:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-6:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-6:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
 }
 
 <div
     class="emotion-0"
   >
-    <a
+    <div
       class="emotion-1"
-      href="https://university.mongodb.com/"
     >
-      <div
+      <svg
+        aria-label="Play Icon"
         class="emotion-2"
+        fill="none"
+        height="16"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          aria-label="Play Icon"
-          class="emotion-3"
-          fill="none"
-          height="16"
-          role="img"
-          viewBox="0 0 16 16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M13.779 6.704a1.5 1.5 0 0 1 0 2.592l-7.523 4.388A1.5 1.5 0 0 1 4 12.388V3.612a1.5 1.5 0 0 1 2.256-1.296l7.523 4.388Z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
-    </a>
+        <path
+          d="M13.779 6.704a1.5 1.5 0 0 1 0 2.592l-7.523 4.388A1.5 1.5 0 0 1 4 12.388V3.612a1.5 1.5 0 0 1 2.256-1.296l7.523 4.388Z"
+          fill="currentColor"
+        />
+      </svg>
+    </div>
     <p
-      class="emotion-4"
+      class="emotion-3"
     >
+      If you prefer learning through videos, try this lesson on 
       <a
-        class="emotion-1"
-        href="https://university.mongodb.com/"
-      >
-        If you prefer learning through videos, try this lesson on 
-      </a>
-      <a
-        class="lg-ui-0001 emotion-6"
+        class="lg-ui-0001 emotion-4"
         href="https://university.mongodb.com/"
         target="_self"
       >
@@ -221,16 +196,6 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
 exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  color: unset;
-}
-
-<a
-    class="emotion-0"
-    href="https://university.mongodb.com/"
-  />
-  .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
   background-color: #E1F7FF;
@@ -250,6 +215,7 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   min-height: 44px;
   padding: 9px 12px 9px 20px;
   position: relative;
+  cursor: pointer;
 }
 
 .emotion-0>div>div>* {
@@ -284,12 +250,6 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 }
 
 .emotion-1 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  color: unset;
-}
-
-.emotion-2 {
   width: 26px;
   min-width: 26px;
   height: 26px;
@@ -311,11 +271,11 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   margin-left: -5px;
 }
 
-.emotion-3 {
+.emotion-2 {
   color: #016BF8;
 }
 
-.emotion-4 {
+.emotion-3 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -327,12 +287,12 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-4 strong,
-.emotion-4 b {
+.emotion-3 strong,
+.emotion-3 b {
   font-weight: 700;
 }
 
-.emotion-6 {
+.emotion-4 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -364,8 +324,8 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-6:hover,
-.emotion-6:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -374,58 +334,48 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-6:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-6:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-6:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
 }
 
 <div
     class="emotion-0"
   >
-    <a
+    <div
       class="emotion-1"
-      href="https://university.mongodb.com/"
     >
-      <div
+      <svg
+        aria-label="Bell Icon"
         class="emotion-2"
+        fill="none"
+        height="16"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          aria-label="Bell Icon"
-          class="emotion-3"
-          fill="none"
-          height="16"
-          role="img"
-          viewBox="0 0 16 16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            clip-rule="evenodd"
-            d="M12.625 6.138a4.656 4.656 0 0 0-3.268-3.925C9.228 1.52 8.67 1 8 1c-.67 0-1.228.52-1.357 1.213a4.656 4.656 0 0 0-3.268 3.925l-.452 3.963h.026a.95.95 0 0 0 0 1.899h10.102a.95.95 0 0 0 0-1.899h.026l-.452-3.963ZM8 15a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2Z"
-            fill="currentColor"
-            fill-rule="evenodd"
-          />
-        </svg>
-      </div>
-    </a>
+        <path
+          clip-rule="evenodd"
+          d="M12.625 6.138a4.656 4.656 0 0 0-3.268-3.925C9.228 1.52 8.67 1 8 1c-.67 0-1.228.52-1.357 1.213a4.656 4.656 0 0 0-3.268 3.925l-.452 3.963h.026a.95.95 0 0 0 0 1.899h10.102a.95.95 0 0 0 0-1.899h.026l-.452-3.963ZM8 15a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2Z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </div>
     <p
-      class="emotion-4"
+      class="emotion-3"
     >
+      If you prefer learning through videos, try this lesson on 
       <a
-        class="emotion-1"
-        href="https://university.mongodb.com/"
-      >
-        If you prefer learning through videos, try this lesson on 
-      </a>
-      <a
-        class="lg-ui-0001 emotion-6"
+        class="lg-ui-0001 emotion-4"
         href="https://university.mongodb.com/"
         target="_self"
       >
@@ -441,16 +391,6 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  color: unset;
-}
-
-<a
-    class="emotion-0"
-    href="https://university.mongodb.com/"
-  />
-  .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
   background-color: #E1F7FF;
@@ -470,6 +410,7 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   min-height: 44px;
   padding: 9px 12px 9px 20px;
   position: relative;
+  cursor: pointer;
 }
 
 .emotion-0>div>div>* {
@@ -504,12 +445,6 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 }
 
 .emotion-1 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  color: unset;
-}
-
-.emotion-2 {
   width: 26px;
   min-width: 26px;
   height: 26px;
@@ -531,11 +466,11 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   margin-left: -5px;
 }
 
-.emotion-3 {
+.emotion-2 {
   color: #016BF8;
 }
 
-.emotion-4 {
+.emotion-3 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -547,12 +482,12 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-4 strong,
-.emotion-4 b {
+.emotion-3 strong,
+.emotion-3 b {
   font-weight: 700;
 }
 
-.emotion-6 {
+.emotion-4 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -584,8 +519,8 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-6:hover,
-.emotion-6:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -594,56 +529,46 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-6:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-6:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-6:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
 }
 
 <div
     class="emotion-0"
   >
-    <a
+    <div
       class="emotion-1"
-      href="https://university.mongodb.com/"
     >
-      <div
+      <svg
+        aria-label="Play Icon"
         class="emotion-2"
+        fill="none"
+        height="16"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          aria-label="Play Icon"
-          class="emotion-3"
-          fill="none"
-          height="16"
-          role="img"
-          viewBox="0 0 16 16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M13.779 6.704a1.5 1.5 0 0 1 0 2.592l-7.523 4.388A1.5 1.5 0 0 1 4 12.388V3.612a1.5 1.5 0 0 1 2.256-1.296l7.523 4.388Z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
-    </a>
+        <path
+          d="M13.779 6.704a1.5 1.5 0 0 1 0 2.592l-7.523 4.388A1.5 1.5 0 0 1 4 12.388V3.612a1.5 1.5 0 0 1 2.256-1.296l7.523 4.388Z"
+          fill="currentColor"
+        />
+      </svg>
+    </div>
     <p
-      class="emotion-4"
+      class="emotion-3"
     >
+      If you prefer learning through videos, try this lesson on 
       <a
-        class="emotion-1"
-        href="https://university.mongodb.com/"
-      >
-        If you prefer learning through videos, try this lesson on 
-      </a>
-      <a
-        class="lg-ui-0001 emotion-6"
+        class="lg-ui-0001 emotion-4"
         href="https://university.mongodb.com/"
         target="_self"
       >
@@ -659,16 +584,6 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
 exports[`renders a CTABanner correctly when non-default icon is specified 1`] = `
 <DocumentFragment>
   .emotion-0 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  color: unset;
-}
-
-<a
-    class="emotion-0"
-    href="https://university.mongodb.com/"
-  />
-  .emotion-0 {
   margin: 16px 0;
   font-size: 13px;
   background-color: #E1F7FF;
@@ -688,6 +603,7 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   min-height: 44px;
   padding: 9px 12px 9px 20px;
   position: relative;
+  cursor: pointer;
 }
 
 .emotion-0>div>div>* {
@@ -722,12 +638,6 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 }
 
 .emotion-1 {
-  -webkit-text-decoration: none!important;
-  text-decoration: none!important;
-  color: unset;
-}
-
-.emotion-2 {
   width: 26px;
   min-width: 26px;
   height: 26px;
@@ -749,11 +659,11 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   margin-left: -5px;
 }
 
-.emotion-3 {
+.emotion-2 {
   color: #016BF8;
 }
 
-.emotion-4 {
+.emotion-3 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -765,12 +675,12 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   color: var(--font-color-primary);
 }
 
-.emotion-4 strong,
-.emotion-4 b {
+.emotion-3 strong,
+.emotion-3 b {
   font-weight: 700;
 }
 
-.emotion-6 {
+.emotion-4 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -802,8 +712,8 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   font-weight: var(--link-font-weight);
 }
 
-.emotion-6:hover,
-.emotion-6:focus {
+.emotion-4:hover,
+.emotion-4:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -812,56 +722,46 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
   text-decoration-thickness: 2px;
 }
 
-.emotion-6:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-6:hover {
+.emotion-4:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-6:focus {
+.emotion-4:focus {
   text-decoration-color: #016BF8;
 }
 
 <div
     class="emotion-0"
   >
-    <a
+    <div
       class="emotion-1"
-      href="https://university.mongodb.com/"
     >
-      <div
+      <svg
+        aria-label="University Icon"
         class="emotion-2"
+        fill="none"
+        height="16"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          aria-label="University Icon"
-          class="emotion-3"
-          fill="none"
-          height="16"
-          role="img"
-          viewBox="0 0 16 16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M8.5 4.613c0-.383.191-.74.51-.953a6.87 6.87 0 0 1 2.145-.949l2.406-.601a.353.353 0 0 1 .439.342v7.88c0 .238 0 .357-.043.453a.5.5 0 0 1-.176.211c-.087.06-.204.081-.438.123l-3.9.71c-.324.058-.486.088-.612.042a.5.5 0 0 1-.264-.22c-.067-.116-.067-.28-.067-.61V4.613ZM2 2.452c0-.23.216-.398.439-.342l2.407.601a6.87 6.87 0 0 1 2.144.95c.319.211.51.569.51.952v6.428c0 .33 0 .494-.067.61a.5.5 0 0 1-.264.22c-.126.046-.288.016-.612-.043l-3.9-.709c-.234-.042-.35-.063-.438-.123a.5.5 0 0 1-.176-.21C2 10.688 2 10.57 2 10.331v-7.88ZM2.008 12.41a.5.5 0 0 1 .581-.402l5.143.935c.177.032.359.032.536 0l5.143-.935a.5.5 0 0 1 .178.984l-4.134.752c-.163.434-.753.756-1.455.756-.702 0-1.292-.322-1.455-.756l-4.134-.752a.5.5 0 0 1-.403-.581Z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
-    </a>
+        <path
+          d="M8.5 4.613c0-.383.191-.74.51-.953a6.87 6.87 0 0 1 2.145-.949l2.406-.601a.353.353 0 0 1 .439.342v7.88c0 .238 0 .357-.043.453a.5.5 0 0 1-.176.211c-.087.06-.204.081-.438.123l-3.9.71c-.324.058-.486.088-.612.042a.5.5 0 0 1-.264-.22c-.067-.116-.067-.28-.067-.61V4.613ZM2 2.452c0-.23.216-.398.439-.342l2.407.601a6.87 6.87 0 0 1 2.144.95c.319.211.51.569.51.952v6.428c0 .33 0 .494-.067.61a.5.5 0 0 1-.264.22c-.126.046-.288.016-.612-.043l-3.9-.709c-.234-.042-.35-.063-.438-.123a.5.5 0 0 1-.176-.21C2 10.688 2 10.57 2 10.331v-7.88ZM2.008 12.41a.5.5 0 0 1 .581-.402l5.143.935c.177.032.359.032.536 0l5.143-.935a.5.5 0 0 1 .178.984l-4.134.752c-.163.434-.753.756-1.455.756-.702 0-1.292-.322-1.455-.756l-4.134-.752a.5.5 0 0 1-.403-.581Z"
+          fill="currentColor"
+        />
+      </svg>
+    </div>
     <p
-      class="emotion-4"
+      class="emotion-3"
     >
+      If you prefer learning through videos, try this lesson on 
       <a
-        class="emotion-1"
-        href="https://university.mongodb.com/"
-      >
-        If you prefer learning through videos, try this lesson on 
-      </a>
-      <a
-        class="lg-ui-0001 emotion-6"
+        class="lg-ui-0001 emotion-4"
         href="https://university.mongodb.com/"
         target="_self"
       >

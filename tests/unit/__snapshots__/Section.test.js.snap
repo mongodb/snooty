@@ -19,7 +19,7 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-1 {
-  position: relative;
+  position: absolute;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -40,6 +40,12 @@ exports[`renders correctly 1`] = `
   margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-3 {
+    margin-top: -85px;
+  }
 }
 
 <section>

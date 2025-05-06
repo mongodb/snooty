@@ -28,12 +28,12 @@ describe('Head', () => {
     });
     it('renders the canonical tag from the snooty.toml', () => {
       render(<Head pageContext={mockCompleteEOLPageContext.pageContext} data={mockCompleteEOLPageContext.data} />);
-      const _canonical = mockEOLSnootyMetadata.canonical;
+      const canonical = mockEOLSnootyMetadata.canonical;
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', _canonical);
+      expect(canonicalTag).toHaveAttribute('href', canonical);
     });
   });
 
@@ -47,16 +47,14 @@ describe('Head', () => {
         siteUrl: mockSiteUrl,
       }));
       render(<Head pageContext={mockHeadPageContext.pageContext} data={mockHeadPageContext.data} />);
-      const urlSlug = 'stable';
-      const siteBasePrefix = mockHeadPageContext.pageContext.repoBranches.siteBasePrefix;
 
-      const currentVersion = `${mockSiteUrl}/${siteBasePrefix}/${urlSlug}/`;
+      const canonical = `${mockEOLSnootyMetadata.canonical}`;
 
       const canonicalTag = screen.getByTestId('canonical');
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', currentVersion);
+      expect(canonicalTag).toHaveAttribute('href', canonical);
     });
   });
 
@@ -249,7 +247,7 @@ describe('Head', () => {
     it('correctly applies title, project name, and version', function () {
       const { container } = render(<Head pageContext={pageContext} data={mockData} />);
       const title = container.querySelector('title');
-      expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title} ${metadata.branch}`);
+      expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title} ${metadata.branch} - MongoDB Docs`);
     });
 
     it('defaults to project name and version if no page title', function () {
@@ -257,7 +255,7 @@ describe('Head', () => {
       useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
       const { container } = render(<Head pageContext={pageContext} data={mockData} />);
       const title = container.querySelector('title');
-      expect(title.innerHTML).toBe(`${metadata.title} ${metadata.branch}`);
+      expect(title.innerHTML).toBe(`${metadata.title} ${metadata.branch} - MongoDB Docs`);
     });
 
     it('only applies branch versions starting with a version number (v)', function () {
@@ -265,7 +263,7 @@ describe('Head', () => {
       useSnootyMetadata.mockImplementation(() => ({ ...metadata }));
       const { container } = render(<Head pageContext={pageContext} data={mockData} />);
       const title = container.querySelector('title');
-      expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title}`);
+      expect(title.innerHTML).toBe(`Get Started with  - ${metadata.title} - MongoDB Docs`);
     });
 
     // highly not likely to be missing project, title, and version

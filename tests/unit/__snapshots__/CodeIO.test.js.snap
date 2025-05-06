@@ -508,6 +508,10 @@ exports[`CodeIO renders correctly 1`] = `
   display: inline!important;
 }
 
+.emotion-22 style {
+  display: none!important;
+}
+
 .emotion-22 * {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
@@ -766,7 +770,9 @@ exports[`CodeIO renders correctly 1`] = `
               fill-rule="evenodd"
             />
           </svg>
-          HIDE OUTPUT
+          <span>
+            HIDE OUTPUT
+          </span>
         </div>
       </button>
     </div>

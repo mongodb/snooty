@@ -12,6 +12,9 @@ const OutputContainer = styled.div`
   > div > * {
     display: inline !important;
   }
+  style {
+    display: none !important;
+  }
   * {
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;

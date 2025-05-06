@@ -16,3 +16,5 @@ coverage/
 bundle.zip
 # Local Netlify folder
 .netlify
+# pyenv
+.python-version

@@ -9,13 +9,37 @@ import { palette } from '@leafygreen-ui/palette';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import Input from '../Code/Input';
 import Output from '../Code/Output';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { OFFLINE_BUTTON_CLASSNAME, OFFLINE_OUTPUT_CLASSNAME } from '../../utils/head-scripts/offline-ui/code';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const outputButtonStyling = LeafyCss`
   padding: 0px;
   height: 24px;
   margin: 8px;
+
+  ${
+    isOfflineDocsBuild &&
+    `
+    span:nth-of-type(2) {
+      display: none;
+    }
+    &.offline-hide-output {
+      svg {
+        transform: rotate(180deg);
+      }
+      span:nth-of-type(2) {
+        display: inherit;
+      }
+      span:nth-of-type(1) {
+        display: none;
+      }
+    }  
+  `
+  }
 `;
+
+const getButtonText = (showOutput) => (showOutput ? 'HIDE OUTPUT' : 'VIEW OUTPUT');
 
 const outputContainerStyle = (showOutput) => LeafyCss`
   ${!showOutput && 'display: none;'}
@@ -30,8 +54,8 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   if (needsIOToggle && children[1]?.options?.visible !== undefined) {
     initialOutputVisibility = !!children[1].options.visible;
   }
-  const [showOutput, setShowOutput] = useState(initialOutputVisibility);
-  const buttonText = showOutput ? 'HIDE OUTPUT' : 'VIEW OUTPUT';
+  const [showOutput, setShowOutput] = useState(() => (isOfflineDocsBuild ? true : initialOutputVisibility));
+  const buttonText = getButtonText(showOutput);
   const arrow = showOutput ? 'ChevronUp' : 'ChevronDown';
   const outputBorderRadius = !showOutput ? '12px' : '0px';
   const singleInputBorderRadius = onlyInputSpecified ? '12px' : '0px';
@@ -69,15 +93,16 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
           <IOToggle style={{ '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
             <Button
               role="button"
-              className={cx(outputButtonStyling)}
+              className={cx(outputButtonStyling, isOfflineDocsBuild ? OFFLINE_BUTTON_CLASSNAME : '')}
               disabled={false}
               onClick={handleClick}
               leftGlyph={<Icon glyph={arrow} fill="#FF0000" />}
             >
-              {buttonText}
+              <span>{buttonText}</span>
+              {isOfflineDocsBuild && <span>{getButtonText(false)}</span>}
             </Button>
           </IOToggle>
-          <div className={outputContainerStyle(showOutput)}>
+          <div className={cx(outputContainerStyle(showOutput), isOfflineDocsBuild ? OFFLINE_OUTPUT_CLASSNAME : '')}>
             <Output nodeData={children[1]} />
           </div>
         </>

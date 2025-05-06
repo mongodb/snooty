@@ -88,7 +88,10 @@ const StepBlock = styled('div')`
   min-height: 59px;
 `;
 
-const Content = 'div';
+const Content = styled('div')`
+  flex: 1;
+  min-width: 0;
+`;
 
 const contentStyles = {
   connected: css`

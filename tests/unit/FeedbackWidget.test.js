@@ -2,7 +2,7 @@ import React from 'react';
 import { act, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
-import { FeedbackProvider, FeedbackForm, FeedbackButton } from '../../src/components/Widgets/FeedbackWidget';
+import { FeedbackProvider, FeedbackForm } from '../../src/components/Widgets/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop } from '../utils';
 import {
@@ -22,7 +22,6 @@ import {
   COMMENT_PLACEHOLDER_TEXT,
   EMAIL_ERROR_TEXT,
   EMAIL_PLACEHOLDER_TEXT,
-  FEEDBACK_BUTTON_TEXT,
   FEEDBACK_SUBMIT_BUTTON_TEXT,
   RATING_QUESTION_TEXT,
   SCREENSHOT_BUTTON_TEXT,
@@ -53,7 +52,6 @@ async function mountFormWithFeedbackState(feedbackState = {}) {
       >
         <FeedbackForm />
         <div>
-          <FeedbackButton />
           <Heading nodeData={headingData} sectionDepth={1} />
         </div>
       </FeedbackProvider>
@@ -94,37 +92,6 @@ describe('FeedbackWidget', () => {
   afterEach(clearMockScreenshotFunctions);
   beforeEach(() => mockLocation('', '', '', 'https://mongodb.com/docs/atlas'));
 
-  describe('FeedbackButton', () => {
-    it('shows the rating view when clicked', async () => {
-      wrapper = await mountFormWithFeedbackState({});
-      // Before the click, the form is hidden
-      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
-      // Click the button
-      userEvent.click(wrapper.getByText(FEEDBACK_BUTTON_TEXT));
-
-      await tick();
-      // After the click new feedback is initialized
-      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
-    });
-
-    it('shows the rating view when using keyboard', async () => {
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
-
-      // Focus and simulate keyboard interaction
-      const fwButon = wrapper.getAllByRole('button')[0];
-      fwButon.focus();
-      userEvent.keyboard('{Enter}');
-      await tick();
-      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
-    });
-
-    it('is visible in the waiting view on large/desktop screens', async () => {
-      wrapper = await mountFormWithFeedbackState({});
-      expect(wrapper.queryAllByText(FEEDBACK_BUTTON_TEXT)).toHaveLength(1);
-    });
-  });
-
   describe('FeedbackForm', () => {
     it('waiting state when the form is closed', async () => {
       wrapper = await mountFormWithFeedbackState({
@@ -136,20 +103,6 @@ describe('FeedbackWidget', () => {
       expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(0);
     });
 
-    it('closes when navigating to a different page', async () => {
-      wrapper = await mountFormWithFeedbackState({});
-      // Click the button
-      userEvent.click(wrapper.getByText(FEEDBACK_BUTTON_TEXT));
-      await tick();
-      // Expect rating question to be on screen
-      expect(wrapper.queryAllByText(RATING_QUESTION_TEXT)).toHaveLength(1);
-
-      mockLocation('', '', '', 'https://mongodb.com/docs/atlas/getting-started');
-      await tick();
-      // Form is closed when navigating to new page
-      expect(wrapper.queryAllByTestId(RATING_QUESTION_TEXT)).toHaveLength(0);
-    });
-
     describe('RatingView', () => {
       it('Shows 5 stars for rating', async () => {
         wrapper = await mountFormWithFeedbackState({
@@ -158,7 +111,7 @@ describe('FeedbackWidget', () => {
         expect(wrapper.getAllByTestId('rating-star')).toHaveLength(5);
       });
 
-      it('transitions to the comment view when a rating is clicked', async () => {
+      it('transitions to the comment view and submits a feedback when a rating is clicked', async () => {
         wrapper = await mountFormWithFeedbackState({
           view: 'rating',
         });
@@ -170,6 +123,7 @@ describe('FeedbackWidget', () => {
 
         checkSelectedStars(wrapper, selectedRating);
         expect(wrapper.getByPlaceholderText(COMMENT_PLACEHOLDER_TEXT)).toBeTruthy();
+        expect(stitchFunctionMocks['upsertFeedback']).toHaveBeenCalledTimes(1);
       });
 
       it('transitions to the comment view when using keyboard to select a rating', async () => {
@@ -187,6 +141,7 @@ describe('FeedbackWidget', () => {
 
         checkSelectedStars(wrapper, selectedRating);
         expect(wrapper.getByPlaceholderText(COMMENT_PLACEHOLDER_TEXT)).toBeTruthy();
+        expect(stitchFunctionMocks['upsertFeedback']).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -255,7 +210,7 @@ describe('FeedbackWidget', () => {
           // Click the submit button
           userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
-          expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(1);
+          expect(stitchFunctionMocks['upsertFeedback']).toHaveBeenCalledTimes(1);
         });
 
         it('raises an input error if an invalid email is specified', async () => {
@@ -276,7 +231,7 @@ describe('FeedbackWidget', () => {
         it('attempts to resubmit on 401 error', async () => {
           const customError = new Error('mock error message');
           customError.statusCode = 401;
-          stitchFunctionMocks['createNewFeedback'].mockRejectedValueOnce(customError);
+          stitchFunctionMocks['upsertFeedback'].mockRejectedValueOnce(customError);
 
           wrapper = await mountFormWithFeedbackState({
             view: 'comment',
@@ -287,7 +242,7 @@ describe('FeedbackWidget', () => {
           });
           userEvent.click(wrapper.getByText(FEEDBACK_SUBMIT_BUTTON_TEXT).closest('button'));
           await tick();
-          expect(stitchFunctionMocks['createNewFeedback']).toHaveBeenCalledTimes(2);
+          expect(stitchFunctionMocks['upsertFeedback']).toHaveBeenCalledTimes(2);
         });
       });
     });

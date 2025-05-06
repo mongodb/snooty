@@ -48,7 +48,7 @@ exports[`collapsible component renders all the content in the options and childr
 }
 
 .emotion-3 {
-  position: relative;
+  position: absolute;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -69,6 +69,12 @@ exports[`collapsible component renders all the content in the options and childr
   margin-top: -85px;
   position: absolute;
   padding-bottom: 2px;
+}
+
+@media only screen and (max-width: 767px) {
+  .emotion-5 {
+    margin-top: -85px;
+  }
 }
 
 .emotion-7 {
@@ -158,13 +164,6 @@ exports[`collapsible component renders all the content in the options and childr
 
 .emotion-8:focus-visible:before {
   background-color: rgba(61,79,88,0.1);
-}
-
-.offline-collapsible[aria-expanded=false] .emotion-8 {
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  transform: rotate(-90deg);
 }
 
 .emotion-9 {

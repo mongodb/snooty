@@ -58,13 +58,15 @@ export const sideNavItemFontSize = css`
 `;
 
 export const titleStyle = css`
+  display: flex;
+  justify-content: space-between;
   color: var(--sidenav-item-title);
   font-size: ${theme.fontSize.small};
   font-weight: bold;
   line-height: 20px;
   text-transform: none;
-  :hover {
-    background-color: inherit;
+  &:hover {
+    background-color: var(--sidenav-hover-bg-color);
 
     &:after,
     span:after {

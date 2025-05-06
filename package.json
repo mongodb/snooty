@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.18.14",
+  "version": "0.20.4",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -19,6 +19,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/gatsbyjs__reach-router": "^2.0.5",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.1",
     "@types/react": "^18.3.13",
@@ -46,11 +47,11 @@
   },
   "scripts": {
     "info": "gatsby info --clipboard",
-    "build": "gatsby build --prefix-paths",
+    "build": "./build-retry.sh --prefix-paths",
+    "build:no-prefix": "./build-retry.sh",
     "build:clean": "npm run clean && npm run build",
     "build:clean:stage": "npm run build:clean && make stage",
     "build:netlify": "npm run build && echo -n $INCOMING_HOOK_BODY > build-hook.txt",
-    "build:no-prefix": "gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "ensure-main": "node scripts/ensure-main.js",
@@ -138,7 +139,7 @@
     "lodash": "^4.6.0",
     "minimist": "^1.2.6",
     "mobx": "^6.1.5",
-    "mongodb-chatbot-ui": "^0.10.2",
+    "mongodb-chatbot-ui": "^0.13.0",
     "no-scroll": "^2.1.1",
     "node-fetch": "^3.3.2",
     "node-gyp": "^10.1.0",

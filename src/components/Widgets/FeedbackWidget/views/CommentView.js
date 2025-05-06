@@ -9,7 +9,6 @@ import { Layout } from '../components/view-components';
 import { useFeedbackContext } from '../context';
 import { retrieveDataUri } from '../handleScreenshot';
 import useViewport from '../../../../hooks/useViewport';
-import { useSiteMetadata } from '../../../../hooks/use-site-metadata';
 import useScreenSize from '../../../../hooks/useScreenSize';
 import validateEmail from '../../../../utils/validate-email';
 import StarRating from '../components/StarRating';
@@ -102,17 +101,16 @@ const CommentView = () => {
   const [email, setEmail] = useState('');
   const [hasEmailError, setHasEmailError] = useState(false);
   const isValidEmail = useValidation(email, validateEmail);
-  const { snootyEnv } = useSiteMetadata();
   const viewport = useViewport();
-  const { isMobile } = useScreenSize();
+  const { isTabletOrMobile } = useScreenSize();
 
   const handleSubmit = async () => {
     if (isValidEmail) {
       if (screenshotTaken) {
         const dataUri = await retrieveDataUri();
-        await submitAllFeedback({ comment, email, snootyEnv, dataUri, viewport });
+        await submitAllFeedback({ comment, email, dataUri, viewport });
       } else {
-        await submitAllFeedback({ comment, email, snootyEnv });
+        await submitAllFeedback({ comment, email });
       }
     } else {
       setHasEmailError(true);
@@ -121,7 +119,7 @@ const CommentView = () => {
 
   return (
     <Layout>
-      <StyledStarRating handleRatingSelection={setSelectedRating} showCaption={false} />
+      <StyledStarRating handleRatingSelection={setSelectedRating} />
       <StyledCommentInput
         type="text"
         id="feedback-comment"
@@ -142,7 +140,7 @@ const CommentView = () => {
         state={hasEmailError ? 'error' : 'none'}
         optional={true}
       />
-      {!isMobile && <ScreenshotButton />}
+      {!isTabletOrMobile && <ScreenshotButton />}
       <SubmitButton onClick={() => handleSubmit()} type="submit">
         {FEEDBACK_SUBMIT_BUTTON_TEXT}
       </SubmitButton>

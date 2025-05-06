@@ -13,7 +13,6 @@ const fontSize = {
   h4: '16px',
 };
 /**
- * @type {Object}
  * @property {string} size returns px value
  * @property {function(string): number} stripUnit removes px unit
  */
@@ -76,6 +75,8 @@ const header = {
   // used for scrolling elements into place, considering sticky header
   navbarScrollOffset: '85px',
   actionBarMobileHeight: '60px',
+  composableDesktopHeight: '90px',
+  composableMobileheight: '190px',
 };
 
 const widgets = {

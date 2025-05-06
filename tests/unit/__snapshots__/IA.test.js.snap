@@ -562,6 +562,7 @@ exports[`renders a page IA with IA linked data 1`] = `
   -ms-flex-align: center;
   align-items: center;
   gap: 8px;
+  text-transform: none;
 }
 
 .emotion-15>span:after {
@@ -595,6 +596,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
+          data-position="tocnode"
           href="https://www.mongodb.com/docs/atlas/getting-started/"
           target="_self"
         >
@@ -610,6 +612,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
+          data-position="tocnode"
           href="https://www.mongodb.com/docs/manual/"
           target="_self"
         >
@@ -625,6 +628,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-side-nav-item-0000 emotion-10"
+          data-position="tocnode"
           href="/tools-and-connectors/"
         >
           Tools and Connectors
@@ -637,6 +641,7 @@ exports[`renders a page IA with IA linked data 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
+          data-position="tocnode"
           href="https://www.mongodb.com/docs/drivers/"
           target="_self"
         >
@@ -655,6 +660,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/c/"
             target="_self"
           >
@@ -678,6 +684,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/cxx/"
             target="_self"
           >
@@ -701,6 +708,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/csharp/current/"
             target="_self"
           >
@@ -724,6 +732,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/go/current/"
             target="_self"
           >
@@ -747,6 +756,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/java-drivers/"
             target="_self"
           >
@@ -770,6 +780,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/kotlin-drivers/"
             target="_self"
           >
@@ -793,6 +804,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/node/current/"
             target="_self"
           >
@@ -816,6 +828,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/php/"
             target="_self"
           >
@@ -839,6 +852,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/python/"
             target="_self"
           >
@@ -862,6 +876,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/ruby/"
             target="_self"
           >
@@ -885,6 +900,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/rust/"
             target="_self"
           >
@@ -908,6 +924,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/scala/"
             target="_self"
           >
@@ -931,6 +948,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/swift/"
             target="_self"
           >
@@ -954,6 +972,7 @@ exports[`renders a page IA with IA linked data 1`] = `
             aria-current="false"
             aria-disabled="false"
             class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-15"
+            data-position="tocnode"
             href="https://www.mongodb.com/docs/drivers/typescript/"
             target="_self"
           >
@@ -1370,6 +1389,7 @@ exports[`renders a simple page IA correctly 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
+          data-position="tocnode"
           href="https://www.mongodb.com/docs/atlas/getting-started/"
           target="_self"
         >
@@ -1385,6 +1405,7 @@ exports[`renders a simple page IA correctly 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
+          data-position="tocnode"
           href="https://www.mongodb.com/docs/manual/"
           target="_self"
         >
@@ -1400,6 +1421,7 @@ exports[`renders a simple page IA correctly 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-side-nav-item-0000 emotion-10"
+          data-position="tocnode"
           href="/tools-and-connectors/"
         >
           Tools and Connectors
@@ -1412,6 +1434,7 @@ exports[`renders a simple page IA correctly 1`] = `
           aria-current="false"
           aria-disabled="false"
           class="lg-ui-0001 lg-ui-side-nav-item-0000 emotion-6"
+          data-position="tocnode"
           href="https://www.mongodb.com/docs/drivers/"
           target="_self"
         >

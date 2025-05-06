@@ -13,7 +13,8 @@ const TocContext = createContext({
 // ToC context that provides ToC content in form of *above*
 // filters all available ToC by currently selected version via VersionContext
 const TocContextProvider = ({ children, remoteMetadata }) => {
-  const { activeVersions, setActiveVersions, availableVersions, showVersionDropdown } = useContext(VersionContext);
+  const { activeVersions, setActiveVersions, availableVersions, hasEmbeddedVersionDropdown } =
+    useContext(VersionContext);
   const { project, branch, toctree, associated_products: associatedProducts } = useSnootyMetadata();
   const { database } = useSiteMetadata();
   const [activeToc, setActiveToc] = useState(remoteMetadata?.toctree || toctree);
@@ -29,7 +30,7 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
         sort: { build_id: -1 },
       };
 
-      if (associatedProducts?.length || showVersionDropdown) {
+      if (associatedProducts?.length || hasEmbeddedVersionDropdown) {
         filter['is_merged_toc'] = true;
       }
       const metadata = await fetchDocument(database, METADATA_COLLECTION, filter, { toctree: 1 }, findOptions);
@@ -40,7 +41,15 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
       return remoteMetadata?.toctree || toctree;
     }
     // below dependents are server constants
-  }, [toctree, project, branch, associatedProducts?.length, showVersionDropdown, database, remoteMetadata?.toctree]);
+  }, [
+    toctree,
+    project,
+    branch,
+    associatedProducts?.length,
+    hasEmbeddedVersionDropdown,
+    database,
+    remoteMetadata?.toctree,
+  ]);
 
   const setInitVersion = useCallback(
     (tocNode) => {

@@ -5,10 +5,12 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
 import Button from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
+import { palette } from '@leafygreen-ui/palette';
 import useScreenSize from '../hooks/useScreenSize';
 import { usePageContext } from '../context/page-context';
 import { theme } from '../theme/docsTheme';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
+import { disabledStyle } from '../styles/button';
 import { useVersionsToml } from '../hooks/use-versions-toml';
 import { getFeatureFlags } from '../utils/feature-flags';
 import ComponentFactory from './ComponentFactory';
@@ -21,27 +23,42 @@ import Permalink from './Permalink';
 import { TimeRequired } from './MultiPageTutorials';
 import UnifiedVersionDropdown from './UnifiedSidenav/UnifiedVersionDropdown';
 
-const h2Styling = css`
-  margin-top: 16px;
-  margin-bottom: 24px;
+const titleMarginStyle = css`
+  margin-top: ${theme.size.default};
+  margin-bottom: ${theme.size.medium};
 `;
 
-const headingStyles = (sectionDepth) => css`
-  margin-top: 24px;
-  margin-bottom: 8px;
+const headingStyles = (sectionDepth, shouldShowLabButton) => css`
+  ${!shouldShowLabButton &&
+  `
+    margin-top: ${theme.size.medium};
+    margin-bottom: ${theme.size.small};
+  `}
   color: ${sectionDepth < 2 ? `var(--heading-color-primary)` : `var(--font-color-primary)`};
 `;
 
+const labWrapperStyle = css`
+  display: flex;
+  gap: ${theme.size.default} ${theme.size.large};
+  flex-wrap: wrap;
+`;
+
+// Theme-specific styles were copied from the original Button component
 const labButtonStyling = css`
-  margin-left: 18px;
+  align-self: center;
+  background-color: ${palette.gray.light3};
+  border-color: ${palette.gray.base};
+  color: ${palette.black};
+
+  .dark-theme & {
+    background-color: ${palette.gray.dark2};
+    border-color: ${palette.gray.base};
+    color: ${palette.white};
+  }
 `;
 
 const contentsStyle = css`
   margin-top: ${theme.size.medium};
-
-  @media ${theme.screenSize.largeAndUp} {
-    display: none;
-  }
 `;
 
 const determineHeading = (sectionDepth) => {
@@ -61,7 +78,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const asHeadingNumber = as ?? sectionDepth;
   const asHeading = asHeadingNumber >= 1 && asHeadingNumber <= 6 ? `h${asHeadingNumber}` : 'h6';
   const isPageTitle = sectionDepth === 1;
-  const { isMobile, isTabletOrMobile } = useScreenSize();
+  const { isTabletOrMobile } = useScreenSize();
   const { selectors } = useContext(TabContext);
   const { hasDrawer, isOpen, setIsOpen } = useContext(InstruqtContext);
   const hasSelectors = selectors && Object.keys(selectors).length > 0;
@@ -69,6 +86,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const { page, tabsMainColumn } = usePageContext();
   const hasMethodSelector = page?.options?.['has_method_selector'];
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
+  const showRating = !(rest?.page?.options?.template === 'product-landing');
   // Data for versions.toml, if project is in versions.toml that means the repo is versioned.
   const versions = useVersionsToml();
   const { isUnifiedToc } = getFeatureFlags();
@@ -79,49 +97,57 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
       <ConditionalWrapper
         condition={shouldShowMobileHeader}
         wrapper={(children) => (
-          <HeadingContainer stackVertically={isMobile}>
+          <HeadingContainer>
             {children}
-            <ChildContainer isStacked={isMobile}>{hasSelectors && !tabsMainColumn && <TabSelectors />}</ChildContainer>
+            <ChildContainer>{hasSelectors && !tabsMainColumn && <TabSelectors rightColumn={true} />}</ChildContainer>
           </HeadingContainer>
         )}
       >
-        <HeadingTag
-          className={cx(
-            headingStyles(sectionDepth),
-            'contains-headerlink',
-            sectionDepth === 1 ? h2Styling : '',
-            className
+        {/* Wrapper for Instruqt drawer button */}
+        <ConditionalWrapper
+          condition={shouldShowLabButton}
+          wrapper={(children) => (
+            <div className={cx(titleMarginStyle, labWrapperStyle)}>
+              {children}
+              <Button
+                role="button"
+                className={cx(labButtonStyling, disabledStyle)}
+                disabled={isOfflineDocsBuild || isOpen}
+                onClick={() => setIsOpen(true)}
+                leftGlyph={<Icon glyph="Code" />}
+              >
+                {'Open Interactive Tutorial'}
+              </Button>
+            </div>
           )}
-          as={asHeading}
-          weight="medium"
         >
-          {nodeData.children.map((element, index) => {
-            return <ComponentFactory {...rest} nodeData={element} key={index} />;
-          })}
-          <Permalink id={id} description="heading" />
-          {shouldShowLabButton && (
-            <Button
-              role="button"
-              className={cx(labButtonStyling)}
-              disabled={isOfflineDocsBuild || isOpen}
-              onClick={() => setIsOpen(true)}
-              leftGlyph={<Icon glyph="Code" />}
-            >
-              {'Open Interactive Tutorial'}
-            </Button>
-          )}
-          {isUnifiedToc && sectionDepth === 1 && versionData && (
-            <>
-              <UnifiedVersionDropdown versionData={versionData} />
-              <hr />
-            </>
-          )}
-        </HeadingTag>
+          <HeadingTag
+            className={cx(
+              headingStyles(sectionDepth, shouldShowLabButton),
+              'contains-headerlink',
+              isPageTitle && !hasDrawer ? titleMarginStyle : '',
+              className
+            )}
+            as={asHeading}
+            weight="medium"
+          >
+            {nodeData.children.map((element, index) => {
+              return <ComponentFactory {...rest} nodeData={element} key={index} />;
+            })}
+            <Permalink id={id} description="heading" />
+            {isUnifiedToc && sectionDepth === 1 && versionData && (
+              <>
+                <UnifiedVersionDropdown versionData={versionData} />
+                <hr />
+              </>
+            )}
+          </HeadingTag>
+        </ConditionalWrapper>
       </ConditionalWrapper>
-      {isPageTitle && (
+      {isPageTitle && isTabletOrMobile && showRating && (
         <>
           <TimeRequired />
-          <Contents className={contentsStyle} />
+          <Contents className={contentsStyle} slug={rest.slug} />
         </>
       )}
     </>
@@ -130,19 +156,25 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
 
 const HeadingContainer = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.stackVertically ? 'column' : 'row')};
+  flex-direction: row;
   justify-content: space-between;
+
+  @media ${theme.screenSize.upToLarge} {
+    flex-direction: column;
+  }
 `;
 
-const ChildContainer = styled.div(
-  ({ isStacked }) => css`
-    ${isStacked && 'margin: 4px 0 16px 0;'}
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: ${isStacked ? 'flex-start' : 'center'};
-  `
-);
+const ChildContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media ${theme.screenSize.upToLarge} {
+    margin: 4px 0 16px 0;
+    align-items: flex-start;
+  }
+`;
 
 Heading.propTypes = {
   sectionDepth: PropTypes.number.isRequired,

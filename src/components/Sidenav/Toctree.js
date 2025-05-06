@@ -5,8 +5,8 @@ import TOCNode from './TOCNode';
 const Toctree = ({ handleClick, slug, toctree: { children } }) => {
   return (
     <>
-      {children.map((c) => (
-        <TOCNode key={c.slug || c.url || c.options?.urls} activeSection={slug} handleClick={handleClick} node={c} />
+      {children.map((c, idx) => (
+        <TOCNode key={idx} activeSection={slug} handleClick={handleClick} node={c} />
       ))}
     </>
   );

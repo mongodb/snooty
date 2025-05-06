@@ -82,6 +82,8 @@ import RoleLinkNewTab from './Roles/LinkNewTab';
 import RoleRed from './Roles/Red';
 import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
+import SeeAlso from './SeeAlso';
+import { ComposableTutorial } from './ComposableTutorial';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -138,6 +140,7 @@ const componentMap = {
   code: Code,
   collapsible: Collapsible,
   'community-driver': CommunityPillLink,
+  'composable-tutorial': ComposableTutorial,
   'io-code-block': CodeIO,
   cond: Cond,
   container: Container,
@@ -183,6 +186,7 @@ const componentMap = {
   rubric: Rubric,
   'search-results': SearchResults,
   section: Section,
+  seealso: SeeAlso,
   sharedinclude: Include,
   strong: Strong,
   substitution_reference: SubstitutionReference,

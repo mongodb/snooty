@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
+import { ToastProvider } from '@leafygreen-ui/toast';
 import ActionBar from '../components/ActionBar/ActionBar';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
@@ -13,6 +15,7 @@ import { theme } from '../theme/docsTheme';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useRemoteMetadata } from '../hooks/use-remote-metadata';
 import { getAllLocaleCssStrings } from '../utils/locale';
+import { OfflineDownloadProvider } from '../components/OfflineDownloadModal/DownloadContext';
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { useVersionsToml } from '../hooks/use-versions-toml';
@@ -94,6 +97,11 @@ export const StyledContentContainer = styled('div')`
   margin: 0px;
 `;
 
+// have Toasts come up with z index above the side nav
+const toastPortalStyling = LeafyCSS`
+  z-index: ${theme.zIndexes.sidenav + 1};
+`;
+
 const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBranches, template } }) => {
   const { sidenav } = getTemplate(template);
   const { chapters, guides, slugToTitle, toctree, eol, project } = useSnootyMetadata();
@@ -123,17 +131,21 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
           {isUnifiedToc ? (
             <UnifiedSidenav slug={slug} versionsData={versionsData} />
           ) : sidenav && !isInPresentationMode ? (
-            <Sidenav
-              chapters={chapters}
-              guides={guides}
-              page={page.ast}
-              pageTitle={pageTitle}
-              repoBranches={repoBranches}
-              slug={slug}
-              toctree={toctree}
-              eol={eol}
-              template={template}
-            />
+            <ToastProvider portalClassName={cx(toastPortalStyling)}>
+              <OfflineDownloadProvider>
+                <Sidenav
+                  chapters={chapters}
+                  guides={guides}
+                  page={page.ast}
+                  pageTitle={pageTitle}
+                  repoBranches={repoBranches}
+                  slug={slug}
+                  toctree={toctree}
+                  eol={eol}
+                  template={template}
+                />
+              </OfflineDownloadProvider>
+            </ToastProvider>
           ) : (
             <div />
           )}

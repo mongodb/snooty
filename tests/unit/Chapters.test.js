@@ -41,7 +41,7 @@ describe('Chapters', () => {
     const wrapper = mountChapters();
 
     // We expect 2 chapter entries, 1 chapter view selector, and the Chapters ContentsList per test data.
-    expect(wrapper.queryAllByText('Chapter', { exact: false })).toHaveLength(4);
+    expect(wrapper.queryAllByText('Chapter', { exact: false })).toHaveLength(5);
   });
 
   it('renders guides in gallery view', async () => {

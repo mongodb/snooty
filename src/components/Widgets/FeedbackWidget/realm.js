@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Realm from 'realm-web';
+import { ObjectID } from 'bson';
 import { isBrowser } from '../../../utils/is-browser';
 import { removeAllRealmUsersFromLocalStorage } from '../../../utils/realm-user-management';
 
@@ -64,7 +65,8 @@ export const useRealmUser = () => {
 };
 
 // Feedback Widget Functions
-export async function createNewFeedback({ page, user, attachment, ...rest }) {
-  const feedback = await app.currentUser.callFunction('feedback_create', { page, user, attachment, ...rest });
-  return feedback;
+export async function upsertFeedback({ page, user, attachment, ...rest }) {
+  const updateOneRes = await app.currentUser.callFunction('feedback_upsert', { page, user, attachment, ...rest });
+  const objectId = new ObjectID(updateOneRes.upsertedId);
+  return objectId.toString();
 }
