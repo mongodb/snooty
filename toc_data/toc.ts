@@ -1,12 +1,13 @@
 import type { TocItem } from '../src/components/UnifiedSidenav/UnifiedConstants';
 
+// each url has to be unique with the prefix!!!!
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
     {
       label: 'C# Quick Start',
       url: '/quick-start',
       glyph: 'Bulb',
-      prefix: '/version/csharp/bianca.laube/DOP-5382',
+      prefix: '/version/csharp/bianca.laube/DOP-5375',
       items: [
         {
           label: 'C# Documentation',
@@ -65,7 +66,7 @@ export const tocData = (): TocItem[] => {
         {
           label: 'Connect to cloud',
           group: true,
-          prefix: '/master/cloud-docs/bianca.laube/DOP-5382',
+          prefix: '/master/cloud-docs/bianca.laube/DOP-5375',
           items: [
             {
               label: 'Manage Clusters',
@@ -90,7 +91,7 @@ export const tocData = (): TocItem[] => {
       label: 'Get Started',
       url: '/getting-started',
       glyph: 'LightningBolt',
-      prefix: '/master/cloud-docs/bianca.laube/DOP-5382',
+      prefix: '/master/cloud-docs/bianca.laube/DOP-5375',
       items: [
         {
           label: 'Get Started',
@@ -136,12 +137,12 @@ export const tocData = (): TocItem[] => {
         },
         {
           label: 'Docs Compass',
-          prefix: '/master/compass/bianca.laube/DOP-5382',
+          prefix: '/master/compass/bianca.laube/DOP-5375',
           group: true,
           items: [
             {
               label: 'Overview',
-              url: '/',
+              url: '/new',
             },
             {
               label: 'Import and export',
@@ -155,7 +156,7 @@ export const tocData = (): TocItem[] => {
       label: 'Application Development',
       url: '/create-connect-deployments',
       glyph: 'Code',
-      prefix: '/master/cloud-docs/bianca.laube/DOP-5382',
+      prefix: '/master/cloud-docs/bianca.laube/DOP-5375',
       items: [
         {
           label: 'Application Development',
@@ -224,6 +225,118 @@ export const tocData = (): TocItem[] => {
             {
               label: 'Support Access',
               url: '/support-acces',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Client Libraries and APIs',
+      url: '/builders',
+      prefix: '/master/java/bianca.laube/DOP-5375',
+      items: [
+        {
+          label: 'Client Libraries',
+          group: true,
+          items: [
+            {
+              label: 'Java Driver',
+              url: '/get-started/',
+              prefix: '/master/java/bianca.laube/DOP-5375',
+              showSubNav: true,
+              items: [
+                {
+                  label: 'Node js driver',
+                  group: true,
+                  items: [
+                    {
+                      label: 'Connection Guide',
+                      collapsible: true,
+                      url: '/connection',
+                      items: [
+                        {
+                          label: 'Create Mongodb client',
+                          url: '/connection/mongoclient',
+                        },
+                        {
+                          label: 'Connection Troubleshooting',
+                          url: '/connection/connection-troubleshooting',
+                        },
+                      ],
+                    },
+                    {
+                      collapsible: true,
+                      label: 'CRUD Operator',
+                      url: '/crud',
+                      items: [
+                        {
+                          label: 'Insert Operations',
+                          url: '/crud/insert',
+                        },
+                        {
+                          label: 'Update Documents',
+                          url: '/crud/update-documents/',
+                          collapsible: true,
+                          items: [
+                            {
+                              label: 'Update Arrays',
+                              url: '/crud/update-documents/embedded-arrays',
+                            },
+                            {
+                              label: 'Upsert',
+                              url: '/crud/update-documents/upsert/',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              label: 'C driver',
+              showSubNav: true,
+              prefix: '/master/c/bianca.laube/DOP-5375',
+              url: '/async-c-driver',
+              items: [
+                {
+                  label: 'C Driver',
+                  group: true,
+                  items: [
+                    {
+                      label: 'Data Aggregation',
+                      url: '/aggregation',
+                    },
+                    {
+                      label: 'Databases and Connections',
+                      url: '/databases-collections',
+                      collapsible: true,
+                      items: [
+                        {
+                          label: 'Time series Data',
+                          url: '/databases-collections/time-series',
+                        },
+                        {
+                          label: 'Run a Database Command',
+                          url: '/databases-collections/run-command',
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'APIs',
+          group: true,
+          items: [
+            {
+              label: 'Atlas Search',
+              prefix: '/master/java/bianca.laube/DOP-5375',
+              url: '/atlas-search',
             },
           ],
         },

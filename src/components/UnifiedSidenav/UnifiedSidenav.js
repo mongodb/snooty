@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
@@ -6,6 +6,7 @@ import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { useViewportSize } from '@leafygreen-ui/hooks';
 import { useLocation } from '@gatsbyjs/reach-router';
+import { BackLink } from '@leafygreen-ui/typography';
 import Link from '../Link';
 import { sideNavItemUniTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
@@ -21,6 +22,8 @@ import { SidenavContext } from '../Sidenav';
 import useViewport from '../../hooks/useViewport';
 import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { assertLeadingSlash } from '../../utils/assert-leading-slash';
+import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -165,8 +168,11 @@ function UnifiedTocNavItem({
   isStatic,
   prefix,
   slug,
-  activeTabUrl,
+  showSubNav,
+  currentL2s,
   isTabletOrMobile,
+  setCurrentL2s,
+  setShowDriverBackBtn,
   level,
 }) {
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
@@ -175,8 +181,16 @@ function UnifiedTocNavItem({
     if (isTabletOrMobile) {
       return (
         <>
-          <StaticNavItem label={label} url={url} slug={slug} isStatic={isStatic} items={items} prefix={prefix} />
-          {url === activeTabUrl &&
+          <StaticNavItem
+            label={label}
+            url={url}
+            slug={slug}
+            isStatic={isStatic}
+            items={items}
+            prefix={prefix}
+            setShowDriverBackBtn={setShowDriverBackBtn}
+          />
+          {url === currentL2s &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
                 {...tocItem}
@@ -185,6 +199,7 @@ function UnifiedTocNavItem({
                 slug={slug}
                 isStatic={false}
                 isTabletOrMobile={isTabletOrMobile}
+                setCurrentL2s={setCurrentL2s}
               />
             ))}
         </>
@@ -201,6 +216,8 @@ function UnifiedTocNavItem({
             slug={slug}
             isStatic={false}
             isTabletOrMobile={isTabletOrMobile}
+            setCurrentL2s={setCurrentL2s}
+            setShowDriverBackBtn={setShowDriverBackBtn}
           />
         ))}
       </>
@@ -218,9 +235,32 @@ function UnifiedTocNavItem({
             key={tocItem.newUrl + tocItem.label}
             slug={slug}
             isTabletOrMobile={isTabletOrMobile}
+            setCurrentL2s={setCurrentL2s}
+            setShowDriverBackBtn={setShowDriverBackBtn}
           />
         ))}
       </SideNavGroup>
+    );
+  }
+
+  const handleClick = () => {
+    // Allows for the showSubNav nodes to have their own L2 panel
+    setShowDriverBackBtn(true);
+    setCurrentL2s({ items });
+  };
+
+  if (showSubNav) {
+    return (
+      <SideNavItem
+        aria-label={label}
+        as={Link}
+        prefix={prefix}
+        to={url}
+        onClick={handleClick}
+        className={cx(sideNavItemUniTOCStyling({ level }))}
+      >
+        {label}
+      </SideNavItem>
     );
   }
 
@@ -253,7 +293,7 @@ function UnifiedTocNavItem({
   );
 }
 
-function StaticNavItem({ label, url, slug, items, isStatic, prefix, level = 1 }) {
+function StaticNavItem({ label, url, slug, items, isStatic, prefix, setCurrentL1, setShowDriverBackBtn, level = 1 }) {
   return (
     <SideNavItem
       active={isActiveTocNode(slug, url, items)}
@@ -261,6 +301,10 @@ function StaticNavItem({ label, url, slug, items, isStatic, prefix, level = 1 })
       prefix={prefix}
       as={Link}
       to={url}
+      onClick={() => {
+        setCurrentL1({ items: items });
+        setShowDriverBackBtn(false);
+      }}
       className={cx(sideNavItemUniTOCStyling({ level, isStatic }))}
     >
       {label}
@@ -342,6 +386,43 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
   });
 };
 
+const findPageParent = (tree, targetUrl) => {
+  const path = [];
+
+  // If the page is a part of a driver toc, return driver as parent, if not return the L1
+  const dfs = (item) => {
+    path.push(item);
+
+    if (assertLeadingSlash(removeTrailingSlash(item.url)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
+      for (let i = path.length - 1; i >= 0; i--) {
+        if (path[i].showSubNav === true) {
+          return [true, path[i]];
+        }
+      }
+      // Page is not a part of a driver, returns the associated L1
+      return [false, path[0]];
+    }
+
+    if (item.items) {
+      for (const child of item.items) {
+        const result = dfs(child);
+        if (result) return result;
+      }
+    }
+
+    path.pop();
+    return null;
+  };
+
+  for (const item of tree) {
+    const result = dfs(item);
+    if (result) return result;
+  }
+
+  // No L1 selected (docs home page)
+  return [false, null];
+};
+
 export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
@@ -354,26 +435,37 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
 
-  // TODO for testing: Use this tree instead of the unifiedTocTree in the preprd enviroment
-  const tree = updateURLs({ tree: unifiedTocTree, prefix: '', activeVersions, versionsData, project, snootyEnv });
+  const tree = useMemo(() => {
+    return updateURLs({
+      tree: unifiedTocTree,
+      prefix: '',
+      activeVersions,
+      versionsData,
+      project,
+      snootyEnv,
+    });
+  }, [unifiedTocTree, activeVersions, versionsData, project, snootyEnv]);
+
   console.log('The edited toctree with prefixes is:', tree);
   console.log(unifiedTocTree);
 
-  const [activeTabUrl, setActiveTabUrl] = useState(() => {
-    const activeToc = tree.find((staticTocItem) => {
+  const [isDriver, currentL2List] = findPageParent(tree, slug);
+  const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
+
+  const [currentL1, setCurrentL1] = useState(() => {
+    return tree.find((staticTocItem) => {
       return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
     });
-    return activeToc?.url;
   });
 
+  const [currentL2s, setCurrentL2s] = useState(() => {
+    return currentL2List;
+  });
+
+  // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
-    setActiveTabUrl(() => {
-      const activeToc = tree.find((staticTocItem) => {
-        return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
-      });
-      return activeToc?.url;
-    });
-  }, [slug, tree]);
+    if (!showDriverBackBtn) setCurrentL2s(currentL1);
+  }, [currentL1, showDriverBackBtn]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
   useEffect(() => {
@@ -404,12 +496,13 @@ export function UnifiedSidenav({ slug, versionsData }) {
                     <UnifiedTocNavItem
                       {...navItems}
                       level={1}
-                      slug={slug}
                       key={navItems.newUrl + navItems.label}
                       group={true}
                       isStatic={true}
-                      activeTabUrl={activeTabUrl}
+                      currentL2s={currentL2s.url}
                       isTabletOrMobile={isTabletOrMobile}
+                      setCurrentL2s={setCurrentL2s}
+                      setShowDriverBackBtn={setShowDriverBackBtn}
                     />
                   );
                 })
@@ -420,27 +513,34 @@ export function UnifiedSidenav({ slug, versionsData }) {
                       slug={slug}
                       key={staticTocItem.newUrl + staticTocItem.label}
                       isStatic={true}
+                      setCurrentL1={setCurrentL1}
+                      setShowDriverBackBtn={setShowDriverBackBtn}
                     />
                   );
                 })}
           </div>
-          {activeTabUrl && !isTabletOrMobile && (
+          {currentL2s && !isTabletOrMobile && (
             <div className={cx(rightPane)}>
-              {tree.map((navItems) => {
-                if (navItems.url === activeTabUrl) {
-                  return (
-                    <UnifiedTocNavItem
-                      {...navItems}
-                      level={1}
-                      key={navItems.newUrl + navItems.label}
-                      slug={slug}
-                      group={true}
-                      isStatic={true}
-                      activeTabUrl={activeTabUrl}
-                    />
-                  );
-                }
-                return null;
+              {showDriverBackBtn && (
+                <BackLink
+                  onClick={() => {
+                    setShowDriverBackBtn(false);
+                  }}
+                >
+                  Back to Client Libraries
+                </BackLink>
+              )}
+              {currentL2s.items?.map((navItems) => {
+                return (
+                  <UnifiedTocNavItem
+                    {...navItems}
+                    level={1}
+                    key={navItems.newUrl + navItems.label}
+                    slug={slug}
+                    setCurrentL2s={setCurrentL2s}
+                    setShowDriverBackBtn={setShowDriverBackBtn}
+                  />
+                );
               })}
             </div>
           )}

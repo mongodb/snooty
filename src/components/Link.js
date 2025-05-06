@@ -151,7 +151,7 @@ const Link = ({
   }
 
   // Use Gatsby Link for internal links, and <a> for others
-  if (to && isRelativeUrl(to) && !anchor && pathPrefix === prefix) {
+  if (to && isRelativeUrl(to) && !anchor) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
