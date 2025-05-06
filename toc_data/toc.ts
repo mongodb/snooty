@@ -7,7 +7,7 @@ export const tocData = (): TocItem[] => {
       label: 'C# Quick Start',
       url: '/quick-start',
       glyph: 'Bulb',
-      prefix: '/version/csharp/bianca.laube/DOP-5375',
+      prefix: '/version/csharp/bianca.laube/DOP-5371',
       items: [
         {
           label: 'C# Documentation',
@@ -66,7 +66,7 @@ export const tocData = (): TocItem[] => {
         {
           label: 'Connect to cloud',
           group: true,
-          prefix: '/master/cloud-docs/bianca.laube/DOP-5375',
+          prefix: '/master/cloud-docs/bianca.laube/DOP-5371',
           items: [
             {
               label: 'Manage Clusters',
@@ -91,7 +91,7 @@ export const tocData = (): TocItem[] => {
       label: 'Get Started',
       url: '/getting-started',
       glyph: 'LightningBolt',
-      prefix: '/master/cloud-docs/bianca.laube/DOP-5375',
+      prefix: '/master/cloud-docs/bianca.laube/DOP-5371',
       items: [
         {
           label: 'Get Started',
@@ -137,7 +137,7 @@ export const tocData = (): TocItem[] => {
         },
         {
           label: 'Docs Compass',
-          prefix: '/master/compass/bianca.laube/DOP-5375',
+          prefix: '/master/compass/bianca.laube/DOP-5371',
           group: true,
           items: [
             {
@@ -156,7 +156,7 @@ export const tocData = (): TocItem[] => {
       label: 'Application Development',
       url: '/create-connect-deployments',
       glyph: 'Code',
-      prefix: '/master/cloud-docs/bianca.laube/DOP-5375',
+      prefix: '/master/cloud-docs/bianca.laube/DOP-5371',
       items: [
         {
           label: 'Application Development',
@@ -233,7 +233,7 @@ export const tocData = (): TocItem[] => {
     {
       label: 'Client Libraries and APIs',
       url: '/builders',
-      prefix: '/master/java/bianca.laube/DOP-5375',
+      prefix: '/master/java/bianca.laube/DOP-5371',
       items: [
         {
           label: 'Client Libraries',
@@ -242,7 +242,7 @@ export const tocData = (): TocItem[] => {
             {
               label: 'Java Driver',
               url: '/get-started/',
-              prefix: '/master/java/bianca.laube/DOP-5375',
+              prefix: '/master/java/bianca.laube/DOP-5371',
               showSubNav: true,
               items: [
                 {
@@ -297,7 +297,7 @@ export const tocData = (): TocItem[] => {
             {
               label: 'C driver',
               showSubNav: true,
-              prefix: '/master/c/bianca.laube/DOP-5375',
+              prefix: '/master/c/bianca.laube/DOP-5371',
               url: '/async-c-driver',
               items: [
                 {
@@ -335,7 +335,7 @@ export const tocData = (): TocItem[] => {
           items: [
             {
               label: 'Atlas Search',
-              prefix: '/master/java/bianca.laube/DOP-5375',
+              prefix: '/master/java/bianca.laube/DOP-5371',
               url: '/atlas-search',
             },
           ],

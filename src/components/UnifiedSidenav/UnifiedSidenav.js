@@ -8,7 +8,7 @@ import { useViewportSize } from '@leafygreen-ui/hooks';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { BackLink } from '@leafygreen-ui/typography';
 import Link from '../Link';
-import { sideNavItemUniTOCStyling, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
+// import { L2ItemStlying, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
@@ -24,6 +24,48 @@ import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
+import DocsHomeButton from '../Sidenav/DocsHomeButton';
+import { DownloadButton } from '../OfflineDownloadModal';
+import { L1ItemStlying, groupHeaderStyling, L2ItemStlying, backLinkStyling } from './styles/SideNavItem';
+
+const ArtificialPadding = styled('div')`
+  height: 15px;
+`;
+
+export const downloadButtonStlying = LeafyCSS`
+  bottom: 20px;
+  position: absolute;
+  width: 100%;
+  text-align: right;
+  padding-right: 30px;
+`;
+
+export const Border = styled('hr')`
+  border: unset;
+  border-bottom: 1px solid var(--sidenav-border-bottom-color);
+  margin: ${theme.size.small} 0;
+  width: 100%;
+`;
+
+export const OfflineDivider = styled('hr')`
+  border: unset;
+  border-bottom: 1px solid var(--sidenav-border-bottom-color);
+  width: 80%;
+  margin: auto
+  position: absolute;
+  top: -60px;
+`;
+
+const NavTopContainer = styled('div')`
+  background-color: var(--background-color-primary);
+  // position: relative;
+  position: absolute;
+  top: -0px;
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid var(--sidenav-border-bottom-color);
+  z-index: 1;
+`;
 
 const FormatTitle = styled.div`
   scroll-margin-bottom: ${theme.size.xxlarge};
@@ -63,6 +105,17 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
   @media ${theme.screenSize.upToSmall} {
     ${getTopAndHeight(topSmall)};
   }
+
+  nav {
+    background-color: var(--sidenav-bg-color);
+  }
+
+   a[class*='lg-ui-side-nav-item'] {
+      color: var(--sidenav-item-color);
+      :not([aria-current='page']):hover {
+        background-color: var(--sidenav-hover-bg-color);
+      }
+    }
 `;
 
 const sideNavStyle = ({ hideMobile }) => LeafyCSS`  
@@ -80,15 +133,41 @@ const sideNavStyle = ({ hideMobile }) => LeafyCSS`
   }
   
   padding: 0px;
-  div > ul {
+  // div > ul > div {
+  //   display: flex;
+  //   flex-direction: row;
+  //   // position: relative; 
+  //   // width: 400px;
+  //   // height: 100vh;
+  //   // overflow-y: auto;
+  //   // position: fixed;
+  //   // left: 0;
+  //   top: 50px;
+
+
+  //   ul {
+  //     display: block;
+  //     width: 100%;
+
+  //     li {
+  //       a {
+  //         justify-content: space-between !important;
+  //       }
+  //     }
+  //   }
+
+  // }
+`;
+
+const designStyle = LeafyCSS`
     display: flex;
     flex-direction: row;
-    // width: 400px;
-    // height: 100vh;
-    // overflow-y: auto;
-    // position: fixed;
-    // left: 0;
-    // top: 0;
+    position: fixed;
+    top: 50px;
+    height: calc(100% - 120px);
+    padding-top: 10px;
+    border-bottom: 1px solid var(--sidenav-border-bottom-color);
+    width: 100%;
 
     ul {
       display: block;
@@ -101,19 +180,21 @@ const sideNavStyle = ({ hideMobile }) => LeafyCSS`
       }
     }
 
-  }
 `;
 
 const leftPane = LeafyCSS`
-  flex: 1;
+  flex: 0 0 162px;
   overflow-y: auto;
-  background-color: #f8f9fa;
-  border-right: 3px solid #ddd;
+  border-right: 1px solid var(--sidenav-border-bottom-color);
+  width: 162px !important;
+  padding-top: ${theme.size.default};
 `;
 
 const rightPane = LeafyCSS`
-  flex: 2;
+  flex: 0 0 264px;
   overflow-y: auto;
+  border-right: 1px solid var(--sidenav-border-bottom-color);
+  padding-top: ${theme.size.default};
 `;
 
 // we will maybe have to edit this function in the future since if we have double panned side nav in theory two things should be selected at same time
@@ -123,7 +204,8 @@ function isSelectedTab(url, slug) {
 
 function CollapsibleNavItem({ items, label, url, slug, prefix, level }) {
   const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
-  const chevronType = isOpen ? 'ChevronDown' : 'ChevronRight';
+  const chevronType = isOpen ? 'CaretDown' : 'CaretUp';
+  const isActive = isSelectedTab(url, slug);
 
   const onChevronClick = (event) => {
     event.preventDefault();
@@ -143,13 +225,18 @@ function CollapsibleNavItem({ items, label, url, slug, prefix, level }) {
         as={Link}
         prefix={prefix}
         to={url}
-        active={isSelectedTab(url, slug)}
-        className={cx(sideNavItemUniTOCStyling({ level }), overwriteLinkStyle)}
+        active={isActive}
+        className={cx(L2ItemStlying({ level }), overwriteLinkStyle)}
         onClick={handleClick}
         hideExternalIcon={true}
       >
         <FormatTitle>{label}</FormatTitle>
-        <Icon className={cx(chevronStyle)} glyph={chevronType} fill={palette.gray.base} onClick={onChevronClick} />
+        <Icon
+          className={cx(chevronStyle)}
+          glyph={chevronType}
+          fill={isActive ? palette.green.dark2 : palette.gray.base}
+          onClick={onChevronClick}
+        />
       </SideNavItem>
       {isOpen &&
         items.map((item) => (
@@ -227,7 +314,7 @@ function UnifiedTocNavItem({
   // groups are for adding a static header, these can also be collapsible
   if (group) {
     return (
-      <SideNavGroup header={label} collapsible={collapsible} className={cx(sideNavGroupTOCStyling())}>
+      <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling())}>
         {items?.map((tocItem) => (
           <UnifiedTocNavItem
             {...tocItem}
@@ -257,7 +344,7 @@ function UnifiedTocNavItem({
         prefix={prefix}
         to={url}
         onClick={handleClick}
-        className={cx(sideNavItemUniTOCStyling({ level }))}
+        className={cx(L2ItemStlying({ level }))}
       >
         {label}
       </SideNavItem>
@@ -274,7 +361,7 @@ function UnifiedTocNavItem({
         level={level}
         slug={slug}
         prefix={prefix}
-        className={cx(sideNavItemUniTOCStyling({ level }))}
+        className={cx(L2ItemStlying({ level }))}
       />
     );
   }
@@ -286,7 +373,7 @@ function UnifiedTocNavItem({
       as={Link}
       prefix={prefix}
       to={url}
-      className={cx(sideNavItemUniTOCStyling({ level }))}
+      className={cx(L2ItemStlying({ level }))}
     >
       {label}
     </SideNavItem>
@@ -305,7 +392,7 @@ function StaticNavItem({ label, url, slug, items, isStatic, prefix, setCurrentL1
         setCurrentL1({ items: items });
         setShowDriverBackBtn(false);
       }}
-      className={cx(sideNavItemUniTOCStyling({ level, isStatic }))}
+      className={cx(L1ItemStlying())}
     >
       {label}
     </SideNavItem>
@@ -457,6 +544,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
       return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
     });
   });
+  const sideNavSize = currentL1 ? 426 : 161;
 
   const [currentL2s, setCurrentL2s] = useState(() => {
     return currentL2List;
@@ -485,65 +573,79 @@ export function UnifiedSidenav({ slug, versionsData }) {
         id={SIDE_NAV_CONTAINER_ID}
       >
         <SideNav
-          widthOverride={isTabletOrMobile ? viewportSize.width : 375}
+          widthOverride={isTabletOrMobile ? viewportSize.width : sideNavSize}
           className={cx(sideNavStyle({ hideMobile }))}
           aria-label="Side navigation Panel"
         >
-          <div className={cx(leftPane)}>
-            {isTabletOrMobile
-              ? tree.map((navItems) => {
+          <NavTopContainer>
+            <ArtificialPadding />
+            <DocsHomeButton />
+          </NavTopContainer>
+          <div className={cx(designStyle)}>
+            <div className={cx(leftPane)}>
+              {isTabletOrMobile
+                ? tree.map((navItems) => {
+                    return (
+                      <UnifiedTocNavItem
+                        {...navItems}
+                        level={1}
+                        key={navItems.newUrl + navItems.label}
+                        group={true}
+                        isStatic={true}
+                        currentL2s={currentL2s.url}
+                        isTabletOrMobile={isTabletOrMobile}
+                        setCurrentL2s={setCurrentL2s}
+                        setShowDriverBackBtn={setShowDriverBackBtn}
+                      />
+                    );
+                  })
+                : tree.map((staticTocItem) => {
+                    return (
+                      <StaticNavItem
+                        {...staticTocItem}
+                        slug={slug}
+                        key={staticTocItem.newUrl + staticTocItem.label}
+                        isStatic={true}
+                        setCurrentL1={setCurrentL1}
+                        setShowDriverBackBtn={setShowDriverBackBtn}
+                      />
+                    );
+                  })}
+            </div>
+            {currentL2s && !isTabletOrMobile && (
+              <div className={cx(rightPane)}>
+                {showDriverBackBtn && (
+                  <BackLink
+                    className={cx(backLinkStyling())}
+                    onClick={() => {
+                      setShowDriverBackBtn(false);
+                    }}
+                    // href="/master/java/bianca.laube/testing-delete/builders/index.html"
+                    href="/builders"
+                  >
+                    Back to Client Libraries
+                  </BackLink>
+                )}
+                {currentL2s.items?.map((navItems) => {
                   return (
                     <UnifiedTocNavItem
                       {...navItems}
                       level={1}
                       key={navItems.newUrl + navItems.label}
-                      group={true}
-                      isStatic={true}
-                      currentL2s={currentL2s.url}
-                      isTabletOrMobile={isTabletOrMobile}
+                      slug={slug}
                       setCurrentL2s={setCurrentL2s}
                       setShowDriverBackBtn={setShowDriverBackBtn}
                     />
                   );
-                })
-              : tree.map((staticTocItem) => {
-                  return (
-                    <StaticNavItem
-                      {...staticTocItem}
-                      slug={slug}
-                      key={staticTocItem.newUrl + staticTocItem.label}
-                      isStatic={true}
-                      setCurrentL1={setCurrentL1}
-                      setShowDriverBackBtn={setShowDriverBackBtn}
-                    />
-                  );
                 })}
+              </div>
+            )}
           </div>
-          {currentL2s && !isTabletOrMobile && (
-            <div className={cx(rightPane)}>
-              {showDriverBackBtn && (
-                <BackLink
-                  onClick={() => {
-                    setShowDriverBackBtn(false);
-                  }}
-                >
-                  Back to Client Libraries
-                </BackLink>
-              )}
-              {currentL2s.items?.map((navItems) => {
-                return (
-                  <UnifiedTocNavItem
-                    {...navItems}
-                    level={1}
-                    key={navItems.newUrl + navItems.label}
-                    slug={slug}
-                    setCurrentL2s={setCurrentL2s}
-                    setShowDriverBackBtn={setShowDriverBackBtn}
-                  />
-                );
-              })}
-            </div>
-          )}
+
+          <div className={cx(downloadButtonStlying)}>
+            {/* <OfflineDivider /> */}
+            <DownloadButton />
+          </div>
         </SideNav>
       </div>
     </>
