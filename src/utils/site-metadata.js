@@ -59,6 +59,8 @@ const getPathPrefix = (pathPrefix) => {
 /**
  * Get site metadata used to identify this build and query correct documents
  */
+
+console.log(manifestMetadata)
 const siteMetadata = {
   commitHash: process.env.COMMIT_HASH || '',
   database: getDatabase(process.env.SNOOTY_ENV),
