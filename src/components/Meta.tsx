@@ -1,8 +1,8 @@
 import React from 'react';
-import { DirectiveOptions, Meta } from '../types/ast';
+import { DirectiveOptions, MetaNode } from '../types/ast';
 
 export type MetaProps = {
-  nodeData: Meta;
+  nodeData: MetaNode;
 };
 
 const getFilteredOptions = (options?: DirectiveOptions): [string, string][] => {
@@ -14,7 +14,7 @@ const getFilteredOptions = (options?: DirectiveOptions): [string, string][] => {
   return Object.entries(options).filter(([key]) => !skipList.has(key));
 };
 
-const MetaComponent = ({ nodeData: { options } }: MetaProps) => {
+const Meta = ({ nodeData: { options } }: MetaProps) => {
   const filteredOptions = getFilteredOptions(options);
   if (!filteredOptions.length) {
     return null;
@@ -29,4 +29,4 @@ const MetaComponent = ({ nodeData: { options } }: MetaProps) => {
   );
 };
 
-export default MetaComponent;
+export default Meta;

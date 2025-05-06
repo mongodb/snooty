@@ -240,7 +240,7 @@ interface ComposableNode extends Directive {
   children: Node[];
 }
 
-interface Meta extends Directive {
+interface MetaNode extends Directive {
   type: 'directive';
   name: 'meta';
 }
@@ -284,5 +284,5 @@ export type {
   ComposableNode,
   ComposableTutorialNode,
   ComposableTutorialOption,
-  Meta,
+  MetaNode,
 };
