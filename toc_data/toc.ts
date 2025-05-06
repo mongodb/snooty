@@ -231,10 +231,14 @@ export const tocData = (): TocItem[] => {
       ],
     },
     {
-      label: 'Client Libraries and APIs',
+      label: 'Client Libraries',
       url: '/builders',
-      prefix: '/master/java/bianca.laube/DOP-5375',
+      prefix: '/master/java/bianca.laube/testing-delete',
       items: [
+        {
+          label: 'Overview',
+          url: '/builders',
+        },
         {
           label: 'Client Libraries',
           group: true,
@@ -242,7 +246,7 @@ export const tocData = (): TocItem[] => {
             {
               label: 'Java Driver',
               url: '/get-started/',
-              prefix: '/master/java/bianca.laube/DOP-5375',
+              prefix: '/master/java/bianca.laube/testing-delete',
               showSubNav: true,
               items: [
                 {
