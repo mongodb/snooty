@@ -30,4 +30,3 @@ const MetaComponent = ({ nodeData: { options } }: MetaProps) => {
 };
 
 export default MetaComponent;
-
