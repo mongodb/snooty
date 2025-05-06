@@ -16,6 +16,10 @@ type NodeType =
   | 'directive_argument'
   | 'code';
 
+type DirectiveOptions = {
+  [key: string]: string;
+};
+
 interface Node {
   type: NodeType | string;
 }
@@ -60,7 +64,7 @@ interface ReferenceNode extends ParentNode {
   refuri: string;
 }
 
-interface Directive<TOptions = { [key: string]: string }> extends ParentNode {
+interface Directive<TOptions = DirectiveOptions> extends ParentNode {
   type: 'directive';
   name: string;
   argument: Node[];
@@ -236,6 +240,11 @@ interface ComposableNode extends Directive {
   children: Node[];
 }
 
+interface Meta extends Directive {
+  type: 'directive';
+  name: 'meta';
+}
+
 export type {
   NodeType,
   Node,
@@ -247,6 +256,7 @@ export type {
   TextNode,
   CodeNode,
   Directive,
+  DirectiveOptions,
   ListNode,
   ListTableNode,
   ListItemNode,
@@ -274,4 +284,5 @@ export type {
   ComposableNode,
   ComposableTutorialNode,
   ComposableTutorialOption,
+  Meta,
 };

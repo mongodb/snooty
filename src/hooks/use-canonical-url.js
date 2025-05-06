@@ -25,11 +25,6 @@ export const useCanonicalUrl = (meta, metadata, slug, repoBranches) => {
 
   if (canonicalIndex !== -1) {
     canonical = meta[canonicalIndex].options.canonical;
-
-    // after updating the canonical, we need to remove it from the
-    // meta array because the canonical will be handle within
-    meta.splice(canonicalIndex, 1);
-
     // lets stop here because a canonical from a directive is highest ranked
     return canonical;
   }
