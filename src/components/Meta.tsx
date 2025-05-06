@@ -5,7 +5,7 @@ export type MetaProps = {
   nodeData: Meta;
 };
 
-const getFilteredOptions = (options: DirectiveOptions | undefined): [string, string][] => {
+const getFilteredOptions = (options?: DirectiveOptions): [string, string][] => {
   if (!options) {
     return [];
   }
