@@ -21,7 +21,7 @@ export const backLinkStyling = () => css`
   }
 `;
 
-export const L1ItemStlying = () => css`
+export const L1ItemStlying = ({ isActive }: { isActive: boolean }) => css`
   ${sideNavItemBasePadding}
   padding-left: ${theme.size.medium};
   padding-right: ${theme.size.medium};
@@ -32,12 +32,14 @@ export const L1ItemStlying = () => css`
   line-height: 16px;
   text-transform: uppercase;
 
-  &[aria-current='page'] {
-    font-weight: 600;
-    color: var(--sidenav-active-before-color) !important;
-    background-color: var(--sidenav-active-bg-color);
-  }
+  ${isActive && css`
+      font-weight: 600;
+      color: var(--sidenav-active-before-color) !important;
+      background-color: var(--sidenav-active-bg-color);
+    `}
+
 `;
+
 export const groupHeaderStyling = () => css`
   div > div {
     font-weight: 500;

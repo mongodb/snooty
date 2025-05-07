@@ -337,9 +337,10 @@ function UnifiedTocNavItem({
 }
 
 function StaticNavItem({ label, url, slug, items, isStatic, prefix, setCurrentL1, setShowDriverBackBtn, level = 1 }) {
+  const isActive = isActiveTocNode(slug, url, items);
   return (
     <SideNavItem
-      active={isActiveTocNode(slug, url, items)}
+      active={isActive}
       aria-label={label}
       prefix={prefix}
       as={Link}
@@ -348,7 +349,7 @@ function StaticNavItem({ label, url, slug, items, isStatic, prefix, setCurrentL1
         setCurrentL1({ items: items });
         setShowDriverBackBtn(false);
       }}
-      className={cx(L1ItemStlying())}
+      className={cx(L1ItemStlying({ isActive }))}
     >
       {label}
     </SideNavItem>
@@ -577,7 +578,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
                       setShowDriverBackBtn(false);
                     }}
                     // TODO: make this link dymanic in DOP-5373
-                    href="/master/java/bianca.laube/testing-delete/builders/index.html"
+                    href="/master/java/bianca.laube/DOP-5371/builders/index.html"
                   >
                     Back to Client Libraries
                   </BackLink>
