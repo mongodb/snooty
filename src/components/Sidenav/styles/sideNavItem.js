@@ -29,30 +29,6 @@ export const sideNavItemTOCStyling = ({ level = 1 }) => css`
   }
 `;
 
-export const sideNavItemUniTOCStyling = ({ level, isStatic = false }) => css`
-  align-items: flex-start !important;
-  // TODO: fix this style when design is finalized (DOP-5375)
-  font-size: ${isStatic ? theme.fontSize.default : theme.fontSize.small};
-  text-transform: none;
-  line-height: 20px !important;
-  padding-left: calc(16px + ${(level - 1) * 25}px);
-`;
-
-export const sideNavGroupTOCStyling = () => css`
-  align-items: flex-start !important;
-  text-transform: none;
-  line-height: 20px !important;
-
-  // overwrite LG link underlines
-  // @leafygreen-ui/typography v13.0.0
-  :hover {
-    &:after,
-    span:after {
-      display: none;
-    }
-  }
-`;
-
 export const sideNavItemFontSize = css`
   font-size: ${theme.fontSize.small};
 `;

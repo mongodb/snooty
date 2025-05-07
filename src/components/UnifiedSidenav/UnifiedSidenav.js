@@ -8,7 +8,6 @@ import { useViewportSize } from '@leafygreen-ui/hooks';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { BackLink } from '@leafygreen-ui/typography';
 import Link from '../Link';
-// import { L2ItemStlying, sideNavGroupTOCStyling } from '../Sidenav/styles/sideNavItem';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
@@ -32,7 +31,7 @@ const ArtificialPadding = styled('div')`
   height: 15px;
 `;
 
-export const downloadButtonStlying = LeafyCSS`
+export const DownloadButtonStlying = LeafyCSS`
   bottom: 20px;
   position: absolute;
   width: 100%;
@@ -40,25 +39,8 @@ export const downloadButtonStlying = LeafyCSS`
   padding-right: 30px;
 `;
 
-export const Border = styled('hr')`
-  border: unset;
-  border-bottom: 1px solid var(--sidenav-border-bottom-color);
-  margin: ${theme.size.small} 0;
-  width: 100%;
-`;
-
-export const OfflineDivider = styled('hr')`
-  border: unset;
-  border-bottom: 1px solid var(--sidenav-border-bottom-color);
-  width: 80%;
-  margin: auto
-  position: absolute;
-  top: -60px;
-`;
-
 const NavTopContainer = styled('div')`
   background-color: var(--background-color-primary);
-  // position: relative;
   position: absolute;
   top: -0px;
   height: 60px;
@@ -77,7 +59,7 @@ const overwriteLinkStyle = LeafyCSS`
   }
 `;
 
-const chevronStyle = LeafyCSS`
+const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
@@ -120,7 +102,7 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
 
 const sideNavStyle = ({ hideMobile }) => LeafyCSS`  
   height: 100%;
-
+  padding: 0px;
 
   // Mobile & Tablet nav
   @media ${theme.screenSize.upToLarge} {
@@ -131,35 +113,9 @@ const sideNavStyle = ({ hideMobile }) => LeafyCSS`
       display: none;
     }
   }
-  
-  padding: 0px;
-  // div > ul > div {
-  //   display: flex;
-  //   flex-direction: row;
-  //   // position: relative; 
-  //   // width: 400px;
-  //   // height: 100vh;
-  //   // overflow-y: auto;
-  //   // position: fixed;
-  //   // left: 0;
-  //   top: 50px;
-
-
-  //   ul {
-  //     display: block;
-  //     width: 100%;
-
-  //     li {
-  //       a {
-  //         justify-content: space-between !important;
-  //       }
-  //     }
-  //   }
-
-  // }
 `;
 
-const designStyle = LeafyCSS`
+const panelStyling = LeafyCSS`
     display: flex;
     flex-direction: row;
     position: fixed;
@@ -204,16 +160,16 @@ function isSelectedTab(url, slug) {
 
 function CollapsibleNavItem({ items, label, url, slug, prefix, level }) {
   const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
-  const chevronType = isOpen ? 'CaretDown' : 'CaretUp';
+  const caretType = isOpen ? 'CaretDown' : 'CaretUp';
   const isActive = isSelectedTab(url, slug);
 
-  const onChevronClick = (event) => {
+  const onCaretClick = (event) => {
     event.preventDefault();
     setIsOpen(!isOpen);
   };
 
   const handleClick = () => {
-    // Allows the collapsed item if the chevron was selected first before
+    // Allows the collapsed item if the caret was selected first before
     if (!(url !== `/${slug}` && isOpen)) {
       setIsOpen(!isOpen);
     }
@@ -232,10 +188,10 @@ function CollapsibleNavItem({ items, label, url, slug, prefix, level }) {
       >
         <FormatTitle>{label}</FormatTitle>
         <Icon
-          className={cx(chevronStyle)}
-          glyph={chevronType}
+          className={cx(caretStyle)}
+          glyph={caretType}
           fill={isActive ? palette.green.dark2 : palette.gray.base}
-          onClick={onChevronClick}
+          onClick={onCaretClick}
         />
       </SideNavItem>
       {isOpen &&
@@ -581,7 +537,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
             <ArtificialPadding />
             <DocsHomeButton />
           </NavTopContainer>
-          <div className={cx(designStyle)}>
+          <div className={cx(panelStyling)}>
             <div className={cx(leftPane)}>
               {isTabletOrMobile
                 ? tree.map((navItems) => {
@@ -620,8 +576,8 @@ export function UnifiedSidenav({ slug, versionsData }) {
                     onClick={() => {
                       setShowDriverBackBtn(false);
                     }}
-                    // href="/master/java/bianca.laube/testing-delete/builders/index.html"
-                    href="/builders"
+                    // TODO: make this link dymanic in DOP-5373
+                    href="/master/java/bianca.laube/testing-delete/builders/index.html"
                   >
                     Back to Client Libraries
                   </BackLink>
@@ -642,8 +598,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
             )}
           </div>
 
-          <div className={cx(downloadButtonStlying)}>
-            {/* <OfflineDivider /> */}
+          <div className={cx(DownloadButtonStlying)}>
             <DownloadButton />
           </div>
         </SideNav>
