@@ -7,7 +7,7 @@ export const tocData = (): TocItem[] => {
       label: 'C# Quick Start',
       url: '/quick-start',
       glyph: 'Bulb',
-      prefix: '/version/csharp/bianca.laube/DOP-5371',
+      prefix: '/${version}/csharp/bianca.laube/DOP-5371',
       items: [
         {
           label: 'C# Documentation',
