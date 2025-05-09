@@ -27,7 +27,7 @@ function filterValidQueryParams(
   composableOptions: ComposableTutorialNode['composable_options'],
   validSelections: Set<string>,
   fallbackToDefaults = false
-) {
+): Record<string, string>[] {
   const validQueryParams = composableOptions.reduce(
     (res: Record<string, { values: string[]; dependencies: Record<string, string>[] }>, composableOption) => {
       res[composableOption['value']] = {
@@ -40,10 +40,11 @@ function filterValidQueryParams(
   );
 
   const res: Record<string, string> = {};
+  const removedQueryParams: Record<string, string> = {};
 
   // query params take precedence
   for (const [key, value] of Object.entries(parsedQuery)) {
-    const dependenciesMet = validQueryParams[key].dependencies.every((d) => {
+    const dependenciesMet = validQueryParams[key]?.dependencies.every((d) => {
       const key = Object.keys(d)[0];
       return parsedQuery[key] === Object.values(d)[0];
     });
@@ -54,11 +55,14 @@ function filterValidQueryParams(
       dependenciesMet
     ) {
       res[key] = value;
+    } else if (key in validQueryParams) {
+      // remove bad key
+      removedQueryParams[key] = value as string;
     }
   }
 
   if (!fallbackToDefaults) {
-    return res;
+    return [res, removedQueryParams];
   }
 
   // fallback to composableOptions if not present in query
@@ -94,7 +98,7 @@ function filterValidQueryParams(
     }
   }
 
-  return res;
+  return [res, removedQueryParams];
 }
 
 function fulfilledSelections(
@@ -143,11 +147,16 @@ const ComposableContainer = styled.div`
   border-bottom: 1px solid ${palette.gray.light2};
   padding-bottom: ${theme.size.medium};
   padding-top: ${theme.size.small};
-  z-index: ${theme.zIndexes.actionBar - 1};
+  z-index: 0;
 
   @media ${theme.screenSize.upToMedium} {
     flex-wrap: wrap;
   }
+`;
+
+const StyledContentContainer = styled.div`
+  position: relative;
+  z-index: -1;
 `;
 
 const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
@@ -176,10 +185,15 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
 
     // read query params
     const queryParams = parse(location.search);
-    const filteredParams = filterValidQueryParams(queryParams, composableOptions, validSelections, false);
 
+    const [filteredParams, removedQueryParams] = filterValidQueryParams(
+      queryParams,
+      composableOptions,
+      validSelections,
+      false
+    );
     // if params fulfill selections, show the current selections
-    if (fulfilledSelections(filteredParams, composableOptions)) {
+    if (fulfilledSelections(filteredParams, composableOptions) && Object.keys(removedQueryParams).length === 0) {
       setLocalValue(LOCAL_STORAGE_KEY, filteredParams);
       setCurrentSelections(filteredParams);
       return;
@@ -187,7 +201,7 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
 
     // params are missing. get default values using local storage and nodeData
     const localStorage: Record<string, string> = getLocalValue(LOCAL_STORAGE_KEY) ?? {};
-    const defaultParams = filterValidQueryParams(localStorage, composableOptions, validSelections, true);
+    const [defaultParams] = filterValidQueryParams(localStorage, composableOptions, validSelections, true);
     const queryString = new URLSearchParams(defaultParams).toString();
     navigate(`?${queryString}`);
   }, [composableOptions, location.pathname, location.search, validSelections]);
@@ -226,7 +240,7 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
         }
       }
 
-      const defaultParams = filterValidQueryParams(persistSelections, composableOptions, validSelections, true);
+      const [defaultParams] = filterValidQueryParams(persistSelections, composableOptions, validSelections, true);
       const queryString = new URLSearchParams(defaultParams).toString();
       return navigate(`?${queryString}`);
     },
@@ -253,13 +267,15 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
           );
         })}
       </ComposableContainer>
-      {children.map((c, i) => {
-        // selections is empty, if child has bad data
-        if (c.selections && showComposable([c.selections])) {
-          return <Composable nodeData={c as ComposableNode} key={i} {...rest} />;
-        }
-        return null;
-      })}
+      <StyledContentContainer>
+        {children.map((c, i) => {
+          // selections is empty, if child has bad data
+          if (c.selections && showComposable([c.selections])) {
+            return <Composable nodeData={c as ComposableNode} key={i} {...rest} />;
+          }
+          return null;
+        })}
+      </StyledContentContainer>
     </>
   );
 };
