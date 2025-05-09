@@ -7,6 +7,7 @@ import { theme } from '../theme/docsTheme.js';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
 import useSnootyMetadata from '../utils/use-snooty-metadata.js';
 import FeedbackRating from '../components/Widgets/FeedbackWidget';
+import { DEPRECATED_PROJECTS } from '../components/Contents/index';
 export const CONTENT_MAX_WIDTH = 1200;
 
 const formstyle = css`
@@ -253,10 +254,14 @@ const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: 
     >
       {offlineBanner}
       {children}
-      <hr className={cx(hrStyling)} />
-      <div className={cx(ratingStlying)}>
-        <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
-      </div>
+      {!DEPRECATED_PROJECTS.includes(project) && (
+        <>
+          <hr className={cx(hrStyling)} />
+          <div className={cx(ratingStlying)}>
+            <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
+          </div>
+        </>
+      )}
     </Wrapper>
   );
 };
