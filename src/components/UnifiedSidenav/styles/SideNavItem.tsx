@@ -32,12 +32,12 @@ export const L1ItemStlying = ({ isActive }: { isActive: boolean }) => css`
   line-height: 16px;
   text-transform: uppercase;
 
-  ${isActive && css`
-      font-weight: 600;
-      color: var(--sidenav-active-before-color) !important;
-      background-color: var(--sidenav-active-bg-color);
-    `}
-
+  ${isActive &&
+  css`
+    font-weight: 600;
+    color: var(--sidenav-active-before-color) !important;
+    background-color: var(--sidenav-active-bg-color);
+  `}
 `;
 
 export const groupHeaderStyling = () => css`

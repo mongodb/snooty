@@ -19,18 +19,18 @@ export const tocData = (): TocItem[] => {
               url: '/docs/database-tools/mongodump/',
               collapsible: true,
               items: [
-                    {
-                      label: 'Compatibility & Installation',
-                      url: '/docs/database-tools/mongodump/',
-                    },
-                    {
-                        label: 'Behavior',
-                        url: '/docs/database-tools/mongodump/mongodump-behavior/',
-                    },
-                    {
-                      label: 'mongodbrestore',
-                      url: '/docs/database-tools/mongorestore/',
-                    },
+                {
+                  label: 'Compatibility & Installation',
+                  url: '/docs/database-tools/mongodump/',
+                },
+                {
+                  label: 'Behavior',
+                  url: '/docs/database-tools/mongodump/mongodump-behavior/',
+                },
+                {
+                  label: 'mongodbrestore',
+                  url: '/docs/database-tools/mongorestore/',
+                },
               ],
             },
           ],
