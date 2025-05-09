@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { parse, ParsedQuery } from 'query-string';
 import { navigate } from 'gatsby';
-import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { ComposableNode, ComposableTutorialNode } from '../../types/ast';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { isBrowser } from '../../utils/is-browser';
@@ -136,7 +136,7 @@ interface ComposableProps {
 
 const LOCAL_STORAGE_KEY = 'activeComposables';
 
-const ComposableContainer = styled.div`
+const containerStyling = css`
   display: flex;
   position: sticky;
   top: ${theme.header.actionBarMobileHeight};
@@ -147,16 +147,11 @@ const ComposableContainer = styled.div`
   border-bottom: 1px solid ${palette.gray.light2};
   padding-bottom: ${theme.size.medium};
   padding-top: ${theme.size.small};
-  z-index: 0;
+  z-index: ${theme.zIndexes.content + 1};
 
   @media ${theme.screenSize.upToMedium} {
     flex-wrap: wrap;
   }
-`;
-
-const StyledContentContainer = styled.div`
-  position: relative;
-  z-index: -1;
 `;
 
 const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
@@ -249,7 +244,7 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
 
   return (
     <>
-      <ComposableContainer>
+      <div className={cx(containerStyling)}>
         {composableOptions.map((option, index) => {
           if (!showComposable(option.dependencies)) {
             return null;
@@ -266,8 +261,8 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
             />
           );
         })}
-      </ComposableContainer>
-      <StyledContentContainer>
+      </div>
+      <div>
         {children.map((c, i) => {
           // selections is empty, if child has bad data
           if (c.selections && showComposable([c.selections])) {
@@ -275,7 +270,7 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
           }
           return null;
         })}
-      </StyledContentContainer>
+      </div>
     </>
   );
 };

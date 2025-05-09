@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { ComposableNode } from '../../types/ast';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
@@ -8,7 +8,7 @@ interface ComposableProps {
   nodeData: ComposableNode;
 }
 
-const StyledContainer = styled.div`
+const containerStyle = css`
   > *:first-child {
     margin-top: ${theme.size.medium};
   }
@@ -16,11 +16,11 @@ const StyledContainer = styled.div`
 
 const Composable = ({ nodeData: { children }, ...rest }: ComposableProps) => {
   return (
-    <StyledContainer>
+    <div className={cx(containerStyle)}>
       {children.map((c, i) => (
         <ComponentFactory nodeData={c} key={i} {...rest} />
       ))}
-    </StyledContainer>
+    </div>
   );
 };
 

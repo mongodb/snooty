@@ -40,7 +40,7 @@ const formStyle = css`
 
 const styledContentList = css`
   overflow: auto;
-  height: 90%;
+  height: 80%;
 `;
 
 export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
@@ -67,7 +67,7 @@ headingSelectorIds structure (comes from parser):
 const isHeadingVisible = (
   headingSelectorIds: HeadingNodeSelectorIds,
   activeSelectorIds: ActiveSelectorIds,
-  searchDict: Record<string, string>
+  searchParams: URLSearchParams
 ): boolean => {
   if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
   const headingsMethodParent = headingSelectorIds['method-option'];
@@ -75,10 +75,8 @@ const isHeadingVisible = (
   const headingsComposableParent = headingSelectorIds['selected-content'] ?? {};
   const composableHeadingVisible = Object.keys(headingsComposableParent).reduce((res, key) => {
     if (!res) return res;
-    return (
-      searchDict[key] === headingsComposableParent[key] ||
-      (!searchDict[key] && headingsComposableParent[key] === 'None')
-    );
+    const value = searchParams.get(key);
+    return (value && value === headingsComposableParent[key]) || (!value && headingsComposableParent[key] === 'None');
   }, true);
   if (
     (headingsMethodParent && headingsMethodParent !== activeSelectorIds.methodSelector) ||
@@ -87,7 +85,7 @@ const isHeadingVisible = (
   ) {
     return false;
   }
-  return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds, searchDict);
+  return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds, searchParams);
 };
 
 const Contents = ({ className, slug }: { className: string; slug: string }) => {
@@ -95,14 +93,7 @@ const Contents = ({ className, slug }: { className: string; slug: string }) => {
   const { isTabletOrMobile } = useScreenSize();
   const metadata = useSnootyMetadata();
   const { search } = useLocation();
-  const searchDict = search
-    .slice(1)
-    .split('&')
-    .reduce((res: Record<string, string>, querySelection) => {
-      const [key, value] = querySelection.split('=');
-      res[key] = value;
-      return res;
-    }, {});
+  const searchDict = new URLSearchParams(search);
 
   const filteredNodes = headingNodes.filter((headingNode) => {
     return isHeadingVisible(headingNode.selector_ids, activeSelectorIds, searchDict);
