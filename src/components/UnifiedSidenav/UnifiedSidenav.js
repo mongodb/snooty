@@ -387,18 +387,13 @@ const replaceVersion = ({ url, currentVersion, versionsData }) => {
   return result;
 };
 
+// TODO: this function needs to be updated with DOP-5677
 // Function that adds a prefix to all the urls
 const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snootyEnv }) => {
   return tree?.map((item) => {
     // Getting the path prefix and editing it based on the environment so links work correctly
     let updatedPrefix = prefix;
     if (item.prefix) {
-      item.prefix =
-        snootyEnv === 'dotcomprd'
-          ? `/docs${item.prefix}`
-          : snootyEnv === 'dotcomstg'
-          ? `/docs-qa${item.prefix}`
-          : item.prefix;
       const result = replaceVersion({
         url: item.prefix,
         currentVersion: activeVersions,
@@ -410,7 +405,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
     }
 
     // Edit the url with the correct version path
-    const newUrl = `${updatedPrefix}${item.url ? item.url : ''}`;
+    const newUrl = `${item.url ? item.url : ''}`;
 
     const items = updateURLs({
       tree: item.items,
@@ -470,7 +465,7 @@ const findPageParent = (tree, targetUrl) => {
 export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
-  const { snootyEnv } = useSiteMetadata();
+  const { snootyEnv, pathPrefix } = useSiteMetadata();
   const { activeVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const viewportSize = useViewportSize();
@@ -478,6 +473,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
+  slug = slug === '/' ? pathPrefix + slug : `${pathPrefix}/${slug}/`;
 
   const tree = useMemo(() => {
     return updateURLs({
