@@ -9,8 +9,8 @@ import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
-import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -99,8 +99,7 @@ const Link = ({
   prefix,
   ...other
 }) => {
-  const { pathPrefix } = useSnootyMetadata();
-  const { snootyEnv } = useSiteMetadata();
+  const { snootyEnv, pathPrefix, project } = useSiteMetadata();
 
   if (!to) to = '';
   const anchor = to.startsWith('#');
@@ -125,13 +124,17 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
-    if (pathPrefix.replaceAll('/', '') === prefix.replaceAll('/', '')) {
+    // TODO: i wonder if this works for versioned site in monorepo
+    if (project === prefix) {
+      // Get rid of the path prefix in link for internal links
+      const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
+
       return (
         <GatsbyLink
           className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
           activeClassName={activeClassName}
           partiallyActive={partiallyActive}
-          to={to}
+          to={editedTo}
           {...anchorProps}
         >
           {children}
