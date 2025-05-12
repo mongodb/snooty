@@ -10,7 +10,7 @@ export const sideNavItemBasePadding = css`
   }
 `;
 
-export const backLinkStyling = () => css`
+export const backLinkStyling = css`
   ${sideNavItemBasePadding}
   padding-left: ${theme.size.default};
   padding-top: ${theme.size.small};
@@ -21,7 +21,7 @@ export const backLinkStyling = () => css`
   }
 `;
 
-export const L1ItemStlying = ({ isActive }: { isActive: boolean }) => css`
+export const l1ItemStyling = ({ isActive }: { isActive: boolean }) => css`
   ${sideNavItemBasePadding}
   padding-left: ${theme.size.medium};
   padding-right: ${theme.size.medium};
@@ -33,11 +33,10 @@ export const L1ItemStlying = ({ isActive }: { isActive: boolean }) => css`
   text-transform: uppercase;
 
   ${isActive && css`
-      font-weight: 600;
-      color: var(--sidenav-active-before-color) !important;
-      background-color: var(--sidenav-active-bg-color);
-    `}
-
+    font-weight: 600;
+    color: var(--sidenav-active-before-color) !important;
+    background-color: var(--sidenav-active-bg-color);
+  `}
 `;
 
 export const groupHeaderStyling = () => css`
@@ -47,7 +46,7 @@ export const groupHeaderStyling = () => css`
   }
 `;
 
-export const L2ItemStlying = ({ level }: { level: number }) => css`
+export const l2ItemStyling = ({ level }: { level: number }) => css`
   ${sideNavItemBasePadding}
   line-height: 20px;
   font-size: ${theme.fontSize.small};

@@ -25,13 +25,13 @@ import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import DocsHomeButton from '../Sidenav/DocsHomeButton';
 import { DownloadButton } from '../OfflineDownloadModal';
-import { L1ItemStlying, groupHeaderStyling, L2ItemStlying, backLinkStyling } from './styles/SideNavItem';
+import { l1ItemStyling, groupHeaderStyling, l2ItemStyling, backLinkStyling } from './styles/SideNavItem';
 
 const ArtificialPadding = styled('div')`
   height: 15px;
 `;
 
-export const DownloadButtonStlying = LeafyCSS`
+export const downloadButtonStlying = LeafyCSS`
   bottom: 20px;
   position: absolute;
   width: 100%;
@@ -182,7 +182,7 @@ function CollapsibleNavItem({ items, label, url, slug, prefix, level }) {
         prefix={prefix}
         to={url}
         active={isActive}
-        className={cx(L2ItemStlying({ level }), overwriteLinkStyle)}
+        className={cx(l2ItemStyling({ level }), overwriteLinkStyle)}
         onClick={handleClick}
         hideExternalIcon={true}
       >
@@ -300,7 +300,7 @@ function UnifiedTocNavItem({
         prefix={prefix}
         to={url}
         onClick={handleClick}
-        className={cx(L2ItemStlying({ level }))}
+        className={cx(l2ItemStyling({ level }))}
       >
         {label}
       </SideNavItem>
@@ -317,7 +317,7 @@ function UnifiedTocNavItem({
         level={level}
         slug={slug}
         prefix={prefix}
-        className={cx(L2ItemStlying({ level }))}
+        className={cx(l2ItemStyling({ level }))}
       />
     );
   }
@@ -329,7 +329,7 @@ function UnifiedTocNavItem({
       as={Link}
       prefix={prefix}
       to={url}
-      className={cx(L2ItemStlying({ level }))}
+      className={cx(l2ItemStyling({ level }))}
     >
       {label}
     </SideNavItem>
@@ -349,7 +349,7 @@ function StaticNavItem({ label, url, slug, items, isStatic, prefix, setCurrentL1
         setCurrentL1({ items: items });
         setShowDriverBackBtn(false);
       }}
-      className={cx(L1ItemStlying({ isActive }))}
+      className={cx(l1ItemStyling({ isActive }))}
     >
       {label}
     </SideNavItem>
@@ -573,7 +573,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
               <div className={cx(rightPane)}>
                 {showDriverBackBtn && (
                   <BackLink
-                    className={cx(backLinkStyling())}
+                    className={cx(backLinkStyling)}
                     onClick={() => {
                       setShowDriverBackBtn(false);
                     }}
@@ -599,7 +599,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
             )}
           </div>
 
-          <div className={cx(DownloadButtonStlying)}>
+          <div className={cx(downloadButtonStlying)}>
             <DownloadButton />
           </div>
         </SideNav>
