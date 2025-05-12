@@ -3,8 +3,8 @@ import { isBrowser } from '../utils/is-browser';
 
 // from https://github.com/streamich/react-use/blob/master/src/useMedia.ts
 
-const useMedia = (query, defaultState = false) => {
-  const [state, setState] = useState(defaultState);
+const useMedia = (query: string, defaultState = false) => {
+  const [state, setState] = useState<boolean>(defaultState);
 
   useEffect(() => {
     if (isBrowser) {

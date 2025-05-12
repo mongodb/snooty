@@ -4,10 +4,8 @@
  * - "current" is the first entry, if applicable
  * - "master" is the second entry, if applicable
  * - Branch version numbers are then provided in most-recent-first order
- * @param {string} branchTitleA the first branch
- * @param {string} branchTitleB
  */
-export const compareBranchesWithVersionNumbers = (branchTitleA, branchTitleB) => {
+export const compareBranchesWithVersionNumbers = (branchTitleA: string, branchTitleB: string): number => {
   const branchA = branchTitleA.toLocaleLowerCase();
   const branchB = branchTitleB.toLocaleLowerCase();
 
@@ -26,4 +24,5 @@ export const compareBranchesWithVersionNumbers = (branchTitleA, branchTitleB) =>
 
 // This helper method replaces a number in a version string with it plus 10 to account for single
 // digit portions of a version number. It also removes `v` found on some for sort purposes
-const parseVersionBranchForSort = (branchString) => branchString.replace(/v/g, '').replace(/\d+/g, (n) => +n + 10);
+const parseVersionBranchForSort = (branchString: string): string =>
+  branchString.replace(/v/g, '').replace(/\d+/g, (n) => String(+n + 10));
