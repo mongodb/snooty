@@ -72,6 +72,16 @@ interface Directive<TOptions = DirectiveOptions> extends ParentNode {
   options?: TOptions;
 }
 
+type DismissibleSkillsCardOptions = {
+  skill: string;
+  url: string;
+};
+
+interface DismissibleSkillsCardNode extends Directive<DismissibleSkillsCardOptions> {
+  name: 'dismissible-skills-card';
+  options: DismissibleSkillsCardOptions;
+}
+
 interface ListTableNode extends Directive {
   name: 'list-table';
   children: ListNode[];
@@ -257,6 +267,7 @@ export type {
   CodeNode,
   Directive,
   DirectiveOptions,
+  DismissibleSkillsCardNode,
   ListNode,
   ListTableNode,
   ListItemNode,
