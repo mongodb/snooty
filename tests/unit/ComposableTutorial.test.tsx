@@ -44,7 +44,7 @@ describe('Composable Tutorial component', () => {
     );
   });
 
-  it('prioritizes query params over local storage if correct', () => {
+  it('prioritizes query params over local storage if correct selections', () => {
     // mock local storage
     mockedGetLocalValue.mockReturnValueOnce({
       'deployment-type': 'self',
@@ -59,6 +59,7 @@ describe('Composable Tutorial component', () => {
 
     // wait for render
     const wrapper = renderComposable();
+    expect(wrapper.asFragment()).toMatchSnapshot();
     // check to see content is visible
     expect(wrapper.findByDisplayValue('queryString')).toBeTruthy();
     expect(wrapper.findByDisplayValue('Language')).toBeTruthy();
