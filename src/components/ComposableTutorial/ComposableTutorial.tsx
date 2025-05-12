@@ -189,6 +189,7 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
     const localStorage: Record<string, string> = getLocalValue(LOCAL_STORAGE_KEY) ?? {};
     const defaultParams = filterValidQueryParams(localStorage, composableOptions, validSelections, true);
     const queryString = new URLSearchParams(defaultParams).toString();
+    console.log('calling navigate with queryString ', queryString);
     navigate(`?${queryString}`);
   }, [composableOptions, location.pathname, location.search, validSelections]);
 
