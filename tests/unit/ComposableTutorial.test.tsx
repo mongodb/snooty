@@ -8,18 +8,17 @@ import ComposableTutorial from '../../src/components/ComposableTutorial/Composab
 import { ComposableTutorialNode } from '../../src/types/ast';
 import ComposableData from './data/Composable.test.json';
 
-// mock local storage
-
 const renderComposable = () => render(<ComposableTutorial nodeData={ComposableData as ComposableTutorialNode} />);
 
+// mock local storage, location (query params), and navigate fn
 const mockedGetLocalValue = jest.spyOn(BrowserStorage, 'getLocalValue');
 const mockedNavigate = jest.spyOn(Gatsby, 'navigate');
 const mockedUseLocation = jest.spyOn(ReachRouter, 'useLocation');
+
 describe('Composable Tutorial component', () => {
   beforeEach(() => {
     mockedGetLocalValue.mockReset();
     mockedNavigate.mockReset();
-    process.env.NODE_ENV = 'production';
   });
 
   it('navigates to default selections without local storage or url query params', async () => {
