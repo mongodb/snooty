@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { BreadcrumbListSd, STRUCTURED_DATA_CLASSNAME } from '../../utils/structured-data.js';
-import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
+import { useSiteMetadata } from '../../hooks/use-site-metadata.tsx';
 
 const BreadcrumbSchema = ({ slug }) => {
   const { parentPaths, title: siteTitle } = useSnootyMetadata();

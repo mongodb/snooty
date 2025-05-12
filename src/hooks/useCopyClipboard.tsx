@@ -1,7 +1,12 @@
 import ClipboardJS from 'clipboard';
 import { useEffect } from 'react';
 
-const useCopyClipboard = (copied, setCopied, component, contents) => {
+const useCopyClipboard = (
+  copied: boolean,
+  setCopied: React.Dispatch<React.SetStateAction<boolean>>,
+  component: HTMLAnchorElement | null,
+  contents: string
+) => {
   useEffect(() => {
     // The component should be a ref
     if (!component) {

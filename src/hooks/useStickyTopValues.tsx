@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { theme } from '../theme/docsTheme';
 
 // Returns the sum of the Header component's children's heights to give the appropriate amount of space for a component
-const getTopValue = (eol, heights) => {
+const getTopValue = (eol: boolean, heights: string[]) => {
   let topValue = 0;
   heights.forEach((height) => {
     topValue += theme.size.stripUnit(height);
@@ -14,18 +14,22 @@ const getTopValue = (eol, heights) => {
   return `${topValue}px`;
 };
 
+type StickyTopValues = {
+  topLarge: string;
+  topMedium: string;
+  topSmall: string;
+};
+
 /**
  *  Get string values (px units) of buffers needed for sticky elements
  *
  * @param {boolean}     eol           if product is eol, meaning no nav bar
  * @param {boolean}     isAbsolute    if element will be absolute positioned and
  *                                    needs to consider universal navbar height
- * * @param {boolean}   hasBanner     if there is a banner, absolute elements need to
+ * @param {boolean}     hasBanner     if there is a banner, absolute elements need to
  *                                    clear
- *
- * @returns {[key: string]: string}
  */
-const useStickyTopValues = (eol, isAbsolute, hasBanner) => {
+const useStickyTopValues = (eol = false, isAbsolute?: boolean, hasBanner?: boolean): StickyTopValues => {
   const topLarge = useMemo(
     () =>
       getTopValue(eol, [

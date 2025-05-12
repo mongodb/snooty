@@ -7,14 +7,14 @@ import { useEffect } from 'react';
  * outside of
  * @param {*} onClickOutside a callback handler
  */
-export const useClickOutside = (ref, onClickOutside) => {
+export const useClickOutside = (ref: React.MutableRefObject<HTMLElement>, onClickOutside: () => void) => {
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && e.target instanceof Node && !ref.current.contains(e.target)) {
         onClickOutside();
       }
     };
-    const handleEscape = (e) => {
+    const handleEscape = (e: KeyboardEvent) => {
       e = e || window.event;
       if (e.key === 'Escape') {
         onClickOutside();

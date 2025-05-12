@@ -4,13 +4,14 @@ import { isBrowser } from '../utils/is-browser';
 import useStickyTopValues from './useStickyTopValues';
 
 // Have a component become visible as the page is scrolled down on large screen sizes
-const useVisibleOnScroll = (selector) => {
+const useVisibleOnScroll = (selector: string) => {
   const [isVisible, setVisible] = useState(false);
   const { topLarge } = useStickyTopValues();
 
   useEffect(() => {
-    let sentinel;
-    let observer;
+    let sentinel: Element | null = null;
+    let observer: IntersectionObserver | null = null;
+
     if (isBrowser) {
       sentinel = document.querySelector(selector);
       if (sentinel) {
@@ -22,7 +23,7 @@ const useVisibleOnScroll = (selector) => {
           threshold: [thresholdRatio, 0.8],
         };
 
-        const callback = (entries) => {
+        const callback: IntersectionObserverCallback = (entries) => {
           // There should only be one entry
           const entry = entries[0];
           // The component should be visible if the Header component goes over the sentinel
@@ -33,7 +34,7 @@ const useVisibleOnScroll = (selector) => {
           }
         };
 
-        let observer = new IntersectionObserver(callback, options);
+        observer = new IntersectionObserver(callback, options);
         observer.observe(sentinel);
       }
     }

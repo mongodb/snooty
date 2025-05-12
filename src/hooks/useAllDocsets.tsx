@@ -1,8 +1,15 @@
 import { useStaticQuery, graphql } from 'gatsby';
+import { Docset } from '../types/data';
+
+type AllDocsetsQueryResult = {
+  allDocset: {
+    nodes: Docset[];
+  };
+};
 
 // Return an array of MongoDB products
 export const useAllDocsets = () => {
-  const { allDocset } = useStaticQuery(
+  const { allDocset } = useStaticQuery<AllDocsetsQueryResult>(
     graphql`
       query AllDocsets {
         allDocset {
