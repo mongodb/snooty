@@ -1,7 +1,3 @@
-/**
- * @type {Object.<string, string>}
- * @property {string} fontsize returns px value
- */
 const fontSize = {
   xsmall: '11px',
   tiny: '12px',
@@ -12,10 +8,7 @@ const fontSize = {
   h3: '18px',
   h4: '16px',
 };
-/**
- * @property {string} size returns px value
- * @property {function(string): number} stripUnit removes px unit
- */
+
 const size = {
   tiny: '4px',
   small: '8px',
@@ -25,15 +18,13 @@ const size = {
   xlarge: '64px',
   xxlarge: '128px',
   maxWidth: '1400px',
-  /** @type {function(string): number} */
-  stripUnit(unit) {
+  stripUnit(unit: string): number {
     return parseInt(unit, 10);
   },
 };
 
 /**
  * store common responsive sizes as numbers
- * @type {Object.<string, number>}
  */
 const breakpoints = {
   xSmall: 320,
@@ -47,7 +38,6 @@ const breakpoints = {
 
 /**
  * store common responsive sizes
- * @type {Object.<string, string>}
  */
 const screenSize = {
   upToXSmall: `only screen and (max-width: ${breakpoints.xSmall}px)`,

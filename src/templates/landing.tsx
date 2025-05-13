@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
-import { useTheme, Global, css } from '@emotion/react';
+import { Global, css } from '@emotion/react';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
-import PropTypes from 'prop-types';
 import { theme } from '../theme/docsTheme';
 
 const CONTENT_MAX_WIDTH = 1440;
@@ -44,7 +43,7 @@ const Wrapper = styled('main')`
     ${gridStyling};
 
     & > .card-group {
-      @media ${({ theme }) => theme.screenSize.mediumAndUp} {
+      @media ${theme.screenSize.mediumAndUp} {
         grid-column: 2 / -2 !important;
       }
       max-width: 1200px;
@@ -53,8 +52,8 @@ const Wrapper = styled('main')`
 `;
 
 // The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
-const Landing = ({ children }) => {
-  const { fontSize, screenSize, size } = useTheme();
+const Landing = ({ children }: { children: ReactNode }) => {
+  const { fontSize, screenSize, size } = theme;
   const { darkMode } = useDarkMode();
   return (
     <>
@@ -195,10 +194,6 @@ const Landing = ({ children }) => {
       />
     </>
   );
-};
-
-Landing.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default Landing;

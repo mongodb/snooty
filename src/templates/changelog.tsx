@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../theme/docsTheme';
 import { CONTENT_MAX_WIDTH } from './product-landing';
@@ -24,7 +23,7 @@ const DocumentContainer = styled('main')`
   }
 `;
 
-const Changelog = ({ children, offlineBanner }) => (
+const Changelog = ({ children, offlineBanner }: { children: ReactNode; offlineBanner: ReactNode }) => (
   <DocumentContainer>
     <Wrapper>
       {offlineBanner}
@@ -32,9 +31,5 @@ const Changelog = ({ children, offlineBanner }) => (
     </Wrapper>
   </DocumentContainer>
 );
-
-Changelog.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.node),
-};
 
 export default Changelog;

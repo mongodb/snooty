@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import { theme } from '../theme/docsTheme.js';
+import { theme } from '../theme/docsTheme.ts';
 import { findKeyValuePair } from '../utils/find-key-value-pair.ts';
 import useSnootyMetadata from '../utils/use-snooty-metadata.js';
 import FeedbackRating from '../components/Widgets/FeedbackWidget';
