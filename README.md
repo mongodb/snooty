@@ -90,10 +90,10 @@ GATSBY_LOCALE=zh-cn
 COMMIT_HASH=zh-cn
 ```
 
-* `GATSBY_LOCALE` is used to change the `html` element's `lang` property to any locale. This can be useful for mocking the `lang`
-property set by Smartling, and for constructing CSS selectors targetting specific languages.
-* `COMMIT_HASH` can be used to prepend its value to the path prefix of the site when building and serving. This can be useful for mocking the `/<local-code>/<path>` pathnames for docs pages, and for testing out
-locale-related logic for pathnames.
+- `GATSBY_LOCALE` is used to change the `html` element's `lang` property to any locale. This can be useful for mocking the `lang`
+  property set by Smartling, and for constructing CSS selectors targetting specific languages.
+- `COMMIT_HASH` can be used to prepend its value to the path prefix of the site when building and serving. This can be useful for mocking the `/<local-code>/<path>` pathnames for docs pages, and for testing out
+  locale-related logic for pathnames.
 
 ## Staging
 
