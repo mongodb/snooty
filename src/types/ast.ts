@@ -121,17 +121,18 @@ type RoleName =
 type NodeName =
   | RoleName
   | AdmonitionName
-  | 'list-table'
-  | 'composable-tutorials'
-  | 'selected-content'
-  | 'contents'
+  | 'blockquote'
   | 'collapsible'
+  | 'composable-tutorials'
+  | 'contents'
+  | 'deprecated'
+  | 'facet'
+  | 'list-table'
   | 'meta'
+  | 'selected-content'
   | 'tabs'
   | 'tab'
-  | 'facet'
   | 'toctree'
-  | 'deprecated'
   | 'versionadded'
   | 'versionchanged';
 
@@ -189,6 +190,10 @@ interface Directive<TOptions = DirectiveOptions> extends ParentNode {
   argument: Node[];
   domain?: string;
   options?: TOptions;
+}
+
+interface BlockQuoteNode extends Directive {
+  name: 'blockquote';
 }
 
 type ButtonOptions = {
@@ -395,6 +400,7 @@ export type {
   HeadingNodeSelectorIds,
   ReferenceNode,
   TextNode,
+  BlockQuoteNode,
   ButtonNode,
   CodeNode,
   ComponentType,

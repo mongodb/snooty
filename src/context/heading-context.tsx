@@ -15,7 +15,7 @@ const HeadingContext = createContext<HeadingContextType>(defaultVal);
 type HeadingContextProviderProps = {
   children: ReactNode;
   heading: string;
-  ignoreNextHeading: boolean;
+  ignoreNextHeading?: boolean;
 };
 
 /**
@@ -24,7 +24,7 @@ type HeadingContextProviderProps = {
  * Designed to be called in the init, so each child node of sections
  * as consumers can access the section header.
  */
-const HeadingContextProvider = ({ children, heading, ignoreNextHeading }: HeadingContextProviderProps) => {
+const HeadingContextProvider = ({ children, heading, ignoreNextHeading = false }: HeadingContextProviderProps) => {
   const { lastHeading: prevHeading, ignoreNextHeading: skipHeading } = useHeadingContext();
 
   const newHeading = skipHeading || !heading ? prevHeading : heading;

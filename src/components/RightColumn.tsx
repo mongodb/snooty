@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+/** @jsxImportSource @emotion/react */
+import React, { ReactNode } from 'react';
 import { css } from '@emotion/react';
 import useStickyTopValues from '../hooks/useStickyTopValues';
 import { displayNone } from '../utils/display-none';
 import { theme } from '../theme/docsTheme';
 
-const RightColumn = ({ children, className }) => {
+const RightColumn = ({ children, className }: { children: ReactNode; className?: string }) => {
   const { topLarge } = useStickyTopValues();
 
   return (
@@ -35,10 +35,6 @@ const RightColumn = ({ children, className }) => {
       </div>
     </div>
   );
-};
-
-RightColumn.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default RightColumn;

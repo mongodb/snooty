@@ -1,15 +1,15 @@
-import { isString } from 'lodash';
-import { Directive, Node, ParentNode, TextNode, RoleName } from './ast';
+import { isObject, isString } from 'lodash';
+import { Directive, ParentNode, TextNode, RoleName, HeadingNode } from './ast';
 
-const isTextNode = (node: Node): node is TextNode => {
-  return node.type === 'text' && 'value' in node && isString(node.value);
+const isTextNode = (node: unknown): node is TextNode => {
+  return isObject(node) && 'type' in node && node.type === 'text' && 'value' in node && isString(node.value);
 };
 
-const isParentNode = (node: Node): node is ParentNode => {
-  return 'children' in node && Array.isArray(node.children);
+const isParentNode = (node: unknown): node is ParentNode => {
+  return isObject(node) && 'children' in node && Array.isArray(node.children);
 };
 
-const isDirectiveNode = (node: Node): node is Directive => {
+const isDirectiveNode = (node: unknown): node is Directive => {
   return (
     isParentNode(node) && 'name' in node && isString(node.name) && 'argument' in node && Array.isArray(node.argument)
   );
@@ -45,4 +45,8 @@ const isRoleName = (name: string): name is RoleName => {
   ].some((roleName) => roleName === name);
 };
 
-export { isTextNode, isParentNode, isDirectiveNode, isRoleName };
+const isHeadingNode = (node: unknown): node is HeadingNode => {
+  return isParentNode(node) && 'type' in node && node.type === 'heading';
+};
+
+export { isTextNode, isParentNode, isDirectiveNode, isRoleName, isHeadingNode };
