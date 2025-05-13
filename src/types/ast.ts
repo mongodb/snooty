@@ -245,6 +245,22 @@ interface MetaNode extends Directive {
   name: 'meta';
 }
 
+interface TitleReferenceNode {
+  children: TextNode[];
+}
+
+type TwitterOptions = {
+  creator?: string;
+  image?: string;
+  'image-alt'?: string;
+  site?: string;
+  title?: string;
+};
+
+interface TwitterNode extends Directive<TwitterOptions> {
+  options: TwitterOptions;
+}
+
 export type {
   NodeType,
   Node,
@@ -276,6 +292,8 @@ export type {
   StrongNode,
   TabsNode,
   TabNode,
+  TitleReferenceNode,
+  TwitterNode,
   FacetNode,
   AdmonitionNode,
   AdmonitionName,

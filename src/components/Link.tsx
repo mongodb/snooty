@@ -82,6 +82,18 @@ const lgLinkStyling = css`
   ${sharedDarkModeOverwriteStyles}
 `;
 
+export type LinkProps = {
+  children: ReactNode;
+  to: string;
+  activeClassName?: string;
+  className?: string;
+  partiallyActive?: boolean;
+  showLinkArrow?: boolean;
+  hideExternalIcon?: boolean;
+  showExternalIcon?: boolean;
+  openInNewTab?: boolean;
+};
+
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
 // destructure the prop here and pass it only to GatsbyLink.
 const Link = ({

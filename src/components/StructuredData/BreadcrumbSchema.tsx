@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { BreadcrumbListSd, STRUCTURED_DATA_CLASSNAME } from '../../utils/structured-data.js';
-import { useSiteMetadata } from '../../hooks/use-site-metadata.tsx';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
 
-const BreadcrumbSchema = ({ slug }) => {
+const BreadcrumbSchema = ({ slug }: { slug: string }) => {
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
   const { siteUrl } = useSiteMetadata();
 
@@ -27,10 +26,6 @@ const BreadcrumbSchema = ({ slug }) => {
       )}
     </>
   );
-};
-
-BreadcrumbSchema.propTypes = {
-  slug: PropTypes.string.isRequired,
 };
 
 export default BreadcrumbSchema;

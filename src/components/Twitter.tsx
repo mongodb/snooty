@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { getPlaintext } from '../utils/get-plaintext';
+import type { TwitterNode } from '../types/ast';
 
 const isExternalUrl = /^http(s)?:\/\//;
 
-const getImageUrl = (src, siteUrl) => {
+const getImageUrl = (src?: string, siteUrl?: string) => {
   if (!src) {
     return null;
   }
@@ -14,7 +14,11 @@ const getImageUrl = (src, siteUrl) => {
 };
 
 /* Extends Twitter card as defined in SEO component */
-const Twitter = ({ nodeData: { children, options: { creator, image, 'image-alt': imageAlt, site, title } = {} } }) => {
+const Twitter = ({
+  nodeData: { children, options: { creator, image, 'image-alt': imageAlt, site, title } = {} },
+}: {
+  nodeData: TwitterNode;
+}) => {
   const { siteUrl } = useSiteMetadata();
   const description = children.length ? getPlaintext(children) : null;
   const imageSrc = getImageUrl(image, siteUrl);
@@ -28,19 +32,6 @@ const Twitter = ({ nodeData: { children, options: { creator, image, 'image-alt':
       {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
     </>
   );
-};
-
-Twitter.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object),
-    options: PropTypes.shape({
-      creator: PropTypes.string,
-      image: PropTypes.string,
-      'image-alt': PropTypes.string,
-      site: PropTypes.string,
-      title: PropTypes.string,
-    }),
-  }),
 };
 
 export default Twitter;

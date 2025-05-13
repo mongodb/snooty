@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme.js';
-import { findKeyValuePair } from '../utils/find-key-value-pair.js';
+import { findKeyValuePair } from '../utils/find-key-value-pair.ts';
 import useSnootyMetadata from '../utils/use-snooty-metadata.js';
 import FeedbackRating from '../components/Widgets/FeedbackWidget';
 export const CONTENT_MAX_WIDTH = 1200;
