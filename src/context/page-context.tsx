@@ -4,7 +4,7 @@ import { Root } from '../types/ast';
 interface PageContextType {
   page: Root | null;
   template: string | null;
-  slug: string | null;
+  slug: string;
   tabsMainColumn: boolean | null;
   options: {} | null;
 }
@@ -12,7 +12,7 @@ interface PageContextType {
 export const PageContext = createContext<PageContextType>({
   page: null,
   template: null,
-  slug: null,
+  slug: '',
   tabsMainColumn: null,
   options: null,
 });

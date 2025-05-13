@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -15,15 +15,16 @@ import { validateHTMAttributes } from '../utils/validate-element-attributes';
  * https://www.gatsbyjs.org/docs/gatsby-link/#recommendations-for-programmatic-in-app-navigation
  */
 
-/**
- * @typedef ThemeStyle
- * @type {object}
- * @property {string} color
- * @property {string} focusTextDecorColor
- * @property {string} hoverTextDecorColor
- * @property {string | number} fontWeight
- */
-const THEME_STYLES = {
+type LinkThemeStyle = {
+  color: string;
+  focusTextDecorColor: string;
+  hoverTextDecorColor: string;
+  fontWeight: string | number;
+};
+
+type LinkThemeStyles = { light: LinkThemeStyle; dark: LinkThemeStyle };
+
+const THEME_STYLES: LinkThemeStyles = {
   light: {
     color: palette.blue.base,
     focusTextDecorColor: palette.blue.base,
@@ -47,7 +48,7 @@ export const sharedDarkModeOverwriteStyles = `
  * CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
  * @param {ThemeStyle} linkThemeStyle
  */
-const gatsbyLinkStyling = (linkThemeStyle) => css`
+const gatsbyLinkStyling = (linkThemeStyle: LinkThemeStyle) => css`
   align-items: center;
   cursor: pointer;
   position: relative;
@@ -107,7 +108,7 @@ const Link = ({
   showExternalIcon,
   openInNewTab,
   ...other
-}) => {
+}: LinkProps) => {
   if (!to) to = '';
   const anchor = to.startsWith('#');
 

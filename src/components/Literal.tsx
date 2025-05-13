@@ -1,9 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { InlineCode } from '@leafygreen-ui/typography';
+import { LiteralNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
+
+export type FormatTextOptions = {
+  literalEnableInline: boolean;
+};
 
 const inlineCodeStyling = css`
   /* Unset font size so it inherits it from its context */
@@ -28,7 +32,13 @@ const StyledNavigationInlineCode = styled('code')`
   color: unset;
 `;
 
-const Literal = ({ nodeData: { children }, formatTextOptions }) => {
+const Literal = ({
+  nodeData: { children },
+  formatTextOptions,
+}: {
+  nodeData: LiteralNode;
+  formatTextOptions: FormatTextOptions;
+}) => {
   const navigationStyle = formatTextOptions?.literalEnableInline;
   const CurrInlineCode = navigationStyle ? StyledNavigationInlineCode : InlineCode;
 
@@ -39,15 +49,6 @@ const Literal = ({ nodeData: { children }, formatTextOptions }) => {
       ))}
     </CurrInlineCode>
   );
-};
-
-Literal.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-  formatTextOptions: PropTypes.shape({
-    literalEnableInline: PropTypes.bool,
-  }),
 };
 
 export default Literal;

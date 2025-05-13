@@ -5,9 +5,9 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { withPrefix } from 'gatsby';
 import { theme } from '../theme/docsTheme';
-import Link from '../components/Link';
 import { usePageContext } from '../context/page-context';
 import { getCompleteUrl } from '../utils/url-utils';
+import Link from './Link';
 
 const Wrapper = styled.div`
   display: flex;
@@ -66,7 +66,7 @@ const assetLabelFromKey = {
 /**
  * @param {string} assetKey - 'instruqt', 'video', etc
  */
-const OfflineNotAvailable = ({ assetKey }) => {
+const OfflineNotAvailable = ({ assetKey }: { assetKey: 'instruqt' | 'video' }) => {
   const { slug } = usePageContext();
 
   const assetLabel = assetLabelFromKey[assetKey];

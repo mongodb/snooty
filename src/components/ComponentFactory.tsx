@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { ComponentType, Node, NodeName, NodeType, RoleName } from '../types/ast';
 
+import { isRoleName } from '../types/ast-utils';
 import { LAZY_COMPONENTS } from './ComponentFactoryLazy';
 import Admonition, { admonitionMap } from './Admonition';
 import Banner from './Banner/Banner';
@@ -100,7 +101,7 @@ const IGNORED_NAMES = new Set([
 const IGNORED_TYPES = new Set(['comment', 'inline_target', 'named_reference', 'substitution_definition']);
 const DEPRECATED_ADMONITIONS = new Set(['admonition', 'caution', 'danger']);
 
-const roleMap = {
+const roleMap: Record<RoleName, React.ComponentType<any>> = {
   abbr: RoleAbbr,
   class: RoleClass,
   command: RoleCommand,
@@ -128,107 +129,130 @@ const roleMap = {
   'link-new-tab': RoleLinkNewTab,
 };
 
-const componentMap = {
-  admonition: Admonition,
-  banner: Banner,
-  blockquote: BlockQuote,
-  button: Button,
-  card: Card,
-  'card-group': CardGroup,
-  chapter: Chapter,
-  chapters: Chapters,
-  code: Code,
-  collapsible: Collapsible,
-  'community-driver': CommunityPillLink,
-  'composable-tutorial': ComposableTutorial,
-  'io-code-block': CodeIO,
-  cond: Cond,
-  container: Container,
-  cta: CTA,
-  'cta-banner': CTABanner,
-  definitionList: DefinitionList,
-  definitionListItem: DefinitionListItem,
-  deprecated: VersionModified,
-  'deprecated-version-selector': DeprecatedVersionSelector,
-  describe: Describe,
-  emphasis: Emphasis,
-  extract: Extract,
-  field: Field,
-  field_list: FieldList,
-  figure: Figure,
-  footnote: Footnote,
-  footnote_reference: FootnoteReference,
-  glossary: Glossary,
-  'guide-next': GuideNext,
-  heading: Heading,
-  hlist: HorizontalList,
-  image: Image,
-  include: Include,
-  introduction: Introduction,
-  kicker: Kicker,
-  line: Line,
-  line_block: LineBlock,
-  list: List,
-  listItem: ListItem,
-  'list-table': ListTable,
-  literal: Literal,
-  literal_block: LiteralBlock,
-  literalinclude: LiteralInclude,
-  'method-selector': MethodSelector,
-  only: Cond,
-  'openapi-changelog': OpenAPIChangelog,
-  paragraph: Paragraph,
-  procedure: Procedure,
-  ref_role: RefRole,
-  reference: Reference,
-  release_specification: ReleaseSpecification,
-  root: Root,
-  rubric: Rubric,
-  'search-results': SearchResults,
-  section: Section,
-  seealso: SeeAlso,
-  sharedinclude: Include,
-  strong: Strong,
-  substitution_reference: SubstitutionReference,
-  tabs: Tabs,
-  'tabs-selector': TabSelectors,
-  target: Target,
-  text: Text,
-  time: Time,
-  title_reference: TitleReference,
-  transition: Transition,
-  versionadded: VersionModified,
-  versionchanged: VersionModified,
-  wayfinding: Wayfinding,
-};
+const getComponent = (() => {
+  let componentMap: Record<Exclude<ComponentType, 'block-quote'>, React.ComponentType<any>> | undefined = undefined;
+  return (key: Exclude<ComponentType, 'block-quote'>) => {
+    if (componentMap === undefined) {
+      componentMap = {
+        admonition: Admonition,
+        banner: Banner,
+        blockquote: BlockQuote,
+        button: Button,
+        card: Card,
+        'card-group': CardGroup,
+        chapter: Chapter,
+        chapters: Chapters,
+        code: Code,
+        collapsible: Collapsible,
+        'community-driver': CommunityPillLink,
+        'composable-tutorial': ComposableTutorial,
+        'io-code-block': CodeIO,
+        cond: Cond,
+        container: Container,
+        cta: CTA,
+        'cta-banner': CTABanner,
+        definitionList: DefinitionList,
+        definitionListItem: DefinitionListItem,
+        deprecated: VersionModified,
+        'deprecated-version-selector': DeprecatedVersionSelector,
+        describe: Describe,
+        emphasis: Emphasis,
+        extract: Extract,
+        field: Field,
+        field_list: FieldList,
+        figure: Figure,
+        footnote: Footnote,
+        footnote_reference: FootnoteReference,
+        glossary: Glossary,
+        'guide-next': GuideNext,
+        heading: Heading,
+        hlist: HorizontalList,
+        image: Image,
+        include: Include,
+        introduction: Introduction,
+        kicker: Kicker,
+        line: Line,
+        line_block: LineBlock,
+        list: List,
+        listItem: ListItem,
+        'list-table': ListTable,
+        literal: Literal,
+        literal_block: LiteralBlock,
+        literalinclude: LiteralInclude,
+        'method-selector': MethodSelector,
+        only: Cond,
+        'openapi-changelog': OpenAPIChangelog,
+        paragraph: Paragraph,
+        procedure: Procedure,
+        ref_role: RefRole,
+        reference: Reference,
+        release_specification: ReleaseSpecification,
+        root: Root,
+        rubric: Rubric,
+        'search-results': SearchResults,
+        section: Section,
+        seealso: SeeAlso,
+        sharedinclude: Include,
+        strong: Strong,
+        substitution_reference: SubstitutionReference,
+        tabs: Tabs,
+        'tabs-selector': TabSelectors,
+        target: Target,
+        text: Text,
+        time: Time,
+        title_reference: TitleReference,
+        transition: Transition,
+        versionadded: VersionModified,
+        versionchanged: VersionModified,
+        wayfinding: Wayfinding,
+      };
+    }
+    return componentMap[key];
+  };
+})();
 
-function getComponentType(type, name) {
+function getComponentType(type: NodeType, name?: NodeName): React.ComponentType<any> | undefined {
   const lookup = type === 'directive' ? name : type;
-  let ComponentType = componentMap[lookup];
+  // @ts-ignore
+  let ComponentType: React.ComponentType<any> | undefined = lookup ? getComponent(lookup) : undefined;
 
-  if (type === 'role') {
-    ComponentType = roleMap[name];
+  if (name) {
+    if (type === 'role' && isRoleName(name)) {
+      ComponentType = roleMap[name];
+    }
+
+    // Various admonition types are all handled by the Admonition component
+    if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
+      ComponentType = getComponent('admonition');
+    }
   }
 
-  // Various admonition types are all handled by the Admonition component
-  if (DEPRECATED_ADMONITIONS.has(name) || name in admonitionMap) {
-    ComponentType = componentMap.admonition;
-  }
-
-  if (LAZY_COMPONENTS[lookup]) {
+  if (lookup && LAZY_COMPONENTS[lookup]) {
     return LAZY_COMPONENTS[lookup];
   }
 
   return ComponentType;
 }
 
-const ComponentFactory = (props) => {
+export type ComponentFactoryProps = {
+  nodeData: Node;
+  slug?: string;
+  sectionDepth?: string | number;
+  [key: string]: unknown;
+};
+
+const ComponentFactory = (props: ComponentFactoryProps) => {
   const { nodeData, slug } = props;
 
   const selectComponent = () => {
-    const { domain, name, type } = nodeData;
+    let domain: string | undefined = '';
+    let name: NodeName | undefined;
+    const { type } = nodeData;
 
-    if (IGNORED_TYPES.has(type) || IGNORED_NAMES.has(name)) {
+    if ('name' in nodeData) name = nodeData.name as NodeName;
+    if ('domain' in nodeData) domain = nodeData.domain as string;
+
+    if (IGNORED_TYPES.has(type) || (name && IGNORED_NAMES.has(name))) {
       return null;
     }
 
@@ -238,10 +262,14 @@ const ComponentFactory = (props) => {
       console.warn(`Domain '${domain}' not yet implemented ${name ? `for '${name}'` : ''}`);
     }
 
-    const ComponentType = getComponentType(type, name, props);
+    const ComponentType = getComponentType(type, name);
 
     if (!ComponentType) {
-      console.warn(`${type} ${name ? `"${name}" ` : ''}not yet implemented${slug ? ` on page ${slug}` : ''}`);
+      console.warn(
+        `${type} ${JSON.stringify(nodeData)}${name ? `"${name}" ` : ''}not yet implemented${
+          slug ? ` on page ${slug}` : ''
+        }`
+      );
       return null;
     }
 
@@ -250,15 +278,6 @@ const ComponentFactory = (props) => {
 
   if (!nodeData) return null;
   return selectComponent();
-};
-
-ComponentFactory.propTypes = {
-  nodeData: PropTypes.shape({
-    domain: PropTypes.string,
-    name: PropTypes.string,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
-  slug: PropTypes.string,
 };
 
 export default ComponentFactory;

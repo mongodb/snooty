@@ -4,7 +4,7 @@ import LeafyButton from '@leafygreen-ui/button';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { Directive } from '../types/ast';
+import { ButtonNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import Link, { LinkProps } from './Link';
 
@@ -16,7 +16,7 @@ const buttonStyling = css`
 `;
 
 export type ButtonProps = {
-  nodeData: Directive<{ uri?: string }>;
+  nodeData: ButtonNode;
   variant?: 'primary';
   darkMode: boolean;
   baseFontSize: BaseFontSize;
@@ -57,7 +57,7 @@ const Button = ({
       size={size}
       darkMode={darkModeProp ?? darkMode}
       variant={variant}
-      rightGlyph={rightGlyph ? <Icon glyph={rightGlyph} /> : null}
+      rightGlyph={rightGlyph ? <Icon glyph={rightGlyph} /> : undefined}
       {...componentProps}
     >
       {argument.map((child, i) => (
