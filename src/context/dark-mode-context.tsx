@@ -5,16 +5,23 @@
  * https://github.com/mongodb/leafygreen-ui/blob/main/STYLEGUIDE.md#consuming-darkmode-from-leafygreenprovider
  */
 
-import React, { createContext, useMemo, useEffect, useRef, useState, useCallback } from 'react';
+import React, { createContext, useMemo, useEffect, useRef, useState, useCallback, ReactNode } from 'react';
 import LeafyGreenProvider from '@leafygreen-ui/leafygreen-provider';
 import { setLocalValue } from '../utils/browser-storage';
 import useMedia from '../hooks/use-media';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 
-const DarkModeContext = createContext({
-  setDarkModePref: () => {},
+type DarkModePref = 'light-theme' | 'dark-theme' | 'system';
+
+interface DarkModeContextType {
+  darkModePref: DarkModePref;
+  setDarkModePref: React.Dispatch<React.SetStateAction<DarkModePref>>;
+}
+
+const DarkModeContext = createContext<DarkModeContextType>({
   darkModePref: 'light-theme',
+  setDarkModePref: () => {},
 });
 
 export const DARK_THEME_CLASSNAME = 'dark-theme';
@@ -23,15 +30,13 @@ export const SYSTEM_THEME_CLASSNAME = 'system';
 
 const LIGHT_MODE_ONLY_PAGE_SLUGS = ['openapi/preview'];
 
-const DarkModeContextProvider = ({ children, slug }) => {
+const DarkModeContextProvider = ({ children, slug }: { children: ReactNode; slug: string }) => {
   const docClassList = useMemo(() => isBrowser && window?.document?.documentElement?.classList, []);
-
-  // darkModePref   {str}   'light-theme' || 'dark-theme' || 'system';
-  const [darkModePref, setDarkModePref] = useState(() => 'light-theme');
-  const loaded = useRef();
+  const [darkModePref, setDarkModePref] = useState<DarkModePref>(() => 'light-theme');
+  const loaded = useRef<boolean>();
 
   // update document class list to apply dark-theme/light-theme to whole document
-  const updateDocumentClasslist = useCallback((darkModePref, darkPref) => {
+  const updateDocumentClasslist = useCallback((darkModePref: DarkModePref, darkPref: boolean) => {
     if (!isBrowser || !docClassList) return;
     docClassList.add(darkModePref);
     const removeClassnames = new Set([LIGHT_THEME_CLASSNAME, DARK_THEME_CLASSNAME, SYSTEM_THEME_CLASSNAME]);
@@ -82,7 +87,9 @@ const DarkModeContextProvider = ({ children, slug }) => {
     <DarkModeContext.Provider value={{ setDarkModePref, darkModePref }}>
       <LeafyGreenProvider
         baseFontSize={16}
-        darkMode={darkModePref === 'dark-theme' || (darkModePref === 'system' && darkPref) ? true : false}
+        darkMode={
+          darkModePref === DARK_THEME_CLASSNAME || (darkModePref === SYSTEM_THEME_CLASSNAME && darkPref) ? true : false
+        }
       >
         {children}
       </LeafyGreenProvider>

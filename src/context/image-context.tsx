@@ -3,17 +3,22 @@
  * with image data queried on page component
  */
 
-import { createContext } from 'react';
+import { createContext, ReactNode } from 'react';
 import { getImage } from 'gatsby-plugin-image';
+import type { GatsbyImageData } from 'gatsby-plugin-image';
 
-const ImageContext = createContext({
+interface ImageContextType {
+  imageByPath: { [k: string]: GatsbyImageData | undefined };
+}
+
+const ImageContext = createContext<ImageContextType>({
   imageByPath: {},
 });
 
 export default ImageContext;
 
-const ImageContextProvider = ({ images, children }) => {
-  const imageByPath = {};
+const ImageContextProvider = ({ images, children }: { images: { relativePath: string }[]; children: ReactNode }) => {
+  const imageByPath: { [k: string]: GatsbyImageData | undefined } = {};
   for (const image of images) {
     if (image?.relativePath) {
       imageByPath[image.relativePath] = getImage(image);

@@ -1,17 +1,30 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, ReactNode, useContext } from 'react';
+
+interface AncestorComponentContextType {
+  table: boolean;
+  procedure: boolean;
+}
 
 const defaultVal = {
   table: false,
   procedure: false,
 };
 
-const AncestorComponentContext = createContext(defaultVal);
+const AncestorComponentContext = createContext<AncestorComponentContextType>(defaultVal);
+
+type AncestorComponentName = 'table' | 'procedure';
 
 /**
  * Context provider to help track ancestors of components without ambiguous prop drilling.
  * If nested within another component that uses this provder, previous ancestors are persisted.
  */
-const AncestorComponentContextProvider = ({ children, component }) => {
+const AncestorComponentContextProvider = ({
+  children,
+  component,
+}: {
+  children: ReactNode;
+  component: AncestorComponentName;
+}) => {
   const prevAncestors = useAncestorComponentContext();
   const newAncestors = { ...prevAncestors };
 
