@@ -118,6 +118,8 @@ const Link = ({
     ''
   );
 
+  console.log('ah', prefix, pathPrefix);
+
   // If prefix, that means we are coming from the UnifiedSideNav and not the old SideNav
   if (prefix) {
     if (!to.startsWith('/')) to = `/${to}`;
