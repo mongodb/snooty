@@ -64,24 +64,26 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
       </ActionBarSearchContainer>
       {!isOfflineDocsBuild && (
         <ActionsBox>
-          <Button
-            className={cx(chatbotButtonStyling)}
-            leftGlyph={<Icon glyph="Sparkle" />}
-            aria-label={CHATBOT_TEXT}
-            variant={'primaryOutline'}
-            onClick={openChatbot}
-          >
-            {CHATBOT_TEXT}
-          </Button>
-          <IconButton className={chatbotMobileButtonStyling} aria-label={CHATBOT_TEXT} onClick={openChatbot}>
-            <Icon glyph={'Sparkle'} />
-          </IconButton>
           {locale === 'en-us' && (
-            <SuspenseHelper>
-              <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-                <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
-              </Chatbot>
-            </SuspenseHelper>
+            <>
+              <Button
+                className={cx(chatbotButtonStyling)}
+                leftGlyph={<Icon glyph="Sparkle" />}
+                aria-label={CHATBOT_TEXT}
+                variant={'primaryOutline'}
+                onClick={openChatbot}
+              >
+                {CHATBOT_TEXT}
+              </Button>
+              <IconButton className={chatbotMobileButtonStyling} aria-label={CHATBOT_TEXT} onClick={openChatbot}>
+                <Icon glyph={'Sparkle'} />
+              </IconButton>
+              <SuspenseHelper>
+                <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
+                  <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
+                </Chatbot>
+              </SuspenseHelper>
+            </>
           )}
           {template !== 'openapi' && <DarkModeDropdown />}
         </ActionsBox>
