@@ -68,6 +68,7 @@ const CodeIO = ({ nodeData: { children } }: { nodeData: IOCodeBlockNode }) => {
 
   return (
     <div
+      // @ts-ignore
       css={css`
         ${baseCodeStyle}
         // Inner div of LG component has a width set to 700px. Unset this as part of our

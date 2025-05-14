@@ -85,6 +85,7 @@ const Code = ({
           align="bottom"
           justify="middle"
           trigger={
+            // @ts-ignore
             <div css={sourceCodeStyle}>
               <Icon glyph="OpenNewTab" />
             </div>
@@ -120,6 +121,7 @@ const Code = ({
       )}
       <div
         className={isOfflineDocsBuild ? OFFLINE_CONTAINER_CLASSNAME : undefined}
+        // @ts-ignore
         css={css`
           ${baseCodeStyle}
 
