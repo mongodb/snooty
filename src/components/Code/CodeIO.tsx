@@ -62,6 +62,7 @@ const CodeIO = ({ nodeData: { children } }: { nodeData: IOCodeBlockNode }) => {
     setShowOutput((val) => !val);
   };
 
+  // @ts-ignore
   if (children.length === 0) {
     return null;
   }
