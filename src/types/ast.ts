@@ -270,7 +270,7 @@ type IOCodeBlockOptions = {
 
 interface IOCodeBlockNode extends Directive<IOCodeBlockOptions> {
   name: 'io-code-block';
-  children: (IOInputNode | IOOutputNode)[];
+  children: [IOInputNode] | [IOInputNode, IOOutputNode];
   options: IOCodeBlockOptions;
 }
 
