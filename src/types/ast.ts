@@ -36,6 +36,7 @@ interface Root extends ParentNode {
 type HeadingNodeSelectorIds = {
   tab?: string;
   'method-option'?: string;
+  'selected-content'?: Record<string, string>;
   children?: HeadingNodeSelectorIds;
 };
 

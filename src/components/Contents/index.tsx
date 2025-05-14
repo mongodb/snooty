@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { isEmpty } from 'lodash';
 import { cx, css } from '@leafygreen-ui/emotion';
 
+import { useLocation } from '@gatsbyjs/reach-router';
 import FeedbackRating from '../Widgets/FeedbackWidget';
 import { formatText } from '../../utils/format-text';
 import { HeadingNodeSelectorIds } from '../../types/ast';
@@ -39,7 +40,7 @@ const formStyle = css`
 
 const styledContentList = css`
   overflow: auto;
-  height: 90%;
+  height: 80%;
 `;
 
 export const DEPRECATED_PROJECTS = ['atlas-app-services', 'datalake', 'realm'];
@@ -53,7 +54,7 @@ activeSelectorIds structure:
 }
 headingSelectorIds structure (comes from parser):
 {
-  method-option | tab: str,
+  method-option | tab | selected-content: str,
   children?: {
     tab: str,
     children?: {
@@ -61,31 +62,41 @@ headingSelectorIds structure (comes from parser):
       ...
     }
   }
-} 
+}
 */
 const isHeadingVisible = (
   headingSelectorIds: HeadingNodeSelectorIds,
-  activeSelectorIds: ActiveSelectorIds
+  activeSelectorIds: ActiveSelectorIds,
+  searchParams: URLSearchParams
 ): boolean => {
   if (!headingSelectorIds || isEmpty(headingSelectorIds)) return true;
   const headingsMethodParent = headingSelectorIds['method-option'];
   const headingsTabParent = headingSelectorIds['tab'];
+  const headingsComposableParent = headingSelectorIds['selected-content'] ?? {};
+  const composableHeadingVisible = Object.keys(headingsComposableParent).reduce((res, key) => {
+    if (!res) return res;
+    const value = searchParams.get(key);
+    return (value && value === headingsComposableParent[key]) || (!value && headingsComposableParent[key] === 'None');
+  }, true);
   if (
     (headingsMethodParent && headingsMethodParent !== activeSelectorIds.methodSelector) ||
-    (headingsTabParent && !activeSelectorIds.tab?.includes(headingsTabParent))
+    (headingsTabParent && !activeSelectorIds.tab?.includes(headingsTabParent)) ||
+    (headingsComposableParent && !composableHeadingVisible)
   ) {
     return false;
   }
-  return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds);
+  return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds, searchParams);
 };
 
 const Contents = ({ className, slug }: { className: string; slug: string }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
   const { isTabletOrMobile } = useScreenSize();
   const metadata = useSnootyMetadata();
+  const { search } = useLocation();
+  const searchDict = new URLSearchParams(search);
 
   const filteredNodes = headingNodes.filter((headingNode) => {
-    return isHeadingVisible(headingNode.selector_ids, activeSelectorIds);
+    return isHeadingVisible(headingNode.selector_ids, activeSelectorIds, searchDict);
   });
 
   if (filteredNodes.length === 0 || !showContentsComponent) {
