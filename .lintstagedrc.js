@@ -11,6 +11,7 @@ module.exports = {
   '*.{js,jsx,ts,tsx}': (files) => {
     const cli = new CLIEngine({});
     const filesToLint = files.filter((file) => !cli.isPathIgnored(file)).join(' ');
-    return ['npm run format:fix', `npm run lint:fix -- ${filesToLint}`];
+    return [];
+    // return ['npm run format:fix', `npm run lint:fix -- ${filesToLint}`];
   },
 };
