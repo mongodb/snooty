@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { cx, css as LeafyCss } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import Input from '../Code/Input';
-import Output from '../Code/Output';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { OFFLINE_BUTTON_CLASSNAME, OFFLINE_OUTPUT_CLASSNAME } from '../../utils/head-scripts/offline-ui/code';
+import { IOCodeBlockNode } from '../../types/ast';
+import Input from './Input';
+import Output from './Output';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
 const outputButtonStyling = LeafyCss`
@@ -39,14 +38,13 @@ const outputButtonStyling = LeafyCss`
   }
 `;
 
-const getButtonText = (showOutput) => (showOutput ? 'HIDE OUTPUT' : 'VIEW OUTPUT');
+const getButtonText = (showOutput: boolean) => (showOutput ? 'HIDE OUTPUT' : 'VIEW OUTPUT');
 
-const outputContainerStyle = (showOutput) => LeafyCss`
+const outputContainerStyle = (showOutput: boolean) => LeafyCss`
   ${!showOutput && 'display: none;'}
 `;
 
-const CodeIO = ({ nodeData: { children }, ...rest }) => {
-  const { darkMode } = useDarkMode();
+const CodeIO = ({ nodeData: { children } }: { nodeData: IOCodeBlockNode }) => {
   const needsIOToggle = children.length === 2;
   const onlyInputSpecified = children.length === 1;
 
@@ -54,7 +52,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
   if (needsIOToggle && children[1]?.options?.visible !== undefined) {
     initialOutputVisibility = !!children[1].options.visible;
   }
-  const [showOutput, setShowOutput] = useState(() => (isOfflineDocsBuild ? true : initialOutputVisibility));
+  const [showOutput, setShowOutput] = useState<boolean>(() => (isOfflineDocsBuild ? true : initialOutputVisibility));
   const buttonText = getButtonText(showOutput);
   const arrow = showOutput ? 'ChevronUp' : 'ChevronDown';
   const outputBorderRadius = !showOutput ? '12px' : '0px';
@@ -90,7 +88,7 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
       {needsIOToggle && (
         <>
           <Input nodeData={children[0]} />
-          <IOToggle style={{ '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
+          <IOToggle>
             <Button
               role="button"
               className={cx(outputButtonStyling, isOfflineDocsBuild ? OFFLINE_BUTTON_CLASSNAME : '')}
@@ -114,14 +112,12 @@ const CodeIO = ({ nodeData: { children }, ...rest }) => {
 
 const IOToggle = styled.div`
   ${borderCodeStyle}
-  border-color: var(--border-color);
   border-top: none;
-`;
+  border-color: ${palette.gray.light2};
 
-CodeIO.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
+  .dark-theme & {
+    border-color: ${palette.gray.dark2};
+  }
+`;
 
 export default CodeIO;

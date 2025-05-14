@@ -1,23 +1,22 @@
 import { css } from '@emotion/react';
 import React, { useCallback, useContext, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { default as CodeBlock } from '@leafygreen-ui/code';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import Tooltip from '@leafygreen-ui/tooltip';
 import { palette } from '@leafygreen-ui/palette';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { TabContext } from '../Tabs/tab-context';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { getLanguage } from '../../utils/get-language';
-import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
+import { DRIVER_ICON_MAP, DriverMap } from '../icons/DriverIconMap';
 import { STRUCTURED_DATA_CLASSNAME, SoftwareSourceCodeSd } from '../../utils/structured-data';
 import { usePageContext } from '../../context/page-context';
 import { OFFLINE_CONTAINER_CLASSNAME } from '../../utils/head-scripts/offline-ui/code';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { CodeNode } from '../../types/ast';
 import { baseCodeStyle, borderCodeStyle, lgStyles } from './styles/codeStyle';
-import { CodeContext } from './code-context';
+import { CodeContext, LanguageOption } from './code-context';
 
 const sourceCodeStyle = css`
   display: flex;
@@ -27,7 +26,7 @@ const sourceCodeStyle = css`
 
 // Returns the icon associated with the driver language that would be
 // shown on our TabSelector component
-const getDriverImage = (driver, driverIconMap) => {
+const getDriverImage = (driver: string, driverIconMap: DriverMap) => {
   const DriverIcon = driverIconMap[driver];
   if (DriverIcon) {
     return <DriverIcon />;
@@ -40,11 +39,13 @@ const getDriverImage = (driver, driverIconMap) => {
 };
 
 const Code = ({
-  nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
+  nodeData: { caption, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
+}: {
+  nodeData: CodeNode;
 }) => {
+  const copyable = false;
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
-  const { darkMode } = useDarkMode();
   const { slug } = usePageContext();
   const code = value;
   let language = (languageOptions?.length > 0 && codeBlockLanguage) || getLanguage(lang);
@@ -64,7 +65,7 @@ const Code = ({
   const sourceSpecified = !!source;
   const captionBorderRadius = captionSpecified ? '0px' : '12px';
 
-  let customActionButtonList = [];
+  let customActionButtonList: JSX.Element[] = [];
 
   if (isOfflineDocsBuild) {
     // LG/button renders copy button on state change. need to add custom button
@@ -77,7 +78,7 @@ const Code = ({
     );
   }
   if (sourceSpecified) {
-    customActionButtonList.push([
+    customActionButtonList.push(
       <IconButton aria-label="View full source in new tab" href={source}>
         <Tooltip
           triggerEvent="hover"
@@ -93,8 +94,8 @@ const Code = ({
         >
           View full source
         </Tooltip>
-      </IconButton>,
-    ]);
+      </IconButton>
+    );
   }
 
   const reportCodeCopied = useCallback(() => {
@@ -165,8 +166,8 @@ const Code = ({
       >
         {captionSpecified && (
           <div>
-            <CaptionContainer style={{ '--border-color': darkMode ? palette.gray.dark2 : palette.gray.light2 }}>
-              <Caption style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}>{caption}</Caption>
+            <CaptionContainer>
+              <Caption>{caption}</Caption>
             </CaptionContainer>
           </div>
         )}
@@ -176,7 +177,7 @@ const Code = ({
           language={language}
           languageOptions={languageOptions}
           onChange={(selectedOption) => {
-            setActiveTab({ drivers: selectedOption.id });
+            setActiveTab({ drivers: (selectedOption as LanguageOption).id });
           }}
           onCopy={reportCodeCopied}
           showLineNumbers={linenos}
@@ -193,31 +194,27 @@ const Code = ({
 
 const CaptionContainer = styled.div`
   ${borderCodeStyle}
-  border-color: var(--border-color);
   border-bottom: none;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
+  border-color: ${palette.gray.light2};
+
+  .dark-theme & {
+    border-color: ${palette.gray.dark2};
+  }
 `;
 
 const Caption = styled.div`
-  color: var(--color);
   padding: 10px;
   font-size: 14px;
   margin-left: 5px;
   border-bottom: none;
-`;
 
-Code.propTypes = {
-  nodeData: PropTypes.shape({
-    caption: PropTypes.string,
-    copyable: PropTypes.bool,
-    emphasize_lines: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)])),
-    lang: PropTypes.string,
-    linenos: PropTypes.bool,
-    value: PropTypes.string.isRequired,
-    source: PropTypes.string,
-    lineno_start: PropTypes.number,
-  }).isRequired,
-};
+  color: ${palette.gray.dark1};
+
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
+`;
 
 export default Code;

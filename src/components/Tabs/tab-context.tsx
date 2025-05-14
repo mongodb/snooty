@@ -15,8 +15,8 @@ import { ContentsContext } from '../Contents/contents-context';
 import { Node } from '../../types/ast';
 import { makeChoices } from './make-choices';
 
-type Selectors = Record<string, Record<string, Node[]>>;
-type ActiveTabs = Record<string, string>;
+export type Selectors = Record<string, Record<string, Node[]>>;
+export type ActiveTabs = Record<string, string>;
 interface Choice {
   tabSelectorIcon?: IconComponent;
   text: string;

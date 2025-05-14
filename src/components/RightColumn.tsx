@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React, { ReactNode } from 'react';
 import { css } from '@emotion/react';
 import useStickyTopValues from '../hooks/useStickyTopValues';
@@ -11,6 +10,7 @@ const RightColumn = ({ children, className }: { children: ReactNode; className?:
   return (
     <div
       className={className}
+      // @ts-ignore
       css={css`
         margin: 70px ${theme.size.medium} 40px 5px;
         min-width: 180px;
@@ -20,6 +20,7 @@ const RightColumn = ({ children, className }: { children: ReactNode; className?:
       `}
     >
       <div
+        // @ts-ignore
         css={css`
           height: calc(100vh - 120px);
           position: sticky;

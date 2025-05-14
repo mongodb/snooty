@@ -1,37 +1,57 @@
-import React, { useContext, useMemo } from 'react';
+import React, { ReactNode, useContext, useMemo } from 'react';
 import { Language } from '@leafygreen-ui/code';
-import { TabContext } from '../Tabs/tab-context';
+import { ActiveTabs, Selectors, TabContext } from '../Tabs/tab-context';
 import { getPlaintext } from '../../utils/get-plaintext';
 
+interface CodeContextType {
+  codeBlockLanguage: string | undefined;
+  languageOptions: LanguageOption[];
+}
+
+export type LanguageOption = {
+  id: string;
+  displayName: string;
+  language: Language;
+  image?: JSX.Element;
+};
+
 const defaultContextValue = {
-  codeBlockLanguage: null,
+  codeBlockLanguage: undefined,
   languageOptions: [],
 };
 
-const CodeContext = React.createContext(defaultContextValue);
+const CodeContext = React.createContext<CodeContextType>(defaultContextValue);
 
 const LANGUAGES = new Set(Object.values(Language));
 
+type DriverLanguageMappingKey = 'cs' | 'javascript' | 'python';
+
 // Custom mapping for unique drivers that don't have an exact 1:1 name to LG language mapping
-const DRIVER_LANGUAGE_MAPPING = {
+const DRIVER_LANGUAGE_MAPPING: {
+  [k in DriverLanguageMappingKey]: Set<string>;
+} = {
   cs: new Set(['c', 'cpp']),
   javascript: new Set(['compass', 'nodejs', 'shell']),
   python: new Set(['motor']),
 };
 
+// Typeguard for below checking if value is a valid language
+function isLanguage(value: string): value is Language {
+  return LANGUAGES.has(value as Language);
+}
+
 // Returns the LG-supported language that corresponds with one of our documented drivers
-const getDriverLanguage = (driverArg) => {
+const getDriverLanguage = (driverArg: string): Language => {
   // Simplifies driver to language matching for drivers like "java-sync"
   const driver = driverArg?.split('-')[0];
 
-  for (const language in DRIVER_LANGUAGE_MAPPING) {
-    const driversSet = DRIVER_LANGUAGE_MAPPING[language];
-    if (driversSet.has(driver) && LANGUAGES.has(language)) {
-      return language;
+  for (const [language, driversSet] of Object.entries(DRIVER_LANGUAGE_MAPPING)) {
+    if (driversSet.has(driver) && LANGUAGES.has(language as DriverLanguageMappingKey)) {
+      return language as DriverLanguageMappingKey;
     }
   }
 
-  if (LANGUAGES.has(driver)) {
+  if (isLanguage(driver)) {
     return driver;
   }
 
@@ -40,7 +60,7 @@ const getDriverLanguage = (driverArg) => {
 };
 
 // Generates language options for code block based on drivers tabset on current page
-const generateLanguageOptions = (selectors = {}) => {
+const generateLanguageOptions = (selectors: Selectors = {}): LanguageOption[] => {
   const drivers = selectors?.['drivers'];
   const languageOptions = [];
 
@@ -56,18 +76,16 @@ const generateLanguageOptions = (selectors = {}) => {
 };
 
 // Returns the display name of the current driver selected
-const getCurrentLanguageOption = (languageOptions, activeTabs) => {
+const getCurrentLanguageOption = (languageOptions: LanguageOption[], activeTabs: ActiveTabs) => {
   const currentTab = activeTabs?.drivers;
-  if (!currentTab) {
-    return null;
-  }
+  if (!currentTab) return;
 
   const currentLangOption = languageOptions.find((option) => option.id === currentTab);
   // LG Code block's language switcher uses the display name to select the current "language"
   return currentLangOption?.displayName;
 };
 
-const CodeProvider = ({ children }) => {
+const CodeProvider = ({ children }: { children: ReactNode }) => {
   const { activeTabs, selectors } = useContext(TabContext);
   const languageOptions = useMemo(() => generateLanguageOptions(selectors), [selectors]);
   const codeBlockLanguage = useMemo(

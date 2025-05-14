@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React from 'react';
 import { css } from '@emotion/react';
 import { Directive } from '../types/ast';
@@ -9,6 +8,7 @@ const rubricStyle = css`
 `;
 
 const Rubric = ({ nodeData: { argument }, ...rest }: { nodeData: Directive }) => (
+  // @ts-ignore
   <p css={rubricStyle}>
     {argument.map((node, i) => (
       <ComponentFactory {...rest} key={i} nodeData={node} />

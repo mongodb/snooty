@@ -126,9 +126,12 @@ type NodeName =
   | 'composable-tutorials'
   | 'contents'
   | 'deprecated'
+  | 'input'
+  | 'io-code-block'
   | 'facet'
   | 'list-table'
   | 'meta'
+  | 'output'
   | 'selected-content'
   | 'tabs'
   | 'tab'
@@ -256,6 +259,37 @@ interface CodeNode extends Node {
   emphasize_lines: number[];
   value: string;
   linenos: boolean;
+  caption?: string;
+  source?: string;
+  lineno_start?: number;
+}
+
+type IOCodeBlockOptions = {
+  copyable: boolean;
+};
+
+interface IOCodeBlockNode extends Directive<IOCodeBlockOptions> {
+  name: 'io-code-block';
+  children: (IOInputNode | IOOutputNode)[];
+  options: IOCodeBlockOptions;
+}
+
+type InputOutputOptions = {
+  language: string;
+  linenos: boolean;
+  visible?: boolean;
+};
+
+interface IOInputNode extends Directive<InputOutputOptions> {
+  name: 'input';
+  children: CodeNode[];
+  options: InputOutputOptions;
+}
+
+interface IOOutputNode extends Directive<InputOutputOptions> {
+  name: 'output';
+  children: CodeNode[];
+  options: InputOutputOptions;
 }
 
 interface MethodNode extends ParentNode {
@@ -406,6 +440,9 @@ export type {
   ComponentType,
   Directive,
   DirectiveOptions,
+  IOCodeBlockNode,
+  IOInputNode,
+  IOOutputNode,
   ListNode,
   ListTableNode,
   ListItemNode,
