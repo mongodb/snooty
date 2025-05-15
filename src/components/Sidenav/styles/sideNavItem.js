@@ -55,7 +55,6 @@ export const logoLinkStyling = css`
   padding-left: ${theme.size.medium};
   display: flex;
   text-decoration: none;
-  width: 162px;
 
   > svg {
     margin-right: ${theme.size.default};
