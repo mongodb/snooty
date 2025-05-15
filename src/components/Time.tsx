@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { getPlaintext } from '../utils/get-plaintext';
+import { Directive } from '../types/ast';
 
-const Time = ({ nodeData: { argument } }) => {
+const Time = ({ nodeData: { argument } }: { nodeData: Directive }) => {
   const time = getPlaintext(argument);
   if (!time) {
     return null;
@@ -13,12 +13,6 @@ const Time = ({ nodeData: { argument } }) => {
       <em>Time required: {time} minutes</em>
     </p>
   );
-};
-
-Time.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
 };
 
 export default Time;

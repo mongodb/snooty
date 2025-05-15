@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode, useMemo } from 'react';
+import { Directive } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
-const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) => {
+const VersionModified = ({ nodeData: { argument, children, name }, ...rest }: { nodeData: Directive }) => {
   const { introText, childIndex } = useMemo(() => {
     const version = argument.length > 0 ? <ComponentFactory nodeData={argument[0]} /> : null;
     let childIndex = 0;
-    let additionalArg = '.';
+    let additionalArg: ReactNode = '.';
     if (argument.length > 1) {
       additionalArg = (
         <>
@@ -24,7 +24,7 @@ const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) =>
         </>
       );
     }
-    let text = '';
+    let text: ReactNode = '';
     if (name === 'deprecated') {
       text = <>Deprecated{version && <> since version {version}</>}</>;
     } else if (name === 'versionadded') {
@@ -52,18 +52,6 @@ const VersionModified = ({ nodeData: { argument, children, name }, ...rest }) =>
       ))}
     </div>
   );
-};
-
-VersionModified.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string,
-      })
-    ).isRequired,
-    children: PropTypes.arrayOf(PropTypes.object),
-    name: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default VersionModified;

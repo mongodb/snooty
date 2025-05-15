@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
+import { Directive } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import Overline from './Internal/Overline';
 
@@ -15,7 +15,7 @@ const kickerBaseStyle = css`
   }
 `;
 
-const Kicker = ({ nodeData: { argument }, ...rest }) => {
+const Kicker = ({ nodeData: { argument }, ...rest }: { nodeData: Directive }) => {
   return (
     <Overline className={kickerBaseStyle}>
       {argument.map((child, i) => (
@@ -23,12 +23,6 @@ const Kicker = ({ nodeData: { argument }, ...rest }) => {
       ))}
     </Overline>
   );
-};
-
-Kicker.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
 };
 
 export default Kicker;

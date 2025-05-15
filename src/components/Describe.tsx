@@ -1,12 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
-import ComponentFactory from './ComponentFactory.tsx';
+import { Directive } from '../types/ast';
+import ComponentFactory from './ComponentFactory';
 
-const Describe = ({ nodeData: { argument, children }, ...rest }) => (
+const Describe = ({ nodeData: { argument, children }, ...rest }: { nodeData: Directive }) => (
   <dl>
     <dt>
       <code
+        // @ts-ignore
         css={css`
           /* TODO: Remove when mongodb-docs.css is removed */
           font-weight: normal;
@@ -24,12 +25,5 @@ const Describe = ({ nodeData: { argument, children }, ...rest }) => (
     </dd>
   </dl>
 );
-
-Describe.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
 
 export default Describe;

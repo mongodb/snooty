@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { theme } from '../theme/docsTheme';
+import { ParentNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
 const StyledIntroduction = styled('div')`
@@ -30,7 +30,7 @@ const StyledIntroduction = styled('div')`
   }
 `;
 
-const Introduction = ({ nodeData: { children }, ...rest }) => {
+const Introduction = ({ nodeData: { children }, ...rest }: { nodeData: ParentNode }) => {
   return (
     <StyledIntroduction className="introduction">
       {children.map((child, i) => (
@@ -38,12 +38,6 @@ const Introduction = ({ nodeData: { children }, ...rest }) => {
       ))}
     </StyledIntroduction>
   );
-};
-
-Introduction.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
 };
 
 export default Introduction;
