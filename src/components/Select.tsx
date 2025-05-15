@@ -1,11 +1,10 @@
-import React, { useRef, forwardRef } from 'react';
+import React, { useRef, forwardRef, ReactNode } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { Option, Select as LGSelect } from '@leafygreen-ui/select';
-import PropTypes from 'prop-types';
 import { palette } from '@leafygreen-ui/palette';
 import { color, focusRing } from '@leafygreen-ui/tokens';
-import Icon from '@leafygreen-ui/icon';
+import Icon, { LGGlyph } from '@leafygreen-ui/icon';
 import { theme } from '../theme/docsTheme';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 
@@ -160,8 +159,8 @@ const optionStyling = css`
 
 const OFFLINE_SELECT_ID = 'offline-select';
 
-const PortalContainer = forwardRef(({ ...props }, ref) => (
-  <div id={isOfflineDocsBuild ? OFFLINE_SELECT_ID : null} className={cx(portalStyle, props.className)} ref={ref}>
+const PortalContainer = forwardRef<HTMLDivElement, { className?: string; children: ReactNode }>(({ ...props }, ref) => (
+  <div id={isOfflineDocsBuild ? OFFLINE_SELECT_ID : undefined} className={cx(portalStyle, props.className)} ref={ref}>
     {props.children}
   </div>
 ));
@@ -212,7 +211,7 @@ const offlineListItemStyle = css`
   }
 `;
 
-const OfflineMenu = ({ choices }) => {
+const OfflineMenu = ({ choices }: { choices: Array<SelectOption> }) => {
   return (
     <div className={cx(offlineMenuStyling, 'offline-select-menu')}>
       <ul className={cx(offlineListStyle)}>
@@ -232,6 +231,24 @@ const OfflineMenu = ({ choices }) => {
   );
 };
 
+export type SelectOption = {
+  text: string;
+  value: string;
+  icon?: LGGlyph.Element;
+  tabSelectorIcon?: React.ComponentType<{ className?: string }>;
+};
+
+export type SelectProps = {
+  className?: string;
+  choices: Array<SelectOption>;
+  onChange: ({ value }: { value: string }) => void;
+  usePortal?: boolean;
+  defaultText?: string;
+  disabled?: boolean;
+  label?: string;
+  value?: string;
+};
+
 const Select = ({
   className,
   choices,
@@ -239,12 +256,12 @@ const Select = ({
   usePortal = true,
   defaultText = '',
   disabled = false,
-  label = null,
-  value = null,
+  label,
+  value = '',
   ...props
-}) => {
+}: SelectProps) => {
   // show select after portal container has loaded for scroll + zindex consistency
-  const portalContainer = useRef();
+  const portalContainer = useRef<HTMLDivElement>(null);
 
   return (
     <PortalContainer
@@ -253,9 +270,9 @@ const Select = ({
     >
       <LGSelect
         data-testid="lg-select"
-        value={value || ''}
-        label={label}
-        aria-labelledby={(!label && 'select') || null}
+        value={value}
+        // Only one is allowed (label or aria-labelledby)
+        {...(label ? { label } : { 'aria-labelledby': 'select' })}
         size="default"
         allowDeselect={false}
         disabled={disabled}
@@ -264,7 +281,6 @@ const Select = ({
         scrollContainer={portalContainer.current}
         popoverZIndex={2}
         placeholder={defaultText}
-        defaultValue={value ? String(value) : ''}
         onChange={(value) => {
           onChange({ value });
         }}
@@ -277,7 +293,7 @@ const Select = ({
             key={choice.value}
             value={choice.value}
             glyph={choice.icon}
-            role="option"
+            {...({ role: 'option' } as React.HTMLAttributes<HTMLLIElement>)}
           >
             {choice.tabSelectorIcon && <choice.tabSelectorIcon className={cx(iconStyle)} />}
             {choice.text}
@@ -287,29 +303,6 @@ const Select = ({
       {isOfflineDocsBuild && <OfflineMenu choices={choices} />}
     </PortalContainer>
   );
-};
-
-Select.propTypes = {
-  choices: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  usePortal: PropTypes.bool,
-  defaultText: PropTypes.string,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  label: PropTypes.string,
-  value: PropTypes.string,
-};
-
-Select.defaultProps = {
-  usePortal: true,
-  defaultText: '',
-  disabled: false,
-  label: null,
-  value: null,
 };
 
 export { Select as default, Label };

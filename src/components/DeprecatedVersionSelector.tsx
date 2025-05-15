@@ -2,16 +2,28 @@ import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import queryString from 'query-string';
 import { keyBy, isEmpty } from 'lodash';
 import Button from '@leafygreen-ui/button';
-import Icon from '@leafygreen-ui/icon';
+import Icon, { LGGlyph } from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { useAllDocsets } from '../hooks/useAllDocsets';
+import { DocsetSlice, useAllDocsets } from '../hooks/useAllDocsets';
 import { fetchDocsets } from '../utils/realm';
 import { sortVersions } from '../utils/sort-versioned-branches';
 import { disabledStyle } from '../styles/button';
 import Select from './Select';
+
+type ProductChoice = {
+  text: string;
+  value: string;
+};
+
+export type VersionChoice = {
+  text: string;
+  value: string;
+  urlSlug: string;
+  icon?: LGGlyph.Element;
+};
 
 const SELECT_WIDTH = '336px';
 
@@ -24,14 +36,14 @@ const selectStyle = css`
   }
 `;
 
-const isPrimaryBranch = (version) => {
+const isPrimaryBranch = (version: string) => {
   return version === 'main' || version === 'master';
 };
 
-const prefixVersion = (version) => {
+const prefixVersion = (version: string) => {
   if (!version) return null;
   // Display as "Version X" on menu if numeric version and remove "v" or "Version" from version name
-  const versionNumber = version.replace(/v|Version /g, '').split()[0];
+  const versionNumber = version.replace(/v|Version /g, '');
   // if branch is 'master' or 'main', show as latest
   if (isPrimaryBranch(versionNumber)) {
     return 'Latest';
@@ -40,8 +52,8 @@ const prefixVersion = (version) => {
 };
 
 // Validation for necessary url fields to bypass errors
-const hasValidHostName = (repoDocument) => {
-  if (!repoDocument?.url?.dotcomprd || !repoDocument?.prefix?.dotcomprd) return false;
+const hasValidHostName = (docset: DocsetSlice) => {
+  if (!docset?.url?.dotcomprd || !docset?.prefix?.dotcomprd) return false;
   return true;
 };
 
@@ -53,50 +65,54 @@ const DeprecatedVersionSelector = () => {
   const [version, setVersion] = useState('');
   const [reposMap, setReposMap] = useState(reposBranchesBuildDataMap);
 
-  const alphabetize = (product1, product2) => {
+  const alphabetize = (product1: ProductChoice, product2: ProductChoice) => {
     return product1?.text?.localeCompare(product2?.text);
   };
 
   const productChoices = useMemo(
     () =>
       reposMap
-        ? Object.keys(reposMap)
-            .map((product) => ({
-              text: reposMap[product].displayName,
-              value: product,
-            }))
-            // Ensure invalid entries do not break selector
-            .filter(({ text }) => text)
+        ? (
+            Object.keys(reposMap)
+              .map((product) => ({
+                text: reposMap[product].displayName,
+                value: product,
+              }))
+              // Ensure invalid entries do not break selector
+              .filter(({ text }) => text) as ProductChoice[]
+          )
             //sort entries alphabetically by text
             .sort(alphabetize)
         : [],
     [reposMap]
   );
 
-  const updateProduct = useCallback(({ value }) => {
+  const updateProduct = useCallback(({ value }: { value: string }) => {
     setProduct(value);
     setVersion('');
   }, []);
 
-  const updateVersion = useCallback(({ value }) => setVersion(value), []);
+  const updateVersion = useCallback(({ value }: { value: string }) => setVersion(value), []);
 
   const versionChoices = useMemo(
     () =>
       reposMap[product]?.branches
-        ? reposMap[product]?.branches
-            .map((version) => {
-              //only include versions with an eol_type field
-              if (version.eol_type && version.versionSelectorLabel) {
-                return {
-                  text: prefixVersion(version.versionSelectorLabel),
-                  value: version.versionSelectorLabel,
-                  urlSlug: version.urlSlug,
-                  icon: version.eol_type === 'download' ? <Icon glyph="Download" /> : null,
-                };
-              } else return null;
-            })
-            //Ensure versions set to null are not included and do not break selector
-            .filter((versionChoice) => versionChoice)
+        ? (
+            reposMap[product]?.branches
+              .map((version) => {
+                //only include versions with an eol_type field
+                if (version.eol_type && version.versionSelectorLabel) {
+                  return {
+                    text: prefixVersion(version.versionSelectorLabel),
+                    value: version.versionSelectorLabel,
+                    urlSlug: version.urlSlug,
+                    icon: version.eol_type === 'download' ? <Icon glyph="Download" /> : undefined,
+                  };
+                } else return null;
+              })
+              //Ensure versions set to null are not included and do not break selector
+              .filter((versionChoice) => versionChoice) as VersionChoice[]
+          )
             //sort versions newest(larger numbers) to oldest(smaller numbers). Assumes there are no more than three digits between/before/after each decimal place
             .sort(sortVersions)
         : [],
@@ -128,15 +144,15 @@ const DeprecatedVersionSelector = () => {
     if (isBrowser) {
       // Extract the value of 'site' query string from the page url to pre-select product
       const { site } = queryString.parse(window.location.search);
-      if (site && reposMap[site]) {
+      if (site && !Array.isArray(site) && reposMap[site]) {
         setProduct(site);
       }
     }
   }, [reposMap]);
 
-  const generateUrl = (currentVersion) => {
+  const generateUrl = (currentVersion: VersionChoice | undefined) => {
     if (!currentVersion) {
-      return null;
+      return undefined;
     }
 
     // Utilizing hardcoded env or aws bucket path because legacy sites are not available on dev/stage
@@ -183,7 +199,5 @@ const DeprecatedVersionSelector = () => {
     </>
   );
 };
-
-DeprecatedVersionSelector.propTypes = {};
 
 export default DeprecatedVersionSelector;

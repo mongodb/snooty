@@ -1,9 +1,11 @@
 import { useStaticQuery, graphql } from 'gatsby';
 import { Docset } from '../types/data';
 
+export type DocsetSlice = Omit<Docset, 'repoName' | 'search' | 'internalOnly' | 'prodDeployable' | 'groups' | 'bucket'>;
+
 type AllDocsetsQueryResult = {
   allDocset: {
-    nodes: Docset[];
+    nodes: DocsetSlice[];
   };
 };
 

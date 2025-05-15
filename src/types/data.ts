@@ -4,7 +4,7 @@ type BranchData = {
   gitBranchName: string;
   active: boolean;
   urlSlug: string;
-  urlAliases?: string[] | null;
+  urlAliases?: Array<string> | null;
   versionSelectorLabel: string;
   offlineUrl: string;
   eol_type?: EOLType;
@@ -27,9 +27,28 @@ interface Docset {
   };
   displayName?: string;
   project: string;
-  branches: BranchData[];
+  branches: Array<BranchData>;
   hasEolVersions?: boolean;
+  repoName: string;
+  search?: { categoryTitle: string; categoryName?: string };
+  internalOnly: boolean;
+  prodDeployable: boolean;
+  groups: Group | null;
+  bucket: {
+    dev: string;
+    dotcomprd: string;
+    dotcomstg: string;
+    prd: string;
+    stg: string;
+    regression: string;
+  };
 }
+
+type Group = {
+  id?: string;
+  groupLabel: string;
+  includedBranches: Array<string>;
+};
 
 type MetadataDatabaseName = 'snooty_stage' | 'snooty_prod' | 'snooty_dotcomstg' | 'snooty_dotcomprd' | 'snooty_dev';
 type ReposDatabaseName = 'pool' | 'pool_test';
@@ -45,9 +64,10 @@ type SiteMetadata = {
   reposDatabase: ReposDatabaseName;
   siteUrl: string;
   snootyBranch: string;
-  // TODO: Make snootyEnv more specific
-  snootyEnv: string;
+  snootyEnv: SnootyEnv;
   user: string;
 };
 
-export { BranchData, Docset, EOLType, SiteMetadata, MetadataDatabaseName, ReposDatabaseName };
+type SnootyEnv = 'dotcomprd' | 'production' | 'dotcomstg' | 'staging' | 'development';
+
+export { BranchData, Docset, EOLType, SiteMetadata, MetadataDatabaseName, ReposDatabaseName, SnootyEnv };
