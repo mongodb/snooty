@@ -16,8 +16,23 @@ Use yarn to add and remove dependencies from sub packages. This will automatical
 ```
 yarn workspace @snooty/gatsby add @leafygreen-ui/tokens
 ```
+To add a dev dependency:
+```
+yarn workspace @snooty/nextjs add -D @types/adm-zip
+```
+
+> **_NOTE:_**  The workspace must be properly named in each corresponding package.json `"name": "@snooty/nextjs",` as well as being defined as a workspace in the root package.json `"workspaces": [ "frameworks/*", "packages/*"],`
+
 
 ## Build steps
 
 Make sure the shared UI library is built before running your framework
 `yarn workspace @snooty/ui build`
+
+### Build the Gatsby app
+See README under Gatsby framework directory for requirements.
+`yarn workspace @snooty/gatsby build`
+
+### Build the NextJS app
+See README under Gatsby framework directory for requirements.
+`yarn workspace @snooty/gatsby build`

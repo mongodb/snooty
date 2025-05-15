@@ -1,0 +1,24 @@
+{
+  "name": "@snooty/nextjs",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "dependencies": {
+    "@snooty/ui": "link:../../packages/ui",
+    "adm-zip": "^0.5.16",
+    "bson": "^6.10.3",
+    "next": "^15.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.7",
+    "@types/node": "^22.15.18",
+    "@types/react": "^19.1.4",
+    "typescript": "^5.8.3"
+  }
+}

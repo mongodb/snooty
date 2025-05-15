@@ -12,8 +12,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:next": "yarn workspace nextjs-site dev",
-    "dev:gatsby": "yarn workspace gatsby-site develop",
+    "dev:next": "yarn workspace @snooty/nextjs dev",
+    "dev:gatsby": "yarn workspace @snooty/gatsby develop",
     "build:gatsby": "yarn workspace @snooty/ui build && yarn workspace @snooty/gatsby build:clean"
   }
 }
