@@ -1,18 +1,9 @@
 import React, { useState, useEffect, useContext, useMemo } from 'react';
 import styled from '@emotion/styled';
-import { SideNav, SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
-import Icon from '@leafygreen-ui/icon';
-import { palette } from '@leafygreen-ui/palette';
-import { useViewportSize } from '@leafygreen-ui/hooks';
 import { useLocation } from '@gatsbyjs/reach-router';
-import { BackLink } from '@leafygreen-ui/typography';
-import Link from '../Link';
 import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
-import useScreenSize from '../../hooks/useScreenSize';
-import { isCurrentPage } from '../../utils/is-current-page';
-import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { VersionContext } from '../../context/version-context';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
@@ -23,19 +14,12 @@ import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
-import DocsHomeButton from '../Sidenav/DocsHomeButton';
-import { DownloadButton } from '../OfflineDownloadModal';
-import { l1ItemStyling, groupHeaderStyling, l2ItemStyling, backLinkStyling } from './styles/SideNavItem';
+import { isActiveTocNode } from './UnifiedTocNavItems';
+import { DoublePannedNav } from './DoublePannedNav';
+import { AccordionNavPanel } from './AccordionNav';
 
-const ArtificialPadding = styled('div')`
+export const ArtificialPadding = styled('div')`
   height: 15px;
-`;
-
-export const Border = styled('hr')`
-  border: unset;
-  border-bottom: 1px solid var(--sidenav-border-bottom-color);
-  margin-bottom: 8px;
-  width: 80%;
 `;
 
 export const downloadButtonStlying = LeafyCSS`
@@ -46,7 +30,7 @@ export const downloadButtonStlying = LeafyCSS`
   padding-right: 30px;
 `;
 
-const NavTopContainer = (isTabletOrMobile) => LeafyCSS`
+export const NavTopContainer = (isTabletOrMobile) => LeafyCSS`
   ${!isTabletOrMobile && 'background-color: var(--background-color-primary)'};
   position: absolute;
   top: -0px;
@@ -54,20 +38,6 @@ const NavTopContainer = (isTabletOrMobile) => LeafyCSS`
   width: 100%;
   border-bottom: 1px solid var(--sidenav-border-bottom-color);
   z-index: 1;
-`;
-
-const FormatTitle = styled.div`
-  scroll-margin-bottom: ${theme.size.xxlarge};
-`;
-
-const overwriteLinkStyle = LeafyCSS`
-  span {
-    display: flex;
-  }
-`;
-
-const caretStyle = LeafyCSS`
-  margin-top: 3px;
 `;
 
 const getTopAndHeight = (topValue) => {
@@ -106,297 +76,6 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
       }
     }
 `;
-
-const sideNavStyle = ({ hideMobile }) => LeafyCSS`  
-  height: 100%;
-  padding: 0px;
-
-  // Mobile & Tablet nav
-  @media ${theme.screenSize.upToLarge} {
-    position: absolute;
-    ${hideMobile && 'display: none;'}
-
-    button[data-testid="side-nav-collapse-toggle"] {
-      display: none;
-    }
-  }
-`;
-
-const panelStyling = LeafyCSS`
-    display: flex;
-    flex-direction: row;
-    position: fixed;
-    top: 50px;
-    height: calc(100% - 120px);
-    padding-top: 10px;
-    border-bottom: 1px solid var(--sidenav-border-bottom-color);
-    width: 100%;
-
-    ul {
-      display: block;
-      width: 100%;
-
-      li {
-        a {
-          justify-content: space-between !important;
-        }
-      }
-    }
-
-`;
-
-const leftPane = (widithSize) => LeafyCSS`
-  flex: 0 0 ${widithSize}px;
-  overflow-y: auto;
-  border-right: 1px solid var(--sidenav-border-bottom-color);
-  width: ${widithSize}px !important;
-  padding-top: ${theme.size.default};
-`;
-
-const rightPane = LeafyCSS`
-  flex: 0 0 264px;
-  overflow-y: auto;
-  border-right: 1px solid var(--sidenav-border-bottom-color);
-  padding-top: ${theme.size.default};
-`;
-
-// we will maybe have to edit this function in the future since if we have double panned side nav in theory two things should be selected at same time
-function isSelectedTab(url, slug) {
-  return isSelectedTocNode(url, slug);
-}
-
-function CollapsibleNavItem({ items, label, url, slug, prefix, isAccordion, level }) {
-  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
-  const caretType = isOpen ? 'CaretDown' : 'CaretUp';
-  const isActive = isSelectedTab(url, slug);
-
-  const onCaretClick = (event) => {
-    event.preventDefault();
-    setIsOpen(!isOpen);
-  };
-
-  const handleClick = () => {
-    // Allows the collapsed item if the caret was selected first before
-    if (!(url !== `/${slug}` && isOpen)) {
-      setIsOpen(!isOpen);
-    }
-  };
-
-  return (
-    <>
-      <SideNavItem
-        as={Link}
-        prefix={prefix}
-        to={url}
-        active={isActive}
-        className={cx(l2ItemStyling({ level, isAccordion }), overwriteLinkStyle)}
-        onClick={handleClick}
-        hideExternalIcon={true}
-      >
-        <FormatTitle>{label}</FormatTitle>
-        <Icon
-          className={cx(caretStyle)}
-          glyph={caretType}
-          fill={isActive ? 'inherit' : palette.gray.base}
-          onClick={onCaretClick}
-        />
-      </SideNavItem>
-      {isOpen &&
-        items.map((item) => (
-          <UnifiedTocNavItem
-            {...item}
-            level={level + 1}
-            key={item.newUrl + item.label}
-            slug={slug}
-            isAccordion={isAccordion}
-          />
-        ))}
-    </>
-  );
-}
-
-function UnifiedTocNavItem({
-  label,
-  group,
-  url,
-  collapsible,
-  items,
-  isStatic,
-  prefix,
-  slug,
-  showSubNav,
-  currentL2s,
-  isAccordion,
-  setCurrentL1,
-  setCurrentL2s,
-  setShowDriverBackBtn,
-  level,
-}) {
-  // These are the tab items that we dont need to show in the second pane but need to go through recursively
-  // Unless in Mobile doing Accordion view
-  if (isStatic) {
-    if (isAccordion) {
-      return (
-        <>
-          <StaticNavItem
-            label={label}
-            url={url}
-            slug={slug}
-            isStatic={isStatic}
-            items={items}
-            prefix={prefix}
-            setCurrentL1={setCurrentL1}
-            setShowDriverBackBtn={setShowDriverBackBtn}
-            isAccordion={isAccordion}
-          />
-          {url === currentL2s?.url &&
-            items?.map((tocItem) => (
-              <UnifiedTocNavItem
-                {...tocItem}
-                level={level}
-                key={tocItem.newUrl + tocItem.label}
-                slug={slug}
-                isStatic={false}
-                isAccordion={isAccordion}
-                setCurrentL2s={setCurrentL2s}
-                setShowDriverBackBtn={setShowDriverBackBtn}
-              />
-            ))}
-          {url === currentL2s?.url && <Border />}
-        </>
-      );
-    }
-
-    return (
-      <>
-        {items?.map((tocItem) => (
-          <UnifiedTocNavItem
-            {...tocItem}
-            level={level}
-            key={tocItem.newUrl + tocItem.label}
-            slug={slug}
-            isStatic={false}
-            isAccordion={isAccordion}
-            setCurrentL2s={setCurrentL2s}
-            setShowDriverBackBtn={setShowDriverBackBtn}
-          />
-        ))}
-      </>
-    );
-  }
-
-  // groups are for adding a static header, these can also be collapsible
-  if (group) {
-    return (
-      <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling({ isAccordion }))}>
-        {items?.map((tocItem) => (
-          <UnifiedTocNavItem
-            {...tocItem}
-            level={level}
-            key={tocItem.newUrl + tocItem.label}
-            slug={slug}
-            isAccordion={isAccordion}
-            setCurrentL2s={setCurrentL2s}
-            setShowDriverBackBtn={setShowDriverBackBtn}
-          />
-        ))}
-      </SideNavGroup>
-    );
-  }
-
-  const handleClick = () => {
-    // Allows for the showSubNav nodes to have their own L2 panel
-    setShowDriverBackBtn(true);
-    setCurrentL2s({ items, url });
-  };
-
-  if (showSubNav) {
-    return (
-      <SideNavItem
-        aria-label={label}
-        as={Link}
-        prefix={prefix}
-        to={url}
-        onClick={handleClick}
-        className={cx(l2ItemStyling({ level, isAccordion }))}
-      >
-        {label}
-      </SideNavItem>
-    );
-  }
-
-  // collapsible is for items that have nested links
-  if (collapsible) {
-    return (
-      <CollapsibleNavItem
-        items={items}
-        label={label}
-        url={url}
-        level={level}
-        isAccordion={isAccordion}
-        slug={slug}
-        prefix={prefix}
-        className={cx(l2ItemStyling({ level, isAccordion }))}
-      />
-    );
-  }
-
-  return (
-    <SideNavItem
-      active={isSelectedTab(url, slug)}
-      aria-label={label}
-      as={Link}
-      prefix={prefix}
-      to={url}
-      className={cx(l2ItemStyling({ level, isAccordion }))}
-    >
-      {label}
-    </SideNavItem>
-  );
-}
-
-function StaticNavItem({
-  label,
-  url,
-  slug,
-  items,
-  isStatic,
-  prefix,
-  setCurrentL1,
-  isAccordion,
-  setShowDriverBackBtn,
-  level = 1,
-}) {
-  const isActive = isActiveTocNode(slug, url, items);
-
-  console.log('TOROROTNO', isActive, slug, url);
-  return (
-    <SideNavItem
-      active={isActive}
-      aria-label={label}
-      prefix={prefix}
-      as={Link}
-      to={url}
-      onClick={() => {
-        setCurrentL1({ items, url });
-        setShowDriverBackBtn(false);
-      }}
-      className={cx(l1ItemStyling({ isActive, isAccordion }))}
-    >
-      {label}
-    </SideNavItem>
-  );
-}
-
-// This checks what sidenav should load based on the active Tab
-const isActiveTocNode = (currentUrl, slug, children) => {
-  if (currentUrl === undefined) return false;
-  if (isCurrentPage(currentUrl, slug)) return true;
-  if (children) {
-    return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.url, b.items), false);
-  }
-  return false;
-};
 
 const replaceVersion = ({ url, currentVersion, versionsData }) => {
   // Find the version data for the current content we are in
@@ -499,43 +178,15 @@ const findPageParent = (tree, targetUrl) => {
   return [false, null];
 };
 
-// function useWindowSize() {
-//   // const viewportSize = useViewportSize();
-//   const [windowSize, setWindowSize] = useState(window.innerWidth);
-
-//   useEffect(() => {
-//       function handleResize() {
-//           setWindowSize(window.innerWidth);
-//       }
-
-//       window.addEventListener("resize", handleResize);
-//       handleResize(); // Call it initially to set the initial size
-
-//       return () => window.removeEventListener("resize", handleResize);
-//   }, []);
-
-//   return windowSize;
-// }
-
 export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
   const { snootyEnv } = useSiteMetadata();
   const { activeVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
-  const viewportSize = useViewportSize();
-  const { isTabletOrMobile, isDesktop } = useScreenSize();
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
-  // const windowSize = useWindowSize();
-  const isAccordion = isDesktop;
-  // const [isAccordion, setIsSidenavVisible] = useState(windowSize <= 1440);
-
-  // useEffect(() => {
-  //   // setIsSidenavVisible(isDesktop);
-  //   setIsSidenavVisible(windowSize <= 1440);
-  // }, [windowSize]);
 
   const tree = useMemo(() => {
     return updateURLs({
@@ -559,7 +210,6 @@ export function UnifiedSidenav({ slug, versionsData }) {
       return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
     });
   });
-  const sideNavSize = currentL1 ? 426 : 161;
 
   const [currentL2s, setCurrentL2s] = useState(() => {
     return currentL2List;
@@ -578,29 +228,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
 
-  const sidenavwidth = () => {
-    if (isTabletOrMobile) return viewportSize.width;
-    if (isAccordion) return 290;
-    return sideNavSize;
-  };
-  // console.log("the width is", sidenavwidth(), viewportSize.width);
-  const sidenavwidth2 = () => {
-    if (isTabletOrMobile) return viewportSize.width;
-    if (isAccordion) return 290;
-    return 161;
-  };
-
-  const whattoshow = showDriverBackBtn ? currentL2s.items : tree;
-
-  // const [navType, setNavType] = useState(isDesktop ? isDesktop : null);
-
-  // useEffect(() => {
-  //   // const mediaQuery = window.matchMedia('only screen and (max-width: 1440px)');
-  //   // setNavType(mediaQuery.matches ? 'accordion' : 'double-pane');
-  //   setNavType(isAccordion ? 'accordion' : 'double-pane');
-  // }, []);
-
-  // if (!navType) return null; // wait until layout is determined
+  const displayedItems = showDriverBackBtn ? currentL2s.items : tree;
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
@@ -611,96 +239,26 @@ export function UnifiedSidenav({ slug, versionsData }) {
         style={{ '--scroll-y': `${viewport.scrollY}px` }}
         id={SIDE_NAV_CONTAINER_ID}
       >
-        <SideNav
-          widthOverride={sidenavwidth()}
-          className={cx(sideNavStyle({ hideMobile }))}
-          aria-label="Side navigation Panel"
-        >
-          <div className={cx(NavTopContainer(isTabletOrMobile))}>
-            <ArtificialPadding />
-            <DocsHomeButton />
-          </div>
-          <div className={cx(panelStyling)}>
-            <div className={cx(leftPane(sidenavwidth2()))}>
-              {showDriverBackBtn && isAccordion && (
-                <BackLink
-                  className={cx(backLinkStyling)}
-                  onClick={() => {
-                    setShowDriverBackBtn(false);
-                  }}
-                  // TODO: make this link dymanic in DOP-5373
-                  href="/master/java/bianca.laube/DOP-5372/builders/index.html"
-                >
-                  Back to Client Libraries
-                </BackLink>
-              )}
-              {isAccordion
-                ? whattoshow.map((navItems) => {
-                    return (
-                      <UnifiedTocNavItem
-                        {...navItems}
-                        level={1}
-                        key={navItems.newUrl + navItems.label}
-                        group={true}
-                        isStatic={!showDriverBackBtn}
-                        slug={slug}
-                        currentL2s={currentL2s}
-                        isAccordion={isAccordion}
-                        setCurrentL1={setCurrentL1}
-                        setCurrentL2s={setCurrentL2s}
-                        setShowDriverBackBtn={setShowDriverBackBtn}
-                      />
-                    );
-                  })
-                : tree.map((staticTocItem) => {
-                    return (
-                      <StaticNavItem
-                        {...staticTocItem}
-                        slug={slug}
-                        key={staticTocItem.newUrl + staticTocItem.label}
-                        isStatic={true}
-                        setCurrentL1={setCurrentL1}
-                        setShowDriverBackBtn={setShowDriverBackBtn}
-                        isAccordion={isAccordion}
-                      />
-                    );
-                  })}
-            </div>
-            {currentL2s && !isAccordion && (
-              <div className={cx(rightPane)}>
-                {showDriverBackBtn && (
-                  <BackLink
-                    className={cx(backLinkStyling)}
-                    onClick={() => {
-                      setShowDriverBackBtn(false);
-                    }}
-                    // TODO: make this link dymanic in DOP-5373
-                    href="/master/java/bianca.laube/DOP-5372/builders/index.html"
-                  >
-                    Back to Client Libraries
-                  </BackLink>
-                )}
-                {currentL2s.items?.map((navItems) => {
-                  return (
-                    <UnifiedTocNavItem
-                      {...navItems}
-                      level={1}
-                      key={navItems.newUrl + navItems.label}
-                      slug={slug}
-                      isAccordion={isAccordion}
-                      setCurrentL2s={setCurrentL2s}
-                      setShowDriverBackBtn={setShowDriverBackBtn}
-                    />
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          <div className={cx(downloadButtonStlying)}>
-            <DownloadButton />
-          </div>
-        </SideNav>
+        <AccordionNavPanel
+          showDriverBackBtn={showDriverBackBtn}
+          setShowDriverBackBtn={setShowDriverBackBtn}
+          displayedItems={displayedItems}
+          slug={slug}
+          currentL2s={currentL2s}
+          setCurrentL1={setCurrentL1}
+          setCurrentL2s={setCurrentL2s}
+          hideMobile={hideMobile}
+        />
+        <DoublePannedNav
+          showDriverBackBtn={showDriverBackBtn}
+          setShowDriverBackBtn={setShowDriverBackBtn}
+          tree={tree}
+          slug={slug}
+          currentL2s={currentL2s}
+          setCurrentL1={setCurrentL1}
+          setCurrentL2s={setCurrentL2s}
+          currentL1={currentL1}
+        />
       </div>
     </>
   );
