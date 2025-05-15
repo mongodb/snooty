@@ -4,7 +4,6 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
 import { appendTrailingPunctuation } from '../utils/append-trailing-punctuation';
 import ComponentFactory from './ComponentFactory';
-import SharedButton from './SharedButton';
 
 const SKIP_P_TAGS = new Set(['caption', 'footnote', 'field']);
 
@@ -21,7 +20,6 @@ const Paragraph = ({ nodeData, parentNode, skipPTag, ...rest }) => {
   }
   return (
     <Body className={cx(paragraphStyling)}>
-      <SharedButton/>
       {children.map((element, index) => (
         <ComponentFactory {...rest} nodeData={element} key={index} />
       ))}
