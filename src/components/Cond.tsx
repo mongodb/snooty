@@ -1,27 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { getNestedValue } from '../utils/get-nested-value';
+import { Directive } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
 // For now, explicitly define the arguments that should be accepted for Gatsby to build the node
 const VALID_COND_ARGS = ['html', '(not man)', 'cloud'];
 
-const Cond = ({ nodeData, ...rest }) => {
+const Cond = ({ nodeData, ...rest }: { nodeData: Directive }) => {
   const argument = getNestedValue(['argument', 0, 'value'], nodeData);
   if (VALID_COND_ARGS.includes(argument)) {
     return nodeData.children.map((child, index) => <ComponentFactory {...rest} nodeData={child} key={index} />);
   }
   return null;
-};
-
-Cond.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string,
-      }).isRequired
-    ).isRequired,
-  }).isRequired,
 };
 
 export default Cond;

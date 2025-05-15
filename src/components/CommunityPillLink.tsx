@@ -1,10 +1,12 @@
 import React from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
-import PropTypes from 'prop-types';
 import Badge, { Variant } from '@leafygreen-ui/badge';
 import { getPlaintext } from '../utils/get-plaintext';
 import { theme } from '../theme/docsTheme';
+import { CommunityDriverPill } from '../types/ast';
 import Link from './Link';
+
+type CommunityPillSnootyVariant = 'darkGray' | 'lightGray' | 'red' | 'yellow' | 'blue' | 'green';
 
 const communityPillVariants = {
   darkGray: Variant.DarkGray,
@@ -21,7 +23,13 @@ const pillLinkStyle = css`
   }
 `;
 
-const CommunityPillLink = ({ nodeData, variant = 'lightGray', text = 'community built' }) => {
+type CommunityPillLinkProps = {
+  nodeData?: CommunityDriverPill;
+  variant?: CommunityPillSnootyVariant;
+  text?: string;
+};
+
+const CommunityPillLink = ({ nodeData, variant = 'lightGray', text = 'community built' }: CommunityPillLinkProps) => {
   const { argument, options: { url } = {} } = nodeData || {};
 
   return (
@@ -30,15 +38,6 @@ const CommunityPillLink = ({ nodeData, variant = 'lightGray', text = 'community 
       <Badge variant={communityPillVariants[variant]}>{text}</Badge>
     </div>
   );
-};
-
-CommunityPillLink.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-    options: PropTypes.shape({ url: PropTypes.string.isRequired }),
-  }),
-  variant: PropTypes.oneOf(Object.values(communityPillVariants)),
-  text: PropTypes.string,
 };
 
 export default CommunityPillLink;

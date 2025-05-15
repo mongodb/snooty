@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Callout, { Variant } from '@leafygreen-ui/callout';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { Theme } from '@leafygreen-ui/lib';
 import { palette } from '@leafygreen-ui/palette';
 import { getPlaintext } from '../utils/get-plaintext';
 import { theme } from '../theme/docsTheme';
+import { AdmonitionNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import { sharedDarkModeOverwriteStyles } from './Link';
 
@@ -15,6 +15,7 @@ export const admonitionMap = {
   note: Variant.Note,
   tip: Variant.Tip,
   see: Variant.Tip,
+  seealso: Variant.Tip,
   warning: Variant.Warning,
 };
 
@@ -67,7 +68,7 @@ const calloutColor = {
 };
 
 /* Overwritten to mitigate light mode flash for dark mode preferred users */
-const colorStyles = (variant) => {
+const colorStyles = (variant: Variant) => {
   const { headerText: lightHeaderText, bar: lightBar } = calloutColor[Theme.Light][variant];
   const { headerText: darkHeaderText, bar: darkBar } = calloutColor[Theme.Dark][variant];
 
@@ -114,7 +115,7 @@ const admonitionStyles = css`
   }
 `;
 
-const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
+const Admonition = ({ nodeData: { argument, children, name }, ...rest }: { nodeData: AdmonitionNode }) => {
   const variant = admonitionMap[name] || Variant.Note;
   let title = getPlaintext(argument);
   if (name === 'see') {
@@ -128,14 +129,6 @@ const Admonition = ({ nodeData: { argument, children, name }, ...rest }) => {
       ))}
     </Callout>
   );
-};
-
-Admonition.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object),
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default Admonition;

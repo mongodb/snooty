@@ -380,6 +380,15 @@ interface TocTreeDirective extends Directive<TocTreeOptions> {
   entries: TocTreeEntry[];
 }
 
+type CommunityDriverPillOptions = {
+  url: string;
+};
+
+interface CommunityDriverPill extends Directive<CommunityDriverPillOptions> {
+  name: 'community-driver';
+  options: CommunityDriverPillOptions;
+}
+
 interface ComposableTutorialOption {
   default: string;
   dependencies: Record<string, string>[];
@@ -437,6 +446,7 @@ export type {
   BlockQuoteNode,
   ButtonNode,
   CodeNode,
+  CommunityDriverPill,
   ComponentType,
   Directive,
   DirectiveOptions,
