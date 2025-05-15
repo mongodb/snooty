@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { ParentNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
-const LiteralBlock = ({ nodeData: { children }, ...rest }) => (
+const LiteralBlock = ({ nodeData: { children }, ...rest }: { nodeData: ParentNode }) => (
   <div className="highlight-default">
     <div className="highlight">
       <pre>
@@ -13,11 +13,5 @@ const LiteralBlock = ({ nodeData: { children }, ...rest }) => (
     </div>
   </div>
 );
-
-LiteralBlock.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
 
 export default LiteralBlock;

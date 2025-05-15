@@ -123,6 +123,7 @@ type NodeName =
   | AdmonitionName
   | 'blockquote'
   | 'collapsible'
+  | 'community-driver'
   | 'composable-tutorials'
   | 'contents'
   | 'deprecated'

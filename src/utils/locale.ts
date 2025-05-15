@@ -6,9 +6,11 @@ import { normalizePath } from './normalize-path';
 import { removeLeadingSlash } from './remove-leading-slash';
 import { setLocalValue } from './browser-storage';
 
-type AvailableLanguage = {
+export type AvailableLocaleType = 'en-us' | 'pt-br' | 'es' | 'ko-kr' | 'ja-jp' | 'it-it' | 'de-de' | 'fr-fr' | 'zh-cn';
+
+type AvailableLanguageData = {
   language: string;
-  localeCode: string;
+  localeCode: AvailableLocaleType;
   fontFamily?: string;
 };
 
@@ -24,7 +26,7 @@ export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
 // Update this as more languages are introduced
 // Because the client-side redirect script cannot use an import, PLEASE remember to update the list of supported languages
 // in redirect-based-on-lang.js
-const AVAILABLE_LANGUAGES: AvailableLanguage[] = [
+const AVAILABLE_LANGUAGES: AvailableLanguageData[] = [
   { language: 'English', localeCode: 'en-us' },
   { language: '简体中文', localeCode: 'zh-cn', fontFamily: 'Noto Sans SC' },
   { language: '한국어', localeCode: 'ko-kr', fontFamily: 'Noto Sans KR' },
@@ -33,7 +35,7 @@ const AVAILABLE_LANGUAGES: AvailableLanguage[] = [
 ];
 
 // Languages in current development that we do not want displayed publicly yet
-const HIDDEN_LANGUAGES: AvailableLanguage[] = [];
+const HIDDEN_LANGUAGES: AvailableLanguageData[] = [];
 
 /**
  * @param {boolean} forceAll - Bypasses feature flag requirements if necessary

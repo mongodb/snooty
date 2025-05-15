@@ -1,11 +1,11 @@
 import React, { lazy } from 'react';
-import PropTypes from 'prop-types';
 import { Skeleton } from '@leafygreen-ui/skeleton-loader';
 import { palette } from '@leafygreen-ui/palette';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { theme } from '../theme/docsTheme';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { PageTemplateType } from '../context/page-context';
 import { SuspenseHelper } from './SuspenseHelper';
 
 export const defaultSuggestedPrompts = [
@@ -108,6 +108,11 @@ const errorPageTemplateStyling = css`
   }
 `;
 
+type ChatbotTemplateStylingTypes = 'errorpage' | 'landing';
+function isChatbotTemplateStylingType(template: PageTemplateType): template is ChatbotTemplateStylingTypes {
+  return ['errorpage', 'landing'].includes(template);
+}
+
 const templateStylingMap = {
   errorpage: errorPageTemplateStyling,
   landing: landingTemplateStyling,
@@ -121,7 +126,8 @@ const StyledChatBotUiContainer = styled.div`
   min-height: 96px;
   align-items: center;
 
-  ${({ template }) => template in templateStylingMap && templateStylingMap[template]};
+  ${({ template }: { template: PageTemplateType }) =>
+    isChatbotTemplateStylingType(template) && templateStylingMap[template]};
 `;
 
 const DocsChatbot = lazy(() =>
@@ -132,7 +138,7 @@ const DocsChatbot = lazy(() =>
 
 const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 
-const ChatbotUi = ({ template, darkMode }) => {
+const ChatbotUi = ({ template, darkMode = false }: { template: PageTemplateType; darkMode?: boolean }) => {
   const { snootyEnv } = useSiteMetadata();
 
   const CHATBOT_SERVER_BASE_URL =
@@ -150,14 +156,6 @@ const ChatbotUi = ({ template, darkMode }) => {
       </SuspenseHelper>
     </StyledChatBotUiContainer>
   );
-};
-
-ChatbotUi.defaultProps = {
-  darkMode: false,
-};
-
-ChatbotUi.prototype = {
-  darkMode: PropTypes.bool,
 };
 
 export default ChatbotUi;

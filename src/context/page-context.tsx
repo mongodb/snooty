@@ -1,9 +1,21 @@
 import { createContext, useContext } from 'react';
 import { Root } from '../types/ast';
 
+export type PageTemplateType =
+  | 'blank'
+  | 'drivers-index'
+  | 'errorpage'
+  | 'feature-not-avail'
+  | 'instruqt'
+  | 'landing'
+  | 'openapi'
+  | 'changelog'
+  | 'search'
+  | 'product-landing';
+
 interface PageContextType {
   page: Root | null;
-  template: string | null;
+  template: PageTemplateType | null;
   slug: string;
   tabsMainColumn: boolean | null;
   options: {} | null;
