@@ -6,7 +6,6 @@ import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
 import DocsHomeButton from '../Sidenav/DocsHomeButton';
 import { DownloadButton } from '../OfflineDownloadModal';
-import { backLinkStyling } from './styles/SideNavItem';
 import { NavTopContainer, downloadButtonStlying, ArtificialPadding } from './UnifiedSidenav';
 import { StaticNavItem, UnifiedTocNavItem } from './UnifiedTocNavItems';
 
@@ -23,6 +22,16 @@ export const rightPane = LeafyCSS`
   overflow-y: auto;
   border-right: 1px solid var(--sidenav-border-bottom-color);
   padding-top: ${theme.size.default};
+`;
+
+const backLinkStyling = LeafyCSS`
+  padding-left: ${theme.size.default};
+  padding-top: ${theme.size.small};
+  font-size: ${theme.fontSize.small};
+
+  :hover {
+    text-decoration: none;
+  }
 `;
 
 const sideNavStyle = LeafyCSS`  

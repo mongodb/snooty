@@ -10,17 +10,6 @@ export const sideNavItemBasePadding = css`
   }
 `;
 
-export const backLinkStyling = css`
-  ${sideNavItemBasePadding}
-  padding-left: ${theme.size.default};
-  padding-top: ${theme.size.small};
-  font-size: ${theme.fontSize.small};
-
-  :hover {
-    text-decoration: none;
-  }
-`;
-
 export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; isAccordion: boolean }) => css`
   ${sideNavItemBasePadding}
   padding-left: ${theme.size.medium};

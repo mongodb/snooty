@@ -8,7 +8,6 @@ import useScreenSize from '../../hooks/useScreenSize';
 import DocsHomeButton from '../Sidenav/DocsHomeButton';
 import { DownloadButton } from '../OfflineDownloadModal';
 import { NavTopContainer, downloadButtonStlying, ArtificialPadding } from './UnifiedSidenav';
-import { backLinkStyling } from './styles/SideNavItem';
 import { UnifiedTocNavItem } from './UnifiedTocNavItems';
 
 export const leftPane = () => LeafyCSS`
@@ -55,6 +54,16 @@ const sideNavStyle = ({ hideMobile }) => LeafyCSS`
     button[data-testid="side-nav-collapse-toggle"] {
       display: none;
     }
+  }
+`;
+
+const backLinkStyling = LeafyCSS`
+  padding-left: ${theme.size.medium};
+  padding-top: ${theme.size.default};
+  font-size: ${theme.fontSize.small};
+
+  :hover {
+    text-decoration: none;
   }
 `;
 
