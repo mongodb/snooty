@@ -5,6 +5,7 @@
 
 import { createContext, ReactNode } from 'react';
 import { getImage } from 'gatsby-plugin-image';
+// @ts-ignore
 import type { GatsbyImageData } from 'gatsby-plugin-image';
 
 interface ImageContextType {

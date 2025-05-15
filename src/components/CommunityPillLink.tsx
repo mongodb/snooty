@@ -30,11 +30,11 @@ type CommunityPillLinkProps = {
 };
 
 const CommunityPillLink = ({ nodeData, variant = 'lightGray', text = 'community built' }: CommunityPillLinkProps) => {
-  const { argument, options: { url } = {} } = nodeData || {};
-
   return (
     <div className={cx(pillLinkStyle)}>
-      {nodeData && argument && url && <Link to={url}>{getPlaintext(argument)}</Link>}
+      {nodeData && nodeData.argument && nodeData.options.url && (
+        <Link to={nodeData.options.url}>{getPlaintext(nodeData.argument)}</Link>
+      )}
       <Badge variant={communityPillVariants[variant]}>{text}</Badge>
     </div>
   );
