@@ -1,5 +1,5 @@
 const babelOptions = {
-  presets: ['babel-preset-gatsby', '@emotion/babel-preset-css-prop'],
+  presets: ['babel-preset-gatsby', '@babel/preset-typescript', '@emotion/babel-preset-css-prop'],
   plugins: ['@emotion'],
 };
 
