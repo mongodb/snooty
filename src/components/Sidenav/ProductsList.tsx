@@ -70,7 +70,8 @@ const ProductsListHeading = styled('div')`
 
   align-items: center;
   background-color: var(--sidenav-bg-color);
-  color: ${({ open }) => (open ? 'var(--all-products-color-open)' : 'var(--all-products-color-closed)')};
+  color: ${({ open }: { open: boolean }) =>
+    open ? 'var(--all-products-color-open)' : 'var(--all-products-color-closed)'};
   cursor: pointer;
   display: flex;
   padding: ${theme.size.default} ${theme.size.medium} 12px;
@@ -113,7 +114,7 @@ const ProductLink = styled(Link)`
   }
 `;
 
-const iconStyle = ({ isOpen }) => LeafyCSS`
+const iconStyle = ({ isOpen }: { isOpen: boolean }) => LeafyCSS`
   height: 12px;
   width: 12px;
 
@@ -123,7 +124,7 @@ const iconStyle = ({ isOpen }) => LeafyCSS`
 
 const ProductsList = () => {
   const products = useAllProducts();
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
     <>

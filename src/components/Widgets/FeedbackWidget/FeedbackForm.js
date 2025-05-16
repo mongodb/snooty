@@ -7,7 +7,7 @@ import { useFeedbackContext } from './context';
 import FeedbackCard from './FeedbackCard';
 import RatingView from './views/RatingView';
 import SubmittedView from './views/SubmittedView';
-const CommentView = Loadable(() => import('../FeedbackWidget/views/CommentView'));
+const CommentView = Loadable(() => import('./views/CommentView'));
 
 export const FeedbackContent = ({ view }) => {
   const View = {
