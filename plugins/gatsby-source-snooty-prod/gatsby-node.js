@@ -284,7 +284,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   if (process.env.USE_FILTER_BRANCH === 'true') {
-    const { code } = await swc.transformFile(`${process.cwd()}/src/components/ComponentFactory.js`, {
+    const { code } = await swc.transformFile(`${process.cwd()}/src/components/ComponentFactory.tsx`, {
       jsc: {
         transform: {
           react: {
@@ -307,7 +307,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     console.log(code);
 
     if (process.env.FILTER_DRY_RUN !== 'true')
-      await fs.writeFile(`${process.cwd()}/src/components/ComponentFactory.js`, code);
+      await fs.writeFile(`${process.cwd()}/src/components/ComponentFactory.tsx`, code);
   }
 
   // DOP-4214: for each page, query the directive/node types

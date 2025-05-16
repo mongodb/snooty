@@ -6,7 +6,7 @@ import { theme } from '../../theme/docsTheme';
 import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-data.js';
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
+import { useSiteMetadata } from '../../hooks/use-site-metadata.tsx';
 import BreadcrumbContainer from './BreadcrumbContainer';
 
 const breadcrumbBodyStyle = css`

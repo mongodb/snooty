@@ -1,27 +1,151 @@
+// Need to figure out which is node type and which is component type
+type ComponentType =
+  | Exclude<NodeType, 'block-quote' | 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
+  | 'banner'
+  | 'blockquote'
+  | 'button'
+  | 'card'
+  | 'card-group'
+  | 'chapter'
+  | 'chapters'
+  | 'code'
+  | 'collapsible'
+  | 'community-driver'
+  | 'io-code-block'
+  | 'composable-tutorial'
+  | 'cond'
+  | 'container'
+  | 'cta'
+  | 'cta-banner'
+  | 'definitionList'
+  | 'definitionListItem'
+  | 'deprecated'
+  | 'deprecated-version-selector'
+  | 'describe'
+  | 'emphasis'
+  | 'extract'
+  | 'field'
+  | 'field_list'
+  | 'figure'
+  | 'footnote'
+  | 'footnote_reference'
+  | 'glossary'
+  | 'guide-next'
+  | 'heading'
+  | 'hlist'
+  | 'image'
+  | 'include'
+  | 'introduction'
+  | 'kicker'
+  | 'line'
+  | 'line_block'
+  | 'literal_block';
+
 type NodeType =
+  | 'admonition'
+  | 'banner'
+  | 'block-quote'
+  | 'code'
   | 'root'
   | 'section'
   | 'heading'
   | 'reference'
   | 'directive'
+  | 'directive_argument'
+  | 'line'
+  | 'line_block'
   | 'list'
   | 'list-table'
   | 'listItem'
   | 'text'
   | 'literal'
+  | 'literalinclude'
   | 'definitionList'
   | 'definitionListItem'
+  | 'emphasis'
+  | 'method-selector'
+  | 'only'
+  | 'openapi-changelog'
+  | 'paragraph'
+  | 'procedure'
+  | 'reference'
+  | 'ref_role'
+  | 'role'
+  | 'release_specification'
+  | 'rubric'
+  | 'search-results'
+  | 'section'
+  | 'seealso'
+  | 'sharedinclude'
+  | 'strong'
+  | 'substitution_reference'
+  | 'tabs-selector'
+  | 'time'
+  | 'title_reference'
+  | 'transition'
+  | 'versionadded'
+  | 'versionchanged'
+  | 'tabs'
   | 'target'
   | 'target_identifier'
-  | 'directive_argument'
-  | 'code';
+  | 'text'
+  | 'wayfinding';
+
+type RoleName =
+  | 'abbr'
+  | 'class'
+  | 'command'
+  | 'file'
+  | 'guilabel'
+  | 'icon'
+  | 'highlight-blue'
+  | 'highlight-green'
+  | 'highlight-red'
+  | 'highlight-yellow'
+  | 'icon-fa5'
+  | 'icon-fa5-brands'
+  | 'icon-fa4'
+  | 'icon-mms'
+  | 'icon-charts'
+  | 'icon-lg'
+  | 'kbd'
+  | 'red'
+  | 'gold'
+  | 'required'
+  | 'sub'
+  | 'subscript'
+  | 'sup'
+  | 'superscript'
+  | 'link-new-tab';
+
+type NodeName =
+  | RoleName
+  | AdmonitionName
+  | 'blockquote'
+  | 'collapsible'
+  | 'community-driver'
+  | 'composable-tutorials'
+  | 'contents'
+  | 'deprecated'
+  | 'input'
+  | 'io-code-block'
+  | 'facet'
+  | 'list-table'
+  | 'meta'
+  | 'output'
+  | 'selected-content'
+  | 'tabs'
+  | 'tab'
+  | 'toctree'
+  | 'versionadded'
+  | 'versionchanged';
 
 type DirectiveOptions = {
   [key: string]: string;
 };
 
 interface Node {
-  type: NodeType | string;
+  type: NodeType;
 }
 
 interface ParentNode extends Node {
@@ -66,10 +190,22 @@ interface ReferenceNode extends ParentNode {
 
 interface Directive<TOptions = DirectiveOptions> extends ParentNode {
   type: 'directive';
-  name: string;
+  name: NodeName;
   argument: Node[];
   domain?: string;
   options?: TOptions;
+}
+
+interface BlockQuoteNode extends Directive {
+  name: 'blockquote';
+}
+
+type ButtonOptions = {
+  uri: string;
+};
+
+interface ButtonNode extends Directive<ButtonOptions> {
+  options: ButtonOptions;
 }
 
 interface ListTableNode extends Directive {
@@ -124,6 +260,37 @@ interface CodeNode extends Node {
   emphasize_lines: number[];
   value: string;
   linenos: boolean;
+  caption?: string;
+  source?: string;
+  lineno_start?: number;
+}
+
+type IOCodeBlockOptions = {
+  copyable: boolean;
+};
+
+interface IOCodeBlockNode extends Directive<IOCodeBlockOptions> {
+  name: 'io-code-block';
+  children: [IOInputNode] | [IOInputNode, IOOutputNode];
+  options: IOCodeBlockOptions;
+}
+
+type InputOutputOptions = {
+  language: string;
+  linenos: boolean;
+  visible?: boolean;
+};
+
+interface IOInputNode extends Directive<InputOutputOptions> {
+  name: 'input';
+  children: CodeNode[];
+  options: InputOutputOptions;
+}
+
+interface IOOutputNode extends Directive<InputOutputOptions> {
+  name: 'output';
+  children: CodeNode[];
+  options: InputOutputOptions;
 }
 
 interface MethodNode extends ParentNode {
@@ -214,6 +381,15 @@ interface TocTreeDirective extends Directive<TocTreeOptions> {
   entries: TocTreeEntry[];
 }
 
+type CommunityDriverPillOptions = {
+  url: string;
+};
+
+interface CommunityDriverPill extends Directive<CommunityDriverPillOptions> {
+  name: 'community-driver';
+  options: CommunityDriverPillOptions;
+}
+
 interface ComposableTutorialOption {
   default: string;
   dependencies: Record<string, string>[];
@@ -245,18 +421,39 @@ interface MetaNode extends Directive {
   name: 'meta';
 }
 
+interface TitleReferenceNode {
+  children: TextNode[];
+}
+
+type TwitterOptions = {
+  creator?: string;
+  image?: string;
+  'image-alt'?: string;
+  site?: string;
+  title?: string;
+};
+
+interface TwitterNode extends Directive<TwitterOptions> {
+  options: TwitterOptions;
+}
+
 export type {
-  NodeType,
-  Node,
   ParentNode,
   Root,
   HeadingNode,
   HeadingNodeSelectorIds,
   ReferenceNode,
   TextNode,
+  BlockQuoteNode,
+  ButtonNode,
   CodeNode,
+  CommunityDriverPill,
+  ComponentType,
   Directive,
   DirectiveOptions,
+  IOCodeBlockNode,
+  IOInputNode,
+  IOOutputNode,
   ListNode,
   ListTableNode,
   ListItemNode,
@@ -264,6 +461,10 @@ export type {
   LiteralNode,
   LineBlockNode,
   LineNode,
+  Node,
+  NodeName,
+  NodeType,
+  RoleName,
   DefinitionListNode,
   DefinitionListItemNode,
   MethodNode,
@@ -276,6 +477,8 @@ export type {
   StrongNode,
   TabsNode,
   TabNode,
+  TitleReferenceNode,
+  TwitterNode,
   FacetNode,
   AdmonitionNode,
   AdmonitionName,

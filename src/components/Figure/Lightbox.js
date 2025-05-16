@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import Image from '../Image';
-import { theme } from '../../theme/docsTheme.js';
+import { theme } from '../../theme/docsTheme.ts';
 import CaptionLegend from './CaptionLegend';
 
 const CAPTION_TEXT = 'click to enlarge';
