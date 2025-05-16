@@ -99,7 +99,7 @@ const Link = ({
   prefix,
   ...other
 }) => {
-  const { snootyEnv, pathPrefix, project } = useSiteMetadata();
+  const { pathPrefix, project } = useSiteMetadata();
 
   if (!to) to = '';
   const anchor = to.startsWith('#');
@@ -144,9 +144,8 @@ const Link = ({
     }
 
     // On the Unified SideNav but linking to a different site
-    const href = snootyEnv === 'development' ? `${prefix + to}index.html` : `${prefix + to}`;
     return (
-      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={href}>
+      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={to}>
         {children}
         {decoration}
       </a>
