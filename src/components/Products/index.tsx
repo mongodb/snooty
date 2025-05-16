@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
+import { ParentNode } from '../../types/ast';
 
 const StyledSectionContainer = styled.section`
   display: grid;
@@ -10,7 +10,7 @@ const StyledSectionContainer = styled.section`
   margin-top: 60px;
 `;
 
-const Products = ({ nodeData: { children } }) => {
+const Products = ({ nodeData: { children } }: { nodeData: ParentNode }) => {
   return (
     <StyledSectionContainer>
       {children.map((child, i) => (
@@ -18,12 +18,6 @@ const Products = ({ nodeData: { children } }) => {
       ))}
     </StyledSectionContainer>
   );
-};
-
-Products.prototype = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
 };
 
 export default Products;
