@@ -18,7 +18,7 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   border-bottom: 1px solid #E8EDEB;
   padding-bottom: 24px;
   padding-top: 8px;
-  z-index: 799;
+  z-index: 2;
 }
 
 @media only screen and (max-width: 767px) {
@@ -497,7 +497,11 @@ exports[`Composable Tutorial component prioritizes query params over local stora
       </button>
     </div>
   </div>
-  .emotion-0 {
+  .emotion-0>*:first-child {
+  margin-top: 24px;
+}
+
+.emotion-1 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -509,21 +513,25 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   color: var(--font-color-primary);
 }
 
-.emotion-0 strong,
-.emotion-0 b {
+.emotion-1 strong,
+.emotion-1 b {
   font-weight: 700;
 }
 
 <div>
-    <p
+    <div
       class="emotion-0"
     >
-      This content will only be shown when the selections are as follows:
+      <p
+        class="emotion-1"
+      >
+        This content will only be shown when the selections are as follows:
 * Interface - Drivers
 * Language - C
 * Deployment Type - atlas
 * Operator (custom snooty.toml) - queryString
-    </p>
+      </p>
+    </div>
   </div>
 </DocumentFragment>
 `;
