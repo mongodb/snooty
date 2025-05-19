@@ -55,6 +55,9 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const { tabsMainColumn } = usePageContext();
   const hasMethodSelector = pageOptions?.has_method_selector;
   const activeTutorial = useActiveMpTutorial();
+  const dismissibleSkillsCard = pageOptions?.dismissible_skills_card;
+
+  console.log('in document ', dismissibleSkillsCard, pageOptions);
 
   return (
     <DocumentContainer>
@@ -72,7 +75,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       <StyledRightColumn>
         {isAssociatedProduct && <AssociatedVersionSelector />}
         {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
-        <Contents slug={slug} />
+        <Contents slug={slug} dismissibleSkillsCard={dismissibleSkillsCard} />
       </StyledRightColumn>
     </DocumentContainer>
   );

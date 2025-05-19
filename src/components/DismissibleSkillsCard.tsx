@@ -2,19 +2,15 @@ import Card from '@leafygreen-ui/card';
 import { Body, Link, Subtitle } from '@leafygreen-ui/typography';
 import Box from '@leafygreen-ui/box';
 
-import { DismissibleSkillsCardNode } from '../types/ast';
+import { css, cx } from '@leafygreen-ui/emotion';
 import CloseButton from './Widgets/FeedbackWidget/components/CloseButton';
 import SkillsBadgeIcon from './SVGs/SkillsBadgeIcon';
 
-const DismissibleSkillsCard = ({
-  nodeData: {
-    options: { skill, url },
-  },
-}: {
-  nodeData: DismissibleSkillsCardNode;
-}) => {
+const cardStyles = css``;
+
+const DismissibleSkillsCard = ({ skill, url }: { skill: string; url: string }) => {
   return (
-    <Card>
+    <Card className={cx(cardStyles)}>
       <Box>
         <SkillsBadgeIcon />
         <Subtitle>Earn a Skill Badge</Subtitle>
