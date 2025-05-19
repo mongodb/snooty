@@ -80,6 +80,21 @@ GATSBY_MANIFEST_PATH=/path/to/zipped/ast/file.zip
 GATSBY_SNOOTY_DEV=true
 ```
 
+### Mocking other locales
+
+Smartling is only configured for our pre-production and production environments. To mock other locales locally,
+set the following in `.env` files:
+
+```
+GATSBY_LOCALE=zh-cn
+COMMIT_HASH=zh-cn
+```
+
+- `GATSBY_LOCALE` is used to change the `html` element's `lang` property to any locale. This can be useful for mocking the `lang`
+  property set by Smartling, and for constructing CSS selectors targetting specific languages.
+- `COMMIT_HASH` can be used to prepend its value to the path prefix of the site when building and serving. This can be useful for mocking the `/<local-code>/<path>` pathnames for docs pages, and for testing out
+  locale-related logic for pathnames.
+
 ## Staging
 
 Install libxml2 with `brew install libxml2` on mac and `apt-get install libxml2` on linux
