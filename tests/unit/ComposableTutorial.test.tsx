@@ -13,7 +13,7 @@ const renderComposable = () => render(<ComposableTutorial nodeData={ComposableDa
 // mock local storage, location (query params), and navigate fn
 const mockedGetLocalValue = jest.spyOn(BrowserStorage, 'getLocalValue');
 const mockedNavigate = jest.spyOn(Gatsby, 'navigate');
-const mockedUseLocation = jest.spyOn(ReachRouter, 'useLocation');
+const mockedUseLocation = jest.spyOn(ReachRouter, 'useLocation') as jest.SpyInstance<Partial<Location>>;
 
 describe('Composable Tutorial component', () => {
   beforeEach(() => {
@@ -54,7 +54,7 @@ describe('Composable Tutorial component', () => {
     mockedUseLocation.mockReturnValueOnce({
       pathname: 'test-pathname',
       search: '?deployment-type=atlas&interface=driver&language=c&operator=queryString',
-    } as never);
+    });
 
     // wait for render
     const wrapper = renderComposable();
