@@ -15,6 +15,7 @@ const RightColumn = ({ children, className }) => {
         margin: 70px ${theme.size.medium} 40px 5px;
         min-width: 180px;
         max-width: 250px;
+        z-index: ${theme.zIndexes.content + 2};
 
         ${displayNone.onMobileAndTablet};
       `}
