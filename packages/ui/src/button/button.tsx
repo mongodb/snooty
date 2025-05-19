@@ -3,7 +3,7 @@ import React from 'react';
 import LeafyButton, { type Size, type Variant } from '@leafygreen-ui/button';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { BaseFontSize } from '@leafygreen-ui/tokens';
-import { ButtonNode } from './types/ast';
+import { ButtonNode } from '../../types/ast';
 
 type ButtonProps = {
   nodeData: ButtonNode;
@@ -59,6 +59,7 @@ const Button = ({
       as={linkProps.as ? linkProps.as : undefined}
       href={linkProps.href ? linkProps.href : undefined}
     >
+      {'this is a button'}
       {children}
     </LeafyButton>
   );

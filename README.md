@@ -35,4 +35,4 @@ See README under Gatsby framework directory for requirements.
 
 ### Build the NextJS app
 See README under Gatsby framework directory for requirements.
-`yarn workspace @snooty/gatsby build`
+`yarn workspace @snooty/next build`

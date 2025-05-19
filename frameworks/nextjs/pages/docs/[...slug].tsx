@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
+// note: lets change this to SSR
 export const getStaticPaths: GetStaticPaths = async () => {
   const { loadBsonFromZip } = await import('../../data/loadBsonData'); // dynamic import = server-only
   console.log('getstaticpaths');
@@ -14,7 +15,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return res;
   }, []);
   console.log('check paths');
-  console.log(paths);
+  console.log(JSON.stringify(paths));
 
   return {
     paths,
@@ -29,7 +30,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const slugPath = (params?.slug as string[]).join('/');
   const doc = data.find((d) => d.page_id === slugPath);
-  console.log('check doc', doc)
+  // console.log('check doc', doc)
 
   return {
     props: { doc },
