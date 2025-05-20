@@ -75,7 +75,7 @@ describe('Composable Tutorial component', () => {
     mockedUseLocation.mockReturnValueOnce({
       pathname: 'test-pathname',
       search: '?deployment-type=atlas&interface=atlas-admin-api&language=c&operator=queryString',
-    } as never);
+    });
 
     renderComposable();
 
