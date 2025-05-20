@@ -57,8 +57,6 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
   const activeTutorial = useActiveMpTutorial();
   const dismissibleSkillsCard = pageOptions?.dismissible_skills_card;
 
-  console.log('in document ', dismissibleSkillsCard, pageOptions);
-
   return (
     <DocumentContainer>
       <StyledMainColumn>

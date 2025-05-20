@@ -8,6 +8,7 @@ import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang
 import { OFFLINE_HEAD_SCRIPTS } from './src/utils/head-scripts/offline-ui';
 import { isOfflineDocsBuild } from './src/utils/is-offline-docs-build';
 import { getHtmlLangFormat } from './src/utils/locale';
+import { DISMISSIBLE_SKILLS_CARD_SHOWN } from './src/components/DismissibleSkillsCard';
 
 export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
   if (isOfflineDocsBuild) {
@@ -48,6 +49,25 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
       rel="stylesheet"
     ></link>,
+    // Dismissible Skills Card - read from session storage
+    <script
+      key="dark-mode"
+      dangerouslySetInnerHTML={{
+        __html: `
+            !function () {
+              try {
+                var d = document.documentElement.classList;
+                var e = JSON.parse(sessionStorage.getItem("mongodb-docs"))?.["${DISMISSIBLE_SKILLS_CARD_SHOWN}"];
+                if (e) {
+                  d.add("${DISMISSIBLE_SKILLS_CARD_SHOWN}")
+                }
+              } catch (e) {
+                console.error(e);
+              }
+            }();
+          `,
+      }}
+    />,
   ];
 
   if (process.env['GATSBY_ENABLE_DARK_MODE'] === 'true') {
