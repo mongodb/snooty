@@ -30,15 +30,15 @@ const getDatabase = (env) => {
 const getReposDatabase = (env) => {
   switch (env) {
     case 'staging':
-      return 'pool_test';
+      return 'pool';
     case 'production':
       return 'pool';
     case 'dotcomstg':
-      return 'pool_test';
+      return 'pool';
     case 'dotcomprd':
       return 'pool';
     default:
-      return 'pool_test';
+      return 'pool';
   }
 };
 
