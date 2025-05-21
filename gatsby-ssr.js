@@ -59,7 +59,7 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
                 var d = document.documentElement.classList;
                 var e = JSON.parse(sessionStorage.getItem("mongodb-docs"))?.["${DISMISSIBLE_SKILLS_CARD_SHOWN}"];
                 if (e) {
-                  d.add("${DISMISSIBLE_SKILLS_CARD_SHOWN}")
+                  Object.keys(e).forEach((s) => d.add(s));
                 }
               } catch (e) {
                 console.error(e);

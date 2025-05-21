@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import Card from '@leafygreen-ui/card';
 import { Body, Link, Subtitle } from '@leafygreen-ui/typography';
 import Box from '@leafygreen-ui/box';
 import { css, cx } from '@leafygreen-ui/emotion';
 
 import { palette } from '@leafygreen-ui/palette';
+import { isObject } from 'lodash';
 import { displayNone } from '../utils/display-none';
 import { getSessionValue, setSessionValue } from '../utils/browser-storage';
 import { isBrowser } from '../utils/is-browser';
@@ -49,28 +50,41 @@ const hrStyles = css`
   border-color: ${palette.gray.light2};
 `;
 
-const DismissibleSkillsCard = ({ skill, url }: { skill: string; url: string }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
-
-  useEffect(() => {
-    const hasBeenShown = getSessionValue(DISMISSIBLE_SKILLS_CARD_SHOWN);
-    if (hasBeenShown) setIsOpen(false);
-  }, []);
+const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: string; slug: string }) => {
+  const shownClassname = useMemo(() => `${slug.split('/').join('-')}-${DISMISSIBLE_SKILLS_CARD_SHOWN}`, [slug]);
 
   const onClose = () => {
-    setIsOpen(false);
-
     if (isBrowser) {
+      // Add to document classnames
       const docClassList = window.document.documentElement.classList;
-      docClassList.add(DISMISSIBLE_SKILLS_CARD_SHOWN);
-      setSessionValue(DISMISSIBLE_SKILLS_CARD_SHOWN, true);
+      docClassList.add(shownClassname);
+
+      // Add to session storage
+      const sessionValue = getSessionValue(DISMISSIBLE_SKILLS_CARD_SHOWN);
+      let shownDismissibleCards: { [k: string]: boolean } = {};
+      if (sessionValue && isObject(sessionValue)) {
+        shownDismissibleCards = {
+          ...sessionValue,
+        };
+      }
+      shownDismissibleCards[shownClassname] = true;
+
+      setSessionValue(DISMISSIBLE_SKILLS_CARD_SHOWN, shownDismissibleCards);
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <Box className={cx(DISMISSIBLE_SKILLS_CARD_CLASSNAME, containerStyles)}>
+    <Box
+      className={cx(
+        DISMISSIBLE_SKILLS_CARD_CLASSNAME,
+        containerStyles,
+        css`
+          .${shownClassname} & {
+            display: none;
+          }
+        `
+      )}
+    >
       <Card className={cx(cardStyles)}>
         <Box className={cx(titleStyles)}>
           <SkillsBadgeIcon />
@@ -78,7 +92,7 @@ const DismissibleSkillsCard = ({ skill, url }: { skill: string; url: string }) =
         </Box>
         <CloseButton onClick={onClose} />
         <Body color={palette.gray.dark1}>Master "{skill}" for free!</Body>
-        <Link arrowAppearance={'persist'} baseFontSize={13}>
+        <Link arrowAppearance={'persist'} baseFontSize={13} href={url} hideExternalIcon>
           Learn more
         </Link>
       </Card>

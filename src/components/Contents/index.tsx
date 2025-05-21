@@ -112,7 +112,7 @@ const Contents = ({
       {!isTabletOrMobile && (
         <>
           {!!dismissibleSkillsCard && (
-            <DismissibleSkillsCard skill={dismissibleSkillsCard.skill} url={dismissibleSkillsCard.url} />
+            <DismissibleSkillsCard skill={dismissibleSkillsCard.skill} url={dismissibleSkillsCard.url} slug={slug} />
           )}
           {!DEPRECATED_PROJECTS.includes(metadata.project) && (
             <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />

@@ -6,7 +6,7 @@ import { displayNone } from '../utils/display-none';
 import { theme } from '../theme/docsTheme';
 import { DISMISSIBLE_SKILLS_CARD_CLASSNAME } from './DismissibleSkillsCard';
 
-const RightColumn = ({ children, className }) => {
+const RightColumn = ({ children, className, hasDismissibleSkillsCard }) => {
   const { topLarge } = useStickyTopValues();
 
   return (
@@ -14,8 +14,7 @@ const RightColumn = ({ children, className }) => {
       className={className}
       css={css`
         margin: 70px ${theme.size.medium} 40px 5px;
-        // min-width: 180px;
-        min-width: 224px;
+        min-width: ${hasDismissibleSkillsCard ? '250px' : '180px'};
         max-width: 250px;
 
         ${displayNone.onMobileAndTablet};

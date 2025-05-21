@@ -70,7 +70,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
           )}
         </div>
       </StyledMainColumn>
-      <StyledRightColumn>
+      <StyledRightColumn hasDismissibleSkillsCard={!!dismissibleSkillsCard}>
         {isAssociatedProduct && <AssociatedVersionSelector />}
         {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
         <Contents slug={slug} dismissibleSkillsCard={dismissibleSkillsCard} />
