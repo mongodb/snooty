@@ -22,10 +22,6 @@ const containerStyles = css`
   margin-bottom: 12px;
 
   ${displayNone.onMobileAndTablet};
-
-  .${DISMISSIBLE_SKILLS_CARD_SHOWN} & {
-    display: none;
-  }
 `;
 
 const cardStyles = css`
@@ -61,13 +57,10 @@ const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: strin
 
       // Add to session storage
       const sessionValue = getSessionValue(DISMISSIBLE_SKILLS_CARD_SHOWN);
-      let shownDismissibleCards: { [k: string]: boolean } = {};
-      if (sessionValue && isObject(sessionValue)) {
-        shownDismissibleCards = {
-          ...sessionValue,
-        };
-      }
-      shownDismissibleCards[shownClassname] = true;
+      const shownDismissibleCards: { [k: string]: boolean } = {
+        ...(sessionValue && isObject(sessionValue) ? sessionValue : {}),
+        [shownClassname]: true,
+      };
 
       setSessionValue(DISMISSIBLE_SKILLS_CARD_SHOWN, shownDismissibleCards);
     }
@@ -91,7 +84,7 @@ const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: strin
           <Subtitle>Earn a Skill Badge</Subtitle>
         </Box>
         <CloseButton onClick={onClose} />
-        <Body color={palette.gray.dark1}>Master "{skill}" for free!</Body>
+        <Body>Master "{skill}" for free!</Body>
         <Link arrowAppearance={'persist'} baseFontSize={13} href={url} hideExternalIcon>
           Learn more
         </Link>
