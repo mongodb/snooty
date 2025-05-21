@@ -1,8 +1,7 @@
 import React from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
-import IconButton from '@leafygreen-ui/icon-button';
-import { palette } from '@leafygreen-ui/palette';
+import IconButton, { Size } from '@leafygreen-ui/icon-button';
 import { theme } from '../../../../theme/docsTheme';
 import { CLOSE_BUTTON_ALT_TEXT } from '../constants';
 
@@ -21,12 +20,12 @@ const buttonStyles = css`
 
 const CloseButton = ({
   onClick,
-  size = 'default',
+  size = Size.Default,
   className,
   ...props
 }: {
   onClick: () => void;
-  size?: string;
+  size?: Size;
   className?: string;
 }) => {
   return (
@@ -35,7 +34,6 @@ const CloseButton = ({
       className={cx(buttonStyles, className)}
       onClick={onClick}
       size={size}
-      fill={palette.gray.light1}
       {...props}
     >
       <Icon size={size} glyph="X" />
