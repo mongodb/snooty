@@ -29,13 +29,17 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  max-width: 1024px;
+  max-width: 1480px;
   padding-top: 64px;
   padding-bottom: 64px;
   padding-left: 24px;
@@ -44,9 +48,12 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 
 @media screen and (min-width: 768px) {
   .emotion-1 {
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
+    -webkit-box-flex-wrap: unset;
+    -webkit-flex-wrap: unset;
+    -ms-flex-wrap: unset;
+    flex-wrap: unset;
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
 
@@ -61,6 +68,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  min-width: 100%;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -72,6 +80,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
 
 @media screen and (min-width: 768px) {
   .emotion-2 {
+    min-width: unset;
     margin-bottom: 0px;
   }
 }
@@ -143,11 +152,19 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   display: -ms-flexbox;
   display: flex;
   margin-top: 0px;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: end;
+  justify-content: end;
 }
 
 @media screen and (min-width: 768px) {
   .emotion-7 {
     margin-top: 24px;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    -webkit-justify-content: start;
+    justify-content: start;
   }
 }
 
@@ -267,7 +284,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   margin: 0;
   min-width: 0;
   display: none;
-  font-family: akzidenz-grotesk-std,Noto Sans KR,Noto Sans SC,Noto Sans JP;
+  font-family: Akzidenz-Grotesk Std,Noto Sans KR,Noto Sans SC,Noto Sans JP;
   font-weight: 300;
   font-size: 12px;
   color: #b8c4c2;
@@ -287,16 +304,24 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   -ms-flex-preferred-size: 25%;
   flex-basis: 25%;
   margin-top: 24px;
+  min-width: 50%;
+}
+
+@media screen and (min-width: 460px) {
+  .emotion-22 {
+    min-width: unset;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .emotion-22 {
     margin-top: 0px;
+    min-width: unset;
   }
 }
 
 .emotion-23 {
-  font-family: akzidenz-grotesk-std,Noto Sans KR,Noto Sans SC,Noto Sans JP;
+  font-family: Akzidenz-Grotesk Std,Noto Sans KR,Noto Sans SC,Noto Sans JP;
   font-weight: 500;
   font-size: 16px;
   margin-bottom: 24px;
@@ -314,14 +339,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-@media screen and (min-width: 768px) {
-  .emotion-24 {
-    display: block;
-  }
+  display: block;
 }
 
 .emotion-25 {
@@ -332,7 +350,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   color: #ffffff;
   -webkit-text-decoration: none;
   text-decoration: none;
-  font-family: akzidenz-grotesk-std,Noto Sans KR,Noto Sans SC,Noto Sans JP;
+  font-family: Akzidenz-Grotesk Std,Noto Sans KR,Noto Sans SC,Noto Sans JP;
   font-weight: 300;
   font-size: 14px;
   line-height: 32px;
@@ -346,20 +364,66 @@ exports[`DocumentBody renders the necessary elements 1`] = `
   align-items: center;
 }
 
-.emotion-59 {
+.emotion-61 {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  -webkit-flex-basis: 25%;
+  -ms-flex-preferred-size: 25%;
+  flex-basis: 25%;
+  margin-top: 24px;
+  min-width: 50%;
+}
+
+@media screen and (min-width: 460px) {
+  .emotion-61 {
+    min-width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .emotion-61 {
+    margin-top: 0px;
+    min-width: unset;
+  }
+}
+
+.emotion-63 {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media screen and (min-width: 460px) {
+  .emotion-63 {
+    display: grid;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .emotion-63 {
+    display: block;
+  }
+}
+
+.emotion-78 {
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
   display: block;
-  font-family: akzidenz-grotesk-std,Noto Sans KR,Noto Sans SC,Noto Sans JP;
+  font-family: Akzidenz-Grotesk Std,Noto Sans KR,Noto Sans SC,Noto Sans JP;
+  width: 100%;
   font-weight: 300;
   font-size: 12px;
   color: #b8c4c2;
   margin-top: 24px;
+  text-align: center;
 }
 
 @media screen and (min-width: 768px) {
-  .emotion-59 {
+  .emotion-78 {
     display: none;
   }
 }
@@ -400,6 +464,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
             class="emotion-7"
           >
             <img
+              alt="Language Selector Icon"
               height="48"
               src="https://webimages.mongodb.com/_com_assets/cms/kr6zmbrgbwlke2l97-atlas-global-deployments.svg?auto=format%252Ccompress"
               style="height: auto;"
@@ -492,7 +557,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         <div
           class="emotion-21"
         >
-          © 2024 MongoDB, Inc.
+          © 2025 MongoDB, Inc.
         </div>
       </div>
       <div
@@ -540,6 +605,18 @@ exports[`DocumentBody renders the necessary elements 1`] = `
               target="_self"
             >
               Legal
+            </a>
+          </li>
+          <li
+            class="emotion-25"
+          >
+            <a
+              class=" emotion-26"
+              href="https://www.mongodb.com/legal/privacy/privacy-policy"
+              rel="noreferrer noopener"
+              target="_self"
+            >
+              Privacy Policy
             </a>
           </li>
           <li
@@ -703,9 +780,106 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         </ul>
       </div>
       <div
-        class="emotion-59"
+        class="emotion-61"
       >
-        © 2024 MongoDB, Inc.
+        <p
+          class="emotion-23"
+        >
+          Data Basics
+        </p>
+        <ul
+          class="emotion-63"
+        >
+          <li
+            class="emotion-25"
+          >
+            <a
+              class=" emotion-26"
+              href="https://www.mongodb.com/resources/basics/databases/vector-databases"
+              rel="noreferrer noopener"
+              target="_self"
+            >
+              Vector Databases
+            </a>
+          </li>
+          <li
+            class="emotion-25"
+          >
+            <a
+              class=" emotion-26"
+              href="https://www.mongodb.com/resources/basics/databases/nosql-explained"
+              rel="noreferrer noopener"
+              target="_self"
+            >
+              NoSQL Databases
+            </a>
+          </li>
+          <li
+            class="emotion-25"
+          >
+            <a
+              class=" emotion-26"
+              href="https://www.mongodb.com/resources/basics/databases/document-databases"
+              rel="noreferrer noopener"
+              target="_self"
+            >
+              Document Databases
+            </a>
+          </li>
+          <li
+            class="emotion-25"
+          >
+            <a
+              class=" emotion-26"
+              href="https://www.mongodb.com/resources/basics/artificial-intelligence/retrieval-augmented-generation"
+              rel="noreferrer noopener"
+              target="_self"
+            >
+              RAG Database
+            </a>
+          </li>
+          <li
+            class="emotion-25"
+          >
+            <a
+              class=" emotion-26"
+              href="https://www.mongodb.com/resources/basics/databases/acid-transactions"
+              rel="noreferrer noopener"
+              target="_self"
+            >
+              ACID Transactions
+            </a>
+          </li>
+          <li
+            class="emotion-25"
+          >
+            <a
+              class=" emotion-26"
+              href="https://www.mongodb.com/resources/languages/mern-stack"
+              rel="noreferrer noopener"
+              target="_self"
+            >
+              MERN Stack
+            </a>
+          </li>
+          <li
+            class="emotion-25"
+          >
+            <a
+              class=" emotion-26"
+              href=" https://www.mongodb.com/resources/languages/mean-stack"
+              rel="noreferrer noopener"
+              target="_self"
+            >
+              MEAN Stack
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="emotion-78"
+      >
+        © 2025 MongoDB, Inc.
       </div>
     </div>
   </footer>
