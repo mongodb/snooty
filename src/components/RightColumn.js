@@ -26,7 +26,7 @@ const RightColumn = ({ children, className, hasDismissibleSkillsCard }) => {
           position: sticky;
           top: calc(${topLarge} + ${theme.size.medium});
 
-          & > *.not(.${DISMISSIBLE_SKILLS_CARD_CLASSNAME}) {
+          & > *:not(.${DISMISSIBLE_SKILLS_CARD_CLASSNAME}) {
             margin-bottom: 30px;
             margin-right: 24px;
           }

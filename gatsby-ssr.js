@@ -51,7 +51,7 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
     ></link>,
     // Dismissible Skills Card - read from session storage
     <script
-      key="dark-mode"
+      key="dismissible-skills-card"
       dangerouslySetInnerHTML={{
         __html: `
             !function () {
