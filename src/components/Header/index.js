@@ -15,6 +15,13 @@ const StyledHeaderContainer = styled.header(
   top: 0;
   margin-top: ${props.hasBanner ? theme.header.bannerHeight : '0px'};
   z-index: ${theme.zIndexes.header};
+
+  // Targets nav dropdown for desktop nav. These properties were causing
+  // UX bugs in FF and Safari (DOP-5692)
+  li > div {
+    max-width: unset;
+    top: unset;
+  }
   `
 );
 

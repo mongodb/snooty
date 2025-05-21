@@ -29,6 +29,18 @@ const mockedReposBranches = [
       { eol_type: 'download', versionSelectorLabel: 'v3.4', urlSlug: 'v3.4' },
     ],
   },
+  {
+    project: 'docs-clone',
+    displayName: 'MongoDB Manual',
+    hasEolVersions: true,
+    url: {
+      dotcomprd: 'https://mongodb.com/',
+    },
+    prefix: {
+      dotcomprd: 'docs/docs-clone',
+    },
+    branches: [{ eol_type: 'download', versionSelectorLabel: 'v2.7', urlSlug: 'v2.7' }],
+  },
 
   {
     project: 'mongocli',
@@ -198,6 +210,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
       'Version 2.2',
       'Version 2.4',
       'Version 2.6',
+      'Version 2.7',
       'Version 3.0',
       'Version 3.2',
       'Version 3.4',

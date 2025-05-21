@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.20.6",
+  "version": "0.20.7",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -109,7 +109,7 @@
     "@leafygreen-ui/tooltip": "^11.0.4",
     "@leafygreen-ui/typography": "^18.3.0",
     "@loadable/component": "^5.14.1",
-    "@mdb/consistent-nav": "^2.2.0",
+    "@mdb/consistent-nav": "^2.3.6",
     "@mdb/flora": "1.14.2",
     "@mdx-js/react": "^2.2.1",
     "abort-controller": "^3.0.0",
