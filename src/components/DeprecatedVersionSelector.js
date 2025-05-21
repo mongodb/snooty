@@ -49,7 +49,6 @@ const DeprecatedVersionSelector = () => {
   const { reposDatabase } = useSiteMetadata();
   const reposBranchesBuildData = useAllDocsets().filter((project) => project.hasEolVersions);
   const reposBranchesBuildDataMap = keyBy(reposBranchesBuildData, 'project');
-  // const [product, setProduct] = useState('');
   const [productName, setProductName] = useState('');
   const [version, setVersion] = useState('');
   const [reposMap, setReposMap] = useState(reposBranchesBuildDataMap);
@@ -68,7 +67,7 @@ const DeprecatedVersionSelector = () => {
           }))
           // Ensure invalid entries do not break selector
           .filter(({ text }) => {
-            if (!seenProducts.has(text)) {
+            if (text && !seenProducts.has(text)) {
               seenProducts.add(text);
               return text;
             }
@@ -107,7 +106,6 @@ const DeprecatedVersionSelector = () => {
 
   const versionChoices = useMemo(() => {
     const res = [];
-    // const productName = reposMap[product]?.displayName;
     // eslint-disable-next-line no-unused-vars
     for (const [_key, reposObj] of Object.entries(reposMap)) {
       if (reposObj['displayName'] !== productName) {
