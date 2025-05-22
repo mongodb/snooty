@@ -437,6 +437,14 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
+type BannerOptions = {
+  variant: string;
+};
+
+interface BannerNode extends Directive<BannerOptions> {
+  options: BannerOptions;
+}
+
 export type {
   ParentNode,
   Root,
@@ -488,4 +496,5 @@ export type {
   ComposableTutorialNode,
   ComposableTutorialOption,
   MetaNode,
+  BannerNode,
 };
