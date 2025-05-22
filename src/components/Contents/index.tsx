@@ -9,6 +9,7 @@ import { HeadingNodeSelectorIds } from '../../types/ast';
 import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import DismissibleSkillsCard from '../DismissibleSkillsCard';
 import ContentsList from './ContentsList';
 import ContentsListItem from './ContentsListItem';
 import { type ActiveSelectorIds, ContentsContext } from './contents-context';
@@ -88,7 +89,15 @@ const isHeadingVisible = (
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds, searchParams);
 };
 
-const Contents = ({ className, slug }: { className: string; slug: string }) => {
+const Contents = ({
+  className,
+  slug,
+  dismissibleSkillsCard,
+}: {
+  className: string;
+  slug: string;
+  dismissibleSkillsCard?: { skill: string; url: string };
+}) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
   const { isTabletOrMobile } = useScreenSize();
   const metadata = useSnootyMetadata();
@@ -111,8 +120,15 @@ const Contents = ({ className, slug }: { className: string; slug: string }) => {
 
   return (
     <>
-      {!isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
-        <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />
+      {!isTabletOrMobile && (
+        <>
+          {!!dismissibleSkillsCard && (
+            <DismissibleSkillsCard skill={dismissibleSkillsCard.skill} url={dismissibleSkillsCard.url} slug={slug} />
+          )}
+          {!DEPRECATED_PROJECTS.includes(metadata.project) && (
+            <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />
+          )}
+        </>
       )}
       <div className={cx(className, styledContentList)}>
         <ContentsList label={label}>
