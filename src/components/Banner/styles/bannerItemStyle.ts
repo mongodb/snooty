@@ -1,6 +1,7 @@
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../../theme/docsTheme';
 import { CONTENT_MAX_WIDTH } from '../../../templates/product-landing';
+import type { PageTemplateType } from '../../../context/page-context';
 
 export const baseBannerStyle = css`
   margin: ${theme.size.default} 0;
@@ -34,7 +35,11 @@ export const baseBannerStyle = css`
   }
 `;
 
-export const offlineBannerStyle = ({ template }) => css`
+interface BannerStyleProps {
+  template: PageTemplateType;
+}
+
+export const offlineBannerStyle = ({ template }: BannerStyleProps) => css`
   max-width: ${CONTENT_MAX_WIDTH}px;
   ${template !== 'instruqt' &&
   `margin-left: auto;
@@ -47,7 +52,7 @@ export const offlineBannerStyle = ({ template }) => css`
 // instruqt,
 // changelog
 // update styling if needed for other templates
-export const offlineBannerContainerStyle = ({ template }) => {
+export const offlineBannerContainerStyle = ({ template }: BannerStyleProps) => {
   return css`
     ${template === 'product-landing' &&
     `
