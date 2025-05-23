@@ -1,5 +1,4 @@
-import React, { lazy, useState, useContext } from 'react';
-import PropTypes from 'prop-types';
+import { lazy, useState, useContext } from 'react';
 import Button from '@leafygreen-ui/button';
 import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
@@ -30,7 +29,14 @@ const ChatbotModal = lazy(() => import('./ChatbotModal'));
 
 const CHATBOT_TEXT = 'Ask MongoDB AI';
 
-const ActionBar = ({ template, slug, sidenav, ...props }) => {
+interface ActionBarProps {
+  template: string;
+  slug: string;
+  sidenav: boolean;
+  className?: string;
+}
+
+const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
   const [chatbotClicked, setChatbotClicked] = useState(false);
   const locale = getCurrLocale();
 
@@ -49,9 +55,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
     : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
-    <div
-      className={cx(props.className, actionBarStyling, containerClassname, isOfflineDocsBuild ? offlineStyling : '')}
-    >
+    <div className={cx(className, actionBarStyling, containerClassname, isOfflineDocsBuild ? offlineStyling : '')}>
       {fakeColumns && <div></div>}
       <ActionBarSearchContainer className={cx(searchContainerClassname)}>
         {sidenav && (
@@ -78,7 +82,8 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
               <IconButton className={chatbotMobileButtonStyling} aria-label={CHATBOT_TEXT} onClick={openChatbot}>
                 <Icon glyph={'Sparkle'} />
               </IconButton>
-              <SuspenseHelper>
+              {/* TODO: this needs a proper fallback */}
+              <SuspenseHelper fallback={<div>Loading...</div>}>
                 <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
                   <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
                 </Chatbot>
@@ -90,12 +95,6 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
       )}
     </div>
   );
-};
-
-ActionBar.propTypes = {
-  template: PropTypes.string,
-  slug: PropTypes.string.isRequired,
-  sidenav: PropTypes.bool.isRequired,
 };
 
 export default ActionBar;
