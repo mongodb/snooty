@@ -1,14 +1,18 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import useScreenSize from '../../hooks/useScreenSize';
 
 const SidenavContext = createContext({
   hideMobile: true,
   isCollapsed: true,
-  setCollapsed: () => {},
-  setHideMobile: () => {},
+  setCollapsed: (value: boolean) => {},
+  setHideMobile: (value: boolean) => {},
 });
 
-const SidenavContextProvider = ({ children }) => {
+interface SidenavContextProviderProps {
+  children: React.ReactNode;
+}
+
+const SidenavContextProvider = ({ children }: SidenavContextProviderProps) => {
   const { isTablet } = useScreenSize();
   const [isCollapsed, setCollapsed] = useState(isTablet);
   // Hide the Sidenav with css while keeping state as open/not collapsed.
