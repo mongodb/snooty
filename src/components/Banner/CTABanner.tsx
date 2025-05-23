@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { navigate } from 'gatsby';
-import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Icon, { glyphs } from '@leafygreen-ui/icon';
-import ComponentFactory from '../ComponentFactory';
+import ComponentFactory, { type ComponentFactoryProps } from '../ComponentFactory';
 import { isRelativeUrl } from '../../utils/is-relative-url';
+import type { CTABannerNode } from '../../types/ast';
 import { baseBannerStyle } from './styles/bannerItemStyle';
 
 const videoBannerStyling = css`
@@ -48,7 +48,14 @@ const lgIconStyling = css`
   margin-left: -5px;
 `;
 
-const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
+interface CTABannerProps extends Omit<ComponentFactoryProps, 'nodeData'> {
+  nodeData: {
+    children: Array<CTABannerNode>;
+    options: CTABannerNode['options'];
+  };
+}
+
+const CTABanner = ({ nodeData: { children, options }, ...rest }: CTABannerProps) => {
   // Handles case sensitivity for specified icons
   let lgIcon = 'Play';
   if (options?.icon) {
@@ -73,16 +80,6 @@ const CTABanner = ({ nodeData: { children, options }, ...rest }) => {
       ))}
     </div>
   );
-};
-
-CTABanner.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    options: PropTypes.shape({
-      url: PropTypes.string.isRequired,
-      icon: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
 };
 
 export default CTABanner;
