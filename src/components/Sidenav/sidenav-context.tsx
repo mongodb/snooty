@@ -1,11 +1,18 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, Dispatch, SetStateAction } from 'react';
 import useScreenSize from '../../hooks/useScreenSize';
 
-const SidenavContext = createContext({
+interface SidenavContextType {
+  hideMobile: boolean;
+  isCollapsed: boolean;
+  setCollapsed: Dispatch<SetStateAction<boolean>>;
+  setHideMobile: Dispatch<SetStateAction<boolean>>;
+}
+
+const SidenavContext = createContext<SidenavContextType>({
   hideMobile: true,
   isCollapsed: true,
-  setCollapsed: (value: boolean) => {},
-  setHideMobile: (value: boolean) => {},
+  setCollapsed: () => {},
+  setHideMobile: () => {},
 });
 
 interface SidenavContextProviderProps {
