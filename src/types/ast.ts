@@ -445,6 +445,15 @@ interface BannerNode extends Directive<BannerOptions> {
   options: BannerOptions;
 }
 
+type CTABannerOptions = {
+  url: string;
+  icon?: string;
+};
+
+interface CTABannerNode extends Directive<CTABannerOptions> {
+  options: CTABannerOptions;
+}
+
 export type {
   ParentNode,
   Root,
@@ -497,4 +506,5 @@ export type {
   ComposableTutorialOption,
   MetaNode,
   BannerNode,
+  CTABannerNode,
 };
