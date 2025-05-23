@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { palette } from '@leafygreen-ui/palette';
 import LeafyBanner, { Variant as LeafyVariant } from '@leafygreen-ui/banner';
 import { css, cx } from '@leafygreen-ui/emotion';
-import ComponentFactory from '../ComponentFactory';
+import ComponentFactory, { type ComponentFactoryProps } from '../ComponentFactory';
+import type { BannerNode } from '../../types/ast';
 import { baseBannerStyle } from './styles/bannerItemStyle';
 
 export const alertMap = {
@@ -42,6 +41,8 @@ const styleMapLight = {
     backgroundColor: palette.green.light3,
     color: palette.green.dark2,
     borderColor: palette.green.light2,
+    beforeColor: palette.green.base,
+    iconColor: palette.green.base,
     linkColor: palette.green.dark3,
   },
 };
@@ -74,11 +75,17 @@ const styleMapDark = {
     backgroundColor: palette.green.dark3,
     color: palette.green.light2,
     borderColor: palette.green.dark2,
+    beforeColor: palette.green.base,
+    iconColor: palette.green.light1,
     linkColor: palette.green.light3,
   },
 };
 
-const bannerStyle = ({ variant }) => css`
+interface BannerStyleProps {
+  variant: keyof typeof alertMap;
+}
+
+const bannerStyle = ({ variant }: BannerStyleProps) => css`
   ${baseBannerStyle}
   background-color: ${styleMapLight[variant].backgroundColor};
   color: ${styleMapLight[variant].color};
@@ -118,7 +125,14 @@ const bannerStyle = ({ variant }) => css`
   }
 `;
 
-const Banner = ({ nodeData: { children, options }, ...rest }) => {
+interface BannerProps extends Omit<ComponentFactoryProps, 'nodeData'> {
+  nodeData: {
+    children: Array<BannerNode>;
+    options: BannerStyleProps;
+  };
+}
+
+const Banner = ({ nodeData: { children, options }, ...rest }: BannerProps) => {
   return (
     <LeafyBanner className={cx(bannerStyle({ variant: alertMap[options?.variant] || LeafyVariant.Info }))}>
       {children.map((child, i) => (
@@ -126,13 +140,6 @@ const Banner = ({ nodeData: { children, options }, ...rest }) => {
       ))}
     </LeafyBanner>
   );
-};
-
-Banner.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    variant: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default Banner;

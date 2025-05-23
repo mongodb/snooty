@@ -34,7 +34,13 @@ export const baseBannerStyle = css`
   }
 `;
 
-export const offlineBannerStyle = ({ template }) => css`
+export type BannerTemplateType = 'product-landing' | 'document' | 'instruqt' | 'changelog';
+
+interface BannerStyleProps {
+  template: BannerTemplateType;
+}
+
+export const offlineBannerStyle = ({ template }: BannerStyleProps) => css`
   max-width: ${CONTENT_MAX_WIDTH}px;
   ${template !== 'instruqt' &&
   `margin-left: auto;
@@ -47,7 +53,7 @@ export const offlineBannerStyle = ({ template }) => css`
 // instruqt,
 // changelog
 // update styling if needed for other templates
-export const offlineBannerContainerStyle = ({ template }) => {
+export const offlineBannerContainerStyle = ({ template }: BannerStyleProps) => {
   return css`
     ${template === 'product-landing' &&
     `

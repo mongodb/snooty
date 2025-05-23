@@ -6,8 +6,6 @@ import { theme } from '../theme/docsTheme';
 import { CommunityDriverPill } from '../types/ast';
 import Link from './Link';
 
-type CommunityPillSnootyVariant = 'darkGray' | 'lightGray' | 'red' | 'yellow' | 'blue' | 'green';
-
 const communityPillVariants = {
   darkGray: Variant.DarkGray,
   lightGray: Variant.LightGray,
@@ -25,7 +23,7 @@ const pillLinkStyle = css`
 
 type CommunityPillLinkProps = {
   nodeData?: CommunityDriverPill;
-  variant?: CommunityPillSnootyVariant;
+  variant?: keyof typeof communityPillVariants;
   text?: string;
 };
 
