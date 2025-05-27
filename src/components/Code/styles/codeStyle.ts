@@ -1,7 +1,8 @@
+import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 
-export const baseCodeStyle = `
+export const baseCodeStyle = css`
   display: table;
   margin: ${theme.size.medium} 0;
   min-width: 150px;
@@ -14,7 +15,7 @@ export const baseCodeStyle = `
   }
 `;
 
-export const borderCodeStyle = `
+export const borderCodeStyle = css`
   border-width: 1px;
   border-style: solid;
 `;
@@ -67,9 +68,8 @@ const variantColors = {
   },
 };
 
-export const lgStyles = `
-  [class*="lg-highlight-hljs-"] {
-    
+export const lgStyles = css`
+  [class*='lg-highlight-hljs-'] {
     .lg-highlight-keyword,
     .lg-highlight-keyword.lg-highlight-function,
     .lg-highlight-keyword.lg-highlight-class,
@@ -111,7 +111,7 @@ export const lgStyles = `
       color: ${variantColors.light[7]};
 
       .dark-theme & {
-       color: ${variantColors.dark[7]};
+        color: ${variantColors.dark[7]};
       }
     }
 
@@ -161,7 +161,7 @@ export const lgStyles = `
         color: ${variantColors.dark[3]};
       }
     }
-  
+
     .lg-highlight-comment {
       color: ${variantColors.light[2]};
 
