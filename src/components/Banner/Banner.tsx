@@ -9,7 +9,6 @@ export const alertMap = {
   info: LeafyVariant.Info,
   warning: LeafyVariant.Warning,
   danger: LeafyVariant.Danger,
-  success: LeafyVariant.Success,
 };
 
 const styleMapLight = {
@@ -37,14 +36,6 @@ const styleMapLight = {
     beforeColor: palette.red.base,
     iconColor: palette.red.base,
   },
-  success: {
-    backgroundColor: palette.green.light3,
-    color: palette.green.dark2,
-    borderColor: palette.green.light2,
-    beforeColor: palette.green.base,
-    iconColor: palette.green.base,
-    linkColor: palette.green.dark3,
-  },
 };
 const styleMapDark = {
   info: {
@@ -70,14 +61,6 @@ const styleMapDark = {
     linkColor: palette.red.light3,
     beforeColor: palette.red.base,
     iconColor: palette.red.light1,
-  },
-  success: {
-    backgroundColor: palette.green.dark3,
-    color: palette.green.light2,
-    borderColor: palette.green.dark2,
-    beforeColor: palette.green.base,
-    iconColor: palette.green.light1,
-    linkColor: palette.green.light3,
   },
 };
 
