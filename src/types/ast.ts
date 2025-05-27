@@ -1,4 +1,3 @@
-// Need to figure out which is node type and which is component type
 type ComponentType =
   | Exclude<NodeType, 'block-quote' | 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
   | 'banner'
@@ -44,7 +43,6 @@ type ComponentType =
 type NodeType =
   | 'admonition'
   | 'banner'
-  | 'block-quote'
   | 'code'
   | 'root'
   | 'section'

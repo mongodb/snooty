@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import { COMPARE_VERSIONS } from '../utils/constants';
 

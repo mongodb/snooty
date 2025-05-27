@@ -1,5 +1,5 @@
 import ClipboardJS from 'clipboard';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 const useCopyClipboard = (
   copied: boolean,

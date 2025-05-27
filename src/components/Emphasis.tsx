@@ -1,3 +1,4 @@
+import React from 'react';
 import { getNestedValue } from '../utils/get-nested-value';
 import { EmphasisNode } from '../types/ast';
 

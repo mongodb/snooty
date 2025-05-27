@@ -3,7 +3,7 @@
  * with image data queried on page component
  */
 
-import { createContext, ReactNode } from 'react';
+import React, { createContext, ReactNode } from 'react';
 import { getImage } from 'gatsby-plugin-image';
 // @ts-ignore
 import type { GatsbyImageData } from 'gatsby-plugin-image';

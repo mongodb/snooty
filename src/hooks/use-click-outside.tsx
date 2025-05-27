@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 /**
  * This hook fires an onClickOutside handler if the given node ref is clicked

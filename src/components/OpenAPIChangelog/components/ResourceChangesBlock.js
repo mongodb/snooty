@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import Badge from '@leafygreen-ui/badge';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
