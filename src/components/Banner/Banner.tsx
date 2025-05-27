@@ -1,7 +1,7 @@
 import { palette } from '@leafygreen-ui/palette';
 import LeafyBanner, { Variant as LeafyVariant } from '@leafygreen-ui/banner';
 import { css, cx } from '@leafygreen-ui/emotion';
-import ComponentFactory, { type ComponentFactoryProps } from '../ComponentFactory';
+import ComponentFactory from '../ComponentFactory';
 import type { BannerNode } from '../../types/ast';
 import { baseBannerStyle } from './styles/bannerItemStyle';
 
@@ -64,11 +64,7 @@ const styleMapDark = {
   },
 };
 
-interface BannerStyleProps {
-  variant: keyof typeof alertMap;
-}
-
-const bannerStyle = ({ variant }: BannerStyleProps) => css`
+const bannerStyle = ({ variant }: BannerNode['options']) => css`
   ${baseBannerStyle}
   background-color: ${styleMapLight[variant].backgroundColor};
   color: ${styleMapLight[variant].color};
@@ -108,11 +104,8 @@ const bannerStyle = ({ variant }: BannerStyleProps) => css`
   }
 `;
 
-interface BannerProps extends Omit<ComponentFactoryProps, 'nodeData'> {
-  nodeData: {
-    children: Array<BannerNode>;
-    options: BannerStyleProps;
-  };
+interface BannerProps {
+  nodeData: BannerNode;
 }
 
 const Banner = ({ nodeData: { children, options }, ...rest }: BannerProps) => {

@@ -438,7 +438,7 @@ interface TwitterNode extends Directive<TwitterOptions> {
 }
 
 type BannerOptions = {
-  variant: string;
+  variant: 'info' | 'warning' | 'danger';
 };
 
 interface BannerNode extends Directive<BannerOptions> {
