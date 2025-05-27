@@ -19,8 +19,10 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIn
   });
 
   const title =
-    showDocsLandingTitle || (!siteTitle && !pageTitle)
+    !siteTitle && !pageTitle
       ? 'MongoDB Documentation'
+      : showDocsLandingTitle
+      ? 'MongoDB Documentation - Homepage'
       : `${pageTitle ? `${pageTitle} - ` : ''}${siteTitle} - MongoDB Docs`;
 
   return (

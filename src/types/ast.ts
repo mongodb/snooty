@@ -41,6 +41,7 @@ type DirectiveName =
   | 'contents'
   | 'deprecated'
   | 'directive'
+  | 'dismissible-skills-card'
   | 'facet'
   | 'input'
   | 'io-code-block'
@@ -148,6 +149,7 @@ interface Root extends ParentNode {
 type HeadingNodeSelectorIds = {
   tab?: string;
   'method-option'?: string;
+  'selected-content'?: Record<string, string>;
   children?: HeadingNodeSelectorIds;
 };
 
@@ -194,6 +196,16 @@ type ButtonOptions = {
 
 interface ButtonNode extends Directive<ButtonOptions> {
   options: ButtonOptions;
+}
+
+type DismissibleSkillsCardOptions = {
+  skill: string;
+  url: string;
+};
+
+interface DismissibleSkillsCardNode extends Directive<DismissibleSkillsCardOptions> {
+  name: 'dismissible-skills-card';
+  options: DismissibleSkillsCardOptions;
 }
 
 interface ListTableNode extends Directive {
@@ -440,6 +452,7 @@ export type {
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,
+  DismissibleSkillsCardNode,
   ListNode,
   ListTableNode,
   ListItemNode,
