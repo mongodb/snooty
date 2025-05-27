@@ -3,7 +3,7 @@ import { navigate } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Icon, { glyphs } from '@leafygreen-ui/icon';
-import ComponentFactory, { type ComponentFactoryProps } from '../ComponentFactory';
+import ComponentFactory from '../ComponentFactory';
 import { isRelativeUrl } from '../../utils/is-relative-url';
 import type { CTABannerNode } from '../../types/ast';
 import { baseBannerStyle } from './styles/bannerItemStyle';
@@ -48,11 +48,8 @@ const lgIconStyling = css`
   margin-left: -5px;
 `;
 
-interface CTABannerProps extends Omit<ComponentFactoryProps, 'nodeData'> {
-  nodeData: {
-    children: Array<CTABannerNode>;
-    options: CTABannerNode['options'];
-  };
+interface CTABannerProps {
+  nodeData: CTABannerNode;
 }
 
 const CTABanner = ({ nodeData: { children, options }, ...rest }: CTABannerProps) => {
