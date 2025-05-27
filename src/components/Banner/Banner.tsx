@@ -1,3 +1,4 @@
+import React from 'react';
 import { palette } from '@leafygreen-ui/palette';
 import LeafyBanner, { Variant as LeafyVariant } from '@leafygreen-ui/banner';
 import { css, cx } from '@leafygreen-ui/emotion';

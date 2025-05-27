@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import LeafyBanner from '@leafygreen-ui/banner';
 import { cx } from '@leafygreen-ui/emotion';

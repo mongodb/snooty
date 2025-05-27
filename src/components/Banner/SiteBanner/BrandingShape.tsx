@@ -1,3 +1,5 @@
+import React from 'react';
+
 const BrandingShape = () => {
   const width = 109;
   const height = 40;
