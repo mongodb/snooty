@@ -1,5 +1,5 @@
 type ComponentType =
-  | Exclude<NodeType, 'block-quote' | 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
+  | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
   | 'banner'
   | 'blockquote'
   | 'button'

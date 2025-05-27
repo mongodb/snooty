@@ -40,7 +40,6 @@ exports[`CodeIO renders correctly 1`] = `
   grid-template-columns: auto 38px;
   border-radius: inherit;
   z-index: 0;
-  grid-template-areas: 'code code';
 }
 
 .emotion-3:before,
@@ -67,10 +66,6 @@ exports[`CodeIO renders correctly 1`] = `
   grid-column: 2;
 }
 
-.emotion-3:after {
-  grid-column: -1;
-}
-
 .emotion-4 {
   grid-area: code;
   overflow-x: auto;
@@ -87,10 +82,6 @@ exports[`CodeIO renders correctly 1`] = `
   white-space: pre;
   background-color: #F9FBFA;
   color: #001E2B;
-  border-left: 0;
-  border-radius: inherit;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -174,17 +165,46 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 .emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  gap: 4px;
+  background-color: #FFFFFF;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 6px;
+  border-left: solid 1px;
+  border-color: #E8EDEB;
+  z-index: 2;
+  grid-area: panel;
+}
+
+.emotion-10 svg {
+  width: 16px;
+  height: 16px;
+}
+
+.emotion-11 {
   border-width: 1px;
   border-style: solid;
   border-top: none;
   border-color: #E8EDEB;
 }
 
-.dark-theme .emotion-10 {
+.dark-theme .emotion-11 {
   border-color: #3D4F58;
 }
 
-.emotion-11 {
+.emotion-12 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -222,40 +242,40 @@ exports[`CodeIO renders correctly 1`] = `
   margin: 8px;
 }
 
-.emotion-11:focus-visible,
-.emotion-11[data-focus="true"] {
+.emotion-12:focus-visible,
+.emotion-12[data-focus="true"] {
   outline: none;
 }
 
-.emotion-11:active,
-.emotion-11[data-active="true"],
-.emotion-11:focus,
-.emotion-11:hover {
+.emotion-12:active,
+.emotion-12[data-active="true"],
+.emotion-12:focus,
+.emotion-12:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-11:focus-visible,
-.emotion-11[data-focus="true"] {
+.emotion-12:focus-visible,
+.emotion-12[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-11:hover,
-.emotion-11[data-hover="true"],
-.emotion-11:active,
-.emotion-11[data-active="true"] {
+.emotion-12:hover,
+.emotion-12[data-hover="true"],
+.emotion-12:active,
+.emotion-12[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-11:focus-visible,
-.emotion-11[data-focus="true"] {
+.emotion-12:focus-visible,
+.emotion-12[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-12 {
+.emotion-13 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -265,7 +285,7 @@ exports[`CodeIO renders correctly 1`] = `
   border-radius: 5px;
 }
 
-.emotion-13 {
+.emotion-14 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -290,7 +310,7 @@ exports[`CodeIO renders correctly 1`] = `
   gap: 6px;
 }
 
-.emotion-14 {
+.emotion-15 {
   color: #FF0000;
   color: #889397;
   height: 16px;
@@ -298,45 +318,83 @@ exports[`CodeIO renders correctly 1`] = `
   justify-self: right;
 }
 
-.emotion-16>div>* {
+.emotion-17>div>* {
   display: inline!important;
 }
 
-.emotion-16 style {
+.emotion-17 style {
   display: none!important;
 }
 
-.emotion-16 * {
+.emotion-17 * {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
 }
 
-.emotion-16>div {
+.emotion-17>div {
   border: initial;
 }
 
-.dark-theme .emotion-16>div {
+.dark-theme .emotion-17>div {
   border: none;
 }
 
-.emotion-16>div>div>pre {
+.emotion-17>div>div>pre {
   border: none;
   border-top: none;
 }
 
-.dark-theme .emotion-16>div>div>pre {
+.dark-theme .emotion-17>div>div>pre {
   border: 1px solid #3D4F58;
 }
 
-.emotion-17 {
+.emotion-18 {
   border: 1px solid #3D4F58;
   border-radius: 12px;
   overflow: hidden;
 }
 
 .emotion-19 {
+  position: relative;
+  display: grid;
+  grid-template-areas: 'code panel';
+  grid-template-columns: auto 38px;
+  border-radius: inherit;
+  z-index: 0;
+  grid-template-areas: 'code code';
+}
+
+.emotion-19:before,
+.emotion-19:after {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  border-radius: 40%;
+  box-shadow: unset;
+  -webkit-transition: box-shadow 100ms ease-in-out;
+  transition: box-shadow 100ms ease-in-out;
+}
+
+.emotion-19:before {
+  grid-column: 1;
+  left: -40px;
+}
+
+.emotion-19:after {
+  grid-column: 2;
+}
+
+.emotion-19:after {
+  grid-column: -1;
+}
+
+.emotion-20 {
   grid-area: code;
   overflow-x: auto;
   border-radius: inherit;
@@ -369,45 +427,45 @@ exports[`CodeIO renders correctly 1`] = `
 }
 
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-19 {
+  .emotion-20 {
     white-space: pre-wrap;
   }
 }
 
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 2) {
-  .emotion-19 {
+  .emotion-20 {
     white-space: pre;
   }
 }
 
-.emotion-19:focus-visible {
+.emotion-20:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px #0498EC inset;
 }
 
-.emotion-22 {
+.emotion-23 {
   background-color: transparent;
   background-image: linear-gradient(90deg, #1C2D38, #001E2B);
   background-attachment: fixed;
 }
 
-.emotion-22>td {
+.emotion-23>td {
   border-top: 1px solid #1C2D38;
 }
 
-.emotion-22+tr>td {
+.emotion-23+tr>td {
   border-top: 1px solid #1C2D38;
 }
 
-.emotion-22+.emotion-22>td {
+.emotion-23+.emotion-23>td {
   border-top: 0;
 }
 
-.emotion-22:last-child>td {
+.emotion-23:last-child>td {
   border-bottom: 1px solid #1C2D38;
 }
 
-.emotion-23 {
+.emotion-24 {
   border-spacing: 0;
   vertical-align: top;
   padding: 0 16px;
@@ -490,29 +548,33 @@ exports[`CodeIO renders correctly 1`] = `
               </table>
             </code>
           </pre>
+          <div
+            class="emotion-10"
+            data-testid="leafygreen-code-panel"
+          />
         </div>
       </div>
     </div>
     <div
-      class="emotion-10"
+      class="emotion-11"
     >
       <button
         aria-disabled="false"
-        class="lg-ui-button-0000 emotion-11"
+        class="lg-ui-button-0000 emotion-12"
         data-lgid="lg-button"
         role="button"
         type="button"
       >
         <div
-          class="emotion-12"
+          class="emotion-13"
         />
         <div
-          class="emotion-13"
+          class="emotion-14"
         >
           <svg
             alt=""
             aria-hidden="true"
-            class="emotion-14"
+            class="emotion-15"
             fill="none"
             height="16"
             role="presentation"
@@ -534,7 +596,7 @@ exports[`CodeIO renders correctly 1`] = `
       </button>
     </div>
     <div
-      class="emotion-15"
+      class="emotion-16"
     >
       <script
         class="structured_data"
@@ -543,16 +605,16 @@ exports[`CodeIO renders correctly 1`] = `
         {"@context":"https://schema.org","@type":"SoftwareSourceCode","codeSampleType":"code snippet","text":"hello world","programmingLanguage":"Python"}
       </script>
       <div
-        class="emotion-16"
+        class="emotion-17"
       >
         <div
-          class="emotion-17"
+          class="emotion-18"
         >
           <div
-            class="emotion-3"
+            class="emotion-19"
           >
             <pre
-              class="emotion-19"
+              class="emotion-20"
               tabindex="-1"
             >
               <code
@@ -563,10 +625,10 @@ exports[`CodeIO renders correctly 1`] = `
                 >
                   <tbody>
                     <tr
-                      class="emotion-22"
+                      class="emotion-23"
                     >
                       <td
-                        class="emotion-23"
+                        class="emotion-24"
                       >
                         1
                       </td>

@@ -21,7 +21,6 @@ exports[`renders correctly 1`] = `
   grid-template-columns: auto 38px;
   border-radius: inherit;
   z-index: 0;
-  grid-template-areas: 'code code';
 }
 
 .emotion-1:before,
@@ -48,10 +47,6 @@ exports[`renders correctly 1`] = `
   grid-column: 2;
 }
 
-.emotion-1:after {
-  grid-column: -1;
-}
-
 .emotion-2 {
   grid-area: code;
   overflow-x: auto;
@@ -68,10 +63,6 @@ exports[`renders correctly 1`] = `
   white-space: pre;
   background-color: #F9FBFA;
   color: #001E2B;
-  border-left: 0;
-  border-radius: inherit;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -154,6 +145,35 @@ exports[`renders correctly 1`] = `
   padding: 0 16px;
 }
 
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  gap: 4px;
+  background-color: #FFFFFF;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 6px;
+  border-left: solid 1px;
+  border-color: #E8EDEB;
+  z-index: 2;
+  grid-area: panel;
+}
+
+.emotion-8 svg {
+  width: 16px;
+  height: 16px;
+}
+
 <div
     css="You have tried to stringify object returned from \`css\` function. It isn't supposed to be used directly (e.g. as value of the \`className\` prop), but rather handed to emotion so it can handle it (e.g. as value of \`css\` prop)."
   >
@@ -192,6 +212,10 @@ exports[`renders correctly 1`] = `
             </table>
           </code>
         </pre>
+        <div
+          class="emotion-8"
+          data-testid="leafygreen-code-panel"
+        />
       </div>
     </div>
   </div>

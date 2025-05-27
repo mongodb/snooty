@@ -130,8 +130,8 @@ const roleMap: Record<RoleName, React.ComponentType<any>> = {
 };
 
 const getComponent = (() => {
-  let componentMap: Record<Exclude<ComponentType, 'block-quote'>, React.ComponentType<any>> | undefined = undefined;
-  return (key: Exclude<ComponentType, 'block-quote'>) => {
+  let componentMap: Record<ComponentType, React.ComponentType<any>> | undefined = undefined;
+  return (key: ComponentType) => {
     if (componentMap === undefined) {
       componentMap = {
         admonition: Admonition,
@@ -265,11 +265,7 @@ const ComponentFactory = (props: ComponentFactoryProps) => {
     const ComponentType = getComponentType(type, name);
 
     if (!ComponentType) {
-      console.warn(
-        `${type} ${JSON.stringify(nodeData)}${name ? `"${name}" ` : ''}not yet implemented${
-          slug ? ` on page ${slug}` : ''
-        }`
-      );
+      console.warn(`${type} ${name ? `"${name}" ` : ''}not yet implemented${slug ? ` on page ${slug}` : ''}`);
       return null;
     }
 

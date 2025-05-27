@@ -1,8 +1,7 @@
-import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 
-export const baseCodeStyle = css`
+export const baseCodeStyle = `
   display: table;
   margin: ${theme.size.medium} 0;
   min-width: 150px;
@@ -15,7 +14,7 @@ export const baseCodeStyle = css`
   }
 `;
 
-export const borderCodeStyle = css`
+export const borderCodeStyle = `
   border-width: 1px;
   border-style: solid;
 `;

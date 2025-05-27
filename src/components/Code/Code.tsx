@@ -1,5 +1,5 @@
-import { css } from '@emotion/react';
 import React, { useCallback, useContext, useMemo } from 'react';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { default as CodeBlock } from '@leafygreen-ui/code';
 import Icon from '@leafygreen-ui/icon';
