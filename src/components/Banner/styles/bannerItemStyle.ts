@@ -47,12 +47,6 @@ export const offlineBannerStyle = ({ template }: BannerStyleProps) => css`
   margin-right: auto;`}
 `;
 
-// NOTE: banner is styled for
-// product-landing,
-// document
-// instruqt,
-// changelog
-// update styling if needed for other templates
 export const offlineBannerContainerStyle = ({ template }: BannerStyleProps) => {
   return css`
     ${template === 'product-landing' &&
