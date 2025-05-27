@@ -50,20 +50,3 @@ module.exports = {
     },
   ],
 };
-
-// preset: 'ts-jest',
-// testEnvironment: 'jsdom',
-// transform: {
-//   '^.+\\.[jt]sx?$': 'babel-jest', // Let Babel handle TS/JS files
-// },
-// moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
-// moduleNameMapper: {
-//   // handle static asset imports (optional)
-//   '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-//   // handle path aliases (if using tsconfig paths)
-//   '^@/(.*)$': '<rootDir>/src/$1',
-// },
-// transformIgnorePatterns: [
-//   '/node_modules/(?!(gatsby)/)', // transform Gatsby
-// ],
-// setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],

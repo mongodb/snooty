@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 
 /* Helper to avoid React minified errors. Compiles fallback component into the static HTML pages. */
 export const SuspenseHelper = ({ fallback, children }) => {

@@ -25,17 +25,6 @@ const plugins = [
     },
   },
   {
-    resolve: 'gatsby-plugin-emotion',
-    options: {
-      // Important: Enable automatic runtime for Emotion
-      sourceMap: true,
-      autoLabel: 'dev-only',
-      labelFormat: '[local]',
-      cssPropOptimization: true,
-    },
-  },
-  'gatsby-plugin-typescript',
-  {
     resolve: 'gatsby-plugin-sitemap',
     options: {
       query: `

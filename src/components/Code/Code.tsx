@@ -39,11 +39,10 @@ const getDriverImage = (driver: string, driverIconMap: DriverMap) => {
 };
 
 const Code = ({
-  nodeData: { caption, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
+  nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
 }: {
   nodeData: CodeNode;
 }) => {
-  const copyable = false;
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
   const { slug } = usePageContext();
