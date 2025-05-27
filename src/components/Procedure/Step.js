@@ -113,6 +113,7 @@ const contentStyles = {
 };
 
 const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', template, ...rest }) => {
+  console.log('STEP style ', stepStyle);
   return (
     <StyledStep css={landingStepStyles[stepStyle]}>
       <StepBlock>
