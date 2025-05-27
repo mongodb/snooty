@@ -7,21 +7,14 @@ type ComponentType =
   | 'card-group'
   | 'chapter'
   | 'chapters'
-  | 'code'
   | 'collapsible'
   | 'community-driver'
-  | 'io-code-block'
-  | 'composable-tutorial'
   | 'cond'
   | 'container'
   | 'cta'
-  | 'cta-banner'
-  | 'definitionList'
-  | 'definitionListItem'
   | 'deprecated'
   | 'deprecated-version-selector'
   | 'describe'
-  | 'emphasis'
   | 'extract'
   | 'field'
   | 'field_list'
@@ -30,43 +23,33 @@ type ComponentType =
   | 'footnote_reference'
   | 'glossary'
   | 'guide-next'
-  | 'heading'
   | 'hlist'
   | 'image'
   | 'include'
   | 'introduction'
   | 'kicker'
-  | 'line'
-  | 'line_block'
   | 'literal_block';
 
-type NodeType =
+type DirectiveName =
+  | AdmonitionName
   | 'admonition'
   | 'banner'
-  | 'code'
-  | 'root'
-  | 'section'
-  | 'heading'
-  | 'reference'
+  | 'blockquote'
+  | 'collapsible'
+  | 'community-driver'
+  | 'composable-tutorials'
+  | 'contents'
+  | 'deprecated'
   | 'directive'
-  | 'directive_argument'
-  | 'line'
-  | 'line_block'
-  | 'list'
+  | 'facet'
+  | 'input'
+  | 'io-code-block'
   | 'list-table'
-  | 'listItem'
-  | 'text'
-  | 'literal'
   | 'literalinclude'
-  | 'definitionList'
-  | 'definitionListItem'
-  | 'emphasis'
-  | 'method-selector'
-  | 'only'
+  | 'meta'
   | 'openapi-changelog'
-  | 'paragraph'
+  | 'output'
   | 'procedure'
-  | 'reference'
   | 'ref_role'
   | 'role'
   | 'release_specification'
@@ -74,69 +57,76 @@ type NodeType =
   | 'search-results'
   | 'section'
   | 'seealso'
+  | 'selected-content'
   | 'sharedinclude'
-  | 'strong'
   | 'substitution_reference'
+  | 'tab'
   | 'tabs-selector'
   | 'time'
   | 'title_reference'
   | 'transition'
+  | 'toctree'
   | 'versionadded'
   | 'versionchanged'
   | 'tabs'
-  | 'target'
-  | 'target_identifier'
-  | 'text'
   | 'wayfinding';
 
-type RoleName =
-  | 'abbr'
-  | 'class'
-  | 'command'
-  | 'file'
-  | 'guilabel'
-  | 'icon'
-  | 'highlight-blue'
-  | 'highlight-green'
-  | 'highlight-red'
-  | 'highlight-yellow'
-  | 'icon-fa5'
-  | 'icon-fa5-brands'
-  | 'icon-fa4'
-  | 'icon-mms'
-  | 'icon-charts'
-  | 'icon-lg'
-  | 'kbd'
-  | 'red'
-  | 'gold'
-  | 'required'
-  | 'sub'
-  | 'subscript'
-  | 'sup'
-  | 'superscript'
-  | 'link-new-tab';
-
-type NodeName =
-  | RoleName
-  | AdmonitionName
-  | 'blockquote'
-  | 'collapsible'
-  | 'community-driver'
-  | 'composable-tutorials'
-  | 'contents'
-  | 'deprecated'
-  | 'input'
-  | 'io-code-block'
-  | 'facet'
-  | 'list-table'
-  | 'meta'
-  | 'output'
-  | 'selected-content'
+type NodeType =
+  | 'code'
+  | 'cta-banner'
+  | 'definitionList'
+  | 'definitionListItem'
+  | 'directive'
+  | 'directive_argument'
+  | 'emphasis'
+  | 'heading'
+  | 'line'
+  | 'line_block'
+  | 'list'
+  | 'listItem'
+  | 'literal'
+  | 'method-selector'
+  | 'only'
+  | 'paragraph'
+  | 'reference'
+  | 'root'
+  | 'section'
+  | 'strong'
   | 'tabs'
-  | 'tab'
-  | 'toctree'
-  | 'versionadded'
-  | 'versionchanged';
+  | 'target'
+  | 'target_identifier'
+  | 'text';
+
+type RoleName = (typeof roleNames)[number];
+export const roleNames = [
+  'abbr',
+  'class',
+  'command',
+  'file',
+  'guilabel',
+  'icon',
+  'highlight-blue',
+  'highlight-green',
+  'highlight-red',
+  'highlight-yellow',
+  'icon-fa5',
+  'icon-fa5-brands',
+  'icon-fa4',
+  'icon-mms',
+  'icon-charts',
+  'icon-lg',
+  'kbd',
+  'red',
+  'gold',
+  'required',
+  'sub',
+  'subscript',
+  'sup',
+  'superscript',
+  'link-new-tab',
+];
+
+type NodeName = RoleName | DirectiveName | AdmonitionName;
 
 type DirectiveOptions = {
   [key: string]: string;
@@ -188,7 +178,7 @@ interface ReferenceNode extends ParentNode {
 
 interface Directive<TOptions = DirectiveOptions> extends ParentNode {
   type: 'directive';
-  name: NodeName;
+  name: DirectiveName;
   argument: Node[];
   domain?: string;
   options?: TOptions;
@@ -313,7 +303,6 @@ type CollapsibleOptions = {
 };
 
 interface CollapsibleNode extends Directive<CollapsibleOptions> {
-  type: 'directive';
   name: 'collapsible';
   options?: CollapsibleOptions;
 }
@@ -326,7 +315,6 @@ interface ContentsOptions {
 }
 
 interface ContentsNode extends Directive<ContentsOptions> {
-  type: 'directive';
   name: 'contents';
   options: ContentsOptions;
 }
