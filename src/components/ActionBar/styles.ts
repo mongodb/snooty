@@ -132,7 +132,17 @@ const centerInGrid = css`
   }
 `;
 
-export const getContainerStyling = (template) => {
+type ContainerStylingTemplate =
+  | 'landing'
+  | 'product-landing'
+  | 'changelog'
+  | 'blank'
+  | 'errorpage'
+  | 'search'
+  | 'guide'
+  | 'drivers-index';
+
+export const getContainerStyling = (template: ContainerStylingTemplate) => {
   let containerClassname,
     searchContainerClassname,
     fakeColumns = false;
@@ -200,10 +210,10 @@ export const StyledInputContainer = styled.div`
   }
 
   @media ${theme.screenSize.mediumAndUp} {
-    width: ${({ sidenav }) => (sidenav ? '70' : '100')}%;
+    width: ${({ sidenav }: { sidenav: boolean }) => (sidenav ? '70' : '100')}%;
   }
 
-  ${(props) => {
+  ${(props: { mobileSearchActive: boolean }) => {
     return (
       props.mobileSearchActive &&
       `
