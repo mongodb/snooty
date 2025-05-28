@@ -1,5 +1,4 @@
 import React, { lazy, useState, useContext } from 'react';
-import PropTypes from 'prop-types';
 import Button from '@leafygreen-ui/button';
 import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
@@ -10,6 +9,7 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { getCurrLocale } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { PageTemplateType } from '../../context/page-context';
 import { SidenavContext } from '../Sidenav';
 import { SuspenseHelper } from '../SuspenseHelper';
 import DarkModeDropdown from './DarkModeDropdown';
@@ -30,7 +30,14 @@ const ChatbotModal = lazy(() => import('./ChatbotModal'));
 
 const CHATBOT_TEXT = 'Ask MongoDB AI';
 
-const ActionBar = ({ template, slug, sidenav, ...props }) => {
+interface ActionBarProps {
+  template: PageTemplateType;
+  slug: string;
+  sidenav: boolean;
+  className?: string;
+}
+
+const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
   const [chatbotClicked, setChatbotClicked] = useState(false);
   const locale = getCurrLocale();
 
@@ -49,9 +56,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
     : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
-    <div
-      className={cx(props.className, actionBarStyling, containerClassname, isOfflineDocsBuild ? offlineStyling : '')}
-    >
+    <div className={cx(className, actionBarStyling, containerClassname, isOfflineDocsBuild ? offlineStyling : '')}>
       {fakeColumns && <div></div>}
       <ActionBarSearchContainer className={cx(searchContainerClassname)}>
         {sidenav && (
@@ -78,7 +83,7 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
               <IconButton className={chatbotMobileButtonStyling} aria-label={CHATBOT_TEXT} onClick={openChatbot}>
                 <Icon glyph={'Sparkle'} />
               </IconButton>
-              <SuspenseHelper>
+              <SuspenseHelper fallback={null}>
                 <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
                   <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
                 </Chatbot>
@@ -90,12 +95,6 @@ const ActionBar = ({ template, slug, sidenav, ...props }) => {
       )}
     </div>
   );
-};
-
-ActionBar.propTypes = {
-  template: PropTypes.string,
-  slug: PropTypes.string.isRequired,
-  sidenav: PropTypes.bool.isRequired,
 };
 
 export default ActionBar;

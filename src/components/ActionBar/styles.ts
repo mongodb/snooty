@@ -10,6 +10,7 @@ import {
   DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE_LARGE_SCREEN,
 } from '../../templates/document';
 import { MAIN_COLUMN_HORIZONTAL_MARGIN } from '../MainColumn';
+import { PageTemplateType } from '../../context/page-context';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
@@ -132,7 +133,7 @@ const centerInGrid = css`
   }
 `;
 
-export const getContainerStyling = (template) => {
+export const getContainerStyling = (template: PageTemplateType) => {
   let containerClassname,
     searchContainerClassname,
     fakeColumns = false;
@@ -184,7 +185,12 @@ export const ActionBarSearchContainer = styled.div`
   }
 `;
 
-export const StyledInputContainer = styled.div`
+interface StyledInputProps {
+  sidenav?: boolean;
+  mobileSearchActive: boolean;
+}
+
+export const StyledInputContainer = styled.div<StyledInputProps>`
   width: 100%;
   max-width: 610px;
   background: inherit;
@@ -229,7 +235,7 @@ export const StyledSearchBoxRef = styled.div`
   width: 100%;
 `;
 
-export const searchInputStyling = ({ mobileSearchActive }) => css`
+export const searchInputStyling = ({ mobileSearchActive }: StyledInputProps) => css`
   ${displayNone.onMedium};
 
   @media ${theme.screenSize.upToMedium} {

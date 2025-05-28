@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createGlyphComponent } from '@leafygreen-ui/icon';
 
-export const SparkleIcon = createGlyphComponent('Sparkle', (props) => (
+export const SparkleIcon = createGlyphComponent('Sparkle', (props: React.SVGProps<SVGSVGElement>) => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       d="M6.27413 2.89343L5.27579 5.88842C5.17568 6.18877 4.94 6.42445 4.63965 6.52456L1.64466 7.52289C1.18616 7.67573 1.18615 8.32427 1.64466 8.47711L4.63965 9.47544C4.94 9.57555 5.17568 9.81123 5.27579 10.1116L6.27413 13.1066C6.42696 13.5651 7.0755 13.5651 7.22834 13.1066L8.22667 10.1116C8.32679 9.81123 8.56247 9.57555 8.86281 9.47544L11.8578 8.47711C12.3163 8.32427 12.3163 7.67573 11.8578 7.52289L8.86281 6.52456C8.56247 6.42445 8.32679 6.18877 8.22667 5.88842L7.22834 2.89343C7.0755 2.43492 6.42696 2.43492 6.27413 2.89343Z"

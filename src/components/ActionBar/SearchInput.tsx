@@ -20,20 +20,25 @@ import { searchIconStyling, searchInputStyling, StyledInputContainer, StyledSear
 export const PLACEHOLDER_TEXT = `Search MongoDB Docs`;
 const PLACEHOLDER_TEXT_MOBILE = 'Search';
 
-const SearchInput = ({ className, slug }) => {
+interface SearchInputProps {
+  className?: string;
+  slug?: string;
+}
+
+const SearchInput = ({ className, slug }: SearchInputProps) => {
   const [searchValue, setSearchValue] = useState('');
-  const searchBoxRef = useRef();
-  const inputRef = useRef();
+  const searchBoxRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { project, snootyEnv } = useSiteMetadata();
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
   const { search } = useLocation();
   const docsets = useAllDocsets();
 
-  const keyPressHandler = useCallback(async (event) => {
+  const keyPressHandler = useCallback(async (event: KeyboardEvent) => {
     // cmd+k or ctrl+k focuses search bar,
     // unless already focused on an input field
     const holdingCtrlCmd = (navigator.userAgent.includes('Mac') && event.metaKey) || event.ctrlKey;
-    if (holdingCtrlCmd && event.key === 'k' && document.activeElement.tagName.toLowerCase() !== 'input') {
+    if (holdingCtrlCmd && event.key === 'k' && document.activeElement?.tagName.toLowerCase() !== 'input') {
       event.preventDefault();
       inputRef.current?.focus();
       return;
@@ -80,10 +85,11 @@ const SearchInput = ({ className, slug }) => {
     const ENVS_WITH_SEARCH = ['dotcomstg', 'dotcomprd'];
     const targetEnv = ENVS_WITH_SEARCH.includes(snootyEnv) ? snootyEnv : ENVS_WITH_SEARCH[1];
     const landingDocset = docsets.find((d) => d.project === 'landing');
-    return (
-      assertTrailingSlash(landingDocset.url[targetEnv]) +
-      localizePath(assertTrailingSlash(landingDocset.prefix[targetEnv]) + 'search')
-    );
+
+    const url = landingDocset?.url?.[targetEnv as keyof typeof landingDocset.url];
+    const prefix = landingDocset?.prefix?.[targetEnv as keyof typeof landingDocset.prefix];
+
+    return assertTrailingSlash(url) + localizePath(assertTrailingSlash(prefix) + 'search');
   }, [docsets, snootyEnv]);
 
   const onSubmit = () => {
