@@ -463,6 +463,23 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
+type BannerOptions = {
+  variant: 'info' | 'warning' | 'danger';
+};
+
+interface BannerNode extends Directive<BannerOptions> {
+  options: BannerOptions;
+}
+
+type CTABannerOptions = {
+  url: string;
+  icon?: string;
+};
+
+interface CTABannerNode extends Directive<CTABannerOptions> {
+  options: CTABannerOptions;
+}
+
 export type {
   ParentNode,
   Root,
@@ -515,4 +532,6 @@ export type {
   ComposableTutorialNode,
   ComposableTutorialOption,
   MetaNode,
+  BannerNode,
+  CTABannerNode,
 };

@@ -4,9 +4,15 @@ import LeafyBanner from '@leafygreen-ui/banner';
 import { cx } from '@leafygreen-ui/emotion';
 import Link from '../Link';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
+import type { BannerTemplateType } from './styles/bannerItemStyle';
 import { baseBannerStyle, offlineBannerStyle, offlineBannerContainerStyle } from './styles/bannerItemStyle';
 
-const OfflineBanner = ({ linkUrl = 'https://mongodb.com/docs/', template = 'document' }) => {
+interface OfflineBannerProps {
+  linkUrl?: string;
+  template?: BannerTemplateType;
+}
+
+const OfflineBanner = ({ linkUrl = 'https://mongodb.com/docs/', template = 'document' }: OfflineBannerProps) => {
   return (
     <div className={cx(offlineBannerContainerStyle({ template }))}>
       <LeafyBanner className={cx(baseBannerStyle, offlineBannerStyle({ template }))} variant={'warning'}>
