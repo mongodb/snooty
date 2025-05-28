@@ -9,6 +9,7 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { getCurrLocale } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { PageTemplateType } from '../../context/page-context';
 import { SidenavContext } from '../Sidenav';
 import { SuspenseHelper } from '../SuspenseHelper';
 import DarkModeDropdown from './DarkModeDropdown';
@@ -18,7 +19,6 @@ import {
   ActionsBox,
   actionBarStyling,
   getContainerStyling,
-  ContainerStylingTemplate,
   offlineStyling,
   overlineStyling,
   chatbotButtonStyling,
@@ -31,7 +31,7 @@ const ChatbotModal = lazy(() => import('./ChatbotModal'));
 const CHATBOT_TEXT = 'Ask MongoDB AI';
 
 interface ActionBarProps {
-  template: ContainerStylingTemplate;
+  template: PageTemplateType;
   slug: string;
   sidenav: boolean;
   className?: string;

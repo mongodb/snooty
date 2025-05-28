@@ -10,6 +10,7 @@ import {
   DOCUMENT_TEMPLATE_MAX_WIDTH_VALUE_LARGE_SCREEN,
 } from '../../templates/document';
 import { MAIN_COLUMN_HORIZONTAL_MARGIN } from '../MainColumn';
+import { PageTemplateType } from '../../context/page-context';
 
 // default styling for all Action Bars
 export const actionBarStyling = css`
@@ -132,18 +133,7 @@ const centerInGrid = css`
   }
 `;
 
-export type ContainerStylingTemplate =
-  | 'landing'
-  | 'product-landing'
-  | 'changelog'
-  | 'blank'
-  | 'errorpage'
-  | 'search'
-  | 'guide'
-  | 'drivers-index'
-  | 'openapi';
-
-export const getContainerStyling = (template: ContainerStylingTemplate) => {
+export const getContainerStyling = (template: PageTemplateType) => {
   let containerClassname,
     searchContainerClassname,
     fakeColumns = false;

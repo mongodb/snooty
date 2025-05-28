@@ -11,6 +11,7 @@ export type PageTemplateType =
   | 'openapi'
   | 'changelog'
   | 'search'
+  | 'guide'
   | 'product-landing';
 
 interface PageContextType {
