@@ -3,7 +3,12 @@ import { useChatbotContext, ModalView, MongoDbLegalDisclosure, PoweredByAtlasVec
 import { css } from '@leafygreen-ui/emotion';
 import { defaultSuggestedPrompts } from '../ChatbotUi';
 
-const ChatbotModal = ({ chatbotClicked, setChatbotClicked }) => {
+interface ChatbotModalProps {
+  chatbotClicked: boolean;
+  setChatbotClicked: (chatbotClicked: boolean) => void;
+}
+
+const ChatbotModal = ({ chatbotClicked, setChatbotClicked }: ChatbotModalProps) => {
   const { openChat } = useChatbotContext();
   useEffect(() => {
     if (chatbotClicked) {
