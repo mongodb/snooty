@@ -196,7 +196,7 @@ export const ActionBarSearchContainer = styled.div`
 `;
 
 interface StyledInputProps {
-  sidenav: boolean;
+  sidenav?: boolean;
   mobileSearchActive: boolean;
 }
 

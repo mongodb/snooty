@@ -20,20 +20,25 @@ import { searchIconStyling, searchInputStyling, StyledInputContainer, StyledSear
 export const PLACEHOLDER_TEXT = `Search MongoDB Docs`;
 const PLACEHOLDER_TEXT_MOBILE = 'Search';
 
-const SearchInput = ({ className, slug }) => {
+interface SearchInputProps {
+  className?: string;
+  slug?: string;
+}
+
+const SearchInput = ({ className, slug }: SearchInputProps) => {
   const [searchValue, setSearchValue] = useState('');
-  const searchBoxRef = useRef();
-  const inputRef = useRef();
+  const searchBoxRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { project, snootyEnv } = useSiteMetadata();
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
   const { search } = useLocation();
   const docsets = useAllDocsets();
 
-  const keyPressHandler = useCallback(async (event) => {
+  const keyPressHandler = useCallback(async (event: KeyboardEvent) => {
     // cmd+k or ctrl+k focuses search bar,
     // unless already focused on an input field
     const holdingCtrlCmd = (navigator.userAgent.includes('Mac') && event.metaKey) || event.ctrlKey;
-    if (holdingCtrlCmd && event.key === 'k' && document.activeElement.tagName.toLowerCase() !== 'input') {
+    if (holdingCtrlCmd && event.key === 'k' && document.activeElement?.tagName.toLowerCase() !== 'input') {
       event.preventDefault();
       inputRef.current?.focus();
       return;
