@@ -18,6 +18,7 @@ import {
   ActionsBox,
   actionBarStyling,
   getContainerStyling,
+  ContainerStylingTemplate,
   offlineStyling,
   overlineStyling,
   chatbotButtonStyling,
@@ -30,7 +31,7 @@ const ChatbotModal = lazy(() => import('./ChatbotModal'));
 const CHATBOT_TEXT = 'Ask MongoDB AI';
 
 interface ActionBarProps {
-  template: string;
+  template: ContainerStylingTemplate;
   slug: string;
   sidenav: boolean;
   className?: string;

@@ -132,7 +132,7 @@ const centerInGrid = css`
   }
 `;
 
-type ContainerStylingTemplate =
+export type ContainerStylingTemplate =
   | 'landing'
   | 'product-landing'
   | 'changelog'
@@ -140,7 +140,8 @@ type ContainerStylingTemplate =
   | 'errorpage'
   | 'search'
   | 'guide'
-  | 'drivers-index';
+  | 'drivers-index'
+  | 'openapi';
 
 export const getContainerStyling = (template: ContainerStylingTemplate) => {
   let containerClassname,
