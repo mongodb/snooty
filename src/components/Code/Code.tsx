@@ -1,4 +1,3 @@
-// /** @jsxImportSource @emotion/react */
 import React, { useCallback, useContext, useMemo } from 'react';
 import { css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
