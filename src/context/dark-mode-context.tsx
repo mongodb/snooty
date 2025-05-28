@@ -12,7 +12,7 @@ import useMedia from '../hooks/use-media';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 
-type DarkModePref = 'light-theme' | 'dark-theme' | 'system';
+export type DarkModePref = 'light-theme' | 'dark-theme' | 'system';
 
 interface DarkModeContextType {
   darkModePref: DarkModePref;

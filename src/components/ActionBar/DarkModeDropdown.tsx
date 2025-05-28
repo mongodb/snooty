@@ -3,7 +3,7 @@ import { cx, css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
 import { Menu, MenuItem } from '@leafygreen-ui/menu';
-import { DarkModeContext } from '../../context/dark-mode-context';
+import { DarkModeContext, DarkModePref } from '../../context/dark-mode-context';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import IconDarkmode from '../icons/DarkMode';
@@ -30,7 +30,7 @@ const darkModeSvgStyle = {
 };
 
 const DarkModeDropdown = () => {
-  const dropdownRef = useRef();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // not using dark mode from LG/provider here to account for case of 'system' dark theme
   const { setDarkModePref, darkModePref } = useContext(DarkModeContext);
@@ -38,7 +38,7 @@ const DarkModeDropdown = () => {
   const [open, setOpen] = useState(false);
 
   const select = useCallback(
-    (selectedPref) => {
+    (selectedPref: DarkModePref) => {
       reportAnalytics('DarkModeSelection', {
         value: selectedPref,
       });
@@ -114,7 +114,5 @@ const DarkModeDropdown = () => {
     </div>
   );
 };
-
-DarkModeDropdown.propTypes = {};
 
 export default DarkModeDropdown;
