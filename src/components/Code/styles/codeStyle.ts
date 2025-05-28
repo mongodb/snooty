@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 

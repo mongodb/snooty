@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { cx, css as LeafyCss } from '@leafygreen-ui/emotion';
+import { cx, css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import Button from '@leafygreen-ui/button';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
@@ -12,14 +11,13 @@ import Input from './Input';
 import Output from './Output';
 import { baseCodeStyle, borderCodeStyle } from './styles/codeStyle';
 
-const outputButtonStyling = LeafyCss`
+const outputButtonStyling = css`
   padding: 0px;
   height: 24px;
   margin: 8px;
 
-  ${
-    isOfflineDocsBuild &&
-    `
+  ${isOfflineDocsBuild &&
+  `
     span:nth-of-type(2) {
       display: none;
     }
@@ -34,13 +32,12 @@ const outputButtonStyling = LeafyCss`
         display: none;
       }
     }  
-  `
-  }
+  `}
 `;
 
 const getButtonText = (showOutput: boolean) => (showOutput ? 'HIDE OUTPUT' : 'VIEW OUTPUT');
 
-const outputContainerStyle = (showOutput: boolean) => LeafyCss`
+const outputContainerStyle = (showOutput: boolean) => css`
   ${!showOutput && 'display: none;'}
 `;
 
@@ -67,26 +64,25 @@ const CodeIO = ({ nodeData: { children } }: { nodeData: IOCodeBlockNode }) => {
     return null;
   }
 
-  return (
-    <div
-      // @ts-ignore
-      css={css`
-        ${baseCodeStyle}
-        // Inner div of LG component has a width set to 700px. Unset this as part of our
-        // override for docs when the language switcher is being used.
-        > div > div {
-          border-bottom-right-radius: ${singleInputBorderRadius};
-          border-bottom-left-radius: ${singleInputBorderRadius};
-        }
+  const containerStyle = css`
+    ${baseCodeStyle}
+    // Inner div of LG component has a width set to 700px. Unset this as part of our
+    // override for docs when the language switcher is being used.
+    > div > div {
+      border-bottom-right-radius: ${singleInputBorderRadius};
+      border-bottom-left-radius: ${singleInputBorderRadius};
+    }
 
-        // Controls output code block and toggle view bar style
-        > div {
-          border-bottom-right-radius: ${outputBorderRadius};
-          border-bottom-left-radius: ${outputBorderRadius};
-          margin: 0px;
-        }
-      `}
-    >
+    // Controls output code block and toggle view bar style
+    > div {
+      border-bottom-right-radius: ${outputBorderRadius};
+      border-bottom-left-radius: ${outputBorderRadius};
+      margin: 0px;
+    }
+  `;
+
+  return (
+    <div className={containerStyle}>
       {needsIOToggle && (
         <>
           <Input nodeData={children[0]} />

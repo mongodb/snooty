@@ -1,5 +1,6 @@
+// /** @jsxImportSource @emotion/react */
 import React, { useCallback, useContext, useMemo } from 'react';
-import { css } from '@emotion/react';
+import { css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { default as CodeBlock } from '@leafygreen-ui/code';
 import Icon from '@leafygreen-ui/icon';
@@ -17,6 +18,32 @@ import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { CodeNode } from '../../types/ast';
 import { baseCodeStyle, borderCodeStyle, lgStyles } from './styles/codeStyle';
 import { CodeContext, LanguageOption } from './code-context';
+
+const codeContainerStyle = css`
+  ${baseCodeStyle}
+
+  pre {
+    background-color: ${palette.gray.light3};
+    color: ${palette.black};
+
+    .dark-theme & {
+      background-color: ${palette.black};
+      color: ${palette.gray.light3};
+    }
+  }
+
+  [data-testid='leafygreen-code-panel'] {
+    background-color: ${palette.white};
+    border-color: ${palette.gray.light2};
+
+    .dark-theme & {
+      background-color: ${palette.gray.dark2};
+      border-color: ${palette.gray.dark2};
+    }
+  }
+
+  ${lgStyles}
+`;
 
 const sourceCodeStyle = css`
   display: flex;
@@ -107,6 +134,26 @@ const Code = ({
     return sd.isValid() ? sd.toString() : undefined;
   }, [code, lang, slug]);
 
+  const captionAndWhitespaceStyle = css`
+    // Remove whitespace when copyable false
+    > div > div {
+      display: grid;
+      grid-template-columns: ${!copyable && (languageOptions?.length === 0 || language === 'none')
+        ? 'auto 0px !important'
+        : 'code panel'};
+    }
+
+    > div {
+      border-top-left-radius: ${captionBorderRadius};
+      border-top-right-radius: ${captionBorderRadius};
+      border-color: ${palette.gray.light2};
+
+      .dark-theme & {
+        border-color: ${palette.gray.dark2};
+      }
+    }
+  `;
+
   return (
     <>
       {softwareSourceCodeSd && (
@@ -119,51 +166,9 @@ const Code = ({
         />
       )}
       <div
-        className={isOfflineDocsBuild ? OFFLINE_CONTAINER_CLASSNAME : undefined}
-        // @ts-ignore
-        css={css`
-          ${baseCodeStyle}
-
-          // Remove whitespace when copyable false
-          > div > div {
-            display: grid;
-            grid-template-columns: ${!copyable && (languageOptions?.length === 0 || language === 'none')
-              ? 'auto 0px !important'
-              : 'code panel'};
-          }
-
-          > div {
-            border-top-left-radius: ${captionBorderRadius};
-            border-top-right-radius: ${captionBorderRadius};
-            border-color: ${palette.gray.light2};
-
-            .dark-theme & {
-              border-color: ${palette.gray.dark2};
-            }
-          }
-
-          pre {
-            background-color: ${palette.gray.light3};
-            color: ${palette.black};
-
-            .dark-theme & {
-              background-color: ${palette.black};
-              color: ${palette.gray.light3};
-            }
-          }
-
-          [data-testid='leafygreen-code-panel'] {
-            background-color: ${palette.white};
-            border-color: ${palette.gray.light2};
-
-            .dark-theme & {
-              background-color: ${palette.gray.dark2};
-              border-color: ${palette.gray.dark2};
-            }
-          }
-
-          ${lgStyles}
-        `}
+        className={`${
+          isOfflineDocsBuild ? OFFLINE_CONTAINER_CLASSNAME : ''
+        } ${codeContainerStyle} ${captionAndWhitespaceStyle}`}
       >
         {captionSpecified && (
           <div>

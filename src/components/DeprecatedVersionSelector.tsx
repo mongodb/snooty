@@ -178,8 +178,8 @@ const DeprecatedVersionSelector = () => {
     if (isBrowser) {
       // Extract the value of 'site' query string from the page url to pre-select product
       const { site } = queryString.parse(window.location.search);
-      if (site && !Array.isArray(site) && reposMap[site] && reposMap[site].displayName) {
-        setProductName(reposMap[site].displayName);
+      if (site && !Array.isArray(site) && reposMap[site] && !!reposMap[site].displayName) {
+        setProductName(reposMap[site].displayName as string);
       }
     }
   }, [reposMap]);

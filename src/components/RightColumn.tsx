@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { css } from '@emotion/react';
+import { cx, css } from '@leafygreen-ui/emotion';
 import useStickyTopValues from '../hooks/useStickyTopValues';
 import { displayNone } from '../utils/display-none';
 import { theme } from '../theme/docsTheme';
@@ -8,30 +8,26 @@ import { DISMISSIBLE_SKILLS_CARD_CLASSNAME } from './DismissibleSkillsCard';
 const RightColumn = ({
   hasDismissibleSkillsCard,
   children,
-  className,
 }: {
   hasDismissibleSkillsCard: boolean;
   children: ReactNode;
-  className?: string;
 }) => {
   const { topLarge } = useStickyTopValues();
 
   return (
     <div
-      className={className}
-      // @ts-ignore
-      css={css`
+      className={cx(css`
         margin: 70px ${theme.size.medium} 40px 5px;
         min-width: ${hasDismissibleSkillsCard ? '250px' : '180px'};
         max-width: 250px;
         z-index: ${theme.zIndexes.content + 2};
 
         ${displayNone.onMobileAndTablet};
-      `}
+      `)}
     >
       <div
         // @ts-ignore
-        css={css`
+        className={cx(css`
           height: calc(100vh - 120px);
           position: sticky;
           top: calc(${topLarge} + ${theme.size.medium});
@@ -40,7 +36,7 @@ const RightColumn = ({
             margin-bottom: 30px;
             margin-right: 24px;
           }
-        `}
+        `)}
       >
         {children}
       </div>

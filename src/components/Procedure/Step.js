@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
+import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
@@ -113,13 +113,12 @@ const contentStyles = {
 };
 
 const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', template, ...rest }) => {
-  console.log('STEP style ', stepStyle);
   return (
-    <StyledStep css={landingStepStyles[stepStyle]}>
+    <StyledStep className={cx(landingStepStyles[stepStyle])}>
       <StepBlock>
-        <Circle css={circleIndividualStyles[stepStyle]}>{stepNumber}</Circle>
+        <Circle className={cx(circleIndividualStyles[stepStyle])}>{stepNumber}</Circle>
       </StepBlock>
-      <Content css={contentStyles[stepStyle]}>
+      <Content className={cx(contentStyles[stepStyle])}>
         {children.map((child, i) => (
           <ComponentFactory {...rest} nodeData={child} template={template} key={i} />
         ))}

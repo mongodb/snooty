@@ -130,8 +130,10 @@ const roleMap: Record<RoleName, React.ComponentType<any>> = {
 };
 
 const getComponent = (() => {
-  let componentMap: Record<ComponentType, React.ComponentType<any>> | undefined = undefined;
-  return (key: ComponentType) => {
+  let componentMap:
+    | Record<Exclude<ComponentType, 'toctree' | 'role' | 'tab' | 'selected-content'>, React.ComponentType<any>>
+    | undefined = undefined;
+  return (key: Exclude<ComponentType, 'toctree' | 'role' | 'tab' | 'selected-content'>) => {
     if (componentMap === undefined) {
       componentMap = {
         admonition: Admonition,
