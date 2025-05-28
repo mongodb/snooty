@@ -194,7 +194,12 @@ export const ActionBarSearchContainer = styled.div`
   }
 `;
 
-export const StyledInputContainer = styled.div`
+interface StyledInputProps {
+  sidenav: boolean;
+  mobileSearchActive: boolean;
+}
+
+export const StyledInputContainer = styled.div<StyledInputProps>`
   width: 100%;
   max-width: 610px;
   background: inherit;
@@ -210,10 +215,10 @@ export const StyledInputContainer = styled.div`
   }
 
   @media ${theme.screenSize.mediumAndUp} {
-    width: ${({ sidenav }: { sidenav: boolean }) => (sidenav ? '70' : '100')}%;
+    width: ${({ sidenav }) => (sidenav ? '70' : '100')}%;
   }
 
-  ${(props: { mobileSearchActive: boolean }) => {
+  ${(props) => {
     return (
       props.mobileSearchActive &&
       `
@@ -239,7 +244,7 @@ export const StyledSearchBoxRef = styled.div`
   width: 100%;
 `;
 
-export const searchInputStyling = ({ mobileSearchActive }) => css`
+export const searchInputStyling = ({ mobileSearchActive }: StyledInputProps) => css`
   ${displayNone.onMedium};
 
   @media ${theme.screenSize.upToMedium} {
