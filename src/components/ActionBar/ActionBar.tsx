@@ -1,4 +1,4 @@
-import { lazy, useState, useContext } from 'react';
+import React, { lazy, useState, useContext } from 'react';
 import Button from '@leafygreen-ui/button';
 import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
