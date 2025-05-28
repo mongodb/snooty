@@ -83,8 +83,7 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
               <IconButton className={chatbotMobileButtonStyling} aria-label={CHATBOT_TEXT} onClick={openChatbot}>
                 <Icon glyph={'Sparkle'} />
               </IconButton>
-              {/* TODO: this needs a proper fallback */}
-              <SuspenseHelper fallback={<div>Loading...</div>}>
+              <SuspenseHelper fallback={null}>
                 <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
                   <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
                 </Chatbot>
