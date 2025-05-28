@@ -1,6 +1,11 @@
 import React from 'react';
 
-const IconDarkmode = ({ styles, className }) => {
+interface IconDarkmodeProps {
+  styles?: React.SVGProps<SVGSVGElement>;
+  className?: string;
+}
+
+const IconDarkmode = ({ styles, className }: IconDarkmodeProps) => {
   return (
     <svg
       id="Layer_1"
