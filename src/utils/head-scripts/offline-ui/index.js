@@ -1,3 +1,4 @@
+import React from 'react';
 import bindTabUI from './tabs';
 import bindCollapsibleUI from './collapsible';
 import updateSidenavHeight from './sidenav';

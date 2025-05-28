@@ -1,27 +1,168 @@
-type NodeType =
-  | 'root'
-  | 'section'
-  | 'heading'
-  | 'reference'
-  | 'directive'
-  | 'list'
+type ComponentType =
+  | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
+  | 'admonition'
+  | 'banner'
+  | 'blockquote'
+  | 'button'
+  | 'card'
+  | 'card-group'
+  | 'chapter'
+  | 'chapters'
+  | 'collapsible'
+  | 'community-driver'
+  | 'composable-tutorial'
+  | 'cond'
+  | 'container'
+  | 'cta'
+  | 'deprecated'
+  | 'deprecated-version-selector'
+  | 'describe'
+  | 'extract'
+  | 'field'
+  | 'field_list'
+  | 'figure'
+  | 'footnote'
+  | 'footnote_reference'
+  | 'glossary'
+  | 'guide-next'
+  | 'hlist'
+  | 'image'
+  | 'include'
+  | 'introduction'
+  | 'io-code-block'
+  | 'kicker'
+  | 'literal_block'
   | 'list-table'
-  | 'listItem'
-  | 'text'
-  | 'literal'
+  | 'literalinclude'
+  | 'openapi-changelog'
+  | 'procedure'
+  | 'ref_role'
+  | 'role'
+  | 'release_specification'
+  | 'rubric'
+  | 'search-results'
+  | 'section'
+  | 'seealso'
+  | 'selected-content'
+  | 'sharedinclude'
+  | 'substitution_reference'
+  | 'tab'
+  | 'tabs-selector'
+  | 'time'
+  | 'title_reference'
+  | 'transition'
+  | 'versionadded'
+  | 'versionchanged'
+  | 'tabs'
+  | 'wayfinding';
+
+type DirectiveName =
+  | AdmonitionName
+  | 'admonition'
+  | 'banner'
+  | 'blockquote'
+  | 'collapsible'
+  | 'community-driver'
+  | 'composable-tutorials'
+  | 'contents'
+  | 'deprecated'
+  | 'directive'
+  | 'dismissible-skills-card'
+  | 'facet'
+  | 'icon'
+  | 'input'
+  | 'io-code-block'
+  | 'list-table'
+  | 'literalinclude'
+  | 'meta'
+  | 'openapi-changelog'
+  | 'output'
+  | 'procedure'
+  | 'ref_role'
+  | 'role'
+  | 'release_specification'
+  | 'rubric'
+  | 'search-results'
+  | 'section'
+  | 'seealso'
+  | 'selected-content'
+  | 'sharedinclude'
+  | 'substitution_reference'
+  | 'tab'
+  | 'tabs-selector'
+  | 'time'
+  | 'title_reference'
+  | 'transition'
+  | 'toctree'
+  | 'versionadded'
+  | 'versionchanged'
+  | 'tabs'
+  | 'wayfinding';
+
+type NodeType =
+  | 'code'
+  | 'cta-banner'
   | 'definitionList'
   | 'definitionListItem'
+  | 'directive'
+  | 'directive_argument'
+  | 'emphasis'
+  | 'heading'
+  | 'line'
+  | 'line_block'
+  | 'list'
+  | 'listItem'
+  | 'literal'
+  | 'method-selector'
+  | 'only'
+  | 'paragraph'
+  | 'reference'
+  | 'role'
+  | 'root'
+  | 'section'
+  | 'strong'
+  | 'tabs'
   | 'target'
   | 'target_identifier'
-  | 'directive_argument'
-  | 'code';
+  | 'text';
+
+type RoleName = (typeof roleNames)[number];
+export const roleNames = [
+  'abbr',
+  'class',
+  'command',
+  'file',
+  'guilabel',
+  'icon',
+  'highlight-blue',
+  'highlight-green',
+  'highlight-red',
+  'highlight-yellow',
+  'icon-fa5',
+  'icon-fa5-brands',
+  'icon-fa4',
+  'icon-mms',
+  'icon-charts',
+  'icon-lg',
+  'kbd',
+  'red',
+  'gold',
+  'required',
+  'sub',
+  'subscript',
+  'sup',
+  'superscript',
+  'link-new-tab',
+];
+
+type NodeName = RoleName | DirectiveName | AdmonitionName;
 
 type DirectiveOptions = {
   [key: string]: string;
 };
 
 interface Node {
-  type: NodeType | string;
+  type: NodeType;
 }
 
 interface ParentNode extends Node {
@@ -67,10 +208,22 @@ interface ReferenceNode extends ParentNode {
 
 interface Directive<TOptions = DirectiveOptions> extends ParentNode {
   type: 'directive';
-  name: string;
+  name: DirectiveName;
   argument: Node[];
   domain?: string;
   options?: TOptions;
+}
+
+interface BlockQuoteNode extends Directive {
+  name: 'blockquote';
+}
+
+type ButtonOptions = {
+  uri: string;
+};
+
+interface ButtonNode extends Directive<ButtonOptions> {
+  options: ButtonOptions;
 }
 
 type DismissibleSkillsCardOptions = {
@@ -135,6 +288,37 @@ interface CodeNode extends Node {
   emphasize_lines: number[];
   value: string;
   linenos: boolean;
+  caption?: string;
+  source?: string;
+  lineno_start?: number;
+}
+
+type IOCodeBlockOptions = {
+  copyable: boolean;
+};
+
+interface IOCodeBlockNode extends Directive<IOCodeBlockOptions> {
+  name: 'io-code-block';
+  children: [IOInputNode] | [IOInputNode, IOOutputNode];
+  options: IOCodeBlockOptions;
+}
+
+type InputOutputOptions = {
+  language: string;
+  linenos: boolean;
+  visible?: boolean;
+};
+
+interface IOInputNode extends Directive<InputOutputOptions> {
+  name: 'input';
+  children: CodeNode[];
+  options: InputOutputOptions;
+}
+
+interface IOOutputNode extends Directive<InputOutputOptions> {
+  name: 'output';
+  children: CodeNode[];
+  options: InputOutputOptions;
 }
 
 interface MethodNode extends ParentNode {
@@ -159,7 +343,6 @@ type CollapsibleOptions = {
 };
 
 interface CollapsibleNode extends Directive<CollapsibleOptions> {
-  type: 'directive';
   name: 'collapsible';
   options?: CollapsibleOptions;
 }
@@ -172,7 +355,6 @@ interface ContentsOptions {
 }
 
 interface ContentsNode extends Directive<ContentsOptions> {
-  type: 'directive';
   name: 'contents';
   options: ContentsOptions;
 }
@@ -225,6 +407,15 @@ interface TocTreeDirective extends Directive<TocTreeOptions> {
   entries: TocTreeEntry[];
 }
 
+type CommunityDriverPillOptions = {
+  url: string;
+};
+
+interface CommunityDriverPill extends Directive<CommunityDriverPillOptions> {
+  name: 'community-driver';
+  options: CommunityDriverPillOptions;
+}
+
 interface ComposableTutorialOption {
   default: string;
   dependencies: Record<string, string>[];
@@ -256,18 +447,56 @@ interface MetaNode extends Directive {
   name: 'meta';
 }
 
+interface TitleReferenceNode {
+  children: TextNode[];
+}
+
+type TwitterOptions = {
+  creator?: string;
+  image?: string;
+  'image-alt'?: string;
+  site?: string;
+  title?: string;
+};
+
+interface TwitterNode extends Directive<TwitterOptions> {
+  options: TwitterOptions;
+}
+
+type BannerOptions = {
+  variant: 'info' | 'warning' | 'danger';
+};
+
+interface BannerNode extends Directive<BannerOptions> {
+  options: BannerOptions;
+}
+
+type CTABannerOptions = {
+  url: string;
+  icon?: string;
+};
+
+interface CTABannerNode extends Directive<CTABannerOptions> {
+  options: CTABannerOptions;
+}
+
 export type {
-  NodeType,
-  Node,
   ParentNode,
   Root,
   HeadingNode,
   HeadingNodeSelectorIds,
   ReferenceNode,
   TextNode,
+  BlockQuoteNode,
+  ButtonNode,
   CodeNode,
+  CommunityDriverPill,
+  ComponentType,
   Directive,
   DirectiveOptions,
+  IOCodeBlockNode,
+  IOInputNode,
+  IOOutputNode,
   DismissibleSkillsCardNode,
   ListNode,
   ListTableNode,
@@ -276,6 +505,10 @@ export type {
   LiteralNode,
   LineBlockNode,
   LineNode,
+  Node,
+  NodeName,
+  NodeType,
+  RoleName,
   DefinitionListNode,
   DefinitionListItemNode,
   MethodNode,
@@ -288,6 +521,8 @@ export type {
   StrongNode,
   TabsNode,
   TabNode,
+  TitleReferenceNode,
+  TwitterNode,
   FacetNode,
   AdmonitionNode,
   AdmonitionName,
@@ -297,4 +532,6 @@ export type {
   ComposableTutorialNode,
   ComposableTutorialOption,
   MetaNode,
+  BannerNode,
+  CTABannerNode,
 };

@@ -1,3 +1,4 @@
+import React from 'react';
 import { isBrowser } from '../../../utils/is-browser';
 import { getPlaintext } from '../../../utils/get-plaintext';
 import { getNestedValue } from '../../../utils/get-nested-value';

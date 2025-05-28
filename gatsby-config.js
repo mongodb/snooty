@@ -24,7 +24,6 @@ const plugins = [
       path: `${__dirname}/src/images`, // cannot use public as plugins initialize before gatsby-node module
     },
   },
-  'gatsby-plugin-emotion',
   {
     resolve: 'gatsby-plugin-sitemap',
     options: {
