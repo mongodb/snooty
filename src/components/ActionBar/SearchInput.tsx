@@ -85,10 +85,11 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
     const ENVS_WITH_SEARCH = ['dotcomstg', 'dotcomprd'];
     const targetEnv = ENVS_WITH_SEARCH.includes(snootyEnv) ? snootyEnv : ENVS_WITH_SEARCH[1];
     const landingDocset = docsets.find((d) => d.project === 'landing');
-    return (
-      assertTrailingSlash(landingDocset.url[targetEnv]) +
-      localizePath(assertTrailingSlash(landingDocset.prefix[targetEnv]) + 'search')
-    );
+
+    const url = landingDocset?.url?.[targetEnv as keyof typeof landingDocset.url];
+    const prefix = landingDocset?.prefix?.[targetEnv as keyof typeof landingDocset.prefix];
+
+    return assertTrailingSlash(url) + localizePath(assertTrailingSlash(prefix) + 'search');
   }, [docsets, snootyEnv]);
 
   const onSubmit = () => {
