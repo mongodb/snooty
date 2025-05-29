@@ -1,5 +1,5 @@
 import { PageTemplateType } from '../context/page-context';
-import { ParagraphNode, TextNode } from './ast';
+import { ParagraphNode, TextNode, TocTreeEntry } from './ast';
 
 type EOLType = 'download' | 'link';
 
@@ -73,6 +73,42 @@ type SiteMetadata = {
 
 type SnootyEnv = 'dotcomprd' | 'production' | 'dotcomstg' | 'staging' | 'development';
 
+type RemoteMetadata = {
+  project: string;
+  branch: string;
+  title: string;
+  eol: boolean;
+  slugToTitle: Record<string, [TextNode]>;
+  toctree: TocTreeEntry;
+  toctreeOrder: string[];
+  parentPaths: Record<string, string[]>;
+  static_files: Record<string, Buffer>;
+  iatree?: IATreeNode;
+  openapi_pages?: Record<string, OpenApiPage>;
+  associated_products?: Array<AssociatedProduct>;
+};
+
+// TODO: Refine structure
+type IATreeNode = {
+  title: [TextNode];
+  slug?: string;
+  url?: string;
+  children?: Array<Node>;
+};
+
+// TODO: Refine structure
+type OpenApiPage = {
+  source_type: string;
+  source: string;
+  api_version?: string | null;
+  resource_versions?: string[] | null;
+};
+
+type AssociatedProduct = {
+  name: string;
+  versions: Array<string>;
+};
+
 type PageContext = {
   title: string;
   slug: string;
@@ -117,6 +153,7 @@ export {
   MetadataChapters,
   MetadataDatabaseName,
   PageContext,
+  RemoteMetadata,
   ReposDatabaseName,
   SiteMetadata,
   SnootyEnv,
