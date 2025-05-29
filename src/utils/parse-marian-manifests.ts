@@ -1,14 +1,18 @@
+import { MarianFilters, MarianManifestResponse, SearchPropertyMapping } from '../hooks/use-marian-manifests';
 import { compareBranchesWithVersionNumbers } from './compare-branches-with-version-numbers';
 
-export const getSortedBranchesForProperty = (parsedManifest, property) => {
+export const getSortedBranchesForProperty = (parsedManifest: MarianFilters, property: string) => {
   const branches = Object.keys(parsedManifest[property]);
   branches.sort(compareBranchesWithVersionNumbers);
   return branches;
 };
 
 // Parses a list of manifest strings from Marian
-export const parseMarianManifests = (manifests, searchPropertyMapping = {}) => {
-  const result = {};
+export const parseMarianManifests = (
+  manifests: MarianManifestResponse['manifests'],
+  searchPropertyMapping: SearchPropertyMapping = {}
+) => {
+  const result: MarianFilters = {};
 
   manifests.forEach((manifest) => {
     // We should only include categories and versions in the filter dropdowns if they
