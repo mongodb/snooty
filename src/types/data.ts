@@ -83,6 +83,7 @@ type RemoteMetadata = {
   toctreeOrder: string[];
   parentPaths: Record<string, string[]>;
   static_files: Record<string, Buffer>;
+  canonical?: string | null;
   iatree?: IATreeNode;
   openapi_pages?: Record<string, OpenApiPage>;
   associated_products?: Array<AssociatedProduct>;
