@@ -14,3 +14,7 @@ export interface TocItem {
   showSubNav?: boolean;
   items?: TocItem[];
 }
+
+export interface ActiveVersions {
+  [project: string]: string;
+}
