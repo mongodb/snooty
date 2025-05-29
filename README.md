@@ -89,7 +89,13 @@ COMMIT_HASH=zh-cn
 - `COMMIT_HASH` can be used to prepend its value to the path prefix of the site when building and serving. This can be useful for mocking the `/<local-code>/<path>` pathnames for docs pages, and for testing out
   locale-related logic for pathnames.
 
-## Staging
+## Staging with Netlify
+
+When a commit is pushed, this automatically triggers a Netlify build on your branch. For every push, a deploy and deploy preview will be generated.
+
+By default, the master branch of `docs-landing` will be parsed with the parser version specified in the `Netlify.toml` and built using your branch as the frontend. If you'd like to build a different site or branch or build with a different parser version, this can be easily done by just updating the values in the Netlify.toml accordingly. Don't forget to update the `ORG_NAME` to `mongodb` or `10gen` depending on which org your repo belongs to!
+
+## Staging (Deprecated)
 
 Install libxml2 with `brew install libxml2` on mac and `apt-get install libxml2` on linux
 
@@ -100,12 +106,6 @@ npm run build:clean:stage
 ```
 
 :warning: Note: This will promote the contents of your local public directory. Your instance in staging may break or be outdated if you haven't run `npm run build` before `make stage`.
-
-## Staging with Netlify
-
-When a commit is pushed, this automatically triggers a Netlify build on your branch. For every push, a deploy and deploy preview will be generated.
-
-By default, the master branch of `docs-landing` will be parsed with the parser version specified in the `Netlify.toml` and built using your branch as the frontend. If you'd like to build a different site or branch or build with a different parser version, this can be easily done by just updating the values in the Netlify.toml accordingly. Don't forget to update the `ORG_NAME` to `mongodb` or `10gen` depending on which org your repo belongs to!
 
 ## Releasing
 
