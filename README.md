@@ -26,9 +26,6 @@ You'll need to set some environment variables in two separate files at the root 
 Snooty's `develop` stage uses the `development` environment. Your `.env.development` file should be as follows:
 
 ```
-GATSBY_SITE=<SITE>
-GATSBY_PARSER_USER=<USER>
-GATSBY_PARSER_BRANCH=<BRANCH>
 GATSBY_SNOOTY_DEV=true
 ```
 
@@ -41,9 +38,6 @@ It should be set to `true` when working on snooty locally.
 Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
 
 ```
-GATSBY_SITE=<SITE>
-GATSBY_PARSER_USER=<USER>
-GATSBY_PARSER_BRANCH=<BRANCH>
 GATSBY_SNOOTY_DEV=true
 ```
 
