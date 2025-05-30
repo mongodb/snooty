@@ -9,16 +9,19 @@ Prerequisite: get a local doc site's AST to work with
 1. [Set up snooty-parser](https://github.com/mongodb/snooty-parser/blob/main/HACKING.md#developing-snooty)
 1. Clone a docs site, for example: `git clone git@github.com:mongodb/docs-landing.git`
 1. Parse the docs site with snooty-parser:
+
 ```
 poetry run snooty build ./path/to/docs-landing/ --output ./snooty-output/docs-landing.zip
 ```
 
-*NOTE*: If you'd like to see the JSON output of the AST, you can use:
+_NOTE_: If you'd like to see the JSON output of the AST, you can use:
+
 ```
 bsondump --pretty --outFile ./path/to/pretty.json ./path/to/file.bson
 ```
 
 From this repo:
+
 1. [Install snooty deps](#installation)
 1. [Set up .env to point to local AST](#running-with-local-manifest-path)
 1. [Run the site locally](#running-locally)
