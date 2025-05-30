@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
 import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import Tooltip from '@leafygreen-ui/tooltip';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
+import { BreadcrumbType } from './BreadcrumbContainer';
 
 const linkStyling = LeafyCss`
   font-size: ${theme.fontSize.small};
@@ -69,9 +69,15 @@ const useIsTruncated = (node) => {
   return JSON.parse(isTruncated);
 };
 
-const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => {
-  const [node, setNode] = useState(null);
-  const measuredRef = useCallback((node) => {
+type IndividualBreadcrumbProps = {
+  crumb: BreadcrumbType;
+  setIsExcessivelyTruncated: () => void;
+  onClick: () => void;
+};
+
+const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }: IndividualBreadcrumbProps) => {
+  const [node, setNode] = useState<HTMLDivElement | null>(null);
+  const measuredRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
       setNode(node);
     }
@@ -108,17 +114,6 @@ const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => 
   }
 
   return result;
-};
-
-const crumbObjectShape = {
-  title: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.arrayOf(PropTypes.object)]),
-  path: PropTypes.string.isRequired,
-};
-
-IndividualBreadcrumb.propTypes = {
-  crumb: PropTypes.shape(crumbObjectShape).isRequired,
-  setIsExcessivelyTruncated: PropTypes.func.isRequired,
-  onClick: PropTypes.func,
 };
 
 export default IndividualBreadcrumb;
