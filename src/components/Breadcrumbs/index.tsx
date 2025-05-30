@@ -2,11 +2,11 @@ import React from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
-import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-data.ts';
+import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-data';
 import { QueriedCrumbs, useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import BreadcrumbContainer from './BreadcrumbContainer';
+import BreadcrumbContainer, { BreadcrumbType } from './BreadcrumbContainer';
 
 const breadcrumbBodyStyle = css`
   font-size: ${theme.fontSize.small};
@@ -31,7 +31,7 @@ export type BreadcrumbsProps = {
   siteTitle: string;
   slug: string;
   queriedCrumbsProp?: QueriedCrumbs;
-  parentPathsProp?: string[];
+  parentPathsProp?: BreadcrumbType[];
   selfCrumb?: { title: string; slug: string };
   pageInfo?: PageInfo;
 };
