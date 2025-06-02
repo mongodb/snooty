@@ -17,7 +17,7 @@ const RightColumn = ({
   return (
     <div
       className={cx(css`
-        margin: 50px ${theme.size.medium} 70px 5px;
+        margin: 70px ${theme.size.medium} 40px 5px;
         min-width: ${hasDismissibleSkillsCard ? '250px' : '180px'};
         max-width: 250px;
         z-index: ${theme.zIndexes.content + 2};
