@@ -111,6 +111,9 @@ const Contents = ({
   if (filteredNodes.length === 0 || !showContentsComponent) {
     return (
       <div className={className}>
+        {!!dismissibleSkillsCard && (
+          <DismissibleSkillsCard skill={dismissibleSkillsCard.skill} url={dismissibleSkillsCard.url} slug={slug} />
+        )}
         <FeedbackRating slug={slug} className={formStyle} />
       </div>
     );

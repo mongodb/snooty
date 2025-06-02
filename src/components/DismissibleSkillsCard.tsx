@@ -30,6 +30,7 @@ const cardStyles = css`
   border-radius: 12px;
 
   p {
+    line-height: 20px;
     font-size: ${theme.fontSize.small};
     color: ${palette.gray.dark1};
 
