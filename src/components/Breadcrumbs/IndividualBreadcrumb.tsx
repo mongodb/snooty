@@ -39,7 +39,7 @@ const linkWrapperLayoutStyling = LeafyCss`
 `;
 
 // On resize events, recheck if our truncation status
-function subscribeToResizeEvents(callback) {
+function subscribeToResizeEvents(callback: () => void) {
   window.addEventListener('resize', callback);
   return () => {
     window.removeEventListener('resize', callback);
@@ -48,7 +48,10 @@ function subscribeToResizeEvents(callback) {
 
 // For server-side generation, assume no truncation
 function getServerSnapshot() {
-  return false;
+  return JSON.stringify({
+    isTruncated: false,
+    isExcessivelyTruncated: false,
+  });
 }
 
 const TRUNCATION_THRESHOLD = 125; // px
