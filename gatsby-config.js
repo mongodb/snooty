@@ -14,6 +14,7 @@ console.log('PATH PREFIX', pathPrefix);
 // Keep our main plugin at top to include file saving before image plugins
 const plugins = [
   'gatsby-source-snooty-prod',
+  'gatsby-plugin-emotion',
   'gatsby-plugin-image',
   'gatsby-plugin-sharp',
   'gatsby-transformer-sharp', // Needed for dynamic images
