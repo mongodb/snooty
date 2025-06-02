@@ -28,6 +28,7 @@ const containerStyles = css`
 const cardStyles = css`
   padding: ${theme.fontSize.default};
   border-radius: 12px;
+  box-shadow: none;
 
   p {
     line-height: 20px;
