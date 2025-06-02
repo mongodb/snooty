@@ -2,6 +2,30 @@
 
 Uses [Gatsby](https://www.gatsbyjs.org/) to build static site.
 
+## Developer Quickstart
+
+Prerequisite: get a local doc site's AST to work with
+
+1. [Set up snooty-parser](https://github.com/mongodb/snooty-parser/blob/main/HACKING.md#developing-snooty)
+1. Clone a docs site, for example: `git clone git@github.com:mongodb/docs-landing.git`
+1. Parse the docs site with snooty-parser:
+
+```
+poetry run snooty build ./path/to/docs-landing/ --output ./snooty-output/docs-landing.zip
+```
+
+_NOTE_: If you'd like to see the JSON output of the AST, you can use:
+
+```
+bsondump --pretty --outFile ./path/to/pretty.json ./path/to/file.bson
+```
+
+From this repo:
+
+1. [Install snooty deps](#installation)
+1. [Set up .env to point to local AST](#running-with-local-manifest-path)
+1. [Run the site locally](#running-locally)
+
 ## Installation
 
 Snooty uses [artifactory](https://jfrog.com/artifactory/) that [will need authentication](https://github.com/mongodb/snooty/blob/main/.npmrc) to install some private npm packages. Update your local zsh variables in `$~/.zshrc` (in Windows `%USERPROFILE%/.zshrc`) to include the following
@@ -26,9 +50,6 @@ You'll need to set some environment variables in two separate files at the root 
 Snooty's `develop` stage uses the `development` environment. Your `.env.development` file should be as follows:
 
 ```
-GATSBY_SITE=<SITE>
-GATSBY_PARSER_USER=<USER>
-GATSBY_PARSER_BRANCH=<BRANCH>
 GATSBY_SNOOTY_DEV=true
 ```
 
@@ -41,9 +62,6 @@ It should be set to `true` when working on snooty locally.
 Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
 
 ```
-GATSBY_SITE=<SITE>
-GATSBY_PARSER_USER=<USER>
-GATSBY_PARSER_BRANCH=<BRANCH>
 GATSBY_SNOOTY_DEV=true
 ```
 
@@ -95,7 +113,13 @@ COMMIT_HASH=zh-cn
 - `COMMIT_HASH` can be used to prepend its value to the path prefix of the site when building and serving. This can be useful for mocking the `/<local-code>/<path>` pathnames for docs pages, and for testing out
   locale-related logic for pathnames.
 
-## Staging
+## Staging with Netlify
+
+When a commit is pushed, this automatically triggers a Netlify build on your branch. For every push, a deploy and deploy preview will be generated.
+
+By default, the master branch of `docs-landing` will be parsed with the parser version specified in the `Netlify.toml` and built using your branch as the frontend. If you'd like to build a different site or branch or build with a different parser version, this can be easily done by just updating the values in the Netlify.toml accordingly. Don't forget to update the `ORG_NAME` to `mongodb` or `10gen` depending on which org your repo belongs to!
+
+## Staging (Deprecated)
 
 Install libxml2 with `brew install libxml2` on mac and `apt-get install libxml2` on linux
 
@@ -106,12 +130,6 @@ npm run build:clean:stage
 ```
 
 :warning: Note: This will promote the contents of your local public directory. Your instance in staging may break or be outdated if you haven't run `npm run build` before `make stage`.
-
-## Staging with Netlify
-
-When a commit is pushed, this automatically triggers a Netlify build on your branch. For every push, a deploy and deploy preview will be generated.
-
-By default, the master branch of `docs-landing` will be parsed with the parser version specified in the `Netlify.toml` and built using your branch as the frontend. If you'd like to build a different site or branch or build with a different parser version, this can be easily done by just updating the values in the Netlify.toml accordingly. Don't forget to update the `ORG_NAME` to `mongodb` or `10gen` depending on which org your repo belongs to!
 
 ## Releasing
 
