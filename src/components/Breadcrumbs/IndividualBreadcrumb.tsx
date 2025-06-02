@@ -53,12 +53,12 @@ function getServerSnapshot() {
 
 const TRUNCATION_THRESHOLD = 125; // px
 
-const useIsTruncated = (node) => {
+const useIsTruncated = (node: HTMLDivElement | null) => {
   const isTruncated = React.useSyncExternalStore(
     subscribeToResizeEvents,
     () => {
       const isTruncated = (node?.scrollWidth ?? 0) > (node?.clientWidth ?? 0);
-      const isExcessivelyTruncated = isTruncated && node?.clientWidth <= TRUNCATION_THRESHOLD;
+      const isExcessivelyTruncated = node ? isTruncated && node?.clientWidth <= TRUNCATION_THRESHOLD : false;
 
       // useSyncExternalStore requires types with value comparison semantics
       return JSON.stringify({ isTruncated, isExcessivelyTruncated });
