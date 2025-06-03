@@ -16,6 +16,7 @@ const plugins = [
   'gatsby-source-snooty-prod',
   'gatsby-plugin-image',
   'gatsby-plugin-sharp',
+  'gatsby-plugin-emotion',
   'gatsby-transformer-sharp', // Needed for dynamic images
   {
     resolve: 'gatsby-source-filesystem',
