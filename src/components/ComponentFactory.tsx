@@ -89,6 +89,7 @@ import { ComposableTutorial } from './ComposableTutorial';
 const IGNORED_NAMES = new Set([
   'contents',
   'default-domain',
+  'dismissible-skills-card',
   'entry',
   'ia',
   'raw',

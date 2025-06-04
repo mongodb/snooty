@@ -34,7 +34,7 @@ const RightColumn = ({
 
           & > *:not(.${DISMISSIBLE_SKILLS_CARD_CLASSNAME}) {
             margin-bottom: 30px;
-            ${!hasDismissibleSkillsCard ? 'margin-right: 24px;' : ''}
+            margin-right: 24px;
           }
         `)}
       >

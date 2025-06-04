@@ -29,6 +29,12 @@ const cardStyles = css`
   padding: ${theme.fontSize.default};
   border-radius: 12px;
   box-shadow: none;
+  background-color: var(--background-color-primary);
+  border-color: ${palette.gray.light2};
+
+  .dark-theme & {
+    border-color: ${palette.gray.dark2};
+  }
 
   p {
     line-height: 20px;
@@ -41,7 +47,7 @@ const cardStyles = css`
   }
 `;
 
-const titleStyles = css`
+const titleBoxStyles = css`
   display: flex;
   align-items: center;
   gap: ${theme.size.small};
@@ -52,6 +58,10 @@ const titleStyles = css`
       fill: ${palette.white};
     }
   }
+`;
+
+const titleStyles = css`
+  color: var(--font-color-primary);
 `;
 
 const hrStyles = css`
@@ -93,9 +103,9 @@ const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: strin
       )}
     >
       <Card className={cx(cardStyles)}>
-        <Box className={cx(titleStyles)}>
+        <Box className={cx(titleBoxStyles)}>
           <SkillsBadgeIcon />
-          <Subtitle>Earn a Skill Badge</Subtitle>
+          <Subtitle className={titleStyles}>Earn a Skill Badge</Subtitle>
         </Box>
         <CloseButton onClick={onClose} />
         <Body>Master "{skill}" for free!</Body>
