@@ -75,7 +75,6 @@ const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: strin
   const shownClassname = useMemo(() => `${slug.split('/').join('-')}-${DISMISSIBLE_SKILLS_CARD_SHOWN}`, [slug]);
 
   const onLinkClick = () => {
-    console.log('onLinkClick');
     reportAnalytics('DismissibleSkillsCardLinkClicked', {
       skill,
       url,
