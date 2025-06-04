@@ -1,9 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { useCallback } from 'react';
+import { Filter } from 'mongodb';
 import { METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { fetchDocument } from '../utils/realm';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { RemoteMetadata } from '../types/data';
+import { TocTreeEntry } from '../types/ast';
 import { VersionContext } from './version-context';
 
 const TocContext = createContext({
@@ -12,7 +15,7 @@ const TocContext = createContext({
 
 // ToC context that provides ToC content in form of *above*
 // filters all available ToC by currently selected version via VersionContext
-const TocContextProvider = ({ children, remoteMetadata }) => {
+const TocContextProvider = ({ children, remoteMetadata }: { children: ReactNode; remoteMetadata: RemoteMetadata }) => {
   const { activeVersions, setActiveVersions, availableVersions, hasEmbeddedVersionDropdown } =
     useContext(VersionContext);
   const { project, branch, toctree, associated_products: associatedProducts } = useSnootyMetadata();
@@ -22,18 +25,15 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
 
   const getTocMetadata = useCallback(async () => {
     try {
-      const filter = {
+      const filter: Filter<RemoteMetadata> = {
         project,
         branch,
-      };
-      const findOptions = {
-        sort: { build_id: -1 },
       };
 
       if (associatedProducts?.length || hasEmbeddedVersionDropdown) {
         filter['is_merged_toc'] = true;
       }
-      const metadata = await fetchDocument(database, METADATA_COLLECTION, filter, { toctree: 1 }, findOptions);
+      const metadata = await fetchDocument(database, METADATA_COLLECTION, filter, { toctree: 1 });
       return metadata?.toctree ?? toctree;
     } catch (e) {
       // fallback to toctree from build time
@@ -52,7 +52,7 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
   ]);
 
   const setInitVersion = useCallback(
-    (tocNode) => {
+    (tocNode: TocTreeEntry) => {
       // for ToC with project option
       // set an active version for this project
       // if it doesn't already exist
@@ -65,7 +65,7 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
           // assumption is that first branch in pool.repos_branches
           // exists as a toc node here. otherwise, fallback to first ToC option
           const gitBranchNames = availableVersions[node.options.project].map((b) => b.gitBranchName);
-          const intersection = gitBranchNames.filter((b) => node.options.versions.includes(b));
+          const intersection = gitBranchNames.filter((b) => node.options?.versions?.includes(b));
           setActiveVersions({
             [node.options.project]: intersection.length ? intersection[0] : node.options.versions[0],
           });
