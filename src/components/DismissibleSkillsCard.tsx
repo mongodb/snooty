@@ -76,16 +76,16 @@ const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: strin
 
   const onLinkClick = () => {
     reportAnalytics('DismissibleSkillsCardLinkClicked', {
-      skill,
-      url,
+      cardSkill: skill,
+      cardUrl: url,
     });
   };
 
   const onClose = () => {
     if (isBrowser) {
       reportAnalytics('DismissibleSkillsCardClosed', {
-        skill,
-        url,
+        cardSkill: skill,
+        cardUrl: url,
       });
       // Add to document classnames
       const docClassList = window.document.documentElement.classList;
