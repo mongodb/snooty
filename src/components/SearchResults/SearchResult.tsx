@@ -64,7 +64,7 @@ const searchResultLinkStyling = css`
   text-decoration: none;
   border-radius: ${theme.size.medium};
 
-  ${StyledResultTitle} {
+  .search-result-title {
     color: ${palette.blue.base};
 
     .dark-theme & {
@@ -72,7 +72,7 @@ const searchResultLinkStyling = css`
     }
   }
   :visited {
-    ${StyledResultTitle} {
+    .search-result-title {
       color: ${palette.purple.dark2};
 
       .dark-theme & {
@@ -82,7 +82,7 @@ const searchResultLinkStyling = css`
   }
   :hover,
   :focus {
-    ${StyledResultTitle} {
+    .search-result-title {
       color: ${palette.blue.base};
 
       .dark-theme & {
@@ -90,7 +90,7 @@ const searchResultLinkStyling = css`
       }
       text-decoration: none;
     }
-    ${SearchResultContainer} {
+    .search-result-container {
       background-color: rgba(231, 238, 236, 0.4);
       transition: background-color 150ms ease-in;
     }
@@ -232,12 +232,13 @@ const SearchResult = React.memo(
         {...props}
         className={cx(className, searchResultLinkStyling, searchResultDynamicStyling)}
       >
-        <SearchResultContainer>
+        <SearchResultContainer className="search-result-container">
           <StyledResultTitle
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(title),
             }}
             useLargeTitle={useLargeTitle}
+            className="search-result-title"
           />
           <StyledPreviewText
             maxLines={maxLines}

@@ -267,7 +267,7 @@ const StyledSearchResults = styled('div')`
   width: 100%;
   /* Create the opaque effect on hover by opaquing everything but a hovered result */
   :not(:hover) {
-    > ${StyledSearchResult} {
+    > .search-result-component {
       opacity: 1;
       transition: opacity 150ms ease-in;
     }
@@ -548,6 +548,7 @@ const SearchResults = () => {
                     useLargeTitle
                     searchProperty={searchProperty?.[0]}
                     facets={facets}
+                    className="search-result-component"
                   />
                 ))}
                 {
