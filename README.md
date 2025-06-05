@@ -35,6 +35,12 @@ export NPM_BASE_64_AUTH=<BASE_64_API_KEY>
 export NPM_EMAIL=<your.email@gmail.com>
 ```
 
+Then, log in with your new NPM credentials:
+
+```
+npm login
+```
+
 Then, to install the package dependencies:
 
 ```shell
