@@ -23,7 +23,7 @@ const DriversIndex = ({ children, pageContext: { slug }, offlineBanner }) => {
       <StyledMainColumn>
         <div className="body">
           {offlineBanner}
-          <Breadcrumbs parentPaths={parentPaths?.slug} siteTitle={title} slug={slug} />
+          <Breadcrumbs parentPaths={parentPaths[slug]} siteTitle={title} slug={slug} />
           {children}
         </div>
       </StyledMainColumn>

@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import { Link as GatsbyLink } from 'gatsby';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Link as LGLink } from '@leafygreen-ui/typography';
@@ -94,6 +93,7 @@ export type LinkProps = {
   hideExternalIcon?: boolean;
   showExternalIcon?: boolean;
   openInNewTab?: boolean;
+  onClick?: () => void;
 };
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
@@ -108,6 +108,7 @@ const Link = ({
   hideExternalIcon: hideExternalIconProp,
   showExternalIcon,
   openInNewTab,
+  onClick,
   ...other
 }: LinkProps) => {
   if (!to) to = '';
@@ -158,16 +159,13 @@ const Link = ({
       href={to}
       hideExternalIcon={!showExtIcon}
       target={openInNewTab ? '_blank' : target}
+      onClick={onClick}
       {...anchorProps}
     >
       {children}
       {decoration}
     </LGLink>
   );
-};
-
-Link.propTypes = {
-  to: PropTypes.string.isRequired,
 };
 
 export default Link;
