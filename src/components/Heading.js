@@ -135,7 +135,8 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
                 return <ComponentFactory {...rest} nodeData={element} key={index} />;
               })}
               <Permalink id={id} description="heading" />
-              {sectionDepth === 1 && (
+              {/* using showRating since it has similar logic for showing the copy markdown button only for non-landing pages */}
+              {isPageTitle && showRating && (
                 <CopyPageMarkdownButton
                   className={css`
                     @media ${theme.screenSize.upToLarge} {
