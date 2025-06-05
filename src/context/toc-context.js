@@ -81,11 +81,15 @@ const TocContextProvider = ({ children, remoteMetadata }) => {
     if (!Object.keys(activeVersions).length || isLoaded) {
       return;
     }
-    getTocMetadata().then((tocTreeResponse) => {
-      setInitVersion(tocTreeResponse);
-      setActiveToc(tocTreeResponse);
-      setIsLoaded(true);
-    });
+
+    // Disable fetching remote toctree data for writers' staging
+    if (database !== 'snooty_prod') {
+      getTocMetadata().then((tocTreeResponse) => {
+        setInitVersion(tocTreeResponse);
+        setActiveToc(tocTreeResponse);
+        setIsLoaded(true);
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeVersions]);
 
