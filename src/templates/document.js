@@ -12,6 +12,7 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 import { theme } from '../theme/docsTheme';
 import { usePageContext } from '../context/page-context';
+import DismissibleSkillsCard from '../components/DismissibleSkillsCard';
 
 const MAX_ON_THIS_PAGE_WIDTH = '200px';
 const MAX_CONTENT_WIDTH = '775px';
@@ -71,9 +72,12 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
         </div>
       </StyledMainColumn>
       <StyledRightColumn hasDismissibleSkillsCard={!!dismissibleSkillsCard}>
+        {!!dismissibleSkillsCard && (
+          <DismissibleSkillsCard skill={dismissibleSkillsCard.skill} url={dismissibleSkillsCard.url} slug={slug} />
+        )}
         {isAssociatedProduct && <AssociatedVersionSelector />}
         {!hasMethodSelector && !tabsMainColumn && <TabSelectors rightColumn={true} />}
-        <Contents slug={slug} dismissibleSkillsCard={dismissibleSkillsCard} />
+        <Contents slug={slug} />
       </StyledRightColumn>
     </DocumentContainer>
   );
