@@ -203,7 +203,11 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
       { associated_products: 1 }
     );
     await createAssociatedProductNodes({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
-    await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+
+    // Disable fetching remote toctree data for writers' staging
+    if (siteMetadata.database !== 'snooty_prod') {
+      await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+    }
   }
 
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
