@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -7,9 +6,31 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { intersperse } from '../../utils/intersperse';
+import type { Node } from '../../types/ast';
 import FootnoteContext from './footnote-context';
 
-const tableStyling = (darkMode) => css`
+type NodeData = {
+  children: Node[];
+  id: string;
+  name?: string;
+};
+
+type FootnoteProps = {
+  nodeData: NodeData;
+  [key: string]: any;
+};
+
+type FootnoteContextType = {
+  footnotes: Record<
+    string,
+    {
+      references: string[];
+      label: string;
+    }
+  >;
+};
+
+const tableStyling = (darkMode: boolean) => css`
   border: 0;
   border-collapse: collapse;
   margin: 24px 0;
@@ -41,13 +62,13 @@ const tdStyling = css`
   padding: 11px 5px 12px;
 `;
 
-const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
-  const { footnotes } = useContext(FootnoteContext);
+const Footnote = ({ nodeData: { children, id, name }, ...rest }: FootnoteProps) => {
+  const { footnotes } = useContext(FootnoteContext) as FootnoteContextType;
   const { darkMode } = useDarkMode();
   const ref = name || id.replace('id', '');
   const label = getNestedValue([ref, 'label'], footnotes);
   const uid = name ? `${name}-` : '';
-  const footnoteReferences = footnotes && footnotes[ref] ? footnotes[ref].references : [];
+  const footnoteReferences = footnotes?.[ref]?.references || [];
   const footnoteReferenceNodes = footnoteReferences.map((footnote, index) => (
     <a href={`#ref-${uid}${footnote}`} key={index}>
       {index + 1}
@@ -55,11 +76,16 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
   ));
 
   return (
-    <table className={cx('header-buffer', tableStyling(darkMode))} frame="void" id={`footnote-${ref}`} rules="none">
+    <table
+      className={cx('header-buffer', tableStyling(darkMode))}
+      data-frame="void"
+      id={`footnote-${ref}`}
+      rules="none"
+    >
       <colgroup>
         <col />
       </colgroup>
-      <tbody valign="top">
+      <tbody {...{ valign: 'top' }}>
         <tr>
           <td className={cx(tdStyling)}>
             [{footnoteReferenceNodes.length !== 1 ? label : <a href={`#ref-${uid}${footnoteReferences[0]}`}>{label}</a>}
@@ -75,14 +101,6 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }) => {
       </tbody>
     </table>
   );
-};
-
-Footnote.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object),
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string,
-  }).isRequired,
 };
 
 export default Footnote;

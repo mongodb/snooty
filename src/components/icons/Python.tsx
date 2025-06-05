@@ -1,6 +1,7 @@
 import React, { useId } from 'react';
+type IconPythonProps = React.SVGProps<SVGSVGElement>;
 
-const IconPython = ({ ...styles }) => {
+const IconPython: React.FC<IconPythonProps> = (styles) => {
   const hash = useId();
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 111.6 147" {...styles}>

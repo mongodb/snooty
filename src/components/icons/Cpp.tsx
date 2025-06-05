@@ -1,6 +1,8 @@
 import React from 'react';
 
-const IconCpp = ({ ...styles }) => (
+type IconCppProps = React.SVGProps<SVGSVGElement>;
+
+const IconCpp: React.FC<IconCppProps> = (styles) => (
   <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg" {...styles}>
     <g clip-path="url(#clip0_1351_59959)">
       <g clip-path="url(#clip1_1351_59959)">

@@ -1,6 +1,8 @@
 import React, { useId } from 'react';
 
-const IconRuby = ({ ...styles }) => {
+type IconRubyProps = React.SVGProps<SVGSVGElement>;
+
+const IconRuby: React.FC<IconRubyProps> = (styles) => {
   const hash = useId();
   return (
     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" {...styles}>

@@ -9,7 +9,17 @@ import { getAvailableLanguages, getCurrLocale, onSelectLocale } from '../../util
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { HeaderContext } from './header-context';
 
-const StyledHeaderContainer = styled.header(
+interface SyledHeaderProps {
+  hasBanner: boolean;
+  template: string;
+}
+
+type HeaderProps = {
+  eol: boolean;
+  template: string;
+};
+
+const StyledHeaderContainer = styled.header<SyledHeaderProps>(
   (props) => `
   grid-area: header;
   top: 0;
@@ -35,7 +45,7 @@ const offlineClass = css`
   }
 `;
 
-const Header = ({ eol, template }) => {
+const Header = ({ eol, template }: HeaderProps) => {
   const unifiedNavProperty = 'DOCS';
 
   const enabledLocales = getAvailableLanguages().map((language) => language.localeCode);
@@ -50,28 +60,28 @@ const Header = ({ eol, template }) => {
           {!eol && (
             <>
               <UnifiedNav
-                fullWidth="true"
-                hideSearch="true"
+                fullWidth={true}
+                hideSearch={true}
                 position="relative"
-                property={{ name: unifiedNavProperty }}
+                property={{ name: unifiedNavProperty, searchParams: [] }}
                 showLanguageSelector={true}
                 onSelectLocale={onSelectLocale}
-                locale={getCurrLocale()}
+                data-locale={getCurrLocale()}
                 enabledLocales={enabledLocales}
                 darkMode={false}
-                className={cx('nav-light', isOfflineDocsBuild ? offlineClass : '')}
+                data-className={cx('nav-light', isOfflineDocsBuild ? offlineClass : '')}
               />
               <UnifiedNav
-                fullWidth="true"
-                hideSearch="true"
+                fullWidth={true}
+                hideSearch={true}
                 position="relative"
-                property={{ name: unifiedNavProperty }}
+                property={{ name: unifiedNavProperty, searchParams: [] }}
                 showLanguageSelector={true}
                 onSelectLocale={onSelectLocale}
-                locale={getCurrLocale()}
+                data-locale={getCurrLocale()}
                 enabledLocales={enabledLocales}
                 darkMode={true}
-                className={cx('nav-dark', isOfflineDocsBuild ? offlineClass : '')}
+                data-className={cx('nav-dark', isOfflineDocsBuild ? offlineClass : '')}
               />
             </>
           )}

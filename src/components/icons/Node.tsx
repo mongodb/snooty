@@ -1,7 +1,9 @@
 import React, { useId } from 'react';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 
-const IconNode = ({ ...styles }) => {
+type IconNodeProps = React.SVGProps<SVGSVGElement>;
+
+const IconNode: React.FC<IconNodeProps> = (styles) => {
   const hash = useId();
   const { darkMode } = useDarkMode();
   const jsFill = darkMode ? '#5FA04E' : 'black';

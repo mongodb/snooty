@@ -1,6 +1,7 @@
 import React from 'react';
 
-const IconDart = ({ ...styles }) => (
+type IconDartProps = React.SVGProps<SVGSVGElement>;
+const IconDart: React.FC<IconDartProps> = (styles) => (
   <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" {...styles}>
     <g clip-path="url(#clip0_2131_12775)">
       <path

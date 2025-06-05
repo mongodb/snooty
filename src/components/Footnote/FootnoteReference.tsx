@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import PropTypes from 'prop-types';
 import { getNestedValue } from '../../utils/get-nested-value';
 import FootnoteContext from './footnote-context';
 
@@ -18,9 +17,25 @@ const refStyles = css`
  * Component used to show a clickable reference to footnote on page
  * scrolls to referenced element by id property
  */
-const FootnoteReference = ({ nodeData: { id, refname } }) => {
-  const { footnotes } = useContext(FootnoteContext);
+
+type NodeData = {
+  id: string;
+  refname: string;
+};
+
+type FootnoteReferenceProps = {
+  nodeData: NodeData;
+};
+
+type FootnotesContextType = {
+  footnotes: Record<string, any>;
+};
+
+const FootnoteReference = ({ nodeData }: FootnoteReferenceProps) => {
+  const { footnotes } = useContext(FootnoteContext) as FootnotesContextType;
   const { darkMode } = useDarkMode();
+
+  const { id, refname } = nodeData;
 
   const ref = refname || id.replace('id', '');
   const uid = refname ? `${refname}-${id}` : id;
@@ -34,13 +49,6 @@ const FootnoteReference = ({ nodeData: { id, refname } }) => {
       [{getNestedValue([ref, 'label'], footnotes) || ref}]
     </a>
   );
-};
-
-FootnoteReference.propTypes = {
-  nodeData: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    refname: PropTypes.string,
-  }).isRequired,
 };
 
 export default FootnoteReference;
