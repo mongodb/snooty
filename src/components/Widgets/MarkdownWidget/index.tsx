@@ -1,26 +1,38 @@
 import React, { useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { SplitButton } from '@leafygreen-ui/split-button';
+import { Toast, ToastProvider, Variant } from '@leafygreen-ui/toast';
 import { MenuItem } from '@leafygreen-ui/menu';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { removeTrailingSlash } from '../../../utils/remove-trailing-slash';
 
-const SplitButtonContainer = css`
-  div[data-theme] {
+type ToastOpen = {
+  open: boolean;
+  variant: Variant;
+};
+
+type CopyPageMarkdownButtonProps = {
+  className?: string;
+};
+
+// This keeps the copy button text jump to a new line when viewing on smaller screens
+// [data-theme] is used to increase the width of the dropdown menu to match designs
+const SplitButtonStyles = css`
+  [data-theme] {
     width: 310px;
   }
+  min-width: 145px;
 `;
 
-const CopyPageMarkdownButton = () => {
-  const [isCopied, setCopy] = useState<boolean>(false);
+const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
+  const [toastOpen, setToastOpen] = useState<ToastOpen>({ open: false, variant: Variant.Success });
   const { origin, pathname } = useLocation();
 
   const href = `${origin}${pathname}`;
+  const urlWithoutTrailingSlash = removeTrailingSlash(href);
 
-  const copyMarkdown = async (url: string) => {
-    const urlWithoutTrailingSlash = removeTrailingSlash(url);
-
+  const copyMarkdown = async () => {
     try {
       const response = await fetch(`${urlWithoutTrailingSlash}.md`);
       if (!response.ok) {
@@ -30,31 +42,68 @@ const CopyPageMarkdownButton = () => {
       const text = await response.text();
       await navigator.clipboard.writeText(text);
 
-      setCopy(true);
-
-      setTimeout(() => {
-        setCopy(false);
-      }, 500);
+      setToastOpen({
+        open: true,
+        variant: Variant.Success,
+      });
     } catch (error) {
       console.error(error);
+      setToastOpen({
+        open: true,
+        variant: Variant.Warning,
+      });
     }
   };
 
+  const viewMarkdown = () => {
+    window.location.href = `${urlWithoutTrailingSlash}.md`;
+  };
+
   return (
-    <SplitButton
-      label="Copy page"
-      className={cx(SplitButtonContainer)}
-      onClick={() => copyMarkdown(href)}
-      menuItems={[
-        <MenuItem glyph={<Icon glyph="Copy" />} description="Copy this page as Markdown for LLMs">
-          Copy Page
-        </MenuItem>,
-        <MenuItem glyph={<Icon glyph="OpenNewTab" />} description="View this page as Markdown">
-          View in Markdown
-        </MenuItem>,
-      ]}
-      leftGlyph={<Icon glyph={!isCopied ? 'Copy' : 'Checkmark'} />}
-    />
+    <>
+      <SplitButton
+        label="Copy page"
+        className={cx(SplitButtonStyles, className)}
+        onClick={() => copyMarkdown()}
+        menuItems={[
+          <MenuItem
+            glyph={<Icon glyph="Copy" />}
+            description="Copy this page as Markdown for LLMs"
+            onClick={() => copyMarkdown()}
+          >
+            Copy Page
+          </MenuItem>,
+          <MenuItem
+            glyph={<Icon glyph="OpenNewTab" />}
+            description="View this page as Markdown"
+            onClick={() => viewMarkdown()}
+          >
+            View in Markdown
+          </MenuItem>,
+        ]}
+        leftGlyph={<Icon glyph="Copy" />}
+      />
+      <ToastProvider
+        portalClassName={css`
+          #lg-toast-region {
+            left: auto;
+            right: 0;
+            z-index: 3;
+          }
+        `}
+      >
+        <Toast
+          title={toastOpen.variant === Variant.Success ? 'Copied' : 'Error'}
+          description={
+            toastOpen.variant === Variant.Success ? `Copied Markdown to clipboard` : 'Failed to copy Markdown'
+          }
+          open={toastOpen.open}
+          variant={toastOpen.variant}
+          timeout={4000}
+          onClose={() => setToastOpen({ open: false, variant: Variant.Success })}
+        />
+      </ToastProvider>
+    </>
   );
 };
 

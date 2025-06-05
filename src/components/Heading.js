@@ -19,6 +19,7 @@ import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
 import { TimeRequired } from './MultiPageTutorials';
+import CopyPageMarkdownButton from './Widgets/MarkdownWidget';
 
 const titleMarginStyle = css`
   margin-top: ${theme.size.default};
@@ -124,10 +125,26 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
             as={asHeading}
             weight="medium"
           >
-            {nodeData.children.map((element, index) => {
-              return <ComponentFactory {...rest} nodeData={element} key={index} />;
-            })}
-            <Permalink id={id} description="heading" />
+            <div
+              className={css`
+                display: flex;
+                justify-content: space-between;
+              `}
+            >
+              {nodeData.children.map((element, index) => {
+                return <ComponentFactory {...rest} nodeData={element} key={index} />;
+              })}
+              <Permalink id={id} description="heading" />
+              {sectionDepth === 1 && (
+                <CopyPageMarkdownButton
+                  className={css`
+                    @media ${theme.screenSize.upToLarge} {
+                      display: none;
+                    }
+                  `}
+                />
+              )}
+            </div>
           </HeadingTag>
         </ConditionalWrapper>
       </ConditionalWrapper>
