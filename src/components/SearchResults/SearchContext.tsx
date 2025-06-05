@@ -43,7 +43,7 @@ type SearchContextType = {
   selectedVersion: string | null;
   selectedCategory: string | null;
   showMobileFilters: boolean;
-  setSearchFilter: (searchProperty: string) => void;
+  setSearchFilter: (searchProperty?: string | null) => void;
   setSelectedVersion: React.Dispatch<React.SetStateAction<string | null>>;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>;
   setShowMobileFilters: React.Dispatch<React.SetStateAction<boolean>>;
@@ -120,7 +120,7 @@ const SearchContextProvider = ({ children, showFacets = false }: { children: Rea
     page,
   }: {
     searchTerm: string | null;
-    searchFilter?: string;
+    searchFilter?: string | null;
     page?: string;
   }) => {
     const newSearch = new URLSearchParams(search);

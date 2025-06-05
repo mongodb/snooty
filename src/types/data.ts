@@ -75,7 +75,7 @@ type FacetBase = {
   key: string;
   name: string;
   checked?: boolean;
-}
+};
 
 interface FacetOption extends FacetBase {
   type: 'facet-option';
@@ -87,4 +87,14 @@ interface FacetValue extends FacetBase {
   facets: Array<FacetOption>;
 }
 
-export { BranchData, Docset, EOLType, FacetOption, FacetValue, SiteMetadata, MetadataDatabaseName, ReposDatabaseName, SnootyEnv };
+export {
+  BranchData,
+  Docset,
+  EOLType,
+  FacetOption,
+  FacetValue,
+  SiteMetadata,
+  MetadataDatabaseName,
+  ReposDatabaseName,
+  SnootyEnv,
+};
