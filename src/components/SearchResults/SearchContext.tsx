@@ -3,8 +3,8 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { navigate } from 'gatsby';
 import { MarianFilters, SearchPropertyMapping, useMarianManifests } from '../../hooks/use-marian-manifests';
 import { FACETS_LEVEL_KEY, FACETS_KEY_PREFIX } from '../../utils/search-facet-constants';
-import useFacets from './Facets/useFacets';
 import { FacetOption, FacetValue } from '../../types/data';
+import useFacets from './Facets/useFacets';
 
 const combineKeyAndId = (facet: FacetOption | FacetValue) => `${facet.key}${FACETS_LEVEL_KEY}${facet.id}`;
 
@@ -47,7 +47,7 @@ type SearchContextType = {
   setSelectedVersion: React.Dispatch<React.SetStateAction<string | null>>;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>;
   setShowMobileFilters: React.Dispatch<React.SetStateAction<boolean>>;
-  handleFacetChange: (facets: Array<FacetOption>) => void;
+  handleFacetChange: (facets: Array<FacetValue>) => void;
   clearFacets: () => void;
   showFacets: boolean;
   searchParams: URLSearchParams;
@@ -85,7 +85,7 @@ const SearchContext = createContext<SearchContextType>({
 
 type LocationState = { searchValue?: string };
 
-const SearchContextProvider = ({ children, showFacets = false }: { children: ReactNode; showFacets?: boolean; }) => {
+const SearchContextProvider = ({ children, showFacets = false }: { children: ReactNode; showFacets?: boolean }) => {
   const location = useLocation();
   const { search } = location;
   const state = location.state as LocationState | undefined;
@@ -114,7 +114,15 @@ const SearchContextProvider = ({ children, showFacets = false }: { children: Rea
   const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
 
   // navigate changes and store state in URL
-  const onSearchChange = ({ searchTerm, searchFilter, page }: { searchTerm: string | null; searchFilter?: string; page?: string; }) => {
+  const onSearchChange = ({
+    searchTerm,
+    searchFilter,
+    page,
+  }: {
+    searchTerm: string | null;
+    searchFilter?: string;
+    page?: string;
+  }) => {
     const newSearch = new URLSearchParams(search);
     if (searchTerm) {
       newSearch.set('q', searchTerm);
@@ -136,7 +144,7 @@ const SearchContextProvider = ({ children, showFacets = false }: { children: Rea
   };
 
   const handleFacetChange = useCallback(
-    (facets: Array<FacetOption>) => {
+    (facets: Array<FacetValue>) => {
       const newSearch = new URLSearchParams(search);
 
       facets.forEach(({ key, id, checked }) => {

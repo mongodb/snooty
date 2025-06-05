@@ -5,16 +5,17 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { Overline } from '@leafygreen-ui/typography';
+
 import { theme } from '../../../theme/docsTheme';
 import Tag, { searchTagStyle } from '../../Tag';
 import SearchContext from '../SearchContext';
+import { FacetOption, FacetValue } from '../../../types/data';
 import { initChecked } from './FacetValue';
 import { getFacetTagVariant } from './utils';
-import { FacetOption, FacetValue } from '../../../types/data';
 
 // util to get all current facets, derived from search params
 const getActiveFacets = (facetOptions: Array<FacetOption>, searchParams: URLSearchParams) => {
-  const res = [];
+  const res: Array<FacetValue> = [];
 
   function checkFacetValue(facetValues: Array<FacetValue>) {
     for (const facetValue of facetValues) {
@@ -82,17 +83,20 @@ const overlineLightStyling = css`
   ${overlineBaseStyling}
 `;
 
-const FacetTag = ({ facet: { name, key, id, facets } }) => {
+const FacetTag = ({ facet }: { facet: FacetValue }) => {
   const { handleFacetChange } = useContext(SearchContext);
+  const { name, key, id, facets } = facet;
   const onClick = useCallback(() => {
     // if the Facet has any sub facet options, include those in change
-    const facetsToDeselect = [{ key, id, checked: false }];
+    const facetsToDeselect: Array<FacetValue> = [{ ...facet, checked: false }];
     for (const subFacet of facets) {
       if (!subFacet.options) {
         continue;
       }
+      // Very confused by the naming here. I think these are facetValues not facetOptions
       for (const facetOption of subFacet?.options) {
         facetsToDeselect.push({
+          ...facetOption,
           key: facetOption.key,
           id: facetOption.id,
           checked: false,
@@ -100,7 +104,7 @@ const FacetTag = ({ facet: { name, key, id, facets } }) => {
       }
     }
     handleFacetChange(facetsToDeselect);
-  }, [facets, handleFacetChange, id, key]);
+  }, [facet, facets, handleFacetChange]);
 
   return (
     <StyledTag variant={getFacetTagVariant({ key, id })} onClick={onClick}>
