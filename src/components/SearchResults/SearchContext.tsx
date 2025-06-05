@@ -6,10 +6,11 @@ import { FACETS_LEVEL_KEY, FACETS_KEY_PREFIX } from '../../utils/search-facet-co
 import { FacetOption, FacetValue } from '../../types/data';
 import useFacets from './Facets/useFacets';
 
+export type PartialFacet = { key: string; id: string };
+type FacetNameByKey = Record<string, string>;
+
 const combineKeyAndId = (facet: FacetOption | FacetValue | { id: string; key: string }) =>
   `${facet.key}${FACETS_LEVEL_KEY}${facet.id}`;
-
-type FacetNameByKey = Record<string, string>;
 
 const constructFacetNamesByKey = (facets: Array<FacetOption>): FacetNameByKey => {
   const res: FacetNameByKey = {};
@@ -48,13 +49,13 @@ type SearchContextType = {
   setSelectedVersion: React.Dispatch<React.SetStateAction<string | null>>;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>;
   setShowMobileFilters: React.Dispatch<React.SetStateAction<boolean>>;
-  handleFacetChange: (facets: Array<FacetValue>) => void;
+  handleFacetChange: (facets: Array<FacetValue | (PartialFacet & { checked: boolean })>) => void;
   clearFacets: () => void;
   showFacets: boolean;
   searchParams: URLSearchParams;
   facets: Array<FacetOption>;
   facetNamesByKeyId: FacetNameByKey;
-  getFacetName: (facet: FacetOption | FacetValue | { key: string; id: string }) => string;
+  getFacetName: (facet: FacetOption | FacetValue | PartialFacet) => string;
   setPage: (p: string) => void;
   setSearchTerm: (q: string | null, p?: string) => void;
 };
@@ -96,7 +97,7 @@ const SearchContextProvider = ({ children, showFacets = false }: { children: Rea
   const facetNamesByKeyId = useMemo(() => constructFacetNamesByKey(facets), [facets]);
 
   const getFacetName = useCallback(
-    (facet: FacetOption | FacetValue | { key: string; id: string }) => {
+    (facet: FacetOption | FacetValue | PartialFacet) => {
       return facetNamesByKeyId?.[combineKeyAndId(facet)];
     },
     [facetNamesByKeyId]
@@ -145,7 +146,7 @@ const SearchContextProvider = ({ children, showFacets = false }: { children: Rea
   };
 
   const handleFacetChange = useCallback(
-    (facets: Array<FacetValue>) => {
+    (facets: Array<FacetValue | (PartialFacet & { checked: boolean })>) => {
       const newSearch = new URLSearchParams(search);
 
       facets.forEach(({ key, id, checked }) => {
