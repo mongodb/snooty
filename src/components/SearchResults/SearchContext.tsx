@@ -6,7 +6,8 @@ import { FACETS_LEVEL_KEY, FACETS_KEY_PREFIX } from '../../utils/search-facet-co
 import { FacetOption, FacetValue } from '../../types/data';
 import useFacets from './Facets/useFacets';
 
-const combineKeyAndId = (facet: FacetOption | FacetValue) => `${facet.key}${FACETS_LEVEL_KEY}${facet.id}`;
+const combineKeyAndId = (facet: FacetOption | FacetValue | { id: string; key: string }) =>
+  `${facet.key}${FACETS_LEVEL_KEY}${facet.id}`;
 
 type FacetNameByKey = Record<string, string>;
 
@@ -53,7 +54,7 @@ type SearchContextType = {
   searchParams: URLSearchParams;
   facets: Array<FacetOption>;
   facetNamesByKeyId: FacetNameByKey;
-  getFacetName: (facet: FacetOption | FacetValue) => string;
+  getFacetName: (facet: FacetOption | FacetValue | { key: string; id: string }) => string;
   setPage: (p: string) => void;
   setSearchTerm: (q: string | null, p?: string) => void;
 };
@@ -95,7 +96,7 @@ const SearchContextProvider = ({ children, showFacets = false }: { children: Rea
   const facetNamesByKeyId = useMemo(() => constructFacetNamesByKey(facets), [facets]);
 
   const getFacetName = useCallback(
-    (facet: FacetOption | FacetValue) => {
+    (facet: FacetOption | FacetValue | { key: string; id: string }) => {
       return facetNamesByKeyId?.[combineKeyAndId(facet)];
     },
     [facetNamesByKeyId]

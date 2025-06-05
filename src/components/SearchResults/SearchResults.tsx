@@ -371,7 +371,7 @@ const SearchResults = () => {
 
   const [searchFinished, setSearchFinished] = useState(() => !searchTerm);
   const [searchCount, setSearchCount] = useState<number | undefined>();
-  const [searchResultFacets, setSearchResultFacets] = useState([]);
+  const [searchResultFacets, setSearchResultFacets] = useState<Array<FacetOption>>([]);
 
   const specifySearchText = 'Refine your search';
 
@@ -443,7 +443,7 @@ const SearchResults = () => {
   useEffect(() => {
     const fetchSearchMeta = async () => {
       const res = await fetch(searchParamsToMetaURL(null, searchTerm), requestHeaders);
-      return res.json();
+      return res.json() as Promise<DocsSearchMetaResponse>;
     };
 
     fetchSearchMeta()
@@ -463,7 +463,7 @@ const SearchResults = () => {
       if (newPage < 1) {
         return;
       }
-      setSearchTerm(searchTerm, newPage);
+      setSearchTerm(searchTerm, `${newPage}`);
     },
     [searchParams, searchTerm, setSearchTerm]
   );
@@ -539,9 +539,9 @@ const SearchResults = () => {
                 {searchResults.map(({ title, preview, url, searchProperty, facets }, index) => (
                   <StyledSearchResult
                     key={`${url}${index}`}
-                    onClick={() =>
-                      reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
-                    }
+                    onClick={() => {
+                      reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url });
+                    }}
                     title={title}
                     preview={escapeHtml(preview)}
                     url={url}
@@ -554,12 +554,12 @@ const SearchResults = () => {
                   <>
                     <Pagination
                       className={paginationStyling}
-                      currentPage={parseInt(new URLSearchParams(search).get('page') || 1)}
+                      currentPage={parseInt(new URLSearchParams(search).get('page') || '1')}
                       numTotalItems={searchCount}
                       onForwardArrowClick={onPageClick.bind(null, true)}
                       onBackArrowClick={onPageClick.bind(null, false)}
-                      shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
-                      shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
+                      shouldDisableBackArrow={new URLSearchParams(search).get('page') === '1'}
+                      shouldDisableForwardArrow={searchResults.length > 0 && searchResults.length < 10}
                     ></Pagination>
                   </>
                 }
