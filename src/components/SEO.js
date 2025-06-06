@@ -10,13 +10,21 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIn
   // Using static siteUrl instead of location.origin due to origin being undefined at build time
   const { siteUrl } = useSiteMetadata();
   const localeHrefMap = getLocaleMapping(siteUrl, slug);
+  // Do not remove class. This is used to prevent Smartling from potentially overwriting these links
+  const smartlingNoRewriteClass = 'sl_opaque';
 
   const hrefLangLinks = Object.entries(localeHrefMap).map(([localeCode, href]) => {
-    const hrefLang = localeCode === 'en-us' ? 'x-default' : localeCode;
-    // Do not remove class. This is used to prevent Smartling from potentially overwriting these links
-    const smartlingNoRewriteClass = 'sl_opaque';
-    return <link key={hrefLang} className={smartlingNoRewriteClass} rel="alternate" hrefLang={hrefLang} href={href} />;
+    return (
+      <link key={localeCode} className={smartlingNoRewriteClass} rel="alternate" hrefLang={localeCode} href={href} />
+    );
   });
+
+  const englishHref = localeHrefMap['en-us'];
+  if (englishHref) {
+    hrefLangLinks.push(
+      <link className={smartlingNoRewriteClass} rel="alternate" hreflang="x-default" href={englishHref} />
+    );
+  }
 
   const title =
     !siteTitle && !pageTitle
