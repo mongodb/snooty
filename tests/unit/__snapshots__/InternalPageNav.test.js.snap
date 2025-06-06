@@ -185,6 +185,16 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
   border-radius: 5px;
 }
 
+.emotion-5 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
 .emotion-6 {
   display: grid;
   grid-auto-flow: column;
@@ -573,6 +583,16 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
 .dark-theme .emotion-4 {
   background-color: #3D4F58;
   color: #FFFFFF;
+}
+
+.emotion-5 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
 }
 
 .emotion-5 {
@@ -985,6 +1005,16 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
   border-radius: 5px;
 }
 
+.emotion-5 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
 .emotion-6 {
   display: grid;
   grid-auto-flow: column;
@@ -1373,6 +1403,16 @@ exports[`renders a page with next and previous links correctly 1`] = `
 .dark-theme .emotion-4 {
   background-color: #3D4F58;
   color: #FFFFFF;
+}
+
+.emotion-5 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
 }
 
 .emotion-5 {
@@ -1785,6 +1825,16 @@ exports[`renders a page with no next link correctly 1`] = `
   border-radius: 5px;
 }
 
+.emotion-5 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
 .emotion-6 {
   display: grid;
   grid-auto-flow: column;
@@ -2092,6 +2142,16 @@ exports[`renders a page with no previous link correctly 1`] = `
 .dark-theme .emotion-4 {
   background-color: #3D4F58;
   color: #FFFFFF;
+}
+
+.emotion-5 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
 }
 
 .emotion-5 {
