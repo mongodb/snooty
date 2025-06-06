@@ -2,6 +2,7 @@ import type { TocItem } from '../src/components/UnifiedSidenav/UnifiedConstants'
 
 const COMMANDLINE_TOOLS = 'database-tools';
 const CLOUD_DOCS = 'cloud-docs';
+const CSHARP = 'csharp';
 
 // each url has to be unique with the prefix!!!!
 export const tocData = (): TocItem[] => {
@@ -88,6 +89,93 @@ export const tocData = (): TocItem[] => {
             {
               label: 'VS Code',
               url: '/docs/atlas/mongodb-for-vscode',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'C# Quick Start',
+      url: '/docs/drivers/csharp/',
+      glyph: 'Bulb',
+      prefix: CSHARP,
+      versionDropdown: true,
+      items: [
+        {
+          label: 'C# Documentation',
+          group: true,
+         
+          items: [
+            {
+              label: 'Quick Reference',
+              url: '/docs/drivers/csharp/{version}/quick-reference/',
+            },
+            {
+              label: 'Usage Examples',
+              url: '/docs/drivers/csharp/usage-examples',
+              collapsible: true,
+              items: [
+                {
+                  label: 'Find a Document',
+                  url: '/docs/drivers/csharp/usage-examples/findOne/',
+                },
+                {
+                  label: 'Find Multiple Documents',
+                  url: '/docs/drivers/csharp/usage-examples/findMany/',
+                },
+                {
+                  label: 'Insert a Document',
+                  url: '/docs/drivers/csharp/usage-examples/insertOne',
+                },
+              ],
+            },
+            {
+              label: "What's New",
+              url: '/docs/drivers/csharp/whats-new',
+            },
+          ],
+        },
+        {
+          label: 'Fundamentals',
+          group: true,
+          versionDropdown: true,
+          items: [
+            {
+              label: 'Operations with Builders',
+              url: '/docs/drivers/csharp/fundamentals/builders',
+            },
+            {
+              label: 'Databases and Collections',
+              url: '/docs/drivers/csharp/fundamentals/database-collection',
+              collapsible: true,
+              items: [
+                {
+                  label: 'Run a Database Command',
+                  url: '/docs/drivers/csharp/fundamentals/databases-collections/run-command',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Connect to cloud',
+          group: true,
+          prefix: '/docs/drivers/csharp/master/cloud-docs/bianca.laube/DOP-5371',
+          items: [
+            {
+              label: 'Manage Clusters',
+              url: '/docs/drivers/csharp/manage-database-deployments',
+              collapsible: true,
+              items: [
+                {
+                  label: 'Storage',
+                  url: '/docs/drivers/csharp/customize-storage',
+                },
+                {
+                  label: 'Auto-Scaling',
+                  url: '/docs/drivers/csharp/cluster-autoscaling',
+                },
+              ],
             },
           ],
         },

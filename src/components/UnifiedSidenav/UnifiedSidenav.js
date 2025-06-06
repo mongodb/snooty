@@ -80,6 +80,7 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
 const replaceVersion = ({ url, currentVersion, versionsData }) => {
   // Find the version data for the current content we are in
   const noVersion = url.replace(/\$\{([^}]+)\}/g, '');
+  // const noVersion = url.replace(/<VERSION>/g, '');
   const content = versionsData.find((obj) => obj.repoSlug.replaceAll('/', '') === noVersion.replaceAll('/', ''));
   if (!content) return;
 
@@ -177,6 +178,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
   const { snootyEnv, pathPrefix } = useSiteMetadata();
+  // const { activeVersions, availableVersions } = useContext(VersionContext);
   const { activeVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const { bannerContent } = useContext(HeaderContext);

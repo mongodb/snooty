@@ -11,8 +11,6 @@ import { usePageContext } from '../context/page-context';
 import { theme } from '../theme/docsTheme';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { disabledStyle } from '../styles/button';
-import { useVersionsToml } from '../hooks/use-versions-toml';
-import { getFeatureFlags } from '../utils/feature-flags';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -21,7 +19,6 @@ import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
 import { TimeRequired } from './MultiPageTutorials';
-import UnifiedVersionDropdown from './UnifiedSidenav/UnifiedVersionDropdown';
 
 const titleMarginStyle = css`
   margin-top: ${theme.size.default};
@@ -87,10 +84,6 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const hasMethodSelector = page?.options?.['has_method_selector'];
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
   const showRating = !(rest?.page?.options?.template === 'product-landing');
-  // Data for versions.toml, if project is in versions.toml that means the repo is versioned.
-  const versions = useVersionsToml();
-  const { isUnifiedToc } = getFeatureFlags();
-  const versionData = versions.find((r) => r.repoName === rest.metadata?.project);
 
   return (
     <>
@@ -135,12 +128,6 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
               return <ComponentFactory {...rest} nodeData={element} key={index} />;
             })}
             <Permalink id={id} description="heading" />
-            {isUnifiedToc && sectionDepth === 1 && versionData && (
-              <>
-                <UnifiedVersionDropdown versionData={versionData} />
-                <hr />
-              </>
-            )}
           </HeadingTag>
         </ConditionalWrapper>
       </ConditionalWrapper>

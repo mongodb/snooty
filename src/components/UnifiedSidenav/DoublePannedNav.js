@@ -6,6 +6,7 @@ import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
 import DocsHomeButton from '../Sidenav/DocsHomeButton';
 import { DownloadButton } from '../OfflineDownloadModal';
+import VersionDropdown from '../VersionDropdown';
 import { NavTopContainer, downloadButtonStlying, ArtificialPadding } from './UnifiedSidenav';
 import { StaticNavItem, UnifiedTocNavItem } from './UnifiedTocNavItems';
 
@@ -22,6 +23,10 @@ export const rightPane = LeafyCSS`
   overflow-y: auto;
   border-right: 1px solid var(--sidenav-border-bottom-color);
   padding-top: ${theme.size.default};
+  button {
+    margin-left: -8px;
+    height: 28px;
+  }
 `;
 
 const backLinkStyling = LeafyCSS`
@@ -110,6 +115,7 @@ export const DoublePannedNav = ({
                 Back to Client Libraries
               </BackLink>
             )}
+            {currentL1.versionDropdown && <VersionDropdown eol={false} />}
             {currentL2s.items?.map((navItems) => (
               <UnifiedTocNavItem
                 {...navItems}

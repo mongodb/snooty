@@ -8,6 +8,7 @@ import Link from '../Link';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import { isCurrentPage } from '../../utils/is-current-page';
 import { theme } from '../../theme/docsTheme';
+import VersionDropdown from '../VersionDropdown';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 
 export const Border = styled('hr')`
@@ -60,6 +61,7 @@ export function UnifiedTocNavItem({
   setCurrentL1,
   setCurrentL2s,
   setShowDriverBackBtn,
+  versionDropdown,
   level,
 }) {
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
@@ -79,6 +81,7 @@ export function UnifiedTocNavItem({
             setShowDriverBackBtn={setShowDriverBackBtn}
             isAccordion={isAccordion}
           />
+          {versionDropdown && <VersionDropdown eol={false} />}
           {url === currentL2s?.url &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
@@ -99,6 +102,7 @@ export function UnifiedTocNavItem({
 
     return (
       <>
+        {versionDropdown && <VersionDropdown eol={false} />}
         {items?.map((tocItem) => (
           <UnifiedTocNavItem
             {...tocItem}
@@ -118,19 +122,22 @@ export function UnifiedTocNavItem({
   // groups are for adding a static header, these can also be collapsible
   if (group) {
     return (
-      <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling({ isAccordion }))}>
-        {items?.map((tocItem) => (
-          <UnifiedTocNavItem
-            {...tocItem}
-            level={level}
-            key={tocItem.newUrl + tocItem.label}
-            slug={slug}
-            isAccordion={isAccordion}
-            setCurrentL2s={setCurrentL2s}
-            setShowDriverBackBtn={setShowDriverBackBtn}
-          />
-        ))}
-      </SideNavGroup>
+      <>
+        <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling({ isAccordion }))}>
+          {versionDropdown && <VersionDropdown eol={false} />}
+          {items?.map((tocItem) => (
+            <UnifiedTocNavItem
+              {...tocItem}
+              level={level}
+              key={tocItem.newUrl + tocItem.label}
+              slug={slug}
+              isAccordion={isAccordion}
+              setCurrentL2s={setCurrentL2s}
+              setShowDriverBackBtn={setShowDriverBackBtn}
+            />
+          ))}
+        </SideNavGroup>
+      </>
     );
   }
 
