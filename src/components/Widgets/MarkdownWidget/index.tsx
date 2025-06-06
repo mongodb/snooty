@@ -87,6 +87,7 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
         portalClassName={css`
           #lg-toast-region {
             left: auto;
+            margin: 16px;
             right: 0;
             z-index: 3;
           }
@@ -95,7 +96,7 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
         <Toast
           title={toastOpen.variant === Variant.Success ? 'Copied' : 'Error'}
           description={
-            toastOpen.variant === Variant.Success ? `Copied Markdown to clipboard` : 'Failed to copy Markdown'
+            toastOpen.variant === Variant.Success ? 'Page copied as markdown successfully.' : 'Failed to copy markdown.'
           }
           open={toastOpen.open}
           variant={toastOpen.variant}
