@@ -1,8 +1,9 @@
 import React, { useCallback, useMemo, useState, useContext } from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Select from '../../Select';
-import SearchContext from '../SearchContext';
+import SearchContext, { PartialFacet } from '../SearchContext';
 import { theme } from '../../../theme/docsTheme';
+import { FacetOption, FacetValue } from '../../../types/data';
 import { initChecked } from './FacetValue';
 
 const selectStyle = css`
@@ -16,7 +17,7 @@ const selectStyle = css`
   }
 `;
 
-const FacetVersionGroup = ({ facetOption: { options } }) => {
+const FacetVersionGroup = ({ facetOption: { options } }: { facetOption: FacetOption }) => {
   // create select options from options
   const selectOptions = useMemo(
     () => options.map((option) => ({ text: option.name, value: option.id, key: option.key })),
@@ -30,7 +31,7 @@ const FacetVersionGroup = ({ facetOption: { options } }) => {
 
   const optionsById = useMemo(
     () =>
-      options.reduce((map, option) => {
+      options.reduce<Record<string, FacetValue>>((map, option) => {
         map[option.id] = option;
         return map;
       }, {}),
@@ -38,10 +39,10 @@ const FacetVersionGroup = ({ facetOption: { options } }) => {
   );
 
   const onChange = useCallback(
-    (newOption) => {
+    (newOption: { value: string }) => {
       const selectedOption = optionsById[newOption.value];
       const oldSelection = optionsById[value];
-      const facetsToUpdate = [];
+      const facetsToUpdate: Array<PartialFacet & { checked: boolean }> = [];
 
       // update to unselect current selection
       facetsToUpdate.push({

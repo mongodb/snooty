@@ -5,17 +5,19 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { Overline } from '@leafygreen-ui/typography';
+
 import { theme } from '../../../theme/docsTheme';
 import Tag, { searchTagStyle } from '../../Tag';
 import SearchContext from '../SearchContext';
+import { FacetOption, FacetValue } from '../../../types/data';
 import { initChecked } from './FacetValue';
 import { getFacetTagVariant } from './utils';
 
 // util to get all current facets, derived from search params
-const getActiveFacets = (facetOptions, searchParams) => {
-  const res = [];
+const getActiveFacets = (facetOptions: Array<FacetOption>, searchParams: URLSearchParams) => {
+  const res: Array<FacetValue> = [];
 
-  function checkFacetValue(facetValues) {
+  function checkFacetValue(facetValues: Array<FacetValue>) {
     for (const facetValue of facetValues) {
       // if it exists in search params, include
       if (initChecked(searchParams, facetValue.key, facetValue.id)) {
@@ -29,7 +31,7 @@ const getActiveFacets = (facetOptions, searchParams) => {
     }
   }
 
-  function checkFacetGroup(facetOptions) {
+  function checkFacetGroup(facetOptions: Array<FacetOption>) {
     for (const facetOption of facetOptions) {
       checkFacetValue(facetOption.options);
     }
@@ -59,7 +61,7 @@ const TagsFlexbox = styled('div')`
   overflow: hidden;
 `;
 
-const SelectionsFlexbox = styled('div')`
+const SelectionsFlexbox = styled('div')<{ expanded: boolean }>`
   display: flex;
   flex-wrap: wrap;
   row-gap: 8px;
@@ -81,17 +83,20 @@ const overlineLightStyling = css`
   ${overlineBaseStyling}
 `;
 
-const FacetTag = ({ facet: { name, key, id, facets } }) => {
+const FacetTag = ({ facet }: { facet: FacetValue }) => {
   const { handleFacetChange } = useContext(SearchContext);
+  const { name, key, id, facets } = facet;
   const onClick = useCallback(() => {
     // if the Facet has any sub facet options, include those in change
-    const facetsToDeselect = [{ key, id, checked: false }];
+    const facetsToDeselect: Array<FacetValue> = [{ ...facet, checked: false }];
     for (const subFacet of facets) {
       if (!subFacet.options) {
         continue;
       }
+      // Very confused by the naming here. I think these are facetValues not facetOptions
       for (const facetOption of subFacet?.options) {
         facetsToDeselect.push({
+          ...facetOption,
           key: facetOption.key,
           id: facetOption.id,
           checked: false,
@@ -99,7 +104,7 @@ const FacetTag = ({ facet: { name, key, id, facets } }) => {
       }
     }
     handleFacetChange(facetsToDeselect);
-  }, [facets, handleFacetChange, id, key]);
+  }, [facet, facets, handleFacetChange]);
 
   return (
     <StyledTag variant={getFacetTagVariant({ key, id })} onClick={onClick}>
@@ -109,13 +114,13 @@ const FacetTag = ({ facet: { name, key, id, facets } }) => {
   );
 };
 
-const ClearFacetsTag = ({ onClick }) => (
+const ClearFacetsTag = ({ onClick }: { onClick: () => void }) => (
   <StyledTag variant={'gray'} className={cx(clearButtonStyling)} onClick={onClick}>
     clear all filters <Icon glyph="X" />
   </StyledTag>
 );
 
-const FacetTags = ({ resultsCount }) => {
+const FacetTags = ({ resultsCount }: { resultsCount?: number }) => {
   const { searchParams, clearFacets, facets } = useContext(SearchContext);
   // don't have to use state since facet filters are
   // derived from URL state (search params)
@@ -124,7 +129,7 @@ const FacetTags = ({ resultsCount }) => {
   const [expanded, setExpanded] = useState(false);
 
   const [needExpansion, setNeedExpansion] = useState(false);
-  const refContainer = useRef();
+  const refContainer = useRef<HTMLDivElement>(null);
   const { darkMode } = useDarkMode();
 
   // resize affect. show/hide `Show More` button if there is no real estate
@@ -139,7 +144,7 @@ const FacetTags = ({ resultsCount }) => {
     return () => resizeObserver.disconnect(); // clean up
   }, []);
 
-  const clickHandle = useCallback((newExpanded) => {
+  const clickHandle = useCallback((newExpanded: boolean) => {
     setExpanded(newExpanded);
   }, []);
 

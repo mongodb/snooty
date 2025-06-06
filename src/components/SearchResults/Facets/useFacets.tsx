@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { assertTrailingSlash } from '../../../utils/assert-trailing-slash';
 import { requestHeaders } from '../../../utils/search-facet-constants';
 import { MARIAN_URL } from '../../../constants';
+import { FacetOption } from '../../../types/data';
 
 const useFacets = () => {
-  const [facets, setFacets] = useState([]);
+  const [facets, setFacets] = useState<Array<FacetOption>>([]);
 
   // Fetch facets
   useEffect(() => {

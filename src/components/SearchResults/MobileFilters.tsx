@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
+import { FacetOption } from '../../types/data';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
 import { Facets } from './Facets';
@@ -33,7 +34,7 @@ const Label = styled('div')`
   margin: ${theme.size.small} 0 ${theme.size.medium} 0;
 `;
 
-const MobileFilters = ({ facets }) => {
+const MobileFilters = ({ facets }: { facets: Array<FacetOption> }) => {
   const { setShowMobileFilters, showFacets } = useContext(SearchContext);
 
   const closeMobileFilters = useCallback(() => {

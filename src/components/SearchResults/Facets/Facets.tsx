@@ -1,7 +1,8 @@
 import React from 'react';
+import { FacetOption } from '../../../types/data';
 import FacetGroup from './FacetGroup';
 
-const Facets = ({ facets }) => {
+const Facets = ({ facets }: { facets: Array<FacetOption> }) => {
   return (
     <div data-testid="facets-container">
       {facets?.length > 0 &&

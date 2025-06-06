@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { H3 } from '@leafygreen-ui/typography';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import NoResults from '../SVGs/NoResults';
 
 export const EMPTY_STATE_HEIGHT = '166px';
@@ -26,32 +24,31 @@ const NoResultText = styled('div')`
 `;
 
 const SupportingText = styled('p')`
-  color: var(--color);
+  color: ${palette.gray.dark1};
   font-size: 13px;
   font-family: Euclid Circular A;
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
+
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
 `;
 
-const EmptyResults = ({ type }) => {
-  const { darkMode } = useDarkMode();
+const EmptyResults = () => {
   return (
     <EmptyStateContainer>
       <NoResults />
       <NoResultText>
         <H3>No results found</H3>
-        <SupportingText style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}>
+        <SupportingText>
           We weren’t able to find any results for your query. Try adjusting your keywords to find what you’re looking
           for.
         </SupportingText>
       </NoResultText>
     </EmptyStateContainer>
   );
-};
-
-EmptyResults.propTypes = {
-  type: PropTypes.string,
 };
 
 export default EmptyResults;

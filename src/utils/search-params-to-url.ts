@@ -9,8 +9,8 @@ import {
   SINGLE_SELECT_FIELDS,
 } from './search-facet-constants';
 
-const getFilterParams = (searchParams) => {
-  const res = [];
+const getFilterParams = (searchParams: URLSearchParams) => {
+  const res: Array<string> = [];
   searchParams.forEach((value, key) => {
     if (key.startsWith(FACETS_KEY_PREFIX)) {
       res.push(`${key}=${value}`);
@@ -26,10 +26,8 @@ const getFilterParams = (searchParams) => {
  * ie. target_products>atlas>versions=master
  *     already implies target_products=atlas
  *     within the data returned
- *
- * @param {URLSearchParams} searchParams
  */
-function removeParentSelections(searchParams) {
+function removeParentSelections(searchParams: URLSearchParams) {
   const newSearchParams = new URLSearchParams(searchParams);
   for (const key of searchParams.keys()) {
     // break down key to its parent key.
@@ -56,9 +54,8 @@ function removeParentSelections(searchParams) {
  * Extracts query params from search params and appends to new request URL as string
  * Route is used to return search document results
  *
- * @param {URLSearchParams} searchParams
  */
-export const searchParamsToURL = (searchParams) => {
+export const searchParamsToURL = (searchParams: URLSearchParams) => {
   const modifiedSearchParams = removeParentSelections(searchParams);
   const searchTerm = modifiedSearchParams.get(TERM_PARAM);
   const page = modifiedSearchParams.get(PAGE_PARAM) || 1;
@@ -76,10 +73,8 @@ export const searchParamsToURL = (searchParams) => {
  * Extracts query params from search params and appends to new request URL as string
  * Route is used to return meta data for search params
  *
- * @param {URLSearchParams} [searchParams]
- * @param {string} [searchTerm]
  */
-export const searchParamsToMetaURL = (searchParams, searchTerm) => {
+export const searchParamsToMetaURL = (searchParams: URLSearchParams | null, searchTerm?: string | null) => {
   const modifiedSearchParams = searchParams ? removeParentSelections(searchParams) : new URLSearchParams();
   const queryString = searchTerm || modifiedSearchParams.get(TERM_PARAM);
 
