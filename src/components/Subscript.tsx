@@ -1,19 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { SubscriptNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
-const Subscript = ({ nodeData, ...rest }) => (
+interface SubscriptProps {
+  nodeData: SubscriptNode;
+}
+
+const Subscript = ({ nodeData, ...rest }: SubscriptProps) => (
   <sub>
     {nodeData.children.map((child, index) => (
       <ComponentFactory {...rest} key={index} nodeData={child} />
     ))}
   </sub>
 );
-
-Subscript.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
 
 export default Subscript;

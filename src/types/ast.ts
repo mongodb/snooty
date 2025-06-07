@@ -122,6 +122,7 @@ type NodeType =
   | 'section'
   | 'strong'
   | 'superscript'
+  | 'subscript'
   | 'tabs'
   | 'target'
   | 'target_identifier'
@@ -205,6 +206,10 @@ interface StrongNode extends ParentNode {
 
 interface SuperscriptNode extends ParentNode {
   type: 'superscript';
+}
+
+interface SubscriptNode extends ParentNode {
+  type: 'subscript';
 }
 
 interface ReferenceNode extends ParentNode {
@@ -553,4 +558,5 @@ export type {
   CTABannerNode,
   StandaloneHeaderNode,
   SuperscriptNode,
+  SubscriptNode,
 };
