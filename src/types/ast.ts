@@ -480,6 +480,17 @@ interface CTABannerNode extends Directive<CTABannerOptions> {
   options: CTABannerOptions;
 }
 
+type StandaloneHeaderOptions = {
+  columns: number;
+  cta: string;
+  url: string;
+};
+
+interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
+  argument: Array<Node>;
+  options: StandaloneHeaderOptions;
+}
+
 export type {
   ParentNode,
   Root,
@@ -534,4 +545,5 @@ export type {
   MetaNode,
   BannerNode,
   CTABannerNode,
+  StandaloneHeaderNode,
 };
