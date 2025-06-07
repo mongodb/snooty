@@ -121,6 +121,7 @@ type NodeType =
   | 'root'
   | 'section'
   | 'strong'
+  | 'superscript'
   | 'tabs'
   | 'target'
   | 'target_identifier'
@@ -200,6 +201,10 @@ interface EmphasisNode extends ParentNode {
 
 interface StrongNode extends ParentNode {
   type: 'strong';
+}
+
+interface SuperscriptNode extends ParentNode {
+  type: 'superscript';
 }
 
 interface ReferenceNode extends ParentNode {
@@ -547,4 +552,5 @@ export type {
   BannerNode,
   CTABannerNode,
   StandaloneHeaderNode,
+  SuperscriptNode,
 };
