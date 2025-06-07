@@ -163,6 +163,7 @@ type DirectiveOptions = {
 
 interface Node {
   type: NodeType;
+  value?: string;
 }
 
 interface ParentNode extends Node {
