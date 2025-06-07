@@ -480,6 +480,8 @@ interface CTABannerNode extends Directive<CTABannerOptions> {
   options: CTABannerOptions;
 }
 
+interface ReleaseSpecificationNode extends ParentNode {}
+
 export type {
   ParentNode,
   Root,
@@ -534,4 +536,5 @@ export type {
   MetaNode,
   BannerNode,
   CTABannerNode,
+  ReleaseSpecificationNode,
 };
