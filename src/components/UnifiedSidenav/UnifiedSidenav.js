@@ -77,51 +77,30 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
     }
 `;
 
-const replaceVersion = ({ url, currentVersion, versionsData }) => {
-  // Find the version data for the current content we are in
-  const noVersion = url.replace(/\$\{([^}]+)\}/g, '');
-  // const noVersion = url.replace(/<VERSION>/g, '');
-  const content = versionsData.find((obj) => obj.repoSlug.replaceAll('/', '') === noVersion.replaceAll('/', ''));
-  if (!content) return;
-
-  const proj = content.repoName;
-
-  // based on the activeVersion, find the correct verion
-  let ver = content?.version.find((obj) => obj.name === currentVersion[proj]);
-  if (!ver) {
-    // If no current version, use first version in the array
-    ver = content.version[0];
-  }
-
-  // input the correct alias into the url
-  const result = url?.replace(/\$\{([^}]+)\}/g, ver.urlSlug);
-
-  return result;
-};
-
-// TODO: this function needs to be updated with DOP-5677
-// Function that adds a prefix to all the urls
+// Function that adds the current version
 const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snootyEnv }) => {
   return tree?.map((item) => {
-    // Getting the path prefix and editing it based on the environment so links work correctly
-    let updatedPrefix = prefix;
-    if (item.prefix) {
-      const result = replaceVersion({
-        url: item.prefix,
-        currentVersion: activeVersions,
-        versionsData,
-        project,
-      });
-      // For incase result is undefined
-      updatedPrefix = result ? result : item.prefix;
-    }
+    let newUrl = item.url ? item.url : '';
+    const currentProject = item.prefix ? item.prefix : prefix;
 
-    // Edit the url with the correct version path
-    const newUrl = `${item.url ? item.url : ''}`;
+    // replace version variable
+    if (item?.url?.includes(':version')) {
+      const version = versionsData[currentProject].find(
+        (version) => version.gitBranchName === activeVersions[currentProject]
+      );
+      // if no version use first version.urlSlug in the list
+      console.log('the version are', versionsData);
+      const currentVersion = version
+        ? version.urlSlug
+        : versionsData[currentProject][0].urlSlug
+        ? versionsData[currentProject][0].urlSlug
+        : 'main';
+      newUrl = item.url.replace(/:version/g, currentVersion);
+    }
 
     const items = updateURLs({
       tree: item.items,
-      prefix: updatedPrefix,
+      prefix: currentProject,
       activeVersions,
       versionsData,
       project,
@@ -132,7 +111,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
       ...item,
       newUrl,
       items,
-      prefix: updatedPrefix,
+      prefix: currentProject,
     };
   });
 };
@@ -174,22 +153,21 @@ const findPageParent = (tree, targetUrl) => {
   return [false, null];
 };
 
-export function UnifiedSidenav({ slug, versionsData }) {
+export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
   const { snootyEnv, pathPrefix } = useSiteMetadata();
-  // const { activeVersions, availableVersions } = useContext(VersionContext);
-  const { activeVersions } = useContext(VersionContext);
+  const { activeVersions, availableVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
   slug = slug === '/' ? pathPrefix + slug : `${pathPrefix}/${slug}/`;
+  const versionsData = availableVersions;
 
   const tree = useMemo(() => {
     return updateURLs({
       tree: unifiedTocTree,
-      prefix: '',
       activeVersions,
       versionsData,
       project,

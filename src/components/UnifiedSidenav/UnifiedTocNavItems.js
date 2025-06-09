@@ -41,7 +41,7 @@ export const isActiveTocNode = (currentUrl, slug, children) => {
   if (currentUrl === undefined) return false;
   if (isCurrentPage(currentUrl, slug)) return true;
   if (children) {
-    return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.url, b.items), false);
+    return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.newUrl, b.items), false);
   }
   return false;
 };
@@ -62,6 +62,7 @@ export function UnifiedTocNavItem({
   setCurrentL2s,
   setShowDriverBackBtn,
   versionDropdown,
+  newUrl,
   level,
 }) {
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
@@ -73,6 +74,7 @@ export function UnifiedTocNavItem({
           <StaticNavItem
             label={label}
             url={url}
+            newUrl={newUrl}
             slug={slug}
             isStatic={isStatic}
             items={items}
@@ -82,7 +84,7 @@ export function UnifiedTocNavItem({
             isAccordion={isAccordion}
           />
           {versionDropdown && <VersionDropdown eol={false} />}
-          {url === currentL2s?.url &&
+          {newUrl === currentL2s?.newUrl &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
                 {...tocItem}
@@ -95,7 +97,7 @@ export function UnifiedTocNavItem({
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
             ))}
-          {url === currentL2s?.url && <Border />}
+          {newUrl === currentL2s?.newUrl && <Border />}
         </>
       );
     }
@@ -144,7 +146,7 @@ export function UnifiedTocNavItem({
   const handleClick = () => {
     // Allows for the showSubNav nodes to have their own L2 panel
     setShowDriverBackBtn(true);
-    setCurrentL2s({ items, url });
+    setCurrentL2s({ items, newUrl });
   };
 
   if (showSubNav) {
@@ -153,7 +155,7 @@ export function UnifiedTocNavItem({
         aria-label={label}
         as={Link}
         prefix={prefix}
-        to={url}
+        to={newUrl}
         onClick={handleClick}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       >
@@ -169,6 +171,7 @@ export function UnifiedTocNavItem({
         items={items}
         label={label}
         url={url}
+        newUrl={newUrl}
         level={level}
         isAccordion={isAccordion}
         slug={slug}
@@ -180,11 +183,11 @@ export function UnifiedTocNavItem({
 
   return (
     <SideNavItem
-      active={isSelectedTab(url, slug)}
+      active={isSelectedTab(newUrl, slug)}
       aria-label={label}
       as={Link}
       prefix={prefix}
-      to={url}
+      to={newUrl}
       className={cx(l2ItemStyling({ level, isAccordion }))}
     >
       {label}
@@ -192,10 +195,10 @@ export function UnifiedTocNavItem({
   );
 }
 
-function CollapsibleNavItem({ items, label, url, slug, prefix, isAccordion, level }) {
-  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
+function CollapsibleNavItem({ items, label, url, newUrl, slug, prefix, isAccordion, level }) {
+  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, newUrl, items));
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
-  const isActive = isSelectedTab(url, slug);
+  const isActive = isSelectedTab(newUrl, slug);
 
   const onCaretClick = (event) => {
     event.preventDefault();
@@ -204,17 +207,19 @@ function CollapsibleNavItem({ items, label, url, slug, prefix, isAccordion, leve
 
   const handleClick = () => {
     // Allows the collapsed item if the caret was selected first before
-    if (!(url !== `/${slug}` && isOpen)) {
+    if (!(newUrl !== `/${slug}` && isOpen)) {
       setIsOpen(!isOpen);
     }
   };
+
+  console.log('heyyyyyy ', newUrl, url);
 
   return (
     <>
       <SideNavItem
         as={Link}
         prefix={prefix}
-        to={url}
+        to={newUrl}
         active={isActive}
         className={cx(l2ItemStyling({ level, isAccordion }), overwriteLinkStyle)}
         onClick={handleClick}
@@ -245,6 +250,7 @@ function CollapsibleNavItem({ items, label, url, slug, prefix, isAccordion, leve
 export function StaticNavItem({
   label,
   url,
+  newUrl,
   slug,
   items,
   isStatic,
@@ -254,7 +260,8 @@ export function StaticNavItem({
   setShowDriverBackBtn,
   level = 1,
 }) {
-  const isActive = isActiveTocNode(slug, url, items);
+  const isActive = isActiveTocNode(slug, newUrl, items);
+  console.log('ahhh', slug, newUrl, isActive);
 
   return (
     <SideNavItem
@@ -262,9 +269,9 @@ export function StaticNavItem({
       aria-label={label}
       prefix={prefix}
       as={Link}
-      to={url}
+      to={newUrl}
       onClick={() => {
-        setCurrentL1({ items, url });
+        setCurrentL1({ items, newUrl });
         setShowDriverBackBtn(false);
       }}
       className={cx(l1ItemStyling({ isActive, isAccordion }))}

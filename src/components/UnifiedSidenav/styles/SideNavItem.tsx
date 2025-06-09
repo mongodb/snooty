@@ -53,11 +53,11 @@ export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) =>
       padding-left: 4px;
     `}
     font-weight: 500;
-    color: var(--tab-color-primary); 
+    color: var(--tab-color-primary);
   }
 
   button {
-    margin-left: ${!isAccordion && "-8px"};
+    margin-left: ${!isAccordion && '-8px'};
     // amrgin-bottom: 8px;
     height: 28px;
   }

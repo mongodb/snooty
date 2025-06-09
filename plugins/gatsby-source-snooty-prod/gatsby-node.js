@@ -21,7 +21,6 @@ const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
-const { createVersionNodes } = require('../utils/versions-toc.js');
 const { generatePathPrefix } = require('../../src/utils/generate-path-prefix.js');
 const assets = new Map();
 const projectComponents = new Set();
@@ -196,8 +195,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   await createProductNodes({ db, createNode, createNodeId, createContentDigest });
 
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
-
-  await createVersionNodes({ createNode, createNodeId, createContentDigest });
 
   if (process.env['OFFLINE_DOCS'] !== 'true') {
     const umbrellaProduct = await db.realmInterface.getMetadata(
@@ -458,10 +455,6 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
     type TOC implements Node @dontInfer {
       tocTree: JSON!
-    }
-
-    type VersionsData implements Node @dontInfer {
-      versionsList: JSON!
     }
 
   `);

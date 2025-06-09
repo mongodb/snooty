@@ -143,7 +143,7 @@ const VersionContext = createContext({
   onVersionSelect: () => {},
 });
 
-const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) => {
+const VersionContextProvider = ({ repoBranches, slug, children }) => {
   const siteMetadata = useSiteMetadata();
   const associatedProductNames = useAllAssociatedProducts();
   const docsets = useAllDocsets();
