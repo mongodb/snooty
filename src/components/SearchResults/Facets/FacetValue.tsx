@@ -105,7 +105,7 @@ const FacetValue = ({
     const map: NestedSubFacets = new Map();
     let nestedVersions: Array<FacetValueType> = [];
     let totalCount = 0;
-    let preferredVersion: FacetValueType | undefined = undefined;
+    let preferredVersion: FacetValueType | undefined;
     // Consolidate the available facet values for an arbitrary amount of nested facet
     // options (i.e. subfacets). This only consolidates up to 1 layer of facet values
     facets.forEach((facetGroup) => {
@@ -159,7 +159,7 @@ const FacetValue = ({
         facetsToUpdate.push({
           key,
           id,
-          checked: checked,
+          checked,
         });
       }
       facetsToUpdate.push({ key, id, checked });
@@ -175,7 +175,7 @@ const FacetValue = ({
         const updatedFacet = {
           key: facet.key,
           id: facet.id,
-          checked: checked,
+          checked,
         };
         return updatedFacet;
       });

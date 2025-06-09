@@ -177,7 +177,7 @@ const SearchContextProvider = ({ children, showFacets = false }: { children: Rea
   }, [searchTerm]);
 
   useEffect(() => {
-    if (state && state?.searchValue) {
+    if (state?.searchValue) {
       setSearchParams(new URLSearchParams(`?q=${state.searchValue}`));
     }
   }, [state]);
