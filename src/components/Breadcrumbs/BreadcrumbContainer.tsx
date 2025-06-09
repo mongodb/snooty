@@ -48,10 +48,11 @@ const BreadcrumbContainer = ({ breadcrumbs }: { breadcrumbs: Array<BreadcrumbTyp
       // crumbs into a single "…" crumb
       const crumbsCopy: (BreadcrumbType | BreadcrumbType[])[] = Array.from(breadcrumbs);
       const collapsedCrumbs = Array.from(breadcrumbs).splice(1, breadcrumbs.length - maxCrumbs + 1);
-      crumbsCopy[1] = collapsedCrumbs;
-      return [];
+      const constructedCrumbs = Array.from(crumbsCopy).splice(1, breadcrumbs.length - maxCrumbs + 1, collapsedCrumbs);
+      return constructedCrumbs;
+    } else {
+      return breadcrumbs;
     }
-    return breadcrumbs;
   }, [maxCrumbs, breadcrumbs]);
 
   const collapseBreadcrumbs = () => {
