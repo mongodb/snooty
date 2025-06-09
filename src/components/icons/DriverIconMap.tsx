@@ -18,7 +18,7 @@ import IconJavascript from './Javascript';
 import IconTypescript from './Typescript';
 import IconDart from './Dart';
 
-export type IconComponent = (styles: Record<string, any>) => React.JSX.Element;
+export type IconComponent = React.FC<React.SVGProps<SVGSVGElement>>;
 export type DriverMap = Record<string, IconComponent>;
 
 export const DRIVER_ICON_MAP: DriverMap = {

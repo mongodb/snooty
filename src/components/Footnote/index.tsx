@@ -6,29 +6,8 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { intersperse } from '../../utils/intersperse';
-import type { Node } from '../../types/ast';
+import type { FootnoteProps, FootnoteContextType } from '../../types/ast';
 import FootnoteContext from './footnote-context';
-
-type NodeData = {
-  children: Node[];
-  id: string;
-  name?: string;
-};
-
-type FootnoteProps = {
-  nodeData: NodeData;
-  [key: string]: any;
-};
-
-type FootnoteContextType = {
-  footnotes: Record<
-    string,
-    {
-      references: string[];
-      label: string;
-    }
-  >;
-};
 
 const tableStyling = (darkMode: boolean) => css`
   border: 0;
@@ -76,12 +55,7 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }: FootnoteProps) 
   ));
 
   return (
-    <table
-      className={cx('header-buffer', tableStyling(darkMode))}
-      data-frame="void"
-      id={`footnote-${ref}`}
-      rules="none"
-    >
+    <table className={cx('header-buffer', tableStyling(darkMode))} id={`footnote-${ref}`} rules="none">
       <colgroup>
         <col />
       </colgroup>
