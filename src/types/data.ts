@@ -7,7 +7,7 @@ type BranchData = {
   gitBranchName: string;
   active: boolean;
   urlSlug: string;
-  urlAliases?: Array<string> | null;
+  urlAliases?: string[] | null;
   versionSelectorLabel: string;
   offlineUrl: string;
   eol_type?: EOLType;
@@ -30,7 +30,7 @@ interface Docset {
   };
   displayName?: string;
   project: string;
-  branches: Array<BranchData>;
+  branches: BranchData[];
   hasEolVersions?: boolean;
   repoName: string;
   search?: { categoryTitle: string; categoryName?: string };
@@ -50,7 +50,7 @@ interface Docset {
 type Group = {
   id?: string;
   groupLabel: string;
-  includedBranches: Array<string>;
+  includedBranches: string[];
 };
 
 type MetadataDatabaseName = 'snooty_stage' | 'snooty_prod' | 'snooty_dotcomstg' | 'snooty_dotcomprd' | 'snooty_dev';
@@ -85,7 +85,7 @@ type RemoteMetadata = {
   static_files: Record<string, Buffer>;
   iatree?: IATreeNode;
   openapi_pages?: Record<string, OpenApiPage>;
-  associated_products?: Array<AssociatedProduct>;
+  associated_products?: AssociatedProduct[];
 };
 
 // TODO: Refine structure
@@ -93,7 +93,7 @@ type IATreeNode = {
   title: [TextNode];
   slug?: string;
   url?: string;
-  children?: Array<Node>;
+  children?: Node[];
 };
 
 // TODO: Refine structure
@@ -106,7 +106,7 @@ type OpenApiPage = {
 
 type AssociatedProduct = {
   name: string;
-  versions: Array<string>;
+  versions: string[];
 };
 
 type PageContext = {
@@ -125,6 +125,8 @@ type PageContext = {
   // TODO: Need to specify
   associatedReposInfo?: {};
 };
+
+type PageContextRepoBranches = PageContext['repoBranches'];
 
 type MetadataChapters = Record<string, MetadataChapter>;
 
@@ -153,6 +155,7 @@ export {
   MetadataChapters,
   MetadataDatabaseName,
   PageContext,
+  PageContextRepoBranches,
   RemoteMetadata,
   ReposDatabaseName,
   SiteMetadata,

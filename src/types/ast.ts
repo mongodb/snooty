@@ -395,21 +395,21 @@ interface AdmonitionNode extends Directive {
 interface TocTreeEntry {
   title: [TextNode];
   slug: string;
-  children: Array<TocTreeEntry>;
+  children: TocTreeEntry[];
   options?: TocTreeOptions;
 }
 
 interface TocTreeOptions {
   drawer?: boolean;
   project?: string;
-  versions?: Array<string>;
+  versions?: string[];
   osiris_parent?: boolean;
 }
 
 interface TocTreeDirective extends Directive<TocTreeOptions> {
   type: 'directive';
   name: 'toctree';
-  entries: Array<TocTreeEntry>;
+  entries: TocTreeEntry[];
 }
 
 type CommunityDriverPillOptions = {
