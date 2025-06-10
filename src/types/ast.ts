@@ -484,6 +484,14 @@ interface SubstitutionReferenceNode extends ParentNode {
   name: 'substitution_reference';
 }
 
+interface TargetNode extends ParentNode {
+  name: 'target';
+  html_id: string;
+  options: {
+    hidden: boolean;
+  };
+}
+
 export type {
   ParentNode,
   Root,
@@ -539,4 +547,5 @@ export type {
   BannerNode,
   CTABannerNode,
   SubstitutionReferenceNode,
+  TargetNode,
 };

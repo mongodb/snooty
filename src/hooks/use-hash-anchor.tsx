@@ -1,4 +1,4 @@
-import { MutableRefObject, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 
 import { TabHashContext } from '../components/Tabs/tab-hash-context';
@@ -9,7 +9,7 @@ import { TabContext } from '../components/Tabs/tab-context';
 // This is required on elements with id attribute
 // to overcome DOM tree being pushed down by rehydrated content
 // ie. saved tabbed content from local storage
-const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
+const useHashAnchor = (id: string, ref: HTMLElement | null) => {
   const { hash } = useLocation();
   const { setActiveTabToHashTab } = useContext(TabHashContext);
   const { selectors, setInitialTabs, setLanguageSelectorTab } = useContext(TabContext);
@@ -21,7 +21,7 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
     setInitialLoad(false);
 
     const hashId = hash?.slice(1);
-    if (id !== hashId || !ref.current) {
+    if (id !== hashId || !ref) {
       return;
     }
 
@@ -34,15 +34,14 @@ const useHashAnchor = (id: string, ref: MutableRefObject<HTMLElement>) => {
       setInitialTabs();
     }
 
-    const element = ref.current;
     const startTime = Date.now();
     const timeout = 5000;
 
     const checkAndScroll = () => {
-      if (!element) return;
+      if (!ref) return;
 
-      if (element.scrollHeight > 0) {
-        const y = element.getBoundingClientRect().top + window.scrollY;
+      if (ref.scrollHeight > 0) {
+        const y = ref.getBoundingClientRect().top + window.scrollY;
         window.scrollTo({ top: y });
         setHasScrolled(true);
         return;
