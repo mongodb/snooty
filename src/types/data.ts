@@ -1,6 +1,12 @@
 import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
 import { PageTemplateType } from '../context/page-context';
-import { ParagraphNode, TextNode, TocTreeEntry } from './ast';
+import { ParagraphNode, Root, TextNode, TocTreeEntry } from './ast';
+
+type AppData = {
+  page: {
+    ast: Root;
+  };
+};
 
 type EOLType = 'download' | 'link';
 
@@ -80,6 +86,7 @@ type RemoteMetadata = {
   title: string;
   eol: boolean;
   slugToTitle: Record<string, [TextNode]>;
+  slugToBreadcrumbLabel?: Record<string, string>;
   toctree: TocTreeEntry;
   toctreeOrder: string[];
   parentPaths: Record<string, BreadcrumbType[]>;
@@ -148,6 +155,7 @@ type MetadataGuide = {
 };
 
 export {
+  AppData,
   BranchData,
   Docset,
   EOLType,

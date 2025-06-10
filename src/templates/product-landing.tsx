@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import { theme } from '../theme/docsTheme.ts';
+import { theme } from '../theme/docsTheme';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
-import useSnootyMetadata from '../utils/use-snooty-metadata.tsx';
-import FeedbackRating from '../components/Widgets/FeedbackWidget';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
+import FeedbackRating from '../components/Widgets/FeedbackWidget/index';
 import { DEPRECATED_PROJECTS } from '../components/Contents/index';
+import { AppData, PageContext } from '../types/data';
 export const CONTENT_MAX_WIDTH = 1200;
 
 const formstyle = css`
@@ -43,7 +43,13 @@ const ratingStlying = css`
   margin: 0px ${theme.size.xlarge};
 `;
 
-const Wrapper = styled('main')`
+const Wrapper = styled('main')<{
+  isGuides: boolean;
+  isRealm: boolean;
+  hasBanner: boolean;
+  hasLightHero: boolean;
+  hasMaxWidthParagraphs: boolean;
+}>`
   ${({ isGuides }) => !isGuides && `margin: 0 auto ${theme.size.xlarge} auto;`}
   width: 100%;
 
@@ -217,9 +223,15 @@ const Wrapper = styled('main')`
 
 const REALM_LIGHT_HERO_PAGES = ['index.txt'];
 
-const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: { slug } }) => {
+export type ProductLandingProps = {
+  children: ReactNode;
+  data: AppData;
+  pageContext: PageContext;
+  offlineBanner: JSX.Element;
+};
+
+const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: { slug } }: ProductLandingProps) => {
   const { project } = useSnootyMetadata();
-  const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
   const isRealm = project === 'realm';
   const pageOptions = page?.ast?.options;
@@ -247,7 +259,6 @@ const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: 
     <Wrapper
       isGuides={isGuides}
       isRealm={isRealm}
-      useHero={useHero}
       hasBanner={!!bannerNode}
       hasLightHero={hasLightHero}
       hasMaxWidthParagraphs={hasMaxWidthParagraphs}
@@ -264,10 +275,6 @@ const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: 
       )}
     </Wrapper>
   );
-};
-
-ProductLanding.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default ProductLanding;
