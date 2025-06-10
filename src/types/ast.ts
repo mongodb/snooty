@@ -492,6 +492,11 @@ interface VideoNode extends Directive<VideoOptions> {
   options: VideoOptions;
 }
 
+interface WayfindingNode extends Directive {
+  argument: Array<{ type: 'reference'; refuri: string }>;
+  children: Node[];
+}
+
 export type {
   ParentNode,
   Root,
@@ -547,4 +552,5 @@ export type {
   BannerNode,
   CTABannerNode,
   VideoNode,
+  WayfindingNode,
 };

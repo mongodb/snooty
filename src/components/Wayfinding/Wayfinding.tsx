@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { Body } from '@leafygreen-ui/typography';
 import Icon from '@leafygreen-ui/icon';
@@ -7,6 +6,7 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { NOTRANSLATE_CLASS } from '../../utils/locale';
+import type { WayfindingNode, Node } from '../../types/ast';
 import WayfindingOption from './WayfindingOption';
 
 export const MAX_INIT_OPTIONS = 4;
@@ -63,7 +63,7 @@ const showAllButtonStyle = css`
   font-weight: 500;
 `;
 
-const getWayfindingComponents = (children) => {
+const getWayfindingComponents = (children: Node[]) => {
   const descriptionNodeIdx = children.findIndex(({ name }) => name === CHILD_DESCRIPTION_NAME);
   const [descriptionNode] = descriptionNodeIdx >= 0 ? children.splice(descriptionNodeIdx, 1) : [];
   return {
@@ -72,7 +72,11 @@ const getWayfindingComponents = (children) => {
   };
 };
 
-const Wayfinding = ({ nodeData: { children, argument } }) => {
+interface WayfindingProps {
+  nodeData: WayfindingNode;
+}
+
+const Wayfinding = ({ nodeData: { children, argument } }: WayfindingProps) => {
   const [showAll, setShowAll] = useState(false);
   const { descriptionNode, optionNodes } = useMemo(() => {
     // Create copy of children to avoid issues with hot reload
@@ -115,13 +119,6 @@ const Wayfinding = ({ nodeData: { children, argument } }) => {
       )}
     </div>
   );
-};
-
-Wayfinding.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
 };
 
 export default Wayfinding;
