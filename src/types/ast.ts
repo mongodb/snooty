@@ -399,12 +399,17 @@ interface AdmonitionNode extends Directive {
 }
 
 interface TocTreeEntry {
-  title?: string;
-  slug?: string;
+  title: [TextNode];
+  slug: string;
+  children: TocTreeEntry[];
+  options?: TocTreeOptions;
 }
 
 interface TocTreeOptions {
-  osiris_parent: boolean;
+  drawer?: boolean;
+  project?: string;
+  versions?: string[];
+  osiris_parent?: boolean;
 }
 
 interface TocTreeDirective extends Directive<TocTreeOptions> {
