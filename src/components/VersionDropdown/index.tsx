@@ -40,8 +40,15 @@ const selectStyling = LeafyCSS`
   }
 `;
 
+interface Branch {
+  gitBranchName: string;
+  versionSelectorLabel: string;
+  urlSlug: string;
+  active: boolean;
+}
+
 // Gets UI labels for supplied active branch names
-export const getUILabel = (branch) => {
+export const getUILabel = (branch: Branch) => {
   if (!branch['active']) {
     console.warn(
       `Retrieving branch UI label for legacy/EOL'd/inactive branch: ${branch['gitBranchName']}. This should probably not be happening.`
@@ -60,9 +67,9 @@ const createVersionLabel = (urlSlug = '', gitBranchName = '') => {
 
   const label = urlSlug || gitBranchName;
   // If the label is numeric (e.g. "2.0" or "v2.0"), we display "Version 2.0"
-  if (!isNaN(label)) {
+  if (!isNaN(Number(label))) {
     return `Version ${label}`;
-  } else if (label.startsWith('v') && !isNaN(label.slice(1))) {
+  } else if (label.startsWith('v') && !isNaN(Number(label.slice(1)))) {
     return `Version ${label.slice(1)}`;
   }
 
@@ -93,7 +100,7 @@ const getBranch = (branchName = '', branches = []) => {
   return branchCandidates?.[0] || null;
 };
 
-const createOption = (branch) => {
+const createOption = (branch: Branch) => {
   const UIlabel = getUILabel(branch);
   const slug = getBranchSlug(branch);
   return (
@@ -103,7 +110,11 @@ const createOption = (branch) => {
   );
 };
 
-const VersionDropdown = ({ eol }) => {
+interface VersionDropdownProps {
+  eol: boolean;
+}
+
+const VersionDropdown = ({ eol }: VersionDropdownProps) => {
   const { parserBranch } = useSiteMetadata();
   const { project } = useSnootyMetadata();
   const { availableVersions, availableGroups, onVersionSelect, showEol, activeVersions } = useContext(VersionContext);
