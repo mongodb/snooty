@@ -14,7 +14,7 @@ export type SearchPropertyMapping = {
 };
 
 export type MarianManifestResponse = {
-  manifests: Array<string>;
+  manifests: string[];
 };
 
 export type MarianFilters = Record<string, Record<string, string>>;
