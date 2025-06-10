@@ -1,25 +1,13 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
-
-type CardGroupOptions = {
-  columns: number;
-  layout: string;
-  style: string;
-  type?: string;
-};
-
-type CardGroupNodeData = {
-  children: any[];
-  options: CardGroupOptions;
-};
+import type { CardGroupNode } from '../../types/ast';
 
 export interface CardGroupProps {
   className?: string;
-  nodeData: CardGroupNodeData;
+  nodeData: CardGroupNode;
   page?: {
     options?: {
       template?: string;
@@ -171,17 +159,6 @@ const CardGroup: React.FC<CardGroupProps> = ({
       ))}
     </StyledGrid>
   );
-};
-
-CardGroup.propTypes = {
-  className: PropTypes.string,
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object),
-    options: PropTypes.shape({
-      columns: PropTypes.number,
-    }),
-  }).isRequired,
-  page: PropTypes.object,
 };
 
 export default CardGroup;

@@ -5,7 +5,6 @@ type ComponentType =
   | 'blockquote'
   | 'button'
   | 'card'
-  | 'card-group'
   | 'chapter'
   | 'chapters'
   | 'collapsible'
@@ -100,6 +99,7 @@ type DirectiveName =
   | 'wayfinding';
 
 type NodeType =
+  | 'card-group'
   | 'code'
   | 'cta-banner'
   | 'definitionList'
@@ -270,6 +270,15 @@ interface LineNode extends ParentNode {
 interface TextNode extends Node {
   type: 'text';
   value: string;
+}
+type CardGroupOptions = {
+  columns: number;
+  layout: string;
+  style: string;
+  type?: string;
+};
+export interface CardGroupNode extends Directive<CardGroupOptions> {
+  options: CardGroupOptions;
 }
 
 interface DefinitionListNode extends ParentNode {
