@@ -97,7 +97,7 @@ export const tocData = (): TocItem[] => {
     },
     {
       label: 'C# Quick Start',
-      url: '/docs/drivers/csharp/:version',
+      url: '/docs/drivers/csharp/:version/quick-start',
       glyph: 'Bulb',
       prefix: CSHARP,
       versionDropdown: true,
@@ -105,7 +105,6 @@ export const tocData = (): TocItem[] => {
         {
           label: 'C# Documentation',
           group: true,
-
           items: [
             {
               label: 'Quick Reference',
@@ -139,6 +138,7 @@ export const tocData = (): TocItem[] => {
         {
           label: 'Fundamentals',
           group: true,
+          versionDropdown: true,
           items: [
             {
               label: 'Operations with Builders',

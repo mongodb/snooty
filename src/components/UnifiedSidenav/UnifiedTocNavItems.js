@@ -76,7 +76,6 @@ export function UnifiedTocNavItem({
             url={url}
             newUrl={newUrl}
             slug={slug}
-            isStatic={isStatic}
             items={items}
             prefix={prefix}
             setCurrentL1={setCurrentL1}
@@ -245,19 +244,7 @@ function CollapsibleNavItem({ items, label, url, newUrl, slug, prefix, isAccordi
   );
 }
 
-export function StaticNavItem({
-  label,
-  url,
-  newUrl,
-  slug,
-  items,
-  isStatic,
-  prefix,
-  setCurrentL1,
-  isAccordion,
-  setShowDriverBackBtn,
-  level = 1,
-}) {
+export function StaticNavItem({ label, newUrl, slug, items, prefix, setCurrentL1, isAccordion, setShowDriverBackBtn }) {
   const isActive = isActiveTocNode(slug, newUrl, items);
 
   return (
