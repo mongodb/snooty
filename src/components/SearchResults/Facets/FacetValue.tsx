@@ -1,10 +1,13 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { ChangeEvent, MouseEvent, useCallback, useContext, useMemo } from 'react';
 import Checkbox from '@leafygreen-ui/checkbox';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { FACETS_KEY_PREFIX, FACETS_LEVEL_KEY, VERSION_GROUP_ID } from '../../../utils/search-facet-constants';
 import SearchContext from '../SearchContext';
+import { FacetValue as FacetValueType } from '../../../types/data';
 import FacetGroup from './FacetGroup';
+
+type NestedSubFacets = Map<string, Set<string>>;
 
 const checkboxStyle = css`
   // Target the label/text
@@ -33,7 +36,7 @@ const onlyButtonStyle = css`
   margin-left: 8px;
 `;
 
-export const initChecked = (searchParams, key, id) => {
+export const initChecked = (searchParams: URLSearchParams, key: string, id: string) => {
   return searchParams.getAll(FACETS_KEY_PREFIX + key).includes(id);
 };
 
@@ -43,7 +46,7 @@ export const initChecked = (searchParams, key, id) => {
  * @param {string} paramKey
  * @param {string} paramVal
  */
-const isParamValidSubFacet = (nestedSubFacets, paramKey, paramVal) => {
+const isParamValidSubFacet = (nestedSubFacets: NestedSubFacets, paramKey: string, paramVal: string) => {
   const originalKey = paramKey.split(FACETS_KEY_PREFIX)[1];
   const ids = nestedSubFacets.get(originalKey);
   return ids?.has(paramVal);
@@ -56,7 +59,11 @@ const isParamValidSubFacet = (nestedSubFacets, paramKey, paramVal) => {
  * @param {Map<string, Set<string, string>>} nestedSubFacets
  * @param {string} fullFacetId
  */
-const findNumSelectedSubFacets = (searchParams, nestedSubFacets, fullFacetId) => {
+const findNumSelectedSubFacets = (
+  searchParams: URLSearchParams,
+  nestedSubFacets: NestedSubFacets,
+  fullFacetId: string
+) => {
   let count = 0;
   for (const [paramKey, paramVal] of searchParams.entries()) {
     // Ensure that invalid query params do not affect the UI
@@ -67,6 +74,13 @@ const findNumSelectedSubFacets = (searchParams, nestedSubFacets, fullFacetId) =>
   return count;
 };
 
+export type FacetValueProps = {
+  facetValue: FacetValueType;
+  isNested?: boolean;
+  siblingsSelected?: boolean;
+  selfAndSiblings: Array<FacetValueType> | null;
+};
+
 // Representative of a "facet-option" from search server response. These are
 // facets that the user can select to filter search
 const FacetValue = ({
@@ -74,7 +88,7 @@ const FacetValue = ({
   isNested = false,
   siblingsSelected = false,
   selfAndSiblings,
-}) => {
+}: FacetValueProps) => {
   const { handleFacetChange, searchParams } = useContext(SearchContext);
   const isAtlasProduct = key === 'target_product' && id === 'atlas';
   // Differentiate between facets with the same id found under different facet options
@@ -82,12 +96,16 @@ const FacetValue = ({
 
   // Mapping of nested facet options/groups with the ids for each underlying facet value
   // nestedSubFacets do not include version subfacets, this is treated separately
-  const [nestedSubFacets, nestedVersions, preferredVersion, totalSubFacets] = useMemo(() => {
-    // key: string; value: Set
-    const map = new Map();
-    let nestedVersions = [];
+  const [nestedSubFacets, nestedVersions, preferredVersion, totalSubFacets]: [
+    NestedSubFacets,
+    Array<FacetValueType>,
+    FacetValueType | undefined,
+    number
+  ] = useMemo(() => {
+    const map: NestedSubFacets = new Map();
+    let nestedVersions: Array<FacetValueType> = [];
     let totalCount = 0;
-    let preferredVersion;
+    let preferredVersion: FacetValueType | undefined;
     // Consolidate the available facet values for an arbitrary amount of nested facet
     // options (i.e. subfacets). This only consolidates up to 1 layer of facet values
     facets.forEach((facetGroup) => {
@@ -101,7 +119,7 @@ const FacetValue = ({
         if (!map.has(key)) {
           map.set(key, new Set());
         }
-        const currentSet = map.get(key);
+        const currentSet = map.get(key)!;
         currentSet.add(id);
         totalCount++;
       });
@@ -113,7 +131,7 @@ const FacetValue = ({
   const isIndeterminate = numSelectedSubProducts > 0 && numSelectedSubProducts !== totalSubFacets;
   const isChecked = totalSubFacets > 0 ? numSelectedSubProducts === totalSubFacets : initChecked(searchParams, key, id);
   const onChange = useCallback(
-    ({ target }) => {
+    ({ target }: ChangeEvent<HTMLInputElement>) => {
       const { checked } = target;
       const facetsToUpdate = [];
       // if unchecked, parent should be unchecked
@@ -137,26 +155,27 @@ const FacetValue = ({
           facetsToUpdate.push({ key, id, checked });
         });
       } else if (preferredVersion) {
+        const { key, id } = preferredVersion;
         facetsToUpdate.push({
-          key: preferredVersion.key,
-          id: preferredVersion.id,
-          checked: checked,
+          key,
+          id,
+          checked,
         });
       }
       facetsToUpdate.push({ key, id, checked });
-      handleFacetChange(facetsToUpdate, checked);
+      handleFacetChange(facetsToUpdate);
     },
     [nestedSubFacets, preferredVersion, key, id, handleFacetChange, nestedVersions]
   );
 
   const updateSiblings = useCallback(
-    (e) => {
-      const facetsToUpdate = selfAndSiblings.map((facet) => {
+    (e: MouseEvent<HTMLSpanElement>) => {
+      const facetsToUpdate = (selfAndSiblings ?? []).map((facet) => {
         const checked = key === facet.key && id === facet.id; // self remains checked
         const updatedFacet = {
           key: facet.key,
           id: facet.id,
-          checked: checked,
+          checked,
         };
         return updatedFacet;
       });
