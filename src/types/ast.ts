@@ -64,6 +64,7 @@ type DirectiveName =
   | 'collapsible'
   | 'community-driver'
   | 'composable-tutorials'
+  | 'container'
   | 'contents'
   | 'deprecated'
   | 'directive'
@@ -224,6 +225,11 @@ type ButtonOptions = {
 
 interface ButtonNode extends Directive<ButtonOptions> {
   options: ButtonOptions;
+}
+
+interface ContainerNode extends Directive {
+  name: 'container';
+  argument: TextNode[];
 }
 
 type DismissibleSkillsCardOptions = {
@@ -492,6 +498,7 @@ export type {
   CodeNode,
   CommunityDriverPill,
   ComponentType,
+  ContainerNode,
   Directive,
   DirectiveOptions,
   IOCodeBlockNode,

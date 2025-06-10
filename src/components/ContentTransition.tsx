@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { css, Global } from '@emotion/react';
+import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
 
 const fadeOut = css`
@@ -31,7 +31,14 @@ const fadeInOut = css`
   ${fadeIn}
 `;
 
-const ContentTransition = ({ children, slug }) => (
+const innerContainerStyles = LeafyCss`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const ContentTransition = ({ children, slug }: { children: ReactNode; slug: string }) => (
   <>
     <Global styles={fadeInOut} />
     <TransitionGroup>
@@ -40,24 +47,10 @@ const ContentTransition = ({ children, slug }) => (
         classNames="fade"
         key={slug}
       >
-        <div
-          css={css`
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-          `}
-        >
-          {children}
-        </div>
+        <div className={cx(innerContainerStyles, 'content-transition-div')}>{children}</div>
       </CSSTransition>
     </TransitionGroup>
   </>
 );
-
-ContentTransition.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  slug: PropTypes.string,
-};
 
 export default ContentTransition;
