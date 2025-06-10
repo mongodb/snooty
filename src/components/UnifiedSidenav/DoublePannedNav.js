@@ -115,7 +115,7 @@ export const DoublePannedNav = ({
                 Back to Client Libraries
               </BackLink>
             )}
-            {currentL1.versionDropdown && <VersionDropdown eol={false} />}
+            {currentL1.versionDropdown && <VersionDropdown />}
             {currentL2s.items?.map((navItems) => (
               <UnifiedTocNavItem
                 {...navItems}

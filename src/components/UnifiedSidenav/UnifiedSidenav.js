@@ -123,7 +123,7 @@ const findPageParent = (tree, targetUrl) => {
   const dfs = (item) => {
     path.push(item);
 
-    if (assertLeadingSlash(removeTrailingSlash(item.url)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
+    if (assertLeadingSlash(removeTrailingSlash(item.newUrl)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
       for (let i = path.length - 1; i >= 0; i--) {
         if (path[i].showSubNav === true) {
           return [true, path[i]];
@@ -183,7 +183,7 @@ export function UnifiedSidenav({ slug }) {
 
   const [currentL1, setCurrentL1] = useState(() => {
     return tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
+      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
     });
   });
 

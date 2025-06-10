@@ -139,7 +139,6 @@ export const tocData = (): TocItem[] => {
         {
           label: 'Fundamentals',
           group: true,
-          versionDropdown: true,
           items: [
             {
               label: 'Operations with Builders',

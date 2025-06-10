@@ -83,7 +83,7 @@ export function UnifiedTocNavItem({
             setShowDriverBackBtn={setShowDriverBackBtn}
             isAccordion={isAccordion}
           />
-          {versionDropdown && <VersionDropdown eol={false} />}
+          {versionDropdown && <VersionDropdown />}
           {newUrl === currentL2s?.newUrl &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
@@ -104,7 +104,7 @@ export function UnifiedTocNavItem({
 
     return (
       <>
-        {versionDropdown && <VersionDropdown eol={false} />}
+        {versionDropdown && <VersionDropdown />}
         {items?.map((tocItem) => (
           <UnifiedTocNavItem
             {...tocItem}
@@ -126,7 +126,7 @@ export function UnifiedTocNavItem({
     return (
       <>
         <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling({ isAccordion }))}>
-          {versionDropdown && <VersionDropdown eol={false} />}
+          {versionDropdown && <VersionDropdown />}
           {items?.map((tocItem) => (
             <UnifiedTocNavItem
               {...tocItem}
@@ -211,8 +211,6 @@ function CollapsibleNavItem({ items, label, url, newUrl, slug, prefix, isAccordi
       setIsOpen(!isOpen);
     }
   };
-
-  console.log('heyyyyyy ', newUrl, url);
 
   return (
     <>
