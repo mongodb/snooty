@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { ContainerNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
-const Container = ({ nodeData: { argument, children }, ...rest }) => {
+const Container = ({ nodeData: { argument, children }, ...rest }: { nodeData: ContainerNode }) => {
   const customClass = argument.map((node) => node.value).join(' ');
   return (
     <div className={`${customClass} docutils container`}>
@@ -11,17 +11,6 @@ const Container = ({ nodeData: { argument, children }, ...rest }) => {
       ))}
     </div>
   );
-};
-
-Container.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string,
-      })
-    ),
-    children: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
 };
 
 export default Container;
