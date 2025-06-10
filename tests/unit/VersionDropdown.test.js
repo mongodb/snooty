@@ -1,13 +1,13 @@
 import { render, screen, within } from '@testing-library/react';
-import { navigate } from '@gatsbyjs/reach-router';
+import { navigate } from 'gatsby';
 import userEvent from '@testing-library/user-event';
 import * as realm from '../../src/utils/realm';
 import VersionDropdown from '../../src/components/VersionDropdown';
 import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
-import mockData from '../unit/data/VersionDropdown.test.json';
 import { VersionContextProvider } from '../../src/context/version-context';
 import { tick } from '../utils';
+import mockData from './data/VersionDropdown.test.json';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ parserBranch: 'master', snootyEnv: 'development' }),
@@ -17,7 +17,7 @@ jest.mock('../../src/utils/use-snooty-metadata', () => {
   return () => ({ project: 'node' });
 });
 
-jest.mock('@gatsbyjs/reach-router', () => ({
+jest.mock('gatsby', () => ({
   navigate: jest.fn(),
 }));
 

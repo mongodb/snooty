@@ -111,7 +111,7 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
       <StyledSearchBoxRef ref={searchBoxRef}>
         <LGSearchInput
           aria-label={PLACEHOLDER_TEXT}
-          className={searchInputStyling({ mobileSearchActive })}
+          className={`sl-search-input ${searchInputStyling({ mobileSearchActive })}`}
           value={searchValue}
           placeholder={isMobile ? PLACEHOLDER_TEXT_MOBILE : PLACEHOLDER_TEXT}
           onChange={(e) => {
