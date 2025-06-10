@@ -482,6 +482,13 @@ interface CTABannerNode extends Directive<CTABannerOptions> {
 
 interface ReleaseSpecificationNode extends ParentNode {}
 
+interface RefRoleNode extends ParentNode {
+  name: 'ref_role';
+  domain: string;
+  fileid: string[];
+  url: string;
+}
+
 export type {
   ParentNode,
   Root,
@@ -537,4 +544,5 @@ export type {
   BannerNode,
   CTABannerNode,
   ReleaseSpecificationNode,
+  RefRoleNode,
 };
