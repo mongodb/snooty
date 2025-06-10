@@ -4,6 +4,7 @@ import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
 import { VERSION_GROUP_ID } from '../../../utils/search-facet-constants';
+import { FacetOption } from '../../../types/data';
 import FacetVersionGroup from './FacetVersionGroup';
 import FacetValue from './FacetValue';
 
@@ -11,7 +12,7 @@ import FacetValue from './FacetValue';
 const TRUNCATE_OPTIONS = ['programming_language', 'sub_product'];
 const TRUNCATE_AMOUNT = 5;
 
-const optionStyle = (isNested) => css`
+const optionStyle = (isNested: boolean) => css`
   ${isNested
     ? `
     margin-left: 22px;
@@ -41,8 +42,15 @@ const showMoreGlyphStyle = css`
   color: ${palette.gray.dark2};
 `;
 
+type FacetGroupProps = {
+  facetOption: FacetOption;
+  isNested?: boolean;
+  numSelectedChildren?: number;
+};
+
 // Representative of a "facet-option" from search server response
-const FacetGroup = ({ facetOption: { name, id, options }, isNested = false, numSelectedChildren }) => {
+const FacetGroup = ({ facetOption, isNested = false, numSelectedChildren = 0 }: FacetGroupProps) => {
+  const { name, id, options } = facetOption;
   const shouldTruncate = options.length >= TRUNCATE_AMOUNT && TRUNCATE_OPTIONS.includes(id);
   const [truncated, setTruncated] = useState(shouldTruncate);
   const displayedOptions = truncated ? options.slice(0, TRUNCATE_AMOUNT) : options;
@@ -62,7 +70,7 @@ const FacetGroup = ({ facetOption: { name, id, options }, isNested = false, numS
   }, []);
 
   if (id === VERSION_GROUP_ID) {
-    return <FacetVersionGroup facetOption={{ name, id, options }} />;
+    return <FacetVersionGroup facetOption={facetOption} />;
   }
 
   return (

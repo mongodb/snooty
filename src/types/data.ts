@@ -146,11 +146,29 @@ type MetadataGuide = {
   description: ParagraphNode;
   title: TextNode;
 };
+type FacetBase = {
+  id: string;
+  key: string;
+  name: string;
+  checked?: boolean;
+};
+
+interface FacetOption extends FacetBase {
+  type: 'facet-option';
+  options: Array<FacetValue>;
+}
+
+interface FacetValue extends FacetBase {
+  type: 'facet-value';
+  facets: Array<FacetOption>;
+}
 
 export {
   BranchData,
   Docset,
   EOLType,
+  FacetOption,
+  FacetValue,
   Group,
   MetadataChapters,
   MetadataDatabaseName,
