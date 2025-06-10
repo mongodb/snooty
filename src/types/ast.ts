@@ -480,6 +480,18 @@ interface CTABannerNode extends Directive<CTABannerOptions> {
   options: CTABannerOptions;
 }
 
+interface VideoOptions {
+  title: string;
+  description: string;
+  'upload-date': string;
+  'thumbnail-url': string;
+}
+
+interface VideoNode extends Directive<VideoOptions> {
+  argument: Array<{ type: 'reference'; refuri: string }>;
+  options: VideoOptions;
+}
+
 export type {
   ParentNode,
   Root,
@@ -534,4 +546,5 @@ export type {
   MetaNode,
   BannerNode,
   CTABannerNode,
+  VideoNode,
 };

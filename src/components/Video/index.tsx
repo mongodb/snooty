@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import ReactPlayerYT from 'react-player/youtube';
 import ReactPlayerWistia from 'react-player/wistia';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { palette } from '@leafygreen-ui/palette';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
 import { STRUCTURED_DATA_CLASSNAME, VideoObjectSd } from '../../utils/structured-data';
+import type { VideoNode } from '../../types/ast';
 import VideoPlayButton from './VideoPlayButton';
 
 // Imported both players to keep bundle size low and rendering the one associated to the URL being passed in
@@ -40,7 +40,7 @@ const ReactPlayerWrapper = styled('div')`
   overflow: hidden;
 `;
 
-const videoStyling = ({ name }) => css`
+const videoStyling = ({ name }: { name: string }) => css`
   position: absolute;
   top: 0;
   left: 0;
@@ -55,7 +55,7 @@ const videoStyling = ({ name }) => css`
   }`}
 `;
 
-const getTheSupportedMedia = (url) => {
+const getTheSupportedMedia = (url: string) => {
   let supportedType = null;
 
   if (url.includes('youtube') || url.includes('youtu.be')) {
@@ -66,10 +66,14 @@ const getTheSupportedMedia = (url) => {
     supportedType = 'wistia';
   }
 
-  return REACT_PLAYERS[supportedType];
+  return REACT_PLAYERS[supportedType as keyof typeof REACT_PLAYERS];
 };
 
-const Video = ({ nodeData: { argument, options = {} } }) => {
+interface VideoProps {
+  nodeData: VideoNode;
+}
+
+const Video = ({ nodeData: { argument, options } }: VideoProps) => {
   const url = `${argument[0]['refuri']}`;
   // use placeholder image for video thumbnail if invalid URL provided
   const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
@@ -135,18 +139,6 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
       </ReactPlayerWrapper>
     </>
   );
-};
-
-Video.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.array.isRequired,
-    options: PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string,
-      'upload-date': PropTypes.string,
-      'thumbnail-url': PropTypes.string,
-    }),
-  }).isRequired,
 };
 
 export default Video;
