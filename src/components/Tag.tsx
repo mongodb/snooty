@@ -74,7 +74,7 @@ const VARIANTS: Record<Theme, Record<TagVariant, string>> = {
   },
 };
 
-interface TagProps {
+interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
   variant: TagVariant;
 }
