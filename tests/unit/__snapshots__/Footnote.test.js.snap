@@ -29,7 +29,6 @@ exports[`renders correctly 1`] = `
 
 <table
     class="header-buffer emotion-0"
-    frame="void"
     id="footnote-1"
     rules="none"
   >
