@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useLocation } from '@gatsbyjs/reach-router';
 import Box from '@leafygreen-ui/box';
 import Icon from '@leafygreen-ui/icon';
@@ -14,11 +13,19 @@ import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { reportAnalytics } from '../../utils/report-analytics';
 import ComponentFactory from '../ComponentFactory';
 import Heading from '../Heading';
+import { CollapsibleNode } from '../../types/ast';
 import { collapsibleStyle, headerContainerStyle, headerStyle, iconStyle, innerContentStyle } from './styles';
 import './styles.css';
 
-const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest }) => {
-  const { id, heading, expanded, sub_heading: subHeading } = options;
+interface CollapsibleProps {
+  nodeData: CollapsibleNode;
+  sectionDepth: number;
+  [key: string]: any;
+}
+const Collapsible: React.FC<CollapsibleProps> = ({ nodeData, sectionDepth, ...rest }) => {
+  // const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest }) => {
+  const { children, options } = nodeData;
+  const { id, heading, expanded, sub_heading: subHeading } = options || {};
   const { hash } = useLocation();
 
   // get a list of all ids in collapsible content
@@ -102,16 +109,4 @@ const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest })
     </HeadingContextProvider>
   );
 };
-
-Collapsible.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object),
-    options: PropTypes.shape({
-      heading: PropTypes.string.isRequired,
-      sub_heading: PropTypes.string,
-      id: PropTypes.string,
-    }),
-  }),
-};
-
 export default Collapsible;

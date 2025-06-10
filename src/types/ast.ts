@@ -362,6 +362,7 @@ type CollapsibleOptions = {
   heading?: string;
   sub_heading?: string;
   id?: string;
+  expanded?: boolean;
 };
 
 interface CollapsibleNode extends Directive<CollapsibleOptions> {
