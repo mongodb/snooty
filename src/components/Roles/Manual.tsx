@@ -1,9 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 import { REF_TARGETS } from '../../constants';
+import { RoleManualNode } from '../../types/ast';
 
-const RoleManual = ({ nodeData: { children, target } }) => {
+export type RoleManualProps = {
+  nodeData: RoleManualNode;
+};
+
+const RoleManual = ({ nodeData: { children, target } }: RoleManualProps) => {
   return (
     <a href={`${REF_TARGETS.manual}${target.replace('/manual', '')}`}>
       {children.map((node, i) => (
@@ -11,12 +15,6 @@ const RoleManual = ({ nodeData: { children, target } }) => {
       ))}
     </a>
   );
-};
-
-RoleManual.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.node).isRequired,
-  }).isRequired,
 };
 
 export default RoleManual;

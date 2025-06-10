@@ -12,7 +12,11 @@ const goldStyles = css`
   }
 `;
 
-const Gold = ({ nodeData: { children } }: { nodeData: ParentNode }) => (
+export type GoldProps = {
+  nodeData: ParentNode;
+};
+
+const Gold = ({ nodeData: { children } }: GoldProps) => (
   <strong className={cx(goldStyles)}>
     {children.map((node, i) => (
       <ComponentFactory key={i} nodeData={node} />

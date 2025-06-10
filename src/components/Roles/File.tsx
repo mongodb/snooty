@@ -2,7 +2,11 @@ import React from 'react';
 import ComponentFactory from '../ComponentFactory';
 import { ParentNode } from '../../types/ast';
 
-const RoleFile = ({ nodeData: { children } }: { nodeData: ParentNode }) => (
+export type RoleFileProps = {
+  nodeData: ParentNode;
+};
+
+const RoleFile = ({ nodeData: { children } }: RoleFileProps) => (
   <code className="file docutils literal">
     <span className="pre">
       {children.map((node, i) => (

@@ -1,29 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
+import { ParentNode } from '../../types/ast';
 
-const Red = ({ nodeData: { children } }) => (
-  <strong
-    css={css`
-      color: ${palette.red.dark2};
+export type RedProps = {
+  nodeData: ParentNode;
+};
 
-      .dark-theme & {
-        color: ${palette.red.light1};
-      }
-    `}
-  >
+const redStyles = css`
+  color: ${palette.red.dark2};
+
+  .dark-theme & {
+    color: ${palette.red.light1};
+  }
+`;
+
+const Red = ({ nodeData: { children } }: RedProps) => (
+  <strong className={cx(redStyles)}>
     {children.map((node, i) => (
       <ComponentFactory key={i} nodeData={node} />
     ))}
   </strong>
 );
-
-Red.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
 
 export default Red;

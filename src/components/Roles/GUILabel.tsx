@@ -8,7 +8,11 @@ const guiLabelStyle = css`
   font-weight: 700;
 `;
 
-const RoleGUILabel = ({ nodeData: { children } }: { nodeData: ParentNode }) => (
+export type RoleGUILabelProps = {
+  nodeData: ParentNode;
+};
+
+const RoleGUILabel = ({ nodeData: { children } }: RoleGUILabelProps) => (
   // Keep "guilabel" className for styling when this component is inside of a Heading.
   <span className={cx('guilabel', guiLabelStyle)}>
     {children.map((node, i) => (
