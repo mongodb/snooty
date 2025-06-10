@@ -1,13 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
+import type { WayfindingNode } from '../../types/ast';
 
-const optionStyle = ({ hideOption }) => css`
+const optionStyle = ({ hideOption }: { hideOption: boolean }) => css`
   padding: 6px 12px;
   text-decoration: none;
   display: ${hideOption ? 'none' : 'flex'};
@@ -29,13 +29,19 @@ const imgStyle = css`
   margin-right: 12px;
 `;
 
-const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false }) => {
+interface WayfindingOptionProps {
+  nodeData: WayfindingNode;
+  hideOption?: boolean;
+}
+
+const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false }: WayfindingOptionProps) => {
   const optionLink = getPlaintext(argument);
   const title = options?.title;
   const lang = options?.language;
   const optionId = options?.id;
 
-  const Icon = DRIVER_ICON_MAP[optionId] || DRIVER_ICON_MAP[lang];
+  const Icon =
+    DRIVER_ICON_MAP[optionId as keyof typeof DRIVER_ICON_MAP] || DRIVER_ICON_MAP[lang as keyof typeof DRIVER_ICON_MAP];
 
   return (
     <a
@@ -53,17 +59,6 @@ const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false 
       <span>{title}</span>
     </a>
   );
-};
-
-WayfindingOption.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-    options: PropTypes.shape({
-      title: PropTypes.string,
-      language: PropTypes.string,
-      id: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
 };
 
 export default WayfindingOption;

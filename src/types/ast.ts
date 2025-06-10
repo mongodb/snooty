@@ -497,6 +497,16 @@ interface WayfindingNode extends Directive {
   children: Node[];
 }
 
+interface WayfindingOptionOptions {
+  title: string;
+  language: string;
+  id: string;
+}
+
+interface WayfindingOptionNode extends Directive<WayfindingOptionOptions> {
+  argument: Array<{ type: 'reference'; refuri: string }>;
+}
+
 export type {
   ParentNode,
   Root,
@@ -553,4 +563,5 @@ export type {
   CTABannerNode,
   VideoNode,
   WayfindingNode,
+  WayfindingOptionNode,
 };
