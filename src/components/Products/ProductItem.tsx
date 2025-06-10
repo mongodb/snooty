@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { css } from '@leafygreen-ui/emotion';
 import { withPrefix } from 'gatsby';
@@ -37,9 +35,13 @@ const StyledArticle = styled.article`
   }
 
   a {
-    color: var(--color);
+    color: ${palette.blue.base};
     font-size: ${FONT_SIZE};
     font-weight: normal;
+
+    .dark-theme & {
+      color: ${palette.blue.light1};
+    }
   }
 `;
 
@@ -50,11 +52,10 @@ const customStyleHeader = css`
 const ProductItem = ({ nodeData: { children, options, argument } }) => {
   const icon = options.icon;
   const iconAlt = options['icon-alt'];
-  const { darkMode } = useDarkMode();
   return (
     <StyledSection>
       <img src={withPrefix(icon)} alt={iconAlt} height={HEIGHT} width={WIDTH} />
-      <StyledArticle style={{ '--color': darkMode ? palette.blue.light1 : palette.blue.base }}>
+      <StyledArticle>
         <SectionHeader customStyles={customStyleHeader}>
           {argument.map((child, i) => (
             <ComponentFactory nodeData={child} key={i} />
@@ -68,14 +69,14 @@ const ProductItem = ({ nodeData: { children, options, argument } }) => {
   );
 };
 
-ProductItem.prototype = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    options: PropTypes.shape({
-      columns: PropTypes.number,
-    }),
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
+// ProductItem.prototype = {
+//   nodeData: PropTypes.shape({
+//     children: PropTypes.arrayOf(PropTypes.object).isRequired,
+//     options: PropTypes.shape({
+//       columns: PropTypes.number,
+//     }),
+//     argument: PropTypes.arrayOf(PropTypes.object).isRequired,
+//   }).isRequired,
+// };
 
 export default ProductItem;
