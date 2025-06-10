@@ -1,19 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
+import { ParentNode } from '../../types/ast';
 
-const RoleCommand = ({ nodeData: { children }, ...rest }) => (
+const RoleCommand = ({ nodeData: { children }, ...rest }: { nodeData: ParentNode }) => (
   <strong>
     {children.map((child, i) => (
       <ComponentFactory {...rest} key={i} nodeData={child} />
     ))}
   </strong>
 );
-
-RoleCommand.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
 
 export default RoleCommand;
