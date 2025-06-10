@@ -18,7 +18,9 @@ const ImageContext = createContext<ImageContextType>({
 
 export default ImageContext;
 
-const ImageContextProvider = ({ images, children }: { images: { relativePath: string }[]; children: ReactNode }) => {
+export type ImageContextProviderProps = { images: { relativePath: string }[]; children: ReactNode };
+
+const ImageContextProvider = ({ images, children }: ImageContextProviderProps) => {
   const imageByPath: { [k: string]: GatsbyImageData | undefined } = {};
   for (const image of images) {
     if (image?.relativePath) {
