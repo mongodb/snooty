@@ -259,7 +259,6 @@ export function StaticNavItem({
   level = 1,
 }) {
   const isActive = isActiveTocNode(slug, newUrl, items);
-  console.log('ahhh', slug, newUrl, isActive);
 
   return (
     <SideNavItem

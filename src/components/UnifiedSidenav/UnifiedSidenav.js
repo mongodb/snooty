@@ -83,18 +83,14 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
     let newUrl = item.url ? item.url : '';
     const currentProject = item.prefix ? item.prefix : prefix;
 
-    // replace version variable
+    // Replace version variable with the true current version
     if (item?.url?.includes(':version')) {
       const version = versionsData[currentProject].find(
         (version) => version.gitBranchName === activeVersions[currentProject]
       );
-      // if no version use first version.urlSlug in the list
-      console.log('the version are', versionsData);
-      const currentVersion = version
-        ? version.urlSlug
-        : versionsData[currentProject][0].urlSlug
-        ? versionsData[currentProject][0].urlSlug
-        : 'main';
+      // If no version use first version.urlSlug in the list, or if no version loads, set as current
+      const defaultVersion = versionsData[currentProject] ? versionsData[currentProject][0].urlSlug : 'current';
+      const currentVersion = version ? version.urlSlug : defaultVersion;
       newUrl = item.url.replace(/:version/g, currentVersion);
     }
 
@@ -163,17 +159,16 @@ export function UnifiedSidenav({ slug }) {
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
   slug = slug === '/' ? pathPrefix + slug : `${pathPrefix}/${slug}/`;
-  const versionsData = availableVersions;
 
   const tree = useMemo(() => {
     return updateURLs({
       tree: unifiedTocTree,
       activeVersions,
-      versionsData,
+      versionsData: availableVersions,
       project,
       snootyEnv,
     });
-  }, [unifiedTocTree, activeVersions, versionsData, project, snootyEnv]);
+  }, [unifiedTocTree, activeVersions, availableVersions, project, snootyEnv]);
 
   console.log('The edited toctree with prefixes is:', tree);
   console.log(unifiedTocTree);
