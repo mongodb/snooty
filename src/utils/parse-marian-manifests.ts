@@ -30,5 +30,6 @@ export const parseMarianManifests = (
     result[category][version] = manifest;
   });
 
-  return result;
+  // Explicit type needed by test suites (sigh)
+  return result as MarianFilters;
 };
