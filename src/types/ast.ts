@@ -480,6 +480,10 @@ interface CTABannerNode extends Directive<CTABannerOptions> {
   options: CTABannerOptions;
 }
 
+interface SubstitutionReferenceNode extends ParentNode {
+  name: 'substitution_reference';
+}
+
 export type {
   ParentNode,
   Root,
@@ -534,4 +538,5 @@ export type {
   MetaNode,
   BannerNode,
   CTABannerNode,
+  SubstitutionReferenceNode,
 };
