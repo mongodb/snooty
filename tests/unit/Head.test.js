@@ -221,7 +221,9 @@ describe('Head', () => {
       const mockData = { ...mockHeadPageContext.data };
       const { container } = render(<Head pageContext={mockPageContext} data={mockData} />);
       const hrefLangLinks = container.querySelectorAll('link.sl_opaque');
-      expect(hrefLangLinks).toHaveLength(getAvailableLanguages().length);
+      // Add 1 for x-default
+      const expectedLength = getAvailableLanguages().length + 1;
+      expect(hrefLangLinks).toHaveLength(expectedLength);
       expect(hrefLangLinks).toMatchSnapshot();
     });
   });
