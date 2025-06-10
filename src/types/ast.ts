@@ -281,6 +281,19 @@ export interface CardGroupNode extends Directive<CardGroupOptions> {
   options: CardGroupOptions;
 }
 
+type CardOptions = {
+  cta?: string;
+  headline?: string;
+  icon: string;
+  'icon-dark': boolean;
+  'icon-alt': string;
+  tag?: string;
+  url: string;
+};
+export interface CardNode extends Directive<CardOptions> {
+  options: CardOptions;
+}
+
 interface DefinitionListNode extends ParentNode {
   type: 'definitionList';
 }
