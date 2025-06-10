@@ -2,7 +2,7 @@ import React from 'react';
 import { palette } from '@leafygreen-ui/palette';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { Theme } from '@leafygreen-ui/lib';
-import { css, type SerializedStyles } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
 
 const baseStyle = css`
@@ -27,7 +27,7 @@ export const searchTagStyle = css`
 
 type TagVariant = 'blue' | 'green' | 'purple' | 'gray';
 
-const VARIANTS: Record<Theme, Record<TagVariant, SerializedStyles>> = {
+const VARIANTS: Record<Theme, Record<TagVariant, string>> = {
   [Theme.Light]: {
     blue: css`
       background-color: ${palette.blue.light3};
@@ -84,7 +84,7 @@ const Tag = ({ children, variant, ...rest }: TagProps) => {
   const variantStyle = VARIANTS[siteTheme][variant] || VARIANTS[siteTheme]['green'];
 
   return (
-    <span css={[baseStyle, variantStyle]} {...rest}>
+    <span className={cx(baseStyle, variantStyle)} {...rest}>
       {children}
     </span>
   );
