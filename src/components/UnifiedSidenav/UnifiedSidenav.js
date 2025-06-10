@@ -85,7 +85,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
 
     // Replace version variable with the true current version
     if (item?.url?.includes(':version')) {
-      const version = versionsData[currentProject].find(
+      const version = (versionsData[currentProject] || []).find(
         (version) => version.gitBranchName === activeVersions[currentProject]
       );
       // If no version use first version.urlSlug in the list, or if no version loads, set as current
