@@ -70,4 +70,31 @@ type SiteMetadata = {
 
 type SnootyEnv = 'dotcomprd' | 'production' | 'dotcomstg' | 'staging' | 'development';
 
-export { BranchData, Docset, EOLType, SiteMetadata, MetadataDatabaseName, ReposDatabaseName, SnootyEnv };
+type FacetBase = {
+  id: string;
+  key: string;
+  name: string;
+  checked?: boolean;
+};
+
+interface FacetOption extends FacetBase {
+  type: 'facet-option';
+  options: Array<FacetValue>;
+}
+
+interface FacetValue extends FacetBase {
+  type: 'facet-value';
+  facets: Array<FacetOption>;
+}
+
+export {
+  BranchData,
+  Docset,
+  EOLType,
+  FacetOption,
+  FacetValue,
+  SiteMetadata,
+  MetadataDatabaseName,
+  ReposDatabaseName,
+  SnootyEnv,
+};
