@@ -11,11 +11,8 @@ export interface CardGroupProps {
   page?: {
     options?: {
       template?: string;
-      [key: string]: any;
     };
-    [key: string]: any;
   };
-  [key: string]: any;
 }
 
 interface CarouselStylingProps {
@@ -24,9 +21,9 @@ interface CarouselStylingProps {
 }
 
 interface StyledGridProps {
-  isForDrivers?: any;
-  isLanding?: any;
-  columns?: any;
+  isForDrivers: boolean;
+  isLanding: boolean;
+  columns: number;
   isCarousel?: boolean;
   className?: string;
   noMargin?: boolean;
@@ -118,7 +115,7 @@ const StyledGrid = styled('div')<StyledGridProps>`
   }
 `;
 
-const CardGroup: React.FC<CardGroupProps> = ({
+const CardGroup = ({
   className,
   nodeData: {
     children = [],
@@ -126,7 +123,7 @@ const CardGroup: React.FC<CardGroupProps> = ({
   },
   page,
   ...rest
-}) => {
+}: CardGroupProps) => {
   const isCompact = style === 'compact';
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = layout === 'carousel';

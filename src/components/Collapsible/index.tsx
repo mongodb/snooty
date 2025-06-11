@@ -17,12 +17,11 @@ import { CollapsibleNode } from '../../types/ast';
 import { collapsibleStyle, headerContainerStyle, headerStyle, iconStyle, innerContentStyle } from './styles';
 import './styles.css';
 
-interface CollapsibleProps {
+interface CollapsibleProps extends React.HTMLAttributes<HTMLDivElement> {
   nodeData: CollapsibleNode;
   sectionDepth: number;
-  [key: string]: any;
 }
-const Collapsible: React.FC<CollapsibleProps> = ({ nodeData, sectionDepth, ...rest }) => {
+const Collapsible = ({ nodeData, sectionDepth, ...rest }: CollapsibleProps) => {
   // const Collapsible = ({ nodeData: { children, options }, sectionDepth, ...rest }) => {
   const { children, options } = nodeData;
   const { id, heading, expanded, sub_heading: subHeading } = options || {};

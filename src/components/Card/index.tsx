@@ -24,9 +24,7 @@ interface CardProps {
   page?: {
     options?: {
       template?: string;
-      [key: string]: any;
     };
-    [key: string]: any;
   };
 }
 
@@ -154,14 +152,7 @@ const onCardClick = (url?: string) => {
   isRelativeUrl(url) ? navigate(url) : (window.location.href = url);
 };
 
-const Card: React.FC<CardProps> = ({
-  isCompact,
-  isExtraCompact,
-  isCenterContentStyle,
-  isLargeIconStyle,
-  page,
-  nodeData,
-}) => {
+const Card = ({ isCompact, isExtraCompact, isCenterContentStyle, isLargeIconStyle, page, nodeData }: CardProps) => {
   const { children, options } = nodeData;
   const { cta, headline, icon, 'icon-dark': iconDark, 'icon-alt': iconAlt, tag, url } = options;
   const template = page?.options?.template;

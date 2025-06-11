@@ -17,10 +17,10 @@ type Branch = {
   [key: string]: any;
 };
 
-type Choice = {
-  value: string;
-  text: string;
-};
+// type Choice = {
+//   value: string;
+//   text: string;
+// };
 
 interface SelectChangeEvent {
   value: string;
@@ -55,7 +55,7 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-const AssociatedVersionSelector: React.FC = () => {
+const AssociatedVersionSelector = () => {
   const { project } = useSnootyMetadata() as { project: string };
   const { activeVersions, availableVersions, hasEmbeddedVersionDropdown, onVersionSelect } = useContext(
     VersionContext

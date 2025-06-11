@@ -277,7 +277,7 @@ type CardGroupOptions = {
   style: string;
   type?: string;
 };
-export interface CardGroupNode extends Directive<CardGroupOptions> {
+interface CardGroupNode extends Directive<CardGroupOptions> {
   options: CardGroupOptions;
 }
 
@@ -290,9 +290,7 @@ type CardOptions = {
   tag?: string;
   url: string;
 };
-export interface CardNode extends Directive<CardOptions> {
-  options: CardOptions;
-}
+export interface CardNode extends Directive<CardOptions> {}
 
 interface DefinitionListNode extends ParentNode {
   type: 'definitionList';
@@ -512,6 +510,7 @@ export type {
   TextNode,
   BlockQuoteNode,
   ButtonNode,
+  CardGroupNode,
   CodeNode,
   CommunityDriverPill,
   ComponentType,
