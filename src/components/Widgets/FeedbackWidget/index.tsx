@@ -35,7 +35,7 @@ const FeedbackRating = ({
 
   return (
     <FeedbackProvider page={feedbackData}>
-      <FeedbackContainer className={classNameContainer}>
+      <FeedbackContainer className={classNameContainer} data-testid="feedback-container">
         <FeedbackForm className={className} />
         <RatingView />
       </FeedbackContainer>
