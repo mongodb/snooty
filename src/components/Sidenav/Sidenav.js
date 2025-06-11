@@ -182,7 +182,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
   const { project } = useSnootyMetadata();
   const isDocsLanding = project === 'landing';
   const viewportSize = useViewportSize();
-  const { isMobile } = useScreenSize();
+  const { isTabletOrMobile } = useScreenSize();
   const { bannerContent } = useContext(HeaderContext);
   const { setModalOpen } = useOfflineDownloadContext();
   const { pathname } = useLocation();
@@ -269,15 +269,15 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
         style={{ '--scroll-y': `${viewport.scrollY}px` }}
         id={SIDE_NAV_CONTAINER_ID}
       >
-        <SidenavMobileTransition hideMobile={hideMobile} isMobile={isMobile}>
+        <SidenavMobileTransition hideMobile={hideMobile} isMobile={isTabletOrMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
             className={cx(sideNavStyling({ hideMobile, isCollapsed }))}
             collapsed={isCollapsed}
             setCollapsed={setCollapsed}
-            widthOverride={isMobile ? viewportSize.width : SIDENAV_WIDTH}
+            widthOverride={isTabletOrMobile ? viewportSize.width : SIDENAV_WIDTH}
           >
-            <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isMobile}>
+            <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isTabletOrMobile}>
               <NavTopContainer>
                 <ArtificialPadding />
                 <DocsHomeButton />
