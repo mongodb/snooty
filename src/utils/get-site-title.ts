@@ -1,12 +1,11 @@
+import { RemoteMetadata } from '../types/data';
 import { getNestedValue } from './get-nested-value';
 
 /**
  * Given property metadata,
  * return the site title as a string
- *
- * @param {object} metadata
  */
-export const getSiteTitle = (metadata) => {
+export const getSiteTitle = (metadata: RemoteMetadata): string => {
   let title = getNestedValue(['title'], metadata) || '';
   if (!title) {
     return '';

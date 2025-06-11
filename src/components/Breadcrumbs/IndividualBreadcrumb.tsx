@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
 import { css as LeafyCss, cx } from '@leafygreen-ui/emotion';
 import Tooltip from '@leafygreen-ui/tooltip';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import { theme } from '../../theme/docsTheme';
+import { BreadcrumbType } from './BreadcrumbContainer';
 
 const linkStyling = LeafyCss`
   font-size: ${theme.fontSize.small};
@@ -39,7 +39,7 @@ const linkWrapperLayoutStyling = LeafyCss`
 `;
 
 // On resize events, recheck if our truncation status
-function subscribeToResizeEvents(callback) {
+function subscribeToResizeEvents(callback: () => void) {
   window.addEventListener('resize', callback);
   return () => {
     window.removeEventListener('resize', callback);
@@ -48,17 +48,20 @@ function subscribeToResizeEvents(callback) {
 
 // For server-side generation, assume no truncation
 function getServerSnapshot() {
-  return false;
+  return JSON.stringify({
+    isTruncated: false,
+    isExcessivelyTruncated: false,
+  });
 }
 
 const TRUNCATION_THRESHOLD = 125; // px
 
-const useIsTruncated = (node) => {
+const useIsTruncated = (node: HTMLDivElement | null) => {
   const isTruncated = React.useSyncExternalStore(
     subscribeToResizeEvents,
     () => {
       const isTruncated = (node?.scrollWidth ?? 0) > (node?.clientWidth ?? 0);
-      const isExcessivelyTruncated = isTruncated && node?.clientWidth <= TRUNCATION_THRESHOLD;
+      const isExcessivelyTruncated = node ? isTruncated && node?.clientWidth <= TRUNCATION_THRESHOLD : false;
 
       // useSyncExternalStore requires types with value comparison semantics
       return JSON.stringify({ isTruncated, isExcessivelyTruncated });
@@ -69,9 +72,15 @@ const useIsTruncated = (node) => {
   return JSON.parse(isTruncated);
 };
 
-const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => {
-  const [node, setNode] = useState(null);
-  const measuredRef = useCallback((node) => {
+type IndividualBreadcrumbProps = {
+  crumb: BreadcrumbType;
+  setIsExcessivelyTruncated: () => void;
+  onClick: () => void;
+};
+
+const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }: IndividualBreadcrumbProps) => {
+  const [node, setNode] = useState<HTMLDivElement | null>(null);
+  const measuredRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
       setNode(node);
     }
@@ -108,17 +117,6 @@ const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }) => 
   }
 
   return result;
-};
-
-const crumbObjectShape = {
-  title: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.arrayOf(PropTypes.object)]),
-  path: PropTypes.string.isRequired,
-};
-
-IndividualBreadcrumb.propTypes = {
-  crumb: PropTypes.shape(crumbObjectShape).isRequired,
-  setIsExcessivelyTruncated: PropTypes.func.isRequired,
-  onClick: PropTypes.func,
 };
 
 export default IndividualBreadcrumb;

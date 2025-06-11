@@ -415,7 +415,7 @@ interface TocTreeOptions {
 interface TocTreeDirective extends Directive<TocTreeOptions> {
   type: 'directive';
   name: 'toctree';
-  entries: TocTreeEntry[];
+  entries: Array<TocTreeEntry>;
 }
 
 type CommunityDriverPillOptions = {
