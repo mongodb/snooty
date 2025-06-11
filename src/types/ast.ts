@@ -415,7 +415,7 @@ interface TocTreeOptions {
 interface TocTreeDirective extends Directive<TocTreeOptions> {
   type: 'directive';
   name: 'toctree';
-  entries: TocTreeEntry[];
+  entries: Array<TocTreeEntry>;
 }
 
 type CommunityDriverPillOptions = {
@@ -524,6 +524,15 @@ interface WayfindingOptionNode extends Directive<WayfindingOptionOptions> {
   argument: Array<ReferenceNode>;
 }
 
+interface ReleaseSpecificationNode extends ParentNode {}
+
+interface RefRoleNode extends ParentNode {
+  name: 'ref_role';
+  domain: string;
+  fileid: string[];
+  url: string;
+}
+
 export type {
   ParentNode,
   Root,
@@ -582,4 +591,6 @@ export type {
   VideoNode,
   WayfindingNode,
   WayfindingOptionNode,
+  ReleaseSpecificationNode,
+  RefRoleNode,
 };
