@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import { normalizePath } from '../utils/normalize-path';
+import type { RefRoleNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 
@@ -24,12 +24,14 @@ const cardRefStyling = css`
   }
 `;
 
-const stopPropagation = function (e) {
-  e.stopPropagation();
-  e.nativeEvent.stopImmediatePropagation();
-};
+interface RefRoleProps {
+  nodeData: RefRoleNode;
+  slug: string;
+  cardRef: boolean;
+  showLinkArrow: boolean;
+}
 
-const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, cardRef, showLinkArrow }) => {
+const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, cardRef, showLinkArrow }: RefRoleProps) => {
   // Render intersphinx target links
   const stylingClass = cardRef ? cardRefStyling : '';
   if (url) {
@@ -60,29 +62,12 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, card
   }
 
   return (
-    <Link
-      className={cx(stylingClass)}
-      to={normalizePath(link)}
-      onClick={(e) => stopPropagation(e)}
-      showLinkArrow={showLinkArrow}
-    >
+    <Link className={cx(stylingClass)} to={normalizePath(link)} showLinkArrow={showLinkArrow}>
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}
     </Link>
   );
-};
-
-RefRole.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    domain: PropTypes.string.isRequired,
-    fileid: PropTypes.arrayOf(PropTypes.string),
-    name: PropTypes.string.isRequired,
-    url: PropTypes.string,
-  }).isRequired,
-  slug: PropTypes.string.isRequired,
-  showLinkArrow: PropTypes.bool,
 };
 
 export default RefRole;

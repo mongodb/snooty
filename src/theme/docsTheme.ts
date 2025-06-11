@@ -66,7 +66,7 @@ const header = {
   navbarScrollOffset: '85px',
   actionBarMobileHeight: '60px',
   composableDesktopHeight: '90px',
-  composableMobileheight: '190px',
+  composableMobileHeight: '190px',
 };
 
 const widgets = {
