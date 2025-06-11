@@ -29,8 +29,8 @@ const StandaloneHeader = ({ nodeData: { argument, options } }: StandaloneHeaderP
           <ComponentFactory nodeData={child} key={i} />
         ))}
       </SectionHeader>
-      <Link to={options.url} showLinkArrow={true}>
-        {options.cta}
+      <Link to={options?.url} showLinkArrow={true}>
+        {options?.cta}
       </Link>
     </StyledStandaloneContainer>
   );
