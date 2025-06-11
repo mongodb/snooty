@@ -64,6 +64,7 @@ type DirectiveName =
   | 'collapsible'
   | 'community-driver'
   | 'composable-tutorials'
+  | 'container'
   | 'contents'
   | 'deprecated'
   | 'directive'
@@ -237,6 +238,11 @@ interface ButtonNode extends Directive<ButtonOptions> {
   options: ButtonOptions;
 }
 
+interface ContainerNode extends Directive {
+  name: 'container';
+  argument: TextNode[];
+}
+
 type DismissibleSkillsCardOptions = {
   skill: string;
   url: string;
@@ -404,12 +410,17 @@ interface AdmonitionNode extends Directive {
 }
 
 interface TocTreeEntry {
-  title?: string;
-  slug?: string;
+  title: [TextNode];
+  slug: string;
+  children: TocTreeEntry[];
+  options?: TocTreeOptions;
 }
 
 interface TocTreeOptions {
-  osiris_parent: boolean;
+  drawer?: boolean;
+  project?: string;
+  versions?: string[];
+  osiris_parent?: boolean;
 }
 
 interface TocTreeDirective extends Directive<TocTreeOptions> {
@@ -453,9 +464,17 @@ interface ComposableNode extends Directive {
   children: Node[];
 }
 
-interface MetaNode extends Directive {
+type MetaOptions = {
+  description?: string;
+  canonical?: string;
+  robots?: string;
+  keywords?: string;
+};
+
+interface MetaNode extends Directive<MetaOptions> {
   type: 'directive';
   name: 'meta';
+  options: MetaOptions;
 }
 
 interface TitleReferenceNode {
@@ -514,6 +533,7 @@ export type {
   CodeNode,
   CommunityDriverPill,
   ComponentType,
+  ContainerNode,
   Directive,
   DirectiveOptions,
   IOCodeBlockNode,
