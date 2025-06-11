@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import ReactPlayerYT, { type YouTubePlayerProps } from 'react-player/youtube';
-import ReactPlayerWistia, { type WistiaPlayerProps } from 'react-player/wistia';
+import ReactPlayerYT from 'react-player/youtube';
+import ReactPlayerWistia from 'react-player/wistia';
 import styled from '@emotion/styled';
 import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
@@ -13,7 +13,7 @@ import VideoPlayButton from './VideoPlayButton';
 // Imported both players to keep bundle size low and rendering the one associated to the URL being passed in
 const REACT_PLAYERS = {
   yt: {
-    player: (props: YouTubePlayerProps) => <ReactPlayerYT {...props} />,
+    player: ReactPlayerYT,
     config: {
       playerVars: {
         autohide: 1,
@@ -24,7 +24,7 @@ const REACT_PLAYERS = {
     name: 'youtube',
   },
   wistia: {
-    player: (props: WistiaPlayerProps) => <ReactPlayerWistia {...props} />,
+    player: ReactPlayerWistia,
     config: {},
     name: 'wistia',
   },
@@ -75,7 +75,7 @@ const Video = ({ nodeData: { argument, options } }: VideoProps) => {
   const url = `${argument[0]['refuri']}`;
   // use placeholder image for video thumbnail if invalid URL provided
   const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
-  const { title, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options;
+  const { title, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options || {};
   const videoObjectSd = useMemo(() => {
     const sd = new VideoObjectSd({ embedUrl: url, name: title, uploadDate, thumbnailUrl, description });
     return sd.isValid() ? sd.toString() : undefined;
