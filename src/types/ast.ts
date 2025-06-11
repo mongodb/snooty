@@ -166,7 +166,10 @@ type DirectiveOptions = {
 
 interface Node {
   type: NodeType;
-  value?: string;
+}
+
+interface TextParentNode extends Node {
+  children: TextNode[];
 }
 
 interface ParentNode extends Node {
@@ -201,7 +204,7 @@ interface EmphasisNode extends ParentNode {
   type: 'emphasis';
 }
 
-interface StrongNode extends ParentNode {
+interface StrongNode extends TextParentNode {
   type: 'strong';
 }
 
