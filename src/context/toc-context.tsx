@@ -13,9 +13,14 @@ const TocContext = createContext({
   activeToc: {}, // table of contents, represented by head node
 });
 
+export type TocContextProviderProps = {
+  children: ReactNode;
+  remoteMetadata: RemoteMetadata;
+};
+
 // ToC context that provides ToC content in form of *above*
 // filters all available ToC by currently selected version via VersionContext
-const TocContextProvider = ({ children, remoteMetadata }: { children: ReactNode; remoteMetadata: RemoteMetadata }) => {
+const TocContextProvider = ({ children, remoteMetadata }: TocContextProviderProps) => {
   const { activeVersions, setActiveVersions, availableVersions, hasEmbeddedVersionDropdown } =
     useContext(VersionContext);
   const { project, branch, toctree, associated_products: associatedProducts } = useSnootyMetadata();

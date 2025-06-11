@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useLocation } from '@gatsbyjs/reach-router';
@@ -16,12 +16,30 @@ import { escapeHtml } from '../../utils/escape-reserved-html-characters';
 import { searchParamsToMetaURL, searchParamsToURL } from '../../utils/search-params-to-url';
 import { requestHeaders } from '../../utils/search-facet-constants';
 import Tag, { searchTagStyle } from '../Tag';
+import { FacetOption } from '../../types/data';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
 import SearchResult from './SearchResult';
 import EmptyResults, { EMPTY_STATE_HEIGHT } from './EmptyResults';
 import MobileFilters from './MobileFilters';
 import { Facets, FacetTags } from './Facets';
+
+export type DocsSearchResponse = {
+  results: Array<DocsSearchResponseResult>;
+};
+
+export type DocsSearchResponseResult = {
+  title: string;
+  preview: string;
+  url: string;
+  searchProperty: Array<string>;
+  facets: Array<{ id: string; key: string }> | null;
+};
+
+export type DocsSearchMetaResponse = {
+  count: number;
+  facets: Array<FacetOption>;
+};
 
 const FILTER_COLUMN_WIDTH = '173px';
 const LANDING_MODULE_MARGIN = '28px';
@@ -84,7 +102,7 @@ const filterHeaderDynamicStyles = css`
   }
 `;
 
-const SearchResultsContainer = styled('div')`
+const SearchResultsContainer = styled('div')<{ showFacets: boolean }>`
   display: grid;
   grid-template-columns: minmax(0, auto) 1fr;
   column-gap: 46px;
@@ -249,7 +267,7 @@ const StyledSearchResults = styled('div')`
   width: 100%;
   /* Create the opaque effect on hover by opaquing everything but a hovered result */
   :not(:hover) {
-    > ${StyledSearchResult} {
+    > .search-result-component {
       opacity: 1;
       transition: opacity 150ms ease-in;
     }
@@ -349,14 +367,13 @@ const SearchResults = () => {
   } = useContext(SearchContext);
 
   const { isTabletOrMobile } = useScreenSize();
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<Array<DocsSearchResponseResult>>([]);
 
   const [searchFinished, setSearchFinished] = useState(() => !searchTerm);
-  const [searchCount, setSearchCount] = useState();
-  const [searchResultFacets, setSearchResultFacets] = useState([]);
+  const [searchCount, setSearchCount] = useState<number | undefined>();
+  const [searchResultFacets, setSearchResultFacets] = useState<Array<FacetOption>>([]);
 
   const specifySearchText = 'Refine your search';
-  const searchBoxRef = useRef(null);
 
   const resetFilters = useCallback(() => {
     setSearchFilter(null);
@@ -379,15 +396,6 @@ const SearchResults = () => {
     };
   }
 
-  // effect called to autofocus search box on page render
-  useEffect(() => {
-    if (searchBoxRef.current) {
-      searchBoxRef.current.focus();
-      // Add class for Smartling localization
-      searchBoxRef.current.classList.add('sl-search-input');
-    }
-  }, []);
-
   // async call to fetch search results
   // effect is called if searchTerm, searchPropertyMapping are defined
   useEffect(() => {
@@ -399,12 +407,12 @@ const SearchResults = () => {
 
     const fetchSearchResults = async () => {
       const res = await fetch(searchParamsToURL(searchParams), requestHeaders);
-      return (await res.json()).results;
+      return (await res.json()).results as Array<DocsSearchResponseResult>;
     };
 
     const fetchSearchMeta = async () => {
       const res = await fetch(searchParamsToMetaURL(searchParams), requestHeaders);
-      return res.json();
+      return res.json() as Promise<DocsSearchMetaResponse>;
     };
 
     // fetch search results
@@ -427,7 +435,7 @@ const SearchResults = () => {
       })
       .catch((e) => {
         console.error(`Error while fetching search meta: ${JSON.stringify(e)}`);
-        setSearchCount();
+        setSearchCount(undefined);
       });
   }, [searchParams]);
 
@@ -435,7 +443,7 @@ const SearchResults = () => {
   useEffect(() => {
     const fetchSearchMeta = async () => {
       const res = await fetch(searchParamsToMetaURL(null, searchTerm), requestHeaders);
-      return res.json();
+      return res.json() as Promise<DocsSearchMetaResponse>;
     };
 
     fetchSearchMeta()
@@ -449,13 +457,13 @@ const SearchResults = () => {
   }, [searchTerm]);
 
   const onPageClick = useCallback(
-    async (isForward) => {
-      const currentPage = parseInt(searchParams.get('page')) || 1;
+    async (isForward: boolean) => {
+      const currentPage = parseInt(searchParams.get('page') ?? '1');
       const newPage = isForward ? currentPage + 1 : currentPage - 1;
       if (newPage < 1) {
         return;
       }
-      setSearchTerm(searchTerm, newPage);
+      setSearchTerm(searchTerm, `${newPage}`);
     },
     [searchParams, searchTerm, setSearchTerm]
   );
@@ -531,27 +539,28 @@ const SearchResults = () => {
                 {searchResults.map(({ title, preview, url, searchProperty, facets }, index) => (
                   <StyledSearchResult
                     key={`${url}${index}`}
-                    onClick={() =>
-                      reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url })
-                    }
+                    onClick={() => {
+                      reportAnalytics('SearchSelection', { areaFrom: 'ResultsPage', rank: index, selectionUrl: url });
+                    }}
                     title={title}
                     preview={escapeHtml(preview)}
                     url={url}
                     useLargeTitle
                     searchProperty={searchProperty?.[0]}
                     facets={facets}
+                    className="search-result-component"
                   />
                 ))}
                 {
                   <>
                     <Pagination
                       className={paginationStyling}
-                      currentPage={parseInt(new URLSearchParams(search).get('page') || 1)}
+                      currentPage={parseInt(new URLSearchParams(search).get('page') || '1')}
                       numTotalItems={searchCount}
                       onForwardArrowClick={onPageClick.bind(null, true)}
                       onBackArrowClick={onPageClick.bind(null, false)}
-                      shouldDisableBackArrow={parseInt(new URLSearchParams(search).get('page')) === 1}
-                      shouldDisableForwardArrow={searchResults?.length && searchResults.length < 10}
+                      shouldDisableBackArrow={new URLSearchParams(search).get('page') === '1'}
+                      shouldDisableForwardArrow={searchResults.length > 0 && searchResults.length < 10}
                     ></Pagination>
                   </>
                 }

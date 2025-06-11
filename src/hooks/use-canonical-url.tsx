@@ -1,15 +1,15 @@
 import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import { normalizePath } from '../utils/normalize-path';
 import { generateVersionedPrefix } from '../utils/generate-versioned-prefix';
-import { PageContext, RemoteMetadata } from '../types/data';
+import { PageContextRepoBranches, RemoteMetadata } from '../types/data';
 import { MetaNode } from '../types/ast';
 import { useSiteMetadata } from './use-site-metadata';
 
 export const useCanonicalUrl = (
-  meta: Array<MetaNode>,
+  meta: MetaNode[],
   metadata: RemoteMetadata,
   slug: string,
-  repoBranches: PageContext['repoBranches']
+  repoBranches: PageContextRepoBranches
 ) => {
   const siteMetadata = useSiteMetadata();
   const { siteUrl, parserBranch } = siteMetadata;

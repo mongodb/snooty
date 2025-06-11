@@ -14,14 +14,14 @@ export type SearchPropertyMapping = {
 };
 
 export type MarianManifestResponse = {
-  manifests: Array<string>;
+  manifests: string[];
 };
 
 export type MarianFilters = Record<string, Record<string, string>>;
 
 // Fetches manifests for search results and the mapping between search properties and their category/version names.
 export const useMarianManifests = () => {
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState<MarianFilters>({});
   const { snootyEnv } = useSiteMetadata();
   const [searchPropertyMapping, setSearchPropertyMapping] = useState<SearchPropertyMapping>({});
 

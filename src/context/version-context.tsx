@@ -19,7 +19,7 @@ import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { fetchDocset, fetchDocument } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { BranchData, Docset, Group, MetadataDatabaseName, PageContext, SiteMetadata } from '../types/data';
+import { BranchData, Docset, Group, MetadataDatabaseName, PageContextRepoBranches, SiteMetadata } from '../types/data';
 
 type AssociatedReposInfo = Record<string, DocsetSlice>;
 type ActiveVersions = Record<string, string>;
@@ -78,7 +78,7 @@ const versionStateReducer = (state: ActiveVersions, newState: Partial<ActiveVers
  */
 const getBranches = async (
   metadata: SiteMetadata,
-  repoBranches: PageContext['repoBranches'],
+  repoBranches: PageContextRepoBranches,
   associatedReposInfo: AssociatedReposInfo,
   associatedProducts: string[]
 ) => {
@@ -115,7 +115,7 @@ const getBranches = async (
 
 const getDefaultVersions = (
   metadata: SiteMetadata,
-  repoBranches: PageContext['repoBranches'] | Docset,
+  repoBranches: PageContextRepoBranches | Docset,
   associatedReposInfo: AssociatedReposInfo
 ) => {
   const { project, parserBranch } = metadata;
@@ -130,7 +130,7 @@ const getDefaultVersions = (
   return versions;
 };
 
-const getDefaultGroups = (project: string, repoBranches: PageContext['repoBranches'] | Docset) => {
+const getDefaultGroups = (project: string, repoBranches: PageContextRepoBranches | Docset) => {
   const groups: AvailableGroups = {};
   const GROUP_KEY = 'groups';
   groups[project] = repoBranches?.[GROUP_KEY] || [];
@@ -189,7 +189,7 @@ const VersionContext = createContext<VersionContextType>({
 interface VersionContextProviderProps {
   children: ReactNode;
   slug: string;
-  repoBranches: PageContext['repoBranches'];
+  repoBranches: PageContextRepoBranches;
 }
 
 const VersionContextProvider = ({ repoBranches, slug, children }: VersionContextProviderProps) => {
