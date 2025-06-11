@@ -25,6 +25,7 @@ import { DownloadButton } from '../OfflineDownloadModal';
 import { useOfflineDownloadContext } from '../OfflineDownloadModal/DownloadContext';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { displayNone } from '../../utils/display-none';
+import useScreenSize from '../../hooks/useScreenSize';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -181,7 +182,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
   const { project } = useSnootyMetadata();
   const isDocsLanding = project === 'landing';
   const viewportSize = useViewportSize();
-  const isMobile = viewportSize?.width <= theme.breakpoints.large;
+  const { isMobile } = useScreenSize();
   const { bannerContent } = useContext(HeaderContext);
   const { setModalOpen } = useOfflineDownloadContext();
   const { pathname } = useLocation();
