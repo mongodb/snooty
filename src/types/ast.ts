@@ -507,13 +507,11 @@ interface VideoOptions {
 }
 
 interface VideoNode extends Directive<VideoOptions> {
-  argument: Array<{ type: 'reference'; refuri: string }>;
-  options: VideoOptions;
+  argument: Array<ReferenceNode>;
 }
 
 interface WayfindingNode extends Directive {
-  argument: Array<{ type: 'reference'; refuri: string }>;
-  children: Node[];
+  argument: Array<ReferenceNode>;
 }
 
 interface WayfindingOptionOptions {
@@ -523,7 +521,7 @@ interface WayfindingOptionOptions {
 }
 
 interface WayfindingOptionNode extends Directive<WayfindingOptionOptions> {
-  argument: Array<{ type: 'reference'; refuri: string }>;
+  argument: Array<ReferenceNode>;
 }
 
 export type {
