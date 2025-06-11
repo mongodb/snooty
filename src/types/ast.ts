@@ -429,7 +429,7 @@ interface TocTreeOptions {
 interface TocTreeDirective extends Directive<TocTreeOptions> {
   type: 'directive';
   name: 'toctree';
-  entries: TocTreeEntry[];
+  entries: Array<TocTreeEntry>;
 }
 
 type CommunityDriverPillOptions = {
@@ -521,6 +521,15 @@ type StandaloneHeaderOptions = {
 
 type StandaloneHeaderNode = Directive<StandaloneHeaderOptions>;
 
+interface ReleaseSpecificationNode extends ParentNode {}
+
+interface RefRoleNode extends ParentNode {
+  name: 'ref_role';
+  domain: string;
+  fileid: string[];
+  url: string;
+}
+
 export type {
   ParentNode,
   Root,
@@ -579,4 +588,6 @@ export type {
   StandaloneHeaderNode,
   SuperscriptNode,
   SubscriptNode,
+  ReleaseSpecificationNode,
+  RefRoleNode,
 };

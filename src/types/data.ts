@@ -1,3 +1,4 @@
+import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
 import { PageTemplateType } from '../context/page-context';
 import { ParagraphNode, TextNode, TocTreeEntry } from './ast';
 
@@ -81,7 +82,8 @@ type RemoteMetadata = {
   slugToTitle: Record<string, [TextNode]>;
   toctree: TocTreeEntry;
   toctreeOrder: string[];
-  parentPaths: Record<string, string[]>;
+  // TODO: This might be <string, string[]> ...
+  parentPaths: Record<string, BreadcrumbType[]>;
   static_files: Record<string, Buffer>;
   canonical?: string | null;
   iatree?: IATreeNode;

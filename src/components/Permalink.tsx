@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
@@ -21,7 +20,7 @@ const tooltipStyle = css`
   }
 `;
 
-const HeaderBuffer = styled.div(
+const HeaderBuffer = styled.div<{ hasComposable: boolean }>(
   (props) => `
   display: inline;
   left: 0;
@@ -45,7 +44,7 @@ const HeaderBuffer = styled.div(
 `
 );
 
-const headingStyle = (copied) => css`
+const headingStyle = (copied: boolean) => css`
   ${!!copied && 'visibility: visible !important;'}
   position: absolute;
   align-self: center;
@@ -58,27 +57,32 @@ const iconStyling = css`
   margin-top: -2px;
 `;
 
-const Permalink = ({ id, description }) => {
-  const [copied, setCopied] = useState(false);
-  const [headingNode, setHeadingNode] = useState(null);
+interface PermalinkProps {
+  id: string;
+  description: string;
+}
+
+const Permalink = ({ id, description }: PermalinkProps) => {
   const { darkMode } = useDarkMode();
+  const { options } = usePageContext();
   const url = isBrowser ? window.location.href.split('#')[0] + '#' + id : '';
 
-  useCopyClipboard(copied, setCopied, headingNode, url);
+  const [copied, setCopied] = useState(false);
 
-  const { options } = usePageContext();
+  const headingRef = useRef<HTMLAnchorElement>(null);
+  useCopyClipboard(copied, setCopied, headingRef.current, url);
 
-  const handleClick = (e) => {
+  const linkRef = useRef<HTMLDivElement>(null);
+  useHashAnchor(id, linkRef.current);
+
+  const handleClick = () => {
     setCopied(true);
   };
-
-  const linkRef = useRef();
-  useHashAnchor(id, linkRef);
 
   return (
     <a
       className={cx('headerlink', headingStyle(copied))}
-      ref={setHeadingNode}
+      ref={headingRef}
       href={`#${id}`}
       title={'Permalink to this ' + description}
       onClick={handleClick}
@@ -102,11 +106,6 @@ const Permalink = ({ id, description }) => {
       <HeaderBuffer hasComposable={options?.has_composable_tutorial ?? false} ref={linkRef} id={id} />
     </a>
   );
-};
-
-Permalink.propTypes = {
-  id: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
 };
 
 export default Permalink;
