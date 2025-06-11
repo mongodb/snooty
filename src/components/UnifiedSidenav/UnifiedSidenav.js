@@ -89,7 +89,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
         (version) => version.gitBranchName === activeVersions[currentProject]
       );
       // If no version use first version.urlSlug in the list, or if no version loads, set as current
-      const defaultVersion = versionsData[currentProject][0] ? versionsData[currentProject][0].urlSlug : 'current';
+      const defaultVersion = versionsData[currentProject]?.[0] ? versionsData[currentProject][0].urlSlug : 'current';
       const currentVersion = version ? version.urlSlug : defaultVersion;
       newUrl = item.url.replace(/:version/g, currentVersion);
     }
