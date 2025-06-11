@@ -519,7 +519,9 @@ type StandaloneHeaderOptions = {
   url: string;
 };
 
-type StandaloneHeaderNode = Directive<StandaloneHeaderOptions>;
+interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
+  options: StandaloneHeaderOptions;
+}
 
 interface ReleaseSpecificationNode extends ParentNode {}
 
