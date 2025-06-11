@@ -30,7 +30,9 @@ export const SYSTEM_THEME_CLASSNAME = 'system';
 
 const LIGHT_MODE_ONLY_PAGE_SLUGS = ['openapi/preview'];
 
-const DarkModeContextProvider = ({ children, slug }: { children: ReactNode; slug: string }) => {
+export type DarkModeContextProviderProps = { children: ReactNode; slug: string };
+
+const DarkModeContextProvider = ({ children, slug }: DarkModeContextProviderProps) => {
   const docClassList = useMemo(() => isBrowser && window?.document?.documentElement?.classList, []);
   const [darkModePref, setDarkModePref] = useState<DarkModePref>(() => 'light-theme');
   const loaded = useRef<boolean>();

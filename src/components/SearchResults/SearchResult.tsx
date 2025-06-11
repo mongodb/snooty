@@ -8,7 +8,7 @@ import { theme } from '../../theme/docsTheme';
 import Tag, { searchTagStyle, tagHeightStyle } from '../Tag';
 import SearchContext from './SearchContext';
 import { getFacetTagVariant } from './Facets/utils';
-import { searchResultDynamicStyling } from './SearchResults';
+import { DocsSearchResponseResult, searchResultDynamicStyling } from './SearchResults';
 
 // Use string for match styles due to replace/innerHTML
 const SEARCH_MATCH_STYLE = `border-radius: 3px; padding-left: 2px; padding-right: 2px;`;
@@ -20,7 +20,7 @@ const largeResultTitle = `
 `;
 
 // Truncates text to a maximum number of lines
-const truncate = (maxLines) => `
+const truncate = (maxLines: number) => `
   display: -webkit-box;
   -webkit-line-clamp: ${maxLines}; /* supported cross browser */
   -webkit-box-orient: vertical;
@@ -44,7 +44,7 @@ const SearchResultContainer = styled('div')`
   height: 100%;
 `;
 
-const StyledResultTitle = styled('p')`
+const StyledResultTitle = styled('p')<{ useLargeTitle: boolean }>`
   font-size: ${theme.fontSize.small};
   line-height: ${theme.size.medium};
   letter-spacing: 0.5px;
@@ -64,7 +64,7 @@ const searchResultLinkStyling = css`
   text-decoration: none;
   border-radius: ${theme.size.medium};
 
-  ${StyledResultTitle} {
+  .search-result-title {
     color: ${palette.blue.base};
 
     .dark-theme & {
@@ -72,7 +72,7 @@ const searchResultLinkStyling = css`
     }
   }
   :visited {
-    ${StyledResultTitle} {
+    .search-result-title {
       color: ${palette.purple.dark2};
 
       .dark-theme & {
@@ -82,7 +82,7 @@ const searchResultLinkStyling = css`
   }
   :hover,
   :focus {
-    ${StyledResultTitle} {
+    .search-result-title {
       color: ${palette.blue.base};
 
       .dark-theme & {
@@ -90,14 +90,14 @@ const searchResultLinkStyling = css`
       }
       text-decoration: none;
     }
-    ${SearchResultContainer} {
+    .search-result-container {
       background-color: rgba(231, 238, 236, 0.4);
       transition: background-color 150ms ease-in;
     }
   }
 `;
 
-const StyledPreviewText = styled(Body)`
+const StyledPreviewText = styled(Body)<{ maxLines: number }>`
   font-size: ${theme.fontSize.small};
   color: var(--font-color-primary);
   line-height: 20px;
@@ -163,13 +163,15 @@ const StylingTagContainer = styled('div')`
   ${tagHeightStyle};
 `;
 
-const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeRegExp = (string: string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-const highlightSearchTerm = (text, searchTerm) =>
-  text.replace(
-    new RegExp(escapeRegExp(searchTerm), 'gi'),
-    (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
-  );
+const highlightSearchTerm = (text: string, searchTerm: string | null) =>
+  searchTerm
+    ? text.replace(
+        new RegExp(escapeRegExp(searchTerm), 'gi'),
+        (result) => `<span style="${SEARCH_MATCH_STYLE}">${result}</span>`
+      )
+    : text;
 
 const spanAllowedStyles = {
   'background-color': [new RegExp(`^${palette.green.light2}$`, 'i'), new RegExp(`^${palette.green.dark2}$`, 'i')],
@@ -179,7 +181,7 @@ const spanAllowedStyles = {
 };
 
 // since we are using dangerouslySetInnerHTML, this helper sanitizes input to be safe
-const sanitizePreviewHtml = (text) =>
+const sanitizePreviewHtml = (text: string) =>
   sanitizeHtml(text, {
     allowedTags: ['span'],
     allowedAttributes: { span: ['style'] },
@@ -187,6 +189,19 @@ const sanitizePreviewHtml = (text) =>
       span: spanAllowedStyles,
     },
   });
+
+export type SearchResultProps = {
+  learnMoreLink?: boolean;
+  maxLines?: number;
+  useLargeTitle?: boolean;
+  onClick?: () => void;
+  preview: string;
+  title: string;
+  searchProperty?: string;
+  url: string;
+  facets: DocsSearchResponseResult['facets'];
+  className?: string;
+};
 
 const SearchResult = React.memo(
   ({
@@ -196,11 +211,12 @@ const SearchResult = React.memo(
     onClick,
     preview,
     title,
-    searchProperty,
+    searchProperty = '',
     url,
     facets,
+    className,
     ...props
-  }) => {
+  }: SearchResultProps) => {
     const { searchPropertyMapping, searchTerm, getFacetName, showFacets } = useContext(SearchContext);
     const highlightedPreviewText = highlightSearchTerm(preview, searchTerm);
     const resultLinkRef = useRef(null);
@@ -214,14 +230,15 @@ const SearchResult = React.memo(
         href={url}
         onClick={onClick}
         {...props}
-        className={cx(props.className, searchResultLinkStyling, searchResultDynamicStyling)}
+        className={cx(className, searchResultLinkStyling, searchResultDynamicStyling)}
       >
-        <SearchResultContainer>
+        <SearchResultContainer className="search-result-container">
           <StyledResultTitle
             dangerouslySetInnerHTML={{
               __html: sanitizePreviewHtml(title),
             }}
             useLargeTitle={useLargeTitle}
+            className="search-result-title"
           />
           <StyledPreviewText
             maxLines={maxLines}
@@ -248,7 +265,7 @@ const SearchResult = React.memo(
               )}
             </StylingTagContainer>
           )}
-          {showFacets && validFacets?.length > 0 && (
+          {showFacets && validFacets && validFacets?.length > 0 && (
             <StylingTagContainer>
               {validFacets.map((facet, idx) => (
                 <StyledTag variant={getFacetTagVariant(facet)} key={`${idx}-${facet.key}-${facet.id}`}>
