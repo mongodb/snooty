@@ -522,9 +522,17 @@ interface RoleManualNode extends ParentNode {
   target: string;
 }
 
-interface MetaNode extends Directive {
+type MetaOptions = {
+  description?: string;
+  canonical?: string;
+  robots?: string;
+  keywords?: string;
+};
+
+interface MetaNode extends Directive<MetaOptions> {
   type: 'directive';
   name: 'meta';
+  options: MetaOptions;
 }
 
 interface TitleReferenceNode {
