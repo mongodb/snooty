@@ -140,6 +140,7 @@ const Link = ({
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}
+        onClick={onClick}
         {...anchorProps}
       >
         {children}
