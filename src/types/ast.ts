@@ -516,10 +516,7 @@ type StandaloneHeaderOptions = {
   url: string;
 };
 
-interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
-  argument: Array<Node>;
-  options: StandaloneHeaderOptions;
-}
+type StandaloneHeaderNode = Directive<StandaloneHeaderOptions>;
 
 export type {
   ParentNode,
