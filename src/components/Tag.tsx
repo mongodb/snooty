@@ -79,12 +79,12 @@ interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant: TagVariant;
 }
 
-const Tag = ({ children, variant, ...rest }: TagProps) => {
+const Tag = ({ children, variant, className, ...rest }: TagProps) => {
   const { theme: siteTheme } = useDarkMode();
   const variantStyle = VARIANTS[siteTheme][variant] || VARIANTS[siteTheme]['green'];
 
   return (
-    <span className={cx(baseStyle, variantStyle)} {...rest}>
+    <span className={cx(baseStyle, variantStyle, className)} {...rest}>
       {children}
     </span>
   );
