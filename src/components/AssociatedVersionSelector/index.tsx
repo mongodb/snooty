@@ -4,23 +4,18 @@ import { VersionContext } from '../../context/version-context';
 import Select, { Label } from '../Select';
 import { getUILabel } from '../VersionDropdown';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { theme } from '../../theme/docsTheme';
+// import { theme } from '../../theme/docsTheme';
 
-type ThemeType = typeof theme;
+// type ThemeType = typeof theme;
 
-declare module '@emotion/react' {
-  export interface Theme extends ThemeType {}
-}
+// declare module '@emotion/react' {
+//   export interface Theme extends ThemeType {}
+// }
 
 type Branch = {
   gitBranchName: string;
   [key: string]: any;
 };
-
-// type Choice = {
-//   value: string;
-//   text: string;
-// };
 
 interface SelectChangeEvent {
   value: string;
@@ -33,7 +28,7 @@ interface VersionContextType {
   onVersionSelect: (project: string, version: string) => void;
 }
 
-const buildChoices = (branches: Branch[]): Choice[] => {
+const buildChoices = (branches: Branch[]) => {
   return branches.map((branch) => ({
     value: branch['gitBranchName'],
     text: getUILabel(branch),
