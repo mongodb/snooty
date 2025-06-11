@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import ReactPlayerYT from 'react-player/youtube';
-import ReactPlayerWistia from 'react-player/wistia';
+import ReactPlayerYT, { type YouTubePlayerProps } from 'react-player/youtube';
+import ReactPlayerWistia, { type WistiaPlayerProps } from 'react-player/wistia';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
@@ -13,20 +13,18 @@ import VideoPlayButton from './VideoPlayButton';
 // Imported both players to keep bundle size low and rendering the one associated to the URL being passed in
 const REACT_PLAYERS = {
   yt: {
-    player: ReactPlayerYT,
+    player: (props: YouTubePlayerProps) => <ReactPlayerYT {...props} />,
     config: {
-      youtube: {
-        playerVars: {
-          autohide: 1,
-          modestbranding: 1,
-          rel: 0,
-        },
+      playerVars: {
+        autohide: 1,
+        modestbranding: 1,
+        rel: 0,
       },
     },
     name: 'youtube',
   },
   wistia: {
-    player: ReactPlayerWistia,
+    player: (props: WistiaPlayerProps) => <ReactPlayerWistia {...props} />,
     config: {},
     name: 'wistia',
   },
