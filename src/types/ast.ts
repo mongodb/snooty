@@ -73,6 +73,7 @@ type DirectiveName =
   | 'dismissible-skills-card'
   | 'facet'
   | 'icon'
+  | 'include'
   | 'input'
   | 'io-code-block'
   | 'list-table'
@@ -90,6 +91,7 @@ type DirectiveName =
   | 'seealso'
   | 'selected-content'
   | 'sharedinclude'
+  | 'step'
   | 'substitution_reference'
   | 'tab'
   | 'tabs-selector'
@@ -535,6 +537,22 @@ interface MetaNode extends Directive<MetaOptions> {
   options: MetaOptions;
 }
 
+type ProcedureStyle = 'connected' | 'normal';
+
+type ProcedureOptions = {
+  style?: ProcedureStyle;
+  title?: string;
+};
+
+interface ProcedureNode extends Directive<ProcedureOptions> {
+  name: 'procedure';
+  options: ProcedureOptions;
+}
+
+interface StepNode extends Directive {
+  name: 'step';
+}
+
 interface TitleReferenceNode {
   children: TextNode[];
 }
@@ -599,11 +617,14 @@ export type {
   NodeType,
   ParagraphNode,
   ParentNode,
+  ProcedureNode,
+  ProcedureStyle,
   ReferenceNode,
   RoleIconNode,
   RoleManualNode,
   RoleName,
   Root,
+  StepNode,
   StrongNode,
   TabNode,
   TabsNode,

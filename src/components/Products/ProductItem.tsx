@@ -6,6 +6,17 @@ import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import SectionHeader from '../SectionHeader';
+import { Directive } from '../../types/ast';
+
+// Keeping these types here as this component is not currently in use (easy to delete in future)
+type ProductItemNodeOptions = {
+  icon: string;
+  'icon-alt': string;
+};
+
+interface ProductItemNode extends Directive<ProductItemNodeOptions> {
+  options: ProductItemNodeOptions;
+}
 
 const FONT_SIZE = theme.fontSize.default;
 const HEIGHT = '61px';
@@ -49,7 +60,11 @@ const customStyleHeader = css`
   padding-top: 4px;
 `;
 
-const ProductItem = ({ nodeData: { children, options, argument } }) => {
+export type ProductItemProps = {
+  nodeData: ProductItemNode;
+};
+
+const ProductItem = ({ nodeData: { children, options, argument } }: ProductItemProps) => {
   const icon = options.icon;
   const iconAlt = options['icon-alt'];
   return (
@@ -68,15 +83,5 @@ const ProductItem = ({ nodeData: { children, options, argument } }) => {
     </StyledSection>
   );
 };
-
-// ProductItem.prototype = {
-//   nodeData: PropTypes.shape({
-//     children: PropTypes.arrayOf(PropTypes.object).isRequired,
-//     options: PropTypes.shape({
-//       columns: PropTypes.number,
-//     }),
-//     argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   }).isRequired,
-// };
 
 export default ProductItem;

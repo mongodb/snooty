@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import {
@@ -9,9 +8,11 @@ import {
 import { theme } from '../../theme/docsTheme';
 import { STRUCTURED_DATA_CLASSNAME, constructHowToSd } from '../../utils/structured-data';
 import { useHeadingContext } from '../../context/heading-context';
+import { Node, ProcedureNode, ProcedureStyle, StepNode } from '../../types/ast';
+import { isDirectiveNode, isParentNode } from '../../types/ast-utils';
 import Step from './Step';
 
-const StyledProcedure = styled('div')`
+const StyledProcedure = styled('div')<{ procedureStyle: ProcedureStyle }>`
   margin-top: ${theme.size.default};
 
   .dark-theme & {
@@ -33,29 +34,35 @@ const StyledProcedure = styled('div')`
 `;
 
 // Returns an array of all "step" nodes nested within the "procedure" node and nested "include" nodes
-const getSteps = (children) => {
-  const steps = [];
+const getSteps = (children: Node[]) => {
+  const steps: StepNode[] = [];
 
   for (const child of children) {
-    const { name, type } = child;
-
-    if (type !== 'directive') {
+    if (!isDirectiveNode(child)) {
       continue;
     }
 
+    const { name } = child;
+
     if (name === 'step') {
-      steps.push(child);
+      steps.push(child as StepNode);
     } else if (name === 'include') {
       // Content in an include file is wrapped in a root node
       const [includeRoot] = child.children;
-      steps.push(...getSteps(includeRoot.children));
+      if (isParentNode(includeRoot)) {
+        steps.push(...getSteps(includeRoot.children));
+      }
     }
   }
 
   return steps;
 };
 
-const Procedure = ({ nodeData, ...rest }) => {
+export type ProcedureProps = {
+  nodeData: ProcedureNode;
+};
+
+const Procedure = ({ nodeData, ...rest }: ProcedureProps) => {
   // Make the style 'connected' by default for now to give time for PLPs that use this directive to
   // add the "style" option
   const children = nodeData['children'];
@@ -91,12 +98,6 @@ const Procedure = ({ nodeData, ...rest }) => {
       </StyledProcedure>
     </AncestorComponentContextProvider>
   );
-};
-
-Procedure.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
 };
 
 export default Procedure;
