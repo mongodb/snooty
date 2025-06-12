@@ -1,7 +1,23 @@
 import { usePageContext } from '../../../context/page-context';
 import useSnootyMetadata from '../../../utils/use-snooty-metadata';
 
-const addPrevNextTutorials = (slugTitleMapping, slug, activeTutorial) => {
+interface TutorialPage {
+  targetSlug: string;
+  pageTitle: string;
+}
+
+export interface MultiPageTutorial {
+  slugs: string[];
+  total_steps: number;
+  next: TutorialPage | null;
+  prev: TutorialPage | null;
+}
+
+const addPrevNextTutorials = (
+  slugTitleMapping: Record<string, string>,
+  slug: string,
+  activeTutorial: MultiPageTutorial | null
+) => {
   if (!activeTutorial || Object.keys(activeTutorial).length === 0) {
     return;
   }
@@ -38,7 +54,7 @@ const addPrevNextTutorials = (slugTitleMapping, slug, activeTutorial) => {
  */
 export const useActiveMpTutorial = () => {
   const { slug } = usePageContext();
-  const { multiPageTutorials = {}, slugToBreadcrumbLabel } = useSnootyMetadata();
+  const { multiPageTutorials = {}, slugToBreadcrumbLabel = {} } = useSnootyMetadata();
 
   const activeTutorial = Object.values(multiPageTutorials).find((tutorial) => tutorial.slugs?.includes(slug)) ?? null;
   addPrevNextTutorials(slugToBreadcrumbLabel, slug, activeTutorial);
