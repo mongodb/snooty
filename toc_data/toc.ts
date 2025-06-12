@@ -5,13 +5,13 @@ const COMMANDLINE_TOOLS = 'database-tools';
 const CLOUD_DOCS = 'cloud-docs';
 const CSHARP = 'csharp';
 
-// each url has to be unique with the prefix!!!!
+// each url has to be unique with the contentSite!!!!
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
     {
       label: 'Database tools',
       url: '/docs/database-tools/',
-      prefix: COMMANDLINE_TOOLS,
+      contentSite: COMMANDLINE_TOOLS,
       items: [
         {
           label: 'command tools',
@@ -43,7 +43,7 @@ export const tocData = (): TocItem[] => {
     {
       label: 'Atlas',
       url: '/docs/atlas/getting-started/',
-      prefix: CLOUD_DOCS,
+      contentSite: CLOUD_DOCS,
       items: [
         {
           label: 'Application Development',

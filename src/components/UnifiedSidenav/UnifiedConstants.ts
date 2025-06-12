@@ -8,7 +8,7 @@ export interface TocItem {
   glyph?: string;
   url?: string;
   group?: boolean;
-  prefix?: string;
+  contentSite?: string;
   collapsible?: boolean;
   breadcrumbs?: BreadCrumb[];
   showSubNav?: boolean;
