@@ -4,7 +4,7 @@ import { useClickOutside } from '../../../hooks/use-click-outside';
 import useScreenSize from '../../../hooks/useScreenSize';
 import { useFeedbackContext } from './context';
 
-const FeedbackContainer = ({ children, className }) => {
+const FeedbackContainer = ({ children, className, ...rest }) => {
   const ref = useRef(null);
   const { abandon, isScreenshotButtonClicked } = useFeedbackContext();
   const { isMobile } = useScreenSize();
@@ -14,7 +14,7 @@ const FeedbackContainer = ({ children, className }) => {
   });
 
   return (
-    <div className={cx(className)} ref={ref}>
+    <div className={cx(className)} ref={ref} data-testid="feedback-container">
       {children}
     </div>
   );
