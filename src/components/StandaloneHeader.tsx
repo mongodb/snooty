@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { theme } from '../theme/docsTheme';
+import type { StandaloneHeaderNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import SectionHeader from './SectionHeader';
 import Link from './Link';
@@ -17,7 +17,11 @@ const StyledStandaloneContainer = styled.div`
   }
 `;
 
-const StandaloneHeader = ({ nodeData: { argument, options } }) => {
+interface StandaloneHeaderProps {
+  nodeData: StandaloneHeaderNode;
+}
+
+const StandaloneHeader = ({ nodeData: { argument, options } }: StandaloneHeaderProps) => {
   return (
     <StyledStandaloneContainer>
       <SectionHeader>
@@ -25,20 +29,11 @@ const StandaloneHeader = ({ nodeData: { argument, options } }) => {
           <ComponentFactory nodeData={child} key={i} />
         ))}
       </SectionHeader>
-      <Link to={options.url} showLinkArrow={true}>
-        {options.cta}
+      <Link to={options?.url} showLinkArrow={true}>
+        {options?.cta}
       </Link>
     </StyledStandaloneContainer>
   );
-};
-
-StandaloneHeader.prototype = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-    options: PropTypes.shape({
-      columns: PropTypes.number,
-    }),
-  }).isRequired,
 };
 
 export default StandaloneHeader;
