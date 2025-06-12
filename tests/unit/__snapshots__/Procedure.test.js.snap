@@ -402,7 +402,7 @@ exports[`renders steps nested in include nodes 1`] = `
   }
 }
 
-.emotion-13 {
+.emotion-12 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -414,8 +414,8 @@ exports[`renders steps nested in include nodes 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-13 strong,
-.emotion-13 b {
+.emotion-12 strong,
+.emotion-12 b {
   font-weight: 700;
 }
 
@@ -468,13 +468,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-11 emotion-12"
+                class="emotion-11"
                 id="step-1"
               />
             </a>
           </h1>
           <p
-            class="emotion-13"
+            class="emotion-12"
           >
             Content for step 1
           </p>
@@ -527,13 +527,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-11 emotion-12"
+                class="emotion-11"
                 id="step-2"
               />
             </a>
           </h1>
           <p
-            class="emotion-13"
+            class="emotion-12"
           >
             Content for step 2
           </p>
@@ -586,13 +586,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-11 emotion-12"
+                class="emotion-11"
                 id="step-3"
               />
             </a>
           </h1>
           <p
-            class="emotion-13"
+            class="emotion-12"
           >
             Content for step 3
           </p>
@@ -645,13 +645,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-11 emotion-12"
+                class="emotion-11"
                 id="step-4"
               />
             </a>
           </h1>
           <p
-            class="emotion-13"
+            class="emotion-12"
           >
             Content for step 4
           </p>
@@ -704,13 +704,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-11 emotion-12"
+                class="emotion-11"
                 id="step-5"
               />
             </a>
           </h1>
           <p
-            class="emotion-13"
+            class="emotion-12"
           >
             Content for step 5
           </p>
@@ -763,13 +763,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-11 emotion-12"
+                class="emotion-11"
                 id="step-6"
               />
             </a>
           </h1>
           <p
-            class="emotion-13"
+            class="emotion-12"
           >
             Content for step 6
           </p>
@@ -822,13 +822,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-11 emotion-12"
+                class="emotion-11"
                 id="step-7"
               />
             </a>
           </h1>
           <p
-            class="emotion-13"
+            class="emotion-12"
           >
             Content for step 7
           </p>
