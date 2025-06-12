@@ -18,7 +18,7 @@ type CopyPageMarkdownButtonProps = {
 
 // This keeps the copy button text jump to a new line when viewing on smaller screens
 // [data-theme] is used to increase the width of the dropdown menu to match designs
-const SplitButtonStyles = css`
+const splitButtonStyles = css`
   [data-theme] {
     width: 310px;
   }
@@ -27,14 +27,17 @@ const SplitButtonStyles = css`
 
 const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
   const [toastOpen, setToastOpen] = useState<ToastOpen>({ open: false, variant: Variant.Success });
-  const { origin, pathname } = useLocation();
+  const { href } = useLocation();
 
-  const href = `${origin}${pathname}`;
+  // Removing the trailing slash, since we expect the URL to be available in markdown
+  // i.e. https://www.mongodb.com/docs/atlas/tutorial/create-atlas-account/ ->
+  // https://www.mongodb.com/docs/atlas/tutorial/create-atlas-account.md
   const urlWithoutTrailingSlash = removeTrailingSlash(href);
+  const markdownAddress = `${urlWithoutTrailingSlash}.md`;
 
   const copyMarkdown = async () => {
     try {
-      const response = await fetch(`${urlWithoutTrailingSlash}.md`);
+      const response = await fetch(markdownAddress);
       if (!response.ok) {
         throw new Error('Failed to fetch Markdown');
       }
@@ -56,14 +59,14 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
   };
 
   const viewMarkdown = () => {
-    window.location.href = `${urlWithoutTrailingSlash}.md`;
+    window.location.href = markdownAddress;
   };
 
   return (
     <>
       <SplitButton
         label="Copy page"
-        className={cx(SplitButtonStyles, className)}
+        className={cx(splitButtonStyles, className)}
         onClick={() => copyMarkdown()}
         menuItems={[
           <MenuItem
@@ -86,7 +89,6 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
       <ToastProvider
         portalClassName={css`
           #lg-toast-region {
-            left: auto;
             margin: 16px;
             right: 0;
             z-index: 3;
