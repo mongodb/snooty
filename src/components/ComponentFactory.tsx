@@ -197,6 +197,8 @@ const getComponent = (() => {
         seealso: SeeAlso,
         sharedinclude: Include,
         strong: Strong,
+        superscript: Superscript,
+        subscript: Subscript,
         substitution_reference: SubstitutionReference,
         tabs: Tabs,
         'tabs-selector': TabSelectors,
