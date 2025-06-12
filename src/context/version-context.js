@@ -9,7 +9,6 @@ import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { fetchDocset, fetchDocument } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { getFeatureFlags } from '../utils/feature-flags';
 
 // <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';
@@ -20,6 +19,7 @@ const getInitBranchName = (branches) => {
   if (activeBranch) {
     return activeBranch.gitBranchName;
   }
+  console.log('i am in init branch name', branches, branches[0]?.gitBranchName);
   return branches[0]?.gitBranchName || null;
 };
 
@@ -29,20 +29,8 @@ const getInitVersions = (branchListByProduct) => {
   for (const productName in branchListByProduct) {
     initState[productName] = localStorage?.[productName] || getInitBranchName(branchListByProduct[productName]);
   }
+  console.log('i am in init versions', branchListByProduct, initState);
   return initState;
-};
-
-// Set the inital active version using versions.toml
-const getInitVersionsToml = (project, versionsData) => {
-  const localStorage = getLocalValue(STORAGE_KEY);
-  const initState = {};
-
-  if (localStorage) {
-    initState[project] = localStorage[project];
-    return initState;
-  }
-
-  return getDefaultActiveVersionsToml(project, versionsData);
 };
 
 const findBranchByGit = (gitBranchName, branches) => {
@@ -101,6 +89,7 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
 
 const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
   const { project, parserBranch } = metadata;
+  console.log('the metadata is ', metadata);
   const versions = {};
   const VERSION_KEY = 'branches';
   const currentBranch = repoBranches?.[VERSION_KEY]?.find((b) => b.gitBranchName === parserBranch);
@@ -110,14 +99,6 @@ const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
     versions[productName] = (associatedReposInfo[productName][VERSION_KEY] || []).filter(filter);
   }
   return versions;
-};
-
-// If repo not saved in local storage use the first version in the array from versions.toml
-const getDefaultActiveVersionsToml = (project, versionsData) => {
-  const initVersion = {};
-  const curVersionData = versionsData.find((obj) => obj.repoName === project);
-  initVersion[project] = curVersionData.version[0].name;
-  return initVersion;
 };
 
 const getDefaultGroups = (project, repoBranches) => {
@@ -130,6 +111,8 @@ const getDefaultGroups = (project, repoBranches) => {
 const getDefaultActiveVersions = (metadata) => {
   // for current metadata.project, should always default to metadata.parserBranch
   const { project, parserBranch } = metadata;
+
+  console.log('i am in default active versions', parserBranch);
   let versions = {};
   versions[project] = parserBranch;
   // for any umbrella / associated products
@@ -163,12 +146,10 @@ const VersionContext = createContext({
   showEol: false,
   isAssociatedProduct: false,
   onVersionSelect: () => {},
-  onTomlVersion: () => {},
 });
 
-const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) => {
+const VersionContextProvider = ({ repoBranches, slug, children }) => {
   const siteMetadata = useSiteMetadata();
-  const { isUnifiedToc } = getFeatureFlags();
   const associatedProductNames = useAllAssociatedProducts();
   const docsets = useAllDocsets();
   const { project } = useSnootyMetadata();
@@ -223,9 +204,7 @@ const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) 
         if (!mountRef.current) {
           return;
         }
-        isUnifiedToc
-          ? setActiveVersions(getInitVersionsToml(project, versionsData))
-          : setActiveVersions(getInitVersions(versions));
+        setActiveVersions(getInitVersions(versions));
         setAvailableGroups(groups);
         setAvailableVersions(versions);
         setShowEol(hasEolBranches);
@@ -273,24 +252,6 @@ const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) 
     [availableVersions, metadata, repoBranches, slug]
   );
 
-  // handler for a versions.toml dropdown
-  const onTomlVersion = useCallback(
-    (targetProject, versionName, location, snootyEnv) => {
-      // store previous version
-      const prevVersion = activeVersions[targetProject];
-
-      // update to new version
-      const updatedVersion = {};
-      updatedVersion[targetProject] = versionName;
-      setActiveVersions(updatedVersion);
-
-      // navigate to location replacing old version with new version
-      let newlocation = location.replace(prevVersion, versionName);
-      if (snootyEnv === 'development') newlocation = newlocation + 'index.html';
-      navigate(newlocation);
-    },
-    [activeVersions]
-  );
   // attempts to find branch by given url alias. can be alias, urlAliases, or gitBranchName
   const findBranchByAlias = useCallback(
     (alias) => {
@@ -319,12 +280,14 @@ const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) 
       console.error(`url <${currentUrlSlug}> does not correspond to any current branch`);
       return;
     }
-    if (activeVersions[metadata.project] !== currentBranch.gitBranchName && !isUnifiedToc) {
+    // MAYBE NEED TO CHANGE THIS
+    if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
       const newState = { ...activeVersions };
       newState[metadata.project] = currentBranch.gitBranchName;
+      console.log('i shouldnt be here', newState, currentBranch.gitBranchName, activeVersions[metadata.project]);
       setActiveVersions(newState);
     }
-  }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions, isUnifiedToc]);
+  }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions]);
 
   return (
     <VersionContext.Provider
@@ -335,7 +298,6 @@ const VersionContextProvider = ({ repoBranches, slug, children, versionsData }) 
         availableGroups,
         hasEmbeddedVersionDropdown,
         onVersionSelect,
-        onTomlVersion,
         isAssociatedProduct,
         showEol,
       }}
