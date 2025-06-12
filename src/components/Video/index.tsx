@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import ReactPlayerYT from 'react-player/youtube';
-import ReactPlayerWistia from 'react-player/wistia';
+import ReactPlayerYT, { type YouTubePlayerProps } from 'react-player/youtube';
+import ReactPlayerWistia, { type WistiaPlayerProps } from 'react-player/wistia';
+import ReactPlayer, { Config } from 'react-player';
 import styled from '@emotion/styled';
 import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
@@ -13,7 +14,7 @@ import VideoPlayButton from './VideoPlayButton';
 // Imported both players to keep bundle size low and rendering the one associated to the URL being passed in
 const REACT_PLAYERS = {
   yt: {
-    player: ReactPlayerYT,
+    player: (props: YouTubePlayerProps) => <ReactPlayerYT {...props} />,
     config: {
       playerVars: {
         autohide: 1,
@@ -24,7 +25,7 @@ const REACT_PLAYERS = {
     name: 'youtube',
   },
   wistia: {
-    player: ReactPlayerWistia,
+    player: (props: WistiaPlayerProps) => <ReactPlayerWistia {...props} />,
     config: {},
     name: 'wistia',
   },
@@ -74,7 +75,7 @@ interface VideoProps {
 const Video = ({ nodeData: { argument, options } }: VideoProps) => {
   const url = `${argument[0]['refuri']}`;
   // use placeholder image for video thumbnail if invalid URL provided
-  const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
+  const [previewImage, setPreviewImage] = useState<string | boolean>(withPrefix('assets/meta_generic.png'));
   const { title, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options || {};
   const videoObjectSd = useMemo(() => {
     const sd = new VideoObjectSd({ embedUrl: url, name: title, uploadDate, thumbnailUrl, description });
@@ -86,9 +87,9 @@ const Video = ({ nodeData: { argument, options } }: VideoProps) => {
     if (url.includes('youtube') || url.includes('youtu.be')) {
       let testUrlValidity = 'https://www.youtube.com/oembed?url=' + url + '&format=json';
 
-      fetch(testUrlValidity, (res) => {
+      fetch(testUrlValidity, { method: 'GET' }).then((res) => {
         // if valid URL, display default YT thumbnail
-        if (res.statusCode === 200) {
+        if (res.status === 200) {
           setPreviewImage(true);
         }
       });
@@ -102,8 +103,8 @@ const Video = ({ nodeData: { argument, options } }: VideoProps) => {
     return null;
   }
 
-  const ReactPlayer = ReactSupportedMedia.player;
-  const playable = ReactPlayer.canPlay(url);
+  const reactPlayer = ReactSupportedMedia.player;
+  const playable = (reactPlayer as unknown as typeof ReactPlayer).canPlay(url);
 
   // handles remaining cases for invalid video URLs
   if (!playable) {
@@ -125,7 +126,7 @@ const Video = ({ nodeData: { argument, options } }: VideoProps) => {
       <ReactPlayerWrapper>
         <ReactPlayer
           css={videoStyling(ReactSupportedMedia)}
-          config={ReactSupportedMedia.config}
+          config={ReactSupportedMedia.config as unknown as Config}
           controls
           url={url}
           width="100%"

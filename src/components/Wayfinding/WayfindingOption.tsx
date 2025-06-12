@@ -5,7 +5,7 @@ import { getPlaintext } from '../../utils/get-plaintext';
 import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
-import type { WayfindingNode } from '../../types/ast';
+import type { WayfindingOptionNode } from '../../types/ast';
 
 const optionStyle = ({ hideOption }: { hideOption: boolean }) => css`
   padding: 6px 12px;
@@ -30,7 +30,7 @@ const imgStyle = css`
 `;
 
 interface WayfindingOptionProps {
-  nodeData: WayfindingNode;
+  nodeData: WayfindingOptionNode;
   hideOption?: boolean;
 }
 

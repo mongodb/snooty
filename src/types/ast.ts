@@ -98,7 +98,9 @@ type DirectiveName =
   | 'versionadded'
   | 'versionchanged'
   | 'tabs'
-  | 'wayfinding';
+  | 'wayfinding'
+  | 'wayfinding-option'
+  | 'wayfinding-description';
 
 type NodeType =
   | 'code'
@@ -524,6 +526,10 @@ interface VideoNode extends Directive<VideoOptions> {
   argument: Array<ReferenceNode>;
 }
 
+interface WayfindingDescriptionNode extends Directive {
+  name: 'wayfinding-description';
+}
+
 interface WayfindingNode extends Directive {
   argument: Array<ReferenceNode>;
 }
@@ -613,6 +619,7 @@ export type {
   BannerNode,
   CTABannerNode,
   VideoNode,
+  WayfindingDescriptionNode,
   WayfindingNode,
   WayfindingOptionNode,
   StandaloneHeaderNode,
