@@ -5,6 +5,7 @@ import { Toast, ToastProvider, Variant } from '@leafygreen-ui/toast';
 import { MenuItem } from '@leafygreen-ui/menu';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { theme } from '../../../theme/docsTheme';
 import { removeTrailingSlash } from '../../../utils/remove-trailing-slash';
 
 type ToastOpen = {
@@ -90,8 +91,7 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
         portalClassName={css`
           #lg-toast-region {
             margin: 16px;
-            right: 0;
-            z-index: 3;
+            z-index: ${theme.zIndexes.popovers};
           }
         `}
       >
