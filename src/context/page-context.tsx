@@ -16,6 +16,10 @@ export type PageTemplateType =
 
 interface PageOptions {
   has_composable_tutorial?: boolean;
+  time_required?: number;
+  multi_page_tutorial_settings?: {
+    show_next_top?: boolean;
+  };
 }
 
 interface PageContextType {
