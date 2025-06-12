@@ -19,6 +19,7 @@ const getInitBranchName = (branches) => {
   if (activeBranch) {
     return activeBranch.gitBranchName;
   }
+  console.log('i am in init branch name', branches, branches[0]?.gitBranchName);
   return branches[0]?.gitBranchName || null;
 };
 
@@ -28,6 +29,7 @@ const getInitVersions = (branchListByProduct) => {
   for (const productName in branchListByProduct) {
     initState[productName] = localStorage?.[productName] || getInitBranchName(branchListByProduct[productName]);
   }
+  console.log('i am in init versions', branchListByProduct, initState);
   return initState;
 };
 
@@ -108,6 +110,8 @@ const getDefaultGroups = (project, repoBranches) => {
 const getDefaultActiveVersions = (metadata) => {
   // for current metadata.project, should always default to metadata.parserBranch
   const { project, parserBranch } = metadata;
+
+  console.log('i am in default active versions', parserBranch);
   let versions = {};
   versions[project] = parserBranch;
   // for any umbrella / associated products
@@ -279,6 +283,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
     if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
       const newState = { ...activeVersions };
       newState[metadata.project] = currentBranch.gitBranchName;
+      console.log('i shouldnt be here', newState, currentBranch.gitBranchName, activeVersions[metadata.project]);
       setActiveVersions(newState);
     }
   }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions]);
