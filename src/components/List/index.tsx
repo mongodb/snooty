@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import ComponentFactory from '../ComponentFactory';
+import { ListNode } from '../../types/ast';
 
 const enumtypeMap = {
   arabic: '1',
@@ -11,34 +11,33 @@ const enumtypeMap = {
   upperroman: 'I',
 };
 
+type EnumTypeKey = keyof typeof enumtypeMap;
+
 const listStyles = css`
   margin-top: 0px;
 `;
 
-const List = ({ nodeData: { children, enumtype, startat }, ...rest }) => {
+export type ListProps = {
+  nodeData: ListNode;
+};
+
+const List = ({ nodeData: { children, enumtype, startat }, ...rest }: ListProps) => {
   const ListTag = enumtype === 'unordered' ? 'ul' : 'ol';
-  const attributes = {};
-  if (enumtype in enumtypeMap) {
-    attributes.type = enumtypeMap[enumtype];
-  }
-  if (startat) {
-    attributes.start = startat;
-  }
+
+  const typeAttr = enumtype && enumtype in enumtypeMap ? enumtypeMap[enumtype as EnumTypeKey] : undefined;
+  const startAttr = startat ?? undefined;
+
   return (
-    <ListTag className={cx(listStyles)} {...attributes}>
+    <ListTag
+      className={cx(listStyles)}
+      {...(typeAttr ? { type: typeAttr as '1' | 'a' | 'A' | 'i' | 'I' } : {})}
+      {...(startAttr !== undefined ? { start: startAttr } : {})}
+    >
       {children.map((listChild, index) => (
         <ComponentFactory {...rest} nodeData={listChild} key={index} />
       ))}
     </ListTag>
   );
-};
-
-List.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.array.isRequired,
-    enumtype: PropTypes.string.isRequired,
-    startat: PropTypes.number,
-  }).isRequired,
 };
 
 export default List;
