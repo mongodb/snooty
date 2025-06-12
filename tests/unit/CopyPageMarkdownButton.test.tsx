@@ -23,8 +23,7 @@ describe('Copy markdown button', () => {
   beforeEach(() => {
     // Mock location
     mockedUseLocation.mockReturnValueOnce({
-      origin: 'http://localhost:8000',
-      pathname: '/tutorial/foo/',
+      href: 'http://localhost:8000/tutorial/foo/',
     });
 
     mockedNavigate.mockReset();
