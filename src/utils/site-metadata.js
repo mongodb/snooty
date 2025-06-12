@@ -11,6 +11,7 @@ require('dotenv').config({
 });
 
 const manifestMetadata = fetchManifestMetadata();
+console.log('the manifest metadata', manifestMetadata['branch']);
 
 const getDatabase = (env) => {
   switch (env) {
