@@ -416,270 +416,7 @@ exports[`renders steps nested in include nodes 1`] = `
   }
 }
 
-.emotion-19 {
-  position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-20 {
-  min-width: 145px;
-}
-
-.emotion-20 [data-theme] {
-  width: 310px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .emotion-20 {
-    display: none;
-  }
-}
-
-.emotion-21 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  padding: 0;
-  margin: 0;
-  background-color: transparent;
-  border: 1px solid transparent;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  cursor: pointer;
-  z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  border-radius: 6px;
-  background-color: #F9FBFA;
-  border-color: #889397;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 500;
-  height: 36px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  z-index: 1;
-}
-
-.emotion-21:focus-visible,
-.emotion-21[data-focus="true"] {
-  outline: none;
-}
-
-.emotion-21:active,
-.emotion-21[data-active="true"],
-.emotion-21:focus,
-.emotion-21:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-21:focus-visible,
-.emotion-21[data-focus="true"] {
-  color: #001E2B;
-}
-
-.emotion-21:hover,
-.emotion-21[data-hover="true"],
-.emotion-21:active,
-.emotion-21[data-active="true"] {
-  color: #001E2B;
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
-.emotion-21:focus-visible,
-.emotion-21[data-focus="true"] {
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-21,
-.emotion-21:hover,
-.emotion-21:focus,
-.emotion-21:focus-visible,
-.emotion-21:active {
-  border-right-color: #889397;
-}
-
-.emotion-22 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
-}
-
-.emotion-22 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
-}
-
-.emotion-23 {
-  display: grid;
-  grid-auto-flow: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  position: relative;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  z-index: 0;
-  -webkit-transition: all 150 ease-in-out;
-  transition: all 150 ease-in-out;
-  padding: 0 11px;
-  gap: 6px;
-}
-
-.emotion-24 {
-  color: #889397;
-  height: 16px;
-  width: 16px;
-  justify-self: right;
-}
-
-.emotion-25 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  padding: 0;
-  margin: 0;
-  background-color: transparent;
-  border: 1px solid transparent;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
-  position: relative;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  cursor: pointer;
-  z-index: 0;
-  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
-  border-radius: 6px;
-  background-color: #F9FBFA;
-  border-color: #889397;
-  color: #001E2B;
-  font-size: 13px;
-  line-height: 20px;
-  font-weight: 500;
-  height: 36px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-  margin-left: -1px;
-  width: 32px;
-}
-
-.emotion-25:focus-visible,
-.emotion-25[data-focus="true"] {
-  outline: none;
-}
-
-.emotion-25:active,
-.emotion-25[data-active="true"],
-.emotion-25:focus,
-.emotion-25:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.emotion-25:focus-visible,
-.emotion-25[data-focus="true"] {
-  color: #001E2B;
-}
-
-.emotion-25:hover,
-.emotion-25[data-hover="true"],
-.emotion-25:active,
-.emotion-25[data-active="true"] {
-  color: #001E2B;
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
-.emotion-25:focus-visible,
-.emotion-25[data-focus="true"] {
-  background-color: #FFFFFF;
-  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-25:focus,
-.emotion-25:focus-visible,
-.emotion-25:hover {
-  z-index: 1;
-}
-
-.emotion-25,
-.emotion-25:hover,
-.emotion-25:focus,
-.emotion-25:focus-visible,
-.emotion-25:active {
-  border-left-color: #889397;
-}
-
-.emotion-25 svg {
-  color: #3D4F58;
-}
-
-.emotion-28 {
-  color: #001E2B;
-  height: 16px;
-  width: 16px;
-  justify-self: right;
-}
-
-.emotion-28 .lg-ui-button-0000:hover,
-.emotion-28 .lg-ui-button-0000:active {
-  color: currentColor;
-}
-
-.emotion-29 {
-  display: none;
-}
-
-.emotion-29 {
-  display: none;
-}
-
-.emotion-30 {
+.emotion-17 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -691,8 +428,8 @@ exports[`renders steps nested in include nodes 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-30 strong,
-.emotion-30 b {
+.emotion-17 strong,
+.emotion-17 b {
   font-weight: 700;
 }
 
@@ -768,71 +505,15 @@ exports[`renders steps nested in include nodes 1`] = `
                 <div
                   class="emotion-22"
                 />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    alt=""
-                    aria-hidden="true"
-                    class="emotion-24"
-                    fill="none"
-                    height="16"
-                    role="presentation"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1Zm8-.928L7.257 6.498A.857.857 0 0 0 7 7.11v.688h3.01a.857.857 0 0 0 .857-.858V4h-.717a.857.857 0 0 0-.6.246l-.55.54ZM4.867 1H4.15a.857.857 0 0 0-.601.246L1.257 3.498A.857.857 0 0 0 1 4.11v.688h3.01a.857.857 0 0 0 .857-.858V1ZM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 0 1 7 13.286V12Z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  Copy page
-                </div>
-              </button>
-              <button
-                aria-controls=""
-                aria-disabled="false"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-label="More options"
-                class="lg-ui-button-0000 emotion-25"
-                data-lgid="lg-split_button-trigger"
-                data-testid="lg-split_button-trigger"
-                type="button"
-              >
-                <div
-                  class="emotion-22"
-                />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    aria-label="Caret Down Icon"
-                    class="emotion-28"
-                    fill="none"
-                    height="16"
-                    role="img"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.679 10.796a.554.554 0 0 1-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-              </button>
-              <span
-                class="emotion-29"
+              </svg>
+              <div
+                class="emotion-16"
+                id="step-1"
               />
             </div>
           </div>
           <p
-            class="emotion-30"
+            class="emotion-17"
           >
             Content for step 1
           </p>
@@ -908,71 +589,15 @@ exports[`renders steps nested in include nodes 1`] = `
                 <div
                   class="emotion-22"
                 />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    alt=""
-                    aria-hidden="true"
-                    class="emotion-24"
-                    fill="none"
-                    height="16"
-                    role="presentation"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1Zm8-.928L7.257 6.498A.857.857 0 0 0 7 7.11v.688h3.01a.857.857 0 0 0 .857-.858V4h-.717a.857.857 0 0 0-.6.246l-.55.54ZM4.867 1H4.15a.857.857 0 0 0-.601.246L1.257 3.498A.857.857 0 0 0 1 4.11v.688h3.01a.857.857 0 0 0 .857-.858V1ZM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 0 1 7 13.286V12Z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  Copy page
-                </div>
-              </button>
-              <button
-                aria-controls=""
-                aria-disabled="false"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-label="More options"
-                class="lg-ui-button-0000 emotion-25"
-                data-lgid="lg-split_button-trigger"
-                data-testid="lg-split_button-trigger"
-                type="button"
-              >
-                <div
-                  class="emotion-22"
-                />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    aria-label="Caret Down Icon"
-                    class="emotion-28"
-                    fill="none"
-                    height="16"
-                    role="img"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.679 10.796a.554.554 0 0 1-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-              </button>
-              <span
-                class="emotion-29"
+              </svg>
+              <div
+                class="emotion-16"
+                id="step-2"
               />
             </div>
           </div>
           <p
-            class="emotion-30"
+            class="emotion-17"
           >
             Content for step 2
           </p>
@@ -1048,71 +673,15 @@ exports[`renders steps nested in include nodes 1`] = `
                 <div
                   class="emotion-22"
                 />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    alt=""
-                    aria-hidden="true"
-                    class="emotion-24"
-                    fill="none"
-                    height="16"
-                    role="presentation"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1Zm8-.928L7.257 6.498A.857.857 0 0 0 7 7.11v.688h3.01a.857.857 0 0 0 .857-.858V4h-.717a.857.857 0 0 0-.6.246l-.55.54ZM4.867 1H4.15a.857.857 0 0 0-.601.246L1.257 3.498A.857.857 0 0 0 1 4.11v.688h3.01a.857.857 0 0 0 .857-.858V1ZM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 0 1 7 13.286V12Z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  Copy page
-                </div>
-              </button>
-              <button
-                aria-controls=""
-                aria-disabled="false"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-label="More options"
-                class="lg-ui-button-0000 emotion-25"
-                data-lgid="lg-split_button-trigger"
-                data-testid="lg-split_button-trigger"
-                type="button"
-              >
-                <div
-                  class="emotion-22"
-                />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    aria-label="Caret Down Icon"
-                    class="emotion-28"
-                    fill="none"
-                    height="16"
-                    role="img"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.679 10.796a.554.554 0 0 1-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-              </button>
-              <span
-                class="emotion-29"
+              </svg>
+              <div
+                class="emotion-16"
+                id="step-3"
               />
             </div>
           </div>
           <p
-            class="emotion-30"
+            class="emotion-17"
           >
             Content for step 3
           </p>
@@ -1188,71 +757,15 @@ exports[`renders steps nested in include nodes 1`] = `
                 <div
                   class="emotion-22"
                 />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    alt=""
-                    aria-hidden="true"
-                    class="emotion-24"
-                    fill="none"
-                    height="16"
-                    role="presentation"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1Zm8-.928L7.257 6.498A.857.857 0 0 0 7 7.11v.688h3.01a.857.857 0 0 0 .857-.858V4h-.717a.857.857 0 0 0-.6.246l-.55.54ZM4.867 1H4.15a.857.857 0 0 0-.601.246L1.257 3.498A.857.857 0 0 0 1 4.11v.688h3.01a.857.857 0 0 0 .857-.858V1ZM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 0 1 7 13.286V12Z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  Copy page
-                </div>
-              </button>
-              <button
-                aria-controls=""
-                aria-disabled="false"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-label="More options"
-                class="lg-ui-button-0000 emotion-25"
-                data-lgid="lg-split_button-trigger"
-                data-testid="lg-split_button-trigger"
-                type="button"
-              >
-                <div
-                  class="emotion-22"
-                />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    aria-label="Caret Down Icon"
-                    class="emotion-28"
-                    fill="none"
-                    height="16"
-                    role="img"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.679 10.796a.554.554 0 0 1-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-              </button>
-              <span
-                class="emotion-29"
+              </svg>
+              <div
+                class="emotion-16"
+                id="step-4"
               />
             </div>
           </div>
           <p
-            class="emotion-30"
+            class="emotion-17"
           >
             Content for step 4
           </p>
@@ -1328,71 +841,15 @@ exports[`renders steps nested in include nodes 1`] = `
                 <div
                   class="emotion-22"
                 />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    alt=""
-                    aria-hidden="true"
-                    class="emotion-24"
-                    fill="none"
-                    height="16"
-                    role="presentation"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1Zm8-.928L7.257 6.498A.857.857 0 0 0 7 7.11v.688h3.01a.857.857 0 0 0 .857-.858V4h-.717a.857.857 0 0 0-.6.246l-.55.54ZM4.867 1H4.15a.857.857 0 0 0-.601.246L1.257 3.498A.857.857 0 0 0 1 4.11v.688h3.01a.857.857 0 0 0 .857-.858V1ZM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 0 1 7 13.286V12Z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  Copy page
-                </div>
-              </button>
-              <button
-                aria-controls=""
-                aria-disabled="false"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-label="More options"
-                class="lg-ui-button-0000 emotion-25"
-                data-lgid="lg-split_button-trigger"
-                data-testid="lg-split_button-trigger"
-                type="button"
-              >
-                <div
-                  class="emotion-22"
-                />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    aria-label="Caret Down Icon"
-                    class="emotion-28"
-                    fill="none"
-                    height="16"
-                    role="img"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.679 10.796a.554.554 0 0 1-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-              </button>
-              <span
-                class="emotion-29"
+              </svg>
+              <div
+                class="emotion-16"
+                id="step-5"
               />
             </div>
           </div>
           <p
-            class="emotion-30"
+            class="emotion-17"
           >
             Content for step 5
           </p>
@@ -1468,71 +925,15 @@ exports[`renders steps nested in include nodes 1`] = `
                 <div
                   class="emotion-22"
                 />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    alt=""
-                    aria-hidden="true"
-                    class="emotion-24"
-                    fill="none"
-                    height="16"
-                    role="presentation"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1Zm8-.928L7.257 6.498A.857.857 0 0 0 7 7.11v.688h3.01a.857.857 0 0 0 .857-.858V4h-.717a.857.857 0 0 0-.6.246l-.55.54ZM4.867 1H4.15a.857.857 0 0 0-.601.246L1.257 3.498A.857.857 0 0 0 1 4.11v.688h3.01a.857.857 0 0 0 .857-.858V1ZM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 0 1 7 13.286V12Z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  Copy page
-                </div>
-              </button>
-              <button
-                aria-controls=""
-                aria-disabled="false"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-label="More options"
-                class="lg-ui-button-0000 emotion-25"
-                data-lgid="lg-split_button-trigger"
-                data-testid="lg-split_button-trigger"
-                type="button"
-              >
-                <div
-                  class="emotion-22"
-                />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    aria-label="Caret Down Icon"
-                    class="emotion-28"
-                    fill="none"
-                    height="16"
-                    role="img"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.679 10.796a.554.554 0 0 1-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-              </button>
-              <span
-                class="emotion-29"
+              </svg>
+              <div
+                class="emotion-16"
+                id="step-6"
               />
             </div>
           </div>
           <p
-            class="emotion-30"
+            class="emotion-17"
           >
             Content for step 6
           </p>
@@ -1608,71 +1009,15 @@ exports[`renders steps nested in include nodes 1`] = `
                 <div
                   class="emotion-22"
                 />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    alt=""
-                    aria-hidden="true"
-                    class="emotion-24"
-                    fill="none"
-                    height="16"
-                    role="presentation"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1Zm8-.928L7.257 6.498A.857.857 0 0 0 7 7.11v.688h3.01a.857.857 0 0 0 .857-.858V4h-.717a.857.857 0 0 0-.6.246l-.55.54ZM4.867 1H4.15a.857.857 0 0 0-.601.246L1.257 3.498A.857.857 0 0 0 1 4.11v.688h3.01a.857.857 0 0 0 .857-.858V1ZM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 0 1 7 13.286V12Z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  Copy page
-                </div>
-              </button>
-              <button
-                aria-controls=""
-                aria-disabled="false"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-label="More options"
-                class="lg-ui-button-0000 emotion-25"
-                data-lgid="lg-split_button-trigger"
-                data-testid="lg-split_button-trigger"
-                type="button"
-              >
-                <div
-                  class="emotion-22"
-                />
-                <div
-                  class="emotion-23"
-                >
-                  <svg
-                    aria-label="Caret Down Icon"
-                    class="emotion-28"
-                    fill="none"
-                    height="16"
-                    role="img"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.679 10.796a.554.554 0 0 1-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-              </button>
-              <span
-                class="emotion-29"
+              </svg>
+              <div
+                class="emotion-16"
+                id="step-7"
               />
             </div>
           </div>
           <p
-            class="emotion-30"
+            class="emotion-17"
           >
             Content for step 7
           </p>

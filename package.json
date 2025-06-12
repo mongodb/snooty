@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.20.10",
+  "version": "0.20.11",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -25,6 +25,7 @@
     "@types/node": "^22.10.1",
     "@types/react": "^18.3.13",
     "@types/react-dom": "^18.3.1",
+    "@types/sanitize-html": "^2.16.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "auto-changelog": "^2.2.1",

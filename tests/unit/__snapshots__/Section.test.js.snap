@@ -379,66 +379,10 @@ exports[`renders correctly 1`] = `
           <div
             class="emotion-9"
           />
-          <div
-            class="emotion-10"
-          >
-            <svg
-              alt=""
-              aria-hidden="true"
-              class="emotion-11"
-              fill="none"
-              height="16"
-              role="presentation"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                clip-rule="evenodd"
-                d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1Zm8-.928L7.257 6.498A.857.857 0 0 0 7 7.11v.688h3.01a.857.857 0 0 0 .857-.858V4h-.717a.857.857 0 0 0-.6.246l-.55.54ZM4.867 1H4.15a.857.857 0 0 0-.601.246L1.257 3.498A.857.857 0 0 0 1 4.11v.688h3.01a.857.857 0 0 0 .857-.858V1ZM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 0 1 7 13.286V12Z"
-                fill="currentColor"
-                fill-rule="evenodd"
-              />
-            </svg>
-            Copy page
-          </div>
-        </button>
-        <button
-          aria-controls=""
-          aria-disabled="false"
-          aria-expanded="false"
-          aria-haspopup="true"
-          aria-label="More options"
-          class="lg-ui-button-0000 emotion-12"
-          data-lgid="lg-split_button-trigger"
-          data-testid="lg-split_button-trigger"
-          type="button"
-        >
-          <div
-            class="emotion-9"
-          />
-          <div
-            class="emotion-10"
-          >
-            <svg
-              aria-label="Caret Down Icon"
-              class="emotion-15"
-              fill="none"
-              height="16"
-              role="img"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.679 10.796a.554.554 0 0 1-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82Z"
-                fill="currentColor"
-              />
-            </svg>
-          </div>
-        </button>
-        <span
-          class="emotion-16"
+        </svg>
+        <div
+          class="emotion-3"
+          id=""
         />
       </div>
     </div>
