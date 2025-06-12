@@ -122,6 +122,8 @@ type NodeType =
   | 'root'
   | 'section'
   | 'strong'
+  | 'superscript'
+  | 'subscript'
   | 'tabs'
   | 'target'
   | 'target_identifier'
@@ -166,6 +168,10 @@ interface Node {
   type: NodeType;
 }
 
+interface TextParentNode extends Node {
+  children: TextNode[];
+}
+
 interface ParentNode extends Node {
   children: Node[];
 }
@@ -198,8 +204,16 @@ interface EmphasisNode extends ParentNode {
   type: 'emphasis';
 }
 
-interface StrongNode extends ParentNode {
+interface StrongNode extends TextParentNode {
   type: 'strong';
+}
+
+interface SuperscriptNode extends ParentNode {
+  type: 'superscript';
+}
+
+interface SubscriptNode extends ParentNode {
+  type: 'subscript';
 }
 
 interface ReferenceNode extends ParentNode {
@@ -524,6 +538,16 @@ interface WayfindingOptionNode extends Directive<WayfindingOptionOptions> {
   argument: Array<ReferenceNode>;
 }
 
+type StandaloneHeaderOptions = {
+  columns: number;
+  cta: string;
+  url: string;
+};
+
+interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
+  options: StandaloneHeaderOptions;
+}
+
 interface ReleaseSpecificationNode extends ParentNode {}
 
 interface RefRoleNode extends ParentNode {
@@ -591,6 +615,9 @@ export type {
   VideoNode,
   WayfindingNode,
   WayfindingOptionNode,
+  StandaloneHeaderNode,
+  SuperscriptNode,
+  SubscriptNode,
   ReleaseSpecificationNode,
   RefRoleNode,
 };
