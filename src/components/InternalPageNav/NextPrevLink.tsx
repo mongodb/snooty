@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { css, cx } from '@leafygreen-ui/emotion';
 import Button from '@leafygreen-ui/button';
 import { Body } from '@leafygreen-ui/typography';
@@ -62,13 +62,23 @@ const baseButtonStyle = css`
   }
 `;
 
-const NextPrevLink = ({ className, icon, direction, pageTitle, targetSlug, title, onClick }) => {
+export type NextPrevLinkProps = {
+  pageTitle: string | ReactNode;
+  title: string;
+  targetSlug: string;
+  direction: string;
+  icon: string;
+  onClick: (direction: string, targetSlug: string) => void;
+  className: string;
+};
+
+const NextPrevLink = ({ className, icon, direction, pageTitle, targetSlug, title, onClick }: NextPrevLinkProps) => {
   const isNext = direction?.toLowerCase() === 'next';
   const isPrev = direction?.toLowerCase() === 'back';
 
   return (
     <div className={className} onClick={() => onClick(direction, targetSlug)}>
-      <Link to={targetSlug} title={title}>
+      <Link to={targetSlug} {...{ title }}>
         <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
           <Button className={cx(baseButtonStyle, navLinkButtonStyle)}>
             <Icon glyph={icon} />
