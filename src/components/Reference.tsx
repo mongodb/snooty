@@ -1,9 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { ReferenceNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 
-const Reference = ({ nodeData, ...rest }) => {
+interface ReferenceProps {
+  nodeData: ReferenceNode;
+}
+
+const Reference = ({ nodeData, ...rest }: ReferenceProps) => {
   return (
     <Link to={nodeData.refuri} {...rest}>
       {nodeData.children.map((element, index) => (
@@ -11,13 +15,6 @@ const Reference = ({ nodeData, ...rest }) => {
       ))}
     </Link>
   );
-};
-
-Reference.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.array.isRequired,
-    refuri: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default Reference;

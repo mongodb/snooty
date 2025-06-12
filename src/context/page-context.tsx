@@ -15,8 +15,9 @@ export type PageTemplateType =
   | 'product-landing';
 
 interface PageOptions {
+  has_composable_tutorial?: boolean;
   hidefeedback: string;
-  [key: string]: string;
+  [key: string]: any;
 }
 
 interface PageContextType {

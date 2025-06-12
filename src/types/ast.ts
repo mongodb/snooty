@@ -415,7 +415,7 @@ interface TocTreeOptions {
 interface TocTreeDirective extends Directive<TocTreeOptions> {
   type: 'directive';
   name: 'toctree';
-  entries: TocTreeEntry[];
+  entries: Array<TocTreeEntry>;
 }
 
 type CommunityDriverPillOptions = {
@@ -499,6 +499,15 @@ interface CTABannerNode extends Directive<CTABannerOptions> {
   options: CTABannerOptions;
 }
 
+interface ReleaseSpecificationNode extends ParentNode {}
+
+interface RefRoleNode extends ParentNode {
+  name: 'ref_role';
+  domain: string;
+  fileid: string[];
+  url: string;
+}
+
 export type {
   ParentNode,
   Root,
@@ -554,4 +563,6 @@ export type {
   MetaNode,
   BannerNode,
   CTABannerNode,
+  ReleaseSpecificationNode,
+  RefRoleNode,
 };
