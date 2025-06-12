@@ -208,6 +208,16 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   border-radius: 5px;
 }
 
+.emotion-4 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
 .emotion-5 {
   display: grid;
   grid-auto-flow: column;
