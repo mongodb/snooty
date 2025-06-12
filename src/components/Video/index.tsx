@@ -82,18 +82,21 @@ const Video = ({ nodeData: { argument, options } }: VideoProps) => {
     return sd.isValid() ? sd.toString() : undefined;
   }, [url, title, uploadDate, thumbnailUrl, description]);
 
-  useEffect(() => {
-    // handles URL validity checking for well-formed YT links
+  // handles URL validity checking for well-formed YT links
+  const checkUrlValidity = async (url: string) => {
     if (url.includes('youtube') || url.includes('youtu.be')) {
       let testUrlValidity = 'https://www.youtube.com/oembed?url=' + url + '&format=json';
 
-      fetch(testUrlValidity, { method: 'GET' }).then((res) => {
-        // if valid URL, display default YT thumbnail
-        if (res.status === 200) {
-          setPreviewImage(true);
-        }
-      });
+      const res = await fetch(testUrlValidity);
+      // if valid URL, display default YT thumbnail
+      if (res.status === 200) {
+        setPreviewImage(true);
+      }
     }
+  };
+
+  useEffect(() => {
+    checkUrlValidity(url);
   }, [url]);
 
   const ReactSupportedMedia = getTheSupportedMedia(url);
@@ -104,7 +107,7 @@ const Video = ({ nodeData: { argument, options } }: VideoProps) => {
   }
 
   const reactPlayer = ReactSupportedMedia.player;
-  const playable = (reactPlayer as unknown as typeof ReactPlayer).canPlay(url);
+  const playable = (reactPlayer as unknown as typeof ReactPlayer).canPlay?.(url);
 
   // handles remaining cases for invalid video URLs
   if (!playable) {
