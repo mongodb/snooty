@@ -162,7 +162,7 @@ const getUmbrellaProject = async (project: string, dbName: MetadataDatabaseName)
 };
 // <-------------- end helper functions -------------->
 
-type VersionContextType = {
+export type VersionContextType = {
   activeVersions: ActiveVersions;
   // active version for each product is marked is {[product name]: active version} pair
   setActiveVersions: Dispatch<Partial<ActiveVersions>>;
