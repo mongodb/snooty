@@ -6,7 +6,7 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { intersperse } from '../../utils/intersperse';
-import type { FootnoteProps, FootnoteContextType } from '../../types/ast';
+import type { FootnoteReferenceProps } from './FootnoteReference';
 import FootnoteContext from './footnote-context';
 
 const tableStyling = (darkMode: boolean) => css`
@@ -41,8 +41,8 @@ const tdStyling = css`
   padding: 11px 5px 12px;
 `;
 
-const Footnote = ({ nodeData: { children, id, name }, ...rest }: FootnoteProps) => {
-  const { footnotes } = useContext(FootnoteContext) as FootnoteContextType;
+const Footnote = ({ nodeData: { children, id, name }, ...rest }: FootnoteReferenceProps) => {
+  const { footnotes } = useContext(FootnoteContext);
   const { darkMode } = useDarkMode();
   const ref = name || id.replace('id', '');
   const label = getNestedValue([ref, 'label'], footnotes);

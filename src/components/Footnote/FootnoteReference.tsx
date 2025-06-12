@@ -3,6 +3,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { getNestedValue } from '../../utils/get-nested-value';
+import { FootnoteReferenceNode } from '../../types/ast';
 import FootnoteContext from './footnote-context';
 
 const refStyles = css`
@@ -18,25 +19,13 @@ const refStyles = css`
  * scrolls to referenced element by id property
  */
 
-type NodeData = {
-  id: string;
-  refname: string;
+export type FootnoteReferenceProps = {
+  nodeData: FootnoteReferenceNode;
 };
 
-type FootnoteReferenceProps = {
-  nodeData: NodeData;
-};
-
-type FootnotesContextType = {
-  footnotes: Record<string, any>;
-};
-
-const FootnoteReference = ({ nodeData }: FootnoteReferenceProps) => {
-  const { footnotes } = useContext(FootnoteContext) as FootnotesContextType;
+const FootnoteReference = ({ nodeData: { id, refname } }: FootnoteReferenceProps) => {
+  const { footnotes } = useContext(FootnoteContext);
   const { darkMode } = useDarkMode();
-
-  const { id, refname } = nodeData;
-
   const ref = refname || id.replace('id', '');
   const uid = refname ? `${refname}-${id}` : id;
 

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { UnifiedNav } from '@mdb/consistent-nav';
@@ -9,7 +8,7 @@ import { getAvailableLanguages, getCurrLocale, onSelectLocale } from '../../util
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { HeaderContext } from './header-context';
 
-interface SyledHeaderProps {
+interface StyledHeaderProps {
   hasBanner: boolean;
   template: string;
 }
@@ -19,7 +18,7 @@ type HeaderProps = {
   template: string;
 };
 
-const StyledHeaderContainer = styled.header<SyledHeaderProps>(
+const StyledHeaderContainer = styled.header<StyledHeaderProps>(
   (props) => `
   grid-area: header;
   top: 0;
@@ -66,10 +65,11 @@ const Header = ({ eol, template }: HeaderProps) => {
                 property={{ name: unifiedNavProperty, searchParams: [] }}
                 showLanguageSelector={true}
                 onSelectLocale={onSelectLocale}
-                data-locale={getCurrLocale()}
+                // @ts-ignore
+                locale={getCurrLocale()}
                 enabledLocales={enabledLocales}
                 darkMode={false}
-                data-className={cx('nav-light', isOfflineDocsBuild ? offlineClass : '')}
+                className={cx('nav-light', isOfflineDocsBuild ? offlineClass : '')}
               />
               <UnifiedNav
                 fullWidth={true}
@@ -78,10 +78,11 @@ const Header = ({ eol, template }: HeaderProps) => {
                 property={{ name: unifiedNavProperty, searchParams: [] }}
                 showLanguageSelector={true}
                 onSelectLocale={onSelectLocale}
-                data-locale={getCurrLocale()}
+                // @ts-ignore
+                locale={getCurrLocale()}
                 enabledLocales={enabledLocales}
                 darkMode={true}
-                data-className={cx('nav-dark', isOfflineDocsBuild ? offlineClass : '')}
+                className={cx('nav-dark', isOfflineDocsBuild ? offlineClass : '')}
               />
             </>
           )}
@@ -89,11 +90,6 @@ const Header = ({ eol, template }: HeaderProps) => {
       </StyledHeaderContainer>
     </>
   );
-};
-
-Header.propTypes = {
-  eol: PropTypes.bool.isRequired,
-  template: PropTypes.string.isRequired,
 };
 
 export default Header;

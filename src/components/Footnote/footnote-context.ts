@@ -1,8 +1,14 @@
 import { createContext } from 'react';
 
-type FootnoteContextType = {
-  footnotes: Record<string, unknown>;
-};
+export interface FootnoteContextType {
+  footnotes: Record<
+    string,
+    {
+      references: string[];
+      label: string;
+    }
+  >;
+}
 
 const FootnoteContext = createContext<FootnoteContextType>({
   footnotes: {},

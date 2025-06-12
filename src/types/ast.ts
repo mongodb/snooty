@@ -173,37 +173,13 @@ interface Root extends ParentNode {
   options: Record<string, any>;
   fileid: string;
 }
-export type NodeData = {
-  children: Node[];
+
+interface FootnoteReferenceNode extends ParentNode {
   id: string;
   name?: string;
-};
-
-export interface FootnoteNode extends ParentNode {
-  id: string;
-  name?: string;
-}
-
-export interface FootnoteReferenceNode extends Node {
-  id: string;
   refname?: string;
 }
 
-// For React props:
-export interface FootnoteProps {
-  nodeData: FootnoteNode;
-  [key: string]: any;
-}
-
-export interface FootnoteContextType {
-  footnotes: Record<
-    string,
-    {
-      references: string[];
-      label: string;
-    }
-  >;
-}
 type HeadingNodeSelectorIds = {
   tab?: string;
   'method-option'?: string;
@@ -524,6 +500,7 @@ export type {
   ComponentType,
   Directive,
   DirectiveOptions,
+  FootnoteReferenceNode,
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,
