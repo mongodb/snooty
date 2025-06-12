@@ -36,13 +36,13 @@ export const MPTNextLinkMini = () => {
   }
 
   return (
-    <div className={baseStyle} onClick={() => reportMPTAnalytics(activeTutorial.next.targetSlug, 'mini')}>
+    <div className={baseStyle} onClick={() => reportMPTAnalytics(activeTutorial?.next?.targetSlug ?? '', 'mini')}>
       <Button
         className={cx(buttonStyle, navLinkButtonStyle)}
         as={Link}
-        to={activeTutorial.next.targetSlug}
+        href={activeTutorial?.next?.targetSlug}
         title={LINK_TITLE}
-        leftGlyph={<Icon glyph={glyphs.ArrowRight.displayName} />}
+        leftGlyph={<Icon glyph={glyphs.ArrowRight.displayName ?? 'ArrowRight'} />}
         size="xsmall"
       >
         {LINK_TITLE}

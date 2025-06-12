@@ -33,10 +33,10 @@ export const MPTNextLinkFull = () => {
       className={baseStyle}
       icon={glyphs.ArrowRight.displayName}
       direction={'Next'}
-      pageTitle={activeTutorial.next.pageTitle}
-      targetSlug={activeTutorial.next.targetSlug}
+      pageTitle={activeTutorial?.next?.pageTitle}
+      targetSlug={activeTutorial?.next?.targetSlug}
       title={LINK_TITLE}
-      onClick={() => reportMPTAnalytics(activeTutorial.next.targetSlug, 'full')}
+      onClick={() => reportMPTAnalytics(activeTutorial?.next?.targetSlug ?? '', 'full')}
     />
   );
 };
