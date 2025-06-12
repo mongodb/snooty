@@ -425,7 +425,7 @@ interface TocTreeOptions {
 interface TocTreeDirective extends Directive<TocTreeOptions> {
   type: 'directive';
   name: 'toctree';
-  entries: TocTreeEntry[];
+  entries: Array<TocTreeEntry>;
 }
 
 type BannerOptions = {
@@ -569,6 +569,15 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
+interface ReleaseSpecificationNode extends ParentNode {}
+
+interface RefRoleNode extends ParentNode {
+  name: 'ref_role';
+  domain: string;
+  fileid: string[];
+  url: string;
+}
+
 export type {
   AbbrRoleNode,
   AdmonitionNode,
@@ -620,6 +629,8 @@ export type {
   ProcedureNode,
   ProcedureStyle,
   ReferenceNode,
+  RefRoleNode,
+  ReleaseSpecificationNode,
   RoleIconNode,
   RoleManualNode,
   RoleName,

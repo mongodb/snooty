@@ -79,7 +79,7 @@ exports[`renders correctly 1`] = `
           />
         </svg>
         <div
-          class="emotion-3 emotion-4"
+          class="emotion-3"
           id=""
         />
       </a>
