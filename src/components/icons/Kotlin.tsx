@@ -1,7 +1,7 @@
 import React, { useId } from 'react';
 type IconKotlinProps = React.SVGProps<SVGSVGElement>;
 
-const IconKotlin: React.FC<IconKotlinProps> = (styles) => {
+const IconKotlin = (styles: IconKotlinProps) => {
   const hash = useId();
 
   return (

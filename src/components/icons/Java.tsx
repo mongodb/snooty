@@ -3,7 +3,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 
 type IconJavaProps = React.SVGProps<SVGSVGElement>;
 
-const IconJava: React.FC<IconJavaProps> = (styles) => {
+const IconJava = (styles: IconJavaProps) => {
   const { darkMode } = useDarkMode();
 
   const javaCupFill = darkMode ? 'white' : '#0074BD';

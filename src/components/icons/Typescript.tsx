@@ -2,7 +2,7 @@ import React from 'react';
 
 type IconTypescriptProps = React.SVGProps<SVGSVGElement>;
 
-const IconTypescript: React.FC<IconTypescriptProps> = (styles) => (
+const IconTypescript = (styles: IconTypescriptProps) => (
   <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" {...styles}>
     <g clip-path="url(#clip0_2131_12795)">
       <path

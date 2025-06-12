@@ -2,7 +2,7 @@ import React from 'react';
 
 type IconShellProps = React.SVGProps<SVGSVGElement>;
 
-const IconShell: React.FC<IconShellProps> = (styles) => (
+const IconShell = (styles: IconShellProps) => (
   <svg viewBox="0 0 18 40" xmlns="http://www.w3.org/2000/svg" {...styles}>
     <g fillRule="nonzero" fill="none">
       <path

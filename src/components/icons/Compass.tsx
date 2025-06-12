@@ -2,7 +2,7 @@ import React, { useId } from 'react';
 
 type IconCompassProps = React.SVGProps<SVGSVGElement>;
 
-const IconCompass: React.FC<IconCompassProps> = (styles) => {
+const IconCompass = (styles: IconCompassProps) => {
   const hash = useId();
   return (
     <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...styles}>

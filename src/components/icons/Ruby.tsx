@@ -2,7 +2,7 @@ import React, { useId } from 'react';
 
 type IconRubyProps = React.SVGProps<SVGSVGElement>;
 
-const IconRuby: React.FC<IconRubyProps> = (styles) => {
+const IconRuby = (styles: IconRubyProps) => {
   const hash = useId();
   return (
     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" {...styles}>

@@ -2,7 +2,7 @@ import React from 'react';
 
 type IconPhpProps = React.SVGProps<SVGSVGElement>;
 
-const IconPhp: React.FC<IconPhpProps> = (styles) => (
+const IconPhp = (styles: IconPhpProps) => (
   <svg x="0" y="0" viewBox="0 0 700 301" xmlns="http://www.w3.org/2000/svg" {...styles}>
     <defs>
       <clipPath clipPathUnits="userSpaceOnUse" id="a">

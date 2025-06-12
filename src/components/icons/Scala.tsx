@@ -1,7 +1,7 @@
 import React, { useId } from 'react';
 type IconScalaProps = React.SVGProps<SVGSVGElement>;
 
-const IconScala: React.FC<IconScalaProps> = (styles) => {
+const IconScala = (styles: IconScalaProps) => {
   const hash = useId();
   return (
     <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" {...styles}>
