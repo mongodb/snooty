@@ -154,7 +154,7 @@ const onCardClick = (url?: string) => {
 
 const Card = ({ isCompact, isExtraCompact, isCenterContentStyle, isLargeIconStyle, page, nodeData }: CardProps) => {
   const { children, options } = nodeData;
-  const { cta, headline, icon, 'icon-dark': iconDark, 'icon-alt': iconAlt, tag, url } = options;
+  const { cta, headline, icon, 'icon-dark': iconDark, 'icon-alt': iconAlt, tag, url } = options ?? {};
   const template = page?.options?.template;
   const { darkMode } = useDarkMode();
 

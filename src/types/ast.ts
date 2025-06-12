@@ -310,7 +310,9 @@ type CardOptions = {
   tag?: string;
   url: string;
 };
-export interface CardNode extends Directive<CardOptions> {}
+export interface CardNode extends Directive<CardOptions> {
+  options: CardOptions;
+}
 
 interface DefinitionListNode extends ParentNode {
   type: 'definitionList';
