@@ -62,7 +62,7 @@ exports[`renders correctly 1`] = `
   }
 }
 
-.emotion-6 {
+.emotion-5 {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -70,21 +70,21 @@ exports[`renders correctly 1`] = `
   display: flex;
 }
 
-.emotion-7 {
+.emotion-6 {
   min-width: 145px;
 }
 
-.emotion-7 [data-theme] {
+.emotion-6 [data-theme] {
   width: 310px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-7 {
+  .emotion-6 {
     display: none;
   }
 }
 
-.emotion-8 {
+.emotion-7 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -122,48 +122,58 @@ exports[`renders correctly 1`] = `
   z-index: 1;
 }
 
-.emotion-8:focus-visible,
-.emotion-8[data-focus="true"] {
+.emotion-7:focus-visible,
+.emotion-7[data-focus="true"] {
   outline: none;
 }
 
-.emotion-8:active,
-.emotion-8[data-active="true"],
-.emotion-8:focus,
-.emotion-8:hover {
+.emotion-7:active,
+.emotion-7[data-active="true"],
+.emotion-7:focus,
+.emotion-7:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-8:focus-visible,
-.emotion-8[data-focus="true"] {
+.emotion-7:focus-visible,
+.emotion-7[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-8:hover,
-.emotion-8[data-hover="true"],
-.emotion-8:active,
-.emotion-8[data-active="true"] {
+.emotion-7:hover,
+.emotion-7[data-hover="true"],
+.emotion-7:active,
+.emotion-7[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-8:focus-visible,
-.emotion-8[data-focus="true"] {
+.emotion-7:focus-visible,
+.emotion-7[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-8,
-.emotion-8:hover,
-.emotion-8:focus,
-.emotion-8:focus-visible,
-.emotion-8:active {
+.emotion-7,
+.emotion-7:hover,
+.emotion-7:focus,
+.emotion-7:focus-visible,
+.emotion-7:active {
   border-right-color: #889397;
 }
 
-.emotion-9 {
+.emotion-8 {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.emotion-8 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -174,16 +184,6 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-9 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
-}
-
-.emotion-10 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -208,14 +208,14 @@ exports[`renders correctly 1`] = `
   gap: 6px;
 }
 
-.emotion-11 {
+.emotion-10 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-12 {
+.emotion-11 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -254,74 +254,74 @@ exports[`renders correctly 1`] = `
   width: 32px;
 }
 
-.emotion-12:focus-visible,
-.emotion-12[data-focus="true"] {
+.emotion-11:focus-visible,
+.emotion-11[data-focus="true"] {
   outline: none;
 }
 
-.emotion-12:active,
-.emotion-12[data-active="true"],
-.emotion-12:focus,
-.emotion-12:hover {
+.emotion-11:active,
+.emotion-11[data-active="true"],
+.emotion-11:focus,
+.emotion-11:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-12:focus-visible,
-.emotion-12[data-focus="true"] {
+.emotion-11:focus-visible,
+.emotion-11[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-12:hover,
-.emotion-12[data-hover="true"],
-.emotion-12:active,
-.emotion-12[data-active="true"] {
+.emotion-11:hover,
+.emotion-11[data-hover="true"],
+.emotion-11:active,
+.emotion-11[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-12:focus-visible,
-.emotion-12[data-focus="true"] {
+.emotion-11:focus-visible,
+.emotion-11[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-12:focus,
-.emotion-12:focus-visible,
-.emotion-12:hover {
+.emotion-11:focus,
+.emotion-11:focus-visible,
+.emotion-11:hover {
   z-index: 1;
 }
 
-.emotion-12,
-.emotion-12:hover,
-.emotion-12:focus,
-.emotion-12:focus-visible,
-.emotion-12:active {
+.emotion-11,
+.emotion-11:hover,
+.emotion-11:focus,
+.emotion-11:focus-visible,
+.emotion-11:active {
   border-left-color: #889397;
 }
 
-.emotion-12 svg {
+.emotion-11 svg {
   color: #3D4F58;
 }
 
-.emotion-15 {
+.emotion-14 {
   color: #001E2B;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-15 .lg-ui-button-0000:hover,
-.emotion-15 .lg-ui-button-0000:active {
+.emotion-14 .lg-ui-button-0000:hover,
+.emotion-14 .lg-ui-button-0000:active {
   color: currentColor;
 }
 
-.emotion-16 {
+.emotion-15 {
   display: none;
 }
 
-.emotion-16 {
+.emotion-15 {
   display: none;
 }
 
@@ -359,30 +359,86 @@ exports[`renders correctly 1`] = `
             />
           </svg>
           <div
-            class="emotion-4 emotion-5"
+            class="emotion-4"
             id=""
           />
         </a>
       </h1>
       <div
-        class="emotion-6 emotion-7"
+        class="emotion-5 emotion-6"
         data-lgid="lg-split_button"
         data-testid="lg-split_button"
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-8"
+          class="lg-ui-button-0000 emotion-7"
           data-lgid="lg-split_button-button"
           data-testid="lg-split_button-button"
           type="button"
         >
           <div
-            class="emotion-9"
+            class="emotion-8"
           />
-        </svg>
-        <div
-          class="emotion-3"
-          id=""
+          <div
+            class="emotion-9"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="emotion-10"
+              fill="none"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1Zm8-.928L7.257 6.498A.857.857 0 0 0 7 7.11v.688h3.01a.857.857 0 0 0 .857-.858V4h-.717a.857.857 0 0 0-.6.246l-.55.54ZM4.867 1H4.15a.857.857 0 0 0-.601.246L1.257 3.498A.857.857 0 0 0 1 4.11v.688h3.01a.857.857 0 0 0 .857-.858V1ZM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 0 1 7 13.286V12Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Copy page
+          </div>
+        </button>
+        <button
+          aria-controls=""
+          aria-disabled="false"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="More options"
+          class="lg-ui-button-0000 emotion-11"
+          data-lgid="lg-split_button-trigger"
+          data-testid="lg-split_button-trigger"
+          type="button"
+        >
+          <div
+            class="emotion-8"
+          />
+          <div
+            class="emotion-9"
+          >
+            <svg
+              aria-label="Caret Down Icon"
+              class="emotion-14"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.679 10.796a.554.554 0 0 1-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </button>
+        <span
+          class="emotion-15"
         />
       </div>
     </div>
