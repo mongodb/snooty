@@ -63,6 +63,7 @@ type DirectiveName =
   | 'collapsible'
   | 'community-driver'
   | 'composable-tutorials'
+  | 'container'
   | 'contents'
   | 'deprecated'
   | 'directive'
@@ -121,6 +122,8 @@ type NodeType =
   | 'root'
   | 'section'
   | 'strong'
+  | 'superscript'
+  | 'subscript'
   | 'tabs'
   | 'target'
   | 'target_identifier'
@@ -165,6 +168,10 @@ interface Node {
   type: NodeType;
 }
 
+interface TextParentNode extends Node {
+  children: TextNode[];
+}
+
 interface ParentNode extends Node {
   children: Node[];
 }
@@ -197,8 +204,16 @@ interface EmphasisNode extends ParentNode {
   type: 'emphasis';
 }
 
-interface StrongNode extends ParentNode {
+interface StrongNode extends TextParentNode {
   type: 'strong';
+}
+
+interface SuperscriptNode extends ParentNode {
+  type: 'superscript';
+}
+
+interface SubscriptNode extends ParentNode {
+  type: 'subscript';
 }
 
 interface ReferenceNode extends ParentNode {
@@ -224,6 +239,11 @@ type ButtonOptions = {
 
 interface ButtonNode extends Directive<ButtonOptions> {
   options: ButtonOptions;
+}
+
+interface ContainerNode extends Directive {
+  name: 'container';
+  argument: TextNode[];
 }
 
 type DismissibleSkillsCardOptions = {
@@ -414,18 +434,23 @@ interface AdmonitionNode extends Directive {
 }
 
 interface TocTreeEntry {
-  title?: string;
-  slug?: string;
+  title: [TextNode];
+  slug: string;
+  children: TocTreeEntry[];
+  options?: TocTreeOptions;
 }
 
 interface TocTreeOptions {
-  osiris_parent: boolean;
+  drawer?: boolean;
+  project?: string;
+  versions?: string[];
+  osiris_parent?: boolean;
 }
 
 interface TocTreeDirective extends Directive<TocTreeOptions> {
   type: 'directive';
   name: 'toctree';
-  entries: TocTreeEntry[];
+  entries: Array<TocTreeEntry>;
 }
 
 type CommunityDriverPillOptions = {
@@ -463,9 +488,17 @@ interface ComposableNode extends Directive {
   children: Node[];
 }
 
-interface MetaNode extends Directive {
+type MetaOptions = {
+  description?: string;
+  canonical?: string;
+  robots?: string;
+  keywords?: string;
+};
+
+interface MetaNode extends Directive<MetaOptions> {
   type: 'directive';
   name: 'meta';
+  options: MetaOptions;
 }
 
 interface TitleReferenceNode {
@@ -501,6 +534,25 @@ interface CTABannerNode extends Directive<CTABannerOptions> {
   options: CTABannerOptions;
 }
 
+type StandaloneHeaderOptions = {
+  columns: number;
+  cta: string;
+  url: string;
+};
+
+interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
+  options: StandaloneHeaderOptions;
+}
+
+interface ReleaseSpecificationNode extends ParentNode {}
+
+interface RefRoleNode extends ParentNode {
+  name: 'ref_role';
+  domain: string;
+  fileid: string[];
+  url: string;
+}
+
 export type {
   ParentNode,
   Root,
@@ -514,6 +566,7 @@ export type {
   CodeNode,
   CommunityDriverPill,
   ComponentType,
+  ContainerNode,
   Directive,
   DirectiveOptions,
   IOCodeBlockNode,
@@ -556,4 +609,9 @@ export type {
   MetaNode,
   BannerNode,
   CTABannerNode,
+  StandaloneHeaderNode,
+  SuperscriptNode,
+  SubscriptNode,
+  ReleaseSpecificationNode,
+  RefRoleNode,
 };

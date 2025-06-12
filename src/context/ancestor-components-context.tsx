@@ -14,17 +14,16 @@ const AncestorComponentContext = createContext<AncestorComponentContextType>(def
 
 type AncestorComponentName = 'table' | 'procedure';
 
+export type AncestorComponentContextProviderProps = {
+  children: ReactNode;
+  component: AncestorComponentName;
+};
+
 /**
  * Context provider to help track ancestors of components without ambiguous prop drilling.
  * If nested within another component that uses this provder, previous ancestors are persisted.
  */
-const AncestorComponentContextProvider = ({
-  children,
-  component,
-}: {
-  children: ReactNode;
-  component: AncestorComponentName;
-}) => {
+const AncestorComponentContextProvider = ({ children, component }: AncestorComponentContextProviderProps) => {
   const prevAncestors = useAncestorComponentContext();
   const newAncestors = { ...prevAncestors };
 
