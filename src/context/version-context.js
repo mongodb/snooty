@@ -89,6 +89,7 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
 
 const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
   const { project, parserBranch } = metadata;
+  console.log('the metadata is ', metadata);
   const versions = {};
   const VERSION_KEY = 'branches';
   const currentBranch = repoBranches?.[VERSION_KEY]?.find((b) => b.gitBranchName === parserBranch);
