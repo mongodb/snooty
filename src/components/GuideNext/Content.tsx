@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -9,6 +8,7 @@ import Link from '../Link';
 import ConditionalWrapper from '../ConditionalWrapper';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
+import type { Guide } from './GuidesList';
 
 const Container = styled('div')`
   p {
@@ -37,7 +37,7 @@ const Time = styled('div')`
   font-weight: normal;
 `;
 
-const defaultTarget = [
+const defaultTarget: [string, Guide] = [
   'https://university.mongodb.com/certification/developer/about',
   {
     title: 'Become a MongoDB Professional',
@@ -46,7 +46,13 @@ const defaultTarget = [
   },
 ];
 
-const Content = ({ argument, children, guideData }) => {
+interface ContentProps {
+  argument: string;
+  children: string;
+  guideData: [string, Guide];
+}
+
+const Content = ({ argument, children, guideData }: ContentProps) => {
   const hasCustomContent = argument?.length > 0 || children?.length > 0;
   const hasNextGuide = !!guideData[0] && !!guideData[1];
   const { darkMode } = useDarkMode();
@@ -85,12 +91,6 @@ const Content = ({ argument, children, guideData }) => {
       )}
     </Container>
   );
-};
-
-Content.propTypes = {
-  argument: PropTypes.arrayOf(PropTypes.object),
-  children: PropTypes.arrayOf(PropTypes.object),
-  guideData: PropTypes.array.isRequired,
 };
 
 export default Content;

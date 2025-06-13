@@ -7,8 +7,14 @@ const List = styled('ul')`
   padding-left: 0;
 `;
 
+export interface Guide {
+  title: string;
+  description: string;
+  completion_time?: number;
+}
+
 interface GuidesListProps {
-  guidesMetadata: Record<string, { title: string }>;
+  guidesMetadata: Record<string, Guide>;
   guideSlugs: Array<string>;
   targetSlug: string;
 }
