@@ -22,7 +22,15 @@ const iconStyle = css`
   cursor: pointer;
 `;
 
-const DrawerButtons = ({ height, minHeight, maxHeight, defaultHeight, setHeight }) => {
+interface DrawerButtonsProps {
+  height: number;
+  minHeight: number;
+  maxHeight: number;
+  defaultHeight: number;
+  setHeight: (height: number) => void;
+}
+
+const DrawerButtons = ({ height, minHeight, maxHeight, defaultHeight, setHeight }: DrawerButtonsProps) => {
   const { setIsOpen } = useContext(InstruqtContext);
   const isMinHeight = height === minHeight;
   const isMaxHeight = height === maxHeight;
