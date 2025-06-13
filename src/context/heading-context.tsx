@@ -14,7 +14,7 @@ const HeadingContext = createContext<HeadingContextType>(defaultVal);
 
 type HeadingContextProviderProps = {
   children: ReactNode;
-  heading: string;
+  heading?: string;
   ignoreNextHeading?: boolean;
 };
 
