@@ -2,7 +2,7 @@ import React from 'react';
 import { act, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { matchers } from '@emotion/jest';
-import { FeedbackProvider, FeedbackForm } from '../../src/components/Widgets/FeedbackWidget';
+import FeedbackWidget, { FeedbackProvider, FeedbackForm } from '../../src/components/Widgets/FeedbackWidget';
 
 import { tick, mockMutationObserver, mockSegmentAnalytics, setDesktop } from '../utils';
 import {
@@ -30,6 +30,8 @@ import {
   SUBMITTED_VIEW_SUPPORT_LINK,
   SUBMITTED_VIEW_TEXT,
 } from '../../src/components/Widgets/FeedbackWidget/constants';
+import { PageContext } from '../../src/context/page-context';
+import { MetadataProvider } from '../../src/utils/use-snooty-metadata';
 import headingData from './data/Heading.test.json';
 
 async function mountFormWithFeedbackState(feedbackState = {}) {
@@ -91,6 +93,27 @@ describe('FeedbackWidget', () => {
   beforeEach(mockScreenshotFunctions);
   afterEach(clearMockScreenshotFunctions);
   beforeEach(() => mockLocation('', '', '', 'https://mongodb.com/docs/atlas'));
+
+  describe('FeedbackWidget', () => {
+    it('is not rendered when hidefeedback page option has value "page"', () => {
+      const pageContextValue = {
+        options: {
+          hidefeedback: 'page',
+        },
+      };
+
+      wrapper = render(
+        <PageContext.Provider value={pageContextValue}>
+          <MetadataProvider metadata={{}}>
+            <FeedbackWidget slug={'/'} />
+          </MetadataProvider>
+        </PageContext.Provider>
+      );
+
+      // Should not be rendered
+      expect(wrapper.queryByTestId('feedback-container')).not.toBeInTheDocument();
+    });
+  });
 
   describe('FeedbackForm', () => {
     it('waiting state when the form is closed', async () => {
