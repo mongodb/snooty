@@ -1,5 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
-import { navigate } from 'gatsby';
+import { navigate } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
 import * as realm from '../../src/utils/realm';
 import VersionDropdown from '../../src/components/VersionDropdown';
@@ -17,7 +17,7 @@ jest.mock('../../src/utils/use-snooty-metadata', () => {
   return () => ({ project: 'node' });
 });
 
-jest.mock('gatsby', () => ({
+jest.mock('@gatsbyjs/reach-router', () => ({
   navigate: jest.fn(),
 }));
 
