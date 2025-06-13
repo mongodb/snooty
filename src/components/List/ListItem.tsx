@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import ComponentFactory from '../ComponentFactory';
+import { ParentNode } from '../../types/ast';
 
 const listParagraphStyles = css`
   ::marker {
@@ -11,18 +11,17 @@ const listParagraphStyles = css`
     margin-bottom: 8px;
   }
 `;
-const ListItem = ({ nodeData, ...rest }) => (
+
+export type ListItemProps = {
+  nodeData: ParentNode;
+};
+
+const ListItem = ({ nodeData, ...rest }: ListItemProps) => (
   <li className={cx(listParagraphStyles)}>
     {nodeData.children.map((child, index) => (
       <ComponentFactory {...rest} nodeData={child} key={index} skipPTag={false} />
     ))}
   </li>
 );
-
-ListItem.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.array.isRequired,
-  }).isRequired,
-};
 
 export default ListItem;

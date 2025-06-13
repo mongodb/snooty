@@ -1,19 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
+import { ParentNode } from '../../types/ast';
 
-const LineBlock = ({ nodeData: { children }, ...rest }) => (
+export type LineBlockProps = {
+  nodeData: ParentNode;
+};
+
+const LineBlock = ({ nodeData: { children }, ...rest }: LineBlockProps) => (
   <div className="line-block">
     {children.map((child, index) => (
       <ComponentFactory key={index} {...rest} nodeData={child} />
     ))}
   </div>
 );
-
-LineBlock.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
 
 export default LineBlock;

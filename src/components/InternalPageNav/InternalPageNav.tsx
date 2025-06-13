@@ -6,6 +6,8 @@ import { theme } from '../../theme/docsTheme';
 import { getPageTitle } from '../../utils/get-page-title';
 import { useActiveMpTutorial } from '../MultiPageTutorials';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { SlugToTitle } from '../../types/data';
+import { ActiveTutorial } from '../MultiPageTutorials/hooks/use-active-mp-tutorial';
 import NextPrevLink from './NextPrevLink';
 
 const containerStyling = css`
@@ -35,23 +37,28 @@ const nextStyle = css`
   margin-left: auto;
 `;
 
-const getActiveTutorialPage = (activeTutorial, key, linkTitle) => {
+const getActiveTutorialPage = (activeTutorial: ActiveTutorial, key: 'next' | 'prev', linkTitle: string) => {
   return {
-    targetSlug: activeTutorial[key].targetSlug,
-    pageTitle: activeTutorial[key].pageTitle,
+    targetSlug: activeTutorial[key]?.targetSlug,
+    pageTitle: activeTutorial[key]?.pageTitle ?? '',
     linkTitle,
   };
 };
 
-const getTocPage = (targetSlug, slugTitleMapping, linkTitle) => {
+const getTocPage = (targetSlug: string | null, slugTitleMapping: SlugToTitle, linkTitle: string) => {
   return {
     targetSlug,
-    pageTitle: targetSlug ? getPageTitle(targetSlug, slugTitleMapping) : null,
+    pageTitle: targetSlug ? getPageTitle(targetSlug, slugTitleMapping) ?? '' : '',
     linkTitle,
   };
 };
 
-const getPrev = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
+const getPrev = (
+  activeTutorial: ActiveTutorial | undefined,
+  toctreeOrder: string[],
+  slugTitleMapping: SlugToTitle,
+  slugIndex: number
+) => {
   const key = 'prev';
   if (activeTutorial?.[key]) {
     return getActiveTutorialPage(activeTutorial, key, 'Previous Step');
@@ -60,7 +67,12 @@ const getPrev = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
   return getTocPage(prevSlug, slugTitleMapping, 'Previous Section');
 };
 
-const getNext = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
+const getNext = (
+  activeTutorial: ActiveTutorial | undefined,
+  toctreeOrder: string[],
+  slugTitleMapping: SlugToTitle,
+  slugIndex: number
+) => {
   const key = 'next';
   if (activeTutorial?.[key]) {
     return getActiveTutorialPage(activeTutorial, key, 'Next Step');
@@ -69,13 +81,19 @@ const getNext = (activeTutorial, toctreeOrder, slugTitleMapping, slugIndex) => {
   return getTocPage(nextSlug, slugTitleMapping, 'Next Section');
 };
 
-const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
+export type InternalPageNavProps = {
+  slug: string;
+  slugTitleMapping: SlugToTitle;
+  toctreeOrder: string[];
+};
+
+const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }: InternalPageNavProps) => {
   const activeTutorial = useActiveMpTutorial();
   const slugIndex = toctreeOrder.indexOf(slug);
   const prevPage = getPrev(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
   const nextPage = getNext(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
 
-  const handleClick = (direction, targetSlug) => {
+  const handleClick = (direction: string, targetSlug: string) => {
     reportAnalytics('InternalPageNavClicked', {
       direction,
       targetSlug,
@@ -87,7 +105,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
       {prevPage?.targetSlug && (
         <NextPrevLink
           className={prevStyle}
-          icon={glyphs.ArrowLeft.displayName}
+          icon={glyphs.ArrowLeft.displayName ?? 'ArrowLeft'}
           direction="Back"
           targetSlug={prevPage.targetSlug}
           pageTitle={prevPage.pageTitle}
@@ -98,7 +116,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }) => {
       {nextPage?.targetSlug && (
         <NextPrevLink
           className={nextStyle}
-          icon={glyphs.ArrowRight.displayName}
+          icon={glyphs.ArrowRight.displayName ?? 'ArrowRight'}
           direction="Next"
           targetSlug={nextPage.targetSlug}
           pageTitle={nextPage.pageTitle}

@@ -80,15 +80,24 @@ type RemoteMetadata = {
   title: string;
   eol: boolean;
   slugToTitle: Record<string, [TextNode]>;
+  slugToBreadcrumbLabel?: Record<string, string>;
   toctree: TocTreeEntry;
   toctreeOrder: string[];
-  // TODO: This might be <string, string[]> ...
   parentPaths: Record<string, BreadcrumbType[]>;
   static_files: Record<string, Buffer>;
   canonical?: string | null;
   iatree?: IATreeNode;
   openapi_pages?: Record<string, OpenApiPage>;
   associated_products?: AssociatedProduct[];
+  multiPageTutorials?: Record<string, MultiPageTutorial>;
+};
+
+type SlugToTitle = RemoteMetadata['slugToTitle'];
+type SlugToBreadcrumbLabel = RemoteMetadata['slugToBreadcrumbLabel'];
+
+type MultiPageTutorial = {
+  slugs: string[];
+  total_steps: number;
 };
 
 // TODO: Refine structure
@@ -175,10 +184,13 @@ export {
   Group,
   MetadataChapters,
   MetadataDatabaseName,
+  MultiPageTutorial,
   PageContext,
   PageContextRepoBranches,
   RemoteMetadata,
   ReposDatabaseName,
   SiteMetadata,
+  SlugToBreadcrumbLabel,
+  SlugToTitle,
   SnootyEnv,
 };
