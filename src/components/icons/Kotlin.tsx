@@ -1,6 +1,8 @@
 import React, { useId } from 'react';
 
-const IconKotlin = ({ ...styles }) => {
+type IconKotlinProps = React.SVGProps<SVGSVGElement>;
+
+const IconKotlin = (styles: IconKotlinProps) => {
   const hash = useId();
 
   return (

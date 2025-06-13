@@ -185,6 +185,16 @@ interface Root extends ParentNode {
   fileid: string;
 }
 
+interface FootnoteReferenceNode extends ParentNode {
+  id: string;
+  refname?: string;
+}
+
+interface FootnoteNode extends ParentNode {
+  id: string;
+  name?: string;
+}
+
 type HeadingNodeSelectorIds = {
   tab?: string;
   'method-option'?: string;
@@ -633,6 +643,8 @@ export type {
   HeadingNodeSelectorIds,
   HighlightNode,
   HighlightRoleNames,
+  FootnoteNode,
+  FootnoteReferenceNode,
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,

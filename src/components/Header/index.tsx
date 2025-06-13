@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { UnifiedNav } from '@mdb/consistent-nav';
@@ -9,7 +8,11 @@ import { getAvailableLanguages, getCurrLocale, onSelectLocale } from '../../util
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { HeaderContext } from './header-context';
 
-const StyledHeaderContainer = styled.header(
+interface StyledHeaderProps {
+  hasBanner: boolean;
+}
+
+const StyledHeaderContainer = styled.header<StyledHeaderProps>(
   (props) => `
   grid-area: header;
   top: 0;
@@ -35,7 +38,11 @@ const offlineClass = css`
   }
 `;
 
-const Header = ({ eol, template }) => {
+type HeaderProps = {
+  eol: boolean;
+};
+
+const Header = ({ eol }: HeaderProps) => {
   const unifiedNavProperty = 'DOCS';
 
   const enabledLocales = getAvailableLanguages().map((language) => language.localeCode);
@@ -44,30 +51,32 @@ const Header = ({ eol, template }) => {
   return (
     <>
       <SiteBanner />
-      <StyledHeaderContainer template={template} hasBanner={!!bannerContent}>
+      <StyledHeaderContainer hasBanner={!!bannerContent}>
         <>
           {/* Two navs used intentionally: one for light mode, one for dark mode */}
           {!eol && (
             <>
               <UnifiedNav
-                fullWidth="true"
-                hideSearch="true"
+                fullWidth={true}
+                hideSearch={true}
                 position="relative"
-                property={{ name: unifiedNavProperty }}
+                property={{ name: unifiedNavProperty, searchParams: [] }}
                 showLanguageSelector={true}
                 onSelectLocale={onSelectLocale}
+                // @ts-ignore
                 locale={getCurrLocale()}
                 enabledLocales={enabledLocales}
                 darkMode={false}
                 className={cx('nav-light', isOfflineDocsBuild ? offlineClass : '')}
               />
               <UnifiedNav
-                fullWidth="true"
-                hideSearch="true"
+                fullWidth={true}
+                hideSearch={true}
                 position="relative"
-                property={{ name: unifiedNavProperty }}
+                property={{ name: unifiedNavProperty, searchParams: [] }}
                 showLanguageSelector={true}
                 onSelectLocale={onSelectLocale}
+                // @ts-ignore
                 locale={getCurrLocale()}
                 enabledLocales={enabledLocales}
                 darkMode={true}
@@ -79,11 +88,6 @@ const Header = ({ eol, template }) => {
       </StyledHeaderContainer>
     </>
   );
-};
-
-Header.propTypes = {
-  eol: PropTypes.bool.isRequired,
-  template: PropTypes.string.isRequired,
 };
 
 export default Header;

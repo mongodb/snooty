@@ -1,6 +1,8 @@
 import React from 'react';
 
-const IconSwift = ({ ...styles }) => (
+type IconSwiftProps = React.SVGProps<SVGSVGElement>;
+
+const IconSwift = (styles: IconSwiftProps) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="-252 343.9 106.1 106.1" {...styles}>
     <path
       fill="#F05138"

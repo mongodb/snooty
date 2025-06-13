@@ -29,17 +29,16 @@ exports[`renders correctly 1`] = `
 
 <table
     class="header-buffer emotion-0"
-    frame="void"
     id="footnote-1"
     rules="none"
   >
     <colgroup>
       <col />
     </colgroup>
-    <tbody
-      valign="top"
-    >
-      <tr>
+    <tbody>
+      <tr
+        style="vertical-align: top;"
+      >
         <td
           class="emotion-1"
         >
