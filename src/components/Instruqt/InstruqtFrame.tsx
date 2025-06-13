@@ -9,7 +9,7 @@ const iframeStyle = css`
 
 interface InstruqtFrameProps {
   title: string;
-  height: number;
+  height?: number;
   embedValue: string;
   darkMode?: boolean;
 }
