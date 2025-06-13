@@ -42,7 +42,7 @@ const defaultTarget = [
   {
     title: 'Become a MongoDB Professional',
     description:
-      'Congrats. You’ve completed all the guides. Want to take the next step? Register for the developer exam.',
+      "Congrats. You've completed all the guides. Want to take the next step? Register for the developer exam.",
   },
 ];
 
@@ -62,7 +62,7 @@ const Content = ({ argument, children, guideData }) => {
 
   return (
     <Container>
-      <Heading style={{ '--color': darkMode ? palette.gray.light2 : palette.gray.dark1 }}>What's Next</Heading>
+      <Heading style={{ color: darkMode ? palette.gray.light2 : palette.gray.dark1 }}>What's Next</Heading>
       <Title>
         {formatText(content.title)}
         {!!content.completion_time && <Time>{content.completion_time} mins</Time>}
@@ -74,9 +74,8 @@ const Content = ({ argument, children, guideData }) => {
       {!hasCustomContent && buttonUrl && (
         <Button
           as={Link}
-          to={buttonUrl}
+          href={buttonUrl}
           variant="primary"
-          hideExternalIcon={true}
           className={css`
             color: #ffffff !important;
           `}
