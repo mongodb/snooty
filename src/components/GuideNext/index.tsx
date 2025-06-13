@@ -59,19 +59,18 @@ const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Record<
   const currentChapterNumber = currentChapter?.chapter_number;
   const isFinalChapter = currentChapterNumber === chaptersArray.length;
 
-  let targetChapter = [currentChapterName, currentChapter];
+  let targetChapter: [string, ChapterData] | undefined = [currentChapterName, currentChapter];
   if (!isFinalChapter && isFinalGuideInChapter) {
-    targetChapter =
-      chaptersArray.find((chapter) => {
-        const data = chapter[1];
-        return data.chapter_number === currentChapterNumber + 1;
-      }) ?? [];
+    targetChapter = chaptersArray.find((chapter) => {
+      const data = chapter[1];
+      return data.chapter_number === currentChapterNumber + 1;
+    });
   }
 
   const isFinalGuideOnSite = isFinalChapter && isFinalGuideInChapter;
   let targetGuide: [string, Guide] | [null, null] = [null, null];
   if (!isFinalGuideOnSite) {
-    targetGuide = getTargetGuide(targetGuideIdx, targetChapter[0] as string, chapters, guides);
+    targetGuide = getTargetGuide(targetGuideIdx, targetChapter?.[0] ?? '', chapters, guides);
   }
 
   return {
