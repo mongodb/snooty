@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
@@ -11,6 +10,7 @@ import { usePageContext } from '../context/page-context';
 import { theme } from '../theme/docsTheme';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { disabledStyle } from '../styles/button';
+import { HeadingNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -25,7 +25,7 @@ const titleMarginStyle = css`
   margin-bottom: ${theme.size.medium};
 `;
 
-const headingStyles = (sectionDepth, shouldShowLabButton) => css`
+const headingStyles = (sectionDepth: number, shouldShowLabButton: boolean) => css`
   ${!shouldShowLabButton &&
   `
     margin-top: ${theme.size.medium};
@@ -58,7 +58,7 @@ const contentsStyle = css`
   margin-top: ${theme.size.medium};
 `;
 
-const determineHeading = (sectionDepth) => {
+const determineHeading = (sectionDepth: number) => {
   if (sectionDepth === 1) {
     return H2;
   } else if (sectionDepth === 2) {
@@ -69,11 +69,25 @@ const determineHeading = (sectionDepth) => {
   return Body; // use weight=medium prop to style appropriately
 };
 
-const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
+type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+function toHeadingTag(n: number): HeadingTag {
+  if (n >= 1 && n <= 6) return `h${n}` as HeadingTag;
+  return 'h6';
+}
+
+export type HeadingProps = {
+  nodeData: HeadingNode;
+  sectionDepth: number;
+  as?: number;
+  className?: string;
+};
+
+const Heading = ({ sectionDepth, nodeData, className, as, ...rest }: HeadingProps) => {
   const id = nodeData.id || '';
   const HeadingTag = determineHeading(sectionDepth);
   const asHeadingNumber = as ?? sectionDepth;
-  const asHeading = asHeadingNumber >= 1 && asHeadingNumber <= 6 ? `h${asHeadingNumber}` : 'h6';
+  const asHeading = toHeadingTag(asHeadingNumber);
   const isPageTitle = sectionDepth === 1;
   const { isTabletOrMobile } = useScreenSize();
   const { selectors } = useContext(TabContext);
@@ -162,19 +176,5 @@ const ChildContainer = styled.div`
     align-items: flex-start;
   }
 `;
-
-Heading.propTypes = {
-  sectionDepth: PropTypes.number.isRequired,
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string,
-      })
-    ).isRequired,
-    id: PropTypes.string.isRequired,
-  }).isRequired,
-  isProductLanding: PropTypes.bool,
-  as: PropTypes.number,
-};
 
 export default Heading;
