@@ -20,6 +20,8 @@ interface PageOptions {
   multi_page_tutorial_settings?: {
     show_next_top?: boolean;
   };
+  hidefeedback: string;
+  [key: string]: any;
 }
 
 interface PageContextType {
