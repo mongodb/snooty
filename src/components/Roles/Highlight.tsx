@@ -1,16 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
+import { HighlightNode, HighlightRoleNames } from '../../types/ast';
 
-const HIGHLIGHT_BLUE = 'highlight-blue';
-const HIGHLIGHT_GREEN = 'highlight-green';
-const HIGHLIGHT_RED = 'highlight-red';
-const HIGHLIGHT_YELLOW = 'highlight-yellow';
+export const HIGHLIGHT_BLUE = 'highlight-blue';
+export const HIGHLIGHT_GREEN = 'highlight-green';
+export const HIGHLIGHT_RED = 'highlight-red';
+export const HIGHLIGHT_YELLOW = 'highlight-yellow';
 
-const COLOR_MAP = {
+const COLOR_MAP: Record<'light' | 'dark', Record<HighlightRoleNames, string>> = {
   light: {
     [HIGHLIGHT_BLUE]: palette.blue.light3,
     [HIGHLIGHT_GREEN]: palette.green.light3,
@@ -25,7 +25,11 @@ const COLOR_MAP = {
   },
 };
 
-const Highlight = ({ nodeData: { children, name } }) => {
+export type HighlightProps = {
+  nodeData: HighlightNode;
+};
+
+const Highlight = ({ nodeData: { children, name } }: HighlightProps) => {
   const { darkMode } = useDarkMode();
   const colorTheme = darkMode ? 'dark' : 'light';
   const backgroundColor = COLOR_MAP[colorTheme][name];
@@ -37,24 +41,14 @@ const Highlight = ({ nodeData: { children, name } }) => {
   return (
     <span
       className={cx(css`
-        background-color: var(--background-color);
+        background-color: ${backgroundColor};
       `)}
-      style={{
-        '--background-color': backgroundColor,
-      }}
     >
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}
     </span>
   );
-};
-
-Highlight.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default Highlight;
