@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
+import type { Directive } from '../../types/ast';
 import Content from './Content';
 import ChapterInfo from './ChapterInfo';
 import { ReadGuidesContextProvider } from './read-guides-context';
@@ -19,16 +19,31 @@ const Container = styled('div')`
   }
 `;
 
-const getTargetGuide = (targetGuideIdx, targetChapter, chapters, guides) => {
+interface ChapterData {
+  chapter_number: number;
+  guides: Array<string>;
+}
+
+interface GuideData {
+  title: string;
+  chapter_name?: string;
+}
+
+const getTargetGuide = (
+  targetGuideIdx: number,
+  targetChapter: Array<string>,
+  chapters: Record<string, ChapterData>,
+  guides: Record<string, GuideData>
+) => {
   const targetChapterName = targetChapter[0];
   const guidesInTargetChapter = chapters[targetChapterName].guides;
   const targetGuideSlug = guidesInTargetChapter[targetGuideIdx];
   return [targetGuideSlug, guides[targetGuideSlug]];
 };
 
-const getNextGuideData = (chapters, guides, slug) => {
+const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Record<string, GuideData>, slug: string) => {
   // Get current chapter name and guides in said chapter
-  const currentChapterName = guides?.[slug]?.['chapter_name'];
+  const currentChapterName = guides?.[slug]?.chapter_name ?? '';
   const currentChapter = chapters?.[currentChapterName];
   const guidesInChapter = currentChapter?.guides;
 
@@ -69,7 +84,16 @@ const getNextGuideData = (chapters, guides, slug) => {
   };
 };
 
-const GuideNext = ({ nodeData: { argument, children }, metadata, slug }) => {
+interface GuideNextProps {
+  nodeData: Directive;
+  slug: string;
+  metadata: {
+    chapters: Record<string, ChapterData>;
+    guides: Record<string, GuideData>;
+  };
+}
+
+const GuideNext = ({ nodeData: { argument, children }, metadata, slug }: GuideNextProps) => {
   const { chapters, guides } = metadata;
   const { targetGuide, targetChapter } = useMemo(
     () => getNextGuideData(chapters, guides, slug),
@@ -84,22 +108,10 @@ const GuideNext = ({ nodeData: { argument, children }, metadata, slug }) => {
     <ReadGuidesContextProvider slug={slug}>
       <Container>
         <Content argument={argument} children={children} guideData={targetGuide} />
-        <ChapterInfo chapterData={targetChapter} guidesMetadata={guides} targetSlug={targetGuide?.[0]} />
+        <ChapterInfo chapterData={targetChapter} guidesMetadata={guides} targetSlug={targetGuide?.[0] ?? ''} />
       </Container>
     </ReadGuidesContextProvider>
   );
-};
-
-GuideNext.propTypes = {
-  metadata: PropTypes.shape({
-    chapters: PropTypes.object.isRequired,
-    guides: PropTypes.object.isRequired,
-  }).isRequired,
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-  slug: PropTypes.string.isRequired,
 };
 
 export default GuideNext;
