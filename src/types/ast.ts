@@ -602,6 +602,15 @@ interface RefRoleNode extends ParentNode {
   url: string;
 }
 
+interface InstruqtOptions {
+  title: string;
+  drawer: boolean;
+}
+
+interface InstruqtNode extends Directive<InstruqtOptions> {
+  argument: Array<TextNode>;
+}
+
 export type {
   AbbrRoleNode,
   AdmonitionNode,
@@ -633,6 +642,7 @@ export type {
   HeadingNodeSelectorIds,
   HighlightNode,
   HighlightRoleNames,
+  InstruqtNode,
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,

@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
+import type { Directive } from '../../types/ast';
 import Content from './Content';
 import ChapterInfo from './ChapterInfo';
+import type { Guide } from './GuidesList';
 import { ReadGuidesContextProvider } from './read-guides-context';
 
 const Container = styled('div')`
@@ -19,16 +20,25 @@ const Container = styled('div')`
   }
 `;
 
-const getTargetGuide = (targetGuideIdx, targetChapter, chapters, guides) => {
-  const targetChapterName = targetChapter[0];
+interface ChapterData {
+  chapter_number: number;
+  guides: Array<string>;
+}
+
+const getTargetGuide = (
+  targetGuideIdx: number,
+  targetChapterName: string,
+  chapters: Record<string, ChapterData>,
+  guides: Record<string, Guide>
+): [string, Guide] => {
   const guidesInTargetChapter = chapters[targetChapterName].guides;
   const targetGuideSlug = guidesInTargetChapter[targetGuideIdx];
   return [targetGuideSlug, guides[targetGuideSlug]];
 };
 
-const getNextGuideData = (chapters, guides, slug) => {
+const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Record<string, Guide>, slug: string) => {
   // Get current chapter name and guides in said chapter
-  const currentChapterName = guides?.[slug]?.['chapter_name'];
+  const currentChapterName = guides?.[slug]?.chapter_name ?? '';
   const currentChapter = chapters?.[currentChapterName];
   const guidesInChapter = currentChapter?.guides;
 
@@ -49,7 +59,7 @@ const getNextGuideData = (chapters, guides, slug) => {
   const currentChapterNumber = currentChapter?.chapter_number;
   const isFinalChapter = currentChapterNumber === chaptersArray.length;
 
-  let targetChapter = [currentChapterName, currentChapter];
+  let targetChapter: [string, ChapterData] | undefined = [currentChapterName, currentChapter];
   if (!isFinalChapter && isFinalGuideInChapter) {
     targetChapter = chaptersArray.find((chapter) => {
       const data = chapter[1];
@@ -58,9 +68,9 @@ const getNextGuideData = (chapters, guides, slug) => {
   }
 
   const isFinalGuideOnSite = isFinalChapter && isFinalGuideInChapter;
-  let targetGuide = [null, null];
+  let targetGuide: [string, Guide] | [null, null] = [null, null];
   if (!isFinalGuideOnSite) {
-    targetGuide = getTargetGuide(targetGuideIdx, targetChapter, chapters, guides);
+    targetGuide = getTargetGuide(targetGuideIdx, targetChapter?.[0] ?? '', chapters, guides);
   }
 
   return {
@@ -69,7 +79,16 @@ const getNextGuideData = (chapters, guides, slug) => {
   };
 };
 
-const GuideNext = ({ nodeData: { argument, children }, metadata, slug }) => {
+interface GuideNextProps {
+  nodeData: Directive;
+  slug: string;
+  metadata: {
+    chapters: Record<string, ChapterData>;
+    guides: Record<string, Guide>;
+  };
+}
+
+const GuideNext = ({ nodeData: { argument, children }, metadata, slug }: GuideNextProps) => {
   const { chapters, guides } = metadata;
   const { targetGuide, targetChapter } = useMemo(
     () => getNextGuideData(chapters, guides, slug),
@@ -84,22 +103,10 @@ const GuideNext = ({ nodeData: { argument, children }, metadata, slug }) => {
     <ReadGuidesContextProvider slug={slug}>
       <Container>
         <Content argument={argument} children={children} guideData={targetGuide} />
-        <ChapterInfo chapterData={targetChapter} guidesMetadata={guides} targetSlug={targetGuide?.[0]} />
+        <ChapterInfo chapterData={targetChapter} guidesMetadata={guides} targetSlug={targetGuide?.[0] ?? ''} />
       </Container>
     </ReadGuidesContextProvider>
   );
-};
-
-GuideNext.propTypes = {
-  metadata: PropTypes.shape({
-    chapters: PropTypes.object.isRequired,
-    guides: PropTypes.object.isRequired,
-  }).isRequired,
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-  slug: PropTypes.string.isRequired,
 };
 
 export default GuideNext;

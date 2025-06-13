@@ -53,7 +53,18 @@ const ChapterTitle = styled('div')`
   font-weight: bold;
 `;
 
-const ChapterInfo = ({ chapterData, guidesMetadata, targetSlug }) => {
+interface ChapterData {
+  chapter_number: number;
+  guides: Array<string>;
+}
+
+interface ChapterInfoProps {
+  chapterData: [title: string, ChapterData];
+  guidesMetadata: Record<string, { title: string }>;
+  targetSlug: string;
+}
+
+const ChapterInfo = ({ chapterData, guidesMetadata, targetSlug }: ChapterInfoProps) => {
   if (chapterData?.length < 2) {
     return null;
   }

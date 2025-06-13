@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { getPlaintext } from '../../utils/get-plaintext';
 import GuidesListItem from './GuidesListItem';
 
 const List = styled('ul')`
@@ -9,25 +7,31 @@ const List = styled('ul')`
   padding-left: 0;
 `;
 
-const GuidesList = ({ guidesMetadata, guideSlugs, targetSlug }) => {
+export interface Guide {
+  title: string;
+  description?: string;
+  chapter_name?: string;
+  completion_time?: number;
+}
+
+interface GuidesListProps {
+  guidesMetadata: Record<string, Guide>;
+  guideSlugs: Array<string>;
+  targetSlug: string;
+}
+
+const GuidesList = ({ guidesMetadata, guideSlugs, targetSlug }: GuidesListProps) => {
   return (
     <List>
       {guideSlugs.map((slug) => {
-        const title = getPlaintext(guidesMetadata[slug].title);
         return (
           <GuidesListItem key={slug} isNext={targetSlug === slug} slug={slug}>
-            {title}
+            {guidesMetadata[slug].title}
           </GuidesListItem>
         );
       })}
     </List>
   );
-};
-
-GuidesList.propTypes = {
-  guidesMetadata: PropTypes.object.isRequired,
-  guideSlugs: PropTypes.array.isRequired,
-  targetSlug: PropTypes.string,
 };
 
 export default GuidesList;
