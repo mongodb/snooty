@@ -10,7 +10,6 @@ import { HeaderContext } from './header-context';
 
 interface StyledHeaderProps {
   hasBanner: boolean;
-  template: string;
 }
 
 const StyledHeaderContainer = styled.header<StyledHeaderProps>(
@@ -41,10 +40,9 @@ const offlineClass = css`
 
 type HeaderProps = {
   eol: boolean;
-  template: string;
 };
 
-const Header = ({ eol, template }: HeaderProps) => {
+const Header = ({ eol }: HeaderProps) => {
   const unifiedNavProperty = 'DOCS';
 
   const enabledLocales = getAvailableLanguages().map((language) => language.localeCode);
@@ -53,7 +51,7 @@ const Header = ({ eol, template }: HeaderProps) => {
   return (
     <>
       <SiteBanner />
-      <StyledHeaderContainer template={template} hasBanner={!!bannerContent}>
+      <StyledHeaderContainer hasBanner={!!bannerContent}>
         <>
           {/* Two navs used intentionally: one for light mode, one for dark mode */}
           {!eol && (

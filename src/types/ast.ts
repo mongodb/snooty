@@ -187,8 +187,12 @@ interface Root extends ParentNode {
 
 interface FootnoteReferenceNode extends ParentNode {
   id: string;
-  name?: string;
   refname?: string;
+}
+
+interface FootnoteNode extends ParentNode {
+  id: string;
+  name?: string;
 }
 
 type HeadingNodeSelectorIds = {
@@ -639,6 +643,7 @@ export type {
   HeadingNodeSelectorIds,
   HighlightNode,
   HighlightRoleNames,
+  FootnoteNode,
   FootnoteReferenceNode,
   IOCodeBlockNode,
   IOInputNode,
