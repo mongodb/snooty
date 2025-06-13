@@ -1,3 +1,5 @@
+import { HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW } from '../components/Roles/Highlight';
+
 type ComponentType =
   | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
   | 'admonition'
@@ -64,12 +66,14 @@ type DirectiveName =
   | 'collapsible'
   | 'community-driver'
   | 'composable-tutorials'
+  | 'container'
   | 'contents'
   | 'deprecated'
   | 'directive'
   | 'dismissible-skills-card'
   | 'facet'
   | 'icon'
+  | 'include'
   | 'input'
   | 'io-code-block'
   | 'list-table'
@@ -87,6 +91,7 @@ type DirectiveName =
   | 'seealso'
   | 'selected-content'
   | 'sharedinclude'
+  | 'step'
   | 'substitution_reference'
   | 'tab'
   | 'tabs-selector'
@@ -121,6 +126,8 @@ type NodeType =
   | 'root'
   | 'section'
   | 'strong'
+  | 'superscript'
+  | 'subscript'
   | 'tabs'
   | 'target'
   | 'target_identifier'
@@ -134,10 +141,10 @@ export const roleNames = [
   'file',
   'guilabel',
   'icon',
-  'highlight-blue',
-  'highlight-green',
-  'highlight-red',
-  'highlight-yellow',
+  HIGHLIGHT_BLUE,
+  HIGHLIGHT_GREEN,
+  HIGHLIGHT_RED,
+  HIGHLIGHT_YELLOW,
   'icon-fa5',
   'icon-fa5-brands',
   'icon-fa4',
@@ -163,6 +170,10 @@ type DirectiveOptions = {
 
 interface Node {
   type: NodeType;
+}
+
+interface TextParentNode extends Node {
+  children: TextNode[];
 }
 
 interface ParentNode extends Node {
@@ -203,8 +214,16 @@ interface EmphasisNode extends ParentNode {
   type: 'emphasis';
 }
 
-interface StrongNode extends ParentNode {
+interface StrongNode extends TextParentNode {
   type: 'strong';
+}
+
+interface SuperscriptNode extends ParentNode {
+  type: 'superscript';
+}
+
+interface SubscriptNode extends ParentNode {
+  type: 'subscript';
 }
 
 interface ReferenceNode extends ParentNode {
@@ -230,6 +249,11 @@ type ButtonOptions = {
 
 interface ButtonNode extends Directive<ButtonOptions> {
   options: ButtonOptions;
+}
+
+interface ContainerNode extends Directive {
+  name: 'container';
+  argument: TextNode[];
 }
 
 type DismissibleSkillsCardOptions = {
@@ -342,6 +366,12 @@ interface TargetIdentifierNode extends ParentNode {
   ids: string[];
 }
 
+interface AbbrRoleNode extends ParentNode {
+  type: 'role';
+  name: 'abbr';
+  children: [TextNode];
+}
+
 type CollapsibleOptions = {
   heading?: string;
   sub_heading?: string;
@@ -399,18 +429,46 @@ interface AdmonitionNode extends Directive {
 }
 
 interface TocTreeEntry {
-  title?: string;
-  slug?: string;
+  title: [TextNode];
+  slug: string;
+  children: TocTreeEntry[];
+  options?: TocTreeOptions;
 }
 
 interface TocTreeOptions {
-  osiris_parent: boolean;
+  drawer?: boolean;
+  project?: string;
+  versions?: string[];
+  osiris_parent?: boolean;
 }
 
 interface TocTreeDirective extends Directive<TocTreeOptions> {
   type: 'directive';
   name: 'toctree';
-  entries: TocTreeEntry[];
+  entries: Array<TocTreeEntry>;
+}
+
+type BannerOptions = {
+  variant: 'info' | 'warning' | 'danger';
+};
+
+interface BannerNode extends Directive<BannerOptions> {
+  options: BannerOptions;
+}
+
+type CTABannerOptions = {
+  url: string;
+  icon?: string;
+};
+
+interface CTABannerNode extends Directive<CTABannerOptions> {
+  options: CTABannerOptions;
+}
+
+interface ClassRoleNode extends ParentNode {
+  type: 'role';
+  name: 'class';
+  target: string;
 }
 
 type CommunityDriverPillOptions = {
@@ -448,9 +506,71 @@ interface ComposableNode extends Directive {
   children: Node[];
 }
 
-interface MetaNode extends Directive {
+const highlightRoleNames = [HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW];
+type HighlightRoleNames = (typeof highlightRoleNames)[number];
+
+interface HighlightNode extends ParentNode {
+  type: 'role';
+  name: HighlightRoleNames;
+}
+
+interface LinkNewTabNode extends ParentNode {
+  type: 'role';
+  name: 'link-new-tab';
+  target: string;
+}
+
+const roleIconNames = [
+  'icon',
+  'icon-fa5-brands',
+  'iconb',
+  'icon-mms',
+  'icon-mms-org',
+  'icon-charts',
+  'icon-fa4',
+  'icon-lg',
+];
+type RoleIconNames = (typeof roleIconNames)[number];
+
+interface RoleIconNode extends ParentNode {
+  type: 'role';
+  name: RoleIconNames;
+  target: string;
+}
+
+interface RoleManualNode extends ParentNode {
+  type: 'role';
+  name: 'manual';
+  target: string;
+}
+
+type MetaOptions = {
+  description?: string;
+  canonical?: string;
+  robots?: string;
+  keywords?: string;
+};
+
+interface MetaNode extends Directive<MetaOptions> {
   type: 'directive';
   name: 'meta';
+  options: MetaOptions;
+}
+
+type ProcedureStyle = 'connected' | 'normal';
+
+type ProcedureOptions = {
+  style?: ProcedureStyle;
+  title?: string;
+};
+
+interface ProcedureNode extends Directive<ProcedureOptions> {
+  name: 'procedure';
+  options: ProcedureOptions;
+}
+
+interface StepNode extends Directive {
+  name: 'step';
 }
 
 interface TitleReferenceNode {
@@ -469,76 +589,94 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
-type BannerOptions = {
-  variant: 'info' | 'warning' | 'danger';
+type StandaloneHeaderOptions = {
+  columns: number;
+  cta: string;
+  url: string;
 };
 
-interface BannerNode extends Directive<BannerOptions> {
-  options: BannerOptions;
+interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
+  options: StandaloneHeaderOptions;
 }
 
-type CTABannerOptions = {
-  url: string;
-  icon?: string;
-};
+interface ReleaseSpecificationNode extends ParentNode {}
 
-interface CTABannerNode extends Directive<CTABannerOptions> {
-  options: CTABannerOptions;
+interface RefRoleNode extends ParentNode {
+  name: 'ref_role';
+  domain: string;
+  fileid: string[];
+  url: string;
 }
 
 export type {
-  ParentNode,
-  Root,
-  HeadingNode,
-  HeadingNodeSelectorIds,
-  ReferenceNode,
-  TextNode,
+  AbbrRoleNode,
+  AdmonitionNode,
+  AdmonitionName,
+  BannerNode,
   BlockQuoteNode,
   ButtonNode,
+  ClassRoleNode,
   CodeNode,
+  CollapsibleNode,
+  CollapsibleOptions,
   CommunityDriverPill,
+  ContentsNode,
   ComponentType,
+  ComposableNode,
+  ComposableTutorialNode,
+  ComposableTutorialOption,
+  ContainerNode,
+  CTABannerNode,
+  DefinitionListNode,
+  DefinitionListItemNode,
   Directive,
+  DirectiveArgumentNode,
   DirectiveOptions,
+  DismissibleSkillsCardNode,
+  EmphasisNode,
+  FacetNode,
+  HeadingNode,
+  HeadingNodeSelectorIds,
+  HighlightNode,
+  HighlightRoleNames,
   FootnoteReferenceNode,
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,
-  DismissibleSkillsCardNode,
+  LinkNewTabNode,
   ListNode,
   ListTableNode,
   ListItemNode,
-  ParagraphNode,
   LiteralNode,
   LineBlockNode,
   LineNode,
+  MetaNode,
+  MethodNode,
   Node,
   NodeName,
   NodeType,
+  ParagraphNode,
+  ParentNode,
+  ProcedureNode,
+  ProcedureStyle,
+  ReferenceNode,
+  StandaloneHeaderNode,
+  SuperscriptNode,
+  SubscriptNode,
+  RefRoleNode,
+  ReleaseSpecificationNode,
+  RoleIconNode,
+  RoleManualNode,
   RoleName,
-  DefinitionListNode,
-  DefinitionListItemNode,
-  MethodNode,
-  TargetIdentifierNode,
-  DirectiveArgumentNode,
-  CollapsibleNode,
-  CollapsibleOptions,
-  ContentsNode,
-  EmphasisNode,
+  Root,
+  StepNode,
   StrongNode,
-  TabsNode,
   TabNode,
+  TabsNode,
+  TargetIdentifierNode,
+  TextNode,
   TitleReferenceNode,
   TwitterNode,
-  FacetNode,
-  AdmonitionNode,
-  AdmonitionName,
   TocTreeEntry,
   TocTreeDirective,
-  ComposableNode,
-  ComposableTutorialNode,
-  ComposableTutorialOption,
-  MetaNode,
-  BannerNode,
-  CTABannerNode,
 };

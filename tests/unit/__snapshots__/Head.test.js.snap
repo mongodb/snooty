@@ -5,7 +5,7 @@ NodeList [
   <link
     class="sl_opaque"
     href="https://www.mongodb.com/"
-    hreflang="x-default"
+    hreflang="en-us"
     rel="alternate"
   />,
   <link
@@ -32,6 +32,12 @@ NodeList [
     hreflang="ja-jp"
     rel="alternate"
   />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/"
+    hreflang="x-default"
+    rel="alternate"
+  />,
 ]
 `;
 
@@ -40,7 +46,7 @@ NodeList [
   <link
     class="sl_opaque"
     href="https://www.mongodb.com/foo/"
-    hreflang="x-default"
+    hreflang="en-us"
     rel="alternate"
   />,
   <link
@@ -65,6 +71,12 @@ NodeList [
     class="sl_opaque"
     href="https://www.mongodb.com/ja-jp/foo/"
     hreflang="ja-jp"
+    rel="alternate"
+  />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/foo/"
+    hreflang="x-default"
     rel="alternate"
   />,
 ]

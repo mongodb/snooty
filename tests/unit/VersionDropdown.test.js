@@ -5,9 +5,9 @@ import * as realm from '../../src/utils/realm';
 import VersionDropdown from '../../src/components/VersionDropdown';
 import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
-import mockData from '../unit/data/VersionDropdown.test.json';
 import { VersionContextProvider } from '../../src/context/version-context';
 import { tick } from '../utils';
+import mockData from './data/VersionDropdown.test.json';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ parserBranch: 'master', snootyEnv: 'development' }),
