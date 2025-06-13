@@ -10,6 +10,7 @@ const List = styled('ul')`
 export interface Guide {
   title: string;
   description: string;
+  chapter_name?: string;
   completion_time?: number;
 }
 

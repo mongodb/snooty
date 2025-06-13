@@ -5,6 +5,7 @@ import { theme } from '../../theme/docsTheme';
 import type { Directive } from '../../types/ast';
 import Content from './Content';
 import ChapterInfo from './ChapterInfo';
+import type { Guide } from './GuidesList';
 import { ReadGuidesContextProvider } from './read-guides-context';
 
 const Container = styled('div')`
@@ -24,24 +25,18 @@ interface ChapterData {
   guides: Array<string>;
 }
 
-interface GuideData {
-  title: string;
-  chapter_name?: string;
-}
-
 const getTargetGuide = (
   targetGuideIdx: number,
-  targetChapter: Array<string>,
+  targetChapterName: string,
   chapters: Record<string, ChapterData>,
-  guides: Record<string, GuideData>
-) => {
-  const targetChapterName = targetChapter[0];
+  guides: Record<string, Guide>
+): [string, Guide] => {
   const guidesInTargetChapter = chapters[targetChapterName].guides;
   const targetGuideSlug = guidesInTargetChapter[targetGuideIdx];
   return [targetGuideSlug, guides[targetGuideSlug]];
 };
 
-const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Record<string, GuideData>, slug: string) => {
+const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Record<string, Guide>, slug: string) => {
   // Get current chapter name and guides in said chapter
   const currentChapterName = guides?.[slug]?.chapter_name ?? '';
   const currentChapter = chapters?.[currentChapterName];
@@ -66,16 +61,17 @@ const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Record<
 
   let targetChapter = [currentChapterName, currentChapter];
   if (!isFinalChapter && isFinalGuideInChapter) {
-    targetChapter = chaptersArray.find((chapter) => {
-      const data = chapter[1];
-      return data.chapter_number === currentChapterNumber + 1;
-    });
+    targetChapter =
+      chaptersArray.find((chapter) => {
+        const data = chapter[1];
+        return data.chapter_number === currentChapterNumber + 1;
+      }) ?? [];
   }
 
   const isFinalGuideOnSite = isFinalChapter && isFinalGuideInChapter;
-  let targetGuide = [null, null];
+  let targetGuide: [string, Guide] | [null, null] = [null, null];
   if (!isFinalGuideOnSite) {
-    targetGuide = getTargetGuide(targetGuideIdx, targetChapter, chapters, guides);
+    targetGuide = getTargetGuide(targetGuideIdx, targetChapter[0] as string, chapters, guides);
   }
 
   return {
@@ -89,7 +85,7 @@ interface GuideNextProps {
   slug: string;
   metadata: {
     chapters: Record<string, ChapterData>;
-    guides: Record<string, GuideData>;
+    guides: Record<string, Guide>;
   };
 }
 
