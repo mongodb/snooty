@@ -126,6 +126,8 @@ type NodeType =
   | 'root'
   | 'section'
   | 'strong'
+  | 'superscript'
+  | 'subscript'
   | 'tabs'
   | 'target'
   | 'target_identifier'
@@ -170,6 +172,10 @@ interface Node {
   type: NodeType;
 }
 
+interface TextParentNode extends Node {
+  children: TextNode[];
+}
+
 interface ParentNode extends Node {
   children: Node[];
 }
@@ -202,8 +208,16 @@ interface EmphasisNode extends ParentNode {
   type: 'emphasis';
 }
 
-interface StrongNode extends ParentNode {
+interface StrongNode extends TextParentNode {
   type: 'strong';
+}
+
+interface SuperscriptNode extends ParentNode {
+  type: 'superscript';
+}
+
+interface SubscriptNode extends ParentNode {
+  type: 'subscript';
 }
 
 interface ReferenceNode extends ParentNode {
@@ -436,12 +450,6 @@ interface BannerNode extends Directive<BannerOptions> {
   options: BannerOptions;
 }
 
-interface ClassRoleNode extends ParentNode {
-  type: 'role';
-  name: 'class';
-  target: string;
-}
-
 type CTABannerOptions = {
   url: string;
   icon?: string;
@@ -449,6 +457,12 @@ type CTABannerOptions = {
 
 interface CTABannerNode extends Directive<CTABannerOptions> {
   options: CTABannerOptions;
+}
+
+interface ClassRoleNode extends ParentNode {
+  type: 'role';
+  name: 'class';
+  target: string;
 }
 
 type CommunityDriverPillOptions = {
@@ -569,6 +583,16 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
+type StandaloneHeaderOptions = {
+  columns: number;
+  cta: string;
+  url: string;
+};
+
+interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
+  options: StandaloneHeaderOptions;
+}
+
 interface ReleaseSpecificationNode extends ParentNode {}
 
 interface RefRoleNode extends ParentNode {
@@ -629,6 +653,9 @@ export type {
   ProcedureNode,
   ProcedureStyle,
   ReferenceNode,
+  StandaloneHeaderNode,
+  SuperscriptNode,
+  SubscriptNode,
   RefRoleNode,
   ReleaseSpecificationNode,
   RoleIconNode,
