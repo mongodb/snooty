@@ -256,13 +256,18 @@ interface DismissibleSkillsCardNode extends Directive<DismissibleSkillsCardOptio
   options: DismissibleSkillsCardOptions;
 }
 
-interface ListTableNode extends Directive {
+type ListTableOptions = {
+  align?: string;
+  width?: string;
+  widths?: string;
+  'header-rows'?: string;
+  'stub-columns'?: string;
+};
+
+interface ListTableNode extends Directive<ListTableOptions> {
   name: 'list-table';
   children: ListNode[];
-  options?: {
-    widths?: string;
-    'header-rows'?: string;
-  };
+  options?: ListTableOptions;
 }
 
 interface ListNode extends ParentNode {
@@ -382,6 +387,7 @@ interface ContentsNode extends Directive<ContentsOptions> {
 interface TabsNode extends Directive {
   type: 'directive';
   name: 'tabs';
+  children: TabNode[];
 }
 
 interface TabOptions {

@@ -11,7 +11,7 @@ import { theme } from '../theme/docsTheme';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { disabledStyle } from '../styles/button';
 import { HeadingNode } from '../types/ast';
-import ComponentFactory from './ComponentFactory';
+import ComponentFactory, { ComponentFactoryProps } from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
 import { InstruqtContext } from './Instruqt/instruqt-context';
@@ -76,7 +76,7 @@ function toHeadingTag(n: number): HeadingTag {
   return 'h6';
 }
 
-export type HeadingProps = {
+export type HeadingProps = ComponentFactoryProps & {
   nodeData: HeadingNode;
   sectionDepth: number;
   as?: number;
@@ -148,7 +148,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }: HeadingProp
       {isPageTitle && isTabletOrMobile && showRating && (
         <>
           <TimeRequired />
-          <Contents className={contentsStyle} slug={rest.slug} />
+          <Contents className={contentsStyle} slug={rest.slug ?? ''} />
         </>
       )}
     </>
