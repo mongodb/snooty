@@ -1,4 +1,5 @@
 import React from 'react';
+
 type IconSwiftProps = React.SVGProps<SVGSVGElement>;
 
 const IconSwift = (styles: IconSwiftProps) => (

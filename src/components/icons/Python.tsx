@@ -1,4 +1,5 @@
 import React, { useId } from 'react';
+
 type IconPythonProps = React.SVGProps<SVGSVGElement>;
 
 const IconPython = (styles: IconPythonProps) => {

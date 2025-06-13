@@ -1,4 +1,5 @@
 import React, { useId } from 'react';
+
 type IconScalaProps = React.SVGProps<SVGSVGElement>;
 
 const IconScala = (styles: IconScalaProps) => {

@@ -13,11 +13,6 @@ interface StyledHeaderProps {
   template: string;
 }
 
-type HeaderProps = {
-  eol: boolean;
-  template: string;
-};
-
 const StyledHeaderContainer = styled.header<StyledHeaderProps>(
   (props) => `
   grid-area: header;
@@ -43,6 +38,11 @@ const offlineClass = css`
     display: none;
   }
 `;
+
+type HeaderProps = {
+  eol: boolean;
+  template: string;
+};
 
 const Header = ({ eol, template }: HeaderProps) => {
   const unifiedNavProperty = 'DOCS';

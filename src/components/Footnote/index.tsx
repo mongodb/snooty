@@ -59,8 +59,8 @@ const Footnote = ({ nodeData: { children, id, name }, ...rest }: FootnoteReferen
       <colgroup>
         <col />
       </colgroup>
-      <tbody {...{ valign: 'top' }}>
-        <tr>
+      <tbody>
+        <tr style={{ verticalAlign: 'top' }}>
           <td className={cx(tdStyling)}>
             [{footnoteReferenceNodes.length !== 1 ? label : <a href={`#ref-${uid}${footnoteReferences[0]}`}>{label}</a>}
             ]
