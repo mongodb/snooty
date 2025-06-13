@@ -15,6 +15,7 @@ import { getLocalValue } from '../../utils/browser-storage';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { TABS_CLASSNAME } from '../../utils/head-scripts/offline-ui/tabs';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { TabsNode } from '../../types/ast';
 import { TabContext } from './tab-context';
 import { TabHashContext, TabHashProvider } from './tab-hash-context';
 
@@ -118,7 +119,13 @@ const offlineStyling = css`
   }
 `;
 
-const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
+export type TabsProps = {
+  nodeData: TabsNode;
+  // TODO: Fix before PR
+  page: any;
+};
+
+const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps) => {
   const { hash } = useLocation();
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const { setActiveTabToHashTab } = useContext(TabHashContext);
@@ -167,7 +174,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   }, [activeTabs, tabIds, tabsetName]);
 
   const handleClick = useCallback(
-    (index) => {
+    (index: number) => {
       if (activeTab === index) {
         return;
       }
