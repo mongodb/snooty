@@ -16,6 +16,8 @@ export type PageTemplateType =
 
 interface PageOptions {
   has_composable_tutorial?: boolean;
+  hidefeedback: string;
+  [key: string]: any;
 }
 
 interface PageContextType {

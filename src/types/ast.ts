@@ -1,3 +1,5 @@
+import { HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW } from '../components/Roles/Highlight';
+
 type ComponentType =
   | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
   | 'admonition'
@@ -71,6 +73,7 @@ type DirectiveName =
   | 'dismissible-skills-card'
   | 'facet'
   | 'icon'
+  | 'include'
   | 'input'
   | 'io-code-block'
   | 'list-table'
@@ -88,6 +91,7 @@ type DirectiveName =
   | 'seealso'
   | 'selected-content'
   | 'sharedinclude'
+  | 'step'
   | 'substitution_reference'
   | 'tab'
   | 'tabs-selector'
@@ -122,6 +126,8 @@ type NodeType =
   | 'root'
   | 'section'
   | 'strong'
+  | 'superscript'
+  | 'subscript'
   | 'tabs'
   | 'target'
   | 'target_identifier'
@@ -135,10 +141,10 @@ export const roleNames = [
   'file',
   'guilabel',
   'icon',
-  'highlight-blue',
-  'highlight-green',
-  'highlight-red',
-  'highlight-yellow',
+  HIGHLIGHT_BLUE,
+  HIGHLIGHT_GREEN,
+  HIGHLIGHT_RED,
+  HIGHLIGHT_YELLOW,
   'icon-fa5',
   'icon-fa5-brands',
   'icon-fa4',
@@ -164,6 +170,10 @@ type DirectiveOptions = {
 
 interface Node {
   type: NodeType;
+}
+
+interface TextParentNode extends Node {
+  children: TextNode[];
 }
 
 interface ParentNode extends Node {
@@ -198,8 +208,16 @@ interface EmphasisNode extends ParentNode {
   type: 'emphasis';
 }
 
-interface StrongNode extends ParentNode {
+interface StrongNode extends TextParentNode {
   type: 'strong';
+}
+
+interface SuperscriptNode extends ParentNode {
+  type: 'superscript';
+}
+
+interface SubscriptNode extends ParentNode {
+  type: 'subscript';
 }
 
 interface ReferenceNode extends ParentNode {
@@ -342,6 +360,12 @@ interface TargetIdentifierNode extends ParentNode {
   ids: string[];
 }
 
+interface AbbrRoleNode extends ParentNode {
+  type: 'role';
+  name: 'abbr';
+  children: [TextNode];
+}
+
 type CollapsibleOptions = {
   heading?: string;
   sub_heading?: string;
@@ -418,6 +442,29 @@ interface TocTreeDirective extends Directive<TocTreeOptions> {
   entries: Array<TocTreeEntry>;
 }
 
+type BannerOptions = {
+  variant: 'info' | 'warning' | 'danger';
+};
+
+interface BannerNode extends Directive<BannerOptions> {
+  options: BannerOptions;
+}
+
+type CTABannerOptions = {
+  url: string;
+  icon?: string;
+};
+
+interface CTABannerNode extends Directive<CTABannerOptions> {
+  options: CTABannerOptions;
+}
+
+interface ClassRoleNode extends ParentNode {
+  type: 'role';
+  name: 'class';
+  target: string;
+}
+
 type CommunityDriverPillOptions = {
   url: string;
 };
@@ -453,6 +500,44 @@ interface ComposableNode extends Directive {
   children: Node[];
 }
 
+const highlightRoleNames = [HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW];
+type HighlightRoleNames = (typeof highlightRoleNames)[number];
+
+interface HighlightNode extends ParentNode {
+  type: 'role';
+  name: HighlightRoleNames;
+}
+
+interface LinkNewTabNode extends ParentNode {
+  type: 'role';
+  name: 'link-new-tab';
+  target: string;
+}
+
+const roleIconNames = [
+  'icon',
+  'icon-fa5-brands',
+  'iconb',
+  'icon-mms',
+  'icon-mms-org',
+  'icon-charts',
+  'icon-fa4',
+  'icon-lg',
+];
+type RoleIconNames = (typeof roleIconNames)[number];
+
+interface RoleIconNode extends ParentNode {
+  type: 'role';
+  name: RoleIconNames;
+  target: string;
+}
+
+interface RoleManualNode extends ParentNode {
+  type: 'role';
+  name: 'manual';
+  target: string;
+}
+
 type MetaOptions = {
   description?: string;
   canonical?: string;
@@ -464,6 +549,22 @@ interface MetaNode extends Directive<MetaOptions> {
   type: 'directive';
   name: 'meta';
   options: MetaOptions;
+}
+
+type ProcedureStyle = 'connected' | 'normal';
+
+type ProcedureOptions = {
+  style?: ProcedureStyle;
+  title?: string;
+};
+
+interface ProcedureNode extends Directive<ProcedureOptions> {
+  name: 'procedure';
+  options: ProcedureOptions;
+}
+
+interface StepNode extends Directive {
+  name: 'step';
 }
 
 interface TitleReferenceNode {
@@ -482,21 +583,14 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
-type BannerOptions = {
-  variant: 'info' | 'warning' | 'danger';
-};
-
-interface BannerNode extends Directive<BannerOptions> {
-  options: BannerOptions;
-}
-
-type CTABannerOptions = {
+type StandaloneHeaderOptions = {
+  columns: number;
+  cta: string;
   url: string;
-  icon?: string;
 };
 
-interface CTABannerNode extends Directive<CTABannerOptions> {
-  options: CTABannerOptions;
+interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
+  options: StandaloneHeaderOptions;
 }
 
 interface SubstitutionReferenceNode extends ParentNode {
@@ -521,62 +615,75 @@ interface RefRoleNode extends ParentNode {
 }
 
 export type {
-  ParentNode,
-  Root,
-  HeadingNode,
-  HeadingNodeSelectorIds,
-  ReferenceNode,
-  TextNode,
-  BlockQuoteNode,
-  ButtonNode,
-  CodeNode,
-  CommunityDriverPill,
-  ComponentType,
-  ContainerNode,
-  Directive,
-  DirectiveOptions,
-  IOCodeBlockNode,
-  IOInputNode,
-  IOOutputNode,
-  DismissibleSkillsCardNode,
-  ListNode,
-  ListTableNode,
-  ListItemNode,
-  ParagraphNode,
-  LiteralNode,
-  LineBlockNode,
-  LineNode,
-  Node,
-  NodeName,
-  NodeType,
-  RoleName,
-  DefinitionListNode,
-  DefinitionListItemNode,
-  MethodNode,
-  TargetIdentifierNode,
-  DirectiveArgumentNode,
-  CollapsibleNode,
-  CollapsibleOptions,
-  ContentsNode,
-  EmphasisNode,
-  StrongNode,
-  TabsNode,
-  TabNode,
-  TitleReferenceNode,
-  TwitterNode,
-  FacetNode,
+  AbbrRoleNode,
   AdmonitionNode,
   AdmonitionName,
-  TocTreeEntry,
-  TocTreeDirective,
+  BannerNode,
+  BlockQuoteNode,
+  ButtonNode,
+  ClassRoleNode,
+  CodeNode,
+  CollapsibleNode,
+  CollapsibleOptions,
+  CommunityDriverPill,
+  ContentsNode,
+  ComponentType,
   ComposableNode,
   ComposableTutorialNode,
   ComposableTutorialOption,
-  MetaNode,
-  BannerNode,
+  ContainerNode,
   CTABannerNode,
-  SubstitutionReferenceNode,
-  TargetNode,
-  ReleaseSpecificationNode,
+  DefinitionListNode,
+  DefinitionListItemNode,
+  Directive,
+  DirectiveArgumentNode,
+  DirectiveOptions,
+  DismissibleSkillsCardNode,
+  EmphasisNode,
+  FacetNode,
+  HeadingNode,
+  HeadingNodeSelectorIds,
+  HighlightNode,
+  HighlightRoleNames,
+  IOCodeBlockNode,
+  IOInputNode,
+  IOOutputNode,
+  LinkNewTabNode,
+  ListNode,
+  ListTableNode,
+  ListItemNode,
+  LiteralNode,
+  LineBlockNode,
+  LineNode,
+  MetaNode,
+  MethodNode,
+  Node,
+  NodeName,
+  NodeType,
+  ParagraphNode,
+  ParentNode,
+  ProcedureNode,
+  ProcedureStyle,
+  ReferenceNode,
+  StandaloneHeaderNode,
+  SuperscriptNode,
+  SubscriptNode,
   RefRoleNode,
+  ReleaseSpecificationNode,
+  RoleIconNode,
+  RoleManualNode,
+  RoleName,
+  Root,
+  StepNode,
+  StrongNode,
+  SubstitutionReferenceNode,
+  TabNode,
+  TabsNode,
+  TargetIdentifierNode,
+  TargetNode,
+  TextNode,
+  TitleReferenceNode,
+  TwitterNode,
+  TocTreeEntry,
+  TocTreeDirective,
 };
