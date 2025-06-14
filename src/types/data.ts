@@ -1,6 +1,7 @@
-import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
-import { PageTemplateType } from '../context/page-context';
-import { ParagraphNode, TextNode, TocTreeEntry } from './ast';
+import type { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
+import type { MultiPageTutorial } from '../components/MultiPageTutorials/hooks/use-active-mp-tutorial';
+import type { PageTemplateType } from '../context/page-context';
+import type { ParagraphNode, TextNode, TocTreeEntry } from './ast';
 
 type EOLType = 'download' | 'link';
 
@@ -89,6 +90,8 @@ type RemoteMetadata = {
   iatree?: IATreeNode;
   openapi_pages?: Record<string, OpenApiPage>;
   associated_products?: AssociatedProduct[];
+  multiPageTutorials?: Record<string, MultiPageTutorial>;
+  slugToBreadcrumbLabel?: Record<string, string>;
 };
 
 // TODO: Refine structure
