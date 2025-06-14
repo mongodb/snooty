@@ -14,7 +14,7 @@ const FeedbackContainer = ({ children, className }) => {
   });
 
   return (
-    <div className={cx(className)} ref={ref}>
+    <div className={cx(className)} ref={ref} data-testid="feedback-container">
       {children}
     </div>
   );

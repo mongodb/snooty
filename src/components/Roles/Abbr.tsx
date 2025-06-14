@@ -1,13 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import InlineDefinition from '@leafygreen-ui/inline-definition';
 import { theme } from '../../theme/docsTheme';
+import { AbbrRoleNode } from '../../types/ast';
+
+export type AbbrProps = {
+  nodeData: AbbrRoleNode;
+};
 
 const Abbr = ({
   nodeData: {
     children: [{ value }],
   },
-}) => {
+}: AbbrProps) => {
   if (!value) {
     return null;
   }
@@ -23,16 +27,6 @@ const Abbr = ({
       {abbr}
     </InlineDefinition>
   );
-};
-
-Abbr.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
 };
 
 export default Abbr;

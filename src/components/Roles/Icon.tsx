@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import Badge from '@leafygreen-ui/badge';
-import { css } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
+import { RoleIconNode } from '../../types/ast';
 
 const cloudSyncStyle = css`
   padding-right: 7px;
@@ -20,15 +20,19 @@ const leafyGreenIconStyle = css`
   vertical-align: middle;
 `;
 
-const RoleIcon = ({ nodeData: { target, name } }) => {
+export type RoleIconProps = {
+  nodeData: RoleIconNode;
+};
+
+const RoleIcon = ({ nodeData: { target, name } }: RoleIconProps) => {
   if (target === 'sync-pill') {
     return (
-      <Badge variant="lightgray" css={syncPillStyle}>
-        <img src={withPrefix('assets/cloud.png')} alt="Sync" css={cloudSyncStyle} />
+      <Badge variant="lightgray" className={cx(syncPillStyle)}>
+        <img src={withPrefix('assets/cloud.png')} alt="Sync" className={cx(cloudSyncStyle)} />
         APP SERVICES
       </Badge>
     );
-  } else if ((name === 'icon') | (name === 'icon-fa5')) {
+  } else if (name === 'icon' || name === 'icon-fa5') {
     return <i className={`fa-${target} fas`}></i>;
   } else if (name === 'icon-fa5-brands') {
     return <i className={`fab fa-${target}`}></i>;
@@ -39,15 +43,8 @@ const RoleIcon = ({ nodeData: { target, name } }) => {
   } else if (name === 'icon-mms') {
     return <i className={`mms-icon-${target} mms-icon`}></i>;
   } else if (name === 'icon-lg') {
-    return <Icon glyph={target} css={leafyGreenIconStyle} />;
+    return <Icon glyph={target} className={cx(leafyGreenIconStyle)} />;
   }
-};
-
-RoleIcon.propTypes = {
-  nodeData: PropTypes.shape({
-    target: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default RoleIcon;
