@@ -40,7 +40,7 @@ export const MPTNextLinkMini = () => {
       <Button
         className={cx(buttonStyle, navLinkButtonStyle)}
         as={Link}
-        href={activeTutorial?.next?.targetSlug}
+        to={activeTutorial?.next?.targetSlug}
         title={LINK_TITLE}
         leftGlyph={<Icon glyph={glyphs.ArrowRight.displayName ?? 'ArrowRight'} />}
         size="xsmall"
