@@ -9,8 +9,8 @@ interface TutorialPage {
 export interface MultiPageTutorial {
   slugs: string[];
   total_steps: number;
-  next: TutorialPage | null;
-  prev: TutorialPage | null;
+  next?: TutorialPage | null;
+  prev?: TutorialPage | null;
 }
 
 const addPrevNextTutorials = (
