@@ -6,5 +6,5 @@ export const useMptPageOptions = () => {
   if (!options || Object.keys(options).length === 0) {
     return;
   }
-  return options[PAGE_OPTION_NAME as keyof typeof options];
+  return options[PAGE_OPTION_NAME];
 };

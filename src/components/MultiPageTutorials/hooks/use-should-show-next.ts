@@ -6,6 +6,6 @@ export const useShouldShowNext = () => {
   const activeTutorial = useActiveMpTutorial();
   const options = useMptPageOptions();
   const hasNextTutorial = activeTutorial && !!activeTutorial.next;
-  const hasPageOption = !!options?.[OPTION_KEY_SHOW_NEXT_TOP as keyof typeof options];
+  const hasPageOption = !!options?.[OPTION_KEY_SHOW_NEXT_TOP];
   return hasPageOption && hasNextTutorial;
 };

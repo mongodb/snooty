@@ -14,6 +14,8 @@ export type PageTemplateType =
   | 'guide'
   | 'product-landing';
 
+export type PageOptionsKeys = keyof PageOptions;
+
 interface PageOptions {
   has_composable_tutorial?: boolean;
   time_required?: number;

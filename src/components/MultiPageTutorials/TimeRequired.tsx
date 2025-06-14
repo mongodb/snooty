@@ -15,7 +15,7 @@ const timeBaseStyle = css`
 
 export const TimeRequired = () => {
   const options = useMptPageOptions();
-  const time = options?.[OPTION_KEY_TIME_REQUIRED as keyof typeof options];
+  const time = options?.[OPTION_KEY_TIME_REQUIRED];
 
   if (!time) {
     return null;
