@@ -16,7 +16,7 @@ export interface MultiPageTutorial {
 const addPrevNextTutorials = (
   slugTitleMapping: Record<string, string>,
   slug: string,
-  activeTutorial: MultiPageTutorial | null
+  activeTutorial?: MultiPageTutorial | null
 ) => {
   if (!activeTutorial || Object.keys(activeTutorial).length === 0) {
     return;
