@@ -52,6 +52,7 @@ type Group = {
   id?: string;
   groupLabel: string;
   includedBranches: string[];
+  sharedSlugPrefix?: string;
 };
 
 type MetadataDatabaseName = 'snooty_stage' | 'snooty_prod' | 'snooty_dotcomstg' | 'snooty_dotcomprd' | 'snooty_dev';

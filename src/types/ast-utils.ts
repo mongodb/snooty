@@ -1,5 +1,14 @@
 import { isObject, isString } from 'lodash';
-import { Directive, ParentNode, TextNode, RoleName, HeadingNode, roleNames } from './ast';
+import {
+  Directive,
+  ParentNode,
+  TextNode,
+  RoleName,
+  HeadingNode,
+  roleNames,
+  WayfindingOptionNode,
+  WayfindingDescriptionNode,
+} from './ast';
 
 const isTextNode = (node: unknown): node is TextNode => {
   return isObject(node) && 'type' in node && node.type === 'text' && 'value' in node && isString(node.value);
@@ -23,4 +32,20 @@ const isHeadingNode = (node: unknown): node is HeadingNode => {
   return isParentNode(node) && 'type' in node && node.type === 'heading';
 };
 
-export { isTextNode, isParentNode, isDirectiveNode, isRoleName, isHeadingNode };
+const isWayfindingOptionNode = (node: unknown): node is WayfindingOptionNode => {
+  return isDirectiveNode(node) && node.name === 'wayfinding-option';
+};
+
+const isWayfindingDescriptionNode = (node: unknown): node is WayfindingDescriptionNode => {
+  return isDirectiveNode(node) && node.name === 'wayfinding-description';
+};
+
+export {
+  isTextNode,
+  isParentNode,
+  isDirectiveNode,
+  isRoleName,
+  isHeadingNode,
+  isWayfindingOptionNode,
+  isWayfindingDescriptionNode,
+};

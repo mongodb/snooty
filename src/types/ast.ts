@@ -102,7 +102,9 @@ type DirectiveName =
   | 'versionadded'
   | 'versionchanged'
   | 'tabs'
-  | 'wayfinding';
+  | 'wayfinding'
+  | 'wayfinding-option'
+  | 'wayfinding-description';
 
 type NodeType =
   | 'code'
@@ -583,6 +585,35 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
+interface VideoOptions {
+  title: string;
+  description: string;
+  'upload-date': string;
+  'thumbnail-url': string;
+}
+
+interface VideoNode extends Directive<VideoOptions> {
+  argument: Array<ReferenceNode>;
+}
+
+interface WayfindingDescriptionNode extends Directive {
+  name: 'wayfinding-description';
+}
+
+interface WayfindingNode extends Directive {
+  argument: Array<ReferenceNode>;
+}
+
+interface WayfindingOptionOptions {
+  title: string;
+  language: string;
+  id: string;
+}
+
+interface WayfindingOptionNode extends Directive<WayfindingOptionOptions> {
+  argument: Array<ReferenceNode>;
+}
+
 type StandaloneHeaderOptions = {
   columns: number;
   cta: string;
@@ -672,4 +703,8 @@ export type {
   TwitterNode,
   TocTreeEntry,
   TocTreeDirective,
+  VideoNode,
+  WayfindingDescriptionNode,
+  WayfindingNode,
+  WayfindingOptionNode,
 };
