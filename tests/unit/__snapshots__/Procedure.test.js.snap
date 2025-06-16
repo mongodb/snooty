@@ -29,18 +29,18 @@ exports[`renders correctly 1`] = `
   }
 }
 
-.emotion-2 {
+.emotion-1 {
   position: relative;
   gap: 33px;
 }
 
-.emotion-2 h2,
-.emotion-2 h3,
-.emotion-2 h4 {
+.emotion-1 h2,
+.emotion-1 h3,
+.emotion-1 h4 {
   margin-top: 4px;
 }
 
-.emotion-2:not(:last-child):before {
+.emotion-1:not(:last-child):before {
   content: '';
   border-left: 2px dashed #E8EDEB;
   bottom: 0;
@@ -49,23 +49,23 @@ exports[`renders correctly 1`] = `
   top: 0;
 }
 
-.dark-theme .emotion-2:not(:last-child):before {
+.dark-theme .emotion-1:not(:last-child):before {
   border-left-color: #5C6C75;
 }
 
-.emotion-3 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.emotion-5 {
+.emotion-3 {
   position: relative;
   min-height: 59px;
 }
 
-.emotion-7 {
+.emotion-4 {
   position: relative;
   font-weight: bold;
   background-color: #E3FCF7;
@@ -74,12 +74,12 @@ exports[`renders correctly 1`] = `
   width: 34px;
 }
 
-.dark-theme .emotion-7 {
+.dark-theme .emotion-4 {
   background-color: #00684A;
   color: #E8EDEB;
 }
 
-.emotion-8 {
+.emotion-5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -95,30 +95,30 @@ exports[`renders correctly 1`] = `
   justify-content: center;
 }
 
-.emotion-10 {
+.emotion-6 {
   padding-bottom: 64px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-10 {
+  .emotion-6 {
     padding-bottom: 40px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-10 {
+  .emotion-6 {
     padding-bottom: 32px;
   }
 }
 
-.emotion-11 {
+.emotion-7 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
   min-width: 0;
 }
 
-.emotion-13 {
+.emotion-8 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -130,12 +130,12 @@ exports[`renders correctly 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-13 strong,
-.emotion-13 b {
+.emotion-8 strong,
+.emotion-8 b {
   font-weight: 700;
 }
 
-.emotion-15 {
+.emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -150,13 +150,13 @@ exports[`renders correctly 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-15>code {
+.emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-15:focus,
-.emotion-15:hover {
+.emotion-10:focus,
+.emotion-10:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -164,43 +164,43 @@ exports[`renders correctly 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-15:focus {
+.emotion-10:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-15:hover {
+.emotion-10:hover {
   text-decoration-color: #E8EDEB;
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           1
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <p
-          class="emotion-13"
+          class="emotion-8"
         >
           Connect to a MongoDB deployment hosted on MongoDB Atlas, or a deployment hosted locally on your own machine.
         </p>
         <p
-          class="emotion-13"
+          class="emotion-8"
         >
           <a
-            class="emotion-15"
+            class="emotion-10"
             href="/connect/#std-label-connect-run-compass"
           >
             To learn more, see Connect to MongoDB
@@ -209,30 +209,30 @@ exports[`renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           2
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <p
-          class="emotion-13"
+          class="emotion-8"
         >
           Import data from CSV or JSON files into your MongoDB database.
         </p>
         <p
-          class="emotion-13"
+          class="emotion-8"
         >
           <a
-            class="emotion-15"
+            class="emotion-10"
             href="/import-export/#std-label-compass-import-export"
           >
             To learn more, see Import and Export Data
@@ -267,18 +267,18 @@ exports[`renders steps nested in include nodes 1`] = `
   }
 }
 
-.emotion-2 {
+.emotion-1 {
   position: relative;
   gap: 33px;
 }
 
-.emotion-2 h2,
-.emotion-2 h3,
-.emotion-2 h4 {
+.emotion-1 h2,
+.emotion-1 h3,
+.emotion-1 h4 {
   margin-top: 4px;
 }
 
-.emotion-2:not(:last-child):before {
+.emotion-1:not(:last-child):before {
   content: '';
   border-left: 2px dashed #E8EDEB;
   bottom: 0;
@@ -287,23 +287,23 @@ exports[`renders steps nested in include nodes 1`] = `
   top: 0;
 }
 
-.dark-theme .emotion-2:not(:last-child):before {
+.dark-theme .emotion-1:not(:last-child):before {
   border-left-color: #5C6C75;
 }
 
-.emotion-3 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.emotion-5 {
+.emotion-3 {
   position: relative;
   min-height: 59px;
 }
 
-.emotion-7 {
+.emotion-4 {
   position: relative;
   font-weight: bold;
   background-color: #E3FCF7;
@@ -312,12 +312,12 @@ exports[`renders steps nested in include nodes 1`] = `
   width: 34px;
 }
 
-.dark-theme .emotion-7 {
+.dark-theme .emotion-4 {
   background-color: #00684A;
   color: #E8EDEB;
 }
 
-.emotion-8 {
+.emotion-5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -333,30 +333,30 @@ exports[`renders steps nested in include nodes 1`] = `
   justify-content: center;
 }
 
-.emotion-10 {
+.emotion-6 {
   padding-bottom: 64px;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-10 {
+  .emotion-6 {
     padding-bottom: 40px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-10 {
+  .emotion-6 {
     padding-bottom: 32px;
   }
 }
 
-.emotion-11 {
+.emotion-7 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
   min-width: 0;
 }
 
-.emotion-13 {
+.emotion-8 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -372,7 +372,7 @@ exports[`renders steps nested in include nodes 1`] = `
   margin-bottom: 24px;
 }
 
-.emotion-14 {
+.emotion-9 {
   position: absolute;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
@@ -381,13 +381,13 @@ exports[`renders steps nested in include nodes 1`] = `
   visibility: hidden;
 }
 
-.emotion-15 {
+.emotion-10 {
   color: #889397;
   vertical-align: middle;
   margin-top: -2px;
 }
 
-.emotion-16 {
+.emotion-11 {
   display: inline;
   left: 0;
   top: 0;
@@ -397,12 +397,12 @@ exports[`renders steps nested in include nodes 1`] = `
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-16 {
+  .emotion-11 {
     margin-top: -85px;
   }
 }
 
-.emotion-18 {
+.emotion-12 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -414,43 +414,43 @@ exports[`renders steps nested in include nodes 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-18 strong,
-.emotion-18 b {
+.emotion-12 strong,
+.emotion-12 b {
   font-weight: 700;
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           1
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <section>
           <h1
-            class="contains-headerlink emotion-13"
+            class="contains-headerlink emotion-8"
             weight="medium"
           >
             Step 1
             <a
-              class="headerlink emotion-14"
+              class="headerlink emotion-9"
               href="#step-1"
               title="Permalink to this heading"
             >
               <svg
                 aria-label="Link Icon"
-                class="emotion-15"
+                class="emotion-10"
                 fill="none"
                 height="12"
                 role="img"
@@ -468,13 +468,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-16 emotion-17"
+                class="emotion-11"
                 id="step-1"
               />
             </a>
           </h1>
           <p
-            class="emotion-18"
+            class="emotion-12"
           >
             Content for step 1
           </p>
@@ -482,34 +482,34 @@ exports[`renders steps nested in include nodes 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           2
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <section>
           <h1
-            class="contains-headerlink emotion-13"
+            class="contains-headerlink emotion-8"
             weight="medium"
           >
             Step 2
             <a
-              class="headerlink emotion-14"
+              class="headerlink emotion-9"
               href="#step-2"
               title="Permalink to this heading"
             >
               <svg
                 aria-label="Link Icon"
-                class="emotion-15"
+                class="emotion-10"
                 fill="none"
                 height="12"
                 role="img"
@@ -527,13 +527,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-16 emotion-17"
+                class="emotion-11"
                 id="step-2"
               />
             </a>
           </h1>
           <p
-            class="emotion-18"
+            class="emotion-12"
           >
             Content for step 2
           </p>
@@ -541,34 +541,34 @@ exports[`renders steps nested in include nodes 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           3
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <section>
           <h1
-            class="contains-headerlink emotion-13"
+            class="contains-headerlink emotion-8"
             weight="medium"
           >
             Step 3
             <a
-              class="headerlink emotion-14"
+              class="headerlink emotion-9"
               href="#step-3"
               title="Permalink to this heading"
             >
               <svg
                 aria-label="Link Icon"
-                class="emotion-15"
+                class="emotion-10"
                 fill="none"
                 height="12"
                 role="img"
@@ -586,13 +586,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-16 emotion-17"
+                class="emotion-11"
                 id="step-3"
               />
             </a>
           </h1>
           <p
-            class="emotion-18"
+            class="emotion-12"
           >
             Content for step 3
           </p>
@@ -600,34 +600,34 @@ exports[`renders steps nested in include nodes 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           4
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <section>
           <h1
-            class="contains-headerlink emotion-13"
+            class="contains-headerlink emotion-8"
             weight="medium"
           >
             Step 4
             <a
-              class="headerlink emotion-14"
+              class="headerlink emotion-9"
               href="#step-4"
               title="Permalink to this heading"
             >
               <svg
                 aria-label="Link Icon"
-                class="emotion-15"
+                class="emotion-10"
                 fill="none"
                 height="12"
                 role="img"
@@ -645,13 +645,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-16 emotion-17"
+                class="emotion-11"
                 id="step-4"
               />
             </a>
           </h1>
           <p
-            class="emotion-18"
+            class="emotion-12"
           >
             Content for step 4
           </p>
@@ -659,34 +659,34 @@ exports[`renders steps nested in include nodes 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           5
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <section>
           <h1
-            class="contains-headerlink emotion-13"
+            class="contains-headerlink emotion-8"
             weight="medium"
           >
             Step 5
             <a
-              class="headerlink emotion-14"
+              class="headerlink emotion-9"
               href="#step-5"
               title="Permalink to this heading"
             >
               <svg
                 aria-label="Link Icon"
-                class="emotion-15"
+                class="emotion-10"
                 fill="none"
                 height="12"
                 role="img"
@@ -704,13 +704,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-16 emotion-17"
+                class="emotion-11"
                 id="step-5"
               />
             </a>
           </h1>
           <p
-            class="emotion-18"
+            class="emotion-12"
           >
             Content for step 5
           </p>
@@ -718,34 +718,34 @@ exports[`renders steps nested in include nodes 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           6
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <section>
           <h1
-            class="contains-headerlink emotion-13"
+            class="contains-headerlink emotion-8"
             weight="medium"
           >
             Step 6
             <a
-              class="headerlink emotion-14"
+              class="headerlink emotion-9"
               href="#step-6"
               title="Permalink to this heading"
             >
               <svg
                 aria-label="Link Icon"
-                class="emotion-15"
+                class="emotion-10"
                 fill="none"
                 height="12"
                 role="img"
@@ -763,13 +763,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-16 emotion-17"
+                class="emotion-11"
                 id="step-6"
               />
             </a>
           </h1>
           <p
-            class="emotion-18"
+            class="emotion-12"
           >
             Content for step 6
           </p>
@@ -777,34 +777,34 @@ exports[`renders steps nested in include nodes 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           7
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <section>
           <h1
-            class="contains-headerlink emotion-13"
+            class="contains-headerlink emotion-8"
             weight="medium"
           >
             Step 7
             <a
-              class="headerlink emotion-14"
+              class="headerlink emotion-9"
               href="#step-7"
               title="Permalink to this heading"
             >
               <svg
                 aria-label="Link Icon"
-                class="emotion-15"
+                class="emotion-10"
                 fill="none"
                 height="12"
                 role="img"
@@ -822,13 +822,13 @@ exports[`renders steps nested in include nodes 1`] = `
                 />
               </svg>
               <div
-                class="emotion-16 emotion-17"
+                class="emotion-11"
                 id="step-7"
               />
             </a>
           </h1>
           <p
-            class="emotion-18"
+            class="emotion-12"
           >
             Content for step 7
           </p>
@@ -850,34 +850,34 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   background-color: #001E2B;
 }
 
-.emotion-2 {
+.emotion-1 {
   gap: 16px;
 }
 
-.emotion-2 h2,
-.emotion-2 h4,
-.emotion-2 h5,
-.emotion-2 h6 {
+.emotion-1 h2,
+.emotion-1 h4,
+.emotion-1 h5,
+.emotion-1 h6 {
   margin-top: unset;
 }
 
-.emotion-2 h3 {
+.emotion-1 h3 {
   margin-top: 2px;
 }
 
-.emotion-3 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.emotion-5 {
+.emotion-3 {
   position: relative;
   min-height: 59px;
 }
 
-.emotion-7 {
+.emotion-4 {
   border: 1.5px solid #C1C7C6;
   font-weight: 500;
   font-size: 16px;
@@ -888,7 +888,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   width: 27px;
 }
 
-.emotion-8 {
+.emotion-5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -904,20 +904,20 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   justify-content: center;
 }
 
-.emotion-10 section>*,
-.emotion-10 ol p,
-.emotion-10 ul p {
+.emotion-6 section>*,
+.emotion-6 ol p,
+.emotion-6 ul p {
   margin-bottom: 16px;
 }
 
-.emotion-11 {
+.emotion-7 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
   min-width: 0;
 }
 
-.emotion-13 {
+.emotion-8 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -929,12 +929,12 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-13 strong,
-.emotion-13 b {
+.emotion-8 strong,
+.emotion-8 b {
   font-weight: 700;
 }
 
-.emotion-15 {
+.emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -949,13 +949,13 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-15>code {
+.emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-15:focus,
-.emotion-15:hover {
+.emotion-10:focus,
+.emotion-10:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -963,43 +963,43 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-15:focus {
+.emotion-10:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-15:hover {
+.emotion-10:hover {
   text-decoration-color: #E8EDEB;
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           1
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <p
-          class="emotion-13"
+          class="emotion-8"
         >
           Connect to a MongoDB deployment hosted on MongoDB Atlas, or a deployment hosted locally on your own machine.
         </p>
         <p
-          class="emotion-13"
+          class="emotion-8"
         >
           <a
-            class="emotion-15"
+            class="emotion-10"
             href="/connect/#std-label-connect-run-compass"
           >
             To learn more, see Connect to MongoDB
@@ -1008,30 +1008,30 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2 emotion-3 emotion-4"
+      class="emotion-1 emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         <div
-          class="emotion-7 emotion-8 emotion-9"
+          class="emotion-4 emotion-5"
         >
           2
         </div>
       </div>
       <div
-        class="emotion-10 emotion-11 emotion-12"
+        class="emotion-6 emotion-7"
       >
         <p
-          class="emotion-13"
+          class="emotion-8"
         >
           Import data from CSV or JSON files into your MongoDB database.
         </p>
         <p
-          class="emotion-13"
+          class="emotion-8"
         >
           <a
-            class="emotion-15"
+            class="emotion-10"
             href="/import-export/#std-label-compass-import-export"
           >
             To learn more, see Import and Export Data

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { theme } from '../../theme/docsTheme';
@@ -20,9 +19,14 @@ const Flexbox = styled('div')`
 `;
 
 const MIN_BREADCRUMBS = 3;
-const initialMaxCrumbs = (breadcrumbs) => breadcrumbs.length + 1;
+const initialMaxCrumbs = (breadcrumbs: Array<BreadcrumbType>) => breadcrumbs.length + 1;
 
-const BreadcrumbContainer = ({ breadcrumbs }) => {
+export type BreadcrumbType = {
+  title: string;
+  path: string;
+};
+
+const BreadcrumbContainer = ({ breadcrumbs }: { breadcrumbs: Array<BreadcrumbType> }) => {
   const [maxCrumbs, setMaxCrumbs] = React.useState(initialMaxCrumbs(breadcrumbs));
   const { siteUrl } = useSiteMetadata();
 
@@ -38,15 +42,17 @@ const BreadcrumbContainer = ({ breadcrumbs }) => {
 
   // Our breadcrumbs representation is an array of crumbObjectShape || (array of crumbObjectShape)
   // The latter indicates a collapsed series of breadcrumbs.
-  const processedBreadcrumbs = React.useMemo(() => {
-    const crumbsCopy = Array.from(breadcrumbs);
-    if (crumbsCopy.length >= maxCrumbs && crumbsCopy.length > 2) {
+  const processedBreadcrumbs: (BreadcrumbType | BreadcrumbType[])[] = React.useMemo(() => {
+    if (breadcrumbs.length >= maxCrumbs && breadcrumbs.length > 2) {
       // A maximum of maxCrumbs breadcrumbs may be shown, so we collapse the first run of internal
       // crumbs into a single "…" crumb
-      const collapsedCrumbs = crumbsCopy.splice(1, breadcrumbs.length - maxCrumbs + 1, []);
-      crumbsCopy[1] = collapsedCrumbs;
+      const collapsedCrumbs = Array.from(breadcrumbs).splice(1, breadcrumbs.length - maxCrumbs + 1);
+      const processedCrumbs: (BreadcrumbType | BreadcrumbType[])[] = Array.from(breadcrumbs);
+      processedCrumbs.splice(1, breadcrumbs.length - maxCrumbs + 1, collapsedCrumbs);
+      return processedCrumbs;
+    } else {
+      return breadcrumbs;
     }
-    return crumbsCopy;
   }, [maxCrumbs, breadcrumbs]);
 
   const collapseBreadcrumbs = () => {
@@ -80,15 +86,6 @@ const BreadcrumbContainer = ({ breadcrumbs }) => {
       })}
     </Flexbox>
   );
-};
-
-const crumbObjectShape = {
-  title: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
-};
-
-BreadcrumbContainer.propTypes = {
-  breadcrumbs: PropTypes.arrayOf(PropTypes.shape(crumbObjectShape)).isRequired,
 };
 
 export default BreadcrumbContainer;

@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
+import { PageTemplateType } from '../../context/page-context';
+import { StepNode } from '../../types/ast';
 
 const circleIndividualStyles = {
   connected: css`
@@ -112,7 +113,14 @@ const contentStyles = {
   `,
 };
 
-const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', template, ...rest }) => {
+export type StepProps = {
+  nodeData: StepNode;
+  stepNumber: number;
+  stepStyle?: 'connected' | 'normal';
+  template?: PageTemplateType;
+};
+
+const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', template, ...rest }: StepProps) => {
   return (
     <StyledStep className={cx(landingStepStyles[stepStyle])}>
       <StepBlock>
@@ -125,15 +133,6 @@ const Step = ({ nodeData: { children }, stepNumber, stepStyle = 'connected', tem
       </Content>
     </StyledStep>
   );
-};
-
-Step.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-  stepNumber: PropTypes.number.isRequired,
-  stepStyle: PropTypes.string,
 };
 
 export default Step;
