@@ -112,6 +112,8 @@ type NodeType =
   | 'directive'
   | 'directive_argument'
   | 'emphasis'
+  | 'footnote'
+  | 'footnote_reference'
   | 'heading'
   | 'line'
   | 'line_block'
@@ -186,11 +188,13 @@ interface Root extends ParentNode {
 }
 
 interface FootnoteReferenceNode extends ParentNode {
+  type: 'footnote_reference';
   id: string;
   refname?: string;
 }
 
 interface FootnoteNode extends ParentNode {
+  type: `footnote`;
   id: string;
   name?: string;
 }
@@ -639,12 +643,12 @@ export type {
   DismissibleSkillsCardNode,
   EmphasisNode,
   FacetNode,
+  FootnoteNode,
+  FootnoteReferenceNode,
   HeadingNode,
   HeadingNodeSelectorIds,
   HighlightNode,
   HighlightRoleNames,
-  FootnoteNode,
-  FootnoteReferenceNode,
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,
