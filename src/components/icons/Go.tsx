@@ -1,6 +1,8 @@
 import React from 'react';
 
-const IconGo = ({ ...styles }) => (
+type IconGoProps = React.SVGProps<SVGSVGElement>;
+
+const IconGo = (styles: IconGoProps) => (
   <svg
     version="1.1"
     id="Layer_1"

@@ -1,7 +1,9 @@
 import React from 'react';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 
-const IconRust = ({ ...styles }) => {
+type IconRustProps = React.SVGProps<SVGSVGElement>;
+
+const IconRust = (styles: IconRustProps) => {
   const { darkMode } = useDarkMode();
   const fillColor = darkMode ? 'white' : 'black';
   return (
