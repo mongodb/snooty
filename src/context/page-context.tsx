@@ -14,18 +14,26 @@ export type PageTemplateType =
   | 'guide'
   | 'product-landing';
 
-interface PageOptions {
+// TODO: Check this
+export interface Page {
+  options: PageOptions | null;
+  ast: Root | null;
+}
+
+export interface PageOptions {
+  template: PageTemplateType;
   has_composable_tutorial?: boolean;
+  has_method_selector?: boolean;
   hidefeedback: string;
   [key: string]: any;
 }
 
-interface PageContextType {
-  page: Root | null;
+export interface PageContextType {
+  page: Page | null;
   template: PageTemplateType | null;
   slug: string;
   tabsMainColumn: boolean | null;
-  options: PageOptions | null;
+  options: Page['options'];
 }
 
 export const PageContext = createContext<PageContextType>({

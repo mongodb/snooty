@@ -24,7 +24,6 @@ type ComponentType =
   | 'field_list'
   | 'figure'
   | 'footnote'
-  | 'footnote_reference'
   | 'glossary'
   | 'guide-next'
   | 'hlist'
@@ -72,7 +71,9 @@ type DirectiveName =
   | 'directive'
   | 'dismissible-skills-card'
   | 'facet'
+  | 'hlist'
   | 'icon'
+  | 'image'
   | 'include'
   | 'input'
   | 'io-code-block'
@@ -274,13 +275,25 @@ interface DismissibleSkillsCardNode extends Directive<DismissibleSkillsCardOptio
   options: DismissibleSkillsCardOptions;
 }
 
-interface ListTableNode extends Directive {
+type ListTableOptions = {
+  align?: string;
+  width?: string;
+  widths?: string;
+  'header-rows'?: string;
+  'stub-columns'?: string;
+};
+
+interface ListTableNode extends Directive<ListTableOptions> {
   name: 'list-table';
-  children: ListNode[];
-  options?: {
-    widths?: string;
-    'header-rows'?: string;
-  };
+  children: ParentListNode[];
+  options?: ListTableOptions;
+}
+
+interface ParentListNode extends ParentNode {
+  type: 'list';
+  enumtype: 'unordered' | 'ordered';
+  startat?: number;
+  children: ParentListItemNode[];
 }
 
 interface ListNode extends ParentNode {
@@ -290,8 +303,14 @@ interface ListNode extends ParentNode {
   children: ListItemNode[];
 }
 
+interface ParentListItemNode extends ParentNode {
+  type: 'listItem';
+  children: ListNode[];
+}
+
 interface ListItemNode extends ParentNode {
   type: 'listItem';
+  children: ParentNode[];
 }
 
 interface LiteralNode extends ParentNode {
@@ -340,6 +359,21 @@ interface IOCodeBlockNode extends Directive<IOCodeBlockOptions> {
   name: 'io-code-block';
   children: [IOInputNode] | [IOInputNode, IOOutputNode];
   options: IOCodeBlockOptions;
+}
+
+type ImageNodeOptions = {
+  alt: string;
+  align?: string;
+  checksum?: string;
+  height?: string;
+  scale?: string;
+  width?: string;
+};
+
+interface ImageNode extends Directive<ImageNodeOptions> {
+  name: 'image';
+  argument: TextNode[];
+  options: ImageNodeOptions;
 }
 
 type InputOutputOptions = {
@@ -407,6 +441,7 @@ interface ContentsNode extends Directive<ContentsOptions> {
 interface TabsNode extends Directive {
   type: 'directive';
   name: 'tabs';
+  children: TabNode[];
 }
 
 interface TabOptions {
@@ -598,6 +633,15 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
+type HorizontalListNodeOptions = {
+  columns: number;
+};
+
+interface HorizontalListNode extends Directive<HorizontalListNodeOptions> {
+  name: 'hlist';
+  options: HorizontalListNodeOptions;
+}
+
 type StandaloneHeaderOptions = {
   columns: number;
   cta: string;
@@ -618,6 +662,8 @@ interface RefRoleNode extends ParentNode {
 }
 
 export type {
+  HorizontalListNode,
+  ImageNode,
   AbbrRoleNode,
   AdmonitionNode,
   AdmonitionName,
@@ -666,6 +712,8 @@ export type {
   NodeName,
   NodeType,
   ParagraphNode,
+  ParentListItemNode,
+  ParentListNode,
   ParentNode,
   ProcedureNode,
   ProcedureStyle,

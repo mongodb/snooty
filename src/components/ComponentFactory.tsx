@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentType, Node, NodeName, NodeType, RoleName } from '../types/ast';
 
 import { isRoleName } from '../types/ast-utils';
+import { Page } from '../context/page-context';
 import { LAZY_COMPONENTS } from './ComponentFactoryLazy';
 import Admonition, { admonitionMap } from './Admonition';
 import Banner from './Banner/Banner';
@@ -243,6 +244,7 @@ export type ComponentFactoryProps = {
   nodeData: Node;
   slug?: string;
   sectionDepth?: string | number;
+  page?: Page;
   [key: string]: unknown;
 };
 
