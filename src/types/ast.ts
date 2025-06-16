@@ -22,7 +22,6 @@ type ComponentType =
   | 'field_list'
   | 'figure'
   | 'footnote'
-  | 'footnote_reference'
   | 'glossary'
   | 'guide-next'
   | 'hlist'
@@ -70,7 +69,9 @@ type DirectiveName =
   | 'directive'
   | 'dismissible-skills-card'
   | 'facet'
+  | 'hlist'
   | 'icon'
+  | 'image'
   | 'input'
   | 'io-code-block'
   | 'list-table'
@@ -108,6 +109,7 @@ type NodeType =
   | 'directive'
   | 'directive_argument'
   | 'emphasis'
+  | 'footnote_reference'
   | 'heading'
   | 'line'
   | 'line_block'
@@ -328,6 +330,21 @@ interface IOCodeBlockNode extends Directive<IOCodeBlockOptions> {
   options: IOCodeBlockOptions;
 }
 
+type ImageNodeOptions = {
+  alt: string;
+  align?: string;
+  checksum?: string;
+  height?: string;
+  scale?: string;
+  width?: string;
+};
+
+interface ImageNode extends Directive<ImageNodeOptions> {
+  name: 'image';
+  argument: TextNode[];
+  options: ImageNodeOptions;
+}
+
 type InputOutputOptions = {
   language: string;
   linenos: boolean;
@@ -519,6 +536,15 @@ interface CTABannerNode extends Directive<CTABannerOptions> {
   options: CTABannerOptions;
 }
 
+type HorizontalListNodeOptions = {
+  columns: number;
+};
+
+interface HorizontalListNode extends Directive<HorizontalListNodeOptions> {
+  name: 'hlist';
+  options: HorizontalListNodeOptions;
+}
+
 type StandaloneHeaderOptions = {
   columns: number;
   cta: string;
@@ -551,8 +577,12 @@ export type {
   CommunityDriverPill,
   ComponentType,
   ContainerNode,
+  DefinitionListNode,
+  DefinitionListItemNode,
   Directive,
   DirectiveOptions,
+  HorizontalListNode,
+  ImageNode,
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,
@@ -564,13 +594,11 @@ export type {
   LiteralNode,
   LineBlockNode,
   LineNode,
+  MethodNode,
   Node,
   NodeName,
   NodeType,
   RoleName,
-  DefinitionListNode,
-  DefinitionListItemNode,
-  MethodNode,
   TargetIdentifierNode,
   DirectiveArgumentNode,
   CollapsibleNode,

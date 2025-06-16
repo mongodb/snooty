@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import type { IGatsbyImageData } from 'gatsby-plugin-image/dist/src/components/gatsby-image.browser';
+
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
@@ -9,6 +10,7 @@ import ImageContext from '../context/image-context';
 import { getNestedValue } from '../utils/get-nested-value';
 import { removeLeadingSlash } from '../utils/remove-leading-slash';
 import { theme } from '../theme/docsTheme';
+import { ImageNode } from '../types/ast';
 
 const defaultImageStyling = css`
   max-width: 100%;
@@ -34,6 +36,34 @@ const gatsbyContainerStyle = css`
   }
 `;
 
+type GetImagePropsProps = {
+  userOptionStyle: Record<string, string>;
+  width: number;
+  height: number;
+  hasBorder: boolean;
+  darkMode: boolean;
+  altText?: string;
+  gatsbyImage?: IGatsbyImageData;
+  customAlign?: string;
+  className?: string;
+  directiveClass?: string;
+  imgSrc?: string;
+  srcSet?: string;
+  loading?: string;
+};
+
+type GatsbyImageProps = {
+  width: number;
+  height: number;
+  alt: string;
+  style: Record<string, string>;
+  imgStyle?: Record<string, string>;
+  image: IGatsbyImageData;
+  className: string;
+  src?: string;
+  srcSet?: string;
+};
+
 function getImageProps({
   altText,
   userOptionStyle,
@@ -48,8 +78,8 @@ function getImageProps({
   imgSrc,
   srcSet,
   loading,
-}) {
-  const imageProps = {
+}: GetImagePropsProps): GatsbyImageProps {
+  const imageProps: Partial<GatsbyImageProps> = {
     alt: altText ?? '',
     style: userOptionStyle,
   };
@@ -89,23 +119,28 @@ function getImageProps({
     };
   }
 
-  return imageProps;
+  return imageProps as GatsbyImageProps;
 }
 
-const Image = ({ nodeData, className }) => {
+export type ImageProps = {
+  nodeData: ImageNode;
+  className?: string;
+};
+
+const Image = ({ nodeData, className }: ImageProps) => {
   const scale = (parseInt(getNestedValue(['options', 'scale'], nodeData), 10) || 100) / 100;
-  const widthOption = getNestedValue(['options', 'width'], nodeData);
-  let height = getNestedValue(['options', 'height'], nodeData);
-  const loading = getNestedValue(['options', 'loading'], nodeData);
-  const directiveClass = getNestedValue(['options', 'class'], nodeData);
+  const widthOption: string = getNestedValue(['options', 'width'], nodeData);
+  let height: number = getNestedValue(['options', 'height'], nodeData);
+  const loading: string | undefined = getNestedValue(['options', 'loading'], nodeData);
+  const directiveClass: string | undefined = getNestedValue(['options', 'class'], nodeData);
   const { darkMode } = useDarkMode();
 
-  let imgSrc = getNestedValue(['argument', 0, 'value'], nodeData);
-  const altText = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
-  const imgAlignment = getNestedValue(['options', 'align'], nodeData);
+  let imgSrc: string = getNestedValue(['argument', 0, 'value'], nodeData);
+  const altText: string | undefined = getNestedValue(['options', 'alt'], nodeData) || imgSrc;
+  const imgAlignment: string | undefined = getNestedValue(['options', 'align'], nodeData);
   const customAlign = imgAlignment ? `align-${imgAlignment}` : '';
 
-  const hasBorder = getNestedValue(['options', 'border'], nodeData);
+  const hasBorder: boolean = !!getNestedValue(['options', 'border'], nodeData);
 
   const { imageByPath } = useContext(ImageContext);
   const gatsbyImage = imageByPath[removeLeadingSlash(imgSrc)];
@@ -115,15 +150,15 @@ const Image = ({ nodeData, className }) => {
   if (gatsbyImage) {
     width = gatsbyImage.width * scale;
     height = gatsbyImage.height * scale;
-    imgSrc = gatsbyImage.images.fallback.src;
-    srcSet = gatsbyImage.images.fallback.srcSet;
+    imgSrc = gatsbyImage.images?.fallback?.src ?? '';
+    srcSet = gatsbyImage.images?.fallback?.srcSet ?? '';
   } else {
     width = parseInt(widthOption, 10) * scale;
     height *= scale;
     imgSrc = withPrefix(imgSrc);
   }
 
-  const userOptionStyle = {};
+  const userOptionStyle: Record<string, string> = {};
   if (widthOption?.endsWith('px')) {
     userOptionStyle['width'] = widthOption;
   }
@@ -151,31 +186,6 @@ const Image = ({ nodeData, className }) => {
   // imageProps contains altText prop
   // eslint-disable-next-line jsx-a11y/alt-text
   return <img {...imageProps} />;
-};
-
-Image.propTypes = {
-  className: PropTypes.string,
-  handleImageLoaded: PropTypes.func,
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string.isRequired,
-      })
-    ),
-    options: PropTypes.shape({
-      align: PropTypes.string,
-      alt: PropTypes.string,
-      checksum: PropTypes.string,
-      height: PropTypes.string,
-      scale: PropTypes.string,
-      width: PropTypes.string,
-    }),
-  }).isRequired,
-};
-
-Image.defaultProps = {
-  className: '',
-  handleImageLoaded: () => {},
 };
 
 export default Image;
