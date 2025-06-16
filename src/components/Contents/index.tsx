@@ -9,6 +9,7 @@ import { HeadingNodeSelectorIds } from '../../types/ast';
 import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
+import { usePageContext } from '../../context/page-context';
 import ContentsList from './ContentsList';
 import ContentsListItem from './ContentsListItem';
 import { type ActiveSelectorIds, ContentsContext } from './contents-context';
@@ -94,6 +95,7 @@ const Contents = ({ className, slug }: { className?: string; slug: string }) => 
   const metadata = useSnootyMetadata();
   const { search } = useLocation();
   const searchDict = new URLSearchParams(search);
+  const { options } = usePageContext();
 
   const filteredNodes = headingNodes.filter((headingNode) => {
     return isHeadingVisible(headingNode.selector_ids, activeSelectorIds, searchDict);
@@ -108,10 +110,12 @@ const Contents = ({ className, slug }: { className?: string; slug: string }) => 
   }
 
   const label = 'On this page';
+  const shouldProjShowFW = !DEPRECATED_PROJECTS.includes(metadata.project);
+  const hideFWOnMobile = options?.hidefeedback === 'header';
 
   return (
     <>
-      {!isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
+      {!isTabletOrMobile && shouldProjShowFW && (
         <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />
       )}
       <div className={cx(className, styledContentList)}>
@@ -127,7 +131,7 @@ const Contents = ({ className, slug }: { className?: string; slug: string }) => 
           })}
         </ContentsList>
       </div>
-      {isTabletOrMobile && !DEPRECATED_PROJECTS.includes(metadata.project) && (
+      {isTabletOrMobile && shouldProjShowFW && !hideFWOnMobile && (
         <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />
       )}
     </>

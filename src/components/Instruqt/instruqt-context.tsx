@@ -14,7 +14,12 @@ const defaultContextValue: InstruqtContextType = {
 
 const InstruqtContext = React.createContext<InstruqtContextType>(defaultContextValue);
 
-const InstruqtProvider = ({ children, hasLabDrawer = false }: { children: ReactNode; hasLabDrawer?: boolean }) => {
+export type InstruqtProviderProps = {
+  children: ReactNode;
+  hasLabDrawer?: boolean;
+};
+
+const InstruqtProvider = ({ children, hasLabDrawer = false }: InstruqtProviderProps) => {
   const hasDrawer = hasLabDrawer;
   const [isOpen, setIsOpen] = useState(false);
 

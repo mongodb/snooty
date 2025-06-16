@@ -22,6 +22,6 @@ export const SINGLE_SELECT_FIELDS = [VERSION_GROUP_ID];
 
 export const requestHeaders: RequestInit = process.env['GATSBY_MARIAN_URL']?.includes('staging')
   ? {
-      credentials: 'include',
+      credentials: 'include' as RequestCredentials,
     }
   : {};

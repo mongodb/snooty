@@ -46,10 +46,10 @@ const BreadcrumbContainer = ({ breadcrumbs }: { breadcrumbs: Array<BreadcrumbTyp
     if (breadcrumbs.length >= maxCrumbs && breadcrumbs.length > 2) {
       // A maximum of maxCrumbs breadcrumbs may be shown, so we collapse the first run of internal
       // crumbs into a single "…" crumb
-      const crumbsCopy: (BreadcrumbType | BreadcrumbType[])[] = Array.from(breadcrumbs);
       const collapsedCrumbs = Array.from(breadcrumbs).splice(1, breadcrumbs.length - maxCrumbs + 1);
-      const constructedCrumbs = Array.from(crumbsCopy).splice(1, breadcrumbs.length - maxCrumbs + 1, collapsedCrumbs);
-      return constructedCrumbs;
+      const processedCrumbs: (BreadcrumbType | BreadcrumbType[])[] = Array.from(breadcrumbs);
+      processedCrumbs.splice(1, breadcrumbs.length - maxCrumbs + 1, collapsedCrumbs);
+      return processedCrumbs;
     } else {
       return breadcrumbs;
     }

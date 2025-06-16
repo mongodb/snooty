@@ -85,7 +85,7 @@ const lgLinkStyling = css`
 
 export type LinkProps = {
   children: ReactNode;
-  to: string;
+  to?: string;
   activeClassName?: string;
   className?: string;
   partiallyActive?: boolean;
@@ -140,6 +140,7 @@ const Link = ({
         activeClassName={activeClassName}
         partiallyActive={partiallyActive}
         to={to}
+        onClick={onClick}
         {...anchorProps}
       >
         {children}
