@@ -1,8 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
+import { ParentNode } from '../../types/ast';
 
-const RoleFile = ({ nodeData: { children } }) => (
+export type RoleFileProps = {
+  nodeData: ParentNode;
+};
+
+const RoleFile = ({ nodeData: { children } }: RoleFileProps) => (
   <code className="file docutils literal">
     <span className="pre">
       {children.map((node, i) => (
@@ -11,11 +15,5 @@ const RoleFile = ({ nodeData: { children } }) => (
     </span>
   </code>
 );
-
-RoleFile.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.node).isRequired,
-  }).isRequired,
-};
 
 export default RoleFile;

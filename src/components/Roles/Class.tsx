@@ -1,19 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
+import { ClassRoleNode } from '../../types/ast';
 
-const RoleClass = ({ nodeData: { children, target } }) => (
+export type RoleClassProps = {
+  nodeData: ClassRoleNode;
+};
+
+const RoleClass = ({ nodeData: { children, target } }: RoleClassProps) => (
   <a href={`${target}`}>
     {children.map((node, i) => (
       <ComponentFactory key={i} nodeData={node} />
     ))}
   </a>
 );
-
-RoleClass.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.node).isRequired,
-  }).isRequired,
-};
 
 export default RoleClass;
