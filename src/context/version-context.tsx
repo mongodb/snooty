@@ -9,7 +9,8 @@ import React, {
   ReactNode,
   Dispatch,
 } from 'react';
-import { navigate } from 'gatsby';
+// @ts-ignore
+import { navigate } from '@gatsbyjs/reach-router';
 import { METADATA_COLLECTION } from '../build-constants';
 import { DocsetSlice, useAllDocsets } from '../hooks/useAllDocsets';
 import { useAllAssociatedProducts } from '../hooks/useAssociatedProducts';
