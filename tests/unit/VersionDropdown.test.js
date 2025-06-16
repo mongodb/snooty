@@ -1,5 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
-import { navigate } from 'gatsby';
+import { navigate } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
 import * as realm from '../../src/utils/realm';
 import VersionDropdown from '../../src/components/VersionDropdown';
@@ -9,15 +9,15 @@ import { VersionContextProvider } from '../../src/context/version-context';
 import { tick } from '../utils';
 import mockData from './data/VersionDropdown.test.json';
 
-jest.mock('../../src/hooks/use-site-metadata.tsx', () => ({
+jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ parserBranch: 'master', snootyEnv: 'development' }),
 }));
 
-jest.mock('../../src/utils/use-snooty-metadata.tsx', () => {
+jest.mock('../../src/utils/use-snooty-metadata', () => {
   return () => ({ project: 'node' });
 });
 
-jest.mock('gatsby', () => ({
+jest.mock('@gatsbyjs/reach-router', () => ({
   navigate: jest.fn(),
 }));
 
