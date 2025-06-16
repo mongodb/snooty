@@ -63,7 +63,7 @@ const baseButtonStyle = css`
 `;
 
 export type NextPrevLinkProps = {
-  pageTitle: string | ReactNode;
+  pageTitle: ReactNode;
   title: string;
   targetSlug: string;
   direction: string;
