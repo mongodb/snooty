@@ -21,9 +21,9 @@ interface CardProps {
   isCenterContentStyle?: boolean;
   isLargeIconStyle?: boolean;
   nodeData: CardNode;
-  page?: {
-    options?: {
-      template?: string;
+  page: {
+    options: {
+      template: string;
     };
   };
 }
@@ -166,7 +166,7 @@ const Card = ({ isCompact, isExtraCompact, isCenterContentStyle, isLargeIconStyl
   else if (template === 'product-landing') imgSize = theme.size.large;
   else imgSize = theme.size.medium;
 
-  const useCompactIcon = !['landing', 'product-landing'].includes(template || '');
+  const useCompactIcon = !['landing', 'product-landing'].includes(template);
 
   const styling = [
     cardBaseStyles,

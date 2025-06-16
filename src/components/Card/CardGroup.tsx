@@ -15,10 +15,6 @@ export interface CardGroupProps {
   };
 }
 
-interface CarouselStylingProps {
-  children?: React.ReactNode;
-}
-
 interface StyledGridProps {
   isForDrivers: boolean;
   isLanding: boolean;
@@ -26,7 +22,6 @@ interface StyledGridProps {
   isCarousel?: boolean;
   className?: string;
   noMargin?: boolean;
-  [key: string]: any;
 }
 
 const getMarginStyles = (
@@ -50,7 +45,7 @@ const getColumnValue = (props: { columns?: number; children?: React.ReactNode })
 // Carousel styling refers to the horizontal scrolling display of the Cards;
 // This is not a true carousel as it is not 'circular,' but is rather 1 row
 // with n columns displaying only a subset on screen
-const carouselStyling = ({ children }: CarouselStylingProps) => css`
+const carouselStyling = ({ children }: { children?: React.ReactNode }) => css`
   grid-gap: calc(${theme.size.medium} * 0.75);
   grid-template-columns:
     calc(${theme.size.medium} / 2) repeat(${React.Children.count(children)}, calc(75% - calc(2 * ${theme.size.medium})))
