@@ -43,7 +43,7 @@ export const tocData = (): TocItem[] => {
     {
       label: 'Atlas',
       url: '/docs/atlas/getting-started/',
-      contentSite:  DocSites.CLOUD_DOCS,
+      contentSite: DocSites.CLOUD_DOCS,
       items: [
         {
           label: 'Application Development',
@@ -99,7 +99,7 @@ export const tocData = (): TocItem[] => {
       label: 'C# Quick Start',
       url: '/docs/drivers/csharp/:version/quick-start',
       glyph: 'Bulb',
-      contentSite:  DocSites.CSHARP,
+      contentSite: DocSites.CSHARP,
       versionDropdown: true,
       items: [
         {
