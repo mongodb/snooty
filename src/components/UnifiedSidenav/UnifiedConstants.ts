@@ -20,6 +20,7 @@ export interface ActiveVersions {
   [project: string]: string;
 }
 
+// These has to match how we store the repo name in local storage
 export enum DocSites {
   CLOUD_DOCS = 'cloud-docs',
   DATABASE_TOOLS = 'database-tools',

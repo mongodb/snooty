@@ -1,10 +1,5 @@
 import { TocItem, DocSites } from '../src/components/UnifiedSidenav/UnifiedConstants';
 
-//these have to match whatever values we use to store local storage in
-// const COMMANDLINE_TOOLS = 'database-tools';
-// const CLOUD_DOCS = 'cloud-docs';
-// const CSHARP = 'csharp';
-
 // each url has to be unique with the contentSite!!!!
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
