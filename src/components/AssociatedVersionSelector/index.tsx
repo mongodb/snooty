@@ -7,10 +7,6 @@ import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { theme } from '../../theme/docsTheme';
 import { BranchData } from '../../types/data';
 
-interface SelectChangeEvent {
-  value: string;
-}
-
 const StyledSelect = css`
   width: 100%;
 
@@ -31,7 +27,7 @@ const AssociatedVersionSelector = () => {
   const { activeVersions, availableVersions, hasEmbeddedVersionDropdown, onVersionSelect } = useContext(VersionContext);
 
   const onSelectChange = useCallback(
-    ({ value }: SelectChangeEvent) => {
+    ({ value }: { value: string }) => {
       onVersionSelect(project, value);
     },
     [onVersionSelect, project]
