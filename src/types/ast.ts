@@ -285,8 +285,15 @@ type ListTableOptions = {
 
 interface ListTableNode extends Directive<ListTableOptions> {
   name: 'list-table';
-  children: ListNode[];
+  children: ParentListNode[];
   options?: ListTableOptions;
+}
+
+interface ParentListNode extends ParentNode {
+  type: 'list';
+  enumtype: 'unordered' | 'ordered';
+  startat?: number;
+  children: ParentListItemNode[];
 }
 
 interface ListNode extends ParentNode {
@@ -296,8 +303,14 @@ interface ListNode extends ParentNode {
   children: ListItemNode[];
 }
 
+interface ParentListItemNode extends ParentNode {
+  type: 'listItem';
+  children: ListNode[];
+}
+
 interface ListItemNode extends ParentNode {
   type: 'listItem';
+  children: ParentNode[];
 }
 
 interface LiteralNode extends ParentNode {
@@ -699,6 +712,8 @@ export type {
   NodeName,
   NodeType,
   ParagraphNode,
+  ParentListItemNode,
+  ParentListNode,
   ParentNode,
   ProcedureNode,
   ProcedureStyle,

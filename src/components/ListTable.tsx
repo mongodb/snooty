@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { ReactNode, useMemo, useRef } from 'react';
 import {
   Cell,
   HeaderCell,
@@ -14,8 +14,8 @@ import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
 import { AncestorComponentContextProvider, useAncestorComponentContext } from '../context/ancestor-components-context';
-import { ListItemNode, ListTableNode, Node } from '../types/ast';
-import { isDirectiveNode, isParentNode } from '../types/ast-utils';
+import { ListItemNode, ListTableNode, Node, ParentListItemNode } from '../types/ast';
+import { isDirectiveNode, isFootnoteReferenceNode, isParentNode } from '../types/ast-utils';
 import ComponentFactory from './ComponentFactory';
 
 const align = (key: string) => {
@@ -135,10 +135,9 @@ const hasOneChild = (children: Node[]) => children.length === 1 && children[0].t
  * id values of footnote references
  */
 const getReferenceIds = (nodeList: Node[]) => {
-  const referenceType = `footnote_reference`;
   const results: string[] = [];
   const iter = (node: Node) => {
-    if (node['type'] === referenceType) {
+    if (isFootnoteReferenceNode(node)) {
       results.push(`ref-${node['refname']}-${node['id']}`);
     }
     if (!isParentNode(node) || !node.children.length) {
@@ -174,8 +173,14 @@ const includesNestedTable = (rows: Node[]) => {
   return rows.some((row) => checkNodeForTable(row));
 };
 
-const generateColumns = (headerRow: Node, bodyRows: ListItemNode[]) => {
-  if (!headerRow?.children) {
+export type ListTableColumnData = {
+  id: string;
+  accessorKey: string;
+  header: string | ((ctx: unknown) => React.ReactNode);
+};
+
+const generateColumns = (headerRow: Node, bodyRows: ParentListItemNode[]): ListTableColumnData[] => {
+  if (!isParentNode(headerRow)) {
     // generate columns from bodyRows
     const flattenedRows = bodyRows.map((bodyRow) => bodyRow.children[0].children);
     const maxColumns = Math.max(...flattenedRows.map((row) => row.length));
@@ -191,13 +196,13 @@ const generateColumns = (headerRow: Node, bodyRows: ListItemNode[]) => {
   }
 
   return headerRow.children.map((listItemNode, index) => {
-    const skipPTag = hasOneChild(listItemNode.children);
+    const skipPTag = hasOneChild((listItemNode as ListItemNode).children);
     return {
       id: `column-${index}`,
       accessorKey: `column-${index}`,
-      header: (
+      header: () => (
         <>
-          {listItemNode.children.map((childNode, index) => (
+          {(listItemNode as ListItemNode).children.map((childNode, index) => (
             <ComponentFactory key={index} nodeData={childNode} skipPTag={skipPTag} />
           ))}
         </>
@@ -206,10 +211,10 @@ const generateColumns = (headerRow: Node, bodyRows: ListItemNode[]) => {
   });
 };
 
-const generateRowsData = (bodyRowNodes, columns) => {
+const generateRowsData = (bodyRowNodes: ParentListItemNode[], columns: ListTableColumnData[]) => {
   const rowNodes = bodyRowNodes.map((node) => node?.children[0]?.children ?? []);
   const rows = rowNodes.map((rowNode) => {
-    return rowNode.reduce((res, columnNode, colIndex) => {
+    return rowNode.reduce<{ [k: string]: ReactNode }>((res, columnNode, colIndex) => {
       const column = columns[colIndex];
       if (!column) {
         console.warn(`Row has too many items (index ${colIndex}) for table with ${columns.length} columns`);
@@ -330,7 +335,7 @@ const ListTable = ({ nodeData: { children, options }, ...rest }: ListTableProps)
                     role={role ?? undefined}
                   >
                     {/* Wraps cell content inside of a div so that all of its content are together when laid out. */}
-                    <div className={cx(bodyCellContentStyle)}>{cell.renderValue()}</div>
+                    <div className={cx(bodyCellContentStyle)}>{cell.renderValue() as ReactNode}</div>
                   </Cell>
                 );
               })}
