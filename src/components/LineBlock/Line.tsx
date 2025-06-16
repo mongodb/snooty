@@ -1,8 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
+import { ParentNode } from '../../types/ast';
 
-const Line = ({ nodeData: { children }, ...rest }) => {
+export type LineProps = {
+  nodeData: ParentNode;
+};
+
+const Line = ({ nodeData: { children }, ...rest }: LineProps) => {
   if (children.length !== 0) {
     return (
       <div className="line">
@@ -19,9 +23,4 @@ const Line = ({ nodeData: { children }, ...rest }) => {
   );
 };
 
-Line.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
 export default Line;

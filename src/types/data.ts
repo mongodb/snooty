@@ -95,6 +95,15 @@ type RemoteMetadata = {
   iatree?: IATreeNode;
   openapi_pages?: Record<string, OpenApiPage>;
   associated_products?: AssociatedProduct[];
+  multiPageTutorials?: Record<string, MultiPageTutorial>;
+};
+
+type SlugToTitle = RemoteMetadata['slugToTitle'];
+type SlugToBreadcrumbLabel = RemoteMetadata['slugToBreadcrumbLabel'];
+
+type MultiPageTutorial = {
+  slugs: string[];
+  total_steps: number;
 };
 
 // TODO: Refine structure
@@ -183,10 +192,13 @@ export {
   Group,
   MetadataChapters,
   MetadataDatabaseName,
+  MultiPageTutorial,
   PageContext,
   PageContextRepoBranches,
   RemoteMetadata,
   ReposDatabaseName,
   SiteMetadata,
+  SlugToBreadcrumbLabel,
+  SlugToTitle,
   SnootyEnv,
 };
