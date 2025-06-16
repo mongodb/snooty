@@ -19,3 +19,9 @@ export interface TocItem {
 export interface ActiveVersions {
   [project: string]: string;
 }
+
+export enum DocSites {
+  CLOUD_DOCS = 'cloud-docs',
+  DATABASE_TOOLS = 'database-tools',
+  CSHARP = 'csharp',
+}
