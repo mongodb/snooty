@@ -329,7 +329,7 @@ type CardOptions = {
   tag?: string;
   url: string;
 };
-export interface CardNode extends Directive<CardOptions> {
+interface CardNode extends Directive<CardOptions> {
   options: CardOptions;
 }
 
@@ -649,6 +649,7 @@ export type {
   ButtonNode,
   ClassRoleNode,
   CardGroupNode,
+  CardNode,
   CodeNode,
   CollapsibleNode,
   CollapsibleOptions,
