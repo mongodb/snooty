@@ -286,6 +286,7 @@ interface ListTableNode extends Directive {
 interface ListNode extends ParentNode {
   type: 'list';
   enumtype: 'unordered' | 'ordered';
+  startat?: number;
   children: ListItemNode[];
 }
 
