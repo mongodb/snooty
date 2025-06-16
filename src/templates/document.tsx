@@ -79,7 +79,7 @@ const Document = ({
           {activeTutorial && <StepNumber slug={slug} activeTutorial={activeTutorial} />}
           {children}
           {showPrevNext && (
-            <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={toctreeOrder} />
+            <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel ?? {}} toctreeOrder={toctreeOrder} />
           )}
         </div>
       </StyledMainColumn>

@@ -170,6 +170,7 @@ type DirectiveOptions = {
 
 interface Node {
   type: NodeType;
+  [key: string]: any;
 }
 
 interface TextParentNode extends Node {

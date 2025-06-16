@@ -8,6 +8,7 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import FeedbackRating from '../components/Widgets/FeedbackWidget/index';
 import { DEPRECATED_PROJECTS } from '../components/Contents/index';
 import { AppData, PageContext } from '../types/data';
+import { Node } from '../types/ast';
 export const CONTENT_MAX_WIDTH = 1200;
 
 const formstyle = css`
@@ -238,10 +239,10 @@ const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: 
   const hasMaxWidthParagraphs = ['', 'true'].includes(pageOptions?.['pl-max-width-paragraphs']);
   const hasLightHero = isRealm && REALM_LIGHT_HERO_PAGES.includes(page?.ast?.fileid);
   // shallow copy children, and search for existence of banner
-  const shallowChildren = children.reduce((res, child) => {
+  const shallowChildren = (Array.isArray(children) ? children : []).reduce<Node[]>((res, child) => {
     const copiedChildren =
-      child.props.nodeData?.children?.map((childNode) => {
-        const newNode = {};
+      child.props.nodeData?.children?.map((childNode: Node) => {
+        const newNode: Record<string, any> = {};
         for (let property in childNode) {
           if (property !== 'children') {
             newNode[property] = childNode[property];
