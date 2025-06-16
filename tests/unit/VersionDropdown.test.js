@@ -9,11 +9,11 @@ import { VersionContextProvider } from '../../src/context/version-context';
 import { tick } from '../utils';
 import mockData from './data/VersionDropdown.test.json';
 
-jest.mock('../../src/hooks/use-site-metadata', () => ({
+jest.mock('../../src/hooks/use-site-metadata.tsx', () => ({
   useSiteMetadata: () => ({ parserBranch: 'master', snootyEnv: 'development' }),
 }));
 
-jest.mock('../../src/utils/use-snooty-metadata', () => {
+jest.mock('../../src/utils/use-snooty-metadata.tsx', () => {
   return () => ({ project: 'node' });
 });
 
