@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { withPrefix } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import type { IGatsbyImageData } from 'gatsby-plugin-image/dist/src/components/gatsby-image.browser';
-
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
