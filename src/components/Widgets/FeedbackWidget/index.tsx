@@ -3,6 +3,7 @@ import { isBrowser } from '../../../utils/is-browser';
 import { getPlaintext } from '../../../utils/get-plaintext';
 import { getNestedValue } from '../../../utils/get-nested-value';
 import useSnootyMetadata from '../../../utils/use-snooty-metadata';
+import { usePageContext } from '../../../context/page-context';
 import { RatingView } from './views';
 import FeedbackContainer from './FeedbackContainer';
 import FeedbackForm from './FeedbackForm';
@@ -26,6 +27,11 @@ const FeedbackRating = ({
     title:
       getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
   });
+  const { options } = usePageContext();
+
+  if (options?.hidefeedback === 'page') {
+    return null;
+  }
 
   return (
     <FeedbackProvider page={feedbackData}>

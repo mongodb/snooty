@@ -24,6 +24,8 @@ export interface PageOptions {
   template: PageTemplateType;
   has_composable_tutorial?: boolean;
   has_method_selector?: boolean;
+  hidefeedback: string;
+  [key: string]: any;
 }
 
 export interface PageContextType {
