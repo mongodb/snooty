@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import LeafyButton from '@leafygreen-ui/button';
 import { css } from '@leafygreen-ui/emotion';
-import Icon from '@leafygreen-ui/icon';
+import Icon, { glyphs } from '@leafygreen-ui/icon';
 
 const StyledButton = styled(LeafyButton)`
   color: ${palette.white};
@@ -36,7 +36,7 @@ const VideoPlayButton = () => {
   return (
     <div className={playButtonBorderStyling}>
       <StyledButton>
-        <Icon size="xlarge" glyph="Play" />
+        <Icon size="xlarge" glyph={glyphs.Play.displayName ?? 'Play'} />
       </StyledButton>
     </div>
   );
