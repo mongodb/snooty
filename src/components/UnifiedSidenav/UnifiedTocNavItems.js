@@ -244,7 +244,17 @@ function CollapsibleNavItem({ items, label, url, newUrl, slug, prefix, isAccordi
   );
 }
 
-export function StaticNavItem({ label, newUrl, slug, items, prefix, setCurrentL1, isAccordion, setShowDriverBackBtn }) {
+export function StaticNavItem({
+  label,
+  newUrl,
+  slug,
+  versionDropdown,
+  items,
+  prefix,
+  setCurrentL1,
+  isAccordion,
+  setShowDriverBackBtn,
+}) {
   const isActive = isActiveTocNode(slug, newUrl, items);
 
   return (
@@ -255,7 +265,7 @@ export function StaticNavItem({ label, newUrl, slug, items, prefix, setCurrentL1
       as={Link}
       to={newUrl}
       onClick={() => {
-        setCurrentL1({ items, newUrl });
+        setCurrentL1({ items, newUrl, versionDropdown });
         setShowDriverBackBtn(false);
       }}
       className={cx(l1ItemStyling({ isActive, isAccordion }))}
