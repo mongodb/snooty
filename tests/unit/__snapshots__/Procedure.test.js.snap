@@ -422,23 +422,20 @@ exports[`renders steps nested in include nodes 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-}
-
-.emotion-14 {
   min-width: 145px;
 }
 
-.emotion-14 [data-theme] {
+.emotion-13 [data-theme] {
   width: 310px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-14 {
+  .emotion-13 {
     display: none;
   }
 }
 
-.emotion-15 {
+.emotion-14 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -476,48 +473,48 @@ exports[`renders steps nested in include nodes 1`] = `
   z-index: 1;
 }
 
-.emotion-15:focus-visible,
-.emotion-15[data-focus="true"] {
+.emotion-14:focus-visible,
+.emotion-14[data-focus="true"] {
   outline: none;
 }
 
-.emotion-15:active,
-.emotion-15[data-active="true"],
-.emotion-15:focus,
-.emotion-15:hover {
+.emotion-14:active,
+.emotion-14[data-active="true"],
+.emotion-14:focus,
+.emotion-14:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-15:focus-visible,
-.emotion-15[data-focus="true"] {
+.emotion-14:focus-visible,
+.emotion-14[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-15:hover,
-.emotion-15[data-hover="true"],
-.emotion-15:active,
-.emotion-15[data-active="true"] {
+.emotion-14:hover,
+.emotion-14[data-hover="true"],
+.emotion-14:active,
+.emotion-14[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-15:focus-visible,
-.emotion-15[data-focus="true"] {
+.emotion-14:focus-visible,
+.emotion-14[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-15,
-.emotion-15:hover,
-.emotion-15:focus,
-.emotion-15:focus-visible,
-.emotion-15:active {
+.emotion-14,
+.emotion-14:hover,
+.emotion-14:focus,
+.emotion-14:focus-visible,
+.emotion-14:active {
   border-right-color: #889397;
 }
 
-.emotion-16 {
+.emotion-15 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -528,16 +525,6 @@ exports[`renders steps nested in include nodes 1`] = `
 }
 
 .emotion-16 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
-}
-
-.emotion-17 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -562,14 +549,14 @@ exports[`renders steps nested in include nodes 1`] = `
   gap: 6px;
 }
 
-.emotion-18 {
+.emotion-17 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-19 {
+.emotion-18 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -608,78 +595,74 @@ exports[`renders steps nested in include nodes 1`] = `
   width: 32px;
 }
 
-.emotion-19:focus-visible,
-.emotion-19[data-focus="true"] {
+.emotion-18:focus-visible,
+.emotion-18[data-focus="true"] {
   outline: none;
 }
 
-.emotion-19:active,
-.emotion-19[data-active="true"],
-.emotion-19:focus,
-.emotion-19:hover {
+.emotion-18:active,
+.emotion-18[data-active="true"],
+.emotion-18:focus,
+.emotion-18:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-19:focus-visible,
-.emotion-19[data-focus="true"] {
+.emotion-18:focus-visible,
+.emotion-18[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-19:hover,
-.emotion-19[data-hover="true"],
-.emotion-19:active,
-.emotion-19[data-active="true"] {
+.emotion-18:hover,
+.emotion-18[data-hover="true"],
+.emotion-18:active,
+.emotion-18[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-19:focus-visible,
-.emotion-19[data-focus="true"] {
+.emotion-18:focus-visible,
+.emotion-18[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-19:focus,
-.emotion-19:focus-visible,
-.emotion-19:hover {
+.emotion-18:focus,
+.emotion-18:focus-visible,
+.emotion-18:hover {
   z-index: 1;
 }
 
-.emotion-19,
-.emotion-19:hover,
-.emotion-19:focus,
-.emotion-19:focus-visible,
-.emotion-19:active {
+.emotion-18,
+.emotion-18:hover,
+.emotion-18:focus,
+.emotion-18:focus-visible,
+.emotion-18:active {
   border-left-color: #889397;
 }
 
-.emotion-19 svg {
+.emotion-18 svg {
   color: #3D4F58;
 }
 
-.emotion-22 {
+.emotion-21 {
   color: #001E2B;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-22 .lg-ui-button-0000:hover,
-.emotion-22 .lg-ui-button-0000:active {
+.emotion-21 .lg-ui-button-0000:hover,
+.emotion-21 .lg-ui-button-0000:active {
   color: currentColor;
 }
 
-.emotion-23 {
+.emotion-22 {
   display: none;
 }
 
 .emotion-23 {
-  display: none;
-}
-
-.emotion-24 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -691,8 +674,8 @@ exports[`renders steps nested in include nodes 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-24 strong,
-.emotion-24 b {
+.emotion-23 strong,
+.emotion-23 b {
   font-weight: 700;
 }
 
@@ -754,27 +737,27 @@ exports[`renders steps nested in include nodes 1`] = `
               </a>
             </h1>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-13"
               data-lgid="lg-split_button"
               data-testid="lg-split_button"
             >
               <button
                 aria-disabled="false"
-                class="lg-ui-button-0000 emotion-15"
+                class="lg-ui-button-0000 emotion-14"
                 data-lgid="lg-split_button-button"
                 data-testid="lg-split_button-button"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-18"
+                    class="emotion-17"
                     fill="none"
                     height="16"
                     role="presentation"
@@ -798,20 +781,20 @@ exports[`renders steps nested in include nodes 1`] = `
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-label="More options"
-                class="lg-ui-button-0000 emotion-19"
+                class="lg-ui-button-0000 emotion-18"
                 data-lgid="lg-split_button-trigger"
                 data-testid="lg-split_button-trigger"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     aria-label="Caret Down Icon"
-                    class="emotion-22"
+                    class="emotion-21"
                     fill="none"
                     height="16"
                     role="img"
@@ -827,12 +810,12 @@ exports[`renders steps nested in include nodes 1`] = `
                 </div>
               </button>
               <span
-                class="emotion-23"
+                class="emotion-22"
               />
             </div>
           </div>
           <p
-            class="emotion-24"
+            class="emotion-23"
           >
             Content for step 1
           </p>
@@ -894,27 +877,27 @@ exports[`renders steps nested in include nodes 1`] = `
               </a>
             </h1>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-13"
               data-lgid="lg-split_button"
               data-testid="lg-split_button"
             >
               <button
                 aria-disabled="false"
-                class="lg-ui-button-0000 emotion-15"
+                class="lg-ui-button-0000 emotion-14"
                 data-lgid="lg-split_button-button"
                 data-testid="lg-split_button-button"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-18"
+                    class="emotion-17"
                     fill="none"
                     height="16"
                     role="presentation"
@@ -938,20 +921,20 @@ exports[`renders steps nested in include nodes 1`] = `
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-label="More options"
-                class="lg-ui-button-0000 emotion-19"
+                class="lg-ui-button-0000 emotion-18"
                 data-lgid="lg-split_button-trigger"
                 data-testid="lg-split_button-trigger"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     aria-label="Caret Down Icon"
-                    class="emotion-22"
+                    class="emotion-21"
                     fill="none"
                     height="16"
                     role="img"
@@ -967,12 +950,12 @@ exports[`renders steps nested in include nodes 1`] = `
                 </div>
               </button>
               <span
-                class="emotion-23"
+                class="emotion-22"
               />
             </div>
           </div>
           <p
-            class="emotion-24"
+            class="emotion-23"
           >
             Content for step 2
           </p>
@@ -1034,27 +1017,27 @@ exports[`renders steps nested in include nodes 1`] = `
               </a>
             </h1>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-13"
               data-lgid="lg-split_button"
               data-testid="lg-split_button"
             >
               <button
                 aria-disabled="false"
-                class="lg-ui-button-0000 emotion-15"
+                class="lg-ui-button-0000 emotion-14"
                 data-lgid="lg-split_button-button"
                 data-testid="lg-split_button-button"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-18"
+                    class="emotion-17"
                     fill="none"
                     height="16"
                     role="presentation"
@@ -1078,20 +1061,20 @@ exports[`renders steps nested in include nodes 1`] = `
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-label="More options"
-                class="lg-ui-button-0000 emotion-19"
+                class="lg-ui-button-0000 emotion-18"
                 data-lgid="lg-split_button-trigger"
                 data-testid="lg-split_button-trigger"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     aria-label="Caret Down Icon"
-                    class="emotion-22"
+                    class="emotion-21"
                     fill="none"
                     height="16"
                     role="img"
@@ -1107,12 +1090,12 @@ exports[`renders steps nested in include nodes 1`] = `
                 </div>
               </button>
               <span
-                class="emotion-23"
+                class="emotion-22"
               />
             </div>
           </div>
           <p
-            class="emotion-24"
+            class="emotion-23"
           >
             Content for step 3
           </p>
@@ -1174,27 +1157,27 @@ exports[`renders steps nested in include nodes 1`] = `
               </a>
             </h1>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-13"
               data-lgid="lg-split_button"
               data-testid="lg-split_button"
             >
               <button
                 aria-disabled="false"
-                class="lg-ui-button-0000 emotion-15"
+                class="lg-ui-button-0000 emotion-14"
                 data-lgid="lg-split_button-button"
                 data-testid="lg-split_button-button"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-18"
+                    class="emotion-17"
                     fill="none"
                     height="16"
                     role="presentation"
@@ -1218,20 +1201,20 @@ exports[`renders steps nested in include nodes 1`] = `
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-label="More options"
-                class="lg-ui-button-0000 emotion-19"
+                class="lg-ui-button-0000 emotion-18"
                 data-lgid="lg-split_button-trigger"
                 data-testid="lg-split_button-trigger"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     aria-label="Caret Down Icon"
-                    class="emotion-22"
+                    class="emotion-21"
                     fill="none"
                     height="16"
                     role="img"
@@ -1247,12 +1230,12 @@ exports[`renders steps nested in include nodes 1`] = `
                 </div>
               </button>
               <span
-                class="emotion-23"
+                class="emotion-22"
               />
             </div>
           </div>
           <p
-            class="emotion-24"
+            class="emotion-23"
           >
             Content for step 4
           </p>
@@ -1314,27 +1297,27 @@ exports[`renders steps nested in include nodes 1`] = `
               </a>
             </h1>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-13"
               data-lgid="lg-split_button"
               data-testid="lg-split_button"
             >
               <button
                 aria-disabled="false"
-                class="lg-ui-button-0000 emotion-15"
+                class="lg-ui-button-0000 emotion-14"
                 data-lgid="lg-split_button-button"
                 data-testid="lg-split_button-button"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-18"
+                    class="emotion-17"
                     fill="none"
                     height="16"
                     role="presentation"
@@ -1358,20 +1341,20 @@ exports[`renders steps nested in include nodes 1`] = `
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-label="More options"
-                class="lg-ui-button-0000 emotion-19"
+                class="lg-ui-button-0000 emotion-18"
                 data-lgid="lg-split_button-trigger"
                 data-testid="lg-split_button-trigger"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     aria-label="Caret Down Icon"
-                    class="emotion-22"
+                    class="emotion-21"
                     fill="none"
                     height="16"
                     role="img"
@@ -1387,12 +1370,12 @@ exports[`renders steps nested in include nodes 1`] = `
                 </div>
               </button>
               <span
-                class="emotion-23"
+                class="emotion-22"
               />
             </div>
           </div>
           <p
-            class="emotion-24"
+            class="emotion-23"
           >
             Content for step 5
           </p>
@@ -1454,27 +1437,27 @@ exports[`renders steps nested in include nodes 1`] = `
               </a>
             </h1>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-13"
               data-lgid="lg-split_button"
               data-testid="lg-split_button"
             >
               <button
                 aria-disabled="false"
-                class="lg-ui-button-0000 emotion-15"
+                class="lg-ui-button-0000 emotion-14"
                 data-lgid="lg-split_button-button"
                 data-testid="lg-split_button-button"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-18"
+                    class="emotion-17"
                     fill="none"
                     height="16"
                     role="presentation"
@@ -1498,20 +1481,20 @@ exports[`renders steps nested in include nodes 1`] = `
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-label="More options"
-                class="lg-ui-button-0000 emotion-19"
+                class="lg-ui-button-0000 emotion-18"
                 data-lgid="lg-split_button-trigger"
                 data-testid="lg-split_button-trigger"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     aria-label="Caret Down Icon"
-                    class="emotion-22"
+                    class="emotion-21"
                     fill="none"
                     height="16"
                     role="img"
@@ -1527,12 +1510,12 @@ exports[`renders steps nested in include nodes 1`] = `
                 </div>
               </button>
               <span
-                class="emotion-23"
+                class="emotion-22"
               />
             </div>
           </div>
           <p
-            class="emotion-24"
+            class="emotion-23"
           >
             Content for step 6
           </p>
@@ -1594,27 +1577,27 @@ exports[`renders steps nested in include nodes 1`] = `
               </a>
             </h1>
             <div
-              class="emotion-13 emotion-14"
+              class="emotion-13"
               data-lgid="lg-split_button"
               data-testid="lg-split_button"
             >
               <button
                 aria-disabled="false"
-                class="lg-ui-button-0000 emotion-15"
+                class="lg-ui-button-0000 emotion-14"
                 data-lgid="lg-split_button-button"
                 data-testid="lg-split_button-button"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-18"
+                    class="emotion-17"
                     fill="none"
                     height="16"
                     role="presentation"
@@ -1638,20 +1621,20 @@ exports[`renders steps nested in include nodes 1`] = `
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-label="More options"
-                class="lg-ui-button-0000 emotion-19"
+                class="lg-ui-button-0000 emotion-18"
                 data-lgid="lg-split_button-trigger"
                 data-testid="lg-split_button-trigger"
                 type="button"
               >
                 <div
-                  class="emotion-16"
+                  class="emotion-15"
                 />
                 <div
-                  class="emotion-17"
+                  class="emotion-16"
                 >
                   <svg
                     aria-label="Caret Down Icon"
-                    class="emotion-22"
+                    class="emotion-21"
                     fill="none"
                     height="16"
                     role="img"
@@ -1667,12 +1650,12 @@ exports[`renders steps nested in include nodes 1`] = `
                 </div>
               </button>
               <span
-                class="emotion-23"
+                class="emotion-22"
               />
             </div>
           </div>
           <p
-            class="emotion-24"
+            class="emotion-23"
           >
             Content for step 7
           </p>

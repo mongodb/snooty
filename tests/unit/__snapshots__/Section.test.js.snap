@@ -68,23 +68,20 @@ exports[`renders correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-}
-
-.emotion-6 {
   min-width: 145px;
 }
 
-.emotion-6 [data-theme] {
+.emotion-5 [data-theme] {
   width: 310px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-6 {
+  .emotion-5 {
     display: none;
   }
 }
 
-.emotion-7 {
+.emotion-6 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -122,48 +119,48 @@ exports[`renders correctly 1`] = `
   z-index: 1;
 }
 
-.emotion-7:focus-visible,
-.emotion-7[data-focus="true"] {
+.emotion-6:focus-visible,
+.emotion-6[data-focus="true"] {
   outline: none;
 }
 
-.emotion-7:active,
-.emotion-7[data-active="true"],
-.emotion-7:focus,
-.emotion-7:hover {
+.emotion-6:active,
+.emotion-6[data-active="true"],
+.emotion-6:focus,
+.emotion-6:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-7:focus-visible,
-.emotion-7[data-focus="true"] {
+.emotion-6:focus-visible,
+.emotion-6[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-7:hover,
-.emotion-7[data-hover="true"],
-.emotion-7:active,
-.emotion-7[data-active="true"] {
+.emotion-6:hover,
+.emotion-6[data-hover="true"],
+.emotion-6:active,
+.emotion-6[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-7:focus-visible,
-.emotion-7[data-focus="true"] {
+.emotion-6:focus-visible,
+.emotion-6[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-7,
-.emotion-7:hover,
-.emotion-7:focus,
-.emotion-7:focus-visible,
-.emotion-7:active {
+.emotion-6,
+.emotion-6:hover,
+.emotion-6:focus,
+.emotion-6:focus-visible,
+.emotion-6:active {
   border-right-color: #889397;
 }
 
-.emotion-8 {
+.emotion-7 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -174,16 +171,6 @@ exports[`renders correctly 1`] = `
 }
 
 .emotion-8 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
-}
-
-.emotion-9 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -208,14 +195,14 @@ exports[`renders correctly 1`] = `
   gap: 6px;
 }
 
-.emotion-10 {
+.emotion-9 {
   color: #889397;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-11 {
+.emotion-10 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -254,74 +241,70 @@ exports[`renders correctly 1`] = `
   width: 32px;
 }
 
-.emotion-11:focus-visible,
-.emotion-11[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   outline: none;
 }
 
-.emotion-11:active,
-.emotion-11[data-active="true"],
-.emotion-11:focus,
-.emotion-11:hover {
+.emotion-10:active,
+.emotion-10[data-active="true"],
+.emotion-10:focus,
+.emotion-10:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-11:focus-visible,
-.emotion-11[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-11:hover,
-.emotion-11[data-hover="true"],
-.emotion-11:active,
-.emotion-11[data-active="true"] {
+.emotion-10:hover,
+.emotion-10[data-hover="true"],
+.emotion-10:active,
+.emotion-10[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-11:focus-visible,
-.emotion-11[data-focus="true"] {
+.emotion-10:focus-visible,
+.emotion-10[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-11:focus,
-.emotion-11:focus-visible,
-.emotion-11:hover {
+.emotion-10:focus,
+.emotion-10:focus-visible,
+.emotion-10:hover {
   z-index: 1;
 }
 
-.emotion-11,
-.emotion-11:hover,
-.emotion-11:focus,
-.emotion-11:focus-visible,
-.emotion-11:active {
+.emotion-10,
+.emotion-10:hover,
+.emotion-10:focus,
+.emotion-10:focus-visible,
+.emotion-10:active {
   border-left-color: #889397;
 }
 
-.emotion-11 svg {
+.emotion-10 svg {
   color: #3D4F58;
 }
 
-.emotion-14 {
+.emotion-13 {
   color: #001E2B;
   height: 16px;
   width: 16px;
   justify-self: right;
 }
 
-.emotion-14 .lg-ui-button-0000:hover,
-.emotion-14 .lg-ui-button-0000:active {
+.emotion-13 .lg-ui-button-0000:hover,
+.emotion-13 .lg-ui-button-0000:active {
   color: currentColor;
 }
 
-.emotion-15 {
-  display: none;
-}
-
-.emotion-15 {
+.emotion-14 {
   display: none;
 }
 
@@ -365,27 +348,27 @@ exports[`renders correctly 1`] = `
         </a>
       </h1>
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-5"
         data-lgid="lg-split_button"
         data-testid="lg-split_button"
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-7"
+          class="lg-ui-button-0000 emotion-6"
           data-lgid="lg-split_button-button"
           data-testid="lg-split_button-button"
           type="button"
         >
           <div
-            class="emotion-8"
+            class="emotion-7"
           />
           <div
-            class="emotion-9"
+            class="emotion-8"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="emotion-10"
+              class="emotion-9"
               fill="none"
               height="16"
               role="presentation"
@@ -409,20 +392,20 @@ exports[`renders correctly 1`] = `
           aria-expanded="false"
           aria-haspopup="true"
           aria-label="More options"
-          class="lg-ui-button-0000 emotion-11"
+          class="lg-ui-button-0000 emotion-10"
           data-lgid="lg-split_button-trigger"
           data-testid="lg-split_button-trigger"
           type="button"
         >
           <div
-            class="emotion-8"
+            class="emotion-7"
           />
           <div
-            class="emotion-9"
+            class="emotion-8"
           >
             <svg
               aria-label="Caret Down Icon"
-              class="emotion-14"
+              class="emotion-13"
               fill="none"
               height="16"
               role="img"
@@ -438,7 +421,7 @@ exports[`renders correctly 1`] = `
           </div>
         </button>
         <span
-          class="emotion-15"
+          class="emotion-14"
         />
       </div>
     </div>

@@ -37,10 +37,6 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
   color: #00ED64;
 }
 
-.emotion-5 {
-  color: #00ED64;
-}
-
 .emotion-6 {
   margin: 0 0 32px 0!important;
   font-weight: 500;
@@ -129,16 +125,6 @@ exports[`quiz widget snapshots renders quiz widget correctly 1`] = `
 
 .emotion-13 {
   font-size: 16px;
-}
-
-.emotion-15 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
 }
 
 .emotion-15 {

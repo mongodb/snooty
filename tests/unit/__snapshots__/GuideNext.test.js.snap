@@ -181,16 +181,6 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   border-radius: 5px;
 }
 
-.emotion-9 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
-}
-
 .emotion-10 {
   display: grid;
   grid-auto-flow: column;
@@ -679,16 +669,6 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   border-radius: 5px;
 }
 
-.emotion-9 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
-}
-
 .emotion-10 {
   display: grid;
   grid-auto-flow: column;
@@ -1155,16 +1135,6 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   color: #FFFFFF;
   background-color: #00593f;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
-}
-
-.emotion-9 {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 5px;
 }
 
 .emotion-9 {
