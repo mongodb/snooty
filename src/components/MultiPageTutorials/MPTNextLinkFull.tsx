@@ -31,10 +31,10 @@ export const MPTNextLinkFull = () => {
   return (
     <NextPrevLink
       className={baseStyle}
-      icon={glyphs.ArrowRight.displayName}
+      icon={glyphs.ArrowRight.displayName ?? 'ArrowRight'}
       direction={'Next'}
       pageTitle={activeTutorial?.next?.pageTitle}
-      targetSlug={activeTutorial?.next?.targetSlug}
+      targetSlug={activeTutorial?.next?.targetSlug ?? ''}
       title={LINK_TITLE}
       onClick={() => reportMPTAnalytics(activeTutorial?.next?.targetSlug ?? '', 'full')}
     />
