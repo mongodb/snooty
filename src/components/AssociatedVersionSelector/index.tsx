@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from 'react';
-import { css } from '@leafygreen-ui/emotion';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { VersionContext } from '../../context/version-context';
 import Select, { Label } from '../Select';
 import { getUILabel } from '../VersionDropdown';
@@ -7,7 +7,7 @@ import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { theme } from '../../theme/docsTheme';
 import { BranchData } from '../../types/data';
 
-const StyledSelect = css`
+const selectStyling = css`
   width: 100%;
 
   button[aria-expanded='true'] {
@@ -41,7 +41,7 @@ const AssociatedVersionSelector = () => {
         <>
           <Label>Specify your version</Label>
           <Select
-            className={StyledSelect}
+            className={cx(selectStyling)}
             choices={currentVersions.map((branch) => ({
               value: branch.gitBranchName,
               text: getUILabel(branch),
