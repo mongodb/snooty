@@ -281,6 +281,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
       return;
     }
     // MAYBE NEED TO CHANGE THIS
+    console.log('hey girl', activeVersions[metadata.project], currentBranch.gitBranchName);
     if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
       const newState = { ...activeVersions };
       newState[metadata.project] = currentBranch.gitBranchName;

@@ -248,6 +248,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   let repoBranches = null;
   try {
     const repoInfo = await db.realmInterface.fetchDocset();
+
+    // this does get all the repoBranches info
+    const allRepos = await db.realmInterface.fetchDocsets();
+    console.log(
+      'diet pepsi',
+      allRepos.find((repo) => repo.repoName === 'docs-java-rs')
+    );
+
     let errMsg;
 
     if (!repoInfo) {
@@ -279,6 +287,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       branches: repoInfo.branches,
       siteBasePrefix: repoInfo.prefix[envKey],
     };
+
+    const shortenedAllRepos = allRepos.map((repo) => ({
+      repoName: repo.repoName,
+      branches: repo.branches,
+      siteBasePrefix: repoInfo.prefix[envKey],
+    }));
+
+    console.log('ayyy', shortenedAllRepos[10].branches);
+    console.log('diet pepsi', shortenedAllRepos.find((repo) => repo.repoName === 'docs-csharp').branches);
 
     if (repoInfo.groups?.length > 0) {
       repoBranches.groups = repoInfo.groups;
