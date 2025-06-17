@@ -1,9 +1,10 @@
 import { createContext, useContext } from 'react';
-import { Root } from '../types/ast';
+import { PageOptions, Root } from '../types/ast';
 
 export type PageTemplateType =
   | 'blank'
   | 'drivers-index'
+  | 'document'
   | 'errorpage'
   | 'feature-not-avail'
   | 'instruqt'
@@ -13,12 +14,6 @@ export type PageTemplateType =
   | 'search'
   | 'guide'
   | 'product-landing';
-
-interface PageOptions {
-  has_composable_tutorial?: boolean;
-  hidefeedback: string;
-  [key: string]: any;
-}
 
 interface PageContextType {
   page: Root | null;

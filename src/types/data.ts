@@ -1,11 +1,23 @@
 import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
+import { ImageRelativePaths } from '../context/image-context';
 import { PageTemplateType } from '../context/page-context';
 import { ParagraphNode, Root, TextNode, TocTreeEntry } from './ast';
 
 type AppData = {
   page: {
     ast: Root;
+    facets: PageFacet[];
   };
+  pageImage?: {
+    images: ImageRelativePaths;
+  } | null;
+};
+
+type PageFacet = {
+  category: string;
+  value: string;
+  display_name: string;
+  sub_facets: PageFacet[] | null;
 };
 
 type EOLType = 'download' | 'link';
@@ -17,6 +29,7 @@ type BranchData = {
   urlAliases?: string[] | null;
   versionSelectorLabel: string;
   offlineUrl: string;
+  noIndexing: boolean;
   eol_type?: EOLType;
 };
 

@@ -100,9 +100,9 @@ const TabProvider = ({
   selectors = {},
   defaultTabs = {},
 }: {
-  children: ReactNode[];
-  selectors: Selectors;
-  defaultTabs: ActiveTabs;
+  children: ReactNode;
+  selectors?: Selectors;
+  defaultTabs?: ActiveTabs;
 }) => {
   // init value to {} to match server and client side
   const { hash } = useLocation();

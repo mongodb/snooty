@@ -146,9 +146,6 @@ export class VideoObjectSd extends StructuredData {
 
 /**
  * get TechArticle Structured Data from page facets and pageTitle.
- * @param   {{category: string, sub_facets: object[]}[]}  facets
- * @param   {string}                                      pageTitle
- * @returns {StructuredData}
  */
 export const constructTechArticle = ({ facets, pageTitle }) => {
   // get display name from facets

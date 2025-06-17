@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 
-interface Footnote {
+export interface Footnote {
   references: string[];
-  label: string;
+  label: number;
 }
 
 interface FootnoteContextType {

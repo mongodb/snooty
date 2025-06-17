@@ -1,12 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { getLocaleMapping } from '../utils/locale';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 
 const DEFAULT_TWITTER_SITE = '@mongodb';
 const metaUrl = `https://www.mongodb.com/docs/assets/meta_generic.png`;
 
-const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIndexing }) => {
+export type SEOProps = {
+  pageTitle: string;
+  siteTitle: string;
+  showDocsLandingTitle: boolean;
+  canonical: string;
+  slug: string;
+  noIndexing: boolean;
+};
+
+const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIndexing }: SEOProps) => {
   // Using static siteUrl instead of location.origin due to origin being undefined at build time
   const { siteUrl } = useSiteMetadata();
   const localeHrefMap = getLocaleMapping(siteUrl, slug);
@@ -52,14 +60,6 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIn
       {canonical && <link data-testid="canonical" id="canonical" rel="canonical" key={canonical} href={canonical} />}
     </>
   );
-};
-
-SEO.propTypes = {
-  pageTitle: PropTypes.string.isRequired,
-  siteTitle: PropTypes.string.isRequired,
-  showDocsLandingTitle: PropTypes.bool,
-  canonical: PropTypes.string,
-  noIndexing: PropTypes.bool,
 };
 
 export default SEO;

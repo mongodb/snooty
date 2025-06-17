@@ -1,6 +1,7 @@
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../../theme/docsTheme';
 import { CONTENT_MAX_WIDTH } from '../../../templates/product-landing';
+import { PageTemplateType } from '../../../context/page-context';
 
 export const baseBannerStyle = css`
   margin: ${theme.size.default} 0;
@@ -34,10 +35,8 @@ export const baseBannerStyle = css`
   }
 `;
 
-export type BannerTemplateType = 'product-landing' | 'document' | 'instruqt' | 'changelog';
-
 interface BannerStyleProps {
-  template: BannerTemplateType;
+  template: PageTemplateType;
 }
 
 export const offlineBannerStyle = ({ template }: BannerStyleProps) => css`

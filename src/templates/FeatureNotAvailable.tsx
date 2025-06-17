@@ -9,6 +9,7 @@ import { theme } from '../theme/docsTheme';
 import Breadcrumbs, { BreadcrumbInfoLocalStorage, PageInfo, SelfCrumb } from '../components/Breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
 import { getCompleteUrl, getUrl } from '../utils/url-utils';
+import { BaseTemplateProps } from '.';
 
 const StyledMain = styled.main`
   max-width: 100vw;
@@ -92,7 +93,7 @@ const FeatureNotAvailContainer = styled.div`
 `;
 
 // TODO: Much better type checks for the data on this page/component
-const FeatureNotAvailable = () => {
+const FeatureNotAvailable = (props: BaseTemplateProps) => {
   let breadcrumbInfo: BreadcrumbInfoLocalStorage | undefined;
   let selfBreadcrumb: SelfCrumb | undefined;
   let pageInfo: PageInfo | undefined;

@@ -9,6 +9,7 @@ import { Body } from '@leafygreen-ui/typography';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
 import Link from '../components/Link';
+import { BaseTemplateProps } from '.';
 
 const ErrorBox = styled.div`
   max-width: 455px;
@@ -158,7 +159,7 @@ export const Wrapper = styled('main')`
   ${gridStyling}
 `;
 
-const NotFound = () => {
+const NotFound = (props: BaseTemplateProps) => {
   return (
     <Wrapper>
       <NotFoundContainer>

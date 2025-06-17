@@ -1,4 +1,5 @@
 import { HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW } from '../components/Roles/Highlight';
+import { ActiveTabs, Selectors } from '../components/Tabs/tab-context';
 
 type ComponentType =
   | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
@@ -183,8 +184,22 @@ interface ParentNode extends Node {
   children: Node[];
 }
 
+interface PageOptions {
+  template: string;
+  has_composable_tutorial?: boolean;
+  hidefeedback?: string;
+  'tabs-selector-position'?: string;
+  selectors?: Selectors;
+  instruqt?: boolean;
+  default_tabs?: ActiveTabs;
+  has_method_selector?: boolean;
+  noprevnext?: string;
+  dismissible_skills_card?: DismissibleSkillsCardOptions;
+  'pl-max-width-paragraphs'?: string;
+}
+
 interface Root extends ParentNode {
-  options: Record<string, any>;
+  options: PageOptions;
   fileid: string;
 }
 
@@ -555,8 +570,8 @@ interface RoleManualNode extends ParentNode {
 }
 
 type MetaOptions = {
+  canonical: string;
   description?: string;
-  canonical?: string;
   robots?: string;
   keywords?: string;
 };
@@ -666,6 +681,7 @@ export type {
   Node,
   NodeName,
   NodeType,
+  PageOptions,
   ParagraphNode,
   ParentNode,
   ProcedureNode,
