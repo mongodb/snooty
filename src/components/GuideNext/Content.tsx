@@ -7,8 +7,8 @@ import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
 import ConditionalWrapper from '../ConditionalWrapper';
 import { theme } from '../../theme/docsTheme';
+import type { MetadataGuide } from '../../types/data';
 import { formatText } from '../../utils/format-text';
-import type { Guide } from './GuidesList';
 
 const Container = styled('div')`
   p {
@@ -37,7 +37,7 @@ const Time = styled('div')`
   font-weight: normal;
 `;
 
-const defaultTarget: [string, Guide] = [
+const defaultTarget: [string, MetadataGuide] = [
   'https://university.mongodb.com/certification/developer/about',
   {
     title: 'Become a MongoDB Professional',
@@ -49,7 +49,7 @@ const defaultTarget: [string, Guide] = [
 interface ContentProps {
   argument: string;
   children: string;
-  guideData: [string, Guide] | [null, null];
+  guideData: [string, MetadataGuide] | [null, null];
 }
 
 const Content = ({ argument, children, guideData }: ContentProps) => {

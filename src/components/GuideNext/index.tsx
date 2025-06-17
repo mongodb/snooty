@@ -3,9 +3,9 @@ import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
 import type { GuideNextNode } from '../../types/ast';
+import type { MetadataGuide, MetadataGuides } from '../../types/data';
 import Content from './Content';
 import ChapterInfo from './ChapterInfo';
-import type { Guide } from './GuidesList';
 import { ReadGuidesContextProvider } from './read-guides-context';
 
 const Container = styled('div')`
@@ -29,14 +29,14 @@ const getTargetGuide = (
   targetGuideIdx: number,
   targetChapterName: string,
   chapters: Record<string, ChapterData>,
-  guides: Record<string, Guide>
-): [string, Guide] => {
+  guides: MetadataGuides
+): [string, MetadataGuide] => {
   const guidesInTargetChapter = chapters[targetChapterName].guides;
   const targetGuideSlug = guidesInTargetChapter[targetGuideIdx];
   return [targetGuideSlug, guides[targetGuideSlug]];
 };
 
-const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Record<string, Guide>, slug: string) => {
+const getNextGuideData = (chapters: Record<string, ChapterData>, guides: MetadataGuides, slug: string) => {
   // Get current chapter name and guides in said chapter
   const currentChapterName = guides?.[slug]?.chapter_name ?? '';
   const currentChapter = chapters?.[currentChapterName];
@@ -68,7 +68,7 @@ const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Record<
   }
 
   const isFinalGuideOnSite = isFinalChapter && isFinalGuideInChapter;
-  let targetGuide: [string, Guide] | [null, null] = [null, null];
+  let targetGuide: [string, MetadataGuide] | [null, null] = [null, null];
   if (!isFinalGuideOnSite) {
     targetGuide = getTargetGuide(targetGuideIdx, targetChapter?.[0] ?? '', chapters, guides);
   }
@@ -84,7 +84,7 @@ interface GuideNextProps {
   slug: string;
   metadata: {
     chapters: Record<string, ChapterData>;
-    guides: Record<string, Guide>;
+    guides: MetadataGuides;
   };
 }
 

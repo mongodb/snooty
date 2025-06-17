@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import type { MetadataGuides } from '../../types/data';
 import GuidesListItem from './GuidesListItem';
 
 const List = styled('ul')`
@@ -7,15 +8,8 @@ const List = styled('ul')`
   padding-left: 0;
 `;
 
-export interface Guide {
-  title: string;
-  description?: string;
-  chapter_name?: string;
-  completion_time?: number;
-}
-
 interface GuidesListProps {
-  guidesMetadata: Record<string, Guide>;
+  guidesMetadata: MetadataGuides;
   guideSlugs: Array<string>;
   targetSlug: string;
 }

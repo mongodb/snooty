@@ -183,6 +183,8 @@ export {
   FacetValue,
   Group,
   MetadataChapters,
+  MetadataGuide,
+  MetadataGuides,
   MetadataDatabaseName,
   MultiPageTutorial,
   PageContext,
