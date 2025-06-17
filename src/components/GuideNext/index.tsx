@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
-import type { Directive } from '../../types/ast';
+import type { GuideNextNode } from '../../types/ast';
 import Content from './Content';
 import ChapterInfo from './ChapterInfo';
 import type { Guide } from './GuidesList';
@@ -80,7 +80,7 @@ const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Record<
 };
 
 interface GuideNextProps {
-  nodeData: Directive;
+  nodeData: GuideNextNode;
   slug: string;
   metadata: {
     chapters: Record<string, ChapterData>;

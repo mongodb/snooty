@@ -8,7 +8,6 @@ import Link from '../Link';
 import ConditionalWrapper from '../ConditionalWrapper';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
-import type { Node } from '../../types/ast';
 import type { Guide } from './GuidesList';
 
 const Container = styled('div')`
@@ -48,8 +47,8 @@ const defaultTarget: [string, Guide] = [
 ];
 
 interface ContentProps {
-  argument: Node[];
-  children: Node[];
+  argument: string;
+  children: string;
   guideData: [string, Guide] | [null, null];
 }
 

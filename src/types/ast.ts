@@ -638,6 +638,11 @@ interface InstruqtNode extends Directive<InstruqtOptions> {
   argument: Array<TextNode>;
 }
 
+interface GuideNextNode {
+  argument: string;
+  children: string;
+}
+
 export type {
   AbbrRoleNode,
   AdmonitionNode,
@@ -667,6 +672,7 @@ export type {
   FacetNode,
   FootnoteNode,
   FootnoteReferenceNode,
+  GuideNextNode,
   HeadingNode,
   HeadingNodeSelectorIds,
   HighlightNode,
