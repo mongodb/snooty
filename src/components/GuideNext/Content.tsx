@@ -8,6 +8,7 @@ import Link from '../Link';
 import ConditionalWrapper from '../ConditionalWrapper';
 import { theme } from '../../theme/docsTheme';
 import type { MetadataGuide } from '../../types/data';
+import type { ParagraphNode, TextNode } from '../../types/ast';
 import { formatText } from '../../utils/format-text';
 
 const Container = styled('div')`
@@ -47,8 +48,8 @@ const defaultTarget: [string, MetadataGuide] = [
 ];
 
 interface ContentProps {
-  argument: string;
-  children: string;
+  argument: TextNode;
+  children: ParagraphNode;
   guideData: [string, MetadataGuide] | [null, null];
 }
 
@@ -70,11 +71,11 @@ const Content = ({ argument, children, guideData }: ContentProps) => {
     <Container>
       <Heading style={{ color: darkMode ? palette.gray.light2 : palette.gray.dark1 }}>What's Next</Heading>
       <Title>
-        {formatText(content.title)}
+        {formatText([content.title])}
         {!!content.completion_time && <Time>{content.completion_time} mins</Time>}
       </Title>
       <ConditionalWrapper condition={typeof content.description === 'string'} wrapper={(children) => <p>{children}</p>}>
-        {formatText(content.description)}
+        {formatText([content.description])}
       </ConditionalWrapper>
       {/* We only want to show the button if argument/children are empty */}
       {!hasCustomContent && buttonUrl && (
