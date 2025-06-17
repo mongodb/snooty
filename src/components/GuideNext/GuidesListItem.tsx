@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { css } from '@emotion/react';
+import { css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
@@ -62,7 +62,7 @@ const STATUSES = {
     circleColor: palette.green.dark1,
     icon: (
       <IconLightningBolt
-        css={css`
+        className={css`
           color: ${palette.green.dark1};
         `}
       />
@@ -78,7 +78,7 @@ const STATUSES = {
     circleColor: 'transparent',
     icon: (
       <IconLightningBolt
-        css={css`
+        className={css`
           color: ${palette.gray.dark2};
           .dark-theme & {
             color: ${palette.gray.light2};
