@@ -9,6 +9,10 @@ import OpenAPITemplate from './openapi';
 import ProductLanding from './product-landing';
 import Changelog from './changelog';
 
+export type BaseTemplateProps = {
+  useChatbot: boolean;
+};
+
 export {
   Blank,
   Document,

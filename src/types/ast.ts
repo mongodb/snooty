@@ -183,8 +183,14 @@ interface ParentNode extends Node {
   children: Node[];
 }
 
+interface PageOptions {
+  has_composable_tutorial?: boolean;
+  hidefeedback: string;
+  [key: string]: any;
+}
+
 interface Root extends ParentNode {
-  options: Record<string, any>;
+  options: PageOptions;
   fileid: string;
 }
 
@@ -555,8 +561,8 @@ interface RoleManualNode extends ParentNode {
 }
 
 type MetaOptions = {
+  canonical: string;
   description?: string;
-  canonical?: string;
   robots?: string;
   keywords?: string;
 };
@@ -666,6 +672,7 @@ export type {
   Node,
   NodeName,
   NodeType,
+  PageOptions,
   ParagraphNode,
   ParentNode,
   ProcedureNode,

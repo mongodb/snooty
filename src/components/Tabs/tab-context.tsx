@@ -100,7 +100,7 @@ const TabProvider = ({
   selectors = {},
   defaultTabs = {},
 }: {
-  children: ReactNode[];
+  children: ReactNode;
   selectors: Selectors;
   defaultTabs: ActiveTabs;
 }) => {

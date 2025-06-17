@@ -1,5 +1,4 @@
 import React, { useState, useMemo, lazy } from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import { ImageContextProvider } from '../context/image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
@@ -18,9 +17,11 @@ import { isBrowser } from '../utils/is-browser';
 import { TEMPLATE_CONTAINER_ID } from '../constants';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { getCompleteUrl, getUrl } from '../utils/url-utils';
+import { AppData, PageContext as PageContextType } from '../types/data';
+import { FootnoteNode, FootnoteReferenceNode, MetaNode, Node, TwitterNode } from '../types/ast';
 import OfflineBanner from './Banner/OfflineBanner';
 import SEO from './SEO';
-import FootnoteContext from './Footnote/footnote-context';
+import FootnoteContext, { Footnote } from './Footnote/footnote-context';
 import ComponentFactory from './ComponentFactory';
 import Meta from './Meta';
 import Twitter from './Twitter';
@@ -37,15 +38,15 @@ const LazyFooter = lazy(() => import('./Footer'));
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
 // - labels: the numerical label for the footnote
 // - references: a list of the footnote reference ids that refer to this footnote
-const getFootnotes = (nodes) => {
-  const footnotes = findAllKeyValuePairs(nodes, 'type', 'footnote');
-  const footnoteReferences = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
+const getFootnotes = (nodes: Node[]) => {
+  const footnotes: FootnoteNode[] = findAllKeyValuePairs(nodes, 'type', 'footnote');
+  const footnoteReferences: FootnoteReferenceNode[] = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
   const numAnonRefs = footnoteReferences.filter(
     (node) => !Object.prototype.hasOwnProperty.call(node, 'refname')
   ).length;
   // We label our footnotes by their index, regardless of their names to
   // circumvent cases such as [[1], [#], [2], ...]
-  return footnotes.reduce((map, footnote, index) => {
+  return footnotes.reduce<Record<string, Footnote>>((map, footnote, index) => {
     if (footnote.name) {
       // Find references associated with a named footnote
       // eslint-disable-next-line no-param-reassign
@@ -69,7 +70,7 @@ const getFootnotes = (nodes) => {
 
 // Find all footnote_reference node IDs associated with a given footnote by
 // that footnote's refname
-const getNamedFootnoteReferences = (footnoteReferences, refname) => {
+const getNamedFootnoteReferences = (footnoteReferences: FootnoteReferenceNode[], refname: string) => {
   return footnoteReferences.filter((node) => node.refname === refname).map((node) => node.id);
 };
 
@@ -78,18 +79,23 @@ const getNamedFootnoteReferences = (footnoteReferences, refname) => {
 // anon footnotes and footnote references are anonymous, we assume a 1:1 pairing, and
 // have no need to query nodes. If there are more anonymous footnotes than references,
 // we may return an empty array
-const getAnonymousFootnoteReferences = (index, numAnonRefs) => {
+const getAnonymousFootnoteReferences = (index: number, numAnonRefs: number) => {
   return index > numAnonRefs ? [] : [`id${index + 1}`];
 };
 
-const DocumentBody = (props) => {
+export type DocumentBodyProps = {
+  data: AppData;
+  pageContext: PageContextType;
+};
+
+const DocumentBody = (props: DocumentBodyProps) => {
   const { data, pageContext } = props;
   const page = data?.page?.ast;
   const { slug, template, repoBranches } = pageContext;
   const tabsMainColumn = page?.options?.['tabs-selector-position'] === 'main';
 
   const initialization = () => {
-    const pageNodes = getNestedValue(['children'], page) || [];
+    const pageNodes: Node[] = getNestedValue(['children'], page) || [];
     const footnotes = getFootnotes(pageNodes);
 
     return { pageNodes, footnotes };
@@ -187,22 +193,14 @@ const DocumentBody = (props) => {
   );
 };
 
-DocumentBody.propTypes = {
-  location: PropTypes.object.isRequired,
-  pageContext: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
-  }),
-  data: PropTypes.shape({
-    page: PropTypes.shape({
-      children: PropTypes.array,
-      options: PropTypes.object,
-    }).isRequired,
-  }).isRequired,
-};
-
 export default DocumentBody;
 
-export const Head = ({ pageContext, data }) => {
+export type HeadProps = {
+  data: AppData;
+  pageContext: PageContextType;
+};
+
+export const Head = ({ pageContext, data }: HeadProps) => {
   const { slug, template, repoBranches } = pageContext;
   const pageAst = data.page?.ast;
 
@@ -212,8 +210,8 @@ export const Head = ({ pageContext, data }) => {
 
   const pageNodes = getNestedValue(['children'], pageAst) || [];
 
-  const meta = getMetaFromDirective('section', pageNodes, 'meta');
-  const twitter = getMetaFromDirective('section', pageNodes, 'twitter');
+  const meta: MetaNode[] = getMetaFromDirective('section', pageNodes, 'meta');
+  const twitter: TwitterNode[] = getMetaFromDirective('section', pageNodes, 'twitter');
 
   const metadata = useSnootyMetadata();
 
@@ -227,7 +225,7 @@ export const Head = ({ pageContext, data }) => {
   // Retrieves the canonical URL based on certain situations
   // i.e. eol'd, non-eol'd, snooty.toml or ..metadata:: directive (highest priority)
   const canonical = useCanonicalUrl(meta, metadata, slug, repoBranches);
-  const noIndexing = repoBranches.branches.find((br) => br.gitBranchName === metadata.branch)?.noIndexing;
+  const noIndexing = repoBranches.branches.find((br) => br.gitBranchName === metadata.branch)?.noIndexing ?? false;
 
   // construct Structured Data
   const techArticleSd = useMemo(() => {
@@ -249,7 +247,8 @@ export const Head = ({ pageContext, data }) => {
         noIndexing={noIndexing}
       />
       {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
-      {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
+      {/* TODO: How does this work?? spreading the node vs passing as 'nodeData' */}
+      {twitter.length > 0 && twitter.map((t) => <Twitter nodeData={t} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
       {techArticleSd && (
