@@ -368,6 +368,8 @@ exports[`renders steps nested in include nodes 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-column-gap: 5px;
+  column-gap: 5px;
 }
 
 .emotion-9 {

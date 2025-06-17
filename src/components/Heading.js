@@ -71,7 +71,7 @@ const determineHeading = (sectionDepth) => {
 };
 
 const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
-  const templates = [
+  const templatesWithNoMarkdown = [
     'blank',
     'drivers-index',
     'errorpage',
@@ -97,7 +97,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const hasMethodSelector = page?.options?.['has_method_selector'];
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
   const showRating = !(rest?.page?.options?.template === 'product-landing');
-  const showCopyMarkdown = !templates.includes(rest?.page?.options?.template) && isPageTitle;
+  const showCopyMarkdown = !templatesWithNoMarkdown.includes(rest?.page?.options?.template) && isPageTitle;
 
   return (
     <>
@@ -136,6 +136,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
                   display: flex;
                   justify-content: space-between;
                   align-items: center;
+                  column-gap: 5px;
                 `}
               >
                 {children}
