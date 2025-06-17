@@ -639,8 +639,8 @@ interface InstruqtNode extends Directive<InstruqtOptions> {
 }
 
 interface GuideNextNode {
-  argument: string;
-  children: string;
+  argument: TextNode;
+  children: ParagraphNode;
 }
 
 export type {
