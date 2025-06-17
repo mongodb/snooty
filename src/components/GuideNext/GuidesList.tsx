@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import type { MetadataGuides } from '../../types/data';
+import { formatText } from '../../utils/format-text';
 import GuidesListItem from './GuidesListItem';
 
 const List = styled('ul')`
@@ -20,7 +21,7 @@ const GuidesList = ({ guidesMetadata, guideSlugs, targetSlug }: GuidesListProps)
       {guideSlugs.map((slug) => {
         return (
           <GuidesListItem key={slug} isNext={targetSlug === slug} slug={slug}>
-            {guidesMetadata[slug].title}
+            {formatText([guidesMetadata[slug].title])}
           </GuidesListItem>
         );
       })}
