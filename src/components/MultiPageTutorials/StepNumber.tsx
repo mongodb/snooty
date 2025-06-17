@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import Overline from '../Internal/Overline';
+import { MultiPageTutorial } from '../../types/data';
 import { MPTNextLinkFull } from './MPTNextLinkFull';
 
 const overlineStyle = css`
@@ -12,10 +13,7 @@ const overlineStyle = css`
 
 interface StepNumberProps {
   slug: string;
-  activeTutorial: {
-    total_steps: number;
-    slugs: string[];
-  };
+  activeTutorial: MultiPageTutorial;
 }
 
 export const StepNumber = ({ slug, activeTutorial }: StepNumberProps) => {
