@@ -1084,13 +1084,31 @@ exports[`Search Results Page considers a given search filter query param and dis
   bottom: 0;
   margin-bottom: 24px;
   overflow: hidden;
-  height: 26px;
 }
 
 .emotion-21 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 4px 8px;
   background-color: #E3FCF7;
   border: 1px solid #C0FAE6;
   color: #00684A;
+  background-color: #E3FCF7;
+  border: 1px solid #C0FAE6;
+  color: #00684A;
+  cursor: pointer;
+  height: 26px;
+  padding: 4px 11px 4px 11px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-right: 8px;
 }
 
 .dark-theme .emotion-21 {
@@ -1099,19 +1117,38 @@ exports[`Search Results Page considers a given search filter query param and dis
   color: #71F6BA;
 }
 
-.emotion-23 {
+.emotion-22 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 4px 8px;
   background-color: #E1F7FF;
   border: 1px solid #C3E7FE;
   color: #1254B7;
+  background-color: #E1F7FF;
+  border: 1px solid #C3E7FE;
+  color: #1254B7;
+  cursor: pointer;
+  height: 26px;
+  padding: 4px 11px 4px 11px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-right: 8px;
 }
 
-.dark-theme .emotion-23 {
+.dark-theme .emotion-22 {
   background-color: #0C2657;
   border: 1px solid #083C90;
   color: #0498EC;
 }
 
-.emotion-25 {
+.emotion-23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1122,14 +1159,14 @@ exports[`Search Results Page considers a given search filter query param and dis
   width: 100%;
 }
 
-.emotion-25>div:first-child {
+.emotion-23>div:first-child {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-25>div:last-child {
+.emotion-23>div:last-child {
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   -webkit-justify-content: flex-end;
@@ -1137,13 +1174,13 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-25 * {
+  .emotion-23 * {
     font-size: 13px;
     line-height: 16px;
   }
 }
 
-.emotion-26 {
+.emotion-24 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -1162,7 +1199,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: center;
 }
 
-.emotion-31 {
+.emotion-29 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -1185,7 +1222,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-31:before {
+.emotion-29:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -1201,57 +1238,57 @@ exports[`Search Results Page considers a given search filter query param and dis
   transform: scale(0.8);
 }
 
-.emotion-31:active:before,
-.emotion-31:hover:before,
-.emotion-31:focus:before {
+.emotion-29:active:before,
+.emotion-29:hover:before,
+.emotion-29:focus:before {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
 }
 
-.emotion-31:focus {
+.emotion-29:focus {
   outline: none;
 }
 
-.emotion-31:active,
-.emotion-31:hover {
+.emotion-29:active,
+.emotion-29:hover {
   color: #001E2B;
 }
 
-.emotion-31:active:before,
-.emotion-31:hover:before {
+.emotion-29:active:before,
+.emotion-29:hover:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-31:focus-visible {
+.emotion-29:focus-visible {
   color: #001E2B;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-31:focus-visible:before {
+.emotion-29:focus-visible:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-31:active,
-.emotion-31:hover {
+.emotion-29:active,
+.emotion-29:hover {
   color: #C1C7C6;
 }
 
-.emotion-31:active:before,
-.emotion-31:hover:before {
+.emotion-29:active:before,
+.emotion-29:hover:before {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-31:focus {
+.emotion-29:focus {
   color: #C1C7C6;
 }
 
-.emotion-31:focus:before {
+.emotion-29:focus:before {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-32 {
+.emotion-30 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1271,31 +1308,31 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: center;
 }
 
-.emotion-33 {
+.emotion-31 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-37 {
+.emotion-35 {
   grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-37 {
+  .emotion-35 {
     display: none;
   }
 }
 
-.emotion-38 {
+.emotion-36 {
   color: #3D4F58;
 }
 
-.dark-theme .emotion-38 {
+.dark-theme .emotion-36 {
   color: #E8EDEB;
 }
 
-.emotion-39 {
+.emotion-37 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -1310,12 +1347,12 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-bottom: 16px;
 }
 
-.emotion-40 {
+.emotion-38 {
   grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-40 {
+  .emotion-38 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -1326,34 +1363,34 @@ exports[`Search Results Page considers a given search filter query param and dis
     flex-direction: row;
   }
 
-  .emotion-40>div {
+  .emotion-38>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-40 {
+  .emotion-38 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-40>div {
+  .emotion-38>div {
     width: 100%;
   }
 
-  .emotion-40>div:first-of-type {
+  .emotion-38>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 
-  .emotion-40>div>div {
+  .emotion-38>div>div {
     width: 100%;
   }
 }
 
-.emotion-41 {
+.emotion-39 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1368,33 +1405,33 @@ exports[`Search Results Page considers a given search filter query param and dis
   margin-bottom: 16px;
 }
 
-.emotion-42 {
+.emotion-40 {
   width: 175px;
 }
 
-.emotion-43 {
+.emotion-41 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-43 label,
-  .emotion-43 p,
-  .emotion-43 button,
-  .emotion-43 div,
-  .emotion-43 span {
+  .emotion-41 label,
+  .emotion-41 p,
+  .emotion-41 button,
+  .emotion-41 div,
+  .emotion-41 span {
     font-size: 13px;
   }
 }
 
-.emotion-43 label {
+.emotion-41 label {
   color: #001E2B;
 }
 
-.dark-theme .emotion-43 label {
+.dark-theme .emotion-41 label {
   color: #E8EDEB;
 }
 
-.emotion-44 {
+.emotion-42 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1404,48 +1441,48 @@ exports[`Search Results Page considers a given search filter query param and dis
   flex-direction: column;
 }
 
-.emotion-44>label+button,
-.emotion-44>p+button {
+.emotion-42>label+button,
+.emotion-42>p+button {
   margin-top: 3px;
 }
 
-.emotion-44>button {
+.emotion-42>button {
   background-color: #FFFFFF;
   text-align: left;
 }
 
-.emotion-44>button>*:last-child>svg {
+.emotion-42>button>*:last-child>svg {
   color: #5C6C75;
 }
 
-.emotion-44>button:focus-visible {
+.emotion-42>button:focus-visible {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.dark-theme .emotion-44>button {
+.dark-theme .emotion-42>button {
   border-color: #889397;
   background-color: #112733;
 }
 
-.dark-theme .emotion-44>button>*:last-child>svg {
+.dark-theme .emotion-42>button>*:last-child>svg {
   color: #C1C7C6;
 }
 
-.dark-theme .emotion-44>button:hover,
-.dark-theme .emotion-44>button:active,
-.dark-theme .emotion-44>button:focus {
+.dark-theme .emotion-42>button:hover,
+.dark-theme .emotion-42>button:active,
+.dark-theme .emotion-42>button:focus {
   background-color: #112733;
   color: #E8EDEB;
 }
 
-.dark-theme .emotion-44>button:focus-visible {
+.dark-theme .emotion-42>button:focus-visible {
   background-color: #112733;
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-45 {
+.emotion-43 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -1484,35 +1521,35 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-size: 13px;
 }
 
-.emotion-45:focus {
+.emotion-43:focus {
   outline: none;
 }
 
-.emotion-45[disabled],
-.emotion-45:disabled {
+.emotion-43[disabled],
+.emotion-43:disabled {
   pointer-events: none;
 }
 
-.emotion-45:active,
-.emotion-45:focus,
-.emotion-45:hover {
+.emotion-43:active,
+.emotion-43:focus,
+.emotion-43:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-45:hover,
-.emotion-45:active {
+.emotion-43:hover,
+.emotion-43:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-45:focus {
+.emotion-43:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-45>*:last-child {
+.emotion-43>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -1520,33 +1557,33 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: flex-start;
 }
 
-.emotion-45>*:last-child>svg {
+.emotion-43>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-45>*:last-child>svg {
+.emotion-43>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-45>*:last-child {
+.emotion-43>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-45:focus {
+.emotion-43:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-45 {
+  .emotion-43 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-47 {
+.emotion-45 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -1566,7 +1603,7 @@ exports[`Search Results Page considers a given search filter query param and dis
   gap: 6px;
 }
 
-.emotion-48 {
+.emotion-46 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1586,14 +1623,14 @@ exports[`Search Results Page considers a given search filter query param and dis
   overflow: hidden;
 }
 
-.emotion-49 {
+.emotion-47 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-50 {
+.emotion-48 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -1603,37 +1640,37 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-self: left;
 }
 
-.emotion-53 {
+.emotion-51 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-53 label,
-  .emotion-53 p,
-  .emotion-53 button,
-  .emotion-53 div,
-  .emotion-53 span {
+  .emotion-51 label,
+  .emotion-51 p,
+  .emotion-51 button,
+  .emotion-51 div,
+  .emotion-51 span {
     font-size: 13px;
   }
 }
 
-.emotion-53 label {
+.emotion-51 label {
   color: #001E2B;
 }
 
-.dark-theme .emotion-53 label {
+.dark-theme .emotion-51 label {
   color: #E8EDEB;
 }
 
-.emotion-53 label {
+.emotion-51 label {
   color: #889397;
 }
 
-.dark-theme .emotion-53 label {
+.dark-theme .emotion-51 label {
   color: #5C6C75;
 }
 
-.emotion-54 {
+.emotion-52 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1643,68 +1680,68 @@ exports[`Search Results Page considers a given search filter query param and dis
   flex-direction: column;
 }
 
-.emotion-54>label+button,
-.emotion-54>p+button {
+.emotion-52>label+button,
+.emotion-52>p+button {
   margin-top: 3px;
 }
 
-.emotion-54>button {
+.emotion-52>button {
   background-color: #FFFFFF;
   text-align: left;
 }
 
-.emotion-54>button>*:last-child>svg {
+.emotion-52>button>*:last-child>svg {
   color: #5C6C75;
 }
 
-.emotion-54>button:focus-visible {
+.emotion-52>button:focus-visible {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.dark-theme .emotion-54>button {
+.dark-theme .emotion-52>button {
   border-color: #889397;
   background-color: #112733;
 }
 
-.dark-theme .emotion-54>button>*:last-child>svg {
+.dark-theme .emotion-52>button>*:last-child>svg {
   color: #C1C7C6;
 }
 
-.emotion-54>button {
+.emotion-52>button {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-54>button:active {
+.emotion-52>button:active {
   pointer-events: none;
 }
 
-.emotion-54>button[aria-disabled='true'] {
+.emotion-52>button[aria-disabled='true'] {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
 }
 
-.dark-theme .emotion-54>button[aria-disabled='true'] {
+.dark-theme .emotion-52>button[aria-disabled='true'] {
   background-color: #1C2D38;
   border-color: #3D4F58;
 }
 
-.emotion-54>button[aria-disabled='true']:hover,
-.emotion-54>button[aria-disabled='true']:active {
+.emotion-52>button[aria-disabled='true']:hover,
+.emotion-52>button[aria-disabled='true']:active {
   box-shadow: inherit;
 }
 
-.emotion-54>button[aria-disabled='true']>*:last-child>svg {
+.emotion-52>button[aria-disabled='true']>*:last-child>svg {
   color: #889397;
 }
 
-.dark-theme .emotion-54>button[aria-disabled='true']>*:last-child>svg {
+.dark-theme .emotion-52>button[aria-disabled='true']>*:last-child>svg {
   color: #5C6C75;
 }
 
-.emotion-55 {
+.emotion-53 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -1743,42 +1780,42 @@ exports[`Search Results Page considers a given search filter query param and dis
   font-size: 13px;
 }
 
-.emotion-55:focus {
+.emotion-53:focus {
   outline: none;
 }
 
-.emotion-55[disabled],
-.emotion-55:disabled {
+.emotion-53[disabled],
+.emotion-53:disabled {
   pointer-events: none;
 }
 
-.emotion-55:active,
-.emotion-55:focus,
-.emotion-55:hover {
+.emotion-53:active,
+.emotion-53:focus,
+.emotion-53:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-55:hover,
-.emotion-55:active {
+.emotion-53:hover,
+.emotion-53:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-55,
-.emotion-55:hover {
+.emotion-53,
+.emotion-53:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-55:focus {
+.emotion-53:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-55>*:last-child {
+.emotion-53>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -1786,52 +1823,52 @@ exports[`Search Results Page considers a given search filter query param and dis
   justify-content: flex-start;
 }
 
-.emotion-55>*:last-child>svg {
+.emotion-53>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-55>*:last-child>svg {
+.emotion-53>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-55>*:last-child {
+.emotion-53>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-55:focus {
+.emotion-53:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-55:disabled {
+.emotion-53:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-55:disabled:active {
+.emotion-53:disabled:active {
   pointer-events: none;
 }
 
-.emotion-55:disabled {
+.emotion-53:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-55:disabled>*:last-child>svg {
+.emotion-53:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-55 {
+  .emotion-53 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-61 {
+.emotion-59 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -1866,47 +1903,47 @@ exports[`Search Results Page considers a given search filter query param and dis
   height: 36px;
 }
 
-.emotion-61:focus-visible,
-.emotion-61[data-focus="true"] {
+.emotion-59:focus-visible,
+.emotion-59[data-focus="true"] {
   outline: none;
 }
 
-.emotion-61:active,
-.emotion-61[data-active="true"],
-.emotion-61:focus,
-.emotion-61:hover {
+.emotion-59:active,
+.emotion-59[data-active="true"],
+.emotion-59:focus,
+.emotion-59:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-61:focus-visible,
-.emotion-61[data-focus="true"] {
+.emotion-59:focus-visible,
+.emotion-59[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-61:hover,
-.emotion-61[data-hover="true"],
-.emotion-61:active,
-.emotion-61[data-active="true"] {
+.emotion-59:hover,
+.emotion-59[data-hover="true"],
+.emotion-59:active,
+.emotion-59[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-61:focus-visible,
-.emotion-61[data-focus="true"] {
+.emotion-59:focus-visible,
+.emotion-59[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.dark-theme .emotion-61 {
+.dark-theme .emotion-59 {
   background-color: var(--gray-dark1);
   border-color: var(--gray-base);
   color: var(--white);
   box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
 }
 
-.dark-theme .emotion-61 svg {
+.dark-theme .emotion-59 svg {
   color: var(--gray-light2);
 }
 
@@ -2028,12 +2065,12 @@ exports[`Search Results Page considers a given search filter query param and dis
             class="emotion-20"
           >
             <span
-              class="emotion-21 emotion-5"
+              class="emotion-21"
             >
               Realm
             </span>
             <span
-              class="emotion-23 emotion-7"
+              class="emotion-22"
             >
               Latest
             </span>
@@ -2041,13 +2078,13 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
       </a>
       <div
-        class="emotion-25"
+        class="emotion-23"
       >
         <div
-          class="emotion-26"
+          class="emotion-24"
         />
         <div
-          class="emotion-26"
+          class="emotion-24"
         >
           <p
             class="emotion-19"
@@ -2057,7 +2094,7 @@ exports[`Search Results Page considers a given search filter query param and dis
           </p>
         </div>
         <div
-          class="emotion-26"
+          class="emotion-24"
         >
           <p
             class="emotion-19"
@@ -2068,16 +2105,16 @@ exports[`Search Results Page considers a given search filter query param and dis
           <button
             aria-disabled="true"
             aria-label="Previous page"
-            class="emotion-31"
+            class="emotion-29"
             data-testid="lg-pagination-back-button"
             tabindex="0"
           >
             <div
-              class="emotion-32"
+              class="emotion-30"
             >
               <svg
                 aria-label="Chevron Left Icon"
-                class="emotion-33"
+                class="emotion-31"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
@@ -2095,16 +2132,16 @@ exports[`Search Results Page considers a given search filter query param and dis
           <button
             aria-disabled="true"
             aria-label="Next page"
-            class="emotion-31"
+            class="emotion-29"
             data-testid="lg-pagination-next-button"
             tabindex="0"
           >
             <div
-              class="emotion-32"
+              class="emotion-30"
             >
               <svg
                 aria-label="Chevron Right Icon"
-                class="emotion-33"
+                class="emotion-31"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
@@ -2123,24 +2160,24 @@ exports[`Search Results Page considers a given search filter query param and dis
       </div>
     </div>
     <div
-      class="emotion-37"
+      class="emotion-35"
     >
       <h2
-        class="emotion-38 emotion-39"
+        class="emotion-36 emotion-37"
       >
         Refine your search
       </h2>
       <div
-        class="emotion-40"
+        class="emotion-38"
       >
         <div
-          class="emotion-41"
+          class="emotion-39"
         >
           <div
-            class="emotion-42 emotion-43"
+            class="emotion-40 emotion-41"
           >
             <div
-              class="emotion-44"
+              class="emotion-42"
             >
               <button
                 aria-controls="select-81-menu"
@@ -2149,7 +2186,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-45"
+                class="emotion-43"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-82"
@@ -2160,13 +2197,13 @@ exports[`Search Results Page considers a given search filter query param and dis
                   class="emotion-10"
                 />
                 <div
-                  class="emotion-47"
+                  class="emotion-45"
                 >
                   <div
-                    class="emotion-48"
+                    class="emotion-46"
                   >
                     <div
-                      class="emotion-49"
+                      class="emotion-47"
                     >
                       Realm
                     </div>
@@ -2174,7 +2211,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-50"
+                    class="emotion-48"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -2191,13 +2228,13 @@ exports[`Search Results Page considers a given search filter query param and dis
           </div>
         </div>
         <div
-          class="emotion-41"
+          class="emotion-39"
         >
           <div
-            class="emotion-42 emotion-53"
+            class="emotion-40 emotion-51"
           >
             <div
-              class="emotion-54"
+              class="emotion-52"
             >
               <button
                 aria-controls="select-83-menu"
@@ -2206,7 +2243,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-55"
+                class="emotion-53"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -2218,13 +2255,13 @@ exports[`Search Results Page considers a given search filter query param and dis
                   class="emotion-10"
                 />
                 <div
-                  class="emotion-47"
+                  class="emotion-45"
                 >
                   <div
-                    class="emotion-48"
+                    class="emotion-46"
                   >
                     <div
-                      class="emotion-49"
+                      class="emotion-47"
                     >
                       Latest
                     </div>
@@ -2232,7 +2269,7 @@ exports[`Search Results Page considers a given search filter query param and dis
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-50"
+                    class="emotion-48"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -2250,7 +2287,7 @@ exports[`Search Results Page considers a given search filter query param and dis
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-61"
+          class="lg-ui-button-0000 emotion-59"
           data-lgid="lg-button"
           type="button"
         >
@@ -7366,13 +7403,31 @@ exports[`Search Results Page renders results from a given search term query para
   bottom: 0;
   margin-bottom: 24px;
   overflow: hidden;
-  height: 26px;
 }
 
 .emotion-18 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 4px 8px;
   background-color: #E3FCF7;
   border: 1px solid #C0FAE6;
   color: #00684A;
+  background-color: #E3FCF7;
+  border: 1px solid #C0FAE6;
+  color: #00684A;
+  cursor: pointer;
+  height: 26px;
+  padding: 4px 11px 4px 11px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-right: 8px;
 }
 
 .dark-theme .emotion-18 {
@@ -7392,9 +7447,12 @@ exports[`Search Results Page renders results from a given search term query para
   display: -ms-inline-flexbox;
   display: inline-flex;
   padding: 4px 8px;
-  background-color: #E3FCF7;
-  border: 1px solid #C0FAE6;
-  color: #00684A;
+  background-color: #E1F7FF;
+  border: 1px solid #C3E7FE;
+  color: #1254B7;
+  background-color: #E1F7FF;
+  border: 1px solid #C3E7FE;
+  color: #1254B7;
   cursor: pointer;
   height: 26px;
   padding: 4px 11px 4px 11px;
@@ -7403,41 +7461,13 @@ exports[`Search Results Page renders results from a given search term query para
   margin-right: 8px;
 }
 
-.emotion-20 {
-  background-color: #E1F7FF;
-  border: 1px solid #C3E7FE;
-  color: #1254B7;
-}
-
-.dark-theme .emotion-20 {
+.dark-theme .emotion-19 {
   background-color: #0C2657;
   border: 1px solid #083C90;
   color: #0498EC;
 }
 
-.emotion-21 {
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  padding: 4px 8px;
-  background-color: #E1F7FF;
-  border: 1px solid #C3E7FE;
-  color: #1254B7;
-  cursor: pointer;
-  height: 26px;
-  padding: 4px 11px 4px 11px;
-  border-radius: 12px;
-  font-size: 12px;
-  margin-right: 8px;
-}
-
-.emotion-22 {
+.emotion-20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -7448,14 +7478,14 @@ exports[`Search Results Page renders results from a given search term query para
   width: 100%;
 }
 
-.emotion-22>div:first-child {
+.emotion-20>div:first-child {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
 
-.emotion-22>div:last-child {
+.emotion-20>div:last-child {
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   -webkit-justify-content: flex-end;
@@ -7463,13 +7493,13 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-22 * {
+  .emotion-20 * {
     font-size: 13px;
     line-height: 16px;
   }
 }
 
-.emotion-23 {
+.emotion-21 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -7488,7 +7518,7 @@ exports[`Search Results Page renders results from a given search term query para
   justify-content: center;
 }
 
-.emotion-28 {
+.emotion-26 {
   border: none;
   -webkit-appearance: unset;
   padding: unset;
@@ -7511,7 +7541,7 @@ exports[`Search Results Page renders results from a given search term query para
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-28:before {
+.emotion-26:before {
   content: '';
   -webkit-transition: 150ms all ease-in-out;
   transition: 150ms all ease-in-out;
@@ -7527,57 +7557,57 @@ exports[`Search Results Page renders results from a given search term query para
   transform: scale(0.8);
 }
 
-.emotion-28:active:before,
-.emotion-28:hover:before,
-.emotion-28:focus:before {
+.emotion-26:active:before,
+.emotion-26:hover:before,
+.emotion-26:focus:before {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
 }
 
-.emotion-28:focus {
+.emotion-26:focus {
   outline: none;
 }
 
-.emotion-28:active,
-.emotion-28:hover {
+.emotion-26:active,
+.emotion-26:hover {
   color: #001E2B;
 }
 
-.emotion-28:active:before,
-.emotion-28:hover:before {
+.emotion-26:active:before,
+.emotion-26:hover:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-28:focus-visible {
+.emotion-26:focus-visible {
   color: #001E2B;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-28:focus-visible:before {
+.emotion-26:focus-visible:before {
   background-color: rgba(61,79,88,0.1);
 }
 
-.emotion-28:active,
-.emotion-28:hover {
+.emotion-26:active,
+.emotion-26:hover {
   color: #C1C7C6;
 }
 
-.emotion-28:active:before,
-.emotion-28:hover:before {
+.emotion-26:active:before,
+.emotion-26:hover:before {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-28:focus {
+.emotion-26:focus {
   color: #C1C7C6;
 }
 
-.emotion-28:focus:before {
+.emotion-26:focus:before {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-29 {
+.emotion-27 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -7597,31 +7627,31 @@ exports[`Search Results Page renders results from a given search term query para
   justify-content: center;
 }
 
-.emotion-30 {
+.emotion-28 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.emotion-34 {
+.emotion-32 {
   grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-34 {
+  .emotion-32 {
     display: none;
   }
 }
 
-.emotion-35 {
+.emotion-33 {
   color: #3D4F58;
 }
 
-.dark-theme .emotion-35 {
+.dark-theme .emotion-33 {
   color: #E8EDEB;
 }
 
-.emotion-36 {
+.emotion-34 {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center;
@@ -7636,12 +7666,12 @@ exports[`Search Results Page renders results from a given search term query para
   margin-bottom: 16px;
 }
 
-.emotion-37 {
+.emotion-35 {
   grid-area: right;
 }
 
 @media only screen and (max-width: 767px) {
-  .emotion-37 {
+  .emotion-35 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -7652,34 +7682,34 @@ exports[`Search Results Page renders results from a given search term query para
     flex-direction: row;
   }
 
-  .emotion-37>div {
+  .emotion-35>div {
     margin-bottom: 0;
     margin-right: 8px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-37 {
+  .emotion-35 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 
-  .emotion-37>div {
+  .emotion-35>div {
     width: 100%;
   }
 
-  .emotion-37>div:first-of-type {
+  .emotion-35>div:first-of-type {
     margin-bottom: 8px;
     margin-right: 0;
   }
 
-  .emotion-37>div>div {
+  .emotion-35>div>div {
     width: 100%;
   }
 }
 
-.emotion-38 {
+.emotion-36 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -7694,33 +7724,33 @@ exports[`Search Results Page renders results from a given search term query para
   margin-bottom: 16px;
 }
 
-.emotion-39 {
+.emotion-37 {
   width: 175px;
 }
 
-.emotion-40 {
+.emotion-38 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-40 label,
-  .emotion-40 p,
-  .emotion-40 button,
-  .emotion-40 div,
-  .emotion-40 span {
+  .emotion-38 label,
+  .emotion-38 p,
+  .emotion-38 button,
+  .emotion-38 div,
+  .emotion-38 span {
     font-size: 13px;
   }
 }
 
-.emotion-40 label {
+.emotion-38 label {
   color: #001E2B;
 }
 
-.dark-theme .emotion-40 label {
+.dark-theme .emotion-38 label {
   color: #E8EDEB;
 }
 
-.emotion-41 {
+.emotion-39 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -7730,48 +7760,48 @@ exports[`Search Results Page renders results from a given search term query para
   flex-direction: column;
 }
 
-.emotion-41>label+button,
-.emotion-41>p+button {
+.emotion-39>label+button,
+.emotion-39>p+button {
   margin-top: 3px;
 }
 
-.emotion-41>button {
+.emotion-39>button {
   background-color: #FFFFFF;
   text-align: left;
 }
 
-.emotion-41>button>*:last-child>svg {
+.emotion-39>button>*:last-child>svg {
   color: #5C6C75;
 }
 
-.emotion-41>button:focus-visible {
+.emotion-39>button:focus-visible {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.dark-theme .emotion-41>button {
+.dark-theme .emotion-39>button {
   border-color: #889397;
   background-color: #112733;
 }
 
-.dark-theme .emotion-41>button>*:last-child>svg {
+.dark-theme .emotion-39>button>*:last-child>svg {
   color: #C1C7C6;
 }
 
-.dark-theme .emotion-41>button:hover,
-.dark-theme .emotion-41>button:active,
-.dark-theme .emotion-41>button:focus {
+.dark-theme .emotion-39>button:hover,
+.dark-theme .emotion-39>button:active,
+.dark-theme .emotion-39>button:focus {
   background-color: #112733;
   color: #E8EDEB;
 }
 
-.dark-theme .emotion-41>button:focus-visible {
+.dark-theme .emotion-39>button:focus-visible {
   background-color: #112733;
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-42 {
+.emotion-40 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -7811,35 +7841,35 @@ exports[`Search Results Page renders results from a given search term query para
   font-size: 13px;
 }
 
-.emotion-42:focus {
+.emotion-40:focus {
   outline: none;
 }
 
-.emotion-42[disabled],
-.emotion-42:disabled {
+.emotion-40[disabled],
+.emotion-40:disabled {
   pointer-events: none;
 }
 
-.emotion-42:active,
-.emotion-42:focus,
-.emotion-42:hover {
+.emotion-40:active,
+.emotion-40:focus,
+.emotion-40:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-42:hover,
-.emotion-42:active {
+.emotion-40:hover,
+.emotion-40:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-42:focus {
+.emotion-40:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-42>*:last-child {
+.emotion-40>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -7847,33 +7877,33 @@ exports[`Search Results Page renders results from a given search term query para
   justify-content: flex-start;
 }
 
-.emotion-42>*:last-child>svg {
+.emotion-40>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-42>*:last-child>svg {
+.emotion-40>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-42>*:last-child {
+.emotion-40>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-42:focus {
+.emotion-40:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-42 {
+  .emotion-40 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-44 {
+.emotion-42 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -7893,7 +7923,7 @@ exports[`Search Results Page renders results from a given search term query para
   gap: 6px;
 }
 
-.emotion-45 {
+.emotion-43 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -7913,14 +7943,14 @@ exports[`Search Results Page renders results from a given search term query para
   overflow: hidden;
 }
 
-.emotion-46 {
+.emotion-44 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-47 {
+.emotion-45 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -7930,37 +7960,37 @@ exports[`Search Results Page renders results from a given search term query para
   justify-self: left;
 }
 
-.emotion-50 {
+.emotion-48 {
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-50 label,
-  .emotion-50 p,
-  .emotion-50 button,
-  .emotion-50 div,
-  .emotion-50 span {
+  .emotion-48 label,
+  .emotion-48 p,
+  .emotion-48 button,
+  .emotion-48 div,
+  .emotion-48 span {
     font-size: 13px;
   }
 }
 
-.emotion-50 label {
+.emotion-48 label {
   color: #001E2B;
 }
 
-.dark-theme .emotion-50 label {
+.dark-theme .emotion-48 label {
   color: #E8EDEB;
 }
 
-.emotion-50 label {
+.emotion-48 label {
   color: #889397;
 }
 
-.dark-theme .emotion-50 label {
+.dark-theme .emotion-48 label {
   color: #5C6C75;
 }
 
-.emotion-51 {
+.emotion-49 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -7970,68 +8000,68 @@ exports[`Search Results Page renders results from a given search term query para
   flex-direction: column;
 }
 
-.emotion-51>label+button,
-.emotion-51>p+button {
+.emotion-49>label+button,
+.emotion-49>p+button {
   margin-top: 3px;
 }
 
-.emotion-51>button {
+.emotion-49>button {
   background-color: #FFFFFF;
   text-align: left;
 }
 
-.emotion-51>button>*:last-child>svg {
+.emotion-49>button>*:last-child>svg {
   color: #5C6C75;
 }
 
-.emotion-51>button:focus-visible {
+.emotion-49>button:focus-visible {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.dark-theme .emotion-51>button {
+.dark-theme .emotion-49>button {
   border-color: #889397;
   background-color: #112733;
 }
 
-.dark-theme .emotion-51>button>*:last-child>svg {
+.dark-theme .emotion-49>button>*:last-child>svg {
   color: #C1C7C6;
 }
 
-.emotion-51>button {
+.emotion-49>button {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-51>button:active {
+.emotion-49>button:active {
   pointer-events: none;
 }
 
-.emotion-51>button[aria-disabled='true'] {
+.emotion-49>button[aria-disabled='true'] {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
 }
 
-.dark-theme .emotion-51>button[aria-disabled='true'] {
+.dark-theme .emotion-49>button[aria-disabled='true'] {
   background-color: #1C2D38;
   border-color: #3D4F58;
 }
 
-.emotion-51>button[aria-disabled='true']:hover,
-.emotion-51>button[aria-disabled='true']:active {
+.emotion-49>button[aria-disabled='true']:hover,
+.emotion-49>button[aria-disabled='true']:active {
   box-shadow: inherit;
 }
 
-.emotion-51>button[aria-disabled='true']>*:last-child>svg {
+.emotion-49>button[aria-disabled='true']>*:last-child>svg {
   color: #889397;
 }
 
-.dark-theme .emotion-51>button[aria-disabled='true']>*:last-child>svg {
+.dark-theme .emotion-49>button[aria-disabled='true']>*:last-child>svg {
   color: #5C6C75;
 }
 
-.emotion-52 {
+.emotion-50 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -8071,42 +8101,42 @@ exports[`Search Results Page renders results from a given search term query para
   font-size: 13px;
 }
 
-.emotion-52:focus {
+.emotion-50:focus {
   outline: none;
 }
 
-.emotion-52[disabled],
-.emotion-52:disabled {
+.emotion-50[disabled],
+.emotion-50:disabled {
   pointer-events: none;
 }
 
-.emotion-52:active,
-.emotion-52:focus,
-.emotion-52:hover {
+.emotion-50:active,
+.emotion-50:focus,
+.emotion-50:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-52:hover,
-.emotion-52:active {
+.emotion-50:hover,
+.emotion-50:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-52,
-.emotion-52:hover {
+.emotion-50,
+.emotion-50:hover {
   background-color: #E8EDEB;
   border-color: #C1C7C6;
   color: #889397;
   cursor: not-allowed;
 }
 
-.emotion-52:focus {
+.emotion-50:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-52>*:last-child {
+.emotion-50>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -8114,52 +8144,52 @@ exports[`Search Results Page renders results from a given search term query para
   justify-content: flex-start;
 }
 
-.emotion-52>*:last-child>svg {
+.emotion-50>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-52>*:last-child>svg {
+.emotion-50>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-52>*:last-child {
+.emotion-50>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-52:focus {
+.emotion-50:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
-.emotion-52:disabled {
+.emotion-50:disabled {
   cursor: not-allowed;
   pointer-events: unset;
   box-shadow: unset;
 }
 
-.emotion-52:disabled:active {
+.emotion-50:disabled:active {
   pointer-events: none;
 }
 
-.emotion-52:disabled {
+.emotion-50:disabled {
   background-color: #E8EDEB;
   color: #889397;
 }
 
-.emotion-52:disabled>*:last-child>svg {
+.emotion-50:disabled>*:last-child>svg {
   color: #889397;
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-52 {
+  .emotion-50 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-58 {
+.emotion-56 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -8194,47 +8224,47 @@ exports[`Search Results Page renders results from a given search term query para
   height: 36px;
 }
 
-.emotion-58:focus-visible,
-.emotion-58[data-focus="true"] {
+.emotion-56:focus-visible,
+.emotion-56[data-focus="true"] {
   outline: none;
 }
 
-.emotion-58:active,
-.emotion-58[data-active="true"],
-.emotion-58:focus,
-.emotion-58:hover {
+.emotion-56:active,
+.emotion-56[data-active="true"],
+.emotion-56:focus,
+.emotion-56:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-58:focus-visible,
-.emotion-58[data-focus="true"] {
+.emotion-56:focus-visible,
+.emotion-56[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-58:hover,
-.emotion-58[data-hover="true"],
-.emotion-58:active,
-.emotion-58[data-active="true"] {
+.emotion-56:hover,
+.emotion-56[data-hover="true"],
+.emotion-56:active,
+.emotion-56[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-58:focus-visible,
-.emotion-58[data-focus="true"] {
+.emotion-56:focus-visible,
+.emotion-56[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.dark-theme .emotion-58 {
+.dark-theme .emotion-56 {
   background-color: var(--gray-dark1);
   border-color: var(--gray-base);
   color: var(--white);
   box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
 }
 
-.dark-theme .emotion-58 svg {
+.dark-theme .emotion-56 svg {
   color: var(--gray-light2);
 }
 
@@ -8326,12 +8356,12 @@ exports[`Search Results Page renders results from a given search term query para
             class="emotion-17"
           >
             <span
-              class="emotion-18 emotion-19"
+              class="emotion-18"
             >
               Realm
             </span>
             <span
-              class="emotion-20 emotion-21"
+              class="emotion-19"
             >
               Latest
             </span>
@@ -8339,13 +8369,13 @@ exports[`Search Results Page renders results from a given search term query para
         </div>
       </a>
       <div
-        class="emotion-22"
+        class="emotion-20"
       >
         <div
-          class="emotion-23"
+          class="emotion-21"
         />
         <div
-          class="emotion-23"
+          class="emotion-21"
         >
           <p
             class="emotion-16"
@@ -8355,7 +8385,7 @@ exports[`Search Results Page renders results from a given search term query para
           </p>
         </div>
         <div
-          class="emotion-23"
+          class="emotion-21"
         >
           <p
             class="emotion-16"
@@ -8366,16 +8396,16 @@ exports[`Search Results Page renders results from a given search term query para
           <button
             aria-disabled="true"
             aria-label="Previous page"
-            class="emotion-28"
+            class="emotion-26"
             data-testid="lg-pagination-back-button"
             tabindex="0"
           >
             <div
-              class="emotion-29"
+              class="emotion-27"
             >
               <svg
                 aria-label="Chevron Left Icon"
-                class="emotion-30"
+                class="emotion-28"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
@@ -8393,16 +8423,16 @@ exports[`Search Results Page renders results from a given search term query para
           <button
             aria-disabled="true"
             aria-label="Next page"
-            class="emotion-28"
+            class="emotion-26"
             data-testid="lg-pagination-next-button"
             tabindex="0"
           >
             <div
-              class="emotion-29"
+              class="emotion-27"
             >
               <svg
                 aria-label="Chevron Right Icon"
-                class="emotion-30"
+                class="emotion-28"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
@@ -8421,24 +8451,24 @@ exports[`Search Results Page renders results from a given search term query para
       </div>
     </div>
     <div
-      class="emotion-34"
+      class="emotion-32"
     >
       <h2
-        class="emotion-35 emotion-36"
+        class="emotion-33 emotion-34"
       >
         Refine your search
       </h2>
       <div
-        class="emotion-37"
+        class="emotion-35"
       >
         <div
-          class="emotion-38"
+          class="emotion-36"
         >
           <div
-            class="emotion-39 emotion-40"
+            class="emotion-37 emotion-38"
           >
             <div
-              class="emotion-41"
+              class="emotion-39"
             >
               <button
                 aria-controls="select-57-menu"
@@ -8447,7 +8477,7 @@ exports[`Search Results Page renders results from a given search term query para
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-42"
+                class="emotion-40"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 id="select-58"
@@ -8458,13 +8488,13 @@ exports[`Search Results Page renders results from a given search term query para
                   class="emotion-7"
                 />
                 <div
-                  class="emotion-44"
+                  class="emotion-42"
                 >
                   <div
-                    class="emotion-45"
+                    class="emotion-43"
                   >
                     <div
-                      class="emotion-46"
+                      class="emotion-44"
                     >
                       Filter by Category
                     </div>
@@ -8472,7 +8502,7 @@ exports[`Search Results Page renders results from a given search term query para
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-47"
+                    class="emotion-45"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -8489,13 +8519,13 @@ exports[`Search Results Page renders results from a given search term query para
           </div>
         </div>
         <div
-          class="emotion-38"
+          class="emotion-36"
         >
           <div
-            class="emotion-39 emotion-50"
+            class="emotion-37 emotion-48"
           >
             <div
-              class="emotion-51"
+              class="emotion-49"
             >
               <button
                 aria-controls="select-59-menu"
@@ -8504,7 +8534,7 @@ exports[`Search Results Page renders results from a given search term query para
                 aria-expanded="false"
                 aria-invalid="false"
                 aria-labelledby="select"
-                class="emotion-52"
+                class="emotion-50"
                 data-leafygreen-ui="button"
                 data-testid="lg-select"
                 disabled=""
@@ -8516,13 +8546,13 @@ exports[`Search Results Page renders results from a given search term query para
                   class="emotion-7"
                 />
                 <div
-                  class="emotion-44"
+                  class="emotion-42"
                 >
                   <div
-                    class="emotion-45"
+                    class="emotion-43"
                   >
                     <div
-                      class="emotion-46"
+                      class="emotion-44"
                     >
                       Filter by Version
                     </div>
@@ -8530,7 +8560,7 @@ exports[`Search Results Page renders results from a given search term query para
                   <svg
                     alt=""
                     aria-hidden="true"
-                    class="emotion-47"
+                    class="emotion-45"
                     height="16"
                     role="presentation"
                     viewBox="0 0 16 16"
@@ -8548,7 +8578,7 @@ exports[`Search Results Page renders results from a given search term query para
         </div>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 emotion-58"
+          class="lg-ui-button-0000 emotion-56"
           data-lgid="lg-button"
           type="button"
         >

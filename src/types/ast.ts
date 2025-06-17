@@ -608,6 +608,18 @@ interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
   options: StandaloneHeaderOptions;
 }
 
+interface SubstitutionReferenceNode extends ParentNode {
+  name: 'substitution_reference';
+}
+
+interface TargetNode extends ParentNode {
+  name: 'target';
+  html_id: string;
+  options: {
+    hidden: boolean;
+  };
+}
+
 interface ReleaseSpecificationNode extends ParentNode {}
 
 interface RefRoleNode extends ParentNode {
@@ -691,9 +703,11 @@ export type {
   Root,
   StepNode,
   StrongNode,
+  SubstitutionReferenceNode,
   TabNode,
   TabsNode,
   TargetIdentifierNode,
+  TargetNode,
   TextNode,
   TitleReferenceNode,
   TwitterNode,

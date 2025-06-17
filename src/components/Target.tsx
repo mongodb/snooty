@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import useHashAnchor from '../hooks/use-hash-anchor';
 import { theme } from '../theme/docsTheme';
+import type { TargetNode, Node } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import Permalink from './Permalink';
 
@@ -12,19 +12,24 @@ const headerBuffer = css`
 `;
 
 // Based on condition isValid, split array into two arrays: [[valid, invalid]]
-const partition = (array, isValid) => {
+const partition = (array: Node[], isValid: (elem: Node) => boolean) => {
   return array.reduce(
     ([pass, fail], elem) => {
       return isValid(elem) ? [[...pass, elem], fail] : [pass, [...fail, elem]];
     },
-    [[], []]
+    [[] as Node[], [] as Node[]]
   );
 };
 
-const DescriptionTerm = ({ children, html_id, ...rest }) => {
+interface DescriptionTermProps {
+  children?: Node[];
+  html_id: string;
+}
+
+const DescriptionTerm = ({ children, html_id, ...rest }: DescriptionTermProps) => {
   return (
     <dt>
-      {children.map((child, j) => (
+      {children?.map((child, j) => (
         <ComponentFactory key={j} {...rest} nodeData={child} />
       ))}
       <Permalink id={html_id} description="definition" />
@@ -32,20 +37,19 @@ const DescriptionTerm = ({ children, html_id, ...rest }) => {
   );
 };
 
-DescriptionTerm.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  html_id: PropTypes.string.isRequired,
-};
+interface TargetProps {
+  nodeData: TargetNode;
+}
 
-const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => {
+const Target = ({ nodeData: { children, html_id, name, options }, ...rest }: TargetProps) => {
   // If directive_argument node is not present, render an empty span with the target ID
   // Otherwise, render directive_argument as a dictionary node and attach the
   // ID to the description term field
   const [, dictList] = partition(children, (elem) => elem.type === 'target_identifier');
   const [[descriptionTerm], descriptionDetails] = partition(dictList, (elem) => elem.type === 'directive_argument');
   const hidden = options && options.hidden ? true : false;
-  const targetRef = useRef();
-  useHashAnchor(html_id, targetRef);
+  const targetRef = useRef<HTMLSpanElement>(null);
+  useHashAnchor(html_id, targetRef.current);
 
   return (
     <React.Fragment>
@@ -65,14 +69,6 @@ const Target = ({ nodeData: { children, html_id, name, options }, ...rest }) => 
       )}
     </React.Fragment>
   );
-};
-
-Target.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    html_id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default Target;
