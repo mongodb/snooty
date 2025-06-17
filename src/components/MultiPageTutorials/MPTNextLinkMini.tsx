@@ -39,8 +39,7 @@ export const MPTNextLinkMini = () => {
     <div className={baseStyle} onClick={() => reportMPTAnalytics(activeTutorial?.next?.targetSlug ?? '', 'mini')}>
       <Button
         className={cx(buttonStyle, navLinkButtonStyle)}
-        as={Link}
-        to={activeTutorial?.next?.targetSlug}
+        as={(props) => <Link {...props} to={activeTutorial?.next?.targetSlug} />}
         title={LINK_TITLE}
         leftGlyph={<Icon glyph={glyphs.ArrowRight.displayName ?? 'ArrowRight'} />}
         size="xsmall"
