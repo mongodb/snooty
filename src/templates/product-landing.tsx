@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
+import { isString } from 'lodash';
 import { theme } from '../theme/docsTheme';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
@@ -241,7 +242,9 @@ const ProductLanding = ({
   const isGuides = project === 'guides';
   const isRealm = project === 'realm';
   const pageOptions = page?.ast?.options;
-  const hasMaxWidthParagraphs = ['', 'true'].includes(pageOptions?.['pl-max-width-paragraphs']);
+  const hasMaxWidthParagraphs = isString(pageOptions?.['pl-max-width-paragraphs'])
+    ? ['', 'true'].includes(pageOptions['pl-max-width-paragraphs'])
+    : false;
   const hasLightHero = isRealm && REALM_LIGHT_HERO_PAGES.includes(page?.ast?.fileid);
   // shallow copy children, and search for existence of banner
   const shallowChildren = (Array.isArray(children) ? children : []).reduce<Node[]>((res, child) => {
