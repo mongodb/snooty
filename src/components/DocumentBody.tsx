@@ -247,7 +247,6 @@ export const Head = ({ pageContext, data }: HeadProps) => {
         noIndexing={noIndexing}
       />
       {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
-      {/* TODO: How does this work?? spreading the node vs passing as 'nodeData' */}
       {twitter.length > 0 && twitter.map((t) => <Twitter nodeData={t} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
       {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}

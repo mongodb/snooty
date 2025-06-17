@@ -186,7 +186,6 @@ interface ParentNode extends Node {
 interface PageOptions {
   has_composable_tutorial?: boolean;
   hidefeedback: string;
-  [key: string]: any;
 }
 
 interface Root extends ParentNode {
