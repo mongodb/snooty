@@ -96,7 +96,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
   margin-right: 12px;
 }
 
-.emotion-13 {
+.emotion-11 {
   padding: 6px 12px;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -114,7 +114,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
   line-height: 20px;
 }
 
-.emotion-13:hover {
+.emotion-11:hover {
   border-color: #889397;
 }
 
@@ -470,7 +470,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-5"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -555,7 +555,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -627,7 +627,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -699,7 +699,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -737,7 +737,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -787,7 +787,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -832,7 +832,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -877,7 +877,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -994,7 +994,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1079,7 +1079,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1164,7 +1164,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1714,7 +1714,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1758,7 +1758,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1814,7 +1814,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
@@ -1839,7 +1839,7 @@ exports[`Wayfinding component renders all options with description 1`] = `
         </span>
       </a>
       <a
-        class="emotion-13"
+        class="emotion-11"
         href="https://www.mongodb.com/docs/"
         target="_self"
       >
