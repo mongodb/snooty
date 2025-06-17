@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { theme } from '../theme/docsTheme';
 import { CONTENT_MAX_WIDTH } from './product-landing';
+import { BaseTemplateProps } from '.';
 
 const Wrapper = styled('div')`
   grid-column: 2/ -2;
@@ -23,7 +24,7 @@ const DocumentContainer = styled('main')`
   }
 `;
 
-const Changelog = ({ children, offlineBanner }: { children: ReactNode; offlineBanner: ReactNode }) => (
+const Changelog = ({ children, offlineBanner }: BaseTemplateProps & { children: ReactNode }) => (
   <DocumentContainer>
     <Wrapper>
       {offlineBanner}

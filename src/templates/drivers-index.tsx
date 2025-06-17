@@ -5,6 +5,7 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import Breadcrumbs from '../components/Breadcrumbs';
 import MainColumn from '../components/MainColumn';
 import { PageContext } from '../types/data';
+import { BaseTemplateProps } from '.';
 
 const DocumentContainer = styled('div')`
   display: grid;
@@ -19,10 +20,9 @@ const StyledMainColumn = styled(MainColumn)`
 export type DriversIndexProps = {
   children: ReactNode;
   pageContext: PageContext;
-  offlineBanner: JSX.Element;
 };
 
-const DriversIndex = ({ children, pageContext: { slug }, offlineBanner }: DriversIndexProps) => {
+const DriversIndex = ({ children, pageContext: { slug }, offlineBanner }: BaseTemplateProps & DriversIndexProps) => {
   const { title, parentPaths } = useSnootyMetadata();
   return (
     <DocumentContainer>

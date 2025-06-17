@@ -9,6 +9,7 @@ import FeedbackRating from '../components/Widgets/FeedbackWidget/index';
 import { DEPRECATED_PROJECTS } from '../components/Contents/index';
 import { AppData, PageContext } from '../types/data';
 import { Node } from '../types/ast';
+import { BaseTemplateProps } from '.';
 export const CONTENT_MAX_WIDTH = 1200;
 
 const formstyle = css`
@@ -228,10 +229,14 @@ export type ProductLandingProps = {
   children: ReactNode;
   data: AppData;
   pageContext: PageContext;
-  offlineBanner: JSX.Element;
 };
 
-const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: { slug } }: ProductLandingProps) => {
+const ProductLanding = ({
+  children,
+  data: { page },
+  offlineBanner,
+  pageContext: { slug },
+}: BaseTemplateProps & ProductLandingProps) => {
   const { project } = useSnootyMetadata();
   const isGuides = project === 'guides';
   const isRealm = project === 'realm';

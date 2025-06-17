@@ -11,6 +11,7 @@ import Changelog from './changelog';
 
 export type BaseTemplateProps = {
   useChatbot: boolean;
+  offlineBanner: JSX.Element;
 };
 
 export {

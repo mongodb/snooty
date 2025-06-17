@@ -13,6 +13,7 @@ import { theme } from '../theme/docsTheme';
 import { usePageContext } from '../context/page-context';
 import DismissibleSkillsCard from '../components/DismissibleSkillsCard';
 import { AppData, PageContext } from '../types/data';
+import { BaseTemplateProps } from '.';
 
 const MAX_ON_THIS_PAGE_WIDTH = '200px';
 const MAX_CONTENT_WIDTH = '775px';
@@ -53,7 +54,6 @@ export type DocumentTemplateProps = {
   children: ReactNode;
   data: AppData;
   pageContext: PageContext;
-  offlineBanner: JSX.Element;
 };
 
 const Document = ({
@@ -61,7 +61,7 @@ const Document = ({
   data: { page },
   pageContext: { slug, isAssociatedProduct },
   offlineBanner,
-}: DocumentTemplateProps) => {
+}: BaseTemplateProps & DocumentTemplateProps) => {
   const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
