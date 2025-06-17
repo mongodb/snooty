@@ -1,7 +1,6 @@
-import type { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
-import type { MultiPageTutorial } from '../components/MultiPageTutorials/hooks/use-active-mp-tutorial';
-import type { PageTemplateType } from '../context/page-context';
-import type { ParagraphNode, TextNode, TocTreeEntry } from './ast';
+import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
+import { PageTemplateType } from '../context/page-context';
+import { ParagraphNode, TextNode, TocTreeEntry } from './ast';
 
 type EOLType = 'download' | 'link';
 
@@ -81,9 +80,9 @@ type RemoteMetadata = {
   title: string;
   eol: boolean;
   slugToTitle: Record<string, [TextNode]>;
+  slugToBreadcrumbLabel?: Record<string, string>;
   toctree: TocTreeEntry;
   toctreeOrder: string[];
-  // TODO: This might be <string, string[]> ...
   parentPaths: Record<string, BreadcrumbType[]>;
   static_files: Record<string, Buffer>;
   canonical?: string | null;
@@ -91,7 +90,14 @@ type RemoteMetadata = {
   openapi_pages?: Record<string, OpenApiPage>;
   associated_products?: AssociatedProduct[];
   multiPageTutorials?: Record<string, MultiPageTutorial>;
-  slugToBreadcrumbLabel?: Record<string, string>;
+};
+
+type SlugToTitle = RemoteMetadata['slugToTitle'];
+type SlugToBreadcrumbLabel = RemoteMetadata['slugToBreadcrumbLabel'];
+
+type MultiPageTutorial = {
+  slugs: string[];
+  total_steps: number;
 };
 
 // TODO: Refine structure
@@ -178,10 +184,13 @@ export {
   Group,
   MetadataChapters,
   MetadataDatabaseName,
+  MultiPageTutorial,
   PageContext,
   PageContextRepoBranches,
   RemoteMetadata,
   ReposDatabaseName,
   SiteMetadata,
+  SlugToBreadcrumbLabel,
+  SlugToTitle,
   SnootyEnv,
 };
