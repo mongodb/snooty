@@ -165,6 +165,7 @@
     "stream-json": "^1.8.0",
     "styled-components": "^5.3.6",
     "theme-ui": "^0.15.4",
+    "trackjs": "^3.10.4",
     "underscore": "^1.12.1",
     "url-parse": "^1.5.8",
     "xmlhttprequest-ssl": ">=1.6.2"
