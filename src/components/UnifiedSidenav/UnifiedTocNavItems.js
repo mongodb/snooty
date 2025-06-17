@@ -205,9 +205,9 @@ function CollapsibleNavItem({ items, label, url, slug, prefix, isAccordion, leve
   return (
     <>
       <SideNavItem
-        as={Link}
+        as={url ? Link : 'a'}
         prefix={prefix}
-        to={url}
+        to={url ? url : null}
         active={isActive}
         className={cx(l2ItemStyling({ level, isAccordion }), overwriteLinkStyle)}
         onClick={handleClick}
