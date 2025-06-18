@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import Modal, { ModalProps, ModalSize } from '@leafygreen-ui/modal';
+import React, { useState, useCallback, SetStateAction } from 'react';
+import Modal, { ModalSize } from '@leafygreen-ui/modal';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import Image from '../Image';
@@ -12,7 +12,15 @@ const CAPTION_TEXT = 'click to enlarge';
 const MODAL_PADDING = '64px';
 const MODAL_DIALOG_PADDING = '40px';
 
-const StyledModal = styled(Modal as React.ComponentType<ModalProps>)`
+// Defining ModalProps (LG doesn't export)
+interface LGModalProps {
+  open: boolean;
+  setOpen?: (open: boolean) => void | React.Dispatch<SetStateAction<boolean>>;
+  size?: ModalSize;
+  children?: React.ReactNode;
+}
+
+const StyledModal = styled(Modal as React.ComponentType<LGModalProps>)`
   // Set z-index to appear above side nav and top navbar
   z-index: 10;
   ${process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' ? `margin-top: ${theme.header.navbarHeight}` : ''};
@@ -57,7 +65,7 @@ const LightboxCaption = styled('div')`
   }
 `;
 
-const LightboxWrapper = styled('div')<{ figwidth: string; }>`
+const LightboxWrapper = styled('div')<{ figwidth: string }>`
   width: ${({ figwidth }) => figwidth};
   cursor: pointer;
   margin-top: ${theme.size.medium};
@@ -78,9 +86,7 @@ const Lightbox = ({ nodeData, ...rest }: FigureProps) => {
       <LightboxWrapper figwidth={figureWidth}>
         <div onClick={openModal} role="button" tabIndex={-1}>
           <Image nodeData={nodeData} {...rest} />
-          <LightboxCaption>
-            {CAPTION_TEXT}
-          </LightboxCaption>
+          <LightboxCaption>{CAPTION_TEXT}</LightboxCaption>
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
       </LightboxWrapper>

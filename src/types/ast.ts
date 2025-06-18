@@ -1,7 +1,7 @@
 import { HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW } from '../components/Roles/Highlight';
 
 type ComponentType =
-  | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
+  | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier' | 'inline_target'>
   | 'admonition'
   | 'banner'
   | 'blockquote'
