@@ -48,8 +48,6 @@ const defaultTarget: [string, MetadataGuide] = [
     title: 'Become a MongoDB Professional',
     description:
       "Congrats. You've completed all the guides. Want to take the next step? Register for the developer exam.",
-    chapter_name: '',
-    completion_time: 0,
   },
 ];
 

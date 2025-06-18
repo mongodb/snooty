@@ -153,8 +153,8 @@ type MetadataChapter = {
 type MetadataGuides = Record<string, MetadataGuide>;
 
 type MetadataGuide = {
-  chapter_name: string;
-  completion_time: number;
+  chapter_name?: string;
+  completion_time?: number;
   description: string | Node[];
   title: string | Node[];
 };
