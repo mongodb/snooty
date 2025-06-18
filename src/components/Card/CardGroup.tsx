@@ -1,11 +1,35 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
+import type { CardGroupNode } from '../../types/ast';
 
-const getMarginStyles = (isForDriver, isLanding, columns, sideMarginValue) => {
+export interface CardGroupProps {
+  className?: string;
+  nodeData: CardGroupNode;
+  page?: {
+    options?: {
+      template?: string;
+    };
+  };
+}
+
+interface StyledGridProps {
+  isForDrivers: boolean;
+  isLanding: boolean;
+  columns: number;
+  isCarousel?: boolean;
+  className?: string;
+  noMargin?: boolean;
+}
+
+const getMarginStyles = (
+  isForDriver: boolean,
+  isLanding: boolean,
+  columns: number,
+  sideMarginValue: number
+): string => {
   if (typeof sideMarginValue !== 'number') {
     console.warn('sideMarginValue only accepts a number');
   }
@@ -15,12 +39,13 @@ const getMarginStyles = (isForDriver, isLanding, columns, sideMarginValue) => {
   else return `${theme.size.large} 0`;
 };
 
-const getColumnValue = (props) => props.columns || React.Children.count(props.children);
+const getColumnValue = (props: { columns?: number; children?: React.ReactNode }) =>
+  props.columns || React.Children.count(props.children);
 
 // Carousel styling refers to the horizontal scrolling display of the Cards;
 // This is not a true carousel as it is not 'circular,' but is rather 1 row
 // with n columns displaying only a subset on screen
-const carouselStyling = ({ children, theme }) => css`
+const carouselStyling = ({ children }: { children?: React.ReactNode }) => css`
   grid-gap: calc(${theme.size.medium} * 0.75);
   grid-template-columns:
     calc(${theme.size.medium} / 2) repeat(${React.Children.count(children)}, calc(75% - calc(2 * ${theme.size.medium})))
@@ -44,7 +69,7 @@ const verticalStyling = css`
 `;
 
 // StyledGrid behavior on medium and small screens is determined by 'isCarousel'
-const StyledGrid = styled('div')`
+const StyledGrid = styled('div')<StyledGridProps>`
   align-items: stretch;
   display: grid;
   grid-column: 1 / -1 !important;
@@ -52,7 +77,7 @@ const StyledGrid = styled('div')`
   grid-row-gap: ${theme.size.medium};
   grid-template-columns: ${(props) => `repeat(${getColumnValue(props)}, 1fr)`};
 
-  margin: ${({ isForDrivers, isLanding, columns }) => getMarginStyles(isForDrivers, isLanding, columns, 0)};
+  margin: ${({ isForDrivers, isLanding, columns }) => getMarginStyles(Boolean(isForDrivers), isLanding, columns, 0)};
 
   @media ${theme.screenSize.upToMedium} {
     margin: ${({ isForDrivers, isLanding, columns }) => getMarginStyles(isForDrivers, isLanding, columns, 42)};
@@ -87,12 +112,12 @@ const StyledGrid = styled('div')`
 const CardGroup = ({
   className,
   nodeData: {
-    children,
+    children = [],
     options: { columns, layout, style, type },
   },
   page,
   ...rest
-}) => {
+}: CardGroupProps) => {
   const isCompact = style === 'compact';
   const isExtraCompact = style === 'extra-compact';
   const isCarousel = layout === 'carousel';
@@ -125,17 +150,6 @@ const CardGroup = ({
       ))}
     </StyledGrid>
   );
-};
-
-CardGroup.propTypes = {
-  className: PropTypes.string,
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object),
-    options: PropTypes.shape({
-      columns: PropTypes.number,
-    }),
-  }).isRequired,
-  page: PropTypes.object,
 };
 
 export default CardGroup;
