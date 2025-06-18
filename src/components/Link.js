@@ -11,7 +11,7 @@ import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
-import { isSnootyInDevMode } from '../utils/is-snooty-dev';
+import { isUnifiedTOCInDevMode } from '../utils/is-unified-toc-dev';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -128,7 +128,7 @@ const Link = ({
     // TODO: i wonder if this works for versioned site in monorepo
     // Using the isSnootyInDevMode to enforce the client-side routing which
     // allows our custom 404 page to render.
-    if (project === prefix || isSnootyInDevMode) {
+    if (project === prefix || isUnifiedTOCInDevMode) {
       // Get rid of the path prefix in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
 
