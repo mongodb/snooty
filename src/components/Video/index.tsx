@@ -15,10 +15,12 @@ const REACT_PLAYERS = {
   yt: {
     player: ReactPlayerYT,
     config: {
-      playerVars: {
-        autohide: 1,
-        modestbranding: 1,
-        rel: 0,
+      youtube: {
+        playerVars: {
+          autohide: 1,
+          modestbranding: 1,
+          rel: 0,
+        },
       },
     },
     name: 'youtube',
@@ -64,7 +66,7 @@ const getTheSupportedMedia = (url: string) => {
     supportedType = 'wistia';
   }
 
-  return supportedType && REACT_PLAYERS[supportedType];
+  return REACT_PLAYERS[supportedType as keyof typeof REACT_PLAYERS];
 };
 
 interface VideoProps {
@@ -87,8 +89,7 @@ const Video = ({ nodeData: { argument, options } }: VideoProps) => {
       let testUrlValidity = 'https://www.youtube.com/oembed?url=' + url + '&format=json';
 
       const res = await fetch(testUrlValidity);
-      // if valid URL, display default YT thumbnail
-      if (res.status === 200) {
+      if (res?.ok) {
         setPreviewImage(true);
       }
     }
