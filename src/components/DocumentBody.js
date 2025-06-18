@@ -1,6 +1,7 @@
 import React, { useState, useMemo, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
+import { TrackJS } from 'trackjs';
 import { ImageContextProvider } from '../context/image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
@@ -29,6 +30,12 @@ import BreadcrumbSchema from './StructuredData/BreadcrumbSchema';
 import { InstruqtProvider } from './Instruqt/instruqt-context';
 import { SuspenseHelper } from './SuspenseHelper';
 import { TabProvider } from './Tabs/tab-context';
+
+// TrackJS is a tool that allows us to track errors and performance issues in our code.
+TrackJS.install({
+  token: 'c3fccd861d9b4238bfe1af83ebdec219',
+  // for more configuration options, see https://docs.trackjs.com
+});
 
 // lazy load the unified footer to improve page load speed
 const LazyFooter = lazy(() => import('./Footer'));
