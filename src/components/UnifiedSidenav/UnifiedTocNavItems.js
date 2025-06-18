@@ -250,6 +250,7 @@ export function StaticNavItem({
   slug,
   items,
   contentSite,
+  versionDropdown,
   setCurrentL1,
   isAccordion,
   setShowDriverBackBtn,
@@ -264,7 +265,7 @@ export function StaticNavItem({
       as={Link}
       to={newUrl}
       onClick={() => {
-        setCurrentL1({ items, newUrl });
+        setCurrentL1({ items, newUrl, versionDropdown });
         setShowDriverBackBtn(false);
       }}
       className={cx(l1ItemStyling({ isActive, isAccordion }))}

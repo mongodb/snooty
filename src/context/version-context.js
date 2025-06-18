@@ -19,7 +19,6 @@ const getInitBranchName = (branches) => {
   if (activeBranch) {
     return activeBranch.gitBranchName;
   }
-  console.log('i am in init branch name', branches, branches[0]?.gitBranchName);
   return branches[0]?.gitBranchName || null;
 };
 
@@ -29,7 +28,6 @@ const getInitVersions = (branchListByProduct) => {
   for (const productName in branchListByProduct) {
     initState[productName] = localStorage?.[productName] || getInitBranchName(branchListByProduct[productName]);
   }
-  console.log('i am in init versions', branchListByProduct, initState);
   return initState;
 };
 
@@ -89,7 +87,6 @@ const getBranches = async (metadata, repoBranches, associatedReposInfo, associat
 
 const getDefaultVersions = (metadata, repoBranches, associatedReposInfo) => {
   const { project, parserBranch } = metadata;
-  console.log('the metadata is ', metadata);
   const versions = {};
   const VERSION_KEY = 'branches';
   const currentBranch = repoBranches?.[VERSION_KEY]?.find((b) => b.gitBranchName === parserBranch);
@@ -112,7 +109,6 @@ const getDefaultActiveVersions = (metadata) => {
   // for current metadata.project, should always default to metadata.parserBranch
   const { project, parserBranch } = metadata;
 
-  console.log('i am in default active versions', parserBranch);
   let versions = {};
   versions[project] = parserBranch;
   // for any umbrella / associated products
@@ -280,7 +276,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
       console.error(`url <${currentUrlSlug}> does not correspond to any current branch`);
       return;
     }
-    // MAYBE NEED TO CHANGE THIS
+    // DOP-5812 : MAYBE NEED TO CHANGE THIS, TEST HOW THIS WORKS IN PREPROD
     if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
       const newState = { ...activeVersions };
       newState[metadata.project] = currentBranch.gitBranchName;
