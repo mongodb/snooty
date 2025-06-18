@@ -27,12 +27,25 @@ export type PageInfo = {
   siteBasePrefix: string;
 };
 
+export type BreadcrumbInfoLocalStorage = {
+  parentPathsSlug: BreadcrumbType[];
+  queriedCrumbs: QueriedCrumbs;
+  siteTitle: string;
+  slug: any;
+  pageTitle: string;
+};
+
+export type SelfCrumb = {
+  title: string;
+  slug: string;
+};
+
 export type BreadcrumbsProps = {
   siteTitle: string;
   slug: string;
   queriedCrumbsProp?: QueriedCrumbs;
   parentPathsProp?: BreadcrumbType[];
-  selfCrumb?: { title: string; slug: string };
+  selfCrumb?: SelfCrumb;
   pageInfo?: PageInfo;
 };
 
