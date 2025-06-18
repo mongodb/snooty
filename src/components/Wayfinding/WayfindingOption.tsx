@@ -29,6 +29,8 @@ const imgStyle = css`
   margin-right: 12px;
 `;
 
+type DriverIconMapKey = keyof typeof DRIVER_ICON_MAP;
+
 interface WayfindingOptionProps {
   nodeData: WayfindingOptionNode;
   hideOption?: boolean;
@@ -40,8 +42,7 @@ const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false 
   const lang = options?.language;
   const optionId = options?.id;
 
-  const Icon =
-    DRIVER_ICON_MAP[optionId as keyof typeof DRIVER_ICON_MAP] || DRIVER_ICON_MAP[lang as keyof typeof DRIVER_ICON_MAP];
+  const Icon = DRIVER_ICON_MAP[optionId as DriverIconMapKey] || DRIVER_ICON_MAP[lang as DriverIconMapKey];
 
   return (
     <a
