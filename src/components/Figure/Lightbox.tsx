@@ -1,19 +1,18 @@
 import React, { useState, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import Modal from '@leafygreen-ui/modal';
+import Modal, { ModalProps, ModalSize } from '@leafygreen-ui/modal';
 import styled from '@emotion/styled';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import Image from '../Image';
-import { theme } from '../../theme/docsTheme.ts';
+import { theme } from '../../theme/docsTheme';
 import CaptionLegend from './CaptionLegend';
+import { FigureProps } from '.';
 
 const CAPTION_TEXT = 'click to enlarge';
 
 const MODAL_PADDING = '64px';
 const MODAL_DIALOG_PADDING = '40px';
 
-const StyledModal = styled(Modal)`
+const StyledModal = styled(Modal as React.ComponentType<ModalProps>)`
   // Set z-index to appear above side nav and top navbar
   z-index: 10;
   ${process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' ? `margin-top: ${theme.header.navbarHeight}` : ''};
@@ -46,16 +45,20 @@ const StyledModal = styled(Modal)`
 `;
 
 const LightboxCaption = styled('div')`
-  color: var(--color);
+  color: #444;
   font-size: 80%;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
   text-align: center;
+
+  .dark-theme & {
+    color: ${palette.gray.light2};
+  }
 `;
 
-const LightboxWrapper = styled('div')`
-  width: ${(props) => props.figwidth};
+const LightboxWrapper = styled('div')<{ figwidth: string; }>`
+  width: ${({ figwidth }) => figwidth};
   cursor: pointer;
   margin-top: ${theme.size.medium};
   margin-bottom: ${theme.size.medium};
@@ -63,9 +66,8 @@ const LightboxWrapper = styled('div')`
   max-width: 100%;
 `;
 
-const Lightbox = ({ nodeData, ...rest }) => {
+const Lightbox = ({ nodeData, ...rest }: FigureProps) => {
   const [open, setOpen] = useState(false);
-  const { darkMode } = useDarkMode();
   const figureWidth = nodeData.options?.figwidth || 'auto';
   const openModal = useCallback(() => {
     setOpen((prevOpen) => !prevOpen);
@@ -74,36 +76,19 @@ const Lightbox = ({ nodeData, ...rest }) => {
   return (
     <React.Fragment>
       <LightboxWrapper figwidth={figureWidth}>
-        <div onClick={openModal} role="button" tabIndex="-1">
+        <div onClick={openModal} role="button" tabIndex={-1}>
           <Image nodeData={nodeData} {...rest} />
-          <LightboxCaption
-            style={{
-              '--color': darkMode ? palette.gray.light2 : '#444',
-            }}
-          >
+          <LightboxCaption>
             {CAPTION_TEXT}
           </LightboxCaption>
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
       </LightboxWrapper>
-      <StyledModal size="medium" open={open} setOpen={setOpen}>
+      <StyledModal size={ModalSize.Default} open={open} setOpen={setOpen}>
         <Image nodeData={nodeData} />
       </StyledModal>
     </React.Fragment>
   );
-};
-
-Lightbox.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    options: PropTypes.shape({
-      alt: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
 };
 
 export default Lightbox;

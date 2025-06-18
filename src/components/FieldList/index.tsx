@@ -1,13 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import ComponentFactory from '../ComponentFactory';
+import { theme } from '../../theme/docsTheme';
+import { FieldListNode } from '../../types/ast';
 
 const Table = styled('table')`
   border-spacing: 0;
-  font-size: ${({ theme }) => `${theme.fontSize.small}`};
-  line-height: ${({ theme }) => `${theme.size.medium}`};
-  margin: ${({ theme }) => `${theme.size.medium} 0`};
+  font-size: ${theme.fontSize.small};
+  line-height: ${theme.size.medium};
+  margin: ${theme.size.medium} 0;
   max-width: 100%;
 
   tbody {
@@ -15,7 +16,11 @@ const Table = styled('table')`
   }
 `;
 
-const FieldList = ({ nodeData: { children }, ...rest }) => (
+export type FieldListProps = {
+  nodeData: FieldListNode;
+}
+
+const FieldList = ({ nodeData: { children }, ...rest }: FieldListProps) => (
   <Table>
     <colgroup>
       <col className="field-name" />
@@ -28,11 +33,5 @@ const FieldList = ({ nodeData: { children }, ...rest }) => (
     </tbody>
   </Table>
 );
-
-FieldList.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
 
 export default FieldList;
