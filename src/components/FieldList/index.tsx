@@ -18,7 +18,7 @@ const Table = styled('table')`
 
 export type FieldListProps = {
   nodeData: FieldListNode;
-}
+};
 
 const FieldList = ({ nodeData: { children }, ...rest }: FieldListProps) => (
   <Table>

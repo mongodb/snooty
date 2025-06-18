@@ -3,9 +3,9 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import Image from '../Image';
 import { getNestedValue } from '../../utils/get-nested-value';
 import { theme } from '../../theme/docsTheme';
+import { FigureNode } from '../../types/ast';
 import Lightbox from './Lightbox';
 import CaptionLegend from './CaptionLegend';
-import { FigureNode } from '../../types/ast';
 
 export type FigureProps = {
   nodeData: FigureNode;

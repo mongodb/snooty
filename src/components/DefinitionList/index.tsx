@@ -4,7 +4,7 @@ import { DefinitionListNode } from '../../types/ast';
 
 export type DefinitionListProps = {
   nodeData: DefinitionListNode;
-}
+};
 
 const DefinitionList = ({ nodeData, ...rest }: DefinitionListProps) => {
   return (

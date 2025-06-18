@@ -16,7 +16,7 @@ const HeaderBuffer = styled.div`
 
 export type DefinitionListItemProps = {
   nodeData: DefinitionListItemNode;
-}
+};
 
 const DefinitionListItem = ({ nodeData: { children, term }, ...rest }: DefinitionListItemProps) => {
   const termProps = {};

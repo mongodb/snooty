@@ -6,7 +6,7 @@ import { FieldNode } from '../../types/ast';
 
 export type FieldProps = {
   nodeData: FieldNode;
-}
+};
 
 const Field = ({ nodeData: { children, label, name }, ...rest }: FieldProps) => (
   <tr
