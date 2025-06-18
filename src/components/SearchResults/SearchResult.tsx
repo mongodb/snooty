@@ -116,10 +116,6 @@ const StyledPreviewText = styled(Body)<{ maxLines: number }>`
   }
 `;
 
-const StyledTag = styled(Tag)`
-  ${searchTagStyle}
-`;
-
 const greenTagStyles = css`
   background-color: ${palette.green.light3};
   border: 1px solid ${palette.green.light2};
@@ -249,28 +245,32 @@ const SearchResult = React.memo(
           {!showFacets && (
             <StylingTagContainer>
               {!!category && (
-                <StyledTag variant="green" className={cx(greenTagStyles)}>
+                <Tag variant="green" className={cx(greenTagStyles, searchTagStyle)}>
                   {category}
-                </StyledTag>
+                </Tag>
               )}
               {!!version && (
-                <StyledTag variant="blue" className={cx(blueTagStyles)}>
+                <Tag variant="blue" className={cx(blueTagStyles, searchTagStyle)}>
                   {version}
-                </StyledTag>
+                </Tag>
               )}
               {url.includes('/api/') && (
-                <StyledTag variant="purple" className={cx(purpleTagStyles)}>
+                <Tag variant="purple" className={cx(purpleTagStyles, searchTagStyle)}>
                   {'API'}
-                </StyledTag>
+                </Tag>
               )}
             </StylingTagContainer>
           )}
           {showFacets && validFacets && validFacets?.length > 0 && (
             <StylingTagContainer>
               {validFacets.map((facet, idx) => (
-                <StyledTag variant={getFacetTagVariant(facet)} key={`${idx}-${facet.key}-${facet.id}`}>
+                <Tag
+                  variant={getFacetTagVariant(facet)}
+                  key={`${idx}-${facet.key}-${facet.id}`}
+                  className={searchTagStyle}
+                >
                   {getFacetName(facet)}
-                </StyledTag>
+                </Tag>
               ))}
             </StylingTagContainer>
           )}
