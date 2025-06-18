@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
@@ -40,6 +39,25 @@ const FormatTitle = styled.div`
 `;
 
 const scrollBehavior = { block: 'nearest', behavior: 'smooth' };
+
+// TOCNode.propTypes = {
+//   level: PropTypes.number,
+//   node: PropTypes.shape({
+//     children: PropTypes.array.isRequired,
+//     options: PropTypes.shape({
+//       drawer: PropTypes.bool,
+//       tocicon: PropTypes.bool,
+//       styles: PropTypes.objectOf(PropTypes.string),
+//     }),
+//     slug: PropTypes.string,
+//     title: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]).isRequired,
+//     url: PropTypes.string,
+//   }).isRequired,
+// };
+
+// TOCNode.defaultProps = {
+//   level: BASE_NODE_LEVEL,
+// };
 
 /**
  * Potential leaf node for the Table of Contents. May have children which are also
@@ -162,25 +180,6 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
         })}
     </>
   );
-};
-
-TOCNode.propTypes = {
-  level: PropTypes.number,
-  node: PropTypes.shape({
-    children: PropTypes.array.isRequired,
-    options: PropTypes.shape({
-      drawer: PropTypes.bool,
-      tocicon: PropTypes.bool,
-      styles: PropTypes.objectOf(PropTypes.string),
-    }),
-    slug: PropTypes.string,
-    title: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]).isRequired,
-    url: PropTypes.string,
-  }).isRequired,
-};
-
-TOCNode.defaultProps = {
-  level: BASE_NODE_LEVEL,
 };
 
 export default TOCNode;

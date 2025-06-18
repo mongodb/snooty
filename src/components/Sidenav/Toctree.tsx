@@ -1,8 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { TocTreeEntry } from '../../types/ast';
 import TOCNode from './TOCNode';
 
-const Toctree = ({ handleClick, slug, toctree: { children } }) => {
+export type ToctreeProps = {
+  toctree: TocTreeEntry;
+  slug: string;
+  handleClick: () => void;
+};
+
+const Toctree = ({ handleClick, slug, toctree: { children } }: ToctreeProps) => {
   return (
     <>
       {children.map((c, idx) => (
@@ -10,23 +16,6 @@ const Toctree = ({ handleClick, slug, toctree: { children } }) => {
       ))}
     </>
   );
-};
-
-Toctree.propTypes = {
-  toctree: PropTypes.shape({
-    children: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]).isRequired,
-        slug: PropTypes.string,
-        url: PropTypes.string,
-        children: PropTypes.array.isRequired,
-        options: PropTypes.shape({
-          drawer: PropTypes.bool,
-          styles: PropTypes.objectOf(PropTypes.string),
-        }),
-      })
-    ),
-  }),
 };
 
 export default Toctree;

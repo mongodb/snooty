@@ -81,6 +81,4 @@ const DocsHomeButton = () => {
   );
 };
 
-DocsHomeButton.propTypes = {};
-
 export default DocsHomeButton;

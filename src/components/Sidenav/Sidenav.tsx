@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useMemo, useEffect } from 'react';
 import { navigate } from 'gatsby';
-import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import Box from '@leafygreen-ui/box';
@@ -12,7 +11,7 @@ import { palette } from '@leafygreen-ui/palette';
 import { useLocation } from '@gatsbyjs/reach-router';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
-import useStickyTopValues from '../../hooks/useStickyTopValues';
+import useStickyTopValues, { StickyTopValues } from '../../hooks/useStickyTopValues';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { TocContext } from '../../context/toc-context';
@@ -40,7 +39,7 @@ import DocsHomeButton from './DocsHomeButton';
 const SIDENAV_WIDTH = 268;
 
 // Use LG's css here to style the component without passing props
-const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
+const sideNavStyling = ({ hideMobile, isCollapsed }: { hideMobile: boolean; isCollapsed: boolean }) => LeafyCSS`
   height: 100%;
 
   // Mobile & Tablet nav
@@ -77,13 +76,13 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
 `;
 
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
-const disableScroll = (shouldDisableScroll) => css`
+const disableScroll = (shouldDisableScroll: boolean) => css`
   body {
     ${shouldDisableScroll && 'overflow: hidden;'}
   }
 `;
 
-const getTopAndHeight = (topValue) => {
+const getTopAndHeight = (topValue: string) => {
   return css`
     top: max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight});
     height: calc(100vh - max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight}));
@@ -92,7 +91,7 @@ const getTopAndHeight = (topValue) => {
 
 // Keep the side nav container sticky to allow LG's side nav to push content seamlessly
 const SidenavContainer = styled.div(
-  ({ topLarge, topMedium, topSmall }) => css`
+  ({ topLarge, topMedium, topSmall }: StickyTopValues) => css`
     grid-area: sidenav;
     position: sticky;
     z-index: ${theme.zIndexes.sidenav};
@@ -177,6 +176,17 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://learn.mongodb.com/' },
 ];
 
+// Sidenav.propTypes = {
+//   chapters: PropTypes.object,
+//   guides: PropTypes.object,
+//   page: PropTypes.shape({
+//     options: PropTypes.object,
+//   }).isRequired,
+//   repoBranches: PropTypes.object,
+//   slug: PropTypes.string.isRequired,
+//   eol: PropTypes.bool.isRequired,
+// };
+
 const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSnootyMetadata();
@@ -198,7 +208,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
   }
 
   // Checks if user is navigating back to the homepage on docs landing
-  const [back, setBack] = React.useState(null);
+  const [back, setBack] = React.useState(false);
 
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
@@ -360,17 +370,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
       </SidenavContainer>
     </>
   );
-};
-
-Sidenav.propTypes = {
-  chapters: PropTypes.object,
-  guides: PropTypes.object,
-  page: PropTypes.shape({
-    options: PropTypes.object,
-  }).isRequired,
-  repoBranches: PropTypes.object,
-  slug: PropTypes.string.isRequired,
-  eol: PropTypes.bool.isRequired,
 };
 
 export default Sidenav;

@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import { css, Global } from '@emotion/react';
 import ConditionalWrapper from '../ConditionalWrapper';
@@ -43,7 +42,14 @@ const forwardStyle = css`
   }
 `;
 
-const IATransition = ({ back, children, hasIA, slug }) => (
+export type IATransitionProps = {
+  back: boolean;
+  children: ReactNode;
+  hasIA: boolean;
+  slug: string;
+};
+
+const IATransition = ({ back, children, hasIA, slug }: IATransitionProps) => (
   <ConditionalWrapper
     condition={hasIA}
     wrapper={(children) => (
@@ -67,12 +73,5 @@ const IATransition = ({ back, children, hasIA, slug }) => (
     {children}
   </ConditionalWrapper>
 );
-
-IATransition.propTypes = {
-  back: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  hasIA: PropTypes.bool,
-  slug: PropTypes.string,
-};
 
 export default IATransition;
