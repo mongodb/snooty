@@ -5,6 +5,14 @@ import { css, cx } from '@leafygreen-ui/emotion';
 const iframeStyle = css`
   border: var(--border);
   border-radius: var(--border-radius);
+
+  border: 'none';
+  border-radius: 0;
+
+  .dark-theme & {
+    border: 1px solid ${palette.gray.dark2};
+    border-radius: 5px;
+  }
 `;
 
 interface InstruqtFrameProps {
@@ -30,10 +38,6 @@ const InstruqtFrame = ({ title, height, embedValue, darkMode = false }: Instruqt
       height={frameHeight}
       width="100%"
       src={frameSrc}
-      style={{
-        border: darkMode ? `1px solid ${palette.gray.dark2}` : 'none',
-        borderRadius: darkMode ? '5px' : 0,
-      }}
     />
   );
 };

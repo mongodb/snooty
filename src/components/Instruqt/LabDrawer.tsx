@@ -60,7 +60,11 @@ const topContainerStyle = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--background-color);
+  background-color: 'inherit';
+
+  .dark-theme & {
+    background-color: ${palette.gray.dark2};
+  }
 
   @media ${theme.screenSize.upToMedium} {
     justify-content: left;
@@ -169,7 +173,7 @@ const LabDrawer = ({ title, embedValue, darkMode }: LabDrawerProps) => {
     >
       {/* Need this div with style as a wrapper to help with resizing */}
       <div style={{ width: wrapperWidth, height: height + 'px' }} data-testid="resizable-wrapper">
-        <div className={cx(topContainerStyle)} style={{ backgroundColor: darkMode ? palette.gray.dark2 : 'inherit' }}>
+        <div className={cx(topContainerStyle)}>
           <div className={cx(titleStyle)}>{labTitle}</div>
           <DrawerButtons
             height={height}
