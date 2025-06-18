@@ -8,7 +8,7 @@ export interface TocItem {
   glyph?: string;
   url?: string;
   group?: boolean;
-  prefix?: string;
+  contentSite?: string;
   collapsible?: boolean;
   breadcrumbs?: BreadCrumb[];
   showSubNav?: boolean;
@@ -18,4 +18,11 @@ export interface TocItem {
 
 export interface ActiveVersions {
   [project: string]: string;
+}
+
+// These has to match how we store the repo name in local storage
+export enum DocSites {
+  CLOUD_DOCS = 'cloud-docs',
+  DATABASE_TOOLS = 'database-tools',
+  CSHARP = 'csharp',
 }

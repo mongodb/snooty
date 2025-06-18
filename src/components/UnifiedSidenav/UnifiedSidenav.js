@@ -78,10 +78,10 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
 `;
 
 // Function that adds the current version
-const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snootyEnv }) => {
+const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, snootyEnv }) => {
   return tree?.map((item) => {
     let newUrl = item.url ? item.url : '';
-    const currentProject = item.prefix ? item.prefix : prefix;
+    const currentProject = item.contentSite ? item.contentSite : contentSite;
 
     // Replace version variable with the true current version
     if (item?.url?.includes(':version')) {
@@ -96,7 +96,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
 
     const items = updateURLs({
       tree: item.items,
-      prefix: currentProject,
+      contentSite: currentProject,
       activeVersions,
       versionsData,
       project,
@@ -107,7 +107,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
       ...item,
       newUrl,
       items,
-      prefix: currentProject,
+      contentSite: currentProject,
     };
   });
 };

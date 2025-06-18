@@ -1,17 +1,12 @@
-import type { TocItem } from '../src/components/UnifiedSidenav/UnifiedConstants';
+import { TocItem, DocSites } from '../src/components/UnifiedSidenav/UnifiedConstants';
 
-//these have to match whatever values we use to store local storage in
-const COMMANDLINE_TOOLS = 'database-tools';
-const CLOUD_DOCS = 'cloud-docs';
-const CSHARP = 'csharp';
-
-// each url has to be unique with the prefix!!!!
+// each url has to be unique with the contentSite!!!!
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
     {
       label: 'Database tools',
       url: '/docs/database-tools/',
-      prefix: COMMANDLINE_TOOLS,
+      contentSite: DocSites.DATABASE_TOOLS,
       items: [
         {
           label: 'command tools',
@@ -43,7 +38,7 @@ export const tocData = (): TocItem[] => {
     {
       label: 'Atlas',
       url: '/docs/atlas/getting-started/',
-      prefix: CLOUD_DOCS,
+      contentSite: DocSites.CLOUD_DOCS,
       items: [
         {
           label: 'Application Development',
@@ -99,7 +94,7 @@ export const tocData = (): TocItem[] => {
       label: 'C# Quick Start',
       url: '/docs/drivers/csharp/:version/quick-start',
       glyph: 'Bulb',
-      prefix: CSHARP,
+      contentSite: DocSites.CSHARP,
       versionDropdown: true,
       items: [
         {
@@ -159,7 +154,7 @@ export const tocData = (): TocItem[] => {
         {
           label: 'Connect to cloud',
           group: true,
-          prefix: '/docs/drivers/csharp/master/cloud-docs/bianca.laube/DOP-5371',
+          contentSite: '/docs/drivers/csharp/master/cloud-docs/bianca.laube/DOP-5371',
           items: [
             {
               label: 'Manage Clusters',
