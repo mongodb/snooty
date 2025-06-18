@@ -658,13 +658,10 @@ interface InstruqtOptions {
 }
 
 interface InstruqtNode extends Directive<InstruqtOptions> {
-  argument: Array<TextNode>;
+  argument: TextNode[];
 }
 
-interface GuideNextNode {
-  argument: TextNode;
-  children: ParagraphNode;
-}
+interface GuideNextNode extends Directive {}
 
 export type {
   AbbrRoleNode,

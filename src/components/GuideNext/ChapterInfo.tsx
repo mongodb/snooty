@@ -62,7 +62,7 @@ interface ChapterData {
 interface ChapterInfoProps {
   chapterData: [title: string, ChapterData];
   guidesMetadata: Record<string, MetadataGuide>;
-  targetSlug: string;
+  targetSlug?: string | null;
 }
 
 const ChapterInfo = ({ chapterData, guidesMetadata, targetSlug }: ChapterInfoProps) => {

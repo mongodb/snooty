@@ -103,7 +103,7 @@ const GuideNext = ({ nodeData: { argument, children }, metadata, slug }: GuideNe
     <ReadGuidesContextProvider slug={slug}>
       <Container>
         <Content argument={argument} children={children} guideData={targetGuide} />
-        <ChapterInfo chapterData={targetChapter} guidesMetadata={guides} targetSlug={targetGuide?.[0] ?? ''} />
+        <ChapterInfo chapterData={targetChapter} guidesMetadata={guides} targetSlug={targetGuide?.[0]} />
       </Container>
     </ReadGuidesContextProvider>
   );
