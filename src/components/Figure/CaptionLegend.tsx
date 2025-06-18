@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
+import { FigureProps } from '.';
 
 const Caption = styled('p')`
   color: ${palette.gray.dark1};
@@ -17,7 +17,7 @@ const Caption = styled('p')`
   }
 `;
 
-const CaptionLegend = ({ nodeData: { children }, ...rest }) => (
+const CaptionLegend = ({ nodeData: { children }, ...rest }: FigureProps) => (
   <>
     {children.length > 0 && (
       <Caption>
@@ -33,11 +33,5 @@ const CaptionLegend = ({ nodeData: { children }, ...rest }) => (
     )}
   </>
 );
-
-CaptionLegend.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-};
 
 export default CaptionLegend;
