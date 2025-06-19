@@ -63,10 +63,15 @@ const showAllButtonStyle = css`
 `;
 
 const getWayfindingComponents = (children: Node[]) => {
-  const descriptionNode = children.find(isWayfindingDescriptionNode);
+  const descriptionNodeIdx = children.findIndex(isWayfindingDescriptionNode);
+  const [foundDescriptionNode] = descriptionNodeIdx >= 0 ? children.splice(descriptionNodeIdx, 1) : [];
+
+  const descriptionNode = isWayfindingDescriptionNode(foundDescriptionNode) ? foundDescriptionNode : null;
+  const optionNodes = children.filter(isWayfindingOptionNode);
+
   return {
     descriptionNode,
-    optionNodes: children,
+    optionNodes,
   };
 };
 
@@ -102,11 +107,8 @@ const Wayfinding = ({ nodeData: { children, argument } }: WayfindingProps) => {
       </div>
       <div className={cx(optionsContainerStyle, NOTRANSLATE_CLASS)}>
         {optionNodes.map((option, index) => {
-          if (isWayfindingOptionNode(option)) {
-            const shouldHideOption = !showAll && index > MAX_INIT_OPTIONS - 1;
-            return <WayfindingOption key={index} hideOption={shouldHideOption} nodeData={option} />;
-          }
-          return null;
+          const shouldHideOption = !showAll && index > MAX_INIT_OPTIONS - 1;
+          return <WayfindingOption key={index} hideOption={shouldHideOption} nodeData={option} />;
         })}
       </div>
       {optionNodes.length > MAX_INIT_OPTIONS && (
