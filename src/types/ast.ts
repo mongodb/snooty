@@ -7,7 +7,6 @@ type ComponentType =
   | 'blockquote'
   | 'button'
   | 'card'
-  | 'card-group'
   | 'chapter'
   | 'chapters'
   | 'collapsible'
@@ -105,6 +104,7 @@ type DirectiveName =
   | 'wayfinding';
 
 type NodeType =
+  | 'card-group'
   | 'code'
   | 'cta-banner'
   | 'definitionList'
@@ -310,6 +310,28 @@ interface TextNode extends Node {
   type: 'text';
   value: string;
 }
+type CardGroupOptions = {
+  columns: number;
+  layout: string;
+  style: string;
+  type?: string;
+};
+interface CardGroupNode extends Directive<CardGroupOptions> {
+  options: CardGroupOptions;
+}
+
+type CardOptions = {
+  cta?: string;
+  headline?: string;
+  icon: string;
+  'icon-dark': boolean;
+  'icon-alt': string;
+  tag?: string;
+  url: string;
+};
+interface CardNode extends Directive<CardOptions> {
+  options: CardOptions;
+}
 
 interface DefinitionListNode extends ParentNode {
   type: 'definitionList';
@@ -385,6 +407,7 @@ type CollapsibleOptions = {
   heading?: string;
   sub_heading?: string;
   id?: string;
+  expanded?: boolean;
 };
 
 interface CollapsibleNode extends Directive<CollapsibleOptions> {
@@ -608,6 +631,18 @@ interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
   options: StandaloneHeaderOptions;
 }
 
+interface SubstitutionReferenceNode extends ParentNode {
+  name: 'substitution_reference';
+}
+
+interface TargetNode extends ParentNode {
+  name: 'target';
+  html_id: string;
+  options: {
+    hidden: boolean;
+  };
+}
+
 interface ReleaseSpecificationNode extends ParentNode {}
 
 interface RefRoleNode extends ParentNode {
@@ -625,6 +660,8 @@ export type {
   BlockQuoteNode,
   ButtonNode,
   ClassRoleNode,
+  CardGroupNode,
+  CardNode,
   CodeNode,
   CollapsibleNode,
   CollapsibleOptions,
@@ -681,9 +718,11 @@ export type {
   Root,
   StepNode,
   StrongNode,
+  SubstitutionReferenceNode,
   TabNode,
   TabsNode,
   TargetIdentifierNode,
+  TargetNode,
   TextNode,
   TitleReferenceNode,
   TwitterNode,

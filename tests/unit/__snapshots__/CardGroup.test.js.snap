@@ -50,7 +50,7 @@ exports[`renders correctly 1`] = `
   }
 }
 
-.emotion-2 {
+.emotion-1 {
   position: relative;
   -webkit-transition: 150ms ease-in-out;
   transition: 150ms ease-in-out;
@@ -87,31 +87,31 @@ exports[`renders correctly 1`] = `
   padding: 32px 24px;
 }
 
-.emotion-2:focus {
+.emotion-1:focus {
   outline: none;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 10px -4px rgba(0,30,43,0.3);
 }
 
-.emotion-2:hover,
-.emotion-2:active {
+.emotion-1:hover,
+.emotion-1:active {
   border: 1px solid #E8EDEB;
   box-shadow: 0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.emotion-2:hover:focus,
-.emotion-2:active:focus {
+.emotion-1:hover:focus,
+.emotion-1:active:focus {
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC,0 4px 20px -4px rgba(0,30,43,0.2);
 }
 
-.dark-theme .emotion-2 {
+.dark-theme .emotion-1 {
   border-color: #3D4F58;
 }
 
-.emotion-2 p:last-of-type {
+.emotion-1 p:last-of-type {
   margin-bottom: 0;
 }
 
-.emotion-3 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -124,16 +124,16 @@ exports[`renders correctly 1`] = `
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-3 {
+  .emotion-2 {
     margin-left: 16px;
   }
 }
 
-.emotion-3 p {
+.emotion-2 p {
   line-height: 24px;
 }
 
-.emotion-5 {
+.emotion-3 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -145,12 +145,12 @@ exports[`renders correctly 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-5 strong,
-.emotion-5 b {
+.emotion-3 strong,
+.emotion-3 b {
   font-weight: 700;
 }
 
-.emotion-6 {
+.emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -160,16 +160,16 @@ exports[`renders correctly 1`] = `
   font-weight: 400;
 }
 
-.emotion-6 strong,
-.emotion-6 b {
+.emotion-4 strong,
+.emotion-4 b {
   font-weight: 700;
 }
 
-.emotion-6 a {
+.emotion-4 a {
   line-height: unset;
 }
 
-.emotion-7 {
+.emotion-5 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -201,8 +201,8 @@ exports[`renders correctly 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-7:hover,
-.emotion-7:focus {
+.emotion-5:hover,
+.emotion-5:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -211,23 +211,23 @@ exports[`renders correctly 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-7:focus {
+.emotion-5:focus {
   outline: none;
 }
 
-.emotion-7:hover {
+.emotion-5:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-7:focus {
+.emotion-5:focus {
   text-decoration-color: #016BF8;
 }
 
 <div
-    class="card-group  emotion-0 emotion-1"
+    class="card-group  emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <img
         alt="MongoDB Atlas icon"
@@ -241,19 +241,19 @@ exports[`renders correctly 1`] = `
         width="24px"
       />
       <div
-        class="emotion-3 emotion-4"
+        class="emotion-2"
       >
         <div>
           <p
-            class="emotion-5"
+            class="emotion-3"
           >
             Use Compass to connect to your Atlas cluster
           </p>
           <p
-            class="emotion-6"
+            class="emotion-4"
           >
             <a
-              class="lg-ui-0001 emotion-7"
+              class="lg-ui-0001 emotion-5"
               href="https://www.mongodb.com/docs/atlas/getting-started/"
               target="_self"
             >
@@ -266,7 +266,7 @@ exports[`renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <img
         alt="MongoDB University icon"
@@ -280,19 +280,19 @@ exports[`renders correctly 1`] = `
         width="24px"
       />
       <div
-        class="emotion-3 emotion-4"
+        class="emotion-2"
       >
         <div>
           <p
-            class="emotion-5"
+            class="emotion-3"
           >
             Learn MongoDB Basics with MongoDB University
           </p>
           <p
-            class="emotion-6"
+            class="emotion-4"
           >
             <a
-              class="lg-ui-0001 emotion-7"
+              class="lg-ui-0001 emotion-5"
               href="https://university.mongodb.com/courses/M001/about"
               target="_self"
             >
@@ -305,7 +305,7 @@ exports[`renders correctly 1`] = `
       </div>
     </div>
     <div
-      class="emotion-2"
+      class="emotion-1"
     >
       <img
         alt="MongoDB Server icon"
@@ -319,19 +319,19 @@ exports[`renders correctly 1`] = `
         width="24px"
       />
       <div
-        class="emotion-3 emotion-4"
+        class="emotion-2"
       >
         <div>
           <p
-            class="emotion-5"
+            class="emotion-3"
           >
             Access more in-depth examples of querying data
           </p>
           <p
-            class="emotion-6"
+            class="emotion-4"
           >
             <a
-              class="lg-ui-0001 emotion-7"
+              class="lg-ui-0001 emotion-5"
               href="https://www.mongodb.com/docs/manual/tutorial/getting-started/"
               target="_self"
             >

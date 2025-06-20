@@ -19,6 +19,7 @@ import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
 import { TimeRequired } from './MultiPageTutorials';
+import CopyPageMarkdownButton from './Widgets/MarkdownWidget';
 
 const titleMarginStyle = css`
   margin-top: ${theme.size.default};
@@ -70,6 +71,18 @@ const determineHeading = (sectionDepth) => {
 };
 
 const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
+  const templatesWithNoMarkdown = [
+    'blank',
+    'drivers-index',
+    'errorpage',
+    'feature-not-avail',
+    'instruqt',
+    'landing',
+    'openapi',
+    'changelog',
+    'product-landing',
+    'search',
+  ];
   const id = nodeData.id || '';
   const HeadingTag = determineHeading(sectionDepth);
   const asHeadingNumber = as ?? sectionDepth;
@@ -84,6 +97,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
   const hasMethodSelector = page?.options?.['has_method_selector'];
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
   const showRating = !(rest?.page?.options?.template === 'product-landing');
+  const showCopyMarkdown = !templatesWithNoMarkdown.includes(rest?.page?.options?.template) && isPageTitle;
 
   return (
     <>
@@ -114,21 +128,45 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }) => {
             </div>
           )}
         >
-          <HeadingTag
-            className={cx(
-              headingStyles(sectionDepth, shouldShowLabButton),
-              'contains-headerlink',
-              isPageTitle && !hasDrawer ? titleMarginStyle : '',
-              className
+          <ConditionalWrapper
+            condition={showCopyMarkdown}
+            wrapper={(children) => (
+              <div
+                className={css`
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  column-gap: 5px;
+                `}
+              >
+                {children}
+                {/* using showRating since it has similar logic for showing the copy markdown button only for non-landing pages */}
+                <CopyPageMarkdownButton
+                  className={css`
+                    @media ${theme.screenSize.upToLarge} {
+                      display: none;
+                    }
+                  `}
+                />
+              </div>
             )}
-            as={asHeading}
-            weight="medium"
           >
-            {nodeData.children.map((element, index) => {
-              return <ComponentFactory {...rest} nodeData={element} key={index} />;
-            })}
-            <Permalink id={id} description="heading" />
-          </HeadingTag>
+            <HeadingTag
+              className={cx(
+                headingStyles(sectionDepth, shouldShowLabButton),
+                'contains-headerlink',
+                isPageTitle && !hasDrawer ? titleMarginStyle : '',
+                className
+              )}
+              as={asHeading}
+              weight="medium"
+            >
+              {nodeData.children.map((element, index) => {
+                return <ComponentFactory {...rest} nodeData={element} key={index} />;
+              })}
+              <Permalink id={id} description="heading" />
+            </HeadingTag>
+          </ConditionalWrapper>
         </ConditionalWrapper>
       </ConditionalWrapper>
       {isPageTitle && isTabletOrMobile && showRating && (

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -14,6 +13,20 @@ import Link from '../Link';
 import CommunityPillLink from '../CommunityPillLink';
 import { isRelativeUrl } from '../../utils/is-relative-url';
 import { getSuitableIcon } from '../../utils/get-suitable-icon';
+import type { CardNode } from '../../types/ast';
+
+interface CardProps {
+  isCompact?: boolean;
+  isExtraCompact?: boolean;
+  isCenterContentStyle?: boolean;
+  isLargeIconStyle?: boolean;
+  nodeData: CardNode;
+  page: {
+    options: {
+      template: string;
+    };
+  };
+}
 
 const cardBaseStyles = css`
   display: flex;
@@ -92,7 +105,15 @@ const compactIconStyle = `
   }
 `;
 
-const headingStyling = ({ isCompact, isExtraCompact, isLargeIconStyle }) => css`
+const headingStyling = ({
+  isCompact,
+  isExtraCompact,
+  isLargeIconStyle,
+}: {
+  isCompact?: boolean;
+  isExtraCompact?: boolean;
+  isLargeIconStyle?: boolean;
+}) => css`
   font-weight: 500;
   letter-spacing: normal;
   color: var(--font-color-primary);
@@ -126,21 +147,14 @@ const bodyStyling = css`
   }
 `;
 
-const onCardClick = (url) => {
+const onCardClick = (url?: string) => {
+  if (!url) return;
   isRelativeUrl(url) ? navigate(url) : (window.location.href = url);
 };
 
-const Card = ({
-  isCompact,
-  isExtraCompact,
-  isCenterContentStyle,
-  isLargeIconStyle,
-  page,
-  nodeData: {
-    children,
-    options: { cta, headline, icon, 'icon-dark': iconDark, 'icon-alt': iconAlt, tag, url },
-  },
-}) => {
+const Card = ({ isCompact, isExtraCompact, isCenterContentStyle, isLargeIconStyle, page, nodeData }: CardProps) => {
+  const { children, options } = nodeData;
+  const { cta, headline, icon, 'icon-dark': iconDark, 'icon-alt': iconAlt, tag, url } = options ?? {};
   const template = page?.options?.template;
   const { darkMode } = useDarkMode();
 
@@ -176,7 +190,7 @@ const Card = ({
         />
       )}
       <ConditionalWrapper
-        condition={isCompact || isExtraCompact}
+        condition={!!(isCompact || isExtraCompact)}
         wrapper={(children) => <CompactTextWrapper>{children}</CompactTextWrapper>}
       >
         {tag && <CommunityPillLink variant="green" text={tag} />}
@@ -200,26 +214,6 @@ const Card = ({
       </ConditionalWrapper>
     </LeafyGreenCard>
   );
-};
-
-Card.propTypes = {
-  isCompact: PropTypes.bool,
-  isExtraCompact: PropTypes.bool,
-  isCenterContentStyle: PropTypes.bool,
-  isLargeIconStyle: PropTypes.bool,
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object),
-    options: PropTypes.shape({
-      cta: PropTypes.string,
-      headline: PropTypes.string,
-      icon: PropTypes.string,
-      'icon-dark': PropTypes.string,
-      'icon-alt': PropTypes.string,
-      tag: PropTypes.string,
-      url: PropTypes.string,
-    }),
-  }).isRequired,
-  page: PropTypes.object,
 };
 
 export default Card;

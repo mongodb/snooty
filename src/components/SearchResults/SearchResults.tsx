@@ -274,10 +274,6 @@ const StyledSearchResults = styled('div')`
   }
 `;
 
-const StyledTag = styled(Tag)`
-  ${searchTagStyle}
-`;
-
 const ResultTag = styled('div')`
   display: flex;
   flex-direction: row;
@@ -490,12 +486,16 @@ const SearchResults = () => {
                 {!!searchFilter && (
                   <div>
                     {selectedCategory && (
-                      <StyledTag variant="green" onClick={resetFilters}>
+                      <Tag variant="green" onClick={resetFilters} className={cx(searchTagStyle)}>
                         {selectedCategory}
                         <Icon className={cx(iconStyle)} glyph="X" />
-                      </StyledTag>
+                      </Tag>
                     )}
-                    {selectedVersion && <StyledTag variant="blue">{selectedVersion}</StyledTag>}
+                    {selectedVersion && (
+                      <Tag variant="blue" className={cx(searchTagStyle)}>
+                        {selectedVersion}
+                      </Tag>
+                    )}
                   </div>
                 )}
                 {showFacets && <FacetTags resultsCount={searchCount}></FacetTags>}

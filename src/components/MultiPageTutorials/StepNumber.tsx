@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import Overline from '../Internal/Overline';
+import { MultiPageTutorial } from '../../types/data';
 import { MPTNextLinkFull } from './MPTNextLinkFull';
 
 const overlineStyle = css`
@@ -11,7 +11,12 @@ const overlineStyle = css`
   padding-top: 0 !important;
 `;
 
-export const StepNumber = ({ slug, activeTutorial }) => {
+interface StepNumberProps {
+  slug: string;
+  activeTutorial: MultiPageTutorial;
+}
+
+export const StepNumber = ({ slug, activeTutorial }: StepNumberProps) => {
   const totalSteps = activeTutorial.total_steps;
   const currentStep = activeTutorial.slugs.indexOf(slug) + 1;
 
@@ -23,13 +28,4 @@ export const StepNumber = ({ slug, activeTutorial }) => {
       <MPTNextLinkFull />
     </>
   );
-};
-
-StepNumber.propTypes = {
-  slug: PropTypes.string.isRequired,
-  activeTutorial: PropTypes.shape({
-    parent: PropTypes.string,
-    total_steps: PropTypes.number,
-    slugs: PropTypes.arrayOf(PropTypes.string),
-  }),
 };
