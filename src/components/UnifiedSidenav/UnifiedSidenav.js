@@ -209,12 +209,12 @@ export function UnifiedSidenav({ slug, versionsData }) {
       setShowDriverBackBtn(isDriver);
 
       const foundCurrentL1 = tree.find((staticTocItem) => {
-        return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
+        return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items, pathPrefix);
       });
       setCurrentL1(foundCurrentL1);
       setCurrentL2s(currentL2List);
     }
-  }, [tree, slug]);
+  }, [tree, slug, pathPrefix]);
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {

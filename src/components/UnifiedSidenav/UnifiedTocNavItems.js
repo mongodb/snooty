@@ -182,7 +182,7 @@ export function UnifiedTocNavItem({
 
 function CollapsibleNavItem({ items, label, url, slug, prefix, isAccordion, level }) {
   const { pathPrefix: contentSitePrefix } = useSiteMetadata();
-  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
+  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items, contentSitePrefix));
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
   const isActive = isSelectedTab(url, slug, contentSitePrefix);
 
