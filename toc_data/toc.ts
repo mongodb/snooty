@@ -34,6 +34,14 @@ export const tocData = (): TocItem[] => {
                 },
               ],
             },
+            {
+              label: 'external link',
+              url: 'https://www.mongodb.com/pricing',
+            },
+            {
+              label: 'l1 link',
+              url: '/docs/atlas/getting-started/',
+            },
           ],
         },
       ],

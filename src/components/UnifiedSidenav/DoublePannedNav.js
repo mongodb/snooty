@@ -74,6 +74,7 @@ export const DoublePannedNav = ({
   currentL2s,
   setCurrentL1,
   setCurrentL2s,
+  l1List,
   currentL1,
 }) => {
   const { isTabletOrMobile } = useScreenSize();
@@ -118,6 +119,7 @@ export const DoublePannedNav = ({
                 slug={slug}
                 isAccordion={false}
                 setCurrentL2s={setCurrentL2s}
+                l1List={l1List}
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
             ))}

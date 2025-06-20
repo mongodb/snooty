@@ -59,6 +59,7 @@ export function UnifiedTocNavItem({
   isAccordion,
   setCurrentL1,
   setCurrentL2s,
+  l1List,
   setShowDriverBackBtn,
   level,
 }) {
@@ -89,6 +90,7 @@ export function UnifiedTocNavItem({
                 isStatic={false}
                 isAccordion={isAccordion}
                 setCurrentL2s={setCurrentL2s}
+                l1List={l1List}
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
             ))}
@@ -108,6 +110,7 @@ export function UnifiedTocNavItem({
             isStatic={false}
             isAccordion={isAccordion}
             setCurrentL2s={setCurrentL2s}
+            l1List={l1List}
             setShowDriverBackBtn={setShowDriverBackBtn}
           />
         ))}
@@ -127,6 +130,7 @@ export function UnifiedTocNavItem({
             slug={slug}
             isAccordion={isAccordion}
             setCurrentL2s={setCurrentL2s}
+            l1List={l1List}
             setShowDriverBackBtn={setShowDriverBackBtn}
           />
         ))}
@@ -147,6 +151,7 @@ export function UnifiedTocNavItem({
         as={Link}
         prefix={prefix}
         to={url}
+        l1List={l1List}
         onClick={handleClick}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       >
@@ -166,6 +171,7 @@ export function UnifiedTocNavItem({
         isAccordion={isAccordion}
         slug={slug}
         prefix={prefix}
+        l1List={l1List}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       />
     );
@@ -178,6 +184,7 @@ export function UnifiedTocNavItem({
       as={Link}
       prefix={prefix}
       to={url}
+      l1List={l1List}
       className={cx(l2ItemStyling({ level, isAccordion }))}
     >
       {label}
@@ -185,7 +192,7 @@ export function UnifiedTocNavItem({
   );
 }
 
-function CollapsibleNavItem({ items, label, url, slug, prefix, isAccordion, level }) {
+function CollapsibleNavItem({ items, label, url, slug, l1List, prefix, isAccordion, level }) {
   const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
   const isActive = isSelectedTab(url, slug);
@@ -208,6 +215,7 @@ function CollapsibleNavItem({ items, label, url, slug, prefix, isAccordion, leve
         as={Link}
         prefix={prefix}
         to={url}
+        l1List={l1List}
         active={isActive}
         className={cx(l2ItemStyling({ level, isAccordion }), overwriteLinkStyle)}
         onClick={handleClick}
@@ -228,6 +236,7 @@ function CollapsibleNavItem({ items, label, url, slug, prefix, isAccordion, leve
             level={level + 1}
             key={item.newUrl + item.label}
             slug={slug}
+            l1List={l1List}
             isAccordion={isAccordion}
           />
         ))}

@@ -6,6 +6,7 @@ import { Link as LGLink } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
+import Icon from '@leafygreen-ui/icon';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
@@ -91,6 +92,7 @@ const Link = ({
   to,
   activeClassName,
   className,
+  l1List,
   partiallyActive,
   showLinkArrow,
   hideExternalIcon: hideExternalIconProp,
@@ -117,8 +119,10 @@ const Link = ({
     ''
   );
 
+  console.log('l1 list is ', l1List);
+
   // If prefix, that means we are coming from the UnifiedSideNav and not the old SideNav
-  if (prefix) {
+  if (prefix && isRelativeUrl(to)) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
@@ -145,10 +149,18 @@ const Link = ({
 
     // On the Unified SideNav but linking to a different site
     return (
-      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={to}>
-        {children}
-        {decoration}
-      </a>
+      <>
+        <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={to}>
+          {children}
+          {decoration}
+        </a>
+        <Icon
+          // className={cx(caretStyle)}
+          glyph={'ArrowRight'}
+          // fill={isActive ? 'inherit' : palette.gray.base}
+          // onClick={onCaretClick}
+        />
+      </>
     );
   }
 
@@ -172,9 +184,11 @@ const Link = ({
     );
   }
 
-  const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
-  const isMDBLink = strippedUrl.includes('mongodb.com');
-  const showExtIcon = showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
+  console.log('hey', to);
+
+  // const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
+  // const isMDBLink = strippedUrl.includes('mongodb.com');
+  const showExtIcon = showExternalIcon ?? (!anchor && !hideExternalIconProp);
   const target = !showExtIcon ? '_self' : undefined;
 
   return (
