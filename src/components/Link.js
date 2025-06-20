@@ -126,7 +126,7 @@ const Link = ({
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
     // TODO: i wonder if this works for versioned site in monorepo
-    // Using the isSnootyInDevMode to enforce the client-side routing which
+    // Using the isUnifiedTOCInDevMode to enforce the client-side routing for local build and preview deployments which
     // allows our custom 404 page to render.
     if (project === prefix || isUnifiedTOCInDevMode) {
       // Get rid of the path prefix in link for internal links
