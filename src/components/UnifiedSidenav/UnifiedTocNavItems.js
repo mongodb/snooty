@@ -6,8 +6,10 @@ import { SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Link from '../Link';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
-import { isCurrentPage } from '../../utils/is-current-page';
+import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { theme } from '../../theme/docsTheme';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { isUnifiedTocActive } from '../../utils/is-unified-toc-active';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 
 export const Border = styled('hr')`
@@ -31,19 +33,11 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
-function isSelectedTab(url, slug) {
+function isSelectedTab(url, slug, pathPrefix) {
+  // Hijacking the isSelectedTab for unified toc in dev and preview builds
+  if (isUnifiedTocActive(url, pathPrefix)) return true;
   return isSelectedTocNode(url, slug);
 }
-
-// This checks what sidenav should load based on the active Tab
-export const isActiveTocNode = (currentUrl, slug, children) => {
-  if (currentUrl === undefined) return false;
-  if (isCurrentPage(currentUrl, slug)) return true;
-  if (children) {
-    return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.url, b.items), false);
-  }
-  return false;
-};
 
 export function UnifiedTocNavItem({
   label,
@@ -62,6 +56,7 @@ export function UnifiedTocNavItem({
   setShowDriverBackBtn,
   level,
 }) {
+  const { pathPrefix: contentSitePrefix } = useSiteMetadata();
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
   // Unless in Mobile doing Accordion view
   if (isStatic) {
@@ -173,7 +168,7 @@ export function UnifiedTocNavItem({
 
   return (
     <SideNavItem
-      active={isSelectedTab(url, slug)}
+      active={isSelectedTab(url, slug, contentSitePrefix)}
       aria-label={label}
       as={Link}
       prefix={prefix}
@@ -186,9 +181,10 @@ export function UnifiedTocNavItem({
 }
 
 function CollapsibleNavItem({ items, label, url, slug, prefix, isAccordion, level }) {
+  const { pathPrefix: contentSitePrefix } = useSiteMetadata();
   const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, url, items));
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
-  const isActive = isSelectedTab(url, slug);
+  const isActive = isSelectedTab(url, slug, contentSitePrefix);
 
   const onCaretClick = (event) => {
     event.preventDefault();
@@ -247,7 +243,8 @@ export function StaticNavItem({
   setShowDriverBackBtn,
   level = 1,
 }) {
-  const isActive = isActiveTocNode(slug, url, items);
+  const { pathPrefix } = useSiteMetadata();
+  const isActive = isActiveTocNode(slug, url, items, pathPrefix);
 
   return (
     <SideNavItem
