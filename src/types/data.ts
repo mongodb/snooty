@@ -1,5 +1,5 @@
 import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
-import { PageTemplateType } from '../context/page-context';
+import { IAOption, PageTemplateType } from '../context/page-context';
 import { ParagraphNode, TextNode, TocTreeEntry } from './ast';
 
 type EOLType = 'download' | 'link';
@@ -86,7 +86,7 @@ type RemoteMetadata = {
   parentPaths: Record<string, BreadcrumbType[]>;
   static_files: Record<string, Buffer>;
   canonical?: string | null;
-  iatree?: IATreeNode;
+  iatree?: IAOption;
   openapi_pages?: Record<string, OpenApiPage>;
   associated_products?: AssociatedProduct[];
   multiPageTutorials?: Record<string, MultiPageTutorial>;
@@ -98,14 +98,6 @@ type SlugToBreadcrumbLabel = RemoteMetadata['slugToBreadcrumbLabel'];
 type MultiPageTutorial = {
   slugs: string[];
   total_steps: number;
-};
-
-// TODO: Refine structure
-type IATreeNode = {
-  title: [TextNode];
-  slug?: string;
-  url?: string;
-  children?: Node[];
 };
 
 // TODO: Refine structure

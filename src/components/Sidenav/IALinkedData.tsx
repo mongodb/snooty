@@ -7,6 +7,7 @@ import Link from '../Link';
 import { DATA_TOC_NODE } from '../../constants';
 import { theme } from '../../theme/docsTheme';
 import { getSuitableIcon } from '../../utils/get-suitable-icon';
+import { IALinkedData } from '../../context/page-context';
 
 const ulStyling = css`
   display: grid;
@@ -64,12 +65,16 @@ const liStyling = css`
   }
 `;
 
-const IALinkedData = ({ linkedData }) => {
+export type IALinkedDataProps = {
+  linkedData: IALinkedData[];
+}
+
+const IALinkedData = ({ linkedData }: IALinkedDataProps) => {
   const { darkMode } = useDarkMode();
   return (
     <ul className={cx(ulStyling)}>
       {linkedData.map(({ headline, url, icon, 'icon-alt': iconAlt, 'icon-dark': iconDark }, index) => {
-        const iconSrc = getSuitableIcon(icon, iconDark, darkMode);
+        const iconSrc = getSuitableIcon(icon, Boolean(iconDark), darkMode);
         return (
           <SideNavItem key={index} className={cx(liStyling)} as={Link} to={url} data-position={DATA_TOC_NODE}>
             <img height={16} width={16} src={iconSrc} alt={iconAlt} />

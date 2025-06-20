@@ -55,15 +55,20 @@ const scrollBehavior = { block: 'nearest', behavior: 'smooth' };
 //   }).isRequired,
 // };
 
-// TOCNode.defaultProps = {
-//   level: BASE_NODE_LEVEL,
-// };
+
+export type TOCNodeProps = {
+  activeSection: string;
+  handleClick: () => void;
+  level?: number;
+  node: ;
+  parentProj: string;
+}
 
 /**
  * Potential leaf node for the Table of Contents. May have children which are also
  * recursively TOCNodes.
  */
-const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, parentProj = '' }) => {
+const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, parentProj = '' }: TOCNodeProps) => {
   const { title, slug, url, children, options = {} } = node;
   const { activeVersions } = useContext(VersionContext);
   const target = options.urls?.[activeVersions[options.project]] || slug || url;
@@ -75,7 +80,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
   const isDrawer = !!(options && (options.drawer || options.versions)); // TODO: convert versions option to drawer in backend
   const isTocIcon = !!(options.tocicon === 'sync');
   const [isOpen, setIsOpen] = useState(isActive);
-  const tocNodeRef = useRef(null);
+  const tocNodeRef = useRef<HTMLDivElement>(null);
 
   // effect of scrolling toc node into view on load
   const isScrolled = useRef(false);
@@ -99,7 +104,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     return null;
   }
 
-  const onCaretClick = (event) => {
+  const onCaretClick = (event: MouseEvent) => {
     event.preventDefault();
     setIsOpen(!isOpen);
   };

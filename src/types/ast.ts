@@ -70,7 +70,9 @@ type DirectiveName =
   | 'deprecated'
   | 'directive'
   | 'dismissible-skills-card'
+  | 'entry'
   | 'facet'
+  | 'ia'
   | 'icon'
   | 'include'
   | 'input'
@@ -465,6 +467,7 @@ interface TocTreeEntry {
   slug: string;
   children: TocTreeEntry[];
   options?: TocTreeOptions;
+  url?: string;
 }
 
 interface TocTreeOptions {
@@ -544,6 +547,19 @@ type HighlightRoleNames = (typeof highlightRoleNames)[number];
 interface HighlightNode extends ParentNode {
   type: 'role';
   name: HighlightRoleNames;
+}
+
+interface IANode extends Directive {
+  name: 'ia';
+}
+
+type IAEntryNodeOptions = {
+  url: string;
+}
+
+interface IAEntryNode extends Directive {
+  name: 'entry';
+  options: IAEntryNodeOptions;
 }
 
 interface LinkNewTabNode extends ParentNode {
@@ -687,6 +703,8 @@ export type {
   HeadingNodeSelectorIds,
   HighlightNode,
   HighlightRoleNames,
+  IAEntryNode,
+  IANode,
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,

@@ -35,6 +35,8 @@ import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
 import { sideNavItemBasePadding, sideNavItemFontSize, titleStyle } from './styles/sideNavItem';
 import DocsHomeButton from './DocsHomeButton';
+import { PageContextRepoBranches } from '../../types/data';
+import { Root } from '../../types/ast';
 
 const SIDENAV_WIDTH = 268;
 
@@ -176,18 +178,19 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://learn.mongodb.com/' },
 ];
 
-// Sidenav.propTypes = {
-//   chapters: PropTypes.object,
-//   guides: PropTypes.object,
-//   page: PropTypes.shape({
-//     options: PropTypes.object,
-//   }).isRequired,
-//   repoBranches: PropTypes.object,
-//   slug: PropTypes.string.isRequired,
-//   eol: PropTypes.bool.isRequired,
-// };
+export type SidenavProps = {
+  // TODO: 
+  chapters: {};
+  guides: {};
+  // TODO: Unsure
+  page: Root;
+  pageTitle: string;
+  repoBranches: PageContextRepoBranches;
+  slug: string;
+  eol: boolean;
+}
 
-const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }) => {
+const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }: SidenavProps) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSnootyMetadata();
   const isDocsLanding = project === 'landing';
@@ -285,9 +288,9 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
             className={cx(sideNavStyling({ hideMobile, isCollapsed }))}
             collapsed={isCollapsed}
             setCollapsed={setCollapsed}
-            widthOverride={isTabletOrMobile ? viewportSize.width : SIDENAV_WIDTH}
+            widthOverride={isTabletOrMobile ? viewportSize?.width : SIDENAV_WIDTH}
           >
-            <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isTabletOrMobile}>
+            <IATransition back={back} hasIA={!!ia} slug={slug}>
               <NavTopContainer>
                 <ArtificialPadding />
                 <DocsHomeButton />
@@ -304,7 +307,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                 )}
                 {showAllProducts && (
                   <Border
-                    css={css`
+                    className={css`
                       margin-bottom: 0;
                     `}
                   />

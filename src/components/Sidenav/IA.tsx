@@ -1,5 +1,4 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode, useMemo } from 'react';
 import { SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Link from '../Link';
@@ -8,6 +7,7 @@ import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { DATA_TOC_NODE } from '../../constants';
 import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import IALinkedData from './IALinkedData';
+import { IALinkedData as IALinkedDataType, IAOption } from '../../context/page-context';
 
 const headerPadding = css`
   > div {
@@ -27,10 +27,8 @@ const fontStyling = css`
 
 /**
  * Traverses the IA tree to look for nodes with IDs and linked data.
- * @param {*} iaTreeNode
- * @param {*} mapping
  */
-const traverseIATree = (iaTreeNode, mapping) => {
+const traverseIATree = (iaTreeNode: IAOption | undefined, mapping: IATreeMapping) => {
   if (!iaTreeNode) {
     return;
   }
@@ -46,17 +44,24 @@ const traverseIATree = (iaTreeNode, mapping) => {
   }
 };
 
+type IATreeMapping = Record<string, IALinkedDataType[]>;
+
 /**
  * Finds IA linked data across the IA tree.
- * @param {*} iaTree
  */
-const findIALinkedData = (iaTree) => {
-  const mapping = {};
+const findIALinkedData = (iaTree?: IAOption) => {
+  const mapping: IATreeMapping = {};
   traverseIATree(iaTree, mapping);
   return mapping;
 };
 
-const IA = ({ handleClick, header, ia }) => {
+export type IAProps = {
+  handleClick: () => void;
+  header: ReactNode;
+  ia: IAOption[];
+}
+
+const IA = ({ handleClick, header, ia }: IAProps) => {
   const { iatree } = useSnootyMetadata();
   const linkedDataMapping = findIALinkedData(iatree);
   const sideNavGroupClassname = useMemo(() => (header ? cx(headerPadding) : cx(collapseHeaderPadding)), [header]);
@@ -67,7 +72,7 @@ const IA = ({ handleClick, header, ia }) => {
         const target = slug || url;
         // We use the linked data from the mapping since the linked data and the
         // IA entry might not always be on the same page (such as the "/search" page).
-        const linkedData = linkedDataMapping[id];
+        const linkedData = id ? linkedDataMapping[id] : undefined;
         return (
           <React.Fragment key={index}>
             <SideNavItem
@@ -86,18 +91,6 @@ const IA = ({ handleClick, header, ia }) => {
       })}
     </SideNavGroup>
   );
-};
-
-IA.propTypes = {
-  handleClick: PropTypes.func,
-  header: PropTypes.element,
-  ia: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.arrayOf(PropTypes.object),
-      slug: PropTypes.string,
-      url: PropTypes.string,
-    })
-  ),
 };
 
 export default IA;

@@ -54,7 +54,7 @@ const DocsHomeButton = () => {
     () => (
       <SideNavItem
         className={cx(titleStyle, sideNavItemBasePadding, homeLinkStyle)}
-        as={Link}
+        as={(props) => <Link {...props} />}
         href={baseUrl()}
         hideExternalIcon={true}
       >
