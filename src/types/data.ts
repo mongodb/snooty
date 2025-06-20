@@ -1,6 +1,6 @@
 import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
 import { IAOption, PageTemplateType } from '../context/page-context';
-import { ParagraphNode, TextNode, TocTreeEntry } from './ast';
+import { Node, TextNode, TocTreeEntry } from './ast';
 
 type EOLType = 'download' | 'link';
 
@@ -145,10 +145,10 @@ type MetadataChapter = {
 type MetadataGuides = Record<string, MetadataGuide>;
 
 type MetadataGuide = {
-  chapter_name: string;
-  completion_time: number;
-  description: ParagraphNode;
-  title: TextNode;
+  chapter_name?: string;
+  completion_time?: number;
+  description: string | Node[];
+  title: string | Node[];
 };
 type FacetBase = {
   id: string;
@@ -175,6 +175,8 @@ export {
   FacetValue,
   Group,
   MetadataChapters,
+  MetadataGuide,
+  MetadataGuides,
   MetadataDatabaseName,
   MultiPageTutorial,
   PageContext,
