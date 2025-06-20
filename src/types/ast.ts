@@ -462,19 +462,21 @@ interface AdmonitionNode extends Directive {
   name: AdmonitionName;
 }
 
+type TocTreeOptions = {
+  drawer?: boolean;
+  project?: string;
+  versions?: string[];
+  osiris_parent?: boolean;
+  tocicon?: string;
+  version?: string;
+  urls?: Record<string, string>;
+};
 interface TocTreeEntry {
   title: [TextNode];
   slug: string;
   children: TocTreeEntry[];
   options?: TocTreeOptions;
   url?: string;
-}
-
-interface TocTreeOptions {
-  drawer?: boolean;
-  project?: string;
-  versions?: string[];
-  osiris_parent?: boolean;
 }
 
 interface TocTreeDirective extends Directive<TocTreeOptions> {
@@ -555,7 +557,7 @@ interface IANode extends Directive {
 
 type IAEntryNodeOptions = {
   url: string;
-}
+};
 
 interface IAEntryNode extends Directive {
   name: 'entry';

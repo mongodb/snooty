@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { MouseEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
@@ -63,7 +63,7 @@ export type VersionSelectorProps = {
   tocVersionNames?: string[];
 };
 
-const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
+const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }: VersionSelectorProps) => {
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
   const [options, setOptions] = useState(buildChoices(availableVersions[versionedProject], tocVersionNames));
 
@@ -78,7 +78,7 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
     [onVersionSelect, versionedProject]
   );
 
-  const onClick = useCallback((e: MouseEvent) => {
+  const onClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   }, []);
 

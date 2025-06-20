@@ -7,7 +7,7 @@ import Link from '../Link';
 import { DATA_TOC_NODE } from '../../constants';
 import { theme } from '../../theme/docsTheme';
 import { getSuitableIcon } from '../../utils/get-suitable-icon';
-import { IALinkedData } from '../../context/page-context';
+import { IALinkedData as IALinkedDataType } from '../../context/page-context';
 
 const ulStyling = css`
   display: grid;
@@ -66,8 +66,8 @@ const liStyling = css`
 `;
 
 export type IALinkedDataProps = {
-  linkedData: IALinkedData[];
-}
+  linkedData: IALinkedDataType[];
+};
 
 const IALinkedData = ({ linkedData }: IALinkedDataProps) => {
   const { darkMode } = useDarkMode();

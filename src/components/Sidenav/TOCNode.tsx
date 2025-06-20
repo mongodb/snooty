@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { MouseEvent, useContext, useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import { palette } from '@leafygreen-ui/palette';
 import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
-import Link from '../Link';
+import Link, { LinkProps } from '../Link';
 import { DATA_TOC_NODE } from '../../constants';
 import { VersionContext } from '../../context/version-context';
 import { formatText } from '../../utils/format-text';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { TocTreeEntry } from '../../types/ast';
 import { sideNavItemTOCStyling } from './styles/sideNavItem';
 import VersionSelector from './VersionSelector';
 
@@ -31,38 +32,22 @@ const overwriteLinkStyle = css`
   }
 `;
 
-const FormatTitle = styled.div`
-  margin-left: var(--margin-left);
+const FormatTitle = styled.div<{ marginLeft: string }>`
+  margin-left: ${({ marginLeft }) => marginLeft};
   scroll-margin-bottom: ${theme.size.xxlarge};
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
-const scrollBehavior = { block: 'nearest', behavior: 'smooth' };
-
-// TOCNode.propTypes = {
-//   level: PropTypes.number,
-//   node: PropTypes.shape({
-//     children: PropTypes.array.isRequired,
-//     options: PropTypes.shape({
-//       drawer: PropTypes.bool,
-//       tocicon: PropTypes.bool,
-//       styles: PropTypes.objectOf(PropTypes.string),
-//     }),
-//     slug: PropTypes.string,
-//     title: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]).isRequired,
-//     url: PropTypes.string,
-//   }).isRequired,
-// };
-
+const scrollBehavior: ScrollIntoViewOptions = { block: 'nearest', behavior: 'smooth' };
 
 export type TOCNodeProps = {
   activeSection: string;
   handleClick: () => void;
+  node: TocTreeEntry;
   level?: number;
-  node: ;
-  parentProj: string;
-}
+  parentProj?: string;
+};
 
 /**
  * Potential leaf node for the Table of Contents. May have children which are also
@@ -71,9 +56,9 @@ export type TOCNodeProps = {
 const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, parentProj = '' }: TOCNodeProps) => {
   const { title, slug, url, children, options = {} } = node;
   const { activeVersions } = useContext(VersionContext);
-  const target = options.urls?.[activeVersions[options.project]] || slug || url;
+  const target = options.urls?.[activeVersions[options.project ?? '']] || slug || url;
   const hasChildren = !!children?.length;
-  const hasVersions = !!(options?.versions?.length > 1);
+  const hasVersions = !!(options?.versions?.length ?? 0 > 1);
 
   const isActive = isActiveTocNode(activeSection, slug, children);
   const isSelected = isSelectedTocNode(activeSection, slug);
@@ -104,7 +89,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     return null;
   }
 
-  const onCaretClick = (event: MouseEvent) => {
+  const onCaretClick = (event: MouseEvent<SVGSVGElement>) => {
     event.preventDefault();
     setIsOpen(!isOpen);
   };
@@ -116,7 +101,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
     };
     // Wrap title in a div to prevent SideNavItem from awkwardly spacing titles with nested elements (e.g. code tags)
     const formattedTitle = (
-      <FormatTitle ref={tocNodeRef} style={{ '--margin-left': hasChildren || isTocIcon ? '0px' : '21px' }}>
+      <FormatTitle ref={tocNodeRef} marginLeft={hasChildren || isTocIcon ? '0px' : '21px'}>
         {formatText(title, formatTextOptions)}
       </FormatTitle>
     );
@@ -127,16 +112,23 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
       return (
         <SideNavItem
           className={cx(sideNavItemTOCStyling({ level }))}
-          as={isOfflineDocsBuild ? Link : 'a'}
+          as={
+            isOfflineDocsBuild
+              ? ({ children, ...props }: LinkProps) => (
+                  <Link {...props} to={target}>
+                    {children}
+                  </Link>
+                )
+              : ({ children, ...props }: LinkProps) => <a {...props}>{children}</a>
+          }
           onClick={() => {
             setIsOpen(!isOpen);
           }}
-          to={isOfflineDocsBuild ? target : null}
           data-position={DATA_TOC_NODE}
         >
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
           {formattedTitle}
-          {hasVersions && activeVersions[options.project] && (
+          {hasVersions && options.project && activeVersions[options.project] && (
             <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
           )}
         </SideNavItem>
@@ -159,7 +151,7 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
           <Icon className={cx(caretStyle)} glyph={iconType} fill={palette.gray.base} onClick={onCaretClick} />
         )}
         {formattedTitle}
-        {hasVersions && activeVersions[options.project] && (
+        {hasVersions && options.project && activeVersions[options.project] && (
           <VersionSelector versionedProject={options.project} tocVersionNames={options.versions} />
         )}
       </SideNavItem>

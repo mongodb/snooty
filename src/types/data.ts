@@ -174,6 +174,7 @@ export {
   FacetOption,
   FacetValue,
   Group,
+  MetadataChapter,
   MetadataChapters,
   MetadataGuide,
   MetadataGuides,

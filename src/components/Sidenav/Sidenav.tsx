@@ -25,6 +25,8 @@ import { useOfflineDownloadContext } from '../OfflineDownloadModal/DownloadConte
 import { reportAnalytics } from '../../utils/report-analytics';
 import { displayNone } from '../../utils/display-none';
 import useScreenSize from '../../hooks/useScreenSize';
+import { MetadataChapters, MetadataGuides, PageContextRepoBranches } from '../../types/data';
+import { Root } from '../../types/ast';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -35,8 +37,6 @@ import SidenavMobileTransition from './SidenavMobileTransition';
 import Toctree from './Toctree';
 import { sideNavItemBasePadding, sideNavItemFontSize, titleStyle } from './styles/sideNavItem';
 import DocsHomeButton from './DocsHomeButton';
-import { PageContextRepoBranches } from '../../types/data';
-import { Root } from '../../types/ast';
 
 const SIDENAV_WIDTH = 268;
 
@@ -84,32 +84,32 @@ const disableScroll = (shouldDisableScroll: boolean) => css`
   }
 `;
 
-const getTopAndHeight = (topValue: string) => {
+const getTopAndHeight = (topValue: string, scrollY: string) => {
   return css`
-    top: max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight});
-    height: calc(100vh - max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight}));
+    top: max(min(calc(${topValue} - var(${scrollY}))), ${theme.header.actionBarMobileHeight});
+    height: calc(100vh - max(min(calc(${topValue} - var(${scrollY}))), ${theme.header.actionBarMobileHeight}));
   `;
 };
 
 // Keep the side nav container sticky to allow LG's side nav to push content seamlessly
 const SidenavContainer = styled.div(
-  ({ topLarge, topMedium, topSmall }: StickyTopValues) => css`
+  ({ topLarge, topMedium, topSmall, scrollY }: StickyTopValues & { scrollY: string }) => css`
     grid-area: sidenav;
     position: sticky;
     z-index: ${theme.zIndexes.sidenav};
     top: 0px;
     height: calc(
       100vh + ${theme.header.actionBarMobileHeight} - ${topLarge} +
-        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(--scroll-y))
+        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(${scrollY}))
     );
 
     @media ${theme.screenSize.upToLarge} {
-      ${getTopAndHeight(topMedium)};
+      ${getTopAndHeight(topMedium, scrollY)};
       z-index: ${theme.zIndexes.actionBar - 1};
     }
 
     @media ${theme.screenSize.upToSmall} {
-      ${getTopAndHeight(topSmall)};
+      ${getTopAndHeight(topSmall, scrollY)};
     }
 
     nav {
@@ -179,16 +179,15 @@ const additionalLinks = [
 ];
 
 export type SidenavProps = {
-  // TODO: 
-  chapters: {};
-  guides: {};
+  chapters: MetadataChapters;
+  guides: MetadataGuides;
   // TODO: Unsure
   page: Root;
   pageTitle: string;
   repoBranches: PageContextRepoBranches;
   slug: string;
   eol: boolean;
-}
+};
 
 const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }: SidenavProps) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
@@ -238,22 +237,14 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }:
     if (isGuidesLanding) {
       return <GuidesLandingTree chapters={chapters} handleClick={() => hideMobileSidenav()} />;
     } else if (isGuidesTemplate) {
-      return (
-        <GuidesTOCTree
-          chapters={chapters}
-          guides={guides}
-          handleClick={() => hideMobileSidenav()}
-          page={page}
-          slug={slug}
-        />
-      );
+      return <GuidesTOCTree chapters={chapters} guides={guides} handleClick={() => hideMobileSidenav()} slug={slug} />;
     }
 
     if (!Object.keys(activeToc).length) {
       return null;
     }
     return <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={activeToc} />;
-  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, activeToc]);
+  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, slug, activeToc]);
 
   const navTitle = isGuidesTemplate ? guides?.[slug]?.['chapter_name'] : formatText(activeToc.title);
 
@@ -262,7 +253,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }:
       return 0;
     }
 
-    const chapterName = guides?.[slug]?.['chapter_name'];
+    const chapterName = guides?.[slug]?.['chapter_name'] ?? '';
     return chapters[chapterName]?.['chapter_number'];
   }, [chapters, guides, isGuidesTemplate, slug]);
 
@@ -276,12 +267,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }:
           ${disableScroll(!hideMobile)}
         `}
       />
-      <SidenavContainer
-        {...topValues}
-        template={template}
-        style={{ '--scroll-y': `${viewport.scrollY}px` }}
-        id={SIDE_NAV_CONTAINER_ID}
-      >
+      <SidenavContainer {...topValues} scrollY={`${viewport.scrollY}px`} id={SIDE_NAV_CONTAINER_ID}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isTabletOrMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
@@ -305,13 +291,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }:
                     ia={ia}
                   />
                 )}
-                {showAllProducts && (
-                  <Border
-                    className={css`
-                      margin-bottom: 0;
-                    `}
-                  />
-                )}
+                {showAllProducts && <Border className={cx(LeafyCSS`margin-bottom: 0;`)} />}
               </NavTopContainer>
               {showAllProducts && <ProductsList />}
             </IATransition>
