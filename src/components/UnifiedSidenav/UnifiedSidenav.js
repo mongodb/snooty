@@ -14,7 +14,7 @@ import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
-import { isActiveTocNode } from './UnifiedTocNavItems';
+import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
 
