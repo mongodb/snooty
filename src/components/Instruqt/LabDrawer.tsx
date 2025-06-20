@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { Resizable } from 'react-resizable';
 import { cx, css } from '@leafygreen-ui/emotion';
@@ -61,7 +60,11 @@ const topContainerStyle = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--background-color);
+  background-color: 'inherit';
+
+  .dark-theme & {
+    background-color: ${palette.gray.dark2};
+  }
 
   @media ${theme.screenSize.upToMedium} {
     justify-content: left;
@@ -93,7 +96,7 @@ const iframeOverlayStyle = css`
   width: 100%;
 `;
 
-const CustomResizeHandle = React.forwardRef((props, ref) => {
+const CustomResizeHandle = React.forwardRef<HTMLDivElement, { handleAxis?: string }>((props, ref) => {
   // handleAxis is being filtered out to avoid prop warning for div
   // restProps along with ref are what actually allows react-resizable to treat this as a handle
   const { handleAxis, ...restProps } = props;
@@ -107,14 +110,20 @@ const CustomResizeHandle = React.forwardRef((props, ref) => {
   );
 });
 
-const LabDrawer = ({ title, embedValue, darkMode }) => {
+export type LabDrawerProps = {
+  title: string;
+  embedValue: string;
+  darkMode: boolean;
+};
+
+const LabDrawer = ({ title, embedValue, darkMode }: LabDrawerProps) => {
   const viewportSize = useViewport();
   const { isMobile } = useScreenSize();
   const labTitle = title || 'MongoDB Interactive Lab';
   const [isResizing, setIsResizing] = useState(false);
 
   const defaultMeasurement = 200;
-  const defaultHeight = (viewportSize.height * 2) / 3 ?? defaultMeasurement;
+  const defaultHeight = viewportSize.height ? (viewportSize.height * 2) / 3 : defaultMeasurement;
   const defaultWidth = viewportSize.width ?? defaultMeasurement;
   // Set this to 100% instead of a set px to avoid overlap with the browser's scrollbar
   const wrapperWidth = '100%';
@@ -145,7 +154,7 @@ const LabDrawer = ({ title, embedValue, darkMode }) => {
     }
   }, [height, maxHeight]);
 
-  const handleResize = (_e, { size }) => {
+  const handleResize = (_e: React.SyntheticEvent, { size }: { size: { height: number } }) => {
     setHeight(size.height);
   };
 
@@ -164,10 +173,7 @@ const LabDrawer = ({ title, embedValue, darkMode }) => {
     >
       {/* Need this div with style as a wrapper to help with resizing */}
       <div style={{ width: wrapperWidth, height: height + 'px' }} data-testid="resizable-wrapper">
-        <div
-          className={cx(topContainerStyle)}
-          style={{ '--background-color': darkMode ? palette.gray.dark2 : 'inherit' }}
-        >
+        <div className={cx(topContainerStyle)}>
           <div className={cx(titleStyle)}>{labTitle}</div>
           <DrawerButtons
             height={height}
@@ -185,12 +191,6 @@ const LabDrawer = ({ title, embedValue, darkMode }) => {
     </Resizable>,
     document.body
   );
-};
-
-LabDrawer.prototype = {
-  title: PropTypes.string,
-  embedValue: PropTypes.string,
-  darkMode: PropTypes.bool,
 };
 
 export default LabDrawer;

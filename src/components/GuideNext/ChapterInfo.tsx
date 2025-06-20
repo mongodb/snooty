@@ -6,6 +6,7 @@ import Card from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import { theme } from '../../theme/docsTheme';
+import type { MetadataGuide } from '../../types/data';
 import GuidesList from './GuidesList';
 
 const cardStyling = css`
@@ -53,7 +54,18 @@ const ChapterTitle = styled('div')`
   font-weight: bold;
 `;
 
-const ChapterInfo = ({ chapterData, guidesMetadata, targetSlug }) => {
+interface ChapterData {
+  chapter_number: number;
+  guides: Array<string>;
+}
+
+export type ChapterInfoProps = {
+  chapterData: [title: string, ChapterData];
+  guidesMetadata: Record<string, MetadataGuide>;
+  targetSlug?: string | null;
+};
+
+const ChapterInfo = ({ chapterData, guidesMetadata, targetSlug }: ChapterInfoProps) => {
   if (chapterData?.length < 2) {
     return null;
   }
