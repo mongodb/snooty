@@ -14,35 +14,35 @@ exports[`Wistia video renders correctly 1`] = `
   overflow: hidden;
 }
 
-.emotion-2 {
+.emotion-1 {
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.emotion-2>div {
+.emotion-1>div {
   position: -webkit-sticky;
   position: sticky;
 }
 
-.emotion-2 video {
+.emotion-1 video {
   background: #FFFFFF!important;
 }
 
-.emotion-3 {
+.emotion-2 {
   border: 8px solid transparent;
   border-radius: 50%!important;
   box-shadow: 0px 0px 0px 8px transparent;
 }
 
-.emotion-3:hover {
+.emotion-2:hover {
   background-color: #C1C7C6AA;
   box-shadow: 0px 0px 0px 8px #3D4F5880;
   -webkit-transition: box-shadow 0.6s,background-color 0.6s;
   transition: box-shadow 0.6s,background-color 0.6s;
 }
 
-.emotion-4 {
+.emotion-3 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -77,40 +77,40 @@ exports[`Wistia video renders correctly 1`] = `
   height: 36px;
 }
 
-.emotion-4:focus-visible,
-.emotion-4[data-focus="true"] {
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
   outline: none;
 }
 
-.emotion-4:active,
-.emotion-4[data-active="true"],
-.emotion-4:focus,
-.emotion-4:hover {
+.emotion-3:active,
+.emotion-3[data-active="true"],
+.emotion-3:focus,
+.emotion-3:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-4:focus-visible,
-.emotion-4[data-focus="true"] {
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
   color: #001E2B;
 }
 
-.emotion-4:hover,
-.emotion-4[data-hover="true"],
-.emotion-4:active,
-.emotion-4[data-active="true"] {
+.emotion-3:hover,
+.emotion-3[data-hover="true"],
+.emotion-3:active,
+.emotion-3[data-active="true"] {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-4:focus-visible,
-.emotion-4[data-focus="true"] {
+.emotion-3:focus-visible,
+.emotion-3[data-focus="true"] {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-5 {
+.emotion-4 {
   color: #FFFFFF;
   background-color: #0c1c27;
   border: 1px solid #F9FBFA;
@@ -119,14 +119,14 @@ exports[`Wistia video renders correctly 1`] = `
   width: 80px;
 }
 
-.emotion-5:hover,
-.emotion-5:active {
+.emotion-4:hover,
+.emotion-4:active {
   border: none!important;
   box-shadow: none!important;
   color: #3D4F58;
 }
 
-.emotion-7 {
+.emotion-5 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -136,7 +136,7 @@ exports[`Wistia video renders correctly 1`] = `
   border-radius: 5px;
 }
 
-.emotion-8 {
+.emotion-6 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -161,17 +161,11 @@ exports[`Wistia video renders correctly 1`] = `
   gap: 6px;
 }
 
-.emotion-9 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
       style="width: 100%; height: 100%;"
     >
       <div
@@ -180,33 +174,33 @@ exports[`Wistia video renders correctly 1`] = `
         tabindex="0"
       >
         <div
-          class="emotion-3"
+          class="emotion-2"
         >
           <button
             aria-disabled="false"
-            class="lg-ui-button-0000 emotion-4 emotion-5 emotion-6"
+            class="lg-ui-button-0000 emotion-3 emotion-4"
             data-lgid="lg-button"
             type="button"
           >
             <div
-              class="emotion-7"
+              class="emotion-5"
             />
             <div
-              class="emotion-8"
+              class="emotion-6"
             >
               <svg
                 aria-label="Play Icon"
-                class="emotion-9"
+                class=""
+                fill="none"
                 height="24"
                 role="img"
                 viewBox="0 0 16 16"
                 width="24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  clip-rule="evenodd"
-                  d="M13.7789 6.70433C14.7711 7.28315 14.7711 8.71685 13.7789 9.29567L6.25581 13.6841C5.25582 14.2674 4 13.5461 4 12.3884L4 3.61155C4 2.45387 5.25582 1.73256 6.25581 2.31589L13.7789 6.70433Z"
+                  d="M13.779 6.704a1.5 1.5 0 0 1 0 2.592l-7.523 4.388A1.5 1.5 0 0 1 4 12.388V3.612a1.5 1.5 0 0 1 2.256-1.296l7.523 4.388Z"
                   fill="currentColor"
-                  fill-rule="evenodd"
                 />
               </svg>
             </div>
@@ -228,22 +222,22 @@ exports[`YouTube video renders correctly 1`] = `
   overflow: hidden;
 }
 
-.emotion-2 {
+.emotion-1 {
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.emotion-2>div {
+.emotion-1>div {
   position: -webkit-sticky;
   position: sticky;
 }
 
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
-      class="emotion-2"
+      class="emotion-1"
       style="width: 100%; height: 100%;"
     />
   </div>
