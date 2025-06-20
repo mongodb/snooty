@@ -69,9 +69,9 @@ const getTheSupportedMedia = (url: string) => {
   return REACT_PLAYERS[supportedType as keyof typeof REACT_PLAYERS];
 };
 
-interface VideoProps {
+export type VideoProps = {
   nodeData: VideoNode;
-}
+};
 
 const Video = ({ nodeData: { argument, options } }: VideoProps) => {
   const url = `${argument[0]['refuri']}`;

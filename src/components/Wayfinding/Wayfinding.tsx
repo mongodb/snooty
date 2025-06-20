@@ -75,9 +75,9 @@ const getWayfindingComponents = (children: Node[]) => {
   };
 };
 
-interface WayfindingProps {
+export type WayfindingProps = {
   nodeData: WayfindingNode;
-}
+};
 
 const Wayfinding = ({ nodeData: { children, argument } }: WayfindingProps) => {
   const [showAll, setShowAll] = useState(false);

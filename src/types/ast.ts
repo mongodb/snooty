@@ -623,15 +623,15 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
-interface VideoOptions {
+type VideoOptions = {
   title: string;
   description: string;
   'upload-date': string;
   'thumbnail-url': string;
-}
+};
 
 interface VideoNode extends Directive<VideoOptions> {
-  argument: Array<ReferenceNode>;
+  argument: ReferenceNode[];
 }
 
 interface WayfindingDescriptionNode extends Directive {
@@ -639,17 +639,17 @@ interface WayfindingDescriptionNode extends Directive {
 }
 
 interface WayfindingNode extends Directive {
-  argument: Array<ReferenceNode>;
+  argument: ReferenceNode[];
 }
 
-interface WayfindingOptionOptions {
+type WayfindingOptionOptions = {
   title: string;
   language: string;
   id: string;
-}
+};
 
 interface WayfindingOptionNode extends Directive<WayfindingOptionOptions> {
-  argument: Array<ReferenceNode>;
+  argument: ReferenceNode[];
 }
 
 type StandaloneHeaderOptions = {

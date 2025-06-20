@@ -103,9 +103,9 @@ const createOption = (branch: BranchData) => {
   );
 };
 
-interface VersionDropdownProps {
+type VersionDropdownProps = {
   eol: boolean;
-}
+};
 
 const VersionDropdown = ({ eol }: VersionDropdownProps) => {
   const { parserBranch } = useSiteMetadata();
@@ -175,13 +175,13 @@ const VersionDropdown = ({ eol }: VersionDropdownProps) => {
         return (
           <OptionGroup key={groupLabel} label={groupLabel}>
             <>
-              {groupedBranchNames?.reduce((res, bn) => {
+              {groupedBranchNames?.reduce<React.ReactNode[]>((res, bn) => {
                 const branch = getBranch(bn, branches);
                 if (branch) {
                   res.push(createOption(branch));
                 }
                 return res;
-              }, [] as Array<React.ReactNode>)}
+              }, [])}
             </>
           </OptionGroup>
         );

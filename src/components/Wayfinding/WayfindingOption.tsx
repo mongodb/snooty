@@ -31,10 +31,10 @@ const imgStyle = css`
 
 type DriverIconMapKey = keyof typeof DRIVER_ICON_MAP;
 
-interface WayfindingOptionProps {
+export type WayfindingOptionProps = {
   nodeData: WayfindingOptionNode;
   hideOption?: boolean;
-}
+};
 
 const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false }: WayfindingOptionProps) => {
   const optionLink = getPlaintext(argument);
