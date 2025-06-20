@@ -213,13 +213,12 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
     (value: string, option: string, index: number) => {
       // the ones that occur less than index, take it
       const newSelections = { ...currentSelections, [option]: value };
+      const [correctedParams] = filterValidQueryParams(newSelections, composableOptions, validSelections, true);
 
-      const targetString = joinKeyValuesAsString(newSelections);
-
-      if (validSelections.has(targetString)) {
-        setCurrentSelections(currentSelections);
-        const queryString = new URLSearchParams(newSelections).toString();
-        return navigate(`?${queryString}`);
+      if (validSelections.has(joinKeyValuesAsString(correctedParams))) {
+        setCurrentSelections(correctedParams);
+        const queryString = new URLSearchParams(correctedParams).toString();
+        return navigate(`?${queryString}`, { state: { preserveScroll: true } });
       }
 
       // need to correct preceding options
