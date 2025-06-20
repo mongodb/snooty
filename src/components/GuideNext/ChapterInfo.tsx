@@ -59,11 +59,11 @@ interface ChapterData {
   guides: Array<string>;
 }
 
-interface ChapterInfoProps {
+export type ChapterInfoProps = {
   chapterData: [title: string, ChapterData];
   guidesMetadata: Record<string, MetadataGuide>;
   targetSlug?: string | null;
-}
+};
 
 const ChapterInfo = ({ chapterData, guidesMetadata, targetSlug }: ChapterInfoProps) => {
   if (chapterData?.length < 2) {

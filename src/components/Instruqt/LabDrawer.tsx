@@ -110,11 +110,11 @@ const CustomResizeHandle = React.forwardRef<HTMLDivElement, { handleAxis?: strin
   );
 });
 
-interface LabDrawerProps {
+export type LabDrawerProps = {
   title: string;
   embedValue: string;
   darkMode: boolean;
-}
+};
 
 const LabDrawer = ({ title, embedValue, darkMode }: LabDrawerProps) => {
   const viewportSize = useViewport();

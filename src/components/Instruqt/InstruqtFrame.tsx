@@ -15,12 +15,12 @@ const iframeStyle = css`
   }
 `;
 
-interface InstruqtFrameProps {
+export type InstruqtFrameProps = {
   title: string;
   height?: number;
   embedValue: string;
   darkMode?: boolean;
-}
+};
 
 const InstruqtFrame = ({ title, height, embedValue, darkMode = false }: InstruqtFrameProps) => {
   const labTitle = title || 'MongoDB Interactive Lab';

@@ -90,11 +90,11 @@ const STATUSES = {
   },
 };
 
-interface GuidesListItemProps {
+export type GuidesListItemProps = {
   children: React.ReactNode;
   isNext: boolean;
   slug: string;
-}
+};
 
 const GuidesListItem = ({ children, isNext, slug }: GuidesListItemProps) => {
   const { readGuides } = useContext(ReadGuidesContext);

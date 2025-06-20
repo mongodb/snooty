@@ -51,11 +51,11 @@ const defaultTarget: [string, MetadataGuide] = [
   },
 ];
 
-interface ContentProps {
+export type ContentProps = {
   argument: Node[];
   children: Node[];
   guideData: [string, MetadataGuide] | [null, null];
-}
+};
 
 const Content = ({ argument, children, guideData }: ContentProps) => {
   const hasCustomContent = argument?.length > 0 || children?.length > 0;

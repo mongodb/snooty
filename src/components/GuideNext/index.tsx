@@ -79,14 +79,14 @@ const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Metadat
   };
 };
 
-interface GuideNextProps {
+export type GuideNextProps = {
   nodeData: GuideNextNode;
   slug: string;
   metadata: {
     chapters: Record<string, ChapterData>;
     guides: MetadataGuides;
   };
-}
+};
 
 const GuideNext = ({ nodeData: { argument, children }, metadata, slug }: GuideNextProps) => {
   const { chapters, guides } = metadata;

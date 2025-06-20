@@ -5,9 +5,9 @@ import LabDrawer from './LabDrawer';
 import InstruqtFrame from './InstruqtFrame';
 import { InstruqtContext } from './instruqt-context';
 
-interface InstruqtProps {
+export type InstruqtProps = {
   nodeData: InstruqtNode;
-}
+};
 
 const Instruqt = ({ nodeData }: InstruqtProps) => {
   const embedValue = nodeData?.argument[0]?.value;

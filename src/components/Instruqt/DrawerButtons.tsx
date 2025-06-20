@@ -22,13 +22,13 @@ const iconStyle = css`
   cursor: pointer;
 `;
 
-interface DrawerButtonsProps {
+export type DrawerButtonsProps = {
   height: number;
   minHeight: number;
   maxHeight: number;
   defaultHeight: number;
   setHeight: (height: number) => void;
-}
+};
 
 const DrawerButtons = ({ height, minHeight, maxHeight, defaultHeight, setHeight }: DrawerButtonsProps) => {
   const { setIsOpen } = useContext(InstruqtContext);

@@ -9,10 +9,10 @@ const ReadGuidesContext = createContext<ReadGuidesContextType>({
   readGuides: {},
 });
 
-interface ReadGuidesContextProviderProps {
+export type ReadGuidesContextProviderProps = {
   children: React.ReactNode;
   slug: string;
-}
+};
 
 const ReadGuidesContextProvider = ({ children, slug }: ReadGuidesContextProviderProps) => {
   const localStorageKey = 'readGuides';

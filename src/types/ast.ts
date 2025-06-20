@@ -652,10 +652,10 @@ interface RefRoleNode extends ParentNode {
   url: string;
 }
 
-interface InstruqtOptions {
+type InstruqtOptions = {
   title: string;
   drawer: boolean;
-}
+};
 
 interface InstruqtNode extends Directive<InstruqtOptions> {
   argument: TextNode[];

@@ -9,11 +9,11 @@ const List = styled('ul')`
   padding-left: 0;
 `;
 
-interface GuidesListProps {
+export type GuidesListProps = {
   guidesMetadata: MetadataGuides;
   guideSlugs: Array<string>;
   targetSlug?: string | null;
-}
+};
 
 const GuidesList = ({ guidesMetadata, guideSlugs, targetSlug }: GuidesListProps) => {
   return (
