@@ -1,14 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 
 const iframeStyle = css`
   border: var(--border);
   border-radius: var(--border-radius);
+
+  border: 'none';
+  border-radius: 0;
+
+  .dark-theme & {
+    border: 1px solid ${palette.gray.dark2};
+    border-radius: 5px;
+  }
 `;
 
-const InstruqtFrame = ({ title, height, embedValue, darkMode }) => {
+export type InstruqtFrameProps = {
+  title: string;
+  height?: number;
+  embedValue: string;
+  darkMode?: boolean;
+};
+
+const InstruqtFrame = ({ title, height, embedValue, darkMode = false }: InstruqtFrameProps) => {
   const labTitle = title || 'MongoDB Interactive Lab';
   const frameTitle = `Instruqt - ${labTitle}`;
   // Allow frameHeight to be 0 when drawer is closed to avoid iframe overflowing
@@ -24,23 +38,8 @@ const InstruqtFrame = ({ title, height, embedValue, darkMode }) => {
       height={frameHeight}
       width="100%"
       src={frameSrc}
-      style={{
-        '--border': darkMode ? `1px solid ${palette.gray.dark2}` : 'none',
-        '--border-radius': darkMode ? '5px' : 0,
-      }}
     />
   );
-};
-
-InstruqtFrame.defaultProps = {
-  darkMode: false,
-};
-
-InstruqtFrame.prototype = {
-  title: PropTypes.string,
-  height: PropTypes.string,
-  embedValue: PropTypes.string,
-  darkMode: PropTypes.bool,
 };
 
 export default InstruqtFrame;

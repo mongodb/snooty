@@ -683,6 +683,17 @@ interface RefRoleNode extends ParentNode {
   url: string;
 }
 
+type InstruqtOptions = {
+  title: string;
+  drawer: boolean;
+};
+
+interface InstruqtNode extends Directive<InstruqtOptions> {
+  argument: TextNode[];
+}
+
+interface GuideNextNode extends Directive {}
+
 export type {
   AbbrRoleNode,
   AdmonitionNode,
@@ -714,10 +725,12 @@ export type {
   FacetNode,
   FootnoteNode,
   FootnoteReferenceNode,
+  GuideNextNode,
   HeadingNode,
   HeadingNodeSelectorIds,
   HighlightNode,
   HighlightRoleNames,
+  InstruqtNode,
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,

@@ -1,11 +1,20 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 
-const ReadGuidesContext = createContext({
+interface ReadGuidesContextType {
+  readGuides: Record<string, boolean>;
+}
+
+const ReadGuidesContext = createContext<ReadGuidesContextType>({
   readGuides: {},
 });
 
-const ReadGuidesContextProvider = ({ children, slug }) => {
+export type ReadGuidesContextProviderProps = {
+  children: React.ReactNode;
+  slug: string;
+};
+
+const ReadGuidesContextProvider = ({ children, slug }: ReadGuidesContextProviderProps) => {
   const localStorageKey = 'readGuides';
   const [readGuides, setReadGuides] = useState({});
 
@@ -14,7 +23,7 @@ const ReadGuidesContextProvider = ({ children, slug }) => {
   }, []);
 
   useEffect(() => {
-    if (!readGuides[slug]) {
+    if (!readGuides[slug as keyof typeof readGuides]) {
       setReadGuides((prevState) => ({
         ...prevState,
         [slug]: true,

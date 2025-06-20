@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
+import { css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
@@ -63,7 +62,7 @@ const STATUSES = {
     circleColor: palette.green.dark1,
     icon: (
       <IconLightningBolt
-        css={css`
+        className={css`
           color: ${palette.green.dark1};
         `}
       />
@@ -79,7 +78,7 @@ const STATUSES = {
     circleColor: 'transparent',
     icon: (
       <IconLightningBolt
-        css={css`
+        className={css`
           color: ${palette.gray.dark2};
           .dark-theme & {
             color: ${palette.gray.light2};
@@ -91,15 +90,21 @@ const STATUSES = {
   },
 };
 
-const GuidesListItem = ({ children, isNext, slug }) => {
+export type GuidesListItemProps = {
+  children: React.ReactNode;
+  isNext: boolean;
+  slug: string;
+};
+
+const GuidesListItem = ({ children, isNext, slug }: GuidesListItemProps) => {
   const { readGuides } = useContext(ReadGuidesContext);
 
   let status = isNext ? 'next' : 'unread';
-  if (readGuides[slug]) {
+  if (readGuides[slug as keyof typeof readGuides]) {
     status = 'read';
   }
 
-  const activeStatus = STATUSES[status];
+  const activeStatus = STATUSES[status as keyof typeof STATUSES];
 
   return (
     <ListItem color={activeStatus.lineColor}>
@@ -107,12 +112,6 @@ const GuidesListItem = ({ children, isNext, slug }) => {
       <GuideTitle to={slug}>{children}</GuideTitle>
     </ListItem>
   );
-};
-
-GuidesListItem.propTypes = {
-  children: PropTypes.node,
-  isNext: PropTypes.bool.isRequired,
-  slug: PropTypes.string.isRequired,
 };
 
 export default GuidesListItem;
