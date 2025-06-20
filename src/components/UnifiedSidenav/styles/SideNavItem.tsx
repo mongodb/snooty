@@ -2,7 +2,8 @@ import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../../theme/docsTheme';
 
 export const sideNavItemBasePadding = css`
-  overwrite LG link underlines @leafygreen-ui/typography v13.0.0 :hover {
+  /* overwrite LG link underlines @leafygreen-ui/typography v13.0.0 */
+  &:hover {
     &:after,
     span:after {
       display: none;
