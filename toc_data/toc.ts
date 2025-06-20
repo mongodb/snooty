@@ -2,6 +2,7 @@ import type { TocItem } from '../src/components/UnifiedSidenav/UnifiedConstants'
 
 const COMMANDLINE_TOOLS = 'database-tools';
 const CLOUD_DOCS = 'cloud-docs';
+const CHARTS = 'charts';
 
 // each url has to be unique with the prefix!!!!
 export const tocData = (): TocItem[] => {
@@ -33,6 +34,38 @@ export const tocData = (): TocItem[] => {
                   url: '/docs/database-tools/mongorestore/',
                 },
               ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Atlas charts',
+      url: '/docs/charts/',
+      prefix: CHARTS,
+      items: [
+        {
+          label: 'ATLAS CHARTS',
+          group: true,
+          items: [
+            {
+              label: 'tutorials',
+              url: '/docs/charts/tutorials/',
+              collapsible: true,
+              items: [
+                {
+                  label: 'Visualizing Order Data',
+                  url: '/docs/charts/tutorial/order-data/order-data-tutorial-overview/',
+                },
+                {
+                  label: 'Visualizing Movie Details',
+                  url: '/docs/charts/tutorial/movie-details/movie-details-tutorial-overview/',
+                },
+              ],
+            },
+            {
+              label: 'Data transfer',
+              url: '/docs/charts/admin-settings/',
             },
           ],
         },
