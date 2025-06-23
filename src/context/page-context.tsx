@@ -14,7 +14,6 @@ export type PageTemplateType =
   | 'guide'
   | 'product-landing';
 
-// TODO: Check this
 export interface Page {
   options: PageOptions | null;
   ast: Root | null;

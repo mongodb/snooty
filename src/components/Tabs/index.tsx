@@ -16,6 +16,7 @@ import { getPlaintext } from '../../utils/get-plaintext';
 import { TABS_CLASSNAME } from '../../utils/head-scripts/offline-ui/tabs';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { Node, TabsNode } from '../../types/ast';
+import { Page } from '../../context/page-context';
 import { TabContext } from './tab-context';
 import { TabHashContext, TabHashProvider } from './tab-hash-context';
 
@@ -121,8 +122,7 @@ const offlineStyling = css`
 
 export type TabsProps = {
   nodeData: TabsNode;
-  // TODO: Fix before PR
-  page: any;
+  page: Page;
 };
 
 const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps) => {

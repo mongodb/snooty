@@ -9,11 +9,11 @@ import { getImage } from 'gatsby-plugin-image';
 import type { IGatsbyImageData } from 'gatsby-plugin-image';
 
 export interface ImageContextType {
-  imageByPath: { [k: string]: IGatsbyImageData | undefined };
+  imageByPath: Record<string, IGatsbyImageData | undefined>;
 }
 
 const ImageContext = createContext<ImageContextType>({
-  imageByPath: {} as { [k: string]: IGatsbyImageData | undefined },
+  imageByPath: {} as Record<string, IGatsbyImageData | undefined>,
 });
 
 export default ImageContext;
@@ -21,7 +21,7 @@ export default ImageContext;
 export type ImageContextProviderProps = { images: { relativePath: string }[]; children: ReactNode };
 
 const ImageContextProvider = ({ images, children }: ImageContextProviderProps) => {
-  const imageByPath = {} as { [k: string]: IGatsbyImageData | undefined };
+  const imageByPath = {} as Record<string, IGatsbyImageData | undefined>;
   for (const image of images) {
     if (image?.relativePath) {
       imageByPath[image.relativePath] = getImage(image) ?? undefined;

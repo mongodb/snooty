@@ -214,7 +214,7 @@ const generateColumns = (headerRow: Node, bodyRows: ParentListItemNode[]): ListT
 const generateRowsData = (bodyRowNodes: ParentListItemNode[], columns: ListTableColumnData[]) => {
   const rowNodes = bodyRowNodes.map((node) => node?.children[0]?.children ?? []);
   const rows = rowNodes.map((rowNode) => {
-    return rowNode.reduce<{ [k: string]: ReactNode }>((res, columnNode, colIndex) => {
+    return rowNode.reduce<Record<string, ReactNode>>((res, columnNode, colIndex) => {
       const column = columns[colIndex];
       if (!column) {
         console.warn(`Row has too many items (index ${colIndex}) for table with ${columns.length} columns`);
