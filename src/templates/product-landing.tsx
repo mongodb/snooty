@@ -11,6 +11,7 @@ import { DEPRECATED_PROJECTS } from '../components/Contents/index';
 import { AppData, PageContext } from '../types/data';
 import { Node } from '../types/ast';
 import { BaseTemplateProps } from '.';
+
 export const CONTENT_MAX_WIDTH = 1200;
 
 const formstyle = css`

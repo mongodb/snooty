@@ -54,6 +54,7 @@ export type DocumentTemplateProps = {
   children: ReactNode;
   data: AppData;
   pageContext: PageContext;
+  offlineBanner: JSX.Element;
 };
 
 const Document = ({
