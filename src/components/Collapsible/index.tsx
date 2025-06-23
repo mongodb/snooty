@@ -13,7 +13,7 @@ import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { reportAnalytics } from '../../utils/report-analytics';
 import ComponentFactory from '../ComponentFactory';
 import Heading from '../Heading';
-import { CollapsibleNode } from '../../types/ast';
+import { CollapsibleNode, HeadingNode } from '../../types/ast';
 import { collapsibleStyle, headerContainerStyle, headerStyle, iconStyle, innerContentStyle } from './styles';
 import './styles.css';
 
@@ -36,9 +36,13 @@ const Collapsible = ({ nodeData, sectionDepth, ...rest }: CollapsibleProps) => {
     if (isOfflineDocsBuild) return true;
     return expanded ?? true;
   });
-  const headingNodeData = {
-    id,
-    children: [{ type: 'text', value: heading }],
+  const headingNodeData: HeadingNode = {
+    type: 'heading',
+    depth: sectionDepth + 1,
+    title: '',
+    id: id ?? '',
+    children: [{ type: 'text', value: heading ?? '' }],
+    selector_ids: {},
   };
 
   const onIconClick = useCallback(() => {

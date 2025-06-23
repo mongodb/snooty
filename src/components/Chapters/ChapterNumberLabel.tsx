@@ -21,7 +21,7 @@ const Label = styled('div')`
 `;
 
 export type ChapterNumberLabelProps = {
-  className: string;
+  className?: string;
   number: number;
 };
 

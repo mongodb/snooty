@@ -258,6 +258,7 @@ interface HeadingNode extends ParentNode {
   title: string;
   id: string;
   selector_ids: HeadingNodeSelectorIds;
+  children: [TextNode];
 }
 
 interface ParagraphNode extends ParentNode {

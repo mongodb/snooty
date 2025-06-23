@@ -192,13 +192,13 @@ const Chapter = ({ metadata, nodeData: { argument, options } }: ChapterProps) =>
           src={withPrefix(image)}
           height={IMAGE_SIZE}
           width={IMAGE_SIZE}
-          altText={`Chapter image for ${chapterTitle}`}
+          alt={`Chapter image for ${chapterTitle}`}
         />
       ) : (
         <EmptyImage />
       )}
       <DescriptionContainer>
-        <ChapterNumberLabel number={chapterNumber} />
+        <ChapterNumberLabel number={chapterNumber ?? 1} />
         <ChapterTitle>{chapterTitle}</ChapterTitle>
         <Body className={cx(decriptionStyling)}>{description}</Body>
       </DescriptionContainer>
