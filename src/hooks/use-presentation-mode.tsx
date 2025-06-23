@@ -6,6 +6,7 @@ export const usePresentationMode = () => {
   const { search } = useLocation();
   const presentationResult = useMemo(() => {
     const { presentation } = queryString.parse(search);
+    if (Array.isArray(presentation)) return presentation[0];
     return presentation;
   }, [search]);
 
