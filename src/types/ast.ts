@@ -387,8 +387,8 @@ type CardOptions = {
   cta?: string;
   headline?: string;
   icon: string;
-  'icon-dark': boolean;
-  'icon-alt': string;
+  'icon-dark'?: string;
+  'icon-alt'?: string;
   tag?: string;
   url: string;
 };

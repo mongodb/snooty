@@ -9,7 +9,7 @@ import ImageContext from '../context/image-context';
 import { getNestedValue } from '../utils/get-nested-value';
 import { removeLeadingSlash } from '../utils/remove-leading-slash';
 import { theme } from '../theme/docsTheme';
-import { ImageNode } from '../types/ast';
+import { FigureNode, ImageNode } from '../types/ast';
 
 const defaultImageStyling = css`
   max-width: 100%;
@@ -122,7 +122,7 @@ function getImageProps({
 }
 
 export type ImageProps = {
-  nodeData: ImageNode;
+  nodeData: ImageNode | FigureNode;
   className?: string;
 };
 
