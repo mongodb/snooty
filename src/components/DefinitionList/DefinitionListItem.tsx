@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { css } from '@leafygreen-ui/emotion';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
 import { findKeyValuePair } from '../../utils/find-key-value-pair';
+import { DefinitionListItemNode, InlineTargetNode } from '../../types/ast';
 
 const HeaderBuffer = styled.div`
   display: inline;
@@ -14,9 +14,13 @@ const HeaderBuffer = styled.div`
   padding-bottom: 2px;
 `;
 
-const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
+export type DefinitionListItemProps = {
+  nodeData: DefinitionListItemNode;
+};
+
+const DefinitionListItem = ({ nodeData: { children, term }, ...rest }: DefinitionListItemProps) => {
   const termProps = {};
-  const targetIdentifier = findKeyValuePair(term, 'type', 'inline_target');
+  const targetIdentifier = findKeyValuePair(term, 'type', 'inline_target') as InlineTargetNode | undefined;
 
   return (
     <>
@@ -27,7 +31,7 @@ const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
         ))}
       </dt>
       <dd
-        css={css`
+        className={css`
           p:first-of-type {
             margin-top: 0 !important;
           }
@@ -39,13 +43,6 @@ const DefinitionListItem = ({ nodeData: { children, term }, ...rest }) => {
       </dd>
     </>
   );
-};
-
-DefinitionListItem.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.array.isRequired,
-    term: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
 };
 
 export default DefinitionListItem;
