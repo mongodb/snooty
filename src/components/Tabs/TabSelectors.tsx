@@ -2,10 +2,11 @@ import React, { useContext, useMemo } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Select from '../Select';
 import { reportAnalytics } from '../../utils/report-analytics';
-import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
+import { DRIVER_ICON_MAP, DriverMap } from '../icons/DriverIconMap';
 import { theme } from '../../theme/docsTheme';
 import { PageContext } from '../../context/page-context';
-import { TabContext } from './tab-context';
+import { Node } from '../../types/ast';
+import { ActiveTabs, TabContext } from './tab-context';
 import { makeChoices } from './make-choices';
 
 const selectStyle = css`
@@ -41,9 +42,9 @@ const mainColumnStyles = css`
   }
 `;
 
-const capitalizeFirstLetter = (str) => str.trim().replace(/^\w/, (c) => c.toUpperCase());
+const capitalizeFirstLetter = (str: string) => str.trim().replace(/^\w/, (c) => c.toUpperCase());
 
-const getLabel = (name) => {
+const getLabel = (name: string) => {
   switch (name) {
     case 'drivers':
       return 'Select your language';
@@ -56,7 +57,25 @@ const getLabel = (name) => {
   }
 };
 
-const TabSelector = ({ className, activeTab, handleClick, iconMapping, name, options, mainColumn }) => {
+export type TabSelectorProps = {
+  className?: string;
+  activeTab: string;
+  handleClick: (activeTab: ActiveTabs) => void;
+  iconMapping: DriverMap;
+  name: string;
+  options: Record<string, Node[]>;
+  mainColumn: boolean;
+};
+
+const TabSelector = ({
+  className,
+  activeTab,
+  handleClick,
+  iconMapping,
+  name,
+  options,
+  mainColumn,
+}: TabSelectorProps) => {
   const choices = useMemo(() => makeChoices({ name, iconMapping, options }), [name, iconMapping, options]);
   // usePortal set to true when Select is in main column to
   // prevent z-index issues with content overlapping dropdown
@@ -79,7 +98,12 @@ const TabSelector = ({ className, activeTab, handleClick, iconMapping, name, opt
   );
 };
 
-const TabSelectors = ({ className, rightColumn }) => {
+export type TabSelectorsProps = {
+  className?: string;
+  rightColumn: boolean;
+};
+
+const TabSelectors = ({ className, rightColumn }: TabSelectorsProps) => {
   const { tabsMainColumn } = useContext(PageContext);
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
 
@@ -104,7 +128,7 @@ const TabSelectors = ({ className, rightColumn }) => {
             iconMapping={iconMapping}
             name={name}
             options={options}
-            mainColumn={tabsMainColumn}
+            mainColumn={!!tabsMainColumn}
           />
         );
       })}

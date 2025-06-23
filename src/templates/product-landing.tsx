@@ -1,13 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
-import { theme } from '../theme/docsTheme.ts';
+import { theme } from '../theme/docsTheme';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
-import useSnootyMetadata from '../utils/use-snooty-metadata.tsx';
+import useSnootyMetadata from '../utils/use-snooty-metadata';
 import FeedbackRating from '../components/Widgets/FeedbackWidget';
 import { DEPRECATED_PROJECTS } from '../components/Contents/index';
+import { AppData, PageContext } from '../types/data';
+import { Node } from '../types/ast';
 export const CONTENT_MAX_WIDTH = 1200;
 
 const formstyle = css`
@@ -43,7 +44,13 @@ const ratingStlying = css`
   margin: 0px ${theme.size.xlarge};
 `;
 
-const Wrapper = styled('main')`
+const Wrapper = styled('main')<{
+  isGuides: boolean;
+  isRealm: boolean;
+  hasBanner: boolean;
+  hasLightHero: boolean;
+  hasMaxWidthParagraphs: boolean;
+}>`
   ${({ isGuides }) => !isGuides && `margin: 0 auto ${theme.size.xlarge} auto;`}
   width: 100%;
 
@@ -217,26 +224,28 @@ const Wrapper = styled('main')`
 
 const REALM_LIGHT_HERO_PAGES = ['index.txt'];
 
-const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: { slug } }) => {
+function stripChildren<T extends Node>(node: T): Omit<T, 'children'> {
+  const { children, ...rest } = node as any;
+  return rest;
+}
+
+export type ProductLandingProps = {
+  children: ReactNode;
+  data: AppData;
+  pageContext: PageContext;
+  offlineBanner: JSX.Element;
+};
+
+const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: { slug } }: ProductLandingProps) => {
   const { project } = useSnootyMetadata();
-  const useHero = ['guides', 'realm'].includes(project);
   const isGuides = project === 'guides';
   const isRealm = project === 'realm';
   const pageOptions = page?.ast?.options;
   const hasMaxWidthParagraphs = ['', 'true'].includes(pageOptions?.['pl-max-width-paragraphs']);
   const hasLightHero = isRealm && REALM_LIGHT_HERO_PAGES.includes(page?.ast?.fileid);
   // shallow copy children, and search for existence of banner
-  const shallowChildren = children.reduce((res, child) => {
-    const copiedChildren =
-      child.props.nodeData?.children?.map((childNode) => {
-        const newNode = {};
-        for (let property in childNode) {
-          if (property !== 'children') {
-            newNode[property] = childNode[property];
-          }
-        }
-        return newNode;
-      }) ?? [];
+  const shallowChildren = (Array.isArray(children) ? children : [children]).reduce<Node[]>((res, child) => {
+    const copiedChildren = child.props.nodeData?.children?.map((childNode: Node) => stripChildren(childNode)) ?? [];
     res = res.concat(copiedChildren);
     return res;
   }, []);
@@ -247,7 +256,6 @@ const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: 
     <Wrapper
       isGuides={isGuides}
       isRealm={isRealm}
-      useHero={useHero}
       hasBanner={!!bannerNode}
       hasLightHero={hasLightHero}
       hasMaxWidthParagraphs={hasMaxWidthParagraphs}
@@ -264,10 +272,6 @@ const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: 
       )}
     </Wrapper>
   );
-};
-
-ProductLanding.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default ProductLanding;
