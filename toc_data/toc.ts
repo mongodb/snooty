@@ -3,6 +3,16 @@ import type { TocItem } from '../src/components/UnifiedSidenav/UnifiedConstants'
 const COMMANDLINE_TOOLS = 'database-tools';
 const CLOUD_DOCS = 'cloud-docs';
 
+const l1s = [
+  'Get Started',
+  'Development',
+  'Management',
+  'Client Libraries',
+  'Tools',
+  'Plans & Pricing',
+  'Atlas Architecture Center'
+];
+
 // each url has to be unique with the prefix!!!!
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
