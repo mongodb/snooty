@@ -5,7 +5,7 @@ import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import { findKeyValuePair } from '../utils/find-key-value-pair.js';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import FeedbackRating from '../components/Widgets/FeedbackWidget/index';
+import FeedbackRating from '../components/Widgets/FeedbackWidget';
 import { DEPRECATED_PROJECTS } from '../components/Contents/index';
 import { AppData, PageContext } from '../types/data';
 import { Node } from '../types/ast';
@@ -224,6 +224,11 @@ const Wrapper = styled('main')<{
 
 const REALM_LIGHT_HERO_PAGES = ['index.txt'];
 
+function stripChildren<T extends Node>(node: T): Omit<T, 'children'> {
+  const { children, ...rest } = node as any;
+  return rest;
+}
+
 export type ProductLandingProps = {
   children: ReactNode;
   data: AppData;
@@ -239,17 +244,8 @@ const ProductLanding = ({ children, data: { page }, offlineBanner, pageContext: 
   const hasMaxWidthParagraphs = ['', 'true'].includes(pageOptions?.['pl-max-width-paragraphs']);
   const hasLightHero = isRealm && REALM_LIGHT_HERO_PAGES.includes(page?.ast?.fileid);
   // shallow copy children, and search for existence of banner
-  const shallowChildren = (Array.isArray(children) ? children : []).reduce<Node[]>((res, child) => {
-    const copiedChildren =
-      child.props.nodeData?.children?.map((childNode: Node) => {
-        const newNode: Record<string, any> = {};
-        for (let property in childNode) {
-          if (property !== 'children') {
-            newNode[property] = childNode[property];
-          }
-        }
-        return newNode;
-      }) ?? [];
+  const shallowChildren = (Array.isArray(children) ? children : [children]).reduce<Node[]>((res, child) => {
+    const copiedChildren = child.props.nodeData?.children?.map((childNode: Node) => stripChildren(childNode)) ?? [];
     res = res.concat(copiedChildren);
     return res;
   }, []);
