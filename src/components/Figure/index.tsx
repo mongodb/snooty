@@ -20,7 +20,7 @@ const Figure = ({ ...props }: FigureProps) => {
   const { nodeData, ...rest } = props;
 
   if (isLightboxSize || (nodeData.options && nodeData.options.lightbox)) {
-    return <Lightbox {...props} nodeData={nodeData} />;
+    return <Lightbox nodeData={nodeData} {...rest} />;
   }
 
   return (
