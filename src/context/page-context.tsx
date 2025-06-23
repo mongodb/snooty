@@ -1,9 +1,10 @@
 import { createContext, useContext } from 'react';
-import { Root, TextNode } from '../types/ast';
+import { PageOptions, Root, TextNode } from '../types/ast';
 
 export type PageTemplateType =
   | 'blank'
   | 'drivers-index'
+  | 'document'
   | 'errorpage'
   | 'feature-not-avail'
   | 'instruqt'
@@ -13,19 +14,6 @@ export type PageTemplateType =
   | 'search'
   | 'guide'
   | 'product-landing';
-
-export type PageOptionsKey = keyof PageOptions;
-
-interface PageOptions {
-  has_composable_tutorial?: boolean;
-  time_required?: number;
-  multi_page_tutorial_settings?: {
-    show_next_top?: boolean;
-  };
-  hidefeedback: string;
-  ia?: IAOption;
-  [key: string]: any;
-}
 
 export interface IAOption {
   title: [TextNode];
