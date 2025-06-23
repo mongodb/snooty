@@ -1,9 +1,10 @@
 import { createContext, useContext } from 'react';
-import { Root } from '../types/ast';
+import { Page } from '../types/data';
 
 export type PageTemplateType =
   | 'blank'
   | 'drivers-index'
+  | 'document'
   | 'errorpage'
   | 'feature-not-avail'
   | 'instruqt'
@@ -13,25 +14,6 @@ export type PageTemplateType =
   | 'search'
   | 'guide'
   | 'product-landing';
-
-export interface Page {
-  options: PageOptions | null;
-  ast: Root | null;
-}
-
-export type PageOptionsKey = keyof PageOptions;
-
-export interface PageOptions {
-  template: PageTemplateType;
-  has_method_selector?: boolean;
-  has_composable_tutorial?: boolean;
-  time_required?: number;
-  multi_page_tutorial_settings?: {
-    show_next_top?: boolean;
-  };
-  hidefeedback?: string;
-  [key: string]: any;
-}
 
 export interface PageContextType {
   page: Page | null;

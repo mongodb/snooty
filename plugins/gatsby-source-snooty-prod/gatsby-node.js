@@ -337,7 +337,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       const slug = getPageSlug(page.page_id);
 
       // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
-      const mainComponentRelativePath = `../../src/components/DocumentBody.js`;
+      const mainComponentRelativePath = `../../src/components/DocumentBody.tsx`;
 
       createPage({
         path: assertTrailingSlash(slug),

@@ -1,4 +1,5 @@
 import { HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW } from '../components/Roles/Highlight';
+import { ActiveTabs, Selectors } from '../components/Tabs/tab-context';
 
 type ComponentType =
   | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
@@ -185,8 +186,29 @@ interface ParentNode extends Node {
   children: Node[];
 }
 
+type PageOptionsKey = keyof PageOptions;
+
+type PageOptions = {
+  template: string;
+  default_tabs?: ActiveTabs;
+  dismissible_skills_card?: DismissibleSkillsCardOptions;
+  has_composable_tutorial?: boolean;
+  hidefeedback?: string;
+  instruqt?: boolean;
+  has_method_selector?: boolean;
+  multi_page_tutorial_settings?: {
+    show_next_top?: boolean;
+  };
+  noprevnext?: string;
+  'pl-max-width-paragraphs'?: string;
+  selectors?: Selectors;
+  'tabs-selector-position'?: string;
+  time_required?: number;
+  [key: string]: any;
+};
+
 interface Root extends ParentNode {
-  options: Record<string, any>;
+  options: PageOptions;
   fileid: string;
 }
 
@@ -615,8 +637,8 @@ interface RoleManualNode extends ParentNode {
 }
 
 type MetaOptions = {
+  canonical: string;
   description?: string;
-  canonical?: string;
   robots?: string;
   keywords?: string;
 };
@@ -793,6 +815,8 @@ export type {
   Node,
   NodeName,
   NodeType,
+  PageOptions,
+  PageOptionsKey,
   ParagraphNode,
   ParentListItemNode,
   ParentListNode,

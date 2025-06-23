@@ -1,15 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import LeafyBanner from '@leafygreen-ui/banner';
 import { cx } from '@leafygreen-ui/emotion';
 import Link from '../Link';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
-import type { BannerTemplateType } from './styles/bannerItemStyle';
+import { PageTemplateType } from '../../context/page-context';
 import { baseBannerStyle, offlineBannerStyle, offlineBannerContainerStyle } from './styles/bannerItemStyle';
 
 interface OfflineBannerProps {
   linkUrl?: string;
-  template?: BannerTemplateType;
+  template?: PageTemplateType;
 }
 
 const OfflineBanner = ({ linkUrl = 'https://mongodb.com/docs/', template = 'document' }: OfflineBannerProps) => {
@@ -22,10 +21,6 @@ const OfflineBanner = ({ linkUrl = 'https://mongodb.com/docs/', template = 'docu
       </LeafyBanner>
     </div>
   );
-};
-
-OfflineBanner.propTypes = {
-  linkUrl: PropTypes.string,
 };
 
 export default OfflineBanner;
