@@ -42,9 +42,8 @@ const getActiveFacets = (facetOptions: Array<FacetOption>, searchParams: URLSear
   return res;
 };
 
-const StyledTag = styled(Tag)`
+const extraTagStyles = css`
   column-gap: ${theme.size.small};
-  ${searchTagStyle}
 `;
 
 const clearButtonStyling = css`
@@ -107,17 +106,17 @@ const FacetTag = ({ facet }: { facet: FacetValue }) => {
   }, [facet, facets, handleFacetChange]);
 
   return (
-    <StyledTag variant={getFacetTagVariant({ key, id })} onClick={onClick}>
+    <Tag variant={getFacetTagVariant({ key, id })} onClick={onClick} className={cx(searchTagStyle, extraTagStyles)}>
       {name}
       <Icon glyph="X" />
-    </StyledTag>
+    </Tag>
   );
 };
 
 const ClearFacetsTag = ({ onClick }: { onClick: () => void }) => (
-  <StyledTag variant={'gray'} className={cx(clearButtonStyling)} onClick={onClick}>
+  <Tag variant={'gray'} className={cx(clearButtonStyling, searchTagStyle, extraTagStyles)} onClick={onClick}>
     clear all filters <Icon glyph="X" />
-  </StyledTag>
+  </Tag>
 );
 
 const FacetTags = ({ resultsCount }: { resultsCount?: number }) => {
@@ -165,18 +164,18 @@ const FacetTags = ({ resultsCount }: { resultsCount?: number }) => {
           <FacetTag facet={facet} key={facet.id}></FacetTag>
         ))}
         {needExpansion && expanded && (
-          <StyledTag variant={'gray'} onClick={() => clickHandle(false)}>
+          <Tag variant={'gray'} onClick={() => clickHandle(false)} className={cx(searchTagStyle, extraTagStyles)}>
             Show Less
-          </StyledTag>
+          </Tag>
         )}
         {expanded && activeFacets.length > 0 && <ClearFacetsTag onClick={clearFacets}></ClearFacetsTag>}
       </SelectionsFlexbox>
       {!expanded && (
         <ExpandFlexbox>
           {needExpansion && (
-            <StyledTag variant={'gray'} onClick={() => clickHandle(true)}>
+            <Tag variant={'gray'} onClick={() => clickHandle(true)} className={cx(searchTagStyle, extraTagStyles)}>
               Show More
-            </StyledTag>
+            </Tag>
           )}
           {activeFacets.length > 0 && <ClearFacetsTag onClick={clearFacets}></ClearFacetsTag>}
         </ExpandFlexbox>
