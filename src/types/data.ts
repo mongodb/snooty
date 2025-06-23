@@ -1,6 +1,12 @@
 import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
 import { IAOption, PageTemplateType } from '../context/page-context';
-import { Node, TextNode, TocTreeEntry } from './ast';
+import { Node, Root, TextNode, TocTreeEntry } from './ast';
+
+type AppData = {
+  page: {
+    ast: Root;
+  };
+};
 
 type EOLType = 'download' | 'link';
 
@@ -52,6 +58,7 @@ type Group = {
   id?: string;
   groupLabel: string;
   includedBranches: string[];
+  sharedSlugPrefix?: string;
 };
 
 type MetadataDatabaseName = 'snooty_stage' | 'snooty_prod' | 'snooty_dotcomstg' | 'snooty_dotcomprd' | 'snooty_dev';
@@ -150,6 +157,7 @@ type MetadataGuide = {
   description: string | Node[];
   title: string | Node[];
 };
+
 type FacetBase = {
   id: string;
   key: string;
@@ -168,6 +176,7 @@ interface FacetValue extends FacetBase {
 }
 
 export {
+  AppData,
   BranchData,
   Docset,
   EOLType,

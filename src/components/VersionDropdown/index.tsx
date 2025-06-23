@@ -1,5 +1,4 @@
 import React, { useCallback, useContext } from 'react';
-import PropTypes from 'prop-types';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
@@ -9,6 +8,7 @@ import { theme } from '../../theme/docsTheme';
 import { useCurrentUrlSlug, getBranchSlug } from '../../hooks/use-current-url-slug';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { BranchData, Group } from '../../types/data';
 
 const selectStyling = LeafyCSS`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
@@ -41,7 +41,7 @@ const selectStyling = LeafyCSS`
 `;
 
 // Gets UI labels for supplied active branch names
-export const getUILabel = (branch) => {
+export const getUILabel = (branch: BranchData) => {
   if (!branch['active']) {
     console.warn(
       `Retrieving branch UI label for legacy/EOL'd/inactive branch: ${branch['gitBranchName']}. This should probably not be happening.`
@@ -60,9 +60,9 @@ const createVersionLabel = (urlSlug = '', gitBranchName = '') => {
 
   const label = urlSlug || gitBranchName;
   // If the label is numeric (e.g. "2.0" or "v2.0"), we display "Version 2.0"
-  if (!isNaN(label)) {
+  if (!isNaN(Number(label))) {
     return `Version ${label}`;
-  } else if (label.startsWith('v') && !isNaN(label.slice(1))) {
+  } else if (label.startsWith('v') && !isNaN(Number(label.slice(1)))) {
     return `Version ${label.slice(1)}`;
   }
 
@@ -70,14 +70,14 @@ const createVersionLabel = (urlSlug = '', gitBranchName = '') => {
 };
 
 // Returns all branches that are neither in 'groups' nor inactive
-const getActiveUngroupedBranches = (branches = [], groups = []) => {
+const getActiveUngroupedBranches = (branches: BranchData[] = [], groups: Group[] = []) => {
   const groupedBranchNames = groups.map((g) => g['includedBranches']).flat() || [];
   return branches.filter((b) => !groupedBranchNames.includes(b['gitBranchName']) && !!b['active']);
 };
 
 // Return a branch object from branches that matches supplied branchName
 // Typically used to associate a branchName from 'groups' with a branchName in 'branches'
-const getBranch = (branchName = '', branches = []) => {
+const getBranch = (branchName = '', branches: BranchData[] = []) => {
   const branchCandidates = branches.filter((b) => b['gitBranchName'] === branchName);
 
   if (branchCandidates.length === 0) {
@@ -93,7 +93,7 @@ const getBranch = (branchName = '', branches = []) => {
   return branchCandidates?.[0] || null;
 };
 
-const createOption = (branch) => {
+const createOption = (branch: BranchData) => {
   const UIlabel = getUILabel(branch);
   const slug = getBranchSlug(branch);
   return (
@@ -103,7 +103,11 @@ const createOption = (branch) => {
   );
 };
 
-const VersionDropdown = ({ eol }) => {
+type VersionDropdownProps = {
+  eol: boolean;
+};
+
+const VersionDropdown = ({ eol }: VersionDropdownProps) => {
   const { parserBranch } = useSiteMetadata();
   const { project } = useSnootyMetadata();
   const { availableVersions, availableGroups, onVersionSelect, showEol, activeVersions } = useContext(VersionContext);
@@ -111,7 +115,7 @@ const VersionDropdown = ({ eol }) => {
   let groups = availableGroups[project];
 
   const onSelectChange = useCallback(
-    (value) => {
+    (value: string) => {
       onVersionSelect(project, value);
     },
     [onVersionSelect, project]
@@ -130,7 +134,7 @@ const VersionDropdown = ({ eol }) => {
   // on the current page selection. For example, on the Android SDK page, we only
   // show Android SDK versions in the version dropdown box.
   if (project === 'realm' && currentUrlSlug?.startsWith('sdk/')) {
-    const currentSdkGroup = groups.find((g) => currentUrlSlug.startsWith(g?.['sharedSlugPrefix']));
+    const currentSdkGroup = groups.find((g) => currentUrlSlug.startsWith(g?.sharedSlugPrefix ?? ''));
     if (currentSdkGroup) {
       groups = [currentSdkGroup];
       const includedBranches = currentSdkGroup['includedBranches'];
@@ -161,7 +165,7 @@ const VersionDropdown = ({ eol }) => {
       onChange={onSelectChange}
       placeholder={'Select a version'}
       popoverZIndex={3}
-      value={activeVersions[project]}
+      defaultChecked={Boolean(activeVersions[project])}
       usePortal={false}
       disabled={isOfflineDocsBuild || eol}
     >
@@ -171,7 +175,7 @@ const VersionDropdown = ({ eol }) => {
         return (
           <OptionGroup key={groupLabel} label={groupLabel}>
             <>
-              {groupedBranchNames?.reduce((res, bn) => {
+              {groupedBranchNames?.reduce<React.ReactNode[]>((res, bn) => {
                 const branch = getBranch(bn, branches);
                 if (branch) {
                   res.push(createOption(branch));
@@ -185,31 +189,6 @@ const VersionDropdown = ({ eol }) => {
       {showEol && <Option value="legacy">Legacy Docs</Option>}
     </Select>
   );
-};
-
-VersionDropdown.propTypes = {
-  // TODO: add active version dropdown prop
-  // consume from version context
-  repoBranches: PropTypes.shape({
-    branches: PropTypes.arrayOf(
-      PropTypes.shape({
-        gitBranchName: PropTypes.string.isRequired,
-        versionSelectorLabel: PropTypes.string,
-        urlSlug: PropTypes.string,
-        active: PropTypes.bool.isRequired,
-      })
-    ).isRequired,
-    groups: PropTypes.arrayOf(
-      PropTypes.shape({
-        groupLabel: PropTypes.string,
-        groupDisplayURLPrefix: PropTypes.string,
-        includedBranches: PropTypes.array,
-      })
-    ),
-    siteBasePrefix: PropTypes.string.isRequired,
-  }).isRequired,
-  slug: PropTypes.string.isRequired,
-  eol: PropTypes.bool.isRequired,
 };
 
 export default VersionDropdown;

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import ReactPlayerYT from 'react-player/youtube';
 import ReactPlayerWistia from 'react-player/wistia';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { withPrefix } from 'gatsby';
 import { theme } from '../../theme/docsTheme';
 import { STRUCTURED_DATA_CLASSNAME, VideoObjectSd } from '../../utils/structured-data';
+import type { VideoNode } from '../../types/ast';
 import VideoPlayButton from './VideoPlayButton';
 
 // Imported both players to keep bundle size low and rendering the one associated to the URL being passed in
@@ -40,7 +40,7 @@ const ReactPlayerWrapper = styled('div')`
   overflow: hidden;
 `;
 
-const videoStyling = ({ name }) => css`
+const videoStyling = ({ name }: { name: string }) => css`
   position: absolute;
   top: 0;
   left: 0;
@@ -55,8 +55,8 @@ const videoStyling = ({ name }) => css`
   }`}
 `;
 
-const getTheSupportedMedia = (url) => {
-  let supportedType = null;
+const getTheSupportedMedia = (url: string) => {
+  let supportedType: 'yt' | 'wistia' | null = null;
 
   if (url.includes('youtube') || url.includes('youtu.be')) {
     supportedType = 'yt';
@@ -66,31 +66,37 @@ const getTheSupportedMedia = (url) => {
     supportedType = 'wistia';
   }
 
-  return REACT_PLAYERS[supportedType];
+  return REACT_PLAYERS[supportedType as keyof typeof REACT_PLAYERS];
 };
 
-const Video = ({ nodeData: { argument, options = {} } }) => {
+export type VideoProps = {
+  nodeData: VideoNode;
+};
+
+const Video = ({ nodeData: { argument, options } }: VideoProps) => {
   const url = `${argument[0]['refuri']}`;
   // use placeholder image for video thumbnail if invalid URL provided
-  const [previewImage, setPreviewImage] = useState(withPrefix('assets/meta_generic.png'));
-  const { title, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options;
+  const [previewImage, setPreviewImage] = useState<string | boolean>(withPrefix('assets/meta_generic.png'));
+  const { title, description, 'upload-date': uploadDate, 'thumbnail-url': thumbnailUrl } = options || {};
   const videoObjectSd = useMemo(() => {
     const sd = new VideoObjectSd({ embedUrl: url, name: title, uploadDate, thumbnailUrl, description });
     return sd.isValid() ? sd.toString() : undefined;
   }, [url, title, uploadDate, thumbnailUrl, description]);
 
-  useEffect(() => {
-    // handles URL validity checking for well-formed YT links
+  // handles URL validity checking for well-formed YT links
+  const checkUrlValidity = async (url: string) => {
     if (url.includes('youtube') || url.includes('youtu.be')) {
       let testUrlValidity = 'https://www.youtube.com/oembed?url=' + url + '&format=json';
 
-      fetch(testUrlValidity, (res) => {
-        // if valid URL, display default YT thumbnail
-        if (res.statusCode === 200) {
-          setPreviewImage(true);
-        }
-      });
+      const res = await fetch(testUrlValidity);
+      if (res?.ok) {
+        setPreviewImage(true);
+      }
     }
+  };
+
+  useEffect(() => {
+    checkUrlValidity(url);
   }, [url]);
 
   const ReactSupportedMedia = getTheSupportedMedia(url);
@@ -100,8 +106,8 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
     return null;
   }
 
-  const ReactPlayer = ReactSupportedMedia.player;
-  const playable = ReactPlayer.canPlay(url);
+  const ReactPlayer = ReactSupportedMedia.player as any;
+  const playable = (ReactPlayer as unknown as typeof ReactPlayer).canPlay?.(url);
 
   // handles remaining cases for invalid video URLs
   if (!playable) {
@@ -115,14 +121,12 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
         <script
           className={STRUCTURED_DATA_CLASSNAME}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: videoObjectSd,
-          }}
+          dangerouslySetInnerHTML={{ __html: videoObjectSd }}
         />
       )}
       <ReactPlayerWrapper>
         <ReactPlayer
-          css={videoStyling(ReactSupportedMedia)}
+          className={videoStyling(ReactSupportedMedia)}
           config={ReactSupportedMedia.config}
           controls
           url={url}
@@ -135,18 +139,6 @@ const Video = ({ nodeData: { argument, options = {} } }) => {
       </ReactPlayerWrapper>
     </>
   );
-};
-
-Video.propTypes = {
-  nodeData: PropTypes.shape({
-    argument: PropTypes.array.isRequired,
-    options: PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string,
-      'upload-date': PropTypes.string,
-      'thumbnail-url': PropTypes.string,
-    }),
-  }).isRequired,
 };
 
 export default Video;
