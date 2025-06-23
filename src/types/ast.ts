@@ -1,5 +1,6 @@
 import { HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW } from '../components/Roles/Highlight';
 import { ActiveTabs, Selectors } from '../components/Tabs/tab-context';
+import { PageTemplateType } from '../context/page-context';
 
 type ComponentType =
   | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
@@ -189,7 +190,7 @@ interface ParentNode extends Node {
 type PageOptionsKey = keyof PageOptions;
 
 type PageOptions = {
-  template: string;
+  template: PageTemplateType;
   default_tabs?: ActiveTabs;
   dismissible_skills_card?: DismissibleSkillsCardOptions;
   has_composable_tutorial?: boolean;
@@ -208,6 +209,7 @@ type PageOptions = {
 };
 
 interface Root extends ParentNode {
+  type: 'root';
   options: PageOptions;
   fileid: string;
 }

@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { Page } from '../types/data';
+import { Root } from '../types/ast';
 
 export type PageTemplateType =
   | 'blank'
@@ -16,11 +16,11 @@ export type PageTemplateType =
   | 'product-landing';
 
 export interface PageContextType {
-  page: Page | null;
+  page: Root | null;
   template: PageTemplateType | null;
   slug: string;
   tabsMainColumn: boolean | null;
-  options: Page['options'];
+  options: Root['options'] | null;
 }
 
 export const PageContext = createContext<PageContextType>({
