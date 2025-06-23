@@ -11,13 +11,13 @@ exports[`Lightbox renders correctly 1`] = `
   max-width: 100%;
 }
 
-.emotion-2 {
+.emotion-1 {
   max-width: 100%;
   height: auto;
 }
 
-.emotion-3 {
-  color: var(--color);
+.emotion-2 {
+  color: #444;
   font-size: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -25,8 +25,12 @@ exports[`Lightbox renders correctly 1`] = `
   text-align: center;
 }
 
+.dark-theme .emotion-2 {
+  color: #E8EDEB;
+}
+
 <div
-    class="emotion-0 emotion-1"
+    class="emotion-0"
   >
     <div
       role="button"
@@ -34,15 +38,14 @@ exports[`Lightbox renders correctly 1`] = `
     >
       <img
         alt="test-alt"
-        class="emotion-2 hero-img align-test-align"
+        class="emotion-1 hero-img align-test-align"
         height="3000"
         src="/images/firstcluster.png"
         style="--border-color: #C1C7C6;"
         width="5000"
       />
       <div
-        class="emotion-3 emotion-4"
-        style="--color: #444;"
+        class="emotion-2"
       >
         click to enlarge
       </div>
