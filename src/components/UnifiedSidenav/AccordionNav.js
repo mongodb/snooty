@@ -25,6 +25,11 @@ const panelStyling = LeafyCSS`
     border-bottom: 1px solid var(--sidenav-border-bottom-color);
     width: 100%;
 
+    // Height for the version dropdown
+    button {
+      height: 28px;
+    }
+
     ul {
       display: block;
       width: 100%;

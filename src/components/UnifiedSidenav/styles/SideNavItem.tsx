@@ -55,6 +55,12 @@ export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) =>
     font-weight: 500;
     color: var(--tab-color-primary);
   }
+
+  // Version Dropdown button
+  button {
+    margin-left: ${!isAccordion && '-8px'};
+    height: 28px;
+  }
 `;
 
 export const l2ItemStyling = ({ level, isAccordion }: { level: number; isAccordion: boolean }) => css`
