@@ -4,6 +4,7 @@ import { Global, css } from '@emotion/react';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
+import { BaseTemplateProps } from '.';
 
 const CONTENT_MAX_WIDTH = 1440;
 
@@ -52,7 +53,7 @@ const Wrapper = styled('main')`
 `;
 
 // The Landing template exclusively represents mongodb.com/docs. All other landings use the ProductLanding template
-const Landing = ({ children }: { children: ReactNode }) => {
+const Landing = ({ children }: BaseTemplateProps & { children: ReactNode }) => {
   const { fontSize, screenSize, size } = theme;
   const { darkMode } = useDarkMode();
   return (
