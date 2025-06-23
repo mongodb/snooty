@@ -1,16 +1,21 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { SideNavItem } from '@leafygreen-ui/side-nav';
 import Link from '../Link';
 import { formatText } from '../../utils/format-text';
+import { MetadataChapters } from '../../types/data';
 import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 
 const fontStyling = css`
   line-height: 20px;
 `;
 
-const GuidesLandingTree = ({ chapters, handleClick }) => {
+export type GuidesLandingTreeProps = {
+  chapters: MetadataChapters;
+  handleClick: () => void;
+};
+
+const GuidesLandingTree = ({ chapters, handleClick }: GuidesLandingTreeProps) => {
   const processedNavItems = useMemo(() => {
     const overviewHeading = { title: 'Overview', to: '/' };
     const chapterHeadings = [overviewHeading];
@@ -39,11 +44,6 @@ const GuidesLandingTree = ({ chapters, handleClick }) => {
       ))}
     </>
   );
-};
-
-GuidesLandingTree.propTypes = {
-  chapters: PropTypes.object.isRequired,
-  handleClick: PropTypes.func,
 };
 
 export default GuidesLandingTree;

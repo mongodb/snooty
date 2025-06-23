@@ -3,7 +3,7 @@ import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
 import type { GuideNextNode } from '../../types/ast';
-import type { MetadataChapters, MetadataGuide, MetadataGuides } from '../../types/data';
+import type { MetadataChapter, MetadataChapters, MetadataGuide, MetadataGuides } from '../../types/data';
 import Content from './Content';
 import ChapterInfo from './ChapterInfo';
 import { ReadGuidesContextProvider } from './read-guides-context';
