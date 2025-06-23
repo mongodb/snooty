@@ -1,9 +1,9 @@
 import React from 'react';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import LeafyButton from '@leafygreen-ui/button';
-import PlayIcon from '@leafygreen-ui/icon/dist/Play';
+import { css } from '@leafygreen-ui/emotion';
+import Icon, { glyphs } from '@leafygreen-ui/icon';
 
 const StyledButton = styled(LeafyButton)`
   color: ${palette.white};
@@ -34,9 +34,9 @@ const playButtonBorderStyling = css`
 
 const VideoPlayButton = () => {
   return (
-    <div css={playButtonBorderStyling}>
+    <div className={playButtonBorderStyling}>
       <StyledButton>
-        <PlayIcon size="xlarge" />
+        <Icon size="xlarge" glyph={glyphs.Play.displayName ?? 'Play'} />
       </StyledButton>
     </div>
   );

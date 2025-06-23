@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { palette } from '@leafygreen-ui/palette';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { Theme } from '@leafygreen-ui/lib';
-import { css } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
 
 const baseStyle = css`
@@ -26,7 +25,9 @@ export const searchTagStyle = css`
   margin-right: ${theme.size.small};
 `;
 
-const VARIANTS = {
+type TagVariant = 'blue' | 'green' | 'purple' | 'gray';
+
+const VARIANTS: Record<Theme, Record<TagVariant, string>> = {
   [Theme.Light]: {
     blue: css`
       background-color: ${palette.blue.light3};
@@ -73,20 +74,20 @@ const VARIANTS = {
   },
 };
 
-const Tag = ({ children, variant, ...rest }) => {
+interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
+  children: React.ReactNode;
+  variant: TagVariant;
+}
+
+const Tag = ({ children, variant, className, ...rest }: TagProps) => {
   const { theme: siteTheme } = useDarkMode();
   const variantStyle = VARIANTS[siteTheme][variant] || VARIANTS[siteTheme]['green'];
 
   return (
-    <span css={[baseStyle, variantStyle]} {...rest}>
+    <span className={cx(baseStyle, variantStyle, className)} {...rest}>
       {children}
     </span>
   );
-};
-
-Tag.propTypes = {
-  children: PropTypes.node.isRequired,
-  variant: PropTypes.string,
 };
 
 export default Tag;

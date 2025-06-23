@@ -102,8 +102,8 @@ const FeatureNotAvailable = (props: BaseTemplateProps) => {
     breadcrumbInfo = JSON.parse(sessionStorage.getItem('breadcrumbInfo') ?? '');
     if (breadcrumbInfo?.pageTitle && breadcrumbInfo?.slug) {
       selfBreadcrumb = {
-        title: breadcrumbInfo?.pageTitle,
-        slug: breadcrumbInfo?.slug,
+        title: breadcrumbInfo.pageTitle,
+        slug: breadcrumbInfo.slug,
       };
     }
     pageInfo = JSON.parse(sessionStorage.getItem('pageInfo') ?? '');

@@ -8,7 +8,6 @@ type ComponentType =
   | 'blockquote'
   | 'button'
   | 'card'
-  | 'card-group'
   | 'chapter'
   | 'chapters'
   | 'collapsible'
@@ -103,9 +102,12 @@ type DirectiveName =
   | 'versionadded'
   | 'versionchanged'
   | 'tabs'
-  | 'wayfinding';
+  | 'wayfinding'
+  | 'wayfinding-option'
+  | 'wayfinding-description';
 
 type NodeType =
+  | 'card-group'
   | 'code'
   | 'cta-banner'
   | 'definitionList'
@@ -173,7 +175,6 @@ type DirectiveOptions = {
 
 interface Node {
   type: NodeType;
-  [key: string]: any;
 }
 
 interface TextParentNode extends Node {
@@ -326,6 +327,28 @@ interface TextNode extends Node {
   type: 'text';
   value: string;
 }
+type CardGroupOptions = {
+  columns: number;
+  layout: string;
+  style: string;
+  type?: string;
+};
+interface CardGroupNode extends Directive<CardGroupOptions> {
+  options: CardGroupOptions;
+}
+
+type CardOptions = {
+  cta?: string;
+  headline?: string;
+  icon: string;
+  'icon-dark': boolean;
+  'icon-alt': string;
+  tag?: string;
+  url: string;
+};
+interface CardNode extends Directive<CardOptions> {
+  options: CardOptions;
+}
 
 interface DefinitionListNode extends ParentNode {
   type: 'definitionList';
@@ -401,6 +424,7 @@ type CollapsibleOptions = {
   heading?: string;
   sub_heading?: string;
   id?: string;
+  expanded?: boolean;
 };
 
 interface CollapsibleNode extends Directive<CollapsibleOptions> {
@@ -614,6 +638,35 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
+type VideoOptions = {
+  title: string;
+  description: string;
+  'upload-date': string;
+  'thumbnail-url': string;
+};
+
+interface VideoNode extends Directive<VideoOptions> {
+  argument: ReferenceNode[];
+}
+
+interface WayfindingDescriptionNode extends Directive {
+  name: 'wayfinding-description';
+}
+
+interface WayfindingNode extends Directive {
+  argument: ReferenceNode[];
+}
+
+type WayfindingOptionOptions = {
+  title: string;
+  language: string;
+  id: string;
+};
+
+interface WayfindingOptionNode extends Directive<WayfindingOptionOptions> {
+  argument: ReferenceNode[];
+}
+
 type StandaloneHeaderOptions = {
   columns: number;
   cta: string;
@@ -622,6 +675,18 @@ type StandaloneHeaderOptions = {
 
 interface StandaloneHeaderNode extends Directive<StandaloneHeaderOptions> {
   options: StandaloneHeaderOptions;
+}
+
+interface SubstitutionReferenceNode extends ParentNode {
+  name: 'substitution_reference';
+}
+
+interface TargetNode extends ParentNode {
+  name: 'target';
+  html_id: string;
+  options: {
+    hidden: boolean;
+  };
 }
 
 interface ReleaseSpecificationNode extends ParentNode {}
@@ -633,6 +698,17 @@ interface RefRoleNode extends ParentNode {
   url: string;
 }
 
+type InstruqtOptions = {
+  title: string;
+  drawer: boolean;
+};
+
+interface InstruqtNode extends Directive<InstruqtOptions> {
+  argument: TextNode[];
+}
+
+interface GuideNextNode extends Directive {}
+
 export type {
   AbbrRoleNode,
   AdmonitionNode,
@@ -641,6 +717,8 @@ export type {
   BlockQuoteNode,
   ButtonNode,
   ClassRoleNode,
+  CardGroupNode,
+  CardNode,
   CodeNode,
   CollapsibleNode,
   CollapsibleOptions,
@@ -662,10 +740,12 @@ export type {
   FacetNode,
   FootnoteNode,
   FootnoteReferenceNode,
+  GuideNextNode,
   HeadingNode,
   HeadingNodeSelectorIds,
   HighlightNode,
   HighlightRoleNames,
+  InstruqtNode,
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,
@@ -698,12 +778,18 @@ export type {
   Root,
   StepNode,
   StrongNode,
+  SubstitutionReferenceNode,
   TabNode,
   TabsNode,
   TargetIdentifierNode,
+  TargetNode,
   TextNode,
   TitleReferenceNode,
   TwitterNode,
   TocTreeEntry,
   TocTreeDirective,
+  VideoNode,
+  WayfindingDescriptionNode,
+  WayfindingNode,
+  WayfindingOptionNode,
 };
