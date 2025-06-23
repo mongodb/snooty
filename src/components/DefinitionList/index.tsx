@@ -1,8 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ComponentFactory from '../ComponentFactory';
+import { DefinitionListNode } from '../../types/ast';
 
-const DefinitionList = ({ nodeData, ...rest }) => {
+export type DefinitionListProps = {
+  nodeData: DefinitionListNode;
+};
+
+const DefinitionList = ({ nodeData, ...rest }: DefinitionListProps) => {
   return (
     <dl>
       {nodeData.children.map((definition, index) => (
@@ -10,12 +14,6 @@ const DefinitionList = ({ nodeData, ...rest }) => {
       ))}
     </dl>
   );
-};
-
-DefinitionList.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.array.isRequired,
-  }).isRequired,
 };
 
 export default DefinitionList;

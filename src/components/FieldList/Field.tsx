@@ -1,12 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
+import { css } from '@leafygreen-ui/emotion';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
+import { FieldNode } from '../../types/ast';
 
-const Field = ({ nodeData: { children, label, name }, ...rest }) => (
+export type FieldProps = {
+  nodeData: FieldNode;
+};
+
+const Field = ({ nodeData: { children, label, name }, ...rest }: FieldProps) => (
   <tr
-    css={css`
+    className={css`
       font-size: ${theme.fontSize.default};
       > th,
       > td {
@@ -23,13 +27,5 @@ const Field = ({ nodeData: { children, label, name }, ...rest }) => (
     </td>
   </tr>
 );
-
-Field.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    label: PropTypes.string,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default Field;

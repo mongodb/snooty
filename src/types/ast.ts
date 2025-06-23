@@ -2,7 +2,7 @@ import { HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW } from
 import { ActiveTabs, Selectors } from '../components/Tabs/tab-context';
 
 type ComponentType =
-  | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier'>
+  | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier' | 'inline_target'>
   | 'admonition'
   | 'banner'
   | 'blockquote'
@@ -76,7 +76,9 @@ type DirectiveName =
   | 'directive'
   | 'dismissible-skills-card'
   | 'facet'
+  | 'figure'
   | 'icon'
+  | 'image'
   | 'include'
   | 'input'
   | 'io-code-block'
@@ -119,9 +121,12 @@ type NodeType =
   | 'directive'
   | 'directive_argument'
   | 'emphasis'
+  | 'field'
+  | 'field_list'
   | 'footnote'
   | 'footnote_reference'
   | 'heading'
+  | 'inline_target'
   | 'line'
   | 'line_block'
   | 'list'
@@ -315,6 +320,19 @@ interface DismissibleSkillsCardNode extends Directive<DismissibleSkillsCardOptio
   options: DismissibleSkillsCardOptions;
 }
 
+interface BaseFieldNode extends ParentNode {
+  name: string;
+  label?: string;
+}
+
+interface FieldNode extends BaseFieldNode {
+  type: 'field';
+}
+
+interface FieldListNode extends BaseFieldNode {
+  type: 'field_list';
+}
+
 interface ListTableNode extends Directive {
   name: 'list-table';
   children: ListNode[];
@@ -378,6 +396,7 @@ interface CardNode extends Directive<CardOptions> {
 
 interface DefinitionListNode extends ParentNode {
   type: 'definitionList';
+  children: DefinitionListItemNode[];
 }
 
 interface DefinitionListItemNode extends ParentNode {
@@ -433,6 +452,21 @@ interface MethodNode extends ParentNode {
 
 interface DirectiveArgumentNode extends ParentNode {
   type: 'directive_argument';
+}
+
+interface BaseTargetNode extends ParentNode {
+  domain: string;
+  name: string;
+  html_id?: string;
+  options?: {};
+}
+
+interface TargetNode extends BaseTargetNode {
+  type: 'target';
+}
+
+interface InlineTargetNode extends BaseTargetNode {
+  type: 'inline_target';
 }
 
 interface TargetIdentifierNode extends ParentNode {
@@ -494,6 +528,29 @@ interface FacetNode extends Directive<FacetOptions> {
   type: 'directive';
   name: 'facet';
   options?: FacetOptions;
+}
+
+type ImageNodeOptions = {
+  alt: string;
+  lightbox?: boolean;
+  align?: string;
+  checksum?: string;
+  height?: string;
+  scale?: string;
+  width?: string;
+  figwidth?: string;
+};
+
+interface FigureNode extends Directive<ImageNodeOptions> {
+  name: 'figure';
+  argument: [TextNode];
+  options: ImageNodeOptions;
+}
+
+interface ImageNode extends Directive<ImageNodeOptions> {
+  name: 'image';
+  argument: [TextNode];
+  options: ImageNodeOptions;
 }
 
 type AdmonitionName = 'example' | 'note' | 'tip' | 'see' | 'seealso' | 'warning' | 'important';
@@ -766,6 +823,9 @@ export type {
   DismissibleSkillsCardNode,
   EmphasisNode,
   FacetNode,
+  FieldNode,
+  FieldListNode,
+  FigureNode,
   FootnoteNode,
   FootnoteReferenceNode,
   GuideNextNode,
@@ -773,6 +833,8 @@ export type {
   HeadingNodeSelectorIds,
   HighlightNode,
   HighlightRoleNames,
+  ImageNode,
+  InlineTargetNode,
   InstruqtNode,
   IOCodeBlockNode,
   IOInputNode,
