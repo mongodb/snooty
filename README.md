@@ -209,7 +209,6 @@ For preview builds, writers need to ensure this environment variable is added to
 
 Note: The custom 404 page is only visible in non-development builds. In development mode (`npm run develop`), Gatsby serves its own default 404 page.
 
-
 ### Useful Resources
 
 [React](https://reactjs.org/docs/getting-started.html)
