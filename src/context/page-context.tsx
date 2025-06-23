@@ -20,11 +20,17 @@ export interface Page {
   ast: Root | null;
 }
 
+export type PageOptionsKey = keyof PageOptions;
+
 export interface PageOptions {
   template: PageTemplateType;
-  has_composable_tutorial?: boolean;
   has_method_selector?: boolean;
-  hidefeedback: string;
+  has_composable_tutorial?: boolean;
+  time_required?: number;
+  multi_page_tutorial_settings?: {
+    show_next_top?: boolean;
+  };
+  hidefeedback?: string;
   [key: string]: any;
 }
 
