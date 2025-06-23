@@ -3,7 +3,7 @@ import { joinUrlAndPath, DOTCOM_BASE_URL } from './base-url';
 import { generateVersionedPrefix } from './generate-versioned-prefix';
 import { localizePath } from './locale';
 
-export const getUrl = (branchUrlSlug: string | undefined, project: string, siteBasePrefix: string, slug: string) => {
+export const getUrl = (branchUrlSlug: string | undefined, project: string, siteBasePrefix: string, slug?: string) => {
   if (branchUrlSlug === 'legacy') {
     // Avoid trailing slash to ensure query param remains valid
     const legacyPath = localizePath(`/docs/legacy/?site=${project}`);

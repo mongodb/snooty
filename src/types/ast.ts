@@ -101,7 +101,9 @@ type DirectiveName =
   | 'versionadded'
   | 'versionchanged'
   | 'tabs'
-  | 'wayfinding';
+  | 'wayfinding'
+  | 'wayfinding-option'
+  | 'wayfinding-description';
 
 type NodeType =
   | 'card-group'
@@ -621,6 +623,35 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
+type VideoOptions = {
+  title: string;
+  description: string;
+  'upload-date': string;
+  'thumbnail-url': string;
+};
+
+interface VideoNode extends Directive<VideoOptions> {
+  argument: ReferenceNode[];
+}
+
+interface WayfindingDescriptionNode extends Directive {
+  name: 'wayfinding-description';
+}
+
+interface WayfindingNode extends Directive {
+  argument: ReferenceNode[];
+}
+
+type WayfindingOptionOptions = {
+  title: string;
+  language: string;
+  id: string;
+};
+
+interface WayfindingOptionNode extends Directive<WayfindingOptionOptions> {
+  argument: ReferenceNode[];
+}
+
 type StandaloneHeaderOptions = {
   columns: number;
   cta: string;
@@ -651,6 +682,17 @@ interface RefRoleNode extends ParentNode {
   fileid: string[];
   url: string;
 }
+
+type InstruqtOptions = {
+  title: string;
+  drawer: boolean;
+};
+
+interface InstruqtNode extends Directive<InstruqtOptions> {
+  argument: TextNode[];
+}
+
+interface GuideNextNode extends Directive {}
 
 export type {
   AbbrRoleNode,
@@ -683,10 +725,12 @@ export type {
   FacetNode,
   FootnoteNode,
   FootnoteReferenceNode,
+  GuideNextNode,
   HeadingNode,
   HeadingNodeSelectorIds,
   HighlightNode,
   HighlightRoleNames,
+  InstruqtNode,
   IOCodeBlockNode,
   IOInputNode,
   IOOutputNode,
@@ -728,4 +772,8 @@ export type {
   TwitterNode,
   TocTreeEntry,
   TocTreeDirective,
+  VideoNode,
+  WayfindingDescriptionNode,
+  WayfindingNode,
+  WayfindingOptionNode,
 };

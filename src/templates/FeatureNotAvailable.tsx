@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { H2 } from '@leafygreen-ui/typography';
 import { theme } from '../theme/docsTheme';
-import Breadcrumbs from '../components/Breadcrumbs';
+import Breadcrumbs, { BreadcrumbInfoLocalStorage, PageInfo, SelfCrumb } from '../components/Breadcrumbs';
 import { isBrowser } from '../utils/is-browser';
 import { getCompleteUrl, getUrl } from '../utils/url-utils';
 
@@ -91,26 +91,29 @@ const FeatureNotAvailContainer = styled.div`
   }
 `;
 
+// TODO: Much better type checks for the data on this page/component
 const FeatureNotAvailable = () => {
-  let breadcrumbInfo = null,
-    selfBreadcrumb = null,
-    pageInfo = null;
+  let breadcrumbInfo: BreadcrumbInfoLocalStorage | undefined;
+  let selfBreadcrumb: SelfCrumb | undefined;
+  let pageInfo: PageInfo | undefined;
 
   if (isBrowser) {
-    breadcrumbInfo = JSON.parse(sessionStorage.getItem('breadcrumbInfo'));
-    selfBreadcrumb = {
-      title: breadcrumbInfo?.pageTitle,
-      slug: breadcrumbInfo?.slug,
-    };
-    pageInfo = JSON.parse(sessionStorage.getItem('pageInfo'));
+    breadcrumbInfo = JSON.parse(sessionStorage.getItem('breadcrumbInfo') ?? '');
+    if (breadcrumbInfo?.pageTitle && breadcrumbInfo?.slug) {
+      selfBreadcrumb = {
+        title: breadcrumbInfo.pageTitle,
+        slug: breadcrumbInfo.slug,
+      };
+    }
+    pageInfo = JSON.parse(sessionStorage.getItem('pageInfo') ?? '');
   }
 
-  const { urlSlug, project, siteBasePrefix } = pageInfo || {};
+  const { urlSlug, project = '', siteBasePrefix = '' } = pageInfo || {};
   const selfCrumbPath = getCompleteUrl(getUrl(urlSlug, project, siteBasePrefix, selfBreadcrumb?.slug));
 
   return (
     <StyledMain>
-      <div class="body">
+      <div className="body">
         {breadcrumbInfo && (
           <Breadcrumbs
             siteTitle={breadcrumbInfo.siteTitle}
