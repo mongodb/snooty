@@ -185,19 +185,26 @@ interface ParentNode extends Node {
   children: Node[];
 }
 
-interface PageOptions {
+type PageOptionsKey = keyof PageOptions;
+
+type PageOptions = {
   template: string;
+  default_tabs?: ActiveTabs;
+  dismissible_skills_card?: DismissibleSkillsCardOptions;
   has_composable_tutorial?: boolean;
   hidefeedback?: string;
-  'tabs-selector-position'?: string;
-  selectors?: Selectors;
   instruqt?: boolean;
-  default_tabs?: ActiveTabs;
   has_method_selector?: boolean;
+  multi_page_tutorial_settings?: {
+    show_next_top?: boolean;
+  };
   noprevnext?: string;
-  dismissible_skills_card?: DismissibleSkillsCardOptions;
   'pl-max-width-paragraphs'?: string;
-}
+  selectors?: Selectors;
+  'tabs-selector-position'?: string;
+  time_required?: number;
+  [key: string]: any;
+};
 
 interface Root extends ParentNode {
   options: PageOptions;
@@ -762,6 +769,7 @@ export type {
   NodeName,
   NodeType,
   PageOptions,
+  PageOptionsKey,
   ParagraphNode,
   ParentNode,
   ProcedureNode,
