@@ -264,7 +264,7 @@ export function StaticNavItem({
       active={isActive}
       aria-label={label}
       prefix={prefix}
-      hideExtLernalIcon={true}
+      hideExternalIcon={true}
       as={Link}
       to={url}
       onClick={() => {

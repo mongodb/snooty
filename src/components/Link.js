@@ -133,7 +133,7 @@ const Link = ({
 
   // If prefix, that means we are coming from the UnifiedSideNav and not the old SideNav
   if (prefix) {
-    // For an external link insides the unified toc
+    // For an external links, inside the unified toc
     if (!isRelativeUrl(to)) {
       return (
         <LGLink
@@ -174,12 +174,14 @@ const Link = ({
       );
     }
 
+    console.log(hideExternalIconProp, 'pepsi', !hideExternalIconProp, l1List?.indexOf(to) !== -1, to);
     // On the Unified SideNav but linking to a different site
     return (
       <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), l1LinkStyling, className)} href={to}>
         {children}
         {decoration}
-        {!hideExternalIconProp && l1List && l1List.indexOf(to) !== -1 && (
+        {/* Adds icon if we are in the L2 panel and linking to an L1 tab */}
+        {((hideExternalIconProp && !hideExternalIconProp) || (l1List && l1List.indexOf(to) !== -1)) && (
           <Icon glyph={'ArrowRight'} fill={palette.gray.base} />
         )}
       </a>
@@ -205,8 +207,6 @@ const Link = ({
       </GatsbyLink>
     );
   }
-
-  console.log('hey', to);
 
   const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
   const isMDBLink = strippedUrl.includes('mongodb.com');
