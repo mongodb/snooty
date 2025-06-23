@@ -1,6 +1,12 @@
 import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
 import { PageTemplateType } from '../context/page-context';
-import { Node, TextNode, TocTreeEntry } from './ast';
+import { Node, Root, TextNode, TocTreeEntry } from './ast';
+
+type AppData = {
+  page: {
+    ast: Root;
+  };
+};
 
 type EOLType = 'download' | 'link';
 
@@ -159,6 +165,7 @@ type MetadataGuide = {
   description: string | Node[];
   title: string | Node[];
 };
+
 type FacetBase = {
   id: string;
   key: string;
@@ -177,6 +184,7 @@ interface FacetValue extends FacetBase {
 }
 
 export {
+  AppData,
   BranchData,
   Docset,
   EOLType,

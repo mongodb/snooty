@@ -1,6 +1,6 @@
 import { withPrefix } from 'gatsby';
 import { QueriedCrumbs } from '../hooks/use-breadcrumbs';
-import { PageInfo } from '../components/Breadcrumbs';
+import { PageInfo, SelfCrumb } from '../components/Breadcrumbs';
 import { Node } from '../types/ast';
 import { isParentNode, isTextNode } from '../types/ast-utils';
 import { baseUrl, joinUrlAndPath } from './base-url';
@@ -40,7 +40,7 @@ export const getFullBreadcrumbPath = (siteUrl: string, path: string, needsPrefix
 };
 
 export const getSelfCrumbPath = (
-  selfCrumbContent: { title: string; slug: string },
+  selfCrumbContent: SelfCrumb,
   urlSlug?: string,
   project?: string,
   siteBasePrefix?: string
@@ -58,7 +58,7 @@ type GetCompleteBreadcrumbDataProps = {
   slug: string;
   queriedCrumbs?: QueriedCrumbs;
   parentPaths?: Array<{ title: string; path: string }>;
-  selfCrumbContent?: { title: string; slug: string };
+  selfCrumbContent?: SelfCrumb;
   pageInfo?: PageInfo;
 };
 

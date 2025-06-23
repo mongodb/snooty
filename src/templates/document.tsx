@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Contents from '../components/Contents';
@@ -13,6 +12,7 @@ import AssociatedVersionSelector from '../components/AssociatedVersionSelector';
 import { theme } from '../theme/docsTheme';
 import { usePageContext } from '../context/page-context';
 import DismissibleSkillsCard from '../components/DismissibleSkillsCard';
+import { AppData, PageContext } from '../types/data';
 
 const MAX_ON_THIS_PAGE_WIDTH = '200px';
 const MAX_CONTENT_WIDTH = '775px';
@@ -49,7 +49,19 @@ const StyledRightColumn = styled(RightColumn)`
   overflow: visible;
 `;
 
-const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedProduct }, offlineBanner }) => {
+export type DocumentTemplateProps = {
+  children: ReactNode;
+  data: AppData;
+  pageContext: PageContext;
+  offlineBanner: JSX.Element;
+};
+
+const Document = ({
+  children,
+  data: { page },
+  pageContext: { slug, isAssociatedProduct },
+  offlineBanner,
+}: DocumentTemplateProps) => {
   const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
@@ -67,7 +79,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
           {activeTutorial && <StepNumber slug={slug} activeTutorial={activeTutorial} />}
           {children}
           {showPrevNext && (
-            <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel} toctreeOrder={toctreeOrder} />
+            <InternalPageNav slug={slug} slugTitleMapping={slugToBreadcrumbLabel ?? {}} toctreeOrder={toctreeOrder} />
           )}
         </div>
       </StyledMainColumn>
@@ -81,20 +93,6 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       </StyledRightColumn>
     </DocumentContainer>
   );
-};
-
-Document.propTypes = {
-  pageContext: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
-  }).isRequired,
-  data: PropTypes.shape({
-    page: PropTypes.shape({
-      ast: PropTypes.shape({
-        children: PropTypes.array,
-        options: PropTypes.object,
-      }).isRequired,
-    }).isRequired,
-  }),
 };
 
 export default Document;

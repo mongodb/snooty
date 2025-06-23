@@ -20,7 +20,7 @@ const ErrorBox = styled.div`
   }
 `;
 
-const getSupportLinkDynamicStyle = (darkMode) => css`
+const getSupportLinkDynamicStyle = (darkMode: boolean) => css`
   ${!darkMode && `color: ${palette.gray.dark1};`}
   display: inline-block;
   font-size: ${theme.fontSize.small};
