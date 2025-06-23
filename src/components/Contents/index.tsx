@@ -89,7 +89,7 @@ const isHeadingVisible = (
   return isHeadingVisible(headingSelectorIds.children ?? {}, activeSelectorIds, searchParams);
 };
 
-const Contents = ({ className, slug }: { className: string; slug: string }) => {
+const Contents = ({ className, slug }: { className?: string; slug: string }) => {
   const { activeHeadingId, headingNodes, showContentsComponent, activeSelectorIds } = useContext(ContentsContext);
   const { isTabletOrMobile } = useScreenSize();
   const metadata = useSnootyMetadata();
