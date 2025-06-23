@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { glyphs } from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { getPageTitle } from '../../utils/get-page-title';
 import { useActiveMpTutorial } from '../MultiPageTutorials';
 import { reportAnalytics } from '../../utils/report-analytics';
-import { SlugToTitle } from '../../types/data';
+import { SlugToBreadcrumbLabel, SlugToTitle } from '../../types/data';
 import { ActiveTutorial } from '../MultiPageTutorials/hooks/use-active-mp-tutorial';
 import NextPrevLink from './NextPrevLink';
 
@@ -45,7 +44,11 @@ const getActiveTutorialPage = (activeTutorial: ActiveTutorial, key: 'next' | 'pr
   };
 };
 
-const getTocPage = (targetSlug: string | null, slugTitleMapping: SlugToTitle, linkTitle: string) => {
+const getTocPage = (
+  targetSlug: string | null,
+  slugTitleMapping: SlugToTitle | SlugToBreadcrumbLabel,
+  linkTitle: string
+) => {
   return {
     targetSlug,
     pageTitle: targetSlug ? getPageTitle(targetSlug, slugTitleMapping) ?? '' : '',
@@ -56,7 +59,7 @@ const getTocPage = (targetSlug: string | null, slugTitleMapping: SlugToTitle, li
 const getPrev = (
   activeTutorial: ActiveTutorial | undefined,
   toctreeOrder: string[],
-  slugTitleMapping: SlugToTitle,
+  slugTitleMapping: SlugToTitle | SlugToBreadcrumbLabel,
   slugIndex: number
 ) => {
   const key = 'prev';
@@ -70,7 +73,7 @@ const getPrev = (
 const getNext = (
   activeTutorial: ActiveTutorial | undefined,
   toctreeOrder: string[],
-  slugTitleMapping: SlugToTitle,
+  slugTitleMapping: SlugToTitle | SlugToBreadcrumbLabel,
   slugIndex: number
 ) => {
   const key = 'next';
@@ -83,7 +86,7 @@ const getNext = (
 
 export type InternalPageNavProps = {
   slug: string;
-  slugTitleMapping: SlugToTitle;
+  slugTitleMapping: SlugToTitle | SlugToBreadcrumbLabel;
   toctreeOrder: string[];
 };
 
@@ -126,13 +129,6 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }: InternalPageN
       )}
     </div>
   );
-};
-
-InternalPageNav.propTypes = {
-  slug: PropTypes.string.isRequired,
-  slugTitleMapping: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.string]))
-    .isRequired,
-  toctreeOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default InternalPageNav;

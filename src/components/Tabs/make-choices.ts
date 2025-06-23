@@ -8,7 +8,7 @@ export const makeChoices = ({
   options,
 }: {
   name: string;
-  options: string | { [k: string]: Node[] };
+  options: string | Record<string, Node[]>;
   iconMapping?: DriverMap;
 }) =>
   Object.entries(options).map(([tabId, title]) => ({

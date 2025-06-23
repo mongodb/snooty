@@ -60,9 +60,9 @@ const getLabel = (name: string) => {
 export type TabSelectorProps = {
   activeTab: string;
   handleClick: (activeTab: ActiveTabs) => void;
+  iconMapping: DriverMap;
   name: string;
   options: Record<string, Node[]>;
-  iconMapping: DriverMap;
   mainColumn: boolean;
   className?: string;
 };
