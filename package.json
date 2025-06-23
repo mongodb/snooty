@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.20.11",
+  "version": "0.20.12",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -23,7 +23,7 @@
     "@types/gatsbyjs__reach-router": "^2.0.5",
     "@types/jest": "^29.5.14",
     "@types/no-scroll": "^2.1.2",
-    "@types/node": "^22.10.1",
+    "@types/node": "^18.15",
     "@types/react": "^18.3.13",
     "@types/react-dom": "^18.3.1",
     "@types/sanitize-html": "^2.16.0",
@@ -116,6 +116,7 @@
     "@mdb/consistent-nav": "^2.3.6",
     "@mdb/flora": "1.14.2",
     "@mdx-js/react": "^2.2.1",
+    "@types/react-resizable": "^3.0.8",
     "abort-controller": "^3.0.0",
     "adm-zip": "^0.5.9",
     "babel-eslint": "^10.1.0",
