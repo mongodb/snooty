@@ -1,14 +1,16 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 import styled from '@emotion/styled';
 import Card from '@leafygreen-ui/card';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Body } from '@leafygreen-ui/typography';
+import { isString } from 'lodash';
 import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
 import { getPlaintext } from '../../utils/get-plaintext';
+import { MetadataChapter, RemoteMetadata } from '../../types/data';
+import { ChapterNode, Node } from '../../types/ast';
 import ChapterNumberLabel from './ChapterNumberLabel';
 
 // Height and width of image
@@ -143,10 +145,16 @@ const GuideLink = styled(Link)`
   }
 `;
 
+type GuideData = {
+  path: string;
+  time?: number;
+  title?: string | Node[];
+};
+
 // Uses guides metadata to obtain the title and completion time of each guide in the chapter
-const getGuidesData = (metadata, currentChapter) => {
+const getGuidesData = (metadata: RemoteMetadata, currentChapter?: MetadataChapter) => {
   const guidePaths = currentChapter?.guides;
-  let guides = [];
+  let guides: GuideData[] = [];
 
   if (guidePaths) {
     guidePaths.forEach((guidePath) => {
@@ -162,7 +170,12 @@ const getGuidesData = (metadata, currentChapter) => {
   return guides;
 };
 
-const Chapter = ({ metadata, nodeData: { argument, options } }) => {
+export type ChapterProps = {
+  metadata: RemoteMetadata;
+  nodeData: ChapterNode;
+};
+
+const Chapter = ({ metadata, nodeData: { argument, options } }: ChapterProps) => {
   const description = options?.description;
   const image = options?.image;
   const chapterTitle = getPlaintext(argument);
@@ -192,7 +205,7 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
       <GuidesList>
         {guides.map((guide, i) => {
           const time = guide.time ? `${guide.time} mins` : '';
-          const guideTitle = getPlaintext(guide.title);
+          const guideTitle = isString(guide.title) ? guide.title : getPlaintext(guide.title ?? []);
 
           return (
             <li key={`${guideTitle}-${i}`}>
@@ -206,20 +219,6 @@ const Chapter = ({ metadata, nodeData: { argument, options } }) => {
       </GuidesList>
     </Card>
   );
-};
-
-Chapter.propTypes = {
-  metadata: PropTypes.shape({
-    chapters: PropTypes.object.isRequired,
-    guides: PropTypes.object.isRequired,
-  }).isRequired,
-  nodeData: PropTypes.shape({
-    argument: PropTypes.arrayOf(PropTypes.object).isRequired,
-    options: PropTypes.shape({
-      description: PropTypes.string,
-      image: PropTypes.string,
-    }),
-  }).isRequired,
 };
 
 export default Chapter;

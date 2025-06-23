@@ -110,6 +110,8 @@ type RemoteMetadata = {
   openapi_pages?: Record<string, OpenApiPage>;
   associated_products?: AssociatedProduct[];
   multiPageTutorials?: Record<string, MultiPageTutorial>;
+  chapters?: MetadataChapters;
+  guides?: MetadataGuides;
 };
 
 type SlugToTitle = RemoteMetadata['slugToTitle'];
@@ -204,6 +206,7 @@ export {
   FacetOption,
   FacetValue,
   Group,
+  MetadataChapter,
   MetadataChapters,
   MetadataGuide,
   MetadataGuides,

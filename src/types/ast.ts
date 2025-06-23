@@ -63,6 +63,10 @@ type DirectiveName =
   | 'admonition'
   | 'banner'
   | 'blockquote'
+  | 'card'
+  | 'card-group'
+  | 'chapter'
+  | 'chapters'
   | 'collapsible'
   | 'community-driver'
   | 'composable-tutorials'
@@ -211,6 +215,19 @@ interface Root extends ParentNode {
   fileid: string;
 }
 
+interface ChaptersNode extends Directive {
+  name: 'chapters';
+}
+
+type ChapterOptions = {
+  description: string;
+  image: string;
+};
+
+interface ChapterNode extends Directive<ChapterOptions> {
+  name: 'chapter';
+}
+
 interface FootnoteReferenceNode extends ParentNode {
   type: 'footnote_reference';
   id: string;
@@ -341,19 +358,21 @@ type CardGroupOptions = {
   type?: string;
 };
 interface CardGroupNode extends Directive<CardGroupOptions> {
+  name: 'card-group';
   options: CardGroupOptions;
 }
 
 type CardOptions = {
   cta?: string;
   headline?: string;
-  icon: string;
-  'icon-dark': boolean;
-  'icon-alt': string;
+  icon?: string;
+  'icon-dark'?: string;
+  'icon-alt'?: string;
   tag?: string;
   url: string;
 };
 interface CardNode extends Directive<CardOptions> {
+  name: 'card';
   options: CardOptions;
 }
 
@@ -723,9 +742,11 @@ export type {
   BannerNode,
   BlockQuoteNode,
   ButtonNode,
-  ClassRoleNode,
   CardGroupNode,
   CardNode,
+  ChapterNode,
+  ChaptersNode,
+  ClassRoleNode,
   CodeNode,
   CollapsibleNode,
   CollapsibleOptions,

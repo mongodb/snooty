@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../theme/docsTheme';
@@ -21,13 +20,13 @@ const Label = styled('div')`
   width: 83px;
 `;
 
-const ChapterNumberLabel = ({ className, number }) => {
-  return <Label className={className}>Chapter {number}</Label>;
+export type ChapterNumberLabelProps = {
+  className: string;
+  number: number;
 };
 
-ChapterNumberLabel.propTypes = {
-  className: PropTypes.string,
-  number: PropTypes.number.isRequired,
+const ChapterNumberLabel = ({ className, number }: ChapterNumberLabelProps) => {
+  return <Label className={className}>Chapter {number}</Label>;
 };
 
 export default ChapterNumberLabel;

@@ -1,13 +1,6 @@
 import { withPrefix } from 'gatsby';
 
-/**
- *
- * @param {string} icon
- * @param {boolean} iconDark
- * @param {boolean} isDarkMode
- * @returns {string}
- */
-export const getSuitableIcon = (icon, iconDark, isDarkMode) => {
+export const getSuitableIcon = (icon: string | undefined, iconDark: string | undefined, isDarkMode: boolean) => {
   if (typeof icon == 'string') {
     const isPath = icon.startsWith('/');
     const getIcon = `${icon}${isDarkMode ? '_inverse' : ''}`;

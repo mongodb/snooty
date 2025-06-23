@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import LeafyGreenCard from '@leafygreen-ui/card';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -12,8 +11,9 @@ import { SidenavContext } from '../Sidenav';
 import useActiveHeading from '../../hooks/useActiveHeading';
 import useVisibleOnScroll from '../../hooks/useVisibleOnScroll';
 import { theme } from '../../theme/docsTheme';
+import { MetadataChapters } from '../../types/data';
 
-const learningCardStyle = ({ isVisible }) => css`
+const learningCardStyle = ({ isVisible }: { isVisible: boolean }) => css`
   background-color: ${palette.white};
   border-color: ${palette.gray.light2};
   color: ${palette.gray.dark3};
@@ -46,7 +46,7 @@ const learningCardStyle = ({ isVisible }) => css`
   }
 `;
 
-const Container = styled('div')`
+const Container = styled('div')<{ isSidenavCollapsed: boolean }>`
   display: none;
 
   @media ${theme.screenSize.mediumAndUp} {
@@ -101,7 +101,11 @@ const LearningTitle = styled('div')`
   margin-bottom: ${theme.size.small};
 `;
 
-const RightColumn = ({ chapters = {} }) => {
+export type RightColumnProps = {
+  chapters?: MetadataChapters;
+};
+
+const RightColumn = ({ chapters = {} }: RightColumnProps) => {
   const { isCollapsed } = useContext(SidenavContext);
   // Have children of the RightColumn appear as user scrolls past hero image on large screen sizes
   const isVisible = useVisibleOnScroll('.hero-img');
@@ -113,7 +117,7 @@ const RightColumn = ({ chapters = {} }) => {
   const activeChapterId = useActiveHeading(chapterValues, targetIntersectionRatio);
 
   return (
-    <Container isSidenavCollapsed={isCollapsed} isVisible={isVisible}>
+    <Container isSidenavCollapsed={isCollapsed}>
       <Sticky>
         <ListContainer>
           <ContentsList label="Chapters">
@@ -139,10 +143,6 @@ const RightColumn = ({ chapters = {} }) => {
       </Sticky>
     </Container>
   );
-};
-
-RightColumn.propTypes = {
-  chapters: PropTypes.object.isRequired,
 };
 
 export default RightColumn;
