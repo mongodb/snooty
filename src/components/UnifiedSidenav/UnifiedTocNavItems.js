@@ -25,6 +25,7 @@ const overwriteLinkStyle = LeafyCSS`
   span {
     display: flex;
   }
+  justify-content: space-between;
 `;
 
 const caretStyle = LeafyCSS`
@@ -263,6 +264,7 @@ export function StaticNavItem({
       active={isActive}
       aria-label={label}
       prefix={prefix}
+      hideExtLernalIcon={true}
       as={Link}
       to={url}
       onClick={() => {

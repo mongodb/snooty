@@ -46,6 +46,13 @@ export const sharedDarkModeOverwriteStyles = `
   font-weight: var(--link-font-weight);
 `;
 
+const l1LinkStyling = css`
+  svg {
+    transform: rotate(-45deg);
+    margin-left: 4px;
+  }
+`;
+
 /**
  * CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
  * @param {ThemeStyle} linkThemeStyle
@@ -83,6 +90,11 @@ const gatsbyLinkStyling = (linkThemeStyle) => css`
 const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
+  svg {
+    margin-left: 4px;
+    margin-bottom: -6px;
+    color: ${palette.gray.base};
+  }
 `;
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
@@ -119,10 +131,25 @@ const Link = ({
     ''
   );
 
-  console.log('l1 list is ', l1List);
-
   // If prefix, that means we are coming from the UnifiedSideNav and not the old SideNav
-  if (prefix && isRelativeUrl(to)) {
+  if (prefix) {
+    // For an external link insides the unified toc
+    if (!isRelativeUrl(to)) {
+      return (
+        <LGLink
+          className={joinClassNames(lgLinkStyling, className)}
+          href={to}
+          hideExternalIcon={false}
+          target={'_blank'}
+          fill={palette.gray.base}
+          {...anchorProps}
+        >
+          {children}
+          {decoration}
+        </LGLink>
+      );
+    }
+
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
@@ -149,18 +176,13 @@ const Link = ({
 
     // On the Unified SideNav but linking to a different site
     return (
-      <>
-        <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={to}>
-          {children}
-          {decoration}
-        </a>
-        <Icon
-          // className={cx(caretStyle)}
-          glyph={'ArrowRight'}
-          // fill={isActive ? 'inherit' : palette.gray.base}
-          // onClick={onCaretClick}
-        />
-      </>
+      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), l1LinkStyling, className)} href={to}>
+        {children}
+        {decoration}
+        {!hideExternalIconProp && l1List && l1List.indexOf(to) !== -1 && (
+          <Icon glyph={'ArrowRight'} fill={palette.gray.base} />
+        )}
+      </a>
     );
   }
 
@@ -186,9 +208,9 @@ const Link = ({
 
   console.log('hey', to);
 
-  // const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
-  // const isMDBLink = strippedUrl.includes('mongodb.com');
-  const showExtIcon = showExternalIcon ?? (!anchor && !hideExternalIconProp);
+  const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
+  const isMDBLink = strippedUrl.includes('mongodb.com');
+  const showExtIcon = showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
   const target = !showExtIcon ? '_self' : undefined;
 
   return (

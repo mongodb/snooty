@@ -40,7 +40,13 @@ export const tocData = (): TocItem[] => {
             },
             {
               label: 'l1 link',
+              prefix: CLOUD_DOCS,
               url: '/docs/atlas/getting-started/',
+            },
+            {
+              label: 'just a dif link',
+              prefix: CLOUD_DOCS,
+              url: '/docs/atlas/getting-started/meow',
             },
           ],
         },
