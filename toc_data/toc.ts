@@ -1,19 +1,12 @@
-import type { TocItem } from '../src/components/UnifiedSidenav/UnifiedConstants';
+import { TocItem, DocSites } from '../src/components/UnifiedSidenav/UnifiedConstants';
 
-//these have to match whatever values we use to store local storage in
-const COMMANDLINE_TOOLS = 'database-tools';
-const CLOUD_DOCS = 'cloud-docs';
-const CHARTS = 'charts';
-const CSHARP = 'csharp';
-const C2C = 'cluster-sync'
-
-// each url has to be unique with the prefix!!!!
+// each url has to be unique with the contentSite!!!!
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
     {
       label: 'Database tools',
       url: '/docs/database-tools/',
-      prefix: COMMANDLINE_TOOLS,
+      contentSite: DocSites.DATABASE_TOOLS,
       items: [
         {
           label: 'command tools',
@@ -45,7 +38,7 @@ export const tocData = (): TocItem[] => {
     {
       label: 'Atlas charts',
       url: '/docs/charts/',
-      prefix: CHARTS,
+      contentSite: DocSites.CHARTS,
       items: [
         {
           label: 'ATLAS CHARTS',
@@ -77,7 +70,7 @@ export const tocData = (): TocItem[] => {
     {
       label: 'Atlas',
       url: '/docs/atlas/getting-started/',
-      prefix: CLOUD_DOCS,
+      contentSite: DocSites.CLOUD_DOCS,
       items: [
         {
           label: 'Application Development',
@@ -133,7 +126,7 @@ export const tocData = (): TocItem[] => {
       label: 'cluster to cluster',
       url: '/docs/cluster-to-cluster-sync/:version/quickstart',
       glyph: 'Bulb',
-      prefix: C2C,
+      contentSite: DocSites.C2C,
       items: [
         {label: 'c2c documentation',
           group: true,
@@ -159,12 +152,12 @@ export const tocData = (): TocItem[] => {
       label: 'C# Quick Start',
       url: '/docs/drivers/csharp/:version/quick-start',
       glyph: 'Bulb',
-      prefix: CSHARP,
-      versionDropdown: true,
+      contentSite: DocSites.CSHARP,
       items: [
         {
           label: 'C# Documentation',
           group: true,
+          versionDropdown: true,
           items: [
             {
               label: 'Quick Reference',
@@ -219,7 +212,7 @@ export const tocData = (): TocItem[] => {
         {
           label: 'Connect to cloud',
           group: true,
-          prefix: '/docs/drivers/csharp/master/cloud-docs/bianca.laube/DOP-5371',
+          contentSite: '/docs/drivers/csharp/master/cloud-docs/bianca.laube/DOP-5371',
           items: [
             {
               label: 'Manage Clusters',

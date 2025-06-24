@@ -96,7 +96,7 @@ const Link = ({
   hideExternalIcon: hideExternalIconProp,
   showExternalIcon,
   openInNewTab,
-  prefix,
+  contentSite,
   ...other
 }) => {
   const { pathPrefix, project } = useSiteMetadata();
@@ -117,16 +117,16 @@ const Link = ({
     ''
   );
 
-  // If prefix, that means we are coming from the UnifiedSideNav and not the old SideNav
-  if (prefix) {
+  // If contentSite, that means we are coming from the UnifiedSideNav and not the old SideNav
+  if (contentSite) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
     // TODO: i wonder if this works for versioned site in monorepo
-    if (project === prefix) {
-      // Get rid of the path prefix in link for internal links
+    if (project === contentSite) {
+      // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
 
       return (
