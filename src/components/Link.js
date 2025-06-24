@@ -174,8 +174,7 @@ const Link = ({
       );
     }
 
-    console.log(hideExternalIconProp, 'pepsi', !hideExternalIconProp, l1List?.indexOf(to) !== -1, to);
-    // On the Unified SideNav but linking to a different site
+    // On the Unified SideNav but linking to a different content site
     return (
       <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), l1LinkStyling, className)} href={to}>
         {children}
