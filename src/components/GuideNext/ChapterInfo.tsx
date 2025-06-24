@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Card from '@leafygreen-ui/card';
 import styled from '@emotion/styled';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import { theme } from '../../theme/docsTheme';
-import type { MetadataGuide } from '../../types/data';
+import type { MetadataChapter, MetadataGuides } from '../../types/data';
 import GuidesList from './GuidesList';
 
 const cardStyling = css`
@@ -54,14 +53,9 @@ const ChapterTitle = styled('div')`
   font-weight: bold;
 `;
 
-interface ChapterData {
-  chapter_number: number;
-  guides: Array<string>;
-}
-
 export type ChapterInfoProps = {
-  chapterData: [title: string, ChapterData];
-  guidesMetadata: Record<string, MetadataGuide>;
+  chapterData: [string, MetadataChapter];
+  guidesMetadata: MetadataGuides;
   targetSlug?: string | null;
 };
 
@@ -81,12 +75,6 @@ const ChapterInfo = ({ chapterData, guidesMetadata, targetSlug }: ChapterInfoPro
       <GuidesList guidesMetadata={guidesMetadata} guideSlugs={data.guides} targetSlug={targetSlug} />
     </Card>
   );
-};
-
-ChapterInfo.propTypes = {
-  chapterData: PropTypes.array.isRequired,
-  guidesMetadata: PropTypes.object.isRequired,
-  targetSlug: PropTypes.string,
 };
 
 export default ChapterInfo;
