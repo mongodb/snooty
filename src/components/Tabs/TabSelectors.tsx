@@ -58,13 +58,13 @@ const getLabel = (name: string) => {
 };
 
 export type TabSelectorProps = {
-  className?: string;
   activeTab: string;
   handleClick: (activeTab: ActiveTabs) => void;
   iconMapping: DriverMap;
   name: string;
   options: Record<string, Node[]>;
   mainColumn: boolean;
+  className?: string;
 };
 
 const TabSelector = ({
@@ -100,10 +100,10 @@ const TabSelector = ({
 
 export type TabSelectorsProps = {
   className?: string;
-  rightColumn: boolean;
+  rightColumn?: boolean;
 };
 
-const TabSelectors = ({ className, rightColumn }: TabSelectorsProps) => {
+const TabSelectors = ({ className, rightColumn = false }: TabSelectorsProps) => {
   const { tabsMainColumn } = useContext(PageContext);
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
 

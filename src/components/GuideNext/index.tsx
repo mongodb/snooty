@@ -3,7 +3,7 @@ import { palette } from '@leafygreen-ui/palette';
 import styled from '@emotion/styled';
 import { theme } from '../../theme/docsTheme';
 import type { GuideNextNode } from '../../types/ast';
-import type { MetadataGuide, MetadataGuides } from '../../types/data';
+import type { MetadataChapter, MetadataChapters, MetadataGuide, MetadataGuides } from '../../types/data';
 import Content from './Content';
 import ChapterInfo from './ChapterInfo';
 import { ReadGuidesContextProvider } from './read-guides-context';
@@ -20,15 +20,10 @@ const Container = styled('div')`
   }
 `;
 
-interface ChapterData {
-  chapter_number: number;
-  guides: Array<string>;
-}
-
 const getTargetGuide = (
   targetGuideIdx: number,
   targetChapterName: string,
-  chapters: Record<string, ChapterData>,
+  chapters: MetadataChapters,
   guides: MetadataGuides
 ): [string, MetadataGuide] => {
   const guidesInTargetChapter = chapters[targetChapterName].guides;
@@ -36,7 +31,7 @@ const getTargetGuide = (
   return [targetGuideSlug, guides[targetGuideSlug]];
 };
 
-const getNextGuideData = (chapters: Record<string, ChapterData>, guides: MetadataGuides, slug: string) => {
+const getNextGuideData = (chapters: MetadataChapters, guides: MetadataGuides, slug: string) => {
   // Get current chapter name and guides in said chapter
   const currentChapterName = guides?.[slug]?.chapter_name ?? '';
   const currentChapter = chapters?.[currentChapterName];
@@ -59,7 +54,7 @@ const getNextGuideData = (chapters: Record<string, ChapterData>, guides: Metadat
   const currentChapterNumber = currentChapter?.chapter_number;
   const isFinalChapter = currentChapterNumber === chaptersArray.length;
 
-  let targetChapter: [string, ChapterData] | undefined = [currentChapterName, currentChapter];
+  let targetChapter: [string, MetadataChapter] | undefined = [currentChapterName, currentChapter];
   if (!isFinalChapter && isFinalGuideInChapter) {
     targetChapter = chaptersArray.find((chapter) => {
       const data = chapter[1];
@@ -83,7 +78,7 @@ export type GuideNextProps = {
   nodeData: GuideNextNode;
   slug: string;
   metadata: {
-    chapters: Record<string, ChapterData>;
+    chapters: MetadataChapters;
     guides: MetadataGuides;
   };
 };

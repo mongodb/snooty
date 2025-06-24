@@ -3,16 +3,12 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
-import type { CardGroupNode } from '../../types/ast';
+import type { CardGroupNode, Root } from '../../types/ast';
 
 export interface CardGroupProps {
   className?: string;
   nodeData: CardGroupNode;
-  page?: {
-    options?: {
-      template?: string;
-    };
-  };
+  page?: Root;
 }
 
 interface StyledGridProps {

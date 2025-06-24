@@ -1,5 +1,4 @@
-import React, { useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode, useMemo, useRef } from 'react';
 import {
   Cell,
   HeaderCell,
@@ -15,9 +14,11 @@ import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../theme/docsTheme';
 import { AncestorComponentContextProvider, useAncestorComponentContext } from '../context/ancestor-components-context';
+import { ListItemNode, ListTableNode, Node, ParentListItemNode } from '../types/ast';
+import { isDirectiveNode, isFootnoteReferenceNode, isParentNode } from '../types/ast-utils';
 import ComponentFactory from './ComponentFactory';
 
-const align = (key) => {
+const align = (key: string) => {
   switch (key) {
     case 'left':
     case 'right':
@@ -28,7 +29,7 @@ const align = (key) => {
   }
 };
 
-const styleTable = ({ customAlign, customWidth }) => css`
+const styleTable = ({ customAlign, customWidth }: { customAlign?: string; customWidth?: string }) => css`
   ${customAlign && `text-align: ${align(customAlign)}`};
   ${customWidth && `width: ${customWidth}`};
   margin: ${theme.size.medium} 0;
@@ -127,23 +128,19 @@ const zebraStripingStyle = css`
   }
 `;
 
-const hasOneChild = (children) => children.length === 1 && children[0].type === 'paragraph';
+const hasOneChild = (children: Node[]) => children.length === 1 && children[0].type === 'paragraph';
 
 /**
  * recursive traversal of nodeLists' children to look for
  * id values of footnote references
- *
- * @param nodeList @node[]
- * @returns str[]
  */
-const getReferenceIds = (nodeList) => {
-  const referenceType = `footnote_reference`;
-  const results = [];
-  const iter = (node) => {
-    if (node['type'] === referenceType) {
+const getReferenceIds = (nodeList: Node[]) => {
+  const results: string[] = [];
+  const iter = (node: Node) => {
+    if (isFootnoteReferenceNode(node)) {
       results.push(`ref-${node['refname']}-${node['id']}`);
     }
-    if (!node.children || !node.children.length) {
+    if (!isParentNode(node) || !node.children.length) {
       return;
     }
     for (let childNode of node.children) {
@@ -159,16 +156,14 @@ const getReferenceIds = (nodeList) => {
 
 /**
  * Checks every row for the existence of a nested table.
- * @param {object[]} rows
- * @returns {boolean}
  */
-const includesNestedTable = (rows) => {
-  const checkNodeForTable = (nodeData) => {
-    if (nodeData.type === 'directive' && nodeData.name === 'list-table') {
+const includesNestedTable = (rows: Node[]) => {
+  const checkNodeForTable = (nodeData: Node): boolean => {
+    if (isDirectiveNode(nodeData) && nodeData.name === 'list-table') {
       return true;
     }
 
-    if (!nodeData.children || nodeData.children === 0) {
+    if (!isParentNode(nodeData) || nodeData.children.length === 0) {
       return false;
     }
 
@@ -178,8 +173,14 @@ const includesNestedTable = (rows) => {
   return rows.some((row) => checkNodeForTable(row));
 };
 
-const generateColumns = (headerRow, bodyRows) => {
-  if (!headerRow?.children) {
+export type ListTableColumnData = {
+  id: string;
+  accessorKey: string;
+  header: string | ((ctx: unknown) => React.ReactNode);
+};
+
+const generateColumns = (headerRow: Node, bodyRows: ParentListItemNode[]): ListTableColumnData[] => {
+  if (!isParentNode(headerRow)) {
     // generate columns from bodyRows
     const flattenedRows = bodyRows.map((bodyRow) => bodyRow.children[0].children);
     const maxColumns = Math.max(...flattenedRows.map((row) => row.length));
@@ -195,13 +196,13 @@ const generateColumns = (headerRow, bodyRows) => {
   }
 
   return headerRow.children.map((listItemNode, index) => {
-    const skipPTag = hasOneChild(listItemNode.children);
+    const skipPTag = hasOneChild((listItemNode as ListItemNode).children);
     return {
       id: `column-${index}`,
       accessorKey: `column-${index}`,
-      header: (
+      header: () => (
         <>
-          {listItemNode.children.map((childNode, index) => (
+          {(listItemNode as ListItemNode).children.map((childNode, index) => (
             <ComponentFactory key={index} nodeData={childNode} skipPTag={skipPTag} />
           ))}
         </>
@@ -210,10 +211,10 @@ const generateColumns = (headerRow, bodyRows) => {
   });
 };
 
-const generateRowsData = (bodyRowNodes, columns) => {
+const generateRowsData = (bodyRowNodes: ParentListItemNode[], columns: ListTableColumnData[]) => {
   const rowNodes = bodyRowNodes.map((node) => node?.children[0]?.children ?? []);
   const rows = rowNodes.map((rowNode) => {
-    return rowNode.reduce((res, columnNode, colIndex) => {
+    return rowNode.reduce<Record<string, ReactNode>>((res, columnNode, colIndex) => {
       const column = columns[colIndex];
       if (!column) {
         console.warn(`Row has too many items (index ${colIndex}) for table with ${columns.length} columns`);
@@ -233,10 +234,14 @@ const generateRowsData = (bodyRowNodes, columns) => {
   return rows;
 };
 
-const ListTable = ({ nodeData: { children, options }, ...rest }) => {
+export type ListTableProps = {
+  nodeData: ListTableNode;
+};
+
+const ListTable = ({ nodeData: { children, options }, ...rest }: ListTableProps) => {
   const ancestors = useAncestorComponentContext();
-  const stubColumnCount = parseInt(options?.['stub-columns'], 10) || 0;
-  const headerRowCount = parseInt(options?.['header-rows'], 10) || 0;
+  const stubColumnCount = parseInt(options?.['stub-columns'] ?? '0', 10) || 0;
+  const headerRowCount = parseInt(options?.['header-rows'] ?? '0', 10) || 0;
 
   // Check if :header-rows: 0 is specified or :header-rows: is omitted
   const headerRows = useMemo(() => {
@@ -251,14 +256,14 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
   }, [children, headerRowCount]);
 
   // get all ID's for elements within header, or first two rows of body
-  const firstHeaderRowChildren = headerRows[0]?.children ?? [];
+  const firstHeaderRowChildren = isParentNode(headerRows[0]) ? headerRows[0].children : [];
   const elmIdsForScroll = getReferenceIds(firstHeaderRowChildren.concat(bodyRows.slice(0, 3)));
 
   const hasNestedTable = useMemo(() => includesNestedTable(bodyRows), [bodyRows]);
   const noTableNesting = !hasNestedTable && !ancestors?.table;
   const shouldAlternateRowColor = noTableNesting && bodyRows.length > 4;
 
-  const tableRef = useRef();
+  const tableRef = useRef(null);
   const columns = useMemo(() => generateColumns(headerRows[0], bodyRows), [bodyRows, headerRows]);
   const data = useMemo(() => generateRowsData(bodyRows, columns), [bodyRows, columns]);
   const table = useLeafyGreenTable({
@@ -324,9 +329,13 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
                 const isStub = colIndex <= stubColumnCount - 1;
                 const role = isStub ? 'rowheader' : null;
                 return (
-                  <Cell key={cell.id} className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)} role={role}>
+                  <Cell
+                    key={cell.id}
+                    className={cx(baseCellStyle, bodyCellStyle, isStub && stubCellStyle)}
+                    role={role ?? undefined}
+                  >
                     {/* Wraps cell content inside of a div so that all of its content are together when laid out. */}
-                    <div className={cx(bodyCellContentStyle)}>{cell.renderValue()}</div>
+                    <div className={cx(bodyCellContentStyle)}>{cell.renderValue() as ReactNode}</div>
                   </Cell>
                 );
               })}
@@ -336,19 +345,6 @@ const ListTable = ({ nodeData: { children, options }, ...rest }) => {
       </Table>
     </AncestorComponentContextProvider>
   );
-};
-
-ListTable.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    options: PropTypes.shape({
-      align: PropTypes.string,
-      'header-rows': PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-      'stub-columns': PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-      width: PropTypes.string,
-      widths: PropTypes.string,
-    }),
-  }).isRequired,
 };
 
 export default ListTable;
