@@ -52,7 +52,7 @@ export const tocData = (): TocItem[] => {
             },
             {
               label: 'bsondump',
-              url: '/docs/database-tools/bsondump/'
+              url: '/docs/database-tools/bsondump/',
             },
           ],
         },
@@ -145,7 +145,7 @@ export const tocData = (): TocItem[] => {
                     },
                   ],
                 },
-              ]
+              ],
             },
             {
               label: 'C# driver',
@@ -209,7 +209,7 @@ export const tocData = (): TocItem[] => {
                   ],
                 },
               ],
-            }
+            },
           ],
         },
       ],
