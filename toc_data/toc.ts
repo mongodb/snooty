@@ -128,7 +128,8 @@ export const tocData = (): TocItem[] => {
       glyph: 'Bulb',
       contentSite: DocSites.C2C,
       items: [
-        {label: 'c2c documentation',
+        {
+          label: 'c2c documentation',
           group: true,
           versionDropdown: true,
           items: [
@@ -145,7 +146,7 @@ export const tocData = (): TocItem[] => {
               url: '/docs/cluster-to-cluster-sync/:version/topologies/',
             },
           ],
-        }
+        },
       ],
     },
     {
