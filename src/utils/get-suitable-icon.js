@@ -1,12 +1,5 @@
 import { withPrefix } from 'gatsby';
 
-/**
- *
- * @param {string} icon
- * @param {boolean} iconDark
- * @param {boolean} isDarkMode
- * @returns {string}
- */
 export const getSuitableIcon = (icon, iconDark, isDarkMode) => {
   if (typeof icon == 'string') {
     const isPath = icon.startsWith('/');

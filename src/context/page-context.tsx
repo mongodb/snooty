@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { PageOptions, Root, TextNode } from '../types/ast';
+import { Root, TextNode } from '../types/ast';
 
 export type PageTemplateType =
   | 'blank'
@@ -35,12 +35,12 @@ export interface IALinkedData {
   height: string;
 }
 
-interface PageContextType {
+export interface PageContextType {
   page: Root | null;
   template: PageTemplateType | null;
   slug: string;
   tabsMainColumn: boolean | null;
-  options: PageOptions | null;
+  options: Root['options'] | null;
 }
 
 export const PageContext = createContext<PageContextType>({

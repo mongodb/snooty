@@ -1,5 +1,6 @@
 import { HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW } from '../components/Roles/Highlight';
 import { ActiveTabs, Selectors } from '../components/Tabs/tab-context';
+import { PageTemplateType } from '../context/page-context';
 
 type ComponentType =
   | Exclude<NodeType, 'directive' | 'directive_argument' | 'role' | 'target_identifier' | 'inline_target'>
@@ -24,7 +25,6 @@ type ComponentType =
   | 'field_list'
   | 'figure'
   | 'footnote'
-  | 'footnote_reference'
   | 'glossary'
   | 'guide-next'
   | 'hlist'
@@ -73,6 +73,7 @@ type DirectiveName =
   | 'dismissible-skills-card'
   | 'entry'
   | 'facet'
+  | 'hlist'
   | 'figure'
   | 'ia'
   | 'icon'
@@ -195,7 +196,7 @@ interface ParentNode extends Node {
 type PageOptionsKey = keyof PageOptions;
 
 type PageOptions = {
-  template: string;
+  template: PageTemplateType;
   default_tabs?: ActiveTabs;
   dismissible_skills_card?: DismissibleSkillsCardOptions;
   has_composable_tutorial?: boolean;
@@ -214,6 +215,7 @@ type PageOptions = {
 };
 
 interface Root extends ParentNode {
+  type: 'root';
   options: PageOptions;
   fileid: string;
 }
@@ -243,6 +245,7 @@ interface HeadingNode extends ParentNode {
   title: string;
   id: string;
   selector_ids: HeadingNodeSelectorIds;
+  children: [TextNode];
 }
 
 interface ParagraphNode extends ParentNode {
@@ -305,6 +308,20 @@ interface DismissibleSkillsCardNode extends Directive<DismissibleSkillsCardOptio
   options: DismissibleSkillsCardOptions;
 }
 
+type ListTableOptions = {
+  align?: string;
+  width?: string;
+  widths?: string;
+  'header-rows'?: string;
+  'stub-columns'?: string;
+};
+
+interface ListTableNode extends Directive<ListTableOptions> {
+  name: 'list-table';
+  children: ParentListNode[];
+  options?: ListTableOptions;
+}
+
 interface BaseFieldNode extends ParentNode {
   name: string;
   label?: string;
@@ -318,13 +335,11 @@ interface FieldListNode extends BaseFieldNode {
   type: 'field_list';
 }
 
-interface ListTableNode extends Directive {
-  name: 'list-table';
-  children: ListNode[];
-  options?: {
-    widths?: string;
-    'header-rows'?: string;
-  };
+interface ParentListNode extends ParentNode {
+  type: 'list';
+  enumtype: 'unordered' | 'ordered';
+  startat?: number;
+  children: ParentListItemNode[];
 }
 
 interface ListNode extends ParentNode {
@@ -334,8 +349,14 @@ interface ListNode extends ParentNode {
   children: ListItemNode[];
 }
 
+interface ParentListItemNode extends ParentNode {
+  type: 'listItem';
+  children: ListNode[];
+}
+
 interface ListItemNode extends ParentNode {
   type: 'listItem';
+  children: ParentNode[];
 }
 
 interface LiteralNode extends ParentNode {
@@ -368,8 +389,8 @@ type CardOptions = {
   cta?: string;
   headline?: string;
   icon: string;
-  'icon-dark': boolean;
-  'icon-alt': string;
+  'icon-dark'?: string;
+  'icon-alt'?: string;
   tag?: string;
   url: string;
 };
@@ -490,6 +511,7 @@ interface ContentsNode extends Directive<ContentsOptions> {
 interface TabsNode extends Directive {
   type: 'directive';
   name: 'tabs';
+  children: TabNode[];
 }
 
 interface TabOptions {
@@ -720,6 +742,15 @@ interface TwitterNode extends Directive<TwitterOptions> {
   options: TwitterOptions;
 }
 
+type HorizontalListNodeOptions = {
+  columns: number;
+};
+
+interface HorizontalListNode extends Directive<HorizontalListNodeOptions> {
+  name: 'hlist';
+  options: HorizontalListNodeOptions;
+}
+
 type VideoOptions = {
   title: string;
   description: string;
@@ -830,6 +861,7 @@ export type {
   HeadingNodeSelectorIds,
   HighlightNode,
   HighlightRoleNames,
+  HorizontalListNode,
   IAEntryNode,
   IANode,
   ImageNode,
@@ -853,6 +885,8 @@ export type {
   PageOptions,
   PageOptionsKey,
   ParagraphNode,
+  ParentListItemNode,
+  ParentListNode,
   ParentNode,
   ProcedureNode,
   ProcedureStyle,

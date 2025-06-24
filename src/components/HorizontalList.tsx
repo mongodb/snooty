@@ -1,7 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { getNestedValue } from '../utils/get-nested-value';
+import { HorizontalListNode, Node } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
+
+export type HorizontalListProps = {
+  nodeData: HorizontalListNode;
+};
 
 const HorizontalList = ({
   nodeData,
@@ -9,9 +13,9 @@ const HorizontalList = ({
     options: { columns },
   },
   ...rest
-}) => {
+}: HorizontalListProps) => {
   // Divide an array into an array of n arrays as evenly as possible
-  const chunkArray = (arr, n) => {
+  const chunkArray = (arr: Node[], n: number) => {
     if (n < 2) return [arr];
 
     const len = arr.length;
@@ -53,15 +57,6 @@ const HorizontalList = ({
       </tbody>
     </table>
   );
-};
-
-HorizontalList.propTypes = {
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    options: PropTypes.shape({
-      columns: PropTypes.number.isRequired,
-    }).isRequired,
-  }).isRequired,
 };
 
 export default HorizontalList;
