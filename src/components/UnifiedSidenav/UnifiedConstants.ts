@@ -5,7 +5,6 @@ export interface BreadCrumb {
 
 export interface TocItem {
   label: string;
-  glyph?: string;
   url?: string;
   group?: boolean;
   contentSite?: string;

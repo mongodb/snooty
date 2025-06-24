@@ -100,7 +100,7 @@ export const AccordionNavPanel = ({
             <BackLink
               className={cx(backLinkStyling)}
               onClick={() => setShowDriverBackBtn(false)}
-              href="/master/java/bianca.laube/DOP-5372/builders/index.html"
+              href="/docs/cluster-to-cluster-sync/current/quickstart/"
             >
               Back to Client Libraries
             </BackLink>
