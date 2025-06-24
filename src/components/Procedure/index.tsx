@@ -8,7 +8,7 @@ import {
 import { theme } from '../../theme/docsTheme';
 import { STRUCTURED_DATA_CLASSNAME, constructHowToSd } from '../../utils/structured-data';
 import { useHeadingContext } from '../../context/heading-context';
-import { Node, ProcedureNode, ProcedureStyle, StepNode } from '../../types/ast';
+import { ASTNode, ProcedureNode, ProcedureStyle, StepNode } from '../../types/ast';
 import { isDirectiveNode, isParentNode } from '../../types/ast-utils';
 import Step from './Step';
 
@@ -34,7 +34,7 @@ const StyledProcedure = styled('div')<{ procedureStyle: ProcedureStyle }>`
 `;
 
 // Returns an array of all "step" nodes nested within the "procedure" node and nested "include" nodes
-const getSteps = (children: Node[]) => {
+const getSteps = (children: ASTNode[]) => {
   const steps: StepNode[] = [];
 
   for (const child of children) {

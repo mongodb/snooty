@@ -5,7 +5,7 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import { DRIVER_ICON_MAP, DriverMap } from '../icons/DriverIconMap';
 import { theme } from '../../theme/docsTheme';
 import { PageContext } from '../../context/page-context';
-import { Node } from '../../types/ast';
+import { ASTNode } from '../../types/ast';
 import { ActiveTabs, TabContext } from './tab-context';
 import { makeChoices } from './make-choices';
 
@@ -63,7 +63,7 @@ export type TabSelectorProps = {
   handleClick: (activeTab: ActiveTabs) => void;
   iconMapping: DriverMap;
   name: string;
-  options: Record<string, Node[]>;
+  options: Record<string, ASTNode[]>;
   mainColumn: boolean;
 };
 

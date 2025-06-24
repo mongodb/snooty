@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import useHashAnchor from '../hooks/use-hash-anchor';
 import { theme } from '../theme/docsTheme';
-import type { TargetNode, Node } from '../types/ast';
+import type { TargetNode, ASTNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 import Permalink from './Permalink';
 
@@ -12,17 +12,17 @@ const headerBuffer = css`
 `;
 
 // Based on condition isValid, split array into two arrays: [[valid, invalid]]
-const partition = (array: Node[], isValid: (elem: Node) => boolean) => {
+const partition = (array: ASTNode[], isValid: (elem: ASTNode) => boolean) => {
   return array.reduce(
     ([pass, fail], elem) => {
       return isValid(elem) ? [[...pass, elem], fail] : [pass, [...fail, elem]];
     },
-    [[] as Node[], [] as Node[]]
+    [[] as ASTNode[], [] as ASTNode[]]
   );
 };
 
 interface DescriptionTermProps {
-  children?: Node[];
+  children?: ASTNode[];
   html_id: string;
 }
 

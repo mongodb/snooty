@@ -7,7 +7,7 @@ import Link from '../Link';
 import ConditionalWrapper from '../ConditionalWrapper';
 import { theme } from '../../theme/docsTheme';
 import type { MetadataGuide } from '../../types/data';
-import type { Node } from '../../types/ast';
+import type { ASTNode } from '../../types/ast';
 import { formatText } from '../../utils/format-text';
 
 const Container = styled('div')`
@@ -52,8 +52,8 @@ const defaultTarget: [string, MetadataGuide] = [
 ];
 
 export type ContentProps = {
-  argument: Node[];
-  children: Node[];
+  argument: ASTNode[];
+  children: ASTNode[];
   guideData: [string, MetadataGuide] | [null, null];
 };
 

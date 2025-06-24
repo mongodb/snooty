@@ -102,7 +102,6 @@ type DirectiveName =
   | 'tab'
   | 'tabs-selector'
   | 'time'
-  | 'title_reference'
   | 'transition'
   | 'toctree'
   | 'versionadded'
@@ -145,7 +144,8 @@ type NodeType =
   | 'tabs'
   | 'target'
   | 'target_identifier'
-  | 'text';
+  | 'text'
+  | 'title_reference';
 
 type RoleName = (typeof roleNames)[number];
 export const roleNames = [
@@ -191,7 +191,7 @@ interface TextParentNode extends Node {
 }
 
 interface ParentNode extends Node {
-  children: Node[];
+  children: ASTNode[];
 }
 
 type PageOptionsKey = keyof PageOptions;
@@ -289,7 +289,7 @@ interface ReferenceNode extends ParentNode {
 interface Directive<TOptions = DirectiveOptions> extends ParentNode {
   type: 'directive';
   name: DirectiveName;
-  argument: Node[];
+  argument: ASTNode[];
   domain?: string;
   options?: TOptions;
 }
@@ -370,12 +370,14 @@ interface TextNode extends Node {
   type: 'text';
   value: string;
 }
+
 type CardGroupOptions = {
   columns: number;
   layout: string;
   style: string;
   type?: string;
 };
+
 interface CardGroupNode extends Directive<CardGroupOptions> {
   name: 'card-group';
   options: CardGroupOptions;
@@ -402,7 +404,7 @@ interface DefinitionListNode extends ParentNode {
 
 interface DefinitionListItemNode extends ParentNode {
   type: 'definitionListItem';
-  term: Node[];
+  term: ASTNode[];
 }
 
 interface CodeNode extends Node {
@@ -561,7 +563,7 @@ interface AdmonitionNode extends Directive {
   name: AdmonitionName;
 }
 
-interface TocTreeEntry {
+interface TocTreeEntry extends ParentNode {
   title: [TextNode];
   slug: string;
   children: TocTreeEntry[];
@@ -636,7 +638,7 @@ interface ComposableNode extends Directive {
   // selections required to show this composable node
   // ie. {interface: 'drivers', language: 'nodejs'}
   selections: Record<string, string>;
-  children: Node[];
+  children: ASTNode[];
 }
 
 const highlightRoleNames = [HIGHLIGHT_BLUE, HIGHLIGHT_GREEN, HIGHLIGHT_RED, HIGHLIGHT_YELLOW];
@@ -706,7 +708,8 @@ interface StepNode extends Directive {
   name: 'step';
 }
 
-interface TitleReferenceNode {
+interface TitleReferenceNode extends ParentNode {
+  type: 'title_reference';
   children: TextNode[];
 }
 
@@ -793,10 +796,89 @@ interface InstruqtNode extends Directive<InstruqtOptions> {
 
 interface GuideNextNode extends Directive {}
 
+type ASTNode =
+  | AbbrRoleNode
+  | AdmonitionNode
+  | BannerNode
+  | BlockQuoteNode
+  | ButtonNode
+  | CardGroupNode
+  | CardNode
+  | ChapterNode
+  | ChaptersNode
+  | ClassRoleNode
+  | CodeNode
+  | CollapsibleNode
+  | CommunityDriverPill
+  | ContentsNode
+  | ComposableNode
+  | ComposableTutorialNode
+  | ContainerNode
+  | CTABannerNode
+  | DefinitionListNode
+  | DefinitionListItemNode
+  | Directive
+  | DirectiveArgumentNode
+  | DismissibleSkillsCardNode
+  | EmphasisNode
+  | FacetNode
+  | FieldNode
+  | FieldListNode
+  | FigureNode
+  | FootnoteNode
+  | FootnoteReferenceNode
+  | GuideNextNode
+  | HeadingNode
+  | HighlightNode
+  | ImageNode
+  | InlineTargetNode
+  | InstruqtNode
+  | IOCodeBlockNode
+  | IOInputNode
+  | IOOutputNode
+  | LinkNewTabNode
+  | ListNode
+  | ListTableNode
+  | ListItemNode
+  | LiteralNode
+  | LineBlockNode
+  | LineNode
+  | MetaNode
+  | MethodNode
+  | ParagraphNode
+  | ParentNode
+  | ProcedureNode
+  | ReferenceNode
+  | StandaloneHeaderNode
+  | SuperscriptNode
+  | SubscriptNode
+  | RefRoleNode
+  | ReleaseSpecificationNode
+  | RoleIconNode
+  | RoleManualNode
+  | Root
+  | StepNode
+  | StrongNode
+  | SubstitutionReferenceNode
+  | TabNode
+  | TabsNode
+  | TargetIdentifierNode
+  | TargetNode
+  | TextNode
+  | TitleReferenceNode
+  | TwitterNode
+  | TocTreeEntry
+  | TocTreeDirective
+  | VideoNode
+  | WayfindingDescriptionNode
+  | WayfindingNode
+  | WayfindingOptionNode;
+
 export type {
   AbbrRoleNode,
   AdmonitionNode,
   AdmonitionName,
+  ASTNode,
   BannerNode,
   BlockQuoteNode,
   ButtonNode,

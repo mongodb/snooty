@@ -18,7 +18,7 @@ import { TEMPLATE_CONTAINER_ID } from '../constants';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { getCompleteUrl, getUrl } from '../utils/url-utils';
 import { AppData, PageContext as PageContextType } from '../types/data';
-import { FootnoteNode, FootnoteReferenceNode, MetaNode, Node, TwitterNode } from '../types/ast';
+import { ASTNode, FootnoteNode, FootnoteReferenceNode, MetaNode, TwitterNode } from '../types/ast';
 import OfflineBanner from './Banner/OfflineBanner';
 import SEO from './SEO';
 import FootnoteContext, { Footnote } from './Footnote/footnote-context';
@@ -38,7 +38,7 @@ const LazyFooter = lazy(() => import('./Footer'));
 // Returns a map wherein each key is the footnote name, and each value is an object containing:
 // - labels: the numerical label for the footnote
 // - references: a list of the footnote reference ids that refer to this footnote
-const getFootnotes = (nodes: Node[]) => {
+const getFootnotes = (nodes: ASTNode[]) => {
   const footnotes: FootnoteNode[] = findAllKeyValuePairs(nodes, 'type', 'footnote');
   const footnoteReferences: FootnoteReferenceNode[] = findAllKeyValuePairs(nodes, 'type', 'footnote_reference');
   const numAnonRefs = footnoteReferences.filter(
@@ -95,7 +95,7 @@ const DocumentBody = (props: DocumentBodyProps) => {
   const tabsMainColumn = page?.options?.['tabs-selector-position'] === 'main';
 
   const initialization = () => {
-    const pageNodes: Node[] = getNestedValue(['children'], page) || [];
+    const pageNodes: ASTNode[] = getNestedValue(['children'], page) || [];
     const footnotes = getFootnotes(pageNodes);
 
     return { pageNodes, footnotes };

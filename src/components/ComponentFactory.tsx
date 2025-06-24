@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentType, Node, NodeName, NodeType, RoleName } from '../types/ast';
+import { ASTNode, ComponentType, NodeName, NodeType, RoleName } from '../types/ast';
 
 import { isRoleName } from '../types/ast-utils';
 import { LAZY_COMPONENTS } from './ComponentFactoryLazy';
@@ -240,7 +240,7 @@ function getComponentType(type: NodeType, name?: NodeName): React.ComponentType<
 }
 
 export type ComponentFactoryProps = {
-  nodeData: Node;
+  nodeData: ASTNode;
   slug?: string;
   sectionDepth?: string | number;
   [key: string]: unknown;

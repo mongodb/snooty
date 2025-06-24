@@ -1,7 +1,7 @@
 import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
 import { ImageRelativePaths } from '../context/image-context';
 import { PageTemplateType } from '../context/page-context';
-import { Node, Root, TextNode, TocTreeEntry } from './ast';
+import { ASTNode, Root, TextNode, TocTreeEntry } from './ast';
 
 type AppData = {
   page: {
@@ -127,7 +127,7 @@ type IATreeNode = {
   title: [TextNode];
   slug?: string;
   url?: string;
-  children?: Node[];
+  children?: ASTNode[];
 };
 
 // TODO: Refine structure
@@ -177,8 +177,8 @@ type MetadataGuides = Record<string, MetadataGuide>;
 type MetadataGuide = {
   chapter_name?: string;
   completion_time?: number;
-  description: string | Node[];
-  title: string | Node[];
+  description: string | ASTNode[];
+  title: string | ASTNode[];
 };
 
 type FacetBase = {

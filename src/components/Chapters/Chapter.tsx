@@ -10,7 +10,7 @@ import { theme } from '../../theme/docsTheme';
 import Link from '../Link';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { MetadataChapter, RemoteMetadata } from '../../types/data';
-import { ChapterNode, Node } from '../../types/ast';
+import { ASTNode, ChapterNode } from '../../types/ast';
 import ChapterNumberLabel from './ChapterNumberLabel';
 
 // Height and width of image
@@ -148,7 +148,7 @@ const GuideLink = styled(Link)`
 type GuideData = {
   path: string;
   time?: number;
-  title?: string | Node[];
+  title?: string | ASTNode[];
 };
 
 // Uses guides metadata to obtain the title and completion time of each guide in the chapter

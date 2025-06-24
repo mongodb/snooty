@@ -138,8 +138,6 @@ const getGuidesData = (chapters: MetadataChapters, guides: MetadataGuides): Card
       ? [{ type: 'text', value: data['description'] }]
       : data['description'];
 
-    console.log('data ', data);
-
     return {
       type: 'directive',
       name: 'card',
