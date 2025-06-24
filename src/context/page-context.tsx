@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { Root, TextNode } from '../types/ast';
+import { Root } from '../types/ast';
 
 export type PageTemplateType =
   | 'blank'
@@ -14,26 +14,6 @@ export type PageTemplateType =
   | 'search'
   | 'guide'
   | 'product-landing';
-
-export interface IAOption {
-  title: [TextNode];
-  slug?: string;
-  url?: string;
-  id?: string;
-  linked_data?: IALinkedData[];
-  children?: IAOption[];
-}
-
-export interface IALinkedData {
-  headline: string;
-  url: string;
-  icon: string;
-  'icon-alt': string;
-  'icon-dark'?: string;
-  checksum: string;
-  width: string;
-  height: string;
-}
 
 export interface PageContextType {
   page: Root | null;

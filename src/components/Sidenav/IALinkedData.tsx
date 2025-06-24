@@ -7,7 +7,7 @@ import Link from '../Link';
 import { DATA_TOC_NODE } from '../../constants';
 import { theme } from '../../theme/docsTheme';
 import { getSuitableIcon } from '../../utils/get-suitable-icon';
-import { IALinkedData as IALinkedDataType } from '../../context/page-context';
+import { IALinkedData as IALinkedDataType } from '../../types/data';
 
 const ulStyling = css`
   display: grid;

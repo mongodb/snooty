@@ -1,5 +1,5 @@
 import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
-import { IAOption, PageTemplateType } from '../context/page-context';
+import { PageTemplateType } from '../context/page-context';
 import { ImageRelativePaths } from '../context/image-context';
 import { Node, Root, TextNode, TocTreeEntry } from './ast';
 
@@ -188,6 +188,26 @@ interface FacetValue extends FacetBase {
   facets: Array<FacetOption>;
 }
 
+interface IAOption {
+  title: [TextNode];
+  slug?: string;
+  url?: string;
+  id?: string;
+  linked_data?: IALinkedData[];
+  children?: IAOption[];
+}
+
+interface IALinkedData {
+  headline: string;
+  url: string;
+  icon: string;
+  'icon-alt': string;
+  'icon-dark'?: string;
+  checksum: string;
+  width: string;
+  height: string;
+}
+
 export {
   AppData,
   BranchData,
@@ -196,6 +216,8 @@ export {
   FacetOption,
   FacetValue,
   Group,
+  IALinkedData,
+  IAOption,
   MetadataChapter,
   MetadataChapters,
   MetadataGuide,

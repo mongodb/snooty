@@ -5,7 +5,7 @@ import Link from '../Link';
 import { formatText } from '../../utils/format-text';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { DATA_TOC_NODE } from '../../constants';
-import { IALinkedData as IALinkedDataType, IAOption } from '../../context/page-context';
+import { IAOption, IALinkedData as IALinkedDataType } from '../../types/data';
 import { sideNavItemBasePadding, sideNavItemFontSize } from './styles/sideNavItem';
 import IALinkedData from './IALinkedData';
 
