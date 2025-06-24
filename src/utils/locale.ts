@@ -4,7 +4,6 @@ import { assertTrailingSlash } from './assert-trailing-slash';
 import { isBrowser } from './is-browser';
 import { normalizePath } from './normalize-path';
 import { removeLeadingSlash } from './remove-leading-slash';
-import { setLocalValue } from './browser-storage';
 
 export type AvailableLocaleType = 'en-us' | 'pt-br' | 'es' | 'ko-kr' | 'ja-jp' | 'it-it' | 'de-de' | 'fr-fr' | 'zh-cn';
 
@@ -22,6 +21,7 @@ export const NOTRANSLATE_CLASS = 'notranslate';
  * Key used to access browser storage for user's preferred locale
  */
 export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
+export const COOKIE_KEY_PREF_LOCALE = 'docsPrefLocale';
 
 // Update this as more languages are introduced
 // Because the client-side redirect script cannot use an import, PLEASE remember to update the list of supported languages
@@ -190,8 +190,16 @@ export const getLocaleMapping = (siteUrl: string, slug: string) => {
 };
 
 export const onSelectLocale = (locale: string) => {
+  // Set cookie to expire in 1 year
+  const cookieMaxAge = 1000 * 60 * 60 * 24 * 365;
+  const expirationDate = new Date();
+  expirationDate.setTime(expirationDate.getTime() + cookieMaxAge);
+  const cookieExpiration = `expires=${expirationDate}`;
+  // Set for all paths on the MongoDB domain so that it persists for every site and locale
+  const cookiePath = 'path=/';
+  window.document.cookie = `${COOKIE_KEY_PREF_LOCALE}=${locale};${cookieExpiration};${cookiePath}`;
+
   const location = window.location;
-  setLocalValue(STORAGE_KEY_PREF_LOCALE, locale);
   const localizedPath = localizePath(location.pathname, locale);
   window.location.pathname = localizedPath;
 };
