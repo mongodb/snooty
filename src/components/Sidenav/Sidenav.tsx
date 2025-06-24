@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useMemo, useEffect } from 'react';
 import { navigate } from 'gatsby';
-import PropTypes from 'prop-types';
 import { css, Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import Box from '@leafygreen-ui/box';
@@ -12,7 +11,7 @@ import { palette } from '@leafygreen-ui/palette';
 import { useLocation } from '@gatsbyjs/reach-router';
 import ChapterNumberLabel from '../Chapters/ChapterNumberLabel';
 import VersionDropdown from '../VersionDropdown';
-import useStickyTopValues from '../../hooks/useStickyTopValues';
+import useStickyTopValues, { StickyTopValues } from '../../hooks/useStickyTopValues';
 import { theme } from '../../theme/docsTheme';
 import { formatText } from '../../utils/format-text';
 import { TocContext } from '../../context/toc-context';
@@ -26,6 +25,8 @@ import { useOfflineDownloadContext } from '../OfflineDownloadModal/DownloadConte
 import { reportAnalytics } from '../../utils/report-analytics';
 import { displayNone } from '../../utils/display-none';
 import useScreenSize from '../../hooks/useScreenSize';
+import { MetadataChapters, MetadataGuides, PageContextRepoBranches } from '../../types/data';
+import { Root } from '../../types/ast';
 import GuidesLandingTree from './GuidesLandingTree';
 import GuidesTOCTree from './GuidesTOCTree';
 import IA from './IA';
@@ -40,7 +41,7 @@ import DocsHomeButton from './DocsHomeButton';
 const SIDENAV_WIDTH = 268;
 
 // Use LG's css here to style the component without passing props
-const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
+const sideNavStyling = ({ hideMobile, isCollapsed }: { hideMobile: boolean; isCollapsed: boolean }) => LeafyCSS`
   height: 100%;
 
   // Mobile & Tablet nav
@@ -77,38 +78,38 @@ const sideNavStyling = ({ hideMobile, isCollapsed }) => LeafyCSS`
 `;
 
 // Prevent content scrolling when the side nav is open on mobile and tablet screen sizes
-const disableScroll = (shouldDisableScroll) => css`
+const disableScroll = (shouldDisableScroll: boolean) => css`
   body {
     ${shouldDisableScroll && 'overflow: hidden;'}
   }
 `;
 
-const getTopAndHeight = (topValue) => {
+const getTopAndHeight = (topValue: string, scrollY: string) => {
   return css`
-    top: max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight});
-    height: calc(100vh - max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight}));
+    top: max(min(calc(${topValue} - var(${scrollY}))), ${theme.header.actionBarMobileHeight});
+    height: calc(100vh - max(min(calc(${topValue} - var(${scrollY}))), ${theme.header.actionBarMobileHeight}));
   `;
 };
 
 // Keep the side nav container sticky to allow LG's side nav to push content seamlessly
 const SidenavContainer = styled.div(
-  ({ topLarge, topMedium, topSmall }) => css`
+  ({ topLarge, topMedium, topSmall, scrollY }: StickyTopValues & { scrollY: string }) => css`
     grid-area: sidenav;
     position: sticky;
     z-index: ${theme.zIndexes.sidenav};
     top: 0px;
     height: calc(
       100vh + ${theme.header.actionBarMobileHeight} - ${topLarge} +
-        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(--scroll-y))
+        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(${scrollY}))
     );
 
     @media ${theme.screenSize.upToLarge} {
-      ${getTopAndHeight(topMedium)};
+      ${getTopAndHeight(topMedium, scrollY)};
       z-index: ${theme.zIndexes.actionBar - 1};
     }
 
     @media ${theme.screenSize.upToSmall} {
-      ${getTopAndHeight(topSmall)};
+      ${getTopAndHeight(topSmall, scrollY)};
     }
 
     nav {
@@ -177,7 +178,17 @@ const additionalLinks = [
   { glyph: 'University', title: 'Register for Courses', url: 'https://learn.mongodb.com/' },
 ];
 
-const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }) => {
+export type SidenavProps = {
+  chapters: MetadataChapters;
+  guides: MetadataGuides;
+  page: Root;
+  pageTitle: string;
+  repoBranches: PageContextRepoBranches;
+  slug: string;
+  eol: boolean;
+};
+
+const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }: SidenavProps) => {
   const { hideMobile, isCollapsed, setCollapsed, setHideMobile } = useContext(SidenavContext);
   const { project } = useSnootyMetadata();
   const isDocsLanding = project === 'landing';
@@ -198,7 +209,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
   }
 
   // Checks if user is navigating back to the homepage on docs landing
-  const [back, setBack] = React.useState(null);
+  const [back, setBack] = React.useState(false);
 
   const showAllProducts = page?.options?.['nav-show-all-products'];
   const ia = page?.options?.ia;
@@ -225,22 +236,14 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
     if (isGuidesLanding) {
       return <GuidesLandingTree chapters={chapters} handleClick={() => hideMobileSidenav()} />;
     } else if (isGuidesTemplate) {
-      return (
-        <GuidesTOCTree
-          chapters={chapters}
-          guides={guides}
-          handleClick={() => hideMobileSidenav()}
-          page={page}
-          slug={slug}
-        />
-      );
+      return <GuidesTOCTree chapters={chapters} guides={guides} handleClick={() => hideMobileSidenav()} slug={slug} />;
     }
 
     if (!Object.keys(activeToc).length) {
       return null;
     }
     return <Toctree handleClick={() => hideMobileSidenav()} slug={slug} toctree={activeToc} />;
-  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, page, slug, activeToc]);
+  }, [chapters, guides, hideMobileSidenav, isGuidesLanding, isGuidesTemplate, slug, activeToc]);
 
   const navTitle = isGuidesTemplate ? guides?.[slug]?.['chapter_name'] : formatText(activeToc.title);
 
@@ -249,7 +252,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
       return 0;
     }
 
-    const chapterName = guides?.[slug]?.['chapter_name'];
+    const chapterName = guides?.[slug]?.['chapter_name'] ?? '';
     return chapters[chapterName]?.['chapter_number'];
   }, [chapters, guides, isGuidesTemplate, slug]);
 
@@ -263,21 +266,16 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
           ${disableScroll(!hideMobile)}
         `}
       />
-      <SidenavContainer
-        {...topValues}
-        template={template}
-        style={{ '--scroll-y': `${viewport.scrollY}px` }}
-        id={SIDE_NAV_CONTAINER_ID}
-      >
+      <SidenavContainer {...topValues} scrollY={`${viewport.scrollY}px`} id={SIDE_NAV_CONTAINER_ID}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isTabletOrMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
             className={cx(sideNavStyling({ hideMobile, isCollapsed }))}
             collapsed={isCollapsed}
             setCollapsed={setCollapsed}
-            widthOverride={isTabletOrMobile ? viewportSize.width : SIDENAV_WIDTH}
+            widthOverride={isTabletOrMobile ? viewportSize?.width : SIDENAV_WIDTH}
           >
-            <IATransition back={back} hasIA={!!ia} slug={slug} isMobile={isTabletOrMobile}>
+            <IATransition back={back} hasIA={!!ia} slug={slug}>
               <NavTopContainer>
                 <ArtificialPadding />
                 <DocsHomeButton />
@@ -292,13 +290,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                     ia={ia}
                   />
                 )}
-                {showAllProducts && (
-                  <Border
-                    css={css`
-                      margin-bottom: 0;
-                    `}
-                  />
-                )}
+                {showAllProducts && <Border className={cx(LeafyCSS`margin-bottom: 0;`)} />}
               </NavTopContainer>
               {showAllProducts && <ProductsList />}
             </IATransition>
@@ -320,7 +312,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
                 </SideNavItem>
               </>
             )}
-            {showVersions && <VersionDropdown slug={slug} repoBranches={repoBranches} eol={eol} />}
+            {showVersions && <VersionDropdown eol={eol} />}
             {!ia && navContent}
 
             {isDocsLanding && (
@@ -360,17 +352,6 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol })
       </SidenavContainer>
     </>
   );
-};
-
-Sidenav.propTypes = {
-  chapters: PropTypes.object,
-  guides: PropTypes.object,
-  page: PropTypes.shape({
-    options: PropTypes.object,
-  }).isRequired,
-  repoBranches: PropTypes.object,
-  slug: PropTypes.string.isRequired,
-  eol: PropTypes.bool.isRequired,
 };
 
 export default Sidenav;

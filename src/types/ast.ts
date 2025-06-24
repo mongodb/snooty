@@ -71,9 +71,11 @@ type DirectiveName =
   | 'deprecated'
   | 'directive'
   | 'dismissible-skills-card'
+  | 'entry'
   | 'facet'
   | 'hlist'
   | 'figure'
+  | 'ia'
   | 'icon'
   | 'image'
   | 'include'
@@ -563,18 +565,21 @@ interface AdmonitionNode extends Directive {
   name: AdmonitionName;
 }
 
+type TocTreeOptions = {
+  drawer?: boolean;
+  project?: string;
+  versions?: string[];
+  osiris_parent?: boolean;
+  tocicon?: string;
+  version?: string;
+  urls?: Record<string, string>;
+};
 interface TocTreeEntry {
   title: [TextNode];
   slug: string;
   children: TocTreeEntry[];
   options?: TocTreeOptions;
-}
-
-interface TocTreeOptions {
-  drawer?: boolean;
-  project?: string;
-  versions?: string[];
-  osiris_parent?: boolean;
+  url?: string;
 }
 
 interface TocTreeDirective extends Directive<TocTreeOptions> {
@@ -647,6 +652,19 @@ type HighlightRoleNames = (typeof highlightRoleNames)[number];
 interface HighlightNode extends ParentNode {
   type: 'role';
   name: HighlightRoleNames;
+}
+
+interface IANode extends Directive {
+  name: 'ia';
+}
+
+type IAEntryNodeOptions = {
+  url: string;
+};
+
+interface IAEntryNode extends Directive {
+  name: 'entry';
+  options: IAEntryNodeOptions;
 }
 
 interface LinkNewTabNode extends ParentNode {
@@ -844,6 +862,8 @@ export type {
   HighlightNode,
   HighlightRoleNames,
   HorizontalListNode,
+  IAEntryNode,
+  IANode,
   ImageNode,
   InlineTargetNode,
   InstruqtNode,
