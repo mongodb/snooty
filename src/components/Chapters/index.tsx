@@ -11,7 +11,7 @@ import { theme } from '../../theme/docsTheme';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { getPlaintext } from '../../utils/get-plaintext';
 import useStickyTopValues, { StickyTopValues } from '../../hooks/useStickyTopValues';
-import { CardGroupNode, CardNode, ChaptersNode } from '../../types/ast';
+import { CardGroupNode, CardNode, ChaptersNode, TextNode } from '../../types/ast';
 import { MetadataChapters, MetadataGuides, RemoteMetadata } from '../../types/data';
 import RightColumn from './RightColumn';
 
@@ -135,7 +135,7 @@ const getGuidesData = (chapters: MetadataChapters, guides: MetadataGuides): Card
     const [slug, data] = guide;
     const chapterName = data['chapter_name'];
     const children = isString(data['description'])
-      ? [{ type: 'text', value: data['description'] }]
+      ? ([{ type: 'text', value: data['description'] }] as TextNode[])
       : data['description'];
 
     return {
