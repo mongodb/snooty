@@ -5,6 +5,7 @@ const COMMANDLINE_TOOLS = 'database-tools';
 const CLOUD_DOCS = 'cloud-docs';
 const CHARTS = 'charts';
 const CSHARP = 'csharp';
+const C2C = 'c2c'
 
 // each url has to be unique with the prefix!!!!
 export const tocData = (): TocItem[] => {
@@ -126,6 +127,32 @@ export const tocData = (): TocItem[] => {
             },
           ],
         },
+      ],
+    },
+    {
+      label: 'cluster to cluster',
+      url: '/docs/cluster-to-cluster-sync/:version/quick-start',
+      glyph: 'Bulb',
+      prefix: C2C,
+      items: [
+        {label: 'c2c documentation',
+          group: true,
+          versionDropdown: true,
+          items: [
+            {
+              label: 'Installation',
+              url: '/docs/cluster-to-cluster-sync/:version/installation/',
+            },
+            {
+              label: 'Connect',
+              url: '/docs/cluster-to-cluster-sync/:version/connecting/',
+            },
+            {
+              label: 'Cluster Topologies',
+              url: '/docs/cluster-to-cluster-sync/:version/topologies/',
+            },
+          ],
+        }
       ],
     },
     {
