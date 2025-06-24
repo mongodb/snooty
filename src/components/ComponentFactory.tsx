@@ -1,5 +1,5 @@
 import React from 'react';
-import { ASTNode, ComponentType, NodeName, NodeType, RoleName } from '../types/ast';
+import { ASTNode, ComponentType, NodeName, NodeType, RoleName, Root as RootNode } from '../types/ast';
 
 import { isRoleName } from '../types/ast-utils';
 import { LAZY_COMPONENTS } from './ComponentFactoryLazy';
@@ -243,6 +243,7 @@ export type ComponentFactoryProps = {
   nodeData: ASTNode;
   slug?: string;
   sectionDepth?: string | number;
+  page?: RootNode;
   [key: string]: unknown;
 };
 

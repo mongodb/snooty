@@ -9,8 +9,12 @@ import { RemoteMetadata } from '../types/data';
 import { TocTreeEntry } from '../types/ast';
 import { VersionContext } from './version-context';
 
-const TocContext = createContext({
-  activeToc: {}, // table of contents, represented by head node
+export type TocContextType = {
+  activeToc: TocTreeEntry;
+};
+
+const TocContext = createContext<TocContextType>({
+  activeToc: {} as TocTreeEntry, // table of contents, represented by head node
 });
 
 export type TocContextProviderProps = {

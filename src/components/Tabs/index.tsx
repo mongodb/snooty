@@ -15,17 +15,18 @@ import { getLocalValue } from '../../utils/browser-storage';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { TABS_CLASSNAME } from '../../utils/head-scripts/offline-ui/tabs';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { Node, Root, TabsNode } from '../../types/ast';
 import { TabContext } from './tab-context';
 import { TabHashContext, TabHashProvider } from './tab-hash-context';
 
 const TAB_BUTTON_SELECTOR = 'button[role="tab"]';
 
-const getTabId = (node) => getNestedValue(['options', 'tabid'], node);
+const getTabId = (node: Node) => getNestedValue(['options', 'tabid'], node);
 
 // Name anonymous tabsets by alphabetizing their tabids and concatenating with a forward slash
-const generateAnonymousTabsetName = (tabIds) => [...tabIds].sort().join('/');
+const generateAnonymousTabsetName = (tabIds: string[]) => [...tabIds].sort().join('/');
 
-const getPosition = (element) => {
+const getPosition = (element: HTMLElement) => {
   if (!isBrowser || !element) return { x: 0, y: 0 };
   const { x, y } = element.getBoundingClientRect();
   return { x, y };
@@ -70,7 +71,7 @@ const landingTabsStyling = css`
   }
 `;
 
-const getTabsStyling = ({ isHidden, isProductLanding }) => css`
+const getTabsStyling = ({ isHidden, isProductLanding }: { isHidden: boolean; isProductLanding: boolean }) => css`
   ${defaultTabsStyling};
   ${isHidden && hiddenTabsStyling};
   ${isProductLanding && landingTabsStyling};
@@ -118,7 +119,12 @@ const offlineStyling = css`
   }
 `;
 
-const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
+export type TabsProps = {
+  nodeData: TabsNode;
+  page: Root;
+};
+
+const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps) => {
   const { hash } = useLocation();
   const { activeTabs, selectors, setActiveTab } = useContext(TabContext);
   const { setActiveTabToHashTab } = useContext(TabHashContext);
@@ -132,9 +138,9 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
     return activeTabIdx > -1 ? activeTabIdx : 0;
   });
 
-  const scrollAnchorRef = useRef();
+  const scrollAnchorRef = useRef<HTMLDivElement>(null);
   // Hide tabset if it includes the :hidden: option, or if it is controlled by a dropdown selector
-  const isHidden = options.hidden || Object.keys(selectors).includes(tabsetName);
+  const isHidden = !!options.hidden || Object.keys(selectors).includes(tabsetName);
   const isProductLanding = page?.options?.template === 'product-landing';
   const { lastHeading } = useHeadingContext();
 
@@ -167,12 +173,12 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
   }, [activeTabs, tabIds, tabsetName]);
 
   const handleClick = useCallback(
-    (index) => {
+    (index: number) => {
       if (activeTab === index) {
         return;
       }
       const tabId = tabIds[index];
-      const priorAnchorOffset = getPosition(scrollAnchorRef.current).y;
+      const priorAnchorOffset = scrollAnchorRef.current ? getPosition(scrollAnchorRef.current).y : undefined;
 
       setActiveTab({ [tabsetName]: tabId });
       reportAnalytics('Tab Selected', {
@@ -182,7 +188,9 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
 
       // Delay preserving scroll behavior by 40ms to allow other tabset content bodies to render
       window.setTimeout(() => {
-        window.scrollTo(0, getPosition(scrollAnchorRef.current).y + window.scrollY - priorAnchorOffset);
+        if (scrollAnchorRef.current && priorAnchorOffset) {
+          window.scrollTo(0, getPosition(scrollAnchorRef.current).y + window.scrollY - priorAnchorOffset);
+        }
       }, 40);
     },
     [activeTab, setActiveTab, tabIds, tabsetName]
@@ -224,7 +232,12 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }) => {
                 : tabId;
 
             return (
-              <LeafyTab data-tabid={tabId} className={isOfflineDocsBuild && offlineStyling} key={tabId} name={tabTitle}>
+              <LeafyTab
+                data-tabid={tabId}
+                className={isOfflineDocsBuild ? offlineStyling : ''}
+                key={tabId}
+                name={tabTitle}
+              >
                 <HeadingContextProvider
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
                 >

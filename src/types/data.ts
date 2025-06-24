@@ -1,6 +1,6 @@
 import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
-import { ImageRelativePaths } from '../context/image-context';
 import { PageTemplateType } from '../context/page-context';
+import { ImageRelativePaths } from '../context/image-context';
 import { ASTNode, Root, TextNode, TocTreeEntry } from './ast';
 
 type AppData = {
@@ -106,7 +106,7 @@ type RemoteMetadata = {
   parentPaths: Record<string, BreadcrumbType[]>;
   static_files: Record<string, Buffer>;
   canonical?: string | null;
-  iatree?: IATreeNode;
+  iatree?: IAOption;
   openapi_pages?: Record<string, OpenApiPage>;
   associated_products?: AssociatedProduct[];
   multiPageTutorials?: Record<string, MultiPageTutorial>;
@@ -122,15 +122,6 @@ type MultiPageTutorial = {
   total_steps: number;
 };
 
-// TODO: Refine structure
-type IATreeNode = {
-  title: [TextNode];
-  slug?: string;
-  url?: string;
-  children?: ASTNode[];
-};
-
-// TODO: Refine structure
 type OpenApiPage = {
   source_type: string;
   source: string;
@@ -198,6 +189,26 @@ interface FacetValue extends FacetBase {
   facets: Array<FacetOption>;
 }
 
+interface IAOption {
+  title: [TextNode];
+  slug?: string;
+  url?: string;
+  id?: string;
+  linked_data?: IALinkedData[];
+  children?: IAOption[];
+}
+
+interface IALinkedData {
+  headline: string;
+  url: string;
+  icon: string;
+  'icon-alt': string;
+  'icon-dark'?: string;
+  checksum: string;
+  width: string;
+  height: string;
+}
+
 export {
   AppData,
   BranchData,
@@ -206,6 +217,8 @@ export {
   FacetOption,
   FacetValue,
   Group,
+  IALinkedData,
+  IAOption,
   MetadataChapter,
   MetadataChapters,
   MetadataGuide,

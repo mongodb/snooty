@@ -143,7 +143,7 @@ const queryElementWithin = (versionDropdown, role) => within(versionDropdown).qu
 const mountConsumer = async () => {
   const res = render(
     <VersionContextProvider repoBranches={docsNodeRepoBranches} slug={'/'}>
-      <VersionDropdown eol={mockData.eol} slug={mockData.slug} repoBranches={docsNodeRepoBranches} />
+      <VersionDropdown eol={mockData.eol} />
     </VersionContextProvider>
   );
   // Wait for any on-mount updates to occur. Prevents warnings about needing to wrap updates in act()
