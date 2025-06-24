@@ -19,7 +19,7 @@ export type GuidesTOCTreeProps = {
 
 const GuidesTOCTree = ({ chapters, guides, handleClick, slug }: GuidesTOCTreeProps) => {
   const currentChapterName = guides?.[slug]?.['chapter_name'];
-  const guidesInChapter: string[] = currentChapterName ? chapters?.[currentChapterName]?.guides ?? [] : [];
+  const guidesInChapter: string[] = chapters?.[currentChapterName ?? '']?.guides ?? [];
   const { activeHeadingId, headingNodes } = useContext(ContentsContext);
 
   return (

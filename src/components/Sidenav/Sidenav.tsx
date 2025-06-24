@@ -181,7 +181,6 @@ const additionalLinks = [
 export type SidenavProps = {
   chapters: MetadataChapters;
   guides: MetadataGuides;
-  // TODO: Unsure
   page: Root;
   pageTitle: string;
   repoBranches: PageContextRepoBranches;

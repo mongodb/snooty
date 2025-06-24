@@ -112,14 +112,14 @@ const TOCNode = ({ activeSection, handleClick, level = BASE_NODE_LEVEL, node, pa
       return (
         <SideNavItem
           className={cx(sideNavItemTOCStyling({ level }))}
-          as={
-            isOfflineDocsBuild
-              ? ({ children, ...props }: LinkProps) => (
-                  <Link {...props} to={target}>
-                    {children}
-                  </Link>
-                )
-              : ({ children, ...props }: LinkProps) => <a {...props}>{children}</a>
+          as={({ children, ...props }: LinkProps) =>
+            isOfflineDocsBuild ? (
+              <Link {...props} to={target}>
+                {children}
+              </Link>
+            ) : (
+              <a {...props}>{children}</a>
+            )
           }
           onClick={() => {
             setIsOpen(!isOpen);
