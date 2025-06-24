@@ -5,7 +5,7 @@ const COMMANDLINE_TOOLS = 'database-tools';
 const CLOUD_DOCS = 'cloud-docs';
 const CHARTS = 'charts';
 const CSHARP = 'csharp';
-const C2C = 'c2c'
+const C2C = 'cluster-sync'
 
 // each url has to be unique with the prefix!!!!
 export const tocData = (): TocItem[] => {
@@ -131,7 +131,7 @@ export const tocData = (): TocItem[] => {
     },
     {
       label: 'cluster to cluster',
-      url: '/docs/cluster-to-cluster-sync/:version/quick-start',
+      url: '/docs/cluster-to-cluster-sync/:version/quickstart',
       glyph: 'Bulb',
       prefix: C2C,
       items: [
