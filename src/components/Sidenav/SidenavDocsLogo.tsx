@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { baseUrl } from '../../utils/base-url';
 import { theme } from '../../theme/docsTheme';
@@ -11,7 +10,11 @@ const PaddedDocsLogo = styled(DocsLogo)`
   margin: 0px ${theme.size.medium};
 `;
 
-const SidenavDocsLogo = ({ border, ...props }) => {
+export type SidenavDocsLogoProps = {
+  border: ReactNode;
+};
+
+const SidenavDocsLogo = ({ border, ...props }: SidenavDocsLogoProps) => {
   return (
     <>
       <Link to={baseUrl()}>
@@ -20,10 +23,6 @@ const SidenavDocsLogo = ({ border, ...props }) => {
       {border}
     </>
   );
-};
-
-SidenavDocsLogo.propTypes = {
-  border: PropTypes.element,
 };
 
 export default SidenavDocsLogo;
