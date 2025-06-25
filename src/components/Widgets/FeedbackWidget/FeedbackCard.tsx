@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { theme } from '../../../../src/theme/docsTheme';
+import { theme } from '../../../theme/docsTheme';
 import useScreenSize from '../../../hooks/useScreenSize';
 import useStickyTopValues from '../../../hooks/useStickyTopValues';
 import { InstruqtContext } from '../../Instruqt/instruqt-context';

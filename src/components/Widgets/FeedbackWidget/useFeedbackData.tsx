@@ -1,6 +1,12 @@
 import useSnootyMetadata from '../../../utils/use-snooty-metadata';
 
-export default function useFeedbackData({ slug, title, url }) {
+export type UseFeedbackDataProps = {
+  slug: string;
+  title: string;
+  url: string;
+};
+
+export default function useFeedbackData({ slug, title, url }: UseFeedbackDataProps) {
   const { project } = useSnootyMetadata();
   const feedback_data = {
     slug,
