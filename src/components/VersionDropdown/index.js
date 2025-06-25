@@ -103,9 +103,9 @@ const createOption = (branch) => {
   );
 };
 
-const VersionDropdown = ({ eol }) => {
+const VersionDropdown = () => {
   const { parserBranch } = useSiteMetadata();
-  const { project } = useSnootyMetadata();
+  const { project, eol } = useSnootyMetadata();
   const { availableVersions, availableGroups, onVersionSelect, showEol, activeVersions } = useContext(VersionContext);
   let branches = availableVersions[project];
   let groups = availableGroups[project];
