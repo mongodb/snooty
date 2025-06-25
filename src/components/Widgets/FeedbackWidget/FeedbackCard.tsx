@@ -1,12 +1,8 @@
-import React, { useContext, useMemo } from 'react';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import LeafygreenCard from '@leafygreen-ui/card';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { theme } from '../../../theme/docsTheme';
 import useScreenSize from '../../../hooks/useScreenSize';
-import useStickyTopValues from '../../../hooks/useStickyTopValues';
-import { InstruqtContext } from '../../Instruqt/instruqt-context';
-import { HeaderContext } from '../../Header/header-context';
 import ProgressBar from './components/PageIndicators';
 import CloseButton from './components/CloseButton';
 import { useFeedbackContext } from './context';
@@ -42,19 +38,16 @@ const Card = styled(LeafygreenCard)`
   }
 `;
 
-const FeedbackCard = ({ isOpen, children }) => {
+export type FeedbackCardProps = {
+  isOpen: boolean;
+  children: ReactNode;
+};
+
+const FeedbackCard = ({ isOpen, children }: FeedbackCardProps) => {
   const { abandon } = useFeedbackContext();
-  const { isOpen: isLabOpen } = useContext(InstruqtContext);
   // Ensure FeedbackCard can be fullscreen size
   const { isMobile } = useScreenSize();
-  const { darkMode } = useDarkMode();
-  const { topSmall } = useStickyTopValues(false, true);
   useNoScroll(isMobile);
-  const { bannerContent } = useContext(HeaderContext);
-  const topBuffer = useMemo(
-    () => parseInt(topSmall, 10) + (!!bannerContent ? parseInt(theme.header.bannerHeight, 10) : 0) + 'px',
-    [bannerContent, topSmall]
-  );
 
   const onClose = () => {
     abandon();
@@ -62,7 +55,7 @@ const FeedbackCard = ({ isOpen, children }) => {
 
   return (
     isOpen && (
-      <CardContainer darkMode={darkMode} top={topBuffer} hasOpenLabDrawer={isLabOpen}>
+      <CardContainer>
         <Card>
           <CloseButton onClick={onClose} />
           <ProgressBar />

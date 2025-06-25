@@ -1,20 +1,74 @@
-import React, { useState, useCallback, useContext, useEffect, createContext, useTransition } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useContext,
+  useEffect,
+  createContext,
+  useTransition,
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+} from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
-import { getViewport } from '../../../hooks/useViewport';
+import { getViewport, Viewport } from '../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { upsertFeedback, useRealmUser } from './realm';
+import { FeedbackPageData } from './useFeedbackData';
 
-const FeedbackContext = createContext();
+type SubmitAllFeedbackProps = {
+  comment?: string;
+  email?: string;
+  dataUri: string;
+  viewport: Viewport;
+};
 
-export function FeedbackProvider({ page, test = {}, ...props }) {
+export type Feedback = {
+  rating?: number;
+};
+
+export type FeedbackContextType = {
+  feedback;
+  progress: boolean[];
+  view: FeedbackViewType;
+  screenshotTaken: boolean;
+  setScreenshotTaken: Dispatch<SetStateAction<boolean>>;
+  initializeFeedback;
+  setProgress: Dispatch<SetStateAction<boolean[]>>;
+  submitAllFeedback: (props: SubmitAllFeedbackProps) => void;
+  abandon: () => void;
+  selectedRating: number;
+  setSelectedRating: Dispatch<SetStateAction<number>>;
+  selectInitialRating: (rating: number) => Promise<void>;
+  isScreenshotButtonClicked: boolean;
+  setIsScreenshotButtonClicked: Dispatch<SetStateAction<boolean>>;
+  detachForm: boolean;
+  setDetachForm: Dispatch<SetStateAction<boolean>>;
+};
+
+export type FeedbackViewType = 'waiting' | 'comment' | 'rating' | 'submitted';
+export type FeedbackTestInput = {
+  feedback: Feedback;
+  view: FeedbackViewType;
+  screenshotTaken: boolean;
+};
+
+export type FeedbackContextProps = {
+  page: FeedbackPageData;
+  test?: FeedbackTestInput;
+  children: ReactNode;
+};
+
+const FeedbackContext = createContext<FeedbackContextType>();
+
+export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps) {
   const hasExistingFeedback =
-    !!test.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
+    !!test?.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
   const [feedback, setFeedback] = useState(() => (hasExistingFeedback && test.feedback) || undefined);
-  const [feedbackId, setFeedbackId] = useState(() => undefined);
+  const [feedbackId, setFeedbackId] = useState<string | undefined>(() => undefined);
   const [detachForm, setDetachForm] = useState(false);
-  const [selectedRating, setSelectedRating] = useState(test.feedback?.rating || undefined);
-  const [view, setView] = useState(test.view || 'waiting');
-  const [screenshotTaken, setScreenshotTaken] = useState(test.screenshotTaken || false);
+  const [selectedRating, setSelectedRating] = useState<number | undefined>(test?.feedback?.rating || undefined);
+  const [view, setView] = useState<FeedbackViewType>(test?.view || 'waiting');
+  const [screenshotTaken, setScreenshotTaken] = useState(test?.screenshotTaken || false);
   const [progress, setProgress] = useState([true, false, false]);
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [, startTransition] = useTransition();
@@ -23,7 +77,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   const { snootyEnv } = useSiteMetadata();
 
   const createFeedbackPayload = useCallback(
-    (rating, email, dataUri, viewport, comment) => {
+    (rating: number, email?: string, dataUri?: string, viewport?: Viewport, comment?: string) => {
       const res = {
         page: {
           title: page.title,
@@ -38,7 +92,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
         category: createSentiment(rating),
         rating: rating,
         snootyEnv,
-        ...test.feedback,
+        ...test?.feedback,
       };
       if (user && user.id) {
         res.user.stitch_id = user.id;
@@ -58,22 +112,22 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
 
       return res;
     },
-    [feedbackId, page.docs_property, page.slug, page.title, page.url, snootyEnv, test.feedback, user]
+    [feedbackId, page.docs_property, page.slug, page.title, page.url, snootyEnv, test?.feedback, user]
   );
 
   // Create a new feedback document
-  const initializeFeedback = (nextView = 'rating') => {
+  const initializeFeedback = (nextView: FeedbackViewType = 'rating') => {
     const newFeedback = {};
     startTransition(() => {
       setFeedback(newFeedback);
       setView(nextView);
       setProgress([true, false, false]);
-      setSelectedRating();
+      setSelectedRating(undefined);
     });
     return { newFeedback };
   };
 
-  const selectInitialRating = async (ratingValue) => {
+  const selectInitialRating = async (ratingValue: number) => {
     setSelectedRating(ratingValue);
     setView('comment');
     setProgress([false, true, false]);
@@ -87,7 +141,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   };
 
   // Create a placeholder sentiment based on the selected rating to avoid any breaking changes from external dependencies
-  const createSentiment = (selectedRating) => {
+  const createSentiment = (selectedRating: number) => {
     if (selectedRating < 3) {
       return 'Negative';
     } else if (selectedRating === 3) {
@@ -108,7 +162,7 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
     }
   };
 
-  const submitAllFeedback = async ({ comment = '', email = '', dataUri, viewport }) => {
+  const submitAllFeedback = async ({ comment = '', email = '', dataUri, viewport }: SubmitAllFeedbackProps) => {
     // Route the user to their "next steps"
     setProgress([false, false, true]);
     setView('submitted');
@@ -128,8 +182,8 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
         await retryFeedbackSubmission(newFeedback);
       }
     } finally {
-      setFeedback();
-      setFeedbackId();
+      setFeedback(undefined);
+      setFeedbackId(undefined);
     }
   };
 
@@ -137,9 +191,9 @@ export function FeedbackProvider({ page, test = {}, ...props }) {
   // initial state.
   const abandon = useCallback(() => {
     setView('waiting');
-    setFeedback();
-    setSelectedRating();
-    setFeedbackId();
+    setFeedback(undefined);
+    setSelectedRating(undefined);
+    setFeedbackId(undefined);
     setIsScreenshotButtonClicked(false);
     setDetachForm(false);
   }, []);

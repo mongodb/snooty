@@ -2,7 +2,14 @@ import React from 'react';
 import { isBrowser } from '../utils/is-browser';
 import debounce from '../utils/debounce';
 
-export function getViewport() {
+export type Viewport = {
+  scrollY: number;
+  scrollX: number;
+  width?: number;
+  height?: number;
+};
+
+export function getViewport(): Viewport {
   const viewport = isBrowser
     ? {
         width: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),

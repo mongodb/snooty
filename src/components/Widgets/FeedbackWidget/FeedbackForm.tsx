@@ -3,13 +3,18 @@ import { cx } from '@leafygreen-ui/emotion';
 import Loadable from '@loadable/component';
 import { createPortal } from 'react-dom';
 import useScreenSize from '../../../hooks/useScreenSize';
-import { useFeedbackContext } from './context';
+import { type FeedbackViewType, useFeedbackContext } from './context';
 import FeedbackCard from './FeedbackCard';
 import RatingView from './views/RatingView';
 import SubmittedView from './views/SubmittedView';
 const CommentView = Loadable(() => import('./views/CommentView'));
 
-export const FeedbackContent = ({ view }) => {
+export type FeedbackContentProps = {
+  view: FeedbackViewType;
+};
+
+export const FeedbackContent = ({ view }: FeedbackContentProps) => {
+  if (view === 'waiting') return null;
   const View = {
     rating: RatingView,
     comment: CommentView,
@@ -21,7 +26,11 @@ export const FeedbackContent = ({ view }) => {
 export const feedbackId = 'feedback-card';
 export const fwFormId = 'feedback-form';
 
-const FeedbackForm = ({ className }) => {
+export type FeedbackFormProps = {
+  className?: string;
+};
+
+const FeedbackForm = ({ className }: FeedbackFormProps) => {
   const { view, detachForm } = useFeedbackContext();
   const { isTabletOrMobile } = useScreenSize();
   const isOpen = view !== 'waiting';
