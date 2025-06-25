@@ -1,7 +1,7 @@
 import { BreadcrumbType } from '../components/Breadcrumbs/BreadcrumbContainer';
 import { PageTemplateType } from '../context/page-context';
 import { ImageRelativePaths } from '../context/image-context';
-import { Node, Root, TextNode, TocTreeEntry } from './ast';
+import { ASTNode, Root, TextNode, TocTreeEntry } from './ast';
 
 type AppData = {
   page: {
@@ -110,6 +110,8 @@ type RemoteMetadata = {
   openapi_pages?: Record<string, OpenApiPage>;
   associated_products?: AssociatedProduct[];
   multiPageTutorials?: Record<string, MultiPageTutorial>;
+  chapters?: MetadataChapters;
+  guides?: MetadataGuides;
 };
 
 type SlugToTitle = RemoteMetadata['slugToTitle'];
@@ -120,7 +122,6 @@ type MultiPageTutorial = {
   total_steps: number;
 };
 
-// TODO: Refine structure
 type OpenApiPage = {
   source_type: string;
   source: string;
@@ -167,8 +168,8 @@ type MetadataGuides = Record<string, MetadataGuide>;
 type MetadataGuide = {
   chapter_name?: string;
   completion_time?: number;
-  description: string | Node[];
-  title: string | Node[];
+  description: string | ASTNode[];
+  title: string | ASTNode[];
 };
 
 type FacetBase = {

@@ -6,7 +6,7 @@ import { theme } from '../../theme/docsTheme';
 import ComponentFactory from '../ComponentFactory';
 import { getPlaintext } from '../../utils/get-plaintext';
 import { NOTRANSLATE_CLASS } from '../../utils/locale';
-import type { WayfindingNode, Node } from '../../types/ast';
+import type { WayfindingNode, ASTNode } from '../../types/ast';
 import { isWayfindingOptionNode, isWayfindingDescriptionNode } from '../../types/ast-utils';
 import WayfindingOption from './WayfindingOption';
 
@@ -62,7 +62,7 @@ const showAllButtonStyle = css`
   font-weight: 500;
 `;
 
-const getWayfindingComponents = (children: Node[]) => {
+const getWayfindingComponents = (children: ASTNode[]) => {
   const descriptionNodeIdx = children.findIndex(isWayfindingDescriptionNode);
   const [foundDescriptionNode] = descriptionNodeIdx >= 0 ? children.splice(descriptionNodeIdx, 1) : [];
 

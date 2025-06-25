@@ -70,7 +70,7 @@ exports[`renders correctly 1`] = `
   }
 }
 
-.emotion-3 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -85,12 +85,12 @@ exports[`renders correctly 1`] = `
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-3 {
+  .emotion-2 {
     grid-area: description;
   }
 }
 
-.emotion-5 {
+.emotion-3 {
   background-color: #E3FCF7;
   border-radius: 4px;
   color: #001E2B;
@@ -102,22 +102,22 @@ exports[`renders correctly 1`] = `
   width: 83px;
 }
 
-.dark-theme .emotion-5 {
+.dark-theme .emotion-3 {
   background-color: #0C2657;
   color: #C3E7FE;
 }
 
-.emotion-7 {
+.emotion-4 {
   font-size: 18px;
   font-weight: 500;
   margin-top: 8px;
 }
 
-.dark-theme .emotion-7 {
+.dark-theme .emotion-4 {
   color: #FFFFFF;
 }
 
-.emotion-9 {
+.emotion-5 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -128,16 +128,16 @@ exports[`renders correctly 1`] = `
   margin-top: 8px;
 }
 
-.emotion-9 strong,
-.emotion-9 b {
+.emotion-5 strong,
+.emotion-5 b {
   font-weight: 700;
 }
 
-.dark-theme .emotion-9 {
+.dark-theme .emotion-5 {
   color: #E8EDEB;
 }
 
-.emotion-10 {
+.emotion-6 {
   list-style-type: none;
   list-style-image: url(/assets/lightning-bolt.svg);
   margin-bottom: 0;
@@ -146,17 +146,17 @@ exports[`renders correctly 1`] = `
   padding-inline-start: 14px;
 }
 
-.dark-theme .emotion-10 {
+.dark-theme .emotion-6 {
   list-style-image: url(/assets/lightning-bolt-dark.svg);
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-10 {
+  .emotion-6 {
     grid-area: guides;
   }
 }
 
-.emotion-12 {
+.emotion-7 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -171,13 +171,13 @@ exports[`renders correctly 1`] = `
   font-weight: var(--link-font-weight);
 }
 
-.emotion-12>code {
+.emotion-7>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-12:focus,
-.emotion-12:hover {
+.emotion-7:focus,
+.emotion-7:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -185,16 +185,16 @@ exports[`renders correctly 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-12:focus {
+.emotion-7:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-12:hover {
+.emotion-7:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-13 {
+.emotion-8 {
   border-radius: 4px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -211,26 +211,26 @@ exports[`renders correctly 1`] = `
   line-height: 24px;
 }
 
-.dark-theme .emotion-13 {
+.dark-theme .emotion-8 {
   color: #C1C7C6;
 }
 
-.emotion-13:hover {
+.emotion-8:hover {
   background-color: #E8EDEB;
 }
 
-.dark-theme .emotion-13:hover {
+.dark-theme .emotion-8:hover {
   background-color: #1C2D38;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-13:hover::after {
+.emotion-8:hover::after {
   content: none;
 }
 
 @media not all and (max-width: 767px) {
-  .emotion-13 {
+  .emotion-8 {
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -250,36 +250,37 @@ exports[`renders correctly 1`] = `
     id="atlas"
   >
     <img
-      class="emotion-1 emotion-2"
+      alt="Chapter image for Atlas"
+      class="emotion-1"
       height="200"
       src="/images/chapter-image-atlas.png"
       width="200"
     />
     <div
-      class="emotion-3 emotion-4"
+      class="emotion-2"
     >
       <div
-        class="emotion-5 emotion-6"
+        class="emotion-3"
       >
         Chapter 1
       </div>
       <div
-        class="emotion-7 emotion-8"
+        class="emotion-4"
       >
         Atlas
       </div>
       <p
-        class="emotion-9"
+        class="emotion-5"
       >
         Get up and running with MongoDB Atlas. Learn how to create a cluster, load a sample dataset, and get your connection information.
       </p>
     </div>
     <ul
-      class="emotion-10 emotion-11"
+      class="emotion-6"
     >
       <li>
         <a
-          class="emotion-12 emotion-13 emotion-14"
+          class="emotion-7 emotion-8"
           href="/cloud/account/"
         >
           <span>
@@ -292,7 +293,7 @@ exports[`renders correctly 1`] = `
       </li>
       <li>
         <a
-          class="emotion-12 emotion-13 emotion-14"
+          class="emotion-7 emotion-8"
           href="/cloud/connectionstring/"
         >
           <span>
@@ -303,7 +304,7 @@ exports[`renders correctly 1`] = `
       </li>
       <li>
         <a
-          class="emotion-12 emotion-13 emotion-14"
+          class="emotion-7 emotion-8"
           href="/cloud/migrate-from-aws-to-atlas/"
         >
           <span>
