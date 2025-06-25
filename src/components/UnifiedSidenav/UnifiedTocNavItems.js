@@ -47,7 +47,7 @@ export function UnifiedTocNavItem({
   collapsible,
   items,
   isStatic,
-  prefix,
+  contentSite,
   slug,
   showSubNav,
   currentL2s,
@@ -72,7 +72,7 @@ export function UnifiedTocNavItem({
             newUrl={newUrl}
             slug={slug}
             items={items}
-            prefix={prefix}
+            contentSite={contentSite}
             setCurrentL1={setCurrentL1}
             setShowDriverBackBtn={setShowDriverBackBtn}
             isAccordion={isAccordion}
@@ -148,7 +148,7 @@ export function UnifiedTocNavItem({
       <SideNavItem
         aria-label={label}
         as={Link}
-        prefix={prefix}
+        contentSite={contentSite}
         to={newUrl}
         onClick={handleClick}
         className={cx(l2ItemStyling({ level, isAccordion }))}
@@ -169,7 +169,7 @@ export function UnifiedTocNavItem({
         level={level}
         isAccordion={isAccordion}
         slug={slug}
-        prefix={prefix}
+        contentSite={contentSite}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       />
     );
@@ -180,7 +180,7 @@ export function UnifiedTocNavItem({
       active={isSelectedTab(newUrl, slug, contentSitePrefix)}
       aria-label={label}
       as={Link}
-      prefix={prefix}
+      contentSite={contentSite}
       to={newUrl}
       className={cx(l2ItemStyling({ level, isAccordion }))}
     >
@@ -189,7 +189,7 @@ export function UnifiedTocNavItem({
   );
 }
 
-function CollapsibleNavItem({ items, label, url, newUrl, slug, prefix, isAccordion, level }) {
+function CollapsibleNavItem({ items, label, url, newUrl, slug, contentSite, isAccordion, level }) {
   const { pathPrefix: contentSitePrefix } = useSiteMetadata();
   const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, newUrl, items, contentSitePrefix));
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
@@ -211,7 +211,7 @@ function CollapsibleNavItem({ items, label, url, newUrl, slug, prefix, isAccordi
     <>
       <SideNavItem
         as={url ? Link : 'a'}
-        prefix={prefix}
+        contentSite={contentSite}
         to={newUrl ? newUrl : null}
         active={isActive}
         className={cx(l2ItemStyling({ level, isAccordion }), overwriteLinkStyle)}
@@ -244,9 +244,9 @@ export function StaticNavItem({
   label,
   newUrl,
   slug,
-  versionDropdown,
   items,
-  prefix,
+  contentSite,
+  versionDropdown,
   setCurrentL1,
   isAccordion,
   setShowDriverBackBtn,
@@ -258,7 +258,7 @@ export function StaticNavItem({
     <SideNavItem
       active={isActive}
       aria-label={label}
-      prefix={prefix}
+      contentSite={contentSite}
       as={Link}
       to={newUrl}
       onClick={() => {
