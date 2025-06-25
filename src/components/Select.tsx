@@ -211,9 +211,20 @@ const offlineListItemStyle = css`
   }
 `;
 
-const OfflineMenu = ({ choices }: { choices: Array<SelectOption> }) => {
+export const OfflineMenu = ({
+  choices,
+  className,
+  'data-option': dataOption,
+}: {
+  choices: Array<SelectOption>;
+  className?: string;
+  'data-option'?: string;
+}) => {
   return (
-    <div className={cx(offlineMenuStyling, 'offline-select-menu')}>
+    <div
+      className={cx(offlineMenuStyling, className ? className : 'offline-select-menu')}
+      data-option={dataOption ? dataOption : undefined}
+    >
       <ul className={cx(offlineListStyle)}>
         {choices.map((choice, idx) => (
           <li
