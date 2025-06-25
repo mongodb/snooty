@@ -15,7 +15,7 @@ import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_BUTTON_TEXT_LOW, SCREENSHOT_OVERLAY_
 
 const HIGHLIGHT_BORDER_SIZE = 5;
 
-let savedPosition = null;
+let savedPosition: DOMRect | null = null;
 
 const instructionsBorderStyling = css`
   position: fixed;
@@ -123,7 +123,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   }, []);
 
   // set properties of selected DOM element based on bounding box
-  const setSelectedElementProperties = useCallback((currDOMRect) => {
+  const setSelectedElementProperties = useCallback((currDOMRect: DOMRect) => {
     const isScrolled = currElemProperties.current['position'] === 'absolute';
 
     currElemProperties.current['width'] = currDOMRect.width;
