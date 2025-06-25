@@ -21,7 +21,8 @@ export const NOTRANSLATE_CLASS = 'notranslate';
  * Key used to access browser storage for user's preferred locale
  */
 export const STORAGE_KEY_PREF_LOCALE = 'preferredLocale';
-export const COOKIE_KEY_PREF_LOCALE = 'docsPrefLocale';
+// Should be the same as what B2K expects
+export const COOKIE_KEY_PREF_LOCALE = 'mdb_docsPrefLocale';
 
 // Update this as more languages are introduced
 // Because the client-side redirect script cannot use an import, PLEASE remember to update the list of supported languages
