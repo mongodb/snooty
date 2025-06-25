@@ -85,8 +85,8 @@ const StyledStarRating = styled(StarRating)`
   margin: 30px 0 ${theme.size.default};
 `;
 
-const useValidation = (inputValue, validator) => {
-  const [isValid, setIsValid] = useState(null);
+const useValidation = (inputValue: string, validator: (input: string) => boolean) => {
+  const [isValid, setIsValid] = useState<boolean>(false);
   useEffect(() => {
     setIsValid(validator(inputValue));
   }, [inputValue, validator]);
@@ -121,7 +121,8 @@ const CommentView = () => {
     <Layout>
       <StyledStarRating handleRatingSelection={setSelectedRating} />
       <StyledCommentInput
-        type="text"
+        // TODO: needed??
+        // type="text"
         id="feedback-comment"
         aria-labelledby="Comment Text Box"
         placeholder={selectedRating < 4 ? COMMENT_PLACEHOLDER_TEXT_LOW : COMMENT_PLACEHOLDER_TEXT}

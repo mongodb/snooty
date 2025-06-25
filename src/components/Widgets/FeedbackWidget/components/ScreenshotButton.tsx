@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { withPrefix } from 'gatsby';
 import Button from '@leafygreen-ui/button';
@@ -37,7 +37,7 @@ const instructionsPanelStyling = css`
   z-index: 13;
 `;
 
-const baseStyle = (position, top, left, width, height) => css`
+const baseStyle = (position: string, top: string, left: string, width: string, height: string) => css`
   position: ${position};
   top: ${top}px;
   left: ${left}px;
@@ -47,14 +47,21 @@ const baseStyle = (position, top, left, width, height) => css`
 `;
 
 // styling for shadow overlays around the current selected component
-const overlayElementStyle = (position, top, left, width, height) => css`
+const overlayElementStyle = (position: string, top: string, left: string, width: string, height: string) => css`
   ${baseStyle(position, top, left, width, height)};
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 10;
 `;
 
 // current hovered or selected component
-const highlightedElementStyle = (position, top, left, width, height, lineStyle) => css`
+const highlightedElementStyle = (
+  position: string,
+  top: string,
+  left: string,
+  width: string,
+  height: string,
+  lineStyle: string
+) => css`
   ${baseStyle(position, top, left, width, height)};
   outline: #ffdd49 ${lineStyle} ${HIGHLIGHT_BORDER_SIZE}px;
   outline-offset: 3px;
@@ -63,10 +70,10 @@ const highlightedElementStyle = (position, top, left, width, height, lineStyle) 
   cursor: ${lineStyle === 'solid' ? 'unset' : 'pointer'};
 `;
 
-const exitButtonStyle = (position, top, left) => css`
+const exitButtonStyle = (position: string, top: string, left: string) => css`
   position: ${position};
-  top: ${Math.max(top - 1, 8)}px;
-  left: ${Math.max(left - 1, 8)}px;
+  top: ${Math.max(Number(top) - 1, 8)}px;
+  left: ${Math.max(Number(left) - 1, 8)}px;
   color: #ffdd49;
   background-color: white;
   border-radius: 80%;
@@ -85,14 +92,14 @@ const ScreenshotSelect = styled(Button)`
 const ScreenshotButton = ({ size = 'default', ...props }) => {
   const { setScreenshotTaken, selectedRating, isScreenshotButtonClicked, setIsScreenshotButtonClicked, setDetachForm } =
     useFeedbackContext();
-  const [currElemState, setCurrElemState] = useState(null);
+  const [currElemState, setCurrElemState] = useState<Element | null>(null);
 
   // border around highlighted element
   const domElementClickedRef = useRef('dashed');
   const [selectedElementBorderStyle, setSelectedElementBorderStyle] = useState('dashed');
 
   // store selected dom element and its attributes
-  const currElem = useRef(null);
+  const currElem = useRef<Element>(null);
   const initialElemProperties = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0, position: 'absolute' };
   const currElemProperties = useRef(initialElemProperties);
   const [elemProps, setElemProps] = useState({});
@@ -114,7 +121,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   }, [currElemState]);
 
   // prevent FW from being selected
-  const isFWSelected = useCallback((listOfElements) => {
+  const isFWSelected = useCallback((listOfElements: Element[]) => {
     for (let i = 0; i < listOfElements.length; i++) {
       if (listOfElements[i]?.id?.includes(feedbackId)) {
         return true;
@@ -144,7 +151,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
     // current position of mouse with scrolling taken into account
     let listOfElements = document.elementsFromPoint(pageX - window.pageXOffset, pageY - window.pageYOffset);
-    let domElement = null;
+    let domElement: Element | null = null;
 
     // get the topmost DOM element excluding overlays
     if (!isFWSelected(listOfElements)) {
@@ -249,34 +256,34 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         <Portal>
           <>
             <img
-              className={fwInstructionsId}
+              className={cx(fwInstructionsId, instructionsPanelStyling)}
               src={withPrefix('assets/screenshotCTA.svg')}
               alt={SCREENSHOT_OVERLAY_ALT_TEXT}
-              css={instructionsPanelStyling}
               onClick={handleInstructionClick}
             />
-            <div className={fwInstructionsId} css={instructionsBorderStyling} />
+            <div className={cx(fwInstructionsId, instructionsBorderStyling)} />
           </>
           {!currElem.current && (
             <div
-              className="overlay"
-              css={overlayElementStyle('fixed', 0, 0, documentScrollWidth, documentScrollHeight)}
+              className={cx('overlay', overlayElementStyle('fixed', 0, 0, documentScrollWidth, documentScrollHeight))}
             />
           )}
           {!!currElem.current && (
             <>
               <div
-                className="overlay"
+                className={cx(
+                  'overlay',
+                  highlightedElementStyle(
+                    elemProps['position'],
+                    elemProps['top'],
+                    elemProps['left'],
+                    elemProps['width'],
+                    elemProps['height'],
+                    selectedElementBorderStyle
+                  )
+                )}
                 onClick={handleDOMElementClick}
                 role="button"
-                css={highlightedElementStyle(
-                  elemProps['position'],
-                  elemProps['top'],
-                  elemProps['left'],
-                  elemProps['width'],
-                  elemProps['height'],
-                  selectedElementBorderStyle
-                )}
               />
               {domElementClickedRef.current === 'solid' && (
                 <div className={fwExitButtonId}>
@@ -289,43 +296,51 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
                 </div>
               )}
               <div
-                className="overlay-left"
-                css={overlayElementStyle(
-                  elemProps['position'],
-                  0,
-                  0,
-                  elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
-                  documentScrollHeight
+                className={cx(
+                  'overlay-left',
+                  overlayElementStyle(
+                    elemProps['position'],
+                    0,
+                    0,
+                    elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
+                    documentScrollHeight
+                  )
                 )}
               />
               <div
-                className="overlay-top"
-                css={overlayElementStyle(
-                  elemProps['position'],
-                  0,
-                  elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
-                  elemProps['width'] + HIGHLIGHT_BORDER_SIZE * 2,
-                  elemProps['top'] - HIGHLIGHT_BORDER_SIZE
+                className={cx(
+                  'overlay-top',
+                  overlayElementStyle(
+                    elemProps['position'],
+                    0,
+                    elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
+                    elemProps['width'] + HIGHLIGHT_BORDER_SIZE * 2,
+                    elemProps['top'] - HIGHLIGHT_BORDER_SIZE
+                  )
                 )}
               />
               <div
-                className="overlay-bottom"
-                css={overlayElementStyle(
-                  elemProps['position'],
-                  elemProps['bottom'] + HIGHLIGHT_BORDER_SIZE,
-                  elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
-                  elemProps['width'] + HIGHLIGHT_BORDER_SIZE * 2,
-                  documentScrollHeight - elemProps['bottom'] - HIGHLIGHT_BORDER_SIZE
+                className={cx(
+                  'overlay-bottom',
+                  overlayElementStyle(
+                    elemProps['position'],
+                    elemProps['bottom'] + HIGHLIGHT_BORDER_SIZE,
+                    elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
+                    elemProps['width'] + HIGHLIGHT_BORDER_SIZE * 2,
+                    documentScrollHeight - elemProps['bottom'] - HIGHLIGHT_BORDER_SIZE
+                  )
                 )}
               />
               <div
-                className="overlay-right"
-                css={overlayElementStyle(
-                  elemProps['position'],
-                  0,
-                  elemProps['left'] + elemProps['width'] + HIGHLIGHT_BORDER_SIZE,
-                  documentScrollWidth - elemProps['right'],
-                  documentScrollHeight
+                className={cx(
+                  'overlay-right',
+                  overlayElementStyle(
+                    elemProps['position'],
+                    0,
+                    elemProps['left'] + elemProps['width'] + HIGHLIGHT_BORDER_SIZE,
+                    documentScrollWidth - elemProps['right'],
+                    documentScrollHeight
+                  )
                 )}
               />
             </>

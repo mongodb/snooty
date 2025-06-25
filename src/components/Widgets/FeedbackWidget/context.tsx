@@ -18,8 +18,8 @@ import { FeedbackPageData } from './useFeedbackData';
 type SubmitAllFeedbackProps = {
   comment?: string;
   email?: string;
-  dataUri: string;
-  viewport: Viewport;
+  dataUri?: string;
+  viewport?: Viewport;
 };
 
 export type Feedback = {
