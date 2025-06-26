@@ -12,57 +12,50 @@ const buildChoice = (branch) => {
   };
 };
 
-const buildChoices = (branches, tocVersionNames) => {
-  return !branches ? [] : branches.filter((branch) => tocVersionNames.includes(branch.gitBranchName)).map(buildChoice);
-};
+// const buildChoices = (branches, tocVersionNames) => {
+//   return !branches ? [] : branches.filter((branch) => tocVersionNames.includes(branch.gitBranchName)).map(buildChoice);
+// };
 
 const selectStyle = css`
-  flex: 1 0 auto;
+  margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
 
-  > div:first-of-type {
-    max-width: 100px;
-    width: max-content;
-  }
-
-  > div:nth-of-type(2) {
-    width: 150px;
-    right: 0px;
-    left: unset;
-
-    @media ${theme.screenSize.upToLarge} {
-      width: max-content;
-      max-width: calc(100vw - (${theme.size.medium} * 2));
-      // (max viewport width - padding) inferred from the max width of the side nav in mobile
-    }
-  }
-
+  ${'' /* Render version dropdown text in front of the Sidebar text */}
   button {
-    height: ${theme.size.medium};
-    &[aria-expanded='true'] {
-      svg {
-        transform: rotate(180deg);
-      }
+    z-index: 2;
+    background-color: var(--select-button-bg-color);
+    color: var(--select-button-color);
+
+    div:last-child svg {
+      color: var(--select-button-carot);
+    }
+
+    .dark-theme &:hover {
+      background-color: var(--gray-dark4);
+      color: var(--gray-light3);
+      border-color: var(--gray-base);
+      box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
     }
   }
 
-  span {
-    overflow: hidden;
-    -webkit-line-clamp: 2;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+  /* Override LG mobile style of enlarged mobile font */
+  @media ${theme.screenSize.upToLarge} {
+    div,
+    span {
+      font-size: ${theme.fontSize.small};
+    }
   }
 `;
 
 const wrapperStyle = css`
-  margin-left: auto;
+  // margin-left: auto;
 `;
 
 const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
-  const [options, setOptions] = useState(buildChoices(availableVersions[versionedProject], tocVersionNames));
+  const [options, setOptions] = useState((availableVersions[versionedProject] || []).map(buildChoice));
 
   useEffect(() => {
-    setOptions(buildChoices(availableVersions[versionedProject], tocVersionNames));
+    setOptions((availableVersions[versionedProject] || []).map(buildChoice));
   }, [availableVersions, tocVersionNames, versionedProject]);
 
   const onChange = useCallback(

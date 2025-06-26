@@ -39,13 +39,14 @@ export const tocData = (): TocItem[] => {
       ],
     },
     {
-      label: 'Atlas',
+      label: 'ATLAS',
       url: '/docs/atlas/getting-started/',
       contentSite: DocSites.CLOUD_DOCS,
       items: [
         {
           label: 'Application Development',
           group: true,
+          versionDropdown: true,
           items: [
             {
               label: 'Connect to Clusters',
@@ -88,6 +89,41 @@ export const tocData = (): TocItem[] => {
             {
               label: 'VS Code',
               url: '/docs/atlas/mongodb-for-vscode',
+            },
+          ],
+        },
+        {
+          label: 'Atlas cli',
+          group: true,
+          versionDropdown: true,
+          contentSite: DocSites.ATLAS_CLI,
+          items: [
+            {
+              label: 'Connect',
+              url: '/docs/atlas/cli/:version/connect-atlas-cli/',
+              collapsible: true,
+              items: [
+                {
+                  label: 'Save Connection Settings',
+                  url: '/docs/atlas/cli/:version/atlas-cli-save-connection-settings',
+                },
+                {
+                  label: 'Migrate to the Atlas CLI',
+                  url: '/docs/atlas/cli/:version/migrate-to-atlas-cli/',
+                },
+                {
+                  label: 'mongosh',
+                  url: '/docs/atlas/mongo-shell-connection',
+                },
+              ],
+            },
+            {
+              label: 'Command ',
+              url: '/docs/atlas/cli/:version/command/atlas/',
+            },
+            {
+              label: 'Automate',
+              url: '/docs/atlas/cli/:version/atlas-cli-automate/',
             },
           ],
         },
