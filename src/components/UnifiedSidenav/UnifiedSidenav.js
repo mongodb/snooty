@@ -14,7 +14,7 @@ import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
-import { isActiveTocNode } from './UnifiedTocNavItems';
+import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
 
@@ -80,8 +80,8 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
 // Function that adds the current version
 const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, snootyEnv }) => {
   return tree?.map((item) => {
-    let newUrl = item.url ? item.url : '';
-    const currentProject = item.contentSite ? item.contentSite : contentSite;
+    let newUrl = item.url ?? '';
+    const currentProject = item.contentSite ?? contentSite;
 
     // Replace version variable with the true current version
     if (item?.url?.includes(':version')) {
@@ -89,8 +89,8 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, 
         (version) => version.gitBranchName === activeVersions[currentProject]
       );
       // If no version use first version.urlSlug in the list, or if no version loads, set as current
-      const defaultVersion = versionsData[currentProject]?.[0] ? versionsData[currentProject][0].urlSlug : 'current';
-      const currentVersion = version ? version.urlSlug : defaultVersion;
+      const defaultVersion = versionsData[currentProject]?.[0]?.urlSlug ?? 'current';
+      const currentVersion = version?.urlSlug ?? defaultVersion;
       newUrl = item.url.replace(/:version/g, currentVersion);
     }
 
@@ -173,22 +173,29 @@ export function UnifiedSidenav({ slug }) {
   console.log('The edited toctree with prefixes is:', tree);
   console.log(unifiedTocTree);
 
-  const [isDriver, currentL2List] = findPageParent(tree, slug);
-  const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
+  // Initialize state with default values instead of computed values
+  const [showDriverBackBtn, setShowDriverBackBtn] = useState(false);
+  const [currentL1, setCurrentL1] = useState(null);
+  const [currentL2s, setCurrentL2s] = useState(null);
 
-  const [currentL1, setCurrentL1] = useState(() => {
-    return tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
-    });
-  });
+  useEffect(() => {
+    if (tree && tree.length > 0) {
+      const [isDriver, currentL2List] = findPageParent(tree, slug);
+      setShowDriverBackBtn(isDriver);
 
-  const [currentL2s, setCurrentL2s] = useState(() => {
-    return currentL2List;
-  });
+      const foundCurrentL1 = tree.find((staticTocItem) => {
+        return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items, pathPrefix);
+      });
+      setCurrentL1(foundCurrentL1);
+      setCurrentL2s(currentL2List);
+    }
+  }, [tree, slug, pathPrefix]);
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
-    if (!showDriverBackBtn) setCurrentL2s(currentL1);
+    if (!showDriverBackBtn && currentL1) {
+      setCurrentL2s(currentL1);
+    }
   }, [currentL1, showDriverBackBtn]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
@@ -199,7 +206,7 @@ export function UnifiedSidenav({ slug }) {
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
 
-  const displayedItems = showDriverBackBtn ? currentL2s.items : tree;
+  const displayedItems = showDriverBackBtn ? currentL2s?.items : tree;
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile

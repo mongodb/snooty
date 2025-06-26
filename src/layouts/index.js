@@ -101,7 +101,8 @@ const toastPortalStyling = LeafyCSS`
   z-index: ${theme.zIndexes.sidenav + 1};
 `;
 
-const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBranches, template } }) => {
+const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, template } }) => {
+  const { page } = data || {};
   const { sidenav } = getTemplate(template);
   const { chapters, guides, slugToTitle, toctree, eol, project } = useSnootyMetadata();
   const { isUnifiedToc } = getFeatureFlags();
@@ -133,7 +134,7 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
                 <Sidenav
                   chapters={chapters}
                   guides={guides}
-                  page={page.ast}
+                  page={page?.ast}
                   pageTitle={pageTitle}
                   repoBranches={repoBranches}
                   slug={slug}
