@@ -19,7 +19,7 @@ export interface ActiveVersions {
   [project: string]: string;
 }
 
-// These has to match how we store the repo name in local storage
+// DOP-5379: Move this somewhere that makes more sense when toc.ts is more finalized
 export enum DocSites {
   CLOUD_DOCS = 'cloud-docs',
   DATABASE_TOOLS = 'database-tools',
