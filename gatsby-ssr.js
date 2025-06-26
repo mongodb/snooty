@@ -4,7 +4,6 @@ import { renderStylesToString } from '@leafygreen-ui/emotion';
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
-import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang';
 import { OFFLINE_HEAD_SCRIPTS } from './src/utils/head-scripts/offline-ui';
 import { isOfflineDocsBuild } from './src/utils/is-offline-docs-build';
 import { getHtmlLangFormat } from './src/utils/locale';
@@ -99,21 +98,6 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
               }
             }();
           `,
-        }}
-      />
-    );
-  }
-
-  // We want to exclude writers' staging (aka "production", aka "prd")
-  if (process.env.SNOOTY_ENV !== 'production') {
-    // Client-side redirect based on browser's language settings.
-    headComponents.push(
-      <script
-        key="browser-lang-redirect"
-        type="text/javascript"
-        dangerouslySetInnerHTML={{
-          // Call function immediately on load
-          __html: `!${redirectBasedOnLang}()`,
         }}
       />
     );
