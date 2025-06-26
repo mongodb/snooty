@@ -1,15 +1,12 @@
-import type { TocItem } from '../src/components/UnifiedSidenav/UnifiedConstants';
+import { TocItem, DocSites } from '../src/components/UnifiedSidenav/UnifiedConstants';
 
-const COMMANDLINE_TOOLS = 'database-tools';
-const CLOUD_DOCS = 'cloud-docs';
-
-// each url has to be unique with the prefix!!!!
+// each url has to be unique with the contentSite!!!!
 export const tocData = (): TocItem[] => {
   const toc: TocItem[] = [
     {
       label: 'Database tools',
       url: '/docs/database-tools/',
-      prefix: COMMANDLINE_TOOLS,
+      contentSite: DocSites.DATABASE_TOOLS,
       items: [
         {
           label: 'command tools',
@@ -44,7 +41,7 @@ export const tocData = (): TocItem[] => {
     {
       label: 'Atlas',
       url: '/docs/atlas/getting-started/',
-      prefix: CLOUD_DOCS,
+      contentSite: DocSites.CLOUD_DOCS,
       items: [
         {
           label: 'Application Development',
@@ -91,6 +88,48 @@ export const tocData = (): TocItem[] => {
             {
               label: 'VS Code',
               url: '/docs/atlas/mongodb-for-vscode',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'C# Quick Start',
+      url: '/docs/drivers/csharp/:version/quick-start',
+      glyph: 'Bulb',
+      contentSite: DocSites.CSHARP,
+      versionDropdown: true,
+      items: [
+        {
+          label: 'C# Documentation',
+          group: true,
+          items: [
+            {
+              label: 'Quick Reference',
+              url: '/docs/drivers/csharp/:version/quick-reference/',
+            },
+            {
+              label: 'Usage Examples',
+              url: '/docs/drivers/csharp/:version/usage-examples',
+              collapsible: true,
+              items: [
+                {
+                  label: 'Find a Document',
+                  url: '/docs/drivers/csharp/:version/usage-examples/findOne/',
+                },
+                {
+                  label: 'Find Multiple Documents',
+                  url: '/docs/drivers/csharp/:version/usage-examples/findMany/',
+                },
+                {
+                  label: 'Insert a Document',
+                  url: '/docs/drivers/csharp/:version/usage-examples/insertOne',
+                },
+              ],
+            },
+            {
+              label: "What's New",
+              url: '/docs/drivers/csharp/:version/whats-new',
             },
           ],
         },

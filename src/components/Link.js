@@ -97,7 +97,7 @@ const Link = ({
   hideExternalIcon: hideExternalIconProp,
   showExternalIcon,
   openInNewTab,
-  prefix,
+  contentSite,
   ...other
 }) => {
   const { pathPrefix, project } = useSiteMetadata();
@@ -118,18 +118,17 @@ const Link = ({
     ''
   );
 
-  // If prefix, that means we are coming from the UnifiedSideNav and not the old SideNav
-  if (prefix) {
+  // If contentSite, that means we are coming from the UnifiedSideNav and not the old SideNav
+  if (contentSite) {
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
-    // TODO: i wonder if this works for versioned site in monorepo
     // Using the isUnifiedTOCInDevMode to enforce the client-side routing for local build and preview deployments which
     // allows our custom 404 page to render.
-    if (project === prefix || isUnifiedTOCInDevMode) {
-      // Get rid of the path prefix in link for internal links
+    if (project === contentSite || isUnifiedTOCInDevMode) {
+      // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
 
       return (
