@@ -80,8 +80,8 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
 // Function that adds the current version
 const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, snootyEnv }) => {
   return tree?.map((item) => {
-    let newUrl = item.url ? item.url : '';
-    const currentProject = item.contentSite ? item.contentSite : contentSite;
+    let newUrl = item.url ?? '';
+    const currentProject = item.contentSite ?? contentSite;
 
     // Replace version variable with the true current version
     if (item?.url?.includes(':version')) {
@@ -89,8 +89,8 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, 
         (version) => version.gitBranchName === activeVersions[currentProject]
       );
       // If no version use first version.urlSlug in the list, or if no version loads, set as current
-      const defaultVersion = versionsData[currentProject]?.[0] ? versionsData[currentProject][0].urlSlug : 'current';
-      const currentVersion = version ? version.urlSlug : defaultVersion;
+      const defaultVersion = versionsData[currentProject]?.[0]?.urlSlug ?? 'current';
+      const currentVersion = version?.urlSlug ?? defaultVersion;
       newUrl = item.url.replace(/:version/g, currentVersion);
     }
 

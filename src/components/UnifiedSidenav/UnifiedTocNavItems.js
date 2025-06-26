@@ -43,7 +43,6 @@ function isSelectedTab(url, slug, pathPrefix) {
 export function UnifiedTocNavItem({
   label,
   group,
-  url,
   collapsible,
   items,
   isStatic,
@@ -68,7 +67,6 @@ export function UnifiedTocNavItem({
         <>
           <StaticNavItem
             label={label}
-            url={url}
             newUrl={newUrl}
             slug={slug}
             items={items}
@@ -164,7 +162,6 @@ export function UnifiedTocNavItem({
       <CollapsibleNavItem
         items={items}
         label={label}
-        url={url}
         newUrl={newUrl}
         level={level}
         isAccordion={isAccordion}
@@ -189,7 +186,7 @@ export function UnifiedTocNavItem({
   );
 }
 
-function CollapsibleNavItem({ items, label, url, newUrl, slug, contentSite, isAccordion, level }) {
+function CollapsibleNavItem({ items, label, newUrl, slug, contentSite, isAccordion, level }) {
   const { pathPrefix: contentSitePrefix } = useSiteMetadata();
   const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, newUrl, items, contentSitePrefix));
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
@@ -210,9 +207,9 @@ function CollapsibleNavItem({ items, label, url, newUrl, slug, contentSite, isAc
   return (
     <>
       <SideNavItem
-        as={url ? Link : 'a'}
+        as={newUrl ? Link : 'a'}
         contentSite={contentSite}
-        to={newUrl ? url : null}
+        to={newUrl ? newUrl : null}
         active={isActive}
         className={cx(l2ItemStyling({ level, isAccordion }), overwriteLinkStyle)}
         onClick={handleClick}

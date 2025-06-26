@@ -133,49 +133,6 @@ export const tocData = (): TocItem[] => {
             },
           ],
         },
-        {
-          label: 'Fundamentals',
-          group: true,
-          items: [
-            {
-              label: 'Operations with Builders',
-              url: '/docs/drivers/csharp/fundamentals/builders',
-            },
-            {
-              label: 'Databases and Collections',
-              url: '/docs/drivers/csharp/fundamentals/database-collection',
-              collapsible: true,
-              items: [
-                {
-                  label: 'Run a Database Command',
-                  url: '/docs/drivers/csharp/fundamentals/databases-collections/run-command',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          label: 'Connect to cloud',
-          group: true,
-          contentSite: '/docs/drivers/csharp/master/cloud-docs/bianca.laube/DOP-5371',
-          items: [
-            {
-              label: 'Manage Clusters',
-              url: '/docs/drivers/csharp/manage-database-deployments',
-              collapsible: true,
-              items: [
-                {
-                  label: 'Storage',
-                  url: '/docs/drivers/csharp/customize-storage',
-                },
-                {
-                  label: 'Auto-Scaling',
-                  url: '/docs/drivers/csharp/cluster-autoscaling',
-                },
-              ],
-            },
-          ],
-        },
       ],
     },
   ];
