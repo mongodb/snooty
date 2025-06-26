@@ -2,7 +2,8 @@ import { css } from '@leafygreen-ui/emotion';
 import { theme } from '../../../theme/docsTheme';
 
 export const sideNavItemBasePadding = css`
-  overwrite LG link underlines @leafygreen-ui/typography v13.0.0 :hover {
+  /* overwrite LG link underlines @leafygreen-ui/typography v13.0.0 */
+  &:hover {
     &:after,
     span:after {
       display: none;
@@ -54,6 +55,12 @@ export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) =>
     `}
     font-weight: 500;
     color: var(--tab-color-primary);
+  }
+
+  // Version Dropdown button
+  button {
+    margin-left: ${!isAccordion && '-8px'};
+    height: 28px;
   }
 `;
 

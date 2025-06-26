@@ -6,6 +6,7 @@ import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
 import DocsHomeButton from '../Sidenav/DocsHomeButton';
 import { DownloadButton } from '../OfflineDownloadModal';
+import VersionDropdown from '../VersionDropdown';
 import { NavTopContainer, downloadButtonStlying, ArtificialPadding } from './UnifiedSidenav';
 import { StaticNavItem, UnifiedTocNavItem } from './UnifiedTocNavItems';
 
@@ -22,6 +23,12 @@ export const rightPane = LeafyCSS`
   overflow-y: auto;
   border-right: 1px solid var(--sidenav-border-bottom-color);
   padding-top: ${theme.size.default};
+
+  // Height for the version dropdown
+  button {
+    margin-left: -8px;
+    height: 28px;
+  }
 `;
 
 const backLinkStyling = LeafyCSS`
@@ -101,11 +108,12 @@ export const DoublePannedNav = ({
               <BackLink
                 className={cx(backLinkStyling)}
                 onClick={() => setShowDriverBackBtn(false)}
-                href="/master/java/bianca.laube/DOP-5372/builders/index.html"
+                href="/docs/cluster-to-cluster-sync/current/quickstart/"
               >
                 Back to Client Libraries
               </BackLink>
             )}
+            {currentL1?.versionDropdown && <VersionDropdown />}
             {currentL2s.items?.map((navItems) => (
               <UnifiedTocNavItem
                 {...navItems}

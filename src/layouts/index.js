@@ -18,7 +18,6 @@ import { getAllLocaleCssStrings } from '../utils/locale';
 import { OfflineDownloadProvider } from '../components/OfflineDownloadModal/DownloadContext';
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
 import { getFeatureFlags } from '../utils/feature-flags';
-import { useVersionsToml } from '../hooks/use-versions-toml';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -102,13 +101,13 @@ const toastPortalStyling = LeafyCSS`
   z-index: ${theme.zIndexes.sidenav + 1};
 `;
 
-const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBranches, template } }) => {
+const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, template } }) => {
+  const { page } = data || {};
   const { sidenav } = getTemplate(template);
   const { chapters, guides, slugToTitle, toctree, eol, project } = useSnootyMetadata();
   const { isUnifiedToc } = getFeatureFlags();
   const remoteMetadata = useRemoteMetadata();
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
-  const versionsData = useVersionsToml();
 
   const pageTitle = React.useMemo(
     () => page?.ast?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug],
@@ -124,19 +123,18 @@ const DefaultLayout = ({ children, data: { page }, pageContext: { slug, repoBran
         headingNodes={page?.ast?.options?.headings}
         remoteMetadata={remoteMetadata}
         project={project}
-        versionsData={versionsData}
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
           {isUnifiedToc ? (
-            <UnifiedSidenav slug={slug} versionsData={versionsData} />
+            <UnifiedSidenav slug={slug} />
           ) : sidenav && !isInPresentationMode ? (
             <ToastProvider portalClassName={cx(toastPortalStyling)}>
               <OfflineDownloadProvider>
                 <Sidenav
                   chapters={chapters}
                   guides={guides}
-                  page={page.ast}
+                  page={page?.ast}
                   pageTitle={pageTitle}
                   repoBranches={repoBranches}
                   slug={slug}

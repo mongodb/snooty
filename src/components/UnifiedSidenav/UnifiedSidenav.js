@@ -14,7 +14,7 @@ import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
-import { isActiveTocNode } from './UnifiedTocNavItems';
+import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
 
@@ -77,50 +77,26 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
     }
 `;
 
-const replaceVersion = ({ url, currentVersion, versionsData }) => {
-  // Find the version data for the current content we are in
-  const noVersion = url.replace(/\$\{([^}]+)\}/g, '');
-  const content = versionsData.find((obj) => obj.repoSlug.replaceAll('/', '') === noVersion.replaceAll('/', ''));
-  if (!content) return;
-
-  const proj = content.repoName;
-
-  // based on the activeVersion, find the correct verion
-  let ver = content?.version.find((obj) => obj.name === currentVersion[proj]);
-  if (!ver) {
-    // If no current version, use first version in the array
-    ver = content.version[0];
-  }
-
-  // input the correct alias into the url
-  const result = url?.replace(/\$\{([^}]+)\}/g, ver.urlSlug);
-
-  return result;
-};
-
-// TODO: this function needs to be updated with DOP-5677
-// Function that adds a prefix to all the urls
-const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snootyEnv }) => {
+// Function that adds the current version
+const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, snootyEnv }) => {
   return tree?.map((item) => {
-    // Getting the path prefix and editing it based on the environment so links work correctly
-    let updatedPrefix = prefix;
-    if (item.prefix) {
-      const result = replaceVersion({
-        url: item.prefix,
-        currentVersion: activeVersions,
-        versionsData,
-        project,
-      });
-      // For incase result is undefined
-      updatedPrefix = result ? result : item.prefix;
-    }
+    let newUrl = item.url ?? '';
+    const currentProject = item.contentSite ?? contentSite;
 
-    // Edit the url with the correct version path
-    const newUrl = `${item.url ? item.url : ''}`;
+    // Replace version variable with the true current version
+    if (item?.url?.includes(':version')) {
+      const version = (versionsData[currentProject] || []).find(
+        (version) => version.gitBranchName === activeVersions[currentProject]
+      );
+      // If no version use first version.urlSlug in the list, or if no version loads, set as current
+      const defaultVersion = versionsData[currentProject]?.[0]?.urlSlug ?? 'current';
+      const currentVersion = version?.urlSlug ?? defaultVersion;
+      newUrl = item.url.replace(/:version/g, currentVersion);
+    }
 
     const items = updateURLs({
       tree: item.items,
-      prefix: updatedPrefix,
+      contentSite: currentProject,
       activeVersions,
       versionsData,
       project,
@@ -131,7 +107,7 @@ const updateURLs = ({ tree, prefix, activeVersions, versionsData, project, snoot
       ...item,
       newUrl,
       items,
-      prefix: updatedPrefix,
+      contentSite: currentProject,
     };
   });
 };
@@ -143,7 +119,7 @@ const findPageParent = (tree, targetUrl) => {
   const dfs = (item) => {
     path.push(item);
 
-    if (assertLeadingSlash(removeTrailingSlash(item.url)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
+    if (assertLeadingSlash(removeTrailingSlash(item.newUrl)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
       for (let i = path.length - 1; i >= 0; i--) {
         if (path[i].showSubNav === true) {
           return [true, path[i]];
@@ -173,11 +149,11 @@ const findPageParent = (tree, targetUrl) => {
   return [false, null];
 };
 
-export function UnifiedSidenav({ slug, versionsData }) {
+export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
   const { snootyEnv, pathPrefix } = useSiteMetadata();
-  const { activeVersions } = useContext(VersionContext);
+  const { activeVersions, availableVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
@@ -187,13 +163,12 @@ export function UnifiedSidenav({ slug, versionsData }) {
   const tree = useMemo(() => {
     return updateURLs({
       tree: unifiedTocTree,
-      prefix: '',
       activeVersions,
-      versionsData,
+      versionsData: availableVersions,
       project,
       snootyEnv,
     });
-  }, [unifiedTocTree, activeVersions, versionsData, project, snootyEnv]);
+  }, [unifiedTocTree, activeVersions, availableVersions, project, snootyEnv]);
 
   const l1List = useMemo(() => {
     return tree.map((item) => item.newUrl);
@@ -202,22 +177,29 @@ export function UnifiedSidenav({ slug, versionsData }) {
   console.log('The edited toctree with prefixes is:', tree, l1List);
   console.log(unifiedTocTree);
 
-  const [isDriver, currentL2List] = findPageParent(tree, slug);
-  const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
+  // Initialize state with default values instead of computed values
+  const [showDriverBackBtn, setShowDriverBackBtn] = useState(false);
+  const [currentL1, setCurrentL1] = useState(null);
+  const [currentL2s, setCurrentL2s] = useState(null);
 
-  const [currentL1, setCurrentL1] = useState(() => {
-    return tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
-    });
-  });
+  useEffect(() => {
+    if (tree && tree.length > 0) {
+      const [isDriver, currentL2List] = findPageParent(tree, slug);
+      setShowDriverBackBtn(isDriver);
 
-  const [currentL2s, setCurrentL2s] = useState(() => {
-    return currentL2List;
-  });
+      const foundCurrentL1 = tree.find((staticTocItem) => {
+        return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items, pathPrefix);
+      });
+      setCurrentL1(foundCurrentL1);
+      setCurrentL2s(currentL2List);
+    }
+  }, [tree, slug, pathPrefix]);
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
-    if (!showDriverBackBtn) setCurrentL2s(currentL1);
+    if (!showDriverBackBtn && currentL1) {
+      setCurrentL2s(currentL1);
+    }
   }, [currentL1, showDriverBackBtn]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
@@ -228,7 +210,7 @@ export function UnifiedSidenav({ slug, versionsData }) {
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
 
-  const displayedItems = showDriverBackBtn ? currentL2s.items : tree;
+  const displayedItems = showDriverBackBtn ? currentL2s?.items : tree;
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
