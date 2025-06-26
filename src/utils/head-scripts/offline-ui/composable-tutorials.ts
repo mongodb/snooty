@@ -46,7 +46,11 @@ function bindComposableTutorials() {
           }
         }
       }
-      configurableOption.setAttribute('hidden', dependencyMet ? 'false' : 'true');
+      if (dependencyMet) {
+        configurableOption.removeAttribute('hidden');
+      } else {
+        configurableOption.setAttribute('hidden', 'true');
+      }
     }
 
     // update the current selection list
