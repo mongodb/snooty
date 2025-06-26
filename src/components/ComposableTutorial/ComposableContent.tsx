@@ -10,14 +10,14 @@ interface ComposableProps {
 }
 
 const containerStyle = css`
-  > *:first-child {
+  > *:first-child:not(script):not(style) {
     margin-top: ${theme.size.medium};
   }
 `;
 
 const ComposableContent = ({ nodeData: { children, selections }, ...rest }: ComposableProps) => {
   return (
-    <div className={cx(containerStyle)} data-selections={isOfflineDocsBuild ? selections : undefined}>
+    <div className={cx(containerStyle)} data-selections={isOfflineDocsBuild ? JSON.stringify(selections) : undefined}>
       {children.map((c, i) => (
         <ComponentFactory nodeData={c} key={i} {...rest} />
       ))}

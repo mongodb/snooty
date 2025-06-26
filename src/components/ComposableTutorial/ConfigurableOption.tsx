@@ -8,7 +8,7 @@ import { OfflineMenu } from '../Select';
 import { OFFLINE_MENU_CLASSNAME } from '../../utils/head-scripts/offline-ui/composable-tutorials';
 import { joinKeyValuesAsString } from './ComposableTutorial';
 
-const selectStyling = css`
+const mainStyling = css`
   flex: 1 1 200px;
   font-size: ${theme.fontSize.small};
   overflow: hidden;
@@ -48,7 +48,7 @@ const optionStyling = css`
 
 const offlineMenuStyling = css`
   top: calc(100% - ${theme.size.medium});
-`
+`;
 
 interface ConfigurationOptionProps {
   validSelections: Set<string>;
@@ -86,9 +86,8 @@ const ConfigurableOption = ({
   }, [option, precedingOptions, selections, validSelections]);
 
   return (
-    <div className={'configurable-option'}>
+    <div className={cx('configurable-option', mainStyling)}>
       <Select
-        className={cx(selectStyling)}
         popoverZIndex={theme.zIndexes.actionBar - 1}
         label={option.text}
         allowDeselect={false}
@@ -96,15 +95,26 @@ const ConfigurableOption = ({
         aria-label={`Select your ${option.text}`}
         onChange={(value) => onSelect(value, option.value, optionIndex)}
         data-value={isOfflineDocsBuild ? option.value : undefined}
-        data-options={isOfflineDocsBuild ? JSON.stringify(option.selections) : undefined}
+        data-dependencies={isOfflineDocsBuild ? JSON.stringify(option.dependencies) : undefined}
       >
         {filteredOptions.map((selection, i) => (
-          <Option className={optionStyling} value={selection.value} key={i}>
+          <Option
+            className={optionStyling}
+            value={selection.value}
+            key={i}
+            data-value={isOfflineDocsBuild ? selection.value : undefined}
+          >
             {selection.text}
           </Option>
         ))}
       </Select>
-      {isOfflineDocsBuild && <OfflineMenu choices={option.selections} className={cx(OFFLINE_MENU_CLASSNAME, offlineMenuStyling)} data-option={JSON.stringify(option)} />}
+      {isOfflineDocsBuild && (
+        <OfflineMenu
+          choices={option.selections}
+          className={cx(OFFLINE_MENU_CLASSNAME, offlineMenuStyling)}
+          data-options={JSON.stringify(option.selections)}
+        />
+      )}
     </div>
   );
 };

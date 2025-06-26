@@ -151,7 +151,7 @@ const containerStyling = css`
   padding-top: ${theme.size.small};
   z-index: ${theme.zIndexes.content + 1};
 
-  ${isOfflineDocsBuild && 'position: relative;'}
+  ${isOfflineDocsBuild && 'position: relative; top: unset;'}
 
   @media ${theme.screenSize.upToMedium} {
     flex-wrap: wrap;
@@ -248,8 +248,12 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
   );
 
   return (
-    <>
-      <div className={cx(containerStyling, isOfflineDocsBuild ? OFFLINE_COMPOSABLE_CLASSNAME : '')}>
+    <div
+      className={isOfflineDocsBuild ? OFFLINE_COMPOSABLE_CLASSNAME : ''}
+      data-selections={isOfflineDocsBuild ? '{}' : undefined}
+      data-valid-selections={isOfflineDocsBuild ? JSON.stringify(Array.from(validSelections)) : undefined}
+    >
+      <div className={cx(containerStyling)}>
         {composableOptions.map((option, index) => {
           if (showComposable(option.dependencies) || !!isOfflineDocsBuild) {
             return (
@@ -280,7 +284,7 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
           return null;
         })}
       </div>
-    </>
+    </div>
   );
 };
 

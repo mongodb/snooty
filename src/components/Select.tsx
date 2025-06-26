@@ -179,7 +179,7 @@ const offlineListStyle = css`
   box-shadow: rgba(0, 30, 43, 0.25) 0px 4px 7px 0px;
   margin: 6px 0 0 0;
   max-height: 250px;
-  overflow: scroll;
+  // overflow: scroll;
 `;
 
 const offlineListItemStyle = css`
