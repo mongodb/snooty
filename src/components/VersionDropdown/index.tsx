@@ -161,11 +161,10 @@ const VersionDropdown = ({ eol }: VersionDropdownProps) => {
       allowDeselect={false}
       className={cx(selectStyling, eol ? eolVersionFlipperStyle : '')}
       aria-labelledby="View a different version of documentation."
-      defaultValue="master"
       onChange={onSelectChange}
       placeholder={'Select a version'}
       popoverZIndex={3}
-      defaultChecked={Boolean(activeVersions[project])}
+      value={activeVersions[project]}
       usePortal={false}
       disabled={isOfflineDocsBuild || eol}
     >
