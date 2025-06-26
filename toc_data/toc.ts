@@ -15,9 +15,25 @@ export const tocData = (): TocItem[] => {
             {
               label: 'mongodump',
               url: '/docs/database-tools/mongodump/',
+              collapsible: true,
+              items: [
+                {
+                  label: 'Compatibility & Installation',
+                  url: '/docs/database-tools/mongodump/mongodump-compatibility-and-installation/',
+                },
+                {
+                  label: 'Behavior',
+                  url: '/docs/database-tools/mongodump/mongodump-behavior/',
+                },
+                {
+                  label: 'Examples',
+                  url: '/docs/database-tools/mongodump/mongodump-examples/',
+                },
+              ],
             },
             {
-              label: 'no link',
+              label: 'mongorestore',
+              url: '/docs/database-tools/mongorestore/',
               collapsible: true,
               items: [
                 {
@@ -26,13 +42,17 @@ export const tocData = (): TocItem[] => {
                 },
                 {
                   label: 'Behavior',
-                  url: '/docs/database-tools/mongodump/mongodump-behavior/',
+                  url: '/docs/database-tools/mongorestore/mongorestore-behavior-access-usage/',
                 },
                 {
-                  label: 'mongodbrestore',
-                  url: '/docs/database-tools/mongorestore/',
+                  label: 'Examples',
+                  url: '/docs/database-tools/mongorestore/mongorestore-examples/',
                 },
               ],
+            },
+            {
+              label: 'bsondump',
+              url: '/docs/database-tools/bsondump/',
             },
           ],
         },
@@ -40,96 +60,155 @@ export const tocData = (): TocItem[] => {
     },
     {
       label: 'Atlas',
-      url: '/docs/atlas/getting-started/',
-      contentSite: DocSites.CLOUD_DOCS,
+      url: '/docs/charts/',
+      contentSite: DocSites.CHARTS,
       items: [
         {
-          label: 'Application Development',
+          label: 'ATLAS CHARTS',
           group: true,
           items: [
             {
-              label: 'Connect to Clusters',
-              url: '/docs/atlas/connect-to-database-deployment',
+              label: 'tutorials',
+              url: '/docs/charts/tutorials/',
               collapsible: true,
               items: [
                 {
-                  label: 'Drivers',
-                  url: '/docs/atlas/driver-connection',
+                  label: 'Visualizing Order Data',
+                  url: '/docs/charts/tutorial/order-data/order-data-tutorial-overview/',
                 },
                 {
-                  label: 'Compass',
-                  url: '/docs/atlas/compass-connection',
-                },
-                {
-                  label: 'mongosh',
-                  url: '/docs/atlas/mongo-shell-connection',
-                },
-                {
-                  collapsible: true,
-                  label: 'BI Connector',
-                  url: '/docs/atlas/bi-connection',
-                  items: [
-                    {
-                      label: 'Transition to Atlas SQL',
-                      url: '/docs/atlas/tutorial/transition-bic-to-atlas-sql',
-                    },
-                    {
-                      label: 'System DSN',
-                      url: '/docs/atlas/tutorial/create-system-dsn',
-                    },
-                  ],
+                  label: 'Visualizing Movie Details',
+                  url: '/docs/charts/tutorial/movie-details/movie-details-tutorial-overview/',
                 },
               ],
             },
             {
-              label: 'Command Line Tools',
-              url: '/docs/atlas/command-line-tools',
+              label: 'Data transfer',
+              url: '/docs/charts/admin-settings/',
             },
             {
-              label: 'VS Code',
-              url: '/docs/atlas/mongodb-for-vscode',
+              label: 'dashboards',
+              url: '/docs/charts/dashboards/',
+            },
+          ],
+        },
+        {
+          label: 'CHART TYPES',
+          group: true,
+          items: [
+            {
+              label: 'Natural Language Charts',
+              url: '/docs/charts/chart-type-reference/natural-language-charts/',
+            },
+            {
+              label: 'Line and Area Charts',
+              url: '/docs/charts/chart-type-reference/line-area-chart/',
+            },
+            {
+              label: 'Heatmap',
+              url: '/docs/charts/chart-type-reference/heatmap/',
             },
           ],
         },
       ],
     },
     {
-      label: 'C# Quick Start',
-      url: '/docs/drivers/csharp/:version/quick-start',
-      glyph: 'Bulb',
-      contentSite: DocSites.CSHARP,
-      versionDropdown: true,
+      label: 'Client Libraries',
+      url: '/docs/cluster-to-cluster-sync/:version/quickstart',
+      contentSite: DocSites.C2C,
       items: [
         {
-          label: 'C# Documentation',
+          label: 'Client Libraries',
           group: true,
           items: [
             {
-              label: 'Quick Reference',
-              url: '/docs/drivers/csharp/:version/quick-reference/',
-            },
-            {
-              label: 'Usage Examples',
-              url: '/docs/drivers/csharp/:version/usage-examples',
-              collapsible: true,
+              label: 'c2c sync',
+              showSubNav: true,
+              url: '/docs/cluster-to-cluster-sync/:version/about-mongosync/',
               items: [
                 {
-                  label: 'Find a Document',
-                  url: '/docs/drivers/csharp/:version/usage-examples/findOne/',
-                },
-                {
-                  label: 'Find Multiple Documents',
-                  url: '/docs/drivers/csharp/:version/usage-examples/findMany/',
-                },
-                {
-                  label: 'Insert a Document',
-                  url: '/docs/drivers/csharp/:version/usage-examples/insertOne',
+                  label: 'c2c documentation',
+                  group: true,
+                  versionDropdown: true,
+                  items: [
+                    {
+                      label: 'Installation',
+                      url: '/docs/cluster-to-cluster-sync/:version/installation/',
+                    },
+                    {
+                      label: 'Connect',
+                      url: '/docs/cluster-to-cluster-sync/:version/connecting/',
+                    },
+                    {
+                      label: 'Cluster Topologies',
+                      url: '/docs/cluster-to-cluster-sync/:version/topologies/',
+                    },
+                  ],
                 },
               ],
             },
             {
-              label: "What's New",
-              url: '/docs/drivers/csharp/:version/whats-new',
+              label: 'C# driver',
+              showSubNav: true,
+              url: '/docs/drivers/csharp/:version/whats-new/',
+              contentSite: DocSites.CSHARP,
+              items: [
+                {
+                  label: 'C# Documentation',
+                  group: true,
+                  versionDropdown: true,
+                  items: [
+                    {
+                      label: 'Quick Reference',
+                      url: '/docs/drivers/csharp/:version/quick-reference/',
+                    },
+                    {
+                      label: 'Usage Examples',
+                      url: '/docs/drivers/csharp/:version/usage-examples',
+                      collapsible: true,
+                      items: [
+                        {
+                          label: 'Find a Document',
+                          url: '/docs/drivers/csharp/:version/usage-examples/findOne/',
+                        },
+                        {
+                          label: 'Find Multiple Documents',
+                          url: '/docs/drivers/csharp/:version/usage-examples/findMany/',
+                        },
+                        {
+                          label: 'Insert a Document',
+                          url: '/docs/drivers/csharp/:version/usage-examples/insertOne',
+                        },
+                      ],
+                    },
+                    {
+                      label: "What's New",
+                      url: '/docs/drivers/csharp/:version/whats-new',
+                    },
+                  ],
+                },
+                {
+                  label: 'Fundamentals',
+                  group: true,
+                  items: [
+                    {
+                      label: 'Operations with Builders',
+                      url: '/docs/drivers/csharp/:version/fundamentals/builders',
+                    },
+                    {
+                      label: 'Databases and Collections',
+                      url: '/docs/drivers/csharp/:version/fundamentals/database-collection',
+                      collapsible: true,
+                      items: [
+                        {
+                          label: 'Run a Database Command',
+                          url: '/docs/drivers/csharp/:version/fundamentals/databases-collections/run-command',
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },

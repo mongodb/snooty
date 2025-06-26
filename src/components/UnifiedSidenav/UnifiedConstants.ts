@@ -5,7 +5,6 @@ export interface BreadCrumb {
 
 export interface TocItem {
   label: string;
-  glyph?: string;
   url?: string;
   group?: boolean;
   contentSite?: string;
@@ -25,4 +24,6 @@ export enum DocSites {
   CLOUD_DOCS = 'cloud-docs',
   DATABASE_TOOLS = 'database-tools',
   CSHARP = 'csharp',
+  CHARTS = 'charts',
+  C2C = 'cluster-sync',
 }
