@@ -193,13 +193,11 @@ export const getLocaleMapping = (siteUrl: string, slug: string) => {
 export const onSelectLocale = (locale: string) => {
   try {
     // Set cookie to expire in 1 year
-    const cookieMaxAge = 1000 * 60 * 60 * 24 * 365;
-    const expirationDate = new Date();
-    expirationDate.setTime(expirationDate.getTime() + cookieMaxAge);
-    const cookieExpiration = `expires=${expirationDate}`;
+    const maxAge = 60 * 60 * 24 * 365;
+    const cookieMaxAge = `max-age=${maxAge}`;
     // Set for all paths on the MongoDB domain so that it persists for every site and locale
     const cookiePath = 'path=/';
-    window.document.cookie = `${COOKIE_KEY_PREF_LOCALE}=${locale};${cookieExpiration};${cookiePath}`;
+    window.document.cookie = `${COOKIE_KEY_PREF_LOCALE}=${locale};${cookieMaxAge};${cookiePath}`;
   } catch (err) {
     console.error(err);
   }
