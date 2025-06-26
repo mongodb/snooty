@@ -50,7 +50,7 @@ export const sharedDarkModeOverwriteStyles = `
 const l1LinkStyling = css`
   svg {
     transform: rotate(-45deg);
-    margin-left: 4px;
+    margin-left: 8px;
   }
 `;
 
@@ -92,7 +92,7 @@ const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
   svg {
-    margin-left: 4px;
+    margin-left: 8px;
     margin-bottom: -6px;
     color: ${palette.gray.base};
   }
