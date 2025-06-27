@@ -25,16 +25,16 @@ for i in {1..3}; do
   # Build failed! Retry?
   if ! grep -q "temp query result" "$OUTPUT_TEMP_FILE" && \
      ! grep -q "parallel query running" "$OUTPUT_TEMP_FILE"; then
-    echo "Build failed, but not with the 'temp query result' error. Not retrying."
+    echo "Build failed, but not with 'temp query result' or 'parallel query running' errors. Not retrying."
     # Clean up and exit with original non-zero code
     rm -f "$OUTPUT_TEMP_FILE"
     exit $EXIT_CODE
   fi
 
-  echo "Build failed with 'temp query result' or with 'parallel query running' error! Clearing LMDB cache."
+  echo "Build failed with a 'temp query result' or with 'parallel query running' error! Clearing LMDB cache."
   rm -rf .cache/caches-lmdb/
   rm -f "$OUTPUT_TEMP_FILE"
 done
 
-echo "Build failed 3 times with 'temp query result' or 'parallel query running' error. Giving up."
+echo "Build failed 3 times with 'temp query result' or 'parallel query running' errors. Giving up."
 exit 1
