@@ -94,8 +94,9 @@ const ConfigurableOption = ({
         value={selections[option.value]}
         aria-label={`Select your ${option.text}`}
         onChange={(value) => onSelect(value, option.value, optionIndex)}
-        data-value={isOfflineDocsBuild ? option.value : undefined}
+        data-option-value={isOfflineDocsBuild ? option.value : undefined}
         data-dependencies={isOfflineDocsBuild ? JSON.stringify(option.dependencies) : undefined}
+        data-selection-value={isOfflineDocsBuild ? '' : undefined}
       >
         {filteredOptions.map((selection, i) => (
           <Option

@@ -4,27 +4,37 @@ function bindComposableTutorials() {
     contents: HTMLElement[],
     menu: HTMLElement,
     configurableOptions: HTMLElement[],
-    composable: HTMLElement,
+    // composable: HTMLElement,
     // listItems: HTMLElement[],
     currentIdx: number,
     selectButton?: HTMLElement
   ) {
+    debugger;
     const currentSelections: Record<string, string> = {};
+
+    // update the current selection list
+    const selectedOptionValue = this.dataset['value'];
+    const configurableOptionValue = selectButton?.dataset['optionValue'];
+    if (configurableOptionValue && selectedOptionValue) {
+      currentSelections[configurableOptionValue] = selectedOptionValue;
+    }
 
     // loop through each configurable option
     // for the ones preceding the one clicked, get their values
     // for the ones following the one clicked, update their availability and value
     for (let idx = 0; idx < configurableOptions.length; idx++) {
+      debugger;
+      const configurableOption = configurableOptions[idx];
+      const currentSelectButton = configurableOption.querySelector('button') as HTMLElement;
       if (idx === currentIdx) {
+        currentSelectButton.dataset['selectionValue'] = selectedOptionValue;
         continue;
       }
 
-      const configurableOption = configurableOptions[idx];
-      const composableSelect = configurableOption.querySelector('button') as HTMLElement;
-
+      // TODO: get key/value of each selection option
       if (idx < currentIdx) {
-        const key = '';
-        const value = '';
+        const key = currentSelectButton.dataset['optionValue'] ?? '';
+        const value = currentSelectButton.dataset['selectionValue'] ?? '';
         currentSelections[key] = value;
         continue;
       }
@@ -32,7 +42,7 @@ function bindComposableTutorials() {
       // hide this configurable option if dependencies not met
       let dependencies: Record<string, string>[] = [];
       try {
-        dependencies = JSON.parse(composableSelect?.dataset['option'] ?? '[]');
+        dependencies = JSON.parse(currentSelectButton?.dataset['dependencies'] ?? '[]');
       } catch (e) {
         console.error(e);
       }
@@ -46,24 +56,38 @@ function bindComposableTutorials() {
           }
         }
       }
+
       if (dependencyMet) {
+        const key = currentSelectButton.dataset['optionValue'] ?? '';
+        const value = currentSelectButton.dataset['selectionValue'] ?? '';
+        currentSelections[key] = value;
         configurableOption.removeAttribute('hidden');
       } else {
         configurableOption.setAttribute('hidden', 'true');
       }
     }
 
-    // update the current selection list
-    const selectedOptionValue = this.dataset['value'];
-    const configurableOptionValue = selectButton?.dataset['value'];
-    if (configurableOptionValue && selectedOptionValue) {
-      currentSelections[configurableOptionValue] = selectedOptionValue;
-    }
-    composable.dataset.selections = JSON.stringify(currentSelections);
-
-    // update the availabilty of listItems within option
-
     // show the contents
+    console.log('currentSelections ', currentSelections);
+    for (const contentElm of contents) {
+      const requiredSelections: Record<string, string> = JSON.parse(contentElm.dataset['selections'] ?? '{}');
+      let requirementsMet = true;
+      for (const [key, value] of Object.entries(requiredSelections)) {
+        if (value === 'None') {
+          continue;
+        }
+        if (currentSelections[key] !== value) {
+          requirementsMet = false;
+          break;
+        }
+      }
+
+      if (requirementsMet) {
+        contentElm.removeAttribute('hidden');
+      } else {
+        contentElm.setAttribute('hidden', 'true');
+      }
+    }
 
     // update select button text
     const buttonChildren = selectButton?.querySelectorAll('div');
@@ -108,7 +132,7 @@ function bindComposableTutorials() {
               contents,
               menu,
               composableSelects,
-              composable,
+              // composable,
               // listItems,
               idx,
               selectButton ?? undefined
@@ -118,7 +142,7 @@ function bindComposableTutorials() {
       }
     }
 
-    // select defaults
+    // TODO: select defaults
   };
 
   document.addEventListener('DOMContentLoaded', onContentLoaded, false);
