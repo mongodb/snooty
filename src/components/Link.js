@@ -135,6 +135,7 @@ const Link = ({
   // If contentSite, that means we are coming from the UnifiedSideNav and not the old SideNav
   if (contentSite) {
     // For an external links, inside the unified toc
+    console.log('before relative to', to);
     if (!isRelativeUrl(to)) {
       return (
         <LGLink
@@ -151,6 +152,8 @@ const Link = ({
       );
     }
 
+    console.log('after relative to', to);
+
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
@@ -160,6 +163,7 @@ const Link = ({
     // allows our custom 404 page to render.
     if (project === contentSite || isUnifiedTOCInDevMode) {
       // Get rid of the path contentSite in link for internal links
+      console.log('inside gatsby link', project, contentSite, isUnifiedTOCInDevMode);
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
 
       return (
