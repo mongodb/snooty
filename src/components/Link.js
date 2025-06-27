@@ -48,10 +48,8 @@ export const sharedDarkModeOverwriteStyles = `
 `;
 
 const l1LinkStyling = css`
-  svg {
-    transform: rotate(-45deg);
-    margin-left: 8px;
-  }
+  transform: rotate(-45deg);
+  margin-left: 8px;
 `;
 
 /**
@@ -178,12 +176,12 @@ const Link = ({
 
     // On the Unified SideNav but linking to a different content site
     return (
-      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), l1LinkStyling, className)} href={to}>
+      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={to}>
         {children}
         {decoration}
         {/* Adds icon if we are in the L2 panel and linking to an L1 tab */}
         {((hideExternalIconProp && !hideExternalIconProp) || (l1List && l1List.indexOf(to) !== -1)) && (
-          <Icon glyph={'ArrowRight'} fill={palette.gray.base} />
+          <Icon className={cx(l1LinkStyling)} glyph={'ArrowRight'} fill={palette.gray.base} />
         )}
       </a>
     );

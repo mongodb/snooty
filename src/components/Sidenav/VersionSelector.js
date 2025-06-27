@@ -4,6 +4,8 @@ import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
 import { theme } from '../../theme/docsTheme';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { selectStyling } from '../VersionDropdown';
+import { getFeatureFlags } from '../../utils/feature-flags';
 
 const buildChoice = (branch) => {
   return {
@@ -12,37 +14,39 @@ const buildChoice = (branch) => {
   };
 };
 
-// const buildChoices = (branches, tocVersionNames) => {
-//   return !branches ? [] : branches.filter((branch) => tocVersionNames.includes(branch.gitBranchName)).map(buildChoice);
-// };
+const buildChoices = (branches, tocVersionNames) => {
+  return !branches ? [] : branches.filter((branch) => tocVersionNames.includes(branch.gitBranchName)).map(buildChoice);
+};
 
 const selectStyle = css`
-  margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
-
-  ${'' /* Render version dropdown text in front of the Sidebar text */}
-  button {
-    z-index: 2;
-    background-color: var(--select-button-bg-color);
-    color: var(--select-button-color);
-
-    div:last-child svg {
-      color: var(--select-button-carot);
-    }
-
-    .dark-theme &:hover {
-      background-color: var(--gray-dark4);
-      color: var(--gray-light3);
-      border-color: var(--gray-base);
-      box-shadow: var(--gray-dark2) 0px 0px 0px 3px;
+  flex: 1 0 auto;
+  > div:first-of-type {
+    max-width: 100px;
+    width: max-content;
+  }
+  > div:nth-of-type(2) {
+    width: 150px;
+    right: 0px;
+    left: unset;
+    @media ${theme.screenSize.upToLarge} {
+      width: max-content;
+      max-width: calc(100vw - (${theme.size.medium} * 2));
+      // (max viewport width - padding) inferred from the max width of the side nav in mobile
     }
   }
-
-  /* Override LG mobile style of enlarged mobile font */
-  @media ${theme.screenSize.upToLarge} {
-    div,
-    span {
-      font-size: ${theme.fontSize.small};
+  button {
+    height: ${theme.size.medium};
+    &[aria-expanded='true'] {
+      svg {
+        transform: rotate(180deg);
+      }
     }
+  }
+  span {
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
 `;
 
@@ -51,12 +55,21 @@ const wrapperStyle = css`
 `;
 
 const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
+  const { isUnifiedToc } = getFeatureFlags();
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
-  const [options, setOptions] = useState((availableVersions[versionedProject] || []).map(buildChoice));
+  const [options, setOptions] = useState(
+    isUnifiedToc
+      ? (availableVersions[versionedProject] || []).map(buildChoice)
+      : buildChoices(availableVersions[versionedProject], tocVersionNames)
+  );
 
   useEffect(() => {
-    setOptions((availableVersions[versionedProject] || []).map(buildChoice));
-  }, [availableVersions, tocVersionNames, versionedProject]);
+    setOptions(
+      isUnifiedToc
+        ? (availableVersions[versionedProject] || []).map(buildChoice)
+        : buildChoices(availableVersions[versionedProject], tocVersionNames)
+    );
+  }, [availableVersions, tocVersionNames, versionedProject, isUnifiedToc]);
 
   const onChange = useCallback(
     ({ value }) => {
@@ -73,7 +86,7 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
     <div onClick={onClick} className={cx(wrapperStyle)}>
       <Select
         value={activeVersions[versionedProject]}
-        className={cx(selectStyle)}
+        className={cx(isUnifiedToc ? selectStyling : selectStyle)}
         onChange={onChange}
         aria-labelledby={'select'}
         popoverZIndex={2}

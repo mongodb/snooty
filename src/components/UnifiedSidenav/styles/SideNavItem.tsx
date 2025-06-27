@@ -49,9 +49,12 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
 
 export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) => css`
   div > div {
-    ${isAccordion &&
+        ${isAccordion &&
     css`
       padding-left: 4px;
+      button {
+        margin-left: -8px;
+      }
     `}
     font-weight: 500;
     color: var(--tab-color-primary);
@@ -59,7 +62,6 @@ export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) =>
 
   // Version Dropdown button
   button {
-    margin-left: ${!isAccordion && '-8px'};
     height: 28px;
   }
 `;
