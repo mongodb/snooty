@@ -176,6 +176,8 @@ const Link = ({
       );
     }
 
+    console.log('to', to, hideExternalIconProp, l1List);
+
     // On the Unified SideNav but linking to a different content site
     return (
       <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), l1LinkStyling, className)} href={to}>
