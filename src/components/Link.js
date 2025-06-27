@@ -6,6 +6,7 @@ import { Link as LGLink } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
+import Icon from '@leafygreen-ui/icon';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
@@ -46,6 +47,13 @@ export const sharedDarkModeOverwriteStyles = `
   font-weight: var(--link-font-weight);
 `;
 
+const l1LinkStyling = css`
+  svg {
+    transform: rotate(-45deg);
+    margin-left: 8px;
+  }
+`;
+
 /**
  * CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
  * @param {ThemeStyle} linkThemeStyle
@@ -83,6 +91,11 @@ const gatsbyLinkStyling = (linkThemeStyle) => css`
 const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
+  svg {
+    margin-left: 8px;
+    margin-bottom: -6px;
+    color: ${palette.gray.base};
+  }
 `;
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
@@ -92,6 +105,7 @@ const Link = ({
   to,
   activeClassName,
   className,
+  l1List,
   partiallyActive,
   showLinkArrow,
   hideExternalIcon: hideExternalIconProp,
@@ -120,6 +134,23 @@ const Link = ({
 
   // If contentSite, that means we are coming from the UnifiedSideNav and not the old SideNav
   if (contentSite) {
+    // For an external links, inside the unified toc
+    if (!isRelativeUrl(to)) {
+      return (
+        <LGLink
+          className={joinClassNames(lgLinkStyling, className)}
+          href={to}
+          hideExternalIcon={false}
+          target={'_blank'}
+          fill={palette.gray.base}
+          {...anchorProps}
+        >
+          {children}
+          {decoration}
+        </LGLink>
+      );
+    }
+
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
@@ -127,7 +158,7 @@ const Link = ({
 
     // Using the isUnifiedTOCInDevMode to enforce the client-side routing for local build and preview deployments which
     // allows our custom 404 page to render.
-    if (project === contentSite || isUnifiedTOCInDevMode) {
+    if (project === contentSite || isUnifiedTOCInDevMode === true) {
       // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
 
@@ -145,11 +176,15 @@ const Link = ({
       );
     }
 
-    // On the Unified SideNav but linking to a different site
+    // On the Unified SideNav but linking to a different content site
     return (
-      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={to}>
+      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), l1LinkStyling, className)} href={to}>
         {children}
         {decoration}
+        {/* Adds icon if we are in the L2 panel and linking to an L1 tab */}
+        {((hideExternalIconProp && !hideExternalIconProp) || (l1List && l1List.indexOf(to) !== -1)) && (
+          <Icon glyph={'ArrowRight'} fill={palette.gray.base} />
+        )}
       </a>
     );
   }

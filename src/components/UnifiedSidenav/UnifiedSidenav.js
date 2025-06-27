@@ -170,7 +170,11 @@ export function UnifiedSidenav({ slug }) {
     });
   }, [unifiedTocTree, activeVersions, availableVersions, project, snootyEnv]);
 
-  console.log('The edited toctree with prefixes is:', tree);
+  const l1List = useMemo(() => {
+    return tree.map((item) => item.newUrl);
+  }, [tree]);
+
+  console.log('The edited toctree with prefixes is:', tree, l1List);
   console.log(unifiedTocTree);
 
   // Initialize state with default values instead of computed values
@@ -224,6 +228,7 @@ export function UnifiedSidenav({ slug }) {
           slug={slug}
           currentL2s={currentL2s}
           setCurrentL1={setCurrentL1}
+          l1List={l1List}
           setCurrentL2s={setCurrentL2s}
           hideMobile={hideMobile}
         />
@@ -235,6 +240,7 @@ export function UnifiedSidenav({ slug }) {
           currentL2s={currentL2s}
           setCurrentL1={setCurrentL1}
           setCurrentL2s={setCurrentL2s}
+          l1List={l1List}
           currentL1={currentL1}
         />
       </div>

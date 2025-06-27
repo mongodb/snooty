@@ -63,12 +63,6 @@ const panelStyling = LeafyCSS`
     ul {
       display: block;
       width: 100%;
-
-      li {
-        a {
-          justify-content: space-between !important;
-        }
-      }
     }
 
 `;
@@ -81,6 +75,7 @@ export const DoublePannedNav = ({
   currentL2s,
   setCurrentL1,
   setCurrentL2s,
+  l1List,
   currentL1,
 }) => {
   const { isTabletOrMobile } = useScreenSize();
@@ -98,6 +93,8 @@ export const DoublePannedNav = ({
               {...staticTocItem}
               slug={slug}
               key={staticTocItem.newUrl + staticTocItem.label}
+              isStatic={true}
+              l1List={l1List}
               setCurrentL1={setCurrentL1}
               setShowDriverBackBtn={setShowDriverBackBtn}
               isAccordion={false}
@@ -116,7 +113,7 @@ export const DoublePannedNav = ({
                 Back to Client Libraries
               </BackLink>
             )}
-            {currentL1.versionDropdown && <VersionDropdown />}
+            {currentL1?.versionDropdown && <VersionDropdown />}
             {currentL2s.items?.map((navItems) => (
               <UnifiedTocNavItem
                 {...navItems}
@@ -125,6 +122,7 @@ export const DoublePannedNav = ({
                 slug={slug}
                 isAccordion={false}
                 setCurrentL2s={setCurrentL2s}
+                l1List={l1List}
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
             ))}
