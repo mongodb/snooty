@@ -80,8 +80,8 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
 // Function that adds the current version
 const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, snootyEnv }) => {
   return tree?.map((item) => {
-    let newUrl = item.url ? item.url : '';
-    const currentProject = item.contentSite ? item.contentSite : contentSite;
+    let newUrl = item.url ?? '';
+    const currentProject = item.contentSite ?? contentSite;
 
     // Replace version variable with the true current version
     if (item?.url?.includes(':version')) {
@@ -89,8 +89,8 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, 
         (version) => version.gitBranchName === activeVersions[currentProject]
       );
       // If no version use first version.urlSlug in the list, or if no version loads, set as current
-      const defaultVersion = versionsData[currentProject]?.[0] ? versionsData[currentProject][0].urlSlug : 'current';
-      const currentVersion = version ? version.urlSlug : defaultVersion;
+      const defaultVersion = versionsData[currentProject]?.[0]?.urlSlug ?? 'current';
+      const currentVersion = version?.urlSlug ?? defaultVersion;
       newUrl = item.url.replace(/:version/g, currentVersion);
     }
 
@@ -170,7 +170,11 @@ export function UnifiedSidenav({ slug }) {
     });
   }, [unifiedTocTree, activeVersions, availableVersions, project, snootyEnv]);
 
-  console.log('The edited toctree with prefixes is:', tree);
+  const l1List = useMemo(() => {
+    return tree.map((item) => item.newUrl);
+  }, [tree]);
+
+  console.log('The edited toctree with prefixes is:', tree, l1List);
   console.log(unifiedTocTree);
 
   // Initialize state with default values instead of computed values
@@ -224,6 +228,7 @@ export function UnifiedSidenav({ slug }) {
           slug={slug}
           currentL2s={currentL2s}
           setCurrentL1={setCurrentL1}
+          l1List={l1List}
           setCurrentL2s={setCurrentL2s}
           hideMobile={hideMobile}
         />
@@ -235,6 +240,7 @@ export function UnifiedSidenav({ slug }) {
           currentL2s={currentL2s}
           setCurrentL1={setCurrentL1}
           setCurrentL2s={setCurrentL2s}
+          l1List={l1List}
           currentL1={currentL1}
         />
       </div>

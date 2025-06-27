@@ -5,7 +5,6 @@ export interface BreadCrumb {
 
 export interface TocItem {
   label: string;
-  glyph?: string;
   url?: string;
   group?: boolean;
   contentSite?: string;
@@ -20,10 +19,12 @@ export interface ActiveVersions {
   [project: string]: string;
 }
 
-// These has to match how we store the repo name in local storage
+// DOP-5379: Move this somewhere that makes more sense when toc.ts is more finalized
 export enum DocSites {
   CLOUD_DOCS = 'cloud-docs',
   DATABASE_TOOLS = 'database-tools',
   CSHARP = 'csharp',
   ATLAS_CLI = 'atlas-cli',
+  CHARTS = 'charts',
+  C2C = 'cluster-sync',
 }
