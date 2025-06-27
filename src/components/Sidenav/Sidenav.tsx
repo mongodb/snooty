@@ -100,7 +100,7 @@ const SidenavContainer = styled.div(
     top: 0px;
     height: calc(
       100vh + ${theme.header.actionBarMobileHeight} - ${topLarge} +
-        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(${scrollY}))
+        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(--scroll-y))
     );
 
     @media ${theme.screenSize.upToLarge} {
@@ -266,7 +266,13 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }:
           ${disableScroll(!hideMobile)}
         `}
       />
-      <SidenavContainer {...topValues} scrollY={`${viewport.scrollY}px`} id={SIDE_NAV_CONTAINER_ID}>
+      <SidenavContainer
+        {...topValues}
+        // @ts-expect-error
+        style={{ '--scroll-y': `${viewport.scrollY}px` }}
+        scrollY={`${viewport.scrollY}px`}
+        id={SIDE_NAV_CONTAINER_ID}
+      >
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isTabletOrMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
