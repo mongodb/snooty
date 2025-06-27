@@ -86,8 +86,8 @@ const disableScroll = (shouldDisableScroll: boolean) => css`
 
 const getTopAndHeight = (topValue: string, scrollY: string) => {
   return css`
-    top: max(min(calc(${topValue} - var(${scrollY}))), ${theme.header.actionBarMobileHeight});
-    height: calc(100vh - max(min(calc(${topValue} - var(${scrollY}))), ${theme.header.actionBarMobileHeight}));
+    top: max(min(calc(${topValue} - ${scrollY})), ${theme.header.actionBarMobileHeight});
+    height: calc(100vh - max(min(calc(${topValue} - ${scrollY})), ${theme.header.actionBarMobileHeight}));
   `;
 };
 
@@ -100,7 +100,7 @@ const SidenavContainer = styled.div(
     top: 0px;
     height: calc(
       100vh + ${theme.header.actionBarMobileHeight} - ${topLarge} +
-        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(--scroll-y))
+        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), ${scrollY})
     );
 
     @media ${theme.screenSize.upToLarge} {
@@ -266,13 +266,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }:
           ${disableScroll(!hideMobile)}
         `}
       />
-      <SidenavContainer
-        {...topValues}
-        // @ts-expect-error
-        style={{ '--scroll-y': `${viewport.scrollY}px` }}
-        scrollY={`${viewport.scrollY}px`}
-        id={SIDE_NAV_CONTAINER_ID}
-      >
+      <SidenavContainer {...topValues} scrollY={`${viewport.scrollY}px`} id={SIDE_NAV_CONTAINER_ID}>
         <SidenavMobileTransition hideMobile={hideMobile} isMobile={isTabletOrMobile}>
           <LeafygreenSideNav
             aria-label="Side navigation"
