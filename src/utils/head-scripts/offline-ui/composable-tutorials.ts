@@ -1,15 +1,37 @@
 function bindComposableTutorials() {
+  function updateSelectButtonText(selectButton: HTMLElement, text: string) {
+    const buttonChildren = selectButton?.querySelectorAll('div');
+    const buttonText = buttonChildren ? buttonChildren[buttonChildren.length - 1] : undefined;
+    if (selectButton && buttonText) {
+      buttonText.innerText = text;
+    }
+  }
+
+  function autoSelectFirstOption(selectButton: HTMLElement): [string, string] {
+    const configurableOption = selectButton.closest('.configurable-option');
+    if (!configurableOption) {
+      console.error('Auto selecting first option not found');
+      return ['', ''];
+    }
+    // get the first option list item
+    const optionListItems = configurableOption.querySelector('li.offline-select-choice') as HTMLElement;
+
+    // close the menu
+    const selectMenu = configurableOption.querySelector('.offline-composable-select') as HTMLElement;
+    selectMenu.setAttribute('hidden', ' true');
+    return optionListItems?.dataset?.['value'] && optionListItems?.dataset?.['text']
+      ? [optionListItems?.dataset?.['value'], optionListItems?.dataset?.['text']]
+      : ['', ''];
+  }
+
   function onSelectListItem(
     this: HTMLElement,
     contents: HTMLElement[],
     menu: HTMLElement,
     configurableOptions: HTMLElement[],
-    // composable: HTMLElement,
-    // listItems: HTMLElement[],
     currentIdx: number,
     selectButton?: HTMLElement
   ) {
-    debugger;
     const currentSelections: Record<string, string> = {};
 
     // update the current selection list
@@ -23,7 +45,6 @@ function bindComposableTutorials() {
     // for the ones preceding the one clicked, get their values
     // for the ones following the one clicked, update their availability and value
     for (let idx = 0; idx < configurableOptions.length; idx++) {
-      debugger;
       const configurableOption = configurableOptions[idx];
       const currentSelectButton = configurableOption.querySelector('button') as HTMLElement;
       if (idx === currentIdx) {
@@ -31,7 +52,6 @@ function bindComposableTutorials() {
         continue;
       }
 
-      // TODO: get key/value of each selection option
       if (idx < currentIdx) {
         const key = currentSelectButton.dataset['optionValue'] ?? '';
         const value = currentSelectButton.dataset['selectionValue'] ?? '';
@@ -59,7 +79,12 @@ function bindComposableTutorials() {
 
       if (dependencyMet) {
         const key = currentSelectButton.dataset['optionValue'] ?? '';
-        const value = currentSelectButton.dataset['selectionValue'] ?? '';
+        let value = currentSelectButton.dataset['selectionValue'] ?? '';
+        let text = currentSelectButton.innerText;
+        if (!value) {
+          [value, text] = autoSelectFirstOption(currentSelectButton);
+        }
+        updateSelectButtonText(currentSelectButton, text);
         currentSelections[key] = value;
         configurableOption.removeAttribute('hidden');
       } else {
@@ -68,7 +93,6 @@ function bindComposableTutorials() {
     }
 
     // show the contents
-    console.log('currentSelections ', currentSelections);
     for (const contentElm of contents) {
       const requiredSelections: Record<string, string> = JSON.parse(contentElm.dataset['selections'] ?? '{}');
       let requirementsMet = true;
@@ -90,11 +114,7 @@ function bindComposableTutorials() {
     }
 
     // update select button text
-    const buttonChildren = selectButton?.querySelectorAll('div');
-    const buttonText = buttonChildren ? buttonChildren[buttonChildren.length - 1] : undefined;
-    if (selectButton && buttonText) {
-      buttonText.innerText = this.innerText;
-    }
+    updateSelectButtonText(selectButton as HTMLElement, this.innerText);
     // close the menu
     menu.setAttribute('hidden', 'true');
   }
@@ -124,8 +144,9 @@ function bindComposableTutorials() {
 
         const listItems = menu?.querySelectorAll('li') as unknown as HTMLElement[];
 
-        for (const listItem of listItems) {
-          // const listItem = listItems[idx];
+        // for (const listItem of listItems) {
+        for (let listItemIdx = 0; listItemIdx < listItems.length; listItemIdx++) {
+          const listItem = listItems[listItemIdx];
           listItem.addEventListener('click', () => {
             onSelectListItem.call(
               listItem,
@@ -138,8 +159,13 @@ function bindComposableTutorials() {
               selectButton ?? undefined
             );
           });
+          if (idx === 0 && listItemIdx === 0) {
+            listItem.click();
+          }
         }
       }
+
+      // auto select the first
     }
 
     // TODO: select defaults
