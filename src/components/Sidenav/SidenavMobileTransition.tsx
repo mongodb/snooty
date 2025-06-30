@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { css, Global } from '@emotion/react';
 import ConditionalWrapper from '../ConditionalWrapper';
@@ -28,7 +27,13 @@ const globalCSS = css`
   }
 `;
 
-const SidenavMobileTransition = ({ children, hideMobile, isMobile }) => (
+export type SidenavMobileTransitionProps = {
+  children: ReactNode;
+  hideMobile: boolean;
+  isMobile: boolean;
+};
+
+const SidenavMobileTransition = ({ children, hideMobile, isMobile }: SidenavMobileTransitionProps) => (
   <ConditionalWrapper
     condition={isMobile}
     wrapper={(children) => (
@@ -50,11 +55,5 @@ const SidenavMobileTransition = ({ children, hideMobile, isMobile }) => (
     {children}
   </ConditionalWrapper>
 );
-
-SidenavMobileTransition.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  hideMobile: PropTypes.bool.isRequired,
-  isMobile: PropTypes.bool.isRequired,
-};
 
 export default SidenavMobileTransition;

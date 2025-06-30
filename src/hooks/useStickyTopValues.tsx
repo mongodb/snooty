@@ -14,7 +14,7 @@ const getTopValue = (eol: boolean, heights: string[]) => {
   return `${topValue}px`;
 };
 
-type StickyTopValues = {
+export type StickyTopValues = {
   topLarge: string;
   topMedium: string;
   topSmall: string;
