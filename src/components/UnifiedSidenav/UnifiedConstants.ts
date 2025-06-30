@@ -2,17 +2,21 @@ export interface BreadCrumb {
   path: string;
   title: string;
 }
-
-export interface TocItem {
+export interface TocItemNested {
   label: string;
-  glyph?: string;
   url?: string;
+  glyph?: string;
   group?: boolean;
-  prefix?: string;
   collapsible?: boolean;
   breadcrumbs?: BreadCrumb[];
   showSubNav?: boolean;
-  items?: TocItem[];
+  items?: TocItemNested[];
+}
+
+export interface TocItem extends TocItemNested {
+  url: string;
+  prefix: string;
+  l1Id: string;
 }
 
 export interface ActiveVersions {
