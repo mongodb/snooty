@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { HeadingNode } from '../types/ast';
+import { MetadataChapter } from '../types/data';
 
-const observeHeadings = (headingNodes: HeadingNode[], observer: IntersectionObserver) =>
+const observeHeadings = (headingNodes: HeadingNode[] | MetadataChapter[], observer: IntersectionObserver) =>
   headingNodes.flatMap((heading) => {
     const el = document.getElementById(heading.id);
     if (el) {
@@ -24,7 +25,7 @@ const unobserveHeadings = (headings: HTMLElement[], observer: IntersectionObserv
  * @param {number} intersectionRatio The ratio to compare element intersection visibility with. If the element
  * is observed to be above this ratio, it will be eligible as active.
  */
-const useActiveHeading = (headingNodes: HeadingNode[], intersectionRatio: number = 0) => {
+const useActiveHeading = (headingNodes: HeadingNode[] | MetadataChapter[], intersectionRatio: number = 0) => {
   const [activeHeadingId, setActiveHeadingId] = useState(headingNodes?.[0]?.id);
 
   useEffect(() => {
