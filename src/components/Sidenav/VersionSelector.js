@@ -51,7 +51,7 @@ const selectStyle = css`
 `;
 
 const wrapperStyle = css`
-  // margin-left: auto;
+  margin-left: auto;
 `;
 
 const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {

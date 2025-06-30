@@ -49,7 +49,7 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
 
 export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) => css`
   div > div {
-        ${isAccordion &&
+    ${isAccordion &&
     css`
       padding-left: 4px;
       button {
