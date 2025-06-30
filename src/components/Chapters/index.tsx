@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import Icon from '@leafygreen-ui/icon';
-import { css } from '@leafygreen-ui/emotion';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { isString } from 'lodash';
@@ -218,7 +218,7 @@ const Chapters = ({ metadata, nodeData: { children } }: ChaptersProps) => {
             </ChapterView>
           )}
           {view === Views.Gallery.name && !!galleryViewData && (
-            <CardGroup className={guidesCardsStyle} nodeData={galleryViewData} />
+            <CardGroup className={guidesCardsStyle.name} nodeData={galleryViewData} />
           )}
         </Content>
       </Grid>
