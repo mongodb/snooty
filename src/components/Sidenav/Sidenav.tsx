@@ -86,8 +86,8 @@ const disableScroll = (shouldDisableScroll: boolean) => css`
 
 const getTopAndHeight = (topValue: string, scrollY: string) => {
   return css`
-    top: max(min(calc(${topValue} - var(${scrollY}))), ${theme.header.actionBarMobileHeight});
-    height: calc(100vh - max(min(calc(${topValue} - var(${scrollY}))), ${theme.header.actionBarMobileHeight}));
+    top: max(min(calc(${topValue} - ${scrollY})), ${theme.header.actionBarMobileHeight});
+    height: calc(100vh - max(min(calc(${topValue} - ${scrollY})), ${theme.header.actionBarMobileHeight}));
   `;
 };
 
@@ -100,7 +100,7 @@ const SidenavContainer = styled.div(
     top: 0px;
     height: calc(
       100vh + ${theme.header.actionBarMobileHeight} - ${topLarge} +
-        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), var(${scrollY}))
+        min(calc(${topLarge} - ${theme.header.actionBarMobileHeight}), ${scrollY})
     );
 
     @media ${theme.screenSize.upToLarge} {
