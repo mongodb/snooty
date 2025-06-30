@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState, useEffect, useRef, MouseEvent } from 'react';
 import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -16,6 +16,16 @@ import { SCREENSHOT_BUTTON_TEXT, SCREENSHOT_BUTTON_TEXT_LOW, SCREENSHOT_OVERLAY_
 const HIGHLIGHT_BORDER_SIZE = 5;
 
 let savedPosition: DOMRect | null = null;
+
+type ElemProps = {
+  width: number;
+  height: number;
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+  position: string;
+};
 
 const instructionsBorderStyling = css`
   position: fixed;
@@ -37,7 +47,7 @@ const instructionsPanelStyling = css`
   z-index: 13;
 `;
 
-const baseStyle = (position: string, top: string, left: string, width: string, height: string) => css`
+const baseStyle = (position: string, top: number, left: number, width: number, height: number) => css`
   position: ${position};
   top: ${top}px;
   left: ${left}px;
@@ -47,7 +57,7 @@ const baseStyle = (position: string, top: string, left: string, width: string, h
 `;
 
 // styling for shadow overlays around the current selected component
-const overlayElementStyle = (position: string, top: string, left: string, width: string, height: string) => css`
+const overlayElementStyle = (position: string, top: number, left: number, width: number, height: number) => css`
   ${baseStyle(position, top, left, width, height)};
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 10;
@@ -56,10 +66,10 @@ const overlayElementStyle = (position: string, top: string, left: string, width:
 // current hovered or selected component
 const highlightedElementStyle = (
   position: string,
-  top: string,
-  left: string,
-  width: string,
-  height: string,
+  top: number,
+  left: number,
+  width: number,
+  height: number,
   lineStyle: string
 ) => css`
   ${baseStyle(position, top, left, width, height)};
@@ -70,10 +80,10 @@ const highlightedElementStyle = (
   cursor: ${lineStyle === 'solid' ? 'unset' : 'pointer'};
 `;
 
-const exitButtonStyle = (position: string, top: string, left: string) => css`
+const exitButtonStyle = (position: string, top: number, left: number) => css`
   position: ${position};
-  top: ${Math.max(Number(top) - 1, 8)}px;
-  left: ${Math.max(Number(left) - 1, 8)}px;
+  top: ${Math.max(top - 1, 8)}px;
+  left: ${Math.max(left - 1, 8)}px;
   color: #ffdd49;
   background-color: white;
   border-radius: 80%;
@@ -102,7 +112,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   const currElem = useRef<Element>(null);
   const initialElemProperties = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0, position: 'absolute' };
   const currElemProperties = useRef(initialElemProperties);
-  const [elemProps, setElemProps] = useState({});
+  const [elemProps, setElemProps] = useState<ElemProps | null>(null);
 
   const documentScrollWidth = document.body.scrollWidth;
   const documentScrollHeight = document.body.scrollHeight;
@@ -188,7 +198,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // when screenshot button is first clicked
   const takeNewScreenshot = useCallback(() => {
-    savedPosition = document.getElementById(feedbackId).getBoundingClientRect();
+    savedPosition = document.getElementById(feedbackId)?.getBoundingClientRect() ?? null;
     setIsScreenshotButtonClicked(true);
     setDetachForm(true);
     domElementClickedRef.current = 'dashed';
@@ -197,7 +207,9 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   // close out the instructions panel
   const handleInstructionClick = () => {
-    document.getElementById(feedbackId).style.left = null;
+    const instructionPanel = document.getElementById(feedbackId);
+    // TODO: Check if this should be zero or unset
+    if (instructionPanel) instructionPanel.style.left = '';
     resetProperties();
   };
 
@@ -210,7 +222,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setScreenshotTaken(false);
   };
 
-  const handleDOMElementClick = (e) => {
+  const handleDOMElementClick = (e: MouseEvent) => {
     e.preventDefault();
 
     domElementClickedRef.current = 'solid';
@@ -219,15 +231,20 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
     // Allows for the feedback widget to appear on top of the screenshot overlay
     const fbFormEl = document.getElementById(feedbackId);
-    fbFormEl.style.display = 'unset';
-    fbFormEl.style.zIndex = '100';
-    fbFormEl.style.top = `${savedPosition.top + window.scrollY}px`;
-    fbFormEl.style.left = `${savedPosition.left}px`;
+    if (fbFormEl) {
+      fbFormEl.style.display = 'unset';
+      fbFormEl.style.zIndex = '100';
+      if (savedPosition) {
+        fbFormEl.style.top = `${savedPosition.top + window.scrollY}px`;
+        fbFormEl.style.left = `${savedPosition.left}px`;
+      }
+    }
   };
 
-  const handleExitButtonClick = (e) => {
+  const handleExitButtonClick = (e: MouseEvent) => {
     resetProperties();
-    document.getElementById(feedbackId).style.display = 'none';
+    const fbFormEl = document.getElementById(feedbackId);
+    if (fbFormEl) fbFormEl.style.display = 'none';
 
     setIsScreenshotButtonClicked(true);
     domElementClickedRef.current = 'dashed';
@@ -238,7 +255,8 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
 
   if (isScreenshotButtonClicked) {
     if (isBrowser && domElementClickedRef.current === 'dashed') {
-      document.getElementById(feedbackId).style.left = '-9000px';
+      const fbFormEl = document.getElementById(feedbackId);
+      if (fbFormEl) fbFormEl.style.left = '-9000px';
       // highlight elements based on mouse movement
       document.addEventListener('mousemove', handleElementHighlight);
     }
@@ -273,14 +291,16 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
               <div
                 className={cx(
                   'overlay',
-                  highlightedElementStyle(
-                    elemProps['position'],
-                    elemProps['top'],
-                    elemProps['left'],
-                    elemProps['width'],
-                    elemProps['height'],
-                    selectedElementBorderStyle
-                  )
+                  elemProps
+                    ? highlightedElementStyle(
+                        elemProps['position'],
+                        elemProps['top'],
+                        elemProps['left'],
+                        elemProps['width'],
+                        elemProps['height'],
+                        selectedElementBorderStyle
+                      )
+                    : ''
                 )}
                 onClick={handleDOMElementClick}
                 role="button"
@@ -289,7 +309,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
                 <div className={fwExitButtonId}>
                   <Icon
                     glyph="XWithCircle"
-                    css={exitButtonStyle(elemProps['position'], elemProps['top'], elemProps['left'])}
+                    css={elemProps ? exitButtonStyle(elemProps['position'], elemProps['top'], elemProps['left']) : ''}
                     size={24}
                     onClick={handleExitButtonClick}
                   />
@@ -298,49 +318,57 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
               <div
                 className={cx(
                   'overlay-left',
-                  overlayElementStyle(
-                    elemProps['position'],
-                    0,
-                    0,
-                    elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
-                    documentScrollHeight
-                  )
+                  elemProps
+                    ? overlayElementStyle(
+                        elemProps['position'],
+                        0,
+                        0,
+                        elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
+                        documentScrollHeight
+                      )
+                    : ''
                 )}
               />
               <div
                 className={cx(
                   'overlay-top',
-                  overlayElementStyle(
-                    elemProps['position'],
-                    0,
-                    elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
-                    elemProps['width'] + HIGHLIGHT_BORDER_SIZE * 2,
-                    elemProps['top'] - HIGHLIGHT_BORDER_SIZE
-                  )
+                  elemProps
+                    ? overlayElementStyle(
+                        elemProps['position'],
+                        0,
+                        elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
+                        elemProps['width'] + HIGHLIGHT_BORDER_SIZE * 2,
+                        elemProps['top'] - HIGHLIGHT_BORDER_SIZE
+                      )
+                    : ''
                 )}
               />
               <div
                 className={cx(
                   'overlay-bottom',
-                  overlayElementStyle(
-                    elemProps['position'],
-                    elemProps['bottom'] + HIGHLIGHT_BORDER_SIZE,
-                    elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
-                    elemProps['width'] + HIGHLIGHT_BORDER_SIZE * 2,
-                    documentScrollHeight - elemProps['bottom'] - HIGHLIGHT_BORDER_SIZE
-                  )
+                  elemProps
+                    ? overlayElementStyle(
+                        elemProps['position'],
+                        elemProps['bottom'] + HIGHLIGHT_BORDER_SIZE,
+                        elemProps['left'] - HIGHLIGHT_BORDER_SIZE,
+                        elemProps['width'] + HIGHLIGHT_BORDER_SIZE * 2,
+                        documentScrollHeight - elemProps['bottom'] - HIGHLIGHT_BORDER_SIZE
+                      )
+                    : ''
                 )}
               />
               <div
                 className={cx(
                   'overlay-right',
-                  overlayElementStyle(
-                    elemProps['position'],
-                    0,
-                    elemProps['left'] + elemProps['width'] + HIGHLIGHT_BORDER_SIZE,
-                    documentScrollWidth - elemProps['right'],
-                    documentScrollHeight
-                  )
+                  elemProps
+                    ? overlayElementStyle(
+                        elemProps['position'],
+                        0,
+                        elemProps['left'] + elemProps['width'] + HIGHLIGHT_BORDER_SIZE,
+                        documentScrollWidth - elemProps['right'],
+                        documentScrollHeight
+                      )
+                    : ''
                 )}
               />
             </>

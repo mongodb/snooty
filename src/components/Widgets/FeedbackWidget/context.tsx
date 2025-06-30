@@ -12,6 +12,7 @@ import React, {
 import { useLocation } from '@gatsbyjs/reach-router';
 import { getViewport, Viewport } from '../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
+import { SnootyEnv } from '../../../types/data';
 import { upsertFeedback, useRealmUser } from './realm';
 import { FeedbackPageData } from './useFeedbackData';
 
@@ -26,13 +27,38 @@ export type Feedback = {
   rating?: number;
 };
 
+type FeedbackSentiment = 'Negative' | 'Suggestion' | 'Positive';
+
+export type FeedbackPayload = {
+  page: {
+    title: string;
+    slug: string;
+    url: string | null;
+    docs_property: string;
+  };
+  user: {
+    stitch_id?: string;
+    email?: string;
+  };
+  attachment: {
+    dataUri?: string;
+    viewport?: Viewport;
+  };
+  viewport: Viewport;
+  category: FeedbackSentiment;
+  rating: number;
+  snootyEnv: SnootyEnv;
+  comment?: string;
+  feedback_id?: string;
+};
+
 export type FeedbackContextType = {
-  feedback;
+  feedback?: Feedback;
   progress: boolean[];
   view: FeedbackViewType;
   screenshotTaken: boolean;
   setScreenshotTaken: Dispatch<SetStateAction<boolean>>;
-  initializeFeedback;
+  initializeFeedback: (nextView: FeedbackViewType) => { newFeedback: Feedback };
   setProgress: Dispatch<SetStateAction<boolean[]>>;
   submitAllFeedback: (props: SubmitAllFeedbackProps) => void;
   abandon: () => void;
@@ -52,18 +78,38 @@ export type FeedbackTestInput = {
   screenshotTaken: boolean;
 };
 
+const initialValue = {
+  progress: [true, false, false],
+  view: 'waiting',
+  screenshotTaken: false,
+  setScreenshotTaken: () => {},
+  initializeFeedback: () => {},
+  setProgress: () => {},
+  submitAllFeedback: () => {},
+  abandon: () => {},
+  selectedRating: undefined,
+  setSelectedRating: () => {},
+  selectInitialRating: () => {},
+  isScreenshotButtonClicked: false,
+  setIsScreenshotButtonClicked: () => {},
+  detachForm: false,
+  setDetachForm: () => {},
+};
+
+const FeedbackContext = createContext<FeedbackContextType>(initialValue);
+
 export type FeedbackContextProps = {
   page: FeedbackPageData;
   test?: FeedbackTestInput;
   children: ReactNode;
 };
 
-const FeedbackContext = createContext<FeedbackContextType>();
-
 export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps) {
   const hasExistingFeedback =
     !!test?.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
-  const [feedback, setFeedback] = useState(() => (hasExistingFeedback && test.feedback) || undefined);
+  const [feedback, setFeedback] = useState<Feedback | undefined>(
+    () => (hasExistingFeedback && test.feedback) || undefined
+  );
   const [feedbackId, setFeedbackId] = useState<string | undefined>(() => undefined);
   const [detachForm, setDetachForm] = useState(false);
   const [selectedRating, setSelectedRating] = useState<number | undefined>(test?.feedback?.rating || undefined);
@@ -78,7 +124,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
 
   const createFeedbackPayload = useCallback(
     (rating: number, email?: string, dataUri?: string, viewport?: Viewport, comment?: string) => {
-      const res = {
+      const res: FeedbackPayload = {
         page: {
           title: page.title,
           slug: page.slug,
@@ -103,7 +149,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
       if (dataUri) {
         res.attachment.dataUri = dataUri;
       }
-      if (dataUri) {
+      if (viewport) {
         res.attachment.viewport = viewport;
       }
       if (feedbackId) {
@@ -141,7 +187,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
   };
 
   // Create a placeholder sentiment based on the selected rating to avoid any breaking changes from external dependencies
-  const createSentiment = (selectedRating: number) => {
+  const createSentiment = (selectedRating: number): FeedbackSentiment => {
     if (selectedRating < 3) {
       return 'Negative';
     } else if (selectedRating === 3) {
@@ -151,7 +197,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
     }
   };
 
-  const retryFeedbackSubmission = async (newFeedback) => {
+  const retryFeedbackSubmission = async (newFeedback: FeedbackPayload) => {
     try {
       const newUser = await reassignCurrentUser();
       newFeedback.user.stitch_id = newUser.id;
@@ -177,7 +223,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
       // This catch block will most likely only be hit after Realm attempts internal retry logic
       // after access token is refreshed
       console.error('There was an error submitting feedback', err);
-      if (err.statusCode === 401) {
+      if (err instanceof Error && err.statusCode === 401) {
         // Explicitly retry 1 time to avoid any infinite loop
         await retryFeedbackSubmission(newFeedback);
       }
