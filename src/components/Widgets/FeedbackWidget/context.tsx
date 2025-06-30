@@ -62,8 +62,8 @@ export type FeedbackContextType = {
   setProgress: Dispatch<SetStateAction<boolean[]>>;
   submitAllFeedback: (props: SubmitAllFeedbackProps) => void;
   abandon: () => void;
-  selectedRating: number;
-  setSelectedRating: Dispatch<SetStateAction<number>>;
+  selectedRating: number | undefined;
+  setSelectedRating: Dispatch<SetStateAction<number | undefined>>;
   selectInitialRating: (rating: number) => Promise<void>;
   isScreenshotButtonClicked: boolean;
   setIsScreenshotButtonClicked: Dispatch<SetStateAction<boolean>>;
@@ -78,18 +78,18 @@ export type FeedbackTestInput = {
   screenshotTaken: boolean;
 };
 
-const initialValue = {
+const initialValue: FeedbackContextType = {
   progress: [true, false, false],
   view: 'waiting',
   screenshotTaken: false,
   setScreenshotTaken: () => {},
-  initializeFeedback: () => {},
+  initializeFeedback: () => ({ newFeedback: {} }),
   setProgress: () => {},
   submitAllFeedback: () => {},
   abandon: () => {},
   selectedRating: undefined,
   setSelectedRating: () => {},
-  selectInitialRating: () => {},
+  selectInitialRating: async () => {},
   isScreenshotButtonClicked: false,
   setIsScreenshotButtonClicked: () => {},
   detachForm: false,
@@ -223,7 +223,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
       // This catch block will most likely only be hit after Realm attempts internal retry logic
       // after access token is refreshed
       console.error('There was an error submitting feedback', err);
-      if (err instanceof Error && err.statusCode === 401) {
+      if (err instanceof Error && 'statusCode' in err && err.statusCode === 401) {
         // Explicitly retry 1 time to avoid any infinite loop
         await retryFeedbackSubmission(newFeedback);
       }

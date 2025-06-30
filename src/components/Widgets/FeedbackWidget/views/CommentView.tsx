@@ -95,7 +95,7 @@ const useValidation = (inputValue: string, validator: (input: string) => boolean
 };
 
 const CommentView = () => {
-  const { submitAllFeedback, screenshotTaken, setSelectedRating, selectedRating } = useFeedbackContext();
+  const { submitAllFeedback, screenshotTaken, setSelectedRating, selectedRating = 0 } = useFeedbackContext();
 
   const [comment, setComment] = useState('');
   const [email, setEmail] = useState('');
