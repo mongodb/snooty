@@ -179,7 +179,6 @@ const offlineListStyle = css`
   box-shadow: rgba(0, 30, 43, 0.25) 0px 4px 7px 0px;
   margin: 6px 0 0 0;
   max-height: 250px;
-  // overflow: scroll;
 `;
 
 const offlineListItemStyle = css`
@@ -211,20 +210,9 @@ const offlineListItemStyle = css`
   }
 `;
 
-export const OfflineMenu = ({
-  choices,
-  className,
-  'data-option': dataOption,
-}: {
-  choices: Array<SelectOption>;
-  className?: string;
-  'data-option'?: string;
-}) => {
+export const OfflineMenu = ({ choices, className }: { choices: Array<SelectOption>; className?: string }) => {
   return (
-    <div
-      className={cx(offlineMenuStyling, className ? className : 'offline-select-menu')}
-      data-option={dataOption ? dataOption : undefined}
-    >
+    <div className={cx(offlineMenuStyling, 'offline-select-menu', className)}>
       <ul className={cx(offlineListStyle)}>
         {choices.map((choice, idx) => (
           <li

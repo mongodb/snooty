@@ -148,27 +148,14 @@ function bindComposableTutorials() {
         for (let listItemIdx = 0; listItemIdx < listItems.length; listItemIdx++) {
           const listItem = listItems[listItemIdx];
           listItem.addEventListener('click', () => {
-            onSelectListItem.call(
-              listItem,
-              contents,
-              menu,
-              composableSelects,
-              // composable,
-              // listItems,
-              idx,
-              selectButton ?? undefined
-            );
+            onSelectListItem.call(listItem, contents, menu, composableSelects, idx, selectButton ?? undefined);
           });
           if (idx === 0 && listItemIdx === 0) {
             listItem.click();
           }
         }
       }
-
-      // auto select the first
     }
-
-    // TODO: select defaults
   };
 
   document.addEventListener('DOMContentLoaded', onContentLoaded, false);

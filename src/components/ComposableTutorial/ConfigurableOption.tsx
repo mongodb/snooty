@@ -30,6 +30,11 @@ const mainStyling = css`
     color: var(--font-color-primary);
   }
 
+  // overwriting lg style to apply to offline docs
+  button {
+    margin-top: 3px;
+  }
+
   .dark-theme & {
     > button {
       background-color: var(--gray-dark4);
@@ -67,7 +72,6 @@ const ConfigurableOption = ({
   precedingOptions,
   optionIndex,
 }: ConfigurationOptionProps) => {
-  // TODO: filter options needs to be available offline
   const filteredOptions = useMemo(() => {
     return option.selections.filter((selection) => {
       // find a validSelection whilst replacing the current configurable option with each options value
@@ -110,11 +114,7 @@ const ConfigurableOption = ({
         ))}
       </Select>
       {isOfflineDocsBuild && (
-        <OfflineMenu
-          choices={option.selections}
-          className={cx(OFFLINE_MENU_CLASSNAME, offlineMenuStyling)}
-          data-options={JSON.stringify(option.selections)}
-        />
+        <OfflineMenu choices={option.selections} className={cx(OFFLINE_MENU_CLASSNAME, offlineMenuStyling)} />
       )}
     </div>
   );

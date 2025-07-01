@@ -205,7 +205,6 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
     navigate(`?${queryString}`);
   }, [composableOptions, location.pathname, location.search, validSelections]);
 
-  // TODO: offline logic
   const showComposable = useCallback(
     (dependencies: Record<string, string>[]) =>
       dependencies.every((d) =>
@@ -214,7 +213,6 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
     [currentSelections]
   );
 
-  // TODO: offline logic
   const onSelect = useCallback(
     (value: string, option: string, index: number) => {
       // the ones that occur less than index, take it
@@ -273,12 +271,7 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
       </div>
       <div>
         {children.map((c, i) => {
-          // selections is empty, if child has bad data
-          if (c.selections && showComposable([c.selections])) {
-            return <ComposableContent nodeData={c as ComposableNode} key={i} {...rest} />;
-          }
-
-          if (isOfflineDocsBuild) {
+          if ((c.selections && showComposable([c.selections])) || isOfflineDocsBuild) {
             return <ComposableContent nodeData={c as ComposableNode} key={i} {...rest} />;
           }
           return null;
