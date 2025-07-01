@@ -1,16 +1,18 @@
 import React, { useState, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import Icon from '@leafygreen-ui/icon';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
+import { isString } from 'lodash';
 import ComponentFactory from '../ComponentFactory';
 import CardGroup from '../Card/CardGroup';
 import BookIcon from '../icons/Book';
 import { theme } from '../../theme/docsTheme';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { getPlaintext } from '../../utils/get-plaintext';
-import useStickyTopValues from '../../hooks/useStickyTopValues';
+import useStickyTopValues, { StickyTopValues } from '../../hooks/useStickyTopValues';
+import type { CardGroupNode, CardNode, ChaptersNode, TextNode } from '../../types/ast';
+import type { MetadataChapters, MetadataGuides, RemoteMetadata } from '../../types/data';
 import RightColumn from './RightColumn';
 
 const plpGridColumns = css`
@@ -45,7 +47,7 @@ const Content = styled('div')`
   margin-bottom: 70px;
 `;
 
-const ViewController = styled('div')`
+const ViewController = styled('div')<StickyTopValues>`
   background-color: var(--background-color);
   margin-bottom: 20px;
   min-height: 84px;
@@ -70,7 +72,7 @@ const ViewOptions = styled('div')`
   grid-column: 2;
 `;
 
-const ViewOption = styled('span')`
+const ViewOption = styled('span')<{ isActive: boolean }>`
   align-items: center;
   --color-active: ${palette.black};
   .dark-theme & {
@@ -127,20 +129,24 @@ const guidesCardsStyle = css`
 `;
 
 // Emulate the nodeData structure for our Card component
-const getGuidesData = (chapters, guides) => {
+const getGuidesData = (chapters: MetadataChapters, guides: MetadataGuides): CardNode[] => {
   const guidesArray = Object.entries(guides);
   return guidesArray.map((guide) => {
     const [slug, data] = guide;
     const chapterName = data['chapter_name'];
+    const children = isString(data['description'])
+      ? ([{ type: 'text', value: data['description'] }] as TextNode[])
+      : data['description'];
 
     return {
       type: 'directive',
       name: 'card',
-      children: data['description'],
+      children,
+      argument: [],
       options: {
         cta: data['completion_time'] ? `${data['completion_time']} mins` : '',
-        headline: getPlaintext(data['title']),
-        icon: chapters[chapterName]?.['icon'],
+        headline: isString(data['title']) ? data['title'] : getPlaintext(data['title']),
+        icon: chapterName ? chapters[chapterName]?.['icon'] : undefined,
         'icon-alt': `${chapterName} chapter icon`,
         url: assertTrailingSlash(slug),
       },
@@ -149,9 +155,12 @@ const getGuidesData = (chapters, guides) => {
 };
 
 // Emulate the nodeData structure for our CardGroup component
-const getGuidesViewData = (metadata) => {
-  if (!metadata) return null;
+const getGuidesViewData = (metadata: RemoteMetadata): CardGroupNode | null => {
+  if (!metadata || !metadata.chapters || !metadata.guides) return null;
   return {
+    type: 'directive',
+    name: 'card-group',
+    argument: [],
     children: getGuidesData(metadata.chapters, metadata.guides),
     options: {
       columns: 3,
@@ -170,7 +179,12 @@ const Views = {
   },
 };
 
-const Chapters = ({ metadata, nodeData: { children } }) => {
+export type ChaptersProps = {
+  metadata: RemoteMetadata;
+  nodeData: ChaptersNode;
+};
+
+const Chapters = ({ metadata, nodeData: { children } }: ChaptersProps) => {
   const [view, setView] = useState(Views.Chapter.name);
   const galleryViewData = useMemo(() => getGuidesViewData(metadata), [metadata]);
   const topValues = useStickyTopValues();
@@ -204,19 +218,12 @@ const Chapters = ({ metadata, nodeData: { children } }) => {
             </ChapterView>
           )}
           {view === Views.Gallery.name && !!galleryViewData && (
-            <CardGroup css={guidesCardsStyle} nodeData={galleryViewData} />
+            <CardGroup className={guidesCardsStyle.name} nodeData={galleryViewData} />
           )}
         </Content>
       </Grid>
     </Container>
   );
-};
-
-Chapters.propTypes = {
-  metadata: PropTypes.object.isRequired,
-  nodeData: PropTypes.shape({
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
 };
 
 export default Chapters;

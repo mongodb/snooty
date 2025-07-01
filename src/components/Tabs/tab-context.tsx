@@ -12,10 +12,10 @@ import { isEmpty } from 'lodash';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { DRIVER_ICON_MAP, IconComponent } from '../icons/DriverIconMap';
 import { ContentsContext } from '../Contents/contents-context';
-import { Node } from '../../types/ast';
+import { ASTNode } from '../../types/ast';
 import { makeChoices } from './make-choices';
 
-export type Selectors = Record<string, Record<string, Node[]>>;
+export type Selectors = Record<string, Record<string, ASTNode[]>>;
 export type ActiveTabs = Record<string, string>;
 interface Choice {
   tabSelectorIcon?: IconComponent;

@@ -74,7 +74,7 @@ const IALinkedData = ({ linkedData }: IALinkedDataProps) => {
   return (
     <ul className={cx(ulStyling)}>
       {linkedData.map(({ headline, url, icon, 'icon-alt': iconAlt, 'icon-dark': iconDark }, index) => {
-        const iconSrc = getSuitableIcon(icon, Boolean(iconDark), darkMode);
+        const iconSrc = getSuitableIcon(icon, iconDark, darkMode);
         return (
           <SideNavItem key={index} className={cx(liStyling)} as={Link} to={url} data-position={DATA_TOC_NODE}>
             <img height={16} width={16} src={iconSrc} alt={iconAlt} />
