@@ -253,7 +253,7 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
     >
       <div className={cx(containerStyling)}>
         {composableOptions.map((option, index) => {
-          if (showComposable(option.dependencies) || !!isOfflineDocsBuild) {
+          if (showComposable(option.dependencies) || isOfflineDocsBuild) {
             return (
               <ConfigurableOption
                 validSelections={validSelections}
