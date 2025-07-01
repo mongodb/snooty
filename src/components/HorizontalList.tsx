@@ -1,6 +1,6 @@
 import React from 'react';
 import { getNestedValue } from '../utils/get-nested-value';
-import { HorizontalListNode, Node } from '../types/ast';
+import { HorizontalListNode, ASTNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
 export type HorizontalListProps = {
@@ -15,7 +15,7 @@ const HorizontalList = ({
   ...rest
 }: HorizontalListProps) => {
   // Divide an array into an array of n arrays as evenly as possible
-  const chunkArray = (arr: Node[], n: number) => {
+  const chunkArray = (arr: ASTNode[], n: number) => {
     if (n < 2) return [arr];
 
     const len = arr.length;
