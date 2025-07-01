@@ -30,7 +30,13 @@ const SEO = ({ pageTitle, siteTitle, showDocsLandingTitle, canonical, slug, noIn
   const englishHref = localeHrefMap['en-us'];
   if (englishHref) {
     hrefLangLinks.push(
-      <link className={smartlingNoRewriteClass} rel="alternate" hrefLang="x-default" href={englishHref} />
+      <link
+        key="x-default"
+        className={smartlingNoRewriteClass}
+        rel="alternate"
+        hrefLang="x-default"
+        href={englishHref}
+      />
     );
   }
 
