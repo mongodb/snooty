@@ -8,7 +8,9 @@ import { ComposableNode, ComposableTutorialNode } from '../../types/ast';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { isBrowser } from '../../utils/is-browser';
 import { theme } from '../../theme/docsTheme';
-import Composable from './Composable';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { OFFLINE_COMPOSABLE_CLASSNAME } from '../../utils/head-scripts/offline-ui/composable-tutorials';
+import ComposableContent from './ComposableContent';
 import ConfigurableOption from './ConfigurableOption';
 
 const DELIMITER_KEY = '**';
@@ -149,6 +151,8 @@ const containerStyling = css`
   padding-top: ${theme.size.small};
   z-index: ${theme.zIndexes.content + 1};
 
+  ${isOfflineDocsBuild && 'position: relative; top: unset;'}
+
   @media ${theme.screenSize.upToMedium} {
     flex-wrap: wrap;
   }
@@ -242,35 +246,37 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
   );
 
   return (
-    <>
+    <div
+      className={isOfflineDocsBuild ? OFFLINE_COMPOSABLE_CLASSNAME : ''}
+      data-selections={isOfflineDocsBuild ? '{}' : undefined}
+    >
       <div className={cx(containerStyling)}>
         {composableOptions.map((option, index) => {
-          if (!showComposable(option.dependencies)) {
-            return null;
-          }
-          return (
-            <ConfigurableOption
-              validSelections={validSelections}
-              option={option}
-              selections={currentSelections}
-              onSelect={onSelect}
-              key={index}
-              optionIndex={index}
-              precedingOptions={composableOptions.slice(0, index)}
-            />
-          );
-        })}
-      </div>
-      <div>
-        {children.map((c, i) => {
-          // selections is empty, if child has bad data
-          if (c.selections && showComposable([c.selections])) {
-            return <Composable nodeData={c as ComposableNode} key={i} {...rest} />;
+          if (showComposable(option.dependencies) || isOfflineDocsBuild) {
+            return (
+              <ConfigurableOption
+                validSelections={validSelections}
+                option={option}
+                selections={currentSelections}
+                onSelect={onSelect}
+                key={index}
+                optionIndex={index}
+                precedingOptions={composableOptions.slice(0, index)}
+              />
+            );
           }
           return null;
         })}
       </div>
-    </>
+      <div>
+        {children.map((c, i) => {
+          if ((c.selections && showComposable([c.selections])) || isOfflineDocsBuild) {
+            return <ComposableContent nodeData={c as ComposableNode} key={i} {...rest} />;
+          }
+          return null;
+        })}
+      </div>
+    </div>
   );
 };
 
