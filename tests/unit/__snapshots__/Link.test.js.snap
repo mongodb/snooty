@@ -56,6 +56,11 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   text-decoration-color: #016BF8;
 }
 
+.emotion-0>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 <a
     class="lg-ui-0001 emotion-0"
     href=""
@@ -121,6 +126,11 @@ exports[`Link component renders a variety of strings correctly external MDB docs
 
 .emotion-0:focus {
   text-decoration-color: #016BF8;
+}
+
+.emotion-0>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 <a
@@ -191,6 +201,11 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   text-decoration-color: #016BF8;
 }
 
+.emotion-0>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 <a
     class="lg-ui-0001 emotion-0"
     href="https://account.mongodb.com/account/"
@@ -257,6 +272,11 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
 
 .emotion-0:focus {
   text-decoration-color: #016BF8;
+}
+
+.emotion-0>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 <a
@@ -327,6 +347,11 @@ exports[`Link component renders a variety of strings correctly external URL with
   text-decoration-color: #016BF8;
 }
 
+.emotion-0>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 <a
     class="lg-ui-0001 emotion-0"
     href="http://mongodb.com"
@@ -393,6 +418,11 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
 
 .emotion-0:focus {
   text-decoration-color: #016BF8;
+}
+
+.emotion-0>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 .emotion-1 {
@@ -489,6 +519,11 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
 
 .emotion-0:focus {
   text-decoration-color: #016BF8;
+}
+
+.emotion-0>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 <a

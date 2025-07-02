@@ -73,6 +73,11 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
   text-decoration-color: #016BF8;
 }
 
+.emotion-1>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 <p
     class="emotion-0"
   >
@@ -160,6 +165,11 @@ exports[`Paragraph unit tests handles formatting dangling punctuation after Link
 
 .emotion-1:focus {
   text-decoration-color: #016BF8;
+}
+
+.emotion-1>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 <p
