@@ -144,7 +144,6 @@ function bindComposableTutorials() {
 
         const listItems = menu?.querySelectorAll('li') as unknown as HTMLElement[];
 
-        // for (const listItem of listItems) {
         for (let listItemIdx = 0; listItemIdx < listItems.length; listItemIdx++) {
           const listItem = listItems[listItemIdx];
           listItem.addEventListener('click', () => {

@@ -249,7 +249,6 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
     <div
       className={isOfflineDocsBuild ? OFFLINE_COMPOSABLE_CLASSNAME : ''}
       data-selections={isOfflineDocsBuild ? '{}' : undefined}
-      data-valid-selections={isOfflineDocsBuild ? JSON.stringify(Array.from(validSelections)) : undefined}
     >
       <div className={cx(containerStyling)}>
         {composableOptions.map((option, index) => {
