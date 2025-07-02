@@ -31,24 +31,12 @@ exports[`Composable Tutorial component prioritizes query params over local stora
 }
 
 .emotion-1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-flex: 1 1 200px;
   -ms-flex: 1 1 200px;
   flex: 1 1 200px;
   font-size: 13px;
   overflow: hidden;
   z-index: 800;
-}
-
-.emotion-1>label+button,
-.emotion-1>p+button {
-  margin-top: 3px;
 }
 
 .emotion-1 label,
@@ -66,6 +54,10 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   color: var(--font-color-primary);
 }
 
+.emotion-1 button {
+  margin-top: 3px;
+}
+
 .dark-theme .emotion-1>button {
   background-color: var(--gray-dark4);
   color: var(--gray-light3);
@@ -80,6 +72,21 @@ exports[`Composable Tutorial component prioritizes query params over local stora
 }
 
 .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-2>label+button,
+.emotion-2>p+button {
+  margin-top: 3px;
+}
+
+.emotion-3 {
   font-family: 'Euclid Circular A',Akzidenz,'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight: bold;
   color: #001E2B;
@@ -91,13 +98,13 @@ exports[`Composable Tutorial component prioritizes query params over local stora
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-2 {
+  .emotion-3 {
     font-size: 16px;
     line-height: 19px;
   }
 }
 
-.emotion-3 {
+.emotion-4 {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -136,35 +143,35 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   font-size: 13px;
 }
 
-.emotion-3:focus {
+.emotion-4:focus {
   outline: none;
 }
 
-.emotion-3[disabled],
-.emotion-3:disabled {
+.emotion-4[disabled],
+.emotion-4:disabled {
   pointer-events: none;
 }
 
-.emotion-3:active,
-.emotion-3:focus,
-.emotion-3:hover {
+.emotion-4:active,
+.emotion-4:focus,
+.emotion-4:hover {
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.emotion-3:hover,
-.emotion-3:active {
+.emotion-4:hover,
+.emotion-4:active {
   color: #001E2B;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 3px #E8EDEB;
 }
 
-.emotion-3:focus {
+.emotion-4:focus {
   background-color: #FFFFFF;
   box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
 }
 
-.emotion-3>*:last-child {
+.emotion-4>*:last-child {
   grid-template-columns: 1fr 16px;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
@@ -172,33 +179,33 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   justify-content: flex-start;
 }
 
-.emotion-3>*:last-child>svg {
+.emotion-4>*:last-child>svg {
   justify-self: right;
   width: 16px;
   height: 16px;
 }
 
-.emotion-3>*:last-child>svg {
+.emotion-4>*:last-child>svg {
   color: #3D4F58;
 }
 
-.emotion-3>*:last-child {
+.emotion-4>*:last-child {
   padding: 0 4px 0 12px;
 }
 
-.emotion-3:focus {
+.emotion-4:focus {
   box-shadow: 0 0 0 3px #0498EC;
   border-color: rgba(255, 255, 255, 0);
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-3 {
+  .emotion-4 {
     height: 36px;
     font-size: 16px;
   }
 }
 
-.emotion-4 {
+.emotion-5 {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -208,7 +215,7 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   border-radius: 5px;
 }
 
-.emotion-5 {
+.emotion-6 {
   display: grid;
   grid-auto-flow: column;
   -webkit-box-pack: center;
@@ -228,7 +235,7 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   gap: 6px;
 }
 
-.emotion-6 {
+.emotion-7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -248,14 +255,14 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   overflow: hidden;
 }
 
-.emotion-7 {
+.emotion-8 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 100%;
 }
 
-.emotion-8 {
+.emotion-9 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -265,243 +272,11 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   justify-self: left;
 }
 
-<div
-    class="emotion-0"
-  >
-    <div
-      class="emotion-1"
-    >
-      <label
-        class="emotion-2"
-        for="select-50"
-        id="select-49-label"
-      >
-        Interface
-      </label>
-      <button
-        aria-controls="select-49-menu"
-        aria-describedby="select-49-description"
-        aria-disabled="false"
-        aria-expanded="false"
-        aria-invalid="false"
-        aria-label="Select your Interface"
-        aria-labelledby="select-49-label"
-        class="emotion-3"
-        data-leafygreen-ui="button"
-        data-testid="leafygreen-ui-select-menubutton"
-        id="select-50"
-        type="button"
-        value="driver"
-      >
-        <div
-          class="emotion-4"
-        />
-        <div
-          class="emotion-5"
-        >
-          <div
-            class="emotion-6"
-          >
-            <div
-              class="emotion-7"
-            >
-              Driver
-            </div>
-          </div>
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-8"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-      </button>
-    </div>
-    <div
-      class="emotion-1"
-    >
-      <label
-        class="emotion-2"
-        for="select-70"
-        id="select-69-label"
-      >
-        Language
-      </label>
-      <button
-        aria-controls="select-69-menu"
-        aria-describedby="select-69-description"
-        aria-disabled="false"
-        aria-expanded="false"
-        aria-invalid="false"
-        aria-label="Select your Language"
-        aria-labelledby="select-69-label"
-        class="emotion-3"
-        data-leafygreen-ui="button"
-        data-testid="leafygreen-ui-select-menubutton"
-        id="select-70"
-        type="button"
-        value="c"
-      >
-        <div
-          class="emotion-4"
-        />
-        <div
-          class="emotion-5"
-        >
-          <div
-            class="emotion-6"
-          >
-            <div
-              class="emotion-7"
-            >
-              C
-            </div>
-          </div>
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-8"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-      </button>
-    </div>
-    <div
-      class="emotion-1"
-    >
-      <label
-        class="emotion-2"
-        for="select-52"
-        id="select-51-label"
-      >
-        Deployment Type
-      </label>
-      <button
-        aria-controls="select-51-menu"
-        aria-describedby="select-51-description"
-        aria-disabled="false"
-        aria-expanded="false"
-        aria-invalid="false"
-        aria-label="Select your Deployment Type"
-        aria-labelledby="select-51-label"
-        class="emotion-3"
-        data-leafygreen-ui="button"
-        data-testid="leafygreen-ui-select-menubutton"
-        id="select-52"
-        type="button"
-        value="atlas"
-      >
-        <div
-          class="emotion-4"
-        />
-        <div
-          class="emotion-5"
-        >
-          <div
-            class="emotion-6"
-          >
-            <div
-              class="emotion-7"
-            >
-              Atlas (Cloud)
-            </div>
-          </div>
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-8"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-      </button>
-    </div>
-    <div
-      class="emotion-1"
-    >
-      <label
-        class="emotion-2"
-        for="select-54"
-        id="select-53-label"
-      >
-        Operator
-      </label>
-      <button
-        aria-controls="select-53-menu"
-        aria-describedby="select-53-description"
-        aria-disabled="false"
-        aria-expanded="false"
-        aria-invalid="false"
-        aria-label="Select your Operator"
-        aria-labelledby="select-53-label"
-        class="emotion-3"
-        data-leafygreen-ui="button"
-        data-testid="leafygreen-ui-select-menubutton"
-        id="select-54"
-        type="button"
-        value="queryString"
-      >
-        <div
-          class="emotion-4"
-        />
-        <div
-          class="emotion-5"
-        >
-          <div
-            class="emotion-6"
-          >
-            <div
-              class="emotion-7"
-            >
-              queryString
-            </div>
-          </div>
-          <svg
-            alt=""
-            aria-hidden="true"
-            class="emotion-8"
-            height="16"
-            role="presentation"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-      </button>
-    </div>
-  </div>
-  .emotion-0>*:first-child {
+.emotion-37>*:first-child:not(script):not(style) {
   margin-top: 24px;
 }
 
-.emotion-1 {
+.emotion-38 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -513,24 +288,276 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   color: var(--font-color-primary);
 }
 
-.emotion-1 strong,
-.emotion-1 b {
+.emotion-38 strong,
+.emotion-38 b {
   font-weight: 700;
 }
 
-<div>
+<div
+    class=""
+  >
     <div
       class="emotion-0"
     >
-      <p
-        class="emotion-1"
+      <div
+        class="configurable-option emotion-1"
       >
-        This content will only be shown when the selections are as follows:
+        <div
+          class="emotion-2"
+        >
+          <label
+            class="emotion-3"
+            for="select-50"
+            id="select-49-label"
+          >
+            Interface
+          </label>
+          <button
+            aria-controls="select-49-menu"
+            aria-describedby="select-49-description"
+            aria-disabled="false"
+            aria-expanded="false"
+            aria-invalid="false"
+            aria-label="Select your Interface"
+            aria-labelledby="select-49-label"
+            class="emotion-4"
+            data-leafygreen-ui="button"
+            data-testid="leafygreen-ui-select-menubutton"
+            id="select-50"
+            type="button"
+            value="driver"
+          >
+            <div
+              class="emotion-5"
+            />
+            <div
+              class="emotion-6"
+            >
+              <div
+                class="emotion-7"
+              >
+                <div
+                  class="emotion-8"
+                >
+                  Driver
+                </div>
+              </div>
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="emotion-9"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div
+        class="configurable-option emotion-1"
+      >
+        <div
+          class="emotion-2"
+        >
+          <label
+            class="emotion-3"
+            for="select-70"
+            id="select-69-label"
+          >
+            Language
+          </label>
+          <button
+            aria-controls="select-69-menu"
+            aria-describedby="select-69-description"
+            aria-disabled="false"
+            aria-expanded="false"
+            aria-invalid="false"
+            aria-label="Select your Language"
+            aria-labelledby="select-69-label"
+            class="emotion-4"
+            data-leafygreen-ui="button"
+            data-testid="leafygreen-ui-select-menubutton"
+            id="select-70"
+            type="button"
+            value="c"
+          >
+            <div
+              class="emotion-5"
+            />
+            <div
+              class="emotion-6"
+            >
+              <div
+                class="emotion-7"
+              >
+                <div
+                  class="emotion-8"
+                >
+                  C
+                </div>
+              </div>
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="emotion-9"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div
+        class="configurable-option emotion-1"
+      >
+        <div
+          class="emotion-2"
+        >
+          <label
+            class="emotion-3"
+            for="select-52"
+            id="select-51-label"
+          >
+            Deployment Type
+          </label>
+          <button
+            aria-controls="select-51-menu"
+            aria-describedby="select-51-description"
+            aria-disabled="false"
+            aria-expanded="false"
+            aria-invalid="false"
+            aria-label="Select your Deployment Type"
+            aria-labelledby="select-51-label"
+            class="emotion-4"
+            data-leafygreen-ui="button"
+            data-testid="leafygreen-ui-select-menubutton"
+            id="select-52"
+            type="button"
+            value="atlas"
+          >
+            <div
+              class="emotion-5"
+            />
+            <div
+              class="emotion-6"
+            >
+              <div
+                class="emotion-7"
+              >
+                <div
+                  class="emotion-8"
+                >
+                  Atlas (Cloud)
+                </div>
+              </div>
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="emotion-9"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div
+        class="configurable-option emotion-1"
+      >
+        <div
+          class="emotion-2"
+        >
+          <label
+            class="emotion-3"
+            for="select-54"
+            id="select-53-label"
+          >
+            Operator
+          </label>
+          <button
+            aria-controls="select-53-menu"
+            aria-describedby="select-53-description"
+            aria-disabled="false"
+            aria-expanded="false"
+            aria-invalid="false"
+            aria-label="Select your Operator"
+            aria-labelledby="select-53-label"
+            class="emotion-4"
+            data-leafygreen-ui="button"
+            data-testid="leafygreen-ui-select-menubutton"
+            id="select-54"
+            type="button"
+            value="queryString"
+          >
+            <div
+              class="emotion-5"
+            />
+            <div
+              class="emotion-6"
+            >
+              <div
+                class="emotion-7"
+              >
+                <div
+                  class="emotion-8"
+                >
+                  queryString
+                </div>
+              </div>
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="emotion-9"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        class="emotion-37"
+      >
+        <p
+          class="emotion-38"
+        >
+          This content will only be shown when the selections are as follows:
 * Interface - Drivers
 * Language - C
 * Deployment Type - atlas
 * Operator (custom snooty.toml) - queryString
-      </p>
+        </p>
+      </div>
     </div>
   </div>
 </DocumentFragment>
