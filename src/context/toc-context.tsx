@@ -41,13 +41,17 @@ const TocContextProvider = ({ children, remoteMetadata }: TocContextProviderProp
 
       if (associatedProducts?.length || hasEmbeddedVersionDropdown) {
         filter['is_merged_toc'] = true;
+        const metadata = await fetchDocument(database, METADATA_COLLECTION, filter, { toctree: 1 });
+        return metadata?.toctree ?? toctree;
       }
-      const metadata = await fetchDocument(database, METADATA_COLLECTION, filter, { toctree: 1 });
-      return metadata?.toctree ?? toctree;
+      return toctree;
     } catch (e) {
       // fallback to toctree from build time
       console.error(e);
-      return remoteMetadata?.toctree || toctree;
+      if (associatedProducts?.length || hasEmbeddedVersionDropdown) {
+        return remoteMetadata?.toctree || toctree;
+      }
+      return toctree;
     }
     // below dependents are server constants
   }, [
