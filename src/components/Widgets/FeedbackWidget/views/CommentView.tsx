@@ -121,8 +121,6 @@ const CommentView = () => {
     <Layout>
       <StyledStarRating handleRatingSelection={setSelectedRating} />
       <StyledCommentInput
-        // TODO: needed??
-        // type="text"
         id="feedback-comment"
         aria-labelledby="Comment Text Box"
         placeholder={selectedRating < 4 ? COMMENT_PLACEHOLDER_TEXT_LOW : COMMENT_PLACEHOLDER_TEXT}

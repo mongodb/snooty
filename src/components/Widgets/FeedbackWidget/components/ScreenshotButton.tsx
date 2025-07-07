@@ -208,7 +208,6 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   // close out the instructions panel
   const handleInstructionClick = () => {
     const instructionPanel = document.getElementById(feedbackId);
-    // TODO: Check if this should be zero or unset
     if (instructionPanel) instructionPanel.style.left = '';
     resetProperties();
   };
