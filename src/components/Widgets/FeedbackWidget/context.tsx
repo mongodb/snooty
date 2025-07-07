@@ -200,9 +200,11 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
   const retryFeedbackSubmission = async (newFeedback: FeedbackPayload) => {
     try {
       const newUser = await reassignCurrentUser();
-      newFeedback.user.stitch_id = newUser.id;
-      await upsertFeedback(newFeedback);
-      setFeedback(newFeedback);
+      if (newUser) {
+        newFeedback.user.stitch_id = newUser.id;
+        await upsertFeedback(newFeedback);
+        setFeedback(newFeedback);
+      }
     } catch (e) {
       console.error('Error when retrying feedback submission', e);
     }
