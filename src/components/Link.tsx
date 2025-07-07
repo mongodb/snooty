@@ -81,6 +81,10 @@ const gatsbyLinkStyling = (linkThemeStyle: LinkThemeStyle) => css`
 const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
+
+  > span > code {
+    ${sharedDarkModeOverwriteStyles}
+  }
 `;
 
 export type LinkProps = {

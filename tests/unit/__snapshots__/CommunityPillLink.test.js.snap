@@ -60,6 +60,11 @@ exports[`community drivers directives render correctly 1`] = `
   text-decoration-color: #016BF8;
 }
 
+.emotion-1>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 .emotion-2 {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;

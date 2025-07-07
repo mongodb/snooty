@@ -11,7 +11,7 @@ import { SidenavContext } from '../Sidenav';
 import useActiveHeading from '../../hooks/useActiveHeading';
 import useVisibleOnScroll from '../../hooks/useVisibleOnScroll';
 import { theme } from '../../theme/docsTheme';
-import { MetadataChapters } from '../../types/data';
+import type { MetadataChapters } from '../../types/data';
 
 const learningCardStyle = ({ isVisible }: { isVisible: boolean }) => css`
   background-color: ${palette.white};

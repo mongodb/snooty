@@ -11,8 +11,8 @@ import { theme } from '../../theme/docsTheme';
 import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { getPlaintext } from '../../utils/get-plaintext';
 import useStickyTopValues, { StickyTopValues } from '../../hooks/useStickyTopValues';
-import { CardGroupNode, CardNode, ChaptersNode, TextNode } from '../../types/ast';
-import { MetadataChapters, MetadataGuides, RemoteMetadata } from '../../types/data';
+import type { CardGroupNode, CardNode, ChaptersNode, TextNode } from '../../types/ast';
+import type { MetadataChapters, MetadataGuides, RemoteMetadata } from '../../types/data';
 import RightColumn from './RightColumn';
 
 const plpGridColumns = css`

@@ -140,6 +140,11 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-decoration-color: #016BF8;
 }
 
+.emotion-4>span>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 .emotion-4:focus-visible,
 .emotion-4[data-focus="true"] {
   outline: none;

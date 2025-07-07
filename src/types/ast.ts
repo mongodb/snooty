@@ -395,8 +395,8 @@ interface TextNode extends Node {
 
 type CardGroupOptions = {
   columns: number;
-  layout: string;
-  style: string;
+  layout?: string;
+  style?: string;
   type?: string;
 };
 
