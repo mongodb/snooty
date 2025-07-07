@@ -20,7 +20,7 @@ export const FeedbackContent = ({ view }: FeedbackContentProps) => {
     comment: CommentView,
     submitted: SubmittedView,
   }[view];
-  return <View className={`view-${view}`} />;
+  return <View />;
 };
 
 export const feedbackId = 'feedback-card';

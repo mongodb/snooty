@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef, MouseEvent } from 'react';
+import React, { useCallback, useState, useEffect, useRef, MouseEvent as ReactMouseEvent } from 'react';
 import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
@@ -109,7 +109,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   const [selectedElementBorderStyle, setSelectedElementBorderStyle] = useState('dashed');
 
   // store selected dom element and its attributes
-  const currElem = useRef<Element>(null);
+  const currElem = useRef<Element | null>(null);
   const initialElemProperties = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0, position: 'absolute' };
   const currElemProperties = useRef(initialElemProperties);
   const [elemProps, setElemProps] = useState<ElemProps | null>(null);
@@ -154,7 +154,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
   }, []);
 
   // event listener to check whether elements are being hovered over
-  const handleElementHighlight = ({ pageX, pageY }) => {
+  const handleElementHighlight = ({ pageX, pageY }: MouseEvent) => {
     if (domElementClickedRef.current === 'solid') {
       document.removeEventListener('mousemove', handleElementHighlight);
     }
@@ -222,7 +222,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     setScreenshotTaken(false);
   };
 
-  const handleDOMElementClick = (e: MouseEvent) => {
+  const handleDOMElementClick = (e: ReactMouseEvent) => {
     e.preventDefault();
 
     domElementClickedRef.current = 'solid';
@@ -241,7 +241,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
     }
   };
 
-  const handleExitButtonClick = (e: MouseEvent) => {
+  const handleExitButtonClick = (e: ReactMouseEvent) => {
     resetProperties();
     const fbFormEl = document.getElementById(feedbackId);
     if (fbFormEl) fbFormEl.style.display = 'none';
@@ -381,7 +381,7 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
         leftGlyph={<img src={withPrefix(glyphImage)} alt="Screenshot Button" />}
         {...props}
       >
-        {selectedRating < 4 ? SCREENSHOT_BUTTON_TEXT_LOW : SCREENSHOT_BUTTON_TEXT}
+        {selectedRating && selectedRating < 4 ? SCREENSHOT_BUTTON_TEXT_LOW : SCREENSHOT_BUTTON_TEXT}
       </ScreenshotSelect>
     </>
   );

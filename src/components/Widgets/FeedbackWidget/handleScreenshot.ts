@@ -16,10 +16,11 @@ async function takeScreenshot(subject: Document, config: Options = {}) {
     img.removeAttribute('srcset');
   });
 
-  // Convert the "clean" document into a rasterized <img />. It has the same dimensions as the user's window.
-  const { image } = await rasterizeHTML.drawHTML(htmlDocument.innerHTML);
   // Create a <canvas /> and draw the image on it. Set the canvas dimensions to match the image.
   const canvas = document.createElement('canvas');
+  // Convert the "clean" document into a rasterized <img />. It has the same dimensions as the user's window.
+  const { image } = await rasterizeHTML.drawHTML((htmlDocument as HTMLElement)?.innerHTML, canvas);
+
   const ctx = canvas.getContext('2d');
   if (ctx) {
     ctx.canvas.width = image.width;
