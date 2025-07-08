@@ -35,9 +35,9 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
-function isSelectedTab(url, slug, pathPrefix) {
+function isSelectedTab(url, slug) {
   // Hijacking the isSelectedTab for unified toc in dev and preview builds
-  if (isUnifiedTocActive(url, pathPrefix)) return true;
+  if (isUnifiedTocActive(url)) return true;
   return isSelectedTocNode(url, slug);
 }
 
@@ -195,10 +195,9 @@ export function UnifiedTocNavItem({
 }
 
 function CollapsibleNavItem({ items, label, newUrl, slug, l1List, contentSite, isAccordion, level }) {
-  const { pathPrefix: contentSitePrefix } = useSiteMetadata();
-  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, newUrl, items, contentSitePrefix));
+  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, newUrl, items));
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
-  const isActive = isSelectedTab(newUrl, slug, contentSitePrefix);
+  const isActive = isSelectedTab(newUrl, slug);
 
   const onCaretClick = (event) => {
     event.preventDefault();
@@ -258,8 +257,7 @@ export function StaticNavItem({
   isAccordion,
   setShowDriverBackBtn,
 }) {
-  const { pathPrefix } = useSiteMetadata();
-  const isActive = isActiveTocNode(slug, newUrl, items, pathPrefix);
+  const isActive = isActiveTocNode(slug, newUrl, items);
 
   return (
     <SideNavItem
