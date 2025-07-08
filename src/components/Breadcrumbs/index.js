@@ -7,7 +7,6 @@ import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-d
 import { useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
-import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { getFeatureFlags } from '../../utils/feature-flags';
 import { usePageBreadcrumbs } from '../../hooks/useCreateBreadCrumbs';
 import BreadcrumbContainer from './BreadcrumbContainer';
@@ -32,15 +31,15 @@ const Breadcrumbs = ({
   parentPathsProp = null,
   selfCrumb = null,
   pageInfo = null,
+  unifiedToc,
 }) => {
   const { isUnifiedToc } = getFeatureFlags();
-  const tocTree = useUnifiedToc();
   const queriedCrumbsHook = useBreadcrumbs();
   const queriedCrumbs = queriedCrumbsProp ?? queriedCrumbsHook;
 
   const { parentPaths } = useSnootyMetadata();
 
-  const unifiedTocParents = usePageBreadcrumbs(tocTree, slug, isUnifiedToc);
+  const unifiedTocParents = usePageBreadcrumbs(unifiedToc, slug, isUnifiedToc);
 
   const parentPathsData = parentPathsProp ?? parentPaths[slug];
 
@@ -72,6 +71,7 @@ Breadcrumbs.propTypes = {
   pageTitle: PropTypes.string,
   siteTitle: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
+  unifiedToc: PropTypes.array.isRequired,
 };
 
 export default Breadcrumbs;

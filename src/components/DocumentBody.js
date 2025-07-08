@@ -203,7 +203,7 @@ DocumentBody.propTypes = {
 export default DocumentBody;
 
 export const Head = ({ pageContext, data }) => {
-  const { slug, template, repoBranches } = pageContext;
+  const { slug, template, repoBranches, unifiedToc } = pageContext;
   const pageAst = data.page?.ast;
 
   if (!pageAst) {
@@ -251,7 +251,7 @@ export const Head = ({ pageContext, data }) => {
       {meta.length > 0 && meta.map((c, i) => <Meta key={`meta-${i}`} nodeData={c} />)}
       {twitter.length > 0 && twitter.map((c) => <Twitter {...c} />)}
       {isDocsLandingHomepage && <DocsLandingSD />}
-      {needsBreadcrumbs && <BreadcrumbSchema slug={slug} />}
+      {needsBreadcrumbs && <BreadcrumbSchema slug={slug} unifiedToc={unifiedToc} />}
       {techArticleSd && (
         <script className={STRUCTURED_DATA_CLASSNAME} id={'tech-article-sd'} type="application/ld+json">
           {techArticleSd.toString()}

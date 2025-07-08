@@ -5,12 +5,10 @@ import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { BreadcrumbListSd, STRUCTURED_DATA_CLASSNAME } from '../../utils/structured-data.js';
 import { useSiteMetadata } from '../../hooks/use-site-metadata.js';
 import { getFeatureFlags } from '../../utils/feature-flags';
-import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { usePageBreadcrumbs } from '../../hooks/useCreateBreadCrumbs';
 
-const BreadcrumbSchema = ({ slug }) => {
+const BreadcrumbSchema = ({ slug, unifiedToc }) => {
   const { isUnifiedToc } = getFeatureFlags();
-  const tocTree = useUnifiedToc();
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
   const { siteUrl } = useSiteMetadata();
 
@@ -18,7 +16,7 @@ const BreadcrumbSchema = ({ slug }) => {
 
   const queriedCrumbs = useBreadcrumbs();
 
-  const unifiedTocParents = usePageBreadcrumbs(tocTree, slug, isUnifiedToc);
+  const unifiedTocParents = usePageBreadcrumbs(unifiedToc, slug, isUnifiedToc);
 
   const breadcrumbSd = React.useMemo(() => {
     const sd = new BreadcrumbListSd({
@@ -45,6 +43,7 @@ const BreadcrumbSchema = ({ slug }) => {
 
 BreadcrumbSchema.propTypes = {
   slug: PropTypes.string.isRequired,
+  unifiedToc: PropTypes.array.isRequired,
 };
 
 export default BreadcrumbSchema;

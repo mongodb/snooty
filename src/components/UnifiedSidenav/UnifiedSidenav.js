@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useLocation } from '@gatsbyjs/reach-router';
-import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { VersionContext } from '../../context/version-context';
@@ -149,8 +148,7 @@ const findPageParent = (tree, targetUrl) => {
   return [false, null];
 };
 
-export function UnifiedSidenav({ slug }) {
-  const unifiedTocTree = useUnifiedToc();
+export function UnifiedSidenav({ slug, unifiedToc = [] }) {
   const { project } = useSnootyMetadata();
   const { snootyEnv, pathPrefix } = useSiteMetadata();
   const { activeVersions, availableVersions } = useContext(VersionContext);
@@ -162,20 +160,19 @@ export function UnifiedSidenav({ slug }) {
 
   const tree = useMemo(() => {
     return updateURLs({
-      tree: unifiedTocTree,
+      tree: unifiedToc,
       activeVersions,
       versionsData: availableVersions,
       project,
       snootyEnv,
     });
-  }, [unifiedTocTree, activeVersions, availableVersions, project, snootyEnv]);
+  }, [unifiedToc, activeVersions, availableVersions, project, snootyEnv]);
 
   const l1List = useMemo(() => {
     return tree.map((item) => item.newUrl);
   }, [tree]);
 
   console.log('The edited toctree with prefixes is:', tree, l1List);
-  console.log(unifiedTocTree);
 
   // Initialize state with default values instead of computed values
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(false);
@@ -188,7 +185,7 @@ export function UnifiedSidenav({ slug }) {
       setShowDriverBackBtn(isDriver);
 
       const foundCurrentL1 = tree.find((staticTocItem) => {
-        return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items, pathPrefix);
+        return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
       });
       setCurrentL1(foundCurrentL1);
       setCurrentL2s(currentL2List);
