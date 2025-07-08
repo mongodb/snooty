@@ -18,23 +18,19 @@ const buttonStyles = css`
   }
 `;
 
-const CloseButton = ({
-  onClick,
-  size = Size.Default,
-  className,
-  ...props
-}: {
+export type CloseButtonProps = {
   onClick: () => void;
   size?: Size;
   className?: string;
-}) => {
+};
+
+const CloseButton = ({ onClick, size = Size.Default, className }: CloseButtonProps) => {
   return (
     <IconButton
       aria-label={CLOSE_BUTTON_ALT_TEXT}
       className={cx(buttonStyles, className)}
       onClick={onClick}
       size={size}
-      {...props}
     >
       <Icon size={size} glyph="X" />
     </IconButton>

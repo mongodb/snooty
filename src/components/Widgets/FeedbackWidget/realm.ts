@@ -3,20 +3,27 @@ import * as Realm from 'realm-web';
 import { ObjectID } from 'bson';
 import { isBrowser } from '../../../utils/is-browser';
 import { removeAllRealmUsersFromLocalStorage } from '../../../utils/realm-user-management';
+import { FeedbackPayload } from './context';
 
 const APP_ID = 'feedbackwidgetv3-dgcsv';
 export const app = isBrowser ? Realm.App.getApp(APP_ID) : { auth: {} };
+const isRealmApp = (app: unknown): app is Realm.App => {
+  return !!app && typeof (app as Realm.App).logIn === 'function';
+};
 
 /**
  * Deletes localStorage data for all users
+ * allUsers is only available when app is a real Realm app (when `isBrowser` is true)
  */
 function deleteLocalStorageData() {
-  const { allUsers } = app;
-  removeAllRealmUsersFromLocalStorage(allUsers);
+  if (isRealmApp(app)) {
+    removeAllRealmUsersFromLocalStorage(app.allUsers);
+  }
 }
 
 // User Authentication & Management
 export async function loginAnonymous() {
+  if (!isRealmApp(app)) return null;
   if (!app.currentUser) {
     const user = await app.logIn(Realm.Credentials.anonymous());
     return user;
@@ -25,22 +32,25 @@ export async function loginAnonymous() {
 }
 
 export async function logout() {
-  if (app.auth.isLoggedIn) {
-    await app.auth.logoutUserWithId(app.id);
-  } else {
+  if (!isRealmApp(app) || !app.currentUser) {
     console.warn('No logged in user.');
+    return;
   }
+  await app.currentUser.logOut();
 }
 
 export const useRealmUser = () => {
-  const [user, setUser] = React.useState(app.currentUser);
+  const [user, setUser] = React.useState(isRealmApp(app) ? app.currentUser : null);
 
   async function reassignCurrentUser() {
+    if (!isRealmApp(app)) return null;
     const oldUser = app.currentUser;
-    try {
-      await app.removeUser(oldUser);
-    } catch (e) {
-      console.error(e);
+    if (oldUser) {
+      try {
+        await app.removeUser(oldUser);
+      } catch (e) {
+        console.error(e);
+      }
     }
 
     // Clean up invalid data from local storage to avoid bubbling up local storage sizes for broken user credentials
@@ -65,8 +75,14 @@ export const useRealmUser = () => {
 };
 
 // Feedback Widget Functions
-export async function upsertFeedback({ page, user, attachment, ...rest }) {
-  const updateOneRes = await app.currentUser.callFunction('feedback_upsert', { page, user, attachment, ...rest });
+export async function upsertFeedback({ page, user, attachment, ...rest }: FeedbackPayload) {
+  if (!isRealmApp(app) || !app.currentUser) return;
+  const updateOneRes = await app.currentUser.callFunction<{ upsertedId: string }>('feedback_upsert', {
+    page,
+    user,
+    attachment,
+    ...rest,
+  });
   const objectId = new ObjectID(updateOneRes.upsertedId);
   return objectId.toString();
 }

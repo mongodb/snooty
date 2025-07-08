@@ -10,15 +10,13 @@ import FeedbackForm from './FeedbackForm';
 import useFeedbackData from './useFeedbackData';
 import { FeedbackProvider, useFeedbackContext } from './context';
 
-const FeedbackRating = ({
-  slug,
-  className,
-  classNameContainer,
-}: {
+export type FeedbackRatingProps = {
   slug: string;
   className: string;
   classNameContainer?: string;
-}) => {
+};
+
+const FeedbackRating = ({ slug, className, classNameContainer }: FeedbackRatingProps) => {
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
   const feedbackData = useFeedbackData({

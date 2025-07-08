@@ -27,7 +27,7 @@ const SubmittedView = () => {
   const { abandon } = useFeedbackContext();
   const { isMobile } = useScreenSize();
   const { selectedRating } = useFeedbackContext();
-  const shouldShowSupportLink = selectedRating <= 3;
+  const shouldShowSupportLink = selectedRating ? selectedRating <= 3 : true;
 
   return (
     <Container>
