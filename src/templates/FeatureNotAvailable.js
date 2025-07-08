@@ -119,6 +119,7 @@ const FeatureNotAvailable = () => {
             queriedCrumbsProp={breadcrumbInfo.queriedCrumbs}
             selfCrumb={selfBreadcrumb}
             pageInfo={pageInfo}
+            unifiedToc={[]}
           />
         )}
         <FeatureNotAvailContainer>

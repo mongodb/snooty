@@ -16,14 +16,14 @@ const StyledMainColumn = styled(MainColumn)`
   grid-area: main;
 `;
 
-const DriversIndex = ({ children, pageContext: { slug }, offlineBanner }) => {
+const DriversIndex = ({ children, pageContext: { slug, unifiedToc }, offlineBanner }) => {
   const { title, parentPaths } = useSnootyMetadata();
   return (
     <DocumentContainer>
       <StyledMainColumn>
         <div className="body">
           {offlineBanner}
-          <Breadcrumbs parentPaths={parentPaths?.slug} siteTitle={title} slug={slug} />
+          <Breadcrumbs parentPaths={parentPaths?.slug} siteTitle={title} slug={slug} unifiedToc={unifiedToc} />
           {children}
         </div>
       </StyledMainColumn>

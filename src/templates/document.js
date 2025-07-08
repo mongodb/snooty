@@ -48,7 +48,12 @@ const StyledRightColumn = styled(RightColumn)`
   overflow: visible;
 `;
 
-const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedProduct }, offlineBanner }) => {
+const Document = ({
+  children,
+  data: { page },
+  pageContext: { slug, isAssociatedProduct, unifiedToc },
+  offlineBanner,
+}) => {
   const { slugToBreadcrumbLabel, title, toctreeOrder } = useSnootyMetadata();
   const pageOptions = page?.ast.options;
   const showPrevNext = !(pageOptions?.noprevnext === '' || pageOptions?.template === 'guide');
@@ -61,7 +66,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
       <StyledMainColumn>
         <div className="body">
           {offlineBanner}
-          <Breadcrumbs siteTitle={title} slug={slug} />
+          <Breadcrumbs siteTitle={title} slug={slug} unifiedToc={unifiedToc} />
           {activeTutorial && <StepNumber slug={slug} activeTutorial={activeTutorial} />}
           {children}
           {showPrevNext && (
@@ -81,6 +86,7 @@ const Document = ({ children, data: { page }, pageContext: { slug, isAssociatedP
 Document.propTypes = {
   pageContext: PropTypes.shape({
     slug: PropTypes.string.isRequired,
+    unifiedToc: PropTypes.array.isRequired,
   }).isRequired,
   data: PropTypes.shape({
     page: PropTypes.shape({
