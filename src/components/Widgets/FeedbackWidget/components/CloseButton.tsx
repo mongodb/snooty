@@ -24,14 +24,13 @@ export type CloseButtonProps = {
   className?: string;
 };
 
-const CloseButton = ({ onClick, size = Size.Default, className, ...props }: CloseButtonProps) => {
+const CloseButton = ({ onClick, size = Size.Default, className }: CloseButtonProps) => {
   return (
     <IconButton
       aria-label={CLOSE_BUTTON_ALT_TEXT}
       className={cx(buttonStyles, className)}
       onClick={onClick}
       size={size}
-      {...props}
     >
       <Icon size={size} glyph="X" />
     </IconButton>

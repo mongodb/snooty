@@ -120,11 +120,10 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
     <>
       <Layout className={className} onMouseLeave={resetHoverStates}>
         {[1, 2, 3, 4, 5].map((ratingValue) => {
-          const isHighlighted = hoveredRating
-            ? hoveredRating >= ratingValue
-            : selectedRating
-            ? selectedRating >= ratingValue
-            : false;
+          let isHighlighted = false;
+          if (hoveredRating) isHighlighted = hoveredRating >= ratingValue;
+          else if (selectedRating) isHighlighted = selectedRating >= ratingValue;
+
           const eventProps = editable
             ? {
                 onMouseEnter: () => hoverStar(ratingValue),
