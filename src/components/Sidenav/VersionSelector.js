@@ -57,19 +57,17 @@ const wrapperStyle = css`
 const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
   const { isUnifiedToc } = getFeatureFlags();
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
-  const [options, setOptions] = useState(
-    isUnifiedToc
+  const computeOptions = useCallback(() => {
+    return isUnifiedToc
       ? (availableVersions[versionedProject] || []).map(buildChoice)
-      : buildChoices(availableVersions[versionedProject], tocVersionNames)
-  );
+      : buildChoices(availableVersions[versionedProject], tocVersionNames);
+  }, [availableVersions, tocVersionNames, versionedProject, isUnifiedToc]);
+
+  const [options, setOptions] = useState(computeOptions);
 
   useEffect(() => {
-    setOptions(
-      isUnifiedToc
-        ? (availableVersions[versionedProject] || []).map(buildChoice)
-        : buildChoices(availableVersions[versionedProject], tocVersionNames)
-    );
-  }, [availableVersions, tocVersionNames, versionedProject, isUnifiedToc]);
+    setOptions(computeOptions());
+  }, [computeOptions]);
 
   const onChange = useCallback(
     ({ value }) => {
