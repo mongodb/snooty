@@ -7,7 +7,7 @@ export interface TocItem {
   label: string;
   url?: string;
   group?: boolean;
-  contentSite?: string;
+  contentSite: string;
   collapsible?: boolean;
   breadcrumbs?: BreadCrumb[];
   showSubNav?: boolean;
