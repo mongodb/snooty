@@ -90,7 +90,8 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   text-decoration-color: #016BF8;
 }
 
-.emotion-2>span>code {
+.emotion-2>span>code,
+.emotion-2>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -289,7 +290,8 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   text-decoration-color: #016BF8;
 }
 
-.emotion-2>span>code {
+.emotion-2>span>code,
+.emotion-2>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -345,6 +347,7 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   font-weight: 400;
 }
 
+.emotion-8>span>code,
 .emotion-8>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -532,7 +535,8 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
   text-decoration-color: #016BF8;
 }
 
-.emotion-2>span>code {
+.emotion-2>span>code,
+.emotion-2>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -715,7 +719,8 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   text-decoration-color: #016BF8;
 }
 
-.emotion-2>span>code {
+.emotion-2>span>code,
+.emotion-2>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -771,6 +776,7 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   font-weight: 400;
 }
 
+.emotion-8>span>code,
 .emotion-8>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);

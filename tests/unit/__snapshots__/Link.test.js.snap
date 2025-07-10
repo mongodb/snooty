@@ -56,7 +56,8 @@ exports[`Link component renders a variety of strings correctly empty string 1`] 
   text-decoration-color: #016BF8;
 }
 
-.emotion-0>span>code {
+.emotion-0>span>code,
+.emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -128,7 +129,8 @@ exports[`Link component renders a variety of strings correctly external MDB docs
   text-decoration-color: #016BF8;
 }
 
-.emotion-0>span>code {
+.emotion-0>span>code,
+.emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -201,7 +203,8 @@ exports[`Link component renders a variety of strings correctly external MDB non-
   text-decoration-color: #016BF8;
 }
 
-.emotion-0>span>code {
+.emotion-0>span>code,
+.emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -274,7 +277,8 @@ exports[`Link component renders a variety of strings correctly external URL 1`] 
   text-decoration-color: #016BF8;
 }
 
-.emotion-0>span>code {
+.emotion-0>span>code,
+.emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -347,7 +351,8 @@ exports[`Link component renders a variety of strings correctly external URL with
   text-decoration-color: #016BF8;
 }
 
-.emotion-0>span>code {
+.emotion-0>span>code,
+.emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -420,7 +425,8 @@ exports[`Link component renders a variety of strings correctly external non-MDB 
   text-decoration-color: #016BF8;
 }
 
-.emotion-0>span>code {
+.emotion-0>span>code,
+.emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -521,7 +527,8 @@ exports[`Link component renders a variety of strings correctly identfies mailto 
   text-decoration-color: #016BF8;
 }
 
-.emotion-0>span>code {
+.emotion-0>span>code,
+.emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -555,6 +562,7 @@ exports[`Link component renders a variety of strings correctly internal link 1`]
   font-weight: var(--link-font-weight);
 }
 
+.emotion-0>span>code,
 .emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -604,6 +612,7 @@ exports[`Link component renders a variety of strings correctly internal link que
   font-weight: var(--link-font-weight);
 }
 
+.emotion-0>span>code,
 .emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -653,6 +662,7 @@ exports[`Link component renders a variety of strings correctly internal link tha
   font-weight: var(--link-font-weight);
 }
 
+.emotion-0>span>code,
 .emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -702,6 +712,7 @@ exports[`Link component renders a variety of strings correctly internal link wit
   font-weight: var(--link-font-weight);
 }
 
+.emotion-0>span>code,
 .emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);

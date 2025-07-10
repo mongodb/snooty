@@ -150,6 +150,7 @@ exports[`renders correctly 1`] = `
   font-weight: var(--link-font-weight);
 }
 
+.emotion-10>span>code,
 .emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -1778,6 +1779,7 @@ exports[`renders with "normal" or YAML steps styling 1`] = `
   font-weight: var(--link-font-weight);
 }
 
+.emotion-10>span>code,
 .emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);

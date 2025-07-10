@@ -52,6 +52,7 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
   font-weight: var(--link-font-weight);
 }
 
+.emotion-2>span>code,
 .emotion-2>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -452,6 +453,7 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
   font-weight: var(--link-font-weight);
 }
 
+.emotion-2>span>code,
 .emotion-2>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -852,6 +854,7 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
   font-weight: var(--link-font-weight);
 }
 
+.emotion-2>span>code,
 .emotion-2>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -1252,6 +1255,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
   font-weight: var(--link-font-weight);
 }
 
+.emotion-2>span>code,
 .emotion-2>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -1652,6 +1656,7 @@ exports[`renders a page with no next link correctly 1`] = `
   font-weight: var(--link-font-weight);
 }
 
+.emotion-2>span>code,
 .emotion-2>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -1971,6 +1976,7 @@ exports[`renders a page with no previous link correctly 1`] = `
   font-weight: var(--link-font-weight);
 }
 
+.emotion-2>span>code,
 .emotion-2>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);

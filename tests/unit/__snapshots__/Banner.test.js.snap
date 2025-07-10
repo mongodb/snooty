@@ -400,7 +400,8 @@ exports[`renders an offline banner correctly 1`] = `
   text-decoration-color: #016BF8;
 }
 
-.emotion-4>span>code {
+.emotion-4>span>code,
+.emotion-4>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
