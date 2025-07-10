@@ -173,7 +173,8 @@ exports[`renders a page IA with IA linked data 1`] = `
   text-decoration-color: #016BF8;
 }
 
-.emotion-6>span>code {
+.emotion-6>span>code,
+.emotion-6>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -291,6 +292,7 @@ exports[`renders a page IA with IA linked data 1`] = `
   line-height: 20px;
 }
 
+.emotion-10>span>code,
 .emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -476,7 +478,8 @@ exports[`renders a page IA with IA linked data 1`] = `
   text-decoration-color: #016BF8;
 }
 
-.emotion-15>span>code {
+.emotion-15>span>code,
+.emotion-15>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -1178,7 +1181,8 @@ exports[`renders a simple page IA correctly 1`] = `
   text-decoration-color: #016BF8;
 }
 
-.emotion-6>span>code {
+.emotion-6>span>code,
+.emotion-6>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -1296,6 +1300,7 @@ exports[`renders a simple page IA correctly 1`] = `
   line-height: 20px;
 }
 
+.emotion-10>span>code,
 .emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);

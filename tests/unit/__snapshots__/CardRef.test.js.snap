@@ -175,6 +175,7 @@ exports[`card correctly with and without url 1`] = `
   padding: 4px;
 }
 
+.emotion-6>span>code,
 .emotion-6>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -336,7 +337,8 @@ exports[`card correctly with and without url 1`] = `
   text-decoration-color: #016BF8;
 }
 
-.emotion-17>span>code {
+.emotion-17>span>code,
+.emotion-17>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }

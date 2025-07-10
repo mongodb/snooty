@@ -140,7 +140,8 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   text-decoration-color: #016BF8;
 }
 
-.emotion-4>span>code {
+.emotion-4>span>code,
+.emotion-4>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
@@ -375,6 +376,7 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
   font-weight: var(--link-font-weight);
 }
 
+.emotion-15>span>code,
 .emotion-15>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -613,6 +615,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   color: #ffffff!important;
 }
 
+.emotion-4>span>code,
 .emotion-4>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -866,6 +869,7 @@ exports[`GuideNext renders the first guide in the next chapter 1`] = `
   font-weight: var(--link-font-weight);
 }
 
+.emotion-15>span>code,
 .emotion-15>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -1094,6 +1098,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   color: #ffffff!important;
 }
 
+.emotion-4>span>code,
 .emotion-4>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -1347,6 +1352,7 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
   font-weight: var(--link-font-weight);
 }
 
+.emotion-15>span>code,
 .emotion-15>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
