@@ -10,8 +10,8 @@ import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { theme } from '../../theme/docsTheme';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isUnifiedTocActive } from '../../utils/is-unified-toc-active';
-import VersionDropdown from '../VersionDropdown';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
+import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 
 export const Border = styled('hr')`
   border: unset;
@@ -77,7 +77,7 @@ export function UnifiedTocNavItem({
             setShowDriverBackBtn={setShowDriverBackBtn}
             isAccordion={isAccordion}
           />
-          {versionDropdown && <VersionDropdown />}
+          {versionDropdown && newUrl === currentL2s?.newUrl && <UnifiedVersionDropdown contentSite={contentSite} />}
           {newUrl === currentL2s?.newUrl &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
@@ -99,7 +99,7 @@ export function UnifiedTocNavItem({
 
     return (
       <>
-        {versionDropdown && <VersionDropdown />}
+        {versionDropdown && <UnifiedVersionDropdown contentSite={contentSite} />}
         {items?.map((tocItem) => (
           <UnifiedTocNavItem
             {...tocItem}
@@ -122,7 +122,7 @@ export function UnifiedTocNavItem({
     return (
       <>
         <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling({ isAccordion }))}>
-          {versionDropdown && <VersionDropdown />}
+          {versionDropdown && <UnifiedVersionDropdown contentSite={contentSite} isAccordion={isAccordion} />}
           {items?.map((tocItem) => (
             <UnifiedTocNavItem
               {...tocItem}

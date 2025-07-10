@@ -4,6 +4,8 @@ import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
 import { theme } from '../../theme/docsTheme';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { selectStyling } from '../VersionDropdown';
+import { getFeatureFlags } from '../../utils/feature-flags';
 
 const buildChoice = (branch) => {
   return {
@@ -18,24 +20,20 @@ const buildChoices = (branches, tocVersionNames) => {
 
 const selectStyle = css`
   flex: 1 0 auto;
-
   > div:first-of-type {
     max-width: 100px;
     width: max-content;
   }
-
   > div:nth-of-type(2) {
     width: 150px;
     right: 0px;
     left: unset;
-
     @media ${theme.screenSize.upToLarge} {
       width: max-content;
       max-width: calc(100vw - (${theme.size.medium} * 2));
       // (max viewport width - padding) inferred from the max width of the side nav in mobile
     }
   }
-
   button {
     height: ${theme.size.medium};
     &[aria-expanded='true'] {
@@ -44,7 +42,6 @@ const selectStyle = css`
       }
     }
   }
-
   span {
     overflow: hidden;
     -webkit-line-clamp: 2;
@@ -58,12 +55,19 @@ const wrapperStyle = css`
 `;
 
 const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
+  const { isUnifiedToc } = getFeatureFlags();
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
-  const [options, setOptions] = useState(buildChoices(availableVersions[versionedProject], tocVersionNames));
+  const computeOptions = useCallback(() => {
+    return isUnifiedToc
+      ? (availableVersions[versionedProject] || []).map(buildChoice)
+      : buildChoices(availableVersions[versionedProject], tocVersionNames);
+  }, [availableVersions, tocVersionNames, versionedProject, isUnifiedToc]);
+
+  const [options, setOptions] = useState(computeOptions);
 
   useEffect(() => {
-    setOptions(buildChoices(availableVersions[versionedProject], tocVersionNames));
-  }, [availableVersions, tocVersionNames, versionedProject]);
+    setOptions(computeOptions());
+  }, [computeOptions]);
 
   const onChange = useCallback(
     ({ value }) => {
@@ -80,7 +84,7 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
     <div onClick={onClick} className={cx(wrapperStyle)}>
       <Select
         value={activeVersions[versionedProject]}
-        className={cx(selectStyle)}
+        className={cx(isUnifiedToc ? selectStyling : selectStyle)}
         onChange={onChange}
         aria-labelledby={'select'}
         popoverZIndex={2}

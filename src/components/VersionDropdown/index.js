@@ -10,7 +10,7 @@ import { useCurrentUrlSlug, getBranchSlug } from '../../hooks/use-current-url-sl
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 
-const selectStyling = LeafyCSS`
+export const selectStyling = LeafyCSS`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
 
   ${'' /* Render version dropdown text in front of the Sidebar text */}
