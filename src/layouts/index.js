@@ -18,6 +18,7 @@ import { getAllLocaleCssStrings } from '../utils/locale';
 import { OfflineDownloadProvider } from '../components/OfflineDownloadModal/DownloadContext';
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
 import { getFeatureFlags } from '../utils/feature-flags';
+import { UnifiedTocContext } from '../context/unified-toc-context';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -101,7 +102,7 @@ const toastPortalStyling = LeafyCSS`
   z-index: ${theme.zIndexes.sidenav + 1};
 `;
 
-const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, template } }) => {
+const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, template, unifiedToc } }) => {
   const { page } = data || {};
   const { sidenav } = getTemplate(template);
   const { chapters, guides, slugToTitle, toctree, eol, project } = useSnootyMetadata();
@@ -124,34 +125,36 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
         remoteMetadata={remoteMetadata}
         project={project}
       >
-        <GlobalGrid isInPresentationMode={isInPresentationMode}>
-          {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
-          {isUnifiedToc ? (
-            <UnifiedSidenav slug={slug} />
-          ) : sidenav && !isInPresentationMode ? (
-            <ToastProvider portalClassName={cx(toastPortalStyling)}>
-              <OfflineDownloadProvider>
-                <Sidenav
-                  chapters={chapters}
-                  guides={guides}
-                  page={page?.ast}
-                  pageTitle={pageTitle}
-                  repoBranches={repoBranches}
-                  slug={slug}
-                  toctree={toctree}
-                  eol={eol}
-                  template={template}
-                />
-              </OfflineDownloadProvider>
-            </ToastProvider>
-          ) : (
-            <div />
-          )}
-          <StyledContentContainer>
-            <ActionBar template={template} slug={slug} sidenav={sidenav} />
-            <ContentTransition slug={slug}>{children}</ContentTransition>
-          </StyledContentContainer>
-        </GlobalGrid>
+        <UnifiedTocContext.Provider value={{ unifiedToc }}>
+          <GlobalGrid isInPresentationMode={isInPresentationMode}>
+            {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
+            {isUnifiedToc ? (
+              <UnifiedSidenav slug={slug} />
+            ) : sidenav && !isInPresentationMode ? (
+              <ToastProvider portalClassName={cx(toastPortalStyling)}>
+                <OfflineDownloadProvider>
+                  <Sidenav
+                    chapters={chapters}
+                    guides={guides}
+                    page={page?.ast}
+                    pageTitle={pageTitle}
+                    repoBranches={repoBranches}
+                    slug={slug}
+                    toctree={toctree}
+                    eol={eol}
+                    template={template}
+                  />
+                </OfflineDownloadProvider>
+              </ToastProvider>
+            ) : (
+              <div />
+            )}
+            <StyledContentContainer>
+              <ActionBar template={template} slug={slug} sidenav={sidenav} />
+              <ContentTransition slug={slug}>{children}</ContentTransition>
+            </StyledContentContainer>
+          </GlobalGrid>
+        </UnifiedTocContext.Provider>
       </RootProvider>
     </>
   );
