@@ -9,7 +9,7 @@ export const tocData = (): TocItem[] => {
       contentSite: DocSites.DATABASE_TOOLS,
       items: [
         {
-          label: 'command tools Bianca',
+          label: 'command tools',
           group: true,
           items: [
             {
