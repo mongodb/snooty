@@ -27,31 +27,30 @@ const projectComponents = new Set();
 
 let db;
 
-// Create a node for the Unified TOC
+// For fetching the Unified TOC from a JSON path
 const fetchUnifiedToc = async () => {
   try {
-    // Fetch the unified toc file from GitHub API
-    // TODO: Change ref from DOP-5877 to the feature branch until ready to deploy, then point to the main branch
-    const url =
-      'https://api.github.com/repos/10gen/docs-mongodb-internal/contents/content/table-of-contents/output/build/toc.json?ref=DOP-5877';
-    const unifiedToc = await fetch(url, {
-      headers: {
-        Authorization: `token ${process.env.UNIFIED_TOC_TOKEN}`,
-        Accept: 'application/vnd.github.v3.raw',
-      },
-    });
+    const filePath = process.env.UNIFIED_TOC_JSON_PATH;
 
-    const unifiedTocData = await unifiedToc.json();
+    console.log(`Reading unified TOC from JSON file: ${filePath}`);
 
-    // If there is an error there is a status message returned
-    // Checking to see that there is no status message in the JSON
-    if (!unifiedTocData.status) {
-      return unifiedTocData;
+    // Check if file exists
+    try {
+      await fs.access(filePath);
+    } catch (error) {
+      console.error(`JSON file not found at path: ${filePath}`);
+      return null;
     }
+
+    // Read and parse the JSON file directly
+    const fileContent = await fs.readFile(filePath, 'utf-8');
+    const unifiedTocData = JSON.parse(fileContent);
+
+    return unifiedTocData;
+  } catch (error) {
+    console.error('Error while fetching unified toc');
+    console.error(error);
     return null;
-  } catch (e) {
-    console.error('Error while fetching unified toc from GitHub API');
-    console.error(e);
   }
 };
 
