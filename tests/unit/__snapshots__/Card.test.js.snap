@@ -193,6 +193,12 @@ exports[`renders correctly 1`] = `
   text-decoration-color: #016BF8;
 }
 
+.emotion-6>span>code,
+.emotion-6>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 <div
     class="emotion-0"
   >

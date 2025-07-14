@@ -104,6 +104,12 @@ exports[`renders correctly as a homepage 1`] = `
   text-decoration-color: #016BF8;
 }
 
+.emotion-3>span>code,
+.emotion-3>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 .emotion-3:hover,
 .emotion-3:focus {
   -webkit-text-decoration: underline;
@@ -262,6 +268,12 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-color: #016BF8;
 }
 
+.emotion-3>span>code,
+.emotion-3>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 .emotion-3:hover,
 .emotion-3:focus {
   -webkit-text-decoration: underline;
@@ -293,6 +305,7 @@ exports[`renders correctly with siteTitle 1`] = `
   font-weight: 400;
 }
 
+.emotion-9>span>code,
 .emotion-9>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);

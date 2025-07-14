@@ -104,6 +104,7 @@ a .emotion-0 {
   font-weight: var(--link-font-weight);
 }
 
+.emotion-5>span>code,
 .emotion-5>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);

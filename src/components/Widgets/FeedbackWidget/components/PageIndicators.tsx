@@ -5,10 +5,10 @@ import { useFeedbackContext } from '../context';
 import { theme } from '../../../../theme/docsTheme';
 
 //styling for individual dots in the progress bar
-const Dot = styled('span')`
+const Dot = styled('span')<{ isActive: boolean }>`
   height: ${theme.size.tiny};
   width: ${theme.size.tiny};
-  background-color: ${(props) => (props.isActive ? `${palette.green.base}` : `${palette.gray.light2}`)};
+  background-color: ${({ isActive }) => (isActive ? `${palette.green.base}` : `${palette.gray.light2}`)};
   border-radius: 50%;
   display: inline-block;
 `;

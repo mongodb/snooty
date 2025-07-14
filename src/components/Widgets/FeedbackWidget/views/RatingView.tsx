@@ -15,7 +15,9 @@ const RatingView = () => {
 
   return (
     <>
-      <Label className={cx(labelStyling)}>Rate this page</Label>
+      <Label className={cx(labelStyling)} htmlFor="rating">
+        Rate this page
+      </Label>
       <StarRating handleRatingSelection={selectInitialRating} />
     </>
   );

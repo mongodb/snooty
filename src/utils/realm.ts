@@ -73,9 +73,10 @@ export const fetchDocument = async <T extends Document>(
   database: ReposDatabaseName | MetadataDatabaseName,
   collectionName: string,
   query: Filter<T>,
-  projections?: Projection<T>
+  projections?: Projection<T>,
+  findOptions?: FindOptions<T>
 ): Promise<T | null> => {
-  return callAuthenticatedFunction('fetchDocumentSorted', database, collectionName, query, projections);
+  return callAuthenticatedFunction('fetchDocumentSorted', database, collectionName, query, projections, findOptions);
 };
 
 export const fetchDocset = async <T extends Document>(

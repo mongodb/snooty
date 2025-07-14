@@ -223,6 +223,12 @@ exports[`renders correctly 1`] = `
   text-decoration-color: #016BF8;
 }
 
+.emotion-5>span>code,
+.emotion-5>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 <div
     class="card-group  emotion-0"
   >

@@ -57,7 +57,7 @@ const gatsbyLinkStyling = (linkThemeStyle: LinkThemeStyle) => css`
   line-height: 13px;
   ${sharedDarkModeOverwriteStyles}
 
-  > code {
+  > span > code, > code {
     ${sharedDarkModeOverwriteStyles}
   }
 
@@ -81,6 +81,10 @@ const gatsbyLinkStyling = (linkThemeStyle: LinkThemeStyle) => css`
 const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
+
+  > span > code, > code {
+    ${sharedDarkModeOverwriteStyles}
+  }
 `;
 
 export type LinkProps = {

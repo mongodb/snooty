@@ -171,6 +171,7 @@ exports[`renders correctly 1`] = `
   font-weight: var(--link-font-weight);
 }
 
+.emotion-7>span>code,
 .emotion-7>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);

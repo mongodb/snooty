@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { KeyboardEvent, useState } from 'react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import { css } from '@leafygreen-ui/emotion';
@@ -10,7 +10,7 @@ import { theme } from '../../../../theme/docsTheme';
 const FILLED_STAR_COLOR = palette.green.light1;
 const UNFILLED_STAR_COLOR = palette.white;
 
-const starIconStyle = (isHighlighted) => css`
+const starIconStyle = (isHighlighted: boolean) => css`
   color: ${isHighlighted ? FILLED_STAR_COLOR : UNFILLED_STAR_COLOR};
   stroke-width: ${isHighlighted ? 1 : 0.5}px;
   stroke: ${palette.gray.dark2};
@@ -48,7 +48,17 @@ export const StarRatingLabel = styled.div`
   margin-top: 12px;
 `;
 
-const Star = ({ isHighlighted, onClick, onMouseEnter, onMouseLeave, onFocus, onKeyDown, onBlur }) => {
+export type StarProps = {
+  isHighlighted: boolean;
+  onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  onFocus?: () => void;
+  onKeyDown?: (e: KeyboardEvent) => void;
+  onBlur?: () => void;
+};
+
+const Star = ({ isHighlighted, onClick, onMouseEnter, onMouseLeave, onFocus, onKeyDown, onBlur }: StarProps) => {
   const { isTabletOrMobile } = useScreenSize();
   const starSize = isTabletOrMobile ? 32 : 24;
 
@@ -73,12 +83,18 @@ const Star = ({ isHighlighted, onClick, onMouseEnter, onMouseLeave, onFocus, onK
   );
 };
 
-const StarRating = ({ className, handleRatingSelection = () => {}, editable = true }) => {
-  const [hoveredRating, setHoveredRating] = useState(null);
-  const [lastHoveredRating, setLastHoveredRating] = useState(null);
+export type StarRatingProps = {
+  className?: string;
+  handleRatingSelection?: (rating: number) => void;
+  editable?: boolean;
+};
+
+const StarRating = ({ className, handleRatingSelection = () => {}, editable = true }: StarRatingProps) => {
+  const [hoveredRating, setHoveredRating] = useState<number | null>(null);
+  const [lastHoveredRating, setLastHoveredRating] = useState<number | null>(null);
   const { selectedRating } = useFeedbackContext();
 
-  const hoverStar = (ratingValue) => {
+  const hoverStar = (ratingValue: number) => {
     setHoveredRating(ratingValue);
     setLastHoveredRating(ratingValue);
   };
@@ -92,7 +108,7 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
     setLastHoveredRating(null);
   };
 
-  const handleKeyDown = (e, ratingValue) => {
+  const handleKeyDown = (e: KeyboardEvent, ratingValue: number) => {
     const validKeys = ['Enter', 'Space'];
     if (validKeys.includes(e.code)) {
       e.preventDefault();
@@ -104,7 +120,10 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
     <>
       <Layout className={className} onMouseLeave={resetHoverStates}>
         {[1, 2, 3, 4, 5].map((ratingValue) => {
-          const isHighlighted = hoveredRating ? hoveredRating >= ratingValue : selectedRating >= ratingValue;
+          let isHighlighted = false;
+          if (hoveredRating) isHighlighted = hoveredRating >= ratingValue;
+          else if (selectedRating) isHighlighted = selectedRating >= ratingValue;
+
           const eventProps = editable
             ? {
                 onMouseEnter: () => hoverStar(ratingValue),
@@ -112,7 +131,7 @@ const StarRating = ({ className, handleRatingSelection = () => {}, editable = tr
                 onFocus: () => hoverStar(ratingValue),
                 onBlur: () => resetHoverStates(),
                 onClick: () => handleRatingSelection(ratingValue),
-                onKeyDown: (e) => handleKeyDown(e, ratingValue),
+                onKeyDown: (e: KeyboardEvent) => handleKeyDown(e, ratingValue),
               }
             : {};
 
