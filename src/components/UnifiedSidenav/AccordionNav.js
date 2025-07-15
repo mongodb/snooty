@@ -25,6 +25,11 @@ const panelStyling = LeafyCSS`
     border-bottom: 1px solid var(--sidenav-border-bottom-color);
     width: 100%;
 
+    // Height for the version dropdown
+    button {
+      height: 28px;
+    }
+
     ul {
       display: block;
       width: 100%;
@@ -95,7 +100,7 @@ export const AccordionNavPanel = ({
             <BackLink
               className={cx(backLinkStyling)}
               onClick={() => setShowDriverBackBtn(false)}
-              href="/master/java/bianca.laube/DOP-5372/builders/index.html"
+              href="/docs/cluster-to-cluster-sync/current/quickstart/"
             >
               Back to Client Libraries
             </BackLink>

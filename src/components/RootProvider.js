@@ -7,12 +7,12 @@ import { HeaderContextProvider } from './Header/header-context';
 import { SidenavContextProvider } from './Sidenav';
 import { ContentsProvider } from './Contents/contents-context';
 
-const RootProvider = ({ children, headingNodes, slug, repoBranches, remoteMetadata, versionsData }) => {
+const RootProvider = ({ children, headingNodes, slug, repoBranches, remoteMetadata }) => {
   return (
     <DarkModeContextProvider slug={slug}>
       <ContentsProvider headingNodes={headingNodes}>
         <HeaderContextProvider>
-          <VersionContextProvider repoBranches={repoBranches} slug={slug} versionsData={versionsData}>
+          <VersionContextProvider repoBranches={repoBranches} slug={slug}>
             <TocContextProvider remoteMetadata={remoteMetadata}>
               <SidenavContextProvider>{children}</SidenavContextProvider>
             </TocContextProvider>
