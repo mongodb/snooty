@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { createParentFromToc, findParentBreadCrumb } from '../components/Breadcrumbs/UnifiedTocBreadCrumbs';
-import type { TocItem, BreadCrumb } from '../components/UnifiedSidenav/UnifiedConstants';
+import type { TocItem, BreadCrumb } from '../components/UnifiedSidenav/types';
 
 export function usePageBreadcrumbs(tocTree: TocItem[], slug: string, isUnifiedToc: boolean): BreadCrumb[] | undefined {
   const unifiedTocParents = useMemo(() => {

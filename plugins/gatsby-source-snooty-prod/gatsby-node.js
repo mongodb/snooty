@@ -27,6 +27,19 @@ const projectComponents = new Set();
 
 let db;
 
+// For fetching the Unified TOC from a JSON path
+const fetchUnifiedToc = async () => {
+  const filePath = process.env.UNIFIED_TOC_JSON_PATH;
+
+  console.log(`Reading unified TOC from JSON file: ${filePath}`);
+
+  // Read and parse the JSON file directly
+  const fileContent = await fs.readFile(filePath, 'utf-8');
+  const unifiedTocData = JSON.parse(fileContent);
+
+  return unifiedTocData;
+};
+
 // Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
 // or data are found, the node will be null
 const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }, umbrellaProduct) => {
@@ -332,6 +345,25 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
   }
 
+  const unifiedToc = await fetchUnifiedToc();
+
+  // Unified TOC is critical, if we don't have one
+  // Stop the build from completing.
+  if (!unifiedToc) {
+    throw Error('Issue fetching the unified TOC');
+  }
+
+  const NotFoundTemplate = `../../src/templates/NotFound.js`;
+
+  createPage({
+    path: '/404/',
+    component: path.resolve(__dirname, NotFoundTemplate),
+    context: {
+      template: null,
+      unifiedToc,
+    },
+  });
+
   return new Promise((resolve, reject) => {
     pageList?.data?.allPage?.nodes?.forEach((page) => {
       const pageNodes = page.ast;
@@ -348,6 +380,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           slug,
           repoBranches,
           template: pageNodes?.options?.template,
+          unifiedToc,
         },
       });
     });

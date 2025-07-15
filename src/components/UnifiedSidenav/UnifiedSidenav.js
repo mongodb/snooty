@@ -174,29 +174,22 @@ export function UnifiedSidenav({ slug }) {
   console.log('The edited toctree with prefixes is:', tree, l1List);
   console.log(unifiedTocTree);
 
-  // Initialize state with default values instead of computed values
-  const [showDriverBackBtn, setShowDriverBackBtn] = useState(false);
-  const [currentL1, setCurrentL1] = useState(null);
-  const [currentL2s, setCurrentL2s] = useState(null);
+  const [isDriver, currentL2List] = findPageParent(tree, slug);
+  const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
 
-  useEffect(() => {
-    if (tree && tree.length > 0) {
-      const [isDriver, currentL2List] = findPageParent(tree, slug);
-      setShowDriverBackBtn(isDriver);
+  const [currentL1, setCurrentL1] = useState(() => {
+    return tree.find((staticTocItem) => {
+      return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
+    });
+  });
 
-      const foundCurrentL1 = tree.find((staticTocItem) => {
-        return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items, pathPrefix);
-      });
-      setCurrentL1(foundCurrentL1);
-      setCurrentL2s(currentL2List);
-    }
-  }, [tree, slug, pathPrefix]);
+  const [currentL2s, setCurrentL2s] = useState(() => {
+    return currentL2List;
+  });
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
-    if (!showDriverBackBtn && currentL1) {
-      setCurrentL2s(currentL1);
-    }
+    if (!showDriverBackBtn) setCurrentL2s(currentL1);
   }, [currentL1, showDriverBackBtn]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
@@ -207,7 +200,7 @@ export function UnifiedSidenav({ slug }) {
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
 
-  const displayedItems = showDriverBackBtn ? currentL2s?.items : tree;
+  const displayedItems = showDriverBackBtn ? currentL2s.items : tree;
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
