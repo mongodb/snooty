@@ -82,6 +82,11 @@ const gatsbyLinkStyling = (linkThemeStyle) => css`
 const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
+  svg {
+    margin-left: 8px;
+    margin-bottom: -6px;
+    color: ${palette.gray.base};
+  }
 `;
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
@@ -119,6 +124,23 @@ const Link = ({
 
   // If contentSite, that means we are coming from the UnifiedSideNav and not the old SideNav
   if (contentSite) {
+    // For an external links, inside the unified toc
+    if (!isRelativeUrl(to)) {
+      return (
+        <LGLink
+          className={joinClassNames(lgLinkStyling, className)}
+          href={to}
+          hideExternalIcon={false}
+          target={'_blank'}
+          fill={palette.gray.base}
+          {...anchorProps}
+        >
+          {children}
+          {decoration}
+        </LGLink>
+      );
+    }
+
     if (!to.startsWith('/')) to = `/${to}`;
 
     // Ensure trailing slash
