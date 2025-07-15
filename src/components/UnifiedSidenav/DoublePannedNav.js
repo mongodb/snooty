@@ -85,6 +85,8 @@ export const DoublePannedNav = ({
 }) => {
   const { isTabletOrMobile } = useScreenSize();
 
+  console.log('currentL2s inside the double panned nav', currentL2s);
+
   return (
     <SideNav widthOverride={currentL1 ? 426 : 161} className={cx(sideNavStyle)} aria-label="Side navigation Panel">
       <div className={cx(NavTopContainer(isTabletOrMobile))}>

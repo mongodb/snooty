@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useEffect, useContext, useMemo, useReducer } from 'react';
 import styled from '@emotion/styled';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useLocation } from '@gatsbyjs/reach-router';
@@ -149,6 +149,25 @@ const findPageParent = (tree, targetUrl) => {
   return [false, null];
 };
 
+const UPDATE_CURRENT_L2S = 'update-current-l2s';
+const SET_SHOW_DRIVER_BACK_BTN = 'set-show-driver-back-btn';
+
+function reducer(state, action) {
+  const { type } = action;
+  switch (type) {
+    case UPDATE_CURRENT_L2S:
+      return {
+        currentL2s: state.currentL2s,
+      };
+    case SET_SHOW_DRIVER_BACK_BTN:
+      return {
+        showDriverBackBtn: state.showDriverBackBtn,
+      };
+    default:
+      return { ...state };
+  }
+}
+
 export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
@@ -173,23 +192,49 @@ export function UnifiedSidenav({ slug }) {
   console.log('The edited toctree with prefixes is:', tree);
   console.log(unifiedTocTree);
 
-  const [isDriver, currentL2List] = findPageParent(tree, slug);
-  const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
-
-  const [currentL1, setCurrentL1] = useState(() => {
-    return tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
-    });
+  console.log('slug', slug);
+  const foundCurrentL1 = tree.find((staticTocItem) => {
+    console.log('staticTocItem', staticTocItem);
+    return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
   });
 
-  const [currentL2s, setCurrentL2s] = useState(() => {
-    return currentL2List;
+  console.log('foundCurrentL1', foundCurrentL1);
+
+  const initialState = { currentL2s: {}, currentL1: {}, showDriverBackBtn: false };
+
+  const [tocData, dispatch] = useReducer(reducer, initialState, () => {
+    const [isDriver, currentL2List] = findPageParent(tree, slug);
+    return {
+      currentL2s: currentL2List,
+      showDriverBackBtn: isDriver,
+      currentL1: foundCurrentL1,
+    };
   });
+
+  // const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
+
+  // const [currentL1, setCurrentL1] = useState(() => {
+  //   return ;
+  // });
+
+  console.log('currentL1 -->', tocData.currentL1);
+
+  // const [currentL2s, setCurrentL2s] = useState(currentL2List);
+  console.log('toc data currentL2s -->', tocData.currentL2s);
+
+  console.log('showDriverBackBtn', tocData.showDriverBackBtn);
+
+  console.log('toc data', tocData);
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
-  useEffect(() => {
-    if (!showDriverBackBtn) setCurrentL2s(currentL1);
-  }, [currentL1, showDriverBackBtn]);
+  // useEffect(() => {
+  //   if (!tocData.showDriverBackBtn) {
+  //     dispatch({
+  //       type: UPDATE_CURRENT_L2S,
+  //       currentL2s: tocData.currentL1,
+  //     })
+  //   }
+  // }, [tocData.currentL1, tocData.showDriverBackBtn]);
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
   useEffect(() => {
     setHideMobile(true);
@@ -198,7 +243,10 @@ export function UnifiedSidenav({ slug }) {
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
 
-  const displayedItems = showDriverBackBtn ? currentL2s?.items : tree;
+  const displayedItems = tocData.showDriverBackBtn ? tocData.currentL2s?.items : tree;
+
+  console.log('showDriverBackBtn', tocData.showDriverBackBtn);
+  console.log('displayedItems ', displayedItems);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
@@ -210,24 +258,42 @@ export function UnifiedSidenav({ slug }) {
         id={SIDE_NAV_CONTAINER_ID}
       >
         <AccordionNavPanel
-          showDriverBackBtn={showDriverBackBtn}
-          setShowDriverBackBtn={setShowDriverBackBtn}
+          showDriverBackBtn={tocData.showDriverBackBtn}
+          setShowDriverBackBtn={(shouldShowDriverBackBtn) => {
+            console.log('shouldShowDriverBackBtn in setCurrentL1 for AccordionNavPanel', shouldShowDriverBackBtn);
+            dispatch({ type: SET_SHOW_DRIVER_BACK_BTN, showDriverBackBtn: shouldShowDriverBackBtn });
+          }}
           displayedItems={displayedItems}
           slug={slug}
-          currentL2s={currentL2s}
-          setCurrentL1={setCurrentL1}
-          setCurrentL2s={setCurrentL2s}
+          currentL2s={tocData.currentL2s}
+          setCurrentL1={(obj) => {
+            console.log('obj in setCurrentL1 for AccordionNavPanel', obj);
+            dispatch({ type: UPDATE_CURRENT_L2S, currentL2s: { ...tocData.currentL1, ...obj } });
+          }}
+          setCurrentL2s={(obj) => {
+            console.log('obj in setCurrentL2s for AccordionNavPanel', obj);
+            dispatch({ type: UPDATE_CURRENT_L2S, currentL2s: { ...tocData.currentL2s, ...obj } });
+          }}
           hideMobile={hideMobile}
         />
         <DoublePannedNav
-          showDriverBackBtn={showDriverBackBtn}
-          setShowDriverBackBtn={setShowDriverBackBtn}
+          showDriverBackBtn={tocData.showDriverBackBtn}
+          setShowDriverBackBtn={(shouldShowDriverBackBtn) => {
+            console.log('shouldShowDriverBackBtn in setCurrentL1 for DoublePannedNav', shouldShowDriverBackBtn);
+            dispatch({ type: SET_SHOW_DRIVER_BACK_BTN, showDriverBackBtn: shouldShowDriverBackBtn });
+          }}
           tree={tree}
           slug={slug}
-          currentL2s={currentL2s}
-          setCurrentL1={setCurrentL1}
-          setCurrentL2s={setCurrentL2s}
-          currentL1={currentL1}
+          currentL2s={tocData.currentL2s}
+          setCurrentL1={(obj) => {
+            console.log('obj in setCurrentL1 for DoublePannedNav', obj);
+            dispatch({ type: UPDATE_CURRENT_L2S, currentL2s: { ...tocData.currentL1, ...obj } });
+          }}
+          setCurrentL2s={(obj) => {
+            console.log('obj in setCurrentL2s for DoublePannedNav', obj);
+            dispatch({ type: UPDATE_CURRENT_L2S, currentL2s: { ...tocData.currentL2s, ...obj } });
+          }}
+          currentL1={tocData.currentL1}
         />
       </div>
     </>
