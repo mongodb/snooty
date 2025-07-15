@@ -29,29 +29,15 @@ let db;
 
 // For fetching the Unified TOC from a JSON path
 const fetchUnifiedToc = async () => {
-  try {
-    const filePath = process.env.UNIFIED_TOC_JSON_PATH;
+  const filePath = process.env.UNIFIED_TOC_JSON_PATH;
 
-    console.log(`Reading unified TOC from JSON file: ${filePath}`);
+  console.log(`Reading unified TOC from JSON file: ${filePath}`);
 
-    // Check if file exists
-    try {
-      await fs.access(filePath);
-    } catch (error) {
-      console.error(`JSON file not found at path: ${filePath}`);
-      return null;
-    }
+  // Read and parse the JSON file directly
+  const fileContent = await fs.readFile(filePath, 'utf-8');
+  const unifiedTocData = JSON.parse(fileContent);
 
-    // Read and parse the JSON file directly
-    const fileContent = await fs.readFile(filePath, 'utf-8');
-    const unifiedTocData = JSON.parse(fileContent);
-
-    return unifiedTocData;
-  } catch (error) {
-    console.error('Error while fetching unified toc');
-    console.error(error);
-    return null;
-  }
+  return unifiedTocData;
 };
 
 // Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
