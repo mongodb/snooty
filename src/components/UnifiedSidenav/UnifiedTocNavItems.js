@@ -9,7 +9,7 @@ import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { theme } from '../../theme/docsTheme';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { isUnifiedTocActive } from '../../utils/is-unified-toc-active';
+// import { isUnifiedTocActive } from '../../utils/is-unified-toc-active';
 import VersionDropdown from '../VersionDropdown';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 
@@ -36,7 +36,7 @@ const caretStyle = LeafyCSS`
 
 function isSelectedTab(url, slug, pathPrefix) {
   // Hijacking the isSelectedTab for unified toc in dev and preview builds
-  if (isUnifiedTocActive(url, pathPrefix)) return true;
+  // if (isUnifiedTocActive(url, pathPrefix)) return true;
   return isSelectedTocNode(url, slug);
 }
 
@@ -113,6 +113,7 @@ export function UnifiedTocNavItem({
     );
   }
 
+  console.log('hello', label);
   // groups are for adding a static header, these can also be collapsible
   if (group) {
     return (
@@ -245,6 +246,7 @@ export function StaticNavItem({
   contentSite,
   versionDropdown,
   setCurrentL1,
+  setCurrentL2s,
   isAccordion,
   setShowDriverBackBtn,
 }) {
@@ -260,6 +262,7 @@ export function StaticNavItem({
       to={newUrl}
       onClick={() => {
         setCurrentL1({ items, newUrl, versionDropdown });
+        setCurrentL2s({ items, newUrl, versionDropdown });
         setShowDriverBackBtn(false);
       }}
       className={cx(l1ItemStyling({ isActive, isAccordion }))}

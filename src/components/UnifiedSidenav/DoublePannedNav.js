@@ -81,9 +81,14 @@ export const DoublePannedNav = ({
   currentL2s,
   setCurrentL1,
   setCurrentL2s,
+  currentL2List,
   currentL1,
 }) => {
   const { isTabletOrMobile } = useScreenSize();
+
+  //   useEffect(() => {
+  //   console.log('DoublePannedNav re-rendered, currentL2s:', currentL2s);
+  // }, [currentL2s]);
 
   return (
     <SideNav widthOverride={currentL1 ? 426 : 161} className={cx(sideNavStyle)} aria-label="Side navigation Panel">
@@ -99,37 +104,38 @@ export const DoublePannedNav = ({
               slug={slug}
               key={staticTocItem.newUrl + staticTocItem.label}
               setCurrentL1={setCurrentL1}
+              setCurrentL2s={setCurrentL2s}
               setShowDriverBackBtn={setShowDriverBackBtn}
               isAccordion={false}
             />
           ))}
         </div>
 
-        {currentL2s && (
-          <div className={cx(rightPane)}>
-            {showDriverBackBtn && (
-              <BackLink
-                className={cx(backLinkStyling)}
-                onClick={() => setShowDriverBackBtn(false)}
-                href="/docs/cluster-to-cluster-sync/current/quickstart/"
-              >
-                Back to Client Libraries
-              </BackLink>
-            )}
-            {currentL1?.versionDropdown && <VersionDropdown />}
-            {currentL2s.items?.map((navItems) => (
-              <UnifiedTocNavItem
-                {...navItems}
-                level={1}
-                key={navItems.newUrl + navItems.label}
-                slug={slug}
-                isAccordion={false}
-                setCurrentL2s={setCurrentL2s}
-                setShowDriverBackBtn={setShowDriverBackBtn}
-              />
-            ))}
-          </div>
-        )}
+        {/* {currentL2s && ( */}
+        <div className={cx(rightPane)}>
+          {console.log('i am on the inside girl', currentL2s?.items)}
+          {showDriverBackBtn && (
+            <BackLink
+              className={cx(backLinkStyling)}
+              onClick={() => setShowDriverBackBtn(false)}
+              href="/docs/cluster-to-cluster-sync/current/quickstart/"
+            >
+              Back to Client Libraries
+            </BackLink>
+          )}
+          {currentL1?.versionDropdown && <VersionDropdown />}
+          {currentL2s?.items?.map((navItems) => (
+            <UnifiedTocNavItem
+              {...navItems}
+              level={1}
+              key={navItems.newUrl + navItems.label}
+              slug={slug}
+              isAccordion={false}
+              setCurrentL2s={setCurrentL2s}
+              setShowDriverBackBtn={setShowDriverBackBtn}
+            />
+          ))}
+        </div>
       </div>
       <div className={cx(downloadButtonStlying)}>
         <DownloadButton />

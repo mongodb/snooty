@@ -174,17 +174,23 @@ export function UnifiedSidenav({ slug }) {
   console.log(unifiedTocTree);
 
   const [isDriver, currentL2List] = findPageParent(tree, slug);
+  console.log('currentl2list', currentL2List);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
 
+  const [currentL2s, setCurrentL2s] = useState(() => {
+    const [, list] = findPageParent(tree, slug);
+    console.log('in current l2 orange', slug, list);
+    return list;
+  });
+
+  console.log('currentl2s', currentL2s);
   const [currentL1, setCurrentL1] = useState(() => {
     return tree.find((staticTocItem) => {
       return isActiveTocNode(slug, staticTocItem.url, staticTocItem.items);
     });
   });
 
-  const [currentL2s, setCurrentL2s] = useState(() => {
-    return currentL2List;
-  });
+  console.log('current l1', currentL1);
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {

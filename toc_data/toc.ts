@@ -74,19 +74,19 @@ export const tocData = (): TocItem[] => {
               contentSite: DocSites.CLOUD_DOCS,
               url: '/docs/atlas/getting-started/meow',
             },
-            {
-              label: 'bsondump',
-              contentSite: DocSites.DATABASE_TOOLS,
-              url: '/docs/database-tools/bsondump/',
-            },
+            // {
+            //   label: 'bsondump',
+            //   contentSite: DocSites.DATABASE_TOOLS,
+            //   url: '/docs/database-tools/bsondump/',
+            // },
           ],
         },
       ],
     },
     {
-      label: 'Atlas',
-      url: '/docs/charts/',
-      contentSite: DocSites.CHARTS,
+      label: 'testing',
+      url: '/docs/database-tools/bsondump/',
+      contentSite: DocSites.DATABASE_TOOLS,
       items: [
         {
           label: 'ATLAS CHARTS',
