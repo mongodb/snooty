@@ -182,8 +182,6 @@ export function UnifiedSidenav({ slug }) {
     });
   });
 
-  console.log('L1 AD', currentL1, slug);
-
   const [currentL2s, setCurrentL2s] = useState(() => {
     return currentL2List;
   });
