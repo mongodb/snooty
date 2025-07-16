@@ -6,11 +6,13 @@ import { SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Link from '../Link';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
-import { isActiveTocNode } from '../../utils/is-active-toc-node';
+// import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { theme } from '../../theme/docsTheme';
-import { isUnifiedTocActive } from '../../utils/is-unified-toc-active';
-import VersionDropdown from '../VersionDropdown';
+// import { useSiteMetadata } from '../../hooks/use-site-metadata';
+// import { isUnifiedTocActive } from '../../utils/is-unified-toc-active';
+import { isCurrentPage } from '../../utils/is-current-page';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
+import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 
 export const Border = styled('hr')`
   border: unset;
@@ -34,9 +36,19 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
-function isSelectedTab(url, slug) {
-  // Hijacking the isSelectedTab for unified toc in dev and preview builds
-  if (isUnifiedTocActive(url)) return true;
+// This checks what sidenav should load based on the active Tab
+export const isActiveTocNode = (currentUrl, slug, children) => {
+  if (currentUrl === undefined) return false;
+  if (isCurrentPage(currentUrl, slug)) return true;
+  if (children) {
+    return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.newUrl, b.items), false);
+  }
+  return false;
+};
+
+function isSelectedTab(url, slug, pathPrefix) {
+  // // Hijacking the isSelectedTab for unified toc in dev and preview builds
+  // if (isUnifiedTocActive(url, pathPrefix)) return true;
   return isSelectedTocNode(url, slug);
 }
 
@@ -75,7 +87,7 @@ export function UnifiedTocNavItem({
             setShowDriverBackBtn={setShowDriverBackBtn}
             isAccordion={isAccordion}
           />
-          {versionDropdown && <VersionDropdown />}
+          {versionDropdown && newUrl === currentL2s?.newUrl && <UnifiedVersionDropdown contentSite={contentSite} />}
           {newUrl === currentL2s?.newUrl &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
@@ -97,7 +109,7 @@ export function UnifiedTocNavItem({
 
     return (
       <>
-        {versionDropdown && <VersionDropdown />}
+        {versionDropdown && <UnifiedVersionDropdown contentSite={contentSite} />}
         {items?.map((tocItem) => (
           <UnifiedTocNavItem
             {...tocItem}
@@ -120,7 +132,7 @@ export function UnifiedTocNavItem({
     return (
       <>
         <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling({ isAccordion }))}>
-          {versionDropdown && <VersionDropdown />}
+          {versionDropdown && <UnifiedVersionDropdown contentSite={contentSite} isAccordion={isAccordion} />}
           {items?.map((tocItem) => (
             <UnifiedTocNavItem
               {...tocItem}
