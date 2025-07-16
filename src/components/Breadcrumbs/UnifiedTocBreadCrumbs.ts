@@ -1,6 +1,6 @@
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
-import type { TocItem, BreadCrumb } from '../UnifiedSidenav/types';
+import type { TocItem, BreadCrumb } from '../UnifiedSidenav/types'
 
 // Goes through toc.toml and builds parent breadcrumb data for each entry
 export function createParentFromToc(tree: TocItem[] | undefined, breadcrumbs: BreadCrumb[]): TocItem[] | undefined {
