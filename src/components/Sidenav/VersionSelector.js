@@ -58,9 +58,13 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
   const { isUnifiedToc } = getFeatureFlags();
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
   const computeOptions = useCallback(() => {
-    return isUnifiedToc
-      ? (availableVersions[versionedProject] || []).map(buildChoice)
-      : buildChoices(availableVersions[versionedProject], tocVersionNames);
+    const versions = availableVersions[versionedProject] || [];
+
+    if (isUnifiedToc) {
+      return versions.map(buildChoice);
+    }
+
+    return buildChoices(versions, tocVersionNames);
   }, [availableVersions, tocVersionNames, versionedProject, isUnifiedToc]);
 
   const [options, setOptions] = useState(computeOptions);
