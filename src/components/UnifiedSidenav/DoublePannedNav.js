@@ -8,6 +8,7 @@ import DocsHomeButton from '../Sidenav/DocsHomeButton';
 import { DownloadButton } from '../OfflineDownloadModal';
 import { NavTopContainer, downloadButtonStlying, ArtificialPadding } from './UnifiedSidenav';
 import { StaticNavItem, UnifiedTocNavItem } from './UnifiedTocNavItems';
+import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 
 export const leftPane = LeafyCSS`
   flex: 0 0 161px;
@@ -104,7 +105,7 @@ export const DoublePannedNav = ({
             />
           ))}
         </div>
-
+        {currentL1?.versionDropdown && <UnifiedVersionDropdown />}
         {currentL2s && (
           <div className={cx(rightPane)}>
             {showDriverBackBtn && (

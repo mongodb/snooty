@@ -1,9 +1,11 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
 import { theme } from '../../theme/docsTheme';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { selectStyling } from '../VersionDropdown';
+import { getFeatureFlags } from '../../utils/feature-flags';
 
 const buildChoice = (branch) => {
   return {
@@ -58,12 +60,19 @@ const wrapperStyle = css`
 `;
 
 const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
+  const { isUnifiedToc } = getFeatureFlags();
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
-  const [options, setOptions] = useState(buildChoices(availableVersions[versionedProject], tocVersionNames));
+  const computeOptions = useCallback(() => {
+    const versions = availableVersions[versionedProject] || [];
 
-  useEffect(() => {
-    setOptions(buildChoices(availableVersions[versionedProject], tocVersionNames));
-  }, [availableVersions, tocVersionNames, versionedProject]);
+    if (isUnifiedToc) {
+      return versions.map(buildChoice);
+    }
+
+    return buildChoices(versions, tocVersionNames);
+  }, [availableVersions, tocVersionNames, versionedProject, isUnifiedToc]);
+
+  const [options] = useState(computeOptions);
 
   const onChange = useCallback(
     ({ value }) => {
@@ -80,7 +89,7 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
     <div onClick={onClick} className={cx(wrapperStyle)}>
       <Select
         value={activeVersions[versionedProject]}
-        className={cx(selectStyle)}
+        className={cx(isUnifiedToc ? selectStyling : selectStyle)}
         onChange={onChange}
         aria-labelledby={'select'}
         popoverZIndex={2}

@@ -14,6 +14,7 @@ import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
+// import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { isActiveTocNode } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
@@ -185,6 +186,17 @@ export function UnifiedSidenav({ slug }) {
   const [currentL2s, setCurrentL2s] = useState(() => {
     return currentL2List;
   });
+
+  useEffect(() => {
+    const [isDriver, updatedL2s] = findPageParent(tree, slug);
+    const updatedL1s = tree.find((staticTocItem) => {
+      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
+    });
+
+    setShowDriverBackBtn(isDriver);
+    setCurrentL1(updatedL1s);
+    setCurrentL2s(updatedL2s);
+  }, [tree, slug]);
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {

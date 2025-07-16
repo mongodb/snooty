@@ -9,6 +9,10 @@ import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import { isCurrentPage } from '../../utils/is-current-page';
 import { theme } from '../../theme/docsTheme';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
+import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
+// import { useSiteMetadata } from '../../hooks/use-site-metadata';
+// import { isUnifiedTocActive } from '../../utils/is-unified-toc-active';
+// import { isActiveTocNode } from '../../utils/is-active-toc-node';
 
 export const Border = styled('hr')`
   border: unset;
@@ -32,6 +36,8 @@ const caretStyle = LeafyCSS`
 `;
 
 function isSelectedTab(newUrl, slug) {
+  // // Hijacking the isSelectedTab for unified toc in dev and preview builds
+  // if (isUnifiedTocActive(url, pathPrefix)) return true;
   return isSelectedTocNode(newUrl, slug);
 }
 
@@ -49,6 +55,7 @@ export function UnifiedTocNavItem({
   label,
   group,
   newUrl,
+  versionDropdown,
   collapsible,
   items,
   isStatic,
@@ -80,6 +87,7 @@ export function UnifiedTocNavItem({
             setShowDriverBackBtn={setShowDriverBackBtn}
             isAccordion={isAccordion}
           />
+          {versionDropdown && newUrl === currentL2s?.newUrl && <UnifiedVersionDropdown contentSite={contentSite} />}
           {newUrl === currentL2s?.newUrl &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
@@ -100,6 +108,7 @@ export function UnifiedTocNavItem({
 
     return (
       <>
+        {versionDropdown && <UnifiedVersionDropdown contentSite={contentSite} />}
         {items?.map((tocItem) => (
           <UnifiedTocNavItem
             {...tocItem}
@@ -119,19 +128,22 @@ export function UnifiedTocNavItem({
   // groups are for adding a static header, these can also be collapsible
   if (group) {
     return (
-      <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling({ isAccordion }))}>
-        {items?.map((tocItem) => (
-          <UnifiedTocNavItem
-            {...tocItem}
-            level={level}
-            key={tocItem.newUrl + tocItem.label}
-            slug={slug}
-            isAccordion={isAccordion}
-            setCurrentL2s={setCurrentL2s}
-            setShowDriverBackBtn={setShowDriverBackBtn}
-          />
-        ))}
-      </SideNavGroup>
+      <>
+        <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling({ isAccordion }))}>
+          {versionDropdown && <UnifiedVersionDropdown contentSite={contentSite} />}
+          {items?.map((tocItem) => (
+            <UnifiedTocNavItem
+              {...tocItem}
+              level={level}
+              key={tocItem.newUrl + tocItem.label}
+              slug={slug}
+              isAccordion={isAccordion}
+              setCurrentL2s={setCurrentL2s}
+              setShowDriverBackBtn={setShowDriverBackBtn}
+            />
+          ))}
+        </SideNavGroup>
+      </>
     );
   }
 
@@ -241,12 +253,11 @@ export function StaticNavItem({
   newUrl,
   slug,
   items,
-  isStatic,
   contentSite,
+  versionDropdown,
   setCurrentL1,
   isAccordion,
   setShowDriverBackBtn,
-  level = 1,
 }) {
   const isActive = isActiveTocNode(slug, newUrl, items);
 
@@ -258,7 +269,7 @@ export function StaticNavItem({
       as={Link}
       to={newUrl}
       onClick={() => {
-        setCurrentL1({ items, newUrl });
+        setCurrentL1({ items, newUrl, versionDropdown });
         setShowDriverBackBtn(false);
       }}
       className={cx(l1ItemStyling({ isActive, isAccordion }))}

@@ -26,4 +26,5 @@ export enum DocSites {
   CSHARP = 'csharp',
   CHARTS = 'charts',
   C2C = 'cluster-sync',
+  ATLAS_CLI = 'atlas-cli',
 }
