@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
@@ -67,11 +67,7 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
     return buildChoices(versions, tocVersionNames);
   }, [availableVersions, tocVersionNames, versionedProject, isUnifiedToc]);
 
-  const [options, setOptions] = useState(computeOptions);
-
-  useEffect(() => {
-    setOptions(computeOptions());
-  }, [computeOptions]);
+  const [options] = useState(computeOptions);
 
   const onChange = useCallback(
     ({ value }) => {

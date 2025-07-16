@@ -156,7 +156,7 @@ const Link = ({
 
     // Using the isUnifiedTOCInDevMode to enforce the client-side routing for local build and preview deployments which
     // allows our custom 404 page to render.
-    if (project === contentSite || isUnifiedTOCInDevMode === true) {
+    if (project === contentSite || isUnifiedTOCInDevMode) {
       // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
 
