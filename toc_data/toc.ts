@@ -85,8 +85,8 @@ export const tocData = (): TocItem[] => {
     },
     {
       label: 'testing',
-      url: '/docs/database-tools/bsondump/',
-      contentSite: DocSites.DATABASE_TOOLS,
+      url: '/docs/atlas/data-federation/',
+      contentSite: DocSites.CLOUD_DOCS,
       items: [
         {
           label: 'ATLAS CHARTS',
@@ -142,6 +142,29 @@ export const tocData = (): TocItem[] => {
               label: 'Heatmap',
               contentSite: DocSites.CHARTS,
               url: '/docs/charts/chart-type-reference/heatmap/',
+            },
+          ],
+        },
+        {
+          label: 'ATLAS CLI',
+          group: true,
+          contentSite: DocSites.ATLAS_CLI,
+          versionDropdown: true,
+          items: [
+            {
+              label: 'Natural Language Charts',
+              contentSite: DocSites.ATLAS_CLI,
+              url: '/docs/atlas/cli/:version/install-atlas-cli/',
+            },
+            {
+              label: 'Line and Area Charts',
+              contentSite: DocSites.ATLAS_CLI,
+              url: '/docs/atlas/cli/:version/verify-packages/',
+            },
+            {
+              label: 'Heatmap',
+              contentSite: DocSites.ATLAS_CLI,
+              url: '/docs/charts/:version/heatmap/',
             },
           ],
         },
