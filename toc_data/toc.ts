@@ -164,7 +164,7 @@ export const tocData = (): TocItem[] => {
               url: '/docs/cluster-to-cluster-sync/:version/about-mongosync/',
               items: [
                 {
-                  label: 'c2c documentation',
+                  label: 'c2c docu',
                   contentSite: DocSites.C2C,
                   group: true,
                   versionDropdown: true,
