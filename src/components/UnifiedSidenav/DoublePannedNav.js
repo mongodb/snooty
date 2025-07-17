@@ -106,7 +106,7 @@ export const DoublePannedNav = ({
               <BackLink
                 className={cx(backLinkStyling)}
                 onClick={() => setShowDriverBackBtn(false)}
-                href="/docs/drivers/csharp/upcoming/quick-start/"
+                href="/docs/kafka-connector/current/whats-new/"
               >
                 Back to Client Libraries
               </BackLink>

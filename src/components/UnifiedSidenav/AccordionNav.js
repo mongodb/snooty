@@ -94,7 +94,7 @@ export const AccordionNavPanel = ({
             <BackLink
               className={cx(backLinkStyling)}
               onClick={() => setShowDriverBackBtn(false)}
-              href="/docs/cluster-to-cluster-sync/current/quickstart/"
+              href="/docs/kafka-connector/current/whats-new/"
             >
               Back to Client Libraries
             </BackLink>
