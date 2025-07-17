@@ -33,12 +33,6 @@ const panelStyling = LeafyCSS`
     ul {
       display: block;
       width: 100%;
-
-      li {
-        a {
-          justify-content: space-between !important;
-        }
-      }
     }
 
 `;

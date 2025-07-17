@@ -29,6 +29,7 @@ const overwriteLinkStyle = LeafyCSS`
   span {
     display: flex;
   }
+  justify-content: space-between;
 `;
 
 const caretStyle = LeafyCSS`
@@ -130,7 +131,7 @@ export function UnifiedTocNavItem({
     return (
       <>
         <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling({ isAccordion }))}>
-          {versionDropdown && <UnifiedVersionDropdown contentSite={contentSite} />}
+          {versionDropdown && <UnifiedVersionDropdown contentSite={contentSite} isAccordion={isAccordion} />}
           {items?.map((tocItem) => (
             <UnifiedTocNavItem
               {...tocItem}

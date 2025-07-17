@@ -63,12 +63,6 @@ const panelStyling = LeafyCSS`
     ul {
       display: block;
       width: 100%;
-
-      li {
-        a {
-          justify-content: space-between !important;
-        }
-      }
     }
 
 `;
@@ -112,7 +106,7 @@ export const DoublePannedNav = ({
               <BackLink
                 className={cx(backLinkStyling)}
                 onClick={() => setShowDriverBackBtn(false)}
-                href="/docs/cluster-to-cluster-sync/current/quickstart/"
+                href="/docs/drivers/csharp/upcoming/quick-start/"
               >
                 Back to Client Libraries
               </BackLink>

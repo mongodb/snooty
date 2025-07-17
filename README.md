@@ -172,7 +172,7 @@ npm run format:fix
 
 We have set up a precommit hook that will format staged files. Prettier also offers a variety of editor integrations to automatically format your code.
 
-### Component Factory Filter
+## Component Factory Filter
 
 The component factory filter process uses [SWC](https://swc.rs/) to remove unused components from the `ComponentFactory.js` file. A custom plugin is used to perform this transformation, and it lives in the `component-factory-transformer` directory. This plugin is run when the `npm run build` command is executed.
 
@@ -185,6 +185,29 @@ The `USE_FILTER_BRANCH` environment variable needs to be added in the `.env.prod
 NOTE: This will modify the `ComponentFactory.js` file directly. To undo this, you can run `git restore src/components/ComponentFactory.js` to get the file back to its original state.
 
 To perform a dry run i.e. the `ComponentFactory.js` file does not get updated, the `FILTER_DRY_RUN` property can be provided and set to `true`. This will log the resulting code that would have been written to the file only.
+
+## Unified TOC (L1 and L2s)
+
+### Requirements
+
+The Unified TOC requires the `GATSBY_USE_UNIFIED_TOC` feature flag to be enabled. This feature flag is temporary and will be removed once the Unified TOC is officially launched. Without this flag enabled, the legacy TOC will be displayed instead.
+
+Additionally, the `GATSBY_UNIFIED_TOC_DEV_MODE` environment variable needs to be set to handle active link styling on 404 pages (pages that are not included in the build) within the Unified TOC navigation. Without this environment variable, active styling will not be applied correctly on 404 pages.
+
+`GATSBY_USE_UNIFIED_TOC` can be added to your `.env.development` and both can be added to your `.env.production` file.
+
+### Local, Preview Builds
+
+The `GATSBY_UNIFIED_TOC_DEV_MODE` environment variable is required for handling 404 pages correctly in non-development environments. This includes:
+
+- Local production builds (using `npm run build` and `npm run serve`)
+- Preview builds
+
+This environment variable forces all links in the Unified TOC to be client-side links, which enables the custom 404 page to render while preserving the Unified TOC and show the correct active state in the navigation.
+
+For preview builds, writers need to ensure this environment variable is added to their Netlify configuration.
+
+Note: The custom 404 page is only visible in non-development builds. In development mode (`npm run develop`), Gatsby serves its own default 404 page.
 
 ### Useful Resources
 
