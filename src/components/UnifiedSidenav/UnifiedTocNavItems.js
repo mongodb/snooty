@@ -8,9 +8,11 @@ import Link from '../Link';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import { isCurrentPage } from '../../utils/is-current-page';
 import { theme } from '../../theme/docsTheme';
-import { isUnifiedTOCInDevMode } from '../../utils/is-unified-toc-dev';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
+// import { useSiteMetadata } from '../../hooks/use-site-metadata';
+// import { isUnifiedTocActive } from '../../utils/is-unified-toc-active';
+// import { isActiveTocNode } from '../../utils/is-active-toc-node';
 
 export const Border = styled('hr')`
   border: unset;
@@ -155,7 +157,7 @@ export function UnifiedTocNavItem({
     return (
       <SideNavItem
         aria-label={label}
-        as={isUnifiedTOCInDevMode ? null : Link}
+        as={Link}
         contentSite={contentSite}
         to={newUrl}
         onClick={handleClick}
@@ -265,7 +267,7 @@ export function StaticNavItem({
       aria-label={label}
       contentSite={contentSite}
       hideExternalIcon={true}
-      as={isUnifiedTOCInDevMode ? null : Link}
+      as={Link}
       to={newUrl}
       onClick={() => {
         setCurrentL1({ items, newUrl, versionDropdown });
