@@ -180,17 +180,17 @@ export function UnifiedSidenav({ slug }) {
     });
   });
 
-  const [currentL2s, setCurrentL2s] = useState(() => {
-    return currentL2List;
-  });
+  const [currentL2s, setCurrentL2s] = useState(currentL2List);
 
-  console.log('cocomelon', currentL1, currentL2s);
+  console.log('cocomelon', currentL1, currentL2s, slug);
 
   useEffect(() => {
     const [isDriver, updatedL2s] = findPageParent(tree, slug);
     const updatedL1s = tree.find((staticTocItem) => {
       return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
     });
+
+    console.log('temp values', isDriver, updatedL2s);
 
     setShowDriverBackBtn(isDriver);
     setCurrentL1(updatedL1s);
@@ -200,6 +200,7 @@ export function UnifiedSidenav({ slug }) {
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
     if (!showDriverBackBtn) setCurrentL2s(currentL1);
+    console.log('i am in l1 change use effect', currentL1);
   }, [currentL1, showDriverBackBtn]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
