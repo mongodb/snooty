@@ -171,9 +171,6 @@ export function UnifiedSidenav({ slug }) {
     });
   }, [unifiedTocTree, activeVersions, availableVersions, project, snootyEnv]);
 
-  // console.log('The edited toctree with prefixes is:', tree);
-  // console.log(unifiedTocTree);
-
   const [isDriver, currentL2List] = findPageParent(tree, slug);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
 
