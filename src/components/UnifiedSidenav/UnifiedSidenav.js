@@ -184,6 +184,8 @@ export function UnifiedSidenav({ slug }) {
     return currentL2List;
   });
 
+  console.log('cocomelon', currentL1, currentL2s);
+
   useEffect(() => {
     const [isDriver, updatedL2s] = findPageParent(tree, slug);
     const updatedL1s = tree.find((staticTocItem) => {
@@ -209,6 +211,8 @@ export function UnifiedSidenav({ slug }) {
   const viewport = useViewport(false);
 
   const displayedItems = showDriverBackBtn ? currentL2s?.items : tree;
+
+  console.log('please', displayedItems, currentL1, currentL2s);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
