@@ -171,13 +171,6 @@ export function UnifiedSidenav({ slug }) {
     });
   }, [unifiedTocTree, activeVersions, availableVersions, project, snootyEnv]);
 
-  const l1List = useMemo(() => {
-    return tree.map((item) => item.newUrl);
-  }, [tree]);
-
-  console.log('The edited toctree with prefixes is:', tree, l1List);
-  console.log(unifiedTocTree);
-
   const [isDriver, currentL2List] = findPageParent(tree, slug);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
 
@@ -192,14 +185,14 @@ export function UnifiedSidenav({ slug }) {
   });
 
   useEffect(() => {
-    const [isDriver, newL2List] = findPageParent(tree, slug);
-    const newL1 = tree.find((staticTocItem) => {
+    const [isDriver, updatedL2s] = findPageParent(tree, slug);
+    const updatedL1s = tree.find((staticTocItem) => {
       return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
     });
 
     setShowDriverBackBtn(isDriver);
-    setCurrentL1(newL1);
-    setCurrentL2s(newL2List);
+    setCurrentL1(updatedL1s);
+    setCurrentL2s(updatedL2s);
   }, [tree, slug]);
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
