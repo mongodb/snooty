@@ -224,6 +224,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
   // handler for selecting version on multiple dropdowns
   const onVersionSelect = useCallback(
     (targetProject, gitBranchName) => {
+      console.log('hello bitch', targetProject, getInitBranchName);
       const updatedVersion = {};
       updatedVersion[targetProject] = gitBranchName;
       setActiveVersions(updatedVersion);
