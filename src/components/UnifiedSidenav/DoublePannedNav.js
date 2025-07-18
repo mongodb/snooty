@@ -106,9 +106,9 @@ export const DoublePannedNav = ({
               <BackLink
                 className={cx(backLinkStyling)}
                 onClick={() => setShowDriverBackBtn(false)}
-                href="/docs/kafka-connector/current/whats-new/"
+                href={currentL1.newUrl}
               >
-                Back to Client Libraries
+                Back to {currentL1.label}
               </BackLink>
             )}
             {currentL2s.items?.map((navItems) => (

@@ -19,6 +19,7 @@ export const leftPane = () => LeafyCSS`
 
 const panelStyling = LeafyCSS`
     position: fixed;
+    overflow-y: auto;
     top: 50px;
     height: calc(100% - 120px);
     padding-top: 10px;
@@ -71,6 +72,7 @@ export const AccordionNavPanel = ({
   setShowDriverBackBtn,
   displayedItems,
   slug,
+  currentL1,
   currentL2s,
   setCurrentL1,
   setCurrentL2s,
@@ -94,9 +96,9 @@ export const AccordionNavPanel = ({
             <BackLink
               className={cx(backLinkStyling)}
               onClick={() => setShowDriverBackBtn(false)}
-              href="/docs/kafka-connector/current/whats-new/"
+              href={currentL1.newUrl}
             >
-              Back to Client Libraries
+              Back to {currentL1.label}
             </BackLink>
           )}
           {displayedItems.map((navItems) => (

@@ -227,6 +227,7 @@ export function UnifiedSidenav({ slug }) {
           currentL2s={currentL2s}
           setCurrentL1={setCurrentL1}
           setCurrentL2s={setCurrentL2s}
+          currentL1={currentL1}
           hideMobile={hideMobile}
         />
         <DoublePannedNav

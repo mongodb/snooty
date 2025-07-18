@@ -268,7 +268,7 @@ export function StaticNavItem({
       as={isUnifiedTOCInDevMode ? null : Link}
       to={newUrl}
       onClick={() => {
-        setCurrentL1({ items, newUrl, versionDropdown });
+        setCurrentL1({ items, newUrl, versionDropdown, label });
         setShowDriverBackBtn(false);
       }}
       className={cx(l1ItemStyling({ isActive, isAccordion }))}
