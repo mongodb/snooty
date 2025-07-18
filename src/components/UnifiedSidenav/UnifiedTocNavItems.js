@@ -36,12 +36,6 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
-function isSelectedTab(newUrl, slug) {
-  // // Hijacking the isSelectedTab for unified toc in dev and preview builds
-  // if (isUnifiedTocActive(url, pathPrefix)) return true;
-  return isSelectedTocNode(newUrl, slug);
-}
-
 // This checks what sidenav should load based on the active Tab
 export const isActiveTocNode = (currentUrl, slug, children) => {
   if (currentUrl === undefined) return false;
@@ -52,11 +46,15 @@ export const isActiveTocNode = (currentUrl, slug, children) => {
   return false;
 };
 
+function isSelectedTab(url, slug, pathPrefix) {
+  // // Hijacking the isSelectedTab for unified toc in dev and preview builds
+  // if (isUnifiedTocActive(url, pathPrefix)) return true;
+  return isSelectedTocNode(url, slug);
+}
+
 export function UnifiedTocNavItem({
   label,
   group,
-  newUrl,
-  versionDropdown,
   collapsible,
   items,
   isStatic,
@@ -68,6 +66,8 @@ export function UnifiedTocNavItem({
   setCurrentL1,
   setCurrentL2s,
   setShowDriverBackBtn,
+  versionDropdown,
+  newUrl,
   level,
 }) {
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
@@ -81,7 +81,6 @@ export function UnifiedTocNavItem({
             label={label}
             newUrl={newUrl}
             slug={slug}
-            isStatic={isStatic}
             items={items}
             contentSite={contentSite}
             setCurrentL1={setCurrentL1}
@@ -267,6 +266,7 @@ export function StaticNavItem({
       active={isActive}
       aria-label={label}
       contentSite={contentSite}
+      hideExternalIcon={true}
       as={Link}
       to={newUrl}
       onClick={() => {
