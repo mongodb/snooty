@@ -74,7 +74,6 @@ export const AccordionNavPanel = ({
   currentL2s,
   setCurrentL1,
   setCurrentL2s,
-  l1List,
   hideMobile,
 }) => {
   const { isTabletOrMobile } = useScreenSize();
@@ -95,7 +94,7 @@ export const AccordionNavPanel = ({
             <BackLink
               className={cx(backLinkStyling)}
               onClick={() => setShowDriverBackBtn(false)}
-              href="/docs/cluster-to-cluster-sync/current/quickstart/"
+              href="/docs/kafka-connector/current/whats-new/"
             >
               Back to Client Libraries
             </BackLink>
@@ -112,7 +111,6 @@ export const AccordionNavPanel = ({
               isAccordion={true}
               setCurrentL1={setCurrentL1}
               setCurrentL2s={setCurrentL2s}
-              l1List={l1List}
               setShowDriverBackBtn={setShowDriverBackBtn}
             />
           ))}

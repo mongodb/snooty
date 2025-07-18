@@ -6,11 +6,9 @@ import { SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Link from '../Link';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
-// import { isActiveTocNode } from '../../utils/is-active-toc-node';
-import { theme } from '../../theme/docsTheme';
-// import { useSiteMetadata } from '../../hooks/use-site-metadata';
-// import { isUnifiedTocActive } from '../../utils/is-unified-toc-active';
 import { isCurrentPage } from '../../utils/is-current-page';
+import { theme } from '../../theme/docsTheme';
+import { isUnifiedTOCInDevMode } from '../../utils/is-unified-toc-dev';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 
@@ -65,7 +63,6 @@ export function UnifiedTocNavItem({
   isAccordion,
   setCurrentL1,
   setCurrentL2s,
-  l1List,
   setShowDriverBackBtn,
   versionDropdown,
   newUrl,
@@ -73,6 +70,7 @@ export function UnifiedTocNavItem({
 }) {
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
   // Unless in Mobile doing Accordion view
+
   if (isStatic) {
     if (isAccordion) {
       return (
@@ -98,7 +96,6 @@ export function UnifiedTocNavItem({
                 isStatic={false}
                 isAccordion={isAccordion}
                 setCurrentL2s={setCurrentL2s}
-                l1List={l1List}
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
             ))}
@@ -119,7 +116,6 @@ export function UnifiedTocNavItem({
             isStatic={false}
             isAccordion={isAccordion}
             setCurrentL2s={setCurrentL2s}
-            l1List={l1List}
             setShowDriverBackBtn={setShowDriverBackBtn}
           />
         ))}
@@ -141,7 +137,6 @@ export function UnifiedTocNavItem({
               slug={slug}
               isAccordion={isAccordion}
               setCurrentL2s={setCurrentL2s}
-              l1List={l1List}
               setShowDriverBackBtn={setShowDriverBackBtn}
             />
           ))}
@@ -160,10 +155,9 @@ export function UnifiedTocNavItem({
     return (
       <SideNavItem
         aria-label={label}
-        as={Link}
+        as={isUnifiedTOCInDevMode ? null : Link}
         contentSite={contentSite}
         to={newUrl}
-        l1List={l1List}
         onClick={handleClick}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       >
@@ -183,7 +177,6 @@ export function UnifiedTocNavItem({
         isAccordion={isAccordion}
         slug={slug}
         contentSite={contentSite}
-        l1List={l1List}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       />
     );
@@ -196,7 +189,6 @@ export function UnifiedTocNavItem({
       as={Link}
       contentSite={contentSite}
       to={newUrl}
-      l1List={l1List}
       className={cx(l2ItemStyling({ level, isAccordion }))}
     >
       {label}
@@ -204,7 +196,7 @@ export function UnifiedTocNavItem({
   );
 }
 
-function CollapsibleNavItem({ items, label, newUrl, slug, l1List, contentSite, isAccordion, level }) {
+function CollapsibleNavItem({ items, label, newUrl, slug, contentSite, isAccordion, level }) {
   const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, newUrl, items));
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
   const isActive = isSelectedTab(newUrl, slug);
@@ -227,7 +219,6 @@ function CollapsibleNavItem({ items, label, newUrl, slug, l1List, contentSite, i
         as={newUrl ? Link : 'a'}
         contentSite={contentSite}
         to={newUrl ? newUrl : null}
-        l1List={l1List}
         active={isActive}
         className={cx(l2ItemStyling({ level, isAccordion }), overwriteLinkStyle)}
         onClick={handleClick}
@@ -248,7 +239,6 @@ function CollapsibleNavItem({ items, label, newUrl, slug, l1List, contentSite, i
             level={level + 1}
             key={item.newUrl + item.label}
             slug={slug}
-            l1List={l1List}
             isAccordion={isAccordion}
           />
         ))}
@@ -275,7 +265,7 @@ export function StaticNavItem({
       aria-label={label}
       contentSite={contentSite}
       hideExternalIcon={true}
-      as={Link}
+      as={isUnifiedTOCInDevMode ? null : Link}
       to={newUrl}
       onClick={() => {
         setCurrentL1({ items, newUrl, versionDropdown });

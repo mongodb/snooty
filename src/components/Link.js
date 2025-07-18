@@ -6,13 +6,11 @@ import { Link as LGLink } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
-import Icon from '@leafygreen-ui/icon';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
-import { isUnifiedTOCInDevMode } from '../utils/is-unified-toc-dev';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -45,11 +43,6 @@ const THEME_STYLES = {
 export const sharedDarkModeOverwriteStyles = `
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
-`;
-
-const l1LinkStyling = css`
-  transform: rotate(-45deg);
-  margin-left: 8px;
 `;
 
 /**
@@ -103,7 +96,6 @@ const Link = ({
   to,
   activeClassName,
   className,
-  l1List,
   partiallyActive,
   showLinkArrow,
   hideExternalIcon: hideExternalIconProp,
@@ -154,9 +146,8 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
-    // Using the isUnifiedTOCInDevMode to enforce the client-side routing for local build and preview deployments which
-    // allows our custom 404 page to render.
-    if (project === contentSite || isUnifiedTOCInDevMode) {
+    if (project === contentSite) {
+      // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
 
@@ -179,10 +170,6 @@ const Link = ({
       <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={to}>
         {children}
         {decoration}
-        {/* Adds icon if we are in the L2 panel and linking to an L1 tab */}
-        {((hideExternalIconProp && !hideExternalIconProp) || (l1List && l1List.indexOf(to) !== -1)) && (
-          <Icon className={cx(l1LinkStyling)} glyph={'ArrowRight'} fill={palette.gray.base} />
-        )}
       </a>
     );
   }
