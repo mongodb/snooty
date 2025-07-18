@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Select from '../Select';
 import { VersionContext } from '../../context/version-context';
@@ -57,7 +57,7 @@ const wrapperStyle = css`
 const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
   const { isUnifiedToc } = getFeatureFlags();
   const { activeVersions, availableVersions, onVersionSelect } = useContext(VersionContext);
-  const computeOptions = useCallback(() => {
+  const options = useMemo(() => {
     const versions = availableVersions[versionedProject] || [];
 
     if (isUnifiedToc) {
@@ -66,8 +66,6 @@ const VersionSelector = ({ versionedProject = '', tocVersionNames = [] }) => {
 
     return buildChoices(versions, tocVersionNames);
   }, [availableVersions, tocVersionNames, versionedProject, isUnifiedToc]);
-
-  const [options] = useState(computeOptions);
 
   const onChange = useCallback(
     ({ value }) => {
