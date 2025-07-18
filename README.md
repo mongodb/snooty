@@ -198,14 +198,16 @@ Additionally, the `GATSBY_UNIFIED_TOC_DEV_MODE` environment variable needs to be
 
 ### Local, Preview Builds
 
-The `GATSBY_UNIFIED_TOC_DEV_MODE` environment variable is required for being able to click through the Sidenav with staying on your current content site.
+The `GATSBY_UNIFIED_TOC_DEV_MODE` environment variable is required for handling 404 pages correctly in non-development environments. This includes:
 
 - Local production builds (using `npm run build` and `npm run serve`)
 - Preview builds
 
-This environment variable forces all `L1` and `showSubNav` links in the Unified TOC to not change pages and to only change the side navigation.
+This environment variable forces all links in the Unified TOC to be client-side links, which enables the custom 404 page to render while preserving the Unified TOC and show the correct active state in the navigation.
 
 For preview builds, writers need to ensure this environment variable is added to their Netlify configuration.
+
+Note: The custom 404 page is only visible in non-development builds. In development mode (`npm run develop`), Gatsby serves its own default 404 page.
 
 ### Useful Resources
 

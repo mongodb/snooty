@@ -6,9 +6,9 @@ import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
 import DocsHomeButton from '../Sidenav/DocsHomeButton';
 import { DownloadButton } from '../OfflineDownloadModal';
+import VersionDropdown from '../VersionDropdown';
 import { NavTopContainer, downloadButtonStlying, ArtificialPadding } from './UnifiedSidenav';
 import { StaticNavItem, UnifiedTocNavItem } from './UnifiedTocNavItems';
-import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 
 export const leftPane = LeafyCSS`
   flex: 0 0 161px;
@@ -75,6 +75,7 @@ export const DoublePannedNav = ({
   currentL2s,
   setCurrentL1,
   setCurrentL2s,
+  l1List,
   currentL1,
 }) => {
   const { isTabletOrMobile } = useScreenSize();
@@ -93,24 +94,26 @@ export const DoublePannedNav = ({
               slug={slug}
               key={staticTocItem.newUrl + staticTocItem.label}
               isStatic={true}
+              l1List={l1List}
               setCurrentL1={setCurrentL1}
               setShowDriverBackBtn={setShowDriverBackBtn}
               isAccordion={false}
             />
           ))}
         </div>
-        {currentL1?.versionDropdown && <UnifiedVersionDropdown />}
+
         {currentL2s && (
           <div className={cx(rightPane)}>
             {showDriverBackBtn && (
               <BackLink
                 className={cx(backLinkStyling)}
                 onClick={() => setShowDriverBackBtn(false)}
-                href="/docs/kafka-connector/current/whats-new/"
+                href="/docs/cluster-to-cluster-sync/current/quickstart/"
               >
                 Back to Client Libraries
               </BackLink>
             )}
+            {currentL1?.versionDropdown && <VersionDropdown />}
             {currentL2s.items?.map((navItems) => (
               <UnifiedTocNavItem
                 {...navItems}
@@ -119,6 +122,7 @@ export const DoublePannedNav = ({
                 slug={slug}
                 isAccordion={false}
                 setCurrentL2s={setCurrentL2s}
+                l1List={l1List}
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
             ))}

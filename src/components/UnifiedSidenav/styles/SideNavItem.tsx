@@ -62,7 +62,6 @@ export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) =>
 
   // Version Dropdown button
   button {
-    margin-left: ${!isAccordion && '-8px'};
     height: 28px;
   }
 `;
