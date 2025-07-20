@@ -15,6 +15,7 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 // import { isActiveTocNode } from '../../utils/is-active-toc-node';
+import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { isActiveTocNode } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
@@ -79,7 +80,7 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
 `;
 
 // Function that adds the current version
-const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, snootyEnv }) => {
+const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }) => {
   return tree?.map((item) => {
     let newUrl = item.url ?? '';
     const currentProject = item.contentSite ?? contentSite;
@@ -101,7 +102,6 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, 
       activeVersions,
       versionsData,
       project,
-      snootyEnv,
     });
 
     return {
@@ -153,13 +153,17 @@ const findPageParent = (tree, targetUrl) => {
 export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
-  const { snootyEnv, pathPrefix } = useSiteMetadata();
+  const { pathPrefix } = useSiteMetadata();
   const { activeVersions, availableVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
-  slug = slug === '/' ? pathPrefix + slug : `${pathPrefix}/${slug}/`;
+  const currentPathname = removeLeadingSlash(removeTrailingSlash(window.location.pathname)) || slug;
+  // const currentPathname = slug;
+
+  console.log('slug vs window path', slug, window.location.pathname);
+  slug = currentPathname === '/' ? pathPrefix + currentPathname : `${pathPrefix}/${currentPathname}/`;
 
   const tree = useMemo(() => {
     return updateURLs({
@@ -167,9 +171,8 @@ export function UnifiedSidenav({ slug }) {
       activeVersions,
       versionsData: availableVersions,
       project,
-      snootyEnv,
     });
-  }, [unifiedTocTree, activeVersions, availableVersions, project, snootyEnv]);
+  }, [unifiedTocTree, activeVersions, availableVersions, project]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [isDriver, currentL2List] = findPageParent(tree, slug);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
@@ -193,7 +196,7 @@ export function UnifiedSidenav({ slug }) {
     setShowDriverBackBtn(isDriver);
     setCurrentL1(updatedL1s);
     setCurrentL2s(updatedL2s);
-  }, [tree, slug]);
+  }, [tree]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
