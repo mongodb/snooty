@@ -86,7 +86,6 @@ export function UnifiedTocNavItem({
             isAccordion={isAccordion}
           />
           {versionDropdown && newUrl === currentL2s?.newUrl && <UnifiedVersionDropdown contentSite={contentSite} />}
-          {console.log('peanut butter', newUrl, currentL2s, items)}
           {newUrl === currentL2s?.newUrl &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem

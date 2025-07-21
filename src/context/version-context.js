@@ -9,6 +9,7 @@ import { getLocalValue, setLocalValue } from '../utils/browser-storage';
 import { fetchDocset, fetchDocument } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
+import { getFeatureFlags } from '../utils/feature-flags';
 
 // <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';
@@ -149,6 +150,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
   const associatedProductNames = useAllAssociatedProducts();
   const docsets = useAllDocsets();
   const { project } = useSnootyMetadata();
+  const { isUnifiedToc } = getFeatureFlags();
   const associatedReposInfo = useMemo(
     () =>
       associatedProductNames.reduce((res, productName) => {
@@ -277,14 +279,13 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
       console.error(`url <${currentUrlSlug}> does not correspond to any current branch`);
       return;
     }
-    // DOP-5812 : MAYBE NEED TO CHANGE THIS, TEST HOW THIS WORKS IN PREPROD
-    // if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
-    //   const newState = { ...activeVersions };
-    //   newState[metadata.project] = currentBranch.gitBranchName;
-    //   console.log('i shouldnt be here', newState, currentBranch.gitBranchName, activeVersions[metadata.project]);
-    //   setActiveVersions(newState);
-    // }
-  }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions]);
+
+    if (!isUnifiedToc && activeVersions[metadata.project] !== currentBranch.gitBranchName) {
+      const newState = { ...activeVersions };
+      newState[metadata.project] = currentBranch.gitBranchName;
+      setActiveVersions(newState);
+    }
+  }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions, isUnifiedToc]);
 
   return (
     <VersionContext.Provider

@@ -160,16 +160,12 @@ export function UnifiedSidenav({ slug }) {
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
-  console.log('slug before', slug, isBrowser && window.location.pathname);
   const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
-
   slug = tempSlug?.startsWith('docs/')
     ? tempSlug
     : tempSlug === '/'
     ? pathPrefix + tempSlug
     : `${pathPrefix}/${tempSlug}/`;
-
-  console.log('slug after', slug, isBrowser && window.location.pathname);
 
   const tree = useMemo(() => {
     return updateURLs({
@@ -178,7 +174,7 @@ export function UnifiedSidenav({ slug }) {
       versionsData: availableVersions,
       project,
     });
-  }, [unifiedTocTree, activeVersions, availableVersions, project]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [unifiedTocTree, activeVersions, availableVersions, project]);
 
   const [isDriver, currentL2List] = findPageParent(tree, slug);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
@@ -190,16 +186,12 @@ export function UnifiedSidenav({ slug }) {
   });
 
   const [currentL2s, setCurrentL2s] = useState(currentL2List);
-  // console.log("bah", tree);
-  console.log('cocomelon', currentL1, currentL2s);
 
   useEffect(() => {
     const [isDriver, updatedL2s] = findPageParent(tree, slug);
     const updatedL1s = tree.find((staticTocItem) => {
       return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
     });
-
-    console.log('temp values', isDriver, updatedL2s);
 
     setShowDriverBackBtn(isDriver);
     setCurrentL1(updatedL1s);
@@ -218,10 +210,6 @@ export function UnifiedSidenav({ slug }) {
 
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
-
-  // const displayedItems = showDriverBackBtn ? currentL2s?.items : tree;
-
-  // console.log('please', displayedItems, currentL1, currentL2s);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
