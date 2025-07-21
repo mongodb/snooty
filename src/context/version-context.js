@@ -224,7 +224,6 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
   // handler for selecting version on multiple dropdowns
   const onVersionSelect = useCallback(
     (targetProject, gitBranchName) => {
-      console.log('hello', targetProject, getInitBranchName);
       const updatedVersion = {};
       updatedVersion[targetProject] = gitBranchName;
       setActiveVersions(updatedVersion);
@@ -278,12 +277,12 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
       return;
     }
     // DOP-5812 : MAYBE NEED TO CHANGE THIS, TEST HOW THIS WORKS IN PREPROD
-    // if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
-    //   const newState = { ...activeVersions };
-    //   newState[metadata.project] = currentBranch.gitBranchName;
-    //   console.log('i shouldnt be here', newState, currentBranch.gitBranchName, activeVersions[metadata.project]);
-    //   setActiveVersions(newState);
-    // }
+    if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
+      const newState = { ...activeVersions };
+      newState[metadata.project] = currentBranch.gitBranchName;
+      console.log('i shouldnt be here', newState, currentBranch.gitBranchName, activeVersions[metadata.project]);
+      setActiveVersions(newState);
+    }
   }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions]);
 
   return (
