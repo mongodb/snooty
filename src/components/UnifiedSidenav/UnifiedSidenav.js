@@ -16,6 +16,7 @@ import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 // import { isActiveTocNode } from '../../utils/is-active-toc-node';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
+import { isBrowser } from '../../utils/is-browser';
 import { isActiveTocNode } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
@@ -159,10 +160,12 @@ export function UnifiedSidenav({ slug }) {
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
-  const currentPathname = removeLeadingSlash(removeTrailingSlash(window.location.pathname)) || slug;
+  const currentPathname = isBrowser
+    ? removeLeadingSlash(removeTrailingSlash(window.location.pathname.replace(pathPrefix, '')))
+    : slug;
   // const currentPathname = slug;
 
-  console.log('slug vs window path', slug, window.location.pathname);
+  console.log('slug vs window path', slug, isBrowser && window.location.pathname, currentPathname);
   slug = currentPathname === '/' ? pathPrefix + currentPathname : `${pathPrefix}/${currentPathname}/`;
 
   const tree = useMemo(() => {

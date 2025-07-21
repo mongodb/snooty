@@ -106,9 +106,9 @@ export const DoublePannedNav = ({
               <BackLink
                 className={cx(backLinkStyling)}
                 onClick={() => setShowDriverBackBtn(false)}
-                href={currentL1.newUrl}
+                href={currentL1?.newUrl}
               >
-                Back to {currentL1.label}
+                Back to {currentL1?.label}
               </BackLink>
             )}
             {currentL2s.items?.map((navItems) => (
