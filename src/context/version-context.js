@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect, useState, useCallback, useRef, useMemo } from 'react';
-// import { navigate } from '@gatsbyjs/reach-router';
+import { navigate } from '@gatsbyjs/reach-router';
 import { METADATA_COLLECTION } from '../build-constants';
 import { useAllDocsets } from '../hooks/useAllDocsets';
 import { useAllAssociatedProducts } from '../hooks/useAssociatedProducts';
@@ -244,7 +244,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
           ? gitBranchName
           : targetBranch.urlSlug || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
       const urlTarget = getUrl(target, metadata.project, repoBranches?.siteBasePrefix, slug);
-      window.location.href = urlTarget;
+      navigate(urlTarget);
     },
     [availableVersions, metadata, repoBranches, slug]
   );
