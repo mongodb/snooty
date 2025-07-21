@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect, useState, useCallback, useRef, useMemo } from 'react';
-import { navigate } from '@gatsbyjs/reach-router';
+// import { navigate } from '@gatsbyjs/reach-router';
 import { METADATA_COLLECTION } from '../build-constants';
 import { useAllDocsets } from '../hooks/useAllDocsets';
 import { useAllAssociatedProducts } from '../hooks/useAssociatedProducts';
@@ -224,7 +224,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
   // handler for selecting version on multiple dropdowns
   const onVersionSelect = useCallback(
     (targetProject, gitBranchName) => {
-      console.log('hello bitch', targetProject, getInitBranchName);
+      console.log('hello', targetProject, getInitBranchName);
       const updatedVersion = {};
       updatedVersion[targetProject] = gitBranchName;
       setActiveVersions(updatedVersion);
@@ -244,7 +244,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
           ? gitBranchName
           : targetBranch.urlSlug || targetBranch.urlAliases[0] || targetBranch.gitBranchName;
       const urlTarget = getUrl(target, metadata.project, repoBranches?.siteBasePrefix, slug);
-      navigate(urlTarget);
+      window.location.href = urlTarget;
     },
     [availableVersions, metadata, repoBranches, slug]
   );
@@ -278,12 +278,12 @@ const VersionContextProvider = ({ repoBranches, slug, children }) => {
       return;
     }
     // DOP-5812 : MAYBE NEED TO CHANGE THIS, TEST HOW THIS WORKS IN PREPROD
-    if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
-      const newState = { ...activeVersions };
-      newState[metadata.project] = currentBranch.gitBranchName;
-      console.log('i shouldnt be here', newState, currentBranch.gitBranchName, activeVersions[metadata.project]);
-      setActiveVersions(newState);
-    }
+    // if (activeVersions[metadata.project] !== currentBranch.gitBranchName) {
+    //   const newState = { ...activeVersions };
+    //   newState[metadata.project] = currentBranch.gitBranchName;
+    //   console.log('i shouldnt be here', newState, currentBranch.gitBranchName, activeVersions[metadata.project]);
+    //   setActiveVersions(newState);
+    // }
   }, [activeVersions, currentUrlSlug, findBranchByAlias, metadata.project, setActiveVersions]);
 
   return (
