@@ -189,7 +189,7 @@ export function UnifiedSidenav({ slug }) {
     setShowDriverBackBtn(isDriver);
     setCurrentL1(updatedL1s);
     setCurrentL2s(updatedL2s);
-  }, [tree]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [tree, slug]);
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
