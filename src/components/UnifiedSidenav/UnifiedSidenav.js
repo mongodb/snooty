@@ -160,13 +160,16 @@ export function UnifiedSidenav({ slug }) {
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
-  const currentPathname = isBrowser
-    ? removeLeadingSlash(removeTrailingSlash(window.location.pathname.replace(pathPrefix, '')))
-    : slug;
-  // const currentPathname = slug;
+  console.log('slug before', slug, isBrowser && window.location.pathname);
+  const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
 
-  console.log('slug vs window path', slug, isBrowser && window.location.pathname, currentPathname);
-  slug = currentPathname === '/' ? pathPrefix + currentPathname : `${pathPrefix}/${currentPathname}/`;
+  slug = tempSlug?.startsWith('docs/')
+    ? tempSlug
+    : tempSlug === '/'
+    ? pathPrefix + tempSlug
+    : `${pathPrefix}/${tempSlug}/`;
+
+  console.log('slug after', slug, isBrowser && window.location.pathname);
 
   const tree = useMemo(() => {
     return updateURLs({
@@ -187,8 +190,8 @@ export function UnifiedSidenav({ slug }) {
   });
 
   const [currentL2s, setCurrentL2s] = useState(currentL2List);
-
-  console.log('cocomelon', currentL1, currentL2s, slug);
+  // console.log("bah", tree);
+  console.log('cocomelon', currentL1, currentL2s);
 
   useEffect(() => {
     const [isDriver, updatedL2s] = findPageParent(tree, slug);
