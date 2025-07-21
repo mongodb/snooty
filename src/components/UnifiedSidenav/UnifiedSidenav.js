@@ -241,6 +241,7 @@ export function UnifiedSidenav({ slug }) {
           setCurrentL1={setCurrentL1}
           setCurrentL2s={setCurrentL2s}
           hideMobile={hideMobile}
+          currentL1={currentL1}
         />
         <DoublePannedNav
           showDriverBackBtn={showDriverBackBtn}

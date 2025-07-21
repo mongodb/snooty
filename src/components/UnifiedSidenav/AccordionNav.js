@@ -80,6 +80,7 @@ export const AccordionNavPanel = ({
 }) => {
   const { isTabletOrMobile } = useScreenSize();
   const viewportSize = useViewportSize();
+
   return (
     <SideNav
       widthOverride={isTabletOrMobile ? viewportSize.width : 290}
