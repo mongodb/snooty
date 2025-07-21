@@ -219,9 +219,9 @@ export function UnifiedSidenav({ slug }) {
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
 
-  const displayedItems = showDriverBackBtn ? currentL2s?.items : tree;
+  // const displayedItems = showDriverBackBtn ? currentL2s?.items : tree;
 
-  console.log('please', displayedItems, currentL1, currentL2s);
+  // console.log('please', displayedItems, currentL1, currentL2s);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
@@ -235,13 +235,13 @@ export function UnifiedSidenav({ slug }) {
         <AccordionNavPanel
           showDriverBackBtn={showDriverBackBtn}
           setShowDriverBackBtn={setShowDriverBackBtn}
-          displayedItems={displayedItems}
           slug={slug}
           currentL2s={currentL2s}
           setCurrentL1={setCurrentL1}
           setCurrentL2s={setCurrentL2s}
           hideMobile={hideMobile}
           currentL1={currentL1}
+          tree={tree}
         />
         <DoublePannedNav
           showDriverBackBtn={showDriverBackBtn}

@@ -31,6 +31,7 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
           // Hides the left tab on Active Selection
           &[aria-current='page'] {
             background-color: unset;
+            color: unset;
             :hover {
               background-color: var(--sidenav-hover-bg-color);
             }
