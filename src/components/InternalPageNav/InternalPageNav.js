@@ -106,10 +106,8 @@ function groupContainsUrl(items, currentUrl) {
 }
 
 function findGroupForUrl(toc, currentUrl) {
-  for (const topLevelItem of toc) {
-    if (!topLevelItem.items) continue;
-
-    for (const item of topLevelItem.items) {
+  for (const L1Item of toc) {
+    for (const item of L1Item.items) {
       if (item.group) {
         if (groupContainsUrl(item.items || [], currentUrl)) {
           return item;
