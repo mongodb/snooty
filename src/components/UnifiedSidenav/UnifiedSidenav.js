@@ -79,7 +79,7 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
 `;
 
 // Function that adds the current version
-const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, snootyEnv }) => {
+const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }) => {
   return tree?.map((item) => {
     let newUrl = item.url ?? '';
     const currentProject = item.contentSite ?? contentSite;
@@ -101,7 +101,6 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project, 
       activeVersions,
       versionsData,
       project,
-      snootyEnv,
     });
 
     return {
@@ -153,7 +152,7 @@ const findPageParent = (tree, targetUrl) => {
 export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
-  const { snootyEnv, pathPrefix } = useSiteMetadata();
+  const { pathPrefix } = useSiteMetadata();
   const { activeVersions, availableVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const { bannerContent } = useContext(HeaderContext);
@@ -167,9 +166,8 @@ export function UnifiedSidenav({ slug }) {
       activeVersions,
       versionsData: availableVersions,
       project,
-      snootyEnv,
     });
-  }, [unifiedTocTree, activeVersions, availableVersions, project, snootyEnv]);
+  }, [unifiedTocTree, activeVersions, availableVersions, project]);
 
   const [isDriver, currentL2List] = findPageParent(tree, slug);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
@@ -180,9 +178,7 @@ export function UnifiedSidenav({ slug }) {
     });
   });
 
-  const [currentL2s, setCurrentL2s] = useState(() => {
-    return currentL2List;
-  });
+  const [currentL2s, setCurrentL2s] = useState(currentL2List);
 
   useEffect(() => {
     const [isDriver, updatedL2s] = findPageParent(tree, slug);
