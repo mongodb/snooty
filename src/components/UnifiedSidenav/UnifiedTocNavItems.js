@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
@@ -6,12 +6,11 @@ import { SideNavGroup, SideNavItem } from '@leafygreen-ui/side-nav';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import Link from '../Link';
 import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
-import { isActiveTocNode } from '../../utils/is-active-toc-node';
+import { isCurrentPage } from '../../utils/is-current-page';
 import { theme } from '../../theme/docsTheme';
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { isUnifiedTocActive } from '../../utils/is-unified-toc-active';
-import VersionDropdown from '../VersionDropdown';
+import { isUnifiedTOCInDevMode } from '../../utils/is-unified-toc-dev';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
+import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 
 export const Border = styled('hr')`
   border: unset;
@@ -35,9 +34,19 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
+// This checks what sidenav should load based on the active Tab
+export const isActiveTocNode = (currentUrl, slug, children) => {
+  if (currentUrl === undefined) return false;
+  if (isCurrentPage(currentUrl, slug)) return true;
+  if (children) {
+    return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.newUrl, b.items), false);
+  }
+  return false;
+};
+
 function isSelectedTab(url, slug, pathPrefix) {
-  // Hijacking the isSelectedTab for unified toc in dev and preview builds
-  if (isUnifiedTocActive(url, pathPrefix)) return true;
+  // // Hijacking the isSelectedTab for unified toc in dev and preview builds
+  // if (isUnifiedTocActive(url, pathPrefix)) return true;
   return isSelectedTocNode(url, slug);
 }
 
@@ -54,15 +63,14 @@ export function UnifiedTocNavItem({
   isAccordion,
   setCurrentL1,
   setCurrentL2s,
-  l1List,
   setShowDriverBackBtn,
   versionDropdown,
   newUrl,
   level,
 }) {
-  const { pathPrefix: contentSitePrefix } = useSiteMetadata();
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
   // Unless in Mobile doing Accordion view
+
   if (isStatic) {
     if (isAccordion) {
       return (
@@ -77,7 +85,7 @@ export function UnifiedTocNavItem({
             setShowDriverBackBtn={setShowDriverBackBtn}
             isAccordion={isAccordion}
           />
-          {versionDropdown && <VersionDropdown />}
+          {versionDropdown && newUrl === currentL2s?.newUrl && <UnifiedVersionDropdown contentSite={contentSite} />}
           {newUrl === currentL2s?.newUrl &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
@@ -88,7 +96,6 @@ export function UnifiedTocNavItem({
                 isStatic={false}
                 isAccordion={isAccordion}
                 setCurrentL2s={setCurrentL2s}
-                l1List={l1List}
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
             ))}
@@ -99,7 +106,7 @@ export function UnifiedTocNavItem({
 
     return (
       <>
-        {versionDropdown && <VersionDropdown />}
+        {versionDropdown && <UnifiedVersionDropdown contentSite={contentSite} />}
         {items?.map((tocItem) => (
           <UnifiedTocNavItem
             {...tocItem}
@@ -109,7 +116,6 @@ export function UnifiedTocNavItem({
             isStatic={false}
             isAccordion={isAccordion}
             setCurrentL2s={setCurrentL2s}
-            l1List={l1List}
             setShowDriverBackBtn={setShowDriverBackBtn}
           />
         ))}
@@ -122,7 +128,7 @@ export function UnifiedTocNavItem({
     return (
       <>
         <SideNavGroup header={label} collapsible={collapsible} className={cx(groupHeaderStyling({ isAccordion }))}>
-          {versionDropdown && <VersionDropdown />}
+          {versionDropdown && <UnifiedVersionDropdown contentSite={contentSite} isAccordion={isAccordion} />}
           {items?.map((tocItem) => (
             <UnifiedTocNavItem
               {...tocItem}
@@ -131,7 +137,6 @@ export function UnifiedTocNavItem({
               slug={slug}
               isAccordion={isAccordion}
               setCurrentL2s={setCurrentL2s}
-              l1List={l1List}
               setShowDriverBackBtn={setShowDriverBackBtn}
             />
           ))}
@@ -150,10 +155,9 @@ export function UnifiedTocNavItem({
     return (
       <SideNavItem
         aria-label={label}
-        as={Link}
+        as={isUnifiedTOCInDevMode ? null : Link}
         contentSite={contentSite}
         to={newUrl}
-        l1List={l1List}
         onClick={handleClick}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       >
@@ -173,7 +177,6 @@ export function UnifiedTocNavItem({
         isAccordion={isAccordion}
         slug={slug}
         contentSite={contentSite}
-        l1List={l1List}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       />
     );
@@ -181,12 +184,11 @@ export function UnifiedTocNavItem({
 
   return (
     <SideNavItem
-      active={isSelectedTab(newUrl, slug, contentSitePrefix)}
+      active={isSelectedTab(newUrl, slug)}
       aria-label={label}
       as={Link}
       contentSite={contentSite}
       to={newUrl}
-      l1List={l1List}
       className={cx(l2ItemStyling({ level, isAccordion }))}
     >
       {label}
@@ -194,11 +196,11 @@ export function UnifiedTocNavItem({
   );
 }
 
-function CollapsibleNavItem({ items, label, newUrl, slug, l1List, contentSite, isAccordion, level }) {
-  const { pathPrefix: contentSitePrefix } = useSiteMetadata();
-  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, newUrl, items, contentSitePrefix));
+function CollapsibleNavItem({ items, label, newUrl, slug, contentSite, isAccordion, level }) {
+  const isActiveCollapsible = isActiveTocNode(slug, newUrl, items);
+  const [isOpen, setIsOpen] = useState(isActiveCollapsible);
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
-  const isActive = isSelectedTab(newUrl, slug, contentSitePrefix);
+  const isActive = isSelectedTab(newUrl, slug);
 
   const onCaretClick = (event) => {
     event.preventDefault();
@@ -212,13 +214,16 @@ function CollapsibleNavItem({ items, label, newUrl, slug, l1List, contentSite, i
     }
   };
 
+  useEffect(() => {
+    setIsOpen(isActiveCollapsible);
+  }, [isActiveCollapsible]);
+
   return (
     <>
       <SideNavItem
         as={newUrl ? Link : 'a'}
         contentSite={contentSite}
         to={newUrl ? newUrl : null}
-        l1List={l1List}
         active={isActive}
         className={cx(l2ItemStyling({ level, isAccordion }), overwriteLinkStyle)}
         onClick={handleClick}
@@ -239,7 +244,6 @@ function CollapsibleNavItem({ items, label, newUrl, slug, l1List, contentSite, i
             level={level + 1}
             key={item.newUrl + item.label}
             slug={slug}
-            l1List={l1List}
             isAccordion={isAccordion}
           />
         ))}
@@ -258,8 +262,7 @@ export function StaticNavItem({
   isAccordion,
   setShowDriverBackBtn,
 }) {
-  const { pathPrefix } = useSiteMetadata();
-  const isActive = isActiveTocNode(slug, newUrl, items, pathPrefix);
+  const isActive = isActiveTocNode(slug, newUrl, items);
 
   return (
     <SideNavItem
@@ -267,10 +270,10 @@ export function StaticNavItem({
       aria-label={label}
       contentSite={contentSite}
       hideExternalIcon={true}
-      as={Link}
+      as={isUnifiedTOCInDevMode ? null : Link}
       to={newUrl}
       onClick={() => {
-        setCurrentL1({ items, newUrl, versionDropdown });
+        setCurrentL1({ items, newUrl, versionDropdown, label });
         setShowDriverBackBtn(false);
       }}
       className={cx(l1ItemStyling({ isActive, isAccordion }))}

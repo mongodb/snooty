@@ -19,6 +19,7 @@ export const leftPane = () => LeafyCSS`
 
 const panelStyling = LeafyCSS`
     position: fixed;
+    overflow-y: auto;
     top: 50px;
     height: calc(100% - 120px);
     padding-top: 10px;
@@ -69,16 +70,17 @@ const backLinkStyling = LeafyCSS`
 export const AccordionNavPanel = ({
   showDriverBackBtn,
   setShowDriverBackBtn,
-  displayedItems,
   slug,
+  currentL1,
   currentL2s,
   setCurrentL1,
   setCurrentL2s,
-  l1List,
+  tree,
   hideMobile,
 }) => {
   const { isTabletOrMobile } = useScreenSize();
   const viewportSize = useViewportSize();
+
   return (
     <SideNav
       widthOverride={isTabletOrMobile ? viewportSize.width : 290}
@@ -91,31 +93,50 @@ export const AccordionNavPanel = ({
       </div>
       <div className={cx(panelStyling)}>
         <div className={cx(leftPane)}>
-          {showDriverBackBtn && (
-            <BackLink
-              className={cx(backLinkStyling)}
-              onClick={() => setShowDriverBackBtn(false)}
-              href="/docs/cluster-to-cluster-sync/current/quickstart/"
-            >
-              Back to Client Libraries
-            </BackLink>
+          {showDriverBackBtn ? (
+            <>
+              <BackLink
+                className={cx(backLinkStyling)}
+                onClick={() => setShowDriverBackBtn(false)}
+                href={currentL1?.newUrl}
+              >
+                Back to {currentL1?.label}
+              </BackLink>
+              {currentL2s.items?.map((navItem) => (
+                <UnifiedTocNavItem
+                  {...navItem}
+                  level={1}
+                  key={navItem.newUrl + navItem.label}
+                  group={true}
+                  isStatic={false}
+                  slug={slug}
+                  currentL2s={currentL2s}
+                  isAccordion={true}
+                  setCurrentL1={setCurrentL1}
+                  setCurrentL2s={setCurrentL2s}
+                  setShowDriverBackBtn={setShowDriverBackBtn}
+                />
+              ))}
+            </>
+          ) : (
+            <>
+              {tree.map((navItems) => (
+                <UnifiedTocNavItem
+                  {...navItems}
+                  level={1}
+                  key={navItems.newUrl + navItems.label}
+                  group={true}
+                  isStatic={true}
+                  slug={slug}
+                  currentL2s={currentL2s}
+                  isAccordion={true}
+                  setCurrentL1={setCurrentL1}
+                  setCurrentL2s={setCurrentL2s}
+                  setShowDriverBackBtn={setShowDriverBackBtn}
+                />
+              ))}
+            </>
           )}
-          {displayedItems.map((navItems) => (
-            <UnifiedTocNavItem
-              {...navItems}
-              level={1}
-              key={navItems.newUrl + navItems.label}
-              group={true}
-              isStatic={!showDriverBackBtn}
-              slug={slug}
-              currentL2s={currentL2s}
-              isAccordion={true}
-              setCurrentL1={setCurrentL1}
-              setCurrentL2s={setCurrentL2s}
-              l1List={l1List}
-              setShowDriverBackBtn={setShowDriverBackBtn}
-            />
-          ))}
         </div>
       </div>
       <div className={cx(downloadButtonStlying)}>
