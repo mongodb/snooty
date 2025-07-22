@@ -11,7 +11,6 @@ import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
-// import { isUnifiedTOCInDevMode } from '../utils/is-unified-toc-dev';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -147,12 +146,8 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
-    // TODO: i wonder if this works for versioned site in monorepo
     if (project === contentSite) {
-      // Get rid of the contenteSIte in link for internal links
-      // Using the isUnifiedTOCInDevMode to enforce the client-side routing for local build and preview deployments which
-      // allows our custom 404 page to render.
-      // if (project === contentSite || isUnifiedTOCInDevMode) {
+      // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
 
