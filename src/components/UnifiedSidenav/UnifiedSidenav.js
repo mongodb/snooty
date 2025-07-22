@@ -15,6 +15,8 @@ import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 // import { isActiveTocNode } from '../../utils/is-active-toc-node';
+import { removeLeadingSlash } from '../../utils/remove-leading-slash';
+import { isBrowser } from '../../utils/is-browser';
 import { isActiveTocNode } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
@@ -158,7 +160,12 @@ export function UnifiedSidenav({ slug }) {
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
   const { pathname } = useLocation();
-  slug = slug === '/' ? pathPrefix + slug : `${pathPrefix}/${slug}/`;
+  const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
+  slug = tempSlug?.startsWith('docs/')
+    ? tempSlug
+    : tempSlug === '/'
+    ? pathPrefix + tempSlug
+    : `${pathPrefix}/${tempSlug}/`;
 
   const tree = useMemo(() => {
     return updateURLs({
@@ -189,7 +196,7 @@ export function UnifiedSidenav({ slug }) {
     setShowDriverBackBtn(isDriver);
     setCurrentL1(updatedL1s);
     setCurrentL2s(updatedL2s);
-  }, [tree, slug]);
+  }, [tree]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
@@ -204,8 +211,6 @@ export function UnifiedSidenav({ slug }) {
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
 
-  const displayedItems = showDriverBackBtn ? currentL2s.items : tree;
-
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
   return (
@@ -218,12 +223,13 @@ export function UnifiedSidenav({ slug }) {
         <AccordionNavPanel
           showDriverBackBtn={showDriverBackBtn}
           setShowDriverBackBtn={setShowDriverBackBtn}
-          displayedItems={displayedItems}
           slug={slug}
           currentL2s={currentL2s}
           setCurrentL1={setCurrentL1}
           setCurrentL2s={setCurrentL2s}
           hideMobile={hideMobile}
+          currentL1={currentL1}
+          tree={tree}
         />
         <DoublePannedNav
           showDriverBackBtn={showDriverBackBtn}
