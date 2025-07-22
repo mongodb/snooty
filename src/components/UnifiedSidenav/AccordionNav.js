@@ -99,7 +99,7 @@ export const AccordionNavPanel = ({
               Back to Client Libraries
             </BackLink>
           )}
-          {displayedItems.map((navItems) => (
+          {displayedItems?.map((navItems) => (
             <UnifiedTocNavItem
               {...navItems}
               level={1}
