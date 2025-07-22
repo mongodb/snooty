@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
@@ -197,7 +197,8 @@ export function UnifiedTocNavItem({
 }
 
 function CollapsibleNavItem({ items, label, newUrl, slug, contentSite, isAccordion, level }) {
-  const [isOpen, setIsOpen] = useState(isActiveTocNode(slug, newUrl, items));
+  const isActiveCollapsible = isActiveTocNode(slug, newUrl, items);
+  const [isOpen, setIsOpen] = useState(isActiveCollapsible);
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
   const isActive = isSelectedTab(newUrl, slug);
 
@@ -212,6 +213,10 @@ function CollapsibleNavItem({ items, label, newUrl, slug, contentSite, isAccordi
       setIsOpen(!isOpen);
     }
   };
+
+  useEffect(() => {
+    setIsOpen(isActiveCollapsible);
+  }, [isActiveCollapsible]);
 
   return (
     <>

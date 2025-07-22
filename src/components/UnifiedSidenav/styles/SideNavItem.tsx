@@ -28,7 +28,7 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
 
     ${isAccordion
       ? css`
-          // Hides the left tab on Active Selection
+          /* Hides the left tab on Active Selection */
           &[aria-current='page'] {
             background-color: unset;
             color: unset;
@@ -61,7 +61,7 @@ export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) =>
     color: var(--tab-color-primary);
   }
 
-  // Version Dropdown button
+  /* Version Dropdown button */
   button {
     margin-left: ${!isAccordion && '-8px'};
     height: 28px;
@@ -80,7 +80,7 @@ export const l2ItemStyling = ({ level, isAccordion }: { level: number; isAccordi
         padding-left: calc(${theme.size.default} + ${(level - 1) * 25}px);
       `}
 
-  // Hides the left tab on Active Selection
+  /* Hides the left tab on Active Selection */
   
   ${isAccordion
     ? css`
