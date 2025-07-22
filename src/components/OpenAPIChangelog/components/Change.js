@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import Tooltip, { Align, Justify } from '@leafygreen-ui/tooltip';

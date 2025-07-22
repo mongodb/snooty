@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { css } from '@leafygreen-ui/emotion';
 import styled from '@emotion/styled';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';

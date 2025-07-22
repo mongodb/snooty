@@ -1,22 +1,22 @@
+import React from 'react';
 import { isBrowser } from '../../../utils/is-browser';
 import { getPlaintext } from '../../../utils/get-plaintext';
 import { getNestedValue } from '../../../utils/get-nested-value';
 import useSnootyMetadata from '../../../utils/use-snooty-metadata';
+import { usePageContext } from '../../../context/page-context';
 import { RatingView } from './views';
 import FeedbackContainer from './FeedbackContainer';
 import FeedbackForm from './FeedbackForm';
 import useFeedbackData from './useFeedbackData';
 import { FeedbackProvider, useFeedbackContext } from './context';
 
-const FeedbackRating = ({
-  slug,
-  className,
-  classNameContainer,
-}: {
+export type FeedbackRatingProps = {
   slug: string;
   className: string;
   classNameContainer?: string;
-}) => {
+};
+
+const FeedbackRating = ({ slug, className, classNameContainer }: FeedbackRatingProps) => {
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
   const feedbackData = useFeedbackData({
@@ -25,6 +25,11 @@ const FeedbackRating = ({
     title:
       getPlaintext(getNestedValue(['slugToTitle', slug === '/' ? 'index' : slug], metadata)) || 'MongoDB Documentation',
   });
+  const { options } = usePageContext();
+
+  if (options?.hidefeedback === 'page') {
+    return null;
+  }
 
   return (
     <FeedbackProvider page={feedbackData}>

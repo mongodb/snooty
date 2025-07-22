@@ -3,9 +3,12 @@ import { Option, Select } from '@leafygreen-ui/select';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { ComposableTutorialOption } from '../../types/ast';
 import { theme } from '../../theme/docsTheme';
+import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { OfflineMenu } from '../Select';
+import { OFFLINE_MENU_CLASSNAME } from '../../utils/head-scripts/offline-ui/composable-tutorials';
 import { joinKeyValuesAsString } from './ComposableTutorial';
 
-const selectStyling = css`
+const mainStyling = css`
   flex: 1 1 200px;
   font-size: ${theme.fontSize.small};
   overflow: hidden;
@@ -27,6 +30,11 @@ const selectStyling = css`
     color: var(--font-color-primary);
   }
 
+  // overwriting lg style to apply to offline docs
+  button {
+    margin-top: 3px;
+  }
+
   .dark-theme & {
     > button {
       background-color: var(--gray-dark4);
@@ -41,6 +49,10 @@ const selectStyling = css`
 
 const optionStyling = css`
   font-size: ${theme.fontSize.small};
+`;
+
+const offlineMenuStyling = css`
+  top: calc(100% - ${theme.size.medium});
 `;
 
 interface ConfigurationOptionProps {
@@ -78,21 +90,33 @@ const ConfigurableOption = ({
   }, [option, precedingOptions, selections, validSelections]);
 
   return (
-    <Select
-      className={cx(selectStyling)}
-      popoverZIndex={theme.zIndexes.actionBar - 1}
-      label={option.text}
-      allowDeselect={false}
-      value={selections[option.value]}
-      aria-label={`Select your ${option.text}`}
-      onChange={(value) => onSelect(value, option.value, optionIndex)}
-    >
-      {filteredOptions.map((selection, i) => (
-        <Option className={optionStyling} value={selection.value} key={i}>
-          {selection.text}
-        </Option>
-      ))}
-    </Select>
+    <div className={cx('configurable-option', mainStyling)}>
+      <Select
+        popoverZIndex={theme.zIndexes.actionBar - 1}
+        label={option.text}
+        allowDeselect={false}
+        value={selections[option.value]}
+        aria-label={`Select your ${option.text}`}
+        onChange={(value) => onSelect(value, option.value, optionIndex)}
+        data-option-value={isOfflineDocsBuild ? option.value : undefined}
+        data-dependencies={isOfflineDocsBuild ? JSON.stringify(option.dependencies) : undefined}
+        data-selection-value={isOfflineDocsBuild ? '' : undefined}
+      >
+        {filteredOptions.map((selection, i) => (
+          <Option
+            className={optionStyling}
+            value={selection.value}
+            key={i}
+            data-value={isOfflineDocsBuild ? selection.value : undefined}
+          >
+            {selection.text}
+          </Option>
+        ))}
+      </Select>
+      {isOfflineDocsBuild && (
+        <OfflineMenu choices={option.selections} className={cx(OFFLINE_MENU_CLASSNAME, offlineMenuStyling)} />
+      )}
+    </div>
   );
 };
 

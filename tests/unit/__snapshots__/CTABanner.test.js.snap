@@ -153,6 +153,12 @@ exports[`renders a CTABanner correctly when invalid icon is specified 1`] = `
   text-decoration-color: #016BF8;
 }
 
+.emotion-4>span>code,
+.emotion-4>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 <div
     class="emotion-0"
   >
@@ -344,6 +350,12 @@ exports[`renders a CTABanner correctly when lowercase icon is specified 1`] = `
 
 .emotion-4:focus {
   text-decoration-color: #016BF8;
+}
+
+.emotion-4>span>code,
+.emotion-4>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 <div
@@ -541,6 +553,12 @@ exports[`renders a CTABanner correctly when no icon is specified 1`] = `
   text-decoration-color: #016BF8;
 }
 
+.emotion-4>span>code,
+.emotion-4>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 <div
     class="emotion-0"
   >
@@ -732,6 +750,12 @@ exports[`renders a CTABanner correctly when non-default icon is specified 1`] = 
 
 .emotion-4:focus {
   text-decoration-color: #016BF8;
+}
+
+.emotion-4>span>code,
+.emotion-4>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
 <div

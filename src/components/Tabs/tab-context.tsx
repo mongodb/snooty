@@ -12,11 +12,11 @@ import { isEmpty } from 'lodash';
 import { getLocalValue, setLocalValue } from '../../utils/browser-storage';
 import { DRIVER_ICON_MAP, IconComponent } from '../icons/DriverIconMap';
 import { ContentsContext } from '../Contents/contents-context';
-import { Node } from '../../types/ast';
+import { ASTNode } from '../../types/ast';
 import { makeChoices } from './make-choices';
 
-type Selectors = Record<string, Record<string, Node[]>>;
-type ActiveTabs = Record<string, string>;
+export type Selectors = Record<string, Record<string, ASTNode[]>>;
+export type ActiveTabs = Record<string, string>;
 interface Choice {
   tabSelectorIcon?: IconComponent;
   text: string;
@@ -100,9 +100,9 @@ const TabProvider = ({
   selectors = {},
   defaultTabs = {},
 }: {
-  children: ReactNode[];
-  selectors: Selectors;
-  defaultTabs: ActiveTabs;
+  children: ReactNode;
+  selectors?: Selectors;
+  defaultTabs?: ActiveTabs;
 }) => {
   // init value to {} to match server and client side
   const { hash } = useLocation();

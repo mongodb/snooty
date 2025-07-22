@@ -72,7 +72,7 @@ a .emotion-0 {
   }
 }
 
-.emotion-5 {
+.emotion-4 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -84,12 +84,12 @@ a .emotion-0 {
   color: var(--font-color-primary);
 }
 
-.emotion-5 strong,
-.emotion-5 b {
+.emotion-4 strong,
+.emotion-4 b {
   font-weight: 700;
 }
 
-.emotion-6 {
+.emotion-5 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -104,13 +104,14 @@ a .emotion-0 {
   font-weight: var(--link-font-weight);
 }
 
-.emotion-6>code {
+.emotion-5>span>code,
+.emotion-5>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-6:focus,
-.emotion-6:hover {
+.emotion-5:focus,
+.emotion-5:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -118,12 +119,12 @@ a .emotion-0 {
   text-decoration-thickness: 2px;
 }
 
-.emotion-6:focus {
+.emotion-5:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-6:hover {
+.emotion-5:hover {
   text-decoration-color: #E8EDEB;
 }
 
@@ -161,20 +162,20 @@ a .emotion-0 {
           />
         </svg>
         <div
-          class="emotion-3 emotion-4"
+          class="emotion-3"
           id="std-option-mongos.--config"
         />
       </a>
     </dt>
     <dd>
       <p
-        class="emotion-5"
+        class="emotion-4"
       >
         Specifies a configuration file for runtime configuration options. The
 configuration file is the preferred method for runtime configuration of
 
         <a
-          class="emotion-6"
+          class="emotion-5"
           href="/reference/program/mongos/#std-program-mongos"
         >
           <code
@@ -186,7 +187,7 @@ configuration file is the preferred method for runtime configuration of
         . The options are equivalent to the command-line
 configuration options. See 
         <a
-          class="emotion-6"
+          class="emotion-5"
           href="/reference/configuration-options/"
         >
           Configuration File Options
@@ -195,11 +196,11 @@ configuration options. See
 more information.
       </p>
       <p
-        class="emotion-5"
+        class="emotion-4"
       >
         Ensure the configuration file uses ASCII encoding. The 
         <a
-          class="emotion-6"
+          class="emotion-5"
           href="/reference/program/mongos/#std-program-mongos"
         >
           <code

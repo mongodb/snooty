@@ -29,17 +29,23 @@ module.exports = {
     },
     {
       displayName: 'utils',
-      testMatch: ['<rootDir>/tests/utils/*.test.js'],
+      testMatch: ['<rootDir>/tests/utils/*.test.js', '<rootDir>/tests/utils/*.test.ts'],
       transform: {
         '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,
+        '^.+\\.(ts|tsx)$': 'ts-jest',
       },
     },
     {
       displayName: 'context',
       testEnvironment: 'jest-environment-jsdom',
-      testMatch: ['<rootDir>/tests/context/*.test.js'],
+      testMatch: [
+        '<rootDir>/tests/context/*.test.js',
+        '<rootDir>/tests/context/*.test.ts',
+        '<rootDir>/tests/context/*.test.tsx',
+      ],
       transform: {
         '^.+\\.jsx?$': `<rootDir>/jest-preprocess.js`,
+        '^.+\\.(ts|tsx)$': 'ts-jest',
       },
     },
   ],

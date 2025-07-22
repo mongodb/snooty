@@ -67,6 +67,7 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
 }
 
+.emotion-1>span>code,
 .emotion-1>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -236,6 +237,7 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
 }
 
+.emotion-1>span>code,
 .emotion-1>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
@@ -389,6 +391,7 @@ exports[`renders correctly 1`] = `
   line-height: 20px;
 }
 
+.emotion-1>span>code,
 .emotion-1>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
