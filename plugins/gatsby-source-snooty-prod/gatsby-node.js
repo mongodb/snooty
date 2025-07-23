@@ -353,17 +353,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     throw Error('Issue fetching the unified TOC');
   }
 
-  const NotFoundTemplate = `../../src/templates/NotFound.js`;
-
-  createPage({
-    path: '/404/',
-    component: path.resolve(__dirname, NotFoundTemplate),
-    context: {
-      template: null,
-      unifiedToc,
-    },
-  });
-
   return new Promise((resolve, reject) => {
     pageList?.data?.allPage?.nodes?.forEach((page) => {
       const pageNodes = page.ast;

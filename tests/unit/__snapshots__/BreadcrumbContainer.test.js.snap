@@ -90,6 +90,12 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   text-decoration-color: #016BF8;
 }
 
+.emotion-3 svg {
+  margin-left: 8px;
+  margin-bottom: -6px;
+  color: #889397;
+}
+
 .emotion-3:hover,
 .emotion-3:focus {
   -webkit-text-decoration: underline;
@@ -282,6 +288,12 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
 
 .emotion-3:focus {
   text-decoration-color: #016BF8;
+}
+
+.emotion-3 svg {
+  margin-left: 8px;
+  margin-bottom: -6px;
+  color: #889397;
 }
 
 .emotion-3:hover,
@@ -522,6 +534,12 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
   text-decoration-color: #016BF8;
 }
 
+.emotion-3 svg {
+  margin-left: 8px;
+  margin-bottom: -6px;
+  color: #889397;
+}
+
 .emotion-3:hover,
 .emotion-3:focus {
   -webkit-text-decoration: underline;
@@ -698,6 +716,12 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
 
 .emotion-3:focus {
   text-decoration-color: #016BF8;
+}
+
+.emotion-3 svg {
+  margin-left: 8px;
+  margin-bottom: -6px;
+  color: #889397;
 }
 
 .emotion-3:hover,
