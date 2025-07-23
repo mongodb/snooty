@@ -104,6 +104,12 @@ exports[`renders correctly as a homepage 1`] = `
   text-decoration-color: #016BF8;
 }
 
+.emotion-4 svg {
+  margin-left: 8px;
+  margin-bottom: -6px;
+  color: #889397;
+}
+
 .emotion-4:hover,
 .emotion-4:focus {
   -webkit-text-decoration: underline;
@@ -260,6 +266,12 @@ exports[`renders correctly with siteTitle 1`] = `
 
 .emotion-4:focus {
   text-decoration-color: #016BF8;
+}
+
+.emotion-4 svg {
+  margin-left: 8px;
+  margin-bottom: -6px;
+  color: #889397;
 }
 
 .emotion-4:hover,
