@@ -200,7 +200,6 @@ export function UnifiedSidenav({ slug }) {
 
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
-    console.log('hello girl', currentL1);
     if (!showDriverBackBtn) setCurrentL2s(currentL1);
   }, [currentL1, showDriverBackBtn, setCurrentL1]);
 
