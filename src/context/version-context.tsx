@@ -210,6 +210,8 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
     [associatedProductNames, docsets]
   );
 
+  console.log('The assosiated repo information is ', associatedReposInfo, associatedProductNames);
+
   const isAssociatedProduct = useMemo(
     () => associatedProductNames.includes(project),
     [associatedProductNames, project]
