@@ -273,7 +273,6 @@ export function StaticNavItem({
       as={isUnifiedTOCInDevMode ? null : Link}
       to={newUrl}
       onClick={() => {
-        console.log('hello i am under the water');
         setCurrentL1({ items, newUrl, versionDropdown, label });
         setShowDriverBackBtn(false);
       }}
