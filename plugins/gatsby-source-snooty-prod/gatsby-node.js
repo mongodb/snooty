@@ -217,7 +217,11 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
       { associated_products: 1 }
     );
     await createAssociatedProductNodes({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
-    await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+
+    // Disable fetching remote toctree data for writers' staging
+    if (siteMetadata.database !== 'snooty_prod') {
+      await createRemoteMetadataNode({ createNode, createNodeId, createContentDigest }, umbrellaProduct);
+    }
   }
 
   if (siteMetadata.project === 'cloud-docs' && hasOpenAPIChangelog)
@@ -302,7 +306,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   if (process.env.USE_FILTER_BRANCH === 'true') {
-    const { code } = await swc.transformFile(`${process.cwd()}/src/components/ComponentFactory.js`, {
+    const { code } = await swc.transformFile(`${process.cwd()}/src/components/ComponentFactory.tsx`, {
       jsc: {
         transform: {
           react: {
@@ -325,7 +329,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     console.log(code);
 
     if (process.env.FILTER_DRY_RUN !== 'true')
-      await fs.writeFile(`${process.cwd()}/src/components/ComponentFactory.js`, code);
+      await fs.writeFile(`${process.cwd()}/src/components/ComponentFactory.tsx`, code);
   }
 
   // DOP-4214: for each page, query the directive/node types
@@ -353,7 +357,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     throw Error('Issue fetching the unified TOC');
   }
 
-  const NotFoundTemplate = `../../src/templates/NotFound.js`;
+  const NotFoundTemplate = `../../src/templates/NotFound.tsx`;
 
   createPage({
     path: '/404/',
@@ -370,7 +374,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       const slug = getPageSlug(page.page_id);
 
       // TODO: Gatsby v4 will enable code splitting automatically. Delete duplicate component, add conditional for consistent-nav UnifiedFooter
-      const mainComponentRelativePath = `../../src/components/DocumentBody.js`;
+      const mainComponentRelativePath = `../../src/components/DocumentBody.tsx`;
 
       createPage({
         path: assertTrailingSlash(slug),

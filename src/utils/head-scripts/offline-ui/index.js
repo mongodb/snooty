@@ -1,9 +1,11 @@
+import React from 'react';
 import bindTabUI from './tabs';
 import bindCollapsibleUI from './collapsible';
 import updateSidenavHeight from './sidenav';
 import bindTabsSelectorsUI from './tabs-selectors';
 import bindMethodSelectorUI from './method-selector';
 import bindIOCode, { bindCodeCopy } from './code';
+import bindComposableTutorials from './composable-tutorials';
 
 const OFFLINE_UI_CLASSNAME = 'snooty-offline-ui';
 
@@ -24,4 +26,5 @@ export const OFFLINE_HEAD_SCRIPTS = [
   bindMethodSelectorUI,
   bindIOCode,
   bindCodeCopy,
+  bindComposableTutorials,
 ].map((fn, idx) => getScript({ key: `offline-docs-ui-${idx}`, fn }));

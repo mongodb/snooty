@@ -28,7 +28,10 @@ export function createParentFromToc(tree: TocItem[] | undefined, breadcrumbs: Br
 // Finds breadcrumb through slug
 export function findParentBreadCrumb(slug: string, tocTree: TocItem[]): BreadCrumb[] | undefined {
   for (const item of tocTree) {
-    if (assertLeadingSlash(removeTrailingSlash(item.url)) === assertLeadingSlash(removeTrailingSlash(slug))) {
+    if (
+      item.url &&
+      assertLeadingSlash(removeTrailingSlash(item.url)) === assertLeadingSlash(removeTrailingSlash(slug))
+    ) {
       return item.breadcrumbs?.slice(0, -1); // Removes last item which is the current item
     }
 

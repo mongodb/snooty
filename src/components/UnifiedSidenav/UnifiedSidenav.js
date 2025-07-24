@@ -201,7 +201,7 @@ export function UnifiedSidenav({ slug }) {
   // Changes if L1 is selected/changed, but doesnt change on inital load
   useEffect(() => {
     if (!showDriverBackBtn) setCurrentL2s(currentL1);
-  }, [currentL1, showDriverBackBtn]);
+  }, [currentL1, showDriverBackBtn, setCurrentL1]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
   useEffect(() => {

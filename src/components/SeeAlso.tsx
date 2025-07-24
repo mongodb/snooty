@@ -4,7 +4,7 @@ import { Body } from '@leafygreen-ui/typography';
 
 import { theme } from '../theme/docsTheme';
 import { getPlaintext } from '../utils/get-plaintext';
-import { AdmonitionNode, Node } from '../types/ast';
+import { AdmonitionNode, ASTNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
 
 const indentedContainerStyle = css`
@@ -18,8 +18,8 @@ const labelStyle = css`
 `;
 
 // Checks if all child content are unordered list nodes (no extra padding required)
-const hasOnlyUnorderedLists = (children: Node[]): boolean => {
-  const isListNode = (nodeData: Node) =>
+const hasOnlyUnorderedLists = (children: ASTNode[]): boolean => {
+  const isListNode = (nodeData: ASTNode) =>
     nodeData.type === 'list' && 'enumtype' in nodeData && nodeData.enumtype === 'unordered';
   return children.every((child) => isListNode(child));
 };

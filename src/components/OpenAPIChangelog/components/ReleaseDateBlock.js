@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import { H3 } from '@leafygreen-ui/typography';
 import { format } from 'date-fns';

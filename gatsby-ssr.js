@@ -4,10 +4,10 @@ import { renderStylesToString } from '@leafygreen-ui/emotion';
 import { renderToString } from 'react-dom/server';
 import { theme } from './src/theme/docsTheme';
 import EuclidCircularASemiBold from './src/styles/fonts/EuclidCircularA-Semibold-WebXL.woff';
-import redirectBasedOnLang from './src/utils/head-scripts/redirect-based-on-lang';
 import { OFFLINE_HEAD_SCRIPTS } from './src/utils/head-scripts/offline-ui';
 import { isOfflineDocsBuild } from './src/utils/is-offline-docs-build';
 import { getHtmlLangFormat } from './src/utils/locale';
+import { DISMISSIBLE_SKILLS_CARD_SHOWN } from './src/components/DismissibleSkillsCard';
 
 export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
   if (isOfflineDocsBuild) {
@@ -48,6 +48,25 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
       rel="stylesheet"
     ></link>,
+    // Dismissible Skills Card - read from session storage
+    <script
+      key="dismissible-skills-card"
+      dangerouslySetInnerHTML={{
+        __html: `
+            !function () {
+              try {
+                var d = document.documentElement.classList;
+                var e = JSON.parse(sessionStorage.getItem("mongodb-docs"))?.["${DISMISSIBLE_SKILLS_CARD_SHOWN}"];
+                if (e) {
+                  Object.keys(e).forEach((s) => d.add(s));
+                }
+              } catch (e) {
+                console.error(e);
+              }
+            }();
+          `,
+      }}
+    />,
   ];
 
   if (process.env['GATSBY_ENABLE_DARK_MODE'] === 'true') {
@@ -79,21 +98,6 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
               }
             }();
           `,
-        }}
-      />
-    );
-  }
-
-  // We want to exclude writers' staging (aka "production", aka "prd")
-  if (process.env.SNOOTY_ENV !== 'production') {
-    // Client-side redirect based on browser's language settings.
-    headComponents.push(
-      <script
-        key="browser-lang-redirect"
-        type="text/javascript"
-        dangerouslySetInnerHTML={{
-          // Call function immediately on load
-          __html: `!${redirectBasedOnLang}()`,
         }}
       />
     );

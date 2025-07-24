@@ -85,6 +85,12 @@ exports[`renders correctly 1`] = `
   text-decoration-color: #016BF8;
 }
 
+.emotion-8>span>code,
+.emotion-8>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
 <blockquote>
     <p
       class="emotion-0"
