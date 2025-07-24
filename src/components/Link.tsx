@@ -146,12 +146,15 @@ const Link = ({
   if (contentSite) {
     // For an external links, inside the unified toc
     if (!isRelativeUrl(to)) {
+      const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
+      const isMDBLink = strippedUrl.includes('mongodb.com'); // For an symlinks
+
       return (
         <LGLink
           className={joinClassNames(lgLinkStyling, className)}
           href={to}
-          hideExternalIcon={false}
-          target={'_blank'}
+          hideExternalIcon={isMDBLink ? true : false}
+          target={isMDBLink ? '_self' : '_blank'}
           style={{ fill: palette.gray.base }}
           {...anchorProps}
         >
