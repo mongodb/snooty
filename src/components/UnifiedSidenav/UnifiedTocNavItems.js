@@ -175,6 +175,8 @@ export function UnifiedTocNavItem({
         newUrl={newUrl}
         level={level}
         isAccordion={isAccordion}
+        setShowDriverBackBtn={setShowDriverBackBtn}
+        setCurrentL2s={setCurrentL2s}
         slug={slug}
         contentSite={contentSite}
         className={cx(l2ItemStyling({ level, isAccordion }))}
@@ -196,7 +198,17 @@ export function UnifiedTocNavItem({
   );
 }
 
-function CollapsibleNavItem({ items, label, newUrl, slug, contentSite, isAccordion, level }) {
+function CollapsibleNavItem({
+  items,
+  label,
+  newUrl,
+  slug,
+  contentSite,
+  setShowDriverBackBtn,
+  setCurrentL2s,
+  isAccordion,
+  level,
+}) {
   const isActiveCollapsible = isActiveTocNode(slug, newUrl, items);
   const [isOpen, setIsOpen] = useState(isActiveCollapsible);
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
@@ -244,6 +256,8 @@ function CollapsibleNavItem({ items, label, newUrl, slug, contentSite, isAccordi
             level={level + 1}
             key={item.newUrl + item.label}
             slug={slug}
+            setShowDriverBackBtn={setShowDriverBackBtn}
+            setCurrentL2s={setCurrentL2s}
             isAccordion={isAccordion}
           />
         ))}
