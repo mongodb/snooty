@@ -51,7 +51,7 @@
   },
   "scripts": {
     "info": "gatsby info --clipboard",
-    "build": "./build-retry.sh --prefix-paths",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' ./build-retry.sh --prefix-paths",
     "build:no-prefix": "./build-retry.sh",
     "build:clean": "npm run clean && npm run build",
     "build:clean:stage": "npm run build:clean && make stage",

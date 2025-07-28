@@ -49,6 +49,8 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
       project: manifestMetadata.project,
       branch: manifestMetadata.branch,
     };
+
+    console.log('the manifest project and branch are', filter);
     const isAssociatedProduct = !!umbrellaProduct;
     if (isAssociatedProduct || manifestMetadata?.associated_products?.length) {
       filter['is_merged_toc'] = true;
