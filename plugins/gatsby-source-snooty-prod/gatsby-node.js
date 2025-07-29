@@ -259,6 +259,24 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     parent: null,
     metadata: snootyMetadata,
   });
+
+  const unifiedToc = await fetchUnifiedToc();
+
+  // Unified TOC is critical, if we don't have one
+  // Stop the build from completing.
+  if (!unifiedToc) {
+    throw Error('Issue fetching the unified TOC');
+  }
+
+  createNode({
+    children: [],
+    id: createNodeId(`toc`),
+    internal: {
+      type: 'TOC',
+      contentDigest: createContentDigest(unifiedToc),
+    },
+    tocTree: unifiedToc,
+  });
 };
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
@@ -351,25 +369,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
   }
 
-  const unifiedToc = await fetchUnifiedToc();
-
-  // Unified TOC is critical, if we don't have one
-  // Stop the build from completing.
-  if (!unifiedToc) {
-    throw Error('Issue fetching the unified TOC');
-  }
-
-  const NotFoundTemplate = `../../src/templates/NotFound.tsx`;
-
-  createPage({
-    path: '/404/',
-    component: path.resolve(__dirname, NotFoundTemplate),
-    context: {
-      template: null,
-      unifiedToc,
-    },
-  });
-
   return new Promise((resolve, reject) => {
     pageList?.data?.allPage?.nodes?.forEach((page) => {
       const pageNodes = page.ast;
@@ -386,7 +385,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           slug,
           repoBranches,
           template: pageNodes?.options?.template,
-          unifiedToc,
         },
       });
     });
