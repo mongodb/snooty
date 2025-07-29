@@ -89,7 +89,8 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }
     // Replace version variable with the true current version
     if (item?.url?.includes(':version')) {
       const version = (versionsData[currentProject] || []).find(
-        (version) => version.gitBranchName === activeVersions[currentProject]
+        (version) =>
+          version.gitBranchName === activeVersions[currentProject] || version.urlSlug === activeVersions[currentProject]
       );
       // If no version use first version.urlSlug in the list, or if no version loads, set as current
       const defaultVersion = versionsData[currentProject]?.[0]?.urlSlug ?? 'current';
