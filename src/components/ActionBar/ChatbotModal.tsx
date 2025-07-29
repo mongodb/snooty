@@ -4,7 +4,7 @@ import {
   ModalView,
   MongoDbLegalDisclosure,
   mongoDbVerifyInformationMessage,
-  PoweredByAtlasVectorSearch
+  PoweredByAtlasVectorSearch,
 } from 'mongodb-chatbot-ui';
 import { css } from '@leafygreen-ui/emotion';
 import { defaultSuggestedPrompts } from '../ChatbotUi';
