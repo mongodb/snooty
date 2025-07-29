@@ -24,7 +24,7 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
 
   ${isActive &&
   css`
-    font-weight: 600;
+    font-weight: 600 !important;
 
     ${isAccordion
       ? css`
@@ -44,6 +44,10 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
       : css`
           color: var(--sidenav-active-before-color) !important;
           background-color: var(--sidenav-active-bg-color);
+
+          ::before {
+            color: var(--sidenav-active-before-color) !important;
+          }
         `}
   `}
 `;
