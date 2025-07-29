@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { useChatbotContext, ModalView, MongoDbLegalDisclosure, PoweredByAtlasVectorSearch } from 'mongodb-chatbot-ui';
+import {
+  useChatbotContext,
+  ModalView,
+  MongoDbLegalDisclosure,
+  mongoDbVerifyInformationMessage,
+  PoweredByAtlasVectorSearch,
+} from 'mongodb-chatbot-ui';
 import { css } from '@leafygreen-ui/emotion';
 import { defaultSuggestedPrompts } from '../ChatbotUi';
 
@@ -19,9 +25,7 @@ const ChatbotModal = ({ chatbotClicked, setChatbotClicked }: ChatbotModalProps) 
 
   return (
     <ModalView
-      inputBottomText={
-        'This is an experimental generative AI chatbot. All information should be verified prior to use.'
-      }
+      inputBottomText={mongoDbVerifyInformationMessage}
       disclaimer={
         <>
           <MongoDbLegalDisclosure />
