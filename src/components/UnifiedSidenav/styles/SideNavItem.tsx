@@ -51,7 +51,7 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
           }
 
           .dark-theme & {
-            background-color: ${palette.green.light3};
+            background-color: ${palette.green.dark3};
           }
         `}
   `}
