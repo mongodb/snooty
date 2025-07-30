@@ -27,26 +27,26 @@ exports[`renders correctly as a homepage 1`] = `
   align-items: center;
 }
 
-.emotion-3 {
+.emotion-2 {
   overflow: hidden;
   white-space: nowrap;
 }
 
-.emotion-3:first-child {
+.emotion-2:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
 }
 
 @media not all and (max-width: 480px) {
-  .emotion-3:last-child {
+  .emotion-2:last-child {
     min-width: -webkit-max-content;
     min-width: -moz-max-content;
     min-width: max-content;
   }
 }
 
-.emotion-4 {
+.emotion-3 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -82,8 +82,8 @@ exports[`renders correctly as a homepage 1`] = `
   font-weight: 400;
 }
 
-.emotion-4:hover,
-.emotion-4:focus {
+.emotion-3:hover,
+.emotion-3:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -92,31 +92,31 @@ exports[`renders correctly as a homepage 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-4:focus {
+.emotion-3:focus {
   outline: none;
 }
 
-.emotion-4:hover {
+.emotion-3:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-4:focus {
+.emotion-3:focus {
   text-decoration-color: #016BF8;
 }
 
-.emotion-4 svg {
-  margin-left: 8px;
-  margin-bottom: -6px;
-  color: #889397;
+.emotion-3>span>code,
+.emotion-3>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
-.emotion-4:hover,
-.emotion-4:focus {
+.emotion-3:hover,
+.emotion-3:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.emotion-5 {
+.emotion-4 {
   cursor: default;
   padding-left: 8px;
   padding-right: 8px;
@@ -126,13 +126,13 @@ exports[`renders correctly as a homepage 1`] = `
     class="emotion-0"
   >
     <div
-      class="emotion-1 emotion-2"
+      class="emotion-1"
     >
       <div
-        class="emotion-3"
+        class="emotion-2"
       >
         <a
-          class="lg-ui-0001 emotion-4"
+          class="lg-ui-0001 emotion-3"
           href="https://www.mongodb.com/docs/"
           target="_self"
         >
@@ -142,15 +142,15 @@ exports[`renders correctly as a homepage 1`] = `
         </a>
       </div>
       <span
-        class="emotion-5 emotion-6"
+        class="emotion-4"
       >
          / 
       </span>
       <div
-        class="emotion-3"
+        class="emotion-2"
       >
         <a
-          class="lg-ui-0001 emotion-4"
+          class="lg-ui-0001 emotion-3"
           href="https://www.mongodb.com/docs/atlas/"
           target="_self"
         >
@@ -191,26 +191,26 @@ exports[`renders correctly with siteTitle 1`] = `
   align-items: center;
 }
 
-.emotion-3 {
+.emotion-2 {
   overflow: hidden;
   white-space: nowrap;
 }
 
-.emotion-3:first-child {
+.emotion-2:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
 }
 
 @media not all and (max-width: 480px) {
-  .emotion-3:last-child {
+  .emotion-2:last-child {
     min-width: -webkit-max-content;
     min-width: -moz-max-content;
     min-width: max-content;
   }
 }
 
-.emotion-4 {
+.emotion-3 {
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -246,8 +246,8 @@ exports[`renders correctly with siteTitle 1`] = `
   font-weight: 400;
 }
 
-.emotion-4:hover,
-.emotion-4:focus {
+.emotion-3:hover,
+.emotion-3:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
@@ -256,37 +256,37 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-4:focus {
+.emotion-3:focus {
   outline: none;
 }
 
-.emotion-4:hover {
+.emotion-3:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-4:focus {
+.emotion-3:focus {
   text-decoration-color: #016BF8;
 }
 
-.emotion-4 svg {
-  margin-left: 8px;
-  margin-bottom: -6px;
-  color: #889397;
+.emotion-3>span>code,
+.emotion-3>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
 }
 
-.emotion-4:hover,
-.emotion-4:focus {
+.emotion-3:hover,
+.emotion-3:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.emotion-5 {
+.emotion-4 {
   cursor: default;
   padding-left: 8px;
   padding-right: 8px;
 }
 
-.emotion-12 {
+.emotion-9 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -305,13 +305,14 @@ exports[`renders correctly with siteTitle 1`] = `
   font-weight: 400;
 }
 
-.emotion-12>code {
+.emotion-9>span>code,
+.emotion-9>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-12:focus,
-.emotion-12:hover {
+.emotion-9:focus,
+.emotion-9:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -319,35 +320,35 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-12:focus {
+.emotion-9:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-12:hover {
+.emotion-9:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-12:hover,
-.emotion-12:focus {
+.emotion-9:hover,
+.emotion-9:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.emotion-15 {
+.emotion-11 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.emotion-15:first-child {
+.emotion-11:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
 }
 
 @media not all and (max-width: 480px) {
-  .emotion-15:last-child {
+  .emotion-11:last-child {
     min-width: -webkit-max-content;
     min-width: -moz-max-content;
     min-width: max-content;
@@ -358,13 +359,13 @@ exports[`renders correctly with siteTitle 1`] = `
     class="emotion-0"
   >
     <div
-      class="emotion-1 emotion-2"
+      class="emotion-1"
     >
       <div
-        class="emotion-3"
+        class="emotion-2"
       >
         <a
-          class="lg-ui-0001 emotion-4"
+          class="lg-ui-0001 emotion-3"
           href="https://www.mongodb.com/docs/"
           target="_self"
         >
@@ -374,15 +375,15 @@ exports[`renders correctly with siteTitle 1`] = `
         </a>
       </div>
       <span
-        class="emotion-5 emotion-6"
+        class="emotion-4"
       >
          / 
       </span>
       <div
-        class="emotion-3"
+        class="emotion-2"
       >
         <a
-          class="lg-ui-0001 emotion-4"
+          class="lg-ui-0001 emotion-3"
           href="https://www.mongodb.com/docs/atlas/"
           target="_self"
         >
@@ -392,45 +393,45 @@ exports[`renders correctly with siteTitle 1`] = `
         </a>
       </div>
       <span
-        class="emotion-5 emotion-6"
+        class="emotion-4"
       >
          / 
       </span>
       <div
-        class="emotion-3"
+        class="emotion-2"
       >
         <a
-          class="emotion-12"
+          class="emotion-9"
           href="/"
         >
           Atlas Device SDKs
         </a>
       </div>
       <span
-        class="emotion-5 emotion-6"
+        class="emotion-4"
       >
          / 
       </span>
       <div
-        class="emotion-15"
+        class="emotion-11"
       >
         <a
-          class="emotion-12"
+          class="emotion-9"
           href="/sdk/cpp/"
         >
           Atlas Device SDK for C++
         </a>
       </div>
       <span
-        class="emotion-5 emotion-6"
+        class="emotion-4"
       >
          / 
       </span>
       <div
-        class="emotion-15"
+        class="emotion-11"
       >
         <a
-          class="emotion-12"
+          class="emotion-9"
           href="/sdk/cpp/application-services/"
         >
           Application Services - C++ SDK

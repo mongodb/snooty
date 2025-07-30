@@ -49,6 +49,7 @@ exports[`button component renders correctly 1`] = `
   height: 36px;
 }
 
+.emotion-0>span>code,
 .emotion-0>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);

@@ -1,5 +1,5 @@
 import { getPlaintext } from '../../utils/get-plaintext';
-import { Node } from '../../types/ast';
+import { ASTNode } from '../../types/ast';
 import { DriverMap } from '../icons/DriverIconMap';
 
 export const makeChoices = ({
@@ -8,7 +8,7 @@ export const makeChoices = ({
   options,
 }: {
   name: string;
-  options: string | { [k: string]: Node[] };
+  options: string | Record<string, ASTNode[]>;
   iconMapping?: DriverMap;
 }) =>
   Object.entries(options).map(([tabId, title]) => ({

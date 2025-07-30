@@ -11,6 +11,7 @@ export interface TocItem {
   collapsible?: boolean;
   breadcrumbs?: BreadCrumb[];
   showSubNav?: boolean;
+  isExternal?: boolean;
   versionDropdown?: boolean;
   items?: TocItem[];
 }

@@ -8,7 +8,7 @@ const { CLIEngine } = require('eslint');
 // https://github.com/okonet/lint-staged/blob/fa15d686deb90b7ffddfbcf644d56ed05fcd8a38/README.md#how-can-i-ignore-files-from-eslintignore
 
 module.exports = {
-  '*.js': (files) => {
+  '*.{js,jsx,ts,tsx}': (files) => {
     const cli = new CLIEngine({});
     const filesToLint = files.filter((file) => !cli.isPathIgnored(file)).join(' ');
     return ['npm run format:fix', `npm run lint:fix -- ${filesToLint}`];
