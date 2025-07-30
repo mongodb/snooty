@@ -1,4 +1,5 @@
 import { css } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 
 export const sideNavItemBasePadding = css`
@@ -43,10 +44,14 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
         `
       : css`
           color: var(--sidenav-active-before-color) !important;
-          background-color: var(--sidenav-active-bg-color);
+          background-color: ${palette.green.light3};
 
           ::before {
             color: var(--sidenav-active-before-color) !important;
+          }
+
+          .dark-theme & {
+            background-color: ${palette.green.light3};
           }
         `}
   `}
