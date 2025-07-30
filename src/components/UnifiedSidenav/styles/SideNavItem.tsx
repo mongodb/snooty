@@ -23,7 +23,7 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
   line-height: 16px;
   text-transform: uppercase;
 
-  // makes sure the colour of the tab isn't blue
+  /* Makes sure the color of the active tab isn't blue before selected */
   ::before {
     color: var(--sidenav-active-before-color);
   }
