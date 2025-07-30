@@ -4,7 +4,6 @@ import { TrackJS } from 'trackjs';
 import { ImageContextProvider } from '../context/image-context';
 import { usePresentationMode } from '../hooks/use-presentation-mode';
 import { useCanonicalUrl } from '../hooks/use-canonical-url';
-import { useIsValidVersion } from '../hooks/use-is-valid-version';
 import { findAllKeyValuePairs } from '../utils/find-all-key-value-pairs';
 import { getNestedValue } from '../utils/get-nested-value';
 import { getMetaFromDirective } from '../utils/get-meta-from-directive';
@@ -12,7 +11,6 @@ import { getPlaintext } from '../utils/get-plaintext';
 import { getTemplate } from '../utils/get-template';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getSiteTitle } from '../utils/get-site-title';
-import { getFeatureFlags } from '../utils/feature-flags';
 import { STRUCTURED_DATA_CLASSNAME, constructTechArticle } from '../utils/structured-data';
 import { PageContext } from '../context/page-context';
 import { useBreadcrumbs } from '../hooks/use-breadcrumbs';
@@ -103,8 +101,6 @@ const DocumentBody = (props: DocumentBodyProps) => {
   const page = data?.page?.ast;
   const { slug, template, repoBranches } = pageContext;
   const tabsMainColumn = page?.options?.['tabs-selector-position'] === 'main';
-  const { isUnifiedToc } = getFeatureFlags();
-  const isValidVersion = useIsValidVersion();
 
   const initialization = () => {
     const pageNodes: ASTNode[] = getNestedValue(['children'], page) || [];
@@ -119,12 +115,7 @@ const DocumentBody = (props: DocumentBodyProps) => {
   const lookup = slug === '/' ? 'index' : slug;
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
 
-  let { Template, useChatbot } = getTemplate(template);
-
-  // Checks to see if the version is valid only for Unified TOC, if not valid, we assigned the FeatureNotAvailable as the Template at runtime.
-  if (isUnifiedToc && !isValidVersion) {
-    Template = FeatureNotAvailable;
-  }
+  const { Template, useChatbot } = getTemplate(template);
 
   const siteTitle = getSiteTitle(metadata);
 
