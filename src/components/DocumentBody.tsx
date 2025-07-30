@@ -22,6 +22,7 @@ import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { getCompleteUrl, getUrl } from '../utils/url-utils';
 import type { AppData, PageContext as PageContextType } from '../types/data';
 import type { ASTNode, FootnoteNode, FootnoteReferenceNode, MetaNode, TwitterNode } from '../types/ast';
+import { FeatureNotAvailable } from '../templates';
 import OfflineBanner from './Banner/OfflineBanner';
 import SEO from './SEO';
 import FootnoteContext, { Footnote } from './Footnote/footnote-context';
