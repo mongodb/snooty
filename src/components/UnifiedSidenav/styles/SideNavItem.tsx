@@ -23,6 +23,11 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
   line-height: 16px;
   text-transform: uppercase;
 
+  // makes sure the colour of the tab isn't blue
+  ::before {
+    color: var(--sidenav-active-before-color);
+  }
+
   ${isActive &&
   css`
     font-weight: 600 !important;
@@ -45,10 +50,6 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
       : css`
           color: var(--sidenav-active-before-color) !important;
           background-color: ${palette.green.light3};
-
-          ::before {
-            color: var(--sidenav-active-before-color) !important;
-          }
 
           .dark-theme & {
             background-color: ${palette.green.dark3};
