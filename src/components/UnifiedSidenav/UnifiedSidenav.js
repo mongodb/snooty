@@ -89,7 +89,8 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }
     // Replace version variable with the true current version
     if (item?.url?.includes(':version')) {
       const version = (versionsData[currentProject] || []).find(
-        (version) => version.gitBranchName === activeVersions[currentProject]
+        (version) =>
+          version.gitBranchName === activeVersions[currentProject] || version.urlSlug === activeVersions[currentProject]
       );
       // If no version use first version.urlSlug in the list, or if no version loads, set as current
       const defaultVersion = versionsData[currentProject]?.[0]?.urlSlug ?? 'current';
@@ -198,11 +199,6 @@ export function UnifiedSidenav({ slug }) {
     setCurrentL1(updatedL1s);
     setCurrentL2s(updatedL2s);
   }, [tree]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Changes if L1 is selected/changed, but doesnt change on inital load
-  useEffect(() => {
-    if (!showDriverBackBtn) setCurrentL2s(currentL1);
-  }, [currentL1, showDriverBackBtn, setCurrentL1]);
 
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
   useEffect(() => {
