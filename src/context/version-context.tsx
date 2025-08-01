@@ -23,7 +23,7 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { BranchData, Docset, Group, MetadataDatabaseName, PageContextRepoBranches, SiteMetadata } from '../types/data';
 
-// type AssociatedReposInfo = Record<string, DocsetSlice>;
+type AssociatedReposInfo = Record<string, DocsetSlice>;
 type ActiveVersions = Record<string, string>;
 type AvailableVersions = Record<string, BranchData[]>;
 type AvailableGroups = Record<string, Group[]>;
@@ -78,7 +78,14 @@ const versionStateReducer = (state: ActiveVersions, newState: Partial<ActiveVers
  *
  * @returns versions{} <product_name: branch_object[]>
  */
-const getBranches = async (metadata: SiteMetadata, associatedProducts: string[], docsets: DocsetSlice[]) => {
+const getBranches = async (
+  metadata: SiteMetadata,
+  repoBranches: PageContextRepoBranches,
+  associatedReposInfo: AssociatedReposInfo,
+  associatedProducts: string[],
+  docsets: DocsetSlice[],
+  isUnifiedToc: boolean
+) => {
   let hasEolBranches = false;
   try {
     const promises = [fetchDocset(metadata.reposDatabase, { project: metadata.project })];
@@ -92,21 +99,63 @@ const getBranches = async (metadata: SiteMetadata, associatedProducts: string[],
     const allBranches = await Promise.all(promises);
     const fetchedRepoBranches = allBranches[0];
     hasEolBranches = fetchedRepoBranches?.branches?.some((b) => !b.active);
-    const versions = getDefaultVersions(docsets);
-    const groups = getDefaultGroups(docsets);
+    const fetchedAssociatedReposInfo = allBranches.slice(1).reduce<{ [k: string]: Docset }>((res, repoBranch) => {
+      res[repoBranch.project] = repoBranch;
+      return res;
+    }, {});
 
-    return { versions, groups, hasEolBranches };
+    if (isUnifiedToc) {
+      const versions = getDefaultVersionsUnified(docsets);
+      const groups = getDefaultGroupsUnified(docsets);
+      return { versions, groups, hasEolBranches };
+    } else {
+      const versions = getDefaultVersions(metadata, fetchedRepoBranches, fetchedAssociatedReposInfo);
+      const groups = getDefaultGroups(metadata.project, fetchedRepoBranches);
+      return { versions, groups, hasEolBranches };
+    }
   } catch (e) {
-    return {
-      versions: getDefaultVersions(docsets),
-      groups: getDefaultGroups(docsets),
-      hasEolBranches,
-    };
+    if (isUnifiedToc) {
+      return {
+        versions: getDefaultVersionsUnified(docsets),
+        groups: getDefaultGroupsUnified(docsets),
+        hasEolBranches,
+      };
+    } else {
+      return {
+        versions: getDefaultVersions(metadata, repoBranches, associatedReposInfo),
+        groups: getDefaultGroups(metadata.project, repoBranches),
+        hasEolBranches,
+      };
+    }
     // on error of realm function, fall back to build time fetches
   }
 };
 
-const getDefaultVersions = (docsets: DocsetSlice[]) => {
+const getDefaultVersions = (
+  metadata: SiteMetadata,
+  repoBranches: PageContextRepoBranches | Docset,
+  associatedReposInfo: AssociatedReposInfo
+) => {
+  const { project, parserBranch } = metadata;
+  const versions: { [k: string]: Docset['branches'] } = {};
+  const VERSION_KEY = 'branches';
+  const currentBranch = repoBranches?.[VERSION_KEY]?.find((b) => b.gitBranchName === parserBranch);
+  const filter = !currentBranch || currentBranch.active ? (b: BranchData) => b.active : () => true;
+  versions[project] = (repoBranches?.[VERSION_KEY] || []).filter(filter);
+  for (const productName in associatedReposInfo) {
+    versions[productName] = (associatedReposInfo[productName][VERSION_KEY] || []).filter(filter);
+  }
+  return versions;
+};
+
+const getDefaultGroups = (project: string, repoBranches: PageContextRepoBranches | Docset) => {
+  const groups: AvailableGroups = {};
+  const GROUP_KEY = 'groups';
+  groups[project] = repoBranches?.[GROUP_KEY] || [];
+  return groups;
+};
+
+const getDefaultVersionsUnified = (docsets: DocsetSlice[]) => {
   const versions: { [k: string]: Docset['branches'] } = {};
 
   for (const docset of docsets) {
@@ -114,14 +163,13 @@ const getDefaultVersions = (docsets: DocsetSlice[]) => {
     if (!docset.branches || docset.branches.length <= 1) {
       continue;
     }
-
     versions[docset.project] = docset.branches.filter((version) => version.active === true);
   }
 
   return versions;
 };
 
-const getDefaultGroups = (docsets: DocsetSlice[]) => {
+const getDefaultGroupsUnified = (docsets: DocsetSlice[]) => {
   const groups: AvailableGroups = {};
 
   for (const docset of docsets) {
@@ -192,15 +240,15 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
   const docsets = useAllDocsets();
   const { project } = useSnootyMetadata();
   const { isUnifiedToc } = getFeatureFlags();
-  // const associatedReposInfo = useMemo(
-  //   () =>
-  //     associatedProductNames.reduce<AssociatedReposInfo>((res, productName) => {
-  //       const docset = docsets.find((docset) => docset.project === productName);
-  //       if (docset) res[productName] = docset;
-  //       return res;
-  //     }, {}),
-  //   [associatedProductNames, docsets]
-  // );
+  const associatedReposInfo = useMemo(
+    () =>
+      associatedProductNames.reduce<AssociatedReposInfo>((res, productName) => {
+        const docset = docsets.find((docset) => docset.project === productName);
+        if (docset) res[productName] = docset;
+        return res;
+      }, {}),
+    [associatedProductNames, docsets]
+  );
 
   const isAssociatedProduct = useMemo(
     () => associatedProductNames.includes(project),
@@ -231,21 +279,27 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
   }, [activeVersions]);
 
   // expose the available versions for current and associated products
-  const [availableVersions, setAvailableVersions] = useState<AvailableVersions>(getDefaultVersions(docsets));
-  const [availableGroups, setAvailableGroups] = useState(getDefaultGroups(docsets));
+  const [availableVersions, setAvailableVersions] = useState<AvailableVersions>(
+    isUnifiedToc ? getDefaultVersionsUnified(docsets) : getDefaultVersions(metadata, repoBranches, associatedReposInfo)
+  );
+  const [availableGroups, setAvailableGroups] = useState(
+    isUnifiedToc ? getDefaultGroupsUnified(docsets) : getDefaultGroups(metadata.project, repoBranches)
+  );
   const [showEol, setShowEol] = useState(repoBranches?.branches?.some((b) => !b.active) || false);
 
   // on init, fetch versions from realm app services
   useEffect(() => {
-    getBranches(metadata, associatedProductNames, docsets).then(({ versions, groups, hasEolBranches }) => {
-      if (!mountRef.current) {
-        return;
+    getBranches(metadata, repoBranches, associatedReposInfo, associatedProductNames, docsets, isUnifiedToc).then(
+      ({ versions, groups, hasEolBranches }) => {
+        if (!mountRef.current) {
+          return;
+        }
+        setActiveVersions(getInitVersions(versions));
+        setAvailableGroups(groups);
+        setAvailableVersions(versions);
+        setShowEol(hasEolBranches);
       }
-      setActiveVersions(getInitVersions(versions));
-      setAvailableGroups(groups);
-      setAvailableVersions(versions);
-      setShowEol(hasEolBranches);
-    });
+    );
     // does not need to refetch after initial fetch
     // also falls back to server side fetch for branches
     // eslint-disable-next-line react-hooks/exhaustive-deps

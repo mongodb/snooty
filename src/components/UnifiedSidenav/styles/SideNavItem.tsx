@@ -42,6 +42,7 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
           }
         `
       : css`
+          color: var(--sidenav-active-before-color) !important;
           background-color: var(--sidenav-active-bg-color);
 
           ::before {
