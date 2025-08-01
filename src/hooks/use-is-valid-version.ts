@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react';
 import { VersionContext } from '../context/version-context';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
-import { Versions } from '../types/versions';
+import { BranchData } from '../types/data';
 import { useCurrentUrlSlug } from './use-current-url-slug';
 import { useSiteMetadata } from './use-site-metadata';
 
@@ -9,7 +9,7 @@ export const useIsValidVersion = () => {
   const { availableVersions } = useContext(VersionContext);
   const { parserBranch } = useSiteMetadata();
   const { project } = useSnootyMetadata();
-  const branches: Versions = useMemo(() => {
+  const branches: BranchData[] = useMemo(() => {
     return availableVersions[project as keyof typeof availableVersions];
   }, [project, availableVersions]);
   const currentUrlSlug = useCurrentUrlSlug(parserBranch, branches);
