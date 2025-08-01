@@ -53,8 +53,8 @@ const findBranchByGit = (gitBranchName: string, branches?: BranchData[]) => {
   if (!branches || !branches.length) {
     return;
   }
-
-  return branches.find((b) => b.gitBranchName === gitBranchName);
+  const foundSlug = branches.find((b) => b.urlSlug === gitBranchName);
+  return foundSlug ? foundSlug : branches.find((b) => b.gitBranchName === gitBranchName);
 };
 
 // version state reducer helper fn
@@ -82,7 +82,9 @@ const getBranches = async (
   metadata: SiteMetadata,
   repoBranches: PageContextRepoBranches,
   associatedReposInfo: AssociatedReposInfo,
-  associatedProducts: string[]
+  associatedProducts: string[],
+  docsets: DocsetSlice[],
+  isUnifiedToc: boolean
 ) => {
   let hasEolBranches = false;
   try {
@@ -101,16 +103,30 @@ const getBranches = async (
       res[repoBranch.project] = repoBranch;
       return res;
     }, {});
-    const versions = getDefaultVersions(metadata, fetchedRepoBranches, fetchedAssociatedReposInfo);
-    const groups = getDefaultGroups(metadata.project, fetchedRepoBranches);
 
-    return { versions, groups, hasEolBranches };
+    if (isUnifiedToc) {
+      const versions = getDefaultVersionsUnified(docsets);
+      const groups = getDefaultGroupsUnified(docsets);
+      return { versions, groups, hasEolBranches };
+    } else {
+      const versions = getDefaultVersions(metadata, fetchedRepoBranches, fetchedAssociatedReposInfo);
+      const groups = getDefaultGroups(metadata.project, fetchedRepoBranches);
+      return { versions, groups, hasEolBranches };
+    }
   } catch (e) {
-    return {
-      versions: getDefaultVersions(metadata, repoBranches, associatedReposInfo),
-      groups: getDefaultGroups(metadata.project, repoBranches),
-      hasEolBranches,
-    };
+    if (isUnifiedToc) {
+      return {
+        versions: getDefaultVersionsUnified(docsets),
+        groups: getDefaultGroupsUnified(docsets),
+        hasEolBranches,
+      };
+    } else {
+      return {
+        versions: getDefaultVersions(metadata, repoBranches, associatedReposInfo),
+        groups: getDefaultGroups(metadata.project, repoBranches),
+        hasEolBranches,
+      };
+    }
     // on error of realm function, fall back to build time fetches
   }
 };
@@ -136,6 +152,30 @@ const getDefaultGroups = (project: string, repoBranches: PageContextRepoBranches
   const groups: AvailableGroups = {};
   const GROUP_KEY = 'groups';
   groups[project] = repoBranches?.[GROUP_KEY] || [];
+  return groups;
+};
+
+const getDefaultVersionsUnified = (docsets: DocsetSlice[]) => {
+  const versions: { [k: string]: Docset['branches'] } = {};
+
+  for (const docset of docsets) {
+    // Skips none versioned sites
+    if (!docset.branches || docset.branches.length <= 1) {
+      continue;
+    }
+    versions[docset.project] = docset.branches.filter((version) => version.active === true);
+  }
+
+  return versions;
+};
+
+const getDefaultGroupsUnified = (docsets: DocsetSlice[]) => {
+  const groups: AvailableGroups = {};
+
+  for (const docset of docsets) {
+    groups[docset.project] = docset?.groups || [];
+  }
+
   return groups;
 };
 
@@ -240,14 +280,16 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
 
   // expose the available versions for current and associated products
   const [availableVersions, setAvailableVersions] = useState<AvailableVersions>(
-    getDefaultVersions(metadata, repoBranches, associatedReposInfo)
+    isUnifiedToc ? getDefaultVersionsUnified(docsets) : getDefaultVersions(metadata, repoBranches, associatedReposInfo)
   );
-  const [availableGroups, setAvailableGroups] = useState(getDefaultGroups(metadata.project, repoBranches));
+  const [availableGroups, setAvailableGroups] = useState(
+    isUnifiedToc ? getDefaultGroupsUnified(docsets) : getDefaultGroups(metadata.project, repoBranches)
+  );
   const [showEol, setShowEol] = useState(repoBranches?.branches?.some((b) => !b.active) || false);
 
   // on init, fetch versions from realm app services
   useEffect(() => {
-    getBranches(metadata, repoBranches, associatedReposInfo, associatedProductNames).then(
+    getBranches(metadata, repoBranches, associatedReposInfo, associatedProductNames, docsets, isUnifiedToc).then(
       ({ versions, groups, hasEolBranches }) => {
         if (!mountRef.current) {
           return;

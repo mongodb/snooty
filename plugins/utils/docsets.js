@@ -12,6 +12,7 @@ const createDocsetNodes = async ({ db, createNode, createNodeId, createContentDi
       displayName: docset.displayName,
       prefix: docset.prefix,
       project: docset.project,
+      groups: docset.groups,
       url: docset.url,
       branches: docset.branches,
       hasEolVersions: docset.hasEolVersions,

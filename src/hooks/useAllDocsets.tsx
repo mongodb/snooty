@@ -1,7 +1,7 @@
 import { useStaticQuery, graphql } from 'gatsby';
 import { Docset } from '../types/data';
 
-export type DocsetSlice = Omit<Docset, 'repoName' | 'search' | 'internalOnly' | 'prodDeployable' | 'groups' | 'bucket'>;
+export type DocsetSlice = Omit<Docset, 'repoName' | 'search' | 'internalOnly' | 'prodDeployable' | 'bucket'>;
 
 type AllDocsetsQueryResult = {
   allDocset: {
@@ -41,6 +41,10 @@ export const useAllDocsets = () => {
               prd
               stg
               regression
+            }
+            groups {
+              groupLabel
+              includedBranches
             }
           }
         }
