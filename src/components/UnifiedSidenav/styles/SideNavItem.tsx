@@ -72,7 +72,15 @@ export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) =>
   }
 `;
 
-export const l2ItemStyling = ({ level, isAccordion }: { level: number; isAccordion: boolean }) => css`
+export const l2ItemStyling = ({
+  level,
+  isAccordion,
+  isActive,
+}: {
+  level: number;
+  isAccordion: boolean;
+  isActive: boolean;
+}) => css`
   ${sideNavItemBasePadding}
   line-height: 20px;
   font-size: ${theme.fontSize.small};
@@ -86,22 +94,29 @@ export const l2ItemStyling = ({ level, isAccordion }: { level: number; isAccordi
 
   /* Hides the left tab on Active Selection */
   
-  ${isAccordion
-    ? css`
-        &[aria-current='page'] {
-          color: var(--sidenav-active-before-color) !important;
-          background-color: var(--sidenav-active-bg-color);
-        }
-      `
-    : css`
-        &[aria-current='page'] {
-          font-weight: 400;
-          color: var(--font-color-active) !important;
-          background-color: var(--sidenav-active-bg-color);
-        }
+  ${isAccordion &&
+  isActive &&
+  css`
+    color: var(--sidenav-active-before-color) !important;
+    background-color: var(--sidenav-active-bg-color);
+  `}
 
-        ::before {
-          display: none;
-        }
-      `}
+  ${!isAccordion &&
+  isActive &&
+  css`
+    font-weight: 400;
+    color: var(--font-color-active) !important;
+    background-color: var(--sidenav-active-bg-color);
+
+    ::before {
+      display: none;
+    }
+  `}
+
+    ${isActive &&
+  css`
+    &:hover {
+      background-color: var(--sidenav-active-bg-color);
+    }
+  `}
 `;

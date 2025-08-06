@@ -11,6 +11,7 @@ import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
+import { isCurrentPage } from '../utils/is-current-page';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -98,6 +99,7 @@ const lgLinkStyling = css`
 export type LinkProps = {
   children: ReactNode;
   to?: string;
+  active?: boolean;
   activeClassName?: string;
   className?: string;
   partiallyActive?: boolean;
@@ -114,6 +116,7 @@ export type LinkProps = {
 const Link = ({
   children,
   to,
+  active,
   activeClassName,
   className,
   partiallyActive,
@@ -127,7 +130,7 @@ const Link = ({
 }: LinkProps) => {
   const { pathPrefix, project } = useSiteMetadata();
   if (!to) to = '';
-  const anchor = to.startsWith('#');
+  const anchor = to.includes('#');
 
   const anchorProps = validateHTMAttributes('anchor', other);
   const { theme: siteTheme } = useDarkMode();
@@ -142,6 +145,10 @@ const Link = ({
     ''
   );
 
+  if (to === '/docs/atlas/tutorial/manage-organizations/#require-ip-access-list-for-the-atlas-administration-api')
+    console.log('meow', to);
+
+  console.log('partially Active', partiallyActive, active);
   // If contentSite, that means we are coming from the UnifiedSideNav and not the old SideNav
   if (contentSite) {
     // For an external links, inside the unified toc
@@ -169,11 +176,12 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
-    if (project === contentSite) {
+    if (project === contentSite && !anchor) {
       // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
-
+      if (to === '/docs/atlas/tutorial/manage-organizations/#require-ip-access-list-for-the-atlas-administration-api')
+        console.log('meow 2', to);
       return (
         <GatsbyLink
           className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
@@ -191,7 +199,7 @@ const Link = ({
 
     // On the Unified SideNav but linking to a different content site
     return (
-      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={to}>
+      <a className={cx(className)} href={to} aria-current={isCurrentPage()}>
         {children}
         {decoration}
       </a>
