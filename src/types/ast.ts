@@ -12,6 +12,7 @@ type ComponentType =
   | 'chapter'
   | 'chapters'
   | 'collapsible'
+  | 'column'
   | 'community-driver'
   | 'composable-tutorial'
   | 'cond'
@@ -36,6 +37,7 @@ type ComponentType =
   | 'literal_block'
   | 'list-table'
   | 'literalinclude'
+  | 'multi-column'
   | 'openapi-changelog'
   | 'procedure'
   | 'ref_role'
@@ -68,6 +70,7 @@ type DirectiveName =
   | 'chapter'
   | 'chapters'
   | 'collapsible'
+  | 'column'
   | 'community-driver'
   | 'composable-tutorials'
   | 'container'
@@ -135,6 +138,7 @@ type NodeType =
   | 'listItem'
   | 'literal'
   | 'method-selector'
+  | 'multi-column'
   | 'only'
   | 'paragraph'
   | 'reference'
@@ -310,6 +314,12 @@ interface ButtonNode extends Directive<ButtonOptions> {
   options: ButtonOptions;
 }
 
+type ColumnOptions = {
+  title: string;
+};
+interface ColumnNode extends Directive<ColumnOptions> {
+  options: ColumnOptions;
+}
 interface ContainerNode extends Directive {
   name: 'container';
   argument: TextNode[];
@@ -938,6 +948,7 @@ export type {
   CodeNode,
   CollapsibleNode,
   CollapsibleOptions,
+  ColumnNode,
   CommunityDriverPill,
   ContentsNode,
   ComponentType,
