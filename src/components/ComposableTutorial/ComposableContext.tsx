@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 const ComposableContext = createContext<{
   currentSelections: Record<string, string>;
@@ -10,10 +10,6 @@ const ComposableContext = createContext<{
 
 export const ComposableContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentSelections, setCurrentSelections] = useState<Record<string, string>>({});
-
-  useEffect(() => {
-    console.log('currentSelections changed', currentSelections);
-  }, [currentSelections]);
 
   return (
     <ComposableContext.Provider value={{ currentSelections, setCurrentSelections }}>
