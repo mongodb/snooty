@@ -97,16 +97,21 @@ const createOption = (branch: BranchData) => {
   const UIlabel = getUILabel(branch);
   const slug = getBranchSlug(branch);
   return (
-    <Option key={slug} value={branch.gitBranchName}>
+    <Option key={slug} value={branch.urlSlug}>
       {UIlabel}
     </Option>
   );
 };
 
-const VersionDropdown = () => {
+type VersionDropdownProps = {
+  contentSite?: string | null;
+};
+
+const VersionDropdown = ({ contentSite = null }: VersionDropdownProps) => {
   const { parserBranch } = useSiteMetadata();
-  const { project, eol } = useSnootyMetadata();
+  let { project, eol } = useSnootyMetadata();
   const { availableVersions, availableGroups, onVersionSelect, showEol, activeVersions } = useContext(VersionContext);
+  project = contentSite ? contentSite : project;
   let branches = availableVersions[project];
   let groups = availableGroups[project];
 

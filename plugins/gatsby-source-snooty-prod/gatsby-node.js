@@ -481,10 +481,18 @@ exports.createSchemaCustomization = ({ actions }) => {
       versionSelectorLabel: String
     }
 
+    type Group implements Node @dontInfer {
+      id: String
+      groupLabel: String!
+      includedBranches: [String!]!
+      sharedSlugPrefix: String
+    }
+
     type Docset implements Node @dontInfer {
       displayName: String
       prefix: EnvKeys
       project: String
+      groups: [Group]
       branches: [Branch]
       hasEolVersions: Boolean
       url: EnvKeys
