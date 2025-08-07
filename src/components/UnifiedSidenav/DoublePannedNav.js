@@ -94,6 +94,7 @@ export const DoublePannedNav = ({
               key={staticTocItem.newUrl + staticTocItem.label}
               isStatic={true}
               setCurrentL1={setCurrentL1}
+              setCurrentL2s={setCurrentL2s}
               setShowDriverBackBtn={setShowDriverBackBtn}
               isAccordion={false}
             />

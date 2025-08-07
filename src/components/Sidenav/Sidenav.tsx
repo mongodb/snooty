@@ -312,7 +312,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }:
                 </SideNavItem>
               </>
             )}
-            {showVersions && <VersionDropdown eol={eol} />}
+            {showVersions && <VersionDropdown />}
             {!ia && navContent}
 
             {isDocsLanding && (

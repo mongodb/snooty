@@ -82,6 +82,7 @@ export function UnifiedTocNavItem({
             items={items}
             contentSite={contentSite}
             setCurrentL1={setCurrentL1}
+            setCurrentL2s={setCurrentL2s}
             setShowDriverBackBtn={setShowDriverBackBtn}
             isAccordion={isAccordion}
           />
@@ -273,6 +274,7 @@ export function StaticNavItem({
   contentSite,
   versionDropdown,
   setCurrentL1,
+  setCurrentL2s,
   isAccordion,
   setShowDriverBackBtn,
 }) {
@@ -288,6 +290,7 @@ export function StaticNavItem({
       to={newUrl}
       onClick={() => {
         setCurrentL1({ items, newUrl, versionDropdown, label });
+        setCurrentL2s({ items, newUrl, versionDropdown, label });
         setShowDriverBackBtn(false);
       }}
       className={cx(l1ItemStyling({ isActive, isAccordion }))}
