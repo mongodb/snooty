@@ -53,8 +53,9 @@ const findBranchByGit = (gitBranchName: string, branches?: BranchData[]) => {
   if (!branches || !branches.length) {
     return;
   }
-  const foundSlug = branches.find((b) => b.urlSlug === gitBranchName);
-  return foundSlug ? foundSlug : branches.find((b) => b.gitBranchName === gitBranchName);
+  return branches.find(
+    (b) => b.urlSlug === gitBranchName || b.gitBranchName === gitBranchName || b?.urlAliases?.includes(gitBranchName)
+  );
 };
 
 // version state reducer helper fn
