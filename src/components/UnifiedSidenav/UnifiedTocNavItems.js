@@ -34,17 +34,11 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
-function removeAnchor(url) {
-  const parts = url.split('#');
-  if (parts.length > 1) console.log('parts', parts);
-  return parts[0];
-}
-
 // This checks what sidenav should load based on the active Tab
 export const isActiveTocNode = (currentUrl, slug, children) => {
   if (currentUrl === undefined) return false;
 
-  if (isCurrentPage(currentUrl, removeAnchor(slug))) return true;
+  if (isCurrentPage(currentUrl, slug)) return true;
   if (children) {
     return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.newUrl, b.items), false);
   }
@@ -54,7 +48,7 @@ export const isActiveTocNode = (currentUrl, slug, children) => {
 function isSelectedTab(url, slug, pathPrefix) {
   // // Hijacking the isSelectedTab for unified toc in dev and preview builds
   // if (isUnifiedTocActive(url, pathPrefix)) return true;
-  return isSelectedTocNode(removeAnchor(url), slug);
+  return isSelectedTocNode(url, slug);
 }
 
 export function UnifiedTocNavItem({
@@ -75,7 +69,6 @@ export function UnifiedTocNavItem({
   newUrl,
   level,
 }) {
-  const isActive = isSelectedTab(newUrl, slug);
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
   // Unless in Mobile doing Accordion view
   if (isStatic) {
@@ -167,7 +160,7 @@ export function UnifiedTocNavItem({
         contentSite={contentSite}
         to={newUrl}
         onClick={handleClick}
-        className={cx(l2ItemStyling({ level, isAccordion, isActive }))}
+        className={cx(l2ItemStyling({ level, isAccordion }))}
       >
         {label}
       </SideNavItem>
@@ -187,7 +180,7 @@ export function UnifiedTocNavItem({
         setCurrentL2s={setCurrentL2s}
         slug={slug}
         contentSite={contentSite}
-        className={cx(l2ItemStyling({ level, isAccordion, isActive }))}
+        className={cx(l2ItemStyling({ level, isAccordion }))}
       />
     );
   }
@@ -199,7 +192,7 @@ export function UnifiedTocNavItem({
       as={Link}
       contentSite={contentSite}
       to={newUrl}
-      className={cx(l2ItemStyling({ level, isAccordion, isActive }))}
+      className={cx(l2ItemStyling({ level, isAccordion }))}
     >
       {label}
     </SideNavItem>
@@ -300,7 +293,7 @@ export function StaticNavItem({
         setCurrentL2s({ items, newUrl, versionDropdown, label });
         setShowDriverBackBtn(false);
       }}
-      className={cx(l1ItemStyling({ isActive, isAccordion }))}
+      className={cx(l1ItemStyling({ isAccordion }))}
     >
       {label}
     </SideNavItem>

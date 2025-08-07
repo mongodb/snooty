@@ -17,6 +17,7 @@ import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { isBrowser } from '../../utils/is-browser';
+import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { isActiveTocNode } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
@@ -161,13 +162,15 @@ export function UnifiedSidenav({ slug }) {
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
   slug = tempSlug?.startsWith('docs/')
     ? tempSlug
     : tempSlug === '/'
     ? pathPrefix + tempSlug
     : `${pathPrefix}/${tempSlug}/`;
+
+  slug = assertTrailingSlash(slug) + hash;
 
   const tree = useMemo(() => {
     return updateURLs({
@@ -179,6 +182,7 @@ export function UnifiedSidenav({ slug }) {
   }, [unifiedTocTree, activeVersions, availableVersions, project]);
 
   const [isDriver, currentL2List] = findPageParent(tree, slug);
+  console.log('meow', slug, isDriver, currentL2List);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
 
   const [currentL1, setCurrentL1] = useState(() => {
@@ -204,6 +208,15 @@ export function UnifiedSidenav({ slug }) {
   useEffect(() => {
     setHideMobile(true);
   }, [pathname, setHideMobile]);
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(removeTrailingSlash(hash));
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [hash]);
 
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
