@@ -138,22 +138,24 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
-          {isUnifiedToc ? (
-            <UnifiedSidenav slug={slug} />
-          ) : sidenav && !isInPresentationMode ? (
+          {sidenav && !isInPresentationMode ? (
             <ToastProvider portalClassName={cx(toastPortalStyling)}>
               <OfflineDownloadProvider>
-                <Sidenav
-                  chapters={chapters}
-                  guides={guides}
-                  page={page?.ast}
-                  pageTitle={pageTitle}
-                  repoBranches={repoBranches}
-                  slug={slug}
-                  toctree={toctree}
-                  eol={eol}
-                  template={template}
-                />
+                {isUnifiedToc ? (
+                  <UnifiedSidenav slug={slug} />
+                ) : (
+                  <Sidenav
+                    chapters={chapters}
+                    guides={guides}
+                    page={page?.ast}
+                    pageTitle={pageTitle}
+                    repoBranches={repoBranches}
+                    slug={slug}
+                    toctree={toctree}
+                    eol={eol}
+                    template={template}
+                  />
+                )}
               </OfflineDownloadProvider>
             </ToastProvider>
           ) : (
