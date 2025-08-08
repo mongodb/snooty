@@ -174,7 +174,7 @@ const Link = ({
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
       return (
         <GatsbyLink
-          className={cx(className)}
+          className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
           activeClassName={activeClassName}
           partiallyActive={partiallyActive}
           to={editedTo}
@@ -189,7 +189,7 @@ const Link = ({
 
     // On the Unified SideNav but linking to a different content site
     return (
-      <a className={cx(className)} href={to}>
+      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={to}>
         {children}
         {decoration}
       </a>
