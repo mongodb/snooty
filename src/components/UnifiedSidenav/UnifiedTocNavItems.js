@@ -100,7 +100,7 @@ export function UnifiedTocNavItem({
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
             ))}
-          {newUrl === currentL2s?.newUrl && <Border />}
+          {items && newUrl === currentL2s?.newUrl && <Border />}
         </>
       );
     }
