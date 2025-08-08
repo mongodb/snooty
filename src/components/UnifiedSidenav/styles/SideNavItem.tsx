@@ -11,7 +11,7 @@ export const sideNavItemBasePadding = css`
   }
 `;
 
-export const l1ItemStyling = ({ isAccordion }: { isAccordion: boolean }) => css`
+export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; isAccordion: boolean }) => css`
   ${sideNavItemBasePadding}
   padding-left: ${theme.size.medium};
   padding-right: ${theme.size.medium};
@@ -22,32 +22,34 @@ export const l1ItemStyling = ({ isAccordion }: { isAccordion: boolean }) => css`
   line-height: 16px;
   text-transform: uppercase;
 
-  ${isAccordion
-    ? css`
-        /* Hides the left tab on Active Selection */
-        &[aria-current='page'] {
-          background-color: unset !important;
-          color: unset;
-          font-weight: 600 !important;
-          :hover {
-            background-color: var(--sidenav-hover-bg-color);
-          }
-        }
+  ${isActive &&
+  css`
+    font-weight: 600 !important;
 
-        ::before {
-          display: none;
-        }
-      `
-    : css`
-        &[aria-current='page'] {
+    ${isAccordion
+      ? css`
+          /* Hides the left tab on Active Selection */
+          &[aria-current='page'] {
+            background-color: unset;
+            color: unset;
+            :hover {
+              background-color: var(--sidenav-hover-bg-color);
+            }
+          }
+
+          ::before {
+            display: none;
+          }
+        `
+      : css`
           color: var(--sidenav-active-before-color) !important;
           background-color: var(--sidenav-active-bg-color);
-        }
 
-        ::before {
-          color: var(--sidenav-active-before-color) !important;
-        }
-      `}
+          ::before {
+            color: var(--sidenav-active-before-color) !important;
+          }
+        `}
+  `}
 `;
 
 export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) => css`
@@ -89,10 +91,6 @@ export const l2ItemStyling = ({ level, isAccordion }: { level: number; isAccordi
         &[aria-current='page'] {
           color: var(--sidenav-active-before-color) !important;
           background-color: var(--sidenav-active-bg-color);
-
-          &:hover {
-            background-color: var(--sidenav-active-bg-color);
-          }
         }
       `
     : css`
@@ -100,10 +98,6 @@ export const l2ItemStyling = ({ level, isAccordion }: { level: number; isAccordi
           font-weight: 400;
           color: var(--font-color-active) !important;
           background-color: var(--sidenav-active-bg-color);
-
-          &:hover {
-            background-color: var(--sidenav-active-bg-color);
-          }
         }
 
         ::before {

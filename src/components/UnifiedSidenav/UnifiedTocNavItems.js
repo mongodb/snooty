@@ -70,6 +70,7 @@ export function UnifiedTocNavItem({
 }) {
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
   // Unless in Mobile doing Accordion view
+
   if (isStatic) {
     if (isAccordion) {
       return (
@@ -292,7 +293,7 @@ export function StaticNavItem({
         setCurrentL2s({ items, newUrl, versionDropdown, label });
         setShowDriverBackBtn(false);
       }}
-      className={cx(l1ItemStyling({ isAccordion }))}
+      className={cx(l1ItemStyling({ isAccordion, isActive }))}
     >
       {label}
     </SideNavItem>
