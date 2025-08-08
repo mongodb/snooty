@@ -98,7 +98,6 @@ const lgLinkStyling = css`
 export type LinkProps = {
   children: ReactNode;
   to?: string;
-  active?: boolean;
   activeClassName?: string;
   className?: string;
   partiallyActive?: boolean;
@@ -115,7 +114,6 @@ export type LinkProps = {
 const Link = ({
   children,
   to,
-  active,
   activeClassName,
   className,
   partiallyActive,
@@ -176,7 +174,7 @@ const Link = ({
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
       return (
         <GatsbyLink
-          className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
+          className={cx(className)}
           activeClassName={activeClassName}
           partiallyActive={partiallyActive}
           to={editedTo}

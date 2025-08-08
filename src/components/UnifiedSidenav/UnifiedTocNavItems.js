@@ -37,7 +37,6 @@ const caretStyle = LeafyCSS`
 // This checks what sidenav should load based on the active Tab
 export const isActiveTocNode = (currentUrl, slug, children) => {
   if (currentUrl === undefined) return false;
-
   if (isCurrentPage(currentUrl, slug)) return true;
   if (children) {
     return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.newUrl, b.items), false);
@@ -238,7 +237,7 @@ function CollapsibleNavItem({
         contentSite={contentSite}
         to={newUrl ? newUrl : null}
         active={isActive}
-        className={cx(l2ItemStyling({ level, isAccordion, isActive }), overwriteLinkStyle)}
+        className={cx(l2ItemStyling({ level, isAccordion }), overwriteLinkStyle)}
         onClick={handleClick}
         hideExternalIcon={true}
       >

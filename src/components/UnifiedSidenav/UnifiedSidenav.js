@@ -171,7 +171,6 @@ export function UnifiedSidenav({ slug }) {
     : tempSlug === '/'
     ? pathPrefix + tempSlug
     : `${pathPrefix}/${tempSlug}/`;
-
   slug = assertTrailingSlash(slug) + hash;
 
   const tree = useMemo(() => {
@@ -184,7 +183,6 @@ export function UnifiedSidenav({ slug }) {
   }, [unifiedTocTree, activeVersions, availableVersions, project]);
 
   const [isDriver, currentL2List] = findPageParent(tree, slug);
-  console.log('meow', slug, isDriver, currentL2List);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
 
   const [currentL1, setCurrentL1] = useState(() => {
