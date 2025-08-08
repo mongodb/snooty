@@ -293,7 +293,7 @@ export function StaticNavItem({
         setCurrentL2s({ items, newUrl, versionDropdown, label });
         setShowDriverBackBtn(false);
       }}
-      className={cx(l1ItemStyling({ isAccordion, isActive }))}
+      className={cx(l1ItemStyling({ isActive, isAccordion }))}
     >
       {label}
     </SideNavItem>
