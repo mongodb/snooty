@@ -7,6 +7,7 @@ command = ". ./build.sh $REPO_NAME $PARSER_VERSION"
 
 [build.environment]
 ORG_NAME = "mongodb"
-REPO_NAME = "landing"
+REPO_NAME = "docs-mongodb-internal"
+SITE_NAME = "landing"
 BRANCH_NAME = "main"
 PARSER_VERSION = "v0.20.6"
