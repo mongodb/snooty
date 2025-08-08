@@ -141,6 +141,7 @@ const Link = ({
   ) : (
     ''
   );
+
   // If contentSite, that means we are coming from the UnifiedSideNav and not the old SideNav
   if (contentSite) {
     // For an external links, inside the unified toc
@@ -172,6 +173,7 @@ const Link = ({
       // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
+
       return (
         <GatsbyLink
           className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
