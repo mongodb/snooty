@@ -147,7 +147,7 @@ const Link = ({
     // For an external links, inside the unified toc
     if (!isRelativeUrl(to)) {
       const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
-      const isMDBLink = strippedUrl.includes('mongodb.com'); // For an symlinks
+      const isMDBLink = strippedUrl.includes('mongodb.com/docs'); // For an symlinks
 
       return (
         <LGLink
