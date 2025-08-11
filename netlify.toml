@@ -6,7 +6,8 @@ publish = "public"
 command = ". ./build.sh $REPO_NAME $PARSER_VERSION"
 
 [build.environment]
-ORG_NAME = "mongodb"
-REPO_NAME = "docs-commandline-tools"
-BRANCH_NAME = "master"
+ORG_NAME = "10gen"
+REPO_NAME = "docs"
+BRANCH_NAME = "unified-toc-mvp"
+SITE_NAME = "docs"
 PARSER_VERSION = "v0.20.6"

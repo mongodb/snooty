@@ -76,6 +76,8 @@ export const l2ItemStyling = ({ level, isAccordion }: { level: number; isAccordi
   ${sideNavItemBasePadding}
   line-height: 20px;
   font-size: ${theme.fontSize.small};
+  text-transform: none !important;
+
   ${isAccordion
     ? css`
         padding-left: calc(50px + ${(level - 1) * 25}px);
