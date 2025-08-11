@@ -55,6 +55,16 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
           }
         `}
   `}
+
+  ::before {
+    color: ${palette.green.dark1} !important;
+  }
+
+  .dark-theme & {
+    ::before {
+      color: ${palette.green.base} !important;
+    }
+  }
 `;
 
 export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) => css`
