@@ -10,13 +10,17 @@ const MultiColumn = ({ nodeData }: { nodeData: ParentNode }) => {
     <div
       className={cx(css`
         display: flex;
-        justify-content: space-between;
         gap: ${theme.size.xxlarge};
         margin-top: 60px;
         margin-bottom: 40px;
 
-        @media ${theme.screenSize.upTo2XLarge} {
+        @media ${theme.screenSize.upToLarge} {
           flex-direction: column;
+          gap: ${theme.size.xlarge};
+        }
+
+        @media ${theme.screenSize.upToSmall} {
+          gap: 40px;
         }
       `)}
     >

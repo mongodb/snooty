@@ -18,9 +18,9 @@ const Column = ({ nodeData: { children, options } }: { nodeData: ColumnNode }) =
 
           li {
             &::before {
-              content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.25" stroke="%2300ED64" stroke-width="1.5"/></svg>');
+              content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.25" stroke="%2300ED64" stroke-width="1.9"/></svg>');
               position: absolute;
-              left: 8px;
+              left: -10px;
               transform: translateY(20%);
             }
           }
@@ -31,14 +31,14 @@ const Column = ({ nodeData: { children, options } }: { nodeData: ColumnNode }) =
         <H3
           className={cx(css`
             color: #fff;
-            margin-bottom: 27px;
+            margin-bottom: 37px;
           `)}
         >
           {options.title}
         </H3>
       )}
       {children.map((child, i) => (
-        <ComponentFactory nodeData={child} key={i} />
+        <ComponentFactory nodeData={child} key={i} removeMargin={true} />
       ))}
     </div>
   );
