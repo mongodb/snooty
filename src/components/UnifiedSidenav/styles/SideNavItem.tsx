@@ -1,4 +1,5 @@
 import { css } from '@leafygreen-ui/emotion';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 
 export const sideNavItemBasePadding = css`
@@ -29,27 +30,41 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
     ${isAccordion
       ? css`
           /* Hides the left tab on Active Selection */
-          &[aria-current='page'] {
-            background-color: unset;
-            color: unset;
-            :hover {
-              background-color: var(--sidenav-hover-bg-color);
-            }
-          }
+          background-color: unset !important;
+          color: unset;
 
           ::before {
             display: none;
           }
         `
       : css`
-          color: var(--sidenav-active-before-color) !important;
-          background-color: var(--sidenav-active-bg-color);
+          color: ${palette.green.dark1} !important;
+          background-color: ${palette.green.light3};
 
-          ::before {
-            color: var(--sidenav-active-before-color) !important;
+          &:hover {
+            background-color: ${palette.green.light3} !important;
+          }
+
+          .dark-theme & {
+            color: ${palette.green.base} !important;
+            background-color: ${palette.green.dark3};
+
+            &:hover {
+              background-color: ${palette.green.dark3} !important;
+            }
           }
         `}
   `}
+
+  ::before {
+    color: ${palette.green.dark1} !important;
+  }
+
+  .dark-theme & {
+    ::before {
+      color: ${palette.green.base} !important;
+    }
+  }
 `;
 
 export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) => css`
