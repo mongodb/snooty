@@ -108,7 +108,7 @@ const Landing = ({ children }: BaseTemplateProps & { children: ReactNode }) => {
           main h1:first-of-type {
             color: ${palette.white};
             grid-column: 2/-1;
-            margin-top: ${size.medium};
+            margin-top: 44px;
             font-size: 48px;
             line-height: 62px;
             margin-bottom: 23px;
@@ -116,7 +116,6 @@ const Landing = ({ children }: BaseTemplateProps & { children: ReactNode }) => {
             @media ${screenSize.upToMedium} {
               font-size: 32px;
               line-height: 40px;
-              margin-top: ${size.medium};
             }
           }
           ${

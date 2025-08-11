@@ -32,6 +32,7 @@ const Column = ({ nodeData: { children, options } }: { nodeData: ColumnNode }) =
           className={cx(css`
             color: #fff;
             margin-bottom: 37px;
+            margin-top: -5px;
           `)}
         >
           {options.title}
