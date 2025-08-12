@@ -20,17 +20,6 @@ const mainStyling = css`
     font-size: inherit;
   }
 
-  label {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  // for dark mode initial load
-  > label {
-    color: var(--font-color-primary);
-  }
-
   // overwriting lg style to apply to offline docs
   button {
     margin-top: 3px;
@@ -70,6 +59,9 @@ const selectStyling = css`
     margin-bottom: ${theme.size.tiny};
     text-transform: uppercase;
     color: var(--gray-dark1);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   > button {
     margin-top: 0;

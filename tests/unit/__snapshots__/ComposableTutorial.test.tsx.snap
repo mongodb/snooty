@@ -17,7 +17,6 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   justify-items: space-between;
   border-bottom: 1px solid #E8EDEB;
   padding-bottom: 24px;
-  padding-top: 8px;
   z-index: 2;
 }
 
@@ -43,16 +42,6 @@ exports[`Composable Tutorial component prioritizes query params over local stora
 .emotion-1 label,
 .emotion-1 button {
   font-size: inherit;
-}
-
-.emotion-1 label {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.emotion-1>label {
-  color: var(--font-color-primary);
 }
 
 .emotion-1 button {
@@ -91,6 +80,9 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   margin-bottom: 4px;
   text-transform: uppercase;
   color: var(--gray-dark1);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .emotion-2>button {
