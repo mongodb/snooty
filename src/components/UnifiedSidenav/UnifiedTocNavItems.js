@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
@@ -214,17 +214,21 @@ function CollapsibleNavItem({
   const [isOpen, setIsOpen] = useState(isActiveCollapsible);
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
   const isActive = isSelectedTab(newUrl, slug);
+  const openedByCaret = useRef(false);
 
   const onCaretClick = (event) => {
     event.preventDefault();
-    setIsOpen(!isOpen);
+    event.stopPropagation();
+    openedByCaret.current = !isOpen;
+    setIsOpen((open) => !open);
   };
 
   const handleClick = () => {
-    // Allows the collapsed item if the caret was selected first before
-    if (!(newUrl !== `/${slug}` && isOpen)) {
-      setIsOpen(!isOpen);
+    if (isOpen && openedByCaret.current) {
+      openedByCaret.current = false; // Was opened by caret, keep it open and reset
+      return;
     }
+    setIsOpen((open) => !open);
   };
 
   useEffect(() => {
