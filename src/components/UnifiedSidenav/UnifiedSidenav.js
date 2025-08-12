@@ -17,6 +17,7 @@ import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { isBrowser } from '../../utils/is-browser';
+import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { isActiveTocNode } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
@@ -89,7 +90,10 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }
     // Replace version variable with the true current version
     if (item?.url?.includes(':version')) {
       const version = (versionsData[currentProject] || []).find(
-        (version) => version.gitBranchName === activeVersions[currentProject]
+        (version) =>
+          version.gitBranchName === activeVersions[currentProject] ||
+          version.urlSlug === activeVersions[currentProject] ||
+          version?.urlAliases?.includes(activeVersions[currentProject])
       );
       // If no version use first version.urlSlug in the list, or if no version loads, set as current
       const defaultVersion = versionsData[currentProject]?.[0]?.urlSlug ?? 'current';
@@ -160,13 +164,14 @@ export function UnifiedSidenav({ slug }) {
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const { bannerContent } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, !!bannerContent);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
   slug = tempSlug?.startsWith('docs/')
     ? tempSlug
     : tempSlug === '/'
     ? pathPrefix + tempSlug
     : `${pathPrefix}/${tempSlug}/`;
+  slug = assertTrailingSlash(slug) + hash;
 
   const tree = useMemo(() => {
     return updateURLs({
@@ -199,15 +204,19 @@ export function UnifiedSidenav({ slug }) {
     setCurrentL2s(updatedL2s);
   }, [tree]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Changes if L1 is selected/changed, but doesnt change on inital load
-  useEffect(() => {
-    if (!showDriverBackBtn) setCurrentL2s(currentL1);
-  }, [currentL1, showDriverBackBtn, setCurrentL1]);
-
   // close navigation panel on mobile screen, but leaves open if they click on a twisty
   useEffect(() => {
     setHideMobile(true);
   }, [pathname, setHideMobile]);
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(removeTrailingSlash(hash));
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [hash]);
 
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
@@ -82,6 +82,7 @@ export function UnifiedTocNavItem({
             items={items}
             contentSite={contentSite}
             setCurrentL1={setCurrentL1}
+            setCurrentL2s={setCurrentL2s}
             setShowDriverBackBtn={setShowDriverBackBtn}
             isAccordion={isAccordion}
           />
@@ -99,7 +100,7 @@ export function UnifiedTocNavItem({
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
             ))}
-          {newUrl === currentL2s?.newUrl && <Border />}
+          {items && newUrl === currentL2s?.newUrl && <Border />}
         </>
       );
     }
@@ -213,17 +214,21 @@ function CollapsibleNavItem({
   const [isOpen, setIsOpen] = useState(isActiveCollapsible);
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
   const isActive = isSelectedTab(newUrl, slug);
+  const openedByCaret = useRef(false);
 
   const onCaretClick = (event) => {
     event.preventDefault();
-    setIsOpen(!isOpen);
+    event.stopPropagation();
+    openedByCaret.current = !isOpen;
+    setIsOpen((open) => !open);
   };
 
   const handleClick = () => {
-    // Allows the collapsed item if the caret was selected first before
-    if (!(newUrl !== `/${slug}` && isOpen)) {
-      setIsOpen(!isOpen);
+    if (isOpen && openedByCaret.current) {
+      openedByCaret.current = false; // Was opened by caret, keep it open and reset
+      return;
     }
+    setIsOpen((open) => !open);
   };
 
   useEffect(() => {
@@ -273,6 +278,7 @@ export function StaticNavItem({
   contentSite,
   versionDropdown,
   setCurrentL1,
+  setCurrentL2s,
   isAccordion,
   setShowDriverBackBtn,
 }) {
@@ -288,6 +294,7 @@ export function StaticNavItem({
       to={newUrl}
       onClick={() => {
         setCurrentL1({ items, newUrl, versionDropdown, label });
+        setCurrentL2s({ items, newUrl, versionDropdown, label });
         setShowDriverBackBtn(false);
       }}
       className={cx(l1ItemStyling({ isActive, isAccordion }))}

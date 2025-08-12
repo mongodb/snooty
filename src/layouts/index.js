@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { ToastProvider } from '@leafygreen-ui/toast';
+import { useLocation } from '@gatsbyjs/reach-router';
 import ActionBar from '../components/ActionBar/ActionBar';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
@@ -18,6 +19,7 @@ import { getAllLocaleCssStrings } from '../utils/locale';
 import { OfflineDownloadProvider } from '../components/OfflineDownloadModal/DownloadContext';
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
 import { getFeatureFlags } from '../utils/feature-flags';
+import { removeTrailingSlash } from '../utils/remove-trailing-slash';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -107,12 +109,22 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
   const { chapters, guides, slugToTitle, toctree, eol, project } = useSnootyMetadata();
   const { isUnifiedToc } = getFeatureFlags();
   const remoteMetadata = useRemoteMetadata();
+  const { hash } = useLocation();
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
 
   const pageTitle = React.useMemo(
     () => page?.ast?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug],
     [slug] // eslint-disable-line react-hooks/exhaustive-deps
   );
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(removeTrailingSlash(hash));
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -126,22 +138,24 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
       >
         <GlobalGrid isInPresentationMode={isInPresentationMode}>
           {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
-          {isUnifiedToc ? (
-            <UnifiedSidenav slug={slug} />
-          ) : sidenav && !isInPresentationMode ? (
+          {sidenav && !isInPresentationMode ? (
             <ToastProvider portalClassName={cx(toastPortalStyling)}>
               <OfflineDownloadProvider>
-                <Sidenav
-                  chapters={chapters}
-                  guides={guides}
-                  page={page?.ast}
-                  pageTitle={pageTitle}
-                  repoBranches={repoBranches}
-                  slug={slug}
-                  toctree={toctree}
-                  eol={eol}
-                  template={template}
-                />
+                {isUnifiedToc ? (
+                  <UnifiedSidenav slug={slug} />
+                ) : (
+                  <Sidenav
+                    chapters={chapters}
+                    guides={guides}
+                    page={page?.ast}
+                    pageTitle={pageTitle}
+                    repoBranches={repoBranches}
+                    slug={slug}
+                    toctree={toctree}
+                    eol={eol}
+                    template={template}
+                  />
+                )}
               </OfflineDownloadProvider>
             </ToastProvider>
           ) : (
