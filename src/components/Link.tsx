@@ -6,6 +6,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 // @ts-ignore
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
+import Icon from '@leafygreen-ui/icon';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
@@ -44,6 +45,15 @@ const THEME_STYLES: LinkThemeStyles = {
 export const sharedDarkModeOverwriteStyles = `
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
+`;
+
+const symLinkStyling = css`
+  display: inline;
+  svg {
+    transform: rotate(-45deg);
+    margin-left: 8px;
+    margin-bottom: -5px;
+  }
 `;
 
 /**
@@ -85,7 +95,7 @@ const lgLinkStyling = css`
   ${sharedDarkModeOverwriteStyles}
   svg {
     margin-left: 8px;
-    margin-bottom: -6px;
+    margin-bottom: -10px;
     color: ${palette.gray.base};
   }
 
@@ -96,7 +106,7 @@ const lgLinkStyling = css`
 `;
 
 export type LinkProps = {
-  children: ReactNode;
+  children?: ReactNode;
   to?: string;
   activeClassName?: string;
   className?: string;
@@ -148,6 +158,22 @@ const Link = ({
     if (!isRelativeUrl(to)) {
       const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
       const isMDBLink = strippedUrl.includes('mongodb.com/docs'); // For an symlinks
+
+      if (isMDBLink) {
+        return (
+          <LGLink
+            className={joinClassNames(symLinkStyling, className)}
+            href={to}
+            hideExternalIcon={true}
+            target={'_self'}
+            {...anchorProps}
+          >
+            {children}
+            {decoration}
+            <Icon glyph={'ArrowRight'} fill={palette.gray.base} />
+          </LGLink>
+        );
+      }
 
       return (
         <LGLink
@@ -223,14 +249,14 @@ const Link = ({
   const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
   const isMDBLink = strippedUrl.includes('mongodb.com');
   const showExtIcon = showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
-  const target = !showExtIcon ? '_self' : undefined;
+  const target = !showExtIcon || !openInNewTab ? '_self' : 'blank';
 
   return (
     <LGLink
       className={joinClassNames(lgLinkStyling, className)}
       href={to}
       hideExternalIcon={!showExtIcon}
-      target={openInNewTab ? '_blank' : target}
+      target={target}
       onClick={onClick}
       {...anchorProps}
     >
