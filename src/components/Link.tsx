@@ -127,7 +127,7 @@ const Link = ({
 }: LinkProps) => {
   const { pathPrefix, project } = useSiteMetadata();
   if (!to) to = '';
-  const anchor = to.startsWith('#');
+  const anchor = to.includes('#');
 
   const anchorProps = validateHTMAttributes('anchor', other);
   const { theme: siteTheme } = useDarkMode();
@@ -147,7 +147,7 @@ const Link = ({
     // For an external links, inside the unified toc
     if (!isRelativeUrl(to)) {
       const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
-      const isMDBLink = strippedUrl.includes('mongodb.com'); // For an symlinks
+      const isMDBLink = strippedUrl.includes('mongodb.com/docs'); // For an symlinks
 
       return (
         <LGLink
@@ -176,7 +176,7 @@ const Link = ({
 
       return (
         <GatsbyLink
-          className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)}
+          className={cx(className)}
           activeClassName={activeClassName}
           partiallyActive={partiallyActive}
           to={editedTo}
@@ -191,7 +191,7 @@ const Link = ({
 
     // On the Unified SideNav but linking to a different content site
     return (
-      <a className={cx(gatsbyLinkStyling(THEME_STYLES[siteTheme]), className)} href={to}>
+      <a className={cx(className)} href={to}>
         {children}
         {decoration}
       </a>

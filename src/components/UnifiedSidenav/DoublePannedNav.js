@@ -80,7 +80,11 @@ export const DoublePannedNav = ({
   const { isTabletOrMobile } = useScreenSize();
 
   return (
-    <SideNav widthOverride={currentL1 ? 426 : 161} className={cx(sideNavStyle)} aria-label="Side navigation Panel">
+    <SideNav
+      widthOverride={currentL2s?.items ? 426 : 161}
+      className={cx(sideNavStyle)}
+      aria-label="Side navigation Panel"
+    >
       <div className={cx(NavTopContainer(isTabletOrMobile))}>
         <ArtificialPadding />
         <DocsHomeButton />
@@ -101,7 +105,7 @@ export const DoublePannedNav = ({
           ))}
         </div>
         {currentL1?.versionDropdown && <UnifiedVersionDropdown />}
-        {currentL2s && (
+        {currentL2s?.items && (
           <div className={cx(rightPane)}>
             {showDriverBackBtn && (
               <BackLink
