@@ -10,9 +10,13 @@ const Column = ({ nodeData: { children, options } }: { nodeData: ColumnNode }) =
       className={cx(css`
         flex: 1;
 
+        .intro-code-block {
+          margin-top: 0;
+        }
+
         ul {
           list-style: none;
-          padding-left: 24px;
+          padding-left: 30px;
           margin: 0;
           position: relative;
 
@@ -20,8 +24,8 @@ const Column = ({ nodeData: { children, options } }: { nodeData: ColumnNode }) =
             &::before {
               content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.25" stroke="%2300ED64" stroke-width="1.9"/></svg>');
               position: absolute;
-              left: -10px;
-              transform: translateY(20%);
+              left: -1px;
+              transform: translateY(30%);
             }
           }
         }
@@ -39,7 +43,7 @@ const Column = ({ nodeData: { children, options } }: { nodeData: ColumnNode }) =
         </H3>
       )}
       {children.map((child, i) => (
-        <ComponentFactory nodeData={child} key={i} removeMargin={true} />
+        <ComponentFactory nodeData={child} key={i} />
       ))}
     </div>
   );

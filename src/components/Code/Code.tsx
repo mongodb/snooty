@@ -18,10 +18,8 @@ import { CodeNode } from '../../types/ast';
 import { baseCodeStyle, borderCodeStyle, lgStyles } from './styles/codeStyle';
 import { CodeContext, LanguageOption } from './code-context';
 
-const codeContainerStyle = (removeMargin: boolean) => css`
+const codeContainerStyle = css`
   ${baseCodeStyle}
-
-  ${removeMargin && `margin-top: 0px;`}
 
   pre {
     background-color: ${palette.gray.light3};
@@ -68,10 +66,8 @@ const getDriverImage = (driver: string, driverIconMap: DriverMap) => {
 
 const Code = ({
   nodeData: { caption, copyable, emphasize_lines: emphasizeLines, lang, linenos, value, source, lineno_start },
-  removeMargin,
 }: {
   nodeData: CodeNode;
-  removeMargin: boolean;
 }) => {
   const { setActiveTab } = useContext(TabContext);
   const { languageOptions, codeBlockLanguage } = useContext(CodeContext);
@@ -169,9 +165,9 @@ const Code = ({
         />
       )}
       <div
-        className={`${isOfflineDocsBuild ? OFFLINE_CONTAINER_CLASSNAME : ''} ${codeContainerStyle(
-          removeMargin
-        )} ${captionAndWhitespaceStyle}`}
+        className={`${
+          isOfflineDocsBuild ? OFFLINE_CONTAINER_CLASSNAME : ''
+        } ${codeContainerStyle} ${captionAndWhitespaceStyle} intro-code-block`}
       >
         {captionSpecified && (
           <div>

@@ -5,7 +5,6 @@ import ComponentFactory from '../ComponentFactory';
 import { theme } from '../../theme/docsTheme';
 
 const MultiColumn = ({ nodeData }: { nodeData: ParentNode }) => {
-  console.log('nodeData', nodeData);
   return (
     <div
       className={cx(css`
