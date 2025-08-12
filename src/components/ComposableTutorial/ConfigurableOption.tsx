@@ -13,21 +13,11 @@ const mainStyling = css`
   font-size: ${theme.fontSize.small};
   overflow: hidden;
   z-index: ${theme.zIndexes.actionBar};
+  max-width: 200px;
 
   label,
   button {
     font-size: inherit;
-  }
-
-  label {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  // for dark mode initial load
-  > label {
-    color: var(--font-color-primary);
   }
 
   // overwriting lg style to apply to offline docs
@@ -64,6 +54,21 @@ interface ConfigurationOptionProps {
   optionIndex: number;
 }
 
+const selectStyling = css`
+  > label {
+    margin-bottom: ${theme.size.tiny};
+    text-transform: uppercase;
+    color: var(--gray-dark1);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  > button {
+    margin-top: 0;
+    height: 22px;
+  }
+`;
+
 const ConfigurableOption = ({
   option,
   selections,
@@ -92,6 +97,7 @@ const ConfigurableOption = ({
   return (
     <div className={cx('configurable-option', mainStyling)}>
       <Select
+        className={cx(selectStyling)}
         popoverZIndex={theme.zIndexes.actionBar - 1}
         label={option.text}
         allowDeselect={false}

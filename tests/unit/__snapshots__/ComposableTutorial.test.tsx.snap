@@ -17,7 +17,6 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   justify-items: space-between;
   border-bottom: 1px solid #E8EDEB;
   padding-bottom: 24px;
-  padding-top: 8px;
   z-index: 2;
 }
 
@@ -37,21 +36,12 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   font-size: 13px;
   overflow: hidden;
   z-index: 800;
+  max-width: 200px;
 }
 
 .emotion-1 label,
 .emotion-1 button {
   font-size: inherit;
-}
-
-.emotion-1 label {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.emotion-1>label {
-  color: var(--font-color-primary);
 }
 
 .emotion-1 button {
@@ -84,6 +74,20 @@ exports[`Composable Tutorial component prioritizes query params over local stora
 .emotion-2>label+button,
 .emotion-2>p+button {
   margin-top: 3px;
+}
+
+.emotion-2>label {
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  color: var(--gray-dark1);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-2>button {
+  margin-top: 0;
+  height: 22px;
 }
 
 .emotion-3 {
@@ -272,11 +276,15 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   justify-self: left;
 }
 
-.emotion-37>*:first-child:not(script):not(style) {
+.emotion-37 {
   margin-top: 24px;
 }
 
-.emotion-38 {
+.emotion-38>*:first-child:not(script):not(style) {
+  margin-top: 24px;
+}
+
+.emotion-39 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -288,8 +296,8 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   color: var(--font-color-primary);
 }
 
-.emotion-38 strong,
-.emotion-38 b {
+.emotion-39 strong,
+.emotion-39 b {
   font-weight: 700;
 }
 
@@ -544,12 +552,14 @@ exports[`Composable Tutorial component prioritizes query params over local stora
         </div>
       </div>
     </div>
-    <div>
+    <div
+      class="emotion-37"
+    >
       <div
-        class="emotion-37"
+        class="emotion-38"
       >
         <p
-          class="emotion-38"
+          class="emotion-39"
         >
           This content will only be shown when the selections are as follows:
 * Interface - Drivers
