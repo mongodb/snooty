@@ -51,8 +51,19 @@ const symLinkStyling = css`
   display: inline;
   svg {
     transform: rotate(-45deg);
+    margin-left: 7px;
+    margin-bottom: -3px;
+    width: 13px;
+    height: 13px;
+    opacity: 1;
+  }
+`;
+
+const externalNavLinks = css`
+  svg {
     margin-left: 8px;
-    margin-bottom: -5px;
+    margin-bottom: -10px;
+    color: ${palette.gray.base};
   }
 `;
 
@@ -93,11 +104,6 @@ const gatsbyLinkStyling = (linkThemeStyle: LinkThemeStyle) => css`
 const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
-  svg {
-    margin-left: 8px;
-    margin-bottom: -10px;
-    color: ${palette.gray.base};
-  }
 
   > span > code,
   > code {
@@ -177,7 +183,7 @@ const Link = ({
 
       return (
         <LGLink
-          className={joinClassNames(lgLinkStyling, className)}
+          className={joinClassNames(lgLinkStyling, externalNavLinks, className)}
           href={to}
           hideExternalIcon={isMDBLink ? true : false}
           target={isMDBLink ? '_self' : '_blank'}
@@ -249,7 +255,7 @@ const Link = ({
   const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
   const isMDBLink = strippedUrl.includes('mongodb.com');
   const showExtIcon = showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
-  const target = !showExtIcon || !openInNewTab ? '_self' : 'blank';
+  const target = !showExtIcon ? '_self' : undefined;
 
   return (
     <LGLink
