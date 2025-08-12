@@ -269,7 +269,11 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
           return null;
         })}
       </div>
-      <div>
+      <div
+        className={css`
+          margin-top: ${theme.size.medium};
+        `}
+      >
         {children.map((c, i) => {
           return <ComponentFactory nodeData={c} key={i} {...rest} />;
         })}

@@ -13,6 +13,7 @@ const mainStyling = css`
   font-size: ${theme.fontSize.small};
   overflow: hidden;
   z-index: ${theme.zIndexes.actionBar};
+  max-width: 200px;
 
   label,
   button {
@@ -64,6 +65,18 @@ interface ConfigurationOptionProps {
   optionIndex: number;
 }
 
+const selectStyling = css`
+  > label {
+    margin-bottom: ${theme.size.tiny};
+    text-transform: uppercase;
+    color: var(--gray-dark1);
+  }
+  > button {
+    margin-top: 0;
+    height: 22px;
+  }
+`;
+
 const ConfigurableOption = ({
   option,
   selections,
@@ -92,6 +105,7 @@ const ConfigurableOption = ({
   return (
     <div className={cx('configurable-option', mainStyling)}>
       <Select
+        className={cx(selectStyling)}
         popoverZIndex={theme.zIndexes.actionBar - 1}
         label={option.text}
         allowDeselect={false}
