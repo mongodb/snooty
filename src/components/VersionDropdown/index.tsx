@@ -110,10 +110,12 @@ type VersionDropdownProps = {
 const VersionDropdown = ({ contentSite = null }: VersionDropdownProps) => {
   const { parserBranch } = useSiteMetadata();
   let { project, eol } = useSnootyMetadata();
-  const { availableVersions, availableGroups, onVersionSelect, showEol, activeVersions } = useContext(VersionContext);
+  const { availableVersions, availableGroups, onVersionSelect, docsets, activeVersions } = useContext(VersionContext);
   project = contentSite ? contentSite : project;
   let branches = availableVersions[project];
   let groups = availableGroups[project];
+  const docset = docsets.find((docset) => docset.project === project);
+  const showEol = docset?.branches?.some((b) => !b.active) || false;
 
   const onSelectChange = useCallback(
     (value: string) => {
