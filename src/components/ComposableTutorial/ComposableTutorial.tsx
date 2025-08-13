@@ -150,7 +150,6 @@ const containerStyling = css`
   justify-items: space-between;
   border-bottom: 1px solid ${palette.gray.light2};
   padding-bottom: ${theme.size.medium};
-  padding-top: ${theme.size.small};
   z-index: ${theme.zIndexes.content + 1};
 
   ${isOfflineDocsBuild && 'position: relative; top: unset;'}
@@ -269,7 +268,11 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
           return null;
         })}
       </div>
-      <div>
+      <div
+        className={css`
+          margin-top: ${theme.size.medium};
+        `}
+      >
         {children.map((c, i) => {
           return <ComponentFactory nodeData={c} key={i} {...rest} />;
         })}
