@@ -6,6 +6,7 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 // @ts-ignore
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
+import Icon from '@leafygreen-ui/icon';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
@@ -46,6 +47,26 @@ export const sharedDarkModeOverwriteStyles = `
   font-weight: var(--link-font-weight);
 `;
 
+const symLinkStyling = css`
+  display: inline;
+  svg {
+    transform: rotate(-45deg);
+    margin-left: 7px;
+    margin-bottom: -3px;
+    width: 13px;
+    height: 13px;
+    opacity: 1;
+  }
+`;
+
+const externalNavLinks = css`
+  svg {
+    margin-left: 8px;
+    margin-bottom: -10px;
+    color: ${palette.gray.base};
+  }
+`;
+
 /**
  * CSS purloined from LG Link definition (source: https://bit.ly/3JpiPIt)
  * @param {ThemeStyle} linkThemeStyle
@@ -83,11 +104,6 @@ const gatsbyLinkStyling = (linkThemeStyle: LinkThemeStyle) => css`
 const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
-  svg {
-    margin-left: 8px;
-    margin-bottom: -6px;
-    color: ${palette.gray.base};
-  }
 
   > span > code,
   > code {
@@ -96,7 +112,7 @@ const lgLinkStyling = css`
 `;
 
 export type LinkProps = {
-  children: ReactNode;
+  children?: ReactNode;
   to?: string;
   activeClassName?: string;
   className?: string;
@@ -149,9 +165,25 @@ const Link = ({
       const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
       const isMDBLink = strippedUrl.includes('mongodb.com/docs'); // For an symlinks
 
+      if (isMDBLink) {
+        return (
+          <LGLink
+            className={joinClassNames(symLinkStyling, className)}
+            href={to}
+            hideExternalIcon={true}
+            target={'_self'}
+            {...anchorProps}
+          >
+            {children}
+            {decoration}
+            <Icon glyph={'ArrowRight'} fill={palette.gray.base} />
+          </LGLink>
+        );
+      }
+
       return (
         <LGLink
-          className={joinClassNames(lgLinkStyling, className)}
+          className={joinClassNames(lgLinkStyling, externalNavLinks, className)}
           href={to}
           hideExternalIcon={isMDBLink ? true : false}
           target={isMDBLink ? '_self' : '_blank'}
