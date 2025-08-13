@@ -17,7 +17,7 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
   padding-left: ${theme.size.medium};
   padding-right: ${theme.size.medium};
   padding-top: ${theme.size.default};
-  padding-bottom: ${theme.size.default};
+  padding-bottom: ${isActive ? theme.size.small : theme.size.default};
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
