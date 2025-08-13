@@ -262,7 +262,7 @@ const Link = ({
       className={joinClassNames(lgLinkStyling, className)}
       href={to}
       hideExternalIcon={!showExtIcon}
-      target={target}
+      target={openInNewTab ? '_blank' : target}
       onClick={onClick}
       {...anchorProps}
     >
