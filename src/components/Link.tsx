@@ -143,7 +143,7 @@ const Link = ({
 }: LinkProps) => {
   const { pathPrefix, project } = useSiteMetadata();
   if (!to) to = '';
-  const anchor = to.includes('#');
+  const anchor = to.startsWith('#');
 
   const anchorProps = validateHTMAttributes('anchor', other);
   const { theme: siteTheme } = useDarkMode();
