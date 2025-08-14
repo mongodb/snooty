@@ -211,7 +211,6 @@ export type VersionContextType = {
   setActiveVersions: Dispatch<Partial<ActiveVersions>>;
   availableVersions: AvailableVersions;
   availableGroups: AvailableGroups;
-  docsets: DocsetSlice[];
   hasEmbeddedVersionDropdown: boolean;
   showEol: boolean;
   isAssociatedProduct: boolean;
@@ -224,7 +223,6 @@ const VersionContext = createContext<VersionContextType>({
   setActiveVersions: () => {},
   availableVersions: {},
   availableGroups: {},
-  docsets: [],
   hasEmbeddedVersionDropdown: false,
   showEol: false,
   isAssociatedProduct: false,
@@ -392,7 +390,6 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
         onVersionSelect,
         isAssociatedProduct,
         showEol,
-        docsets,
       }}
     >
       {children}

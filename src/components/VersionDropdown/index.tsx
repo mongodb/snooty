@@ -9,6 +9,7 @@ import { useCurrentUrlSlug, getBranchSlug } from '../../hooks/use-current-url-sl
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { BranchData, Group } from '../../types/data';
+import { useAllDocsets } from '../../hooks/useAllDocsets';
 
 export const selectStyling = LeafyCSS`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
@@ -110,7 +111,8 @@ type VersionDropdownProps = {
 const VersionDropdown = ({ contentSite = null }: VersionDropdownProps) => {
   const { parserBranch } = useSiteMetadata();
   let { project, eol } = useSnootyMetadata();
-  const { availableVersions, availableGroups, onVersionSelect, docsets, activeVersions } = useContext(VersionContext);
+  const { availableVersions, availableGroups, onVersionSelect, activeVersions } = useContext(VersionContext);
+  const docsets = useAllDocsets();
   project = contentSite ? contentSite : project;
   let branches = availableVersions[project];
   let groups = availableGroups[project];
