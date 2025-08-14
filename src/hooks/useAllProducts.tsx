@@ -1,27 +1,14 @@
-import { useStaticQuery, graphql } from 'gatsby';
+import { useEffect, useState } from 'react';
 
-type AllProductsQueryResult = {
-  allProduct: {
-    nodes: {
-      title: string;
-      url: string;
-    }[];
-  };
-};
-
-// Return an array of MongoDB products
 export const useAllProducts = () => {
-  const { allProduct } = useStaticQuery<AllProductsQueryResult>(
-    graphql`
-      query AllProducts {
-        allProduct {
-          nodes {
-            title
-            url
-          }
-        }
-      }
-    `
-  );
-  return allProduct.nodes;
+  const [products, setProducts] = useState<{ title: string; url: string }[]>([]);
+
+  useEffect(() => {
+    fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/api/products`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch(console.error);
+  }, []);
+
+  return products;
 };

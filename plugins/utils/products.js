@@ -1,6 +1,10 @@
+const { siteMetadata } = require('../../src/utils/site-metadata');
+
 const createProductNodes = async ({ db, createNode, createNodeId, createContentDigest }) => {
   // Get all MongoDB products for the sidenav
-  const products = await db.fetchAllProducts();
+  const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/api/products?dbName=${siteMetadata.database}`);
+  const products = await res.json();
+
   products.forEach((product) => {
     createNode({
       children: [],
