@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from 'react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
+import { navigate } from 'gatsby';
 import { VersionContext } from '../../context/version-context';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
@@ -121,7 +122,11 @@ const VersionDropdown = ({ contentSite = null }: VersionDropdownProps) => {
 
   const onSelectChange = useCallback(
     (value: string) => {
-      onVersionSelect(project, value);
+      if (value === 'legacy') {
+        navigate(`https://www.mongodb.com/docs/legacy/?site=${project}`);
+      } else {
+        onVersionSelect(project, value);
+      }
     },
     [onVersionSelect, project]
   );
