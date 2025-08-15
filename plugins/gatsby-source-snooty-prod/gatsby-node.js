@@ -210,6 +210,26 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
 
+  const banner = await db.realmInterface.fetchBanner(siteMetadata.snootyEnv === 'development');
+
+  createNode({
+    children: [],
+    id: createNodeId(`banner-content`),
+    internal: {
+      contentDigest: createContentDigest(banner),
+      type: 'BannerContent',
+    },
+    isEnabled: banner.isEnabled,
+    altText: banner.altText,
+    imgPath: banner.imgPath,
+    tabletImgPath: banner.tabletImgPath,
+    mobileImgPath: banner.mobileImgPath,
+    bgColor: banner.bgColor,
+    text: banner.text,
+    pillText: banner.pillText,
+    url: banner.url,
+  });
+
   if (process.env['OFFLINE_DOCS'] !== 'true') {
     const umbrellaProduct = await db.realmInterface.getMetadata(
       {
@@ -497,8 +517,21 @@ exports.createSchemaCustomization = ({ actions }) => {
       hasEolVersions: Boolean
       url: EnvKeys
     }
+    
     type TOC implements Node @dontInfer {
       tocTree: JSON!
+    }
+    
+    type BannerContent implements Node @dontInfer {
+      isEnabled: Boolean!
+      altText: String!
+      imgPath: String
+      tabletImgPath: String
+      mobileImgPath: String
+      bgColor: String
+      text: String
+      pillText: String
+      url: String!
     }
 
   `);
