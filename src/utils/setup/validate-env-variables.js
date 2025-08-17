@@ -74,7 +74,9 @@ const replaceIncorrectEnvVars = (incorrectEnvVars, envVars) => {
           throw err;
         }
 
+
         const dataArray = data.split('\n');
+        console.log(data)
 
         // remove incorrect variables from .env files
         for (const dataEntry in dataArray) {
