@@ -124,15 +124,6 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
         el.scrollIntoView({ behavior: 'smooth' });
       }
     }
-
-    // Scrolls selected sidenav item into view
-    const selectedLink = document.querySelector('a[aria-current="page"]');
-    if (selectedLink) {
-      selectedLink.scrollIntoView({
-        block: 'center',
-        behavior: 'instant',
-      });
-    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

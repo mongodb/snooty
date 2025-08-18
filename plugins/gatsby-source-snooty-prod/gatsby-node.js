@@ -21,6 +21,7 @@ const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
+const { createBannerNode } = require('../utils/banner.js');
 const { generatePathPrefix } = require('../../src/utils/generate-path-prefix.js');
 const assets = new Map();
 const projectComponents = new Set();
@@ -210,25 +211,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
 
-  const banner = await db.realmInterface.fetchBanner(siteMetadata.snootyEnv === 'development');
-
-  createNode({
-    children: [],
-    id: createNodeId(`banner-content`),
-    internal: {
-      contentDigest: createContentDigest(banner),
-      type: 'BannerContent',
-    },
-    isEnabled: banner.isEnabled,
-    altText: banner.altText,
-    imgPath: banner.imgPath,
-    tabletImgPath: banner.tabletImgPath,
-    mobileImgPath: banner.mobileImgPath,
-    bgColor: banner.bgColor,
-    text: banner.text,
-    pillText: banner.pillText,
-    url: banner.url,
-  });
+  await createBannerNode({ db, createNode, createNodeId, createContentDigest });
 
   if (process.env['OFFLINE_DOCS'] !== 'true') {
     const umbrellaProduct = await db.realmInterface.getMetadata(
