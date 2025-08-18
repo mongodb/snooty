@@ -25,7 +25,7 @@ const Column = ({ nodeData: { children, options } }: { nodeData: ColumnNode }) =
               content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.25" stroke="%2300ED64" stroke-width="1.9"/></svg>');
               position: absolute;
               left: -1px;
-              transform: translateY(30%);
+              transform: translateY(10%);
             }
           }
         }
