@@ -36,8 +36,7 @@ const caretStyle = LeafyCSS`
 
 // Anchors are sometimes included in toc.ts files, but we dont want to compare the current slug to the url with an anchor
 export const removeAnchor = (str) => {
-  const hashIndex = str.indexOf('#');
-  return hashIndex !== -1 ? str.substring(0, hashIndex) : str;
+  return str.replace(/#.*/, '');
 };
 // This checks what sidenav should load based on the active Tab
 export const isActiveTocNode = (currentUrl, slug, children) => {
