@@ -17,8 +17,7 @@ import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { isBrowser } from '../../utils/is-browser';
-import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
-import { isActiveTocNode } from './UnifiedTocNavItems';
+import { isActiveTocNode, removeAnchor } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
 
@@ -124,7 +123,10 @@ const findPageParent = (tree, targetUrl) => {
   const dfs = (item) => {
     path.push(item);
 
-    if (assertLeadingSlash(removeTrailingSlash(item.newUrl)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
+    if (
+      assertLeadingSlash(removeTrailingSlash(removeAnchor(item.newUrl))) ===
+      assertLeadingSlash(removeTrailingSlash(targetUrl))
+    ) {
       for (let i = path.length - 1; i >= 0; i--) {
         if (path[i].showSubNav === true) {
           return [true, path[i]];
@@ -170,7 +172,6 @@ export function UnifiedSidenav({ slug }) {
     : tempSlug === '/'
     ? pathPrefix + tempSlug
     : `${pathPrefix}/${tempSlug}/`;
-  slug = assertTrailingSlash(slug) + hash;
 
   const tree = useMemo(() => {
     return updateURLs({
