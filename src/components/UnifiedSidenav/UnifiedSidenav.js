@@ -163,8 +163,8 @@ export function UnifiedSidenav({ slug }) {
   const isValidVersion = useIsValidVersion();
   const { activeVersions, availableVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
-  const { bannerContent } = useContext(HeaderContext);
-  const topValues = useStickyTopValues(false, true, !!bannerContent);
+  const { hasBanner } = useContext(HeaderContext);
+  const topValues = useStickyTopValues(false, true, hasBanner);
   const { pathname, hash } = useLocation();
   const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
   slug = tempSlug?.startsWith('docs/')

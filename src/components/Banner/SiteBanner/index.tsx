@@ -1,21 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { HeaderContext } from '../../Header/header-context';
-import { SNOOTY_REALM_APP_ID } from '../../../build-constants';
-import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { theme } from '../../../theme/docsTheme';
-import { isBrowser } from '../../../utils/is-browser';
-import { normalizePath } from '../../../utils/normalize-path';
-import { fetchBanner } from '../../../utils/realm';
+import { useBanner } from '../../../hooks/useBanner';
 import { SiteBannerContent } from './types';
 import BrandingShape from './BrandingShape';
-
-const getBannerSource = (src?: string) => {
-  if (src == null || src === '') return null;
-  const srcUrl = `${SNOOTY_REALM_APP_ID}.mongodbstitch.com/${src}`;
-  return `https://${normalizePath(srcUrl)}`;
-};
 
 const bannerContainerStyle = css`
   display: block;
@@ -28,7 +17,7 @@ const bannerContainerStyle = css`
 `;
 
 const bannerContentStyle = (bannerContent: Partial<SiteBannerContent>) => css`
-  background-image: url(${getBannerSource(bannerContent.imgPath)});
+  background-image: url(${bannerContent.imgPath});
   background-position: center;
   background-size: cover;
   ${bannerContent.bgColor && `background-color: ${bannerContent.bgColor};`}
@@ -41,12 +30,12 @@ const bannerContentStyle = (bannerContent: Partial<SiteBannerContent>) => css`
   line-height: 20px;
 
   @media ${theme.screenSize.upToMedium} {
-    background-image: url(${getBannerSource(bannerContent.tabletImgPath)});
+    background-image: url(${bannerContent.tabletImgPath});
     justify-content: space-between;
   }
 
   @media ${theme.screenSize.upToSmall} {
-    background-image: url(${getBannerSource(bannerContent.mobileImgPath)});
+    background-image: url(${bannerContent.mobileImgPath});
     font-size: ${theme.fontSize.xsmall};
   }
 `;
@@ -91,27 +80,9 @@ const pillStyle = css`
 `;
 
 const SiteBanner = () => {
-  const { bannerContent, setBannerContent } = useContext(HeaderContext);
-  const { snootyEnv } = useSiteMetadata();
+  const bannerContent = useBanner();
 
-  useEffect(() => {
-    const fetchBannerContent = async () => {
-      try {
-        const res: SiteBannerContent | null = await fetchBanner(snootyEnv);
-        // Guard against missing banner content
-        if (res && res.url && (res.imgPath || res.text)) {
-          setBannerContent(res);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    if (isBrowser) {
-      fetchBannerContent();
-    }
-  }, [setBannerContent, snootyEnv]);
-
-  if (!bannerContent) {
+  if (!(bannerContent && bannerContent.url && (bannerContent.imgPath || bannerContent.text))) {
     return null;
   }
 
