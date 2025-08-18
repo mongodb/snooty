@@ -95,9 +95,8 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }
           version.urlSlug === activeVersions[currentProject] ||
           version?.urlAliases?.includes(activeVersions[currentProject])
       );
-      // If no version use first version.urlSlug in the list, or if no version loads, set as current
-      const defaultVersion = versionsData[currentProject]?.[0]?.urlSlug ?? 'current';
-      const currentVersion = version?.urlSlug ?? defaultVersion;
+      // If no version found in local storage use 'current'
+      const currentVersion = version?.urlSlug ?? 'current';
       newUrl = item.url.replace(/:version/g, currentVersion);
     }
 
