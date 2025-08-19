@@ -17,8 +17,7 @@ import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { isBrowser } from '../../utils/is-browser';
-import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
-import { isActiveTocNode } from './UnifiedTocNavItems';
+import { isActiveTocNode, removeAnchor } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
 
@@ -95,9 +94,8 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }
           version.urlSlug === activeVersions[currentProject] ||
           version?.urlAliases?.includes(activeVersions[currentProject])
       );
-      // If no version use first version.urlSlug in the list, or if no version loads, set as current
-      const defaultVersion = versionsData[currentProject]?.[0]?.urlSlug ?? 'current';
-      const currentVersion = version?.urlSlug ?? defaultVersion;
+      // If no version found in local storage use 'current'
+      const currentVersion = version?.urlSlug ?? 'current';
       newUrl = item.url.replace(/:version/g, currentVersion);
     }
 
@@ -125,7 +123,10 @@ const findPageParent = (tree, targetUrl) => {
   const dfs = (item) => {
     path.push(item);
 
-    if (assertLeadingSlash(removeTrailingSlash(item.newUrl)) === assertLeadingSlash(removeTrailingSlash(targetUrl))) {
+    if (
+      assertLeadingSlash(removeTrailingSlash(removeAnchor(item.newUrl))) ===
+      assertLeadingSlash(removeTrailingSlash(targetUrl))
+    ) {
       for (let i = path.length - 1; i >= 0; i--) {
         if (path[i].showSubNav === true) {
           return [true, path[i]];
@@ -162,8 +163,8 @@ export function UnifiedSidenav({ slug }) {
   const isValidVersion = useIsValidVersion();
   const { activeVersions, availableVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
-  const { bannerContent } = useContext(HeaderContext);
-  const topValues = useStickyTopValues(false, true, !!bannerContent);
+  const { hasBanner } = useContext(HeaderContext);
+  const topValues = useStickyTopValues(false, true, hasBanner);
   const { pathname, hash } = useLocation();
   const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
   slug = tempSlug?.startsWith('docs/')
@@ -171,7 +172,6 @@ export function UnifiedSidenav({ slug }) {
     : tempSlug === '/'
     ? pathPrefix + tempSlug
     : `${pathPrefix}/${tempSlug}/`;
-  slug = assertTrailingSlash(slug) + hash;
 
   const tree = useMemo(() => {
     return updateURLs({

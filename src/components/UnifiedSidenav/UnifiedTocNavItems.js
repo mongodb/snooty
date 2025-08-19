@@ -34,20 +34,22 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
+// Anchors are sometimes included in toc.ts files, but we dont want to compare the current slug to the url with an anchor
+export const removeAnchor = (str) => {
+  return str.replace(/#.*/, '');
+};
 // This checks what sidenav should load based on the active Tab
 export const isActiveTocNode = (currentUrl, slug, children) => {
   if (currentUrl === undefined) return false;
-  if (isCurrentPage(currentUrl, slug)) return true;
+  if (isCurrentPage(currentUrl, removeAnchor(slug))) return true;
   if (children) {
     return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.newUrl, b.items), false);
   }
   return false;
 };
 
-function isSelectedTab(url, slug, pathPrefix) {
-  // // Hijacking the isSelectedTab for unified toc in dev and preview builds
-  // if (isUnifiedTocActive(url, pathPrefix)) return true;
-  return isSelectedTocNode(url, slug);
+function isSelectedTab(url, slug) {
+  return isSelectedTocNode(removeAnchor(url), slug);
 }
 
 export function UnifiedTocNavItem({
