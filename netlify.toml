@@ -2,12 +2,12 @@
 name = "snooty-cache-plugin"
 
 [build]
-publish = "public"
-command = ". ./build.sh $REPO_NAME $PARSER_VERSION"
+publish = "dist"
 
 [build.environment]
 ORG_NAME = "10gen"
-REPO_NAME = "docs-landing"
+REPO_NAME = "cloud-docs"
 BRANCH_NAME = "unified-toc-mvp"
-SITE_NAME = "landing"
+SITE_NAME = "atlas"
 PARSER_VERSION = "v0.20.7"
+
