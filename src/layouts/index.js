@@ -128,6 +128,13 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
     // Scrolls selected sidenav item into view
     const selectedLink = document.querySelector('a[aria-current="page"]');
     if (selectedLink) {
+      const rightPane = document.querySelector('[data-pane="right"]');
+      if (rightPane) {
+        rightPane.scrollTo({
+          top: rightPane.clientHeight,
+          behavior: 'instant',
+        });
+      }
       selectedLink.scrollIntoView({
         block: 'center',
         behavior: 'instant',
