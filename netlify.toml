@@ -2,7 +2,7 @@
 name = "snooty-cache-plugin"
 
 [build]
-publish = "public"
+publish = "dist"
 command = ". ./build.sh $REPO_NAME $PARSER_VERSION"
 
 [build.environment]
