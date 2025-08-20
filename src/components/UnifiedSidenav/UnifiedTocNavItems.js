@@ -174,7 +174,11 @@ export function UnifiedTocNavItem({
 
   // collapsible is for items that have nested links
   if (collapsible) {
-    if (!versions || versions.includes(activeVersions[contentSite])) {
+    if (
+      !versions ||
+      versions['includes']?.includes(activeVersions[contentSite]) ||
+      (versions['excludes'] && !versions['excludes'].includes(activeVersions[contentSite]))
+    ) {
       return (
         <CollapsibleNavItem
           items={items}
@@ -192,7 +196,11 @@ export function UnifiedTocNavItem({
     }
   }
 
-  if (!versions || versions.includes(activeVersions[contentSite])) {
+  if (
+    !versions ||
+    versions['includes']?.includes(activeVersions[contentSite]) ||
+    (versions['excludes'] && !versions['excludes'].includes(activeVersions[contentSite]))
+  ) {
     return (
       <SideNavItem
         active={isSelectedTab(newUrl, slug)}
