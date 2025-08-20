@@ -25,9 +25,9 @@ const HelperComponentEol = () => {
   );
 };
 
-const TestComponent = ({ mockBannerContent, HelperComponent }) => {
+const TestComponent = ({ hasBanner, HelperComponent }) => {
   return (
-    <HeaderContext.Provider value={{ bannerContent: mockBannerContent }}>
+    <HeaderContext.Provider value={{ hasBanner }}>
       <HelperComponent />
     </HeaderContext.Provider>
   );
@@ -35,12 +35,12 @@ const TestComponent = ({ mockBannerContent, HelperComponent }) => {
 
 describe('useStickyTopValues()', () => {
   it('provides the correct top values without any banner content and eol false', () => {
-    const wrapper = render(<TestComponent mockBannerContent={null} HelperComponent={HelperComponent} />);
+    const wrapper = render(<TestComponent hasBanner={false} HelperComponent={HelperComponent} />);
     expect(wrapper.queryAllByText('60px').length).toBeGreaterThan(0);
   });
 
   it('provides the correct top values without any banner content and eol true', () => {
-    const wrapper = render(<TestComponent mockBannerContent={null} HelperComponent={HelperComponentEol} />);
+    const wrapper = render(<TestComponent hasBanner={false} HelperComponent={HelperComponentEol} />);
     expect(wrapper.queryAllByText('0px').length).toBeGreaterThan(0);
   });
 });

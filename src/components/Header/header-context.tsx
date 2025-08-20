@@ -1,36 +1,31 @@
 import React, { createContext, PropsWithChildren, useEffect, useState } from 'react';
 import { theme } from '../../theme/docsTheme';
-import { SiteBannerContent } from '../Banner/SiteBanner/types';
+import { useBanner } from '../../hooks/useBanner';
 
 interface HeaderContextType {
-  bannerContent: SiteBannerContent | null;
-  setBannerContent: Function;
   totalHeaderHeight: string;
+  hasBanner: boolean;
 }
 
 const HeaderContext = createContext<HeaderContextType>({
-  bannerContent: null,
-  setBannerContent: () => {},
   totalHeaderHeight: theme.header.navbarHeight,
+  hasBanner: false,
 });
 
 const HeaderContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [bannerContent, setBannerContent] = useState(null);
+  const bannerContent = useBanner();
+  const hasBanner = bannerContent && bannerContent.url && (bannerContent.imgPath || bannerContent.text) ? true : false;
   const [totalHeaderHeight, setTotalHeaderHeight] = useState(theme.header.navbarHeight);
 
   useEffect(() => {
     const totalHeight = `calc(
-      ${bannerContent != null ? `${theme.header.bannerHeight} +` : ''}
+      ${hasBanner != null ? `${theme.header.bannerHeight} +` : ''}
       ${theme.header.navbarHeight}
     )`;
     setTotalHeaderHeight(totalHeight);
-  }, [bannerContent, setTotalHeaderHeight]);
+  }, [setTotalHeaderHeight, hasBanner]);
 
-  return (
-    <HeaderContext.Provider value={{ bannerContent, setBannerContent, totalHeaderHeight }}>
-      {children}
-    </HeaderContext.Provider>
-  );
+  return <HeaderContext.Provider value={{ hasBanner, totalHeaderHeight }}>{children}</HeaderContext.Provider>;
 };
 
 export { HeaderContext, HeaderContextProvider };
