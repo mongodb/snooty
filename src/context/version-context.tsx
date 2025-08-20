@@ -33,6 +33,13 @@ const STORAGE_KEY = 'activeVersions';
 const LEGACY_GIT_BRANCH = 'legacy';
 
 const getInitBranchName = (branches: BranchData[]) => {
+  // Find 'current' branch as first option
+  const currentBranch = branches.find(
+    (b) => b.urlSlug === 'current' || b.gitBranchName === 'current' || b.urlAliases?.includes('current')
+  );
+  if (currentBranch) {
+    return currentBranch.gitBranchName;
+  }
   const activeBranch = branches.find((b) => b.active);
   if (activeBranch) {
     return activeBranch.gitBranchName;
