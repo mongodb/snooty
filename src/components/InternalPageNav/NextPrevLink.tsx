@@ -68,7 +68,7 @@ export type NextPrevLinkProps = {
   targetSlug: string;
   direction: string;
   icon: string;
-  contentSite: string | null | undefined;
+  contentSite?: string | null | undefined;
   onClick: (direction: string, targetSlug: string) => void;
   className: string;
 };
