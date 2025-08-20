@@ -6,8 +6,8 @@ publish = "dist"
 
 [build.environment]
 ORG_NAME = "10gen"
-REPO_NAME = "cloud-docs"
+REPO_NAME = "docs-cpp"
 BRANCH_NAME = "unified-toc-mvp"
-SITE_NAME = "atlas"
+SITE_NAME = "cpp-driver"
 PARSER_VERSION = "v0.20.7"
 
