@@ -9,6 +9,7 @@ export const useIsValidVersion = () => {
   const { availableVersions } = useContext(VersionContext);
   const { parserBranch } = useSiteMetadata();
   const { project } = useSnootyMetadata();
+
   const branches: BranchData[] = useMemo(() => {
     return availableVersions[project as keyof typeof availableVersions];
   }, [project, availableVersions]);
@@ -17,6 +18,8 @@ export const useIsValidVersion = () => {
   // using useMemo to cache th result if
   // available versions, project and currentSlug didn't change
   const isValid = useMemo(() => {
+    // When an array.length is 1, it is safe to assume it's not a versioned site
+    if (branches?.length === 1) return true;
     // No version in URL, treat as a valid version
     if (!currentUrlSlug) return true;
 

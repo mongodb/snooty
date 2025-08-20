@@ -14,6 +14,7 @@ import Chapters from './Chapters';
 import Code from './Code/Code';
 import CodeIO from './Code/CodeIO';
 import Collapsible from './Collapsible';
+import Column from './MultiColumn/Column';
 import CommunityPillLink from './CommunityPillLink';
 import Cond from './Cond';
 import Container from './Container';
@@ -47,6 +48,7 @@ import Literal from './Literal';
 import LiteralBlock from './LiteralBlock';
 import LiteralInclude from './LiteralInclude';
 import { MethodSelector } from './MethodSelector';
+import MultiColumn from './MultiColumn';
 import OpenAPIChangelog from './OpenAPIChangelog';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
@@ -147,6 +149,7 @@ const getComponent = (() => {
         chapters: Chapters,
         code: Code,
         collapsible: Collapsible,
+        column: Column,
         'community-driver': CommunityPillLink,
         'composable-tutorial': ComposableTutorial,
         'io-code-block': CodeIO,
@@ -169,6 +172,7 @@ const getComponent = (() => {
         glossary: Glossary,
         'guide-next': GuideNext,
         heading: Heading,
+        'multi-column': MultiColumn,
         hlist: HorizontalList,
         image: Image,
         include: Include,
