@@ -172,35 +172,30 @@ export function UnifiedTocNavItem({
     );
   }
 
+  const isVersionAllowed =
+    !versions ||
+    versions.includes?.includes(activeVersions[contentSite]) ||
+    (versions.excludes && !versions.excludes.includes(activeVersions[contentSite]));
+
   // collapsible is for items that have nested links
-  if (collapsible) {
-    if (
-      !versions ||
-      versions['includes']?.includes(activeVersions[contentSite]) ||
-      (versions['excludes'] && !versions['excludes'].includes(activeVersions[contentSite]))
-    ) {
-      return (
-        <CollapsibleNavItem
-          items={items}
-          label={label}
-          newUrl={newUrl}
-          level={level}
-          isAccordion={isAccordion}
-          setShowDriverBackBtn={setShowDriverBackBtn}
-          setCurrentL2s={setCurrentL2s}
-          slug={slug}
-          contentSite={contentSite}
-          className={cx(l2ItemStyling({ level, isAccordion }))}
-        />
-      );
-    }
+  if (collapsible && isVersionAllowed) {
+    return (
+      <CollapsibleNavItem
+        items={items}
+        label={label}
+        newUrl={newUrl}
+        level={level}
+        isAccordion={isAccordion}
+        setShowDriverBackBtn={setShowDriverBackBtn}
+        setCurrentL2s={setCurrentL2s}
+        slug={slug}
+        contentSite={contentSite}
+        className={cx(l2ItemStyling({ level, isAccordion }))}
+      />
+    );
   }
 
-  if (
-    !versions ||
-    versions['includes']?.includes(activeVersions[contentSite]) ||
-    (versions['excludes'] && !versions['excludes'].includes(activeVersions[contentSite]))
-  ) {
+  if (isVersionAllowed) {
     return (
       <SideNavItem
         active={isSelectedTab(newUrl, slug)}
