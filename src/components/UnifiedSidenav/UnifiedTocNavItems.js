@@ -172,10 +172,9 @@ export function UnifiedTocNavItem({
     );
   }
 
-  const isVersionAllowed =
-    !versions ||
-    versions.includes?.includes(activeVersions[contentSite]) ||
-    (versions.excludes && !versions.excludes.includes(activeVersions[contentSite]));
+  const isVersionIncluded = versions?.includes?.includes(activeVersions[contentSite]);
+  const isVersionExcluded = versions?.excludes && versions.excludes?.includes(activeVersions[contentSite]);
+  const isVersionAllowed = !versions || isVersionIncluded || (isVersionExcluded !== undefined && !isVersionExcluded);
 
   // collapsible is for items that have nested links
   if (collapsible && isVersionAllowed) {
