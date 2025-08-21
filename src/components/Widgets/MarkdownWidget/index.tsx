@@ -34,7 +34,7 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
   // i.e. https://www.mongodb.com/docs/mcp-server/get-started/?client=cursor&deployment-type=atlas ->
   // https://www.mongodb.com/docs/mcp-server/get-started/ ->
   // https://www.mongodb.com/docs/mcp-server/get-started.md
-  const markdownPath = href.split('?')[0];
+  const markdownPath = href?.split('?')[0];
   const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
   const markdownAddress = `${urlWithoutTrailingSlash}.md`;
 
