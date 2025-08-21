@@ -115,7 +115,7 @@ exports[`renders correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
-  height: 36px;
+  height: 28px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   z-index: 1;
@@ -236,7 +236,7 @@ exports[`renders correctly 1`] = `
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
-  height: 36px;
+  height: 28px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   margin-left: -1px;

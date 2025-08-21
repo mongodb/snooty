@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { SplitButton } from '@leafygreen-ui/split-button';
+import { Size } from '@leafygreen-ui/button';
 import { Toast, ToastProvider, Variant } from '@leafygreen-ui/toast';
 import { MenuItem } from '@leafygreen-ui/menu';
 import Icon from '@leafygreen-ui/icon';
@@ -70,6 +71,7 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
       <SplitButton
         label="Copy page"
         className={cx(splitButtonStyles, className)}
+        size={Size.Small}
         onClick={() => copyMarkdown()}
         menuItems={[
           <MenuItem
