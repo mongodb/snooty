@@ -30,10 +30,12 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
   const [toastOpen, setToastOpen] = useState<ToastOpen>({ open: false, variant: Variant.Success });
   const { href } = useLocation();
 
-  // Removing the trailing slash, since we expect the URL to be available in markdown
-  // i.e. https://www.mongodb.com/docs/atlas/tutorial/create-atlas-account/ ->
-  // https://www.mongodb.com/docs/atlas/tutorial/create-atlas-account.md
-  const urlWithoutTrailingSlash = removeTrailingSlash(href);
+  // First removing the search and then the trailing slash, since we expect the URL to be available in markdown
+  // i.e. https://www.mongodb.com/docs/mcp-server/get-started/?client=cursor&deployment-type=atlas ->
+  // https://www.mongodb.com/docs/mcp-server/get-started/ ->
+  // https://www.mongodb.com/docs/mcp-server/get-started.md
+  const markdownPath = href.split('?')[0];
+  const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
   const markdownAddress = `${urlWithoutTrailingSlash}.md`;
 
   const copyMarkdown = async () => {
