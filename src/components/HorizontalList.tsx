@@ -55,7 +55,7 @@ const HorizontalList = ({
       <tbody>
         <tr>
           {columnArray.map((col, colIndex) => (
-            <td className={cx(tableDataStyling, 'hlist-cell')} key={colIndex}>
+            <td className={cx(tableDataStyling)} key={colIndex}>
               <ListTag className="simple">
                 {col.map((child, index) => (
                   <ComponentFactory {...rest} key={index} nodeData={child} />
