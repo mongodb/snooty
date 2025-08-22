@@ -105,8 +105,7 @@ const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
 
-  > span > code,
-  > code {
+  > span > code, > code {
     ${sharedDarkModeOverwriteStyles}
   }
 `;

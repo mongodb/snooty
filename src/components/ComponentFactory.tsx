@@ -86,7 +86,7 @@ import RoleRed from './Roles/Red';
 import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
 import SeeAlso from './SeeAlso';
-import { ComposableTutorial } from './ComposableTutorial';
+import { ComposableTutorial, ComposableContent } from './ComposableTutorial';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -133,10 +133,9 @@ const roleMap: Record<RoleName, React.ComponentType<any>> = {
 };
 
 const getComponent = (() => {
-  let componentMap:
-    | Record<Exclude<ComponentType, 'toctree' | 'role' | 'tab' | 'selected-content'>, React.ComponentType<any>>
-    | undefined = undefined;
-  return (key: Exclude<ComponentType, 'toctree' | 'role' | 'tab' | 'selected-content'>) => {
+  let componentMap: Record<Exclude<ComponentType, 'toctree' | 'role' | 'tab'>, React.ComponentType<any>> | undefined =
+    undefined;
+  return (key: Exclude<ComponentType, 'toctree' | 'role' | 'tab'>) => {
     if (componentMap === undefined) {
       componentMap = {
         admonition: Admonition,
@@ -199,6 +198,7 @@ const getComponent = (() => {
         'search-results': SearchResults,
         section: Section,
         seealso: SeeAlso,
+        'selected-content': ComposableContent,
         sharedinclude: Include,
         strong: Strong,
         superscript: Superscript,
