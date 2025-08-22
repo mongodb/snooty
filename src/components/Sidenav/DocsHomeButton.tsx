@@ -33,7 +33,7 @@ const homeLinkStyle = LeafyCSS`
   }
 `;
 
-const containerStyle = (isUnifiedToc, isDesktop) => LeafyCSS`
+const containerStyle = (isUnifiedToc: boolean, isDesktop: boolean) => LeafyCSS`
   display: flex;
   align-items: center;
   ${isUnifiedToc && !isDesktop && 'width : 162px'}

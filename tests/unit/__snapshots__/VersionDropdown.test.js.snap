@@ -77,6 +77,7 @@ exports[`VersionDropdown Component renders correctly 1`] = `
   height: 36px;
   font-weight: 400;
   background-color: #FFFFFF;
+  color: #5C6C75;
   width: 100%;
   font-size: 13px;
 }
@@ -226,7 +227,7 @@ exports[`VersionDropdown Component renders correctly 1`] = `
       id="select-2"
       role="button"
       type="button"
-      value="master"
+      value=""
     >
       <div
         class="emotion-2"
@@ -240,7 +241,7 @@ exports[`VersionDropdown Component renders correctly 1`] = `
           <div
             class="emotion-5"
           >
-            master
+            Select a version
           </div>
         </div>
         <svg

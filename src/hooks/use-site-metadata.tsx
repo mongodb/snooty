@@ -8,7 +8,7 @@ type SiteMetadataQueryResult = {
 };
 
 export const useSiteMetadata = () => {
-  const { site } = useStaticQuery<SiteMetadataQueryResult>(
+  const data = useStaticQuery<SiteMetadataQueryResult>(
     graphql`
       query SiteMetaData {
         site {
@@ -30,5 +30,5 @@ export const useSiteMetadata = () => {
       }
     `
   );
-  return site.siteMetadata;
+  return data?.site.siteMetadata ?? {};
 };
