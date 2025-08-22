@@ -664,7 +664,6 @@ interface ComposableTutorialOption {
 interface ComposableTutorialNode extends Directive {
   type: 'directive';
   name: 'composable-tutorials';
-  children: ComposableNode[];
   composable_options: ComposableTutorialOption[];
 }
 

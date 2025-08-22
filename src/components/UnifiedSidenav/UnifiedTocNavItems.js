@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from '@emotion/styled';
 import Icon from '@leafygreen-ui/icon';
 import { palette } from '@leafygreen-ui/palette';
@@ -9,6 +9,7 @@ import { isSelectedTocNode } from '../../utils/is-selected-toc-node';
 import { isCurrentPage } from '../../utils/is-current-page';
 import { theme } from '../../theme/docsTheme';
 import { isUnifiedTOCInDevMode } from '../../utils/is-unified-toc-dev';
+import { VersionContext } from '../../context/version-context';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 
@@ -67,9 +68,11 @@ export function UnifiedTocNavItem({
   setCurrentL2s,
   setShowDriverBackBtn,
   versionDropdown,
+  versions,
   newUrl,
   level,
 }) {
+  const { activeVersions } = useContext(VersionContext);
   // These are the tab items that we dont need to show in the second pane but need to go through recursively
   // Unless in Mobile doing Accordion view
 
@@ -169,8 +172,12 @@ export function UnifiedTocNavItem({
     );
   }
 
+  const isVersionIncluded = versions?.includes?.includes(activeVersions[contentSite]);
+  const isVersionExcluded = versions?.excludes && versions.excludes?.includes(activeVersions[contentSite]);
+  const isVersionAllowed = !versions || isVersionIncluded || (isVersionExcluded !== undefined && !isVersionExcluded);
+
   // collapsible is for items that have nested links
-  if (collapsible) {
+  if (collapsible && isVersionAllowed) {
     return (
       <CollapsibleNavItem
         items={items}
@@ -187,18 +194,20 @@ export function UnifiedTocNavItem({
     );
   }
 
-  return (
-    <SideNavItem
-      active={isSelectedTab(newUrl, slug)}
-      aria-label={label}
-      as={Link}
-      contentSite={contentSite}
-      to={newUrl}
-      className={cx(l2ItemStyling({ level, isAccordion }))}
-    >
-      {label}
-    </SideNavItem>
-  );
+  if (isVersionAllowed) {
+    return (
+      <SideNavItem
+        active={isSelectedTab(newUrl, slug)}
+        aria-label={label}
+        as={Link}
+        contentSite={contentSite}
+        to={newUrl}
+        className={cx(l2ItemStyling({ level, isAccordion }))}
+      >
+        {label}
+      </SideNavItem>
+    );
+  }
 }
 
 function CollapsibleNavItem({
