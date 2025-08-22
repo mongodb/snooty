@@ -23,6 +23,7 @@ export const rightPane = LeafyCSS`
   overflow-y: auto;
   border-right: 1px solid var(--sidenav-border-bottom-color);
   padding-top: ${theme.size.default};
+  height: 100%;
 
   // Height for the version dropdown
   button {
@@ -106,7 +107,7 @@ export const DoublePannedNav = ({
         </div>
         {currentL1?.versionDropdown && <UnifiedVersionDropdown />}
         {currentL2s?.items && (
-          <div className={cx(rightPane)}>
+          <div className={cx(rightPane)} data-pane="right">
             {showDriverBackBtn && (
               <BackLink
                 className={cx(backLinkStyling)}
