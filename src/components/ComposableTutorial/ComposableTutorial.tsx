@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
-import { parse, ParsedQuery } from 'query-string';
+import { parse, ParsedQuery, stringify } from 'query-string';
 import { navigate } from 'gatsby';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -182,6 +182,30 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
     return res;
   }, [children]);
 
+  const externalQueryParamsString = useMemo(() => {
+    const queryParams = parse(location.search);
+    const composableOptionsKeys = composableOptions.map((option) => option.value);
+    const res: Record<string, string> = {};
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (!composableOptionsKeys.includes(key)) {
+        res[key] = value as string;
+      }
+    }
+    return stringify(res);
+  }, [composableOptions, location.search]);
+
+  const navigatePreservingExternalQueryParams = useCallback(
+    (queryString: string, preserveScroll = false) => {
+      navigate(
+        `${queryString.startsWith('?') ? '' : '?'}${queryString}${
+          queryString.length > 0 ? '&' : ''
+        }${externalQueryParamsString}`,
+        { state: { preserveScroll } }
+      );
+    },
+    [externalQueryParamsString]
+  );
+
   // takes care of query param reading and rerouting
   // if query params fulfill all selections, show the selections
   // otherwise, fallback to getting default values from combination of local storage and node Data
@@ -210,8 +234,15 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
     const localStorage: Record<string, string> = getLocalValue(LOCAL_STORAGE_KEY) ?? {};
     const [defaultParams] = filterValidQueryParams(localStorage, composableOptions, validSelections, true);
     const queryString = new URLSearchParams(defaultParams).toString();
-    navigate(`?${queryString}`);
-  }, [composableOptions, location.pathname, location.search, validSelections, setCurrentSelections]);
+    navigatePreservingExternalQueryParams(`?${queryString}`);
+  }, [
+    composableOptions,
+    location.pathname,
+    location.search,
+    validSelections,
+    setCurrentSelections,
+    navigatePreservingExternalQueryParams,
+  ]);
 
   const onSelect = useCallback(
     (value: string, option: string, index: number) => {
@@ -222,7 +253,7 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
       if (validSelections.has(joinKeyValuesAsString(correctedParams))) {
         setCurrentSelections(correctedParams);
         const queryString = new URLSearchParams(correctedParams).toString();
-        return navigate(`?${queryString}`, { state: { preserveScroll: true } });
+        return navigatePreservingExternalQueryParams(`?${queryString}`, true);
       }
 
       // need to correct preceding options
@@ -240,9 +271,9 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
 
       const [defaultParams] = filterValidQueryParams(persistSelections, composableOptions, validSelections, true);
       const queryString = new URLSearchParams(defaultParams).toString();
-      return navigate(`?${queryString}`);
+      return navigatePreservingExternalQueryParams(`?${queryString}`);
     },
-    [composableOptions, currentSelections, validSelections, setCurrentSelections]
+    [composableOptions, currentSelections, validSelections, setCurrentSelections, navigatePreservingExternalQueryParams]
   );
 
   return (
