@@ -48,6 +48,10 @@ exports[`Composable Tutorial component prioritizes query params over local stora
   margin-top: 3px;
 }
 
+.emotion-1 button {
+  margin-top: 3px;
+}
+
 .dark-theme .emotion-1>button {
   background-color: var(--gray-dark4);
   color: var(--gray-light3);
