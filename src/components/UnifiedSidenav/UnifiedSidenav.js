@@ -12,7 +12,7 @@ import { SidenavContext } from '../Sidenav';
 import useViewport from '../../hooks/useViewport';
 import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { useIsValidVersion } from '../../hooks/use-is-valid-version';
+// import { useIsValidVersion } from '../../hooks/use-is-valid-version';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
@@ -160,7 +160,7 @@ export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
   const { pathPrefix } = useSiteMetadata();
-  const isValidVersion = useIsValidVersion();
+  // const isValidVersion = useIsValidVersion();
   const { activeVersions, availableVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const { hasBanner } = useContext(HeaderContext);
@@ -223,35 +223,35 @@ export function UnifiedSidenav({ slug }) {
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
-  return isValidVersion ? (
-    <div
-      className={cx(SidenavContainer({ ...topValues }))}
-      style={{ '--scroll-y': `${viewport.scrollY}px` }}
-      id={SIDE_NAV_CONTAINER_ID}
-    >
-      <AccordionNavPanel
-        showDriverBackBtn={showDriverBackBtn}
-        setShowDriverBackBtn={setShowDriverBackBtn}
-        slug={slug}
-        currentL2s={currentL2s}
-        setCurrentL1={setCurrentL1}
-        setCurrentL2s={setCurrentL2s}
-        hideMobile={hideMobile}
-        currentL1={currentL1}
-        tree={tree}
-      />
-      <DoublePannedNav
-        showDriverBackBtn={showDriverBackBtn}
-        setShowDriverBackBtn={setShowDriverBackBtn}
-        tree={tree}
-        slug={slug}
-        currentL2s={currentL2s}
-        setCurrentL1={setCurrentL1}
-        setCurrentL2s={setCurrentL2s}
-        currentL1={currentL1}
-      />
-    </div>
-  ) : (
-    <div />
-  );
+  // return isValidVersion ? (
+  <div
+    className={cx(SidenavContainer({ ...topValues }))}
+    style={{ '--scroll-y': `${viewport.scrollY}px` }}
+    id={SIDE_NAV_CONTAINER_ID}
+  >
+    <AccordionNavPanel
+      showDriverBackBtn={showDriverBackBtn}
+      setShowDriverBackBtn={setShowDriverBackBtn}
+      slug={slug}
+      currentL2s={currentL2s}
+      setCurrentL1={setCurrentL1}
+      setCurrentL2s={setCurrentL2s}
+      hideMobile={hideMobile}
+      currentL1={currentL1}
+      tree={tree}
+    />
+    <DoublePannedNav
+      showDriverBackBtn={showDriverBackBtn}
+      setShowDriverBackBtn={setShowDriverBackBtn}
+      tree={tree}
+      slug={slug}
+      currentL2s={currentL2s}
+      setCurrentL1={setCurrentL1}
+      setCurrentL2s={setCurrentL2s}
+      currentL1={currentL1}
+    />
+  </div>;
+  // ) : (
+  //   <div />
+  // );
 }
