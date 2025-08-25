@@ -223,7 +223,6 @@ export function UnifiedSidenav({ slug }) {
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
-  // return isValidVersion ? (
   return (
     <div
       className={cx(SidenavContainer({ ...topValues }))}
@@ -253,7 +252,4 @@ export function UnifiedSidenav({ slug }) {
       />
     </div>
   );
-  // ) : (
-  //   <div />
-  // );
 }
