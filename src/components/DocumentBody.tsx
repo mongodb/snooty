@@ -114,7 +114,7 @@ const DocumentBody = (props: DocumentBodyProps) => {
   const lookup = slug === '/' ? 'index' : slug;
   const pageTitle = getPlaintext(getNestedValue(['slugToTitle', lookup], metadata)) || 'MongoDB Documentation';
 
-  let { Template, useChatbot } = getTemplate(template);
+  const { Template, useChatbot } = getTemplate(template);
 
   const siteTitle = getSiteTitle(metadata);
 
