@@ -198,7 +198,7 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
     (queryString: string, preserveScroll = false) => {
       navigate(
         `${queryString.startsWith('?') ? '' : '?'}${queryString}${
-          queryString.length > 0 ? '&' : ''
+          queryString.length > 0 && externalQueryParamsString.length > 0 ? '&' : ''
         }${externalQueryParamsString}`,
         { state: { preserveScroll } }
       );
