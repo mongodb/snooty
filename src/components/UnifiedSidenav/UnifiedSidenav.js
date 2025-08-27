@@ -155,6 +155,17 @@ const findPageParent = (tree, targetUrl) => {
   return [false, null];
 };
 
+export const removeLanguage = (slug) => {
+  const langArray = ['/zh-cn', '/ja-jp', '/ko-kr', '/pt-br'];
+
+  for (const lang in langArray) {
+    if (slug.includes(lang)) {
+      return slug.replace(lang, '');
+    }
+  }
+  return slug;
+};
+
 export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
@@ -165,22 +176,17 @@ export function UnifiedSidenav({ slug }) {
   const topValues = useStickyTopValues(false, true, hasBanner);
   const { pathname, hash } = useLocation();
   const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
-  slug = tempSlug?.startsWith('docs/')
-    ? tempSlug
-    : tempSlug === '/'
-    ? pathPrefix + tempSlug
-    : `${pathPrefix}/${tempSlug}/`;
-
-  console.log('whats the slug 1', slug, pathPrefix);
-
   const langArray = ['/zh-cn', '/ja-jp', '/ko-kr', '/pt-br'];
-  let newSlug = '';
-  for (const lang in langArray) {
-    if (slug.includes(lang)) {
-      newSlug = slug.replace(lang, '');
-    }
-  }
-  console.log('whats the slug 2', newSlug, slug);
+  const hasLang = langArray.some((lang) => tempSlug?.includes(lang));
+  slug =
+    tempSlug?.startsWith('docs/') || hasLang
+      ? tempSlug
+      : tempSlug === '/'
+      ? pathPrefix + tempSlug
+      : `${pathPrefix}/${tempSlug}/`;
+
+  console.log('whats the slug 1', slug, pathPrefix, removeLanguage(slug));
+
   // /zh-cn /ja-jp /ko-kr /pt-br
   const tree = useMemo(() => {
     return updateURLs({
@@ -196,7 +202,7 @@ export function UnifiedSidenav({ slug }) {
 
   const [currentL1, setCurrentL1] = useState(() => {
     return tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
+      return isActiveTocNode(removeLanguage(slug), staticTocItem.newUrl, staticTocItem.items);
     });
   });
 
@@ -205,7 +211,7 @@ export function UnifiedSidenav({ slug }) {
   useEffect(() => {
     const [isDriver, updatedL2s] = findPageParent(tree, slug);
     const updatedL1s = tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
+      return isActiveTocNode(removeLanguage(slug), staticTocItem.newUrl, staticTocItem.items);
     });
 
     setShowDriverBackBtn(isDriver);

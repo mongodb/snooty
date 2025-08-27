@@ -200,6 +200,8 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
+    console.log(pathPrefix, 'pathPreifx');
+
     if (project === contentSite) {
       // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
