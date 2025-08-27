@@ -157,7 +157,8 @@ const findPageParent = (tree, targetUrl) => {
 
 export const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
 export const removeLanguage = (slug) => {
-  for (const lang in langArray) {
+  for (const lang of langArray) {
+    console.log(slug, lang, slug.includes(lang));
     if (slug.includes(lang)) {
       return removeLeadingSlash(slug.replace(lang, ''));
     }
