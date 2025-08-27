@@ -210,6 +210,7 @@ const Link = ({
       // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(removeLanguage(pathPrefix), ''));
 
+      console.log('edited to', editedTo, to);
       return (
         <GatsbyLink
           className={cx(className)}
@@ -228,10 +229,12 @@ const Link = ({
     // if pathprefix contains langauge replce newurl's path prefix with the pathprefix
     const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
     const hasLang = langArray.some((lang) => pathPrefix?.includes(lang));
+    console.log('to before', to);
     if (hasLang) {
       to = to.replace(removeLanguage(pathPrefix), '');
-      to = pathPrefix + to;
+      to = assertLeadingAndTrailingSlash(pathPrefix + to);
     }
+    console.log('to after', to);
 
     // On the Unified SideNav but linking to a different content site
     return (
