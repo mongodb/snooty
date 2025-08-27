@@ -142,8 +142,6 @@ const Link = ({
   ...other
 }: LinkProps) => {
   const { pathPrefix, project } = useSiteMetadata();
-  const noLangPathPrefix = removeLanguage(pathPrefix);
-  console.log('in link', noLangPathPrefix, pathPrefix);
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
@@ -203,14 +201,11 @@ const Link = ({
     // Ensure trailing slash
     to = to.replace(/\/?(\?|#|$)/, '/$1');
 
-    console.log(pathPrefix, 'pathPreifx');
-
     if (project === contentSite) {
       // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(removeLanguage(pathPrefix), ''));
 
-      console.log('edited to', editedTo, to);
       return (
         <GatsbyLink
           className={cx(className)}
@@ -228,12 +223,10 @@ const Link = ({
 
     // if pathprefix contains language replace newurl's path prefix with the pathprefix
     const hasLang = langArray.some((lang) => pathPrefix?.includes(lang));
-    console.log('to before', to);
     if (hasLang) {
       to = to.replace(removeLanguage(pathPrefix), '');
       to = assertLeadingAndTrailingSlash(pathPrefix + to);
     }
-    console.log('to after', to);
 
     // On the Unified SideNav but linking to a different content site
     return (

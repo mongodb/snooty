@@ -12,6 +12,7 @@ import { isUnifiedTOCInDevMode } from '../../utils/is-unified-toc-dev';
 import { VersionContext } from '../../context/version-context';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
+import { removeLanguage } from './UnifiedSidenav';
 
 export const Border = styled('hr')`
   border: unset;
@@ -50,7 +51,7 @@ export const isActiveTocNode = (currentUrl, slug, children) => {
 };
 
 function isSelectedTab(url, slug) {
-  return isSelectedTocNode(removeAnchor(url), slug);
+  return isSelectedTocNode(removeAnchor(url), removeLanguage(slug));
 }
 
 export function UnifiedTocNavItem({
@@ -221,7 +222,7 @@ function CollapsibleNavItem({
   isAccordion,
   level,
 }) {
-  const isActiveCollapsible = isActiveTocNode(slug, newUrl, items);
+  const isActiveCollapsible = isActiveTocNode(removeLanguage(slug), newUrl, items);
   const [isOpen, setIsOpen] = useState(isActiveCollapsible);
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
   const isActive = isSelectedTab(newUrl, slug);
@@ -293,7 +294,7 @@ export function StaticNavItem({
   isAccordion,
   setShowDriverBackBtn,
 }) {
-  const isActive = isActiveTocNode(slug, newUrl, items);
+  const isActive = isActiveTocNode(removeLanguage(slug), newUrl, items);
 
   return (
     <SideNavItem
