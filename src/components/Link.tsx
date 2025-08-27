@@ -221,7 +221,7 @@ const Link = ({
       );
     }
 
-    // if pathprefix contains langauge replace newurl's path prefix with the pathprefix
+    // if pathprefix contains language replace newurl's path prefix with the pathprefix
     const hasLang = langArray.some((lang) => pathPrefix?.includes(lang));
     if (hasLang) {
       to = to.replace(removeLanguage(pathPrefix), '');
