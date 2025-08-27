@@ -12,6 +12,7 @@ import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
+import { removeLanguage } from './UnifiedSidenav/UnifiedSidenav';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -141,6 +142,8 @@ const Link = ({
   ...other
 }: LinkProps) => {
   const { pathPrefix, project } = useSiteMetadata();
+  const noLangPathPrefix = removeLanguage(pathPrefix);
+  console.log('in link', noLangPathPrefix, pathPrefix);
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
@@ -205,7 +208,7 @@ const Link = ({
     if (project === contentSite) {
       // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
-      const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
+      const editedTo = assertLeadingAndTrailingSlash(to.replace(removeLanguage(pathPrefix), ''));
 
       return (
         <GatsbyLink
@@ -221,6 +224,8 @@ const Link = ({
         </GatsbyLink>
       );
     }
+
+    // if pathprefix contains langauge replce newurl's path prefix with the pathprefix
 
     // On the Unified SideNav but linking to a different content site
     return (

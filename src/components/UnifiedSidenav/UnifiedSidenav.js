@@ -185,7 +185,7 @@ export function UnifiedSidenav({ slug }) {
       ? pathPrefix + tempSlug
       : `${pathPrefix}/${tempSlug}/`;
 
-  console.log('whats the slug 1', slug, pathPrefix, removeLanguage(slug));
+  console.log('whats the slug 1', slug, pathPrefix, hasLang, tempSlug, removeLanguage(slug));
 
   // /zh-cn /ja-jp /ko-kr /pt-br
   const tree = useMemo(() => {
