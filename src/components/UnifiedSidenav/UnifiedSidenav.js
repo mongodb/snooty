@@ -159,7 +159,7 @@ export const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
 export const removeLanguage = (slug) => {
   for (const lang in langArray) {
     if (slug.includes(lang)) {
-      return slug.replace(lang, '');
+      return removeLeadingSlash(slug.replace(lang, ''));
     }
   }
   return removeLeadingSlash(slug);
@@ -174,15 +174,15 @@ export function UnifiedSidenav({ slug }) {
   const { hasBanner } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, hasBanner);
   const { pathname, hash } = useLocation();
-  let tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
-  tempSlug = removeLanguage(tempSlug);
+  const tempSlug1 = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
+  const tempSlug = removeLanguage(tempSlug1);
   slug = tempSlug?.startsWith('docs/')
     ? tempSlug
     : tempSlug === '/'
     ? pathPrefix + tempSlug
     : `${pathPrefix}/${tempSlug}/`;
 
-  console.log('slug is', slug, tempSlug);
+  console.log('slug is', slug, tempSlug, tempSlug1);
 
   const tree = useMemo(() => {
     return updateURLs({
