@@ -171,6 +171,17 @@ export function UnifiedSidenav({ slug }) {
     ? pathPrefix + tempSlug
     : `${pathPrefix}/${tempSlug}/`;
 
+  console.log('whats the slug 1', slug, pathPrefix);
+
+  const langArray = ['/zh-cn', '/ja-jp', '/ko-kr', '/pt-br'];
+  let newSlug = '';
+  for (const lang in langArray) {
+    if (slug.includes(lang)) {
+      newSlug = slug.replace(lang, '');
+    }
+  }
+  console.log('whats the slug 2', newSlug, slug);
+  // /zh-cn /ja-jp /ko-kr /pt-br
   const tree = useMemo(() => {
     return updateURLs({
       tree: unifiedTocTree,
