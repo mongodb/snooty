@@ -155,9 +155,8 @@ const findPageParent = (tree, targetUrl) => {
   return [false, null];
 };
 
+export const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
 export const removeLanguage = (slug) => {
-  const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
-
   for (const lang in langArray) {
     if (slug.includes(lang)) {
       return slug.replace(lang, '');
@@ -176,7 +175,6 @@ export function UnifiedSidenav({ slug }) {
   const topValues = useStickyTopValues(false, true, hasBanner);
   const { pathname, hash } = useLocation();
   const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
-  const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
   const hasLang = langArray.some((lang) => tempSlug?.includes(lang));
   slug =
     tempSlug?.startsWith('docs/') || hasLang
@@ -187,7 +185,6 @@ export function UnifiedSidenav({ slug }) {
 
   console.log('whats the slug 1', slug, pathPrefix, hasLang, tempSlug, removeLanguage(slug));
 
-  // /zh-cn /ja-jp /ko-kr /pt-br
   const tree = useMemo(() => {
     return updateURLs({
       tree: unifiedTocTree,

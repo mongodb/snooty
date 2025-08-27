@@ -12,7 +12,7 @@ import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
-import { removeLanguage } from './UnifiedSidenav/UnifiedSidenav';
+import { removeLanguage, langArray } from './UnifiedSidenav/UnifiedSidenav';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -227,7 +227,6 @@ const Link = ({
     }
 
     // if pathprefix contains langauge replce newurl's path prefix with the pathprefix
-    const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
     const hasLang = langArray.some((lang) => pathPrefix?.includes(lang));
     console.log('to before', to);
     if (hasLang) {
