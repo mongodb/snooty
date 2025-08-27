@@ -185,6 +185,8 @@ export function UnifiedSidenav({ slug }) {
 
   console.log('slug is', slug, tempSlug, tempSlug1);
 
+  console.log('whats the slug 1', slug, pathPrefix, hasLang, tempSlug, removeLanguage(slug));
+
   const tree = useMemo(() => {
     return updateURLs({
       tree: unifiedTocTree,
