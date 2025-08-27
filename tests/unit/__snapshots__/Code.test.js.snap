@@ -327,7 +327,7 @@ exports[`renders correctly 1`] = `
 }
 
 <div
-    class=" emotion-0 emotion-1"
+    class=" emotion-0 emotion-1 intro-code-block"
   >
     <div>
       <div
@@ -723,7 +723,7 @@ exports[`renders correctly when none is passed in as a language 1`] = `
 }
 
 <div
-    class=" emotion-0 emotion-1"
+    class=" emotion-0 emotion-1 intro-code-block"
   >
     <div
       class="emotion-2"

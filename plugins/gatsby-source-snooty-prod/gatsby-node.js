@@ -21,11 +21,25 @@ const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
-
+const { createBannerNode } = require('../utils/banner.js');
+const { generatePathPrefix } = require('../../src/utils/generate-path-prefix.js');
 const assets = new Map();
 const projectComponents = new Set();
 
 let db;
+
+// For fetching the Unified TOC from a JSON path
+const fetchUnifiedToc = async () => {
+  const filePath = process.env.UNIFIED_TOC_JSON_PATH;
+
+  console.log(`Reading unified TOC from JSON file: ${filePath}`);
+
+  // Read and parse the JSON file directly
+  const fileContent = await fs.readFile(filePath, 'utf-8');
+  const unifiedTocData = JSON.parse(fileContent);
+
+  return unifiedTocData;
+};
 
 // Creates node for RemoteMetadata
 // If there are embedded versions (aka if this build is an umbrella product, or there is an umbrella product for this build)
@@ -134,6 +148,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     );
     process.exit(1);
   }
+
   const pageIdPrefix = constructPageIdPrefix(siteMetadata);
   documents.forEach((doc) => {
     const { page_id, ...rest } = doc;
@@ -202,6 +217,8 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
 
+  await createBannerNode({ db, createNode, createNodeId, createContentDigest });
+
   if (process.env['OFFLINE_DOCS'] !== 'true') {
     const umbrellaProduct = await db.realmInterface.getMetadata(
       {
@@ -236,15 +253,37 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     await saveStaticFiles(staticFiles);
   }
 
+  const snootyMetadata = {
+    ...metadataMinusStatic,
+    pathPrefix: generatePathPrefix(siteMetadata),
+  };
   createNode({
     children: [],
     id: createNodeId('metadata'),
     internal: {
-      contentDigest: createContentDigest(metadataMinusStatic),
+      contentDigest: createContentDigest(snootyMetadata),
       type: 'SnootyMetadata',
     },
     parent: null,
-    metadata: metadataMinusStatic,
+    metadata: snootyMetadata,
+  });
+
+  const unifiedToc = await fetchUnifiedToc();
+
+  // Unified TOC is critical, if we don't have one
+  // Stop the build from completing.
+  if (!unifiedToc) {
+    throw Error('Issue fetching the unified TOC');
+  }
+
+  createNode({
+    children: [],
+    id: createNodeId(`toc`),
+    internal: {
+      type: 'TOC',
+      contentDigest: createContentDigest(unifiedToc),
+    },
+    tocTree: unifiedToc,
   });
 };
 
@@ -400,6 +439,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       metadata: JSON
       branch: String
       project: String
+      pathPrefix: String
     }
 
     type PagePath implements Node @dontInfer {
@@ -450,13 +490,38 @@ exports.createSchemaCustomization = ({ actions }) => {
       versionSelectorLabel: String
     }
 
+    type Group implements Node @dontInfer {
+      id: String
+      groupLabel: String!
+      includedBranches: [String!]!
+      sharedSlugPrefix: String
+    }
+
     type Docset implements Node @dontInfer {
       displayName: String
       prefix: EnvKeys
       project: String
+      groups: [Group]
       branches: [Branch]
       hasEolVersions: Boolean
       url: EnvKeys
     }
+    
+    type TOC implements Node @dontInfer {
+      tocTree: JSON!
+    }
+    
+    type BannerContent implements Node @dontInfer {
+      isEnabled: Boolean!
+      altText: String!
+      imgPath: String
+      tabletImgPath: String
+      mobileImgPath: String
+      bgColor: String
+      text: String
+      pillText: String
+      url: String!
+    }
+
   `);
 };

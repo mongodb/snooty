@@ -3,6 +3,7 @@ import { QueriedCrumbs } from '../hooks/use-breadcrumbs';
 import { PageInfo, SelfCrumb } from '../components/Breadcrumbs';
 import { Node } from '../types/ast';
 import { isParentNode, isTextNode } from '../types/ast-utils';
+import { type BreadCrumb } from '../components/UnifiedSidenav/types';
 import { baseUrl, joinUrlAndPath } from './base-url';
 import { assertTrailingSlash } from './assert-trailing-slash';
 import { assertLeadingSlash } from './assert-leading-slash';
@@ -60,6 +61,7 @@ type GetCompleteBreadcrumbDataProps = {
   parentPaths?: Array<{ title: string; path: string }>;
   selfCrumbContent?: SelfCrumb;
   pageInfo?: PageInfo;
+  unifiedTocParents?: BreadCrumb[] | undefined;
 };
 
 export const getCompleteBreadcrumbData = ({
@@ -70,6 +72,7 @@ export const getCompleteBreadcrumbData = ({
   parentPaths,
   selfCrumbContent,
   pageInfo,
+  unifiedTocParents,
 }: GetCompleteBreadcrumbDataProps) => {
   const isLanding = pageInfo?.project === 'landing';
 
@@ -98,17 +101,19 @@ export const getCompleteBreadcrumbData = ({
 
   //get direct parents of the current page from parentPaths
   //add respective url to each direct parent crumb
-  const parents = (parentPaths ?? []).map((crumb) => {
-    const path =
-      pageInfo && !isLanding
-        ? getCompleteUrl(getUrl(pageInfo.urlSlug, pageInfo.project, pageInfo.siteBasePrefix, crumb.path))
-        : assertLeadingSlash(crumb.path);
-    return {
-      ...crumb,
-      title: nodesToString(crumb.title),
-      path: path,
-    };
-  });
+  const parents =
+    unifiedTocParents ??
+    (parentPaths ?? []).map((crumb) => {
+      const path =
+        pageInfo && !isLanding
+          ? getCompleteUrl(getUrl(pageInfo.urlSlug, pageInfo.project, pageInfo.siteBasePrefix, crumb.path))
+          : assertLeadingSlash(crumb.path);
+      return {
+        ...crumb,
+        title: nodesToString(crumb.title),
+        path: path,
+      };
+    });
 
   const selfCrumb = selfCrumbContent
     ? {

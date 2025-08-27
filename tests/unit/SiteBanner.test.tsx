@@ -41,11 +41,8 @@ describe('Banner component', () => {
   it('renders with a banner image', async () => {
     jest.useFakeTimers();
     jest.spyOn(RealmUtil, 'fetchBanner').mockResolvedValueOnce(() => mockBannerContent);
-    const setBannerContent = jest.fn();
     const wrapper = render(
-      <HeaderContext.Provider
-        value={{ bannerContent: mockBannerContent, setBannerContent: setBannerContent, totalHeaderHeight: '' }}
-      >
+      <HeaderContext.Provider value={{ hasBanner: true, totalHeaderHeight: '' }}>
         <SiteBanner />
       </HeaderContext.Provider>
     );
@@ -64,9 +61,8 @@ describe('Banner component', () => {
       url: mockBannerContent.url,
     };
     jest.spyOn(RealmUtil, 'fetchBanner').mockResolvedValueOnce(() => bannerContent);
-    const setBannerContent = jest.fn();
     const wrapper = render(
-      <HeaderContext.Provider value={{ bannerContent, setBannerContent: setBannerContent, totalHeaderHeight: '' }}>
+      <HeaderContext.Provider value={{ hasBanner: true, totalHeaderHeight: '' }}>
         <SiteBanner />
       </HeaderContext.Provider>
     );

@@ -108,15 +108,14 @@ const Landing = ({ children }: BaseTemplateProps & { children: ReactNode }) => {
           main h1:first-of-type {
             color: ${palette.white};
             grid-column: 2/-1;
-            margin-top: ${size.medium};
+            margin-top: 44px;
             font-size: 48px;
             line-height: 62px;
-            margin-bottom: 10px;
+            margin-bottom: 23px;
             align-self: end;
             @media ${screenSize.upToMedium} {
               font-size: 32px;
               line-height: 40px;
-              margin-top: ${size.medium};
             }
           }
           ${
@@ -149,26 +148,11 @@ const Landing = ({ children }: BaseTemplateProps & { children: ReactNode }) => {
             width: 100%;
             object-fit: cover;
             z-index: -1;
-            object-position: 50%;
+            object-position: right;
+            height: 100%;
 
-            @media ${screenSize.upToXSmall} {
-              height: 555px;
-            }
-
-            @media ${screenSize.xSmallAndUp} {
-              height: 430px;
-            }
-
-            @media ${screenSize.smallAndUp} {
-              height: 317px;
-            }
-
-            @media ${screenSize.largeAndUp} {
-              height: 280px;
-            }
-
-            @media ${screenSize.xLargeAndUp} {
-              height: 250px;
+            @media ${screenSize.upTo2XLarge} {
+              object-position: center;
             }
           }
 
@@ -184,10 +168,6 @@ const Landing = ({ children }: BaseTemplateProps & { children: ReactNode }) => {
             }
 
             @media ${screenSize.xLargeAndUp} {
-              grid-column: 2 / -5;
-            }
-
-            @media ${screenSize['3XLargeAndUp']} {
               grid-column: 2 / -4;
             }
           }
