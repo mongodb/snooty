@@ -155,11 +155,11 @@ const findPageParent = (tree, targetUrl) => {
   return [false, null];
 };
 
+export const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
 export const removeLanguage = (slug) => {
-  const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
-  for (const lang of langArray) {
+  for (const lang in langArray) {
     if (slug.includes(lang)) {
-      return removeLeadingSlash(slug.replace(lang, ''));
+      return slug.replace(lang, '');
     }
   }
   return removeLeadingSlash(slug);
@@ -175,11 +175,13 @@ export function UnifiedSidenav({ slug }) {
   const topValues = useStickyTopValues(false, true, hasBanner);
   const { pathname, hash } = useLocation();
   const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
-  slug = removeLanguage(tempSlug).startsWith('docs/')
-    ? tempSlug
-    : tempSlug === '/'
-    ? pathPrefix + tempSlug
-    : `${pathPrefix}/${tempSlug}/`;
+  const hasLang = langArray.some((lang) => tempSlug?.includes(lang));
+  slug =
+    tempSlug?.startsWith('docs/') || hasLang
+      ? tempSlug
+      : tempSlug === '/'
+      ? pathPrefix + tempSlug
+      : `${pathPrefix}/${tempSlug}/`;
 
   const tree = useMemo(() => {
     return updateURLs({
@@ -190,7 +192,7 @@ export function UnifiedSidenav({ slug }) {
     });
   }, [unifiedTocTree, activeVersions, availableVersions, project]);
 
-  const [isDriver, currentL2List] = findPageParent(tree, removeLanguage(slug));
+  const [isDriver, currentL2List] = findPageParent(tree, slug);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
 
   const [currentL1, setCurrentL1] = useState(() => {
@@ -202,7 +204,7 @@ export function UnifiedSidenav({ slug }) {
   const [currentL2s, setCurrentL2s] = useState(currentL2List);
 
   useEffect(() => {
-    const [isDriver, updatedL2s] = findPageParent(tree, removeLanguage(slug));
+    const [isDriver, updatedL2s] = findPageParent(tree, slug);
     const updatedL1s = tree.find((staticTocItem) => {
       return isActiveTocNode(removeLanguage(slug), staticTocItem.newUrl, staticTocItem.items);
     });
