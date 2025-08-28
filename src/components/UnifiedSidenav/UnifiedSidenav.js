@@ -156,14 +156,6 @@ const findPageParent = (tree, targetUrl) => {
 };
 
 export const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
-export const removeLanguage = (slug) => {
-  for (const lang in langArray) {
-    if (slug.includes(lang)) {
-      return slug.replace(lang, '');
-    }
-  }
-  return removeLeadingSlash(slug);
-};
 
 export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
@@ -183,7 +175,7 @@ export function UnifiedSidenav({ slug }) {
       ? pathPrefix + tempSlug
       : `${pathPrefix}/${tempSlug}/`;
 
-  console.log('what the slug 2', slug, tempSlug, hasLang, removeLanguage(slug), pathPrefix);
+  console.log('what the slug 2', slug, tempSlug, hasLang, pathPrefix);
   const tree = useMemo(() => {
     return updateURLs({
       tree: unifiedTocTree,
@@ -198,7 +190,7 @@ export function UnifiedSidenav({ slug }) {
 
   const [currentL1, setCurrentL1] = useState(() => {
     return tree.find((staticTocItem) => {
-      return isActiveTocNode(removeLanguage(slug), staticTocItem.newUrl, staticTocItem.items);
+      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
     });
   });
 
@@ -209,7 +201,7 @@ export function UnifiedSidenav({ slug }) {
   useEffect(() => {
     const [isDriver, updatedL2s] = findPageParent(tree, slug);
     const updatedL1s = tree.find((staticTocItem) => {
-      return isActiveTocNode(removeLanguage(slug), staticTocItem.newUrl, staticTocItem.items);
+      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
     });
 
     setShowDriverBackBtn(isDriver);

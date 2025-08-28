@@ -14,7 +14,7 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
 // import { removeTrailingSlash } from '../utils/remove-trailing-slash';
 // import { assertLeadingSlash } from '../utils/assert-leading-slash';
-import { removeLanguage } from './UnifiedSidenav/UnifiedSidenav';
+// import { removeLanguage } from './UnifiedSidenav/UnifiedSidenav';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -206,7 +206,7 @@ const Link = ({
     if (project === contentSite) {
       // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
-      const editedTo = assertLeadingAndTrailingSlash(to.replace(removeLanguage(pathPrefix), ''));
+      const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
       console.log('editTO', editedTo, to);
       return (
         <GatsbyLink
