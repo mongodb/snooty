@@ -205,7 +205,7 @@ const Link = ({
       // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(removeLanguage(pathPrefix), ''));
-      console.log('editedTo,', editedTo, pathPrefix);
+      console.log('editedTo,', to, editedTo, pathPrefix, removeLanguage(pathPrefix));
       return (
         <GatsbyLink
           className={cx(className)}
