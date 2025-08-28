@@ -12,9 +12,7 @@ import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
-import { removeTrailingSlash } from '../utils/remove-trailing-slash';
-import { assertLeadingSlash } from '../utils/assert-leading-slash';
-import { removeLanguage } from './UnifiedSidenav/UnifiedSidenav';
+import { AddLanguge, removeLanguage } from './UnifiedSidenav/UnifiedSidenav';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -223,8 +221,7 @@ const Link = ({
     }
 
     // if pathprefix contains language replace newurl's path prefix with the pathprefix
-    to = to.replace(removeLanguage(pathPrefix), '');
-    to = removeTrailingSlash(pathPrefix) + assertLeadingSlash(to);
+    to = AddLanguge(to, pathPrefix);
 
     // On the Unified SideNav but linking to a different content site
     return (
