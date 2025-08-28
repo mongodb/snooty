@@ -204,7 +204,7 @@ const Link = ({
     if (project === contentSite) {
       // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
-      const editedTo = assertLeadingAndTrailingSlash(to.replace(removeLanguage(pathPrefix), ''));
+      const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
       console.log('editedTo,', to, editedTo, pathPrefix, removeLanguage(pathPrefix));
       return (
         <GatsbyLink
