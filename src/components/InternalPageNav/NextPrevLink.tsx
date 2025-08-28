@@ -68,17 +68,27 @@ export type NextPrevLinkProps = {
   targetSlug: string;
   direction: string;
   icon: string;
+  contentSite?: string | null | undefined;
   onClick: (direction: string, targetSlug: string) => void;
   className: string;
 };
 
-const NextPrevLink = ({ className, icon, direction, pageTitle, targetSlug, title, onClick }: NextPrevLinkProps) => {
+const NextPrevLink = ({
+  className,
+  icon,
+  direction,
+  pageTitle,
+  targetSlug,
+  title,
+  contentSite,
+  onClick,
+}: NextPrevLinkProps) => {
   const isNext = direction?.toLowerCase() === 'next';
   const isPrev = direction?.toLowerCase() === 'back';
 
   return (
     <div className={className} onClick={() => onClick(direction, targetSlug)}>
-      <Link to={targetSlug} {...{ title }}>
+      <Link to={targetSlug} {...{ title }} contentSite={contentSite}>
         <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
           <Button className={cx(baseButtonStyle, navLinkButtonStyle)}>
             <Icon glyph={icon} />

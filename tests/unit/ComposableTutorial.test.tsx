@@ -24,7 +24,8 @@ describe('Composable Tutorial component', () => {
   it('navigates to default selections without local storage or url query params', async () => {
     renderComposable();
     expect(mockedNavigate).toHaveBeenCalledWith(
-      '?interface=driver&language=nodejs&deployment-type=atlas&operator=queryString'
+      '?interface=driver&language=nodejs&deployment-type=atlas&operator=queryString',
+      { state: { preserveScroll: false } }
     );
   });
 
@@ -39,7 +40,8 @@ describe('Composable Tutorial component', () => {
     });
     renderComposable();
     expect(mockedNavigate).toHaveBeenCalledWith(
-      '?deployment-type=self&interface=atlas-admin-api&operator=autocomplete'
+      '?deployment-type=self&interface=atlas-admin-api&operator=autocomplete',
+      { state: { preserveScroll: false } }
     );
   });
 
@@ -81,7 +83,8 @@ describe('Composable Tutorial component', () => {
 
     // removed bad selection of language
     expect(mockedNavigate).toHaveBeenCalledWith(
-      '?deployment-type=self&interface=atlas-admin-api&operator=autocomplete'
+      '?deployment-type=self&interface=atlas-admin-api&operator=autocomplete',
+      { state: { preserveScroll: false } }
     );
   });
 });

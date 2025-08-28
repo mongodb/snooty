@@ -611,7 +611,7 @@ exports[`collapsible component renders all the content in the options and childr
         {"@context":"https://schema.org","@type":"SoftwareSourceCode","codeSampleType":"code snippet","text":"This is code within collapsible content","programmingLanguage":"JavaScript"}
       </script>
       <div
-        class=" emotion-11 emotion-12"
+        class=" emotion-11 emotion-12 intro-code-block"
       >
         <div
           class="emotion-13"

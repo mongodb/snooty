@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from 'react';
 import { cx, css as LeafyCSS } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import { Option, OptionGroup, Select } from '@leafygreen-ui/select';
+import { navigate } from 'gatsby';
 import { VersionContext } from '../../context/version-context';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { theme } from '../../theme/docsTheme';
@@ -9,8 +10,9 @@ import { useCurrentUrlSlug, getBranchSlug } from '../../hooks/use-current-url-sl
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { BranchData, Group } from '../../types/data';
+import { useAllDocsets } from '../../hooks/useAllDocsets';
 
-const selectStyling = LeafyCSS`
+export const selectStyling = LeafyCSS`
   margin: ${theme.size.small} ${theme.size.medium} ${theme.size.small} ${theme.size.medium};
 
   ${'' /* Render version dropdown text in front of the Sidebar text */}
@@ -97,26 +99,34 @@ const createOption = (branch: BranchData) => {
   const UIlabel = getUILabel(branch);
   const slug = getBranchSlug(branch);
   return (
-    <Option key={slug} value={branch.gitBranchName}>
+    <Option key={slug} value={branch.urlSlug}>
       {UIlabel}
     </Option>
   );
 };
 
 type VersionDropdownProps = {
-  eol: boolean;
+  contentSite?: string | null;
 };
 
-const VersionDropdown = ({ eol }: VersionDropdownProps) => {
+const VersionDropdown = ({ contentSite = null }: VersionDropdownProps) => {
   const { parserBranch } = useSiteMetadata();
-  const { project } = useSnootyMetadata();
-  const { availableVersions, availableGroups, onVersionSelect, showEol, activeVersions } = useContext(VersionContext);
+  let { project, eol } = useSnootyMetadata();
+  const { availableVersions, availableGroups, onVersionSelect, activeVersions } = useContext(VersionContext);
+  const docsets = useAllDocsets();
+  project = contentSite ? contentSite : project;
   let branches = availableVersions[project];
   let groups = availableGroups[project];
+  const docset = docsets.find((docset) => docset.project === project);
+  const showEol = docset?.branches?.some((b) => !b.active) || false;
 
   const onSelectChange = useCallback(
     (value: string) => {
-      onVersionSelect(project, value);
+      if (value === 'legacy') {
+        navigate(`https://www.mongodb.com/docs/legacy/?site=${project}`);
+      } else {
+        onVersionSelect(project, value);
+      }
     },
     [onVersionSelect, project]
   );

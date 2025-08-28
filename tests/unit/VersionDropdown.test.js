@@ -7,14 +7,13 @@ import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import { VersionContextProvider } from '../../src/context/version-context';
 import { tick } from '../utils';
-import mockData from './data/VersionDropdown.test.json';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ parserBranch: 'master', snootyEnv: 'development' }),
 }));
 
 jest.mock('../../src/utils/use-snooty-metadata', () => {
-  return () => ({ project: 'node' });
+  return () => ({ project: 'node', eol: false });
 });
 
 jest.mock('@gatsbyjs/reach-router', () => ({
@@ -63,7 +62,7 @@ const fetchDocset = () => {
               active: true,
               aliases: null,
               gitBranchName: 'master',
-              urlSlug: null,
+              urlSlug: 'upcoming',
               urlAliases: null,
               isStableBranch: true,
             },
@@ -73,7 +72,7 @@ const fetchDocset = () => {
               active: true,
               aliases: null,
               gitBranchName: 'v4.11',
-              urlSlug: null,
+              urlSlug: 'v4.11',
               urlAliases: ['v4.11'],
               isStableBranch: true,
             },
@@ -83,7 +82,7 @@ const fetchDocset = () => {
               active: true,
               aliases: null,
               gitBranchName: 'v4.10',
-              urlSlug: null,
+              urlSlug: 'v4.10',
               urlAliases: ['v4.10'],
               isStableBranch: true,
             },
@@ -108,7 +107,7 @@ const docsNodeRepoBranches = {
       active: true,
       aliases: null,
       gitBranchName: 'master',
-      urlSlug: null,
+      urlSlug: 'upcoming',
       urlAliases: null,
       isStableBranch: true,
       id: { $oid: '62e293ce8b1d857926ab4c7d' },
@@ -143,7 +142,7 @@ const queryElementWithin = (versionDropdown, role) => within(versionDropdown).qu
 const mountConsumer = async () => {
   const res = render(
     <VersionContextProvider repoBranches={docsNodeRepoBranches} slug={'/'}>
-      <VersionDropdown eol={mockData.eol} />
+      <VersionDropdown />
     </VersionContextProvider>
   );
   // Wait for any on-mount updates to occur. Prevents warnings about needing to wrap updates in act()
@@ -175,13 +174,13 @@ describe('VersionDropdown', () => {
 
     it('renders the dropdown with the correct version', async () => {
       await mountConsumer();
-      const versionDropdown = screen.queryByRole('button', { name: 'master' });
+      const versionDropdown = screen.queryByRole('button', { value: 'master' });
       expect(versionDropdown).toBeInTheDocument();
     });
 
     it('show version options when user clicks button', async () => {
       await mountConsumer();
-      const versionDropdown = screen.queryByRole('button', { name: 'master' });
+      const versionDropdown = screen.queryByRole('button', { value: 'master' });
       let versionOptionsDropdown = queryElementWithin(versionDropdown, 'listbox');
       expect(versionOptionsDropdown).not.toBeInTheDocument();
 
@@ -196,7 +195,7 @@ describe('VersionDropdown', () => {
     it('calls the navigate function when a user clicks on a version', async () => {
       await mountConsumer();
 
-      const versionDropdown = screen.queryByRole('button', { name: 'master' });
+      const versionDropdown = screen.queryByRole('button', { value: 'master' });
       expect(versionDropdown).toBeInTheDocument();
 
       userEvent.click(versionDropdown);
@@ -224,7 +223,7 @@ describe('VersionDropdown', () => {
 
       await mountConsumer();
 
-      const versionDropdown = screen.queryByRole('button', { name: 'master' });
+      const versionDropdown = screen.queryByRole('button', { value: 'master' });
       expect(versionDropdown).toBeInTheDocument();
 
       userEvent.click(versionDropdown);

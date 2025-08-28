@@ -194,12 +194,12 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }:
   const isDocsLanding = project === 'landing';
   const viewportSize = useViewportSize();
   const { isTabletOrMobile } = useScreenSize();
-  const { bannerContent } = useContext(HeaderContext);
+  const { hasBanner } = useContext(HeaderContext);
   const { setModalOpen } = useOfflineDownloadContext();
   const { pathname } = useLocation();
 
   // CSS top property values for sticky side nav based on header height
-  const topValues = useStickyTopValues(false, true, !!bannerContent);
+  const topValues = useStickyTopValues(false, true, hasBanner);
 
   let showVersions = repoBranches?.branches?.length > 1;
 
@@ -312,7 +312,7 @@ const Sidenav = ({ chapters, guides, page, pageTitle, repoBranches, slug, eol }:
                 </SideNavItem>
               </>
             )}
-            {showVersions && <VersionDropdown eol={eol} />}
+            {showVersions && <VersionDropdown />}
             {!ia && navContent}
 
             {isDocsLanding && (

@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { glyphs } from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../theme/docsTheme';
 import { getPageTitle } from '../../utils/get-page-title';
 import { useActiveMpTutorial } from '../MultiPageTutorials';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { getFeatureFlags } from '../../utils/feature-flags';
+import { useUnifiedToc } from '../../hooks/use-unified-toc';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { VersionContext } from '../../context/version-context';
+import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
+import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { SlugToBreadcrumbLabel, SlugToTitle } from '../../types/data';
 import { ActiveTutorial } from '../MultiPageTutorials/hooks/use-active-mp-tutorial';
+import { TocItem } from '../UnifiedSidenav/types';
+import { BranchData } from '../../types/data';
+import type { ActiveVersions, AvailableVersions } from '../../context/version-context';
 import NextPrevLink from './NextPrevLink';
+
+interface FlatItem {
+  label: string;
+  url: string;
+  contentSite?: string;
+}
 
 const containerStyling = css`
   padding-bottom: 2.5em;
@@ -36,10 +51,20 @@ const nextStyle = css`
   margin-left: auto;
 `;
 
-const getActiveTutorialPage = (activeTutorial: ActiveTutorial, key: 'next' | 'prev', linkTitle: string) => {
+const getActiveTutorialPage = (
+  activeTutorial: ActiveTutorial,
+  key: 'next' | 'prev',
+  linkTitle: string
+): {
+  targetSlug: string | null;
+  pageTitle: string | null;
+  contentSite: string | null;
+  linkTitle: string;
+} => {
   return {
-    targetSlug: activeTutorial[key]?.targetSlug,
-    pageTitle: activeTutorial[key]?.pageTitle ?? '',
+    targetSlug: activeTutorial[key]?.targetSlug ?? null,
+    pageTitle: activeTutorial[key]?.pageTitle ?? null,
+    contentSite: null,
     linkTitle,
   };
 };
@@ -48,11 +73,17 @@ const getTocPage = (
   targetSlug: string | null,
   slugTitleMapping: SlugToTitle | SlugToBreadcrumbLabel,
   linkTitle: string
-) => {
+): {
+  targetSlug: string | null;
+  pageTitle: string | null;
+  contentSite: string | null;
+  linkTitle: string;
+} => {
   return {
     targetSlug,
-    pageTitle: targetSlug ? getPageTitle(targetSlug, slugTitleMapping) ?? '' : '',
+    pageTitle: targetSlug ? String(getPageTitle(targetSlug, slugTitleMapping) ?? '') : '',
     linkTitle,
+    contentSite: null,
   };
 };
 
@@ -84,6 +115,145 @@ const getNext = (
   return getTocPage(nextSlug, slugTitleMapping, 'Next Section');
 };
 
+// Replacing the version in the pathPrefix with `:version` to match toc.json urls
+function replaceVersionInPath(pathPrefix: string, versions?: BranchData[]): string {
+  if (!versions) return pathPrefix;
+
+  const segments = pathPrefix.split('/');
+  const lastSegment = segments[segments.length - 1] || segments[segments.length - 2];
+  const matchesVersion = versions.find(
+    (version) => version.urlSlug === lastSegment || (version.urlAliases && version.urlAliases.includes(lastSegment))
+  );
+
+  if (matchesVersion) {
+    segments[segments.length - 1] = ':version/';
+    if (segments[segments.length - 1] === '') {
+      segments[segments.length - 2] = ':version/'; // If the last was empty due to trailing slash
+      segments.pop();
+    }
+    return segments.join('/');
+  }
+
+  return pathPrefix;
+}
+
+function groupContainsUrl(items: TocItem[], currentUrl: string): boolean {
+  for (const item of items) {
+    if (item.url && removeTrailingSlash(item.url) === removeTrailingSlash(currentUrl)) return true;
+    if (item.items && groupContainsUrl(item.items, currentUrl)) return true;
+  }
+  return false;
+}
+
+function findGroupForUrl(toc: TocItem[], currentUrl: string): TocItem | null {
+  for (const L1Item of toc) {
+    if (!L1Item.items) continue;
+    for (const item of L1Item.items) {
+      if (item.group) {
+        if (groupContainsUrl(item.items || [], currentUrl)) {
+          return item;
+        }
+      }
+    }
+  }
+  return null;
+}
+
+function flattenGroupItems(items: TocItem[], flat: FlatItem[] = []): FlatItem[] {
+  for (const item of items) {
+    if (item.isExternal) {
+      // Skips external links
+      continue;
+    }
+
+    if (item.url) {
+      flat.push({
+        label: item.label,
+        url: item.url,
+        contentSite: item.contentSite,
+      });
+    }
+    if (item.items) {
+      flattenGroupItems(item.items, flat);
+    }
+  }
+  return flat;
+}
+
+// Allows InternalNavLinks to be between different contentSites if needed
+function getTargetSlug(
+  fullUrl: string,
+  contentSite: string | undefined,
+  activeVersions: ActiveVersions,
+  availableVersions: AvailableVersions
+): string {
+  if (!fullUrl.includes(':version') || !contentSite) {
+    return fullUrl;
+  } else {
+    const version = (availableVersions[contentSite] || []).find(
+      (version) => version.gitBranchName === activeVersions[contentSite]
+    );
+    // If no version use first version.urlSlug in the list, or if no version loads, set as current
+    const defaultVersion = availableVersions[contentSite]?.[0].urlSlug ?? 'current';
+    const currentVersion = version?.urlSlug ?? defaultVersion;
+    return fullUrl.replace(/:version/g, currentVersion);
+  }
+}
+
+function getPrevUnified(
+  toc: TocItem[],
+  currentUrl: string,
+  activeVersions: ActiveVersions,
+  availableVersions: AvailableVersions
+): {
+  targetSlug: string | null;
+  pageTitle: string | null;
+  contentSite: string | undefined | null;
+  linkTitle: string;
+} | null {
+  const group = findGroupForUrl(toc, currentUrl);
+  if (!group) return null;
+
+  const flat = flattenGroupItems(group.items || []);
+  const index = flat.findIndex((item) => removeTrailingSlash(item.url) === removeTrailingSlash(currentUrl));
+
+  const node = index > 0 ? flat[index - 1] : null;
+
+  return {
+    targetSlug: node ? getTargetSlug(node.url, node.contentSite, activeVersions, availableVersions) : null,
+    pageTitle: node ? node.label : null,
+    contentSite: node ? node.contentSite : null,
+    linkTitle: 'Previous Section',
+  };
+}
+
+function getNextUnified(
+  toc: TocItem[],
+  currentUrl: string,
+  activeVersions: ActiveVersions,
+  availableVersions: AvailableVersions
+): {
+  targetSlug: string | null;
+  pageTitle: string | null;
+  contentSite: string | undefined | null;
+  linkTitle: string;
+} | null {
+  const group = findGroupForUrl(toc, currentUrl);
+  if (!group) return null;
+
+  const flat = flattenGroupItems(group.items || []);
+  const index = flat.findIndex((item) => removeTrailingSlash(item.url) === removeTrailingSlash(currentUrl));
+
+  const node = index >= 0 && index < flat.length - 1 ? flat[index + 1] : null;
+
+  return {
+    targetSlug: node ? getTargetSlug(node.url, node.contentSite, activeVersions, availableVersions) : null,
+    pageTitle: node ? node.label : null,
+    contentSite: node ? node.contentSite : null,
+    linkTitle: 'Next Section',
+  };
+}
+
 export type InternalPageNavProps = {
   slug: string;
   slugTitleMapping: SlugToTitle | SlugToBreadcrumbLabel;
@@ -91,10 +261,21 @@ export type InternalPageNavProps = {
 };
 
 const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }: InternalPageNavProps) => {
+  const { isUnifiedToc } = getFeatureFlags();
+  const tocTree = useUnifiedToc();
+  const { pathPrefix, project } = useSiteMetadata();
+  const { availableVersions, activeVersions } = useContext(VersionContext);
+  const noVersionPathPrefix = replaceVersionInPath(pathPrefix, availableVersions[project]);
+  const fullSlug = slug === '/' ? noVersionPathPrefix : assertTrailingSlash(noVersionPathPrefix) + slug;
   const activeTutorial = useActiveMpTutorial();
   const slugIndex = toctreeOrder.indexOf(slug);
-  const prevPage = getPrev(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
-  const nextPage = getNext(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
+
+  const prevPage = isUnifiedToc
+    ? getPrevUnified(tocTree, fullSlug, activeVersions, availableVersions)
+    : getPrev(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
+  const nextPage = isUnifiedToc
+    ? getNextUnified(tocTree, fullSlug, activeVersions, availableVersions)
+    : getNext(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
 
   const handleClick = (direction: string, targetSlug: string) => {
     reportAnalytics('InternalPageNavClicked', {
@@ -113,6 +294,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }: InternalPageN
           targetSlug={prevPage.targetSlug}
           pageTitle={prevPage.pageTitle}
           title={prevPage.linkTitle}
+          contentSite={prevPage?.contentSite}
           onClick={handleClick}
         />
       )}
@@ -124,6 +306,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }: InternalPageN
           targetSlug={nextPage.targetSlug}
           pageTitle={nextPage.pageTitle}
           title={nextPage.linkTitle}
+          contentSite={nextPage?.contentSite}
           onClick={handleClick}
         />
       )}
