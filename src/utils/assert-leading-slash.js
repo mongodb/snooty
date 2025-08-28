@@ -1,6 +1,8 @@
 const assertLeadingSlash = (url) => {
-  if (!url) return '/';
-  return '/' + url.replace(/^\/+/, '');
+  if (url && url.match(/^\//)) {
+    return url;
+  }
+  return `/${url}`;
 };
 
 module.exports.assertLeadingSlash = assertLeadingSlash;

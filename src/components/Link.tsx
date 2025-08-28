@@ -12,10 +12,6 @@ import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
-// import { removeTrailingSlash } from '../utils/remove-trailing-slash';
-// import { assertLeadingSlash } from '../utils/assert-leading-slash';
-// import { removeLanguage } from './UnifiedSidenav/UnifiedSidenav';
-
 /*
  * Note: This component is not suitable for internal page navigation:
  * https://www.gatsbyjs.org/docs/gatsby-link/#recommendations-for-programmatic-in-app-navigation
@@ -207,7 +203,7 @@ const Link = ({
       // Get rid of the contenteSite in link for internal links
       // Get rid of the path contentSite in link for internal links
       const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
-      console.log('editTO', editedTo, to);
+
       return (
         <GatsbyLink
           className={cx(className)}
@@ -223,15 +219,6 @@ const Link = ({
       );
     }
 
-    // if pathprefix contains language replace newurl's path prefix with the pathprefix
-    // console.log('to', to);
-    // const hasLang = langArray.some((lang) => pathPrefix?.includes(lang));
-    // if (hasLang) {
-    //   to = to.replace(removeLanguage(pathPrefix), '');
-    //   to = removeTrailingSlash(pathPrefix) + assertLeadingSlash(to);
-    // }
-    // console.log('to after', to);
-    // On the Unified SideNav but linking to a different content site
     return (
       <a className={cx(className)} href={to}>
         {children}

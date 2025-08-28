@@ -175,7 +175,6 @@ export function UnifiedSidenav({ slug }) {
       ? pathPrefix + tempSlug
       : `${pathPrefix}/${tempSlug}/`;
 
-  console.log('what the slug 2', slug, tempSlug, hasLang, pathPrefix);
   const tree = useMemo(() => {
     return updateURLs({
       tree: unifiedTocTree,
@@ -195,8 +194,6 @@ export function UnifiedSidenav({ slug }) {
   });
 
   const [currentL2s, setCurrentL2s] = useState(currentL2List);
-
-  console.log('are these found,', currentL1, currentL2s);
 
   useEffect(() => {
     const [isDriver, updatedL2s] = findPageParent(tree, slug);
