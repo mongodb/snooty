@@ -183,6 +183,7 @@ export function UnifiedSidenav({ slug }) {
       ? pathPrefix + tempSlug
       : `${pathPrefix}/${tempSlug}/`;
 
+  console.log('what the slug 2', slug, tempSlug, hasLang, removeLanguage(slug), pathPrefix);
   const tree = useMemo(() => {
     return updateURLs({
       tree: unifiedTocTree,
