@@ -165,16 +165,6 @@ export const removeLanguage = (slug) => {
   return removeLeadingSlash(slug);
 };
 
-export const AddLanguge = (url, pathPrefix) => {
-  const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
-  for (const lang of langArray) {
-    if (pathPrefix.includes(lang)) {
-      return `/${lang}${url}`;
-    }
-  }
-  return url;
-};
-
 export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
@@ -187,11 +177,9 @@ export function UnifiedSidenav({ slug }) {
   const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
   slug = removeLanguage(tempSlug).startsWith('docs/')
     ? tempSlug
-    : tempSlug === '/' || !tempSlug
+    : tempSlug === '/'
     ? pathPrefix + tempSlug
     : `${pathPrefix}/${tempSlug}/`;
-
-  slug = removeLanguage(slug);
 
   const tree = useMemo(() => {
     return updateURLs({
@@ -202,26 +190,21 @@ export function UnifiedSidenav({ slug }) {
     });
   }, [unifiedTocTree, activeVersions, availableVersions, project]);
 
-  const [isDriver, currentL2List] = findPageParent(tree, slug);
+  const [isDriver, currentL2List] = findPageParent(tree, removeLanguage(slug));
   const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
-
-  console.log('what', slug, pathPrefix, tempSlug, slug);
-  console.log('temp slug', tempSlug, !tempSlug);
 
   const [currentL1, setCurrentL1] = useState(() => {
     return tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
+      return isActiveTocNode(removeLanguage(slug), staticTocItem.newUrl, staticTocItem.items);
     });
   });
 
   const [currentL2s, setCurrentL2s] = useState(currentL2List);
 
-  console.log(currentL1, currentL2s);
-
   useEffect(() => {
-    const [isDriver, updatedL2s] = findPageParent(tree, slug);
+    const [isDriver, updatedL2s] = findPageParent(tree, removeLanguage(slug));
     const updatedL1s = tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
+      return isActiveTocNode(removeLanguage(slug), staticTocItem.newUrl, staticTocItem.items);
     });
 
     setShowDriverBackBtn(isDriver);
