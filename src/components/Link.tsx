@@ -12,6 +12,7 @@ import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
+
 /*
  * Note: This component is not suitable for internal page navigation:
  * https://www.gatsbyjs.org/docs/gatsby-link/#recommendations-for-programmatic-in-app-navigation
@@ -219,6 +220,7 @@ const Link = ({
       );
     }
 
+    // On the Unified SideNav but linking to a different content site
     return (
       <a className={cx(className)} href={to}>
         {children}
