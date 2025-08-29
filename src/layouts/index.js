@@ -20,6 +20,7 @@ import { OfflineDownloadProvider } from '../components/OfflineDownloadModal/Down
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { removeTrailingSlash } from '../utils/remove-trailing-slash';
+import { isBrowser } from '../utils/is-browser';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -118,8 +119,9 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
   );
 
   useEffect(() => {
+    if (!isBrowser) return;
     if (hash) {
-      const el = document.querySelector(removeTrailingSlash(hash));
+      const el = document.querySelector(CSS.escape(removeTrailingSlash(hash)));
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }
