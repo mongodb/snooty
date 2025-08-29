@@ -7,7 +7,7 @@ const createBreadcrumbNodes = async ({ createNode, createNodeId, createContentDi
   let breadcrumbData;
   try {
     const res = await fetch(
-      `${process.env.GATSBY_NEXT_API_BASE_URL}/api/breadcrumbs?dbName=${database}&project=${project}`
+      `${process.env.GATSBY_NEXT_API_BASE_URL}/breadcrumbs?dbName=${database}&project=${project}`
     );
     breadcrumbData = await res.json();
   } catch (e) {
