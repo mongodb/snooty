@@ -4,12 +4,14 @@ import Icon from '@leafygreen-ui/icon';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { MongoDBLogoMark } from '@leafygreen-ui/logo';
-import { Body, Link } from '@leafygreen-ui/typography';
+import { Body } from '@leafygreen-ui/typography';
 import { palette } from '@leafygreen-ui/palette';
 import useViewport from '../../hooks/useViewport';
 import { baseUrl } from '../../utils/base-url';
 import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
+import { getFeatureFlags } from '../../utils/feature-flags';
+import Link from '../Link';
 import { sideNavItemBasePadding } from './styles/sideNavItem';
 import { titleStyle, logoLinkStyling } from './styles/sideNavItem';
 
@@ -31,9 +33,10 @@ const homeLinkStyle = LeafyCSS`
   }
 `;
 
-const containerStyle = LeafyCSS`
+const containerStyle = (isUnifiedToc: boolean, isDesktop: boolean) => LeafyCSS`
   display: flex;
   align-items: center;
+  ${isUnifiedToc && !isDesktop && 'width : 162px'}
 `;
 
 const logoTextStyling = LeafyCSS`
@@ -47,8 +50,9 @@ const logoTextStyling = LeafyCSS`
 
 const DocsHomeButton = () => {
   const viewport = useViewport(false);
-  const { isTabletOrMobile } = useScreenSize();
+  const { isTabletOrMobile, isDesktop } = useScreenSize();
   const { darkMode } = useDarkMode();
+  const { isUnifiedToc } = getFeatureFlags();
 
   const sideNavHome = useMemo(
     () => (
@@ -74,7 +78,7 @@ const DocsHomeButton = () => {
     [darkMode]
   );
   return (
-    <div className={cx(containerStyle)}>
+    <div className={cx(containerStyle(isUnifiedToc, isDesktop))}>
       {!isTabletOrMobile && viewport.scrollY > parseInt(theme.header.navbarHeight, 10) ? homeNav : sideNavHome}
     </div>
   );

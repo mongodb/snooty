@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.20.21",
+  "version": "0.20.24",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -140,6 +140,7 @@
     "html-screen-capture-js": "^1.0.50",
     "https-browserify": "^1.0.0",
     "immer": "^9.0.6",
+    "js-toml": "^1.0.1",
     "json-schema": "^0.4.0",
     "lodash": "^4.6.0",
     "minimist": "^1.2.6",

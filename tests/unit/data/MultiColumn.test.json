@@ -1,0 +1,114 @@
+{
+  "type": "directive",
+  "children": [
+      {
+          "type": "directive",
+          "children": [
+              {
+                  "type": "code",
+                  "lang": "javascript",
+                  "copyable": true,
+                  "emphasize_lines": [],
+                  "value": "{\n   first name: \"Bob\"\n   lastname: \"Smith\"\n   email: \"bob@smith.com\"\n   address: {\n      street: \"100 Main St\"\n      city: \"Anytown\"\n      state: \"MO\"\n      zip: \"11111\"\n   }\n}",
+                  "linenos": false
+              },
+              {
+                  "type": "paragraph",
+                  "children": [
+                      {
+                          "type": "text",
+                          "value": "This is a paragraph between the code blocks."
+                      }
+                  ]
+              },
+              {
+                  "type": "code",
+                  "lang": "javascript",
+                  "copyable": true,
+                  "emphasize_lines": [],
+                  "value": "users.find({ address.zip : \"11111\"})",
+                  "linenos": false
+              }
+          ],
+          "domain": "",
+          "name": "column",
+          "argument": []
+      },
+      {
+          "type": "directive",
+          "children": [
+              {
+                  "type": "list",
+                  "children": [
+                      {
+                          "type": "listItem",
+                          "children": [
+                              {
+                                  "type": "paragraph",
+                                  "children": [
+                                      {
+                                          "type": "text",
+                                          "value": "Strong consistency with ACID transactions."
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "type": "listItem",
+                          "children": [
+                              {
+                                  "type": "paragraph",
+                                  "children": [
+                                      {
+                                          "type": "text",
+                                          "value": "Modern additional built-in query capabilities such as geo search, lexical search, and vector search."
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "type": "listItem",
+                          "children": [
+                              {
+                                  "type": "paragraph",
+                                  "children": [
+                                      {
+                                          "type": "text",
+                                          "value": "Serverless horizontal scaling with geo-aware fault tolerance across all major clouds."
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "type": "listItem",
+                          "children": [
+                              {
+                                  "type": "paragraph",
+                                  "children": [
+                                      {
+                                          "type": "text",
+                                          "value": "Security primitives that allow MongoDB to operate in the most demanding of enterprise environments."
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+                  ],
+                  "enumtype": "unordered"
+              }
+          ],
+          "domain": "",
+          "name": "column",
+          "argument": [],
+          "options": {
+              "title": "MongoDB also offers"
+          }
+      }
+  ],
+  "domain": "",
+  "name": "multi-column",
+  "argument": []
+}

@@ -57,6 +57,7 @@ Snooty's `develop` stage uses the `development` environment. Your `.env.developm
 
 ```
 GATSBY_SNOOTY_DEV=true
+GATSBY_NEXT_API_BASE_URL=https://docs-on-nextjs.netlify.app/api
 ```
 
 The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`. See pathing [here](https://github.com/mongodb/snooty/blob/main/src/utils/generate-path-prefix.js#L22)
@@ -69,6 +70,7 @@ Snooty's `build` and `serve` stages use the `production` environment. Your `.env
 
 ```
 GATSBY_SNOOTY_DEV=true
+GATSBY_NEXT_API_BASE_URL=https://docs-on-nextjs.netlify.app/api
 ```
 
 ## Running locally
@@ -224,6 +226,27 @@ The `USE_FILTER_BRANCH` environment variable needs to be added in the `.env.prod
 NOTE: This will modify the `ComponentFactory.js` file directly. To undo this, you can run `git restore src/components/ComponentFactory.js` to get the file back to its original state.
 
 To perform a dry run i.e. the `ComponentFactory.js` file does not get updated, the `FILTER_DRY_RUN` property can be provided and set to `true`. This will log the resulting code that would have been written to the file only.
+
+## Unified TOC (L1 and L2s)
+
+### Requirements
+
+The Unified TOC requires the `GATSBY_USE_UNIFIED_TOC` feature flag to be enabled. This feature flag is temporary and will be removed once the Unified TOC is officially launched. Without this flag enabled, the legacy TOC will be displayed instead.
+
+Additionally, the `GATSBY_UNIFIED_TOC_DEV_MODE` environment variable needs to be set to handle active link styling on 404 pages (pages that are not included in the build) within the Unified TOC navigation. Without this environment variable, active styling will not be applied correctly on 404 pages.
+
+`GATSBY_USE_UNIFIED_TOC` can be added to your `.env.development` and both can be added to your `.env.production` file.
+
+### Local, Preview Builds
+
+The `GATSBY_UNIFIED_TOC_DEV_MODE` environment variable is required for being able to click through the Sidenav with staying on your current content site.
+
+- Local production builds (using `npm run build` and `npm run serve`)
+- Preview builds
+
+This environment variable forces all `L1` and `showSubNav` links in the Unified TOC to not change pages and to only change the side navigation.
+
+For preview builds, writers need to ensure this environment variable is added to their Netlify configuration.
 
 ### Useful Resources
 

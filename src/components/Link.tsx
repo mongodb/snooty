@@ -6,9 +6,12 @@ import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
 // @ts-ignore
 import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
+import Icon from '@leafygreen-ui/icon';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { assertLeadingAndTrailingSlash } from '../utils/assert-trailing-and-leading-slash';
 
 /*
  * Note: This component is not suitable for internal page navigation:
@@ -42,6 +45,26 @@ const THEME_STYLES: LinkThemeStyles = {
 export const sharedDarkModeOverwriteStyles = `
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
+`;
+
+const symLinkStyling = css`
+  display: inline;
+  svg {
+    transform: rotate(-45deg);
+    margin-left: 7px;
+    margin-bottom: -3px;
+    width: 13px;
+    height: 13px;
+    opacity: 1;
+  }
+`;
+
+const externalNavLinks = css`
+  svg {
+    margin-left: 8px;
+    margin-bottom: -10px;
+    color: ${palette.gray.base};
+  }
 `;
 
 /**
@@ -88,7 +111,7 @@ const lgLinkStyling = css`
 `;
 
 export type LinkProps = {
-  children: ReactNode;
+  children?: ReactNode;
   to?: string;
   activeClassName?: string;
   className?: string;
@@ -97,6 +120,7 @@ export type LinkProps = {
   hideExternalIcon?: boolean;
   showExternalIcon?: boolean;
   openInNewTab?: boolean;
+  contentSite?: string | null | undefined;
   onClick?: () => void;
 };
 
@@ -112,9 +136,11 @@ const Link = ({
   hideExternalIcon: hideExternalIconProp,
   showExternalIcon,
   openInNewTab,
+  contentSite,
   onClick,
   ...other
 }: LinkProps) => {
+  const { pathPrefix, project } = useSiteMetadata();
   if (!to) to = '';
   const anchor = to.startsWith('#');
 
@@ -130,6 +156,78 @@ const Link = ({
   ) : (
     ''
   );
+
+  // If contentSite, that means we are coming from the UnifiedSideNav and not the old SideNav
+  if (contentSite) {
+    // For an external links, inside the unified toc
+    if (!isRelativeUrl(to)) {
+      const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
+      const isMDBLink = strippedUrl.includes('mongodb.com/docs'); // For symlinks
+
+      if (isMDBLink) {
+        return (
+          <LGLink
+            className={joinClassNames(symLinkStyling, className)}
+            href={to}
+            hideExternalIcon={true}
+            target={'_self'}
+            {...anchorProps}
+          >
+            {children}
+            {decoration}
+            <Icon glyph={'ArrowRight'} fill={palette.gray.base} />
+          </LGLink>
+        );
+      }
+
+      return (
+        <LGLink
+          className={joinClassNames(lgLinkStyling, externalNavLinks, className)}
+          href={to}
+          hideExternalIcon={isMDBLink ? true : false}
+          target={isMDBLink ? '_self' : '_blank'}
+          style={{ fill: palette.gray.base }}
+          {...anchorProps}
+        >
+          {children}
+          {decoration}
+        </LGLink>
+      );
+    }
+
+    if (!to.startsWith('/')) to = `/${to}`;
+
+    // Ensure trailing slash
+    to = to.replace(/\/?(\?|#|$)/, '/$1');
+
+    if (project === contentSite) {
+      // Get rid of the contenteSite in link for internal links
+      // Get rid of the path contentSite in link for internal links
+      const editedTo = assertLeadingAndTrailingSlash(to.replace(pathPrefix, ''));
+
+      return (
+        <GatsbyLink
+          className={cx(className)}
+          activeClassName={activeClassName}
+          partiallyActive={partiallyActive}
+          to={editedTo}
+          onClick={onClick}
+          {...anchorProps}
+        >
+          {children}
+          {decoration}
+        </GatsbyLink>
+      );
+    }
+
+    // On the Unified SideNav but linking to a different content site
+    return (
+      <a className={cx(className)} href={to}>
+        {children}
+        {decoration}
+      </a>
+    );
+  }
 
   // Use Gatsby Link for internal links, and <a> for others
   if (to && isRelativeUrl(to) && !anchor) {

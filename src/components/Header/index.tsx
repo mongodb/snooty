@@ -44,14 +44,13 @@ type HeaderProps = {
 
 const Header = ({ eol }: HeaderProps) => {
   const unifiedNavProperty = 'DOCS';
-
   const enabledLocales = getAvailableLanguages().map((language) => language.localeCode);
-  const { bannerContent } = useContext(HeaderContext);
+  const { hasBanner } = useContext(HeaderContext);
 
   return (
     <>
       <SiteBanner />
-      <StyledHeaderContainer hasBanner={!!bannerContent}>
+      <StyledHeaderContainer hasBanner={hasBanner}>
         <>
           {/* Two navs used intentionally: one for light mode, one for dark mode */}
           {!eol && (
