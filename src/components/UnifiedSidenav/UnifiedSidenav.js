@@ -213,7 +213,7 @@ export function UnifiedSidenav({ slug }) {
 
   useEffect(() => {
     if (hash) {
-      const el = document.querySelector(removeTrailingSlash(hash));
+      const el = document.querySelector(CSS.escape(removeTrailingSlash(hash)));
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }

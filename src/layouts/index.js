@@ -119,7 +119,12 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
 
   useEffect(() => {
     if (hash) {
-      const el = document.querySelector(removeTrailingSlash(hash));
+      // const id = removeTrailingSlash(hash).replace(/^#/, ""); // strip leading #
+      // const el = document.getElementById(id);
+      // if (el) {
+      //   el.scrollIntoView({ behavior: "smooth" });
+      // }
+      const el = document.querySelector(CSS.escape(removeTrailingSlash(hash)));
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }
