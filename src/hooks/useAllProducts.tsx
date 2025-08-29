@@ -26,7 +26,7 @@ export const useAllProducts = () => {
   );
 
   useEffect(() => {
-    fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/api/products`)
+    fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/products`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch(console.error);
