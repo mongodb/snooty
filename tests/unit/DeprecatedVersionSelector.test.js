@@ -2,7 +2,7 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import DeprecatedVersionSelector from '../../src/components/DeprecatedVersionSelector';
-import * as realm from '../../src/utils/realm';
+import * as docsetApi from '../../src/utils/docsets';
 import { useAllDocsets } from '../../src/hooks/useAllDocsets';
 
 const mockedReposBranches = [
@@ -80,7 +80,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
   let wrapper, mockFetchDocuments;
 
   beforeEach(() => {
-    mockFetchDocuments = jest.spyOn(realm, 'fetchDocsets').mockImplementation(async (dbName) => {
+    mockFetchDocuments = jest.spyOn(docsetApi, 'fetchDocsets').mockImplementation(async (dbName) => {
       return mockedReposBranches;
     });
     useAllDocsets.mockImplementation(() => mockedReposBranches);

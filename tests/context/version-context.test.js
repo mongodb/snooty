@@ -9,6 +9,7 @@ import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import * as browserStorage from '../../src/utils/browser-storage';
 import * as realm from '../../src/utils/realm';
+import * as docsetApi from '../../src/utils/docsets';
 
 const snootyMetadataMock = jest.spyOn(snootyMetadata, 'default');
 const uesSiteMetadataMock = jest.spyOn(siteMetadata, 'useSiteMetadata');
@@ -197,7 +198,7 @@ describe('Version Context', () => {
     mockedBrowserStorageGetter = jest.spyOn(browserStorage, 'getLocalValue').mockImplementation((key) => {
       return mockedLocalStorage[key];
     });
-    mockedFetchDocset = jest.spyOn(realm, 'fetchDocset').mockImplementation(async (database, matchConditions) => {
+    mockedFetchDocset = jest.spyOn(docsetApi, 'fetchDocset').mockImplementation(async (database, matchConditions) => {
       switch (matchConditions.project) {
         case 'cloud-docs':
           return {

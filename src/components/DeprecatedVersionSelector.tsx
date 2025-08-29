@@ -10,7 +10,8 @@ import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { DocsetSlice, useAllDocsets } from '../hooks/useAllDocsets';
 import { sortVersions } from '../utils/sort-versioned-branches';
 import { disabledStyle } from '../styles/button';
-import { BranchData, Docset } from '../types/data';
+import { BranchData } from '../types/data';
+import { fetchDocsets } from '../utils/docsets';
 import Select from './Select';
 
 type ProductChoice = {
@@ -161,8 +162,7 @@ const DeprecatedVersionSelector = () => {
     if (reposDatabase) {
       const createReposMap = async () => {
         try {
-          const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/docsets?dbName=${reposDatabase}`);
-          const docsets: Docset[] = await res.json();
+          const docsets = await fetchDocsets(reposDatabase);
 
           const reposBranchesMap = keyBy(
             docsets.filter((project) => project.hasEolVersions),

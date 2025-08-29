@@ -2,6 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import { navigate } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
 import * as realm from '../../src/utils/realm';
+import * as docsetApi from '../../src/utils/docsets';
 import VersionDropdown from '../../src/components/VersionDropdown';
 import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
@@ -50,7 +51,7 @@ const fetchDocument = () => {
 };
 
 const fetchDocset = () => {
-  return jest.spyOn(realm, 'fetchDocset').mockImplementation(async (database, matchConditions) => {
+  return jest.spyOn(docsetApi, 'fetchDocset').mockImplementation(async (database, matchConditions) => {
     switch (matchConditions.project) {
       case 'node':
         return {
