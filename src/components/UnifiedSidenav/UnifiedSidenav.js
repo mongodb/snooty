@@ -212,6 +212,7 @@ export function UnifiedSidenav({ slug }) {
   }, [pathname, setHideMobile]);
 
   useEffect(() => {
+    if (!isBrowser) return;
     if (hash) {
       const el = document.querySelector(CSS.escape(removeTrailingSlash(hash)));
       if (el) {
