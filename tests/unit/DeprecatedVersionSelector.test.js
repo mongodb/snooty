@@ -81,6 +81,7 @@ describe('DeprecatedVersionSelector when rendered', () => {
 
   beforeEach(() => {
     mockFetchDocuments = jest.spyOn(docsetApi, 'fetchDocsets').mockImplementation(async (dbName) => {
+      console.log('SENDING BACK MOCKED REPOSBRANCHES');
       return mockedReposBranches;
     });
     useAllDocsets.mockImplementation(() => mockedReposBranches);

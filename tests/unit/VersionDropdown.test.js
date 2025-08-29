@@ -51,8 +51,8 @@ const fetchDocument = () => {
 };
 
 const fetchDocset = () => {
-  return jest.spyOn(docsetApi, 'fetchDocset').mockImplementation(async (database, matchConditions) => {
-    switch (matchConditions.project) {
+  return jest.spyOn(docsetApi, 'fetchDocset').mockImplementation(async (database, project) => {
+    switch (project) {
       case 'node':
         return {
           project: 'node',
@@ -94,7 +94,7 @@ const fetchDocset = () => {
     }
     return {
       database,
-      matchConditions,
+      project,
     };
   });
 };

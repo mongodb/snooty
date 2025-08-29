@@ -198,8 +198,8 @@ describe('Version Context', () => {
     mockedBrowserStorageGetter = jest.spyOn(browserStorage, 'getLocalValue').mockImplementation((key) => {
       return mockedLocalStorage[key];
     });
-    mockedFetchDocset = jest.spyOn(docsetApi, 'fetchDocset').mockImplementation(async (database, matchConditions) => {
-      switch (matchConditions.project) {
+    mockedFetchDocset = jest.spyOn(docsetApi, 'fetchDocset').mockImplementation(async (database, project) => {
+      switch (project) {
         case 'cloud-docs':
           return {
             project: 'cloud-docs',
@@ -231,7 +231,7 @@ describe('Version Context', () => {
       }
       return {
         database,
-        matchConditions,
+        project,
       };
     });
   });
