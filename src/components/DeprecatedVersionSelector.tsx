@@ -8,10 +8,9 @@ import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { DocsetSlice, useAllDocsets } from '../hooks/useAllDocsets';
-import { fetchDocsets } from '../utils/realm';
 import { sortVersions } from '../utils/sort-versioned-branches';
 import { disabledStyle } from '../styles/button';
-import { BranchData } from '../types/data';
+import { BranchData, Docset } from '../types/data';
 import Select from './Select';
 
 type ProductChoice = {
@@ -160,17 +159,21 @@ const DeprecatedVersionSelector = () => {
   // Fetch docsets for url
   useEffect(() => {
     if (reposDatabase) {
-      fetchDocsets(reposDatabase)
-        .then((resp) => {
+      const createReposMap = async () => {
+        try {
+          const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/docsets?dbName=${reposDatabase}`);
+          const docsets: Docset[] = await res.json();
+
           const reposBranchesMap = keyBy(
-            resp.filter((project) => project.hasEolVersions),
+            docsets.filter((project) => project.hasEolVersions),
             'project'
           );
           if (!isEmpty(reposBranchesMap)) setReposMap(reposBranchesMap);
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error(`ERROR: could not access ${reposDatabase} for dropdown data.`);
-        });
+        }
+      };
+      createReposMap();
     }
   }, [reposDatabase]);
 
