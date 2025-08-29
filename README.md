@@ -57,11 +57,14 @@ Snooty's `develop` stage uses the `development` environment. Your `.env.developm
 
 ```
 GATSBY_SNOOTY_DEV=true
+GATSBY_NEXT_API_BASE_URL=https://docs-on-nextjs.netlify.app
 ```
 
 The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`. See pathing [here](https://github.com/mongodb/snooty/blob/main/src/utils/generate-path-prefix.js#L22)
 
 It should be set to `true` when working on snooty locally.
+
+The `GATSBY_NEXT_API_BASE_URL` variable points to our production Nextjs app API.
 
 #### `.env.production`
 
@@ -69,6 +72,7 @@ Snooty's `build` and `serve` stages use the `production` environment. Your `.env
 
 ```
 GATSBY_SNOOTY_DEV=true
+GATSBY_NEXT_API_BASE_URL=https://docs-on-nextjs.netlify.app
 ```
 
 ## Running locally
