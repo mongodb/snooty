@@ -23,16 +23,23 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { BranchData, Docset, Group, MetadataDatabaseName, PageContextRepoBranches, SiteMetadata } from '../types/data';
 
-type AssociatedReposInfo = Record<string, DocsetSlice>;
-type ActiveVersions = Record<string, string>;
-type AvailableVersions = Record<string, BranchData[]>;
-type AvailableGroups = Record<string, Group[]>;
+export type AssociatedReposInfo = Record<string, DocsetSlice>;
+export type ActiveVersions = Record<string, string>;
+export type AvailableVersions = Record<string, BranchData[]>;
+export type AvailableGroups = Record<string, Group[]>;
 
 // <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';
 const LEGACY_GIT_BRANCH = 'legacy';
 
 const getInitBranchName = (branches: BranchData[]) => {
+  // Find 'current' branch as first option
+  const currentBranch = branches.find(
+    (b) => b.urlSlug === 'current' || b.gitBranchName === 'current' || b.urlAliases?.includes('current')
+  );
+  if (currentBranch) {
+    return currentBranch.gitBranchName;
+  }
   const activeBranch = branches.find((b) => b.active);
   if (activeBranch) {
     return activeBranch.gitBranchName;

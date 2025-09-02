@@ -1,4 +1,5 @@
 import React from 'react';
+import { css, cx } from '@leafygreen-ui/emotion';
 import { getNestedValue } from '../utils/get-nested-value';
 import { HorizontalListNode, ASTNode } from '../types/ast';
 import ComponentFactory from './ComponentFactory';
@@ -7,6 +8,14 @@ export type HorizontalListProps = {
   nodeData: HorizontalListNode;
 };
 
+const horizontalListStyling = css`
+  table-layout: fixed;
+  width: 100%;
+`;
+
+const tableDataStyling = css`
+  vertical-align: top;
+`;
 const HorizontalList = ({
   nodeData,
   nodeData: {
@@ -41,11 +50,11 @@ const HorizontalList = ({
   const columnArray = chunkArray(getNestedValue(['children', 0, 'children'], nodeData), columns);
   const ListTag = getNestedValue(['children', 0, 'ordered'], nodeData) ? 'ol' : 'ul';
   return (
-    <table className="hlist">
+    <table className={cx(horizontalListStyling, 'hlist')}>
       <tbody>
         <tr>
           {columnArray.map((col, colIndex) => (
-            <td key={colIndex}>
+            <td className={cx(tableDataStyling)} key={colIndex}>
               <ListTag className="simple">
                 {col.map((child, index) => (
                   <ComponentFactory {...rest} key={index} nodeData={child} />

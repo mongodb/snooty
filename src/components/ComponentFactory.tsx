@@ -14,6 +14,7 @@ import Chapters from './Chapters';
 import Code from './Code/Code';
 import CodeIO from './Code/CodeIO';
 import Collapsible from './Collapsible';
+import Column from './MultiColumn/Column';
 import CommunityPillLink from './CommunityPillLink';
 import Cond from './Cond';
 import Container from './Container';
@@ -47,6 +48,7 @@ import Literal from './Literal';
 import LiteralBlock from './LiteralBlock';
 import LiteralInclude from './LiteralInclude';
 import { MethodSelector } from './MethodSelector';
+import MultiColumn from './MultiColumn';
 import OpenAPIChangelog from './OpenAPIChangelog';
 import Paragraph from './Paragraph';
 import Procedure from './Procedure';
@@ -84,7 +86,7 @@ import RoleRed from './Roles/Red';
 import RoleGold from './Roles/Gold';
 import RoleRequired from './Roles/Required';
 import SeeAlso from './SeeAlso';
-import { ComposableTutorial } from './ComposableTutorial';
+import { ComposableTutorial, ComposableContent } from './ComposableTutorial';
 
 const IGNORED_NAMES = new Set([
   'contents',
@@ -131,10 +133,9 @@ const roleMap: Record<RoleName, React.ComponentType<any>> = {
 };
 
 const getComponent = (() => {
-  let componentMap:
-    | Record<Exclude<ComponentType, 'toctree' | 'role' | 'tab' | 'selected-content'>, React.ComponentType<any>>
-    | undefined = undefined;
-  return (key: Exclude<ComponentType, 'toctree' | 'role' | 'tab' | 'selected-content'>) => {
+  let componentMap: Record<Exclude<ComponentType, 'toctree' | 'role' | 'tab'>, React.ComponentType<any>> | undefined =
+    undefined;
+  return (key: Exclude<ComponentType, 'toctree' | 'role' | 'tab'>) => {
     if (componentMap === undefined) {
       componentMap = {
         admonition: Admonition,
@@ -147,6 +148,7 @@ const getComponent = (() => {
         chapters: Chapters,
         code: Code,
         collapsible: Collapsible,
+        column: Column,
         'community-driver': CommunityPillLink,
         'composable-tutorial': ComposableTutorial,
         'io-code-block': CodeIO,
@@ -169,6 +171,7 @@ const getComponent = (() => {
         glossary: Glossary,
         'guide-next': GuideNext,
         heading: Heading,
+        'multi-column': MultiColumn,
         hlist: HorizontalList,
         image: Image,
         include: Include,
@@ -195,6 +198,7 @@ const getComponent = (() => {
         'search-results': SearchResults,
         section: Section,
         seealso: SeeAlso,
+        'selected-content': ComposableContent,
         sharedinclude: Include,
         strong: Strong,
         superscript: Superscript,

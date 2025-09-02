@@ -8,7 +8,7 @@ export type TocQueryData = {
 };
 
 export const useUnifiedToc = () => {
-  const { toc } = useStaticQuery<TocQueryData>(
+  const data = useStaticQuery<TocQueryData>(
     graphql`
       query GetUnifiedToc {
         toc {
@@ -18,5 +18,5 @@ export const useUnifiedToc = () => {
     `
   );
 
-  return toc?.tocTree ?? [];
+  return data?.toc?.tocTree ?? [];
 };

@@ -167,7 +167,7 @@ const Code = ({
       <div
         className={`${
           isOfflineDocsBuild ? OFFLINE_CONTAINER_CLASSNAME : ''
-        } ${codeContainerStyle} ${captionAndWhitespaceStyle}`}
+        } ${codeContainerStyle} ${captionAndWhitespaceStyle} intro-code-block`}
       >
         {captionSpecified && (
           <div>

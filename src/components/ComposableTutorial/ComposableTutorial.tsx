@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
-import { parse, ParsedQuery } from 'query-string';
+import { parse, ParsedQuery, stringify } from 'query-string';
 import { navigate } from 'gatsby';
 import { palette } from '@leafygreen-ui/palette';
 import { css, cx } from '@leafygreen-ui/emotion';
@@ -10,8 +10,10 @@ import { isBrowser } from '../../utils/is-browser';
 import { theme } from '../../theme/docsTheme';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { OFFLINE_COMPOSABLE_CLASSNAME } from '../../utils/head-scripts/offline-ui/composable-tutorials';
-import ComposableContent from './ComposableContent';
+import ComponentFactory from '../ComponentFactory';
+import { findAllKeyValuePairs } from '../../utils/find-all-key-value-pairs';
 import ConfigurableOption from './ConfigurableOption';
+import ComposableContext, { ComposableContextProvider } from './ComposableContext';
 
 const DELIMITER_KEY = '**';
 // helper function to join key-value pairs as one string
@@ -148,7 +150,6 @@ const containerStyling = css`
   justify-items: space-between;
   border-bottom: 1px solid ${palette.gray.light2};
   padding-bottom: ${theme.size.medium};
-  padding-top: ${theme.size.small};
   z-index: ${theme.zIndexes.content + 1};
 
   ${isOfflineDocsBuild && 'position: relative; top: unset;'}
@@ -158,14 +159,21 @@ const containerStyling = css`
   }
 `;
 
-const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
-  const [currentSelections, setCurrentSelections] = useState<Record<string, string>>(() => ({}));
+export const showComposable = (dependencies: Record<string, string>[], currentSelections: Record<string, string>) =>
+  dependencies.every((d) =>
+    Object.keys(d).every((key) => d[key]?.toLowerCase() === 'none' || currentSelections[key] === d[key])
+  );
+
+// Internal component that consumes the context
+const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
+  const { currentSelections, setCurrentSelections } = useContext(ComposableContext);
   const location = useLocation();
   const { composable_options: composableOptions, children } = nodeData;
 
   const validSelections = useMemo(() => {
     const res: Set<string> = new Set();
-    for (const composableNode of children) {
+    const composableContents: ComposableNode[] = findAllKeyValuePairs(children, 'name', 'selected-content');
+    for (const composableNode of composableContents) {
       const newSet = getSelectionPermutation(composableNode.selections ?? {});
       for (const elm of newSet) {
         res.add(elm);
@@ -173,6 +181,30 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
     }
     return res;
   }, [children]);
+
+  const externalQueryParamsString = useMemo(() => {
+    const queryParams = parse(location.search);
+    const composableOptionsKeys = composableOptions.map((option) => option.value);
+    const res: Record<string, string> = {};
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (!composableOptionsKeys.includes(key)) {
+        res[key] = value as string;
+      }
+    }
+    return stringify(res);
+  }, [composableOptions, location.search]);
+
+  const navigatePreservingExternalQueryParams = useCallback(
+    (queryString: string, preserveScroll = false) => {
+      navigate(
+        `${queryString.startsWith('?') ? '' : '?'}${queryString}${
+          queryString.length > 0 && externalQueryParamsString.length > 0 ? '&' : ''
+        }${externalQueryParamsString}`,
+        { state: { preserveScroll } }
+      );
+    },
+    [externalQueryParamsString]
+  );
 
   // takes care of query param reading and rerouting
   // if query params fulfill all selections, show the selections
@@ -202,16 +234,15 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
     const localStorage: Record<string, string> = getLocalValue(LOCAL_STORAGE_KEY) ?? {};
     const [defaultParams] = filterValidQueryParams(localStorage, composableOptions, validSelections, true);
     const queryString = new URLSearchParams(defaultParams).toString();
-    navigate(`?${queryString}`);
-  }, [composableOptions, location.pathname, location.search, validSelections]);
-
-  const showComposable = useCallback(
-    (dependencies: Record<string, string>[]) =>
-      dependencies.every((d) =>
-        Object.keys(d).every((key) => d[key]?.toLowerCase() === 'none' || currentSelections[key] === d[key])
-      ),
-    [currentSelections]
-  );
+    navigatePreservingExternalQueryParams(`?${queryString}`);
+  }, [
+    composableOptions,
+    location.pathname,
+    location.search,
+    validSelections,
+    setCurrentSelections,
+    navigatePreservingExternalQueryParams,
+  ]);
 
   const onSelect = useCallback(
     (value: string, option: string, index: number) => {
@@ -222,7 +253,7 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
       if (validSelections.has(joinKeyValuesAsString(correctedParams))) {
         setCurrentSelections(correctedParams);
         const queryString = new URLSearchParams(correctedParams).toString();
-        return navigate(`?${queryString}`, { state: { preserveScroll: true } });
+        return navigatePreservingExternalQueryParams(`?${queryString}`, true);
       }
 
       // need to correct preceding options
@@ -240,9 +271,9 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
 
       const [defaultParams] = filterValidQueryParams(persistSelections, composableOptions, validSelections, true);
       const queryString = new URLSearchParams(defaultParams).toString();
-      return navigate(`?${queryString}`);
+      return navigatePreservingExternalQueryParams(`?${queryString}`);
     },
-    [composableOptions, currentSelections, validSelections]
+    [composableOptions, currentSelections, validSelections, setCurrentSelections, navigatePreservingExternalQueryParams]
   );
 
   return (
@@ -252,7 +283,7 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
     >
       <div className={cx(containerStyling)}>
         {composableOptions.map((option, index) => {
-          if (showComposable(option.dependencies) || isOfflineDocsBuild) {
+          if (showComposable(option.dependencies, currentSelections) || isOfflineDocsBuild) {
             return (
               <ConfigurableOption
                 validSelections={validSelections}
@@ -268,15 +299,25 @@ const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
           return null;
         })}
       </div>
-      <div>
+      <div
+        className={css`
+          margin-top: ${theme.size.medium};
+        `}
+      >
         {children.map((c, i) => {
-          if ((c.selections && showComposable([c.selections])) || isOfflineDocsBuild) {
-            return <ComposableContent nodeData={c as ComposableNode} key={i} {...rest} />;
-          }
-          return null;
+          return <ComponentFactory nodeData={c} key={i} {...rest} />;
         })}
       </div>
     </div>
+  );
+};
+
+// Wrapper component that provides the context
+const ComposableTutorial = ({ nodeData, ...rest }: ComposableProps) => {
+  return (
+    <ComposableContextProvider>
+      <ComposableTutorialInternal nodeData={nodeData} {...rest} />
+    </ComposableContextProvider>
   );
 };
 

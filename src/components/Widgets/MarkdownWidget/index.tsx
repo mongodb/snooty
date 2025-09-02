@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { SplitButton } from '@leafygreen-ui/split-button';
+import { Size } from '@leafygreen-ui/button';
 import { Toast, ToastProvider, Variant } from '@leafygreen-ui/toast';
 import { MenuItem } from '@leafygreen-ui/menu';
 import Icon from '@leafygreen-ui/icon';
@@ -30,10 +31,12 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
   const [toastOpen, setToastOpen] = useState<ToastOpen>({ open: false, variant: Variant.Success });
   const { href } = useLocation();
 
-  // Removing the trailing slash, since we expect the URL to be available in markdown
-  // i.e. https://www.mongodb.com/docs/atlas/tutorial/create-atlas-account/ ->
-  // https://www.mongodb.com/docs/atlas/tutorial/create-atlas-account.md
-  const urlWithoutTrailingSlash = removeTrailingSlash(href);
+  // First removing the search and then the trailing slash, since we expect the URL to be available in markdown
+  // i.e. https://www.mongodb.com/docs/mcp-server/get-started/?client=cursor&deployment-type=atlas ->
+  // https://www.mongodb.com/docs/mcp-server/get-started/ ->
+  // https://www.mongodb.com/docs/mcp-server/get-started.md
+  const markdownPath = href?.split('?')[0];
+  const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
   const markdownAddress = `${urlWithoutTrailingSlash}.md`;
 
   const copyMarkdown = async () => {
@@ -68,6 +71,7 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
       <SplitButton
         label="Copy page"
         className={cx(splitButtonStyles, className)}
+        size={Size.Small}
         onClick={() => copyMarkdown()}
         menuItems={[
           <MenuItem

@@ -15,10 +15,9 @@ import { SlugToBreadcrumbLabel, SlugToTitle } from '../../types/data';
 import { ActiveTutorial } from '../MultiPageTutorials/hooks/use-active-mp-tutorial';
 import { TocItem } from '../UnifiedSidenav/types';
 import { BranchData } from '../../types/data';
+import type { ActiveVersions, AvailableVersions } from '../../context/version-context';
 import NextPrevLink from './NextPrevLink';
 
-type ActiveVersions = Record<string, string>;
-type AvailableVersions = Record<string, BranchData[]>;
 interface FlatItem {
   label: string;
   url: string;

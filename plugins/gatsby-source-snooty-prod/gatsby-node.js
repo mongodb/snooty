@@ -41,24 +41,30 @@ const fetchUnifiedToc = async () => {
   return unifiedTocData;
 };
 
-// Creates node for RemoteMetadata, mostly used for Embedded Versions. If no associated products
-// or data are found, the node will be null
-const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }, umbrellaProduct) => {
-  // get remote metadata for updated ToC in Atlas
-  try {
-    const filter = {
-      project: manifestMetadata.project,
-      branch: manifestMetadata.branch,
-    };
+// Creates node for RemoteMetadata
+// If there are embedded versions (aka if this build is an umbrella product, or there is an umbrella product for this build)
+// fetch the remote metadata in the db.
+// Otherwise, can use the bundled manifest metadata
 
-    const isAssociatedProduct = !!umbrellaProduct;
-    if (isAssociatedProduct || manifestMetadata?.associated_products?.length) {
+// umbrellaMetadata {metadata}    metadata entry for an umbrella product for current build
+const createRemoteMetadataNode = async ({ createNode, createNodeId, createContentDigest }, umbrellaMetadata) => {
+  let remoteMetadata = manifestMetadata;
+  const isAssociatedProduct = !!umbrellaMetadata;
+  const isUmbrellaProduct = manifestMetadata?.associated_products?.length;
+
+  try {
+    if (isAssociatedProduct || isUmbrellaProduct) {
+      const filter = {
+        project: manifestMetadata.project,
+        branch: manifestMetadata.branch,
+      };
       filter['is_merged_toc'] = true;
+      const findOptions = {
+        sort: { build_id: -1 },
+      };
+      // get remote metadata for updated ToC in Atlas
+      remoteMetadata = await db.realmInterface.getMetadata(filter, undefined, findOptions);
     }
-    const findOptions = {
-      sort: { build_id: -1 },
-    };
-    const remoteMetadata = await db.realmInterface.getMetadata(filter, undefined, findOptions);
 
     createNode({
       children: [],

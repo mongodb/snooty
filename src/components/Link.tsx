@@ -105,8 +105,7 @@ const lgLinkStyling = css`
   display: inline;
   ${sharedDarkModeOverwriteStyles}
 
-  > span > code,
-  > code {
+  > span > code, > code {
     ${sharedDarkModeOverwriteStyles}
   }
 `;
@@ -163,7 +162,7 @@ const Link = ({
     // For an external links, inside the unified toc
     if (!isRelativeUrl(to)) {
       const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
-      const isMDBLink = strippedUrl.includes('mongodb.com/docs'); // For an symlinks
+      const isMDBLink = strippedUrl.includes('mongodb.com/docs'); // For symlinks
 
       if (isMDBLink) {
         return (
