@@ -33,6 +33,11 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
   }
 }
 
+.emotion-0 a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
 .emotion-1 {
   margin-right: auto;
 }
@@ -432,6 +437,11 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
   .emotion-0 {
     display: none;
   }
+}
+
+.emotion-0 a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-1 {
@@ -835,6 +845,11 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
   }
 }
 
+.emotion-0 a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
 .emotion-1 {
   margin-right: auto;
 }
@@ -1234,6 +1249,11 @@ exports[`renders a page with next and previous links correctly 1`] = `
   .emotion-0 {
     display: none;
   }
+}
+
+.emotion-0 a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-1 {
@@ -1637,6 +1657,11 @@ exports[`renders a page with no next link correctly 1`] = `
   }
 }
 
+.emotion-0 a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
 .emotion-1 {
   margin-right: auto;
 }
@@ -1955,6 +1980,11 @@ exports[`renders a page with no previous link correctly 1`] = `
   .emotion-0 {
     display: none;
   }
+}
+
+.emotion-0 a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .emotion-1 {
