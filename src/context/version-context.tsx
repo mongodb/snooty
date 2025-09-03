@@ -23,10 +23,10 @@ import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { BranchData, Docset, Group, MetadataDatabaseName, PageContextRepoBranches, SiteMetadata } from '../types/data';
 
-type AssociatedReposInfo = Record<string, DocsetSlice>;
-type ActiveVersions = Record<string, string>;
-type AvailableVersions = Record<string, BranchData[]>;
-type AvailableGroups = Record<string, Group[]>;
+export type AssociatedReposInfo = Record<string, DocsetSlice>;
+export type ActiveVersions = Record<string, string>;
+export type AvailableVersions = Record<string, BranchData[]>;
+export type AvailableGroups = Record<string, Group[]>;
 
 // <-------------- begin helper functions -------------->
 const STORAGE_KEY = 'activeVersions';

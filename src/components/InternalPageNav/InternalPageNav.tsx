@@ -15,10 +15,9 @@ import { SlugToBreadcrumbLabel, SlugToTitle } from '../../types/data';
 import { ActiveTutorial } from '../MultiPageTutorials/hooks/use-active-mp-tutorial';
 import { TocItem } from '../UnifiedSidenav/types';
 import { BranchData } from '../../types/data';
+import type { ActiveVersions, AvailableVersions } from '../../context/version-context';
 import NextPrevLink from './NextPrevLink';
 
-type ActiveVersions = Record<string, string>;
-type AvailableVersions = Record<string, BranchData[]>;
 interface FlatItem {
   label: string;
   url: string;
@@ -41,6 +40,10 @@ const containerStyling = css`
 
   @media print {
     display: none;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;
 
@@ -192,11 +195,14 @@ function getTargetSlug(
     return fullUrl;
   } else {
     const version = (availableVersions[contentSite] || []).find(
-      (version) => version.gitBranchName === activeVersions[contentSite]
+      (version) =>
+        version.gitBranchName === activeVersions[contentSite] ||
+        version.urlSlug === activeVersions[contentSite] ||
+        version?.urlAliases?.includes(activeVersions[contentSite])
     );
-    // If no version use first version.urlSlug in the list, or if no version loads, set as current
-    const defaultVersion = availableVersions[contentSite]?.[0].urlSlug ?? 'current';
-    const currentVersion = version?.urlSlug ?? defaultVersion;
+
+    // If no version found in local storage use 'current'
+    const currentVersion = version?.urlSlug ?? 'current';
     return fullUrl.replace(/:version/g, currentVersion);
   }
 }

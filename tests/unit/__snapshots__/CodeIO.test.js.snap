@@ -683,7 +683,7 @@ exports[`CodeIO renders correctly 1`] = `
       {"@context":"https://schema.org","@type":"SoftwareSourceCode","codeSampleType":"code snippet","text":"print('hello world')","programmingLanguage":"Python"}
     </script>
     <div
-      class=" emotion-1 emotion-2"
+      class=" emotion-1 emotion-2 intro-code-block"
     >
       <div>
         <div
