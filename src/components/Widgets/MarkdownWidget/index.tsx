@@ -50,7 +50,7 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
     // prefetch the markdown
     const fetchMarkDown = async () => {
       const response = await fetch(markdownAddress, { signal });
-      if (response.ok) {
+      if (response?.ok) {
         const text = await response.text();
         getMarkdownText(text);
       }
