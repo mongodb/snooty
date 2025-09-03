@@ -25,11 +25,6 @@ const mainStyling = css`
     margin-top: 3px;
   }
 
-  // overwriting lg style to apply to offline docs
-  button {
-    margin-top: 3px;
-  }
-
   .dark-theme & {
     > button {
       background-color: var(--gray-dark4);

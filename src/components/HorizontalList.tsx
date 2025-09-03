@@ -16,6 +16,7 @@ const horizontalListStyling = css`
 const tableDataStyling = css`
   vertical-align: top;
 `;
+
 const HorizontalList = ({
   nodeData,
   nodeData: {

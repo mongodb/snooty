@@ -213,7 +213,7 @@ npm run format:fix
 
 We have set up a precommit hook that will format staged files. Prettier also offers a variety of editor integrations to automatically format your code.
 
-## Component Factory Filter
+### Component Factory Filter
 
 The component factory filter process uses [SWC](https://swc.rs/) to remove unused components from the `ComponentFactory.js` file. A custom plugin is used to perform this transformation, and it lives in the `component-factory-transformer` directory. This plugin is run when the `npm run build` command is executed.
 

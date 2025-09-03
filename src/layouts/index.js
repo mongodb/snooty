@@ -104,6 +104,26 @@ const toastPortalStyling = LeafyCSS`
   z-index: ${theme.zIndexes.sidenav + 1};
 `;
 
+// Specialized scroll function for double panned navigation due to fixed positioning
+const scrollIntoViewInDoublePanned = (element, container) => {
+  if (!element || !container) return;
+
+  const containerRect = container.getBoundingClientRect();
+  const elementRect = element.getBoundingClientRect();
+
+  // Calculate the current scroll position
+  const currentScrollTop = container.scrollTop;
+  const elementTopInContainer = elementRect.top - containerRect.top + currentScrollTop;
+  const containerHeight = container.clientHeight;
+  const elementHeight = element.offsetHeight;
+  const targetScrollTop = elementTopInContainer - containerHeight / 2 + elementHeight / 2;
+
+  container.scrollTo({
+    top: Math.max(0, targetScrollTop),
+    behavior: 'instant',
+  });
+};
+
 const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, template } }) => {
   const { page } = data || {};
   const { sidenav } = getTemplate(template);
@@ -129,11 +149,23 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
 
     // Scrolls selected sidenav item into view
     const selectedLink = document.querySelector('a[aria-current="page"]');
-    if (selectedLink) {
-      selectedLink.scrollIntoView({
-        block: 'center',
-        behavior: 'instant',
-      });
+    const navDoublePannedContainer = document.querySelector('nav[aria-label*="Double Panned Side navigation Panel"]');
+
+    if (navDoublePannedContainer && navDoublePannedContainer.offsetWidth > 0) {
+      // Double Panned Nav is visible
+      const element = document.querySelector('[data-nav-panel="fixed-sidenav"] a[aria-current="page"]');
+      if (element) {
+        const scrollableParent = element.closest('[data-nav-pane="left"], [data-nav-pane="right"]');
+        scrollIntoViewInDoublePanned(element, scrollableParent);
+      }
+    } else {
+      // Accordion Nav is visible
+      if (selectedLink) {
+        selectedLink.scrollIntoView({
+          block: 'center',
+          behavior: 'instant',
+        });
+      }
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
