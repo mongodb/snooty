@@ -124,6 +124,22 @@ const scrollIntoViewInDoublePanned = (element, container) => {
   });
 };
 
+export const loadHashInView = (hash) => {
+  if (hash) {
+    // Decode the hash so '.' and '-' don't cause issues
+    const hashWithoutSymbol = removeTrailingSlash(hash).substring(1);
+    const decodedHash = decodeURIComponent(hashWithoutSymbol);
+    const selector = '#' + CSS.escape(decodedHash);
+
+    const el = document.querySelector(selector);
+    console.log('el is ', el);
+
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+};
+
 const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, template } }) => {
   const { page } = data || {};
   const { sidenav } = getTemplate(template);
@@ -140,12 +156,7 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
 
   useEffect(() => {
     if (!isBrowser) return;
-    if (hash) {
-      const el = document.querySelector(CSS.escape(removeTrailingSlash(hash)));
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    loadHashInView(hash);
 
     // Scrolls selected sidenav item into view
     const selectedLink = document.querySelector('a[aria-current="page"]');
