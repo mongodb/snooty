@@ -132,7 +132,6 @@ export const loadHashInView = (hash) => {
     const selector = '#' + CSS.escape(decodedHash);
 
     const el = document.querySelector(selector);
-    console.log('el is ', el);
 
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
