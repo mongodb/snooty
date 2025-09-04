@@ -242,8 +242,6 @@ export const UnifiedSidenav = ({ slug: initialSlug }: { slug: string }) => {
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
 
-  console.log('tree', tree);
-
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile
   return (

@@ -195,8 +195,9 @@ export const UnifiedTocNavItem = ({
     );
   }
 
-  const isVersionIncluded = versions?.includes?.includes(activeVersions[contentSite || '']);
-  const isVersionExcluded = versions?.excludes && versions.excludes?.includes(activeVersions[contentSite || '']);
+  const isVersionIncluded = contentSite && versions?.includes?.includes(activeVersions[contentSite]);
+  const isVersionExcluded =
+    contentSite && versions?.excludes && versions.excludes?.includes(activeVersions[contentSite]);
   const isVersionAllowed = !versions || isVersionIncluded || (isVersionExcluded !== undefined && !isVersionExcluded);
 
   // collapsible is for items that have nested links
@@ -250,7 +251,7 @@ interface CollapsibleNavItemProps {
   className?: string;
 }
 
-function CollapsibleNavItem({
+export const CollapsibleNavItem = ({
   items,
   label,
   newUrl,
@@ -261,7 +262,7 @@ function CollapsibleNavItem({
   setCurrentL1,
   isAccordion,
   level,
-}: CollapsibleNavItemProps): JSX.Element {
+}: CollapsibleNavItemProps) => {
   const isActiveCollapsible = isActiveTocNode(slug, newUrl, items);
   const [isOpen, setIsOpen] = useState<boolean>(isActiveCollapsible);
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
@@ -321,7 +322,7 @@ function CollapsibleNavItem({
         ))}
     </>
   );
-}
+};
 
 interface StaticNavItemProps {
   label: string;
@@ -336,7 +337,7 @@ interface StaticNavItemProps {
   setShowDriverBackBtn: (show: boolean) => void;
 }
 
-export function StaticNavItem({
+export const StaticNavItem = ({
   label,
   newUrl,
   slug,
@@ -347,7 +348,7 @@ export function StaticNavItem({
   setCurrentL2s,
   isAccordion,
   setShowDriverBackBtn,
-}: StaticNavItemProps): JSX.Element {
+}: StaticNavItemProps) => {
   const isActive = isActiveTocNode(slug, newUrl, items);
 
   return (
@@ -368,4 +369,4 @@ export function StaticNavItem({
       {label}
     </SideNavItem>
   );
-}
+};
