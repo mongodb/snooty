@@ -50,7 +50,7 @@ export const isActiveTocNode = (currentUrl: string, slug?: string, children?: To
   if (currentUrl === undefined) return false;
   if (slug && isCurrentPage(currentUrl, removeAnchor(slug))) return true;
   if (children) {
-    return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.url, b.items), false);
+    return children.reduce((a, b) => a || isActiveTocNode(currentUrl, b.newUrl, b.items), false);
   }
   return false;
 };
