@@ -8,6 +8,10 @@ import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { theme } from '../../../theme/docsTheme';
 import { removeTrailingSlash } from '../../../utils/remove-trailing-slash';
+import { useChatbot } from '../../../context/chatbot-context';
+import { assertLeadingAndTrailingSlash } from '../../../utils/assert-trailing-and-leading-slash';
+import { removeLeadingSlash } from '../../../utils/remove-leading-slash';
+import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 
 type ToastOpen = {
   open: boolean;
@@ -16,6 +20,7 @@ type ToastOpen = {
 
 type CopyPageMarkdownButtonProps = {
   className?: string;
+  slug?: string;
 };
 
 // This keeps the copy button text jump to a new line when viewing on smaller screens
@@ -27,10 +32,11 @@ const splitButtonStyles = css`
   min-width: 145px;
 `;
 
-const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
+const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps) => {
   const [toastOpen, setToastOpen] = useState<ToastOpen>({ open: false, variant: Variant.Success });
   const { href } = useLocation();
-
+  const { openChatbotWithText } = useChatbot();
+  const { pathPrefix } = useSiteMetadata();
   // First removing the search and then the trailing slash, since we expect the URL to be available in markdown
   // i.e. https://www.mongodb.com/docs/mcp-server/get-started/?client=cursor&deployment-type=atlas ->
   // https://www.mongodb.com/docs/mcp-server/get-started/ ->
@@ -66,6 +72,14 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
     window.location.href = markdownAddress;
   };
 
+  const askQuestion = () => {
+    openChatbotWithText(
+      `I have a question about the page I'm on: www.mongodb.com${assertLeadingAndTrailingSlash(
+        pathPrefix
+      )}${removeLeadingSlash(slug)}`
+    );
+  };
+
   return (
     <>
       <SplitButton
@@ -80,6 +94,13 @@ const CopyPageMarkdownButton = ({ className }: CopyPageMarkdownButtonProps) => {
             onClick={() => copyMarkdown()}
           >
             Copy Page
+          </MenuItem>,
+          <MenuItem
+            glyph={<Icon glyph="Sparkle" />}
+            description="Ask Mongodb AI about this page"
+            onClick={() => askQuestion()}
+          >
+            Ask a Question
           </MenuItem>,
           <MenuItem
             glyph={<Icon glyph="OpenNewTab" />}
