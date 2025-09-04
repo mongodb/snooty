@@ -111,7 +111,7 @@ export const AccordionNavPanel = ({
               <BackLink
                 className={cx(backLinkStyling)}
                 onClick={() => setShowDriverBackBtn(false)}
-                href={currentL1?.url}
+                href={currentL1?.newUrl}
               >
                 Back to {currentL1?.label}
               </BackLink>
@@ -119,7 +119,7 @@ export const AccordionNavPanel = ({
                 <UnifiedTocNavItem
                   {...navItem}
                   level={1}
-                  key={navItem.url + navItem.label}
+                  key={navItem.newUrl + navItem.label}
                   group={true}
                   isStatic={false}
                   slug={slug}
@@ -137,7 +137,7 @@ export const AccordionNavPanel = ({
                 <UnifiedTocNavItem
                   {...navItems}
                   level={1}
-                  key={navItems.url + navItems.label}
+                  key={navItems.newUrl + navItems.label}
                   group={true}
                   isStatic={true}
                   slug={slug}

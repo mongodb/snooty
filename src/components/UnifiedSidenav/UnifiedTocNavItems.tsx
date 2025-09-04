@@ -89,7 +89,7 @@ export const UnifiedTocNavItem = ({
   setShowDriverBackBtn,
   versionDropdown,
   versions,
-  url,
+  newUrl,
   level,
 }: UnifiedTocNavItemProps) => {
   const { activeVersions } = useContext(VersionContext);
@@ -102,7 +102,7 @@ export const UnifiedTocNavItem = ({
         <>
           <StaticNavItem
             label={label}
-            url={url}
+            newUrl={newUrl}
             slug={slug}
             items={items}
             contentSite={contentSite}
@@ -111,13 +111,13 @@ export const UnifiedTocNavItem = ({
             setShowDriverBackBtn={setShowDriverBackBtn}
             isAccordion={isAccordion}
           />
-          {versionDropdown && url === currentL2s?.url && <UnifiedVersionDropdown contentSite={contentSite} />}
-          {url === currentL2s?.url &&
+          {versionDropdown && newUrl === currentL2s?.newUrl && <UnifiedVersionDropdown contentSite={contentSite} />}
+          {newUrl === currentL2s?.newUrl &&
             items?.map((tocItem) => (
               <UnifiedTocNavItem
                 {...tocItem}
                 level={level}
-                key={tocItem.url + tocItem.label}
+                key={tocItem.newUrl + tocItem.label}
                 slug={slug}
                 isStatic={false}
                 isAccordion={isAccordion}
@@ -126,7 +126,7 @@ export const UnifiedTocNavItem = ({
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
             ))}
-          {items && items.length > 0 && url === currentL2s?.url && <Border />}
+          {items && items.length > 0 && newUrl === currentL2s?.newUrl && <Border />}
         </>
       );
     }
@@ -138,7 +138,7 @@ export const UnifiedTocNavItem = ({
           <UnifiedTocNavItem
             {...tocItem}
             level={level}
-            key={tocItem.url + tocItem.label}
+            key={tocItem.newUrl + tocItem.label}
             slug={slug}
             isStatic={false}
             isAccordion={isAccordion}
@@ -161,7 +161,7 @@ export const UnifiedTocNavItem = ({
             <UnifiedTocNavItem
               {...tocItem}
               level={level}
-              key={tocItem.url + tocItem.label}
+              key={tocItem.newUrl + tocItem.label}
               slug={slug}
               isAccordion={isAccordion}
               setCurrentL2s={setCurrentL2s}
@@ -177,7 +177,7 @@ export const UnifiedTocNavItem = ({
   const handleClick = () => {
     // Allows for the showSubNav nodes to have their own L2 panel
     setShowDriverBackBtn(true);
-    setCurrentL2s({ items, url, label, contentSite });
+    setCurrentL2s({ items, newUrl, label, contentSite });
   };
 
   if (showSubNav) {
@@ -186,7 +186,7 @@ export const UnifiedTocNavItem = ({
         aria-label={label}
         as={isUnifiedTOCInDevMode ? DevWrapper : Link}
         contentSite={contentSite}
-        to={url}
+        to={newUrl}
         onClick={handleClick}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       >
@@ -205,7 +205,7 @@ export const UnifiedTocNavItem = ({
       <CollapsibleNavItem
         items={items}
         label={label}
-        url={url}
+        newUrl={newUrl}
         level={level}
         isAccordion={isAccordion}
         setShowDriverBackBtn={setShowDriverBackBtn}
@@ -221,11 +221,11 @@ export const UnifiedTocNavItem = ({
   if (isVersionAllowed) {
     return (
       <SideNavItem
-        active={isSelectedTab(url, slug)}
+        active={isSelectedTab(newUrl, slug)}
         aria-label={label}
         as={Link}
         contentSite={contentSite}
-        to={url}
+        to={newUrl}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       >
         {label}
@@ -239,7 +239,7 @@ export const UnifiedTocNavItem = ({
 interface CollapsibleNavItemProps {
   items?: TocItem[];
   label: string;
-  url?: string;
+  newUrl?: string;
   slug: string;
   contentSite?: string;
   setShowDriverBackBtn: (show: boolean) => void;
@@ -253,7 +253,7 @@ interface CollapsibleNavItemProps {
 function CollapsibleNavItem({
   items,
   label,
-  url,
+  newUrl,
   slug,
   contentSite,
   setShowDriverBackBtn,
@@ -262,10 +262,10 @@ function CollapsibleNavItem({
   isAccordion,
   level,
 }: CollapsibleNavItemProps): JSX.Element {
-  const isActiveCollapsible = isActiveTocNode(slug, url, items);
+  const isActiveCollapsible = isActiveTocNode(slug, newUrl, items);
   const [isOpen, setIsOpen] = useState<boolean>(isActiveCollapsible);
   const caretType = isOpen ? 'CaretDown' : 'CaretUp';
-  const isActive = isSelectedTab(url, slug);
+  const isActive = isSelectedTab(newUrl, slug);
   const openedByCaret = useRef<boolean>(false);
 
   const onCaretClick = (event: React.MouseEvent) => {
@@ -290,9 +290,9 @@ function CollapsibleNavItem({
   return (
     <>
       <SideNavItem
-        as={url ? Link : LinkWrapper}
+        as={newUrl ? Link : LinkWrapper}
         contentSite={contentSite}
-        to={url || undefined}
+        to={newUrl || undefined}
         active={isActive}
         className={cx(l2ItemStyling({ level, isAccordion }), overwriteLinkStyle)}
         onClick={handleClick}
@@ -311,7 +311,7 @@ function CollapsibleNavItem({
           <UnifiedTocNavItem
             {...item}
             level={level + 1}
-            key={item.url + item.label}
+            key={item.newUrl + item.label}
             slug={slug}
             setShowDriverBackBtn={setShowDriverBackBtn}
             setCurrentL2s={setCurrentL2s}
@@ -325,7 +325,7 @@ function CollapsibleNavItem({
 
 interface StaticNavItemProps {
   label: string;
-  url?: string;
+  newUrl?: string;
   slug: string;
   items?: TocItem[];
   contentSite?: string;
@@ -338,7 +338,7 @@ interface StaticNavItemProps {
 
 export function StaticNavItem({
   label,
-  url,
+  newUrl,
   slug,
   items,
   contentSite,
@@ -348,7 +348,7 @@ export function StaticNavItem({
   isAccordion,
   setShowDriverBackBtn,
 }: StaticNavItemProps): JSX.Element {
-  const isActive = isActiveTocNode(slug, url, items);
+  const isActive = isActiveTocNode(slug, newUrl, items);
 
   return (
     <SideNavItem
@@ -357,10 +357,10 @@ export function StaticNavItem({
       contentSite={contentSite}
       hideExternalIcon={true}
       as={isUnifiedTOCInDevMode ? DevWrapper : Link}
-      to={url}
+      to={newUrl}
       onClick={() => {
-        setCurrentL1({ items, url, versionDropdown, label, contentSite });
-        setCurrentL2s({ items, url, versionDropdown, label, contentSite });
+        setCurrentL1({ items, newUrl, versionDropdown, label, contentSite });
+        setCurrentL2s({ items, newUrl, versionDropdown, label, contentSite });
         setShowDriverBackBtn(false);
       }}
       className={cx(l1ItemStyling({ isActive, isAccordion }))}

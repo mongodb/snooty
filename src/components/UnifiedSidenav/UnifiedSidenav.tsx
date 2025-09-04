@@ -125,7 +125,7 @@ const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }
 
       return {
         ...item,
-        url: newUrl,
+        newUrl,
         items,
         contentSite: currentProject,
       } as TocItem;
@@ -141,7 +141,7 @@ const findPageParent = (tree: TocItem[], targetUrl: string): [boolean, TocItem |
     path.push(item);
 
     if (
-      assertLeadingSlash(removeTrailingSlash(removeAnchor(item.url ?? ''))) ===
+      assertLeadingSlash(removeTrailingSlash(removeAnchor(item.newUrl ?? ''))) ===
       assertLeadingSlash(removeTrailingSlash(targetUrl))
     ) {
       for (let i = path.length - 1; i >= 0; i--) {
@@ -207,7 +207,7 @@ export const UnifiedSidenav = ({ slug: initialSlug }: { slug: string }) => {
 
   const [currentL1, setCurrentL1] = useState<TocItem | undefined>(() => {
     return tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.url ?? '', staticTocItem.items);
+      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
     });
   });
 
@@ -216,7 +216,7 @@ export const UnifiedSidenav = ({ slug: initialSlug }: { slug: string }) => {
   useEffect(() => {
     const [isDriver, updatedL2s] = findPageParent(tree, slug);
     const updatedL1s = tree.find((staticTocItem) => {
-      return isActiveTocNode(slug, staticTocItem.url ?? '', staticTocItem.items);
+      return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
     });
 
     setShowDriverBackBtn(isDriver);
@@ -241,6 +241,8 @@ export const UnifiedSidenav = ({ slug: initialSlug }: { slug: string }) => {
 
   // listen for scrolls for mobile and tablet menu
   const viewport = useViewport(false);
+
+  console.log('tree', tree);
 
   // Hide the Sidenav with css while keeping state as open/not collapsed.
   // This prevents LG's SideNav component from being seen in its collapsed state on mobile

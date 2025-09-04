@@ -107,7 +107,7 @@ export const DoublePannedNav = ({
             <StaticNavItem
               {...staticTocItem}
               slug={slug}
-              key={staticTocItem.url + staticTocItem.label}
+              key={staticTocItem.newUrl + staticTocItem.label}
               setCurrentL1={setCurrentL1}
               setCurrentL2s={setCurrentL2s}
               setShowDriverBackBtn={setShowDriverBackBtn}
@@ -122,7 +122,7 @@ export const DoublePannedNav = ({
               <BackLink
                 className={cx(backLinkStyling)}
                 onClick={() => setShowDriverBackBtn(false)}
-                href={currentL1?.url}
+                href={currentL1?.newUrl}
               >
                 Back to {currentL1?.label}
               </BackLink>
@@ -131,7 +131,7 @@ export const DoublePannedNav = ({
               <UnifiedTocNavItem
                 {...navItems}
                 level={1}
-                key={navItems.url + navItems.label}
+                key={navItems.newUrl + navItems.label}
                 slug={slug}
                 isAccordion={false}
                 setCurrentL1={setCurrentL1}

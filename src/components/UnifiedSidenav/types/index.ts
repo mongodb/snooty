@@ -6,6 +6,7 @@ export interface BreadCrumb {
 export interface TocItem {
   label: string;
   url?: string;
+  newUrl?: string;
   group?: boolean;
   contentSite?: string;
   collapsible?: boolean;
