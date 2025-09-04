@@ -101,8 +101,8 @@ export const DoublePannedNav = ({
         <ArtificialPadding />
         <DocsHomeButton />
       </div>
-      <div className={cx(panelStyling)} data-nav-panel="fixed-sidenav">
-        <div className={cx(leftPane)} data-nav-pane="left">
+      <div className={cx(panelStyling)}>
+        <div className={cx(leftPane)}>
           {tree.map((staticTocItem) => (
             <StaticNavItem
               {...staticTocItem}
@@ -117,7 +117,7 @@ export const DoublePannedNav = ({
         </div>
         {currentL1?.versionDropdown && <UnifiedVersionDropdown contentSite={currentL1?.contentSite} />}
         {currentL2s?.items && currentL2s.items.length > 0 && (
-          <div className={cx(rightPane)} data-nav-pane="right">
+          <div className={cx(rightPane)}>
             {showDriverBackBtn && (
               <BackLink
                 className={cx(backLinkStyling)}
