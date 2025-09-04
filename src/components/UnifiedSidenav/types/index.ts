@@ -7,15 +7,15 @@ export interface TocItem {
   label: string;
   url?: string;
   group?: boolean;
-  contentSite: string;
+  contentSite?: string;
   collapsible?: boolean;
   breadcrumbs?: BreadCrumb[];
   showSubNav?: boolean;
   isExternal?: boolean;
   versionDropdown?: boolean;
+  versions?: {
+    includes?: string[];
+    excludes?: string[];
+  };
   items?: TocItem[];
-}
-
-export interface ActiveVersions {
-  [project: string]: string;
 }

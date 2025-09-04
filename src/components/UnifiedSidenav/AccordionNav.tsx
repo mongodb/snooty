@@ -9,8 +9,9 @@ import DocsHomeButton from '../Sidenav/DocsHomeButton';
 import { DownloadButton } from '../OfflineDownloadModal';
 import { NavTopContainer, downloadButtonStlying, ArtificialPadding } from './UnifiedSidenav';
 import { UnifiedTocNavItem } from './UnifiedTocNavItems';
+import { TocItem } from './types';
 
-export const leftPane = () => LeafyCSS`
+export const leftPane = LeafyCSS`
   overflow-y: auto;
   border-right: 1px solid var(--sidenav-border-bottom-color);
   width: 100%;
@@ -38,7 +39,7 @@ const panelStyling = LeafyCSS`
 
 `;
 
-const sideNavStyle = ({ hideMobile }) => LeafyCSS`  
+const sideNavStyle = ({ hideMobile }: { hideMobile: boolean }) => LeafyCSS`  
   height: 100%;
   padding: 0px;
 
@@ -67,6 +68,18 @@ const backLinkStyling = LeafyCSS`
   }
 `;
 
+interface AccordionNavPanelProps {
+  showDriverBackBtn: boolean;
+  setShowDriverBackBtn: (show: boolean) => void;
+  slug: string;
+  currentL1?: TocItem;
+  currentL2s?: TocItem | null;
+  setCurrentL1: (item: TocItem) => void;
+  setCurrentL2s: (item: TocItem) => void;
+  tree: TocItem[];
+  hideMobile: boolean;
+}
+
 export const AccordionNavPanel = ({
   showDriverBackBtn,
   setShowDriverBackBtn,
@@ -77,15 +90,15 @@ export const AccordionNavPanel = ({
   setCurrentL2s,
   tree,
   hideMobile,
-}) => {
+}: AccordionNavPanelProps) => {
   const { isTabletOrMobile } = useScreenSize();
   const viewportSize = useViewportSize();
 
   return (
     <SideNav
-      widthOverride={isTabletOrMobile ? viewportSize.width : 290}
+      widthOverride={isTabletOrMobile && viewportSize ? viewportSize.width : 290}
       className={cx(sideNavStyle({ hideMobile }))}
-      aria-label="Side navigation Panel"
+      aria-label="Accordion Side navigation Panel"
     >
       <div className={cx(NavTopContainer(isTabletOrMobile))}>
         <ArtificialPadding />
@@ -98,15 +111,15 @@ export const AccordionNavPanel = ({
               <BackLink
                 className={cx(backLinkStyling)}
                 onClick={() => setShowDriverBackBtn(false)}
-                href={currentL1?.newUrl}
+                href={currentL1?.url}
               >
                 Back to {currentL1?.label}
               </BackLink>
-              {currentL2s.items?.map((navItem) => (
+              {currentL2s?.items?.map((navItem) => (
                 <UnifiedTocNavItem
                   {...navItem}
                   level={1}
-                  key={navItem.newUrl + navItem.label}
+                  key={navItem.url + navItem.label}
                   group={true}
                   isStatic={false}
                   slug={slug}
@@ -124,7 +137,7 @@ export const AccordionNavPanel = ({
                 <UnifiedTocNavItem
                   {...navItems}
                   level={1}
-                  key={navItems.newUrl + navItems.label}
+                  key={navItems.url + navItems.label}
                   group={true}
                   isStatic={true}
                   slug={slug}
