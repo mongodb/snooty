@@ -23,7 +23,6 @@ const ChatbotModal = ({ chatbotClicked, setChatbotClicked }: ChatbotModalProps) 
     if (chatbotClicked) {
       openChat();
 
-      // Set the input text if we have pending text
       if (pendingInputText) {
         setInputText(pendingInputText);
       }
