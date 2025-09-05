@@ -189,7 +189,7 @@ export const UnifiedSidenav = ({ slug: initialSlug }: { slug: string }) => {
   let slug =
     tempSlug?.startsWith('docs/') || hasLang
       ? tempSlug
-      : tempSlug === '/'
+      : tempSlug === '/' || tempSlug === ''
       ? pathPrefix + tempSlug
       : `${pathPrefix}/${tempSlug}/`;
 
