@@ -6,6 +6,12 @@ import { InstruqtProvider } from '../../src/components/Instruqt/instruqt-context
 import Heading from '../../src/components/Heading';
 import mockData from './data/Instruqt.test.json';
 
+jest.mock('../../src/context/chatbot-context', () => ({
+  useChatbot: () => ({
+    openChatbotWithText: jest.fn(),
+  }),
+}));
+
 const mockTitleHeading = {
   children: [
     {

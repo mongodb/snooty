@@ -14,7 +14,7 @@ interface ChatbotProviderProps {
   children: ReactNode;
 }
 
-export const ChatbotProvider: React.FC<ChatbotProviderProps> = ({ children }) => {
+export const ChatbotProvider = ({ children }: ChatbotProviderProps) => {
   const [chatbotClicked, setChatbotClicked] = useState(false);
   const [pendingInputText, setPendingInputText] = useState<string | null>(null);
 
