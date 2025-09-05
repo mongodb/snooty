@@ -6,6 +6,12 @@ import Procedure from '../../src/components/Procedure';
 // data for this component
 import mockData from './data/Procedure.test.json';
 
+jest.mock('../../src/context/chatbot-context', () => ({
+  useChatbot: () => ({
+    openChatbotWithText: jest.fn(),
+  }),
+}));
+
 beforeAll(() => {
   mockLocation(null, `/`);
 });

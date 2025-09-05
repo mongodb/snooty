@@ -1,4 +1,4 @@
-import React, { lazy, useState, useContext } from 'react';
+import React, { lazy, useContext } from 'react';
 import Button from '@leafygreen-ui/button';
 import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
@@ -12,6 +12,7 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import { PageTemplateType } from '../../context/page-context';
 import { SidenavContext } from '../Sidenav';
 import { SuspenseHelper } from '../SuspenseHelper';
+import { useChatbot } from '../../context/chatbot-context';
 import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
 import {
@@ -38,7 +39,7 @@ interface ActionBarProps {
 }
 
 const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
-  const [chatbotClicked, setChatbotClicked] = useState(false);
+  const { chatbotClicked, setChatbotClicked } = useChatbot();
   const locale = getCurrLocale();
 
   const { fakeColumns, containerClassname, searchContainerClassname } = getContainerStyling(template);
@@ -47,7 +48,7 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
 
   const openChatbot = () => {
     reportAnalytics('Chatbot button clicked');
-    setChatbotClicked((currVal) => !currVal);
+    setChatbotClicked(!chatbotClicked);
   };
   const { snootyEnv } = useSiteMetadata();
   const { darkMode } = useDarkMode();

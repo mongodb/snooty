@@ -18,6 +18,7 @@ import { useRemoteMetadata } from '../hooks/use-remote-metadata';
 import { getAllLocaleCssStrings } from '../utils/locale';
 import { OfflineDownloadProvider } from '../components/OfflineDownloadModal/DownloadContext';
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
+import { ChatbotProvider } from '../context/chatbot-context';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { removeTrailingSlash } from '../utils/remove-trailing-slash';
 import { isBrowser } from '../utils/is-browser';
@@ -147,36 +148,38 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
         remoteMetadata={remoteMetadata}
         project={project}
       >
-        <GlobalGrid isInPresentationMode={isInPresentationMode}>
-          {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
-          {sidenav && !isInPresentationMode ? (
-            <ToastProvider portalClassName={cx(toastPortalStyling)}>
-              <OfflineDownloadProvider>
-                {isUnifiedToc ? (
-                  <UnifiedSidenav slug={slug} />
-                ) : (
-                  <Sidenav
-                    chapters={chapters}
-                    guides={guides}
-                    page={page?.ast}
-                    pageTitle={pageTitle}
-                    repoBranches={repoBranches}
-                    slug={slug}
-                    toctree={toctree}
-                    eol={eol}
-                    template={template}
-                  />
-                )}
-              </OfflineDownloadProvider>
-            </ToastProvider>
-          ) : (
-            <div />
-          )}
-          <StyledContentContainer>
-            <ActionBar template={template} slug={slug} sidenav={sidenav} />
-            <ContentTransition slug={slug}>{children}</ContentTransition>
-          </StyledContentContainer>
-        </GlobalGrid>
+        <ChatbotProvider>
+          <GlobalGrid isInPresentationMode={isInPresentationMode}>
+            {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
+            {sidenav && !isInPresentationMode ? (
+              <ToastProvider portalClassName={cx(toastPortalStyling)}>
+                <OfflineDownloadProvider>
+                  {isUnifiedToc ? (
+                    <UnifiedSidenav slug={slug} />
+                  ) : (
+                    <Sidenav
+                      chapters={chapters}
+                      guides={guides}
+                      page={page?.ast}
+                      pageTitle={pageTitle}
+                      repoBranches={repoBranches}
+                      slug={slug}
+                      toctree={toctree}
+                      eol={eol}
+                      template={template}
+                    />
+                  )}
+                </OfflineDownloadProvider>
+              </ToastProvider>
+            ) : (
+              <div />
+            )}
+            <StyledContentContainer>
+              <ActionBar template={template} slug={slug} sidenav={sidenav} />
+              <ContentTransition slug={slug}>{children}</ContentTransition>
+            </StyledContentContainer>
+          </GlobalGrid>
+        </ChatbotProvider>
       </RootProvider>
     </>
   );

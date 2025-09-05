@@ -7,6 +7,7 @@ import {
   PoweredByAtlasVectorSearch,
 } from 'mongodb-chatbot-ui';
 import { css } from '@leafygreen-ui/emotion';
+import { useChatbot } from '../../context/chatbot-context';
 import { defaultSuggestedPrompts } from '../ChatbotUi';
 
 interface ChatbotModalProps {
@@ -15,13 +16,20 @@ interface ChatbotModalProps {
 }
 
 const ChatbotModal = ({ chatbotClicked, setChatbotClicked }: ChatbotModalProps) => {
-  const { openChat } = useChatbotContext();
+  const { openChat, setInputText } = useChatbotContext();
+  const { pendingInputText } = useChatbot();
+
   useEffect(() => {
     if (chatbotClicked) {
       openChat();
+
+      if (pendingInputText) {
+        setInputText(pendingInputText);
+      }
+
       setChatbotClicked(false);
     }
-  }, [chatbotClicked, openChat, setChatbotClicked]);
+  }, [chatbotClicked, openChat, setChatbotClicked, pendingInputText, setInputText]);
 
   return (
     <ModalView

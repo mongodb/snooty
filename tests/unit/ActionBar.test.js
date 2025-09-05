@@ -8,6 +8,14 @@ import { PLACEHOLDER_TEXT } from '../../src/components/ActionBar/SearchInput';
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),
 }));
+
+jest.mock('../../src/context/chatbot-context', () => ({
+  useChatbot: () => ({
+    chatbotClicked: false,
+    setChatbotClicked: jest.fn(),
+  }),
+}));
+
 jest.spyOn(snootyMetadata, 'default').mockImplementation(() => ({
   branch: 'master',
   project: '',

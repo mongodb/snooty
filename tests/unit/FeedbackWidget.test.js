@@ -34,6 +34,12 @@ import { PageContext } from '../../src/context/page-context';
 import { MetadataProvider } from '../../src/utils/use-snooty-metadata';
 import headingData from './data/Heading.test.json';
 
+jest.mock('../../src/context/chatbot-context', () => ({
+  useChatbot: () => ({
+    openChatbotWithText: jest.fn(),
+  }),
+}));
+
 async function mountFormWithFeedbackState(feedbackState = {}) {
   const { view, isSupportRequest, screenshotTaken, ...feedback } = feedbackState;
   const wrapper = render(

@@ -4,12 +4,25 @@ import * as Gatsby from 'gatsby';
 import * as ReachRouter from '@gatsbyjs/reach-router';
 import CopyPageMarkdownButton from '../../src/components/Widgets/MarkdownWidget';
 
-const renderCopyMarkdownButton = () => render(<CopyPageMarkdownButton />);
+const renderCopyMarkdownButton = (props = {}) => render(<CopyPageMarkdownButton {...props} />);
 
 const mockedNavigate = jest.spyOn(Gatsby, 'navigate');
 const mockedUseLocation = jest.spyOn(ReachRouter, 'useLocation') as jest.SpyInstance<Partial<Location>>;
 const mockedConsoleError = jest.spyOn(console, 'error');
 const mockedFetch = jest.spyOn(global, 'fetch') as jest.Mock;
+
+const mockOpenChatbotWithText = jest.fn();
+jest.mock('../../src/context/chatbot-context', () => ({
+  useChatbot: () => ({
+    openChatbotWithText: mockOpenChatbotWithText,
+  }),
+}));
+
+jest.mock('../../src/hooks/use-site-metadata', () => ({
+  useSiteMetadata: () => ({
+    pathPrefix: '/docs/atlas',
+  }),
+}));
 
 // Mock clipboard
 Object.defineProperty(global.navigator, 'clipboard', {
@@ -28,6 +41,7 @@ describe('Copy markdown button', () => {
 
     mockedNavigate.mockReset();
     mockedFetch.mockReset();
+    mockOpenChatbotWithText.mockReset();
     jest.clearAllMocks();
   });
 
@@ -76,5 +90,25 @@ describe('Copy markdown button', () => {
       expect(navigator.clipboard.writeText).not.toHaveBeenCalled();
       expect(mockedConsoleError).toHaveBeenCalled();
     });
+  });
+
+  it('opens chatbot with pre-filled message question about the current page', async () => {
+    // Render component with a slug prop
+    const { getByLabelText, getByText } = renderCopyMarkdownButton({ slug: 'tutorial/foo' });
+
+    // Click the dropdown trigger (arrow button) to open the menu
+    fireEvent.click(getByLabelText('More options'));
+
+    // Wait for menu to appear and click "Ask a Question"
+    await waitFor(() => {
+      expect(getByText('Ask a Question')).toBeInTheDocument();
+    });
+
+    fireEvent.click(getByText('Ask a Question'));
+
+    // Verify that openChatbotWithText was called with the correct message
+    expect(mockOpenChatbotWithText).toHaveBeenCalledWith(
+      "I have a question about the page I'm on: www.mongodb.com/docs/atlas/tutorial/foo"
+    );
   });
 });
