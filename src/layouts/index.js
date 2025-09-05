@@ -161,7 +161,7 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
     const selectedLink = document.querySelector('a[aria-current="page"]');
     const navDoublePannedContainer = document.querySelector('nav[aria-label*="Double Panned Side navigation Panel"]');
 
-    if (navDoublePannedContainer && navDoublePannedContainer.offsetWidth > 0) {
+    if (navDoublePannedContainer?.offsetWidth > 0) {
       // Double Panned Nav is visible
       const element = document.querySelector('[data-nav-panel="fixed-sidenav"] a[aria-current="page"]');
       if (element) {
