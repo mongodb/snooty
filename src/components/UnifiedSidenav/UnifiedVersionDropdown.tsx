@@ -1,6 +1,6 @@
 import React from 'react';
 import VersionDropdown from '../VersionDropdown';
 
-export function UnifiedVersionDropdown({ contentSite }) {
+export const UnifiedVersionDropdown = ({ contentSite }: { contentSite?: string }) => {
   return <VersionDropdown contentSite={contentSite} />;
-}
+};
