@@ -19,8 +19,8 @@ import { getAllLocaleCssStrings } from '../utils/locale';
 import { OfflineDownloadProvider } from '../components/OfflineDownloadModal/DownloadContext';
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
 import { getFeatureFlags } from '../utils/feature-flags';
-import { removeTrailingSlash } from '../utils/remove-trailing-slash';
 import { isBrowser } from '../utils/is-browser';
+import { loadHashIntoView } from '../utils/load-hash-into-view';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -124,21 +124,6 @@ const scrollIntoViewInDoublePanned = (element, container) => {
   });
 };
 
-export const loadHashInView = (hash) => {
-  if (hash) {
-    // Decode the hash so '.' and '-' don't cause issues
-    const hashWithoutSymbol = removeTrailingSlash(hash).substring(1);
-    const decodedHash = decodeURIComponent(hashWithoutSymbol);
-    const selector = '#' + CSS.escape(decodedHash);
-
-    const el = document.querySelector(selector);
-
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-};
-
 const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, template } }) => {
   const { page } = data || {};
   const { sidenav } = getTemplate(template);
@@ -155,7 +140,7 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
 
   useEffect(() => {
     if (!isBrowser) return;
-    loadHashInView(hash);
+    loadHashIntoView(hash);
 
     // Scrolls selected sidenav item into view
     const selectedLink = document.querySelector('a[aria-current="page"]');
