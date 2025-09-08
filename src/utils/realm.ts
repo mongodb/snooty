@@ -2,7 +2,6 @@ import * as Realm from 'realm-web';
 import { Filter, FindOptions, Document } from 'mongodb';
 import { SNOOTY_REALM_APP_ID } from '../build-constants';
 import { Docset, MetadataDatabaseName, ReposDatabaseName, SnootyEnv } from '../types/data';
-import { SearchPropertyMapping } from '../hooks/use-marian-manifests';
 import { currentRealmUsersCleanup } from './realm-user-management';
 
 type Projection<T> = Pick<T, Extract<keyof T, string | number>> | Record<string, 0 | 1>;
@@ -59,10 +58,6 @@ export const fetchBanner = async (snootyEnv: SnootyEnv) => {
 
 export const fetchBreadcrumbs = async (database: MetadataDatabaseName, project: string) => {
   return callAuthenticatedFunction('fetchBreadcrumbs', database, project);
-};
-
-export const fetchSearchPropertyMapping = async (snootyEnv: SnootyEnv): Promise<SearchPropertyMapping> => {
-  return callAuthenticatedFunction('fetchSearchPropertyMapping', snootyEnv);
 };
 
 export const fetchOASFile = async (apiName: string, database: MetadataDatabaseName) => {
