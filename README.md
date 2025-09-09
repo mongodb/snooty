@@ -72,7 +72,7 @@ Snooty's `build` and `serve` stages use the `production` environment. Your `.env
 GATSBY_SNOOTY_DEV=true
 GATSBY_NEXT_API_BASE_URL=https://docs-on-nextjs.netlify.app/api
 ```
-### Unified ToC setup
+### Unified ToC Setup
 
 1. Build the toc.json file in your local `doc-mongodb-internal` repo.
    * `> cd docs-mongodb-internal/content/table-of-contents`
