@@ -18,7 +18,7 @@ jobs:
       NPM_BASE_64_AUTH: ${{ secrets.NPM_BASE_64_AUTH }}
       NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v1
         with:
           node-version: '18.15'

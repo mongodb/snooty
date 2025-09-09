@@ -292,7 +292,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   let repoBranches = null;
   try {
-    const repoInfo = await db.realmInterface.fetchDocset();
+    const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/docsets/${siteMetadata.project}`);
+    const repoInfo = await res.json();
     let errMsg;
 
     if (!repoInfo) {
