@@ -27,6 +27,7 @@ type CopyPageMarkdownButtonProps = {
 const splitButtonStyles = css`
   [data-theme] {
     width: 310px;
+    background-color: #001e2b;
   }
   min-width: 145px;
 `;
