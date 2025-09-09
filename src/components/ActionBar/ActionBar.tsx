@@ -43,7 +43,7 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
 
   const openChatbot = () => {
     reportAnalytics('Chatbot button clicked');
-    setChatbotClicked(!chatbotClicked);
+    setChatbotClicked((currVal) => !currVal);
   };
 
   return (
