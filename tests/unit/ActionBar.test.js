@@ -9,13 +9,6 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),
 }));
 
-jest.mock('../../src/context/chatbot-context', () => ({
-  useChatbot: () => ({
-    chatbotClicked: false,
-    setChatbotClicked: jest.fn(),
-  }),
-}));
-
 jest.spyOn(snootyMetadata, 'default').mockImplementation(() => ({
   branch: 'master',
   project: '',
@@ -31,24 +24,25 @@ useAllDocsetsMock.mockImplementation(() => [
   },
 ]);
 
-const conversationSpy = jest.fn();
+const mockConversationSpy = jest.fn();
 // eslint-disable-next-line no-unused-vars
-const MongoDBChatbot = jest.mock('mongodb-chatbot-ui', () => {
-  const chatbot = jest.requireActual('mongodb-chatbot-ui');
-
-  return {
-    __esModule: true,
-    ...chatbot,
-    useChatbotContext: () => ({
-      setInputText: () => {},
-      handleSubmit: () => {},
-      conversation: {
-        createConversation: conversationSpy,
-        conversationId: null,
-      },
-    }),
-  };
-});
+jest.mock('mongodb-chatbot-ui', () => ({
+  __esModule: true,
+  useChatbotContext: () => ({
+    openChat: jest.fn(),
+    setInputText: jest.fn(),
+    handleSubmit: jest.fn(),
+    conversation: {
+      createConversation: mockConversationSpy,
+      conversationId: null,
+    },
+  }),
+  ModalView: () => null,
+  MongoDbLegalDisclosure: () => null,
+  mongoDbVerifyInformationMessage: 'Mock message',
+  PoweredByAtlasVectorSearch: () => null,
+  default: () => null,
+}));
 
 describe('ActionBar', () => {
   let consoleSpy;

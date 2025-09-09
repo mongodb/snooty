@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy } from 'react';
 import PropTypes from 'prop-types';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { ToastProvider } from '@leafygreen-ui/toast';
 import { useLocation } from '@gatsbyjs/reach-router';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import ActionBar from '../components/ActionBar/ActionBar';
 import ContentTransition from '../components/ContentTransition';
 import Header from '../components/Header';
@@ -18,10 +19,11 @@ import { useRemoteMetadata } from '../hooks/use-remote-metadata';
 import { getAllLocaleCssStrings } from '../utils/locale';
 import { OfflineDownloadProvider } from '../components/OfflineDownloadModal/DownloadContext';
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
-import { ChatbotProvider } from '../context/chatbot-context';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { removeTrailingSlash } from '../utils/remove-trailing-slash';
 import { isBrowser } from '../utils/is-browser';
+import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { SuspenseHelper } from '../components/SuspenseHelper';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -104,6 +106,7 @@ export const StyledContentContainer = styled('div')`
 const toastPortalStyling = LeafyCSS`
   z-index: ${theme.zIndexes.sidenav + 1};
 `;
+const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 
 const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, template } }) => {
   const { page } = data || {};
@@ -113,6 +116,11 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
   const remoteMetadata = useRemoteMetadata();
   const { hash } = useLocation();
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
+  const { snootyEnv } = useSiteMetadata();
+  const { darkMode } = useDarkMode();
+  const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(snootyEnv)
+    ? 'https://knowledge.mongodb.com/api/v1'
+    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   const pageTitle = React.useMemo(
     () => page?.ast?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug],
@@ -148,38 +156,40 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
         remoteMetadata={remoteMetadata}
         project={project}
       >
-        <ChatbotProvider>
-          <GlobalGrid isInPresentationMode={isInPresentationMode}>
-            {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
-            {sidenav && !isInPresentationMode ? (
-              <ToastProvider portalClassName={cx(toastPortalStyling)}>
-                <OfflineDownloadProvider>
-                  {isUnifiedToc ? (
-                    <UnifiedSidenav slug={slug} />
-                  ) : (
-                    <Sidenav
-                      chapters={chapters}
-                      guides={guides}
-                      page={page?.ast}
-                      pageTitle={pageTitle}
-                      repoBranches={repoBranches}
-                      slug={slug}
-                      toctree={toctree}
-                      eol={eol}
-                      template={template}
-                    />
-                  )}
-                </OfflineDownloadProvider>
-              </ToastProvider>
-            ) : (
-              <div />
-            )}
-            <StyledContentContainer>
-              <ActionBar template={template} slug={slug} sidenav={sidenav} />
-              <ContentTransition slug={slug}>{children}</ContentTransition>
-            </StyledContentContainer>
-          </GlobalGrid>
-        </ChatbotProvider>
+        <SuspenseHelper fallback={null}>
+          <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
+            <GlobalGrid isInPresentationMode={isInPresentationMode}>
+              {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
+              {sidenav && !isInPresentationMode ? (
+                <ToastProvider portalClassName={cx(toastPortalStyling)}>
+                  <OfflineDownloadProvider>
+                    {isUnifiedToc ? (
+                      <UnifiedSidenav slug={slug} />
+                    ) : (
+                      <Sidenav
+                        chapters={chapters}
+                        guides={guides}
+                        page={page?.ast}
+                        pageTitle={pageTitle}
+                        repoBranches={repoBranches}
+                        slug={slug}
+                        toctree={toctree}
+                        eol={eol}
+                        template={template}
+                      />
+                    )}
+                  </OfflineDownloadProvider>
+                </ToastProvider>
+              ) : (
+                <div />
+              )}
+              <StyledContentContainer>
+                <ActionBar template={template} slug={slug} sidenav={sidenav} />
+                <ContentTransition slug={slug}>{children}</ContentTransition>
+              </StyledContentContainer>
+            </GlobalGrid>
+          </Chatbot>
+        </SuspenseHelper>
       </RootProvider>
     </>
   );

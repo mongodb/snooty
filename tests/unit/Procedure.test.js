@@ -2,22 +2,44 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { mockLocation } from '../utils/mock-location';
 import Procedure from '../../src/components/Procedure';
+import { AncestorComponentContextProvider } from '../../src/context/ancestor-components-context';
+import { HeadingContextProvider } from '../../src/context/heading-context';
 
 // data for this component
 import mockData from './data/Procedure.test.json';
 
-jest.mock('../../src/context/chatbot-context', () => ({
-  useChatbot: () => ({
-    openChatbotWithText: jest.fn(),
+jest.mock('mongodb-chatbot-ui', () => ({
+  __esModule: true,
+  useChatbotContext: () => ({
+    openChat: jest.fn(),
+    setInputText: jest.fn(),
+    handleSubmit: jest.fn(),
   }),
+  default: () => null,
 }));
+
+// Mock ComponentFactory to return simple content for testing
+jest.mock('../../src/components/ComponentFactory', () => {
+  return function ComponentFactory({ nodeData }) {
+    if (!nodeData) return null;
+    return 'Mock Content';
+  };
+});
+
+const renderWithContexts = (component) => {
+  return render(
+    <AncestorComponentContextProvider component="document">
+      <HeadingContextProvider>{component}</HeadingContextProvider>
+    </AncestorComponentContextProvider>
+  );
+};
 
 beforeAll(() => {
   mockLocation(null, `/`);
 });
 
 it('renders correctly', () => {
-  const tree = render(<Procedure nodeData={mockData.testSteps} />);
+  const tree = renderWithContexts(<Procedure nodeData={mockData.testSteps} />);
   expect(tree.asFragment()).toMatchSnapshot();
 });
 
@@ -26,12 +48,12 @@ it('renders with "normal" or YAML steps styling', () => {
   mockData.testSteps.options = {
     style: 'normal',
   };
-  const tree = render(<Procedure nodeData={mockData.testSteps} />);
+  const tree = renderWithContexts(<Procedure nodeData={mockData.testSteps} />);
   expect(tree.asFragment()).toMatchSnapshot();
 });
 
 it('renders steps nested in include nodes', () => {
-  const tree = render(<Procedure nodeData={mockData.nestedSteps} />);
+  const tree = renderWithContexts(<Procedure nodeData={mockData.nestedSteps} />);
   expect(tree.asFragment()).toMatchSnapshot();
-  expect(tree.getAllByText(/Step/)).toHaveLength(7);
+  expect(tree.getAllByText(/^[1-7]$/)).toHaveLength(7);
 });

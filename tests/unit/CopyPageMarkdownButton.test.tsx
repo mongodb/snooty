@@ -4,20 +4,27 @@ import * as Gatsby from 'gatsby';
 import * as ReachRouter from '@gatsbyjs/reach-router';
 import CopyPageMarkdownButton from '../../src/components/Widgets/MarkdownWidget';
 
+// Create mock functions that we can access in tests
+const mockOpenChat = jest.fn();
+const mockSetInputText = jest.fn();
+
+// Mock mongodb-chatbot-ui
+jest.mock('mongodb-chatbot-ui', () => ({
+  __esModule: true,
+  useChatbotContext: () => ({
+    openChat: mockOpenChat,
+    setInputText: mockSetInputText,
+    handleSubmit: jest.fn(),
+  }),
+  default: () => null,
+}));
+
 const renderCopyMarkdownButton = (props = {}) => render(<CopyPageMarkdownButton {...props} />);
 
 const mockedNavigate = jest.spyOn(Gatsby, 'navigate');
 const mockedUseLocation = jest.spyOn(ReachRouter, 'useLocation') as jest.SpyInstance<Partial<Location>>;
 const mockedConsoleError = jest.spyOn(console, 'error');
 const mockedFetch = jest.spyOn(global, 'fetch') as jest.Mock;
-
-const mockOpenChatbotWithText = jest.fn();
-jest.mock('../../src/context/chatbot-context', () => ({
-  useChatbot: () => ({
-    openChatbotWithText: mockOpenChatbotWithText,
-  }),
-}));
-
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({
     pathPrefix: '/docs/atlas',
@@ -41,7 +48,8 @@ describe('Copy markdown button', () => {
 
     mockedNavigate.mockReset();
     mockedFetch.mockReset();
-    mockOpenChatbotWithText.mockReset();
+    mockOpenChat.mockReset();
+    mockSetInputText.mockReset();
     jest.clearAllMocks();
   });
 
@@ -106,9 +114,12 @@ describe('Copy markdown button', () => {
 
     fireEvent.click(getByText('Ask a Question'));
 
-    // Verify that openChatbotWithText was called with the correct message
-    expect(mockOpenChatbotWithText).toHaveBeenCalledWith(
+    // Verify that setInputText was called with the correct message
+    expect(mockSetInputText).toHaveBeenCalledWith(
       "I have a question about the page I'm on: www.mongodb.com/docs/atlas/tutorial/foo"
     );
+
+    // Verify that openChat was called
+    expect(mockOpenChat).toHaveBeenCalled();
   });
 });

@@ -6,13 +6,12 @@ import { Toast, ToastProvider, Variant } from '@leafygreen-ui/toast';
 import { MenuItem } from '@leafygreen-ui/menu';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { useChatbotContext } from 'mongodb-chatbot-ui';
 import { theme } from '../../../theme/docsTheme';
 import { removeTrailingSlash } from '../../../utils/remove-trailing-slash';
-import { useChatbot } from '../../../context/chatbot-context';
 import { assertLeadingAndTrailingSlash } from '../../../utils/assert-trailing-and-leading-slash';
 import { removeLeadingSlash } from '../../../utils/remove-leading-slash';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
-
 type ToastOpen = {
   open: boolean;
   variant: Variant;
@@ -35,7 +34,7 @@ const splitButtonStyles = css`
 const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps) => {
   const [toastOpen, setToastOpen] = useState<ToastOpen>({ open: false, variant: Variant.Success });
   const { href } = useLocation();
-  const { openChatbotWithText } = useChatbot();
+  const { openChat, setInputText } = useChatbotContext();
   const { pathPrefix } = useSiteMetadata();
   // First removing the search and then the trailing slash, since we expect the URL to be available in markdown
   // i.e. https://www.mongodb.com/docs/mcp-server/get-started/?client=cursor&deployment-type=atlas ->
@@ -73,11 +72,12 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   };
 
   const askQuestion = () => {
-    openChatbotWithText(
-      `I have a question about the page I'm on: www.mongodb.com${assertLeadingAndTrailingSlash(
-        pathPrefix
-      )}${removeLeadingSlash(slug)}`
-    );
+    const questionText = `I have a question about the page I'm on: www.mongodb.com${assertLeadingAndTrailingSlash(
+      pathPrefix
+    )}${removeLeadingSlash(slug)}`;
+
+    setInputText(questionText);
+    openChat();
   };
 
   return (

@@ -6,10 +6,14 @@ import { InstruqtProvider } from '../../src/components/Instruqt/instruqt-context
 import Heading from '../../src/components/Heading';
 import mockData from './data/Instruqt.test.json';
 
-jest.mock('../../src/context/chatbot-context', () => ({
-  useChatbot: () => ({
-    openChatbotWithText: jest.fn(),
+jest.mock('mongodb-chatbot-ui', () => ({
+  __esModule: true,
+  useChatbotContext: () => ({
+    openChat: jest.fn(),
+    setInputText: jest.fn(),
+    handleSubmit: jest.fn(),
   }),
+  default: () => null,
 }));
 
 const mockTitleHeading = {
