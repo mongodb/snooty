@@ -57,10 +57,6 @@ export const fetchBanner = async (snootyEnv: SnootyEnv) => {
   return callAuthenticatedFunction('getBanner', snootyEnv === 'development');
 };
 
-export const fetchBreadcrumbs = async (database: MetadataDatabaseName, project: string) => {
-  return callAuthenticatedFunction('fetchBreadcrumbs', database, project);
-};
-
 export const fetchSearchPropertyMapping = async (snootyEnv: SnootyEnv): Promise<SearchPropertyMapping> => {
   return callAuthenticatedFunction('fetchSearchPropertyMapping', snootyEnv);
 };
