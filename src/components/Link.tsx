@@ -254,14 +254,14 @@ const Link = ({
   const strippedUrl = to?.replace(/(^https:\/\/)|(www\.)/g, '');
   const isMDBLink = strippedUrl.includes('mongodb.com');
   const showExtIcon = showExternalIcon ?? (!anchor && !isMDBLink && !hideExternalIconProp);
-  const target = !showExtIcon ? '_self' : undefined;
+  const target = showExtIcon || openInNewTab ? '_blank' : '_self';
 
   return (
     <LGLink
       className={joinClassNames(lgLinkStyling, className)}
       href={to}
       hideExternalIcon={!showExtIcon}
-      target={openInNewTab || showExtIcon ? '_blank' : target}
+      target={target}
       onClick={onClick}
       {...anchorProps}
     >
