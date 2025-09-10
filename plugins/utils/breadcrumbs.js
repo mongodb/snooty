@@ -7,11 +7,11 @@ const createBreadcrumbNodes = async ({ createNode, createNodeId, createContentDi
   let breadcrumbData;
   try {
     const res = await fetch(
-      `${process.env.GATSBY_NEXT_API_BASE_URL}/breadcrumbs?dbName=${database}&project=${project}`
+      `${process.env.GATSBY_NEXT_API_BASE_URL}/breadcrumbs/?dbName=${database}&project=${project}`
     );
     breadcrumbData = await res.json();
   } catch (e) {
-    console.error(`Error while fetching breadcrumb data from Docs Next API: ${e}`);
+    console.error(`Error while fetching breadcrumb data from Docs Nextjs API: ${e}`);
   }
   const [breadcrumbs, propertyUrl] = breadcrumbData
     ? [breadcrumbData.breadcrumbs, breadcrumbData.propertyUrl]
