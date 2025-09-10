@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { SplitButton } from '@leafygreen-ui/split-button';
 import { Size } from '@leafygreen-ui/button';
@@ -29,11 +29,13 @@ const splitButtonStyles = css`
     width: 310px;
     background-color: #001e2b;
   }
-  min-width: 145px;
+  min-width: 175px; /* Increase min-width to account for Copy Page in diff langs */
+  justify-content: end; /* Ensures it stays flush to the right */
 `;
 
 const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps) => {
   const [toastOpen, setToastOpen] = useState<ToastOpen>({ open: false, variant: Variant.Success });
+  const [markdownText, getMarkdownText] = useState<string | null>(null);
   const { href } = useLocation();
   const { openChat, setInputText } = useChatbotContext();
   const { pathPrefix } = useSiteMetadata();
@@ -45,15 +47,37 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
   const markdownAddress = `${urlWithoutTrailingSlash}.md`;
 
+  useEffect(() => {
+    // Introducing aborting to handling bounce behavior
+    // (someone hits a page and immediately hits the back button or leaves the page)
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    // prefetch the markdown
+    const fetchMarkDown = async () => {
+      const response = await fetch(markdownAddress, { signal });
+      if (response?.ok) {
+        const text = await response.text();
+        getMarkdownText(text);
+      }
+    };
+
+    fetchMarkDown();
+
+    return () => {
+      // When called sends a signal to the fetch
+      // to cancel the request
+      controller.abort();
+    };
+  }, [markdownAddress]);
+
   const copyMarkdown = async () => {
     try {
-      const response = await fetch(markdownAddress);
-      if (!response.ok) {
-        throw new Error('Failed to fetch Markdown');
+      if (!markdownText) {
+        throw new Error(`Failed to fetch markdown from ${markdownAddress}`);
       }
 
-      const text = await response.text();
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(markdownText);
 
       setToastOpen({
         open: true,
