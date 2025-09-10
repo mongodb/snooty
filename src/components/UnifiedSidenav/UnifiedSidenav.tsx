@@ -16,6 +16,7 @@ import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { isBrowser } from '../../utils/is-browser';
+import { loadHashIntoView } from '../../utils/load-hash-into-view';
 import { ActiveVersions, AvailableVersions } from '../../context/version-context';
 import { isActiveTocNode, removeAnchor } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
@@ -232,10 +233,7 @@ export const UnifiedSidenav = ({ slug: initialSlug }: { slug: string }) => {
   useEffect(() => {
     if (!isBrowser) return;
     if (hash) {
-      const el = document.querySelector(CSS.escape(removeTrailingSlash(hash)));
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+      loadHashIntoView(hash);
     }
   }, [hash]);
 

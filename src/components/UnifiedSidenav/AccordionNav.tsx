@@ -98,7 +98,7 @@ export const AccordionNavPanel = ({
     <SideNav
       widthOverride={isTabletOrMobile && viewportSize ? viewportSize.width : 290}
       className={cx(sideNavStyle({ hideMobile }))}
-      aria-label="Side navigation Panel"
+      aria-label="Accordion Side navigation Panel"
     >
       <div className={cx(NavTopContainer(isTabletOrMobile))}>
         <ArtificialPadding />

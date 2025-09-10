@@ -95,14 +95,14 @@ export const DoublePannedNav = ({
     <SideNav
       widthOverride={currentL2s?.items && currentL2s.items.length > 0 ? 426 : 161}
       className={cx(sideNavStyle)}
-      aria-label="Side navigation Panel"
+      aria-label="Double Panned Side navigation Panel"
     >
       <div className={cx(NavTopContainer(isTabletOrMobile))}>
         <ArtificialPadding />
         <DocsHomeButton />
       </div>
-      <div className={cx(panelStyling)}>
-        <div className={cx(leftPane)}>
+      <div className={cx(panelStyling)} data-nav-panel="fixed-sidenav">
+        <div className={cx(leftPane)} data-nav-pane="left">
           {tree.map((staticTocItem) => (
             <StaticNavItem
               {...staticTocItem}
@@ -117,7 +117,7 @@ export const DoublePannedNav = ({
         </div>
         {currentL1?.versionDropdown && <UnifiedVersionDropdown contentSite={currentL1?.contentSite} />}
         {currentL2s?.items && currentL2s.items.length > 0 && (
-          <div className={cx(rightPane)}>
+          <div className={cx(rightPane)} data-nav-pane="right">
             {showDriverBackBtn && (
               <BackLink
                 className={cx(backLinkStyling)}
