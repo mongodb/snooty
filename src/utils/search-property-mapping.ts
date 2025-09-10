@@ -1,5 +1,5 @@
-import { SearchPropertyMapping } from '../hooks/use-marian-manifests';
-import { SnootyEnv } from '../types/data';
+import type { SearchPropertyMapping } from '../hooks/use-marian-manifests';
+import type { SnootyEnv } from '../types/data';
 
 /**
  * Fetches SearchPropertyMapping
