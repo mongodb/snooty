@@ -1,4 +1,5 @@
 import { SearchPropertyMapping } from '../hooks/use-marian-manifests';
+import { SnootyEnv } from '../types/data';
 
 /**
  * Fetches SearchPropertyMapping
@@ -9,7 +10,8 @@ import { SearchPropertyMapping } from '../hooks/use-marian-manifests';
  *   };
  * }
  */
-export const fetchSearchPropertyMapping = async (dbName: string): Promise<SearchPropertyMapping> => {
-  const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/search-mapping?dbName=${dbName}`);
+export const fetchSearchPropertyMapping = async (snootyEnv: SnootyEnv): Promise<SearchPropertyMapping> => {
+  const isStaging = ['staging', 'development', 'dotcomstg'].includes(snootyEnv);
+  const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/search-mapping/${isStaging ? `?staging=true` : ''}`);
   return res.json();
 };
