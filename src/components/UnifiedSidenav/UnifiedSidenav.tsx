@@ -17,9 +17,11 @@ import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { isBrowser } from '../../utils/is-browser';
 import { loadHashIntoView } from '../../utils/load-hash-into-view';
+import { ActiveVersions, AvailableVersions } from '../../context/version-context';
 import { isActiveTocNode, removeAnchor } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
+import { TocItem } from './types';
 
 export const ArtificialPadding = styled('div')`
   height: 15px;
@@ -33,7 +35,7 @@ export const downloadButtonStlying = LeafyCSS`
   padding-right: 30px;
 `;
 
-export const NavTopContainer = (isTabletOrMobile) => LeafyCSS`
+export const NavTopContainer = (isTabletOrMobile: boolean) => LeafyCSS`
   ${!isTabletOrMobile && 'background-color: var(--background-color-primary)'};
   position: absolute;
   top: -0px;
@@ -43,14 +45,20 @@ export const NavTopContainer = (isTabletOrMobile) => LeafyCSS`
   z-index: 1;
 `;
 
-const getTopAndHeight = (topValue) => {
+const getTopAndHeight = (topValue: string) => {
   return LeafyCSS`
     top: max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight});
     height: calc(100vh - max(min(calc(${topValue} - var(--scroll-y))), ${theme.header.actionBarMobileHeight}));
   `;
 };
 
-const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
+interface SidenavContainerProps {
+  topLarge: string;
+  topMedium: string;
+  topSmall: string;
+}
+
+const SidenavContainer = ({ topLarge, topMedium, topSmall }: SidenavContainerProps) => LeafyCSS`
   grid-area: sidenav;
   position: sticky;
   z-index: ${theme.zIndexes.sidenav};
@@ -80,51 +88,61 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }) => LeafyCSS`
     }
 `;
 
+interface UpdateURLsParams {
+  tree?: TocItem[];
+  contentSite?: string;
+  activeVersions: ActiveVersions;
+  versionsData: AvailableVersions;
+  project: string;
+}
+
 // Function that adds the current version
-const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }) => {
-  return tree?.map((item) => {
-    let newUrl = item.url ?? '';
-    const currentProject = item.contentSite ?? contentSite;
+const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }: UpdateURLsParams): TocItem[] => {
+  return (
+    tree?.map((item) => {
+      let newUrl = item.url ?? '';
+      const currentProject = item.contentSite ?? contentSite;
 
-    // Replace version variable with the true current version
-    if (item?.url?.includes(':version')) {
-      const version = (versionsData[currentProject] || []).find(
-        (version) =>
-          version.gitBranchName === activeVersions[currentProject] ||
-          version.urlSlug === activeVersions[currentProject] ||
-          version?.urlAliases?.includes(activeVersions[currentProject])
-      );
-      // If no version found in local storage use 'current'
-      const currentVersion = version?.urlSlug ?? 'current';
-      newUrl = item.url.replace(/:version/g, currentVersion);
-    }
+      // Replace version variable with the true current version
+      if (item?.url?.includes(':version') && currentProject) {
+        const version = (versionsData[currentProject] || []).find(
+          (version) =>
+            version.gitBranchName === activeVersions[currentProject] ||
+            version.urlSlug === activeVersions[currentProject] ||
+            version?.urlAliases?.includes(activeVersions[currentProject])
+        );
+        // If no version found in local storage use 'current'
+        const currentVersion = version?.urlSlug ?? 'current';
+        newUrl = item.url!.replace(/:version/g, currentVersion);
+      }
 
-    const items = updateURLs({
-      tree: item.items,
-      contentSite: currentProject,
-      activeVersions,
-      versionsData,
-      project,
-    });
+      const items = updateURLs({
+        tree: item.items,
+        contentSite: currentProject,
+        activeVersions,
+        versionsData,
+        project,
+      });
 
-    return {
-      ...item,
-      newUrl,
-      items,
-      contentSite: currentProject,
-    };
-  });
+      return {
+        ...item,
+        newUrl,
+        items,
+        contentSite: currentProject,
+      } as TocItem;
+    }) ?? []
+  );
 };
 
-const findPageParent = (tree, targetUrl) => {
-  const path = [];
+const findPageParent = (tree: TocItem[], targetUrl: string): [boolean, TocItem | null] => {
+  const path: TocItem[] = [];
 
   // If the page is a part of a driver toc, return driver as parent, if not return the L1
-  const dfs = (item) => {
+  const dfs = (item: TocItem): [boolean, TocItem] | null => {
     path.push(item);
 
     if (
-      assertLeadingSlash(removeTrailingSlash(removeAnchor(item.newUrl))) ===
+      assertLeadingSlash(removeTrailingSlash(removeAnchor(item.newUrl ?? ''))) ===
       assertLeadingSlash(removeTrailingSlash(targetUrl))
     ) {
       for (let i = path.length - 1; i >= 0; i--) {
@@ -158,7 +176,7 @@ const findPageParent = (tree, targetUrl) => {
 
 export const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
 
-export function UnifiedSidenav({ slug }) {
+export const UnifiedSidenav = ({ slug: initialSlug }: { slug: string }) => {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
   const { pathPrefix } = useSiteMetadata();
@@ -167,12 +185,12 @@ export function UnifiedSidenav({ slug }) {
   const { hasBanner } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, hasBanner);
   const { pathname, hash } = useLocation();
-  const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
+  const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : initialSlug;
   const hasLang = langArray.some((lang) => tempSlug?.includes(lang));
-  slug =
+  let slug =
     tempSlug?.startsWith('docs/') || hasLang
       ? tempSlug
-      : tempSlug === '/'
+      : tempSlug === '/' || tempSlug === ''
       ? pathPrefix + tempSlug
       : `${pathPrefix}/${tempSlug}/`;
 
@@ -186,15 +204,15 @@ export function UnifiedSidenav({ slug }) {
   }, [unifiedTocTree, activeVersions, availableVersions, project]);
 
   const [isDriver, currentL2List] = findPageParent(tree, slug);
-  const [showDriverBackBtn, setShowDriverBackBtn] = useState(isDriver);
+  const [showDriverBackBtn, setShowDriverBackBtn] = useState<boolean>(isDriver);
 
-  const [currentL1, setCurrentL1] = useState(() => {
+  const [currentL1, setCurrentL1] = useState<TocItem | undefined>(() => {
     return tree.find((staticTocItem) => {
       return isActiveTocNode(slug, staticTocItem.newUrl, staticTocItem.items);
     });
   });
 
-  const [currentL2s, setCurrentL2s] = useState(currentL2List);
+  const [currentL2s, setCurrentL2s] = useState<TocItem | null>(currentL2List);
 
   useEffect(() => {
     const [isDriver, updatedL2s] = findPageParent(tree, slug);
@@ -227,7 +245,7 @@ export function UnifiedSidenav({ slug }) {
   return (
     <div
       className={cx(SidenavContainer({ ...topValues }))}
-      style={{ '--scroll-y': `${viewport.scrollY}px` }}
+      style={{ '--scroll-y': `${viewport.scrollY}px` } as React.CSSProperties}
       id={SIDE_NAV_CONTAINER_ID}
     >
       <AccordionNavPanel
@@ -253,4 +271,4 @@ export function UnifiedSidenav({ slug }) {
       />
     </div>
   );
-}
+};
