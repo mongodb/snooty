@@ -57,6 +57,7 @@ Snooty's `develop` stage uses the `development` environment. Your `.env.developm
 
 ```
 GATSBY_SNOOTY_DEV=true
+GATSBY_NEXT_API_BASE_URL=https://docs-on-nextjs.netlify.app/api
 ```
 
 The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that it should use the snooty branch name as part of the file paths. When not set, the file paths will use the value of `GATSBY_PARSER_BRANCH`. See pathing [here](https://github.com/mongodb/snooty/blob/main/src/utils/generate-path-prefix.js#L22)
@@ -69,6 +70,28 @@ Snooty's `build` and `serve` stages use the `production` environment. Your `.env
 
 ```
 GATSBY_SNOOTY_DEV=true
+GATSBY_NEXT_API_BASE_URL=https://docs-on-nextjs.netlify.app/api
+```
+
+### Unified ToC Setup
+
+1. Build the toc.json file in your local `doc-mongodb-internal` repo.
+   - `> cd docs-mongodb-internal/content/table-of-contents`
+   - `> npm run build`
+2. Link your toc.json folder in your `.env` file, for example
+   - `UNIFIED_TOC_JSON_PATH=/path-to-docs-mongodb-internal/docs-mongodb-internal/content/table-of-contents/output/toc.json`
+3. Declare the path prefix for the content directory you built locally in snooty-parser. For example if you parsed `cloud-docs` your path prefix will be:
+   - `PATH_PREFIX='docs/atlas'`
+4. Set the feature flag to true. `GATSBY_USE_UNIFIED_TOC=true`
+   - If you need to click around in the sidenav locally but can only load one site at a time, you can set `GATSBY_UNIFIED_TOC_DEV_MODE=true`. This makes L1s and showSubNavs non-linking, allowing you to traverse the TOC without navigating away.
+
+Example `.env` file for Unified ToC Setup
+
+```
+GATSBY_USE_UNIFIED_TOC=true
+GATSBY_UNIFIED_TOC_DEV_MODE=true
+PATH_PREFIX='docs/drivers/node/current'
+UNIFIED_TOC_JSON_PATH=/Users/bianca.laube/Documents/repos/docs-content-repos/docs-mongodb-internal/content/table-of-contents/output/toc.json
 ```
 
 ## Running locally

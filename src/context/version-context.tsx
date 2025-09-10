@@ -17,11 +17,12 @@ import { useAllAssociatedProducts } from '../hooks/useAssociatedProducts';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
-import { fetchDocset, fetchDocument } from '../utils/realm';
+import { fetchDocument } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { BranchData, Docset, Group, MetadataDatabaseName, PageContextRepoBranches, SiteMetadata } from '../types/data';
+import { fetchDocset } from '../utils/docsets';
 
 export type AssociatedReposInfo = Record<string, DocsetSlice>;
 export type ActiveVersions = Record<string, string>;
@@ -96,13 +97,9 @@ const getBranches = async (
 ) => {
   let hasEolBranches = false;
   try {
-    const promises = [fetchDocset(metadata.reposDatabase, { project: metadata.project })];
+    const promises = [fetchDocset(metadata.reposDatabase, metadata.project)];
     for (let associatedProduct of associatedProducts) {
-      promises.push(
-        fetchDocset(metadata.reposDatabase, {
-          project: associatedProduct,
-        })
-      );
+      promises.push(fetchDocset(metadata.reposDatabase, associatedProduct));
     }
     const allBranches = await Promise.all(promises);
     const fetchedRepoBranches = allBranches[0];

@@ -425,7 +425,11 @@ exports[`renders steps nested in include nodes 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  min-width: 145px;
+  min-width: 175px;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  -webkit-justify-content: end;
+  justify-content: end;
 }
 
 .emotion-13 [data-theme] {
@@ -470,7 +474,7 @@ exports[`renders steps nested in include nodes 1`] = `
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
-  height: 36px;
+  height: 28px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   z-index: 1;
@@ -591,7 +595,7 @@ exports[`renders steps nested in include nodes 1`] = `
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
-  height: 36px;
+  height: 28px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   margin-left: -1px;
