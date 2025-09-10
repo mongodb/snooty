@@ -16,6 +16,7 @@ import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { isBrowser } from '../../utils/is-browser';
+import { loadHashIntoView } from '../../utils/load-hash-into-view';
 import { isActiveTocNode, removeAnchor } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
@@ -155,6 +156,8 @@ const findPageParent = (tree, targetUrl) => {
   return [false, null];
 };
 
+export const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
+
 export function UnifiedSidenav({ slug }) {
   const unifiedTocTree = useUnifiedToc();
   const { project } = useSnootyMetadata();
@@ -165,11 +168,13 @@ export function UnifiedSidenav({ slug }) {
   const topValues = useStickyTopValues(false, true, hasBanner);
   const { pathname, hash } = useLocation();
   const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : slug;
-  slug = tempSlug?.startsWith('docs/')
-    ? tempSlug
-    : tempSlug === '/'
-    ? pathPrefix + tempSlug
-    : `${pathPrefix}/${tempSlug}/`;
+  const hasLang = langArray.some((lang) => tempSlug?.includes(lang));
+  slug =
+    tempSlug?.startsWith('docs/') || hasLang
+      ? tempSlug
+      : tempSlug === '/'
+      ? pathPrefix + tempSlug
+      : `${pathPrefix}/${tempSlug}/`;
 
   const tree = useMemo(() => {
     return updateURLs({
@@ -208,11 +213,9 @@ export function UnifiedSidenav({ slug }) {
   }, [pathname, setHideMobile]);
 
   useEffect(() => {
+    if (!isBrowser) return;
     if (hash) {
-      const el = document.querySelector(removeTrailingSlash(hash));
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+      loadHashIntoView(hash);
     }
   }, [hash]);
 

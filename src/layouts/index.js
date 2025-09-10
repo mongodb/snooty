@@ -19,7 +19,8 @@ import { getAllLocaleCssStrings } from '../utils/locale';
 import { OfflineDownloadProvider } from '../components/OfflineDownloadModal/DownloadContext';
 import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
 import { getFeatureFlags } from '../utils/feature-flags';
-import { removeTrailingSlash } from '../utils/remove-trailing-slash';
+import { isBrowser } from '../utils/is-browser';
+import { loadHashIntoView } from '../utils/load-hash-into-view';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -118,20 +119,34 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
   );
 
   useEffect(() => {
-    if (hash) {
-      const el = document.querySelector(removeTrailingSlash(hash));
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    if (!isBrowser) return;
+    loadHashIntoView(hash);
 
     // Scrolls selected sidenav item into view
-    const selectedLink = document.querySelector('a[aria-current="page"]');
-    if (selectedLink) {
-      selectedLink.scrollIntoView({
-        block: 'center',
-        behavior: 'instant',
-      });
+    const navDoublePannedContainer = document.querySelector('nav[aria-label*="Double Panned Side navigation Panel"]');
+
+    if (navDoublePannedContainer?.offsetWidth > 0) {
+      // Double Panned Nav is visible
+      const selectedDoublePannedLink = document.querySelector(
+        '[aria-label*="Double Panned Side navigation Panel"] a[aria-current="page"]'
+      );
+      if (selectedDoublePannedLink) {
+        selectedDoublePannedLink.scrollIntoView({
+          block: 'center',
+          behavior: 'instant',
+        });
+      }
+    } else {
+      const selectedAccordionLink = document.querySelector(
+        '[aria-label*="Accordion Side navigation Panel"] a[aria-current="page"]'
+      );
+      // Accordion Nav is visible
+      if (selectedAccordionLink) {
+        selectedAccordionLink.scrollIntoView({
+          block: 'center',
+          behavior: 'instant',
+        });
+      }
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
