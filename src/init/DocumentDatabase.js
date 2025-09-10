@@ -182,3 +182,4 @@ class RealmDocumentDatabase {
 
 exports.manifestDocumentDatabase = new ManifestDocumentDatabase(process.env.GATSBY_MANIFEST_PATH);
 exports.realmDocumentDatabase = new RealmDocumentDatabase();
+exports.RealmDocumentDatabaseClass = RealmDocumentDatabase;
