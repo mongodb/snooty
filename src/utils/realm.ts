@@ -65,10 +65,6 @@ export const fetchSearchPropertyMapping = async (snootyEnv: SnootyEnv): Promise<
   return callAuthenticatedFunction('fetchSearchPropertyMapping', snootyEnv);
 };
 
-export const fetchOASFile = async (apiName: string, database: MetadataDatabaseName) => {
-  return callAuthenticatedFunction('fetchOASFile', apiName, database);
-};
-
 export const fetchDocument = async <T extends Document>(
   database: ReposDatabaseName | MetadataDatabaseName,
   collectionName: string,
