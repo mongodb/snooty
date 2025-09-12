@@ -15,13 +15,14 @@ interface ChatbotModalProps {
 }
 
 const ChatbotModal = ({ chatbotClicked, setChatbotClicked }: ChatbotModalProps) => {
-  const { openChat } = useChatbotContext();
+  const { openChat, setInputText } = useChatbotContext();
   useEffect(() => {
     if (chatbotClicked) {
+      setInputText('');
       openChat();
       setChatbotClicked(false);
     }
-  }, [chatbotClicked, openChat, setChatbotClicked]);
+  }, [chatbotClicked, setInputText, openChat, setChatbotClicked]);
 
   return (
     <ModalView
