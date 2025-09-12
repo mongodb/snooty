@@ -1,7 +1,9 @@
 const { siteMetadata } = require('../../src/utils/site-metadata');
 
-const createBannerNode = async ({ db, createNode, createNodeId, createContentDigest }) => {
-  const banner = await db.realmInterface.fetchBanner(siteMetadata.snootyEnv === 'development');
+const createBannerNode = async ({ createNode, createNodeId, createContentDigest }) => {
+  const isStaging = ['staging', 'development', 'dotcomstg'].includes(siteMetadata.snootyEnv);
+  const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/banners/${isStaging ? '?staging=true' : ''}`);
+  const banner = await res.json();
 
   createNode({
     children: [],

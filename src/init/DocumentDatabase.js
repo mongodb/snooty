@@ -59,10 +59,6 @@ class RealmInterface {
   async fetchBreadcrumbs(database, project) {
     return this.realmClient.callFunction('fetchBreadcrumbs', database, project);
   }
-
-  async fetchBanner(isDevBuild) {
-    return this.realmClient.callFunction('getBanner', isDevBuild);
-  }
 }
 
 class ManifestDocumentDatabase {
