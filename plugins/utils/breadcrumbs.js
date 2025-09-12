@@ -2,13 +2,16 @@ const { siteMetadata } = require('../../src/utils/site-metadata');
 
 const breadcrumbType = `Breadcrumb`;
 
-const createBreadcrumbNodes = async ({ db, createNode, createNodeId, createContentDigest }) => {
+const createBreadcrumbNodes = async ({ createNode, createNodeId, createContentDigest }) => {
   const { database, project } = siteMetadata;
   let breadcrumbData;
   try {
-    breadcrumbData = await db.fetchBreadcrumbs(database, project);
+    const res = await fetch(
+      `${process.env.GATSBY_NEXT_API_BASE_URL}/breadcrumbs/?dbName=${database}&project=${project}`
+    );
+    breadcrumbData = await res.json();
   } catch (e) {
-    console.error(`Error while fetching breadcrumb data from Atlas: ${e}`);
+    console.error(`Error while fetching breadcrumb data from Docs Nextjs API: ${e}`);
   }
   const [breadcrumbs, propertyUrl] = breadcrumbData
     ? [breadcrumbData.breadcrumbs, breadcrumbData.propertyUrl]
