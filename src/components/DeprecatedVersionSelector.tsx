@@ -8,10 +8,10 @@ import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { DocsetSlice, useAllDocsets } from '../hooks/useAllDocsets';
-import { fetchDocsets } from '../utils/realm';
 import { sortVersions } from '../utils/sort-versioned-branches';
 import { disabledStyle } from '../styles/button';
 import { BranchData } from '../types/data';
+import { fetchDocsets } from '../utils/docsets';
 import Select from './Select';
 
 type ProductChoice = {
@@ -160,17 +160,20 @@ const DeprecatedVersionSelector = () => {
   // Fetch docsets for url
   useEffect(() => {
     if (reposDatabase) {
-      fetchDocsets(reposDatabase)
-        .then((resp) => {
+      const createReposMap = async () => {
+        try {
+          const docsets = await fetchDocsets(reposDatabase);
+
           const reposBranchesMap = keyBy(
-            resp.filter((project) => project.hasEolVersions),
+            docsets.filter((project) => project.hasEolVersions),
             'project'
           );
           if (!isEmpty(reposBranchesMap)) setReposMap(reposBranchesMap);
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error(`ERROR: could not access ${reposDatabase} for dropdown data.`);
-        });
+        }
+      };
+      createReposMap();
     }
   }, [reposDatabase]);
 

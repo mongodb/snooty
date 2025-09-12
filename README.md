@@ -64,6 +64,8 @@ The `GATSBY_SNOOTY_DEV` variable is what allows Gatsby to know that it should us
 
 It should be set to `true` when working on snooty locally.
 
+The `GATSBY_NEXT_API_BASE_URL` variable points to our production Nextjs app API.
+
 #### `.env.production`
 
 Snooty's `build` and `serve` stages use the `production` environment. Your `.env.production` file should be as follows:
