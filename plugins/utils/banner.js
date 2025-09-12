@@ -1,9 +1,18 @@
 const { siteMetadata } = require('../../src/utils/site-metadata');
 
-const createBannerNode = async ({ createNode, createNodeId, createContentDigest }) => {
+const fetchBanner = async () => {
   const isStaging = ['staging', 'development', 'dotcomstg'].includes(siteMetadata.snootyEnv);
-  const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/banners/${isStaging ? '?staging=true' : ''}`);
-  const banner = await res.json();
+  try {
+    const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/banners/${isStaging ? '?staging=true' : ''}`);
+    return await res.json();
+  } catch (e) {
+    console.error(`Error while fetching banner data from Nextjs: ${e}`);
+    return null;
+  }
+};
+
+const createBannerNode = async ({ createNode, createNodeId, createContentDigest }) => {
+  const banner = await fetchBanner();
 
   createNode({
     children: [],
@@ -26,4 +35,5 @@ const createBannerNode = async ({ createNode, createNodeId, createContentDigest 
 
 module.exports = {
   createBannerNode,
+  fetchBanner,
 };

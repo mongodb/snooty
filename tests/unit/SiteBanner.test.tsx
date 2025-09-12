@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import * as Gatsby from 'gatsby';
 import { palette } from '@leafygreen-ui/palette';
-import * as RealmUtil from '../../src/utils/realm';
+import * as BannerUtil from '../../plugins/utils/banner';
 import SiteBanner from '../../src/components/Banner/SiteBanner';
 import { HeaderContext } from '../../src/components/Header/header-context';
 import { tick } from '../utils';
@@ -40,7 +40,7 @@ describe('Banner component', () => {
 
   it('renders with a banner image', async () => {
     jest.useFakeTimers();
-    jest.spyOn(RealmUtil, 'fetchBanner').mockResolvedValueOnce(() => mockBannerContent);
+    jest.spyOn(BannerUtil, 'fetchBanner').mockResolvedValueOnce(() => mockBannerContent);
     const wrapper = render(
       <HeaderContext.Provider value={{ hasBanner: true, totalHeaderHeight: '' }}>
         <SiteBanner />
@@ -60,7 +60,7 @@ describe('Banner component', () => {
       pillText: 'DOP',
       url: mockBannerContent.url,
     };
-    jest.spyOn(RealmUtil, 'fetchBanner').mockResolvedValueOnce(() => bannerContent);
+    jest.spyOn(BannerUtil, 'fetchBanner').mockResolvedValueOnce(() => bannerContent);
     const wrapper = render(
       <HeaderContext.Provider value={{ hasBanner: true, totalHeaderHeight: '' }}>
         <SiteBanner />
