@@ -9,6 +9,7 @@ import { getCurrLocale } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { PageTemplateType } from '../../context/page-context';
 import { SidenavContext } from '../Sidenav';
+import { SuspenseHelper } from '../SuspenseHelper';
 import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
 import {
@@ -74,7 +75,9 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
               <IconButton className={chatbotMobileButtonStyling} aria-label={CHATBOT_TEXT} onClick={openChatbot}>
                 <Icon glyph={'Sparkle'} />
               </IconButton>
-              <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
+              <SuspenseHelper fallback={null}>
+                <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
+              </SuspenseHelper>
             </>
           )}
           {template !== 'openapi' && <DarkModeDropdown />}
