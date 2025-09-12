@@ -261,7 +261,6 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     metadata = await db.getMetadata();
   } else {
     try {
-      console.log('Fetching metadata from NEXTJS');
       metadata = await fetchDocumentSorted(
         siteMetadata.database,
         METADATA_COLLECTION,
