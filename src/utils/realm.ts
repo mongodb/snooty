@@ -95,7 +95,3 @@ export const fetchDocuments = async <T extends Document>(
 export const fetchDocsets = async (database: ReposDatabaseName): Promise<Array<Docset>> => {
   return callAuthenticatedFunction('fetchDocsets', database);
 };
-
-export const fetchOpenAPIChangelogDiff = async (diffString: string, snootyEnv: SnootyEnv) => {
-  return callAuthenticatedFunction('fetchOpenAPIChangelogDiff', diffString, snootyEnv);
-};
