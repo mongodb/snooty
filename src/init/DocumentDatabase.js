@@ -55,10 +55,6 @@ class RealmInterface {
   async updateOAChangelogMetadata(metadata) {
     return this.realmClient.callFunction('updateOAChangelogMetadata', metadata);
   }
-
-  async fetchBreadcrumbs(database, project) {
-    return this.realmClient.callFunction('fetchBreadcrumbs', database, project);
-  }
 }
 
 class ManifestDocumentDatabase {
@@ -121,10 +117,6 @@ class ManifestDocumentDatabase {
   async fetchAllProducts() {
     return this.realmInterface.fetchAllProducts();
   }
-
-  async fetchBreadcrumbs(database, project) {
-    return this.realmInterface.fetchBreadcrumbs(database, project);
-  }
 }
 
 class RealmDocumentDatabase {
@@ -169,10 +161,6 @@ class RealmDocumentDatabase {
 
   async updateOAChangelogMetadata(metadata) {
     return this.realmInterface.updateOAChangelogMetadata(metadata);
-  }
-
-  async fetchBreadcrumbs(database, project) {
-    return this.realmInterface.fetchBreadcrumbs(database, project);
   }
 }
 

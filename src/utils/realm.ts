@@ -53,10 +53,6 @@ const callAuthenticatedFunction = async (funcName: string, ...argsList: unknown[
   }
 };
 
-export const fetchBreadcrumbs = async (database: MetadataDatabaseName, project: string) => {
-  return callAuthenticatedFunction('fetchBreadcrumbs', database, project);
-};
-
 export const fetchSearchPropertyMapping = async (snootyEnv: SnootyEnv): Promise<SearchPropertyMapping> => {
   return callAuthenticatedFunction('fetchSearchPropertyMapping', snootyEnv);
 };
@@ -94,8 +90,4 @@ export const fetchDocuments = async <T extends Document>(
 
 export const fetchDocsets = async (database: ReposDatabaseName): Promise<Array<Docset>> => {
   return callAuthenticatedFunction('fetchDocsets', database);
-};
-
-export const fetchOpenAPIChangelogDiff = async (diffString: string, snootyEnv: SnootyEnv) => {
-  return callAuthenticatedFunction('fetchOpenAPIChangelogDiff', diffString, snootyEnv);
 };
