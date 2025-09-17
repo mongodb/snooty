@@ -116,7 +116,7 @@ export const DoublePannedNav = ({
           ))}
         </div>
         {currentL1?.versionDropdown && <UnifiedVersionDropdown contentSite={currentL1?.contentSite} />}
-        {currentL2s?.items && currentL2s.items.length > 0 && (
+        {currentL2s?.items?.length > 0 && (
           <div className={cx(rightPane)} data-nav-pane="right">
             {showDriverBackBtn && (
               <BackLink
