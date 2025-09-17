@@ -209,6 +209,20 @@ interface IALinkedData {
   height: string;
 }
 
+interface OpenAPIChangelogChange {
+  change: string;
+  changeCode: string;
+  backwardCompatible: boolean;
+}
+
+interface OpenAPIChangelogDiffSection {
+  path: string;
+  httpMethod: 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT';
+  operationId: string;
+  tag: string;
+  changes: OpenAPIChangelogChange[];
+}
+
 export {
   AppData,
   BranchData,
@@ -225,6 +239,8 @@ export {
   MetadataGuides,
   MetadataDatabaseName,
   MultiPageTutorial,
+  OpenAPIChangelogChange,
+  OpenAPIChangelogDiffSection,
   PageContext,
   PageContextRepoBranches,
   RemoteMetadata,

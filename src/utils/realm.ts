@@ -56,10 +56,6 @@ export const fetchBanner = async (snootyEnv: SnootyEnv) => {
   return callAuthenticatedFunction('getBanner', snootyEnv === 'development');
 };
 
-export const fetchBreadcrumbs = async (database: MetadataDatabaseName, project: string) => {
-  return callAuthenticatedFunction('fetchBreadcrumbs', database, project);
-};
-
 export const fetchOASFile = async (apiName: string, database: MetadataDatabaseName) => {
   return callAuthenticatedFunction('fetchOASFile', apiName, database);
 };
@@ -93,8 +89,4 @@ export const fetchDocuments = async <T extends Document>(
 
 export const fetchDocsets = async (database: ReposDatabaseName): Promise<Array<Docset>> => {
   return callAuthenticatedFunction('fetchDocsets', database);
-};
-
-export const fetchOpenAPIChangelogDiff = async (diffString: string, snootyEnv: SnootyEnv) => {
-  return callAuthenticatedFunction('fetchOpenAPIChangelogDiff', diffString, snootyEnv);
 };
