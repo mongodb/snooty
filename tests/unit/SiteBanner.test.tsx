@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import * as Gatsby from 'gatsby';
 import { palette } from '@leafygreen-ui/palette';
-import * as RealmUtil from '../../src/utils/realm';
 import SiteBanner from '../../src/components/Banner/SiteBanner';
 import { HeaderContext } from '../../src/components/Header/header-context';
 import { tick } from '../utils';
@@ -32,6 +31,11 @@ describe('Banner component', () => {
     mockSnootyEnv('development');
   });
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+    jest.resetModules();
+  });
+
   it('renders without a banner image', () => {
     // bannerContent state should remain null
     const wrapper = render(<SiteBanner />);
@@ -40,7 +44,8 @@ describe('Banner component', () => {
 
   it('renders with a banner image', async () => {
     jest.useFakeTimers();
-    jest.spyOn(RealmUtil, 'fetchBanner').mockResolvedValueOnce(() => mockBannerContent);
+    const BannerUtil = require('../../plugins/utils/banner');
+    jest.spyOn(BannerUtil, 'fetchBanner').mockResolvedValueOnce(() => mockBannerContent);
     const wrapper = render(
       <HeaderContext.Provider value={{ hasBanner: true, totalHeaderHeight: '' }}>
         <SiteBanner />
@@ -60,7 +65,8 @@ describe('Banner component', () => {
       pillText: 'DOP',
       url: mockBannerContent.url,
     };
-    jest.spyOn(RealmUtil, 'fetchBanner').mockResolvedValueOnce(() => bannerContent);
+    const BannerUtil = require('../../plugins/utils/banner');
+    jest.spyOn(BannerUtil, 'fetchBanner').mockResolvedValueOnce(() => bannerContent);
     const wrapper = render(
       <HeaderContext.Provider value={{ hasBanner: true, totalHeaderHeight: '' }}>
         <SiteBanner />

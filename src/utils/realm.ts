@@ -1,7 +1,7 @@
 import * as Realm from 'realm-web';
 import { Filter, FindOptions, Document } from 'mongodb';
 import { SNOOTY_REALM_APP_ID } from '../build-constants';
-import { Docset, MetadataDatabaseName, ReposDatabaseName, SnootyEnv } from '../types/data';
+import { Docset, MetadataDatabaseName, ReposDatabaseName } from '../types/data';
 import { currentRealmUsersCleanup } from './realm-user-management';
 
 type Projection<T> = Pick<T, Extract<keyof T, string | number>> | Record<string, 0 | 1>;
@@ -50,10 +50,6 @@ const callAuthenticatedFunction = async (funcName: string, ...argsList: unknown[
   } catch (err) {
     console.error(`Failed to call function: ${funcName}`);
   }
-};
-
-export const fetchBanner = async (snootyEnv: SnootyEnv) => {
-  return callAuthenticatedFunction('getBanner', snootyEnv === 'development');
 };
 
 export const fetchOASFile = async (apiName: string, database: MetadataDatabaseName) => {

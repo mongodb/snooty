@@ -55,10 +55,6 @@ class RealmInterface {
   async updateOAChangelogMetadata(metadata) {
     return this.realmClient.callFunction('updateOAChangelogMetadata', metadata);
   }
-
-  async fetchBanner(isDevBuild) {
-    return this.realmClient.callFunction('getBanner', isDevBuild);
-  }
 }
 
 class ManifestDocumentDatabase {

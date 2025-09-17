@@ -217,7 +217,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
 
   await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
 
-  await createBannerNode({ db, createNode, createNodeId, createContentDigest });
+  await createBannerNode({ createNode, createNodeId, createContentDigest });
 
   if (process.env['OFFLINE_DOCS'] !== 'true') {
     const umbrellaProduct = await db.realmInterface.getMetadata(
