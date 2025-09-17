@@ -14,10 +14,6 @@ import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideN
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 import { TocItem } from './types';
 
-// Simple wrappers for TypeScript compatibility
-const DevWrapper: React.FC<any> = ({ children, ...props }) => <div {...props}>{children}</div>;
-const LinkWrapper: React.FC<any> = ({ children, ...props }) => <a {...props}>{children}</a>;
-
 export const Border = styled('hr')`
   border: unset;
   border-bottom: 1px solid var(--sidenav-border-bottom-color);
@@ -184,7 +180,7 @@ export const UnifiedTocNavItem = ({
     return (
       <SideNavItem
         aria-label={label}
-        as={isUnifiedTOCInDevMode ? DevWrapper : Link}
+        as={isUnifiedTOCInDevMode ? (undefined as never) : Link}
         contentSite={contentSite}
         to={newUrl}
         onClick={handleClick}
@@ -291,7 +287,7 @@ export const CollapsibleNavItem = ({
   return (
     <>
       <SideNavItem
-        as={newUrl ? Link : LinkWrapper}
+        as={newUrl ? Link : (undefined as never)}
         contentSite={contentSite}
         to={newUrl || undefined}
         active={isActive}
@@ -357,7 +353,7 @@ export const StaticNavItem = ({
       aria-label={label}
       contentSite={contentSite}
       hideExternalIcon={true}
-      as={isUnifiedTOCInDevMode ? DevWrapper : Link}
+      as={isUnifiedTOCInDevMode ? (undefined as never) : Link}
       to={newUrl}
       onClick={() => {
         setCurrentL1({ items, newUrl, versionDropdown, label, contentSite });
