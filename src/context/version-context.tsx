@@ -17,12 +17,12 @@ import { useAllAssociatedProducts } from '../hooks/useAssociatedProducts';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
 import { useCurrentUrlSlug } from '../hooks/use-current-url-slug';
 import { getLocalValue, setLocalValue } from '../utils/browser-storage';
-import { fetchDocument } from '../utils/realm';
 import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { BranchData, Docset, Group, MetadataDatabaseName, PageContextRepoBranches, SiteMetadata } from '../types/data';
 import { fetchDocset } from '../utils/docsets';
+import { fetchDocument } from '../utils/data/documents';
 
 export type AssociatedReposInfo = Record<string, DocsetSlice>;
 export type ActiveVersions = Record<string, string>;

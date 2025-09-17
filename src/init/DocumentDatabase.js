@@ -3,12 +3,7 @@ const BSON = require('bson');
 const fs = require('fs');
 const { promisify } = require('util');
 const { initRealm } = require('../utils/setup/init-realm');
-const { DOCUMENTS_COLLECTION, METADATA_COLLECTION, ASSETS_COLLECTION } = require('../build-constants');
 const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
-const { constructBuildFilter } = require('../utils/setup/construct-build-filter');
-
-const DB = siteMetadata.database;
-const buildFilter = constructBuildFilter(siteMetadata);
 
 const readFileAsync = promisify(fs.readFile);
 
@@ -23,25 +18,6 @@ class RealmInterface {
 
   fetchAllProducts() {
     return this.realmClient.callFunction('fetchAllProducts', siteMetadata.database);
-  }
-
-  async fetchDocuments(collection, buildFilter) {
-    return this.realmClient.callFunction('fetchDocuments', DB, collection, buildFilter);
-  }
-
-  async getMetadata(buildFilter, projectionOptions, findOptions) {
-    return this.realmClient.callFunction(
-      'fetchDocumentSorted',
-      DB,
-      METADATA_COLLECTION,
-      buildFilter,
-      projectionOptions,
-      findOptions
-    );
-  }
-
-  async fetchDocument(database, collectionName, query) {
-    return this.realmClient.callFunction('fetchDocumentSorted', database, collectionName, query);
   }
 
   async fetchDocset(matchConditions = { project: siteMetadata.project }) {
@@ -140,31 +116,8 @@ class RealmDocumentDatabase {
     await this.realmInterface.connect();
   }
 
-  async getDocuments() {
-    return this.realmInterface.fetchDocuments(DOCUMENTS_COLLECTION, buildFilter);
-  }
-
-  async getMetadata(queryFilters) {
-    const filter = queryFilters || buildFilter;
-    return this.realmInterface.getMetadata(filter);
-  }
-
-  async getAsset(checksum) {
-    const assetQuery = { _id: checksum };
-    const assetDataDocuments = await this.realmInterface.fetchDocuments(ASSETS_COLLECTION, assetQuery);
-
-    for (const result of assetDataDocuments) {
-      return result.data.buffer;
-    }
-    return null;
-  }
-
   async fetchAllProducts() {
     return this.realmInterface.fetchAllProducts();
-  }
-
-  async fetchDocument(database, collectionName, query) {
-    return this.realmInterface.fetchDocument(database, collectionName, query);
   }
 
   async fetchDocset(matchConditions) {
