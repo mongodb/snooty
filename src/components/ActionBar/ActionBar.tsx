@@ -1,11 +1,9 @@
-import React, { lazy, useState, useContext } from 'react';
+import React, { lazy, useContext, useState } from 'react';
 import Button from '@leafygreen-ui/button';
 import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { Overline } from '@leafygreen-ui/typography';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import IconButton from '@leafygreen-ui/icon-button';
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { getCurrLocale } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
@@ -25,7 +23,6 @@ import {
   chatbotMobileButtonStyling,
 } from './styles';
 
-const Chatbot = lazy(() => import('mongodb-chatbot-ui'));
 const ChatbotModal = lazy(() => import('./ChatbotModal'));
 
 const CHATBOT_TEXT = 'Ask MongoDB AI';
@@ -49,11 +46,6 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
     reportAnalytics('Chatbot button clicked');
     setChatbotClicked((currVal) => !currVal);
   };
-  const { snootyEnv } = useSiteMetadata();
-  const { darkMode } = useDarkMode();
-  const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(snootyEnv)
-    ? 'https://knowledge.mongodb.com/api/v1'
-    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
     <div className={cx(className, actionBarStyling, containerClassname, isOfflineDocsBuild ? offlineStyling : '')}>
@@ -84,9 +76,7 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
                 <Icon glyph={'Sparkle'} />
               </IconButton>
               <SuspenseHelper fallback={null}>
-                <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-                  <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
-                </Chatbot>
+                <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
               </SuspenseHelper>
             </>
           )}
