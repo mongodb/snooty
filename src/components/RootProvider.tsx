@@ -4,6 +4,7 @@ import { TocContextProvider } from '../context/toc-context';
 import { DarkModeContextProvider } from '../context/dark-mode-context';
 import { PageContextRepoBranches, RemoteMetadata } from '../types/data';
 import { HeadingNode } from '../types/ast';
+import { LocaleProvider } from '../context/locale';
 import { HeaderContextProvider } from './Header/header-context';
 import { SidenavContextProvider } from './Sidenav';
 import { ContentsProvider } from './Contents/contents-context';
@@ -20,13 +21,15 @@ const RootProvider = ({ children, headingNodes, slug, repoBranches, remoteMetada
   return (
     <DarkModeContextProvider slug={slug}>
       <ContentsProvider headingNodes={headingNodes}>
-        <HeaderContextProvider>
-          <VersionContextProvider repoBranches={repoBranches} slug={slug}>
-            <TocContextProvider remoteMetadata={remoteMetadata}>
-              <SidenavContextProvider>{children}</SidenavContextProvider>
-            </TocContextProvider>
-          </VersionContextProvider>
-        </HeaderContextProvider>
+        <LocaleProvider>
+          <HeaderContextProvider>
+            <VersionContextProvider repoBranches={repoBranches} slug={slug}>
+              <TocContextProvider remoteMetadata={remoteMetadata}>
+                <SidenavContextProvider>{children}</SidenavContextProvider>
+              </TocContextProvider>
+            </VersionContextProvider>
+          </HeaderContextProvider>
+        </LocaleProvider>
       </ContentsProvider>
     </DarkModeContextProvider>
   );
