@@ -2,7 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import { navigate } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
 import * as documentsApi from '../../src/utils/data/documents';
-import * as docsetApi from '../../src/utils/docsets';
+import * as docsetApi from '../../src/utils/data/docsets';
 import VersionDropdown from '../../src/components/VersionDropdown';
 import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';

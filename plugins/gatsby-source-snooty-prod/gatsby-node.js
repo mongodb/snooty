@@ -16,7 +16,7 @@ const { removeLeadingSlash } = require('../../src/utils/remove-leading-slash.js'
 const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadata.js');
 const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash.js');
 const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix.js');
-const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
+const { manifestDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
@@ -126,20 +126,15 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     throw Error(envResults.message);
   }
 
-  // wait to connect to Realm
-
   if (siteMetadata.manifestPath || process.env.GATSBY_BUILD_FROM_JSON === 'true') {
     console.log('Loading documents from manifest');
     db = manifestDocumentDatabase;
   } else {
-    console.log('Loading documents from realm');
-    db = realmDocumentDatabase;
+    console.log('Loading documents from Nextjs API');
   }
 
-  await db.connect();
-
   let documents;
-  if (siteMetadata.manifestPath || process.env.GATSBY_BUILD_FROM_JSON === 'true') {
+  if (db && (siteMetadata.manifestPath || process.env.GATSBY_BUILD_FROM_JSON === 'true')) {
     documents = await db.getDocuments();
   } else {
     documents = await fetchDocumentSorted(
@@ -223,11 +218,11 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
-  await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
+  await createDocsetNodes({ createNode, createNodeId, createContentDigest });
 
-  await createProductNodes({ db, createNode, createNodeId, createContentDigest });
+  await createProductNodes({ createNode, createNodeId, createContentDigest });
 
-  await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
+  await createBreadcrumbNodes({ createNode, createNodeId, createContentDigest });
 
   await createBannerNode({ createNode, createNodeId, createContentDigest });
 
@@ -257,7 +252,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   }
 
   let metadata;
-  if (siteMetadata.manifestPath || process.env.GATSBY_BUILD_FROM_JSON === 'true') {
+  if (db && (siteMetadata.manifestPath || process.env.GATSBY_BUILD_FROM_JSON === 'true')) {
     metadata = await db.getMetadata();
   } else {
     try {

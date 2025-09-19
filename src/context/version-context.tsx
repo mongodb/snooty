@@ -21,7 +21,7 @@ import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { BranchData, Docset, Group, MetadataDatabaseName, PageContextRepoBranches, SiteMetadata } from '../types/data';
-import { fetchDocset } from '../utils/docsets';
+import { fetchDocset } from '../utils/data/docsets';
 import { fetchDocument } from '../utils/data/documents';
 
 export type AssociatedReposInfo = Record<string, DocsetSlice>;

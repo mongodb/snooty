@@ -9,7 +9,7 @@ import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import * as browserStorage from '../../src/utils/browser-storage';
 import * as documentsApi from '../../src/utils/data/documents';
-import * as docsetApi from '../../src/utils/docsets';
+import * as docsetApi from '../../src/utils/data/docsets';
 
 const snootyMetadataMock = jest.spyOn(snootyMetadata, 'default');
 const uesSiteMetadataMock = jest.spyOn(siteMetadata, 'useSiteMetadata');

@@ -2,46 +2,14 @@ const AdmZip = require('adm-zip');
 const BSON = require('bson');
 const fs = require('fs');
 const { promisify } = require('util');
-const { initRealm } = require('../utils/setup/init-realm');
-const { manifestMetadata, siteMetadata } = require('../utils/site-metadata');
+const { manifestMetadata } = require('../utils/site-metadata');
 
 const readFileAsync = promisify(fs.readFile);
-
-class RealmInterface {
-  constructor() {
-    this.realmClient = null;
-  }
-
-  async connect() {
-    this.realmClient = await initRealm();
-  }
-
-  fetchAllProducts() {
-    return this.realmClient.callFunction('fetchAllProducts', siteMetadata.database);
-  }
-
-  async fetchDocset(matchConditions = { project: siteMetadata.project }) {
-    return this.realmClient.callFunction('fetchDocset', siteMetadata.reposDatabase, matchConditions);
-  }
-
-  async fetchDocsets() {
-    return this.realmClient.callFunction('fetchDocsets', siteMetadata.reposDatabase);
-  }
-
-  async updateOAChangelogMetadata(metadata) {
-    return this.realmClient.callFunction('updateOAChangelogMetadata', metadata);
-  }
-}
 
 class ManifestDocumentDatabase {
   constructor(path) {
     // Allow no zip if building artifact through Github Action
     this.zip = process.env.GATSBY_BUILD_FROM_JSON !== 'true' ? new AdmZip(path) : null;
-    this.realmInterface = new RealmInterface();
-  }
-
-  async connect() {
-    await this.realmInterface.connect();
   }
 
   async getDocuments() {
@@ -89,34 +57,7 @@ class ManifestDocumentDatabase {
     }
     return null;
   }
-
-  async fetchAllProducts() {
-    return this.realmInterface.fetchAllProducts();
-  }
-}
-
-class RealmDocumentDatabase {
-  constructor() {
-    this.realmInterface = new RealmInterface();
-  }
-
-  async connect() {
-    await this.realmInterface.connect();
-  }
-
-  async fetchAllProducts() {
-    return this.realmInterface.fetchAllProducts();
-  }
-
-  async fetchDocset(matchConditions) {
-    return this.realmInterface.fetchDocset(matchConditions);
-  }
-
-  async updateOAChangelogMetadata(metadata) {
-    return this.realmInterface.updateOAChangelogMetadata(metadata);
-  }
 }
 
 exports.manifestDocumentDatabase = new ManifestDocumentDatabase(process.env.GATSBY_MANIFEST_PATH);
-exports.realmDocumentDatabase = new RealmDocumentDatabase();
-exports.RealmDocumentDatabaseClass = RealmDocumentDatabase;
+exports.ManifestDocumentDatabaseClass = ManifestDocumentDatabase;

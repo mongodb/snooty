@@ -2,7 +2,7 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import DeprecatedVersionSelector from '../../src/components/DeprecatedVersionSelector';
-import * as docsetApi from '../../src/utils/docsets';
+import * as docsetApi from '../../src/utils/data/docsets';
 import { useAllDocsets } from '../../src/hooks/useAllDocsets';
 
 const mockedReposBranches = [
