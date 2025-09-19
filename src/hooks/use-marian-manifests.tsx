@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { assertTrailingSlash } from '../utils/assert-trailing-slash';
 import { parseMarianManifests } from '../utils/parse-marian-manifests';
 import { MARIAN_URL } from '../constants';
-import { fetchSearchPropertyMapping } from '../utils/realm';
 import { requestHeaders } from '../utils/search-facet-constants';
+import { fetchSearchPropertyMapping } from '../utils/search-property-mapping';
 import { useSiteMetadata } from './use-site-metadata';
 
 export type SearchPropertyMapping = {
