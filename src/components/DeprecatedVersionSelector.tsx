@@ -11,7 +11,7 @@ import { DocsetSlice, useAllDocsets } from '../hooks/useAllDocsets';
 import { sortVersions } from '../utils/sort-versioned-branches';
 import { disabledStyle } from '../styles/button';
 import { BranchData } from '../types/data';
-import { fetchDocsets } from '../utils/docsets';
+import { fetchDocsets } from '../utils/data/docsets';
 import Select from './Select';
 
 type ProductChoice = {

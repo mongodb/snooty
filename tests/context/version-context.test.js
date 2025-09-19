@@ -8,8 +8,8 @@ import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
 import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import * as browserStorage from '../../src/utils/browser-storage';
-import * as realm from '../../src/utils/realm';
-import * as docsetApi from '../../src/utils/docsets';
+import * as documentsApi from '../../src/utils/data/documents';
+import * as docsetApi from '../../src/utils/data/docsets';
 
 const snootyMetadataMock = jest.spyOn(snootyMetadata, 'default');
 const uesSiteMetadataMock = jest.spyOn(siteMetadata, 'useSiteMetadata');
@@ -235,12 +235,14 @@ describe('Version Context', () => {
       };
     });
   });
-  mockFetchDocuments = jest.spyOn(realm, 'fetchDocument').mockImplementation(async (dbName, collectionName, query) => {
-    if (query && query['associated_products'] === 'docs-atlas-cli') {
-      return {}; // spoofing data for "at least one parent association"
-    }
-    return [];
-  });
+  mockFetchDocuments = jest
+    .spyOn(documentsApi, 'fetchDocument')
+    .mockImplementation(async (dbName, collectionName, query) => {
+      if (query && query['associated_products'] === 'docs-atlas-cli') {
+        return {}; // spoofing data for "at least one parent association"
+      }
+      return [];
+    });
 
   afterAll(() => {
     mockedFetchDocset.mockClear();

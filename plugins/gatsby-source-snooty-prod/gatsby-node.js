@@ -16,13 +16,16 @@ const { removeLeadingSlash } = require('../../src/utils/remove-leading-slash.js'
 const { manifestMetadata, siteMetadata } = require('../../src/utils/site-metadata.js');
 const { assertTrailingSlash } = require('../../src/utils/assert-trailing-slash.js');
 const { constructPageIdPrefix } = require('../../src/utils/setup/construct-page-id-prefix.js');
-const { manifestDocumentDatabase, realmDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
+const { manifestDocumentDatabase } = require('../../src/init/DocumentDatabase.js');
 const { createOpenAPIChangelogNode } = require('../utils/openapi.js');
 const { createProductNodes } = require('../utils/products.js');
 const { createDocsetNodes } = require('../utils/docsets.js');
 const { createBreadcrumbNodes } = require('../utils/breadcrumbs.js');
 const { createBannerNode } = require('../utils/banner.js');
 const { generatePathPrefix } = require('../../src/utils/generate-path-prefix.js');
+const { METADATA_COLLECTION, DOCUMENTS_COLLECTION } = require('../../src/build-constants.js');
+const { fetchDocumentSorted } = require('../utils/documents.js');
+const { constructBuildFilter } = require('../../src/utils/setup/construct-build-filter.js');
 const assets = new Map();
 const projectComponents = new Set();
 
@@ -63,7 +66,7 @@ const createRemoteMetadataNode = async ({ createNode, createNodeId, createConten
         sort: { build_id: -1 },
       };
       // get remote metadata for updated ToC in Atlas
-      remoteMetadata = await db.realmInterface.getMetadata(filter, undefined, findOptions);
+      remoteMetadata = fetchDocumentSorted(siteMetadata.database, METADATA_COLLECTION, filter, undefined, findOptions);
     }
 
     createNode({
@@ -123,19 +126,23 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     throw Error(envResults.message);
   }
 
-  // wait to connect to Realm
-
   if (siteMetadata.manifestPath || process.env.GATSBY_BUILD_FROM_JSON === 'true') {
     console.log('Loading documents from manifest');
     db = manifestDocumentDatabase;
   } else {
-    console.log('Loading documents from realm');
-    db = realmDocumentDatabase;
+    console.log('Loading documents from Nextjs API');
   }
 
-  await db.connect();
-
-  const documents = await db.getDocuments();
+  let documents;
+  if (db && (siteMetadata.manifestPath || process.env.GATSBY_BUILD_FROM_JSON === 'true')) {
+    documents = await db.getDocuments();
+  } else {
+    documents = await fetchDocumentSorted(
+      siteMetadata.database,
+      DOCUMENTS_COLLECTION,
+      constructBuildFilter(siteMetadata)
+    );
+  }
 
   if (documents.length === 0) {
     console.error(
@@ -211,16 +218,18 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
     if (val?.ast?.options?.template === 'changelog') hasOpenAPIChangelog = true;
   });
 
-  await createDocsetNodes({ db, createNode, createNodeId, createContentDigest });
+  await createDocsetNodes({ createNode, createNodeId, createContentDigest });
 
-  await createProductNodes({ db, createNode, createNodeId, createContentDigest });
+  await createProductNodes({ createNode, createNodeId, createContentDigest });
 
-  await createBreadcrumbNodes({ db, createNode, createNodeId, createContentDigest });
+  await createBreadcrumbNodes({ createNode, createNodeId, createContentDigest });
 
   await createBannerNode({ createNode, createNodeId, createContentDigest });
 
   if (process.env['OFFLINE_DOCS'] !== 'true') {
-    const umbrellaProduct = await db.realmInterface.getMetadata(
+    const umbrellaProduct = await fetchDocumentSorted(
+      siteMetadata.database,
+      METADATA_COLLECTION,
       {
         'associated_products.name': siteMetadata.project,
       },
@@ -241,7 +250,22 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId, getNo
   if (!siteMetadata.manifestPath) {
     console.error('Getting metadata from realm without filters');
   }
-  const { static_files: staticFiles, ...metadataMinusStatic } = await db.getMetadata();
+
+  let metadata;
+  if (db && (siteMetadata.manifestPath || process.env.GATSBY_BUILD_FROM_JSON === 'true')) {
+    metadata = await db.getMetadata();
+  } else {
+    try {
+      metadata = await fetchDocumentSorted(
+        siteMetadata.database,
+        METADATA_COLLECTION,
+        constructBuildFilter(siteMetadata)
+      );
+    } catch (e) {
+      console.error(`Error while fetching metadata from NEXTJS: ${e}`);
+    }
+  }
+  const { static_files: staticFiles, ...metadataMinusStatic } = metadata;
 
   const { parentPaths, slugToBreadcrumbLabel } = metadataMinusStatic;
   if (parentPaths) {
@@ -292,7 +316,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   let repoBranches = null;
   try {
-    const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/docsets/${siteMetadata.project}`);
+    const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/docsets/${siteMetadata.project}/`);
     const repoInfo = await res.json();
     let errMsg;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as openApiChangelogApi from '../../src/utils/openapi-changelog-diff';
+import * as openApiChangelogApi from '../../src/utils/data/openapi-changelog-diff';
 import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
 import { mockChangelog, mockDiff, mockChangelogMetadata } from './data/OpenAPIChangelog';
 

@@ -1,8 +1,8 @@
 import { render, screen, within } from '@testing-library/react';
 import { navigate } from '@gatsbyjs/reach-router';
 import userEvent from '@testing-library/user-event';
-import * as realm from '../../src/utils/realm';
-import * as docsetApi from '../../src/utils/docsets';
+import * as documentsApi from '../../src/utils/data/documents';
+import * as docsetApi from '../../src/utils/data/docsets';
 import VersionDropdown from '../../src/components/VersionDropdown';
 import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
@@ -36,7 +36,7 @@ useAllDocsetsMock.mockImplementation(() => [
 ]);
 
 const fetchDocuments = () => {
-  return jest.spyOn(realm, 'fetchDocuments').mockImplementation(async (dbName, collectionName, query) => {
+  return jest.spyOn(documentsApi, 'fetchDocuments').mockImplementation(async (dbName, collectionName, query) => {
     if (query && query['associated_products'] === 'docs-atlas-cli') {
       return [{}]; // spoofing data for "at least one parent association"
     }
@@ -45,7 +45,7 @@ const fetchDocuments = () => {
 };
 
 const fetchDocument = () => {
-  return jest.spyOn(realm, 'fetchDocument').mockImplementation(async () => {
+  return jest.spyOn(documentsApi, 'fetchDocument').mockImplementation(async () => {
     return {};
   });
 };
