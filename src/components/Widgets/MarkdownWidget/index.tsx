@@ -121,11 +121,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
           >
             Copy Page
           </MenuItem>,
-          <MenuItem
-            glyph={<Icon glyph="Sparkle" />}
-            description="Ask Mongodb AI about this page"
-            onClick={() => askQuestion()}
-          >
+          <MenuItem glyph={<Icon glyph="Sparkle" />} description="Ask Mongodb AI about this page" onClick={askQuestion}>
             Ask a Question
           </MenuItem>,
           <MenuItem
