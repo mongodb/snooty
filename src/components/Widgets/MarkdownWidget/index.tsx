@@ -7,6 +7,7 @@ import { MenuItem } from '@leafygreen-ui/menu';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useChatbotContext } from 'mongodb-chatbot-ui';
+import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 import { removeTrailingSlash } from '../../../utils/remove-trailing-slash';
 import { assertLeadingAndTrailingSlash } from '../../../utils/assert-trailing-and-leading-slash';
@@ -27,7 +28,7 @@ type CopyPageMarkdownButtonProps = {
 const splitButtonStyles = css`
   [data-theme] {
     width: 310px;
-    background-color: #001e2b;
+    background-color: ${palette.black};
   }
   min-width: 175px; /* Increase min-width to account for Copy Page in diff langs */
   justify-content: end; /* Ensures it stays flush to the right */
