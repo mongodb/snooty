@@ -1,4 +1,4 @@
-import { OpenAPIChangelogDiffSection, SnootyEnv } from '../types/data';
+import { OpenAPIChangelogDiffSection, SnootyEnv } from '../../types/data';
 
 export const fetchOpenAPIChangelogDiff = async (
   diffString: string,

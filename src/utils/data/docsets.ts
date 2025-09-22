@@ -1,4 +1,4 @@
-import { Docset } from '../types/data';
+import { Docset } from '../../types/data';
 
 // Fetches for Docsets (made separate for usage and creating mocks for testing components)
 export const fetchDocset = async (dbName: string, project: string): Promise<Docset> => {
