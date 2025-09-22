@@ -1,13 +1,12 @@
 const { siteMetadata } = require('../../src/utils/site-metadata');
 
-// Helper function with fallback to ensure first App Services Function migration to Nextjs does not break app
 const fetchProducts = async () => {
   try {
     const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/products/?dbName=${siteMetadata.database}`);
     const products = await res.json();
     return products;
   } catch (err) {
-    console.error('Nextjs API has responded with error, will use fallback App Services Function ', err);
+    console.error('Nextjs fetchProducts API has errored ', err);
     throw err;
   }
 };
