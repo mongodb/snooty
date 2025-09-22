@@ -9,6 +9,7 @@ import { DownloadButton } from '../OfflineDownloadModal';
 import { NavTopContainer, downloadButtonStlying, ArtificialPadding } from './UnifiedSidenav';
 import { StaticNavItem, UnifiedTocNavItem } from './UnifiedTocNavItems';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
+import { TocItem } from './types';
 
 export const leftPane = LeafyCSS`
   flex: 0 0 161px;
@@ -67,6 +68,17 @@ const panelStyling = LeafyCSS`
 
 `;
 
+interface DoublePannedNavProps {
+  showDriverBackBtn: boolean;
+  setShowDriverBackBtn: (show: boolean) => void;
+  tree: TocItem[];
+  slug: string;
+  currentL2s?: TocItem | null;
+  setCurrentL1: (item: TocItem) => void;
+  setCurrentL2s: (item: TocItem) => void;
+  currentL1?: TocItem;
+}
+
 export const DoublePannedNav = ({
   showDriverBackBtn,
   setShowDriverBackBtn,
@@ -76,12 +88,12 @@ export const DoublePannedNav = ({
   setCurrentL1,
   setCurrentL2s,
   currentL1,
-}) => {
+}: DoublePannedNavProps) => {
   const { isTabletOrMobile } = useScreenSize();
 
   return (
     <SideNav
-      widthOverride={currentL2s?.items ? 426 : 161}
+      widthOverride={currentL2s?.items && currentL2s.items.length > 0 ? 426 : 161}
       className={cx(sideNavStyle)}
       aria-label="Double Panned Side navigation Panel"
     >
@@ -96,7 +108,6 @@ export const DoublePannedNav = ({
               {...staticTocItem}
               slug={slug}
               key={staticTocItem.newUrl + staticTocItem.label}
-              isStatic={true}
               setCurrentL1={setCurrentL1}
               setCurrentL2s={setCurrentL2s}
               setShowDriverBackBtn={setShowDriverBackBtn}
@@ -104,8 +115,8 @@ export const DoublePannedNav = ({
             />
           ))}
         </div>
-        {currentL1?.versionDropdown && <UnifiedVersionDropdown />}
-        {currentL2s?.items && (
+        {currentL1?.versionDropdown && <UnifiedVersionDropdown contentSite={currentL1?.contentSite} />}
+        {currentL2s?.items?.length > 0 && (
           <div className={cx(rightPane)} data-nav-pane="right">
             {showDriverBackBtn && (
               <BackLink
@@ -123,6 +134,7 @@ export const DoublePannedNav = ({
                 key={navItems.newUrl + navItems.label}
                 slug={slug}
                 isAccordion={false}
+                setCurrentL1={setCurrentL1}
                 setCurrentL2s={setCurrentL2s}
                 setShowDriverBackBtn={setShowDriverBackBtn}
               />
