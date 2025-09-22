@@ -78,7 +78,7 @@ export const useRealmUser = () => {
 export async function upsertFeedback({ page, user, attachment, ...rest }: FeedbackPayload) {
   console.log('will upsert feedback');
   console.log('upsertFeedback payload', page, user, attachment, rest);
-  const { viewport, comment, category, rating, snootyEnv } = rest;
+  const { viewport, comment, category, rating, snootyEnv, feedback_id } = rest;
   const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/feedback/upsert/`, {
     method: 'POST',
     body: JSON.stringify({
@@ -90,6 +90,7 @@ export async function upsertFeedback({ page, user, attachment, ...rest }: Feedba
       category,
       rating,
       snootyEnv,
+      feedback_id,
     }),
   });
   const updateOneRes = await res.json();
