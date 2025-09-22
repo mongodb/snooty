@@ -76,6 +76,8 @@ export const useRealmUser = () => {
 
 // Feedback Widget Functions
 export async function upsertFeedback({ page, user, attachment, ...rest }: FeedbackPayload) {
+  console.log('will upsert feedback');
+  console.log('upsertFeedback payload', page, user, attachment, rest);
   const { viewport, comment, category, rating, snootyEnv } = rest;
   const res = await fetch(
     `${process.env.GATSBY_NEXT_API_BASE_URL}/feedback/upsert/?page=${page}&user=${user}&attachment=${attachment}&viewport=${viewport}&comment=${comment}&category=${category}&rating=${rating}&snootyEnv=${snootyEnv}`
