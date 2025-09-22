@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import Image from '../Image';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
 import CaptionLegend from './CaptionLegend';
 import { FigureProps } from '.';
 
@@ -70,8 +71,18 @@ const Lightbox = ({ nodeData, ...rest }: FigureProps) => {
   const [open, setOpen] = useState(false);
   const figureWidth = nodeData.options?.figwidth || 'auto';
   const openModal = useCallback(() => {
+    reportAnalytics('ImageEnlarged', {
+      event: 'Click',
+      eventDescription: 'Image Enlarged',
+      properties: {
+        position: 'figure',
+        position_context: nodeData,
+        label: nodeData.name,
+        label_text_displayed: nodeData.name,
+      },
+    });
     setOpen((prevOpen) => !prevOpen);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <React.Fragment>

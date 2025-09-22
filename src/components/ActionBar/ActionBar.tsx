@@ -46,7 +46,16 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
 
   const openChatbot = () => {
-    reportAnalytics('Chatbot button clicked');
+    reportAnalytics('ChatbotButtonClicked', {
+      event: 'CTA Click',
+      eventDescription: 'Chatbot button clicked',
+      properties: {
+        position: 'secondary nav',
+        position_context: '',
+        label: 'Ask MongoDB AI',
+        label_text_displayed: 'Ask MongoDB AI',
+      },
+    });
     setChatbotClicked((currVal) => !currVal);
   };
   const { snootyEnv } = useSiteMetadata();

@@ -71,22 +71,29 @@ const hrStyles = css`
   border-color: ${palette.gray.light2};
 `;
 
+const reportDismissibleSkillsCard = (skill: string, url: string) => {
+  reportAnalytics('DismissibleSkillsCardLinkClicked', {
+    event: 'CTA Click',
+    eventDescription: 'Dismissible skills card link clicked',
+    properties: {
+      position: 'dismissible skills card',
+      position_context: 'right column',
+      label: `card skill: ${skill}, card url: ${url}`,
+      label_text_displayed: `card skill: ${skill}, card url: ${url}`,
+    },
+  });
+};
+
 const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: string; slug: string }) => {
   const shownClassname = useMemo(() => `${slug.split('/').join('-')}-${DISMISSIBLE_SKILLS_CARD_SHOWN}`, [slug]);
 
   const onLinkClick = () => {
-    reportAnalytics('DismissibleSkillsCardLinkClicked', {
-      cardSkill: skill,
-      cardUrl: url,
-    });
+    reportDismissibleSkillsCard(skill, url);
   };
 
   const onClose = () => {
     if (isBrowser) {
-      reportAnalytics('DismissibleSkillsCardClosed', {
-        cardSkill: skill,
-        cardUrl: url,
-      });
+      reportDismissibleSkillsCard(skill, url);
       // Add to document classnames
       const docClassList = window.document.documentElement.classList;
       docClassList.add(shownClassname);

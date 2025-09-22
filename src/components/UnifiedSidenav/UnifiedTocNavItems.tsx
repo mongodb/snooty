@@ -10,6 +10,7 @@ import { isCurrentPage } from '../../utils/is-current-page';
 import { theme } from '../../theme/docsTheme';
 import { isUnifiedTOCInDevMode } from '../../utils/is-unified-toc-dev';
 import { VersionContext } from '../../context/version-context';
+import { reportAnalytics } from '../../utils/report-analytics';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 import { TocItem } from './types';
@@ -35,6 +36,19 @@ const overwriteLinkStyle = LeafyCSS`
 const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
+
+const sidenavAnalytics = (label: string, url: string | undefined) => {
+  reportAnalytics('SidenavItemClicked', {
+    event: 'Click',
+    eventDescription: 'Sidenav Item Clicked',
+    properties: {
+      position: 'sidenav',
+      position_context: url,
+      label: label,
+      label_text_displayed: label,
+    },
+  });
+};
 
 // Anchors are sometimes included in toc.ts files, but we dont want to compare the current slug to the url with an anchor
 export const removeAnchor = (str: string): string => {
@@ -172,6 +186,7 @@ export const UnifiedTocNavItem = ({
 
   const handleClick = () => {
     // Allows for the showSubNav nodes to have their own L2 panel
+    sidenavAnalytics(label, newUrl);
     setShowDriverBackBtn(true);
     setCurrentL2s({ items, newUrl, label, contentSite });
   };
@@ -223,6 +238,7 @@ export const UnifiedTocNavItem = ({
         as={Link}
         contentSite={contentSite}
         to={newUrl}
+        onClick={() => sidenavAnalytics(label, newUrl)}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       >
         {label}
@@ -273,6 +289,7 @@ export const CollapsibleNavItem = ({
   };
 
   const handleClick = () => {
+    sidenavAnalytics(label, newUrl);
     if (isOpen && openedByCaret.current) {
       openedByCaret.current = false; // Was opened by caret, keep it open and reset
       return;
@@ -356,6 +373,7 @@ export const StaticNavItem = ({
       as={isUnifiedTOCInDevMode ? (undefined as never) : Link}
       to={newUrl}
       onClick={() => {
+        sidenavAnalytics(label, newUrl);
         setCurrentL1({ items, newUrl, versionDropdown, label, contentSite });
         setCurrentL2s({ items, newUrl, versionDropdown, label, contentSite });
         setShowDriverBackBtn(false);

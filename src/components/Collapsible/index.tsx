@@ -47,8 +47,15 @@ const Collapsible = ({ nodeData, sectionDepth, ...rest }: CollapsibleProps) => {
 
   const onIconClick = useCallback(() => {
     reportAnalytics('CollapsibleClicked', {
-      action: open ? 'collapsed' : 'expanded',
-      heading,
+      event: 'Click',
+      eventDescription: 'Collapsible Clicked',
+      properties: {
+        position: 'collapsible',
+        position_context: `action: ${open ? 'collapsed' : 'expanded'}`,
+        label: `heading: ${heading}`,
+        label_text_displayed: `heading: ${heading}`,
+        scroll_position: '0',
+      },
     });
     setOpen(!open);
   }, [heading, open]);

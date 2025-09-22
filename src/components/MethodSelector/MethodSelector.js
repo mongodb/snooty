@@ -156,7 +156,14 @@ const MethodSelector = ({ nodeData: { children } }) => {
             setSelectedIdx(idx);
             setLocalValue(STORAGE_KEY, id);
             reportAnalytics('MethodOptionSelected', {
-              methodOption: defaultValue,
+              event: 'Click',
+              eventDescription: 'Method Option Selected',
+              properties: {
+                position: 'method selector',
+                position_context: 'method option selected',
+                label: `method option: ${defaultValue}`,
+                label_text_displayed: `method option: ${defaultValue}`,
+              },
             });
           }}
         >

@@ -21,6 +21,8 @@ import { UnifiedSidenav } from '../components/UnifiedSidenav/UnifiedSidenav';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { isBrowser } from '../utils/is-browser';
 import { loadHashIntoView } from '../utils/load-hash-into-view';
+import { usePageDuration } from '../hooks/usePageDuration';
+import { usePageScroll } from '../hooks/usePageScroll';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -112,6 +114,10 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
   const remoteMetadata = useRemoteMetadata();
   const { hash } = useLocation();
   const isInPresentationMode = usePresentationMode()?.toLocaleLowerCase() === 'true';
+
+  // Track page duration and scroll for analytics
+  usePageDuration();
+  usePageScroll();
 
   const pageTitle = React.useMemo(
     () => page?.ast?.options?.title || slugToTitle?.[slug === '/' ? 'index' : slug],

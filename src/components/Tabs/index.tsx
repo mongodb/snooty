@@ -181,11 +181,17 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps
       const priorAnchorOffset = scrollAnchorRef.current ? getPosition(scrollAnchorRef.current).y : undefined;
 
       setActiveTab({ [tabsetName]: tabId });
-      reportAnalytics('Tab Selected', {
-        tabId,
-        tabSet: tabsetName,
+      reportAnalytics('TabSelected', {
+        event: 'Click',
+        eventDescription: 'Tab Selected',
+        properties: {
+          position: 'tab',
+          position_context: `tab id: ${tabId}, tab set: ${tabsetName}`,
+          label: tabId,
+          tab_name: tabsetName,
+          label_text_displayed: tabId,
+        },
       });
-
       // Delay preserving scroll behavior by 40ms to allow other tabset content bodies to render
       window.setTimeout(() => {
         if (scrollAnchorRef.current && priorAnchorOffset) {

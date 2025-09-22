@@ -6,6 +6,7 @@ import Icon from '@leafygreen-ui/icon';
 import { theme } from '../../theme/docsTheme';
 import Select from '../Select';
 import { getSortedBranchesForProperty } from '../../utils/parse-marian-manifests';
+import { reportAnalytics } from '../../utils/report-analytics';
 import SearchContext from './SearchContext';
 
 export type SearchFiltersChoice = { text: string; value: string };
@@ -97,6 +98,16 @@ const SearchFilters = ({
 
   const onCategoryChange = useCallback(
     ({ value }: { value: string }) => {
+      reportAnalytics('RefineYourSearchFilterSelected', {
+        event: 'Click',
+        eventDescription: 'Refine Your Search Filter Selected',
+        properties: {
+          position: 'Search',
+          position_context: '',
+          label: value,
+          label_text_displayed: value,
+        },
+      });
       if (!manuallyApplyFilters) {
         setSelectedCategory(value);
       } else {

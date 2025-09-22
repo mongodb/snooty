@@ -40,7 +40,14 @@ const DarkModeDropdown = () => {
   const select = useCallback(
     (selectedPref: DarkModePref) => {
       reportAnalytics('DarkModeSelection', {
-        value: selectedPref,
+        event: 'Click',
+        eventDescription: 'Dark mode selection',
+        properties: {
+          position: 'secondary nav',
+          position_context: 'dark mode menu',
+          label: selectedPref,
+          label_text_displayed: selectedPref,
+        },
       });
       setDarkModePref(selectedPref);
       setOpen(false);
@@ -65,8 +72,15 @@ const DarkModeDropdown = () => {
         align={'bottom'}
         open={open}
         setOpen={() => {
-          reportAnalytics('DarkModeMenu', {
-            action: open ? 'closed' : 'opened',
+          reportAnalytics({
+            event: 'Click',
+            eventDescription: 'Dark mode menu clicked',
+            properties: {
+              position: 'secondary nav',
+              position_context: 'dark mode menu',
+              label: `action: ${open ? 'closed' : 'opened'}`,
+              label_text_displayed: `action: ${open ? 'closed' : 'opened'}`,
+            },
           });
           setOpen((e) => !e);
         }}

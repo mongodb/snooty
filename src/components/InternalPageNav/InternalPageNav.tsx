@@ -286,8 +286,14 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }: InternalPageN
 
   const handleClick = (direction: string, targetSlug: string) => {
     reportAnalytics('InternalPageNavClicked', {
-      direction,
-      targetSlug,
+      event: 'CTA click',
+      eventDescription: 'Internal Page Nav Clicked',
+      properties: {
+        position: 'body',
+        position_context: `page selector direction: ${direction}`,
+        label: targetSlug,
+        label_text_displayed: targetSlug,
+      },
     });
   };
 

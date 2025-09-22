@@ -2,6 +2,7 @@ import React from 'react';
 import InlineDefinition from '@leafygreen-ui/inline-definition';
 import { theme } from '../../theme/docsTheme';
 import { AbbrRoleNode } from '../../types/ast';
+import { reportAnalytics } from '../../utils/report-analytics';
 
 export type AbbrProps = {
   nodeData: AbbrRoleNode;
@@ -23,7 +24,24 @@ const Abbr = ({
     abbr = abbr.trim();
   }
   return (
-    <InlineDefinition popoverZIndex={theme.zIndexes.popovers} definition={expansion}>
+    <InlineDefinition
+      popoverZIndex={theme.zIndexes.popovers}
+      definition={expansion}
+      onClose={() =>
+        console.log(
+          reportAnalytics('AbbreviatioHoverUsed', {
+            event: 'Click',
+            eventDescription: 'Abbreviation/Glossary Definition Hover Used',
+            properties: {
+              position: 'body',
+              position_context: expansion,
+              label: abbr,
+              label_text_displayed: abbr,
+            },
+          })
+        )
+      }
+    >
       {abbr}
     </InlineDefinition>
   );

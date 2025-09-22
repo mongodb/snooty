@@ -25,7 +25,16 @@ const DownloadButton = () => {
 
   const openDownloadModal = () => {
     if (isTabletOrMobile) return;
-    reportAnalytics('Offline docs download button clicked');
+    reportAnalytics('OfflineDocsDownloadButtonClicked', {
+      event: 'Click',
+      eventDescription: 'Offline docs download button clicked',
+      properties: {
+        position: 'SideNav',
+        position_context: 'download button clicked',
+        label: 'offline docs download button clicked',
+        label_text_displayed: 'offline docs download button clicked',
+      },
+    });
     setModalOpen(true);
   };
 

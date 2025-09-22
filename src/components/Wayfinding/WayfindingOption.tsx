@@ -51,8 +51,14 @@ const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false 
       target={'_self'}
       onClick={() => {
         reportAnalytics('WayfindingOptionClicked', {
-          optionId,
-          optionLink,
+          event: 'Click',
+          eventDescription: 'Wayfinding Option Clicked',
+          properties: {
+            position: 'wayfinding option',
+            position_context: `option id: ${optionId}, option link: ${optionLink}`,
+            label: optionLink,
+            label_text_displayed: optionLink,
+          },
         });
       }}
     >

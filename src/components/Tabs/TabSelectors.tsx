@@ -88,9 +88,15 @@ const TabSelector = ({
       onChange={({ value }) => {
         handleClick({ [name]: value });
         reportAnalytics('LanguageSelection', {
-          areaFrom: 'LanguageSelector',
-          languageInitial: activeTab,
-          languageSelected: value,
+          event: 'Click',
+          eventDescription: 'Language Selection',
+          properties: {
+            position: 'selector/dropdown',
+            position_context: '',
+            label: value,
+            label_text_displayed: value,
+            tab_name: activeTab,
+          },
         });
       }}
       value={activeTab}

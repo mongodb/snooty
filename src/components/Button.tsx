@@ -5,6 +5,7 @@ import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { ButtonNode } from '../types/ast';
+import { reportAnalytics } from '../utils/report-analytics';
 import ComponentFactory from './ComponentFactory';
 import Link, { LinkProps } from './Link';
 
@@ -57,6 +58,18 @@ const Button = ({
       size={size}
       darkMode={darkModeProp ?? darkMode}
       variant={variant}
+      onClick={() =>
+        reportAnalytics('ButtonClicked', {
+          event: 'CTA Click',
+          eventDescription: 'Button Clicked',
+          properties: {
+            position: 'body',
+            position_context: uri ?? '',
+            label: argument,
+            label_text_displayed: argument,
+          },
+        })
+      }
       rightGlyph={rightGlyph ? <Icon glyph={rightGlyph} /> : undefined}
       {...componentProps}
     >

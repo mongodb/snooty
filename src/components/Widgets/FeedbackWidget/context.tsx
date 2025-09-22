@@ -13,6 +13,7 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { getViewport, Viewport } from '../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { SnootyEnv } from '../../../types/data';
+import { reportAnalytics } from '../../../utils/report-analytics';
 import { upsertFeedback, useRealmUser } from './realm';
 import { FeedbackPageData } from './useFeedbackData';
 
@@ -174,6 +175,16 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
   };
 
   const selectInitialRating = async (ratingValue: number) => {
+    reportAnalytics('RatingSelection', {
+      event: 'Click',
+      eventDescription: 'Rating Selection',
+      properties: {
+        position: 'right column',
+        position_context: '',
+        label: ratingValue,
+        label_text_displayed: ratingValue,
+      },
+    });
     setSelectedRating(ratingValue);
     setView('comment');
     setProgress([false, true, false]);

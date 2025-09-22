@@ -125,7 +125,16 @@ const Code = ({
   }
 
   const reportCodeCopied = useCallback(() => {
-    reportAnalytics('CodeblockCopied', { code });
+    reportAnalytics('CodeblockCopied', {
+      event: 'Click',
+      eventDescription: 'Codeblock Copied',
+      properties: {
+        position: 'codeblock',
+        position_context: `codeblock code: ${code}`,
+        label: 'codeblock copied',
+        label_text_displayed: 'codeblock copied',
+      },
+    });
   }, [code]);
 
   const softwareSourceCodeSd = useMemo(() => {
