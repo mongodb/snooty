@@ -79,9 +79,19 @@ export async function upsertFeedback({ page, user, attachment, ...rest }: Feedba
   console.log('will upsert feedback');
   console.log('upsertFeedback payload', page, user, attachment, rest);
   const { viewport, comment, category, rating, snootyEnv } = rest;
-  const res = await fetch(
-    `${process.env.GATSBY_NEXT_API_BASE_URL}/feedback/upsert/?page=${page}&user=${user}&attachment=${attachment}&viewport=${viewport}&comment=${comment}&category=${category}&rating=${rating}&snootyEnv=${snootyEnv}`
-  );
+  const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/feedback/upsert/`, {
+    method: 'POST',
+    body: JSON.stringify({
+      page,
+      user,
+      attachment,
+      viewport,
+      comment,
+      category,
+      rating,
+      snootyEnv,
+    }),
+  });
   const updateOneRes = await res.json();
   const objectId = new ObjectID(updateOneRes.upsertedId);
   return objectId.toString();
