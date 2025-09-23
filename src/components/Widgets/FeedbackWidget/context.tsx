@@ -13,8 +13,9 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { getViewport, Viewport } from '../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { SnootyEnv } from '../../../types/data';
-import { upsertFeedback, useRealmUser } from './realm';
+import { useRealmUser } from './realm';
 import { FeedbackPageData } from './useFeedbackData';
+import { upsertFeedback } from './upsertFeedback';
 
 type SubmitAllFeedbackProps = {
   comment?: string;
@@ -140,7 +141,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
         snootyEnv,
         ...test?.feedback,
       };
-      if (user && user.id) {
+      if (user?.id) {
         res.user.stitch_id = user.id;
       }
       if (email) {

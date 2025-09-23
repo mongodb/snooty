@@ -1,9 +1,7 @@
 import React from 'react';
 import * as Realm from 'realm-web';
-import { ObjectID } from 'bson';
 import { isBrowser } from '../../../utils/is-browser';
 import { removeAllRealmUsersFromLocalStorage } from '../../../utils/realm-user-management';
-import { FeedbackPayload } from './context';
 
 const APP_ID = 'feedbackwidgetv3-dgcsv';
 export const app = isBrowser ? Realm.App.getApp(APP_ID) : { auth: {} };
@@ -73,27 +71,3 @@ export const useRealmUser = () => {
 
   return { user, reassignCurrentUser };
 };
-
-// Feedback Widget Functions
-export async function upsertFeedback({ page, user, attachment, ...rest }: FeedbackPayload) {
-  console.log('will upsert feedback');
-  console.log('upsertFeedback payload', page, user, attachment, rest);
-  const { viewport, comment, category, rating, snootyEnv, feedback_id } = rest;
-  const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/feedback/upsert/`, {
-    method: 'POST',
-    body: JSON.stringify({
-      page,
-      user,
-      attachment,
-      viewport,
-      comment,
-      category,
-      rating,
-      snootyEnv,
-      feedback_id,
-    }),
-  });
-  const updateOneRes = await res.json();
-  const objectId = new ObjectID(updateOneRes.upsertedId);
-  return objectId.toString();
-}
