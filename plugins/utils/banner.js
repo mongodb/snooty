@@ -21,15 +21,15 @@ const createBannerNode = async ({ createNode, createNodeId, createContentDigest 
       contentDigest: createContentDigest(banner),
       type: 'BannerContent',
     },
-    isEnabled: banner.isEnabled,
-    altText: banner.altText,
+    isEnabled: banner.isEnabled ?? false,
+    altText: banner.altText ?? '',
     imgPath: banner.imgPath,
     tabletImgPath: banner.tabletImgPath,
     mobileImgPath: banner.mobileImgPath,
     bgColor: banner.bgColor,
     text: banner.text,
     pillText: banner.pillText,
-    url: banner.url,
+    url: banner.url ?? '',
   });
 };
 
