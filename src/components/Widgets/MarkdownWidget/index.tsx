@@ -6,13 +6,13 @@ import { Toast, ToastProvider, Variant } from '@leafygreen-ui/toast';
 import { MenuItem } from '@leafygreen-ui/menu';
 import Icon from '@leafygreen-ui/icon';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { useChatbotContext } from 'mongodb-chatbot-ui';
 import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../../../theme/docsTheme';
 import { removeTrailingSlash } from '../../../utils/remove-trailing-slash';
 import { assertLeadingAndTrailingSlash } from '../../../utils/assert-trailing-and-leading-slash';
 import { removeLeadingSlash } from '../../../utils/remove-leading-slash';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
+import { useChatbotModal } from '../../../context/chatbot-context';
 type ToastOpen = {
   open: boolean;
   variant: Variant;
@@ -38,7 +38,6 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   const [toastOpen, setToastOpen] = useState<ToastOpen>({ open: false, variant: Variant.Success });
   const [markdownText, getMarkdownText] = useState<string | null>(null);
   const { href } = useLocation();
-  const { openChat, setInputText } = useChatbotContext();
   const { pathPrefix } = useSiteMetadata();
   // First removing the search and then the trailing slash, since we expect the URL to be available in markdown
   // i.e. https://www.mongodb.com/docs/mcp-server/get-started/?client=cursor&deployment-type=atlas ->
@@ -47,6 +46,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   const markdownPath = href?.split('?')[0];
   const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
   const markdownAddress = `${urlWithoutTrailingSlash}.md`;
+  const { setChatbotClicked, setText } = useChatbotModal();
 
   useEffect(() => {
     // Introducing aborting to handling bounce behavior
@@ -102,8 +102,8 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
       pathPrefix
     )}${removeLeadingSlash(slug)}`;
 
-    setInputText(questionText);
-    openChat();
+    setText(questionText);
+    setChatbotClicked(true);
   };
 
   return (
@@ -115,16 +115,23 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
         onClick={() => copyMarkdown()}
         menuItems={[
           <MenuItem
+            key={'copy-page'}
             glyph={<Icon glyph="Copy" />}
             description="Copy this page as Markdown for LLMs"
             onClick={() => copyMarkdown()}
           >
             Copy Page
           </MenuItem>,
-          <MenuItem glyph={<Icon glyph="Sparkle" />} description="Ask Mongodb AI about this page" onClick={askQuestion}>
+          <MenuItem
+            key={'ask-question'}
+            glyph={<Icon glyph="Sparkle" />}
+            description="Ask Mongodb AI about this page"
+            onClick={askQuestion}
+          >
             Ask a Question
           </MenuItem>,
           <MenuItem
+            key={'view-markdown'}
             glyph={<Icon glyph="OpenNewTab" />}
             description="View this page as Markdown"
             onClick={() => viewMarkdown()}

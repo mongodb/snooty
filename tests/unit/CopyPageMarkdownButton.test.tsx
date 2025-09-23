@@ -4,21 +4,6 @@ import * as Gatsby from 'gatsby';
 import * as ReachRouter from '@gatsbyjs/reach-router';
 import CopyPageMarkdownButton from '../../src/components/Widgets/MarkdownWidget';
 
-// Create mock functions that we can access in tests
-const mockOpenChat = jest.fn();
-const mockSetInputText = jest.fn();
-
-// Mock mongodb-chatbot-ui
-jest.mock('mongodb-chatbot-ui', () => ({
-  __esModule: true,
-  useChatbotContext: () => ({
-    openChat: mockOpenChat,
-    setInputText: mockSetInputText,
-    handleSubmit: jest.fn(),
-  }),
-  default: () => null,
-}));
-
 const renderCopyMarkdownButton = (props = {}) => render(<CopyPageMarkdownButton {...props} />);
 
 const mockedNavigate = jest.spyOn(Gatsby, 'navigate');
@@ -29,6 +14,21 @@ jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({
     pathPrefix: '/docs/atlas',
   }),
+}));
+
+// Create mock functions that we can access in tests
+const mockSetChatbotClicked = jest.fn();
+const mockSetText = jest.fn();
+
+// Mock chatbot context
+jest.mock('../../src/context/chatbot-context', () => ({
+  useChatbotModal: () => ({
+    chatbotClicked: false,
+    setChatbotClicked: mockSetChatbotClicked,
+    text: '',
+    setText: mockSetText,
+  }),
+  ChatbotProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
 
 const TEST_URL = 'http://localhost:8000/tutorial/foo/';
@@ -50,8 +50,8 @@ describe('Copy markdown button', () => {
 
     mockedNavigate.mockReset();
     mockedFetch.mockReset();
-    mockOpenChat.mockReset();
-    mockSetInputText.mockReset();
+    mockSetChatbotClicked.mockReset();
+    mockSetText.mockReset();
     jest.clearAllMocks();
   });
 
@@ -142,12 +142,12 @@ describe('Copy markdown button', () => {
 
     fireEvent.click(getByText('Ask a Question'));
 
-    // Verify that setInputText was called with the correct message
-    expect(mockSetInputText).toHaveBeenCalledWith(
+    // Verify that setText was called with the correct message (our new implementation)
+    expect(mockSetText).toHaveBeenCalledWith(
       "I have a question about the page I'm on: www.mongodb.com/docs/atlas/tutorial/foo"
     );
 
-    // Verify that openChat was called
-    expect(mockOpenChat).toHaveBeenCalled();
+    // Verify that setChatbotClicked was called
+    expect(mockSetChatbotClicked).toHaveBeenCalledWith(true);
   });
 });

@@ -34,14 +34,15 @@ import { PageContext } from '../../src/context/page-context';
 import { MetadataProvider } from '../../src/utils/use-snooty-metadata';
 import headingData from './data/Heading.test.json';
 
-jest.mock('mongodb-chatbot-ui', () => ({
-  __esModule: true,
-  useChatbotContext: () => ({
-    openChat: jest.fn(),
-    setInputText: jest.fn(),
-    handleSubmit: jest.fn(),
+// Mock chatbot context
+jest.mock('../../src/context/chatbot-context', () => ({
+  useChatbotModal: () => ({
+    chatbotClicked: false,
+    setChatbotClicked: jest.fn(),
+    text: '',
+    setText: jest.fn(),
   }),
-  default: () => null,
+  ChatbotProvider: ({ children }) => children,
 }));
 
 async function mountFormWithFeedbackState(feedbackState = {}) {

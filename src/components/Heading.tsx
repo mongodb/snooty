@@ -1,4 +1,4 @@
-import React, { useContext, lazy } from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { cx, css } from '@leafygreen-ui/emotion';
 import { H2, H3, Subtitle, Body } from '@leafygreen-ui/typography';
@@ -19,6 +19,7 @@ import ConditionalWrapper from './ConditionalWrapper';
 import Contents from './Contents';
 import Permalink from './Permalink';
 import { TimeRequired } from './MultiPageTutorials';
+import CopyPageMarkdownButton from './Widgets/MarkdownWidget';
 
 const titleMarginStyle = css`
   margin-top: ${theme.size.default};
@@ -75,8 +76,6 @@ function toHeadingTag(n: number): HeadingTag {
   if (n >= 1 && n <= 6) return `h${n}` as HeadingTag;
   return 'h6';
 }
-
-const CopyPageMarkdownButton = lazy(() => import('./Widgets/MarkdownWidget/index'));
 
 export type HeadingProps = ComponentFactoryProps & {
   nodeData: HeadingNode;

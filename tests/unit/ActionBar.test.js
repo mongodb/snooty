@@ -24,25 +24,35 @@ useAllDocsetsMock.mockImplementation(() => [
   },
 ]);
 
-const mockConversationSpy = jest.fn();
-// eslint-disable-next-line no-unused-vars
-jest.mock('mongodb-chatbot-ui', () => ({
-  __esModule: true,
-  useChatbotContext: () => ({
-    openChat: jest.fn(),
-    setInputText: jest.fn(),
-    handleSubmit: jest.fn(),
-    conversation: {
-      createConversation: mockConversationSpy,
-      conversationId: null,
-    },
+// Mock chatbot context
+jest.mock('../../src/context/chatbot-context', () => ({
+  useChatbotModal: () => ({
+    chatbotClicked: false,
+    setChatbotClicked: jest.fn(),
+    text: '',
+    setText: jest.fn(),
   }),
-  ModalView: () => null,
-  MongoDbLegalDisclosure: () => null,
-  mongoDbVerifyInformationMessage: 'Mock message',
-  PoweredByAtlasVectorSearch: () => null,
-  default: () => null,
+  ChatbotProvider: ({ children }) => children,
 }));
+
+const conversationSpy = jest.fn();
+// eslint-disable-next-line no-unused-vars
+const MongoDBChatbot = jest.mock('mongodb-chatbot-ui', () => {
+  const chatbot = jest.requireActual('mongodb-chatbot-ui');
+
+  return {
+    __esModule: true,
+    ...chatbot,
+    useChatbotContext: () => ({
+      setInputText: () => {},
+      handleSubmit: () => {},
+      conversation: {
+        createConversation: conversationSpy,
+        conversationId: null,
+      },
+    }),
+  };
+});
 
 describe('ActionBar', () => {
   let consoleSpy;
