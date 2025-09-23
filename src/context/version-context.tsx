@@ -294,8 +294,18 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
 
   // on init, fetch versions from realm app services
   useEffect(() => {
+    console.log(
+      'sending getBranches this: ',
+      metadata,
+      repoBranches,
+      associatedReposInfo,
+      associatedProductNames,
+      docsets,
+      isUnifiedToc
+    );
     getBranches(metadata, repoBranches, associatedReposInfo, associatedProductNames, docsets, isUnifiedToc).then(
       ({ versions, groups, hasEolBranches }) => {
+        console.log('getBranches in VersionContext , ', versions, groups, hasEolBranches);
         if (!mountRef.current) {
           return;
         }

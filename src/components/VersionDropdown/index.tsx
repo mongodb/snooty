@@ -80,6 +80,9 @@ const getActiveUngroupedBranches = (branches: BranchData[] = [], groups: Group[]
 // Return a branch object from branches that matches supplied branchName
 // Typically used to associate a branchName from 'groups' with a branchName in 'branches'
 const getBranch = (branchName = '', branches: BranchData[] = []) => {
+  console.log('branchName: ', branchName);
+  console.log('branches: ', branches);
+
   const branchCandidates = branches.filter((b) => b['gitBranchName'] === branchName);
 
   if (branchCandidates.length === 0) {
@@ -181,6 +184,7 @@ const VersionDropdown = ({ contentSite = null }: VersionDropdownProps) => {
       {activeUngroupedBranches?.map((b) => createOption(b))}
       {groups?.map((group) => {
         const { groupLabel, includedBranches: groupedBranchNames = [] } = group;
+        console.log('groupedBranchNames: ', groupedBranchNames);
         return (
           <OptionGroup key={groupLabel} label={groupLabel}>
             <>
