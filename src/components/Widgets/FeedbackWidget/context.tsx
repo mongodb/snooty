@@ -13,7 +13,7 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { getViewport, Viewport } from '../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { SnootyEnv } from '../../../types/data';
-import { useBrowserUser } from './upsertFeedback';
+import { FeedbackUser, useBrowserUser } from './upsertFeedback';
 import { FeedbackPageData } from './useFeedbackData';
 import { upsertFeedback } from './upsertFeedback';
 
@@ -37,10 +37,7 @@ export type FeedbackPayload = {
     url: string | null;
     docs_property: string;
   };
-  user: {
-    stitch_id?: string;
-    email?: string;
-  };
+  user: FeedbackUser;
   attachment: {
     dataUri?: string;
     viewport?: Viewport;
@@ -132,7 +129,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
           url: page.url,
           docs_property: page.docs_property,
         },
-        user: {},
+        user: { id: user?.id || '' },
         attachment: {},
         viewport: getViewport(),
         comment,
@@ -142,7 +139,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
         ...test?.feedback,
       };
       if (user?.id) {
-        res.user.stitch_id = user.id;
+        res.user.id = user.id;
       }
       if (email) {
         res.user.email = email;
@@ -202,7 +199,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
     try {
       const newUser = await reassignCurrentUser();
       if (newUser) {
-        newFeedback.user.stitch_id = newUser.id;
+        newFeedback.user.id = newUser.id;
         await upsertFeedback(newFeedback);
         setFeedback(newFeedback);
       }

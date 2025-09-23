@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ObjectID } from 'bson';
 import type { FeedbackPayload } from './context';
+
+export interface FeedbackUser {
+  id: string;
+  email?: string;
+}
 
 const FEEDBACK_USER_KEY = 'feedback_user_session';
 
@@ -24,27 +29,29 @@ export const deleteLocalStorageData = async (): Promise<void> => {
  *  User Authentication & Management
  * Gets or creates an anonymous user session ID for feedback
  */
-export const loginAnonymous = (): string => {
-  if (isValidWindow()) {
+export const loginAnonymous = (): FeedbackUser => {
+  if (!isValidWindow()) {
     // Server-side: generate temporary ID
-    return generateUserId();
+    return { id: generateUserId() };
   }
 
   try {
-    let userId = localStorage.getItem(FEEDBACK_USER_KEY);
-    if (!userId) {
-      userId = generateUserId();
-      localStorage.setItem(FEEDBACK_USER_KEY, userId);
+    const localId = localStorage.getItem(FEEDBACK_USER_KEY);
+    if (localId) {
+      return { id: localId };
     }
-    return userId;
   } catch (e) {
     console.error('Failed to access localStorage for feedback user', e);
-    return generateUserId();
   }
+
+  // If no existing ID or localStorage failed, create new one
+  const userId = generateUserId();
+  localStorage.setItem(FEEDBACK_USER_KEY, userId);
+  return { id: userId };
 };
 
 export const useBrowserUser = () => {
-  const [user, setUser] = useState(isValidWindow() ? localStorage.getItem(FEEDBACK_USER_KEY) : null);
+  const [user, setUser] = useState(isValidWindow() ? loginAnonymous() : null);
 
   async function reassignCurrentUser() {
     // Clean up invalid data from local storage to avoid bubbling up local storage sizes for broken user credentials
@@ -55,12 +62,6 @@ export const useBrowserUser = () => {
     setUser(newUser);
     return newUser;
   }
-
-  // Initial user login
-  React.useEffect(() => {
-    const newUser = loginAnonymous();
-    setUser(newUser);
-  }, []);
 
   return { user, reassignCurrentUser };
 };
