@@ -118,6 +118,7 @@ const VersionDropdown = ({ contentSite = null }: VersionDropdownProps) => {
   const { availableVersions, availableGroups, onVersionSelect, activeVersions } = useContext(VersionContext);
   const docsets = useAllDocsets();
   project = contentSite ? contentSite : project;
+  console.log('availableGroups: ', availableGroups);
   let branches = availableVersions[project];
   let groups = availableGroups[project];
   const docset = docsets.find((docset) => docset.project === project);
