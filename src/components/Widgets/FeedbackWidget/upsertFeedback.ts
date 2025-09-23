@@ -51,7 +51,7 @@ export const loginAnonymous = (): FeedbackUser => {
 };
 
 export const useBrowserUser = () => {
-  const [user, setUser] = useState(isValidWindow() ? loginAnonymous() : null);
+  const [user, setUser] = useState(loginAnonymous());
 
   async function reassignCurrentUser() {
     // Clean up invalid data from local storage to avoid bubbling up local storage sizes for broken user credentials
