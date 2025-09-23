@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { ObjectID } from 'bson';
 import type { FeedbackPayload } from './context';
 
@@ -6,15 +7,25 @@ const FEEDBACK_USER_KEY = 'feedback_user_session';
 /**
  * Generates a new anonymous user session ID
  */
-function generateUserId(): string {
+export const generateUserId = (): string => {
   return `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-}
+};
 
 /**
+ * Deletes localStorage data for all users
+ */
+export const deleteLocalStorageData = async (): Promise<void> => {
+  if (isValidWindow()) {
+    localStorage.removeItem(FEEDBACK_USER_KEY);
+  }
+};
+
+/**
+ *  User Authentication & Management
  * Gets or creates an anonymous user session ID for feedback
  */
-export const getOrCreateUserId = (): string => {
-  if (typeof window === 'undefined') {
+export const loginAnonymous = (): string => {
+  if (isValidWindow()) {
     // Server-side: generate temporary ID
     return generateUserId();
   }
@@ -31,6 +42,32 @@ export const getOrCreateUserId = (): string => {
     return generateUserId();
   }
 };
+
+export const useBrowserUser = () => {
+  const [user, setUser] = useState(isValidWindow() ? localStorage.getItem(FEEDBACK_USER_KEY) : null);
+
+  async function reassignCurrentUser() {
+    // Clean up invalid data from local storage to avoid bubbling up local storage sizes for broken user credentials
+    // This should be safe since only old users' data would be deleted, and we make a new user right after
+    deleteLocalStorageData();
+
+    const newUser = loginAnonymous();
+    setUser(newUser);
+    return newUser;
+  }
+
+  // Initial user login
+  React.useEffect(() => {
+    const newUser = loginAnonymous();
+    setUser(newUser);
+  }, []);
+
+  return { user, reassignCurrentUser };
+};
+
+export function isValidWindow() {
+  return typeof window !== 'undefined';
+}
 
 // Feedback Widget Functions
 export async function upsertFeedback({ page, user, attachment, ...rest }: FeedbackPayload): Promise<string> {

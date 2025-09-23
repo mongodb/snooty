@@ -13,7 +13,7 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { getViewport, Viewport } from '../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { SnootyEnv } from '../../../types/data';
-import { useRealmUser } from './realm';
+import { useBrowserUser } from './upsertFeedback';
 import { FeedbackPageData } from './useFeedbackData';
 import { upsertFeedback } from './upsertFeedback';
 
@@ -119,7 +119,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
   const [progress, setProgress] = useState([true, false, false]);
   const [isScreenshotButtonClicked, setIsScreenshotButtonClicked] = useState(false);
   const [, startTransition] = useTransition();
-  const { user, reassignCurrentUser } = useRealmUser();
+  const { user, reassignCurrentUser } = useBrowserUser();
   const { href } = useLocation();
   const { snootyEnv } = useSiteMetadata();
 
