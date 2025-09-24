@@ -115,7 +115,9 @@ const Banner = ({ nodeData: { children, options }, ...rest }: BannerProps) => {
   const locale = getCurrLocale();
 
   // if banner has option locale, then only render the banner for said translated page.
-  if (options?.locale && !options.locale.includes(locale)) {
+  // Let us first do a string to array conversion for better accuracy
+  const locales = options?.locale?.split(',');
+  if (locales && !locales.includes(locale)) {
     return <div />;
   }
 
