@@ -2,7 +2,7 @@ import React from 'react';
 import * as Gatsby from 'gatsby';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as realm from '../../src/utils/realm';
+import * as openApiChangelogApi from '../../src/utils/data/openapi-changelog-diff';
 import OpenAPIChangelog from '../../src/components/OpenAPIChangelog';
 import { mockChangelog, mockDiff, mockChangelogMetadata } from './data/OpenAPIChangelog';
 
@@ -70,7 +70,7 @@ describe('OpenAPIChangelog tests', () => {
 
   beforeEach(() => {
     mockFetchOpenAPIChangelogDiff = jest
-      .spyOn(realm, 'fetchOpenAPIChangelogDiff')
+      .spyOn(openApiChangelogApi, 'fetchOpenAPIChangelogDiff')
       .mockImplementation(async (fromAndToDiffString, snootyEnv) => {
         return mockDiff;
       });
