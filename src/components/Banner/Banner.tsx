@@ -110,10 +110,14 @@ interface BannerProps {
   nodeData: BannerNode;
 }
 
-const Banner = ({ nodeData: { children, options }, ...rest }: BannerProps) => {
+const Banner = (props: BannerProps) => {
+  // handling the nested destructing in the body, to allow cleaner debugging.
+  const { nodeData, ...rest } = props;
+  const { children, options } = nodeData;
   // Get the current locale (language + region) i.e. es-US, fr-FR
   const locale = getCurrLocale();
 
+  console.log('options', options);
   // if banner has option locale, then only render the banner for said translated page.
   // Let us first do a string to array conversion for better accuracy
   const locales = options?.locale?.split(',');
