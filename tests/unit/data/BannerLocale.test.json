@@ -35,8 +35,6 @@
   "argument": [],
   "options": {
     "variant": "info",
-    "locale": [
-      "es"
-    ]
+    "locale": "es"
   }
 }
