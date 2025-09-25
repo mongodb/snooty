@@ -119,7 +119,7 @@ const Banner = (props: BannerProps) => {
 
   // if banner has option locale, then only render the banner for said translated page.
   // Let us first do a string to array conversion for better accuracy
-  const locales = options?.locale?.split(',');
+  const locales = typeof options?.locale === 'string' ? options.locale.split(',') : undefined;
   if (locales && !locales.includes(locale)) {
     return <div />;
   }
