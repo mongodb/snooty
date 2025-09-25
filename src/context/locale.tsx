@@ -1,26 +1,23 @@
-import React, { createContext, PropsWithChildren, useEffect, useState } from 'react';
-import {
-  AvailableLanguageData,
-  AvailableLocaleType,
-  BETA_LOCALE,
-  getAvailableLanguages,
-  getCurrLocale,
-} from '../utils/locale';
+import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
+import { AvailableLocaleType, BETA_LOCALE, getAvailableLanguages, getCurrLocale } from '../utils/locale';
 
 type LocaleContextType = {
-  enabledLocalesData: AvailableLanguageData[];
-  updateAvailableLocales?: (locale: AvailableLocaleType) => void;
+  enabledLocales: AvailableLocaleType[];
+};
+
+const gettingAvailableLanguages = (): AvailableLocaleType[] => {
+  return getAvailableLanguages().map((lang) => lang.localeCode);
 };
 
 const LocaleContext = createContext<LocaleContextType>({
-  enabledLocalesData: getAvailableLanguages(),
+  enabledLocales: gettingAvailableLanguages(),
 });
 
 const LocaleProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [enabledLocalesData, setEnableLocalesData] = useState<AvailableLanguageData[]>([]);
+  const [enabledLocales, setEnableLocalesData] = useState<AvailableLocaleType[]>([]);
   const locale = getCurrLocale();
 
-  const betaLocale = BETA_LOCALE[locale];
+  const betaLocale = BETA_LOCALE[locale].localeCode;
 
   useEffect(() => {
     const betaLocals = ['es'];
@@ -30,7 +27,7 @@ const LocaleProvider: React.FC<PropsWithChildren> = ({ children }) => {
      * unified header and footer.
      * If not then just use the default available languages
      */
-    const data = getAvailableLanguages();
+    const data = gettingAvailableLanguages();
     if (betaLocals.includes(locale) && betaLocale) {
       setEnableLocalesData([...data, betaLocale]);
     } else {
@@ -38,7 +35,17 @@ const LocaleProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
   }, [locale, betaLocale]);
 
-  return <LocaleContext.Provider value={{ enabledLocalesData }}>{children}</LocaleContext.Provider>;
+  return <LocaleContext.Provider value={{ enabledLocales }}>{children}</LocaleContext.Provider>;
 };
 
-export { LocaleContext, LocaleProvider };
+export { LocaleProvider };
+
+export const useLocale = () => {
+  const context = useContext(LocaleContext);
+
+  if (!context) {
+    throw new Error('useLocale must be used within a LocalProvider');
+  }
+
+  return context;
+};

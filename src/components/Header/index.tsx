@@ -6,7 +6,7 @@ import SiteBanner from '../Banner/SiteBanner';
 import { theme } from '../../theme/docsTheme';
 import { getCurrLocale, onSelectLocale } from '../../utils/locale';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
-import { LocaleContext } from '../../context/locale';
+import { useLocale } from '../../context/locale';
 import { HeaderContext } from './header-context';
 
 interface StyledHeaderProps {
@@ -45,8 +45,7 @@ type HeaderProps = {
 
 const Header = ({ eol }: HeaderProps) => {
   const unifiedNavProperty = 'DOCS';
-  const { enabledLocalesData } = useContext(LocaleContext);
-  const enabledLocales = enabledLocalesData.map((language) => language.localeCode);
+  const { enabledLocales } = useLocale();
   const locale = getCurrLocale();
   const { hasBanner } = useContext(HeaderContext);
 
