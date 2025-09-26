@@ -17,6 +17,7 @@ import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
 import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { isBrowser } from '../../utils/is-browser';
 import { loadHashIntoView } from '../../utils/load-hash-into-view';
+import { getAvailableLanguages } from '../../utils/locale';
 import { ActiveVersions, AvailableVersions } from '../../context/version-context';
 import { isActiveTocNode, removeAnchor } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
@@ -174,7 +175,8 @@ const findPageParent = (tree: TocItem[], targetUrl: string): [boolean, TocItem |
   return [false, null];
 };
 
-export const langArray = ['zh-cn', 'ja-jp', 'ko-kr', 'pt-br'];
+// Getting a list of the available languages
+export const langArray = getAvailableLanguages(true).map((lang) => lang.localeCode);
 
 export const UnifiedSidenav = ({ slug: initialSlug }: { slug: string }) => {
   const unifiedTocTree = useUnifiedToc();
