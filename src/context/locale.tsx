@@ -17,7 +17,7 @@ export const LocaleProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [enabledLocales, setEnableLocalesData] = useState<AvailableLocaleType[]>([]);
   const locale = getCurrLocale();
 
-  const betaLocale = BETA_LOCALE[locale].localeCode;
+  const betaLocale = BETA_LOCALE[locale]?.localeCode ?? undefined;
 
   useEffect(() => {
     const betaLocals = ['es'];
