@@ -13,7 +13,7 @@ const LocaleContext = createContext<LocaleContextType>({
   enabledLocales: gettingAvailableLanguages(),
 });
 
-const LocaleProvider: React.FC<PropsWithChildren> = ({ children }) => {
+export const LocaleProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [enabledLocales, setEnableLocalesData] = useState<AvailableLocaleType[]>([]);
   const locale = getCurrLocale();
 
@@ -37,8 +37,6 @@ const LocaleProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   return <LocaleContext.Provider value={{ enabledLocales }}>{children}</LocaleContext.Provider>;
 };
-
-export { LocaleProvider };
 
 export const useLocale = () => {
   const context = useContext(LocaleContext);
