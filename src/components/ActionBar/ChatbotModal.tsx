@@ -8,20 +8,20 @@ import {
 } from 'mongodb-chatbot-ui';
 import { css } from '@leafygreen-ui/emotion';
 import { defaultSuggestedPrompts } from '../ChatbotUi';
+import { useChatbotModal } from '../../context/chatbot-context';
 
-interface ChatbotModalProps {
-  chatbotClicked: boolean;
-  setChatbotClicked: (chatbotClicked: boolean) => void;
-}
+const ChatbotModal = () => {
+  const { openChat, setInputText } = useChatbotContext();
+  const { chatbotClicked, setChatbotClicked, text, setText } = useChatbotModal();
 
-const ChatbotModal = ({ chatbotClicked, setChatbotClicked }: ChatbotModalProps) => {
-  const { openChat } = useChatbotContext();
   useEffect(() => {
     if (chatbotClicked) {
+      setInputText(text);
       openChat();
       setChatbotClicked(false);
+      setText('');
     }
-  }, [chatbotClicked, openChat, setChatbotClicked]);
+  }, [chatbotClicked]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <ModalView
