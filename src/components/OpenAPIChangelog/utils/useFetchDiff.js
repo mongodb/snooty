@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { fetchOpenAPIChangelogDiff } from '../../../utils/realm';
 import useChangelogData from '../../../utils/use-changelog-data';
+import { fetchOpenAPIChangelogDiff } from '../../../utils/data/openapi-changelog-diff';
 import { getDiffRequestFormat } from './getDiffRequestFormat';
 import { hideDiffChanges } from './filterHiddenChanges';
 

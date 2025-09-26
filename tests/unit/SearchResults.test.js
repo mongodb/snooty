@@ -10,7 +10,7 @@ import { tick, setMobile } from '../utils';
 import SearchResults from '../../src/components/SearchResults/SearchResults';
 import { SearchContextProvider } from '../../src/components/SearchResults/SearchContext';
 import mockStaticQuery from '../utils/mockStaticQuery';
-import * as RealmUtil from '../../src/utils/realm';
+import * as searchPropertyMappingApi from '../../src/utils/search-property-mapping';
 import mockInputData from '../utils/data/marian-manifests.json';
 import { FILTERED_RESULT, mockMarianFetch, UNFILTERED_RESULT } from './utils/mock-marian-fetch';
 
@@ -128,7 +128,9 @@ describe('Search Results Page', () => {
 
   beforeEach(() => {
     mockStaticQuery();
-    jest.spyOn(RealmUtil, 'fetchSearchPropertyMapping').mockImplementation(() => mockInputData.searchPropertyMapping);
+    jest
+      .spyOn(searchPropertyMappingApi, 'fetchSearchPropertyMapping')
+      .mockImplementation(() => mockInputData.searchPropertyMapping);
     navigateSpy = jest.spyOn(gatsby, 'navigate').mockImplementation((...args) => {});
   });
 

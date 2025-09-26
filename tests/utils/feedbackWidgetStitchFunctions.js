@@ -1,20 +1,19 @@
-import * as Realm from 'realm-web';
-import * as realm from '../../src/components/Widgets/FeedbackWidget/realm';
+import * as feedbackWidget from '../../src/components/Widgets/FeedbackWidget/upsertFeedback';
 
 export const stitchFunctionMocks = {};
 export function mockStitchFunctions() {
   stitchFunctionMocks['upsertFeedback'] = jest
-    .spyOn(realm, 'upsertFeedback')
+    .spyOn(feedbackWidget, 'upsertFeedback')
     .mockImplementation(({ page, user, ...rest }) => {
       return {
-        _id: rest.feedback_id ?? new Realm.BSON.ObjectId(),
+        _id: rest.feedback_id,
         page,
         user,
         ...rest,
       };
     });
 
-  stitchFunctionMocks['useRealmUser'] = jest.spyOn(realm, 'useRealmUser').mockImplementation(() => {
+  stitchFunctionMocks['useBrowserUser'] = jest.spyOn(feedbackWidget, 'useBrowserUser').mockImplementation(() => {
     return {
       user: {
         id: 'test-user-id',

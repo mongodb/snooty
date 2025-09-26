@@ -8,7 +8,8 @@ import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
 import * as useAssociatedProducts from '../../src/hooks/useAssociatedProducts';
 import * as useAllDocsets from '../../src/hooks/useAllDocsets';
 import * as browserStorage from '../../src/utils/browser-storage';
-import * as realm from '../../src/utils/realm';
+import * as documentsApi from '../../src/utils/data/documents';
+import * as docsetApi from '../../src/utils/data/docsets';
 
 const snootyMetadataMock = jest.spyOn(snootyMetadata, 'default');
 const uesSiteMetadataMock = jest.spyOn(siteMetadata, 'useSiteMetadata');
@@ -197,8 +198,8 @@ describe('Version Context', () => {
     mockedBrowserStorageGetter = jest.spyOn(browserStorage, 'getLocalValue').mockImplementation((key) => {
       return mockedLocalStorage[key];
     });
-    mockedFetchDocset = jest.spyOn(realm, 'fetchDocset').mockImplementation(async (database, matchConditions) => {
-      switch (matchConditions.project) {
+    mockedFetchDocset = jest.spyOn(docsetApi, 'fetchDocset').mockImplementation(async (database, project) => {
+      switch (project) {
         case 'cloud-docs':
           return {
             project: 'cloud-docs',
@@ -230,16 +231,18 @@ describe('Version Context', () => {
       }
       return {
         database,
-        matchConditions,
+        project,
       };
     });
   });
-  mockFetchDocuments = jest.spyOn(realm, 'fetchDocument').mockImplementation(async (dbName, collectionName, query) => {
-    if (query && query['associated_products'] === 'docs-atlas-cli') {
-      return {}; // spoofing data for "at least one parent association"
-    }
-    return [];
-  });
+  mockFetchDocuments = jest
+    .spyOn(documentsApi, 'fetchDocument')
+    .mockImplementation(async (dbName, collectionName, query) => {
+      if (query && query['associated_products'] === 'docs-atlas-cli') {
+        return {}; // spoofing data for "at least one parent association"
+      }
+      return [];
+    });
 
   afterAll(() => {
     mockedFetchDocset.mockClear();

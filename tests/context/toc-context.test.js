@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { act } from 'react-dom/test-utils';
 import { render } from '@testing-library/react';
-import * as realm from '../../src/utils/realm';
+import * as documentsApi from '../../src/utils/data/documents';
 import * as siteMetadata from '../../src/hooks/use-site-metadata';
 import * as snootyMetadata from '../../src/utils/use-snooty-metadata';
 import { VersionContext } from '../../src/context/version-context';
@@ -11,7 +11,7 @@ import { TocContext, TocContextProvider } from '../../src/context/toc-context';
 // <------------------ START test data mocks ------------------>
 const siteMetadataMock = jest.spyOn(siteMetadata, 'useSiteMetadata');
 const snootyMetadataMock = jest.spyOn(snootyMetadata, 'default');
-const realmMock = jest.spyOn(realm, 'fetchDocument');
+const documentsApiMock = jest.spyOn(documentsApi, 'fetchDocument');
 const project = 'cloud-docs';
 
 let sampleTocTree, responseTree, mockedResponse;
@@ -100,7 +100,7 @@ const setMocks = () => {
   }));
 
   // mock realm
-  realmMock.mockImplementation(() => {
+  documentsApiMock.mockImplementation(() => {
     return mockedResponse;
   });
 };
@@ -160,15 +160,15 @@ describe('ToC Context', () => {
     await act(async () => {
       wrapper = mountConsumer();
     });
-    expect(realmMock).toHaveBeenCalled();
+    expect(documentsApiMock).toHaveBeenCalled();
   });
 
   it('falls back to server side metadata if realm call fails', async () => {
-    realmMock.mockRejectedValueOnce(new Error('test'));
+    documentsApiMock.mockRejectedValueOnce(new Error('test'));
     await act(async () => {
       wrapper = mountConsumer();
     });
-    expect(realmMock).toHaveBeenCalled();
+    expect(documentsApiMock).toHaveBeenCalled();
     expect(wrapper.getByText(/options/g)).toBeTruthy();
     expect(wrapper.getByText(/v1.0/g)).toBeTruthy();
     expect(wrapper.queryByText(/v1.2/g)).toBeNull();
