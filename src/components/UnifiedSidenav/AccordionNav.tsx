@@ -119,7 +119,11 @@ export const AccordionNavPanel = ({
                 <UnifiedTocNavItem
                   {...navItem}
                   level={1}
-                  key={navItem.newUrl + navItem.label}
+                  key={
+                    navItem.newUrl +
+                    navItem.label +
+                    `${navItem.versions ? (navItem.versions.includes ? 'include list' : 'exclude list') : ''}`
+                  }
                   group={true}
                   isStatic={false}
                   slug={slug}
@@ -137,7 +141,11 @@ export const AccordionNavPanel = ({
                 <UnifiedTocNavItem
                   {...navItems}
                   level={1}
-                  key={navItems.newUrl + navItems.label}
+                  key={
+                    (navItems.url || navItems.newUrl) +
+                    navItems.label +
+                    `${navItems.versions ? (navItems.versions.includes ? 'include list' : 'exclude list') : ''}`
+                  }
                   group={true}
                   isStatic={true}
                   slug={slug}

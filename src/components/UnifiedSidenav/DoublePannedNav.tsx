@@ -116,7 +116,7 @@ export const DoublePannedNav = ({
           ))}
         </div>
         {currentL1?.versionDropdown && <UnifiedVersionDropdown contentSite={currentL1?.contentSite} />}
-        {currentL2s?.items?.length > 0 && (
+        {currentL2s?.items?.length !== undefined && (
           <div className={cx(rightPane)} data-nav-pane="right">
             {showDriverBackBtn && (
               <BackLink
@@ -127,11 +127,15 @@ export const DoublePannedNav = ({
                 Back to {currentL1?.label}
               </BackLink>
             )}
-            {currentL2s.items?.map((navItems) => (
+            {currentL2s?.items?.map((navItems) => (
               <UnifiedTocNavItem
                 {...navItems}
                 level={1}
-                key={navItems.newUrl + navItems.label}
+                key={
+                  navItems.newUrl +
+                  navItems.label +
+                  `${navItems.versions ? (navItems.versions.includes ? 'include list' : 'exclude list') : ''}`
+                }
                 slug={slug}
                 isAccordion={false}
                 setCurrentL1={setCurrentL1}

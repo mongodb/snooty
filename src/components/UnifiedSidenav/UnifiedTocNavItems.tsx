@@ -113,7 +113,11 @@ export const UnifiedTocNavItem = ({
               <UnifiedTocNavItem
                 {...tocItem}
                 level={level}
-                key={tocItem.newUrl + tocItem.label}
+                key={
+                  tocItem.newUrl +
+                  tocItem.label +
+                  `${tocItem.versions ? (tocItem.versions.includes ? 'include list' : 'exclude list') : ''}`
+                }
                 slug={slug}
                 isStatic={false}
                 isAccordion={isAccordion}
@@ -134,7 +138,11 @@ export const UnifiedTocNavItem = ({
           <UnifiedTocNavItem
             {...tocItem}
             level={level}
-            key={tocItem.newUrl + tocItem.label}
+            key={
+              tocItem.newUrl +
+              tocItem.label +
+              `${tocItem.versions ? (tocItem.versions.includes ? 'include list' : 'exclude list') : ''}`
+            }
             slug={slug}
             isStatic={false}
             isAccordion={isAccordion}
@@ -157,7 +165,11 @@ export const UnifiedTocNavItem = ({
             <UnifiedTocNavItem
               {...tocItem}
               level={level}
-              key={tocItem.newUrl + tocItem.label}
+              key={
+                tocItem.newUrl +
+                tocItem.label +
+                `${tocItem.versions ? (tocItem.versions.includes ? 'include list' : 'exclude list') : ''}`
+              }
               slug={slug}
               isAccordion={isAccordion}
               setCurrentL2s={setCurrentL2s}
@@ -308,7 +320,11 @@ export const CollapsibleNavItem = ({
           <UnifiedTocNavItem
             {...item}
             level={level + 1}
-            key={item.newUrl + item.label}
+            key={
+              item.newUrl +
+              item.label +
+              `${item.versions ? (item.versions.includes ? 'include list' : 'exclude list') : ''}`
+            }
             slug={slug}
             setShowDriverBackBtn={setShowDriverBackBtn}
             setCurrentL2s={setCurrentL2s}
