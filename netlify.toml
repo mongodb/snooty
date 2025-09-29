@@ -7,7 +7,7 @@ command = ". ./build.sh $REPO_NAME $PARSER_VERSION"
 
 [build.environment]
 ORG_NAME = "10gen"
-REPO_NAME = "cloud-docs"
+REPO_NAME = "csharp"
 BRANCH_NAME = "main"
-SITE_NAME = "atlas"
+SITE_NAME = "csharp"
 PARSER_VERSION = "v0.20.9"
