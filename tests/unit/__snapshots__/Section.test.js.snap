@@ -79,6 +79,7 @@ exports[`renders correctly 1`] = `
 
 .emotion-5 [data-theme] {
   width: 310px;
+  background-color: #001E2B;
 }
 
 @media only screen and (max-width: 1024px) {

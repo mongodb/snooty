@@ -1,17 +1,18 @@
-import React, { lazy, useState, useContext } from 'react';
+import React, { useContext, lazy } from 'react';
 import Button from '@leafygreen-ui/button';
 import { cx } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import { Overline } from '@leafygreen-ui/typography';
-import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import IconButton from '@leafygreen-ui/icon-button';
-import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { getCurrLocale } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { PageTemplateType } from '../../context/page-context';
 import { SidenavContext } from '../Sidenav';
 import { SuspenseHelper } from '../SuspenseHelper';
+import { useChatbotModal } from '../../context/chatbot-context';
+import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
 import {
@@ -38,22 +39,20 @@ interface ActionBarProps {
 }
 
 const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
-  const [chatbotClicked, setChatbotClicked] = useState(false);
+  const { setChatbotClicked } = useChatbotModal();
   const locale = getCurrLocale();
-
+  const { snootyEnv } = useSiteMetadata();
+  const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(snootyEnv)
+    ? 'https://knowledge.mongodb.com/api/v1'
+    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
   const { fakeColumns, containerClassname, searchContainerClassname } = getContainerStyling(template);
-
+  const { darkMode } = useDarkMode();
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
 
   const openChatbot = () => {
     reportAnalytics('Chatbot button clicked');
-    setChatbotClicked((currVal) => !currVal);
+    setChatbotClicked(true);
   };
-  const { snootyEnv } = useSiteMetadata();
-  const { darkMode } = useDarkMode();
-  const CHATBOT_SERVER_BASE_URL = ['dotcomprd', 'production'].includes(snootyEnv)
-    ? 'https://knowledge.mongodb.com/api/v1'
-    : 'https://knowledge.staging.corp.mongodb.com/api/v1';
 
   return (
     <div className={cx(className, actionBarStyling, containerClassname, isOfflineDocsBuild ? offlineStyling : '')}>
@@ -85,7 +84,7 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
               </IconButton>
               <SuspenseHelper fallback={null}>
                 <Chatbot serverBaseUrl={CHATBOT_SERVER_BASE_URL} darkMode={darkMode}>
-                  <ChatbotModal chatbotClicked={chatbotClicked} setChatbotClicked={setChatbotClicked} />
+                  <ChatbotModal />
                 </Chatbot>
               </SuspenseHelper>
             </>

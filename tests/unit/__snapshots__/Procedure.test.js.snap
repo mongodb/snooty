@@ -434,6 +434,7 @@ exports[`renders steps nested in include nodes 1`] = `
 
 .emotion-13 [data-theme] {
   width: 310px;
+  background-color: #001E2B;
 }
 
 @media only screen and (max-width: 1024px) {

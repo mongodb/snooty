@@ -8,6 +8,7 @@ import { PLACEHOLDER_TEXT } from '../../src/components/ActionBar/SearchInput';
 jest.mock('../../src/hooks/use-site-metadata', () => ({
   useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),
 }));
+
 jest.spyOn(snootyMetadata, 'default').mockImplementation(() => ({
   branch: 'master',
   project: '',
@@ -22,6 +23,17 @@ useAllDocsetsMock.mockImplementation(() => [
     prefix: {},
   },
 ]);
+
+// Mock chatbot context
+jest.mock('../../src/context/chatbot-context', () => ({
+  useChatbotModal: () => ({
+    chatbotClicked: false,
+    setChatbotClicked: jest.fn(),
+    text: '',
+    setText: jest.fn(),
+  }),
+  ChatbotProvider: ({ children }) => children,
+}));
 
 const conversationSpy = jest.fn();
 // eslint-disable-next-line no-unused-vars
