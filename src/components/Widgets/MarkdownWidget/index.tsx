@@ -45,8 +45,8 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   // https://www.mongodb.com/docs/mcp-server/get-started.md
   const markdownPath = href?.split('?')[0];
   const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
-  const markdownAddress = slug !== '/' ? `${urlWithoutTrailingSlash}.md` : null;
-  console.log('markdownAddress', markdownAddress, urlWithoutTrailingSlash, slug);
+  const markdownAddress =
+    slug === '/' && urlWithoutTrailingSlash?.includes('localhost:8000') ? null : `${urlWithoutTrailingSlash}.md`;
   const { setChatbotClicked, setText } = useChatbotModal();
 
   useEffect(() => {
