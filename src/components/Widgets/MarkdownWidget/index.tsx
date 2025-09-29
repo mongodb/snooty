@@ -43,7 +43,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   // i.e. https://www.mongodb.com/docs/mcp-server/get-started/?client=cursor&deployment-type=atlas ->
   // https://www.mongodb.com/docs/mcp-server/get-started/ ->
   // https://www.mongodb.com/docs/mcp-server/get-started.md
-  const markdownPath = href?.split('?')[0];
+  const markdownPath = href?.split(/[?#]/)[0]; // Looking to spit either at the ? or # to handle query params and fragment identifiers
   const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
   const markdownAddress = `${urlWithoutTrailingSlash}.md`;
   const { setChatbotClicked, setText } = useChatbotModal();
