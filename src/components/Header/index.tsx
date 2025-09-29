@@ -4,8 +4,9 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { UnifiedNav } from '@mdb/consistent-nav';
 import SiteBanner from '../Banner/SiteBanner';
 import { theme } from '../../theme/docsTheme';
-import { getAvailableLanguages, getCurrLocale, onSelectLocale } from '../../utils/locale';
+import { getCurrLocale, onSelectLocale } from '../../utils/locale';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
+import { useLocale } from '../../context/locale';
 import { HeaderContext } from './header-context';
 
 interface StyledHeaderProps {
@@ -44,7 +45,8 @@ type HeaderProps = {
 
 const Header = ({ eol }: HeaderProps) => {
   const unifiedNavProperty = 'DOCS';
-  const enabledLocales = getAvailableLanguages().map((language) => language.localeCode);
+  const { enabledLocales } = useLocale();
+  const locale = getCurrLocale();
   const { hasBanner } = useContext(HeaderContext);
 
   return (
@@ -63,7 +65,7 @@ const Header = ({ eol }: HeaderProps) => {
                 showLanguageSelector={true}
                 onSelectLocale={onSelectLocale}
                 // @ts-ignore
-                locale={getCurrLocale()}
+                locale={locale}
                 enabledLocales={enabledLocales}
                 darkMode={false}
                 className={cx('nav-light', isOfflineDocsBuild ? offlineClass : '')}
@@ -76,7 +78,7 @@ const Header = ({ eol }: HeaderProps) => {
                 showLanguageSelector={true}
                 onSelectLocale={onSelectLocale}
                 // @ts-ignore
-                locale={getCurrLocale()}
+                locale={locale}
                 enabledLocales={enabledLocales}
                 darkMode={true}
                 className={cx('nav-dark', isOfflineDocsBuild ? offlineClass : '')}

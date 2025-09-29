@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a Banner correctly 1`] = `
+exports[`Snapshots renders a Banner correctly 1`] = `
 <DocumentFragment>
   .emotion-0 {
   position: relative;
@@ -207,7 +207,13 @@ exports[`renders a Banner correctly 1`] = `
 </DocumentFragment>
 `;
 
-exports[`renders an offline banner correctly 1`] = `
+exports[`Snapshots renders a Banner correctly for a beta locale 1`] = `
+<DocumentFragment>
+  <div />
+</DocumentFragment>
+`;
+
+exports[`Snapshots renders an offline banner correctly 1`] = `
 <DocumentFragment>
   .emotion-1 {
   position: relative;
