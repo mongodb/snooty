@@ -1,6 +1,9 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { siteMetadata } = require('../site-metadata');
+const { ASSETS_COLLECTION } = require('../../build-constants');
+const { ManifestDocumentDatabaseClass } = require('../../init/DocumentDatabase');
+const { fetchDocumentSorted } = require('../../../plugins/utils/documents');
 
 const GATSBY_IMAGE_EXTENSIONS = ['webp', 'png', 'avif'];
 
@@ -33,7 +36,15 @@ const saveAssetFiles = async (assets, db) => {
 
   for (const [id, filenames] of assets) {
     if (filenames) {
-      const buffer = await db.getAsset(id);
+      let buffer;
+      if (db instanceof ManifestDocumentDatabaseClass) {
+        buffer = await db.getAsset(id);
+      } else {
+        const assetQuery = { _id: id };
+        const assetDataDocuments = await fetchDocumentSorted(siteMetadata.database, ASSETS_COLLECTION, assetQuery);
+        buffer = assetDataDocuments[0]?.data?.buffer ?? null;
+      }
+
       if (!buffer) {
         console.error(
           `Failed to fetch asset with checksum ${id}. This should not be possible and indicates an internal problem with the document source.`

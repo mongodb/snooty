@@ -7,7 +7,7 @@ import { removeLeadingSlash } from './remove-leading-slash';
 
 export type AvailableLocaleType = 'en-us' | 'pt-br' | 'es' | 'ko-kr' | 'ja-jp' | 'it-it' | 'de-de' | 'fr-fr' | 'zh-cn';
 
-type AvailableLanguageData = {
+export type AvailableLanguageData = {
   language: string;
   localeCode: AvailableLocaleType;
   fontFamily?: string;
@@ -35,8 +35,16 @@ const AVAILABLE_LANGUAGES: AvailableLanguageData[] = [
   { language: '日本語', localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' },
 ];
 
+// GTM locale
+export const BETA_LOCALE: { [key: string]: AvailableLanguageData } = {
+  es: {
+    language: 'Español',
+    localeCode: 'es',
+  },
+};
+
 // Languages in current development that we do not want displayed publicly yet
-const HIDDEN_LANGUAGES: AvailableLanguageData[] = [];
+const HIDDEN_LANGUAGES: AvailableLanguageData[] = [BETA_LOCALE['es']];
 
 /**
  * @param {boolean} forceAll - Bypasses feature flag requirements if necessary
@@ -127,7 +135,7 @@ export const getAllLocaleCssStrings = () => {
 /**
  * Returns the locale code based on the current location pathname of the page.
  */
-export const getCurrLocale = () => {
+export const getCurrLocale = (): AvailableLocaleType => {
   const defaultLang = 'en-us';
 
   if (!isBrowser) {
@@ -146,7 +154,7 @@ export const getCurrLocale = () => {
   }
 
   const slugMatchesCode = validateLocaleCode(firstPathSlug);
-  return slugMatchesCode ? firstPathSlug : defaultLang;
+  return slugMatchesCode ? (firstPathSlug as AvailableLocaleType) : defaultLang;
 };
 
 /**

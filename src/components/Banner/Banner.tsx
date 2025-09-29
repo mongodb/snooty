@@ -2,6 +2,7 @@ import React from 'react';
 import { palette } from '@leafygreen-ui/palette';
 import LeafyBanner, { Variant as LeafyVariant } from '@leafygreen-ui/banner';
 import { css, cx } from '@leafygreen-ui/emotion';
+import { getCurrLocale } from '../../utils/locale';
 import ComponentFactory from '../ComponentFactory';
 import type { BannerNode } from '../../types/ast';
 import { baseBannerStyle } from './styles/bannerItemStyle';
@@ -109,7 +110,20 @@ interface BannerProps {
   nodeData: BannerNode;
 }
 
-const Banner = ({ nodeData: { children, options }, ...rest }: BannerProps) => {
+const Banner = (props: BannerProps) => {
+  // handling the nested destructing in the body, to allow cleaner debugging.
+  const { nodeData, ...rest } = props;
+  const { children, options } = nodeData;
+  // Get the current locale (language + region) i.e. es-US, fr-FR
+  const locale = getCurrLocale();
+
+  // if banner has option locale, then only render the banner for said translated page.
+  // Let us first do a string to array conversion for better accuracy
+  const locales = typeof options?.locale === 'string' ? options.locale.split(',') : undefined;
+  if (locales && !locales.includes(locale)) {
+    return <div />;
+  }
+
   return (
     <LeafyBanner className={cx(bannerStyle({ variant: alertMap[options?.variant] || LeafyVariant.Info }))}>
       {children.map((child, i) => (

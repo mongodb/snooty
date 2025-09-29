@@ -172,6 +172,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }: HeadingProp
                 {children}
                 {/* using showRating since it has similar logic for showing the copy markdown button only for non-landing pages */}
                 <CopyPageMarkdownButton
+                  slug={rest.slug ?? ''}
                   className={css`
                     @media ${theme.screenSize.upToLarge} {
                       display: none;

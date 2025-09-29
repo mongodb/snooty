@@ -3,10 +3,10 @@ import { useCallback } from 'react';
 import { Filter } from 'mongodb';
 import { METADATA_COLLECTION } from '../build-constants';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
-import { fetchDocument } from '../utils/realm';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { RemoteMetadata } from '../types/data';
 import { TocTreeEntry } from '../types/ast';
+import { fetchDocument } from '../utils/data/documents';
 import { VersionContext } from './version-context';
 
 export type TocContextType = {

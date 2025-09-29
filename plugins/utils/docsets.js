@@ -1,6 +1,10 @@
-const createDocsetNodes = async ({ db, createNode, createNodeId, createContentDigest }) => {
+const { siteMetadata } = require('../../src/utils/site-metadata');
+
+const createDocsetNodes = async ({ createNode, createNodeId, createContentDigest }) => {
   // Get all MongoDB products for the sidenav
-  const docsets = await db.realmInterface.fetchDocsets();
+  const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/docsets/?dbName=${siteMetadata.reposDatabase}`);
+  const docsets = await res.json();
+
   docsets.forEach((docset) => {
     createNode({
       children: [],

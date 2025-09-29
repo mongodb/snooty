@@ -23,6 +23,7 @@ import { isBrowser } from '../utils/is-browser';
 import { loadHashIntoView } from '../utils/load-hash-into-view';
 import { usePageDuration } from '../hooks/usePageDuration';
 import { usePageScroll } from '../hooks/usePageScroll';
+import { ChatbotProvider } from '../context/chatbot-context';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -166,36 +167,38 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
         remoteMetadata={remoteMetadata}
         project={project}
       >
-        <GlobalGrid isInPresentationMode={isInPresentationMode}>
-          {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
-          {sidenav && !isInPresentationMode ? (
-            <ToastProvider portalClassName={cx(toastPortalStyling)}>
-              <OfflineDownloadProvider>
-                {isUnifiedToc ? (
-                  <UnifiedSidenav slug={slug} />
-                ) : (
-                  <Sidenav
-                    chapters={chapters}
-                    guides={guides}
-                    page={page?.ast}
-                    pageTitle={pageTitle}
-                    repoBranches={repoBranches}
-                    slug={slug}
-                    toctree={toctree}
-                    eol={eol}
-                    template={template}
-                  />
-                )}
-              </OfflineDownloadProvider>
-            </ToastProvider>
-          ) : (
-            <div />
-          )}
-          <StyledContentContainer>
-            <ActionBar template={template} slug={slug} sidenav={sidenav} />
-            <ContentTransition slug={slug}>{children}</ContentTransition>
-          </StyledContentContainer>
-        </GlobalGrid>
+        <ChatbotProvider>
+          <GlobalGrid isInPresentationMode={isInPresentationMode}>
+            {!isInPresentationMode ? <Header eol={eol} template={template} /> : <div />}
+            {sidenav && !isInPresentationMode ? (
+              <ToastProvider portalClassName={cx(toastPortalStyling)}>
+                <OfflineDownloadProvider>
+                  {isUnifiedToc ? (
+                    <UnifiedSidenav slug={slug} />
+                  ) : (
+                    <Sidenav
+                      chapters={chapters}
+                      guides={guides}
+                      page={page?.ast}
+                      pageTitle={pageTitle}
+                      repoBranches={repoBranches}
+                      slug={slug}
+                      toctree={toctree}
+                      eol={eol}
+                      template={template}
+                    />
+                  )}
+                </OfflineDownloadProvider>
+              </ToastProvider>
+            ) : (
+              <div />
+            )}
+            <StyledContentContainer>
+              <ActionBar template={template} slug={slug} sidenav={sidenav} />
+              <ContentTransition slug={slug}>{children}</ContentTransition>
+            </StyledContentContainer>
+          </GlobalGrid>
+        </ChatbotProvider>
       </RootProvider>
     </>
   );
