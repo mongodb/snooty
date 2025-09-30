@@ -77,7 +77,10 @@ const isHeadingVisible = (
   const composableHeadingVisible = Object.keys(headingsComposableParent).reduce((res, key) => {
     if (!res) return res;
     const value = searchParams.get(key);
-    return (value && value === headingsComposableParent[key]) || (!value && headingsComposableParent[key] === 'None');
+    return (
+      (value && value === headingsComposableParent[key]) ||
+      (!value && headingsComposableParent[key]?.toLowerCase() === 'none')
+    );
   }, true);
   if (
     (headingsMethodParent && headingsMethodParent !== activeSelectorIds.methodSelector) ||
