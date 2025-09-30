@@ -18,9 +18,7 @@ export const usePageScroll = () => {
       if (!hasTrackedBelowFoldRef.current && scrollY > viewportHeightRef.current) {
         hasTrackedBelowFoldRef.current = true;
 
-        reportAnalytics('UserScrolledBelowFold', {
-          event: 'Scroll',
-          eventDescription: 'User Scrolled Below Fold',
+        reportAnalytics('Page Scroll', {
           properties: {
             position: 'page',
             position_context: `scroll position: ${Math.round(scrollY)}`,

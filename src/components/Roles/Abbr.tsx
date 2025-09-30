@@ -29,12 +29,10 @@ const Abbr = ({
       definition={expansion}
       onClose={() =>
         console.log(
-          reportAnalytics('AbbreviatioHoverUsed', {
-            event: 'Click',
-            eventDescription: 'Abbreviation/Glossary Definition Hover Used',
+          reportAnalytics('Click', {
             properties: {
               position: 'body',
-              position_context: expansion,
+              position_context: `abbreviation/glossary definition hover used: ${expansion}`,
               label: abbr,
               label_text_displayed: abbr,
             },

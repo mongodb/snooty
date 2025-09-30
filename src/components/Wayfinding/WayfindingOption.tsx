@@ -50,9 +50,7 @@ const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false 
       href={optionLink}
       target={'_self'}
       onClick={() => {
-        reportAnalytics('WayfindingOptionClicked', {
-          event: 'Click',
-          eventDescription: 'Wayfinding Option Clicked',
+        reportAnalytics('Click', {
           properties: {
             position: 'wayfinding option',
             position_context: `option id: ${optionId}, option link: ${optionLink}`,

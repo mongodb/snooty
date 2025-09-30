@@ -25,9 +25,7 @@ const DownloadButton = () => {
 
   const openDownloadModal = () => {
     if (isTabletOrMobile) return;
-    reportAnalytics('OfflineDocsDownloadButtonClicked', {
-      event: 'Click',
-      eventDescription: 'Offline docs download button clicked',
+    reportAnalytics('Click', {
       properties: {
         position: 'SideNav',
         position_context: 'download button clicked',

@@ -150,12 +150,10 @@ const bodyStyling = css`
 
 const onCardClick = (url?: string) => {
   if (!url) return;
-  reportAnalytics('CardClicked', {
-    event: 'Click',
-    eventDescription: 'Card Clicked',
+  reportAnalytics('Click', {
     properties: {
       position: 'body',
-      position_context: '',
+      position_context: 'Card',
       label: url,
       label_text_displayed: url,
     },

@@ -15,9 +15,7 @@ export const usePageDuration = () => {
       if (startTimeRef.current) {
         const duration = Math.round((Date.now() - startTimeRef.current) / 1000);
 
-        reportAnalytics('PageDurationTracked', {
-          event: 'Page View',
-          eventDescription: 'User Page Duration Tracked',
+        reportAnalytics('Time on Page', {
           properties: {
             position: 'page',
             position_context: `time spent on page: ${duration} seconds`,

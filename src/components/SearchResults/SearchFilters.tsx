@@ -98,12 +98,10 @@ const SearchFilters = ({
 
   const onCategoryChange = useCallback(
     ({ value }: { value: string }) => {
-      reportAnalytics('RefineYourSearchFilterSelected', {
-        event: 'Click',
-        eventDescription: 'Refine Your Search Filter Selected',
+      reportAnalytics('Click', {
         properties: {
           position: 'Search',
-          position_context: '',
+          position_context: 'Refine Your Search Filter',
           label: value,
           label_text_displayed: value,
         },

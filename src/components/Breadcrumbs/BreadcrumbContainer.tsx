@@ -75,9 +75,7 @@ const BreadcrumbContainer = ({ breadcrumbs }: { breadcrumbs: Array<BreadcrumbTyp
                 crumb={crumb}
                 setIsExcessivelyTruncated={collapseBreadcrumbs}
                 onClick={() =>
-                  reportAnalytics({
-                    event: 'Click',
-                    eventDescription: 'Breadcrumb Clicked',
+                  reportAnalytics('Click', {
                     properties: {
                       position: 'breadcrumb',
                       position_context: '',

@@ -155,9 +155,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
             setActiveSelectorIds({ ...activeSelectorIds, methodSelector: id });
             setSelectedIdx(idx);
             setLocalValue(STORAGE_KEY, id);
-            reportAnalytics('MethodOptionSelected', {
-              event: 'Click',
-              eventDescription: 'Method Option Selected',
+            reportAnalytics('Click', {
               properties: {
                 position: 'method selector',
                 position_context: 'method option selected',

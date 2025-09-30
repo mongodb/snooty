@@ -173,12 +173,10 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
   };
 
   const selectInitialRating = async (ratingValue: number) => {
-    reportAnalytics('RatingSelection', {
-      event: 'Click',
-      eventDescription: 'Rating Selection',
+    reportAnalytics('Click', {
       properties: {
         position: 'right column',
-        position_context: '',
+        position_context: 'rating selection',
         label: ratingValue,
         label_text_displayed: ratingValue,
       },

@@ -59,12 +59,10 @@ const Button = ({
       darkMode={darkModeProp ?? darkMode}
       variant={variant}
       onClick={() =>
-        reportAnalytics('ButtonClicked', {
-          event: 'CTA Click',
-          eventDescription: 'Button Clicked',
+        reportAnalytics('CTA Click', {
           properties: {
             position: 'body',
-            position_context: uri ?? '',
+            position_context: `button clicked: ${uri ?? ''}`,
             label: argument,
             label_text_displayed: argument,
           },

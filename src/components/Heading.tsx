@@ -116,12 +116,10 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }: HeadingProp
   const OpenInteractiveTutorialLabel = 'Open Interactive Tutorial';
 
   const interactiveOnClick = () => {
-    reportAnalytics('InteractiveTutorialOpened', {
-      event: 'Click',
-      eventDescription: 'Interactive Tutorial Opened',
+    reportAnalytics('Click', {
       properties: {
         position: 'body',
-        position_context: '',
+        position_context: 'interactive tutorial opened',
         label: OpenInteractiveTutorialLabel,
         label_text_displayed: OpenInteractiveTutorialLabel,
       },

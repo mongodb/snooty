@@ -50,9 +50,7 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
 
   const openChatbot = () => {
-    reportAnalytics('ChatbotButtonClicked', {
-      event: 'CTA Click',
-      eventDescription: 'Chatbot button clicked',
+    reportAnalytics('CTA Click', {
       properties: {
         position: 'secondary nav',
         position_context: '',

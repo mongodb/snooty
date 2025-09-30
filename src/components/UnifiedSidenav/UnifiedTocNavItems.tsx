@@ -38,11 +38,9 @@ const caretStyle = LeafyCSS`
 `;
 
 const sidenavAnalytics = (label: string, url: string | undefined) => {
-  reportAnalytics('SidenavItemClicked', {
-    event: 'Click',
-    eventDescription: 'Sidenav Item Clicked',
+  reportAnalytics('Click', {
     properties: {
-      position: 'sidenav',
+      position: 'sidenav item',
       position_context: url,
       label: label,
       label_text_displayed: label,

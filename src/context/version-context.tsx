@@ -343,12 +343,10 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
           ? gitBranchName
           : targetBranch?.urlSlug || targetBranch?.urlAliases?.[0] || targetBranch?.gitBranchName;
       const urlTarget = getUrl(target, metadata.project, repoBranches?.siteBasePrefix, slug);
-      reportAnalytics('VersionSelection', {
-        event: 'Click',
-        eventDescription: 'Version Selection',
+      reportAnalytics('Click', {
         properties: {
           position: 'sidenav',
-          position_context: urlTarget,
+          position_context: `version selection: ${urlTarget}`,
           label: target,
           label_text_displayed: target,
         },

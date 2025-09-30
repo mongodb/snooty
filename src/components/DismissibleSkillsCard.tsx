@@ -72,9 +72,7 @@ const hrStyles = css`
 `;
 
 const reportDismissibleSkillsCard = (skill: string, url: string) => {
-  reportAnalytics('DismissibleSkillsCardLinkClicked', {
-    event: 'CTA Click',
-    eventDescription: 'Dismissible skills card link clicked',
+  reportAnalytics('CTA Click', {
     properties: {
       position: 'dismissible skills card',
       position_context: 'right column',

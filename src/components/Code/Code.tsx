@@ -125,9 +125,7 @@ const Code = ({
   }
 
   const reportCodeCopied = useCallback(() => {
-    reportAnalytics('CodeblockCopied', {
-      event: 'Click',
-      eventDescription: 'Codeblock Copied',
+    reportAnalytics('Click', {
       properties: {
         position: 'codeblock',
         position_context: `codeblock code: ${code}`,

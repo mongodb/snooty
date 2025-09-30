@@ -1,9 +1,7 @@
 import { reportAnalytics } from '../../utils/report-analytics';
 
 export const reportMPTAnalytics = (targetSlug: string, variant: string) => {
-  reportAnalytics('MultiPageTutorialNextClicked', {
-    event: 'Click',
-    eventDescription: 'Multi Page Tutorial Next Clicked',
+  reportAnalytics('Click', {
     properties: {
       position: 'multi page tutorial',
       position_context: `variant: ${variant}`,

@@ -71,12 +71,10 @@ const Lightbox = ({ nodeData, ...rest }: FigureProps) => {
   const [open, setOpen] = useState(false);
   const figureWidth = nodeData.options?.figwidth || 'auto';
   const openModal = useCallback(() => {
-    reportAnalytics('ImageEnlarged', {
-      event: 'Click',
-      eventDescription: 'Image Enlarged',
+    reportAnalytics('Click', {
       properties: {
         position: 'figure',
-        position_context: nodeData,
+        position_context: `enlarged image: ${nodeData}`,
         label: nodeData.name,
         label_text_displayed: nodeData.name,
       },

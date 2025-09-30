@@ -181,9 +181,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps
       const priorAnchorOffset = scrollAnchorRef.current ? getPosition(scrollAnchorRef.current).y : undefined;
 
       setActiveTab({ [tabsetName]: tabId });
-      reportAnalytics('TabSelected', {
-        event: 'Click',
-        eventDescription: 'Tab Selected',
+      reportAnalytics('Click', {
         properties: {
           position: 'tab',
           position_context: `tab id: ${tabId}, tab set: ${tabsetName}`,

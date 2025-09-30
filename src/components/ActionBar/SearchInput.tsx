@@ -93,9 +93,7 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
   }, [docsets, snootyEnv]);
 
   const onSubmit = () => {
-    reportAnalytics('SearchBarUsed', {
-      event: 'Search',
-      eventDescription: 'Search bar used',
+    reportAnalytics('Search', {
       properties: {
         position: 'secondary nav',
         position_context: 'docs-search',
@@ -124,12 +122,12 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
             setSearchValue(e.target.value);
           }}
           onFocus={() => {
-            reportAnalytics({
-              event: 'focus',
-              eventDescription: 'Search bar focused',
+            reportAnalytics('Focus', {
               properties: {
                 position: 'secondary nav',
                 position_context: 'docs-search',
+                label: 'search bar focused',
+                label_text_displayed: 'search bar focused',
               },
             });
           }}

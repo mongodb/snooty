@@ -87,12 +87,10 @@ const TabSelector = ({
       usePortal={mainColumn}
       onChange={({ value }) => {
         handleClick({ [name]: value });
-        reportAnalytics('LanguageSelection', {
-          event: 'Click',
-          eventDescription: 'Language Selection',
+        reportAnalytics('Click', {
           properties: {
             position: 'selector/dropdown',
-            position_context: '',
+            position_context: 'language selection',
             label: value,
             label_text_displayed: value,
             tab_name: activeTab,

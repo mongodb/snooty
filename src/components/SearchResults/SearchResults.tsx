@@ -540,9 +540,7 @@ const SearchResults = () => {
                   <StyledSearchResult
                     key={`${url}${index}`}
                     onClick={() => {
-                      reportAnalytics('SearchSelection', {
-                        event: 'Search',
-                        eventDescription: 'Search Selection',
+                      reportAnalytics('Search', {
                         properties: {
                           position: 'secondary nav',
                           position_context: `area from: ResultsPage, rank: ${index}, selection url: ${url}`,
