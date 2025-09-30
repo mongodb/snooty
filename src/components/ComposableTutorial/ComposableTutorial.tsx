@@ -243,7 +243,7 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
 
     // first verify if there is a hash
     // if there is a hash and it belongs to a composable option,
-    // set the current selections to the value of the hash
+    // set the current selections that composable option to show the content with hash id
     const hash = location.hash?.slice(1);
     if (hash) {
       const selection = refToSelection[hash];
@@ -253,7 +253,6 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
         isNavigatingRef.current = true;
         return navigatePreservingExternalQueryParams(`?${queryString}`, false, hash);
       }
-      // setCurrentSelections({ [hashValue]: hashValue });
     }
 
     // read query params
