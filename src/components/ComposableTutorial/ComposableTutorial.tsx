@@ -192,6 +192,11 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
       const html_ids = findAllNestedAttribute(composableContent.children, 'html_id');
       const selection = composableContent.selections;
       for (const id of [...ids, ...html_ids]) {
+        // if multiple composable contents have the same id, this is a content issue.
+        // use the first composable content that has this id
+        if (res[id]) {
+          continue;
+        }
         res[id] = selection;
       }
     }
