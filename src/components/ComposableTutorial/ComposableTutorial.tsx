@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { parse, ParsedQuery, stringify } from 'query-string';
 import { navigate } from 'gatsby';
@@ -12,6 +12,7 @@ import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { OFFLINE_COMPOSABLE_CLASSNAME } from '../../utils/head-scripts/offline-ui/composable-tutorials';
 import ComponentFactory from '../ComponentFactory';
 import { findAllKeyValuePairs } from '../../utils/find-all-key-value-pairs';
+import { findAllNestedAttribute } from '../../utils/find-all-nested-attribute';
 import ConfigurableOption from './ConfigurableOption';
 import ComposableContext, { ComposableContextProvider } from './ComposableContext';
 
@@ -169,6 +170,7 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
   const { currentSelections, setCurrentSelections } = useContext(ComposableContext);
   const location = useLocation();
   const { composable_options: composableOptions, children } = nodeData;
+  const isNavigatingRef = useRef(false);
 
   const validSelections = useMemo(() => {
     const res: Set<string> = new Set();
@@ -177,6 +179,20 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
       const newSet = getSelectionPermutation(composableNode.selections ?? {});
       for (const elm of newSet) {
         res.add(elm);
+      }
+    }
+    return res;
+  }, [children]);
+
+  const refToSelection = useMemo(() => {
+    const res: Record<string, Record<string, string>> = {};
+    const composableContents: ComposableNode[] = findAllKeyValuePairs(children, 'name', 'selected-content');
+    for (const composableContent of composableContents) {
+      const ids = findAllNestedAttribute(composableContent.children, 'id');
+      const html_ids = findAllNestedAttribute(composableContent.children, 'html_id');
+      const selection = composableContent.selections;
+      for (const id of [...ids, ...html_ids]) {
+        res[id] = selection;
       }
     }
     return res;
@@ -195,11 +211,11 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
   }, [composableOptions, location.search]);
 
   const navigatePreservingExternalQueryParams = useCallback(
-    (queryString: string, preserveScroll = false) => {
+    (queryString: string, preserveScroll = false, hash = '') => {
       navigate(
         `${queryString.startsWith('?') ? '' : '?'}${queryString}${
           queryString.length > 0 && externalQueryParamsString.length > 0 ? '&' : ''
-        }${externalQueryParamsString}`,
+        }${externalQueryParamsString}${hash ? `#${hash}` : ''}`,
         { state: { preserveScroll } }
       );
     },
@@ -212,6 +228,27 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
   useEffect(() => {
     if (!isBrowser) {
       return;
+    }
+
+    // Skip if this useEffect was triggered by our own navigation
+    if (isNavigatingRef.current) {
+      isNavigatingRef.current = false;
+      return;
+    }
+
+    // first verify if there is a hash
+    // if there is a hash and it belongs to a composable option,
+    // set the current selections to the value of the hash
+    const hash = location.hash?.slice(1);
+    if (hash) {
+      const selection = refToSelection[hash];
+      if (selection) {
+        setCurrentSelections(selection);
+        const queryString = new URLSearchParams(selection).toString();
+        isNavigatingRef.current = true;
+        return navigatePreservingExternalQueryParams(`?${queryString}`, false, hash);
+      }
+      // setCurrentSelections({ [hashValue]: hashValue });
     }
 
     // read query params
@@ -239,6 +276,8 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
     composableOptions,
     location.pathname,
     location.search,
+    location.hash,
+    refToSelection,
     validSelections,
     setCurrentSelections,
     navigatePreservingExternalQueryParams,
