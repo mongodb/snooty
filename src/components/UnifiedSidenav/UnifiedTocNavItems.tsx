@@ -34,6 +34,7 @@ const overwriteLinkStyle = LeafyCSS`
 
 const caretStyle = LeafyCSS`
   margin-top: 3px;
+  min-width: 16px;
 `;
 
 // Anchors are sometimes included in toc.ts files, but we dont want to compare the current slug to the url with an anchor
