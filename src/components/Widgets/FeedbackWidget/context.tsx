@@ -220,7 +220,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
     try {
       await upsertFeedback(newFeedback);
     } catch (err) {
-      // This catch block will most likely only be hit after Realm attempts internal retry logic
+      // This catch block will most likely only be hit after Next API route attempts internal retry logic
       // after access token is refreshed
       console.error('There was an error submitting feedback', err);
       if (err instanceof Error && 'statusCode' in err && err.statusCode === 401) {

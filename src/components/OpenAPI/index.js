@@ -137,24 +137,25 @@ const MenuTitleContainer = ({ pageTitle }) => {
 
 const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, page, ...rest }) => {
   const usesRST = options?.['uses-rst'];
-  const usesRealm = options?.['uses-realm'];
+  // Where is this set, how do we change it?
+  const usesNextAPI = options?.['uses-realm'];
   const { database } = useSiteMetadata();
-  const [realmSpec, setRealmSpec] = useState(null);
+  const [nextAPISpec, setNextAPISpec] = useState(null);
   const topValues = useStickyTopValues();
   const [isLoading, setIsLoading] = useState(true);
   const [hasValidSpecUrl, setHasValidSpecUrl] = useState(true);
   const [src, setSrc] = useState(null);
   let specUrl, spec;
 
-  // Attempt to fetch a spec from Realm
+  // Attempt to fetch a spec from Next API route
   useEffect(() => {
-    if (usesRealm) {
+    if (usesNextAPI) {
       const apiName = getPlaintext(argument);
       fetchOASFile(apiName, database)
-        .then((response) => setRealmSpec(response))
+        .then((response) => setNextAPISpec(response))
         .catch((e) => console.error(e));
     }
-  }, [argument, database, usesRealm]);
+  }, [argument, database, usesNextAPI]);
 
   useEffect(() => {
     if (isBrowser) {
@@ -175,7 +176,7 @@ const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, pag
     );
   }
 
-  spec = usesRealm ? realmSpec : JSON.parse(children[0]?.value || '{}');
+  spec = usesNextAPI ? nextAPISpec : JSON.parse(children[0]?.value || '{}');
   spec = !src ? spec : null;
 
   // Create our loading widget
