@@ -137,7 +137,6 @@ const MenuTitleContainer = ({ pageTitle }) => {
 
 const OpenAPI = ({ metadata, nodeData: { argument, children, options = {} }, page, ...rest }) => {
   const usesRST = options?.['uses-rst'];
-  // Where is this set, how do we change it?
   const usesNextAPI = options?.['uses-realm'];
   const { database } = useSiteMetadata();
   const [nextAPISpec, setNextAPISpec] = useState(null);
