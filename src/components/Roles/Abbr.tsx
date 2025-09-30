@@ -28,16 +28,14 @@ const Abbr = ({
       popoverZIndex={theme.zIndexes.popovers}
       definition={expansion}
       onClose={() =>
-        console.log(
-          reportAnalytics('Click', {
-            properties: {
-              position: 'body',
-              position_context: `abbreviation/glossary definition hover used: ${expansion}`,
-              label: abbr,
-              label_text_displayed: abbr,
-            },
-          })
-        )
+        reportAnalytics('Click', {
+          properties: {
+            position: 'body',
+            position_context: `abbreviation/glossary definition hover used: ${expansion}`,
+            label: abbr,
+            label_text_displayed: abbr,
+          },
+        })
       }
     >
       {abbr}
