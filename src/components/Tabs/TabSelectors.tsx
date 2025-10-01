@@ -92,8 +92,6 @@ const TabSelector = ({
             position: 'selector/dropdown',
             position_context: 'language selection',
             label: value,
-            label_text_displayed: value,
-            tab_name: activeTab,
           },
         });
       }}

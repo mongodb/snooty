@@ -101,9 +101,8 @@ const SearchFilters = ({
       reportAnalytics('Click', {
         properties: {
           position: 'Search',
-          position_context: 'Refine Your Search Filter',
+          position_context: 'Refined Search Filter',
           label: value,
-          label_text_displayed: value,
         },
       });
       if (!manuallyApplyFilters) {

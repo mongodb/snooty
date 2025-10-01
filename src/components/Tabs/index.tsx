@@ -184,10 +184,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps
       reportAnalytics('Click', {
         properties: {
           position: 'tab',
-          position_context: `tab id: ${tabId}, tab set: ${tabsetName}`,
-          label: tabId,
-          tab_name: tabsetName,
-          label_text_displayed: tabId,
+          label: tabsetName,
         },
       });
       // Delay preserving scroll behavior by 40ms to allow other tabset content bodies to render

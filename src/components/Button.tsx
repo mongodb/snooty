@@ -62,9 +62,8 @@ const Button = ({
         reportAnalytics('CTA Click', {
           properties: {
             position: 'body',
-            position_context: `button clicked: ${uri ?? ''}`,
+            position_context: `button`,
             label: argument,
-            label_text_displayed: argument,
           },
         })
       }

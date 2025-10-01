@@ -53,9 +53,7 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
     reportAnalytics('CTA Click', {
       properties: {
         position: 'secondary nav',
-        position_context: '',
         label: 'Ask MongoDB AI',
-        label_text_displayed: 'Ask MongoDB AI',
       },
     });
     setChatbotClicked(true);

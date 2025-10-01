@@ -41,9 +41,7 @@ const sidenavAnalytics = (label: string, url: string | undefined) => {
   reportAnalytics('Click', {
     properties: {
       position: 'sidenav item',
-      position_context: url,
       label: label,
-      label_text_displayed: label,
     },
   });
 };

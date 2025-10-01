@@ -74,10 +74,9 @@ const hrStyles = css`
 const reportDismissibleSkillsCard = (skill: string, url: string) => {
   reportAnalytics('CTA Click', {
     properties: {
-      position: 'dismissible skills card',
-      position_context: 'right column',
-      label: `card skill: ${skill}, card url: ${url}`,
-      label_text_displayed: `card skill: ${skill}, card url: ${url}`,
+      position: 'right column',
+      position_context: 'dismissible skills card',
+      label: skill,
     },
   });
 };

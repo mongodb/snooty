@@ -346,9 +346,8 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
       reportAnalytics('Click', {
         properties: {
           position: 'sidenav',
-          position_context: `version selection: ${urlTarget}`,
-          label: target,
-          label_text_displayed: target,
+          position_context: `version selection`,
+          label: gitBranchName,
         },
       });
       navigate(urlTarget);

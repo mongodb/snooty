@@ -158,9 +158,7 @@ const MethodSelector = ({ nodeData: { children } }) => {
             reportAnalytics('Click', {
               properties: {
                 position: 'method selector',
-                position_context: 'method option selected',
-                label: `method option: ${defaultValue}`,
-                label_text_displayed: `method option: ${defaultValue}`,
+                label: defaultValue,
               },
             });
           }}

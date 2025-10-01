@@ -288,9 +288,8 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }: InternalPageN
     reportAnalytics('CTA click', {
       properties: {
         position: 'body',
-        position_context: `internal page nav selector direction: ${direction}`,
-        label: targetSlug,
-        label_text_displayed: targetSlug,
+        position_context: 'internal page nav',
+        label: direction,
       },
     });
   };

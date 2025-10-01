@@ -119,9 +119,7 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }: HeadingProp
     reportAnalytics('Click', {
       properties: {
         position: 'body',
-        position_context: 'interactive tutorial opened',
         label: OpenInteractiveTutorialLabel,
-        label_text_displayed: OpenInteractiveTutorialLabel,
       },
     });
     setIsOpen(true);

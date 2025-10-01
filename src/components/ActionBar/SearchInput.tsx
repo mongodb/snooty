@@ -96,9 +96,7 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
     reportAnalytics('Search', {
       properties: {
         position: 'secondary nav',
-        position_context: 'docs-search',
-        label: searchValue,
-        label_text_displayed: searchValue,
+        label: `search value: ${searchValue}`,
       },
     });
     inputRef.current?.blur();
@@ -122,12 +120,10 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
             setSearchValue(e.target.value);
           }}
           onFocus={() => {
-            reportAnalytics('Focus', {
+            reportAnalytics('Click', {
               properties: {
                 position: 'secondary nav',
-                position_context: 'docs-search',
-                label: 'search bar focused',
-                label_text_displayed: 'search bar focused',
+                position_context: 'Search bar selected',
               },
             });
           }}

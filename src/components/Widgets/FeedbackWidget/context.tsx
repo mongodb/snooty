@@ -178,7 +178,6 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
         position: 'right column',
         position_context: 'rating selection',
         label: ratingValue,
-        label_text_displayed: ratingValue,
       },
     });
     setSelectedRating(ratingValue);

@@ -53,9 +53,7 @@ const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false 
         reportAnalytics('Click', {
           properties: {
             position: 'wayfinding option',
-            position_context: `option id: ${optionId}, option link: ${optionLink}`,
-            label: optionLink,
-            label_text_displayed: optionLink,
+            label: optionId,
           },
         });
       }}

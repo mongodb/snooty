@@ -44,7 +44,6 @@ const DarkModeDropdown = () => {
           position: 'secondary nav',
           position_context: 'dark mode menu',
           label: selectedPref,
-          label_text_displayed: selectedPref,
         },
       });
       setDarkModePref(selectedPref);
@@ -75,7 +74,6 @@ const DarkModeDropdown = () => {
               position: 'secondary nav',
               position_context: 'dark mode menu',
               label: `action: ${open ? 'closed' : 'opened'}`,
-              label_text_displayed: `action: ${open ? 'closed' : 'opened'}`,
             },
           });
           setOpen((e) => !e);

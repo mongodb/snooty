@@ -77,10 +77,9 @@ const BreadcrumbContainer = ({ breadcrumbs }: { breadcrumbs: Array<BreadcrumbTyp
                 onClick={() =>
                   reportAnalytics('Click', {
                     properties: {
-                      position: 'breadcrumb',
-                      position_context: '',
+                      position: 'body',
+                      position_context: 'breadcrumb',
                       label: getFullBreadcrumbPath(siteUrl, crumb.path, true),
-                      label_text_displayed: getFullBreadcrumbPath(siteUrl, crumb.path, true),
                     },
                   })
                 }

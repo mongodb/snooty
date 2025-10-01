@@ -128,9 +128,7 @@ const Code = ({
     reportAnalytics('Click', {
       properties: {
         position: 'codeblock',
-        position_context: `codeblock code: ${code}`,
-        label: 'codeblock copied',
-        label_text_displayed: 'codeblock copied',
+        label: 'codeblock copied: ' + code,
       },
     });
   }, [code]);

@@ -543,9 +543,8 @@ const SearchResults = () => {
                       reportAnalytics('Search', {
                         properties: {
                           position: 'secondary nav',
-                          position_context: `area from: ResultsPage, rank: ${index}, selection url: ${url}`,
-                          label: url,
-                          label_text_displayed: url,
+                          position_context: `search selection`,
+                          label: `rank: ${index}, selection url: ${url}`,
                         },
                       });
                     }}

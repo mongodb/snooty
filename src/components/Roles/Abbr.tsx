@@ -31,9 +31,8 @@ const Abbr = ({
         reportAnalytics('Click', {
           properties: {
             position: 'body',
-            position_context: `abbreviation/glossary definition hover used: ${expansion}`,
-            label: abbr,
-            label_text_displayed: abbr,
+            position_context: `abbreviation/glossary`,
+            label: `${abbr} : ${expansion}`,
           },
         })
       }

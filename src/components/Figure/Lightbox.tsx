@@ -73,10 +73,9 @@ const Lightbox = ({ nodeData, ...rest }: FigureProps) => {
   const openModal = useCallback(() => {
     reportAnalytics('Click', {
       properties: {
-        position: 'figure',
-        position_context: `enlarged image: ${nodeData}`,
+        position: 'body',
+        position_context: 'image enlarged',
         label: nodeData.name,
-        label_text_displayed: nodeData.name,
       },
     });
     setOpen((prevOpen) => !prevOpen);

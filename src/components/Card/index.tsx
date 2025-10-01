@@ -153,9 +153,7 @@ const onCardClick = (url?: string) => {
   reportAnalytics('Click', {
     properties: {
       position: 'body',
-      position_context: 'Card',
-      label: url,
-      label_text_displayed: url,
+      label: 'Card',
     },
   });
   isRelativeUrl(url) ? navigate(url) : (window.location.href = url);
