@@ -242,9 +242,9 @@ exports[`renders correctly 1`] = `
     width: 20px;
   }
 "
-        height="24px"
+        height="24"
         src="/images/icons/atlas.svg"
-        width="24px"
+        width="24"
       />
       <div
         class="emotion-2"
@@ -281,9 +281,9 @@ exports[`renders correctly 1`] = `
     width: 20px;
   }
 "
-        height="24px"
+        height="24"
         src="/images/icons/university.svg"
-        width="24px"
+        width="24"
       />
       <div
         class="emotion-2"
@@ -320,9 +320,9 @@ exports[`renders correctly 1`] = `
     width: 20px;
   }
 "
-        height="24px"
+        height="24"
         src="/images/icons/server.svg"
-        width="24px"
+        width="24"
       />
       <div
         class="emotion-2"
