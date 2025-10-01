@@ -10,6 +10,7 @@ import { isCurrentPage } from '../../utils/is-current-page';
 import { theme } from '../../theme/docsTheme';
 import { isUnifiedTOCInDevMode } from '../../utils/is-unified-toc-dev';
 import { VersionContext } from '../../context/version-context';
+import { tocItemKey } from '../../utils/create-toc-key';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 import { TocItem } from './types';
@@ -113,11 +114,7 @@ export const UnifiedTocNavItem = ({
               <UnifiedTocNavItem
                 {...tocItem}
                 level={level}
-                key={
-                  tocItem.newUrl +
-                  tocItem.label +
-                  `${tocItem.versions ? (tocItem.versions.includes ? 'include list' : 'exclude list') : ''}`
-                }
+                key={tocItemKey(tocItem)}
                 slug={slug}
                 isStatic={false}
                 isAccordion={isAccordion}
@@ -138,11 +135,7 @@ export const UnifiedTocNavItem = ({
           <UnifiedTocNavItem
             {...tocItem}
             level={level}
-            key={
-              tocItem.newUrl +
-              tocItem.label +
-              `${tocItem.versions ? (tocItem.versions.includes ? 'include list' : 'exclude list') : ''}`
-            }
+            key={tocItemKey(tocItem)}
             slug={slug}
             isStatic={false}
             isAccordion={isAccordion}
@@ -165,11 +158,7 @@ export const UnifiedTocNavItem = ({
             <UnifiedTocNavItem
               {...tocItem}
               level={level}
-              key={
-                tocItem.newUrl +
-                tocItem.label +
-                `${tocItem.versions ? (tocItem.versions.includes ? 'include list' : 'exclude list') : ''}`
-              }
+              key={tocItemKey(tocItem)}
               slug={slug}
               isAccordion={isAccordion}
               setCurrentL2s={setCurrentL2s}
@@ -320,11 +309,7 @@ export const CollapsibleNavItem = ({
           <UnifiedTocNavItem
             {...item}
             level={level + 1}
-            key={
-              item.newUrl +
-              item.label +
-              `${item.versions ? (item.versions.includes ? 'include list' : 'exclude list') : ''}`
-            }
+            key={tocItemKey(item)}
             slug={slug}
             setShowDriverBackBtn={setShowDriverBackBtn}
             setCurrentL2s={setCurrentL2s}
