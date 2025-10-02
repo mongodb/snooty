@@ -345,13 +345,11 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
           : targetBranch?.urlSlug || targetBranch?.urlAliases?.[0] || targetBranch?.gitBranchName;
       const urlTarget = getUrl(target, metadata.project, repoBranches?.siteBasePrefix, slug);
       reportAnalytics('Click', {
-        properties: {
-          position: 'sidenav',
-          position_context: `version selection`,
-          label: gitBranchName,
-          scroll_position: currentScrollPosition(),
-          tagbook: 'true',
-        },
+        position: 'sidenav',
+        position_context: `version selection`,
+        label: gitBranchName,
+        scroll_position: currentScrollPosition(),
+        tagbook: 'true',
       });
       navigate(urlTarget);
     },

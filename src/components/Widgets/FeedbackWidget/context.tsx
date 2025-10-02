@@ -175,12 +175,10 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
 
   const selectInitialRating = async (ratingValue: number) => {
     reportAnalytics('Click', {
-      properties: {
-        position: 'right column',
-        label: ratingValue,
-        scroll_position: currentScrollPosition(),
-        tagbook: 'true',
-      },
+      position: 'right column',
+      label: ratingValue,
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
     });
     setSelectedRating(ratingValue);
     setView('comment');
