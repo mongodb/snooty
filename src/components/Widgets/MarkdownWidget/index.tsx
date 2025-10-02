@@ -97,7 +97,8 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
 
   const viewMarkdown = () => {
     if (!markdownAddress) return;
-    window.location.href = markdownAddress;
+    // There is a preference to open in a new tab, the default target is _blank
+    window.open(markdownAddress);
   };
 
   const askQuestion = () => {
