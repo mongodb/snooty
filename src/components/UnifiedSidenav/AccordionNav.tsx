@@ -7,6 +7,7 @@ import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
 import DocsHomeButton from '../Sidenav/DocsHomeButton';
 import { DownloadButton } from '../OfflineDownloadModal';
+import { tocItemKey } from '../../utils/create-toc-key';
 import { NavTopContainer, downloadButtonStlying, ArtificialPadding } from './UnifiedSidenav';
 import { UnifiedTocNavItem } from './UnifiedTocNavItems';
 import { TocItem } from './types';
@@ -119,7 +120,7 @@ export const AccordionNavPanel = ({
                 <UnifiedTocNavItem
                   {...navItem}
                   level={1}
-                  key={navItem.newUrl + navItem.label}
+                  key={tocItemKey(navItem)}
                   group={true}
                   isStatic={false}
                   slug={slug}
@@ -137,7 +138,7 @@ export const AccordionNavPanel = ({
                 <UnifiedTocNavItem
                   {...navItems}
                   level={1}
-                  key={navItems.newUrl + navItems.label}
+                  key={tocItemKey(navItems)}
                   group={true}
                   isStatic={true}
                   slug={slug}
