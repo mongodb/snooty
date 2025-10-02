@@ -84,7 +84,7 @@ describe('snootyAstToMd', () => {
     it('Renders code examples without language', () => {
       const result = snootyAstToMd(mockSamplePageWithCodeExamples.data.ast);
       expect(result).toContain('```\n');
-      expect(result).not.toContain(`\```${siteBasePrefix}\n`);
+      expect(result).not.toContain('```docs/example-project\n');
     });
   });
 
