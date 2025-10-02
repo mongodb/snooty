@@ -26,10 +26,14 @@ const { generatePathPrefix } = require('../../src/utils/generate-path-prefix.js'
 const { METADATA_COLLECTION, DOCUMENTS_COLLECTION } = require('../../src/build-constants.js');
 const { fetchDocumentSorted } = require('../utils/documents.js');
 const { constructBuildFilter } = require('../../src/utils/setup/construct-build-filter.js');
+const { snootyAstToMd, setSiteBasePrefix } = require('../../src/utils/snooty-ast-to-md/snooty-ast-to-md.js');
 const assets = new Map();
 const projectComponents = new Set();
 
 let db;
+
+// public directory
+const sitePublicDir = path.join(process.cwd(), 'public');
 
 // For fetching the Unified TOC from a JSON path
 const fetchUnifiedToc = async () => {
@@ -403,6 +407,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   return new Promise((resolve, reject) => {
+    const markdownPaths = [];
     pageList?.data?.allPage?.nodes?.forEach((page) => {
       const pageNodes = page.ast;
       const slug = getPageSlug(page.page_id);
@@ -420,7 +425,29 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           template: pageNodes?.options?.template,
         },
       });
+
+      // We need to set the site base prefix which is used for the internal links
+      setSiteBasePrefix(repoBranches.siteBasePrefix);
+      const body = snootyAstToMd(pageNodes);
+      const markdownPath = path.join(sitePublicDir, `${slug === '/' ? 'index' : slug.replace(/\/$/, '')}`);
+
+      markdownPaths.push({
+        body,
+        path: markdownPath,
+      });
     });
+
+    try {
+      Promise.all(
+        markdownPaths.map(async (markdown) => {
+          await fs.mkdir(markdown.path, { recursive: true });
+          await fs.writeFile(`${markdown.path}.md`, markdown.body, 'utf-8');
+        })
+      );
+    } catch (error) {
+      console.error('Error:', error);
+      reject();
+    }
 
     resolve();
   });
