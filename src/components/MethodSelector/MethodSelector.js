@@ -8,6 +8,7 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import { ContentsContext } from '../Contents/contents-context';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { OFFLINE_METHOD_SELECTOR_CLASSNAME } from '../../utils/head-scripts/offline-ui/method-selector';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import MethodOptionContent from './MethodOptionContent';
 
 const STORAGE_KEY = 'methodSelectorId';
@@ -156,10 +157,10 @@ const MethodSelector = ({ nodeData: { children } }) => {
             setSelectedIdx(idx);
             setLocalValue(STORAGE_KEY, id);
             reportAnalytics('Click', {
-              properties: {
-                position: 'method selector',
-                label: defaultValue,
-              },
+              position: 'method selector',
+              label: defaultValue,
+              scroll_position: currentScrollPosition(),
+              tagbook: 'true',
             });
           }}
         >

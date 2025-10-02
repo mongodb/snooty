@@ -16,6 +16,7 @@ import { ActiveTutorial } from '../MultiPageTutorials/hooks/use-active-mp-tutori
 import { TocItem } from '../UnifiedSidenav/types';
 import { BranchData } from '../../types/data';
 import type { ActiveVersions, AvailableVersions } from '../../context/version-context';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import NextPrevLink from './NextPrevLink';
 
 interface FlatItem {
@@ -286,11 +287,11 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }: InternalPageN
 
   const handleClick = (direction: string, targetSlug: string) => {
     reportAnalytics('CTA click', {
-      properties: {
-        position: 'body',
-        position_context: 'internal page nav',
-        label: direction,
-      },
+      position: 'body',
+      position_context: 'internal page nav',
+      label: direction,
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
     });
   };
 

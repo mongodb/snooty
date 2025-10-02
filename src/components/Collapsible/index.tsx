@@ -14,6 +14,7 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import ComponentFactory from '../ComponentFactory';
 import Heading from '../Heading';
 import { CollapsibleNode, HeadingNode } from '../../types/ast';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import { collapsibleStyle, headerContainerStyle, headerStyle, iconStyle, innerContentStyle } from './styles';
 import './styles.css';
 
@@ -47,11 +48,11 @@ const Collapsible = ({ nodeData, sectionDepth, ...rest }: CollapsibleProps) => {
 
   const onIconClick = useCallback(() => {
     reportAnalytics('Click', {
-      properties: {
-        position: 'body',
-        position_context: `collapsible ${open ? 'opened' : 'closed'}`,
-        label: heading,
-      },
+      position: 'body',
+      position_context: `collapsible ${open ? 'opened' : 'closed'}`,
+      label: heading,
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
     });
     setOpen(!open);
   }, [heading, open]);

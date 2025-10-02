@@ -5,6 +5,7 @@ import { palette } from '@leafygreen-ui/palette';
 import Image from '../Image';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import CaptionLegend from './CaptionLegend';
 import { FigureProps } from '.';
 
@@ -72,11 +73,11 @@ const Lightbox = ({ nodeData, ...rest }: FigureProps) => {
   const figureWidth = nodeData.options?.figwidth || 'auto';
   const openModal = useCallback(() => {
     reportAnalytics('Click', {
-      properties: {
-        position: 'body',
-        position_context: 'image enlarged',
-        label: nodeData.name,
-      },
+      position: 'body',
+      position_context: 'image enlarged',
+      label: nodeData.name,
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
     });
     setOpen((prevOpen) => !prevOpen);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

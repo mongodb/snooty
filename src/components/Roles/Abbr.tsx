@@ -3,6 +3,7 @@ import InlineDefinition from '@leafygreen-ui/inline-definition';
 import { theme } from '../../theme/docsTheme';
 import { AbbrRoleNode } from '../../types/ast';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 
 export type AbbrProps = {
   nodeData: AbbrRoleNode;
@@ -29,11 +30,11 @@ const Abbr = ({
       definition={expansion}
       onClose={() =>
         reportAnalytics('Click', {
-          properties: {
-            position: 'body',
-            position_context: `abbreviation/glossary`,
-            label: `${abbr} : ${expansion}`,
-          },
+          position: 'body',
+          position_context: `abbreviation/glossary`,
+          label: `${abbr} : ${expansion}`,
+          scroll_position: currentScrollPosition(),
+          tagbook: 'true',
         })
       }
     >

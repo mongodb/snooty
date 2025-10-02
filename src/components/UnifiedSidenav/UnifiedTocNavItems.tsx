@@ -11,6 +11,7 @@ import { theme } from '../../theme/docsTheme';
 import { isUnifiedTOCInDevMode } from '../../utils/is-unified-toc-dev';
 import { VersionContext } from '../../context/version-context';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 import { TocItem } from './types';
@@ -37,12 +38,12 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
-const sidenavAnalytics = (label: string, url: string | undefined) => {
+const sidenavAnalytics = (label: string) => {
   reportAnalytics('Click', {
-    properties: {
-      position: 'sidenav item',
-      label: label,
-    },
+    position: 'sidenav item',
+    label: label,
+    scroll_position: currentScrollPosition(),
+    tagbook: 'true',
   });
 };
 
@@ -180,9 +181,9 @@ export const UnifiedTocNavItem = ({
     );
   }
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent) => {
     // Allows for the showSubNav nodes to have their own L2 panel
-    sidenavAnalytics(label, newUrl);
+    sidenavAnalytics(label);
     setShowDriverBackBtn(true);
     setCurrentL2s({ items, newUrl, label, contentSite });
   };
@@ -234,7 +235,9 @@ export const UnifiedTocNavItem = ({
         as={Link}
         contentSite={contentSite}
         to={newUrl}
-        onClick={() => sidenavAnalytics(label, newUrl)}
+        onClick={() => {
+          sidenavAnalytics(label);
+        }}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       >
         {label}
@@ -285,7 +288,7 @@ export const CollapsibleNavItem = ({
   };
 
   const handleClick = () => {
-    sidenavAnalytics(label, newUrl);
+    sidenavAnalytics(label);
     if (isOpen && openedByCaret.current) {
       openedByCaret.current = false; // Was opened by caret, keep it open and reset
       return;
@@ -369,7 +372,7 @@ export const StaticNavItem = ({
       as={isUnifiedTOCInDevMode ? (undefined as never) : Link}
       to={newUrl}
       onClick={() => {
-        sidenavAnalytics(label, newUrl);
+        sidenavAnalytics(label);
         setCurrentL1({ items, newUrl, versionDropdown, label, contentSite });
         setCurrentL2s({ items, newUrl, versionDropdown, label, contentSite });
         setShowDriverBackBtn(false);

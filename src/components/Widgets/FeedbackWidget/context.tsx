@@ -14,6 +14,7 @@ import { getViewport, Viewport } from '../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { SnootyEnv } from '../../../types/data';
 import { reportAnalytics } from '../../../utils/report-analytics';
+import { currentScrollPosition } from '../../../utils/current-scroll-position';
 import { FeedbackUser, useBrowserUser } from './upsertFeedback';
 import { FeedbackPageData } from './useFeedbackData';
 import { upsertFeedback } from './upsertFeedback';
@@ -176,8 +177,9 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
     reportAnalytics('Click', {
       properties: {
         position: 'right column',
-        position_context: 'rating selection',
         label: ratingValue,
+        scroll_position: currentScrollPosition(),
+        tagbook: 'true',
       },
     });
     setSelectedRating(ratingValue);

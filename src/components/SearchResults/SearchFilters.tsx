@@ -7,6 +7,7 @@ import { theme } from '../../theme/docsTheme';
 import Select from '../Select';
 import { getSortedBranchesForProperty } from '../../utils/parse-marian-manifests';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import SearchContext from './SearchContext';
 
 export type SearchFiltersChoice = { text: string; value: string };
@@ -99,11 +100,11 @@ const SearchFilters = ({
   const onCategoryChange = useCallback(
     ({ value }: { value: string }) => {
       reportAnalytics('Click', {
-        properties: {
-          position: 'Search',
-          position_context: 'Refined Search Filter',
-          label: value,
-        },
+        position: 'Search',
+        position_context: 'Refined Search Filter',
+        label: value,
+        scroll_position: currentScrollPosition(),
+        tagbook: 'true',
       });
       if (!manuallyApplyFilters) {
         setSelectedCategory(value);

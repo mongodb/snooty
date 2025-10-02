@@ -13,6 +13,7 @@ import { SidenavContext } from '../Sidenav';
 import { SuspenseHelper } from '../SuspenseHelper';
 import { useChatbotModal } from '../../context/chatbot-context';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import DarkModeDropdown from './DarkModeDropdown';
 import SearchInput from './SearchInput';
 import {
@@ -51,10 +52,10 @@ const ActionBar = ({ template, slug, sidenav, className }: ActionBarProps) => {
 
   const openChatbot = () => {
     reportAnalytics('CTA Click', {
-      properties: {
-        position: 'secondary nav',
-        label: 'Ask MongoDB AI',
-      },
+      position: 'secondary nav',
+      label: 'Ask MongoDB AI',
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
     });
     setChatbotClicked(true);
   };

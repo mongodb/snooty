@@ -15,6 +15,7 @@ import { assertTrailingSlash } from '../../utils/assert-trailing-slash';
 import { isBrowser } from '../../utils/is-browser';
 import { localizePath } from '../../utils/locale';
 import { reportAnalytics } from '../../utils/report-analytics';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import { searchIconStyling, searchInputStyling, StyledInputContainer, StyledSearchBoxRef } from './styles';
 
 export const PLACEHOLDER_TEXT = `Search MongoDB Docs`;
@@ -94,10 +95,10 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
 
   const onSubmit = () => {
     reportAnalytics('Search', {
-      properties: {
-        position: 'secondary nav',
-        label: `search value: ${searchValue}`,
-      },
+      position: 'secondary nav',
+      label: `search value: ${searchValue}`,
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
     });
     inputRef.current?.blur();
     if (project === 'landing' && slug === 'search') {
@@ -121,10 +122,10 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
           }}
           onFocus={() => {
             reportAnalytics('Click', {
-              properties: {
-                position: 'secondary nav',
-                position_context: 'Search bar selected',
-              },
+              position: 'secondary nav',
+              position_context: 'Search bar selected',
+              scroll_position: currentScrollPosition(),
+              tagbook: 'true',
             });
           }}
           onSubmit={onSubmit}

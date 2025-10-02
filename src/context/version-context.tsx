@@ -24,6 +24,7 @@ import { BranchData, Docset, Group, MetadataDatabaseName, PageContextRepoBranche
 import { reportAnalytics } from '../utils/report-analytics';
 import { fetchDocset } from '../utils/data/docsets';
 import { fetchDocument } from '../utils/data/documents';
+import { currentScrollPosition } from '../utils/current-scroll-position';
 
 export type AssociatedReposInfo = Record<string, DocsetSlice>;
 export type ActiveVersions = Record<string, string>;
@@ -348,6 +349,8 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
           position: 'sidenav',
           position_context: `version selection`,
           label: gitBranchName,
+          scroll_position: currentScrollPosition(),
+          tagbook: 'true',
         },
       });
       navigate(urlTarget);

@@ -17,6 +17,7 @@ import { searchParamsToMetaURL, searchParamsToURL } from '../../utils/search-par
 import { requestHeaders } from '../../utils/search-facet-constants';
 import Tag, { searchTagStyle } from '../Tag';
 import { FacetOption } from '../../types/data';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import SearchContext from './SearchContext';
 import SearchFilters from './SearchFilters';
 import SearchResult from './SearchResult';
@@ -541,11 +542,11 @@ const SearchResults = () => {
                     key={`${url}${index}`}
                     onClick={() => {
                       reportAnalytics('Search', {
-                        properties: {
-                          position: 'secondary nav',
-                          position_context: `search selection`,
-                          label: `rank: ${index}, selection url: ${url}`,
-                        },
+                        position: 'secondary nav',
+                        position_context: `search selection`,
+                        label: `rank: ${index}, selection url: ${url}`,
+                        scroll_position: currentScrollPosition(),
+                        tagbook: 'true',
                       });
                     }}
                     title={title}

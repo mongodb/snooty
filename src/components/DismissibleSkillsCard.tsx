@@ -11,6 +11,7 @@ import { getSessionValue, setSessionValue } from '../utils/browser-storage';
 import { isBrowser } from '../utils/is-browser';
 import { theme } from '../theme/docsTheme';
 import { reportAnalytics } from '../utils/report-analytics';
+import { currentScrollPosition } from '../utils/current-scroll-position';
 import CloseButton from './Widgets/FeedbackWidget/components/CloseButton';
 import SkillsBadgeIcon from './SVGs/SkillsBadgeIcon';
 
@@ -73,11 +74,11 @@ const hrStyles = css`
 
 const reportDismissibleSkillsCard = (skill: string, url: string) => {
   reportAnalytics('CTA Click', {
-    properties: {
-      position: 'right column',
-      position_context: 'dismissible skills card',
-      label: skill,
-    },
+    position: 'right column',
+    position_context: 'dismissible skills card',
+    label: skill,
+    scroll_position: currentScrollPosition(),
+    tagbook: 'true',
   });
 };
 

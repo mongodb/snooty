@@ -4,6 +4,7 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import { theme } from '../../theme/docsTheme';
 import { getFullBreadcrumbPath } from '../../utils/get-complete-breadcrumb-data';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import IndividualBreadcrumb from './IndividualBreadcrumb';
 import CollapsedBreadcrumbs from './CollapsedBreadcrumbs';
 
@@ -76,11 +77,11 @@ const BreadcrumbContainer = ({ breadcrumbs }: { breadcrumbs: Array<BreadcrumbTyp
                 setIsExcessivelyTruncated={collapseBreadcrumbs}
                 onClick={() =>
                   reportAnalytics('Click', {
-                    properties: {
-                      position: 'body',
-                      position_context: 'breadcrumb',
-                      label: getFullBreadcrumbPath(siteUrl, crumb.path, true),
-                    },
+                    position: 'body',
+                    position_context: 'breadcrumb',
+                    label: getFullBreadcrumbPath(siteUrl, crumb.path, true),
+                    scroll_position: currentScrollPosition(),
+                    tagbook: 'true',
                   })
                 }
               ></IndividualBreadcrumb>
