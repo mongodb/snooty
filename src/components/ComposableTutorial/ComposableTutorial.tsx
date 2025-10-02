@@ -216,7 +216,15 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
   }, [composableOptions, location.search]);
 
   const navigatePreservingExternalQueryParams = useCallback(
-    (queryString: string, preserveScroll = false, hash = '') => {
+    ({
+      queryString,
+      preserveScroll = false,
+      hash = '',
+    }: {
+      queryString: string;
+      preserveScroll?: boolean;
+      hash?: string;
+    }) => {
       navigate(
         `${queryString.startsWith('?') ? '' : '?'}${queryString}${
           queryString.length > 0 && externalQueryParamsString.length > 0 ? '&' : ''
@@ -251,7 +259,7 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
         setCurrentSelections(selection);
         const queryString = new URLSearchParams(selection).toString();
         isNavigatingRef.current = true;
-        return navigatePreservingExternalQueryParams(`?${queryString}`, false, hash);
+        return navigatePreservingExternalQueryParams({ queryString: `?${queryString}`, preserveScroll: false, hash });
       }
     }
 
@@ -275,7 +283,7 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
     const localStorage: Record<string, string> = getLocalValue(LOCAL_STORAGE_KEY) ?? {};
     const [defaultParams] = filterValidQueryParams(localStorage, composableOptions, validSelections, true);
     const queryString = new URLSearchParams(defaultParams).toString();
-    navigatePreservingExternalQueryParams(`?${queryString}`);
+    navigatePreservingExternalQueryParams({ queryString: `?${queryString}`, hash });
   }, [
     composableOptions,
     location.pathname,
@@ -296,7 +304,7 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
       if (validSelections.has(joinKeyValuesAsString(correctedParams))) {
         setCurrentSelections(correctedParams);
         const queryString = new URLSearchParams(correctedParams).toString();
-        return navigatePreservingExternalQueryParams(`?${queryString}`, true);
+        return navigatePreservingExternalQueryParams({ queryString: `?${queryString}`, preserveScroll: true });
       }
 
       // need to correct preceding options
@@ -314,7 +322,7 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
 
       const [defaultParams] = filterValidQueryParams(persistSelections, composableOptions, validSelections, true);
       const queryString = new URLSearchParams(defaultParams).toString();
-      return navigatePreservingExternalQueryParams(`?${queryString}`);
+      return navigatePreservingExternalQueryParams({ queryString: `?${queryString}` });
     },
     [composableOptions, currentSelections, validSelections, setCurrentSelections, navigatePreservingExternalQueryParams]
   );
