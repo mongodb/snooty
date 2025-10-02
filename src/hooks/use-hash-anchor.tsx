@@ -18,7 +18,6 @@ const useHashAnchor = (id: string, ref: HTMLElement | null) => {
 
   useEffect(() => {
     if (!initialLoad || !hash || hasScrolled) return;
-    setInitialLoad(false);
 
     const hashId = hash?.slice(1);
     if (id !== hashId || !ref) {
@@ -39,6 +38,7 @@ const useHashAnchor = (id: string, ref: HTMLElement | null) => {
 
     const checkAndScroll = () => {
       if (!ref) return;
+      setInitialLoad(false);
 
       if (ref.scrollHeight > 0) {
         const y = ref.getBoundingClientRect().top + window.scrollY;
