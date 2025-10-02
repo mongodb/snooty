@@ -6,6 +6,7 @@ import { theme } from '../../theme/docsTheme';
 import useScreenSize from '../../hooks/useScreenSize';
 import DocsHomeButton from '../Sidenav/DocsHomeButton';
 import { DownloadButton } from '../OfflineDownloadModal';
+import { tocItemKey } from '../../utils/create-toc-key';
 import { NavTopContainer, downloadButtonStlying, ArtificialPadding } from './UnifiedSidenav';
 import { StaticNavItem, UnifiedTocNavItem } from './UnifiedTocNavItems';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
@@ -116,7 +117,7 @@ export const DoublePannedNav = ({
           ))}
         </div>
         {currentL1?.versionDropdown && <UnifiedVersionDropdown contentSite={currentL1?.contentSite} />}
-        {currentL2s?.items?.length > 0 && (
+        {currentL2s?.items?.length !== undefined && (
           <div className={cx(rightPane)} data-nav-pane="right">
             {showDriverBackBtn && (
               <BackLink
@@ -127,11 +128,11 @@ export const DoublePannedNav = ({
                 Back to {currentL1?.label}
               </BackLink>
             )}
-            {currentL2s.items?.map((navItems) => (
+            {currentL2s?.items?.map((navItems) => (
               <UnifiedTocNavItem
                 {...navItems}
                 level={1}
-                key={navItems.newUrl + navItems.label}
+                key={tocItemKey(navItems)}
                 slug={slug}
                 isAccordion={false}
                 setCurrentL1={setCurrentL1}
