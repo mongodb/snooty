@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import { isEmpty } from 'lodash';
 import { useLocation } from '@gatsbyjs/reach-router';
 import { parse, ParsedQuery, stringify } from 'query-string';
 import { navigate } from 'gatsby';
@@ -168,9 +169,10 @@ export const showComposable = (dependencies: Record<string, string>[], currentSe
 // Internal component that consumes the context
 const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
   const { currentSelections, setCurrentSelections } = useContext(ComposableContext);
-  const location = useLocation();
+  const { hash, search } = useLocation();
   const { composable_options: composableOptions, children } = nodeData;
-  const isNavigatingRef = useRef(false);
+  const preserveHash = useRef(false);
+  const initialLoad = useRef(true);
 
   const validSelections = useMemo(() => {
     const res: Set<string> = new Set();
@@ -203,60 +205,72 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
     return res;
   }, [children]);
 
-  const externalQueryParamsString = useMemo(() => {
-    const queryParams = parse(location.search);
+  const [externalQueryParamsString, internalQueryParamsString] = useMemo(() => {
+    const queryParams = parse(search);
     const composableOptionsKeys = composableOptions.map((option) => option.value);
-    const res: Record<string, string> = {};
+    const external: Record<string, string> = {};
+    const internal: Record<string, string> = {};
     for (const [key, value] of Object.entries(queryParams)) {
       if (!composableOptionsKeys.includes(key)) {
-        res[key] = value as string;
+        external[key] = value as string;
+      } else {
+        internal[key] = value as string;
       }
     }
-    return stringify(res);
-  }, [composableOptions, location.search]);
+    return [stringify(external), stringify(internal)];
+  }, [composableOptions, search]);
 
   const navigatePreservingExternalQueryParams = useCallback(
-    (queryString: string, preserveScroll = false, hash = '') => {
+    ({
+      queryString,
+      hash = '',
+      state = {},
+    }: {
+      queryString: string;
+      hash?: string;
+      state?: { [key: string]: string | boolean };
+    }) => {
+      // Preserve hash if we are not navigating from our own useEffect
+      let newHash;
+      if (preserveHash.current) {
+        newHash = hash;
+      }
       navigate(
         `${queryString.startsWith('?') ? '' : '?'}${queryString}${
           queryString.length > 0 && externalQueryParamsString.length > 0 ? '&' : ''
-        }${externalQueryParamsString}${hash ? `#${hash}` : ''}`,
-        { state: { preserveScroll } }
+        }${externalQueryParamsString}${newHash ? `${newHash}` : ''}`,
+        { state: { ...state } }
       );
     },
     [externalQueryParamsString]
   );
 
-  // takes care of query param reading and rerouting
+  // takes care of query param reading and rerouting on initial load
   // if query params fulfill all selections, show the selections
   // otherwise, fallback to getting default values from combination of local storage and node Data
   useEffect(() => {
-    if (!isBrowser) {
+    // do this only on initial load
+    if (!isBrowser || !initialLoad.current) {
       return;
     }
 
-    // Skip if this useEffect was triggered by our own navigation
-    if (isNavigatingRef.current) {
-      isNavigatingRef.current = false;
-      return;
-    }
+    initialLoad.current = false;
 
     // first verify if there is a hash
     // if there is a hash and it belongs to a composable option,
     // set the current selections that composable option to show the content with hash id
-    const hash = location.hash?.slice(1);
     if (hash) {
-      const selection = refToSelection[hash];
+      const hashString = hash.slice(1);
+      const selection = refToSelection[hashString];
       if (selection) {
+        preserveHash.current = true;
         setCurrentSelections(selection);
-        const queryString = new URLSearchParams(selection).toString();
-        isNavigatingRef.current = true;
-        return navigatePreservingExternalQueryParams(`?${queryString}`, false, hash);
+        return;
       }
     }
 
     // read query params
-    const queryParams = parse(location.search);
+    const queryParams = parse(search);
 
     const [filteredParams, removedQueryParams] = filterValidQueryParams(
       queryParams,
@@ -266,7 +280,6 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
     );
     // if params fulfill selections, show the current selections
     if (fulfilledSelections(filteredParams, composableOptions) && Object.keys(removedQueryParams).length === 0) {
-      setLocalValue(LOCAL_STORAGE_KEY, filteredParams);
       setCurrentSelections(filteredParams);
       return;
     }
@@ -274,29 +287,47 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
     // params are missing. get default values using local storage and nodeData
     const localStorage: Record<string, string> = getLocalValue(LOCAL_STORAGE_KEY) ?? {};
     const [defaultParams] = filterValidQueryParams(localStorage, composableOptions, validSelections, true);
-    const queryString = new URLSearchParams(defaultParams).toString();
-    navigatePreservingExternalQueryParams(`?${queryString}`);
-  }, [
-    composableOptions,
-    location.pathname,
-    location.search,
-    location.hash,
-    refToSelection,
-    validSelections,
-    setCurrentSelections,
-    navigatePreservingExternalQueryParams,
-  ]);
+    preserveHash.current = true;
+    setCurrentSelections(defaultParams);
+  }, [hash, refToSelection, setCurrentSelections, search, composableOptions, validSelections]);
+
+  // when updating selection state, update the url and local storage with the new selections
+  useEffect(() => {
+    // if no selections, do not update the url
+    if (!currentSelections || isEmpty(currentSelections)) {
+      return;
+    }
+
+    setLocalValue(LOCAL_STORAGE_KEY, currentSelections);
+
+    // if query params are the same as the current selections, do not update the url
+    const validQueryParts = parse(internalQueryParamsString);
+    const allSelectionsMatch = Object.entries(currentSelections).every(
+      ([key, value]) => validQueryParts[key] === value
+    );
+    if (allSelectionsMatch) {
+      return;
+    }
+
+    const queryString = new URLSearchParams(currentSelections).toString();
+    return navigatePreservingExternalQueryParams({
+      queryString: `?${queryString}`,
+      hash,
+      state: { preserveScroll: true },
+    });
+  }, [currentSelections, hash, internalQueryParamsString, navigatePreservingExternalQueryParams]);
 
   const onSelect = useCallback(
     (value: string, option: string, index: number) => {
-      // the ones that occur less than index, take it
       const newSelections = { ...currentSelections, [option]: value };
       const [correctedParams] = filterValidQueryParams(newSelections, composableOptions, validSelections, true);
 
+      // do not preserve hash since we are changing the selections
+      preserveHash.current = false;
+
       if (validSelections.has(joinKeyValuesAsString(correctedParams))) {
         setCurrentSelections(correctedParams);
-        const queryString = new URLSearchParams(correctedParams).toString();
-        return navigatePreservingExternalQueryParams(`?${queryString}`, true);
+        return;
       }
 
       // need to correct preceding options
@@ -313,10 +344,9 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
       }
 
       const [defaultParams] = filterValidQueryParams(persistSelections, composableOptions, validSelections, true);
-      const queryString = new URLSearchParams(defaultParams).toString();
-      return navigatePreservingExternalQueryParams(`?${queryString}`);
+      setCurrentSelections(defaultParams);
     },
-    [composableOptions, currentSelections, validSelections, setCurrentSelections, navigatePreservingExternalQueryParams]
+    [composableOptions, currentSelections, validSelections, setCurrentSelections]
   );
 
   return (
