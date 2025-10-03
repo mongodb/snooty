@@ -3,6 +3,9 @@ import { render, fireEvent, waitFor, act } from '@testing-library/react';
 import * as Gatsby from 'gatsby';
 import * as ReachRouter from '@gatsbyjs/reach-router';
 import CopyPageMarkdownButton from '../../src/components/Widgets/MarkdownWidget';
+import { removeTrailingSlash } from '../../src/utils/remove-trailing-slash';
+
+const TEST_URL = 'http://localhost:8000/tutorial/foo/';
 
 const renderCopyMarkdownButton = (props = {}) => render(<CopyPageMarkdownButton {...props} />);
 
@@ -31,14 +34,65 @@ jest.mock('../../src/context/chatbot-context', () => ({
   ChatbotProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
 
-const TEST_URL = 'http://localhost:8000/tutorial/foo/';
-
 // Mock clipboard
 Object.defineProperty(global.navigator, 'clipboard', {
   value: {
     writeText: jest.fn(),
   },
   writable: true,
+});
+
+// Mock the window open API
+Object.defineProperty(global.window, 'open', { configurable: true, writable: true, value: jest.fn(() => ({} as any)) });
+
+describe('Prefetching', () => {
+  it('prefetches if the URL has a query param', async () => {
+    const urlWithQueryParam = `${TEST_URL}?value=something`;
+
+    mockedUseLocation.mockReturnValue({
+      href: urlWithQueryParam,
+    });
+
+    mockedFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve('# Markdown content'),
+    });
+
+    await act(async () => {
+      renderCopyMarkdownButton();
+    });
+
+    expect(mockedFetch).toHaveBeenCalledWith(
+      'http://localhost:8000/tutorial/foo.md',
+      expect.objectContaining({
+        signal: expect.any(AbortSignal),
+      })
+    );
+  });
+
+  it('prefetches if the URL has a fragment identifier', async () => {
+    const urlWithFragmentIdentifier = `${TEST_URL}#target-some-anchor-text`;
+
+    mockedUseLocation.mockReturnValue({
+      href: urlWithFragmentIdentifier,
+    });
+
+    mockedFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve('# Markdown content'),
+    });
+
+    await act(async () => {
+      renderCopyMarkdownButton();
+    });
+
+    expect(mockedFetch).toHaveBeenCalledWith(
+      'http://localhost:8000/tutorial/foo.md',
+      expect.objectContaining({
+        signal: expect.any(AbortSignal),
+      })
+    );
+  });
 });
 
 describe('Copy markdown button', () => {
@@ -92,6 +146,37 @@ describe('Copy markdown button', () => {
     });
   });
 
+  it('the URL is opened into the targeted browsing context', async () => {
+    mockedFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve('# Markdown content'),
+    });
+
+    const viewInMarkdown = /view in markdown/i;
+    let getByText: any;
+    let getByLabelText: any;
+
+    await act(async () => {
+      const result = renderCopyMarkdownButton();
+      getByLabelText = result.getByLabelText;
+      getByText = result.getByText;
+    });
+
+    // Click the menu action
+    act(() => fireEvent.click(getByLabelText('More options')));
+
+    // Wait for the menu to appear and click "View in markdown"
+    await waitFor(() => {
+      expect(getByText(viewInMarkdown)).toBeInTheDocument();
+    });
+
+    // Click the action
+    act(() => fireEvent.click(getByText(viewInMarkdown)));
+
+    expect(window.open).toHaveBeenCalledTimes(1);
+    expect(window.open).toHaveBeenCalledWith(`${removeTrailingSlash(TEST_URL)}.md`);
+  });
+
   it('triggers error when hitting a 404 page', async () => {
     // Mock fetch response
     mockedFetch.mockResolvedValue({
@@ -129,18 +214,30 @@ describe('Copy markdown button', () => {
   });
 
   it('opens chatbot with pre-filled message question about the current page', async () => {
+    mockedFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve('# Markdown content'),
+    });
+
     // Render component with a slug prop
-    const { getByLabelText, getByText } = renderCopyMarkdownButton({ slug: 'tutorial/foo' });
+    let getByLabelText: any;
+    let getByText: any;
+
+    await act(async () => {
+      const result = renderCopyMarkdownButton({ slug: 'tutorial/foo' });
+      getByLabelText = result.getByLabelText;
+      getByText = result.getByText;
+    });
 
     // Click the dropdown trigger (arrow button) to open the menu
-    fireEvent.click(getByLabelText('More options'));
+    await act(() => fireEvent.click(getByLabelText('More options')));
 
     // Wait for menu to appear and click "Ask a Question"
     await waitFor(() => {
       expect(getByText('Ask a Question')).toBeInTheDocument();
     });
 
-    fireEvent.click(getByText('Ask a Question'));
+    await act(() => fireEvent.click(getByText('Ask a Question')));
 
     // Verify that setText was called with the correct message (our new implementation)
     expect(mockSetText).toHaveBeenCalledWith(
