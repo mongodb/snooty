@@ -68,7 +68,7 @@ export const l1ItemStyling = ({ isActive, isAccordion }: { isActive: boolean; is
 `;
 
 export const groupHeaderStyling = ({ isAccordion }: { isAccordion: boolean }) => css`
-  div > div {
+  div[data-testid*='side-nav-group-header-label'] > div > div {
     ${isAccordion &&
     css`
       padding-left: 4px;
