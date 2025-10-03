@@ -59,15 +59,17 @@ const Button = ({
       size={size}
       darkMode={darkModeProp ?? darkMode}
       variant={variant}
-      onClick={() =>
+      onClick={(event) => {
+        const translatedArgument = event.currentTarget.textContent?.trim() || argument;
         reportAnalytics('CTA Click', {
           position: 'body',
           position_context: `button`,
           label: argument,
+          label__displayed: translatedArgument,
           scroll_position: currentScrollPosition(),
           tagbook: 'true',
-        })
-      }
+        });
+      }}
       rightGlyph={rightGlyph ? <Icon glyph={rightGlyph} /> : undefined}
       {...componentProps}
     >

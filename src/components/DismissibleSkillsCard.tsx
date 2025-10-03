@@ -72,11 +72,13 @@ const hrStyles = css`
   border-color: ${palette.gray.light2};
 `;
 
-const reportDismissibleSkillsCard = (skill: string, url: string) => {
+const reportDismissibleSkillsCard = (skill: string, url: string, element?: HTMLElement | null) => {
+  const translatedLabel = element?.textContent?.trim() || skill;
   reportAnalytics('CTA Click', {
     position: 'right column',
     position_context: 'dismissible skills card',
     label: skill,
+    label__displayed: translatedLabel,
     scroll_position: currentScrollPosition(),
     tagbook: 'true',
   });
@@ -85,13 +87,13 @@ const reportDismissibleSkillsCard = (skill: string, url: string) => {
 const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: string; slug: string }) => {
   const shownClassname = useMemo(() => `${slug.split('/').join('-')}-${DISMISSIBLE_SKILLS_CARD_SHOWN}`, [slug]);
 
-  const onLinkClick = () => {
-    reportDismissibleSkillsCard(skill, url);
+  const onLinkClick = (event: React.MouseEvent) => {
+    reportDismissibleSkillsCard(skill, url, event.currentTarget as HTMLElement);
   };
 
-  const onClose = () => {
+  const onClose = (event: React.MouseEvent) => {
     if (isBrowser) {
-      reportDismissibleSkillsCard(skill, url);
+      reportDismissibleSkillsCard(skill, url, event.currentTarget as HTMLElement);
       // Add to document classnames
       const docClassList = window.document.documentElement.classList;
       docClassList.add(shownClassname);
@@ -124,7 +126,7 @@ const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: strin
           <SkillsBadgeIcon />
           <Subtitle className={titleStyles}>Earn a Skill Badge</Subtitle>
         </Box>
-        <CloseButton onClick={onClose} />
+        <CloseButton onClick={() => onClose} />
         <Body>Master "{skill}" for free!</Body>
         <Link arrowAppearance={'persist'} baseFontSize={13} href={url} onClick={onLinkClick} hideExternalIcon>
           Learn more

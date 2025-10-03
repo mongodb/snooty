@@ -38,10 +38,13 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
 `;
 
-const sidenavAnalytics = (label: string) => {
+const sidenavAnalytics = (label: string, element?: HTMLElement | null) => {
+  const translatedLabel = element?.textContent?.trim() || label;
+
   reportAnalytics('Click', {
     position: 'sidenav item',
     label: label,
+    label__displayed: translatedLabel,
     scroll_position: currentScrollPosition(),
     tagbook: 'true',
   });
@@ -183,7 +186,8 @@ export const UnifiedTocNavItem = ({
 
   const handleClick = (event: React.MouseEvent) => {
     // Allows for the showSubNav nodes to have their own L2 panel
-    sidenavAnalytics(label);
+    const target = event.currentTarget as HTMLElement;
+    sidenavAnalytics(label, target);
     setShowDriverBackBtn(true);
     setCurrentL2s({ items, newUrl, label, contentSite });
   };
@@ -235,8 +239,8 @@ export const UnifiedTocNavItem = ({
         as={Link}
         contentSite={contentSite}
         to={newUrl}
-        onClick={() => {
-          sidenavAnalytics(label);
+        onClick={(event) => {
+          sidenavAnalytics(label, event.currentTarget as HTMLElement);
         }}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       >
@@ -287,8 +291,8 @@ export const CollapsibleNavItem = ({
     setIsOpen((open) => !open);
   };
 
-  const handleClick = () => {
-    sidenavAnalytics(label);
+  const handleClick = (event: React.MouseEvent) => {
+    sidenavAnalytics(label, event.currentTarget as HTMLElement);
     if (isOpen && openedByCaret.current) {
       openedByCaret.current = false; // Was opened by caret, keep it open and reset
       return;
@@ -371,8 +375,8 @@ export const StaticNavItem = ({
       hideExternalIcon={true}
       as={isUnifiedTOCInDevMode ? (undefined as never) : Link}
       to={newUrl}
-      onClick={() => {
-        sidenavAnalytics(label);
+      onClick={(event) => {
+        sidenavAnalytics(label, event.currentTarget as HTMLElement);
         setCurrentL1({ items, newUrl, versionDropdown, label, contentSite });
         setCurrentL2s({ items, newUrl, versionDropdown, label, contentSite });
         setShowDriverBackBtn(false);

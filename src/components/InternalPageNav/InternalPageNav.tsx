@@ -286,7 +286,7 @@ const InternalPageNav = ({ slug, slugTitleMapping, toctreeOrder }: InternalPageN
     : getNext(activeTutorial, toctreeOrder, slugTitleMapping, slugIndex);
 
   const handleClick = (direction: string, targetSlug: string) => {
-    reportAnalytics('CTA click', {
+    reportAnalytics('CTA Click', {
       position: 'body',
       position_context: 'internal page nav',
       label: direction,

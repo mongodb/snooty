@@ -98,11 +98,13 @@ const SearchFilters = ({
   );
 
   const onCategoryChange = useCallback(
-    ({ value }: { value: string }) => {
+    ({ value }: { value: string }, element?: HTMLElement | null) => {
+      const translatedLabel = element?.textContent?.trim() || value;
       reportAnalytics('Click', {
         position: 'Search',
         position_context: 'Refined Search Filter',
         label: value,
+        label__displayed: translatedLabel,
         scroll_position: currentScrollPosition(),
         tagbook: 'true',
       });
@@ -192,7 +194,7 @@ const SearchFilters = ({
       <SelectWrapper>
         <MaxWidthSelect
           choices={categoryChoices}
-          onChange={onCategoryChange}
+          onChange={() => onCategoryChange}
           defaultText="Filter by Category"
           value={(manuallyApplyFilters && mobileCategory ? mobileCategory : selectedCategory) ?? undefined}
         />

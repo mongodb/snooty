@@ -546,7 +546,6 @@ const SearchResults = () => {
                         position_context: `search selection`,
                         label: `rank: ${index}, selection url: ${url}`,
                         scroll_position: currentScrollPosition(),
-                        tagbook: 'true',
                       });
                     }}
                     title={title}
