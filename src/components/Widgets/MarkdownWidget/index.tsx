@@ -45,8 +45,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   // https://www.mongodb.com/docs/mcp-server/get-started.md
   const markdownPath = href?.split('?')[0];
   const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
-  const markdownAddress =
-    slug === '/' && urlWithoutTrailingSlash?.includes('localhost:8000') ? null : `${urlWithoutTrailingSlash}.md`;
+  const markdownAddress = `${urlWithoutTrailingSlash}.md`;
   const { setChatbotClicked, setText } = useChatbotModal();
 
   useEffect(() => {
@@ -57,7 +56,6 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
 
     // prefetch the markdown
     const fetchMarkDown = async () => {
-      if (!markdownAddress) return;
       const response = await fetch(markdownAddress, { signal });
       if (response?.ok) {
         const text = await response.text();
@@ -96,9 +94,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   };
 
   const viewMarkdown = () => {
-    if (!markdownAddress) return;
-    // There is a preference to open in a new tab, the default target is _blank
-    window.open(markdownAddress);
+    window.location.href = markdownAddress;
   };
 
   const askQuestion = () => {
