@@ -80,7 +80,7 @@ const versionStateReducer = (state: ActiveVersions, newState: Partial<ActiveVers
   };
 };
 /**
- * async call to realm app services
+ * async call to Next API route
  * to get active branches for
  * 1) current product (from site metadata)
  * 2) associated products list (filter response by SnootyMetadata['associated_products'])
@@ -98,7 +98,7 @@ const getBranches = async (
   let hasEolBranches = false;
   try {
     const promises = [fetchDocset(metadata.reposDatabase, metadata.project)];
-    for (let associatedProduct of associatedProducts) {
+    for (const associatedProduct of associatedProducts) {
       promises.push(fetchDocset(metadata.reposDatabase, associatedProduct));
     }
     const allBranches = await Promise.all(promises);
@@ -132,7 +132,7 @@ const getBranches = async (
         hasEolBranches,
       };
     }
-    // on error of realm function, fall back to build time fetches
+    // on error of Next API, fall back to build time fetches
   }
 };
 
@@ -292,7 +292,7 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
   );
   const [showEol, setShowEol] = useState(repoBranches?.branches?.some((b) => !b.active) || false);
 
-  // on init, fetch versions from realm app services
+  // on init, fetch versions from Next API
   useEffect(() => {
     getBranches(metadata, repoBranches, associatedReposInfo, associatedProductNames, docsets, isUnifiedToc).then(
       ({ versions, groups, hasEolBranches }) => {

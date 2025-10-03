@@ -38,9 +38,10 @@ export type FeedbackPayload = {
     docs_property: string;
   };
   user: FeedbackUser;
-  attachment: {
-    dataUri?: string;
-    viewport?: Viewport;
+  attachment?: {
+    type: 'screenshot';
+    dataUri: string;
+    viewport: Viewport;
   };
   viewport: Viewport;
   category: FeedbackSentiment;
@@ -130,7 +131,6 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
           docs_property: page.docs_property,
         },
         user: { id: user?.id || '' },
-        attachment: {},
         viewport: getViewport(),
         comment,
         category: createSentiment(rating),
@@ -144,11 +144,12 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
       if (email) {
         res.user.email = email;
       }
-      if (dataUri) {
-        res.attachment.dataUri = dataUri;
-      }
-      if (viewport) {
-        res.attachment.viewport = viewport;
+      if (dataUri && viewport) {
+        res.attachment = {
+          type: 'screenshot',
+          dataUri,
+          viewport,
+        };
       }
       if (feedbackId) {
         res.feedback_id = feedbackId;
@@ -220,7 +221,7 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
     try {
       await upsertFeedback(newFeedback);
     } catch (err) {
-      // This catch block will most likely only be hit after Realm attempts internal retry logic
+      // This catch block will most likely only be hit after Next API route attempts internal retry logic
       // after access token is refreshed
       console.error('There was an error submitting feedback', err);
       if (err instanceof Error && 'statusCode' in err && err.statusCode === 401) {
