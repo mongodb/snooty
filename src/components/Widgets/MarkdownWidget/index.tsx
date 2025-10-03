@@ -97,7 +97,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
 
   const viewMarkdown = () => {
     if (!markdownAddress) return;
-    window.location.href = markdownAddress;
+    window.open(markdownAddress);
   };
 
   const askQuestion = () => {
