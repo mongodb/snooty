@@ -45,6 +45,56 @@ Object.defineProperty(global.navigator, 'clipboard', {
 // Mock the window open API
 Object.defineProperty(global.window, 'open', { configurable: true, writable: true, value: jest.fn(() => ({} as any)) });
 
+describe('Prefetching', () => {
+  it('prefetches if the URL has a query param', async () => {
+    const urlWithQueryParam = `${TEST_URL}?value=something`;
+
+    mockedUseLocation.mockReturnValue({
+      href: urlWithQueryParam,
+    });
+
+    mockedFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve('# Markdown content'),
+    });
+
+    await act(async () => {
+      renderCopyMarkdownButton();
+    });
+
+    expect(mockedFetch).toHaveBeenCalledWith(
+      'http://localhost:8000/tutorial/foo.md',
+      expect.objectContaining({
+        signal: expect.any(AbortSignal),
+      })
+    );
+  });
+
+  it('prefetches if the URL has a fragment identifier', async () => {
+    const urlWithFragmentIdentifier = `${TEST_URL}#target-some-anchor-text`;
+
+    mockedUseLocation.mockReturnValue({
+      href: urlWithFragmentIdentifier,
+    });
+
+    mockedFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve('# Markdown content'),
+    });
+
+    await act(async () => {
+      renderCopyMarkdownButton();
+    });
+
+    expect(mockedFetch).toHaveBeenCalledWith(
+      'http://localhost:8000/tutorial/foo.md',
+      expect.objectContaining({
+        signal: expect.any(AbortSignal),
+      })
+    );
+  });
+});
+
 describe('Copy markdown button', () => {
   beforeEach(() => {
     // Mock location
