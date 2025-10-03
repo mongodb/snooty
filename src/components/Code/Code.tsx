@@ -15,6 +15,7 @@ import { usePageContext } from '../../context/page-context';
 import { OFFLINE_CONTAINER_CLASSNAME } from '../../utils/head-scripts/offline-ui/code';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { CodeNode } from '../../types/ast';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import { baseCodeStyle, borderCodeStyle, lgStyles } from './styles/codeStyle';
 import { CodeContext, LanguageOption } from './code-context';
 
@@ -125,7 +126,12 @@ const Code = ({
   }
 
   const reportCodeCopied = useCallback(() => {
-    reportAnalytics('CodeblockCopied', { code });
+    reportAnalytics('Click', {
+      position: 'codeblock',
+      label: 'codeblock copied: ' + code,
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
+    });
   }, [code]);
 
   const softwareSourceCodeSd = useMemo(() => {

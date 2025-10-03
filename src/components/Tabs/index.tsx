@@ -16,6 +16,7 @@ import { getPlaintext } from '../../utils/get-plaintext';
 import { TABS_CLASSNAME } from '../../utils/head-scripts/offline-ui/tabs';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { Node, Root, TabsNode } from '../../types/ast';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import { TabContext } from './tab-context';
 import { TabHashContext, TabHashProvider } from './tab-hash-context';
 
@@ -181,11 +182,12 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps
       const priorAnchorOffset = scrollAnchorRef.current ? getPosition(scrollAnchorRef.current).y : undefined;
 
       setActiveTab({ [tabsetName]: tabId });
-      reportAnalytics('Tab Selected', {
-        tabId,
-        tabSet: tabsetName,
+      reportAnalytics('Click', {
+        position: 'tab',
+        label: tabsetName,
+        scroll_position: currentScrollPosition(),
+        tagbook: 'true',
       });
-
       // Delay preserving scroll behavior by 40ms to allow other tabset content bodies to render
       window.setTimeout(() => {
         if (scrollAnchorRef.current && priorAnchorOffset) {

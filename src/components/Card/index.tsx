@@ -14,6 +14,8 @@ import CommunityPillLink from '../CommunityPillLink';
 import { isRelativeUrl } from '../../utils/is-relative-url';
 import { getSuitableIcon } from '../../utils/get-suitable-icon';
 import type { CardNode } from '../../types/ast';
+import { reportAnalytics } from '../../utils/report-analytics';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 
 interface CardProps {
   isCompact?: boolean;
@@ -149,6 +151,12 @@ const bodyStyling = css`
 
 const onCardClick = (url?: string) => {
   if (!url) return;
+  reportAnalytics('Click', {
+    position: 'body',
+    label: 'Card',
+    scroll_position: currentScrollPosition(),
+    tagbook: 'true',
+  });
   isRelativeUrl(url) ? navigate(url) : (window.location.href = url);
 };
 

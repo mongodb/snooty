@@ -6,6 +6,7 @@ import { DRIVER_ICON_MAP } from '../icons/DriverIconMap';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import type { WayfindingOptionNode } from '../../types/ast';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 
 const optionStyle = ({ hideOption }: { hideOption: boolean }) => css`
   padding: 6px 12px;
@@ -50,9 +51,11 @@ const WayfindingOption = ({ nodeData: { options, argument }, hideOption = false 
       href={optionLink}
       target={'_self'}
       onClick={() => {
-        reportAnalytics('WayfindingOptionClicked', {
-          optionId,
-          optionLink,
+        reportAnalytics('Click', {
+          position: 'wayfinding option',
+          label: optionId,
+          scroll_position: currentScrollPosition(),
+          tagbook: 'true',
         });
       }}
     >
