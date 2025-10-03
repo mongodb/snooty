@@ -426,24 +426,29 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         },
       });
 
-      // We need to set the site base prefix which is used for the internal links
-      setSiteBasePrefix(repoBranches.siteBasePrefix);
-      const body = snootyAstToMd(pageNodes);
-      const markdownPath = path.join(sitePublicDir, `${slug === '/' ? 'index' : slug.replace(/\/$/, '')}`);
+      // Only generate the markdown files for non-offline docs
+      if (process.env['OFFLINE_DOCS'] !== 'true') {
+        // We need to set the site base prefix which is used for the internal links
+        setSiteBasePrefix(repoBranches.siteBasePrefix);
+        const body = snootyAstToMd(pageNodes);
+        const markdownPath = path.join(sitePublicDir, `${slug === '/' ? 'index' : slug.replace(/\/$/, '')}`);
 
-      markdownPaths.push({
-        body,
-        path: markdownPath,
-      });
+        markdownPaths.push({
+          body,
+          path: markdownPath,
+        });
+      }
     });
 
     try {
-      Promise.all(
-        markdownPaths.map(async (markdown) => {
-          await fs.mkdir(markdown.path, { recursive: true });
-          await fs.writeFile(`${markdown.path}.md`, markdown.body, 'utf-8');
-        })
-      );
+      if (markdownPaths.length) {
+        Promise.all(
+          markdownPaths.map(async (markdown) => {
+            await fs.mkdir(markdown.path, { recursive: true });
+            await fs.writeFile(`${markdown.path}.md`, markdown.body, 'utf-8');
+          })
+        );
+      }
     } catch (error) {
       console.error('Error:', error);
       reject();
