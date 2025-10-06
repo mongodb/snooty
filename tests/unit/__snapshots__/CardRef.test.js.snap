@@ -355,9 +355,9 @@ exports[`card correctly with and without url 1`] = `
     width: 20px;
   }
 "
-        height="24px"
+        height="24"
         src="/images/icons/realm_sdk.svg"
-        width="24px"
+        width="24"
       />
       <div
         class="emotion-2"
@@ -436,9 +436,9 @@ exports[`card correctly with and without url 1`] = `
     width: 20px;
   }
 "
-        height="24px"
+        height="24"
         src="/images/icons/realm.svg"
-        width="24px"
+        width="24"
       />
       <div
         class="emotion-2"
