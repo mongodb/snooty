@@ -43,9 +43,10 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   // i.e. https://www.mongodb.com/docs/mcp-server/get-started/?client=cursor&deployment-type=atlas ->
   // https://www.mongodb.com/docs/mcp-server/get-started/ ->
   // https://www.mongodb.com/docs/mcp-server/get-started.md
-  const markdownPath = href?.split('?')[0];
+  const markdownPath = href?.split(/[?#]/)[0]; // Looking to spit either at the ? or # to handle query params and fragment identifiers
   const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
-  const markdownAddress = `${urlWithoutTrailingSlash}.md`;
+  const markdownAddress =
+    slug === '/' && urlWithoutTrailingSlash?.includes('localhost:8000') ? null : `${urlWithoutTrailingSlash}.md`;
   const { setChatbotClicked, setText } = useChatbotModal();
 
   useEffect(() => {
@@ -56,6 +57,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
 
     // prefetch the markdown
     const fetchMarkDown = async () => {
+      if (!markdownAddress) return;
       const response = await fetch(markdownAddress, { signal });
       if (response?.ok) {
         const text = await response.text();
@@ -94,7 +96,8 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   };
 
   const viewMarkdown = () => {
-    window.location.href = markdownAddress;
+    if (!markdownAddress) return;
+    window.open(markdownAddress);
   };
 
   const askQuestion = () => {

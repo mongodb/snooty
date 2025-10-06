@@ -10,6 +10,7 @@ import { isCurrentPage } from '../../utils/is-current-page';
 import { theme } from '../../theme/docsTheme';
 import { isUnifiedTOCInDevMode } from '../../utils/is-unified-toc-dev';
 import { VersionContext } from '../../context/version-context';
+import { tocItemKey } from '../../utils/create-toc-key';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 import { TocItem } from './types';
@@ -34,6 +35,7 @@ const overwriteLinkStyle = LeafyCSS`
 
 const caretStyle = LeafyCSS`
   margin-top: 3px;
+  min-width: 16px;
 `;
 
 // Anchors are sometimes included in toc.ts files, but we dont want to compare the current slug to the url with an anchor
@@ -113,7 +115,7 @@ export const UnifiedTocNavItem = ({
               <UnifiedTocNavItem
                 {...tocItem}
                 level={level}
-                key={tocItem.newUrl + tocItem.label}
+                key={tocItemKey(tocItem)}
                 slug={slug}
                 isStatic={false}
                 isAccordion={isAccordion}
@@ -134,7 +136,7 @@ export const UnifiedTocNavItem = ({
           <UnifiedTocNavItem
             {...tocItem}
             level={level}
-            key={tocItem.newUrl + tocItem.label}
+            key={tocItemKey(tocItem)}
             slug={slug}
             isStatic={false}
             isAccordion={isAccordion}
@@ -157,7 +159,7 @@ export const UnifiedTocNavItem = ({
             <UnifiedTocNavItem
               {...tocItem}
               level={level}
-              key={tocItem.newUrl + tocItem.label}
+              key={tocItemKey(tocItem)}
               slug={slug}
               isAccordion={isAccordion}
               setCurrentL2s={setCurrentL2s}
@@ -308,7 +310,7 @@ export const CollapsibleNavItem = ({
           <UnifiedTocNavItem
             {...item}
             level={level + 1}
-            key={item.newUrl + item.label}
+            key={tocItemKey(item)}
             slug={slug}
             setShowDriverBackBtn={setShowDriverBackBtn}
             setCurrentL2s={setCurrentL2s}

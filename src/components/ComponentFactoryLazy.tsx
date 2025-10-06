@@ -3,15 +3,13 @@ import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { SuspenseHelper } from './SuspenseHelper';
 import OfflineNotAvailable from './OfflineNotAvailable';
 
-type LazyComponentType = 'openapi' | 'video' | 'instruqt' | 'quiz' | 'quizchoice';
+type LazyComponentType = 'openapi' | 'video' | 'instruqt';
 type LazyComponentMap = Record<LazyComponentType, React.LazyExoticComponent<any>>;
 
 const ComponentMap: LazyComponentMap = {
   openapi: lazy(() => import('./OpenAPI')),
   video: lazy(() => import('./Video')),
   instruqt: lazy(() => import('./Instruqt')),
-  quiz: lazy(() => import('./Widgets/QuizWidget/QuizWidget')),
-  quizchoice: lazy(() => import('./Widgets/QuizWidget/QuizChoice')),
 };
 
 const isOfflineNotAvailableKey = (key: LazyComponentType): key is 'video' | 'instruqt' => {
