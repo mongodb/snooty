@@ -59,11 +59,15 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
       try {
         const response = await fetch(markdownAddress, { signal });
 
-        if (response?.ok) {
-          const text = await response.text();
-          getMarkdownText(text);
+        // Checks if the request was unsuccessful via status code (404)
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
         }
+
+        const text = await response.text();
+        getMarkdownText(text);
       } catch (error) {
+        console.error(`Error while fetching markdown: ${error}`);
         getMarkdownText(null);
       }
     };
