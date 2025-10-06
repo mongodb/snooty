@@ -100,7 +100,6 @@ const SearchFilters = ({
   const onCategoryChange = useCallback(
     ({ value }: { value: string }, element?: HTMLElement | null) => {
       const translatedValue = element?.textContent?.trim() || value;
-      console.log('translatedValue', translatedValue, value);
       reportAnalytics('Click', {
         position: 'Search',
         position_context: 'Refined Search Filter',
