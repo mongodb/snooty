@@ -9,6 +9,7 @@ import { assertTrailingSlash } from './assert-trailing-slash';
 import { assertLeadingSlash } from './assert-leading-slash';
 import { isRelativeUrl } from './is-relative-url';
 import { getUrl, getCompleteUrl } from './url-utils';
+import { getFeatureFlags } from './feature-flags';
 
 const nodesToString = (titleNodes: string | Array<Node>) => {
   if (typeof titleNodes === 'string') {
@@ -75,6 +76,7 @@ export const getCompleteBreadcrumbData = ({
   unifiedTocParents,
 }: GetCompleteBreadcrumbDataProps) => {
   const isLanding = pageInfo?.project === 'landing';
+  const { isUnifiedToc } = getFeatureFlags();
 
   //get intermediate breadcrumbs
   const intermediateCrumbs = (queriedCrumbs?.breadcrumbs ?? []).map((crumb) => {
@@ -126,5 +128,7 @@ export const getCompleteBreadcrumbData = ({
     ? [homeCrumb, ...intermediateCrumbs, propertyCrumb, ...parents]
     : [homeCrumb, ...intermediateCrumbs, ...parents];
 
-  return selfCrumb ? [...almostFinalCrumbs, selfCrumb] : almostFinalCrumbs;
+  const unifiedTocCrumbs = [homeCrumb, ...parents];
+
+  return isUnifiedToc ? unifiedTocCrumbs : selfCrumb ? [...almostFinalCrumbs, selfCrumb] : almostFinalCrumbs;
 };

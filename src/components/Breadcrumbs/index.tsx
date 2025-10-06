@@ -6,7 +6,7 @@ import { getCompleteBreadcrumbData } from '../../utils/get-complete-breadcrumb-d
 import { QueriedCrumbs, useBreadcrumbs } from '../../hooks/use-breadcrumbs';
 import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-import { useUnifiedToc } from '../../hooks/use-unified-toc';
+import { useProcessedUnifiedToc } from '../../hooks/useProcessedUnifiedToc';
 import { getFeatureFlags } from '../../utils/feature-flags';
 import { usePageBreadcrumbs } from '../../hooks/useCreateBreadCrumbs';
 import BreadcrumbContainer, { BreadcrumbType } from './BreadcrumbContainer';
@@ -61,7 +61,7 @@ const Breadcrumbs = ({
   pageInfo,
 }: BreadcrumbsProps) => {
   const { isUnifiedToc } = getFeatureFlags();
-  const tocTree = useUnifiedToc();
+  const tocTree = useProcessedUnifiedToc();
   const queriedCrumbsHook = useBreadcrumbs();
   const queriedCrumbs = queriedCrumbsProp ?? queriedCrumbsHook;
 
