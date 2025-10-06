@@ -161,10 +161,10 @@ const Card = ({ isCompact, isExtraCompact, isCenterContentStyle, isLargeIconStyl
   const isLanding = template === 'landing';
 
   let imgSize;
-  if (isLargeIconStyle) imgSize = '50px';
-  else if (isLanding) imgSize = theme.size.xlarge;
-  else if (template === 'product-landing') imgSize = theme.size.large;
-  else imgSize = theme.size.medium;
+  if (isLargeIconStyle) imgSize = '50';
+  else if (isLanding) imgSize = '64';
+  else if (template === 'product-landing') imgSize = '32';
+  else imgSize = '24';
 
   const useCompactIcon = !['landing', 'product-landing'].includes(template);
 
