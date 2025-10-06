@@ -180,14 +180,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps
       }
       const tabId = tabIds[index];
       const priorAnchorOffset = scrollAnchorRef.current ? getPosition(scrollAnchorRef.current).y : undefined;
-
       setActiveTab({ [tabsetName]: tabId });
-      reportAnalytics('Click', {
-        position: 'tab',
-        label: tabsetName,
-        scroll_position: currentScrollPosition(),
-        tagbook: 'true',
-      });
       // Delay preserving scroll behavior by 40ms to allow other tabset content bodies to render
       window.setTimeout(() => {
         if (scrollAnchorRef.current && priorAnchorOffset) {
@@ -239,6 +232,17 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps
                 className={isOfflineDocsBuild ? offlineStyling : ''}
                 key={tabId}
                 name={tabTitle}
+                onClick={(event) => {
+                  const translatedLabel = event.currentTarget.textContent?.trim() || getPlaintext(tab.argument);
+                  reportAnalytics('Click', {
+                    position: 'body',
+                    position_context: 'Tab',
+                    label: getPlaintext(tab.argument),
+                    label__displayed: translatedLabel,
+                    scroll_position: currentScrollPosition(),
+                    tagbook: 'true',
+                  });
+                }}
               >
                 <HeadingContextProvider
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}

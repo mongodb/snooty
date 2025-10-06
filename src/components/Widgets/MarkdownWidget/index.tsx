@@ -13,6 +13,9 @@ import { assertLeadingAndTrailingSlash } from '../../../utils/assert-trailing-an
 import { removeLeadingSlash } from '../../../utils/remove-leading-slash';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { useChatbotModal } from '../../../context/chatbot-context';
+import { reportAnalytics } from '../../../utils/report-analytics';
+import { currentScrollPosition } from '../../../utils/current-scroll-position';
+
 type ToastOpen = {
   open: boolean;
   variant: Variant;
@@ -74,8 +77,15 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
     };
   }, [markdownAddress]);
 
-  const copyMarkdown = async () => {
+  const copyMarkdown = async (event?: React.MouseEvent<HTMLButtonElement>) => {
     try {
+      reportAnalytics('CTA Click', {
+        position: 'body',
+        label: 'Copy Page',
+        label__displayed: event?.currentTarget.textContent?.trim() || 'Copy Page',
+        scroll_position: currentScrollPosition(),
+        tagbook: 'true',
+      });
       if (!markdownText) {
         throw new Error(`Failed to fetch markdown from ${markdownAddress}`);
       }
@@ -116,13 +126,13 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
         label="Copy page"
         className={cx(splitButtonStyles, className)}
         size={Size.Small}
-        onClick={() => copyMarkdown()}
+        onClick={(event: React.MouseEvent<HTMLButtonElement>) => copyMarkdown(event)}
         menuItems={[
           <MenuItem
             key={'copy-page'}
             glyph={<Icon glyph="Copy" />}
             description="Copy this page as Markdown for LLMs"
-            onClick={() => copyMarkdown()}
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => copyMarkdown(event)}
           >
             Copy Page
           </MenuItem>,

@@ -4,6 +4,8 @@ import { css } from '@leafygreen-ui/emotion';
 import { palette } from '@leafygreen-ui/palette';
 import Link from '../Link';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 
 const LINK_DEPTH_PADDING = 16;
 
@@ -67,7 +69,22 @@ const linkStyling = ({ depth, isActive }) => css`
 const ContentsListItem = ({ children, depth = 0, id, isActive = false }) => {
   return (
     <li className={listItemStyling({ isActive })}>
-      <Link className={linkStyling({ depth, isActive })} to={`#${id}`} depth={depth} isActive={isActive}>
+      <Link
+        className={linkStyling({ depth, isActive })}
+        to={`#${id}`}
+        depth={depth}
+        isActive={isActive}
+        onClick={(event) => {
+          reportAnalytics('Click', {
+            position: 'Right Column',
+            position_context: 'On This Page',
+            label: children[0]?.props?.nodeData?.value,
+            label__displayed: event.currentTarget.textContent?.trim() || children[0]?.props?.nodeData?.value,
+            scroll_position: currentScrollPosition(),
+            tagbook: 'true',
+          });
+        }}
+      >
         {children}
       </Link>
     </li>
