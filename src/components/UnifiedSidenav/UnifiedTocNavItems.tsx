@@ -37,6 +37,7 @@ const overwriteLinkStyle = LeafyCSS`
 
 const caretStyle = LeafyCSS`
   margin-top: 3px;
+  min-width: 16px;
 `;
 
 const sidenavAnalytics = (label: string, element?: HTMLElement | null) => {

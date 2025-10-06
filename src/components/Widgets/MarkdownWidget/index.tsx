@@ -46,7 +46,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   // i.e. https://www.mongodb.com/docs/mcp-server/get-started/?client=cursor&deployment-type=atlas ->
   // https://www.mongodb.com/docs/mcp-server/get-started/ ->
   // https://www.mongodb.com/docs/mcp-server/get-started.md
-  const markdownPath = href?.split('?')[0];
+  const markdownPath = href?.split(/[?#]/)[0]; // Looking to spit either at the ? or # to handle query params and fragment identifiers
   const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
   const markdownAddress =
     slug === '/' && urlWithoutTrailingSlash?.includes('localhost:8000') ? null : `${urlWithoutTrailingSlash}.md`;
@@ -107,7 +107,6 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
 
   const viewMarkdown = () => {
     if (!markdownAddress) return;
-    // There is a preference to open in a new tab, the default target is _blank
     window.open(markdownAddress);
   };
 
