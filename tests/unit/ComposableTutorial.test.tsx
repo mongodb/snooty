@@ -15,6 +15,16 @@ const mockedGetLocalValue = jest.spyOn(BrowserStorage, 'getLocalValue');
 const mockedNavigate = jest.spyOn(Gatsby, 'navigate');
 const mockedUseLocation = jest.spyOn(ReachRouter, 'useLocation') as jest.SpyInstance<Partial<Location>>;
 
+jest.mock('../../src/context/chatbot-context', () => ({
+  useChatbotModal: () => ({
+    chatbotClicked: false,
+    setChatbotClicked: jest.fn(),
+    text: '',
+    setText: jest.fn(),
+  }),
+  ChatbotProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
 describe('Composable Tutorial component', () => {
   beforeEach(() => {
     mockedGetLocalValue.mockReset();
@@ -25,7 +35,7 @@ describe('Composable Tutorial component', () => {
     renderComposable();
     expect(mockedNavigate).toHaveBeenCalledWith(
       '?interface=driver&language=nodejs&deployment-type=atlas&operator=queryString',
-      { state: { preserveScroll: false } }
+      { state: { preserveScroll: true } }
     );
   });
 
@@ -41,7 +51,7 @@ describe('Composable Tutorial component', () => {
     renderComposable();
     expect(mockedNavigate).toHaveBeenCalledWith(
       '?deployment-type=self&interface=atlas-admin-api&operator=autocomplete',
-      { state: { preserveScroll: false } }
+      { state: { preserveScroll: true } }
     );
   });
 
@@ -84,7 +94,7 @@ describe('Composable Tutorial component', () => {
     // removed bad selection of language
     expect(mockedNavigate).toHaveBeenCalledWith(
       '?deployment-type=self&interface=atlas-admin-api&operator=autocomplete',
-      { state: { preserveScroll: false } }
+      { state: { preserveScroll: true } }
     );
   });
 });
