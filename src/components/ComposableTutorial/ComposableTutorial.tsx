@@ -171,6 +171,9 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
   const { currentSelections, setCurrentSelections } = useContext(ComposableContext);
   const { hash, search } = useLocation();
   const { composable_options: composableOptions, children } = nodeData;
+  // flag to either preserve the hash or not when navigating
+  // ie. if providing default selections, preserve the hash in url
+  //    vs. if changing selections, do not preserve the hash
   const preserveHash = useRef(false);
   const initialLoad = useRef(true);
 
@@ -238,7 +241,7 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
       navigate(
         `${queryString.startsWith('?') ? '' : '?'}${queryString}${
           queryString.length > 0 && externalQueryParamsString.length > 0 ? '&' : ''
-        }${externalQueryParamsString}${newHash ? `${newHash}` : ''}`,
+        }${externalQueryParamsString}${newHash ? newHash : ''}`,
         { state: { ...state } }
       );
     },
