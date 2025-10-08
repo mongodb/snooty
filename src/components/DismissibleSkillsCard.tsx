@@ -74,7 +74,7 @@ const hrStyles = css`
 
 const reportDismissibleSkillsCard = (skill: string, url: string, element?: HTMLElement | null) => {
   const translatedLabel = element?.textContent?.trim() || skill;
-  reportAnalytics('CTA Click', {
+  reportAnalytics('Click', {
     position: 'right column',
     position_context: 'dismissible skills card',
     label: skill,

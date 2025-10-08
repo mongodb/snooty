@@ -103,9 +103,10 @@ export type FeedbackContextProps = {
   page: FeedbackPageData;
   test?: FeedbackTestInput;
   children: ReactNode;
+  position?: 'right column' | 'body';
 };
 
-export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps) {
+export function FeedbackProvider({ page, test, position = 'right column', ...props }: FeedbackContextProps) {
   const hasExistingFeedback =
     !!test?.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
   const [feedback, setFeedback] = useState<Feedback | undefined>(
@@ -176,7 +177,8 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
 
   const selectInitialRating = async (ratingValue: number) => {
     reportAnalytics('Click', {
-      position: 'right column',
+      position: position,
+      position_context: 'Rating',
       label: ratingValue,
       scroll_position: currentScrollPosition(),
       tagbook: 'true',
