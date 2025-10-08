@@ -48,8 +48,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   // https://www.mongodb.com/docs/mcp-server/get-started.md
   const markdownPath = href?.split(/[?#]/)[0]; // Looking to spit either at the ? or # to handle query params and fragment identifiers
   const urlWithoutTrailingSlash = removeTrailingSlash(markdownPath);
-  const markdownAddress =
-    slug === '/' && urlWithoutTrailingSlash?.includes('localhost:8000') ? null : `${urlWithoutTrailingSlash}.md`;
+  const markdownAddress = slug === '/' ? `${urlWithoutTrailingSlash}/index.md` : `${urlWithoutTrailingSlash}.md`;
   const { setChatbotClicked, setText } = useChatbotModal();
 
   useEffect(() => {
@@ -60,11 +59,19 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
 
     // prefetch the markdown
     const fetchMarkDown = async () => {
-      if (!markdownAddress) return;
-      const response = await fetch(markdownAddress, { signal });
-      if (response?.ok) {
+      try {
+        const response = await fetch(markdownAddress, { signal });
+
+        // Checks if the request was unsuccessful via status code (404)
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+
         const text = await response.text();
         getMarkdownText(text);
+      } catch (error) {
+        console.error(`Error while fetching markdown: ${error}`);
+        getMarkdownText(null);
       }
     };
 
@@ -106,7 +113,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
   };
 
   const viewMarkdown = () => {
-    if (!markdownAddress) return;
+    if (!markdownText) return;
     window.open(markdownAddress);
   };
 
