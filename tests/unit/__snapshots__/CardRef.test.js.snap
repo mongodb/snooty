@@ -365,6 +365,7 @@ exports[`card correctly with and without url 1`] = `
         <div>
           <p
             class="emotion-3"
+            data-headline="true"
           >
             Realm SDKs
           </p>
@@ -445,6 +446,7 @@ exports[`card correctly with and without url 1`] = `
         <div>
           <p
             class="emotion-3"
+            data-headline="true"
           >
             MongoDB Realm
           </p>

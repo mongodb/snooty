@@ -275,7 +275,7 @@ const ProductLanding = ({
         <>
           <hr className={cx(hrStyling)} />
           <div className={cx(ratingStlying)}>
-            <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} />
+            <FeedbackRating slug={slug} className={formstyle} classNameContainer={formContainer} position="body" />
           </div>
         </>
       )}

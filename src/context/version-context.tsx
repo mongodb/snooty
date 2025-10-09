@@ -21,8 +21,10 @@ import { getUrl } from '../utils/url-utils';
 import useSnootyMetadata from '../utils/use-snooty-metadata';
 import { getFeatureFlags } from '../utils/feature-flags';
 import { BranchData, Docset, Group, MetadataDatabaseName, PageContextRepoBranches, SiteMetadata } from '../types/data';
+import { reportAnalytics } from '../utils/report-analytics';
 import { fetchDocset } from '../utils/data/docsets';
 import { fetchDocument } from '../utils/data/documents';
+import { currentScrollPosition } from '../utils/current-scroll-position';
 
 export type AssociatedReposInfo = Record<string, DocsetSlice>;
 export type ActiveVersions = Record<string, string>;
@@ -342,6 +344,13 @@ const VersionContextProvider = ({ repoBranches, slug, children }: VersionContext
           ? gitBranchName
           : targetBranch?.urlSlug || targetBranch?.urlAliases?.[0] || targetBranch?.gitBranchName;
       const urlTarget = getUrl(target, metadata.project, repoBranches?.siteBasePrefix, slug);
+      reportAnalytics('Click', {
+        position: 'sidenav',
+        position_context: `version selection`,
+        label: gitBranchName,
+        scroll_position: currentScrollPosition(),
+        tagbook: 'true',
+      });
       navigate(urlTarget);
     },
     [availableVersions, metadata, repoBranches, slug]

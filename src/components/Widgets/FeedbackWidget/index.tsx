@@ -14,9 +14,10 @@ export type FeedbackRatingProps = {
   slug: string;
   className: string;
   classNameContainer?: string;
+  position?: 'right column' | 'body';
 };
 
-const FeedbackRating = ({ slug, className, classNameContainer }: FeedbackRatingProps) => {
+const FeedbackRating = ({ slug, className, classNameContainer, position = 'right column' }: FeedbackRatingProps) => {
   const url = isBrowser ? window.location.href : null;
   const metadata = useSnootyMetadata();
   const feedbackData = useFeedbackData({
@@ -32,7 +33,7 @@ const FeedbackRating = ({ slug, className, classNameContainer }: FeedbackRatingP
   }
 
   return (
-    <FeedbackProvider page={feedbackData}>
+    <FeedbackProvider page={feedbackData} position={position}>
       <FeedbackContainer className={classNameContainer}>
         <FeedbackForm className={className} />
         <RatingView />

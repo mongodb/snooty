@@ -11,6 +11,8 @@ import { theme } from '../theme/docsTheme';
 import { isOfflineDocsBuild } from '../utils/is-offline-docs-build';
 import { disabledStyle } from '../styles/button';
 import { HeadingNode } from '../types/ast';
+import { reportAnalytics } from '../utils/report-analytics';
+import { currentScrollPosition } from '../utils/current-scroll-position';
 import ComponentFactory, { ComponentFactoryProps } from './ComponentFactory';
 import TabSelectors from './Tabs/TabSelectors';
 import { TabContext } from './Tabs/tab-context';
@@ -112,6 +114,17 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }: HeadingProp
   const shouldShowMobileHeader = !!(isPageTitle && isTabletOrMobile && hasSelectors && !hasMethodSelector);
   const showRating = !(rest?.page?.options?.template === 'product-landing');
   const showCopyMarkdown = !templatesWithNoMarkdown.includes(rest?.page?.options?.template ?? '') && isPageTitle;
+  const OpenInteractiveTutorialLabel = 'Open Interactive Tutorial';
+
+  const interactiveOnClick = () => {
+    reportAnalytics('Click', {
+      position: 'body',
+      label: OpenInteractiveTutorialLabel,
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
+    });
+    setIsOpen(true);
+  };
 
   return (
     <>
@@ -134,10 +147,10 @@ const Heading = ({ sectionDepth, nodeData, className, as, ...rest }: HeadingProp
                 role="button"
                 className={cx(labButtonStyling, disabledStyle)}
                 disabled={isOfflineDocsBuild || isOpen}
-                onClick={() => setIsOpen(true)}
+                onClick={() => interactiveOnClick()}
                 leftGlyph={<Icon glyph="Code" />}
               >
-                {'Open Interactive Tutorial'}
+                {OpenInteractiveTutorialLabel}
               </Button>
             </div>
           )}

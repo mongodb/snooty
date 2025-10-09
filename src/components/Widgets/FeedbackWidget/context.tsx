@@ -13,6 +13,8 @@ import { useLocation } from '@gatsbyjs/reach-router';
 import { getViewport, Viewport } from '../../../hooks/useViewport';
 import { useSiteMetadata } from '../../../hooks/use-site-metadata';
 import { SnootyEnv } from '../../../types/data';
+import { reportAnalytics } from '../../../utils/report-analytics';
+import { currentScrollPosition } from '../../../utils/current-scroll-position';
 import { FeedbackUser, useBrowserUser } from './upsertFeedback';
 import { FeedbackPageData } from './useFeedbackData';
 import { upsertFeedback } from './upsertFeedback';
@@ -101,9 +103,10 @@ export type FeedbackContextProps = {
   page: FeedbackPageData;
   test?: FeedbackTestInput;
   children: ReactNode;
+  position?: 'right column' | 'body';
 };
 
-export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps) {
+export function FeedbackProvider({ page, test, position = 'right column', ...props }: FeedbackContextProps) {
   const hasExistingFeedback =
     !!test?.feedback && typeof test.feedback === 'object' && Object.keys(test.feedback).length > 0;
   const [feedback, setFeedback] = useState<Feedback | undefined>(
@@ -173,6 +176,13 @@ export function FeedbackProvider({ page, test, ...props }: FeedbackContextProps)
   };
 
   const selectInitialRating = async (ratingValue: number) => {
+    reportAnalytics('Click', {
+      position: position,
+      position_context: 'Rating',
+      label: ratingValue,
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
+    });
     setSelectedRating(ratingValue);
     setView('comment');
     setProgress([false, true, false]);

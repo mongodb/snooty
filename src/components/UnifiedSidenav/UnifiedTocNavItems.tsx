@@ -11,6 +11,8 @@ import { theme } from '../../theme/docsTheme';
 import { isUnifiedTOCInDevMode } from '../../utils/is-unified-toc-dev';
 import { VersionContext } from '../../context/version-context';
 import { tocItemKey } from '../../utils/create-toc-key';
+import { reportAnalytics } from '../../utils/report-analytics';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import { l1ItemStyling, groupHeaderStyling, l2ItemStyling } from './styles/SideNavItem';
 import { UnifiedVersionDropdown } from './UnifiedVersionDropdown';
 import { TocItem } from './types';
@@ -37,6 +39,18 @@ const caretStyle = LeafyCSS`
   margin-top: 3px;
   min-width: 16px;
 `;
+
+const sidenavAnalytics = (label: string, element?: HTMLElement | null) => {
+  const translatedLabel = element?.textContent?.trim() || label;
+
+  reportAnalytics('Click', {
+    position: 'sidenav item',
+    label: label,
+    label_text_displayed: translatedLabel,
+    scroll_position: currentScrollPosition(),
+    tagbook: 'true',
+  });
+};
 
 // Anchors are sometimes included in toc.ts files, but we dont want to compare the current slug to the url with an anchor
 export const removeAnchor = (str: string): string => {
@@ -172,8 +186,10 @@ export const UnifiedTocNavItem = ({
     );
   }
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent) => {
     // Allows for the showSubNav nodes to have their own L2 panel
+    const target = event.currentTarget as HTMLElement;
+    sidenavAnalytics(label, target);
     setShowDriverBackBtn(true);
     setCurrentL2s({ items, newUrl, label, contentSite });
   };
@@ -225,6 +241,9 @@ export const UnifiedTocNavItem = ({
         as={Link}
         contentSite={contentSite}
         to={newUrl}
+        onClick={(event) => {
+          sidenavAnalytics(label, event.currentTarget as HTMLElement);
+        }}
         className={cx(l2ItemStyling({ level, isAccordion }))}
       >
         {label}
@@ -274,7 +293,8 @@ export const CollapsibleNavItem = ({
     setIsOpen((open) => !open);
   };
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent) => {
+    sidenavAnalytics(label, event.currentTarget as HTMLElement);
     if (isOpen && openedByCaret.current) {
       openedByCaret.current = false; // Was opened by caret, keep it open and reset
       return;
@@ -357,7 +377,8 @@ export const StaticNavItem = ({
       hideExternalIcon={true}
       as={isUnifiedTOCInDevMode ? (undefined as never) : Link}
       to={newUrl}
-      onClick={() => {
+      onClick={(event) => {
+        sidenavAnalytics(label, event.currentTarget as HTMLElement);
         setCurrentL1({ items, newUrl, versionDropdown, label, contentSite });
         setCurrentL2s({ items, newUrl, versionDropdown, label, contentSite });
         setShowDriverBackBtn(false);

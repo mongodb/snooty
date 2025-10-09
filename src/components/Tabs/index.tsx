@@ -16,6 +16,7 @@ import { getPlaintext } from '../../utils/get-plaintext';
 import { TABS_CLASSNAME } from '../../utils/head-scripts/offline-ui/tabs';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { Node, Root, TabsNode } from '../../types/ast';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import { TabContext } from './tab-context';
 import { TabHashContext, TabHashProvider } from './tab-hash-context';
 
@@ -179,13 +180,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps
       }
       const tabId = tabIds[index];
       const priorAnchorOffset = scrollAnchorRef.current ? getPosition(scrollAnchorRef.current).y : undefined;
-
       setActiveTab({ [tabsetName]: tabId });
-      reportAnalytics('Tab Selected', {
-        tabId,
-        tabSet: tabsetName,
-      });
-
       // Delay preserving scroll behavior by 40ms to allow other tabset content bodies to render
       window.setTimeout(() => {
         if (scrollAnchorRef.current && priorAnchorOffset) {
@@ -237,6 +232,17 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps
                 className={isOfflineDocsBuild ? offlineStyling : ''}
                 key={tabId}
                 name={tabTitle}
+                onClick={(event) => {
+                  const translatedLabel = event.currentTarget.textContent?.trim() || getPlaintext(tab.argument);
+                  reportAnalytics('Click', {
+                    position: 'body',
+                    position_context: 'Tab',
+                    label: getPlaintext(tab.argument),
+                    label_text_displayed: translatedLabel,
+                    scroll_position: currentScrollPosition(),
+                    tagbook: 'true',
+                  });
+                }}
               >
                 <HeadingContextProvider
                   heading={lastHeading ? `${lastHeading} - ${getPlaintext(tab.argument)}` : getPlaintext(tab.argument)}
