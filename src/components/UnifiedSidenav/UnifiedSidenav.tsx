@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from '@emotion/styled';
 import { css as LeafyCSS, cx } from '@leafygreen-ui/emotion';
 import { useLocation } from '@gatsbyjs/reach-router';
-import { useUnifiedToc } from '../../hooks/use-unified-toc';
 import { theme } from '../../theme/docsTheme';
-import useSnootyMetadata from '../../utils/use-snooty-metadata';
-import { VersionContext } from '../../context/version-context';
 import useStickyTopValues from '../../hooks/useStickyTopValues';
 import { HeaderContext } from '../Header/header-context';
 import { SidenavContext } from '../Sidenav';
@@ -14,11 +11,10 @@ import { SIDE_NAV_CONTAINER_ID } from '../../constants';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { assertLeadingSlash } from '../../utils/assert-leading-slash';
 import { removeTrailingSlash } from '../../utils/remove-trailing-slash';
-import { removeLeadingSlash } from '../../utils/remove-leading-slash';
 import { isBrowser } from '../../utils/is-browser';
 import { loadHashIntoView } from '../../utils/load-hash-into-view';
-import { getAvailableLanguages } from '../../utils/locale';
-import { ActiveVersions, AvailableVersions } from '../../context/version-context';
+import { getFullSlug } from '../../utils/get-full-slug';
+import { useProcessedUnifiedToc } from '../../hooks/useProcessedUnifiedToc';
 import { isActiveTocNode, removeAnchor } from './UnifiedTocNavItems';
 import { DoublePannedNav } from './DoublePannedNav';
 import { AccordionNavPanel } from './AccordionNav';
@@ -89,52 +85,6 @@ const SidenavContainer = ({ topLarge, topMedium, topSmall }: SidenavContainerPro
     }
 `;
 
-interface UpdateURLsParams {
-  tree?: TocItem[];
-  contentSite?: string;
-  activeVersions: ActiveVersions;
-  versionsData: AvailableVersions;
-  project: string;
-}
-
-// Function that adds the current version
-const updateURLs = ({ tree, contentSite, activeVersions, versionsData, project }: UpdateURLsParams): TocItem[] => {
-  return (
-    tree?.map((item) => {
-      let newUrl = item.url ?? '';
-      const currentProject = item.contentSite ?? contentSite;
-
-      // Replace version variable with the true current version
-      if (item?.url?.includes(':version') && currentProject) {
-        const version = (versionsData[currentProject] || []).find(
-          (version) =>
-            version.gitBranchName === activeVersions[currentProject] ||
-            version.urlSlug === activeVersions[currentProject] ||
-            version?.urlAliases?.includes(activeVersions[currentProject])
-        );
-        // If no version found in local storage use 'current'
-        const currentVersion = version?.urlSlug ?? 'current';
-        newUrl = item.url!.replace(/:version/g, currentVersion);
-      }
-
-      const items = updateURLs({
-        tree: item.items,
-        contentSite: currentProject,
-        activeVersions,
-        versionsData,
-        project,
-      });
-
-      return {
-        ...item,
-        newUrl,
-        items,
-        contentSite: currentProject,
-      } as TocItem;
-    }) ?? []
-  );
-};
-
 const findPageParent = (tree: TocItem[], targetUrl: string): [boolean, TocItem | null] => {
   const path: TocItem[] = [];
 
@@ -175,35 +125,14 @@ const findPageParent = (tree: TocItem[], targetUrl: string): [boolean, TocItem |
   return [false, null];
 };
 
-// Getting a list of the available languages
-export const langArray = getAvailableLanguages(true).map((lang) => lang.localeCode);
-
 export const UnifiedSidenav = ({ slug: initialSlug }: { slug: string }) => {
-  const unifiedTocTree = useUnifiedToc();
-  const { project } = useSnootyMetadata();
   const { pathPrefix } = useSiteMetadata();
-  const { activeVersions, availableVersions } = useContext(VersionContext);
   const { hideMobile, setHideMobile } = useContext(SidenavContext);
   const { hasBanner } = useContext(HeaderContext);
   const topValues = useStickyTopValues(false, true, hasBanner);
   const { pathname, hash } = useLocation();
-  const tempSlug = isBrowser ? removeLeadingSlash(removeTrailingSlash(window.location.pathname)) : initialSlug;
-  const hasLang = langArray.some((lang) => tempSlug?.includes(lang));
-  let slug =
-    tempSlug?.startsWith('docs/') || hasLang
-      ? tempSlug
-      : tempSlug === '/' || tempSlug === ''
-      ? pathPrefix + tempSlug
-      : `${pathPrefix}/${tempSlug}/`;
-
-  const tree = useMemo(() => {
-    return updateURLs({
-      tree: unifiedTocTree,
-      activeVersions,
-      versionsData: availableVersions,
-      project,
-    });
-  }, [unifiedTocTree, activeVersions, availableVersions, project]);
+  const tree = useProcessedUnifiedToc();
+  let slug = getFullSlug(initialSlug, pathPrefix);
 
   const [isDriver, currentL2List] = findPageParent(tree, slug);
   const [showDriverBackBtn, setShowDriverBackBtn] = useState<boolean>(isDriver);

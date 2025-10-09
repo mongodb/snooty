@@ -94,7 +94,7 @@ const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }: Ind
 
   let result = (
     <div className={cx(linkWrapperLayoutStyling, crumb.title.length > 21 ? ellipsisStyling : '')} ref={measuredRef}>
-      <Link className={cx(linkStyling)} to={crumb.path} onClick={onClick}>
+      <Link className={cx(linkStyling)} to={crumb.path} onClick={onClick} hideExternalIcon={true}>
         {formatText(crumb.title)}
       </Link>
     </div>
