@@ -104,7 +104,7 @@ const SearchFilters = ({
         position: 'Search',
         position_context: 'Refined Search Filter',
         label: value,
-        label__displayed: translatedValue,
+        label_text_displayed: translatedValue,
         scroll_position: currentScrollPosition(),
         tagbook: 'true',
       });

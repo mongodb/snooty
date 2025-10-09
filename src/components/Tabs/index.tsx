@@ -238,7 +238,7 @@ const Tabs = ({ nodeData: { children, options = {} }, page, ...rest }: TabsProps
                     position: 'body',
                     position_context: 'Tab',
                     label: getPlaintext(tab.argument),
-                    label__displayed: translatedLabel,
+                    label_text_displayed: translatedLabel,
                     scroll_position: currentScrollPosition(),
                     tagbook: 'true',
                   });

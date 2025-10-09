@@ -46,7 +46,7 @@ const sidenavAnalytics = (label: string, element?: HTMLElement | null) => {
   reportAnalytics('Click', {
     position: 'sidenav item',
     label: label,
-    label__displayed: translatedLabel,
+    label_text_displayed: translatedLabel,
     scroll_position: currentScrollPosition(),
     tagbook: 'true',
   });

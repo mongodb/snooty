@@ -157,7 +157,7 @@ const onCardClick = (url?: string, headline?: string, element?: HTMLElement | nu
     position: 'body',
     position_context: 'Card',
     label: headline,
-    label__displayed: translatedLabel,
+    label_text_displayed: translatedLabel,
     scroll_position: currentScrollPosition(),
     tagbook: 'true',
   });

@@ -79,7 +79,7 @@ const ContentsListItem = ({ children, depth = 0, id, isActive = false }) => {
             position: 'Right Column',
             position_context: 'On This Page',
             label: children[0]?.props?.nodeData?.value,
-            label__displayed: event.currentTarget.textContent?.trim() || children[0]?.props?.nodeData?.value,
+            label_text_displayed: event.currentTarget.textContent?.trim() || children[0]?.props?.nodeData?.value,
             scroll_position: currentScrollPosition(),
             tagbook: 'true',
           });

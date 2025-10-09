@@ -65,7 +65,7 @@ const Button = ({
           position: 'body',
           position_context: `button`,
           label: argument,
-          label__displayed: translatedArgument,
+          label_text_displayed: translatedArgument,
           scroll_position: currentScrollPosition(),
           tagbook: 'true',
         });

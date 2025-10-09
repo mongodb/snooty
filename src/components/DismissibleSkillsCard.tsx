@@ -78,7 +78,7 @@ const reportDismissibleSkillsCard = (skill: string, url: string, element?: HTMLE
     position: 'right column',
     position_context: 'dismissible skills card',
     label: skill,
-    label__displayed: translatedLabel,
+    label_text_displayed: translatedLabel,
     scroll_position: currentScrollPosition(),
     tagbook: 'true',
   });

@@ -89,7 +89,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
       reportAnalytics('CTA Click', {
         position: 'body',
         label: 'Copy Page',
-        label__displayed: event?.currentTarget.textContent?.trim() || 'Copy Page',
+        label_text_displayed: event?.currentTarget.textContent?.trim() || 'Copy Page',
         scroll_position: currentScrollPosition(),
         tagbook: 'true',
       });
