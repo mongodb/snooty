@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.20.28",
+  "version": "0.20.29",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -171,6 +171,7 @@
     "styled-components": "^5.3.6",
     "theme-ui": "^0.15.4",
     "trackjs": "^3.10.4",
+    "tree-visit": "^0.5.1",
     "underscore": "^1.12.1",
     "url-parse": "^1.5.8",
     "xmlhttprequest-ssl": ">=1.6.2"

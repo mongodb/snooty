@@ -46,6 +46,11 @@ Object.defineProperty(global.navigator, 'clipboard', {
 Object.defineProperty(global.window, 'open', { configurable: true, writable: true, value: jest.fn(() => ({} as any)) });
 
 describe('Prefetching', () => {
+  beforeEach(() => {
+    // Clearing the call history before each new test
+    mockedFetch.mockClear();
+  });
+
   it('prefetches if the URL has a query param', async () => {
     const urlWithQueryParam = `${TEST_URL}?value=something`;
 
@@ -92,6 +97,30 @@ describe('Prefetching', () => {
         signal: expect.any(AbortSignal),
       })
     );
+  });
+
+  it('it calls console error on failed prefetches', async () => {
+    mockedUseLocation.mockReturnValue({
+      href: `${TEST_URL}bar/`,
+    });
+
+    mockedFetch.mockResolvedValue({
+      ok: false,
+      status: 404,
+    });
+
+    await act(async () => {
+      renderCopyMarkdownButton();
+    });
+
+    expect(mockedFetch).toHaveBeenCalledWith(
+      `${TEST_URL}bar.md`,
+      expect.objectContaining({
+        signal: expect.any(AbortSignal),
+      })
+    );
+
+    expect(mockedConsoleError).toHaveBeenCalledWith('Error while fetching markdown: Error: Response status: 404');
   });
 });
 
@@ -181,7 +210,7 @@ describe('Copy markdown button', () => {
     // Mock fetch response
     mockedFetch.mockResolvedValue({
       ok: false,
-      statusCode: 404,
+      status: 404,
     });
 
     // Render component
