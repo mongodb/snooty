@@ -20,6 +20,7 @@ const StyledModal = styled(Modal as React.ComponentType<ModalProps>)`
   ${process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' ? `margin-top: ${theme.header.navbarHeight}` : ''};
 
   div[role='dialog'] {
+    width: 80%;
     max-width: 80%;
     max-height: calc(100vh - ${theme.header.navbarHeight} - ${MODAL_DIALOG_PADDING});
     transition: none;
@@ -91,7 +92,7 @@ const Lightbox = ({ nodeData, ...rest }: FigureProps) => {
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
       </LightboxWrapper>
-      <StyledModal size={ModalSize.Default} open={open} setOpen={setOpen}>
+      <StyledModal size={ModalSize.Large} open={open} setOpen={setOpen}>
         <Image nodeData={nodeData} />
       </StyledModal>
     </React.Fragment>

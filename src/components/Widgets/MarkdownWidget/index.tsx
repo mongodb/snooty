@@ -145,7 +145,7 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
           <MenuItem
             key={'ask-question'}
             glyph={<Icon glyph="Sparkle" />}
-            description="Ask Mongodb AI about this page"
+            description="Ask MongoDB AI about this page"
             onClick={askQuestion}
           >
             Ask a Question
