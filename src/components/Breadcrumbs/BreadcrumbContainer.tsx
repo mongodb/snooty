@@ -4,6 +4,7 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import { theme } from '../../theme/docsTheme';
 import { getFullBreadcrumbPath } from '../../utils/get-complete-breadcrumb-data';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import useScreenSize from '../../hooks/useScreenSize';
 import IndividualBreadcrumb from './IndividualBreadcrumb';
 import CollapsedBreadcrumbs from './CollapsedBreadcrumbs';
 
@@ -19,7 +20,25 @@ const Flexbox = styled('div')`
 `;
 
 const MIN_BREADCRUMBS = 3;
-const initialMaxCrumbs = (breadcrumbs: Array<BreadcrumbType>) => breadcrumbs.length + 1;
+
+// Calculate the initial maximum number of breadcrumbs to show based on screen size
+const getInitialMaxCrumbs = (breadcrumbs: Array<BreadcrumbType>, isMobile: boolean, isTabletOrMobile: boolean) => {
+  if (breadcrumbs.length <= MIN_BREADCRUMBS) {
+    // No collapsing needed if we don't have many breadcrumbs
+    return breadcrumbs.length + 1;
+  }
+
+  if (isMobile) {
+    return Math.max(3, breadcrumbs.length);
+  }
+
+  if (isTabletOrMobile) {
+    return Math.max(4, breadcrumbs.length);
+  }
+
+  // Desktop
+  return Math.max(6, breadcrumbs.length);
+};
 
 export type BreadcrumbType = {
   title: string;
@@ -27,18 +46,19 @@ export type BreadcrumbType = {
 };
 
 const BreadcrumbContainer = ({ breadcrumbs }: { breadcrumbs: Array<BreadcrumbType> }) => {
-  const [maxCrumbs, setMaxCrumbs] = React.useState(initialMaxCrumbs(breadcrumbs));
+  const { isMobile, isTabletOrMobile } = useScreenSize();
+  const [maxCrumbs, setMaxCrumbs] = React.useState(() => getInitialMaxCrumbs(breadcrumbs, isMobile, isTabletOrMobile));
   const { siteUrl } = useSiteMetadata();
 
   React.useEffect(() => {
     const handleResize = () => {
-      setMaxCrumbs(initialMaxCrumbs(breadcrumbs));
+      setMaxCrumbs(getInitialMaxCrumbs(breadcrumbs, isMobile, isTabletOrMobile));
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [breadcrumbs]);
+  }, [breadcrumbs, isMobile, isTabletOrMobile]);
 
   // Our breadcrumbs representation is an array of crumbObjectShape || (array of crumbObjectShape)
   // The latter indicates a collapsed series of breadcrumbs.
