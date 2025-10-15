@@ -107,7 +107,7 @@ const Contents = ({ className, slug }: { className?: string; slug: string }) => 
   if (filteredNodes.length === 0 || !showContentsComponent) {
     return (
       <div className={className}>
-        <FeedbackRating slug={slug} className={formStyle} />
+        <FeedbackRating slug={slug} className={formStyle} position="right column" />
       </div>
     );
   }
@@ -119,7 +119,7 @@ const Contents = ({ className, slug }: { className?: string; slug: string }) => 
   return (
     <>
       {!isTabletOrMobile && shouldProjShowFW && (
-        <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />
+        <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} position="right column" />
       )}
       <div className={cx(className, styledContentList)}>
         <ContentsList label={label}>
@@ -135,7 +135,7 @@ const Contents = ({ className, slug }: { className?: string; slug: string }) => 
         </ContentsList>
       </div>
       {isTabletOrMobile && shouldProjShowFW && !hideFWOnMobile && (
-        <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} />
+        <FeedbackRating slug={slug} className={formStyle} classNameContainer={formContainer} position="body" />
       )}
     </>
   );

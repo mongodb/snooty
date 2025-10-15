@@ -5,6 +5,7 @@ import Icon from '@leafygreen-ui/icon';
 import { reportAnalytics } from '../../utils/report-analytics';
 import { displayNone } from '../../utils/display-none';
 import useScreenSize from '../../hooks/useScreenSize';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import { useOfflineDownloadContext } from './DownloadContext';
 
 const downloadIconStyling = css`
@@ -25,7 +26,12 @@ const DownloadButton = () => {
 
   const openDownloadModal = () => {
     if (isTabletOrMobile) return;
-    reportAnalytics('Offline docs download button clicked');
+    reportAnalytics('Click', {
+      position: 'SideNav',
+      label: 'Offline docs download button',
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
+    });
     setModalOpen(true);
   };
 
