@@ -6,6 +6,7 @@ import { DRIVER_ICON_MAP, DriverMap } from '../icons/DriverIconMap';
 import { theme } from '../../theme/docsTheme';
 import { PageContext } from '../../context/page-context';
 import { ASTNode } from '../../types/ast';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import { ActiveTabs, TabContext } from './tab-context';
 import { makeChoices } from './make-choices';
 
@@ -87,10 +88,12 @@ const TabSelector = ({
       usePortal={mainColumn}
       onChange={({ value }) => {
         handleClick({ [name]: value });
-        reportAnalytics('LanguageSelection', {
-          areaFrom: 'LanguageSelector',
-          languageInitial: activeTab,
-          languageSelected: value,
+        reportAnalytics('Click', {
+          position: 'selector/dropdown',
+          position_context: `language selection`,
+          label: value,
+          scroll_position: currentScrollPosition(),
+          tagbook: 'true',
         });
       }}
       value={activeTab}
