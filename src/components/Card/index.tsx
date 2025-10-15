@@ -14,6 +14,8 @@ import CommunityPillLink from '../CommunityPillLink';
 import { isRelativeUrl } from '../../utils/is-relative-url';
 import { getSuitableIcon } from '../../utils/get-suitable-icon';
 import type { CardNode } from '../../types/ast';
+import { reportAnalytics } from '../../utils/report-analytics';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 
 interface CardProps {
   isCompact?: boolean;
@@ -147,8 +149,18 @@ const bodyStyling = css`
   }
 `;
 
-const onCardClick = (url?: string) => {
+const onCardClick = (url?: string, headline?: string, element?: HTMLElement | null) => {
   if (!url) return;
+  const headlineElement = element?.querySelector('[data-headline]') as HTMLElement;
+  const translatedLabel = headlineElement?.textContent?.trim() || headline;
+  reportAnalytics('Click', {
+    position: 'body',
+    position_context: 'Card',
+    label: headline,
+    label_text_displayed: translatedLabel,
+    scroll_position: currentScrollPosition(),
+    tagbook: 'true',
+  });
   isRelativeUrl(url) ? navigate(url) : (window.location.href = url);
 };
 
@@ -179,7 +191,10 @@ const Card = ({ isCompact, isExtraCompact, isCenterContentStyle, isLargeIconStyl
   const iconSrc = getSuitableIcon(icon, iconDark, darkMode);
 
   return (
-    <LeafyGreenCard className={cx(styling)} onClick={url ? () => onCardClick(url) : undefined}>
+    <LeafyGreenCard
+      className={cx(styling)}
+      onClick={url ? (event) => onCardClick(url, headline, event.currentTarget as HTMLElement) : undefined}
+    >
       {icon && (
         <img
           src={iconSrc}
@@ -196,7 +211,11 @@ const Card = ({ isCompact, isExtraCompact, isCenterContentStyle, isLargeIconStyl
         {tag && <CommunityPillLink variant="green" text={tag} />}
         <div>
           {headline && (
-            <Body className={cx(headingStyling({ isCompact, isExtraCompact, isLargeIconStyle }))} weight="medium">
+            <Body
+              className={cx(headingStyling({ isCompact, isExtraCompact, isLargeIconStyle }))}
+              weight="medium"
+              data-headline
+            >
               {headline}
             </Body>
           )}
