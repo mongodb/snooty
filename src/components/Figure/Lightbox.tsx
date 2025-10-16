@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 import { palette } from '@leafygreen-ui/palette';
 import Image from '../Image';
 import { theme } from '../../theme/docsTheme';
+import { reportAnalytics } from '../../utils/report-analytics';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 import CaptionLegend from './CaptionLegend';
 import { FigureProps } from '.';
 
@@ -18,6 +20,7 @@ const StyledModal = styled(Modal as React.ComponentType<ModalProps>)`
   ${process.env['GATSBY_ENABLE_DARK_MODE'] !== 'true' ? `margin-top: ${theme.header.navbarHeight}` : ''};
 
   div[role='dialog'] {
+    width: 80%;
     max-width: 80%;
     max-height: calc(100vh - ${theme.header.navbarHeight} - ${MODAL_DIALOG_PADDING});
     transition: none;
@@ -70,8 +73,15 @@ const Lightbox = ({ nodeData, ...rest }: FigureProps) => {
   const [open, setOpen] = useState(false);
   const figureWidth = nodeData.options?.figwidth || 'auto';
   const openModal = useCallback(() => {
+    reportAnalytics('Click', {
+      position: 'body',
+      position_context: 'image enlarged',
+      label: nodeData.name,
+      scroll_position: currentScrollPosition(),
+      tagbook: 'true',
+    });
     setOpen((prevOpen) => !prevOpen);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <React.Fragment>
@@ -82,7 +92,7 @@ const Lightbox = ({ nodeData, ...rest }: FigureProps) => {
         </div>
         <CaptionLegend {...rest} nodeData={nodeData} />
       </LightboxWrapper>
-      <StyledModal size={ModalSize.Default} open={open} setOpen={setOpen}>
+      <StyledModal size={ModalSize.Large} open={open} setOpen={setOpen}>
         <Image nodeData={nodeData} />
       </StyledModal>
     </React.Fragment>

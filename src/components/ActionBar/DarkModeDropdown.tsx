@@ -7,6 +7,7 @@ import { DarkModeContext, DarkModePref } from '../../context/dark-mode-context';
 import { theme } from '../../theme/docsTheme';
 import { reportAnalytics } from '../../utils/report-analytics';
 import IconDarkmode from '../icons/DarkMode';
+import { currentScrollPosition } from '../../utils/current-scroll-position';
 
 const iconStyling = css`
   display: block;
@@ -39,8 +40,12 @@ const DarkModeDropdown = () => {
 
   const select = useCallback(
     (selectedPref: DarkModePref) => {
-      reportAnalytics('DarkModeSelection', {
-        value: selectedPref,
+      reportAnalytics('Click', {
+        position: 'secondary nav',
+        position_context: 'dark mode menu',
+        label: selectedPref,
+        scroll_position: currentScrollPosition(),
+        tagbook: 'true',
       });
       setDarkModePref(selectedPref);
       setOpen(false);
@@ -65,8 +70,12 @@ const DarkModeDropdown = () => {
         align={'bottom'}
         open={open}
         setOpen={() => {
-          reportAnalytics('DarkModeMenu', {
-            action: open ? 'closed' : 'opened',
+          reportAnalytics('Click', {
+            position: 'secondary nav',
+            position_context: 'dark mode menu',
+            label: `action: ${open ? 'closed' : 'opened'}`,
+            scroll_position: currentScrollPosition(),
+            tagbook: 'true',
           });
           setOpen((e) => !e);
         }}
