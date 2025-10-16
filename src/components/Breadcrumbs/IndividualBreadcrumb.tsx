@@ -74,11 +74,10 @@ const useIsTruncated = (node: HTMLDivElement | null) => {
 
 type IndividualBreadcrumbProps = {
   crumb: BreadcrumbType;
-  setIsExcessivelyTruncated: () => void;
   onClick: () => void;
 };
 
-const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }: IndividualBreadcrumbProps) => {
+const IndividualBreadcrumb = ({ crumb, onClick }: IndividualBreadcrumbProps) => {
   const [node, setNode] = useState<HTMLDivElement | null>(null);
   const measuredRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
@@ -86,11 +85,7 @@ const IndividualBreadcrumb = ({ crumb, setIsExcessivelyTruncated, onClick }: Ind
     }
   }, []);
 
-  const { isTruncated, isExcessivelyTruncated } = useIsTruncated(node);
-
-  if (isExcessivelyTruncated) {
-    setIsExcessivelyTruncated();
-  }
+  const { isTruncated } = useIsTruncated(node);
 
   let result = (
     <div className={cx(linkWrapperLayoutStyling, crumb.title.length > 21 ? ellipsisStyling : '')} ref={measuredRef}>
