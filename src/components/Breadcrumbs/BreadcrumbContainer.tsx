@@ -4,7 +4,6 @@ import { reportAnalytics } from '../../utils/report-analytics';
 import { theme } from '../../theme/docsTheme';
 import { getFullBreadcrumbPath } from '../../utils/get-complete-breadcrumb-data';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
-
 import { currentScrollPosition } from '../../utils/current-scroll-position';
 import IndividualBreadcrumb from './IndividualBreadcrumb';
 import CollapsedBreadcrumbs from './CollapsedBreadcrumbs';

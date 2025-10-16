@@ -98,6 +98,7 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
       position: 'secondary nav',
       label: `search value: ${searchValue}`,
       scroll_position: currentScrollPosition(),
+      tagbook: 'true',
     });
     inputRef.current?.blur();
     if (project === 'landing' && slug === 'search') {
