@@ -129,6 +129,7 @@ export const getCompleteBreadcrumbData = ({
     : [homeCrumb, ...intermediateCrumbs, ...parents];
 
   const unifiedTocCrumbs = [homeCrumb, ...parents];
+  const nonUnifiedTocCrumbs = selfCrumb ? [...almostFinalCrumbs, selfCrumb] : almostFinalCrumbs;
 
-  return isUnifiedToc ? unifiedTocCrumbs : selfCrumb ? [...almostFinalCrumbs, selfCrumb] : almostFinalCrumbs;
+  return isUnifiedToc ? unifiedTocCrumbs : nonUnifiedTocCrumbs;
 };

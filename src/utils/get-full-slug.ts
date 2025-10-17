@@ -14,12 +14,10 @@ export const getFullSlug = (initialSlug: string, pathPrefix: string): string => 
       removeLeadingSlash(tempSlug)?.startsWith(lang + '/') || removeLeadingSlash(tempSlug)?.startsWith(lang + '/')
   );
 
-  const fullSlug =
-    tempSlug?.startsWith('docs/') || hasLang
-      ? tempSlug
-      : tempSlug === '/' || tempSlug === ''
-      ? pathPrefix + tempSlug
-      : `${pathPrefix}/${tempSlug}/`;
+  const alreadyCompleteSlug = tempSlug?.startsWith('docs/') || hasLang ? tempSlug : null;
+  const withPathPrefixSlug = tempSlug === '/' || tempSlug === '' ? pathPrefix + tempSlug : `${pathPrefix}/${tempSlug}/`;
+
+  const fullSlug = alreadyCompleteSlug ? alreadyCompleteSlug : withPathPrefixSlug;
 
   return fullSlug;
 };
