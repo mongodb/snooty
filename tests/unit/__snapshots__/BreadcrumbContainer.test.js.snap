@@ -13,6 +13,21 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   align-items: center;
 }
 
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
 .emotion-1 {
   overflow: hidden;
   white-space: nowrap;
@@ -108,6 +123,94 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   padding-right: 8px;
 }
 
+.emotion-4 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: color,box-shadow;
+  background-color: rgba(255, 255, 255, 0);
+  height: 28px;
+  width: 28px;
+  color: #5C6C75;
+}
+
+.emotion-4:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-4:active:before,
+.emotion-4:hover:before,
+.emotion-4:focus:before {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-4:focus {
+  outline: none;
+}
+
+.emotion-4:active,
+.emotion-4:hover {
+  color: #001E2B;
+}
+
+.emotion-4:active:before,
+.emotion-4:hover:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-4:focus-visible {
+  color: #001E2B;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-4:focus-visible:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-5 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
 <div
     class="emotion-0"
   >
@@ -129,19 +232,36 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
        / 
     </span>
-    <div
-      class="emotion-1"
+    <button
+      aria-disabled="false"
+      aria-expanded="false"
+      aria-haspopup="true"
+      aria-label="Show all breadcrumbs"
+      class="emotion-4"
+      tabindex="0"
     >
-      <a
-        class="lg-ui-0001 emotion-2"
-        href="https://www.mongodb.com/docs/languages"
-        target="_self"
+      <div
+        class="emotion-5"
       >
-        <span>
-          Languages
-        </span>
-      </a>
-    </div>
+        <svg
+          aria-label="Ellipsis Icon"
+          class=""
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </div>
+    </button>
     <span
       class="emotion-3"
     >
@@ -152,14 +272,281 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
     >
       <a
         class="lg-ui-0001 emotion-2"
-        href="https://www.mongodb.com/docs/languages/csharp/"
+        href="https://www.mongodb.com/docs/languages/csharp/csharp-driver/usage-examples/"
         target="_self"
       >
         <span>
-          C#/.NET
+          Usage Examples
         </span>
       </a>
     </div>
+  </div>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+.emotion-1 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-1:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-1:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-2 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-2:hover,
+.emotion-2:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-2:focus {
+  outline: none;
+}
+
+.emotion-2:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-2:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-2>span>code,
+.emotion-2>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-2:hover,
+.emotion-2:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-3 {
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.emotion-4 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: color,box-shadow;
+  background-color: rgba(255, 255, 255, 0);
+  height: 28px;
+  width: 28px;
+  color: #5C6C75;
+}
+
+.emotion-4:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-4:active:before,
+.emotion-4:hover:before,
+.emotion-4:focus:before {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-4:focus {
+  outline: none;
+}
+
+.emotion-4:active,
+.emotion-4:hover {
+  color: #001E2B;
+}
+
+.emotion-4:active:before,
+.emotion-4:hover:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-4:focus-visible {
+  color: #001E2B;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-4:focus-visible:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-5 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+<div
+    class="emotion-0"
+  >
+    <div
+      class="emotion-1"
+    >
+      <a
+        class="lg-ui-0001 emotion-2"
+        href="https://www.mongodb.com/docs/"
+        target="_self"
+      >
+        <span>
+          Docs Home
+        </span>
+      </a>
+    </div>
+    <span
+      class="emotion-3"
+    >
+       / 
+    </span>
+    <button
+      aria-disabled="false"
+      aria-expanded="false"
+      aria-haspopup="true"
+      aria-label="Show all breadcrumbs"
+      class="emotion-4"
+      tabindex="0"
+    >
+      <div
+        class="emotion-5"
+      >
+        <svg
+          aria-label="Ellipsis Icon"
+          class=""
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </div>
+    </button>
     <span
       class="emotion-3"
     >
@@ -197,6 +584,231 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
       </a>
     </div>
   </div>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-2:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-2:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-3 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-3:hover,
+.emotion-3:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-3:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-3:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-3>span>code,
+.emotion-3>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-3:hover,
+.emotion-3:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-4 {
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+<div
+    class="emotion-0"
+  >
+    <div
+      class="emotion-1"
+    >
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/"
+          target="_self"
+        >
+          <span>
+            Docs Home
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/languages"
+          target="_self"
+        >
+          <span>
+            Languages
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/languages/csharp/"
+          target="_self"
+        >
+          <span>
+            C#/.NET
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/languages/csharp/csharp-driver/"
+          target="_self"
+        >
+          <span>
+            C#/.NET Driver
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/languages/csharp/csharp-driver/usage-examples/"
+          target="_self"
+        >
+          <span>
+            Usage Examples
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
 </DocumentFragment>
 `;
 
@@ -211,6 +823,352 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+.emotion-1 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-1:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-1:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-2 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-2:hover,
+.emotion-2:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-2:focus {
+  outline: none;
+}
+
+.emotion-2:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-2:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-2>span>code,
+.emotion-2>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-2:hover,
+.emotion-2:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-3 {
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.emotion-4 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: color,box-shadow;
+  background-color: rgba(255, 255, 255, 0);
+  height: 28px;
+  width: 28px;
+  color: #5C6C75;
+}
+
+.emotion-4:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-4:active:before,
+.emotion-4:hover:before,
+.emotion-4:focus:before {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-4:focus {
+  outline: none;
+}
+
+.emotion-4:active,
+.emotion-4:hover {
+  color: #001E2B;
+}
+
+.emotion-4:active:before,
+.emotion-4:hover:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-4:focus-visible {
+  color: #001E2B;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-4:focus-visible:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-5 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-8 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-8>span>code,
+.emotion-8>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-8:focus,
+.emotion-8:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-8:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-8:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-8:hover,
+.emotion-8:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<div
+    class="emotion-0"
+  >
+    <div
+      class="emotion-1"
+    >
+      <a
+        class="lg-ui-0001 emotion-2"
+        href="https://www.mongodb.com/docs/"
+        target="_self"
+      >
+        <span>
+          Docs Home
+        </span>
+      </a>
+    </div>
+    <span
+      class="emotion-3"
+    >
+       / 
+    </span>
+    <button
+      aria-disabled="false"
+      aria-expanded="false"
+      aria-haspopup="true"
+      aria-label="Show all breadcrumbs"
+      class="emotion-4"
+      tabindex="0"
+    >
+      <div
+        class="emotion-5"
+      >
+        <svg
+          aria-label="Ellipsis Icon"
+          class=""
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </div>
+    </button>
+    <span
+      class="emotion-3"
+    >
+       / 
+    </span>
+    <div
+      class="emotion-1"
+    >
+      <a
+        class="emotion-8"
+        href="/sdk/cpp/application-services/"
+      >
+        Application Services - C++ SDK
+      </a>
+    </div>
+  </div>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-0 {
+    display: none;
+  }
 }
 
 .emotion-1 {
@@ -442,6 +1400,276 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
       </a>
     </div>
   </div>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-2:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-2:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-3 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-3:hover,
+.emotion-3:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-3:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-3:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-3>span>code,
+.emotion-3>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-3:hover,
+.emotion-3:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-4 {
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.emotion-5 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.emotion-5:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-5:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-9 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-9>span>code,
+.emotion-9>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-9:focus,
+.emotion-9:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-9:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-9:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-9:hover,
+.emotion-9:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<div
+    class="emotion-0"
+  >
+    <div
+      class="emotion-1"
+    >
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/"
+          target="_self"
+        >
+          <span>
+            Docs Home
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-5"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/atlas/device-sdks/"
+          target="_self"
+        >
+          <span>
+            MongoDB Atlas Device SDKs
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="emotion-9"
+          href="/sdk/cpp/"
+        >
+          Atlas Device SDK for C++
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="emotion-9"
+          href="/sdk/cpp/application-services/"
+        >
+          Application Services - C++ SDK
+        </a>
+      </div>
+    </div>
+  </div>
 </DocumentFragment>
 `;
 
@@ -456,6 +1684,21 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-0 {
+    display: none;
+  }
 }
 
 .emotion-1 {
@@ -626,6 +1869,415 @@ exports[`BreadcrumbContainer renders correctly with intermediate breadcrumb, no 
       </a>
     </div>
   </div>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+.emotion-1 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-1:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-1:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-2 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-2:hover,
+.emotion-2:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-2:focus {
+  outline: none;
+}
+
+.emotion-2:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-2:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-2>span>code,
+.emotion-2>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-2:hover,
+.emotion-2:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-3 {
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.emotion-7 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.emotion-7:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-7:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+<div
+    class="emotion-0"
+  >
+    <div
+      class="emotion-1"
+    >
+      <a
+        class="lg-ui-0001 emotion-2"
+        href="https://www.mongodb.com/docs/"
+        target="_self"
+      >
+        <span>
+          Docs Home
+        </span>
+      </a>
+    </div>
+    <span
+      class="emotion-3"
+    >
+       / 
+    </span>
+    <div
+      class="emotion-1"
+    >
+      <a
+        class="lg-ui-0001 emotion-2"
+        href="https://www.mongodb.com/docs/atlas/"
+        target="_self"
+      >
+        <span>
+          MongoDB Atlas
+        </span>
+      </a>
+    </div>
+    <span
+      class="emotion-3"
+    >
+       / 
+    </span>
+    <div
+      class="emotion-7"
+    >
+      <a
+        class="lg-ui-0001 emotion-2"
+        href="https://www.mongodb.com/docs/atlas/device-sdks/"
+        target="_self"
+      >
+        <span>
+          MongoDB Atlas Device SDKs
+        </span>
+      </a>
+    </div>
+  </div>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-2:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-2:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-3 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-3:hover,
+.emotion-3:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-3:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-3:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-3>span>code,
+.emotion-3>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-3:hover,
+.emotion-3:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-4 {
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.emotion-8 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.emotion-8:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-8:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+<div
+    class="emotion-0"
+  >
+    <div
+      class="emotion-1"
+    >
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/"
+          target="_self"
+        >
+          <span>
+            Docs Home
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/atlas/"
+          target="_self"
+        >
+          <span>
+            MongoDB Atlas
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-8"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/atlas/device-sdks/"
+          target="_self"
+        >
+          <span>
+            MongoDB Atlas Device SDKs
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
 </DocumentFragment>
 `;
 
@@ -640,6 +2292,352 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+.emotion-1 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-1:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-1:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-2 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-2:hover,
+.emotion-2:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-2:focus {
+  outline: none;
+}
+
+.emotion-2:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-2:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-2>span>code,
+.emotion-2>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-2:hover,
+.emotion-2:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-3 {
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.emotion-4 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: color,box-shadow;
+  background-color: rgba(255, 255, 255, 0);
+  height: 28px;
+  width: 28px;
+  color: #5C6C75;
+}
+
+.emotion-4:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-4:active:before,
+.emotion-4:hover:before,
+.emotion-4:focus:before {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-4:focus {
+  outline: none;
+}
+
+.emotion-4:active,
+.emotion-4:hover {
+  color: #001E2B;
+}
+
+.emotion-4:active:before,
+.emotion-4:hover:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-4:focus-visible {
+  color: #001E2B;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-4:focus-visible:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-5 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-8 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-8>span>code,
+.emotion-8>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-8:focus,
+.emotion-8:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-8:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-8:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-8:hover,
+.emotion-8:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<div
+    class="emotion-0"
+  >
+    <div
+      class="emotion-1"
+    >
+      <a
+        class="lg-ui-0001 emotion-2"
+        href="https://www.mongodb.com/docs/"
+        target="_self"
+      >
+        <span>
+          Docs Home
+        </span>
+      </a>
+    </div>
+    <span
+      class="emotion-3"
+    >
+       / 
+    </span>
+    <button
+      aria-disabled="false"
+      aria-expanded="false"
+      aria-haspopup="true"
+      aria-label="Show all breadcrumbs"
+      class="emotion-4"
+      tabindex="0"
+    >
+      <div
+        class="emotion-5"
+      >
+        <svg
+          aria-label="Ellipsis Icon"
+          class=""
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </div>
+    </button>
+    <span
+      class="emotion-3"
+    >
+       / 
+    </span>
+    <div
+      class="emotion-1"
+    >
+      <a
+        class="emotion-8"
+        href="/sdk/cpp/application-services/"
+      >
+        Application Services - C++ SDK
+      </a>
+    </div>
+  </div>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-0 {
+    display: none;
+  }
 }
 
 .emotion-1 {
@@ -869,6 +2867,276 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
       >
         Application Services - C++ SDK
       </a>
+    </div>
+  </div>
+  .emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-0 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-0 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.emotion-2:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-2:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-3 {
+  font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  cursor: pointer;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: #016BF8;
+  font-weight: 400;
+  display: inline;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-3:hover,
+.emotion-3:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-3:focus {
+  outline: none;
+}
+
+.emotion-3:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-3:focus {
+  text-decoration-color: #016BF8;
+}
+
+.emotion-3>span>code,
+.emotion-3>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-3:hover,
+.emotion-3:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-4 {
+  cursor: default;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.emotion-5 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.emotion-5:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-5:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
+}
+
+.emotion-9 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-decoration-color: transparent;
+  line-height: 13px;
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: unset;
+  font-weight: 400;
+}
+
+.emotion-9>span>code,
+.emotion-9>code {
+  color: var(--link-color-primary);
+  font-weight: var(--link-font-weight);
+}
+
+.emotion-9:focus,
+.emotion-9:hover {
+  text-decoration-line: underline;
+  -webkit-transition: text-decoration 150ms ease-in-out;
+  transition: text-decoration 150ms ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.emotion-9:focus {
+  text-decoration-color: #016BF8;
+  outline: none;
+}
+
+.emotion-9:hover {
+  text-decoration-color: #E8EDEB;
+}
+
+.emotion-9:hover,
+.emotion-9:focus {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<div
+    class="emotion-0"
+  >
+    <div
+      class="emotion-1"
+    >
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/"
+          target="_self"
+        >
+          <span>
+            Docs Home
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-5"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/atlas/device-sdks/"
+          target="_self"
+        >
+          <span>
+            MongoDB Atlas Device SDKs
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="emotion-9"
+          href="/sdk/cpp/"
+        >
+          Atlas Device SDK for C++
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="emotion-9"
+          href="/sdk/cpp/application-services/"
+        >
+          Application Services - C++ SDK
+        </a>
+      </div>
     </div>
   </div>
 </DocumentFragment>
