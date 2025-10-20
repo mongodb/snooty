@@ -2,7 +2,6 @@ const { siteMetadata } = require('../../src/utils/site-metadata');
 
 const createDocsetNodes = async ({ createNode, createNodeId, createContentDigest }) => {
   // Get all MongoDB products for the sidenav
-  console.log(`${process.env.GATSBY_NEXT_API_BASE_URL}/docsets/?dbName=${siteMetadata.reposDatabase}`);
   const res = await fetch(`${process.env.GATSBY_NEXT_API_BASE_URL}/docsets/?dbName=${siteMetadata.reposDatabase}`);
   const docsets = await res.json();
 
