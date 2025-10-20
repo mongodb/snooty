@@ -3,7 +3,7 @@ import { isBrowser } from '../utils/is-browser';
 
 const parseCookies = () => window.document.cookie.split(';');
 
-const getTargetedCookie = (cookies: string[]) => cookies.find((cookie) => cookie.trim().startsWith('originRequest='));
+const getTargetedCookie = (cookies: string[]) => cookies.find((cookie) => cookie.trim().startsWith('originalRequest='));
 
 export const useOriginalReqURL = () => {
   const [originReqURL, setOriginalReqURL] = useState<string | null>(null);
