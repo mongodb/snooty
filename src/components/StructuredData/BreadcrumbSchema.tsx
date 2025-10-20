@@ -4,14 +4,14 @@ import useSnootyMetadata from '../../utils/use-snooty-metadata';
 import { BreadcrumbListSd, STRUCTURED_DATA_CLASSNAME } from '../../utils/structured-data';
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { getFeatureFlags } from '../../utils/feature-flags';
-import { useUnifiedToc } from '../../hooks/use-unified-toc';
+import { useProcessedUnifiedToc } from '../../hooks/useProcessedUnifiedToc';
 import { usePageBreadcrumbs } from '../../hooks/useCreateBreadCrumbs';
 
 const BreadcrumbSchema = ({ slug }: { slug: string }) => {
   const { parentPaths, title: siteTitle } = useSnootyMetadata();
   const { siteUrl } = useSiteMetadata();
   const { isUnifiedToc } = getFeatureFlags();
-  const tocTree = useUnifiedToc();
+  const tocTree = useProcessedUnifiedToc();
 
   const parentPathsSlug = parentPaths[slug];
 
