@@ -5,15 +5,16 @@ import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { Body } from '@leafygreen-ui/typography';
+import { Body, H1 } from '@leafygreen-ui/typography';
+import { useOriginalReqURL } from '../hooks/use-original-req-url';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
 import Link from '../components/Link';
 import { BaseTemplateProps } from '.';
 
 const ErrorBox = styled.div`
-  max-width: 455px;
   flex: 1 0.5 auto;
+  word-break: break-word;
 
   @media ${theme.screenSize.upToSmall} {
     padding: 0px ${theme.size.default};
@@ -35,7 +36,7 @@ const getSupportLinkDynamicStyle = (darkMode: boolean) => css`
 `;
 
 const ImageContainer = styled.div`
-  max-width: 455px;
+  max-width: 226px;
   display: flex;
   justify-content: flex-start;
   flex: 0.5 1 auto;
@@ -58,10 +59,10 @@ const NotFoundImage = () => {
 
 const errorTitleStyling = css`
   font-family: 'MongoDB Value Serif';
-  font-size: 32px;
   line-height: 40px;
+  color: #000;
   margin-block-start: 1em;
-  margin-block-end: 1em;
+  margin-block-end: 22px;
 
   @media ${theme.screenSize.upToSmall} {
     font-size: ${theme.fontSize.h2};
@@ -79,10 +80,19 @@ const LinkContainer = styled.div`
 
 const ErrorBoxContainer = () => {
   const { darkMode } = useDarkMode();
+  const { originReqURL } = useOriginalReqURL();
+
   return (
     <ErrorBox>
-      <Body className={cx(errorTitleStyling)}>Sorry, we can't find that page.</Body>
-      <Body>The page might have been moved or deleted.</Body>
+      <H1 className={cx(errorTitleStyling)}>Sorry, we can't find that page.</H1>
+      {originReqURL ? (
+        <Body>
+          The page with the URL &quot;<Link to={originReqURL}>{originReqURL}</Link>&quot; does not exist. It might have
+          been moved or deleted.
+        </Body>
+      ) : (
+        <Body>The page might have been moved or deleted.</Body>
+      )}
       <LinkContainer>
         <Button
           href={baseUrl()}
@@ -108,10 +118,9 @@ const ErrorBoxContainer = () => {
 };
 
 export const NotFoundContainer = styled.div`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
-  flex-flow: no-wrap;
-  justify-content: space-between;
+  flex-direction: column;
   margin-bottom: ${theme.size.xxlarge};
 
   @media ${theme.screenSize.upToSmall} {
@@ -120,7 +129,6 @@ export const NotFoundContainer = styled.div`
 
   @media ${theme.screenSize.upToMedium} {
     grid-column: 2/-2;
-    flex-flow: column-reverse;
   }
 
   @media ${theme.screenSize.upToLarge} {
@@ -131,7 +139,7 @@ export const NotFoundContainer = styled.div`
     grid-column: 4/-4;
   }
   @media ${theme.screenSize.xLargeAndUp} {
-    grid-column: 6/-5;
+    grid-column: 6/-3;
     justify-content: start;
   }
 `;
@@ -163,8 +171,8 @@ const NotFound = (props: BaseTemplateProps) => {
   return (
     <Wrapper>
       <NotFoundContainer>
-        <ErrorBoxContainer />
         <NotFoundImage />
+        <ErrorBoxContainer />
       </NotFoundContainer>
     </Wrapper>
   );
