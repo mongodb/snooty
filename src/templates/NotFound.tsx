@@ -59,7 +59,7 @@ const NotFoundImage = () => {
 
 const errorTitleStyling = css`
   font-family: 'MongoDB Value Serif';
-  line-height: 40px;
+  line-height: 64px;
   font-size: 48px;
   margin-block-start: 1em;
   margin-block-end: 22px;
