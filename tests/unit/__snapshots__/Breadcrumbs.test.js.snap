@@ -27,6 +27,21 @@ exports[`renders correctly as a homepage 1`] = `
   align-items: center;
 }
 
+@media only screen and (max-width: 480px) {
+  .emotion-1 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-1 {
+    display: none;
+  }
+}
+
 .emotion-2 {
   overflow: hidden;
   white-space: nowrap;
@@ -120,6 +135,75 @@ exports[`renders correctly as a homepage 1`] = `
   cursor: default;
   padding-left: 8px;
   padding-right: 8px;
+}
+
+.emotion-7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-7 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-7 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-7 {
+    display: none;
+  }
+}
+
+.emotion-13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-13 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-13 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.emotion-14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 <div
@@ -160,6 +244,80 @@ exports[`renders correctly as a homepage 1`] = `
         </a>
       </div>
     </div>
+    <div
+      class="emotion-7"
+    >
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/"
+          target="_self"
+        >
+          <span>
+            Docs Home
+          </span>
+        </a>
+      </div>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-2"
+      >
+        <a
+          class="lg-ui-0001 emotion-3"
+          href="https://www.mongodb.com/docs/atlas/"
+          target="_self"
+        >
+          <span>
+            MongoDB Atlas
+          </span>
+        </a>
+      </div>
+    </div>
+    <div
+      class="emotion-13"
+    >
+      <div
+        class="emotion-14"
+      >
+        <div
+          class="emotion-2"
+        >
+          <a
+            class="lg-ui-0001 emotion-3"
+            href="https://www.mongodb.com/docs/"
+            target="_self"
+          >
+            <span>
+              Docs Home
+            </span>
+          </a>
+        </div>
+        <span
+          class="emotion-4"
+        >
+           / 
+        </span>
+        <div
+          class="emotion-2"
+        >
+          <a
+            class="lg-ui-0001 emotion-3"
+            href="https://www.mongodb.com/docs/atlas/"
+            target="_self"
+          >
+            <span>
+              MongoDB Atlas
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -189,6 +347,21 @@ exports[`renders correctly with siteTitle 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+  .emotion-1 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-1 {
+    display: none;
+  }
 }
 
 .emotion-2 {
@@ -284,6 +457,114 @@ exports[`renders correctly with siteTitle 1`] = `
   cursor: default;
   padding-left: 8px;
   padding-right: 8px;
+}
+
+.emotion-5 {
+  border: none;
+  -webkit-appearance: unset;
+  padding: unset;
+  display: inline-block;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: 150ms ease-in-out;
+  transition: 150ms ease-in-out;
+  transition-property: color,box-shadow;
+  background-color: rgba(255, 255, 255, 0);
+  height: 28px;
+  width: 28px;
+  color: #5C6C75;
+}
+
+.emotion-5:before {
+  content: '';
+  -webkit-transition: 150ms all ease-in-out;
+  transition: 150ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(0.8);
+}
+
+.emotion-5:active:before,
+.emotion-5:hover:before,
+.emotion-5:focus:before {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-5:focus {
+  outline: none;
+}
+
+.emotion-5:active,
+.emotion-5:hover {
+  color: #001E2B;
+}
+
+.emotion-5:active:before,
+.emotion-5:hover:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-5:focus-visible {
+  color: #001E2B;
+  box-shadow: 0 0 0 2px #FFFFFF,0 0 0 4px #0498EC;
+}
+
+.emotion-5:focus-visible:before {
+  background-color: rgba(61,79,88,0.1);
+}
+
+.emotion-6 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-8 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.emotion-8:first-child {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+
+@media not all and (max-width: 480px) {
+  .emotion-8:last-child {
+    min-width: -webkit-max-content;
+    min-width: -moz-max-content;
+    min-width: max-content;
+  }
 }
 
 .emotion-9 {
@@ -335,24 +616,73 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration: underline;
 }
 
-.emotion-11 {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-.emotion-11:first-child {
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
+@media only screen and (max-width: 480px) {
+  .emotion-10 {
+    display: none;
+  }
 }
 
 @media not all and (max-width: 480px) {
-  .emotion-11:last-child {
-    min-width: -webkit-max-content;
-    min-width: -moz-max-content;
-    min-width: max-content;
+  .emotion-10 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
   }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-10 {
+    display: none;
+  }
+}
+
+.emotion-22 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emotion-22 {
+    display: none;
+  }
+}
+
+@media not all and (max-width: 1024px) {
+  .emotion-22 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.emotion-23 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 <div
@@ -379,16 +709,65 @@ exports[`renders correctly with siteTitle 1`] = `
       >
          / 
       </span>
+      <button
+        aria-disabled="false"
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="Show all breadcrumbs"
+        class="emotion-5"
+        tabindex="0"
+      >
+        <div
+          class="emotion-6"
+        >
+          <svg
+            aria-label="Ellipsis Icon"
+            class=""
+            fill="none"
+            height="16"
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </button>
+      <span
+        class="emotion-4"
+      >
+         / 
+      </span>
+      <div
+        class="emotion-8"
+      >
+        <a
+          class="emotion-9"
+          href="/sdk/cpp/application-services/"
+        >
+          Application Services - C++ SDK
+        </a>
+      </div>
+    </div>
+    <div
+      class="emotion-10"
+    >
       <div
         class="emotion-2"
       >
         <a
           class="lg-ui-0001 emotion-3"
-          href="https://www.mongodb.com/docs/atlas/"
+          href="https://www.mongodb.com/docs/"
           target="_self"
         >
           <span>
-            MongoDB Atlas
+            Docs Home
           </span>
         </a>
       </div>
@@ -397,23 +776,43 @@ exports[`renders correctly with siteTitle 1`] = `
       >
          / 
       </span>
-      <div
-        class="emotion-2"
+      <button
+        aria-disabled="false"
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="Show all breadcrumbs"
+        class="emotion-5"
+        tabindex="0"
       >
-        <a
-          class="emotion-9"
-          href="/"
+        <div
+          class="emotion-6"
         >
-          Atlas Device SDKs
-        </a>
-      </div>
+          <svg
+            aria-label="Ellipsis Icon"
+            class=""
+            fill="none"
+            height="16"
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </button>
       <span
         class="emotion-4"
       >
          / 
       </span>
       <div
-        class="emotion-11"
+        class="emotion-8"
       >
         <a
           class="emotion-9"
@@ -428,7 +827,7 @@ exports[`renders correctly with siteTitle 1`] = `
          / 
       </span>
       <div
-        class="emotion-11"
+        class="emotion-8"
       >
         <a
           class="emotion-9"
@@ -436,6 +835,90 @@ exports[`renders correctly with siteTitle 1`] = `
         >
           Application Services - C++ SDK
         </a>
+      </div>
+    </div>
+    <div
+      class="emotion-22"
+    >
+      <div
+        class="emotion-23"
+      >
+        <div
+          class="emotion-2"
+        >
+          <a
+            class="lg-ui-0001 emotion-3"
+            href="https://www.mongodb.com/docs/"
+            target="_self"
+          >
+            <span>
+              Docs Home
+            </span>
+          </a>
+        </div>
+        <span
+          class="emotion-4"
+        >
+           / 
+        </span>
+        <div
+          class="emotion-2"
+        >
+          <a
+            class="lg-ui-0001 emotion-3"
+            href="https://www.mongodb.com/docs/atlas/"
+            target="_self"
+          >
+            <span>
+              MongoDB Atlas
+            </span>
+          </a>
+        </div>
+        <span
+          class="emotion-4"
+        >
+           / 
+        </span>
+        <div
+          class="emotion-2"
+        >
+          <a
+            class="emotion-9"
+            href="/"
+          >
+            Atlas Device SDKs
+          </a>
+        </div>
+        <span
+          class="emotion-4"
+        >
+           / 
+        </span>
+        <div
+          class="emotion-8"
+        >
+          <a
+            class="emotion-9"
+            href="/sdk/cpp/"
+          >
+            Atlas Device SDK for C++
+          </a>
+        </div>
+        <span
+          class="emotion-4"
+        >
+           / 
+        </span>
+        <div
+          class="emotion-8"
+        >
+          <a
+            class="emotion-9"
+            href="/sdk/cpp/application-services/"
+          >
+            Application Services - C++ SDK
+          </a>
+        </div>
       </div>
     </div>
   </div>

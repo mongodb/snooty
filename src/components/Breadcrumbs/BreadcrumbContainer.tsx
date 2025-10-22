@@ -19,7 +19,60 @@ const Flexbox = styled('div')`
   align-items: center;
 `;
 
+const MobileBreadcrumbs = styled(Flexbox)`
+  @media ${theme.screenSize.upToSmall} {
+    display: flex;
+  }
+
+  @media ${theme.screenSize.smallAndUp} {
+    display: none;
+  }
+`;
+
+const TabletBreadcrumbs = styled(Flexbox)`
+  @media ${theme.screenSize.upToSmall} {
+    display: none;
+  }
+
+  @media ${theme.screenSize.smallAndUp} {
+    display: flex;
+  }
+
+  @media ${theme.screenSize.largeAndUp} {
+    display: none;
+  }
+`;
+
+const DesktopBreadcrumbs = styled(Flexbox)`
+  @media ${theme.screenSize.upToLarge} {
+    display: none;
+  }
+
+  @media ${theme.screenSize.largeAndUp} {
+    display: flex;
+  }
+`;
+
 const MIN_BREADCRUMBS = 3;
+
+// Collapses middle breadcrumbs into a  ellipsis
+const createCollapsedBreadcrumbs = (
+  breadcrumbs: Array<BreadcrumbType>,
+  maxVisible: number
+): (BreadcrumbType | BreadcrumbType[])[] => {
+  // Too few breadcrumbs, no need to collapse
+  if (breadcrumbs.length <= MIN_BREADCRUMBS || breadcrumbs.length <= maxVisible) {
+    return breadcrumbs;
+  }
+
+  // Extract middle crumbs to collapse
+  const collapsedCrumbs = Array.from(breadcrumbs).splice(1, breadcrumbs.length - maxVisible + 1);
+  // Replace middle section with collapsed array that displays as an ellipsis
+  const processedCrumbs: (BreadcrumbType | BreadcrumbType[])[] = Array.from(breadcrumbs);
+  processedCrumbs.splice(1, breadcrumbs.length - maxVisible + 1, collapsedCrumbs);
+  return processedCrumbs;
+};
+
 const initialMaxCrumbs = (breadcrumbs: Array<BreadcrumbType>) => breadcrumbs.length + 1;
 
 export type BreadcrumbType = {
@@ -31,6 +84,38 @@ const BreadcrumbContainer = ({ breadcrumbs }: { breadcrumbs: Array<BreadcrumbTyp
   const [maxCrumbs, setMaxCrumbs] = React.useState(initialMaxCrumbs(breadcrumbs));
   const { siteUrl } = useSiteMetadata();
 
+  // Create different breadcrumb versions for different screen sizes
+  const mobileBreadcrumbs = React.useMemo(() => createCollapsedBreadcrumbs(breadcrumbs, 3), [breadcrumbs]);
+  const tabletBreadcrumbs = React.useMemo(() => createCollapsedBreadcrumbs(breadcrumbs, 4), [breadcrumbs]);
+
+  // Render breadcrumbs for tablet and mobile screen
+  const renderBreadcrumbs = (processedBreadcrumbs: (BreadcrumbType | BreadcrumbType[])[]) => {
+    return processedBreadcrumbs.map((crumb, index) => {
+      const isFirst = index === 0;
+      return (
+        <React.Fragment key={`${index}-${Array.isArray(crumb) ? 'collapsed' : crumb.title}`}>
+          {!isFirst && <StyledSlash> / </StyledSlash>}
+          {Array.isArray(crumb) ? (
+            <CollapsedBreadcrumbs crumbs={crumb} />
+          ) : (
+            <IndividualBreadcrumb
+              crumb={crumb}
+              onClick={() =>
+                reportAnalytics('Click', {
+                  position: 'body',
+                  position_context: 'breadcrumb',
+                  label: getFullBreadcrumbPath(siteUrl, crumb.path, true),
+                  scroll_position: currentScrollPosition(),
+                  tagbook: 'true',
+                })
+              }
+            />
+          )}
+        </React.Fragment>
+      );
+    });
+  };
+
   React.useEffect(() => {
     const handleResize = () => {
       setMaxCrumbs(initialMaxCrumbs(breadcrumbs));
@@ -41,8 +126,7 @@ const BreadcrumbContainer = ({ breadcrumbs }: { breadcrumbs: Array<BreadcrumbTyp
     return () => window.removeEventListener('resize', handleResize);
   }, [breadcrumbs]);
 
-  // Our breadcrumbs representation is an array of crumbObjectShape || (array of crumbObjectShape)
-  // The latter indicates a collapsed series of breadcrumbs.
+  // For desktop breadcrumbs
   const processedBreadcrumbs: (BreadcrumbType | BreadcrumbType[])[] = React.useMemo(() => {
     if (breadcrumbs.length >= maxCrumbs && breadcrumbs.length > 2) {
       // A maximum of maxCrumbs breadcrumbs may be shown, so we collapse the first run of internal
@@ -56,40 +140,42 @@ const BreadcrumbContainer = ({ breadcrumbs }: { breadcrumbs: Array<BreadcrumbTyp
     }
   }, [maxCrumbs, breadcrumbs]);
 
-  const collapseBreadcrumbs = () => {
-    const newMaxCrumbs = Math.max(maxCrumbs - 1, MIN_BREADCRUMBS);
-    setMaxCrumbs(newMaxCrumbs);
-  };
-
   return (
-    <Flexbox>
-      {processedBreadcrumbs.map((crumb, index) => {
-        const isFirst = index === 0;
-        return (
-          <React.Fragment key={index}>
-            {!isFirst && <StyledSlash> / </StyledSlash>}
-            {Array.isArray(crumb) ? (
-              <CollapsedBreadcrumbs crumbs={crumb}></CollapsedBreadcrumbs>
-            ) : (
-              <IndividualBreadcrumb
-                key={crumb.title}
-                crumb={crumb}
-                setIsExcessivelyTruncated={collapseBreadcrumbs}
-                onClick={() =>
-                  reportAnalytics('Click', {
-                    position: 'body',
-                    position_context: 'breadcrumb',
-                    label: getFullBreadcrumbPath(siteUrl, crumb.path, true),
-                    scroll_position: currentScrollPosition(),
-                    tagbook: 'true',
-                  })
-                }
-              ></IndividualBreadcrumb>
-            )}
-          </React.Fragment>
-        );
-      })}
-    </Flexbox>
+    <>
+      <MobileBreadcrumbs>{renderBreadcrumbs(mobileBreadcrumbs)}</MobileBreadcrumbs>
+
+      <TabletBreadcrumbs>{renderBreadcrumbs(tabletBreadcrumbs)}</TabletBreadcrumbs>
+
+      <DesktopBreadcrumbs>
+        <Flexbox>
+          {processedBreadcrumbs.map((crumb, index) => {
+            const isFirst = index === 0;
+            return (
+              <React.Fragment key={index}>
+                {!isFirst && <StyledSlash> / </StyledSlash>}
+                {Array.isArray(crumb) ? (
+                  <CollapsedBreadcrumbs crumbs={crumb}></CollapsedBreadcrumbs>
+                ) : (
+                  <IndividualBreadcrumb
+                    key={crumb.title}
+                    crumb={crumb}
+                    onClick={() =>
+                      reportAnalytics('Click', {
+                        position: 'body',
+                        position_context: 'breadcrumb',
+                        label: getFullBreadcrumbPath(siteUrl, crumb.path, true),
+                        scroll_position: currentScrollPosition(),
+                        tagbook: 'true',
+                      })
+                    }
+                  ></IndividualBreadcrumb>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </Flexbox>
+      </DesktopBreadcrumbs>
+    </>
   );
 };
 
