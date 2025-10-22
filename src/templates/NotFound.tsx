@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
-import { Body, H1 } from '@leafygreen-ui/typography';
+import { Body } from '@leafygreen-ui/typography';
 import { useOriginalReqURL } from '../hooks/use-original-req-url';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
@@ -60,7 +60,7 @@ const NotFoundImage = () => {
 const errorTitleStyling = css`
   font-family: 'MongoDB Value Serif';
   line-height: 40px;
-  color: #000;
+  font-size: 48px;
   margin-block-start: 1em;
   margin-block-end: 22px;
 
@@ -81,14 +81,17 @@ const LinkContainer = styled.div`
 const ErrorBoxContainer = () => {
   const { darkMode } = useDarkMode();
   const { originReqURL } = useOriginalReqURL();
+  const decodedURL = originReqURL ? decodeURIComponent(originReqURL) : null;
 
   return (
     <ErrorBox>
-      <H1 className={cx(errorTitleStyling)}>Sorry, we can't find that page.</H1>
-      {originReqURL ? (
+      <Body as="h1" className={cx(errorTitleStyling)}>
+        Sorry, we can't find that page.
+      </Body>
+      {decodedURL ? (
         <Body>
-          The page with the URL &quot;<Link to={originReqURL}>{originReqURL}</Link>&quot; does not exist. It might have
-          been moved or deleted.
+          The page with the URL &quot;<Link to={decodedURL}>{decodedURL}</Link>&quot; does not exist. It might have been
+          moved or deleted.
         </Body>
       ) : (
         <Body>The page might have been moved or deleted.</Body>
