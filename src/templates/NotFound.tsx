@@ -36,6 +36,7 @@ const getSupportLinkDynamicStyle = (darkMode: boolean) => css`
 `;
 
 const ImageContainer = styled.div`
+  margin-left: -27px; /* to account for the whitespace of the image */
   max-width: 226px;
   display: flex;
   justify-content: flex-start;
@@ -61,7 +62,7 @@ const errorTitleStyling = css`
   font-family: 'MongoDB Value Serif';
   line-height: 64px;
   font-size: 48px;
-  margin-block-start: 1em;
+  margin-block-start: 0em; /* to account for the whitespace of the image */
   margin-block-end: 22px;
 
   @media ${theme.screenSize.upToSmall} {
