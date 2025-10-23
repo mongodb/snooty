@@ -6,14 +6,15 @@ import Button from '@leafygreen-ui/button';
 import { palette } from '@leafygreen-ui/palette';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { Body } from '@leafygreen-ui/typography';
+import { useOriginalReqURL } from '../hooks/use-original-req-url';
 import { theme } from '../theme/docsTheme';
 import { baseUrl } from '../utils/base-url';
 import Link from '../components/Link';
 import { BaseTemplateProps } from '.';
 
 const ErrorBox = styled.div`
-  max-width: 455px;
   flex: 1 0.5 auto;
+  word-break: break-word;
 
   @media ${theme.screenSize.upToSmall} {
     padding: 0px ${theme.size.default};
@@ -35,7 +36,8 @@ const getSupportLinkDynamicStyle = (darkMode: boolean) => css`
 `;
 
 const ImageContainer = styled.div`
-  max-width: 455px;
+  margin-left: -27px; /* to account for the whitespace of the image */
+  max-width: 226px;
   display: flex;
   justify-content: flex-start;
   flex: 0.5 1 auto;
@@ -58,10 +60,10 @@ const NotFoundImage = () => {
 
 const errorTitleStyling = css`
   font-family: 'MongoDB Value Serif';
-  font-size: 32px;
-  line-height: 40px;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+  line-height: 64px;
+  font-size: 48px;
+  margin-block-start: 0em; /* to account for the whitespace of the image */
+  margin-block-end: 22px;
 
   @media ${theme.screenSize.upToSmall} {
     font-size: ${theme.fontSize.h2};
@@ -79,10 +81,22 @@ const LinkContainer = styled.div`
 
 const ErrorBoxContainer = () => {
   const { darkMode } = useDarkMode();
+  const { originReqURL } = useOriginalReqURL();
+  const decodedURL = originReqURL ? decodeURIComponent(originReqURL) : null;
+
   return (
     <ErrorBox>
-      <Body className={cx(errorTitleStyling)}>Sorry, we can't find that page.</Body>
-      <Body>The page might have been moved or deleted.</Body>
+      <Body as="h1" className={cx(errorTitleStyling)}>
+        Sorry, we can't find that page.
+      </Body>
+      {decodedURL ? (
+        <Body>
+          The page with the URL &quot;<Link to={decodedURL}>{decodedURL}</Link>&quot; does not exist. It might have been
+          moved or deleted.
+        </Body>
+      ) : (
+        <Body>The page might have been moved or deleted.</Body>
+      )}
       <LinkContainer>
         <Button
           href={baseUrl()}
@@ -108,10 +122,9 @@ const ErrorBoxContainer = () => {
 };
 
 export const NotFoundContainer = styled.div`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
-  flex-flow: no-wrap;
-  justify-content: space-between;
+  flex-direction: column;
   margin-bottom: ${theme.size.xxlarge};
 
   @media ${theme.screenSize.upToSmall} {
@@ -120,7 +133,6 @@ export const NotFoundContainer = styled.div`
 
   @media ${theme.screenSize.upToMedium} {
     grid-column: 2/-2;
-    flex-flow: column-reverse;
   }
 
   @media ${theme.screenSize.upToLarge} {
@@ -131,7 +143,7 @@ export const NotFoundContainer = styled.div`
     grid-column: 4/-4;
   }
   @media ${theme.screenSize.xLargeAndUp} {
-    grid-column: 6/-5;
+    grid-column: 6/-3;
     justify-content: start;
   }
 `;
@@ -163,8 +175,8 @@ const NotFound = (props: BaseTemplateProps) => {
   return (
     <Wrapper>
       <NotFoundContainer>
-        <ErrorBoxContainer />
         <NotFoundImage />
+        <ErrorBoxContainer />
       </NotFoundContainer>
     </Wrapper>
   );
