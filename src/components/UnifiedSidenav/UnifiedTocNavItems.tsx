@@ -234,7 +234,6 @@ export const UnifiedTocNavItem = ({
   }
 
   if (isVersionAllowed) {
-    console.log('newUrl', newUrl, label, level);
     return (
       <SideNavItem
         active={isSelectedTab(newUrl, slug)}
