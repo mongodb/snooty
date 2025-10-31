@@ -122,7 +122,7 @@ export type LinkProps = {
   openInNewTab?: boolean;
   contentSite?: string | null | undefined;
   onClick?: () => void;
-  footerNav?: boolean;
+  InternalPageNav?: boolean;
 };
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
@@ -139,7 +139,7 @@ const Link = ({
   openInNewTab,
   contentSite,
   onClick,
-  footerNav,
+  InternalPageNav,
   ...other
 }: LinkProps) => {
   const { pathPrefix, project } = useSiteMetadata();
@@ -167,9 +167,9 @@ const Link = ({
       const isMDBLink = strippedUrl.includes('mongodb.com/docs'); // For symlinks
 
       if (isMDBLink) {
-        // If this is an external link linking to another mongodb content site but used in the footer nav
+        // If this is an external link linking to another mongodb content site but used in the Internal Page Nav
         // we need to use the GatsbyLink (to main the original styling)
-        if (footerNav) {
+        if (InternalPageNav) {
           return (
             <GatsbyLink
               className={cx(className)}
