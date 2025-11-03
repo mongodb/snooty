@@ -122,6 +122,7 @@ export type LinkProps = {
   openInNewTab?: boolean;
   contentSite?: string | null | undefined;
   onClick?: () => void;
+  InternalPageNav?: boolean;
 };
 
 // Since DOM elements <a> cannot receive activeClassName and partiallyActive,
@@ -138,6 +139,7 @@ const Link = ({
   openInNewTab,
   contentSite,
   onClick,
+  InternalPageNav,
   ...other
 }: LinkProps) => {
   const { pathPrefix, project } = useSiteMetadata();
@@ -165,6 +167,24 @@ const Link = ({
       const isMDBLink = strippedUrl.includes('mongodb.com/docs'); // For symlinks
 
       if (isMDBLink) {
+        // If this is an external link linking to another mongodb content site but used in the Internal Page Nav
+        // we need to use the GatsbyLink (to main the original styling)
+        if (InternalPageNav) {
+          return (
+            <GatsbyLink
+              className={cx(className)}
+              activeClassName={activeClassName}
+              partiallyActive={partiallyActive}
+              to={to}
+              onClick={onClick}
+              {...anchorProps}
+            >
+              {children}
+              {decoration}
+            </GatsbyLink>
+          );
+        }
+
         return (
           <LGLink
             className={joinClassNames(symLinkStyling, className)}
@@ -184,8 +204,8 @@ const Link = ({
         <LGLink
           className={joinClassNames(lgLinkStyling, externalNavLinks, className)}
           href={to}
-          hideExternalIcon={isMDBLink ? true : false}
-          target={isMDBLink ? '_self' : '_blank'}
+          hideExternalIcon={false}
+          target={'_blank'}
           style={{ fill: palette.gray.base }}
           {...anchorProps}
         >
