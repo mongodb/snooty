@@ -88,7 +88,7 @@ const NextPrevLink = ({
 
   return (
     <div className={className} onClick={() => onClick(direction, targetSlug)}>
-      <Link to={targetSlug} {...{ title }} contentSite={contentSite}>
+      <Link to={targetSlug} {...{ title }} contentSite={contentSite} InternalPageNav={true}>
         <div className={cx({ [nextLinkContainerStyling]: isNext, [prevLinkContainerStyling]: isPrev })}>
           <Button className={cx(baseButtonStyle, navLinkButtonStyle)}>
             <Icon glyph={icon} />
