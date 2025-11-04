@@ -172,7 +172,7 @@ export const UnifiedTocNavItem = ({
           {items?.map((tocItem) => (
             <UnifiedTocNavItem
               {...tocItem}
-              level={level}
+              level={isAccordion ? level + 1 : level}
               key={tocItemKey(tocItem)}
               slug={slug}
               isAccordion={isAccordion}
