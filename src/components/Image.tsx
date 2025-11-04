@@ -111,8 +111,7 @@ function getImageProps({
       hasBorder ? borderStyling : '',
       directiveClass,
       customAlign,
-      className,
-      'gatsby-image-mmeigs'
+      className
     );
     imageProps['style'] = {
       '--border-color': borderColor,
