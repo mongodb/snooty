@@ -38,7 +38,7 @@ exports[`Lightbox renders correctly 1`] = `
     >
       <img
         alt="test-alt"
-        class="emotion-1 hero-img align-test-align"
+        class="emotion-1 hero-img align-test-align gatsby-image-mmeigs"
         height="3000"
         src="/images/firstcluster.png"
         style="--border-color: #C1C7C6;"

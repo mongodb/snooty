@@ -21,9 +21,11 @@ exports[`renders border correctly when specified as an option 1`] = `
   >
     <img
       alt="/images/firstcluster.png"
-      class="emotion-1"
+      class="gatsby-image-mmeigs emotion-1"
+      height="500"
       src="/images/firstcluster.png"
-      style="--border-color: #C1C7C6;"
+      style="height: auto;"
+      width="700"
     />
   </div>
 </DocumentFragment>
@@ -48,7 +50,7 @@ exports[`renders correctly 1`] = `
   >
     <img
       alt="test-alt"
-      class="emotion-1 hero-img align-test-align"
+      class="emotion-1 hero-img align-test-align gatsby-image-mmeigs"
       height="3000"
       src="/images/firstcluster.png"
       style="--border-color: #C1C7C6;"
@@ -96,9 +98,11 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
     >
       <img
         alt="/images/firstcluster.png"
-        class="emotion-1"
+        class="emotion-1 gatsby-image-mmeigs"
+        height="500"
         src="/images/firstcluster.png"
-        style="--border-color: #C1C7C6;"
+        style="height: auto;"
+        width="700"
       />
       <div
         class="emotion-2"
