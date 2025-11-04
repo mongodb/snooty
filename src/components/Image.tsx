@@ -111,7 +111,8 @@ function getImageProps({
       hasBorder ? borderStyling : '',
       directiveClass,
       customAlign,
-      className
+      className,
+      'gatsby-image-mmeigs'
     );
     imageProps['style'] = {
       '--border-color': borderColor,
@@ -128,7 +129,8 @@ export type ImageProps = {
 
 const Image = ({ nodeData, className }: ImageProps) => {
   const scale = (parseInt(getNestedValue(['options', 'scale'], nodeData), 10) || 100) / 100;
-  const widthOption: string = getNestedValue(['options', 'width'], nodeData);
+  const widthOption: string =
+    getNestedValue(['options', 'width'], nodeData) ?? getNestedValue(['options', 'figwidth'], nodeData);
   let height: number = getNestedValue(['options', 'height'], nodeData);
   const loading: string | undefined = getNestedValue(['options', 'loading'], nodeData);
   const directiveClass: string | undefined = getNestedValue(['options', 'class'], nodeData);
@@ -182,9 +184,15 @@ const Image = ({ nodeData, className }: ImageProps) => {
     return <GatsbyImage {...imageProps} />;
   }
 
-  // imageProps contains altText prop
-  // eslint-disable-next-line jsx-a11y/alt-text
-  return <img {...imageProps} />;
+  return (
+    // imageProps contains altText prop
+    // eslint-disable-next-line jsx-a11y/alt-text
+    <img
+      {...imageProps}
+      // For Croud purposes, we need an integer for height - this is a fallback
+      {...(!imageProps.height ? { height: 500, style: { height: 'auto' } } : {})}
+    />
+  );
 };
 
 export default Image;
