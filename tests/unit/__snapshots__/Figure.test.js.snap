@@ -22,8 +22,10 @@ exports[`renders border correctly when specified as an option 1`] = `
     <img
       alt="/images/firstcluster.png"
       class="emotion-1"
+      height="500"
       src="/images/firstcluster.png"
-      style="--border-color: #C1C7C6;"
+      style="height: auto;"
+      width="700"
     />
   </div>
 </DocumentFragment>
@@ -97,8 +99,10 @@ exports[`renders lightbox correctly when specified as an option 1`] = `
       <img
         alt="/images/firstcluster.png"
         class="emotion-1"
+        height="500"
         src="/images/firstcluster.png"
-        style="--border-color: #C1C7C6;"
+        style="height: auto;"
+        width="700"
       />
       <div
         class="emotion-2"
