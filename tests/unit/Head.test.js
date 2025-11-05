@@ -33,7 +33,7 @@ describe('Head', () => {
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', canonical);
+      expect(canonicalTag).toHaveAttribute('href', canonical.toLowerCase());
     });
   });
 
@@ -54,7 +54,7 @@ describe('Head', () => {
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', canonical);
+      expect(canonicalTag).toHaveAttribute('href', canonical.toLowerCase());
     });
   });
 
@@ -77,7 +77,7 @@ describe('Head', () => {
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', expectedCanonical);
+      expect(canonicalTag).toHaveAttribute('href', expectedCanonical.toLowerCase());
     });
 
     it('includes the correct page slug', () => {
@@ -95,7 +95,7 @@ describe('Head', () => {
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', expectedCanonical);
+      expect(canonicalTag).toHaveAttribute('href', expectedCanonical.toLowerCase());
     });
 
     it('gracefully uses parserBranch for missing branches', () => {
@@ -112,7 +112,7 @@ describe('Head', () => {
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', expectedCanonical);
+      expect(canonicalTag).toHaveAttribute('href', expectedCanonical.toLowerCase());
     });
 
     it("uses the branch's url slug as the canonical for non-versioned docs", () => {
@@ -149,7 +149,7 @@ describe('Head', () => {
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', expectedCanonical);
+      expect(canonicalTag).toHaveAttribute('href', expectedCanonical.toLowerCase());
     });
   });
 
@@ -173,7 +173,7 @@ describe('Head', () => {
       expect(canonicalTag).toBeInTheDocument();
       expect(canonicalTag).toHaveAttribute('id', 'canonical');
       expect(canonicalTag).toHaveAttribute('rel', 'canonical');
-      expect(canonicalTag).toHaveAttribute('href', metaCanonical.options.canonical);
+      expect(canonicalTag).toHaveAttribute('href', metaCanonical.options.canonical.toLowerCase());
     };
 
     it('renders the canonical tag from directive rather than pulling from snooty.toml', () => {
