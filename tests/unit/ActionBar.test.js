@@ -6,7 +6,7 @@ import ActionBar from '../../src/components/ActionBar/ActionBar';
 import { PLACEHOLDER_TEXT } from '../../src/components/ActionBar/SearchInput';
 
 jest.mock('../../src/hooks/use-site-metadata', () => ({
-  useSiteMetadata: () => ({ reposDatabase: 'pool_test' }),
+  useSiteMetadata: () => ({ reposDatabase: 'pool_test', snootyEnv: 'dotcomprd' }),
 }));
 
 jest.spyOn(snootyMetadata, 'default').mockImplementation(() => ({
@@ -35,22 +35,32 @@ jest.mock('../../src/context/chatbot-context', () => ({
   ChatbotProvider: ({ children }) => children,
 }));
 
-const conversationSpy = jest.fn();
-// eslint-disable-next-line no-unused-vars
-const MongoDBChatbot = jest.mock('mongodb-chatbot-ui', () => {
-  const chatbot = jest.requireActual('mongodb-chatbot-ui');
-
+// Mock mongodb-chatbot-ui - must be at module level, not assigned
+jest.mock('mongodb-chatbot-ui', () => {
+  const React = require('react');
   return {
     __esModule: true,
-    ...chatbot,
+    default: ({ children }) => React.createElement('div', { 'data-testid': 'chatbot' }, children),
     useChatbotContext: () => ({
-      setInputText: () => {},
-      handleSubmit: () => {},
+      openChat: jest.fn(),
+      setInputText: jest.fn(),
+      handleSubmit: jest.fn(),
       conversation: {
-        createConversation: conversationSpy,
+        createConversation: jest.fn(),
         conversationId: null,
       },
     }),
+    ModalView: ({ children }) => React.createElement('div', { 'data-testid': 'modal-view' }, children),
+    mongoDbVerifyInformationMessage: 'Verify information',
+  };
+});
+
+// Mock the lazy-loaded ChatbotModal component
+jest.mock('../../src/components/ActionBar/ChatbotModal', () => {
+  const React = require('react');
+  return {
+    __esModule: true,
+    default: () => React.createElement('div', { 'data-testid': 'chatbot-modal' }),
   };
 });
 
