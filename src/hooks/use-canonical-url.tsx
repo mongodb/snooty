@@ -37,5 +37,5 @@ export const useCanonicalUrl = (
   }
 
   canonical = assertTrailingSlash(canonical);
-  return canonical;
+  return canonical.toLowerCase();
 };
