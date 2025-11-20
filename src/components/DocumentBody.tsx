@@ -35,6 +35,7 @@ import { TabProvider } from './Tabs/tab-context';
 // TrackJS is a tool that allows us to track errors and performance issues in our code.
 TrackJS.install({
   token: 'c3fccd861d9b4238bfe1af83ebdec219',
+  dependencies: false,
   // for more configuration options, see https://docs.trackjs.com
 });
 
