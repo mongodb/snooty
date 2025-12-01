@@ -18,7 +18,9 @@ const ChatbotModal = () => {
 
   return (
     <ModalView
-      initialMessageText={'Welcome to the MongoDB Assistant!\n\nAsk any question about MongoDB to receive expert guidance and documentation.'}
+      initialMessageText={
+        'Welcome to the MongoDB Assistant!\n\nAsk any question about MongoDB to receive expert guidance and documentation.'
+      }
       initialMessageSuggestedPrompts={defaultSuggestedPrompts}
     />
   );
