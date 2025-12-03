@@ -230,6 +230,7 @@ function isNodeValidForVersion(
   if (!node.url) return false; // If no URL, not valid
   if (!node.versions) return true; // If no versions constraint, always valid
   if (!node.contentSite) return false; // This is case shouldn't exist, but just in case
+  if (node.url.includes('http')) return false; // If external link, not valid for internal page navigation
 
   const contentSite = node.contentSite;
   const activeVersion = (availableVersions[contentSite] || []).find(
@@ -305,8 +306,11 @@ function getNextUnified(
   if (!flattenedData) return null;
   const { flat, index } = flattenedData;
 
+  console.log('bianca next', index);
+
   let node: FlatItem | null = null;
   for (let i = index + 1; i < flat.length; i++) {
+    console.log('bianca next i', i);
     const candidate = flat[i];
 
     if (candidate.group) {
@@ -315,6 +319,7 @@ function getNextUnified(
 
     if (isNodeValidForVersion(candidate, activeVersions, availableVersions)) {
       node = candidate;
+      console.log('bianca next node', i);
       break;
     }
   }
