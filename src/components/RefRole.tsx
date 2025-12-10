@@ -4,7 +4,6 @@ import { palette } from '@leafygreen-ui/palette';
 import { theme } from '../theme/docsTheme';
 import { normalizePath } from '../utils/normalize-path';
 import type { RefRoleNode } from '../types/ast';
-import { scrollActiveSidenavIntoView } from '../utils/scroll-active-sidenav-into-view';
 import ComponentFactory from './ComponentFactory';
 import Link from './Link';
 
@@ -63,16 +62,7 @@ const RefRole = ({ nodeData: { children, domain, fileid, name, url }, slug, card
   }
 
   return (
-    <Link
-      className={cx(stylingClass)}
-      to={normalizePath(link)}
-      showLinkArrow={showLinkArrow}
-      onClick={() => {
-        setTimeout(() => {
-          scrollActiveSidenavIntoView();
-        }, 100);
-      }}
-    >
+    <Link className={cx(stylingClass)} to={normalizePath(link)} showLinkArrow={showLinkArrow}>
       {children.map((node, i) => (
         <ComponentFactory key={i} nodeData={node} />
       ))}
