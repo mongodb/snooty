@@ -5,7 +5,7 @@
 export const scrollActiveSidenavIntoView = () => {
   const navDoublePannedContainer = document.querySelector('nav[aria-label*="Double Panned Side navigation Panel"]');
 
-  if ((navDoublePannedContainer as HTMLElement).offsetWidth > 0) {
+  if ((navDoublePannedContainer as HTMLElement)?.offsetWidth > 0) {
     // Double Panned Nav is visible
     const selectedDoublePannedLink = document.querySelector(
       '[aria-label*="Double Panned Side navigation Panel"] a[aria-current="page"]'
