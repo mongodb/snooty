@@ -22,7 +22,6 @@ import { getFeatureFlags } from '../utils/feature-flags';
 import { isBrowser } from '../utils/is-browser';
 import { loadHashIntoView } from '../utils/load-hash-into-view';
 import { ChatbotProvider } from '../context/chatbot-context';
-import { scrollActiveSidenavIntoView } from '../utils/scroll-active-sidenav-into-view';
 
 // TODO: Delete this as a part of the css cleanup
 // Currently used to preserve behavior and stop legacy css
@@ -124,7 +123,32 @@ const DefaultLayout = ({ children, data, pageContext: { slug, repoBranches, temp
     if (!isBrowser) return;
     loadHashIntoView(hash);
 
-    scrollActiveSidenavIntoView();
+    // Scrolls selected sidenav item into view
+    const navDoublePannedContainer = document.querySelector('nav[aria-label*="Double Panned Side navigation Panel"]');
+
+    if (navDoublePannedContainer?.offsetWidth > 0) {
+      // Double Panned Nav is visible
+      const selectedDoublePannedLink = document.querySelector(
+        '[aria-label*="Double Panned Side navigation Panel"] a[aria-current="page"]'
+      );
+      if (selectedDoublePannedLink) {
+        selectedDoublePannedLink.scrollIntoView({
+          block: 'center',
+          behavior: 'instant',
+        });
+      }
+    } else {
+      const selectedAccordionLink = document.querySelector(
+        '[aria-label*="Accordion Side navigation Panel"] a[aria-current="page"]'
+      );
+      // Accordion Nav is visible
+      if (selectedAccordionLink) {
+        selectedAccordionLink.scrollIntoView({
+          block: 'center',
+          behavior: 'instant',
+        });
+      }
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
