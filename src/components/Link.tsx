@@ -4,9 +4,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { Link as LGLink } from '@leafygreen-ui/typography';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { palette } from '@leafygreen-ui/palette';
-// @ts-ignore
-import ArrowRightIcon from '@leafygreen-ui/icon/dist/ArrowRight';
-import Icon from '@leafygreen-ui/icon';
+import { Icon } from '@leafygreen-ui/icon';
 import { isRelativeUrl } from '../utils/is-relative-url';
 import { joinClassNames } from '../utils/join-class-names';
 import { validateHTMAttributes } from '../utils/validate-element-attributes';
@@ -153,7 +151,7 @@ const Link = ({
   const decoration = showLinkArrow ? (
     <span>
       {' '}
-      <ArrowRightIcon role="presentation" size={12} />{' '}
+      <Icon glyph="ArrowRight" role="presentation" size={12} />{' '}
     </span>
   ) : (
     ''
