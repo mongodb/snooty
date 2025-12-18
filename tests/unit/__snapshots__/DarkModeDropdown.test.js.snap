@@ -857,7 +857,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
             <li
               class="lg-ui-lg-menu-menu_item-0000 emotion-8"
               data-testid="lg-menu-menu_item"
-              id="_7lgxwnnev"
+              id="_0001ogs5w"
               role="none"
             >
               <button
@@ -866,7 +866,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
                 aria-selected="true"
                 class="lg-ui-input_option-0000 emotion-9"
                 data-depth="0"
-                data-id="_7lgxwnnev"
+                data-id="_0001ogs5w"
                 data-index="0"
                 role="menuitem"
                 tabindex="-1"
@@ -943,7 +943,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
             <li
               class="lg-ui-lg-menu-menu_item-0000 emotion-8"
               data-testid="lg-menu-menu_item"
-              id="_mdfy4mz4t"
+              id="_0003cxkbt"
               role="none"
             >
               <button
@@ -951,7 +951,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
                 aria-disabled="false"
                 class="lg-ui-input_option-0000 emotion-17"
                 data-depth="0"
-                data-id="_mdfy4mz4t"
+                data-id="_0003cxkbt"
                 data-index="1"
                 role="menuitem"
                 tabindex="-1"
@@ -996,7 +996,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
             <li
               class="lg-ui-lg-menu-menu_item-0000 emotion-8"
               data-testid="lg-menu-menu_item"
-              id="_mx2tne8jo"
+              id="_00051echq"
               role="none"
             >
               <button
@@ -1004,7 +1004,7 @@ exports[`DarkMode Dropdown component renders dark mode dropdown 2`] = `
                 aria-disabled="false"
                 class="lg-ui-input_option-0000 emotion-17"
                 data-depth="0"
-                data-id="_mx2tne8jo"
+                data-id="_00051echq"
                 data-index="2"
                 role="menuitem"
                 tabindex="-1"
