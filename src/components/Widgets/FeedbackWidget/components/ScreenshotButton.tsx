@@ -4,7 +4,7 @@ import { css, cx } from '@leafygreen-ui/emotion';
 import { useDarkMode } from '@leafygreen-ui/leafygreen-provider';
 import { withPrefix } from 'gatsby';
 import Button from '@leafygreen-ui/button';
-import Icon from '@leafygreen-ui/icon';
+import { Icon } from '@leafygreen-ui/icon';
 import Portal from '@leafygreen-ui/portal';
 import { useFeedbackContext } from '../context';
 import { feedbackId } from '../FeedbackForm';
@@ -308,7 +308,9 @@ const ScreenshotButton = ({ size = 'default', ...props }) => {
                 <div className={fwExitButtonId}>
                   <Icon
                     glyph="XWithCircle"
-                    css={elemProps ? exitButtonStyle(elemProps['position'], elemProps['top'], elemProps['left']) : ''}
+                    className={cx(
+                      elemProps ? exitButtonStyle(elemProps['position'], elemProps['top'], elemProps['left']) : ''
+                    )}
                     size={24}
                     onClick={handleExitButtonClick}
                   />

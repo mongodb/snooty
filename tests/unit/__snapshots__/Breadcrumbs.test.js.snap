@@ -547,27 +547,37 @@ exports[`renders correctly with siteTitle 1`] = `
   justify-content: center;
 }
 
+.emotion-7 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
 .emotion-8 {
+  display: none;
+}
+
+.emotion-10 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.emotion-8:first-child {
+.emotion-10:first-child {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
 }
 
 @media not all and (max-width: 480px) {
-  .emotion-8:last-child {
+  .emotion-10:last-child {
     min-width: -webkit-max-content;
     min-width: -moz-max-content;
     min-width: max-content;
   }
 }
 
-.emotion-9 {
+.emotion-11 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -586,14 +596,14 @@ exports[`renders correctly with siteTitle 1`] = `
   font-weight: 400;
 }
 
-.emotion-9>span>code,
-.emotion-9>code {
+.emotion-11>span>code,
+.emotion-11>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-9:focus,
-.emotion-9:hover {
+.emotion-11:focus,
+.emotion-11:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -601,22 +611,22 @@ exports[`renders correctly with siteTitle 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-9:focus {
+.emotion-11:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-9:hover {
+.emotion-11:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-9:hover,
-.emotion-9:focus {
+.emotion-11:hover,
+.emotion-11:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.emotion-10 {
+.emotion-12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -628,13 +638,13 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 @media only screen and (max-width: 480px) {
-  .emotion-10 {
+  .emotion-12 {
     display: none;
   }
 }
 
 @media not all and (max-width: 480px) {
-  .emotion-10 {
+  .emotion-12 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -643,12 +653,12 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 @media not all and (max-width: 1024px) {
-  .emotion-10 {
+  .emotion-12 {
     display: none;
   }
 }
 
-.emotion-22 {
+.emotion-26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -660,13 +670,13 @@ exports[`renders correctly with siteTitle 1`] = `
 }
 
 @media only screen and (max-width: 1024px) {
-  .emotion-22 {
+  .emotion-26 {
     display: none;
   }
 }
 
 @media not all and (max-width: 1024px) {
-  .emotion-22 {
+  .emotion-26 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -674,7 +684,7 @@ exports[`renders correctly with siteTitle 1`] = `
   }
 }
 
-.emotion-23 {
+.emotion-27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -722,17 +732,15 @@ exports[`renders correctly with siteTitle 1`] = `
         >
           <svg
             aria-label="Ellipsis Icon"
-            class=""
-            fill="none"
+            class="emotion-7"
             height="16"
             role="img"
             viewBox="0 0 16 16"
             width="16"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               clip-rule="evenodd"
-              d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+              d="M2.75 6C3.7165 6 4.5 6.7835 4.5 7.75C4.5 8.7165 3.7165 9.5 2.75 9.5C1.7835 9.5 1 8.7165 1 7.75C1 6.7835 1.7835 6 2.75 6ZM7.75 6C8.7165 6 9.5 6.7835 9.5 7.75C9.5 8.7165 8.7165 9.5 7.75 9.5C6.7835 9.5 6 8.7165 6 7.75C6 6.7835 6.7835 6 7.75 6ZM14.5 7.75C14.5 6.7835 13.7165 6 12.75 6C11.7835 6 11 6.7835 11 7.75C11 8.7165 11.7835 9.5 12.75 9.5C13.7165 9.5 14.5 8.7165 14.5 7.75Z"
               fill="currentColor"
               fill-rule="evenodd"
             />
@@ -740,15 +748,18 @@ exports[`renders correctly with siteTitle 1`] = `
         </div>
       </button>
       <span
+        class="emotion-8"
+      />
+      <span
         class="emotion-4"
       >
          / 
       </span>
       <div
-        class="emotion-8"
+        class="emotion-10"
       >
         <a
-          class="emotion-9"
+          class="emotion-11"
           href="/sdk/cpp/application-services/"
         >
           Application Services - C++ SDK
@@ -756,7 +767,7 @@ exports[`renders correctly with siteTitle 1`] = `
       </div>
     </div>
     <div
-      class="emotion-10"
+      class="emotion-12"
     >
       <div
         class="emotion-2"
@@ -789,17 +800,15 @@ exports[`renders correctly with siteTitle 1`] = `
         >
           <svg
             aria-label="Ellipsis Icon"
-            class=""
-            fill="none"
+            class="emotion-7"
             height="16"
             role="img"
             viewBox="0 0 16 16"
             width="16"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               clip-rule="evenodd"
-              d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+              d="M2.75 6C3.7165 6 4.5 6.7835 4.5 7.75C4.5 8.7165 3.7165 9.5 2.75 9.5C1.7835 9.5 1 8.7165 1 7.75C1 6.7835 1.7835 6 2.75 6ZM7.75 6C8.7165 6 9.5 6.7835 9.5 7.75C9.5 8.7165 8.7165 9.5 7.75 9.5C6.7835 9.5 6 8.7165 6 7.75C6 6.7835 6.7835 6 7.75 6ZM14.5 7.75C14.5 6.7835 13.7165 6 12.75 6C11.7835 6 11 6.7835 11 7.75C11 8.7165 11.7835 9.5 12.75 9.5C13.7165 9.5 14.5 8.7165 14.5 7.75Z"
               fill="currentColor"
               fill-rule="evenodd"
             />
@@ -807,15 +816,18 @@ exports[`renders correctly with siteTitle 1`] = `
         </div>
       </button>
       <span
+        class="emotion-8"
+      />
+      <span
         class="emotion-4"
       >
          / 
       </span>
       <div
-        class="emotion-8"
+        class="emotion-10"
       >
         <a
-          class="emotion-9"
+          class="emotion-11"
           href="/sdk/cpp/"
         >
           Atlas Device SDK for C++
@@ -827,10 +839,10 @@ exports[`renders correctly with siteTitle 1`] = `
          / 
       </span>
       <div
-        class="emotion-8"
+        class="emotion-10"
       >
         <a
-          class="emotion-9"
+          class="emotion-11"
           href="/sdk/cpp/application-services/"
         >
           Application Services - C++ SDK
@@ -838,10 +850,10 @@ exports[`renders correctly with siteTitle 1`] = `
       </div>
     </div>
     <div
-      class="emotion-22"
+      class="emotion-26"
     >
       <div
-        class="emotion-23"
+        class="emotion-27"
       >
         <div
           class="emotion-2"
@@ -883,7 +895,7 @@ exports[`renders correctly with siteTitle 1`] = `
           class="emotion-2"
         >
           <a
-            class="emotion-9"
+            class="emotion-11"
             href="/"
           >
             Atlas Device SDKs
@@ -895,10 +907,10 @@ exports[`renders correctly with siteTitle 1`] = `
            / 
         </span>
         <div
-          class="emotion-8"
+          class="emotion-10"
         >
           <a
-            class="emotion-9"
+            class="emotion-11"
             href="/sdk/cpp/"
           >
             Atlas Device SDK for C++
@@ -910,10 +922,10 @@ exports[`renders correctly with siteTitle 1`] = `
            / 
         </span>
         <div
-          class="emotion-8"
+          class="emotion-10"
         >
           <a
-            class="emotion-9"
+            class="emotion-11"
             href="/sdk/cpp/application-services/"
           >
             Application Services - C++ SDK

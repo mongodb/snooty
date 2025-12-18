@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef, useState } from 'react';
+import { useCallback, useContext, useRef, useState } from 'react';
 import { cx, css } from '@leafygreen-ui/emotion';
 import Icon from '@leafygreen-ui/icon';
 import IconButton from '@leafygreen-ui/icon-button';
@@ -20,8 +20,18 @@ const iconStyling = css`
 `;
 
 const menuStyling = css`
-  width: fit-content;
-  margin-top: ${theme.size.small};
+  && {
+    min-width: 124px;
+    width: fit-content;
+    margin-top: ${theme.size.small};
+    font-weight: 700;
+  }
+`;
+
+const menuItemStyling = css`
+  && {
+    padding: 1px ${theme.size.medium};
+  }
 `;
 
 const DROPDOWN_ICON_SIZE = 20;
@@ -90,6 +100,7 @@ const DarkModeDropdown = () => {
         }
       >
         <MenuItem
+          className={cx(menuItemStyling)}
           active={darkModePref === 'light-theme'}
           onClick={() => select('light-theme')}
           glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Sun'} />}
@@ -97,6 +108,7 @@ const DarkModeDropdown = () => {
           Light
         </MenuItem>
         <MenuItem
+          className={cx(menuItemStyling)}
           active={darkModePref === 'dark-theme'}
           onClick={() => select('dark-theme')}
           glyph={<Icon size={DROPDOWN_ICON_SIZE} glyph={'Moon'} />}
@@ -104,18 +116,10 @@ const DarkModeDropdown = () => {
           Dark
         </MenuItem>
         <MenuItem
+          className={cx(menuItemStyling)}
           active={darkModePref === 'system'}
           onClick={() => select('system')}
-          glyph={
-            <IconDarkmode
-              className={css`
-                svg {
-                  margin-right: ${theme.size.default};
-                }
-              `}
-              styles={darkModeSvgStyle}
-            />
-          }
+          glyph={<IconDarkmode styles={darkModeSvgStyle} />}
         >
           System
         </MenuItem>

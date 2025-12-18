@@ -506,6 +506,9 @@ exports[`CodeIO renders correctly 1`] = `
 
 .emotion-18 {
   color: #FF0000;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   color: #889397;
   height: 16px;
   width: 16px;
@@ -769,16 +772,14 @@ exports[`CodeIO renders correctly 1`] = `
             alt=""
             aria-hidden="true"
             class="emotion-18"
-            fill="none"
             height="16"
             role="presentation"
             viewBox="0 0 16 16"
             width="16"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               clip-rule="evenodd"
-              d="M14.364 10.778a1 1 0 0 0 0-1.414l-4.95-4.95-.707-.707a1 1 0 0 0-1.414 0l-.707.707-4.95 4.95a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0L8 7.243l4.243 4.242a1 1 0 0 0 1.414 0l.707-.707Z"
+              d="M14.364 10.7782C14.7545 10.3877 14.7545 9.75449 14.364 9.36396L9.41421 4.41421L8.70711 3.70711C8.31658 3.31658 7.68342 3.31658 7.29289 3.70711L6.58579 4.41421L1.63604 9.36396C1.24552 9.75448 1.24551 10.3876 1.63604 10.7782L2.34315 11.4853C2.73367 11.8758 3.36684 11.8758 3.75736 11.4853L8 7.24264L12.2426 11.4853C12.6332 11.8758 13.2663 11.8758 13.6569 11.4853L14.364 10.7782Z"
               fill="currentColor"
               fill-rule="evenodd"
             />

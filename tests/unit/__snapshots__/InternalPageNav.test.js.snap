@@ -217,10 +217,16 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
 }
 
 .emotion-7 {
-  text-align: start;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .emotion-8 {
+  text-align: start;
+}
+
+.emotion-9 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -234,12 +240,12 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
   color: var(--font-color-primary);
 }
 
-.emotion-8 strong,
-.emotion-8 b {
+.emotion-9 strong,
+.emotion-9 b {
   font-weight: 700;
 }
 
-.emotion-9 {
+.emotion-10 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -252,20 +258,20 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
   color: #889397;
 }
 
-.emotion-9 strong,
-.emotion-9 b {
+.emotion-10 strong,
+.emotion-10 b {
   font-weight: 700;
 }
 
-.dark-theme .emotion-9 {
+.dark-theme .emotion-10 {
   color: #C1C7C6;
 }
 
-.emotion-10 {
+.emotion-11 {
   margin-left: auto;
 }
 
-.emotion-12 {
+.emotion-13 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -281,7 +287,7 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
   flex-direction: row-reverse;
 }
 
-.emotion-16 {
+.emotion-18 {
   text-align: end;
 }
 
@@ -313,31 +319,29 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
             >
               <svg
                 aria-label="Arrow Left Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
                 width="16"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
+                  d="M13 6.83212L6.05559 6.83212L7.59059 5.29711C7.98112 4.90659 7.98112 4.27342 7.59059 3.8829L7.35168 3.64398C6.96115 3.25346 6.32799 3.25345 5.93746 3.64398L2.55483 7.02661C2.5456 7.03518 2.5365 7.04395 2.52752 7.05292L2.2886 7.29184C1.89808 7.68237 1.89808 8.31553 2.2886 8.70605L5.93975 12.3572C6.33028 12.7477 6.96344 12.7477 7.35397 12.3572L7.59288 12.1183C7.98341 11.7278 7.98341 11.0946 7.59288 10.7041L6.0588 9.17L13 9.17C13.5523 9.17 14 8.72228 14 8.17V7.83212C14 7.27983 13.5523 6.83212 13 6.83212Z"
                   fill="currentColor"
                 />
               </svg>
             </div>
           </button>
           <div
-            class="emotion-7"
+            class="emotion-8"
           >
             <p
-              class="emotion-8"
+              class="emotion-9"
             >
               Back
             </p>
             <p
-              class="emotion-9"
+              class="emotion-10"
             >
               MongoDB C#/.NET Driver
             </p>
@@ -346,7 +350,7 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
       </a>
     </div>
     <div
-      class="emotion-10"
+      class="emotion-11"
     >
       <a
         class="emotion-2"
@@ -354,7 +358,7 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
         title="Next Section"
       >
         <div
-          class="emotion-12"
+          class="emotion-13"
         >
           <button
             aria-disabled="false"
@@ -370,31 +374,29 @@ exports[`multi-page tutorials renders a page with next and previous page steps 1
             >
               <svg
                 aria-label="Arrow Right Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
                 width="16"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
+                  d="M3 6.83212L9.94442 6.83212L8.40941 5.29711C8.01888 4.90659 8.01889 4.27342 8.40941 3.8829L8.64833 3.64398C9.03885 3.25346 9.67201 3.25345 10.0625 3.64398L13.4452 7.02661C13.4544 7.03518 13.4635 7.04395 13.4725 7.05292L13.7114 7.29184C14.1019 7.68237 14.1019 8.31553 13.7114 8.70605L10.0602 12.3572C9.66972 12.7477 9.03656 12.7477 8.64603 12.3572L8.40712 12.1183C8.01659 11.7278 8.01659 11.0946 8.40712 10.7041L9.9412 9.17L3 9.17C2.44771 9.17 2 8.72228 2 8.17L2 7.83212C2 7.27983 2.44772 6.83212 3 6.83212Z"
                   fill="currentColor"
                 />
               </svg>
             </div>
           </button>
           <div
-            class="emotion-16"
+            class="emotion-18"
           >
             <p
-              class="emotion-8"
+              class="emotion-9"
             >
               Next
             </p>
             <p
-              class="emotion-9"
+              class="emotion-10"
             >
               Java MongoDB Driver
             </p>
@@ -623,10 +625,16 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
 }
 
 .emotion-7 {
-  text-align: start;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .emotion-8 {
+  text-align: start;
+}
+
+.emotion-9 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -640,12 +648,12 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
   color: var(--font-color-primary);
 }
 
-.emotion-8 strong,
-.emotion-8 b {
+.emotion-9 strong,
+.emotion-9 b {
   font-weight: 700;
 }
 
-.emotion-9 {
+.emotion-10 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -658,20 +666,20 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
   color: #889397;
 }
 
-.emotion-9 strong,
-.emotion-9 b {
+.emotion-10 strong,
+.emotion-10 b {
   font-weight: 700;
 }
 
-.dark-theme .emotion-9 {
+.dark-theme .emotion-10 {
   color: #C1C7C6;
 }
 
-.emotion-10 {
+.emotion-11 {
   margin-left: auto;
 }
 
-.emotion-12 {
+.emotion-13 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -687,7 +695,7 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
   flex-direction: row-reverse;
 }
 
-.emotion-16 {
+.emotion-18 {
   text-align: end;
 }
 
@@ -719,31 +727,29 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
             >
               <svg
                 aria-label="Arrow Left Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
                 width="16"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
+                  d="M13 6.83212L6.05559 6.83212L7.59059 5.29711C7.98112 4.90659 7.98112 4.27342 7.59059 3.8829L7.35168 3.64398C6.96115 3.25346 6.32799 3.25345 5.93746 3.64398L2.55483 7.02661C2.5456 7.03518 2.5365 7.04395 2.52752 7.05292L2.2886 7.29184C1.89808 7.68237 1.89808 8.31553 2.2886 8.70605L5.93975 12.3572C6.33028 12.7477 6.96344 12.7477 7.35397 12.3572L7.59288 12.1183C7.98341 11.7278 7.98341 11.0946 7.59288 10.7041L6.0588 9.17L13 9.17C13.5523 9.17 14 8.72228 14 8.17V7.83212C14 7.27983 13.5523 6.83212 13 6.83212Z"
                   fill="currentColor"
                 />
               </svg>
             </div>
           </button>
           <div
-            class="emotion-7"
+            class="emotion-8"
           >
             <p
-              class="emotion-8"
+              class="emotion-9"
             >
               Back
             </p>
             <p
-              class="emotion-9"
+              class="emotion-10"
             >
               MongoDB C#/.NET Driver
             </p>
@@ -752,7 +758,7 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
       </a>
     </div>
     <div
-      class="emotion-10"
+      class="emotion-11"
     >
       <a
         class="emotion-2"
@@ -760,7 +766,7 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
         title="Next Step"
       >
         <div
-          class="emotion-12"
+          class="emotion-13"
         >
           <button
             aria-disabled="false"
@@ -776,31 +782,29 @@ exports[`multi-page tutorials renders a page with next in multi-page tutorial, a
             >
               <svg
                 aria-label="Arrow Right Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
                 width="16"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
+                  d="M3 6.83212L9.94442 6.83212L8.40941 5.29711C8.01888 4.90659 8.01889 4.27342 8.40941 3.8829L8.64833 3.64398C9.03885 3.25346 9.67201 3.25345 10.0625 3.64398L13.4452 7.02661C13.4544 7.03518 13.4635 7.04395 13.4725 7.05292L13.7114 7.29184C14.1019 7.68237 14.1019 8.31553 13.7114 8.70605L10.0602 12.3572C9.66972 12.7477 9.03656 12.7477 8.64603 12.3572L8.40712 12.1183C8.01659 11.7278 8.01659 11.0946 8.40712 10.7041L9.9412 9.17L3 9.17C2.44771 9.17 2 8.72228 2 8.17L2 7.83212C2 7.27983 2.44772 6.83212 3 6.83212Z"
                   fill="currentColor"
                 />
               </svg>
             </div>
           </button>
           <div
-            class="emotion-16"
+            class="emotion-18"
           >
             <p
-              class="emotion-8"
+              class="emotion-9"
             >
               Next
             </p>
             <p
-              class="emotion-9"
+              class="emotion-10"
             >
               Motor (Async Driver)
             </p>
@@ -1029,10 +1033,16 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
 }
 
 .emotion-7 {
-  text-align: start;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .emotion-8 {
+  text-align: start;
+}
+
+.emotion-9 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -1046,12 +1056,12 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
   color: var(--font-color-primary);
 }
 
-.emotion-8 strong,
-.emotion-8 b {
+.emotion-9 strong,
+.emotion-9 b {
   font-weight: 700;
 }
 
-.emotion-9 {
+.emotion-10 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -1064,20 +1074,20 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
   color: #889397;
 }
 
-.emotion-9 strong,
-.emotion-9 b {
+.emotion-10 strong,
+.emotion-10 b {
   font-weight: 700;
 }
 
-.dark-theme .emotion-9 {
+.dark-theme .emotion-10 {
   color: #C1C7C6;
 }
 
-.emotion-10 {
+.emotion-11 {
   margin-left: auto;
 }
 
-.emotion-12 {
+.emotion-13 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1093,7 +1103,7 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
   flex-direction: row-reverse;
 }
 
-.emotion-16 {
+.emotion-18 {
   text-align: end;
 }
 
@@ -1125,31 +1135,29 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
             >
               <svg
                 aria-label="Arrow Left Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
                 width="16"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
+                  d="M13 6.83212L6.05559 6.83212L7.59059 5.29711C7.98112 4.90659 7.98112 4.27342 7.59059 3.8829L7.35168 3.64398C6.96115 3.25346 6.32799 3.25345 5.93746 3.64398L2.55483 7.02661C2.5456 7.03518 2.5365 7.04395 2.52752 7.05292L2.2886 7.29184C1.89808 7.68237 1.89808 8.31553 2.2886 8.70605L5.93975 12.3572C6.33028 12.7477 6.96344 12.7477 7.35397 12.3572L7.59288 12.1183C7.98341 11.7278 7.98341 11.0946 7.59288 10.7041L6.0588 9.17L13 9.17C13.5523 9.17 14 8.72228 14 8.17V7.83212C14 7.27983 13.5523 6.83212 13 6.83212Z"
                   fill="currentColor"
                 />
               </svg>
             </div>
           </button>
           <div
-            class="emotion-7"
+            class="emotion-8"
           >
             <p
-              class="emotion-8"
+              class="emotion-9"
             >
               Back
             </p>
             <p
-              class="emotion-9"
+              class="emotion-10"
             >
               MongoDB Go Driver
             </p>
@@ -1158,7 +1166,7 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
       </a>
     </div>
     <div
-      class="emotion-10"
+      class="emotion-11"
     >
       <a
         class="emotion-2"
@@ -1166,7 +1174,7 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
         title="Next Section"
       >
         <div
-          class="emotion-12"
+          class="emotion-13"
         >
           <button
             aria-disabled="false"
@@ -1182,31 +1190,29 @@ exports[`multi-page tutorials renders a page with previous in multi-page tutoria
             >
               <svg
                 aria-label="Arrow Right Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
                 width="16"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
+                  d="M3 6.83212L9.94442 6.83212L8.40941 5.29711C8.01888 4.90659 8.01889 4.27342 8.40941 3.8829L8.64833 3.64398C9.03885 3.25346 9.67201 3.25345 10.0625 3.64398L13.4452 7.02661C13.4544 7.03518 13.4635 7.04395 13.4725 7.05292L13.7114 7.29184C14.1019 7.68237 14.1019 8.31553 13.7114 8.70605L10.0602 12.3572C9.66972 12.7477 9.03656 12.7477 8.64603 12.3572L8.40712 12.1183C8.01659 11.7278 8.01659 11.0946 8.40712 10.7041L9.9412 9.17L3 9.17C2.44771 9.17 2 8.72228 2 8.17L2 7.83212C2 7.27983 2.44772 6.83212 3 6.83212Z"
                   fill="currentColor"
                 />
               </svg>
             </div>
           </button>
           <div
-            class="emotion-16"
+            class="emotion-18"
           >
             <p
-              class="emotion-8"
+              class="emotion-9"
             >
               Next
             </p>
             <p
-              class="emotion-9"
+              class="emotion-10"
             >
               MongoDB C++ Driver
             </p>
@@ -1435,10 +1441,16 @@ exports[`renders a page with next and previous links correctly 1`] = `
 }
 
 .emotion-7 {
-  text-align: start;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .emotion-8 {
+  text-align: start;
+}
+
+.emotion-9 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -1452,12 +1464,12 @@ exports[`renders a page with next and previous links correctly 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-8 strong,
-.emotion-8 b {
+.emotion-9 strong,
+.emotion-9 b {
   font-weight: 700;
 }
 
-.emotion-9 {
+.emotion-10 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -1470,20 +1482,20 @@ exports[`renders a page with next and previous links correctly 1`] = `
   color: #889397;
 }
 
-.emotion-9 strong,
-.emotion-9 b {
+.emotion-10 strong,
+.emotion-10 b {
   font-weight: 700;
 }
 
-.dark-theme .emotion-9 {
+.dark-theme .emotion-10 {
   color: #C1C7C6;
 }
 
-.emotion-10 {
+.emotion-11 {
   margin-left: auto;
 }
 
-.emotion-12 {
+.emotion-13 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1499,7 +1511,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
   flex-direction: row-reverse;
 }
 
-.emotion-16 {
+.emotion-18 {
   text-align: end;
 }
 
@@ -1531,31 +1543,29 @@ exports[`renders a page with next and previous links correctly 1`] = `
             >
               <svg
                 aria-label="Arrow Left Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
                 width="16"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
+                  d="M13 6.83212L6.05559 6.83212L7.59059 5.29711C7.98112 4.90659 7.98112 4.27342 7.59059 3.8829L7.35168 3.64398C6.96115 3.25346 6.32799 3.25345 5.93746 3.64398L2.55483 7.02661C2.5456 7.03518 2.5365 7.04395 2.52752 7.05292L2.2886 7.29184C1.89808 7.68237 1.89808 8.31553 2.2886 8.70605L5.93975 12.3572C6.33028 12.7477 6.96344 12.7477 7.35397 12.3572L7.59288 12.1183C7.98341 11.7278 7.98341 11.0946 7.59288 10.7041L6.0588 9.17L13 9.17C13.5523 9.17 14 8.72228 14 8.17V7.83212C14 7.27983 13.5523 6.83212 13 6.83212Z"
                   fill="currentColor"
                 />
               </svg>
             </div>
           </button>
           <div
-            class="emotion-7"
+            class="emotion-8"
           >
             <p
-              class="emotion-8"
+              class="emotion-9"
             >
               Back
             </p>
             <p
-              class="emotion-9"
+              class="emotion-10"
             >
               MongoDB C#/.NET Driver
             </p>
@@ -1564,7 +1574,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
       </a>
     </div>
     <div
-      class="emotion-10"
+      class="emotion-11"
     >
       <a
         class="emotion-2"
@@ -1572,7 +1582,7 @@ exports[`renders a page with next and previous links correctly 1`] = `
         title="Next Section"
       >
         <div
-          class="emotion-12"
+          class="emotion-13"
         >
           <button
             aria-disabled="false"
@@ -1588,31 +1598,29 @@ exports[`renders a page with next and previous links correctly 1`] = `
             >
               <svg
                 aria-label="Arrow Right Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
                 width="16"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
+                  d="M3 6.83212L9.94442 6.83212L8.40941 5.29711C8.01888 4.90659 8.01889 4.27342 8.40941 3.8829L8.64833 3.64398C9.03885 3.25346 9.67201 3.25345 10.0625 3.64398L13.4452 7.02661C13.4544 7.03518 13.4635 7.04395 13.4725 7.05292L13.7114 7.29184C14.1019 7.68237 14.1019 8.31553 13.7114 8.70605L10.0602 12.3572C9.66972 12.7477 9.03656 12.7477 8.64603 12.3572L8.40712 12.1183C8.01659 11.7278 8.01659 11.0946 8.40712 10.7041L9.9412 9.17L3 9.17C2.44771 9.17 2 8.72228 2 8.17L2 7.83212C2 7.27983 2.44772 6.83212 3 6.83212Z"
                   fill="currentColor"
                 />
               </svg>
             </div>
           </button>
           <div
-            class="emotion-16"
+            class="emotion-18"
           >
             <p
-              class="emotion-8"
+              class="emotion-9"
             >
               Next
             </p>
             <p
-              class="emotion-9"
+              class="emotion-10"
             >
               Java MongoDB Driver
             </p>
@@ -1841,10 +1849,16 @@ exports[`renders a page with no next link correctly 1`] = `
 }
 
 .emotion-7 {
-  text-align: start;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .emotion-8 {
+  text-align: start;
+}
+
+.emotion-9 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -1858,12 +1872,12 @@ exports[`renders a page with no next link correctly 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-8 strong,
-.emotion-8 b {
+.emotion-9 strong,
+.emotion-9 b {
   font-weight: 700;
 }
 
-.emotion-9 {
+.emotion-10 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -1876,12 +1890,12 @@ exports[`renders a page with no next link correctly 1`] = `
   color: #889397;
 }
 
-.emotion-9 strong,
-.emotion-9 b {
+.emotion-10 strong,
+.emotion-10 b {
   font-weight: 700;
 }
 
-.dark-theme .emotion-9 {
+.dark-theme .emotion-10 {
   color: #C1C7C6;
 }
 
@@ -1913,31 +1927,29 @@ exports[`renders a page with no next link correctly 1`] = `
             >
               <svg
                 aria-label="Arrow Left Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
                 width="16"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M13 6.832H6.056L7.59 5.297a1 1 0 0 0 0-1.414l-.24-.239a1 1 0 0 0-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 0 0 0 1.414l3.652 3.651a1 1 0 0 0 1.414 0l.239-.239a1 1 0 0 0 0-1.414L6.059 9.17H13a1 1 0 0 0 1-1v-.338a1 1 0 0 0-1-1Z"
+                  d="M13 6.83212L6.05559 6.83212L7.59059 5.29711C7.98112 4.90659 7.98112 4.27342 7.59059 3.8829L7.35168 3.64398C6.96115 3.25346 6.32799 3.25345 5.93746 3.64398L2.55483 7.02661C2.5456 7.03518 2.5365 7.04395 2.52752 7.05292L2.2886 7.29184C1.89808 7.68237 1.89808 8.31553 2.2886 8.70605L5.93975 12.3572C6.33028 12.7477 6.96344 12.7477 7.35397 12.3572L7.59288 12.1183C7.98341 11.7278 7.98341 11.0946 7.59288 10.7041L6.0588 9.17L13 9.17C13.5523 9.17 14 8.72228 14 8.17V7.83212C14 7.27983 13.5523 6.83212 13 6.83212Z"
                   fill="currentColor"
                 />
               </svg>
             </div>
           </button>
           <div
-            class="emotion-7"
+            class="emotion-8"
           >
             <p
-              class="emotion-8"
+              class="emotion-9"
             >
               Back
             </p>
             <p
-              class="emotion-9"
+              class="emotion-10"
             >
               Motor (Async Driver)
             </p>
@@ -2166,10 +2178,16 @@ exports[`renders a page with no previous link correctly 1`] = `
 }
 
 .emotion-7 {
-  text-align: end;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .emotion-8 {
+  text-align: end;
+}
+
+.emotion-9 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -2183,12 +2201,12 @@ exports[`renders a page with no previous link correctly 1`] = `
   color: var(--font-color-primary);
 }
 
-.emotion-8 strong,
-.emotion-8 b {
+.emotion-9 strong,
+.emotion-9 b {
   font-weight: 700;
 }
 
-.emotion-9 {
+.emotion-10 {
   margin: unset;
   font-family: 'Euclid Circular A','Helvetica Neue',Helvetica,Arial,sans-serif;
   color: #001E2B;
@@ -2201,12 +2219,12 @@ exports[`renders a page with no previous link correctly 1`] = `
   color: #889397;
 }
 
-.emotion-9 strong,
-.emotion-9 b {
+.emotion-10 strong,
+.emotion-10 b {
   font-weight: 700;
 }
 
-.dark-theme .emotion-9 {
+.dark-theme .emotion-10 {
   color: #C1C7C6;
 }
 
@@ -2238,31 +2256,29 @@ exports[`renders a page with no previous link correctly 1`] = `
             >
               <svg
                 aria-label="Arrow Right Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="16"
                 role="img"
                 viewBox="0 0 16 16"
                 width="16"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M3 6.832h6.944L8.41 5.297a1 1 0 0 1 0-1.414l.24-.239a1 1 0 0 1 1.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 0 1 0 1.414l-3.652 3.651a1 1 0 0 1-1.414 0l-.239-.239a1 1 0 0 1 0-1.414L9.941 9.17H3a1 1 0 0 1-1-1v-.338a1 1 0 0 1 1-1Z"
+                  d="M3 6.83212L9.94442 6.83212L8.40941 5.29711C8.01888 4.90659 8.01889 4.27342 8.40941 3.8829L8.64833 3.64398C9.03885 3.25346 9.67201 3.25345 10.0625 3.64398L13.4452 7.02661C13.4544 7.03518 13.4635 7.04395 13.4725 7.05292L13.7114 7.29184C14.1019 7.68237 14.1019 8.31553 13.7114 8.70605L10.0602 12.3572C9.66972 12.7477 9.03656 12.7477 8.64603 12.3572L8.40712 12.1183C8.01659 11.7278 8.01659 11.0946 8.40712 10.7041L9.9412 9.17L3 9.17C2.44771 9.17 2 8.72228 2 8.17L2 7.83212C2 7.27983 2.44772 6.83212 3 6.83212Z"
                   fill="currentColor"
                 />
               </svg>
             </div>
           </button>
           <div
-            class="emotion-7"
+            class="emotion-8"
           >
             <p
-              class="emotion-8"
+              class="emotion-9"
             >
               Next
             </p>
             <p
-              class="emotion-9"
+              class="emotion-10"
             >
               MongoDB Go Driver
             </p>

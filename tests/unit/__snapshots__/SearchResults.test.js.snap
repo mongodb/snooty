@@ -44,6 +44,9 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
 }
 
 .emotion-6 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   color: #3D4F58;
 }
 
@@ -124,16 +127,14 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
         <svg
           aria-label="Chevron Down Icon"
           class="emotion-6"
-          fill="none"
           height="16"
           role="img"
           viewBox="0 0 16 16"
           width="16"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             clip-rule="evenodd"
-            d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+            d="M1.63604 5.36396C1.24551 5.75449 1.24551 6.38765 1.63604 6.77817L6.58579 11.7279L7.29289 12.435C7.68342 12.8256 8.31658 12.8256 8.70711 12.435L9.41421 11.7279L14.364 6.77817C14.7545 6.38765 14.7545 5.75449 14.364 5.36396L13.6569 4.65685C13.2663 4.26633 12.6332 4.26633 12.2426 4.65685L8 8.89949L3.75736 4.65685C3.36684 4.26633 2.73367 4.26633 2.34315 4.65685L1.63604 5.36396Z"
             fill="currentColor"
             fill-rule="evenodd"
           />
@@ -294,16 +295,14 @@ exports[`Search Results Page Facets component renders all facets 1`] = `
       <svg
         aria-label="Chevron Down Icon"
         class="emotion-6"
-        fill="none"
         height="16"
         role="img"
         viewBox="0 0 16 16"
         width="16"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           clip-rule="evenodd"
-          d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+          d="M1.63604 5.36396C1.24551 5.75449 1.24551 6.38765 1.63604 6.77817L6.58579 11.7279L7.29289 12.435C7.68342 12.8256 8.31658 12.8256 8.70711 12.435L9.41421 11.7279L14.364 6.77817C14.7545 6.38765 14.7545 5.75449 14.364 5.36396L13.6569 4.65685C13.2663 4.26633 12.6332 4.26633 12.2426 4.65685L8 8.89949L3.75736 4.65685C3.36684 4.26633 2.73367 4.26633 2.34315 4.65685L1.63604 5.36396Z"
           fill="currentColor"
           fill-rule="evenodd"
         />
@@ -358,6 +357,9 @@ exports[`Search Results Page Facets component renders facets with selected value
 }
 
 .emotion-6 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   color: #3D4F58;
 }
 
@@ -438,16 +440,14 @@ exports[`Search Results Page Facets component renders facets with selected value
         <svg
           aria-label="Chevron Down Icon"
           class="emotion-6"
-          fill="none"
           height="16"
           role="img"
           viewBox="0 0 16 16"
           width="16"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             clip-rule="evenodd"
-            d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+            d="M1.63604 5.36396C1.24551 5.75449 1.24551 6.38765 1.63604 6.77817L6.58579 11.7279L7.29289 12.435C7.68342 12.8256 8.31658 12.8256 8.70711 12.435L9.41421 11.7279L14.364 6.77817C14.7545 6.38765 14.7545 5.75449 14.364 5.36396L13.6569 4.65685C13.2663 4.26633 12.6332 4.26633 12.2426 4.65685L8 8.89949L3.75736 4.65685C3.36684 4.26633 2.73367 4.26633 2.34315 4.65685L1.63604 5.36396Z"
             fill="currentColor"
             fill-rule="evenodd"
           />
@@ -608,16 +608,14 @@ exports[`Search Results Page Facets component renders facets with selected value
       <svg
         aria-label="Chevron Down Icon"
         class="emotion-6"
-        fill="none"
         height="16"
         role="img"
         viewBox="0 0 16 16"
         width="16"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           clip-rule="evenodd"
-          d="M1.636 5.364a1 1 0 0 0 0 1.414l4.95 4.95.707.707a1 1 0 0 0 1.414 0l.707-.707 4.95-4.95a1 1 0 0 0 0-1.414l-.707-.707a1 1 0 0 0-1.414 0L8 8.899 3.757 4.657a1 1 0 0 0-1.414 0l-.707.707Z"
+          d="M1.63604 5.36396C1.24551 5.75449 1.24551 6.38765 1.63604 6.77817L6.58579 11.7279L7.29289 12.435C7.68342 12.8256 8.31658 12.8256 8.70711 12.435L9.41421 11.7279L14.364 6.77817C14.7545 6.38765 14.7545 5.75449 14.364 5.36396L13.6569 4.65685C13.2663 4.26633 12.6332 4.26633 12.2426 4.65685L8 8.89949L3.75736 4.65685C3.36684 4.26633 2.73367 4.26633 2.34315 4.65685L1.63604 5.36396Z"
           fill="currentColor"
           fill-rule="evenodd"
         />
@@ -722,6 +720,9 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-6 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   margin-left: 8px;
   margin-right: -2px;
 }
@@ -904,6 +905,9 @@ exports[`Search Results Page considers a given search filter query param and dis
 }
 
 .emotion-12 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   color: #889397;
   height: 16px;
   width: 16px;
@@ -1975,16 +1979,14 @@ exports[`Search Results Page considers a given search filter query param and dis
             <svg
               aria-label="X Icon"
               class="emotion-6"
-              fill="none"
               height="16"
               role="img"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                d="M12.2028 3.40381C11.8123 3.01329 11.1791 3.01329 10.7886 3.40381L8.3137 5.87869L5.83883 3.40381C5.44831 3.01329 4.81514 3.01329 4.42462 3.40381L3.71751 4.11092C3.32699 4.50144 3.32699 5.13461 3.71751 5.52513L6.19238 8.00001L3.71751 10.4749C3.32699 10.8654 3.32699 11.4986 3.71751 11.8891L4.42462 12.5962C4.81514 12.9867 5.44831 12.9867 5.83883 12.5962L8.3137 10.1213L10.7886 12.5962C11.1791 12.9867 11.8123 12.9867 12.2028 12.5962L12.9099 11.8891C13.3004 11.4986 13.3004 10.8654 12.9099 10.4749L10.435 8.00001L12.9099 5.52513C13.3004 5.13461 13.3004 4.50144 12.9099 4.11092L12.2028 3.40381Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -2016,16 +2018,14 @@ exports[`Search Results Page considers a given search filter query param and dis
               alt=""
               aria-hidden="true"
               class="emotion-12"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                d="M12.2028 3.40381C11.8123 3.01329 11.1791 3.01329 10.7886 3.40381L8.3137 5.87869L5.83883 3.40381C5.44831 3.01329 4.81514 3.01329 4.42462 3.40381L3.71751 4.11092C3.32699 4.50144 3.32699 5.13461 3.71751 5.52513L6.19238 8.00001L3.71751 10.4749C3.32699 10.8654 3.32699 11.4986 3.71751 11.8891L4.42462 12.5962C4.81514 12.9867 5.44831 12.9867 5.83883 12.5962L8.3137 10.1213L10.7886 12.5962C11.1791 12.9867 11.8123 12.9867 12.2028 12.5962L12.9099 11.8891C13.3004 11.4986 13.3004 10.8654 12.9099 10.4749L10.435 8.00001L12.9099 5.52513C13.3004 5.13461 13.3004 4.50144 12.9099 4.11092L12.2028 3.40381Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -2301,16 +2301,14 @@ exports[`Search Results Page considers a given search filter query param and dis
               alt=""
               aria-hidden="true"
               class="emotion-12"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                d="M12.2028 3.40381C11.8123 3.01329 11.1791 3.01329 10.7886 3.40381L8.3137 5.87869L5.83883 3.40381C5.44831 3.01329 4.81514 3.01329 4.42462 3.40381L3.71751 4.11092C3.32699 4.50144 3.32699 5.13461 3.71751 5.52513L6.19238 8.00001L3.71751 10.4749C3.32699 10.8654 3.32699 11.4986 3.71751 11.8891L4.42462 12.5962C4.81514 12.9867 5.44831 12.9867 5.83883 12.5962L8.3137 10.1213L10.7886 12.5962C11.1791 12.9867 11.8123 12.9867 12.2028 12.5962L12.9099 11.8891C13.3004 11.4986 13.3004 10.8654 12.9099 10.4749L10.435 8.00001L12.9099 5.52513C13.3004 5.13461 13.3004 4.50144 12.9099 4.11092L12.2028 3.40381Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -2551,6 +2549,9 @@ exports[`Search Results Page does not return results for a given search term wit
 }
 
 .emotion-9 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   color: #889397;
   height: 16px;
   width: 16px;
@@ -3266,16 +3267,14 @@ exports[`Search Results Page does not return results for a given search term wit
               alt=""
               aria-hidden="true"
               class="emotion-9"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="m6 6.148-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 0 1-.17.376l-3 2.625a.5.5 0 0 1-.83-.376v-8.25Z"
+                d="M6 6.14834L2.19955 2.20776C1.79746 1.79085 2.04373 1 2.57564 1H13.4244C13.9563 1 14.2025 1.79085 13.8005 2.20776L10 6.14834V11.7731C10 11.9173 9.93776 12.0545 9.82925 12.1494L6.82925 14.7744C6.50596 15.0573 6 14.8277 6 14.3981V6.14834Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -3709,16 +3708,14 @@ exports[`Search Results Page does not return results for a given search term wit
               alt=""
               aria-hidden="true"
               class="emotion-9"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                d="M12.2028 3.40381C11.8123 3.01329 11.1791 3.01329 10.7886 3.40381L8.3137 5.87869L5.83883 3.40381C5.44831 3.01329 4.81514 3.01329 4.42462 3.40381L3.71751 4.11092C3.32699 4.50144 3.32699 5.13461 3.71751 5.52513L6.19238 8.00001L3.71751 10.4749C3.32699 10.8654 3.32699 11.4986 3.71751 11.8891L4.42462 12.5962C4.81514 12.9867 5.44831 12.9867 5.83883 12.5962L8.3137 10.1213L10.7886 12.5962C11.1791 12.9867 11.8123 12.9867 12.2028 12.5962L12.9099 11.8891C13.3004 11.4986 13.3004 10.8654 12.9099 10.4749L10.435 8.00001L12.9099 5.52513C13.3004 5.13461 13.3004 4.50144 12.9099 4.11092L12.2028 3.40381Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -3935,6 +3932,9 @@ exports[`Search Results Page renders correctly without browser 1`] = `
 }
 
 .emotion-8 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   color: #889397;
   height: 16px;
   width: 16px;
@@ -3975,16 +3975,14 @@ exports[`Search Results Page renders correctly without browser 1`] = `
               alt=""
               aria-hidden="true"
               class="emotion-8"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="m6 6.148-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 0 1-.17.376l-3 2.625a.5.5 0 0 1-.83-.376v-8.25Z"
+                d="M6 6.14834L2.19955 2.20776C1.79746 1.79085 2.04373 1 2.57564 1H13.4244C13.9563 1 14.2025 1.79085 13.8005 2.20776L10 6.14834V11.7731C10 11.9173 9.93776 12.0545 9.82925 12.1494L6.82925 14.7744C6.50596 15.0573 6 14.8277 6 14.3981V6.14834Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -4225,6 +4223,9 @@ exports[`Search Results Page renders loading images before returning no results 
 }
 
 .emotion-9 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   color: #889397;
   height: 16px;
   width: 16px;
@@ -5049,16 +5050,14 @@ exports[`Search Results Page renders loading images before returning no results 
               alt=""
               aria-hidden="true"
               class="emotion-9"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="m6 6.148-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 0 1-.17.376l-3 2.625a.5.5 0 0 1-.83-.376v-8.25Z"
+                d="M6 6.14834L2.19955 2.20776C1.79746 1.79085 2.04373 1 2.57564 1H13.4244C13.9563 1 14.2025 1.79085 13.8005 2.20776L10 6.14834V11.7731C10 11.9173 9.93776 12.0545 9.82925 12.1494L6.82925 14.7744C6.50596 15.0573 6 14.8277 6 14.3981V6.14834Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -5474,16 +5473,14 @@ exports[`Search Results Page renders loading images before returning no results 
               alt=""
               aria-hidden="true"
               class="emotion-9"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                d="M12.2028 3.40381C11.8123 3.01329 11.1791 3.01329 10.7886 3.40381L8.3137 5.87869L5.83883 3.40381C5.44831 3.01329 4.81514 3.01329 4.42462 3.40381L3.71751 4.11092C3.32699 4.50144 3.32699 5.13461 3.71751 5.52513L6.19238 8.00001L3.71751 10.4749C3.32699 10.8654 3.32699 11.4986 3.71751 11.8891L4.42462 12.5962C4.81514 12.9867 5.44831 12.9867 5.83883 12.5962L8.3137 10.1213L10.7886 12.5962C11.1791 12.9867 11.8123 12.9867 12.2028 12.5962L12.9099 11.8891C13.3004 11.4986 13.3004 10.8654 12.9099 10.4749L10.435 8.00001L12.9099 5.52513C13.3004 5.13461 13.3004 4.50144 12.9099 4.11092L12.2028 3.40381Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -5724,6 +5721,9 @@ exports[`Search Results Page renders loading images before returning nonempty re
 }
 
 .emotion-9 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   color: #889397;
   height: 16px;
   width: 16px;
@@ -6548,16 +6548,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
               alt=""
               aria-hidden="true"
               class="emotion-9"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="m6 6.148-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 0 1-.17.376l-3 2.625a.5.5 0 0 1-.83-.376v-8.25Z"
+                d="M6 6.14834L2.19955 2.20776C1.79746 1.79085 2.04373 1 2.57564 1H13.4244C13.9563 1 14.2025 1.79085 13.8005 2.20776L10 6.14834V11.7731C10 11.9173 9.93776 12.0545 9.82925 12.1494L6.82925 14.7744C6.50596 15.0573 6 14.8277 6 14.3981V6.14834Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -6973,16 +6971,14 @@ exports[`Search Results Page renders loading images before returning nonempty re
               alt=""
               aria-hidden="true"
               class="emotion-9"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                d="M12.2028 3.40381C11.8123 3.01329 11.1791 3.01329 10.7886 3.40381L8.3137 5.87869L5.83883 3.40381C5.44831 3.01329 4.81514 3.01329 4.42462 3.40381L3.71751 4.11092C3.32699 4.50144 3.32699 5.13461 3.71751 5.52513L6.19238 8.00001L3.71751 10.4749C3.32699 10.8654 3.32699 11.4986 3.71751 11.8891L4.42462 12.5962C4.81514 12.9867 5.44831 12.9867 5.83883 12.5962L8.3137 10.1213L10.7886 12.5962C11.1791 12.9867 11.8123 12.9867 12.2028 12.5962L12.9099 11.8891C13.3004 11.4986 13.3004 10.8654 12.9099 10.4749L10.435 8.00001L12.9099 5.52513C13.3004 5.13461 13.3004 4.50144 12.9099 4.11092L12.2028 3.40381Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -7223,6 +7219,9 @@ exports[`Search Results Page renders results from a given search term query para
 }
 
 .emotion-9 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   color: #889397;
   height: 16px;
   width: 16px;
@@ -8307,16 +8306,14 @@ exports[`Search Results Page renders results from a given search term query para
               alt=""
               aria-hidden="true"
               class="emotion-9"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="m6 6.148-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 0 1-.17.376l-3 2.625a.5.5 0 0 1-.83-.376v-8.25Z"
+                d="M6 6.14834L2.19955 2.20776C1.79746 1.79085 2.04373 1 2.57564 1H13.4244C13.9563 1 14.2025 1.79085 13.8005 2.20776L10 6.14834V11.7731C10 11.9173 9.93776 12.0545 9.82925 12.1494L6.82925 14.7744C6.50596 15.0573 6 14.8277 6 14.3981V6.14834Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -8592,16 +8589,14 @@ exports[`Search Results Page renders results from a given search term query para
               alt=""
               aria-hidden="true"
               class="emotion-9"
-              fill="none"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
+                d="M12.2028 3.40381C11.8123 3.01329 11.1791 3.01329 10.7886 3.40381L8.3137 5.87869L5.83883 3.40381C5.44831 3.01329 4.81514 3.01329 4.42462 3.40381L3.71751 4.11092C3.32699 4.50144 3.32699 5.13461 3.71751 5.52513L6.19238 8.00001L3.71751 10.4749C3.32699 10.8654 3.32699 11.4986 3.71751 11.8891L4.42462 12.5962C4.81514 12.9867 5.44831 12.9867 5.83883 12.5962L8.3137 10.1213L10.7886 12.5962C11.1791 12.9867 11.8123 12.9867 12.2028 12.5962L12.9099 11.8891C13.3004 11.4986 13.3004 10.8654 12.9099 10.4749L10.435 8.00001L12.9099 5.52513C13.3004 5.13461 13.3004 4.50144 12.9099 4.11092L12.2028 3.40381Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
