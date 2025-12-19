@@ -211,6 +211,16 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   justify-content: center;
 }
 
+.emotion-6 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.emotion-7 {
+  display: none;
+}
+
 <div
     class="emotion-0"
   >
@@ -245,23 +255,24 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
       >
         <svg
           aria-label="Ellipsis Icon"
-          class=""
-          fill="none"
+          class="emotion-6"
           height="16"
           role="img"
           viewBox="0 0 16 16"
           width="16"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             clip-rule="evenodd"
-            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+            d="M2.75 6C3.7165 6 4.5 6.7835 4.5 7.75C4.5 8.7165 3.7165 9.5 2.75 9.5C1.7835 9.5 1 8.7165 1 7.75C1 6.7835 1.7835 6 2.75 6ZM7.75 6C8.7165 6 9.5 6.7835 9.5 7.75C9.5 8.7165 8.7165 9.5 7.75 9.5C6.7835 9.5 6 8.7165 6 7.75C6 6.7835 6.7835 6 7.75 6ZM14.5 7.75C14.5 6.7835 13.7165 6 12.75 6C11.7835 6 11 6.7835 11 7.75C11 8.7165 11.7835 9.5 12.75 9.5C13.7165 9.5 14.5 8.7165 14.5 7.75Z"
             fill="currentColor"
             fill-rule="evenodd"
           />
         </svg>
       </div>
     </button>
+    <span
+      class="emotion-7"
+    />
     <span
       class="emotion-3"
     >
@@ -496,6 +507,16 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
   justify-content: center;
 }
 
+.emotion-6 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.emotion-7 {
+  display: none;
+}
+
 <div
     class="emotion-0"
   >
@@ -530,23 +551,24 @@ exports[`BreadcrumbContainer renders a driver site correctly with intermediate b
       >
         <svg
           aria-label="Ellipsis Icon"
-          class=""
-          fill="none"
+          class="emotion-6"
           height="16"
           role="img"
           viewBox="0 0 16 16"
           width="16"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             clip-rule="evenodd"
-            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+            d="M2.75 6C3.7165 6 4.5 6.7835 4.5 7.75C4.5 8.7165 3.7165 9.5 2.75 9.5C1.7835 9.5 1 8.7165 1 7.75C1 6.7835 1.7835 6 2.75 6ZM7.75 6C8.7165 6 9.5 6.7835 9.5 7.75C9.5 8.7165 8.7165 9.5 7.75 9.5C6.7835 9.5 6 8.7165 6 7.75C6 6.7835 6.7835 6 7.75 6ZM14.5 7.75C14.5 6.7835 13.7165 6 12.75 6C11.7835 6 11 6.7835 11 7.75C11 8.7165 11.7835 9.5 12.75 9.5C13.7165 9.5 14.5 8.7165 14.5 7.75Z"
             fill="currentColor"
             fill-rule="evenodd"
           />
         </svg>
       </div>
     </button>
+    <span
+      class="emotion-7"
+    />
     <span
       class="emotion-3"
     >
@@ -1023,7 +1045,17 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   justify-content: center;
 }
 
-.emotion-8 {
+.emotion-6 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.emotion-7 {
+  display: none;
+}
+
+.emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1042,14 +1074,14 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   font-weight: 400;
 }
 
-.emotion-8>span>code,
-.emotion-8>code {
+.emotion-10>span>code,
+.emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-8:focus,
-.emotion-8:hover {
+.emotion-10:focus,
+.emotion-10:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -1057,17 +1089,17 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
   text-decoration-thickness: 2px;
 }
 
-.emotion-8:focus {
+.emotion-10:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-8:hover {
+.emotion-10:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-8:hover,
-.emotion-8:focus {
+.emotion-10:hover,
+.emotion-10:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
@@ -1106,23 +1138,24 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
       >
         <svg
           aria-label="Ellipsis Icon"
-          class=""
-          fill="none"
+          class="emotion-6"
           height="16"
           role="img"
           viewBox="0 0 16 16"
           width="16"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             clip-rule="evenodd"
-            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+            d="M2.75 6C3.7165 6 4.5 6.7835 4.5 7.75C4.5 8.7165 3.7165 9.5 2.75 9.5C1.7835 9.5 1 8.7165 1 7.75C1 6.7835 1.7835 6 2.75 6ZM7.75 6C8.7165 6 9.5 6.7835 9.5 7.75C9.5 8.7165 8.7165 9.5 7.75 9.5C6.7835 9.5 6 8.7165 6 7.75C6 6.7835 6.7835 6 7.75 6ZM14.5 7.75C14.5 6.7835 13.7165 6 12.75 6C11.7835 6 11 6.7835 11 7.75C11 8.7165 11.7835 9.5 12.75 9.5C13.7165 9.5 14.5 8.7165 14.5 7.75Z"
             fill="currentColor"
             fill-rule="evenodd"
           />
         </svg>
       </div>
     </button>
+    <span
+      class="emotion-7"
+    />
     <span
       class="emotion-3"
     >
@@ -1132,7 +1165,7 @@ exports[`BreadcrumbContainer renders correctly as a docs homepage 1`] = `
       class="emotion-1"
     >
       <a
-        class="emotion-8"
+        class="emotion-10"
         href="/sdk/cpp/application-services/"
       >
         Application Services - C++ SDK
@@ -2492,7 +2525,17 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   justify-content: center;
 }
 
-.emotion-8 {
+.emotion-6 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.emotion-7 {
+  display: none;
+}
+
+.emotion-10 {
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -2511,14 +2554,14 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   font-weight: 400;
 }
 
-.emotion-8>span>code,
-.emotion-8>code {
+.emotion-10>span>code,
+.emotion-10>code {
   color: var(--link-color-primary);
   font-weight: var(--link-font-weight);
 }
 
-.emotion-8:focus,
-.emotion-8:hover {
+.emotion-10:focus,
+.emotion-10:hover {
   text-decoration-line: underline;
   -webkit-transition: text-decoration 150ms ease-in-out;
   transition: text-decoration 150ms ease-in-out;
@@ -2526,17 +2569,17 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
   text-decoration-thickness: 2px;
 }
 
-.emotion-8:focus {
+.emotion-10:focus {
   text-decoration-color: #016BF8;
   outline: none;
 }
 
-.emotion-8:hover {
+.emotion-10:hover {
   text-decoration-color: #E8EDEB;
 }
 
-.emotion-8:hover,
-.emotion-8:focus {
+.emotion-10:hover,
+.emotion-10:focus {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
@@ -2575,23 +2618,24 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
       >
         <svg
           aria-label="Ellipsis Icon"
-          class=""
-          fill="none"
+          class="emotion-6"
           height="16"
           role="img"
           viewBox="0 0 16 16"
           width="16"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             clip-rule="evenodd"
-            d="M2.75 6a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm5 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm6.75 1.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0Z"
+            d="M2.75 6C3.7165 6 4.5 6.7835 4.5 7.75C4.5 8.7165 3.7165 9.5 2.75 9.5C1.7835 9.5 1 8.7165 1 7.75C1 6.7835 1.7835 6 2.75 6ZM7.75 6C8.7165 6 9.5 6.7835 9.5 7.75C9.5 8.7165 8.7165 9.5 7.75 9.5C6.7835 9.5 6 8.7165 6 7.75C6 6.7835 6.7835 6 7.75 6ZM14.5 7.75C14.5 6.7835 13.7165 6 12.75 6C11.7835 6 11 6.7835 11 7.75C11 8.7165 11.7835 9.5 12.75 9.5C13.7165 9.5 14.5 8.7165 14.5 7.75Z"
             fill="currentColor"
             fill-rule="evenodd"
           />
         </svg>
       </div>
     </button>
+    <span
+      class="emotion-7"
+    />
     <span
       class="emotion-3"
     >
@@ -2601,7 +2645,7 @@ exports[`BreadcrumbContainer renders correctly with no intermediate breadcrumbs,
       class="emotion-1"
     >
       <a
-        class="emotion-8"
+        class="emotion-10"
         href="/sdk/cpp/application-services/"
       >
         Application Services - C++ SDK

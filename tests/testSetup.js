@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom';
-import EventSource from 'eventsourcemock';
 import { preloadAll } from 'react-loadable';
 import { useLocation } from '@gatsbyjs/reach-router';
+import { mockLeafyGreenIds, resetLeafyGreenIdCounter, restoreLeafyGreenIds } from './utils/mock-leafygreen-ids';
+import { mockWindows } from './utils/mock-windows';
 
 jest.mock('@gatsbyjs/reach-router', () => ({
   useLocation: jest.fn().mockImplementation(() => ({
@@ -39,13 +40,28 @@ const rejectionHandler = (err) => {
   throw err;
 };
 
+// Reset ID counter before each test for consistency
+beforeEach(() => {
+  resetLeafyGreenIdCounter();
+
+  // Reset URL via History API so jsdom's real Location object is preserved
+  window.history.replaceState({}, '', '/');
+  // Clear hash to a consistent default
+  if (window.location.hash) {
+    window.location.hash = '';
+  }
+});
+
 beforeAll(async () => {
+  mockLeafyGreenIds();
+  mockWindows();
   await preloadAll();
   process.on('unhandledRejection', rejectionHandler);
 });
 
 afterAll(() => {
   process.removeListener('unhandledRejection', rejectionHandler);
+  restoreLeafyGreenIds();
 });
 
 const crypto = require('crypto');
@@ -56,8 +72,5 @@ Object.defineProperty(global.self, 'crypto', {
   },
 });
 
-window.matchMedia = () => ({ addListener: () => {}, removeListener: () => {} });
-window.EventSource = () => ({ EventSource: EventSource });
-window.scrollTo = () => {};
 global.fetch = jest.fn();
 window.crypto.randomUUID = crypto.randomUUID;

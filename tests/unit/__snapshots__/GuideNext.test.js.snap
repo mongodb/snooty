@@ -359,6 +359,9 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
 
 .emotion-14 {
   color: #00A35C;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .emotion-15 {
@@ -486,16 +489,14 @@ exports[`GuideNext renders the default copy on the final guide 1`] = `
             <svg
               aria-label="Checkmark Icon"
               class="emotion-14"
-              fill="none"
               height="16"
               role="img"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="m6.306 9.05 5.455-5.455a1 1 0 0 1 1.414 0l.707.707a1 1 0 0 1 0 1.414l-7.067 7.068a1 1 0 0 1-1.5-.098l-3.049-3.97a1 1 0 0 1 .184-1.402l.595-.457a1.25 1.25 0 0 1 1.753.23L6.306 9.05Z"
+                d="M6.30583 9.05037L11.7611 3.59509C12.1516 3.20457 12.7848 3.20457 13.1753 3.59509L13.8824 4.3022C14.273 4.69273 14.273 5.32589 13.8824 5.71642L6.81525 12.7836C6.38819 13.2106 5.68292 13.1646 5.31505 12.6856L2.26638 8.71605C1.92998 8.27804 2.01235 7.65025 2.45036 7.31385L3.04518 6.85702C3.59269 6.43652 4.37742 6.53949 4.79792 7.087L6.30583 9.05037Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />
@@ -1335,6 +1336,9 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
 
 .emotion-14 {
   color: #00A35C;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .emotion-15 {
@@ -1516,16 +1520,14 @@ exports[`GuideNext renders the next guide in the same chapter 1`] = `
             <svg
               aria-label="Checkmark Icon"
               class="emotion-14"
-              fill="none"
               height="16"
               role="img"
               viewBox="0 0 16 16"
               width="16"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 clip-rule="evenodd"
-                d="m6.306 9.05 5.455-5.455a1 1 0 0 1 1.414 0l.707.707a1 1 0 0 1 0 1.414l-7.067 7.068a1 1 0 0 1-1.5-.098l-3.049-3.97a1 1 0 0 1 .184-1.402l.595-.457a1.25 1.25 0 0 1 1.753.23L6.306 9.05Z"
+                d="M6.30583 9.05037L11.7611 3.59509C12.1516 3.20457 12.7848 3.20457 13.1753 3.59509L13.8824 4.3022C14.273 4.69273 14.273 5.32589 13.8824 5.71642L6.81525 12.7836C6.38819 13.2106 5.68292 13.1646 5.31505 12.6856L2.26638 8.71605C1.92998 8.27804 2.01235 7.65025 2.45036 7.31385L3.04518 6.85702C3.59269 6.43652 4.37742 6.53949 4.79792 7.087L6.30583 9.05037Z"
                 fill="currentColor"
                 fill-rule="evenodd"
               />

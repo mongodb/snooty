@@ -332,7 +332,7 @@ function getNextUnified(
 /**
  * Flattens the TOC group containing the current URL and finds the index of the current page.
  *
- * Enssures that the returned URL is displayed in the current version.
+ * Ensures that the returned URL is displayed in the current version.
  *
  * @param {TocItem[]} toc - The full table of contents tree
  * @param {string} currentUrl - The URL of the current page

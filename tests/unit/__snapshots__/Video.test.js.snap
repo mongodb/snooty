@@ -161,6 +161,12 @@ exports[`Wistia video renders correctly 1`] = `
   gap: 6px;
 }
 
+.emotion-7 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
 <div
     class="emotion-0"
   >
@@ -190,17 +196,17 @@ exports[`Wistia video renders correctly 1`] = `
             >
               <svg
                 aria-label="Play Icon"
-                class=""
-                fill="none"
+                class="emotion-7"
                 height="24"
                 role="img"
                 viewBox="0 0 16 16"
                 width="24"
-                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M13.779 6.704a1.5 1.5 0 0 1 0 2.592l-7.523 4.388A1.5 1.5 0 0 1 4 12.388V3.612a1.5 1.5 0 0 1 2.256-1.296l7.523 4.388Z"
+                  clip-rule="evenodd"
+                  d="M13.7789 6.70433C14.7711 7.28315 14.7711 8.71685 13.7789 9.29567L6.25581 13.6841C5.25582 14.2674 4 13.5461 4 12.3884L4 3.61155C4 2.45387 5.25582 1.73256 6.25581 2.31589L13.7789 6.70433Z"
                   fill="currentColor"
+                  fill-rule="evenodd"
                 />
               </svg>
             </div>
