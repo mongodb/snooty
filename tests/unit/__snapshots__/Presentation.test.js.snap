@@ -557,7 +557,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
         <div
           class="emotion-21"
         >
-          © 2025 MongoDB, Inc.
+          © 2026 MongoDB, Inc.
         </div>
       </div>
       <div
@@ -879,7 +879,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
       <div
         class="emotion-78"
       >
-        © 2025 MongoDB, Inc.
+        © 2026 MongoDB, Inc.
       </div>
     </div>
   </footer>
