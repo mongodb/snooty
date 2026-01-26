@@ -51,7 +51,6 @@ jest.mock('mongodb-chatbot-ui', () => {
       },
     }),
     ModalView: ({ children }) => React.createElement('div', { 'data-testid': 'modal-view' }, children),
-    mongoDbVerifyInformationMessage: 'Verify information',
   };
 });
 
