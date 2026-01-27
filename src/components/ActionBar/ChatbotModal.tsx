@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useChatbotContext, ModalView, mongoDbVerifyInformationMessage } from 'mongodb-chatbot-ui';
+import { useChatbotContext, ModalView } from 'mongodb-chatbot-ui';
 import { defaultSuggestedPrompts } from '../ChatbotUi';
 import { useChatbotModal } from '../../context/chatbot-context';
 
@@ -17,11 +17,7 @@ const ChatbotModal = () => {
   }, [chatbotClicked]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <ModalView
-      inputBottomText={mongoDbVerifyInformationMessage}
-      initialMessageText={'Welcome to MongoDB AI'}
-      initialMessageSuggestedPrompts={defaultSuggestedPrompts}
-    />
+    <ModalView initialMessageText={'Welcome to MongoDB AI'} initialMessageSuggestedPrompts={defaultSuggestedPrompts} />
   );
 };
 

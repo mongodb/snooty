@@ -146,7 +146,7 @@
     "minimist": "^1.2.6",
     "mobx": "^6.1.5",
     "mongodb": "^6.16.0",
-    "mongodb-chatbot-ui": "^0.18.2",
+    "mongodb-chatbot-ui": "^0.18.3",
     "no-scroll": "^2.1.1",
     "node-fetch": "^3.3.2",
     "node-gyp": "^10.1.0",
