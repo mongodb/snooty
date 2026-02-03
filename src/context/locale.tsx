@@ -20,7 +20,7 @@ export const LocaleProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const betaLocale = BETA_LOCALE[locale]?.localeCode ?? undefined;
 
   useEffect(() => {
-    const betaLocals = ['es'];
+    const betaLocales = Object.keys(BETA_LOCALE);
     /**
      * Grab the available languages and if the current locale is included in the
      * beta list of locale, add it to the enable locales data which will be used by the
@@ -28,7 +28,7 @@ export const LocaleProvider: React.FC<PropsWithChildren> = ({ children }) => {
      * If not then just use the default available languages
      */
     const data = gettingAvailableLanguages();
-    if (betaLocals.includes(locale) && betaLocale) {
+    if (betaLocales.includes(locale) && betaLocale) {
       setEnableLocalesData([...data, betaLocale]);
     } else {
       setEnableLocalesData(data);
