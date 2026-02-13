@@ -91,9 +91,9 @@ const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: strin
     reportDismissibleSkillsCard(skill, url, event.currentTarget as HTMLElement);
   };
 
-  const onClose = (event: React.MouseEvent) => {
+  const onClose = (event?: React.MouseEvent) => {
     if (isBrowser) {
-      reportDismissibleSkillsCard(skill, url, event.currentTarget as HTMLElement);
+      reportDismissibleSkillsCard(skill, url, event?.currentTarget as HTMLElement);
       // Add to document classnames
       const docClassList = window.document.documentElement.classList;
       docClassList.add(shownClassname);
@@ -126,7 +126,7 @@ const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: strin
           <SkillsBadgeIcon />
           <Subtitle className={titleStyles}>Earn a Skill Badge</Subtitle>
         </Box>
-        <CloseButton onClick={() => onClose} />
+        <CloseButton onClick={onClose} />
         <Body>Master "{skill}" for free!</Body>
         <Link arrowAppearance={'persist'} baseFontSize={13} href={url} onClick={onLinkClick} hideExternalIcon>
           Learn more
