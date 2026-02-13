@@ -26,6 +26,13 @@ type CopyPageMarkdownButtonProps = {
   slug?: string;
 };
 
+const menuItemStyles = css`
+  background-color: ${palette.black};
+  div > div > div > div {
+    color: ${palette.white};
+  }
+`;
+
 // This keeps the copy button text jump to a new line when viewing on smaller screens
 // [data-theme] is used to increase the width of the dropdown menu to match designs
 const splitButtonStyles = css`
@@ -136,6 +143,8 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
         menuItems={[
           <MenuItem
             key={'copy-page'}
+            className={menuItemStyles}
+            {...({ darkMode: true } as any)}
             glyph={<Icon glyph="Copy" />}
             description="Copy this page as Markdown for LLMs"
             onClick={(event: React.MouseEvent<HTMLButtonElement>) => copyMarkdown(event)}
@@ -144,6 +153,8 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
           </MenuItem>,
           <MenuItem
             key={'ask-question'}
+            className={menuItemStyles}
+            {...({ darkMode: true } as any)}
             glyph={<Icon glyph="Sparkle" />}
             description="Ask MongoDB AI about this page"
             onClick={askQuestion}
@@ -153,6 +164,8 @@ const CopyPageMarkdownButton = ({ className, slug }: CopyPageMarkdownButtonProps
           <MenuItem
             key={'view-markdown'}
             glyph={<Icon glyph="OpenNewTab" />}
+            className={menuItemStyles}
+            {...({ darkMode: true } as any)}
             description="View this page as Markdown"
             onClick={() => viewMarkdown()}
           >
