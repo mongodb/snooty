@@ -126,7 +126,7 @@ const DismissibleSkillsCard = ({ skill, url, slug }: { skill: string; url: strin
           <SkillsBadgeIcon />
           <Subtitle className={titleStyles}>Earn a Skill Badge</Subtitle>
         </Box>
-        <CloseButton onClick={() => onClose()} />
+        <CloseButton onClick={onClose} />
         <Body>Master "{skill}" for free!</Body>
         <Link arrowAppearance={'persist'} baseFontSize={13} href={url} onClick={onLinkClick} hideExternalIcon>
           Learn more
