@@ -143,6 +143,11 @@ const renderAst = (node, state) => {
       }
       return node.children.map((subnode) => renderAst(subnode, { ...state })).join('');
 
+    case 'definitionListItem':
+      const term = node.term.map((subnode) => renderAst(subnode, { ...state })).join('');
+      const definition = node.children.map((subnode) => renderAst(subnode, { ...state })).join('');
+      return `${term} - ${definition}\n\n`;
+
     default:
       return node.children.map((subnode) => renderAst(subnode, { ...state })).join('');
   }
