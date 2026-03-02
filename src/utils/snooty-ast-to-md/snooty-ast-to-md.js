@@ -176,6 +176,13 @@ const renderDirective = (node, state) => {
     case 'tabs':
     case 'tabs-drivers':
       return `\n\n<Tabs>\n\n${node.children.map((child) => renderAst(child, { ...state })).join('')}\n\n</Tabs>\n\n`;
+
+    case 'collapsible':
+      const heading = node.options?.heading;
+      const subHeading = node.options?.sub_heading;
+      const children = node.children.map((subnode) => renderAst(subnode, { ...state })).join('');
+      return `${heading}\n\n${subHeading}\n\n${children}`;
+
     default:
       return node.children.map((subnode) => renderAst(subnode, { ...state })).join('');
   }
