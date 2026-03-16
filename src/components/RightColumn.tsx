@@ -31,6 +31,8 @@ const RightColumn = ({
           height: calc(100vh - 120px);
           position: sticky;
           top: calc(${topLarge} + ${theme.size.medium});
+          display: flex;
+          flex-direction: column;
 
           & > *:not(.${DISMISSIBLE_SKILLS_CARD_CLASSNAME}) {
             margin-bottom: 30px;
