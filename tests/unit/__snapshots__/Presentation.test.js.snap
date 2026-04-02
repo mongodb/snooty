@@ -554,7 +554,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
                   >
                     <a
                       class="emotion-17"
-                      href="https://www.mongodb.com/docs"
+                      href="https://www.mongodb.com/docs/drivers/community-supported-drivers"
                     >
                       English
                     </a>
@@ -566,7 +566,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
                   >
                     <a
                       class="emotion-17"
-                      href="https://www.mongodb.com/docs/pt-br"
+                      href="https://www.mongodb.com/pt-br/docs/drivers/community-supported-drivers"
                     >
                       Português
                     </a>
@@ -578,7 +578,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
                   >
                     <a
                       class="emotion-17"
-                      href="https://www.mongodb.com/docs/es"
+                      href="https://www.mongodb.com/es/docs/drivers/community-supported-drivers"
                     >
                       Español
                     </a>
@@ -590,7 +590,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
                   >
                     <a
                       class="emotion-17"
-                      href="https://www.mongodb.com/docs/ko-kr"
+                      href="https://www.mongodb.com/ko-kr/docs/drivers/community-supported-drivers"
                     >
                       한국어
                     </a>
@@ -602,7 +602,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
                   >
                     <a
                       class="emotion-17"
-                      href="https://www.mongodb.com/docs/ja-jp"
+                      href="https://www.mongodb.com/ja-jp/docs/drivers/community-supported-drivers"
                     >
                       日本語
                     </a>
@@ -614,7 +614,7 @@ exports[`DocumentBody renders the necessary elements 1`] = `
                   >
                     <a
                       class="emotion-17"
-                      href="https://www.mongodb.com/docs/zh-cn"
+                      href="https://www.mongodb.com/zh-cn/docs/drivers/community-supported-drivers"
                     >
                       简体中文
                     </a>

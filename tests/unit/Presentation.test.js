@@ -25,14 +25,19 @@ useStaticQuery.mockImplementation(() => ({
   },
 }));
 
-describe('DocumentBody', () => {
+describe.only('DocumentBody', () => {
   beforeAll(() => {
     jest.spyOn(document, 'querySelector');
   });
 
   it('renders the necessary elements', async () => {
     await act(async () => {
-      mockLocation(null);
+      mockLocation(
+        null,
+        '/docs/drivers/community-supported-drivers',
+        '',
+        'https://www.mongodb.com/docs/drivers/community-supported-drivers'
+      );
       render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
     });
     const footer = await screen.findByTestId('consistent-footer');

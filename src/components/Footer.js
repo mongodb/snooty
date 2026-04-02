@@ -8,6 +8,8 @@ const Footer = () => {
   const { enabledLocales } = useLocale();
   const pageUrl = getPageUrl();
 
+  console.log('pageUrl', pageUrl);
+
   return (
     <LocalizedLinkProvider origin="https://www.mongodb.com" pageUrl={pageUrl}>
       <UnifiedFooter onSelectLocale={onSelectLocale} locale={getCurrLocale()} enabledLocales={enabledLocales} />
