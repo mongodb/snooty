@@ -59,7 +59,7 @@ const Header = ({ eol }: HeaderProps) => {
         <>
           {/* Two navs used intentionally: one for light mode, one for dark mode */}
           {!eol && (
-            <LocalizedLinkProvider origin="https://www.mongodb.com/docs" pageUrl={pageUrl}>
+            <LocalizedLinkProvider origin="https://www.mongodb.com" pageUrl={pageUrl}>
               <UnifiedNav
                 fullWidth={true}
                 hideSearch={true}

@@ -9,7 +9,7 @@ const Footer = () => {
   const pageUrl = getPageUrl();
 
   return (
-    <LocalizedLinkProvider origin="https://www.mongodb.com/docs" pageUrl={pageUrl}>
+    <LocalizedLinkProvider origin="https://www.mongodb.com" pageUrl={pageUrl}>
       <UnifiedFooter onSelectLocale={onSelectLocale} locale={getCurrLocale()} enabledLocales={enabledLocales} />
     </LocalizedLinkProvider>
   );
