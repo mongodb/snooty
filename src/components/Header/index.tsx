@@ -7,7 +7,7 @@ import { theme } from '../../theme/docsTheme';
 import { getCurrLocale, onSelectLocale } from '../../utils/locale';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { useLocale } from '../../context/locale';
-import { getPageUrl } from '../../utils/get-page-url';
+import { getPagePath } from '../../utils/get-page-path';
 import { HeaderContext } from './header-context';
 
 interface StyledHeaderProps {
@@ -50,7 +50,7 @@ const Header = ({ eol }: HeaderProps) => {
   const locale = getCurrLocale();
   const { hasBanner } = useContext(HeaderContext);
 
-  const pageUrl = getPageUrl();
+  const pagePath = getPagePath();
 
   return (
     <>
@@ -59,7 +59,7 @@ const Header = ({ eol }: HeaderProps) => {
         <>
           {/* Two navs used intentionally: one for light mode, one for dark mode */}
           {!eol && (
-            <LocalizedLinkProvider origin="https://www.mongodb.com" pageUrl={pageUrl}>
+            <LocalizedLinkProvider origin="https://www.mongodb.com/docs" pageUrl={pagePath}>
               <UnifiedNav
                 fullWidth={true}
                 hideSearch={true}
