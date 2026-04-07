@@ -52,8 +52,6 @@ const Header = ({ eol }: HeaderProps) => {
 
   const pageUrl = getPageUrl();
 
-  console.log('pageUrl', pageUrl);
-
   return (
     <>
       <SiteBanner />
