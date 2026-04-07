@@ -52,6 +52,8 @@ const Header = ({ eol }: HeaderProps) => {
 
   const pageUrl = getPageUrl();
 
+  console.log('pageUrl', pageUrl);
+
   return (
     <>
       <SiteBanner />
@@ -66,7 +68,7 @@ const Header = ({ eol }: HeaderProps) => {
                 position="relative"
                 property={{ name: unifiedNavProperty, searchParams: [] }}
                 showLanguageSelector={true}
-                onSelectLocale={onSelectLocale}
+                // onSelectLocale={onSelectLocale}
                 // @ts-ignore
                 locale={locale}
                 enabledLocales={enabledLocales}
