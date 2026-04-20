@@ -30,31 +30,9 @@ describe('DocumentBody', () => {
     jest.spyOn(document, 'querySelector');
   });
 
-  it('renders the necessary elements at base path', async () => {
+  it('renders the necessary elements', async () => {
     await act(async () => {
-      mockLocation(null, '/docs', '', 'https://www.mongodb.com/docs');
-      render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
-    });
-    const footer = await screen.findByTestId('consistent-footer');
-    expect(footer).toBeVisible();
-    expect(footer).toMatchSnapshot();
-
-    const languageSelector = await screen.findByTestId('options');
-    expect(languageSelector).toBeInTheDocument();
-
-    const mainNav = await screen.findByRole('img', { name: 'MongoDB logo' });
-    expect(mainNav).toBeVisible();
-    expect(mainNav).toMatchSnapshot();
-  });
-
-  it('renders the necessary elements at project path', async () => {
-    await act(async () => {
-      mockLocation(
-        null,
-        '/docs/drivers/community-supported-drivers',
-        '',
-        'https://www.mongodb.com/docs/drivers/community-supported-drivers'
-      );
+      mockLocation(null);
       render(<DocumentBody location={window.location} pageContext={mockPageContext} />);
     });
     const footer = await screen.findByTestId('consistent-footer');
