@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { css, cx } from '@leafygreen-ui/emotion';
-import { LocalizedLinkProvider, UnifiedNav } from '@mdb/consistent-nav';
+import { UnifiedNav } from '@mdb/consistent-nav';
 import SiteBanner from '../Banner/SiteBanner';
 import { theme } from '../../theme/docsTheme';
 import { getCurrLocale, onSelectLocale } from '../../utils/locale';
 import { isOfflineDocsBuild } from '../../utils/is-offline-docs-build';
 import { useLocale } from '../../context/locale';
-import { getPageUrl } from '../../utils/get-page-url';
 import { HeaderContext } from './header-context';
 
 interface StyledHeaderProps {
@@ -50,8 +49,6 @@ const Header = ({ eol }: HeaderProps) => {
   const locale = getCurrLocale();
   const { hasBanner } = useContext(HeaderContext);
 
-  const pageUrl = getPageUrl();
-
   return (
     <>
       <SiteBanner />
@@ -59,7 +56,7 @@ const Header = ({ eol }: HeaderProps) => {
         <>
           {/* Two navs used intentionally: one for light mode, one for dark mode */}
           {!eol && (
-            <LocalizedLinkProvider origin="https://www.mongodb.com" pageUrl={pageUrl}>
+            <>
               <UnifiedNav
                 fullWidth={true}
                 hideSearch={true}
@@ -86,7 +83,7 @@ const Header = ({ eol }: HeaderProps) => {
                 darkMode={true}
                 className={cx('nav-dark', isOfflineDocsBuild ? offlineClass : '')}
               />
-            </LocalizedLinkProvider>
+            </>
           )}
         </>
       </StyledHeaderContainer>
