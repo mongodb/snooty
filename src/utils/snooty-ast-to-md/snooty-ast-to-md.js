@@ -6,7 +6,9 @@ let siteBasePrefix;
 const ENV_KEY = siteMetadata.snootyEnv || 'development';
 
 const baseURL =
-  ENV_KEY !== 'production' ? 'https://mongodbcom-cdn.staging.corp.mongodb.com' : 'https://www.mongodb.com';
+  ENV_KEY === 'production' || ENV_KEY === 'dotcomprd'
+    ? 'https://www.mongodb.com'
+    : 'https://mongodbcom-cdn.staging.corp.mongodb.com';
 
 const setSiteBasePrefix = (basePrefix) => (siteBasePrefix = basePrefix);
 
