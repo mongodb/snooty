@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withPrefix } from 'gatsby';
 
-const faviconUrl = `https://www.mongodb.com/docs/assets/favicon.ico`;
+const faviconUrl = withPrefix('/favicon.ico');
 
 const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyComponents, postBodyComponents }) => (
   <html lang="en" {...htmlAttributes}>
