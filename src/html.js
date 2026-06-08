@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withPrefix } from 'gatsby';
 
-const faviconUrl = withPrefix('/favicon.ico');
+const faviconUrl = withPrefix('assets/favicon.ico');
 
 const HTML = ({ body, bodyAttributes, headComponents, htmlAttributes, preBodyComponents, postBodyComponents }) => (
   <html lang="en" {...htmlAttributes}>
