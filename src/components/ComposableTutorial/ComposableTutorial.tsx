@@ -175,7 +175,10 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
   // ie. if providing default selections, preserve the hash in url
   //    vs. if changing selections, do not preserve the hash
   const preserveHash = useRef(false);
-  const initialLoad = useRef(true);
+  // tracks whether the one-time query-param / local-storage defaults have been applied
+  const hasAppliedInitialDefaults = useRef(false);
+  // hash that needs to be scrolled to after selections update and DOM re-renders
+  const pendingHashScroll = useRef<string | null>(null);
 
   const validSelections = useMemo(() => {
     const res: Set<string> = new Set();
@@ -242,35 +245,36 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
         `${queryString.startsWith('?') ? '' : '?'}${queryString}${
           queryString.length > 0 && externalQueryParamsString.length > 0 ? '&' : ''
         }${externalQueryParamsString}${newHash ? newHash : ''}`,
-        { state: { ...state } }
+        // replace=true for URL corrections (initial defaults / hash-driven selection), which shouldn't
+        // add a history entry. replace=false (push) for explicit user dropdown changes so they can go back.
+        { state: { ...state }, replace: preserveHash.current }
       );
     },
     [externalQueryParamsString]
   );
 
-  // takes care of query param reading and rerouting on initial load
-  // if query params fulfill all selections, show the selections
-  // otherwise, fallback to getting default values from combination of local storage and node Data
+  // Handles hash-based selection on every hash change.
+  // On the first render without a matching hash, falls back to query params and local-storage defaults (runs once).
   useEffect(() => {
-    // do this only on initial load
-    if (!isBrowser || !initialLoad.current) {
-      return;
-    }
+    if (!isBrowser) return;
 
-    initialLoad.current = false;
-
-    // first verify if there is a hash
-    // if there is a hash and it belongs to a composable option,
-    // set the current selections that composable option to show the content with hash id
+    // If there is a hash that belongs to a composable option, set the selections so that content
+    // containing that hash id becomes visible, then queue a scroll once the DOM updates.
     if (hash) {
       const hashString = hash.slice(1);
       const selection = refToSelection[hashString];
       if (selection) {
         preserveHash.current = true;
+        pendingHashScroll.current = hash;
         setCurrentSelections(selection);
+        hasAppliedInitialDefaults.current = true;
         return;
       }
     }
+
+    // Query-param / local-storage fallback only runs once (initial load without a matching hash).
+    if (hasAppliedInitialDefaults.current) return;
+    hasAppliedInitialDefaults.current = true;
 
     // read query params
     const queryParams = parse(search);
@@ -293,6 +297,20 @@ const ComposableTutorialInternal = ({ nodeData, ...rest }: ComposableProps) => {
     preserveHash.current = true;
     setCurrentSelections(defaultParams);
   }, [hash, refToSelection, setCurrentSelections, search, composableOptions, validSelections]);
+
+  // After selections change, scroll to any pending hash once its element is in the DOM.
+  // The element is absent in the same render that setCurrentSelections is called, but present
+  // in the next render after the composable content re-renders with the new selections.
+  useEffect(() => {
+    if (!isBrowser || !pendingHashScroll.current) return;
+    const hashToScroll = pendingHashScroll.current;
+    const decodedHash = decodeURIComponent(hashToScroll.slice(1));
+    const el = document.querySelector('#' + CSS.escape(decodedHash));
+    if (el) {
+      pendingHashScroll.current = null;
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [currentSelections]);
 
   // when updating selection state, update the url and local storage with the new selections
   useEffect(() => {
