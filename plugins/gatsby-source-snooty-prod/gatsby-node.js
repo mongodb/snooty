@@ -420,7 +420,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         component: path.resolve(__dirname, mainComponentRelativePath),
         context: {
           page_id: page.page_id,
-          slug,
+          slug: slug.toLowerCase(),
           repoBranches,
           template: pageNodes?.options?.template,
         },
