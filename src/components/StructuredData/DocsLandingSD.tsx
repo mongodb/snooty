@@ -23,7 +23,7 @@ const DocsLandingSD = () => (
         '@type': 'SearchAction',
         target: {
           '@type': 'EntryPoint',
-          urlTemplate: 'https://mongodb.com/docs/search/?q={search_term_string}&page=1',
+          urlTemplate: 'https://mongodb.com/docs/site-search/?q={search_term_string}&page=1',
         },
         'query-input': 'required name=search_term_string',
       },

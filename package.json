@@ -1,6 +1,6 @@
 {
   "name": "snooty",
-  "version": "0.20.37",
+  "version": "0.20.45",
   "repository": "github:mongodb/snooty",
   "engines": {
     "node": "^18",
@@ -114,7 +114,7 @@
     "@leafygreen-ui/tooltip": "^11.0.4",
     "@leafygreen-ui/typography": "^18.3.0",
     "@loadable/component": "^5.14.1",
-    "@mdb/consistent-nav": "^2.6.1",
+    "@mdb/consistent-nav": "2.4.6",
     "@mdb/flora": "1.14.2",
     "@mdx-js/react": "^2.2.1",
     "@types/react-resizable": "^3.0.8",
@@ -146,7 +146,7 @@
     "minimist": "^1.2.6",
     "mobx": "^6.1.5",
     "mongodb": "^6.16.0",
-    "mongodb-chatbot-ui": "^0.18.2",
+    "mongodb-chatbot-ui": "^0.18.3",
     "no-scroll": "^2.1.1",
     "node-fetch": "^3.3.2",
     "node-gyp": "^10.1.0",

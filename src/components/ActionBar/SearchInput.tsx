@@ -90,7 +90,7 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
     const url = landingDocset?.url?.[targetEnv as keyof typeof landingDocset.url];
     const prefix = landingDocset?.prefix?.[targetEnv as keyof typeof landingDocset.prefix];
 
-    return assertTrailingSlash(url) + localizePath(assertTrailingSlash(prefix) + 'search');
+    return assertTrailingSlash(url) + localizePath(assertTrailingSlash(prefix) + 'site-search');
   }, [docsets, snootyEnv]);
 
   const onSubmit = () => {
@@ -101,7 +101,7 @@ const SearchInput = ({ className, slug }: SearchInputProps) => {
       tagbook: 'true',
     });
     inputRef.current?.blur();
-    if (project === 'landing' && slug === 'search') {
+    if (project === 'landing' && slug === 'site-search') {
       const newSearch = new URLSearchParams();
       newSearch.set('q', searchValue);
       return navigate(`?${newSearch.toString()}`, { state: { searchValue } });

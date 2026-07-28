@@ -141,7 +141,7 @@ const Wrapper = styled('main')<{
     }
 
     [role='alert'] {
-      grid-column: 2 / 3;
+      grid-column: 2 / 4;
       grid-row: banner;
       align-items: center;
     }

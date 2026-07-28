@@ -34,6 +34,12 @@ NodeList [
   />,
   <link
     class="sl_opaque"
+    href="https://www.mongodb.com/es/"
+    hreflang="es"
+    rel="alternate"
+  />,
+  <link
+    class="sl_opaque"
     href="https://www.mongodb.com/"
     hreflang="x-default"
     rel="alternate"
@@ -71,6 +77,12 @@ NodeList [
     class="sl_opaque"
     href="https://www.mongodb.com/ja-jp/foo/"
     hreflang="ja-jp"
+    rel="alternate"
+  />,
+  <link
+    class="sl_opaque"
+    href="https://www.mongodb.com/es/foo/"
+    hreflang="es"
     rel="alternate"
   />,
   <link

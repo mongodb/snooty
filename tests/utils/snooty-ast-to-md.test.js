@@ -96,27 +96,27 @@ For additional patterns and use cases, see also: [Building with Patterns](https:
 
 The following documents provide overviews of various data modeling patterns and common schema design considerations:
 
-Examples for modeling relationships between documents.
+[Model Relationships Between Documents](https://mongodbcom-cdn.staging.corp.mongodb.com/docs/example-project/applications/data-models-relationships/) - Examples for modeling relationships between documents.
 
-Presents a data model that uses [embedded documents](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/core/data-model-design/#std-label-data-modeling-embedding) to describe one-to-one relationships between connected data.
+[Model One-to-One Relationships with Embedded Documents](https://mongodbcom-cdn.staging.corp.mongodb.com/docs/example-project/tutorial/model-embedded-one-to-one-relationships-between-documents/) - Presents a data model that uses [embedded documents](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/core/data-model-design/#std-label-data-modeling-embedding) to describe one-to-one relationships between connected data.
 
-Presents a data model that uses [embedded documents](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/core/data-model-design/#std-label-data-modeling-embedding) to describe one-to-many relationships between connected data.
+[Model One-to-Many Relationships with Embedded Documents](https://mongodbcom-cdn.staging.corp.mongodb.com/docs/example-project/tutorial/model-embedded-one-to-many-relationships-between-documents/) - Presents a data model that uses [embedded documents](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/core/data-model-design/#std-label-data-modeling-embedding) to describe one-to-many relationships between connected data.
 
-Presents a data model that uses [references](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/core/data-model-design/#std-label-data-modeling-referencing) to describe one-to-many relationships between documents.
+[Model One-to-Many Relationships with Document References](https://mongodbcom-cdn.staging.corp.mongodb.com/docs/example-project/tutorial/model-referenced-one-to-many-relationships-between-documents/) - Presents a data model that uses [references](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/core/data-model-design/#std-label-data-modeling-referencing) to describe one-to-many relationships between documents.
 
-Examples for modeling tree structures.
+[Model Tree Structures](https://mongodbcom-cdn.staging.corp.mongodb.com/docs/example-project/applications/data-models-tree-structures/) - Examples for modeling tree structures.
 
-Presents a data model that organizes documents in a tree-like structure by storing [references](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/core/data-model-design/#std-label-data-modeling-referencing) to "parent" nodes in "child" nodes.
+[Model Tree Structures with Parent References](https://mongodbcom-cdn.staging.corp.mongodb.com/docs/example-project/tutorial/model-tree-structures-with-parent-references/) - Presents a data model that organizes documents in a tree-like structure by storing [references](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/core/data-model-design/#std-label-data-modeling-referencing) to "parent" nodes in "child" nodes.
 
-Presents a data model that organizes documents in a tree-like structure by storing [references](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/core/data-model-design/#std-label-data-modeling-referencing) to "child" nodes in "parent" nodes.
+[Model Tree Structures with Child References](https://mongodbcom-cdn.staging.corp.mongodb.com/docs/example-project/tutorial/model-tree-structures-with-child-references/) - Presents a data model that organizes documents in a tree-like structure by storing [references](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/core/data-model-design/#std-label-data-modeling-referencing) to "child" nodes in "parent" nodes.
 
 See [Model Tree Structures](https://mongodbcom-cdn.staging.corp.mongodb.com/${siteBasePrefix}/applications/data-models-tree-structures/) for additional examples of data models for tree structures.
 
-Examples for models for specific application contexts.
+[Model Specific Application Contexts](https://mongodbcom-cdn.staging.corp.mongodb.com/docs/example-project/applications/data-models-applications/) - Examples for models for specific application contexts.
 
-Illustrates how embedding fields related to an atomic update within the same document ensures that the fields are in sync.
+[Model Data for Atomic Operations](https://mongodbcom-cdn.staging.corp.mongodb.com/docs/example-project/tutorial/model-data-for-atomic-operations/) - Illustrates how embedding fields related to an atomic update within the same document ensures that the fields are in sync.
 
-Describes one method for supporting keyword search by storing keywords in an array in the same document as the text field. Combined with a multi-key index, this pattern can support application's keyword search operations.
+[Model Data to Support Keyword Search](https://mongodbcom-cdn.staging.corp.mongodb.com/docs/example-project/tutorial/model-data-for-keyword-search/) - Describes one method for supporting keyword search by storing keywords in an array in the same document as the text field. Combined with a multi-key index, this pattern can support application's keyword search operations.
 
 `;
     expect(result).toBe(expected);

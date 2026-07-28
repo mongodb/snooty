@@ -33,18 +33,14 @@ const AVAILABLE_LANGUAGES: AvailableLanguageData[] = [
   { language: '한국어', localeCode: 'ko-kr', fontFamily: 'Noto Sans KR' },
   { language: 'Português', localeCode: 'pt-br' },
   { language: '日本語', localeCode: 'ja-jp', fontFamily: 'Noto Sans JP' },
+  { language: 'Español', localeCode: 'es' },
 ];
 
 // GTM locale
-export const BETA_LOCALE: { [key: string]: AvailableLanguageData } = {
-  es: {
-    language: 'Español',
-    localeCode: 'es',
-  },
-};
+export const BETA_LOCALE: { [key: string]: AvailableLanguageData } = {};
 
 // Languages in current development that we do not want displayed publicly yet
-const HIDDEN_LANGUAGES: AvailableLanguageData[] = [BETA_LOCALE['es']];
+const HIDDEN_LANGUAGES: AvailableLanguageData[] = [];
 
 /**
  * @param {boolean} forceAll - Bypasses feature flag requirements if necessary
@@ -70,7 +66,7 @@ const validateLocaleCode = (potentialCode: string) =>
  * @param {string} slug
  * @returns {string}
  */
-const stripLocale = (slug: string) => {
+export const stripLocale = (slug: string) => {
   // Smartling has extensive replace logic for URLs and slugs that follow the pattern of "https://www.mongodb.com/docs". However,
   // there are instances where we can't rely on them for certain components
   if (!slug) {
