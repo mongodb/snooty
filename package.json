@@ -23,6 +23,7 @@
     "@types/gatsbyjs__reach-router": "^2.0.5",
     "@types/jest": "^29.5.14",
     "@types/loadable__component": "^5.13.9",
+    "@types/lodash": "^4.17.13",
     "@types/no-scroll": "^2.1.2",
     "@types/node": "^18.15",
     "@types/react": "^18.3.13",
