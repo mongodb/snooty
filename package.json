@@ -8,7 +8,10 @@
   },
   "overrides": {
     "@mdx-js/react": "^2.2.1",
-    "@leafygreen-ui/emotion": "5.0.0"
+    "@leafygreen-ui/emotion": "5.0.0",
+    "sanitize-html": {
+      "htmlparser2": "^10.1.0"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
