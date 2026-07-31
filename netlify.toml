@@ -27,8 +27,3 @@ REPO_NAME = "cloud-docs"
 BRANCH_NAME = "main"
 SITE_NAME = "atlas"
 PARSER_VERSION = "v0.20.18"
-# Netlify's automatic "Install dependencies" step runs `npm install` before our
-# `command` above ever executes, with no way to inject CodeArtifact auth ahead of
-# it. --dry-run makes that automatic step a no-op; `command` above does the real,
-# authenticated install itself instead.
-NPM_FLAGS = "--dry-run"
