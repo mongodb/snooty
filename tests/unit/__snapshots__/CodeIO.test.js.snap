@@ -275,6 +275,8 @@ exports[`CodeIO renders correctly 1`] = `
   position: relative;
   -webkit-transition: box-shadow 100ms ease-in-out;
   transition: box-shadow 100ms ease-in-out;
+  -webkit-transition: height 300ms ease-in-out;
+  transition: height 300ms ease-in-out;
   white-space: pre;
   background-color: #F9FBFA;
   color: #001E2B;
@@ -304,7 +306,6 @@ exports[`CodeIO renders correctly 1`] = `
 
 .emotion-7:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #0498EC inset;
 }
 
 .emotion-8 {
@@ -604,6 +605,8 @@ exports[`CodeIO renders correctly 1`] = `
   position: relative;
   -webkit-transition: box-shadow 100ms ease-in-out;
   transition: box-shadow 100ms ease-in-out;
+  -webkit-transition: height 300ms ease-in-out;
+  transition: height 300ms ease-in-out;
   white-space: pre;
   background-color: #001E2B;
   color: #F9FBFA;
@@ -637,7 +640,6 @@ exports[`CodeIO renders correctly 1`] = `
 
 .emotion-23:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #0498EC inset;
 }
 
 .emotion-26 {

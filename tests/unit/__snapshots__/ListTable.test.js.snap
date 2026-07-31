@@ -179,6 +179,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
   >
     <table
       class="emotion-1"
+      data-lgid="lg-table"
     >
       <colgroup>
         <col
@@ -207,11 +208,14 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
         <tr
           aria-hidden="false"
           class=""
+          data-expanded="false"
+          data-lgid="lg-table-row"
           data-selected="false"
           id="lg-table-row-0"
         >
           <td
             class="emotion-3"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-4"
@@ -230,6 +234,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
           </td>
           <td
             class="emotion-7"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-4"
@@ -248,6 +253,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
           </td>
           <td
             class="emotion-7"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-4"
@@ -266,6 +272,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
           </td>
           <td
             class="emotion-7"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-4"
@@ -284,6 +291,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
           </td>
           <td
             class="emotion-7"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-4"
@@ -302,6 +310,7 @@ exports[`when rendering a list table with fixed widths renders correctly 1`] = `
           </td>
           <td
             class="emotion-7"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-4"
@@ -606,6 +615,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
   >
     <table
       class="emotion-1"
+      data-lgid="lg-table"
     >
       <thead
         class="emotion-2"
@@ -615,6 +625,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         >
           <th
             class="emotion-3"
+            data-lgid="lg-table-header"
             scope="col"
           >
             <div
@@ -627,6 +638,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </th>
           <th
             class="emotion-5"
+            data-lgid="lg-table-header"
             scope="col"
           >
             <div
@@ -639,6 +651,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </th>
           <th
             class="emotion-5"
+            data-lgid="lg-table-header"
             scope="col"
           >
             <div
@@ -651,6 +664,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </th>
           <th
             class="emotion-5"
+            data-lgid="lg-table-header"
             scope="col"
           >
             <div
@@ -663,6 +677,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </th>
           <th
             class="emotion-5"
+            data-lgid="lg-table-header"
             scope="col"
           >
             <div
@@ -675,6 +690,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </th>
           <th
             class="emotion-5"
+            data-lgid="lg-table-header"
             scope="col"
           >
             <div
@@ -691,11 +707,14 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tr
           aria-hidden="false"
           class="emotion-15"
+          data-expanded="false"
+          data-lgid="lg-table-row"
           data-selected="false"
           id="lg-table-row-0"
         >
           <td
             class="emotion-16"
+            data-lgid="lg-table-cell"
             role="rowheader"
           >
             <div
@@ -715,6 +734,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -733,6 +753,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -751,6 +772,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -769,6 +791,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -787,6 +810,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -807,11 +831,14 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tr
           aria-hidden="false"
           class="emotion-15"
+          data-expanded="false"
+          data-lgid="lg-table-row"
           data-selected="false"
           id="lg-table-row-1"
         >
           <td
             class="emotion-16"
+            data-lgid="lg-table-cell"
             role="rowheader"
           >
             <div
@@ -831,6 +858,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -849,6 +877,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -867,6 +896,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -885,6 +915,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -903,6 +934,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -923,11 +955,14 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tr
           aria-hidden="false"
           class="emotion-15"
+          data-expanded="false"
+          data-lgid="lg-table-row"
           data-selected="false"
           id="lg-table-row-2"
         >
           <td
             class="emotion-16"
+            data-lgid="lg-table-cell"
             role="rowheader"
           >
             <div
@@ -947,6 +982,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -965,6 +1001,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -983,6 +1020,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1001,6 +1039,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1019,6 +1058,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1039,11 +1079,14 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tr
           aria-hidden="false"
           class="emotion-15"
+          data-expanded="false"
+          data-lgid="lg-table-row"
           data-selected="false"
           id="lg-table-row-3"
         >
           <td
             class="emotion-16"
+            data-lgid="lg-table-cell"
             role="rowheader"
           >
             <div
@@ -1063,6 +1106,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1081,6 +1125,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1099,6 +1144,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1117,6 +1163,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1135,6 +1182,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1155,11 +1203,14 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
         <tr
           aria-hidden="false"
           class="emotion-15"
+          data-expanded="false"
+          data-lgid="lg-table-row"
           data-selected="false"
           id="lg-table-row-4"
         >
           <td
             class="emotion-16"
+            data-lgid="lg-table-cell"
             role="rowheader"
           >
             <div
@@ -1179,6 +1230,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1197,6 +1249,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1215,6 +1268,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1233,6 +1287,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"
@@ -1251,6 +1306,7 @@ exports[`when rendering a list-table directive renders correctly 1`] = `
           </td>
           <td
             class="emotion-20"
+            data-lgid="lg-table-cell"
           >
             <div
               class="emotion-17"

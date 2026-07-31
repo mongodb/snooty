@@ -555,10 +555,6 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
   transition-property: box-shadow;
 }
 
-.emotion-38:hover {
-  box-shadow: 0 0 0 3px #E8EDEB;
-}
-
 .emotion-39 {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
@@ -650,6 +646,11 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
 .emotion-43 {
   width: 100%;
   margin-top: 32px;
+}
+
+.emotion-45 {
+  width: 100%;
+  margin-top: 28px;
 }
 
 .emotion-47 {
@@ -973,16 +974,16 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
           >
             <label
               class="emotion-37"
-              for="combobox-input-1"
-              id="combobox-label-1"
+              for="combobox-input-2"
+              id="combobox-label-3"
             >
               Select Resource
             </label>
           </div>
           <div
-            aria-controls="combobox-menu-1"
+            aria-controls="combobox-menu-4"
             aria-expanded="false"
-            aria-owns="combobox-menu-1"
+            aria-owns="combobox-menu-4"
             class="emotion-38"
             role="combobox"
             tabindex="-1"
@@ -992,12 +993,12 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
             >
               <input
                 aria-autocomplete="list"
-                aria-controls="combobox-menu-1"
+                aria-controls="combobox-menu-4"
                 aria-label="Select Resource"
-                aria-labelledby="combobox-label-1"
+                aria-labelledby="combobox-label-3"
                 autocomplete="off"
                 class="emotion-40"
-                id="combobox-input-1"
+                id="combobox-input-2"
                 placeholder="All"
                 value=""
               />
@@ -1029,7 +1030,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
       class="emotion-43 emotion-44"
     >
       <section
-        class="emotion-13 emotion-46"
+        class="emotion-45 emotion-46"
       >
         <h2
           class="emotion-47"
@@ -1075,7 +1076,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         </div>
       </section>
       <section
-        class="emotion-13 emotion-46"
+        class="emotion-45 emotion-46"
       >
         <h2
           class="emotion-47"
@@ -1121,7 +1122,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         </div>
       </section>
       <section
-        class="emotion-13 emotion-46"
+        class="emotion-45 emotion-46"
       >
         <h2
           class="emotion-47"
@@ -1361,7 +1362,7 @@ exports[`OpenAPIChangelog tests OpenAPIChangelog renders correctly 1`] = `
         </div>
       </section>
       <section
-        class="emotion-13 emotion-46"
+        class="emotion-45 emotion-46"
       >
         <h2
           class="emotion-47"

@@ -315,23 +315,23 @@ exports[`Composable Tutorial component prioritizes query params over local stora
         >
           <label
             class="emotion-3"
-            for="select-58"
-            id="select-57-label"
+            for="select-16"
+            id="select-15-label"
           >
             Interface
           </label>
           <button
-            aria-controls="select-57-menu"
-            aria-describedby="select-57-description"
+            aria-controls="select-15-menu"
+            aria-describedby="select-15-description"
             aria-disabled="false"
             aria-expanded="false"
             aria-invalid="false"
             aria-label="Select your Interface"
-            aria-labelledby="select-57-label"
+            aria-labelledby="select-15-label"
             class="emotion-4"
             data-leafygreen-ui="button"
             data-testid="leafygreen-ui-select-menubutton"
-            id="select-58"
+            id="select-16"
             type="button"
             value="driver"
           >
@@ -376,23 +376,23 @@ exports[`Composable Tutorial component prioritizes query params over local stora
         >
           <label
             class="emotion-3"
-            for="select-78"
-            id="select-77-label"
+            for="select-22"
+            id="select-21-label"
           >
             Language
           </label>
           <button
-            aria-controls="select-77-menu"
-            aria-describedby="select-77-description"
+            aria-controls="select-21-menu"
+            aria-describedby="select-21-description"
             aria-disabled="false"
             aria-expanded="false"
             aria-invalid="false"
             aria-label="Select your Language"
-            aria-labelledby="select-77-label"
+            aria-labelledby="select-21-label"
             class="emotion-4"
             data-leafygreen-ui="button"
             data-testid="leafygreen-ui-select-menubutton"
-            id="select-78"
+            id="select-22"
             type="button"
             value="c"
           >
@@ -437,23 +437,23 @@ exports[`Composable Tutorial component prioritizes query params over local stora
         >
           <label
             class="emotion-3"
-            for="select-60"
-            id="select-59-label"
+            for="select-18"
+            id="select-17-label"
           >
             Deployment Type
           </label>
           <button
-            aria-controls="select-59-menu"
-            aria-describedby="select-59-description"
+            aria-controls="select-17-menu"
+            aria-describedby="select-17-description"
             aria-disabled="false"
             aria-expanded="false"
             aria-invalid="false"
             aria-label="Select your Deployment Type"
-            aria-labelledby="select-59-label"
+            aria-labelledby="select-17-label"
             class="emotion-4"
             data-leafygreen-ui="button"
             data-testid="leafygreen-ui-select-menubutton"
-            id="select-60"
+            id="select-18"
             type="button"
             value="atlas"
           >
@@ -498,23 +498,23 @@ exports[`Composable Tutorial component prioritizes query params over local stora
         >
           <label
             class="emotion-3"
-            for="select-62"
-            id="select-61-label"
+            for="select-20"
+            id="select-19-label"
           >
             Operator
           </label>
           <button
-            aria-controls="select-61-menu"
-            aria-describedby="select-61-description"
+            aria-controls="select-19-menu"
+            aria-describedby="select-19-description"
             aria-disabled="false"
             aria-expanded="false"
             aria-invalid="false"
             aria-label="Select your Operator"
-            aria-labelledby="select-61-label"
+            aria-labelledby="select-19-label"
             class="emotion-4"
             data-leafygreen-ui="button"
             data-testid="leafygreen-ui-select-menubutton"
-            id="select-62"
+            id="select-20"
             type="button"
             value="queryString"
           >
