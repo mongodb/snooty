@@ -8,7 +8,10 @@
   },
   "overrides": {
     "@mdx-js/react": "^2.2.1",
-    "@leafygreen-ui/emotion": "5.0.0"
+    "@leafygreen-ui/emotion": "5.0.0",
+    "sanitize-html": {
+      "htmlparser2": "^10.1.0"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -23,6 +26,7 @@
     "@types/gatsbyjs__reach-router": "^2.0.5",
     "@types/jest": "^29.5.14",
     "@types/loadable__component": "^5.13.9",
+    "@types/lodash": "^4.17.13",
     "@types/no-scroll": "^2.1.2",
     "@types/node": "^18.15",
     "@types/react": "^18.3.13",
@@ -64,7 +68,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "npm run lint -- --fix --max-warnings 0",
     "percy": "npm run build:clean && npm exec -- percy snapshot ./public -c .percy.yml",
-    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install",
+    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install || true",
     "postversion": "git push origin v$npm_package_version && git push origin main",
     "prettier": "prettier '**/*.{js,jsx,ts,tsx,json,md}'",
     "preversion": "npm run ensure-main && npm run format && npm run lint && npm run test",
@@ -158,7 +162,7 @@
     "react-dev-utils": "^12.0.0",
     "react-dom": "^18.0.2",
     "react-loadable": "^5.5.0",
-    "react-player": "^2.9.0",
+    "react-player": "2.11.2",
     "react-resizable": "^3.0.5",
     "react-transition-group": "^4.4.1",
     "readable-stream": "^4.3.0",

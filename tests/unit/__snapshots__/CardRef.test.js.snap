@@ -344,7 +344,7 @@ exports[`card correctly with and without url 1`] = `
 }
 
 <div
-    class="card-group  emotion-0"
+    class="card-group emotion-0"
   >
     <div
       class="emotion-1"

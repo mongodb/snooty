@@ -582,7 +582,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/careers"
               rel="noreferrer noopener"
               target="_self"
@@ -594,7 +594,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://investors.mongodb.com"
               rel="noreferrer noopener"
               target="_self"
@@ -606,7 +606,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/legal"
               rel="noreferrer noopener"
               target="_self"
@@ -618,7 +618,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/legal/privacy/privacy-policy"
               rel="noreferrer noopener"
               target="_self"
@@ -630,7 +630,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://github.com/mongodb"
               rel="noreferrer noopener"
               target="_self"
@@ -642,7 +642,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/company/contact/mongodb-vulnerability-disclosure-policy"
               rel="noreferrer noopener"
               target="_self"
@@ -654,7 +654,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/products/platform/trust"
               rel="noreferrer noopener"
               target="_self"
@@ -666,7 +666,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/company/contact/social-media-hub"
               rel="noreferrer noopener"
               target="_self"
@@ -691,7 +691,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/company/contact"
               rel="noreferrer noopener"
               target="_self"
@@ -703,7 +703,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://support.mongodb.com/welcome"
               rel="noreferrer noopener"
               target="_self"
@@ -715,7 +715,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://status.mongodb.com/"
               rel="noreferrer noopener"
               target="_self"
@@ -727,7 +727,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/services/support"
               rel="noreferrer noopener"
               target="_self"
@@ -752,7 +752,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/cloud/atlas/register"
               rel="noreferrer noopener"
               target="_self"
@@ -764,7 +764,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/try/download/enterprise"
               rel="noreferrer noopener"
               target="_self"
@@ -776,7 +776,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href=" https://www.mongodb.com/try/download/community"
               rel="noreferrer noopener"
               target="_self"
@@ -801,7 +801,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/basics/databases/vector-databases"
               rel="noreferrer noopener"
               target="_self"
@@ -813,7 +813,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/basics/databases/nosql-explained"
               rel="noreferrer noopener"
               target="_self"
@@ -825,7 +825,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/basics/databases/document-databases"
               rel="noreferrer noopener"
               target="_self"
@@ -837,7 +837,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/basics/artificial-intelligence/retrieval-augmented-generation"
               rel="noreferrer noopener"
               target="_self"
@@ -849,7 +849,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/basics/databases/acid-transactions"
               rel="noreferrer noopener"
               target="_self"
@@ -861,7 +861,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/languages/mern-stack"
               rel="noreferrer noopener"
               target="_self"
@@ -873,7 +873,7 @@ exports[`DocumentBody renders the necessary elements at base path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href=" https://www.mongodb.com/resources/languages/mean-stack"
               rel="noreferrer noopener"
               target="_self"
@@ -1493,7 +1493,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/careers"
               rel="noreferrer noopener"
               target="_self"
@@ -1505,7 +1505,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://investors.mongodb.com"
               rel="noreferrer noopener"
               target="_self"
@@ -1517,7 +1517,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/legal"
               rel="noreferrer noopener"
               target="_self"
@@ -1529,7 +1529,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/legal/privacy/privacy-policy"
               rel="noreferrer noopener"
               target="_self"
@@ -1541,7 +1541,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://github.com/mongodb"
               rel="noreferrer noopener"
               target="_self"
@@ -1553,7 +1553,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/company/contact/mongodb-vulnerability-disclosure-policy"
               rel="noreferrer noopener"
               target="_self"
@@ -1565,7 +1565,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/products/platform/trust"
               rel="noreferrer noopener"
               target="_self"
@@ -1577,7 +1577,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/company/contact/social-media-hub"
               rel="noreferrer noopener"
               target="_self"
@@ -1602,7 +1602,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/company/contact"
               rel="noreferrer noopener"
               target="_self"
@@ -1614,7 +1614,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://support.mongodb.com/welcome"
               rel="noreferrer noopener"
               target="_self"
@@ -1626,7 +1626,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://status.mongodb.com/"
               rel="noreferrer noopener"
               target="_self"
@@ -1638,7 +1638,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/services/support"
               rel="noreferrer noopener"
               target="_self"
@@ -1663,7 +1663,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/cloud/atlas/register"
               rel="noreferrer noopener"
               target="_self"
@@ -1675,7 +1675,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/try/download/enterprise"
               rel="noreferrer noopener"
               target="_self"
@@ -1687,7 +1687,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href=" https://www.mongodb.com/try/download/community"
               rel="noreferrer noopener"
               target="_self"
@@ -1712,7 +1712,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/basics/databases/vector-databases"
               rel="noreferrer noopener"
               target="_self"
@@ -1724,7 +1724,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/basics/databases/nosql-explained"
               rel="noreferrer noopener"
               target="_self"
@@ -1736,7 +1736,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/basics/databases/document-databases"
               rel="noreferrer noopener"
               target="_self"
@@ -1748,7 +1748,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/basics/artificial-intelligence/retrieval-augmented-generation"
               rel="noreferrer noopener"
               target="_self"
@@ -1760,7 +1760,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/basics/databases/acid-transactions"
               rel="noreferrer noopener"
               target="_self"
@@ -1772,7 +1772,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href="https://www.mongodb.com/resources/languages/mern-stack"
               rel="noreferrer noopener"
               target="_self"
@@ -1784,7 +1784,7 @@ exports[`DocumentBody renders the necessary elements at project path 1`] = `
             class="emotion-26"
           >
             <a
-              class=" emotion-27"
+              class="emotion-27"
               href=" https://www.mongodb.com/resources/languages/mean-stack"
               rel="noreferrer noopener"
               target="_self"

@@ -281,6 +281,8 @@ exports[`Rendering a MultiComponent renders correct 1`] = `
   position: relative;
   -webkit-transition: box-shadow 100ms ease-in-out;
   transition: box-shadow 100ms ease-in-out;
+  -webkit-transition: height 300ms ease-in-out;
+  transition: height 300ms ease-in-out;
   white-space: pre;
   background-color: #F9FBFA;
   color: #001E2B;
@@ -300,7 +302,6 @@ exports[`Rendering a MultiComponent renders correct 1`] = `
 
 .emotion-6:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #0498EC inset;
 }
 
 .emotion-7 {
@@ -379,6 +380,8 @@ exports[`Rendering a MultiComponent renders correct 1`] = `
   position: relative;
   -webkit-transition: box-shadow 100ms ease-in-out;
   transition: box-shadow 100ms ease-in-out;
+  -webkit-transition: height 300ms ease-in-out;
+  transition: height 300ms ease-in-out;
   white-space: pre;
   background-color: #F9FBFA;
   color: #001E2B;
@@ -408,7 +411,6 @@ exports[`Rendering a MultiComponent renders correct 1`] = `
 
 .emotion-26:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #0498EC inset;
 }
 
 .emotion-32 {

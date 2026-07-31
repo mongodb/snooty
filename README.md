@@ -28,18 +28,17 @@ From this repo:
 
 ## Installation
 
-Snooty uses [artifactory](https://jfrog.com/artifactory/) that [will need authentication](https://github.com/mongodb/snooty/blob/main/.npmrc) to install some private npm packages. Update your local zsh variables in `$~/.zshrc` (in Windows `%USERPROFILE%/.zshrc`) to include the following
+Snooty uses [AWS CodeArtifact](https://aws.amazon.com/codeartifact/) which [will need authentication](https://github.com/mongodb/snooty/blob/main/.npmrc) to install some private npm packages (`@mdb/*`). Log in with your AWS SSO profile (see whoever manages CodeArtifact access if you don't have a profile configured), then fetch a token and export it before installing:
 
 ```
-export NPM_BASE_64_AUTH=<BASE_64_API_KEY>
-export NPM_EMAIL=<your.email@gmail.com>
+aws sso login --profile <your-codeartifact-profile>
+export NPM_AWS_AUTH=$(aws codeartifact get-authorization-token \
+  --domain mongodb --domain-owner 271346171620 --region us-east-1 \
+  --profile <your-codeartifact-profile> \
+  --query authorizationToken --output text)
 ```
 
-Then, log in with your new NPM credentials:
-
-```
-npm login
-```
+Note that this token expires (12 hours by default), so you'll need to re-run the `export` command in any new shell session once it does.
 
 Then, to install the package dependencies:
 

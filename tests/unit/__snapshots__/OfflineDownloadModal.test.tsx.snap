@@ -1133,6 +1133,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
           >
             <table
               class="emotion-16"
+              data-lgid="lg-table"
             >
               <thead
                 class="emotion-17"
@@ -1140,6 +1141,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
                 <tr>
                   <th
                     class="emotion-18"
+                    data-lgid="lg-table-header"
                     scope="col"
                   >
                     <div
@@ -1147,7 +1149,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
                     >
                       <div
                         class="emotion-20"
-                        data-lgid="lg-checkbox"
+                        data-lgid="lg-table-select_all"
                       >
                         <label
                           class="emotion-21"
@@ -1194,6 +1196,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
                   </th>
                   <th
                     class="emotion-26"
+                    data-lgid="lg-table-header"
                     scope="col"
                   >
                     <div
@@ -1204,6 +1207,7 @@ exports[`Offline download button opens the offline modal when clicked 1`] = `
                   </th>
                   <th
                     class="emotion-28"
+                    data-lgid="lg-table-header"
                     scope="col"
                   >
                     <div

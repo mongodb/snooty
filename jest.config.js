@@ -4,6 +4,11 @@ module.exports = {
   },
   verbose: true,
   testTimeout: 15000,
+  // Heap usage climbs steadily across test files within a worker (likely emotion/RTL
+  // cleanup not fully releasing DOM/style caches between files) and never comes back
+  // down. Restart a worker once it exceeds this RSS so the leak can't accumulate
+  // across an entire run and OOM-crash CI, which has far less memory than a dev machine.
+  workerIdleMemoryLimit: '1GB',
   projects: [
     {
       displayName: 'unit',
