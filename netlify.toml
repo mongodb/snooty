@@ -23,7 +23,7 @@ npm install --legacy-peer-deps
 
 [build.environment]
 ORG_NAME = "10gen"
-REPO_NAME = "cloud-docs"
+REPO_NAME = "docs-ops-manager"
 BRANCH_NAME = "main"
-SITE_NAME = "atlas"
+SITE_NAME = "ops-manager"
 PARSER_VERSION = "v0.20.18"
