@@ -88,6 +88,53 @@ describe('snootyAstToMd', () => {
     });
   });
 
+  describe('renders icon roles', () => {
+    const iconRole = (name, target) => ({
+      type: 'role',
+      name,
+      target,
+      children: [],
+      position: { start: { line: 0 } },
+    });
+    const wrap = (node) => ({
+      type: 'root',
+      position: { start: { line: 0 } },
+      children: [{ type: 'paragraph', children: [node], position: { start: { line: 0 } } }],
+    });
+
+    it('renders the check family as a tick', () => {
+      expect(snootyAstToMd(wrap(iconRole('icon-fa5', 'check'))).trim()).toBe('\u2713');
+      expect(snootyAstToMd(wrap(iconRole('icon', 'check-circle'))).trim()).toBe('\u2713');
+      expect(snootyAstToMd(wrap(iconRole('icon', 'check-square'))).trim()).toBe('\u2713');
+    });
+
+    it('renders negative and empty markers', () => {
+      expect(snootyAstToMd(wrap(iconRole('icon-fa5', 'times-circle'))).trim()).toBe('\u2717');
+      expect(snootyAstToMd(wrap(iconRole('icon-lg', 'X'))).trim()).toBe('\u2717');
+      expect(snootyAstToMd(wrap(iconRole('icon-fa4', 'square-o'))).trim()).toBe('\u2610');
+    });
+
+    it('falls back to the icon target for icons with no text equivalent', () => {
+      expect(snootyAstToMd(wrap(iconRole('icon-lg', 'Cloud'))).trim()).toBe('Cloud');
+      expect(snootyAstToMd(wrap(iconRole('icon-charts', 'dashboard'))).trim()).toBe('dashboard');
+    });
+
+    it('renders the sync-pill special case', () => {
+      expect(snootyAstToMd(wrap(iconRole('icon-fa5', 'sync-pill'))).trim()).toBe('APP SERVICES');
+    });
+
+    it('still renders the children of non-icon roles', () => {
+      const abbr = {
+        type: 'role',
+        name: 'abbr',
+        target: '',
+        children: [{ type: 'text', value: 'MCP', position: { start: { line: 0 } } }],
+        position: { start: { line: 0 } },
+      };
+      expect(snootyAstToMd(wrap(abbr)).trim()).toBe('MCP');
+    });
+  });
+
   it('strips comments', () => {
     const result = snootyAstToMd(mockSamplePageWithCommentAst);
     const expected = `# Data Model Examples and Patterns

@@ -24,8 +24,56 @@ const snootyAstToMd = (node) => {
 
 const renderSnootyTable = createRenderSnootyTable(snootyAstToMd);
 
+// Icon roles carry the icon name in `target` and have no text children, so both
+// the terminal and the parent default branches of renderAst would render them as
+// an empty string. Rendering a text equivalent keeps the information available to
+// consumers of the markdown output, such as tables whose only content is an icon.
+const ICON_ROLE_NAMES = new Set([
+  'icon',
+  'icon-fa4',
+  'icon-fa5',
+  'icon-fa5-brands',
+  'iconb',
+  'icon-charts',
+  'icon-lg',
+  'icon-mms',
+  'icon-mms-org',
+]);
+
+// Targets whose meaning is carried by the glyph rather than by its name. These are
+// the icons that appear alone in a table cell, where falling back to the target name
+// would be misleading rather than merely terse. Every other target falls back to its
+// name, which reads acceptably for the UI affordance icons that make up the rest of
+// the corpus (ellipsis, trash-alt, cog and so on).
+const ICON_ROLE_TEXT = {
+  check: '✓',
+  'check-circle': '✓',
+  'check-square': '✓',
+  checkmark: '✓',
+  Checkmark: '✓',
+  'square-o': '☐',
+  times: '✗',
+  'times-circle': '✗',
+  xmark: '✗',
+  remove: '✗',
+  X: '✗',
+};
+
+const renderIconRole = (node) => {
+  // Matches the special case in src/components/Roles/Icon.tsx
+  if (node.target === 'sync-pill') {
+    return 'APP SERVICES';
+  }
+  return ICON_ROLE_TEXT[node.target] ?? node.target ?? '';
+};
+
 const renderAst = (node, state) => {
   const { parentHeadingLevel, listBullet } = state;
+
+  // Icon roles have no children to fall through to; see ICON_ROLE_NAMES above.
+  if (node.type === 'role' && ICON_ROLE_NAMES.has(node.name)) {
+    return renderIconRole(node);
+  }
 
   // Base cases (terminal nodes)
   if (node.children === undefined) {
